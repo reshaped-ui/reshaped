@@ -1,0 +1,110 @@
+.root,
+.scrim {
+  position: absolute;
+	inset: 0;
+}
+
+.root {
+  pointer-events: none;
+	--rs-overlay-gradient: 
+		rgba(var(--rs-color-rgb-black), 0), 
+		rgba(var(--rs-color-rgb-black), 0.52%),
+		rgba(var(--rs-color-rgb-black), 2.13%),
+		rgba(var(--rs-color-rgb-black), 4.9%),
+		rgba(var(--rs-color-rgb-black), 8.84%),
+		rgba(var(--rs-color-rgb-black), 13.91%),
+		rgba(var(--rs-color-rgb-black), 19.91%),
+		rgba(var(--rs-color-rgb-black), 26.56%),
+		rgba(var(--rs-color-rgb-black), 33.44%),
+		rgba(var(--rs-color-rgb-black), 40.09%),
+		rgba(var(--rs-color-rgb-black), 46.09%),
+		rgba(var(--rs-color-rgb-black), 51.16%),
+		rgba(var(--rs-color-rgb-black), 55.1%),
+		rgba(var(--rs-color-rgb-black), 57.87%),
+		rgba(var(--rs-color-rgb-black), 59.48%),
+		rgba(var(--rs-color-rgb-black), 60%);
+}
+
+.scrim {
+  padding: var(--rs-unit-x3) var(--rs-unit-x4);
+  color: var(--rs-color-white);
+
+  /*
+    Turn on GPU acceleration for handling events on underlying elements properly
+    Example: Media slider scrolling with css snapping
+    */
+  transform: translateZ(0);
+}
+
+.content {
+  pointer-events: all;
+	position: relative;
+	z-index: 5;
+}
+
+.--position-cover .scrim {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.--position-cover .scrim:after {
+	content: '';
+	position: absolute;
+	inset: 0;
+  background-color: var(--rs-color-black);
+	opacity: 0.5;
+}
+
+.--position-cover .content {
+  text-align: center;
+}
+
+.--position-cover .content,
+.--position-top .content,
+.--position-bottom .content {
+  width: 100%;
+}
+
+.--position-start .content,
+.--position-end .content {
+  height: 100%;
+}
+
+.--position-top .scrim {
+	inset-block-end: auto;
+	background: linear-gradient(to top, var(--rs-overlay-gradient));
+	padding-block-end: calc(var(--rs-unit-x10) * 2);
+}
+
+.--position-bottom .scrim {
+	inset-block-start: auto;
+	background: linear-gradient(to bottom, var(--rs-overlay-gradient));
+	padding-block-start: calc(var(--rs-unit-x10) * 2);
+}
+
+.--position-start .scrim {
+  width: auto;
+  inset-inline-end: auto;
+	background: linear-gradient(to left, var(--rs-overlay-gradient));
+	padding-inline-end: calc(var(--rs-unit-x10) * 2);
+
+	[dir="rtl"] & {
+		background: linear-gradient(to right, var(--rs-overlay-gradient));
+	}
+}
+
+.--position-end .scrim {
+  width: auto;
+	inset-inline-start: auto;
+	background: linear-gradient(to right, var(--rs-overlay-gradient));
+	padding-inline-start: calc(var(--rs-unit-x10) * 2);
+
+	[dir="rtl"] & {
+		background: linear-gradient(to left, var(--rs-overlay-gradient));
+	}
+}
+
+.--with-background {
+  position: relative;
+}

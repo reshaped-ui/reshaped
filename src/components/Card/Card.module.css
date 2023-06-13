@@ -1,0 +1,51 @@
+.root {
+	border: 1px solid var(--rs-color-border-neutral-faded);
+	background: var(--rs-color-background-elevation-base);
+	color: var(--rs-color-foreground-neutral);
+	display: block;
+	position: relative;
+	overflow: hidden;
+	text-align: initial;
+}
+
+.content {
+	position: relative;
+	z-index: var(--rs-z-index-raised);
+}
+
+.--selected {
+	border-color: transparent;
+	box-shadow: 0 0 0 2px var(--rs-color-border-primary);
+}
+
+.--elevated {
+	background: var(--rs-color-background-elevation-raised);
+	box-shadow: var(--rs-shadow-raised);
+}
+
+.--actionable:not(.--selected) {
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	color: inherit;
+
+	[data-rs-keyboard] &:focus {
+		box-shadow: var(--rs-focus-shadow);
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: rgba(var(--rs-color-rgb-background-neutral-faded), 0.4);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+	}
+
+	&:hover:before {
+		opacity: 1;
+	}
+}
+
+

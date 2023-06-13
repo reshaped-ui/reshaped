@@ -1,0 +1,321 @@
+.root {
+	--rs-view-gaps-count-multiplier: 1;
+	--rs-view-z: auto;
+	--rs-view-gap-value: calc(var(--rs-view-gap) * var(--rs-unit-x1));
+
+	z-index: var(--rs-view-z);
+	gap: var(--rs-view-gap-value);
+}
+
+.item {
+	--rs-view-item-gap: calc(var(--rs-unit-x1) * var(--rs-view-item-gap-before) - var(--rs-view-gap-value));
+	order: var(--rs-view-item-order);
+}
+
+.--padding {
+	padding: 
+		calc(var(--rs-unit-x1) * var(--rs-view-p-vertical, var(--rs-view-p-top)))
+		calc(var(--rs-unit-x1) * var(--rs-view-p-horizontal, var(--rs-view-p-start)))
+	;
+}
+
+.--padding-top {
+	padding-top: calc(var(--rs-unit-x1) * var(--rs-view-p-top));
+}
+
+.--padding-bottom {
+	padding-bottom: calc(var(--rs-unit-x1) * var(--rs-view-p-bottom));
+}
+
+.--padding-start{
+	padding-inline-start: calc(var(--rs-unit-x1) * var(--rs-view-p-start));
+}
+
+.--padding-end {
+	padding-inline-end: calc(var(--rs-unit-x1) * var(--rs-view-p-end));
+}
+
+.--animated {
+	transition: var(--rs-duration-medium) var(--rs-easing-standard);
+	transition-property: background-color, color, border-color;
+}
+
+@each $alignment in start, center, end {
+	.--align-text-$alignment {
+		text-align: $alignment;
+	}
+}
+
+@each $color in neutral, position, critical, primary {
+	.--bg-$color {
+		background-color: var(--rs-color-background-$color);
+		color: var(--rs-color-on-background-$color);
+	}
+}
+
+@each $color in neutral-faded, positive-faded, critical-faded, primary-faded, page, page-faded, disabled, disabled-faded, elevation-base, elevation-raised, elevation-overlay {
+	.--bg-$color {
+		color: var(--rs-color-foreground-neutral);
+		background-color: var(--rs-color-background-$color);
+	}
+}
+
+.--bg-white {
+	background-color: var(--rs-color-white);
+	color: var(--rs-color-black);
+}
+
+.--bg-black {
+	background-color: var(--rs-color-black);
+	color: var(--rs-color-white);
+}
+
+.--shadow-raised {
+	box-shadow: var(--rs-shadow-raised);
+}
+
+.--shadow-overlay {
+	box-shadow: var(--rs-shadow-overlay);
+}
+
+.--bd {
+	border: 1px solid var(--rs-view-border-color);
+}
+
+@each $color in neutral-faded, neutral, positive, positive-faded, critical, critical-faded, primary, primary-faded {
+	.--bd-$color {
+		--rs-view-border-color: var(--rs-color-border-$color);
+	}
+}
+
+.--bd-transparent {
+	--rs-view-border-color: transparent;
+}
+
+.--overflow-hidden {
+	overflow: hidden;
+}
+
+.--divided {
+	--rs-view-gaps-count-multiplier: 2;
+}
+
+.--flex {
+  display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+/* Direction */
+@responsive .--direction {
+	@value column {
+		flex-direction: column;
+		flex-wrap: nowrap;
+
+		& > .item--gap-before {
+			margin-top: var(--rs-view-item-gap);
+		}
+
+		& > .item--gap-auto {
+			margin-top: auto;
+		}
+	}
+
+	@value column-reverse {
+		flex-wrap: nowrap;
+		flex-direction: column-reverse;
+
+		& > .item--gap-before {
+			margin-top: var(--rs-view-item-gap);
+		}
+
+		& > .item--gap-auto {
+			margin-top: auto;
+		}
+	}
+
+	@value row {
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: flex-start;
+
+		& > .item--gap-before {
+			margin-inline-start: var(--rs-view-item-gap);
+		}
+
+		& > .item--gap-auto {
+			margin-inline-start: auto;
+		}
+
+		& > button {
+			width: auto !important;
+		}
+	}
+
+	@value row-reverse {
+		flex-wrap: wrap;
+		flex-direction: row-reverse;
+		align-items: flex-start;
+
+		& > .item--gap-before {
+			margin-inline-start: var(--rs-view-item-gap);
+		}
+
+		& > .item--gap-auto {
+			margin-inline-start: auto;
+		}
+
+		& > button {
+			width: auto !important;
+		}
+	}
+}
+
+.--nowrap {
+	flex-wrap: nowrap;
+
+	& > * {
+		flex-shrink: 0;
+	}
+}
+
+.--wrap {
+	flex-wrap: wrap;
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		.--nowrap-false--$(viewport),
+		.--wrap-true--$(viewport) {
+			flex-wrap: wrap;
+		}
+
+		.--nowrap-true--$(viewport),
+		.--wrap-false--$(viewport) {
+			flex-wrap: nowrap;
+		}
+	}
+}
+
+/* Alignment */
+@responsive .--align {
+	@value start {
+		align-items: flex-start !important;
+	}
+
+	@value end {
+		align-items: flex-end  !important;
+	}
+
+	@value center {
+		align-items: center !important;
+	}
+
+	@value stretch {
+		align-items: stretch !important;
+	}
+
+	@value baseline {
+		align-items: baseline !important;
+	}
+}
+
+@responsive .--justify {
+	@value start {
+		justify-content: flex-start;
+	}
+
+	@value end {
+		justify-content: flex-end;
+	}
+
+	@value center {
+		justify-content: center;
+	}
+}
+
+.divider {
+	align-self: stretch;
+}
+
+@responsive .item--grow {
+	@value true {
+		flex-grow: 1;
+		/* Fixes nested View with nowrap inside the grow item */
+		min-width: 0;
+		flex-shrink: 1;
+		flex-basis: 0;
+	}
+
+	@value false {
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-basis: auto;
+		min-width: auto;
+	}
+}
+
+@each $columns in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
+	.item--columns-$columns {
+		--rs-view-columns-count: calc(12 / $columns);
+		--rs-view-gaps-count: calc((var(--rs-view-columns-count) - 1) * var(--rs-view-gaps-count-multiplier));
+
+		width: calc(
+			(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) / var(--rs-view-columns-count) - var(--rs-view-item-gap, 0px)
+		)
+	}
+}
+
+.item--columns-auto {
+	width: auto;
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		@each $columns in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
+			.item--columns-$(columns)--$(viewport) {
+				--rs-view-columns-count: calc(12 / $columns);
+				--rs-view-gaps-count: calc((var(--rs-view-columns-count) - 1) * var(--rs-view-gaps-count-multiplier));
+
+				width: calc(
+					(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) / var(--rs-view-columns-count) - var(--rs-view-item-gap, 0px)
+					)
+			}
+
+			.item--columns-auto--$(viewport) {
+				width: auto;
+			}
+		}
+	}
+}
+
+/* Variables */
+@responsive .--padding {
+	@variable --rs-view-p-vertical 0;
+	@variable --rs-view-p-horizontal 0;
+}
+
+@responsive .--padding-top {
+	@variable --rs-view-p-top 0;
+}
+
+@responsive .--padding-bottom {
+	@variable --rs-view-p-bottom 0;
+}
+
+@responsive .--padding-start {
+	@variable --rs-view-p-start 0;
+}
+
+@responsive .--padding-end {
+	@variable --rs-view-p-end 0;
+}
+
+@responsive .root {
+	@variable --rs-view-gap 0;
+}
+
+@responsive .root > .item {
+	@variable --rs-view-item-order 0;
+	@variable --rs-view-item-gap-before initial;
+}

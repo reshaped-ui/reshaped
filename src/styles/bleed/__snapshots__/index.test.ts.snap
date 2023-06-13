@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/Bleed handles 0 value 1`] = `
+{
+  "classNames": [
+    "root",
+    "--bleed-false",
+  ],
+  "variables": {
+    "--rs-bleed-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Bleed handles positive value 1`] = `
+{
+  "classNames": [
+    "root",
+    "--bleed",
+  ],
+  "variables": {
+    "--rs-bleed-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Bleed handles responsive value 1`] = `
+{
+  "classNames": [
+    "root",
+    "--bleed",
+    "--bleed-false--m",
+    "--bleed-true--l",
+  ],
+  "variables": {
+    "--rs-bleed-l": 2,
+    "--rs-bleed-m": 0,
+    "--rs-bleed-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Bleed handles undefined value 1`] = `null`;

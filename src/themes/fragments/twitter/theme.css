@@ -1,0 +1,17 @@
+
+			[data-rs-theme="twitter"][data-rs-color-mode="light"], [data-rs-theme="twitter"][data-rs-color-mode="dark"] {
+					--rs-color-background-primary: #1da1f2;
+--rs-color-background-primary-highlighted: #1a90da;
+--rs-color-on-background-primary: #ffffff;
+--rs-color-rgb-background-primary: 29, 161, 242;
+--rs-color-rgb-background-primary-highlighted: 26, 144, 218;
+			}
+		
+			[data-rs-theme="twitter"][data-rs-color-mode="light"] {
+					
+			}
+		
+			[data-rs-theme="twitter"][data-rs-color-mode="dark"] {
+					
+			}
+		

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/Inset handles 0 value 1`] = `
+{
+  "classNames": [
+    "--inset",
+  ],
+  "variables": {
+    "--rs-inset-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset handles positive value 1`] = `
+{
+  "classNames": [
+    "--inset",
+  ],
+  "variables": {
+    "--rs-inset-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset handles responsive value 1`] = `
+{
+  "classNames": [
+    "--inset",
+    "--inset--m",
+    "--inset--l",
+  ],
+  "variables": {
+    "--rs-inset-l": 2,
+    "--rs-inset-m": 0,
+    "--rs-inset-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset handles undefined value 1`] = `null`;
+
+exports[`Styles/Inset handles value width defined side 1`] = `
+{
+  "classNames": [
+    "--inset-start",
+  ],
+  "variables": {
+    "--rs-inset-start-s": 4,
+  },
+}
+`;

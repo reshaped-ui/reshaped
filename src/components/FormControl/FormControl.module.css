@@ -1,0 +1,17 @@
+.root {
+	border: none;
+}
+
+.label {
+	display: block;
+	margin-bottom: var(--rs-unit-x1);
+}
+
+.caption {
+	margin-top: var(--rs-unit-x1);
+	display: block;
+}
+
+.caption + .caption {
+	margin-top: 0;
+}

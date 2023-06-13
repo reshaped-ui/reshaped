@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/Height handles % value 1`] = `
+{
+  "classNames": [
+    "literal",
+  ],
+  "variables": {
+    "--rs-h-s": "50%",
+  },
+}
+`;
+
+exports[`Styles/Height handles px value 1`] = `
+{
+  "classNames": [
+    "literal",
+  ],
+  "variables": {
+    "--rs-h-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/Height handles responsive value 1`] = `
+{
+  "classNames": [
+    "literal",
+    "literal--l",
+  ],
+  "variables": {
+    "--rs-h-l": "50%",
+    "--rs-h-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/Height handles undefined value 1`] = `null`;
+
+exports[`Styles/Height handles unit value 1`] = `
+{
+  "classNames": [
+    "unit",
+  ],
+  "variables": {
+    "--rs-h-s": 5,
+  },
+}
+`;

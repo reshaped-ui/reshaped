@@ -1,0 +1,21 @@
+.root {
+  max-width: 100%;
+  display: block;
+}
+
+.fallback {
+  background: var(--rs-color-background-neutral-faded);
+  color: var(--rs-color-foreground-disabled);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Important to override AspectRatio defaults */
+.--display-mode-cover {
+  object-fit: cover !important;
+}
+
+.--display-mode-contain {
+  object-fit: scale-down !important;
+}

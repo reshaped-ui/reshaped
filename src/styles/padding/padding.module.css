@@ -1,0 +1,7 @@
+.root {
+	padding: calc(var(--rs-p) * var(--rs-unit-x1));
+}
+
+@responsive .root {
+	@variable --rs-p 0;
+}

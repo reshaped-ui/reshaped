@@ -1,0 +1,19 @@
+.root {
+  padding: calc(var(--rs-unit-x1) - 1px) calc(var(--rs-unit-x2) - 1px);
+	border: 1px solid var(--rs-color-background-neutral-faded);
+	min-width: calc(var(--rs-line-height-caption-1) + var(--rs-unit-x1) * 2);
+	display: inline-flex;
+	justify-content: center;
+	vertical-align: top;
+  background: var(--rs-color-background-neutral-faded);
+  border-radius: var(--rs-unit-radius-small);
+  color: var(--rs-color-foreground-neutral);
+  transition: var(--rs-easing-standard) var(--rs-duration-fast);
+  transition-property: color, background-color, border-color;
+}
+
+.--active {
+  background: var(--rs-color-background-neutral);
+  border-color: var(--rs-color-background-neutral);
+  color: var(--rs-color-on-background-neutral);
+}

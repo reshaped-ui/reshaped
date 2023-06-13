@@ -1,0 +1,116 @@
+.root {
+	position: relative;
+}
+
+.input {
+	display: block;
+	border: none;
+	outline: none;
+	position: relative;
+	z-index: 1;
+	background: none;
+	flex-grow: 1;
+	width: 100%;
+	box-sizing: border-box;
+	padding: calc(var(--rs-text-area-padding) - 1px);
+	color: var(--rs-color-foreground-neutral);
+	background: var(--rs-color-background-elevation-base);
+	border: 1px solid var(--rs-color-border-neutral);
+	border-radius: var(--rs-unit-radius-small);
+	font-weight: var(--rs-font-weight-regular);
+	font-family: var(--rs-font-family-body);
+
+	&:focus {
+		border-color: var(--rs-color-border-primary);
+		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
+	}
+
+	&[disabled] {
+		cursor: not-allowed;
+		color: var(--rs-color-foreground-disabled);
+		background: var(--rs-color-background-disabled-faded);
+		border-color: var(--rs-color-border-disabled);
+	}
+}
+
+@responsive .--size {
+	@value medium {
+		--rs-text-area-padding: var(--rs-unit-x2);
+		border-radius: var(--rs-unit-radius-small);
+	
+		& .input {
+			font-size: var(--rs-font-size-body-3);
+			line-height: var(--rs-line-height-body-3);
+		}
+	}
+
+	@value large {
+		--rs-text-area-padding: var(--rs-unit-x3);
+		border-radius: var(--rs-unit-radius-medium);
+
+		& .input {
+			font-size: var(--rs-font-size-body-3);
+			line-height: var(--rs-line-height-body-3);
+		}
+	}
+
+	@value xlarge {
+		--rs-text-area-padding: var(--rs-unit-x4);
+		border-radius: var(--rs-unit-radius-medium);
+
+		& .input {
+			font-size: var(--rs-font-size-body-2);
+			line-height: var(--rs-line-height-body-2);
+		}
+	}
+}
+
+.root.--variant-faded {
+	& .input {
+		background: var(--rs-color-background-neutral-faded);
+		border-color: transparent;
+	}
+
+	& .input:focus {
+		border-color: var(--rs-color-border-primary);
+	}
+}
+
+.root.--variant-headless {
+	& .input {
+		background: transparent;
+		border-color: transparent;
+		padding-inline-start: 0;
+		padding-inline-end: 0;
+	}
+
+	& .input:focus,
+	&.--status-error .input,
+	&.--status-error .input:focus {
+		border-color: transparent;
+		box-shadow: none;
+	}
+}
+
+.root.--status-error {
+	& .input {
+		border-color: var(--rs-color-border-critical);
+	}
+
+	& .input:focus,
+	& .input:active {
+		border-color: var(--rs-color-border-primary);
+		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
+	}
+}
+
+@media (--rs-viewport-s) and (hover: none) {
+	.input {
+		font-size: var(--rs-font-size-body-2) !important;
+	}
+}
+
+
+
+
+

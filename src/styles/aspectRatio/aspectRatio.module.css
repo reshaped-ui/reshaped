@@ -1,0 +1,15 @@
+.root:empty {
+	aspect-ratio: var(--rs-ratio);
+}
+
+.root:not(:empty) > * {
+	aspect-ratio: var(--rs-ratio);
+}
+
+.root > img {
+	object-fit: cover;
+}
+
+@responsive .root {
+	@variable --rs-ratio 0;
+}

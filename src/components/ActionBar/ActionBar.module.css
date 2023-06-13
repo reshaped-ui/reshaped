@@ -1,0 +1,36 @@
+.root {
+	background: var(--rs-color-background-elevation-base);
+	position: relative;
+}
+
+.--position {
+	&-bottom {
+		border-top: 1px solid var(--rs-color-border-neutral-faded);
+	}
+
+	&-top {
+		border-bottom: 1px solid var(--rs-color-border-neutral-faded);
+	}
+}
+
+.--elevated {
+	border: none;
+	overflow-x: clip;
+	background-color: var(--rs-color-background-elevation-raised);
+}
+
+.--elevated:after {
+	content: '';
+	position: absolute;
+	display: block;
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	right: 0;
+	box-shadow: var(--rs-shadow-raised);
+
+	.--position-bottom& {
+		transform: rotateX(180deg);
+	}
+}
+

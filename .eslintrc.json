@@ -1,0 +1,56 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint", "react-hooks", "prettier"],
+	"extends": [
+		"airbnb-typescript",
+		"plugin:prettier/recommended",
+		"plugin:import/recommended",
+		"plugin:jsx-a11y/recommended"
+	],
+	"env": {
+		"browser": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"project": ["./tsconfig.json"],
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"rules": {
+		"prefer-destructuring": "off",
+		//		"import/extensions": "off",
+		// We import dev dependencies in test files but still want to lint them
+		"import/no-extraneous-dependencies": "off",
+		"import/prefer-default-export": "off",
+		"import/named": "off",
+		"import/no-unresolved": "off",
+		"object-curly-newline": "off",
+		"jsx-a11y/label-has-associated-control": 0,
+		"jsx-a11y/click-events-have-key-events": "off",
+		"react/require-default-props": "off",
+		// TODO: Generate random ids for keys
+		"react/no-array-index-key": "off",
+		"react/no-unused-prop-types": "off",
+		"arrow-body-style": 0,
+		"arrow-parens": 0,
+		"space-before-function-paren": 0,
+		"consistent-return": 0,
+		"default-case": 0,
+		"@typescript-eslint/no-shadow": 0,
+		"@typescript-eslint/dot-notation": 0,
+		"no-shadow": 0,
+
+		"react/prop-types": 0,
+		"react/jsx-filename-extension": 0,
+		"react/jsx-indent": 0,
+		"react/jsx-indent-props": 0,
+		"react/destructuring-assignment": 0,
+		"react/jsx-one-expression-per-line": 0,
+		"react/jsx-props-no-spreading": 0,
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "error"
+	}
+}

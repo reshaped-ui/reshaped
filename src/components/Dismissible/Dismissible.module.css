@@ -1,0 +1,27 @@
+.root {
+	position: relative;
+	padding-inline-end: var(--rs-unit-x7);
+	min-height: var(--rs-unit-x6);
+}
+
+.close {
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline-end: 0;
+	z-index: 5;
+}
+
+.--variant-media,
+.--hide-close {
+	padding: 0;
+}
+
+.--variant-media .close {
+	inset-block-start: var(--rs-unit-x2);
+	inset-inline-end: var(--rs-unit-x2);
+}
+
+.--align-center .close {
+	inset-block-start: 50%;
+	transform: translateY(-50%);
+}

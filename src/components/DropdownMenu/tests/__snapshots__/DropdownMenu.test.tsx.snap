@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownMenu works as controlled 1`] = `
+<button
+  aria-controls=":r2:"
+  aria-expanded="true"
+  aria-haspopup="menu"
+  class=" root  root --color-neutral --variant-solid  --size-medium"
+  type="button"
+>
+  <span
+    class="text"
+  >
+    Open
+  </span>
+</button>
+`;
+
+exports[`DropdownMenu works as uncontrolled 1`] = `
+<button
+  aria-controls=":r4:"
+  aria-expanded="true"
+  aria-haspopup="menu"
+  class=" root  root --color-neutral --variant-solid  --size-medium"
+  type="button"
+>
+  <span
+    class="text"
+  >
+    Open
+  </span>
+</button>
+`;
+
+exports[`DropdownMenu works when opening and closing 1`] = `
+<button
+  aria-expanded="false"
+  aria-haspopup="menu"
+  class=" root  root --color-neutral --variant-solid  --size-medium"
+  type="button"
+>
+  <span
+    class="text"
+  >
+    Open
+  </span>
+</button>
+`;
+
+exports[`DropdownMenu works when opening and closing 2`] = `
+<button
+  aria-controls=":r0:"
+  aria-expanded="true"
+  aria-haspopup="menu"
+  class=" root  root --color-neutral --variant-solid  --size-medium"
+  type="button"
+>
+  <span
+    class="text"
+  >
+    Open
+  </span>
+</button>
+`;

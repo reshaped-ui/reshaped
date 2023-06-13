@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/Radius handles none 1`] = `
+{
+  "classNames": [
+    "root",
+    "--radius-none",
+  ],
+}
+`;
+
+exports[`Styles/Radius handles responsive value 1`] = `
+{
+  "classNames": [
+    "root",
+    "--radius-small",
+    "--radius-none--m",
+    "--radius-circular--l",
+  ],
+}
+`;
+
+exports[`Styles/Radius handles undefined value 1`] = `null`;
+
+exports[`Styles/Radius handles value 1`] = `
+{
+  "classNames": [
+    "root",
+    "--radius-large",
+  ],
+}
+`;

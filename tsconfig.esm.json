@@ -1,0 +1,18 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outDir": "dist",
+		"baseUrl": "./src",
+		"rootDir": "./src",
+		"target": "es6",
+		"module": "ESNext"
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+		"tools",
+		"src/utilities/testPresets.tsx",
+		"./src/**/tests/*.test.tsx",
+		"./src/**/tests/*.stories.tsx"
+	]
+}

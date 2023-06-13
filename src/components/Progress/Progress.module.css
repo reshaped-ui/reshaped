@@ -1,0 +1,54 @@
+.root {
+	border-radius: var(--rs-unit-radius-small);
+	overflow: hidden;
+	background: var(--rs-color-background-neutral-faded);
+	display: flex;
+	align-items: flex-start;
+}
+
+.value {
+	border-radius: var(--rs-unit-radius-small);
+	height: 100%;
+	width: 100%;
+	background: var(--rs-color-background-neutral-faded);
+	transition: transform var(--rs-easing-decelerate);
+	transition-duration: var(--rs-progress-duration, var(--rs-duration-slow));
+	transform: translateX(var(--rs-progress-value));
+
+	[dir="rtl"] & {
+		transform: translateX(calc(var(--rs-progress-value) * -1));
+	}
+}
+
+.--duration .value {
+	transition-timing-function: linear;
+}
+
+.--size-small {
+	height: var(--rs-unit-x1);
+}
+
+.--size-medium {
+	height: var(--rs-unit-x2);
+}
+
+.--color-primary .value {
+	background: var(--rs-color-background-primary);
+}
+
+.--color-critical .value {
+	background: var(--rs-color-background-critical);
+}
+
+.--color-positive .value {
+	background: var(--rs-color-background-positive);
+}
+
+.--color-white {
+	background: rgba(var(--rs-color-rgb-white), .32);
+}
+
+.--color-white .value {
+	background: var(--rs-color-white);
+}
+

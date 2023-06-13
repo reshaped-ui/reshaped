@@ -1,0 +1,19 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outDir": "dist",
+		"baseUrl": "./src",
+		"rootDir": "./src",
+		"module": "CommonJS",
+		"target": "ES6"
+	},
+	"include": ["./src/cli", "./src/config"],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"tools",
+		"src/utilities/testPresets.tsx",
+		"./src/**/tests/*.test.tsx",
+		"./src/**/tests/*.stories.tsx"
+	]
+}

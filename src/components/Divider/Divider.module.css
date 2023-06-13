@@ -1,0 +1,35 @@
+.root {
+	border: none;
+	height: 1px;
+	background: var(--rs-color-border-neutral-faded);
+	margin: 0;
+}
+
+.--blank {
+	margin-top: -1px;
+}
+
+@responsive .--vertical {
+	@value true {
+		height: 100%;
+		width: 1px;
+		display: inline-block;
+		vertical-align: top;
+
+		&.--blank {
+			margin-top: 0;
+			margin-inline-start: -1px;
+		}
+	}
+
+	@value false {
+		width: 100%;
+		height: 1px;
+		display: block;
+
+		&.--blank {
+			margin-top: -1px;
+			margin-inline-start: 0;
+		}
+	}
+}

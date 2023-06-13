@@ -1,0 +1,88 @@
+.root {
+	transition: transform var(--rs-easing-accelerate) var(--rs-duration-medium);
+	background: var(--rs-color-background-elevation-overlay);
+	color: var(--rs-color-foreground-neutral);
+	box-shadow: var(--rs-shadow-overlay);
+}
+
+@responsive .root {
+	@variable --rs-modal-size calc(var(--rs-unit-x1) * 100);
+}
+
+@responsive .--position {
+	@value center {
+		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+		width: var(--rs-modal-size);
+		height: auto;
+		max-width: calc(100vw - var(--rs-unit-x8));
+		max-height: none;
+		margin: var(--rs-unit-x4);
+		inset: 0;
+		transform: scale(0.96);
+		position: relative;
+		border-radius: var(--rs-unit-radius-large);
+		overflow: hidden;
+	}
+
+	@value bottom {
+		--rs-modal-size-s: auto;
+		width: 100%;
+		height: var(--rs-modal-size);
+		max-width: 100%;
+		max-height: calc(100vh - var(--rs-unit-x4));
+		margin: 0;
+		margin-top: var(--rs-unit-x4);
+		inset: 0;
+		inset-block-start: initial;
+		transform: translate(0, 100%);
+		position: fixed;
+		border-radius: var(--rs-unit-radius-large) var(--rs-unit-radius-large) 0 0;
+		overflow: auto;
+	}
+
+	@value start {
+		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+		width: var(--rs-modal-size);
+		height: 100%;
+		max-width: calc(100vw - var(--rs-unit-x4));
+		max-height: 100%;
+		margin: 0;
+		margin-inline-end: var(--rs-unit-x4);
+		inset: 0;
+		inset-inline-end: initial;
+		transform: translate(-100%, 0);
+		position: fixed;
+		border-radius: 0;
+		overflow: auto;
+	
+		[dir="rtl"] & {
+			transform: translate(100%, 0);
+		}
+	}
+
+	@value end {
+		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+		width: var(--rs-modal-size);
+		height: 100%;
+		max-width: calc(100vw - var(--rs-unit-x4));
+		max-height: 100%;
+		margin: 0;
+		margin-inline-start: var(--rs-unit-x4);
+		inset: 0;
+		inset-inline-start: initial;
+		transform: translate(100%, 0);
+		position: fixed;
+		border-radius: 0;
+		overflow: auto;
+	
+		[dir="rtl"] & {
+			transform: translate(-100%, 0);
+		}
+	}
+}
+
+.--active,
+[dir="rtl"] .--active {
+	transform: translate(0, 0) scale(1) !important;
+	transition-timing-function: var(--rs-easing-decelerate);
+}

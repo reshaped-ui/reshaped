@@ -1,0 +1,121 @@
+.root {
+	display: block;
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: background-color, transform;
+	padding: var(--rs-menu-item-padding-v) var(--rs-menu-item-padding-h);
+	font-family: var(--rs-font-family-body);
+	font-weight: var(--rs-font-weight-medium);
+	color: var(--rs-menu-item-color);
+	background-color: var(--rs-menu-item-bg-color);
+}
+
+/* Apply only to button so it works correctly in stack */
+button.root {
+	width: 100%;
+}
+
+.icon {
+	color: var(--rs-menu-item-icon-color, inherit);
+}
+
+.icon,
+.content {
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: color;
+}
+
+@responsive .--rounded-corners {
+	@value true {
+		border-radius: var(--rs-menu-item-radius);
+	}
+
+	@value false {
+		border-radius: 0;
+	}
+}
+
+@responsive .--size {
+	@value small {
+		--rs-menu-item-padding-v: var(--rs-unit-x1);
+		--rs-menu-item-padding-h: var(--rs-unit-x2);
+		--rs-menu-item-radius: var(--rs-unit-radius-small);
+
+		font-size: var(--rs-font-size-body-3);
+		line-height: var(--rs-line-height-body-3);
+	}
+
+	@value medium {
+		--rs-menu-item-padding-v: var(--rs-unit-x2);
+		--rs-menu-item-padding-h: var(--rs-unit-x3);
+		--rs-menu-item-radius: var(--rs-unit-radius-medium);
+
+		font-size: var(--rs-font-size-body-3);
+		line-height: var(--rs-line-height-body-3);
+	}
+
+	@value large {
+		--rs-menu-item-padding-v: var(--rs-unit-x3);
+		--rs-menu-item-padding-h: var(--rs-unit-x4);
+		--rs-menu-item-radius: var(--rs-unit-radius-medium);
+
+		font-size: var(--rs-font-size-body-2);
+		line-height: var(--rs-line-height-body-2);
+	}
+}
+
+.--color-neutral {
+	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
+
+	&:hover,
+	&.--selected {
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 0.4);
+	}
+}
+
+.--color-critical {
+	--rs-menu-item-color: var(--rs-color-foreground-critical);
+
+	&:hover,
+	&.--selected {
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-critical), 0.12);
+	}
+}
+
+.--color-primary {
+	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
+
+	&:hover {
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 0.4);
+	}
+
+	&.--selected,
+	&.--selected:hover {
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-primary), 0.12);
+		--rs-menu-item-color: var(--rs-color-foreground-primary);
+		--rs-menu-item-icon-color: var(--rs-color-foreground-primary);
+	}
+}
+
+.--selected,
+.--selected:hover {
+	cursor: default;
+}
+
+.--disabled,
+.--disabled:hover {
+	--rs-menu-item-color: var(--rs-color-foreground-disabled);
+	--rs-menu-item-bg-color: none;
+	--rs-menu-item-icon-color: var(--rs-color-foreground-disabled);
+}
+
+/* Aligner */
+.aligner {
+	/* Normalize button width, since it doesn't respect width: 100% with negative margin */
+	button.root {
+		box-sizing: initial;
+	}
+
+	.root {
+		margin: 0 calc(var(--rs-menu-item-padding-h) * -1);
+	}
+}

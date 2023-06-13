@@ -1,0 +1,19 @@
+.literal {
+	height: var(--rs-h-s, auto);
+}
+
+.unit {
+	height: calc(var(--rs-h-s) * var(--rs-unit-x1));
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		.literal--$viewport {
+			height: var(--rs-h-$viewport);
+		}
+
+		.unit--$viewport {
+			height: calc(var(--rs-h-$viewport) * var(--rs-unit-x1));
+		}
+	}
+}

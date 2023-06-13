@@ -1,0 +1,59 @@
+.root {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	position: fixed;
+	inset: 0;
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
+	opacity: 0;
+	z-index: var(--rs-z-index-overlay);
+	color: var(--rs-color-white);
+}
+
+.root:after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background: var(--rs-color-black);
+	opacity: 0.8;
+}
+
+.wrapper {
+	display: table;
+	height: 100%;
+	width: 100%;
+}
+
+.inner {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.content {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: initial;
+	position: relative;
+	z-index: var(--rs-z-index-raised);
+}
+
+.root.--visible {
+	opacity: 1;
+}
+
+.root.--transparent {
+	color: inherit;
+	pointer-events: none;
+}
+
+.root.--transparent > *:not(.wrapper) {
+	pointer-events: all;
+}
+
+.root.--transparent:after {
+	content: none;
+}
+
+.root.--transparent .content {
+	pointer-events: all;
+}

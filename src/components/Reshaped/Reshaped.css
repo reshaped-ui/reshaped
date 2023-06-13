@@ -1,0 +1,129 @@
+
+:root {
+	--rs-z-index-raised: 5;
+	--rs-z-index-flyout: 80;
+	--rs-z-index-fixed: 90;
+	--rs-z-index-overlay: 100;
+	--rs-z-index-notification: 110;
+}
+
+[data-rs-color-mode=light] {
+	color-scheme: light;
+}
+
+[data-rs-color-mode=dark] {
+	color-scheme: dark;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+	margin: 0;
+	padding: 0;
+}
+
+ul[class], ol[class] {
+	list-style: none;
+}
+
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* 
+Setting background for Windows browsers that have white background by default 
+which doesn't work well in dark mode
+*/
+option {
+	background: var(--rs-color-background-elevation-base);
+}
+
+label {
+	cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+[data-rs-no-transition] *,
+[data-rs-no-transition] *:before,
+[data-rs-no-transition] *:after {
+	transition: none !important;
+}
+
+input::-webkit-input-placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input::-ms-input-placeholder {
+	color: var(--rs-color-foreground-neutral-faded);
+  opacity: 0.5;
+}
+
+html {
+	height: 100%;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust */
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering */
+	text-rendering: optimizeLegibility;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action#values */
+	touch-action: manipulation;
+}
+
+body {
+	height: 100%;
+	scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+	color: var(--rs-color-foreground-neutral);
+	background: var(--rs-color-background-page);
+
+	/* TODO: Replace with font utilities when they become available */
+	font-size: var(--rs-font-size-body-3);
+	line-height: var(--rs-line-height-body-3);
+	font-family: var(--rs-font-family-body);
+	font-weight: var(--rs-font-weight-regular);
+}
+
+textarea {
+	resize: vertical;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: underline;
+	color: var(--rs-color-foreground-primary);
+
+	&:hover {
+		text-decoration: none;
+	}
+}

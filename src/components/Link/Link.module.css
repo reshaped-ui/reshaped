@@ -1,0 +1,52 @@
+.root {
+	display: inline;
+	text-underline-offset: calc(var(--rs-unit-x1) / 2);
+}
+
+.root.--color-primary {
+	color: var(--rs-color-foreground-primary);
+}
+
+.root.--color-critical {
+	color: var(--rs-color-foreground-critical);
+}
+
+.root.--color-positive {
+	color: var(--rs-color-foreground-positive);
+}
+
+.root.--color-inherit {
+	color: currentColor;
+}
+
+.root.--variant-plain {
+	transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+	opacity: 1;
+
+	&:hover:not(.--disabled) {
+		/* Same as in button */
+		opacity: 0.6;
+	}
+}
+
+.root.--variant-underline {
+	text-decoration: underline;
+	text-decoration-color: currentColor;
+	transition: text-decoration-color var(--rs-duration-fast) var(--rs-easing-standard);
+
+	&:hover:not(.--disabled) {
+		text-decoration-color: transparent;
+	}
+}
+
+.root.--disabled {
+	text-decoration: none;
+	opacity: 1;
+	color: var(--rs-color-foreground-disabled);
+}
+
+.root.--with-icon {
+	display: inline-flex;
+	align-items: center;
+	gap: calc(1em / 3.5);
+}

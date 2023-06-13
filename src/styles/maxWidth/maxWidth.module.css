@@ -1,0 +1,19 @@
+.literal {
+	max-width: var(--rs-max-w-s, auto);
+}
+
+.unit {
+	max-width: calc(var(--rs-max-w-s) * var(--rs-unit-x1));
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		.literal--$viewport {
+			max-width: var(--rs-max-w-$viewport);
+		}
+
+		.unit--$viewport {
+			max-width: calc(var(--rs-max-w-$viewport) * var(--rs-unit-x1));
+		}
+	}
+}

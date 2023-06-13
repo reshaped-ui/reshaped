@@ -1,0 +1,24 @@
+.root {
+	margin-left: calc(var(--rs-unit-x1) * var(--rs-bleed) * -1);
+	margin-right: calc(var(--rs-unit-x1) * var(--rs-bleed) * -1);
+}
+
+@responsive .root {
+	@variable --rs-bleed 0;
+}
+
+@responsive .--bleed {
+	@value true {
+		border-left-style: none !important;
+		border-right-style: none !important;
+		border-radius: 0;
+	}
+
+	@value false {
+		border-left-style: solid !important;
+		border-right-style: solid !important;
+		/* Depends on the radius css utility */
+		border-radius: var(--rs-radius);
+	}
+}
+

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chain adds items 1`] = `
+{
+  "1": {
+    "data": "Test",
+    "previousId": null,
+  },
+}
+`;
+
+exports[`Chain removes item in the middle 1`] = `
+{
+  "1": {
+    "data": "Test",
+    "nextId": 3,
+    "previousId": null,
+  },
+  "3": {
+    "data": "Test 3",
+    "previousId": 1,
+  },
+}
+`;
+
+exports[`Chain removes previous elements till condition is true 1`] = `
+{
+  "1": {
+    "data": "Test",
+    "nextId": null,
+    "previousId": null,
+  },
+}
+`;
+
+exports[`Chain removes side items 1`] = `
+{
+  "2": {
+    "data": "Test 2",
+    "nextId": null,
+    "previousId": null,
+  },
+}
+`;

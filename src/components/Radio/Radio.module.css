@@ -1,0 +1,84 @@
+.root {
+	display: inline-flex;
+	vertical-align: top;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.root:hover .input:not(:checked) + .decorator {
+	background: var(--rs-color-background-neutral-faded);
+}
+
+.field {
+	position: relative;
+}
+
+.decorator {
+	width: var(--rs-unit-x5);
+	height: var(--rs-unit-x5);
+	border-radius: 50%;
+	border: 1px solid var(--rs-color-border-neutral);
+	background: var(--rs-color-background-elevation-base);
+
+	&:after {
+		content: "";
+		position: absolute;
+		height: var(--rs-unit-x2);
+		width: var(--rs-unit-x2);
+		background: var(--rs-color-on-background-primary);
+		border-radius: 50%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+	}
+}
+
+[data-rs-keyboard] .input:focus + .decorator {
+	box-shadow: var(--rs-focus-shadow);
+}
+
+.input:checked + .decorator,
+.root.--error .input:checked + .decorator,
+.root.--error:hover .input:checked + .decorator {
+	border-width: 2px;
+	border-color: var(--rs-color-background-primary);
+	background: var(--rs-color-background-primary);
+
+	&:after {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.text {
+	margin-inline-start: var(--rs-unit-x2);
+}
+
+.root.--error {
+	& .decorator,
+	&:hover .input + .decorator {
+		border-color: var(--rs-color-border-critical);
+	}
+}
+
+.root.--disabled {
+	cursor: not-allowed;
+	color: var(--rs-color-foreground-disabled);
+
+	& .decorator,
+	& .input:checked + .decorator,
+	&:hover .input + .decorator {
+		background: var(--rs-color-background-disabled-faded);
+		border-color: var(--rs-color-border-disabled);
+	}
+
+	& .input:checked + .decorator {
+		border-color: transparent;
+	}
+
+	& .input:checked + .decorator:after {
+		background: var(--rs-color-border-disabled);
+	}
+}

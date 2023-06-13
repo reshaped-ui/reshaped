@@ -1,0 +1,105 @@
+.root {
+	display: inline-flex;
+	gap: var(--rs-unit-x2);
+	vertical-align: top;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.root:hover .decorator {
+	background: var(--rs-color-background-neutral-faded);
+}
+
+.field {
+	position: relative;
+}
+
+.decorator {
+	width: var(--rs-unit-x5);
+	height: var(--rs-unit-x5);
+	border-radius: var(--rs-unit-radius-small);
+	border: 1px solid var(--rs-color-border-neutral);
+	background: var(--rs-color-background-elevation-base);
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+[data-rs-keyboard] .input:focus + .decorator {
+	box-shadow: var(--rs-focus-shadow);
+}
+
+.input:indeterminate + .decorator,
+.root:hover .input:indeterminate + .decorator,
+.root.--error .input:indeterminate + .decorator,
+.root.--error:hover .input:indeterminate + .decorator {
+	border-color: var(--rs-color-background-primary);
+	background: var(--rs-color-background-primary);
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 2px;
+		border-radius: 999px;
+		width: var(--rs-unit-x2);
+		background: var(--rs-color-on-background-primary);
+	}
+}
+
+.input:checked + .decorator,
+.root:hover .input:checked + .decorator,
+.root.--error .input:checked + .decorator,
+.root.--error:hover .input:checked + .decorator {
+	border-color: var(--rs-color-background-primary);
+	background: var(--rs-color-background-primary);
+	color: var(--rs-color-on-background-primary);
+
+	& .icon {
+		opacity: 1;
+	}
+}
+
+.root.--error {
+	& .decorator {
+		border-color: var(--rs-color-border-critical);
+	}
+}
+
+.root.--disabled {
+	cursor: not-allowed;
+	color: var(--rs-color-foreground-disabled);
+
+	& .decorator,
+	&:hover .decorator,
+	& .input:checked + .decorator,
+	&:hover .input:checked + .decorator, {
+		background: var(--rs-color-background-disabled-faded);
+		border-color: var(--rs-color-border-disabled);
+		color: var(--rs-color-foreground-disabled);
+	}
+
+	& .input:checked + .decorator,
+	&:hover .input:checked + .decorator,
+	& .input:indeterminate + .decorator,
+	&:hover .input:indeterminate + .decorator  {
+		background: var(--rs-color-background-disabled);
+		border-color: transparent;
+	}
+
+	& .input:indeterminate + .decorator:before {
+		background: var(--rs-color-foreground-disabled);
+	}
+
+	& .input:checked + .decorator:after {
+		background: var(--rs-color-border-disabled);
+	}
+}

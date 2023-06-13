@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/Position handles responsive value 1`] = `
+{
+  "classNames": [
+    "--position-absolute",
+    "--position-fixed--l",
+  ],
+}
+`;
+
+exports[`Styles/Position handles undefined value 1`] = `null`;
+
+exports[`Styles/Position handles value 1`] = `
+{
+  "classNames": [
+    "--position-absolute",
+  ],
+}
+`;

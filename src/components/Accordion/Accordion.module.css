@@ -1,0 +1,19 @@
+.content {
+  overflow: hidden;
+  height: 0;
+}
+
+.content--animated {
+  /* 
+  Using standard timing function here to have the same transition curve when animating multiple items together
+  */
+  transition: height var(--rs-duration-slow) var(--rs-easing-standard);
+}
+
+.icon {
+  transition: transform var(--rs-duration-fast) var(--rs-easing-standard);
+}
+
+.icon--active {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,25 @@
+.root {
+	border-radius: var(--rs-radius);
+}
+
+@responsive .--radius {
+	@value none {
+		--rs-radius: 0;
+	}
+
+	@value small {
+		--rs-radius: var(--rs-unit-radius-small);
+	}
+
+	@value medium {
+		--rs-radius: var(--rs-unit-radius-medium);
+	}
+
+	@value large {
+		--rs-radius: var(--rs-unit-radius-large);
+	}
+
+	@value circular {
+		--rs-radius: 9999px;
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"jsx": "react-native",
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"baseUrl": "./src"
+	},
+	"include": ["./src/**/tests/*.stories.tsx", "./src/**/*.d.ts"]
+}

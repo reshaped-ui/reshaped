@@ -1,0 +1,9 @@
+.root {
+  --demo-bg: var(--rs-color-background-elevation-base);
+	--dot-color: var(--rs-color-background-neutral);
+	background:
+		linear-gradient(90deg, var(--demo-bg) 10px, transparent 1%) center,
+		linear-gradient(var(--demo-bg) 10px, transparent 1%) center,
+		var(--dot-color);
+	background-size: 12px 12px;
+}

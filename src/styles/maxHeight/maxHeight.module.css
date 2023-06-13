@@ -1,0 +1,19 @@
+.literal {
+	max-height: var(--rs-max-h-s, auto);
+}
+
+.unit {
+	max-height: calc(var(--rs-max-h-s) * var(--rs-unit-x1));
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		.literal--$viewport {
+			max-height: var(--rs-max-h-$viewport);
+		}
+
+		.unit--$viewport {
+			max-height: calc(var(--rs-max-h-$viewport) * var(--rs-unit-x1));
+		}
+	}
+}

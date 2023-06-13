@@ -1,0 +1,89 @@
+@keyframes rs-reshaped-loader {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(540deg);
+	}
+
+	100% {
+		transform: rotate(1080deg);
+	}
+}
+
+.root {
+	position: relative;
+	display: block;
+	animation: rs-reshaped-loader 2.2s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
+	width: var(--rs-loader-size);
+	height: var(--rs-loader-size);
+}
+
+.root:before,
+.root:after {
+	content: '';
+	background: var(--rs-loader-color);
+	border-radius: 50%;
+	position: absolute;
+	z-index: 2;
+	width: var(--rs-loader-stroke);
+	height: var(--rs-loader-stroke);
+	transform: translateY(-50%);
+	top: 50%;
+}
+
+.root:before {
+	left: 0;
+}
+
+.root:after {
+	right: 0;
+}
+
+.inner:after,
+.inner:before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border: var(--rs-loader-stroke) solid var(--rs-loader-color);
+	border-radius: 50%;
+}
+
+.inner:before {
+	opacity: 0.3;
+}
+
+.inner:after {
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+	transform: rotate(-45deg);
+}
+
+.--color-inherit {
+	--rs-loader-color: currentColor;
+}
+
+.--color-primary {
+	--rs-loader-color: var(--rs-color-border-primary);
+}
+
+.--color-positive {
+	--rs-loader-color: var(--rs-color-border-positive);
+}
+
+.--color-critical {
+	--rs-loader-color: var(--rs-color-border-critical);
+}
+
+@responsive .--size {
+	@value small {
+		--rs-loader-size: var(--rs-unit-x4);
+		--rs-loader-stroke: 2px;
+	}
+
+	@value medium {
+		--rs-loader-size: var(--rs-unit-x6);
+		--rs-loader-stroke: 3px;
+	}
+}

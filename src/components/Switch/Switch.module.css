@@ -1,0 +1,103 @@
+.root {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--rs-unit-x2);
+	position: relative;
+	vertical-align: top;
+}
+
+.input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* Trap focus should be able to find this element with 1px height */
+	width: 1px;
+	height: 1px;
+	border: 0;
+	opacity: 0;
+	outline: none;
+
+	&:checked + .area {
+		background: var(--rs-color-background-primary);
+		border-color: transparent;
+
+		& .thumb {
+			transform: translateX(var(--rs-unit-x3));
+
+			[dir="rtl"] & {
+				transform: translateX(calc(var(--rs-unit-x3) * -1));
+			}
+		}
+	}
+
+	[data-rs-keyboard] &:focus + .area {
+		box-shadow: var(--rs-focus-shadow);
+	}
+
+	&[disabled] + .area {
+		cursor: not-allowed;
+		background: var(--rs-color-background-disabled);
+
+		& .thumb {
+			opacity: 0.8;
+		}
+	}
+
+	&[disabled]:checked + .area {
+		background: var(--rs-color-background-primary);
+		opacity: 0.4;
+
+
+		& .thumb {
+			opacity: 1;
+		}
+	}
+}
+
+.area {
+	cursor: pointer;
+	border: 2px solid transparent;
+	height: calc(var(--rs-unit-x1) * 5);
+	width: calc(var(--rs-unit-x1) * 8);
+	border-radius: calc(var(--rs-unit-x1) * 5 / 2);
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	background: var(--rs-color-background-neutral);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: background, border;
+}
+
+.thumb {
+	height: var(--rs-unit-x4);
+	width: var(--rs-unit-x4);
+	background: var(--rs-color-white);
+	border-radius: 50%;
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: transform;
+	box-shadow: var(--rs-shadow-raised);
+}
+
+.root--size-small {
+	& .area {
+		height: calc(var(--rs-unit-x1) * 4);
+		width: calc(var(--rs-unit-x1) * 6);
+	}
+
+	& .thumb {
+		height: var(--rs-unit-x3);
+		width: var(--rs-unit-x3);
+	}
+
+	& .input:checked + .area .thumb {
+		transform: translateX(var(--rs-unit-x2));
+
+		[dir="rtl"] & {
+			transform: translateX(calc(var(--rs-unit-x2) * -1));
+		}
+	}
+}
+
+.root--reversed {
+	flex-direction: row-reverse;
+}

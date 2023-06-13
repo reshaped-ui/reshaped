@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-external:crypto"],
+  "sourcesContent": ["module.exports = Object.create(new Proxy({}, {\n  get(_, key) {\n    if (\n      key !== '__esModule' &&\n      key !== '__proto__' &&\n      key !== 'constructor' &&\n      key !== 'splice'\n    ) {\n      console.warn(`Module \"crypto\" has been externalized for browser compatibility. Cannot access \"crypto.${key}\" in client code. See http://vitejs.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.`)\n    }\n  }\n}))"],
+  "mappings": ";;;;;AAAA;AAAA;AAAA,WAAO,UAAU,OAAO,OAAO,IAAI,MAAM,CAAC,GAAG;AAAA,MAC3C,IAAI,GAAG,KAAK;AACV,YACE,QAAQ,gBACR,QAAQ,eACR,QAAQ,iBACR,QAAQ,UACR;AACA,kBAAQ,KAAK,0FAA0F,uIAAuI;AAAA,QAChP;AAAA,MACF;AAAA,IACF,CAAC,CAAC;AAAA;AAAA;",
+  "names": []
+}
