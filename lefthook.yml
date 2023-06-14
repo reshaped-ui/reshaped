@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: "*.{js,ts,jsx,tsx,vue}"
+      run: yarn lint:js --fix {staged_files} && git add {staged_files}
+    stylelint:
+      glob: "*.css"
+      run: yarn lint:css --fix {staged_files} && git add {staged_files}
+# commit-msg:
+#   commands:
+#     "lint commit message":
+#       run: npx commitlint --color --edit {1}

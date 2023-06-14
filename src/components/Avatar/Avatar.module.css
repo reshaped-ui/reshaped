@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
 	/* Depends on getHeightStyles */
 	font-size: calc(var(--rs-h) * var(--rs-unit-x1) / 3);
 	font-weight: bold;

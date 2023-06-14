@@ -1,93 +1,89 @@
 .root {
-  position: relative;
+	position: relative;
 }
 
 .control {
-  position: absolute;
-  top: 50%;
-  opacity: 0;
-  transition: var(--rs-duration-fast) var(--rs-easing-standard);
-  transition-property: opacity, transform;
-  transform-origin: 50%;
-  transform: translate(-50%, -50%) scale(0.75);
-  display: none; 
-  z-index: var(--rs-z-index-raised);
+	position: absolute;
+	top: 50%;
+	opacity: 0;
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: opacity, transform;
+	transform-origin: 50%;
+	transform: translate(-50%, -50%) scale(0.75);
+	display: none;
+	z-index: var(--rs-z-index-raised);
 }
 
 .--control-prev {
-  left: 0;
+	left: 0;
 }
 
 .--control-next {
-  left: 100%;
-}
-
-.--control-visible > * {
-  pointer-events: none;
+	left: 100%;
 }
 
 .--control-visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.--control-visible > * {
-  pointer-events: all;
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(1);
 }
 
 .scroll {
-  overflow: auto;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-  -webkit-overflow-scrolling: touch;
-  backface-visibility: hidden;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  margin: 0 calc(var(--rs-unit-x1) * var(--rs-carousel-bleed) * -1);
-  padding: 0 calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
-  scroll-snap-type: inline;
-  scroll-padding-inline-start: calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
+	overflow: auto;
+	-ms-overflow-style: none;
+	/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+	overflow: -moz-scrollbars-none;
+	-webkit-overflow-scrolling: touch;
+	backface-visibility: hidden;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+	margin: 0 calc(var(--rs-unit-x1) * var(--rs-carousel-bleed) * -1);
+	padding: 0 calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
+	scroll-snap-type: inline;
+	scroll-padding-inline-start: calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
 }
 
 .scroll::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+	display: none;
+	width: 0;
+	height: 0;
 }
 
-
 .item {
-  --rs-carousel-item-width: calc(100% / var(--rs-carousel-items) - var(--rs-view-gap-value) * (var(--rs-carousel-items) - 1) / var(--rs-carousel-items));
-  scroll-snap-align: start;
-  width: var(--rs-carousel-item-width);
-  position: relative;
+	--rs-carousel-item-width: calc(
+		100% / var(--rs-carousel-items) - var(--rs-view-gap-value) * (var(--rs-carousel-items) - 1) /
+			var(--rs-carousel-items)
+	);
+
+	scroll-snap-align: start;
+	width: var(--rs-carousel-item-width);
+	position: relative;
 }
 
 @media (--rs-viewport-l), (hover: hover) {
-  .--control-rendered {
-    display: block;
-  }
+	.--control-rendered {
+		display: block;
+	}
 }
 
 @media (hover: none) {
-  .--bleed .item {
-    width: calc(var(--rs-carousel-item-width) - 10% / var(--rs-carousel-items));
-  }
+	.--bleed .item {
+		width: calc(var(--rs-carousel-item-width) - 10% / var(--rs-carousel-items));
+	}
 }
 
 @each $viewport in m, l, xl {
 	@media (--rs-viewport-$viewport) and (hover: none) {
 		.--bleed-true--$(viewport) .item {
-      width: calc(var(--rs-carousel-item-width) - 10% / var(--rs-carousel-items));
+			width: calc(var(--rs-carousel-item-width) - 10% / var(--rs-carousel-items));
 		}
-		
+
 		.--bleed-false--$(viewport) .item {
-      width: var(--rs-carousel-item-width);
+			width: var(--rs-carousel-item-width);
 		}
 	}
 }
 
 @responsive .root {
-  @variable --rs-carousel-items unset;
-  @variable --rs-carousel-bleed 0;
+	@variable --rs-carousel-items unset;
+	@variable --rs-carousel-bleed 0;
 }

@@ -2,8 +2,10 @@
 	position: relative;
 	box-sizing: initial;
 
-	/* Make sure that tab is not stretching the flex container when is in the middle of other flex children */
-	/* Example is available in View.stories */
+	/* 
+	Make sure that tab is not stretching the flex container when is in the middle of other flex children
+	Example is available in View.stories 
+	*/
 	max-width: 100%;
 }
 
@@ -11,8 +13,8 @@
 	position: relative;
 }
 
-.inner:after {
-	content: '';
+.inner::after {
+	content: "";
 	position: absolute;
 	background-color: var(--rs-color-border-neutral-faded);
 	z-index: 2;
@@ -27,6 +29,7 @@
 
 .button {
 	width: 100%;
+
 	/* 
 	Keep transform working with absolute positioned elements
 	Without z-index actionable goes behind them
@@ -34,6 +37,7 @@
 	z-index: 1;
 	position: relative;
 	overflow: hidden;
+
 	/* Highlighting causes background animation to get cut off */
 	-webkit-tap-highlight-color: transparent;
 	border-radius: var(--rs-unit-radius-medium);
@@ -60,11 +64,11 @@
 	margin-inline-end: var(--rs-unit-x2);
 }
 
-.--item-active:after {
-	content: '';
+.--item-active::after {
+	content: "";
 }
 
-.--item-active:after,
+.--item-active::after,
 .selector {
 	position: absolute;
 	border-radius: calc(var(--rs-unit-radius-medium) - 1px);
@@ -77,8 +81,10 @@
 	--rs-tab-selection-y: 0;
 	--rs-tab-selection-scale-x: 0;
 	--rs-tab-selection-scale-y: 0;
+
 	transform-origin: 0 0;
-	transform: translate(calc(var(--rs-tab-selection-x) * 1px), calc(var(--rs-tab-selection-y) * 1px)) translateZ(0);
+	transform: translate(calc(var(--rs-tab-selection-x) * 1px), calc(var(--rs-tab-selection-y) * 1px))
+		translateZ(0);
 }
 
 .--selector-hidden {
@@ -132,20 +138,23 @@
 	& .inner {
 		white-space: nowrap;
 		overflow: auto;
+
 		/* 1 */
 		margin: 0 calc(var(--rs-unit-x2) * -1) -40px;
 		padding: 0 var(--rs-unit-x2) 40px;
 		-ms-overflow-style: none;
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		overflow: -moz-scrollbars-none;
 		scrollbar-width: none;
 	}
-	
+
 	& .inner::-webkit-scrollbar {
 		display: none;
 	}
 
-	& .inner:after {
+	& .inner::after {
 		height: 1px;
+
 		/* 1 */
 		inset-inline: var(--rs-unit-x2);
 		bottom: 0;
@@ -162,7 +171,7 @@
 		margin-inline-start: var(--rs-tabs-gap);
 	}
 
-	& .--item-active:after {
+	& .--item-active::after {
 		inset-inline: 0;
 		height: 2px;
 		bottom: 0;
@@ -189,7 +198,7 @@
 }
 
 .--direction-column {
-	& .inner:after {
+	& .inner::after {
 		inset-inline-end: 0;
 		top: 0;
 		bottom: 0;
@@ -204,6 +213,7 @@
 
 	& .item {
 		--rs-tabs-gap: var(--rs-unit-x1);
+
 		padding-inline-end: var(--rs-unit-x1);
 	}
 
@@ -211,11 +221,11 @@
 		margin-top: var(--rs-tabs-gap);
 	}
 
-	& .--item-active:after {
+	& .--item-active::after {
 		bottom: 0;
 	}
 
-	& .--item-active:after,
+	& .--item-active::after,
 	& .selector {
 		width: 2px;
 		height: 100%;
@@ -238,9 +248,9 @@
 	}
 }
 
-.--variant-borderless .inner:after,
-.--variant-pills .inner:after,
-.--variant-pills-elevated .inner:after {
+.--variant-borderless .inner::after,
+.--variant-pills .inner::after,
+.--variant-pills-elevated .inner::after {
 	content: none;
 }
 
@@ -282,8 +292,8 @@
 	}
 }
 
-.--variant-pills .--item-active:after,
-.--variant-pills-elevated .--item-active:after {
+.--variant-pills .--item-active::after,
+.--variant-pills-elevated .--item-active::after {
 	background-color: var(--rs-color-background-neutral);
 	opacity: 0.6;
 	z-index: 0;
@@ -303,7 +313,7 @@
 	border: 2px solid transparent;
 }
 
-.--variant-pills-elevated .--item-active:after,
+.--variant-pills-elevated .--item-active::after,
 .--variant-pills-elevated .selector {
 	opacity: 1;
 	background: var(--rs-color-background-elevation-raised);
@@ -342,20 +352,41 @@
 
 [dir="rtl"] .--cut-off-start .inner,
 .--cut-off-end .inner {
-	mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0.1) 95%, rgba(0, 0, 0, 0) 100%);
+	mask-image: linear-gradient(
+		to right,
+		rgba(var(--rs-color-rgb-black) / 100%) 0,
+		rgba(var(--rs-color-rgb-black) / 100%) 80%,
+		rgba(var(--rs-color-rgb-black) / 10%) 95%,
+		rgba(var(--rs-color-rgb-black) / 0%) 100%
+	);
 }
 
 [dir="rtl"] .--cut-off-end .inner,
 .--cut-off-start .inner {
-	mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0.1) 95%, rgba(0, 0, 0, 0) 100%);
+	mask-image: linear-gradient(
+		to left,
+		rgba(var(--rs-color-rgb-black) / 100%) 0,
+		rgba(var(--rs-color-rgb-black) / 100%) 80%,
+		rgba(var(--rs-color-rgb-black) / 10%) 95%,
+		rgba(var(--rs-color-rgb-black) / 0%) 100%
+	);
 }
 
 .--cut-off-both .inner {
-	mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0.1) 95%, rgba(0, 0, 0, 0) 100%);
+	mask-image: linear-gradient(
+		to right,
+		rgba(var(--rs-color-rgb-black) / 0%) 0,
+		rgba(var(--rs-color-rgb-black) / 10%) 5%,
+		rgba(var(--rs-color-rgb-black) / 100%) 20%,
+		rgba(var(--rs-color-rgb-black) / 100%) 80%,
+		rgba(var(--rs-color-rgb-black) / 10%) 95%,
+		rgba(var(--rs-color-rgb-black) / 0%) 100%
+	);
 }
 
 @media (--rs-viewport-s) {
-	.next, .prev {
+	.next,
+	.prev {
 		display: none;
 	}
 }

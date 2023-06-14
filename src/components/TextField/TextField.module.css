@@ -34,8 +34,8 @@
 }
 
 .input:-webkit-autofill {
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: var(--rs-color-foreground-neutral);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: var(--rs-color-foreground-neutral);
 }
 
 .slot,
@@ -97,7 +97,7 @@
 
 		border-radius: var(--rs-unit-radius-medium);
 		min-height: calc(var(--rs-unit-x1) * 12);
-	
+
 		& .input {
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
@@ -127,9 +127,10 @@
 }
 
 .root.--variant-headless {
+	--rs-text-field-padding-h: 0;
+
 	background: transparent;
 	border-color: transparent;
-	--rs-text-field-padding-h: 0;
 
 	&:focus-within,
 	&.--status-error,
@@ -152,8 +153,3 @@
 		font-size: var(--rs-font-size-body-2) !important;
 	}
 }
-
-
-
-
-

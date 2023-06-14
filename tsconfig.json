@@ -1,21 +1,21 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "pretty": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "lib": ["es2017", "dom"],
-    "jsx": "react",
-    "target": "es6",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "outDir": "./dist",
-    "baseUrl": "./src",
-    "rootDir": "./src",
-    "paths": { "*": ["*"] }
-  },
-  "exclude": ["node_modules", "dist"]
+	"compilerOptions": {
+		"strict": true,
+		"esModuleInterop": true,
+		"declaration": true,
+		"pretty": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"skipLibCheck": true,
+		"lib": ["es2017", "dom"],
+		"jsx": "react",
+		"target": "es6",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"outDir": "./dist",
+		"baseUrl": "./src",
+		"rootDir": "./src",
+		"paths": { "*": ["*"] }
+	},
+	"exclude": ["node_modules", "dist", "tools"]
 }

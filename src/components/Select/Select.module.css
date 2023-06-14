@@ -25,7 +25,6 @@
 	position: relative;
 	background: none;
 	z-index: 1;
-	background: none;
 	flex-grow: 1;
 	width: 100%;
 	box-sizing: border-box;
@@ -35,11 +34,9 @@
 	color: var(--rs-color-foreground-neutral);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
-	padding: 
-		var(--rs-select-padding-v) 
-		calc(var(--rs-select-padding-h) + var(--rs-select-chevron-size) + var(--rs-unit-x2)) 
-		var(--rs-select-padding-v) 
-		var(--rs-select-padding-h);
+	padding: var(--rs-select-padding-v)
+		calc(var(--rs-select-padding-h) + var(--rs-select-chevron-size) + var(--rs-unit-x2))
+		var(--rs-select-padding-v) var(--rs-select-padding-h);
 
 	/* Firefox text alignment */
 	line-height: calc(var(--rs-select-min-height) - 2 * var(--rs-select-padding-v)) !important;
@@ -85,9 +82,9 @@
 		--rs-select-padding-base: var(--rs-unit-x1);
 		--rs-select-min-height: var(--rs-unit-x9);
 		--rs-select-chevron-size: var(--rs-unit-x4);
-	
+
 		border-radius: var(--rs-unit-radius-small);
-	
+
 		& .input {
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
@@ -98,9 +95,9 @@
 		--rs-select-padding-base: var(--rs-unit-x2);
 		--rs-select-min-height: calc(var(--rs-unit-x1) * 12);
 		--rs-select-chevron-size: var(--rs-unit-x5);
-	
+
 		border-radius: var(--rs-unit-radius-medium);
-	
+
 		& .input {
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
@@ -132,6 +129,7 @@
 
 .root.--variant-headless {
 	--rs-select-padding-h: 0;
+
 	background: transparent;
 	border-color: transparent;
 
@@ -171,8 +169,3 @@
 		font-size: var(--rs-font-size-body-2) !important;
 	}
 }
-
-
-
-
-

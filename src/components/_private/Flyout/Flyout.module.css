@@ -54,6 +54,11 @@
 	transform: translate(var(--rs-unit-x2), 0);
 }
 
+.content.--visible .inner {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
 .content.--animated .inner {
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: opacity, transform;
@@ -61,9 +66,4 @@
 
 .content.--animated.--visible .inner {
 	transition-timing-function: var(--rs-easing-decelerate);
-}
-
-.content.--visible .inner {
-	opacity: 1;
-	transform: translate(0, 0);
 }

@@ -1,4 +1,4 @@
-tools/**/*.js
+tools/**/*.ts
 src/themes/**/*.tsx
 src/icons/**/*.js
 src/icons/**/*.ts

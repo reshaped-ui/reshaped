@@ -4,11 +4,9 @@
 
 .input {
 	display: block;
-	border: none;
 	outline: none;
 	position: relative;
 	z-index: 1;
-	background: none;
 	flex-grow: 1;
 	width: 100%;
 	box-sizing: border-box;
@@ -36,8 +34,9 @@
 @responsive .--size {
 	@value medium {
 		--rs-text-area-padding: var(--rs-unit-x2);
+
 		border-radius: var(--rs-unit-radius-small);
-	
+
 		& .input {
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
@@ -46,6 +45,7 @@
 
 	@value large {
 		--rs-text-area-padding: var(--rs-unit-x3);
+
 		border-radius: var(--rs-unit-radius-medium);
 
 		& .input {
@@ -56,6 +56,7 @@
 
 	@value xlarge {
 		--rs-text-area-padding: var(--rs-unit-x4);
+
 		border-radius: var(--rs-unit-radius-medium);
 
 		& .input {
@@ -109,8 +110,3 @@
 		font-size: var(--rs-font-size-body-2) !important;
 	}
 }
-
-
-
-
-

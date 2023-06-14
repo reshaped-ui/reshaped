@@ -21,7 +21,7 @@
 	border: 1px solid var(--rs-color-border-neutral);
 	background: var(--rs-color-background-elevation-base);
 
-	&:after {
+	&::after {
 		content: "";
 		position: absolute;
 		height: var(--rs-unit-x2);
@@ -46,7 +46,7 @@
 	border-color: var(--rs-color-background-primary);
 	background: var(--rs-color-background-primary);
 
-	&:after {
+	&::after {
 		opacity: 1;
 		transform: translate(-50%, -50%);
 	}
@@ -78,7 +78,7 @@
 		border-color: transparent;
 	}
 
-	& .input:checked + .decorator:after {
+	& .input:checked + .decorator::after {
 		background: var(--rs-color-border-disabled);
 	}
 }
