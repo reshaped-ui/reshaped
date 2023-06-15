@@ -21,7 +21,6 @@
 	},
 	"rules": {
 		"prefer-destructuring": "off",
-		//		"import/extensions": "off",
 		// We import dev dependencies in test files but still want to lint them
 		"import/no-extraneous-dependencies": "off",
 		"import/prefer-default-export": "off",

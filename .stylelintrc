@@ -1,0 +1,17 @@
+{
+	"extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+	"rules": {
+		"selector-class-pattern": null,
+		"no-descending-specificity": null,
+		"custom-property-pattern": null,
+		"selector-no-vendor-prefix": null,
+		"property-no-vendor-prefix": null,
+		"declaration-block-no-redundant-longhand-properties": null,
+		"at-rule-no-unknown": [
+			true,
+			{
+				"ignoreAtRules": ["responsive", "value", "variable", "each"]
+			}
+		]
+	}
+}

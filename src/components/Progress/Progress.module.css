@@ -45,10 +45,9 @@
 }
 
 .--color-white {
-	background: rgba(var(--rs-color-rgb-white), .32);
+	background: rgba(var(--rs-color-rgb-white) / 32%);
 }
 
 .--color-white .value {
 	background: var(--rs-color-white);
 }
-

@@ -33,19 +33,17 @@
 		box-shadow: var(--rs-focus-shadow);
 	}
 
-	&:before {
-		content: '';
+	&::before {
+		content: "";
 		position: absolute;
 		inset: 0;
-		background: rgba(var(--rs-color-rgb-background-neutral-faded), 0.4);
+		background: rgba(var(--rs-color-rgb-background-neutral-faded) / 40%);
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 	}
 
-	&:hover:before {
+	&:hover::before {
 		opacity: 1;
 	}
 }
-
-

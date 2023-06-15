@@ -8,15 +8,16 @@
 }
 
 .item {
-	--rs-view-item-gap: calc(var(--rs-unit-x1) * var(--rs-view-item-gap-before) - var(--rs-view-gap-value));
+	--rs-view-item-gap: calc(
+		var(--rs-unit-x1) * var(--rs-view-item-gap-before) - var(--rs-view-gap-value)
+	);
+
 	order: var(--rs-view-item-order);
 }
 
 .--padding {
-	padding: 
-		calc(var(--rs-unit-x1) * var(--rs-view-p-vertical, var(--rs-view-p-top)))
-		calc(var(--rs-unit-x1) * var(--rs-view-p-horizontal, var(--rs-view-p-start)))
-	;
+	padding: calc(var(--rs-unit-x1) * var(--rs-view-p-vertical, var(--rs-view-p-top)))
+		calc(var(--rs-unit-x1) * var(--rs-view-p-horizontal, var(--rs-view-p-start)));
 }
 
 .--padding-top {
@@ -27,7 +28,7 @@
 	padding-bottom: calc(var(--rs-unit-x1) * var(--rs-view-p-bottom));
 }
 
-.--padding-start{
+.--padding-start {
 	padding-inline-start: calc(var(--rs-unit-x1) * var(--rs-view-p-start));
 }
 
@@ -53,7 +54,9 @@
 	}
 }
 
-@each $color in neutral-faded, positive-faded, critical-faded, primary-faded, page, page-faded, disabled, disabled-faded, elevation-base, elevation-raised, elevation-overlay {
+@each $color in neutral-faded, positive-faded, critical-faded, primary-faded, page, page-faded,
+	disabled, disabled-faded, elevation-base, elevation-raised, elevation-overlay
+{
 	.--bg-$color {
 		color: var(--rs-color-foreground-neutral);
 		background-color: var(--rs-color-background-$color);
@@ -82,7 +85,9 @@
 	border: 1px solid var(--rs-view-border-color);
 }
 
-@each $color in neutral-faded, neutral, positive, positive-faded, critical, critical-faded, primary, primary-faded {
+@each $color in neutral-faded, neutral, positive, positive-faded, critical, critical-faded, primary,
+	primary-faded
+{
 	.--bd-$color {
 		--rs-view-border-color: var(--rs-color-border-$color);
 	}
@@ -101,7 +106,7 @@
 }
 
 .--flex {
-  display: flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 }
@@ -204,7 +209,7 @@
 	}
 
 	@value end {
-		align-items: flex-end  !important;
+		align-items: flex-end !important;
 	}
 
 	@value center {
@@ -241,6 +246,7 @@
 @responsive .item--grow {
 	@value true {
 		flex-grow: 1;
+
 		/* Fixes nested View with nowrap inside the grow item */
 		min-width: 0;
 		flex-shrink: 1;
@@ -258,11 +264,15 @@
 @each $columns in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
 	.item--columns-$columns {
 		--rs-view-columns-count: calc(12 / $columns);
-		--rs-view-gaps-count: calc((var(--rs-view-columns-count) - 1) * var(--rs-view-gaps-count-multiplier));
+		--rs-view-gaps-count: calc(
+			(var(--rs-view-columns-count) - 1) * var(--rs-view-gaps-count-multiplier)
+		);
 
 		width: calc(
-			(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) / var(--rs-view-columns-count) - var(--rs-view-item-gap, 0px)
-		)
+			(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) /
+				var(--rs-view-columns-count) -
+				var(--rs-view-item-gap, 0px)
+		);
 	}
 }
 
@@ -275,11 +285,15 @@
 		@each $columns in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
 			.item--columns-$(columns)--$(viewport) {
 				--rs-view-columns-count: calc(12 / $columns);
-				--rs-view-gaps-count: calc((var(--rs-view-columns-count) - 1) * var(--rs-view-gaps-count-multiplier));
+				--rs-view-gaps-count: calc(
+					(var(--rs-view-columns-count) - 1) * var(--rs-view-gaps-count-multiplier)
+				);
 
 				width: calc(
-					(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) / var(--rs-view-columns-count) - var(--rs-view-item-gap, 0px)
-					)
+					(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) /
+						var(--rs-view-columns-count) -
+						var(--rs-view-item-gap, 0px)
+				);
 			}
 
 			.item--columns-auto--$(viewport) {

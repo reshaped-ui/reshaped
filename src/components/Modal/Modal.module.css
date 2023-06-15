@@ -12,6 +12,7 @@
 @responsive .--position {
 	@value center {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+
 		width: var(--rs-modal-size);
 		height: auto;
 		max-width: calc(100vw - var(--rs-unit-x8));
@@ -26,6 +27,7 @@
 
 	@value bottom {
 		--rs-modal-size-s: auto;
+
 		width: 100%;
 		height: var(--rs-modal-size);
 		max-width: 100%;
@@ -42,6 +44,7 @@
 
 	@value start {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+
 		width: var(--rs-modal-size);
 		height: 100%;
 		max-width: calc(100vw - var(--rs-unit-x4));
@@ -54,7 +57,7 @@
 		position: fixed;
 		border-radius: 0;
 		overflow: auto;
-	
+
 		[dir="rtl"] & {
 			transform: translate(100%, 0);
 		}
@@ -62,6 +65,7 @@
 
 	@value end {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+
 		width: var(--rs-modal-size);
 		height: 100%;
 		max-width: calc(100vw - var(--rs-unit-x4));
@@ -74,7 +78,7 @@
 		position: fixed;
 		border-radius: 0;
 		overflow: auto;
-	
+
 		[dir="rtl"] & {
 			transform: translate(-100%, 0);
 		}

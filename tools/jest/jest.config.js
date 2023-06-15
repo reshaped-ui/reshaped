@@ -9,6 +9,6 @@ module.exports = {
 	preset: "ts-jest",
 	moduleDirectories: ["node_modules", path.join(__dirname, "../../src")],
 	moduleNameMapper: {
-		"\\.css$": "identity-obj-proxy",
+		"\\.css$": "<rootDir>/tools/jest/css.stub.js",
 	},
 };

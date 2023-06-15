@@ -9,6 +9,7 @@
 	border: 1px solid var(--rs-color-background-neutral);
 	color: var(--rs-color-foreground-neutral);
 	box-sizing: border-box;
+
 	/* GPU for container positioning */
 	backface-visibility: hidden;
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
@@ -149,6 +150,7 @@
 .--container-position-top-end {
 	& .root {
 		--rs-badge-translate-y: -50%;
+
 		top: 0;
 	}
 
@@ -160,6 +162,7 @@
 .--container-position-bottom-end {
 	& .root {
 		--rs-badge-translate-y: 50%;
+
 		bottom: 0;
 	}
 

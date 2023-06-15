@@ -16,7 +16,7 @@
 }
 
 .root.--color-inherit {
-	color: currentColor;
+	color: currentcolor;
 }
 
 .root.--variant-plain {
@@ -31,7 +31,7 @@
 
 .root.--variant-underline {
 	text-decoration: underline;
-	text-decoration-color: currentColor;
+	text-decoration-color: currentcolor;
 	transition: text-decoration-color var(--rs-duration-fast) var(--rs-easing-standard);
 
 	&:hover:not(.--disabled) {

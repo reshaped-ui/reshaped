@@ -19,8 +19,8 @@
 	background-color: var(--rs-color-background-elevation-raised);
 }
 
-.--elevated:after {
-	content: '';
+.--elevated::after {
+	content: "";
 	position: absolute;
 	display: block;
 	bottom: 0;
@@ -33,4 +33,3 @@
 		transform: rotateX(180deg);
 	}
 }
-

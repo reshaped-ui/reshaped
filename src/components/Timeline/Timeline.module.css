@@ -1,62 +1,62 @@
 .item {
-  position: relative;
-  overflow: hidden;
-  padding-bottom: var(--rs-unit-x3);
-  margin-bottom: var(--rs-unit-x1);
+	position: relative;
+	overflow: hidden;
+	padding-bottom: var(--rs-unit-x3);
+	margin-bottom: var(--rs-unit-x1);
 
-  &:last-child {
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
+	&:last-child {
+		padding-bottom: 0;
+		margin-bottom: 0;
+	}
 
-  &--full-width {
-    padding-bottom: var(--rs-unit-x4);
-    margin-bottom: 0;
+	&--full-width {
+		padding-bottom: var(--rs-unit-x4);
+		margin-bottom: 0;
 
-    &:after {
-      content: '';
-      width: 1px;
-      background: var(--rs-color-border-neutral);
-      position: absolute;
-      bottom: 0;
-      left: var(--rs-unit-x3);
-      height: var(--rs-unit-x4);
-    }
+		&::after {
+			content: "";
+			width: 1px;
+			background: var(--rs-color-border-neutral);
+			position: absolute;
+			bottom: 0;
+			left: var(--rs-unit-x3);
+			height: var(--rs-unit-x4);
+		}
 
-    &:last-child {
-      padding-bottom: 0;
+		&:last-child {
+			padding-bottom: 0;
 
-      &:after {
-        content: none;
-      }
-    }
-  }
+			&::after {
+				content: none;
+			}
+		}
+	}
 }
 
 .marker {
-  position: relative;
+	position: relative;
 }
 
-.marker:empty:before {
-  content: '';
-  display: block;
-  background: var(--rs-color-border-neutral);
-  width: var(--rs-unit-x2);
-  height: var(--rs-unit-x2);
-  border-radius: 50%;
+.marker:empty::before {
+	content: "";
+	display: block;
+	background: var(--rs-color-border-neutral);
+	width: var(--rs-unit-x2);
+	height: var(--rs-unit-x2);
+	border-radius: 50%;
 }
 
-.marker:after {
-  content: '';
-  width: 1px;
-  transform: translate(-50%, var(--rs-unit-x1));
-  background: var(--rs-color-border-neutral);
-  position: absolute;
-  left: 50%;
-  height: 100%;
-  display: block;
+.marker::after {
+	content: "";
+	width: 1px;
+	transform: translate(-50%, var(--rs-unit-x1));
+	background: var(--rs-color-border-neutral);
+	position: absolute;
+	left: 50%;
+	height: 100%;
+	display: block;
 
-  .item:last-child & {
-    content: none;
-  }
+	.item:last-child & {
+		content: none;
+	}
 }

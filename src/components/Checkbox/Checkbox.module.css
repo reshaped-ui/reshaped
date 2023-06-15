@@ -42,7 +42,7 @@
 	border-color: var(--rs-color-background-primary);
 	background: var(--rs-color-background-primary);
 
-	&:before {
+	&::before {
 		content: "";
 		position: absolute;
 		top: 50%;
@@ -81,7 +81,7 @@
 	& .decorator,
 	&:hover .decorator,
 	& .input:checked + .decorator,
-	&:hover .input:checked + .decorator, {
+	&:hover .input:checked + .decorator {
 		background: var(--rs-color-background-disabled-faded);
 		border-color: var(--rs-color-border-disabled);
 		color: var(--rs-color-foreground-disabled);
@@ -90,16 +90,16 @@
 	& .input:checked + .decorator,
 	&:hover .input:checked + .decorator,
 	& .input:indeterminate + .decorator,
-	&:hover .input:indeterminate + .decorator  {
+	&:hover .input:indeterminate + .decorator {
 		background: var(--rs-color-background-disabled);
 		border-color: transparent;
 	}
 
-	& .input:indeterminate + .decorator:before {
+	& .input:indeterminate + .decorator::before {
 		background: var(--rs-color-foreground-disabled);
 	}
 
-	& .input:checked + .decorator:after {
+	& .input:checked + .decorator::after {
 		background: var(--rs-color-border-disabled);
 	}
 }

@@ -5,6 +5,7 @@
 
 .root {
 	--rs-hidden-display: block;
+
 	display: var(--rs-hidden-display) !important;
 }
 
