@@ -57,9 +57,9 @@
 		"defaults and not IE 11"
 	],
 	"devDependencies": {
-		"@storybook/addon-a11y": "7.0.20",
-		"@storybook/react": "7.0.20",
-		"@storybook/react-vite": "7.0.20",
+		"@storybook/addon-a11y": "7.0.21",
+		"@storybook/react": "7.0.21",
+		"@storybook/react-vite": "7.0.21",
 		"@testing-library/jest-dom": "5.16.5",
 		"@testing-library/react": "14.0.0",
 		"@testing-library/user-event": "14.4.3",
@@ -93,7 +93,7 @@
 		"react-dom": "18.2.0",
 		"resolve-tspaths": "0.8.13",
 		"size-limit": "8.2.4",
-		"storybook": "7.0.20",
+		"storybook": "7.0.21",
 		"stylelint": "15.7.0",
 		"stylelint-config-prettier": "9.0.5",
 		"stylelint-config-standard": "33.0.0",
