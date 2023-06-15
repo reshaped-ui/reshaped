@@ -2,7 +2,7 @@ pre-commit:
   parallel: true
   commands:
     eslint:
-      glob: "*.{js,ts,jsx,tsx,vue}"
+      glob: "*.{ts,tsx}"
       run: yarn lint:js --fix {staged_files} && git add {staged_files}
     stylelint:
       glob: "*.css"
