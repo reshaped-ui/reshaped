@@ -118,12 +118,12 @@
 	"size-limit": [
 		{
 			"name": "JS",
-			"path": "packages/reshaped/dist/bundle.js",
+			"path": "dist/bundle.js",
 			"webpack": false
 		},
 		{
 			"name": "CSS",
-			"path": "packages/reshaped/dist/bundle.css",
+			"path": "dist/bundle.css",
 			"webpack": false
 		}
 	],
