@@ -110,7 +110,7 @@
 	},
 	"dependencies": {
 		"autoprefixer": "10.4.14",
-		"chalk": "4.1.2",
+		"chalk": "5.2.0",
 		"commander": "10.0.1",
 		"cssnano": "6.0.1",
 		"postcss-custom-media": "8.0.2"
