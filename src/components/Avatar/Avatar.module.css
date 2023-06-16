@@ -4,7 +4,7 @@
 	justify-content: center;
 
 	/* Depends on getHeightStyles */
-	font-size: calc(var(--rs-h) * var(--rs-unit-x1) / 3);
+	font-size: calc(var(--rs-h) / 3);
 	font-weight: bold;
 	aspect-ratio: 1;
 	line-height: 100%;

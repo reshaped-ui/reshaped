@@ -322,22 +322,22 @@
 	}
 
 	&.--color-black {
-		background-color: rgba(var(--rs-color-rgb-black) / 28%);
+		background-color: rgba(var(--rs-color-rgb-black), 28%);
 		color: var(--rs-color-white);
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-black) / 36%);
+			background-color: rgba(var(--rs-color-rgb-black), 36%);
 		}
 	}
 
 	&.--color-white {
-		background-color: rgba(var(--rs-color-rgb-white) / 28%);
+		background-color: rgba(var(--rs-color-rgb-white), 28%);
 		color: var(--rs-color-black);
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-white) / 36%);
+			background-color: rgba(var(--rs-color-rgb-white), 36%);
 		}
 	}
 }
@@ -350,7 +350,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-neutral) / 28%);
+			background-color: rgba(var(--rs-color-rgb-background-neutral), 28%);
 		}
 	}
 
@@ -361,7 +361,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-primary) / 10%);
+			background-color: rgba(var(--rs-color-rgb-background-primary), 10%);
 		}
 	}
 
@@ -372,7 +372,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-critical) / 10%);
+			background-color: rgba(var(--rs-color-rgb-background-critical), 10%);
 		}
 	}
 
@@ -383,7 +383,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-positive) / 10%);
+			background-color: rgba(var(--rs-color-rgb-background-positive), 10%);
 		}
 	}
 
@@ -394,7 +394,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-white) / 12%);
+			background-color: rgba(var(--rs-color-rgb-white), 12%);
 		}
 	}
 
@@ -405,7 +405,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-black) / 4%);
+			background-color: rgba(var(--rs-color-rgb-black), 4%);
 		}
 	}
 
@@ -444,7 +444,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-neutral) / 40%);
+			background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
 		}
 	}
 
@@ -454,7 +454,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-primary) / 12%);
+			background-color: rgba(var(--rs-color-rgb-background-primary), 12%);
 		}
 	}
 
@@ -464,7 +464,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-critical) / 12%);
+			background-color: rgba(var(--rs-color-rgb-background-critical), 12%);
 		}
 	}
 
@@ -474,7 +474,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-positive) / 12%);
+			background-color: rgba(var(--rs-color-rgb-background-positive), 12%);
 		}
 	}
 
@@ -484,7 +484,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-white) / 8%);
+			background-color: rgba(var(--rs-color-rgb-white), 8%);
 		}
 	}
 
@@ -494,7 +494,7 @@
 
 		&:hover:not(.--loading),
 		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-black) / 8%);
+			background-color: rgba(var(--rs-color-rgb-black), 8%);
 		}
 	}
 

@@ -354,10 +354,10 @@
 .--cut-off-end .inner {
 	mask-image: linear-gradient(
 		to right,
-		rgba(var(--rs-color-rgb-black) / 100%) 0,
-		rgba(var(--rs-color-rgb-black) / 100%) 80%,
-		rgba(var(--rs-color-rgb-black) / 10%) 95%,
-		rgba(var(--rs-color-rgb-black) / 0%) 100%
+		rgba(var(--rs-color-rgb-black), 100%) 0,
+		rgba(var(--rs-color-rgb-black), 100%) 80%,
+		rgba(var(--rs-color-rgb-black), 10%) 95%,
+		rgba(var(--rs-color-rgb-black), 0%) 100%
 	);
 }
 
@@ -365,22 +365,22 @@
 .--cut-off-start .inner {
 	mask-image: linear-gradient(
 		to left,
-		rgba(var(--rs-color-rgb-black) / 100%) 0,
-		rgba(var(--rs-color-rgb-black) / 100%) 80%,
-		rgba(var(--rs-color-rgb-black) / 10%) 95%,
-		rgba(var(--rs-color-rgb-black) / 0%) 100%
+		rgba(var(--rs-color-rgb-black), 100%) 0,
+		rgba(var(--rs-color-rgb-black), 100%) 80%,
+		rgba(var(--rs-color-rgb-black), 10%) 95%,
+		rgba(var(--rs-color-rgb-black), 0%) 100%
 	);
 }
 
 .--cut-off-both .inner {
 	mask-image: linear-gradient(
 		to right,
-		rgba(var(--rs-color-rgb-black) / 0%) 0,
-		rgba(var(--rs-color-rgb-black) / 10%) 5%,
-		rgba(var(--rs-color-rgb-black) / 100%) 20%,
-		rgba(var(--rs-color-rgb-black) / 100%) 80%,
-		rgba(var(--rs-color-rgb-black) / 10%) 95%,
-		rgba(var(--rs-color-rgb-black) / 0%) 100%
+		rgba(var(--rs-color-rgb-black), 0%) 0,
+		rgba(var(--rs-color-rgb-black), 10%) 5%,
+		rgba(var(--rs-color-rgb-black), 100%) 20%,
+		rgba(var(--rs-color-rgb-black), 100%) 80%,
+		rgba(var(--rs-color-rgb-black), 10%) 95%,
+		rgba(var(--rs-color-rgb-black), 0%) 100%
 	);
 }
 

@@ -37,7 +37,7 @@
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: rgba(var(--rs-color-rgb-background-neutral-faded) / 40%);
+		background: rgba(var(--rs-color-rgb-background-neutral-faded), 40%);
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);

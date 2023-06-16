@@ -7,6 +7,7 @@
 		"selector-no-vendor-prefix": null,
 		"property-no-vendor-prefix": null,
 		"declaration-block-no-redundant-longhand-properties": null,
+		"color-function-notation": "legacy",
 		"at-rule-no-unknown": [
 			true,
 			{

@@ -47,7 +47,7 @@
 	}
 }
 
-@each $color in neutral, position, critical, primary {
+@each $color in neutral, positive, critical, primary {
 	.--bg-$color {
 		background-color: var(--rs-color-background-$color);
 		color: var(--rs-color-on-background-$color);
