@@ -116,9 +116,6 @@
 		"cssnano": "6.0.1",
 		"postcss-custom-media": "8.0.2"
 	},
-	"resolutions": {
-		"aria-query": "5.1.3"
-	},
 	"size-limit": [
 		{
 			"name": "JS",
