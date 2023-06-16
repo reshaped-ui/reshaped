@@ -95,6 +95,7 @@ const DemoMultiple = () => {
 		<View gap={2}>
 			{[1, 2, 3].map((i) => (
 				<View
+					key={i}
 					backgroundColor={activeValue === i ? "elevation-base" : undefined}
 					animated
 					borderRadius="medium"

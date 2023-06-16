@@ -44,7 +44,7 @@
 		"release:before": "cp -r dist/* ./",
 		"release": "yarn version && yarn pack && mkdir release && mv *.tgz ./release/$(jq -r .version package.json)/reshaped-react-v$(jq -r .version package.json).tgz",
 		"release:beta": "yarn pack --filename reshaped-beta.tgz",
-		"chromatic": "chromatic -b build:chromatic --project-token=jbcohq2nbtr",
+		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .env)",
 		"test:vrt": "yarn chromatic",
 		"test:unit": "jest --config tools/jest/jest.config.js",
 		"test:size": "size-limit",

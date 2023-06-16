@@ -68,7 +68,7 @@ button.root {
 
 	&:hover,
 	&.--selected {
-		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral) / 40%);
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
 	}
 }
 
@@ -77,7 +77,7 @@ button.root {
 
 	&:hover,
 	&.--selected {
-		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-critical) / 12%);
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-critical), 12%);
 	}
 }
 
@@ -85,12 +85,12 @@ button.root {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
 	&:hover {
-		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral) / 40%);
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
 	}
 
 	&.--selected,
 	&.--selected:hover {
-		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-primary) / 12%);
+		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-primary), 12%);
 		--rs-menu-item-color: var(--rs-color-foreground-primary);
 		--rs-menu-item-icon-color: var(--rs-color-foreground-primary);
 	}
