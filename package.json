@@ -96,7 +96,7 @@
 		"resolve-tspaths": "0.8.13",
 		"size-limit": "8.2.4",
 		"storybook": "7.0.22",
-		"stylelint": "15.7.0",
+		"stylelint": "15.8.0",
 		"stylelint-config-prettier": "9.0.5",
 		"stylelint-config-standard": "33.0.0",
 		"ts-jest": "29.1.0",
