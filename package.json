@@ -7,7 +7,10 @@
 	"module": "./index.js",
 	"types": "./index.d.ts",
 	"files": [
+		"bin/**/*",
+		"cli/**/*",
 		"components/**/*",
+		"config/**/*",
 		"constants/**/*",
 		"hooks/**/*",
 		"icons/**/*",
@@ -15,16 +18,11 @@
 		"themes/**/*",
 		"types/**/*",
 		"utilities/**/*",
-		"config/**/*",
-		"cli/**/*",
-		"bin/**/*",
-		"index.js",
-		"index.d.ts",
-		"bundle.js",
-		"bundle.js.map",
 		"bundle.css",
-		"bundle.css.map",
-		"bundle.d.ts"
+		"bundle.d.ts",
+		"bundle.js",
+		"index.d.ts",
+		"index.js"
 	],
 	"bin": {
 		"reshaped": "./bin/cli.js"
