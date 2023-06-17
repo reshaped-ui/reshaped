@@ -16,6 +16,20 @@ describe("Utilities/Text", () => {
 		expect(el).toBeInTheDocument();
 	});
 
+	test("resolves variant to a heading tag", () => {
+		render(<Text variant="title-3">{fixtures.content}</Text>);
+
+		const el = screen.getByText(fixtures.content);
+		expect(el.tagName).toEqual("H3");
+	});
+
+	test("resolves responsive variant to a heading tag", () => {
+		render(<Text variant={{ s: "title-4", m: "title-3" }}>{fixtures.content}</Text>);
+
+		const el = screen.getByText(fixtures.content);
+		expect(el.tagName).toEqual("H3");
+	});
+
 	test("works with custom tag name", () => {
 		render(<Text as="ul">{fixtures.content}</Text>);
 

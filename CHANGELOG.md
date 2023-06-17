@@ -1,0 +1,1 @@
+- Text: Add automatic default tags for title variants
