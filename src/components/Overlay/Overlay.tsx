@@ -68,7 +68,8 @@ const Overlay = (props: T.Props) => {
 		close();
 	};
 
-	const handleTransitionEnd = () => {
+	const handleTransitionEnd = (e: React.TransitionEvent) => {
+		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
 		if (visible) return;
 		if (!transparent) unlockScroll();
 		remove();
