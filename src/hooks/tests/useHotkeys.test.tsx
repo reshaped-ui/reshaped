@@ -37,6 +37,18 @@ describe("useHotkey", () => {
 		expect(fn).toBeCalledTimes(1);
 	});
 
+	test("triggers callback for a mod key", async () => {
+		const fn = jest.fn();
+		render(
+			<Reshaped theme="reshaped">
+				<Component hotkeys={{ mod: fn }} />
+			</Reshaped>
+		);
+
+		await userEvent.keyboard("Meta");
+		expect(fn).toBeCalledTimes(1);
+	});
+
 	test("triggers callback for an array of keys", async () => {
 		const fn = jest.fn();
 		render(

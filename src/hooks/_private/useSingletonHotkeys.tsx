@@ -40,15 +40,21 @@ const getEventKey = (e: KeyboardEvent) => {
 	return e.key.toLowerCase();
 };
 
-const getCombinations = (items: string[]) => {
+const getCombinations = (pressedKeys: string[]) => {
 	const result: string[] = [];
+	const hotkey = pressedKeys.join(COMBINATION_DELIMETER);
+	const id = getHotkeyId(hotkey);
+	const sortedKeys = id.split(COMBINATION_DELIMETER);
+
 	const f = (prefix: string, items: string[]) => {
 		items.forEach((item, i) => {
-			result.push(prefix ? `${prefix}+${item}` : item);
-			f(prefix + item, items.slice(i + 1));
+			const nextId = prefix ? `${prefix}+${item}` : item;
+			result.push(nextId);
+			f(nextId, items.slice(i + 1));
 		});
 	};
-	f("", items);
+
+	f("", sortedKeys);
 	return result;
 };
 
@@ -57,10 +63,7 @@ const walkPressedCombinations = (pressed: PressedKeys, cb: (id: string) => void)
 
 	if (!pressedKeys.length) return;
 
-	const hotkey = pressedKeys.join(COMBINATION_DELIMETER);
-	const id = getHotkeyId(hotkey);
-
-	getCombinations(id.split(COMBINATION_DELIMETER)).forEach((pressedId) => {
+	getCombinations(pressedKeys).forEach((pressedId) => {
 		cb(pressedId);
 	});
 };
@@ -118,7 +121,6 @@ export class HotkeyStore {
 	handleKeyDown = (pressedMap: PressedKeys, e: KeyboardEvent) => {
 		walkPressedCombinations(pressedMap, (pressedId) => {
 			const hotkeyData = this.hotkeyMap[pressedId];
-
 			if (!hotkeyData || hotkeyData.used) return;
 
 			if (hotkeyData?.data.size) {
@@ -169,6 +171,11 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 			const eventKey = getEventKey(e);
 
 			pressedMap[eventKey] = e;
+
+			if (eventKey === "meta" || eventKey === "control") {
+				pressedMap.mod = e;
+			}
+
 			setTriggerCount(Object.keys(pressedMap).length);
 
 			// Key up won't trigger for other keys while Meta is pressed so we need to cache them
@@ -191,6 +198,9 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 			const eventKey = getEventKey(e);
 
 			delete pressedMap[eventKey];
+			if (eventKey === "meta" || eventKey === "control") {
+				delete pressedMap.mod;
+			}
 
 			if (eventKey === "meta") {
 				modifiedKeys.forEach((key) => {

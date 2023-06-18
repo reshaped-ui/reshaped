@@ -1,2 +1,3 @@
 - Text: Add automatic default tags for title variants
 - Overlay: Fixed transitionEnd triggering from children components
+- useHotkeys: Added support for `mod` hotkey
