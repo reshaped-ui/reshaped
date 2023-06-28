@@ -32,10 +32,7 @@ const MenuItemBase = (props: T.Props, ref: ActionableRef) => {
 		selected && s["--selected"],
 		disabled && s["--disabled"]
 	);
-	const gapSize = responsivePropDependency(size, (size) => {
-		const map = { large: 4, medium: 3, small: 2 };
-		return map[size];
-	});
+	const gapSize = responsivePropDependency(size, (size) => (size === "large" ? 3 : 2));
 	const iconSize = responsivePropDependency(size, (size) => (size === "large" ? 5 : 4));
 
 	return (
