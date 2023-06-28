@@ -114,7 +114,7 @@
 		"chalk": "4.1.2",
 		"commander": "11.0.0",
 		"cssnano": "6.0.1",
-		"postcss-custom-media": "8.0.2"
+		"postcss-custom-media": "9.1.5"
 	},
 	"size-limit": [
 		{
