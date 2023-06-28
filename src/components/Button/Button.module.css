@@ -88,6 +88,7 @@
 	@value small {
 		--rs-button-padding-v: var(--rs-unit-x1);
 		--rs-button-padding-h: var(--rs-unit-x2);
+		--rs-button-padding-h-ghost: var(--rs-unit-x2);
 		--rs-button-min-size: var(--rs-unit-x7);
 		--rs-button-icon-gap: var(--rs-unit-x1);
 
@@ -99,6 +100,7 @@
 	@value medium {
 		--rs-button-padding-v: var(--rs-unit-x2);
 		--rs-button-padding-h: var(--rs-unit-x3);
+		--rs-button-padding-h-ghost: var(--rs-unit-x2);
 		--rs-button-min-size: var(--rs-unit-x9);
 		--rs-button-icon-gap: var(--rs-unit-x1);
 
@@ -110,6 +112,7 @@
 	@value large {
 		--rs-button-padding-v: var(--rs-unit-x3);
 		--rs-button-padding-h: var(--rs-unit-x4);
+		--rs-button-padding-h-ghost: var(--rs-unit-x3);
 		--rs-button-min-size: calc(var(--rs-unit-x1) * 12);
 		--rs-button-icon-gap: var(--rs-unit-x2);
 
@@ -121,6 +124,7 @@
 	@value xlarge {
 		--rs-button-padding-v: var(--rs-unit-x4);
 		--rs-button-padding-h: var(--rs-unit-x5);
+		--rs-button-padding-h-ghost: var(--rs-unit-x4);
 		--rs-button-min-size: calc(var(--rs-unit-x1) * 14);
 		--rs-button-icon-gap: var(--rs-unit-x2);
 
@@ -436,7 +440,8 @@
 }
 
 .root.--variant-ghost {
-	--rs-button-padding-h: var(--rs-button-padding-v);
+	padding-left: var(--rs-button-padding-h-ghost);
+	padding-right: var(--rs-button-padding-h-ghost);
 
 	&.--color-neutral {
 		background: transparent;

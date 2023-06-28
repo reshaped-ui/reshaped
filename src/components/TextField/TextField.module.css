@@ -1,14 +1,10 @@
 .root {
-	/* Minus border size */
-	--rs-text-field-padding-v: calc(var(--rs-text-field-padding-base) - 1px);
-	--rs-text-field-padding-h: calc(var(--rs-text-field-padding-base) - 1px + var(--rs-unit-x1));
-
 	display: flex;
 	position: relative;
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
-	padding: var(--rs-text-field-padding-v) var(--rs-text-field-padding-h);
+	padding: 0 calc(var(--rs-unit-x1) - 1px);
 	overflow: hidden;
 
 	&:focus-within {
@@ -27,8 +23,8 @@
 	box-sizing: border-box;
 	color: var(--rs-color-foreground-neutral);
 	width: 100%;
-	margin: calc(var(--rs-text-field-padding-v) * -1) -50%;
-	padding: calc(var(--rs-text-field-padding-v)) 50% !important;
+	margin: calc(var(--rs-unit-x1) * -1) -50%;
+	padding: var(--rs-unit-x1) calc(var(--rs-text-field-gap) + 50%) !important;
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 }
@@ -39,33 +35,52 @@
 }
 
 .slot,
-.icon {
+.icon,
+.affix {
 	position: relative;
 	z-index: 5;
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-
-	&:first-child {
-		padding-inline-end: var(--rs-unit-x2);
-	}
-
-	&:last-child {
-		padding-inline-start: var(--rs-unit-x2);
-	}
 }
 
 .icon {
 	pointer-events: none;
 }
 
-/* If there is an html element inside the slot container – align vertical and horizontal input padding */
-.slot:last-child > * {
-	margin-inline-end: calc(var(--rs-unit-x1) * -1);
+.affix {
+	color: var(--rs-color-foreground-neutral-faded);
 }
 
-.slot:first-child > * {
-	margin-inline-start: calc(var(--rs-unit-x1) * -1);
+.attachment {
+	display: flex;
+	align-items: center;
+}
+
+.attachment--position-start {
+	& .icon,
+	& .affix {
+		padding-inline-start: var(--rs-text-field-gap);
+	}
+
+	& .affix {
+		padding-inline-end: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
+		margin-inline-end: var(--rs-unit-x1);
+		border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
+	}
+}
+
+.attachment--position-end {
+	& .icon,
+	& .affix {
+		padding-inline-end: var(--rs-text-field-gap);
+	}
+
+	& .affix {
+		padding-inline-start: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
+		margin-inline-start: var(--rs-unit-x1);
+		border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+	}
 }
 
 .root.--disabled {
@@ -81,36 +96,39 @@
 
 @responsive .--size {
 	@value medium {
-		--rs-text-field-padding-base: var(--rs-unit-x1);
+		--rs-text-field-gap: var(--rs-unit-x1);
 
 		border-radius: var(--rs-unit-radius-small);
 		min-height: var(--rs-unit-x9);
 
-		& .input {
+		& .input,
+		& .affix {
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
 		}
 	}
 
 	@value large {
-		--rs-text-field-padding-base: var(--rs-unit-x2);
+		--rs-text-field-gap: var(--rs-unit-x2);
 
 		border-radius: var(--rs-unit-radius-medium);
 		min-height: calc(var(--rs-unit-x1) * 12);
 
-		& .input {
+		& .input,
+		& .affix {
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
 		}
 	}
 
 	@value xlarge {
-		--rs-text-field-padding-base: var(--rs-unit-x3);
+		--rs-text-field-gap: var(--rs-unit-x3);
 
 		border-radius: var(--rs-unit-radius-medium);
 		min-height: calc(var(--rs-unit-x1) * 14);
 
-		& .input {
+		& .input,
+		& .affix {
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 		}
@@ -127,8 +145,6 @@
 }
 
 .root.--variant-headless {
-	--rs-text-field-padding-h: 0;
-
 	background: transparent;
 	border-color: transparent;
 

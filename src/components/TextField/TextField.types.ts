@@ -15,6 +15,8 @@ type BaseProps = {
 	endIcon?: SlotProps["icon"];
 	startSlot?: SlotProps["slot"];
 	endSlot?: SlotProps["slot"];
+	prefix?: React.ReactNode;
+	suffix?: React.ReactNode;
 	variant?: "outline" | "faded" | "headless";
 	onChange?: G.ChangeHandler<string>;
 	onFocus?: (e: React.FocusEvent) => void;
@@ -32,4 +34,6 @@ export type SlotProps = {
 	slot?: React.ReactNode;
 	icon?: IconProps["svg"];
 	size: Size;
+	affix?: React.ReactNode;
+	position: "start" | "end";
 };

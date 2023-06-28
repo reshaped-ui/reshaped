@@ -36,7 +36,7 @@ const MenuItemBase = (props: T.Props, ref: ActionableRef) => {
 		const map = { large: 4, medium: 3, small: 2 };
 		return map[size];
 	});
-	const iconSize = responsivePropDependency(size, (size) => (size === "small" ? 4 : 5));
+	const iconSize = responsivePropDependency(size, (size) => (size === "large" ? 5 : 4));
 
 	return (
 		<Actionable

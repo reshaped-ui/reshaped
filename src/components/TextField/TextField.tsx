@@ -9,12 +9,14 @@ import type * as T from "./TextField.types";
 import s from "./TextField.module.css";
 
 const TextFieldSlot = (props: T.SlotProps) => {
-	const { slot, icon, size } = props;
+	const { slot, icon, size, affix, position } = props;
 
-	if (!icon && !slot) return null;
+	if (!icon && !slot && !affix) return null;
 
-	if (icon) {
-		return (
+	const attachmentClassNames = classNames(s.attachment, s[`attachment--position-${position}`]);
+	const content = [
+		slot && <div className={s.slot}>{slot}</div>,
+		icon && (
 			<div className={s.icon}>
 				<Icon
 					size={responsivePropDependency(size, (size) => {
@@ -25,10 +27,13 @@ const TextFieldSlot = (props: T.SlotProps) => {
 					svg={icon}
 				/>
 			</div>
-		);
-	}
+		),
+		affix && <div className={s.affix}>{affix}</div>,
+	].filter(Boolean);
 
-	return <div className={s.slot}>{slot}</div>;
+	return (
+		<span className={attachmentClassNames}>{position === "end" ? content.reverse() : content}</span>
+	);
 };
 
 const TextField = (props: T.Props) => {
@@ -44,6 +49,8 @@ const TextField = (props: T.Props) => {
 		endIcon,
 		startSlot,
 		endSlot,
+		prefix,
+		suffix,
 		size = "medium",
 		variant = "outline",
 		className,
@@ -72,7 +79,7 @@ const TextField = (props: T.Props) => {
 
 	return (
 		<div {...attributes} className={rootClassName}>
-			<TextFieldSlot icon={icon} slot={startSlot} size={size} />
+			<TextFieldSlot position="start" icon={icon} slot={startSlot} size={size} affix={prefix} />
 
 			<input
 				{...inputAttributes}
@@ -88,7 +95,7 @@ const TextField = (props: T.Props) => {
 				id={inputId}
 			/>
 
-			<TextFieldSlot icon={endIcon} slot={endSlot} size={size} />
+			<TextFieldSlot position="end" icon={endIcon} slot={endSlot} size={size} affix={suffix} />
 		</div>
 	);
 };

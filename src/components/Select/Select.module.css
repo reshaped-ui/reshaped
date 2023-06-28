@@ -1,8 +1,7 @@
 .root {
 	/* Minus border size */
-	--rs-select-padding-v: calc(var(--rs-select-padding-base) - 1px);
-	--rs-select-padding-h: calc(var(--rs-select-padding-base) - 1px + var(--rs-unit-x1));
 
+	padding: calc(var(--rs-unit-x1) - 1px);
 	display: flex;
 	position: relative;
 	z-index: 0;
@@ -34,16 +33,18 @@
 	color: var(--rs-color-foreground-neutral);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
-	padding: var(--rs-select-padding-v)
-		calc(var(--rs-select-padding-h) + var(--rs-select-chevron-size) + var(--rs-unit-x2))
-		var(--rs-select-padding-v) var(--rs-select-padding-h);
+	padding-inline-end: calc(var(--rs-select-chevron-size) + var(--rs-select-gap));
 
 	/* Firefox text alignment */
-	line-height: calc(var(--rs-select-min-height) - 2 * var(--rs-select-padding-v)) !important;
+	line-height: calc(var(--rs-select-min-height) - 2 * var(--rs-unit-x1)) !important;
 
 	&::-ms-expand {
 		display: none;
 	}
+}
+
+select.input {
+	padding-inline-start: var(--rs-select-gap);
 }
 
 .slot {
@@ -52,25 +53,24 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	padding-inline-start: var(--rs-select-padding-h);
 }
 
-/* Native select with slot rendered before input  */
-.slot + .input {
-	padding-inline-start: var(--rs-unit-x2);
+.icon {
+	padding-inline-start: var(--rs-select-gap);
+	box-sizing: initial;
 }
 
 /* Custom trigger with slot rendered inside trigger */
 .input .slot {
 	padding-inline-start: 0;
-	padding-inline-end: var(--rs-unit-x2);
+	padding-inline-end: var(--rs-select-gap);
 }
 
-.icon {
+.arrow {
 	color: var(--rs-color-foreground-neutral-faded);
 	display: flex;
 	inset-block-start: 50%;
-	inset-inline-end: var(--rs-select-padding-h);
+	inset-inline-end: calc(var(--rs-select-gap) + var(--rs-unit-x1));
 	pointer-events: none;
 	position: absolute;
 	transform: translateY(-50%);
@@ -79,7 +79,7 @@
 
 @responsive .--size {
 	@value medium {
-		--rs-select-padding-base: var(--rs-unit-x1);
+		--rs-select-gap: var(--rs-unit-x1);
 		--rs-select-min-height: var(--rs-unit-x9);
 		--rs-select-chevron-size: var(--rs-unit-x4);
 
@@ -92,7 +92,7 @@
 	}
 
 	@value large {
-		--rs-select-padding-base: var(--rs-unit-x2);
+		--rs-select-gap: var(--rs-unit-x2);
 		--rs-select-min-height: calc(var(--rs-unit-x1) * 12);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
@@ -105,7 +105,7 @@
 	}
 
 	@value xlarge {
-		--rs-select-padding-base: var(--rs-unit-x3);
+		--rs-select-gap: var(--rs-unit-x3);
 		--rs-select-min-height: calc(var(--rs-unit-x1) * 14);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
@@ -128,8 +128,6 @@
 }
 
 .root.--variant-headless {
-	--rs-select-padding-h: 0;
-
 	background: transparent;
 	border-color: transparent;
 
@@ -158,7 +156,7 @@
 	border-color: var(--rs-color-border-disabled);
 
 	& .input,
-	& .icon {
+	& .arrow {
 		cursor: not-allowed;
 		color: var(--rs-color-foreground-disabled);
 	}

@@ -86,11 +86,8 @@ label {
 	transition: none !important;
 }
 
-input::-webkit-input-placeholder,
-input:-moz-placeholder,
-input::-moz-placeholder,
-input::-ms-input-placeholder {
-	color: var(--rs-color-foreground-neutral-faded);
+input::placeholder {
+	color: var(--rs-color-neutral-faded);
 	opacity: 0.5;
 }
 

@@ -9,7 +9,7 @@ export default { title: "Components/TextField" };
 export const value = () => (
 	<Example>
 		<Example.Item title="no value, placeholder">
-			<TextField name="Name" placeholder="Enter your name" />
+			<TextField name="Name" placeholder="Enter your name" icon={IconZap} />
 		</Example.Item>
 
 		<Example.Item title="value, uncontrolled">
@@ -89,6 +89,18 @@ export const size = () => (
 	</Example>
 );
 
+export const affixes = () => (
+	<Example>
+		<Example.Item title="prefix">
+			<TextField name="phone" placeholder="Enter your phone number" value="Reshaped" prefix="+31" />
+		</Example.Item>
+
+		<Example.Item title="suffix">
+			<TextField name="area" placeholder="Enter your room ara" value="25" suffix="m2" />
+		</Example.Item>
+	</Example>
+);
+
 export const slots = () => (
 	<Example>
 		<Example.Item title={["startSlot", "vertical and horizontal padding aligned"]}>
@@ -106,14 +118,6 @@ export const slots = () => (
 				value="Reshaped"
 				endSlot={<Placeholder h={28} />}
 			/>
-		</Example.Item>
-		<Example.Item
-			title={["startSlot, text", "horizontal padding aligned with the opposite padding"]}
-		>
-			<TextField name="Name" placeholder="Enter your name" value="Reshaped" startSlot="text slot" />
-		</Example.Item>
-		<Example.Item title={["endSlot, text", "horizontal padding aligned with the opposite padding"]}>
-			<TextField name="Name" placeholder="Enter your name" value="Reshaped" endSlot="text slot" />
 		</Example.Item>
 	</Example>
 );

@@ -73,6 +73,7 @@ const Select = (props: T.Props) => {
 						return 4;
 					})}
 					svg={icon}
+					className={s.icon}
 				/>
 			) : (
 				startSlot
@@ -124,7 +125,7 @@ const Select = (props: T.Props) => {
 				</>
 			)}
 
-			<div className={s.icon}>
+			<div className={s.arrow}>
 				<Icon
 					svg={IconArrow}
 					size={responsivePropDependency(size, (size) => {
