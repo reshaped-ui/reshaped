@@ -4,7 +4,7 @@
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
-	padding: 0 calc(var(--rs-unit-x1) - 1px);
+	padding: calc(var(--rs-unit-x1) - 1px);
 	overflow: hidden;
 
 	&:focus-within {
@@ -61,11 +61,11 @@
 	& .icon,
 	& .affix {
 		padding-inline-start: var(--rs-text-field-gap);
+		margin-inline-end: var(--rs-unit-x1);
 	}
 
 	& .affix {
 		padding-inline-end: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
-		margin-inline-end: var(--rs-unit-x1);
 		border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
 	}
 }
@@ -74,11 +74,11 @@
 	& .icon,
 	& .affix {
 		padding-inline-end: var(--rs-text-field-gap);
+		margin-inline-start: var(--rs-unit-x1);
 	}
 
 	& .affix {
 		padding-inline-start: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
-		margin-inline-start: var(--rs-unit-x1);
 		border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
 	}
 }

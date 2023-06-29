@@ -28,6 +28,7 @@
 		"reshaped": "./bin/cli.js"
 	},
 	"scripts": {
+		"dev": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
 		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
 		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes --private",
@@ -36,7 +37,6 @@
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build && cp -rp src/themes/media.css dist/themes/media.css && mkdir themes && cp -r src/themes/media.css themes/media.css",
 		"build:stories": "tsc -p tsconfig.stories.json",
 		"build:bundle": "vite build && mv dist/bundle.umd.js dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",
-		"start": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"build:storybook": "storybook build -c tools/storybook -o dist/app --disable-telemetry",
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build -c tools/storybook",
 		"release": "read -p 'Have you updated chromatic tests?' && yarn release:lib && yarn release:source && yarn build:storybook",

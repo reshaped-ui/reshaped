@@ -57,6 +57,7 @@ select.input {
 
 .icon {
 	padding-inline-start: var(--rs-select-gap);
+	padding-inline-end: var(--rs-unit-x1);
 	box-sizing: initial;
 }
 

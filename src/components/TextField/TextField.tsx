@@ -15,9 +15,13 @@ const TextFieldSlot = (props: T.SlotProps) => {
 
 	const attachmentClassNames = classNames(s.attachment, s[`attachment--position-${position}`]);
 	const content = [
-		slot && <div className={s.slot}>{slot}</div>,
+		slot && (
+			<div className={s.slot} key="slot">
+				{slot}
+			</div>
+		),
 		icon && (
-			<div className={s.icon}>
+			<div className={s.icon} key="icon">
 				<Icon
 					size={responsivePropDependency(size, (size) => {
 						if (size === "large") return 5;
@@ -28,7 +32,11 @@ const TextFieldSlot = (props: T.SlotProps) => {
 				/>
 			</div>
 		),
-		affix && <div className={s.affix}>{affix}</div>,
+		affix && (
+			<div className={s.affix} key="affix">
+				{affix}
+			</div>
+		),
 	].filter(Boolean);
 
 	return (
