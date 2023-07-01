@@ -67,7 +67,7 @@
 		"@types/events": "3.0.0",
 		"@types/jest": "29.5.2",
 		"@types/node": "20.3.2",
-		"@types/react": "18.2.13",
+		"@types/react": "18.2.14",
 		"@types/react-dom": "18.2.6",
 		"@typescript-eslint/eslint-plugin": "5.60.0",
 		"@typescript-eslint/parser": "5.60.0",
