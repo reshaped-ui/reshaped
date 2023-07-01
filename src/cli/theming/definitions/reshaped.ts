@@ -3,10 +3,12 @@ import { UserThemeDefinition } from "../tokens/types";
 const theme: UserThemeDefinition = {
 	fontFamily: {
 		title: {
-			family: "BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+			family:
+				"Inter, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
 		},
 		body: {
-			family: "BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+			family:
+				"Inter, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
 		},
 	},
 
@@ -41,48 +43,59 @@ const theme: UserThemeDefinition = {
 			fontSize: { px: 56 },
 			lineHeight: { px: 60 },
 			fontWeightToken: "bold",
+			fontFamilyToken: "title",
 		},
 		title5: {
 			fontSize: { px: 48 },
 			lineHeight: { px: 52 },
 			fontWeightToken: "bold",
+			fontFamilyToken: "title",
 		},
 		title6: {
 			fontSize: { px: 36 },
 			lineHeight: { px: 40 },
 			fontWeightToken: "bold",
+			fontFamilyToken: "title",
 		},
 		featured1: {
 			fontSize: { px: 32 },
 			lineHeight: { px: 40 },
+			fontFamilyToken: "body",
 		},
 		featured2: {
 			fontSize: { px: 24 },
 			lineHeight: { px: 32 },
+			fontFamilyToken: "body",
 		},
 		featured3: {
 			fontSize: { px: 20 },
 			lineHeight: { px: 28 },
+			fontFamilyToken: "body",
 		},
 		body1: {
 			fontSize: { px: 18 },
 			lineHeight: { px: 24 },
+			fontFamilyToken: "body",
 		},
 		body2: {
 			fontSize: { px: 16 },
 			lineHeight: { px: 24 },
+			fontFamilyToken: "body",
 		},
 		body3: {
 			fontSize: { px: 14 },
 			lineHeight: { px: 20 },
+			fontFamilyToken: "body",
 		},
 		caption1: {
 			fontSize: { px: 12 },
 			lineHeight: { px: 16 },
+			fontFamilyToken: "body",
 		},
 		caption2: {
 			fontSize: { px: 10 },
 			lineHeight: { px: 12 },
+			fontFamilyToken: "body",
 		},
 	},
 

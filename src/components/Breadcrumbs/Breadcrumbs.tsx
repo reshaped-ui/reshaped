@@ -37,7 +37,8 @@ const BreadcrumbsItem = (props: T.ItemProps) => {
 };
 
 const Breadcrumbs = (props: T.Props) => {
-	const { children, separator, color, defaultVisibleItems, className, attributes } = props;
+	const { children, separator, color, defaultVisibleItems, ariaLabel, className, attributes } =
+		props;
 	const visibleItems = defaultVisibleItems && defaultVisibleItems >= 2 ? defaultVisibleItems : null;
 	const [expanded, setExpanded] = React.useState(false);
 	const rootClassNames = classNames(className);
@@ -49,7 +50,11 @@ const Breadcrumbs = (props: T.Props) => {
 	};
 
 	return (
-		<nav {...attributes} className={rootClassNames}>
+		<nav
+			{...attributes}
+			aria-label={ariaLabel || attributes?.["aria-label"]}
+			className={rootClassNames}
+		>
 			<View as="ol" direction="row" gap={2} align="center">
 				{React.Children.map(children, (child, index) => {
 					if (!child) return null;
@@ -81,20 +86,16 @@ const Breadcrumbs = (props: T.Props) => {
 					if (itemNode === null) return null;
 
 					return (
-						<React.Fragment key={index}>
+						<View as="li" key={index} gap={2} direction="row" align="center">
 							{index > 0 && (isDisplayed || isCollapseButton) && (
-								<Text as="li" attributes={{ role: "presentation" }} color="neutral-faded">
+								<Text color="neutral-faded">
 									{separator || <Icon svg={IconChevronRight} size={3} />}
 								</Text>
 							)}
-							<Text
-								variant="body-3"
-								color={color === "primary" ? "primary" : "neutral-faded"}
-								as="li"
-							>
+							<Text variant="body-3" color={color === "primary" ? "primary" : "neutral-faded"}>
 								{itemNode}
 							</Text>
-						</React.Fragment>
+						</View>
 					);
 				})}
 			</View>

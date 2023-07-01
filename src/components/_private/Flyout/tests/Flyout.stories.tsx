@@ -150,9 +150,9 @@ export const scopedTheming = () => (
 				<Flyout.Content>
 					<div
 						style={{
-							background: "#fefefe",
+							background: "var(--rs-color-background-elevation-overlay)",
 							padding: 8,
-							border: "1px solid #dedede",
+							border: "1px solid var(--rs-color-border-neutral-faded)",
 							boxSizing: "border-box",
 						}}
 					>

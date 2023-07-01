@@ -37,12 +37,12 @@ export const padding = () => (
 export const actionable = () => (
 	<Example>
 		<Example.Item title="button role">
-			<Card onClick={() => {}}>
+			<Card onClick={() => {}} attributes={{ "aria-label": "action" }}>
 				<Placeholder />
 			</Card>
 		</Example.Item>
 		<Example.Item title="link role">
-			<Card href="#">
+			<Card href="#" attributes={{ "aria-label": "action" }}>
 				<Placeholder />
 			</Card>
 		</Example.Item>

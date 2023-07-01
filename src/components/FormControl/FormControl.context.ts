@@ -10,13 +10,14 @@ const FormControlContext = React.createContext<T.Context>({
 	},
 	required: undefined,
 	hasError: false,
-	hasSuccess: false,
+	errorRef: () => {},
+	helperRef: () => {},
 });
 
 export const Provider = FormControlContext.Provider;
 export const useFormControlPrivate = () => React.useContext(FormControlContext);
 export const useFormControl = () => {
-	const { attributes, required, hasError, hasSuccess, disabled } = useFormControlPrivate();
+	const { attributes, required, hasError, disabled } = useFormControlPrivate();
 
-	return { attributes, required, hasError, hasSuccess, disabled };
+	return { attributes, required, hasError, disabled };
 };

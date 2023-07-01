@@ -21,7 +21,6 @@ export const status = () => (
 				<Input />
 				<FormControl.Helper>Caption</FormControl.Helper>
 				<FormControl.Error>Error</FormControl.Error>
-				<FormControl.Success>Caption</FormControl.Success>
 			</FormControl>
 		</Example.Item>
 
@@ -31,17 +30,6 @@ export const status = () => (
 				<Input />
 				<FormControl.Helper>Caption</FormControl.Helper>
 				<FormControl.Error>Error</FormControl.Error>
-				<FormControl.Success>Caption</FormControl.Success>
-			</FormControl>
-		</Example.Item>
-
-		<Example.Item title="status: success">
-			<FormControl hasSuccess>
-				<FormControl.Label>Label</FormControl.Label>
-				<Input />
-				<FormControl.Helper>Caption</FormControl.Helper>
-				<FormControl.Error>Error</FormControl.Error>
-				<FormControl.Success>Success</FormControl.Success>
 			</FormControl>
 		</Example.Item>
 	</Example>

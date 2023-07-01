@@ -1,11 +1,9 @@
 import React from "react";
-import { TextProps } from "components/Text";
 
 export type Props = {
 	children: React.ReactNode;
 	size?: "medium" | "large";
 	hasError?: boolean;
-	hasSuccess?: boolean;
 	required?: boolean;
 	disabled?: boolean;
 	group?: boolean;
@@ -21,7 +19,8 @@ export type CaptionProps = {
 };
 
 export type PrivateCaptionProps = CaptionProps & {
-	color?: TextProps["color"];
+	variant?: "error";
+	disabled?: boolean;
 };
 
 type Attributes = {
@@ -32,4 +31,6 @@ export type Context = {
 	required?: boolean;
 	group?: boolean;
 	attributes: Attributes & { id: string };
-} & Pick<Props, "hasError" | "hasSuccess" | "disabled" | "size">;
+	helperRef: () => void;
+	errorRef: () => void;
+} & Pick<Props, "hasError" | "disabled" | "size">;

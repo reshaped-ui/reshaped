@@ -34,7 +34,7 @@ const Dismissible = (props: T.Props) => {
 						size="small"
 						{...(variant === "media" ? { color: "black", variant: "faded" } : { variant: "ghost" })}
 						onClick={onClose}
-						attributes={{ "aria-label": closeAriaLabel }}
+						attributes={{ "aria-label": onClose ? closeAriaLabel : undefined }}
 						icon={IconClose}
 					/>
 				</WrapperTag>

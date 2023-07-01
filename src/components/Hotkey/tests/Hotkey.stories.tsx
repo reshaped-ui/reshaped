@@ -25,7 +25,11 @@ export const base = () => (
 		</Example.Item>
 		<Example.Item title="Inside input slot">
 			<View width="300px">
-				<TextField name="hey" endSlot={<Demo />} />
+				<TextField
+					name="hey"
+					endSlot={<Demo />}
+					inputAttributes={{ "aria-label": "hotkey test" }}
+				/>
 			</View>
 		</Example.Item>
 	</Example>

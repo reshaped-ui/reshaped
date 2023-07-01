@@ -7,17 +7,36 @@ import { Provider, useFormControlPrivate } from "./FormControl.context";
 import type * as T from "./FormControl.types";
 import s from "./FormControl.module.css";
 
-const getCaptionId = (id: string) => `${id}-caption`;
+const getCaptionId = (id: string, variant?: T.PrivateCaptionProps["variant"]) =>
+	`${id}-${variant || "caption"}`;
 
 const FormControl = (props: T.Props) => {
-	const { children, id: passedId, required, hasSuccess, hasError, group, disabled, size } = props;
+	const { children, id: passedId, required, hasError, group, disabled, size } = props;
 	const id = useElementId(passedId);
-	const attributes = { id, "aria-describedby": getCaptionId(id) };
 	const WrapperTagName = group ? "fieldset" : "div";
+	const [helperRendered, setHelperRendered] = React.useState(false);
+	const [errorRendered, setErrorRendered] = React.useState(false);
+	const describedby = [
+		helperRendered && getCaptionId(id),
+		errorRendered && getCaptionId(id, "error"),
+	]
+		.filter(Boolean)
+		.join(" ");
+	const attributes = { id, "aria-describedby": describedby };
+
+	const errorRef = () => {
+		setErrorRendered(true);
+	};
+
+	const helperRef = () => {
+		setHelperRendered(true);
+	};
 
 	return (
 		<WrapperTagName>
-			<Provider value={{ required, hasSuccess, hasError, attributes, group, disabled, size }}>
+			<Provider
+				value={{ required, hasError, errorRef, helperRef, attributes, group, disabled, size }}
+			>
 				{children}
 			</Provider>
 		</WrapperTagName>
@@ -54,16 +73,18 @@ const FormControlLabel = (props: T.LabelProps) => {
 
 /* Private component */
 const FormControlCaption = (props: T.PrivateCaptionProps) => {
-	const { children, color } = props;
-	const { attributes, size } = useFormControlPrivate();
-	const id = getCaptionId(attributes.id);
+	const { children, variant, disabled } = props;
+	const { attributes, size, helperRef, errorRef } = useFormControlPrivate();
+	const id = getCaptionId(attributes.id, variant);
+	const color = variant === "error" ? "critical" : "neutral-faded";
+	const ref = variant === "error" ? errorRef : helperRef;
 
 	return (
 		<Text
 			as="span"
 			variant={size === "large" ? "body-2" : "body-3"}
-			color={color || "neutral-faded"}
-			attributes={{ id, role: color ? "alert" : undefined }}
+			color={disabled && !variant ? "disabled" : color}
+			attributes={{ id, role: color ? "alert" : undefined, ref }}
 			className={s.caption}
 		>
 			{children}
@@ -75,11 +96,7 @@ const FormControlHelper = (props: T.CaptionProps) => {
 	const { children } = props;
 	const { disabled } = useFormControlPrivate();
 
-	return (
-		<FormControlCaption color={disabled ? "disabled" : "neutral-faded"}>
-			{children}
-		</FormControlCaption>
-	);
+	return <FormControlCaption disabled={disabled}>{children}</FormControlCaption>;
 };
 
 const FormControlError = (props: T.CaptionProps) => {
@@ -87,20 +104,11 @@ const FormControlError = (props: T.CaptionProps) => {
 	const { hasError } = useFormControlPrivate();
 
 	if (!hasError) return null;
-	return <FormControlCaption color="critical">{children}</FormControlCaption>;
-};
-
-const FormControlSuccess = (props: T.CaptionProps) => {
-	const { children } = props;
-	const { hasSuccess } = useFormControlPrivate();
-
-	if (!hasSuccess) return null;
-	return <FormControlCaption color="positive">{children}</FormControlCaption>;
+	return <FormControlCaption variant="error">{children}</FormControlCaption>;
 };
 
 FormControl.Label = FormControlLabel;
 FormControl.Helper = FormControlHelper;
 FormControl.Error = FormControlError;
-FormControl.Success = FormControlSuccess;
 
 export default FormControl;

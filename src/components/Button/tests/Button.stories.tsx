@@ -136,7 +136,7 @@ export const icon = () => (
 		</Example.Item>
 
 		<Example.Item title="icon only">
-			<Button onClick={() => {}} icon={IconZap} />
+			<Button onClick={() => {}} icon={IconZap} attributes={{ "aria-label": "Action" }} />
 		</Example.Item>
 	</Example>
 );

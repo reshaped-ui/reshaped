@@ -162,8 +162,8 @@ export const icon = () => (
 		<Example.Item title="icon only">
 			<Tabs variant="pills-elevated">
 				<Tabs.List>
-					<Tabs.Item value="0" icon={IconZap} />
-					<Tabs.Item value="1" icon={IconZap} />
+					<Tabs.Item value="0" icon={IconZap} attributes={{ "aria-label": "Tab 1" }} />
+					<Tabs.Item value="1" icon={IconZap} attributes={{ "aria-label": "Tab 2" }} />
 				</Tabs.List>
 			</Tabs>
 		</Example.Item>

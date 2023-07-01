@@ -10,7 +10,7 @@ export const behavior = () => (
 	<Example>
 		<Example.Item title="uncontrolled">
 			<Accordion>
-				<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
+				<Accordion.Trigger>Uncontrolled accordion</Accordion.Trigger>
 				<Accordion.Content>
 					<View paddingTop={2}>
 						<Placeholder />
@@ -21,7 +21,7 @@ export const behavior = () => (
 		</Example.Item>
 		<Example.Item title="active, uncontrolled">
 			<Accordion defaultActive>
-				<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
+				<Accordion.Trigger>Action uncontrolled</Accordion.Trigger>
 				<Accordion.Content>
 					<View paddingTop={2}>
 						<Placeholder />
@@ -31,7 +31,7 @@ export const behavior = () => (
 		</Example.Item>
 		<Example.Item title="active, controlled">
 			<Accordion active>
-				<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
+				<Accordion.Trigger>Active controlled</Accordion.Trigger>
 				<Accordion.Content>
 					<View paddingTop={2}>
 						<Placeholder />

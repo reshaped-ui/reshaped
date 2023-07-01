@@ -14,6 +14,7 @@ export const selection = () => (
 			<Select
 				name="animal"
 				placeholder="Select an animal"
+				inputAttributes={{ "aria-label": "test select" }}
 				options={[
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
@@ -24,6 +25,7 @@ export const selection = () => (
 		<Example.Item title="selected, controlled">
 			<Select
 				name="animal"
+				inputAttributes={{ "aria-label": "test select" }}
 				placeholder="Select an animal"
 				defaultValue="dog"
 				options={[
@@ -36,6 +38,7 @@ export const selection = () => (
 		<Example.Item title="selected, uncontrolled">
 			<Select
 				name="animal"
+				inputAttributes={{ "aria-label": "test select" }}
 				placeholder="Select an animal"
 				value="dog"
 				options={[
@@ -59,6 +62,7 @@ export const variants = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 
@@ -72,6 +76,7 @@ export const variants = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 	</Example>
@@ -88,6 +93,7 @@ export const size = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 
@@ -100,6 +106,7 @@ export const size = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 
@@ -112,6 +119,7 @@ export const size = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 
@@ -124,6 +132,7 @@ export const size = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 
@@ -136,6 +145,7 @@ export const size = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 
@@ -148,6 +158,7 @@ export const size = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 
@@ -159,6 +170,7 @@ export const size = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 	</Example>
@@ -175,6 +187,7 @@ export const disabled = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 	</Example>
@@ -191,6 +204,7 @@ export const error = () => (
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
 				]}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 	</Example>
@@ -207,6 +221,7 @@ export const icon = () => (
 					{ label: "Turtle", value: "turtle" },
 				]}
 				icon={IconZap}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 	</Example>
@@ -225,6 +240,7 @@ export const slots = () => (
 				startSlot={
 					<View height="20px" width="20px" backgroundColor="neutral" borderRadius="small" />
 				}
+				inputAttributes={{ "aria-label": "test select" }}
 			/>
 		</Example.Item>
 	</Example>
