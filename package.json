@@ -95,7 +95,7 @@
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"resolve-tspaths": "0.8.13",
-		"size-limit": "8.2.4",
+		"size-limit": "8.2.6",
 		"storybook": "7.0.24",
 		"stylelint": "15.9.0",
 		"stylelint-config-prettier": "9.0.5",
