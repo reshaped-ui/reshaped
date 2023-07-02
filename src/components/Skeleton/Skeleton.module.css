@@ -1,5 +1,5 @@
 .root {
-	animation: rs-skeleton-pulse 2s ease-in-out infinite;
+	animation: rs-skeleton-pulse 2.4s ease-in-out infinite;
 	min-height: var(--rs-unit-x5);
 }
 
@@ -15,7 +15,7 @@
 	}
 
 	50% {
-		opacity: 0.4;
+		opacity: 0.6;
 	}
 
 	100% {

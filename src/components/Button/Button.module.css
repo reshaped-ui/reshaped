@@ -102,7 +102,7 @@
 		--rs-button-padding-h: var(--rs-unit-x3);
 		--rs-button-padding-h-ghost: var(--rs-unit-x2);
 		--rs-button-min-size: var(--rs-unit-x9);
-		--rs-button-icon-gap: var(--rs-unit-x1);
+		--rs-button-icon-gap: var(--rs-unit-x2);
 
 		border-radius: var(--rs-unit-radius-small);
 		font-size: var(--rs-font-size-body-3);
@@ -126,7 +126,7 @@
 		--rs-button-padding-h: var(--rs-unit-x5);
 		--rs-button-padding-h-ghost: var(--rs-unit-x4);
 		--rs-button-min-size: calc(var(--rs-unit-x1) * 14);
-		--rs-button-icon-gap: var(--rs-unit-x2);
+		--rs-button-icon-gap: var(--rs-unit-x3);
 
 		border-radius: var(--rs-unit-radius-medium);
 
