@@ -98,7 +98,14 @@ describe("Components/Modal", () => {
 
 		await userEvent.keyboard("{Escape}");
 
-		fireEvent.transitionEnd(screen.getByText(fixtures.content));
+		/**
+		 * Need to trigger transition event on the correct element
+		 * since Overlay ignores event bubbling to prevent it from closing based on other elements transitionend
+		 */
+		const overlayEl = screen.getAllByRole("button")[1];
+		fireEvent.transitionEnd(overlayEl, {
+			propertyName: "opacity",
+		});
 
 		await waitFor(() => {
 			expect(handleCloseMock).toBeCalledTimes(1);

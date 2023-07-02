@@ -45,7 +45,7 @@ describe("useHotkey", () => {
 			</Reshaped>
 		);
 
-		await userEvent.keyboard("Meta");
+		await userEvent.keyboard("{meta}");
 		expect(fn).toBeCalledTimes(1);
 	});
 
