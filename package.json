@@ -94,7 +94,7 @@
 		"prettier": "2.8.8",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"resolve-tspaths": "0.8.13",
+		"resolve-tspaths": "0.8.14",
 		"size-limit": "8.2.6",
 		"storybook": "7.0.25",
 		"stylelint": "15.9.0",
