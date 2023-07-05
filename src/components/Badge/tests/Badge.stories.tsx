@@ -5,7 +5,8 @@ import View from "components/View";
 import Badge from "components/Badge";
 import Icon from "components/Icon";
 import Button from "components/Button";
-import SVG from "icons/Close";
+import IconCheckmark from "icons/Checkmark";
+import IconChevronRight from "icons/ChevronRight";
 
 export default { title: "Components/Badge" };
 
@@ -65,12 +66,6 @@ export const color = () => (
 
 export const sizes = () => (
 	<Example>
-		<Example.Item title="size: medium, not rounded and rounded">
-			<View gap={3} direction="row">
-				<Badge>Badge</Badge>
-				<Badge rounded>Badge</Badge>
-			</View>
-		</Example.Item>
 		<Example.Item title="size: small, not rounded and rounded">
 			<View gap={3} direction="row">
 				<Badge size="small">Badge</Badge>
@@ -78,6 +73,61 @@ export const sizes = () => (
 					Badge
 				</Badge>
 			</View>
+		</Example.Item>
+		<Example.Item title="size: medium, not rounded and rounded">
+			<View gap={3} direction="row">
+				<Badge>Badge</Badge>
+				<Badge rounded>Badge</Badge>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: large, not rounded and rounded">
+			<View gap={3} direction="row">
+				<Badge size="large">Badge</Badge>
+				<Badge rounded size="large">
+					Badge
+				</Badge>
+			</View>
+		</Example.Item>
+	</Example>
+);
+
+export const icon = () => (
+	<Example>
+		<Example.Item title="size: small, not rounded and rounded">
+			<View gap={3} direction="row">
+				<Badge icon={IconCheckmark} endIcon={IconChevronRight} size="small">
+					Badge
+				</Badge>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: medium, not rounded and rounded">
+			<View gap={3} direction="row">
+				<Badge icon={IconCheckmark} endIcon={IconChevronRight}>
+					Badge
+				</Badge>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: large, not rounded and rounded">
+			<View gap={3} direction="row">
+				<Badge size="large" icon={IconCheckmark} endIcon={IconChevronRight}>
+					Badge
+				</Badge>
+			</View>
+		</Example.Item>
+	</Example>
+);
+
+export const actionable = () => (
+	<Example>
+		<Example.Item title="dismissible, close button is actionable">
+			<Badge onDismiss={() => console.log("heyeye")} dismissAriaLabel="Dismiss">
+				Badge
+			</Badge>
+		</Example.Item>
+		<Example.Item title="dismissible + onClick, whole badge is actionable">
+			<Badge onDismiss={() => console.log("heyeye")} dismissAriaLabel="Dismiss" onClick={() => {}}>
+				Badge
+			</Badge>
 		</Example.Item>
 	</Example>
 );
@@ -99,11 +149,13 @@ export const rounded = () => (
 			title={["rounded, all sizes, color: critical", "one character, renders as circle"]}
 		>
 			<View direction="row" gap={3}>
+				<Badge rounded color="critical" size="small">
+					2
+				</Badge>
 				<Badge rounded color="critical">
 					2
 				</Badge>
-
-				<Badge rounded color="critical" size="small">
+				<Badge rounded color="critical" size="large">
 					2
 				</Badge>
 			</View>
@@ -115,14 +167,16 @@ export const empty = () => (
 	<Example>
 		<Example.Item title="empty, not rounded, all sizes, color: critical">
 			<View direction="row" gap={3}>
-				<Badge color="critical" />
 				<Badge size="small" color="critical" />
+				<Badge color="critical" />
+				<Badge size="large" color="critical" />
 			</View>
 		</Example.Item>
 		<Example.Item title="empty, rounded, all sizes, color: critical">
 			<View direction="row" gap={3}>
-				<Badge rounded color="critical" />
 				<Badge rounded size="small" color="critical" />
+				<Badge rounded color="critical" />
+				<Badge rounded size="large" color="critical" />
 			</View>
 		</Example.Item>
 	</Example>
@@ -188,7 +242,7 @@ export const container = () => {
 			<Example.Item title={["position: top-end, overlap", "should cover the icon"]}>
 				<Badge.Container overlap position="top-end">
 					<Badge size="small" color="primary" rounded hidden={hidden} />
-					<Icon svg={SVG} size={5} />
+					<Icon svg={IconCheckmark} size={5} />
 				</Badge.Container>
 			</Example.Item>
 		</Example>

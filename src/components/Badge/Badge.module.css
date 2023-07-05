@@ -1,12 +1,14 @@
 .root {
-	padding: calc(var(--rs-unit-x1) - 1px) calc(var(--rs-unit-x2) - 1px);
-	min-width: calc(var(--rs-line-height-caption-1) + var(--rs-unit-x1) * 2);
+	padding: var(--rs-badge-p-v) var(--rs-badge-p-h);
+	min-width: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
+	border: 1px solid var(--rs-color-background-neutral);
 	display: inline-flex;
+	align-items: center;
 	justify-content: center;
+	gap: var(--rs-badge-gap);
 	vertical-align: top;
 	border-radius: var(--rs-unit-radius-small);
 	background: var(--rs-color-background-neutral);
-	border: 1px solid var(--rs-color-background-neutral);
 	color: var(--rs-color-foreground-neutral);
 	box-sizing: border-box;
 
@@ -14,6 +16,19 @@
 	backface-visibility: hidden;
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
 	transition-property: transform, opacity;
+}
+
+.dismiss {
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: opacity;
+}
+
+.root.--actionable:hover {
+	opacity: 0.8;
+}
+
+.root .dismiss:hover {
+	opacity: 0.72;
 }
 
 .root.--variant {
@@ -89,9 +104,30 @@
 	}
 }
 
-.root.--size-small {
-	padding: 0 var(--rs-unit-x1);
-	min-width: calc(var(--rs-line-height-caption-1) + 2px);
+.root.--size {
+	&-small {
+		--rs-badge-p-v: 0px;
+		--rs-badge-p-h: var(--rs-unit-x1);
+		--rs-badge-line-height: var(--rs-line-height-caption-1);
+		--rs-badge-empty-size: var(--rs-unit-x2);
+		--rs-badge-gap: calc(var(--rs-unit-x1) / 2);
+	}
+
+	&-medium {
+		--rs-badge-p-v: calc(var(--rs-unit-x1) - 1px);
+		--rs-badge-p-h: calc(var(--rs-unit-x2) - 1px);
+		--rs-badge-line-height: var(--rs-line-height-caption-1);
+		--rs-badge-empty-size: var(--rs-unit-x3);
+		--rs-badge-gap: calc(var(--rs-unit-x1) / 2);
+	}
+
+	&-large {
+		--rs-badge-p-v: calc(var(--rs-unit-x1) - 1px);
+		--rs-badge-p-h: calc(var(--rs-unit-x2) - 1px);
+		--rs-badge-line-height: var(--rs-line-height-body-3);
+		--rs-badge-empty-size: var(--rs-unit-x4);
+		--rs-badge-gap: var(--rs-unit-x1);
+	}
 }
 
 .root.--rounded {
@@ -100,15 +136,10 @@
 }
 
 .root:empty {
-	width: var(--rs-unit-x3);
-	height: var(--rs-unit-x3);
+	width: var(--rs-badge-empty-size);
+	height: var(--rs-badge-empty-size);
 	min-width: auto;
 	padding: 0;
-}
-
-.root.--size-small:empty {
-	width: var(--rs-unit-x2);
-	height: var(--rs-unit-x2);
 }
 
 .root.--hidden {

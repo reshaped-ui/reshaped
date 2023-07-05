@@ -13,6 +13,7 @@
 			{
 				"ignoreAtRules": ["responsive", "value", "variable", "each"]
 			}
-		]
+		],
+		"media-query-no-invalid": null
 	}
 }

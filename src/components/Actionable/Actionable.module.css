@@ -1,5 +1,4 @@
 .root {
-	cursor: pointer;
 	display: inline-block;
 	vertical-align: top;
 	text-decoration: none;
@@ -18,6 +17,11 @@
 		outline: none;
 		z-index: var(--rs-z-index-raised);
 	}
+}
+
+button.root,
+[role="button"].root {
+	cursor: pointer;
 }
 
 .root.--disabled,
