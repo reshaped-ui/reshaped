@@ -1,3 +1,4 @@
+tools/**/*.tsx
 tools/**/*.ts
 tools/**/*.js
 src/themes/**/*.tsx

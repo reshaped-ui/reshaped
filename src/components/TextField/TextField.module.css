@@ -24,7 +24,7 @@
 	color: var(--rs-color-foreground-neutral);
 	width: 100%;
 	margin: calc(var(--rs-unit-x1) * -1) -50%;
-	padding: var(--rs-unit-x1) calc(var(--rs-text-field-gap) + 50%) !important;
+	padding: 0 calc(var(--rs-text-field-gap) + 50%);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 }
@@ -99,7 +99,11 @@
 		--rs-text-field-gap: var(--rs-unit-x1);
 
 		border-radius: var(--rs-unit-radius-small);
-		min-height: var(--rs-unit-x9);
+
+		& .input {
+			padding-top: var(--rs-unit-x2);
+			padding-bottom: var(--rs-unit-x2);
+		}
 
 		& .input,
 		& .affix {
@@ -112,12 +116,16 @@
 		--rs-text-field-gap: var(--rs-unit-x2);
 
 		border-radius: var(--rs-unit-radius-medium);
-		min-height: calc(var(--rs-unit-x1) * 12);
+
+		& .input {
+			padding-top: var(--rs-unit-x3);
+			padding-bottom: var(--rs-unit-x3);
+		}
 
 		& .input,
 		& .affix {
-			font-size: var(--rs-font-size-body-3);
-			line-height: var(--rs-line-height-body-3);
+			font-size: var(--rs-font-size-body-2);
+			line-height: var(--rs-line-height-body-2);
 		}
 	}
 
@@ -125,7 +133,11 @@
 		--rs-text-field-gap: var(--rs-unit-x3);
 
 		border-radius: var(--rs-unit-radius-medium);
-		min-height: calc(var(--rs-unit-x1) * 14);
+
+		& .input {
+			padding-top: var(--rs-unit-x4);
+			padding-bottom: var(--rs-unit-x4);
+		}
 
 		& .input,
 		& .affix {

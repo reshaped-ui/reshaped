@@ -1,7 +1,7 @@
 .root {
 	padding: var(--rs-badge-p-v) var(--rs-badge-p-h);
-	min-width: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
 	border: 1px solid var(--rs-color-background-neutral);
+	min-width: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -118,7 +118,7 @@
 		--rs-badge-p-h: calc(var(--rs-unit-x2) - 1px);
 		--rs-badge-line-height: var(--rs-line-height-caption-1);
 		--rs-badge-empty-size: var(--rs-unit-x3);
-		--rs-badge-gap: calc(var(--rs-unit-x1) / 2);
+		--rs-badge-gap: var(--rs-unit-x1);
 	}
 
 	&-large {

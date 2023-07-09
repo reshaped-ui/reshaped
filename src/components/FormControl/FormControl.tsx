@@ -82,7 +82,7 @@ const FormControlCaption = (props: T.PrivateCaptionProps) => {
 	return (
 		<Text
 			as="span"
-			variant={size === "large" ? "body-2" : "body-3"}
+			variant={size === "large" ? "body-3" : "caption-1"}
 			color={disabled && !variant ? "disabled" : color}
 			attributes={{ id, role: color ? "alert" : undefined, ref }}
 			className={s.caption}

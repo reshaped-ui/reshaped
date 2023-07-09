@@ -1,9 +1,11 @@
-import definition from "cli/theming/definitions/reshaped";
+import reshapedDefinition from "cli/theming/definitions/reshaped";
+import figmaDefinition from "cli/theming/definitions/figma";
 import { ReshapedConfig } from "types/config";
 
 const config: ReshapedConfig = {
 	themes: {
-		reshaped: definition,
+		reshaped: reshapedDefinition,
+		figma: figmaDefinition,
 	},
 
 	themeFragments: {

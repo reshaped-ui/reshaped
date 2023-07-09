@@ -128,6 +128,7 @@ const Select = (props: T.Props) => {
 			<div className={s.arrow}>
 				<Icon
 					svg={IconArrow}
+					color="neutral-faded"
 					size={responsivePropDependency(size, (size) => {
 						return size === "large" || size === "xlarge" ? 5 : 4;
 					})}

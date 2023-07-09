@@ -49,11 +49,16 @@
 	align-items: center;
 	box-sizing: border-box;
 	border-radius: var(--rs-unit-radius-medium);
-	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
 
 	&:hover {
 		color: var(--rs-color-foreground-neutral-faded);
 	}
+}
+
+.buttonContent,
+.icon {
+	color: inherit;
+	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
 }
 
 [data-rs-keyboard] .radio:focus + .buttonContent {

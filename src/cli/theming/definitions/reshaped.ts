@@ -15,6 +15,7 @@ const theme: UserThemeDefinition = {
 	fontWeight: {
 		regular: { weight: 400 },
 		medium: { weight: 500 },
+		semibold: { weight: 600 },
 		bold: { weight: 700 },
 		heavy: { weight: 800 },
 		black: { weight: 900 },

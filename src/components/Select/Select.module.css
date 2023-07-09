@@ -7,7 +7,6 @@
 	z-index: 0;
 	border: 1px solid var(--rs-color-border-neutral);
 	overflow: hidden;
-	min-height: var(--rs-select-min-height);
 	background: var(--rs-color-background-elevation-base);
 
 	&:focus-within {
@@ -34,9 +33,6 @@
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 	padding-inline-end: calc(var(--rs-select-chevron-size) + var(--rs-select-gap));
-
-	/* Firefox text alignment */
-	line-height: calc(var(--rs-select-min-height) - 2 * var(--rs-unit-x1)) !important;
 
 	&::-ms-expand {
 		display: none;
@@ -81,12 +77,13 @@ select.input {
 @responsive .--size {
 	@value medium {
 		--rs-select-gap: var(--rs-unit-x1);
-		--rs-select-min-height: var(--rs-unit-x9);
 		--rs-select-chevron-size: var(--rs-unit-x4);
 
 		border-radius: var(--rs-unit-radius-small);
 
 		& .input {
+			padding-top: var(--rs-unit-x1);
+			padding-bottom: var(--rs-unit-x1);
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
 		}
@@ -94,25 +91,27 @@ select.input {
 
 	@value large {
 		--rs-select-gap: var(--rs-unit-x2);
-		--rs-select-min-height: calc(var(--rs-unit-x1) * 12);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
 		border-radius: var(--rs-unit-radius-medium);
 
 		& .input {
-			font-size: var(--rs-font-size-body-3);
-			line-height: var(--rs-line-height-body-3);
+			padding-top: var(--rs-unit-x2);
+			padding-bottom: var(--rs-unit-x2);
+			font-size: var(--rs-font-size-body-2);
+			line-height: var(--rs-line-height-body-2);
 		}
 	}
 
 	@value xlarge {
 		--rs-select-gap: var(--rs-unit-x3);
-		--rs-select-min-height: calc(var(--rs-unit-x1) * 14);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
 		border-radius: var(--rs-unit-radius-medium);
 
 		& .input {
+			padding-top: var(--rs-unit-x3);
+			padding-bottom: var(--rs-unit-x3);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 		}

@@ -41,15 +41,17 @@ const Badge = (props: T.Props) => {
 	return (
 		<Actionable onClick={onClick} href={href} className={rootClassName} attributes={attributes}>
 			{icon && <Icon svg={icon} autoWidth size={iconSize} />}
-			<Text
-				variant={size === "large" ? "body-3" : "caption-1"}
-				weight="medium"
-				attributes={{
-					"aria-hidden": hidden ? "true" : undefined,
-				}}
-			>
-				{children}
-			</Text>
+			{children && (
+				<Text
+					variant={size === "large" ? "body-3" : "caption-1"}
+					weight="medium"
+					attributes={{
+						"aria-hidden": hidden ? "true" : undefined,
+					}}
+				>
+					{children}
+				</Text>
+			)}
 			{endIcon && <Icon svg={endIcon} autoWidth size={iconSize} />}
 			{onDismiss && (
 				<Actionable
