@@ -7,6 +7,9 @@
 
 .--blank {
 	margin-top: -1px;
+
+	/* Display above other position relative elements */
+	position: relative;
 }
 
 @responsive .--vertical {

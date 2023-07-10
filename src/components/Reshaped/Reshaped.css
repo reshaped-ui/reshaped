@@ -111,8 +111,10 @@ body {
 	text-rendering: optimizespeed;
 	color: var(--rs-color-foreground-neutral);
 	background: var(--rs-color-background-page);
+}
 
-	/* TODO: Replace with font utilities when they become available */
+body,
+[data-rs-theme] {
 	font-size: var(--rs-font-size-body-3);
 	line-height: var(--rs-line-height-body-3);
 	font-family: var(--rs-font-family-body);
