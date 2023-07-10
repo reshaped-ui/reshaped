@@ -39,7 +39,7 @@ export const radius = () => (
 				<Image src={imgUrl} borderRadius="medium" />
 			</View>
 		</Example.Item>
-		<Example.Item title="radius: small">
+		<Example.Item title="radius: large">
 			<View width="300px">
 				<Image src={imgUrl} borderRadius="large" />
 			</View>

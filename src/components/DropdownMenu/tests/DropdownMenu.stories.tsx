@@ -2,7 +2,6 @@ import React from "react";
 import { Example } from "utilities/storybook";
 import Button from "components/Button";
 import DropdownMenu from "components/DropdownMenu";
-import MenuItem from "components/MenuItem";
 import View from "components/View";
 import { useTheme } from "components/Theme/useTheme";
 import IconCheckmark from "icons/Checkmark";

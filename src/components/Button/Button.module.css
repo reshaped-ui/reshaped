@@ -552,6 +552,12 @@
 }
 
 /* Button aligner */
+
+/* Prevent buttons inside the aligned from adding parent line-height */
+.aligner {
+	line-height: 0;
+}
+
 .aligner.--aligner-position-all .root {
 	margin: calc(var(--rs-button-padding-v) * -1) calc(var(--rs-button-padding-h) * -1);
 }
