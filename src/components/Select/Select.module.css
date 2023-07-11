@@ -32,7 +32,9 @@
 	color: var(--rs-color-foreground-neutral);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
-	padding-inline-end: calc(var(--rs-select-chevron-size) + var(--rs-select-gap));
+	padding-inline-end: calc(
+		var(--rs-select-chevron-size) + var(--rs-select-gap) * 2 + var(--rs-unit-x1)
+	);
 
 	&::-ms-expand {
 		display: none;
