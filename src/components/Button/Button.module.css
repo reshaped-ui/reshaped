@@ -19,6 +19,12 @@
 	-webkit-tap-highlight-color: transparent;
 	font-family: var(--rs-font-family-body);
 	font-weight: var(--rs-font-weight-medium);
+	font-size: var(--rs-button-font-size);
+	line-height: var(--rs-button-line-height);
+	min-height: calc(var(--rs-button-line-height) + var(--rs-button-padding-v) * 2);
+	min-width: calc(
+		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-padding-h) * 2)
+	);
 
 	&:active {
 		transform: scale(0.98);
@@ -91,10 +97,10 @@
 		--rs-button-padding-h: var(--rs-unit-x2);
 		--rs-button-padding-h-ghost: var(--rs-unit-x2);
 		--rs-button-icon-gap: var(--rs-unit-x1);
+		--rs-button-line-height: var(--rs-line-height-body-3);
+		--rs-button-font-size: var(--rs-font-size-body-3);
 
 		border-radius: var(--rs-unit-radius-small);
-		font-size: var(--rs-font-size-body-3);
-		line-height: var(--rs-line-height-body-3);
 	}
 
 	@value medium {
@@ -102,10 +108,10 @@
 		--rs-button-padding-h: var(--rs-unit-x3);
 		--rs-button-padding-h-ghost: var(--rs-unit-x2);
 		--rs-button-icon-gap: var(--rs-unit-x2);
+		--rs-button-line-height: var(--rs-line-height-body-3);
+		--rs-button-font-size: var(--rs-font-size-body-3);
 
 		border-radius: var(--rs-unit-radius-small);
-		font-size: var(--rs-font-size-body-3);
-		line-height: var(--rs-line-height-body-3);
 	}
 
 	@value large {
@@ -113,10 +119,10 @@
 		--rs-button-padding-h: var(--rs-unit-x4);
 		--rs-button-padding-h-ghost: var(--rs-unit-x3);
 		--rs-button-icon-gap: var(--rs-unit-x2);
+		--rs-button-line-height: var(--rs-line-height-body-2);
+		--rs-button-font-size: var(--rs-font-size-body-2);
 
 		border-radius: var(--rs-unit-radius-medium);
-		font-size: var(--rs-font-size-body-2);
-		line-height: var(--rs-line-height-body-2);
 	}
 
 	@value xlarge {
@@ -124,10 +130,10 @@
 		--rs-button-padding-h: var(--rs-unit-x5);
 		--rs-button-padding-h-ghost: var(--rs-unit-x4);
 		--rs-button-icon-gap: var(--rs-unit-x3);
+		--rs-button-line-height: var(--rs-line-height-body-1);
+		--rs-button-font-size: var(--rs-font-size-body-1);
 
 		border-radius: var(--rs-unit-radius-medium);
-		font-size: var(--rs-font-size-body-1);
-		line-height: var(--rs-line-height-body-1);
 	}
 }
 
