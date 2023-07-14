@@ -102,7 +102,7 @@
 		"stylelint-config-standard": "34.0.0",
 		"ts-jest": "29.1.1",
 		"typescript": "5.1.6",
-		"vite": "4.3.9",
+		"vite": "4.4.4",
 		"vite-tsconfig-paths": "4.2.0"
 	},
 	"peerDependencies": {
