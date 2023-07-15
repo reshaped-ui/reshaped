@@ -1,5 +1,6 @@
 import React from "react";
 import type { PopoverProps } from "components/Popover";
+import type { FlyoutContentProps } from "components/_private/Flyout";
 
 export type Props = Pick<
 	PopoverProps,
@@ -13,12 +14,13 @@ export type Props = Pick<
 	| "active"
 	| "defaultActive"
 	| "width"
+	| "disableHideAnimation"
 	| "instanceRef"
->;
-
-export type ContentProps = {
-	children: React.ReactNode;
+> & {
+	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu">;
 };
+
+export type ContentProps = Pick<FlyoutContentProps, "attributes" | "children" | "className">;
 
 export type SectionProps = {
 	children: React.ReactNode;

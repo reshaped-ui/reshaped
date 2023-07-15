@@ -20,23 +20,34 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 	} = useFlyoutContext();
 
 	let childrenAttributes: Partial<T.TriggerAttributes> = {
-		onClick: handleClick,
 		onBlur: handleBlur,
 		ref: triggerElRef,
 	};
+
+	if (triggerType === "click") {
+		childrenAttributes.onClick = handleClick;
+	}
 
 	if (triggerType === "hover") {
 		childrenAttributes.onMouseEnter = handleMouseEnter;
 		childrenAttributes.onMouseLeave = handleMouseLeave;
 	}
 
-	if (triggerType === "hover" && trapFocusMode !== "action-menu") {
+	if ((triggerType === "hover" && trapFocusMode !== "action-menu") || triggerType === "focus") {
 		childrenAttributes.onFocus = handleFocus;
 		childrenAttributes["aria-describedby"] = id;
 	}
 
-	if (triggerType === "click" || trapFocusMode === "action-menu") {
-		childrenAttributes["aria-haspopup"] = trapFocusMode === "dialog" ? "dialog" : "menu";
+	if (triggerType === "click" || triggerType === "focus" || trapFocusMode === "action-menu") {
+		if (trapFocusMode === "dialog") {
+			childrenAttributes["aria-haspopup"] = "dialog";
+		} else if (trapFocusMode === "selection-menu") {
+			childrenAttributes["aria-haspopup"] = "listbox";
+			childrenAttributes["aria-autocomplete"] = "list";
+		} else {
+			childrenAttributes["aria-haspopup"] = "menu";
+		}
+
 		childrenAttributes["aria-expanded"] = flyout.status !== "idle";
 		childrenAttributes["aria-controls"] = flyout.status !== "idle" ? id : undefined;
 	}

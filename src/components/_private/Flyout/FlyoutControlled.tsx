@@ -24,6 +24,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		forcePosition,
 		trapFocusMode,
 		width,
+		disableHideAnimation,
 		contentGap,
 		contentClassName,
 		contentAttributes,
@@ -139,13 +140,13 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			return;
 		}
 
-		if (checkTransitions()) {
+		if (checkTransitions() && !disableHideAnimation) {
 			hide();
 			// In case transitions are disabled globally - remove from the DOM immediately
 		} else {
 			remove();
 		}
-	}, [passedActive, render, hide]);
+	}, [passedActive, render, hide, disableHideAnimation]);
 
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
@@ -169,7 +170,6 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 		releaseFocusRef.current = trapFocus(flyoutElRef.current!, {
 			mode: trapFocusMode,
-			// TODO: Turn includeTrigger on for input text and textarea
 			includeTrigger: triggerType === "hover" && trapFocusMode === "content-menu",
 			onNavigateOutside: () => {
 				releaseFocusRef.current = null;

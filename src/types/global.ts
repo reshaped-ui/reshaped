@@ -23,8 +23,8 @@ export type Responsive<T> = T | ResponsiveOnly<T>;
  * Form handlers
  */
 type ChangeHandlerArgs<Value, Event> = Value extends Boolean
-	? { name: string; value?: string; checked: Value; event: Event }
-	: { name: string; value: Value; event: Event };
+	? { name: string; value?: string; checked: Value; event?: Event }
+	: { name: string; value: Value; event?: Event };
 
 export type ChangeHandler<Value, Event = React.ChangeEvent<HTMLInputElement>> = (
 	args: ChangeHandlerArgs<Value, Event>

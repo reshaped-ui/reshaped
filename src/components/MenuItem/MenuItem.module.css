@@ -67,7 +67,8 @@ button.root {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
 	&:hover,
-	&.--selected {
+	&.--selected,
+	&[data-rs-focus] {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
 	}
 }
@@ -76,7 +77,8 @@ button.root {
 	--rs-menu-item-color: var(--rs-color-foreground-critical);
 
 	&:hover,
-	&.--selected {
+	&.--selected,
+	&[data-rs-focus] {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-critical), 12%);
 	}
 }
@@ -84,7 +86,8 @@ button.root {
 .--color-primary {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
-	&:hover {
+	&:hover,
+	&[data-rs-focus] {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
 	}
 
