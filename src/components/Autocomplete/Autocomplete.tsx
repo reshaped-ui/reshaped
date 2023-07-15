@@ -53,7 +53,7 @@ const Autocomplete = (props: T.Props) => {
 						/>
 					)}
 				</DropdownMenu.Trigger>
-				<DropdownMenu.Content attributes={{ role: "listbox" }}>{children}</DropdownMenu.Content>
+				<DropdownMenu.Content>{children}</DropdownMenu.Content>
 			</DropdownMenu>
 		</AutocompleteContext.Provider>
 	);

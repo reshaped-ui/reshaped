@@ -9,6 +9,7 @@ import IconChevronRight from "icons/ChevronRight";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";
 import { getActiveElement } from "utilities/a11y";
+import { classNames } from "utilities/helpers";
 import * as keys from "constants/keys";
 import type * as T from "./DropdownMenu.types";
 import s from "./DropdownMenu.module.css";
@@ -38,7 +39,7 @@ const DropdownMenu = (props: T.Props) => {
 };
 
 const DropdownMenuContent = (props: T.ContentProps) => {
-	const { children, attributes } = props;
+	const { children, attributes, className } = props;
 	const subMenuInstance = React.useContext(DropdownMenuSubContext);
 	const [rtl] = useRTL();
 	const { ref } = useHotkeys<HTMLDivElement>(
@@ -53,12 +54,11 @@ const DropdownMenuContent = (props: T.ContentProps) => {
 		},
 		[subMenuInstance?.current]
 	);
+	const contentClassName = classNames(s.menu, className);
 
 	return (
-		<Popover.Content attributes={{ ...attributes, ref }}>
-			<div className={s.menu} role="menu">
-				{children}
-			</div>
+		<Popover.Content className={contentClassName} attributes={{ ...attributes, ref }}>
+			{children}
 		</Popover.Content>
 	);
 };

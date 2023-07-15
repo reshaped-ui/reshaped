@@ -47,6 +47,10 @@ const FlyoutContent = (props: T.ContentProps) => {
 		role = "tooltip";
 	} else if (trapFocusMode === "dialog") {
 		role = "dialog";
+	} else if (trapFocusMode === "selection-menu") {
+		role = "listbox";
+	} else if (trapFocusMode === "action-menu") {
+		role = "menu";
 	}
 
 	const content = (
