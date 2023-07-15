@@ -29,7 +29,7 @@ export type TriggerAttributes = {
 
 type BaseProps = {
 	id?: string;
-	triggerType: "hover" | "click" | "focus";
+	triggerType?: "hover" | "click" | "focus";
 	position?: FlyoutPosition;
 	forcePosition?: boolean;
 	trapFocusMode?: TrapMode;
