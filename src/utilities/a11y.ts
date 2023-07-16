@@ -1,8 +1,25 @@
 import { TAB, UP, DOWN } from "constants/keys";
-import { keyboardModeAttribute } from "constants/attributes";
+import { keyboardModeAttribute, pseudoFocusAttribute } from "constants/attributes";
 import Chain from "utilities/Chain";
 
-export type TrapMode = "dialog" | "action-menu" | "content-menu";
+/**
+ * dialog: Completely trap the focus inside for tab navigation until content is closed
+ * example: Modal
+ *
+ * action-menu: Trap the arrow navigation, while tab moves the focus to
+ * the next element on the page after the trigger
+ * example: Dropdown Menu
+ *
+ * content-menu: Include dropdown content into the tab navigation flow and move the focus to
+ * the next element on the page after the trigger after navigation through the trapped content
+ * example: Header navigation dropdowns
+ *
+ * selection-menu: Keep the focus on the trigger and enable arrow key navigation with pseudo focusing with data-attributes
+ * without moving the focus away from the trigger
+ * example: Autocomplete
+ */
+export type TrapMode = "dialog" | "action-menu" | "content-menu" | "selection-menu";
+
 type ReleaseOptions = { withoutFocusReturn?: boolean };
 type Release = (options?: ReleaseOptions) => void;
 type TrapOptions = {
@@ -17,8 +34,9 @@ export const isKeyboardMode = () => document.documentElement.hasAttribute(keyboa
 export const focusableSelector =
 	'a,button,input:not([type="hidden"]),textarea,select,details,[tabindex]:not([tabindex="-1"])';
 
-const getActiveElement = () => {
-	return document.activeElement as HTMLButtonElement;
+export const getActiveElement = () => {
+	const pseudoFocusedEl = document.querySelector(`[${pseudoFocusAttribute}]`);
+	return (pseudoFocusedEl || document.activeElement) as HTMLButtonElement;
 };
 
 const getFocusableElements = (el: HTMLElement, extraElement?: HTMLButtonElement) => {
@@ -66,15 +84,25 @@ const getFocusData = (args: {
 	return { overflow: isOverflow, el: focusable[nextIndex] };
 };
 
-const focusElement = (root: HTMLElement, target: "next" | "prev" | "first" | "last") => {
-	const data = getFocusData({ root, target });
-	if (data.el) data.el.focus();
+const focusElement = (el: HTMLButtonElement, mode?: TrapMode) => {
+	document.querySelector(`[${pseudoFocusAttribute}]`)?.removeAttribute(pseudoFocusAttribute);
+
+	if (mode === "selection-menu") {
+		el.setAttribute(pseudoFocusAttribute, "true");
+	} else {
+		el.focus();
+	}
 };
 
-export const focusNextElement = (root: HTMLElement) => focusElement(root, "next");
-export const focusPreviousElement = (root: HTMLElement) => focusElement(root, "prev");
-export const focusFirstElement = (root: HTMLElement) => focusElement(root, "first");
-export const focusLastElement = (root: HTMLElement) => focusElement(root, "last");
+const focusTargetElement = (root: HTMLElement, target: "next" | "prev" | "first" | "last") => {
+	const data = getFocusData({ root, target });
+	focusElement(data.el);
+};
+
+export const focusNextElement = (root: HTMLElement) => focusTargetElement(root, "next");
+export const focusPreviousElement = (root: HTMLElement) => focusTargetElement(root, "prev");
+export const focusFirstElement = (root: HTMLElement) => focusTargetElement(root, "first");
+export const focusLastElement = (root: HTMLElement) => focusTargetElement(root, "last");
 
 const trapScreenReader = (() => {
 	let affectedElements: HTMLElement[] = [];
@@ -130,8 +158,9 @@ export const trapFocus = (() => {
 		const triggerElement = getActiveElement();
 		const isDialog = mode === "dialog";
 		const isContentMenu = mode === "content-menu";
+		const isSelectionMenu = mode === "selection-menu";
 		const isTabMode = isDialog || isContentMenu;
-		const isArrowsMode = mode === "action-menu";
+		const isArrowsMode = mode === "action-menu" || isSelectionMenu;
 		let chainId: number;
 
 		const release: Release = (releaseOptions = {}) => {
@@ -189,7 +218,10 @@ export const trapFocus = (() => {
 			if (!isPrev && !isNext) return;
 
 			event.preventDefault();
-			if (focusData.el) focusData.el.focus();
+
+			if (!focusData.el) return;
+
+			focusElement(focusData.el, mode);
 		};
 
 		// Reset event listeners if focus is trapped elsewhere
@@ -204,7 +236,8 @@ export const trapFocus = (() => {
 		const tailItem = chain.tailId && chain.get(chain.tailId);
 		if (!tailItem || root !== tailItem.data.root) {
 			chainId = chain.add({ root, trigger: triggerElement, options });
-			focusable[0].focus();
+
+			focusElement(focusable[0], mode);
 		}
 
 		document.addEventListener("keydown", handleKeyDown);

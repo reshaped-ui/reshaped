@@ -47,6 +47,10 @@ const FlyoutContent = (props: T.ContentProps) => {
 		role = "tooltip";
 	} else if (trapFocusMode === "dialog") {
 		role = "dialog";
+	} else if (trapFocusMode === "selection-menu") {
+		role = "listbox";
+	} else if (trapFocusMode === "action-menu") {
+		role = "menu";
 	}
 
 	const content = (
@@ -54,14 +58,18 @@ const FlyoutContent = (props: T.ContentProps) => {
 			className={contentClassNames}
 			style={{ ...styles, "--rs-flyout-gap": contentGap } as React.CSSProperties}
 			ref={flyoutElRef}
-			id={id}
-			role={role}
-			aria-modal={triggerType === "click"}
 			onTransitionEnd={handleTransitionEnd}
 			onMouseEnter={triggerType === "hover" ? handleMouseEnter : undefined}
 			onMouseLeave={triggerType === "hover" ? handleMouseLeave : undefined}
 		>
-			<div {...attributes} style={contentAttributes?.style} className={innerClassNames}>
+			<div
+				role={role}
+				{...attributes}
+				id={id}
+				aria-modal={triggerType === "click"}
+				style={contentAttributes?.style}
+				className={innerClassNames}
+			>
 				{children}
 			</div>
 		</div>

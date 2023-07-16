@@ -19,6 +19,7 @@ const Popover = (props: T.Props) => {
 		variant = "elevated",
 		triggerType = "click",
 		position = "bottom",
+		disableHideAnimation,
 		instanceRef,
 	} = props;
 	const padding = props.padding ?? (variant === "headless" ? 0 : 4);
@@ -46,6 +47,7 @@ const Popover = (props: T.Props) => {
 			active={active}
 			defaultActive={defaultActive}
 			width={width}
+			disableHideAnimation={disableHideAnimation}
 			contentGap={contentGap}
 			contentClassName={contentClassName}
 			contentAttributes={{ style: { ...paddingStyles?.variables } }}

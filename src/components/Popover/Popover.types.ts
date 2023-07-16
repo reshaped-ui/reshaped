@@ -14,9 +14,10 @@ export type Props = Pick<
 	| "defaultActive"
 	| "contentGap"
 	| "instanceRef"
+	| "triggerType"
+	| "disableHideAnimation"
 > & {
 	children?: React.ReactNode;
-	triggerType?: "click" | "hover";
 	padding?: number;
 	variant?: "elevated" | "headless";
 };

@@ -1,5 +1,6 @@
 export const ESC = "Escape";
 export const SPACE = " ";
+export const ENTER = "Enter";
 export const TAB = "Tab";
 export const UP = "ArrowUp";
 export const DOWN = "ArrowDown";

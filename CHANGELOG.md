@@ -1,1 +1,5 @@
-
+- Autocomplete component
+- trapFocusMode: 'selection-menu'
+- triggerType: 'focus
+- disableHideAnimation
+- attributes in DropdownMenu.Content

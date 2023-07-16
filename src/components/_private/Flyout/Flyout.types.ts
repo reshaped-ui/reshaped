@@ -21,17 +21,19 @@ export type TriggerAttributes = {
 	onMouseLeave?: () => void;
 	onClick?: () => void;
 	"aria-describedby"?: string;
-	"aria-haspopup"?: "dialog" | "menu";
+	"aria-haspopup"?: "dialog" | "menu" | "listbox";
+	"aria-autocomplete"?: "list";
 	"aria-expanded"?: boolean;
 	"aria-controls"?: string;
 };
 
 type BaseProps = {
 	id?: string;
-	triggerType: "hover" | "click";
+	triggerType?: "hover" | "click" | "focus";
 	position?: FlyoutPosition;
 	forcePosition?: boolean;
 	trapFocusMode?: TrapMode;
+	disableHideAnimation?: boolean;
 	children?: React.ReactNode;
 	onOpen?: () => void;
 	onClose?: () => void;

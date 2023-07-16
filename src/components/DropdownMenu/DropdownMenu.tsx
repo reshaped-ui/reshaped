@@ -8,6 +8,8 @@ import { useFlyoutContext, FlyoutInstanceRef } from "components/_private/Flyout"
 import IconChevronRight from "icons/ChevronRight";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";
+import { getActiveElement } from "utilities/a11y";
+import { classNames } from "utilities/helpers";
 import * as keys from "constants/keys";
 import type * as T from "./DropdownMenu.types";
 import s from "./DropdownMenu.module.css";
@@ -15,14 +17,20 @@ import s from "./DropdownMenu.module.css";
 const DropdownMenuSubContext = React.createContext<React.RefObject<FlyoutInstanceRef> | null>(null);
 
 const DropdownMenu = (props: T.Props) => {
-	const { children, position = "bottom-start", triggerType = "click", ...popoverProps } = props;
+	const {
+		children,
+		position = "bottom-start",
+		triggerType = "click",
+		trapFocusMode = "action-menu",
+		...popoverProps
+	} = props;
 
 	return (
 		<Popover
 			{...popoverProps}
 			position={position}
 			padding={0}
-			trapFocusMode="action-menu"
+			trapFocusMode={trapFocusMode}
 			triggerType={triggerType}
 		>
 			{children}
@@ -31,7 +39,7 @@ const DropdownMenu = (props: T.Props) => {
 };
 
 const DropdownMenuContent = (props: T.ContentProps) => {
-	const { children } = props;
+	const { children, attributes, className } = props;
 	const subMenuInstance = React.useContext(DropdownMenuSubContext);
 	const [rtl] = useRTL();
 	const { ref } = useHotkeys<HTMLDivElement>(
@@ -39,15 +47,18 @@ const DropdownMenuContent = (props: T.ContentProps) => {
 			[rtl ? keys.RIGHT : keys.LEFT]: () => {
 				subMenuInstance?.current?.close();
 			},
+			[keys.ENTER]: () => {
+				const el = getActiveElement();
+				el?.click();
+			},
 		},
 		[subMenuInstance?.current]
 	);
+	const contentClassName = classNames(s.menu, className);
 
 	return (
-		<Popover.Content attributes={{ ref }}>
-			<div className={s.menu} role="menu">
-				{children}
-			</div>
+		<Popover.Content className={contentClassName} attributes={{ ...attributes, ref }}>
+			{children}
 		</Popover.Content>
 	);
 };

@@ -13,6 +13,9 @@ export type { ActionBarProps } from "components/ActionBar";
 export { default as Alert } from "components/Alert";
 export type { AlertProps } from "components/Alert";
 
+export { default as Autocomplete } from "components/Autocomplete";
+export type { AutocompleteProps } from "components/Autocomplete";
+
 export { default as Avatar } from "components/Avatar";
 export type { AvatarProps } from "components/Avatar";
 
