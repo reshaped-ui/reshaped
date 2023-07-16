@@ -179,7 +179,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	}, [status, triggerType, handleClose, trapFocusMode]);
 
 	React.useEffect(() => {
-		if (status !== "hidden") return;
+		if (!disableHideAnimation && status !== "hidden") return;
+		if (disableHideAnimation && status !== "idle") return;
 
 		if (releaseFocusRef.current) {
 			/* Locking the popover to not open it again on trigger focus */
@@ -195,7 +196,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			releaseFocusRef.current = null;
 			shouldReturnFocusRef.current = true;
 		}
-	}, [status, triggerType]);
+	}, [status, triggerType, disableHideAnimation]);
 
 	/**
 	 * Release focus trapping on unmount

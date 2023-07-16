@@ -10,21 +10,36 @@ import * as T from "./Autocomplete.types";
 const AutocompleteContext = React.createContext({} as T.Context);
 
 const Autocomplete = (props: T.Props) => {
-	const { children, onChange, name, ...textFieldProps } = props;
+	const { children, onChange, onItemSelect, name, ...textFieldProps } = props;
 	const [active, setActive] = React.useState(false);
-	const hasChildren = !!React.Children.count(children);
+	// Prevent dropdown from opening on selecting an item
+	const [locked, setLocked] = React.useState(false);
+	const hasChildren = !!React.Children.toArray(children).filter(Boolean).length;
+
+	const handleOpen = () => setActive(true);
+	const handleClose = () => setActive(false);
 
 	const handleChange: TextFieldProps["onChange"] = (args) => {
 		onChange?.(args);
-		setActive(true);
+
+		setLocked(false);
+		handleOpen();
 	};
 
 	const handleItemClick: T.Context["onItemClick"] = (args) => {
 		onChange?.({ value: args.value, name });
+		onItemSelect?.({ value: args.value });
+		setLocked(true);
 	};
 
-	const handleOpen = () => setActive(true);
-	const handleClose = () => setActive(false);
+	const handleFocus: TextFieldProps["onFocus"] = (e) => {
+		requestAnimationFrame(() => {
+			if (!locked) return;
+			setActive(false);
+			setLocked(false);
+		});
+		textFieldProps.onFocus?.(e);
+	};
 
 	return (
 		<AutocompleteContext.Provider value={{ onItemClick: handleItemClick }}>
@@ -33,7 +48,7 @@ const Autocomplete = (props: T.Props) => {
 				width="trigger"
 				triggerType="focus"
 				trapFocusMode="selection-menu"
-				active={hasChildren && active}
+				active={!locked && hasChildren && active}
 				onClose={handleClose}
 				onOpen={handleOpen}
 				disableHideAnimation
@@ -45,9 +60,13 @@ const Autocomplete = (props: T.Props) => {
 							name={name}
 							onChange={handleChange}
 							// Ignoring the type check since TS can't infer the correct html element type
-							attributes={{ ref } as any}
+							attributes={{ ...textFieldProps.attributes, ref } as any}
 							inputAttributes={{
 								...attributes,
+								onFocus: (e) => {
+									attributes.onFocus?.();
+									handleFocus(e);
+								},
 								role: "combobox",
 							}}
 						/>

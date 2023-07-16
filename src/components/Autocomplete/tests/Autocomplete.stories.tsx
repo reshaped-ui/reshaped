@@ -14,13 +14,15 @@ const Demo = () => {
 			placeholder="Pick your food"
 			onChange={({ value }) => setValue(value)}
 		>
-			{["Pizza", "Pie", "Ice-cream"]
-				.filter((v) => v.toLowerCase().includes(value.toLowerCase()))
-				.map((v) => (
+			{["Pizza", "Pie", "Ice-cream"].map((v) => {
+				if (!v.toLowerCase().includes(value.toLowerCase())) return;
+
+				return (
 					<Autocomplete.Item key={v} value={v}>
 						{v}
 					</Autocomplete.Item>
-				))}
+				);
+			})}
 		</Autocomplete>
 	);
 };
