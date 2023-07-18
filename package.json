@@ -1,8 +1,17 @@
 {
 	"name": "reshaped",
-	"private": true,
+	"description": "Professionally crafted design system in React & Figma for building products of any scale and complexity",
 	"version": "2.1.0",
-	"author": "Dmitry Belyaev <blv.dmitry@gmail.com>",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"email": "hello@reshaped.so",
+	"homepage": "https://reshaped.so",
+	"bugs": {
+		"url": "https://github.com/formaat-design/reshaped/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/formaat-design/reshaped"
+	},
 	"main": "./index.js",
 	"module": "./index.js",
 	"types": "./index.d.ts",
@@ -39,9 +48,9 @@
 		"build:bundle": "vite build && mv dist/bundle.umd.js dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",
 		"build:storybook": "storybook build -c tools/storybook -o dist/app --disable-telemetry",
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build -c tools/storybook",
-		"release": "read -p 'Have you updated chromatic tests?' && yarn release:lib && yarn release:source && yarn build:storybook",
-		"release:lib": "yarn build && yarn version && yarn pack --filename reshaped-react-v$(jq -r .version package.json).tgz",
-		"release:beta": "yarn build && yarn pack --filename reshaped-beta.tgz",
+		"release": "read -p 'Have you updated chromatic tests?' && yarn release:lib && yarn release:source && yarn build:storybook && yarn release:copy",
+		"release:lib": "yarn build && yarn publish",
+		"release:beta": "yarn build && yarn publish --tag beta",
 		"release:source": "git archive -o reshaped-source-v$(jq -r .version package.json).zip HEAD . ':!.chromatic'",
 		"release:copy": "sh ./bin/copy-release.sh",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
@@ -52,7 +61,6 @@
 		"lint:js": "eslint --ext .ts,.tsx src/**/*.ts src/**/*.tsx --quiet --fix",
 		"lint:css": "stylelint 'src/**/*.css'"
 	},
-	"license": "SEE LICENSE IN LICENSE.md",
 	"browserslist": [
 		"defaults and not IE 11"
 	],
