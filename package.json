@@ -5,6 +5,19 @@
 	"license": "SEE LICENSE IN LICENSE.md",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
+	"keywords": [
+		"react",
+		"ui",
+		"design-system",
+		"react-components",
+		"component-library",
+		"components",
+		"css-modules",
+		"figma",
+		"ui-kit",
+		"accessibility",
+		"accessible"
+	],
 	"bugs": {
 		"url": "https://github.com/formaat-design/reshaped/issues"
 	},
