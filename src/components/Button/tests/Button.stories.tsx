@@ -184,6 +184,7 @@ export const size = () => (
 	<Example>
 		<Example.Item title="size: small, all variants">
 			<View gap={3} direction="row">
+				<Button size="small">Button</Button>
 				<Button size="small" icon={IconZap}>
 					Button
 				</Button>
@@ -198,6 +199,7 @@ export const size = () => (
 
 		<Example.Item title="size: medium, all variants">
 			<View gap={3} direction="row">
+				<Button>Button</Button>
 				<Button icon={IconZap}>Button</Button>
 				<Button variant="outline" icon={IconZap}>
 					Button
@@ -210,6 +212,7 @@ export const size = () => (
 
 		<Example.Item title="size: large, all variants">
 			<View gap={3} direction="row">
+				<Button size="large">Button</Button>
 				<Button size="large" icon={IconZap}>
 					Button
 				</Button>
@@ -224,6 +227,7 @@ export const size = () => (
 
 		<Example.Item title="size: xlarge, all variants">
 			<View gap={3} direction="row">
+				<Button size="xlarge">Button</Button>
 				<Button size="xlarge" icon={IconZap}>
 					Button
 				</Button>
