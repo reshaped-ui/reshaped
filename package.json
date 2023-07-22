@@ -95,7 +95,7 @@
 		"@vitejs/plugin-react": "4.0.3",
 		"chromatic": "6.19.9",
 		"eslint": "8.45.0",
-		"eslint-config-airbnb-typescript": "17.0.0",
+		"eslint-config-airbnb-typescript": "17.1.0",
 		"eslint-config-prettier": "8.8.0",
 		"eslint-plugin-import": "2.27.5",
 		"eslint-plugin-jsx-a11y": "6.7.1",
