@@ -10,14 +10,14 @@ export const debounce = <T extends Function>(cb: T, wait = 20) => {
 	return <T>(<any>callable);
 };
 
-export function debounceHandler<T extends React.SyntheticEvent>(
+export function debounceHandler<T extends React.SyntheticEvent | Event>(
 	handler: (event: T) => void,
 	timeout: number
 ): (event: T) => void {
 	const debounced = debounce(handler, timeout);
 
 	return (event) => {
-		event.persist();
+		if ("persist" in event) event.persist();
 		return debounced(event);
 	};
 }
@@ -40,6 +40,18 @@ export const throttle = <T extends Function>(cb: T, wait: number) => {
 		}
 	};
 };
+
+export function throttleHandler<T extends React.SyntheticEvent | Event>(
+	handler: (event: T) => void,
+	timeout: number
+): (event: T) => void {
+	const throttled = throttle(handler, timeout);
+
+	return (event) => {
+		if ("persist" in event) event.persist();
+		return throttled(event);
+	};
+}
 
 type Value = string | boolean | number | undefined;
 type ClassNameResolver = string | ((value: Value) => string);

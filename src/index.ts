@@ -109,6 +109,9 @@ export type { SelectProps } from "components/Select";
 export { default as Skeleton } from "components/Skeleton";
 export type { SkeletonProps } from "components/Skeleton";
 
+export { default as Slider } from "components/Slider";
+export type { SliderProps } from "components/Slider";
+
 export { default as Switch } from "components/Switch";
 export type { SwitchProps } from "components/Switch";
 
