@@ -64,6 +64,7 @@
 		"release": "read -p 'Have you updated chromatic tests?' && yarn release:lib && yarn release:source && yarn build:storybook && yarn release:copy",
 		"release:lib": "yarn build && yarn publish",
 		"release:beta": "yarn build && yarn publish --tag beta",
+		"release:test": "yarn build && yarn pack --filename reshaped-test.tgz",
 		"release:source": "git archive -o reshaped-source-v$(jq -r .version package.json).zip HEAD . ':!.chromatic'",
 		"release:copy": "sh ./bin/copy-release.sh",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",

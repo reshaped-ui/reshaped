@@ -3,12 +3,11 @@
 import React from "react";
 import { classNames } from "utilities/helpers";
 import useRTL from "hooks/useRTL";
+import useElementId from "hooks/useElementId";
+import { useFormControl } from "components/FormControl";
 import SliderThumb from "./SliderThumb";
 import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
-
-const minId = "min";
-const maxId = "max";
 
 const getDragX = (event: MouseEvent | TouchEvent) => {
 	if (event instanceof MouseEvent) return event.pageX || event.screenX;
@@ -25,7 +24,6 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		range,
 		max,
 		min,
-		disabled,
 		step = 1,
 		onChange,
 		onChangeCommit,
@@ -39,8 +37,14 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const barRef = React.useRef<HTMLDivElement | null>(null);
 	const minRef = React.useRef<HTMLDivElement | null>(null);
 	const maxRef = React.useRef<HTMLDivElement | null>(null);
-	const [draggingId, setDraggingId] = React.useState<"min" | "max" | null>(null);
+	const [draggingId, setDraggingId] = React.useState<string | null>(null);
 	const [rtl] = useRTL();
+	const formControl = useFormControl();
+	const id = useElementId();
+	const inputId = formControl?.attributes?.id || id;
+	const minId = `${inputId}-min`;
+	const maxId = `${inputId}-max`;
+	const disabled = formControl?.disabled || props.disabled;
 	const rootClassNames = classNames(s.root, disabled && s["--disabled"], className);
 
 	const getPositionValue = React.useCallback(
@@ -143,7 +147,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		}
 
 		setDraggingId(null);
-	}, [minValue, maxValue, handleMinChange, handleMaxChange, draggingId]);
+	}, [minValue, maxValue, handleMinChange, handleMaxChange, draggingId, minId, maxId]);
 
 	const handleDrag = React.useCallback(
 		(e: MouseEvent | TouchEvent) => {
@@ -164,7 +168,16 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			if (nextDraggingId === maxId) handleMaxChange(nextValue);
 			if (draggingId !== nextDraggingId) setDraggingId(nextDraggingId);
 		},
-		[draggingId, minValue, maxValue, getPositionValue, handleMaxChange, handleMinChange]
+		[
+			draggingId,
+			minValue,
+			maxValue,
+			getPositionValue,
+			handleMaxChange,
+			handleMinChange,
+			maxId,
+			minId,
+		]
 	);
 
 	React.useEffect(() => {

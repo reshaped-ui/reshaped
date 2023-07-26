@@ -101,6 +101,8 @@
 }
 
 .--disabled {
+	cursor: not-allowed;
+
 	& .bar {
 		background-color: var(--rs-color-background-disabled);
 	}
@@ -112,5 +114,9 @@
 
 	& .thumb::after {
 		cursor: not-allowed;
+	}
+
+	& .thumb:hover .tooltip {
+		opacity: 0;
 	}
 }
