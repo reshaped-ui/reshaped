@@ -1,0 +1,122 @@
+.root {
+	position: relative;
+	height: var(--rs-unit-x4);
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.bar {
+	border-radius: var(--rs-unit-radius-small);
+	background: var(--rs-color-background-neutral);
+	height: var(--rs-unit-x1);
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.selection {
+	height: 100%;
+	position: absolute;
+	background: var(--rs-color-background-primary);
+}
+
+.tooltip {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	opacity: 0;
+	color: var(--rs-color-foreground-neutral);
+	background: var(--rs-color-background-elevation-overlay);
+	box-shadow: var(--rs-shadow-overlay);
+	border-radius: var(--rs-unit-radius-small);
+	padding: calc(var(--rs-unit-x1) / 2) var(--rs-unit-x1);
+	user-select: none;
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: opacity, transform;
+}
+
+.thumb {
+	width: 0;
+	height: 100%;
+	position: absolute;
+
+	&::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 50%;
+		width: var(--rs-unit-x4);
+		height: var(--rs-unit-x4);
+		border-radius: 999px;
+		background: var(--rs-color-background-primary);
+		box-shadow: 0 0 0 2px var(--rs-color-background-elevation-base);
+		box-sizing: border-box;
+		transform: translate(-50%, -50%);
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: box-shadow;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 50%;
+		width: var(--rs-unit-x9);
+		height: var(--rs-unit-x9);
+		transform: translate(-50%, -50%);
+		cursor: grab;
+	}
+
+	&:hover .tooltip {
+		opacity: 1;
+		transform: translate(-50%, calc(var(--rs-unit-x1) * -1));
+	}
+
+	.input:focus + &,
+	&--active {
+		&::after {
+			cursor: grabbing;
+		}
+
+		&::before {
+			box-shadow: 0 0 0 1px var(--rs-color-background-elevation-base);
+		}
+
+		& .tooltip {
+			opacity: 1;
+			transform: translate(-50%, calc(var(--rs-unit-x1) * -1)) scale(1.1) !important;
+		}
+	}
+}
+
+.--disabled {
+	cursor: not-allowed;
+
+	& .bar {
+		background-color: var(--rs-color-background-disabled);
+	}
+
+	& .selection,
+	& .thumb::before {
+		background-color: var(--rs-color-foreground-disabled);
+	}
+
+	& .thumb::after {
+		cursor: not-allowed;
+	}
+
+	& .thumb:hover .tooltip {
+		opacity: 0;
+	}
+}

@@ -5,6 +5,7 @@ export type ClassName = ClassNameValue | ClassNameValue[];
 
 export type CSSVariable = `--${string}`;
 export type StyleAttribute = React.CSSProperties & Record<CSSVariable, string | number | undefined>;
+
 type DataAttributes = Record<`data-${string}`, string | boolean>;
 
 export type Attributes<TagName = void, O = void> = Omit<
