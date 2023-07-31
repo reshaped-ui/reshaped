@@ -1,5 +1,8 @@
 - Autocomplete component
+- InputSlider component
 - trapFocusMode: 'selection-menu'
 - triggerType: 'focus
 - disableHideAnimation
 - attributes in DropdownMenu.Content
+- Radio/Checkbox: Transitions
+- Website migrated to next app directory, improved web vitals

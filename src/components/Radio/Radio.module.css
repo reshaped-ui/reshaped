@@ -20,6 +20,8 @@
 	border-radius: 50%;
 	border: 1px solid var(--rs-color-border-neutral);
 	background: var(--rs-color-background-elevation-base);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: background-color, border-color;
 
 	&::after {
 		content: "";
@@ -30,8 +32,10 @@
 		border-radius: 50%;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%) scale(0);
 		opacity: 0;
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: opacity, transform;
 	}
 }
 
@@ -48,7 +52,7 @@
 
 	&::after {
 		opacity: 1;
-		transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%) scale(1);
 	}
 }
 
