@@ -1,5 +1,5 @@
 - Autocomplete component
-- InputSlider component
+- Slider component
 - trapFocusMode: 'selection-menu'
 - triggerType: 'focus
 - disableHideAnimation
