@@ -3,12 +3,10 @@ import { UserThemeDefinition } from "../tokens/types";
 const theme: UserThemeDefinition = {
 	fontFamily: {
 		title: {
-			family:
-				"Inter, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
 		},
 		body: {
-			family:
-				"Inter, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
 		},
 	},
 

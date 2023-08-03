@@ -1,7 +1,7 @@
 .root {
 	display: block;
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: background-color, transform;
+	transition-property: background-color, transform, box-shadow;
 	padding: var(--rs-menu-item-padding-v) var(--rs-menu-item-padding-h);
 	font-family: var(--rs-font-family-body);
 	font-weight: var(--rs-font-weight-medium);

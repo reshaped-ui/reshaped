@@ -6,3 +6,5 @@
 - attributes in DropdownMenu.Content
 - Radio/Checkbox: Transitions
 - Website migrated to next app directory, improved web vitals
+- MenuItem: Box shadow animtion for the focus
+- Removed Segoe UI from the default themes
