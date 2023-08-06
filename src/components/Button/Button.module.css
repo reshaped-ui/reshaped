@@ -130,8 +130,8 @@
 		--rs-button-padding-h: var(--rs-unit-x5);
 		--rs-button-padding-h-ghost: var(--rs-unit-x4);
 		--rs-button-icon-gap: var(--rs-unit-x3);
-		--rs-button-line-height: var(--rs-line-height-body-1);
-		--rs-button-font-size: var(--rs-font-size-body-1);
+		--rs-button-line-height: var(--rs-line-height-body-2);
+		--rs-button-font-size: var(--rs-font-size-body-2);
 
 		border-radius: var(--rs-unit-radius-medium);
 	}

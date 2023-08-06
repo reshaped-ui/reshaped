@@ -73,7 +73,7 @@ const theme: UserThemeDefinition = {
 		},
 		body1: {
 			fontSize: { px: 18 },
-			lineHeight: { px: 24 },
+			lineHeight: { px: 28 },
 			fontFamilyToken: "body",
 		},
 		body2: {
