@@ -12,7 +12,8 @@
 		"dist",
 		"tools",
 		"src/utilities/testPresets.tsx",
-		"./src/**/tests/*.test.tsx",
-		"./src/**/tests/*.stories.tsx"
+		"./src/**/*.test.tsx",
+		"./src/**/*.test.ts",
+		"./src/**/*.stories.tsx"
 	]
 }
