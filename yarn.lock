@@ -5211,18 +5211,7 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.3.0.tgz#ece407fa550a64d638536cd727e129c61616e0f0"
   integrity sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==
 
-fast-glob@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.0.tgz#7c40cb491e1e2ed5664749e87bfb516dbe8727c0"
-  integrity sha512-ChDuvbOypPuNjO8yIDf36x7BlZX1smcUMTTcyoIjycexOxd6DFsKsg21qVBzEmr3G7fUKIRy2/psii+CIUt7FA==
-  dependencies:
-    "@nodelib/fs.stat" "^2.0.2"
-    "@nodelib/fs.walk" "^1.2.3"
-    glob-parent "^5.1.2"
-    merge2 "^1.3.0"
-    micromatch "^4.0.4"
-
-fast-glob@^3.2.9, fast-glob@^3.3.0:
+fast-glob@3.3.1, fast-glob@^3.2.9, fast-glob@^3.3.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.1.tgz#784b4e897340f3dbbef17413b3f11acf03c874c4"
   integrity sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==
@@ -8721,14 +8710,14 @@ resolve-from@^5.0.0:
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-5.0.0.tgz#c35225843df8f776df21c57557bc087e9dfdfc69"
   integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
 
-resolve-tspaths@0.8.14:
-  version "0.8.14"
-  resolved "https://registry.yarnpkg.com/resolve-tspaths/-/resolve-tspaths-0.8.14.tgz#924d892eea1ea3e0b364b4f686bea470ef845151"
-  integrity sha512-gxJvswfUGAIFZg8DxwhezhOP5972i80lfD2P+aADGOR4fm6V8i2jKBpznh9QQtPZbcbXhxaf6B/1sbx+jgnwvA==
+resolve-tspaths@0.8.15:
+  version "0.8.15"
+  resolved "https://registry.yarnpkg.com/resolve-tspaths/-/resolve-tspaths-0.8.15.tgz#bd9eca94efadd205c5a3b3bcd202b978ea6340f2"
+  integrity sha512-uqxasvZ7WGMfaozpwSLo5nEV/TBnbwMSV7df7hLfwtmGNQlqO1ljcTJ5s8EX9MidKlMQLnczCwur9gFtbOc6pA==
   dependencies:
     ansi-colors "4.1.3"
     commander "11.0.0"
-    fast-glob "3.3.0"
+    fast-glob "3.3.1"
 
 resolve.exports@^2.0.0:
   version "2.0.2"
