@@ -4,6 +4,7 @@
 	gap: var(--rs-unit-x2);
 	position: relative;
 	vertical-align: top;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .input {

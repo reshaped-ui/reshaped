@@ -11,7 +11,7 @@
 	border: 0;
 	margin: 0;
 	background: none;
-	-webkit-tap-highlight-color: none;
+	-webkit-tap-highlight-color: transparent;
 
 	&:focus {
 		outline: none;
