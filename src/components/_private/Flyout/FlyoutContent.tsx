@@ -18,6 +18,8 @@ const FlyoutContent = (props: T.ContentProps) => {
 		triggerType,
 		handleMouseEnter,
 		handleMouseLeave,
+		handleContentMouseDown,
+		handleContentMouseUp,
 		contentGap,
 		contentClassName,
 		contentAttributes,
@@ -54,6 +56,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 	}
 
 	const content = (
+		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 		<div
 			className={contentClassNames}
 			style={{ ...styles, "--rs-flyout-gap": contentGap } as React.CSSProperties}
@@ -61,6 +64,10 @@ const FlyoutContent = (props: T.ContentProps) => {
 			onTransitionEnd={handleTransitionEnd}
 			onMouseEnter={triggerType === "hover" ? handleMouseEnter : undefined}
 			onMouseLeave={triggerType === "hover" ? handleMouseLeave : undefined}
+			onMouseDown={handleContentMouseDown}
+			onTouchStart={handleContentMouseDown}
+			onMouseUp={handleContentMouseUp}
+			onTouchEnd={handleContentMouseUp}
 		>
 			<div
 				role={role}

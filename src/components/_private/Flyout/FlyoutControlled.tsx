@@ -40,6 +40,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
 	const releaseFocusRef = React.useRef<ReturnType<typeof trapFocus> | null>(null);
 	const lockedRef = React.useRef(false);
+	const lockedBlurEffects = React.useRef(false);
 	const shouldReturnFocusRef = React.useRef(true);
 	const flyout = useFlyout(triggerElRef, flyoutElRef, {
 		width,
@@ -99,7 +100,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				// Empty flyouts don't move the focus so they have to be closed on blur
 				focusedContent ||
 				// Content menu keeps the focus on the original trigger so moving the focus away from it shouldn't close it
-				(triggerType === "hover" && trapFocusMode === "content-menu")
+				(triggerType === "hover" && trapFocusMode === "content-menu") ||
+				// Prevent from closing in case user interacts with items inside content
+				lockedBlurEffects.current
 			) {
 				return;
 			}
@@ -130,6 +133,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			handleClose();
 		}
 	}, [status, handleOpen, handleClose]);
+
+	const handleContentMouseDown = () => (lockedBlurEffects.current = true);
+	const handleContentMouseUp = () => (lockedBlurEffects.current = false);
 
 	/**
 	 * Control the display based on the props
@@ -257,6 +263,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				handleMouseLeave,
 				handleTransitionEnd,
 				handleClick: handleTriggerClick,
+				handleContentMouseDown,
+				handleContentMouseUp,
 				triggerType,
 				trapFocusMode,
 				contentGap,

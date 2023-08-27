@@ -87,7 +87,7 @@ const DropdownMenuItem = (props: Omit<MenuItemProps, "roundedCorners">) => {
 			{...props}
 			roundedCorners
 			className={s.item}
-			attributes={{ ...props.attributes, role: "menuitem" }}
+			attributes={{ role: "menuitem", ...props.attributes }}
 			onClick={handleClick}
 		/>
 	);

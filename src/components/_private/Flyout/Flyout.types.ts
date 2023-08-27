@@ -76,6 +76,8 @@ export type ContextProps = {
 	handleClick: () => void;
 	handleBlur: (e: React.FocusEvent) => void;
 	handleFocus: () => void;
+	handleContentMouseDown: () => void;
+	handleContentMouseUp: () => void;
 } & Pick<
 	Props,
 	"triggerType" | "contentClassName" | "contentAttributes" | "trapFocusMode" | "contentGap"
