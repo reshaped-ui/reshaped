@@ -1,4 +1,4 @@
-import { Name } from "cli/theming/tokens/color/color.types";
+import { Name } from "themes/_generator/tokens/color/color.types";
 
 export const bgWithDynamicForeground: Name[] = [
 	"backgroundNeutral",

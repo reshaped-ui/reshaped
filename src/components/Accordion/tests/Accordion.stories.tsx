@@ -3,21 +3,19 @@ import { Example, Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
 import View from "components/View";
+import Theme from "components/Theme";
+import Text from "components/Text";
+import { getThemeCSS } from "themes";
 
 export default { title: "Utilities/Accordion" };
 
 export const behavior = () => (
 	<Example>
 		<Example.Item title="uncontrolled">
-			<Accordion>
-				<Accordion.Trigger>Uncontrolled accordion</Accordion.Trigger>
-				<Accordion.Content>
-					<View paddingTop={2}>
-						<Placeholder />
-						<button>Heeloo</button>
-					</View>
-				</Accordion.Content>
-			</Accordion>
+			<style>{getThemeCSS("foo", { color: { foregroundNeutral: { hex: "#ff0000" } } })}</style>
+			<Theme name="foo">
+				<Text color="neutral">Hello</Text>
+			</Theme>
 		</Example.Item>
 		<Example.Item title="active, uncontrolled">
 			<Accordion defaultActive>

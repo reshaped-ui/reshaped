@@ -1,4 +1,4 @@
-import { BaseThemeDefinition } from "../tokens/types";
+import { BaseThemeDefinition } from "../../../themes/_generator/tokens/types";
 
 const base: BaseThemeDefinition = {
 	viewport: {

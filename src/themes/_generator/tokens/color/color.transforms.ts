@@ -1,5 +1,5 @@
 import type * as T from "./color.types";
-import { Transformer, TransformedToken } from "../types";
+import type { Transformer, TransformedToken } from "../types";
 
 const transformedToken: Transformer<T.Token> = (name, token) => {
 	const hasDarkMode = !!token.hexDark;

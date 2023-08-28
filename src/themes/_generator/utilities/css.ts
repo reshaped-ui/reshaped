@@ -1,4 +1,4 @@
-import { camelToKebab } from "../../utilities/string";
+import { camelToKebab } from "utilities/string";
 import type * as T from "../tokens/types";
 
 export const getVariableName = (tokenName: string, tokenType?: string) => {
@@ -38,6 +38,8 @@ export const variablesTemplate = (themeName: string, tokens: T.TransformedToken[
 			type === "root"
 				? `[data-rs-theme="${themeName}"][data-rs-color-mode="light"], [data-rs-theme="${themeName}"][data-rs-color-mode="dark"]`
 				: `[data-rs-theme="${themeName}"][data-rs-color-mode="${type}"]`;
+
+		if (!tokens.length) return;
 
 		code += `
 			${selector} {

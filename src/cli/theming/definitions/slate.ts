@@ -1,5 +1,5 @@
 import reshapedDefinition from "./reshaped";
-import { UserThemeDefinition } from "../tokens/types";
+import { UserThemeDefinition } from "../../../themes/_generator/tokens/types";
 
 const theme: UserThemeDefinition = {
 	...reshapedDefinition,
