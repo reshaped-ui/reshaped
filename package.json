@@ -149,6 +149,11 @@
 			"name": "CSS",
 			"path": "dist/bundle.css",
 			"webpack": false
+		},
+		{
+			"name": "JS Theming engine",
+			"path": "dist/themes/index.js",
+			"webpack": false
 		}
 	],
 	"engines": {
