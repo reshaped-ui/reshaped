@@ -17,7 +17,14 @@ const generateBackgroundColors = (
 		const bgToken = definition.color?.[tokenName];
 		const generatedForegroundName = `on${capitalize(tokenName)}` as GeneratedOnColorName;
 		const generatedRGBName = `rgb${capitalize(tokenName)}` as GeneratedRGBColorName;
-		const needsDynamicForeground = themeOptions?.generateOnColorsFor?.includes(tokenName);
+		const generateOnColorsFor = [
+			"backgroundNeutral",
+			"backgroundPrimary",
+			"backgroundCritical",
+			"backgroundPositive",
+			...(themeOptions?.generateOnColorsFor || []),
+		];
+		const needsDynamicForeground = generateOnColorsFor.includes(tokenName);
 		const needsRGB =
 			tokenName.startsWith("background") ||
 			tokenName.endsWith("black") ||
