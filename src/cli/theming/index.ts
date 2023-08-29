@@ -16,7 +16,7 @@ const transformDefinition = (
 	definition: T.PartialDeep<FullThemeDefinition>,
 	options: T.CLIOptions
 ) => {
-	const { isFragment, isPrivate, outputPath } = options;
+	const { isFragment, outputPath } = options;
 	const code = transform(name, definition, options);
 
 	const themeFolderPath = isFragment
@@ -27,9 +27,9 @@ const transformDefinition = (
 	fs.mkdirSync(themeFolderPath, { recursive: true });
 	fs.writeFileSync(themePath, code.variables);
 
-	if (isPrivate && !isFragment) {
+	if (code.media) {
 		const mediaPath = path.resolve(outputPath, "media.css");
-		fs.writeFileSync(mediaPath, code.variables);
+		fs.writeFileSync(mediaPath, code.media);
 	}
 
 	const logOutput = `Compiled ${chalk.bold(name)} theme${isFragment ? " fragment" : ""}`;
