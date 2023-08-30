@@ -1,4 +1,4 @@
-import { PartialUserThemeDefinition } from "cli/theming/tokens/types";
+import { PartialUserThemeDefinition } from "themes/_generator/tokens/types";
 
 export type ReshapedConfig = {
 	themes?: Record<string, PartialUserThemeDefinition>;

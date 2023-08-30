@@ -1,5 +1,5 @@
 import type * as T from "./font.types";
-import { Transformer, TransformedToken } from "../types";
+import type { Transformer, TransformedToken } from "../types";
 import { getVariableName } from "../../utilities/css";
 
 const transformedToken: Transformer<T.Token> = (name, token) => {

@@ -7,7 +7,8 @@ export type PartialDeep<T> = T extends Primitive
 
 export type PublicOptions = {
 	isPrivate?: boolean;
-	outputPath: string;
 	themeOptions?: ReshapedConfig["themeOptions"];
 };
+
 export type PrivateOptions = PublicOptions & { isFragment?: boolean };
+export type CLIOptions = PrivateOptions & { outputPath: string };

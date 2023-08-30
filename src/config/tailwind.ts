@@ -1,9 +1,9 @@
 import reshapedDefinition from "cli/theming/definitions/reshaped";
 import baseDefinition from "cli/theming/definitions/base";
-import { camelToKebab } from "cli/utilities/string";
-import { bgWithDynamicForeground } from "cli/utilities/color";
-import mergeDefinitions from "cli/theming/utilities/mergeDefinitions";
-import { UserThemeDefinition } from "cli/theming/tokens/types";
+import { camelToKebab } from "utilities/string";
+import { bgWithDynamicForeground } from "utilities/color";
+import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
+import { UserThemeDefinition } from "themes/_generator/tokens/types";
 
 export const getTheme = (theme?: UserThemeDefinition) => {
 	const config: Record<

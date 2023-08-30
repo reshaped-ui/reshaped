@@ -46,17 +46,7 @@ program
 
 		console.log(chalk.blue("Processing Reshaped themes..."));
 		const config = importJSConfig(configPath);
-		const { themes, themeFragments } = config;
-		const themeOptions = {
-			...config.themeOptions,
-			generateOnColorsFor: [
-				"backgroundNeutral",
-				"backgroundPrimary",
-				"backgroundCritical",
-				"backgroundPositive",
-				...(config.themeOptions?.generateOnColorsFor || []),
-			],
-		};
+		const { themes, themeFragments, themeOptions } = config;
 
 		if (themes) {
 			Object.keys(themes).forEach((themeName) => {
