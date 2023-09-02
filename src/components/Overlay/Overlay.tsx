@@ -17,7 +17,6 @@ const Overlay = (props: T.Props) => {
 	const { active, children, transparent, onClose, className, attributes } = props;
 	const [mounted, setMounted] = React.useState(false);
 	const contentRef = React.useRef<HTMLDivElement | null>(null);
-	const rootRef = React.useRef<HTMLDivElement | null>(null);
 	const isMouseDownValidRef = React.useRef(false);
 	const releaseFocusRef = React.useRef<ReturnType<typeof trapFocus> | null>(null);
 	const { lockScroll, unlockScroll } = useScrollLock();
@@ -110,25 +109,30 @@ const Overlay = (props: T.Props) => {
 	if (!rendered || !mounted) return null;
 
 	return (
-		<Portal scopeRef={rootRef}>
-			<div
-				{...attributes}
-				ref={rootRef}
-				role="button"
-				tabIndex={-1}
-				className={rootClassNames}
-				onMouseDown={handleMouseDown}
-				onMouseUp={handleMouseUp}
-				onTransitionEnd={handleTransitionEnd}
-			>
-				<div className={s.wrapper}>
-					<div className={s.inner}>
-						<div className={s.content} ref={contentRef}>
-							{typeof children === "function" ? children({ active: visible }) : children}
+		<Portal>
+			<Portal.Scope<HTMLDivElement>>
+				{(ref) => (
+					<div
+						{...attributes}
+						ref={ref}
+						role="button"
+						tabIndex={-1}
+						className={rootClassNames}
+						onMouseDown={handleMouseDown}
+						onMouseUp={handleMouseUp}
+						onTransitionEnd={handleTransitionEnd}
+					>
+						<div className={s.wrapper}>
+							<div className={s.inner}>
+								<div className={s.content} ref={contentRef}>
+									{typeof children === "function" ? children({ active: visible }) : children}
+								</div>
+							</div>
+							P
 						</div>
 					</div>
-				</div>
-			</div>
+				)}
+			</Portal.Scope>
 		</Portal>
 	);
 };

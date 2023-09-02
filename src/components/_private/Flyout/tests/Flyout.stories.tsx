@@ -1,4 +1,5 @@
 import React from "react";
+import { Example } from "utilities/storybook";
 import View from "components/View";
 import Theme from "components/Theme";
 import Button from "components/Button";
@@ -114,6 +115,34 @@ export const testWidthOverflowOnMobile = () => (
 		<button type="button">Item 2</button>
 		<button type="button">Close</button>
 	</Demo>
+);
+
+export const testInsideScrollArea = () => (
+	<Example>
+		<Example.Item title="should move the content on area scroll">
+			<div style={{ overflow: "scroll", height: 200, margin: 40, position: "relative" }}>
+				<Flyout triggerType="click" position="bottom-start">
+					<Flyout.Trigger>{(attributes) => <button {...attributes}>Foo</button>}</Flyout.Trigger>
+					<Flyout.Content>
+						<div
+							style={{
+								background: "var(--rs-color-background-elevation-overlay)",
+								padding: "var(--rs-unit-x4)",
+								height: 100,
+								width: 160,
+								borderRadius: "var(--rs-unit-radius-medium)",
+								border: "1px solid var(--rs-color-border-neutral-faded)",
+								boxSizing: "border-box",
+							}}
+						>
+							{"Content"}
+						</div>
+					</Flyout.Content>
+				</Flyout>
+				<View height="300px" backgroundColor="neutral-faded" />
+			</div>
+		</Example.Item>
+	</Example>
 );
 
 export const widthTrigger = () => (
