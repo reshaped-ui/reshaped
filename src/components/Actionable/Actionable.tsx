@@ -28,6 +28,7 @@ const Actionable = (props: T.Props, ref: T.Ref) => {
 		fullWidth && s["--full-width"]
 	);
 	const rootAttributes: T.Props["attributes"] = { ...attributes };
+	const repeatRef = React.useRef(false);
 	const hasClickHandler = onClick || (attributes?.onClick as T.Props["onClick"]);
 	const hasFocusHandler = attributes?.onFocus || attributes?.onBlur;
 	const isLink = Boolean(href || attributes?.href);
@@ -54,23 +55,33 @@ const Actionable = (props: T.Props, ref: T.Ref) => {
 
 	const handlePress: T.Props["onClick"] = (event) => {
 		if (disabled) return;
+		/**
+		 * - Holding enter keep onClick getting triggered
+		 * - Storybook environment is triggering onClick twice on each enter press
+		 */
+		if (repeatRef.current) return;
 
 		onClick?.(event);
 		attributes?.onClick?.(event as any);
 	};
 
-	const handleClick = (event: React.MouseEvent<HTMLElement>) => handlePress(event);
-
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
 		const simulatingButton = rootAttributes.role === "button";
 
-		if (!simulatingButton || isLink) return;
+		// These cases are handled correctly by the browsers
+		if (simulatingButton || isLink) return;
 		const isSpace = event.key === " ";
 		const isEnter = event.key === "Enter";
 		if (!isSpace && !isEnter) return;
 
 		event.preventDefault();
 		handlePress(event);
+
+		repeatRef.current = true;
+	};
+
+	const handleKeyUp = () => {
+		repeatRef.current = false;
 	};
 
 	return (
@@ -79,8 +90,9 @@ const Actionable = (props: T.Props, ref: T.Ref) => {
 			// rootAttributes can receive ref from Flyout
 			{...rootAttributes}
 			className={rootClassNames}
-			onClick={handleClick}
+			onClick={handlePress}
 			onKeyDown={handleKeyDown}
+			onKeyUp={handleKeyUp}
 		>
 			{children}
 		</TagName>

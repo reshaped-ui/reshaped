@@ -5,28 +5,42 @@ import ReactDOM from "react-dom";
 import Theme from "components/Theme";
 import type * as T from "./Portal.types";
 
-const PortalContext = React.createContext<T.Context>({ scopeRef: undefined });
+const PortalScopeContext = React.createContext<T.Context>({} as T.Context);
 
-export const usePortal = () => {
-	return React.useContext(PortalContext);
+export const usePortalScope = () => {
+	return React.useContext(PortalScopeContext);
 };
 
 /**
  * Disclaimer: Works only for components that don't show the portal immediately
  * That gives Portal time to receive scope on first render
  */
-const PortalProvider = (props: T.Props): JSX.Element => {
-	const { children, scopeRef } = props;
-	const portal = usePortal();
-	const nextScopeRef = scopeRef || portal.scopeRef;
+const Portal = (props: T.Props): JSX.Element => {
+	const { children, targetRef } = props;
+	/**
+	 * Check for parent portal to render inside it
+	 * To avoid z-iondex issues
+	 * Example:
+	 * Dropdown rendered on the page should render under the modal
+	 * Dropdown inside the modal should render above it
+	 */
+	const portal = usePortalScope();
+	const nextScopeRef = targetRef || portal.scopeRef;
 
-	return ReactDOM.createPortal(
-		<PortalContext.Provider value={{ scopeRef: nextScopeRef }}>
-			{/* Preserve the current theme when rendered in body */}
-			<Theme>{children}</Theme>
-		</PortalContext.Provider>,
-		portal.scopeRef?.current || document.body
-	);
+	/* Preserve the current theme when rendered in body */
+	return ReactDOM.createPortal(<Theme>{children}</Theme>, nextScopeRef?.current || document.body);
 };
 
-export default PortalProvider;
+function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>) {
+	const { children } = props;
+	const ref = React.useRef<T | null>(null);
+
+	return (
+		<PortalScopeContext.Provider value={{ scopeRef: ref }}>
+			{children(ref)}
+		</PortalScopeContext.Provider>
+	);
+}
+
+Portal.Scope = PortalScope;
+export default Portal;

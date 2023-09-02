@@ -1,7 +1,7 @@
 import React from "react";
 import useRTL from "hooks/useRTL";
-import { usePortal } from "components/_private/Portal";
 import { onNextFrame } from "utilities/animation";
+import { getClosestScrollableParent } from "utilities/dom";
 
 /**
  * Typings
@@ -33,13 +33,13 @@ type FlyoutOptions = {
 	position: FlyoutPosition;
 	rtl: boolean;
 	forcePosition?: boolean;
-	isInsidePortal: boolean;
 };
 type PositionStyles = Record<"left" | "top" | "width" | "height", number>;
 
 type CalculatePosition = (
 	originBounds: ClientRect,
 	targetBounds: ClientRect,
+	boundsDelta: ClientRect,
 	options: FlyoutOptions
 ) => {
 	styles: PositionStyles;
@@ -140,8 +140,8 @@ const fullyVisible = (bounds: PositionStyles) => {
 /**
  * Calculate styles for the current position
  */
-const calculatePosition: CalculatePosition = (originBounds, targetBounds, options) => {
-	const { position: passedPosition, rtl, width, isInsidePortal } = options;
+const calculatePosition: CalculatePosition = (originBounds, targetBounds, boundsDelta, options) => {
+	const { position: passedPosition, rtl, width } = options;
 	let left = 0;
 	let top = 0;
 
@@ -219,9 +219,8 @@ const calculatePosition: CalculatePosition = (originBounds, targetBounds, option
 		throw Error(`[Reshaped, flyout]: ${position} position is not valid`);
 	}
 
-	// When rendered inside portal, we don't need to accommodate for the page scroll
-	top = Math.round(top + (isInsidePortal ? 0 : window.pageYOffset || 0));
-	left = Math.round(left + (isInsidePortal ? 0 : window.pageXOffset || 0));
+	top = Math.round(top + (window.pageYOffset || 0) - boundsDelta.top);
+	left = Math.round(left + (window.pageXOffset || 0) - boundsDelta.left);
 	let widthStyle = Math.ceil(targetBounds.width);
 	const height = Math.ceil(targetBounds.height);
 
@@ -287,7 +286,9 @@ const flyout: Flyout = (origin, target, options) => {
 	document.body.appendChild(targetClone);
 
 	const targetBounds = targetClone.getBoundingClientRect();
-	let calculated = calculatePosition(originBounds, targetBounds, options);
+	const scrollableParent = getClosestScrollableParent(origin);
+	const boundsDelta = scrollableParent.getBoundingClientRect();
+	let calculated = calculatePosition(originBounds, targetBounds, boundsDelta, options);
 
 	if (!fullyVisible(calculated.styles) && !forcePosition) {
 		const order = getPositionOrder(position);
@@ -302,7 +303,7 @@ const flyout: Flyout = (origin, target, options) => {
 					position: currentPosition,
 				};
 
-				const tested = calculatePosition(originBounds, targetBounds, calculateOptions);
+				const tested = calculatePosition(originBounds, targetBounds, boundsDelta, calculateOptions);
 
 				if (fullyVisible(tested.styles)) {
 					calculated = tested;
@@ -348,8 +349,6 @@ const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState =>
 
 const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 	const { position: defaultPosition = "bottom", forcePosition, width } = options;
-	const { scopeRef } = usePortal();
-	const isInsidePortal = !!scopeRef?.current;
 	const [isRTL] = useRTL();
 	const [state, dispatch] = React.useReducer(flyoutReducer, {
 		position: defaultPosition,
@@ -381,11 +380,10 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 			position: defaultPosition,
 			forcePosition,
 			rtl: isRTL,
-			isInsidePortal,
 		});
 
 		dispatch({ type: "position", payload: nextFlyoutData });
-	}, [originRef, targetRef, defaultPosition, isRTL, forcePosition, width, isInsidePortal]);
+	}, [originRef, targetRef, defaultPosition, isRTL, forcePosition, width]);
 
 	React.useEffect(() => {
 		if (state.status === "rendered") updatePosition();
