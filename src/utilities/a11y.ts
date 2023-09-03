@@ -161,12 +161,22 @@ export const trapFocus = (() => {
 		const isSelectionMenu = mode === "selection-menu";
 		const isTabMode = isDialog || isContentMenu;
 		const isArrowsMode = mode === "action-menu" || isSelectionMenu;
+		const focusable = getFocusableElements(root, includeTrigger ? triggerElement : undefined);
 		let chainId: number;
+
+		// Re-focus on the first element if content has changed
+		const observer = new MutationObserver(() => {
+			const focusable = getFocusableElements(root, includeTrigger ? triggerElement : undefined);
+
+			if (!focusable.length) return;
+			focusElement(focusable[0], mode);
+		});
 
 		const release: Release = (releaseOptions = {}) => {
 			const { withoutFocusReturn } = releaseOptions;
 
 			chain.removePreviousTill(chainId, (item) => document.body.contains(item.data.trigger));
+			observer.disconnect();
 
 			if (triggerElement) {
 				triggerElement.focus({ preventScroll: withoutFocusReturn || !isKeyboardMode() });
@@ -228,7 +238,9 @@ export const trapFocus = (() => {
 		if (resetListeners) resetListeners();
 		if (isDialog) srTrap = trapScreenReader(root);
 
-		const focusable = getFocusableElements(root, includeTrigger ? triggerElement : undefined);
+		document.addEventListener("keydown", handleKeyDown);
+		resetListeners = () => document.removeEventListener("keydown", handleKeyDown);
+		observer.observe(root, { childList: true, subtree: true });
 
 		if (!focusable.length) return null;
 
@@ -239,9 +251,6 @@ export const trapFocus = (() => {
 
 			focusElement(focusable[0], mode);
 		}
-
-		document.addEventListener("keydown", handleKeyDown);
-		resetListeners = () => document.removeEventListener("keydown", handleKeyDown);
 
 		return release;
 	};

@@ -127,7 +127,6 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	}, [clearTimer, timerRef, handleClose]);
 
 	const handleTriggerClick = React.useCallback(() => {
-		console.log("HEHEHEHH", status);
 		if (status === "idle") {
 			handleOpen();
 		} else {

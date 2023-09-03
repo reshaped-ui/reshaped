@@ -61,7 +61,12 @@ const FlyoutContent = (props: T.ContentProps) => {
 		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 		<div
 			className={contentClassNames}
-			style={{ ...styles, "--rs-flyout-gap": contentGap } as React.CSSProperties}
+			style={
+				{
+					...styles,
+					"--rs-flyout-gap": contentGap,
+				} as React.CSSProperties
+			}
 			ref={flyoutElRef}
 			onTransitionEnd={handleTransitionEnd}
 			onMouseEnter={triggerType === "hover" ? handleMouseEnter : undefined}

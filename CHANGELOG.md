@@ -6,4 +6,5 @@
 - Select: Fixed disabled icon color
 
 - Actionable: Fixed repeating onClicks for Enter
-- Popover, DropdownMenu: Added rendering support inside scrollable areas
+- Popover, DropdownMenu, Autocomplete: Added rendering support inside scrollable areas
+- Popover, DropdownMenu, Autocomplete: Added trapFocus support for dynamic data rendering
