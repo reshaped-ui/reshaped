@@ -234,6 +234,26 @@ export const selection = () => (
 	</Example>
 );
 
+export const navigation = () => (
+	<Example>
+		<Example.Item title="href, no onChange">
+			<Tabs value="2">
+				<Tabs.List>
+					<Tabs.Item value="1" href="#item-1" icon={IconZap}>
+						Item 1
+					</Tabs.Item>
+					<Tabs.Item value="2" href="#item-2" icon={IconZap}>
+						Long item 2
+					</Tabs.Item>
+					<Tabs.Item value="3" href="#item-3" icon={IconZap}>
+						Very long item 3
+					</Tabs.Item>
+				</Tabs.List>
+			</Tabs>
+		</Example.Item>
+	</Example>
+);
+
 export const edgeCases = () => (
 	<Example>
 		<Example.Item title="Viewport overflow">

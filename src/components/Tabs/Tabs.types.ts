@@ -1,5 +1,4 @@
 import React from "react";
-import { ActionableProps } from "components/Actionable";
 import { IconProps } from "components/Icon";
 import type * as G from "types/global";
 
@@ -15,13 +14,8 @@ export type ItemProps = {
 	value: string;
 	children?: React.ReactNode;
 	icon?: IconProps["svg"];
-};
-
-export type PrivateItemProps = Partial<ItemProps> & {
-	value: string;
-	active?: boolean;
-	visuallySelected?: boolean;
-	attributes?: ActionableProps["attributes"];
+	href?: string;
+	attributes?: G.Attributes<"div", Props>;
 };
 
 export type ListProps = {
@@ -69,4 +63,8 @@ export type Context = Pick<
 	value?: string;
 	setDefaultValue: (value: string) => void;
 	id: string;
+	elActiveRef: React.MutableRefObject<HTMLDivElement | null>;
+	elPrevActiveRef: React.MutableRefObject<HTMLDivElement | null>;
+	selection: SelectionState;
+	setSelection: React.Dispatch<React.SetStateAction<SelectionState>>;
 };

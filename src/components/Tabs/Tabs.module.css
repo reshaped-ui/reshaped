@@ -20,7 +20,7 @@
 	z-index: 2;
 }
 
-.item {
+.listItem {
 	--rs-tabs-gap: var(--rs-unit-x4);
 
 	flex-shrink: 0;
@@ -98,7 +98,7 @@
 
 .--selector-animated {
 	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
-	transition-property: transform, width, height;
+	transition-property: transform, height;
 }
 
 .next,
@@ -172,7 +172,7 @@
 		align-items: center;
 	}
 
-	& .item + .item {
+	& .listItem + .listItem {
 		margin-inline-start: var(--rs-tabs-gap);
 	}
 
@@ -216,13 +216,15 @@
 		flex-direction: column;
 	}
 
-	& .item {
+	& .listItem {
 		--rs-tabs-gap: var(--rs-unit-x1);
+	}
 
+	& .item {
 		padding-inline-end: var(--rs-unit-x1);
 	}
 
-	& .item + .item {
+	& .listItem + .listItem {
 		margin-top: var(--rs-tabs-gap);
 	}
 
@@ -275,8 +277,8 @@
 	}
 }
 
-.--variant-pills .item,
-.--variant-pills-elevated .item {
+.--variant-pills .listItem,
+.--variant-pills-elevated .listItem {
 	--rs-tabs-gap: var(--rs-unit-x1);
 }
 
@@ -349,7 +351,7 @@
 	display: flex;
 }
 
-.--item-width-equal .item {
+.--item-width-equal .listItem {
 	flex-grow: 1;
 	flex-basis: 0;
 	margin: 0;
