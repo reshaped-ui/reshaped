@@ -19,20 +19,29 @@ import { useTabs } from "./TabsContext";
 import type * as T from "./Tabs.types";
 import s from "./Tabs.module.css";
 
+const findParentItem = (el: HTMLElement | null, rootEl: HTMLElement): HTMLElement | null => {
+	if (el === rootEl || !el) return null;
+	if (el.classList.contains(s.listItem)) return el;
+	return findParentItem(el.parentElement, rootEl);
+};
+
 const TabsList = (props: T.ListProps) => {
 	const { children, className, attributes } = props;
-	const { value, setDefaultValue, itemWidth, variant, name, direction, size } = useTabs();
+	const {
+		value,
+		setDefaultValue,
+		itemWidth,
+		variant,
+		name,
+		direction,
+		size,
+		selection,
+		setSelection,
+		elActiveRef,
+		elPrevActiveRef,
+	} = useTabs();
 	const [rtl] = useRTL();
 	const elScrollableRef = React.useRef<HTMLDivElement | null>(null);
-	const elActiveRef = React.useRef<HTMLElement | null>(null);
-	const elPrevActiveRef = React.useRef<HTMLElement | null>(elActiveRef.current);
-	const [selection, setSelection] = React.useState<T.SelectionState>({
-		scaleX: 0,
-		scaleY: 0,
-		left: 0,
-		top: 0,
-		status: "idle",
-	});
 	const [cutOffSide, setCutOffSide] = React.useState<"start" | "end" | "both" | null>(null);
 	const rootClassNames = classNames(
 		s.root,
@@ -73,12 +82,17 @@ const TabsList = (props: T.ListProps) => {
 	};
 
 	const getElementSelectionStyle = React.useCallback(
-		(el: HTMLElement): Pick<T.SelectionState, "scaleX" | "scaleY" | "left" | "top"> => {
+		(el: HTMLElement): Pick<T.SelectionState, "scaleX" | "scaleY" | "left" | "top"> | null => {
+			if (!elScrollableRef.current) return null;
+
+			const itemEl = findParentItem(el, elScrollableRef.current);
+			if (!itemEl) return null;
+
 			return {
-				scaleX: el.clientWidth,
-				scaleY: el.clientHeight,
-				top: el.offsetTop,
-				left: el.offsetLeft,
+				scaleX: itemEl.clientWidth,
+				scaleY: itemEl.clientHeight,
+				top: itemEl.offsetTop,
+				left: itemEl.offsetLeft,
 			};
 		},
 		[]
@@ -117,16 +131,19 @@ const TabsList = (props: T.ListProps) => {
 
 	useIsomorphicLayoutEffect(() => {
 		// Do not update selection on mount, until we receive new activeId
-		if (elActiveRef.current === elPrevActiveRef.current) return;
-		const selectionStyle = getElementSelectionStyle(elPrevActiveRef.current!);
+		if (!elPrevActiveRef.current || elPrevActiveRef.current === elActiveRef.current) return;
+		const selectionStyle = getElementSelectionStyle(elPrevActiveRef.current);
+
+		if (!selectionStyle) return;
 		setSelection({ ...selectionStyle, status: "prepared" });
 	}, [value, getElementSelectionStyle]);
 
 	useIsomorphicLayoutEffect(() => {
-		if (selection.status === "prepared") {
-			const selectionStyle = getElementSelectionStyle(elActiveRef.current!);
-			setSelection({ ...selectionStyle, status: "animated" });
-		}
+		if (selection.status !== "prepared" || !elActiveRef.current) return;
+		const selectionStyle = getElementSelectionStyle(elActiveRef.current);
+
+		if (!selectionStyle) return;
+		setSelection({ ...selectionStyle, status: "animated" });
 	}, [selection]);
 
 	useIsomorphicLayoutEffect(() => {
@@ -164,28 +181,13 @@ const TabsList = (props: T.ListProps) => {
 	return (
 		<div {...attributes} className={rootClassNames}>
 			<div className={s.inner} ref={elScrollableRef}>
-				{/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
 				<div className={s.list} role="tablist" ref={hotkeysRef}>
-					{React.Children.map(children, (child: any) => {
-						if (!child || child.type !== TabsItem) return <div className={s.item}>{child}</div>;
-						const childValue = child.props.value;
-						const isActive = childValue === value;
-
+					{React.Children.map(children, (child: any, index: number) => {
+						if (!child) return null;
 						return (
-							<TabsItem
-								{...child.props}
-								ref={(node) => {
-									if (!node) return;
-									if (isActive) {
-										elPrevActiveRef.current = elActiveRef.current || node;
-										elActiveRef.current = node;
-									}
-								}}
-								value={childValue}
-								key={childValue}
-								active={isActive}
-								visuallySelected={isActive && selection.status === "idle"}
-							/>
+							<div className={s.listItem} key={child.props.value || child.key || index}>
+								{child}
+							</div>
 						);
 					})}
 
