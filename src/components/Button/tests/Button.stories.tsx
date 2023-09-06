@@ -529,6 +529,80 @@ export const disabled = () => (
 	</Example>
 );
 
+export const group = () => (
+	<Example>
+		<Example.Item title="with icon">
+			<Button.Group>
+				<Button>Submit</Button>
+				<Button icon={IconZap} />
+			</Button.Group>
+		</Example.Item>
+		<Example.Item title="variant: solid">
+			<View gap={2}>
+				{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color}>One</Button>
+						<Button color={color}>Two</Button>
+						<Button color={color}>Three</Button>
+					</Button.Group>
+				))}
+			</View>
+		</Example.Item>
+		<Example.Item title="variant: outline">
+			<View gap={2}>
+				{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color} variant="outline">
+							One
+						</Button>
+						<Button color={color} variant="outline">
+							Two
+						</Button>
+						<Button color={color} variant="outline">
+							Three
+						</Button>
+					</Button.Group>
+				))}
+			</View>
+		</Example.Item>
+		<Example.Item title="variant: faded">
+			<View gap={2}>
+				{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color} variant="faded">
+							One
+						</Button>
+						<Button color={color} variant="faded">
+							Two
+						</Button>
+						<Button color={color} variant="faded">
+							Three
+						</Button>
+					</Button.Group>
+				))}
+			</View>
+		</Example.Item>
+
+		<Example.Item title="variant: ghost">
+			<View gap={2}>
+				{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color} variant="ghost">
+							One
+						</Button>
+						<Button color={color} variant="ghost">
+							Two
+						</Button>
+						<Button color={color} variant="ghost">
+							Three
+						</Button>
+					</Button.Group>
+				))}
+			</View>
+		</Example.Item>
+	</Example>
+);
+
 export const aligner = () => (
 	<Example>
 		<Example.Item title="aligner: all">

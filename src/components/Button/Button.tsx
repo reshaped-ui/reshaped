@@ -3,6 +3,7 @@ import { classNames, responsiveClassNames, responsivePropDependency } from "util
 import Icon from "components/Icon";
 import Loader from "components/Loader";
 import Actionable, { ActionableRef } from "components/Actionable";
+import ButtonGroup from "./ButtonGroup";
 import ButtonAligner from "./ButtonAligner";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";
@@ -90,6 +91,7 @@ const ButtonBase = (props: T.Props, ref: ActionableRef) => {
 };
 
 const Button = React.forwardRef(ButtonBase) as T.Export;
+Button.Group = ButtonGroup;
 Button.Aligner = ButtonAligner;
 
 export default Button;
