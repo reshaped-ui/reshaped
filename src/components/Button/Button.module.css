@@ -1,10 +1,9 @@
 .root {
-	--rs-button-border-width: 1px;
-
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform;
 	padding: calc(var(--rs-button-padding-v) - var(--rs-button-border-width))
 		calc(var(--rs-button-padding-h) - var(--rs-button-border-width));
+	border-radius: var(--rs-button-radius);
 	cursor: pointer;
 	position: relative;
 	z-index: 0;
@@ -99,8 +98,7 @@
 		--rs-button-icon-gap: var(--rs-unit-x1);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
-
-		border-radius: var(--rs-unit-radius-small);
+		--rs-button-radius: var(--rs-unit-radius-small);
 	}
 
 	@value medium {
@@ -110,8 +108,7 @@
 		--rs-button-icon-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
-
-		border-radius: var(--rs-unit-radius-small);
+		--rs-button-radius: var(--rs-unit-radius-small);
 	}
 
 	@value large {
@@ -121,8 +118,7 @@
 		--rs-button-icon-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
-
-		border-radius: var(--rs-unit-radius-medium);
+		--rs-button-radius: var(--rs-unit-radius-medium);
 	}
 
 	@value xlarge {
@@ -132,8 +128,7 @@
 		--rs-button-icon-gap: var(--rs-unit-x3);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
-
-		border-radius: var(--rs-unit-radius-medium);
+		--rs-button-radius: var(--rs-unit-radius-medium);
 	}
 }
 
@@ -171,6 +166,8 @@
 }
 
 .root.--variant-solid {
+	--rs-button-border-width: 0px;
+
 	&.--color-neutral {
 		background-color: var(--rs-color-background-neutral);
 		color: var(--rs-color-foreground-neutral);
@@ -212,8 +209,6 @@
 	}
 
 	&.--color-white {
-		--rs-button-border-width: 0px;
-
 		background-color: var(--rs-color-white);
 		color: var(--rs-color-black);
 
@@ -230,8 +225,6 @@
 	}
 
 	&.--color-black {
-		--rs-button-border-width: 0px;
-
 		background-color: var(--rs-color-black);
 		color: var(--rs-color-white);
 
@@ -249,7 +242,11 @@
 }
 
 .root.--variant-faded {
+	--rs-button-border-width: 0px;
+
 	&.--color-neutral {
+		--rs-button-border-width: 1px;
+
 		color: var(--rs-color-foreground-neutral);
 		background-color: var(--rs-color-background-elevation-base);
 		border-color: var(--rs-color-border-neutral-faded);
@@ -352,6 +349,8 @@
 }
 
 .root.--variant-outline {
+	--rs-button-border-width: 1px;
+
 	&.--color-neutral {
 		background-color: transparent;
 		color: var(--rs-color-foreground-neutral);
@@ -445,6 +444,8 @@
 }
 
 .root.--variant-ghost {
+	--rs-button-border-width: 0px;
+
 	padding-left: var(--rs-button-padding-h-ghost);
 	padding-right: var(--rs-button-padding-h-ghost);
 
@@ -553,6 +554,42 @@
 
 		&:active {
 			transform: none !important;
+		}
+	}
+}
+
+/* Button group */
+
+.group .root {
+	border-radius: 0;
+
+	&:first-child {
+		border-start-start-radius: var(--rs-button-radius);
+		border-end-start-radius: var(--rs-button-radius);
+	}
+
+	&:not(:first-child) {
+		border-inline-start: 1px solid var(--rs-button-group-separator-color);
+	}
+
+	&:last-child {
+		border-start-end-radius: var(--rs-button-radius);
+		border-end-end-radius: var(--rs-button-radius);
+	}
+
+	@each $color in neutral, positive, critical, primary {
+		&.--variant-solid.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color));
+		}
+
+		&.--variant-ghost.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
+		}
+	}
+
+	@each $color in positive, critical, primary {
+		&.--variant-faded.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
 		}
 	}
 }

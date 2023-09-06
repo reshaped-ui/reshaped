@@ -22,6 +22,12 @@ type BaseProps = {
 
 export type Props = Omit<ActionableProps, keyof BaseProps> & BaseProps;
 
+export type GroupProps = {
+	children: React.ReactNode;
+	className?: G.ClassName;
+	attributes?: G.Attributes<"div", Props>;
+};
+
 type AlignerPosition = "start" | "end" | "top" | "bottom";
 
 export type AlignerProps = {
@@ -33,4 +39,5 @@ export type AlignerProps = {
 
 export type Export = React.ForwardRefExoticComponent<Props> & {
 	Aligner: React.ComponentType<AlignerProps>;
+	Group: React.ComponentType<GroupProps>;
 };
