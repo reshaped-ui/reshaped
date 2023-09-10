@@ -27,6 +27,7 @@ const toastReducer: T.Reducer = (state, action) => {
 
 			positions.forEach((position) => {
 				nextState[position] = nextState[position].map((item) => {
+					if (item.status !== "entering") return item;
 					return item.id === showId ? { ...item, status: "entered" } : item;
 				});
 			});
@@ -64,6 +65,7 @@ const ToastProvider = (props: T.ProviderProps) => {
 	const add = React.useCallback<T.Context["add"]>((toastProps) => {
 		const id = generateId();
 
+		console.log("add");
 		dispatch({ type: "add", payload: { toastProps, id } });
 		return id;
 	}, []);
@@ -73,6 +75,7 @@ const ToastProvider = (props: T.ProviderProps) => {
 	}, []);
 
 	const hide = React.useCallback((id: string) => {
+		console.log("hide");
 		dispatch({ type: "hide", payload: { id } });
 	}, []);
 

@@ -14,4 +14,6 @@
 - Tabs: Added href support for Tabs.Item
 - Tabs: Added attributes support for Tabs.Item
 
+- Toast: Fixed immediate close
+
 - Figma: Fixed dark mode relations

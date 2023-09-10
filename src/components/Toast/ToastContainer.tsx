@@ -66,6 +66,8 @@ const ToastContainer = (props: T.ContainerProps) => {
 			setToastHeight(wrapperRef.current.clientHeight);
 		}
 
+		console.log("show");
+
 		show(id);
 		startTimer();
 	}, [show, id, startTimer]);
