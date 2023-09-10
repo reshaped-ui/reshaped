@@ -139,6 +139,9 @@
 		"cssnano": "6.0.1",
 		"postcss-custom-media": "8.0.2"
 	},
+	"resolutions": {
+		"jackspeak": "2.1.1"
+	},
 	"size-limit": [
 		{
 			"name": "JS",
