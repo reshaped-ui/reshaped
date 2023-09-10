@@ -79,7 +79,7 @@
 		"defaults and not IE 11"
 	],
 	"devDependencies": {
-		"@size-limit/preset-big-lib": "8.2.6",
+		"@size-limit/preset-big-lib": "9.0.0",
 		"@storybook/addon-a11y": "7.4.0",
 		"@storybook/react": "7.4.0",
 		"@storybook/react-vite": "7.4.0",
