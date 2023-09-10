@@ -141,6 +141,7 @@ export const testInsideScrollArea = () => (
 				</Flyout>
 				<View height="300px" backgroundColor="neutral-faded" />
 			</div>
+			<div style={{ height: 2000 }} />
 		</Example.Item>
 	</Example>
 );

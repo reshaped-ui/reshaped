@@ -592,6 +592,30 @@
 			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
 		}
 	}
+
+	&.--variant-solid.--color-black {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.28);
+	}
+
+	&.--variant-faded.--color-black {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.14);
+	}
+
+	&.--variant-ghost.--color-black {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.2);
+	}
+
+	&.--variant-solid.--color-white {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.2);
+	}
+
+	&.--variant-faded.--color-white {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.2);
+	}
+
+	&.--variant-ghost.--color-white {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.28);
+	}
 }
 
 /* Button aligner */

@@ -39,7 +39,7 @@ type PositionStyles = Record<"left" | "top" | "width" | "height", number>;
 type CalculatePosition = (
 	originBounds: ClientRect,
 	targetBounds: ClientRect,
-	boundsDelta: ClientRect,
+	boundsDelta: { top: number; left: number },
 	options: FlyoutOptions
 ) => {
 	styles: PositionStyles;
@@ -140,7 +140,12 @@ const fullyVisible = (bounds: PositionStyles) => {
 /**
  * Calculate styles for the current position
  */
-const calculatePosition: CalculatePosition = (originBounds, targetBounds, boundsDelta, options) => {
+const calculatePosition: CalculatePosition = (
+	originBounds,
+	targetBounds,
+	parentOffset,
+	options
+) => {
 	const { position: passedPosition, rtl, width } = options;
 	let left = 0;
 	let top = 0;
@@ -219,8 +224,8 @@ const calculatePosition: CalculatePosition = (originBounds, targetBounds, bounds
 		throw Error(`[Reshaped, flyout]: ${position} position is not valid`);
 	}
 
-	top = Math.round(top + (window.pageYOffset || 0) - boundsDelta.top);
-	left = Math.round(left + (window.pageXOffset || 0) - boundsDelta.left);
+	top = Math.round(top + (window.scrollY || 0) - parentOffset.top);
+	left = Math.round(left + (window.scrollX || 0) - parentOffset.left);
 	let widthStyle = Math.ceil(targetBounds.width);
 	const height = Math.ceil(targetBounds.height);
 
@@ -288,7 +293,13 @@ const flyout: Flyout = (origin, target, options) => {
 	const targetBounds = targetClone.getBoundingClientRect();
 	const scrollableParent = getClosestScrollableParent(origin);
 	const boundsDelta = scrollableParent.getBoundingClientRect();
-	let calculated = calculatePosition(originBounds, targetBounds, boundsDelta, options);
+
+	const parentOffset = {
+		top: boundsDelta.top + document.documentElement.scrollTop - scrollableParent.scrollTop,
+		left: boundsDelta.left + document.documentElement.scrollLeft - scrollableParent.scrollLeft,
+	};
+
+	let calculated = calculatePosition(originBounds, targetBounds, parentOffset, options);
 
 	if (!fullyVisible(calculated.styles) && !forcePosition) {
 		const order = getPositionOrder(position);
@@ -303,7 +314,12 @@ const flyout: Flyout = (origin, target, options) => {
 					position: currentPosition,
 				};
 
-				const tested = calculatePosition(originBounds, targetBounds, boundsDelta, calculateOptions);
+				const tested = calculatePosition(
+					originBounds,
+					targetBounds,
+					parentOffset,
+					calculateOptions
+				);
 
 				if (fullyVisible(tested.styles)) {
 					calculated = tested;
