@@ -204,6 +204,7 @@ export const trapFocus = (() => {
 			const isDown = isArrowsMode && key === DOWN;
 			const isPrev = (isBackTab && isTabMode) || isUp;
 			const isNext = (isNextTab && isTabMode) || isDown;
+			const isFocusedOnTrigger = getActiveElement() === triggerElement;
 			const focusData = getFocusData({
 				root,
 				target: isPrev ? "prev" : "next",
@@ -217,7 +218,7 @@ export const trapFocus = (() => {
 
 			if (hasNavigatedOutside) {
 				// Prevent shift + tab event to avoid focus moving after the trap release
-				if (isBackTab && getActiveElement() !== triggerElement) event.preventDefault();
+				if (isBackTab && !isFocusedOnTrigger) event.preventDefault();
 
 				release();
 				onNavigateOutside?.();
@@ -238,11 +239,11 @@ export const trapFocus = (() => {
 		if (resetListeners) resetListeners();
 		if (isDialog) srTrap = trapScreenReader(root);
 
+		observer.observe(root, { childList: true, subtree: true });
+		if (!focusable.length) return null;
+
 		document.addEventListener("keydown", handleKeyDown);
 		resetListeners = () => document.removeEventListener("keydown", handleKeyDown);
-		observer.observe(root, { childList: true, subtree: true });
-
-		if (!focusable.length) return null;
 
 		// Don't add back to the chain if we're traversing back
 		const tailItem = chain.tailId && chain.get(chain.tailId);
