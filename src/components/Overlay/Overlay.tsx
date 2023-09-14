@@ -128,7 +128,6 @@ const Overlay = (props: T.Props) => {
 									{typeof children === "function" ? children({ active: visible }) : children}
 								</div>
 							</div>
-							P
 						</div>
 					</div>
 				)}

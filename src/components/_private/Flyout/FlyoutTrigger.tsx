@@ -47,7 +47,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		childrenAttributes.onMouseLeave = handleMouseLeave;
 	}
 
-	if ((triggerType === "hover" && trapFocusMode !== "action-menu") || triggerType === "focus") {
+	if (triggerType === "hover" || triggerType === "focus") {
 		childrenAttributes.onFocus = handleFocus;
 		childrenAttributes["aria-describedby"] = id;
 	}

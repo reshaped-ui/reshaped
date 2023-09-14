@@ -10,6 +10,7 @@ import s from "./Theme.module.css";
 
 const Theme = (props: T.Props) => {
 	const { name, defaultName, colorMode, children, className } = props;
+	const [mounted, setMounted] = React.useState(false);
 	const [stateTheme, setStateTheme] = React.useState(defaultName);
 	const globalColorMode = useGlobalColorMode();
 	const parentTheme = useTheme();
@@ -25,13 +26,23 @@ const Theme = (props: T.Props) => {
 	};
 
 	useIsomorphicLayoutEffect(() => {
+		setMounted(true);
+	}, []);
+
+	useIsomorphicLayoutEffect(() => {
 		if (!document || !isRootProvider) return;
+		const hasColorModeApplied = document.documentElement.getAttribute("data-rs-color-mode");
+
 		document.documentElement.setAttribute("data-rs-theme", usedTheme);
-		document.documentElement.setAttribute("data-rs-color-mode", usedColorMode);
+		if (!hasColorModeApplied) {
+			document.documentElement.setAttribute("data-rs-color-mode", usedColorMode);
+		}
 
 		return () => {
 			document.documentElement.removeAttribute("data-rs-theme");
-			document.documentElement.removeAttribute("data-rs-color-mode");
+			if (!hasColorModeApplied) {
+				document.documentElement.removeAttribute("data-rs-color-mode");
+			}
 		};
 	}, [usedTheme, usedColorMode, isRootProvider]);
 
@@ -46,7 +57,10 @@ const Theme = (props: T.Props) => {
 			<div
 				className={rootClassNames}
 				data-rs-theme={isRootProvider ? undefined : usedTheme}
-				data-rs-color-mode={isRootProvider ? undefined : usedColorMode}
+				/**
+				 * Root provider uses theme and color mode from <html>
+				 */
+				data-rs-color-mode={isRootProvider || (!colorMode && !mounted) ? undefined : usedColorMode}
 			>
 				{children}
 			</div>

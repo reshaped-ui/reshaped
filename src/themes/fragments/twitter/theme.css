@@ -1,5 +1,5 @@
 
-			[data-rs-theme="twitter"][data-rs-color-mode="light"], [data-rs-theme="twitter"][data-rs-color-mode="dark"] {
+			[data-rs-theme="twitter"] {
 					--rs-color-background-primary: #1da1f2;
 --rs-color-background-primary-highlighted: #1a90da;
 --rs-color-on-background-primary: #ffffff;

@@ -1,5 +1,5 @@
 
-			[data-rs-theme="slate"][data-rs-color-mode="light"], [data-rs-theme="slate"][data-rs-color-mode="dark"] {
+			[data-rs-theme="slate"] {
 					--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-body: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-weight-regular: 400;

@@ -12,7 +12,9 @@ const Demo = (props: any) => {
 
 	return (
 		<Flyout triggerType="click" position={position} {...rest}>
-			<Flyout.Trigger>{(attributes) => <button {...attributes}>{position}</button>}</Flyout.Trigger>
+			<Flyout.Trigger>
+				{(attributes) => <Button attributes={attributes}>{position}</Button>}
+			</Flyout.Trigger>
 			<Flyout.Content>
 				<div
 					style={{
