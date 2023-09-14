@@ -11,11 +11,10 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode || "light");
 
 	const changeColorMode = React.useCallback((targetMode: T.ColorMode) => {
-		setMode((prevMode) => {
-			// Avoid components styles animating when switching to another color mode
-			if (prevMode !== targetMode) disableTransitions();
-			return targetMode;
-		});
+		// Avoid components styles animating when switching to another color mode
+		disableTransitions();
+		document.documentElement.setAttribute("data-rs-color-mode", targetMode);
+		setMode(targetMode);
 	}, []);
 
 	useIsomorphicLayoutEffect(() => {
@@ -23,6 +22,18 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 			enableTransitions();
 		});
 	}, [mode]);
+
+	/**
+	 * In case color mode was set in html but was not provided to the provider - hydrate the state
+	 * This could happen if we're receiving the mode on the client but before React hydration
+	 */
+	useIsomorphicLayoutEffect(() => {
+		const nextColorMode = document.documentElement.getAttribute("data-rs-color-mode") as
+			| T.ColorMode
+			| undefined;
+
+		if (nextColorMode) changeColorMode(nextColorMode);
+	}, []);
 
 	const value = React.useMemo(
 		() => ({
