@@ -33,6 +33,7 @@ const ThemeSwitch = () => {
 			align="center"
 			gap={2}
 			position="fixed"
+			zIndex={999}
 			insetBottom={2}
 			insetEnd={2}
 			attributes={{ dir: "ltr" }}

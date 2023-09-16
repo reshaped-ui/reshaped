@@ -1,0 +1,19 @@
+.literal {
+	min-width: var(--rs-min-w-s, auto);
+}
+
+.unit {
+	min-width: calc(var(--rs-min-w-s) * var(--rs-unit-x1));
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		.literal--$viewport {
+			min-width: var(--rs-min-w-$viewport);
+		}
+
+		.unit--$viewport {
+			min-width: calc(var(--rs-min-w-$viewport) * var(--rs-unit-x1));
+		}
+	}
+}

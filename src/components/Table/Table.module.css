@@ -1,0 +1,53 @@
+.root {
+	overflow: auto;
+	margin: 0 calc(var(--rs-unit-x4) * -1);
+	padding: 0 var(--rs-unit-x4);
+	mask-image: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0%) 0,
+		rgba(0, 0, 0, 100%) var(--rs-unit-x4),
+		rgba(0, 0, 0, 100%) calc(100% - var(--rs-unit-x4)),
+		rgba(0, 0, 0, 0%) 100%
+	);
+}
+
+.table {
+	border: 1px solid var(--rs-color-border-neutral-faded);
+	min-width: 100%;
+	border-radius: var(--rs-unit-radius-medium);
+	border-collapse: separate;
+}
+
+.cell {
+	padding: var(--rs-unit-x3) var(--rs-unit-x4);
+	text-align: start;
+	vertical-align: top;
+}
+
+.cell:not(:first-child) {
+	border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+}
+
+.row:not(:first-child) .cell {
+	border-top: 1px solid var(--rs-color-border-neutral-faded);
+}
+
+@each $align in start, center, end {
+	.cell--align-$(align) {
+		text-align: $(align);
+	}
+}
+
+.--row-highlighted {
+	background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
+}
+
+.--border-rows {
+	& .table {
+		border: none;
+	}
+
+	& .cell:not(:first-child) {
+		border-inline-start: none;
+	}
+}

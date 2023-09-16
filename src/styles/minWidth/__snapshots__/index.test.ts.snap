@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/MinWidth handles % value 1`] = `
+{
+  "classNames": [
+    "literal",
+  ],
+  "variables": {
+    "--rs-min-w-s": "50%",
+  },
+}
+`;
+
+exports[`Styles/MinWidth handles px value 1`] = `
+{
+  "classNames": [
+    "literal",
+  ],
+  "variables": {
+    "--rs-min-w-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MinWidth handles responsive value 1`] = `
+{
+  "classNames": [
+    "literal",
+    "literal--l",
+  ],
+  "variables": {
+    "--rs-min-w-l": "50%",
+    "--rs-min-w-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MinWidth handles undefined value 1`] = `null`;
+
+exports[`Styles/MinWidth handles unit value 1`] = `
+{
+  "classNames": [
+    "unit",
+  ],
+  "variables": {
+    "--rs-min-w-s": 5,
+  },
+}
+`;
