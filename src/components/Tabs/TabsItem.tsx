@@ -48,6 +48,8 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 		if (href && !onChange) return;
 
 		updateRefs();
+
+		itemRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
 		if (onChange) onChange({ value, name });
 	};
 

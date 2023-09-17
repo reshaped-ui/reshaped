@@ -1,6 +1,6 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import Reshaped from "components/Reshaped";
 import useRTL from "hooks/useRTL";
 
@@ -22,7 +22,9 @@ describe("useRTL", () => {
 			</Reshaped>
 		);
 
-		expect(document.documentElement).toHaveAttribute("dir", "rtl");
+		waitFor(() => {
+			expect(document.documentElement).toHaveAttribute("dir", "rtl");
+		});
 	});
 
 	test("defaults to RTL", () => {

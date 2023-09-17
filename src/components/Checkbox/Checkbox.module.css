@@ -24,6 +24,21 @@
 	background: var(--rs-color-background-elevation-base);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, border-color;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		height: 1.5px;
+		border-radius: 999px;
+		width: var(--rs-unit-x2);
+		background: var(--rs-color-on-background-primary);
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0);
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: opacity, transform;
+	}
 }
 
 .icon {
@@ -48,15 +63,8 @@
 	background: var(--rs-color-background-primary);
 
 	&::before {
-		content: "";
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		height: 2px;
-		border-radius: 999px;
-		width: var(--rs-unit-x2);
-		background: var(--rs-color-on-background-primary);
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
 	}
 }
 

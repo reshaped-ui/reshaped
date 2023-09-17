@@ -15,7 +15,8 @@
 		"outDir": "./dist",
 		"baseUrl": "./src",
 		"rootDir": "./src",
-		"paths": { "*": ["*"] }
+		"paths": { "*": ["*"] },
+		"types": ["node", "jest", "@testing-library/jest-dom"]
 	},
 	"exclude": ["node_modules", "dist", "tools"]
 }
