@@ -1,23 +1,24 @@
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames, responsiveVariables } from "utilities/helpers";
 import getWidthStyles from "styles/width";
 import getMinWidthStyles from "styles/minWidth";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
 
-const TableCell = (props: T.CellProps) => {
-	const { rowSpan, colSpan, align, children, attributes } = props;
-	const cellClassNames = classNames(s.cell, align && s[`cell--align-${align}`]);
-
-	return (
-		<td {...attributes} className={cellClassNames} rowSpan={rowSpan} colSpan={colSpan}>
-			{children}
-		</td>
-	);
-};
-
-const TableHeading = (props: T.HeadingProps) => {
-	const { width, minWidth, rowSpan, colSpan, align, children, attributes } = props;
+const TableCellPrivate = (props: T.PrivateCellProps) => {
+	const {
+		minWidth,
+		rowSpan,
+		colSpan,
+		align,
+		tagName: TagName,
+		padding,
+		paddingInline,
+		paddingBlock,
+		children,
+		attributes,
+	} = props;
+	const width = props.width === "auto" ? "0px" : props.width;
 	const widthStyles = getWidthStyles(width);
 	const minWidthStyles = getMinWidthStyles(minWidth || width);
 	const headingClassNames = classNames(
@@ -26,10 +27,15 @@ const TableHeading = (props: T.HeadingProps) => {
 		minWidthStyles?.classNames,
 		align && s[`cell--align-${align}`]
 	);
-	const headingStyle = { ...widthStyles?.variables, ...minWidthStyles?.variables };
+	const headingStyle = {
+		...widthStyles?.variables,
+		...minWidthStyles?.variables,
+		...responsiveVariables("--rs-table-p-vertical", paddingBlock ?? padding),
+		...responsiveVariables("--rs-table-p-horizontal", paddingInline ?? padding),
+	};
 
 	return (
-		<th
+		<TagName
 			{...attributes}
 			className={headingClassNames}
 			rowSpan={rowSpan}
@@ -37,8 +43,16 @@ const TableHeading = (props: T.HeadingProps) => {
 			style={headingStyle}
 		>
 			{children}
-		</th>
+		</TagName>
 	);
+};
+
+const TableCell = (props: T.CellProps) => {
+	return <TableCellPrivate {...props} tagName="td" />;
+};
+
+const TableHeading = (props: T.HeadingProps) => {
+	return <TableCellPrivate {...props} tagName="th" />;
 };
 
 const TableRow = (props: T.RowProps) => {
@@ -52,13 +66,34 @@ const TableRow = (props: T.RowProps) => {
 	);
 };
 
+const TableBody = (props: T.BodyProps) => {
+	return <tbody>{props.children}</tbody>;
+};
+
+const TableHead = (props: T.HeadProps) => {
+	return <thead>{props.children}</thead>;
+};
+
 const Table = (props: T.Props) => {
-	const { children, border, className, attributes } = props;
-	const rootClassNames = classNames(s.root, className, border && s[`--border-${border}`]);
+	const { children, border, columnBorder, className, attributes } = props;
+	const rootClassNames = classNames(
+		s.root,
+		className,
+		border && s["--border-outer"],
+		columnBorder && s["--border-column"]
+	);
+	const [firstChild] = React.Children.toArray(children);
 
 	return (
 		<div {...attributes} className={rootClassNames}>
-			<table className={s.table}>{children}</table>
+			<table className={s.table}>
+				{React.isValidElement(firstChild) &&
+				(firstChild.type === TableBody || firstChild.type === TableHead) ? (
+					children
+				) : (
+					<TableBody>{children}</TableBody>
+				)}
+			</table>
 		</div>
 	);
 };
@@ -66,4 +101,6 @@ const Table = (props: T.Props) => {
 Table.Cell = TableCell;
 Table.Heading = TableHeading;
 Table.Row = TableRow;
+Table.Body = TableBody;
+Table.Head = TableHead;
 export default Table;

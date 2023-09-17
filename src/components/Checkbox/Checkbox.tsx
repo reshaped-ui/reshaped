@@ -32,7 +32,6 @@ const Checkbox = (props: T.Props) => {
 	const defaultChecked = checkboxGroup ? undefined : props.defaultChecked;
 	const name = checkboxGroup ? checkboxGroup.name : props.name;
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
-	const TagName = children ? "label" : "span";
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -51,10 +50,10 @@ const Checkbox = (props: T.Props) => {
 
 	useIsomorphicLayoutEffect(() => {
 		inputRef.current!.indeterminate = indeterminate || false;
-	}, [indeterminate]);
+	}, [indeterminate, checked]);
 
 	return (
-		<TagName {...attributes} className={rootClassName}>
+		<label {...attributes} className={rootClassName}>
 			<span className={s.field}>
 				<HiddenInput
 					className={s.input}
@@ -78,7 +77,7 @@ const Checkbox = (props: T.Props) => {
 			</span>
 
 			{children && <span className={s.text}>{children}</span>}
-		</TagName>
+		</label>
 	);
 };
 

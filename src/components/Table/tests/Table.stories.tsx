@@ -1,6 +1,7 @@
 import React from "react";
 import { Example } from "utilities/storybook";
 import Table from "components/Table";
+import Checkbox from "components/Checkbox";
 import Card from "components/Card";
 
 export default { title: "Components/Table" };
@@ -67,8 +68,32 @@ export const layout = () => (
 
 export const border = () => (
 	<Example>
-		<Example.Item title="border: rows">
-			<Table border="rows">
+		<Example.Item title="border: true">
+			<Table border>
+				<Table.Row>
+					<Table.Heading>Column 1</Table.Heading>
+					<Table.Heading>Column 2</Table.Heading>
+				</Table.Row>
+				<Table.Row>
+					<Table.Cell>Cell 1</Table.Cell>
+					<Table.Cell>Cell 2</Table.Cell>
+				</Table.Row>
+			</Table>
+		</Example.Item>
+		<Example.Item title="columnBorder: true">
+			<Table columnBorder>
+				<Table.Row>
+					<Table.Heading>Column 1</Table.Heading>
+					<Table.Heading>Column 2</Table.Heading>
+				</Table.Row>
+				<Table.Row>
+					<Table.Cell>Cell 1</Table.Cell>
+					<Table.Cell>Cell 2</Table.Cell>
+				</Table.Row>
+			</Table>
+		</Example.Item>
+		<Example.Item title="columnBorder: true, border: true">
+			<Table columnBorder border>
 				<Table.Row>
 					<Table.Heading>Column 1</Table.Heading>
 					<Table.Heading>Column 2</Table.Heading>
@@ -115,7 +140,7 @@ export const edgeCases = () => (
 		</Example.Item>
 		<Example.Item title="card with highlighted heading">
 			<Card elevated padding={0}>
-				<Table border="rows">
+				<Table>
 					<Table.Row highlighted>
 						<Table.Heading width="50%" minWidth="200px">
 							Column 1
@@ -136,6 +161,66 @@ export const edgeCases = () => (
 					</Table.Row>
 				</Table>
 			</Card>
+		</Example.Item>
+	</Example>
+);
+
+const SelectionDemo = () => {
+	const [value, setValue] = React.useState<string[]>([]);
+	const rows = [
+		{
+			value: "1",
+		},
+		{ value: "2" },
+	];
+	const allSelected = value.length === rows.length;
+
+	return (
+		<Table>
+			<Table.Row>
+				<Table.Heading width="auto">
+					<Checkbox
+						inputAttributes={{ "aria-label": "Select all" }}
+						name="hey"
+						checked={allSelected}
+						indeterminate={!!value.length && value.length < rows.length}
+						onChange={() => {
+							setValue(allSelected ? [] : rows.map((row) => row.value));
+						}}
+					/>
+				</Table.Heading>
+				<Table.Heading>Column 1</Table.Heading>
+				<Table.Heading>Column 2</Table.Heading>
+			</Table.Row>
+			{rows.map((row) => (
+				<Table.Row key={row.value} highlighted={value.includes(row.value)}>
+					<Table.Cell>
+						<Checkbox
+							name="hey"
+							value={row.value}
+							inputAttributes={{ "aria-label": "Select the row" }}
+							checked={value.includes(row.value)}
+							onChange={(args) => {
+								setValue((prev) => {
+									if (!args.value) return prev;
+									if (args.checked) return [...prev, args.value];
+									return prev.filter((item) => item !== args.value);
+								});
+							}}
+						/>
+					</Table.Cell>
+					<Table.Cell>Cell 1</Table.Cell>
+					<Table.Cell>Cell 2</Table.Cell>
+				</Table.Row>
+			))}
+		</Table>
+	);
+};
+
+export const examples = () => (
+	<Example>
+		<Example.Item title="selectable">
+			<SelectionDemo />
 		</Example.Item>
 	</Example>
 );

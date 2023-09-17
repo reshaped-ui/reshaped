@@ -4,3 +4,4 @@
 - New component: Table
 
 - Tabs: auto scroll for active item
+- Checkbox: transition for the indeterminate state
