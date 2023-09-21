@@ -263,6 +263,13 @@
 	}
 }
 
+.item--columns {
+	width: calc(
+		(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) / var(--rs-view-columns-count) -
+			var(--rs-view-item-gap, 0px)
+	);
+}
+
 @each $columns in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
 	.item--columns-$columns {
 		--rs-view-columns-count: calc(12 / $columns);
@@ -288,11 +295,6 @@
 				--rs-view-columns-count: calc(12 / $columns);
 				--rs-view-gaps-count: calc(
 					(var(--rs-view-columns-count) - 1) * var(--rs-view-gaps-count-multiplier)
-				);
-
-				width: calc(
-					(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) /
-						var(--rs-view-columns-count) - var(--rs-view-item-gap, 0px)
 				);
 			}
 

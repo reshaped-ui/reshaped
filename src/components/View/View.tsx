@@ -31,6 +31,7 @@ const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemP
 		className,
 		gapBefore === "auto" && s["item--gap-auto"],
 		gapBefore !== undefined && s["item--gap-before"],
+		columns && s["item--columns"],
 		...responsiveClassNames(s, "item--grow", grow),
 		...responsiveClassNames(s, "item--columns", columns)
 	);
