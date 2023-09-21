@@ -13,7 +13,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	gap?: G.Responsive<number>;
 	wrap?: G.Responsive<boolean>;
 	align?: G.Responsive<"center" | "start" | "end" | "stretch" | "baseline">;
-	justify?: G.Responsive<"center" | "start" | "end">;
+	justify?: G.Responsive<"center" | "start" | "end" | "space-between">;
 	height?: G.Responsive<string | number>;
 	width?: G.Responsive<string | number>;
 	aspectRatio?: G.Responsive<number>;
@@ -55,6 +55,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 		| "positive-faded"
 		| "primary"
 		| "primary-faded"
+		| "disabled"
 		| "transparent";
 	borderRadius?: G.Responsive<TStyles.Radius>;
 	position?: G.Responsive<TStyles.Position>;

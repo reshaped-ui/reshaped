@@ -20,6 +20,7 @@ const TabsControlled = (props: T.PrivateControlledProps) => {
 	const id = useElementId();
 	const elActiveRef = React.useRef<HTMLDivElement | null>(null);
 	const elPrevActiveRef = React.useRef<HTMLDivElement | null>(elActiveRef.current);
+	const elScrollableRef = React.useRef<HTMLDivElement | null>(null);
 	const [selection, setSelection] = React.useState<T.SelectionState>({
 		scaleX: 0,
 		scaleY: 0,
@@ -47,6 +48,7 @@ const TabsControlled = (props: T.PrivateControlledProps) => {
 				setDefaultValue,
 				elActiveRef,
 				elPrevActiveRef,
+				elScrollableRef,
 				selection,
 				setSelection,
 			}}

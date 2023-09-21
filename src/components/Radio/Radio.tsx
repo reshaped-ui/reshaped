@@ -18,7 +18,6 @@ const Radio = (props: T.Props) => {
 	const checked = radioGroup ? radioGroup.value === value : props.checked;
 	const defaultChecked = radioGroup ? undefined : props.defaultChecked;
 	const name = radioGroup ? radioGroup.name : props.name;
-	const TagName = children ? "label" : "span";
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -37,7 +36,7 @@ const Radio = (props: T.Props) => {
 	};
 
 	return (
-		<TagName {...attributes} className={rootClassName}>
+		<label {...attributes} className={rootClassName}>
 			<span className={s.field}>
 				<HiddenInput
 					className={s.input}
@@ -56,7 +55,7 @@ const Radio = (props: T.Props) => {
 			</span>
 
 			{children && <span className={s.text}>{children}</span>}
-		</TagName>
+		</label>
 	);
 };
 

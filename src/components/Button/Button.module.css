@@ -627,20 +627,40 @@
 
 .aligner.--aligner-position-all .root {
 	margin: calc(var(--rs-button-padding-v) * -1) calc(var(--rs-button-padding-h) * -1);
+
+	&.--variant-ghost {
+		margin: calc(var(--rs-button-padding-h-ghost) * -1);
+	}
 }
 
 .aligner.--aligner-position-start .root {
 	margin-inline-start: calc(var(--rs-button-padding-h) * -1);
+
+	&.--variant-ghost {
+		margin-inline-start: calc(var(--rs-button-padding-h-ghost) * -1);
+	}
 }
 
 .aligner.--aligner-position-end .root {
 	margin-inline-end: calc(var(--rs-button-padding-h) * -1);
+
+	&.--variant-ghost {
+		margin-inline-end: calc(var(--rs-button-padding-h-ghost) * -1);
+	}
 }
 
 .aligner.--aligner-position-top .root {
 	margin-top: calc(var(--rs-button-padding-v) * -1);
+
+	&.--variant-ghost {
+		margin-top: calc(var(--rs-button-padding-h-ghost) * -1);
+	}
 }
 
 .aligner.--aligner-position-bottom .root {
 	margin-bottom: calc(var(--rs-button-padding-v) * -1);
+
+	&.--variant-ghost {
+		margin-bottom: calc(var(--rs-button-padding-h-ghost) * -1);
+	}
 }

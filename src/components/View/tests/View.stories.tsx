@@ -336,6 +336,12 @@ export const justify = () => (
 				<Placeholder />
 			</View>
 		</Example.Item>
+		<Example.Item title="justify: space-between, direction: row">
+			<View justify="space-between" direction="row" gap={3}>
+				<Placeholder />
+				<Placeholder />
+			</View>
+		</Example.Item>
 
 		<Example.Item title="justify: start, direction: column, height: 200px">
 			<View height="200px" justify="start" direction="column" gap={3}>
@@ -351,6 +357,12 @@ export const justify = () => (
 		</Example.Item>
 		<Example.Item title="justify: end, direction: column, height: 200px">
 			<View justify="end" height="200px" direction="column" gap={3}>
+				<Placeholder />
+				<Placeholder />
+			</View>
+		</Example.Item>
+		<Example.Item title="justify: space-between, direction: column, height: 200px">
+			<View justify="space-between" height="200px" direction="column" gap={3}>
 				<Placeholder />
 				<Placeholder />
 			</View>

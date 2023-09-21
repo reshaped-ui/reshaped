@@ -6,6 +6,8 @@
 	position: relative;
 	overflow: hidden;
 	text-align: initial;
+	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
+	transition-property: box-shadow, border-color;
 }
 
 .content {
@@ -16,6 +18,7 @@
 .--selected {
 	border-color: transparent;
 	box-shadow: 0 0 0 2px var(--rs-color-border-primary);
+	transition-timing-function: var(--rs-easing-decelerate);
 }
 
 .--elevated {

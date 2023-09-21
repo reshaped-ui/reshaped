@@ -39,9 +39,9 @@ const TabsList = (props: T.ListProps) => {
 		setSelection,
 		elActiveRef,
 		elPrevActiveRef,
+		elScrollableRef,
 	} = useTabs();
 	const [rtl] = useRTL();
-	const elScrollableRef = React.useRef<HTMLDivElement | null>(null);
 	const [cutOffSide, setCutOffSide] = React.useState<"start" | "end" | "both" | null>(null);
 	const rootClassNames = classNames(
 		s.root,
@@ -95,7 +95,7 @@ const TabsList = (props: T.ListProps) => {
 				left: itemEl.offsetLeft,
 			};
 		},
-		[]
+		[elScrollableRef]
 	);
 
 	const { ref: hotkeysRef } = useHotkeys<HTMLDivElement>({

@@ -55,8 +55,7 @@
 }
 
 @each $color in neutral-faded, positive-faded, critical-faded, primary-faded, page, page-faded,
-	disabled, disabled-faded, elevation-base, elevation-raised, elevation-overlay
-{
+	disabled, disabled-faded, elevation-base, elevation-raised, elevation-overlay {
 	.--bg-$color {
 		color: var(--rs-color-foreground-neutral);
 		background-color: var(--rs-color-background-$color);
@@ -86,8 +85,7 @@
 }
 
 @each $color in neutral-faded, neutral, positive, positive-faded, critical, critical-faded, primary,
-	primary-faded
-{
+	primary-faded, disabled {
 	.--bd-$color {
 		--rs-view-border-color: var(--rs-color-border-$color);
 	}
@@ -237,6 +235,10 @@
 	@value center {
 		justify-content: center;
 	}
+
+	@value space-between {
+		justify-content: space-between;
+	}
 }
 
 .divider {
@@ -269,8 +271,7 @@
 		);
 
 		width: calc(
-			(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) /
-				var(--rs-view-columns-count) -
+			(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) / var(--rs-view-columns-count) -
 				var(--rs-view-item-gap, 0px)
 		);
 	}
@@ -291,8 +292,7 @@
 
 				width: calc(
 					(100% - var(--rs-view-gap-value) * var(--rs-view-gaps-count)) /
-						var(--rs-view-columns-count) -
-						var(--rs-view-item-gap, 0px)
+						var(--rs-view-columns-count) - var(--rs-view-item-gap, 0px)
 				);
 			}
 

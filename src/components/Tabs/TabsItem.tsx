@@ -21,6 +21,7 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 		selection,
 		elActiveRef,
 		elPrevActiveRef,
+		elScrollableRef,
 	} = useTabs(value);
 	const itemRef = React.useRef<HTMLDivElement | null>(null);
 	const active = tabsValue === value;
@@ -47,10 +48,27 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 	const handleChange = () => {
 		if (href && !onChange) return;
 
+		const listEl = elScrollableRef.current;
+		const currentListItem = itemRef.current?.parentElement;
+		const prevListItem = elActiveRef.current?.parentElement;
+
+		// Updating refs after saving the elements
 		updateRefs();
 
-		itemRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
 		if (onChange) onChange({ value, name });
+
+		if (!listEl || !currentListItem || !prevListItem || listEl.scrollWidth === listEl.clientWidth) {
+			return;
+		}
+
+		const navigatingBack = currentListItem.offsetLeft < prevListItem.offsetLeft;
+		const threshold = (currentListItem.offsetLeft - listEl.scrollLeft) / listEl.clientWidth;
+		// Only scroll if the item is close to getting clipped
+		// Back navigation threshold is 0.3 since its calculated based on offsetLeft
+		const shouldScroll = navigatingBack ? threshold < 0.3 : threshold > 0.5;
+
+		if (!shouldScroll) return;
+		itemRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
 	};
 
 	React.useEffect(() => {
