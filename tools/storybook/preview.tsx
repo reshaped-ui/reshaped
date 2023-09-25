@@ -9,6 +9,7 @@ import Icon from "../../src/components/Icon";
 import useRTL from "../../src/hooks/useRTL";
 import IconCheckmark from "../../src/icons/Checkmark";
 import { useTheme } from "../../src/components/Theme";
+import useHotkeys from "../../src/hooks/useHotkeys";
 import "../../src/themes/reshaped/theme.css";
 import "../../src/themes/slate/theme.css";
 import "../../src/themes/figma/theme.css";
@@ -18,14 +19,12 @@ const ThemeSwitch = () => {
 	const { invertColorMode, setTheme, theme } = useTheme();
 	const [rtl, setRTL] = useRTL();
 
-	React.useEffect(() => {
-		const handleKey = (e: KeyboardEvent) => {
-			if (e.code === "KeyM") invertColorMode();
-		};
-
-		window.addEventListener("keypress", handleKey);
-		return () => window.removeEventListener("keypress", handleKey);
-	}, [invertColorMode]);
+	useHotkeys(
+		{
+			"shift+m": () => invertColorMode(),
+		},
+		[invertColorMode]
+	);
 
 	return (
 		<View

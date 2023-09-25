@@ -32,6 +32,8 @@ const getHotkeyId = (hotkey: string) => {
 };
 
 const getEventKey = (e: KeyboardEvent) => {
+	if (!e.key) return;
+
 	// Having alt pressed modifies e.key value, so relying on e.code for it
 	if (e.altKey && e.key !== "Alt") {
 		return e.code.toLowerCase().replace(/key|digit|numpad/, "");
@@ -169,6 +171,7 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 			if (e.repeat || hooksCount === 0) return;
 
 			const eventKey = getEventKey(e);
+			if (!eventKey) return;
 
 			pressedMap[eventKey] = e;
 
@@ -196,6 +199,7 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 			if (hooksCount === 0) return;
 
 			const eventKey = getEventKey(e);
+			if (!eventKey) return;
 
 			delete pressedMap[eventKey];
 			if (eventKey === "meta" || eventKey === "control") {
@@ -232,6 +236,9 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 
 	const handleWindowKeyDown = React.useCallback(
 		(e: KeyboardEvent) => {
+			// Browsers trigger keyboard event without passing e.key when you click on autocomplete
+			if (!e.key) return;
+
 			addPressedKey(e);
 			globalHotkeyStore.handleKeyDown(pressedMap, e);
 		},
@@ -240,6 +247,8 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 
 	const handleWindowKeyUp = React.useCallback(
 		(e: KeyboardEvent) => {
+			if (!e.key) return;
+
 			removePressedKey(e);
 			globalHotkeyStore.handleKeyUp(e);
 		},

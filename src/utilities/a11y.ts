@@ -166,6 +166,9 @@ export const trapFocus = (() => {
 
 		// Re-focus on the first element if content has changed
 		const observer = new MutationObserver(() => {
+			// Focus stayed inside the wrapper, no need to refocus
+			if (root.contains(document.activeElement)) return;
+
 			const focusable = getFocusableElements(root, includeTrigger ? triggerElement : undefined);
 
 			if (!focusable.length) return;
