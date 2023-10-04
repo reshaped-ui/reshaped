@@ -23,8 +23,14 @@
 	box-sizing: border-box;
 	color: var(--rs-color-foreground-neutral);
 	width: 100%;
-	margin: calc(var(--rs-unit-x1) * -1) -50%;
-	padding: 0 calc(var(--rs-text-field-gap) + 50%);
+
+	/* 
+	500px is a manually inserted value is a hardcoded value here, assuming the max width of the space reserved for the slots
+	to control the input size based on their width
+	Originally we were using 50% instead but it's causing issues in safari when focusing the input was causing it to grow
+	*/
+	margin: calc(var(--rs-unit-x1) * -1) -500px;
+	padding: 0 calc(var(--rs-text-field-gap) + 500px);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 }
