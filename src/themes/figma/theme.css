@@ -83,8 +83,8 @@
 --rs-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
 --rs-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 --rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
---rs-shadow-raised: 0px 1px 3px rgba(0, 0, 0, 0.15);
---rs-shadow-overlay: 0px 10px 24px rgba(0, 0, 0, 0.1), 0px 2px 5px rgba(0, 0, 0, 0.04);
+--rs-shadow-raised: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+--rs-shadow-overlay: 0px 10px 24px 0px rgba(0, 0, 0, 0.1), 0px 2px 5px 0px rgba(0, 0, 0, 0.04);
 			}
 		
 			[data-rs-theme="figma"][data-rs-color-mode="light"] {

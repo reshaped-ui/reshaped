@@ -9,8 +9,8 @@ const transformedToken: Transformer<T.Token> = (name, token, theme) => [
 		type: "variable",
 		value: token
 			.map((value) => {
-				const blur = value.blurRadius ? ` ${value.blurRadius}px` : "";
-				const spread = value.spreadRadius ? ` ${value.spreadRadius}px` : "";
+				const blur = ` ${value.blurRadius || 0}px`;
+				const spread = ` ${value.spreadRadius || 0}px`;
 				const colorRef = theme.color[value.colorToken];
 				const color = `rgba(${hexToRgbString(colorRef.hex)}, ${value.opacity || 1})`;
 
