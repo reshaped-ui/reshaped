@@ -156,12 +156,12 @@
 		{
 			"name": "Theming / JS",
 			"path": "dist/tests/themingWithoutDefinition.js",
-			"webpack": false
+			"webpack": true
 		},
 		{
 			"name": "Theming with a default theme definition / JS",
 			"path": "dist/tests/themingWithDefinition.js",
-			"webpack": false
+			"webpack": true
 		}
 	],
 	"engines": {
