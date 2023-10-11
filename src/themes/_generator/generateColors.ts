@@ -1,3 +1,5 @@
+import type { FullThemeDefinition } from "./tokens/types";
+
 /**
  * Some of the color conversion utilities are taken from https://github.com/hsluv/hsluv-javascript
  * They have been rewritten for easier color transformations in the theme generation case
@@ -505,7 +507,7 @@ const generate = (args: {
 	critical: string;
 	positive: string;
 	neutral: string;
-}) => {
+}): FullThemeDefinition["color"] => {
 	const { primary, critical, positive, neutral } = args;
 
 	return {

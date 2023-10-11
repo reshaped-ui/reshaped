@@ -144,19 +144,24 @@
 	},
 	"size-limit": [
 		{
-			"name": "JS",
+			"name": "Library / JS",
 			"path": "dist/bundle.js",
 			"webpack": false
 		},
 		{
-			"name": "CSS",
+			"name": "Library / CSS",
 			"path": "dist/bundle.css",
 			"webpack": false
 		},
 		{
-			"name": "JS Theming engine",
-			"path": "dist/themes/index.js",
-			"webpack": true
+			"name": "Theming / JS",
+			"path": "dist/tests/themingWithoutDefinition.js",
+			"webpack": false
+		},
+		{
+			"name": "Theming with a default theme definition / JS",
+			"path": "dist/tests/themingWithDefinition.js",
+			"webpack": false
 		}
 	],
 	"engines": {

@@ -1,4 +1,4 @@
-import { UserThemeDefinition } from "../../../themes/_generator/tokens/types";
+import { UserThemeDefinition } from "../tokens/types";
 
 const theme: UserThemeDefinition = {
 	fontFamily: {

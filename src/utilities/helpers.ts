@@ -1,19 +1,5 @@
 import type * as G from "types/global";
 
-export const deepMerge = <T extends Record<string, unknown>>(target: T, source: T) => {
-	for (const key in source) {
-		if (source.hasOwnProperty(key)) {
-			if (source[key] instanceof Object && key in target && target[key] instanceof Object) {
-				deepMerge(target[key] as T, source[key] as T);
-			} else {
-				target[key] = source[key];
-			}
-		}
-	}
-
-	return target;
-};
-
 // from https://gist.github.com/ca0v/73a31f57b397606c9813472f7493a940
 export const debounce = <T extends Function>(cb: T, wait = 20) => {
 	let timer: ReturnType<typeof setTimeout>;

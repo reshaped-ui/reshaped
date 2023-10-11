@@ -1,8 +1,10 @@
 import React from "react";
 import { Example } from "utilities/storybook";
+import View from "components/View";
 import Button from "components/Button";
+import Alert from "components/Alert";
 import Theme from "components/Theme";
-import { getThemeCSS } from "themes";
+import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
 
 export default { title: "Themes" };
 
@@ -20,7 +22,37 @@ const css2 = getThemeCSS("peach", {
 	},
 });
 
-export const behavior = () => (
+const cssGenerated = getThemeCSS("generated", {
+	...baseThemeDefinition,
+	color: generateThemeColors({ primaryColor: "#2563eb" }),
+});
+
+const componentExamples = (
+	<View gap={4}>
+		<View gap={2} direction="row">
+			<Button color="primary">Primary button</Button>
+			<Button color="critical">Primary button</Button>
+			<Button color="positive">Primary button</Button>
+			<Button color="neutral">Primary button</Button>
+		</View>
+		<View direction="row" gap={4}>
+			<View.Item columns={6}>
+				<Alert color="primary">Primary</Alert>
+			</View.Item>
+			<View.Item columns={6}>
+				<Alert color="critical">Critical</Alert>
+			</View.Item>
+			<View.Item columns={6}>
+				<Alert color="positive">Positive</Alert>
+			</View.Item>
+			<View.Item columns={6}>
+				<Alert color="neutral">Neutral</Alert>
+			</View.Item>
+		</View>
+	</View>
+);
+
+export const base = () => (
 	<Example>
 		<Example.Item title="custom runtime theme">
 			<style>{css}</style>
@@ -33,6 +65,20 @@ export const behavior = () => (
 			<Theme name="peach">
 				<Button color="primary">Primary button</Button>
 			</Theme>
+		</Example.Item>
+	</Example>
+);
+
+export const generation = () => (
+	<Example>
+		<Example.Item title="base">
+			<style>{cssGenerated}</style>
+			<View gap={4}>
+				<View.Item>Generated theme</View.Item>
+				<Theme name="generated">{componentExamples}</Theme>
+				<View.Item>Reshaped theme</View.Item>
+				<Theme name="reshaped">{componentExamples}</Theme>
+			</View>
 		</Example.Item>
 	</Example>
 );

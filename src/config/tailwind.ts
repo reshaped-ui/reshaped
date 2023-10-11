@@ -1,5 +1,5 @@
-import reshapedDefinition from "cli/theming/definitions/reshaped";
-import baseDefinition from "cli/theming/definitions/base";
+import reshapedDefinition from "themes/_generator/definitions/reshaped";
+import baseDefinition from "themes/_generator/definitions/base";
 import { camelToKebab } from "utilities/string";
 import { bgWithDynamicForeground } from "utilities/color";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";

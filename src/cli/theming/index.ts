@@ -8,8 +8,8 @@ import type {
 import type * as T from "themes/_generator/types";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
 import transform from "themes/_generator/transform";
-import reshapedDefinition from "./definitions/reshaped";
-import baseDefinition from "./definitions/base";
+import reshapedDefinition from "themes/_generator/definitions/reshaped";
+import baseDefinition from "themes/_generator/definitions/base";
 
 const transformDefinition = (
 	name: string,
