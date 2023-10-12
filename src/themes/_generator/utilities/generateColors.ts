@@ -1,4 +1,4 @@
-import type { FullThemeDefinition } from "./tokens/types";
+import type { ThemeDefinition } from "../tokens/types";
 
 /**
  * Some of the color conversion utilities are taken from https://github.com/hsluv/hsluv-javascript
@@ -307,7 +307,7 @@ const hsluvToHex = (hsl: HslColor): string => {
 	return rgbToHex(rgb);
 };
 
-const hexToHSL = (H: string) => {
+const hexToHsl = (H: string) => {
 	const rgb = hexToRgb(H);
 	return rgbToHsl(rgb);
 };
@@ -330,11 +330,11 @@ const hslToHex = (hsl: HslColor) => {
  */
 
 const getDarkModeLightnessDelta = (lightness: number, luminance: number) => {
-	const perceivedLuminanceOrigin = 69.4;
-	// Magical modifier to darken the lightness
-	const luminanceModifier = 2.65;
-	const luminanceDistance = luminance - perceivedLuminanceOrigin;
-	const distance = Math.abs(Math.round(luminanceDistance)) * luminanceModifier;
+	const perceivedLuminanceOrigin = 69.5;
+	const luminanceDistance = Math.abs(Math.round(luminance - perceivedLuminanceOrigin));
+	// Use a greater modifier for values around the luminance origin and decrease it for distant values
+	const luminanceModifier = 3 - (Math.min(luminanceDistance, 20) / 20) * 0.5;
+	const distance = luminanceDistance * luminanceModifier;
 
 	// Dark mode always reduces lightness but if the color was dark originally, we need to do it a slower pace
 	const slowdownModifier = luminanceDistance < 0 ? 2 : 1;
@@ -367,39 +367,38 @@ export function getRgbLuminance({ r, g, b }: RgbColor) {
  * Generator
  */
 
-// Make sure gray doesn't become colored in dark mode while keep its minimum hue
-const DARK_MODE_GRAY_S = 3;
+const FG_L_DARK = 62;
 
 const generateColorValues = (args: { key: string; hex: string }) => {
 	const { key, hex } = args;
 	const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
 
-	const hsl = hexToHSL(hex);
+	const hsl = hexToHsl(hex);
 	const rgb = hexToRgb(hex);
 	const hsluv = hexToHsluv(hex);
 	const luminance = getRgbLuminance(rgb);
 	const luminanceDelta = getLuminanceDelta(luminance);
 	const darkModeLigthnessDelta = getDarkModeLightnessDelta(hsl.l, luminance);
 	const hslDark = { ...hsl, l: hsl.l - darkModeLigthnessDelta };
-	const bgHex = hslToHex(hsl);
+	const bgHex = hex;
 	const bgHexDark = hslToHex(hslDark);
 	const hsluvDark = hexToHsluv(bgHexDark);
 
 	const bdHex = hsluvToHex({ ...hsluv, l: hsluv.l - 5 - luminanceDelta });
-	const bdHexDark = hsluvToHex({ ...hsluvDark, l: hsluvDark.l + 9 });
+	const bdHexDark = hsluvToHex({
+		...hsluvDark,
+		// s: Math.min(hsluvDark.s, 70),
+		l: key === "neutral" ? 35 : FG_L_DARK,
+	});
 
 	const fgHsluv = { ...hsluv, l: 43 };
-	const fgHsluvDark = { ...hsluv, l: key === "neutral" ? 80 : 62 };
+	const fgHsluvDark = { ...hsluv, l: key === "neutral" ? 80 : FG_L_DARK };
 	const fgHex = hsluvToHex(fgHsluv);
 	const fgHexDark = hsluvToHex(fgHsluvDark);
 
 	const bgFadedHex = rgbToHex(hslToRgb({ ...hsl, l: 97 }));
 	const bgFadedHsluv = hexToHsluv(bgFadedHex);
-	const bgFadedHsluvDark = {
-		...hsluv,
-		l: 16,
-		s: key === "neutral" ? DARK_MODE_GRAY_S : 32,
-	};
+	const bgFadedHsluvDark = { ...hsluv, l: 16, s: 32 };
 	const bgFadedHexDark = hsluvToHex(bgFadedHsluvDark);
 
 	const fadedLuminance = getRgbLuminance(hexToRgb(bgFadedHex));
@@ -412,11 +411,11 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	});
 	const bdFadedHexDark = hsluvToHex({
 		...bgFadedHsluvDark,
-		s: key === "neutral" ? DARK_MODE_GRAY_S : 50,
+		s: 40,
 		l: bgFadedHsluvDark.l + 7 - fadedLuminanceDeltaDark,
 	});
 
-	const output = {
+	const output: Partial<ThemeDefinition["color"]> = {
 		[`background${capitalizedKey}`]: {
 			hex: bgHex,
 			hexDark: bgHexDark,
@@ -498,26 +497,25 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 		};
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return output as any;
+	return output;
 };
 
 const generate = (args: {
-	primary: string;
-	critical: string;
-	positive: string;
-	neutral: string;
-}): FullThemeDefinition["color"] => {
-	const { primary, critical, positive, neutral } = args;
+	primaryColor: string;
+	criticalColor?: string;
+	positiveColor?: string;
+	neutralColor?: string;
+}) => {
+	const { primaryColor, criticalColor, positiveColor, neutralColor } = args;
 
 	return {
-		...generateColorValues({ key: "primary", hex: primary }),
-		...generateColorValues({ key: "critical", hex: critical }),
-		...generateColorValues({ key: "positive", hex: positive }),
-		...generateColorValues({ key: "neutral", hex: neutral }),
+		...generateColorValues({ key: "primary", hex: primaryColor }),
+		...generateColorValues({ key: "critical", hex: criticalColor || "#e22c2c" }),
+		...generateColorValues({ key: "positive", hex: positiveColor || "#118850" }),
+		...generateColorValues({ key: "neutral", hex: neutralColor || "#dfe2ea" }),
 		white: { hex: "#ffffff" },
 		black: { hex: "#000000" },
-	} as const;
+	} as ThemeDefinition["color"];
 };
 
 export default generate;

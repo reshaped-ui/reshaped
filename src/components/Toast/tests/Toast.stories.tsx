@@ -24,8 +24,6 @@ const Base = () => {
 						<Button onClick={() => toast.hide(id)}>Show</Button>,
 					],
 				});
-
-				toast.hide(id);
 			}}
 		>
 			Show toast

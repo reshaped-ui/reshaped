@@ -571,7 +571,7 @@ export const border = () => (
 		</Example.Item>
 
 		<Example.Item title="border: positive-faded">
-			<View borderColor="positive" padding={4}>
+			<View borderColor="positive-faded" padding={4}>
 				Content
 			</View>
 		</Example.Item>

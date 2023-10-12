@@ -2,7 +2,10 @@ import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Button from "components/Button";
+import Badge from "components/Badge";
 import Alert from "components/Alert";
+import Card from "components/Card";
+import DropdownMenu from "components/DropdownMenu";
 import Theme from "components/Theme";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
 
@@ -35,6 +38,20 @@ const componentExamples = (
 			<Button color="positive">Primary button</Button>
 			<Button color="neutral">Primary button</Button>
 		</View>
+		<View gap={2} direction="row">
+			<Button color="primary" variant="outline">
+				Primary button
+			</Button>
+			<Button color="critical" variant="outline">
+				Primary button
+			</Button>
+			<Button color="positive" variant="outline">
+				Primary button
+			</Button>
+			<Button color="neutral" variant="outline">
+				Primary button
+			</Button>
+		</View>
 		<View direction="row" gap={4}>
 			<View.Item columns={6}>
 				<Alert color="primary">Primary</Alert>
@@ -47,6 +64,28 @@ const componentExamples = (
 			</View.Item>
 			<View.Item columns={6}>
 				<Alert color="neutral">Neutral</Alert>
+			</View.Item>
+			<View.Item columns={6}>
+				<Card>
+					<View gap={2} align="start">
+						<Badge variant="outline" color="primary">
+							Badge
+						</Badge>
+						<DropdownMenu>
+							<DropdownMenu.Trigger>
+								{(attributes) => (
+									<Button variant="faded" attributes={attributes}>
+										Menu
+									</Button>
+								)}
+							</DropdownMenu.Trigger>
+							<DropdownMenu.Content>
+								<DropdownMenu.Item>Item 1</DropdownMenu.Item>
+								<DropdownMenu.Item>Item 1</DropdownMenu.Item>
+							</DropdownMenu.Content>
+						</DropdownMenu>
+					</View>
+				</Card>
 			</View.Item>
 		</View>
 	</View>
@@ -76,8 +115,8 @@ export const generation = () => (
 			<View gap={4}>
 				<View.Item>Generated theme</View.Item>
 				<Theme name="generated">{componentExamples}</Theme>
-				<View.Item>Reshaped theme</View.Item>
-				<Theme name="reshaped">{componentExamples}</Theme>
+				{/* <View.Item>Reshaped theme</View.Item> */}
+				{/* <Theme name="reshaped">{componentExamples}</Theme> */}
 			</View>
 		</Example.Item>
 	</Example>
