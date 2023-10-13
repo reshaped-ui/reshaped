@@ -1,4 +1,5 @@
-import { UserThemeDefinition } from "../../../themes/_generator/tokens/types";
+import { UserThemeDefinition } from "../tokens/types";
+import generateColors from "../utilities/generateColors";
 
 const theme: UserThemeDefinition = {
 	fontFamily: {
@@ -105,48 +106,7 @@ const theme: UserThemeDefinition = {
 		radiusLarge: { px: 12 },
 	},
 
-	color: {
-		foregroundNeutral: { hex: "#14171F", hexDark: "#EFF0F1" },
-		foregroundNeutralFaded: { hex: "#4D5874", hexDark: "#C2C8D6" },
-		foregroundDisabled: { hex: "#C7CDDB", hexDark: "#404A63" },
-		foregroundPrimary: { hex: "#4D4BE7", hexDark: "#9D9CF7" },
-		foregroundPositive: { hex: "#05751F", hexDark: "#03AB5F" },
-		foregroundCritical: { hex: "#CB101D", hexDark: "#EB6666" },
-
-		backgroundNeutral: { hex: "#DFE2EA", hexDark: "#384056" },
-		backgroundNeutralFaded: { hex: "#F3F4F6", hexDark: "#242838" },
-		backgroundNeutralHighlighted: { hex: "#D4D8E3", hexDark: "#404A63" },
-		backgroundDisabled: { hex: "#ECEEF3", hexDark: "#1C202B" },
-		backgroundDisabledFaded: { hex: "#F4F5F7", hexDark: "#161922" },
-		backgroundPrimary: { hex: "#5A58F2", hexDark: "#5250F2" },
-		backgroundPrimaryHighlighted: { hex: "#6d6bf5", hexDark: "#5f5df4" },
-		backgroundPrimaryFaded: { hex: "#EDECFD", hexDark: "#24254C" },
-		backgroundPositive: { hex: "#118850", hexDark: "#06743F" },
-		backgroundPositiveFaded: { hex: "#EBFEF6", hexDark: "#0F2921" },
-		backgroundPositiveHighlighted: { hex: "#009950", hexDark: "#008545" },
-		backgroundCritical: { hex: "#E22C2C", hexDark: "#AB1717" },
-		backgroundCriticalFaded: { hex: "#FEF1F2", hexDark: "#2F1E1F" },
-		backgroundCriticalHighlighted: { hex: "#eb4747", hexDark: "#c11515" },
-
-		borderNeutral: { hex: "#BBC1D3", hexDark: "#49536F" },
-		borderNeutralFaded: { hex: "#DFE2EA", hexDark: "#313649" },
-		borderDisabled: { hex: "#DFE2EA", hexDark: "#242938" },
-		borderPrimary: { hex: "#4D4BE7", hexDark: "#7D7BF4" },
-		borderPrimaryFaded: { hex: "#D7D5FB", hexDark: "#2E3160" },
-		borderPositive: { hex: "#05751F", hexDark: "#03A059" },
-		borderPositiveFaded: { hex: "#CDEDD5", hexDark: "#163C30" },
-		borderCritical: { hex: "#CB101D", hexDark: "#E95454" },
-		borderCriticalFaded: { hex: "#FBD5D8", hexDark: "#412A2B" },
-
-		backgroundPage: { hex: "#FFFFFF", hexDark: "#0D1117" },
-		backgroundPageFaded: { hex: "#FAFAFA", hexDark: "#0F131A" },
-		backgroundElevationBase: { hex: "#FFFFFF", hexDark: "#14181f" },
-		backgroundElevationRaised: { hex: "#FFFFFF", hexDark: "#181D25" },
-		backgroundElevationOverlay: { hex: "#FFFFFF", hexDark: "#1C212B" },
-
-		black: { hex: "#000000" },
-		white: { hex: "#FFFFFF" },
-	},
+	color: generateColors(),
 
 	duration: {
 		fast: { ms: 200 },

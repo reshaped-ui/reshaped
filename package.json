@@ -1,7 +1,7 @@
 {
 	"name": "reshaped",
 	"description": "Professionally crafted design system in React & Figma for building products of any scale and complexity",
-	"version": "2.4.4",
+	"version": "2.4.5",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
@@ -144,18 +144,23 @@
 	},
 	"size-limit": [
 		{
-			"name": "JS",
+			"name": "Library / JS",
 			"path": "dist/bundle.js",
 			"webpack": false
 		},
 		{
-			"name": "CSS",
+			"name": "Library / CSS",
 			"path": "dist/bundle.css",
 			"webpack": false
 		},
 		{
-			"name": "JS Theming engine",
-			"path": "dist/themes/index.js",
+			"name": "Theming / JS",
+			"path": "dist/tests/themingWithoutDefinition.js",
+			"webpack": true
+		},
+		{
+			"name": "Theming with a default theme definition / JS",
+			"path": "dist/tests/themingWithDefinition.js",
 			"webpack": true
 		}
 	],

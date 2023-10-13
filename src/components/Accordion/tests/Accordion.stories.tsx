@@ -3,6 +3,7 @@ import { Example, Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
 import View from "components/View";
+import TextField from "components/TextField";
 
 export default { title: "Utilities/Accordion" };
 
@@ -13,8 +14,8 @@ export const behavior = () => (
 				<Accordion.Trigger>Uncontrolled accordion</Accordion.Trigger>
 				<Accordion.Content>
 					<View paddingTop={2}>
+						<TextField name="test" />
 						<Placeholder />
-						<button>Heeloo</button>
 					</View>
 				</Accordion.Content>
 			</Accordion>
