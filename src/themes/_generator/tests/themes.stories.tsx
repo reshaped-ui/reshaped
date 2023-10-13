@@ -27,7 +27,7 @@ const css2 = getThemeCSS("peach", {
 
 const cssGenerated = getThemeCSS("generated", {
 	...baseThemeDefinition,
-	color: generateThemeColors({ primaryColor: "#2563eb" }),
+	color: generateThemeColors({ primary: "#2563eb" }),
 });
 
 const componentExamples = (
