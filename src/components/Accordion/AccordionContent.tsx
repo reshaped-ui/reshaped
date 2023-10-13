@@ -58,7 +58,11 @@ const AccordionContent = (props: T.ContentProps) => {
 		<div
 			className={contentClassNames}
 			ref={contentRef}
-			style={animatedHeight !== null ? { height: animatedHeight } : undefined}
+			style={
+				animatedHeight !== null
+					? { height: animatedHeight, overflow: animatedHeight === "auto" ? "visible" : undefined }
+					: undefined
+			}
 			onTransitionEnd={handleTransitionEnd}
 			aria-labelledby={triggerId}
 			id={contentId}

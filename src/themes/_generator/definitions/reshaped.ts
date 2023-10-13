@@ -106,8 +106,7 @@ const theme: UserThemeDefinition = {
 		radiusLarge: { px: 12 },
 	},
 
-	// hexDark: "#5250F2"
-	color: generateColors({ primaryColor: "#5A58F2" }),
+	color: generateColors(),
 
 	duration: {
 		fast: { ms: 200 },

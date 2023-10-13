@@ -500,19 +500,26 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	return output;
 };
 
-const generate = (args: {
-	primaryColor: string;
-	criticalColor?: string;
-	positiveColor?: string;
-	neutralColor?: string;
-}) => {
-	const { primaryColor, criticalColor, positiveColor, neutralColor } = args;
+const validateHexColor = (color?: string) => {
+	const hexColorRegex = /^#([A-Fa-f0-9]{3}){2}$/;
+	return hexColorRegex.test(color || "") ? color : null;
+};
+
+const generate = (
+	args: {
+		primary?: string;
+		critical?: string;
+		positive?: string;
+		neutral?: string;
+	} = {}
+) => {
+	const { primary, critical, positive, neutral } = args;
 
 	return {
-		...generateColorValues({ key: "primary", hex: primaryColor }),
-		...generateColorValues({ key: "critical", hex: criticalColor || "#e22c2c" }),
-		...generateColorValues({ key: "positive", hex: positiveColor || "#118850" }),
-		...generateColorValues({ key: "neutral", hex: neutralColor || "#dfe2ea" }),
+		...generateColorValues({ key: "primary", hex: validateHexColor(primary) || "#5a58f2" }),
+		...generateColorValues({ key: "critical", hex: validateHexColor(critical) || "#e22c2c" }),
+		...generateColorValues({ key: "positive", hex: validateHexColor(positive) || "#118850" }),
+		...generateColorValues({ key: "neutral", hex: validateHexColor(neutral) || "#dfe2ea" }),
 		white: { hex: "#ffffff" },
 		black: { hex: "#000000" },
 	} as ThemeDefinition["color"];

@@ -9,10 +9,10 @@ import mergeDefinitions from "./_generator/utilities/mergeDefinitions";
 export const baseThemeDefinition = mergeDefinitions(reshapedDefinition, baseDefinition);
 
 export const generateThemeColors = (options: {
-	primaryColor: string;
-	criticalColor?: string;
-	positiveColor?: string;
-	neutralColor?: string;
+	primary: string;
+	critical?: string;
+	positive?: string;
+	neutral?: string;
 }) => {
 	return generateColors(options);
 };
