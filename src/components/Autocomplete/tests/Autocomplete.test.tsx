@@ -39,7 +39,7 @@ describe("Components/Autocomplete", () => {
 		});
 
 		await waitFor(() => {
-			const items = screen.getAllByRole("menuitem");
+			const items = screen.getAllByRole("option");
 			expect(items).toHaveLength(2);
 
 			// Focus first item manually since unit tests can't trap focus
@@ -77,7 +77,7 @@ describe("Components/Autocomplete", () => {
 		});
 
 		await waitFor(async () => {
-			const items = screen.getAllByRole("menuitem");
+			const items = screen.getAllByRole("option");
 			expect(items).toHaveLength(2);
 
 			await userEvent.click(items[0]);

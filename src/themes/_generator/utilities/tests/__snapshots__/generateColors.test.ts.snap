@@ -1,0 +1,295 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Themes/Utilties/generateColors applies color overrides 1`] = `
+{
+  "backgroundCritical": {
+    "hex": "#dc2626",
+    "hexDark": "#ae1c1c",
+  },
+  "backgroundCriticalFaded": {
+    "hex": "#fdf2f2",
+    "hexDark": "#3e1f1f",
+  },
+  "backgroundCriticalHighlighted": {
+    "hex": "#ca2222",
+    "hexDark": "#c02020",
+  },
+  "backgroundDisabled": {
+    "hex": "#eceef2",
+    "hexDark": "#1c212f",
+  },
+  "backgroundDisabledFaded": {
+    "hex": "#f5f6f9",
+    "hexDark": "#151925",
+  },
+  "backgroundElevationBase": {
+    "hex": "#ffffff",
+    "hexDark": "#131722",
+  },
+  "backgroundElevationOverlay": {
+    "hex": "#ffffff",
+    "hexDark": "#1b1f2c",
+  },
+  "backgroundElevationRaised": {
+    "hex": "#ffffff",
+    "hexDark": "#171b27",
+  },
+  "backgroundNeutral": {
+    "hex": "#dfe2ea",
+    "hexDark": "#3f4861",
+  },
+  "backgroundNeutralFaded": {
+    "hex": "#f6f7f9",
+    "hexDark": "#222835",
+  },
+  "backgroundNeutralHighlighted": {
+    "hex": "#d2d7e2",
+    "hexDark": "#47516d",
+  },
+  "backgroundPage": {
+    "hex": "#ffffff",
+    "hexDark": "#0d111a",
+  },
+  "backgroundPageFaded": {
+    "hex": "#f9f9fb",
+    "hexDark": "#10131d",
+  },
+  "backgroundPositive": {
+    "hex": "#16a34a",
+    "hexDark": "#12863d",
+  },
+  "backgroundPositiveFaded": {
+    "hex": "#f2fdf6",
+    "hexDark": "#1f2b21",
+  },
+  "backgroundPositiveHighlighted": {
+    "hex": "#149744",
+    "hexDark": "#149143",
+  },
+  "backgroundPrimary": {
+    "hex": "#2563eb",
+    "hexDark": "#1658e9",
+  },
+  "backgroundPrimaryFaded": {
+    "hex": "#f1f5fe",
+    "hexDark": "#23273b",
+  },
+  "backgroundPrimaryHighlighted": {
+    "hex": "#215ad7",
+    "hexDark": "#2462f9",
+  },
+  "black": {
+    "hex": "#000000",
+  },
+  "borderCritical": {
+    "hex": "#bb1f1f",
+    "hexDark": "#f56868",
+  },
+  "borderCriticalFaded": {
+    "hex": "#f6dada",
+    "hexDark": "#582929",
+  },
+  "borderDisabled": {
+    "hex": "#dfe2ea",
+    "hexDark": "#242a3a",
+  },
+  "borderNeutral": {
+    "hex": "#b3bbce",
+    "hexDark": "#48526e",
+  },
+  "borderNeutralFaded": {
+    "hex": "#e2e3e4",
+    "hexDark": "#2d374c",
+  },
+  "borderPositive": {
+    "hex": "#10853b",
+    "hexDark": "#1aac50",
+  },
+  "borderPositiveFaded": {
+    "hex": "#cfeddb",
+    "hexDark": "#283b2c",
+  },
+  "borderPrimary": {
+    "hex": "#1c50c1",
+    "hexDark": "#778efb",
+  },
+  "borderPrimaryFaded": {
+    "hex": "#d7e1f8",
+    "hexDark": "#2e3555",
+  },
+  "foregroundCritical": {
+    "hex": "#c62121",
+    "hexDark": "#f56868",
+  },
+  "foregroundDisabled": {
+    "hex": "#c6ccda",
+    "hexDark": "#3f4962",
+  },
+  "foregroundNeutral": {
+    "hex": "#14181f",
+    "hexDark": "#eff1f5",
+  },
+  "foregroundNeutralFaded": {
+    "hex": "#5b667e",
+    "hexDark": "#c0c6d6",
+  },
+  "foregroundPositive": {
+    "hex": "#0d7533",
+    "hexDark": "#18ac4f",
+  },
+  "foregroundPrimary": {
+    "hex": "#225cdc",
+    "hexDark": "#7590f7",
+  },
+  "white": {
+    "hex": "#ffffff",
+  },
+}
+`;
+
+exports[`Themes/Utilties/generateColors generate the default theme 1`] = `
+{
+  "backgroundCritical": {
+    "hex": "#e22c2c",
+    "hexDark": "#c51b1b",
+  },
+  "backgroundCriticalFaded": {
+    "hex": "#fdf2f2",
+    "hexDark": "#3e1f1f",
+  },
+  "backgroundCriticalHighlighted": {
+    "hex": "#d02828",
+    "hexDark": "#d71f1f",
+  },
+  "backgroundDisabled": {
+    "hex": "#eceef2",
+    "hexDark": "#1c212f",
+  },
+  "backgroundDisabledFaded": {
+    "hex": "#f5f6f9",
+    "hexDark": "#151925",
+  },
+  "backgroundElevationBase": {
+    "hex": "#ffffff",
+    "hexDark": "#131722",
+  },
+  "backgroundElevationOverlay": {
+    "hex": "#ffffff",
+    "hexDark": "#1b1f2c",
+  },
+  "backgroundElevationRaised": {
+    "hex": "#ffffff",
+    "hexDark": "#171b27",
+  },
+  "backgroundNeutral": {
+    "hex": "#dfe2ea",
+    "hexDark": "#3f4861",
+  },
+  "backgroundNeutralFaded": {
+    "hex": "#f6f7f9",
+    "hexDark": "#222835",
+  },
+  "backgroundNeutralHighlighted": {
+    "hex": "#d2d7e2",
+    "hexDark": "#47516d",
+  },
+  "backgroundPage": {
+    "hex": "#ffffff",
+    "hexDark": "#0d111a",
+  },
+  "backgroundPageFaded": {
+    "hex": "#f9f9fb",
+    "hexDark": "#10131d",
+  },
+  "backgroundPositive": {
+    "hex": "#118850",
+    "hexDark": "#10844e",
+  },
+  "backgroundPositiveFaded": {
+    "hex": "#f1fdf8",
+    "hexDark": "#1f2a23",
+  },
+  "backgroundPositiveHighlighted": {
+    "hex": "#0f7d49",
+    "hexDark": "#128f55",
+  },
+  "backgroundPrimary": {
+    "hex": "#5a58f2",
+    "hexDark": "#5350f2",
+  },
+  "backgroundPrimaryFaded": {
+    "hex": "#f1f1fe",
+    "hexDark": "#252544",
+  },
+  "backgroundPrimaryHighlighted": {
+    "hex": "#4d4af0",
+    "hexDark": "#605ef4",
+  },
+  "black": {
+    "hex": "#000000",
+  },
+  "borderCritical": {
+    "hex": "#bf2424",
+    "hexDark": "#f86666",
+  },
+  "borderCriticalFaded": {
+    "hex": "#f6dada",
+    "hexDark": "#582929",
+  },
+  "borderDisabled": {
+    "hex": "#dfe2ea",
+    "hexDark": "#242a3a",
+  },
+  "borderNeutral": {
+    "hex": "#b3bbce",
+    "hexDark": "#48526e",
+  },
+  "borderNeutralFaded": {
+    "hex": "#e2e3e4",
+    "hexDark": "#2d374c",
+  },
+  "borderPositive": {
+    "hex": "#0c6e40",
+    "hexDark": "#18ab67",
+  },
+  "borderPositiveFaded": {
+    "hex": "#cdede0",
+    "hexDark": "#293b2f",
+  },
+  "borderPrimary": {
+    "hex": "#3b38ed",
+    "hexDark": "#8b8af7",
+  },
+  "borderPrimaryFaded": {
+    "hex": "#dcdcfb",
+    "hexDark": "#323164",
+  },
+  "foregroundCritical": {
+    "hex": "#c42525",
+    "hexDark": "#f36a6a",
+  },
+  "foregroundDisabled": {
+    "hex": "#c6ccda",
+    "hexDark": "#3f4962",
+  },
+  "foregroundNeutral": {
+    "hex": "#14181f",
+    "hexDark": "#eff1f5",
+  },
+  "foregroundNeutralFaded": {
+    "hex": "#5b667e",
+    "hexDark": "#c0c6d6",
+  },
+  "foregroundPositive": {
+    "hex": "#0d7544",
+    "hexDark": "#18ab66",
+  },
+  "foregroundPrimary": {
+    "hex": "#4f4cf0",
+    "hexDark": "#8b8af7",
+  },
+  "white": {
+    "hex": "#ffffff",
+  },
+}
+`;

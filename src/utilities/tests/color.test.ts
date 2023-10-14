@@ -1,4 +1,4 @@
-import { getOnColor } from "cli/utilities/color";
+import { getOnColor } from "utilities/color";
 
 describe("cli/utilities/color", () => {
 	test("returns white for black background", () => {
