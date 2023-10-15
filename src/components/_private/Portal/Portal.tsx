@@ -15,7 +15,7 @@ export const usePortalScope = () => {
  * Disclaimer: Works only for components that don't show the portal immediately
  * That gives Portal time to receive scope on first render
  */
-const Portal = (props: T.Props): JSX.Element => {
+const Portal = (props: T.Props): any => {
 	const { children, targetRef } = props;
 	/**
 	 * Check for parent portal to render inside it
