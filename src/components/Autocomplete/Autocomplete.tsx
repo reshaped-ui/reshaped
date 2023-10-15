@@ -5,19 +5,30 @@ import TextField from "components/TextField";
 import type { TextFieldProps } from "components/TextField";
 import DropdownMenu from "components/DropdownMenu";
 import type { MenuItemProps } from "components/MenuItem";
+import useHotkeys from "hooks/useHotkeys";
+import * as keys from "constants/keys";
 import * as T from "./Autocomplete.types";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
 const Autocomplete = (props: T.Props) => {
 	const { children, onChange, onItemSelect, name, ...textFieldProps } = props;
+	const inputRef = React.useRef<HTMLInputElement | null>(null);
 	const [active, setActive] = React.useState(false);
 	// Prevent dropdown from opening on selecting an item
 	const [locked, setLocked] = React.useState(false);
 	const hasChildren = !!React.Children.toArray(children).filter(Boolean).length;
 
-	const handleOpen = () => setActive(true);
+	const handleOpen = React.useCallback(() => setActive(true), []);
 	const handleClose = () => setActive(false);
+
+	useHotkeys(
+		{
+			[`${keys.UP},${keys.DOWN}`]: () => handleOpen(),
+		},
+		[handleOpen],
+		{ ref: inputRef }
+	);
 
 	const handleChange: TextFieldProps["onChange"] = (args) => {
 		onChange?.(args);
@@ -67,6 +78,7 @@ const Autocomplete = (props: T.Props) => {
 									attributes.onFocus?.();
 									handleFocus(e);
 								},
+								ref: inputRef,
 								role: "combobox",
 							}}
 						/>

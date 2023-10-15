@@ -78,10 +78,9 @@ const Actionable = (props: T.Props, ref: T.Ref) => {
 		handlePress(event);
 
 		repeatRef.current = true;
-	};
-
-	const handleKeyUp = () => {
-		repeatRef.current = false;
+		requestAnimationFrame(() => {
+			repeatRef.current = false;
+		});
 	};
 
 	return (
@@ -92,7 +91,6 @@ const Actionable = (props: T.Props, ref: T.Ref) => {
 			className={rootClassNames}
 			onClick={handlePress}
 			onKeyDown={handleKeyDown}
-			onKeyUp={handleKeyUp}
 		>
 			{children}
 		</TagName>

@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import useHotkeys from "hooks/useHotkeys";
-import * as keys from "constants/keys";
 import type * as T from "./Flyout.types";
 import { useFlyoutContext } from "./Flyout.context";
 
@@ -18,27 +16,15 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		handleMouseEnter,
 		handleMouseLeave,
 		handleClick,
-		handleOpen,
 		trapFocusMode,
 	} = useFlyoutContext();
-
-	useHotkeys(
-		{
-			[`${keys.UP},${keys.DOWN}`]: () => {
-				if (flyout.status !== "idle") return;
-				handleOpen();
-			},
-		},
-		[handleOpen, flyout.status],
-		{ ref: triggerElRef }
-	);
 
 	let childrenAttributes: Partial<T.TriggerAttributes> = {
 		onBlur: handleBlur,
 		ref: triggerElRef,
 	};
 
-	if (triggerType === "click") {
+	if (triggerType === "click" || trapFocusMode === "action-menu") {
 		childrenAttributes.onClick = handleClick;
 	}
 
@@ -47,7 +33,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		childrenAttributes.onMouseLeave = handleMouseLeave;
 	}
 
-	if (triggerType === "hover" || triggerType === "focus") {
+	if ((triggerType === "hover" && trapFocusMode !== "action-menu") || triggerType === "focus") {
 		childrenAttributes.onFocus = handleFocus;
 		childrenAttributes["aria-describedby"] = id;
 	}
