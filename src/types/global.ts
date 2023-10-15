@@ -1,7 +1,7 @@
 import React from "react";
 
 type ClassNameValue = string | null | undefined | false;
-export type ClassName = ClassNameValue | ClassNameValue[];
+export type ClassName = ClassNameValue | ClassNameValue[] | ClassName[];
 
 export type CSSVariable = `--${string}`;
 export type StyleAttribute = React.CSSProperties & Record<CSSVariable, string | number | undefined>;

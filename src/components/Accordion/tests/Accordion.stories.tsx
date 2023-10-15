@@ -75,7 +75,7 @@ export const renderProps = () => (
 				<Accordion.Trigger>
 					{(attributes, { active }) => (
 						<Button attributes={attributes} highlighted={active}>
-							Toggle2
+							Toggle
 						</Button>
 					)}
 				</Accordion.Trigger>

@@ -114,7 +114,7 @@ export const aligner = () => (
 			<View gap={2}>
 				<Text variant="title-6">Heading</Text>
 				<MenuItem.Aligner>
-					<MenuItem size="small" selected>
+					<MenuItem size="small" selected onClick={() => {}}>
 						Menu item
 					</MenuItem>
 				</MenuItem.Aligner>

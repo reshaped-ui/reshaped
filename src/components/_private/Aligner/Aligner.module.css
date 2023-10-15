@@ -1,0 +1,28 @@
+.root [data-rs-aligner-target] {
+	--rs-aligner-p-h: var(--rs-p-h, var(--rs-p));
+	--rs-aligner-p-v: var(--rs-p-v, var(--rs-p));
+}
+
+.root.--side-all [data-rs-aligner-target] {
+	margin: calc(var(--rs-aligner-p-v) * -1) calc(var(--rs-aligner-p-h) * -1);
+}
+
+.root.--side-start [data-rs-aligner-target],
+.root.--side-inline [data-rs-aligner-target] {
+	margin-inline-start: calc(var(--rs-aligner-p-h) * -1);
+}
+
+.root.--side-end [data-rs-aligner-target],
+.root.--side-inline [data-rs-aligner-target] {
+	margin-inline-end: calc(var(--rs-aligner-p-h) * -1);
+}
+
+.root.--side-top [data-rs-aligner-target],
+.root.--side-block [data-rs-aligner-target] {
+	margin-block-start: calc(var(--rs-aligner-p-v) * -1);
+}
+
+.root.--side-bottom [data-rs-aligner-target],
+.root.--side-block [data-rs-aligner-target] {
+	margin-block-end: calc(var(--rs-aligner-p-v) * -1);
+}

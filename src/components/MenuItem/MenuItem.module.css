@@ -2,16 +2,11 @@
 	display: block;
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, transform, box-shadow;
-	padding: var(--rs-menu-item-padding-v) var(--rs-menu-item-padding-h);
+	padding: var(--rs-p-v) var(--rs-p-h);
 	font-family: var(--rs-font-family-body);
 	font-weight: var(--rs-font-weight-medium);
 	color: var(--rs-menu-item-color);
 	background-color: var(--rs-menu-item-bg-color);
-}
-
-/* Apply only to button so it works correctly in stack */
-button.root {
-	width: 100%;
 }
 
 .icon {
@@ -36,8 +31,8 @@ button.root {
 
 @responsive .--size {
 	@value small {
-		--rs-menu-item-padding-v: var(--rs-unit-x1);
-		--rs-menu-item-padding-h: var(--rs-unit-x2);
+		--rs-p-v: var(--rs-unit-x1);
+		--rs-p-h: var(--rs-unit-x2);
 		--rs-menu-item-radius: var(--rs-unit-radius-small);
 
 		font-size: var(--rs-font-size-body-3);
@@ -45,8 +40,8 @@ button.root {
 	}
 
 	@value medium {
-		--rs-menu-item-padding-v: var(--rs-unit-x2);
-		--rs-menu-item-padding-h: var(--rs-unit-x3);
+		--rs-p-v: var(--rs-unit-x2);
+		--rs-p-h: var(--rs-unit-x3);
 		--rs-menu-item-radius: var(--rs-unit-radius-medium);
 
 		font-size: var(--rs-font-size-body-3);
@@ -54,8 +49,8 @@ button.root {
 	}
 
 	@value large {
-		--rs-menu-item-padding-v: var(--rs-unit-x3);
-		--rs-menu-item-padding-h: var(--rs-unit-x4);
+		--rs-p-v: var(--rs-unit-x3);
+		--rs-p-h: var(--rs-unit-x4);
 		--rs-menu-item-radius: var(--rs-unit-radius-medium);
 
 		font-size: var(--rs-font-size-body-2);
@@ -111,14 +106,20 @@ button.root {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-disabled);
 }
 
-/* Aligner */
-.aligner {
-	/* Normalize button width, since it doesn't respect width: 100% with negative margin */
-	button.root {
-		box-sizing: initial;
-	}
+/* 
+Aligner
+Normalize button width, since it doesn't respect width: 100% with negative margin 
+*/
 
-	.root {
-		margin: 0 calc(var(--rs-menu-item-padding-h) * -1);
-	}
+/* 
+Apply only to button so it works correctly in stack 
+Buttons don't stretch by default with display: block and need width: 100% to make negative margin work correctly
+inline-size: 100% won't work in this case
+*/
+button.root {
+	width: 100%;
+}
+
+.aligner button.root {
+	box-sizing: initial;
 }

@@ -22,22 +22,6 @@ module.exports = () => {
 						new Rule({
 							selector,
 							nodes: [
-								// new Declaration({
-								// 	prop: `${name}-s`,
-								// 	value: defaultValue,
-								// }),
-								// new Declaration({
-								// 	prop: `${name}-m`,
-								// 	value: `var(${name}-s)`,
-								// }),
-								// new Declaration({
-								// 	prop: `${name}-l`,
-								// 	value: `var(${name}-m)`,
-								// }),
-								// new Declaration({
-								// 	prop: `${name}-xl`,
-								// 	value: `var(${name}-l)`,
-								// }),
 								new Declaration({
 									prop: name,
 									value: defaultValue ? `var(${name}-s, ${defaultValue})` : `var(${name}-s)`,
@@ -81,20 +65,6 @@ module.exports = () => {
 							],
 						})
 					);
-
-					// [("m", "l", "xl")].forEach((viewport) => {
-					// 	mqRules[viewport].push(
-					// 		new Rule({
-					// 			selector,
-					// 			nodes: [
-					// 				new Declaration({
-					// 					prop: name,
-					// 					value: `var(${name}-${viewport})`,
-					// 				}),
-					// 			],
-					// 		})
-					// 	);
-					// });
 				});
 
 				atRule.walkAtRules("value", (valueAtRule) => {

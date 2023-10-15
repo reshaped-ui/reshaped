@@ -39,7 +39,7 @@ const MenuItemBase = (props: T.Props, ref: ActionableRef) => {
 		<Actionable
 			disabled={disabled}
 			className={rootClassNames}
-			attributes={attributes}
+			attributes={{ ...attributes, "data-rs-aligner-target": true }}
 			onClick={onClick}
 			href={href}
 			ref={ref}
