@@ -72,7 +72,7 @@ const ButtonBase = (props: T.Props, ref: ActionableRef) => {
 		<Actionable
 			disabled={disabled || loading}
 			className={rootClassName}
-			attributes={attributes}
+			attributes={{ ...attributes, "data-rs-aligner-target": true }}
 			type={type}
 			onClick={onClick}
 			href={href}

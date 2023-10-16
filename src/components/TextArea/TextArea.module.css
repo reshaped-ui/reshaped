@@ -10,7 +10,7 @@
 	flex-grow: 1;
 	width: 100%;
 	box-sizing: border-box;
-	padding: calc(var(--rs-text-area-padding) - 1px);
+	padding: calc(var(--rs-p) - 1px);
 	color: var(--rs-color-foreground-neutral);
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
@@ -33,7 +33,7 @@
 
 @responsive .--size {
 	@value medium {
-		--rs-text-area-padding: var(--rs-unit-x2);
+		--rs-p: var(--rs-unit-x2);
 
 		border-radius: var(--rs-unit-radius-small);
 
@@ -44,7 +44,7 @@
 	}
 
 	@value large {
-		--rs-text-area-padding: var(--rs-unit-x3);
+		--rs-p: var(--rs-unit-x3);
 
 		border-radius: var(--rs-unit-radius-medium);
 
@@ -55,7 +55,7 @@
 	}
 
 	@value xlarge {
-		--rs-text-area-padding: var(--rs-unit-x4);
+		--rs-p: var(--rs-unit-x4);
 
 		border-radius: var(--rs-unit-radius-medium);
 
