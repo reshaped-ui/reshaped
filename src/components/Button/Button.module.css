@@ -445,7 +445,7 @@
 
 .root.--variant-ghost {
 	--rs-button-border-width: 0px;
-	--rs-p-h: min(calc(var(--rs-button-p-h) - var(--rs-unit-x1)), var(--rs-unit-x2));
+	--rs-p-h: max(calc(var(--rs-button-p-h) - var(--rs-unit-x1)), var(--rs-unit-x2));
 
 	&.--color-neutral {
 		background: transparent;
