@@ -22,11 +22,16 @@ module.exports = () => {
 						new Rule({
 							selector,
 							nodes: [
+								defaultValue !== undefined &&
+									new Declaration({
+										prop: `${name}-s`,
+										value: defaultValue,
+									}),
 								new Declaration({
 									prop: name,
-									value: defaultValue ? `var(${name}-s, ${defaultValue})` : `var(${name}-s)`,
+									value: `var(${name}-s)`,
 								}),
-							],
+							].filter(Boolean),
 						})
 					);
 
