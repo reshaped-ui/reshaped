@@ -5,6 +5,7 @@ import { classNames, responsiveClassNames, responsivePropDependency } from "util
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
 import Icon from "components/Icon";
+import Aligner, { type AlignerProps } from "components/_private/Aligner";
 import type * as T from "./TextField.types";
 import s from "./TextField.module.css";
 
@@ -86,7 +87,7 @@ const TextField = (props: T.Props) => {
 	};
 
 	return (
-		<div {...attributes} className={rootClassName}>
+		<div {...attributes} data-rs-aligner-target className={rootClassName}>
 			<TextFieldSlot position="start" icon={icon} slot={startSlot} size={size} affix={prefix} />
 
 			<input
@@ -108,4 +109,5 @@ const TextField = (props: T.Props) => {
 	);
 };
 
+TextField.Aligner = (props: Omit<AlignerProps, "side">) => <Aligner {...props} />;
 export default TextField;

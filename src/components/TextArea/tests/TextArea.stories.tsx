@@ -2,6 +2,9 @@ import React from "react";
 import { Example } from "utilities/storybook";
 import TextArea from "components/TextArea";
 import FormControl from "components/FormControl";
+import View from "components/View";
+import Button from "components/Button";
+import Text from "components/Text";
 
 export default { title: "Components/TextArea" };
 
@@ -86,6 +89,26 @@ export const formControl = () => (
 				<TextArea name="name" placeholder="Enter your name" />
 				<FormControl.Error>This field is required</FormControl.Error>
 			</FormControl>
+		</Example.Item>
+	</Example>
+);
+
+export const aligner = () => (
+	<Example>
+		<Example.Item title="aligner">
+			<View gap={2}>
+				<Text variant="featured-2">What problem are you trying to solve?</Text>
+				<TextArea.Aligner>
+					<TextArea
+						variant="headless"
+						placeholder="Try something like 'I have a job'"
+						name="description"
+					/>
+				</TextArea.Aligner>
+				<View.Item>
+					<Button>Next</Button>
+				</View.Item>
+			</View>
 		</Example.Item>
 	</Example>
 );
