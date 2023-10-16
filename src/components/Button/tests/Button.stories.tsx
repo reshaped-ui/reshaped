@@ -627,7 +627,7 @@ export const aligner = () => (
 				<View.Item grow>
 					<Placeholder />
 				</View.Item>
-				<Button.Aligner position="top">
+				<Button.Aligner side="top">
 					<Button icon={IconZap} variant="ghost" />
 				</Button.Aligner>
 			</View>
@@ -638,7 +638,7 @@ export const aligner = () => (
 				<View.Item grow>
 					<Placeholder />
 				</View.Item>
-				<Button.Aligner position={["top", "end"]}>
+				<Button.Aligner side={["top", "end"]}>
 					<Button icon={IconZap} variant="ghost" />
 				</Button.Aligner>
 			</View>
@@ -649,7 +649,7 @@ export const aligner = () => (
 				<View.Item grow>
 					<Placeholder />
 				</View.Item>
-				<Button.Aligner position="bottom">
+				<Button.Aligner side="bottom">
 					<Button icon={IconZap} variant="ghost" />
 				</Button.Aligner>
 			</View>
@@ -660,7 +660,7 @@ export const aligner = () => (
 				<View.Item grow>
 					<Placeholder />
 				</View.Item>
-				<Button.Aligner position="start">
+				<Button.Aligner side="start">
 					<Button icon={IconZap} variant="ghost" />
 				</Button.Aligner>
 			</View>
@@ -671,7 +671,7 @@ export const aligner = () => (
 				<View.Item grow>
 					<Placeholder />
 				</View.Item>
-				<Button.Aligner position="end">
+				<Button.Aligner side="end">
 					<Button icon={IconZap} variant="ghost" />
 				</Button.Aligner>
 			</View>

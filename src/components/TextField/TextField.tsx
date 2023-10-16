@@ -5,7 +5,7 @@ import { classNames, responsiveClassNames, responsivePropDependency } from "util
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
 import Icon from "components/Icon";
-import Aligner, { type AlignerProps } from "components/_private/Aligner";
+import Aligner from "components/_private/Aligner";
 import type * as T from "./TextField.types";
 import s from "./TextField.module.css";
 
@@ -109,5 +109,5 @@ const TextField = (props: T.Props) => {
 	);
 };
 
-TextField.Aligner = (props: Omit<AlignerProps, "side">) => <Aligner {...props} />;
+TextField.Aligner = Aligner;
 export default TextField;

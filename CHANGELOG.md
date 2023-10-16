@@ -9,4 +9,6 @@
 - Accordion: removed overflow hidden once accordion is expanded
 - Text field: native autocomplete position
 - Dropdown menu: Nested menu open on enter and space
-- Simplified responsive css output
+- Text field, Text area: Added aligner utility
+- MenuItem: Added side support for the aligner
+- Button: Renamed aligned position to side, deprecated position

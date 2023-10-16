@@ -1,6 +1,7 @@
 import type React from "react";
 import type { IconProps } from "components/Icon";
 import type { ActionableProps } from "components/Actionable";
+import type { AlignerProps as BaseAlignerProps } from "components/_private/Aligner";
 import type * as G from "types/global";
 
 export type Size = "xlarge" | "large" | "medium" | "small";
@@ -28,13 +29,11 @@ export type GroupProps = {
 	attributes?: G.Attributes<"div", Props>;
 };
 
-type AlignerPosition = "start" | "end" | "top" | "bottom";
-
-export type AlignerProps = {
-	children: React.ReactElement;
-	position?: AlignerPosition | AlignerPosition[];
-	className?: G.ClassName;
-	attributes?: G.Attributes<"div", AlignerProps>;
+export type AlignerProps = BaseAlignerProps & {
+	/**
+	 * @deprecated The method should not be used
+	 */
+	position?: BaseAlignerProps["side"];
 };
 
 export type Export = React.ForwardRefExoticComponent<Props> & {

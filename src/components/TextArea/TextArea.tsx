@@ -3,7 +3,7 @@
 import React from "react";
 import { classNames, responsiveClassNames } from "utilities/helpers";
 import { useFormControl } from "components/FormControl";
-import Aligner, { type AlignerProps } from "components/_private/Aligner";
+import Aligner from "components/_private/Aligner";
 import useElementId from "hooks/useElementId";
 import type * as T from "./TextArea.types";
 import s from "./TextArea.module.css";
@@ -63,5 +63,5 @@ const TextArea = (props: T.Props) => {
 	);
 };
 
-TextArea.Aligner = (props: Omit<AlignerProps, "side">) => <Aligner {...props} />;
+TextArea.Aligner = Aligner;
 export default TextArea;
