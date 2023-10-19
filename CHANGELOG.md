@@ -12,3 +12,5 @@
 - Text field, Text area: Added aligner utility
 - MenuItem: Added side support for the aligner
 - Button: Renamed aligned position to side, deprecated position
+
+- Theming: Fixed setting color mode to an already applied color mode (transition)
