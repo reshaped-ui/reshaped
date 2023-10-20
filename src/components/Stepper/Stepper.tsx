@@ -6,6 +6,7 @@ import Divider from "components/Divider";
 import Icon from "components/Icon";
 import IconCheckmark from "icons/Checkmark";
 import type * as T from "./Stepper.types";
+import s from "./Stepper.module.css";
 
 const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 	const {
@@ -23,22 +24,33 @@ const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 
 	return (
 		<View>
-			<View attributes={attributes} className={className} direction="row" gap={2} align="center">
-				<View
-					align="center"
-					justify="center"
-					backgroundColor={active || completed ? "primary" : "neutral-faded"}
-					borderColor={active || completed ? undefined : "neutral-faded"}
-					borderRadius="circular"
-					as="span"
-					width={8}
-					height={8}
-				>
-					<Text variant="body-3" weight={active ? "bold" : "medium"}>
-						{completed ? <Icon svg={IconCheckmark} size={4} /> : step}
-					</Text>
-				</View>
-				<View gap={3}>
+			<View
+				attributes={attributes}
+				className={className}
+				direction="row"
+				gap={2}
+				align="center"
+				position="static"
+			>
+				<View.Item>
+					<View
+						align="center"
+						justify="center"
+						backgroundColor={active || completed ? "primary" : "neutral-faded"}
+						borderColor={active || completed ? undefined : "neutral-faded"}
+						borderRadius="circular"
+						as="span"
+						width={8}
+						height={8}
+						zIndex={5}
+					>
+						<Text variant="body-3" weight={active ? "bold" : "medium"}>
+							{completed ? <Icon svg={IconCheckmark} size={4} /> : step}
+						</Text>
+					</View>
+					{direction === "column" && !last && <Divider vertical className={s.verticalDivider} />}
+				</View.Item>
+				<View gap={3} grow>
 					<View.Item>
 						<Text variant="body-3" weight="medium">
 							{title}
@@ -49,17 +61,12 @@ const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 					</View.Item>
 				</View>
 			</View>
-			{direction === "column" && (
+			{direction === "column" && children && (
 				<Expandable active={active}>
 					<View paddingStart={10} paddingTop={2}>
 						{children}
 					</View>
 				</Expandable>
-			)}
-			{direction === "column" && !last && (
-				<View paddingStart={4} position="absolute" insetTop={10} insetBottom={0}>
-					<Divider vertical blank />
-				</View>
 			)}
 		</View>
 	);
@@ -80,6 +87,7 @@ const Stepper = (props: T.Props) => {
 			align={vertical ? "start" : "center"}
 			className={className}
 			gap={3}
+			wrap={false}
 		>
 			{React.Children.map(children, (child: any, index) => {
 				const itemId = child.props.id || `${index}`;
@@ -89,7 +97,7 @@ const Stepper = (props: T.Props) => {
 						<StepperItemPrivate
 							{...child.props}
 							id={child.props.id || `${index}`}
-							active={activeId === itemId}
+							active={activeId?.toString() === itemId}
 							step={index + 1}
 							last={index === length - 1}
 							direction={direction}

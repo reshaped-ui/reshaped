@@ -2,7 +2,7 @@ import React from "react";
 import type * as G from "types/global";
 
 export type Props = {
-	activeId?: string;
+	activeId?: string | number;
 	children?: React.ReactNode;
 	direction?: "row" | "column";
 	className?: G.ClassName;

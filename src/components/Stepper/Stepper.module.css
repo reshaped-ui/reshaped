@@ -1,0 +1,6 @@
+.verticalDivider {
+	position: absolute;
+
+	/* Centering 1px divider visually */
+	inset-inline-start: calc(var(--rs-unit-x4) - 0.5px);
+}

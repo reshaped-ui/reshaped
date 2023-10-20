@@ -7,7 +7,7 @@
 		"module": "CommonJS",
 		"target": "ES6"
 	},
-	"include": ["./src/cli", "./src/config"],
+	"include": ["./src/cli", "./src/config", "./src/themes"],
 	"exclude": [
 		"node_modules",
 		"dist",
