@@ -1,62 +1,70 @@
 .content {
 	--rs-flyout-gap: 2;
+	--rs-flyout-origin-x: 50%;
+	--rs-flyout-origin-y: 50%;
 }
 
-.content .inner {
+.inner {
 	opacity: 0;
+	transform: scale(0.8);
+	transform-origin: var(--rs-flyout-origin-x) var(--rs-flyout-origin-y);
 }
 
 .content.--position-top,
 .content.--position-top-end,
 .content.--position-top-start {
+	--rs-flyout-origin-y: 100%;
+
 	padding-bottom: calc(var(--rs-unit-x1) * var(--rs-flyout-gap));
 }
 
 .content.--position-bottom,
 .content.--position-bottom-end,
 .content.--position-bottom-start {
+	--rs-flyout-origin-y: 0%;
+
 	padding-top: calc(var(--rs-unit-x1) * var(--rs-flyout-gap));
+}
+
+.content.--position-top-start,
+.content.--position-bottom-start {
+	--rs-flyout-origin-x: 0%;
+}
+
+.content.--position-top-end,
+.content.--position-bottom-end {
+	--rs-flyout-origin-x: 100%;
 }
 
 .content.--position-start,
 .content.--position-start-top,
 .content.--position-start-bottom {
+	--rs-flyout-origin-x: 100%;
+
 	padding-right: calc(var(--rs-unit-x1) * var(--rs-flyout-gap));
 }
 
 .content.--position-end,
 .content.--position-end-top,
 .content.--position-end-bottom {
+	--rs-flyout-origin-x: 0%;
+
 	padding-left: calc(var(--rs-unit-x1) * var(--rs-flyout-gap));
 }
 
-.content.--position-top .inner,
-.content.--position-top-start .inner,
-.content.--position-top-end .inner,
-.content.--position-start-bottom .inner,
-.content.--position-end-bottom .inner {
-	transform: translate(0, calc(var(--rs-unit-x2) * -1));
+.content.--position-start-top,
+.content.--position-end-top {
+	--rs-flyout-origin-y: 0%;
 }
 
-.content.--position-bottom .inner,
-.content.--position-bottom-start .inner,
-.content.--position-bottom-end .inner,
-.content.--position-start-top .inner,
-.content.--position-end-top .inner {
-	transform: translate(0, var(--rs-unit-x2));
-}
-
-.content.--position-start .inner {
-	transform: translate(calc(var(--rs-unit-x2) * -1), 0);
-}
-
-.content.--position-end .inner {
-	transform: translate(var(--rs-unit-x2), 0);
+.content.--position-start-bottom,
+.content.--position-end-bottom {
+	--rs-flyout-origin-y: 100%;
 }
 
 .content.--visible .inner {
 	opacity: 1;
-	transform: translate(0, 0);
+	transform: scale(1);
 }
 
 .content.--animated .inner {

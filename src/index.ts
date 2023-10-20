@@ -112,6 +112,9 @@ export type { SkeletonProps } from "components/Skeleton";
 export { default as Slider } from "components/Slider";
 export type { SliderProps } from "components/Slider";
 
+export { default as Stepper } from "components/Stepper";
+export type { StepperProps } from "components/Stepper";
+
 export { default as Switch } from "components/Switch";
 export type { SwitchProps } from "components/Switch";
 

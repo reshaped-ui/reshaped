@@ -2,7 +2,7 @@ import React from "react";
 import * as G from "types/global";
 
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
-export type Position = "relative" | "absolute" | "fixed" | "sticky";
+export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
 
 /**
  * Utility controlled only with classnames

@@ -11,10 +11,15 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode || "light");
 
 	const changeColorMode = React.useCallback((targetMode: T.ColorMode) => {
-		// Avoid components styles animating when switching to another color mode
-		disableTransitions();
 		document.documentElement.setAttribute("data-rs-color-mode", targetMode);
-		setMode(targetMode);
+		setMode((prevMode) => {
+			if (prevMode !== targetMode) {
+				// Avoid components styles animating when switching to another color mode
+				disableTransitions();
+			}
+
+			return targetMode;
+		});
 	}, []);
 
 	useIsomorphicLayoutEffect(() => {

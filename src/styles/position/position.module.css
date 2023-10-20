@@ -1,4 +1,8 @@
 @responsive .--position {
+	@value static {
+		position: static;
+	}
+
 	@value relative {
 		position: relative;
 	}
