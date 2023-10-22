@@ -1,5 +1,5 @@
 import React from "react";
-import { Example } from "utilities/storybook";
+import { Example, Placeholder } from "utilities/storybook";
 import Stepper from "components/Stepper";
 import Button from "components/Button";
 import View from "components/View";
@@ -11,7 +11,7 @@ const Demo = (props: { subtitle?: string; activeId?: number }) => {
 
 	const content = (
 		<View gap={3}>
-			<View.Item>Content</View.Item>
+			<Placeholder />
 			<View direction="row" gap={3}>
 				<Button onClick={() => setActiveId((prev) => Math.max(0, prev - 1))}>Previous</Button>
 				<Button onClick={() => setActiveId((prev) => Math.min(2, prev + 1))}>Next</Button>
@@ -49,6 +49,32 @@ export const direction = () => (
 		</Example.Item>
 		<Example.Item title="direction: column">
 			<Stepper activeId="1" direction="column">
+				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
+				<Stepper.Item title="Step 2" />
+				<Stepper.Item title="Step 3 very long title" />
+			</Stepper>
+		</Example.Item>
+	</Example>
+);
+
+export const labelDisplay = () => (
+	<Example>
+		<Example.Item title="direction: row, labels hidden">
+			<Stepper activeId="1" labelDisplay="hidden">
+				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
+				<Stepper.Item title="Step 2" />
+				<Stepper.Item title="Step 3 very long title" />
+			</Stepper>
+		</Example.Item>
+		<Example.Item title="direction: column, labels hiden">
+			<Stepper activeId="1" direction="column" labelDisplay="hidden">
+				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
+				<Stepper.Item title="Step 2" />
+				<Stepper.Item title="Step 3 very long title" />
+			</Stepper>
+		</Example.Item>
+		<Example.Item title="direction: row, labels hidden on s">
+			<Stepper activeId="1" labelDisplay={{ s: "hidden", m: "inline" }}>
 				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
 				<Stepper.Item title="Step 2" />
 				<Stepper.Item title="Step 3 very long title" />

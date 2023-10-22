@@ -1,9 +1,11 @@
 import React from "react";
+import { responsivePropDependency } from "utilities/helpers";
 import Expandable from "components/_private/Expandable";
 import View from "components/View";
 import Text from "components/Text";
 import Divider from "components/Divider";
 import Icon from "components/Icon";
+import Hidden from "components/Hidden";
 import IconCheckmark from "icons/Checkmark";
 import type * as T from "./Stepper.types";
 import s from "./Stepper.module.css";
@@ -16,11 +18,27 @@ const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 		direction,
 		className,
 		attributes,
+		labelDisplay,
 		step,
 		completed,
 		active,
 		last,
 	} = props;
+	const labelHidden =
+		labelDisplay && responsivePropDependency(labelDisplay, (value) => value === "hidden");
+
+	const labelNode = (
+		<View gap={3} grow>
+			<View.Item>
+				<Text variant="body-3" weight="medium">
+					{title}
+				</Text>
+				<Text variant="caption-1" color="neutral-faded">
+					{subtitle}
+				</Text>
+			</View.Item>
+		</View>
+	);
 
 	return (
 		<View>
@@ -50,16 +68,7 @@ const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 					</View>
 					{direction === "column" && !last && <Divider vertical className={s.verticalDivider} />}
 				</View.Item>
-				<View gap={3} grow>
-					<View.Item>
-						<Text variant="body-3" weight="medium">
-							{title}
-						</Text>
-						<Text variant="caption-1" color="neutral-faded">
-							{subtitle}
-						</Text>
-					</View.Item>
-				</View>
+				{labelDisplay ? <Hidden hide={labelHidden}>{labelNode}</Hidden> : labelNode}
 			</View>
 			{direction === "column" && children && (
 				<Expandable active={active}>
@@ -76,7 +85,7 @@ const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 const StepperItem = (_: T.ItemProps) => null;
 
 const Stepper = (props: T.Props) => {
-	const { children, direction = "row", activeId, className, attributes } = props;
+	const { children, direction = "row", activeId, labelDisplay, className, attributes } = props;
 	const vertical = direction === "column";
 	const length = React.Children.count(children);
 
@@ -84,7 +93,7 @@ const Stepper = (props: T.Props) => {
 		<View
 			attributes={attributes}
 			direction={direction}
-			align={vertical ? "start" : "center"}
+			align={vertical ? "stretch" : "center"}
 			className={className}
 			gap={3}
 			wrap={false}
@@ -101,6 +110,7 @@ const Stepper = (props: T.Props) => {
 							step={index + 1}
 							last={index === length - 1}
 							direction={direction}
+							labelDisplay={labelDisplay}
 						/>
 
 						{!vertical && index < length - 1 && (

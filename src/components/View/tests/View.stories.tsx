@@ -1185,5 +1185,13 @@ export const testComposition = () => (
 				</View.Item>
 			</View>
 		</Example.Item>
+		<Example.Item title="View becomes flexbox if there is a child with grow">
+			<View height="300px" borderColor="neutral-faded">
+				<View height="50px" />
+				<View grow backgroundColor="neutral-faded" padding={4}>
+					Grow
+				</View>
+			</View>
+		</Example.Item>
 	</Example>
 );

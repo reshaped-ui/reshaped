@@ -3,6 +3,7 @@ import type * as G from "types/global";
 
 export type Props = {
 	activeId?: string | number;
+	labelDisplay?: G.Responsive<"inline" | "hidden">;
 	children?: React.ReactNode;
 	direction?: "row" | "column";
 	className?: G.ClassName;
@@ -15,12 +16,12 @@ export type ItemProps = {
 	title?: React.ReactNode;
 	subtitle?: React.ReactNode;
 	children?: React.ReactNode;
-	status?: "completed" | "current";
 	className?: G.ClassName;
 	attributes?: G.Attributes<"li", ItemProps>;
 };
 
 export type ItemPrivateProps = ItemProps & {
+	labelDisplay: Props["labelDisplay"];
 	step: number;
 	active: boolean;
 	direction: Props["direction"];

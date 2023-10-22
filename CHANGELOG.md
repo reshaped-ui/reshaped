@@ -13,6 +13,7 @@
 - MenuItem: Added side support for the aligner
 - Button: Renamed aligned position to side, deprecated position
 - View: Static position support
+- View: Added automatic switching to flex box if there are children with grow
 - Popover, Tooltip, DropdownMenu: Updated transition effect
 
 - Theming: Fixed setting color mode to an already applied color mode (transition)

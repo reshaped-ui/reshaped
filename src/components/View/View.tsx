@@ -108,7 +108,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		className,
 		attributes,
 	} = props;
-	const isFlex = !!align || !!justify || !!gap || !!props.direction;
+	let isFlex = !!align || !!justify || !!gap || !!props.direction;
 	const direction = props.direction || (isFlex ? "column" : undefined);
 	const radiusStyles = getRadiusStyles(borderRadius);
 	const bleedStyles = getBleedStyles(bleed);
@@ -157,6 +157,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 
 	const renderItem: T.RenderItem = ({ className, child, index }) => {
 		const isItem = child.type === ViewItem;
+		const isView = child.type === View;
 		const key = child.key || index;
 		const dividerElement = !!index && divided && renderDivider({ className, key });
 		let itemElement;
@@ -178,7 +179,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		// Passing grow here because it's responsive and nowrap should follow it
 		if (isItem && child.props?.grow) nowrap = child.props.grow;
 		if (isItem && child.props?.gap === "auto") nowrap = true;
-
+		if ((isItem || isView) && child.props?.grow) isFlex = true;
 		return [dividerElement, itemElement];
 	};
 
