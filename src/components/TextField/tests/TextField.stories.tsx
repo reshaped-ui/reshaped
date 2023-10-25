@@ -111,7 +111,7 @@ export const slots = () => (
 				name="Name"
 				placeholder="Enter your name"
 				value="Reshaped"
-				startSlot={<Placeholder h={28} />}
+				startSlot={<Placeholder h={24} />}
 			/>
 		</Example.Item>
 		<Example.Item title={["endSlot", "vertical and horizontal padding aligned"]}>

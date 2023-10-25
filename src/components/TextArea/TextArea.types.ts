@@ -12,8 +12,8 @@ type BaseProps = {
 	disabled?: boolean;
 	placeholder?: string;
 	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLTextAreaElement>>;
-	onFocus?: (e: React.FocusEvent) => void;
-	onBlur?: (e: React.FocusEvent) => void;
+	onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
+	onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div", Props>;
 	inputAttributes?: G.Attributes<"textarea", Omit<Props, "id">>;

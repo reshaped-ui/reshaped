@@ -73,7 +73,6 @@ const Select = (props: T.Props) => {
 						return 4;
 					})}
 					svg={icon}
-					className={s.icon}
 				/>
 			) : (
 				startSlot

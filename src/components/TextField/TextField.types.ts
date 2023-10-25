@@ -19,8 +19,8 @@ type BaseProps = {
 	suffix?: React.ReactNode;
 	variant?: "outline" | "faded" | "headless";
 	onChange?: G.ChangeHandler<string>;
-	onFocus?: (e: React.FocusEvent) => void;
-	onBlur?: (e: React.FocusEvent) => void;
+	onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div", Props>;
 	inputAttributes?: G.Attributes<"input">;

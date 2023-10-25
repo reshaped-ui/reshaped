@@ -46,9 +46,9 @@ const TextArea = (props: T.Props) => {
 	return (
 		<div {...attributes} data-rs-aligner-target className={rootClassName}>
 			<textarea
+				rows={3}
 				{...inputAttributes}
 				className={s.input}
-				rows={3}
 				disabled={disabled}
 				name={name}
 				placeholder={placeholder}

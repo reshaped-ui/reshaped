@@ -10,19 +10,11 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 	const { defaultMode, children } = props;
 	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode || "light");
 
-	const changeColorMode = React.useCallback((targetMode: T.ColorMode) => {
-		document.documentElement.setAttribute("data-rs-color-mode", targetMode);
-		setMode((prevMode) => {
-			if (prevMode !== targetMode) {
-				// Avoid components styles animating when switching to another color mode
-				disableTransitions();
-			}
-
-			return targetMode;
-		});
-	}, []);
-
 	useIsomorphicLayoutEffect(() => {
+		// Avoid components styles animating when switching to another color mode
+		disableTransitions();
+		document.documentElement.setAttribute("data-rs-color-mode", mode);
+
 		onNextFrame(() => {
 			enableTransitions();
 		});
@@ -37,18 +29,18 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 			| T.ColorMode
 			| undefined;
 
-		if (nextColorMode) changeColorMode(nextColorMode);
+		if (nextColorMode) setMode(nextColorMode);
 	}, []);
 
 	const value = React.useMemo(
 		() => ({
 			mode,
-			setMode: changeColorMode,
+			setMode,
 			invertMode: () => {
-				changeColorMode(mode === "light" ? "dark" : "light");
+				setMode(mode === "light" ? "dark" : "light");
 			},
 		}),
-		[mode, changeColorMode]
+		[mode]
 	);
 
 	return (

@@ -1,7 +1,7 @@
 .root {
 	/* Minus border size */
 
-	padding: calc(var(--rs-unit-x1) - 1px);
+	padding: calc(var(--rs-unit-x1) - 1px) 0;
 	display: flex;
 	position: relative;
 	z-index: 0;
@@ -51,17 +51,12 @@ select.input {
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-}
-
-.icon {
 	padding-inline-start: var(--rs-select-gap);
-	padding-inline-end: var(--rs-unit-x1);
-	box-sizing: initial;
 }
 
 /* Custom trigger with slot rendered inside trigger */
 .input .slot {
-	padding-inline-start: 0;
+	padding-inline-start: var(--rs-select-gap);
 	padding-inline-end: var(--rs-select-gap);
 }
 
@@ -78,7 +73,7 @@ select.input {
 
 @responsive .--size {
 	@value medium {
-		--rs-select-gap: var(--rs-unit-x1);
+		--rs-select-gap: var(--rs-unit-x2);
 		--rs-select-chevron-size: var(--rs-unit-x4);
 
 		border-radius: var(--rs-unit-radius-small);
@@ -92,7 +87,7 @@ select.input {
 	}
 
 	@value large {
-		--rs-select-gap: var(--rs-unit-x2);
+		--rs-select-gap: var(--rs-unit-x3);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
 		border-radius: var(--rs-unit-radius-medium);
@@ -106,7 +101,7 @@ select.input {
 	}
 
 	@value xlarge {
-		--rs-select-gap: var(--rs-unit-x3);
+		--rs-select-gap: var(--rs-unit-x4);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
 		border-radius: var(--rs-unit-radius-medium);
