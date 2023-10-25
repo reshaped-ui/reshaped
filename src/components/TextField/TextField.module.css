@@ -64,8 +64,8 @@
 }
 
 .attachment--position-start {
-	gap: var(--rs-text-field-gap);
 	padding-inline-start: var(--rs-text-field-gap);
+	gap: var(--rs-text-field-gap);
 
 	& .affix {
 		padding-inline-end: var(--rs-text-field-gap);
@@ -74,11 +74,12 @@
 }
 
 .attachment--position-end {
-	padding-inline-end: calc(var(--rs-text-field-gap) - var(--rs-unit-x1) - 1px);
+	padding-inline-end: var(--rs-unit-x1);
+	gap: var(--rs-unit-x1);
 
 	& .icon,
 	& .affix {
-		padding-inline-end: var(--rs-unit-x1);
+		padding-inline-end: calc(var(--rs-text-field-gap) - var(--rs-unit-x1));
 	}
 
 	& .affix {
