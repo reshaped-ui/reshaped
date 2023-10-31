@@ -6,7 +6,10 @@ import reshapedDefinition from "./_generator/definitions/reshaped";
 import baseDefinition from "./_generator/definitions/base";
 import mergeDefinitions from "./_generator/utilities/mergeDefinitions";
 
-export const baseThemeDefinition = mergeDefinitions(reshapedDefinition, baseDefinition);
+export const baseThemeDefinition = mergeDefinitions(
+	reshapedDefinition,
+	baseDefinition
+) as FullThemeDefinition;
 
 export const generateThemeColors = (options: {
 	primary: string;

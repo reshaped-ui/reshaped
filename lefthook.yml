@@ -7,7 +7,8 @@ pre-commit:
     stylelint:
       glob: "*.css"
       run: yarn lint:css --fix {staged_files} && git add {staged_files}
-# commit-msg:
-#   commands:
-#     "lint commit message":
-#       run: npx commitlint --color --edit {1}
+
+commit-msg:
+  commands:
+    "lint commit message":
+      run: npx commitlint --color --edit {1}
