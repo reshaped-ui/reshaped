@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.5](https://github.com/formaat-design/reshaped-source/compare/v2.5.4...v2.5.5) (2023-10-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v10.4.16 ([f9a4361](https://github.com/formaat-design/reshaped-source/commit/f9a4361398eb17b8c0675e3f1259dfb731723fe1))
+
 # 2.5.4 (2023-10-31)
 
 ### Bug Fixes
