@@ -17,7 +17,7 @@ module.exports = {
 			"@semantic-release/git",
 			{
 				assets: ["CHANGELOG.md", "package.json"],
-				message: "chore(global): publish",
+				message: "chore: publish",
 			},
 		],
 	],
