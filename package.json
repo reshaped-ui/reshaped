@@ -129,7 +129,7 @@
 		"stylelint-config-standard": "34.0.0",
 		"ts-jest": "29.1.1",
 		"typescript": "5.2.2",
-		"vite": "4.4.9",
+		"vite": "4.5.0",
 		"vite-tsconfig-paths": "4.2.1",
 		"@semantic-release/changelog": "6.0.3",
 		"@semantic-release/git": "10.0.1",
