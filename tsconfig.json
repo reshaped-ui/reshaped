@@ -18,5 +18,5 @@
 		"paths": { "*": ["*"] },
 		"types": ["node", "jest", "@testing-library/jest-dom"]
 	},
-	"exclude": ["node_modules", "dist", "tools"]
+	"exclude": ["node_modules", "dist", "tools", "./commitlint.config.ts"]
 }
