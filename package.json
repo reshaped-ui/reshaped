@@ -83,7 +83,7 @@
 		"@commitlint/cli": "18.2.0",
 		"@commitlint/config-conventional": "18.1.0",
 		"@commitlint/types": "18.1.0",
-		"@size-limit/preset-big-lib": "9.0.0",
+		"@size-limit/preset-big-lib": "10.0.2",
 		"@storybook/addon-a11y": "7.4.6",
 		"@storybook/react": "7.4.6",
 		"@storybook/react-vite": "7.4.6",
