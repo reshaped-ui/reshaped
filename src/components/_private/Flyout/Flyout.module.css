@@ -2,6 +2,8 @@
 	--rs-flyout-gap: 2;
 	--rs-flyout-origin-x: 50%;
 	--rs-flyout-origin-y: 50%;
+
+	position: absolute;
 }
 
 .inner {

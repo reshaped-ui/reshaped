@@ -1,7 +1,7 @@
 import React from "react";
 import useRTL from "hooks/useRTL";
 import { onNextFrame } from "utilities/animation";
-import { getClosestScrollableParent } from "utilities/dom";
+import { getClosestFlyoutTarget } from "utilities/dom";
 
 /**
  * Typings
@@ -249,7 +249,6 @@ const defaultStyles: FlyoutStyles = {
 	top: 0,
 	width: "auto",
 	height: "auto",
-	position: "absolute",
 	// z-index doesn't accept strings
 	zIndex: "var(--rs-z-index-flyout)" as any,
 };
@@ -258,7 +257,8 @@ const resetStyles: FlyoutStyles = {
 	left: 0,
 	top: 0,
 	position: "fixed",
-	opacity: 0,
+	// opacity: 0,
+	visibility: "hidden",
 	animation: "none",
 	transition: "none",
 	zIndex: "var(--rs-z-index-tooltip)" as any,
@@ -291,7 +291,7 @@ const flyout: Flyout = (origin, target, options) => {
 	document.body.appendChild(targetClone);
 
 	const targetBounds = targetClone.getBoundingClientRect();
-	const scrollableParent = getClosestScrollableParent(origin);
+	const scrollableParent = getClosestFlyoutTarget(origin);
 	const boundsDelta = scrollableParent.getBoundingClientRect();
 
 	const parentOffset = {
