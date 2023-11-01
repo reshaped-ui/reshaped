@@ -148,6 +148,41 @@ export const testInsideScrollArea = () => (
 	</Example>
 );
 
+export const testInsideFixed = () => (
+	<Example>
+		<Example.Item title="should move the content on page scroll">
+			<View
+				position="fixed"
+				insetTop={20}
+				insetStart={0}
+				insetEnd={0}
+				backgroundColor="neutral-faded"
+				padding={4}
+			>
+				<Flyout triggerType="click" position="bottom-start">
+					<Flyout.Trigger>{(attributes) => <button {...attributes}>Foo</button>}</Flyout.Trigger>
+					<Flyout.Content>
+						<div
+							style={{
+								background: "var(--rs-color-background-elevation-overlay)",
+								padding: "var(--rs-unit-x4)",
+								height: 100,
+								width: 160,
+								borderRadius: "var(--rs-unit-radius-medium)",
+								border: "1px solid var(--rs-color-border-neutral-faded)",
+								boxSizing: "border-box",
+							}}
+						>
+							{"Content"}
+						</div>
+					</Flyout.Content>
+				</Flyout>
+			</View>
+			<div style={{ height: 2000 }} />
+		</Example.Item>
+	</Example>
+);
+
 export const widthTrigger = () => (
 	<Flyout triggerType="click" width="trigger" position="bottom">
 		<Flyout.Trigger>

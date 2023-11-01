@@ -4,7 +4,7 @@ import React from "react";
 import { classNames } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
-import { getClosestScrollableParent } from "utilities/dom";
+import { getClosestFlyoutTarget } from "utilities/dom";
 import { useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 import s from "./Flyout.module.css";
@@ -89,7 +89,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 		</div>
 	);
 
-	const closestScrollable = getClosestScrollableParent(triggerElRef.current);
+	const closestScrollable = getClosestFlyoutTarget(triggerElRef.current);
 
 	return (
 		<Portal
