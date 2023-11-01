@@ -6,6 +6,7 @@ exports[`DropdownMenu works as controlled 1`] = `
   aria-expanded="true"
   aria-haspopup="menu"
   class=" root  root --color-neutral --variant-solid  --size-medium"
+  data-rs-aligner-target="true"
   type="button"
 >
   <span
@@ -22,6 +23,7 @@ exports[`DropdownMenu works as uncontrolled 1`] = `
   aria-expanded="true"
   aria-haspopup="menu"
   class=" root  root --color-neutral --variant-solid  --size-medium"
+  data-rs-aligner-target="true"
   type="button"
 >
   <span
@@ -37,6 +39,7 @@ exports[`DropdownMenu works when opening and closing 1`] = `
   aria-expanded="false"
   aria-haspopup="menu"
   class=" root  root --color-neutral --variant-solid  --size-medium"
+  data-rs-aligner-target="true"
   type="button"
 >
   <span
@@ -53,6 +56,7 @@ exports[`DropdownMenu works when opening and closing 2`] = `
   aria-expanded="true"
   aria-haspopup="menu"
   class=" root  root --color-neutral --variant-solid  --size-medium"
+  data-rs-aligner-target="true"
   type="button"
 >
   <span
