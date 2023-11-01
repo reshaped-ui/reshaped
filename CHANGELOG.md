@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.6](https://github.com/formaat-design/reshaped-source/compare/v2.5.5...v2.5.6) (2023-11-01)
+
+
+### Bug Fixes
+
+* **Flyout:** added support for automatic positioning inside position: fixed parent ([04c8239](https://github.com/formaat-design/reshaped-source/commit/04c8239264397b1aae90bbef3cb6bd6f75227707))
+* **Toast:** removed logs ([15ee2c5](https://github.com/formaat-design/reshaped-source/commit/15ee2c5fe758287c11fccaef0fc49a36a38cf0bb))
+
 ## [2.5.5](https://github.com/formaat-design/reshaped-source/compare/v2.5.4...v2.5.5) (2023-10-31)
 
 
