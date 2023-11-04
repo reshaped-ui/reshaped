@@ -35,14 +35,11 @@
 	padding-inline-end: calc(
 		var(--rs-select-chevron-size) + var(--rs-select-gap) * 2 + var(--rs-unit-x1)
 	);
+	padding-inline-start: var(--rs-select-gap);
 
 	&::-ms-expand {
 		display: none;
 	}
-}
-
-select.input {
-	padding-inline-start: var(--rs-select-gap);
 }
 
 .slot {
@@ -56,7 +53,7 @@ select.input {
 
 /* Custom trigger with slot rendered inside trigger */
 .input .slot {
-	padding-inline-start: var(--rs-select-gap);
+	padding-inline-start: 0;
 	padding-inline-end: var(--rs-select-gap);
 }
 
