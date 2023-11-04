@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.8](https://github.com/formaat-design/reshaped-source/compare/v2.5.7...v2.5.8) (2023-11-04)
+
+
+### Bug Fixes
+
+* **Select:** fixed custom trigger start padding when used without slots ([e3c81a9](https://github.com/formaat-design/reshaped-source/commit/e3c81a92c13f159ecdb9a529e832ea25cd0ec6a5))
+
 ## [2.5.7](https://github.com/formaat-design/reshaped-source/compare/v2.5.6...v2.5.7) (2023-11-04)
 
 
