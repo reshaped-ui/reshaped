@@ -8,8 +8,12 @@
 
 .inner {
 	opacity: 0;
-	transform: scale(0.8);
+	transform: scale(0.8) translateY(0);
 	transform-origin: var(--rs-flyout-origin-x) var(--rs-flyout-origin-y);
+}
+
+.content.--width-trigger .inner {
+	transform: scale(1) translateY(var(--rs-unit-x2));
 }
 
 .content.--position-top,
@@ -66,7 +70,7 @@
 
 .content.--visible .inner {
 	opacity: 1;
-	transform: scale(1);
+	transform: scale(1) translateY(0);
 }
 
 .content.--animated .inner {

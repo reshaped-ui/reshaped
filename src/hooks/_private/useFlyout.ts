@@ -344,7 +344,7 @@ const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState =>
 	switch (action.type) {
 		case "render":
 			// Disable events before it's positioned to avoid mouseleave getting triggered
-			return { ...state, status: "rendered", styles: { pointerEvents: "none" } };
+			return { ...state, status: "rendered", styles: { pointerEvents: "none", ...resetStyles } };
 		case "position":
 			return {
 				...state,

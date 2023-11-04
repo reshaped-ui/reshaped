@@ -253,6 +253,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			value={{
 				id,
 				flyout,
+				width,
 				triggerElRef,
 				flyoutElRef,
 				handleClose,

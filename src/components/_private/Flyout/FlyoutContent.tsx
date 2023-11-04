@@ -26,6 +26,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 		contentClassName,
 		contentAttributes,
 		trapFocusMode,
+		width,
 	} = useFlyoutContext();
 	const { styles, status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
@@ -41,7 +42,8 @@ const FlyoutContent = (props: T.ContentProps) => {
 		status === "visible" && s["--visible"],
 		// Animate after correct position has been assigned
 		["visible", "hidden"].includes(status) && s["--animated"],
-		position && s[`--position-${position}`]
+		position && s[`--position-${position}`],
+		width === "trigger" && s["--width-trigger"]
 	);
 	// className is applied to inner element because it has the transform and is treated like a real root element
 	const innerClassNames = classNames(s.inner, className, contentClassName);

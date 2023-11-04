@@ -66,6 +66,7 @@ export type ContentProps = {
 export type ContextProps = {
 	id: string;
 	flyout: ReturnType<typeof useFlyout>;
+	width?: FlyoutWidth;
 	triggerElRef: React.RefObject<HTMLButtonElement>;
 	flyoutElRef: React.RefObject<HTMLDivElement>;
 	handleClose: (options?: { closeParents?: boolean }) => void;
