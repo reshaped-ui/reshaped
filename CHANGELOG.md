@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.7](https://github.com/formaat-design/reshaped-source/compare/v2.5.6...v2.5.7) (2023-11-04)
+
+
+### Bug Fixes
+
+* **Popover:** fixed default render styles and improved transition for trigger width ([e4e4584](https://github.com/formaat-design/reshaped-source/commit/e4e4584b34d6d6b9f43107b6a6c591a6c549542d))
+
 ## [2.5.6](https://github.com/formaat-design/reshaped-source/compare/v2.5.5...v2.5.6) (2023-11-01)
 
 
