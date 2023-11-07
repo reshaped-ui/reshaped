@@ -1,5 +1,5 @@
 import type * as T from "themes/_generator/types";
-import type { FullThemeDefinition } from "themes/_generator/tokens/types";
+import type { FullThemeDefinition, ColorHue } from "themes/_generator/tokens/types";
 import type {
 	GeneratedOnName as GeneratedOnColorName,
 	GeneratedRGBName as GeneratedRGBColorName,
@@ -33,18 +33,30 @@ const generateBackgroundColors = (
 		if (!bgToken) return;
 
 		if (needsDynamicForeground) {
+			const overrideKeys =
+				themeOptions?.onColorValues && (Object.keys(themeOptions?.onColorValues) as ColorHue[]);
+			const onColorKey =
+				overrideKeys && overrideKeys.find((key) => tokenName.toLowerCase().includes(key));
+
+			const onColorHexMap = {
+				lightHexColor:
+					(onColorKey && themeOptions?.onColorValues?.[onColorKey]?.hexLight) ||
+					definition?.color?.white?.hex,
+				darkHexColor:
+					(onColorKey && themeOptions?.onColorValues?.[onColorKey]?.hexDark) ||
+					definition?.color?.black?.hex,
+			};
+
 			const hex = getOnColor({
 				bgHexColor: bgToken.hex!,
 				mode: "light",
-				lightHexColor: definition?.color?.white?.hex,
-				darkHexColor: definition?.color?.black?.hex,
+				...onColorHexMap,
 			});
 
 			const hexDark = getOnColor({
 				bgHexColor: bgToken.hexDark || bgToken.hex!,
 				mode: "dark",
-				lightHexColor: definition?.color?.white?.hex,
-				darkHexColor: definition?.color?.black?.hex,
+				...onColorHexMap,
 			});
 
 			// eslint-disable-next-line no-param-reassign

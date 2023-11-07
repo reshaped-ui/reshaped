@@ -19,6 +19,8 @@ export type TokenType =
 	| "easing"
 	| "shadow";
 
+export type ColorHue = "primary" | "positive" | "critical" | "neutral";
+
 export type BaseThemeDefinition = {
 	viewport: Record<TViewport.Name, TViewport.Token>;
 };

@@ -20,7 +20,11 @@ export const generateThemeColors = (options: {
 	return generateColors(options);
 };
 
-export const getThemeCSS = (name: string, definition: T.PartialDeep<FullThemeDefinition>) => {
-	const code = transform(name, definition, { isFragment: true });
+export const getThemeCSS = (
+	name: string,
+	definition: T.PartialDeep<FullThemeDefinition>,
+	options?: T.PublicOptions["themeOptions"]
+) => {
+	const code = transform(name, definition, { themeOptions: options, isFragment: true });
 	return code.variables;
 };
