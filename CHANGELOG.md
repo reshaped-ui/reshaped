@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.9](https://github.com/formaat-design/reshaped-source/compare/v2.5.8...v2.5.9) (2023-11-07)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fixed breadcrumbs rendering when used in RSC ([98c14bc](https://github.com/formaat-design/reshaped-source/commit/98c14bc885707431ea2421fe865e9acf436ec650))
+* **Themes:** added a way control individual "on" colors to fix themes with non-gray foreground color ([506e38c](https://github.com/formaat-design/reshaped-source/commit/506e38c4f0b3b45ce8c240f5fac6304a427de2b1))
+
 ## [2.5.8](https://github.com/formaat-design/reshaped-source/compare/v2.5.7...v2.5.8) (2023-11-04)
 
 
