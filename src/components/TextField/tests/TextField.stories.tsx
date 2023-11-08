@@ -64,6 +64,18 @@ export const icon = () => (
 		<Example.Item title="endIcon">
 			<TextField name="Name" placeholder="Enter your name" value="Reshaped" endIcon={IconZap} />
 		</Example.Item>
+
+		<Example.Item title="width affixes">
+			<TextField
+				name="Name"
+				placeholder="Enter your name"
+				value="Reshaped"
+				endIcon={IconZap}
+				icon={IconZap}
+				prefix="Estimated value"
+				suffix="m2"
+			/>
+		</Example.Item>
 	</Example>
 );
 
