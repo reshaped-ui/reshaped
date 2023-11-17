@@ -38,7 +38,7 @@
 
 .--animated {
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
-	transition-property: background-color, color, border-color;
+	transition-property: background-color, color, border-color, box-shadow;
 }
 
 @each $alignment in start, center, end {

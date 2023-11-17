@@ -1,0 +1,30 @@
+.root {
+	&.--highlighted .triggerLayer {
+		background: rgba(var(--rs-color-rgb-background-primary), 8%);
+		border-color: var(--rs-color-border-primary);
+	}
+}
+
+.triggerLayer {
+	border: 1px dashed var(--rs-color-border-neutral);
+
+	[data-rs-keyboard] &:focus-within {
+		box-shadow: var(--rs-focus-shadow);
+	}
+
+	&:hover:not(:has(.trigger)) {
+		background: rgba(var(--rs-color-rgb-background-neutral), 16%);
+	}
+
+	&:has(.trigger) {
+		pointer-events: none;
+
+		& .trigger {
+			pointer-events: all;
+		}
+	}
+}
+
+.trigger {
+	display: contents;
+}
