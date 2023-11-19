@@ -7,7 +7,7 @@ const fixtures = {
 	id: "test-id",
 };
 
-describe("Components/Dismissible", () => {
+describe("Components/Divider", () => {
 	test("renders with horizontal orientation", () => {
 		render(<Divider />);
 

@@ -52,6 +52,9 @@ export type { DividerProps } from "components/Divider";
 export { default as DropdownMenu } from "components/DropdownMenu";
 export type { DropdownMenuProps } from "components/DropdownMenu";
 
+export { default as FileUpload } from "components/FileUpload";
+export type { FileUploadProps } from "components/FileUpload";
+
 export { default as FormControl } from "components/FormControl";
 export type { FormControlProps } from "components/FormControl";
 
