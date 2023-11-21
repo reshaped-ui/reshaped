@@ -16,7 +16,8 @@
 }
 
 .root.--color-inherit {
-	color: currentcolor;
+	/* currentColor for color is not supported in Safari iOS */
+	color: inherit;
 }
 
 .root.--variant-plain {
