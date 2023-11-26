@@ -16,6 +16,7 @@ export type Props = {
 	children?: React.ReactNode;
 	actionsSlot?: React.ReactNode;
 	color?: "neutral" | "primary" | "critical" | "positive" | "inverted";
+	className?: G.ClassName;
 	attributes?: G.Attributes<"div", Props>;
 };
 

@@ -42,5 +42,18 @@ export const getOnColor = (args: {
 		b: (1 - bgColor.a) * baseColor.b + bgColor.a * bgColor.b,
 	};
 
-	return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? darkHexColor : lightHexColor;
+	const lrgb: number[] = [];
+	[r, g, b].forEach(function (c) {
+		c = c / 255;
+		if (c <= 0.03928) {
+			c = c / 12.92;
+		} else {
+			c = Math.pow((c + 0.055) / 1.055, 2.4);
+		}
+
+		lrgb.push(c);
+	});
+
+	const lum = 0.2126 * lrgb[0] + 0.7152 * lrgb[1] + 0.0722 * lrgb[2];
+	return lum > 0.179 ? darkHexColor : lightHexColor;
 };

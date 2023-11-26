@@ -12,6 +12,7 @@ const fixtures = {
 	buttonText: "test-button",
 	children: "test-children",
 	startSlot: "test-start",
+	className: "test-className",
 	id: "test-id",
 };
 
@@ -112,7 +113,7 @@ describe("Components/Toast", () => {
 		expect(elStart).toBeInTheDocument();
 	});
 
-	test("works with attributes", async () => {
+	test("works with className and attributes", async () => {
 		const Component = () => {
 			const toast = useToast();
 
@@ -131,6 +132,7 @@ describe("Components/Toast", () => {
 								</Button>
 							),
 							attributes: { "data-testid": fixtures.id },
+							className: fixtures.className,
 						});
 					}}
 				>
@@ -152,5 +154,6 @@ describe("Components/Toast", () => {
 		const elToast = screen.getByTestId(fixtures.id);
 
 		expect(elToast).toBeInTheDocument();
+		expect(elToast).toHaveClass(fixtures.className);
 	});
 });

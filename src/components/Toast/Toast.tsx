@@ -20,6 +20,7 @@ const Toast = (props: T.Props & { collapsed: boolean }) => {
 		actionsSlot,
 		startSlot,
 		collapsed,
+		className,
 		attributes,
 	} = props;
 	let backgroundColor: ViewProps["backgroundColor"] =
@@ -57,7 +58,7 @@ const Toast = (props: T.Props & { collapsed: boolean }) => {
 			direction="row"
 			gap={3}
 			align={isLarge ? "start" : "center"}
-			className={s.toast}
+			className={[s.toast, className]}
 			attributes={attributes}
 		>
 			{icon && <Icon size={5} svg={icon} className={s.icon} />}
