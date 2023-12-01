@@ -4,7 +4,8 @@ import type {
 	GeneratedOnName as GeneratedOnColorName,
 	GeneratedRGBName as GeneratedRGBColorName,
 } from "themes/_generator/tokens/color/color.types";
-import { getOnColor, hexToRgbString } from "utilities/color";
+import { hexToRgb, getOnColor } from "./color";
+import { bgWithDynamicForeground } from "../constants";
 import { capitalize } from "utilities/string";
 
 const generateBackgroundColors = (
@@ -18,15 +19,13 @@ const generateBackgroundColors = (
 		const generatedForegroundName = `on${capitalize(tokenName)}` as GeneratedOnColorName;
 		const generatedRGBName = `rgb${capitalize(tokenName)}` as GeneratedRGBColorName;
 		const generateOnColorsFor = [
-			"backgroundNeutral",
-			"backgroundPrimary",
-			"backgroundCritical",
-			"backgroundPositive",
+			...bgWithDynamicForeground,
 			...(themeOptions?.generateOnColorsFor || []),
 		];
 		const needsDynamicForeground = generateOnColorsFor.includes(tokenName);
 		const needsRGB =
 			tokenName.startsWith("background") ||
+			tokenName.startsWith("border") ||
 			tokenName.endsWith("black") ||
 			tokenName.endsWith("white");
 
@@ -67,10 +66,12 @@ const generateBackgroundColors = (
 		}
 
 		if (needsRGB) {
+			const rgb = hexToRgb(bgToken.hex!);
+			const rgbDark = bgToken.hexDark && hexToRgb(bgToken.hexDark);
 			// eslint-disable-next-line no-param-reassign
 			definition.color![generatedRGBName] = {
-				hex: hexToRgbString(bgToken.hex!),
-				hexDark: bgToken.hexDark && hexToRgbString(bgToken.hexDark),
+				hex: `${rgb.r}, ${rgb.g}, ${rgb.b}`,
+				hexDark: rgbDark && `${rgbDark.r}, ${rgbDark.g}, ${rgbDark.b}`,
 			};
 		}
 	});
