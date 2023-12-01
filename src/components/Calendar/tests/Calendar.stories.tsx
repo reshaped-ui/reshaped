@@ -1,0 +1,17 @@
+import React from "react";
+import { Example } from "utilities/storybook";
+import Calendar from "components/Calendar";
+
+export default { title: "Components/Calendar" };
+
+export const rendering = () => (
+	<Example>
+		<Example.Item title="single date selection">
+			<Calendar
+				defaultMonth={new Date(2022, 0)}
+				min={new Date(2021, 11, 6)}
+				max={new Date(2022, 1, 22)}
+			/>
+		</Example.Item>
+	</Example>
+);

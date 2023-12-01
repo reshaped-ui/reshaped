@@ -1,0 +1,45 @@
+.dates {
+	table-layout: fixed;
+	width: 100%;
+}
+
+.weekday {
+	color: var(--rs-color-foreground-neutral-faded);
+	font-weight: var(--rs-font-weight-regular);
+}
+
+.week {
+	border-top: 2px solid transparent;
+}
+
+.date {
+	padding: 0;
+	border-left: 2px solid transparent;
+
+	&:first-child {
+		border-left: 0;
+	}
+}
+
+.date-button {
+	padding: var(--rs-unit-x2);
+	transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
+	border-radius: var(--rs-unit-radius-small);
+	text-align: center;
+
+	&:hover {
+		background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
+	}
+
+	&--active,
+	&--active:hover {
+		background-color: var(--rs-color-background-primary);
+		color: var(--rs-color-on-background-primary);
+	}
+
+	&[disabled],
+	&[disabled]:hover {
+		background-color: transparent;
+		color: var(--rs-color-foreground-disabled);
+	}
+}
