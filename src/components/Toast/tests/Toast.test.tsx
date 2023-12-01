@@ -126,11 +126,7 @@ describe("Components/Toast", () => {
 							text: fixtures.text,
 							children: fixtures.children,
 							startSlot: fixtures.startSlot,
-							actionsSlot: (
-								<Button attributes={{ "data-testid": fixtures.id }} onClick={() => toast.hide(id)}>
-									{fixtures.buttonText}
-								</Button>
-							),
+							actionsSlot: <Button onClick={() => toast.hide(id)}>{fixtures.buttonText}</Button>,
 							attributes: { "data-testid": fixtures.id },
 							className: fixtures.className,
 						});

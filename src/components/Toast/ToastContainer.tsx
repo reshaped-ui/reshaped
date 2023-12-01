@@ -119,7 +119,7 @@ const ToastContainer = (props: T.ContainerProps) => {
 				<Toast
 					{...toastProps}
 					collapsed={index > 0 && !inspected}
-					attributes={{ ref: wrapperRef }}
+					attributes={{ ...toastProps.attributes, ref: wrapperRef }}
 				/>
 			</span>
 		</li>
