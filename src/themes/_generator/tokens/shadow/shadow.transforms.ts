@@ -1,6 +1,6 @@
-import { hexToRgbString } from "utilities/color";
-import type * as T from "./shadow.types";
+import { hexToRgb } from "../../utilities/color";
 import type { Transformer } from "../types";
+import type * as T from "./shadow.types";
 
 const transformedToken: Transformer<T.Token> = (name, token, theme) => [
 	{
@@ -12,7 +12,9 @@ const transformedToken: Transformer<T.Token> = (name, token, theme) => [
 				const blur = ` ${value.blurRadius || 0}px`;
 				const spread = ` ${value.spreadRadius || 0}px`;
 				const colorRef = theme.color[value.colorToken];
-				const color = `rgba(${hexToRgbString(colorRef.hex)}, ${value.opacity || 1})`;
+				const rgb = hexToRgb(colorRef.hex);
+				const rgbString = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+				const color = `rgba(${rgbString}, ${value.opacity || 1})`;
 
 				return `${value.offsetX}px ${value.offsetY}px${blur}${spread} ${color}`;
 			})

@@ -13,8 +13,8 @@ export default { title: "Themes" };
 
 const css = getThemeCSS("green", {
 	color: {
-		backgroundPrimary: { hex: "#1abc9c", hexDark: "#16a085" },
-		backgroundPrimaryHighlighted: { hex: "#16a085", hexDark: "#1abc9c" },
+		backgroundPrimary: { hex: "#1abc9c", hexDark: "#00E5C4" },
+		backgroundPrimaryHighlighted: { hex: "#16a085", hexDark: "#00E5C4" },
 	},
 });
 

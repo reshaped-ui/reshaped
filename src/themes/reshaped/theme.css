@@ -88,7 +88,7 @@
 			}
 		
 			[data-rs-theme="reshaped"][data-rs-color-mode="light"] {
-					--rs-color-background-primary: #5A58F2;
+					--rs-color-background-primary: #5a58f2;
 --rs-color-background-primary-faded: #f1f1fe;
 --rs-color-background-primary-highlighted: #4d4af0;
 --rs-color-border-primary: #3b38ed;
@@ -125,18 +125,27 @@
 --rs-color-rgb-background-primary: 90, 88, 242;
 --rs-color-rgb-background-primary-faded: 241, 241, 254;
 --rs-color-rgb-background-primary-highlighted: 77, 74, 240;
+--rs-color-rgb-border-primary: 59, 56, 237;
+--rs-color-rgb-border-primary-faded: 220, 220, 251;
 --rs-color-rgb-background-critical: 226, 44, 44;
 --rs-color-rgb-background-critical-faded: 253, 242, 242;
 --rs-color-rgb-background-critical-highlighted: 208, 40, 40;
+--rs-color-rgb-border-critical: 191, 36, 36;
+--rs-color-rgb-border-critical-faded: 246, 218, 218;
 --rs-color-rgb-background-positive: 17, 136, 80;
 --rs-color-rgb-background-positive-faded: 241, 253, 248;
 --rs-color-rgb-background-positive-highlighted: 15, 125, 73;
+--rs-color-rgb-border-positive: 12, 110, 64;
+--rs-color-rgb-border-positive-faded: 205, 237, 224;
 --rs-color-on-background-neutral: #000000;
 --rs-color-rgb-background-neutral: 223, 226, 234;
 --rs-color-rgb-background-neutral-faded: 246, 247, 249;
 --rs-color-rgb-background-neutral-highlighted: 210, 215, 226;
+--rs-color-rgb-border-neutral: 179, 187, 206;
+--rs-color-rgb-border-neutral-faded: 226, 227, 228;
 --rs-color-rgb-background-disabled: 236, 238, 242;
 --rs-color-rgb-background-disabled-faded: 245, 246, 249;
+--rs-color-rgb-border-disabled: 223, 226, 234;
 --rs-color-rgb-background-elevation-base: 255, 255, 255;
 --rs-color-rgb-background-elevation-raised: 255, 255, 255;
 --rs-color-rgb-background-elevation-overlay: 255, 255, 255;
@@ -182,18 +191,27 @@
 --rs-color-rgb-background-primary: 83, 80, 242;
 --rs-color-rgb-background-primary-faded: 37, 37, 68;
 --rs-color-rgb-background-primary-highlighted: 96, 94, 244;
+--rs-color-rgb-border-primary: 139, 138, 247;
+--rs-color-rgb-border-primary-faded: 50, 49, 100;
 --rs-color-rgb-background-critical: 197, 27, 27;
 --rs-color-rgb-background-critical-faded: 62, 31, 31;
 --rs-color-rgb-background-critical-highlighted: 215, 31, 31;
+--rs-color-rgb-border-critical: 248, 102, 102;
+--rs-color-rgb-border-critical-faded: 88, 41, 41;
 --rs-color-rgb-background-positive: 16, 132, 78;
 --rs-color-rgb-background-positive-faded: 31, 42, 35;
 --rs-color-rgb-background-positive-highlighted: 18, 143, 85;
+--rs-color-rgb-border-positive: 24, 171, 103;
+--rs-color-rgb-border-positive-faded: 41, 59, 47;
 --rs-color-on-background-neutral: #ffffff;
 --rs-color-rgb-background-neutral: 63, 72, 97;
 --rs-color-rgb-background-neutral-faded: 34, 40, 53;
 --rs-color-rgb-background-neutral-highlighted: 71, 81, 109;
+--rs-color-rgb-border-neutral: 72, 82, 110;
+--rs-color-rgb-border-neutral-faded: 45, 55, 76;
 --rs-color-rgb-background-disabled: 28, 33, 47;
 --rs-color-rgb-background-disabled-faded: 21, 25, 37;
+--rs-color-rgb-border-disabled: 36, 42, 58;
 --rs-color-rgb-background-elevation-base: 19, 23, 34;
 --rs-color-rgb-background-elevation-raised: 23, 27, 39;
 --rs-color-rgb-background-elevation-overlay: 27, 31, 44;
