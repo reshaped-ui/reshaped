@@ -20,9 +20,21 @@ import CalendarMonth from "./CalendarMonth";
 import type * as T from "./Calendar.types";
 
 const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
-	const { value, onChange, defaultMonth, min, max } = props;
+	const {
+		value,
+		onChange,
+		defaultMonth,
+		min,
+		max,
+		range,
+		firstWeekDay,
+		renderMonthLabel,
+		renderSelectedMonthLabel,
+		renderWeekDay,
+	} = props;
 	const [selectionMode, setSelectionMode] = React.useState<"date" | "month">("date");
 	const [monthDate, setMonthDate] = React.useState(defaultMonth || new Date());
+	const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null);
 	const bounds = applyNavigationBounds({ date: monthDate, min, max });
 
 	const handlePreviousClick = () => {
@@ -52,6 +64,14 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 		setSelectionMode("date");
 	};
 
+	const handleDateHover = (date: Date) => {
+		setHoveredDate(date);
+	};
+
+	const handleDateHoverEnd = (date: Date) => {
+		if (hoveredDate && +hoveredDate === +date) setHoveredDate(null);
+	};
+
 	return (
 		<View gap={2}>
 			<View direction="row" gap={2} align="center">
@@ -61,7 +81,9 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 				<View.Item grow>
 					{selectionMode === "date" && (
 						<Button fullWidth variant="ghost" onClick={handleMonthTitleClick}>
-							{monthDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+							{renderSelectedMonthLabel
+								? renderSelectedMonthLabel({ date: monthDate })
+								: monthDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
 						</Button>
 					)}
 					{selectionMode === "month" && (
@@ -76,12 +98,24 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 			</View>
 
 			{selectionMode === "date" && (
-				<CalendarMonth date={monthDate} value={value} onChange={onChange} min={min} max={max} />
+				<CalendarMonth
+					date={monthDate}
+					value={value}
+					onChange={onChange}
+					min={min}
+					max={max}
+					range={range}
+					firstWeekDay={firstWeekDay}
+					hoveredDate={hoveredDate}
+					onDateHover={handleDateHover}
+					onDateHoverEnd={handleDateHoverEnd}
+					renderWeekDay={renderWeekDay}
+				/>
 			)}
 
 			{selectionMode === "month" && (
 				<View direction="row" gap={2}>
-					{getMonthNames().map((name, i) => {
+					{getMonthNames({ renderMonthLabel }).map((name, i) => {
 						const date = new Date(monthDate.getFullYear(), i);
 						const isOutsideMinBound =
 							min && min.getFullYear() >= date.getFullYear() && min.getMonth() > date.getMonth();

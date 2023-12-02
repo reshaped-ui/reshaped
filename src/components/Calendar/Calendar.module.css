@@ -12,34 +12,54 @@
 	border-top: 2px solid transparent;
 }
 
-.date {
-	padding: 0;
-	border-left: 2px solid transparent;
-
-	&:first-child {
-		border-left: 0;
-	}
-}
-
 .date-button {
 	padding: var(--rs-unit-x2);
-	transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
-	border-radius: var(--rs-unit-radius-small);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: border-radius, background-color;
 	text-align: center;
-
-	&:hover {
-		background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
-	}
-
-	&--active,
-	&--active:hover {
-		background-color: var(--rs-color-background-primary);
-		color: var(--rs-color-on-background-primary);
-	}
 
 	&[disabled],
 	&[disabled]:hover {
 		background-color: transparent;
 		color: var(--rs-color-foreground-disabled);
+	}
+}
+
+.date {
+	padding: 0;
+
+	& .date-button:hover,
+	&--in-range .date-button {
+		background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+	}
+
+	&--active-start .date-button,
+	&--active-end .date-button,
+	&--active-start:hover .date-button,
+	&--active-end:hover .date-button {
+		background-color: var(--rs-color-background-primary);
+		color: var(--rs-color-on-background-primary);
+	}
+
+	/* First day of the week */
+	&:first-child .date-button,
+	&--active-start .date-button {
+		border-start-start-radius: var(--rs-unit-radius-small);
+		border-end-start-radius: var(--rs-unit-radius-small);
+	}
+
+	/* Last day of the week */
+	&:last-child .date-button,
+	&--active-end .date-button,
+	/* Hovered date after start date or the highlighted range */
+	&--in-range + &:hover:not(&--in-range) .date-button,
+	&--active-start + &:hover:not(&--in-range) .date-button {
+		border-start-end-radius: var(--rs-unit-radius-small);
+		border-end-end-radius: var(--rs-unit-radius-small);
+	}
+
+	/* Hovered date outside the selection and range highlighted dates */
+	&:hover:not(&--in-range, &--in-range + &:hover, &--active-start + &:hover) .date-button {
+		border-radius: var(--rs-unit-radius-small);
 	}
 }

@@ -1,14 +1,26 @@
 import React from "react";
-import { getMonthWeeks, getWeekdayNames, getLocalISODate } from "./Calendar.utils";
+import { getMonthWeeks, getWeekdayNames } from "./Calendar.utils";
 import CalendarDate from "./CalendarDate";
 import type * as T from "./Calendar.types";
 import s from "./Calendar.module.css";
 
 const CalendarMonth = (props: T.MonthProps) => {
-	const { date, value, onChange, min, max } = props;
+	const {
+		date,
+		value,
+		onChange,
+		min,
+		max,
+		range,
+		firstWeekDay,
+		hoveredDate,
+		onDateHover,
+		onDateHoverEnd,
+		renderWeekDay,
+	} = props;
 	const month = date.getMonth();
-	const weeks = getMonthWeeks({ date });
-	const weekdayNames = getWeekdayNames();
+	const weeks = getMonthWeeks({ date, firstWeekDay });
+	const weekdayNames = getWeekdayNames({ firstWeekDay, renderWeekDay });
 
 	return (
 		<table className={s.dates}>
@@ -27,20 +39,18 @@ const CalendarMonth = (props: T.MonthProps) => {
 					return (
 						<tr key={key} className={s.week}>
 							{week.map((date, index) => {
-								const isoDate = date && getLocalISODate({ date });
-								const isoValue = value && getLocalISODate({ date: value });
-								const active = !!isoDate && !!isoValue && isoDate === isoValue;
-								const disabled = (min && date < min) || (max && date > max);
-
-								const handleClick = () => onChange?.({ value: date });
-
 								return (
 									<CalendarDate
 										date={date}
-										active={active}
-										disabled={disabled}
 										key={index}
-										onClick={handleClick}
+										range={range}
+										value={value}
+										min={min}
+										max={max}
+										onChange={onChange}
+										hoveredDate={hoveredDate}
+										onDateHover={onDateHover}
+										onDateHoverEnd={onDateHoverEnd}
 									/>
 								);
 							})}

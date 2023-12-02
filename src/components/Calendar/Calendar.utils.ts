@@ -1,5 +1,7 @@
+import type * as T from "./Calendar.types";
+
 const DAYS_IN_WEEK = 7;
-const FIRST_WEEKDAY = 1;
+const FIRST_WEEK_DAY = 1;
 
 /**
  * Return the ISO date format without the timezones adjustemnts
@@ -14,22 +16,30 @@ export const getLocalISODate = (args: { date: Date }) => {
 	].join("-");
 };
 
-const getNormalizedDay = (args: { date: Date }) => {
-	const { date } = args;
+const getNormalizedDay = (args: { date: Date; firstWeekDay?: number }) => {
+	const { date, firstWeekDay = FIRST_WEEK_DAY } = args;
 
 	const day = date.getDay();
-	return day < FIRST_WEEKDAY ? DAYS_IN_WEEK - day - FIRST_WEEKDAY : day - FIRST_WEEKDAY;
+
+	return day < firstWeekDay ? DAYS_IN_WEEK - day - firstWeekDay : day - firstWeekDay;
 };
 
 /**
  * Return an array of US weekday names for the calendar
  */
-export const getWeekdayNames = () => {
-	const baseDate = new Date(Date.UTC(2021, 0, 4)); // Starting from a Monday
+export const getWeekdayNames = (args: {
+	firstWeekDay?: number;
+	renderWeekDay: T.BaseProps["renderWeekDay"];
+}) => {
+	const { firstWeekDay = FIRST_WEEK_DAY, renderWeekDay } = args;
+	const startDateDay = `${3 + firstWeekDay}`.padStart(2);
+	const baseDate = new Date(`2021-01-${startDateDay}`); // Starting from Sunday + firstWeekDay
 	const weekdays = [];
 
-	for (let i = 0; i < 7; i++) {
-		const weekday = baseDate.toLocaleDateString("en-US", { weekday: "short" });
+	for (let i = firstWeekDay; i < firstWeekDay + DAYS_IN_WEEK; i++) {
+		const weekday = renderWeekDay
+			? renderWeekDay({ weekDay: i, date: baseDate })
+			: baseDate.toLocaleDateString("en-US", { weekday: "short" });
 		weekdays.push(weekday.slice(0, 2));
 		baseDate.setDate(baseDate.getDate() + 1);
 	}
@@ -40,29 +50,33 @@ export const getWeekdayNames = () => {
 /**
  * Return an array of all month names
  */
-export const getMonthNames = () => {
+export const getMonthNames = (args: { renderMonthLabel: T.BaseProps["renderMonthLabel"] }) => {
+	const { renderMonthLabel } = args;
+
 	return new Array(12).fill(null).map((_, i) => {
 		const date = new Date(0, i);
-		return date.toLocaleString("default", { month: "short" });
+		return renderMonthLabel
+			? renderMonthLabel({ month: i, date })
+			: date.toLocaleString("default", { month: "short" });
 	});
 };
 
 /**
  * Return an array of weeks based on the month passed to the function
  */
-export const getMonthWeeks = (args: { date: Date }) => {
-	const { date } = args;
+export const getMonthWeeks = (args: { date: Date; firstWeekDay?: number }) => {
+	const { date, firstWeekDay } = args;
 	const month = date.getMonth();
 	const year = date.getFullYear();
 	const weeks: Date[][] = [];
 	const currentDate = new Date(year, month, 1);
 
 	// Fill in the days if month starts in the middle of the week
-	const firstDay = getNormalizedDay({ date: currentDate });
+	const firstDay = getNormalizedDay({ date: currentDate, firstWeekDay });
 	if (firstDay !== 0) weeks.push(new Array(firstDay).fill(null));
 
 	while (month === currentDate.getMonth()) {
-		const day = getNormalizedDay({ date: currentDate });
+		const day = getNormalizedDay({ date: currentDate, firstWeekDay });
 
 		if (day === 0 || !weeks.length) weeks.push([]);
 
@@ -71,7 +85,7 @@ export const getMonthWeeks = (args: { date: Date }) => {
 	}
 
 	// Fill in the days if month ends in the middle of the week
-	const lastDay = getNormalizedDay({ date: currentDate });
+	const lastDay = getNormalizedDay({ date: currentDate, firstWeekDay });
 	if (lastDay !== 0) weeks[weeks.length - 1].push(...new Array(7 - lastDay).fill(null));
 
 	return weeks;
