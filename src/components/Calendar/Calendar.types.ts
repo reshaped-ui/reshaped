@@ -1,3 +1,5 @@
+export type SelectionMode = "date" | "month";
+
 export type BaseProps = {
 	defaultMonth?: Date;
 	min?: Date;
@@ -6,6 +8,14 @@ export type BaseProps = {
 	renderWeekDay?: (args: { weekDay: number; date: Date }) => string;
 	renderSelectedMonthLabel?: (args: { date: Date }) => string;
 	renderMonthLabel?: (args: { month: number; date: Date }) => string;
+
+	previousMonthAriaLabel?: string;
+	nextMonthAriaLabel?: string;
+	previousYearAriaLabel?: string;
+	nextYearAriaLabel?: string;
+	monthSelectionAriaLabel?: string;
+	renderDateAriaLabel?: (args: { date: Date }) => string;
+	renderMonthAriaLabel?: (args: { month: number }) => string;
 };
 
 export type SingleValue = Date;
@@ -53,13 +63,50 @@ export type MonthProps = {
 	onDateHoverEnd: (date: Date) => void;
 } & Pick<
 	BaseProps,
-	"max" | "min" | "firstWeekDay" | "renderMonthLabel" | "renderWeekDay" | "renderSelectedMonthLabel"
+	| "max"
+	| "min"
+	| "firstWeekDay"
+	| "renderMonthLabel"
+	| "renderWeekDay"
+	| "renderSelectedMonthLabel"
+	| "renderDateAriaLabel"
 > &
 	Pick<ControlledProps, "value" | "onChange" | "range">;
 
+export type YearProps = { monthDate: Date; onMonthClick: (month: number) => void } & Pick<
+	BaseProps,
+	"renderMonthLabel" | "min" | "max" | "renderMonthAriaLabel"
+>;
+
 export type DateProps = {
 	date: Date | null;
+	disabled?: boolean;
+	focusable?: boolean;
+	startValue: Date | null;
+	endValue: Date | null;
+	isActiveStart: boolean;
+	isActiveEnd: boolean;
+	renderAriaLabel?: MonthProps["renderDateAriaLabel"];
 } & Pick<
 	MonthProps,
-	"hoveredDate" | "onDateHover" | "onDateHoverEnd" | "value" | "onChange" | "range" | "min" | "max"
+	"hoveredDate" | "onDateHover" | "onDateHoverEnd" | "onChange" | "range" | "min" | "max"
+>;
+
+export type ControlsProps = {
+	selectionMode: SelectionMode;
+	onMonthTitleClick: () => void;
+	monthTitleRef: React.MutableRefObject<HTMLButtonElement | null>;
+	monthDate: Date;
+	renderSelectedMonthLabel?: BaseProps["renderSelectedMonthLabel"];
+	isFirstMonth?: boolean;
+	isLastMonth?: boolean;
+	onNextClick: () => void;
+	onPreviousClick: () => void;
+} & Pick<
+	BaseProps,
+	| "nextMonthAriaLabel"
+	| "nextYearAriaLabel"
+	| "previousMonthAriaLabel"
+	| "previousYearAriaLabel"
+	| "monthSelectionAriaLabel"
 >;

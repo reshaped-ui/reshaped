@@ -11,8 +11,8 @@ export const getLocalISODate = (args: { date: Date }) => {
 
 	return [
 		date.getFullYear(),
-		(date.getMonth() + 1).toString().padStart(2),
-		date.getDate().toString().padStart(2),
+		(date.getMonth() + 1).toString().padStart(2, "0"),
+		date.getDate().toString().padStart(2, "0"),
 	].join("-");
 };
 
@@ -32,8 +32,7 @@ export const getWeekdayNames = (args: {
 	renderWeekDay: T.BaseProps["renderWeekDay"];
 }) => {
 	const { firstWeekDay = FIRST_WEEK_DAY, renderWeekDay } = args;
-	const startDateDay = `${3 + firstWeekDay}`.padStart(2);
-	const baseDate = new Date(`2021-01-${startDateDay}`); // Starting from Sunday + firstWeekDay
+	const baseDate = new Date(2021, 1, firstWeekDay); // Starting from Sunday + firstWeekDay
 	const weekdays = [];
 
 	for (let i = firstWeekDay; i < firstWeekDay + DAYS_IN_WEEK; i++) {
@@ -64,7 +63,7 @@ export const getMonthNames = (args: { renderMonthLabel: T.BaseProps["renderMonth
 /**
  * Return an array of weeks based on the month passed to the function
  */
-export const getMonthWeeks = (args: { date: Date; firstWeekDay?: number }) => {
+export const getMonthWeeks = (args: { date: Date; firstWeekDay?: number }): (Date | null)[][] => {
 	const { date, firstWeekDay } = args;
 	const month = date.getMonth();
 	const year = date.getFullYear();
@@ -90,6 +89,13 @@ export const getMonthWeeks = (args: { date: Date; firstWeekDay?: number }) => {
 
 	return weeks;
 };
+
+export const getFocusableDates = (rootEl: HTMLElement | null) => {
+	return (rootEl?.querySelectorAll("[data-rs-date]") || []) as unknown as HTMLButtonElement[];
+};
+
+export const changeDate = (date: Date, delta: number) =>
+	new Date(date.getFullYear(), date.getMonth(), date.getDate() + delta);
 
 export const setMonthTo = (date: Date, value: number) => {
 	const resultDate = new Date(date);

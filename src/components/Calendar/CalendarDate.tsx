@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Actionable from "components/Actionable";
 import { classNames } from "utilities/helpers";
@@ -6,31 +8,35 @@ import type * as T from "./Calendar.types";
 import s from "./Calendar.module.css";
 
 const CalendarDate = (props: T.DateProps) => {
-	const { date, value, min, max, onChange, range, hoveredDate, onDateHover, onDateHoverEnd } =
-		props;
+	const {
+		date,
+		startValue,
+		endValue,
+		isActiveStart,
+		isActiveEnd,
+		disabled,
+		focusable,
+		onChange,
+		range,
+		hoveredDate,
+		onDateHover,
+		onDateHoverEnd,
+		renderAriaLabel,
+	} = props;
 
-	if (!date) return <td className={s.date} />;
+	if (!date) return <td className={s.cell} aria-hidden="true" />;
 
-	const startValue = value && "start" in value ? value.start : value;
-	const endValue = value && "end" in value ? value.end : value;
-
-	const isoDate = date && getLocalISODate({ date });
-	const isoStartValue = startValue && getLocalISODate({ date: startValue });
-	const isoEndValue = endValue && getLocalISODate({ date: endValue });
-
-	const isActiveStart = !!isoDate && !!isoStartValue && isoDate === isoStartValue;
-	const isActiveEnd = !!isoDate && !!isoEndValue && isoDate === isoEndValue;
-	const disabled = (min && date < min) || (max && date > max);
 	const inRange =
 		startValue &&
 		startValue < date &&
 		((endValue && endValue > date) || (hoveredDate && !endValue && hoveredDate > date));
 	const dateClassNames = classNames([
-		s.date,
-		isActiveStart && s["date--active-start"],
-		(isActiveEnd || (!endValue && isActiveStart && !(hoveredDate && hoveredDate > startValue))) &&
-			s["date--active-end"],
-		inRange && s["date--in-range"],
+		s.cell,
+		isActiveStart && s["cell--active-start"],
+		(isActiveEnd ||
+			(!endValue && isActiveStart && !(hoveredDate && startValue && hoveredDate > startValue))) &&
+			s["cell--active-end"],
+		inRange && s["cell--in-range"],
 	]);
 
 	const handleClick = () => {
@@ -58,14 +64,27 @@ const CalendarDate = (props: T.DateProps) => {
 	};
 
 	return (
-		<td className={dateClassNames}>
+		<td className={dateClassNames} role={disabled ? "presentation" : "gridcell"}>
 			<Actionable
 				fullWidth
 				insetFocus
-				className={s["date-button"]}
+				className={s["cell-button"]}
 				disabled={disabled}
 				onClick={handleClick}
-				attributes={{ onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave }}
+				attributes={{
+					role: "checkbox",
+					tabIndex: focusable ? 0 : -1,
+					"aria-hidden": disabled,
+					"aria-label": renderAriaLabel
+						? renderAriaLabel({ date })
+						: date.toLocaleDateString("en-us", { month: "long", day: "numeric", weekday: "long" }),
+					"aria-checked": isActiveStart || isActiveEnd,
+					"data-rs-date": getLocalISODate({ date }),
+					onMouseEnter: handleMouseEnter,
+					onMouseLeave: handleMouseLeave,
+					onFocus: handleMouseEnter,
+					onBlur: handleMouseLeave,
+				}}
 			>
 				{date.getDate()}
 			</Actionable>

@@ -1,22 +1,20 @@
 "use client";
 
 import React from "react";
-import Button from "components/Button";
 import View from "components/View";
-import Text from "components/Text";
-import Hidden from "components/Hidden";
-import IconChevronLeft from "icons/ChevronLeft";
-import IconChevronRight from "icons/ChevronRight";
+import { onNextFrame } from "utilities/animation";
 import {
 	setMonthToPrevious,
 	setMonthToNext,
 	setMonthTo,
 	setYearToNext,
 	setYearToPrevious,
-	getMonthNames,
 	applyNavigationBounds,
 } from "./Calendar.utils";
+import useCalendarKeyboardNavigation from "./useCalendarKeyboardNavigation";
 import CalendarMonth from "./CalendarMonth";
+import CalendarYear from "./CalendarYear";
+import CalendarControls from "./CalendarControls";
 import type * as T from "./Calendar.types";
 
 const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
@@ -31,11 +29,21 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 		renderMonthLabel,
 		renderSelectedMonthLabel,
 		renderWeekDay,
+		previousMonthAriaLabel,
+		previousYearAriaLabel,
+		nextMonthAriaLabel,
+		nextYearAriaLabel,
+		monthSelectionAriaLabel,
+		renderMonthAriaLabel,
+		renderDateAriaLabel,
 	} = props;
-	const [selectionMode, setSelectionMode] = React.useState<"date" | "month">("date");
+	const [selectionMode, setSelectionMode] = React.useState<T.SelectionMode>("date");
 	const [monthDate, setMonthDate] = React.useState(defaultMonth || new Date());
 	const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null);
+	const monthTitleRef = React.useRef<HTMLButtonElement | null>(null);
+	const prevSelectionModeRef = React.useRef<typeof selectionMode>(selectionMode);
 	const bounds = applyNavigationBounds({ date: monthDate, min, max });
+	const selectionRootRef = React.useRef<HTMLDivElement>(null);
 
 	const handlePreviousClick = () => {
 		if (selectionMode === "month") {
@@ -72,71 +80,75 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 		if (hoveredDate && +hoveredDate === +date) setHoveredDate(null);
 	};
 
+	React.useEffect(() => {
+		if (selectionMode === "date" && selectionMode !== prevSelectionModeRef.current) {
+			onNextFrame(() => {
+				monthTitleRef.current?.focus();
+			});
+		}
+
+		prevSelectionModeRef.current = selectionMode;
+	}, [selectionMode]);
+
+	useCalendarKeyboardNavigation({
+		monthDate,
+		rootRef: selectionRootRef,
+		changeToNextMonth: handleNextClick,
+		changeToPreviousMonth: handlePreviousClick,
+		// Each row has 7 days in date selection and 3 months in month
+		verticalDelta: selectionMode === "date" ? 7 : 3,
+		min,
+		max,
+	});
+
 	return (
 		<View gap={2}>
-			<View direction="row" gap={2} align="center">
-				<Hidden visibility hide={bounds.isFirstMonth}>
-					<Button variant="ghost" icon={IconChevronLeft} onClick={handlePreviousClick} />
-				</Hidden>
-				<View.Item grow>
-					{selectionMode === "date" && (
-						<Button fullWidth variant="ghost" onClick={handleMonthTitleClick}>
-							{renderSelectedMonthLabel
-								? renderSelectedMonthLabel({ date: monthDate })
-								: monthDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-						</Button>
-					)}
-					{selectionMode === "month" && (
-						<Text align="center" weight="medium">
-							{monthDate.toLocaleDateString("en-US", { year: "numeric" })}
-						</Text>
-					)}
-				</View.Item>
-				<Hidden visibility hide={bounds.isLastMonth}>
-					<Button variant="ghost" icon={IconChevronRight} onClick={handleNextClick} />
-				</Hidden>
-			</View>
+			<CalendarControls
+				renderSelectedMonthLabel={renderSelectedMonthLabel}
+				monthDate={monthDate}
+				selectionMode={selectionMode}
+				isFirstMonth={bounds.isFirstMonth}
+				isLastMonth={bounds.isLastMonth}
+				monthTitleRef={monthTitleRef}
+				onMonthTitleClick={handleMonthTitleClick}
+				onNextClick={handleNextClick}
+				onPreviousClick={handlePreviousClick}
+				previousMonthAriaLabel={previousMonthAriaLabel}
+				previousYearAriaLabel={previousYearAriaLabel}
+				nextMonthAriaLabel={nextMonthAriaLabel}
+				nextYearAriaLabel={nextYearAriaLabel}
+				monthSelectionAriaLabel={monthSelectionAriaLabel}
+			/>
 
-			{selectionMode === "date" && (
-				<CalendarMonth
-					date={monthDate}
-					value={value}
-					onChange={onChange}
-					min={min}
-					max={max}
-					range={range}
-					firstWeekDay={firstWeekDay}
-					hoveredDate={hoveredDate}
-					onDateHover={handleDateHover}
-					onDateHoverEnd={handleDateHoverEnd}
-					renderWeekDay={renderWeekDay}
-				/>
-			)}
+			<View.Item attributes={{ ref: selectionRootRef }}>
+				{selectionMode === "date" && (
+					<CalendarMonth
+						date={monthDate}
+						value={value}
+						onChange={onChange}
+						min={min}
+						max={max}
+						range={range}
+						firstWeekDay={firstWeekDay}
+						hoveredDate={hoveredDate}
+						onDateHover={handleDateHover}
+						onDateHoverEnd={handleDateHoverEnd}
+						renderWeekDay={renderWeekDay}
+						renderDateAriaLabel={renderDateAriaLabel}
+					/>
+				)}
 
-			{selectionMode === "month" && (
-				<View direction="row" gap={2}>
-					{getMonthNames({ renderMonthLabel }).map((name, i) => {
-						const date = new Date(monthDate.getFullYear(), i);
-						const isOutsideMinBound =
-							min && min.getFullYear() >= date.getFullYear() && min.getMonth() > date.getMonth();
-						const isOutsideMaxBound =
-							max && max.getFullYear() <= date.getFullYear() && max.getMonth() < date.getMonth();
-
-						return (
-							<View.Item columns={4} key={name}>
-								<Button
-									variant="ghost"
-									onClick={() => handleMonthClick(i)}
-									fullWidth
-									disabled={isOutsideMaxBound || isOutsideMinBound}
-								>
-									{name}
-								</Button>
-							</View.Item>
-						);
-					})}
-				</View>
-			)}
+				{selectionMode === "month" && (
+					<CalendarYear
+						monthDate={monthDate}
+						onMonthClick={handleMonthClick}
+						renderMonthLabel={renderMonthLabel}
+						renderMonthAriaLabel={renderMonthAriaLabel}
+						min={min}
+						max={max}
+					/>
+				)}
+			</View.Item>
 		</View>
 	);
 };

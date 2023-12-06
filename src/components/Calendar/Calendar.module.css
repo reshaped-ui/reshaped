@@ -1,4 +1,4 @@
-.dates {
+.selection {
 	table-layout: fixed;
 	width: 100%;
 }
@@ -6,60 +6,65 @@
 .weekday {
 	color: var(--rs-color-foreground-neutral-faded);
 	font-weight: var(--rs-font-weight-regular);
+	padding-bottom: var(--rs-unit-x2);
 }
 
-.week {
+.row {
 	border-top: 2px solid transparent;
 }
 
-.date-button {
+[dir="rtl"] .control {
+	transform: scaleX(-1);
+}
+
+.cell-button {
 	padding: var(--rs-unit-x2);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: border-radius, background-color;
+	transition-property: border-radius, background-color, box-shadow;
 	text-align: center;
 
 	&[disabled],
 	&[disabled]:hover {
-		background-color: transparent;
-		color: var(--rs-color-foreground-disabled);
+		background-color: transparent !important;
+		color: var(--rs-color-foreground-disabled) !important;
 	}
 }
 
-.date {
+.cell {
 	padding: 0;
 
-	& .date-button:hover,
-	&--in-range .date-button {
+	& .cell-button:hover,
+	&--in-range .cell-button {
 		background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
 	}
 
-	&--active-start .date-button,
-	&--active-end .date-button,
-	&--active-start:hover .date-button,
-	&--active-end:hover .date-button {
+	&--active-start .cell-button,
+	&--active-end .cell-button,
+	&--active-start:hover .cell-button,
+	&--active-end:hover .cell-button {
 		background-color: var(--rs-color-background-primary);
 		color: var(--rs-color-on-background-primary);
 	}
 
 	/* First day of the week */
-	&:first-child .date-button,
-	&--active-start .date-button {
+	&:first-child .cell-button,
+	&--active-start .cell-button {
 		border-start-start-radius: var(--rs-unit-radius-small);
 		border-end-start-radius: var(--rs-unit-radius-small);
 	}
 
 	/* Last day of the week */
-	&:last-child .date-button,
-	&--active-end .date-button,
+	&:last-child .cell-button,
+	&--active-end .cell-button,
 	/* Hovered date after start date or the highlighted range */
-	&--in-range + &:hover:not(&--in-range) .date-button,
-	&--active-start + &:hover:not(&--in-range) .date-button {
+	&--in-range + &:hover:not(&--in-range) .cell-button,
+	&--active-start + &:hover:not(&--in-range) .cell-button {
 		border-start-end-radius: var(--rs-unit-radius-small);
 		border-end-end-radius: var(--rs-unit-radius-small);
 	}
 
 	/* Hovered date outside the selection and range highlighted dates */
-	&:hover:not(&--in-range, &--in-range + &:hover, &--active-start + &:hover) .date-button {
+	&:hover:not(&--in-range, &--in-range + &:hover, &--active-start + &:hover) .cell-button {
 		border-radius: var(--rs-unit-radius-small);
 	}
 }
