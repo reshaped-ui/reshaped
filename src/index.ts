@@ -28,6 +28,9 @@ export type { ButtonProps, ButtonAlignerProps } from "components/Button";
 export { default as Breadcrumbs } from "components/Breadcrumbs";
 export type { BreadcrumbsProps } from "components/Breadcrumbs";
 
+export { default as Calendar } from "components/Calendar";
+export type { CalendarProps } from "components/Calendar";
+
 export { default as Card } from "components/Card";
 export type { CardProps } from "components/Card";
 
