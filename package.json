@@ -85,7 +85,7 @@
 		"@commitlint/types": "18.4.0",
 		"@semantic-release/changelog": "6.0.3",
 		"@semantic-release/git": "10.0.1",
-		"@size-limit/preset-big-lib": "9.0.0",
+		"@size-limit/preset-big-lib": "11.0.1",
 		"@storybook/addon-a11y": "7.6.3",
 		"@storybook/react": "7.6.3",
 		"@storybook/react-vite": "7.6.3",
