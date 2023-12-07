@@ -125,7 +125,7 @@
 		"react-dom": "18.2.0",
 		"resolve-tspaths": "0.8.17",
 		"semantic-release": "22.0.8",
-		"size-limit": "9.0.0",
+		"size-limit": "11.0.1",
 		"storybook": "7.6.3",
 		"stylelint": "15.11.0",
 		"stylelint-config-prettier": "9.0.5",
