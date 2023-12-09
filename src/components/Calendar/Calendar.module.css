@@ -64,7 +64,8 @@
 	}
 
 	/* Hovered date outside the selection and range highlighted dates */
-	&:hover:not(&--in-range, &--in-range + &:hover, &--active-start + &:hover) .cell-button {
+	&:hover:not(&--in-range, &--in-range + &:hover, &--active-start + &:hover) .cell-button,
+	&--active-single + &:hover .cell-button {
 		border-radius: var(--rs-unit-radius-small);
 	}
 }

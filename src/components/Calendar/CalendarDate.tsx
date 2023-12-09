@@ -32,6 +32,7 @@ const CalendarDate = (props: T.DateProps) => {
 		((endValue && endValue > date) || (hoveredDate && !endValue && hoveredDate > date));
 	const dateClassNames = classNames([
 		s.cell,
+		!range && isActiveStart && s["cell--active-single"],
 		isActiveStart && s["cell--active-start"],
 		(isActiveEnd ||
 			(!endValue && isActiveStart && !(hoveredDate && startValue && hoveredDate > startValue))) &&
