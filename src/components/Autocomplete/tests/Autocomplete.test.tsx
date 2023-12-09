@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Reshaped from "components/Reshaped";
 import Autocomplete from "components/Autocomplete";
 
@@ -8,6 +8,7 @@ const fixtures = {
 	name: "test-name",
 	className: "test-className",
 	id: "test-id",
+	inputId: "test-input-id",
 	itemContent: "Item content",
 	itemClassName: "test-item-className",
 	itemId: "test-item-id",
@@ -50,8 +51,8 @@ describe("Components/Autocomplete", () => {
 
 		await userEvent.keyboard("{Enter}");
 
-		expect(handleChange).toBeCalledTimes(1);
-		expect(handleChange).toBeCalledWith({ name: fixtures.name, value: fixtures.firstValue });
+		expect(handleChange).toHaveBeenCalledTimes(1);
+		expect(handleChange).toHaveBeenCalledWith({ name: fixtures.name, value: fixtures.firstValue });
 	});
 
 	test("works with mouse", async () => {
@@ -94,6 +95,7 @@ describe("Components/Autocomplete", () => {
 					name={fixtures.name}
 					className={fixtures.className}
 					attributes={{ "data-testid": fixtures.id }}
+					inputAttributes={{ "data-testid": fixtures.inputId }}
 				>
 					<Autocomplete.Item value="1" attributes={{ "data-testid": fixtures.itemId }}>
 						{fixtures.itemContent}
@@ -106,6 +108,8 @@ describe("Components/Autocomplete", () => {
 		expect(textFieldRootEl).toHaveClass(fixtures.className);
 
 		const inputEl = screen.getByRole("combobox");
+
+		expect(inputEl).toHaveAttribute("data-testid", fixtures.inputId);
 
 		act(() => {
 			inputEl.focus();

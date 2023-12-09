@@ -73,7 +73,7 @@ const Autocomplete = (props: T.Props) => {
 							// Ignoring the type check since TS can't infer the correct html element type
 							attributes={{ ...textFieldProps.attributes, ref } as any}
 							inputAttributes={{
-								...attributes,
+								...textFieldProps.inputAttributes,
 								onFocus: (e) => {
 									attributes.onFocus?.();
 									handleFocus(e);
