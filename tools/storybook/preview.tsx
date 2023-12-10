@@ -32,7 +32,7 @@ const ThemeSwitch = () => {
 			align="center"
 			gap={2}
 			position="fixed"
-			zIndex={999}
+			zIndex={99}
 			insetBottom={2}
 			insetEnd={2}
 			attributes={{ dir: "ltr" }}
@@ -58,49 +58,43 @@ const ThemeSwitch = () => {
 			<Button onClick={invertColorMode} size="small">
 				Toggle mode
 			</Button>
-			<View.Item>
-				<DropdownMenu>
-					<DropdownMenu.Trigger>
-						{(attributes) => (
-							<Button attributes={attributes} size="small">
-								Switch theme
-							</Button>
-						)}
-					</DropdownMenu.Trigger>
-					<DropdownMenu.Content>
-						<DropdownMenu.Item
-							onClick={() => setTheme("reshaped")}
-							endSlot={
-								theme === "reshaped" ? (
-									<Icon svg={IconCheckmark} color="primary" size={5} />
-								) : undefined
-							}
-						>
-							Reshaped
-						</DropdownMenu.Item>
-						<DropdownMenu.Item
-							onClick={() => setTheme("slate")}
-							endSlot={
-								theme === "slate" ? (
-									<Icon svg={IconCheckmark} color="primary" size={5} />
-								) : undefined
-							}
-						>
-							Slate
-						</DropdownMenu.Item>
-						<DropdownMenu.Item
-							onClick={() => setTheme("figma")}
-							endSlot={
-								theme === "figma" ? (
-									<Icon svg={IconCheckmark} color="primary" size={5} />
-								) : undefined
-							}
-						>
-							Figma
-						</DropdownMenu.Item>
-					</DropdownMenu.Content>
-				</DropdownMenu>
-			</View.Item>
+			<DropdownMenu>
+				<DropdownMenu.Trigger>
+					{(attributes) => (
+						<Button attributes={attributes} size="small">
+							Switch theme
+						</Button>
+					)}
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content>
+					<DropdownMenu.Item
+						onClick={() => setTheme("reshaped")}
+						endSlot={
+							theme === "reshaped" ? (
+								<Icon svg={IconCheckmark} color="primary" size={5} />
+							) : undefined
+						}
+					>
+						Reshaped
+					</DropdownMenu.Item>
+					<DropdownMenu.Item
+						onClick={() => setTheme("slate")}
+						endSlot={
+							theme === "slate" ? <Icon svg={IconCheckmark} color="primary" size={5} /> : undefined
+						}
+					>
+						Slate
+					</DropdownMenu.Item>
+					<DropdownMenu.Item
+						onClick={() => setTheme("figma")}
+						endSlot={
+							theme === "figma" ? <Icon svg={IconCheckmark} color="primary" size={5} /> : undefined
+						}
+					>
+						Figma
+					</DropdownMenu.Item>
+				</DropdownMenu.Content>
+			</DropdownMenu>
 		</View>
 	);
 };

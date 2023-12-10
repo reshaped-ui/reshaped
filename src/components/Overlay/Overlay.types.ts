@@ -2,7 +2,7 @@ import React from "react";
 import type * as G from "types/global";
 
 export type Props = {
-	transparent?: boolean;
+	transparent?: boolean | number;
 	children?: React.ReactNode | ((props: { active: boolean }) => React.ReactNode);
 	active?: boolean;
 	onClose?: () => void;

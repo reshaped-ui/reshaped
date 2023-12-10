@@ -18,7 +18,7 @@ const mediaQueries = {
 	xl: `(min-width: ${breakpoints.xl}px)`,
 };
 
-const useResponsiveClientValue = <T extends unknown>(value: G.ResponsiveOnly<T>): T | undefined => {
+const useResponsiveClientValue = <T extends unknown>(value: G.Responsive<T>): T | undefined => {
 	const { defaultViewport } = React.useContext(SingletonEnvironmentContext);
 	const [viewport, setViewport] = React.useState(defaultViewport);
 
@@ -40,6 +40,10 @@ const useResponsiveClientValue = <T extends unknown>(value: G.ResponsiveOnly<T>)
 			});
 		};
 	}, []);
+
+	if (typeof value !== "object" || value === null || !("s" in value)) {
+		return value as T;
+	}
 
 	if (viewport === "xl") return value.xl || value.l || value.m || value.s;
 	if (viewport === "l") return value.l || value.m || value.s;

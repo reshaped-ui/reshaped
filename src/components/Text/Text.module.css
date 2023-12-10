@@ -5,9 +5,10 @@
 
 .--clamp {
 	display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: var(--rs-text-lines);
-  overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: var(--rs-text-lines);
+	word-break: break-all;
+	overflow: hidden;
 }
 
 @responsive .--align {
@@ -133,7 +134,7 @@
 @each $color in neutral, neutral-faded, primary, positive, critical, disabled {
 	.--color-$(color) {
 		color: var(--rs-color-foreground-$(color));
-	}	
+	}
 }
 
 .--decoration-line-through {
