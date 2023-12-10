@@ -1,8 +1,13 @@
 .root {
-	transition: transform var(--rs-easing-accelerate) var(--rs-duration-medium);
+	transition: var(--rs-easing-accelerate) var(--rs-duration-medium);
+	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
 	box-shadow: var(--rs-shadow-overlay);
+}
+
+.--dragging {
+	transition: none;
 }
 
 @responsive .root {
@@ -23,6 +28,13 @@
 		position: relative;
 		border-radius: var(--rs-unit-radius-large);
 		overflow: hidden;
+		opacity: 0;
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate3d(0, 0, 0) scale(1) !important;
+			opacity: 1;
+		}
 	}
 
 	@value bottom {
@@ -36,10 +48,16 @@
 		margin-top: var(--rs-unit-x4);
 		inset: 0;
 		inset-block-start: initial;
-		transform: translate(0, 100%);
+		transform: translate3d(0, 100%, 0);
 		position: fixed;
 		border-radius: var(--rs-unit-radius-large) var(--rs-unit-radius-large) 0 0;
 		overflow: auto;
+		opacity: 1;
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate3d(0, max(var(--rs-modal-drag, 0px), 0px), 0) scale(1) !important;
+		}
 	}
 
 	@value start {
@@ -53,13 +71,19 @@
 		margin-inline-end: var(--rs-unit-x4);
 		inset: 0;
 		inset-inline-end: initial;
-		transform: translate(-100%, 0);
+		transform: translate3d(-100%, 0, 0);
 		position: fixed;
 		border-radius: 0;
 		overflow: auto;
+		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate(100%, 0);
+			transform: translate3d(100%, 0, 0);
+		}
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate3d(min(var(--rs-modal-drag, 0px), 0px), 0, 0) scale(1) !important;
 		}
 	}
 
@@ -74,19 +98,24 @@
 		margin-inline-start: var(--rs-unit-x4);
 		inset: 0;
 		inset-inline-start: initial;
-		transform: translate(100%, 0);
+		transform: translate3d(100%, 0, 0);
 		position: fixed;
 		border-radius: 0;
 		overflow: auto;
+		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate(-100%, 0);
+			transform: translate3d(-100%, 0, 0);
+		}
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate3d(max(var(--rs-modal-drag, 0px), 0px), 0, 0) scale(1) !important;
 		}
 	}
 }
 
 .--active,
 [dir="rtl"] .--active {
-	transform: translate(0, 0) scale(1) !important;
 	transition-timing-function: var(--rs-easing-decelerate);
 }

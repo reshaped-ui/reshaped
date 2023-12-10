@@ -15,7 +15,10 @@ import s from "./Overlay.module.css";
 
 const Overlay = (props: T.Props) => {
 	const { active, children, transparent, onClose, className, attributes } = props;
+	const clickThrough = transparent === true;
+	const opacity = clickThrough ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
+	const [animated, setAnimated] = React.useState(false);
 	const contentRef = React.useRef<HTMLDivElement | null>(null);
 	const isMouseDownValidRef = React.useRef(false);
 	const releaseFocusRef = React.useRef<ReturnType<typeof trapFocus> | null>(null);
@@ -26,7 +29,8 @@ const Overlay = (props: T.Props) => {
 	const rootClassNames = classNames(
 		s.root,
 		visible && s["--visible"],
-		transparent && s["--transparent"],
+		clickThrough && s["--click-through"],
+		animated && s["--animated"],
 		className
 	);
 
@@ -61,22 +65,26 @@ const Overlay = (props: T.Props) => {
 
 	const handleMouseUp = (event: React.MouseEvent<HTMLElement>) => {
 		const isMouseUpValid = !isInsideChild(event.target as HTMLElement);
-		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !transparent;
+		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !clickThrough;
 
 		if (!shouldClose) return;
 		close();
 	};
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
+		if (e.propertyName !== "opacity" || !e.pseudoElement) return;
+		setAnimated(false);
+
 		if (visible) return;
-		if (!transparent) unlockScroll();
+		if (!clickThrough) unlockScroll();
+
 		remove();
 	};
 
 	useHotkeys({ Escape: close }, [close]);
 
 	React.useEffect(() => {
+		setAnimated(true);
 		if (active && !rendered) render();
 		if (!active && rendered) hide();
 	}, [active, render, hide, rendered]);
@@ -84,10 +92,9 @@ const Overlay = (props: T.Props) => {
 	// Show overlay after it was rendered
 	React.useEffect(() => {
 		if (!rendered) return;
-		if (!transparent) lockScroll();
+		if (!clickThrough) lockScroll();
 		onNextFrame(() => show());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [rendered, show, lockScroll, transparent]);
+	}, [rendered, show, lockScroll, clickThrough]);
 
 	React.useEffect(() => {
 		if (!rendered) return;
@@ -98,9 +105,9 @@ const Overlay = (props: T.Props) => {
 	// Unlock scroll on unmount
 	React.useEffect(() => {
 		return () => {
-			if (!transparent) unlockScroll();
+			if (!clickThrough) unlockScroll();
 		};
-	}, [unlockScroll, transparent]);
+	}, [unlockScroll, clickThrough]);
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -115,6 +122,7 @@ const Overlay = (props: T.Props) => {
 					<div
 						{...attributes}
 						ref={ref}
+						style={{ "--rs-overlay-opacity": opacity } as React.CSSProperties}
 						role="button"
 						tabIndex={-1}
 						className={rootClassNames}

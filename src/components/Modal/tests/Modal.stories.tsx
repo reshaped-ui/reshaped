@@ -6,6 +6,8 @@ import Button from "components/Button";
 import Dismissible from "components/Dismissible";
 import DropdownMenu from "components/DropdownMenu";
 import Switch from "components/Switch";
+import TextField from "components/TextField";
+import Slider from "components/Slider";
 import useToggle from "hooks/useToggle";
 
 export default { title: "Components/Modal" };
@@ -27,6 +29,8 @@ const Demo = (props: any) => {
 					)}
 					{children ||
 						"Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."}
+					<Button onClick={() => {}}>Hey</Button>
+					<TextField name="hey" />
 				</View>
 			</Modal>
 		</>

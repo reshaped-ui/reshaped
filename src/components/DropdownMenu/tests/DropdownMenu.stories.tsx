@@ -5,6 +5,8 @@ import DropdownMenu from "components/DropdownMenu";
 import View from "components/View";
 import { useTheme } from "components/Theme/useTheme";
 import IconCheckmark from "icons/Checkmark";
+import useToggle from "hooks/useToggle";
+import { onNextFrame } from "utilities/animation";
 
 export default { title: "Components/DropdownMenu" };
 
@@ -136,10 +138,19 @@ export const testScroll = () => (
 
 const ThemeSwitching = () => {
 	const { invertColorMode } = useTheme();
+	const toggle = useToggle();
 
 	return (
 		<View gap={3} direction="row">
-			<DropdownMenu defaultActive>
+			<DropdownMenu
+				defaultActive
+				active={toggle.active}
+				onOpen={toggle.activate}
+				onClose={() => {
+					toggle.activate();
+					toggle.deactivate();
+				}}
+			>
 				<DropdownMenu.Trigger>
 					{(attributes) => <Button attributes={attributes}>Open</Button>}
 				</DropdownMenu.Trigger>

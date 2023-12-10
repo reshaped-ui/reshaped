@@ -3,8 +3,6 @@
 	-webkit-overflow-scrolling: touch;
 	position: fixed;
 	inset: 0;
-	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
-	opacity: 0;
 	z-index: var(--rs-z-index-overlay);
 	color: var(--rs-color-white);
 }
@@ -14,7 +12,7 @@
 	position: fixed;
 	inset: 0;
 	background: var(--rs-color-black);
-	opacity: 0.8;
+	opacity: 0;
 }
 
 .wrapper {
@@ -37,23 +35,23 @@
 	z-index: var(--rs-z-index-raised);
 }
 
-.root.--visible {
-	opacity: 1;
+.root.--visible::after {
+	opacity: var(--rs-overlay-opacity);
 }
 
-.root.--transparent {
+.root.--click-through {
 	color: inherit;
 	pointer-events: none;
 }
 
-.root.--transparent > *:not(.wrapper) {
+.root.--click-through > *:not(.wrapper) {
 	pointer-events: all;
 }
 
-.root.--transparent::after {
-	content: none;
+.root.--click-through .content {
+	pointer-events: all;
 }
 
-.root.--transparent .content {
-	pointer-events: all;
+.root.--animated::after {
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
 }

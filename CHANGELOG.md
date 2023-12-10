@@ -9,5 +9,10 @@
 - Link: Fixed iOS Safari currentColor
 - View: Updating padding array mentioned in the docs
 - Toast: Added className support
+- Text: Updated Text maxLines to break in the middle of the word
+- Overlay: transparent number support
+- Modal: Swipe close
+- Overlay + Modal: Animation update
+- Slider: Removed touch highlight on mobile devices
 
 - Calendar: New component

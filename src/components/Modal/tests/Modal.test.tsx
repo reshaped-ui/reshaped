@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Modal from "components/Modal";
 import Reshaped from "components/Reshaped";
 
@@ -11,6 +11,18 @@ const fixtures = {
 	className: "test-className",
 	id: "test-id",
 };
+
+Object.defineProperty(window, "matchMedia", {
+	writable: true,
+	value: jest.fn().mockImplementation((query) => ({
+		matches: false,
+		media: query,
+		onchange: null,
+		addEventListener: jest.fn(),
+		removeEventListener: jest.fn(),
+		dispatchEvent: jest.fn(),
+	})),
+});
 
 describe("Components/Modal", () => {
 	test("doesn't render children", () => {
@@ -105,10 +117,11 @@ describe("Components/Modal", () => {
 		const overlayEl = screen.getAllByRole("button")[1];
 		fireEvent.transitionEnd(overlayEl, {
 			propertyName: "opacity",
+			pseudoElement: "::after",
 		});
 
 		await waitFor(() => {
-			expect(handleCloseMock).toBeCalledTimes(1);
+			expect(handleCloseMock).toHaveBeenCalledTimes(1);
 			expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
 		});
 
