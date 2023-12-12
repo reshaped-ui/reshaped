@@ -30,6 +30,7 @@ const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
 		weight && s[`--weight-${weight}`],
 		decoration && s[`--decoration-${decoration}`],
 		maxLines !== undefined && s[`--clamp`],
+		maxLines === 1 && s["--break-all"],
 		className
 	);
 	const style = {

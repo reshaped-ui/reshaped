@@ -7,8 +7,11 @@
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: var(--rs-text-lines);
-	word-break: break-all;
 	overflow: hidden;
+}
+
+.--break-all {
+	word-break: break-all;
 }
 
 @responsive .--align {

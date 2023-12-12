@@ -138,19 +138,10 @@ export const testScroll = () => (
 
 const ThemeSwitching = () => {
 	const { invertColorMode } = useTheme();
-	const toggle = useToggle();
 
 	return (
 		<View gap={3} direction="row">
-			<DropdownMenu
-				defaultActive
-				active={toggle.active}
-				onOpen={toggle.activate}
-				onClose={() => {
-					toggle.activate();
-					toggle.deactivate();
-				}}
-			>
+			<DropdownMenu defaultActive>
 				<DropdownMenu.Trigger>
 					{(attributes) => <Button attributes={attributes}>Open</Button>}
 				</DropdownMenu.Trigger>
