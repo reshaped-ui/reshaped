@@ -10,7 +10,8 @@ import type * as T from "./Modal.types";
 import s from "./Modal.module.css";
 import getPaddingStyles from "styles/padding";
 
-const DRAG_THRESHOLD = 16;
+const DRAG_THRESHOLD = 32;
+const DRAG_OPPOSITE_THRESHOLD = 100;
 const DRAG_EDGE_BOUNDARY = 32;
 
 const Context = React.createContext<T.Context>({
@@ -67,14 +68,15 @@ const Modal = (props: T.Props) => {
 		attributes,
 	} = props;
 	const id = useElementId();
-	const clientPosition = useResponsiveClientValue(position);
+	const clientPosition = useResponsiveClientValue(position)!;
 	const [titleMounted, setTitleMounted] = React.useState(false);
 	const [subtitleMounted, setSubtitleMounted] = React.useState(false);
 	const [dragging, setDragging] = React.useState(false);
 	const rootRef = React.useRef<HTMLDivElement>(null);
-	const dragClientCoordinatesRef = React.useRef(0);
+	const dragStartCoordinatesRef = React.useRef({ x: 0, y: 0 });
+	const dragLastCoordinateRef = React.useRef(0);
 	const dragDistanceRef = React.useRef(0);
-	const dragDirectionRef = React.useRef<-1 | 0 | 1>(0);
+	const dragDirectionRef = React.useRef(0);
 	const [dragDistance, setDragDistance] = React.useState(0);
 	const [hideProgress, setHideProgress] = React.useState(0);
 	const paddingStyles = getPaddingStyles(padding);
@@ -91,10 +93,10 @@ const Modal = (props: T.Props) => {
 	);
 
 	const resetDragData = () => {
+		dragStartCoordinatesRef.current = { x: 0, y: 0 };
+		dragLastCoordinateRef.current = 0;
 		dragDirectionRef.current = 0;
-		dragClientCoordinatesRef.current = 0;
 		setDragDistance(0);
-		setHideProgress(0);
 	};
 
 	const handleDragStart = (e: React.TouchEvent) => {
@@ -128,9 +130,7 @@ const Modal = (props: T.Props) => {
 			// Close only when dragging in the closing direction
 			// Changing to a different direction will keep the modal opened
 			const shouldClose =
-				clientPosition && ["bottom", "end"].includes(clientPosition)
-					? dragDirectionRef.current > 0
-					: dragDirectionRef.current < 0;
+				clientPosition === "start" ? dragDirectionRef.current < 0 : dragDirectionRef.current > 0;
 
 			if (Math.abs(dragDistanceRef.current) > DRAG_THRESHOLD && shouldClose) {
 				onClose?.();
@@ -142,20 +142,40 @@ const Modal = (props: T.Props) => {
 		const handleDrag = (e: TouchEvent) => {
 			if (!dragging || clientPosition === "center") return;
 
-			const prev = dragClientCoordinatesRef.current;
 			const target = e.targetTouches[0];
-			dragClientCoordinatesRef.current =
-				clientPosition === "bottom" ? target.clientY : target.clientX;
+			const coordinate = { x: target.clientX, y: target.clientY };
+			const key = clientPosition === "bottom" ? "y" : "x";
+			const oppositeKey = clientPosition === "bottom" ? "x" : "y";
 
-			if (!prev) return;
+			// Save the initial coordinates
+			if (!dragStartCoordinatesRef.current[key]) {
+				dragStartCoordinatesRef.current = coordinate;
+				dragLastCoordinateRef.current = coordinate[key];
+			}
 
-			const delta = dragClientCoordinatesRef.current - prev;
-			dragDirectionRef.current = delta < 0 ? -1 : 1;
+			const next = Math.abs(coordinate[key] - dragStartCoordinatesRef.current[key]);
+			const nextOpposite = Math.abs(
+				coordinate[oppositeKey] - dragStartCoordinatesRef.current[oppositeKey]
+			);
 
-			setDragDistance((prev) => {
-				const next = prev + delta;
-				return clientPosition === "start" ? Math.min(0, next) : Math.max(0, next);
-			});
+			// For start/end drawers - ignore the swiping
+			// If user is scrolling vertically more than swiping
+			if (
+				position !== "bottom" &&
+				(next < nextOpposite || nextOpposite > DRAG_OPPOSITE_THRESHOLD)
+			) {
+				dragLastCoordinateRef.current = coordinate[key];
+				return;
+			}
+
+			dragDirectionRef.current = coordinate[key] - dragLastCoordinateRef.current;
+			dragLastCoordinateRef.current = coordinate[key];
+
+			setDragDistance((prev) =>
+				clientPosition === "start"
+					? Math.min(0, prev + dragDirectionRef.current)
+					: Math.max(0, prev + dragDirectionRef.current)
+			);
 		};
 
 		document.addEventListener("touchmove", handleDrag);
@@ -179,12 +199,19 @@ const Modal = (props: T.Props) => {
 		const size = isInline ? rootEl.clientWidth : rootEl.clientHeight;
 		const progress = Math.abs(dragDistance) / size;
 
-		dragDistanceRef.current = dragDistance;
 		setHideProgress(progress / 2);
+		dragDistanceRef.current = dragDistance;
 	}, [dragDistance, clientPosition]);
 
 	return (
-		<Overlay onClose={onClose} active={active} transparent={transparentOverlay || hideProgress}>
+		<Overlay
+			onClose={onClose}
+			active={active}
+			transparent={transparentOverlay || hideProgress}
+			attributes={{
+				onTouchStart: handleDragStart,
+			}}
+		>
 			{({ active }) => {
 				const rootClassNames = classNames(
 					s.root,
@@ -217,9 +244,8 @@ const Modal = (props: T.Props) => {
 							className={rootClassNames}
 							aria-modal="true"
 							role="dialog"
-							onTouchStart={handleDragStart}
-							onTransitionEnd={handleTransitionEnd}
 							ref={rootRef}
+							onTransitionEnd={handleTransitionEnd}
 						>
 							{children}
 						</div>
