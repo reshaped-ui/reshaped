@@ -4,6 +4,7 @@
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
 	box-shadow: var(--rs-shadow-overlay);
+	will-change: transform;
 }
 
 .--dragging {
@@ -32,7 +33,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate3d(0, 0, 0) scale(1) !important;
+			transform: translate(0, 0) scale(1) !important;
 			opacity: 1;
 		}
 	}
@@ -48,7 +49,7 @@
 		margin-top: var(--rs-unit-x4);
 		inset: 0;
 		inset-block-start: initial;
-		transform: translate3d(0, 100%, 0);
+		transform: translate(0, 100%);
 		position: fixed;
 		border-radius: var(--rs-unit-radius-large) var(--rs-unit-radius-large) 0 0;
 		overflow: auto;
@@ -56,7 +57,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate3d(0, max(var(--rs-modal-drag, 0px), 0px), 0) scale(1) !important;
+			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px)) scale(1) !important;
 		}
 	}
 
@@ -71,19 +72,19 @@
 		margin-inline-end: var(--rs-unit-x4);
 		inset: 0;
 		inset-inline-end: initial;
-		transform: translate3d(-100%, 0, 0);
+		transform: translate(-100%, 0);
 		position: fixed;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate3d(100%, 0, 0);
+			transform: translate(100%, 0);
 		}
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate3d(min(var(--rs-modal-drag, 0px), 0px), 0, 0) scale(1) !important;
+			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0) scale(1) !important;
 		}
 	}
 
@@ -98,19 +99,19 @@
 		margin-inline-start: var(--rs-unit-x4);
 		inset: 0;
 		inset-inline-start: initial;
-		transform: translate3d(100%, 0, 0);
+		transform: translate(100%, 0);
 		position: fixed;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate3d(-100%, 0, 0);
+			transform: translate(-100%, 0);
 		}
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate3d(max(var(--rs-modal-drag, 0px), 0px), 0, 0) scale(1) !important;
+			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0) scale(1) !important;
 		}
 	}
 }

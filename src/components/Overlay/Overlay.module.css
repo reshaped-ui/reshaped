@@ -5,6 +5,9 @@
 	inset: 0;
 	z-index: var(--rs-z-index-overlay);
 	color: var(--rs-color-white);
+
+	/* Override default Tailwind reset */
+	cursor: default !important;
 }
 
 .root::after {
