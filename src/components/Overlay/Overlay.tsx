@@ -72,7 +72,7 @@ const Overlay = (props: T.Props) => {
 	};
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		if (e.propertyName !== "opacity" || !e.pseudoElement) return;
+		if (e.propertyName !== "transform" || !e.pseudoElement) return;
 		setAnimated(false);
 
 		if (visible) return;
@@ -93,7 +93,9 @@ const Overlay = (props: T.Props) => {
 	React.useEffect(() => {
 		if (!rendered) return;
 		if (!clickThrough) lockScroll();
-		onNextFrame(() => show());
+		onNextFrame(() => {
+			show();
+		});
 	}, [rendered, show, lockScroll, clickThrough]);
 
 	React.useEffect(() => {

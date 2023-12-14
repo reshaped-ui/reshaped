@@ -13,6 +13,7 @@
 	inset: 0;
 	background: var(--rs-color-black);
 	opacity: 0;
+	transform: scale(1.01);
 }
 
 .wrapper {
@@ -37,6 +38,7 @@
 
 .root.--visible::after {
 	opacity: var(--rs-overlay-opacity);
+	transform: scale(1);
 }
 
 .root.--click-through {
@@ -53,5 +55,8 @@
 }
 
 .root.--animated::after {
-	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
+	transition: var(--rs-duration-medium) var(--rs-easing-standard);
+
+	/* Using transform to keep the transparent overlay transitionEnd event */
+	transition-property: opacity, transform;
 }
