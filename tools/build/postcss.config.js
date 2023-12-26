@@ -1,4 +1,3 @@
-const path = require("path");
 const importPlugin = require("postcss-import");
 const nestedPlugin = require("postcss-nested");
 const eachPlugin = require("postcss-each");
@@ -13,7 +12,7 @@ module.exports = {
 		responsivePlugin(),
 		eachPlugin(),
 		nestedPlugin(),
-		customMediaPlugin({ importFrom: path.resolve(__dirname, "../../src/themes/media.css") }),
+		customMediaPlugin(),
 		autoprefixer(),
 		cssNano({ preset: ["default", { calc: false }] }),
 	],

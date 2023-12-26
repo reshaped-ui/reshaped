@@ -56,7 +56,7 @@
 		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes --private",
 		"build:esm": "tsc -p tsconfig.esm.json",
 		"build:cjs": "tsc -p tsconfig.cjs.json",
-		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build && cp -rp src/themes/media.css dist/themes/media.css && mkdir themes && cp -r src/themes/media.css themes/media.css",
+		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
 		"build:stories": "tsc -p tsconfig.stories.json",
 		"build:bundle": "vite build && mv dist/bundle.umd.js dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",
 		"build:storybook": "storybook build -c tools/storybook -o dist/app --disable-telemetry",

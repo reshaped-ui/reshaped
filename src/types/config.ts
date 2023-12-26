@@ -1,8 +1,8 @@
-import { PartialUserThemeDefinition, ColorHue } from "themes/_generator/tokens/types";
+import { PartialThemeDefinition, ColorHue } from "themes/_generator/tokens/types";
 
 export type ReshapedConfig = {
-	themes?: Record<string, PartialUserThemeDefinition>;
-	themeFragments?: Record<string, PartialUserThemeDefinition>;
+	themes?: Record<string, PartialThemeDefinition>;
+	themeFragments?: Record<string, PartialThemeDefinition>;
 	themeOptions?: {
 		generateOnColorsFor?: string[];
 		onColorValues?: {

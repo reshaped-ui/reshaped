@@ -1,7 +1,7 @@
 import reshapedDefinition from "./reshaped";
-import { UserThemeDefinition } from "../tokens/types";
+import { ThemeDefinition } from "../tokens/types";
 
-const theme: UserThemeDefinition = {
+const theme: ThemeDefinition = {
 	...reshapedDefinition,
 	color: {
 		...reshapedDefinition.color,
@@ -107,6 +107,10 @@ const theme: UserThemeDefinition = {
 		radiusLarge: {
 			px: 6,
 		},
+	},
+	viewport: {
+		...reshapedDefinition.viewport,
+		m: { minPx: 630 },
 	},
 };
 

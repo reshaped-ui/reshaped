@@ -1,11 +1,10 @@
 import reshapedDefinition from "themes/_generator/definitions/reshaped";
-import baseDefinition from "themes/_generator/definitions/base";
 import { camelToKebab } from "utilities/string";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
-import { UserThemeDefinition } from "themes/_generator/tokens/types";
+import { ThemeDefinition } from "themes/_generator/tokens/types";
 import { bgWithDynamicForeground } from "themes/_generator/constants";
 
-export const getTheme = (theme?: UserThemeDefinition) => {
+export const getTheme = (theme?: ThemeDefinition) => {
 	const config: Record<
 		| "backgroundColor"
 		| "textColor"
@@ -28,7 +27,7 @@ export const getTheme = (theme?: UserThemeDefinition) => {
 	};
 
 	const definition = theme
-		? (mergeDefinitions(reshapedDefinition, theme) as UserThemeDefinition)
+		? (mergeDefinitions(reshapedDefinition, theme) as ThemeDefinition)
 		: reshapedDefinition;
 
 	Object.keys(definition.color).forEach((tokenName) => {
@@ -100,7 +99,7 @@ export const getTheme = (theme?: UserThemeDefinition) => {
 		return;
 	});
 
-	Object.entries(baseDefinition.viewport).forEach(([tokenName, tokenValue]) => {
+	Object.entries(definition.viewport).forEach(([tokenName, tokenValue]) => {
 		if (!tokenValue.minPx) return;
 		config.screens[tokenName] = `${tokenValue.minPx}px`;
 	});
