@@ -36,14 +36,15 @@ const ExampleItem = (props: Props) => {
 
 	return (
 		<View borderColor="neutral-faded" borderRadius="medium" overflow="hidden">
-			<View paddingInline={4} paddingBlock={3} backgroundColor="neutral-faded">
-				{title &&
-					title.map((line, index) => (
+			{title && (
+				<View paddingInline={4} paddingBlock={3} backgroundColor="neutral-faded">
+					{title.map((line, index) => (
 						<Text variant="body-3" color={index > 0 ? "neutral-faded" : "neutral"} key={index}>
 							{line}
 						</Text>
 					))}
-			</View>
+				</View>
+			)}
 			<View padding={4} className={s.root}>
 				{children}
 			</View>

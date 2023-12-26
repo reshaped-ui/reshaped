@@ -4,5 +4,7 @@ export const bgWithDynamicForeground: Name[] = [
 	"backgroundNeutral",
 	"backgroundPrimary",
 	"backgroundCritical",
+	"backgroundWarning",
 	"backgroundPositive",
+	"brand",
 ];

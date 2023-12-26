@@ -4,6 +4,7 @@ export type Name =
 	| "foregroundDisabled"
 	| "foregroundPrimary"
 	| "foregroundCritical"
+	| "foregrounwarning"
 	| "foregroundPositive"
 	| "borderNeutral"
 	| "borderNeutralFaded"
@@ -12,6 +13,8 @@ export type Name =
 	| "borderPrimaryFaded"
 	| "borderCritical"
 	| "borderCriticalFaded"
+	| "borderwarning"
+	| "borderwarningFaded"
 	| "borderPositive"
 	| "borderPositiveFaded"
 	| "backgroundNeutral"
@@ -25,6 +28,9 @@ export type Name =
 	| "backgroundCritical"
 	| "backgroundCriticalFaded"
 	| "backgroundCriticalHighlighted"
+	| "backgroundWarning"
+	| "backgroundWarningFaded"
+	| "backgroundWarningHighlighted"
 	| "backgroundPositive"
 	| "backgroundPositiveFaded"
 	| "backgroundPositiveHighlighted"
@@ -33,6 +39,7 @@ export type Name =
 	| "backgroundElevationBase"
 	| "backgroundElevationRaised"
 	| "backgroundElevationOverlay"
+	| "brand"
 	| "white"
 	| "black";
 
@@ -40,6 +47,7 @@ export type GeneratedOnName =
 	| "onBackgroundNeutral"
 	| "onBackgroundPrimary"
 	| "onBackgroundPositive"
+	| "onBackgroundWarning"
 	| "onBackgroundCritical";
 
 export type GeneratedRGBName =
@@ -54,6 +62,9 @@ export type GeneratedRGBName =
 	| "rgbBackgroundCritical"
 	| "rgbBackgroundCriticalFaded"
 	| "rgbBackgroundCriticalHighlighted"
+	| "rgbBackgroundWarning"
+	| "rgbBackgroundWarningFaded"
+	| "rgbBackgroundWarningHighlighted"
 	| "rgbBackgroundPositive"
 	| "rgbBackgroundPositiveFaded"
 	| "rgbBackgroundPositiveHighlighted"
