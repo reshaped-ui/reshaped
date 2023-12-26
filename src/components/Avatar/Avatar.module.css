@@ -30,6 +30,10 @@
 		color: var(--rs-color-foreground-positive);
 	}
 
+	&.--color-warning {
+		color: var(--rs-color-foreground-warning);
+	}
+
 	&.--color-primary {
 		color: var(--rs-color-foreground-primary);
 	}

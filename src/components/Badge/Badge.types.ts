@@ -14,7 +14,7 @@ type BaseProps = {
 
 type WithChildren = BaseProps & {
 	children: React.ReactNode;
-	color?: "critical" | "positive" | "primary";
+	color?: "critical" | "warning" | "positive" | "primary";
 	variant?: "faded" | "outline";
 };
 

@@ -331,19 +331,23 @@ export const hslToHex = (hsl: HslColor) => {
  * Normalizing utilities
  */
 
-export const getDarkModeLightnessDelta = (lightness: number, luminance: number) => {
-	const perceivedLuminanceOrigin = 69.5;
-	const luminanceDistance = Math.abs(Math.round(luminance - perceivedLuminanceOrigin));
-	// Use a greater modifier for values around the luminance origin and decrease it for distant values
-	const luminanceModifier = 3 - (Math.min(luminanceDistance, 20) / 20) * 0.5;
-	const distance = luminanceDistance * luminanceModifier;
+export const getDarkModeColor = (hsl: HslColor) => {
+	const { s, l } = hsl;
 
-	// Dark mode always reduces lightness but if the color was dark originally, we need to do it a slower pace
-	const slowdownModifier = luminanceDistance < 0 ? 2 : 1;
-	// Adjust the value based on the current lightness boundary
-	const delta = lightness / 100;
-
-	return (distance * delta) / slowdownModifier;
+	/**
+	 * Colors with lower saturation should have bigger lightness delta, for example it can be
+	 * Neutral: l: 97 -> l dark: 13
+	 * Warning: l: 53 -> l dark: 47
+	 *
+	 * Therefor we calculate the dark mode lightness based on a saturation modifier, which should be between 0 and 1
+	 * We take base saturation:
+	 * Neutral: 20 -> 0.2 modifier, Warning: 96 -> 0.96 modifier
+	 *
+	 * And we also adjust that value with a modifier of 0.9-2 based on the saturation
+	 * That way satured colors won't change much from its original value
+	 */
+	const sModifier = (s / 100) * (0.96 + (100 - s) / 100);
+	return { ...hsl, s: s - 7, l: l * sModifier };
 };
 
 export const getLuminanceDelta = (luminance: number) => {

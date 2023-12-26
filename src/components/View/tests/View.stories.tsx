@@ -513,6 +513,16 @@ export const background = () => (
 				Content
 			</View>
 		</Example.Item>
+		<Example.Item title="bg: warning">
+			<View backgroundColor="warning" padding={4}>
+				Content
+			</View>
+		</Example.Item>
+		<Example.Item title="bg: warning-faded">
+			<View backgroundColor="warning-faded" padding={4}>
+				Content
+			</View>
+		</Example.Item>
 		<Example.Item title="bg: positive">
 			<View backgroundColor="positive" padding={4}>
 				Content
@@ -560,6 +570,18 @@ export const border = () => (
 
 		<Example.Item title="border: critical-faded">
 			<View borderColor="critical-faded" padding={4}>
+				Content
+			</View>
+		</Example.Item>
+
+		<Example.Item title="border: warning">
+			<View borderColor="warning" padding={4}>
+				Content
+			</View>
+		</Example.Item>
+
+		<Example.Item title="border: warning-faded">
+			<View borderColor="warning-faded" padding={4}>
 				Content
 			</View>
 		</Example.Item>

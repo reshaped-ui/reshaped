@@ -20,7 +20,14 @@ export type Variant =
 export type Props<TagName extends keyof JSX.IntrinsicElements | void = void> = {
 	variant?: G.Responsive<Variant>;
 	weight?: "regular" | "medium" | "bold";
-	color?: "neutral" | "neutral-faded" | "critical" | "positive" | "primary" | "disabled";
+	color?:
+		| "neutral"
+		| "neutral-faded"
+		| "critical"
+		| "warning"
+		| "positive"
+		| "primary"
+		| "disabled";
 	align?: G.Responsive<"start" | "center" | "end">;
 	decoration?: "line-through";
 	maxLines?: number;

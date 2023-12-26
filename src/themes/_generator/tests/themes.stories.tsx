@@ -5,6 +5,7 @@ import Button from "components/Button";
 import Badge from "components/Badge";
 import Alert from "components/Alert";
 import Card from "components/Card";
+import Avatar from "components/Avatar";
 import DropdownMenu from "components/DropdownMenu";
 import Theme from "components/Theme";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
@@ -60,10 +61,33 @@ const componentExamples = (
 				<Alert color="critical">Critical</Alert>
 			</View.Item>
 			<View.Item columns={6}>
+				<Alert color="warning">warning</Alert>
+			</View.Item>
+			<View.Item columns={6}>
 				<Alert color="positive">Positive</Alert>
 			</View.Item>
 			<View.Item columns={6}>
 				<Alert color="neutral">Neutral</Alert>
+			</View.Item>
+			<View.Item columns={12}>
+				<View direction="row" gap={2}>
+					<View backgroundColor="neutral" width={10} height={10} />
+					<View backgroundColor="neutral-faded" width={10} height={10} />
+					<View backgroundColor="primary" width={10} height={10} />
+					<View backgroundColor="primary-faded" width={10} height={10} />
+					<View backgroundColor="critical" width={10} height={10} />
+					<View backgroundColor="critical-faded" width={10} height={10} />
+					<View backgroundColor="warning" width={10} height={10} />
+					<View backgroundColor="warning-faded" width={10} height={10} />
+					<View backgroundColor="positive" width={10} height={10} />
+					<View backgroundColor="positive-faded" width={10} height={10} />
+				</View>
+			</View.Item>
+			<View.Item columns={12}>
+				<View direction="row" gap={2}>
+					<Avatar initials="RS" color="warning" variant="faded" />
+					<Badge color="warning">Warning</Badge>
+				</View>
 			</View.Item>
 			<View.Item columns={6}>
 				<Card>
@@ -110,7 +134,7 @@ export const base = () => (
 
 export const generation = () => (
 	<Example>
-		<Example.Item title="base">
+		<Example.Item>
 			<style>{cssGenerated}</style>
 			<View gap={4}>
 				<View.Item>Generated theme</View.Item>

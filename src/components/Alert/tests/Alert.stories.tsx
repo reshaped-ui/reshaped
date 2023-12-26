@@ -82,6 +82,23 @@ export const color = () => (
 				been the industry's standard
 			</Alert>
 		</Example.Item>
+
+		<Example.Item title="color: warning">
+			<Alert
+				color="warning"
+				title="Alert title goes here"
+				icon={IconZap}
+				actionsSlot={
+					<>
+						<Link variant="plain">View now</Link>
+						<Link variant="plain">Dismiss</Link>
+					</>
+				}
+			>
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+				been the industry's standard
+			</Alert>
+		</Example.Item>
 	</Example>
 );
 

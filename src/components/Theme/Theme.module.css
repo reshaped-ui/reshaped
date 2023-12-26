@@ -1,11 +1,9 @@
 .root {
-	--rs-focus-shadow: 
-		0 0 0 2px var(--rs-color-background-elevation-base),
+	--rs-focus-shadow: 0 0 0 2px var(--rs-color-background-elevation-base),
 		0 0 0 4px var(--rs-color-border-primary);
-	--rs-focus-inset-shadow:
-		inset 0 0 0 2px var(--rs-color-border-primary),
+	--rs-focus-inset-shadow: inset 0 0 0 2px var(--rs-color-border-primary),
 		inset 0 0 0 4px var(--rs-color-background-elevation-base);
 
 	color: var(--rs-color-foreground-neutral);
+	display: contents;
 }
-

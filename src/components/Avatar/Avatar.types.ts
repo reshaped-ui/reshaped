@@ -10,7 +10,7 @@ type WithContent = WithImage | WithInitials | WithIcon;
 export type Props = WithContent & {
 	squared?: boolean;
 	variant?: "solid" | "faded";
-	color?: "neutral" | "critical" | "positive" | "primary";
+	color?: "neutral" | "critical" | "warning" | "positive" | "primary";
 	size?: G.Responsive<number>;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div", Props>;

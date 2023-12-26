@@ -17,7 +17,7 @@
 	min-width: 100%;
 }
 
-@each $color in neutral, neutral-faded, primary, positive, critical, disabled {
+@each $color in neutral, neutral-faded, primary, positive, warning, critical, disabled {
 	.--color-$(color) {
 		color: var(--rs-color-foreground-$(color));
 	}

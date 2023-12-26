@@ -61,6 +61,18 @@ export const color = () => (
 				</Badge>
 			</View>
 		</Example.Item>
+
+		<Example.Item title="color: warning, all variants">
+			<View direction="row" gap={3}>
+				<Badge color="warning">Badge</Badge>
+				<Badge variant="faded" color="warning">
+					Badge
+				</Badge>
+				<Badge variant="outline" color="warning">
+					Badge
+				</Badge>
+			</View>
+		</Example.Item>
 	</Example>
 );
 
