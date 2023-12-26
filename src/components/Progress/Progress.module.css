@@ -40,6 +40,10 @@
 	background: var(--rs-color-background-critical);
 }
 
+.--color-warning .value {
+	background: var(--rs-color-background-warning);
+}
+
 .--color-positive .value {
 	background: var(--rs-color-background-positive);
 }

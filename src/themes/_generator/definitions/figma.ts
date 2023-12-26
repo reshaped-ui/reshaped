@@ -105,6 +105,7 @@ const theme: ThemeDefinition = {
 		radiusLarge: { px: 4 },
 	},
 
+	// @ts-ignore
 	color: {
 		foregroundNeutral: { hex: "#191919", hexDark: "#FFFFFF" },
 		foregroundNeutralFaded: { hex: "#474747", hexDark: "#B2B2B2" },

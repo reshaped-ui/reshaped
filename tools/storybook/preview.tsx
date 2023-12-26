@@ -58,7 +58,8 @@ const ThemeSwitch = () => {
 			<Button onClick={invertColorMode} size="small">
 				Toggle mode
 			</Button>
-			<DropdownMenu>
+
+			<DropdownMenu position="top-end" forcePosition>
 				<DropdownMenu.Trigger>
 					{(attributes) => (
 						<Button attributes={attributes} size="small">

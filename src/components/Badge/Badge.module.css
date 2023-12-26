@@ -84,6 +84,26 @@
 	}
 }
 
+.root.--color-warning {
+	background: var(--rs-color-background-warning);
+	color: var(--rs-color-on-background-warning);
+	border-color: var(--rs-color-background-warning);
+
+	&.--variant {
+		&-faded {
+			background: var(--rs-color-background-warning-faded);
+			border-color: var(--rs-color-background-warning-faded);
+			color: var(--rs-color-foreground-warning);
+		}
+
+		&-outline {
+			background: none;
+			border-color: var(--rs-color-border-warning);
+			color: var(--rs-color-foreground-warning);
+		}
+	}
+}
+
 .root.--color-primary {
 	background: var(--rs-color-background-primary);
 	color: var(--rs-color-on-background-primary);

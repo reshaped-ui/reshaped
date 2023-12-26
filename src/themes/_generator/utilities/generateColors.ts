@@ -5,7 +5,7 @@ import {
 	hexToRgb,
 	getRgbLuminance,
 	getLuminanceDelta,
-	getDarkModeLightnessDelta,
+	getDarkModeColor,
 	hslToHex,
 	hsluvToHex,
 	rgbToHex,
@@ -27,8 +27,7 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	const hsluv = hexToHsluv(hex);
 	const luminance = getRgbLuminance(rgb);
 	const luminanceDelta = getLuminanceDelta(luminance);
-	const darkModeLigthnessDelta = getDarkModeLightnessDelta(hsl.l, luminance);
-	const hslDark = { ...hsl, l: hsl.l - darkModeLigthnessDelta };
+	const hslDark = getDarkModeColor(hsl);
 	const bgHex = hex;
 	const bgHexDark = hslToHex(hslDark);
 	const hsluvDark = hexToHsluv(bgHexDark);
@@ -36,7 +35,6 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	const bdHex = hsluvToHex({ ...hsluv, l: hsluv.l - 5 - luminanceDelta });
 	const bdHexDark = hsluvToHex({
 		...hsluvDark,
-		// s: Math.min(hsluvDark.s, 70),
 		l: key === "neutral" ? 35 : FG_L_DARK,
 	});
 
@@ -44,8 +42,9 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	const fgHsluvDark = { ...hsluv, l: key === "neutral" ? 80 : FG_L_DARK };
 	const fgHex = hsluvToHex(fgHsluv);
 	const fgHexDark = hsluvToHex(fgHsluvDark);
+	const sturationModifier = hsl.s / 40;
 
-	const bgFadedHex = rgbToHex(hslToRgb({ ...hsl, l: 97 }));
+	const bgFadedHex = rgbToHex(hslToRgb({ ...hsl, l: 98 - sturationModifier }));
 	const bgFadedHsluv = hexToHsluv(bgFadedHex);
 	const bgFadedHsluvDark = { ...hsluv, l: 16, s: 32 };
 	const bgFadedHexDark = hsluvToHex(bgFadedHsluvDark);
@@ -56,7 +55,7 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	const bdFadedHex = hsluvToHex({
 		...bgFadedHsluv,
 		s: Math.max(0, bgFadedHsluv.s - 6 - Math.max(0, fadedLuminance - 98) * 20),
-		l: bgFadedHsluv.l - 7,
+		l: bgFadedHsluv.l - 7 + sturationModifier,
 	});
 	const bdFadedHexDark = hsluvToHex({
 		...bgFadedHsluvDark,
@@ -149,26 +148,46 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	return output;
 };
 
-const validateHexColor = (color?: string) => {
+const validateHexColor = (color: string) => {
 	const hexColorRegex = /^#([A-Fa-f0-9]{3}){2}$/;
-	return hexColorRegex.test(color || "") ? color : null;
+
+	if (!hexColorRegex.test(color)) {
+		throw new Error(`Invalid hex color: ${color}`);
+	}
+
+	return color;
 };
 
 const generate = (
 	args: {
 		primary?: string;
 		critical?: string;
+		warning?: string;
 		positive?: string;
 		neutral?: string;
+		brand?: string;
 	} = {}
 ) => {
-	const { primary, critical, positive, neutral } = args;
+	const {
+		primary = "#5a58f2",
+		critical = "#e22c2c",
+		warning = "#facc15",
+		positive = "#118850",
+		neutral = "#dfe2ea",
+		brand,
+	} = args;
+	const primaryColors = generateColorValues({
+		key: "primary",
+		hex: validateHexColor(primary),
+	});
 
 	return {
-		...generateColorValues({ key: "primary", hex: validateHexColor(primary) || "#5a58f2" }),
-		...generateColorValues({ key: "critical", hex: validateHexColor(critical) || "#e22c2c" }),
-		...generateColorValues({ key: "positive", hex: validateHexColor(positive) || "#118850" }),
-		...generateColorValues({ key: "neutral", hex: validateHexColor(neutral) || "#dfe2ea" }),
+		...primaryColors,
+		...generateColorValues({ key: "critical", hex: validateHexColor(critical) }),
+		...generateColorValues({ key: "warning", hex: validateHexColor(warning) }),
+		...generateColorValues({ key: "positive", hex: validateHexColor(positive) }),
+		...generateColorValues({ key: "neutral", hex: validateHexColor(neutral) }),
+		brand: { hex: brand || primary },
 		white: { hex: "#ffffff" },
 		black: { hex: "#000000" },
 	} as ThemeDefinition["color"];

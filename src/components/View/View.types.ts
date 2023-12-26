@@ -34,6 +34,8 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 		| "critical"
 		| "critical-faded"
 		| "positive"
+		| "warning"
+		| "warning-faded"
 		| "positive-faded"
 		| "primary"
 		| "primary-faded"
@@ -44,6 +46,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 		| "page-faded"
 		| "disabled"
 		| "disabled-faded"
+		| "brand"
 		| "white"
 		| "black";
 	borderColor?:
@@ -51,11 +54,14 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 		| "neutral-faded"
 		| "critical"
 		| "critical-faded"
+		| "warning"
+		| "warning-faded"
 		| "positive"
 		| "positive-faded"
 		| "primary"
 		| "primary-faded"
 		| "disabled"
+		| "brand"
 		| "transparent";
 	borderRadius?: G.Responsive<TStyles.Radius>;
 	position?: G.Responsive<TStyles.Position>;

@@ -79,6 +79,9 @@ export const color = () => (
 		<Example.Item title="color: positive">
 			<Text color="positive">Positive</Text>
 		</Example.Item>
+		<Example.Item title="color: warning">
+			<Text color="warning">warning</Text>
+		</Example.Item>
 		<Example.Item title="color: critical">
 			<Text color="critical">Critical</Text>
 		</Example.Item>

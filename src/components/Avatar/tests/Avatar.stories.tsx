@@ -92,6 +92,12 @@ export const colors = () => (
 		<Example.Item title="color: positive, variant: faded">
 			<Avatar color="positive" variant="faded" icon={IconZap} />
 		</Example.Item>
+		<Example.Item title="color: warning">
+			<Avatar color="warning" icon={IconZap} />
+		</Example.Item>
+		<Example.Item title="color: warning, variant: faded">
+			<Avatar color="warning" variant="faded" icon={IconZap} />
+		</Example.Item>
 		<Example.Item title="color: critical">
 			<Avatar color="critical" icon={IconZap} />
 		</Example.Item>

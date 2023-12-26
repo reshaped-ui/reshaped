@@ -47,8 +47,6 @@ const useCalendarKeyboardNavigation = (props: {
 
 			const disabled = (min && nextDate < min) || (max && nextDate > max);
 
-			console.log({ nextDate, disabled });
-
 			if (disabled) return;
 
 			if (nextEl) {

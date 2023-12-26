@@ -7,7 +7,7 @@ export type Props = {
 	title?: React.ReactNode;
 	children?: React.ReactNode;
 	actionsSlot?: React.ReactNode;
-	color?: "neutral" | "critical" | "positive" | "primary";
+	color?: "neutral" | "critical" | "warning" | "positive" | "primary";
 	inline?: boolean;
 	bleed?: G.Responsive<number>;
 	className?: G.ClassName;

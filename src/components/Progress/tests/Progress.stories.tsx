@@ -36,6 +36,9 @@ export const color = () => (
 		<Example.Item title="color: critical, value: 50">
 			<Progress value={50} color="critical" />
 		</Example.Item>
+		<Example.Item title="color: warning, value: 50">
+			<Progress value={50} color="warning" />
+		</Example.Item>
 		<Example.Item title="color: positive, value: 50">
 			<Progress value={50} color="positive" />
 		</Example.Item>

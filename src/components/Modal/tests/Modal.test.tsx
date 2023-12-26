@@ -116,7 +116,7 @@ describe("Components/Modal", () => {
 		 */
 		const overlayEl = screen.getAllByRole("button")[1];
 		fireEvent.transitionEnd(overlayEl, {
-			propertyName: "opacity",
+			propertyName: "transform",
 			pseudoElement: "::after",
 		});
 

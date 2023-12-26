@@ -4,118 +4,141 @@ exports[`Themes/Utilties/generateColors applies color overrides 1`] = `
 {
   "backgroundCritical": {
     "hex": "#dc2626",
-    "hexDark": "#ae1c1c",
+    "hexDark": "#c02929",
   },
   "backgroundCriticalFaded": {
-    "hex": "#fdf2f2",
+    "hex": "#fceeee",
     "hexDark": "#3e1f1f",
   },
   "backgroundCriticalHighlighted": {
     "hex": "#ca2222",
-    "hexDark": "#c02020",
+    "hexDark": "#d22e2e",
   },
   "backgroundDisabled": {
     "hex": "#eceef2",
-    "hexDark": "#1c212f",
+    "hexDark": "#1e212a",
   },
   "backgroundDisabledFaded": {
     "hex": "#f5f6f9",
-    "hexDark": "#151925",
+    "hexDark": "#171921",
   },
   "backgroundElevationBase": {
     "hex": "#ffffff",
-    "hexDark": "#131722",
+    "hexDark": "#15171e",
   },
   "backgroundElevationOverlay": {
     "hex": "#ffffff",
-    "hexDark": "#1b1f2c",
+    "hexDark": "#1c1f28",
   },
   "backgroundElevationRaised": {
     "hex": "#ffffff",
-    "hexDark": "#171b27",
+    "hexDark": "#191b23",
   },
   "backgroundNeutral": {
     "hex": "#dfe2ea",
-    "hexDark": "#3f4861",
+    "hexDark": "#494f60",
   },
   "backgroundNeutralFaded": {
-    "hex": "#f6f7f9",
+    "hex": "#f7f8fa",
     "hexDark": "#222835",
   },
   "backgroundNeutralHighlighted": {
     "hex": "#d2d7e2",
-    "hexDark": "#47516d",
+    "hexDark": "#52586b",
   },
   "backgroundPage": {
     "hex": "#ffffff",
-    "hexDark": "#0d111a",
+    "hexDark": "#0f1116",
   },
   "backgroundPageFaded": {
     "hex": "#f9f9fb",
-    "hexDark": "#10131d",
+    "hexDark": "#111319",
   },
   "backgroundPositive": {
     "hex": "#16a34a",
-    "hexDark": "#12863d",
+    "hexDark": "#1a8d44",
   },
   "backgroundPositiveFaded": {
-    "hex": "#f2fdf6",
+    "hex": "#edfdf3",
     "hexDark": "#1f2b21",
   },
   "backgroundPositiveHighlighted": {
     "hex": "#149744",
-    "hexDark": "#149143",
+    "hexDark": "#1d994a",
   },
   "backgroundPrimary": {
     "hex": "#2563eb",
-    "hexDark": "#1658e9",
+    "hexDark": "#1e5bdf",
   },
   "backgroundPrimaryFaded": {
-    "hex": "#f1f5fe",
+    "hex": "#ecf1fd",
     "hexDark": "#23273b",
   },
   "backgroundPrimaryHighlighted": {
     "hex": "#215ad7",
-    "hexDark": "#2462f9",
+    "hexDark": "#2264f3",
+  },
+  "backgroundWarning": {
+    "hex": "#facc15",
+    "hexDark": "#f1c512",
+  },
+  "backgroundWarningFaded": {
+    "hex": "#fffae9",
+    "hexDark": "#2c271f",
+  },
+  "backgroundWarningHighlighted": {
+    "hex": "#edc113",
+    "hexDark": "#fed014",
   },
   "black": {
     "hex": "#000000",
   },
   "borderCritical": {
     "hex": "#bb1f1f",
-    "hexDark": "#f56868",
+    "hexDark": "#f16c6c",
   },
   "borderCriticalFaded": {
-    "hex": "#f6dada",
+    "hex": "#f7dcdc",
     "hexDark": "#582929",
   },
   "borderDisabled": {
     "hex": "#dfe2ea",
-    "hexDark": "#242a3a",
+    "hexDark": "#262a34",
   },
   "borderNeutral": {
     "hex": "#b3bbce",
-    "hexDark": "#48526e",
+    "hexDark": "#4c5264",
   },
   "borderNeutralFaded": {
-    "hex": "#e2e3e4",
+    "hex": "#e5e5e7",
     "hexDark": "#2d374c",
   },
   "borderPositive": {
     "hex": "#10853b",
-    "hexDark": "#1aac50",
+    "hexDark": "#22ac54",
   },
   "borderPositiveFaded": {
-    "hex": "#cfeddb",
+    "hex": "#cff3dd",
     "hexDark": "#283b2c",
   },
   "borderPrimary": {
     "hex": "#1c50c1",
-    "hexDark": "#778efb",
+    "hexDark": "#758ff9",
   },
   "borderPrimaryFaded": {
-    "hex": "#d7e1f8",
+    "hex": "#d9e3f9",
     "hexDark": "#2e3555",
+  },
+  "borderWarning": {
+    "hex": "#cfa90f",
+    "hexDark": "#b4920a",
+  },
+  "borderWarningFaded": {
+    "hex": "#faedbb",
+    "hexDark": "#3d3628",
+  },
+  "brand": {
+    "hex": "#2563eb",
   },
   "foregroundCritical": {
     "hex": "#c62121",
@@ -123,7 +146,7 @@ exports[`Themes/Utilties/generateColors applies color overrides 1`] = `
   },
   "foregroundDisabled": {
     "hex": "#c6ccda",
-    "hexDark": "#3f4962",
+    "hexDark": "#434959",
   },
   "foregroundNeutral": {
     "hex": "#14181f",
@@ -141,6 +164,10 @@ exports[`Themes/Utilties/generateColors applies color overrides 1`] = `
     "hex": "#225cdc",
     "hexDark": "#7590f7",
   },
+  "foregroundWarning": {
+    "hex": "#7b6305",
+    "hexDark": "#b4920c",
+  },
   "white": {
     "hex": "#ffffff",
   },
@@ -151,118 +178,141 @@ exports[`Themes/Utilties/generateColors generate the default theme 1`] = `
 {
   "backgroundCritical": {
     "hex": "#e22c2c",
-    "hexDark": "#c51b1b",
+    "hexDark": "#d02626",
   },
   "backgroundCriticalFaded": {
-    "hex": "#fdf2f2",
+    "hex": "#fdeded",
     "hexDark": "#3e1f1f",
   },
   "backgroundCriticalHighlighted": {
     "hex": "#d02828",
-    "hexDark": "#d71f1f",
+    "hexDark": "#e22a2a",
   },
   "backgroundDisabled": {
     "hex": "#eceef2",
-    "hexDark": "#1c212f",
+    "hexDark": "#1e212a",
   },
   "backgroundDisabledFaded": {
     "hex": "#f5f6f9",
-    "hexDark": "#151925",
+    "hexDark": "#171921",
   },
   "backgroundElevationBase": {
     "hex": "#ffffff",
-    "hexDark": "#131722",
+    "hexDark": "#15171e",
   },
   "backgroundElevationOverlay": {
     "hex": "#ffffff",
-    "hexDark": "#1b1f2c",
+    "hexDark": "#1c1f28",
   },
   "backgroundElevationRaised": {
     "hex": "#ffffff",
-    "hexDark": "#171b27",
+    "hexDark": "#191b23",
   },
   "backgroundNeutral": {
     "hex": "#dfe2ea",
-    "hexDark": "#3f4861",
+    "hexDark": "#494f60",
   },
   "backgroundNeutralFaded": {
-    "hex": "#f6f7f9",
+    "hex": "#f7f8fa",
     "hexDark": "#222835",
   },
   "backgroundNeutralHighlighted": {
     "hex": "#d2d7e2",
-    "hexDark": "#47516d",
+    "hexDark": "#52586b",
   },
   "backgroundPage": {
     "hex": "#ffffff",
-    "hexDark": "#0d111a",
+    "hexDark": "#0f1116",
   },
   "backgroundPageFaded": {
     "hex": "#f9f9fb",
-    "hexDark": "#10131d",
+    "hexDark": "#111319",
   },
   "backgroundPositive": {
     "hex": "#118850",
-    "hexDark": "#10844e",
+    "hexDark": "#14784a",
   },
   "backgroundPositiveFaded": {
-    "hex": "#f1fdf8",
+    "hex": "#edfdf5",
     "hexDark": "#1f2a23",
   },
   "backgroundPositiveHighlighted": {
     "hex": "#0f7d49",
-    "hexDark": "#128f55",
+    "hexDark": "#178351",
   },
   "backgroundPrimary": {
     "hex": "#5a58f2",
-    "hexDark": "#5350f2",
+    "hexDark": "#524fea",
   },
   "backgroundPrimaryFaded": {
-    "hex": "#f1f1fe",
+    "hex": "#ecebfe",
     "hexDark": "#252544",
   },
   "backgroundPrimaryHighlighted": {
     "hex": "#4d4af0",
-    "hexDark": "#605ef4",
+    "hexDark": "#5f5ced",
+  },
+  "backgroundWarning": {
+    "hex": "#facc15",
+    "hexDark": "#f1c512",
+  },
+  "backgroundWarningFaded": {
+    "hex": "#fffae9",
+    "hexDark": "#2c271f",
+  },
+  "backgroundWarningHighlighted": {
+    "hex": "#edc113",
+    "hexDark": "#fed014",
   },
   "black": {
     "hex": "#000000",
   },
   "borderCritical": {
     "hex": "#bf2424",
-    "hexDark": "#f86666",
+    "hexDark": "#f46969",
   },
   "borderCriticalFaded": {
-    "hex": "#f6dada",
+    "hex": "#fadbdb",
     "hexDark": "#582929",
   },
   "borderDisabled": {
     "hex": "#dfe2ea",
-    "hexDark": "#242a3a",
+    "hexDark": "#262a34",
   },
   "borderNeutral": {
     "hex": "#b3bbce",
-    "hexDark": "#48526e",
+    "hexDark": "#4c5264",
   },
   "borderNeutralFaded": {
-    "hex": "#e2e3e4",
+    "hex": "#e5e5e7",
     "hexDark": "#2d374c",
   },
   "borderPositive": {
     "hex": "#0c6e40",
-    "hexDark": "#18ab67",
+    "hexDark": "#21ab6b",
   },
   "borderPositiveFaded": {
-    "hex": "#cdede0",
+    "hex": "#d0f3e2",
     "hexDark": "#293b2f",
   },
   "borderPrimary": {
     "hex": "#3b38ed",
-    "hexDark": "#8b8af7",
+    "hexDark": "#8c8bf3",
   },
   "borderPrimaryFaded": {
-    "hex": "#dcdcfb",
+    "hex": "#dedcfb",
     "hexDark": "#323164",
+  },
+  "borderWarning": {
+    "hex": "#cfa90f",
+    "hexDark": "#b4920a",
+  },
+  "borderWarningFaded": {
+    "hex": "#faedbb",
+    "hexDark": "#3d3628",
+  },
+  "brand": {
+    "hex": "#5a58f2",
   },
   "foregroundCritical": {
     "hex": "#c42525",
@@ -270,7 +320,7 @@ exports[`Themes/Utilties/generateColors generate the default theme 1`] = `
   },
   "foregroundDisabled": {
     "hex": "#c6ccda",
-    "hexDark": "#3f4962",
+    "hexDark": "#434959",
   },
   "foregroundNeutral": {
     "hex": "#14181f",
@@ -287,6 +337,10 @@ exports[`Themes/Utilties/generateColors generate the default theme 1`] = `
   "foregroundPrimary": {
     "hex": "#4f4cf0",
     "hexDark": "#8b8af7",
+  },
+  "foregroundWarning": {
+    "hex": "#7b6305",
+    "hexDark": "#b4920c",
   },
   "white": {
     "hex": "#ffffff",
