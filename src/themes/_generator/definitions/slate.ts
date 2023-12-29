@@ -108,10 +108,6 @@ const theme: ThemeDefinition = {
 			px: 6,
 		},
 	},
-	viewport: {
-		...reshapedDefinition.viewport,
-		m: { minPx: 630 },
-	},
 };
 
 export default theme;

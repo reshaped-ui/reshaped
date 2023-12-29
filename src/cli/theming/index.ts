@@ -19,9 +19,12 @@ const transformDefinition = (
 		? path.resolve(outputPath, "fragments", name)
 		: path.resolve(outputPath, name);
 	const themePath = path.resolve(themeFolderPath, "theme.css");
+	const themeMediaPath = path.resolve(themeFolderPath, "media.css");
 
 	fs.mkdirSync(themeFolderPath, { recursive: true });
-	fs.writeFileSync(themePath, [code.variables, code.media].filter(Boolean).join("\n"));
+	fs.writeFileSync(themePath, code.variables);
+
+	if (code.media) fs.writeFileSync(themeMediaPath, code.media);
 
 	const logOutput = `Compiled ${chalk.bold(name)} theme${isFragment ? " fragment" : ""}`;
 

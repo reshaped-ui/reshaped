@@ -1,16 +1,16 @@
 import path from "path";
 
-const defaultThemeMediaCSSPath = path.resolve(__dirname, "../themes/media.css");
+const defaultThemeMediaCSSPath = path.resolve(__dirname, "../themes/reshaped/media.css");
 
 // Using [plugin]: { ...options } format here because it's supported by the most frameworks
 // - require('plugin') is not supported by Next
 // - ['plugin', options] is not supported by Vite
 export const config = {
 	plugins: {
-		"postcss-custom-media": {
-			importFrom: defaultThemeMediaCSSPath,
+		"@csstools/postcss-global-data": {
+			files: defaultThemeMediaCSSPath,
 		},
-		autoprefixer: {},
+		"postcss-custom-media": {},
 		cssnano: { preset: ["default", { calc: false }] },
 	},
 };
@@ -20,10 +20,10 @@ export const getConfig = (options: { themeMediaCSSPath: string }) => {
 
 	return {
 		plugins: {
-			"postcss-custom-media": {
-				importFrom: themeMediaCSSPath,
+			"@csstools/postcss-global-data": {
+				files: themeMediaCSSPath,
 			},
-			autoprefixer: {},
+			"postcss-custom-media": {},
 			cssnano: { preset: ["default", { calc: false }] },
 		},
 	};
