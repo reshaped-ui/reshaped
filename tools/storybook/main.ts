@@ -19,7 +19,7 @@ export default {
 		return mergeConfig(config, {
 			plugins: [tsconfigPaths()],
 			css: {
-				postcss: path.resolve(__dirname, "../build"),
+				postcss: path.resolve(__dirname),
 			},
 		});
 	},

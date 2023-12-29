@@ -1,7 +1,7 @@
-import { UserThemeDefinition } from "../tokens/types";
+import { ThemeDefinition } from "../tokens/types";
 import generateColors from "../utilities/generateColors";
 
-const theme: UserThemeDefinition = {
+const theme: ThemeDefinition = {
 	fontFamily: {
 		title: {
 			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
@@ -154,6 +154,13 @@ const theme: UserThemeDefinition = {
 				opacity: 0.07,
 			},
 		],
+	},
+
+	viewport: {
+		s: { maxPx: 659 },
+		m: { minPx: 660 },
+		l: { minPx: 900 },
+		xl: { minPx: 1280 },
 	},
 };
 

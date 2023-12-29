@@ -1,15 +1,11 @@
 import fs from "fs";
 import path from "path";
 import chalk from "chalk";
-import type {
-	PartialUserThemeDefinition,
-	FullThemeDefinition,
-} from "themes/_generator/tokens/types";
+import type { PartialThemeDefinition, FullThemeDefinition } from "themes/_generator/tokens/types";
 import type * as T from "themes/_generator/types";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
 import transform from "themes/_generator/transform";
 import reshapedDefinition from "themes/_generator/definitions/reshaped";
-import baseDefinition from "themes/_generator/definitions/base";
 
 const transformDefinition = (
 	name: string,
@@ -23,14 +19,12 @@ const transformDefinition = (
 		? path.resolve(outputPath, "fragments", name)
 		: path.resolve(outputPath, name);
 	const themePath = path.resolve(themeFolderPath, "theme.css");
+	const themeMediaPath = path.resolve(themeFolderPath, "media.css");
 
 	fs.mkdirSync(themeFolderPath, { recursive: true });
 	fs.writeFileSync(themePath, code.variables);
 
-	if (code.media) {
-		const mediaPath = path.resolve(outputPath, "media.css");
-		fs.writeFileSync(mediaPath, code.media);
-	}
+	if (code.media) fs.writeFileSync(themeMediaPath, code.media);
 
 	const logOutput = `Compiled ${chalk.bold(name)} theme${isFragment ? " fragment" : ""}`;
 
@@ -40,7 +34,7 @@ const transformDefinition = (
 
 export const addThemeFragment = (
 	name: string,
-	definition: PartialUserThemeDefinition,
+	definition: PartialThemeDefinition,
 	options: T.CLIOptions
 ) => {
 	transformDefinition(name, definition, { ...options, isFragment: true });
@@ -48,10 +42,8 @@ export const addThemeFragment = (
 
 export const addTheme = (
 	name: string,
-	definition: PartialUserThemeDefinition,
+	definition: PartialThemeDefinition,
 	options: T.CLIOptions
 ) => {
-	const withReshaped = mergeDefinitions(reshapedDefinition, definition);
-	const withBase = mergeDefinitions(withReshaped, baseDefinition);
-	transformDefinition(name, withBase, options);
+	transformDefinition(name, mergeDefinitions(reshapedDefinition, definition), options);
 };

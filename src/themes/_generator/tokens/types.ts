@@ -21,15 +21,11 @@ export type TokenType =
 
 export type ColorHue = "primary" | "positive" | "critical" | "neutral";
 
-export type BaseThemeDefinition = {
-	viewport: Record<TViewport.Name, TViewport.Token>;
-};
-
 type TokenSet<Name extends string, Token> = Record<Name, Token> & {
 	[tokenName: string]: Token;
 };
 
-export type UserThemeDefinition = {
+export type ThemeDefinition = {
 	unit: TokenSet<TUnit.Name, TUnit.Token>;
 	fontFamily: TokenSet<TFontFamily.Name, TFontFamily.Token>;
 	fontWeight: TokenSet<TFontWeight.Name, TFontWeight.Token>;
@@ -38,20 +34,20 @@ export type UserThemeDefinition = {
 	duration: TokenSet<TDuration.Name, TDuration.Token>;
 	easing: TokenSet<TEasing.Name, TEasing.Token>;
 	shadow: TokenSet<TShadow.Name, TShadow.Token>;
+	viewport: Record<TViewport.Name, TViewport.Token>;
 };
 
-export type PartialUserThemeDefinition = {
-	unit?: Partial<UserThemeDefinition["unit"]>;
-	fontFamily?: Partial<UserThemeDefinition["fontFamily"]>;
-	fontWeight?: Partial<UserThemeDefinition["fontWeight"]>;
-	font?: Partial<UserThemeDefinition["font"]>;
-	color?: Partial<UserThemeDefinition["color"]>;
-	duration?: Partial<UserThemeDefinition["duration"]>;
-	easing?: Partial<UserThemeDefinition["easing"]>;
-	shadow?: Partial<UserThemeDefinition["shadow"]>;
+export type PartialThemeDefinition = {
+	unit?: Partial<ThemeDefinition["unit"]>;
+	fontFamily?: Partial<ThemeDefinition["fontFamily"]>;
+	fontWeight?: Partial<ThemeDefinition["fontWeight"]>;
+	font?: Partial<ThemeDefinition["font"]>;
+	color?: Partial<ThemeDefinition["color"]>;
+	duration?: Partial<ThemeDefinition["duration"]>;
+	easing?: Partial<ThemeDefinition["easing"]>;
+	shadow?: Partial<ThemeDefinition["shadow"]>;
+	viewport?: Partial<ThemeDefinition["viewport"]>;
 };
-
-export type ThemeDefinition = BaseThemeDefinition & UserThemeDefinition;
 
 // Includes generated colors
 export type FullThemeDefinition = ThemeDefinition & {
