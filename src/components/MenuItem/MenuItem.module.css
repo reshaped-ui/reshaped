@@ -1,4 +1,6 @@
-.root {
+.root,
+/* Higher priority as a workaround for Tailwind button styles reset */
+button.root {
 	display: block;
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, transform, box-shadow;

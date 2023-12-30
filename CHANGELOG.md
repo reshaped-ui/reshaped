@@ -10,7 +10,8 @@
 
 - Badge, Figma: Exposed icon properties
 - Button, Figma: Split into Button and .button-content to improve the library
-- Button: Added slot support
+- Button, Figma: Added slot support
+- MenuItem: Fixed Tailwind CSS reset overriding button styles
 
 - Timeline: Fixed slot auto layout in Figma
 - Slot: Fixed slot overriding styles of the swapped components
