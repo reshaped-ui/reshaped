@@ -61,7 +61,7 @@ const componentExamples = (
 				<Alert color="critical">Critical</Alert>
 			</View.Item>
 			<View.Item columns={6}>
-				<Alert color="warning">warning</Alert>
+				<Alert color="warning">Warning</Alert>
 			</View.Item>
 			<View.Item columns={6}>
 				<Alert color="positive">Positive</Alert>
@@ -87,6 +87,29 @@ const componentExamples = (
 				<View direction="row" gap={2}>
 					<Avatar initials="RS" color="warning" variant="faded" />
 					<Badge color="warning">Warning</Badge>
+				</View>
+			</View.Item>
+			<View.Item columns={12}>
+				<View direction="row">
+					<View padding={4} gap={4} backgroundColor="page">
+						Page
+						<View backgroundColor="neutral" padding={4}>
+							Neutral
+						</View>
+						<View backgroundColor="neutral-faded" padding={4}>
+							Neutral faded
+						</View>
+					</View>
+
+					<View padding={4} gap={4} backgroundColor="page-faded">
+						Page faded
+						<View backgroundColor="neutral" padding={4}>
+							Neutral
+						</View>
+						<View backgroundColor="neutral-faded" padding={4}>
+							Neutral faded
+						</View>
+					</View>
 				</View>
 			</View.Item>
 			<View.Item columns={6}>

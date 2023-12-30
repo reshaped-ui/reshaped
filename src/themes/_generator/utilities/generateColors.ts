@@ -42,9 +42,11 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	const fgHsluvDark = { ...hsluv, l: key === "neutral" ? 80 : FG_L_DARK };
 	const fgHex = hsluvToHex(fgHsluv);
 	const fgHexDark = hsluvToHex(fgHsluvDark);
-	const sturationModifier = hsl.s / 40;
+	const saturationModifier = hsl.s / 40;
 
-	const bgFadedHex = rgbToHex(hslToRgb({ ...hsl, l: 98 - sturationModifier }));
+	const bgFadedHex = rgbToHex(
+		hslToRgb({ ...hsl, l: 98 - saturationModifier - (key === "neutral" ? 2 : 0) })
+	);
 	const bgFadedHsluv = hexToHsluv(bgFadedHex);
 	const bgFadedHsluvDark = { ...hsluv, l: 16, s: 32 };
 	const bgFadedHexDark = hsluvToHex(bgFadedHsluvDark);
@@ -55,7 +57,7 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	const bdFadedHex = hsluvToHex({
 		...bgFadedHsluv,
 		s: Math.max(0, bgFadedHsluv.s - 6 - Math.max(0, fadedLuminance - 98) * 20),
-		l: bgFadedHsluv.l - 7 + sturationModifier,
+		l: bgFadedHsluv.l - 7 + saturationModifier,
 	});
 	const bdFadedHexDark = hsluvToHex({
 		...bgFadedHsluvDark,
