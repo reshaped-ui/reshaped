@@ -1,5 +1,3 @@
-const path = require("path");
-const importPlugin = require("postcss-import");
 const nestedPlugin = require("postcss-nested");
 const eachPlugin = require("postcss-each");
 const cssNano = require("cssnano");
