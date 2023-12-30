@@ -8,7 +8,7 @@ const defaultThemeMediaCSSPath = path.resolve(__dirname, "../themes/reshaped/med
 export const config = {
 	plugins: {
 		"@csstools/postcss-global-data": {
-			files: defaultThemeMediaCSSPath,
+			files: [defaultThemeMediaCSSPath],
 		},
 		"postcss-custom-media": {},
 		cssnano: { preset: ["default", { calc: false }] },
@@ -21,7 +21,7 @@ export const getConfig = (options: { themeMediaCSSPath: string }) => {
 	return {
 		plugins: {
 			"@csstools/postcss-global-data": {
-				files: themeMediaCSSPath,
+				files: [themeMediaCSSPath],
 			},
 			"postcss-custom-media": {},
 			cssnano: { preset: ["default", { calc: false }] },

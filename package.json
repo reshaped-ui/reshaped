@@ -53,7 +53,7 @@
 		"dev": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
 		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
-		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes --private",
+		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json",
 		"build:cjs": "tsc -p tsconfig.cjs.json",
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",

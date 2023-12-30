@@ -10,10 +10,15 @@ const transform = (
 	definition: T.PartialDeep<FullThemeDefinition>,
 	options: T.PrivateOptions
 ) => {
-	const { isPrivate, isFragment, themeOptions } = options;
+	const { isFragment, themeOptions } = options;
 
 	generateBackgroundColors(definition, themeOptions);
 	generateUnits(definition);
+
+	// Generate s viewport
+	if (definition.viewport?.m?.minPx) {
+		definition.viewport.s = { maxPx: definition.viewport.m.minPx - 1 };
+	}
 
 	const transformedStorage: Record<TransformedToken["type"], TransformedToken[]> = {
 		variable: [],
@@ -36,7 +41,7 @@ const transform = (
 
 	return {
 		variables: variablesTemplate(name, transformedStorage.variable),
-		media: isPrivate && !isFragment ? mediaTemplate(transformedStorage.media) : undefined,
+		media: !isFragment ? mediaTemplate(transformedStorage.media) : undefined,
 	};
 };
 

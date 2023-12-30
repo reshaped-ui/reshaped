@@ -34,7 +34,7 @@ export type ThemeDefinition = {
 	duration: TokenSet<TDuration.Name, TDuration.Token>;
 	easing: TokenSet<TEasing.Name, TEasing.Token>;
 	shadow: TokenSet<TShadow.Name, TShadow.Token>;
-	viewport: Record<TViewport.Name, TViewport.Token>;
+	viewport: Record<Exclude<TViewport.Name, "s">, TViewport.Token>;
 };
 
 export type PartialThemeDefinition = {
@@ -53,6 +53,7 @@ export type PartialThemeDefinition = {
 export type FullThemeDefinition = ThemeDefinition & {
 	color: Record<TColor.GeneratedOnName | TColor.GeneratedRGBName | TColor.Name, TColor.Token>;
 	unit: Record<TUnit.GeneratedName | TUnit.Name, TUnit.Token>;
+	viewport: Record<TViewport.Name, TViewport.Token | TViewport.SToken>;
 };
 
 export type TransformedToken = {

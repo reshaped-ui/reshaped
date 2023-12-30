@@ -20,9 +20,8 @@ program
 	.command("theming")
 	.requiredOption("-o, --output <path>", "Path to output generated themes")
 	.option("-c, --config <path>", "Path to the config file")
-	.option("--private", "Package private theme generation that also builds mixins and media queries")
 	.action(async (opts) => {
-		const { output: outputPath, config: passedConfigPath, private } = opts;
+		const { output: outputPath, config: passedConfigPath } = opts;
 		const originPath = process.cwd();
 		let configPath;
 
@@ -50,7 +49,7 @@ program
 
 		if (themes) {
 			Object.keys(themes).forEach((themeName) => {
-				addTheme(themeName, themes[themeName], { outputPath, isPrivate: private, themeOptions });
+				addTheme(themeName, themes[themeName], { outputPath, themeOptions });
 			});
 		}
 
@@ -58,7 +57,6 @@ program
 			Object.keys(themeFragments).forEach((fragmentName) => {
 				addThemeFragment(fragmentName, themeFragments[fragmentName], {
 					outputPath,
-					isPrivate: private,
 					themeOptions,
 				});
 			});

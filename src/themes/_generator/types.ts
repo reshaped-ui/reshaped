@@ -6,7 +6,6 @@ export type PartialDeep<T> = T extends Primitive
 	: { [Key in keyof T]?: PartialDeep<T[Key]> };
 
 export type PublicOptions = {
-	isPrivate?: boolean;
 	themeOptions?: ReshapedConfig["themeOptions"];
 };
 
