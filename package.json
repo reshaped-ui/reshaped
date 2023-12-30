@@ -1,7 +1,7 @@
 {
 	"name": "reshaped",
 	"description": "Professionally crafted design system in React & Figma for building products of any scale and complexity",
-	"version": "2.7.4",
+	"version": "2.7.5-beta.0",
 	"license": "SEE LICENSE IN LICENSE.md",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
@@ -141,11 +141,11 @@
 		"react-dom": "^18.0.0"
 	},
 	"dependencies": {
+		"@csstools/postcss-global-data": "2.1.1",
 		"chalk": "4.1.2",
 		"commander": "11.1.0",
 		"cssnano": "6.0.1",
-		"postcss-custom-media": "10.0.2",
-		"@csstools/postcss-global-data": "2.1.1"
+		"postcss-custom-media": "10.0.2"
 	},
 	"resolutions": {
 		"jackspeak": "2.1.1"
