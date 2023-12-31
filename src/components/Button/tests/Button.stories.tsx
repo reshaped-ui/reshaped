@@ -3,6 +3,8 @@ import { Example, Placeholder } from "utilities/storybook";
 import Button from "components/Button";
 import View from "components/View";
 import Image from "components/Image";
+import Avatar from "components/Avatar";
+import Hotkey from "components/Hotkey";
 import IconZap from "icons/Zap";
 
 export default { title: "Components/Button" };
@@ -675,6 +677,18 @@ export const aligner = () => (
 					<Button icon={IconZap} variant="ghost" />
 				</Button.Aligner>
 			</View>
+		</Example.Item>
+	</Example>
+);
+
+export const composition = () => (
+	<Example>
+		<Example.Item title="slot gap">
+			<Button variant="faded">
+				<Avatar size={6} initials="RS" />
+				Label
+				<Hotkey>B</Hotkey>
+			</Button>
 		</Example.Item>
 	</Example>
 );

@@ -5,7 +5,7 @@
 
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform;
-	padding: calc(var(--rs-p-v) - var(--rs-button-border-width))
+	padding: calc(var(--rs-unit-x1) - var(--rs-button-border-width))
 		calc(var(--rs-p-h) - var(--rs-button-border-width));
 	border-radius: var(--rs-button-radius);
 	cursor: pointer;
@@ -44,17 +44,23 @@
 
 .icon {
 	/* Starts with 1x and then grows based on the padding size */
-	margin-inline-end: var(--rs-button-icon-gap);
+	margin-inline-end: var(--rs-button-gap);
 
 	&.--icon-position-end {
 		margin-inline-end: 0;
-		margin-inline-start: var(--rs-button-icon-gap);
+		margin-inline-start: var(--rs-button-gap);
 	}
 
 	/* Icon only */
 	&:last-child {
 		margin-inline-end: 0;
 	}
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	gap: var(--rs-button-gap);
 }
 
 .text,
@@ -98,7 +104,7 @@
 	@value small {
 		--rs-button-p-v: var(--rs-unit-x1);
 		--rs-button-p-h: var(--rs-unit-x2);
-		--rs-button-icon-gap: var(--rs-unit-x1);
+		--rs-button-gap: var(--rs-unit-x1);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
 		--rs-button-radius: var(--rs-unit-radius-small);
@@ -107,7 +113,7 @@
 	@value medium {
 		--rs-button-p-v: var(--rs-unit-x2);
 		--rs-button-p-h: var(--rs-unit-x3);
-		--rs-button-icon-gap: var(--rs-unit-x2);
+		--rs-button-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
 		--rs-button-radius: var(--rs-unit-radius-small);
@@ -116,7 +122,7 @@
 	@value large {
 		--rs-button-p-v: var(--rs-unit-x3);
 		--rs-button-p-h: var(--rs-unit-x4);
-		--rs-button-icon-gap: var(--rs-unit-x2);
+		--rs-button-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
 		--rs-button-radius: var(--rs-unit-radius-medium);
@@ -125,7 +131,7 @@
 	@value xlarge {
 		--rs-button-p-v: var(--rs-unit-x4);
 		--rs-button-p-h: var(--rs-unit-x5);
-		--rs-button-icon-gap: var(--rs-unit-x3);
+		--rs-button-gap: var(--rs-unit-x3);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
 		--rs-button-radius: var(--rs-unit-radius-medium);
