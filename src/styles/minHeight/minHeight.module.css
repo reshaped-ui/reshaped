@@ -1,0 +1,19 @@
+.literal {
+	min-height: var(--rs-min-h-s, auto);
+}
+
+.unit {
+	min-height: calc(var(--rs-min-h-s) * var(--rs-unit-x1));
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		.literal--$viewport {
+			min-height: var(--rs-min-h-$viewport);
+		}
+
+		.unit--$viewport {
+			min-height: calc(var(--rs-min-h-$viewport) * var(--rs-unit-x1));
+		}
+	}
+}

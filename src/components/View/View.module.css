@@ -108,6 +108,10 @@
 	overflow: hidden;
 }
 
+.--overflow-auto {
+	overflow: auto;
+}
+
 .--divided {
 	--rs-view-gaps-count-multiplier: 2;
 }

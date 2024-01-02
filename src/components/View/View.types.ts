@@ -19,6 +19,8 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	aspectRatio?: G.Responsive<number>;
 	maxHeight?: G.Responsive<string | number>;
 	maxWidth?: G.Responsive<string | number>;
+	minHeight?: G.Responsive<string | number>;
+	minWidth?: G.Responsive<string | number>;
 	padding?: G.Responsive<number>;
 	paddingTop?: G.Responsive<number>;
 	paddingBottom?: G.Responsive<number>;
@@ -72,7 +74,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	insetBottom?: G.Responsive<number>;
 	zIndex?: number;
 	shadow?: "raised" | "overlay";
-	overflow?: "hidden";
+	overflow?: "hidden" | "auto";
 	animated?: boolean;
 	className?: G.ClassName;
 	attributes?: G.Attributes<TagName>;

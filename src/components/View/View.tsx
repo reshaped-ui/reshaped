@@ -11,6 +11,8 @@ import getWidthStyles from "styles/width";
 import getHeightStyles from "styles/height";
 import getMaxWidthStyles from "styles/maxWidth";
 import getMaxHeightStyles from "styles/maxHeight";
+import getMinWidthStyles from "styles/minWidth";
+import getMinHeightStyles from "styles/minHeight";
 import getPositionStyles from "styles/position";
 import getInsetStyles from "styles/inset";
 import getAspectRatioStyles from "styles/aspectRatio";
@@ -66,6 +68,8 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		aspectRatio,
 		maxHeight,
 		maxWidth,
+		minHeight,
+		minWidth,
 		padding,
 		paddingInline,
 		paddingBlock,
@@ -116,6 +120,8 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 	const heightStyles = getHeightStyles(height);
 	const maxWidthStyles = getMaxWidthStyles(maxWidth);
 	const maxHeightStyles = getMaxHeightStyles(maxHeight);
+	const minWidthStyles = getMinWidthStyles(minWidth);
+	const minHeightStyles = getMinHeightStyles(minHeight);
 	const positionStyles = getPositionStyles(position);
 	const insetStyles = getInsetStyles(inset);
 	const insetTopStyles = getInsetStyles(insetTop, "top");
@@ -216,6 +222,8 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		aspectRatioStyles?.classNames,
 		maxWidthStyles?.classNames,
 		maxHeightStyles?.classNames,
+		minWidthStyles?.classNames,
+		minHeightStyles?.classNames,
 		insetStyles?.classNames,
 		insetTopStyles?.classNames,
 		insetBottomStyles?.classNames,
@@ -261,6 +269,8 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		...aspectRatioStyles?.variables,
 		...maxWidthStyles?.variables,
 		...maxHeightStyles?.variables,
+		...minWidthStyles?.variables,
+		...minHeightStyles?.variables,
 		...insetStyles?.variables,
 		...insetTopStyles?.variables,
 		...insetBottomStyles?.variables,

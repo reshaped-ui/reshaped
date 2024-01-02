@@ -15,5 +15,7 @@
 - Button: Reduced the vertical padding to work with larger slots without stretching the button
 - MenuItem: Fixed Tailwind CSS reset overriding button styles
 
-- Timeline: Fixed slot auto layout in Figma
-- Slot: Fixed slot overriding styles of the swapped components
+- Timeline, Figma: Fixed slot auto layout in Figma
+- Slot, Figma: Fixed slot overriding styles of the swapped components
+- View: minWidth, minHeight support
+- View: overflow auto support

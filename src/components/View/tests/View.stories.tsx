@@ -446,6 +446,38 @@ export const maxSize = () => (
 	</Example>
 );
 
+export const minSize = () => (
+	<Example>
+		<Example.Item title="minHeight: 150px, minWidth: 150px, height: 50px, width: 50px">
+			<View
+				backgroundColor="neutral-faded"
+				minHeight="150px"
+				minWidth="150px"
+				height="50px"
+				width="50px"
+			/>
+		</Example.Item>
+		<Example.Item title="minHeight: 25, minWidth: 25, height: 5, width: 5">
+			<View backgroundColor="neutral-faded" minHeight={25} minWidth={25} height={5} width={5} />
+		</Example.Item>
+		<Example.Item
+			title={[
+				"responsive minHeight and minWidth, height: 50px, width: 50px",
+				"[s] minHeight: 25, minWidth: 25",
+				"[m+] minHeight: 200px, minWidth: 200px",
+			]}
+		>
+			<View
+				backgroundColor="neutral-faded"
+				minHeight={{ s: 25, m: "200px" }}
+				minWidth={{ s: 25, m: "200px" }}
+				height="50px"
+				width="50px"
+			/>
+		</Example.Item>
+	</Example>
+);
+
 export const background = () => (
 	<Example title="border is used to highlight the backround value when it's similar to the page background, text color changes based on the background">
 		<Example.Item title="bg: page">
