@@ -28,31 +28,43 @@
 	"main": "./index.js",
 	"module": "./index.js",
 	"types": "./index.d.ts",
-	"files": [
-		"bin/**/*",
-		"cli/**/*",
-		"components/**/*",
-		"config/**/*",
-		"constants/**/*",
-		"hooks/**/*",
-		"icons/**/*",
-		"styles/**/*",
-		"themes/**/*",
-		"types/**/*",
-		"utilities/**/*",
-		"bundle.css",
-		"bundle.d.ts",
-		"bundle.js",
-		"index.d.ts",
-		"index.js"
-	],
+	"exports": {
+		".": {
+			"default": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./themes": {
+			"default": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./themes/reshaped/theme.css": {
+			"default": "./dist/themes/reshaped/theme.css"
+		},
+		"./themes/slate/theme.css": {
+			"default": "./dist/themes/slate/theme.css"
+		},
+		"./themes/figma/theme.css": {
+			"default": "./dist/themes/figma/theme.css"
+		},
+		"./bundle": {
+			"default": "./dist/bundle.js",
+			"types": "./dist/bundle.d.ts"
+		},
+		"./bundle.css": {
+			"default": "./dist/bundle.css"
+		}
+	},
 	"bin": {
 		"reshaped": "./bin/cli.js"
 	},
+	"files": [
+		"bin/**/*",
+		"dist/**/*"
+	],
 	"scripts": {
 		"dev": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
-		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
+		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths",
 		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json",
 		"build:cjs": "tsc -p tsconfig.cjs.json",
