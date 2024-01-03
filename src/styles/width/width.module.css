@@ -1,19 +1,17 @@
-.literal {
-	width: var(--rs-w-s, auto);
+@responsive [style*="--rs-w-s:"] {
+	@variable --rs-w 0;
 }
 
-.unit {
-	width: calc(var(--rs-w-s) * var(--rs-unit-x1));
-}
-
-@each $viewport in m, l, xl {
-	@media (--rs-viewport-$viewport) {
-		.literal--$viewport {
-			width: var(--rs-w-$viewport);
-		}
-
-		.unit--$viewport {
-			width: calc(var(--rs-w-$viewport) * var(--rs-unit-x1));
-		}
+@responsive .root {
+	@value literal {
+		--rs-w-resolved: var(--rs-w);
 	}
+
+	@value unit {
+		--rs-w-resolved: calc(var(--rs-w) * var(--rs-unit-x1));
+	}
+}
+
+[style*="--rs-w-s:"] {
+	width: var(--rs-w-resolved);
 }

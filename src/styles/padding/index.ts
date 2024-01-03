@@ -1,12 +1,12 @@
 import { responsiveVariables } from "utilities/helpers";
 import * as T from "styles/types";
-import s from "./padding.module.css";
+import "./padding.css";
 
 const getPaddingStyles: T.DynamicStyleUtility<number> = (value) => {
 	if (!value) return null;
 	const variables = responsiveVariables("--rs-p", value);
 
-	return { classNames: s.root, variables };
+	return { variables };
 };
 
 export default getPaddingStyles;

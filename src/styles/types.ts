@@ -16,7 +16,7 @@ export type StaticStyleUtility<Value> = (value?: G.Responsive<Value>) => null | 
  * Classnames define the styles, variables define the values for those styles
  */
 export type DynamicStyleUtilityResult = null | {
-	classNames: G.ClassName;
+	classNames?: G.ClassName;
 	variables: React.CSSProperties;
 };
 

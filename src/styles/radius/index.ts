@@ -6,7 +6,7 @@ const getRadiusStyles: T.StaticStyleUtility<T.Radius> = (value) => {
 	if (!value) return null;
 
 	return {
-		classNames: [s.root, ...responsiveClassNames(s, "--radius", value)],
+		classNames: responsiveClassNames(s, "--radius", value),
 	};
 };
 

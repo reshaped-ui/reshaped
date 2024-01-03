@@ -10,7 +10,6 @@ const getBleedStyles: T.DynamicStyleUtility<number> = (value) => {
 	if (value === undefined) return null;
 
 	const classNames = [
-		s.root,
 		...responsiveClassNames(
 			s,
 			"--bleed",

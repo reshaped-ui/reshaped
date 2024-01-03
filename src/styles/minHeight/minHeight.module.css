@@ -1,19 +1,17 @@
-.literal {
-	min-height: var(--rs-min-h-s, auto);
+@responsive [style*="--rs-min-h-s:"] {
+	@variable --rs-min-h 0;
 }
 
-.unit {
-	min-height: calc(var(--rs-min-h-s) * var(--rs-unit-x1));
-}
-
-@each $viewport in m, l, xl {
-	@media (--rs-viewport-$viewport) {
-		.literal--$viewport {
-			min-height: var(--rs-min-h-$viewport);
-		}
-
-		.unit--$viewport {
-			min-height: calc(var(--rs-min-h-$viewport) * var(--rs-unit-x1));
-		}
+@responsive .root {
+	@value literal {
+		--rs-min-h-resolved: var(--rs-min-h);
 	}
+
+	@value unit {
+		--rs-min-h-resolved: calc(var(--rs-min-h) * var(--rs-unit-x1));
+	}
+}
+
+[style*="--rs-min-h-s:"] {
+	min-height: var(--rs-min-h-resolved);
 }

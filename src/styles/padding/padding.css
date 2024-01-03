@@ -1,0 +1,7 @@
+@responsive [style*="--rs-p-s:"] {
+	@variable --rs-p 0;
+}
+
+[style*="--rs-p-s:"] {
+	padding: calc(var(--rs-p) * var(--rs-unit-x1));
+}

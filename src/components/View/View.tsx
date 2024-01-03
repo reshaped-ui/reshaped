@@ -215,11 +215,9 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		s.root,
 		className,
 		radiusStyles?.classNames,
-		positionStyles?.classNames,
 		bleedStyles?.classNames,
 		widthStyles?.classNames,
 		heightStyles?.classNames,
-		aspectRatioStyles?.classNames,
 		maxWidthStyles?.classNames,
 		maxHeightStyles?.classNames,
 		minWidthStyles?.classNames,
@@ -276,6 +274,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		...insetBottomStyles?.variables,
 		...insetStartStyles?.variables,
 		...insetEndStyles?.variables,
+		...positionStyles?.variables,
 		...(zIndex ? { "--rs-view-z": zIndex } : {}),
 	};
 

@@ -216,7 +216,6 @@ const Modal = (props: T.Props) => {
 				const rootClassNames = classNames(
 					s.root,
 					className,
-					paddingStyles?.classNames,
 					active && s["--active"],
 					dragging && s["--dragging"],
 					responsiveClassNames(s, "--position", position)
@@ -236,7 +235,7 @@ const Modal = (props: T.Props) => {
 											? "0px"
 											: `${
 													dragDistance + DRAG_THRESHOLD * (clientPosition === "start" ? 1 : -1)
-											  }px`,
+												}px`,
 								} as React.CSSProperties
 							}
 							aria-labelledby={titleMounted ? `${id}-title` : undefined}

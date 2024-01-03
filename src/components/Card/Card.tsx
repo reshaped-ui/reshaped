@@ -39,7 +39,6 @@ const Card = <As extends keyof JSX.IntrinsicElements = "div">(
 		s.root,
 		radiusStyles?.classNames,
 		bleedStyles?.classNames,
-		paddingStyles?.classNames,
 		heightStyles?.classNames,
 		isActionable && s["--actionable"],
 		elevated && s["--elevated"],

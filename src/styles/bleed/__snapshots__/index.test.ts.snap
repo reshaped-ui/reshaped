@@ -3,7 +3,6 @@
 exports[`Styles/Bleed handles 0 value 1`] = `
 {
   "classNames": [
-    "root",
     "--bleed-false",
   ],
   "variables": {
@@ -15,7 +14,6 @@ exports[`Styles/Bleed handles 0 value 1`] = `
 exports[`Styles/Bleed handles positive value 1`] = `
 {
   "classNames": [
-    "root",
     "--bleed",
   ],
   "variables": {
@@ -27,7 +25,6 @@ exports[`Styles/Bleed handles positive value 1`] = `
 exports[`Styles/Bleed handles responsive value 1`] = `
 {
   "classNames": [
-    "root",
     "--bleed",
     "--bleed-false--m",
     "--bleed-true--l",

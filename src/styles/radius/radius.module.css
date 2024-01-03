@@ -1,4 +1,4 @@
-.root {
+[style*="--rs-radius-s:"] {
 	border-radius: var(--rs-radius);
 }
 

@@ -1,0 +1,3 @@
+[style*="--rs-position-s:"] {
+	position: var(--rs-position);
+}

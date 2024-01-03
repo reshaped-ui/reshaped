@@ -29,8 +29,7 @@ const Popover = (props: T.Props) => {
 	const contentClassName = classNames(
 		s.content,
 		!!width && s["content--has-width"],
-		variant && s[`content--variant-${variant}`],
-		paddingStyles?.classNames
+		variant && s[`content--variant-${variant}`]
 	);
 
 	return (

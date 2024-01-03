@@ -1,9 +1,9 @@
-.root {
+[style*="--rs-bleed-s:"] {
 	margin-left: calc(var(--rs-unit-x1) * var(--rs-bleed) * -1);
 	margin-right: calc(var(--rs-unit-x1) * var(--rs-bleed) * -1);
 }
 
-@responsive .root {
+@responsive [style*="--rs-bleed-s:"] {
 	@variable --rs-bleed 0;
 }
 
@@ -22,4 +22,3 @@
 		border-radius: var(--rs-radius);
 	}
 }
-
