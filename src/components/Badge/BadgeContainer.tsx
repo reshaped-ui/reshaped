@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames } from "utilities/helpers";
 import type * as T from "./Badge.types";
 import s from "./Badge.module.css";

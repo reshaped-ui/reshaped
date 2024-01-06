@@ -1,4 +1,3 @@
-import React from "react";
 import Text from "components/Text";
 import { classNames } from "utilities/helpers";
 import type * as T from "./Hotkey.types";

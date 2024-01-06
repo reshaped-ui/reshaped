@@ -1,4 +1,3 @@
-import React from "react";
 import Text from "components/Text";
 import Link from "components/Link";
 import type * as T from "./Breadcrumbs.types";

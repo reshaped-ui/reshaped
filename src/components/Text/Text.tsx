@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames, responsiveClassNames } from "utilities/helpers";
 import type * as T from "./Text.types";
 import s from "./Text.module.css";

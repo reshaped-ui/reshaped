@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames, responsiveClassNames } from "utilities/helpers";
 import type * as T from "./Hidden.types";
 import s from "./Hidden.module.css";

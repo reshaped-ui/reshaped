@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames } from "utilities/helpers";
 import View from "components/View";
 import type * as T from "./Container.types";

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Actionable from "components/Actionable";
 import { classNames } from "utilities/helpers";
 import { getLocalISODate } from "./Calendar.utils";

@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames } from "utilities/helpers";
 import Flyout from "components/_private/Flyout";
 import type * as T from "./Popover.types";

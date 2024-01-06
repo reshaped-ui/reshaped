@@ -1,6 +1,6 @@
-import React from "react";
+import type React from "react";
 import type { IconProps } from "components/Icon";
-import * as G from "types/global";
+import type * as G from "types/global";
 
 export type BaseProps = {
 	iconSize?: IconProps["size"];

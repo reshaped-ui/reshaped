@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames, responsivePropDependency } from "utilities/helpers";
 import getHeightStyles from "styles/height";
 import Icon from "components/Icon";
@@ -24,7 +23,7 @@ const Avatar = (props: T.Props) => {
 				if (size >= 24) return "large";
 				if (size >= 12) return "medium";
 				return "small";
-		  })
+			})
 		: "circular";
 	const heightStyles = getHeightStyles(size);
 	const rootClassNames = classNames(

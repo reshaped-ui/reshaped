@@ -1,5 +1,5 @@
-import React from "react";
-import { IconProps } from "components/Icon";
+import type React from "react";
+import type { IconProps } from "components/Icon";
 import type * as G from "types/global";
 
 export type SelectionState = {

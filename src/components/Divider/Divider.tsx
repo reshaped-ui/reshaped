@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { classNames, responsiveClassNames } from "utilities/helpers";
 import type * as T from "./Divider.types";
 import s from "./Divider.module.css";

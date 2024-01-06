@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import type { PopoverProps } from "components/Popover";
 import type { FlyoutContentProps } from "components/_private/Flyout";
 

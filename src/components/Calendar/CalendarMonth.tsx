@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { getMonthWeeks, getWeekdayNames, getLocalISODate } from "./Calendar.utils";
 import CalendarDate from "./CalendarDate";
 import type * as T from "./Calendar.types";

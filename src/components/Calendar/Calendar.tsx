@@ -1,4 +1,3 @@
-import React from "react";
 import CalendarControlled from "./CalendarControlled";
 import CalendarUncontrolled from "./CalendarUncontrolled";
 import type * as T from "./Calendar.types";
