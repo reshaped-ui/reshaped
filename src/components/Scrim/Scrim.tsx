@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames } from "utilities/helpers";
 import type * as T from "./Scrim.types";
 import s from "./Scrim.module.css";

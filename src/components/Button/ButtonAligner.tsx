@@ -1,4 +1,3 @@
-import React from "react";
 import Aligner from "components/_private/Aligner";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";

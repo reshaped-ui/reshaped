@@ -1,4 +1,3 @@
-import React from "react";
 import CheckboxGroupControlled from "./CheckboxGroupControlled";
 import CheckboxGroupUncontrolled from "./CheckboxGroupUncontrolled";
 import type * as T from "./CheckboxGroup.types";

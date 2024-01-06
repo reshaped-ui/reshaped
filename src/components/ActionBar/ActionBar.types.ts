@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import type { ViewProps } from "components/View";
 import type * as G from "types/global";
 

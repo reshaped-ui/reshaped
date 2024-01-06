@@ -1,6 +1,6 @@
-import React from "react";
+import type React from "react";
 import type * as G from "types/global";
-import { CheckboxProps } from "components/Checkbox";
+import type { CheckboxProps } from "components/Checkbox";
 
 type BaseProps = {
 	id?: string;

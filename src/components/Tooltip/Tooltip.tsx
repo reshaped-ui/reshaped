@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Theme from "components/Theme";
 import Text from "components/Text";
 import Flyout from "components/_private/Flyout";

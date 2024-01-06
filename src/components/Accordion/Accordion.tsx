@@ -1,4 +1,3 @@
-import React from "react";
 import AccordionControlled from "./AccordionControlled";
 import AccordionUncontrolled from "./AccordionUncontrolled";
 import AccordionTrigger from "./AccordionTrigger";

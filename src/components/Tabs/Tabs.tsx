@@ -1,4 +1,3 @@
-import React from "react";
 import TabsControlled from "./TabsControlled";
 import TabsUncontrolled from "./TabsUncontrolled";
 import TabsItem from "./TabsItem";

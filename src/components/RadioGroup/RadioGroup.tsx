@@ -1,4 +1,3 @@
-import React from "react";
 import RadioGroupControlled from "./RadioGroupControlled";
 import RadioGroupUncontrolled from "./RadioGroupUncontrolled";
 import type * as T from "./RadioGroup.types";

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { classNames } from "utilities/helpers";
 import { useTabs } from "./TabsContext";
 import type * as T from "./Tabs.types";

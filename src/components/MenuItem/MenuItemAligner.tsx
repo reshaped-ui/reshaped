@@ -1,4 +1,3 @@
-import React from "react";
 import Aligner, { type AlignerProps } from "components/_private/Aligner";
 import s from "./MenuItem.module.css";
 

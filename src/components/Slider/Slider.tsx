@@ -1,4 +1,3 @@
-import React from "react";
 import type * as T from "./Slider.types";
 import SliderControlled from "./SliderControlled";
 import SliderUncontrolled from "./SliderUncontrolled";

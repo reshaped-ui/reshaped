@@ -1,4 +1,3 @@
-import React from "react";
 import type * as T from "./HiddenVisually.types";
 import s from "./HiddenVisually.module.css";
 

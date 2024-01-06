@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames } from "utilities/helpers";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";
