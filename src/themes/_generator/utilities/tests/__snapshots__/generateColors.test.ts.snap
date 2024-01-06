@@ -39,7 +39,7 @@ exports[`Themes/Utilties/generateColors applies color overrides 1`] = `
     "hexDark": "#494f60",
   },
   "backgroundNeutralFaded": {
-    "hex": "#f7f8fa",
+    "hex": "#f1f2f6",
     "hexDark": "#222835",
   },
   "backgroundNeutralHighlighted": {
@@ -110,7 +110,7 @@ exports[`Themes/Utilties/generateColors applies color overrides 1`] = `
     "hexDark": "#4c5264",
   },
   "borderNeutralFaded": {
-    "hex": "#e5e5e7",
+    "hex": "#dddfe7",
     "hexDark": "#2d374c",
   },
   "borderPositive": {
@@ -213,7 +213,7 @@ exports[`Themes/Utilties/generateColors generate the default theme 1`] = `
     "hexDark": "#494f60",
   },
   "backgroundNeutralFaded": {
-    "hex": "#f7f8fa",
+    "hex": "#f1f2f6",
     "hexDark": "#222835",
   },
   "backgroundNeutralHighlighted": {
@@ -284,7 +284,7 @@ exports[`Themes/Utilties/generateColors generate the default theme 1`] = `
     "hexDark": "#4c5264",
   },
   "borderNeutralFaded": {
-    "hex": "#e5e5e7",
+    "hex": "#dddfe7",
     "hexDark": "#2d374c",
   },
   "borderPositive": {

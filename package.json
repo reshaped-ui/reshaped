@@ -25,33 +25,56 @@
 		"type": "git",
 		"url": "https://github.com/formaat-design/reshaped"
 	},
-	"main": "./index.js",
-	"module": "./index.js",
-	"types": "./index.d.ts",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
-			"default": "./dist/index.js",
+			"import": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		},
 		"./themes": {
-			"default": "./dist/index.js",
+			"import": "./dist/index.js",
+			"require": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		},
 		"./themes/reshaped/theme.css": {
-			"default": "./dist/themes/reshaped/theme.css"
+			"import": "./dist/themes/reshaped/theme.css"
 		},
 		"./themes/slate/theme.css": {
-			"default": "./dist/themes/slate/theme.css"
+			"import": "./dist/themes/slate/theme.css"
 		},
 		"./themes/figma/theme.css": {
-			"default": "./dist/themes/figma/theme.css"
+			"import": "./dist/themes/figma/theme.css"
+		},
+		"./themes/fragments/twitter/theme.css": {
+			"import": "./dist/themes/fragments/twitter/theme.css"
 		},
 		"./bundle": {
-			"default": "./dist/bundle.js",
+			"import": "./dist/bundle.js",
 			"types": "./dist/bundle.d.ts"
 		},
 		"./bundle.css": {
-			"default": "./dist/bundle.css"
+			"import": "./dist/bundle.css"
+		},
+		"./config/postcss": {
+			"import": "./dist/config/postcss.js",
+			"require": "./dist/config/postcss.js",
+			"types": "./dist/config/postcss.d.ts"
+		},
+		"./config/tailwind": {
+			"import": "./dist/config/tailwind.js",
+			"require": "./dist/config/tailwind.js",
+			"types": "./dist/config/tailwind.d.ts"
+		},
+		"./config/postcss.js": {
+			"import": "./dist/config/postcss.js",
+			"require": "./dist/config/postcss.js",
+			"types": "./dist/config/postcss.d.ts"
+		},
+		"./config/tailwind.js": {
+			"import": "./dist/config/tailwind.js",
+			"require": "./dist/config/tailwind.js",
+			"types": "./dist/config/tailwind.d.ts"
 		}
 	},
 	"bin": {
@@ -144,9 +167,9 @@
 		"vite-tsconfig-paths": "4.2.3"
 	},
 	"peerDependencies": {
-		"postcss": "^8.4.31",
-		"react": "^18.0.0",
-		"react-dom": "^18.0.0"
+		"postcss": "^8",
+		"react": "^18",
+		"react-dom": "^18"
 	},
 	"dependencies": {
 		"@csstools/postcss-global-data": "2.1.1",
