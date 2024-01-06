@@ -8,7 +8,7 @@
 		"allowSyntheticDefaultImports": true,
 		"skipLibCheck": true,
 		"lib": ["es2017", "dom"],
-		"jsx": "react",
+		"jsx": "react-jsx",
 		"target": "es6",
 		"module": "ESNext",
 		"moduleResolution": "node",
