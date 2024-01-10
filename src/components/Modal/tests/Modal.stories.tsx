@@ -7,8 +7,8 @@ import Dismissible from "components/Dismissible";
 import DropdownMenu from "components/DropdownMenu";
 import Switch from "components/Switch";
 import TextField from "components/TextField";
-import Slider from "components/Slider";
 import useToggle from "hooks/useToggle";
+import Radio from "components/Radio";
 
 export default { title: "Components/Modal" };
 
@@ -164,6 +164,30 @@ export const edgeCases = () => {
 			<Example.Item title="scroll locks on open">
 				<Demo />
 				<View height="1000px" />
+			</Example.Item>
+		</Example>
+	);
+};
+
+export const trapFocusEdgeCases = () => {
+	const toggle = useToggle();
+
+	return (
+		<Example>
+			<Example.Item title="Radio should be navigatable with arrow keys">
+				<Button onClick={toggle.activate}>Open modal</Button>
+				<Modal active={toggle.active} onClose={toggle.deactivate}>
+					<View gap={2}>
+						<Button onClick={() => {}}>Action 1</Button>
+						<Radio name="radio" value="1">
+							Option 1
+						</Radio>
+						<Radio name="radio" value="2">
+							Option 2
+						</Radio>
+						<Button onClick={() => {}}>Action 2</Button>
+					</View>
+				</Modal>
 			</Example.Item>
 		</Example>
 	);

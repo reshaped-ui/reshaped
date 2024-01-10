@@ -20,6 +20,7 @@ import Chain from "utilities/Chain";
  */
 export type TrapMode = "dialog" | "action-menu" | "content-menu" | "selection-menu";
 
+type FocusableElement = HTMLButtonElement | HTMLInputElement;
 type ReleaseOptions = { withoutFocusReturn?: boolean };
 type Release = (options?: ReleaseOptions) => void;
 type TrapOptions = {
@@ -39,12 +40,49 @@ export const getActiveElement = () => {
 	return (pseudoFocusedEl || document.activeElement) as HTMLButtonElement;
 };
 
-const getFocusableElements = (el: HTMLElement, extraElement?: HTMLButtonElement) => {
+const getFocusableElements = (rootEl: HTMLElement, extraElement?: FocusableElement) => {
 	const focusableElements = Array.from(
-		el.querySelectorAll(focusableSelector)
-	) as HTMLButtonElement[];
+		rootEl.querySelectorAll(focusableSelector)
+	) as FocusableElement[];
 	const filteredElements = focusableElements.filter((el) => {
-		return !el.hasAttribute("disabled") && el.clientHeight > 0;
+		if (el.hasAttribute("disabled")) return false;
+		if (el.clientHeight === 0) return false;
+
+		if (el.type === "radio") {
+			let sameNameRadioEls: HTMLInputElement[];
+
+			if (el.form) {
+				const formInputs = el.form.elements.namedItem(el.name);
+
+				// Synthetic error handling for narrowing down types
+				// Radio element can't find itself in the form, so we don't need to include it in the array
+				if (!formInputs) return false;
+
+				const multipleElementsFound = "length" in formInputs;
+
+				if (!multipleElementsFound) {
+					// Single element found is always an input radio since we're inside the condition
+					sameNameRadioEls = [formInputs as HTMLInputElement];
+				} else {
+					sameNameRadioEls = Array.from(formInputs).filter(
+						(el) => "type" in el && el.type === "radio"
+					) as HTMLInputElement[];
+				}
+			} else {
+				sameNameRadioEls = Array.from(
+					rootEl.querySelectorAll<HTMLInputElement>(`[type="radio"][name="${el.name}"]`)
+				);
+			}
+
+			if (sameNameRadioEls?.length) {
+				const checkedEl = Array.from(sameNameRadioEls).find((el) => el.checked);
+
+				if (checkedEl && el !== checkedEl) return false;
+				if (!checkedEl && el !== sameNameRadioEls[0]) return false;
+			}
+		}
+
+		return true;
 	});
 
 	if (extraElement && filteredElements.length) filteredElements.unshift(extraElement);
@@ -56,7 +94,7 @@ const getFocusData = (args: {
 	root: HTMLElement;
 	target: "next" | "prev" | "first" | "last";
 	mode?: TrapMode;
-	extraElement?: HTMLButtonElement;
+	extraElement?: FocusableElement;
 }) => {
 	const { root, extraElement, target, mode } = args;
 	const focusable = getFocusableElements(root, extraElement);
@@ -84,7 +122,7 @@ const getFocusData = (args: {
 	return { overflow: isOverflow, el: focusable[nextIndex] };
 };
 
-const focusElement = (el: HTMLButtonElement, mode?: TrapMode) => {
+const focusElement = (el: FocusableElement, mode?: TrapMode) => {
 	document.querySelector(`[${pseudoFocusAttribute}]`)?.removeAttribute(pseudoFocusAttribute);
 
 	if (mode === "selection-menu") {
