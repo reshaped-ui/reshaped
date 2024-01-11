@@ -2,3 +2,5 @@
 
 - Migrated to package.json exports
 - Switched to react-jsx
+
+- trapFocus: radio input arrow nagivation

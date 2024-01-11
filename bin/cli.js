@@ -4,7 +4,7 @@ const path = require("path");
 const process = require("process");
 const chalk = require("chalk");
 const { Command } = require("commander");
-const { addTheme, addThemeFragment } = require("../dist/cli/theming");
+const { addTheme, addThemeFragment } = require("../cli/theming");
 
 const program = new Command();
 

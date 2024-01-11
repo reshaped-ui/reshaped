@@ -25,69 +25,34 @@
 		"type": "git",
 		"url": "https://github.com/formaat-design/reshaped"
 	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"types": "./dist/index.d.ts"
-		},
-		"./themes": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.js",
-			"types": "./dist/index.d.ts"
-		},
-		"./themes/reshaped/theme.css": {
-			"import": "./dist/themes/reshaped/theme.css"
-		},
-		"./themes/slate/theme.css": {
-			"import": "./dist/themes/slate/theme.css"
-		},
-		"./themes/figma/theme.css": {
-			"import": "./dist/themes/figma/theme.css"
-		},
-		"./themes/fragments/twitter/theme.css": {
-			"import": "./dist/themes/fragments/twitter/theme.css"
-		},
-		"./bundle": {
-			"import": "./dist/bundle.js",
-			"types": "./dist/bundle.d.ts"
-		},
-		"./bundle.css": {
-			"import": "./dist/bundle.css"
-		},
-		"./config/postcss": {
-			"import": "./dist/config/postcss.js",
-			"require": "./dist/config/postcss.js",
-			"types": "./dist/config/postcss.d.ts"
-		},
-		"./config/tailwind": {
-			"import": "./dist/config/tailwind.js",
-			"require": "./dist/config/tailwind.js",
-			"types": "./dist/config/tailwind.d.ts"
-		},
-		"./config/postcss.js": {
-			"import": "./dist/config/postcss.js",
-			"require": "./dist/config/postcss.js",
-			"types": "./dist/config/postcss.d.ts"
-		},
-		"./config/tailwind.js": {
-			"import": "./dist/config/tailwind.js",
-			"require": "./dist/config/tailwind.js",
-			"types": "./dist/config/tailwind.d.ts"
-		}
-	},
+	"main": "./index.js",
+	"module": "./index.js",
+	"types": "./index.d.ts",
+	"files": [
+		"bin/**/*",
+		"cli/**/*",
+		"components/**/*",
+		"config/**/*",
+		"constants/**/*",
+		"hooks/**/*",
+		"icons/**/*",
+		"styles/**/*",
+		"themes/**/*",
+		"types/**/*",
+		"utilities/**/*",
+		"bundle.css",
+		"bundle.d.ts",
+		"bundle.js",
+		"index.d.ts",
+		"index.js"
+	],
 	"bin": {
 		"reshaped": "./bin/cli.js"
 	},
-	"files": [
-		"bin/**/*",
-		"dist/**/*"
-	],
 	"scripts": {
 		"dev": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
-		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths",
+		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
 		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json",
 		"build:cjs": "tsc -p tsconfig.cjs.json",
