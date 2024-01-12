@@ -86,9 +86,10 @@ label {
 	transition: none !important;
 }
 
+textarea::placeholder,
 input::placeholder {
-	color: var(--rs-color-neutral-faded);
 	opacity: 0.5;
+	color: var(--rs-color-foreground-neutral-faded);
 }
 
 html {

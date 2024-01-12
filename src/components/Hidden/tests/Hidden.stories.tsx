@@ -1,4 +1,3 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Hidden from "components/Hidden";
 

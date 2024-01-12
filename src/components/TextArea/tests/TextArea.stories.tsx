@@ -1,17 +1,20 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import TextArea from "components/TextArea";
 import FormControl from "components/FormControl";
 import View from "components/View";
 import Button from "components/Button";
 import Text from "components/Text";
+import TextField from "components/TextField";
 
 export default { title: "Components/TextArea" };
 
 export const value = () => (
 	<Example>
 		<Example.Item title="no value, placeholder">
-			<TextArea name="Name" placeholder="Enter your name" />
+			<View gap={4}>
+				<TextField placeholder="hello" name="22" />
+				<TextArea name="Name" placeholder="Enter your name" />
+			</View>
 		</Example.Item>
 		<Example.Item title="value, uncontrolled">
 			<TextArea name="Name" placeholder="Enter your name" defaultValue="Reshaped" />

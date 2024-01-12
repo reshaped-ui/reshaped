@@ -4,3 +4,4 @@
 - Switched to react-jsx
 
 - trapFocus: radio input arrow nagivation
+- TextArea: Fixed placeholder color misalignment
