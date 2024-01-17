@@ -2,6 +2,7 @@
 
 import React from "react";
 import { classNames, responsiveVariables, responsiveClassNames } from "utilities/helpers";
+import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import Text from "components/Text";
 import Overlay from "components/Overlay";
@@ -109,6 +110,7 @@ const Modal = (props: T.Props) => {
 		// Prevent the drag handling when browser tab swiping is triggering
 		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
 
+		disableUserSelect();
 		setDragging(true);
 	};
 
@@ -125,6 +127,7 @@ const Modal = (props: T.Props) => {
 		if (!dragging) return;
 
 		const handleDragEnd = () => {
+			enableUserSelect();
 			setDragging(false);
 
 			// Close only when dragging in the closing direction
@@ -236,7 +239,7 @@ const Modal = (props: T.Props) => {
 											? "0px"
 											: `${
 													dragDistance + DRAG_THRESHOLD * (clientPosition === "start" ? 1 : -1)
-											  }px`,
+												}px`,
 								} as React.CSSProperties
 							}
 							aria-labelledby={titleMounted ? `${id}-title` : undefined}

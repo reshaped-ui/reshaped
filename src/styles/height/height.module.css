@@ -1,29 +1,19 @@
-.literal,
-.unit {
-	--rs-h-s: auto;
-	--rs-h-m: var(--rs-h-s);
-	--rs-h-l: var(--rs-h-m);
-	--rs-h-xl: var(--rs-h-l);
-
-	height: var(--rs-h);
-}
-
 .literal {
-	--rs-h: var(--rs-h-s);
+	height: var(--rs-h-s, auto) !important;
 }
 
 .unit {
-	--rs-h: calc(var(--rs-h-s) * var(--rs-unit-x1));
+	height: calc(var(--rs-h-s) * var(--rs-unit-x1)) !important;
 }
 
 @each $viewport in m, l, xl {
 	@media (--rs-viewport-$viewport) {
 		.literal--$viewport {
-			--rs-h: var(--rs-h-$viewport);
+			height: var(--rs-h-$viewport) !important;
 		}
 
 		.unit--$viewport {
-			--rs-h: calc(var(--rs-h-$viewport) * var(--rs-unit-x1));
+			height: calc(var(--rs-h-$viewport) * var(--rs-unit-x1)) !important;
 		}
 	}
 }

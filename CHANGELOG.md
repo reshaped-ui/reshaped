@@ -5,3 +5,5 @@
 
 - trapFocus: radio input arrow nagivation
 - TextArea: Fixed placeholder color misalignment
+
+- New utility: ScrollArea

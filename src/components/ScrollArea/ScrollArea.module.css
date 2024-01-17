@@ -1,0 +1,87 @@
+.root {
+	--rs-scroll-area-thumb-size: calc(var(--rs-unit-x1) * 1.5);
+	--rs-scroll-area-thumb-offset: calc(var(--rs-unit-x1) / 2);
+}
+
+.root,
+.scrollable {
+	height: 100%;
+	position: relative;
+}
+
+.scrollable {
+	overflow: auto;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
+}
+
+.scrollbar {
+	position: absolute;
+	box-sizing: initial;
+	padding: var(--rs-scroll-area-thumb-offset);
+
+	&.--scrollbar-dragging .thumb::before,
+	&:hover .thumb::before {
+		opacity: 0.4;
+	}
+}
+
+.thumb {
+	position: relative;
+	height: 100%;
+	width: 100%;
+
+	&::before {
+		content: "";
+		display: block;
+		border-radius: 999px;
+		background: var(--rs-color-foreground-neutral);
+		opacity: 0;
+		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+		position: absolute;
+	}
+}
+
+.--scrollbar-y {
+	inset-block: 0;
+	inset-inline-end: 0;
+	width: var(--rs-scroll-area-thumb-size);
+
+	& .thumb::before {
+		inset-block-start: calc(var(--rs-scroll-area-position) * 100%);
+		width: 100%;
+		height: calc(var(--rs-scroll-area-ratio) * 100%);
+	}
+}
+
+.--scrollbar-x {
+	inset-inline: 0;
+	inset-block-end: 0;
+	height: var(--rs-scroll-area-thumb-size);
+
+	& .thumb::before {
+		inset-inline-start: calc(var(--rs-scroll-area-position) * 100%);
+		height: 100%;
+		width: calc(var(--rs-scroll-area-ratio) * 100%);
+	}
+}
+
+.--scrollbar-y:not(:last-child) {
+	inset-block-end: calc(var(--rs-scroll-area-thumb-size) + var(--rs-scroll-area-thumb-offset) * 2);
+}
+
+.--scrollbar-y ~ .--scrollbar-x {
+	inset-inline-end: calc(var(--rs-scroll-area-thumb-size) + var(--rs-scroll-area-thumb-offset) * 2);
+}
+
+.--display-visible .thumb::before {
+	opacity: 0.2;
+}
+
+.--display-hover:hover .thumb::before {
+	opacity: 0.2;
+}

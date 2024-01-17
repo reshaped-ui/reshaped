@@ -2,6 +2,7 @@
 
 import React from "react";
 import { classNames } from "utilities/helpers";
+import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import useRTL from "hooks/useRTL";
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
@@ -124,6 +125,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		if (closestId === minId) handleMinChange(nextValue);
 		if (closestId === maxId) handleMaxChange(nextValue);
 
+		disableUserSelect();
 		setDraggingId(closestId);
 	};
 
@@ -146,6 +148,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			handleMaxChange(maxValue, { commit: true });
 		}
 
+		enableUserSelect();
 		setDraggingId(null);
 	}, [minValue, maxValue, handleMinChange, handleMaxChange, draggingId, minId, maxId]);
 

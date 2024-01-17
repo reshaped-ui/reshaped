@@ -9,3 +9,11 @@ export const getClosestFlyoutTarget = (el: HTMLElement | null): HTMLElement => {
 	if ((isScrollable && el.scrollHeight > el.clientHeight) || isFixed) return el;
 	return getClosestFlyoutTarget(el.parentElement);
 };
+
+export const disableUserSelect = () => {
+	document.body.style.userSelect = "none";
+};
+
+export const enableUserSelect = () => {
+	document.body.style.userSelect = "";
+};
