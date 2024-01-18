@@ -1,5 +1,5 @@
 .literal {
-	width: var(--rs-w-s, auto);
+	width: var(--rs-w-s, auto) !important;
 }
 
 .unit {

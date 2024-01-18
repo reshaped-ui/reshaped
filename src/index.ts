@@ -109,6 +109,9 @@ export type { ReshapedProps } from "components/Reshaped";
 export { default as Scrim } from "components/Scrim";
 export type { ScrimProps } from "components/Scrim";
 
+export { default as ScrollArea } from "components/ScrollArea";
+export type { ScrollAreaProps } from "components/ScrollArea";
+
 export { default as Select } from "components/Select";
 export type { SelectProps } from "components/Select";
 
