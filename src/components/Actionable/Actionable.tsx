@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { forwardRef } from "react";
 import { classNames } from "utilities/helpers";
 import type * as T from "./Actionable.types";
 import s from "./Actionable.module.css";
@@ -97,4 +97,4 @@ const Actionable = (props: T.Props, ref: T.Ref) => {
 	);
 };
 
-export default React.forwardRef(Actionable);
+export default forwardRef(Actionable);

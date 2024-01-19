@@ -1,9 +1,22 @@
-import React from "react";
-import { Example } from "utilities/storybook";
 import Actionable from "components/Actionable";
+import { Example } from "utilities/storybook";
 import View from "components/View";
+import type { Meta } from "@storybook/react";
 
-export default { title: "Utilities/Actionable" };
+const meta: Meta<typeof Actionable> = {
+	title: "Utilities/Actionable",
+	component: Actionable,
+};
+
+export default meta;
+
+export const docs = () => (
+	<Example>
+		<Example.Item>
+			<Actionable onClick={() => {}}>Click me</Actionable>
+		</Example.Item>
+	</Example>
+);
 
 export const role = () => (
 	<Example>

@@ -1,4 +1,7 @@
 import React from "react";
+import { Preview } from "@storybook/react";
+import { themes } from "@storybook/theming";
+import { Title, Subtitle, Description, Primary, Controls, Stories } from "@storybook/blocks";
 import Reshaped from "../../src/components/Reshaped";
 import Button from "../../src/components/Button";
 import View from "../../src/components/View";
@@ -107,7 +110,7 @@ const reshapedDecorator = (Story: React.ComponentType) => (
 			defaultColorMode="dark"
 			toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
 		>
-			<View padding={4}>
+			<View padding={4} paddingBottom={10}>
 				<Story />
 			</View>
 			<ThemeSwitch />
@@ -115,11 +118,33 @@ const reshapedDecorator = (Story: React.ComponentType) => (
 	</React.StrictMode>
 );
 
-const preview = {
+const preview: Preview = {
 	decorators: [reshapedDecorator],
+	parameters: {
+		actions: { argTypesRegex: "^on[A-Z].*" },
+		controls: {
+			matchers: {},
+		},
+
+		docs: {
+			theme: themes.dark,
+			source: { type: "dynamic" },
+			page: () => (
+				<>
+					<Title />
+					<Subtitle />
+					<Description />
+					<Primary />
+					<Controls />
+					<Stories includePrimary={false} />
+				</>
+			),
+		},
+	},
 };
 
 export const parameters = {
 	layout: "fullscreen",
 };
+
 export default preview;

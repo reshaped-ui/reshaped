@@ -3,9 +3,29 @@ import { Example, Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
 import View from "components/View";
-import TextField from "components/TextField";
+import type { Meta } from "@storybook/react";
 
-export default { title: "Utilities/Accordion" };
+const meta: Meta<typeof Accordion> = {
+	title: "Utilities/Accordion",
+	component: Accordion,
+};
+
+export default meta;
+
+export const docs = () => (
+	<Example>
+		<Example.Item>
+			<Accordion>
+				<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
+				<Accordion.Content>
+					<View paddingTop={2}>
+						<Placeholder />
+					</View>
+				</Accordion.Content>
+			</Accordion>
+		</Example.Item>
+	</Example>
+);
 
 export const behavior = () => (
 	<Example>
@@ -14,7 +34,6 @@ export const behavior = () => (
 				<Accordion.Trigger>Uncontrolled accordion</Accordion.Trigger>
 				<Accordion.Content>
 					<View paddingTop={2}>
-						<TextField name="test" />
 						<Placeholder />
 					</View>
 				</Accordion.Content>
