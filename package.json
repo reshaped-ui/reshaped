@@ -83,7 +83,7 @@
 		"@commitlint/cli": "18.4.3",
 		"@commitlint/config-conventional": "18.4.3",
 		"@commitlint/types": "18.4.3",
-		"@size-limit/preset-big-lib": "11.0.1",
+		"@size-limit/preset-big-lib": "11.0.2",
 		"@storybook/addon-a11y": "7.6.10",
 		"@storybook/addon-docs": "7.6.10",
 		"@storybook/addon-storysource": "7.6.10",
