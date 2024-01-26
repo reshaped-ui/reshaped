@@ -1,8 +1,15 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Calendar from "components/Calendar";
 
-export default { title: "Components/Calendar" };
+export default {
+	title: "Components/Calendar",
+	component: Calendar,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/calendar",
+		},
+	},
+};
 
 export const base = () => (
 	<Example>

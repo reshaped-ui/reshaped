@@ -4,7 +4,15 @@ import Autocomplete from "components/Autocomplete";
 import Loader from "components/Loader";
 import View from "components/View";
 
-export default { title: "Components/Autocomplete" };
+export default {
+	title: "Components/Autocomplete",
+	component: Autocomplete,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/autocomplete",
+		},
+	},
+};
 
 const Demo = () => {
 	const [value, setValue] = React.useState("");

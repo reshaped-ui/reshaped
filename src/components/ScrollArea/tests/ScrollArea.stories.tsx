@@ -4,7 +4,15 @@ import ScrollArea from "components/ScrollArea";
 import View from "components/View";
 import Button from "components/Button";
 
-export default { title: "Utilities/ScrollArea" };
+export default {
+	title: "Utilities/ScrollArea",
+	component: ScrollArea,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/scroll-area",
+		},
+	},
+};
 
 const Demo = () => {
 	const ref = useRef<HTMLDivElement | null>(null);

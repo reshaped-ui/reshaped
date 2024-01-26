@@ -1,11 +1,18 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import useHotkeys from "hooks/useHotkeys";
 import View from "components/View";
 import TextField from "components/TextField";
 import Hotkey from "../Hotkey";
 
-export default { title: "Components/Hotkey" };
+export default {
+	title: "Components/Hotkey",
+	component: Hotkey,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/hotkey",
+		},
+	},
+};
 
 const Demo = () => {
 	const { checkHotkeyState } = useHotkeys({

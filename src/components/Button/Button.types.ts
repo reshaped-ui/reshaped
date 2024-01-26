@@ -6,22 +6,21 @@ import type * as G from "types/global";
 
 export type Size = "xlarge" | "large" | "medium" | "small";
 
-type BaseProps = {
+export type Props = Pick<
+	ActionableProps,
+	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "type"
+> & {
 	color?: "black" | "white" | "primary" | "critical" | "positive" | "neutral" | "inherit";
 	variant?: "solid" | "outline" | "ghost" | "faded";
-	elevated?: boolean;
 	icon?: IconProps["svg"];
 	endIcon?: IconProps["svg"];
 	size?: G.Responsive<Size>;
 	rounded?: boolean;
 	loading?: boolean;
+	elevated?: boolean;
 	fullWidth?: G.Responsive<boolean>;
 	highlighted?: boolean;
-	children?: React.ReactNode;
-	className?: G.ClassName;
 };
-
-export type Props = Omit<ActionableProps, keyof BaseProps> & BaseProps;
 
 export type GroupProps = {
 	children: React.ReactNode;

@@ -3,9 +3,16 @@ import { Example, Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
 import View from "components/View";
-import TextField from "components/TextField";
 
-export default { title: "Utilities/Accordion" };
+export default {
+	title: "Utilities/Accordion",
+	component: Accordion,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/accordion",
+		},
+	},
+};
 
 export const behavior = () => (
 	<Example>
@@ -14,7 +21,6 @@ export const behavior = () => (
 				<Accordion.Trigger>Uncontrolled accordion</Accordion.Trigger>
 				<Accordion.Content>
 					<View paddingTop={2}>
-						<TextField name="test" />
 						<Placeholder />
 					</View>
 				</Accordion.Content>

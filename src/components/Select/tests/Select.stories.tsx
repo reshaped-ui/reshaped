@@ -1,4 +1,3 @@
-import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
 import IconZap from "icons/Zap";
 import Select from "components/Select";
@@ -6,7 +5,15 @@ import View from "components/View";
 import DropdownMenu from "components/DropdownMenu/DropdownMenu";
 import FormControl from "components/FormControl";
 
-export default { title: "Components/Select" };
+export default {
+	title: "Components/Select",
+	component: Select,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/select",
+		},
+	},
+};
 
 export const selection = () => (
 	<Example>

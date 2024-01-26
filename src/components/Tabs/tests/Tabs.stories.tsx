@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Tabs from "components/Tabs";
 import View from "components/View";
 import IconZap from "icons/Zap";
 
-export default { title: "Components/Tabs" };
+export default {
+	title: "Components/Tabs",
+	component: Tabs,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/tabs",
+		},
+	},
+};
 
 export const variant = () => (
 	<Example>

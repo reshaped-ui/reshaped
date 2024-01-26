@@ -4,7 +4,15 @@ import Table from "components/Table";
 import Checkbox from "components/Checkbox";
 import Card from "components/Card";
 
-export default { title: "Components/Table" };
+export default {
+	title: "Components/Table",
+	component: Table,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/table",
+		},
+	},
+};
 
 export const layout = () => (
 	<Example>

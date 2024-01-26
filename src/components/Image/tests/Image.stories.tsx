@@ -1,11 +1,18 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Icon from "components/Icon";
 import IconZap from "icons/Zap";
 import Image from "../Image";
 
-export default { title: "Utilities/Image" };
+export default {
+	title: "Utilities/Image",
+	component: Image,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/image",
+		},
+	},
+};
 
 const imgUrl =
 	"https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80";

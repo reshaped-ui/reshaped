@@ -3,7 +3,15 @@ import { Example, Placeholder } from "utilities/storybook";
 import Card from "components/Card";
 import View from "components/View";
 
-export default { title: "Components/Card" };
+export default {
+	title: "Components/Card",
+	component: Card,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/card",
+		},
+	},
+};
 
 export const padding = () => (
 	<Example>

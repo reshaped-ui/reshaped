@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Breadcrumbs from "components/Breadcrumbs";
 import Badge from "components/Badge";
 import IconZap from "icons/Zap";
 
-export default { title: "Components/Breadcrumbs" };
+export default {
+	title: "Components/Breadcrumbs",
+	component: Breadcrumbs,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/breadcrumbs",
+		},
+	},
+};
 
 export const color = () => (
 	<Example>

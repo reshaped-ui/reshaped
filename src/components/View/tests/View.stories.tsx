@@ -8,7 +8,15 @@ import Avatar from "components/Avatar";
 import MenuItem from "components/MenuItem";
 import Button from "components/Button";
 
-export default { title: "Utilities/View" };
+export default {
+	title: "Utilities/View",
+	component: View,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/view",
+		},
+	},
+};
 
 export const padding = () => (
 	<Example title="Border is used to highlight the padding value">

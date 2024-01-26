@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { forwardRef } from "react";
 import { classNames } from "utilities/helpers";
 import { disableUserSelect, enableUserSelect } from "utilities/dom";
 import getHeightStyles from "styles/height";
@@ -96,125 +96,127 @@ const ScrollAreaBar = (props: T.BarProps) => {
 	);
 };
 
-const ScrollArea = (props: T.Props, ref: React.Ref<HTMLDivElement | null>) => {
-	const {
-		children,
-		height,
-		maxHeight,
-		scrollbarDisplay = "hover",
-		onScroll,
-		className,
-		attributes,
-	} = props;
-	const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
-	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
-	const scrollableRef = React.useRef<HTMLDivElement | null>(null);
-	const resizeObserverRef = React.useRef<ResizeObserver>();
-	const heightStyles = getHeightStyles(height);
-	const maxHeightStyles = getMaxHeightStyles(maxHeight);
-	const rootClassNames = classNames(
-		s.root,
-		scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
-		heightStyles?.classNames,
-		maxHeightStyles?.classNames,
-		className
-	);
-	const rootVariables = {
-		...heightStyles?.variables,
-		...maxHeightStyles?.variables,
-	};
-
-	const updateScroll = React.useCallback(() => {
-		const scrollableEl = scrollableRef.current;
-		if (!scrollableEl) return;
-
-		setScrollRatio({
-			x: scrollableEl.clientWidth / scrollableEl.scrollWidth,
-			y: scrollableEl.clientHeight / scrollableEl.scrollHeight,
-		});
-	}, []);
-
-	const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-		const scrollableEl = scrollableRef.current;
-		if (!scrollableEl) return;
-
-		const next = {
-			x: e.currentTarget.scrollLeft / scrollableEl.scrollWidth,
-			y: e.currentTarget.scrollTop / scrollableEl.scrollHeight,
+const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
+	(props: T.Props, ref: React.Ref<HTMLDivElement | null>) => {
+		const {
+			children,
+			height,
+			maxHeight,
+			scrollbarDisplay = "hover",
+			onScroll,
+			className,
+			attributes,
+		} = props;
+		const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
+		const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
+		const scrollableRef = React.useRef<HTMLDivElement | null>(null);
+		const resizeObserverRef = React.useRef<ResizeObserver>();
+		const heightStyles = getHeightStyles(height);
+		const maxHeightStyles = getMaxHeightStyles(maxHeight);
+		const rootClassNames = classNames(
+			s.root,
+			scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
+			heightStyles?.classNames,
+			maxHeightStyles?.classNames,
+			className
+		);
+		const rootVariables = {
+			...heightStyles?.variables,
+			...maxHeightStyles?.variables,
 		};
 
-		setScrollPosition(next);
-		onScroll?.(next);
-	};
+		const updateScroll = React.useCallback(() => {
+			const scrollableEl = scrollableRef.current;
+			if (!scrollableEl) return;
 
-	const handleThumbYMove: T.BarProps["onThumbMove"] = (args) => {
-		const scrollableEl = scrollableRef.current;
-		if (!scrollableEl) return;
+			setScrollRatio({
+				x: scrollableEl.clientWidth / scrollableEl.scrollWidth,
+				y: scrollableEl.clientHeight / scrollableEl.scrollHeight,
+			});
+		}, []);
 
-		const value = scrollableEl.scrollHeight * args.value;
+		const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+			const scrollableEl = scrollableRef.current;
+			if (!scrollableEl) return;
 
-		if (args.type === "absolute") {
-			scrollableEl.scrollTop = value;
-		} else {
-			scrollableEl.scrollTop += value;
-		}
-	};
+			const next = {
+				x: e.currentTarget.scrollLeft / scrollableEl.scrollWidth,
+				y: e.currentTarget.scrollTop / scrollableEl.scrollHeight,
+			};
 
-	const handleThumbXMove: T.BarProps["onThumbMove"] = (args) => {
-		const scrollableEl = scrollableRef.current;
-		if (!scrollableEl) return;
-
-		const value = scrollableEl.clientWidth * args.value;
-
-		if (args.type === "absolute") {
-			scrollableEl.scrollLeft = value;
-		} else {
-			scrollableEl.scrollLeft += value;
-		}
-	};
-
-	React.useImperativeHandle(ref, () => scrollableRef.current);
-
-	useIsomorphicLayoutEffect(() => {
-		updateScroll();
-	}, [updateScroll]);
-
-	useIsomorphicLayoutEffect(() => {
-		const scrollableEl = scrollableRef.current;
-		if (!scrollableEl) return;
-
-		resizeObserverRef.current = new ResizeObserver(updateScroll);
-		resizeObserverRef.current.observe(scrollableEl);
-
-		return () => {
-			resizeObserverRef.current?.disconnect();
+			setScrollPosition(next);
+			onScroll?.(next);
 		};
-	}, [updateScroll]);
 
-	return (
-		<div {...attributes} className={rootClassNames} style={rootVariables}>
-			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll}>
-				{children}
+		const handleThumbYMove: T.BarProps["onThumbMove"] = (args) => {
+			const scrollableEl = scrollableRef.current;
+			if (!scrollableEl) return;
+
+			const value = scrollableEl.scrollHeight * args.value;
+
+			if (args.type === "absolute") {
+				scrollableEl.scrollTop = value;
+			} else {
+				scrollableEl.scrollTop += value;
+			}
+		};
+
+		const handleThumbXMove: T.BarProps["onThumbMove"] = (args) => {
+			const scrollableEl = scrollableRef.current;
+			if (!scrollableEl) return;
+
+			const value = scrollableEl.clientWidth * args.value;
+
+			if (args.type === "absolute") {
+				scrollableEl.scrollLeft = value;
+			} else {
+				scrollableEl.scrollLeft += value;
+			}
+		};
+
+		React.useImperativeHandle(ref, () => scrollableRef.current);
+
+		useIsomorphicLayoutEffect(() => {
+			updateScroll();
+		}, [updateScroll]);
+
+		useIsomorphicLayoutEffect(() => {
+			const scrollableEl = scrollableRef.current;
+			if (!scrollableEl) return;
+
+			resizeObserverRef.current = new ResizeObserver(updateScroll);
+			resizeObserverRef.current.observe(scrollableEl);
+
+			return () => {
+				resizeObserverRef.current?.disconnect();
+			};
+		}, [updateScroll]);
+
+		return (
+			<div {...attributes} className={rootClassNames} style={rootVariables}>
+				<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll}>
+					{children}
+				</div>
+
+				{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
+					<ScrollAreaBar
+						vertical
+						onThumbMove={handleThumbYMove}
+						ratio={scrollRatio.y}
+						position={scrollPosition.y}
+					/>
+				)}
+
+				{scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
+					<ScrollAreaBar
+						onThumbMove={handleThumbXMove}
+						ratio={scrollRatio.x}
+						position={scrollPosition.x}
+					/>
+				)}
 			</div>
+		);
+	}
+);
 
-			{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
-				<ScrollAreaBar
-					vertical
-					onThumbMove={handleThumbYMove}
-					ratio={scrollRatio.y}
-					position={scrollPosition.y}
-				/>
-			)}
-
-			{scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
-				<ScrollAreaBar
-					onThumbMove={handleThumbXMove}
-					ratio={scrollRatio.x}
-					position={scrollPosition.x}
-				/>
-			)}
-		</div>
-	);
-};
-
-export default React.forwardRef(ScrollArea);
+export default ScrollArea;

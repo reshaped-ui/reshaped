@@ -7,7 +7,15 @@ import Link from "components/Link";
 import Icon from "components/Icon";
 import IconMic from "icons/Mic";
 
-export default { title: "Components/FileUpload" };
+export default {
+	title: "Components/FileUpload",
+	component: FileUpload,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/file-upload",
+		},
+	},
+};
 
 const Demo = () => {
 	const [files, setFiles] = React.useState<File[]>([]);

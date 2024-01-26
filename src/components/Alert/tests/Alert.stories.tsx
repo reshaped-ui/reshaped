@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Alert from "components/Alert";
 import Link from "components/Link";
 import IconZap from "icons/Zap";
 
-export default { title: "Components/Alert" };
+export default {
+	title: "Components/Alert",
+	component: Alert,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/alert",
+		},
+	},
+};
 
 export const color = () => (
 	<Example>

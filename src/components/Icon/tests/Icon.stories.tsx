@@ -1,4 +1,3 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Icon from "components/Icon";
@@ -6,7 +5,15 @@ import Text from "components/Text";
 import IconZap from "icons/Zap";
 import IconMic from "icons/Mic";
 
-export default { title: "Utilities/Icon" };
+export default {
+	title: "Utilities/Icon",
+	component: Icon,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/icon",
+		},
+	},
+};
 
 export const size = () => (
 	<Example>

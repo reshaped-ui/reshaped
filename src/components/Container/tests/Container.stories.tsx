@@ -1,9 +1,20 @@
-import React from "react";
+import type { Meta } from "@storybook/react";
 import { Example, Placeholder } from "utilities/storybook";
 import Container from "components/Container";
-import View from "components/View";
 
-export default { title: "Utilities/Container" };
+const meta: Meta<typeof Container> = {
+	title: "Utilities/Container",
+	component: Container,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/container",
+		},
+	},
+};
+
+export default meta;
+
+export const docs = () => <Container>Content</Container>;
 
 export const padding = () => (
 	<Example>

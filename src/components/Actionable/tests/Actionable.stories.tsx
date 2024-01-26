@@ -1,9 +1,16 @@
-import React from "react";
-import { Example } from "utilities/storybook";
 import Actionable from "components/Actionable";
+import { Example } from "utilities/storybook";
 import View from "components/View";
 
-export default { title: "Utilities/Actionable" };
+export default {
+	title: "Utilities/Actionable",
+	component: Actionable,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/actionable",
+		},
+	},
+};
 
 export const role = () => (
 	<Example>

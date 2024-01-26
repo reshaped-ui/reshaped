@@ -1,8 +1,15 @@
-import React from "react";
 import { Placeholder, Example } from "utilities/storybook";
 import ActionBar from "components/ActionBar";
 
-export default { title: "Components/ActionBar" };
+export default {
+	title: "Components/ActionBar",
+	component: ActionBar,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/action-bar",
+		},
+	},
+};
 
 export const position = () => (
 	<Example>

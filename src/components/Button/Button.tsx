@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 import Icon from "components/Icon";
 import Loader from "components/Loader";
@@ -8,7 +8,7 @@ import ButtonAligner from "./ButtonAligner";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";
 
-const ButtonBase = (props: T.Props, ref: ActionableRef) => {
+const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 	const {
 		variant = "solid",
 		color = "neutral",
@@ -88,9 +88,8 @@ const ButtonBase = (props: T.Props, ref: ActionableRef) => {
 			{renderIcon("end")}
 		</Actionable>
 	);
-};
+}) as T.Export;
 
-const Button = React.forwardRef(ButtonBase) as T.Export;
 Button.Group = ButtonGroup;
 Button.Aligner = ButtonAligner;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 import Actionable, { ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
@@ -7,7 +7,7 @@ import MenuItemAligner from "./MenuItemAligner";
 import type * as T from "./MenuItem.types";
 import s from "./MenuItem.module.css";
 
-const MenuItemBase = (props: T.Props, ref: ActionableRef) => {
+const MenuItem = forwardRef((props: T.Props, ref: ActionableRef) => {
 	const {
 		icon,
 		startSlot,
@@ -56,9 +56,8 @@ const MenuItemBase = (props: T.Props, ref: ActionableRef) => {
 			</View>
 		</Actionable>
 	);
-};
+}) as T.Export;
 
-const MenuItem = React.forwardRef(MenuItemBase) as T.Export;
 MenuItem.Aligner = MenuItemAligner;
 
 export default MenuItem;

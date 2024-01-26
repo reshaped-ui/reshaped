@@ -1,8 +1,15 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Loader from "components/Loader";
 
-export default { title: "Components/Loader" };
+export default {
+	title: "Components/Loader",
+	component: Loader,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/loader",
+		},
+	},
+};
 
 export const size = () => (
 	<Example>

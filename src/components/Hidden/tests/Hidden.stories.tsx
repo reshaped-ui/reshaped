@@ -1,7 +1,15 @@
 import { Example } from "utilities/storybook";
 import Hidden from "components/Hidden";
 
-export default { title: "Utilities/Hidden" };
+export default {
+	title: "Utilities/Hidden",
+	component: Hidden,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/hidden",
+		},
+	},
+};
 
 export const visibility = () => (
 	<Example>

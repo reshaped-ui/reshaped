@@ -1,11 +1,18 @@
-import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
 import View from "components/View";
 import Text from "components/Text";
 import MenuItem from "components/MenuItem";
 import IconZap from "icons/Zap";
 
-export default { title: "Components/MenuItem" };
+export default {
+	title: "Components/MenuItem",
+	component: MenuItem,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/menu-item",
+		},
+	},
+};
 
 export const size = () => (
 	<Example>

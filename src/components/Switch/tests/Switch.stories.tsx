@@ -1,8 +1,15 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Switch from "components/Switch";
 
-export default { title: "Components/Switch" };
+export default {
+	title: "Components/Switch",
+	component: Switch,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/switch",
+		},
+	},
+};
 
 export const selection = () => (
 	<Example>

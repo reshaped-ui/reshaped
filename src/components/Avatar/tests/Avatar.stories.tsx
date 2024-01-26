@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Avatar from "components/Avatar";
 import View from "components/View";
 import IconZap from "icons/Zap";
 
-export default { title: "Components/Avatar" };
+export default {
+	title: "Components/Avatar",
+	component: Avatar,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/avatar",
+		},
+	},
+};
 
 export const content = () => (
 	<Example>

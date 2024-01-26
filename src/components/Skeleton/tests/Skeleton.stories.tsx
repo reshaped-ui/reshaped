@@ -1,9 +1,15 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Skeleton from "components/Skeleton";
-import Text from "components/Text";
 
-export default { title: "Components/Skeleton" };
+export default {
+	title: "Components/Skeleton",
+	component: Skeleton,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/skeleton",
+		},
+	},
+};
 
 export const variant = () => (
 	<Example>

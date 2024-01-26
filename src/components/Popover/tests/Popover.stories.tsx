@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Popover from "components/Popover";
 import Button from "components/Button";
 
-export default { title: "Components/Popover" };
+export default {
+	title: "Components/Popover",
+	component: Popover,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/popover",
+		},
+	},
+};
 
 const Demo = (props: any) => {
 	const { position, ...rest } = props;

@@ -1,11 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Link from "components/Link";
-import View from "components/View";
 import Text from "components/Text";
 import IconZap from "icons/Zap";
 
-export default { title: "Components/Link" };
+export default {
+	title: "Components/Link",
+	component: Link,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/breadcrumbs",
+		},
+	},
+};
 
 export const variant = () => (
 	<Example>

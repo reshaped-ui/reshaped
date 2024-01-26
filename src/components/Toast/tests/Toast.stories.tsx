@@ -1,4 +1,3 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import { useToast } from "components/Toast";
 import Button from "components/Button";
@@ -8,7 +7,14 @@ import Text from "components/Text";
 import Dismissible from "components/Dismissible";
 import IconZap from "icons/Zap";
 
-export default { title: "Components/Toast" };
+export default {
+	title: "Components/Toast",
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/toast",
+		},
+	},
+};
 
 const Base = () => {
 	const toast = useToast();
