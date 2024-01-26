@@ -3,17 +3,17 @@
 }
 
 .unit {
-	width: calc(var(--rs-w-s) * var(--rs-unit-x1));
+	width: calc(var(--rs-w-s) * var(--rs-unit-x1)) !important;
 }
 
 @each $viewport in m, l, xl {
 	@media (--rs-viewport-$viewport) {
 		.literal--$viewport {
-			width: var(--rs-w-$viewport);
+			width: var(--rs-w-$viewport) !important;
 		}
 
 		.unit--$viewport {
-			width: calc(var(--rs-w-$viewport) * var(--rs-unit-x1));
+			width: calc(var(--rs-w-$viewport) * var(--rs-unit-x1)) !important;
 		}
 	}
 }

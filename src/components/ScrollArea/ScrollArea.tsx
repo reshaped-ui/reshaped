@@ -198,7 +198,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 					{children}
 				</div>
 
-				{scrollRatio.y < 1 && (
+				{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
 					<ScrollAreaBar
 						vertical
 						onThumbMove={handleThumbYMove}
@@ -207,7 +207,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 					/>
 				)}
 
-				{scrollRatio.x < 1 && (
+				{scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
 					<ScrollAreaBar
 						onThumbMove={handleThumbXMove}
 						ratio={scrollRatio.x}

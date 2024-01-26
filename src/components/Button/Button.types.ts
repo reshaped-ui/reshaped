@@ -8,7 +8,7 @@ export type Size = "xlarge" | "large" | "medium" | "small";
 
 export type Props = Pick<
 	ActionableProps,
-	"attributes" | "className" | "disabled" | "children" | "href" | "onClick"
+	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "type"
 > & {
 	color?: "black" | "white" | "primary" | "critical" | "positive" | "neutral" | "inherit";
 	variant?: "solid" | "outline" | "ghost" | "faded";
@@ -17,6 +17,7 @@ export type Props = Pick<
 	size?: G.Responsive<Size>;
 	rounded?: boolean;
 	loading?: boolean;
+	elevated?: boolean;
 	fullWidth?: G.Responsive<boolean>;
 	highlighted?: boolean;
 };
