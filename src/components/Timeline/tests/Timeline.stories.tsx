@@ -1,8 +1,15 @@
-import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
 import Timeline from "components/Timeline";
 
-export default { title: "Components/Timeline" };
+export default {
+	title: "Components/Timeline",
+	component: Timeline,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/timeline",
+		},
+	},
+};
 
 export const base = () => (
 	<Example>

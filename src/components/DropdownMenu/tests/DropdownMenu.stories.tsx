@@ -1,14 +1,19 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Button from "components/Button";
 import DropdownMenu from "components/DropdownMenu";
 import View from "components/View";
 import { useTheme } from "components/Theme/useTheme";
 import IconCheckmark from "icons/Checkmark";
-import useToggle from "hooks/useToggle";
-import { onNextFrame } from "utilities/animation";
 
-export default { title: "Components/DropdownMenu" };
+export default {
+	title: "Components/DropdownMenu",
+	component: DropdownMenu,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/dropdown-menu",
+		},
+	},
+};
 
 export const position = () => (
 	<Example>

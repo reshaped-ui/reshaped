@@ -5,6 +5,11 @@ import Container from "components/Container";
 const meta: Meta<typeof Container> = {
 	title: "Utilities/Container",
 	component: Container,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/container",
+		},
+	},
 };
 
 export default meta;

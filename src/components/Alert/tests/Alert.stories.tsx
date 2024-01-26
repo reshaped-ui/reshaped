@@ -2,34 +2,16 @@ import { Example } from "utilities/storybook";
 import Alert from "components/Alert";
 import Link from "components/Link";
 import IconZap from "icons/Zap";
-import type { Meta } from "@storybook/react";
 
-const meta: Meta<typeof Alert> = {
+export default {
 	title: "Components/Alert",
 	component: Alert,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/alert",
+		},
+	},
 };
-
-export default meta;
-
-export const docs = () => (
-	<Example>
-		<Example.Item>
-			<Alert
-				title="Alert title goes here"
-				icon={IconZap}
-				actionsSlot={
-					<>
-						<Link variant="plain">View now</Link>
-						<Link variant="plain">Dismiss</Link>
-					</>
-				}
-			>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-				been the industry's standard
-			</Alert>
-		</Example.Item>
-	</Example>
-);
 
 export const color = () => (
 	<Example>

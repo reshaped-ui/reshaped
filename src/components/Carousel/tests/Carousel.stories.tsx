@@ -4,7 +4,15 @@ import Carousel, { CarouselInstanceRef } from "components/Carousel";
 import Button from "components/Button";
 import View from "components/View";
 
-export default { title: "Components/Carousel" };
+export default {
+	title: "Components/Carousel",
+	component: Carousel,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/carousel",
+		},
+	},
+};
 
 export const visibleItems = () => (
 	<Example>

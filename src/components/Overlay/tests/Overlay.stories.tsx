@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Overlay from "components/Overlay";
 import Button from "components/Button";
 import useToggle from "hooks/useToggle";
 
-export default { title: "Utilities/Overlay" };
+export default {
+	title: "Utilities/Overlay",
+	component: Overlay,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/overlay",
+		},
+	},
+};
 
 export const base = () => {
 	const baseToggle = useToggle(true);

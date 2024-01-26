@@ -1,22 +1,16 @@
 import Actionable from "components/Actionable";
 import { Example } from "utilities/storybook";
 import View from "components/View";
-import type { Meta } from "@storybook/react";
 
-const meta: Meta<typeof Actionable> = {
+export default {
 	title: "Utilities/Actionable",
 	component: Actionable,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/actionable",
+		},
+	},
 };
-
-export default meta;
-
-export const docs = () => (
-	<Example>
-		<Example.Item>
-			<Actionable onClick={() => {}}>Click me</Actionable>
-		</Example.Item>
-	</Example>
-);
 
 export const role = () => (
 	<Example>

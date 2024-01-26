@@ -1,8 +1,15 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Radio from "components/Radio";
 
-export default { title: "Components/Radio" };
+export default {
+	title: "Components/Radio",
+	component: Radio,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/radio",
+		},
+	},
+};
 
 export const selection = () => (
 	<Example>

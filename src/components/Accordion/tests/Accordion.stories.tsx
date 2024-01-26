@@ -3,29 +3,16 @@ import { Example, Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
 import View from "components/View";
-import type { Meta } from "@storybook/react";
 
-const meta: Meta<typeof Accordion> = {
+export default {
 	title: "Utilities/Accordion",
 	component: Accordion,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/accordion",
+		},
+	},
 };
-
-export default meta;
-
-export const docs = () => (
-	<Example>
-		<Example.Item>
-			<Accordion>
-				<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
-				<Accordion.Content>
-					<View paddingTop={2}>
-						<Placeholder />
-					</View>
-				</Accordion.Content>
-			</Accordion>
-		</Example.Item>
-	</Example>
-);
 
 export const behavior = () => (
 	<Example>

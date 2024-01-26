@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "components/Card";
 import Button from "components/Button";
 import View from "components/View";
@@ -6,7 +5,15 @@ import MenuItem from "components/MenuItem";
 import Theme, { useTheme } from "components/Theme";
 import { Example } from "utilities/storybook";
 
-export default { title: "Utilities/Theme" };
+export default {
+	title: "Utilities/Theme",
+	component: Theme,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/theme",
+		},
+	},
+};
 
 const UncontrolledDemo = () => {
 	const { setTheme, theme } = useTheme();

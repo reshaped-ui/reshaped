@@ -5,7 +5,10 @@ import type * as G from "types/global";
 
 export type Size = "small" | "medium" | "large";
 
-export type Props = Omit<ActionableProps, "type"> & {
+export type Props = Pick<
+	ActionableProps,
+	"attributes" | "className" | "disabled" | "children" | "href" | "onClick"
+> & {
 	color?: "neutral" | "critical" | "primary";
 	icon?: IconProps["svg"];
 	startSlot?: React.ReactNode;

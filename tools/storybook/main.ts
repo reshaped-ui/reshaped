@@ -16,12 +16,22 @@ const config: StorybookConfig = {
 			propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
 		},
 	},
-	docs: {
-		autodocs: true,
-	},
-	stories: ["../../src/**/*.stories.tsx", "../../src/**/*.mdx"],
+	stories: ["../../src/**/*.stories.tsx"],
 	staticDirs: ["./public"],
-	addons: ["@storybook/addon-a11y", "@storybook/addon-docs"],
+	addons: [
+		"@storybook/addon-storysource",
+		"@storybook/addon-controls",
+		"@storybook/addon-a11y",
+		"./plugins/preset.js",
+		{
+			name: "@storybook/addon-docs",
+			options: {
+				sourceLoaderOptions: {
+					injectStoryParameters: false,
+				},
+			},
+		},
+	],
 
 	async viteFinal(config: UserConfig) {
 		return mergeConfig(config, {

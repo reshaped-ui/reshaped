@@ -1,23 +1,15 @@
 import { Placeholder, Example } from "utilities/storybook";
 import ActionBar from "components/ActionBar";
-import type { Meta } from "@storybook/react";
 
-const meta: Meta<typeof ActionBar> = {
+export default {
 	title: "Components/ActionBar",
 	component: ActionBar,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/action-bar",
+		},
+	},
 };
-
-export default meta;
-
-export const docs = () => (
-	<Example>
-		<Example.Item>
-			<ActionBar position="bottom">
-				<Placeholder />
-			</ActionBar>
-		</Example.Item>
-	</Example>
-);
 
 export const position = () => (
 	<Example>

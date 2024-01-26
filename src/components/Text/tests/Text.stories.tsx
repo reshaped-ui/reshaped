@@ -1,8 +1,15 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Text from "components/Text";
 
-export default { title: "Utilities/Text" };
+export default {
+	title: "Utilities/Text",
+	component: Text,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/text",
+		},
+	},
+};
 
 export const variant = () => (
 	<Example>

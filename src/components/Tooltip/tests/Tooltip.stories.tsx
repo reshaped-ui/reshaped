@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Tooltip from "components/Tooltip";
 import Button from "components/Button";
 import View from "components/View";
 
-export default { title: "Components/Tooltip" };
+export default {
+	title: "Components/Tooltip",
+	component: Tooltip,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/tooltip",
+		},
+	},
+};
 
 const Demo = (props: any) => {
 	const { position, ...rest } = props;

@@ -126,9 +126,11 @@ const preview: Preview = {
 			matchers: {},
 		},
 
+		// source: { type: "dynamic" },
+
 		docs: {
 			theme: themes.dark,
-			source: { type: "dynamic" },
+			// source: { type: "dynamic" },
 			page: () => (
 				<>
 					<Title />

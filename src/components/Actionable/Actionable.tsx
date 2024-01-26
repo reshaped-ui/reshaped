@@ -5,7 +5,7 @@ import { classNames } from "utilities/helpers";
 import type * as T from "./Actionable.types";
 import s from "./Actionable.module.css";
 
-const Actionable = (props: T.Props, ref: T.Ref) => {
+const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	const {
 		children,
 		href,
@@ -95,6 +95,6 @@ const Actionable = (props: T.Props, ref: T.Ref) => {
 			{children}
 		</TagName>
 	);
-};
+});
 
-export default forwardRef(Actionable);
+export default Actionable;

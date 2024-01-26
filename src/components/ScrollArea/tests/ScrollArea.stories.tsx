@@ -1,46 +1,17 @@
 import { useRef } from "react";
-import type { Meta } from "@storybook/react";
 import { Example } from "utilities/storybook";
 import ScrollArea from "components/ScrollArea";
 import View from "components/View";
 import Button from "components/Button";
 
-const meta: Meta<typeof ScrollArea> = {
+export default {
 	title: "Utilities/ScrollArea",
 	component: ScrollArea,
-	render: (args: any) => (
-		<Example>
-			<Example.Item>
-				<ScrollArea {...args} />
-			</Example.Item>
-		</Example>
-	),
-};
-
-export default meta;
-
-export const Playground = (args: any) => (
-	<Example>
-		<Example.Item>
-			<ScrollArea {...args} />
-		</Example.Item>
-	</Example>
-);
-
-Playground.args = {
-	height: "100px",
-	scrollbarDisplay: "visible",
-	children: (
-		<View backgroundColor="neutral-faded" padding={4}>
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-			been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-			galley of type and scrambled it to make a type specimen book. It has survived not only five
-			centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It
-			was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-			passages, and more recently with desktop publishing software like Aldus PageMaker including
-			versions of Lorem Ipsum.
-		</View>
-	),
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/scroll-area",
+		},
+	},
 };
 
 const Demo = () => {

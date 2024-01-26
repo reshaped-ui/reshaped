@@ -1,11 +1,18 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import FormControl, { useFormControl } from "components/FormControl";
 import RadioGroup from "components/RadioGroup";
 import Radio from "components/Radio";
 import View from "components/View";
 
-export default { title: "Utilities/FormControl" };
+export default {
+	title: "Utilities/FormControl",
+	component: FormControl,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/form-control",
+		},
+	},
+};
 
 const Input = () => {
 	const { attributes } = useFormControl();

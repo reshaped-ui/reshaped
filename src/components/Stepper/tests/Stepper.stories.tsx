@@ -4,7 +4,15 @@ import Stepper from "components/Stepper";
 import Button from "components/Button";
 import View from "components/View";
 
-export default { title: "Components/Stepper" };
+export default {
+	title: "Components/Stepper",
+	component: Stepper,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/stepper",
+		},
+	},
+};
 
 const Demo = (props: { subtitle?: string; activeId?: number }) => {
 	const [activeId, setActiveId] = React.useState(props.activeId ?? 1);

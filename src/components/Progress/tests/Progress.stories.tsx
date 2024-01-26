@@ -4,7 +4,15 @@ import View from "components/View";
 import Progress from "components/Progress";
 import Button from "components/Button";
 
-export default { title: "Components/Progress" };
+export default {
+	title: "Components/Progress",
+	component: Progress,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/progress",
+		},
+	},
+};
 
 export const value = () => (
 	<Example>

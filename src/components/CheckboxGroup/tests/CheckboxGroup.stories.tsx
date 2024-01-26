@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import CheckboxGroup from "components/CheckboxGroup";
 import Checkbox from "components/Checkbox";
 
-export default { title: "Components/CheckboxGroup" };
+export default {
+	title: "Components/CheckboxGroup",
+	component: CheckboxGroup,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/checkbox",
+		},
+	},
+};
 
 export const selection = () => (
 	<Example>

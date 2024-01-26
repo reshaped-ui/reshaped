@@ -86,6 +86,8 @@
 		"@size-limit/preset-big-lib": "11.0.1",
 		"@storybook/addon-a11y": "7.6.10",
 		"@storybook/addon-docs": "7.6.10",
+		"@storybook/addon-storysource": "7.6.10",
+		"@storybook/addon-controls": "7.6.10",
 		"@storybook/react": "7.6.10",
 		"@storybook/react-vite": "7.6.10",
 		"@testing-library/jest-dom": "6.1.6",

@@ -1,9 +1,16 @@
-import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
 import View from "components/View";
 import Divider from "components/Divider";
 
-export default { title: "Components/Divider" };
+export default {
+	title: "Components/Divider",
+	component: Divider,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/divider",
+		},
+	},
+};
 
 export const rendering = () => (
 	<Example>

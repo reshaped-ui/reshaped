@@ -8,7 +8,15 @@ import Button from "components/Button";
 import IconCheckmark from "icons/Checkmark";
 import IconChevronRight from "icons/ChevronRight";
 
-export default { title: "Components/Badge" };
+export default {
+	title: "Components/Badge",
+	component: Badge,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/badge",
+		},
+	},
+};
 
 export const variant = () => (
 	<Example>

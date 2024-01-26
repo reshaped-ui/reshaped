@@ -1,8 +1,15 @@
-import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
 import Scrim from "components/Scrim";
 
-export default { title: "Components/Scrim" };
+export default {
+	title: "Components/Scrim",
+	component: Scrim,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/scrim",
+		},
+	},
+};
 
 export const position = () => (
 	<Example>

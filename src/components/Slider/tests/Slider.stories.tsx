@@ -1,9 +1,16 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Slider from "components/Slider";
 import FormControl from "components/FormControl";
 
-export default { title: "Components/Slider" };
+export default {
+	title: "Components/Slider",
+	component: Slider,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/slider",
+		},
+	},
+};
 
 export const base = () => (
 	<Example>

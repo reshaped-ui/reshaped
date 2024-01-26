@@ -1,4 +1,3 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Button from "components/Button";
@@ -10,7 +9,12 @@ import DropdownMenu from "components/DropdownMenu";
 import Theme from "components/Theme";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
 
-export default { title: "Themes" };
+export default {
+	title: "Themes",
+	parameters: {
+		iframe: { url: "https://reshaped.so/docs/tokens/theming/runtime-theming" },
+	},
+};
 
 const css = getThemeCSS("green", {
 	color: {

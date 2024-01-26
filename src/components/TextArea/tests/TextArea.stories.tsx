@@ -6,7 +6,15 @@ import Button from "components/Button";
 import Text from "components/Text";
 import TextField from "components/TextField";
 
-export default { title: "Components/TextArea" };
+export default {
+	title: "Components/TextArea",
+	component: TextArea,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/text-area",
+		},
+	},
+};
 
 export const value = () => (
 	<Example>

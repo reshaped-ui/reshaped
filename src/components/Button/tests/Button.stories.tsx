@@ -1,4 +1,3 @@
-import type { Meta } from "@storybook/react";
 import { Example, Placeholder } from "utilities/storybook";
 import Button from "components/Button";
 import View from "components/View";
@@ -7,14 +6,15 @@ import Avatar from "components/Avatar";
 import Hotkey from "components/Hotkey";
 import IconZap from "icons/Zap";
 
-const meta: Meta<typeof Button> = {
+export default {
 	title: "Components/Button",
 	component: Button,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/button",
+		},
+	},
 };
-
-export default meta;
-
-export const docs = () => <Button color="primary">Submit</Button>;
 
 const imgUrl =
 	"https://images.unsplash.com/photo-1632502361954-0dd92ce797db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1625&q=80";

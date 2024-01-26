@@ -1,10 +1,17 @@
-import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
 import Dismissible from "components/Dismissible";
 import Image from "components/Image";
 import View from "components/View";
 
-export default { title: "Utilities/Dismissible" };
+export default {
+	title: "Utilities/Dismissible",
+	components: Dismissible,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/utilities/dismissible",
+		},
+	},
+};
 
 export const variant = () => (
 	<Example>

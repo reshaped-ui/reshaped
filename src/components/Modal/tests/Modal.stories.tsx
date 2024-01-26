@@ -1,4 +1,3 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import Modal from "components/Modal";
 import View from "components/View";
@@ -10,7 +9,15 @@ import TextField from "components/TextField";
 import useToggle from "hooks/useToggle";
 import Radio from "components/Radio";
 
-export default { title: "Components/Modal" };
+export default {
+	title: "Components/Modal",
+	component: Modal,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/modal",
+		},
+	},
+};
 
 const Demo = (props: any) => {
 	const { active: activeProp, title, subtitle, children, ...modalProps } = props;

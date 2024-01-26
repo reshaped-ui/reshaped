@@ -1,10 +1,17 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import RadioGroup from "components/RadioGroup";
 import Radio from "components/Radio";
 
-export default { title: "Components/RadioGroup" };
+export default {
+	title: "Components/RadioGroup",
+	component: RadioGroup,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/radio",
+		},
+	},
+};
 
 export const selection = () => (
 	<Example>

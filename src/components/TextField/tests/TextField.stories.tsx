@@ -1,4 +1,3 @@
-import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
 import IconZap from "icons/Zap";
 import TextField from "components/TextField";
@@ -7,7 +6,15 @@ import View from "components/View";
 import Text from "components/Text";
 import Button from "components/Button";
 
-export default { title: "Components/TextField" };
+export default {
+	title: "Components/TextField",
+	component: TextField,
+	parameters: {
+		iframe: {
+			url: "https://reshaped.so/docs/components/text-field",
+		},
+	},
+};
 
 export const value = () => (
 	<Example>
