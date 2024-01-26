@@ -1,7 +1,5 @@
 import React from "react";
 import { Preview } from "@storybook/react";
-import { themes } from "@storybook/theming";
-import { Title, Subtitle, Description, Primary, Controls, Stories } from "@storybook/blocks";
 import Reshaped from "../../src/components/Reshaped";
 import Button from "../../src/components/Button";
 import View from "../../src/components/View";
@@ -120,29 +118,6 @@ const reshapedDecorator = (Story: React.ComponentType) => (
 
 const preview: Preview = {
 	decorators: [reshapedDecorator],
-	parameters: {
-		actions: { argTypesRegex: "^on[A-Z].*" },
-		controls: {
-			matchers: {},
-		},
-
-		// source: { type: "dynamic" },
-
-		docs: {
-			theme: themes.dark,
-			// source: { type: "dynamic" },
-			page: () => (
-				<>
-					<Title />
-					<Subtitle />
-					<Description />
-					<Primary />
-					<Controls />
-					<Stories includePrimary={false} />
-				</>
-			),
-		},
-	},
 };
 
 export const parameters = {

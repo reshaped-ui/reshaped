@@ -1,8 +1,7 @@
-import type { Meta } from "@storybook/react";
 import { Example, Placeholder } from "utilities/storybook";
 import Container from "components/Container";
 
-const meta: Meta<typeof Container> = {
+export default {
 	title: "Utilities/Container",
 	component: Container,
 	parameters: {
@@ -11,10 +10,6 @@ const meta: Meta<typeof Container> = {
 		},
 	},
 };
-
-export default meta;
-
-export const docs = () => <Container>Content</Container>;
 
 export const padding = () => (
 	<Example>
