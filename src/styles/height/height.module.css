@@ -7,7 +7,7 @@
 	--rs-h-l: var(--rs-h-m);
 	--rs-h-xl: var(--rs-h-l);
 
-	height: var(--rs-h);
+	height: var(--rs-h) !important;
 }
 
 .literal {
