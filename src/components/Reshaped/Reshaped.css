@@ -1,3 +1,8 @@
+/* Used for resetting headless component styles */
+@layer rs {
+	@layer reset;
+}
+
 :root {
 	--rs-z-index-raised: 5;
 	--rs-z-index-flyout: 80;
@@ -60,30 +65,15 @@ select {
 }
 
 /* 
-Setting background for Windows browsers that have white background by default 
-which doesn't work well in dark mode
-*/
+	Setting background for Windows browsers that have white background by default 
+	which doesn't work well in dark mode
+	*/
 option {
 	background: var(--rs-color-background-elevation-base);
 }
 
 label {
 	cursor: pointer;
-}
-
-@media (prefers-reduced-motion: reduce) {
-	* {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
-	}
-}
-
-[data-rs-no-transition] *,
-[data-rs-no-transition] *::before,
-[data-rs-no-transition] *::after {
-	transition: none !important;
 }
 
 textarea::placeholder,
@@ -142,4 +132,19 @@ a {
 	&:hover {
 		text-decoration: none;
 	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+[data-rs-no-transition] *,
+[data-rs-no-transition] *::before,
+[data-rs-no-transition] *::after {
+	transition: none !important;
 }
