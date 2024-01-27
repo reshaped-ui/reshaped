@@ -1,7 +1,5 @@
 /* Used for resetting headless component styles */
-@layer rs {
-	@layer reset;
-}
+@layer rs.reset;
 
 @layer rs.reset {
 	:root {
