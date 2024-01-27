@@ -1,61 +1,63 @@
-.root {
-	display: inline-block;
-	vertical-align: top;
-	text-decoration: none;
-	color: inherit;
-	line-height: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	text-align: initial;
-	padding: 0;
-	border: 0;
-	margin: 0;
-	background: none;
-	-webkit-tap-highlight-color: transparent;
+@layer rs.reset {
+	.root {
+		display: inline-block;
+		vertical-align: top;
+		text-decoration: none;
+		color: inherit;
+		line-height: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		text-align: initial;
+		padding: 0;
+		border: 0;
+		margin: 0;
+		background: none;
+		-webkit-tap-highlight-color: transparent;
 
-	&:focus {
-		outline: none;
-		z-index: var(--rs-z-index-raised);
-	}
-}
-
-button.root,
-[role="button"].root {
-	cursor: pointer;
-	user-select: none;
-}
-
-.root.--disabled,
-.root[disabled] {
-	cursor: not-allowed;
-
-	&:active {
-		transform: none;
-	}
-}
-
-.--full-width {
-	width: 100%;
-}
-
-[data-rs-keyboard] .root:focus {
-	box-shadow: var(--rs-focus-shadow);
-}
-
-[data-rs-keyboard] .root.--inset:focus {
-	box-shadow: var(--rs-focus-inset-shadow);
-}
-
-[data-rs-keyboard] .root.--radius-inherit {
-	&:focus {
-		box-shadow: none;
+		&:focus {
+			outline: none;
+			z-index: var(--rs-z-index-raised);
+		}
 	}
 
-	&:focus > * {
+	button.root,
+	[role="button"].root {
+		cursor: pointer;
+		user-select: none;
+	}
+
+	.root.--disabled,
+	.root[disabled] {
+		cursor: not-allowed;
+
+		&:active {
+			transform: none;
+		}
+	}
+
+	.--full-width {
+		width: 100%;
+	}
+
+	[data-rs-keyboard] .root:focus {
 		box-shadow: var(--rs-focus-shadow);
 	}
 
-	&.--inset:focus > * {
+	[data-rs-keyboard] .root.--inset:focus {
 		box-shadow: var(--rs-focus-inset-shadow);
+	}
+
+	[data-rs-keyboard] .root.--radius-inherit {
+		&:focus {
+			box-shadow: none;
+		}
+
+		&:focus > * {
+			box-shadow: var(--rs-focus-shadow);
+		}
+
+		&.--inset:focus > * {
+			box-shadow: var(--rs-focus-inset-shadow);
+		}
 	}
 }
