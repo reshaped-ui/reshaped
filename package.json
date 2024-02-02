@@ -46,6 +46,7 @@
 		"index.d.ts",
 		"index.js"
 	],
+	"sideEffects": false,
 	"bin": {
 		"reshaped": "./bin/cli.js"
 	},

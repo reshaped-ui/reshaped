@@ -1,6 +1,8 @@
 .root {
 	--rs-scroll-area-thumb-size: calc(var(--rs-unit-x1) * 1.5);
 	--rs-scroll-area-thumb-offset: calc(var(--rs-unit-x1) / 2);
+
+	overflow: hidden;
 }
 
 .root,

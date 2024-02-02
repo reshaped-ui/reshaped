@@ -180,6 +180,7 @@
 	z-index: 10;
 	inset-inline-end: 0;
 	transform: translate(50%, var(--rs-badge-translate-y)) scale(1);
+	pointer-events: none;
 
 	&.--hidden {
 		transform: translate(50%, var(--rs-badge-translate-y)) scale(0.2);
