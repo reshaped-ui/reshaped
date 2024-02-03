@@ -75,4 +75,5 @@ export type ThumbProps = {
 	max: number;
 	min: number;
 	renderValue?: BaseProps["renderValue"];
+	tooltipRef: React.RefObject<HTMLDivElement>;
 };

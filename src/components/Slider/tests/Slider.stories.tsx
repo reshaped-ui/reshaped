@@ -18,7 +18,13 @@ export const base = () => (
 			<Slider name="slider" defaultValue={30} />
 		</Example.Item>
 		<Example.Item title="range">
-			<Slider range name="slider" defaultMinValue={30} defaultMaxValue={70} />
+			<Slider
+				range
+				name="slider"
+				defaultMinValue={30}
+				defaultMaxValue={70}
+				renderValue={() => "Hundred more times"}
+			/>
 		</Example.Item>
 	</Example>
 );
