@@ -8,8 +8,19 @@ import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
 
 const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
-	const { name, value, disabled, active, position, max, min, onChange, onDragStart, renderValue } =
-		props;
+	const {
+		name,
+		value,
+		disabled,
+		active,
+		position,
+		max,
+		min,
+		onChange,
+		onDragStart,
+		renderValue,
+		tooltipRef,
+	} = props;
 	const id = React.useId();
 	const thumbClassNames = classNames(s.thumb, active && s["thumb--active"]);
 	const tooltipValue = renderValue ? renderValue({ value }) : value;
@@ -41,7 +52,12 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 				aria-hidden="true"
 			>
 				<Theme colorMode="inverted">
-					<Text variant="caption-1" weight="medium" className={s.tooltip}>
+					<Text
+						variant="caption-1"
+						weight="medium"
+						className={s.tooltip}
+						attributes={{ ref: tooltipRef }}
+					>
 						{tooltipValue}
 					</Text>
 				</Theme>

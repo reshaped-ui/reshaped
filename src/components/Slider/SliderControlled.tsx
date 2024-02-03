@@ -38,6 +38,8 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const barRef = React.useRef<HTMLDivElement | null>(null);
 	const minRef = React.useRef<HTMLDivElement | null>(null);
 	const maxRef = React.useRef<HTMLDivElement | null>(null);
+	const minTooltipRef = React.useRef<HTMLDivElement | null>(null);
+	const maxTooltipRef = React.useRef<HTMLDivElement | null>(null);
 	const [draggingId, setDraggingId] = React.useState<string | null>(null);
 	const [rtl] = useRTL();
 	const formControl = useFormControl();
@@ -71,6 +73,39 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 
 		return ratio * 100;
 	};
+
+	const positionTooltip = React.useCallback(
+		(draggingId: string) => {
+			const draggingRef = draggingId === minId ? minTooltipRef : maxTooltipRef;
+			const thumbRef = draggingId === minId ? minRef : maxRef;
+
+			let nextTooltipOffset = 0;
+			const barRect = barRef.current?.getBoundingClientRect();
+			const draggingRect = draggingRef.current?.getBoundingClientRect();
+			const thumbRect = thumbRef.current?.getBoundingClientRect();
+
+			const barLeftSide = barRect?.left;
+			const barRightSide = barLeftSide && barLeftSide + barRect?.width;
+			const tooltipLeftSide = thumbRect && draggingRect && thumbRect.left - draggingRect.width / 2;
+			const tooltipRightSide = thumbRect && draggingRect && thumbRect.left + draggingRect.width / 2;
+
+			// Crosses the left slider boundary
+			if (tooltipLeftSide && barLeftSide && tooltipLeftSide < barLeftSide - 8) {
+				nextTooltipOffset = draggingRect.width / 2 - 8;
+			}
+
+			// Crosses the right slider boundary
+			if (tooltipRightSide && barRightSide && tooltipRightSide > barRightSide) {
+				nextTooltipOffset = -(draggingRect.width / 2 - 8);
+			}
+
+			const tooltipEl = draggingRef.current;
+			if (tooltipEl) {
+				tooltipEl.style.setProperty("--rs-slider-tooltip-offset", `${nextTooltipOffset || 0}px`);
+			}
+		},
+		[minId]
+	);
 
 	const handleMinChange: T.ThumbProps["onChange"] = React.useCallback(
 		(value, options) => {
@@ -159,6 +194,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			const x = getDragX(e);
 			const nextValue = getPositionValue(x);
 
+			positionTooltip(draggingId);
 			if (nextValue === undefined) return;
 
 			// Switch to another id if thumbs overlap
@@ -180,8 +216,14 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			handleMinChange,
 			maxId,
 			minId,
+			positionTooltip,
 		]
 	);
+
+	React.useEffect(() => {
+		positionTooltip(minId);
+		positionTooltip(maxId);
+	}, [positionTooltip, minId, maxId]);
 
 	React.useEffect(() => {
 		window.addEventListener("mouseup", handleDragStop);
@@ -232,6 +274,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 					max={max}
 					min={min}
 					ref={minRef}
+					tooltipRef={minTooltipRef}
 					renderValue={renderValue}
 				/>
 			)}
@@ -248,6 +291,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 				max={max}
 				min={min}
 				ref={maxRef}
+				tooltipRef={maxTooltipRef}
 				renderValue={renderValue}
 			/>
 		</div>
