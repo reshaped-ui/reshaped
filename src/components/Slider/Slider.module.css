@@ -53,6 +53,7 @@
 	padding: calc(var(--rs-unit-x1) / 2) var(--rs-unit-x1);
 	white-space: nowrap;
 	will-change: transform;
+	pointer-events: none;
 }
 
 .thumb {
