@@ -19,9 +19,11 @@ const TextArea = (props: T.Props) => {
 		placeholder,
 		size = "medium",
 		variant = "outline",
+		resize,
 		className,
 		attributes,
 	} = props;
+	const [autogrowValue, setAutogrowValue] = React.useState(value || defaultValue || "");
 	const formControl = useFormControl();
 	const id = useElementId(props.id);
 	const inputId =
@@ -35,16 +37,31 @@ const TextArea = (props: T.Props) => {
 		hasError && s["--status-error"],
 		disabled && s["--disabled"],
 		variant && s[`--variant-${variant}`],
+		resize !== undefined && s[`--resize-${resize}`],
 		className
 	);
 
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-		if (!onChange) return;
-		onChange({ name, value: event.target.value, event });
+		const nextValue = event.target.value;
+
+		onChange?.({ name, value: nextValue, event });
+		if (resize === "auto" && typeof value !== "string") {
+			setAutogrowValue(nextValue);
+		}
 	};
 
+	React.useEffect(() => {
+		if (typeof value !== "string" || resize !== "auto") return;
+		setAutogrowValue(value);
+	}, [value, resize]);
+
 	return (
-		<div {...attributes} data-rs-aligner-target className={rootClassName}>
+		<div
+			{...attributes}
+			data-rs-aligner-target
+			className={rootClassName}
+			data-rs-textarea-value={autogrowValue}
+		>
 			<textarea
 				rows={3}
 				{...inputAttributes}
