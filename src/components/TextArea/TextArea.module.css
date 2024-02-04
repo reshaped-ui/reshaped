@@ -1,22 +1,33 @@
 .root {
 	position: relative;
+	display: grid;
+}
+
+.root::after {
+	content: attr(data-rs-textarea-value) " ";
+	white-space: pre-wrap;
+	visibility: hidden;
+}
+
+.root::after,
+.input {
+	grid-area: 1 / 1 / 2 / 2;
+	border: 1px solid var(--rs-color-border-neutral);
+	padding: calc(var(--rs-p) - 1px);
+	font-weight: var(--rs-font-weight-regular);
+	font-family: var(--rs-font-family-body);
+	box-sizing: border-box;
+	flex-grow: 1;
+	width: 100%;
 }
 
 .input {
-	display: block;
 	outline: none;
 	position: relative;
 	z-index: 1;
-	flex-grow: 1;
-	width: 100%;
-	box-sizing: border-box;
-	padding: calc(var(--rs-p) - 1px);
 	color: var(--rs-color-foreground-neutral);
 	background: var(--rs-color-background-elevation-base);
-	border: 1px solid var(--rs-color-border-neutral);
 	border-radius: var(--rs-unit-radius-small);
-	font-weight: var(--rs-font-weight-regular);
-	font-family: var(--rs-font-family-body);
 
 	&:focus {
 		border-color: var(--rs-color-border-primary);
@@ -101,6 +112,11 @@
 		border-color: var(--rs-color-border-primary);
 		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
 	}
+}
+
+.root.--resize-none .input,
+.root.--resize-auto .input {
+	resize: none;
 }
 
 @media (--rs-viewport-s) and (hover: none) {

@@ -65,6 +65,17 @@ export const size = () => (
 	</Example>
 );
 
+export const resize = () => (
+	<Example>
+		<Example.Item title="resize: none">
+			<TextArea name="Name" placeholder="Enter your name" resize="none" />
+		</Example.Item>
+		<Example.Item title="resize: auto">
+			<TextArea name="Name" placeholder="Enter your name" resize="auto" />
+		</Example.Item>
+	</Example>
+);
+
 export const disabled = () => (
 	<Example>
 		<Example.Item title="disabled, no value">
