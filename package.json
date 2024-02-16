@@ -102,7 +102,7 @@
 		"@typescript-eslint/eslint-plugin": "6.20.0",
 		"@typescript-eslint/parser": "6.20.0",
 		"@vitejs/plugin-react": "4.2.1",
-		"chromatic": "10.7.1",
+		"chromatic": "10.9.6",
 		"cz-conventional-changelog": "3.3.0",
 		"eslint": "8.56.0",
 		"eslint-config-airbnb-typescript": "17.1.0",
