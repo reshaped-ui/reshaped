@@ -29,6 +29,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements | void = void> = {
 		| "primary"
 		| "disabled";
 	align?: G.Responsive<"start" | "center" | "end">;
+	wrap?: "balance";
 	decoration?: "line-through";
 	maxLines?: number;
 	as?: TagName;

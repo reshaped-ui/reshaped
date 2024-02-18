@@ -109,6 +109,16 @@ export const decoration = () => (
 	</Example>
 );
 
+export const wrap = () => (
+	<Example>
+		<Example.Item title="wrap: balance">
+			<Text wrap="balance" variant="title-3">
+				The design system you want to build
+			</Text>
+		</Example.Item>
+	</Example>
+);
+
 export const maxLines = () => (
 	<Example>
 		<Example.Item title="maxLines: 2">

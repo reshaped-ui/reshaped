@@ -12,8 +12,18 @@ const tagMap: Partial<Record<T.Variant, keyof JSX.IntrinsicElements>> = {
 };
 
 const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
-	const { variant, color, weight, align, decoration, maxLines, children, className, attributes } =
-		props;
+	const {
+		variant,
+		color,
+		weight,
+		align,
+		decoration,
+		maxLines,
+		wrap,
+		children,
+		className,
+		attributes,
+	} = props;
 	const largestVariant =
 		typeof variant === "string" ? variant : variant?.xl || variant?.l || variant?.m || variant?.s;
 	/**
@@ -30,6 +40,7 @@ const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
 		decoration && s[`--decoration-${decoration}`],
 		maxLines !== undefined && s[`--clamp`],
 		maxLines === 1 && s["--break-all"],
+		wrap && s[`--wrap-${wrap}`],
 		className
 	);
 	const style = {
