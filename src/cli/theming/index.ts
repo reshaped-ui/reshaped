@@ -18,11 +18,14 @@ const transformDefinition = (
 	const themeFolderPath = isFragment
 		? path.resolve(outputPath, "fragments", name)
 		: path.resolve(outputPath, name);
+
 	const themePath = path.resolve(themeFolderPath, "theme.css");
 	const themeMediaPath = path.resolve(themeFolderPath, "media.css");
+	const themeJsonPath = path.resolve(themeFolderPath, "theme.json");
 
 	fs.mkdirSync(themeFolderPath, { recursive: true });
 	fs.writeFileSync(themePath, code.variables);
+	fs.writeFileSync(themeJsonPath, JSON.stringify(definition));
 
 	if (code.media) fs.writeFileSync(themeMediaPath, code.media);
 
