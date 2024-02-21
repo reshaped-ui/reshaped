@@ -91,6 +91,9 @@ export type { ModalProps } from "components/Modal";
 export { default as Overlay } from "components/Overlay";
 export type { OverlayProps } from "components/Overlay";
 
+export { default as Paginaton } from "components/Pagination";
+export type { PaginationProps } from "components/Pagination";
+
 export { default as Popover } from "components/Popover";
 export type { PopoverProps } from "components/Popover";
 
