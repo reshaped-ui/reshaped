@@ -1,5 +1,10 @@
 import type * as G from "types/global";
 
+export const range = (start: number, end: number) => {
+	if (start > end) return [];
+	return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+};
+
 // from https://gist.github.com/ca0v/73a31f57b397606c9813472f7493a940
 export const debounce = <T extends Function>(cb: T, wait = 20) => {
 	let timer: ReturnType<typeof setTimeout>;
