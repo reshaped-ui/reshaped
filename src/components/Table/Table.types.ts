@@ -17,6 +17,7 @@ export type RowProps = {
 
 export type CellProps = {
 	align?: "start" | "center" | "end";
+	verticalAlign?: "start" | "center" | "end";
 	rowSpan?: number;
 	colSpan?: number;
 	padding?: number;

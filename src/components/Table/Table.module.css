@@ -13,7 +13,6 @@
 
 .table {
 	min-width: 100%;
-	border-radius: var(--rs-unit-radius-medium);
 	border-collapse: separate;
 	overflow: hidden;
 }
@@ -31,7 +30,7 @@
 	text-align: start;
 	vertical-align: top;
 
-	&:first-child {
+	&:not(:last-child) {
 		padding-inline-end: 0;
 	}
 }
@@ -46,11 +45,18 @@
 	}
 }
 
+@each $align, $value in (start, center, end), (top, middle, bottom) {
+	.cell--valign-$(align) {
+		vertical-align: $(value);
+	}
+}
+
 .--row-highlighted {
 	background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
 }
 
 .--border-outer .table {
+	border-radius: var(--rs-unit-radius-medium);
 	border: 1px solid var(--rs-color-border-neutral-faded);
 }
 
@@ -59,7 +65,7 @@
 		border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
 	}
 
-	&:first-child {
+	&:not(:last-child) {
 		padding-inline-end: calc(var(--rs-unit-x1) * var(--rs-table-p-horizontal-s));
 	}
 }

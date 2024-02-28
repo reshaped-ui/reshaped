@@ -7,7 +7,11 @@
 - Pagination: New component
 - ScrollArea: Added overflow hidden to root to prevent scrollbar bleeding out in Safari
 - Slider: Tooltip positioning inside the viewport
+- Table: Cell verticalAlign support
+- Table: Remove border radius for non-bordered tables (for better composition)
+- Table: Fixed duplicated padding in borderless tables
 - Text: wrap="balance"
+- FormControl: Fixed RSC
 
 - Updated all dependencies
 - CRA: Responsive style support with Craco

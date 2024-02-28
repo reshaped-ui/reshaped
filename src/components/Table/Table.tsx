@@ -5,12 +5,15 @@ import getMinWidthStyles from "styles/minWidth";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
 
+console.log(s);
+
 const TableCellPrivate = (props: T.PrivateCellProps) => {
 	const {
 		minWidth,
 		rowSpan,
 		colSpan,
 		align,
+		verticalAlign,
 		tagName: TagName,
 		padding,
 		paddingInline,
@@ -25,7 +28,8 @@ const TableCellPrivate = (props: T.PrivateCellProps) => {
 		s.cell,
 		widthStyles?.classNames,
 		minWidthStyles?.classNames,
-		align && s[`cell--align-${align}`]
+		align && s[`cell--align-${align}`],
+		verticalAlign && s[`cell--valign-${verticalAlign}`]
 	);
 	const headingStyle = {
 		...widthStyles?.variables,

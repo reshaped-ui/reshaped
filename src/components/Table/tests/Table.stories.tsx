@@ -3,6 +3,7 @@ import { Example } from "utilities/storybook";
 import Table from "components/Table";
 import Checkbox from "components/Checkbox";
 import Card from "components/Card";
+import View from "components/View";
 
 export default {
 	title: "Components/Table",
@@ -54,6 +55,22 @@ export const layout = () => (
 				<Table.Row>
 					<Table.Cell>Cell 1</Table.Cell>
 					<Table.Cell>Cell 2</Table.Cell>
+				</Table.Row>
+			</Table>
+		</Example.Item>
+		<Example.Item title="valign: center for cell 2, valign: end for cell 3">
+			<Table>
+				<Table.Row>
+					<Table.Heading>Column 1</Table.Heading>
+					<Table.Heading>Column 2</Table.Heading>
+					<Table.Heading>Column 2</Table.Heading>
+				</Table.Row>
+				<Table.Row>
+					<Table.Cell>
+						<View height={15} backgroundColor="neutral-faded" />
+					</Table.Cell>
+					<Table.Cell verticalAlign="center">Cell 2</Table.Cell>
+					<Table.Cell verticalAlign="end">Cell 3</Table.Cell>
 				</Table.Row>
 			</Table>
 		</Example.Item>
