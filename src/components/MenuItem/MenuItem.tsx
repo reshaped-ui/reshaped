@@ -20,6 +20,7 @@ const MenuItem = forwardRef((props: T.Props, ref: ActionableRef) => {
 		href,
 		size = "medium",
 		roundedCorners,
+		as,
 		className,
 		attributes,
 	} = props;
@@ -43,6 +44,7 @@ const MenuItem = forwardRef((props: T.Props, ref: ActionableRef) => {
 			onClick={onClick}
 			href={href}
 			ref={ref}
+			as={as}
 		>
 			<View direction="row" gap={gapSize} align="center">
 				{icon && <Icon svg={icon} className={s.icon} size={iconSize} />}

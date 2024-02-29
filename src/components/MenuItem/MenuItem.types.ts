@@ -7,7 +7,7 @@ export type Size = "small" | "medium" | "large";
 
 export type Props = Pick<
 	ActionableProps,
-	"attributes" | "className" | "disabled" | "children" | "href" | "onClick"
+	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "as"
 > & {
 	color?: "neutral" | "critical" | "primary";
 	icon?: IconProps["svg"];

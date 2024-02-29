@@ -8,7 +8,7 @@ export type Size = "xlarge" | "large" | "medium" | "small";
 
 export type Props = Pick<
 	ActionableProps,
-	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "type"
+	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "type" | "as"
 > & {
 	color?: "black" | "white" | "primary" | "critical" | "positive" | "neutral" | "inherit";
 	variant?: "solid" | "outline" | "ghost" | "faded";

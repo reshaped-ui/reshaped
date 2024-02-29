@@ -16,7 +16,7 @@ const FormControl = FormControlClient as React.ComponentType<T.Props> & {
 };
 
 FormControl.Label = FormControlLabel;
-FormControl.Helper = FormControlError;
-FormControl.Error = FormControlHelper;
+FormControl.Helper = FormControlHelper;
+FormControl.Error = FormControlError;
 
 export default FormControl;

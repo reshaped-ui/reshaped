@@ -4,6 +4,8 @@ import FormControl, { useFormControl } from "components/FormControl";
 
 const Input = () => {
 	const { attributes } = useFormControl();
+
+	console.log({ attributes });
 	return <input {...attributes} />;
 };
 

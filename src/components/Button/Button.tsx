@@ -20,13 +20,14 @@ const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 		type,
 		href,
 		size = "medium",
-		className,
 		children,
 		rounded,
-		attributes,
 		onClick,
 		icon,
 		endIcon,
+		as,
+		className,
+		attributes,
 	} = props;
 	const iconOnly = (icon || endIcon) && !children;
 	const rootClassName = classNames(
@@ -77,6 +78,7 @@ const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 			onClick={onClick}
 			href={href}
 			ref={ref}
+			as={as}
 		>
 			{loading && (
 				<div className={s.loader}>

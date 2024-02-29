@@ -12,6 +12,7 @@
 - Table: Fixed duplicated padding in borderless tables
 - Text: wrap="balance"
 - FormControl: Fixed RSC
+- Button,MenuItem: Add as prop support
 
 - Updated all dependencies
 - CRA: Responsive style support with Craco

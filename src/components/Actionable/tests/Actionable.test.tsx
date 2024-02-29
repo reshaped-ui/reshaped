@@ -49,7 +49,7 @@ describe("Utilities/Actionable", () => {
 		await userEvent.click(el);
 
 		expect(el).toHaveAttribute("href", fixtures.href);
-		expect(handleClick).toBeCalledTimes(1);
+		expect(handleClick).toHaveBeenCalledTimes(1);
 	});
 
 	test("renders button", async () => {
@@ -60,7 +60,23 @@ describe("Utilities/Actionable", () => {
 		await userEvent.click(el);
 
 		expect(el).toHaveAttribute("type", "button");
-		expect(handleClick).toBeCalledTimes(1);
+		expect(handleClick).toHaveBeenCalledTimes(1);
+	});
+
+	test("renders custom tag", async () => {
+		const handleClick = jest.fn();
+		render(
+			<Actionable onClick={handleClick} as="span">
+				{fixtures.content}
+			</Actionable>
+		);
+
+		const el = screen.getByRole("button");
+		await userEvent.click(el);
+
+		expect(el).toHaveAttribute("role", "button");
+		expect(handleClick).toHaveBeenCalledTimes(1);
+		expect(el.tagName).toBe("SPAN");
 	});
 
 	test("works with disabled property", async () => {
@@ -76,7 +92,7 @@ describe("Utilities/Actionable", () => {
 
 		expect(el).toHaveAttribute("type", "button");
 		expect(el).toBeDisabled();
-		expect(handleClick).toBeCalledTimes(0);
+		expect(handleClick).toHaveBeenCalledTimes(0);
 	});
 
 	test("renders className and attributes", () => {
