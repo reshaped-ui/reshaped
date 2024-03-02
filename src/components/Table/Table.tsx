@@ -5,8 +5,6 @@ import getMinWidthStyles from "styles/minWidth";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
 
-console.log(s);
-
 const TableCellPrivate = (props: T.PrivateCellProps) => {
 	const {
 		minWidth,

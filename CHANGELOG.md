@@ -2,6 +2,7 @@
 
 - Actionable: @layer
 - Accordion: Fixed RSC
+- Accordion, Stepper: Removed js height calculations
 - sideEffects: false
 - BadgeContainer: Added pointer-events: none to badge
 - Pagination: New component
