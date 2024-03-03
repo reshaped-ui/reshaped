@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import Button from "components/Button";
 import View from "components/View";
 import IconChevronLeft from "icons/ChevronLeft";
@@ -45,8 +46,6 @@ const PaginationControlled = (props: T.ControlledProps) => {
 
 		onChange?.({ page: resolvedValue });
 	};
-
-	React.useEffect(() => {}, [selectedPage]);
 
 	return (
 		<View direction="row" align="center" gap={1} className={className} attributes={attributes}>

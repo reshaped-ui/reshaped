@@ -5,6 +5,7 @@
 - Accordion, Stepper: Removed js height calculations
 - sideEffects: false
 - BadgeContainer: Added pointer-events: none to badge
+- Button: Added min-width support for text buttons
 - Pagination: New component
 - ScrollArea: Added overflow hidden to root to prevent scrollbar bleeding out in Safari
 - Slider: Tooltip positioning inside the viewport
