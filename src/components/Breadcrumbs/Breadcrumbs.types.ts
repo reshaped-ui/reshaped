@@ -7,6 +7,7 @@ export type Props = {
 	separator?: React.ReactNode;
 	color?: "neutral" | "primary";
 	defaultVisibleItems?: number;
+	disableExpand?: boolean;
 	ariaLabel?: string;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"nav", Props>;

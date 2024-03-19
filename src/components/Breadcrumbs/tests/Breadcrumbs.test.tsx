@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Breadcrumbs from "components/Breadcrumbs";
 
 const fixtures = {
@@ -73,6 +72,21 @@ describe("Components/Breadcrumbs", () => {
 
 		expect(elCollapseButton).not.toBeInTheDocument();
 		expect(elsLink).toHaveLength(4);
+	});
+
+	test("expandCollapse makes collapse icon static", async () => {
+		render(
+			<Breadcrumbs defaultVisibleItems={3} disableExpand>
+				<Breadcrumbs.Item href="#">{fixtures.content}</Breadcrumbs.Item>
+				<Breadcrumbs.Item href="#">{fixtures.content}</Breadcrumbs.Item>
+				<Breadcrumbs.Item href="#">{fixtures.content}</Breadcrumbs.Item>
+				<Breadcrumbs.Item href="#">{fixtures.content}</Breadcrumbs.Item>
+				<Breadcrumbs.Item>{fixtures.content}</Breadcrumbs.Item>
+			</Breadcrumbs>
+		);
+
+		const elCollapseButton = screen.queryByRole("button");
+		expect(elCollapseButton).not.toBeInTheDocument();
 	});
 
 	test("applies className and attributes", () => {

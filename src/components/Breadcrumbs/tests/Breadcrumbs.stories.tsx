@@ -102,6 +102,16 @@ export const collapsed = () => (
 				<Breadcrumbs.Item>Item 5</Breadcrumbs.Item>
 			</Breadcrumbs>
 		</Example.Item>
+
+		<Example.Item title="collapsed, 3 items shown by default, not expandable">
+			<Breadcrumbs defaultVisibleItems={3} ariaLabel="breadcrumb with 3 items" disableExpand>
+				<Breadcrumbs.Item onClick={() => {}}>Item 1</Breadcrumbs.Item>
+				<Breadcrumbs.Item onClick={() => {}}>Item 2</Breadcrumbs.Item>
+				<Breadcrumbs.Item onClick={() => {}}>Item 3</Breadcrumbs.Item>
+				<Breadcrumbs.Item onClick={() => {}}>Item 4</Breadcrumbs.Item>
+				<Breadcrumbs.Item>Item 5</Breadcrumbs.Item>
+			</Breadcrumbs>
+		</Example.Item>
 	</Example>
 );
 

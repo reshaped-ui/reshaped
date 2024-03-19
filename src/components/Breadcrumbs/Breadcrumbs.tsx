@@ -11,8 +11,16 @@ import IconDotsHorizontal from "icons/DotsHorizontal";
 import * as T from "./Breadcrumbs.types";
 
 const Breadcrumbs = (props: T.Props) => {
-	const { children, separator, color, defaultVisibleItems, ariaLabel, className, attributes } =
-		props;
+	const {
+		children,
+		separator,
+		color,
+		defaultVisibleItems,
+		disableExpand,
+		ariaLabel,
+		className,
+		attributes,
+	} = props;
 	const visibleItems = defaultVisibleItems && defaultVisibleItems >= 2 ? defaultVisibleItems : null;
 	const [expanded, setExpanded] = React.useState(false);
 	const rootClassNames = classNames(className);
@@ -45,7 +53,9 @@ const Breadcrumbs = (props: T.Props) => {
 					if (isDisplayed) {
 						itemNode = child;
 					} else if (isCollapseButton) {
-						itemNode = (
+						itemNode = disableExpand ? (
+							<Icon svg={IconDotsHorizontal} size={4} />
+						) : (
 							<Button.Aligner>
 								<Button
 									variant="ghost"
