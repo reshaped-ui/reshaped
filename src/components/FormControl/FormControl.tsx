@@ -1,4 +1,4 @@
-import FormControlClient from "./FormControl.client";
+import FormControlClient from "./FormControlClient";
 import FormControlLabel from "./FormControlLabel";
 import FormControlError from "./FormControlError";
 import FormControlHelper from "./FormControlHelper";
