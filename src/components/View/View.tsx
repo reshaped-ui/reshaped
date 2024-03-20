@@ -207,6 +207,14 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 			);
 		}
 
+		if (child.type === React.Fragment) {
+			return child.props.children.map((child: any) => {
+				const index = renderedIndex;
+				renderedItemIndex += 1;
+				return renderItem({ child, index });
+			});
+		}
+
 		return renderItem({ child, index: renderedIndex });
 	});
 

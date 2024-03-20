@@ -154,9 +154,12 @@ export const direction = () => (
 export const gap = () => (
 	<Example>
 		<Example.Item title="gap: 4, direction: row">
-			<View direction="row" gap={4}>
+			<View direction="row" gap={4} divided>
 				<Placeholder>Item 1</Placeholder>
-				<Placeholder>Item 2</Placeholder>
+				<>
+					<Placeholder>Item 2</Placeholder>
+					<Placeholder>Item 3</Placeholder>
+				</>
 			</View>
 		</Example.Item>
 		<Example.Item title="gap: 0, direction: row">
