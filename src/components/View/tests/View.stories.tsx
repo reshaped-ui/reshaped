@@ -156,10 +156,8 @@ export const gap = () => (
 		<Example.Item title="gap: 4, direction: row">
 			<View direction="row" gap={4} divided>
 				<Placeholder>Item 1</Placeholder>
-				<>
-					<Placeholder>Item 2</Placeholder>
-					<Placeholder>Item 3</Placeholder>
-				</>
+				<Placeholder>Item 2</Placeholder>
+				<Placeholder>Item 3</Placeholder>
 			</View>
 		</Example.Item>
 		<Example.Item title="gap: 0, direction: row">
@@ -226,6 +224,15 @@ export const divided = () => (
 				<View.Item columns={2}>
 					<Placeholder>Item 3</Placeholder>
 				</View.Item>
+			</View>
+		</Example.Item>
+		<Example.Item title="with React.Fragment">
+			<View direction="row" gap={4} divided>
+				<Placeholder>Item 1</Placeholder>
+				<>
+					<Placeholder>Item 2</Placeholder>
+					<Placeholder>Item 3</Placeholder>
+				</>
 			</View>
 		</Example.Item>
 	</Example>
