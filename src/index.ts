@@ -148,8 +148,8 @@ export type { TextFieldProps } from "components/TextField";
 export { default as Timeline } from "components/Timeline";
 export type { TimelineProps, TimelineItemProps } from "components/Timeline";
 
-export { useToast } from "components/Toast";
-export type { ToastProps } from "components/Toast";
+export { useToast, ToastProvider } from "components/Toast";
+export type { ToastProps, ToastProviderProps } from "components/Toast";
 
 export { default as Tooltip } from "components/Tooltip";
 export type { TooltipProps } from "components/Tooltip";

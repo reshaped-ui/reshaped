@@ -9,14 +9,18 @@ import * as T from "./Toast.types";
 import s from "./Toast.module.css";
 
 const ToastRegion = (props: T.RegionProps) => {
-	const { position } = props;
+	const { position, nested } = props;
 	const { queues, options } = React.useContext(ToastContext);
 	const [inspecting, setInspecting] = React.useState(false);
 	const ignoreHoverRef = React.useRef(false);
 	const rootRef = React.useRef<HTMLUListElement | null>(null);
 	const queue = queues[position];
 	const { width, expanded } = options?.[position] || {};
-	const regionClassNames = classNames(s.region, s[`region--position-${position}`]);
+	const regionClassNames = classNames(
+		s.region,
+		s[`region--position-${position}`],
+		nested && s["region--nested"]
+	);
 	const filteredLength = queue.filter((item) => item.status === "entered").length;
 	let hiddenCount = 0;
 

@@ -21,6 +21,7 @@ const defaultPositionData = positions.reduce<T.Context["queues"]>(
 
 export const defaultContextData = {
 	queues: defaultPositionData,
+	id: "",
 	show: () => {},
 	hide: () => {},
 	remove: () => {},

@@ -35,6 +35,7 @@ export type ProviderProps = {
 
 export type RegionProps = {
 	position: Position;
+	nested?: boolean;
 };
 
 export type ContainerProps = {
@@ -52,6 +53,7 @@ export type Context = {
 	show: (id: string) => void;
 	hide: (id: string) => void;
 	remove: (id: string) => void;
+	id: string;
 };
 
 export type ShowOptions = { timeout?: Timeout; position?: Position };

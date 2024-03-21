@@ -3,6 +3,7 @@
 import React from "react";
 import ToastContext from "./Toast.context";
 import ToastRegion from "./ToastRegion";
+import useToast from "./useToast";
 import { positions, defaultContextData } from "./Toast.constants";
 import * as T from "./Toast.types";
 
@@ -60,6 +61,8 @@ const toastReducer: T.Reducer = (state, action) => {
 
 const ToastProvider = (props: T.ProviderProps) => {
 	const { children, options } = props;
+	const toast = useToast();
+	const id = React.useId();
 	const [data, dispatch] = React.useReducer(toastReducer, defaultContextData.queues);
 
 	const add = React.useCallback<T.Context["add"]>((toastProps) => {
@@ -84,6 +87,7 @@ const ToastProvider = (props: T.ProviderProps) => {
 	const value = React.useMemo(
 		() => ({
 			queues: data,
+			id,
 			add,
 			show,
 			hide,
@@ -91,14 +95,14 @@ const ToastProvider = (props: T.ProviderProps) => {
 			inspecting: false,
 			options,
 		}),
-		[data, show, hide, add, remove, options]
+		[data, show, hide, add, remove, id, options]
 	);
 
 	return (
 		<ToastContext.Provider value={value}>
 			{children}
 			{positions.map((position) => (
-				<ToastRegion position={position} key={position} />
+				<ToastRegion position={position} key={position} nested={!!toast.id} />
 			))}
 		</ToastContext.Provider>
 	);
