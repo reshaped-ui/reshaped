@@ -117,7 +117,7 @@
 		"jest-environment-jsdom": "29.7.0",
 		"jest-matchmedia-mock": "1.1.0",
 		"lefthook": "1.6.1",
-		"postcss": "8.4.33",
+		"postcss": "8.4.38",
 		"postcss-cli": "11.0.0",
 		"postcss-each": "1.1.0",
 		"postcss-nested": "6.0.1",
