@@ -1,5 +1,5 @@
 import { Example } from "utilities/storybook";
-import { useToast } from "components/Toast";
+import { useToast, ToastProvider } from "components/Toast";
 import Button from "components/Button";
 import View from "components/View";
 import Image from "components/Image";
@@ -376,19 +376,44 @@ const Multiline = () => {
 	const toast = useToast();
 
 	return (
-		<Example>
-			<Example.Item title="Multiline, should support dynamic height">
-				<Button
-					onClick={() => {
-						toast.show({
-							text: "Very long event completed notification message",
-						});
-					}}
-				>
-					Show toast
-				</Button>
-			</Example.Item>
-		</Example>
+		<Button
+			onClick={() => {
+				toast.show({
+					text: "Very long event completed notification message",
+				});
+			}}
+		>
+			Show toast
+		</Button>
 	);
 };
-export const edgeCases = () => <Multiline />;
+
+const Nested = () => {
+	const toast = useToast();
+
+	return (
+		<View height="300px">
+			<Button
+				onClick={() => {
+					toast.show({
+						text: "Notification sent",
+					});
+				}}
+			>
+				Show toast
+			</Button>
+		</View>
+	);
+};
+export const edgeCases = () => (
+	<Example>
+		<Example.Item title="Multiline, should support dynamic height">
+			<Multiline />
+		</Example.Item>
+		<Example.Item title="Nested ToastProvider">
+			<ToastProvider>
+				<Nested />
+			</ToastProvider>
+		</Example.Item>
+	</Example>
+);

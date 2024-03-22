@@ -1,9 +1,8 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, fireEvent, within } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import Reshaped from "components/Reshaped";
 import Button from "components/Button";
-import { useToast } from "components/Toast";
+import { useToast, ToastProvider } from "components/Toast";
 import IconZap from "icons/Zap";
 
 const fixtures = {
@@ -111,6 +110,43 @@ describe("Components/Toast", () => {
 		const elStart = screen.getByText(fixtures.startSlot);
 
 		expect(elStart).toBeInTheDocument();
+	});
+
+	test("supports nested toast providers", async () => {
+		const Component = () => {
+			const toast = useToast();
+
+			return (
+				<Button
+					onClick={() => {
+						toast.show({
+							text: fixtures.text,
+						});
+					}}
+				>
+					Show toast
+				</Button>
+			);
+		};
+
+		render(
+			<Reshaped theme="reshaped">
+				<div data-testid={fixtures.id}>
+					<ToastProvider>
+						<Component />
+					</ToastProvider>
+				</div>
+			</Reshaped>
+		);
+
+		const elButton = screen.getByRole("button");
+
+		await userEvent.click(elButton);
+
+		const elContainer = screen.getByTestId(fixtures.id);
+		const elToast = within(elContainer).queryByText(fixtures.text);
+
+		expect(elToast).toBeInTheDocument();
 	});
 
 	test("works with className and attributes", async () => {
