@@ -8,7 +8,6 @@ import { useFlyoutContext, FlyoutInstanceRef } from "components/_private/Flyout"
 import IconChevronRight from "icons/ChevronRight";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";
-import { getActiveElement } from "utilities/a11y";
 import { classNames } from "utilities/helpers";
 import * as keys from "constants/keys";
 import type * as T from "./DropdownMenu.types";
@@ -46,10 +45,6 @@ const DropdownMenuContent = (props: T.ContentProps) => {
 		{
 			[rtl ? keys.RIGHT : keys.LEFT]: () => {
 				subMenuInstance?.current?.close();
-			},
-			[keys.ENTER]: () => {
-				const el = getActiveElement();
-				el?.click();
 			},
 		},
 		[subMenuInstance?.current]

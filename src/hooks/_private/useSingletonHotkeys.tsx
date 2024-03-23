@@ -134,7 +134,10 @@ export class HotkeyStore {
 						return;
 					}
 
-					data.callback(pressedMap[pressedId]);
+					const resolvedEvent = pressedMap[pressedId];
+
+					resolvedEvent?.preventDefault();
+					data.callback(resolvedEvent);
 					this.hotkeyMap[pressedId].used = true;
 				});
 			}

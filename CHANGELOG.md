@@ -1,6 +1,13 @@
 2.11.0
 
+Features:
+
 - Breadcrumbs: disableExpand
 - Remix Vite FormControl error fixed
-- View: Fixed dividers incorrectly working with React.Fragments
 - Toast: Added support for toast render boundaries
+
+Fixes:
+
+- View: Fixed dividers incorrectly working with React.Fragments
+- useHotkeys: auto preventDefault
+- DropdownMenu: fixed double click handling

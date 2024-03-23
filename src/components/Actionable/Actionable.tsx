@@ -28,7 +28,6 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		fullWidth && s["--full-width"]
 	);
 	const rootAttributes: T.Props["attributes"] = { ...attributes };
-	const repeatRef = React.useRef(false);
 	const hasClickHandler = onClick || (attributes?.onClick as T.Props["onClick"]);
 	const hasFocusHandler = attributes?.onFocus || attributes?.onBlur;
 	const isLink = Boolean(href || attributes?.href);
@@ -55,11 +54,6 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 
 	const handlePress: T.Props["onClick"] = (event) => {
 		if (disabled) return;
-		/**
-		 * - Holding enter keep onClick getting triggered
-		 * - Storybook environment is triggering onClick twice on each enter press
-		 */
-		if (repeatRef.current) return;
 
 		onClick?.(event);
 		attributes?.onClick?.(event as any);
@@ -76,11 +70,6 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 
 		event.preventDefault();
 		handlePress(event);
-
-		repeatRef.current = true;
-		requestAnimationFrame(() => {
-			repeatRef.current = false;
-		});
 	};
 
 	return (
