@@ -4,6 +4,7 @@ import React from "react";
 import { classNames } from "utilities/helpers";
 import Theme from "components/Theme";
 import Text from "components/Text";
+import { getPrecision } from "./Slider.utilities";
 import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
 
@@ -16,6 +17,7 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 		position,
 		max,
 		min,
+		step,
 		onChange,
 		onDragStart,
 		renderValue,
@@ -23,7 +25,8 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 	} = props;
 	const id = React.useId();
 	const thumbClassNames = classNames(s.thumb, active && s["thumb--active"]);
-	const tooltipValue = renderValue ? renderValue({ value }) : value;
+	const precision = getPrecision(step);
+	const tooltipValue = renderValue ? renderValue({ value }) : value.toFixed(precision);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		onChange(+e.target.value);
@@ -40,6 +43,7 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 				disabled={disabled}
 				max={max}
 				min={min}
+				step={step}
 				aria-labelledby={id}
 			/>
 			<div

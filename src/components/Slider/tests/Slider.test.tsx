@@ -117,11 +117,18 @@ describe("Components/Slider", () => {
 		expect(maxInputEl).toHaveAttribute("max", fixtures.max.toString());
 	});
 
-	test("renders with step applied", () => {
+	test("renders with integer step applied", () => {
 		render(<Slider name={fixtures.name} defaultValue={11} step={5} />);
 
 		const inputEl = screen.getByRole("slider");
 		expect(inputEl).toHaveValue("10");
+	});
+
+	test("renders with float step applied", () => {
+		render(<Slider name={fixtures.name} defaultValue={20.24} step={0.1} />);
+
+		const inputEl = screen.getByRole("slider");
+		expect(inputEl).toHaveValue("20.2");
 	});
 
 	test("renders custom tooltip value", () => {

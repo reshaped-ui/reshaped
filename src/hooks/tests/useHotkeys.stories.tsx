@@ -1,4 +1,3 @@
-import React from "react";
 import useHotkeys from "hooks/useHotkeys";
 import View from "components/View";
 
