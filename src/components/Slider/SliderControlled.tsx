@@ -256,7 +256,6 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 						width: `${maxPercentPosition - (minPercentPosition || 0)}%`,
 					}}
 				/>
-				i
 			</div>
 
 			{minValue !== undefined && minPercentPosition !== undefined && (
