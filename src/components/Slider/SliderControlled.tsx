@@ -7,16 +7,13 @@ import useRTL from "hooks/useRTL";
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
 import SliderThumb from "./SliderThumb";
+import { applyStepToValue } from "./Slider.utilities";
 import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
 
 const getDragX = (event: MouseEvent | TouchEvent) => {
 	if (event instanceof MouseEvent) return event.pageX || event.screenX;
 	return event.changedTouches[0].pageX;
-};
-
-const applyStepToValue = (value: number, step: number) => {
-	return Math.round(value / step) * step;
 };
 
 const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
@@ -259,6 +256,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 						width: `${maxPercentPosition - (minPercentPosition || 0)}%`,
 					}}
 				/>
+				i
 			</div>
 
 			{minValue !== undefined && minPercentPosition !== undefined && (
@@ -276,6 +274,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 					ref={minRef}
 					tooltipRef={minTooltipRef}
 					renderValue={renderValue}
+					step={step}
 				/>
 			)}
 
@@ -293,6 +292,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 				ref={maxRef}
 				tooltipRef={maxTooltipRef}
 				renderValue={renderValue}
+				step={step}
 			/>
 		</div>
 	);

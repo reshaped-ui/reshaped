@@ -39,6 +39,7 @@ const DropdownMenu = (props: T.Props) => {
 
 const DropdownMenuContent = (props: T.ContentProps) => {
 	const { children, attributes, className } = props;
+	const { flyout } = useFlyoutContext();
 	const subMenuInstance = React.useContext(DropdownMenuSubContext);
 	const [rtl] = useRTL();
 	const { ref } = useHotkeys<HTMLDivElement>(
@@ -47,7 +48,10 @@ const DropdownMenuContent = (props: T.ContentProps) => {
 				subMenuInstance?.current?.close();
 			},
 		},
-		[subMenuInstance?.current]
+		[subMenuInstance?.current],
+		{
+			disabled: flyout.status === "idle",
+		}
 	);
 	const contentClassName = classNames(s.menu, className);
 

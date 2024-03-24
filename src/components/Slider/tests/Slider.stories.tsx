@@ -29,6 +29,14 @@ export const base = () => (
 	</Example>
 );
 
+export const step = () => (
+	<Example>
+		<Example.Item title="float step">
+			<Slider name="slider" defaultValue={30} step={0.01} />
+		</Example.Item>
+	</Example>
+);
+
 export const boundaries = () => (
 	<Example>
 		<Example.Item title="min: 20, max: 30, value: 25">

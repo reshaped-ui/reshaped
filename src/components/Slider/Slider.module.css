@@ -54,6 +54,7 @@
 	white-space: nowrap;
 	will-change: transform;
 	pointer-events: none;
+	font-variant-numeric: tabular-nums;
 }
 
 .thumb {
@@ -90,7 +91,7 @@
 
 	&:hover .tooltip {
 		opacity: 1;
-		transform: translate(var(--rs-slider-tooltip-translate-x), calc(var(--rs-unit-x1) * -1));
+		transform: translate(var(--rs-slider-tooltip-translate-x), calc(var(--rs-unit-x1) * -1.5));
 	}
 
 	.input:focus + &,
@@ -107,9 +108,13 @@
 			opacity: 1;
 			transform: translate(
 				var(--rs-slider-tooltip-translate-x),
-				calc(var(--rs-unit-x1) * -1)
+				calc(var(--rs-unit-x1) * -1.5)
 			) !important;
 		}
+	}
+
+	.input:focus + &::before {
+		box-shadow: var(--rs-focus-shadow);
 	}
 }
 

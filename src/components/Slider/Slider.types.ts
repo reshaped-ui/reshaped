@@ -74,6 +74,7 @@ export type ThumbProps = {
 	onDragStart: () => void;
 	max: number;
 	min: number;
+	step: NonNullable<BaseProps["step"]>;
 	renderValue?: BaseProps["renderValue"];
 	tooltipRef: React.RefObject<HTMLDivElement>;
 };
