@@ -26,5 +26,6 @@ export type Props = {
 	transparentOverlay?: boolean;
 	onClose?: () => void;
 	className?: G.ClassName;
+	overlayClassName?: G.ClassName;
 	attributes?: G.Attributes<"div", Props>;
 };

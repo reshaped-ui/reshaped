@@ -6,6 +6,7 @@ Features:
 - Remix Vite FormControl error fixed
 - Toast: Added support for toast render boundaries
 - useHotkeys: disable flag
+- Modal: overlayClassName
 
 Fixes:
 

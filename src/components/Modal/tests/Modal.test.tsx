@@ -9,6 +9,7 @@ const fixtures = {
 	title: "Title",
 	subtitle: "Subtitle",
 	className: "test-className",
+	overlayClassName: "test-overlay-className",
 	id: "test-id",
 };
 
@@ -61,21 +62,6 @@ describe("Components/Modal", () => {
 		expect(elModal).toHaveAttribute("aria-modal", "true");
 		expect(elModal).toHaveAttribute("aria-labelledby", titleId);
 		expect(elModal).toHaveAttribute("aria-describedby", subtitleId);
-	});
-
-	test("works with className and attributes", () => {
-		render(
-			<Reshaped>
-				<Modal active className={fixtures.className} attributes={{ id: fixtures.id }}>
-					{fixtures.content}
-				</Modal>
-			</Reshaped>
-		);
-
-		const elModal = screen.getByRole("dialog");
-
-		expect(elModal).toHaveClass(fixtures.className);
-		expect(elModal).toHaveAttribute("id", fixtures.id);
 	});
 
 	test("works as controlled", async () => {
@@ -132,5 +118,27 @@ describe("Components/Modal", () => {
 		await userEvent.click(elButton);
 
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
+	});
+
+	test("works with className and attributes", () => {
+		render(
+			<Reshaped>
+				<Modal
+					active
+					className={fixtures.className}
+					attributes={{ id: fixtures.id }}
+					overlayClassName={fixtures.overlayClassName}
+				>
+					{fixtures.content}
+				</Modal>
+			</Reshaped>
+		);
+
+		const elModal = screen.getByRole("dialog");
+		const elOverlay = screen.getByRole("button");
+
+		expect(elModal).toHaveClass(fixtures.className);
+		expect(elModal).toHaveAttribute("id", fixtures.id);
+		expect(elOverlay).toHaveClass(fixtures.overlayClassName);
 	});
 });

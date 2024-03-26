@@ -65,6 +65,7 @@ const Modal = (props: T.Props) => {
 		padding = 4,
 		position = "center",
 		transparentOverlay,
+		overlayClassName,
 		className,
 		attributes,
 	} = props;
@@ -211,6 +212,7 @@ const Modal = (props: T.Props) => {
 			onClose={onClose}
 			active={active}
 			transparent={transparentOverlay || hideProgress}
+			className={overlayClassName}
 			attributes={{
 				onTouchStart: handleDragStart,
 			}}
