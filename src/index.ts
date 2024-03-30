@@ -94,6 +94,9 @@ export type { OverlayProps } from "components/Overlay";
 export { default as Pagination } from "components/Pagination";
 export type { PaginationProps } from "components/Pagination";
 
+export { default as PinField } from "components/PinField";
+export type { PinFieldProps } from "components/PinField";
+
 export { default as Popover } from "components/Popover";
 export type { PopoverProps } from "components/Popover";
 

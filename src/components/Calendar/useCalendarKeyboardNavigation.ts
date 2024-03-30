@@ -85,7 +85,7 @@ const useCalendarKeyboardNavigation = (props: {
 			[keys.DOWN]: () => focusDate({ delta: verticalDelta, onMonthChange: changeToNextMonth }),
 		},
 		[changeToNextMonth, changeToPreviousMonth, focusDate, verticalDelta],
-		{ ref: rootRef }
+		{ ref: rootRef, preventDefault: true }
 	);
 };
 

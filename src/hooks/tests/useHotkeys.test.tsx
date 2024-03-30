@@ -1,6 +1,5 @@
-import React from "react";
 import { render } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Reshaped from "components/Reshaped";
 import useHotkey from "hooks/useHotkeys";
 
@@ -22,7 +21,7 @@ describe("useHotkey", () => {
 
 		await userEvent.keyboard("a");
 		await userEvent.keyboard("b");
-		expect(fn).toBeCalledTimes(1);
+		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
 	test("triggers callback for a key combination", async () => {
@@ -34,7 +33,7 @@ describe("useHotkey", () => {
 		);
 
 		await userEvent.keyboard("{a>}b");
-		expect(fn).toBeCalledTimes(1);
+		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
 	test("triggers callback for a mod key", async () => {
@@ -46,7 +45,7 @@ describe("useHotkey", () => {
 		);
 
 		await userEvent.keyboard("{meta}");
-		expect(fn).toBeCalledTimes(1);
+		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
 	test("triggers callback for an array of keys", async () => {
@@ -58,10 +57,10 @@ describe("useHotkey", () => {
 		);
 
 		await userEvent.keyboard("a");
-		expect(fn).toBeCalledTimes(1);
+		expect(fn).toHaveBeenCalledTimes(1);
 
 		await userEvent.keyboard("b");
-		expect(fn).toBeCalledTimes(2);
+		expect(fn).toHaveBeenCalledTimes(2);
 	});
 
 	test("triggers callback for a combination with different casing and spaces", async () => {
@@ -73,7 +72,7 @@ describe("useHotkey", () => {
 		);
 
 		await userEvent.keyboard("{a>}b");
-		expect(fn).toBeCalledTimes(1);
+		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
 	test("triggers callback for a combination pressed in different order", async () => {
@@ -85,7 +84,7 @@ describe("useHotkey", () => {
 		);
 
 		await userEvent.keyboard("{a>}b");
-		expect(fn).toBeCalledTimes(1);
+		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
 	test("triggers callback when more keys are pressed than required for a callback", async () => {
@@ -98,7 +97,7 @@ describe("useHotkey", () => {
 
 		await userEvent.keyboard("{a>}{b>}{c>}");
 		// When c is pressed, it doesn't trigger a+b for the second time
-		expect(fn).toBeCalledTimes(1);
+		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
 	test("triggers callback with meta key on hold and another key pressed multiple times", async () => {
@@ -110,6 +109,6 @@ describe("useHotkey", () => {
 		);
 
 		await userEvent.keyboard("{Meta>}aa");
-		expect(fn).toBeCalledTimes(2);
+		expect(fn).toHaveBeenCalledTimes(2);
 	});
 });

@@ -6,11 +6,13 @@ import React from "react";
 type Callback = (e: KeyboardEvent) => void;
 type PressedKeys = Record<string, KeyboardEvent>;
 type Hotkeys = Record<string, Callback | null>;
+type HotkeyOptions = { preventDefault?: boolean };
 type Context = {
 	isPressed: (key: string) => boolean;
 	addHotkeys: (
 		hotkeys: Hotkeys,
-		ref: React.RefObject<HTMLElement | null>
+		ref: React.RefObject<HTMLElement | null>,
+		options?: HotkeyOptions
 	) => (() => void) | undefined;
 };
 
@@ -19,7 +21,7 @@ type Context = {
  */
 const COMBINATION_DELIMETER = "+";
 const pressedMap: Record<string, KeyboardEvent> = {};
-const modifiedKeys: string[] = [];
+let modifiedKeys: string[] = [];
 
 const formatHotkey = (hotkey: string) => {
 	if (hotkey === " ") return hotkey;
@@ -87,12 +89,23 @@ const walkHotkeys = <T extends unknown>(
 export class HotkeyStore {
 	hotkeyMap: Record<
 		string,
-		{ data: Set<{ callback: Callback; ref: React.RefObject<HTMLElement | null> }>; used: boolean }
+		{
+			data: Set<{
+				callback: Callback;
+				ref: React.RefObject<HTMLElement | null>;
+				options: HotkeyOptions;
+			}>;
+			used: boolean;
+		}
 	> = {};
 
 	getSize = () => Object.keys(this.hotkeyMap).length;
 
-	bindHotkeys = (hotkeys: Hotkeys, ref: React.RefObject<HTMLElement | null>) => {
+	bindHotkeys = (
+		hotkeys: Hotkeys,
+		ref: React.RefObject<HTMLElement | null>,
+		options: HotkeyOptions
+	) => {
 		walkHotkeys(hotkeys, (id, hotkeyData) => {
 			if (!hotkeyData) return;
 
@@ -100,7 +113,7 @@ export class HotkeyStore {
 				this.hotkeyMap[id] = { data: new Set(), used: false };
 			}
 
-			this.hotkeyMap[id].data.add({ callback: hotkeyData, ref });
+			this.hotkeyMap[id].data.add({ callback: hotkeyData, ref, options });
 		});
 	};
 
@@ -136,9 +149,17 @@ export class HotkeyStore {
 
 					const resolvedEvent = pressedMap[pressedId];
 
-					resolvedEvent?.preventDefault();
+					if (data.options.preventDefault) {
+						resolvedEvent?.preventDefault();
+					}
+
 					data.callback(resolvedEvent);
-					this.hotkeyMap[pressedId].used = true;
+
+					/**
+					 * While meta is pressed - other keys keyup won't trigger and
+					 * we want to allow calling the same shortcut multiple times while meta was pressed
+					 */
+					if (!resolvedEvent?.metaKey) this.hotkeyMap[pressedId].used = true;
 				});
 			}
 		});
@@ -186,7 +207,7 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 
 			// Key up won't trigger for other keys while Meta is pressed so we need to cache them
 			// and remove on Meta keyup
-			if (eventKey === "meta") {
+			if (eventKey === "meta" || e.metaKey) {
 				modifiedKeys.push(...Object.keys(pressedMap));
 			}
 
@@ -211,8 +232,11 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 
 			if (eventKey === "meta") {
 				modifiedKeys.forEach((key) => {
+					if (!pressedMap[key]) return;
+					globalHotkeyStore.handleKeyUp(pressedMap[key]);
 					delete pressedMap[key];
 				});
+				modifiedKeys = [];
 			}
 
 			setTriggerCount(Object.keys(pressedMap).length);
@@ -227,9 +251,9 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 		return true;
 	};
 
-	const addHotkeys: Context["addHotkeys"] = React.useCallback((hotkeys, ref) => {
+	const addHotkeys: Context["addHotkeys"] = React.useCallback((hotkeys, ref, options = {}) => {
 		setHooksCount((prev) => prev + 1);
-		globalHotkeyStore.bindHotkeys(hotkeys, ref);
+		globalHotkeyStore.bindHotkeys(hotkeys, ref, options);
 
 		return () => {
 			setHooksCount((prev) => prev - 1);
