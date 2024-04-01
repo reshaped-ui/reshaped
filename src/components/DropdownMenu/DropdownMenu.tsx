@@ -121,7 +121,7 @@ const DropdownMenuSubTriggerItem = (props: Omit<MenuItemProps, "endSlot" | "roun
 			},
 		},
 		[],
-		{ ref: attributes?.ref }
+		{ ref: attributes?.ref, preventDefault: true }
 	);
 
 	return (

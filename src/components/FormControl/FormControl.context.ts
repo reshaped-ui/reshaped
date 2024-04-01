@@ -3,16 +3,7 @@
 import React from "react";
 import type * as T from "./FormControl.types";
 
-const FormControlContext = React.createContext<T.Context>({
-	attributes: {
-		id: "",
-		"aria-describedby": "",
-	},
-	required: undefined,
-	hasError: false,
-	errorRef: () => {},
-	helperRef: () => {},
-});
+const FormControlContext = React.createContext({ attributes: {} } as T.Context);
 
 export const Provider = FormControlContext.Provider;
 export const useFormControlPrivate = () => React.useContext(FormControlContext);

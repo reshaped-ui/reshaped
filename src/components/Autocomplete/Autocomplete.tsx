@@ -27,7 +27,7 @@ const Autocomplete = (props: T.Props) => {
 			[`${keys.UP},${keys.DOWN}`]: () => handleOpen(),
 		},
 		[handleOpen],
-		{ ref: inputRef }
+		{ ref: inputRef, preventDefault: true }
 	);
 
 	const handleChange: TextFieldProps["onChange"] = (args) => {
