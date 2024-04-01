@@ -74,3 +74,18 @@ export const focusRing = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const edgeCases = () => (
+	<Example>
+		<Example.Item title="insetFocus">
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					alert("Submitted");
+				}}
+			>
+				<Actionable type="submit">Submit</Actionable>
+			</form>
+		</Example.Item>
+	</Example>
+);

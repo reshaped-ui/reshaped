@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from "react";
 import { classNames } from "utilities/helpers";
+import * as keys from "constants/keys";
 import type * as T from "./Actionable.types";
 import s from "./Actionable.module.css";
 
@@ -35,8 +36,9 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	let TagName: any;
 
 	if (isLink) {
-		rootAttributes.href = disabled ? undefined : href || attributes?.href;
 		TagName = "a";
+		rootAttributes.href = disabled ? undefined : href || attributes?.href;
+		rootAttributes.role = hasClickHandler ? "button" : attributes?.role;
 	} else if (isButton && (!as || as === "button")) {
 		TagName = "button";
 		rootAttributes.type = type || attributes?.type || "button";
@@ -60,13 +62,11 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	};
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-		const simulatingButton = rootAttributes.role === "button";
+		const isSpace = event.key === keys.SPACE;
+		const isEnter = event.key === keys.ENTER;
 
-		// These cases are handled correctly by the browsers
-		if (simulatingButton || isLink) return;
-		const isSpace = event.key === " ";
-		const isEnter = event.key === "Enter";
 		if (!isSpace && !isEnter) return;
+		if (!hasClickHandler) return;
 
 		event.preventDefault();
 		handlePress(event);
