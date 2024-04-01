@@ -18,3 +18,4 @@ Fixes:
 - DropdownMenu: fixed double click handling
 - Slider: Float values
 - Slider: Tabular numbers
+- Actionable: Form submission with type="submit"
