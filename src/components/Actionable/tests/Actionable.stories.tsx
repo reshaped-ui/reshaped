@@ -84,7 +84,9 @@ export const edgeCases = () => (
 					alert("Submitted");
 				}}
 			>
-				<Actionable type="submit">Submit</Actionable>
+				<Actionable type="submit" onClick={() => console.log("Clicked")}>
+					Submit
+				</Actionable>
 			</form>
 		</Example.Item>
 	</Example>

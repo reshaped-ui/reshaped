@@ -33,13 +33,14 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	const hasFocusHandler = attributes?.onFocus || attributes?.onBlur;
 	const isLink = Boolean(href || attributes?.href);
 	const isButton = Boolean(hasClickHandler || hasFocusHandler || type);
+	const renderedAsButton = !isLink && isButton && (!as || as === "button");
 	let TagName: any;
 
 	if (isLink) {
 		TagName = "a";
 		rootAttributes.href = disabled ? undefined : href || attributes?.href;
 		rootAttributes.role = hasClickHandler ? "button" : attributes?.role;
-	} else if (isButton && (!as || as === "button")) {
+	} else if (renderedAsButton) {
 		TagName = "button";
 		rootAttributes.type = type || attributes?.type || "button";
 		rootAttributes.disabled = disabled || attributes?.disabled;
@@ -66,10 +67,11 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		const isEnter = event.key === keys.ENTER;
 
 		if (!isSpace && !isEnter) return;
-		if (!hasClickHandler) return;
 
-		event.preventDefault();
-		handlePress(event);
+		if (!renderedAsButton && hasClickHandler) {
+			event.preventDefault();
+			handlePress(event);
+		}
 	};
 
 	return (
