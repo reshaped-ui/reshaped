@@ -55,7 +55,6 @@
 	}
 }
 
-.buttonContent,
 .icon {
 	color: inherit;
 	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
