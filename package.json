@@ -2,7 +2,7 @@
 	"name": "reshaped",
 	"description": "Professionally crafted design system in React & Figma for building products of any scale and complexity",
 	"version": "2.10.12",
-	"license": "SEE LICENSE IN LICENSE.md",
+	"license": "MIT",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
 	"keywords": [
