@@ -66,7 +66,7 @@ const CalendarMonth = (props: T.MonthProps) => {
 
 								if (!foundFocusableDate && date) {
 									if (!!startValue && startValue.getMonth() === date?.getMonth()) {
-										focusable = +startValue === +date;
+										focusable = getLocalISODate({ date: startValue }) === getLocalISODate({ date });
 									} else if (isoDate && month === today.getMonth()) {
 										focusable = isoDate >= isoToday && !disabled;
 									} else {

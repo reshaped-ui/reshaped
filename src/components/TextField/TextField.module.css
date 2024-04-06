@@ -10,9 +10,8 @@
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
 	padding: calc(var(--rs-p-v) - 1px) 0;
-	overflow: hidden;
 
-	&:focus-within {
+	&:focus-within:not(:has(button:focus, a:focus)) {
 		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
 		border-color: var(--rs-color-border-primary);
 	}

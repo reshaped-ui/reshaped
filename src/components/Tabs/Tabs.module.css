@@ -97,7 +97,8 @@
 
 .--selector-animated {
 	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
-	transition-property: transform, height;
+	transition-property: transform, height, width;
+	will-change: transform, height, width;
 }
 
 .next,

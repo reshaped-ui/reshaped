@@ -2,6 +2,7 @@
 	--rs-view-gaps-count-multiplier: 1;
 	--rs-view-z: auto;
 	--rs-view-gap-value: calc(var(--rs-view-gap) * var(--rs-unit-x1));
+	--rs-view-border-width: 0px;
 
 	z-index: var(--rs-view-z);
 	gap: var(--rs-view-gap-value);
@@ -16,8 +17,14 @@
 }
 
 .--padding {
-	padding: calc(var(--rs-unit-x1) * var(--rs-view-p-vertical, var(--rs-view-p-top)))
-		calc(var(--rs-unit-x1) * var(--rs-view-p-horizontal, var(--rs-view-p-start)));
+	padding: calc(
+			var(--rs-unit-x1) * var(--rs-view-p-vertical, var(--rs-view-p-top)) -
+				var(--rs-view-border-width)
+		)
+		calc(
+			var(--rs-unit-x1) * var(--rs-view-p-horizontal, var(--rs-view-p-start)) -
+				var(--rs-view-border-width)
+		);
 }
 
 .--padding-top {
@@ -86,7 +93,9 @@
 }
 
 .--bd {
-	border: 1px solid var(--rs-view-border-color);
+	--rs-view-border-width: 1px;
+
+	border: var(--rs-view-border-width) solid var(--rs-view-border-color);
 }
 
 @each $color in neutral-faded, neutral, positive, positive-faded, warning, warning-faded, critical,

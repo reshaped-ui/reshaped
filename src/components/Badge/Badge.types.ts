@@ -19,7 +19,7 @@ type WithChildren = BaseProps & {
 };
 
 type WithEmpty = BaseProps & {
-	color: "critical" | "positive" | "primary";
+	color: "critical" | "warning" | "positive" | "primary";
 	children?: never;
 	variant?: never;
 };

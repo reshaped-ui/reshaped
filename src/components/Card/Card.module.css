@@ -1,5 +1,7 @@
 .root {
-	border: 1px solid var(--rs-color-border-neutral-faded);
+	--rs-border-width: 1px;
+
+	border: var(--rs-border-width) solid var(--rs-color-border-neutral-faded);
 	background: var(--rs-color-background-elevation-base);
 	color: var(--rs-color-foreground-neutral);
 	display: block;

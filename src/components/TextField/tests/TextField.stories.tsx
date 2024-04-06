@@ -138,7 +138,7 @@ export const slots = () => (
 				name="Name"
 				placeholder="Enter your name"
 				value="Reshaped"
-				endSlot={<Placeholder h={28} />}
+				endSlot={<Button icon={IconZap} size="small" onClick={() => {}} />}
 			/>
 		</Example.Item>
 	</Example>

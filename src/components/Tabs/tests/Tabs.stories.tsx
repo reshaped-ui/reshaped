@@ -18,8 +18,8 @@ export const variant = () => (
 		<Example.Item title="variant: default">
 			<Tabs>
 				<Tabs.List>
-					<Tabs.Item value="0">Item 1</Tabs.Item>
 					<Tabs.Item value="1">Long item 2</Tabs.Item>
+					<Tabs.Item value="0">Item 1</Tabs.Item>
 					<Tabs.Item value="2">Very long item 3</Tabs.Item>
 				</Tabs.List>
 			</Tabs>
