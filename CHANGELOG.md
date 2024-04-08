@@ -28,3 +28,7 @@ Fixes:
 - Tabs: Improved tabs animation
 - Tabs: Updated font weight to medium to align with buttons
 - Pagination: Added tabular nums
+
+Updates:
+
+- Commitlint 16, Storybook 8, Chromatic 11
