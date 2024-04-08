@@ -6,6 +6,7 @@ import IconChevronLeft from "icons/ChevronLeft";
 import IconChevronRight from "icons/ChevronRight";
 import { range } from "utilities/helpers";
 import type * as T from "./Pagination.types";
+import s from "./Pagination.module.css";
 
 const PaginationControlled = (props: T.ControlledProps) => {
 	const {
@@ -78,6 +79,7 @@ const PaginationControlled = (props: T.ControlledProps) => {
 							"aria-label": pageAriaLabel?.({ page }),
 							"aria-current": page === selectedPage,
 						}}
+						className={s.page}
 					>
 						{page}
 					</Button>
@@ -87,6 +89,7 @@ const PaginationControlled = (props: T.ControlledProps) => {
 			<Button
 				variant="ghost"
 				size="small"
+				className={s.page}
 				icon={IconChevronRight}
 				onClick={() => changePage(selectedPage + 1)}
 				disabled={selectedPage === total}

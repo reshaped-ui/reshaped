@@ -187,6 +187,22 @@ export const edgeCases = () => (
 				</Table>
 			</Card>
 		</Example.Item>
+		<Example.Item title="width: auto, nowrap">
+			<Table>
+				<Table.Row>
+					<Table.Heading width="50%">Column 1</Table.Heading>
+					<Table.Heading>Column 2</Table.Heading>
+					<Table.Heading>Column 3</Table.Heading>
+					<Table.Heading width="auto">Long heading title</Table.Heading>
+				</Table.Row>
+				<Table.Row>
+					<Table.Cell>Cell 1</Table.Cell>
+					<Table.Cell>Cell 2</Table.Cell>
+					<Table.Cell>Cell 3</Table.Cell>
+					<Table.Cell>Cell 4</Table.Cell>
+				</Table.Row>
+			</Table>
+		</Example.Item>
 	</Example>
 );
 

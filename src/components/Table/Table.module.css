@@ -51,6 +51,10 @@
 	}
 }
 
+.cell--width-auto {
+	white-space: nowrap;
+}
+
 .--row-highlighted {
 	background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
 }

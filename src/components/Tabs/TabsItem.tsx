@@ -102,7 +102,11 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 				)}
 				<span className={s.buttonContent}>
 					{icon && <Icon svg={icon} className={s.icon} size={4} />}
-					{children && <Text variant={size === "large" ? "body-2" : "body-3"}>{children}</Text>}
+					{children && (
+						<Text variant={size === "large" ? "body-2" : "body-3"} weight="medium">
+							{children}
+						</Text>
+					)}
 				</span>
 			</Actionable>
 		</div>

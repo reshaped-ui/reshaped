@@ -9,6 +9,8 @@ Features:
 - Modal: overlayClassName
 - PinField: new component
 - useHotkeys: preventDefault flag
+- Table: Added width: auto nowrap
+- Table: Added minWidth support
 
 Fixes:
 
@@ -24,3 +26,5 @@ Fixes:
 - Actionable: Form submission with type="submit"
 - Calendar: Fixed dates tabIndex edge cases
 - Tabs: Improved tabs animation
+- Tabs: Updated font weight to medium to align with buttons
+- Pagination: Added tabular nums

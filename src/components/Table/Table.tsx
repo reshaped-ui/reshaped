@@ -26,6 +26,7 @@ const TableCellPrivate = (props: T.PrivateCellProps) => {
 		s.cell,
 		widthStyles?.classNames,
 		minWidthStyles?.classNames,
+		(width === 0 || width === "0px") && s["cell--width-auto"],
 		align && s[`cell--align-${align}`],
 		verticalAlign && s[`cell--valign-${verticalAlign}`]
 	);

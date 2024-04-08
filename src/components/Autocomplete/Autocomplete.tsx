@@ -6,6 +6,7 @@ import type { TextFieldProps } from "components/TextField";
 import DropdownMenu from "components/DropdownMenu";
 import type { MenuItemProps } from "components/MenuItem";
 import useHotkeys from "hooks/useHotkeys";
+import { getActiveElement } from "utilities/a11y";
 import * as keys from "constants/keys";
 import * as T from "./Autocomplete.types";
 
@@ -25,6 +26,10 @@ const Autocomplete = (props: T.Props) => {
 	useHotkeys(
 		{
 			[`${keys.UP},${keys.DOWN}`]: () => handleOpen(),
+			[keys.ENTER]: () => {
+				const el = getActiveElement();
+				el?.click();
+			},
 		},
 		[handleOpen],
 		{ ref: inputRef, preventDefault: true }
@@ -94,7 +99,7 @@ const AutocompleteItem = (props: T.ItemProps) => {
 	const { value, onClick, ...menuItemProps } = props;
 	const { onItemClick } = React.useContext(AutocompleteContext);
 
-	const hanleClick: MenuItemProps["onClick"] = (e) => {
+	const handleClick: MenuItemProps["onClick"] = (e) => {
 		onClick?.(e);
 		onItemClick({ value });
 	};
@@ -103,7 +108,7 @@ const AutocompleteItem = (props: T.ItemProps) => {
 		<DropdownMenu.Item
 			{...menuItemProps}
 			attributes={{ ...menuItemProps.attributes, role: "option" }}
-			onClick={hanleClick}
+			onClick={handleClick}
 		/>
 	);
 };
