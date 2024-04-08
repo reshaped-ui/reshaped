@@ -2,7 +2,7 @@
 
 import React from "react";
 import { debounce } from "utilities/helpers";
-import { trapFocus } from "utilities/a11y";
+import TrapFocus from "utilities/a11y/TrapFocus";
 import * as timeouts from "constants/timeouts";
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
@@ -38,7 +38,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const flyoutElRef = React.useRef<HTMLDivElement | null>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
-	const releaseFocusRef = React.useRef<ReturnType<typeof trapFocus> | null>(null);
+	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
 	const lockedBlurEffects = React.useRef(false);
 	const shouldReturnFocusRef = React.useRef(true);
@@ -174,11 +174,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	useIsomorphicLayoutEffect(() => {
 		if (status !== "visible" || !flyoutElRef.current) return;
 
-		releaseFocusRef.current = trapFocus(flyoutElRef.current!, {
+		trapFocusRef.current = new TrapFocus(flyoutElRef.current);
+		trapFocusRef.current.trap({
 			mode: trapFocusMode,
 			includeTrigger: triggerType === "hover" && trapFocusMode === "content-menu",
 			onNavigateOutside: () => {
-				releaseFocusRef.current = null;
 				handleClose();
 			},
 		});
@@ -188,7 +188,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		if (!disableHideAnimation && status !== "hidden") return;
 		if (disableHideAnimation && status !== "idle") return;
 
-		if (releaseFocusRef.current) {
+		if (trapFocusRef.current?.trapped) {
 			/* Locking the popover to not open it again on trigger focus */
 			if (triggerType === "hover") {
 				lockedRef.current = true;
@@ -196,10 +196,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 					lockedRef.current = false;
 				}, 100);
 			}
-			releaseFocusRef.current({
-				withoutFocusReturn: !shouldReturnFocusRef.current,
-			});
-			releaseFocusRef.current = null;
+
+			trapFocusRef.current.release({ withoutFocusReturn: !shouldReturnFocusRef.current });
 			shouldReturnFocusRef.current = true;
 		}
 	}, [status, triggerType, disableHideAnimation]);
@@ -208,10 +206,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Release focus trapping on unmount
 	 */
 	React.useEffect(() => {
-		return () => {
-			if (releaseFocusRef.current) releaseFocusRef.current();
-			releaseFocusRef.current = null;
-		};
+		return () => trapFocusRef.current?.release();
 	}, []);
 
 	/**

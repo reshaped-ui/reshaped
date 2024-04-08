@@ -1,0 +1,119 @@
+import type { FocusableElement } from "./types";
+
+const pseudoFocusAttribute = "data-rs-focus";
+
+export const focusableSelector =
+	'a,button,input:not([type="hidden"]),textarea,select,details,[tabindex]:not([tabindex="-1"])';
+
+export const getActiveElement = () => {
+	const pseudoFocusedEl = document.querySelector(`[${pseudoFocusAttribute}]`);
+	return (pseudoFocusedEl || document.activeElement) as HTMLButtonElement;
+};
+
+export const focusElement = (el: FocusableElement, options?: { pseudoFocus?: boolean }) => {
+	document.querySelector(`[${pseudoFocusAttribute}]`)?.removeAttribute(pseudoFocusAttribute);
+
+	if (options?.pseudoFocus) {
+		el.setAttribute(pseudoFocusAttribute, "true");
+	} else {
+		el.focus();
+	}
+};
+
+export const getFocusableElements = (
+	rootEl: HTMLElement,
+	options?: { additionalElement?: FocusableElement | null }
+) => {
+	const focusableElements = Array.from(
+		rootEl.querySelectorAll(focusableSelector)
+	) as FocusableElement[];
+	const filteredElements = focusableElements.filter((el) => {
+		if (el.hasAttribute("disabled")) return false;
+		if (el.clientHeight === 0) return false;
+
+		if (el.type === "radio") {
+			let sameNameRadioEls: HTMLInputElement[];
+
+			if (el.form) {
+				const formInputs = el.form.elements.namedItem(el.name);
+
+				// Synthetic error handling for narrowing down types
+				// Radio element can't find itself in the form, so we don't need to include it in the array
+				if (!formInputs) return false;
+
+				const multipleElementsFound = "length" in formInputs;
+
+				if (!multipleElementsFound) {
+					// Single element found is always an input radio since we're inside the condition
+					sameNameRadioEls = [formInputs as HTMLInputElement];
+				} else {
+					sameNameRadioEls = Array.from(formInputs).filter(
+						(el) => "type" in el && el.type === "radio"
+					) as HTMLInputElement[];
+				}
+			} else {
+				sameNameRadioEls = Array.from(
+					rootEl.querySelectorAll<HTMLInputElement>(`[type="radio"][name="${el.name}"]`)
+				);
+			}
+
+			if (sameNameRadioEls?.length) {
+				const checkedEl = Array.from(sameNameRadioEls).find((el) => el.checked);
+
+				if (checkedEl && el !== checkedEl) return false;
+				if (!checkedEl && el !== sameNameRadioEls[0]) return false;
+			}
+		}
+
+		return true;
+	});
+
+	if (options?.additionalElement && filteredElements.length) {
+		filteredElements.unshift(options.additionalElement);
+	}
+
+	return filteredElements;
+};
+
+export const getFocusData = (args: {
+	root: HTMLElement;
+	target: "next" | "prev" | "first" | "last";
+	options?: {
+		circular?: boolean;
+		additionalElement?: FocusableElement | null;
+	};
+}) => {
+	const { root, target, options } = args;
+	const focusable = getFocusableElements(root, { additionalElement: options?.additionalElement });
+	const focusableLimit = focusable.length - 1;
+	const currentElement = getActiveElement();
+	const currentIndex = focusable.indexOf(currentElement);
+	const positions = {
+		next: currentIndex + 1,
+		prev: currentIndex - 1,
+		first: 0,
+		last: focusableLimit,
+	};
+	let nextIndex = positions[target];
+
+	const isOverflow = nextIndex > focusableLimit || nextIndex < 0;
+	if (isOverflow) {
+		if (options?.circular) {
+			nextIndex = target === "prev" ? positions.last : positions.first;
+		} else {
+			nextIndex = target === "prev" ? positions.first : positions.last;
+		}
+	}
+
+	return { overflow: isOverflow, el: focusable[nextIndex] };
+};
+
+const focusTargetElement = (root: HTMLElement, target: "next" | "prev" | "first" | "last") => {
+	const data = getFocusData({ root, target });
+	focusElement(data.el);
+};
+
+export const focusNextElement = (root: HTMLElement) => focusTargetElement(root, "next");
+export const focusPreviousElement = (root: HTMLElement) => focusTargetElement(root, "prev");
+export const focusFirstElement = (root: HTMLElement) => focusTargetElement(root, "first");
+export const focusLastElement = (root: HTMLElement) => focusTargetElement(root, "last");

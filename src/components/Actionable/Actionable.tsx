@@ -39,7 +39,6 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	if (isLink) {
 		TagName = "a";
 		rootAttributes.href = disabled ? undefined : href || attributes?.href;
-		rootAttributes.role = hasClickHandler ? "button" : attributes?.role;
 	} else if (renderedAsButton) {
 		TagName = "button";
 		rootAttributes.type = type || attributes?.type || "button";

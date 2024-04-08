@@ -2,7 +2,7 @@
 
 import React from "react";
 import { classNames } from "utilities/helpers";
-import { focusableSelector } from "utilities/a11y";
+import { focusableSelector } from "utilities/a11y/focus";
 import ToastContainer from "./ToastContainer";
 import ToastContext from "./Toast.context";
 import * as T from "./Toast.types";

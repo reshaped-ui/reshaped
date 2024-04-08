@@ -6,7 +6,7 @@ import type { TextFieldProps } from "components/TextField";
 import DropdownMenu from "components/DropdownMenu";
 import type { MenuItemProps } from "components/MenuItem";
 import useHotkeys from "hooks/useHotkeys";
-import { getActiveElement } from "utilities/a11y";
+import { getActiveElement } from "utilities/a11y/focus";
 import * as keys from "constants/keys";
 import * as T from "./Autocomplete.types";
 

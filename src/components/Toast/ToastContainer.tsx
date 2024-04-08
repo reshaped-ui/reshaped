@@ -3,7 +3,8 @@
 import React from "react";
 import { classNames } from "utilities/helpers";
 import { onNextFrame } from "utilities/animation";
-import { trapFocus, isKeyboardMode } from "utilities/a11y";
+import { checkKeyboardMode } from "utilities/a11y/keyboardMode";
+import TrapFocus from "utilities/a11y/TrapFocus";
 import Toast from "./Toast";
 import ToastContext from "./Toast.context";
 import { timeouts } from "./Toast.constants";
@@ -17,7 +18,6 @@ const ToastContainer = (props: T.ContainerProps) => {
 	const [toastHeight, setToastHeight] = React.useState<number>();
 	const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
 	const resizingRef = React.useRef(false);
-	const trapFocusRef = React.useRef<ReturnType<typeof trapFocus> | null>(null);
 	const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 	const visible = status === "entered";
 	const containerClassNames = classNames(
@@ -73,14 +73,15 @@ const ToastContainer = (props: T.ContainerProps) => {
 	React.useEffect(() => {
 		if (!wrapperRef.current) return;
 
+		const trapFocus = new TrapFocus(wrapperRef.current);
+
 		if (visible) {
-			trapFocusRef.current = trapFocus(wrapperRef.current, {
+			trapFocus.trap({
 				includeTrigger: true,
 				mode: "content-menu",
 			});
-		} else if (trapFocusRef.current && isKeyboardMode()) {
-			trapFocusRef.current();
-			trapFocusRef.current = null;
+		} else if (checkKeyboardMode()) {
+			trapFocus.release();
 		}
 	}, [visible]);
 
