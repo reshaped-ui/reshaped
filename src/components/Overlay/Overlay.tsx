@@ -3,7 +3,7 @@
 import React from "react";
 import { onNextFrame } from "utilities/animation";
 import { classNames } from "utilities/helpers";
-import { trapFocus } from "utilities/a11y";
+import TrapFocus from "utilities/a11y/TrapFocus";
 import useToggle from "hooks/useToggle";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";
@@ -21,7 +21,6 @@ const Overlay = (props: T.Props) => {
 	const [animated, setAnimated] = React.useState(false);
 	const contentRef = React.useRef<HTMLDivElement | null>(null);
 	const isMouseDownValidRef = React.useRef(false);
-	const releaseFocusRef = React.useRef<ReturnType<typeof trapFocus> | null>(null);
 	const { lockScroll, unlockScroll } = useScrollLock();
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
@@ -40,17 +39,6 @@ const Overlay = (props: T.Props) => {
 
 		if (!firstChild) return;
 		return firstChild.contains(el);
-	};
-
-	const trapFocusInside = () => {
-		if (!contentRef.current) return;
-		releaseFocusRef.current = trapFocus(contentRef.current!);
-	};
-
-	const cancelTrapFocus = () => {
-		if (!releaseFocusRef.current) return;
-		releaseFocusRef.current();
-		releaseFocusRef.current = null;
 	};
 
 	const close = React.useCallback(() => {
@@ -99,9 +87,12 @@ const Overlay = (props: T.Props) => {
 	}, [rendered, show, lockScroll, clickThrough]);
 
 	React.useEffect(() => {
-		if (!rendered) return;
-		trapFocusInside();
-		return () => cancelTrapFocus();
+		if (!rendered || !contentRef.current) return;
+
+		const trapFocus = new TrapFocus(contentRef.current);
+
+		trapFocus.trap();
+		return () => trapFocus.release();
 	}, [rendered]);
 
 	// Unlock scroll on unmount

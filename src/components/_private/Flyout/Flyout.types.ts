@@ -1,6 +1,6 @@
 import React from "react";
 import type * as G from "types/global";
-import type { TrapMode } from "utilities/a11y";
+import type { TrapMode } from "utilities/a11y/types";
 import useFlyout, { FlyoutPosition, FlyoutWidth } from "hooks/_private/useFlyout";
 
 export type InstanceRef =
