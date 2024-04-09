@@ -8,6 +8,6 @@ module.exports = {
 		responsivePlugin(),
 		eachPlugin(),
 		nestedPlugin(),
-		cssNano({ preset: ["default", { calc: false }] }),
+		cssNano({ preset: ["default", { calc: false, convertValues: false }] }),
 	],
 };
