@@ -24,7 +24,7 @@ export const getConfig = (options: { themeMediaCSSPath: string }) => {
 				files: [themeMediaCSSPath],
 			},
 			"postcss-custom-media": {},
-			cssnano: { preset: ["default", { calc: false }] },
+			cssnano: { preset: ["default", { calc: false, convertValues: false }] },
 		},
 	};
 };

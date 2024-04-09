@@ -1,3 +1,15 @@
+@property --rs-tabs-stop-l {
+	syntax: "<percentage>";
+	initial-value: 0%;
+	inherits: false;
+}
+
+@property --rs-tabs-stop-r {
+	syntax: "<percentage>";
+	initial-value: 100%;
+	inherits: false;
+}
+
 .root {
 	position: relative;
 	box-sizing: initial;
@@ -11,6 +23,18 @@
 
 .list {
 	position: relative;
+}
+
+.inner {
+	mask-image: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0%) 0%,
+		rgba(0, 0, 0, 100%) var(--rs-tabs-stop-l),
+		rgba(0, 0, 0, 100%) var(--rs-tabs-stop-r),
+		rgba(0, 0, 0, 0%) 100%
+	);
+	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
+	transition-property: --rs-tabs-stop-l, --rs-tabs-stop-r;
 }
 
 .inner::after {
@@ -357,38 +381,14 @@
 	margin: 0;
 }
 
-[dir="rtl"] .--cut-off-start .inner,
-.--cut-off-end .inner {
-	mask-image: linear-gradient(
-		to right,
-		rgba(var(--rs-color-rgb-black), 100%) 0,
-		rgba(var(--rs-color-rgb-black), 100%) 80%,
-		rgba(var(--rs-color-rgb-black), 10%) 95%,
-		rgba(var(--rs-color-rgb-black), 0%) 100%
-	);
+[dir="rtl"] .--fade-start .inner,
+.--fade-end .inner {
+	--rs-tabs-stop-r: 80%;
 }
 
-[dir="rtl"] .--cut-off-end .inner,
-.--cut-off-start .inner {
-	mask-image: linear-gradient(
-		to left,
-		rgba(var(--rs-color-rgb-black), 100%) 0,
-		rgba(var(--rs-color-rgb-black), 100%) 80%,
-		rgba(var(--rs-color-rgb-black), 10%) 95%,
-		rgba(var(--rs-color-rgb-black), 0%) 100%
-	);
-}
-
-.--cut-off-both .inner {
-	mask-image: linear-gradient(
-		to right,
-		rgba(var(--rs-color-rgb-black), 0%) 0,
-		rgba(var(--rs-color-rgb-black), 10%) 5%,
-		rgba(var(--rs-color-rgb-black), 100%) 20%,
-		rgba(var(--rs-color-rgb-black), 100%) 80%,
-		rgba(var(--rs-color-rgb-black), 10%) 95%,
-		rgba(var(--rs-color-rgb-black), 0%) 100%
-	);
+[dir="rtl"] .--fade-end .inner,
+.--fade-start .inner {
+	--rs-tabs-stop-l: 20%;
 }
 
 @media (--rs-viewport-s) {

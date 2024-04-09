@@ -11,6 +11,7 @@ Features:
 - useHotkeys: preventDefault flag
 - Table: Added width: auto nowrap
 - Table: Added minWidth support
+- Tabs: Animated fade
 
 Fixes:
 

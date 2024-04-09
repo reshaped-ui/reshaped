@@ -42,14 +42,15 @@ const TabsList = (props: T.ListProps) => {
 		elScrollableRef,
 	} = useTabs();
 	const [rtl] = useRTL();
-	const [cutOffSide, setCutOffSide] = React.useState<"start" | "end" | "both" | null>(null);
+	const [fadeSide, setFadeSide] = React.useState<"start" | "end" | "both" | null>(null);
 	const rootClassNames = classNames(
 		s.root,
 		size && s[`--size-${size}`],
 		direction && s[`--direction-${direction}`],
 		itemWidth && s[`--item-width-${itemWidth}`],
 		variant && s[`--variant-${variant}`],
-		cutOffSide && s[`--cut-off-${cutOffSide}`],
+		(fadeSide === "start" || fadeSide === "both") && s["--fade-start"],
+		(fadeSide === "end" || fadeSide === "both") && s["--fade-end"],
 		className
 	);
 	const selectorClassNames = classNames(
@@ -152,18 +153,18 @@ const TabsList = (props: T.ListProps) => {
 
 		const updateArrowNav = () => {
 			const isScrollable = elScrollable.clientWidth < elScrollable.scrollWidth;
-			if (!isScrollable) setCutOffSide(null);
+			if (!isScrollable) setFadeSide(null);
 
 			// scrollLeft in RTL starts from 1 instead of 0, so we compare values using this delta
 			const scrollLeft = elScrollable.scrollLeft * (rtl ? -1 : 1);
 			const cutOffStart = scrollLeft > 1;
 			const cutOffEnd = scrollLeft + elScrollable.clientWidth < elScrollable.scrollWidth - 1;
 
-			if (cutOffEnd && cutOffStart) return setCutOffSide("both");
-			if (cutOffStart) return setCutOffSide("start");
-			if (cutOffEnd) return setCutOffSide("end");
+			if (cutOffEnd && cutOffStart) return setFadeSide("both");
+			if (cutOffStart) return setFadeSide("start");
+			if (cutOffEnd) return setFadeSide("end");
 		};
-		const debouncedUpdateArrowNav = throttle(updateArrowNav, 100);
+		const debouncedUpdateArrowNav = throttle(updateArrowNav, 16);
 
 		// Use RaF when scroll to have scrollWidth calculated correctly on the first effect
 		// For example: And edge case inside the complex flexbox layout
@@ -206,7 +207,7 @@ const TabsList = (props: T.ListProps) => {
 				</div>
 			</div>
 
-			{(cutOffSide === "start" || cutOffSide === "both") && (
+			{(fadeSide === "start" || fadeSide === "both") && (
 				<span className={s.prev}>
 					<Button
 						onClick={handlePrevClick}
@@ -218,7 +219,7 @@ const TabsList = (props: T.ListProps) => {
 				</span>
 			)}
 
-			{(cutOffSide === "end" || cutOffSide === "both") && (
+			{(fadeSide === "end" || fadeSide === "both") && (
 				<span className={s.next}>
 					<Button
 						onClick={handleNextClick}
