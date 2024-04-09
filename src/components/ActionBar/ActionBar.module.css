@@ -28,6 +28,7 @@
 	left: 0;
 	right: 0;
 	box-shadow: var(--rs-shadow-raised);
+	pointer-events: none;
 
 	.--position-bottom& {
 		transform: rotateX(180deg);
