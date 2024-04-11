@@ -20,7 +20,7 @@
 .cell-button {
 	padding: var(--rs-unit-x2);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: border-radius, background-color, box-shadow;
+	transition-property: border-radius, background-color, box-shadow, color;
 	text-align: center;
 
 	&[disabled],

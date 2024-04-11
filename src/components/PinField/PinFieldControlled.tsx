@@ -227,7 +227,7 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 				{...inputAttributes}
 				{...formControl.attributes}
 				type="text"
-				// className={s.input}
+				className={s.input}
 				onFocus={handleFocus}
 				onBlur={handleBlur}
 				onPaste={handlePaste}
