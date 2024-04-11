@@ -1,6 +1,8 @@
 @property --rs-tabs-stop-l {
 	syntax: "<percentage>";
-	initial-value: 0%;
+
+	/* Prevent cssnano from converting it to 0 without % sign */
+	initial-value: 0.01%;
 	inherits: false;
 }
 
@@ -383,12 +385,12 @@
 
 [dir="rtl"] .--fade-start .inner,
 .--fade-end .inner {
-	--rs-tabs-stop-r: 80%;
+	--rs-tabs-stop-r: 85%;
 }
 
 [dir="rtl"] .--fade-end .inner,
 .--fade-start .inner {
-	--rs-tabs-stop-l: 20%;
+	--rs-tabs-stop-l: 15%;
 }
 
 @media (--rs-viewport-s) {

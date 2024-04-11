@@ -17,7 +17,7 @@ export default {
 export const size = () => (
 	<Example>
 		<Example.Item title="size: small">
-			<MenuItem size="small" icon={IconZap} onClick={() => {}}>
+			<MenuItem size="small" icon={IconZap} href="#">
 				Menu item
 			</MenuItem>
 		</Example.Item>
