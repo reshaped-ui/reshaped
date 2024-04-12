@@ -102,12 +102,18 @@ const Modal = (props: T.Props) => {
 	};
 
 	const handleDragStart = (e: React.TouchEvent) => {
-		const el = e.target as HTMLElement;
+		let currentEl = e.target as HTMLElement | null;
+		const rootEl = rootRef.current;
 
-		// Prioritize scrolling over modal swiping
-		if (el.scrollTop !== 0 || el.scrollLeft !== 0) return;
-		// Start dragging only when starting on static elements
-		if (el.matches("input,textarea")) return;
+		while (currentEl && (currentEl === rootEl || rootEl?.contains(currentEl))) {
+			// Prioritize scrolling over modal swiping
+			if (currentEl.scrollTop !== 0 || currentEl.scrollLeft !== 0) return;
+			// Start dragging only when starting on static elements
+			if (currentEl.matches("input,textarea")) return;
+
+			currentEl = currentEl ? currentEl.parentElement : null;
+		}
+
 		// Prevent the drag handling when browser tab swiping is triggering
 		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
 

@@ -29,6 +29,7 @@ Fixes:
 - Tabs: Improved tabs animation
 - Tabs: Updated font weight to medium to align with buttons
 - Pagination: Added tabular nums
+- Modal: fixed swipe to close in scrollable areas
 
 Updates:
 

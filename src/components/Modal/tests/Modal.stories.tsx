@@ -124,7 +124,8 @@ export const overlay = () => (
 );
 
 export const edgeCases = () => {
-	const { active, activate, deactivate } = useToggle();
+	const menuModalToggle = useToggle();
+	const scrollModalToggle = useToggle();
 
 	return (
 		<Example>
@@ -135,6 +136,21 @@ export const edgeCases = () => {
 						<Switch name="switch" />
 					</View>
 				</Demo>
+			</Example.Item>
+			<Example.Item title="scrollable area in modal ignores swipe-to-close">
+				<View gap={3} direction="row">
+					<Button onClick={scrollModalToggle.activate}>Open</Button>
+					<Modal
+						active={scrollModalToggle.active}
+						onClose={scrollModalToggle.deactivate}
+						size="300px"
+						position="bottom"
+					>
+						<View height="1000px" backgroundColor="neutral-faded" borderRadius="medium" padding={4}>
+							Content
+						</View>
+					</Modal>
+				</View>
 			</Example.Item>
 			<Example.Item
 				title={[
@@ -148,11 +164,11 @@ export const edgeCases = () => {
 						{(attributes) => <Button attributes={attributes}>Open menu</Button>}
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content>
-						<DropdownMenu.Item onClick={activate}>Open dialog</DropdownMenu.Item>
+						<DropdownMenu.Item onClick={menuModalToggle.activate}>Open dialog</DropdownMenu.Item>
 						<DropdownMenu.Item>Item 2</DropdownMenu.Item>
 					</DropdownMenu.Content>
 				</DropdownMenu>
-				<Modal active={active} onClose={deactivate}>
+				<Modal active={menuModalToggle.active} onClose={menuModalToggle.deactivate}>
 					<View gap={3}>
 						<DropdownMenu>
 							<DropdownMenu.Trigger>
@@ -163,7 +179,7 @@ export const edgeCases = () => {
 								<DropdownMenu.Item>Item 2</DropdownMenu.Item>
 							</DropdownMenu.Content>
 						</DropdownMenu>
-						<Button onClick={deactivate}>Close</Button>
+						<Button onClick={menuModalToggle.deactivate}>Close</Button>
 					</View>
 				</Modal>
 			</Example.Item>
