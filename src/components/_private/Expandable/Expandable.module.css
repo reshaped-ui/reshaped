@@ -12,6 +12,10 @@
 	grid-template-rows: 1fr;
 }
 
+.--hidden {
+	display: none;
+}
+
 .inner {
 	overflow: hidden;
 }

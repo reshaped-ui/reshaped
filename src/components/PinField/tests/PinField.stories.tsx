@@ -18,8 +18,8 @@ export const base = () => (
 			<PinField name="pin" />
 		</Example.Item>
 
-		<Example.Item title="defaultValue: 12">
-			<PinField name="pin2" defaultValue="12" />
+		<Example.Item title="defaultValue: 1234">
+			<PinField name="pin2" defaultValue="1234" />
 		</Example.Item>
 
 		<Example.Item title="value: 12">

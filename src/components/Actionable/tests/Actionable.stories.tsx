@@ -77,7 +77,7 @@ export const focusRing = () => (
 
 export const edgeCases = () => (
 	<Example>
-		<Example.Item title="insetFocus">
+		<Example.Item title="form submit">
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();

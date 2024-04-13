@@ -66,11 +66,10 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		const isEnter = event.key === keys.ENTER;
 
 		if (!isSpace && !isEnter) return;
+		if (rootAttributes.role !== "button") return;
 
-		if (!renderedAsButton && hasClickHandler) {
-			event.preventDefault();
-			handlePress(event);
-		}
+		event.preventDefault();
+		handlePress(event);
 	};
 
 	return (

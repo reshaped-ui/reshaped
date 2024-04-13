@@ -65,27 +65,30 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 	/**
 	 * Update displayed item focus based on the current caret position and current mode
 	 */
-	const syncSelection = React.useCallback((index?: number) => {
-		const el = inputRef.current;
-		if (!el || el.selectionStart === null) return;
+	const syncSelection = React.useCallback(
+		(index?: number) => {
+			const el = inputRef.current;
+			if (!el || el.selectionStart === null) return;
 
-		const mode = modeRef.current;
-		const selectionStart = index ?? el.selectionStart ?? 0;
-		const nextSelectionStart = Math.min(
-			mode === "type" ? el.value.length : el.value.length - 1,
-			Math.max(0, selectionStart)
-		);
+			const mode = modeRef.current;
+			const selectionStart = index ?? el.selectionStart ?? 0;
+			const nextSelectionStart = Math.min(
+				mode === "type" ? el.value.length : el.value.length - 1,
+				Math.max(0, selectionStart)
+			);
 
-		if (modeRef.current === "type") {
-			el.selectionStart = nextSelectionStart;
-			el.selectionEnd = nextSelectionStart;
-		} else {
-			el.selectionStart = nextSelectionStart;
-			el.selectionEnd = nextSelectionStart + 1;
-		}
+			if (modeRef.current === "type") {
+				el.selectionStart = nextSelectionStart;
+				el.selectionEnd = nextSelectionStart;
+			} else {
+				el.selectionStart = nextSelectionStart;
+				el.selectionEnd = nextSelectionStart + 1;
+			}
 
-		setFocusedIndex(el.selectionStart);
-	}, []);
+			setFocusedIndex(Math.min(el.selectionStart, valueLength - 1));
+		},
+		[valueLength]
+	);
 
 	/**
 	 * Using onNextFrame here to wait for the native behavior first

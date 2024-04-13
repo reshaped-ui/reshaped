@@ -9,17 +9,24 @@ import { onNextFrame } from "utilities/animation";
 const Expandable = (props: T.ContentProps) => {
 	const { children, active, attributes } = props;
 	const [animated, setAnimated] = React.useState(false);
-	const rootClassNames = classNames(s.root, active && s["--active"]);
+	const rootClassNames = classNames(
+		s.root,
+		active && animated && s["--active"],
+		!active && !animated && s["--hidden"]
+	);
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
 		if (e.propertyName !== "height") return;
+		if (active) return;
+
 		onNextFrame(() => {
 			setAnimated(false);
 		});
 	};
 
 	React.useEffect(() => {
-		setAnimated(active || false);
+		if (!active) return;
+		setAnimated(active);
 	}, [active]);
 
 	return (
@@ -28,7 +35,7 @@ const Expandable = (props: T.ContentProps) => {
 			className={rootClassNames}
 			onTransitionEnd={handleTransitionEnd}
 			role="region"
-			hidden={!active && !animated}
+			hidden={!active}
 		>
 			<div className={s.inner}>{children}</div>
 		</div>
