@@ -163,6 +163,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		(e: TransitionEvent) => {
 			if (!passedActive) return;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
+			console.log("fofoo");
 			transitionStartedRef.current = true;
 		},
 		[passedActive]
@@ -170,9 +171,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
-			transitionStartedRef.current = false;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			if (status === "hidden") remove();
+			if (status === "hidden") {
+				transitionStartedRef.current = false;
+				remove();
+			}
 		},
 		[remove, status]
 	);
