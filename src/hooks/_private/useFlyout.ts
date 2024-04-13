@@ -353,9 +353,14 @@ const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState =>
 				styles: { ...defaultStyles, ...action.payload.styles },
 			};
 		case "show":
-			return { ...state, status: "visible" };
+			return state.status === "positioned"
+				? { ...state, status: "visible" }
+				: { ...state, status: "idle" };
 		case "hide":
-			return { ...state, status: state.status === "idle" ? "idle" : "hidden" };
+			return {
+				...state,
+				status: state.status === "idle" || state.status === "hidden" ? "idle" : "hidden",
+			};
 		case "remove":
 			return { ...state, status: "idle", styles: resetStyles };
 

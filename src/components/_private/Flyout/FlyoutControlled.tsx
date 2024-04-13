@@ -40,6 +40,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
+	const transitionStartedRef = React.useRef(false);
 	const lockedBlurEffects = React.useRef(false);
 	const shouldReturnFocusRef = React.useRef(true);
 	const flyout = useFlyout(triggerElRef, flyoutElRef, {
@@ -146,16 +147,30 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			return;
 		}
 
-		if (checkTransitions() && !disableHideAnimation) {
+		/**
+		 * Check that transitions are enabled and it has been triggered on tooltip open
+		 * (keyboard focus navigation could move too fast and ignore the transitions completely)
+		 */
+		if (checkTransitions() && !disableHideAnimation && transitionStartedRef.current) {
 			hide();
-			// In case transitions are disabled globally - remove from the DOM immediately
 		} else {
+			// In case transitions are disabled globally - remove from the DOM immediately
 			remove();
 		}
 	}, [passedActive, render, hide, disableHideAnimation]);
 
+	const handleTransitionStart = React.useCallback(
+		(e: TransitionEvent) => {
+			if (!passedActive) return;
+			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
+			transitionStartedRef.current = true;
+		},
+		[passedActive]
+	);
+
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
+			transitionStartedRef.current = false;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
 			if (status === "hidden") remove();
 		},
@@ -257,6 +272,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				handleBlur,
 				handleMouseEnter,
 				handleMouseLeave,
+				handleTransitionStart,
 				handleTransitionEnd,
 				handleClick: handleTriggerClick,
 				handleContentMouseDown,

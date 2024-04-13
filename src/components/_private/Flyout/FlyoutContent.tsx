@@ -17,6 +17,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 		flyoutElRef,
 		triggerElRef,
 		handleTransitionEnd,
+		handleTransitionStart,
 		triggerType,
 		handleMouseEnter,
 		handleMouseLeave,
@@ -34,6 +35,17 @@ const FlyoutContent = (props: T.ContentProps) => {
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
 	}, []);
+
+	/**
+	 * transitionStart doesn't exist as a jsx event handler and needs to be handled with vanilla js
+	 */
+	React.useEffect(() => {
+		const el = flyoutElRef.current;
+		if (!el) return;
+
+		el.addEventListener("transitionstart", handleTransitionStart);
+		return () => el.removeEventListener("transitionstart", handleTransitionStart);
+	}, [handleTransitionStart, flyoutElRef, status]);
 
 	if (status === "idle" || !mounted) return null;
 

@@ -74,6 +74,7 @@ export type ContextProps = {
 	handleMouseEnter: () => void;
 	handleMouseLeave: () => void;
 	handleTransitionEnd: (e: React.TransitionEvent) => void;
+	handleTransitionStart: (e: TransitionEvent) => void;
 	handleClick: () => void;
 	handleBlur: (e: React.FocusEvent) => void;
 	handleFocus: () => void;
