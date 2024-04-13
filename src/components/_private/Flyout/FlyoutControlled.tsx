@@ -163,7 +163,6 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		(e: TransitionEvent) => {
 			if (!passedActive) return;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			console.log("fofoo");
 			transitionStartedRef.current = true;
 		},
 		[passedActive]
