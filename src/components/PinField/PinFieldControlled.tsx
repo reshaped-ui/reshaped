@@ -22,7 +22,7 @@ const sizeMap: Record<T.Size, number> = {
 	xlarge: 14,
 };
 
-const patternMap: Record<NonNullable<T.Props["charPattern"]>, string> = {
+const patternMap: Record<NonNullable<T.Props["pattern"]>, string> = {
 	numeric: regExpNumericChar,
 	alphabetic: regExpAlphabeticChar,
 	alphanumeric: regExpAlphaNumericChar,
@@ -34,14 +34,14 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 		value,
 		onChange,
 		name,
-		charPattern = "numeric",
+		pattern = "numeric",
 		size = "medium",
 		variant = "outline",
 		className,
 		attributes,
 		inputAttributes,
 	} = props;
-	const pattern = patternMap[charPattern];
+	const patternRegexp = patternMap[pattern];
 	const responsiveInputSize = responsivePropDependency(size, (value) => sizeMap[value]);
 	const responsiveTextVariant = responsivePropDependency(size, (value) =>
 		value === "medium" ? "body-3" : "body-2"
@@ -162,7 +162,7 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 		const el = event.target;
 		const nextValue = el.value;
 
-		const matcher = new RegExp(`^${pattern}+$`);
+		const matcher = new RegExp(`^${patternRegexp}+$`);
 		if (nextValue && !nextValue.match(matcher)) return;
 		if (el.selectionStart === null) return;
 
@@ -237,8 +237,8 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 				maxLength={valueLength}
 				ref={inputRef}
 				autoComplete={inputAttributes?.autoComplete || "one-time-code"}
-				inputMode={charPattern === "numeric" ? "numeric" : undefined}
-				pattern={`${pattern}{${valueLength}}`}
+				inputMode={pattern === "numeric" ? "numeric" : undefined}
+				pattern={`${patternRegexp}{${valueLength}}`}
 			/>
 		</View>
 	);

@@ -90,7 +90,7 @@ describe("Components/PinField", () => {
 			<Reshaped>
 				<PinField
 					name={fixtures.name}
-					charPattern="alphabetic"
+					pattern="alphabetic"
 					defaultValue="ab"
 					onChange={handleChange}
 				/>

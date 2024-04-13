@@ -5,7 +5,7 @@ export type Size = "medium" | "large" | "xlarge";
 type BaseProps = {
 	name: string;
 	valueLength?: number;
-	charPattern?: "alphabetic" | "numeric" | "alphanumeric";
+	pattern?: "alphabetic" | "numeric" | "alphanumeric";
 	size?: G.Responsive<Size>;
 	variant?: "outline" | "faded";
 	onChange?: G.ChangeHandler<string>;

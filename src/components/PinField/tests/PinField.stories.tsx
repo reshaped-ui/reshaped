@@ -31,11 +31,11 @@ export const base = () => (
 		</Example.Item>
 
 		<Example.Item title="defaultValue: ab, charPattern: alphabetic">
-			<PinField name="pin5" defaultValue="ab" charPattern="alphabetic" />
+			<PinField name="pin5" defaultValue="ab" pattern="alphabetic" />
 		</Example.Item>
 
 		<Example.Item title="defaultValue: ab, charPattern: alphanumeric">
-			<PinField name="pin6" defaultValue="ab" charPattern="alphanumeric" />
+			<PinField name="pin6" defaultValue="ab" pattern="alphanumeric" />
 		</Example.Item>
 	</Example>
 );
