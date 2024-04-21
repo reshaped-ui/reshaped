@@ -11,6 +11,8 @@ import { applyStepToValue } from "./Slider.utilities";
 import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
 
+const THUMB_SIZE = 16;
+
 const getDragX = (event: MouseEvent | TouchEvent) => {
 	if (event instanceof MouseEvent) return event.pageX || event.screenX;
 	return event.changedTouches[0].pageX;
@@ -52,9 +54,12 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			if (!barRef.current) return;
 
 			const barWidth = barRef.current.clientWidth;
-			const positionX = x - barRef.current!.getBoundingClientRect().left;
+			// Move by half thumb size since it's a reserved space
+			const barX = barRef.current!.getBoundingClientRect().left + THUMB_SIZE / 2;
+			const positionX = x - barX;
+			const thumbsAreaWidth = barWidth - THUMB_SIZE;
 
-			let percentage = positionX / barWidth;
+			let percentage = positionX / thumbsAreaWidth;
 			if (rtl) percentage = 1 - percentage;
 
 			let value = (max - min) * percentage + min;
@@ -180,9 +185,19 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			handleMaxChange(maxValue, { commit: true });
 		}
 
+		if (draggingId) positionTooltip(draggingId);
 		enableUserSelect();
 		setDraggingId(null);
-	}, [minValue, maxValue, handleMinChange, handleMaxChange, draggingId, minId, maxId]);
+	}, [
+		minValue,
+		maxValue,
+		handleMinChange,
+		handleMaxChange,
+		draggingId,
+		minId,
+		maxId,
+		positionTooltip,
+	]);
 
 	const handleDrag = React.useCallback(
 		(e: MouseEvent | TouchEvent) => {
@@ -258,41 +273,43 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 				/>
 			</div>
 
-			{minValue !== undefined && minPercentPosition !== undefined && (
+			<div className={s.thumbs}>
+				{minValue !== undefined && minPercentPosition !== undefined && (
+					<SliderThumb
+						id={minId}
+						active={minId === draggingId}
+						name={name}
+						disabled={disabled}
+						onChange={handleMinChange}
+						value={minValue}
+						onDragStart={handleMinDragStart}
+						position={minPercentPosition}
+						max={max}
+						min={min}
+						ref={minRef}
+						tooltipRef={minTooltipRef}
+						renderValue={renderValue}
+						step={step}
+					/>
+				)}
+
 				<SliderThumb
-					id={minId}
-					active={minId === draggingId}
+					id={maxId}
+					active={maxId === draggingId}
 					name={name}
 					disabled={disabled}
-					onChange={handleMinChange}
-					value={minValue}
-					onDragStart={handleMinDragStart}
-					position={minPercentPosition}
+					onChange={handleMaxChange}
+					value={maxValue}
+					onDragStart={handleMaxDragStart}
+					position={maxPercentPosition}
 					max={max}
 					min={min}
-					ref={minRef}
-					tooltipRef={minTooltipRef}
+					ref={maxRef}
+					tooltipRef={maxTooltipRef}
 					renderValue={renderValue}
 					step={step}
 				/>
-			)}
-
-			<SliderThumb
-				id={maxId}
-				active={maxId === draggingId}
-				name={name}
-				disabled={disabled}
-				onChange={handleMaxChange}
-				value={maxValue}
-				onDragStart={handleMaxDragStart}
-				position={maxPercentPosition}
-				max={max}
-				min={min}
-				ref={maxRef}
-				tooltipRef={maxTooltipRef}
-				renderValue={renderValue}
-				step={step}
-			/>
+			</div>
 		</div>
 	);
 };

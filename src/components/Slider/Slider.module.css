@@ -57,6 +57,12 @@
 	font-variant-numeric: tabular-nums;
 }
 
+.thumbs {
+	position: absolute;
+	inset-inline: var(--rs-unit-x2);
+	height: 100%;
+}
+
 .thumb {
 	width: 0;
 	height: 100%;
