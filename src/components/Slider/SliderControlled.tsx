@@ -40,6 +40,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const minTooltipRef = React.useRef<HTMLDivElement | null>(null);
 	const maxTooltipRef = React.useRef<HTMLDivElement | null>(null);
 	const [draggingId, setDraggingId] = React.useState<string | null>(null);
+	const [mounted, setMounted] = React.useState(false);
 	const [rtl] = useRTL();
 	const formControl = useFormControl();
 	const id = useElementId();
@@ -47,7 +48,12 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const minId = `${inputId}-min`;
 	const maxId = `${inputId}-max`;
 	const disabled = formControl?.disabled || props.disabled;
-	const rootClassNames = classNames(s.root, disabled && s["--disabled"], className);
+	const rootClassNames = classNames(
+		s.root,
+		disabled && s["--disabled"],
+		!mounted && s["--overflow"],
+		className
+	);
 
 	const getPositionValue = React.useCallback(
 		(x: number) => {
@@ -185,19 +191,9 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			handleMaxChange(maxValue, { commit: true });
 		}
 
-		if (draggingId) positionTooltip(draggingId);
 		enableUserSelect();
 		setDraggingId(null);
-	}, [
-		minValue,
-		maxValue,
-		handleMinChange,
-		handleMaxChange,
-		draggingId,
-		minId,
-		maxId,
-		positionTooltip,
-	]);
+	}, [minValue, maxValue, handleMinChange, handleMaxChange, draggingId, minId, maxId]);
 
 	const handleDrag = React.useCallback(
 		(e: MouseEvent | TouchEvent) => {
@@ -206,7 +202,6 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			const x = getDragX(e);
 			const nextValue = getPositionValue(x);
 
-			positionTooltip(draggingId);
 			if (nextValue === undefined) return;
 
 			// Switch to another id if thumbs overlap
@@ -228,7 +223,6 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			handleMinChange,
 			maxId,
 			minId,
-			positionTooltip,
 		]
 	);
 
@@ -236,6 +230,10 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		positionTooltip(minId);
 		positionTooltip(maxId);
 	}, [positionTooltip, minId, maxId]);
+
+	React.useEffect(() => {
+		if (draggingId) positionTooltip(draggingId);
+	}, [draggingId, minValue, maxValue, positionTooltip]);
 
 	React.useEffect(() => {
 		window.addEventListener("mouseup", handleDragStop);
@@ -250,6 +248,10 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			window.removeEventListener("touchmove", handleDrag);
 		};
 	}, [handleDragStop, handleDrag]);
+
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const minPercentPosition = minValue && getPercentPosition(minValue);
 	const maxPercentPosition = getPercentPosition(maxValue);

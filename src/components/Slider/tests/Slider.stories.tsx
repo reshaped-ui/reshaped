@@ -1,8 +1,6 @@
 import { Example } from "utilities/storybook";
 import Slider from "components/Slider";
 import FormControl from "components/FormControl";
-import View from "components/View";
-import Text from "components/Text";
 
 export default {
 	title: "Components/Slider",
@@ -16,10 +14,6 @@ export default {
 
 export const base = () => (
 	<Example>
-		<View height="50vh" justify="center" borderColor="brand" padding={4} gap={4}>
-			<Slider name="slide" min={0} max={100} defaultMaxValue={100} defaultMinValue={50} range />
-			<View backgroundColor="neutral-faded" height="100px" />
-		</View>
 		<Example.Item title="single">
 			<Slider name="slider" defaultValue={30} />
 		</Example.Item>

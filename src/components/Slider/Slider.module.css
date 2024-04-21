@@ -144,3 +144,7 @@
 		opacity: 0;
 	}
 }
+
+.--overflow {
+	overflow: hidden;
+}
