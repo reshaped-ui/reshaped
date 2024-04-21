@@ -14,9 +14,7 @@ export default {
 
 export const base = () => (
 	<Example>
-		<Example.Item title="single">
-			<Slider name="slider" defaultValue={30} />
-		</Example.Item>
+		<Slider name="slider" defaultValue={100} renderValue={() => "$12345"} />
 		<Example.Item title="range">
 			<Slider
 				range

@@ -1,11 +1,22 @@
 .root {
+	/* Reserve additional space to keep thumb focus visible when clip is applied */
+	--rs-slider-overflow-gap: var(--rs-unit-x1);
+	--rs-slider-thumb-size: var(--rs-unit-x4);
+
 	position: relative;
-	height: var(--rs-unit-x4);
+	height: var(--rs-slider-thumb-size);
 	display: flex;
 	align-items: center;
 	cursor: pointer;
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
+	overflow-x: clip;
+	margin-inline: calc(var(--rs-slider-overflow-gap) * -1);
+	padding-inline: var(--rs-slider-overflow-gap);
+
+	&:has(.thumb:hover, .thumb--active, .input:focus) {
+		overflow: visible;
+	}
 }
 
 .bar {
@@ -59,7 +70,7 @@
 
 .thumbs {
 	position: absolute;
-	inset-inline: var(--rs-unit-x2);
+	inset-inline: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
 	height: 100%;
 }
 
@@ -73,8 +84,8 @@
 		position: absolute;
 		left: 0;
 		top: 50%;
-		width: var(--rs-unit-x4);
-		height: var(--rs-unit-x4);
+		width: var(--rs-slider-thumb-size);
+		height: var(--rs-slider-thumb-size);
 		border-radius: 999px;
 		background: var(--rs-color-background-primary);
 		box-shadow: 0 0 0 2px var(--rs-color-background-elevation-base);
@@ -143,8 +154,4 @@
 	& .thumb:hover .tooltip {
 		opacity: 0;
 	}
-}
-
-.--overflow {
-	overflow: hidden;
 }

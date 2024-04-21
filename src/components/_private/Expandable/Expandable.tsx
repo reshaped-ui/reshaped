@@ -8,11 +8,11 @@ import { onNextFrame } from "utilities/animation";
 
 const Expandable = (props: T.ContentProps) => {
 	const { children, active, attributes } = props;
-	const [animated, setAnimated] = React.useState(false);
+	const [rendered, setRendered] = React.useState(active);
 	const rootClassNames = classNames(
 		s.root,
-		active && animated && s["--active"],
-		!active && !animated && s["--hidden"]
+		active && rendered && s["--active"],
+		!active && !rendered && s["--hidden"]
 	);
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
@@ -20,13 +20,13 @@ const Expandable = (props: T.ContentProps) => {
 		if (active) return;
 
 		onNextFrame(() => {
-			setAnimated(false);
+			setRendered(false);
 		});
 	};
 
 	React.useEffect(() => {
 		if (!active) return;
-		setAnimated(active);
+		setRendered(active);
 	}, [active]);
 
 	return (
