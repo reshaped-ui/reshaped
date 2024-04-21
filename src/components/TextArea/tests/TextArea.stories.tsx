@@ -134,3 +134,17 @@ export const aligner = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const edgeCases = () => (
+	<Example>
+		<Example.Item title="long value without breaks">
+			<TextArea
+				name="hey"
+				defaultValue={`<div style="position:relative;width:100%;padding-top:calc(150% + 72px)">
+	<iframe src="nskjdfdsdkjfsjkdfhbsjlhdfbsjlhfbs;jhbsdljfhsbljhfsbljhfbsjlfdhbsljhfbsdljhfbsljhfbslufbhsdlfds" />
+</div>`}
+				resize="auto"
+			/>
+		</Example.Item>
+	</Example>
+);

@@ -19,6 +19,7 @@
 	box-sizing: border-box;
 	flex-grow: 1;
 	width: 100%;
+	word-break: break-word;
 }
 
 .input {

@@ -47,7 +47,7 @@ const Demo = (props: any) => {
 export const position = () => (
 	<Example>
 		<Example.Item title="position: center">
-			<Demo position="center" />
+			<Demo position="center" active />
 		</Example.Item>
 		<Example.Item title="position: bottom">
 			<Demo position="bottom" />
