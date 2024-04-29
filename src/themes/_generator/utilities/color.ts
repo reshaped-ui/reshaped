@@ -347,7 +347,7 @@ export const getDarkModeColor = (hsl: HslColor) => {
 	 * That way satured colors won't change much from its original value
 	 */
 	const sModifier = (s / 100) * (0.96 + (100 - s) / 100);
-	return { ...hsl, s: s - 7, l: l * sModifier };
+	return { ...hsl, s: Math.max(0, s - 7), l: l * sModifier };
 };
 
 export const getLuminanceDelta = (luminance: number) => {

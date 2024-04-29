@@ -94,6 +94,7 @@
 		"@testing-library/jest-dom": "6.4.2",
 		"@testing-library/react": "14.3.0",
 		"@testing-library/user-event": "14.5.2",
+		"@types/culori": "^2.1.0",
 		"@types/events": "3.0.3",
 		"@types/jest": "29.5.12",
 		"@types/node": "20.12.5",
@@ -145,6 +146,7 @@
 		"chalk": "4.1.2",
 		"commander": "11.1.0",
 		"cssnano": "6.1.2",
+		"culori": "4.0.1",
 		"postcss-custom-media": "10.0.4"
 	},
 	"resolutions": {

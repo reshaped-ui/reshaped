@@ -1,7 +1,7 @@
 import type * as T from "themes/_generator/types";
 import type { FullThemeDefinition } from "themes/_generator/tokens/types";
 import transform from "./_generator/transform";
-import generateColors from "./_generator/utilities/generateColors";
+import generateColors from "./_generator/utilities/generateColors-test";
 
 export { default as baseThemeDefinition } from "./_generator/definitions/reshaped";
 

@@ -175,7 +175,8 @@ const generate = (
 		critical = "#e22c2c",
 		warning = "#facc15",
 		positive = "#118850",
-		neutral = "#dfe2ea",
+		// neutral = "#dfe2ea",
+		neutral = "#e5e5e5",
 		brand,
 	} = args;
 	const primaryColors = generateColorValues({
