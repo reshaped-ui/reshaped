@@ -1,6 +1,7 @@
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Popover from "components/Popover";
+import Tooltip from "components/Tooltip";
 import Button from "components/Button";
 
 export default {
@@ -115,6 +116,37 @@ export const triggerType = () => (
 	<Example>
 		<Example.Item title="triggerType: hover">
 			<Demo triggerType="hover" />
+		</Example.Item>
+	</Example>
+);
+
+export const edgeCases = () => (
+	<Example>
+		<Example.Item title="Popover with tooltip">
+			<Tooltip position="top" text="Hello">
+				{(tooltipAttributes) => (
+					<Popover position="bottom">
+						<Popover.Trigger>
+							{(attributes) => (
+								<Button
+									attributes={{
+										...attributes,
+										...tooltipAttributes,
+									}}
+								>
+									Open
+								</Button>
+							)}
+						</Popover.Trigger>
+						<Popover.Content>
+							<View gap={2} align="start">
+								Popover content
+								<Button onClick={() => {}}>Button</Button>
+							</View>
+						</Popover.Content>
+					</Popover>
+				)}
+			</Tooltip>
 		</Example.Item>
 	</Example>
 );

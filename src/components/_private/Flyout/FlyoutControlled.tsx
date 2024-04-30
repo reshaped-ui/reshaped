@@ -33,8 +33,10 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		id: passedId,
 		instanceRef,
 	} = props;
+	const parentFlyoutContext = useFlyoutContext();
 	const [isRTL] = useRTL();
-	const triggerElRef = React.useRef<HTMLButtonElement | null>(null);
+	const internalTriggerElRef = React.useRef<HTMLButtonElement | null>(null);
+	const triggerElRef = parentFlyoutContext?.triggerElRef || internalTriggerElRef;
 	const flyoutElRef = React.useRef<HTMLDivElement | null>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
@@ -49,7 +51,6 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		defaultActive: passedActive,
 		forcePosition,
 	});
-	const parentFlyoutContext = useFlyoutContext();
 	const { status, updatePosition, render, hide, remove } = flyout;
 	// Don't create dismissible queue for hover flyout because they close all together on mouseout
 	const isDismissible = useIsDismissible(
