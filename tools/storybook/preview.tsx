@@ -105,7 +105,7 @@ const reshapedDecorator = (Story: React.ComponentType) => (
 	<React.StrictMode>
 		<Reshaped
 			defaultTheme="reshaped"
-			defaultColorMode="dark"
+			defaultColorMode="light"
 			toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
 		>
 			<View padding={4} paddingBottom={10}>

@@ -1,6 +1,6 @@
-const path = require("path");
+import path from "path";
 
-module.exports = {
+export default {
 	rootDir: "../../",
 	testEnvironment: "jsdom",
 	transform: { "\\.ts$": ["ts-jest"] },

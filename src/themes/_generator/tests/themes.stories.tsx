@@ -65,19 +65,30 @@ const componentExamples = (
 			</View>
 		</View> */}
 
+		<Text variant="featured-2">Hello world</Text>
+		<Text color="neutral-faded" variant="featured-2">
+			Hello world faded
+		</Text>
+		<Text color="disabled" variant="featured-2">
+			Hello world disabled
+		</Text>
+
 		<View gap={2} direction="row">
 			<Button color="primary" onClick={() => {}}>
 				Primary button
 			</Button>
 			<Button color="critical" onClick={() => {}}>
-				Primary button
+				Critical button
 			</Button>
 			<Button color="positive" onClick={() => {}}>
-				Primary button
+				Positive button
 			</Button>
 			<View height={9} width={20} borderRadius="small" backgroundColor="warning" />
 			<Button color="neutral" onClick={() => {}}>
-				Primary button
+				Neutral button
+			</Button>
+			<Button color="neutral" disabled onClick={() => {}}>
+				Disabled button
 			</Button>
 		</View>
 		<View gap={2} direction="row">
@@ -85,13 +96,13 @@ const componentExamples = (
 				Primary button
 			</Button>
 			<Button color="critical" variant="outline" onClick={() => {}}>
-				Primary button
+				Critical button
 			</Button>
 			<Button color="positive" variant="outline" onClick={() => {}}>
-				Primary button
+				Positive button
 			</Button>
 			<Button color="neutral" variant="outline" onClick={() => {}}>
-				Primary button
+				Neutral button
 			</Button>
 		</View>
 		<View direction="row" gap={4}>
@@ -219,7 +230,8 @@ const componentExamples = (
 							<Button variant="outline">Button</Button>
 						</View>
 
-						<TextField name="h" placeholder="hello" />
+						<TextField name="h" placeholder="hello" disabled />
+						<TextField name="h" placeholder="hello" value="2323" />
 					</View>
 				</Card>
 			</View.Item>
@@ -230,7 +242,12 @@ const componentExamples = (
 							Badge
 						</Badge>
 
-						<TextField name="h" placeholder="hello" />
+						<TextField name="h" placeholder="hello" value="2323" disabled />
+						<TextField name="h" placeholder="hello" value="2323" />
+
+						<Button color="neutral" disabled onClick={() => {}}>
+							Disabled button
+						</Button>
 					</View>
 				</Card>
 			</View.Item>

@@ -87,7 +87,7 @@ export const color = () => (
 			<Text color="positive">Positive</Text>
 		</Example.Item>
 		<Example.Item title="color: warning">
-			<Text color="warning">warning</Text>
+			<Text color="warning">Warning</Text>
 		</Example.Item>
 		<Example.Item title="color: critical">
 			<Text color="critical">Critical</Text>
@@ -122,7 +122,7 @@ export const wrap = () => (
 export const maxLines = () => (
 	<Example>
 		<Example.Item title="maxLines: 2">
-			<Text maxLines={1}>
+			<Text maxLines={2}>
 				There are many variations of passages of Lorem Ipsum available, but the majority have
 				suffered alteration in some form, by injected humour, or randomised words which don't look
 				even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be
