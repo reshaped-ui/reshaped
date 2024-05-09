@@ -1,9 +1,9 @@
-const nestedPlugin = require("postcss-nested");
-const eachPlugin = require("postcss-each");
-const cssNano = require("cssnano");
-const responsivePlugin = require("./postcss.responsive");
+import nestedPlugin from "postcss-nested";
+import eachPlugin from "postcss-each";
+import cssNano from "cssnano";
+import responsivePlugin from "./postcss.responsive.js";
 
-module.exports = {
+export default {
 	plugins: [
 		responsivePlugin(),
 		eachPlugin(),

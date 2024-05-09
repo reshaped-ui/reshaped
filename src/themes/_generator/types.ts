@@ -1,5 +1,7 @@
 import { ReshapedConfig } from "types/config";
 
+export type Color = string | { hex: string; hexDark: string };
+
 type Primitive = string | number | boolean;
 export type PartialDeep<T> = T extends Primitive
 	? Partial<T>

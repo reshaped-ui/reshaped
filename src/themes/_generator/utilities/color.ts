@@ -347,7 +347,7 @@ export const getDarkModeColor = (hsl: HslColor) => {
 	 * That way satured colors won't change much from its original value
 	 */
 	const sModifier = (s / 100) * (0.96 + (100 - s) / 100);
-	return { ...hsl, s: s - 7, l: l * sModifier };
+	return { ...hsl, s: Math.max(0, s - 7), l: l * sModifier };
 };
 
 export const getLuminanceDelta = (luminance: number) => {
@@ -369,46 +369,99 @@ export function getRgbLuminance({ r, g, b }: RgbColor) {
 	}
 }
 
-function getContrastLuminance({ r, g, b }: RgbColor) {
-	return (
-		0.2126 * Math.pow(r / 255, 2.2) +
-		0.7152 * Math.pow(g / 255, 2.2) +
-		0.0722 * Math.pow(b / 255, 2.2)
-	);
+// function getContrastLuminance({ r, g, b }: RgbColor) {
+// 	return (
+// 		0.2126 * Math.pow(r / 255, 2.2) +
+// 		0.7152 * Math.pow(g / 255, 2.2) +
+// 		0.0722 * Math.pow(b / 255, 2.2)
+// 	);
+// }
+
+// function getApcaContrast(backgroundLuminance: number, textLuminance: number) {
+// 	// Calculate the contrast based on APCA
+// 	let Lc = textLuminance - backgroundLuminance;
+// 	return Math.abs(Lc); // Return the absolute value of contrast
+// }
+
+const RED = 0.2126;
+const GREEN = 0.7152;
+const BLUE = 0.0722;
+
+const GAMMA = 2.4;
+
+function luminance(r: number, g: number, b: number) {
+	var a = [r, g, b].map((v) => {
+		v /= 255;
+		return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, GAMMA);
+	});
+	return a[0] * RED + a[1] * GREEN + a[2] * BLUE;
 }
 
-function getApcaContrast(backgroundLuminance: number, textLuminance: number) {
-	// Calculate the contrast based on APCA
-	let Lc = textLuminance - backgroundLuminance;
-	return Math.abs(Lc); // Return the absolute value of contrast
+function contrast(rgb1: [number, number, number], rgb2: [number, number, number]) {
+	var lum1 = luminance(...rgb1);
+	var lum2 = luminance(...rgb2);
+	var brightest = Math.max(lum1, lum2);
+	var darkest = Math.min(lum1, lum2);
+	return (brightest + 0.05) / (darkest + 0.05);
 }
 
 export const getOnColor = (args: {
 	bgHexColor: string;
-	mode: "light" | "dark";
 	lightHexColor?: string;
 	darkHexColor?: string;
 }) => {
-	const { bgHexColor, mode, lightHexColor = "#ffffff", darkHexColor = "#000000" } = args;
-	const bgHexAlpha = bgHexColor.slice(7);
-	const bgAlpha = bgHexAlpha ? Number((parseInt(bgHexAlpha, 16) / 255).toFixed(2)) : 1;
-	const bgColor = hexToRgb(bgHexColor.slice(0, 7));
-	const baseColor = mode === "light" ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 };
-	const { r, g, b } = {
-		r: (1 - bgAlpha) * baseColor.r + bgAlpha * bgColor.r,
-		g: (1 - bgAlpha) * baseColor.g + bgAlpha * bgColor.g,
-		b: (1 - bgAlpha) * baseColor.b + bgAlpha * bgColor.b,
-	};
+	const { bgHexColor, lightHexColor = "#ffffff", darkHexColor = "#000000" } = args;
 
-	// Calculate luminance for background and for white & black
-	let backgroundLuminance = getContrastLuminance({ r, g, b });
-	let whiteLuminance = getContrastLuminance({ r: 255, g: 255, b: 255 });
-	let blackLuminance = getContrastLuminance({ r: 0, g: 0, b: 0 });
+	const bgRgb = hexToRgb(bgHexColor);
+	const lightRgb = hexToRgb(lightHexColor);
 
-	// Calculate contrast
-	let contrastWithWhite = getApcaContrast(backgroundLuminance, whiteLuminance);
-	let contrastWithBlack = getApcaContrast(backgroundLuminance, blackLuminance);
+	return contrast([bgRgb.r, bgRgb.g, bgRgb.b], [lightRgb.r, lightRgb.g, lightRgb.b]) > 4.5
+		? lightHexColor
+		: darkHexColor;
 
-	// Choose the color with higher contrast
-	return contrastWithWhite > contrastWithBlack ? lightHexColor : darkHexColor;
+	// const color = bgHexColor.charAt(0) === "#" ? bgHexColor.substring(1, 7) : bgHexColor;
+	// const r = parseInt(color.substring(0, 2), 16); // hexToR
+	// const g = parseInt(color.substring(2, 4), 16); // hexToG
+	// const b = parseInt(color.substring(4, 6), 16); // hexToB
+	// const uicolors = [r / 255, g / 255, b / 255];
+	// const c = uicolors.map((col) => {
+	// 	if (col <= 0.03928) {
+	// 		return col / 12.92;
+	// 	}
+	// 	return Math.pow((col + 0.055) / 1.055, 2.4);
+	// });
+	// const L = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+	// return L <= 0.179 ? lightHexColor : darkHexColor;
 };
+
+// export const getOnColor = (args: {
+// 	bgHexColor: string;
+// 	mode: "light" | "dark";
+// 	lightHexColor?: string;
+// 	darkHexColor?: string;
+// }) => {
+// 	const { bgHexColor, mode, lightHexColor = "#ffffff", darkHexColor = "#000000" } = args;
+// 	const bgHexAlpha = bgHexColor.slice(7);
+// 	const bgAlpha = bgHexAlpha ? Number((parseInt(bgHexAlpha, 16) / 255).toFixed(2)) : 1;
+// 	const bgColor = hexToRgb(bgHexColor.slice(0, 7));
+// 	const baseColor = mode === "light" ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 };
+// 	const { r, g, b } = {
+// 		r: (1 - bgAlpha) * baseColor.r + bgAlpha * bgColor.r,
+// 		g: (1 - bgAlpha) * baseColor.g + bgAlpha * bgColor.g,
+// 		b: (1 - bgAlpha) * baseColor.b + bgAlpha * bgColor.b,
+// 	};
+
+// 	// Calculate luminance for background and for white & black
+// 	let backgroundLuminance = getContrastLuminance({ r, g, b });
+// 	let whiteLuminance = getContrastLuminance({ r: 255, g: 255, b: 255 });
+// 	let blackLuminance = getContrastLuminance({ r: 0, g: 0, b: 0 });
+
+// 	// Calculate contrast
+// 	let contrastWithWhite = getApcaContrast(backgroundLuminance, whiteLuminance);
+// 	let contrastWithBlack = getApcaContrast(backgroundLuminance, blackLuminance);
+
+// 	console.log({ bgHexColor, contrastWithBlack, contrastWithWhite, bgAlpha });
+
+// 	// Choose the color with higher contrast
+// 	return contrastWithWhite > contrastWithBlack ? lightHexColor : darkHexColor;
+// };

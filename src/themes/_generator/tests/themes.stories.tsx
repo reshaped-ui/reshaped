@@ -6,7 +6,11 @@ import Alert from "components/Alert";
 import Card from "components/Card";
 import Avatar from "components/Avatar";
 import DropdownMenu from "components/DropdownMenu";
+import TextField from "components/TextField";
 import Theme from "components/Theme";
+import IconZap from "icons/Mic";
+import Link from "components/Link";
+import Text from "components/Text";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
 
 export default {
@@ -32,46 +36,112 @@ const css2 = getThemeCSS("peach", {
 
 const cssGenerated = getThemeCSS("generated", {
 	...baseThemeDefinition,
-	color: generateThemeColors({ primary: "#2563eb" }),
+	color: generateThemeColors({
+		primary: "#0369a1" /*"#5a58f2"*/ /* "#2563eb" */,
+	}),
+});
+
+const cssGenerated2 = getThemeCSS("generated2", {
+	...baseThemeDefinition,
+	color: generateThemeColors({ primary: "#2383e2" }),
 });
 
 const componentExamples = (
-	<View gap={4}>
+	<View gap={4} padding={6} backgroundColor="page">
+		<Text variant="featured-2">Hello world</Text>
+		<Text color="neutral-faded" variant="featured-2">
+			Hello world faded
+		</Text>
+		<Text color="disabled" variant="featured-2">
+			Hello world disabled
+		</Text>
+
 		<View gap={2} direction="row">
-			<Button color="primary">Primary button</Button>
-			<Button color="critical">Primary button</Button>
-			<Button color="positive">Primary button</Button>
-			<Button color="neutral">Primary button</Button>
+			<Button color="primary" onClick={() => {}}>
+				Primary button
+			</Button>
+			<Button color="critical" onClick={() => {}}>
+				Critical button
+			</Button>
+			<Button color="positive" onClick={() => {}}>
+				Positive button
+			</Button>
+			<View height={9} width={20} borderRadius="small" backgroundColor="warning" />
+			<Button color="neutral" onClick={() => {}}>
+				Neutral button
+			</Button>
+			<Button color="neutral" disabled onClick={() => {}}>
+				Disabled button
+			</Button>
 		</View>
 		<View gap={2} direction="row">
-			<Button color="primary" variant="outline">
+			<Button color="primary" variant="outline" onClick={() => {}}>
 				Primary button
 			</Button>
-			<Button color="critical" variant="outline">
-				Primary button
+			<Button color="critical" variant="outline" onClick={() => {}}>
+				Critical button
 			</Button>
-			<Button color="positive" variant="outline">
-				Primary button
+			<Button color="positive" variant="outline" onClick={() => {}}>
+				Positive button
 			</Button>
-			<Button color="neutral" variant="outline">
-				Primary button
+			<Button color="neutral" variant="outline" onClick={() => {}}>
+				Neutral button
 			</Button>
 		</View>
 		<View direction="row" gap={4}>
 			<View.Item columns={6}>
-				<Alert color="primary">Primary</Alert>
+				<Alert
+					color="primary"
+					title="Hello"
+					icon={IconZap}
+					actionsSlot={<Link color="primary">Action</Link>}
+				>
+					Primary
+				</Alert>
 			</View.Item>
 			<View.Item columns={6}>
-				<Alert color="critical">Critical</Alert>
+				<Alert
+					color="critical"
+					title="Hello"
+					icon={IconZap}
+					actionsSlot={<Link color="critical">Action</Link>}
+				>
+					Critical
+				</Alert>
 			</View.Item>
 			<View.Item columns={6}>
-				<Alert color="warning">Warning</Alert>
+				<Alert
+					color="warning"
+					title="Hello"
+					icon={IconZap}
+					actionsSlot={
+						<Text color="warning">
+							<Link color="inherit">Action</Link>
+						</Text>
+					}
+				>
+					Warning
+				</Alert>
 			</View.Item>
 			<View.Item columns={6}>
-				<Alert color="positive">Positive</Alert>
+				<Alert
+					color="positive"
+					title="Hello"
+					icon={IconZap}
+					actionsSlot={<Link color="positive">Action</Link>}
+				>
+					Positive
+				</Alert>
 			</View.Item>
 			<View.Item columns={6}>
-				<Alert color="neutral">Neutral</Alert>
+				<Alert
+					color="neutral"
+					title="Hello"
+					icon={IconZap}
+					actionsSlot={<Link color="primary">Action</Link>}
+				>
+					Neutral
+				</Alert>
 			</View.Item>
 			<View.Item columns={12}>
 				<View direction="row" gap={2}>
@@ -122,19 +192,45 @@ const componentExamples = (
 						<Badge variant="outline" color="primary">
 							Badge
 						</Badge>
-						<DropdownMenu>
-							<DropdownMenu.Trigger>
-								{(attributes) => (
-									<Button variant="faded" attributes={attributes}>
-										Menu
-									</Button>
-								)}
-							</DropdownMenu.Trigger>
-							<DropdownMenu.Content>
-								<DropdownMenu.Item>Item 1</DropdownMenu.Item>
-								<DropdownMenu.Item>Item 1</DropdownMenu.Item>
-							</DropdownMenu.Content>
-						</DropdownMenu>
+						<View gap={2} direction="row">
+							<DropdownMenu>
+								<DropdownMenu.Trigger>
+									{(attributes) => (
+										<Button variant="faded" attributes={attributes}>
+											Menu
+										</Button>
+									)}
+								</DropdownMenu.Trigger>
+								<DropdownMenu.Content>
+									<DropdownMenu.Item>Item 1</DropdownMenu.Item>
+									<DropdownMenu.Item>Item 1</DropdownMenu.Item>
+									<br />
+									<View backgroundColor="neutral-faded" padding={4}>
+										Hello
+									</View>
+								</DropdownMenu.Content>
+							</DropdownMenu>
+							<Button variant="outline">Button</Button>
+						</View>
+
+						<TextField name="h" placeholder="hello" disabled />
+						<TextField name="h" placeholder="hello" value="2323" />
+					</View>
+				</Card>
+			</View.Item>
+			<View.Item columns={6}>
+				<Card elevated>
+					<View gap={2} align="start">
+						<Badge variant="outline" color="primary">
+							Badge
+						</Badge>
+
+						<TextField name="h" placeholder="hello" value="2323" disabled />
+						<TextField name="h" placeholder="hello" value="2323" />
+
+						<Button color="neutral" disabled onClick={() => {}}>
+							Disabled button
+						</Button>
 					</View>
 				</Card>
 			</View.Item>
@@ -160,17 +256,14 @@ export const base = () => (
 );
 
 export const generation = () => (
-	<Example>
-		<Example.Item>
-			<style>{cssGenerated}</style>
-			<View gap={4}>
-				<View.Item>Generated theme</View.Item>
-				<Theme name="generated">{componentExamples}</Theme>
-				{/* <View.Item>Reshaped theme</View.Item> */}
-				{/* <Theme name="reshaped">{componentExamples}</Theme> */}
-			</View>
-		</Example.Item>
-	</Example>
+	<>
+		<style>
+			{cssGenerated}
+			{cssGenerated2}
+		</style>
+		<Theme name="generated">{componentExamples}</Theme>
+		{/* <Theme name="generated2">{componentExamples}</Theme> */}
+	</>
 );
 
 const onColorsCss = getThemeCSS(

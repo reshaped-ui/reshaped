@@ -1,71 +1,125 @@
 import type { ThemeDefinition } from "../tokens/types";
+import type { Color } from "../types";
 import {
-	hexToHsl,
-	hexToHsluv,
-	hexToRgb,
-	getRgbLuminance,
-	getLuminanceDelta,
-	getDarkModeColor,
-	hslToHex,
-	hsluvToHex,
-	rgbToHex,
-	hslToRgb,
-} from "./color";
+	parseHex,
+	convertOklabToOkhsl,
+	convertLrgbToOklab,
+	convertRgbToLrgb,
+	convertOkhslToOklab,
+	convertOklabToLrgb,
+	convertLrgbToRgb,
+	type Okhsl,
+	type Rgb,
+	serializeHex,
+	serializeHex8,
+} from "culori/fn";
 
-/**
- * Generator
- */
+const hexToOkHsl = (hex: string) => {
+	const rgb = parseHex(hex) as Rgb;
 
-const FG_L_DARK = 62;
+	if (!rgb) throw new Error(`Can\'t generate rgb from ${hex} color`);
 
-const generateColorValues = (args: { key: string; hex: string }) => {
-	const { key, hex } = args;
+	const lrgb = convertRgbToLrgb(rgb);
+	const oklab = convertLrgbToOklab(lrgb);
+	const okhsl = convertOklabToOkhsl(oklab);
+
+	return okhsl;
+};
+
+const okhslToHex = (okhsl: Okhsl) => {
+	const oklab = convertOkhslToOklab(okhsl);
+	const lrgb = convertOklabToLrgb(oklab);
+	const rgb = convertLrgbToRgb(lrgb);
+	return !okhsl.alpha || okhsl.alpha === 1 ? serializeHex(rgb) : serializeHex8(rgb);
+};
+
+const getDarkModeColor = (hsl: Okhsl) => {
+	const { l } = hsl;
+
+	const mid = 0.5;
+	const lDelta = 1 - (l - mid) / (1 - mid);
+
+	return { ...hsl, l: l < mid ? l : 1 - l * lDelta };
+};
+
+const generateColorValues = (args: { key: string; hex: string; hexDark?: string }) => {
+	const { key, hex, hexDark } = args;
 	const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
 
-	const hsl = hexToHsl(hex);
-	const rgb = hexToRgb(hex);
-	const hsluv = hexToHsluv(hex);
-	const luminance = getRgbLuminance(rgb);
-	const luminanceDelta = getLuminanceDelta(luminance);
-	const hslDark = getDarkModeColor(hsl);
+	const okhsl = hexToOkHsl(hex);
+
+	/**
+	 * Calculate hue perceptual lighness (yellow, cyan, )
+	 */
+	const hueStep = 120;
+	const normalizedHue = ((okhsl.h! + 150) % 360) / 360;
+	const hueLightness = Math.cos((2 * Math.PI) / hueStep) * normalizedHue;
+
+	const okhslDark =
+		key === "neutral"
+			? { ...okhsl, l: 1 - okhsl.l + 0.16, s: 0.1 }
+			: (hexDark && hexToOkHsl(hexDark)) || getDarkModeColor(okhsl);
+
+	/**
+	 * Background
+	 */
 	const bgHex = hex;
-	const bgHexDark = hslToHex(hslDark);
-	const hsluvDark = hexToHsluv(bgHexDark);
+	const bgHexDark = okhslToHex(okhslDark);
 
-	const bdHex = hsluvToHex({ ...hsluv, l: hsluv.l - 5 - luminanceDelta });
-	const bdHexDark = hsluvToHex({
-		...hsluvDark,
-		l: key === "neutral" ? 35 : FG_L_DARK,
-	});
+	const bgFadedHsl = { ...okhsl, l: 0.94 + 0.045 * hueLightness };
+	const bgFadedHslDark = { ...okhslDark, l: 0.16, s: okhslDark.s / 2 };
+	const bgFadedHex = okhslToHex(bgFadedHsl);
+	const bgFadedHexDark = okhslToHex(bgFadedHslDark);
 
-	const fgHsluv = { ...hsluv, l: 43 };
-	const fgHsluvDark = { ...hsluv, l: key === "neutral" ? 80 : FG_L_DARK };
-	const fgHex = hsluvToHex(fgHsluv);
-	const fgHexDark = hsluvToHex(fgHsluvDark);
-	const saturationModifier = hsl.s / 40;
+	const bgHighlightedHex = okhslToHex({ ...okhsl, l: okhsl.l - 0.04 });
+	const bgHighlightedHexDark = okhslToHex({ ...okhslDark, l: okhslDark.l + 0.04 });
 
-	const bgFadedHex = rgbToHex(
-		hslToRgb({ ...hsl, l: 98 - saturationModifier - (key === "neutral" ? 2 : 0) })
-	);
-	const bgFadedHsluv = hexToHsluv(bgFadedHex);
-	const bgFadedHsluvDark = { ...hsluv, l: 16, s: 32 };
-	const bgFadedHexDark = hsluvToHex(bgFadedHsluvDark);
+	/**
+	 * Foreground
+	 */
 
-	const fadedLuminance = getRgbLuminance(hexToRgb(bgFadedHex));
-	const fadedLuminanceDark = getRgbLuminance(hexToRgb(bgFadedHexDark));
-	const fadedLuminanceDeltaDark = getLuminanceDelta(fadedLuminanceDark);
-	const bdFadedHex = hsluvToHex({
-		...bgFadedHsluv,
-		s: Math.max(0, bgFadedHsluv.s - 6 - Math.max(0, fadedLuminance - 98) * 20),
-		l: bgFadedHsluv.l - 7 + saturationModifier,
-	});
-	const bdFadedHexDark = hsluvToHex({
-		...bgFadedHsluvDark,
-		s: 40,
-		l: bgFadedHsluvDark.l + 7 - fadedLuminanceDeltaDark,
-	});
+	const fgOkhsl = key === "neutral" ? { ...okhsl, l: 0.2 } : { ...okhsl, l: 0.45 };
+	// Lighter colors need smaller lightness increase for fg colors
+	const fgDarkLDelta = 0.16 / (1 + Math.max(0, okhslDark.l - 0.5));
+	const fgOkhslDark =
+		key === "neutral"
+			? { ...okhsl, l: 0.96 }
+			: { ...okhslDark, l: okhslDark.l + fgDarkLDelta, s: 0.7 };
+	const fgHex = okhslToHex(fgOkhsl);
+	const fgHexDark = okhslToHex(fgOkhslDark);
 
-	const output: Partial<ThemeDefinition["color"]> = {
+	/**
+	 * Border
+	 */
+	const bdHex = key === "neutral" ? okhslToHex({ ...fgOkhsl, l: 0, alpha: 0.08 }) : fgHex;
+	const bdHexDark =
+		key === "neutral" ? okhslToHex({ ...fgOkhslDark, l: 1, alpha: 0.14 }) : fgHexDark;
+
+	const bdFadedHex =
+		key === "neutral"
+			? okhslToHex({
+					...bgFadedHslDark,
+					l: 0,
+					alpha: 0.1,
+				})
+			: okhslToHex({
+					...bgFadedHsl,
+					s: 0.6 - 0.2 * hueLightness,
+					l: bgFadedHsl.l - 0.05,
+				});
+	const bdFadedHexDark =
+		key === "neutral"
+			? okhslToHex({
+					...bgFadedHslDark,
+					l: 1,
+					alpha: 0.09,
+				})
+			: okhslToHex({
+					...bgFadedHslDark,
+					l: bgFadedHslDark.l + 0.08,
+				});
+
+	const output = {
 		[`background${capitalizedKey}`]: {
 			hex: bgHex,
 			hexDark: bgHexDark,
@@ -75,8 +129,8 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 			hexDark: bgFadedHexDark,
 		},
 		[`background${capitalizedKey}Highlighted`]: {
-			hex: hsluvToHex({ ...hsluv, l: hsluv.l - 4 }),
-			hexDark: hsluvToHex({ ...hsluvDark, l: hsluvDark.l + 4 }),
+			hex: bgHighlightedHex,
+			hexDark: bgHighlightedHexDark,
 		},
 		[`border${capitalizedKey}`]: {
 			hex: bdHex,
@@ -93,57 +147,45 @@ const generateColorValues = (args: { key: string; hex: string }) => {
 	};
 
 	if (key === "neutral") {
-		output[`foreground${capitalizedKey}`] = {
-			hex: hsluvToHex({ ...fgHsluv, l: 8 }),
-			hexDark: hsluvToHex({ ...fgHsluvDark, l: 95 }),
-		};
 		output[`foreground${capitalizedKey}Faded`] = {
-			hex: fgHex,
-			hexDark: fgHexDark,
+			hex: okhslToHex({ ...fgOkhsl, l: fgOkhsl.l + 0.25 }),
+			hexDark: okhslToHex({ ...fgOkhslDark, l: fgOkhslDark.l - 0.15 }),
 		};
-
 		output[`backgroundDisabled`] = {
-			hex: hsluvToHex({ ...hsluv, l: 94 }),
-			hexDark: hsluvToHex({ ...hsluvDark, l: 13 }),
+			hex: okhslToHex({ ...okhsl, s: 0.04, l: 0.94 }),
+			hexDark: okhslToHex({ ...okhslDark, s: 0.04, l: 0.16 }),
 		};
 		output[`backgroundDisabledFaded`] = {
-			hex: hsluvToHex({ ...hsluv, l: 97 }),
-			hexDark: hsluvToHex({ ...hsluvDark, l: 9 }),
+			hex: okhslToHex({ ...okhsl, l: 0.97, s: 0.04 }),
+			hexDark: okhslToHex({ ...okhslDark, l: 0.12, s: 0.04 }),
 		};
 		output[`borderDisabled`] = {
-			hex: hsluvToHex({ ...hsluv, l: 90 }),
-			hexDark: hsluvToHex({ ...hsluvDark, l: 17 }),
+			hex: okhslToHex({ ...okhsl, l: 0.9, s: 0.04 }),
+			hexDark: okhslToHex({ ...okhslDark, l: 0.17, s: 0.04 }),
 		};
 		output[`foregroundDisabled`] = {
-			hex: hsluvToHex({ ...hsluv, l: 82 }),
-			hexDark: hsluvToHex({ ...hsluvDark, l: 31 }),
+			hex: okhslToHex({ ...okhsl, l: 0.82, s: 0.04 }),
+			hexDark: okhslToHex({ ...okhslDark, l: 0.32, s: 0.04 }),
 		};
-
 		output[`backgroundElevationBase`] = {
 			hex: "#ffffff",
-			hexDark: hsluvToHex({ ...hsluvDark, l: 8 }),
+			hexDark: okhslToHex({ ...okhslDark, s: 0.03, l: 0.1 }),
 		};
 		output[`backgroundElevationRaised`] = {
 			hex: "#ffffff",
-			hexDark: hsluvToHex({ ...hsluvDark, l: 10 }),
+			hexDark: okhslToHex({ ...okhslDark, s: 0.04, l: 0.11 }),
 		};
 		output[`backgroundElevationOverlay`] = {
 			hex: "#ffffff",
-			hexDark: hsluvToHex({ ...hsluvDark, l: 12 }),
+			hexDark: okhslToHex({ ...okhslDark, s: 0.04, l: 0.13 }),
 		};
-
 		output[`backgroundPage`] = {
 			hex: "#ffffff",
-			hexDark: hsluvToHex({ ...hsluvDark, l: 5 }),
+			hexDark: okhslToHex({ ...okhslDark, l: 0.07, s: 0.02 }),
 		};
 		output[`backgroundPageFaded`] = {
-			hex: hsluvToHex({ ...hsluv, l: 98 }),
-			hexDark: hsluvToHex({ ...hsluvDark, l: 6 }),
-		};
-	} else {
-		output[`foreground${capitalizedKey}`] = {
-			hex: fgHex,
-			hexDark: fgHexDark,
+			hex: okhslToHex({ ...okhsl, l: 0.985 }),
+			hexDark: okhslToHex({ ...okhslDark, l: 0.09, s: 0.02 }),
 		};
 	}
 
@@ -162,33 +204,37 @@ const validateHexColor = (color: string) => {
 
 const generate = (
 	args: {
-		primary?: string;
-		critical?: string;
-		warning?: string;
-		positive?: string;
-		neutral?: string;
+		primary?: Color;
+		critical?: Color;
+		warning?: Color;
+		positive?: Color;
+		neutral?: Color;
 		brand?: string;
 	} = {}
 ) => {
 	const {
-		primary = "#5a58f2",
+		primary = "#2383e2",
 		critical = "#e22c2c",
 		warning = "#facc15",
 		positive = "#118850",
-		neutral = "#dfe2ea",
+		neutral = "#e3e4e8",
 		brand,
 	} = args;
-	const primaryColors = generateColorValues({
-		key: "primary",
-		hex: validateHexColor(primary),
-	});
+
+	const generateFor = (key: string, color: Color) => {
+		return generateColorValues({
+			key,
+			hex: validateHexColor(typeof color === "string" ? color : color.hex),
+			hexDark: typeof color !== "string" ? validateHexColor(color.hexDark) : undefined,
+		});
+	};
 
 	return {
-		...primaryColors,
-		...generateColorValues({ key: "critical", hex: validateHexColor(critical) }),
-		...generateColorValues({ key: "warning", hex: validateHexColor(warning) }),
-		...generateColorValues({ key: "positive", hex: validateHexColor(positive) }),
-		...generateColorValues({ key: "neutral", hex: validateHexColor(neutral) }),
+		...generateFor("primary", primary),
+		...generateFor("critical", critical),
+		...generateFor("warning", warning),
+		...generateFor("positive", positive),
+		...generateFor("neutral", neutral),
 		brand: { hex: brand || primary },
 		white: { hex: "#ffffff" },
 		black: { hex: "#000000" },

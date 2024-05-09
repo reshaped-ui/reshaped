@@ -5,6 +5,7 @@
 	"license": "MIT",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
+	"type": "module",
 	"keywords": [
 		"react",
 		"ui",
@@ -53,13 +54,12 @@
 	"scripts": {
 		"dev": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
-		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
+		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
 		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json",
-		"build:cjs": "tsc -p tsconfig.cjs.json",
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
 		"build:stories": "tsc -p tsconfig.stories.json",
-		"build:bundle": "vite build && mv dist/bundle.umd.js dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",
+		"build:bundle": "vite build && mv dist/bundle.umd.cjs dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",
 		"build:storybook": "storybook build -c tools/storybook -o dist/app --disable-telemetry",
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build -c tools/storybook",
 		"release": "read -p 'Have you updated chromatic tests?' && yarn release:lib && yarn release:source && yarn build:storybook && yarn release:copy",
@@ -94,6 +94,7 @@
 		"@testing-library/jest-dom": "6.4.2",
 		"@testing-library/react": "14.3.0",
 		"@testing-library/user-event": "14.5.2",
+		"@types/culori": "^2.1.0",
 		"@types/events": "3.0.3",
 		"@types/jest": "29.5.12",
 		"@types/node": "20.12.5",
@@ -145,6 +146,7 @@
 		"chalk": "4.1.2",
 		"commander": "11.1.0",
 		"cssnano": "6.1.2",
+		"culori": "4.0.1",
 		"postcss-custom-media": "10.0.4"
 	},
 	"resolutions": {

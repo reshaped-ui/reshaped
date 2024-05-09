@@ -2,6 +2,6 @@ function managerEntries(entry = []) {
 	return [...entry, require.resolve("./iframe.js")];
 }
 
-module.exports = {
+export default {
 	managerEntries,
 };

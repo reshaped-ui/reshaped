@@ -1,17 +1,16 @@
 #!/usr/bin/env node
-const fs = require("fs");
-const path = require("path");
-const process = require("process");
-const chalk = require("chalk");
-const { Command } = require("commander");
-const { addTheme, addThemeFragment } = require("../cli/theming");
+import fs from "fs";
+import path from "path";
+import process from "process";
+import chalk from "chalk";
+import { Command } from "commander";
+import { addTheme, addThemeFragment } from "../cli/theming/index.js";
 
 const program = new Command();
 
-const importJSConfig = (path) => {
+const importJSConfig = async (path) => {
 	console.log(chalk.yellow(`Using Reshaped config at ${path}`));
-	// eslint-disable-next-line global-require,import/no-dynamic-require
-	const config = require(path);
+	const config = await import(path);
 	return config.default || config;
 };
 
@@ -44,7 +43,7 @@ program
 		}
 
 		console.log(chalk.blue("Processing Reshaped themes..."));
-		const config = importJSConfig(configPath);
+		const config = await importJSConfig(configPath);
 		const { themes, themeFragments, themeOptions } = config;
 
 		if (themes) {
