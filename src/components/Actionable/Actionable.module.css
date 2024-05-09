@@ -14,52 +14,54 @@
 		background: none;
 		position: relative;
 		-webkit-tap-highlight-color: transparent;
+	}
+}
 
-		&:focus {
-			outline: none;
+.root {
+	&:focus {
+		outline: none;
+	}
+
+	&:focus-visible {
+		outline: none;
+		z-index: var(--rs-z-index-raised);
+		box-shadow: var(--rs-focus-shadow);
+	}
+
+	&.--inset:focus {
+		box-shadow: var(--rs-focus-inset-shadow);
+	}
+
+	&.--radius-inherit {
+		&:focus-visible {
+			box-shadow: none;
 		}
 
-		&:focus-visible {
-			outline: none;
-			z-index: var(--rs-z-index-raised);
+		&:focus-visible > * {
 			box-shadow: var(--rs-focus-shadow);
 		}
 
-		&.--inset:focus {
+		&.--inset:focus-visible > * {
 			box-shadow: var(--rs-focus-inset-shadow);
 		}
-
-		&.--radius-inherit {
-			&:focus-visible {
-				box-shadow: none;
-			}
-
-			&:focus-visible > * {
-				box-shadow: var(--rs-focus-shadow);
-			}
-
-			&.--inset:focus-visible > * {
-				box-shadow: var(--rs-focus-inset-shadow);
-			}
-		}
 	}
+}
 
-	button.root,
-	[role="button"].root {
-		cursor: pointer;
-		user-select: none;
+button.root,
+[role="button"].root {
+	cursor: pointer;
+	user-select: none;
+}
+
+.root.--disabled,
+.root[disabled] {
+	cursor: not-allowed;
+
+	&:active {
+		transform: none;
 	}
+}
 
-	.root.--disabled,
-	.root[disabled] {
-		cursor: not-allowed;
-
-		&:active {
-			transform: none;
-		}
-	}
-
-	.--full-width {
-		width: 100%;
-	}
+.root.--full-width {
+	width: 100%;
 }
