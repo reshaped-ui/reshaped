@@ -54,10 +54,9 @@
 	"scripts": {
 		"dev": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
-		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:cjs && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
+		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
 		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json",
-		"build:cjs": "tsc -p tsconfig.esm.json",
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
 		"build:stories": "tsc -p tsconfig.stories.json",
 		"build:bundle": "vite build && mv dist/bundle.umd.cjs dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",

@@ -36,7 +36,9 @@ const css2 = getThemeCSS("peach", {
 
 const cssGenerated = getThemeCSS("generated", {
 	...baseThemeDefinition,
-	color: generateThemeColors({ primary: "#5a58f2" /* "#2563eb" */ }),
+	color: generateThemeColors({
+		primary: "#0369a1" /*"#5a58f2"*/ /* "#2563eb" */,
+	}),
 });
 
 const cssGenerated2 = getThemeCSS("generated2", {
@@ -46,25 +48,6 @@ const cssGenerated2 = getThemeCSS("generated2", {
 
 const componentExamples = (
 	<View gap={4} padding={6} backgroundColor="page">
-		{/* <View backgroundColor="page" direction="row" minHeight="500px" align="stretch">
-			<View
-				backgroundColor="page-faded"
-				padding={4}
-				width={75}
-				attributes={{ style: { borderRight: "1px solid var(--rs-color-border-neutral-faded)" } }}
-			>
-				<DropdownMenu active>
-					<DropdownMenu.Trigger>
-						{(attributes) => <Button attributes={attributes}>Settings</Button>}
-					</DropdownMenu.Trigger>
-					<DropdownMenu.Content>
-						<DropdownMenu.Item>Item 1</DropdownMenu.Item>
-						<DropdownMenu.Item>Item 2</DropdownMenu.Item>
-					</DropdownMenu.Content>
-				</DropdownMenu>
-			</View>
-		</View> */}
-
 		<Text variant="featured-2">Hello world</Text>
 		<Text color="neutral-faded" variant="featured-2">
 			Hello world faded

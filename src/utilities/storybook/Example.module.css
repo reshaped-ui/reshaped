@@ -1,6 +1,6 @@
 .root {
 	--demo-bg: var(--rs-color-background-elevation-base);
-	--dot-color: var(--rs-color-border-neutral);
+	--dot-color: var(--rs-color-border-neutral-faded);
 
 	background:
 		linear-gradient(90deg, var(--demo-bg) 10px, transparent 1%) center,

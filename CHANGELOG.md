@@ -13,4 +13,7 @@ General:
 Theming:
 
 - Completely switched to Figma variables, no need to use plugins anymore
-- Updated color tokens generation
+- Major update for the Slate theme and minor changes for Reshaped theme
+- Updated color tokens generation, closer to Slate theme now
+- [Breaking] Border rgb color tokens got removed (since some border colors are coming with built-in opacity)
+- generateColors support for manually passing dark mode base values

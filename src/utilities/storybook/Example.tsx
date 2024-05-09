@@ -35,7 +35,12 @@ const ExampleItem = (props: Props) => {
 	const title = typeof props.title === "string" ? [props.title] : props.title;
 
 	return (
-		<View borderColor="neutral-faded" borderRadius="medium" overflow="hidden">
+		<View
+			borderColor="neutral-faded"
+			borderRadius="medium"
+			overflow="hidden"
+			backgroundColor="elevation-base"
+		>
 			{title && (
 				<View paddingInline={4} paddingBlock={3} backgroundColor="neutral-faded">
 					{title.map((line, index) => (

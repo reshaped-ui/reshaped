@@ -25,7 +25,6 @@ const generateBackgroundColors = (
 		const needsDynamicForeground = generateOnColorsFor.includes(tokenName);
 		const needsRGB =
 			tokenName.startsWith("background") ||
-			tokenName.startsWith("border") ||
 			tokenName.endsWith("black") ||
 			tokenName.endsWith("white");
 
@@ -48,13 +47,13 @@ const generateBackgroundColors = (
 
 			const hex = getOnColor({
 				bgHexColor: bgToken.hex!,
-				mode: "light",
+				// mode: "light",
 				...onColorHexMap,
 			});
 
 			const hexDark = getOnColor({
 				bgHexColor: bgToken.hexDark || bgToken.hex!,
-				mode: "dark",
+				// mode: "dark",
 				...onColorHexMap,
 			});
 

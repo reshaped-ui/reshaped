@@ -6,10 +6,10 @@ import generateColors from "./_generator/utilities/generateColors";
 export { default as baseThemeDefinition } from "./_generator/definitions/reshaped";
 
 export const generateThemeColors = (options: {
-	primary: string;
-	critical?: string;
-	positive?: string;
-	neutral?: string;
+	primary: T.Color;
+	critical?: T.Color;
+	positive?: T.Color;
+	neutral?: T.Color;
 }) => {
 	return generateColors(options);
 };
