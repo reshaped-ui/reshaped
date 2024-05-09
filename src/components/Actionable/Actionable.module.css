@@ -28,7 +28,7 @@
 		box-shadow: var(--rs-focus-shadow);
 	}
 
-	&.--inset:focus {
+	&.--inset:focus-visible {
 		box-shadow: var(--rs-focus-inset-shadow);
 	}
 
