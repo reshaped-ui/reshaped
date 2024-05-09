@@ -12,52 +12,56 @@
 		border: 0;
 		margin: 0;
 		background: none;
+		position: relative;
 		-webkit-tap-highlight-color: transparent;
+	}
+}
 
-		&:focus {
-			outline: none;
-			z-index: var(--rs-z-index-raised);
-		}
+.root {
+	&:focus {
+		outline: none;
 	}
 
-	button.root,
-	[role="button"].root {
-		cursor: pointer;
-		user-select: none;
-	}
-
-	.root.--disabled,
-	.root[disabled] {
-		cursor: not-allowed;
-
-		&:active {
-			transform: none;
-		}
-	}
-
-	.--full-width {
-		width: 100%;
-	}
-
-	[data-rs-keyboard] .root:focus {
+	&:focus-visible {
+		outline: none;
+		z-index: var(--rs-z-index-raised);
 		box-shadow: var(--rs-focus-shadow);
 	}
 
-	[data-rs-keyboard] .root.--inset:focus {
+	&.--inset:focus-visible {
 		box-shadow: var(--rs-focus-inset-shadow);
 	}
 
-	[data-rs-keyboard] .root.--radius-inherit {
-		&:focus {
+	&.--radius-inherit {
+		&:focus-visible {
 			box-shadow: none;
 		}
 
-		&:focus > * {
+		&:focus-visible > * {
 			box-shadow: var(--rs-focus-shadow);
 		}
 
-		&.--inset:focus > * {
+		&.--inset:focus-visible > * {
 			box-shadow: var(--rs-focus-inset-shadow);
 		}
 	}
+}
+
+button.root,
+[role="button"].root {
+	cursor: pointer;
+	user-select: none;
+}
+
+.root.--disabled,
+.root[disabled] {
+	cursor: not-allowed;
+
+	&:active {
+		transform: none;
+	}
+}
+
+.root.--full-width {
+	width: 100%;
 }
