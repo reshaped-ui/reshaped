@@ -22,3 +22,7 @@ Theming:
 - [Breaking] --rs-unit-radius-_ turned into --rs-radius-_
 - [Breaking] unit.radius in theme config is now radius
 - [Breaking] heavy font weight is now called extrabold
+
+Utility:
+
+- [Breaking] Hidden: Switched to display: contents. Removed displayStyle prop and render props children function

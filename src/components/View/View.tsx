@@ -196,13 +196,13 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		const renderedIndex = renderedItemIndex;
 		renderedItemIndex += 1;
 
-		if (child.type === Hidden && typeof child.props.children !== "function") {
+		if (child.type === Hidden) {
 			const { children: hiddenChild, ...hiddenProps } = child.props;
 			const key = child.key || index;
 
 			return (
 				<Hidden {...hiddenProps} key={key}>
-					{(className) => renderItem({ className, child: hiddenChild, index: renderedIndex })}
+					{renderItem({ child: hiddenChild, index: renderedIndex })}
 				</Hidden>
 			);
 		}
