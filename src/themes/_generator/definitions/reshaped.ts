@@ -167,18 +167,18 @@ const theme: ThemeDefinition = {
 		raised: [
 			{
 				offsetX: 0,
-				offsetY: 2,
-				blurRadius: 3,
+				offsetY: 1,
+				blurRadius: 5,
+				spreadRadius: -4,
 				colorToken: "black",
-				opacity: 0.1,
+				opacity: 0.5,
 			},
 			{
 				offsetX: 0,
-				offsetY: 1,
-				blurRadius: 2,
-				spreadRadius: -1,
+				offsetY: 4,
+				blurRadius: 8,
 				colorToken: "black",
-				opacity: 0.1,
+				opacity: 0.05,
 			},
 		],
 		overlay: [

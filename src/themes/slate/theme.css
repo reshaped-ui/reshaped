@@ -73,10 +73,11 @@
 --rs-color-brand: #2383e2;
 --rs-color-white: #ffffff;
 --rs-color-black: #000000;
---rs-color-on-background-primary: #ffffff;
+--rs-color-on-background-primary: #000000;
 --rs-color-on-background-critical: #ffffff;
+--rs-color-on-background-warning: #000000;
 --rs-color-on-background-positive: #ffffff;
---rs-color-on-brand: #ffffff;
+--rs-color-on-brand: #000000;
 --rs-color-rgb-white: 255, 255, 255;
 --rs-color-rgb-black: 0, 0, 0;
 --rs-duration-fast: 200ms;
@@ -85,7 +86,7 @@
 --rs-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
 --rs-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 --rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
---rs-shadow-raised: 0px 2px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+--rs-shadow-raised: 0px 1px 5px -4px rgba(0, 0, 0, 0.5), 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
 --rs-shadow-overlay: 0px 5px 10px 0px rgba(0, 0, 0, 0.05), 0px 15px 25px 0px rgba(0, 0, 0, 0.07);
 			}
 		
@@ -117,7 +118,7 @@
 --rs-color-background-neutral: #e3e4e8;
 --rs-color-background-neutral-faded: #eff0f2;
 --rs-color-background-neutral-highlighted: #d7d9de;
---rs-color-border-neutral: #0000001f;
+--rs-color-border-neutral: #00000014;
 --rs-color-border-neutral-faded: #0000001a;
 --rs-color-foreground-neutral: #2c2e34;
 --rs-color-foreground-neutral-faded: #676a75;
@@ -136,7 +137,6 @@
 --rs-color-rgb-background-critical: 226, 44, 44;
 --rs-color-rgb-background-critical-faded: 255, 241, 239;
 --rs-color-rgb-background-critical-highlighted: 209, 37, 38;
---rs-color-on-background-warning: #000000;
 --rs-color-rgb-background-warning: 250, 204, 21;
 --rs-color-rgb-background-warning-faded: 255, 246, 221;
 --rs-color-rgb-background-warning-highlighted: 237, 193, 11;
@@ -157,30 +157,30 @@
 			}
 		
 			[data-rs-theme="slate"][data-rs-color-mode="dark"] {
-					--rs-color-background-primary: #146dc1;
+					--rs-color-background-primary: #1b79d3;
 --rs-color-background-primary-faded: #152639;
---rs-color-background-primary-highlighted: #1a77d1;
---rs-color-border-primary: #5393db;
+--rs-color-background-primary-highlighted: #2383e2;
+--rs-color-border-primary: #6ca5e7;
 --rs-color-border-primary-faded: #223953;
---rs-color-foreground-primary: #5393db;
---rs-color-background-critical: #cc2325;
+--rs-color-foreground-primary: #6ca5e7;
+--rs-color-background-critical: #d72828;
 --rs-color-background-critical-faded: #391b18;
---rs-color-background-critical-highlighted: #dc292a;
---rs-color-border-critical: #dd6e64;
+--rs-color-background-critical-highlighted: #e82f2e;
+--rs-color-border-critical: #e68075;
 --rs-color-border-critical-faded: #532a26;
---rs-color-foreground-critical: #dd6e64;
---rs-color-background-warning: #cda605;
+--rs-color-foreground-critical: #e68075;
+--rs-color-background-warning: #d7ae06;
 --rs-color-background-warning-faded: #2b2410;
---rs-color-background-warning-highlighted: #dab106;
---rs-color-border-warning: #eacf7c;
+--rs-color-background-warning-highlighted: #e4b908;
+--rs-color-border-warning: #eed58a;
 --rs-color-border-warning-faded: #40371b;
---rs-color-foreground-warning: #eacf7c;
---rs-color-background-positive: #139357;
+--rs-color-foreground-warning: #eed58a;
+--rs-color-background-positive: #118850;
 --rs-color-background-positive-faded: #152a1d;
---rs-color-background-positive-highlighted: #159f5e;
---rs-color-border-positive: #5ab680;
+--rs-color-background-positive-highlighted: #139457;
+--rs-color-border-positive: #57b17c;
 --rs-color-border-positive-faded: #223f2d;
---rs-color-foreground-positive: #5ab680;
+--rs-color-foreground-positive: #57b17c;
 --rs-color-background-neutral: #393a42;
 --rs-color-background-neutral-faded: #242527;
 --rs-color-background-neutral-highlighted: #42444d;
@@ -197,19 +197,18 @@
 --rs-color-background-elevation-overlay: #1d1d1f;
 --rs-color-background-page: #0e0e0f;
 --rs-color-background-page-faded: #131414;
---rs-color-rgb-background-primary: 20, 109, 193;
+--rs-color-rgb-background-primary: 27, 121, 211;
 --rs-color-rgb-background-primary-faded: 21, 38, 57;
---rs-color-rgb-background-primary-highlighted: 26, 119, 209;
---rs-color-rgb-background-critical: 204, 35, 37;
+--rs-color-rgb-background-primary-highlighted: 35, 131, 226;
+--rs-color-rgb-background-critical: 215, 40, 40;
 --rs-color-rgb-background-critical-faded: 57, 27, 24;
---rs-color-rgb-background-critical-highlighted: 220, 41, 42;
---rs-color-on-background-warning: #ffffff;
---rs-color-rgb-background-warning: 205, 166, 5;
+--rs-color-rgb-background-critical-highlighted: 232, 47, 46;
+--rs-color-rgb-background-warning: 215, 174, 6;
 --rs-color-rgb-background-warning-faded: 43, 36, 16;
---rs-color-rgb-background-warning-highlighted: 218, 177, 6;
---rs-color-rgb-background-positive: 19, 147, 87;
+--rs-color-rgb-background-warning-highlighted: 228, 185, 8;
+--rs-color-rgb-background-positive: 17, 136, 80;
 --rs-color-rgb-background-positive-faded: 21, 42, 29;
---rs-color-rgb-background-positive-highlighted: 21, 159, 94;
+--rs-color-rgb-background-positive-highlighted: 19, 148, 87;
 --rs-color-on-background-neutral: #ffffff;
 --rs-color-rgb-background-neutral: 57, 58, 66;
 --rs-color-rgb-background-neutral-faded: 36, 37, 39;

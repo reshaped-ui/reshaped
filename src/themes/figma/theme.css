@@ -73,10 +73,10 @@
 --rs-color-brand: #5a58f2;
 --rs-color-white: #FFFFFF;
 --rs-color-black: #000000;
---rs-color-on-background-primary: #FFFFFF;
---rs-color-on-background-critical: #FFFFFF;
+--rs-color-on-background-primary: #000000;
+--rs-color-on-background-critical: #000000;
 --rs-color-on-background-warning: #000000;
---rs-color-on-background-positive: #FFFFFF;
+--rs-color-on-background-positive: #000000;
 --rs-color-on-brand: #FFFFFF;
 --rs-color-rgb-white: 255, 255, 255;
 --rs-color-rgb-black: 0, 0, 0;
