@@ -6,6 +6,7 @@ import fontFamily from "./fontFamily/fontFamily.transforms";
 import fontWeight from "./fontWeight/fontWeight.transforms";
 import shadow from "./shadow/shadow.transforms";
 import unit from "./unit/unit.transforms";
+import radius from "./radius/radius.transforms";
 import viewport from "./viewport/viewport.transforms";
 
 export const css = {
@@ -17,5 +18,6 @@ export const css = {
 	fontWeight,
 	shadow,
 	unit,
+	radius,
 	viewport,
 };

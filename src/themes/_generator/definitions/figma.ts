@@ -15,7 +15,7 @@ const theme: ThemeDefinition = {
 		medium: { weight: 500 },
 		semibold: { weight: 600 },
 		bold: { weight: 700 },
-		heavy: { weight: 800 },
+		extrabold: { weight: 800 },
 		black: { weight: 900 },
 	},
 
