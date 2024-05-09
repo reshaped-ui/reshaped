@@ -1129,15 +1129,13 @@ export const testHiddenItem = () => (
 			]}
 		>
 			<View direction="row" gap={3}>
-				<Placeholder key="1" />
-				<Hidden hide={{ s: false, m: true }} key="hidden">
-					{(className) => (
-						<View.Item grow className={className} key="hidden">
-							<Placeholder />
-						</View.Item>
-					)}
+				<Placeholder />
+				<Hidden hide={{ s: false, m: true }}>
+					<View.Item grow>
+						<Placeholder />
+					</View.Item>
 				</Hidden>
-				<View.Item grow={{ s: false, m: true }} key="3">
+				<View.Item grow={{ s: false, m: true }}>
 					<Placeholder />
 				</View.Item>
 			</View>

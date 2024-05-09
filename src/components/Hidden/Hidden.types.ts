@@ -5,6 +5,5 @@ export type Props = {
 	hide?: G.Responsive<boolean>;
 	visibility?: boolean;
 	as?: keyof JSX.IntrinsicElements;
-	displayStyle?: "inline" | "flex";
-	children: ((className: string) => React.ReactNode) | React.ReactNode;
+	children: React.ReactNode;
 };

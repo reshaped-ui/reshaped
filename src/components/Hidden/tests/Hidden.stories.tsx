@@ -31,22 +31,9 @@ export const visibility = () => (
 		<Example.Item title="shown on s/xl">
 			<Hidden hide={{ s: false, m: true, xl: false }}>Content</Hidden>
 		</Example.Item>
-	</Example>
-);
-
-export const inline = () => (
-	<Example>
-		<Example.Item title="inline, shown on s">
-			<div>
-				Hello&nbsp;
-				<Hidden hide={{ s: false, m: true }} displayStyle="inline">
-					world
-				</Hidden>
-			</div>
-		</Example.Item>
-		<Example.Item title="flex, shown on s">
-			<Hidden hide={{ s: false, m: true }} displayStyle="flex">
-				world
+		<Example.Item title="hide: always, visibility">
+			<Hidden hide visibility>
+				Content
 			</Hidden>
 		</Example.Item>
 	</Example>

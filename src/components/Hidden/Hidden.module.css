@@ -1,34 +1,19 @@
-/**
-* Important is used since classNames can be used as mixins for other components
-* and there is no guarantee about the css specificity
-*/
-
 .root {
-	--rs-hidden-display: block;
-
-	display: var(--rs-hidden-display) !important;
-}
-
-.--display-inline {
-	--rs-hidden-display: inline;
-}
-
-.--display-flex {
-	--rs-hidden-display: flex;
+	display: contents;
 }
 
 @responsive .--hidden {
 	@value true {
-		display: none !important;
+		display: none;
 
 		&.--visibility {
-			display: var(--rs-hidden-display) !important;
+			display: contents;
 			visibility: hidden;
 		}
 	}
 
 	@value false {
-		display: var(--rs-hidden-display) !important;
+		display: contents;
 
 		&.--visibility {
 			visibility: visible;
