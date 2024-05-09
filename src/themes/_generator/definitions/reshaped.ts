@@ -15,7 +15,7 @@ const theme: ThemeDefinition = {
 		medium: { weight: 500 },
 		semibold: { weight: 600 },
 		bold: { weight: 700 },
-		heavy: { weight: 800 },
+		extrabold: { weight: 800 },
 		black: { weight: 900 },
 	},
 
@@ -23,19 +23,19 @@ const theme: ThemeDefinition = {
 		title1: {
 			fontSize: { px: 96 },
 			lineHeight: { px: 100 },
-			fontWeightToken: "heavy",
+			fontWeightToken: "extrabold",
 			fontFamilyToken: "title",
 		},
 		title2: {
 			fontSize: { px: 80 },
 			lineHeight: { px: 84 },
-			fontWeightToken: "heavy",
+			fontWeightToken: "extrabold",
 			fontFamilyToken: "title",
 		},
 		title3: {
 			fontSize: { px: 64 },
 			lineHeight: { px: 68 },
-			fontWeightToken: "heavy",
+			fontWeightToken: "extrabold",
 			fontFamilyToken: "title",
 		},
 		title4: {
@@ -100,9 +100,12 @@ const theme: ThemeDefinition = {
 
 	unit: {
 		base: { px: 4 },
-		radiusSmall: { px: 4 },
-		radiusMedium: { px: 8 },
-		radiusLarge: { px: 12 },
+	},
+
+	radius: {
+		small: { px: 4 },
+		medium: { px: 8 },
+		large: { px: 12 },
 	},
 
 	color: {

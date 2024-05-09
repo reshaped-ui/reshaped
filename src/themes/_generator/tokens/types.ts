@@ -6,12 +6,14 @@ import type * as TFontFamily from "./fontFamily/fontFamily.types";
 import type * as TFontWeight from "./fontWeight/fontWeight.types";
 import type * as TShadow from "./shadow/shadow.types";
 import type * as TUnit from "./unit/unit.types";
+import type * as TRadius from "./radius/radius.types";
 import type * as TViewport from "./viewport/viewport.types";
 
 export type TokenType =
 	| "fontFamily"
 	| "fontWeight"
 	| "unit"
+	| "radius"
 	| "viewport"
 	| "font"
 	| "color"
@@ -27,6 +29,7 @@ type TokenSet<Name extends string, Token> = Record<Name, Token> & {
 
 export type ThemeDefinition = {
 	unit: TokenSet<TUnit.Name, TUnit.Token>;
+	radius: TokenSet<TRadius.Name, TRadius.Token>;
 	fontFamily: TokenSet<TFontFamily.Name, TFontFamily.Token>;
 	fontWeight: TokenSet<TFontWeight.Name, TFontWeight.Token>;
 	font: TokenSet<TFont.Name, TFont.Token>;
@@ -39,6 +42,7 @@ export type ThemeDefinition = {
 
 export type PartialThemeDefinition = {
 	unit?: Partial<ThemeDefinition["unit"]>;
+	radius?: Partial<ThemeDefinition["radius"]>;
 	fontFamily?: Partial<ThemeDefinition["fontFamily"]>;
 	fontWeight?: Partial<ThemeDefinition["fontWeight"]>;
 	font?: Partial<ThemeDefinition["font"]>;
