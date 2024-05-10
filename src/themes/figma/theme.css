@@ -6,7 +6,7 @@
 --rs-font-weight-medium: 500;
 --rs-font-weight-semibold: 600;
 --rs-font-weight-bold: 700;
---rs-font-weight-heavy: 800;
+--rs-font-weight-extrabold: 800;
 --rs-font-weight-black: 900;
 --rs-font-size-title-1: 80px;
 --rs-line-height-title-1: 84px;
@@ -70,6 +70,9 @@
 --rs-unit-x8: 32px;
 --rs-unit-x9: 36px;
 --rs-unit-x10: 40px;
+--rs-radius-small: 4px;
+--rs-radius-medium: 8px;
+--rs-radius-large: 12px;
 --rs-color-brand: #5a58f2;
 --rs-color-white: #FFFFFF;
 --rs-color-black: #000000;
