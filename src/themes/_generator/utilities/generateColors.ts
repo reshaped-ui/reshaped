@@ -91,16 +91,16 @@ const generateColorValues = (args: { key: string; hex: string; hexDark?: string 
 	/**
 	 * Border
 	 */
-	const bdHex = key === "neutral" ? okhslToHex({ ...fgOkhsl, l: 0, alpha: 0.08 }) : fgHex;
+	const bdHex = key === "neutral" ? okhslToHex({ ...fgOkhsl, l: 0, alpha: 0.12 }) : fgHex;
 	const bdHexDark =
 		key === "neutral" ? okhslToHex({ ...fgOkhslDark, l: 1, alpha: 0.14 }) : fgHexDark;
 
 	const bdFadedHex =
 		key === "neutral"
 			? okhslToHex({
-					...bgFadedHslDark,
+					...bgFadedHsl,
 					l: 0,
-					alpha: 0.1,
+					alpha: 0.06,
 				})
 			: okhslToHex({
 					...bgFadedHsl,
