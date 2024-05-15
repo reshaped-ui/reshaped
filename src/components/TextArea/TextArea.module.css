@@ -28,7 +28,7 @@
 	z-index: 1;
 	color: var(--rs-color-foreground-neutral);
 	background: var(--rs-color-background-elevation-base);
-	border-radius: var(--rs-unit-radius-small);
+	border-radius: var(--rs-radius-small);
 
 	&:focus {
 		border-color: var(--rs-color-border-primary);
@@ -47,7 +47,7 @@
 	@value medium {
 		--rs-p: var(--rs-unit-x2);
 
-		border-radius: var(--rs-unit-radius-small);
+		border-radius: var(--rs-radius-small);
 
 		& .input {
 			font-size: var(--rs-font-size-body-3);
@@ -58,7 +58,7 @@
 	@value large {
 		--rs-p: var(--rs-unit-x3);
 
-		border-radius: var(--rs-unit-radius-medium);
+		border-radius: var(--rs-radius-medium);
 
 		& .input {
 			font-size: var(--rs-font-size-body-2);
@@ -69,7 +69,7 @@
 	@value xlarge {
 		--rs-p: var(--rs-unit-x4);
 
-		border-radius: var(--rs-unit-radius-medium);
+		border-radius: var(--rs-radius-medium);
 
 		& .input {
 			font-size: var(--rs-font-size-body-2);

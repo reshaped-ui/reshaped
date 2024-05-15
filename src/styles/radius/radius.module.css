@@ -8,15 +8,15 @@
 	}
 
 	@value small {
-		--rs-radius: var(--rs-unit-radius-small);
+		--rs-radius: var(--rs-radius-small);
 	}
 
 	@value medium {
-		--rs-radius: var(--rs-unit-radius-medium);
+		--rs-radius: var(--rs-radius-medium);
 	}
 
 	@value large {
-		--rs-radius: var(--rs-unit-radius-large);
+		--rs-radius: var(--rs-radius-large);
 	}
 
 	@value circular {

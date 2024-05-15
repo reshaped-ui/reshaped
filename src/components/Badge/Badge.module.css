@@ -7,7 +7,7 @@
 	justify-content: center;
 	gap: var(--rs-badge-gap);
 	vertical-align: top;
-	border-radius: var(--rs-unit-radius-small);
+	border-radius: var(--rs-radius-small);
 	background: var(--rs-color-background-neutral);
 	color: var(--rs-color-foreground-neutral);
 	box-sizing: border-box;

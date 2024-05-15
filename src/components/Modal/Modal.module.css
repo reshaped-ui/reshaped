@@ -27,7 +27,7 @@
 		inset: 0;
 		transform: scale(0.96);
 		position: relative;
-		border-radius: var(--rs-unit-radius-large);
+		border-radius: var(--rs-radius-large);
 		overflow: hidden;
 		opacity: 0;
 
@@ -51,7 +51,7 @@
 		inset-block-start: initial;
 		transform: translate(0, 100%);
 		position: fixed;
-		border-radius: var(--rs-unit-radius-large) var(--rs-unit-radius-large) 0 0;
+		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
 		opacity: 1;
 

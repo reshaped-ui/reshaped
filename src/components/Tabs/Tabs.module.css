@@ -66,7 +66,7 @@
 
 	/* Highlighting causes background animation to get cut off */
 	-webkit-tap-highlight-color: transparent;
-	border-radius: var(--rs-unit-radius-medium);
+	border-radius: var(--rs-radius-medium);
 }
 
 .buttonContent {
@@ -74,7 +74,7 @@
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
-	border-radius: var(--rs-unit-radius-medium);
+	border-radius: var(--rs-radius-medium);
 
 	&:hover {
 		color: var(--rs-color-foreground-neutral-faded);
@@ -101,7 +101,7 @@
 .--item-active::after,
 .selector {
 	position: absolute;
-	border-radius: calc(var(--rs-unit-radius-medium) - 1px);
+	border-radius: calc(var(--rs-radius-medium) - 1px);
 	background: var(--rs-color-border-primary);
 	z-index: var(--rs-z-index-raised);
 }
@@ -341,7 +341,7 @@
 }
 
 .--variant-pills-elevated .list {
-	border-radius: var(--rs-unit-radius-medium);
+	border-radius: var(--rs-radius-medium);
 	background: var(--rs-color-background-neutral-faded);
 	border: 2px solid transparent;
 }

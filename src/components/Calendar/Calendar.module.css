@@ -49,8 +49,8 @@
 	/* First day of the week */
 	&:first-child .cell-button,
 	&--active-start .cell-button {
-		border-start-start-radius: var(--rs-unit-radius-small);
-		border-end-start-radius: var(--rs-unit-radius-small);
+		border-start-start-radius: var(--rs-radius-small);
+		border-end-start-radius: var(--rs-radius-small);
 	}
 
 	/* Last day of the week */
@@ -59,13 +59,13 @@
 	/* Hovered date after start date or the highlighted range */
 	&--in-range + &:hover:not(&--in-range) .cell-button,
 	&--active-start + &:hover:not(&--in-range) .cell-button {
-		border-start-end-radius: var(--rs-unit-radius-small);
-		border-end-end-radius: var(--rs-unit-radius-small);
+		border-start-end-radius: var(--rs-radius-small);
+		border-end-end-radius: var(--rs-radius-small);
 	}
 
 	/* Hovered date outside the selection and range highlighted dates */
 	&:hover:not(&--in-range, &--in-range + &:hover, &--active-start + &:hover) .cell-button,
 	&--active-single + &:hover .cell-button {
-		border-radius: var(--rs-unit-radius-small);
+		border-radius: var(--rs-radius-small);
 	}
 }
