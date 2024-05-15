@@ -32,7 +32,7 @@ describe("useHotkey", () => {
 			</Reshaped>
 		);
 
-		await userEvent.keyboard("{a>}b");
+		await userEvent.keyboard("{a>}b{/a}");
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
@@ -44,7 +44,7 @@ describe("useHotkey", () => {
 			</Reshaped>
 		);
 
-		await userEvent.keyboard("{meta}");
+		await userEvent.keyboard("{Meta}");
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
@@ -71,7 +71,7 @@ describe("useHotkey", () => {
 			</Reshaped>
 		);
 
-		await userEvent.keyboard("{a>}b");
+		await userEvent.keyboard("{a>}b{/a}");
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
@@ -83,7 +83,7 @@ describe("useHotkey", () => {
 			</Reshaped>
 		);
 
-		await userEvent.keyboard("{a>}b");
+		await userEvent.keyboard("{a>}b{/a}");
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
@@ -91,11 +91,11 @@ describe("useHotkey", () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
-				<Component hotkeys={{ "a + b": fn }} />
+				<Component hotkeys={{ "z + x": fn }} />
 			</Reshaped>
 		);
 
-		await userEvent.keyboard("{a>}{b>}{c>}");
+		await userEvent.keyboard("{z>}{x>}c{/x}{/z}");
 		// When c is pressed, it doesn't trigger a+b for the second time
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
@@ -104,11 +104,11 @@ describe("useHotkey", () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
-				<Component hotkeys={{ "Meta + a": fn }} />
+				<Component hotkeys={{ "Meta + b": fn }} />
 			</Reshaped>
 		);
 
-		await userEvent.keyboard("{Meta>}aa");
+		await userEvent.keyboard("{Meta>}bb{/Meta}");
 		expect(fn).toHaveBeenCalledTimes(2);
 	});
 });

@@ -7,6 +7,7 @@ export default {
 	setupFilesAfterEnv: ["./tools/jest/jest.setup.ts"],
 	roots: ["./src"],
 	preset: "ts-jest",
+	transformIgnorePatterns: [".+(?!culori).+\\.js$"],
 	moduleDirectories: ["node_modules", path.join(__dirname, "../../src")],
 	moduleNameMapper: {
 		"\\.css$": "identity-obj-proxy",

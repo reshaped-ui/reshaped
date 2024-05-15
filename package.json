@@ -70,7 +70,7 @@
 		"release:copy": "sh ./bin/release-copy.sh",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
 		"test:vrt": "yarn chromatic",
-		"test:unit": "jest --config tools/jest/jest.config.js",
+		"test:unit": "jest --config tools/jest/jest.config.ts",
 		"test:size": "size-limit",
 		"lint": "yarn lint:js && yarn lint:css",
 		"lint:js": "eslint --quiet --fix",
@@ -132,6 +132,7 @@
 		"stylelint-config-prettier": "9.0.5",
 		"stylelint-config-standard": "36.0.0",
 		"ts-jest": "29.1.2",
+		"ts-node": "10.9.2",
 		"typescript": "5.4.4",
 		"vite": "5.2.8",
 		"vite-tsconfig-paths": "4.3.2"

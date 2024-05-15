@@ -5,7 +5,13 @@ export default { title: "Hooks/useHotkeys" };
 
 function Example() {
 	const { checkHotkeyState } = useHotkeys({
-		"shift + b + n": null,
+		"shift + b + n": () => console.log("pressed"),
+		"c + v": () => console.log(111),
+		"Meta + v": () => console.log(222),
+		"mod + ArrowRight": () => console.log("right"),
+		"mod + ArrowUp": () => console.log("top"),
+		"shift + ArrowRight": () => console.log("right"),
+		"shift + ArrowUp": () => console.log("top"),
 	});
 	const active = checkHotkeyState("shift + b + n");
 	const shiftActive = checkHotkeyState("shift");
