@@ -19,7 +19,7 @@
 .decorator {
 	width: var(--rs-line-height-body-3);
 	height: var(--rs-line-height-body-3);
-	border-radius: var(--rs-unit-radius-small);
+	border-radius: var(--rs-radius-small);
 	border: 1px solid var(--rs-color-border-neutral);
 	background: var(--rs-color-background-elevation-base);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);

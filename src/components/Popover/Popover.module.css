@@ -3,7 +3,7 @@
 }
 
 .content--variant-elevated {
-	border-radius: var(--rs-unit-radius-medium);
+	border-radius: var(--rs-radius-medium);
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
 	border: 1px solid var(--rs-color-border-neutral-faded);
@@ -22,4 +22,3 @@
 		max-width: none;
 	}
 }
-

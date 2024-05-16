@@ -102,7 +102,7 @@
 	@value medium {
 		--rs-text-field-gap: var(--rs-unit-x2);
 
-		border-radius: var(--rs-unit-radius-small);
+		border-radius: var(--rs-radius-small);
 
 		& .input {
 			padding-top: var(--rs-unit-x2);
@@ -119,7 +119,7 @@
 	@value large {
 		--rs-text-field-gap: var(--rs-unit-x3);
 
-		border-radius: var(--rs-unit-radius-medium);
+		border-radius: var(--rs-radius-medium);
 
 		& .input {
 			padding-top: var(--rs-unit-x3);
@@ -136,7 +136,7 @@
 	@value xlarge {
 		--rs-text-field-gap: var(--rs-unit-x4);
 
-		border-radius: var(--rs-unit-radius-medium);
+		border-radius: var(--rs-radius-medium);
 
 		& .input {
 			padding-top: var(--rs-unit-x4);

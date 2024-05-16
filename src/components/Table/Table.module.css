@@ -60,7 +60,7 @@
 }
 
 .--border-outer .table {
-	border-radius: var(--rs-unit-radius-medium);
+	border-radius: var(--rs-radius-medium);
 	border: 1px solid var(--rs-color-border-neutral-faded);
 }
 

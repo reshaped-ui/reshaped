@@ -22,7 +22,7 @@ const Demo = (props: any) => {
 						padding: "var(--rs-unit-x4)",
 						height: 100,
 						width: 160,
-						borderRadius: "var(--rs-unit-radius-medium)",
+						borderRadius: "var(--rs-radius-medium)",
 						border: "1px solid var(--rs-color-border-neutral-faded)",
 						boxSizing: "border-box",
 					}}
@@ -132,7 +132,7 @@ export const testInsideScrollArea = () => (
 								padding: "var(--rs-unit-x4)",
 								height: 100,
 								width: 160,
-								borderRadius: "var(--rs-unit-radius-medium)",
+								borderRadius: "var(--rs-radius-medium)",
 								border: "1px solid var(--rs-color-border-neutral-faded)",
 								boxSizing: "border-box",
 							}}
@@ -168,7 +168,7 @@ export const testInsideFixed = () => (
 								padding: "var(--rs-unit-x4)",
 								height: 100,
 								width: 160,
-								borderRadius: "var(--rs-unit-radius-medium)",
+								borderRadius: "var(--rs-radius-medium)",
 								border: "1px solid var(--rs-color-border-neutral-faded)",
 								boxSizing: "border-box",
 							}}
@@ -193,7 +193,7 @@ export const widthTrigger = () => (
 				style={{
 					background: "var(--rs-color-background-elevation-overlay)",
 					padding: "var(--rs-unit-x4)",
-					borderRadius: "var(--rs-unit-radius-medium)",
+					borderRadius: "var(--rs-radius-medium)",
 					border: "1px solid var(--rs-color-border-neutral-faded)",
 					boxSizing: "border-box",
 				}}

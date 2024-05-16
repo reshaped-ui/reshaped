@@ -35,7 +35,7 @@ button.root {
 	@value small {
 		--rs-p-v: var(--rs-unit-x1);
 		--rs-p-h: var(--rs-unit-x2);
-		--rs-menu-item-radius: var(--rs-unit-radius-small);
+		--rs-menu-item-radius: var(--rs-radius-small);
 
 		font-size: var(--rs-font-size-body-3);
 		line-height: var(--rs-line-height-body-3);
@@ -44,7 +44,7 @@ button.root {
 	@value medium {
 		--rs-p-v: var(--rs-unit-x2);
 		--rs-p-h: var(--rs-unit-x3);
-		--rs-menu-item-radius: var(--rs-unit-radius-medium);
+		--rs-menu-item-radius: var(--rs-radius-medium);
 
 		font-size: var(--rs-font-size-body-3);
 		line-height: var(--rs-line-height-body-3);
@@ -53,7 +53,7 @@ button.root {
 	@value large {
 		--rs-p-v: var(--rs-unit-x3);
 		--rs-p-h: var(--rs-unit-x4);
-		--rs-menu-item-radius: var(--rs-unit-radius-medium);
+		--rs-menu-item-radius: var(--rs-radius-medium);
 
 		font-size: var(--rs-font-size-body-2);
 		line-height: var(--rs-line-height-body-2);

@@ -22,7 +22,7 @@ const Placeholder = (props: Props) => {
 				display: "flex",
 				alignItems: "center",
 				justifyContent: "center",
-				borderRadius: "var(--rs-unit-radius-small)",
+				borderRadius: "var(--rs-radius-small)",
 			}}
 		>
 			{children}

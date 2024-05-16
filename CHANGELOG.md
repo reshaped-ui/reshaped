@@ -26,3 +26,7 @@ Theming:
 Utility:
 
 - [Breaking] Hidden: Switched to display: contents. Removed displayStyle prop and render props children function
+
+Hooks:
+
+- useHotkeys: Added support for holding keys pressed

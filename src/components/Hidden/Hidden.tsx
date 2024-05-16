@@ -4,7 +4,6 @@ import s from "./Hidden.module.css";
 
 const Hidden = (props: T.Props) => {
 	const { as: TagName = "div", children, visibility, hide } = props;
-	console.log(children);
 	const rootClassNames = classNames(
 		s.root,
 		...responsiveClassNames(s, "--hidden", hide),

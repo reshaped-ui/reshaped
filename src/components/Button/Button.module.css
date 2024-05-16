@@ -107,7 +107,7 @@
 		--rs-button-gap: var(--rs-unit-x1);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
-		--rs-button-radius: var(--rs-unit-radius-small);
+		--rs-button-radius: var(--rs-radius-small);
 	}
 
 	@value medium {
@@ -116,7 +116,7 @@
 		--rs-button-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
-		--rs-button-radius: var(--rs-unit-radius-small);
+		--rs-button-radius: var(--rs-radius-small);
 	}
 
 	@value large {
@@ -125,7 +125,7 @@
 		--rs-button-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
-		--rs-button-radius: var(--rs-unit-radius-medium);
+		--rs-button-radius: var(--rs-radius-medium);
 	}
 
 	@value xlarge {
@@ -134,7 +134,7 @@
 		--rs-button-gap: var(--rs-unit-x3);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
-		--rs-button-radius: var(--rs-unit-radius-medium);
+		--rs-button-radius: var(--rs-radius-medium);
 	}
 }
 

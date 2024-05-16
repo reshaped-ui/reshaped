@@ -73,7 +73,7 @@
 		--rs-select-gap: var(--rs-unit-x2);
 		--rs-select-chevron-size: var(--rs-unit-x4);
 
-		border-radius: var(--rs-unit-radius-small);
+		border-radius: var(--rs-radius-small);
 
 		& .input {
 			padding-top: var(--rs-unit-x1);
@@ -87,7 +87,7 @@
 		--rs-select-gap: var(--rs-unit-x3);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
-		border-radius: var(--rs-unit-radius-medium);
+		border-radius: var(--rs-radius-medium);
 
 		& .input {
 			padding-top: var(--rs-unit-x2);
@@ -101,7 +101,7 @@
 		--rs-select-gap: var(--rs-unit-x4);
 		--rs-select-chevron-size: var(--rs-unit-x5);
 
-		border-radius: var(--rs-unit-radius-medium);
+		border-radius: var(--rs-radius-medium);
 
 		& .input {
 			padding-top: var(--rs-unit-x3);
