@@ -19,7 +19,7 @@ export type SubtitleProps = {
 
 export type Props = {
 	children?: React.ReactNode;
-	position?: G.Responsive<"center" | "end" | "bottom" | "start">;
+	position?: G.Responsive<"center" | "end" | "bottom" | "start" | "full-screen">;
 	size?: G.Responsive<string>;
 	padding?: G.Responsive<number>;
 	active?: boolean;
