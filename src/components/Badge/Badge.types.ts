@@ -31,7 +31,7 @@ type WithDismissible = {
 
 type WithoutDismissible = {
 	onDismiss?: never;
-	dismissAriaLabel?: never;
+	dismissAriaLabel?: string;
 };
 
 export type Props = (WithChildren | WithEmpty) & (WithDismissible | WithoutDismissible);

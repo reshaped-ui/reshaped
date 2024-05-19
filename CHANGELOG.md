@@ -4,6 +4,8 @@
 - Slider: Fit thumbs within the bar area not to cause overflow
 - Slider: Fixed horizontal scrolling on mount in safari
 - Actionable: Switched to :focus-visible
+- Badge: Relaxed the types to be able to pass dismissAriaLabel while onDismiss is undefined
+- Modal: Added full-screen position
 
   3.0
 
@@ -22,6 +24,12 @@ Theming:
 - [Breaking] --rs-unit-radius-_ turned into --rs-radius-_
 - [Breaking] unit.radius in theme config is now radius
 - [Breaking] heavy font weight is now called extrabold
+
+Figma:
+
+- [Breaking] Icon: switched to use instance swapping
+- Icon: Added on background colors support
+- Icon: Fixed edge cases for applying correct color to the icons in other components
 
 Utility:
 

@@ -36,7 +36,7 @@ const Demo = (props: any) => {
 					)}
 					{children ||
 						"Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."}
-					<Button onClick={() => {}}>Hey</Button>
+					<Button onClick={deactivate}>Close</Button>
 					<TextField name="hey" />
 				</View>
 			</Modal>
@@ -46,6 +46,9 @@ const Demo = (props: any) => {
 
 export const position = () => (
 	<Example>
+		<Example.Item title={["responsive position", "[s] full-screen", "[m] center", "[l] end"]}>
+			<Demo position={{ s: "full-screen", m: "center", l: "end" }} />
+		</Example.Item>
 		<Example.Item title="position: center">
 			<Demo position="center" />
 		</Example.Item>
@@ -58,8 +61,8 @@ export const position = () => (
 		<Example.Item title="position: end">
 			<Demo position="end" />
 		</Example.Item>
-		<Example.Item title={["responsive position", "[s] bottom", "[m] center", "[l] end"]}>
-			<Demo position={{ s: "bottom", m: "center", l: "end" }} />
+		<Example.Item title="position: full-screen">
+			<Demo position="full-screen" />
 		</Example.Item>
 	</Example>
 );
