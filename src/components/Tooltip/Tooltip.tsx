@@ -9,6 +9,8 @@ import s from "./Tooltip.module.css";
 const Tooltip = (props: T.Props) => {
 	const { id, text, children, onOpen, onClose, position = "bottom", active } = props;
 
+	if (!text) return <>{children({})}</>;
+
 	return (
 		<Flyout
 			id={id}

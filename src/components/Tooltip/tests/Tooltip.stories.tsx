@@ -63,3 +63,11 @@ export const controlled = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const edgeCases = () => (
+	<Example>
+		<Example.Item title="without text">
+			<Tooltip>{() => <Button>Button</Button>}</Tooltip>
+		</Example.Item>
+	</Example>
+);

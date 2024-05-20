@@ -6,6 +6,7 @@
 - Actionable: Switched to :focus-visible
 - Badge: Relaxed the types to be able to pass dismissAriaLabel while onDismiss is undefined
 - Modal: Added full-screen position
+- Tooltip: Optional text prop
 
   3.0
 
