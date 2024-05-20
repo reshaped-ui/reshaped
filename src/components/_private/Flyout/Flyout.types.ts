@@ -54,7 +54,7 @@ export type ControlledProps = BaseProps & WithControlled;
 export type Props = ControlledProps | UncontrolledProps;
 
 export type TriggerProps = {
-	children: (attributes: TriggerAttributes) => React.ReactNode;
+	children: (attributes: TriggerAttributes | {}) => React.ReactNode;
 };
 
 export type ContentProps = {
