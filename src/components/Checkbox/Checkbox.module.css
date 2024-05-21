@@ -20,6 +20,7 @@
 	width: var(--rs-line-height-body-3);
 	height: var(--rs-line-height-body-3);
 	border-radius: var(--rs-radius-small);
+	color: var(--rs-color-on-background-primary);
 	border: 1px solid var(--rs-color-border-neutral);
 	background: var(--rs-color-background-elevation-base);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
@@ -74,7 +75,6 @@
 .root.--error:hover .input:checked + .decorator {
 	border-color: var(--rs-color-background-primary);
 	background: var(--rs-color-background-primary);
-	color: var(--rs-color-on-background-primary);
 
 	& .icon {
 		opacity: 1;

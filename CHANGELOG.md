@@ -39,6 +39,7 @@ Utilities:
 Components:
 
 - Alert: Increased gap before actions when using inline layout
+- Link: Added `warning` color support
 
 Hooks:
 

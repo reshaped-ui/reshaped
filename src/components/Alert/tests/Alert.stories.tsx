@@ -97,8 +97,12 @@ export const color = () => (
 				icon={IconZap}
 				actionsSlot={
 					<>
-						<Link variant="plain">View now</Link>
-						<Link variant="plain">Dismiss</Link>
+						<Link variant="plain" color="warning">
+							View now
+						</Link>
+						<Link variant="plain" color="warning">
+							Dismiss
+						</Link>
 					</>
 				}
 			>

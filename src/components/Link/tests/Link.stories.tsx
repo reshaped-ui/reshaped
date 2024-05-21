@@ -39,6 +39,9 @@ export const color = () => (
 		<Example.Item title="color: positive">
 			<Link color="positive">Link</Link>
 		</Example.Item>
+		<Example.Item title="color: warning">
+			<Link color="warning">Link</Link>
+		</Example.Item>
 		<Example.Item title="color: inherit">
 			<Link color="inherit">Link</Link>
 		</Example.Item>

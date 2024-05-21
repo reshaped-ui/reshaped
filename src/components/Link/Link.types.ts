@@ -6,6 +6,6 @@ export type Props = Pick<
 	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "type"
 > & {
 	icon?: IconProps["svg"];
-	color?: "inherit" | "critical" | "primary" | "positive";
+	color?: "inherit" | "critical" | "primary" | "positive" | "warning";
 	variant?: "plain" | "underline";
 };

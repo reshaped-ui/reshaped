@@ -15,6 +15,10 @@
 	color: var(--rs-color-foreground-positive);
 }
 
+.root.--color-warning {
+	color: var(--rs-color-foreground-warning);
+}
+
 .root.--color-inherit {
 	/* currentColor for color is not supported in Safari iOS */
 	color: inherit;
