@@ -32,9 +32,13 @@ Figma:
 - Icon: Added on background colors support
 - Icon: Fixed edge cases for applying correct color to the icons in other components
 
-Utility:
+Utilities:
 
 - [Breaking] Hidden: Switched to display: contents. Removed displayStyle prop and render props children function
+
+Components:
+
+- Alert: Increased gap before actions when using inline layout
 
 Hooks:
 
