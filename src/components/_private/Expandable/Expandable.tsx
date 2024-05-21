@@ -1,45 +1,72 @@
 "use client";
 
 import React from "react";
-import * as T from "./Expandable.types";
-import s from "./Expandable.module.css";
 import { classNames } from "utilities/helpers";
 import { onNextFrame } from "utilities/animation";
+import * as T from "./Expandable.types";
+import s from "./Expandable.module.css";
 
 const Expandable = (props: T.ContentProps) => {
 	const { children, active, attributes } = props;
-	const [rendered, setRendered] = React.useState(active);
-	const rootClassNames = classNames(
+	const rootRef = React.useRef<HTMLDivElement>(null);
+	const mountedRef = React.useRef(false);
+	const [animatedHeight, setAnimatedHeight] = React.useState<React.CSSProperties["height"] | null>(
+		active ? "auto" : null
+	);
+	const contentClassNames = classNames(
 		s.root,
-		active && rendered && s["--active"],
-		!active && !rendered && s["--hidden"]
+		mountedRef.current && animatedHeight !== "auto" && s["--animated"]
 	);
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
 		if (e.propertyName !== "height") return;
-		if (active) return;
 
-		onNextFrame(() => {
-			setRendered(false);
-		});
+		setAnimatedHeight(active ? "auto" : null);
 	};
 
+	// Avoid animations happening if component is active by default
+	// onNextFrame lets us wait for the component to render first
 	React.useEffect(() => {
-		if (!active) return;
-		setRendered(active);
+		onNextFrame(() => {
+			mountedRef.current = true;
+		});
+	}, []);
+
+	React.useEffect(() => {
+		const rootEl = rootRef.current;
+		if (!rootEl || !mountedRef.current) return;
+
+		let targetHeight: React.CSSProperties["height"] = 0;
+
+		if (active) {
+			rootEl.style.height = "auto";
+			targetHeight = rootEl.clientHeight;
+			rootEl.style.height = "0";
+		}
+
+		if (!active) {
+			rootEl.style.height = `${rootEl.clientHeight}px`;
+		}
+
+		setAnimatedHeight(targetHeight);
 	}, [active]);
 
 	return (
 		<div
 			{...attributes}
-			className={rootClassNames}
+			className={contentClassNames}
+			ref={rootRef}
+			style={
+				animatedHeight !== null
+					? { height: animatedHeight, overflow: animatedHeight === "auto" ? "visible" : undefined }
+					: undefined
+			}
 			onTransitionEnd={handleTransitionEnd}
 			role="region"
-			hidden={!active}
+			hidden={!active && animatedHeight === null}
 		>
-			<div className={s.inner}>{children}</div>
+			{children}
 		</div>
 	);
 };
-
 export default Expandable;
