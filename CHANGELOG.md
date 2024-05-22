@@ -31,15 +31,22 @@ Figma:
 - [Breaking] Icon: switched to use instance swapping
 - Icon: Added on background colors support
 - Icon: Fixed edge cases for applying correct color to the icons in other components
+- Card: Improved content clip
 
 Utilities:
 
 - [Breaking] Hidden: Switched to display: contents. Removed displayStyle prop and render props children function
+- Container: Added "align" | "justify" | "height" | "maxHeight" support
 
 Components:
 
 - Alert: Increased gap before actions when using inline layout
 - Link: Added `warning` color support
+- MenuItem: Aligned the medium size border radius in design and code
+- TextField: Removed focus ring for headless variant
+- Badge: ref support for routing
+- Badge: fixed onClick triggerring together with onDismiss
+- Autocomplete: Added onInput support
 
 Hooks:
 

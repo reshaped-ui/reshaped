@@ -11,9 +11,14 @@
 	border: 1px solid var(--rs-color-border-neutral);
 	padding: calc(var(--rs-p-v) - 1px) 0;
 
-	&:focus-within:not(:has(button:focus, a:focus)) {
+	&:focus-within {
 		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
 		border-color: var(--rs-color-border-primary);
+	}
+
+	&:focus-within:has(button:focus, a:focus) {
+		box-shadow: none;
+		border-color: transparent;
 	}
 }
 
@@ -73,7 +78,8 @@
 }
 
 .attachment--position-end {
-	padding-inline-end: var(--rs-unit-x1);
+	/* Compensate for the end border */
+	padding-inline-end: calc(var(--rs-unit-x1) - 1px);
 	gap: var(--rs-unit-x1);
 
 	& .icon,

@@ -2,7 +2,7 @@ import type React from "react";
 import type { ViewProps } from "components/View";
 import type * as G from "types/global";
 
-export type Props = Pick<ViewProps, "padding"> & {
+export type Props = Pick<ViewProps, "padding" | "align" | "justify" | "height" | "maxHeight"> & {
 	width?: G.Responsive<string | number>;
 	children?: React.ReactNode;
 	className?: G.ClassName;

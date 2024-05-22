@@ -19,6 +19,7 @@ const fixtures = {
 describe("Components/Autocomplete", () => {
 	test("works from keyboard", async () => {
 		const handleChange = jest.fn();
+		const handleInput = jest.fn();
 		render(
 			<Reshaped>
 				<Autocomplete
@@ -26,6 +27,7 @@ describe("Components/Autocomplete", () => {
 					className={fixtures.className}
 					attributes={{ "data-testid": fixtures.id }}
 					onChange={handleChange}
+					onInput={handleInput}
 				>
 					<Autocomplete.Item value={fixtures.firstValue}>{fixtures.itemContent}</Autocomplete.Item>
 					<Autocomplete.Item value={fixtures.secondValue}>{fixtures.itemContent}</Autocomplete.Item>
@@ -39,6 +41,17 @@ describe("Components/Autocomplete", () => {
 			inputEl.focus();
 		});
 
+		await userEvent.keyboard("{f}");
+
+		expect(handleChange).toHaveBeenCalledTimes(1);
+		expect(handleChange).toHaveBeenCalledWith(
+			expect.objectContaining({ name: fixtures.name, value: "f" })
+		);
+		expect(handleInput).toHaveBeenCalledTimes(1);
+		expect(handleInput).toHaveBeenCalledWith(
+			expect.objectContaining({ name: fixtures.name, value: "f" })
+		);
+
 		await waitFor(() => {
 			const items = screen.getAllByRole("option");
 			expect(items).toHaveLength(2);
@@ -51,8 +64,11 @@ describe("Components/Autocomplete", () => {
 
 		await userEvent.keyboard("{Enter}");
 
-		expect(handleChange).toHaveBeenCalledTimes(1);
-		expect(handleChange).toHaveBeenCalledWith({ name: fixtures.name, value: fixtures.firstValue });
+		expect(handleChange).toHaveBeenCalledTimes(2);
+		expect(handleChange).toHaveBeenCalledWith(
+			expect.objectContaining({ name: fixtures.name, value: fixtures.firstValue })
+		);
+		expect(handleInput).toHaveBeenCalledTimes(1);
 	});
 
 	test("works with mouse", async () => {

@@ -43,3 +43,7 @@ export type ContainerProps = {
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div", ContainerProps>;
 };
+
+export type Export = React.ForwardRefExoticComponent<Props> & {
+	Container: React.ComponentType<ContainerProps>;
+};

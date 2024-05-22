@@ -70,14 +70,14 @@
 --rs-radius-small: 4px;
 --rs-radius-medium: 8px;
 --rs-radius-large: 12px;
---rs-color-brand: #2383e2;
+--rs-color-brand: #2563eb;
 --rs-color-white: #ffffff;
 --rs-color-black: #000000;
---rs-color-on-background-primary: #000000;
+--rs-color-on-background-primary: #ffffff;
 --rs-color-on-background-critical: #ffffff;
 --rs-color-on-background-warning: #000000;
 --rs-color-on-background-positive: #ffffff;
---rs-color-on-brand: #000000;
+--rs-color-on-brand: #ffffff;
 --rs-color-rgb-white: 255, 255, 255;
 --rs-color-rgb-black: 0, 0, 0;
 --rs-duration-fast: 200ms;
@@ -91,12 +91,12 @@
 			}
 		
 			[data-rs-theme="slate"][data-rs-color-mode="light"] {
-					--rs-color-background-primary: #2383e2;
---rs-color-background-primary-faded: #e5f1fe;
---rs-color-background-primary-highlighted: #1b78d3;
---rs-color-border-primary: #136bbe;
---rs-color-border-primary-faded: #d3e3f6;
---rs-color-foreground-primary: #136bbe;
+					--rs-color-background-primary: #2563eb;
+--rs-color-background-primary-faded: #e8f0ff;
+--rs-color-background-primary-highlighted: #1b58de;
+--rs-color-border-primary: #1e5ce5;
+--rs-color-border-primary-faded: #d7e2f6;
+--rs-color-foreground-primary: #1e5ce5;
 --rs-color-background-critical: #e22c2c;
 --rs-color-background-critical-faded: #fff1ef;
 --rs-color-background-critical-highlighted: #d12526;
@@ -131,9 +131,9 @@
 --rs-color-background-elevation-overlay: #ffffff;
 --rs-color-background-page: #ffffff;
 --rs-color-background-page-faded: #fafbfb;
---rs-color-rgb-background-primary: 35, 131, 226;
---rs-color-rgb-background-primary-faded: 229, 241, 254;
---rs-color-rgb-background-primary-highlighted: 27, 120, 211;
+--rs-color-rgb-background-primary: 37, 99, 235;
+--rs-color-rgb-background-primary-faded: 232, 240, 255;
+--rs-color-rgb-background-primary-highlighted: 27, 88, 222;
 --rs-color-rgb-background-critical: 226, 44, 44;
 --rs-color-rgb-background-critical-faded: 255, 241, 239;
 --rs-color-rgb-background-critical-highlighted: 209, 37, 38;
@@ -157,12 +157,12 @@
 			}
 		
 			[data-rs-theme="slate"][data-rs-color-mode="dark"] {
-					--rs-color-background-primary: #1b79d3;
---rs-color-background-primary-faded: #152639;
---rs-color-background-primary-highlighted: #2383e2;
---rs-color-border-primary: #6ca5e7;
---rs-color-border-primary-faded: #223953;
---rs-color-foreground-primary: #6ca5e7;
+					--rs-color-background-primary: #2563eb;
+--rs-color-background-primary-faded: #17243d;
+--rs-color-background-primary-highlighted: #3370f2;
+--rs-color-border-primary: #7199e5;
+--rs-color-border-primary-faded: #253759;
+--rs-color-foreground-primary: #7199e5;
 --rs-color-background-critical: #d72828;
 --rs-color-background-critical-faded: #391b18;
 --rs-color-background-critical-highlighted: #e82f2e;
@@ -197,9 +197,9 @@
 --rs-color-background-elevation-overlay: #1d1d1f;
 --rs-color-background-page: #0e0e0f;
 --rs-color-background-page-faded: #131414;
---rs-color-rgb-background-primary: 27, 121, 211;
---rs-color-rgb-background-primary-faded: 21, 38, 57;
---rs-color-rgb-background-primary-highlighted: 35, 131, 226;
+--rs-color-rgb-background-primary: 37, 99, 235;
+--rs-color-rgb-background-primary-faded: 23, 36, 61;
+--rs-color-rgb-background-primary-highlighted: 51, 112, 242;
 --rs-color-rgb-background-critical: 215, 40, 40;
 --rs-color-rgb-background-critical-faded: 57, 27, 24;
 --rs-color-rgb-background-critical-highlighted: 232, 47, 46;

@@ -40,3 +40,13 @@ export const width = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const layout = () => (
+	<Example>
+		<Example.Item title="center">
+			<Container align="center" justify="center" height="500px">
+				<Placeholder />
+			</Container>
+		</Example.Item>
+	</Example>
+);

@@ -23,7 +23,7 @@
 	transition-property: opacity;
 }
 
-.root.--actionable:hover {
+.root.--actionable:hover:not(:has(.dismiss:hover)) {
 	opacity: 0.8;
 }
 

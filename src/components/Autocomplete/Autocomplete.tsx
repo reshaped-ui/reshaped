@@ -13,7 +13,7 @@ import * as T from "./Autocomplete.types";
 const AutocompleteContext = React.createContext({} as T.Context);
 
 const Autocomplete = (props: T.Props) => {
-	const { children, onChange, onItemSelect, name, ...textFieldProps } = props;
+	const { children, onChange, onInput, onItemSelect, name, ...textFieldProps } = props;
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
 	const [active, setActive] = React.useState(false);
 	// Prevent dropdown from opening on selecting an item
@@ -57,6 +57,11 @@ const Autocomplete = (props: T.Props) => {
 		textFieldProps.onFocus?.(e);
 	};
 
+	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		onInput?.({ value: e.currentTarget.value, name, event: e });
+		textFieldProps.inputAttributes?.onInput?.(e);
+	};
+
 	return (
 		<AutocompleteContext.Provider value={{ onItemClick: handleItemClick }}>
 			<DropdownMenu
@@ -83,6 +88,7 @@ const Autocomplete = (props: T.Props) => {
 									attributes.onFocus?.();
 									handleFocus(e);
 								},
+								onInput: handleInput,
 								ref: inputRef,
 								role: "combobox",
 							}}

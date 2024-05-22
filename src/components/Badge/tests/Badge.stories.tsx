@@ -139,13 +139,22 @@ export const icon = () => (
 
 export const actionable = () => (
 	<Example>
+		<Example.Item title="onClick">
+			<Badge onClick={() => console.log("click")} dismissAriaLabel="Dismiss">
+				Badge
+			</Badge>
+		</Example.Item>
 		<Example.Item title="dismissible, close button is actionable">
 			<Badge onDismiss={() => console.log("heyeye")} dismissAriaLabel="Dismiss">
 				Badge
 			</Badge>
 		</Example.Item>
 		<Example.Item title="dismissible + onClick, whole badge is actionable">
-			<Badge onDismiss={() => console.log("heyeye")} dismissAriaLabel="Dismiss" onClick={() => {}}>
+			<Badge
+				onDismiss={() => console.log("dismiss")}
+				dismissAriaLabel="Dismiss"
+				onClick={() => console.log("click")}
+			>
 				Badge
 			</Badge>
 		</Example.Item>

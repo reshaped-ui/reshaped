@@ -44,7 +44,7 @@ button.root {
 	@value medium {
 		--rs-p-v: var(--rs-unit-x2);
 		--rs-p-h: var(--rs-unit-x3);
-		--rs-menu-item-radius: var(--rs-radius-medium);
+		--rs-menu-item-radius: var(--rs-radius-small);
 
 		font-size: var(--rs-font-size-body-3);
 		line-height: var(--rs-line-height-body-3);

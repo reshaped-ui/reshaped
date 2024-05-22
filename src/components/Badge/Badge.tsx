@@ -2,12 +2,13 @@ import { classNames } from "utilities/helpers";
 import Text from "components/Text";
 import Icon from "components/Icon";
 import IconClose from "icons/Close";
-import Actionable from "components/Actionable";
+import Actionable, { ActionableProps, ActionableRef } from "components/Actionable";
 import type * as T from "./Badge.types";
 import BadgeContainer from "./BadgeContainer";
 import s from "./Badge.module.css";
+import { forwardRef } from "react";
 
-const Badge = (props: T.Props) => {
+const Badge = forwardRef((props: T.Props, ref: ActionableRef) => {
 	const {
 		children,
 		color,
@@ -37,8 +38,19 @@ const Badge = (props: T.Props) => {
 		isActionable && s["--actionable"]
 	);
 
+	const hnadleDismiss: ActionableProps["onClick"] = (e) => {
+		e.stopPropagation();
+		onDismiss?.();
+	};
+
 	return (
-		<Actionable onClick={onClick} href={href} className={rootClassName} attributes={attributes}>
+		<Actionable
+			onClick={onClick}
+			href={href}
+			className={rootClassName}
+			attributes={attributes}
+			ref={ref}
+		>
 			{icon && <Icon svg={icon} autoWidth size={iconSize} />}
 			{children && (
 				<Text
@@ -54,7 +66,7 @@ const Badge = (props: T.Props) => {
 			{endIcon && <Icon svg={endIcon} autoWidth size={iconSize} />}
 			{onDismiss && (
 				<Actionable
-					onClick={onDismiss}
+					onClick={hnadleDismiss}
 					className={s.dismiss}
 					as="span"
 					attributes={{ "aria-label": dismissAriaLabel }}
@@ -64,7 +76,7 @@ const Badge = (props: T.Props) => {
 			)}
 		</Actionable>
 	);
-};
+}) as T.Export;
 
 Badge.Container = BadgeContainer;
 export default Badge;

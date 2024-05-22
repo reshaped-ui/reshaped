@@ -213,7 +213,7 @@ const generate = (
 	} = {}
 ) => {
 	const {
-		primary = "#2383e2",
+		primary = "#2563eb",
 		critical = "#e22c2c",
 		warning = "#facc15",
 		positive = "#118850",
