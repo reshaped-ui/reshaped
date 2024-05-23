@@ -1,4 +1,3 @@
-import React from "react";
 import FlyoutUncontrolled from "./FlyoutUncontrolled";
 import FlyoutControlled from "./FlyoutControlled";
 import FlyoutTrigger from "./FlyoutTrigger";

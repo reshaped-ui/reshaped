@@ -11,7 +11,7 @@ import useHotkeys from "hooks/useHotkeys";
 import useFlyout from "hooks/_private/useFlyout";
 import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
-import { checkTransitions } from "utilities/animation";
+import { checkTransitions, onNextFrame } from "utilities/animation";
 import { Provider, useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 
@@ -51,7 +51,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		defaultActive: passedActive,
 		forcePosition,
 	});
-	const { status, updatePosition, render, hide, remove } = flyout;
+	const { status, updatePosition, render, hide, remove, show } = flyout;
 	// Don't create dismissible queue for hover flyout because they close all together on mouseout
 	const isDismissible = useIsDismissible(
 		triggerType !== "hover" && status !== "idle",
@@ -139,6 +139,26 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const handleContentMouseDown = () => (lockedBlurEffects.current = true);
 	const handleContentMouseUp = () => (lockedBlurEffects.current = false);
 
+	const handleTransitionStart = React.useCallback(
+		(e: TransitionEvent) => {
+			if (!passedActive) return;
+			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
+			transitionStartedRef.current = true;
+		},
+		[passedActive]
+	);
+
+	const handleTransitionEnd = React.useCallback(
+		(e: React.TransitionEvent) => {
+			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
+			if (status === "hidden") {
+				transitionStartedRef.current = false;
+				remove();
+			}
+		},
+		[remove, status]
+	);
+
 	/**
 	 * Control the display based on the props
 	 */
@@ -160,25 +180,10 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		}
 	}, [passedActive, render, hide, disableHideAnimation]);
 
-	const handleTransitionStart = React.useCallback(
-		(e: TransitionEvent) => {
-			if (!passedActive) return;
-			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			transitionStartedRef.current = true;
-		},
-		[passedActive]
-	);
-
-	const handleTransitionEnd = React.useCallback(
-		(e: React.TransitionEvent) => {
-			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			if (status === "hidden") {
-				transitionStartedRef.current = false;
-				remove();
-			}
-		},
-		[remove, status]
-	);
+	React.useEffect(() => {
+		// Wait after positioning before show is triggered to animate flyout from the right side
+		if (status === "positioned") onNextFrame(() => show());
+	}, [status, show]);
 
 	/**
 	 * Handle focus trap

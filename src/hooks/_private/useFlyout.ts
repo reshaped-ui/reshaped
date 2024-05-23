@@ -82,6 +82,7 @@ type UseFlyout = (
 	render: () => void;
 	hide: () => void;
 	remove: () => void;
+	show: () => void;
 };
 
 const SCREEN_OFFSET = 16;
@@ -346,6 +347,7 @@ const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState =>
 			// Disable events before it's positioned to avoid mouseleave getting triggered
 			return { ...state, status: "rendered", styles: { pointerEvents: "none", ...resetStyles } };
 		case "position":
+			console.log("position");
 			return {
 				...state,
 				status: state.status === "visible" ? "visible" : "positioned",
@@ -353,6 +355,7 @@ const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState =>
 				styles: { ...defaultStyles, ...action.payload.styles },
 			};
 		case "show":
+			console.log("show", state);
 			return state.status === "positioned"
 				? { ...state, status: "visible" }
 				: { ...state, status: "idle" };
@@ -362,6 +365,7 @@ const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState =>
 				status: state.status === "idle" || state.status === "hidden" ? "idle" : "hidden",
 			};
 		case "remove":
+			console.log("remove red");
 			return { ...state, status: "idle", styles: resetStyles };
 
 		default:
@@ -379,18 +383,22 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 	});
 
 	const render = React.useCallback(() => {
+		console.log("render");
 		dispatch({ type: "render" });
 	}, []);
 
 	const show = React.useCallback(() => {
+		console.log("show");
 		dispatch({ type: "show" });
 	}, []);
 
 	const hide = React.useCallback(() => {
+		console.log("hide");
 		dispatch({ type: "hide" });
 	}, []);
 
 	const remove = React.useCallback(() => {
+		console.log("remove");
 		dispatch({ type: "remove" });
 	}, []);
 
@@ -409,9 +417,7 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 
 	React.useEffect(() => {
 		if (state.status === "rendered") updatePosition();
-		// Wait after positioning before show is triggered to animate flyout from the right side
-		if (state.status === "positioned") onNextFrame(() => show());
-	}, [state.status, updatePosition, show]);
+	}, [state.status, updatePosition]);
 
 	return React.useMemo(
 		() => ({
@@ -422,8 +428,9 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 			render,
 			hide,
 			remove,
+			show,
 		}),
-		[render, updatePosition, hide, remove, state.position, state.styles, state.status]
+		[render, updatePosition, hide, remove, show, state.position, state.styles, state.status]
 	);
 };
 
