@@ -223,11 +223,6 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	React.useEffect(() => {
 		positionTooltip(minId);
 		positionTooltip(maxId);
-	}, [positionTooltip, minId, maxId]);
-
-	React.useEffect(() => {
-		positionTooltip(minId);
-		positionTooltip(maxId);
 	}, [minId, maxId, minValue, maxValue, positionTooltip]);
 
 	React.useEffect(() => {
