@@ -27,11 +27,6 @@
 	position: absolute;
 	box-sizing: initial;
 	padding: var(--rs-scroll-area-thumb-offset);
-
-	&.--scrollbar-dragging .thumb::before,
-	&:hover .thumb::before {
-		opacity: 0.4;
-	}
 }
 
 .thumb {
@@ -88,4 +83,10 @@
 
 .--display-hover:hover .thumb::before {
 	opacity: 0.2;
+}
+
+.--scrollbar-dragging .thumb::before,
+.--display-hover:hover .--scrollbar-dragging .thumb::before,
+.scrollbar:hover .thumb::before {
+	opacity: 0.4;
 }

@@ -47,6 +47,7 @@ Components:
 - Badge: ref support for routing
 - Badge: fixed onClick triggerring together with onDismiss
 - Autocomplete: Added onInput support
+- ScrollArea: Fixed hover display thumb opacity
 
 Hooks:
 
