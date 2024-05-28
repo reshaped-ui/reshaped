@@ -1,61 +1,35 @@
 import React from "react";
 import useRTL from "hooks/useRTL";
-import { onNextFrame } from "utilities/animation";
 import { getClosestFlyoutTarget } from "utilities/dom";
+import calculatePosition from "./utilities/calculatePosition";
+import type * as T from "./Flyout.types";
 
 /**
  * Typings
  */
-export type FlyoutPosition =
-	| "bottom"
-	| "bottom-start"
-	| "bottom-end"
-	| "top"
-	| "top-start"
-	| "top-end"
-	| "start"
-	| "start-top"
-	| "start-bottom"
-	| "end"
-	| "end-top"
-	| "end-bottom";
-export type FlyoutWidth = "trigger" | string;
 type ElementRef = React.RefObject<HTMLElement>;
 type FlyoutOrderKey = "bottom" | "top" | "end" | "start";
 type PassedFlyoutOptions = {
-	width?: FlyoutWidth;
-	position?: FlyoutPosition;
+	width?: T.Width;
+	position?: T.Position;
 	defaultActive?: boolean;
-	forcePosition?: boolean;
-};
-type FlyoutOptions = {
-	width?: FlyoutWidth;
-	position: FlyoutPosition;
-	rtl: boolean;
 	forcePosition?: boolean;
 };
 type PositionStyles = Record<"left" | "top" | "width" | "height", number>;
 
-type CalculatePosition = (
-	originBounds: ClientRect,
-	targetBounds: ClientRect,
-	boundsDelta: { top: number; left: number },
-	options: FlyoutOptions
-) => {
-	styles: PositionStyles;
-	position: FlyoutPosition;
-};
-
 type Flyout = (
 	origin: HTMLElement,
 	target: HTMLElement,
-	options: FlyoutOptions
-) => ReturnType<CalculatePosition>;
+	options: T.Options
+) => {
+	styles: PositionStyles;
+	position: T.Position;
+};
 
 type FlyoutStyles = React.CSSProperties;
 type FlyoutState = {
 	styles: FlyoutStyles;
-	position?: FlyoutPosition;
+	position?: T.Position;
 	status: "idle" | "rendered" | "positioned" | "visible" | "hidden";
 };
 type FlyoutRenderAction = { type: "render"; payload?: never };
@@ -85,36 +59,21 @@ type UseFlyout = (
 	show: () => void;
 };
 
-const SCREEN_OFFSET = 16;
-
-const topPos: FlyoutPosition[] = ["top-start", "top", "top-end"];
-const bottomPos: FlyoutPosition[] = ["bottom-start", "bottom", "bottom-end"];
-const startPos: FlyoutPosition[] = ["start", "start-bottom", "start-top"];
-const endPos: FlyoutPosition[] = ["end", "end-bottom", "end-top"];
-const order: Record<FlyoutOrderKey, FlyoutPosition[]> = {
+const topPos: T.Position[] = ["top-start", "top", "top-end"];
+const bottomPos: T.Position[] = ["bottom-start", "bottom", "bottom-end"];
+const startPos: T.Position[] = ["start", "start-bottom", "start-top"];
+const endPos: T.Position[] = ["end", "end-bottom", "end-top"];
+const order: Record<FlyoutOrderKey, T.Position[]> = {
 	top: [...topPos, ...bottomPos, ...endPos, ...startPos],
 	bottom: [...bottomPos, ...topPos, ...endPos, ...startPos],
 	start: [...startPos, ...endPos, ...topPos, ...bottomPos],
 	end: [...endPos, ...startPos, ...topPos, ...bottomPos],
 };
 
-const getRTLPosition = (position: FlyoutPosition) => {
-	if (position.includes("start")) return position.replace("start", "end") as FlyoutPosition;
-	if (position.includes("end")) return position.replace("end", "start") as FlyoutPosition;
-	return position;
-};
-
-/**
- * Get a position value which centers 2 elements vertically or horizontally
- */
-const centerBySize = (originSize: number, targetSize: number) => {
-	return Math.floor(originSize / 2 - targetSize / 2);
-};
-
 /**
  * Get an order of positions to try to fit popover on the screen based on its starting position
  */
-const getPositionOrder = (position: FlyoutPosition) => {
+const getPositionOrder = (position: T.Position) => {
 	const types: Array<FlyoutOrderKey> = ["top", "bottom", "start", "end"];
 	const type = types.find((type) => position.startsWith(type)) || "bottom";
 	return order[type];
@@ -136,110 +95,6 @@ const fullyVisible = (bounds: PositionStyles) => {
 		bounds.top >= pageTop &&
 		bounds.top + bounds.height <= pageBottom
 	);
-};
-
-/**
- * Calculate styles for the current position
- */
-const calculatePosition: CalculatePosition = (
-	originBounds,
-	targetBounds,
-	parentOffset,
-	options
-) => {
-	const { position: passedPosition, rtl, width } = options;
-	let left = 0;
-	let top = 0;
-
-	let position = passedPosition;
-	if (rtl) position = getRTLPosition(position);
-	if (width === "full" || width === "trigger") {
-		position = position.includes("top") ? "top" : "bottom";
-	}
-
-	switch (position) {
-		case "bottom":
-		case "top":
-			left = centerBySize(originBounds.width, targetBounds.width) + originBounds.left;
-			break;
-
-		case "start":
-		case "start-top":
-		case "start-bottom":
-			left = originBounds.left - targetBounds.width;
-			break;
-
-		case "end":
-		case "end-top":
-		case "end-bottom":
-			left = originBounds.right;
-			break;
-
-		case "top-start":
-		case "bottom-start":
-			left = originBounds.left;
-			break;
-
-		case "top-end":
-		case "bottom-end":
-			left = originBounds.right - targetBounds.width;
-			break;
-
-		default:
-			break;
-	}
-
-	switch (position) {
-		case "top":
-		case "top-start":
-		case "top-end":
-			top = originBounds.top - targetBounds.height;
-			break;
-
-		case "bottom":
-		case "bottom-start":
-		case "bottom-end":
-			top = originBounds.bottom;
-			break;
-
-		case "start":
-		case "end":
-			top = centerBySize(originBounds.height, targetBounds.height) + originBounds.top;
-			break;
-
-		case "start-top":
-		case "end-top":
-			top = originBounds.top;
-			break;
-
-		case "start-bottom":
-		case "end-bottom":
-			top = originBounds.bottom - targetBounds.height;
-			break;
-
-		default:
-			break;
-	}
-
-	if (top === undefined || left === undefined) {
-		throw Error(`[Reshaped, flyout]: ${position} position is not valid`);
-	}
-
-	top = Math.round(top + (window.scrollY || 0) - parentOffset.top);
-	left = Math.round(left + (window.scrollX || 0) - parentOffset.left);
-	let widthStyle = Math.ceil(targetBounds.width);
-	const height = Math.ceil(targetBounds.height);
-
-	if (width === "full") {
-		left = SCREEN_OFFSET;
-		widthStyle = window.innerWidth - SCREEN_OFFSET * 2;
-	} else if (width === "trigger") {
-		widthStyle = originBounds.width;
-	}
-
-	const styles = { left, top, width: widthStyle, height };
-
-	return { styles, position };
 };
 
 /**
@@ -268,10 +123,10 @@ const resetStyles: FlyoutStyles = {
 /**
  * Set position of the target element to fit on the screen
  */
-const flyout: Flyout = (origin, target, options) => {
+const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 	const { position, forcePosition, width } = options;
-	const targetClone = target.cloneNode(true) as any;
-	const originBounds = origin.getBoundingClientRect();
+	const targetClone = flyoutEl.cloneNode(true) as any;
+	const triggerBounds = triggerEl.getBoundingClientRect();
 
 	// Reset all styles applied on the previous hook execution
 	targetClone.style = "";
@@ -283,7 +138,7 @@ const flyout: Flyout = (origin, target, options) => {
 
 	if (width) {
 		if (width === "trigger") {
-			targetClone.style.width = `${originBounds.width}px`;
+			targetClone.style.width = `${triggerBounds.width}px`;
 		} else if (width !== "full") {
 			targetClone.style.width = width;
 		}
@@ -291,16 +146,16 @@ const flyout: Flyout = (origin, target, options) => {
 
 	document.body.appendChild(targetClone);
 
-	const targetBounds = targetClone.getBoundingClientRect();
-	const scrollableParent = getClosestFlyoutTarget(origin);
-	const boundsDelta = scrollableParent.getBoundingClientRect();
+	const flyoutBounds = targetClone.getBoundingClientRect();
+	const scrollableParent = getClosestFlyoutTarget(triggerEl);
+	const scopeBounds = scrollableParent.getBoundingClientRect();
 
-	const parentOffset = {
-		top: boundsDelta.top + document.documentElement.scrollTop - scrollableParent.scrollTop,
-		left: boundsDelta.left + document.documentElement.scrollLeft - scrollableParent.scrollLeft,
+	const scopeOffset = {
+		top: scopeBounds.top + document.documentElement.scrollTop - scrollableParent.scrollTop,
+		left: scopeBounds.left + document.documentElement.scrollLeft - scrollableParent.scrollLeft,
 	};
 
-	let calculated = calculatePosition(originBounds, targetBounds, parentOffset, options);
+	let calculated = calculatePosition({ triggerBounds, flyoutBounds, scopeOffset, ...options });
 
 	if (!fullyVisible(calculated.styles) && !forcePosition) {
 		const order = getPositionOrder(position);
@@ -315,12 +170,12 @@ const flyout: Flyout = (origin, target, options) => {
 					position: currentPosition,
 				};
 
-				const tested = calculatePosition(
-					originBounds,
-					targetBounds,
-					parentOffset,
-					calculateOptions
-				);
+				const tested = calculatePosition({
+					triggerBounds,
+					flyoutBounds,
+					scopeOffset,
+					...calculateOptions,
+				});
 
 				if (fullyVisible(tested.styles)) {
 					calculated = tested;
@@ -344,28 +199,25 @@ const flyout: Flyout = (origin, target, options) => {
 const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState => {
 	switch (action.type) {
 		case "render":
+			if (state.status !== "idle") return state;
 			// Disable events before it's positioned to avoid mouseleave getting triggered
 			return { ...state, status: "rendered", styles: { pointerEvents: "none", ...resetStyles } };
 		case "position":
-			console.log("position");
+			if (state.status !== "rendered") return state;
 			return {
 				...state,
-				status: state.status === "visible" ? "visible" : "positioned",
+				status: "positioned",
 				position: action.payload.position,
 				styles: { ...defaultStyles, ...action.payload.styles },
 			};
 		case "show":
-			console.log("show", state);
-			return state.status === "positioned"
-				? { ...state, status: "visible" }
-				: { ...state, status: "idle" };
+			if (state.status !== "positioned") return state;
+			return { ...state, status: "visible" };
 		case "hide":
-			return {
-				...state,
-				status: state.status === "idle" || state.status === "hidden" ? "idle" : "hidden",
-			};
+			if (state.status !== "visible") return state;
+			return { ...state, status: "hidden" };
 		case "remove":
-			console.log("remove red");
+			if (state.status !== "hidden" && state.status !== "visible") return state;
 			return { ...state, status: "idle", styles: resetStyles };
 
 		default:
@@ -383,22 +235,18 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 	});
 
 	const render = React.useCallback(() => {
-		console.log("render");
 		dispatch({ type: "render" });
 	}, []);
 
 	const show = React.useCallback(() => {
-		console.log("show");
 		dispatch({ type: "show" });
 	}, []);
 
 	const hide = React.useCallback(() => {
-		console.log("hide");
 		dispatch({ type: "hide" });
 	}, []);
 
 	const remove = React.useCallback(() => {
-		console.log("remove");
 		dispatch({ type: "remove" });
 	}, []);
 

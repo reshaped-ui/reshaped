@@ -1,8 +1,34 @@
 import React from "react";
 import type * as G from "types/global";
 import type { TrapMode } from "utilities/a11y/types";
-import useFlyout, { FlyoutPosition, FlyoutWidth } from "hooks/_private/useFlyout";
 
+/**
+ * Utility
+ */
+export type Position =
+	| "bottom"
+	| "bottom-start"
+	| "bottom-end"
+	| "top"
+	| "top-start"
+	| "top-end"
+	| "start"
+	| "start-top"
+	| "start-bottom"
+	| "end"
+	| "end-top"
+	| "end-bottom";
+export type Width = "trigger" | string;
+export type Options = {
+	width?: Width;
+	position: Position;
+	rtl: boolean;
+	forcePosition?: boolean;
+};
+
+/**
+ * Component
+ */
 export type InstanceRef =
 	| {
 			open: () => void;
@@ -30,14 +56,14 @@ export type TriggerAttributes = {
 type BaseProps = {
 	id?: string;
 	triggerType?: "hover" | "click" | "focus";
-	position?: FlyoutPosition;
+	position?: Position;
 	forcePosition?: boolean;
 	trapFocusMode?: TrapMode;
 	disableHideAnimation?: boolean;
 	children?: React.ReactNode;
 	onOpen?: () => void;
 	onClose?: () => void;
-	width?: FlyoutWidth;
+	width?: Width;
 	contentGap?: number;
 	contentClassName?: string;
 	contentAttributes?: G.Attributes<"div">;
@@ -66,7 +92,7 @@ export type ContentProps = {
 export type ContextProps = {
 	id: string;
 	flyout: ReturnType<typeof useFlyout>;
-	width?: FlyoutWidth;
+	width?: Width;
 	triggerElRef: React.RefObject<HTMLButtonElement>;
 	flyoutElRef: React.RefObject<HTMLDivElement>;
 	handleClose: (options?: { closeParents?: boolean }) => void;

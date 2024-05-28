@@ -8,10 +8,10 @@ import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";
-import useFlyout from "hooks/_private/useFlyout";
 import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
+import useFlyout from "./useFlyout";
 import { Provider, useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 
