@@ -10,7 +10,7 @@ export type Props = Pick<
 	ActionableProps,
 	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "type" | "as"
 > & {
-	color?: "black" | "white" | "primary" | "critical" | "positive" | "neutral" | "inherit";
+	color?: "primary" | "critical" | "positive" | "neutral" | "media" | "inherit";
 	variant?: "solid" | "outline" | "ghost" | "faded";
 	icon?: IconProps["svg"];
 	endIcon?: IconProps["svg"];

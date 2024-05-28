@@ -33,10 +33,7 @@ export const variant = () => (
 				<Button onClick={() => {}} color="positive">
 					Button
 				</Button>
-				<Button onClick={() => {}} color="black">
-					Button
-				</Button>
-				<Button onClick={() => {}} color="white">
+				<Button onClick={() => {}} color="media">
 					Button
 				</Button>
 			</View>
@@ -55,10 +52,7 @@ export const variant = () => (
 				<Button onClick={() => {}} color="positive" variant="faded">
 					Button
 				</Button>
-				<Button onClick={() => {}} color="black" variant="faded">
-					Button
-				</Button>
-				<Button onClick={() => {}} color="white" variant="faded">
+				<Button onClick={() => {}} color="media" variant="faded">
 					Button
 				</Button>
 				<div style={{ color: "#029CFD" }}>
@@ -82,12 +76,6 @@ export const variant = () => (
 				<Button onClick={() => {}} color="positive" variant="outline">
 					Button
 				</Button>
-				<Button onClick={() => {}} color="black" variant="outline">
-					Button
-				</Button>
-				<Button onClick={() => {}} color="white" variant="outline">
-					Button
-				</Button>
 				<div style={{ color: "#029CFD" }}>
 					<Button onClick={() => {}} color="inherit" variant="outline">
 						Inherit
@@ -107,12 +95,6 @@ export const variant = () => (
 					Button
 				</Button>
 				<Button onClick={() => {}} color="positive" variant="ghost">
-					Button
-				</Button>
-				<Button onClick={() => {}} color="black" variant="ghost">
-					Button
-				</Button>
-				<Button onClick={() => {}} color="white" variant="ghost">
 					Button
 				</Button>
 				<div style={{ color: "#029CFD" }}>
@@ -171,17 +153,9 @@ export const elevated = () => (
 			</View>
 		</Example.Item>
 
-		<Example.Item title="color: white, elevated, variant: solid">
+		<Example.Item title="color: media, elevated, variant: solid">
 			<View gap={3} backgroundColor="primary-faded" padding={2} direction="row">
-				<Button color="white" elevated>
-					Button
-				</Button>
-			</View>
-		</Example.Item>
-
-		<Example.Item title="color: black, elevated, variant: solid">
-			<View gap={3} backgroundColor="primary-faded" padding={2} direction="row">
-				<Button color="black" elevated>
+				<Button color="media" elevated>
 					Button
 				</Button>
 			</View>
@@ -380,19 +354,16 @@ export const loading = () => (
 			</View>
 		</Example.Item>
 
-		<Example.Item title="loading, color: black and white">
+		<Example.Item title="loading, color: media">
 			<View aspectRatio={16 / 9}>
 				<Image src={imgUrl} />
 
 				<div style={{ position: "absolute", top: 16, left: 16 }}>
 					<View gap={3} direction="row">
-						<Button color="black" loading>
+						<Button color="media" loading>
 							Button
 						</Button>
-						<Button color="white" loading>
-							Button
-						</Button>
-						<Button color="white" variant="ghost" loading>
+						<Button color="media" variant="faded">
 							Button
 						</Button>
 					</View>
@@ -516,19 +487,16 @@ export const disabled = () => (
 			</View>
 		</Example.Item>
 
-		<Example.Item title="disabled, color: black and white">
+		<Example.Item title="disabled, color: media">
 			<View aspectRatio={16 / 9}>
 				<Image src={imgUrl} />
 
 				<div style={{ position: "absolute", top: 16, left: 16 }}>
 					<View gap={3} direction="row">
-						<Button color="black" disabled>
+						<Button color="media" disabled>
 							Button
 						</Button>
-						<Button color="white" disabled>
-							Button
-						</Button>
-						<Button color="white" variant="ghost" disabled>
+						<Button color="media" variant="faded" disabled>
 							Button
 						</Button>
 					</View>
@@ -548,73 +516,65 @@ export const group = () => (
 		</Example.Item>
 		<Example.Item title="variant: solid">
 			<View gap={2}>
-				{(["neutral", "primary", "critical", "positive", "black", "white"] as const).map(
-					(color) => (
-						<Button.Group>
-							<Button color={color}>One</Button>
-							<Button color={color}>Two</Button>
-							<Button color={color}>Three</Button>
-						</Button.Group>
-					)
-				)}
+				{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color}>One</Button>
+						<Button color={color}>Two</Button>
+						<Button color={color}>Three</Button>
+					</Button.Group>
+				))}
 			</View>
 		</Example.Item>
 		<Example.Item title="variant: outline">
 			<View gap={2}>
-				{(["neutral", "primary", "critical", "positive", "black", "white"] as const).map(
-					(color) => (
-						<Button.Group>
-							<Button color={color} variant="outline">
-								One
-							</Button>
-							<Button color={color} variant="outline">
-								Two
-							</Button>
-							<Button color={color} variant="outline">
-								Three
-							</Button>
-						</Button.Group>
-					)
-				)}
+				{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color} variant="outline">
+							One
+						</Button>
+						<Button color={color} variant="outline">
+							Two
+						</Button>
+						<Button color={color} variant="outline">
+							Three
+						</Button>
+					</Button.Group>
+				))}
 			</View>
 		</Example.Item>
 		<Example.Item title="variant: faded">
 			<View gap={2}>
-				{(["neutral", "primary", "critical", "positive", "black", "white"] as const).map(
-					(color) => (
-						<Button.Group>
-							<Button color={color} variant="faded">
-								One
-							</Button>
-							<Button color={color} variant="faded">
-								Two
-							</Button>
-							<Button color={color} variant="faded">
-								Three
-							</Button>
-						</Button.Group>
-					)
-				)}
+				{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color} variant="faded">
+							One
+						</Button>
+						<Button color={color} variant="faded">
+							Two
+						</Button>
+						<Button color={color} variant="faded">
+							Three
+						</Button>
+					</Button.Group>
+				))}
 			</View>
 		</Example.Item>
 
 		<Example.Item title="variant: ghost">
 			<View gap={2}>
-				{(["neutral", "primary", "critical", "positive", "black", "white"] as const).map(
-					(color) => (
-						<Button.Group>
-							<Button color={color} variant="ghost">
-								One
-							</Button>
-							<Button color={color} variant="ghost">
-								Two
-							</Button>
-							<Button color={color} variant="ghost">
-								Three
-							</Button>
-						</Button.Group>
-					)
-				)}
+				{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
+					<Button.Group>
+						<Button color={color} variant="ghost">
+							One
+						</Button>
+						<Button color={color} variant="ghost">
+							Two
+						</Button>
+						<Button color={color} variant="ghost">
+							Three
+						</Button>
+					</Button.Group>
+				))}
 			</View>
 		</Example.Item>
 	</Example>

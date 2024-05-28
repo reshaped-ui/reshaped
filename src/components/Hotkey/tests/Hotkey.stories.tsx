@@ -16,7 +16,12 @@ export default {
 
 const Demo = () => {
 	const { checkHotkeyState } = useHotkeys({
-		"Meta+k": () => {},
+		"Meta+v": () => {
+			console.log("meta v");
+		},
+		"Mod+v": () => {
+			console.log("mod v");
+		},
 	});
 
 	return <Hotkey active={checkHotkeyState("k")}>⌘K</Hotkey>;

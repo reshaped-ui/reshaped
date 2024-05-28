@@ -71,9 +71,6 @@ const generateColorValues = (args: { key: string; hex: string; hexDark?: string 
 	const bgFadedHex = okhslToHex(bgFadedHsl);
 	const bgFadedHexDark = okhslToHex(bgFadedHslDark);
 
-	const bgHighlightedHex = okhslToHex({ ...okhsl, l: okhsl.l - 0.04 });
-	const bgHighlightedHexDark = okhslToHex({ ...okhslDark, l: okhslDark.l + 0.04 });
-
 	/**
 	 * Foreground
 	 */
@@ -127,10 +124,6 @@ const generateColorValues = (args: { key: string; hex: string; hexDark?: string 
 		[`background${capitalizedKey}Faded`]: {
 			hex: bgFadedHex,
 			hexDark: bgFadedHexDark,
-		},
-		[`background${capitalizedKey}Highlighted`]: {
-			hex: bgHighlightedHex,
-			hexDark: bgHighlightedHexDark,
 		},
 		[`border${capitalizedKey}`]: {
 			hex: bdHex,

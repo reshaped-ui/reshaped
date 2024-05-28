@@ -25,6 +25,8 @@ Theming:
 - [Breaking] --rs-unit-radius-_ turned into --rs-radius-_
 - [Breaking] unit.radius in theme config is now radius
 - [Breaking] heavy font weight is now called extrabold
+- [Breaking] removed highlighted color tokens
+- Added opacity to neutral border, border faded and background faded color tokens
 
 Figma:
 
@@ -48,6 +50,11 @@ Components:
 - Badge: fixed onClick triggerring together with onDismiss
 - Autocomplete: Added onInput support
 - ScrollArea: Fixed hover display thumb opacity
+- Button: black, white -> media
+- Button: updated media disabled state
+- Button: neutral faded -> outline elevated
+- Button: updated highlighted styles
+- MenuItem: updated highlighted/selected styles
 
 Hooks:
 

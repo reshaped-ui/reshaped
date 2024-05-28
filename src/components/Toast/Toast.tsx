@@ -81,7 +81,7 @@ const Toast = (props: T.Props & { collapsed: boolean }) => {
 							{actions.map((slot, index) => {
 								const isPrimary = size === "large" ? index === 0 : index === actions.length - 1;
 								const primaryColor =
-									color === "neutral" || color === "inverted" ? "neutral" : "white";
+									color === "neutral" || color === "inverted" ? "neutral" : "media";
 								const defaultProps: Partial<ButtonProps> = {
 									variant: isPrimary ? "solid" : "ghost",
 									size: "small",

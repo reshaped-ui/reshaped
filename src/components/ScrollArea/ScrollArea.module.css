@@ -88,5 +88,5 @@
 .--scrollbar-dragging .thumb::before,
 .--display-hover:hover .--scrollbar-dragging .thumb::before,
 .scrollbar:hover .thumb::before {
-	opacity: 0.4;
+	opacity: 0.32;
 }

@@ -3,6 +3,7 @@ import View from "components/View";
 import Text from "components/Text";
 import MenuItem from "components/MenuItem";
 import IconZap from "icons/Zap";
+import Hotkey from "components/Hotkey";
 
 export default {
 	title: "Components/MenuItem",
@@ -17,7 +18,7 @@ export default {
 export const size = () => (
 	<Example>
 		<Example.Item title="size: small">
-			<MenuItem size="small" icon={IconZap} onClick={() => {}}>
+			<MenuItem size="small" icon={IconZap} onClick={() => {}} endSlot={<Hotkey>⌘K</Hotkey>}>
 				Menu item
 			</MenuItem>
 		</Example.Item>

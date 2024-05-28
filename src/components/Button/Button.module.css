@@ -32,14 +32,21 @@
 	&:active {
 		transform: scale(0.98);
 	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: opacity;
+		opacity: 0;
+	}
 }
 
-.loader {
-	position: absolute;
-	inset: 0;
-	display: none;
+.text {
+	display: flex;
 	align-items: center;
-	justify-content: center;
+	gap: var(--rs-button-gap);
 }
 
 .icon {
@@ -57,16 +64,24 @@
 	}
 }
 
-.text {
-	display: flex;
-	align-items: center;
-	gap: var(--rs-button-gap);
-}
-
 .text,
 .icon {
 	position: relative;
 	z-index: 5;
+}
+
+.loader {
+	position: absolute;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+.root.--icon-only {
+	& .icon {
+		margin: 0 calc(var(--rs-unit-x1) * -1);
+	}
 }
 
 .root.--loading {
@@ -83,16 +98,6 @@
 
 	& .loader {
 		display: flex;
-	}
-}
-
-.--elevated {
-	box-shadow: var(--rs-shadow-raised);
-}
-
-.root.--icon-only {
-	& .icon {
-		margin: 0 calc(var(--rs-unit-x1) * -1);
 	}
 }
 
@@ -150,71 +155,41 @@
 	}
 }
 
-/* Variants and colors */
+.root.--variant-solid.--color-neutral,
+.root.--variant-faded.--color-neutral {
+	background-color: var(--rs-color-background-neutral);
+	color: var(--rs-color-on-background-neutral);
 
-.root.--variant-solid.--color-black,
-.root.--variant-solid.--color-white,
-.root.--variant-faded.--color-neutral,
-.root.--variant-faded.--color-primary,
-.root.--variant-faded.--color-critical,
-.root.--variant-faded.--color-positive,
-.root.--variant-faded.--color-inherit,
-.root.--variant-outline.--color-inherit,
-.root.--variant-ghost.--color-inherit {
 	&::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
-		transition-property: opacity;
-		opacity: 0;
+		background-color: var(--rs-color-on-background-neutral);
+	}
+
+	&:hover:not(.--loading)::before,
+	&.--highlighted::before {
+		opacity: 0.04;
 	}
 }
 
 .root.--variant-solid {
 	--rs-button-border-width: 0px;
 
-	&.--color-neutral {
-		background-color: var(--rs-color-background-neutral);
-		color: var(--rs-color-foreground-neutral);
+	@each $color in primary, critical, positive {
+		&.--color-$(color) {
+			background-color: var(--rs-color-background-$(color));
+			color: var(--rs-color-on-background-$(color));
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: var(--rs-color-background-neutral-highlighted);
+			&::before {
+				background-color: var(--rs-color-on-background-$(color));
+			}
+
+			&:hover:not(.--loading)::before,
+			&.--highlighted::before {
+				opacity: 0.08;
+			}
 		}
 	}
 
-	&.--color-primary {
-		background-color: var(--rs-color-background-primary);
-		color: var(--rs-color-on-background-primary);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: var(--rs-color-background-primary-highlighted);
-		}
-	}
-
-	&.--color-critical {
-		background-color: var(--rs-color-background-critical);
-		color: var(--rs-color-on-background-critical);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: var(--rs-color-background-critical-highlighted);
-		}
-	}
-
-	&.--color-positive {
-		background-color: var(--rs-color-background-positive);
-		color: var(--rs-color-on-background-positive);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: var(--rs-color-background-positive-highlighted);
-		}
-	}
-
-	&.--color-white {
+	&.--color-media {
 		background-color: var(--rs-color-white);
 		color: var(--rs-color-black);
 
@@ -222,27 +197,9 @@
 			background-color: var(--rs-color-black);
 		}
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			&::before {
-				opacity: 0.04;
-			}
-		}
-	}
-
-	&.--color-black {
-		background-color: var(--rs-color-black);
-		color: var(--rs-color-white);
-
-		&::before {
-			background-color: var(--rs-color-white);
-		}
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			&::before {
-				opacity: 0.2;
-			}
+		&:hover:not(.--loading, .--disabled)::before,
+		&.--highlighted::before {
+			opacity: 0.04;
 		}
 	}
 }
@@ -250,70 +207,33 @@
 .root.--variant-faded {
 	--rs-button-border-width: 0px;
 
-	&.--color-neutral {
-		--rs-button-border-width: 1px;
+	@each $color in primary, critical, positive {
+		&.--color-$(color) {
+			background-color: var(--rs-color-background-$(color)-faded);
+			color: var(--rs-color-foreground-$(color));
 
-		color: var(--rs-color-foreground-neutral);
-		background-color: var(--rs-color-background-elevation-base);
-		border-color: var(--rs-color-border-neutral-faded);
-
-		&::before {
-			background-color: var(--rs-color-foreground-neutral);
-		}
-
-		&:hover:not(.--loading),
-		&.--highlighted {
 			&::before {
+				background-color: var(--rs-color-foreground-$(fg-color));
+			}
+
+			&:hover:not(.--loading)::before,
+			&.--highlighted::before {
 				opacity: 0.04;
 			}
 		}
 	}
 
-	&.--color-primary {
-		color: var(--rs-color-foreground-primary);
-		background-color: var(--rs-color-background-primary-faded);
+	&.--color-media {
+		color: var(--rs-color-white);
 
 		&::before {
-			background-color: var(--rs-color-foreground-primary);
+			background-color: var(--rs-color-black);
+			opacity: 0.28;
 		}
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			&::before {
-				opacity: 0.06;
-			}
-		}
-	}
-
-	&.--color-critical {
-		color: var(--rs-color-foreground-critical);
-		background-color: var(--rs-color-background-critical-faded);
-
-		&::before {
-			background-color: var(--rs-color-foreground-critical);
-		}
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			&::before {
-				opacity: 0.06;
-			}
-		}
-	}
-
-	&.--color-positive {
-		color: var(--rs-color-foreground-positive);
-		background-color: var(--rs-color-background-positive-faded);
-
-		&::before {
-			background-color: var(--rs-color-foreground-positive);
-		}
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			&::before {
-				opacity: 0.06;
-			}
+		&:hover:not(.--loading, .--disabled)::before,
+		&.--highlighted::before {
+			opacity: 0.32;
 		}
 	}
 
@@ -325,31 +245,9 @@
 			opacity: 0.16;
 		}
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			&::before {
-				opacity: 0.24;
-			}
-		}
-	}
-
-	&.--color-black {
-		background-color: rgba(var(--rs-color-rgb-black), 28%);
-		color: var(--rs-color-white);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-black), 36%);
-		}
-	}
-
-	&.--color-white {
-		background-color: rgba(var(--rs-color-rgb-white), 28%);
-		color: var(--rs-color-black);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-white), 36%);
+		&:hover:not(.--loading)::before,
+		&.--highlighted::before {
+			opacity: 0.2;
 		}
 	}
 }
@@ -358,93 +256,46 @@
 	--rs-button-border-width: 1px;
 
 	&.--color-neutral {
-		background-color: transparent;
 		color: var(--rs-color-foreground-neutral);
 		border-color: var(--rs-color-border-neutral);
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-neutral), 28%);
+		&::before {
+			background-color: var(--rs-color-foreground-neutral);
+		}
+
+		&:hover:not(.--loading)::before,
+		&.--highlighted::before {
+			opacity: 0.04;
 		}
 	}
 
-	&.--color-primary {
-		background-color: transparent;
-		color: var(--rs-color-foreground-primary);
-		border-color: var(--rs-color-border-primary);
+	@each $color in primary, critical, positive {
+		&.--color-$(color) {
+			color: var(--rs-color-foreground-$(color));
+			border-color: var(--rs-color-border-$(color));
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-primary), 10%);
-		}
-	}
+			&::before {
+				background-color: var(--rs-color-foreground-$(color));
+			}
 
-	&.--color-critical {
-		background-color: transparent;
-		color: var(--rs-color-foreground-critical);
-		border-color: var(--rs-color-border-critical);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-critical), 10%);
-		}
-	}
-
-	&.--color-positive {
-		background-color: transparent;
-		color: var(--rs-color-foreground-positive);
-		border-color: var(--rs-color-border-positive);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-positive), 10%);
-		}
-	}
-
-	&.--color-white {
-		background-color: transparent;
-		color: var(--rs-color-white);
-		border-color: var(--rs-color-white);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-white), 12%);
-		}
-	}
-
-	&.--color-black {
-		background-color: transparent;
-		color: var(--rs-color-black);
-		border-color: var(--rs-color-black);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-black), 4%);
+			&:hover:not(.--loading)::before,
+			&.--highlighted::before {
+				opacity: 0.08;
+			}
 		}
 	}
 
 	&.--color-inherit {
-		background-color: transparent;
 		color: inherit;
 		border-color: currentcolor;
 
 		&::before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			transition: var(--rs-duration-fast) var(--rs-easing-standard);
-			transition-property: opacity;
 			background-color: currentcolor;
-			opacity: 0;
 		}
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: transparent;
-
-			&::before {
-				opacity: 0.1;
-			}
+		&:hover:not(.--loading)::before,
+		&.--highlighted::before {
+			opacity: 0.08;
 		}
 	}
 }
@@ -454,110 +305,101 @@
 	--rs-p-h: max(calc(var(--rs-button-p-h) - var(--rs-unit-x1)), var(--rs-unit-x2));
 
 	&.--color-neutral {
-		background: transparent;
 		color: var(--rs-color-foreground-neutral);
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
+		&::before {
+			background-color: var(--rs-color-background-neutral);
+		}
+
+		&:hover:not(.--loading)::before,
+		&.--highlighted::before {
+			opacity: 0.32;
 		}
 	}
 
-	&.--color-primary {
-		background: transparent;
-		color: var(--rs-color-foreground-primary);
+	@each $color in primary, critical, positive {
+		&.--color-$(color) {
+			color: var(--rs-color-foreground-$(color));
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-primary), 12%);
-		}
-	}
+			&::before {
+				background-color: var(--rs-color-background-$(color));
+			}
 
-	&.--color-critical {
-		background: transparent;
-		color: var(--rs-color-foreground-critical);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-critical), 12%);
-		}
-	}
-
-	&.--color-positive {
-		background: transparent;
-		color: var(--rs-color-foreground-positive);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-background-positive), 12%);
-		}
-	}
-
-	&.--color-white {
-		background: transparent;
-		color: var(--rs-color-white);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-white), 8%);
-		}
-	}
-
-	&.--color-black {
-		background: transparent;
-		color: var(--rs-color-black);
-
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: rgba(var(--rs-color-rgb-black), 8%);
+			&:hover:not(.--loading)::before,
+			&.--highlighted::before {
+				opacity: 0.12;
+			}
 		}
 	}
 
 	&.--color-inherit {
-		background-color: transparent;
 		color: inherit;
 
 		&::before {
 			background-color: currentcolor;
 		}
 
-		&:hover:not(.--loading),
-		&.--highlighted {
-			background-color: transparent;
+		&:hover:not(.--loading)::before,
+		&.--highlighted::before {
+			opacity: 0.08;
+		}
+	}
+}
 
-			&::before {
-				opacity: 0.08;
-			}
+.root.--elevated {
+	box-shadow: var(--rs-shadow-raised);
+
+	&.--variant-outline {
+		&.--color-neutral,
+		&.--color-primary,
+		&.--color-critical,
+		&.--color-positive {
+			background: var(--rs-color-background-elevation-raised);
 		}
 	}
 }
 
 .root.--disabled {
-	&,
-	&:hover:not(.--loading) {
-		background-color: var(--rs-color-background-disabled) !important;
-		color: var(--rs-color-foreground-disabled) !important;
-		border-color: var(--rs-color-border-disabled) !important;
+	&:active {
+		transform: none !important;
+	}
 
-		&::before {
-			opacity: 0 !important;
+	&.--color-neutral,
+	&.--color-primary,
+	&.--color-positive,
+	&.--color-critical,
+	&.--color-inherit {
+		&,
+		&:hover,
+		&.--highlighted {
+			color: var(--rs-color-foreground-disabled) !important;
+			border-color: var(--rs-color-border-disabled) !important;
+			background-color: var(--rs-color-background-disabled) !important;
+
+			&::before {
+				opacity: 0 !important;
+			}
+
+			&.--variant-faded {
+				background-color: var(--rs-color-background-disabled-faded) !important;
+			}
+
+			&.--variant-outline {
+				background-color: transparent !important;
+			}
+
+			&.--variant-ghost {
+				background-color: transparent !important;
+				border-color: transparent !important;
+			}
 		}
+	}
 
-		&.--variant-faded {
-			background-color: var(--rs-color-background-disabled-faded) !important;
-		}
-
-		&.--variant-outline {
-			background-color: transparent !important;
-		}
-
-		&.--variant-ghost {
-			background-color: transparent !important;
-			border-color: transparent !important;
-		}
-
-		&:active {
-			transform: none !important;
+	&.--color-media {
+		&,
+		&:hover,
+		&.--highlighted {
+			opacity: 0.4 !important;
 		}
 	}
 }
