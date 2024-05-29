@@ -4,6 +4,7 @@ import React from "react";
 import { onNextFrame } from "utilities/animation";
 import { classNames } from "utilities/helpers";
 import TrapFocus from "utilities/a11y/TrapFocus";
+import { FocusableElement } from "utilities/a11y/types";
 import useToggle from "hooks/useToggle";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";
@@ -87,11 +88,19 @@ const Overlay = (props: T.Props) => {
 	}, [rendered, show, lockScroll, clickThrough]);
 
 	React.useEffect(() => {
+		console.log(1221212121, rendered, contentRef);
 		if (!rendered || !contentRef.current) return;
 
 		const trapFocus = new TrapFocus(contentRef.current);
 
-		trapFocus.trap();
+		console.log("efffect", contentRef.current.querySelector("[role=dialog]"));
+
+		trapFocus.trap({
+			initialFocusEl: contentRef.current.querySelector("[role=dialog][tabindex='-1']") as
+				| FocusableElement
+				| undefined,
+		});
+
 		return () => trapFocus.release();
 	}, [rendered]);
 

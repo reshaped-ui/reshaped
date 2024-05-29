@@ -29,7 +29,14 @@
 		"object-curly-newline": "off",
 		"jsx-a11y/label-has-associated-control": 0,
 		"jsx-a11y/click-events-have-key-events": "off",
+		"jsx-a11y/no-autofocus": [
+			2,
+			{
+				"ignoreNonDOM": true
+			}
+		],
 		"react/require-default-props": "off",
+
 		// TODO: Generate random ids for keys
 		"react/no-array-index-key": "off",
 		"react/no-unused-prop-types": "off",
