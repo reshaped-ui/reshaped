@@ -2,6 +2,7 @@ import { Example } from "utilities/storybook";
 import Tooltip from "components/Tooltip";
 import Button from "components/Button";
 import View from "components/View";
+import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 
 export default {
 	title: "Components/Tooltip",
@@ -18,6 +19,20 @@ const Demo = (props: any) => {
 
 	return (
 		<Tooltip text={position} position={position} {...rest}>
+			{(attributes) => <Button attributes={attributes}>Show tooltip</Button>}
+		</Tooltip>
+	);
+};
+
+const DemoResponsive = (props: any) => {
+	const { position, ...rest } = props;
+	const screenSize = useResponsiveClientValue({
+		s: "small",
+		m: "medium",
+	});
+
+	return (
+		<Tooltip text={position} position={position} {...rest} active={screenSize === "small"}>
 			{(attributes) => <Button attributes={attributes}>Show tooltip</Button>}
 		</Tooltip>
 	);
@@ -59,7 +74,7 @@ export const position = () => (
 export const controlled = () => (
 	<Example>
 		<Example.Item title="active, controlled, position: bottom">
-			<Demo position="bottom" active />
+			<Demo position="bottom" />
 		</Example.Item>
 	</Example>
 );
@@ -68,6 +83,9 @@ export const edgeCases = () => (
 	<Example>
 		<Example.Item title="without text">
 			<Tooltip>{() => <Button>Button</Button>}</Tooltip>
+		</Example.Item>
+		<Example.Item title="responsive visibility">
+			<DemoResponsive />
 		</Example.Item>
 	</Example>
 );

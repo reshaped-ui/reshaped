@@ -53,7 +53,7 @@ const Alert = (props: T.Props) => {
 		if (!actionsSlot) return content;
 
 		return (
-			<View gap={2} direction={inline ? "row" : "column"}>
+			<View gap={inline ? 4 : 2} direction={inline ? "row" : "column"}>
 				{inline ? <View.Item grow>{content}</View.Item> : content}
 				{actionsSlot && (
 					<Text variant="body-3" weight="medium">
