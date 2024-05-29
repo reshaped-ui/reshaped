@@ -1,7 +1,7 @@
 "use client";
 
 import type * as T from "./Flyout.types";
-import { useFlyoutContext } from "./Flyout.context";
+import { useFlyoutContext, TriggerProvider } from "./Flyout.context";
 
 const FlyoutTrigger = (props: T.TriggerProps) => {
 	const { children } = props;
@@ -51,7 +51,11 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		childrenAttributes["aria-controls"] = flyout.status !== "idle" ? id : undefined;
 	}
 
-	return <>{children(childrenAttributes as T.TriggerAttributes)}</>;
+	return (
+		<TriggerProvider value={{ triggerElRef }}>
+			{children(childrenAttributes as T.TriggerAttributes)}
+		</TriggerProvider>
+	);
 };
 
 export default FlyoutTrigger;

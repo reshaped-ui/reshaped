@@ -12,7 +12,7 @@ import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
 import useFlyout from "./useFlyout";
-import { Provider, useFlyoutContext } from "./Flyout.context";
+import { Provider, useFlyoutTriggerContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 
 const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
@@ -33,10 +33,16 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		id: passedId,
 		instanceRef,
 	} = props;
-	const parentFlyoutContext = useFlyoutContext();
+	const parentFlyoutContext = useFlyoutTriggerContext();
+	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
 	const [isRTL] = useRTL();
 	const internalTriggerElRef = React.useRef<HTMLButtonElement | null>(null);
-	const triggerElRef = parentFlyoutContext?.triggerElRef || internalTriggerElRef;
+
+	/**
+	 * Reuse the parent trigger ref in case we render nested triggers
+	 * For example, when we apply tooltip and popover to the same button
+	 */
+	const triggerElRef = parentFlyoutTriggerContext?.triggerElRef || internalTriggerElRef;
 	const flyoutElRef = React.useRef<HTMLDivElement | null>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();

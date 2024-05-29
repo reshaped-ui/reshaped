@@ -130,3 +130,5 @@ export type ContextProps = {
 	Props,
 	"triggerType" | "contentClassName" | "contentAttributes" | "trapFocusMode" | "contentGap"
 >;
+
+export type TriggerContextProps = Pick<ContextProps, "triggerElRef">;
