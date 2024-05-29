@@ -1,5 +1,5 @@
 import { Example } from "utilities/storybook";
-import Modal from "components/Modal";
+import Modal, { type ModalProps } from "components/Modal";
 import View from "components/View";
 import Button from "components/Button";
 import Dismissible from "components/Dismissible";
@@ -19,7 +19,7 @@ export default {
 	},
 };
 
-const Demo = (props: any) => {
+const Demo = (props: ModalProps & { title?: string; subtitle?: string }) => {
 	const { active: activeProp, title, subtitle, children, ...modalProps } = props;
 	const { active, activate, deactivate } = useToggle(activeProp);
 
@@ -132,6 +132,9 @@ export const edgeCases = () => {
 
 	return (
 		<Example>
+			<Example.Item title="trap focus works with custom children components">
+				<Demo title="Modal title" autoFocus={false} active />
+			</Example.Item>
 			<Example.Item title="trap focus works with custom children components">
 				<Demo title="Modal title">
 					<View gap={3} direction="row">

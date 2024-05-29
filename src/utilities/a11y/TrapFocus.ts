@@ -9,6 +9,7 @@ type ReleaseOptions = { withoutFocusReturn?: boolean };
 type TrapOptions = {
 	onNavigateOutside?: () => void;
 	includeTrigger?: boolean;
+	initialFocusEl?: FocusableElement;
 	mode?: TrapMode;
 };
 
@@ -94,7 +95,7 @@ class TrapFocus {
 	 * and create a chain item
 	 */
 	trap = (options: TrapOptions = {}) => {
-		const { mode = "dialog", includeTrigger } = options;
+		const { mode = "dialog", includeTrigger, initialFocusEl } = options;
 		const trigger = getActiveElement();
 		const focusable = getFocusableElements(this.root, {
 			additionalElement: includeTrigger ? trigger : undefined,
@@ -122,7 +123,7 @@ class TrapFocus {
 		if (mode === "dialog") this.screenReaderTrap.trap();
 
 		this.mutationObserver.observe(this.root, { childList: true, subtree: true });
-		if (!focusable.length) return;
+		if (!focusable.length && !initialFocusEl) return;
 
 		this.addListeners();
 
@@ -130,7 +131,7 @@ class TrapFocus {
 		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
 		if (!tailItem || this.root !== tailItem.data.root) {
 			this.chainId = TrapFocus.chain.add(this);
-			focusElement(focusable[0], { pseudoFocus });
+			focusElement(initialFocusEl || focusable[0], { pseudoFocus });
 		}
 
 		this.trapped = true;

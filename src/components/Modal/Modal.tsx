@@ -65,6 +65,8 @@ const Modal = (props: T.Props) => {
 		padding = 4,
 		position = "center",
 		transparentOverlay,
+		ariaLabel,
+		autoFocus = true,
 		overlayClassName,
 		className,
 		attributes,
@@ -233,6 +235,8 @@ const Modal = (props: T.Props) => {
 					responsiveClassNames(s, "--position", position)
 				);
 
+				console.log({ autoFocus });
+
 				return (
 					<Context.Provider value={value}>
 						{/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
@@ -252,9 +256,11 @@ const Modal = (props: T.Props) => {
 							}
 							aria-labelledby={titleMounted ? `${id}-title` : undefined}
 							aria-describedby={subtitleMounted ? `${id}-subtitle` : undefined}
+							aria-label={ariaLabel || attributes?.["aria-label"]}
 							className={rootClassNames}
 							aria-modal="true"
 							role="dialog"
+							tabIndex={!autoFocus ? -1 : undefined}
 							ref={rootRef}
 							onTransitionEnd={handleTransitionEnd}
 						>
