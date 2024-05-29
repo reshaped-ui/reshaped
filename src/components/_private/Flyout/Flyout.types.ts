@@ -25,6 +25,26 @@ export type Options = {
 	rtl: boolean;
 	forcePosition?: boolean;
 };
+export type Styles = React.CSSProperties;
+
+export type State = {
+	styles: Styles;
+	position?: Position;
+	status: "idle" | "rendered" | "positioned" | "visible" | "hidden";
+};
+
+export type FlyoutData = {
+	styles: Styles;
+	position: Position;
+};
+
+export type UseFlyoutData = Pick<State, "styles" | "position" | "status"> & {
+	updatePosition: () => void;
+	render: () => void;
+	hide: () => void;
+	remove: () => void;
+	show: () => void;
+};
 
 /**
  * Component
@@ -80,7 +100,7 @@ export type ControlledProps = BaseProps & WithControlled;
 export type Props = ControlledProps | UncontrolledProps;
 
 export type TriggerProps = {
-	children: (attributes: TriggerAttributes | {}) => React.ReactNode;
+	children: (attributes: TriggerAttributes) => React.ReactNode;
 };
 
 export type ContentProps = {
@@ -91,7 +111,7 @@ export type ContentProps = {
 
 export type ContextProps = {
 	id: string;
-	flyout: ReturnType<typeof useFlyout>;
+	flyout: UseFlyoutData;
 	width?: Width;
 	triggerElRef: React.RefObject<HTMLButtonElement>;
 	flyoutElRef: React.RefObject<HTMLDivElement>;

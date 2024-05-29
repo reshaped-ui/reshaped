@@ -16,10 +16,19 @@ export default {
 
 const Demo = (props: any) => {
 	const { position, ...rest } = props;
+
+	return (
+		<Tooltip text={position} position={position} {...rest}>
+			{(attributes) => <Button attributes={attributes}>Show tooltip</Button>}
+		</Tooltip>
+	);
+};
+
+const DemoResponsive = (props: any) => {
+	const { position, ...rest } = props;
 	const screenSize = useResponsiveClientValue({
 		s: "small",
 		m: "medium",
-		l: "large",
 	});
 
 	return (
@@ -74,6 +83,9 @@ export const edgeCases = () => (
 	<Example>
 		<Example.Item title="without text">
 			<Tooltip>{() => <Button>Button</Button>}</Tooltip>
+		</Example.Item>
+		<Example.Item title="responsive visibility">
+			<DemoResponsive />
 		</Example.Item>
 	</Example>
 );

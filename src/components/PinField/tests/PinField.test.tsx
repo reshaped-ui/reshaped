@@ -136,14 +136,14 @@ describe("Components/PinField", () => {
 			expect(elInput.selectionEnd).toEqual(4);
 		});
 
-		await userEvent.keyboard("[ArrowLeft][ArrowLeft][ArrowLeft]");
+		await userEvent.keyboard("{ArrowLeft}{ArrowLeft}{ArrowLeft}");
 
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(0);
 			expect(elInput.selectionEnd).toEqual(1);
 		});
 
-		await userEvent.keyboard("[ArrowRight][ArrowRight]");
+		await userEvent.keyboard("{ArrowRight}{ArrowRight}");
 
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(2);

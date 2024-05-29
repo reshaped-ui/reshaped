@@ -17,25 +17,12 @@ type PassedFlyoutOptions = {
 };
 type PositionStyles = Record<"left" | "top" | "width" | "height", number>;
 
-type Flyout = (
-	origin: HTMLElement,
-	target: HTMLElement,
-	options: T.Options
-) => {
-	styles: PositionStyles;
-	position: T.Position;
-};
+type Flyout = (origin: HTMLElement, target: HTMLElement, options: T.Options) => T.FlyoutData;
 
-type FlyoutStyles = React.CSSProperties;
-type FlyoutState = {
-	styles: FlyoutStyles;
-	position?: T.Position;
-	status: "idle" | "rendered" | "positioned" | "visible" | "hidden";
-};
 type FlyoutRenderAction = { type: "render"; payload?: never };
 type FlyoutPositionAction = {
 	type: "position";
-	payload: Pick<FlyoutState, "styles" | "position">;
+	payload: Pick<T.State, "styles" | "position">;
 };
 type FlyoutShowAction = { type: "show"; payload?: never };
 type FlyoutHideAction = { type: "hide"; payload?: never };
@@ -51,7 +38,7 @@ type UseFlyout = (
 	originRef: ElementRef,
 	targetRef: ElementRef,
 	options: PassedFlyoutOptions
-) => Pick<FlyoutState, "styles" | "position" | "status"> & {
+) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: () => void;
 	render: () => void;
 	hide: () => void;
@@ -100,7 +87,7 @@ const fullyVisible = (bounds: PositionStyles) => {
 /**
  * Order of keys here is responsible for the order of styles applied
  */
-const defaultStyles: FlyoutStyles = {
+const defaultStyles: T.Styles = {
 	left: 0,
 	top: 0,
 	width: "auto",
@@ -109,7 +96,7 @@ const defaultStyles: FlyoutStyles = {
 	zIndex: "var(--rs-z-index-flyout)" as any,
 };
 
-const resetStyles: FlyoutStyles = {
+const resetStyles: T.Styles = {
 	left: 0,
 	top: 0,
 	position: "fixed",
@@ -132,7 +119,7 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 	targetClone.style = "";
 
 	Object.keys(resetStyles).forEach((key) => {
-		const value = resetStyles[key as keyof FlyoutStyles];
+		const value = resetStyles[key as keyof T.Styles];
 		targetClone.style[key as any] = value!.toString();
 	});
 
@@ -196,7 +183,7 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 	return calculated;
 };
 
-const flyoutReducer = (state: FlyoutState, action: FlyoutAction): FlyoutState => {
+const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 	switch (action.type) {
 		case "render":
 			if (state.status !== "idle") return state;
