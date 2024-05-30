@@ -36,6 +36,7 @@ Figma:
 - Icon: Added on background colors support
 - Icon: Fixed edge cases for applying correct color to the icons in other components
 - Card: Improved content clip
+- Text: White color for inherit
 
 Utilities:
 
@@ -57,6 +58,7 @@ Components:
 - Button: neutral faded -> outline elevated
 - Button: updated highlighted styles
 - MenuItem: updated highlighted/selected styles
+- PinField: fixed the field to use edit mode if the value is filled on mount
 
 Hooks:
 

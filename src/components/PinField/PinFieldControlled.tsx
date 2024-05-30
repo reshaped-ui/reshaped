@@ -58,7 +58,7 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 	 * `type` means user is typing a new value in an empty item,
 	 * so caret is positioned before the value that's going to be added
 	 */
-	const modeRef = React.useRef<"type" | "edit">("type");
+	const modeRef = React.useRef<"type" | "edit">(value.length === valueLength ? "edit" : "type");
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
 	const nodes = [];
 
@@ -230,7 +230,7 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 				{...inputAttributes}
 				{...formControl.attributes}
 				type="text"
-				className={s.input}
+				// className={s.input}
 				onFocus={handleFocus}
 				onBlur={handleBlur}
 				onPaste={handlePaste}
