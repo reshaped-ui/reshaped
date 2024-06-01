@@ -59,6 +59,7 @@
 	transition: var(--rs-duration-medium) ease-out;
 	transition-property: height, transform, opacity;
 	height: 100%;
+	transform: translateZ(0);
 }
 
 .region {
