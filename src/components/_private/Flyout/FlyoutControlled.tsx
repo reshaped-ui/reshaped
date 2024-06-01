@@ -12,7 +12,7 @@ import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
 import useFlyout from "./useFlyout";
-import { Provider, useFlyoutTriggerContext } from "./Flyout.context";
+import { Provider, useFlyoutTriggerContext, useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 
 const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
@@ -33,7 +33,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		id: passedId,
 		instanceRef,
 	} = props;
-	const parentFlyoutContext = useFlyoutTriggerContext();
+	const parentFlyoutContext = useFlyoutContext();
 	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
 	const [isRTL] = useRTL();
 	const internalTriggerElRef = React.useRef<HTMLButtonElement | null>(null);
