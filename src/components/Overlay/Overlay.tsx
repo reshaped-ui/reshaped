@@ -88,12 +88,9 @@ const Overlay = (props: T.Props) => {
 	}, [rendered, show, lockScroll, clickThrough]);
 
 	React.useEffect(() => {
-		console.log(1221212121, rendered, contentRef);
 		if (!rendered || !contentRef.current) return;
 
 		const trapFocus = new TrapFocus(contentRef.current);
-
-		console.log("efffect", contentRef.current.querySelector("[role=dialog]"));
 
 		trapFocus.trap({
 			initialFocusEl: contentRef.current.querySelector("[role=dialog][tabindex='-1']") as
