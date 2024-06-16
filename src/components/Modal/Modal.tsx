@@ -235,8 +235,6 @@ const Modal = (props: T.Props) => {
 					responsiveClassNames(s, "--position", position)
 				);
 
-				console.log({ autoFocus });
-
 				return (
 					<Context.Provider value={value}>
 						{/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
