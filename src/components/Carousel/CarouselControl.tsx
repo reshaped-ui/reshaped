@@ -52,7 +52,7 @@ const CarouselControl = (props: T.ControlProps) => {
 				onClick={onClick}
 				icon={isDisplayedAsNext ? IconChevronRight : IconChevronLeft}
 				rounded
-				variant="faded"
+				variant="outline"
 				elevated
 				attributes={{ "aria-disabled": !visible }}
 			/>

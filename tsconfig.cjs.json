@@ -1,20 +1,21 @@
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"outDir": "dist",
+		"outDir": "dist/cjs",
 		"baseUrl": "./src",
 		"rootDir": "./src",
+		"module": "CommonJS",
 		"target": "ES2022",
-		"module": "ESNext"
+		"paths": { "*": ["*"] }
 	},
+	"include": ["./src/cli", "./src/config", "./src/themes"],
 	"exclude": [
 		"node_modules",
 		"dist",
 		"tools",
 		"src/utilities/testPresets.tsx",
-		"./src/**/*.test.tsx",
-		"./src/**/*.test.ts",
-		"./src/**/*.stories.tsx",
+		"./src/**/tests/*.test.tsx",
+		"./src/**/tests/*.stories.tsx",
 		"./commitlint.config.ts"
 	]
 }

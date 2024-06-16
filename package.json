@@ -5,7 +5,6 @@
 	"license": "MIT",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
-	"type": "module",
 	"keywords": [
 		"react",
 		"ui",
@@ -26,27 +25,41 @@
 		"type": "git",
 		"url": "https://github.com/formaat-design/reshaped"
 	},
-	"main": "./index.js",
-	"module": "./index.js",
-	"types": "./index.d.ts",
 	"files": [
-		"bin/**/*",
-		"cli/**/*",
-		"components/**/*",
-		"config/**/*",
-		"constants/**/*",
-		"hooks/**/*",
-		"icons/**/*",
-		"styles/**/*",
-		"themes/**/*",
-		"types/**/*",
-		"utilities/**/*",
-		"bundle.css",
-		"bundle.d.ts",
-		"bundle.js",
-		"index.d.ts",
-		"index.js"
+		"bin/cli.js",
+		"dist/**/*"
 	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./themes": {
+			"types": "./dist/themes/index.d.ts",
+			"require": "./dist/cjs/themes/index.js",
+			"import": "./dist/themes/index.js"
+		},
+		"./config/postcss": {
+			"types": "./dist/config/postcss.d.ts",
+			"import": "./dist/config/postcss.js",
+			"require": "./dist/cjs/config/postcss.js"
+		},
+		"./config/tailwind": {
+			"types": "./dist/config/tailwind.d.ts",
+			"import": "./dist/config/tailwind.js",
+			"require": "./dist/cjs/config/tailwind.js"
+		},
+		"./bundle": {
+			"types": "./dist/bundle.d.ts",
+			"import": "./dist/bundle.js"
+		},
+		"./bundle.css": "./dist/bundle.css",
+		"./themes/reshaped/theme.css": "./dist/themes/reshaped/theme.css",
+		"./themes/slate/theme.css": "./dist/themes/slate/theme.css",
+		"./themes/figma/theme.css": "./dist/themes/figma/theme.css",
+		"./themes/fragments/twitter/theme.css": "./dist/themes/fragments/twitter/theme.css",
+		"./package.json": "./package.json"
+	},
 	"sideEffects": false,
 	"bin": {
 		"reshaped": "./bin/cli.js"
@@ -54,12 +67,13 @@
 	"scripts": {
 		"dev": "storybook dev -c tools/storybook -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
-		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:css && yarn build:bundle && resolve-tspaths && cp -r dist/* ./",
-		"build:themes": "node bin/cli.js theming --config cli/theming/reshaped.config.js --output src/themes",
-		"build:esm": "tsc -p tsconfig.esm.json",
+		"build": "yarn clean && yarn build:stories && yarn build:esm && yarn build:css && yarn build:cjs && yarn build:bundle",
+		"build:themes": "node bin/cli.js theming --config dist/cjs/cli/theming/reshaped.config.js --output src/themes",
+		"build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
+		"build:cjs": "tsc -p tsconfig.cjs.json && resolve-tspaths -p tsconfig.cjs.json && node ./bin/format-cjs-build.js",
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
-		"build:stories": "tsc -p tsconfig.stories.json",
-		"build:bundle": "vite build && mv dist/bundle.umd.cjs dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",
+		"build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",
+		"build:bundle": "vite build && mv dist/bundle.umd.js dist/bundle.js && cp dist/index.d.ts dist/bundle.d.ts",
 		"build:storybook": "storybook build -c tools/storybook -o dist/app --disable-telemetry",
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build -c tools/storybook",
 		"release": "read -p 'Have you updated chromatic tests?' && yarn release:lib && yarn release:source && yarn build:storybook && yarn release:copy",

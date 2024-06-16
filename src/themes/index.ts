@@ -1,9 +1,9 @@
 import type * as T from "themes/_generator/types";
 import type { FullThemeDefinition } from "themes/_generator/tokens/types";
-import transform from "./_generator/transform";
-import generateColors from "./_generator/utilities/generateColors";
+import transform from "themes/_generator/transform";
+import generateColors from "themes/_generator/utilities/generateColors";
 
-export { default as baseThemeDefinition } from "./_generator/definitions/reshaped";
+export { default as baseThemeDefinition } from "themes/_generator/definitions/reshaped";
 
 export const generateThemeColors = (options: {
 	primary: T.Color;
