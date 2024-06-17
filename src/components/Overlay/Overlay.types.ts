@@ -6,6 +6,7 @@ export type Props = {
 	children?: React.ReactNode | ((props: { active: boolean }) => React.ReactNode);
 	active?: boolean;
 	onClose?: () => void;
+	onOpen?: () => void;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div", Props>;
 };

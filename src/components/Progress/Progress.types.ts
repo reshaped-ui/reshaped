@@ -5,7 +5,7 @@ export type Props = {
 	max?: number;
 	min?: number;
 	size?: "small" | "medium";
-	color?: "primary" | "critical" | "warning" | "positive" | "white";
+	color?: "primary" | "critical" | "warning" | "positive" | "media";
 	duration?: number;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div", Props>;

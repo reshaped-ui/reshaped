@@ -50,9 +50,9 @@ export const color = () => (
 		<Example.Item title="color: positive, value: 50">
 			<Progress value={50} color="positive" />
 		</Example.Item>
-		<Example.Item title="color: white, value: 50">
+		<Example.Item title="color: media, value: 50">
 			<View padding={4} backgroundColor="black" borderRadius="medium">
-				<Progress value={50} color="white" />
+				<Progress value={50} color="media" />
 			</View>
 		</Example.Item>
 	</Example>

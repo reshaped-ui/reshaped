@@ -34,6 +34,7 @@ describe("Utilities/Overlay", () => {
 
 	test("triggers onOpen and onClose", async () => {
 		const handleCloseMock = jest.fn();
+		const handleOpenMock = jest.fn();
 		const Component = () => {
 			const [active, setActive] = React.useState(true);
 
@@ -44,6 +45,7 @@ describe("Utilities/Overlay", () => {
 
 			const handleOpen = () => {
 				setActive(true);
+				handleOpenMock();
 			};
 
 			return (
@@ -64,12 +66,13 @@ describe("Utilities/Overlay", () => {
 
 		await userEvent.click(screen.getByText(fixtures.content));
 
-		expect(handleCloseMock).toBeCalledTimes(1);
+		expect(handleCloseMock).toHaveBeenCalledTimes(1);
 		waitFor(() => {
 			expect(screen.getByText(fixtures.content)).not.toBeInTheDocument();
 		});
 
 		await userEvent.click(elButton);
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
+		expect(handleOpenMock).toHaveBeenCalledTimes(1);
 	});
 });

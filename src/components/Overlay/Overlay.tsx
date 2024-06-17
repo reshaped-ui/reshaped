@@ -15,7 +15,7 @@ import type * as T from "./Overlay.types";
 import s from "./Overlay.module.css";
 
 const Overlay = (props: T.Props) => {
-	const { active, children, transparent, onClose, className, attributes } = props;
+	const { active, children, transparent, onClose, onOpen, className, attributes } = props;
 	const clickThrough = transparent === true;
 	const opacity = clickThrough ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
@@ -98,7 +98,11 @@ const Overlay = (props: T.Props) => {
 				| undefined,
 		});
 
+		onOpen?.();
+
 		return () => trapFocus.release();
+		// Ignoring onOpen since it might be not memoized when passed
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [rendered]);
 
 	// Unlock scroll on unmount

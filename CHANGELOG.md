@@ -14,7 +14,7 @@
 
 General:
 
-- Switched to type: "module", node v20+?
+- Switched to `exports` in `package.json`
 
 Theming:
 
@@ -29,6 +29,7 @@ Theming:
 - [Breaking] heavy font weight is now called extrabold
 - [Breaking] removed highlighted color tokens
 - Added opacity to neutral border, border faded and background faded color tokens
+- [Maybe breaking] REM based typography, removed default font size / line height from body
 
 Figma:
 
@@ -53,12 +54,14 @@ Components:
 - Badge: fixed onClick triggerring together with onDismiss
 - Autocomplete: Added onInput support
 - ScrollArea: Fixed hover display thumb opacity
-- Button: black, white -> media
+- [Breaking] Button: black, white -> media
 - Button: updated media disabled state
-- Button: neutral faded -> outline elevated
+- [Breaking] Button: neutral faded -> outline elevated
 - Button: updated highlighted styles
 - MenuItem: updated highlighted/selected styles
 - PinField: fixed the field to use edit mode if the value is filled on mount
+- Modal, Overlay: onOpen for focus management
+- [Breaking] Progress: white -> media
 
 Hooks:
 

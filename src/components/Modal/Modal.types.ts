@@ -26,6 +26,7 @@ export type Props = {
 	transparentOverlay?: boolean;
 	autoFocus?: boolean;
 	onClose?: () => void;
+	onOpen?: () => void;
 	ariaLabel?: string;
 	className?: G.ClassName;
 	overlayClassName?: G.ClassName;

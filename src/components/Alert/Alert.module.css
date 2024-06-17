@@ -1,0 +1,6 @@
+.icon {
+	/* Align the icon vertically with the text for rem fonts */
+	height: var(--rs-line-height-body-3);
+	display: flex;
+	align-items: center;
+}

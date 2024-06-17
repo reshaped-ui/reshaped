@@ -83,6 +83,7 @@ class TrapFocus {
 		event.preventDefault();
 
 		if (!focusData.el) return;
+		console.log("focus key");
 		focusElement(focusData.el, { pseudoFocus });
 	};
 
@@ -116,6 +117,7 @@ class TrapFocus {
 			});
 
 			if (!focusable.length) return;
+			console.log("focus observer");
 			focusElement(focusable[0], { pseudoFocus });
 		});
 
@@ -131,6 +133,7 @@ class TrapFocus {
 		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
 		if (!tailItem || this.root !== tailItem.data.root) {
 			this.chainId = TrapFocus.chain.add(this);
+			console.log("chain focus");
 			focusElement(initialFocusEl || focusable[0], { pseudoFocus });
 		}
 
@@ -149,6 +152,7 @@ class TrapFocus {
 
 		if (this.trigger) {
 			const preventScroll = withoutFocusReturn || !checkKeyboardMode();
+			console.log("trigger focus");
 			this.trigger.focus({ preventScroll });
 		}
 

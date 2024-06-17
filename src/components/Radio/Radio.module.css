@@ -16,8 +16,10 @@
 }
 
 .decorator {
-	width: var(--rs-line-height-body-3);
-	height: var(--rs-line-height-body-3);
+	--rs-radio-decorator-size: var(--rs-line-height-body-3);
+
+	width: var(--rs-radio-decorator-size);
+	height: var(--rs-radio-decorator-size);
 	border-radius: 50%;
 	border: 1px solid var(--rs-color-border-neutral);
 	background: var(--rs-color-background-elevation-base);
@@ -27,8 +29,8 @@
 	&::after {
 		content: "";
 		position: absolute;
-		height: var(--rs-unit-x2);
-		width: var(--rs-unit-x2);
+		height: calc(var(--rs-radio-decorator-size) * 0.4);
+		width: calc(var(--rs-radio-decorator-size) * 0.4);
 		background: var(--rs-color-on-background-primary);
 		border-radius: 50%;
 		top: 50%;

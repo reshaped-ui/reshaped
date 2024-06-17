@@ -33,7 +33,7 @@
 		left: 50%;
 		height: 1.5px;
 		border-radius: 999px;
-		width: var(--rs-unit-x2);
+		width: calc(var(--rs-line-height-body-3) * 0.4);
 		background: var(--rs-color-on-background-primary);
 		opacity: 0;
 		transform: translate(-50%, -50%) scale(0);

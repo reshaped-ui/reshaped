@@ -1,6 +1,6 @@
-import { Rule, AtRule, Declaration } from "postcss";
+const { Rule, AtRule, Declaration } = require("postcss");
 
-export default () => {
+module.exports = () => {
 	return {
 		postcssPlugin: "responsive",
 		Once: (root) => {

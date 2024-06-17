@@ -48,10 +48,10 @@
 	background: var(--rs-color-background-positive);
 }
 
-.--color-white {
+.--color-media {
 	background: rgba(var(--rs-color-rgb-white), 28%);
 }
 
-.--color-white .value {
+.--color-media .value {
 	background: var(--rs-color-white);
 }

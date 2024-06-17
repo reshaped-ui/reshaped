@@ -213,7 +213,7 @@
 			color: var(--rs-color-foreground-$(color));
 
 			&::before {
-				background-color: var(--rs-color-foreground-$(fg-color));
+				background-color: var(--rs-color-foreground-$(color));
 			}
 
 			&:hover:not(.--loading)::before,

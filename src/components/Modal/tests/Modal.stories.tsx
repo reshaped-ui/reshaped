@@ -1,3 +1,4 @@
+import React from "react";
 import { Example } from "utilities/storybook";
 import Modal, { type ModalProps } from "components/Modal";
 import View from "components/View";
@@ -6,6 +7,7 @@ import Dismissible from "components/Dismissible";
 import DropdownMenu from "components/DropdownMenu";
 import Switch from "components/Switch";
 import TextField from "components/TextField";
+import TextArea from "components/TextArea";
 import useToggle from "hooks/useToggle";
 import Radio from "components/Radio";
 
@@ -129,17 +131,32 @@ export const overlay = () => (
 export const edgeCases = () => {
 	const menuModalToggle = useToggle();
 	const scrollModalToggle = useToggle();
+	const inputRef = React.useRef<HTMLInputElement | null>(null);
 
 	return (
 		<Example>
 			<Example.Item title="trap focus works with custom children components">
-				<Demo title="Modal title" autoFocus={false} active />
+				<Demo title="Modal title" autoFocus={false} />
 			</Example.Item>
 			<Example.Item title="trap focus works with custom children components">
 				<Demo title="Modal title">
 					<View gap={3} direction="row">
 						<Button onClick={() => {}}>Button</Button>
 						<Switch name="switch" />
+					</View>
+				</Demo>
+			</Example.Item>
+			<Example.Item title="focus moves to the input">
+				<Demo
+					title="Modal title"
+					onOpen={() => {
+						inputRef.current?.focus();
+						console.log(11);
+					}}
+				>
+					<View gap={3} direction="row">
+						<Button onClick={() => {}}>Button</Button>
+						<TextField name="name" inputAttributes={{ ref: inputRef }} />
 					</View>
 				</Demo>
 			</Example.Item>
