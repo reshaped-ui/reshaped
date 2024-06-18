@@ -30,6 +30,7 @@ Theming:
 - [Breaking] removed highlighted color tokens
 - Added opacity to neutral border, border faded and background faded color tokens
 - [Maybe breaking] REM based typography, removed default font size / line height from body
+- Added `rootTheme` and `setRootTheme`
 
 Figma:
 
@@ -43,6 +44,7 @@ Utilities:
 
 - [Breaking] Hidden: Switched to display: contents. Removed displayStyle prop and render props children function
 - Container: Added "align" | "justify" | "height" | "maxHeight" support
+- Flyout: Automatic sticky positioning support
 
 Components:
 

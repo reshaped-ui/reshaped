@@ -16,14 +16,26 @@ const Theme = (props: T.Props) => {
 	const parentTheme = useTheme();
 	const isRootProvider = !parentTheme.theme;
 	const usedTheme = name || stateTheme || parentTheme.theme;
+	const rootTheme = isRootProvider ? usedTheme : parentTheme.rootTheme;
 	const parentColorMode = isRootProvider ? globalColorMode : parentTheme.colorMode;
 	const invertedColorMode = parentColorMode === "light" ? "dark" : "light";
 	const usedColorMode = colorMode === "inverted" ? invertedColorMode : colorMode || parentColorMode;
 	const rootClassNames = classNames(s.root, className);
 
-	const setTheme = (theme: string) => {
+	const setRootTheme = React.useCallback(
+		(theme: string) => {
+			if (isRootProvider) {
+				setStateTheme(theme);
+			} else {
+				parentTheme.setRootTheme(theme);
+			}
+		},
+		[isRootProvider, parentTheme]
+	);
+
+	const setTheme = React.useCallback((theme: string) => {
 		setStateTheme(theme);
-	};
+	}, []);
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -46,14 +58,19 @@ const Theme = (props: T.Props) => {
 		};
 	}, [usedTheme, usedColorMode, isRootProvider]);
 
+	const value = React.useMemo(
+		() => ({
+			theme: usedTheme,
+			rootTheme,
+			colorMode: usedColorMode,
+			setTheme,
+			setRootTheme,
+		}),
+		[usedTheme, usedColorMode, setTheme, setRootTheme, rootTheme]
+	);
+
 	return (
-		<ThemeContext.Provider
-			value={{
-				theme: usedTheme,
-				colorMode: usedColorMode,
-				setTheme,
-			}}
-		>
+		<ThemeContext.Provider value={value}>
 			<div
 				className={rootClassNames}
 				data-rs-theme={isRootProvider ? undefined : usedTheme}

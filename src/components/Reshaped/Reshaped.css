@@ -86,6 +86,11 @@ html {
 
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action#values */
 	touch-action: manipulation;
+
+	/* Use 14px as base for rem values */
+	font-size: 87.5%;
+	font-family: var(--rs-font-family-body);
+	font-weight: var(--rs-font-weight-regular);
 }
 
 * {
@@ -100,8 +105,9 @@ body {
 	scroll-behavior: smooth;
 }
 
-body,
-[data-rs-theme] {
+[data-rs-theme]:not(html) {
+	font-size: var(--rs-font-size-body-3);
+	line-height: var(--rs-line-height-body-3);
 	font-family: var(--rs-font-family-body);
 	font-weight: var(--rs-font-weight-regular);
 }

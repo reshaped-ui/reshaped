@@ -2,7 +2,7 @@ import type * as T from "./font.types";
 import type { Transformer, TransformedToken } from "../types";
 import { getVariableName } from "../../utilities/css";
 
-const REM_SIZE = 16;
+const BASE_REM_SIZE = 14;
 
 const transformedToken: Transformer<T.Token> = (name, token) => {
 	const result: TransformedToken[] = [];
@@ -11,14 +11,14 @@ const transformedToken: Transformer<T.Token> = (name, token) => {
 		name,
 		tokenType: "fontSize",
 		type: "variable",
-		value: `${token.fontSize.px / REM_SIZE}rem`,
+		value: `${token.fontSize.px / BASE_REM_SIZE}rem`,
 	});
 
 	result.push({
 		name,
 		tokenType: "lineHeight",
 		type: "variable",
-		value: `${token.lineHeight.px / REM_SIZE}rem`,
+		value: `${token.lineHeight.px / BASE_REM_SIZE}rem`,
 	});
 
 	if (token.fontFamilyToken) {

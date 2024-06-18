@@ -13,6 +13,8 @@ export type ThemeContextData = {
 	colorMode: ColorMode;
 	theme: string;
 	setTheme: (theme: string) => void;
+	rootTheme: string;
+	setRootTheme: (theme: string) => void;
 };
 
 export type Props = {
