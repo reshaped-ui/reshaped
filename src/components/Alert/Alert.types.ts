@@ -11,5 +11,5 @@ export type Props = {
 	inline?: boolean;
 	bleed?: G.Responsive<number>;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

@@ -13,5 +13,5 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	href?: string;
 	as?: TagName;
 	className?: G.ClassName;
-	attributes?: G.Attributes<TagName, Props> & ActionableProps["attributes"];
+	attributes?: G.Attributes<TagName> & ActionableProps["attributes"];
 } & Pick<ViewProps, "height">;

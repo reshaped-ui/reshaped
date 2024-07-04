@@ -30,5 +30,5 @@ export type Props = {
 	navigationDisplay?: "hidden";
 	instanceRef?: React.Ref<InstanceRef>;
 	className?: G.ClassName;
-	attributes?: G.Attributes<React.HTMLAttributes<HTMLDivElement>, keyof Props>;
+	attributes?: G.Attributes<"div">;
 };

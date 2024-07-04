@@ -13,5 +13,5 @@ export type Props = WithContent & {
 	color?: "neutral" | "critical" | "warning" | "positive" | "primary";
 	size?: G.Responsive<number>;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

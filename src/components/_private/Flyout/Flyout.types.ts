@@ -106,7 +106,7 @@ export type TriggerProps = {
 export type ContentProps = {
 	children?: React.ReactNode;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ContextProps = {

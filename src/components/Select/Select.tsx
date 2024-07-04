@@ -87,14 +87,14 @@ const Select = (props: T.Props) => {
 					{startContent}
 					<select
 						{...(inputAttributes as T.SelectTriggerProps["inputAttributes"])}
+						onFocus={(onFocus || inputAttributes?.onFocus) as T.SelectTriggerProps["onFocus"]}
+						onBlur={(onBlur || inputAttributes?.onBlur) as T.SelectTriggerProps["onBlur"]}
 						className={s.input}
 						disabled={disabled}
 						name={name}
 						value={value}
 						defaultValue={defaultValue}
 						onChange={handleChange}
-						onFocus={onFocus || inputAttributes?.onFocus}
-						onBlur={onBlur || inputAttributes?.onBlur}
 						id={inputId}
 					>
 						{placeholder && <option value="">{placeholder}</option>}

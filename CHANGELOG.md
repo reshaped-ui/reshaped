@@ -31,6 +31,7 @@ Theming:
 - Added opacity to neutral border, border faded and background faded color tokens
 - [Maybe breaking] REM based typography, removed default font size / line height from body
 - Added `rootTheme` and `setRootTheme`
+- Allow to pass manually defined on colors
 
 Figma:
 

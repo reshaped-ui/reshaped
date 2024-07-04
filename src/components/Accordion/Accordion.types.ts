@@ -8,7 +8,7 @@ export type BaseProps = {
 	children?: React.ReactNode;
 	onToggle?: (active: boolean) => void;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type TriggerProps = {

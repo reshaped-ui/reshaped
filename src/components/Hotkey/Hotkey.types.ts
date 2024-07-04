@@ -5,5 +5,5 @@ export type Props = {
 	children: React.ReactNode;
 	active?: boolean;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"span", Props>;
+	attributes?: G.Attributes<"span">;
 };

@@ -14,5 +14,5 @@ export type Props = {
 		| "disabled";
 	autoWidth?: boolean;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"span", Props>;
+	attributes?: G.Attributes<"span">;
 };

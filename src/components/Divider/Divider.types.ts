@@ -4,5 +4,5 @@ export type Props = {
 	blank?: boolean;
 	vertical?: G.Responsive<boolean>;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"hr", Props>;
+	attributes?: G.Attributes<"hr">;
 };

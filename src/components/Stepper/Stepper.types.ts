@@ -7,7 +7,7 @@ export type Props = {
 	children?: React.ReactNode;
 	direction?: "row" | "column";
 	className?: G.ClassName;
-	attributes?: G.Attributes<"ul", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ItemProps = {
@@ -17,7 +17,7 @@ export type ItemProps = {
 	subtitle?: React.ReactNode;
 	children?: React.ReactNode;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"li", ItemProps>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ItemPrivateProps = ItemProps & {

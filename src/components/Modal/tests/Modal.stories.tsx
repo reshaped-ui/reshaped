@@ -151,7 +151,6 @@ export const edgeCases = () => {
 					title="Modal title"
 					onOpen={() => {
 						inputRef.current?.focus();
-						console.log(11);
 					}}
 				>
 					<View gap={3} direction="row">

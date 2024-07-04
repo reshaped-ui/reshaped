@@ -22,7 +22,8 @@ const generateBackgroundColors = (
 			...bgWithDynamicForeground,
 			...(themeOptions?.generateOnColorsFor || []),
 		];
-		const needsDynamicForeground = generateOnColorsFor.includes(tokenName);
+		const needsDynamicForeground =
+			generateOnColorsFor.includes(tokenName) && !definition.color?.[generatedForegroundName];
 		const needsRGB =
 			tokenName.startsWith("background") ||
 			tokenName.endsWith("black") ||
@@ -47,13 +48,11 @@ const generateBackgroundColors = (
 
 			const hex = getOnColor({
 				bgHexColor: bgToken.hex!,
-				// mode: "light",
 				...onColorHexMap,
 			});
 
 			const hexDark = getOnColor({
 				bgHexColor: bgToken.hexDark || bgToken.hex!,
-				// mode: "dark",
 				...onColorHexMap,
 			});
 

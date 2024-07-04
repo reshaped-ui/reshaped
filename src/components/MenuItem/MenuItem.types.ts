@@ -22,7 +22,7 @@ export type Props = Pick<
 export type AlignerProps = {
 	children: React.ReactElement;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", AlignerProps>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type Export = React.ForwardRefExoticComponent<Props> & {

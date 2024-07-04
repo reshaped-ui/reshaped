@@ -25,7 +25,7 @@ export type Props = Pick<
 export type GroupProps = {
 	children: React.ReactNode;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type AlignerProps = BaseAlignerProps & {

@@ -3,5 +3,5 @@ import type * as G from "types/global";
 
 export type Props = Pick<ViewProps, "width" | "height" | "borderRadius"> & {
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

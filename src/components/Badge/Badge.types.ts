@@ -41,7 +41,7 @@ export type ContainerProps = {
 	overlap?: boolean;
 	children: React.ReactNode;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", ContainerProps>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type Export = React.ForwardRefExoticComponent<Props> & {

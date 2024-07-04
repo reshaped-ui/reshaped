@@ -17,7 +17,7 @@ export type Props = {
 	actionsSlot?: React.ReactNode;
 	color?: "neutral" | "primary" | "critical" | "positive" | "inverted";
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ProviderProps = {

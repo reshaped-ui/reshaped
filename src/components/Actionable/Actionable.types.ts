@@ -13,7 +13,7 @@ export type Props = {
 	as?: keyof JSX.IntrinsicElements;
 	className?: G.ClassName;
 	// Props are not ommited from attributes since we support all of them
-	attributes?: Omit<G.Attributes<"button">, "ref"> &
+	attributes?: G.Attributes<"button"> &
 		Omit<JSX.IntrinsicElements["a"], keyof G.Attributes<"button">> & {
 			ref?: React.RefObject<HTMLButtonElement | HTMLAnchorElement>;
 		};

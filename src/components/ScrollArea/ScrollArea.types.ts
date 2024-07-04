@@ -8,7 +8,7 @@ export type Props = {
 	height?: G.Responsive<string | number>;
 	maxHeight?: G.Responsive<string | number>;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type BarProps = {

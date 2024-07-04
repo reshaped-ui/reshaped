@@ -22,7 +22,7 @@ type BaseProps = {
 	onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 	inputAttributes?: G.Attributes<"input">;
 } & Pick<FormControlProps, "hasError">;
 

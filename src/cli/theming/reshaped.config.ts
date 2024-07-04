@@ -15,6 +15,7 @@ const config: ReshapedConfig = {
 			color: {
 				backgroundPrimary: { hex: "#1da1f2" },
 				backgroundPrimaryHighlighted: { hex: "#1a90da" },
+				onBackgroundPrimary: { hex: "#ffffff" },
 			},
 		},
 	},

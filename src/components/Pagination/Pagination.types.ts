@@ -28,7 +28,7 @@ export type BaseProps = {
 	/**
 	 * Custom root element attributes
 	 */
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps & {

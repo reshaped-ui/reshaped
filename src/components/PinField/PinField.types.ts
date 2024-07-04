@@ -9,9 +9,9 @@ type BaseProps = {
 	size?: G.Responsive<Size>;
 	variant?: "outline" | "faded";
 	onChange?: G.ChangeHandler<string>;
-	inputAttributes?: G.Attributes<"input", BaseProps>;
+	inputAttributes?: G.Attributes<"input">;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", BaseProps>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps & { value: string; defaultValue?: never };

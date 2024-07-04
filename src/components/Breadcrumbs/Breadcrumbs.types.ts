@@ -10,7 +10,7 @@ export type Props = {
 	disableExpand?: boolean;
 	ariaLabel?: string;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"nav", Props>;
+	attributes?: G.Attributes<"nav">;
 };
 
 export type ItemProps = Pick<LinkProps, "icon" | "href" | "onClick" | "disabled" | "children">;

@@ -145,6 +145,8 @@ const theme: ThemeDefinition = {
 		backgroundElevationRaised: { hex: "#FFFFFF", hexDark: "#2C2C2C" },
 		backgroundElevationOverlay: { hex: "#FFFFFF", hexDark: "#2C2C2C" },
 
+		onBackgroundPrimary: { hex: "#FFFFFF" },
+
 		black: { hex: "#000000" },
 		white: { hex: "#FFFFFF" },
 	},

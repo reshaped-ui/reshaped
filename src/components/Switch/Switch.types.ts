@@ -7,13 +7,13 @@ type BaseProps = {
 	name: string;
 	disabled?: boolean;
 	reversed?: boolean;
-	size?: "medium" | "small";
+	size?: "medium" | "small" | "large";
 	onChange?: G.ChangeHandler<boolean>;
 	onFocus?: (e: React.FocusEvent) => void;
 	onBlur?: (e: React.FocusEvent) => void;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"label", Props>;
-	inputAttributes?: G.Attributes<"input", Omit<Props, "id">>;
+	attributes?: G.Attributes<"label">;
+	inputAttributes?: G.Attributes<"input">;
 };
 
 export type ControlledProps = BaseProps & { defaultChecked?: never; checked: boolean };

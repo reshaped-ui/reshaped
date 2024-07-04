@@ -8,5 +8,5 @@ export type Props = {
 	color?: "primary" | "critical" | "warning" | "positive" | "media";
 	duration?: number;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

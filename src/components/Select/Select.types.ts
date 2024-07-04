@@ -16,6 +16,8 @@ export type ButtonTriggerProps = {
 	onClick?: () => void;
 	children?: React.ReactNode;
 	inputAttributes?: ActionableProps["attributes"];
+	onFocus?: (e: React.FocusEvent<HTMLButtonElement>) => void;
+	onBlur?: (e: React.FocusEvent<HTMLButtonElement>) => void;
 	options?: never;
 	onChange?: never;
 };
@@ -23,7 +25,9 @@ export type ButtonTriggerProps = {
 export type SelectTriggerProps = {
 	options: Option[];
 	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
-	inputAttributes?: G.Attributes<"select", Omit<Props, "id">>;
+	onFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
+	onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
+	inputAttributes?: G.Attributes<"select">;
 	onClick?: never;
 	children?: never;
 };
@@ -38,10 +42,8 @@ type BaseProps = ((ButtonTriggerProps | SelectTriggerProps) &
 	placeholder?: string;
 	icon?: IconProps["svg"];
 	startSlot?: React.ReactNode;
-	onFocus?: (e: React.FocusEvent) => void;
-	onBlur?: (e: React.FocusEvent) => void;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps & { value: string; defaultValue?: never };

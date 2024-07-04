@@ -8,5 +8,5 @@ export type Props = {
 	fill?: boolean;
 	scrimClassName?: G.ClassName;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

@@ -11,5 +11,5 @@ export type Props = CloseProps & {
 	children?: React.ReactNode;
 	onClose?: () => void;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

@@ -136,7 +136,6 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	);
 
 	const handleMouseDown = ({ nativeEvent }: React.MouseEvent | React.TouchEvent) => {
-		console.log(111);
 		if (disabled) return;
 
 		let minDistance: number;

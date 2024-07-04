@@ -11,7 +11,7 @@ type BaseProps = {
 	onFocus?: (e: React.FocusEvent) => void;
 	onBlur?: (e: React.FocusEvent) => void;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"label", Props>;
+	attributes?: G.Attributes<"label">;
 	inputAttributes?: G.Attributes<"input">;
 };
 

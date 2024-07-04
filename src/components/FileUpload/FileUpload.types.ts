@@ -9,7 +9,7 @@ export type Props = {
 		React.DragEvent<HTMLDivElement> | React.ChangeEvent<HTMLInputElement>
 	>;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 	inputAttributes?: G.Attributes<"input">;
 };
 

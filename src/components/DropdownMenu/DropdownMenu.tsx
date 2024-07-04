@@ -127,7 +127,7 @@ const DropdownMenuSubTriggerItem = (props: Omit<MenuItemProps, "endSlot" | "roun
 	return (
 		<DropdownMenuItem
 			{...menuItemProps}
-			attributes={{ ...attributes, ref }}
+			attributes={{ ...attributes, ref: ref as React.RefObject<HTMLButtonElement> }}
 			endSlot={<Icon autoWidth svg={IconChevronRight} className={s.arrow} />}
 		>
 			{children}

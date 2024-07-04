@@ -13,6 +13,6 @@ export type Props = {
 	displayMode?: "cover" | "contain";
 	borderRadius?: Extract<TStyles.Radius, "small" | "medium" | "large">;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props & { ref: any }>;
-	imageAttributes?: G.Attributes<"img", Props>;
+	attributes?: G.Attributes<"div"> & G.Attributes<"img">;
+	imageAttributes?: G.Attributes<"img">;
 };

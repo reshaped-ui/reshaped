@@ -15,13 +15,13 @@ export type ItemProps = {
 	children?: React.ReactNode;
 	icon?: IconProps["svg"];
 	href?: string;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ListProps = {
 	children?: React.ReactNode;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type PanelProps = {

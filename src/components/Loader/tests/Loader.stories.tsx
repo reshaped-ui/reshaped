@@ -1,5 +1,6 @@
 import { Example } from "utilities/storybook";
 import Loader from "components/Loader";
+import { HTMLAttributes } from "react";
 
 export default {
 	title: "Components/Loader",
@@ -11,19 +12,26 @@ export default {
 	},
 };
 
-export const size = () => (
-	<Example>
-		<Example.Item title="size: medium">
-			<Loader size="medium" />
-		</Example.Item>
-		<Example.Item title="size: small">
-			<Loader size="small" />
-		</Example.Item>
-		<Example.Item title={["responsive size", "[s] small", "[m+] medium"]}>
-			<Loader size={{ s: "small", m: "medium" }} />
-		</Example.Item>
-	</Example>
-);
+export const size = () => {
+	const attributes: React.HTMLAttributes<HTMLSpanElement> = {};
+
+	return (
+		<Example>
+			<Example.Item title="size: medium">
+				<Loader size="medium" attributes={attributes} />
+			</Example.Item>
+			<Example.Item title="size: small">
+				<Loader size="small" attributes={{ "data-foo": "23" }} />
+			</Example.Item>
+			<Example.Item title={["responsive size", "[s] small", "[m+] medium"]}>
+				<Loader
+					size={{ s: "small", m: "medium" }}
+					attributes={{ style: { margin: 20, "--foo": 2 } }}
+				/>
+			</Example.Item>
+		</Example>
+	);
+};
 
 export const color = () => (
 	<Example>

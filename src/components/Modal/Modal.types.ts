@@ -30,5 +30,5 @@ export type Props = {
 	ariaLabel?: string;
 	className?: G.ClassName;
 	overlayClassName?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

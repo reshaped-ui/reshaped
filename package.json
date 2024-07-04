@@ -36,18 +36,15 @@
 		},
 		"./themes": {
 			"types": "./dist/themes/index.d.ts",
-			"require": "./dist/cjs/themes/index.js",
-			"import": "./dist/themes/index.js"
+			"default": "./dist/cjs/themes/index.js"
 		},
 		"./config/postcss": {
 			"types": "./dist/config/postcss.d.ts",
-			"import": "./dist/config/postcss.js",
-			"require": "./dist/cjs/config/postcss.js"
+			"default": "./dist/cjs/config/postcss.js"
 		},
 		"./config/tailwind": {
 			"types": "./dist/config/tailwind.d.ts",
-			"import": "./dist/config/tailwind.js",
-			"require": "./dist/cjs/config/tailwind.js"
+			"default": "./dist/cjs/config/tailwind.js"
 		},
 		"./bundle": {
 			"types": "./dist/bundle.d.ts",
@@ -147,7 +144,7 @@
 		"stylelint-config-standard": "36.0.0",
 		"ts-jest": "29.1.2",
 		"ts-node": "10.9.2",
-		"typescript": "5.4.4",
+		"typescript": "5.5.3",
 		"vite": "5.2.8",
 		"vite-tsconfig-paths": "4.3.2"
 	},

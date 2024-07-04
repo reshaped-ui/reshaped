@@ -33,6 +33,9 @@ export const size = () => (
 		<Example.Item title="size: small">
 			<Switch name="active" size="small" inputAttributes={{ "aria-label": "test switch" }} />
 		</Example.Item>
+		<Example.Item title="size: large">
+			<Switch name="active" size="large" inputAttributes={{ "aria-label": "test switch" }} />
+		</Example.Item>
 	</Example>
 );
 

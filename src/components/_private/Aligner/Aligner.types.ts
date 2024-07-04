@@ -6,5 +6,5 @@ export type Props = {
 	children: React.ReactElement;
 	side?: Side | Side[];
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };

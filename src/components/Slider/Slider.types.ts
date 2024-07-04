@@ -49,7 +49,7 @@ type BaseProps = {
 	max?: number;
 	renderValue?: (args: { value: number }) => string;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps &

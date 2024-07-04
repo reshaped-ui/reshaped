@@ -7,5 +7,5 @@ export type Props = Pick<ViewProps, "paddingBlock" | "paddingInline" | "padding"
 	elevated?: boolean;
 	children?: React.ReactNode;
 	className?: G.ClassName;
-	attributes?: G.Attributes<"div", Props>;
+	attributes?: G.Attributes<"div">;
 };
