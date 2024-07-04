@@ -75,7 +75,7 @@ export const position = () => (
 export const controlled = () => (
 	<Example>
 		<Example.Item title="active, controlled, position: bottom">
-			<Demo position="bottom" />
+			<Demo position="bottom" active />
 		</Example.Item>
 	</Example>
 );
