@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 import Icon from "components/Icon";
 import Loader from "components/Loader";
-import Actionable, { ActionableRef } from "components/Actionable";
+import Actionable, { type ActionableRef } from "components/Actionable";
 import ButtonGroup from "./ButtonGroup";
 import ButtonAligner from "./ButtonAligner";
 import type * as T from "./Button.types";

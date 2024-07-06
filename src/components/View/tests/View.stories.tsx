@@ -1,6 +1,6 @@
 import React from "react";
 import { Placeholder, Example } from "utilities/storybook";
-import View, { ViewProps } from "components/View";
+import View, { type ViewProps } from "components/View";
 import Hidden from "components/Hidden";
 import Text from "components/Text";
 import Tabs from "components/Tabs";

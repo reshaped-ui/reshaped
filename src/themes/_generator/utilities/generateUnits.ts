@@ -1,6 +1,6 @@
 import type * as T from "themes/_generator/types";
 import type { FullThemeDefinition } from "themes/_generator/tokens/types";
-import { GeneratedName as GeneratedUnitName } from "themes/_generator/tokens/unit/unit.types";
+import type { GeneratedName as GeneratedUnitName } from "themes/_generator/tokens/unit/unit.types";
 
 const generateUnits = (definition: T.PartialDeep<FullThemeDefinition>) => {
 	const baseValue = definition.unit?.base?.px;

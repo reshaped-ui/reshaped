@@ -4,7 +4,7 @@ import React from "react";
 import { onNextFrame } from "utilities/animation";
 import { classNames } from "utilities/helpers";
 import TrapFocus from "utilities/a11y/TrapFocus";
-import { FocusableElement } from "utilities/a11y/types";
+import { type FocusableElement } from "utilities/a11y/types";
 import useToggle from "hooks/useToggle";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";

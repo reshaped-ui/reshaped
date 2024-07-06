@@ -1,6 +1,6 @@
 import React from "react";
 import type * as G from "types/global";
-import { FormControlProps } from "components/FormControl";
+import { type FormControlProps } from "components/FormControl";
 
 type Size = G.Responsive<"medium" | "large" | "xlarge">;
 

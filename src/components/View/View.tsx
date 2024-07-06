@@ -1,6 +1,6 @@
 import React from "react";
 import { classNames, responsiveClassNames, responsiveVariables } from "utilities/helpers";
-import Divider, { DividerProps } from "components/Divider";
+import Divider, { type DividerProps } from "components/Divider";
 import Hidden from "components/Hidden";
 import type * as G from "types/global";
 import type * as T from "./View.types";

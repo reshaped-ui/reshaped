@@ -1,7 +1,7 @@
 "use client";
 
-import View, { ViewProps } from "components/View";
-import Button, { ButtonProps } from "components/Button";
+import View, { type ViewProps } from "components/View";
+import Button, { type ButtonProps } from "components/Button";
 import Icon from "components/Icon";
 import Theme from "components/Theme";
 import Text from "components/Text";

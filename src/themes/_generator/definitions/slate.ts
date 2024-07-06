@@ -1,5 +1,5 @@
 import reshapedDefinition from "./reshaped";
-import { ThemeDefinition } from "../tokens/types";
+import type { ThemeDefinition } from "../tokens/types";
 import generateColors from "../utilities/generateColors";
 
 const theme: ThemeDefinition = {

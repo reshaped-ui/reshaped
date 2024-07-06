@@ -1,4 +1,4 @@
-import { ReshapedConfig } from "types/config";
+import type { ReshapedConfig } from "types/config";
 
 export type Color = string | { hex: string; hexDark: string };
 
