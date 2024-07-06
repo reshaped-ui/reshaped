@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { classNames } from "utilities/helpers";
-import Actionable, { ActionableRef } from "components/Actionable";
+import Actionable, { type ActionableRef } from "components/Actionable";
 import type * as T from "./Card.types";
 import s from "./Card.module.css";
 import getRadiusStyles from "styles/radius";

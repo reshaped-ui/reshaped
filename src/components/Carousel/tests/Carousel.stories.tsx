@@ -1,6 +1,6 @@
 import React from "react";
 import { Example, Placeholder } from "utilities/storybook";
-import Carousel, { CarouselInstanceRef } from "components/Carousel";
+import Carousel, { type CarouselInstanceRef } from "components/Carousel";
 import Button from "components/Button";
 import View from "components/View";
 

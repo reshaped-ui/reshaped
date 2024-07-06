@@ -135,6 +135,3 @@ body {
 [data-rs-no-transition] *::after {
 	transition: none !important;
 }
-
-/* Used for resetting headless component styles */
-@layer rs.reset;

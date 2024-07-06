@@ -3,7 +3,7 @@
 import React from "react";
 import { classNames } from "utilities/helpers";
 import HiddenInput from "components/_private/HiddenInput";
-import Actionable, { ActionableRef } from "components/Actionable";
+import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import Text from "components/Text";
 import { useTabs } from "./TabsContext";

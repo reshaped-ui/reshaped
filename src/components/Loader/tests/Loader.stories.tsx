@@ -1,6 +1,5 @@
 import { Example } from "utilities/storybook";
 import Loader from "components/Loader";
-import { HTMLAttributes } from "react";
 
 export default {
 	title: "Components/Loader",

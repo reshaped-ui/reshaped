@@ -4,6 +4,7 @@
 		"outDir": "dist/cjs",
 		"baseUrl": "./src",
 		"rootDir": "./src",
+		"verbatimModuleSyntax": false,
 		"module": "CommonJS",
 		"target": "ES2022",
 		"paths": { "*": ["*"] }

@@ -2,9 +2,9 @@
 
 import React from "react";
 import Popover from "components/Popover";
-import MenuItem, { MenuItemProps } from "components/MenuItem";
+import MenuItem, { type MenuItemProps } from "components/MenuItem";
 import Icon from "components/Icon";
-import { useFlyoutContext, FlyoutInstanceRef } from "components/_private/Flyout";
+import { useFlyoutContext, type FlyoutInstanceRef } from "components/_private/Flyout";
 import IconChevronRight from "icons/ChevronRight";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";

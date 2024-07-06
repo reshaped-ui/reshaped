@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { classNames } from "utilities/helpers";
-import Actionable, { ActionableRef } from "components/Actionable";
+import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import type * as T from "./Link.types";
 import s from "./Link.module.css";

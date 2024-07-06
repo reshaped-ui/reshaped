@@ -1,4 +1,4 @@
-import { ThemeDefinition } from "../tokens/types";
+import type { ThemeDefinition } from "../tokens/types";
 
 const theme: ThemeDefinition = {
 	fontFamily: {

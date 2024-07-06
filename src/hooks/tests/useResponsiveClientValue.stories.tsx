@@ -1,6 +1,6 @@
 import React from "react";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
-import View, { ViewProps } from "components/View";
+import View, { type ViewProps } from "components/View";
 
 export default { title: "Hooks/useResponsiveClientValue" };
 

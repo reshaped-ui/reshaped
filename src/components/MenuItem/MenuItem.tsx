@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
-import Actionable, { ActionableRef } from "components/Actionable";
+import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import View from "components/View";
 import MenuItemAligner from "./MenuItemAligner";
