@@ -47,6 +47,7 @@ type BaseProps = {
 	disabled?: boolean;
 	min?: number;
 	max?: number;
+	direction?: "vertical" | "horizontal";
 	renderValue?: (args: { value: number }) => string;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;

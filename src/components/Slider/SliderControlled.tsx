@@ -7,16 +7,11 @@ import useRTL from "hooks/useRTL";
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
 import SliderThumb from "./SliderThumb";
-import { applyStepToValue } from "./Slider.utilities";
+import { applyStepToValue, getDragCoord } from "./Slider.utilities";
 import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
 
 const THUMB_SIZE = 16;
-
-const getDragX = (event: MouseEvent | TouchEvent) => {
-	if (event instanceof MouseEvent) return event.pageX || event.screenX;
-	return event.changedTouches[0].pageX;
-};
 
 const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const {
@@ -30,7 +25,9 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		renderValue,
 		className,
 		attributes,
+		direction = "horizontal",
 	} = props;
+	const vertical = direction === "vertical";
 	const minValue =
 		range && props.minValue !== undefined ? applyStepToValue(props.minValue, step) : undefined;
 	const maxValue = applyStepToValue(range ? props.maxValue : props.value, step);
@@ -47,27 +44,35 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const minId = `${inputId}-min`;
 	const maxId = `${inputId}-max`;
 	const disabled = formControl?.disabled || props.disabled;
-	const rootClassNames = classNames(s.root, disabled && s["--disabled"], className);
+	const rootClassNames = classNames(
+		s.root,
+		disabled && s["--disabled"],
+		direction && s[`--direction-${direction}`],
+		className
+	);
 
 	const getPositionValue = React.useCallback(
-		(x: number) => {
-			if (!barRef.current) return;
+		(dragCoord: number) => {
+			const barEl = barRef.current;
 
-			const barWidth = barRef.current.clientWidth;
+			if (!barEl) return;
+
+			const barSize = vertical ? barEl.clientHeight : barEl.clientWidth;
+			const barRect = barEl.getBoundingClientRect();
 			// Move by half thumb size since it's a reserved space
-			const barX = barRef.current!.getBoundingClientRect().left + THUMB_SIZE / 2;
-			const positionX = x - barX;
-			const thumbsAreaWidth = barWidth - THUMB_SIZE;
+			const barCoord = barRect[vertical ? "top" : "left"] + THUMB_SIZE / 2;
+			const position = dragCoord - barCoord;
+			const thumbsAreaWidth = barSize - THUMB_SIZE;
 
-			let percentage = positionX / thumbsAreaWidth;
-			if (rtl) percentage = 1 - percentage;
+			let percentage = position / thumbsAreaWidth;
+			if (rtl || vertical) percentage = 1 - percentage;
 
 			let value = (max - min) * percentage + min;
 			value = Math.max(min, Math.min(max, value));
 
 			return applyStepToValue(value, step);
 		},
-		[max, min, rtl, step]
+		[max, min, rtl, step, vertical]
 	);
 
 	const getPercentPosition = (value: number) => {
@@ -78,6 +83,8 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const positionTooltip = React.useCallback(
 		(draggingId: string) => {
+			if (vertical) return;
+
 			const draggingRef = draggingId === minId ? minTooltipRef : maxTooltipRef;
 			const thumbRef = draggingId === minId ? minRef : maxRef;
 
@@ -106,7 +113,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 				tooltipEl.style.setProperty("--rs-slider-tooltip-offset", `${nextTooltipOffset || 0}px`);
 			}
 		},
-		[minId]
+		[minId, vertical]
 	);
 
 	const handleMinChange: T.ThumbProps["onChange"] = React.useCallback(
@@ -140,8 +147,8 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 
 		let minDistance: number;
 		let closestId;
-		const x = getDragX(nativeEvent);
-		const nextValue = getPositionValue(x);
+		const dragCoord = getDragCoord({ event: nativeEvent, vertical });
+		const nextValue = getPositionValue(dragCoord);
 		const thumbs = [
 			{ ref: minRef, id: minId },
 			{ ref: maxRef, id: maxId },
@@ -150,7 +157,8 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		thumbs.forEach((item) => {
 			if (!item.ref.current) return;
 			const el = item.ref.current;
-			const distance = Math.abs(el.getBoundingClientRect().left - x);
+			const elRect = el.getBoundingClientRect();
+			const distance = Math.abs((vertical ? elRect.top : elRect.left) - dragCoord);
 
 			if (minDistance === undefined || distance <= minDistance) {
 				minDistance = distance;
@@ -193,8 +201,8 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		(e: MouseEvent | TouchEvent) => {
 			if (!draggingId) return;
 
-			const x = getDragX(e);
-			const nextValue = getPositionValue(x);
+			const coord = getDragCoord({ event: e, vertical });
+			const nextValue = getPositionValue(coord);
 
 			if (nextValue === undefined) return;
 
@@ -217,6 +225,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			handleMinChange,
 			maxId,
 			minId,
+			vertical,
 		]
 	);
 
@@ -254,10 +263,12 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			<div className={s.bar} ref={barRef}>
 				<div
 					className={s.selection}
-					style={{
-						insetInlineStart: `${minPercentPosition || 0}%`,
-						width: `${maxPercentPosition - (minPercentPosition || 0)}%`,
-					}}
+					style={
+						{
+							"--rs-slider-selection-start": `${minPercentPosition || 0}%`,
+							"--rs-slider-selection-size": `${maxPercentPosition - (minPercentPosition || 0)}%`,
+						} as React.CSSProperties
+					}
 				/>
 			</div>
 

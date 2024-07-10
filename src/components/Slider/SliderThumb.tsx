@@ -51,7 +51,7 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 				className={thumbClassNames}
 				onMouseDown={onDragStart}
 				onTouchStart={onDragStart}
-				style={{ insetInlineStart: `${position}%` }}
+				style={{ "--ts-slider-thumb-position": `${position}%` } as React.CSSProperties}
 				id={id}
 				aria-hidden="true"
 			>
