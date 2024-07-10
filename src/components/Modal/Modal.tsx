@@ -68,6 +68,7 @@ const Modal = (props: T.Props) => {
 		transparentOverlay,
 		ariaLabel,
 		autoFocus = true,
+		disableSwipeGesture,
 		overlayClassName,
 		className,
 		attributes,
@@ -106,6 +107,8 @@ const Modal = (props: T.Props) => {
 	};
 
 	const handleDragStart = (e: React.TouchEvent) => {
+		if (disableSwipeGesture) return;
+
 		let currentEl = e.target as HTMLElement | null;
 		const rootEl = rootRef.current;
 

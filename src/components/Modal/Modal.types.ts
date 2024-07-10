@@ -24,6 +24,7 @@ export type Props = {
 	padding?: G.Responsive<number>;
 	active?: boolean;
 	transparentOverlay?: boolean;
+	disableSwipeGesture?: boolean;
 	autoFocus?: boolean;
 	onClose?: () => void;
 	onOpen?: () => void;
