@@ -68,6 +68,7 @@ const Modal = (props: T.Props) => {
 		transparentOverlay,
 		ariaLabel,
 		autoFocus = true,
+		disableSwipeGesture,
 		overlayClassName,
 		className,
 		attributes,
@@ -77,7 +78,8 @@ const Modal = (props: T.Props) => {
 	const [titleMounted, setTitleMounted] = React.useState(false);
 	const [subtitleMounted, setSubtitleMounted] = React.useState(false);
 	const [dragging, setDragging] = React.useState(false);
-	const rootRef = React.useRef<HTMLDivElement>(null);
+	const internalRootRef = React.useRef<HTMLDivElement>(null);
+	const rootRef = attributes?.ref || internalRootRef;
 	const dragStartCoordinatesRef = React.useRef({ x: 0, y: 0 });
 	const dragLastCoordinateRef = React.useRef(0);
 	const dragDistanceRef = React.useRef(0);
@@ -105,6 +107,8 @@ const Modal = (props: T.Props) => {
 	};
 
 	const handleDragStart = (e: React.TouchEvent) => {
+		if (disableSwipeGesture) return;
+
 		let currentEl = e.target as HTMLElement | null;
 		const rootEl = rootRef.current;
 
@@ -214,7 +218,7 @@ const Modal = (props: T.Props) => {
 
 		setHideProgress(progress / 2);
 		dragDistanceRef.current = dragDistance;
-	}, [dragDistance, clientPosition]);
+	}, [dragDistance, clientPosition, rootRef]);
 
 	return (
 		<Overlay

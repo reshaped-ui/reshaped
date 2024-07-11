@@ -3,6 +3,7 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import Modal from "components/Modal";
 import Reshaped from "components/Reshaped";
+import useToggle from "hooks/useToggle";
 
 const fixtures = {
 	content: "Content",
@@ -11,6 +12,7 @@ const fixtures = {
 	className: "test-className",
 	overlayClassName: "test-overlay-className",
 	id: "test-id",
+	testId: "data-test-id",
 };
 
 Object.defineProperty(window, "matchMedia", {
@@ -120,19 +122,33 @@ describe("Components/Modal", () => {
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
 	});
 
-	test("works with className and attributes", () => {
-		render(
-			<Reshaped>
-				<Modal
-					active
-					className={fixtures.className}
-					attributes={{ id: fixtures.id }}
-					overlayClassName={fixtures.overlayClassName}
-				>
-					{fixtures.content}
-				</Modal>
-			</Reshaped>
-		);
+	test("works with className and attributes", async () => {
+		const Component = () => {
+			const ref = React.useRef<HTMLDivElement | null>(null);
+			const toggle = useToggle();
+
+			React.useEffect(() => {
+				toggle.activate();
+			}, [toggle]);
+
+			return (
+				<Reshaped>
+					<Modal
+						active={toggle.active}
+						className={fixtures.className}
+						attributes={{ id: fixtures.id, ref }}
+						overlayClassName={fixtures.overlayClassName}
+						onOpen={() => {
+							ref.current?.setAttribute("data-testid", fixtures.testId);
+						}}
+					>
+						{fixtures.content}
+					</Modal>
+				</Reshaped>
+			);
+		};
+
+		render(<Component />);
 
 		const elModal = screen.getByRole("dialog");
 		const elOverlay = screen.getByRole("button");
@@ -140,5 +156,9 @@ describe("Components/Modal", () => {
 		expect(elModal).toHaveClass(fixtures.className);
 		expect(elModal).toHaveAttribute("id", fixtures.id);
 		expect(elOverlay).toHaveClass(fixtures.overlayClassName);
+
+		// Test that passed ref overrides internal modal ref
+		const elModalRef = screen.getByTestId(fixtures.testId);
+		expect(elModalRef).toBeInTheDocument();
 	});
 });

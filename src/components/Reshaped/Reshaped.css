@@ -6,104 +6,106 @@
 	--rs-z-index-notification: 110;
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
-	margin: 0;
-	padding: 0;
-}
+@layer rs.reset {
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	ul,
+	ol,
+	li,
+	figure,
+	figcaption,
+	blockquote,
+	dl,
+	dd {
+		margin: 0;
+		padding: 0;
+	}
 
-ul[class],
-ol[class] {
-	list-style: none;
-}
+	ul[class],
+	ol[class] {
+		list-style: none;
+	}
 
-textarea {
-	resize: vertical;
-}
+	textarea {
+		resize: vertical;
+	}
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
 
-fieldset {
-	border: 0;
-	margin: 0;
-	padding: 0;
-}
+	fieldset {
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
 
-img {
-	max-width: 100%;
-	display: block;
-}
+	img {
+		max-width: 100%;
+		display: block;
+	}
 
-input,
-button,
-textarea,
-select {
-	font: inherit;
-}
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+	}
 
-/* 
+	/* 
 	Setting background for Windows browsers that have white background by default 
 	which doesn't work well in dark mode
 	*/
-option {
-	background: var(--rs-color-background-elevation-base);
-}
+	option {
+		background: var(--rs-color-background-elevation-base);
+	}
 
-label {
-	cursor: pointer;
-}
+	label {
+		cursor: pointer;
+	}
 
-textarea::placeholder,
-input::placeholder {
-	opacity: 0.5;
-	color: var(--rs-color-foreground-neutral-faded);
-}
+	textarea::placeholder,
+	input::placeholder {
+		opacity: 0.5;
+		color: var(--rs-color-foreground-neutral-faded);
+	}
 
-html {
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust */
-	-webkit-text-size-adjust: 100%;
-	-webkit-font-smoothing: antialiased;
+	html {
+		/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust */
+		-webkit-text-size-adjust: 100%;
+		-webkit-font-smoothing: antialiased;
 
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering */
-	text-rendering: optimizelegibility;
+		/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering */
+		text-rendering: optimizelegibility;
 
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action#values */
-	touch-action: manipulation;
+		/* https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action#values */
+		touch-action: manipulation;
 
-	/* Use 14px as base for rem values */
-	font-size: 87.5%;
-	line-height: var(--rs-line-height-body-3);
-	font-family: var(--rs-font-family-body);
-	font-weight: var(--rs-font-weight-regular);
-}
+		/* Use 14px as base for rem values */
+		font-size: 87.5%;
+		line-height: var(--rs-line-height-body-3);
+		font-family: var(--rs-font-family-body);
+		font-weight: var(--rs-font-weight-regular);
+	}
 
-* {
-	box-sizing: border-box;
-}
+	* {
+		box-sizing: border-box;
+	}
 
-html,
-body {
-	color: var(--rs-color-foreground-neutral);
-	background: var(--rs-color-background-page);
-	height: 100%;
-	scroll-behavior: smooth;
+	html,
+	body {
+		color: var(--rs-color-foreground-neutral);
+		background: var(--rs-color-background-page);
+		height: 100%;
+		scroll-behavior: smooth;
+	}
 }
 
 [data-rs-theme]:not(html) {

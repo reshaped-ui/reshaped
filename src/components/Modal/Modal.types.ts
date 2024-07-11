@@ -24,11 +24,12 @@ export type Props = {
 	padding?: G.Responsive<number>;
 	active?: boolean;
 	transparentOverlay?: boolean;
+	disableSwipeGesture?: boolean;
 	autoFocus?: boolean;
 	onClose?: () => void;
 	onOpen?: () => void;
 	ariaLabel?: string;
 	className?: G.ClassName;
 	overlayClassName?: G.ClassName;
-	attributes?: G.Attributes<"div">;
+	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
 };

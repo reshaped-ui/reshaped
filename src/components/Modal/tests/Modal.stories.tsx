@@ -206,6 +206,10 @@ export const edgeCases = () => {
 				</Modal>
 			</Example.Item>
 
+			<Example.Item title="disableSwipeGesture">
+				<Demo disableSwipeGesture position="start" />
+			</Example.Item>
+
 			<Example.Item title="scroll locks on open">
 				<Demo />
 				<View height="1000px" />
