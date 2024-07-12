@@ -2,7 +2,7 @@
 
 import React from "react";
 import { classNames } from "utilities/helpers";
-import { enableUserSelect, disableUserSelect } from "utilities/dom";
+import { enableUserSelect, disableUserSelect, enableScroll, disableScroll } from "utilities/dom";
 import useRTL from "hooks/useRTL";
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
@@ -25,9 +25,9 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		renderValue,
 		className,
 		attributes,
-		direction = "horizontal",
+		orientation = "horizontal",
 	} = props;
-	const vertical = direction === "vertical";
+	const vertical = orientation === "vertical";
 	const minValue =
 		range && props.minValue !== undefined ? applyStepToValue(props.minValue, step) : undefined;
 	const maxValue = applyStepToValue(range ? props.maxValue : props.value, step);
@@ -47,7 +47,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const rootClassNames = classNames(
 		s.root,
 		disabled && s["--disabled"],
-		direction && s[`--direction-${direction}`],
+		orientation && s[`--orientation-${orientation}`],
 		className
 	);
 
@@ -171,6 +171,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		if (closestId === maxId) handleMaxChange(nextValue);
 
 		disableUserSelect();
+		disableScroll();
 		setDraggingId(closestId);
 	};
 
@@ -194,6 +195,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		}
 
 		enableUserSelect();
+		enableScroll();
 		setDraggingId(null);
 	}, [minValue, maxValue, handleMinChange, handleMaxChange, draggingId, minId, maxId]);
 
@@ -289,6 +291,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 						tooltipRef={minTooltipRef}
 						renderValue={renderValue}
 						step={step}
+						orientation={orientation}
 					/>
 				)}
 
@@ -307,6 +310,7 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 					tooltipRef={maxTooltipRef}
 					renderValue={renderValue}
 					step={step}
+					orientation={orientation}
 				/>
 			</div>
 		</div>

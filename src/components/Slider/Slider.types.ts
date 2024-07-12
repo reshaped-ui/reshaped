@@ -47,7 +47,7 @@ type BaseProps = {
 	disabled?: boolean;
 	min?: number;
 	max?: number;
-	direction?: "vertical" | "horizontal";
+	orientation?: "vertical" | "horizontal";
 	renderValue?: (args: { value: number }) => string;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
@@ -76,6 +76,7 @@ export type ThumbProps = {
 	max: number;
 	min: number;
 	step: NonNullable<BaseProps["step"]>;
+	orientation: NonNullable<BaseProps["orientation"]>;
 	renderValue?: BaseProps["renderValue"];
 	tooltipRef: React.RefObject<HTMLDivElement>;
 };

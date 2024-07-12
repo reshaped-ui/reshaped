@@ -110,7 +110,7 @@
 	}
 }
 
-.--direction {
+.--orientation {
 	&-horizontal {
 		height: var(--rs-slider-thumb-size);
 		overflow-x: clip;
@@ -152,10 +152,13 @@
 			}
 
 			&:hover .tooltip,
-			&--active .tooltip,
-			.input:focus & .tooltip {
+			&--active .tooltip {
 				transform: translate(var(--rs-slider-tooltip-translate), calc(var(--rs-unit-x1) * -1.5));
 			}
+		}
+
+		& .input:focus + .thumb .tooltip {
+			transform: translate(var(--rs-slider-tooltip-translate), calc(var(--rs-unit-x1) * -1.5));
 		}
 	}
 
@@ -203,10 +206,13 @@
 			}
 
 			&:hover .tooltip,
-			&--active .tooltip,
-			.input:focus & .tooltip {
+			&--active .tooltip {
 				transform: translate(calc(var(--rs-unit-x1) * 1.5), -50%);
 			}
+		}
+
+		& .input:focus + .thumb .tooltip {
+			transform: translate(calc(var(--rs-unit-x1) * 1.5), -50%);
 		}
 	}
 }

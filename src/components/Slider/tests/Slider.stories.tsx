@@ -24,6 +24,7 @@ export const base = () => (
 				renderValue={() => "Hundred more times"}
 			/>
 		</Example.Item>
+		<div style={{ height: 2000 }} />
 	</Example>
 );
 
@@ -36,7 +37,7 @@ export const direction = () => (
 					name="slider"
 					defaultMinValue={30}
 					defaultMaxValue={100}
-					direction="vertical"
+					orientation="vertical"
 				/>
 			</View>
 		</Example.Item>
