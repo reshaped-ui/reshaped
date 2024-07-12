@@ -15,3 +15,19 @@ export const applyStepToValue = (value: number, step: number) => {
 
 	return result;
 };
+
+export const getDragCoord = ({
+	event,
+	vertical,
+}: {
+	event: MouseEvent | TouchEvent;
+	vertical?: boolean;
+}) => {
+	if (vertical) {
+		if (event instanceof MouseEvent) return event.pageY || event.screenY;
+		return event.changedTouches[0].pageY;
+	}
+
+	if (event instanceof MouseEvent) return event.pageX || event.screenX;
+	return event.changedTouches[0].pageX;
+};

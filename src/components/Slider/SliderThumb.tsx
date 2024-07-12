@@ -22,6 +22,7 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 		onDragStart,
 		renderValue,
 		tooltipRef,
+		orientation,
 	} = props;
 	const id = React.useId();
 	const thumbClassNames = classNames(s.thumb, active && s["thumb--active"]);
@@ -45,13 +46,14 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 				min={min}
 				step={step}
 				aria-labelledby={id}
+				aria-orientation={orientation}
 			/>
 			<div
 				ref={ref}
 				className={thumbClassNames}
 				onMouseDown={onDragStart}
 				onTouchStart={onDragStart}
-				style={{ insetInlineStart: `${position}%` }}
+				style={{ "--ts-slider-thumb-position": `${position}%` } as React.CSSProperties}
 				id={id}
 				aria-hidden="true"
 			>

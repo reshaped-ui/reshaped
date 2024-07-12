@@ -17,3 +17,15 @@ export const disableUserSelect = () => {
 export const enableUserSelect = () => {
 	document.body.style.userSelect = "";
 };
+
+const preventDefault = (e: Event) => e.preventDefault();
+
+export const disableScroll = () => {
+	window.addEventListener("wheel", preventDefault, { passive: false });
+	window.addEventListener("touchmove", preventDefault, { passive: false });
+};
+
+export const enableScroll = () => {
+	window.removeEventListener("wheel", preventDefault);
+	window.removeEventListener("touchmove", preventDefault);
+};

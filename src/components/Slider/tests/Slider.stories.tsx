@@ -1,5 +1,6 @@
 import { Example } from "utilities/storybook";
 import Slider from "components/Slider";
+import View from "components/View";
 import FormControl from "components/FormControl";
 
 export default {
@@ -22,6 +23,23 @@ export const base = () => (
 				defaultMaxValue={100}
 				renderValue={() => "Hundred more times"}
 			/>
+		</Example.Item>
+		<div style={{ height: 2000 }} />
+	</Example>
+);
+
+export const direction = () => (
+	<Example>
+		<Example.Item title="vertical">
+			<View height="200px">
+				<Slider
+					range
+					name="slider"
+					defaultMinValue={30}
+					defaultMaxValue={100}
+					orientation="vertical"
+				/>
+			</View>
 		</Example.Item>
 	</Example>
 );

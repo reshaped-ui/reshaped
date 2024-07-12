@@ -4,15 +4,11 @@
 	--rs-slider-thumb-size: var(--rs-unit-x4);
 
 	position: relative;
-	height: var(--rs-slider-thumb-size);
 	display: flex;
 	align-items: center;
 	cursor: pointer;
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
-	overflow-x: clip;
-	margin-inline: calc(var(--rs-slider-overflow-gap) * -1);
-	padding-inline: var(--rs-slider-overflow-gap);
 
 	&:has(.thumb:hover, .thumb--active, .input:focus) {
 		overflow: visible;
@@ -22,8 +18,6 @@
 .bar {
 	border-radius: var(--rs-radius-small);
 	background: var(--rs-color-background-neutral);
-	height: var(--rs-unit-x1);
-	width: 100%;
 	position: relative;
 	overflow: hidden;
 }
@@ -38,21 +32,17 @@
 }
 
 .selection {
-	height: 100%;
 	position: absolute;
 	background: var(--rs-color-background-primary);
 }
 
 .tooltip {
-	--rs-slider-tooltip-translate-x: calc(-50% + var(--rs-slider-tooltip-offset, 0px));
+	--rs-slider-tooltip-translate: calc(-50% + var(--rs-slider-tooltip-offset, 0px));
 
 	position: absolute;
-	bottom: 100%;
-	left: 50%;
 	min-width: var(--rs-line-height-caption-1);
 	box-sizing: initial;
 	text-align: center;
-	transform: translate(var(--rs-slider-tooltip-translate-x), 0);
 	opacity: 0;
 	user-select: none;
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
@@ -70,27 +60,20 @@
 
 .thumbs {
 	position: absolute;
-	inset-inline: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
-	height: 100%;
 }
 
 .thumb {
-	width: 0;
-	height: 100%;
 	position: absolute;
 
 	&::before {
 		content: "";
 		position: absolute;
-		left: 0;
-		top: 50%;
 		width: var(--rs-slider-thumb-size);
 		height: var(--rs-slider-thumb-size);
 		border-radius: 999px;
 		background: var(--rs-color-background-primary);
 		box-shadow: 0 0 0 2px var(--rs-color-background-elevation-base);
 		box-sizing: border-box;
-		transform: translate(-50%, -50%);
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
 		transition-property: box-shadow;
 	}
@@ -98,17 +81,13 @@
 	&::after {
 		content: "";
 		position: absolute;
-		left: 0;
-		top: 50%;
 		width: var(--rs-unit-x7);
 		height: var(--rs-unit-x7);
-		transform: translate(-50%, -50%);
 		cursor: grab;
 	}
 
 	&:hover .tooltip {
 		opacity: 1;
-		transform: translate(var(--rs-slider-tooltip-translate-x), calc(var(--rs-unit-x1) * -1.5));
 	}
 
 	.input:focus + &,
@@ -123,15 +102,118 @@
 
 		& .tooltip {
 			opacity: 1;
-			transform: translate(
-				var(--rs-slider-tooltip-translate-x),
-				calc(var(--rs-unit-x1) * -1.5)
-			) !important;
 		}
 	}
 
 	.input:focus + &::before {
 		box-shadow: var(--rs-focus-shadow);
+	}
+}
+
+.--orientation {
+	&-horizontal {
+		height: var(--rs-slider-thumb-size);
+		overflow-x: clip;
+		margin-inline: calc(var(--rs-slider-overflow-gap) * -1);
+		padding-inline: var(--rs-slider-overflow-gap);
+
+		& .bar {
+			height: var(--rs-unit-x1);
+			width: 100%;
+		}
+
+		& .selection {
+			height: 100%;
+			inset-inline-start: var(--rs-slider-selection-start);
+			width: var(--rs-slider-selection-size);
+		}
+
+		& .tooltip {
+			bottom: 100%;
+			left: 50%;
+			transform: translate(var(--rs-slider-tooltip-translate), 0);
+		}
+
+		& .thumbs {
+			inset-inline: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
+			height: 100%;
+		}
+
+		& .thumb {
+			width: 0;
+			height: 100%;
+			inset-inline-start: var(--ts-slider-thumb-position);
+
+			&::before,
+			&::after {
+				left: 0;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			&:hover .tooltip,
+			&--active .tooltip {
+				transform: translate(var(--rs-slider-tooltip-translate), calc(var(--rs-unit-x1) * -1.5));
+			}
+		}
+
+		& .input:focus + .thumb .tooltip {
+			transform: translate(var(--rs-slider-tooltip-translate), calc(var(--rs-unit-x1) * -1.5));
+		}
+	}
+
+	&-vertical {
+		height: 100%;
+		width: var(--rs-slider-thumb-size);
+		flex-direction: column;
+		overflow-y: clip;
+		margin-block: calc(var(--rs-slider-overflow-gap) * -1);
+		padding-block: var(--rs-slider-overflow-gap);
+
+		& .bar {
+			width: var(--rs-unit-x1);
+			height: 100%;
+		}
+
+		& .selection {
+			width: 100%;
+			inset-inline-start: auto;
+			inset-block-end: var(--rs-slider-selection-start);
+			height: var(--rs-slider-selection-size);
+		}
+
+		& .tooltip {
+			top: 50%;
+			inset-inline-start: 100%;
+			transform: translate(0, var(--rs-slider-tooltip-translate));
+		}
+
+		& .thumbs {
+			inset-block: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
+			width: 100%;
+		}
+
+		& .thumb {
+			height: 0;
+			width: 100%;
+			inset-block-end: var(--ts-slider-thumb-position);
+
+			&::before,
+			&::after {
+				top: 0;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			&:hover .tooltip,
+			&--active .tooltip {
+				transform: translate(calc(var(--rs-unit-x1) * 1.5), -50%);
+			}
+		}
+
+		& .input:focus + .thumb .tooltip {
+			transform: translate(calc(var(--rs-unit-x1) * 1.5), -50%);
+		}
 	}
 }
 
