@@ -42,7 +42,11 @@ const DemoResponsive = (props: any) => {
 export const position = () => (
 	<Example>
 		<Example.Item title="position: bottom-start">
-			<Demo position="bottom-start" />
+			<View direction="row" gap={2}>
+				<Demo position="bottom-start" text="Tooltip 1" />
+				<Demo position="bottom-start" text="Tooltip 2" />
+				<Demo position="bottom-start" text="Tooltip 3" />
+			</View>
 		</Example.Item>
 		<Example.Item title="position: bottom">
 			<Demo position="bottom" />
@@ -66,8 +70,28 @@ export const position = () => (
 			</View>
 		</Example.Item>
 
+		<Example.Item title="position: start-top">
+			<View align="end">
+				<Demo position="start-top" />
+			</View>
+		</Example.Item>
+
+		<Example.Item title="position: start-bottom">
+			<View align="end">
+				<Demo position="start-bottom" />
+			</View>
+		</Example.Item>
+
 		<Example.Item title="position: end">
 			<Demo position="end" />
+		</Example.Item>
+
+		<Example.Item title="position: end-top">
+			<Demo position="end-top" />
+		</Example.Item>
+
+		<Example.Item title="position: end-bottom">
+			<Demo position="end-bottom" />
 		</Example.Item>
 	</Example>
 );

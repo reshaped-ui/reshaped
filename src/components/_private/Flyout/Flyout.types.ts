@@ -79,6 +79,7 @@ type BaseProps = {
 	position?: Position;
 	forcePosition?: boolean;
 	trapFocusMode?: TrapMode;
+	disabled?: boolean;
 	disableHideAnimation?: boolean;
 	children?: React.ReactNode;
 	onOpen?: () => void;

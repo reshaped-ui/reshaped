@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen, waitFor, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Flyout from "components/_private/Flyout/index";
 import Reshaped from "components/Reshaped";
 
@@ -46,7 +45,7 @@ describe("Flyout", () => {
 		waitFor(() => {
 			expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
 			expect(button).not.toHaveAttribute("aria-controls");
-			expect(handleClose).toBeCalled();
+			expect(handleClose).toHaveBeenCalled();
 		});
 	});
 
@@ -76,14 +75,41 @@ describe("Flyout", () => {
 
 		waitFor(() => {
 			expect(screen.queryByText(fixtures.content)).toBeInTheDocument();
-			expect(handleOpen).toBeCalled();
+			expect(handleOpen).toHaveBeenCalled();
 		});
 
 		await act(() => userEvent.unhover(button));
 
 		waitFor(() => {
 			expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
-			expect(handleClose).toBeCalled();
+			expect(handleClose).toHaveBeenCalled();
 		});
+	});
+
+	test("works with disabled flag", async () => {
+		const handleOpen = jest.fn();
+
+		render(
+			<Reshaped>
+				<Flyout triggerType="hover" onOpen={handleOpen} disabled>
+					<Flyout.Trigger>
+						{(attributes) => (
+							<button type="button" {...attributes}>
+								{fixtures.triggerText}
+							</button>
+						)}
+					</Flyout.Trigger>
+					<Flyout.Content>{fixtures.content}</Flyout.Content>
+				</Flyout>
+			</Reshaped>
+		);
+
+		const button = screen.getByRole("button");
+
+		expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
+
+		await act(() => userEvent.hover(button));
+
+		expect(handleOpen).toHaveBeenCalledTimes(0);
 	});
 });

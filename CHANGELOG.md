@@ -4,6 +4,10 @@
 - Modal: attribures.ref support
 - Modal: disableSwipeGesture
 - Slider: vertical orientation
+- Tooltip, Popover, DropdownMenu: Fixed position calculations
+- Tooltip: disabled flag
+- Tooltip: Cooldown for tooltip groups
 
-- Figma: Removed local scoping
+- Figma: Removed local color scoping
 - Figma: Updated description links
+- Figma: typography weight and scoping
