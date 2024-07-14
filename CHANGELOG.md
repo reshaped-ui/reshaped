@@ -8,6 +8,7 @@
 - Tooltip: disabled flag
 - Tooltip: Cooldown for tooltip groups
 - Popover, DropdownMenu: containerRef
+- Text: Responsive weight
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

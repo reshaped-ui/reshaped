@@ -132,9 +132,17 @@
 	}
 }
 
-@each $weight in regular, medium, bold {
-	.--weight-$(weight) {
-		font-weight: var(--rs-font-weight-$(weight)) !important;
+@responsive .--weight {
+	@value regular {
+		font-weight: var(--rs-font-weight-regular) !important;
+	}
+
+	@value medium {
+		font-weight: var(--rs-font-weight-medium) !important;
+	}
+
+	@value bold {
+		font-weight: var(--rs-font-weight-bold) !important;
 	}
 }
 

@@ -72,6 +72,9 @@ export const weight = () => (
 		<Example.Item title="weight: bold">
 			<Text weight="bold">Bold</Text>
 		</Example.Item>
+		<Example.Item title={["responsive", "[s] weight: regular", "[m+] bold"]}>
+			<Text weight={{ s: "regular", m: "bold" }}>Responsive</Text>
+		</Example.Item>
 	</Example>
 );
 
