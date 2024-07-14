@@ -20,6 +20,7 @@ const Popover = (props: T.Props) => {
 		position = "bottom",
 		disableHideAnimation,
 		instanceRef,
+		containerRef,
 	} = props;
 	const padding = props.padding ?? (variant === "headless" ? 0 : 4);
 	const trapFocusMode =
@@ -48,6 +49,7 @@ const Popover = (props: T.Props) => {
 			width={width}
 			disableHideAnimation={disableHideAnimation}
 			contentGap={contentGap}
+			containerRef={containerRef}
 			contentClassName={contentClassName}
 			contentAttributes={{ style: { ...paddingStyles?.variables } }}
 		>

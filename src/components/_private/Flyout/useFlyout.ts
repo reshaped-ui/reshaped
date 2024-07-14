@@ -14,6 +14,7 @@ type PassedFlyoutOptions = {
 	position?: T.Position;
 	defaultActive?: boolean;
 	forcePosition?: boolean;
+	container?: HTMLElement | null;
 };
 type PositionStyles = Record<"left" | "top" | "width" | "height", number>;
 
@@ -111,7 +112,7 @@ const resetStyles: T.Styles = {
  * Set position of the target element to fit on the screen
  */
 const flyout: Flyout = (triggerEl, flyoutEl, options) => {
-	const { position, forcePosition, width } = options;
+	const { position, forcePosition, width, container } = options;
 	const targetClone = flyoutEl.cloneNode(true) as any;
 	const triggerBounds = triggerEl.getBoundingClientRect();
 
@@ -134,7 +135,7 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 	document.body.appendChild(targetClone);
 
 	const flyoutBounds = targetClone.getBoundingClientRect();
-	const scrollableParent = getClosestFlyoutTarget(triggerEl);
+	const scrollableParent = container || getClosestFlyoutTarget(triggerEl);
 	const scopeBounds = scrollableParent.getBoundingClientRect();
 
 	const scopeOffset = {
@@ -213,7 +214,7 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 };
 
 const useFlyout: UseFlyout = (originRef, targetRef, options) => {
-	const { position: defaultPosition = "bottom", forcePosition, width } = options;
+	const { position: defaultPosition = "bottom", forcePosition, width, container } = options;
 	const [isRTL] = useRTL();
 	const [state, dispatch] = React.useReducer(flyoutReducer, {
 		position: defaultPosition,
@@ -245,10 +246,11 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 			position: defaultPosition,
 			forcePosition,
 			rtl: isRTL,
+			container,
 		});
 
 		dispatch({ type: "position", payload: nextFlyoutData });
-	}, [originRef, targetRef, defaultPosition, isRTL, forcePosition, width]);
+	}, [originRef, targetRef, defaultPosition, isRTL, forcePosition, width, container]);
 
 	React.useEffect(() => {
 		if (state.status === "rendered") updatePosition();

@@ -7,6 +7,7 @@
 - Tooltip, Popover, DropdownMenu: Fixed position calculations
 - Tooltip: disabled flag
 - Tooltip: Cooldown for tooltip groups
+- Popover, DropdownMenu: containerRef
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

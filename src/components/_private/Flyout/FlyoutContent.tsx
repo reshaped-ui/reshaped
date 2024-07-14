@@ -29,6 +29,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 		contentAttributes,
 		trapFocusMode,
 		width,
+		containerRef,
 	} = useFlyoutContext();
 	const { styles, status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
@@ -106,14 +107,10 @@ const FlyoutContent = (props: T.ContentProps) => {
 	);
 
 	const closestScrollable = getClosestFlyoutTarget(triggerElRef.current);
+	const scrollableRef =
+		closestScrollable === document.body ? undefined : { current: closestScrollable };
 
-	return (
-		<Portal
-			targetRef={closestScrollable === document.body ? undefined : { current: closestScrollable }}
-		>
-			{content}
-		</Portal>
-	);
+	return <Portal targetRef={containerRef || scrollableRef}>{content}</Portal>;
 };
 
 export default FlyoutContent;

@@ -22,6 +22,7 @@ export type Width = "trigger" | string;
 export type Options = {
 	width?: Width;
 	position: Position;
+	container?: HTMLElement | null;
 	rtl: boolean;
 	forcePosition?: boolean;
 };
@@ -89,6 +90,7 @@ type BaseProps = {
 	contentClassName?: string;
 	contentAttributes?: G.Attributes<"div">;
 	instanceRef?: React.Ref<InstanceRef>;
+	containerRef?: React.RefObject<HTMLElement>;
 };
 
 export type DefaultProps = Required<{
@@ -129,7 +131,12 @@ export type ContextProps = {
 	handleContentMouseUp: () => void;
 } & Pick<
 	Props,
-	"triggerType" | "contentClassName" | "contentAttributes" | "trapFocusMode" | "contentGap"
+	| "triggerType"
+	| "contentClassName"
+	| "contentAttributes"
+	| "trapFocusMode"
+	| "contentGap"
+	| "containerRef"
 >;
 
 export type TriggerContextProps = Pick<ContextProps, "triggerElRef">;

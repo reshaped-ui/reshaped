@@ -34,6 +34,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		active: passedActive,
 		id: passedId,
 		instanceRef,
+		containerRef,
 	} = props;
 	const parentFlyoutContext = useFlyoutContext();
 	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
@@ -57,6 +58,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		width,
 		position: passedPosition,
 		defaultActive: passedActive,
+		container: containerRef?.current,
 		forcePosition,
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
@@ -311,6 +313,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				contentGap,
 				contentClassName,
 				contentAttributes,
+				containerRef,
 			}}
 		>
 			{children}

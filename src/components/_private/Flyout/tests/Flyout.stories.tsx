@@ -110,6 +110,37 @@ export const modeContentMenuHover = () => (
 	</Demo>
 );
 
+const PortalTargetDemo = () => {
+	const portalRef = React.useRef<HTMLDivElement | null>(null);
+
+	return (
+		<View gap={50}>
+			<div style={{ position: "relative" }} ref={portalRef}>
+				<Flyout position="bottom-start" containerRef={portalRef} active>
+					<Flyout.Trigger>{(attributes) => <button {...attributes}>Open</button>}</Flyout.Trigger>
+					<Flyout.Content>
+						<div
+							style={{
+								background: "var(--rs-color-background-elevation-overlay)",
+								padding: "var(--rs-unit-x4)",
+								height: 100,
+								width: 160,
+								borderRadius: "var(--rs-radius-medium)",
+								border: "1px solid var(--rs-color-border-neutral-faded)",
+								boxSizing: "border-box",
+							}}
+						>
+							{"Content"}
+						</div>
+					</Flyout.Content>
+				</Flyout>
+			</div>
+		</View>
+	);
+};
+
+export const customPortalTarget = () => <PortalTargetDemo />;
+
 export const testWidthOverflowOnMobile = () => (
 	<Demo position="bottom-start" width={600}>
 		Should work on mobile

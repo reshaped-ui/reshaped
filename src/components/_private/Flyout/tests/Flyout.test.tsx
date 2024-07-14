@@ -1,3 +1,4 @@
+import React from "react";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import Flyout from "components/_private/Flyout/index";
@@ -6,6 +7,7 @@ import Reshaped from "components/Reshaped";
 const fixtures = {
 	triggerText: "Button",
 	content: "Content",
+	testId: "test-id",
 };
 
 describe("Flyout", () => {
@@ -111,5 +113,33 @@ describe("Flyout", () => {
 		await act(() => userEvent.hover(button));
 
 		expect(handleOpen).toHaveBeenCalledTimes(0);
+	});
+
+	test("works with custom container", () => {
+		const PortalTargetDemo = () => {
+			const portalRef = React.useRef<HTMLDivElement | null>(null);
+
+			return (
+				<div ref={portalRef} data-testid={fixtures.testId}>
+					<Flyout containerRef={portalRef} active>
+						<Flyout.Trigger>
+							{(attributes) => <button {...attributes}>{fixtures.triggerText}</button>}
+						</Flyout.Trigger>
+						<Flyout.Content>{fixtures.content}</Flyout.Content>
+					</Flyout>
+				</div>
+			);
+		};
+
+		render(
+			<Reshaped>
+				<PortalTargetDemo />
+			</Reshaped>
+		);
+
+		const containerEl = screen.getByTestId(fixtures.testId);
+		const contentEl = screen.getByText(fixtures.content);
+
+		expect(containerEl).toContainElement(contentEl);
 	});
 });

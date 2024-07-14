@@ -16,6 +16,7 @@ export type Props = Pick<
 	| "width"
 	| "disableHideAnimation"
 	| "instanceRef"
+	| "containerRef"
 > & {
 	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu">;
 };

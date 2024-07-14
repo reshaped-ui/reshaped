@@ -16,6 +16,7 @@ export type Props = Pick<
 	| "instanceRef"
 	| "triggerType"
 	| "disableHideAnimation"
+	| "containerRef"
 > & {
 	children?: React.ReactNode;
 	padding?: number;
