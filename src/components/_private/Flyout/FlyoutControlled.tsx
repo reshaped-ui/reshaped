@@ -3,7 +3,6 @@
 import React from "react";
 import { debounce } from "utilities/helpers";
 import TrapFocus from "utilities/a11y/TrapFocus";
-import * as timeouts from "constants/timeouts";
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
@@ -12,6 +11,8 @@ import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
 import useFlyout from "./useFlyout";
+import * as timeouts from "./Flyout.constants";
+import cooldown from "./utilities/cooldown";
 import { Provider, useFlyoutTriggerContext, useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 
@@ -21,6 +22,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		onOpen,
 		onClose,
 		children,
+		disabled,
 		forcePosition,
 		trapFocusMode,
 		width,
@@ -74,17 +76,17 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Called from the internal actions
 	 */
 	const handleOpen = React.useCallback(() => {
-		const canOpen = !lockedRef.current && status === "idle";
+		const canOpen = !lockedRef.current && status === "idle" && !disabled;
 
 		if (!canOpen) return;
 		onOpen?.();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [status]);
+	}, [status, disabled]);
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
 			const isLocked = triggerType === "click" && !isDismissible();
-			const canClose = !isLocked && status !== "idle";
+			const canClose = !isLocked && status !== "idle" && !disabled;
 
 			if (!canClose) return;
 			onClose?.();
@@ -94,7 +96,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			}
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[status, isDismissible, triggerType]
+		[status, isDismissible, triggerType, disabled]
 	);
 
 	/**
@@ -126,10 +128,17 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const handleMouseEnter = React.useCallback(() => {
 		clearTimer();
-		timerRef.current = setTimeout(handleOpen, timeouts.mouseEnter);
+		timerRef.current = setTimeout(
+			handleOpen,
+			cooldown.timer ? timeouts.mouseEnterShort : timeouts.mouseEnter
+		);
+
+		cooldown.warm();
 	}, [clearTimer, timerRef, handleOpen]);
 
 	const handleMouseLeave = React.useCallback(() => {
+		cooldown.cool();
+
 		clearTimer();
 		timerRef.current = setTimeout(() => handleClose(), timeouts.mouseLeave);
 	}, [clearTimer, timerRef, handleClose]);
@@ -176,9 +185,15 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 		/**
 		 * Check that transitions are enabled and it has been triggered on tooltip open
-		 * (keyboard focus navigation could move too fast and ignore the transitions completely)
+		 * - keyboard focus navigation could move too fast and ignore the transitions completely
+		 * - warmed up tooltips get removed instantly
 		 */
-		if (checkTransitions() && !disableHideAnimation && transitionStartedRef.current) {
+		if (
+			checkTransitions() &&
+			!disableHideAnimation &&
+			transitionStartedRef.current &&
+			cooldown.status !== "warm"
+		) {
 			hide();
 		} else {
 			// In case transitions are disabled globally - remove from the DOM immediately

@@ -44,7 +44,7 @@ const calculatePosition = (
 		case "start":
 		case "start-top":
 		case "start-bottom":
-			left = triggerBounds.left - triggerBounds.width;
+			left = triggerBounds.left - flyoutBounds.width;
 			break;
 
 		case "end":
@@ -92,7 +92,7 @@ const calculatePosition = (
 
 		case "start-bottom":
 		case "end-bottom":
-			top = triggerBounds.bottom - triggerBounds.height;
+			top = triggerBounds.bottom - flyoutBounds.height;
 			break;
 
 		default:

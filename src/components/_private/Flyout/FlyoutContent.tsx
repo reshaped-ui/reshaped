@@ -5,6 +5,7 @@ import { classNames } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
 import { getClosestFlyoutTarget } from "utilities/dom";
+import cooldown from "./utilities/cooldown";
 import { useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 import s from "./Flyout.module.css";
@@ -52,8 +53,9 @@ const FlyoutContent = (props: T.ContentProps) => {
 	const contentClassNames = classNames(
 		s.content,
 		status === "visible" && s["--visible"],
-		// Animate after correct position has been assigned
-		["visible", "hidden"].includes(status) && s["--animated"],
+		// animating only when we're opening the first flyout or closing the last flyout within the same cooldown
+		// content is rendered only once flyout is already warm so checking for timer instead
+		(cooldown.status === "cooling" || !cooldown.timer) && s["--animated"],
 		position && s[`--position-${position}`],
 		width === "trigger" && s["--width-trigger"]
 	);

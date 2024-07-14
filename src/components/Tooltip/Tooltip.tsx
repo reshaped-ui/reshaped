@@ -7,7 +7,7 @@ import type * as T from "./Tooltip.types";
 import s from "./Tooltip.module.css";
 
 const Tooltip = (props: T.Props) => {
-	const { id, text, children, onOpen, onClose, position = "bottom", active } = props;
+	const { id, text, children, onOpen, onClose, position = "bottom", active, disabled } = props;
 
 	if (!text) return <>{children({})}</>;
 
@@ -16,6 +16,7 @@ const Tooltip = (props: T.Props) => {
 			id={id}
 			active={active}
 			position={position}
+			disabled={disabled}
 			onOpen={onOpen}
 			onClose={onClose}
 			triggerType="hover"
