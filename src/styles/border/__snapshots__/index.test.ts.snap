@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/Border handles responsive value 1`] = `
+{
+  "classNames": [
+    "root",
+    "null",
+    "--border-neutral--m",
+    "--border-transparent--l",
+  ],
+}
+`;
+
+exports[`Styles/Border handles undefined value 1`] = `null`;
+
+exports[`Styles/Border handles value 1`] = `
+{
+  "classNames": [
+    "root",
+    "--border-primary",
+  ],
+}
+`;

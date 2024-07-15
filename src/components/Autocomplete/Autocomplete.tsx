@@ -13,7 +13,8 @@ import * as T from "./Autocomplete.types";
 const AutocompleteContext = React.createContext({} as T.Context);
 
 const Autocomplete = (props: T.Props) => {
-	const { children, onChange, onInput, onItemSelect, name, ...textFieldProps } = props;
+	const { children, onChange, onInput, onItemSelect, name, containerRef, ...textFieldProps } =
+		props;
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
 	const [active, setActive] = React.useState(false);
 	// Prevent dropdown from opening on selecting an item
@@ -72,6 +73,7 @@ const Autocomplete = (props: T.Props) => {
 				active={!locked && hasChildren && active}
 				onClose={handleClose}
 				onOpen={handleOpen}
+				containerRef={containerRef}
 				disableHideAnimation
 			>
 				<DropdownMenu.Trigger>

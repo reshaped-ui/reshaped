@@ -92,27 +92,6 @@
 	box-shadow: var(--rs-shadow-overlay);
 }
 
-.--bd {
-	--rs-view-border-width: 1px;
-
-	border: var(--rs-view-border-width) solid var(--rs-view-border-color);
-}
-
-@each $color in neutral-faded, neutral, positive, positive-faded, warning, warning-faded, critical,
-	critical-faded, primary, primary-faded, disabled {
-	.--bd-$color {
-		--rs-view-border-color: var(--rs-color-border-$color);
-	}
-}
-
-.--bd-brand {
-	--rs-view-border-color: var(--rs-color-brand);
-}
-
-.--bd-transparent {
-	--rs-view-border-color: transparent;
-}
-
 .--overflow-hidden {
 	overflow: hidden;
 }

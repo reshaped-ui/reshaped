@@ -653,6 +653,12 @@ export const border = () => (
 				Content
 			</View>
 		</Example.Item>
+
+		<Example.Item title={["responsive", "[s] primary", "[m+] neutral"]}>
+			<View borderColor={{ s: "primary", m: "neutral" }} padding={4}>
+				Content
+			</View>
+		</Example.Item>
 	</Example>
 );
 
