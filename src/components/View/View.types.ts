@@ -51,20 +51,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 		| "brand"
 		| "white"
 		| "black";
-	borderColor?:
-		| "neutral"
-		| "neutral-faded"
-		| "critical"
-		| "critical-faded"
-		| "warning"
-		| "warning-faded"
-		| "positive"
-		| "positive-faded"
-		| "primary"
-		| "primary-faded"
-		| "disabled"
-		| "brand"
-		| "transparent";
+	borderColor?: G.Responsive<TStyles.BorderColor>;
 	borderRadius?: G.Responsive<TStyles.Radius>;
 	position?: G.Responsive<TStyles.Position>;
 	inset?: G.Responsive<number>;

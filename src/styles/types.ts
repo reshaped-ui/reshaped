@@ -3,6 +3,20 @@ import * as G from "types/global";
 
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
+export type BorderColor =
+	| "neutral"
+	| "neutral-faded"
+	| "critical"
+	| "critical-faded"
+	| "warning"
+	| "warning-faded"
+	| "positive"
+	| "positive-faded"
+	| "primary"
+	| "primary-faded"
+	| "disabled"
+	| "brand"
+	| "transparent";
 
 /**
  * Utility controlled only with classnames
