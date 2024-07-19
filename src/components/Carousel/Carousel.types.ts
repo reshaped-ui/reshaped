@@ -28,7 +28,7 @@ export type Props = {
 	gap?: G.Responsive<number>;
 	bleed?: G.Responsive<number>;
 	navigationDisplay?: "hidden";
-	instanceRef?: React.Ref<InstanceRef>;
+	instanceRef?: React.Ref<Instance>;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };
