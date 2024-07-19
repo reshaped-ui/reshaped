@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { debounce } from "utilities/helpers";
 import TrapFocus from "utilities/a11y/TrapFocus";
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
@@ -259,11 +258,13 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Update position on resize or RTL
 	 */
 	React.useEffect(() => {
-		const update = debounce(updatePosition, 10);
+		const resizeObserver = new ResizeObserver(() => updatePosition({ sync: true }));
 
-		window.addEventListener("resize", update);
-		return () => window.removeEventListener("resize", update);
-	}, [updatePosition]);
+		resizeObserver.observe(document.body);
+		if (triggerElRef.current) resizeObserver.observe(triggerElRef.current);
+
+		return () => resizeObserver.disconnect();
+	}, [updatePosition, triggerElRef]);
 
 	React.useEffect(() => {
 		updatePosition();
@@ -277,8 +278,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		() => ({
 			open: handleOpen,
 			close: handleClose,
+			updatePosition: () => updatePosition({ sync: true }),
 		}),
-		[handleOpen, handleClose]
+		[handleOpen, handleClose, updatePosition]
 	);
 
 	useHotkeys({ Escape: () => handleClose() }, [handleClose]);

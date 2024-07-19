@@ -1,7 +1,7 @@
 import type React from "react";
 import type * as G from "types/global";
 
-export type InstanceRef =
+export type Instance =
 	| {
 			navigateBack: () => void;
 			navigateForward: () => void;
@@ -28,7 +28,7 @@ export type Props = {
 	gap?: G.Responsive<number>;
 	bleed?: G.Responsive<number>;
 	navigationDisplay?: "hidden";
-	instanceRef?: React.Ref<InstanceRef>;
+	instanceRef?: React.Ref<Instance>;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

@@ -8,8 +8,10 @@
 - Tooltip: disabled flag
 - Tooltip: Cooldown for tooltip groups
 - Popover, DropdownMenu, Autocomplete: containerRef
+- Popover, DropdownMenu: updatePosition in instanceRef, added InstanceRef types
 - Text: Responsive weight
 - View: Responsive border color
+- Carousel: Renamed CarouselInstanceRef -> CarouselInstance
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

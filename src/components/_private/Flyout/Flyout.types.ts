@@ -50,10 +50,11 @@ export type UseFlyoutData = Pick<State, "styles" | "position" | "status"> & {
 /**
  * Component
  */
-export type InstanceRef =
+export type Instance =
 	| {
 			open: () => void;
 			close: () => void;
+			updatePosition: () => void;
 	  }
 	| undefined;
 
@@ -89,7 +90,7 @@ type BaseProps = {
 	contentGap?: number;
 	contentClassName?: string;
 	contentAttributes?: G.Attributes<"div">;
-	instanceRef?: React.Ref<InstanceRef>;
+	instanceRef?: React.Ref<Instance>;
 	containerRef?: React.RefObject<HTMLElement>;
 };
 
