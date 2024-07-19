@@ -10,6 +10,7 @@
 - Popover, DropdownMenu, Autocomplete: containerRef
 - Text: Responsive weight
 - View: Responsive border color
+- Tooltip, Popover: Disabled content hover
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

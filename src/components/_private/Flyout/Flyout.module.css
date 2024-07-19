@@ -84,3 +84,7 @@
 .content.--animated.--visible .inner {
 	transition-timing-function: var(--rs-easing-decelerate);
 }
+
+.content.--hover-disabled {
+	pointer-events: none;
+}

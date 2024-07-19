@@ -19,6 +19,7 @@ const Popover = (props: T.Props) => {
 		triggerType = "click",
 		position = "bottom",
 		disableHideAnimation,
+		disableContentHover,
 		instanceRef,
 		containerRef,
 	} = props;
@@ -48,6 +49,7 @@ const Popover = (props: T.Props) => {
 			defaultActive={defaultActive}
 			width={width}
 			disableHideAnimation={disableHideAnimation}
+			disableContentHover={disableContentHover}
 			contentGap={contentGap}
 			containerRef={containerRef}
 			contentClassName={contentClassName}

@@ -28,6 +28,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 		contentClassName,
 		contentAttributes,
 		trapFocusMode,
+		disableContentHover,
 		width,
 		containerRef,
 	} = useFlyoutContext();
@@ -58,7 +59,8 @@ const FlyoutContent = (props: T.ContentProps) => {
 		// content is rendered only once flyout is already warm so checking for timer instead
 		(cooldown.status === "cooling" || !cooldown.timer) && s["--animated"],
 		position && s[`--position-${position}`],
-		width === "trigger" && s["--width-trigger"]
+		width === "trigger" && s["--width-trigger"],
+		triggerType === "hover" && disableContentHover && s["--hover-disabled"]
 	);
 	// className is applied to inner element because it has the transform and is treated like a real root element
 	const innerClassNames = classNames(s.inner, className, contentClassName);
