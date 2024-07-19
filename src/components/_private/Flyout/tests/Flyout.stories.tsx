@@ -220,6 +220,51 @@ export const testInsideFixed = () => (
 	</Example>
 );
 
+export const testDynamicBounds = () => {
+	const [left, setLeft] = React.useState("50%");
+	const [size, setSize] = React.useState<"medium" | "large">("medium");
+
+	return (
+		<View gap={4}>
+			<View direction="row" gap={2}>
+				<Button onClick={() => setLeft("0%")}>Left</Button>
+				<Button onClick={() => setLeft("50%")}>Center</Button>
+				<Button onClick={() => setLeft("100%")}>Right</Button>
+				<Button onClick={() => setSize("large")}>Large button</Button>
+				<Button onClick={() => setSize("medium")}>Small button</Button>
+			</View>
+			<View height={100}>
+				<Flyout position="bottom" active>
+					<Flyout.Trigger>
+						{(attributes) => (
+							<div style={{ position: "absolute", left, top: "50%" }}>
+								<Button color="primary" attributes={attributes} size={size}>
+									Open
+								</Button>
+							</div>
+						)}
+					</Flyout.Trigger>
+					<Flyout.Content>
+						<div
+							style={{
+								background: "var(--rs-color-background-elevation-overlay)",
+								padding: "var(--rs-unit-x4)",
+								height: 100,
+								width: 160,
+								borderRadius: "var(--rs-radius-medium)",
+								border: "1px solid var(--rs-color-border-neutral-faded)",
+								boxSizing: "border-box",
+							}}
+						>
+							{"Content"}
+						</div>
+					</Flyout.Content>
+				</Flyout>
+			</View>
+		</View>
+	);
+};
+
 export const widthTrigger = () => (
 	<Flyout triggerType="click" width="trigger" position="bottom">
 		<Flyout.Trigger>

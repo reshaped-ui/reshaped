@@ -4,7 +4,7 @@ import React from "react";
 import Popover from "components/Popover";
 import MenuItem, { type MenuItemProps } from "components/MenuItem";
 import Icon from "components/Icon";
-import { useFlyoutContext, type FlyoutInstanceRef } from "components/_private/Flyout";
+import { useFlyoutContext } from "components/_private/Flyout";
 import IconChevronRight from "icons/ChevronRight";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";
@@ -13,7 +13,7 @@ import * as keys from "constants/keys";
 import type * as T from "./DropdownMenu.types";
 import s from "./DropdownMenu.module.css";
 
-const DropdownMenuSubContext = React.createContext<React.RefObject<FlyoutInstanceRef> | null>(null);
+const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
 
 const DropdownMenu = (props: T.Props) => {
 	const {
@@ -94,7 +94,7 @@ const DropdownMenuItem = (props: Omit<MenuItemProps, "roundedCorners">) => {
 
 const DropdownMenuSubMenu = (props: T.SubMenuProps) => {
 	const { children } = props;
-	const dropdownMenuRef = React.useRef<FlyoutInstanceRef>();
+	const dropdownMenuRef = React.useRef<T.Instance>();
 
 	return (
 		<DropdownMenuSubContext.Provider value={dropdownMenuRef}>

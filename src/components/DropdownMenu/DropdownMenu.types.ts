@@ -1,6 +1,8 @@
 import type React from "react";
-import type { PopoverProps } from "components/Popover";
+import type { PopoverProps, PopoverInstance } from "components/Popover";
 import type { FlyoutContentProps } from "components/_private/Flyout";
+
+export type Instance = PopoverInstance;
 
 export type Props = Pick<
 	PopoverProps,

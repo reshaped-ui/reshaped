@@ -23,7 +23,7 @@ type Flyout = (origin: HTMLElement, target: HTMLElement, options: T.Options) => 
 type FlyoutRenderAction = { type: "render"; payload?: never };
 type FlyoutPositionAction = {
 	type: "position";
-	payload: Pick<T.State, "styles" | "position">;
+	payload: Pick<T.State, "styles" | "position"> & { sync?: boolean };
 };
 type FlyoutShowAction = { type: "show"; payload?: never };
 type FlyoutHideAction = { type: "hide"; payload?: never };
@@ -40,7 +40,7 @@ type UseFlyout = (
 	targetRef: ElementRef,
 	options: PassedFlyoutOptions
 ) => Pick<T.State, "styles" | "position" | "status"> & {
-	updatePosition: () => void;
+	updatePosition: (options?: { sync?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
 	remove: () => void;
@@ -191,10 +191,12 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 			// Disable events before it's positioned to avoid mouseleave getting triggered
 			return { ...state, status: "rendered", styles: { pointerEvents: "none", ...resetStyles } };
 		case "position":
-			if (state.status !== "rendered") return state;
+			if (!action.payload.sync && state.status !== "rendered") return state;
+			if (action.payload.sync && state.status !== "visible") return state;
+
 			return {
 				...state,
-				status: "positioned",
+				status: action.payload.sync ? "visible" : "positioned",
 				position: action.payload.position,
 				styles: { ...defaultStyles, ...action.payload.styles },
 			};
@@ -238,19 +240,23 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 		dispatch({ type: "remove" });
 	}, []);
 
-	const updatePosition = React.useCallback(() => {
-		if (!originRef.current || !targetRef.current) return;
+	const updatePosition = React.useCallback(
+		(options?: { sync?: boolean }) => {
+			if (!originRef.current || !targetRef.current) return;
 
-		const nextFlyoutData = flyout(originRef.current, targetRef.current, {
-			width,
-			position: defaultPosition,
-			forcePosition,
-			rtl: isRTL,
-			container,
-		});
+			const nextFlyoutData = flyout(originRef.current, targetRef.current, {
+				width,
+				position: defaultPosition,
+				forcePosition,
+				rtl: isRTL,
+				container,
+			});
 
-		dispatch({ type: "position", payload: nextFlyoutData });
-	}, [originRef, targetRef, defaultPosition, isRTL, forcePosition, width, container]);
+			if (nextFlyoutData)
+				dispatch({ type: "position", payload: { ...nextFlyoutData, sync: options?.sync } });
+		},
+		[container, defaultPosition, forcePosition, isRTL, originRef, targetRef, width]
+	);
 
 	React.useEffect(() => {
 		if (state.status === "rendered") updatePosition();

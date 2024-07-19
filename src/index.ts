@@ -35,7 +35,7 @@ export { default as Card } from "components/Card";
 export type { CardProps } from "components/Card";
 
 export { default as Carousel } from "components/Carousel";
-export type { CarouselProps, CarouselInstanceRef } from "components/Carousel";
+export type { CarouselProps, CarouselInstanceRef, CarouselInstance } from "components/Carousel";
 
 export { default as Checkbox } from "components/Checkbox";
 export type { CheckboxProps } from "components/Checkbox";
@@ -53,7 +53,7 @@ export { default as Divider } from "components/Divider";
 export type { DividerProps } from "components/Divider";
 
 export { default as DropdownMenu } from "components/DropdownMenu";
-export type { DropdownMenuProps } from "components/DropdownMenu";
+export type { DropdownMenuProps, DropdownMenuInstance } from "components/DropdownMenu";
 
 export { default as FileUpload } from "components/FileUpload";
 export type { FileUploadProps } from "components/FileUpload";
@@ -98,7 +98,7 @@ export { default as PinField } from "components/PinField";
 export type { PinFieldProps } from "components/PinField";
 
 export { default as Popover } from "components/Popover";
-export type { PopoverProps } from "components/Popover";
+export type { PopoverProps, PopoverInstance } from "components/Popover";
 
 export { default as Progress } from "components/Progress";
 export type { ProgressProps } from "components/Progress";
