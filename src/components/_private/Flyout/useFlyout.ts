@@ -16,7 +16,6 @@ type PassedFlyoutOptions = {
 	forcePosition?: boolean;
 	container?: HTMLElement | null;
 };
-type PositionStyles = Record<"left" | "top" | "width" | "height", number>;
 
 type Flyout = (origin: HTMLElement, target: HTMLElement, options: T.Options) => T.FlyoutData;
 
@@ -70,7 +69,8 @@ const getPositionOrder = (position: T.Position) => {
 /**
  * Check if element visually fits on the screen
  */
-const fullyVisible = (bounds: PositionStyles) => {
+const fullyVisible = (args: ReturnType<typeof calculatePosition>) => {
+	const { styles, scopeOffset } = args;
 	const htmlEl = document.documentElement;
 	const pageLeft = htmlEl.scrollLeft;
 	const pageRight = pageLeft + htmlEl.clientWidth;
@@ -78,10 +78,10 @@ const fullyVisible = (bounds: PositionStyles) => {
 	const pageBottom = pageTop + htmlEl.clientHeight;
 
 	return (
-		bounds.left >= pageLeft &&
-		bounds.left + bounds.width <= pageRight &&
-		bounds.top >= pageTop &&
-		bounds.top + bounds.height <= pageBottom
+		styles.left + scopeOffset.left >= pageLeft &&
+		styles.left + styles.width + scopeOffset.left <= pageRight &&
+		styles.top + scopeOffset.top >= pageTop &&
+		styles.top + styles.height + scopeOffset.top <= pageBottom
 	);
 };
 
@@ -145,7 +145,7 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 
 	let calculated = calculatePosition({ triggerBounds, flyoutBounds, scopeOffset, ...options });
 
-	if (!fullyVisible(calculated.styles) && !forcePosition) {
+	if (!fullyVisible(calculated) && !forcePosition) {
 		const order = getPositionOrder(position);
 		const mobileOrder = order.filter((position) => position === "top" || position === "bottom");
 
@@ -165,7 +165,7 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 					...calculateOptions,
 				});
 
-				if (fullyVisible(tested.styles)) {
+				if (fullyVisible(tested)) {
 					calculated = tested;
 					return true;
 				}
@@ -175,7 +175,7 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 		};
 
 		test(order);
-		if (!fullyVisible(calculated.styles)) {
+		if (!fullyVisible(calculated)) {
 			test(mobileOrder, { fullWidth: true });
 		}
 	}

@@ -13,6 +13,7 @@
 - View: Responsive border color
 - Tooltip, Popover: Disabled content hover
 - Carousel: Renamed CarouselInstanceRef -> CarouselInstance
+- Flyout: Calculate position correctly inside fixed position containers that are not top: 0
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

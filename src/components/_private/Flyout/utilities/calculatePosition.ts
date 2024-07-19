@@ -117,7 +117,7 @@ const calculatePosition = (
 
 	const styles = { left, top, width: widthStyle, height };
 
-	return { styles, position };
+	return { styles, position, scopeOffset };
 };
 
 export default calculatePosition;
