@@ -18,6 +18,7 @@ export type Props = Pick<
 	| "instanceRef"
 	| "triggerType"
 	| "disableHideAnimation"
+	| "disableContentHover"
 	| "containerRef"
 > & {
 	children?: React.ReactNode;

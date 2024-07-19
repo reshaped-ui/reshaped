@@ -110,6 +110,12 @@ export const modeContentMenuHover = () => (
 	</Demo>
 );
 
+export const disableContentHover = () => (
+	<Demo triggerType="hover" disableContentHover>
+		Content
+	</Demo>
+);
+
 export const customPortalTarget = () => {
 	const portalRef = React.useRef<HTMLDivElement | null>(null);
 

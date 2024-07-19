@@ -7,7 +7,17 @@ import type * as T from "./Tooltip.types";
 import s from "./Tooltip.module.css";
 
 const Tooltip = (props: T.Props) => {
-	const { id, text, children, onOpen, onClose, position = "bottom", active, disabled } = props;
+	const {
+		id,
+		text,
+		children,
+		onOpen,
+		onClose,
+		position = "bottom",
+		active,
+		disabled,
+		disableContentHover,
+	} = props;
 
 	if (!text) return <>{children({})}</>;
 
@@ -19,6 +29,7 @@ const Tooltip = (props: T.Props) => {
 			disabled={disabled}
 			onOpen={onOpen}
 			onClose={onClose}
+			disableContentHover={disableContentHover}
 			triggerType="hover"
 		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>

@@ -11,6 +11,7 @@
 - Popover, DropdownMenu: updatePosition in instanceRef, added InstanceRef types
 - Text: Responsive weight
 - View: Responsive border color
+- Tooltip, Popover: Disabled content hover
 - Carousel: Renamed CarouselInstanceRef -> CarouselInstance
 
 - Figma: Removed local color scoping

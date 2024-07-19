@@ -26,6 +26,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		trapFocusMode,
 		width,
 		disableHideAnimation,
+		disableContentHover,
 		contentGap,
 		contentClassName,
 		contentAttributes,
@@ -316,6 +317,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				contentClassName,
 				contentAttributes,
 				containerRef,
+				disableContentHover,
 			}}
 		>
 			{children}

@@ -7,7 +7,6 @@ import Dismissible from "components/Dismissible";
 import DropdownMenu from "components/DropdownMenu";
 import Switch from "components/Switch";
 import TextField from "components/TextField";
-import TextArea from "components/TextArea";
 import useToggle from "hooks/useToggle";
 import Radio from "components/Radio";
 

@@ -83,6 +83,7 @@ type BaseProps = {
 	trapFocusMode?: TrapMode;
 	disabled?: boolean;
 	disableHideAnimation?: boolean;
+	disableContentHover?: boolean;
 	children?: React.ReactNode;
 	onOpen?: () => void;
 	onClose?: () => void;
@@ -138,6 +139,7 @@ export type ContextProps = {
 	| "trapFocusMode"
 	| "contentGap"
 	| "containerRef"
+	| "disableContentHover"
 >;
 
 export type TriggerContextProps = Pick<ContextProps, "triggerElRef">;
