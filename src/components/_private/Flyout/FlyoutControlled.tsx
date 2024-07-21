@@ -38,6 +38,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	} = props;
 	const parentFlyoutContext = useFlyoutContext();
 	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
+	const isSubmenu =
+		parentFlyoutContext.trapFocusMode === "action-menu" ||
+		parentFlyoutContext.trapFocusMode === "content-menu";
 	const [isRTL] = useRTL();
 	const internalTriggerElRef = React.useRef<HTMLButtonElement | null>(null);
 
@@ -91,11 +94,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			const canClose = !isLocked && status !== "idle" && !disabled;
 
 			if (!canClose) return;
-			onClose?.();
 
-			if (options?.closeParents) {
-				parentFlyoutContext?.handleClose?.();
-			}
+			onClose?.();
+			if (options?.closeParents) parentFlyoutContext?.handleClose?.();
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[status, isDismissible, triggerType, disabled]
@@ -132,11 +133,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		clearTimer();
 		timerRef.current = setTimeout(
 			handleOpen,
-			cooldown.timer ? timeouts.mouseEnterShort : timeouts.mouseEnter
+			cooldown.timer || isSubmenu ? timeouts.mouseEnterShort : timeouts.mouseEnter
 		);
 
-		cooldown.warm();
-	}, [clearTimer, timerRef, handleOpen]);
+		if (!isSubmenu) cooldown.warm();
+	}, [clearTimer, timerRef, handleOpen, isSubmenu]);
 
 	const handleMouseLeave = React.useCallback(() => {
 		cooldown.cool();
@@ -318,6 +319,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				contentAttributes,
 				containerRef,
 				disableContentHover,
+				isSubmenu,
 			}}
 		>
 			{children}

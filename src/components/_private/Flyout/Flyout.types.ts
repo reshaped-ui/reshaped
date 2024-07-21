@@ -131,6 +131,7 @@ export type ContextProps = {
 	handleFocus: () => void;
 	handleContentMouseDown: () => void;
 	handleContentMouseUp: () => void;
+	isSubmenu: boolean;
 } & Pick<
 	Props,
 	| "triggerType"
