@@ -14,6 +14,8 @@
 - Tooltip, Popover: Disabled content hover
 - Carousel: Renamed CarouselInstanceRef -> CarouselInstance
 - Flyout: Calculate position correctly inside fixed position containers that are not top: 0
+- Modal: Improved edge cases of swipe to close in scrollable modals
+- Modal: Prevent swipe to close when text selection is happening
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

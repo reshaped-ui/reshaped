@@ -109,6 +109,9 @@ const Modal = (props: T.Props) => {
 	const handleDragStart = (e: React.TouchEvent) => {
 		if (disableSwipeGesture) return;
 
+		// Prevent swipe to close from happening when user is working with text selection
+		if (window.getSelection()?.toString()) return;
+
 		let currentEl = e.target as HTMLElement | null;
 		const rootEl = rootRef.current;
 
@@ -158,6 +161,7 @@ const Modal = (props: T.Props) => {
 
 		const handleDrag = (e: TouchEvent) => {
 			if (!dragging || clientPosition === "center") return;
+			if (rootRef.current?.scrollTop !== 0 || rootRef.current?.scrollLeft !== 0) return;
 
 			const target = e.targetTouches[0];
 			const coordinate = { x: target.clientX, y: target.clientY };
@@ -171,7 +175,7 @@ const Modal = (props: T.Props) => {
 			}
 
 			const next = Math.abs(coordinate[key] - dragStartCoordinatesRef.current[key]);
-			const nextOpposite = Math.abs(
+			const nextPerpendicular = Math.abs(
 				coordinate[oppositeKey] - dragStartCoordinatesRef.current[oppositeKey]
 			);
 
@@ -179,7 +183,7 @@ const Modal = (props: T.Props) => {
 			// If user is scrolling vertically more than swiping
 			if (
 				position !== "bottom" &&
-				(next < nextOpposite || nextOpposite > DRAG_OPPOSITE_THRESHOLD)
+				(next < nextPerpendicular || nextPerpendicular > DRAG_OPPOSITE_THRESHOLD)
 			) {
 				dragLastCoordinateRef.current = coordinate[key];
 				return;
@@ -195,8 +199,8 @@ const Modal = (props: T.Props) => {
 			);
 		};
 
-		document.addEventListener("touchmove", handleDrag);
-		document.addEventListener("touchend", handleDragEnd);
+		document.addEventListener("touchmove", handleDrag, { passive: true });
+		document.addEventListener("touchend", handleDragEnd, { passive: true });
 
 		return () => {
 			document.removeEventListener("touchmove", handleDrag);
