@@ -12,10 +12,6 @@
 	}
 }
 
-.--dragging {
-	transition: none;
-}
-
 @responsive .root {
 	@variable --rs-modal-size calc(var(--rs-unit-x1) * 100);
 }
@@ -55,7 +51,7 @@
 		inset: 0;
 		inset-block-start: initial;
 		transform: translate(0, 100%);
-		position: absolute;
+		position: fixed;
 		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
 		opacity: 1;
@@ -78,7 +74,7 @@
 		inset: 0;
 		inset-inline-end: initial;
 		transform: translate(-100%, 0);
-		position: absolute;
+		position: fixed;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
@@ -105,7 +101,7 @@
 		inset: 0;
 		inset-inline-start: initial;
 		transform: translate(100%, 0);
-		position: absolute;
+		position: fixed;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
@@ -131,7 +127,7 @@
 		inset: 0;
 		inset-block-start: initial;
 		transform: translate(0, var(--rs-unit-x4));
-		position: absolute;
+		position: fixed;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 0;
@@ -147,4 +143,8 @@
 .--active,
 [dir="rtl"] .--active {
 	transition-timing-function: var(--rs-easing-decelerate);
+}
+
+.--dragging {
+	transition: none;
 }

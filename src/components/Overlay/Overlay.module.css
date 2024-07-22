@@ -1,23 +1,14 @@
 .root {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-	position: absolute;
+	position: fixed;
 	inset: 0;
 	z-index: var(--rs-z-index-overlay);
 	color: var(--rs-color-white);
+	background-color: rgba(var(--rs-color-rgb-black), 0);
 
 	/* Override default Tailwind reset */
 	cursor: default !important;
-}
-
-.root::before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background: var(--rs-color-black);
-	opacity: 0;
-	transform: scale(1.01);
-	pointer-events: none;
 }
 
 .wrapper {
@@ -38,9 +29,8 @@
 	text-align: initial;
 }
 
-.root.--visible::before {
-	opacity: var(--rs-overlay-opacity);
-	transform: scale(1);
+.root.--visible {
+	background-color: rgba(var(--rs-color-rgb-black), var(--rs-overlay-opacity));
 }
 
 .root.--click-through {
@@ -56,9 +46,13 @@
 	pointer-events: all;
 }
 
-.root.--animated::before {
-	transition: var(--rs-duration-medium) var(--rs-easing-standard);
+.root.--animated {
+	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
 
 	/* Using transform to keep the transparent overlay transitionEnd event */
-	transition-property: opacity, transform;
+	transition-property: background-color, transform;
+
+	&.--visible {
+		transition-timing-function: var(--rs-easing-decelerate);
+	}
 }

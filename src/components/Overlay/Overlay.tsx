@@ -62,7 +62,7 @@ const Overlay = (props: T.Props) => {
 	};
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		if (e.propertyName !== "transform" || !e.pseudoElement) return;
+		if (e.propertyName !== "background-color") return;
 		setAnimated(false);
 
 		if (visible) return;
