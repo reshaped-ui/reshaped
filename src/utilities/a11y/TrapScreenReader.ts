@@ -41,7 +41,9 @@ class TrapScreenReader {
 
 		this.release();
 
-		while (currentEl !== document.body) {
+		// Stop at the body level for regular pages
+		// And stop at shadow root
+		while (currentEl !== document.body && currentEl.parentElement) {
 			this.hideSiblingsFromScreenReader(currentEl);
 			currentEl = currentEl.parentElement as HTMLElement;
 		}
