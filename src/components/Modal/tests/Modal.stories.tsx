@@ -1,4 +1,5 @@
 import React from "react";
+import { createRoot } from "react-dom/client";
 import { Example } from "utilities/storybook";
 import Modal, { type ModalProps } from "components/Modal";
 import View from "components/View";
@@ -7,6 +8,7 @@ import Dismissible from "components/Dismissible";
 import DropdownMenu from "components/DropdownMenu";
 import Switch from "components/Switch";
 import TextField from "components/TextField";
+import Reshaped from "components/Reshaped";
 import useToggle from "hooks/useToggle";
 import Radio from "components/Radio";
 
@@ -126,6 +128,59 @@ export const overlay = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const customContainer = () => {
+	const toggle = useToggle();
+	const containerRef = React.useRef<HTMLDivElement | null>(null);
+	const shadowRootRef = React.useRef<HTMLDivElement | null>(null);
+
+	React.useEffect(() => {
+		if (!shadowRootRef.current) return;
+		if (shadowRootRef.current.shadowRoot) return;
+
+		const shadowRoot = shadowRootRef.current?.attachShadow({ mode: "open" });
+		const root = createRoot(shadowRoot);
+
+		root.render(
+			<Reshaped theme="reshaped">
+				<Modal active containerRef={{ current: shadowRootRef.current?.shadowRoot }}>
+					Modal content
+				</Modal>
+			</Reshaped>
+		);
+	}, []);
+
+	return (
+		<Example>
+			<Example.Item title="inside an element">
+				<View
+					backgroundColor="neutral-faded"
+					height="400px"
+					borderRadius="medium"
+					attributes={{ ref: containerRef }}
+					padding={4}
+					overflow="auto"
+				>
+					<View height="5000px">
+						<Button onClick={toggle.activate}>Open</Button>
+					</View>
+				</View>
+				<Modal
+					onClose={toggle.deactivate}
+					active={toggle.active}
+					containerRef={containerRef}
+					position="end"
+				>
+					Modal content
+				</Modal>
+			</Example.Item>
+
+			<Example.Item title="shadow DOM">
+				<div ref={shadowRootRef} style={{ height: 400 }} />
+			</Example.Item>
+		</Example>
+	);
+};
 
 export const edgeCases = () => {
 	const menuModalToggle = useToggle();

@@ -7,6 +7,7 @@ export type Props = {
 	active?: boolean;
 	onClose?: () => void;
 	onOpen?: () => void;
+	containerRef?: React.RefObject<HTMLElement | ShadowRoot>;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

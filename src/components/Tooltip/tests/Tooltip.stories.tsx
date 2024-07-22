@@ -4,6 +4,7 @@ import Popover from "components/Popover";
 import Button from "components/Button";
 import View from "components/View";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
+import Actionable from "components/Actionable";
 
 export default {
 	title: "Components/Tooltip",
@@ -109,6 +110,7 @@ export const edgeCases = () => (
 		<Example.Item title="responsive visibility">
 			<DemoResponsive text="Responsive" />
 		</Example.Item>
+
 		<Example.Item title="without text">
 			<Tooltip>{() => <Button>Button</Button>}</Tooltip>
 		</Example.Item>
@@ -124,6 +126,23 @@ export const edgeCases = () => (
 						</Popover.Trigger>
 						<Popover.Content>Popover</Popover.Content>
 					</Popover>
+				)}
+			</Tooltip>
+		</Example.Item>
+
+		<Example.Item title="tooltip with popover on different elements">
+			<Tooltip text="Tooltip" position="top">
+				{(attributes) => (
+					<Actionable attributes={attributes} as="span">
+						<Popover position="bottom">
+							<Popover.Trigger>
+								{(popoverAttributes) => (
+									<Button attributes={{ ...attributes, ...popoverAttributes }}>Action</Button>
+								)}
+							</Popover.Trigger>
+							<Popover.Content>Popover</Popover.Content>
+						</Popover>
+					</Actionable>
 				)}
 			</Tooltip>
 		</Example.Item>

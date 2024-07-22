@@ -136,8 +136,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			cooldown.timer || isSubmenu ? timeouts.mouseEnterShort : timeouts.mouseEnter
 		);
 
-		if (!isSubmenu) cooldown.warm();
-	}, [clearTimer, timerRef, handleOpen, isSubmenu]);
+		if (!isSubmenu && triggerType === "hover") cooldown.warm();
+	}, [clearTimer, timerRef, handleOpen, isSubmenu, triggerType]);
 
 	const handleMouseLeave = React.useCallback(() => {
 		cooldown.cool();
@@ -195,14 +195,14 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			checkTransitions() &&
 			!disableHideAnimation &&
 			transitionStartedRef.current &&
-			cooldown.status !== "warm"
+			(cooldown.status !== "warm" || triggerType !== "hover")
 		) {
 			hide();
 		} else {
 			// In case transitions are disabled globally - remove from the DOM immediately
 			remove();
 		}
-	}, [passedActive, render, hide, disableHideAnimation]);
+	}, [passedActive, render, hide, remove, disableHideAnimation]);
 
 	React.useEffect(() => {
 		// Wait after positioning before show is triggered to animate flyout from the right side

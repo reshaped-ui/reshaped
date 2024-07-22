@@ -1,7 +1,7 @@
 .root {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-	position: fixed;
+	position: absolute;
 	inset: 0;
 	z-index: var(--rs-z-index-overlay);
 	color: var(--rs-color-white);
@@ -10,9 +10,9 @@
 	cursor: default !important;
 }
 
-.root::after {
+.root::before {
 	content: "";
-	position: fixed;
+	position: absolute;
 	inset: 0;
 	background: var(--rs-color-black);
 	opacity: 0;
@@ -36,11 +36,9 @@
 	display: inline-block;
 	vertical-align: middle;
 	text-align: initial;
-	position: relative;
-	z-index: var(--rs-z-index-raised);
 }
 
-.root.--visible::after {
+.root.--visible::before {
 	opacity: var(--rs-overlay-opacity);
 	transform: scale(1);
 }
@@ -58,7 +56,7 @@
 	pointer-events: all;
 }
 
-.root.--animated::after {
+.root.--animated::before {
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
 
 	/* Using transform to keep the transparent overlay transitionEnd event */

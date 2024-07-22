@@ -15,14 +15,15 @@ import type * as T from "./Overlay.types";
 import s from "./Overlay.module.css";
 
 const Overlay = (props: T.Props) => {
-	const { active, children, transparent, onClose, onOpen, className, attributes } = props;
-	const clickThrough = transparent === true;
-	const opacity = clickThrough ? 0 : (1 - (transparent || 0)) * 0.7;
+	const { active, children, transparent, onClose, onOpen, containerRef, className, attributes } =
+		props;
+	const clickThrough = transparent === true && !containerRef?.current;
+	const opacity = transparent === true ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
 	const contentRef = React.useRef<HTMLDivElement | null>(null);
 	const isMouseDownValidRef = React.useRef(false);
-	const { lockScroll, unlockScroll } = useScrollLock();
+	const { lockScroll, unlockScroll } = useScrollLock({ ref: containerRef });
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
 	const isDismissible = useIsDismissible(active, contentRef);
@@ -119,7 +120,7 @@ const Overlay = (props: T.Props) => {
 	if (!rendered || !mounted) return null;
 
 	return (
-		<Portal>
+		<Portal targetRef={containerRef}>
 			<Portal.Scope<HTMLDivElement>>
 				{(ref) => (
 					<div

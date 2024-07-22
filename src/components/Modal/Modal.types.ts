@@ -1,5 +1,6 @@
 import type React from "react";
 import type * as G from "types/global";
+import type { OverlayProps } from "components/Overlay";
 
 export type Context = {
 	id: string;
@@ -22,14 +23,11 @@ export type Props = {
 	position?: G.Responsive<"center" | "end" | "bottom" | "start" | "full-screen">;
 	size?: G.Responsive<string>;
 	padding?: G.Responsive<number>;
-	active?: boolean;
 	transparentOverlay?: boolean;
 	disableSwipeGesture?: boolean;
 	autoFocus?: boolean;
-	onClose?: () => void;
-	onOpen?: () => void;
 	ariaLabel?: string;
 	className?: G.ClassName;
 	overlayClassName?: G.ClassName;
 	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
-};
+} & Pick<OverlayProps, "onClose" | "onOpen" | "active" | "containerRef">;

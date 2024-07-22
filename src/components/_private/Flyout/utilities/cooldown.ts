@@ -13,7 +13,7 @@ class Cooldown {
 		const currentTimer = setTimeout(() => {
 			this.status = "cold";
 			if (currentTimer === this.timer) this.timer = undefined;
-		}, 2000);
+		}, 1000);
 
 		this.timer = currentTimer;
 	};

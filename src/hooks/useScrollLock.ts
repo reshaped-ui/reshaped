@@ -22,33 +22,39 @@ const getScrollbarWidth = (() => {
 	};
 })();
 
-const useScrollLock = () => {
+const useScrollLock = (args?: { ref?: React.RefObject<HTMLElement | ShadowRoot> }) => {
+	const { ref } = args || {};
 	const [locked, setLocked] = React.useState(false);
 	const overflowStyleRef = React.useRef<string | undefined>();
 	const isOverflowingRef = React.useRef(false);
 
+	let targetEl = document.body;
+	if (ref?.current) {
+		targetEl =
+			ref?.current instanceof ShadowRoot ? (ref?.current?.host as HTMLElement) : ref.current;
+	}
+
 	const lockScroll = React.useCallback(() => {
-		const { body } = document;
-		const rect = body.getBoundingClientRect();
+		const rect = targetEl.getBoundingClientRect();
 
 		isOverflowingRef.current = rect.left + rect.right < window.innerWidth;
-		overflowStyleRef.current = body.style.overflow;
-		body.style.overflow = "hidden";
+		overflowStyleRef.current = targetEl.style.overflow;
+		targetEl.style.overflow = "hidden";
 
 		if (isOverflowingRef.current) {
 			const scrollBarWidth = getScrollbarWidth();
-			document.body.style.paddingRight = `${scrollBarWidth}px`;
+			targetEl.style.paddingRight = `${scrollBarWidth}px`;
 		}
 
 		setLocked(true);
-	}, [setLocked, isOverflowingRef, overflowStyleRef]);
+	}, [setLocked, isOverflowingRef, overflowStyleRef, targetEl]);
 
 	const unlockScroll = React.useCallback(() => {
-		document.body.style.overflow = overflowStyleRef.current || "";
-		if (isOverflowingRef.current) document.body.style.paddingRight = "";
+		targetEl.style.overflow = overflowStyleRef.current || "";
+		if (isOverflowingRef.current) targetEl.style.paddingRight = "";
 
 		setLocked(false);
-	}, [setLocked, isOverflowingRef, overflowStyleRef]);
+	}, [setLocked, isOverflowingRef, overflowStyleRef, targetEl]);
 
 	return { scrollLocked: locked, lockScroll, unlockScroll };
 };
