@@ -9,6 +9,7 @@ import useHotkeys from "hooks/useHotkeys";
 import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
+import { checkKeyboardMode } from "utilities/a11y/keyboardMode";
 import useFlyout from "./useFlyout";
 import * as timeouts from "./Flyout.constants";
 import cooldown from "./utilities/cooldown";
@@ -108,6 +109,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 */
 	const handleBlur = React.useCallback(
 		(e: React.FocusEvent) => {
+			if (!checkKeyboardMode()) return;
 			const focusedContent = flyoutElRef.current?.contains(e.relatedTarget as Node);
 
 			if (
@@ -127,6 +129,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	);
 
 	const handleFocus = React.useCallback(() => {
+		if (!checkKeyboardMode()) return;
 		handleOpen();
 	}, [handleOpen]);
 

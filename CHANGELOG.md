@@ -17,6 +17,7 @@
 - Modal: Improved edge cases of swipe to close in scrollable modals
 - Modal: Prevent swipe to close when text selection is happening
 - Overlay, Modal: shadow dom support
+- Popover, Tooltip: Only trigger focus events for keyboard mode
 
 - Figma: Removed local color scoping
 - Figma: Updated description links
