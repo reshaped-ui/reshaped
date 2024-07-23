@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Theme from "components/Theme";
 import type * as T from "./Portal.types";
+import s from "./Portal.module.css";
 
 const PortalScopeContext = React.createContext<T.Context>({} as T.Context);
 
@@ -37,7 +38,7 @@ const Portal = (props: T.Props): any => {
 	return (
 		<>
 			{ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl)}
-			<div ref={rootRef} />
+			<div ref={rootRef} className={s.root} />
 		</>
 	);
 };

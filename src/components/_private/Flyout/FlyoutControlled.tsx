@@ -36,6 +36,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		instanceRef,
 		containerRef,
 	} = props;
+	const resolvedActive = disabled === true ? false : passedActive;
 	const parentFlyoutContext = useFlyoutContext();
 	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
 	const isSubmenu =
@@ -60,7 +61,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const flyout = useFlyout(triggerElRef, flyoutElRef, {
 		width,
 		position: passedPosition,
-		defaultActive: passedActive,
+		defaultActive: resolvedActive,
 		container: containerRef?.current,
 		forcePosition,
 	});
@@ -81,17 +82,17 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Called from the internal actions
 	 */
 	const handleOpen = React.useCallback(() => {
-		const canOpen = !lockedRef.current && status === "idle" && !disabled;
+		const canOpen = !lockedRef.current && status === "idle";
 
 		if (!canOpen) return;
 		onOpen?.();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [status, disabled]);
+	}, [status]);
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
 			const isLocked = triggerType === "click" && !isDismissible();
-			const canClose = !isLocked && status !== "idle" && !disabled;
+			const canClose = !isLocked && (status !== "idle" || disabled);
 
 			if (!canClose) return;
 
@@ -99,7 +100,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			if (options?.closeParents) parentFlyoutContext?.handleClose?.();
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[status, isDismissible, triggerType, disabled]
+		[status, isDismissible, triggerType]
 	);
 
 	/**
@@ -159,11 +160,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const handleTransitionStart = React.useCallback(
 		(e: TransitionEvent) => {
-			if (!passedActive) return;
+			if (!resolvedActive) return;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
 			transitionStartedRef.current = true;
 		},
-		[passedActive]
+		[resolvedActive]
 	);
 
 	const handleTransitionEnd = React.useCallback(
@@ -181,10 +182,12 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Control the display based on the props
 	 */
 	useIsomorphicLayoutEffect(() => {
-		if (passedActive) {
+		if (resolvedActive) {
 			render();
 			return;
 		}
+
+		if (disabled) cooldown.cool();
 
 		/**
 		 * Check that transitions are enabled and it has been triggered on tooltip open
@@ -202,7 +205,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			// In case transitions are disabled globally - remove from the DOM immediately
 			remove();
 		}
-	}, [passedActive, render, hide, remove, disableHideAnimation]);
+	}, [resolvedActive, render, hide, remove, disableHideAnimation, disabled]);
 
 	React.useEffect(() => {
 		// Wait after positioning before show is triggered to animate flyout from the right side

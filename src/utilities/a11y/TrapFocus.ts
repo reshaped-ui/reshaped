@@ -147,9 +147,8 @@ class TrapFocus {
 		if (!this.trapped || !this.chainId) return;
 		this.trapped = false;
 
-		if (this.trigger) {
-			const preventScroll = withoutFocusReturn || !checkKeyboardMode();
-			this.trigger.focus({ preventScroll });
+		if (this.trigger && !withoutFocusReturn) {
+			this.trigger.focus({ preventScroll: !checkKeyboardMode() });
 		}
 
 		TrapFocus.chain.removePreviousTill(this.chainId, (item) =>
