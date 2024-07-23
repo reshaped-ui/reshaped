@@ -161,30 +161,4 @@ describe("Components/Modal", () => {
 		const elModalRef = screen.getByTestId(fixtures.testId);
 		expect(elModalRef).toBeInTheDocument();
 	});
-
-	test("works with custom container", () => {
-		const PortalTargetDemo = () => {
-			const portalRef = React.useRef<HTMLDivElement | null>(null);
-
-			return (
-				<>
-					<div ref={portalRef} data-testid={fixtures.testId}></div>
-					<Modal containerRef={portalRef} active>
-						{fixtures.content}
-					</Modal>
-				</>
-			);
-		};
-
-		render(
-			<Reshaped>
-				<PortalTargetDemo />
-			</Reshaped>
-		);
-
-		const containerEl = screen.getByTestId(fixtures.testId);
-		const contentEl = screen.getByText(fixtures.content);
-
-		expect(containerEl).toContainElement(contentEl);
-	});
 });

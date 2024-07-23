@@ -70,7 +70,6 @@ const Modal = (props: T.Props) => {
 		autoFocus = true,
 		disableSwipeGesture,
 		overlayClassName,
-		containerRef,
 		className,
 		attributes,
 	} = props;
@@ -232,7 +231,6 @@ const Modal = (props: T.Props) => {
 			active={active}
 			transparent={transparentOverlay || hideProgress}
 			className={overlayClassName}
-			containerRef={containerRef}
 			attributes={{
 				onTouchStart: handleDragStart,
 			}}

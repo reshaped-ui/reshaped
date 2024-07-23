@@ -16,8 +16,7 @@
 - Flyout: Calculate position correctly inside fixed position containers that are not top: 0
 - Modal: Improved edge cases of swipe to close in scrollable modals
 - Modal: Prevent swipe to close when text selection is happening
-- Overlay, Modal: containerRef support
-- useScrollLock: added support for passing an element ref
+- Overlay, Modal: shadow dom support
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

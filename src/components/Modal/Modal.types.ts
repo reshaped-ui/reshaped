@@ -30,4 +30,4 @@ export type Props = {
 	className?: G.ClassName;
 	overlayClassName?: G.ClassName;
 	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
-} & Pick<OverlayProps, "onClose" | "onOpen" | "active" | "containerRef">;
+} & Pick<OverlayProps, "onClose" | "onOpen" | "active">;

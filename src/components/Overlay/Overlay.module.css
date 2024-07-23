@@ -6,6 +6,7 @@
 	z-index: var(--rs-z-index-overlay);
 	color: var(--rs-color-white);
 	background-color: rgba(var(--rs-color-rgb-black), 0);
+	opacity: 0;
 
 	/* Override default Tailwind reset */
 	cursor: default !important;
@@ -31,6 +32,7 @@
 
 .root.--visible {
 	background-color: rgba(var(--rs-color-rgb-black), var(--rs-overlay-opacity));
+	opacity: 1;
 }
 
 .root.--click-through {
@@ -50,7 +52,7 @@
 	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
 
 	/* Using transform to keep the transparent overlay transitionEnd event */
-	transition-property: background-color, transform;
+	transition-property: background-color, transform, opacity;
 
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);

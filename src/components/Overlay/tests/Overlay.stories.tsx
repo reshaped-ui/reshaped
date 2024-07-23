@@ -1,6 +1,8 @@
+import { createRoot } from "react-dom/client";
 import { Example } from "utilities/storybook";
 import Overlay from "components/Overlay";
 import Button from "components/Button";
+import Reshaped from "components/Reshaped";
 import useToggle from "hooks/useToggle";
 
 export default {
@@ -37,6 +39,36 @@ export const base = () => {
 					Overlay content
 				</Overlay>
 				<div style={{ height: 1000 }} />
+			</Example.Item>
+		</Example>
+	);
+};
+
+class CustomElement extends window.HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: "open" });
+
+		if (!this.shadowRoot) return;
+
+		const overlay = (
+			<Reshaped>
+				<Overlay active>Content</Overlay>
+			</Reshaped>
+		);
+		const root = createRoot(this.shadowRoot);
+		root.render(overlay);
+	}
+}
+
+window.customElements.define("custom-element", CustomElement);
+
+export const shadowDom = () => {
+	return (
+		<Example>
+			<Example.Item>
+				{/* @ts-ignore */}
+				<custom-element />
 			</Example.Item>
 		</Example>
 	);

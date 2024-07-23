@@ -129,59 +129,6 @@ export const overlay = () => (
 	</Example>
 );
 
-export const customContainer = () => {
-	const toggle = useToggle();
-	const containerRef = React.useRef<HTMLDivElement | null>(null);
-	const shadowRootRef = React.useRef<HTMLDivElement | null>(null);
-
-	React.useEffect(() => {
-		if (!shadowRootRef.current) return;
-		if (shadowRootRef.current.shadowRoot) return;
-
-		const shadowRoot = shadowRootRef.current?.attachShadow({ mode: "open" });
-		const root = createRoot(shadowRoot);
-
-		root.render(
-			<Reshaped theme="reshaped">
-				<Modal active containerRef={{ current: shadowRootRef.current?.shadowRoot }}>
-					Modal content
-				</Modal>
-			</Reshaped>
-		);
-	}, []);
-
-	return (
-		<Example>
-			<Example.Item title="inside an element">
-				<View
-					backgroundColor="neutral-faded"
-					height="400px"
-					borderRadius="medium"
-					attributes={{ ref: containerRef }}
-					padding={4}
-					overflow="auto"
-				>
-					<View height="5000px">
-						<Button onClick={toggle.activate}>Open</Button>
-					</View>
-				</View>
-				<Modal
-					onClose={toggle.deactivate}
-					active={toggle.active}
-					containerRef={containerRef}
-					position="end"
-				>
-					Modal content
-				</Modal>
-			</Example.Item>
-
-			<Example.Item title="shadow DOM">
-				<div ref={shadowRootRef} style={{ height: 400 }} />
-			</Example.Item>
-		</Example>
-	);
-};
-
 export const edgeCases = () => {
 	const menuModalToggle = useToggle();
 	const scrollModalToggle = useToggle();

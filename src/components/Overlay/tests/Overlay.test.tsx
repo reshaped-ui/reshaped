@@ -1,4 +1,5 @@
 import React from "react";
+import { createRoot } from "react-dom/client";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import Overlay from "components/Overlay";
@@ -74,5 +75,53 @@ describe("Utilities/Overlay", () => {
 		await userEvent.click(elButton);
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
 		expect(handleOpenMock).toHaveBeenCalledTimes(1);
+	});
+
+	test("works with shadow dom", () => {
+		render(<div data-testid="host" />);
+
+		const container = document.createElement("div");
+		const shadowRoot = container.attachShadow({ mode: "open" });
+		const overlay = <Overlay active>{fixtures.content}</Overlay>;
+		const host = screen.getByTestId("host");
+		host.after(container);
+
+		const root = createRoot(shadowRoot);
+		root.render(overlay);
+
+		console.log(document.body.innerHTML);
+
+		expect(document.body).not.toHaveTextContent(fixtures.content);
+		expect(shadowRoot).toHaveTextContent(fixtures.content);
+	});
+
+	test("renders inside shadow root", () => {
+		class CustomElement extends window.HTMLElement {
+			constructor() {
+				super();
+				this.attachShadow({ mode: "open" });
+
+				if (!this.shadowRoot) return;
+
+				const root = createRoot(this.shadowRoot);
+				root.render(
+					<Reshaped>
+						<Overlay active>
+							<div id={fixtures.testId} />
+						</Overlay>
+					</Reshaped>
+				);
+			}
+		}
+
+		window.customElements.define("custom-element", CustomElement);
+
+		// @ts-ignore
+		render(<custom-element />);
+
+		expect(
+			document.querySelector("custom-element")?.shadowRoot?.querySelector(`#${fixtures.testId}`)
+		).toBeTruthy();
+		expect(document.body.querySelector(`#${fixtures.testId}`)).toBe(null);
 	});
 });

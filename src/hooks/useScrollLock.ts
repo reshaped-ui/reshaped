@@ -22,17 +22,11 @@ const getScrollbarWidth = (() => {
 	};
 })();
 
-const useScrollLock = (args?: { ref?: React.RefObject<HTMLElement | ShadowRoot> }) => {
-	const { ref } = args || {};
+const useScrollLock = () => {
 	const [locked, setLocked] = React.useState(false);
 	const overflowStyleRef = React.useRef<string | undefined>();
 	const isOverflowingRef = React.useRef(false);
-
-	let targetEl = document.body;
-	if (ref?.current) {
-		targetEl =
-			ref?.current instanceof ShadowRoot ? (ref?.current?.host as HTMLElement) : ref.current;
-	}
+	const targetEl = document.body;
 
 	const lockScroll = React.useCallback(() => {
 		const rect = targetEl.getBoundingClientRect();

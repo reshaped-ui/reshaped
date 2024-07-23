@@ -17,6 +17,11 @@ export const usePortalScope = () => {
  */
 const Portal = (props: T.Props): any => {
 	const { children, targetRef } = props;
+	const rootRef = React.useRef<HTMLDivElement | null>(null);
+	const rootNode = rootRef.current?.getRootNode();
+	const isShadowDom = rootNode instanceof ShadowRoot;
+	const defaultTargetEl = isShadowDom ? rootNode : document.body;
+
 	/**
 	 * Check for parent portal to render inside it
 	 * To avoid z-iondex issues
@@ -26,9 +31,15 @@ const Portal = (props: T.Props): any => {
 	 */
 	const portal = usePortalScope();
 	const nextScopeRef = targetRef || portal.scopeRef;
+	const targetEl = nextScopeRef?.current || defaultTargetEl;
 
 	/* Preserve the current theme when rendered in body */
-	return ReactDOM.createPortal(<Theme>{children}</Theme>, nextScopeRef?.current || document.body);
+	return (
+		<>
+			{ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl)}
+			<div ref={rootRef} />
+		</>
+	);
 };
 
 function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>) {
