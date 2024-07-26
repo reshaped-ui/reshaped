@@ -1,7 +1,6 @@
 .root {
 	position: relative;
 	padding-inline-end: var(--rs-unit-x7);
-	min-height: var(--rs-unit-x6);
 }
 
 .close {

@@ -1,4 +1,5 @@
 import React from "react";
+import { createRoot } from "react-dom/client";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import Flyout from "components/_private/Flyout/index";
@@ -141,5 +142,40 @@ describe("Flyout", () => {
 		const contentEl = screen.getByText(fixtures.content);
 
 		expect(containerEl).toContainElement(contentEl);
+	});
+
+	test("renders inside shadow root", () => {
+		class CustomElement extends window.HTMLElement {
+			constructor() {
+				super();
+				this.attachShadow({ mode: "open" });
+
+				if (!this.shadowRoot) return;
+
+				const root = createRoot(this.shadowRoot);
+				root.render(
+					<Reshaped>
+						<Flyout active>
+							<Flyout.Trigger>
+								{(attributes) => <button {...attributes}>{fixtures.triggerText}</button>}
+							</Flyout.Trigger>
+							<Flyout.Content>
+								<div id={fixtures.testId} />
+							</Flyout.Content>
+						</Flyout>
+					</Reshaped>
+				);
+			}
+		}
+
+		window.customElements.define("custom-element", CustomElement);
+
+		// @ts-ignore
+		render(<custom-element />);
+
+		expect(
+			document.querySelector("custom-element")?.shadowRoot?.querySelector(`#${fixtures.testId}`)
+		).toBeTruthy();
+		expect(document.body.querySelector(`#${fixtures.testId}`)).toBe(null);
 	});
 });

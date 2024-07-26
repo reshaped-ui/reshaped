@@ -1,12 +1,12 @@
-import React from "react";
 import { render, screen, waitFor, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Popover from "components/Popover";
 import Reshaped from "components/Reshaped";
 
 const fixtures = {
 	content: "Content",
 	openText: "Open",
+	closeAriaLabel: "Close",
 	className: "test-className",
 	id: "test-id",
 };
@@ -50,13 +50,13 @@ describe("Components/Popover", () => {
 		const elButton = screen.getByText(fixtures.openText);
 
 		expect(elButton).toHaveAttribute("aria-controls");
-		expect(handleOpenMock).not.toBeCalled();
+		expect(handleOpenMock).not.toHaveBeenCalled();
 		expect(screen.queryByText(fixtures.content)).toBeInTheDocument();
 
 		await userEvent.keyboard("{Escape}");
 
 		await waitFor(() => {
-			expect(handleCloseMock).toBeCalledTimes(1);
+			expect(handleCloseMock).toHaveBeenCalledTimes(1);
 		});
 	});
 
@@ -90,7 +90,7 @@ describe("Components/Popover", () => {
 		await userEvent.click(elButton);
 
 		await waitFor(() => {
-			expect(handleOpenMock).toBeCalledTimes(1);
+			expect(handleOpenMock).toHaveBeenCalledTimes(1);
 			expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
 		});
 	});
@@ -117,16 +117,45 @@ describe("Components/Popover", () => {
 		const elButton = screen.getByText(fixtures.openText);
 
 		expect(elButton).toHaveAttribute("aria-controls");
-		expect(handleOpen).not.toBeCalled();
+		expect(handleOpen).not.toHaveBeenCalled();
 		expect(screen.queryByText(fixtures.content)).toBeInTheDocument();
 
 		await userEvent.keyboard("{Escape}");
 
 		await waitFor(() => {
 			act(() => {
-				expect(handleClose).toBeCalledTimes(1);
+				expect(handleClose).toHaveBeenCalledTimes(1);
 			});
 		});
+	});
+
+	test("works with dismissible", async () => {
+		const handleClose = jest.fn();
+
+		render(
+			<Reshaped>
+				<Popover defaultActive onClose={handleClose}>
+					<Popover.Trigger>
+						{(attributes) => (
+							<button type="button" {...attributes}>
+								{fixtures.openText}
+							</button>
+						)}
+					</Popover.Trigger>
+					<Popover.Content>
+						<Popover.Dismissible closeAriaLabel={fixtures.closeAriaLabel}>
+							{fixtures.content}
+						</Popover.Dismissible>
+					</Popover.Content>
+				</Popover>
+			</Reshaped>
+		);
+
+		const elCloseButton = screen.getByLabelText(fixtures.closeAriaLabel);
+
+		await userEvent.click(elCloseButton);
+
+		expect(handleClose).toHaveBeenCalledTimes(1);
 	});
 
 	test("works with hover trigger type", async () => {
@@ -151,7 +180,7 @@ describe("Components/Popover", () => {
 		const elButton = screen.getByText(fixtures.openText);
 
 		expect(elButton).not.toHaveAttribute("aria-controls");
-		expect(handleOpen).not.toBeCalled();
+		expect(handleOpen).not.toHaveBeenCalled();
 
 		await waitFor(() => {
 			expect(screen.queryByText(fixtures.content)).toBeInTheDocument();
@@ -160,7 +189,7 @@ describe("Components/Popover", () => {
 		await userEvent.unhover(elButton);
 
 		await waitFor(() => {
-			expect(handleClose).toBeCalledTimes(1);
+			expect(handleClose).toHaveBeenCalledTimes(1);
 		});
 	});
 });

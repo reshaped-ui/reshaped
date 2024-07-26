@@ -1,5 +1,7 @@
 import React from "react";
+import { createRoot } from "react-dom/client";
 import { Example } from "utilities/storybook";
+import Reshaped from "components/Reshaped";
 import View from "components/View";
 import Theme from "components/Theme";
 import Button from "components/Button";
@@ -116,34 +118,69 @@ export const disableContentHover = () => (
 	</Demo>
 );
 
+class CustomElement extends window.HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: "open" });
+
+		if (!this.shadowRoot) return;
+
+		const node = (
+			<Reshaped>
+				<Flyout active>
+					<Flyout.Trigger>{(attributes) => <button {...attributes}>Open</button>}</Flyout.Trigger>
+					<Flyout.Content>Content</Flyout.Content>
+				</Flyout>
+			</Reshaped>
+		);
+		const root = createRoot(this.shadowRoot);
+		root.render(node);
+	}
+}
+
+window.customElements.define("custom-element", CustomElement);
+
 export const customPortalTarget = () => {
 	const portalRef = React.useRef<HTMLDivElement | null>(null);
 
 	return (
-		<div
-			style={{ position: "relative", padding: 16, height: 200, overflow: "auto" }}
-			ref={portalRef}
-		>
-			<Flyout position="bottom-start" containerRef={portalRef} active>
-				<Flyout.Trigger>{(attributes) => <button {...attributes}>Open</button>}</Flyout.Trigger>
-				<Flyout.Content>
-					<div
-						style={{
-							background: "var(--rs-color-background-elevation-overlay)",
-							padding: "var(--rs-unit-x4)",
-							height: 100,
-							width: 160,
-							borderRadius: "var(--rs-radius-medium)",
-							border: "1px solid var(--rs-color-border-neutral-faded)",
-							boxSizing: "border-box",
-						}}
-					>
-						{"Content"}
-					</div>
-				</Flyout.Content>
-			</Flyout>
-			<div style={{ height: 1000 }} />
-		</div>
+		<Example>
+			<Example.Item title="Custom containerRef">
+				<View
+					padding={4}
+					paddingInline={40}
+					height={50}
+					overflow="auto"
+					backgroundColor="neutral-faded"
+					borderRadius="small"
+					attributes={{ ref: portalRef }}
+				>
+					<Flyout position="bottom-end" containerRef={portalRef} active>
+						<Flyout.Trigger>{(attributes) => <button {...attributes}>Open</button>}</Flyout.Trigger>
+						<Flyout.Content>
+							<div
+								style={{
+									background: "var(--rs-color-background-elevation-overlay)",
+									padding: "var(--rs-unit-x4)",
+									height: 200,
+									width: 160,
+									borderRadius: "var(--rs-radius-medium)",
+									border: "1px solid var(--rs-color-border-neutral-faded)",
+									boxSizing: "border-box",
+								}}
+							>
+								{"Content"}
+							</div>
+						</Flyout.Content>
+					</Flyout>
+					<div style={{ height: 1000 }} />
+				</View>
+			</Example.Item>
+			<Example.Item title="Shadow dom">
+				{/* @ts-ignore */}
+				<custom-element />
+			</Example.Item>
+		</Example>
 	);
 };
 
