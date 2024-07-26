@@ -120,6 +120,25 @@ export const triggerType = () => (
 	</Example>
 );
 
+export const dismissible = () => {
+	return (
+		<Example>
+			<Example.Item title="with dismissible">
+				<Popover>
+					<Popover.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</Popover.Trigger>
+					<Popover.Content>
+						<Popover.Dismissible closeAriaLabel="Close" align="center">
+							Popover content
+						</Popover.Dismissible>
+					</Popover.Content>
+				</Popover>
+			</Example.Item>
+		</Example>
+	);
+};
+
 export const edgeCases = () => (
 	<Example>
 		<Example.Item title="Popover with tooltip">

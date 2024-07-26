@@ -1,5 +1,6 @@
 import { classNames } from "utilities/helpers";
-import Flyout from "components/_private/Flyout";
+import Flyout, { useFlyoutContext } from "components/_private/Flyout";
+import Dismissible, { type DismissibleProps } from "components/Dismissible";
 import type * as T from "./Popover.types";
 import s from "./Popover.module.css";
 import getPaddingStyles from "styles/padding";
@@ -60,6 +61,13 @@ const Popover = (props: T.Props) => {
 	);
 };
 
+const PopoverDismissible = (props: DismissibleProps) => {
+	const { handleClose } = useFlyoutContext();
+
+	return <Dismissible {...props} onClose={handleClose} />;
+};
+
+Popover.Dismissible = PopoverDismissible;
 Popover.Trigger = Flyout.Trigger;
 Popover.Content = Flyout.Content;
 
