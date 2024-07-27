@@ -1,5 +1,7 @@
 3.1.0
 
+- useDrag
+
 - Reshaped global reset styles in rs.reset
 - Modal: attribures.ref support
 - Modal: disableSwipeGesture

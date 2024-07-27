@@ -1,0 +1,36 @@
+.item {
+	overflow: hidden;
+}
+
+.handle {
+	flex-shrink: 0;
+	height: 100%;
+	position: relative;
+	cursor: ew-resize;
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 50%;
+		transform: translateX(-50%);
+		border-radius: 999px;
+	}
+
+	&::before {
+		width: var(--rs-unit-x4);
+	}
+
+	&::after {
+		width: var(--rs-unit-x1);
+		background: var(--rs-color-border-neutral);
+		opacity: 0;
+		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+	}
+
+	&:hover::after,
+	&&--dragging::after {
+		opacity: 0.6;
+	}
+}

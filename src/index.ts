@@ -127,6 +127,9 @@ export type { SkeletonProps } from "components/Skeleton";
 export { default as Slider } from "components/Slider";
 export type { SliderProps } from "components/Slider";
 
+export { default as Splitter } from "components/Splitter";
+export type { SplitterProps } from "components/Splitter";
+
 export { default as Stepper } from "components/Stepper";
 export type { StepperProps } from "components/Stepper";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { render, queryByAttribute, waitFor } from "@testing-library/react";
 import useElementId from "../useElementId";
 
