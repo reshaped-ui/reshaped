@@ -18,7 +18,7 @@
 - Modal: Prevent swipe to close when text selection is happening
 - Overlay, Modal: shadow dom support
 - Popover, Tooltip: Only trigger focus events for keyboard mode
-- Popover: Popover.Dismissible
+- Popover, DropdownMenu: Popover.Dismissible
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

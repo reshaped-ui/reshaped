@@ -147,6 +147,7 @@ const DropdownMenuSubTrigger = (props: T.SubTriggerProps) => {
 	);
 };
 
+DropdownMenu.Dismissible = Popover.Dismissible;
 DropdownMenu.Trigger = Popover.Trigger;
 DropdownMenu.Content = DropdownMenuContent;
 DropdownMenu.Section = DropdownMenuSection;

@@ -129,9 +129,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	);
 
 	const handleFocus = React.useCallback(() => {
-		if (!checkKeyboardMode()) return;
+		if (triggerType === "hover" && !checkKeyboardMode()) return;
 		handleOpen();
-	}, [handleOpen]);
+	}, [handleOpen, triggerType]);
 
 	const handleMouseEnter = React.useCallback(() => {
 		clearTimer();

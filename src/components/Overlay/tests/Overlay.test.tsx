@@ -77,24 +77,6 @@ describe("Utilities/Overlay", () => {
 		expect(handleOpenMock).toHaveBeenCalledTimes(1);
 	});
 
-	test("works with shadow dom", () => {
-		render(<div data-testid="host" />);
-
-		const container = document.createElement("div");
-		const shadowRoot = container.attachShadow({ mode: "open" });
-		const overlay = <Overlay active>{fixtures.content}</Overlay>;
-		const host = screen.getByTestId("host");
-		host.after(container);
-
-		const root = createRoot(shadowRoot);
-		root.render(overlay);
-
-		console.log(document.body.innerHTML);
-
-		expect(document.body).not.toHaveTextContent(fixtures.content);
-		expect(shadowRoot).toHaveTextContent(fixtures.content);
-	});
-
 	test("renders inside shadow root", () => {
 		class CustomElement extends window.HTMLElement {
 			constructor() {
@@ -107,7 +89,7 @@ describe("Utilities/Overlay", () => {
 				root.render(
 					<Reshaped>
 						<Overlay active>
-							<div id={fixtures.testId} />
+							<div id={fixtures.testId}>{fixtures.content}</div>
 						</Overlay>
 					</Reshaped>
 				);
