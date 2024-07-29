@@ -3,6 +3,7 @@
 - useDrag
 
 - Reshaped global reset styles in rs.reset
+- Switched to :focus-visible wherever possible
 - Modal: attribures.ref support
 - Modal: disableSwipeGesture
 - Slider: vertical orientation
@@ -21,6 +22,7 @@
 - Overlay, Modal: shadow dom support
 - Popover, Tooltip: Only trigger focus events for keyboard mode
 - Popover, DropdownMenu: Popover.Dismissible
+- Slider: Fixed focus state to work based on focus-visible
 
 - Figma: Removed local color scoping
 - Figma: Updated description links

@@ -10,7 +10,7 @@
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
 
-	&:has(.thumb:hover, .thumb--active, .input:focus) {
+	&:has(.thumb:hover, .thumb--active, .input:focus-visible) {
 		overflow: visible;
 	}
 }
@@ -90,7 +90,7 @@
 		opacity: 1;
 	}
 
-	.input:focus + &,
+	.input:focus-visible + &,
 	&--active {
 		&::after {
 			cursor: grabbing;
@@ -105,7 +105,7 @@
 		}
 	}
 
-	.input:focus + &::before {
+	.input:focus-visible + &::before {
 		box-shadow: var(--rs-focus-shadow);
 	}
 }

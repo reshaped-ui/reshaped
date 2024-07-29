@@ -32,7 +32,7 @@
 		}
 	}
 
-	[data-rs-keyboard] &:focus + .area {
+	&:focus-visible + .area {
 		box-shadow: var(--rs-focus-shadow);
 	}
 
