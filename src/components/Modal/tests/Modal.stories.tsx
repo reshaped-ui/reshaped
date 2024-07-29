@@ -1,5 +1,4 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
 import { Example } from "utilities/storybook";
 import Modal, { type ModalProps } from "components/Modal";
 import View from "components/View";
@@ -8,9 +7,9 @@ import Dismissible from "components/Dismissible";
 import DropdownMenu from "components/DropdownMenu";
 import Switch from "components/Switch";
 import TextField from "components/TextField";
-import Reshaped from "components/Reshaped";
 import useToggle from "hooks/useToggle";
 import Radio from "components/Radio";
+import Slider from "components/Slider";
 
 export default {
 	title: "Components/Modal",
@@ -20,6 +19,25 @@ export default {
 			url: "https://reshaped.so/docs/components/modal",
 		},
 	},
+};
+
+export const foo = () => {
+	const { activate, deactivate, active } = useToggle(false);
+
+	return (
+		<>
+			<Button onClick={console.log}>Other</Button>
+			<Button onClick={activate}>Open modal</Button>
+			<Button onClick={console.log}>Other</Button>
+
+			<Modal active={active} onClose={deactivate}>
+				<Slider name="slider" defaultValue={20} onChange={(args) => console.log(args.value)} />
+				<Button onClick={console.log}>Btn 1</Button>
+
+				<Button onClick={console.log}>Btn 2</Button>
+			</Modal>
+		</>
+	);
 };
 
 const Demo = (props: ModalProps & { title?: string; subtitle?: string }) => {
@@ -136,7 +154,7 @@ export const edgeCases = () => {
 
 	return (
 		<Example>
-			<Example.Item title="trap focus works with custom children components">
+			<Example.Item title="keyboard focus stays on the modal first">
 				<Demo title="Modal title" autoFocus={false} />
 			</Example.Item>
 			<Example.Item title="trap focus works with custom children components">

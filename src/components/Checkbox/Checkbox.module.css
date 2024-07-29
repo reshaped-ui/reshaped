@@ -52,7 +52,7 @@
 	transition-property: opacity, transform;
 }
 
-[data-rs-keyboard] .input:focus + .decorator {
+.input:focus-visible + .decorator {
 	box-shadow: var(--rs-focus-shadow);
 }
 
