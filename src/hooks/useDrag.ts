@@ -3,9 +3,11 @@
 import React from "react";
 import { disableUserSelect, enableUserSelect, disableScroll, enableScroll } from "utilities/dom";
 import useToggle from "hooks/useToggle";
+import useHotkeys from "hooks/useHotkeys";
+import * as keys from "constants/keys";
 
 const useDrag = <
-	TriggerElement extends HTMLElement = HTMLDivElement,
+	TriggerElement extends HTMLElement = HTMLButtonElement,
 	ContainerElement extends HTMLElement = HTMLDivElement,
 >(
 	cb: (args: { x: number; y: number }) => void,
@@ -14,14 +16,60 @@ const useDrag = <
 		onDragStart?: () => void;
 		onDragEnd?: () => void;
 		containerRef?: React.RefObject<ContainerElement | null>;
+		orientation?: "horizontal" | "vertical" | "all";
 	}
 ) => {
-	const { disabled, onDragStart, onDragEnd, containerRef: passedContainerRef } = options || {};
+	const {
+		disabled,
+		onDragStart,
+		onDragEnd,
+		containerRef: passedContainerRef,
+		orientation = "all",
+	} = options || {};
 	const toggle = useToggle();
 	const triggerRef = React.useRef<TriggerElement | null>(null);
 	const internalContainerRef = React.useRef<ContainerElement | null>(null);
 	const containerRef = passedContainerRef || internalContainerRef;
 	const triggerCompensationRef = React.useRef({ x: 0, y: 0 });
+	const isVertical = orientation === "vertical" || orientation === "all";
+	const isHorizontal = orientation === "horizontal" || orientation === "all";
+
+	const handleKeyboard = (x: number, y: number) => {
+		const triggerEl = triggerRef.current;
+
+		if (!triggerEl) return;
+
+		const container = containerRef.current ?? document.body;
+		const containerRect = container.getBoundingClientRect();
+		const triggerRect = triggerEl?.getBoundingClientRect();
+		const nextArgs = { x: 0, y: 0 };
+
+		if (isVertical) {
+			const relativeY = Math.round(triggerRect.y) - containerRect.y + y;
+			nextArgs.y = Math.max(0, Math.min(relativeY, containerRect.height - triggerRect!.height));
+		}
+
+		if (isHorizontal) {
+			const relativeX = Math.round(triggerRect.x) - containerRect.x + x;
+			nextArgs.x = Math.max(0, Math.min(relativeX, containerRect.width - triggerRect!.width));
+		}
+
+		cb(nextArgs);
+	};
+
+	useHotkeys(
+		{
+			[keys.LEFT]: () => isHorizontal && handleKeyboard(-20, 0),
+			[keys.RIGHT]: () => isHorizontal && handleKeyboard(20, 0),
+			[keys.UP]: () => isVertical && handleKeyboard(0, -20),
+			[keys.DOWN]: () => isVertical && handleKeyboard(0, 20),
+		},
+		[],
+		{
+			ref: triggerRef,
+			disabled,
+		}
+	);
 
 	React.useEffect(() => {
 		const triggerEl = triggerRef.current;

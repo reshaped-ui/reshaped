@@ -8,26 +8,46 @@ import type * as T from "./Splitter.types";
 import s from "./Splitter.module.css";
 
 const PrivateSplitterHandle = (props: T.PrivateHandleProps) => {
-	const { containerRef, onDrag, index } = props;
+	const { containerRef, onDrag, index, direction, children } = props;
 	const { ref, active } = useDrag(
 		(args) => {
 			onDrag({ ...args, index });
 		},
 		{
 			containerRef,
+			orientation: direction === "row" ? "horizontal" : "vertical",
 		}
 	);
 	const handleClassNames = classNames(s.handle, active && s["handle--dragging"]);
 
-	return <div className={handleClassNames} role="button" tabIndex={0} ref={ref} />;
+	if (children) return children({ ref, className: s.cursor });
+	return (
+		<div
+			className={handleClassNames}
+			role="button"
+			tabIndex={0}
+			ref={ref as React.Ref<HTMLDivElement>}
+		/>
+	);
 };
 
 const PrivateSplitterItem = React.forwardRef(
 	(props: T.PrivateItemProps, ref: React.Ref<HTMLDivElement>) => {
-		const { children } = props;
+		const { children, minSize, maxSize } = props;
 
 		return (
-			<View.Item grow className={s.item} attributes={{ ref, style: { flexGrow: 1 } }}>
+			<View.Item
+				grow
+				className={s.item}
+				attributes={{
+					ref,
+					style: {
+						flexGrow: 1,
+						"--rs-splitter-item-min-size": minSize,
+						"--rs-splitter-item-max-size": maxSize,
+					},
+				}}
+			>
 				{children}
 			</View.Item>
 		);
@@ -35,8 +55,8 @@ const PrivateSplitterItem = React.forwardRef(
 );
 
 const Splitter = (props: T.Props) => {
-	const { children, height, className, attributes } = props;
-	const rootClassNames = classNames(s.root, className);
+	const { children, height, direction = "row", className, attributes } = props;
+	const rootClassNames = classNames(s.root, s[`--direction-${direction}`], className);
 	const containerRef = React.useRef<HTMLDivElement | null>(null);
 	const itemsRef = React.useRef<(HTMLDivElement | null)[]>([]);
 
@@ -45,21 +65,24 @@ const Splitter = (props: T.Props) => {
 	itemsRef.current = [];
 
 	const onDrag: T.PrivateHandleProps["onDrag"] = (args) => {
-		const { index, x } = args;
+		const { index, x, y } = args;
 		const startItem = itemsRef.current[index];
 		const endItem = itemsRef.current[index + 1];
 		const container = containerRef.current;
 
 		if (!startItem || !endItem || !container) return;
 
+		const horizontal = direction === "row";
+		const dragCoord = horizontal ? x : y;
 		const itemsCount = itemsRef.current.length;
-		const startWidth = startItem.clientWidth;
-		const endWidth = endItem.clientWidth;
-		const gapWidth = (itemsRef.current.length - 2) * 16;
-		const currentItemsWidth = startWidth + endWidth + gapWidth;
+		const startSize = horizontal ? startItem.clientWidth : startItem.clientHeight;
+		const endSize = horizontal ? endItem.clientWidth : endItem.clientHeight;
+		const gapSize = (itemsRef.current.length - 2) * 16;
+		const currentItemsSize = startSize + endSize + gapSize;
+		const currentItemsOffset = horizontal ? startItem.offsetLeft : startItem.offsetTop;
 		// x is calculated based on container but we're changing grow based on current items
 		// startItem might be not in the left 0 position
-		const percent = Math.min(1, Math.max(0, (x - startItem.offsetLeft) / currentItemsWidth));
+		const percent = Math.min(1, Math.max(0, (dragCoord - currentItemsOffset) / currentItemsSize));
 
 		/**
 		 * Each item has flex-grow of 1 as base
@@ -85,6 +108,7 @@ const Splitter = (props: T.Props) => {
 					containerRef={containerRef}
 					index={currentHandleIndex++}
 					onDrag={onDrag}
+					direction={direction}
 				/>
 			);
 		}
@@ -109,7 +133,7 @@ const Splitter = (props: T.Props) => {
 			attributes={{ ...attributes, ref: containerRef }}
 			className={rootClassNames}
 			height={height}
-			direction="row"
+			direction={direction}
 			align="stretch"
 			gap={2}
 		>

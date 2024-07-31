@@ -4,26 +4,16 @@
 
 .handle {
 	flex-shrink: 0;
-	height: 100%;
 	position: relative;
-	cursor: ew-resize;
 
 	&::before,
 	&::after {
 		content: "";
 		position: absolute;
-		inset-block: 0;
-		inset-inline-start: 50%;
-		transform: translateX(-50%);
 		border-radius: 999px;
 	}
 
-	&::before {
-		width: var(--rs-unit-x4);
-	}
-
 	&::after {
-		width: var(--rs-unit-x1);
 		background: var(--rs-color-border-neutral);
 		opacity: 0;
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
@@ -32,5 +22,47 @@
 	&:hover::after,
 	&&--dragging::after {
 		opacity: 0.6;
+	}
+}
+
+.--direction {
+	&-row > .handle {
+		height: 100%;
+		cursor: ew-resize;
+
+		&::before,
+		&::after {
+			inset-block: 0;
+			inset-inline-start: 50%;
+			transform: translateX(-50%);
+		}
+
+		&::before {
+			width: var(--rs-unit-x4);
+		}
+
+		&::after {
+			width: var(--rs-unit-x1);
+		}
+	}
+
+	&-column > .handle {
+		width: 100%;
+		cursor: ns-resize;
+
+		&::before,
+		&::after {
+			inset-inline: 0;
+			inset-block-start: 50%;
+			transform: translateY(-50%);
+		}
+
+		&::before {
+			height: var(--rs-unit-x4);
+		}
+
+		&::after {
+			height: var(--rs-unit-x1);
+		}
 	}
 }

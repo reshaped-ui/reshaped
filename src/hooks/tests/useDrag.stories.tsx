@@ -35,6 +35,8 @@ function Example() {
 					animated
 					backgroundColor={active ? "primary" : "neutral"}
 					attributes={{
+						role: "button",
+						tabIndex: 0,
 						ref,
 						style: { translate: `${state.x}px ${state.y}px`, cursor: active ? "grabbing" : "grab" },
 					}}
