@@ -15,24 +15,13 @@ const useDrag = <
 	cb: (args: UseDragCallbackArgs) => void,
 	options?: {
 		disabled?: boolean;
-		onDragStart?: () => void;
-		onDragEnd?: () => void;
 		containerRef?: React.RefObject<ContainerElement>;
-		triggerRef?: React.RefObject<TriggerElement>;
 		orientation?: "horizontal" | "vertical" | "all";
 	}
 ) => {
-	const {
-		disabled,
-		onDragStart,
-		onDragEnd,
-		containerRef: passedContainerRef,
-		triggerRef: passedTriggerRef,
-		orientation = "all",
-	} = options || {};
+	const { disabled, containerRef: passedContainerRef, orientation = "all" } = options || {};
 	const toggle = useToggle();
-	const internalTriggerRef = React.useRef<TriggerElement | null>(null);
-	const triggerRef = passedTriggerRef || internalTriggerRef;
+	const triggerRef = React.useRef<TriggerElement | null>(null);
 	const internalContainerRef = React.useRef<ContainerElement | null>(null);
 	const containerRef = passedContainerRef || internalContainerRef;
 	const triggerCompensationRef = React.useRef({ x: 0, y: 0 });
@@ -98,8 +87,12 @@ const useDrag = <
 			const relativeY = triggerY - triggerCompensationRef.current.y;
 
 			cb({
-				x: Math.max(0, Math.min(relativeX, containerRect.width - triggerRect.width)),
-				y: Math.max(0, Math.min(relativeY, containerRect.height - triggerRect.height)),
+				x: isHorizontal
+					? Math.max(0, Math.min(relativeX, containerRect.width - triggerRect.width))
+					: 0,
+				y: isVertical
+					? Math.max(0, Math.min(relativeY, containerRect.height - triggerRect.height))
+					: 0,
 				triggerX: triggerRect.x - containerRect.x,
 				triggerY: triggerRect.y - containerRect.y,
 			});
@@ -110,7 +103,6 @@ const useDrag = <
 			toggle.deactivate();
 			enableUserSelect();
 			enableScroll();
-			onDragEnd?.();
 		};
 
 		document.addEventListener("touchmove", handleDrag, { passive: true });
@@ -144,7 +136,6 @@ const useDrag = <
 			toggle.activate();
 			disableUserSelect();
 			disableScroll();
-			onDragStart?.();
 		};
 
 		triggerEl.addEventListener("touchstart", handleStart, { passive: true });

@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import View from "components/View";
+import Reshaped from "components/Reshaped";
 import useDrag from "hooks/useDrag";
 
 const fixtures = {
@@ -9,20 +10,18 @@ const fixtures = {
 
 const Example = (props: {
 	disabled?: boolean;
-	onDragStart?: () => void;
-	onDragEnd?: () => void;
 	onDrag: (args: { x: number; y: number }) => void;
+	orientation?: "horizontal" | "vertical";
 }) => {
-	const { onDrag, onDragEnd, onDragStart, disabled } = props;
+	const { onDrag, orientation, disabled } = props;
 
-	const { ref, containerRef, active } = useDrag(
+	const { ref, containerRef, active } = useDrag<HTMLDivElement>(
 		(args) => {
 			onDrag(args);
 		},
 		{
 			disabled,
-			onDragEnd,
-			onDragStart,
+			orientation,
 		}
 	);
 
@@ -68,12 +67,14 @@ const mockBrowser = () => {
 };
 
 describe("useDrag", () => {
-	test("works with mouse events", () => {
+	test("callback works with mouse events", () => {
 		const handleDrag = jest.fn();
-		const handleDragStart = jest.fn();
-		const handleDragEnd = jest.fn();
 
-		render(<Example onDrag={handleDrag} onDragEnd={handleDragEnd} onDragStart={handleDragStart} />);
+		render(
+			<Reshaped>
+				<Example onDrag={handleDrag} />
+			</Reshaped>
+		);
 
 		const spy = mockBrowser();
 		const trigger = screen.getByTestId(fixtures.handleId);
@@ -81,25 +82,25 @@ describe("useDrag", () => {
 		fireEvent.mouseDown(trigger);
 		fireEvent.mouseMove(document.body, { clientX: 100, clientY: 50 });
 
-		expect(handleDragStart).toHaveBeenCalledTimes(1);
 		expect(handleDrag).toHaveBeenCalledTimes(1);
-		expect(handleDrag).toHaveBeenCalledWith({ x: 100, y: 50 });
+		expect(handleDrag).toHaveBeenCalledWith(expect.objectContaining({ x: 100, y: 50 }));
 
 		fireEvent.mouseUp(trigger);
 		fireEvent.mouseUp(document.body, { clientX: 50, clientY: 100 });
 
-		expect(handleDragEnd).toHaveBeenCalledTimes(1);
 		expect(handleDrag).toHaveBeenCalledTimes(1);
 
 		spy.mockReset();
 	});
 
-	test("works with touch events", () => {
+	test("callback works with touch events", () => {
 		const handleDrag = jest.fn();
-		const handleDragStart = jest.fn();
-		const handleDragEnd = jest.fn();
 
-		render(<Example onDrag={handleDrag} onDragEnd={handleDragEnd} onDragStart={handleDragStart} />);
+		render(
+			<Reshaped>
+				<Example onDrag={handleDrag} />
+			</Reshaped>
+		);
 
 		const spy = mockBrowser();
 		const trigger = screen.getByTestId(fixtures.handleId);
@@ -107,23 +108,67 @@ describe("useDrag", () => {
 		fireEvent.touchStart(trigger, { changedTouches: [{ clientX: 0, clientY: 0 }] });
 		fireEvent.touchMove(document.body, { changedTouches: [{ clientX: 100, clientY: 50 }] });
 
-		expect(handleDragStart).toHaveBeenCalledTimes(1);
 		expect(handleDrag).toHaveBeenCalledTimes(1);
-		expect(handleDrag).toHaveBeenCalledWith({ x: 100, y: 50 });
+		expect(handleDrag).toHaveBeenCalledWith(expect.objectContaining({ x: 100, y: 50 }));
 
 		fireEvent.touchEnd(trigger);
 		fireEvent.touchEnd(document.body, { changedTouches: [{ clientX: 100, clientY: 50 }] });
 
-		expect(handleDragEnd).toHaveBeenCalledTimes(1);
 		expect(handleDrag).toHaveBeenCalledTimes(1);
 
 		spy.mockReset();
 	});
 
-	test("disables dragging", () => {
+	test("orientation: horizontal", () => {
 		const handleDrag = jest.fn();
 
-		render(<Example onDrag={handleDrag} disabled />);
+		render(
+			<Reshaped>
+				<Example onDrag={handleDrag} orientation="horizontal" />
+			</Reshaped>
+		);
+
+		const spy = mockBrowser();
+		const trigger = screen.getByTestId(fixtures.handleId);
+
+		fireEvent.mouseDown(trigger);
+		fireEvent.mouseMove(document.body, { clientX: 100, clientY: 50 });
+
+		expect(handleDrag).toHaveBeenCalledTimes(1);
+		expect(handleDrag).toHaveBeenCalledWith(expect.objectContaining({ x: 100, y: 0 }));
+
+		spy.mockReset();
+	});
+
+	test("orientation: vertical", () => {
+		const handleDrag = jest.fn();
+
+		render(
+			<Reshaped>
+				<Example onDrag={handleDrag} orientation="vertical" />
+			</Reshaped>
+		);
+
+		const spy = mockBrowser();
+		const trigger = screen.getByTestId(fixtures.handleId);
+
+		fireEvent.mouseDown(trigger);
+		fireEvent.mouseMove(document.body, { clientX: 100, clientY: 50 });
+
+		expect(handleDrag).toHaveBeenCalledTimes(1);
+		expect(handleDrag).toHaveBeenCalledWith(expect.objectContaining({ x: 0, y: 50 }));
+
+		spy.mockReset();
+	});
+
+	test("disabled", () => {
+		const handleDrag = jest.fn();
+
+		render(
+			<Reshaped>
+				<Example onDrag={handleDrag} disabled />
+			</Reshaped>
+		);
 
 		const spy = mockBrowser();
 		const trigger = screen.getByTestId(fixtures.handleId);
@@ -140,4 +185,6 @@ describe("useDrag", () => {
 
 		spy.mockReset();
 	});
+
+	test.todo("callback works with keyboard events [userEvent only triggers hotkeys on body]");
 });
