@@ -79,6 +79,9 @@ export const customRender = () => (
 		<Example.Item title="custom render">
 			<Slider name="slider" defaultValue={30} renderValue={(args) => `$${args.value}`} />
 		</Example.Item>
+		<Example.Item title="no tooltip">
+			<Slider name="slider" defaultValue={30} renderValue={false} />
+		</Example.Item>
 	</Example>
 );
 

@@ -112,6 +112,13 @@ export type { RadioGroupProps } from "components/RadioGroup";
 export { default as Reshaped } from "components/Reshaped";
 export type { ReshapedProps } from "components/Reshaped";
 
+export { default as Resizable } from "components/Resizable";
+export type {
+	ResizableProps,
+	ResizableItemProps,
+	ResizableHandleProps,
+} from "components/Resizable";
+
 export { default as Scrim } from "components/Scrim";
 export type { ScrimProps } from "components/Scrim";
 

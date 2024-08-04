@@ -17,7 +17,10 @@ const useToggle = (defaultValue?: boolean) => {
 		setActive((active) => !active);
 	}, []);
 
-	return { active, activate, deactivate, toggle };
+	return React.useMemo(
+		() => ({ active, activate, deactivate, toggle }),
+		[activate, deactivate, toggle, active]
+	);
 };
 
 export default useToggle;

@@ -1,0 +1,100 @@
+.item {
+	--rs-resizable-default-size: none;
+	--rs-resizable-min-size: 0;
+	--rs-resizable-max-size: 100%;
+
+	overflow: hidden;
+	min-width: var(--rs-resizable-default-size);
+	max-width: var(--rs-resizable-default-size);
+	flex-grow: 100;
+}
+
+.handle {
+	flex-shrink: 0;
+	position: relative;
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		border-radius: 999px;
+	}
+
+	&::after {
+		background: var(--rs-color-border-neutral);
+		opacity: 0;
+		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+	}
+
+	&:focus-visible::after,
+	&:hover::after,
+	&--dragging::after {
+		opacity: 0.6;
+	}
+}
+
+/* Prevent handle hover in case any other handle is already active */
+body:has(.handle--dragging) .handle:not(.handle--dragging) {
+	opacity: 0;
+}
+
+/* Keep drag cursor anywhere while dragging */
+body:has(.--direction-row > .handle--dragging) {
+	cursor: ew-resize;
+}
+
+body:has(.--direction-column > .handle--dragging) {
+	cursor: ns-resize;
+}
+
+.--direction {
+	&-row > .handle {
+		height: 100%;
+		cursor: ew-resize;
+
+		&::before,
+		&::after {
+			inset-block: 0;
+			inset-inline-start: 50%;
+			transform: translateX(-50%);
+		}
+
+		&::before {
+			width: var(--rs-unit-x4);
+		}
+
+		&::after {
+			width: var(--rs-unit-x1);
+		}
+	}
+
+	&-row > .item[data-rs-resizable-item-mounted] {
+		min-width: var(--rs-resizable-min-size);
+		max-width: var(--rs-resizable-max-size);
+	}
+
+	&-column > .handle {
+		width: 100%;
+		cursor: ns-resize;
+
+		&::before,
+		&::after {
+			inset-inline: 0;
+			inset-block-start: 50%;
+			transform: translateY(-50%);
+		}
+
+		&::before {
+			height: var(--rs-unit-x4);
+		}
+
+		&::after {
+			height: var(--rs-unit-x1);
+		}
+	}
+
+	&-column > .item[data-rs-resizable-item-mounted] {
+		min-height: var(--rs-resizable-min-size);
+		max-height: var(--rs-resizable-max-size);
+	}
+}

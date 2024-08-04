@@ -57,16 +57,18 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 				id={id}
 				aria-hidden="true"
 			>
-				<Theme colorMode="inverted">
-					<Text
-						variant="caption-1"
-						weight="medium"
-						className={s.tooltip}
-						attributes={{ ref: tooltipRef }}
-					>
-						{tooltipValue}
-					</Text>
-				</Theme>
+				{renderValue !== false && (
+					<Theme colorMode="inverted">
+						<Text
+							variant="caption-1"
+							weight="medium"
+							className={s.tooltip}
+							attributes={{ ref: tooltipRef }}
+						>
+							{tooltipValue}
+						</Text>
+					</Theme>
+				)}
 			</div>
 		</>
 	);

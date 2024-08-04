@@ -6,7 +6,7 @@ export type ClassName = ClassNameValue | ClassNameValue[] | ClassName[];
 export type CSSVariable = `--${string}`;
 export type StyleAttribute =
 	| React.CSSProperties
-	| (React.CSSProperties & Record<CSSVariable, string | number>);
+	| (React.CSSProperties & Record<CSSVariable, string | number | undefined>);
 
 // Align with the
 type DataAttributes = {} | Record<`data-${string}`, string | boolean>;

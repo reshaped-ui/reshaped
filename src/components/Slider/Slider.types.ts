@@ -48,7 +48,7 @@ type BaseProps = {
 	min?: number;
 	max?: number;
 	orientation?: "vertical" | "horizontal";
-	renderValue?: (args: { value: number }) => string;
+	renderValue?: ((args: { value: number }) => string) | false;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };
