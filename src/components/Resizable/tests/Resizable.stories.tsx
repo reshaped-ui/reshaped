@@ -1,14 +1,14 @@
 import { Example } from "utilities/storybook";
-import Splitter from "components/Splitter";
+import Resizable from "components/Resizable";
 import View from "components/View";
 import Button from "components/Button";
 
 export default {
-	title: "Components/Splitter",
-	component: Splitter,
+	title: "Components/Resizable",
+	component: Resizable,
 	parameters: {
 		iframe: {
-			url: "https://reshaped.so/docs/utilities/splitter",
+			url: "https://reshaped.so/docs/utilities/Resizable",
 		},
 	},
 };
@@ -16,8 +16,8 @@ export default {
 export const base = () => (
 	<Example>
 		<Example.Item>
-			<Splitter height="300px">
-				<Splitter.Item>
+			<Resizable height="300px" gap={4}>
+				<Resizable.Item minSize="100px">
 					<View
 						backgroundColor="neutral-faded"
 						borderRadius="medium"
@@ -27,9 +27,9 @@ export const base = () => (
 					>
 						Panel
 					</View>
-				</Splitter.Item>
-				<Splitter.Handle />
-				<Splitter.Item>
+				</Resizable.Item>
+				<Resizable.Handle />
+				<Resizable.Item minSize="100px">
 					<View
 						backgroundColor="neutral-faded"
 						borderRadius="medium"
@@ -39,11 +39,11 @@ export const base = () => (
 					>
 						Panel
 					</View>
-				</Splitter.Item>
-				<Splitter.Handle />
-				<Splitter.Item>
-					<Splitter height="100%" direction="column">
-						<Splitter.Item>
+				</Resizable.Item>
+				<Resizable.Handle />
+				<Resizable.Item>
+					<Resizable height="100%" direction="column">
+						<Resizable.Item>
 							<View
 								backgroundColor="neutral-faded"
 								borderRadius="medium"
@@ -53,9 +53,9 @@ export const base = () => (
 							>
 								Panel
 							</View>
-						</Splitter.Item>
-						<Splitter.Handle />
-						<Splitter.Item>
+						</Resizable.Item>
+						<Resizable.Handle />
+						<Resizable.Item>
 							<View
 								backgroundColor="neutral-faded"
 								borderRadius="medium"
@@ -65,8 +65,8 @@ export const base = () => (
 							>
 								Panel
 							</View>
-						</Splitter.Item>
-						<Splitter.Handle>
+						</Resizable.Item>
+						<Resizable.Handle>
 							{(attributes) => (
 								<View
 									backgroundColor="primary-faded"
@@ -81,8 +81,8 @@ export const base = () => (
 									</View.Item>
 								</View>
 							)}
-						</Splitter.Handle>
-						<Splitter.Item>
+						</Resizable.Handle>
+						<Resizable.Item>
 							<View
 								backgroundColor="neutral-faded"
 								borderRadius="medium"
@@ -92,10 +92,10 @@ export const base = () => (
 							>
 								Panel
 							</View>
-						</Splitter.Item>
-					</Splitter>
-				</Splitter.Item>
-			</Splitter>
+						</Resizable.Item>
+					</Resizable>
+				</Resizable.Item>
+			</Resizable>
 		</Example.Item>
 	</Example>
 );

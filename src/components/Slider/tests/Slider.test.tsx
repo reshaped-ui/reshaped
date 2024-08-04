@@ -144,6 +144,13 @@ describe("Components/Slider", () => {
 		expect(tooltipEl).toBeInTheDocument();
 	});
 
+	test("doesn't render tooltip", () => {
+		render(<Slider name={fixtures.name} defaultValue={fixtures.minValue} renderValue={false} />);
+
+		const tooltipEl = screen.queryByText(`$${fixtures.minValue}`);
+		expect(tooltipEl).not.toBeInTheDocument();
+	});
+
 	test("disables the slider", () => {
 		render(<Slider name={fixtures.name} defaultValue={fixtures.minValue} disabled />);
 

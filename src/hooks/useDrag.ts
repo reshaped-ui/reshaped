@@ -16,6 +16,7 @@ const useDrag = <
 		onDragStart?: () => void;
 		onDragEnd?: () => void;
 		containerRef?: React.RefObject<ContainerElement | null>;
+		triggerRef?: React.RefObject<TriggerElement | null>;
 		orientation?: "horizontal" | "vertical" | "all";
 	}
 ) => {
@@ -24,10 +25,12 @@ const useDrag = <
 		onDragStart,
 		onDragEnd,
 		containerRef: passedContainerRef,
+		triggerRef: passedTriggerRef,
 		orientation = "all",
 	} = options || {};
 	const toggle = useToggle();
-	const triggerRef = React.useRef<TriggerElement | null>(null);
+	const internalTriggerRef = React.useRef<TriggerElement | null>(null);
+	const triggerRef = passedTriggerRef || internalTriggerRef;
 	const internalContainerRef = React.useRef<ContainerElement | null>(null);
 	const containerRef = passedContainerRef || internalContainerRef;
 	const triggerCompensationRef = React.useRef({ x: 0, y: 0 });

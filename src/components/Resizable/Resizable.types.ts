@@ -1,14 +1,15 @@
 import type React from "react";
 import type { ViewProps } from "components/View";
 
-export type Props = Pick<ViewProps, "children" | "className" | "attributes" | "height"> & {
-	direction?: "row" | "column";
-};
+export type Props = Pick<
+	ViewProps,
+	"children" | "className" | "attributes" | "height" | "direction" | "gap"
+>;
 
 export type ItemProps = {
 	children: React.ReactNode;
-	minSize?: number;
-	maxSize?: number;
+	minSize?: `${number}px`;
+	maxSize?: `${number}px`;
 };
 
 export type PrivateItemProps = ItemProps & {
@@ -16,7 +17,7 @@ export type PrivateItemProps = ItemProps & {
 };
 
 export type HandleProps = {
-	children?: (attributes: { ref: React.RefObject<HTMLButtonElement> }) => React.ReactNode;
+	children?: (attributes: { ref: React.RefObject<HTMLButtonElement | null> }) => React.ReactNode;
 };
 
 export type PrivateHandleProps = HandleProps & {
@@ -24,3 +25,5 @@ export type PrivateHandleProps = HandleProps & {
 	index: number;
 	onDrag: (args: { x: number; y: number; index: number }) => void;
 } & Pick<Props, "direction">;
+
+export type ItemsRef = { el: HTMLDivElement | null; props: ItemProps }[];

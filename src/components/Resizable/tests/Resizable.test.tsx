@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
-import Splitter from "../Splitter";
+import Splitter from "../Resizable";
 
-describe("Components/Splitter", () => {
+describe("Components/Resizable", () => {
 	test("generates ids correctly", () => {
 		render(<Splitter>...</Splitter>);
 		expect(true).toBe(true);
