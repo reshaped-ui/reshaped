@@ -7,49 +7,54 @@ import View from "components/View";
 import type * as T from "./Resizable.types";
 import s from "./Resizable.module.css";
 
-const PrivateSplitterHandle = React.forwardRef(
-	// Using any here since we're expecting ref to be a Button element but using div with ro
-	(props: T.PrivateHandleProps, handleRef: React.Ref<any>) => {
-		const { containerRef, onDrag, index, direction, children } = props;
-		const { ref, active } = useDrag(
-			(args) => {
-				onDrag({ ...args, index });
-			},
-			{
-				containerRef,
-				orientation: direction === "row" ? "horizontal" : "vertical",
-			}
-		);
-		const handleClassNames = classNames(s.handle, active && s["handle--dragging"]);
+const PrivateResizableHandle = (props: T.PrivateHandleProps) => {
+	const { containerRef, onDrag, index, direction, children } = props;
+	const { ref, active } = useDrag(
+		(args) => {
+			onDrag({ ...args, index });
+		},
+		{
+			containerRef,
+			orientation: direction === "row" ? "horizontal" : "vertical",
+		}
+	);
+	const handleClassNames = classNames(s.handle, active && s["handle--dragging"]);
 
-		if (children) return <div ref={handleRef}>{children({ ref })}</div>;
-		return (
-			<div
-				className={handleClassNames}
-				role="button"
-				tabIndex={0}
-				ref={(el) => {
+	if (children) return <View.Item>{children({ ref })}</View.Item>;
+	return (
+		<View.Item
+			className={handleClassNames}
+			attributes={{
+				role: "button",
+				tabIndex: 0,
+				ref: (el) => {
 					// @ts-ignore
 					ref.current = el;
-					// @ts-ignore
-					handleRef.current = el;
-				}}
-			/>
-		);
-	}
-);
+				},
+			}}
+		/>
+	);
+};
 
-const PrivateSplitterItem = React.forwardRef(
-	(props: T.PrivateItemProps, ref: React.Ref<HTMLDivElement>) => {
-		const { children } = props;
+const PrivateResizableItem = React.forwardRef(
+	(props: T.PrivateItemProps, ref: React.Ref<HTMLDivElement | null>) => {
+		const { children, defaultSize, minSize, maxSize } = props;
+		const itemRef = React.useRef<HTMLDivElement | null>(null);
 
 		return (
 			<View.Item
 				grow
 				className={s.item}
 				attributes={{
-					ref,
-					style: { flexGrow: 1 },
+					ref: (el) => {
+						if (typeof ref === "function") ref(el);
+						itemRef.current = el;
+					},
+					style: {
+						"--rs-resizable-default-size": defaultSize,
+						"--rs-resizable-min-size": minSize,
+						"--rs-resizable-max-size": maxSize,
+					},
 				}}
 			>
 				{children}
@@ -58,28 +63,26 @@ const PrivateSplitterItem = React.forwardRef(
 	}
 );
 
-const Splitter = (props: T.Props) => {
+const Resizable = (props: T.Props) => {
 	const { children, height, direction = "row", gap = 2, className, attributes } = props;
 	const rootClassNames = classNames(s.root, s[`--direction-${direction}`], className);
 	const containerRef = React.useRef<HTMLDivElement | null>(null);
-	const itemsRef = React.useRef<T.ItemsRef>([]);
-	const handlesRef = React.useRef<(HTMLElement | null)[]>([]);
+	const itemsRef = React.useRef<T.ItemsRefProps>([]);
 	const horizontal = direction === "row";
 
 	let currentHandleIndex = 0;
 	let currentItemIndex = 0;
 	itemsRef.current = [];
-	handlesRef.current = [];
 
 	const checkedCrossedBoundaries = (args: {
-		item: T.ItemsRef[number];
+		item: T.ItemsRefProps[number];
 		grow: number;
-		containerSize: number;
+		itemsSize: number;
 		itemsCount: number;
 	}) => {
-		const { item, grow, containerSize, itemsCount } = args;
+		const { item, grow, itemsSize, itemsCount } = args;
 		const { minSize, maxSize } = item.props;
-		const nextPx = (grow / itemsCount) * containerSize;
+		const nextPx = (grow / itemsCount / 100) * itemsSize;
 		const minPx = minSize && Number(minSize.replace("px", ""));
 		const maxPx = maxSize && Number(maxSize?.replace("px", ""));
 
@@ -89,60 +92,46 @@ const Splitter = (props: T.Props) => {
 	};
 
 	const onDrag: T.PrivateHandleProps["onDrag"] = (args) => {
-		const { index, x, y } = args;
+		const { index, x, y, triggerX, triggerY } = args;
 		const startItem = itemsRef.current[index];
 		const endItem = itemsRef.current[index + 1];
-		const container = containerRef.current;
 
-		if (!startItem.el || !endItem.el || !container) return;
+		if (!startItem.el || !endItem.el) return;
 
 		const itemsCount = itemsRef.current.length;
-		const containerSize = horizontal ? container.clientWidth : container.clientHeight;
 
 		// Each item has a flex-grow of 1 as default and these values get updated while dragging for the items around the handle
 		// Grow value of all items besides currently updating ones
-		let restGrow = 0;
-		// Size of each gap between the items, remainder after excluding sizes of all items and custom handles
-		let gapSize = containerSize;
+		let currentItemsGrow = itemsCount * 100;
+		let itemsSize = 0;
 		itemsRef.current.forEach((item, i) => {
 			if (!item.el) return;
-			gapSize -= horizontal ? item.el.clientWidth : item.el.clientHeight;
 
+			itemsSize += horizontal ? item.el.clientWidth : item.el.clientHeight;
 			if (i === index || i === index + 1) return;
-			restGrow += Number(item.el.style.flexGrow);
+			currentItemsGrow -= Number(item.el.style.flexGrow || 100);
 		}, 0);
-		// Combined grow value of start and end items
-		const itemsGrow = itemsCount - restGrow;
 
-		// Also exclude the size of custom handles taking space
-		handlesRef.current.forEach((el) => {
-			if (!el) return;
-			gapSize -= horizontal ? el.clientWidth : el.clientHeight;
-		});
-
-		// calc the size of a single gap
-		gapSize /= itemsCount - 1;
-
-		const dragCoord = horizontal ? x : y;
 		const startSize = horizontal ? startItem.el.clientWidth : startItem.el.clientHeight;
+		const startOffset = horizontal ? startItem.el.offsetLeft : startItem.el.offsetTop;
 		const endSize = horizontal ? endItem.el.clientWidth : endItem.el.clientHeight;
-		// Calculate at which coord the area with current items start
-		const currentItemsOffset = horizontal ? startItem.el.offsetLeft : startItem.el.offsetTop;
-		// Total size of the dragging area
-		const currentItemsSize = startSize + endSize + gapSize;
-		// x is calculated based on container but we're changing grow based on current items
-		const percent = Math.min(1, Math.max(0, (dragCoord - currentItemsOffset) / currentItemsSize));
 
-		const nextStartGrow = percent * itemsGrow;
-		const nextEndGrow = itemsGrow - percent * itemsGrow;
+		// Handles containing triggers are located lower based on the gap and padding inside the handle
+		const gapCompensation = (horizontal ? triggerX : triggerY) - startSize - startOffset;
+		const dragCoord = (horizontal ? x : y) - gapCompensation;
+
+		// Total size of the dragging area
+		const currentItemsSize = startSize + endSize;
+		// x is calculated based on container but we're changing grow based on current items
+		const percent = Math.min(1, Math.max(0, (dragCoord - startOffset) / currentItemsSize));
+		const nextStartGrow = Math.floor(percent * currentItemsGrow);
+		const nextEndGrow = Math.floor(currentItemsGrow - nextStartGrow);
 
 		// Validate that next grow values won't break the min/max size values
-		if (
-			checkedCrossedBoundaries({ item: startItem, containerSize, grow: nextStartGrow, itemsCount })
-		) {
+		if (checkedCrossedBoundaries({ item: startItem, itemsSize, grow: nextStartGrow, itemsCount })) {
 			return;
 		}
-		if (checkedCrossedBoundaries({ item: endItem, containerSize, grow: nextEndGrow, itemsCount })) {
+		if (checkedCrossedBoundaries({ item: endItem, itemsSize, grow: nextEndGrow, itemsCount })) {
 			return;
 		}
 
@@ -150,29 +139,58 @@ const Splitter = (props: T.Props) => {
 		endItem.el.style.flexGrow = nextEndGrow.toString();
 	};
 
+	/**
+	 * When passing sizes, items first get rendered with css
+	 * and then have to be hydrated with flexGrow to enable correct resizing
+	 */
+	React.useEffect(() => {
+		const growValues: number[] = [];
+
+		// Calculate total size of items excluding gaps
+		let totalItemsSize = 0;
+		itemsRef.current.forEach((item) => {
+			if (!item.el) return;
+			totalItemsSize += horizontal ? item.el.clientWidth : item.el.clientHeight;
+		});
+
+		// Calculate flex grow values of all items rendered by css originally
+		itemsRef.current.forEach((item, i) => {
+			if (!item.el) return;
+
+			const itemSizePercent =
+				(horizontal ? item.el.clientWidth : item.el.clientHeight) / totalItemsSize;
+			growValues[i] = itemsRef.current.length * itemSizePercent * 100;
+		});
+
+		// Apply flex grow after calculation is done to avoid layout shifts during the calculation
+		itemsRef.current.forEach((item, i) => {
+			if (!item.el || !growValues[i]) return;
+
+			item.el.style.flexGrow = growValues[i].toString();
+			item.el.setAttribute("data-rs-resizable-item-mounted", "");
+		});
+	}, [horizontal]);
+
 	const output = React.Children.map(children, (child) => {
 		const isComponent = React.isValidElement(child);
 
-		if (isComponent && child.type === Splitter.Handle && child.props) {
-			const index = currentHandleIndex;
-
+		if (isComponent && child.type === Resizable.Handle && child.props) {
 			return (
-				<PrivateSplitterHandle
+				<PrivateResizableHandle
 					{...(child.props as T.HandleProps)}
 					containerRef={containerRef}
 					index={currentHandleIndex++}
 					onDrag={onDrag}
 					direction={direction}
-					ref={(el) => (handlesRef.current[index] = el)}
 				/>
 			);
 		}
 
-		if (isComponent && child.type === Splitter.Item && child.props) {
+		if (isComponent && child.type === Resizable.Item && child.props) {
 			const index = currentHandleIndex;
 
 			return (
-				<PrivateSplitterItem
+				<PrivateResizableItem
 					{...(child.props as T.ItemProps)}
 					index={currentItemIndex++}
 					ref={(el) => (itemsRef.current[index] = { el, props: child.props as T.ItemProps })}
@@ -197,7 +215,7 @@ const Splitter = (props: T.Props) => {
 	);
 };
 
-Splitter.Item = (() => null) as React.FC<T.ItemProps>;
-Splitter.Handle = (() => null) as React.FC<T.HandleProps>;
+Resizable.Item = (() => null) as React.FC<T.ItemProps>;
+Resizable.Handle = (() => null) as React.FC<T.HandleProps>;
 
-export default Splitter;
+export default Resizable;

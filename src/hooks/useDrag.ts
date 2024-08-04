@@ -6,17 +6,19 @@ import useToggle from "hooks/useToggle";
 import useHotkeys from "hooks/useHotkeys";
 import * as keys from "constants/keys";
 
+export type UseDragCallbackArgs = { x: number; y: number; triggerX: number; triggerY: number };
+
 const useDrag = <
 	TriggerElement extends HTMLElement = HTMLButtonElement,
 	ContainerElement extends HTMLElement = HTMLDivElement,
 >(
-	cb: (args: { x: number; y: number }) => void,
+	cb: (args: UseDragCallbackArgs) => void,
 	options?: {
 		disabled?: boolean;
 		onDragStart?: () => void;
 		onDragEnd?: () => void;
-		containerRef?: React.RefObject<ContainerElement | null>;
-		triggerRef?: React.RefObject<TriggerElement | null>;
+		containerRef?: React.RefObject<ContainerElement>;
+		triggerRef?: React.RefObject<TriggerElement>;
 		orientation?: "horizontal" | "vertical" | "all";
 	}
 ) => {
@@ -45,22 +47,24 @@ const useDrag = <
 		const container = containerRef.current ?? document.body;
 		const containerRect = container.getBoundingClientRect();
 		const triggerRect = triggerEl?.getBoundingClientRect();
-		const nextArgs = { x: 0, y: 0 };
+		const nextArgs = { x: 0, y: 0, triggerX: 0, triggerY: 0 };
 
 		if (isVertical) {
 			const relativeY = Math.round(triggerRect.y) - containerRect.y + y;
 			nextArgs.y = Math.max(0, Math.min(relativeY, containerRect.height - triggerRect!.height));
+			nextArgs.triggerY = triggerRect.y - containerRect.y;
 		}
 
 		if (isHorizontal) {
 			const relativeX = Math.round(triggerRect.x) - containerRect.x + x;
 			nextArgs.x = Math.max(0, Math.min(relativeX, containerRect.width - triggerRect!.width));
+			nextArgs.triggerX = triggerRect.x - containerRect.x;
 		}
 
 		cb(nextArgs);
 	};
 
-	useHotkeys(
+	useHotkeys<TriggerElement>(
 		{
 			[keys.LEFT]: () => isHorizontal && handleKeyboard(-20, 0),
 			[keys.RIGHT]: () => isHorizontal && handleKeyboard(20, 0),
@@ -86,13 +90,18 @@ const useDrag = <
 			const containerRect = container.getBoundingClientRect();
 			const triggerRect = triggerEl.getBoundingClientRect();
 
+			const triggerX = resolvedEvent.clientX - containerRect.x;
+			const triggerY = resolvedEvent.clientY - containerRect.y;
+
 			// Calculate position relative to the container
-			const relativeX = resolvedEvent.clientX - containerRect.x - triggerCompensationRef.current.x;
-			const relativeY = resolvedEvent.clientY - containerRect.y - triggerCompensationRef.current.y;
+			const relativeX = triggerX - triggerCompensationRef.current.x;
+			const relativeY = triggerY - triggerCompensationRef.current.y;
 
 			cb({
 				x: Math.max(0, Math.min(relativeX, containerRect.width - triggerRect.width)),
 				y: Math.max(0, Math.min(relativeY, containerRect.height - triggerRect.height)),
+				triggerX: triggerRect.x - containerRect.x,
+				triggerY: triggerRect.y - containerRect.y,
 			});
 		};
 

@@ -17,7 +17,7 @@ export const base = () => (
 	<Example>
 		<Example.Item>
 			<Resizable height="300px" gap={4}>
-				<Resizable.Item minSize="100px">
+				<Resizable.Item minSize="100px" defaultSize="200px">
 					<View
 						backgroundColor="neutral-faded"
 						borderRadius="medium"
@@ -29,7 +29,7 @@ export const base = () => (
 					</View>
 				</Resizable.Item>
 				<Resizable.Handle />
-				<Resizable.Item minSize="100px">
+				<Resizable.Item>
 					<View
 						backgroundColor="neutral-faded"
 						borderRadius="medium"
@@ -43,7 +43,7 @@ export const base = () => (
 				<Resizable.Handle />
 				<Resizable.Item>
 					<Resizable height="100%" direction="column">
-						<Resizable.Item>
+						<Resizable.Item minSize="50px" maxSize="100px">
 							<View
 								backgroundColor="neutral-faded"
 								borderRadius="medium"
@@ -74,11 +74,9 @@ export const base = () => (
 									align="center"
 									borderRadius="small"
 								>
-									<View.Item>
-										<Button attributes={attributes} type="button">
-											Drag me
-										</Button>
-									</View.Item>
+									<Button attributes={attributes} type="button">
+										Drag me
+									</Button>
 								</View>
 							)}
 						</Resizable.Handle>

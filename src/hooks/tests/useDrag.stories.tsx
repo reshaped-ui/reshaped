@@ -10,7 +10,7 @@ function Example() {
 	const [state, setState] = React.useState({ x: 0, y: 0 });
 	const disabledToggle = useToggle();
 
-	const { ref, containerRef, active } = useDrag(
+	const { ref, containerRef, active } = useDrag<HTMLDivElement>(
 		(args) => {
 			setState(args);
 		},
