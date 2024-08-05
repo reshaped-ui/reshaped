@@ -13,7 +13,12 @@ import { checkKeyboardMode } from "utilities/a11y/keyboardMode";
 import useFlyout from "./useFlyout";
 import * as timeouts from "./Flyout.constants";
 import cooldown from "./utilities/cooldown";
-import { Provider, useFlyoutTriggerContext, useFlyoutContext } from "./Flyout.context";
+import {
+	Provider,
+	useFlyoutTriggerContext,
+	useFlyoutContext,
+	useFlyoutContentContext,
+} from "./Flyout.context";
 import type * as T from "./Flyout.types";
 
 const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
@@ -40,9 +45,12 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const resolvedActive = disabled === true ? false : passedActive;
 	const parentFlyoutContext = useFlyoutContext();
 	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
+	const parentFlyoutContentContext = useFlyoutContentContext();
+
 	const isSubmenu =
 		parentFlyoutContext.trapFocusMode === "action-menu" ||
 		parentFlyoutContext.trapFocusMode === "content-menu";
+
 	const [isRTL] = useRTL();
 	const internalTriggerElRef = React.useRef<HTMLButtonElement | null>(null);
 
@@ -50,7 +58,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Reuse the parent trigger ref in case we render nested triggers
 	 * For example, when we apply tooltip and popover to the same button
 	 */
-	const triggerElRef = parentFlyoutTriggerContext?.triggerElRef || internalTriggerElRef;
+	const triggerElRef =
+		(!parentFlyoutContentContext && parentFlyoutTriggerContext?.triggerElRef) ||
+		internalTriggerElRef;
 	const flyoutElRef = React.useRef<HTMLDivElement | null>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
