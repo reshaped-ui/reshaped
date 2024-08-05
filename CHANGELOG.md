@@ -21,6 +21,7 @@
 - Popover, Tooltip: Only trigger focus events for keyboard mode
 - Popover, DropdownMenu: Popover.Dismissible
 - Popover: Improved nested popovers inside tooltip
+- Popover, DropdownMenu: disableCloseOnOutsideClick
 - Slider: Fixed focus state to work based on focus-visible
 - Slider: renderValue=false
 

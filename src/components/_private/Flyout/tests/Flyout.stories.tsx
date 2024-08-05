@@ -112,10 +112,22 @@ export const modeContentMenuHover = () => (
 	</Demo>
 );
 
-export const disableContentHover = () => (
-	<Demo triggerType="hover" disableContentHover>
-		Content
-	</Demo>
+export const disableFlags = () => (
+	<Example>
+		<Example.Item title="disableContentHover">
+			<Demo triggerType="hover" disableContentHover>
+				Content
+			</Demo>
+		</Example.Item>
+
+		<Example.Item title="disableCloseOnOutsideClick">
+			<Demo disableCloseOnOutsideClick>Content</Demo>
+		</Example.Item>
+
+		<Example.Item title="disableHideAnimation">
+			<Demo disableHideAnimation>Content</Demo>
+		</Example.Item>
+	</Example>
 );
 
 class CustomElement extends window.HTMLElement {

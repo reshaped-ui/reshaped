@@ -84,6 +84,7 @@ type BaseProps = {
 	disabled?: boolean;
 	disableHideAnimation?: boolean;
 	disableContentHover?: boolean;
+	disableCloseOnOutsideClick?: boolean;
 	children?: React.ReactNode;
 	onOpen?: () => void;
 	onClose?: () => void;
