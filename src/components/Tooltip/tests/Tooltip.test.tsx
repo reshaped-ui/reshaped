@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Button from "components/Button";
 import Tooltip from "components/Tooltip";
 import Reshaped from "components/Reshaped";

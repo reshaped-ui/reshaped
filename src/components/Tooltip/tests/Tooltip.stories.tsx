@@ -148,5 +148,43 @@ export const edgeCases = () => (
 				)}
 			</Tooltip>
 		</Example.Item>
+
+		<Example.Item title="nested popovers inside a tooltip">
+			<Tooltip position="top" text="Hello">
+				{(tooltipAttributes) => (
+					<Popover position="bottom">
+						<Popover.Trigger>
+							{(attributes) => (
+								<Button
+									color="primary"
+									attributes={{
+										...tooltipAttributes,
+										...attributes,
+									}}
+								>
+									Open
+								</Button>
+							)}
+						</Popover.Trigger>
+						<Popover.Content>
+							<View gap={2} align="start">
+								Popover content
+								<Popover position="bottom">
+									<Popover.Trigger>
+										{(attributes) => <Button attributes={attributes}>Open</Button>}
+									</Popover.Trigger>
+									<Popover.Content>
+										<View gap={2} align="start">
+											Popover content
+											<Button onClick={() => {}}>Button</Button>
+										</View>
+									</Popover.Content>
+								</Popover>
+							</View>
+						</Popover.Content>
+					</Popover>
+				)}
+			</Tooltip>
+		</Example.Item>
 	</Example>
 );

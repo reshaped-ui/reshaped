@@ -6,7 +6,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
 import { getClosestFlyoutTarget } from "utilities/dom";
 import cooldown from "./utilities/cooldown";
-import { useFlyoutContext } from "./Flyout.context";
+import { useFlyoutContext, ContentProvider } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 import s from "./Flyout.module.css";
 
@@ -79,35 +79,37 @@ const FlyoutContent = (props: T.ContentProps) => {
 	}
 
 	const content = (
-		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
-		<div
-			className={contentClassNames}
-			style={
-				{
-					...styles,
-					"--rs-flyout-gap": contentGap,
-				} as React.CSSProperties
-			}
-			ref={flyoutElRef}
-			onTransitionEnd={handleTransitionEnd}
-			onMouseEnter={triggerType === "hover" ? handleMouseEnter : undefined}
-			onMouseLeave={triggerType === "hover" ? handleMouseLeave : undefined}
-			onMouseDown={handleContentMouseDown}
-			onTouchStart={handleContentMouseDown}
-			onMouseUp={handleContentMouseUp}
-			onTouchEnd={handleContentMouseUp}
-		>
+		<ContentProvider value={true}>
+			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 			<div
-				role={role}
-				{...attributes}
-				id={id}
-				aria-modal={triggerType === "click"}
-				style={contentAttributes?.style}
-				className={innerClassNames}
+				className={contentClassNames}
+				style={
+					{
+						...styles,
+						"--rs-flyout-gap": contentGap,
+					} as React.CSSProperties
+				}
+				ref={flyoutElRef}
+				onTransitionEnd={handleTransitionEnd}
+				onMouseEnter={triggerType === "hover" ? handleMouseEnter : undefined}
+				onMouseLeave={triggerType === "hover" ? handleMouseLeave : undefined}
+				onMouseDown={handleContentMouseDown}
+				onTouchStart={handleContentMouseDown}
+				onMouseUp={handleContentMouseUp}
+				onTouchEnd={handleContentMouseUp}
 			>
-				{children}
+				<div
+					role={role}
+					{...attributes}
+					id={id}
+					aria-modal={triggerType === "click"}
+					style={contentAttributes?.style}
+					className={innerClassNames}
+				>
+					{children}
+				</div>
 			</div>
-		</div>
+		</ContentProvider>
 	);
 
 	const closestScrollable = getClosestFlyoutTarget(triggerElRef.current);
