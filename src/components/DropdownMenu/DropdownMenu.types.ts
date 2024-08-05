@@ -17,6 +17,7 @@ export type Props = Pick<
 	| "defaultActive"
 	| "width"
 	| "disableHideAnimation"
+	| "disableCloseOnOutsideClick"
 	| "instanceRef"
 	| "containerRef"
 > & {

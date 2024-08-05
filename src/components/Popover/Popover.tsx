@@ -21,6 +21,7 @@ const Popover = (props: T.Props) => {
 		position = "bottom",
 		disableHideAnimation,
 		disableContentHover,
+		disableCloseOnOutsideClick,
 		instanceRef,
 		containerRef,
 	} = props;
@@ -51,6 +52,7 @@ const Popover = (props: T.Props) => {
 			width={width}
 			disableHideAnimation={disableHideAnimation}
 			disableContentHover={disableContentHover}
+			disableCloseOnOutsideClick={disableCloseOnOutsideClick}
 			contentGap={contentGap}
 			containerRef={containerRef}
 			contentClassName={contentClassName}

@@ -33,6 +33,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		width,
 		disableHideAnimation,
 		disableContentHover,
+		disableCloseOnOutsideClick,
 		contentGap,
 		contentClassName,
 		contentAttributes,
@@ -304,6 +305,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	useHotkeys({ Escape: () => handleClose() }, [handleClose]);
 
 	useOnClickOutside([flyoutElRef, triggerElRef], () => {
+		if (disableCloseOnOutsideClick) return;
 		// Clicking outside changes focused element so we don't need to set it back ourselves
 		shouldReturnFocusRef.current = false;
 		handleClose();
