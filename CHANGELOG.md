@@ -25,6 +25,7 @@
 - Popover, DropdownMenu: disableCloseOnOutsideClick
 - Slider: Fixed focus state to work based on focus-visible
 - Slider: renderValue=false
+- Button: elevated variant focus shadow
 
 - Figma: Autocomplete as component
 - Figma: Removed local color scoping
