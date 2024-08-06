@@ -24,10 +24,10 @@ export const getDragCoord = ({
 	vertical?: boolean;
 }) => {
 	if (vertical) {
-		if (event instanceof MouseEvent) return event.pageY || event.screenY;
-		return event.changedTouches[0].pageY;
+		if (event instanceof MouseEvent) return event.clientY;
+		return event.changedTouches[0].clientY;
 	}
 
-	if (event instanceof MouseEvent) return event.pageX || event.screenX;
-	return event.changedTouches[0].pageX;
+	if (event instanceof MouseEvent) return event.clientX;
+	return event.changedTouches[0].clientX;
 };

@@ -26,9 +26,9 @@ const useScrollLock = () => {
 	const [locked, setLocked] = React.useState(false);
 	const overflowStyleRef = React.useRef<string | undefined>();
 	const isOverflowingRef = React.useRef(false);
-	const targetEl = document.body;
 
 	const lockScroll = React.useCallback(() => {
+		const targetEl = document.body;
 		const rect = targetEl.getBoundingClientRect();
 
 		isOverflowingRef.current = rect.left + rect.right < window.innerWidth;
@@ -41,14 +41,15 @@ const useScrollLock = () => {
 		}
 
 		setLocked(true);
-	}, [setLocked, isOverflowingRef, overflowStyleRef, targetEl]);
+	}, [setLocked, isOverflowingRef, overflowStyleRef]);
 
 	const unlockScroll = React.useCallback(() => {
+		const targetEl = document.body;
 		targetEl.style.overflow = overflowStyleRef.current || "";
 		if (isOverflowingRef.current) targetEl.style.paddingRight = "";
 
 		setLocked(false);
-	}, [setLocked, isOverflowingRef, overflowStyleRef, targetEl]);
+	}, [setLocked, isOverflowingRef, overflowStyleRef]);
 
 	return { scrollLocked: locked, lockScroll, unlockScroll };
 };

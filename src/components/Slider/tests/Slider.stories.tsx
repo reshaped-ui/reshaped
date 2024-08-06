@@ -40,6 +40,7 @@ export const direction = () => (
 					orientation="vertical"
 				/>
 			</View>
+			<View height="2000px" />
 		</Example.Item>
 	</Example>
 );
