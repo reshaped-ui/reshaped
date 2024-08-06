@@ -10,6 +10,7 @@ import useElementId from "hooks/useElementId";
 import type * as T from "./Modal.types";
 import s from "./Modal.module.css";
 import getPaddingStyles from "styles/padding";
+import useHandlerRef from "hooks/useHandlerRef";
 
 const DRAG_THRESHOLD = 32;
 const DRAG_OPPOSITE_THRESHOLD = 100;
@@ -73,6 +74,7 @@ const Modal = (props: T.Props) => {
 		className,
 		attributes,
 	} = props;
+	const onCloseRef = useHandlerRef(onClose);
 	const id = useElementId();
 	const clientPosition = useResponsiveClientValue(position)!;
 	const [titleMounted, setTitleMounted] = React.useState(false);
@@ -153,7 +155,7 @@ const Modal = (props: T.Props) => {
 				clientPosition === "start" ? dragDirectionRef.current < 0 : dragDirectionRef.current > 0;
 
 			if (Math.abs(dragDistanceRef.current) > DRAG_THRESHOLD && shouldClose) {
-				onClose?.();
+				onCloseRef.current?.();
 			} else {
 				resetDragData();
 			}
@@ -206,8 +208,7 @@ const Modal = (props: T.Props) => {
 			document.removeEventListener("touchmove", handleDrag);
 			document.removeEventListener("touchend", handleDragEnd);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dragging, clientPosition]);
+	}, [dragging, clientPosition, onCloseRef, position, rootRef]);
 
 	// Syncing distance to the ref to avoid having a dependency on dragDistance in handleDragEnd
 	React.useEffect(() => {

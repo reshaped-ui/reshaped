@@ -10,6 +10,7 @@ import SliderThumb from "./SliderThumb";
 import { applyStepToValue, getDragCoord } from "./Slider.utilities";
 import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
+import useHandlerRef from "hooks/useHandlerRef";
 
 const THUMB_SIZE = 16;
 
@@ -27,6 +28,8 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		attributes,
 		orientation = "horizontal",
 	} = props;
+	const onChangeRef = useHandlerRef(onChange);
+	const onChangeCommitRef = useHandlerRef(onChangeCommit);
 	const vertical = orientation === "vertical";
 	const minValue =
 		range && props.minValue !== undefined ? applyStepToValue(props.minValue, step) : undefined;
@@ -119,27 +122,30 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const handleMinChange: T.ThumbProps["onChange"] = React.useCallback(
 		(value, options) => {
 			if (!range) return;
-			const method = options?.commit ? onChangeCommit : onChange;
 
+			const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
+
+			// @ts-ignore - creating refs out of handler props loses connection to the range flag
 			method?.({ minValue: value, maxValue, name });
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[maxValue, name, range]
+		[maxValue, name, range, onChangeCommitRef, onChangeRef]
 	);
 
 	const handleMaxChange: T.ThumbProps["onChange"] = React.useCallback(
 		(value, options) => {
 			if (range) {
-				const method = options?.commit ? onChangeCommit : onChange;
+				const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
+
+				// @ts-ignore - creating refs out of handler props loses connection to the range flag
 				method?.({ minValue: minValue!, maxValue: value, name });
 				return;
 			}
 
-			const method = options?.commit ? onChangeCommit : onChange;
+			const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
+			// @ts-ignore - creating refs out of handler props loses connection to the range flag
 			method?.({ value, name });
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[minValue, name, range]
+		[minValue, name, range, onChangeRef, onChangeCommitRef]
 	);
 
 	const handleMouseDown = ({ nativeEvent }: React.MouseEvent | React.TouchEvent) => {

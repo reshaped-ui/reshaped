@@ -20,6 +20,7 @@ import {
 	useFlyoutContentContext,
 } from "./Flyout.context";
 import type * as T from "./Flyout.types";
+import useHandlerRef from "hooks/useHandlerRef";
 
 const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const {
@@ -43,6 +44,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		instanceRef,
 		containerRef,
 	} = props;
+	const onOpenRef = useHandlerRef(onOpen);
+	const onCloseRef = useHandlerRef(onClose);
 	const resolvedActive = disabled === true ? false : passedActive;
 	const parentFlyoutContext = useFlyoutContext();
 	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
@@ -97,9 +100,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		const canOpen = !lockedRef.current && status === "idle";
 
 		if (!canOpen) return;
-		onOpen?.();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [status]);
+		onOpenRef.current?.();
+	}, [status, onOpenRef]);
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
@@ -108,11 +110,10 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 			if (!canClose) return;
 
-			onClose?.();
+			onCloseRef.current?.();
 			if (options?.closeParents) parentFlyoutContext?.handleClose?.();
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[status, isDismissible, triggerType]
+		[status, isDismissible, triggerType, onCloseRef, disabled, parentFlyoutContext]
 	);
 
 	/**

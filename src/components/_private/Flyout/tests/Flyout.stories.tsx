@@ -5,7 +5,7 @@ import Reshaped from "components/Reshaped";
 import View from "components/View";
 import Theme from "components/Theme";
 import Button from "components/Button";
-import Flyout from "components/_private/Flyout";
+import Flyout, { FlyoutInstance } from "components/_private/Flyout";
 
 export default { title: "Utilities/Internal/Flyout" };
 
@@ -150,7 +150,9 @@ class CustomElement extends window.HTMLElement {
 	}
 }
 
-window.customElements.define("custom-element", CustomElement);
+if (!window.customElements.get("custom-element")) {
+	window.customElements.define("custom-element", CustomElement);
+}
 
 export const customPortalTarget = () => {
 	const portalRef = React.useRef<HTMLDivElement | null>(null);
@@ -272,18 +274,41 @@ export const testInsideFixed = () => (
 export const testDynamicBounds = () => {
 	const [left, setLeft] = React.useState("50%");
 	const [size, setSize] = React.useState<"medium" | "large">("medium");
+	const flyoutRef = React.useRef<FlyoutInstance>();
+
+	React.useEffect(() => {
+		flyoutRef.current?.updatePosition();
+	}, [left]);
 
 	return (
 		<View gap={4}>
 			<View direction="row" gap={2}>
-				<Button onClick={() => setLeft("0%")}>Left</Button>
-				<Button onClick={() => setLeft("50%")}>Center</Button>
-				<Button onClick={() => setLeft("100%")}>Right</Button>
+				<Button
+					onClick={() => {
+						setLeft("20%");
+					}}
+				>
+					Left
+				</Button>
+				<Button
+					onClick={() => {
+						setLeft("50%");
+					}}
+				>
+					Center
+				</Button>
+				<Button
+					onClick={() => {
+						setLeft("70%");
+					}}
+				>
+					Right
+				</Button>
 				<Button onClick={() => setSize("large")}>Large button</Button>
 				<Button onClick={() => setSize("medium")}>Small button</Button>
 			</View>
 			<View height={100}>
-				<Flyout position="bottom" active>
+				<Flyout position="bottom" active instanceRef={flyoutRef}>
 					<Flyout.Trigger>
 						{(attributes) => (
 							<div style={{ position: "absolute", left, top: "50%" }}>

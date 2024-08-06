@@ -21,25 +21,6 @@ export default {
 	},
 };
 
-export const foo = () => {
-	const { activate, deactivate, active } = useToggle(false);
-
-	return (
-		<>
-			<Button onClick={console.log}>Other</Button>
-			<Button onClick={activate}>Open modal</Button>
-			<Button onClick={console.log}>Other</Button>
-
-			<Modal active={active} onClose={deactivate}>
-				<Slider name="slider" defaultValue={20} onChange={(args) => console.log(args.value)} />
-				<Button onClick={console.log}>Btn 1</Button>
-
-				<Button onClick={console.log}>Btn 2</Button>
-			</Modal>
-		</>
-	);
-};
-
 const Demo = (props: ModalProps & { title?: string; subtitle?: string }) => {
 	const { active: activeProp, title, subtitle, children, ...modalProps } = props;
 	const { active, activate, deactivate } = useToggle(activeProp);

@@ -8,9 +8,11 @@ import getMaxHeightStyles from "styles/maxHeight";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import type * as T from "./ScrollArea.types";
 import s from "./ScrollArea.module.css";
+import useHandlerRef from "hooks/useHandlerRef";
 
 const ScrollAreaBar = (props: T.BarProps) => {
 	const { ratio, position, vertical, onThumbMove } = props;
+	const onThumbMoveRef = useHandlerRef(onThumbMove);
 	const [dragging, setDragging] = React.useState(false);
 	const dragStartPositionRef = React.useRef(0);
 	const barRef = React.useRef<HTMLDivElement | null>(null);
@@ -49,10 +51,9 @@ const ScrollAreaBar = (props: T.BarProps) => {
 			const diff = vertical ? e.movementY : e.movementX;
 			const total = vertical ? elBar.scrollHeight : elBar.scrollWidth;
 
-			onThumbMove({ value: diff / total, type: "relative" });
+			onThumbMoveRef.current?.({ value: diff / total, type: "relative" });
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[ratio, vertical, dragging]
+		[vertical, dragging, onThumbMoveRef]
 	);
 
 	const handleDragEnd = React.useCallback(() => {

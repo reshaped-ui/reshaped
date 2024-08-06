@@ -13,9 +13,12 @@ import useIsDismissible from "hooks/_private/useIsDismissible";
 import Portal from "components/_private/Portal";
 import type * as T from "./Overlay.types";
 import s from "./Overlay.module.css";
+import useHandlerRef from "hooks/useHandlerRef";
 
 const Overlay = (props: T.Props) => {
 	const { active, children, transparent, onClose, onOpen, className, attributes } = props;
+	const onCloseRef = useHandlerRef(onClose);
+	const onOpenRef = useHandlerRef(onOpen);
 	const clickThrough = transparent === true;
 	const opacity = clickThrough ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
@@ -44,9 +47,8 @@ const Overlay = (props: T.Props) => {
 
 	const close = React.useCallback(() => {
 		if (!visible || !isDismissible()) return;
-		if (onClose) onClose();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [visible, isDismissible]);
+		onCloseRef.current?.();
+	}, [visible, isDismissible, onCloseRef]);
 
 	const handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
 		isMouseDownValidRef.current = !isInsideChild(event.target as HTMLElement);
@@ -98,12 +100,11 @@ const Overlay = (props: T.Props) => {
 				| undefined,
 		});
 
-		onOpen?.();
+		onOpenRef.current?.();
 
 		return () => trapFocus.release();
 		// Ignoring onOpen since it might be not memoized when passed
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [rendered]);
+	}, [rendered, onOpenRef]);
 
 	// Unlock scroll on unmount
 	React.useEffect(() => {

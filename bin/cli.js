@@ -10,7 +10,6 @@ const program = new Command();
 
 const importJSConfig = (path) => {
 	console.log(chalk.yellow(`Using Reshaped config at ${path}`));
-	// eslint-disable-next-line global-require,import/no-dynamic-require
 	const config = require(path);
 	return config.default || config;
 };

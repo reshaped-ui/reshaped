@@ -347,7 +347,9 @@
 }
 
 .root.--elevated {
-	box-shadow: var(--rs-shadow-raised);
+	&:not(:focus-visible) {
+		box-shadow: var(--rs-shadow-raised);
+	}
 
 	&.--variant-outline {
 		&.--color-neutral,

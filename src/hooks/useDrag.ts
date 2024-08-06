@@ -5,6 +5,7 @@ import { disableUserSelect, enableUserSelect, disableScroll, enableScroll } from
 import useToggle from "hooks/useToggle";
 import useHotkeys from "hooks/useHotkeys";
 import * as keys from "constants/keys";
+import useHandlerRef from "./useHandlerRef";
 
 export type UseDragCallbackArgs = { x: number; y: number; triggerX: number; triggerY: number };
 
@@ -20,6 +21,7 @@ const useDrag = <
 	}
 ) => {
 	const { disabled, containerRef: passedContainerRef, orientation = "all" } = options || {};
+	const cbRef = useHandlerRef(cb);
 	const toggle = useToggle();
 	const triggerRef = React.useRef<TriggerElement | null>(null);
 	const internalContainerRef = React.useRef<ContainerElement | null>(null);
@@ -86,7 +88,7 @@ const useDrag = <
 			const relativeX = triggerX - triggerCompensationRef.current.x;
 			const relativeY = triggerY - triggerCompensationRef.current.y;
 
-			cb({
+			cbRef.current?.({
 				x: isHorizontal
 					? Math.max(0, Math.min(relativeX, containerRect.width - triggerRect.width))
 					: 0,
@@ -116,8 +118,7 @@ const useDrag = <
 			document.removeEventListener("mousemove", handleDrag);
 			document.removeEventListener("mouseup", handleDragEnd);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [toggle]);
+	}, [toggle, isHorizontal, isVertical, containerRef, cbRef]);
 
 	React.useEffect(() => {
 		const triggerEl = triggerRef.current;
@@ -145,7 +146,6 @@ const useDrag = <
 			triggerEl.removeEventListener("touchstart", handleStart);
 			triggerEl.removeEventListener("mousedown", handleStart);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [toggle, disabled]);
 
 	return { ref: triggerRef, containerRef, active: toggle.active };

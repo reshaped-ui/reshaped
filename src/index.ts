@@ -159,7 +159,7 @@ export { default as Timeline } from "components/Timeline";
 export type { TimelineProps, TimelineItemProps } from "components/Timeline";
 
 export { useToast, ToastProvider } from "components/Toast";
-export type { ToastProps, ToastProviderProps } from "components/Toast";
+export type { ToastProps, ToastProviderProps, ToastShowProps } from "components/Toast";
 
 export { default as Tooltip } from "components/Tooltip";
 export type { TooltipProps } from "components/Tooltip";

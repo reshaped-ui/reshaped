@@ -136,7 +136,9 @@ export const elevated = () => (
 	<Example>
 		<Example.Item title="color: neutral, elevated, variant: solid and outline">
 			<View gap={3} direction="row">
-				<Button elevated>Button</Button>
+				<Button elevated onClick={() => {}}>
+					Button
+				</Button>
 				<Button elevated variant="outline">
 					Button
 				</Button>

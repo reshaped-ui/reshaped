@@ -61,7 +61,9 @@ class CustomElement extends window.HTMLElement {
 	}
 }
 
-window.customElements.define("custom-element", CustomElement);
+if (!window.customElements.get("custom-element")) {
+	window.customElements.define("custom-element", CustomElement);
+}
 
 export const shadowDom = () => {
 	return (

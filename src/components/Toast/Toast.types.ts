@@ -46,21 +46,22 @@ export type ContainerProps = {
 	inspected: boolean;
 };
 
+export type ShowOptions = { timeout?: Timeout; position?: Position };
+export type ShowProps = Props & ShowOptions;
+
 export type Context = {
 	options?: ProviderProps["options"];
 	queues: Record<RegionProps["position"], Array<ContainerProps>>;
-	add: (toast: Props & ShowOptions) => string;
+	add: (toast: ShowProps) => string;
 	show: (id: string) => void;
 	hide: (id: string) => void;
 	remove: (id: string) => void;
 	id: string;
 };
 
-export type ShowOptions = { timeout?: Timeout; position?: Position };
-
 type AddAction = {
 	type: "add";
-	payload: { toastProps: Props & ShowOptions; id: string };
+	payload: { toastProps: ShowProps; id: string };
 };
 type ShowAction = { type: "show"; payload: { id: string } };
 type HideAction = { type: "hide"; payload: { id: string } };
