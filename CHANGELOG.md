@@ -2,6 +2,7 @@
 
 - Reshaped global reset styles in rs.reset
 - Switched to :focus-visible wherever possible
+- Added more theming types with the full definition and token names
 - Modal: attribures.ref support
 - Modal: disableSwipeGesture
 - Slider: vertical orientation

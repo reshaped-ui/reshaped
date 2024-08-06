@@ -64,52 +64,56 @@ export const dynamicPosition = () => (
 	</div>
 );
 
-export const modeDialogClick = () => (
-	<Demo position="bottom-start" trapFocusMode="dialog">
-		<button type="button">Item 1</button>
-		<button type="button">Item 2</button>
-		<button type="button">Close</button>
-	</Demo>
-);
+export const modes = () => (
+	<Example>
+		<Example.Item title="dialog click">
+			<Demo position="bottom-start" trapFocusMode="dialog">
+				<button type="button">Item 1</button>
+				<button type="button">Item 2</button>
+				<button type="button">Close</button>
+			</Demo>
+		</Example.Item>
 
-export const modeActionMenuClick = () => (
-	<Demo position="bottom-start" trapFocusMode="action-menu">
-		<button type="button">Item 1</button>
-		<button type="button">Item 2</button>
-		<button type="button">Close</button>
-	</Demo>
-);
+		<Example.Item title="action-menu click">
+			<Demo position="bottom-start" trapFocusMode="action-menu">
+				<button type="button">Item 1</button>
+				<button type="button">Item 2</button>
+				<button type="button">Close</button>
+			</Demo>
+		</Example.Item>
 
-export const modeContentMenuClick = () => (
-	<Demo position="bottom-start" trapFocusMode="content-menu">
-		<button type="button">Item 1</button>
-		<button type="button">Item 2</button>
-		<button type="button">Close</button>
-	</Demo>
-);
+		<Example.Item title="content-menu click">
+			<Demo position="bottom-start" trapFocusMode="content-menu">
+				<button type="button">Item 1</button>
+				<button type="button">Item 2</button>
+				<button type="button">Close</button>
+			</Demo>
+		</Example.Item>
 
-export const modeDialogHover = () => (
-	<Demo position="bottom-start" trapFocusMode="dialog" triggerType="hover">
-		<button type="button">Item 1</button>
-		<button type="button">Item 2</button>
-		<button type="button">Close</button>
-	</Demo>
-);
+		<Example.Item title="dialog hover">
+			<Demo position="bottom-start" trapFocusMode="dialog" triggerType="hover">
+				<button type="button">Item 1</button>
+				<button type="button">Item 2</button>
+				<button type="button">Close</button>
+			</Demo>
+		</Example.Item>
 
-export const modeActionMenuHover = () => (
-	<Demo position="bottom-start" trapFocusMode="action-menu" triggerType="hover">
-		<button type="button">Item 1</button>
-		<button type="button">Item 2</button>
-		<button type="button">Close</button>
-	</Demo>
-);
+		<Example.Item title="action-menu hover">
+			<Demo position="bottom-start" trapFocusMode="action-menu" triggerType="hover">
+				<button type="button">Item 1</button>
+				<button type="button">Item 2</button>
+				<button type="button">Close</button>
+			</Demo>
+		</Example.Item>
 
-export const modeContentMenuHover = () => (
-	<Demo position="bottom-start" trapFocusMode="content-menu" triggerType="hover">
-		<button type="button">Item 1</button>
-		<button type="button">Item 2</button>
-		<button type="button">Close</button>
-	</Demo>
+		<Example.Item title="content-menu hover">
+			<Demo position="bottom-start" trapFocusMode="content-menu" triggerType="hover">
+				<button type="button">Item 1</button>
+				<button type="button">Item 2</button>
+				<button type="button">Close</button>
+			</Demo>
+		</Example.Item>
+	</Example>
 );
 
 export const disableFlags = () => (

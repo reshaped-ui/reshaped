@@ -16,6 +16,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		handleMouseLeave,
 		handleClick,
 		trapFocusMode,
+		isSubmenu,
 	} = useFlyoutContext();
 
 	let childrenAttributes: Partial<T.TriggerAttributes> = {
@@ -32,7 +33,8 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		childrenAttributes.onMouseLeave = handleMouseLeave;
 	}
 
-	if ((triggerType === "hover" && trapFocusMode !== "action-menu") || triggerType === "focus") {
+	// Submenus open on keypress instead of hover
+	if ((triggerType === "hover" && !isSubmenu) || triggerType === "focus") {
 		childrenAttributes.onFocus = handleFocus;
 		childrenAttributes["aria-describedby"] = id;
 	}

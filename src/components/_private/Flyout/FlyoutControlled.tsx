@@ -238,16 +238,17 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 */
 	useIsomorphicLayoutEffect(() => {
 		if (status !== "visible" || !flyoutElRef.current) return;
+		if (trapFocusRef.current?.trapped) return;
 
 		trapFocusRef.current = new TrapFocus(flyoutElRef.current);
 		trapFocusRef.current.trap({
 			mode: trapFocusMode,
-			includeTrigger: triggerType === "hover" && trapFocusMode === "content-menu",
+			includeTrigger: triggerType === "hover" && trapFocusMode !== "dialog" && !isSubmenu,
 			onNavigateOutside: () => {
 				handleClose();
 			},
 		});
-	}, [status, triggerType, handleClose, trapFocusMode]);
+	}, [status, triggerType, trapFocusMode]);
 
 	React.useEffect(() => {
 		if (!disableHideAnimation && status !== "hidden") return;
