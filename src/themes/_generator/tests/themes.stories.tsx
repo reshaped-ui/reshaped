@@ -284,11 +284,39 @@ const onColorsCss = getThemeCSS(
 	}
 );
 
+const onColorsCssApca = getThemeCSS(
+	"on-color-apca",
+	{
+		color: {
+			backgroundPrimary: { hex: "#1abc9c", hexDark: "#16a085" },
+			backgroundPrimaryHighlighted: { hex: "#16a085", hexDark: "#1abc9c" },
+		},
+	},
+	{
+		colorContrastAlgorithm: "apca",
+		onColorValues: {
+			primary: {
+				hexLight: "#d1fae5",
+				hexDark: "#022c22",
+			},
+		},
+	}
+);
+
 export const onColors = () => (
 	<Example>
 		<Example.Item title="custom on color values">
 			<style>{onColorsCss}</style>
 			<Theme name="on-color">
+				<View gap={2} direction="row">
+					<Button color="primary">Primary button</Button>
+					<Button color="critical">Critical button</Button>
+				</View>
+			</Theme>
+		</Example.Item>
+		<Example.Item title="custom on color values, apca">
+			<style>{onColorsCssApca}</style>
+			<Theme name="on-color-apca">
 				<View gap={2} direction="row">
 					<Button color="primary">Primary button</Button>
 					<Button color="critical">Critical button</Button>

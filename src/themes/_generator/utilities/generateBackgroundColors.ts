@@ -48,11 +48,15 @@ const generateBackgroundColors = (
 
 			const hex = getOnColor({
 				bgHexColor: bgToken.hex!,
+				mode: "light",
+				algorithm: themeOptions?.colorContrastAlgorithm,
 				...onColorHexMap,
 			});
 
 			const hexDark = getOnColor({
 				bgHexColor: bgToken.hexDark || bgToken.hex!,
+				mode: "dark",
+				algorithm: themeOptions?.colorContrastAlgorithm,
 				...onColorHexMap,
 			});
 
