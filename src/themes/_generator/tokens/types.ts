@@ -62,7 +62,7 @@ export type FullThemeDefinition = ThemeDefinition & {
 
 export type TransformedToken = {
 	name: string;
-	tokenType: TokenType | "fontSize" | "lineHeight";
+	tokenType: TokenType | "fontSize" | "lineHeight" | "letterSpacing";
 	value: string;
 	type: "variable" | "media";
 	mode?: "light" | "dark";

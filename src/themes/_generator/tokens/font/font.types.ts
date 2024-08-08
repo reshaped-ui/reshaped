@@ -23,4 +23,5 @@ export type Token = {
 	lineHeight: TUnit.Token;
 	fontFamilyToken?: TFontFamily.Name;
 	fontWeightToken?: TFontWeight.Name;
+	letterSpacing?: TUnit.Token;
 };

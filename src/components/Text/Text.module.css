@@ -36,6 +36,7 @@
 	@value title-1 {
 		font-size: var(--rs-font-size-title-1);
 		line-height: var(--rs-line-height-title-1);
+		letter-spacing: var(--rs-letter-spacing-title-1);
 		font-weight: var(--rs-font-weight-title-1);
 		font-family: var(--rs-font-family-title-1);
 	}
@@ -43,6 +44,7 @@
 	@value title-2 {
 		font-size: var(--rs-font-size-title-2);
 		line-height: var(--rs-line-height-title-2);
+		letter-spacing: var(--rs-letter-spacing-title-2);
 		font-weight: var(--rs-font-weight-title-2);
 		font-family: var(--rs-font-family-title-2);
 	}
@@ -50,6 +52,7 @@
 	@value title-3 {
 		font-size: var(--rs-font-size-title-3);
 		line-height: var(--rs-line-height-title-3);
+		letter-spacing: var(--rs-letter-spacing-title-3);
 		font-weight: var(--rs-font-weight-title-3);
 		font-family: var(--rs-font-family-title-3);
 	}
@@ -57,6 +60,7 @@
 	@value title-4 {
 		font-size: var(--rs-font-size-title-4);
 		line-height: var(--rs-line-height-title-4);
+		letter-spacing: var(--rs-letter-spacing-title-4);
 		font-weight: var(--rs-font-weight-title-4);
 		font-family: var(--rs-font-family-title-4);
 	}
@@ -64,6 +68,7 @@
 	@value title-5 {
 		font-size: var(--rs-font-size-title-5);
 		line-height: var(--rs-line-height-title-5);
+		letter-spacing: var(--rs-letter-spacing-title-5);
 		font-weight: var(--rs-font-weight-title-5);
 		font-family: var(--rs-font-family-title-5);
 	}
@@ -71,6 +76,7 @@
 	@value title-6 {
 		font-size: var(--rs-font-size-title-6);
 		line-height: var(--rs-line-height-title-6);
+		letter-spacing: var(--rs-letter-spacing-title-6);
 		font-weight: var(--rs-font-weight-title-6);
 		font-family: var(--rs-font-family-title-6);
 	}
@@ -78,6 +84,7 @@
 	@value featured-1 {
 		font-size: var(--rs-font-size-featured-1);
 		line-height: var(--rs-line-height-featured-1);
+		letter-spacing: var(--rs-letter-spacing-featured-1);
 		font-weight: var(--rs-font-weight-featured-1);
 		font-family: var(--rs-font-family-featured-1);
 	}
@@ -85,6 +92,7 @@
 	@value featured-2 {
 		font-size: var(--rs-font-size-featured-2);
 		line-height: var(--rs-line-height-featured-2);
+		letter-spacing: var(--rs-letter-spacing-featured-2);
 		font-weight: var(--rs-font-weight-featured-2);
 		font-family: var(--rs-font-family-featured-2);
 	}
@@ -92,6 +100,7 @@
 	@value featured-3 {
 		font-size: var(--rs-font-size-featured-3);
 		line-height: var(--rs-line-height-featured-3);
+		letter-spacing: var(--rs-letter-spacing-featured-3);
 		font-weight: var(--rs-font-weight-featured-3);
 		font-family: var(--rs-font-family-featured-3);
 	}
@@ -99,6 +108,7 @@
 	@value body-1 {
 		font-size: var(--rs-font-size-body-1);
 		line-height: var(--rs-line-height-body-1);
+		letter-spacing: var(--rs-letter-spacing-body-1);
 		font-weight: var(--rs-font-weight-body-1);
 		font-family: var(--rs-font-family-body-1);
 	}
@@ -106,6 +116,7 @@
 	@value body-2 {
 		font-size: var(--rs-font-size-body-2);
 		line-height: var(--rs-line-height-body-2);
+		letter-spacing: var(--rs-letter-spacing-body-2);
 		font-weight: var(--rs-font-weight-body-2);
 		font-family: var(--rs-font-family-body-2);
 	}
@@ -113,6 +124,7 @@
 	@value body-3 {
 		font-size: var(--rs-font-size-body-3);
 		line-height: var(--rs-line-height-body-3);
+		letter-spacing: var(--rs-letter-spacing-body-3);
 		font-weight: var(--rs-font-weight-body-3);
 		font-family: var(--rs-font-family-body-3);
 	}
@@ -120,6 +132,7 @@
 	@value caption-1 {
 		font-size: var(--rs-font-size-caption-1);
 		line-height: var(--rs-line-height-caption-1);
+		letter-spacing: var(--rs-letter-spacing-caption-1);
 		font-weight: var(--rs-font-weight-caption-1);
 		font-family: var(--rs-font-family-caption-1);
 	}
@@ -127,6 +140,7 @@
 	@value caption-2 {
 		font-size: var(--rs-font-size-caption-2);
 		line-height: var(--rs-line-height-caption-2);
+		letter-spacing: var(--rs-letter-spacing-caption-2);
 		font-weight: var(--rs-font-weight-caption-2);
 		font-family: var(--rs-font-family-caption-2);
 	}

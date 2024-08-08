@@ -80,6 +80,7 @@
 			padding-bottom: var(--rs-unit-x1);
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
+			letter-spacing: var(--rs-letter-spacing-body-3);
 		}
 	}
 
@@ -94,6 +95,7 @@
 			padding-bottom: var(--rs-unit-x2);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
 		}
 	}
 
@@ -108,6 +110,7 @@
 			padding-bottom: var(--rs-unit-x3);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
 		}
 	}
 }

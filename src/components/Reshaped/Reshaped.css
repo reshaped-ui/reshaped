@@ -91,6 +91,7 @@
 		/* Use 14px as base for rem values */
 		font-size: 87.5%;
 		line-height: var(--rs-line-height-body-3);
+		letter-spacing: var(--rs-letter-spacing-body-3);
 		font-family: var(--rs-font-family-body);
 		font-weight: var(--rs-font-weight-regular);
 	}
@@ -111,6 +112,7 @@
 [data-rs-theme]:not(html) {
 	font-size: var(--rs-font-size-body-3);
 	line-height: var(--rs-line-height-body-3);
+	letter-spacing: var(--rs-letter-spacing-body-3);
 	font-family: var(--rs-font-family-body);
 	font-weight: var(--rs-font-weight-regular);
 }

@@ -24,6 +24,7 @@
 	font-weight: var(--rs-font-weight-medium);
 	font-size: var(--rs-button-font-size);
 	line-height: var(--rs-button-line-height);
+	letter-spacing: var(--rs-button-letter-spacing);
 	min-height: calc(var(--rs-button-line-height) + var(--rs-p-v) * 2);
 	min-width: calc(
 		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
@@ -112,6 +113,7 @@
 		--rs-button-gap: var(--rs-unit-x1);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
 		--rs-button-radius: var(--rs-radius-small);
 	}
 
@@ -121,6 +123,7 @@
 		--rs-button-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
 		--rs-button-radius: var(--rs-radius-small);
 	}
 
@@ -130,6 +133,7 @@
 		--rs-button-gap: var(--rs-unit-x2);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-button-radius: var(--rs-radius-medium);
 	}
 
@@ -139,6 +143,7 @@
 		--rs-button-gap: var(--rs-unit-x3);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-button-radius: var(--rs-radius-medium);
 	}
 }

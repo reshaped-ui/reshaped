@@ -39,6 +39,13 @@ const transformedToken: Transformer<T.Token> = (name, token) => {
 		});
 	}
 
+	result.push({
+		name,
+		tokenType: "letterSpacing",
+		type: "variable",
+		value: token.letterSpacing ? `${token.letterSpacing.px}px` : "normal",
+	});
+
 	return result;
 };
 

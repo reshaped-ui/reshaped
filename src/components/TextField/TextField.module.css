@@ -119,6 +119,7 @@
 		& .affix {
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
+			letter-spacing: var(--rs-letter-spacing-body-3);
 		}
 	}
 
@@ -136,6 +137,7 @@
 		& .affix {
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
 		}
 	}
 
@@ -153,6 +155,7 @@
 		& .affix {
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
 		}
 	}
 }
