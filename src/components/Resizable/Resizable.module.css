@@ -49,7 +49,6 @@ body:has(.--direction-column > .handle--dragging) {
 
 .--direction {
 	&-row > .handle {
-		height: 100%;
 		cursor: ew-resize;
 
 		&::before,
@@ -74,7 +73,6 @@ body:has(.--direction-column > .handle--dragging) {
 	}
 
 	&-column > .handle {
-		width: 100%;
 		cursor: ns-resize;
 
 		&::before,
