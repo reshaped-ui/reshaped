@@ -135,12 +135,23 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 	document.body.appendChild(targetClone);
 
 	const flyoutBounds = targetClone.getBoundingClientRect();
+	const rootNode = triggerEl?.getRootNode();
+	const isShadowDom = rootNode instanceof ShadowRoot;
+	const shadowHostBounds = isShadowDom ? rootNode.host.getBoundingClientRect() : null;
 	const scrollableParent = container || getClosestFlyoutTarget(triggerEl);
 	const scopeBounds = scrollableParent.getBoundingClientRect();
 
 	const scopeOffset = {
-		top: scopeBounds.top + document.documentElement.scrollTop - scrollableParent.scrollTop,
-		left: scopeBounds.left + document.documentElement.scrollLeft - scrollableParent.scrollLeft,
+		top:
+			scopeBounds.top +
+			document.documentElement.scrollTop -
+			scrollableParent.scrollTop -
+			(shadowHostBounds?.top || 0),
+		left:
+			scopeBounds.left +
+			document.documentElement.scrollLeft -
+			scrollableParent.scrollLeft -
+			(shadowHostBounds?.left || 0),
 	};
 
 	let calculated = calculatePosition({ triggerBounds, flyoutBounds, scopeOffset, ...options });
