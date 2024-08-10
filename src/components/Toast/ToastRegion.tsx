@@ -65,7 +65,7 @@ const ToastRegion = (props: T.RegionProps) => {
 
 	return (
 		// We only use onClick for touch devices since touchend is not supported
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
 		<ul
 			role="region"
 			aria-live="polite"

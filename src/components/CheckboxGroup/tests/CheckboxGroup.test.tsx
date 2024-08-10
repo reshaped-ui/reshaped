@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Checkbox from "components/Checkbox";
 import CheckboxGroup from "components/CheckboxGroup";
 

@@ -1,7 +1,6 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import Theme, { useTheme } from "components/Theme";
-import userEvent from "@testing-library/user-event";
 
 const Component = () => {
 	const { colorMode } = useTheme();

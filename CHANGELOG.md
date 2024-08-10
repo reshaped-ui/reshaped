@@ -1,5 +1,6 @@
 3.1.0
 
+- Updated dependencies, updated eslint
 - Reshaped global reset styles in rs.reset
 - Switched to :focus-visible wherever possible
 - Added more theming types with the full definition and token names

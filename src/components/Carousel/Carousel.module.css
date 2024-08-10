@@ -28,6 +28,7 @@
 }
 
 .scroll {
+	/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 	overflow: auto;
 	-ms-overflow-style: none;
 	/* stylelint-disable-next-line declaration-block-no-duplicate-properties */

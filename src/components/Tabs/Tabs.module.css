@@ -168,12 +168,15 @@
 
 	& .inner {
 		white-space: nowrap;
+
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		overflow: auto;
 
 		/* 1 */
 		margin: 0 calc(var(--rs-unit-x2) * -1) -40px;
 		padding: 0 var(--rs-unit-x2) 40px;
 		-ms-overflow-style: none;
+
 		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		overflow: -moz-scrollbars-none;
 		scrollbar-width: none;

@@ -44,7 +44,7 @@ const CarouselControl = (props: T.ControlProps) => {
 		return () => {
 			if (timer) clearTimeout(timer);
 		};
-	}, [scrollPosition, scrollElRef.current, mounted]);
+	}, [scrollPosition, scrollElRef, mounted, isNext]);
 
 	return (
 		<div className={controlClassNames} aria-hidden="true">

@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import DropdownMenu from "components/DropdownMenu";
 import Button from "components/Button";
 import Reshaped from "components/Reshaped";
