@@ -12,6 +12,7 @@
 - Tooltip: Cooldown for tooltip groups
 - Popover, DropdownMenu, Autocomplete: containerRef
 - Popover, DropdownMenu: updatePosition in instanceRef, added InstanceRef types
+- Popover, Tooltip, DropdownMenu, Autocomplete: ShadowDOM support
 - Text: Responsive weight
 - View: Responsive border color
 - Tooltip, Popover: Disabled content hover

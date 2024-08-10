@@ -132,26 +132,19 @@ const flyout: Flyout = (triggerEl, flyoutEl, options) => {
 		}
 	}
 
-	document.body.appendChild(targetClone);
+	const rootNode = triggerEl?.getRootNode();
+	const shadowRoot = rootNode instanceof ShadowRoot ? rootNode : null;
+
+	// Insert inside shadow root if possible to make sure styles are applied correctly
+	(shadowRoot || document.body).appendChild(targetClone);
 
 	const flyoutBounds = targetClone.getBoundingClientRect();
-	const rootNode = triggerEl?.getRootNode();
-	const isShadowDom = rootNode instanceof ShadowRoot;
-	const shadowHostBounds = isShadowDom ? rootNode.host.getBoundingClientRect() : null;
-	const scrollableParent = container || getClosestFlyoutTarget(triggerEl);
-	const scopeBounds = scrollableParent.getBoundingClientRect();
+	const containerParent = container || getClosestFlyoutTarget(triggerEl);
+	const containerBounds = containerParent.getBoundingClientRect();
 
 	const scopeOffset = {
-		top:
-			scopeBounds.top +
-			document.documentElement.scrollTop -
-			scrollableParent.scrollTop -
-			(shadowHostBounds?.top || 0),
-		left:
-			scopeBounds.left +
-			document.documentElement.scrollLeft -
-			scrollableParent.scrollLeft -
-			(shadowHostBounds?.left || 0),
+		top: containerBounds.top + document.documentElement.scrollTop - containerParent.scrollTop,
+		left: containerBounds.left + document.documentElement.scrollLeft - containerParent.scrollLeft,
 	};
 
 	let calculated = calculatePosition({ triggerBounds, flyoutBounds, scopeOffset, ...options });
