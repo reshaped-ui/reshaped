@@ -136,6 +136,7 @@ export class HotkeyStore {
 
 					if (data.options.preventDefault) {
 						resolvedEvent?.preventDefault();
+						e.preventDefault();
 					}
 
 					data.callback(resolvedEvent);

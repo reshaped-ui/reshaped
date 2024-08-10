@@ -65,6 +65,7 @@ const useDrag = <
 		[],
 		{
 			ref: triggerRef,
+			preventDefault: true,
 			disabled,
 		}
 	);

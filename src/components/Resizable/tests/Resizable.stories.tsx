@@ -94,6 +94,7 @@ export const base = () => (
 					</Resizable>
 				</Resizable.Item>
 			</Resizable>
+			<div style={{ height: 2000 }} />
 		</Example.Item>
 	</Example>
 );

@@ -20,7 +20,6 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 	} = useFlyoutContext();
 
 	let childrenAttributes: Partial<T.TriggerAttributes> = {
-		onBlur: handleBlur,
 		ref: triggerElRef,
 	};
 
@@ -36,6 +35,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 	// Submenus open on keypress instead of hover
 	if ((triggerType === "hover" && !isSubmenu) || triggerType === "focus") {
 		childrenAttributes.onFocus = handleFocus;
+		childrenAttributes.onBlur = handleBlur;
 		childrenAttributes["aria-describedby"] = id;
 	}
 

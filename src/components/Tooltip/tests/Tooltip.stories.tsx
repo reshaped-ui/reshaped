@@ -5,8 +5,6 @@ import Button from "components/Button";
 import View from "components/View";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import Actionable from "components/Actionable";
-import DropdownMenu from "components/DropdownMenu";
-import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Components/Tooltip",
@@ -150,41 +148,39 @@ export const edgeCases = () => (
 		</Example.Item>
 
 		<Example.Item title="nested popovers inside a tooltip">
-			<Tooltip position="top" text="Hello">
-				{(tooltipAttributes) => (
-					<Popover position="bottom">
-						<Popover.Trigger>
-							{(attributes) => (
-								<Button
-									color="primary"
-									attributes={{
-										...tooltipAttributes,
-										...attributes,
-									}}
-								>
-									Open
-								</Button>
-							)}
-						</Popover.Trigger>
-						<Popover.Content>
-							<View gap={2} align="start">
-								Popover content
-								<Popover position="bottom">
-									<Popover.Trigger>
-										{(attributes) => <Button attributes={attributes}>Open</Button>}
-									</Popover.Trigger>
-									<Popover.Content>
-										<View gap={2} align="start">
-											Popover content
-											<Button onClick={() => {}}>Button</Button>
-										</View>
-									</Popover.Content>
-								</Popover>
-							</View>
-						</Popover.Content>
-					</Popover>
-				)}
-			</Tooltip>
+			<View direction="row" gap={2}>
+				<Tooltip position="top" text="Hello">
+					{(tooltipAttributes) => (
+						<Popover position="bottom" width="300px">
+							<Popover.Trigger>
+								{(attributes) => (
+									<Button attributes={{ ...tooltipAttributes, ...attributes }}>
+										Tooltip with popover
+									</Button>
+								)}
+							</Popover.Trigger>
+							<Popover.Content>
+								<View gap={2} align="center" direction="row" justify="space-between">
+									Popover content
+									<Popover position="bottom" width="300px">
+										<Popover.Trigger>
+											{(attributes) => <Button attributes={attributes}>Open</Button>}
+										</Popover.Trigger>
+										<Popover.Content>
+											<Popover.Dismissible align="center" closeAriaLabel="Close">
+												Another popover content
+											</Popover.Dismissible>
+										</Popover.Content>
+									</Popover>
+								</View>
+							</Popover.Content>
+						</Popover>
+					)}
+				</Tooltip>
+				<Tooltip position="top" text="Hello">
+					{(tooltipAttributes) => <Button attributes={tooltipAttributes}>Just a tooltip</Button>}
+				</Tooltip>
+			</View>
 		</Example.Item>
 	</Example>
 );
