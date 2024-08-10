@@ -211,35 +211,6 @@ export const testWidthOverflowOnMobile = () => (
 	</Demo>
 );
 
-export const testInsideScrollArea = () => (
-	<Example>
-		<Example.Item title="should move the content on area scroll">
-			<div style={{ overflow: "scroll", height: 200, margin: 40, position: "relative" }}>
-				<Flyout triggerType="click" position="bottom-start">
-					<Flyout.Trigger>{(attributes) => <button {...attributes}>Foo</button>}</Flyout.Trigger>
-					<Flyout.Content>
-						<div
-							style={{
-								background: "var(--rs-color-background-elevation-overlay)",
-								padding: "var(--rs-unit-x4)",
-								height: 100,
-								width: 160,
-								borderRadius: "var(--rs-radius-medium)",
-								border: "1px solid var(--rs-color-border-neutral-faded)",
-								boxSizing: "border-box",
-							}}
-						>
-							{"Content"}
-						</div>
-					</Flyout.Content>
-				</Flyout>
-				<View height="300px" backgroundColor="neutral-faded" />
-			</div>
-			<div style={{ height: 2000 }} />
-		</Example.Item>
-	</Example>
-);
-
 export const testInsideFixed = () => (
 	<Example>
 		<Example.Item title="should move the content on page scroll">
