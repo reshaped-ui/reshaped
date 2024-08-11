@@ -122,8 +122,11 @@ export const overlay = () => (
 	<Example>
 		<Example.Item title="transparentOverlay, doesn't lock scroll">
 			<Demo transparentOverlay />
-			<View height="1000px" />
 		</Example.Item>
+		<Example.Item title="blurredOverlay">
+			<Demo blurredOverlay />
+		</Example.Item>
+		<View height="1000px" />
 	</Example>
 );
 

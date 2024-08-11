@@ -41,6 +41,10 @@
 	pointer-events: none;
 }
 
+.root.--blurred {
+	backdrop-filter: blur(3px);
+}
+
 .root.--click-through > *:not(.wrapper) {
 	pointer-events: all;
 }

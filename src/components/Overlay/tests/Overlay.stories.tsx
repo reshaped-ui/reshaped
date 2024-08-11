@@ -16,8 +16,9 @@ export default {
 };
 
 export const base = () => {
-	const baseToggle = useToggle(true);
+	const baseToggle = useToggle(false);
 	const transparentToggle = useToggle(false);
+	const blurredToggle = useToggle(false);
 
 	return (
 		<Example>
@@ -26,7 +27,6 @@ export const base = () => {
 				<Overlay active={baseToggle.active} onClose={() => baseToggle.deactivate()}>
 					Overlay content
 				</Overlay>
-				<div style={{ height: 1000 }} />
 			</Example.Item>
 
 			<Example.Item title="transparent, doesn't lock scroll">
@@ -38,8 +38,16 @@ export const base = () => {
 				>
 					Overlay content
 				</Overlay>
-				<div style={{ height: 1000 }} />
 			</Example.Item>
+
+			<Example.Item title="blurred">
+				<Button onClick={() => blurredToggle.activate()}>Open overlay</Button>
+				<Overlay active={blurredToggle.active} onClose={() => blurredToggle.deactivate()} blurred>
+					Overlay content
+				</Overlay>
+			</Example.Item>
+
+			<div style={{ height: 1000 }} />
 		</Example>
 	);
 };

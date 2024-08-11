@@ -67,6 +67,7 @@ const Modal = (props: T.Props) => {
 		padding = 4,
 		position = "center",
 		transparentOverlay,
+		blurredOverlay,
 		ariaLabel,
 		autoFocus = true,
 		disableSwipeGesture,
@@ -233,6 +234,7 @@ const Modal = (props: T.Props) => {
 			disableCloseOnClick={disableCloseOnOutsideClick}
 			active={active}
 			transparent={transparentOverlay || hideProgress}
+			blurred={blurredOverlay}
 			className={overlayClassName}
 			attributes={{
 				onTouchStart: handleDragStart,

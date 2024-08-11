@@ -20,6 +20,7 @@ const Overlay = (props: T.Props) => {
 		active,
 		children,
 		transparent,
+		blurred,
 		onClose,
 		onOpen,
 		disableCloseOnClick,
@@ -42,6 +43,7 @@ const Overlay = (props: T.Props) => {
 		s.root,
 		visible && s["--visible"],
 		clickThrough && s["--click-through"],
+		blurred && s["--blurred"],
 		animated && s["--animated"],
 		className
 	);
