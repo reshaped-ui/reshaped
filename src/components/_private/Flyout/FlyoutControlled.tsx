@@ -70,9 +70,16 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
+	// Check if transition had enough time to start when opening a flyout
+	// In some cases there is not enough time to start, like when you're holding tab key
 	const transitionStartedRef = React.useRef(false);
+	// Lock blur event while pressing anywhere inside the flyout content
 	const lockedBlurEffects = React.useRef(false);
+	// Focus shouldn't retrun back to the trigger when user intentionally clicks outside the flyout
 	const shouldReturnFocusRef = React.useRef(true);
+	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
+	// So we're saving a flag on touch start and then change the mouse enter behavior
+	const hoverTriggeredWithTouchEventRef = React.useRef(false);
 	const flyout = useFlyout(triggerElRef, flyoutElRef, {
 		width,
 		position: passedPosition,
@@ -140,6 +147,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		[handleClose, triggerType, trapFocusMode]
 	);
 
+	const handleTouchStart = React.useCallback(() => {
+		if (triggerType !== "hover") return;
+		hoverTriggeredWithTouchEventRef.current = true;
+	}, [triggerType]);
+
 	const handleFocus = React.useCallback(() => {
 		if (triggerType === "hover" && !checkKeyboardMode()) return;
 		handleOpen();
@@ -147,12 +159,18 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const handleMouseEnter = React.useCallback(() => {
 		clearTimer();
-		timerRef.current = setTimeout(
-			handleOpen,
-			cooldown.timer || isSubmenu ? timeouts.mouseEnterShort : timeouts.mouseEnter
-		);
 
-		if (!isSubmenu && triggerType === "hover") cooldown.warm();
+		if (hoverTriggeredWithTouchEventRef.current) {
+			handleOpen();
+			hoverTriggeredWithTouchEventRef.current = false;
+		} else {
+			timerRef.current = setTimeout(
+				handleOpen,
+				cooldown.timer || isSubmenu ? timeouts.mouseEnterShort : timeouts.mouseEnter
+			);
+
+			if (!isSubmenu && triggerType === "hover") cooldown.warm();
+		}
 	}, [clearTimer, timerRef, handleOpen, isSubmenu, triggerType]);
 
 	const handleMouseLeave = React.useCallback(() => {
@@ -170,8 +188,13 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		}
 	}, [status, handleOpen, handleClose]);
 
-	const handleContentMouseDown = () => (lockedBlurEffects.current = true);
-	const handleContentMouseUp = () => (lockedBlurEffects.current = false);
+	const handleContentMouseDown = () => {
+		lockedBlurEffects.current = true;
+		hoverTriggeredWithTouchEventRef.current = true;
+	};
+	const handleContentMouseUp = () => {
+		lockedBlurEffects.current = false;
+	};
 
 	const handleTransitionStart = React.useCallback(
 		(e: TransitionEvent) => {
@@ -209,6 +232,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		 * - keyboard focus navigation could move too fast and ignore the transitions completely
 		 * - warmed up tooltips get removed instantly
 		 */
+
 		if (
 			checkTransitions() &&
 			!disableHideAnimation &&
@@ -327,6 +351,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				handleBlur,
 				handleMouseEnter,
 				handleMouseLeave,
+				handleTouchStart,
 				handleTransitionStart,
 				handleTransitionEnd,
 				handleClick: handleTriggerClick,

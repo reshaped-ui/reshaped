@@ -14,6 +14,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		handleBlur,
 		handleMouseEnter,
 		handleMouseLeave,
+		handleTouchStart,
 		handleClick,
 		trapFocusMode,
 		isSubmenu,
@@ -30,6 +31,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 	if (triggerType === "hover") {
 		childrenAttributes.onMouseEnter = handleMouseEnter;
 		childrenAttributes.onMouseLeave = handleMouseLeave;
+		childrenAttributes.onTouchStart = handleTouchStart;
 	}
 
 	// Submenus open on keypress instead of hover

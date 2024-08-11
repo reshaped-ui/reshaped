@@ -67,6 +67,7 @@ export type TriggerAttributes = {
 	onFocus?: () => void;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	onTouchStart?: () => void;
 	onClick?: () => void;
 	"aria-describedby"?: string;
 	"aria-haspopup"?: "dialog" | "menu" | "listbox";
@@ -130,6 +131,7 @@ export type ContextProps = {
 	handleClick: () => void;
 	handleBlur: (e: React.FocusEvent) => void;
 	handleFocus: () => void;
+	handleTouchStart: () => void;
 	handleContentMouseDown: () => void;
 	handleContentMouseUp: () => void;
 	isSubmenu: boolean;
