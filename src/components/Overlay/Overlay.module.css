@@ -2,7 +2,9 @@
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	position: fixed;
-	inset: 0;
+
+	/* Applying blur causes some browsers (e.g. Chrome) to render a 1px border */
+	inset: -1px;
 	z-index: var(--rs-z-index-overlay);
 	color: var(--rs-color-white);
 	background-color: rgba(var(--rs-color-rgb-black), 0);
