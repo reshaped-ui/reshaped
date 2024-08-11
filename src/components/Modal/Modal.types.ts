@@ -25,6 +25,7 @@ export type Props = {
 	padding?: G.Responsive<number>;
 	transparentOverlay?: boolean;
 	disableSwipeGesture?: boolean;
+	disableCloseOnOutsideClick?: boolean;
 	autoFocus?: boolean;
 	ariaLabel?: string;
 	className?: G.ClassName;

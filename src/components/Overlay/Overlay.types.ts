@@ -7,6 +7,7 @@ export type Props = {
 	active?: boolean;
 	onClose?: () => void;
 	onOpen?: () => void;
+	disableCloseOnClick?: boolean;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

@@ -9,7 +9,6 @@ import Switch from "components/Switch";
 import TextField from "components/TextField";
 import useToggle from "hooks/useToggle";
 import Radio from "components/Radio";
-import Slider from "components/Slider";
 
 export default {
 	title: "Components/Modal",
@@ -127,6 +126,16 @@ export const overlay = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const flags = () => {
+	return (
+		<Example>
+			<Example.Item title="disableCloseOnOutsideClick">
+				<Demo disableCloseOnOutsideClick />
+			</Example.Item>
+		</Example>
+	);
+};
 
 export const edgeCases = () => {
 	const menuModalToggle = useToggle();

@@ -16,7 +16,16 @@ import s from "./Overlay.module.css";
 import useHandlerRef from "hooks/useHandlerRef";
 
 const Overlay = (props: T.Props) => {
-	const { active, children, transparent, onClose, onOpen, className, attributes } = props;
+	const {
+		active,
+		children,
+		transparent,
+		onClose,
+		onOpen,
+		disableCloseOnClick,
+		className,
+		attributes,
+	} = props;
 	const onCloseRef = useHandlerRef(onClose);
 	const onOpenRef = useHandlerRef(onOpen);
 	const clickThrough = transparent === true;
@@ -58,7 +67,7 @@ const Overlay = (props: T.Props) => {
 		const isMouseUpValid = !isInsideChild(event.target as HTMLElement);
 		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !clickThrough;
 
-		if (!shouldClose) return;
+		if (!shouldClose || disableCloseOnClick) return;
 		close();
 	};
 

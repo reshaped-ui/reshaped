@@ -7,6 +7,7 @@
 	color: var(--rs-color-white);
 	background-color: rgba(var(--rs-color-rgb-black), 0);
 	opacity: 0;
+	outline: none;
 
 	/* Override default Tailwind reset */
 	cursor: default !important;

@@ -122,6 +122,24 @@ describe("Components/Modal", () => {
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
 	});
 
+	test("ignores close with disableCloseOnOutsideClick", async () => {
+		const handleClose = jest.fn();
+
+		render(
+			<Reshaped>
+				<Modal active onClose={handleClose} disableCloseOnOutsideClick>
+					{fixtures.content}
+				</Modal>
+			</Reshaped>
+		);
+
+		const elOverlay = screen.getByRole("button");
+
+		await userEvent.click(elOverlay);
+
+		expect(handleClose).toHaveBeenCalledTimes(0);
+	});
+
 	test("works with className and attributes", async () => {
 		const Component = () => {
 			const ref = React.useRef<HTMLDivElement | null>(null);

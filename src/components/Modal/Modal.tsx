@@ -70,6 +70,7 @@ const Modal = (props: T.Props) => {
 		ariaLabel,
 		autoFocus = true,
 		disableSwipeGesture,
+		disableCloseOnOutsideClick,
 		overlayClassName,
 		className,
 		attributes,
@@ -229,6 +230,7 @@ const Modal = (props: T.Props) => {
 		<Overlay
 			onClose={onClose}
 			onOpen={onOpen}
+			disableCloseOnClick={disableCloseOnOutsideClick}
 			active={active}
 			transparent={transparentOverlay || hideProgress}
 			className={overlayClassName}

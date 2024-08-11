@@ -8,6 +8,7 @@ import Reshaped from "components/Reshaped";
 const fixtures = {
 	content: "Content",
 	testId: "test-id",
+	className: "test-className",
 };
 
 describe("Utilities/Overlay", () => {
@@ -75,6 +76,40 @@ describe("Utilities/Overlay", () => {
 		await userEvent.click(elButton);
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
 		expect(handleOpenMock).toHaveBeenCalledTimes(1);
+	});
+
+	test("ignores close with disableCloseOnClick", async () => {
+		const handleClose = jest.fn();
+
+		render(
+			<Reshaped>
+				<Overlay active onClose={handleClose} disableCloseOnClick>
+					{fixtures.content}
+				</Overlay>
+			</Reshaped>
+		);
+
+		const elOverlay = screen.getByRole("button");
+
+		await userEvent.click(elOverlay);
+
+		expect(handleClose).toHaveBeenCalledTimes(0);
+	});
+
+	test("works with className and attributes", () => {
+		render(
+			<Reshaped>
+				<Overlay
+					active
+					className={fixtures.className}
+					attributes={{ "data-testid": fixtures.testId }}
+				/>
+			</Reshaped>
+		);
+
+		const el = screen.getByTestId(fixtures.testId);
+
+		expect(el).toHaveClass(fixtures.className);
 	});
 
 	test("renders inside shadow root", () => {
