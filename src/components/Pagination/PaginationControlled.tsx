@@ -22,8 +22,11 @@ const PaginationControlled = (props: T.ControlledProps) => {
 	const selectionRadius = 1;
 	const edgeRadius = 1;
 	const pages = [];
-	const hasHead = selectedPage - selectionRadius > edgeRadius + 2;
-	const hasTail = selectedPage + selectionRadius < total - edgeRadius;
+	const minLengthToSplit = (edgeRadius + 1) * 2 + selectionRadius * 2 + 1;
+	const hasHead = total > minLengthToSplit && selectedPage - selectionRadius > edgeRadius + 2;
+	const hasTail = total > minLengthToSplit && selectedPage + selectionRadius < total - edgeRadius;
+
+	console.log({ selectedPage, selectionRadius, edgeRadius, hasHead, hasTail });
 
 	/**
 	 * Calculate the amount of rendered pages + dots

@@ -40,6 +40,14 @@ export const truncate = () => {
 					pageAriaLabel={(args) => `Page ${args.page}`}
 				/>
 			</Example.Item>
+			<Example.Item title="no truncation">
+				<Pagination
+					total={4}
+					previousAriaLabel="Previous page"
+					nextAriaLabel="Next page"
+					pageAriaLabel={(args) => `Page ${args.page}`}
+				/>
+			</Example.Item>
 		</Example>
 	);
 };

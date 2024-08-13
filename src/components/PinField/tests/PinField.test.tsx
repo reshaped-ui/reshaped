@@ -136,14 +136,16 @@ describe("Components/PinField", () => {
 			expect(elInput.selectionEnd).toEqual(4);
 		});
 
-		await userEvent.keyboard("{ArrowLeft}{ArrowLeft}{ArrowLeft}");
+		await userEvent.keyboard(
+			"{ArrowLeft}{/ArrowLeft}{ArrowLeft}{/ArrowLeft}{ArrowLeft}{/ArrowLeft}"
+		);
 
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(0);
 			expect(elInput.selectionEnd).toEqual(1);
 		});
 
-		await userEvent.keyboard("{ArrowRight}{ArrowRight}");
+		await userEvent.keyboard("{ArrowRight}{/ArrowRight}{ArrowRight}{/ArrowRight}");
 
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(2);
@@ -151,7 +153,7 @@ describe("Components/PinField", () => {
 		});
 
 		expect(elInput).toHaveValue("1234");
-		await userEvent.keyboard("{backspace}");
+		await userEvent.keyboard("{backspace}{/backspace}");
 		expect(elInput).toHaveValue("124");
 
 		await waitFor(() => {
@@ -160,14 +162,14 @@ describe("Components/PinField", () => {
 		});
 
 		// Switched to type mode
-		await userEvent.keyboard("[ArrowRight]");
+		await userEvent.keyboard("{ArrowRight}{/ArrowRight}");
 
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(3);
 		});
 
 		// Can't move further
-		await userEvent.keyboard("[ArrowRight]");
+		await userEvent.keyboard("{ArrowRight}{/ArrowRight}");
 		expect(elInput.selectionStart).toEqual(3);
 	});
 
