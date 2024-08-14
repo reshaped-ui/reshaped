@@ -65,6 +65,7 @@ export type TriggerAttributes = {
 	ref: React.RefObject<HTMLButtonElement>;
 	onBlur?: (e: React.FocusEvent) => void;
 	onFocus?: () => void;
+	onMouseDown?: () => void;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
 	onTouchStart?: () => void;
@@ -126,6 +127,7 @@ export type ContextProps = {
 	handleOpen: () => void;
 	handleMouseEnter: () => void;
 	handleMouseLeave: () => void;
+	handleMouseDown: () => void;
 	handleTransitionEnd: (e: React.TransitionEvent) => void;
 	handleTransitionStart: (e: TransitionEvent) => void;
 	handleClick: () => void;

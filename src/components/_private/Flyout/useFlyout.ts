@@ -17,7 +17,13 @@ type PassedFlyoutOptions = {
 	container?: HTMLElement | null;
 };
 
-type Flyout = (origin: HTMLElement, target: HTMLElement, options: T.Options) => T.FlyoutData;
+type Flyout = (
+	args: T.Options & {
+		triggerEl: HTMLElement;
+		flyoutEl: HTMLElement;
+		triggerBounds?: DOMRect | null;
+	}
+) => T.FlyoutData;
 
 type FlyoutRenderAction = { type: "render"; payload?: never };
 type FlyoutPositionAction = {
@@ -35,9 +41,11 @@ type FlyoutAction =
 	| FlyoutRemoveAction;
 
 type UseFlyout = (
-	originRef: ElementRef,
-	targetRef: ElementRef,
-	options: PassedFlyoutOptions
+	args: PassedFlyoutOptions & {
+		triggerElRef: ElementRef;
+		flyoutElRef: ElementRef;
+		triggerBoundsRef: React.RefObject<DOMRect | undefined>;
+	}
 ) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
 	render: () => void;
@@ -111,10 +119,11 @@ const resetStyles: T.Styles = {
 /**
  * Set position of the target element to fit on the screen
  */
-const flyout: Flyout = (triggerEl, flyoutEl, options) => {
+const flyout: Flyout = (args) => {
+	const { triggerEl, flyoutEl, triggerBounds: passedTriggerBounds, ...options } = args;
 	const { position, forcePosition, width, container } = options;
 	const targetClone = flyoutEl.cloneNode(true) as any;
-	const triggerBounds = triggerEl.getBoundingClientRect();
+	const triggerBounds = passedTriggerBounds || triggerEl.getBoundingClientRect();
 
 	// Reset all styles applied on the previous hook execution
 	targetClone.style = "";
@@ -219,7 +228,8 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 	}
 };
 
-const useFlyout: UseFlyout = (originRef, targetRef, options) => {
+const useFlyout: UseFlyout = (args) => {
+	const { triggerElRef, flyoutElRef, triggerBoundsRef, ...options } = args;
 	const { position: defaultPosition = "bottom", forcePosition, width, container } = options;
 	const [isRTL] = useRTL();
 	const [state, dispatch] = React.useReducer(flyoutReducer, {
@@ -246,9 +256,12 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 
 	const updatePosition = React.useCallback(
 		(options?: { sync?: boolean }) => {
-			if (!originRef.current || !targetRef.current) return;
+			if (!triggerElRef.current || !flyoutElRef.current) return;
 
-			const nextFlyoutData = flyout(originRef.current, targetRef.current, {
+			const nextFlyoutData = flyout({
+				triggerEl: triggerElRef.current,
+				flyoutEl: flyoutElRef.current,
+				triggerBounds: triggerBoundsRef.current,
 				width,
 				position: defaultPosition,
 				forcePosition,
@@ -259,7 +272,16 @@ const useFlyout: UseFlyout = (originRef, targetRef, options) => {
 			if (nextFlyoutData)
 				dispatch({ type: "position", payload: { ...nextFlyoutData, sync: options?.sync } });
 		},
-		[container, defaultPosition, forcePosition, isRTL, originRef, targetRef, width]
+		[
+			container,
+			defaultPosition,
+			forcePosition,
+			isRTL,
+			flyoutElRef,
+			triggerElRef,
+			triggerBoundsRef,
+			width,
+		]
 	);
 
 	React.useEffect(() => {

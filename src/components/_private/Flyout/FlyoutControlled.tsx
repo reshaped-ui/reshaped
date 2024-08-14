@@ -65,6 +65,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const triggerElRef =
 		(!parentFlyoutContentContext && parentFlyoutTriggerContext?.triggerElRef) ||
 		internalTriggerElRef;
+	const triggerBoundsRef = React.useRef<DOMRect>();
 	const flyoutElRef = React.useRef<HTMLDivElement | null>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
@@ -80,7 +81,10 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
-	const flyout = useFlyout(triggerElRef, flyoutElRef, {
+	const flyout = useFlyout({
+		triggerElRef,
+		flyoutElRef,
+		triggerBoundsRef,
 		width,
 		position: passedPosition,
 		defaultActive: resolvedActive,
@@ -147,15 +151,15 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		[handleClose, triggerType, trapFocusMode]
 	);
 
-	const handleTouchStart = React.useCallback(() => {
-		if (triggerType !== "hover") return;
-		hoverTriggeredWithTouchEventRef.current = true;
-	}, [triggerType]);
-
 	const handleFocus = React.useCallback(() => {
 		if (triggerType === "hover" && !checkKeyboardMode()) return;
 		handleOpen();
 	}, [handleOpen, triggerType]);
+
+	const handleTouchStart = React.useCallback(() => {
+		if (triggerType !== "hover") return;
+		hoverTriggeredWithTouchEventRef.current = true;
+	}, [triggerType]);
 
 	const handleMouseEnter = React.useCallback(() => {
 		clearTimer();
@@ -187,6 +191,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			handleClose();
 		}
 	}, [status, handleOpen, handleClose]);
+
+	const handleTriggerMouseDown = React.useCallback(() => {
+		const rect = triggerElRef.current?.getBoundingClientRect();
+		triggerBoundsRef.current = rect;
+	}, [triggerElRef]);
 
 	const handleContentMouseDown = () => {
 		lockedBlurEffects.current = true;
@@ -354,6 +363,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				handleTouchStart,
 				handleTransitionStart,
 				handleTransitionEnd,
+				handleMouseDown: handleTriggerMouseDown,
 				handleClick: handleTriggerClick,
 				handleContentMouseDown,
 				handleContentMouseUp,

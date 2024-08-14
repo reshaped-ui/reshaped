@@ -26,8 +26,6 @@ const PaginationControlled = (props: T.ControlledProps) => {
 	const hasHead = total > minLengthToSplit && selectedPage - selectionRadius > edgeRadius + 2;
 	const hasTail = total > minLengthToSplit && selectedPage + selectionRadius < total - edgeRadius;
 
-	console.log({ selectedPage, selectionRadius, edgeRadius, hasHead, hasTail });
-
 	/**
 	 * Calculate the amount of rendered pages + dots
 	 * Removing head or tail also removes their dots
