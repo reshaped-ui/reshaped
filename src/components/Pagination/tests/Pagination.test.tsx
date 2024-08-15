@@ -39,7 +39,7 @@ describe("Components/Pagination", () => {
 		expect(firstPageButton).toHaveAttribute("aria-current", "true");
 	});
 
-	test("truncating works correctly", async () => {
+	test("truncation works correctly", async () => {
 		render(
 			<Pagination
 				total={100}
@@ -78,6 +78,22 @@ describe("Components/Pagination", () => {
 		expect(elsPage[5]).toHaveAttribute("aria-current", "true");
 		expect(prevButton).not.toBeDisabled();
 		expect(nextButton).toBeDisabled();
+	});
+
+	test("truncation gets disabled", () => {
+		render(
+			<Pagination
+				total={4}
+				previousAriaLabel={fixtures.previousAriaLabel}
+				nextAriaLabel={fixtures.nextAriaLabel}
+				pageAriaLabel={(args) => `Page ${args.page}`}
+			/>
+		);
+
+		const elsButton = screen.getAllByRole("button");
+
+		// 4 pages + 2 navigation controls
+		expect(elsButton.length).toBe(6);
 	});
 
 	test("works as uncontrolled", async () => {

@@ -32,7 +32,9 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	const hasClickHandler = onClick || (attributes?.onClick as T.Props["onClick"]);
 	const hasFocusHandler = attributes?.onFocus || attributes?.onBlur;
 	const isLink = Boolean(href || attributes?.href);
-	const isButton = Boolean(hasClickHandler || hasFocusHandler || type);
+	// Including attributes ref for the cases when event listeners are added through it
+	// To make sure it doesn't render a span
+	const isButton = Boolean(hasClickHandler || hasFocusHandler || type || attributes?.ref);
 	const renderedAsButton = !isLink && isButton && (!as || as === "button");
 	let TagName: any;
 

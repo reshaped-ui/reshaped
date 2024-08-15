@@ -122,11 +122,13 @@ describe("Components/PinField", () => {
 		});
 
 		expect(elInput.selectionStart).toEqual(0);
+		expect(elInput.selectionEnd).toEqual(0);
 
 		await userEvent.keyboard("1");
 
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(1);
+			expect(elInput.selectionEnd).toEqual(1);
 		});
 
 		await userEvent.keyboard("234");
@@ -136,15 +138,30 @@ describe("Components/PinField", () => {
 			expect(elInput.selectionEnd).toEqual(4);
 		});
 
-		await userEvent.keyboard("{ArrowLeft}{ArrowLeft}{ArrowLeft}");
-
+		// Move back to the first character
+		await userEvent.keyboard("{ArrowLeft}");
+		await waitFor(() => {
+			expect(elInput.selectionStart).toEqual(2);
+			expect(elInput.selectionEnd).toEqual(3);
+		});
+		await userEvent.keyboard("{ArrowLeft}");
+		await waitFor(() => {
+			expect(elInput.selectionStart).toEqual(1);
+			expect(elInput.selectionEnd).toEqual(2);
+		});
+		await userEvent.keyboard("{ArrowLeft}");
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(0);
 			expect(elInput.selectionEnd).toEqual(1);
 		});
 
-		await userEvent.keyboard("{ArrowRight}{ArrowRight}");
-
+		// Move to the third character
+		await userEvent.keyboard("{ArrowRight}");
+		await waitFor(() => {
+			expect(elInput.selectionStart).toEqual(1);
+			expect(elInput.selectionEnd).toEqual(2);
+		});
+		await userEvent.keyboard("{ArrowRight}");
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(2);
 			expect(elInput.selectionEnd).toEqual(3);
@@ -160,15 +177,19 @@ describe("Components/PinField", () => {
 		});
 
 		// Switched to type mode
-		await userEvent.keyboard("[ArrowRight]");
+		await userEvent.keyboard("{ArrowRight}");
 
 		await waitFor(() => {
+			expect(elInput.selectionStart).toEqual(3);
 			expect(elInput.selectionStart).toEqual(3);
 		});
 
 		// Can't move further
-		await userEvent.keyboard("[ArrowRight]");
-		expect(elInput.selectionStart).toEqual(3);
+		await userEvent.keyboard("{ArrowRight}");
+		await waitFor(() => {
+			expect(elInput.selectionStart).toEqual(3);
+			expect(elInput.selectionStart).toEqual(3);
+		});
 	});
 
 	test("supports FormControl", () => {

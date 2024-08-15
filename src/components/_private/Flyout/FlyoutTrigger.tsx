@@ -14,6 +14,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		handleBlur,
 		handleMouseEnter,
 		handleMouseLeave,
+		handleMouseDown,
 		handleTouchStart,
 		handleClick,
 		trapFocusMode,
@@ -26,6 +27,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 
 	if (triggerType === "click" || trapFocusMode === "action-menu") {
 		childrenAttributes.onClick = handleClick;
+		childrenAttributes.onMouseDown = handleMouseDown;
 	}
 
 	if (triggerType === "hover") {
