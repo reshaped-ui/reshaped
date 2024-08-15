@@ -1,5 +1,4 @@
 import React from "react";
-import { act } from "react-dom/test-utils";
 import { render, waitFor } from "@testing-library/react";
 import Reshaped from "components/Reshaped";
 import useRTL from "hooks/useRTL";
@@ -8,7 +7,7 @@ const Component = () => {
 	const [rtl, setRTL] = useRTL();
 
 	React.useEffect(() => {
-		act(() => setRTL(true));
+		React.act(() => setRTL(true));
 	}, [setRTL]);
 
 	return <div>{rtl}</div>;
