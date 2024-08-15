@@ -18,20 +18,6 @@
 	text-wrap: balance;
 }
 
-@responsive .--align {
-	@value start {
-		text-align: start;
-	}
-
-	@value center {
-		text-align: center;
-	}
-
-	@value end {
-		text-align: end;
-	}
-}
-
 @responsive .--variant {
 	@value title-1 {
 		font-size: var(--rs-font-size-title-1);

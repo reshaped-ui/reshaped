@@ -17,6 +17,7 @@ import getPositionStyles from "styles/position";
 import getInsetStyles from "styles/inset";
 import getAspectRatioStyles from "styles/aspectRatio";
 import getBorderStyles from "styles/border";
+import getTextAlignStyles from "styles/textAlign";
 
 const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
 	const {
@@ -131,6 +132,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 	const insetEndStyles = getInsetStyles(insetEnd, "end");
 	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
 	const borderStyles = getBorderStyles(borderColor);
+	const textAlignStyles = getTextAlignStyles(textAlign);
 
 	let renderedItemIndex = 0;
 	// If wrap is not defined, it can be set based on item grow and split usage
@@ -241,7 +243,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		insetStartStyles?.classNames,
 		insetEndStyles?.classNames,
 		borderStyles?.classNames,
-		textAlign && s[`--align-text-${textAlign}`],
+		textAlignStyles?.classNames,
 		backgroundColor && s[`--bg-${backgroundColor}`],
 		shadow && s[`--shadow-${shadow}`],
 		overflow && s[`--overflow-${overflow}`],

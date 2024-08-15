@@ -1,6 +1,7 @@
 import React from "react";
 import * as G from "types/global";
 
+export type TextAlign = "start" | "center" | "end";
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
 export type BorderColor =

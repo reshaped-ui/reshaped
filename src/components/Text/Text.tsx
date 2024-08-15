@@ -1,4 +1,5 @@
 import { classNames, responsiveClassNames } from "utilities/helpers";
+import getTextAlignStyles from "styles/textAlign";
 import type * as T from "./Text.types";
 import s from "./Text.module.css";
 
@@ -26,6 +27,8 @@ const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
 	} = props;
 	const largestVariant =
 		typeof variant === "string" ? variant : variant?.xl || variant?.l || variant?.m || variant?.s;
+	const alignStyles = getTextAlignStyles(align);
+
 	/**
 	 * Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
 	 * It still resolves the attributes correctly based on the tag
@@ -35,12 +38,12 @@ const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
 		s.root,
 		color && s[`--color-${color}`],
 		...responsiveClassNames(s, "--variant", variant),
-		...responsiveClassNames(s, "--align", align),
 		...responsiveClassNames(s, "--weight", weight),
 		decoration && s[`--decoration-${decoration}`],
 		maxLines !== undefined && s[`--clamp`],
 		maxLines === 1 && s["--break-all"],
 		wrap && s[`--wrap-${wrap}`],
+		alignStyles?.classNames,
 		className
 	);
 	const style = {

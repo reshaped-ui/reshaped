@@ -1,0 +1,13 @@
+@responsive .--text-align {
+	@value start {
+		text-align: start;
+	}
+
+	@value center {
+		text-align: center;
+	}
+
+	@value end {
+		text-align: end;
+	}
+}

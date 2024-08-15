@@ -29,7 +29,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	paddingInline?: G.Responsive<number>;
 	paddingBlock?: G.Responsive<number>;
 	bleed?: G.Responsive<number>;
-	textAlign?: "center" | "start" | "end";
+	textAlign?: G.Responsive<TStyles.TextAlign>;
 	backgroundColor?:
 		| "neutral"
 		| "neutral-faded"

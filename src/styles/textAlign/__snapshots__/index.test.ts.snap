@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/TextAlign handles responsive value 1`] = `
+{
+  "classNames": [
+    "--text-align-start",
+    "--text-align-center--m",
+    "--text-align-end--l",
+  ],
+}
+`;
+
+exports[`Styles/TextAlign handles undefined value 1`] = `null`;
+
+exports[`Styles/TextAlign handles value 1`] = `
+{
+  "classNames": [
+    "--text-align-start",
+  ],
+}
+`;

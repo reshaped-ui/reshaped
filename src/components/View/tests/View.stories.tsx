@@ -401,6 +401,10 @@ export const textAlign = () => (
 		<Example.Item title="textAlign: end">
 			<View textAlign="end">Content</View>
 		</Example.Item>
+
+		<Example.Item title="textAlign: [s] start, [m+] end">
+			<View textAlign={{ s: "start", m: "end" }}>Content</View>
+		</Example.Item>
 	</Example>
 );
 
