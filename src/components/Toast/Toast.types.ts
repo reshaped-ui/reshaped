@@ -15,7 +15,7 @@ export type Props = {
 	text?: React.ReactNode;
 	children?: React.ReactNode;
 	actionsSlot?: React.ReactNode;
-	color?: "neutral" | "primary" | "critical" | "positive" | "inverted";
+	color?: "neutral" | "primary" | "critical" | "positive" | "warning" | "inverted";
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

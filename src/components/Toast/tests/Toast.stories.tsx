@@ -249,6 +249,24 @@ const Color = () => {
 					Show toast
 				</Button>
 			</Example.Item>
+			<Example.Item title="color: warning">
+				<Button
+					onClick={() => {
+						const id = toast.show({
+							text: "Event completed",
+							color: "warning",
+							title: "Hey!",
+							icon: IconZap,
+							actionsSlot: [
+								<Button onClick={() => toast.hide(id)}>Close</Button>,
+								<Button onClick={() => toast.hide(id)}>Close</Button>,
+							],
+						});
+					}}
+				>
+					Show toast
+				</Button>
+			</Example.Item>
 		</Example>
 	);
 };
