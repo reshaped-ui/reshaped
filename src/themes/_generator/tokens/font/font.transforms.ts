@@ -2,7 +2,7 @@ import type * as T from "./font.types";
 import type { Transformer, TransformedToken } from "../types";
 import { getVariableName } from "../../utilities/css";
 
-const BASE_REM_SIZE = 14;
+const BASE_REM_SIZE = 16;
 
 const transformedToken: Transformer<T.Token> = (name, token) => {
 	const result: TransformedToken[] = [];

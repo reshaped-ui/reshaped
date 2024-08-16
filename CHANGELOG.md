@@ -1,5 +1,7 @@
 3.2.0
 
+- Theming: Updated rem calculations to be based on 16px
+
 - Pagination: Fixed truncation for total < 8
 - PinField, source: Updated keyboard tests
 - Flyout: Correctly calculate position for scaled down triggers
