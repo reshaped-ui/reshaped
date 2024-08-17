@@ -15,7 +15,7 @@ const FileUploadTrigger = (props: T.TriggerProps) => {
 };
 
 const FileUpload = (props: T.Props) => {
-	const { name, children, className, attributes, inputAttributes, onChange } = props;
+	const { name, children, height, className, attributes, inputAttributes, onChange } = props;
 	const highlightToggle = useToggle();
 	const rootClassNames = classNames(
 		s.root,
@@ -57,13 +57,16 @@ const FileUpload = (props: T.Props) => {
 	};
 
 	return (
-		<div
-			{...attributes}
+		<View
 			className={rootClassNames}
-			onDragOver={handleDragOver}
-			onDragEnter={handleDragEnter}
-			onDragLeave={handleDragLeave}
-			onDrop={handleDrop}
+			height={height}
+			attributes={{
+				...attributes,
+				onDragOver: handleDragOver,
+				onDragEnter: handleDragEnter,
+				onDragLeave: handleDragLeave,
+				onDrop: handleDrop,
+			}}
 		>
 			<View
 				as="label"
@@ -72,8 +75,10 @@ const FileUpload = (props: T.Props) => {
 				borderRadius="medium"
 				gap={2}
 				align="center"
+				justify="center"
 				textAlign="center"
 				animated
+				height="100%"
 			>
 				<View.Item>{children}</View.Item>
 				<HiddenVisually>
@@ -86,7 +91,7 @@ const FileUpload = (props: T.Props) => {
 					/>
 				</HiddenVisually>
 			</View>
-		</div>
+		</View>
 	);
 };
 

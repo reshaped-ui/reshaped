@@ -65,3 +65,16 @@ export const base = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const height = () => (
+	<Example>
+		<Example.Item title="Custom height">
+			<FileUpload name="file" height="300px">
+				<View gap={3}>
+					<Icon svg={IconMic} size={8} />
+					Drop files to attach
+				</View>
+			</FileUpload>
+		</Example.Item>
+	</Example>
+);

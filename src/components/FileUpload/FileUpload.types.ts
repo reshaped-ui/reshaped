@@ -1,4 +1,5 @@
 import type React from "react";
+import type { ViewProps } from "components/View";
 import type * as G from "types/global";
 
 export type Props = {
@@ -8,6 +9,7 @@ export type Props = {
 		File[],
 		React.DragEvent<HTMLDivElement> | React.ChangeEvent<HTMLInputElement>
 	>;
+	height?: ViewProps["height"];
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 	inputAttributes?: G.Attributes<"input">;
