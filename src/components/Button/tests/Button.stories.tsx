@@ -653,7 +653,7 @@ export const aligner = () => (
 export const composition = () => (
 	<Example>
 		<Example.Item title="slot gap">
-			<Button variant="faded">
+			<Button variant="outline">
 				<Avatar size={6} initials="RS" />
 				Label
 				<Hotkey>B</Hotkey>

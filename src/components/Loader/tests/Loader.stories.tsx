@@ -23,10 +23,7 @@ export const size = () => {
 				<Loader size="small" attributes={{ "data-foo": "23" }} />
 			</Example.Item>
 			<Example.Item title={["responsive size", "[s] small", "[m+] medium"]}>
-				<Loader
-					size={{ s: "small", m: "medium" }}
-					attributes={{ style: { margin: 20, "--foo": 2 } }}
-				/>
+				<Loader size={{ s: "small", m: "medium" }} />
 			</Example.Item>
 		</Example>
 	);

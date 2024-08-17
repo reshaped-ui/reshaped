@@ -56,7 +56,7 @@
 }
 
 .--row-highlighted {
-	background-color: rgba(var(--rs-color-rgb-background-neutral), 40%);
+	background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
 }
 
 .--border-outer .table {

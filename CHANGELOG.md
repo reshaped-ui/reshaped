@@ -1,6 +1,7 @@
 3.2.0
 
 - Theming: Updated rem calculations to be based on 16px
+- Theming: Updated generated bg neutral faded values (slightly more faded)
 
 - Pagination: Fixed truncation for total < 8
 - PinField, source: Updated keyboard tests
@@ -9,3 +10,4 @@
 - View: Responsive textAlign support
 - Toast: Warning color support
 - FileUpload: Added `height` support
+- Table: Aligned highlighted row bg color with other components
