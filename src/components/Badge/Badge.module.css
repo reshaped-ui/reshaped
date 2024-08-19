@@ -19,6 +19,7 @@
 }
 
 .dismiss {
+	border-radius: var(--rs-radius-small);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: opacity;
 }

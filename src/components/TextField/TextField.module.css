@@ -1,24 +1,22 @@
 .root {
-	--rs-p-v: var(--rs-unit-x1);
+	--rs-p-v: var(--rs-unit-x2);
 
 	/* This variable is only used by Aligner */
 	--rs-p-h: var(--rs-text-field-gap);
 
 	display: flex;
+	flex-wrap: wrap;
 	position: relative;
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
-	padding: calc(var(--rs-p-v) - 1px) 0;
+	padding: calc(var(--rs-p-v) - 1px) var(--rs-text-field-gap);
+	gap: var(--rs-text-field-gap);
+	row-gap: var(--rs-p-v);
 
-	&:focus-within {
+	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus)):focus-within {
 		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
 		border-color: var(--rs-color-border-primary);
-	}
-
-	&:focus-within:has(button:focus, a:focus) {
-		box-shadow: none;
-		border-color: transparent;
 	}
 }
 
@@ -31,8 +29,7 @@
 	flex-grow: 1;
 	box-sizing: border-box;
 	color: var(--rs-color-foreground-neutral);
-	width: 100%;
-	margin: calc(var(--rs-unit-x1) * -1) 0;
+	margin: calc(var(--rs-unit-x2) * -1) calc(var(--rs-text-field-gap) * -1);
 	padding: 0 var(--rs-text-field-gap);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
@@ -51,6 +48,7 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
+	min-height: var(--rs-text-field-line-height);
 }
 
 .icon {
@@ -59,35 +57,14 @@
 
 .affix {
 	color: var(--rs-color-foreground-neutral-faded);
-}
+	margin-block: var(--rs-unit-x1);
 
-.attachment {
-	display: flex;
-	align-items: center;
-	flex-shrink: 0;
-}
-
-.attachment--position-start {
-	padding-inline-start: var(--rs-text-field-gap);
-	gap: var(--rs-text-field-gap);
-
-	& .affix {
+	&.affix--position-start {
 		padding-inline-end: var(--rs-text-field-gap);
 		border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
 	}
-}
 
-.attachment--position-end {
-	/* Compensate for the end border */
-	padding-inline-end: calc(var(--rs-unit-x1) - 1px);
-	gap: var(--rs-unit-x1);
-
-	& .icon,
-	& .affix {
-		padding-inline-end: calc(var(--rs-text-field-gap) - var(--rs-unit-x1));
-	}
-
-	& .affix {
+	&.affix--position-end {
 		padding-inline-start: var(--rs-text-field-gap);
 		border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
 	}
@@ -107,6 +84,7 @@
 @responsive .--size {
 	@value medium {
 		--rs-text-field-gap: var(--rs-unit-x2);
+		--rs-text-field-line-height: var(--rs-line-height-body-3);
 
 		border-radius: var(--rs-radius-small);
 
@@ -125,6 +103,7 @@
 
 	@value large {
 		--rs-text-field-gap: var(--rs-unit-x3);
+		--rs-text-field-line-height: var(--rs-line-height-body-2);
 
 		border-radius: var(--rs-radius-medium);
 
@@ -143,6 +122,7 @@
 
 	@value xlarge {
 		--rs-text-field-gap: var(--rs-unit-x4);
+		--rs-text-field-line-height: var(--rs-line-height-body-2);
 
 		border-radius: var(--rs-radius-medium);
 
