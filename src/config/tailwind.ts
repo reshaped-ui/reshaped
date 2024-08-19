@@ -66,17 +66,14 @@ export const getTheme = (theme?: ThemeDefinition) => {
 		config.colors[cssTokenName] = configValue;
 	});
 
-	Object.keys(definition.unit).forEach((tokenName) => {
+	Object.keys(definition.radius).forEach((tokenName) => {
 		const cssTokenName = camelToKebab(tokenName);
-		const cssVariable = ["rs", "unit", cssTokenName].join("-");
-		const configValue = `var(--${cssVariable})`;
 
-		if (tokenName.startsWith("radius")) {
-			const name = cssTokenName.replace("radius-", "");
-			config.borderRadius[name] = configValue;
-			return;
-		}
+		config.borderRadius[tokenName] = `var(--rs-radius-${cssTokenName})`;
+		return;
+	});
 
+	Object.keys(definition.unit).forEach((tokenName) => {
 		if (tokenName.startsWith("base")) {
 			[...Array(11).keys()].forEach((i) => {
 				if (i === 0) {
@@ -85,7 +82,6 @@ export const getTheme = (theme?: ThemeDefinition) => {
 					config.spacing[`x${i}`] = `var(--rs-unit-x${i})`;
 				}
 			});
-			return;
 		}
 	});
 
