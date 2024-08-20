@@ -132,7 +132,6 @@ export const multiselect = () => {
 	return (
 		<>
 			<Autocomplete
-				instanceRef={ref}
 				name="fruit"
 				value={query}
 				placeholder="Pick your food"
