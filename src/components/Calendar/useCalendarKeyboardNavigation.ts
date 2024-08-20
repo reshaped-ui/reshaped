@@ -14,7 +14,7 @@ const useCalendarKeyboardNavigation = (props: {
 }) => {
 	const { rootRef, changeToNextMonth, changeToPreviousMonth, monthDate, verticalDelta, min, max } =
 		props;
-	const overflowCountRef = React.useRef<number>(0);
+	const overflowCountRef = React.useRef(0);
 
 	const focusDate = React.useCallback(
 		(args: { delta: number; onMonthChange: () => void }) => {

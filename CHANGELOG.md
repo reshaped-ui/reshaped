@@ -11,3 +11,6 @@
 - Toast: Warning color support
 - FileUpload: Added `height` support
 - Table: Aligned highlighted row bg color with other components
+- Autocomplete: onBackspace prop
+- TextField: focused prop
+- TextField: multiline prop

@@ -118,7 +118,7 @@ describe("Flyout", () => {
 
 	test("works with custom container", () => {
 		const PortalTargetDemo = () => {
-			const portalRef = React.useRef<HTMLDivElement | null>(null);
+			const portalRef = React.useRef<HTMLDivElement>(null);
 
 			return (
 				<div ref={portalRef} data-testid={fixtures.testId}>

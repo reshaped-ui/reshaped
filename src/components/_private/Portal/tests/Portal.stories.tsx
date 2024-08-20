@@ -4,7 +4,7 @@ import Portal from "components/_private/Portal";
 export default { title: "Utilities/Internal/Portal" };
 
 export const base = () => {
-	const ref = React.useRef<HTMLDivElement | null>(null);
+	const ref = React.useRef<HTMLDivElement>(null);
 	const [mounted, setMounted] = React.useState(false);
 
 	React.useEffect(() => {

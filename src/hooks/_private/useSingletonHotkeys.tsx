@@ -11,14 +11,14 @@ type Context = {
 	isPressed: (key: string) => boolean;
 	addHotkeys: (
 		hotkeys: Hotkeys,
-		ref: React.RefObject<HTMLElement | null>,
+		ref: React.RefObject<HTMLElement>,
 		options?: HotkeyOptions
 	) => (() => void) | undefined;
 };
 
 type HotkeyData = {
 	callback: Callback;
-	ref: React.RefObject<HTMLElement | null>;
+	ref: React.RefObject<HTMLElement>;
 	options: HotkeyOptions;
 };
 
@@ -69,11 +69,7 @@ export class HotkeyStore {
 
 	getSize = () => Object.keys(this.hotkeyMap).length;
 
-	bindHotkeys = (
-		hotkeys: Hotkeys,
-		ref: React.RefObject<HTMLElement | null>,
-		options: HotkeyOptions
-	) => {
+	bindHotkeys = (hotkeys: Hotkeys, ref: React.RefObject<HTMLElement>, options: HotkeyOptions) => {
 		walkHotkeys(hotkeys, (id, hotkeyData) => {
 			if (!hotkeyData) return;
 

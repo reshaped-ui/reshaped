@@ -8,3 +8,4 @@ export const RIGHT = "ArrowRight";
 export const LEFT = "ArrowLeft";
 export const HOME = "Home";
 export const END = "End";
+export const BACKSPACE = "Backspace";

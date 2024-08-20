@@ -9,7 +9,7 @@ const useHotkeys = <Element extends HTMLElement>(
 	options?: { ref?: React.RefObject<Element>; disabled?: boolean; preventDefault?: boolean }
 ) => {
 	const { addHotkeys, isPressed } = useSingletonHotkey();
-	const generatedRef = React.useRef<Element | null>(null);
+	const generatedRef = React.useRef<Element>(null);
 	const elementRef = options?.ref || generatedRef;
 
 	React.useEffect(() => {

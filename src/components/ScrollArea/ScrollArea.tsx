@@ -15,7 +15,7 @@ const ScrollAreaBar = (props: T.BarProps) => {
 	const onThumbMoveRef = useHandlerRef(onThumbMove);
 	const [dragging, setDragging] = React.useState(false);
 	const dragStartPositionRef = React.useRef(0);
-	const barRef = React.useRef<HTMLDivElement | null>(null);
+	const barRef = React.useRef<HTMLDivElement>(null);
 	const barClassNames = classNames(
 		s.scrollbar,
 		vertical ? s["--scrollbar-y"] : s["--scrollbar-x"],
@@ -110,7 +110,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 		} = props;
 		const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
 		const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
-		const scrollableRef = React.useRef<HTMLDivElement | null>(null);
+		const scrollableRef = React.useRef<HTMLDivElement>(null);
 		const resizeObserverRef = React.useRef<ResizeObserver>();
 		const heightStyles = getHeightStyles(height);
 		const maxHeightStyles = getMaxHeightStyles(maxHeight);

@@ -6,6 +6,7 @@ export type Props = TextFieldProps &
 	Pick<DropdownMenuProps, "containerRef"> & {
 		onInput?: TextFieldProps["onChange"];
 		onItemSelect?: (args: { value: string }) => void;
+		onBackspace?: () => void;
 		children: React.ReactNode;
 	};
 

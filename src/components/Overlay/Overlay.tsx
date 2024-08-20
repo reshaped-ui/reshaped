@@ -33,7 +33,7 @@ const Overlay = (props: T.Props) => {
 	const opacity = clickThrough ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
-	const contentRef = React.useRef<HTMLDivElement | null>(null);
+	const contentRef = React.useRef<HTMLDivElement>(null);
 	const isMouseDownValidRef = React.useRef(false);
 	const { lockScroll, unlockScroll } = useScrollLock();
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);

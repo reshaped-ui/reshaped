@@ -14,10 +14,9 @@ const TextFieldSlot = (props: T.SlotProps) => {
 
 	if (!icon && !slot && !affix) return null;
 
-	const attachmentClassNames = classNames(s.attachment, s[`attachment--position-${position}`]);
 	const content = [
 		slot && (
-			<div className={s.slot} key="slot">
+			<div className={classNames(s.slot, s[`slot--position-${position}`])} key="slot">
 				{slot}
 			</div>
 		),
@@ -34,15 +33,13 @@ const TextFieldSlot = (props: T.SlotProps) => {
 			</div>
 		),
 		affix && (
-			<div className={s.affix} key="affix">
+			<div className={classNames(s.affix, s[`affix--position-${position}`])} key="affix">
 				{affix}
 			</div>
 		),
 	].filter(Boolean);
 
-	return (
-		<span className={attachmentClassNames}>{position === "end" ? content.reverse() : content}</span>
-	);
+	return position === "end" ? content.reverse() : content;
 };
 
 const TextField = (props: T.Props) => {
@@ -62,6 +59,8 @@ const TextField = (props: T.Props) => {
 		suffix,
 		size = "medium",
 		variant = "outline",
+		focused,
+		multiline,
 		className,
 		attributes,
 	} = props;
@@ -78,6 +77,8 @@ const TextField = (props: T.Props) => {
 		size && responsiveClassNames(s, "--size", size),
 		hasError && s["--status-error"],
 		disabled && s["--disabled"],
+		focused && s["--focused"],
+		multiline && s["--multiline"],
 		variant && s[`--variant-${variant}`]
 	);
 

@@ -23,7 +23,7 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 		elPrevActiveRef,
 		elScrollableRef,
 	} = useTabs(value);
-	const itemRef = React.useRef<HTMLDivElement | null>(null);
+	const itemRef = React.useRef<HTMLDivElement>(null);
 	const active = tabsValue === value;
 	const visuallySelected = active && selection.status === "idle";
 	const itemClassNames = classNames(s.item, visuallySelected && s["--item-active"]);

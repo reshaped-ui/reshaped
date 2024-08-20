@@ -2,7 +2,7 @@ import React from "react";
 
 export type Props = {
 	children?: React.ReactNode;
-	targetRef?: React.RefObject<HTMLElement | ShadowRoot | null>;
+	targetRef?: React.RefObject<HTMLElement | ShadowRoot>;
 };
 
 export type ScopeProps<T extends HTMLElement> = {
@@ -10,5 +10,5 @@ export type ScopeProps<T extends HTMLElement> = {
 };
 
 export type Context = {
-	scopeRef: React.RefObject<HTMLElement | null>;
+	scopeRef: React.RefObject<HTMLElement>;
 };

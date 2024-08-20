@@ -16,7 +16,7 @@ const fixtures = {
 };
 
 describe("Components/Autocomplete", () => {
-	test("works from keyboard", async () => {
+	test("works with keyboard", async () => {
 		const handleChange = jest.fn();
 		const handleInput = jest.fn();
 		render(
@@ -99,8 +99,29 @@ describe("Components/Autocomplete", () => {
 			await userEvent.click(items[0]);
 		});
 
-		expect(handleChange).toBeCalledTimes(1);
-		expect(handleChange).toBeCalledWith({ name: fixtures.name, value: fixtures.firstValue });
+		expect(handleChange).toHaveBeenCalledTimes(1);
+		expect(handleChange).toHaveBeenCalledWith({ name: fixtures.name, value: fixtures.firstValue });
+	});
+
+	test("triggers onBackspace", async () => {
+		const handleBackspace = jest.fn();
+		render(
+			<Reshaped>
+				<Autocomplete name={fixtures.name} onBackspace={handleBackspace}>
+					<Autocomplete.Item value={fixtures.secondValue}>{fixtures.itemContent}</Autocomplete.Item>
+				</Autocomplete>
+			</Reshaped>
+		);
+
+		const inputEl = screen.getByRole("combobox");
+
+		act(() => {
+			inputEl.focus();
+		});
+
+		await userEvent.keyboard("{Backspace}");
+
+		expect(handleBackspace).toHaveBeenCalledTimes(1);
 	});
 
 	test("applies className and attributes", async () => {

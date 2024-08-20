@@ -23,8 +23,8 @@ const useDrag = <
 	const { disabled, containerRef: passedContainerRef, orientation = "all" } = options || {};
 	const cbRef = useHandlerRef(cb);
 	const toggle = useToggle();
-	const triggerRef = React.useRef<TriggerElement | null>(null);
-	const internalContainerRef = React.useRef<ContainerElement | null>(null);
+	const triggerRef = React.useRef<TriggerElement>(null);
+	const internalContainerRef = React.useRef<ContainerElement>(null);
 	const containerRef = passedContainerRef || internalContainerRef;
 	const triggerCompensationRef = React.useRef({ x: 0, y: 0 });
 	const isVertical = orientation === "vertical" || orientation === "all";

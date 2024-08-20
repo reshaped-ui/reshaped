@@ -142,7 +142,7 @@ describe("Components/Modal", () => {
 
 	test("works with className and attributes", async () => {
 		const Component = () => {
-			const ref = React.useRef<HTMLDivElement | null>(null);
+			const ref = React.useRef<HTMLDivElement>(null);
 			const toggle = useToggle();
 
 			React.useEffect(() => {

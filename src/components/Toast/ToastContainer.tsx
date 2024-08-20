@@ -18,7 +18,7 @@ const ToastContainer = (props: T.ContainerProps) => {
 	const [toastHeight, setToastHeight] = React.useState<number>();
 	const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
 	const resizingRef = React.useRef(false);
-	const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+	const wrapperRef = React.useRef<HTMLDivElement>(null);
 	const visible = status === "entered";
 	const containerClassNames = classNames(
 		s.container,

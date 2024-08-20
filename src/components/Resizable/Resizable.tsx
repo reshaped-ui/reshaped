@@ -37,7 +37,7 @@ const PrivateResizableHandle = (props: T.PrivateHandleProps) => {
 };
 
 const PrivateResizableItem = React.forwardRef(
-	(props: T.PrivateItemProps, ref: React.Ref<HTMLDivElement | null>) => {
+	(props: T.PrivateItemProps, ref: React.Ref<HTMLDivElement>) => {
 		const { children, defaultSize, minSize, maxSize } = props;
 		const itemRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -66,7 +66,7 @@ const PrivateResizableItem = React.forwardRef(
 const Resizable = (props: T.Props) => {
 	const { children, height, direction = "row", gap = 2, className, attributes } = props;
 	const rootClassNames = classNames(s.root, s[`--direction-${direction}`], className);
-	const containerRef = React.useRef<HTMLDivElement | null>(null);
+	const containerRef = React.useRef<HTMLDivElement>(null);
 	const itemsRef = React.useRef<T.ItemsRefProps>([]);
 	const horizontal = direction === "row";
 
