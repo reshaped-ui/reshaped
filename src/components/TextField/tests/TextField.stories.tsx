@@ -63,7 +63,7 @@ export const error = () => (
 	</Example>
 );
 
-export const icon = () => (
+export const attachments = () => (
 	<Example>
 		<Example.Item title="icon">
 			<TextField name="Name" placeholder="Enter your name" value="Reshaped" icon={IconZap} />
@@ -81,6 +81,19 @@ export const icon = () => (
 				icon={IconZap}
 				prefix="Estimated value"
 				suffix="m2"
+			/>
+		</Example.Item>
+
+		<Example.Item title="multine">
+			<TextField
+				name="Name"
+				placeholder="Enter your name"
+				value="Reshaped"
+				endIcon={IconZap}
+				icon={IconZap}
+				prefix="Estimated value"
+				suffix="m2"
+				multiline
 			/>
 		</Example.Item>
 	</Example>
@@ -130,7 +143,7 @@ export const slots = () => (
 				name="Name"
 				placeholder="Enter your name"
 				value="Reshaped"
-				startSlot={<Placeholder h={24} />}
+				startSlot={<Placeholder h={20} />}
 			/>
 		</Example.Item>
 		<Example.Item title={["endSlot", "vertical and horizontal padding aligned"]}>

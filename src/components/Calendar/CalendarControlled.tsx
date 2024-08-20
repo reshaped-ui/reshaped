@@ -40,7 +40,7 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 	const [selectionMode, setSelectionMode] = React.useState<T.SelectionMode>("date");
 	const [monthDate, setMonthDate] = React.useState(defaultMonth || new Date());
 	const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null);
-	const monthTitleRef = React.useRef<HTMLButtonElement | null>(null);
+	const monthTitleRef = React.useRef<HTMLButtonElement>(null);
 	const prevSelectionModeRef = React.useRef<typeof selectionMode>(selectionMode);
 	const bounds = applyNavigationBounds({ date: monthDate, min, max });
 	const selectionRootRef = React.useRef<HTMLDivElement>(null);

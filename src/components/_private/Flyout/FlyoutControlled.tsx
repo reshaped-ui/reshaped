@@ -56,7 +56,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		parentFlyoutContext.trapFocusMode === "content-menu";
 
 	const [isRTL] = useRTL();
-	const internalTriggerElRef = React.useRef<HTMLButtonElement | null>(null);
+	const internalTriggerElRef = React.useRef<HTMLButtonElement>(null);
 
 	/**
 	 * Reuse the parent trigger ref in case we render nested triggers
@@ -66,7 +66,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		(!parentFlyoutContentContext && parentFlyoutTriggerContext?.triggerElRef) ||
 		internalTriggerElRef;
 	const triggerBoundsRef = React.useRef<DOMRect>();
-	const flyoutElRef = React.useRef<HTMLDivElement | null>(null);
+	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);

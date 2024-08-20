@@ -1,22 +1,27 @@
 .root {
-	--rs-p-v: var(--rs-unit-x2);
-
 	/* This variable is only used by Aligner */
 	--rs-p-h: var(--rs-text-field-gap);
 
 	display: flex;
-	flex-wrap: wrap;
 	position: relative;
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
-	padding: calc(var(--rs-p-v) - 1px) var(--rs-text-field-gap);
+	padding: calc(var(--rs-unit-x1) - 1px) var(--rs-text-field-gap);
 	gap: var(--rs-text-field-gap);
-	row-gap: var(--rs-p-v);
+	row-gap: var(--rs-unit-x1);
 
 	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus)):focus-within {
 		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
 		border-color: var(--rs-color-border-primary);
+	}
+
+	&.--multiline {
+		flex-wrap: wrap;
+
+		& .input {
+			width: auto;
+		}
 	}
 }
 
@@ -28,9 +33,10 @@
 	background: none;
 	flex-grow: 1;
 	box-sizing: border-box;
+	width: 100%;
 	color: var(--rs-color-foreground-neutral);
-	margin: calc(var(--rs-unit-x2) * -1) calc(var(--rs-text-field-gap) * -1);
-	padding: 0 var(--rs-text-field-gap);
+	margin: calc(var(--rs-unit-x1) * -1) calc(var(--rs-text-field-gap) * -1);
+	padding-inline: var(--rs-text-field-gap);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 }
@@ -48,7 +54,11 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	min-height: var(--rs-text-field-line-height);
+	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x1) * 2);
+}
+
+.slot--position-end {
+	margin-inline-end: calc(var(--rs-unit-x1) * -1);
 }
 
 .icon {
@@ -57,16 +67,29 @@
 
 .affix {
 	color: var(--rs-color-foreground-neutral-faded);
-	margin-block: var(--rs-unit-x1);
 
 	&.affix--position-start {
 		padding-inline-end: var(--rs-text-field-gap);
-		border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: var(--rs-unit-x1);
+			inset-inline-end: 0;
+			border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
+		}
 	}
 
 	&.affix--position-end {
 		padding-inline-start: var(--rs-text-field-gap);
-		border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: var(--rs-unit-x1);
+			inset-inline-start: 0;
+			border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+		}
 	}
 }
 
@@ -89,8 +112,7 @@
 		border-radius: var(--rs-radius-small);
 
 		& .input {
-			padding-top: var(--rs-unit-x2);
-			padding-bottom: var(--rs-unit-x2);
+			padding-block: var(--rs-unit-x2);
 		}
 
 		& .input,
@@ -108,8 +130,7 @@
 		border-radius: var(--rs-radius-medium);
 
 		& .input {
-			padding-top: var(--rs-unit-x3);
-			padding-bottom: var(--rs-unit-x3);
+			padding-block: var(--rs-unit-x3);
 		}
 
 		& .input,
@@ -127,8 +148,7 @@
 		border-radius: var(--rs-radius-medium);
 
 		& .input {
-			padding-top: var(--rs-unit-x4);
-			padding-bottom: var(--rs-unit-x4);
+			padding-block: var(--rs-unit-x4);
 		}
 
 		& .input,

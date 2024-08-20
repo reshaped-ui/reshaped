@@ -13,7 +13,7 @@ const ToastRegion = (props: T.RegionProps) => {
 	const { queues, options } = React.useContext(ToastContext);
 	const [inspecting, setInspecting] = React.useState(false);
 	const ignoreHoverRef = React.useRef(false);
-	const rootRef = React.useRef<HTMLUListElement | null>(null);
+	const rootRef = React.useRef<HTMLUListElement>(null);
 	const queue = queues[position];
 	const { width, expanded } = options?.[position] || {};
 	const regionClassNames = classNames(

@@ -25,7 +25,7 @@ const Autocomplete = (props: T.Props) => {
 		...textFieldProps
 	} = props;
 	const onBackspaceRef = useHandlerRef(onBackspace);
-	const internalInputRef = React.useRef<HTMLInputElement | null>(null);
+	const internalInputRef = React.useRef<HTMLInputElement>(null);
 	const inputAttributesRef = textFieldProps.inputAttributes?.ref;
 	const inputRef =
 		inputAttributesRef && typeof inputAttributesRef !== "string" && "current" in inputAttributesRef

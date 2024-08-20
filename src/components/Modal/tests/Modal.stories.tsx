@@ -143,7 +143,7 @@ export const flags = () => {
 export const edgeCases = () => {
 	const menuModalToggle = useToggle();
 	const scrollModalToggle = useToggle();
-	const inputRef = React.useRef<HTMLInputElement | null>(null);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	return (
 		<Example>

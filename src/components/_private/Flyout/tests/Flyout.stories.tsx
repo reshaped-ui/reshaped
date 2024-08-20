@@ -159,7 +159,7 @@ if (!window.customElements.get("custom-element")) {
 }
 
 export const customPortalTarget = () => {
-	const portalRef = React.useRef<HTMLDivElement | null>(null);
+	const portalRef = React.useRef<HTMLDivElement>(null);
 
 	return (
 		<Example>

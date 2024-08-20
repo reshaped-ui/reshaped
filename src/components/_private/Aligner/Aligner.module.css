@@ -1,6 +1,6 @@
 .root [data-rs-aligner-target] {
-	--rs-aligner-p-h: var(--rs-p-h, var(--rs-p));
-	--rs-aligner-p-v: var(--rs-p-v, var(--rs-p));
+	--rs-aligner-p-h: var(--rs-p-h, var(--rs-p, 0px));
+	--rs-aligner-p-v: var(--rs-p-v, var(--rs-p, 0px));
 }
 
 .root.--side-all [data-rs-aligner-target] {

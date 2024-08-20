@@ -31,5 +31,5 @@ export type Props = {
 	ariaLabel?: string;
 	className?: G.ClassName;
 	overlayClassName?: G.ClassName;
-	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
+	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement> };
 } & Pick<OverlayProps, "onClose" | "onOpen" | "active">;

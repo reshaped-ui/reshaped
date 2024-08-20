@@ -16,7 +16,7 @@ const TextFieldSlot = (props: T.SlotProps) => {
 
 	const content = [
 		slot && (
-			<div className={s.slot} key="slot">
+			<div className={classNames(s.slot, s[`slot--position-${position}`])} key="slot">
 				{slot}
 			</div>
 		),
@@ -60,6 +60,7 @@ const TextField = (props: T.Props) => {
 		size = "medium",
 		variant = "outline",
 		focused,
+		multiline,
 		className,
 		attributes,
 	} = props;
@@ -77,6 +78,7 @@ const TextField = (props: T.Props) => {
 		hasError && s["--status-error"],
 		disabled && s["--disabled"],
 		focused && s["--focused"],
+		multiline && s["--multiline"],
 		variant && s[`--variant-${variant}`]
 	);
 

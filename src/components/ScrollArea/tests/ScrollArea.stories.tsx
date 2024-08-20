@@ -15,7 +15,7 @@ export default {
 };
 
 const Demo = () => {
-	const ref = useRef<HTMLDivElement | null>(null);
+	const ref = useRef<HTMLDivElement>(null);
 
 	return (
 		<View gap={4}>

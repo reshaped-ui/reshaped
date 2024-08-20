@@ -18,7 +18,7 @@ export const usePortalScope = () => {
  */
 const Portal = (props: T.Props): any => {
 	const { children, targetRef } = props;
-	const rootRef = React.useRef<HTMLDivElement | null>(null);
+	const rootRef = React.useRef<HTMLDivElement>(null);
 	const rootNode = rootRef.current?.getRootNode();
 	const isShadowDom = rootNode instanceof ShadowRoot;
 	const defaultTargetEl = isShadowDom ? rootNode : document.body;
@@ -45,7 +45,7 @@ const Portal = (props: T.Props): any => {
 
 function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>) {
 	const { children } = props;
-	const ref = React.useRef<T | null>(null);
+	const ref = React.useRef<T>(null);
 
 	return (
 		<PortalScopeContext.Provider value={{ scopeRef: ref }}>

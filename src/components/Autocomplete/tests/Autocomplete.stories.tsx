@@ -93,7 +93,7 @@ export const base = () => (
 );
 
 export const multiselect = () => {
-	const inputRef = React.useRef<HTMLInputElement | null>(null);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 	const [values, setValues] = React.useState<string[]>([]);
 	const [query, setQuery] = React.useState("");
 	const [customValueQuery, setCustomValueQuery] = React.useState("");
@@ -140,6 +140,7 @@ export const multiselect = () => {
 				onBackspace={() => {
 					if (!query.length) handleDismiss(values[values.length - 1]);
 				}}
+				multiline
 				onChange={(args) => setQuery(args.value)}
 				onItemSelect={(args) => {
 					setCustomValueQuery(query);

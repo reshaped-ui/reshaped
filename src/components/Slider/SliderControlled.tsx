@@ -34,11 +34,11 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const minValue =
 		range && props.minValue !== undefined ? applyStepToValue(props.minValue, step) : undefined;
 	const maxValue = applyStepToValue(range ? props.maxValue : props.value, step);
-	const barRef = React.useRef<HTMLDivElement | null>(null);
-	const minRef = React.useRef<HTMLDivElement | null>(null);
-	const maxRef = React.useRef<HTMLDivElement | null>(null);
-	const minTooltipRef = React.useRef<HTMLDivElement | null>(null);
-	const maxTooltipRef = React.useRef<HTMLDivElement | null>(null);
+	const barRef = React.useRef<HTMLDivElement>(null);
+	const minRef = React.useRef<HTMLDivElement>(null);
+	const maxRef = React.useRef<HTMLDivElement>(null);
+	const minTooltipRef = React.useRef<HTMLDivElement>(null);
+	const maxTooltipRef = React.useRef<HTMLDivElement>(null);
 	const [draggingId, setDraggingId] = React.useState<string | null>(null);
 	const [rtl] = useRTL();
 	const formControl = useFormControl();

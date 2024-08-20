@@ -59,7 +59,7 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 	 * so caret is positioned before the value that's going to be added
 	 */
 	const modeRef = React.useRef<"type" | "edit">(value.length === valueLength ? "edit" : "type");
-	const inputRef = React.useRef<HTMLInputElement | null>(null);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 	const nodes = [];
 
 	/**

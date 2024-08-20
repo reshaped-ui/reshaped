@@ -31,7 +31,7 @@ const Checkbox = (props: T.Props) => {
 	const checked = checkboxGroup ? checkboxGroup.value?.includes(value!) : props.checked;
 	const defaultChecked = checkboxGroup ? undefined : props.defaultChecked;
 	const name = checkboxGroup ? checkboxGroup.name : props.name;
-	const inputRef = React.useRef<HTMLInputElement | null>(null);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 	const rootClassName = classNames(
 		s.root,
 		className,
