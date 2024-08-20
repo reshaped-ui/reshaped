@@ -21,6 +21,7 @@ const Autocomplete = (props: T.Props) => {
 		onItemSelect,
 		name,
 		containerRef,
+		instanceRef,
 		onBackspace,
 		...textFieldProps
 	} = props;
@@ -93,6 +94,7 @@ const Autocomplete = (props: T.Props) => {
 				onOpen={handleOpen}
 				containerRef={containerRef}
 				disableHideAnimation
+				instanceRef={instanceRef}
 			>
 				<DropdownMenu.Trigger>
 					{({ ref, ...attributes }) => (

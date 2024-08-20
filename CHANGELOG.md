@@ -14,3 +14,4 @@
 - Autocomplete: onBackspace prop
 - TextField: focused prop
 - TextField: multiline prop
+- Autocomplete: instanceRef + AutocompleteInstance type
