@@ -1,6 +1,9 @@
 .root {
 	position: relative;
 	padding-inline-end: var(--rs-unit-x7);
+
+	/* Reserve space for empty children, button height - negative spacing */
+	min-height: var(--rs-unit-x5);
 }
 
 .close {
