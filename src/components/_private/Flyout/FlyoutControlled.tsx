@@ -138,8 +138,6 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			if (
 				// Empty flyouts don't move the focus so they have to be closed on blur
 				focusedContent ||
-				// Content menu keeps the focus on the original trigger so moving the focus away from it shouldn't close it
-				(triggerType === "hover" && trapFocusMode === "content-menu") ||
 				// Prevent from closing in case user interacts with items inside content
 				lockedBlurEffects.current
 			) {
@@ -148,7 +146,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 			handleClose();
 		},
-		[handleClose, triggerType, trapFocusMode]
+		[handleClose]
 	);
 
 	const handleFocus = React.useCallback(() => {

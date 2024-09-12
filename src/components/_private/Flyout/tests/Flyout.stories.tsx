@@ -106,6 +106,12 @@ export const modes = () => (
 			</Demo>
 		</Example.Item>
 
+		<Example.Item title="content-menu hover without buttons">
+			<Demo position="bottom-start" trapFocusMode="content-menu" triggerType="hover">
+				<div style={{ height: 50, width: 50, background: "tomato" }} />
+			</Demo>
+		</Example.Item>
+
 		<Example.Item title="content-menu hover">
 			<Demo position="bottom-start" trapFocusMode="content-menu" triggerType="hover">
 				<button type="button">Item 1</button>

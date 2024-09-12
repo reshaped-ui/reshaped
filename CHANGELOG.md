@@ -20,3 +20,4 @@
 - Image: Added support for passing attributes.style
 - Modal, Overlay: Added onClose 'reason'
 - useResponsiveClientValue: boolean values support
+- Flyout: Fixed blur event for the content-menu hover without buttons inside
