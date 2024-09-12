@@ -14,6 +14,7 @@ const Tooltip = (props: T.Props) => {
 		onOpen,
 		onClose,
 		position = "bottom",
+		containerRef,
 		active,
 		disabled,
 		disableContentHover,
@@ -30,6 +31,7 @@ const Tooltip = (props: T.Props) => {
 			onOpen={onOpen}
 			onClose={onClose}
 			disableContentHover={disableContentHover}
+			containerRef={containerRef}
 			triggerType="hover"
 		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>

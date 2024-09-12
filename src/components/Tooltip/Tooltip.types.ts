@@ -3,7 +3,14 @@ import type { FlyoutProps, FlyoutTriggerProps } from "components/_private/Flyout
 
 export type Props = Pick<
 	FlyoutProps,
-	"id" | "position" | "onOpen" | "onClose" | "active" | "disabled" | "disableContentHover"
+	| "id"
+	| "position"
+	| "onOpen"
+	| "onClose"
+	| "active"
+	| "disabled"
+	| "disableContentHover"
+	| "containerRef"
 > & {
 	children: (attributes: Parameters<FlyoutTriggerProps["children"]>[0] | {}) => React.ReactNode;
 	text?: React.ReactNode;

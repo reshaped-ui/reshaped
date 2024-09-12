@@ -148,3 +148,7 @@
 .--dragging {
 	transition: none;
 }
+
+.--overflow-visible {
+	overflow: visible;
+}

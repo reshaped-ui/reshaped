@@ -110,6 +110,40 @@ export const padding = () => (
 	</Example>
 );
 
+export const overflow = () => (
+	<Example>
+		<Example.Item title="default overflow">
+			<Demo>
+				<div
+					style={{
+						position: "absolute",
+						top: -32,
+						left: -32,
+						height: 100,
+						width: 100,
+						background: "tomato",
+					}}
+				/>
+			</Demo>
+		</Example.Item>
+
+		<Example.Item title="overflow: visible">
+			<Demo overflow="visible">
+				<div
+					style={{
+						position: "absolute",
+						top: -32,
+						left: -32,
+						height: 100,
+						width: 100,
+						background: "tomato",
+					}}
+				/>
+			</Demo>
+		</Example.Item>
+	</Example>
+);
+
 export const composition = () => (
 	<Example>
 		<Example.Item title="title, subtitle, dismissible">

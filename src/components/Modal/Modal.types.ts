@@ -23,6 +23,7 @@ export type Props = {
 	position?: G.Responsive<"center" | "end" | "bottom" | "start" | "full-screen">;
 	size?: G.Responsive<string>;
 	padding?: G.Responsive<number>;
+	overflow?: "visible";
 	transparentOverlay?: boolean;
 	blurredOverlay?: boolean;
 	disableSwipeGesture?: boolean;

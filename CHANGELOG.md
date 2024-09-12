@@ -15,3 +15,4 @@
 - TextField: focused prop
 - TextField: multiline prop
 - Autocomplete: instanceRef + AutocompleteInstance type
+- Modal: Added overflow="visible" prop

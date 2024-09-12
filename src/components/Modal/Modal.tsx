@@ -66,6 +66,7 @@ const Modal = (props: T.Props) => {
 		size,
 		padding = 4,
 		position = "center",
+		overflow,
 		transparentOverlay,
 		blurredOverlay,
 		ariaLabel,
@@ -247,6 +248,7 @@ const Modal = (props: T.Props) => {
 					paddingStyles?.classNames,
 					active && s["--active"],
 					dragging && s["--dragging"],
+					overflow && s[`--overflow-${overflow}`],
 					responsiveClassNames(s, "--position", position)
 				);
 
