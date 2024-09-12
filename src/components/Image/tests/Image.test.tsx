@@ -7,6 +7,7 @@ const fixtures = {
 	alt: "Alternative text",
 	className: "test-className",
 	id: "test-id",
+	imageId: "test-image-id",
 };
 
 describe("Utilities/Image", () => {
@@ -40,8 +41,18 @@ describe("Utilities/Image", () => {
 	});
 
 	test("works with className, attributes", () => {
-		const { container } = render(<Image src={fixtures.src} className={fixtures.className} />);
+		const { container } = render(
+			<Image
+				src={fixtures.src}
+				className={fixtures.className}
+				attributes={{ id: fixtures.id, style: { opacity: 0.5 } }}
+				imageAttributes={{ "data-testid": fixtures.imageId }}
+			/>
+		);
 
 		expect(container.firstChild).toHaveClass(fixtures.className);
+		expect(container.firstChild).toHaveAttribute("id", fixtures.id);
+		expect(container.firstChild).toHaveAttribute("data-testid", fixtures.imageId);
+		expect(container.firstChild).toHaveStyle("opacity: 0.5");
 	});
 });

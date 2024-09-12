@@ -37,7 +37,9 @@ const Image = (props: T.Props) => {
 	);
 	const imgClassNames = classNames(s.image, baseClassNames);
 	const fallbackClassNames = classNames(s.fallback, baseClassNames);
+	const isFallback = (status === "error" || !src) && !!fallback;
 	const style = {
+		...attributes?.style,
 		...widthStyles?.variables,
 		...heightStyles?.variables,
 	} as React.CSSProperties;
@@ -56,7 +58,7 @@ const Image = (props: T.Props) => {
 		setStatus("loading");
 	}, [src]);
 
-	if ((status === "error" || !src) && !!fallback) {
+	if (isFallback) {
 		if (typeof fallback === "string") {
 			return (
 				<img

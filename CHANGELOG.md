@@ -17,3 +17,4 @@
 - Autocomplete: instanceRef + AutocompleteInstance type
 - Modal: Added overflow="visible" prop
 - Switch: Fixed disabled label color
+- Image: Added support for passing attributes.style
