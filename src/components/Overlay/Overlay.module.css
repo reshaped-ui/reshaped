@@ -57,9 +57,7 @@
 
 .root.--animated {
 	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
-
-	/* Using transform to keep the transparent overlay transitionEnd event */
-	transition-property: background-color, transform, opacity;
+	transition-property: background-color, opacity;
 
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);
