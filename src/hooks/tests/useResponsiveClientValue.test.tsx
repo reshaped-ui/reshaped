@@ -1,12 +1,11 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import Reshaped from "components/Reshaped";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 
-const Component = (props: Parameters<typeof useResponsiveClientValue<string>>[0]) => {
+const Component = (props: Parameters<typeof useResponsiveClientValue<string | boolean>>[0]) => {
 	const value = useResponsiveClientValue(props);
 
-	return <div>{value}</div>;
+	return <div>{value?.toString()}</div>;
 };
 
 Object.defineProperty(window, "matchMedia", {
@@ -50,5 +49,15 @@ describe("useResponsiveClientValue", () => {
 		);
 
 		expect(screen.queryByText("bar")).toBeInTheDocument();
+	});
+
+	test("works with boolean values", () => {
+		render(
+			<Reshaped defaultViewport="l">
+				<Component s={true} l={false} />
+			</Reshaped>
+		);
+
+		expect(screen.queryByText("false")).toBeInTheDocument();
 	});
 });

@@ -45,9 +45,9 @@ const useResponsiveClientValue = <T extends unknown>(value: G.Responsive<T>): T 
 		return value as T;
 	}
 
-	if (viewport === "xl") return value.xl || value.l || value.m || value.s;
-	if (viewport === "l") return value.l || value.m || value.s;
-	if (viewport === "m") return value.m || value.s;
+	if (viewport === "xl") return value.xl ?? value.l ?? value.m ?? value.s;
+	if (viewport === "l") return value.l ?? value.m ?? value.s;
+	if (viewport === "m") return value.m ?? value.s;
 	return value.s;
 };
 
