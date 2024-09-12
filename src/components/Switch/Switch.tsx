@@ -63,7 +63,11 @@ const Switch = (props: T.Props) => {
 				<span className={s.thumb} />
 			</span>
 			{children && (
-				<Text variant={size === "small" ? "caption-1" : "body-3"} weight="medium">
+				<Text
+					variant={size === "small" ? "caption-1" : "body-3"}
+					weight="medium"
+					color={disabled ? "disabled" : undefined}
+				>
 					{children}
 				</Text>
 			)}

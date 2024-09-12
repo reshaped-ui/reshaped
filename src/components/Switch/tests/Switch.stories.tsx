@@ -77,5 +77,10 @@ export const disabled = () => (
 				inputAttributes={{ "aria-label": "test switch" }}
 			/>
 		</Example.Item>
+		<Example.Item title="disabled, with label">
+			<Switch name="active" disabled>
+				Switch
+			</Switch>
+		</Example.Item>
 	</Example>
 );

@@ -16,3 +16,4 @@
 - TextField: multiline prop
 - Autocomplete: instanceRef + AutocompleteInstance type
 - Modal: Added overflow="visible" prop
+- Switch: Fixed disabled label color
