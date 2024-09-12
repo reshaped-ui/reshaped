@@ -4,6 +4,7 @@ import React from "react";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { enableTransitions, disableTransitions, onNextFrame } from "utilities/animation";
 import { GlobalColorModeContext } from "./Theme.context";
+import { getRootThemeEl } from "./Theme.utilities";
 import type * as T from "./Theme.types";
 
 const GlobalColorMode = (props: T.GlobalColorModeProps) => {
@@ -11,7 +12,7 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode || "light");
 
 	const changeColorMode = React.useCallback((targetMode: T.ColorMode) => {
-		document.documentElement.setAttribute("data-rs-color-mode", targetMode);
+		getRootThemeEl().setAttribute("data-rs-color-mode", targetMode);
 		setMode((prevMode) => {
 			if (prevMode !== targetMode) {
 				// Avoid components styles animating when switching to another color mode
@@ -33,7 +34,7 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 	 * This could happen if we're receiving the mode on the client but before React hydration
 	 */
 	useIsomorphicLayoutEffect(() => {
-		const nextColorMode = document.documentElement.getAttribute("data-rs-color-mode") as
+		const nextColorMode = getRootThemeEl().getAttribute("data-rs-color-mode") as
 			| T.ColorMode
 			| undefined;
 

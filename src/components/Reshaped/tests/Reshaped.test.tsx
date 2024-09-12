@@ -19,19 +19,19 @@ describe("Utilities/Reshaped", () => {
 		matchMedia.clear();
 	});
 
-	it("renders children", () => {
+	test("renders children", () => {
 		render(<Reshaped theme="reshaped">{fixtures.content}</Reshaped>);
 
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
 	});
 
-	it("applies RTL to html", () => {
+	test("applies RTL to html", () => {
 		render(<Reshaped theme="reshaped" defaultRTL />);
 
 		expect(document.documentElement).toHaveAttribute("dir", "rtl");
 	});
 
-	it("applies light theme", () => {
+	test("applies light theme", () => {
 		render(<Reshaped theme="reshaped" />);
 
 		const theme = document.documentElement.getAttribute("data-rs-theme");
@@ -41,7 +41,7 @@ describe("Utilities/Reshaped", () => {
 		expect(colorMode).toEqual("light");
 	});
 
-	it("applies dark theme", () => {
+	test("applies dark theme", () => {
 		render(<Reshaped theme="reshaped" defaultColorMode="dark" />);
 
 		const theme = document.documentElement.getAttribute("data-rs-theme");
@@ -51,7 +51,7 @@ describe("Utilities/Reshaped", () => {
 		expect(colorMode).toEqual("dark");
 	});
 
-	it("applies keyboard mode", async () => {
+	test("applies keyboard mode", async () => {
 		const attribute = "data-rs-keyboard";
 		render(<Reshaped theme="reshaped" />);
 
@@ -60,5 +60,16 @@ describe("Utilities/Reshaped", () => {
 		expect(document.documentElement).toHaveAttribute(attribute);
 		await userEvent.click(document.body);
 		expect(document.documentElement).not.toHaveAttribute(attribute);
+	});
+
+	test("works in scoped mode", () => {
+		render(<Reshaped theme="reshaped" scoped />);
+
+		const rootEl = document.querySelector("[data-rs-root]");
+
+		expect(rootEl).toBeInTheDocument();
+		expect(rootEl).not.toBe(document.documentElement);
+		expect(rootEl).toHaveAttribute("data-rs-theme", "reshaped");
+		expect(document.documentElement).not.toHaveAttribute("data-rs-theme");
 	});
 });

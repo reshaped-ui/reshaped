@@ -4,12 +4,15 @@ import React from "react";
 import { classNames } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { ThemeContext } from "./Theme.context";
+import { getRootThemeEl } from "./Theme.utilities";
 import { useTheme, useGlobalColorMode } from "./useTheme";
 import * as T from "./Theme.types";
 import s from "./Theme.module.css";
 
-const Theme = (props: T.Props) => {
-	const { name, defaultName, colorMode, children, className } = props;
+const Theme = (props: T.Props) => <PrivateTheme {...props} />;
+
+export const PrivateTheme = (props: T.PrivateProps) => {
+	const { name, defaultName, colorMode, scoped, children, className } = props;
 	const [mounted, setMounted] = React.useState(false);
 	const [stateTheme, setStateTheme] = React.useState(defaultName);
 	const globalColorMode = useGlobalColorMode();
@@ -43,18 +46,15 @@ const Theme = (props: T.Props) => {
 
 	useIsomorphicLayoutEffect(() => {
 		if (!document || !isRootProvider) return;
-		const hasColorModeApplied = document.documentElement.getAttribute("data-rs-color-mode");
+		const themeRootEl = getRootThemeEl();
+		const hasColorModeApplied = themeRootEl.getAttribute("data-rs-color-mode");
 
-		document.documentElement.setAttribute("data-rs-theme", usedTheme);
-		if (!hasColorModeApplied) {
-			document.documentElement.setAttribute("data-rs-color-mode", usedColorMode);
-		}
+		themeRootEl.setAttribute("data-rs-theme", usedTheme);
+		if (!hasColorModeApplied) themeRootEl.setAttribute("data-rs-color-mode", usedColorMode);
 
 		return () => {
-			document.documentElement.removeAttribute("data-rs-theme");
-			if (!hasColorModeApplied) {
-				document.documentElement.removeAttribute("data-rs-color-mode");
-			}
+			themeRootEl.removeAttribute("data-rs-theme");
+			if (!hasColorModeApplied) themeRootEl.removeAttribute("data-rs-color-mode");
 		};
 	}, [usedTheme, usedColorMode, isRootProvider]);
 
@@ -73,6 +73,7 @@ const Theme = (props: T.Props) => {
 		<ThemeContext.Provider value={value}>
 			<div
 				className={rootClassNames}
+				data-rs-root={scoped ? true : undefined}
 				data-rs-theme={isRootProvider ? undefined : usedTheme}
 				/**
 				 * Root provider uses theme and color mode from <html>

@@ -3,6 +3,8 @@
 - Theming: Updated rem calculations to be based on 16px
 - Theming: Updated generated bg neutral faded values (slightly more faded)
 
+- Package.json added types field for old module resolution
+
 - Pagination: Fixed truncation for total < 8
 - PinField, source: Updated keyboard tests
 - Flyout: Correctly calculate position for scaled down triggers
@@ -21,3 +23,5 @@
 - Modal, Overlay: Added onClose 'reason'
 - useResponsiveClientValue: boolean values support
 - Flyout: Fixed blur event for the content-menu hover without buttons inside
+- Reshaped: `scoped` flag, scoped all global styles to data-rs-theme attribute
+- Badge: added neutral color to docs and types

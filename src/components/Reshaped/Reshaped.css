@@ -7,55 +7,55 @@
 }
 
 @layer rs.reset {
-	body,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p,
-	ul,
-	ol,
-	li,
-	figure,
-	figcaption,
-	blockquote,
-	dl,
-	dd {
+	[data-rs-theme] body,
+	[data-rs-theme] h1,
+	[data-rs-theme] h2,
+	[data-rs-theme] h3,
+	[data-rs-theme] h4,
+	[data-rs-theme] h5,
+	[data-rs-theme] h6,
+	[data-rs-theme] p,
+	[data-rs-theme] ul,
+	[data-rs-theme] ol,
+	[data-rs-theme] li,
+	[data-rs-theme] figure,
+	[data-rs-theme] figcaption,
+	[data-rs-theme] blockquote,
+	[data-rs-theme] dl,
+	[data-rs-theme] dd {
 		margin: 0;
 		padding: 0;
 	}
 
-	ul[class],
-	ol[class] {
+	[data-rs-theme] ul[class],
+	[data-rs-theme] ol[class] {
 		list-style: none;
 	}
 
-	textarea {
+	[data-rs-theme] textarea {
 		resize: vertical;
 	}
 
-	table {
+	[data-rs-theme] table {
 		border-collapse: collapse;
 		border-spacing: 0;
 	}
 
-	fieldset {
+	[data-rs-theme] fieldset {
 		border: 0;
 		margin: 0;
 		padding: 0;
 	}
 
-	img {
+	[data-rs-theme] img {
 		max-width: 100%;
 		display: block;
 	}
 
-	input,
-	button,
-	textarea,
-	select {
+	[data-rs-theme] input,
+	[data-rs-theme] button,
+	[data-rs-theme] textarea,
+	[data-rs-theme] select {
 		font: inherit;
 	}
 
@@ -63,21 +63,21 @@
 	Setting background for Windows browsers that have white background by default 
 	which doesn't work well in dark mode
 	*/
-	option {
+	[data-rs-theme] option {
 		background: var(--rs-color-background-elevation-base);
 	}
 
-	label {
+	[data-rs-theme] label {
 		cursor: pointer;
 	}
 
-	textarea::placeholder,
-	input::placeholder {
+	[data-rs-theme] textarea::placeholder,
+	[data-rs-theme] input::placeholder {
 		opacity: 0.5;
 		color: var(--rs-color-foreground-neutral-faded);
 	}
 
-	html {
+	html[data-rs-theme] {
 		/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust */
 		-webkit-text-size-adjust: 100%;
 		-webkit-font-smoothing: antialiased;
@@ -92,12 +92,12 @@
 		font-size: 100%;
 	}
 
-	* {
+	[data-rs-theme] * {
 		box-sizing: border-box;
 	}
 
-	html,
-	body {
+	html[data-rs-theme],
+	[data-rs-theme] body {
 		color: var(--rs-color-foreground-neutral);
 		background: var(--rs-color-background-page);
 		height: 100%;
@@ -105,7 +105,7 @@
 	}
 }
 
-body,
+[data-rs-theme] body,
 [data-rs-theme]:not(html) {
 	font-size: var(--rs-font-size-body-3);
 	line-height: var(--rs-line-height-body-3);

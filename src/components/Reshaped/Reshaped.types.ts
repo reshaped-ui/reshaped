@@ -5,11 +5,12 @@ import type * as G from "types/global";
 
 export type Props = {
 	children?: React.ReactNode;
+	theme?: NonNullable<ThemeProps["name"]>;
+	defaultTheme?: NonNullable<ThemeProps["defaultName"]>;
 	defaultRTL?: boolean;
 	defaultColorMode?: GlobalColorModeProps["defaultMode"];
 	defaultViewport?: G.Viewport;
-	className?: G.ClassName;
-	theme?: NonNullable<ThemeProps["name"]>;
-	defaultTheme?: NonNullable<ThemeProps["defaultName"]>;
 	toastOptions?: ToastProviderProps["options"];
+	scoped?: boolean;
+	className?: G.ClassName;
 };

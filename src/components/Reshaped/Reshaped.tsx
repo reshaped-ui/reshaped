@@ -1,7 +1,7 @@
 "use client";
 
 import { classNames } from "utilities/helpers";
-import Theme, { GlobalColorMode } from "components/Theme";
+import { GlobalColorMode, PrivateTheme } from "components/Theme";
 import { ToastProvider } from "components/Toast";
 import useSingletonKeyboardMode from "hooks/_private/useSingletonKeyboardMode";
 import {
@@ -29,14 +29,19 @@ const ReshapedInner = (props: T.Props) => {
 };
 
 const Reshaped = (props: T.Props) => {
-	const { theme, defaultTheme = "reshaped", defaultColorMode, className } = props;
+	const { theme, defaultTheme = "reshaped", defaultColorMode, scoped, className } = props;
 	const rootClassNames = classNames(s.root, className);
 
 	return (
 		<GlobalColorMode defaultMode={defaultColorMode}>
-			<Theme name={theme} defaultName={defaultTheme} className={rootClassNames}>
+			<PrivateTheme
+				name={theme}
+				defaultName={defaultTheme}
+				className={rootClassNames}
+				scoped={scoped}
+			>
 				<ReshapedInner {...props}>{props.children}</ReshapedInner>
-			</Theme>
+			</PrivateTheme>
 		</GlobalColorMode>
 	);
 };

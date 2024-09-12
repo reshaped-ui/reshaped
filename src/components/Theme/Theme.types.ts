@@ -25,7 +25,10 @@ export type Props = {
 	children?: React.ReactNode;
 };
 
+export type PrivateProps = Props & { scoped?: boolean };
+
 export type GlobalColorModeProps = {
 	defaultMode?: ColorMode;
+	scoped?: boolean;
 	children?: React.ReactNode;
 };
