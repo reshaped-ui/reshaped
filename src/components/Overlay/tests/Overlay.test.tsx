@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import Overlay from "components/Overlay";
+import Overlay, { type OverlayProps } from "components/Overlay";
 import Reshaped from "components/Reshaped";
 
 const fixtures = {
@@ -40,9 +40,9 @@ describe("Utilities/Overlay", () => {
 		const Component = () => {
 			const [active, setActive] = React.useState(true);
 
-			const handleClose = () => {
+			const handleClose: OverlayProps["onClose"] = (args) => {
 				setActive(false);
-				handleCloseMock();
+				handleCloseMock(args);
 			};
 
 			const handleOpen = () => {
@@ -69,6 +69,7 @@ describe("Utilities/Overlay", () => {
 		await userEvent.click(screen.getByText(fixtures.content));
 
 		expect(handleCloseMock).toHaveBeenCalledTimes(1);
+		expect(handleCloseMock).toHaveBeenCalledWith({ reason: "overlay-click" });
 		waitFor(() => {
 			expect(screen.getByText(fixtures.content)).not.toBeInTheDocument();
 		});

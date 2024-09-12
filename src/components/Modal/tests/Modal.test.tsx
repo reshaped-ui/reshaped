@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import Modal from "components/Modal";
+import Modal, { type ModalProps } from "components/Modal";
 import Reshaped from "components/Reshaped";
 import useToggle from "hooks/useToggle";
 
@@ -76,9 +76,9 @@ describe("Components/Modal", () => {
 				setActive(true);
 			};
 
-			const handleClose = () => {
+			const handleClose: ModalProps["onClose"] = (args) => {
 				setActive(false);
-				handleCloseMock();
+				handleCloseMock(args);
 			};
 
 			return (
@@ -110,6 +110,7 @@ describe("Components/Modal", () => {
 
 		await waitFor(() => {
 			expect(handleCloseMock).toHaveBeenCalledTimes(1);
+			expect(handleCloseMock).toHaveBeenCalledWith({ reason: "escape-key" });
 
 			// TODO: Flaky behavior, make it stable
 			// expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();

@@ -1,6 +1,6 @@
 import type React from "react";
 import type * as G from "types/global";
-import type { OverlayProps } from "components/Overlay";
+import type { OverlayProps, OverlayCloseReason } from "components/Overlay";
 
 export type Context = {
 	id: string;
@@ -24,6 +24,7 @@ export type Props = {
 	size?: G.Responsive<string>;
 	padding?: G.Responsive<number>;
 	overflow?: "visible";
+	onClose?: (args: { reason: OverlayCloseReason | "drag" }) => void;
 	transparentOverlay?: boolean;
 	blurredOverlay?: boolean;
 	disableSwipeGesture?: boolean;
@@ -33,4 +34,4 @@ export type Props = {
 	className?: G.ClassName;
 	overlayClassName?: G.ClassName;
 	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement> };
-} & Pick<OverlayProps, "onClose" | "onOpen" | "active">;
+} & Pick<OverlayProps, "onOpen" | "active">;

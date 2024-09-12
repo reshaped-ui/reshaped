@@ -56,10 +56,13 @@ const Overlay = (props: T.Props) => {
 		return firstChild.contains(el);
 	};
 
-	const close = React.useCallback(() => {
-		if (!visible || !isDismissible()) return;
-		onCloseRef.current?.();
-	}, [visible, isDismissible, onCloseRef]);
+	const close = React.useCallback(
+		(reason: T.CloseReason) => {
+			if (!visible || !isDismissible()) return;
+			onCloseRef.current?.({ reason });
+		},
+		[visible, isDismissible, onCloseRef]
+	);
 
 	const handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
 		isMouseDownValidRef.current = !isInsideChild(event.target as HTMLElement);
@@ -70,7 +73,7 @@ const Overlay = (props: T.Props) => {
 		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !clickThrough;
 
 		if (!shouldClose || disableCloseOnClick) return;
-		close();
+		close("overlay-click");
 	};
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
@@ -83,7 +86,7 @@ const Overlay = (props: T.Props) => {
 		remove();
 	};
 
-	useHotkeys({ Escape: close }, [close]);
+	useHotkeys({ Escape: () => close("escape-key") }, [close]);
 
 	React.useEffect(() => {
 		setAnimated(true);

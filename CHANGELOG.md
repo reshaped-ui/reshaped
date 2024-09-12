@@ -18,3 +18,4 @@
 - Modal: Added overflow="visible" prop
 - Switch: Fixed disabled label color
 - Image: Added support for passing attributes.style
+- Modal, Overlay: Added onClose 'reason'

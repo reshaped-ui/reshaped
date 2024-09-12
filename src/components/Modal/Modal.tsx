@@ -158,7 +158,7 @@ const Modal = (props: T.Props) => {
 				clientPosition === "start" ? dragDirectionRef.current < 0 : dragDirectionRef.current > 0;
 
 			if (Math.abs(dragDistanceRef.current) > DRAG_THRESHOLD && shouldClose) {
-				onCloseRef.current?.();
+				onCloseRef.current?.({ reason: "drag" });
 			} else {
 				resetDragData();
 			}
