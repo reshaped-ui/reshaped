@@ -12,6 +12,9 @@ function Example() {
 		"mod + ArrowUp": () => console.log("top"),
 		"shift + ArrowRight": () => console.log("right"),
 		"shift + ArrowUp": () => console.log("top"),
+		"alt+shift+n": () => console.log("alt+shift+n"),
+		"shift+alt+n": () => console.log("shift+alt+n"),
+		"alt+shiftLeft+n": () => console.log("alt+shiftLeft+n"),
 	});
 	const active = checkHotkeyState("shift + b + n");
 	const shiftActive = checkHotkeyState("shift");

@@ -11,7 +11,7 @@ const Component = (props: { hotkeys: Record<string, () => void | null> }) => {
 };
 
 describe("useHotkey", () => {
-	test("triggers callback for a single key", async () => {
+	test("single key", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -24,7 +24,7 @@ describe("useHotkey", () => {
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test("triggers callback for a key combination", async () => {
+	test("key combination", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -36,7 +36,7 @@ describe("useHotkey", () => {
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test("triggers callback for a mod key", async () => {
+	test("mod key", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -48,7 +48,7 @@ describe("useHotkey", () => {
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test("triggers callback for an array of keys", async () => {
+	test("list of keys", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -63,7 +63,7 @@ describe("useHotkey", () => {
 		expect(fn).toHaveBeenCalledTimes(2);
 	});
 
-	test("triggers callback for a combination with different casing and spaces", async () => {
+	test("combiation with different casing and spaces", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -75,7 +75,7 @@ describe("useHotkey", () => {
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test("triggers callback for a combination pressed in different order", async () => {
+	test("combination pressed in different order", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -87,7 +87,7 @@ describe("useHotkey", () => {
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test("triggers callback when more keys are pressed than required for a callback", async () => {
+	test("more keys are pressed than required for a callback", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -100,7 +100,7 @@ describe("useHotkey", () => {
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test("triggers callback with meta key on hold and another key pressed multiple times", async () => {
+	test("meta key on hold and another key pressed multiple times", async () => {
 		const fn = jest.fn();
 		render(
 			<Reshaped theme="reshaped">
@@ -110,5 +110,21 @@ describe("useHotkey", () => {
 
 		await userEvent.keyboard("{Meta>}bb{/Meta}");
 		expect(fn).toHaveBeenCalledTimes(2);
+	});
+
+	test("key modified with alt", async () => {
+		const modifiedFn = jest.fn();
+		const notModifiedFn = jest.fn();
+		render(
+			<Reshaped theme="reshaped">
+				<Component hotkeys={{ "alt+n": modifiedFn, "alt+shift": notModifiedFn }} />
+			</Reshaped>
+		);
+
+		await userEvent.keyboard("{Alt>}n{/Alt}");
+		expect(modifiedFn).toHaveBeenCalledTimes(1);
+
+		await userEvent.keyboard("{Alt>}{Shift}{/Alt}");
+		expect(notModifiedFn).toHaveBeenCalledTimes(1);
 	});
 });

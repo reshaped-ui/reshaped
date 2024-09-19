@@ -26,6 +26,7 @@ export type CellProps = {
 	width?: "auto" | string | number;
 	minWidth?: string | number;
 	children?: React.ReactNode;
+	className?: G.ClassName;
 	attributes?: G.Attributes<"td">;
 };
 
@@ -35,12 +36,16 @@ export type HeadingProps = CellProps & {
 
 export type BodyProps = {
 	children: React.ReactNode;
+	className?: G.ClassName;
+	attributes?: G.Attributes<"tbody">;
 };
 
 export type HeadProps = {
 	children: React.ReactNode;
+	className?: G.ClassName;
+	attributes?: G.Attributes<"thead">;
 };
 
-export type PrivateCellProps = HeadingProps & {
+export type PrivateCellProps = CellProps & {
 	tagName: "td" | "th";
 };

@@ -25,3 +25,5 @@
 - Flyout: Fixed blur event for the content-menu hover without buttons inside
 - Reshaped: `scoped` flag, scoped all global styles to data-rs-theme attribute
 - Badge: added neutral color to docs and types
+- Table: added className and attributes for tbody, thead, cells
+- useHotkeys: fixed keys alt modified keys (shiftleft)

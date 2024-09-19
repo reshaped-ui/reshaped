@@ -17,6 +17,7 @@ const TableCellPrivate = (props: T.PrivateCellProps) => {
 		paddingInline,
 		paddingBlock,
 		children,
+		className,
 		attributes,
 	} = props;
 	const width = props.width === "auto" ? "0px" : props.width;
@@ -28,7 +29,8 @@ const TableCellPrivate = (props: T.PrivateCellProps) => {
 		minWidthStyles?.classNames,
 		(width === 0 || width === "0px") && s["cell--width-auto"],
 		align && s[`cell--align-${align}`],
-		verticalAlign && s[`cell--valign-${verticalAlign}`]
+		verticalAlign && s[`cell--valign-${verticalAlign}`],
+		className
 	);
 	const headingStyle = {
 		...widthStyles?.variables,
@@ -70,11 +72,23 @@ const TableRow = (props: T.RowProps) => {
 };
 
 const TableBody = (props: T.BodyProps) => {
-	return <tbody>{props.children}</tbody>;
+	const { children, attributes, className } = props;
+
+	return (
+		<tbody {...attributes} className={classNames(className)}>
+			{children}
+		</tbody>
+	);
 };
 
 const TableHead = (props: T.HeadProps) => {
-	return <thead>{props.children}</thead>;
+	const { children, attributes, className } = props;
+
+	return (
+		<thead {...attributes} className={classNames(className)}>
+			{children}
+		</thead>
+	);
 };
 
 const Table = (props: T.Props) => {

@@ -43,7 +43,7 @@ const getEventKey = (e: KeyboardEvent) => {
 	if (!e.key) return;
 
 	// Having alt pressed modifies e.key value, so relying on e.code for it
-	if (e.altKey && e.key !== "Alt") {
+	if (e.altKey && /^[Key|Digit|Numpad]/.test(e.code)) {
 		return e.code.toLowerCase().replace(/key|digit|numpad/, "");
 	}
 
