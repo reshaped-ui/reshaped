@@ -15,6 +15,27 @@ export default {
 	},
 };
 
+class CustomElement extends window.HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: "open" });
+
+		if (!this.shadowRoot) return;
+
+		const overlay = (
+			<Reshaped>
+				<Overlay active>Content</Overlay>
+			</Reshaped>
+		);
+		const root = createRoot(this.shadowRoot);
+		root.render(overlay);
+	}
+}
+
+if (!window.customElements.get("rs-scope")) {
+	window.customElements.define("rs-scope", CustomElement);
+}
+
 export const behavior = () => (
 	<Example>
 		<Example.Item title="uncontrolled">

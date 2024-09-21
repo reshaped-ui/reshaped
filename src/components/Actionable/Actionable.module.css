@@ -32,6 +32,10 @@
 		box-shadow: var(--rs-focus-inset-shadow);
 	}
 
+	&.--disabled-focus-ring:focus-visible {
+		box-shadow: none;
+	}
+
 	&.--radius-inherit {
 		&:focus-visible {
 			box-shadow: none;

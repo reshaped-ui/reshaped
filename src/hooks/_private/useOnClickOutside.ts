@@ -1,4 +1,5 @@
 import useHandlerRef from "hooks/useHandlerRef";
+import { getShadowRoot } from "utilities/dom";
 import React from "react";
 
 const useOnClickOutside = (
@@ -12,12 +13,13 @@ const useOnClickOutside = (
 
 		const handleClick = (event: Event) => {
 			let isInside = false;
+			const clickedEl = event.composedPath()[0];
 
 			refs.forEach((elRef) => {
 				if (
 					!elRef.current ||
-					elRef.current === event.target ||
-					elRef.current.contains(event.target as HTMLElement)
+					elRef.current === clickedEl ||
+					elRef.current.contains(clickedEl as HTMLElement)
 				) {
 					isInside = true;
 				}

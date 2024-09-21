@@ -1,4 +1,5 @@
 import React from "react";
+import { getShadowRoot } from "utilities/dom";
 
 /**
  * Types
@@ -6,7 +7,7 @@ import React from "react";
 type Callback = (e: KeyboardEvent) => void;
 type PressedMap = Record<string, KeyboardEvent>;
 type Hotkeys = Record<string, Callback | null>;
-type HotkeyOptions = { preventDefault?: boolean };
+type HotkeyOptions = { preventDefault?: boolean; shadow?: boolean };
 type Context = {
 	isPressed: (key: string) => boolean;
 	addHotkeys: (
@@ -208,16 +209,6 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 		return true;
 	};
 
-	const addHotkeys: Context["addHotkeys"] = React.useCallback((hotkeys, ref, options = {}) => {
-		setHooksCount((prev) => prev + 1);
-		globalHotkeyStore.bindHotkeys(hotkeys, ref, options);
-
-		return () => {
-			setHooksCount((prev) => prev - 1);
-			globalHotkeyStore.unbindHotkeys(hotkeys);
-		};
-	}, []);
-
 	const handleWindowKeyDown = React.useCallback(
 		(e: KeyboardEvent) => {
 			// Browsers trigger keyboard event without passing e.key when you click on autocomplete
@@ -236,6 +227,27 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 			removePressedKey(e);
 		},
 		[removePressedKey]
+	);
+
+	const addHotkeys: Context["addHotkeys"] = React.useCallback(
+		(hotkeys, ref, options = {}) => {
+			const shadowRoot = getShadowRoot(ref.current);
+
+			setHooksCount((prev) => prev + 1);
+			globalHotkeyStore.bindHotkeys(hotkeys, ref, { ...options, shadow: !!shadowRoot });
+
+			// @ts-ignore - shadow root addEventListener expects Event instead of KeyboardEvent
+			shadowRoot?.addEventListener("keydown", handleWindowKeyDown);
+
+			return () => {
+				setHooksCount((prev) => prev - 1);
+				globalHotkeyStore.unbindHotkeys(hotkeys);
+
+				// @ts-ignore - shadow root addEventListener expects Event instead of KeyboardEvent
+				shadowRoot?.removeEventListener("keydown", handleWindowKeyDown);
+			};
+		},
+		[handleWindowKeyDown]
 	);
 
 	React.useEffect(() => {

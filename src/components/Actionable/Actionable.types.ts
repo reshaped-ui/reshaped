@@ -9,6 +9,7 @@ export type Props = {
 	disabled?: boolean;
 	fullWidth?: boolean;
 	insetFocus?: boolean;
+	disableFocusRing?: boolean;
 	borderRadius?: "inherit";
 	as?: keyof JSX.IntrinsicElements;
 	className?: G.ClassName;

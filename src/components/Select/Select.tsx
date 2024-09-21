@@ -110,6 +110,7 @@ const Select = (props: T.Props) => {
 					<Actionable
 						className={s.input}
 						disabled={disabled}
+						disableFocusRing
 						onClick={onClick}
 						attributes={{
 							...(inputAttributes as T.ButtonTriggerProps["inputAttributes"]),
@@ -123,7 +124,6 @@ const Select = (props: T.Props) => {
 					<input type="hidden" value={value} name={name} />
 				</>
 			)}
-
 			<div className={s.arrow}>
 				<Icon
 					svg={IconArrow}

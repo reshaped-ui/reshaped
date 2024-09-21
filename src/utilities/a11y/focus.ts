@@ -1,17 +1,24 @@
 import type { FocusableElement } from "./types";
+import { getShadowRoot } from "utilities/dom";
 
 const pseudoFocusAttribute = "data-rs-focus";
 
 export const focusableSelector =
 	'a,button,input:not([type="hidden"]),textarea,select,details,[tabindex]:not([tabindex="-1"])';
 
-export const getActiveElement = () => {
-	const pseudoFocusedEl = document.querySelector(`[${pseudoFocusAttribute}]`);
-	return (pseudoFocusedEl || document.activeElement) as HTMLButtonElement;
+export const getActiveElement = (originEl?: HTMLElement | null) => {
+	const shadowRoot = originEl ? getShadowRoot(originEl) : null;
+	const rootEl = shadowRoot ?? document;
+
+	const pseudoFocusedEl = rootEl.querySelector(`[${pseudoFocusAttribute}]`);
+	return (pseudoFocusedEl || rootEl.activeElement) as HTMLButtonElement;
 };
 
 export const focusElement = (el: FocusableElement, options?: { pseudoFocus?: boolean }) => {
-	document.querySelector(`[${pseudoFocusAttribute}]`)?.removeAttribute(pseudoFocusAttribute);
+	const shadowRoot = getShadowRoot(el);
+	const rootEl = shadowRoot ?? document;
+
+	rootEl.querySelector(`[${pseudoFocusAttribute}]`)?.removeAttribute(pseudoFocusAttribute);
 
 	if (options?.pseudoFocus) {
 		el.setAttribute(pseudoFocusAttribute, "true");
@@ -86,7 +93,7 @@ export const getFocusData = (args: {
 	const { root, target, options } = args;
 	const focusable = getFocusableElements(root, { additionalElement: options?.additionalElement });
 	const focusableLimit = focusable.length - 1;
-	const currentElement = getActiveElement();
+	const currentElement = getActiveElement(root);
 	const currentIndex = focusable.indexOf(currentElement);
 	const positions = {
 		next: currentIndex + 1,

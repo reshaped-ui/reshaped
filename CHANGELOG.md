@@ -27,3 +27,6 @@
 - Badge: added neutral color to docs and types
 - Table: added className and attributes for tbody, thead, cells
 - useHotkeys: fixed keys alt modified keys (shiftleft)
+- Actionable: disableFocusRing
+- useOnClickOutside: support shadow DOM
+- Autocomplete, DropdownMenu, Popover, trapFocus: Support shadow dom for the keyboard navigation

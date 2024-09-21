@@ -52,9 +52,11 @@ const Autocomplete = (props: T.Props) => {
 
 	useHotkeys(
 		{
-			[keys.DOWN]: () => handleOpen(),
+			[keys.DOWN]: () => {
+				handleOpen();
+			},
 			[keys.ENTER]: () => {
-				const el = getActiveElement();
+				const el = getActiveElement(inputRef.current);
 				el?.click();
 			},
 		},

@@ -3,6 +3,7 @@ import * as keys from "constants/keys";
 import TrapScreenReader from "./TrapScreenReader";
 import { getActiveElement, getFocusableElements, focusElement, getFocusData } from "./focus";
 import type { FocusableElement, TrapMode } from "./types";
+import { getShadowRoot } from "utilities/dom";
 import { checkKeyboardMode } from "./keyboardMode";
 
 type ReleaseOptions = { withoutFocusReturn?: boolean };
@@ -54,7 +55,7 @@ class TrapFocus {
 		const isDown = navigationMode === "arrows" && key === keys.DOWN;
 		const isPrev = (isBackTab && navigationMode === "tabs") || isUp;
 		const isNext = (isNextTab && navigationMode === "tabs") || isDown;
-		const isFocusedOnTrigger = getActiveElement() === this.trigger;
+		const isFocusedOnTrigger = getActiveElement(this.root) === this.trigger;
 		const focusData = getFocusData({
 			root: this.root,
 			target: isPrev ? "prev" : "next",
@@ -86,9 +87,19 @@ class TrapFocus {
 		focusElement(focusData.el, { pseudoFocus });
 	};
 
-	addListeners = () => document.addEventListener("keydown", this.handleKeyDown);
+	addListeners = () => {
+		const shadowRoot = getShadowRoot(this.root);
+		const el = shadowRoot ?? document;
 
-	removeListeners = () => document.removeEventListener("keydown", this.handleKeyDown);
+		el.addEventListener("keydown", this.handleKeyDown);
+	};
+
+	removeListeners = () => {
+		const shadowRoot = getShadowRoot(this.root);
+		const el = shadowRoot ?? document;
+
+		el.removeEventListener("keydown", this.handleKeyDown);
+	};
 
 	/**
 	 * Trap the focus, add observer and keyboard event listeners
@@ -96,7 +107,7 @@ class TrapFocus {
 	 */
 	trap = (options: TrapOptions = {}) => {
 		const { mode = "dialog", includeTrigger, initialFocusEl } = options;
-		const trigger = getActiveElement();
+		const trigger = getActiveElement(this.root);
 		const focusable = getFocusableElements(this.root, {
 			additionalElement: includeTrigger ? trigger : undefined,
 		});
@@ -106,7 +117,7 @@ class TrapFocus {
 		this.trigger = trigger;
 
 		this.mutationObserver = new MutationObserver(() => {
-			const currentActiveElement = getActiveElement();
+			const currentActiveElement = getActiveElement(this.root);
 
 			// Focus stayed inside the wrapper, no need to refocus
 			if (this.root.contains(currentActiveElement)) return;

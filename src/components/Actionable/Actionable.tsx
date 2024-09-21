@@ -14,6 +14,7 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		type,
 		disabled,
 		insetFocus,
+		disableFocusRing,
 		borderRadius,
 		as,
 		fullWidth,
@@ -26,6 +27,7 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		disabled && s["--disabled"],
 		borderRadius && s[`--radius-${borderRadius}`],
 		insetFocus && s["--inset"],
+		disableFocusRing && s["--disabled-focus-ring"],
 		fullWidth && s["--full-width"]
 	);
 	const rootAttributes: T.Props["attributes"] = { ...attributes };

@@ -3,6 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Theme from "components/Theme";
+import { getShadowRoot } from "utilities/dom";
 import type * as T from "./Portal.types";
 import s from "./Portal.module.css";
 
@@ -19,9 +20,8 @@ export const usePortalScope = () => {
 const Portal = (props: T.Props): any => {
 	const { children, targetRef } = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
-	const rootNode = rootRef.current?.getRootNode();
-	const isShadowDom = rootNode instanceof ShadowRoot;
-	const defaultTargetEl = isShadowDom ? rootNode : document.body;
+	const shadowRoot = getShadowRoot(rootRef.current);
+	const defaultTargetEl = shadowRoot ?? document.body;
 
 	/**
 	 * Check for parent portal to render inside it

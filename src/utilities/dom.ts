@@ -29,3 +29,8 @@ export const enableScroll = () => {
 	window.removeEventListener("wheel", preventDefault);
 	window.removeEventListener("touchmove", preventDefault);
 };
+
+export const getShadowRoot = (el: HTMLElement | null) => {
+	const rootNode = el?.getRootNode();
+	return rootNode instanceof ShadowRoot ? rootNode : null;
+};
