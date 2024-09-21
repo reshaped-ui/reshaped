@@ -1,5 +1,4 @@
 import React from "react";
-import { getShadowRoot } from "utilities/dom";
 
 /**
  * Types
@@ -7,7 +6,7 @@ import { getShadowRoot } from "utilities/dom";
 type Callback = (e: KeyboardEvent) => void;
 type PressedMap = Record<string, KeyboardEvent>;
 type Hotkeys = Record<string, Callback | null>;
-type HotkeyOptions = { preventDefault?: boolean; shadow?: boolean };
+type HotkeyOptions = { preventDefault?: boolean };
 type Context = {
 	isPressed: (key: string) => boolean;
 	addHotkeys: (
@@ -122,9 +121,11 @@ export class HotkeyStore {
 
 			if (hotkeyData?.size) {
 				hotkeyData.forEach((data) => {
+					const eventTarget = e.composedPath()[0] as Node;
+
 					if (
 						data.ref?.current &&
-						!(e.target === data.ref.current || data.ref.current.contains(e.target as Node))
+						!(eventTarget === data.ref.current || data.ref.current.contains(eventTarget))
 					) {
 						return;
 					}
@@ -229,26 +230,15 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 		[removePressedKey]
 	);
 
-	const addHotkeys: Context["addHotkeys"] = React.useCallback(
-		(hotkeys, ref, options = {}) => {
-			const shadowRoot = getShadowRoot(ref.current);
+	const addHotkeys: Context["addHotkeys"] = React.useCallback((hotkeys, ref, options = {}) => {
+		setHooksCount((prev) => prev + 1);
+		globalHotkeyStore.bindHotkeys(hotkeys, ref, options);
 
-			setHooksCount((prev) => prev + 1);
-			globalHotkeyStore.bindHotkeys(hotkeys, ref, { ...options, shadow: !!shadowRoot });
-
-			// @ts-ignore - shadow root addEventListener expects Event instead of KeyboardEvent
-			shadowRoot?.addEventListener("keydown", handleWindowKeyDown);
-
-			return () => {
-				setHooksCount((prev) => prev - 1);
-				globalHotkeyStore.unbindHotkeys(hotkeys);
-
-				// @ts-ignore - shadow root addEventListener expects Event instead of KeyboardEvent
-				shadowRoot?.removeEventListener("keydown", handleWindowKeyDown);
-			};
-		},
-		[handleWindowKeyDown]
-	);
+		return () => {
+			setHooksCount((prev) => prev - 1);
+			globalHotkeyStore.unbindHotkeys(hotkeys);
+		};
+	}, []);
 
 	React.useEffect(() => {
 		window.addEventListener("keydown", handleWindowKeyDown);
