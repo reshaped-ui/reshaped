@@ -36,19 +36,21 @@ const Expandable = (props: T.ContentProps) => {
 		const rootEl = rootRef.current;
 		if (!rootEl || !mountedRef.current) return;
 
-		let targetHeight: React.CSSProperties["height"] = 0;
-
 		if (active) {
 			rootEl.style.height = "auto";
-			targetHeight = rootEl.clientHeight;
-			rootEl.style.height = "0";
-		}
+			requestAnimationFrame(() => {
+				const targetHeight = rootEl.clientHeight;
 
-		if (!active) {
+				rootEl.style.height = "0";
+				setAnimatedHeight(targetHeight);
+			});
+		} else {
 			rootEl.style.height = `${rootEl.clientHeight}px`;
-		}
 
-		setAnimatedHeight(targetHeight);
+			requestAnimationFrame(() => {
+				setAnimatedHeight(0);
+			});
+		}
 	}, [active]);
 
 	return (
