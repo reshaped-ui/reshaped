@@ -161,7 +161,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const handleMouseEnter = React.useCallback(() => {
 		clearTimer();
-
+		console.log("enter");
 		if (hoverTriggeredWithTouchEventRef.current) {
 			handleOpen();
 			hoverTriggeredWithTouchEventRef.current = false;

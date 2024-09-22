@@ -36,7 +36,10 @@ const Autocomplete = (props: T.Props) => {
 	const hasChildren = !!React.Children.toArray(children).filter(Boolean).length;
 	const lockedRef = React.useRef(false);
 
-	const handleOpen = React.useCallback(() => setActive(true), []);
+	const handleOpen = React.useCallback(() => {
+		if (lockedRef.current) return;
+		setActive(true);
+	}, []);
 	const handleClose = () => setActive(false);
 
 	useHotkeys(
@@ -91,7 +94,7 @@ const Autocomplete = (props: T.Props) => {
 				width="trigger"
 				triggerType="focus"
 				trapFocusMode="selection-menu"
-				active={!lockedRef.current && hasChildren && active}
+				active={hasChildren && active}
 				onClose={handleClose}
 				onOpen={handleOpen}
 				containerRef={containerRef}

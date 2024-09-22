@@ -1,6 +1,6 @@
 import React from "react";
 import useRTL from "hooks/useRTL";
-import { getClosestFlyoutTarget } from "utilities/dom";
+import { getClosestFlyoutTarget, getShadowRoot } from "utilities/dom";
 import calculatePosition from "./utilities/calculatePosition";
 import type * as T from "./Flyout.types";
 
@@ -141,8 +141,7 @@ const flyout: Flyout = (args) => {
 		}
 	}
 
-	const rootNode = triggerEl?.getRootNode();
-	const shadowRoot = rootNode instanceof ShadowRoot ? rootNode : null;
+	const shadowRoot = getShadowRoot(triggerEl);
 
 	// Insert inside shadow root if possible to make sure styles are applied correctly
 	(shadowRoot || document.body).appendChild(targetClone);

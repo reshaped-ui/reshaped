@@ -30,3 +30,4 @@
 - Actionable: disableFocusRing
 - useOnClickOutside: support shadow DOM
 - Autocomplete, DropdownMenu, Popover, trapFocus: Support shadow dom for the keyboard navigation
+- Flyout: shadow dom doesn't required using containerRef

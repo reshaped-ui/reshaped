@@ -7,15 +7,10 @@ import DropdownMenu from "components/DropdownMenu";
 import Reshaped from "components/Reshaped";
 import Select from "components/Select";
 import Button from "components/Button";
-import Text from "components/Text";
+import Tooltip from "components/Tooltip";
 
 export default {
 	title: "Meta/ShadowDOM",
-};
-
-// Shadow DOM Component
-type ShadowDivProps = {
-	children?: React.ReactNode;
 };
 
 const getStylesData = () => {
@@ -25,7 +20,7 @@ const getStylesData = () => {
 };
 
 // Create a component to render inside the Shadow DOM
-const ShadowDiv = forwardRef<HTMLDivElement, ShadowDivProps>((props, ref) => {
+const ShadowDiv = forwardRef<HTMLDivElement, React.PropsWithChildren>((props, ref) => {
 	const shadowRef = useRef<HTMLDivElement>(null);
 
 	// Load styles
@@ -56,20 +51,25 @@ const ShadowDiv = forwardRef<HTMLDivElement, ShadowDivProps>((props, ref) => {
 		} else {
 			styleBlock.innerHTML = "";
 		}
+
 		styleBlock.append(
 			...getStylesData() // finds all <style> tags containing your web component ID
 				.map((x) => x.cloneNode(true)) // copies styles into the current instance of your web component. You might need to have multiple instances, so all of them need to track the styles.
 		);
 
-		return () => {
-			observer.disconnect();
-		};
+		return () => observer.disconnect();
 	}, []);
 
 	return (
 		<Reshaped>
 			<root.div className="quote" ref={shadowRef}>
-				<div ref={ref}>{props.children}</div>
+				<div ref={ref}>
+					{/* 
+						Adding padding here since otherwise mouseenter won't trigger on contents 
+						when mouse is switching from outside the shadow dom
+					*/}
+					<View padding={4}>{props.children}</View>
+				</div>
 			</root.div>
 		</Reshaped>
 	);
@@ -77,13 +77,8 @@ const ShadowDiv = forwardRef<HTMLDivElement, ShadowDivProps>((props, ref) => {
 
 // Main Component
 const Component: React.FC = () => {
-	const divRef = useRef<HTMLDivElement | null>(null);
-
 	const [valueAutoShadow, setValueAutoShadow] = useState("");
 	const [valueDropdownShadow, setValueDropdownShadow] = useState("");
-
-	const [valueAuto, setValueAuto] = useState("");
-	const [valueDropdown, setValueDropdown] = useState("");
 
 	const optionsAuto = ["Pizza", "Pie", "Ice-cream"];
 	const optionsDropdown = ["Turtle", "Cat", "Long-necked giraffe"];
@@ -98,141 +93,50 @@ const Component: React.FC = () => {
 		setValueDropdownShadow(val);
 	};
 
-	const handleChangeAuto: AutocompleteProps["onChange"] = (args) => {
-		console.log("Autocomlete value=", args);
-		setValueAuto(args.value);
-	};
-
-	const handleChangeDropdown = (val: string) => {
-		console.log("Dropdown value=", val);
-		setValueDropdown(val);
-	};
-
 	return (
-		<>
-			<Text variant="title-6">Inside shadow DOM</Text>
-			<View
-				width="100%"
-				divided
-				gap={4}
-				padding={4}
-				direction="row"
-				backgroundColor="elevation-base"
-				borderColor="neutral-faded"
-				wrap={false}
-			>
-				<View width="40px" backgroundColor="neutral-faded" />
-				<View grow>
-					<ShadowDiv ref={divRef}>
-						<View gap={4} direction="row" wrap={false}>
-							<Autocomplete
-								name="fruit-auto"
-								placeholder="Pick your food"
-								value={valueAutoShadow}
-								onChange={handleChangeAutoShadow}
-								containerRef={divRef}
+		<View paddingBottom={50}>
+			<ShadowDiv>
+				<View gap={4} direction="row" wrap={false}>
+					<Autocomplete
+						name="fruit-shadow"
+						placeholder="Pick your food"
+						value={valueAutoShadow}
+						onChange={handleChangeAutoShadow}
+					>
+						{optionsAuto.map((option) => (
+							<Autocomplete.Item
+								key={option}
+								value={option}
+								onClick={() => handleChangeAutoShadow({ value: option, name: "fruit-auto" })}
 							>
-								<Button onClick={() => console.log("233232")}>sdds</Button>
-								{optionsAuto.map((option) => (
-									<Autocomplete.Item
-										key={option}
-										value={option}
-										onClick={() => handleChangeAutoShadow({ value: option, name: "fruit-auto" })}
-									>
-										{option}
-									</Autocomplete.Item>
-								))}
-							</Autocomplete>
+								{option}
+							</Autocomplete.Item>
+						))}
+					</Autocomplete>
 
-							<DropdownMenu containerRef={divRef}>
-								<DropdownMenu.Trigger>
-									{(attributes) => (
-										<Select placeholder="Pick your animal" name="font" inputAttributes={attributes}>
-											{valueDropdownShadow}
-										</Select>
-									)}
-								</DropdownMenu.Trigger>
-								<DropdownMenu.Content>
-									{optionsDropdown.map((option) => (
-										<DropdownMenu.Item
-											onClick={() => handleChangeDropdownShadow(option)}
-											key={option}
-										>
-											{option}
-										</DropdownMenu.Item>
-									))}
-								</DropdownMenu.Content>
-							</DropdownMenu>
-
-							{/* <Tooltip containerRef={divRef} active text="Tooltip for button">
-                {(attributes) => (
-                  <Button attributes={attributes}>Hover me</Button>
-                )}
-              </Tooltip> */}
-						</View>
-					</ShadowDiv>
-				</View>
-			</View>
-
-			{/* Without shadow dom */}
-			<Text variant="title-6">Main DOM</Text>
-
-			<View
-				width="100%"
-				divided
-				gap={4}
-				padding={4}
-				direction="row"
-				backgroundColor="elevation-base"
-				borderColor="neutral-faded"
-				wrap={false}
-			>
-				<View width="40px" backgroundColor="neutral-faded" />
-				<View grow>
-					<View gap={4} direction="row" wrap={false}>
-						<Autocomplete
-							name="fruit-2"
-							placeholder="Pick your food"
-							value={valueAuto}
-							onChange={handleChangeAuto}
-						>
-							{optionsAuto.map((option) => (
-								<Autocomplete.Item
-									key={option}
-									value={option}
-									onClick={() => handleChangeAuto({ value: option, name: "fruit-2" })}
-								>
+					<DropdownMenu>
+						<DropdownMenu.Trigger>
+							{(attributes) => (
+								<Select placeholder="Pick your animal" name="font" inputAttributes={attributes}>
+									{valueDropdownShadow}
+								</Select>
+							)}
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content>
+							{optionsDropdown.map((option) => (
+								<DropdownMenu.Item onClick={() => handleChangeDropdownShadow(option)} key={option}>
 									{option}
-								</Autocomplete.Item>
+								</DropdownMenu.Item>
 							))}
-						</Autocomplete>
+						</DropdownMenu.Content>
+					</DropdownMenu>
 
-						<DropdownMenu>
-							<DropdownMenu.Trigger>
-								{(attributes) => (
-									<Select placeholder="Pick your animal" name="font-2" inputAttributes={attributes}>
-										{valueDropdown}
-									</Select>
-								)}
-							</DropdownMenu.Trigger>
-							<DropdownMenu.Content>
-								{optionsDropdown.map((option) => (
-									<DropdownMenu.Item onClick={() => handleChangeDropdown(option)} key={option}>
-										{option}
-									</DropdownMenu.Item>
-								))}
-							</DropdownMenu.Content>
-						</DropdownMenu>
-
-						{/* <Tooltip active text="Tooltip for button">
-              {(attributes) => (
-                <Button attributes={attributes}>Hover me</Button>
-              )}
-            </Tooltip> */}
-					</View>
+					<Tooltip text="Tooltip for button">
+						{(attributes) => <Button attributes={attributes}>Hover me</Button>}
+					</Tooltip>
 				</View>
-			</View>
-		</>
+			</ShadowDiv>
+		</View>
 	);
 };
 
