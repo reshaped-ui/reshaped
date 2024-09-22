@@ -91,14 +91,14 @@ class TrapFocus {
 		const shadowRoot = getShadowRoot(this.root);
 		const el = shadowRoot ?? document;
 
-		el.addEventListener("keydown", this.handleKeyDown);
+		el.addEventListener("keydown", this.handleKeyDown as EventListener);
 	};
 
 	removeListeners = () => {
 		const shadowRoot = getShadowRoot(this.root);
 		const el = shadowRoot ?? document;
 
-		el.removeEventListener("keydown", this.handleKeyDown);
+		el.removeEventListener("keydown", this.handleKeyDown as EventListener);
 	};
 
 	/**
