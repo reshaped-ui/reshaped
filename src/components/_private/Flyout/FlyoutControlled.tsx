@@ -25,6 +25,7 @@ import useHandlerRef from "hooks/useHandlerRef";
 const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const {
 		triggerType = "click",
+		groupTimeouts,
 		onOpen,
 		onClose,
 		children,
@@ -161,19 +162,22 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const handleMouseEnter = React.useCallback(() => {
 		clearTimer();
-		console.log("enter");
 		if (hoverTriggeredWithTouchEventRef.current) {
 			handleOpen();
 			hoverTriggeredWithTouchEventRef.current = false;
 		} else {
-			timerRef.current = setTimeout(
-				handleOpen,
-				cooldown.timer || isSubmenu ? timeouts.mouseEnterShort : timeouts.mouseEnter
-			);
+			if (groupTimeouts) cooldown.warm();
 
-			if (!isSubmenu && triggerType === "hover") cooldown.warm();
+			timerRef.current = setTimeout(
+				() => {
+					handleOpen();
+				},
+				groupTimeouts && cooldown.status === "warming"
+					? timeouts.mouseEnter
+					: timeouts.mouseEnterShort
+			);
 		}
-	}, [clearTimer, timerRef, handleOpen, isSubmenu, triggerType]);
+	}, [clearTimer, timerRef, handleOpen, groupTimeouts]);
 
 	const handleMouseLeave = React.useCallback(() => {
 		cooldown.cool();
@@ -244,14 +248,14 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			checkTransitions() &&
 			!disableHideAnimation &&
 			transitionStartedRef.current &&
-			(cooldown.status !== "warm" || triggerType !== "hover")
+			(cooldown.status === "cooling" || !groupTimeouts)
 		) {
 			hide();
 		} else {
 			// In case transitions are disabled globally - remove from the DOM immediately
 			remove();
 		}
-	}, [resolvedActive, render, hide, remove, disableHideAnimation, disabled]);
+	}, [resolvedActive, render, hide, remove, disableHideAnimation, disabled, groupTimeouts]);
 
 	React.useEffect(() => {
 		// Wait after positioning before show is triggered to animate flyout from the right side

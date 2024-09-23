@@ -20,8 +20,9 @@ export const usePortalScope = () => {
 const Portal = (props: T.Props): any => {
 	const { children, targetRef } = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
-	const shadowRoot = getShadowRoot(rootRef.current);
-	const defaultTargetEl = shadowRoot ?? document.body;
+	const rootNode = rootRef.current?.getRootNode();
+	const isShadowDom = rootNode instanceof ShadowRoot;
+	const defaultTargetEl = isShadowDom ? rootNode : document.body;
 
 	/**
 	 * Check for parent portal to render inside it

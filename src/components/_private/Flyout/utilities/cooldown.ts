@@ -1,21 +1,40 @@
+import * as timeouts from "../Flyout.constants";
+
 class Cooldown {
-	status: "cold" | "warm" | "cooling" = "cold";
+	status: "warming" | "warm" | "cooling" | "cold" = "cold";
 
 	timer?: ReturnType<typeof setTimeout>;
 
 	warm = () => {
 		clearTimeout(this.timer);
-		this.status = "warm";
+
+		if (this.status === "cooling") {
+			this.status = "warm";
+			return;
+		}
+
+		this.status = "warming";
+
+		this.timer = setTimeout(() => {
+			this.status = "warm";
+			this.timer = undefined;
+		}, timeouts.mouseEnterShort);
 	};
 
 	cool = () => {
-		this.status = "cooling";
-		const currentTimer = setTimeout(() => {
-			this.status = "cold";
-			if (currentTimer === this.timer) this.timer = undefined;
-		}, 500);
+		clearTimeout(this.timer);
 
-		this.timer = currentTimer;
+		if (this.status === "warming") {
+			this.status = "cold";
+			return;
+		}
+
+		this.status = "cooling";
+
+		this.timer = setTimeout(() => {
+			this.status = "cold";
+			this.timer = undefined;
+		}, 500);
 	};
 }
 

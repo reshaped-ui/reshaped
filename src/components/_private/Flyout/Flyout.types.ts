@@ -80,6 +80,7 @@ export type TriggerAttributes = {
 type BaseProps = {
 	id?: string;
 	triggerType?: "hover" | "click" | "focus";
+	groupTimeouts?: boolean;
 	position?: Position;
 	forcePosition?: boolean;
 	trapFocusMode?: TrapMode;

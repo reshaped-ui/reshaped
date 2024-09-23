@@ -109,12 +109,14 @@ export class HotkeyStore {
 
 		/**
 		 * Support for `mod` that represents both Mac and Win keyboards
+		 * We create the hotkeyId again to sort the mod key correctly
 		 */
+		const controlToModPressedId = getHotkeyId(pressedId.replace("control", "mod"));
+		const metaToModPressedId = getHotkeyId(pressedId.replace("meta", "mod"));
 		const hotkeyControlModData =
-			pressedFormattedKeys.includes("control") &&
-			this.hotkeyMap[pressedId.replace("control", "mod")];
+			pressedFormattedKeys.includes("control") && this.hotkeyMap[controlToModPressedId];
 		const hotkeyMetaModData =
-			pressedFormattedKeys.includes("meta") && this.hotkeyMap[pressedId.replace("meta", "mod")];
+			pressedFormattedKeys.includes("meta") && this.hotkeyMap[metaToModPressedId];
 
 		[hotkeyData, hotkeyControlModData, hotkeyMetaModData].forEach((hotkeyData) => {
 			if (!hotkeyData) return;

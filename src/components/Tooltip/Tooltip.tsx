@@ -33,6 +33,7 @@ const Tooltip = (props: T.Props) => {
 			disableContentHover={disableContentHover}
 			containerRef={containerRef}
 			triggerType="hover"
+			groupTimeouts
 		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>
 			<Flyout.Content>

@@ -10,7 +10,7 @@ export default {
 	component: Overlay,
 	parameters: {
 		iframe: {
-			url: "https://reshaped.so/docs/components/overlay",
+			url: "https://reshaped.so/docs/utilities/overlay",
 		},
 	},
 };
