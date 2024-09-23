@@ -32,3 +32,4 @@
 - Autocomplete, DropdownMenu, Popover, trapFocus: Support shadow dom for the keyboard navigation
 - Flyout: shadow dom doesn't required using containerRef
 - Accordiong: fixed animation edge cases (inside live editor on the website)
+- useHotkeys: fixed mod+enter on non-mac os
