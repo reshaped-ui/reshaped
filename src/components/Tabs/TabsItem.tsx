@@ -6,6 +6,7 @@ import HiddenInput from "components/_private/HiddenInput";
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import Text from "components/Text";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { useTabs } from "./TabsContext";
 import type * as T from "./Tabs.types";
 import s from "./Tabs.module.css";
@@ -52,9 +53,6 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 		const currentListItem = itemRef.current?.parentElement;
 		const prevListItem = elActiveRef.current?.parentElement;
 
-		// Updating refs after saving the elements
-		updateRefs();
-
 		if (onChange) onChange({ value, name });
 
 		if (!listEl || !currentListItem || !prevListItem || listEl.scrollWidth === listEl.clientWidth) {
@@ -71,7 +69,7 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 		itemRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
 	};
 
-	React.useEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		if (!active) return;
 		updateRefs();
 	}, [active, updateRefs]);

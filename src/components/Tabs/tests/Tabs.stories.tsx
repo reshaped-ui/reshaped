@@ -1,6 +1,9 @@
+import React from "react";
 import { Example } from "utilities/storybook";
 import Tabs from "components/Tabs";
 import View from "components/View";
+import Text from "components/Text";
+import ScrollArea from "components/ScrollArea";
 import IconZap from "icons/Zap";
 
 export default {
@@ -305,3 +308,77 @@ export const edgeCases = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const edgeCaseDom = () => {
+	const [activeItem, setActiveItem] = React.useState("1");
+	const sectionsRef = React.useRef(null);
+
+	return (
+		<Example>
+			<Example.Item title="active item changes on scroll">
+				<View justify="center" align="center" padding={10}>
+					<View width={60} gap={2}>
+						<Tabs value={activeItem} onChange={(args) => setActiveItem(args.value)}>
+							<Tabs.List>
+								<Tabs.Item value="1">Item 1</Tabs.Item>
+								<Tabs.Item value="2">Item 2</Tabs.Item>
+								<Tabs.Item value="3">Item 3</Tabs.Item>
+								<Tabs.Item value="4">Item 4</Tabs.Item>
+							</Tabs.List>
+						</Tabs>
+
+						<ScrollArea
+							attributes={{ ref: sectionsRef }}
+							height={70}
+							onScroll={(args) => {
+								setActiveItem(Math.min(4, Math.floor(args.y * 10) + 1).toString());
+							}}
+						>
+							<View gap={4}>
+								<View gap={2}>
+									<Text>Section 1</Text>
+
+									<View gap={1} direction="row">
+										{[...Array(4)].map((i) => (
+											<View grow height="100px" backgroundColor="neutral-faded" key={i} />
+										))}
+									</View>
+								</View>
+
+								<View gap={2}>
+									<Text>Section 2</Text>
+
+									<View gap={1} direction="row">
+										{[...Array(4)].map((i) => (
+											<View grow height="100px" backgroundColor="neutral-faded" />
+										))}
+									</View>
+								</View>
+
+								<View gap={2}>
+									<Text>Section 3</Text>
+
+									<View gap={1} direction="row">
+										{[...Array(4)].map((i) => (
+											<View grow height="100px" backgroundColor="neutral-faded" />
+										))}
+									</View>
+								</View>
+
+								<View gap={2}>
+									<Text>Section 4</Text>
+
+									<View gap={1} direction="row">
+										{[...Array(4)].map((i) => (
+											<View grow height="100px" backgroundColor="neutral-faded" />
+										))}
+									</View>
+								</View>
+							</View>
+						</ScrollArea>
+					</View>
+				</View>
+			</Example.Item>
+		</Example>
+	);
+};
