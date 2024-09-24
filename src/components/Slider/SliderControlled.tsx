@@ -2,7 +2,8 @@
 
 import React from "react";
 import { classNames } from "utilities/helpers";
-import { enableUserSelect, disableUserSelect, enableScroll, disableScroll } from "utilities/dom";
+import { enableUserSelect, disableUserSelect } from "utilities/dom";
+import { disableScroll, enableScroll } from "utilities/scroll";
 import useRTL from "hooks/useRTL";
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";

@@ -1,57 +1,29 @@
 "use client";
 
 import React from "react";
-
-const getScrollbarWidth = (() => {
-	let scrollbarWidth: number;
-
-	return () => {
-		if (scrollbarWidth) return scrollbarWidth;
-
-		const scrollDiv = document.createElement("div");
-		scrollDiv.style.position = "absolute";
-		scrollDiv.style.top = "-9999px";
-		scrollDiv.style.width = "50px";
-		scrollDiv.style.height = "50px";
-		scrollDiv.style.overflow = "scroll";
-		document.body.appendChild(scrollDiv);
-		scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
-		document.body.removeChild(scrollDiv);
-
-		return scrollbarWidth;
-	};
-})();
+import useId from "hooks/useElementId";
+import { lockScroll, unlockScroll } from "utilities/scroll";
 
 const useScrollLock = () => {
 	const [locked, setLocked] = React.useState(false);
-	const overflowStyleRef = React.useRef<string | undefined>();
-	const isOverflowingRef = React.useRef(false);
+	const id = useId();
 
-	const lockScroll = React.useCallback(() => {
-		const targetEl = document.body;
-		const rect = targetEl.getBoundingClientRect();
+	const handleLockScroll = React.useCallback(() => {
+		lockScroll(id, () => setLocked(true));
+	}, [id]);
 
-		isOverflowingRef.current = rect.left + rect.right < window.innerWidth;
-		overflowStyleRef.current = targetEl.style.overflow;
-		targetEl.style.overflow = "hidden";
+	const handleUnlockScroll = React.useCallback(() => {
+		unlockScroll(id, () => setLocked(false));
+	}, [id]);
 
-		if (isOverflowingRef.current) {
-			const scrollBarWidth = getScrollbarWidth();
-			targetEl.style.paddingRight = `${scrollBarWidth}px`;
-		}
-
-		setLocked(true);
-	}, [setLocked, isOverflowingRef, overflowStyleRef]);
-
-	const unlockScroll = React.useCallback(() => {
-		const targetEl = document.body;
-		targetEl.style.overflow = overflowStyleRef.current || "";
-		if (isOverflowingRef.current) targetEl.style.paddingRight = "";
-
-		setLocked(false);
-	}, [setLocked, isOverflowingRef, overflowStyleRef]);
-
-	return { scrollLocked: locked, lockScroll, unlockScroll };
+	return React.useMemo(
+		() => ({
+			scrollLocked: locked,
+			lockScroll: handleLockScroll,
+			unlockScroll: handleUnlockScroll,
+		}),
+		[locked, handleLockScroll, handleUnlockScroll]
+	);
 };
 
 export default useScrollLock;

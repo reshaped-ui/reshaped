@@ -1,5 +1,5 @@
 import React from "react";
-import { enableKeyboardMode, disableKeyboardMode } from "utilities/a11y/keyboardMode";
+import { enableKeyboardMode, disableKeyboardMode } from "utilities/a11y";
 
 const useSingletonKeyboardMode = () => {
 	React.useEffect(() => {

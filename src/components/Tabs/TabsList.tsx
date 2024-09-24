@@ -8,7 +8,7 @@ import {
 	focusPreviousElement,
 	focusFirstElement,
 	focusLastElement,
-} from "utilities/a11y/focus";
+} from "utilities/a11y";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";
 import Button from "components/Button";
