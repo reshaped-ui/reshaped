@@ -34,3 +34,4 @@
 - Accordiong: fixed animation edge cases (inside live editor on the website)
 - useHotkeys: fixed mod+enter on non-mac os
 - Tabs: fixed edge cases when tab item active value is changing based on user events
+- useScrollLock: fixed ios lock
