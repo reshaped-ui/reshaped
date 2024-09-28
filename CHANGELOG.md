@@ -37,3 +37,4 @@
 - Icon: Fixed html width / height overrides
 - Tabs: Increased spacing between the items
 - Loader: Large size support
+- Flyout: fixed updatePosition not working when flyout stays opened

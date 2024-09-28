@@ -289,7 +289,7 @@ export const testDynamicBounds = () => {
 				<Button onClick={() => setSize("medium")}>Small button</Button>
 			</View>
 			<View height={100}>
-				<Flyout position="bottom" active instanceRef={flyoutRef}>
+				<Flyout position="bottom" instanceRef={flyoutRef} disableCloseOnOutsideClick>
 					<Flyout.Trigger>
 						{(attributes) => (
 							<div style={{ position: "absolute", left, top: "50%" }}>
