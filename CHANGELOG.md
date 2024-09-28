@@ -36,3 +36,4 @@
 - Tabs: fixed edge cases when tab item active value is changing based on user events
 - Icon: Fixed html width / height overrides
 - Tabs: Increased spacing between the items
+- Loader: Large size support

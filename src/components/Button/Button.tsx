@@ -82,7 +82,7 @@ const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 		>
 			{loading && (
 				<div className={s.loader}>
-					<Loader size="small" color="inherit" />
+					<Loader color="inherit" />
 				</div>
 			)}
 			{renderIcon("start")}
