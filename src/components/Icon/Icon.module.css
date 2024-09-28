@@ -13,8 +13,11 @@
 
 .root svg {
 	display: block;
-	height: 100%;
+
+	/* Override the sizes that might be defined on the svg element in html */
 	min-width: 100%;
+	height: 100%;
+	width: auto;
 }
 
 @each $color in neutral, neutral-faded, primary, positive, warning, critical, disabled {
