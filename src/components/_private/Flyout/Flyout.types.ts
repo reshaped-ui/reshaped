@@ -5,19 +5,11 @@ import type { TrapMode } from "utilities/a11y";
 /**
  * Utility
  */
-export type Position =
-	| "bottom"
-	| "bottom-start"
-	| "bottom-end"
-	| "top"
-	| "top-start"
-	| "top-end"
-	| "start"
-	| "start-top"
-	| "start-bottom"
-	| "end"
-	| "end-top"
-	| "end-bottom";
+type XSide = "start" | "end";
+type YSide = "top" | "bottom";
+export type Side = XSide | YSide;
+
+export type Position = `${YSide}` | `${YSide}-${XSide}` | `${XSide}` | `${XSide}-${YSide}`;
 export type Width = "trigger" | string;
 export type Options = {
 	width?: Width;
@@ -25,6 +17,7 @@ export type Options = {
 	container?: HTMLElement | null;
 	rtl: boolean;
 	forcePosition?: boolean;
+	contentGap?: number;
 };
 export type Styles = React.CSSProperties;
 

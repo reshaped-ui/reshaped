@@ -253,37 +253,29 @@ export const testInsideFixed = () => (
 );
 
 export const testDynamicBounds = () => {
-	const [left, setLeft] = React.useState("50%");
+	const [left, setLeft] = React.useState(50);
+	const [top, setTop] = React.useState(50);
 	const [size, setSize] = React.useState<"medium" | "large">("medium");
 	const flyoutRef = React.useRef<FlyoutInstance>();
 
 	React.useEffect(() => {
 		flyoutRef.current?.updatePosition();
-	}, [left]);
+	}, [left, top]);
 
 	return (
 		<View gap={4}>
 			<View direction="row" gap={2}>
+				<Button onClick={() => setLeft((prev) => prev - 10)}>Left</Button>
+				<Button onClick={() => setLeft((prev) => prev + 10)}>Right</Button>
+				<Button onClick={() => setTop((prev) => prev - 10)}>Up</Button>
+				<Button onClick={() => setTop((prev) => prev + 10)}>Down</Button>
 				<Button
 					onClick={() => {
-						setLeft("20%");
-					}}
-				>
-					Left
-				</Button>
-				<Button
-					onClick={() => {
-						setLeft("50%");
+						setLeft(50);
+						setTop(50);
 					}}
 				>
 					Center
-				</Button>
-				<Button
-					onClick={() => {
-						setLeft("70%");
-					}}
-				>
-					Right
 				</Button>
 				<Button onClick={() => setSize("large")}>Large button</Button>
 				<Button onClick={() => setSize("medium")}>Small button</Button>
@@ -292,7 +284,7 @@ export const testDynamicBounds = () => {
 				<Flyout position="bottom" instanceRef={flyoutRef} disableCloseOnOutsideClick>
 					<Flyout.Trigger>
 						{(attributes) => (
-							<div style={{ position: "absolute", left, top: "50%" }}>
+							<div style={{ position: "absolute", left: `${left}%`, top: `${top}%` }}>
 								<Button color="primary" attributes={attributes} size={size}>
 									Open
 								</Button>
@@ -305,13 +297,13 @@ export const testDynamicBounds = () => {
 								background: "var(--rs-color-background-elevation-overlay)",
 								padding: "var(--rs-unit-x4)",
 								height: 100,
-								width: 160,
+								minWidth: 160,
 								borderRadius: "var(--rs-radius-medium)",
 								border: "1px solid var(--rs-color-border-neutral-faded)",
 								boxSizing: "border-box",
 							}}
 						>
-							{"Content"}
+							Content
 						</div>
 					</Flyout.Content>
 				</Flyout>

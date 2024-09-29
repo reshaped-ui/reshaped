@@ -39,3 +39,4 @@
 - Tabs: Increased spacing between the items
 - Loader: Large size support
 - Flyout: fixed updatePosition not working when flyout stays opened
+- Flyout: better fallback calculations and correctly calculating the gap when positioning

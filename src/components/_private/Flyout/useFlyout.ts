@@ -2,13 +2,13 @@ import React from "react";
 import useRTL from "hooks/useRTL";
 import { getClosestFlyoutTarget, getShadowRoot } from "utilities/dom";
 import calculatePosition from "./utilities/calculatePosition";
+import getPositionFallbacks from "./utilities/getPositionFallbacks";
 import type * as T from "./Flyout.types";
 
 /**
  * Typings
  */
 type ElementRef = React.RefObject<HTMLElement>;
-type FlyoutOrderKey = "bottom" | "top" | "end" | "start";
 type PassedFlyoutOptions = {
 	width?: T.Width;
 	position?: T.Position;
@@ -22,6 +22,7 @@ type Flyout = (
 		triggerEl: HTMLElement;
 		flyoutEl: HTMLElement;
 		triggerBounds?: DOMRect | null;
+		contentGap?: number;
 	}
 ) => T.FlyoutData;
 
@@ -45,6 +46,7 @@ type UseFlyout = (
 		triggerElRef: ElementRef;
 		flyoutElRef: ElementRef;
 		triggerBoundsRef: React.RefObject<DOMRect | undefined>;
+		contentGap?: number;
 	}
 ) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
@@ -52,26 +54,6 @@ type UseFlyout = (
 	hide: () => void;
 	remove: () => void;
 	show: () => void;
-};
-
-const topPos: T.Position[] = ["top-start", "top", "top-end"];
-const bottomPos: T.Position[] = ["bottom-start", "bottom", "bottom-end"];
-const startPos: T.Position[] = ["start", "start-bottom", "start-top"];
-const endPos: T.Position[] = ["end", "end-bottom", "end-top"];
-const order: Record<FlyoutOrderKey, T.Position[]> = {
-	top: [...topPos, ...bottomPos, ...endPos, ...startPos],
-	bottom: [...bottomPos, ...topPos, ...endPos, ...startPos],
-	start: [...startPos, ...endPos, ...topPos, ...bottomPos],
-	end: [...endPos, ...startPos, ...topPos, ...bottomPos],
-};
-
-/**
- * Get an order of positions to try to fit popover on the screen based on its starting position
- */
-const getPositionOrder = (position: T.Position) => {
-	const types: Array<FlyoutOrderKey> = ["top", "bottom", "start", "end"];
-	const type = types.find((type) => position.startsWith(type)) || "bottom";
-	return order[type];
 };
 
 /**
@@ -120,13 +102,20 @@ const resetStyles: T.Styles = {
  * Set position of the target element to fit on the screen
  */
 const flyout: Flyout = (args) => {
-	const { triggerEl, flyoutEl, triggerBounds: passedTriggerBounds, ...options } = args;
+	const {
+		triggerEl,
+		flyoutEl,
+		triggerBounds: passedTriggerBounds,
+		contentGap = 0,
+		...options
+	} = args;
 	const { position, forcePosition, width, container } = options;
-	const targetClone = flyoutEl.cloneNode(true) as any;
+	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
 	const triggerBounds = passedTriggerBounds || triggerEl.getBoundingClientRect();
+	const contentGapModifier = parseInt(getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1"));
 
 	// Reset all styles applied on the previous hook execution
-	targetClone.style = "";
+	targetClone.style.cssText = "";
 
 	Object.keys(resetStyles).forEach((key) => {
 		const value = resetStyles[key as keyof T.Styles];
@@ -155,44 +144,34 @@ const flyout: Flyout = (args) => {
 		left: containerBounds.left + document.documentElement.scrollLeft - containerParent.scrollLeft,
 	};
 
-	let calculated = calculatePosition({ triggerBounds, flyoutBounds, scopeOffset, ...options });
+	let calculated: ReturnType<typeof calculatePosition> | null = null;
+	const testOrder = getPositionFallbacks(position);
 
-	if (!fullyVisible(calculated) && !forcePosition) {
-		const order = getPositionOrder(position);
-		const mobileOrder = order.filter((position) => position === "top" || position === "bottom");
+	testOrder.some((currentPosition, index) => {
+		const tested = calculatePosition({
+			...options,
+			triggerBounds,
+			flyoutBounds,
+			scopeOffset,
+			position: currentPosition,
+			contentGap: contentGap * contentGapModifier,
+		});
+		const visible = fullyVisible(tested);
+		const validPosition = visible || forcePosition;
 
-		const test = (testOrder: typeof order, extraOptions: { fullWidth?: boolean } = {}) => {
-			const { fullWidth } = extraOptions;
-			testOrder.some((currentPosition) => {
-				const calculateOptions = {
-					...options,
-					width: fullWidth ? "full" : options.width,
-					position: currentPosition,
-				};
-
-				const tested = calculatePosition({
-					triggerBounds,
-					flyoutBounds,
-					scopeOffset,
-					...calculateOptions,
-				});
-
-				if (fullyVisible(tested)) {
-					calculated = tested;
-					return true;
-				}
-
-				return false;
-			});
-		};
-
-		test(order);
-		if (!fullyVisible(calculated)) {
-			test(mobileOrder, { fullWidth: true });
+		// Saving first try in case non of the options work
+		if (validPosition || index === 0) {
+			calculated = tested;
 		}
+
+		return validPosition;
+	});
+
+	if (!calculated) {
+		throw new Error(`Reshaped: Can't calculate styles for the ${position} position`);
 	}
 
-	targetClone.parentNode.removeChild(targetClone);
+	targetClone.parentNode?.removeChild(targetClone);
 	return calculated;
 };
 
@@ -228,7 +207,7 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 };
 
 const useFlyout: UseFlyout = (args) => {
-	const { triggerElRef, flyoutElRef, triggerBoundsRef, ...options } = args;
+	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, ...options } = args;
 	const { position: defaultPosition = "bottom", forcePosition, width, container } = options;
 	const [isRTL] = useRTL();
 	const [state, dispatch] = React.useReducer(flyoutReducer, {
@@ -266,6 +245,7 @@ const useFlyout: UseFlyout = (args) => {
 				forcePosition,
 				rtl: isRTL,
 				container,
+				contentGap,
 			});
 
 			if (nextFlyoutData)
@@ -280,6 +260,7 @@ const useFlyout: UseFlyout = (args) => {
 			triggerElRef,
 			triggerBoundsRef,
 			width,
+			contentGap,
 		]
 	);
 
