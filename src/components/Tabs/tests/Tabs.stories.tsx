@@ -141,15 +141,17 @@ export const composition = () => (
 	<Example>
 		<Example.Item title="switching panels">
 			<Tabs>
-				<Tabs.List>
-					<Tabs.Item value="0">Item 1</Tabs.Item>
-					<Tabs.Item value="1">Long item 2</Tabs.Item>
-					<Tabs.Item value="2">Very long item 3</Tabs.Item>
-				</Tabs.List>
+				<View gap={4}>
+					<Tabs.List>
+						<Tabs.Item value="0">Item 1</Tabs.Item>
+						<Tabs.Item value="1">Long item 2</Tabs.Item>
+						<Tabs.Item value="2">Very long item 3</Tabs.Item>
+					</Tabs.List>
 
-				<Tabs.Panel value="0">Tab 1</Tabs.Panel>
-				<Tabs.Panel value="1">Tab 2</Tabs.Panel>
-				<Tabs.Panel value="2">Tab 3</Tabs.Panel>
+					<Tabs.Panel value="0">Tab 1</Tabs.Panel>
+					<Tabs.Panel value="1">Tab 2</Tabs.Panel>
+					<Tabs.Panel value="2">Tab 3</Tabs.Panel>
+				</View>
 			</Tabs>
 		</Example.Item>
 	</Example>

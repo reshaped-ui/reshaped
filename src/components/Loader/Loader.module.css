@@ -86,4 +86,9 @@
 		--rs-loader-size: var(--rs-unit-x6);
 		--rs-loader-stroke: 3px;
 	}
+
+	@value large {
+		--rs-loader-size: var(--rs-unit-x10);
+		--rs-loader-stroke: 5px;
+	}
 }

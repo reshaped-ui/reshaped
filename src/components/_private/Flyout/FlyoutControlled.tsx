@@ -65,7 +65,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const triggerElRef =
 		(!parentFlyoutContentContext && parentFlyoutTriggerContext?.triggerElRef) ||
 		internalTriggerElRef;
-	const triggerBoundsRef = React.useRef<DOMRect>();
+	const triggerBoundsRef = React.useRef<DOMRect | null | undefined>(null);
 	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
@@ -211,6 +211,12 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			if (!resolvedActive) return;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
 			transitionStartedRef.current = true;
+
+			/**
+			 * After animation has started, we're sure about the correct bounds
+			 * so drop the cache to make flyout work when trigger moves around
+			 */
+			triggerBoundsRef.current = null;
 		},
 		[resolvedActive]
 	);

@@ -35,3 +35,7 @@
 - useHotkeys: fixed mod+enter on non-mac os
 - Tabs: fixed edge cases when tab item active value is changing based on user events
 - useScrollLock: fixed ios lock
+- Icon: Fixed html width / height overrides
+- Tabs: Increased spacing between the items
+- Loader: Large size support
+- Flyout: fixed updatePosition not working when flyout stays opened

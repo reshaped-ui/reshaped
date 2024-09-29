@@ -47,7 +47,7 @@
 }
 
 .listItem {
-	--rs-tabs-gap: var(--rs-unit-x4);
+	--rs-tabs-gap: var(--rs-unit-x6);
 
 	flex-shrink: 0;
 	position: relative;

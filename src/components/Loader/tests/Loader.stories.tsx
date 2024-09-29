@@ -12,15 +12,16 @@ export default {
 };
 
 export const size = () => {
-	const attributes: React.HTMLAttributes<HTMLSpanElement> = {};
-
 	return (
 		<Example>
 			<Example.Item title="size: medium">
-				<Loader size="medium" attributes={attributes} />
+				<Loader size="medium" />
 			</Example.Item>
 			<Example.Item title="size: small">
-				<Loader size="small" attributes={{ "data-foo": "23" }} />
+				<Loader size="small" />
+			</Example.Item>
+			<Example.Item title="size: large">
+				<Loader size="large" />
 			</Example.Item>
 			<Example.Item title={["responsive size", "[s] small", "[m+] medium"]}>
 				<Loader size={{ s: "small", m: "medium" }} />
