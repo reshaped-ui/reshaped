@@ -36,7 +36,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		disableHideAnimation,
 		disableContentHover,
 		disableCloseOnOutsideClick,
-		contentGap,
+		contentGap = 2,
 		contentClassName,
 		contentAttributes,
 		position: passedPosition,
@@ -91,6 +91,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		defaultActive: resolvedActive,
 		container: containerRef?.current,
 		forcePosition,
+		contentGap,
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
 	// Don't create dismissible queue for hover flyout because they close all together on mouseout

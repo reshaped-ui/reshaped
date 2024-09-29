@@ -25,26 +25,42 @@ const calculatePosition = (
 		scopeOffset: Record<"left" | "top", number>;
 	}
 ) => {
-	const { triggerBounds, flyoutBounds, scopeOffset, position: passedPosition, rtl, width } = args;
+	const {
+		triggerBounds,
+		flyoutBounds,
+		scopeOffset,
+		position: passedPosition,
+		rtl,
+		width,
+		contentGap = 0,
+	} = args;
+	const isFullWidth = width === "full" || width === "100%";
 	let left = 0;
 	let top = 0;
 
 	let position = passedPosition;
 	if (rtl) position = getRTLPosition(position);
-	if (width === "full" || width === "trigger") {
+	if (width === isFullWidth || width === "trigger") {
 		position = position.includes("top") ? "top" : "bottom";
 	}
+
+	const isHorizontalPosition = position.match(/^(start|end)/);
+	const isVerticalPosition = position.match(/^(top|bottom)/);
+
+	const flyoutWidth = flyoutBounds.width + (isHorizontalPosition ? contentGap : 0);
+	const flyoutHeight = flyoutBounds.height + (isVerticalPosition ? contentGap : 0);
 
 	switch (position) {
 		case "bottom":
 		case "top":
-			left = centerBySize(triggerBounds.width, flyoutBounds.width) + triggerBounds.left;
+			left = centerBySize(triggerBounds.width, flyoutWidth) + triggerBounds.left;
 			break;
 
 		case "start":
 		case "start-top":
 		case "start-bottom":
-			left = triggerBounds.left - flyoutBounds.width;
+			left = triggerBounds.left - flyoutWidth;
+
 			break;
 
 		case "end":
@@ -60,7 +76,7 @@ const calculatePosition = (
 
 		case "top-end":
 		case "bottom-end":
-			left = triggerBounds.right - flyoutBounds.width;
+			left = triggerBounds.right - flyoutWidth;
 			break;
 
 		default:
@@ -71,7 +87,7 @@ const calculatePosition = (
 		case "top":
 		case "top-start":
 		case "top-end":
-			top = triggerBounds.top - flyoutBounds.height;
+			top = triggerBounds.top - flyoutHeight;
 			break;
 
 		case "bottom":
@@ -82,7 +98,7 @@ const calculatePosition = (
 
 		case "start":
 		case "end":
-			top = centerBySize(triggerBounds.height, flyoutBounds.height) + triggerBounds.top;
+			top = centerBySize(triggerBounds.height, flyoutHeight) + triggerBounds.top;
 			break;
 
 		case "start-top":
@@ -92,7 +108,7 @@ const calculatePosition = (
 
 		case "start-bottom":
 		case "end-bottom":
-			top = triggerBounds.bottom - flyoutBounds.height;
+			top = triggerBounds.bottom - flyoutHeight;
 			break;
 
 		default:
@@ -105,10 +121,10 @@ const calculatePosition = (
 
 	top = Math.round(top + (window.scrollY || 0) - scopeOffset.top);
 	left = Math.round(left + (window.scrollX || 0) - scopeOffset.left);
-	let widthStyle = Math.ceil(flyoutBounds.width);
-	const height = Math.ceil(flyoutBounds.height);
+	let widthStyle = Math.ceil(flyoutWidth);
+	const height = Math.ceil(flyoutHeight);
 
-	if (width === "full") {
+	if (isFullWidth) {
 		left = SCREEN_OFFSET;
 		widthStyle = window.innerWidth - SCREEN_OFFSET * 2;
 	} else if (width === "trigger") {
