@@ -39,3 +39,5 @@
 - Loader: Large size support
 - Flyout: fixed updatePosition not working when flyout stays opened
 - Flyout: better fallback calculations and correctly calculating the gap when positioning
+- Flyout, Popover, DropdownMenu: deprecated forcePosition, added fallbackPositions array and false
+- Flyout: fallback history when no position fits

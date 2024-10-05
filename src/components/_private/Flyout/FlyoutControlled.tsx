@@ -45,6 +45,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		instanceRef,
 		containerRef,
 	} = props;
+	const fallbackPositions =
+		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
 	const onOpenRef = useHandlerRef(onOpen);
 	const onCloseRef = useHandlerRef(onClose);
 	const resolvedActive = disabled === true ? false : passedActive;
@@ -90,7 +92,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		position: passedPosition,
 		defaultActive: resolvedActive,
 		container: containerRef?.current,
-		forcePosition,
+		fallbackPositions,
 		contentGap,
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;

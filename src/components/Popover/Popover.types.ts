@@ -8,6 +8,7 @@ export type Props = Pick<
 	| "id"
 	| "position"
 	| "forcePosition"
+	| "fallbackPositions"
 	| "onOpen"
 	| "onClose"
 	| "width"
