@@ -10,6 +10,7 @@ import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
 import { checkKeyboardMode } from "utilities/a11y/keyboardMode";
+import { FocusableElement } from "utilities/a11y/types";
 import useFlyout from "./useFlyout";
 import * as timeouts from "./Flyout.constants";
 import cooldown from "./utilities/cooldown";
@@ -44,6 +45,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		id: passedId,
 		instanceRef,
 		containerRef,
+		initialFocusRef,
 	} = props;
 	const fallbackPositions =
 		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
@@ -287,6 +289,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		trapFocusRef.current = new TrapFocus(flyoutElRef.current);
 		trapFocusRef.current.trap({
 			mode: trapFocusMode,
+			initialFocusEl: initialFocusRef?.current as FocusableElement | undefined,
 			includeTrigger: triggerType === "hover" && trapFocusMode !== "dialog" && !isSubmenu,
 			onNavigateOutside: () => {
 				handleClose();

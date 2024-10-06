@@ -10,7 +10,7 @@ type ReleaseOptions = { withoutFocusReturn?: boolean };
 type TrapOptions = {
 	onNavigateOutside?: () => void;
 	includeTrigger?: boolean;
-	initialFocusEl?: FocusableElement;
+	initialFocusEl?: FocusableElement | null;
 	mode?: TrapMode;
 };
 

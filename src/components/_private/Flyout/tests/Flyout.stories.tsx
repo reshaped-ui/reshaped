@@ -6,6 +6,7 @@ import View from "components/View";
 import Theme from "components/Theme";
 import Button from "components/Button";
 import Flyout, { FlyoutInstance } from "components/_private/Flyout";
+import TextField from "components/TextField";
 
 export default { title: "Utilities/Internal/Flyout" };
 
@@ -22,7 +23,7 @@ const Demo = (props: any) => {
 					style={{
 						background: "var(--rs-color-background-elevation-overlay)",
 						padding: "var(--rs-unit-x4)",
-						height: 100,
+						height: 150,
 						width: 160,
 						borderRadius: "var(--rs-radius-medium)",
 						border: "1px solid var(--rs-color-border-neutral-faded)",
@@ -139,6 +140,23 @@ export const disableFlags = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const initialFocus = () => {
+	const initialFocusRef = React.useRef<HTMLInputElement>(null);
+
+	return (
+		<Example>
+			<Example.Item title="focuses input on open">
+				<Demo initialFocusRef={initialFocusRef}>
+					<View gap={4}>
+						<Button onClick={() => {}}>Click me</Button>
+						<TextField name="foo" inputAttributes={{ ref: initialFocusRef }} />
+					</View>
+				</Demo>
+			</Example.Item>
+		</Example>
+	);
+};
 
 class CustomElement extends window.HTMLElement {
 	constructor() {

@@ -94,6 +94,7 @@ type BaseProps = {
 	contentAttributes?: G.Attributes<"div">;
 	instanceRef?: React.Ref<Instance>;
 	containerRef?: React.RefObject<HTMLElement>;
+	initialFocusRef?: React.RefObject<HTMLElement>;
 };
 
 export type DefaultProps = Required<{
