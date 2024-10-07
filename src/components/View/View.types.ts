@@ -12,8 +12,8 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	direction?: G.Responsive<Direction>;
 	gap?: G.Responsive<number>;
 	wrap?: G.Responsive<boolean>;
-	align?: G.Responsive<"center" | "start" | "end" | "stretch" | "baseline">;
-	justify?: G.Responsive<"center" | "start" | "end" | "space-between">;
+	align?: G.Responsive<TStyles.Align>;
+	justify?: G.Responsive<TStyles.Justify>;
 	height?: G.Responsive<string | number>;
 	width?: G.Responsive<string | number>;
 	aspectRatio?: G.Responsive<number>;

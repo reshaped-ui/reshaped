@@ -18,6 +18,8 @@ import getInsetStyles from "styles/inset";
 import getAspectRatioStyles from "styles/aspectRatio";
 import getBorderStyles from "styles/border";
 import getTextAlignStyles from "styles/textAlign";
+import getAlignStyles from "styles/align";
+import getJustifyStyles from "styles/justify";
 
 const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
 	const {
@@ -133,6 +135,8 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
 	const borderStyles = getBorderStyles(borderColor);
 	const textAlignStyles = getTextAlignStyles(textAlign);
+	const alignStyles = getAlignStyles(align);
+	const justifyStyles = getJustifyStyles(justify);
 
 	let renderedItemIndex = 0;
 	// If wrap is not defined, it can be set based on item grow and split usage
@@ -176,7 +180,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 			itemElement = React.cloneElement(child, {
 				className: classNames(className, child.props.className),
 			});
-		} else if (className || !React.isValidElement(child)) {
+		} else if (className || (!React.isValidElement(child) && React.Children.count(children) > 1)) {
 			itemElement = (
 				<div className={className} key={key}>
 					{child}
@@ -244,6 +248,8 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		insetEndStyles?.classNames,
 		borderStyles?.classNames,
 		textAlignStyles?.classNames,
+		justifyStyles?.classNames,
+		alignStyles?.classNames,
 		backgroundColor && s[`--bg-${backgroundColor}`],
 		shadow && s[`--shadow-${shadow}`],
 		overflow && s[`--overflow-${overflow}`],
@@ -257,8 +263,6 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		paddingTop !== undefined && s["--padding-top"],
 		(isFlex || nowrap) && s["--flex"],
 		...responsiveClassNames(s, "--direction", direction),
-		...responsiveClassNames(s, "--align", align),
-		...responsiveClassNames(s, "--justify", justify),
 		// Wrap and nowrap are separate here because inverting any of them could result into a false value which will be ignored by classNames
 		...responsiveClassNames(s, "--nowrap", nowrap || wrap === false),
 		...responsiveClassNames(s, "--wrap", wrap),

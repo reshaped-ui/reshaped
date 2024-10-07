@@ -1,0 +1,17 @@
+@responsive .--justify {
+	@value start {
+		justify-content: flex-start;
+	}
+
+	@value end {
+		justify-content: flex-end;
+	}
+
+	@value center {
+		justify-content: center;
+	}
+
+	@value space-between {
+		justify-content: space-between;
+	}
+}
