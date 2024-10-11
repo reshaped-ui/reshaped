@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styles/Justify handles responsive value 1`] = `
+{
+  "classNames": [
+    "--justify-start",
+    "--justify-center--m",
+    "--justify-end--l",
+  ],
+}
+`;
+
+exports[`Styles/Justify handles undefined value 1`] = `null`;
+
+exports[`Styles/Justify handles value 1`] = `
+{
+  "classNames": [
+    "--justify-start",
+  ],
+}
+`;

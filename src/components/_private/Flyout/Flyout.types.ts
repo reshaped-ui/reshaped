@@ -16,7 +16,9 @@ export type Options = {
 	position: Position;
 	container?: HTMLElement | null;
 	rtl: boolean;
-	forcePosition?: boolean;
+	fallbackPositions?: Position[];
+	lastUsedFallback: Position;
+	onFallback: (position: Position) => void;
 	contentGap?: number;
 };
 export type Styles = React.CSSProperties;
@@ -75,7 +77,9 @@ type BaseProps = {
 	triggerType?: "hover" | "click" | "focus";
 	groupTimeouts?: boolean;
 	position?: Position;
+	// @deprecated Use fallbackPosition={false} instead
 	forcePosition?: boolean;
+	fallbackPositions?: Position[] | false;
 	trapFocusMode?: TrapMode;
 	disabled?: boolean;
 	disableHideAnimation?: boolean;
@@ -90,6 +94,7 @@ type BaseProps = {
 	contentAttributes?: G.Attributes<"div">;
 	instanceRef?: React.Ref<Instance>;
 	containerRef?: React.RefObject<HTMLElement>;
+	initialFocusRef?: React.RefObject<HTMLElement>;
 };
 
 export type DefaultProps = Required<{

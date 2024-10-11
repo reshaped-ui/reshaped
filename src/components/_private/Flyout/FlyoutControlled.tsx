@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { TrapFocus, checkKeyboardMode } from "utilities/a11y";
+import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
@@ -43,7 +43,10 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		id: passedId,
 		instanceRef,
 		containerRef,
+		initialFocusRef,
 	} = props;
+	const fallbackPositions =
+		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
 	const onOpenRef = useHandlerRef(onOpen);
 	const onCloseRef = useHandlerRef(onClose);
 	const resolvedActive = disabled === true ? false : passedActive;
@@ -89,13 +92,14 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		position: passedPosition,
 		defaultActive: resolvedActive,
 		container: containerRef?.current,
-		forcePosition,
+		fallbackPositions,
 		contentGap,
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
+	const isRendered = status !== "idle";
 	// Don't create dismissible queue for hover flyout because they close all together on mouseout
 	const isDismissible = useIsDismissible(
-		triggerType !== "hover" && status !== "idle",
+		triggerType !== "hover" && isRendered,
 		flyoutElRef,
 		triggerElRef
 	);
@@ -109,23 +113,23 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Called from the internal actions
 	 */
 	const handleOpen = React.useCallback(() => {
-		const canOpen = !lockedRef.current && status === "idle";
+		const canOpen = !lockedRef.current && !isRendered;
 
 		if (!canOpen) return;
 		onOpenRef.current?.();
-	}, [status, onOpenRef]);
+	}, [isRendered, onOpenRef]);
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
 			const isLocked = triggerType === "click" && !isDismissible();
-			const canClose = !isLocked && (status !== "idle" || disabled);
+			const canClose = !isLocked && (isRendered || disabled);
 
 			if (!canClose) return;
 
 			onCloseRef.current?.();
 			if (options?.closeParents) parentFlyoutContext?.handleClose?.();
 		},
-		[status, isDismissible, triggerType, onCloseRef, disabled, parentFlyoutContext]
+		[isRendered, isDismissible, triggerType, onCloseRef, disabled, parentFlyoutContext]
 	);
 
 	/**
@@ -187,12 +191,12 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	}, [clearTimer, timerRef, handleClose]);
 
 	const handleTriggerClick = React.useCallback(() => {
-		if (status === "idle") {
+		if (!isRendered) {
 			handleOpen();
 		} else {
 			handleClose();
 		}
-	}, [status, handleOpen, handleClose]);
+	}, [isRendered, handleOpen, handleClose]);
 
 	const handleTriggerMouseDown = React.useCallback(() => {
 		const rect = triggerElRef.current?.getBoundingClientRect();
@@ -284,6 +288,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		trapFocusRef.current = new TrapFocus(flyoutElRef.current);
 		trapFocusRef.current.trap({
 			mode: trapFocusMode,
+			initialFocusEl: initialFocusRef?.current as FocusableElement | undefined,
 			includeTrigger: triggerType === "hover" && trapFocusMode !== "dialog" && !isSubmenu,
 			onNavigateOutside: () => {
 				handleClose();
@@ -293,7 +298,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	React.useEffect(() => {
 		if (!disableHideAnimation && status !== "hidden") return;
-		if (disableHideAnimation && status !== "idle") return;
+		if (disableHideAnimation && isRendered) return;
 
 		if (trapFocusRef.current?.trapped) {
 			/* Locking the popover to not open it again on trigger focus */
@@ -307,7 +312,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			trapFocusRef.current.release({ withoutFocusReturn: !shouldReturnFocusRef.current });
 			shouldReturnFocusRef.current = true;
 		}
-	}, [status, triggerType, disableHideAnimation]);
+	}, [status, isRendered, triggerType, disableHideAnimation]);
 
 	/**
 	 * Release focus trapping on unmount
@@ -320,13 +325,15 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Update position on resize or RTL
 	 */
 	React.useEffect(() => {
+		if (!isRendered) return;
+
 		const resizeObserver = new ResizeObserver(() => updatePosition({ sync: true }));
 
 		resizeObserver.observe(document.body);
 		if (triggerElRef.current) resizeObserver.observe(triggerElRef.current);
 
 		return () => resizeObserver.disconnect();
-	}, [updatePosition, triggerElRef]);
+	}, [updatePosition, triggerElRef, isRendered]);
 
 	React.useEffect(() => {
 		updatePosition();

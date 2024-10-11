@@ -9,6 +9,7 @@ export type Props = Pick<
 	| "children"
 	| "position"
 	| "forcePosition"
+	| "fallbackPositions"
 	| "triggerType"
 	| "contentGap"
 	| "onOpen"

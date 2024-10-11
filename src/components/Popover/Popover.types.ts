@@ -8,6 +8,7 @@ export type Props = Pick<
 	| "id"
 	| "position"
 	| "forcePosition"
+	| "fallbackPositions"
 	| "onOpen"
 	| "onClose"
 	| "width"
@@ -21,6 +22,7 @@ export type Props = Pick<
 	| "disableContentHover"
 	| "disableCloseOnOutsideClick"
 	| "containerRef"
+	| "initialFocusRef"
 > & {
 	children?: React.ReactNode;
 	padding?: number;

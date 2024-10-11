@@ -13,7 +13,7 @@ type PassedFlyoutOptions = {
 	width?: T.Width;
 	position?: T.Position;
 	defaultActive?: boolean;
-	forcePosition?: boolean;
+	fallbackPositions?: T.Position[];
 	container?: HTMLElement | null;
 };
 
@@ -109,7 +109,7 @@ const flyout: Flyout = (args) => {
 		contentGap = 0,
 		...options
 	} = args;
-	const { position, forcePosition, width, container } = options;
+	const { position, fallbackPositions, width, container, lastUsedFallback, onFallback } = options;
 	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
 	const triggerBounds = passedTriggerBounds || triggerEl.getBoundingClientRect();
 	const contentGapModifier = parseInt(getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1"));
@@ -145,7 +145,7 @@ const flyout: Flyout = (args) => {
 	};
 
 	let calculated: ReturnType<typeof calculatePosition> | null = null;
-	const testOrder = getPositionFallbacks(position);
+	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
 	testOrder.some((currentPosition, index) => {
 		const tested = calculatePosition({
@@ -157,11 +157,12 @@ const flyout: Flyout = (args) => {
 			contentGap: contentGap * contentGapModifier,
 		});
 		const visible = fullyVisible(tested);
-		const validPosition = visible || forcePosition;
+		const validPosition = visible || fallbackPositions?.length === 0;
 
 		// Saving first try in case non of the options work
-		if (validPosition || index === 0) {
+		if (validPosition || lastUsedFallback === currentPosition) {
 			calculated = tested;
+			onFallback(currentPosition);
 		}
 
 		return validPosition;
@@ -208,7 +209,14 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 
 const useFlyout: UseFlyout = (args) => {
 	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, ...options } = args;
-	const { position: defaultPosition = "bottom", forcePosition, width, container } = options;
+	const { position: defaultPosition = "bottom", fallbackPositions, width, container } = options;
+	const lastUsedFallbackRef = React.useRef(defaultPosition);
+	// Memo the array internally to avoid new arrays triggering useCallback
+	const cachedFallbackPositions = React.useMemo(
+		() => fallbackPositions,
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[fallbackPositions?.join(" ")]
+	);
 	const [isRTL] = useRTL();
 	const [state, dispatch] = React.useReducer(flyoutReducer, {
 		position: defaultPosition,
@@ -232,6 +240,10 @@ const useFlyout: UseFlyout = (args) => {
 		dispatch({ type: "remove" });
 	}, []);
 
+	const handleFallback = React.useCallback((position: T.Position) => {
+		lastUsedFallbackRef.current = position;
+	}, []);
+
 	const updatePosition = React.useCallback(
 		(options?: { sync?: boolean }) => {
 			if (!triggerElRef.current || !flyoutElRef.current) return;
@@ -242,7 +254,9 @@ const useFlyout: UseFlyout = (args) => {
 				triggerBounds: triggerBoundsRef.current,
 				width,
 				position: defaultPosition,
-				forcePosition,
+				fallbackPositions: cachedFallbackPositions,
+				lastUsedFallback: lastUsedFallbackRef.current,
+				onFallback: handleFallback,
 				rtl: isRTL,
 				container,
 				contentGap,
@@ -254,13 +268,14 @@ const useFlyout: UseFlyout = (args) => {
 		[
 			container,
 			defaultPosition,
-			forcePosition,
+			cachedFallbackPositions,
 			isRTL,
 			flyoutElRef,
 			triggerElRef,
 			triggerBoundsRef,
 			width,
 			contentGap,
+			handleFallback,
 		]
 	);
 

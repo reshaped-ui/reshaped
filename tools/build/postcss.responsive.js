@@ -13,6 +13,20 @@ module.exports = () => {
 				const selector = params.join(" ");
 				const baseRules = [];
 
+				const baseStyles = new Rule({
+					selector,
+					nodes: [],
+				});
+
+				atRule.walkDecls((decl) => {
+					if (decl.parent !== atRule) return;
+					baseStyles.nodes.push(decl);
+				});
+
+				if (baseStyles.nodes.length) {
+					baseRules.push(baseStyles);
+				}
+
 				// Save variable definitions
 				atRule.walkAtRules("variable", (variableAtRule) => {
 					const [name, ...defaultValueChunks] = variableAtRule.params.split(" ");

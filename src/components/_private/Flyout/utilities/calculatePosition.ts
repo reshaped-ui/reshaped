@@ -40,7 +40,7 @@ const calculatePosition = (
 
 	let position = passedPosition;
 	if (rtl) position = getRTLPosition(position);
-	if (width === isFullWidth || width === "trigger") {
+	if (isFullWidth || width === "trigger") {
 		position = position.includes("top") ? "top" : "bottom";
 	}
 
