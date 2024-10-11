@@ -45,3 +45,4 @@
 - Flyout: fallback history when no position fits
 - Flyout, Popover: initialFocusRef
 - View: removed additional div around the content when it has a single child
+- Flyout: Optimized resize observer to only be active when rendered
