@@ -5,10 +5,6 @@ const useSingletonKeyboardMode = () => {
 	React.useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			if (e.metaKey || e.altKey || e.ctrlKey) return;
-			if (!e.isTrusted || e.isComposing) return;
-
-			console.log("keydown", e);
-
 			enableKeyboardMode();
 		};
 
