@@ -61,6 +61,9 @@ export type { FileUploadProps } from "components/FileUpload";
 export { default as FormControl } from "components/FormControl";
 export type { FormControlProps } from "components/FormControl";
 
+export { default as Grid } from "components/Grid";
+export type { GridProps, GridItemProps } from "components/Grid";
+
 export { default as Hidden } from "components/Hidden";
 export type { HiddenProps } from "components/Hidden";
 

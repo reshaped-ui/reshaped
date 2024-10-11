@@ -1,5 +1,7 @@
 3.2.0
 
+- Grid utility
+
 - Theming: Updated rem calculations to be based on 16px
 - Theming: Updated generated bg neutral faded values (slightly more faded)
 
@@ -42,3 +44,4 @@
 - Flyout, Popover, DropdownMenu: deprecated forcePosition, added fallbackPositions array and false
 - Flyout: fallback history when no position fits
 - Flyout, Popover: initialFocusRef
+- View: removed additional div around the content when it has a single child

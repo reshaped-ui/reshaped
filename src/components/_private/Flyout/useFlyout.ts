@@ -147,8 +147,6 @@ const flyout: Flyout = (args) => {
 	let calculated: ReturnType<typeof calculatePosition> | null = null;
 	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
-	console.log(testOrder, fallbackPositions);
-
 	testOrder.some((currentPosition, index) => {
 		const tested = calculatePosition({
 			...options,
