@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { disableUserSelect, enableUserSelect, disableScroll, enableScroll } from "utilities/dom";
+import { disableUserSelect, enableUserSelect } from "utilities/dom";
+import { disableScroll, enableScroll } from "utilities/scroll";
 import useToggle from "hooks/useToggle";
 import useHotkeys from "hooks/useHotkeys";
 import * as keys from "constants/keys";

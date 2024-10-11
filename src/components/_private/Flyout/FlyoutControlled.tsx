@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import TrapFocus from "utilities/a11y/TrapFocus";
+import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
@@ -9,8 +9,6 @@ import useHotkeys from "hooks/useHotkeys";
 import useOnClickOutside from "hooks/_private/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
-import { checkKeyboardMode } from "utilities/a11y/keyboardMode";
-import { FocusableElement } from "utilities/a11y/types";
 import useFlyout from "./useFlyout";
 import * as timeouts from "./Flyout.constants";
 import cooldown from "./utilities/cooldown";

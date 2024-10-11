@@ -3,8 +3,7 @@
 import React from "react";
 import { classNames } from "utilities/helpers";
 import { onNextFrame } from "utilities/animation";
-import { checkKeyboardMode } from "utilities/a11y/keyboardMode";
-import TrapFocus from "utilities/a11y/TrapFocus";
+import { checkKeyboardMode, TrapFocus } from "utilities/a11y";
 import Toast from "./Toast";
 import ToastContext from "./Toast.context";
 import { timeouts } from "./Toast.constants";

@@ -5,9 +5,9 @@ import TextField from "components/TextField";
 import type { TextFieldProps } from "components/TextField";
 import DropdownMenu from "components/DropdownMenu";
 import type { MenuItemProps } from "components/MenuItem";
-import useHotkeys from "hooks/useHotkeys";
-import { getActiveElement } from "utilities/a11y/focus";
+import { getActiveElement } from "utilities/a11y";
 import * as keys from "constants/keys";
+import useHotkeys from "hooks/useHotkeys";
 import useHandlerRef from "hooks/useHandlerRef";
 import * as T from "./Autocomplete.types";
 

@@ -34,7 +34,7 @@
 	text-decoration: none;
 	color: inherit;
 
-	&:focus-visible {
+	[data-rs-keyboard] &:focus {
 		box-shadow: var(--rs-focus-shadow);
 	}
 

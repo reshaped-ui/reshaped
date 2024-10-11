@@ -1,3 +1,5 @@
+import { getShadowRoot } from "./shadowDom";
+
 export const getClosestFlyoutTarget = (
 	el: HTMLElement | null,
 	iteration: number = 0
@@ -17,29 +19,4 @@ export const getClosestFlyoutTarget = (
 	if (el === document.body || !el) return document.body;
 	if ((isScrollable && el.scrollHeight > el.clientHeight) || isFixed) return el;
 	return getClosestFlyoutTarget(el.parentElement, iteration + 1);
-};
-
-export const disableUserSelect = () => {
-	document.body.style.userSelect = "none";
-};
-
-export const enableUserSelect = () => {
-	document.body.style.userSelect = "";
-};
-
-const preventDefault = (e: Event) => e.preventDefault();
-
-export const disableScroll = () => {
-	window.addEventListener("wheel", preventDefault, { passive: false });
-	window.addEventListener("touchmove", preventDefault, { passive: false });
-};
-
-export const enableScroll = () => {
-	window.removeEventListener("wheel", preventDefault);
-	window.removeEventListener("touchmove", preventDefault);
-};
-
-export const getShadowRoot = (el: HTMLElement | null) => {
-	const rootNode = el?.getRootNode();
-	return rootNode instanceof ShadowRoot ? rootNode : null;
 };

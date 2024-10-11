@@ -6,7 +6,7 @@
 	box-shadow: var(--rs-shadow-overlay);
 	will-change: transform;
 
-	&:focus-visible {
+	[data-rs-keyboard] &:focus {
 		outline: none;
 		box-shadow: var(--rs-focus-shadow);
 	}

@@ -42,7 +42,7 @@
 	}
 }
 
-.input:focus-visible + .decorator {
+[data-rs-keyboard] .input:focus + .decorator {
 	box-shadow: var(--rs-focus-shadow);
 }
 
