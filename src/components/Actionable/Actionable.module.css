@@ -17,35 +17,35 @@
 	}
 }
 
-.root {
-	&:focus {
-		outline: none;
-	}
+.root:focus {
+	outline: none;
+}
 
-	&:focus-visible {
+[data-rs-keyboard] .root {
+	&:focus {
 		outline: none;
 		z-index: var(--rs-z-index-raised);
 		box-shadow: var(--rs-focus-shadow);
 	}
 
-	&.--inset:focus-visible {
+	&.--inset:focus {
 		box-shadow: var(--rs-focus-inset-shadow);
 	}
 
-	&.--disabled-focus-ring:focus-visible {
+	&.--disabled-focus-ring:focus {
 		box-shadow: none;
 	}
 
 	&.--radius-inherit {
-		&:focus-visible {
+		&:focus {
 			box-shadow: none;
 		}
 
-		&:focus-visible > * {
+		&:focus > * {
 			box-shadow: var(--rs-focus-shadow);
 		}
 
-		&.--inset:focus-visible > * {
+		&.--inset:focus > * {
 			box-shadow: var(--rs-focus-inset-shadow);
 		}
 	}

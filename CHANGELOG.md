@@ -47,3 +47,5 @@
 - Flyout, Popover: initialFocusRef
 - View: removed additional div around the content when it has a single child
 - Flyout: Optimized resize observer to only be active when rendered
+- Overlay, Modal: Fixed scroll lock on safari
+- Fixed :focus-visible safari edge cases (back to data-rs-keyboard)

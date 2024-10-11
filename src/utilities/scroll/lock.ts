@@ -1,44 +1,29 @@
 import { isIOS } from "utilities/platform";
-import { getScrollbarWidth } from "./helpers";
-import { lockSafariScroll } from "./lockSafari";
-import { setStyle, resetStyles } from "./styles";
+import lockSafariScroll from "./lockSafari";
+import lockStandardScroll from "./lockStandard";
 
-const lockedIds: Record<string, boolean> = {};
-let unlockSafariScroll: ReturnType<typeof lockSafariScroll> | null = null;
+let lockedCount = 0;
+let reset = () => {};
 
-export const lockScroll = (id: string, cb?: () => void) => {
-	lockedIds[id] = true;
+export const lockScroll = (cb?: () => void) => {
+	lockedCount += 1;
 
-	if (Object.keys(lockedIds).length > 1) return;
-
-	const { body } = document;
-	const rect = body.getBoundingClientRect();
-	const isOverflowing = rect.left + rect.right < window.innerWidth;
+	if (lockedCount > 1) return;
 
 	if (isIOS()) {
-		unlockSafariScroll = lockSafariScroll();
+		reset = lockSafariScroll();
 	} else {
-		setStyle(body, "overflow", "hidden");
-	}
-
-	if (isOverflowing) {
-		const scrollBarWidth = getScrollbarWidth();
-		setStyle(body, "paddingRight", `${scrollBarWidth}px`);
+		reset = lockStandardScroll();
 	}
 
 	cb?.();
 };
 
-export const unlockScroll = (id: string, cb?: () => void) => {
-	delete lockedIds[id];
-	if (Object.keys(lockedIds).length) return;
+export const unlockScroll = (cb?: () => void) => {
+	lockedCount -= 1;
 
-	resetStyles();
+	if (lockedCount > 0) return;
 
-	if (unlockSafariScroll) {
-		unlockSafariScroll();
-		unlockSafariScroll = null;
-	}
-
+	reset();
 	cb?.();
 };

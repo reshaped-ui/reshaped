@@ -26,7 +26,7 @@
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 	}
 
-	&:focus-visible::after,
+	[data-rs-keyboard] &:focus::after,
 	&:hover::after,
 	&--dragging::after {
 		opacity: 0.6;

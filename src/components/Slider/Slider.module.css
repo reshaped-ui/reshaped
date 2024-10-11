@@ -90,7 +90,7 @@
 		opacity: 1;
 	}
 
-	.input:focus-visible + &,
+	[data-rs-keyboard] .input:focus + &,
 	&--active {
 		&::after {
 			cursor: grabbing;
@@ -105,7 +105,7 @@
 		}
 	}
 
-	.input:focus-visible + &::before {
+	[data-rs-keyboard] .input:focus + &::before {
 		box-shadow: var(--rs-focus-shadow);
 	}
 }
