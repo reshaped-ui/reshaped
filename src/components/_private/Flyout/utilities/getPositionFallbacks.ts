@@ -18,7 +18,7 @@ const fallbackOrder: Record<T.Side, T.Side[]> = {
 
 // Get an order of positions to try to fit flyout on the screen based on its starting position
 const getPositionFallbacks = (position: T.Position, availableFallbacks?: T.Position[]) => {
-	const result: T.Position[] = [];
+	const result: T.Position[] = [position];
 	const chunks = position.split("-") as [T.Side, string];
 	const [firstChunk] = chunks;
 	const passedPositionOrder = positions[firstChunk];

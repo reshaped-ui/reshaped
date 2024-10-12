@@ -67,7 +67,7 @@ const generateColorValues = (args: { key: string; hex: string; hexDark?: string 
 	const bgHexDark = okhslToHex(okhslDark);
 
 	const bgFadedHsl =
-		key === "neutral" ? { ...okhsl, l: 0.97 } : { ...okhsl, l: 0.94 + 0.045 * hueLightness };
+		key === "neutral" ? { ...okhsl, l: 0.96 } : { ...okhsl, l: 0.94 + 0.045 * hueLightness };
 	const bgFadedHslDark =
 		key === "neutral" ? { ...okhslDark, l: 0.15 } : { ...okhslDark, l: 0.16, s: okhslDark.s / 2 };
 	const bgFadedHex = okhslToHex(bgFadedHsl);
