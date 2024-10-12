@@ -3,6 +3,7 @@
 import React from "react";
 import { classNames, responsiveVariables, responsiveClassNames } from "utilities/helpers";
 import { enableUserSelect, disableUserSelect } from "utilities/dom";
+import { enableScroll, disableScroll } from "utilities/scroll";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import Text from "components/Text";
 import Overlay from "components/Overlay";
@@ -73,6 +74,7 @@ const Modal = (props: T.Props) => {
 		autoFocus = true,
 		disableSwipeGesture,
 		disableCloseOnOutsideClick,
+		containerRef,
 		overlayClassName,
 		className,
 		attributes,
@@ -133,6 +135,7 @@ const Modal = (props: T.Props) => {
 		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
 
 		disableUserSelect();
+		disableScroll();
 		setDragging(true);
 	};
 
@@ -150,6 +153,7 @@ const Modal = (props: T.Props) => {
 
 		const handleDragEnd = () => {
 			enableUserSelect();
+			enableScroll();
 			setDragging(false);
 
 			// Close only when dragging in the closing direction
@@ -237,6 +241,7 @@ const Modal = (props: T.Props) => {
 			transparent={transparentOverlay || hideProgress}
 			blurred={blurredOverlay}
 			className={overlayClassName}
+			containerRef={containerRef}
 			attributes={{
 				onTouchStart: handleDragStart,
 			}}
@@ -249,6 +254,7 @@ const Modal = (props: T.Props) => {
 					active && s["--active"],
 					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],
+					containerRef && s["--contained"],
 					responsiveClassNames(s, "--position", position)
 				);
 

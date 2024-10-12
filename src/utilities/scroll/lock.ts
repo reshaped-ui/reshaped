@@ -5,7 +5,7 @@ import lockStandardScroll from "./lockStandard";
 let lockedCount = 0;
 let reset = () => {};
 
-export const lockScroll = (cb?: () => void) => {
+export const lockScroll = (args: { containerEl?: HTMLElement | null; cb?: () => void }) => {
 	lockedCount += 1;
 
 	if (lockedCount > 1) return;
@@ -13,10 +13,10 @@ export const lockScroll = (cb?: () => void) => {
 	if (isIOS()) {
 		reset = lockSafariScroll();
 	} else {
-		reset = lockStandardScroll();
+		reset = lockStandardScroll(args.containerEl);
 	}
 
-	cb?.();
+	args.cb?.();
 };
 
 export const unlockScroll = (cb?: () => void) => {

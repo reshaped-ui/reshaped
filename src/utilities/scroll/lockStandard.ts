@@ -1,25 +1,22 @@
 import { getScrollbarWidth } from "./helpers";
+import { StyleCache } from "utilities/css";
 
-let originalBodyStyles: Pick<React.CSSProperties, "overflow" | "paddingRight"> = {};
+const styleCache = new StyleCache();
 
-const lockStandardScroll = () => {
-	const { body } = document;
-	const rect = body.getBoundingClientRect();
+const lockStandardScroll = (containerEl?: HTMLElement | null) => {
+	const container = containerEl || document.body;
+	const rect = container.getBoundingClientRect();
 	const isOverflowing = rect.left + rect.right < window.innerWidth;
 
-	originalBodyStyles.overflow = body.style.overflow;
-	body.style.overflow = "hidden";
+	styleCache.set(container, { overflow: "hidden" });
 
 	if (isOverflowing) {
 		const scrollBarWidth = getScrollbarWidth();
-
-		originalBodyStyles.paddingRight = body.style.paddingRight;
-		body.style.paddingRight = `${scrollBarWidth}px`;
+		styleCache.set(container, { paddingRight: `${scrollBarWidth}px` });
 	}
 
 	return () => {
-		Object.assign(body.style, originalBodyStyles);
-		originalBodyStyles = {};
+		styleCache.reset();
 	};
 };
 

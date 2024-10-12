@@ -113,6 +113,28 @@ describe("Utilities/Overlay", () => {
 		expect(el).toHaveClass(fixtures.className);
 	});
 
+	test("renders inside container", () => {
+		const Component = () => {
+			const containerRef = React.useRef<HTMLDivElement>(null);
+
+			return (
+				<Reshaped>
+					<div ref={containerRef} data-testid={fixtures.testId} />
+					<Overlay active containerRef={containerRef}>
+						{fixtures.content}
+					</Overlay>
+				</Reshaped>
+			);
+		};
+
+		render(<Component />);
+
+		const elContainer = screen.getByTestId(fixtures.testId);
+		const elOverlay = screen.getByText(fixtures.content);
+
+		expect(elContainer).toContainElement(elOverlay);
+	});
+
 	test("renders inside shadow root", () => {
 		class CustomElement extends window.HTMLElement {
 			constructor() {

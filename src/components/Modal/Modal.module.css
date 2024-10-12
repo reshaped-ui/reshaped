@@ -22,7 +22,7 @@
 
 		width: var(--rs-modal-size);
 		height: auto;
-		max-width: calc(100vw - var(--rs-unit-x8));
+		max-width: calc(100% - var(--rs-unit-x8));
 		max-height: none;
 		margin: var(--rs-unit-x4);
 		inset: 0;
@@ -45,7 +45,7 @@
 		width: 100%;
 		height: var(--rs-modal-size);
 		max-width: 100%;
-		max-height: calc(100vh - var(--rs-unit-x4));
+		max-height: calc(100% - var(--rs-unit-x4));
 		margin: 0;
 		margin-top: var(--rs-unit-x4);
 		inset: 0;
@@ -55,6 +55,10 @@
 		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
 		opacity: 1;
+
+		&.--contained {
+			position: absolute;
+		}
 
 		&.--active,
 		[dir="rtl"] &.--active {
@@ -67,7 +71,7 @@
 
 		width: var(--rs-modal-size);
 		height: 100%;
-		max-width: calc(100vw - var(--rs-unit-x4));
+		max-width: calc(100% - var(--rs-unit-x4));
 		max-height: 100%;
 		margin: 0;
 		margin-inline-end: var(--rs-unit-x4);
@@ -78,6 +82,10 @@
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
+
+		&.--contained {
+			position: absolute;
+		}
 
 		[dir="rtl"] & {
 			transform: translate(100%, 0);
@@ -94,7 +102,7 @@
 
 		width: var(--rs-modal-size);
 		height: 100%;
-		max-width: calc(100vw - var(--rs-unit-x4));
+		max-width: calc(100% - var(--rs-unit-x4));
 		max-height: 100%;
 		margin: 0;
 		margin-inline-start: var(--rs-unit-x4);
@@ -105,6 +113,10 @@
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
+
+		&.--contained {
+			position: absolute;
+		}
 
 		[dir="rtl"] & {
 			transform: translate(-100%, 0);
@@ -131,6 +143,10 @@
 		border-radius: 0;
 		overflow: auto;
 		opacity: 0;
+
+		&.--contained {
+			position: absolute;
+		}
 
 		&.--active,
 		[dir="rtl"] &.--active {

@@ -3,19 +3,20 @@ import React from "react";
 type Props = {
 	w?: string | number;
 	h?: string | number;
+	minW?: string | number;
 	children?: React.ReactNode;
 	inverted?: boolean;
 };
 
 const Placeholder = (props: Props) => {
-	const { w = "auto", h = 50, children } = props;
+	const { w = "auto", h = 50, minW = h, children } = props;
 
 	return (
 		<div
 			style={{
 				width: w,
 				height: h,
-				minWidth: h,
+				minWidth: minW,
 				padding: "var(--rs-unit-x2)",
 				background: "rgba(var(--rs-color-rgb-background-neutral), 0.32)",
 				boxSizing: "border-box",

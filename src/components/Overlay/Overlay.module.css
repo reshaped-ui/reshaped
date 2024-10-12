@@ -1,10 +1,18 @@
 .root {
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
-	position: fixed;
+	/* Add an offset in case overlay is rendered inside a scrolled container */
+	--rs-overlay-offset-y: 0px;
+	--rs-overlay-offset-x: 0px;
 
-	/* Applying blur causes some browsers (e.g. Chrome) to render a 1px border */
-	inset: -1px;
+	position: fixed;
+	overflow: auto;
+	overflow-x: clip;
+	-webkit-overflow-scrolling: touch;
+
+	/* Not using logical properties here because offset is calculated with scrollLeft */
+	left: var(--rs-overlay-offset-x);
+	top: var(--rs-overlay-offset-y);
+	height: 100%;
+	width: 100%;
 	z-index: var(--rs-z-index-overlay);
 	color: var(--rs-color-white);
 	background-color: rgba(var(--rs-color-rgb-black), 0);
@@ -45,6 +53,12 @@
 
 .root.--blurred {
 	backdrop-filter: blur(3px);
+
+	/* Applying blur causes some browsers (e.g. Chrome) to render a 1px border */
+	left: calc(var(--rs-overlay-offset-x) - 1px);
+	top: calc(var(--rs-overlay-offset-y) - 1px);
+	width: calc(100% + 2px);
+	height: calc(100% + 2px);
 }
 
 .root.--click-through > *:not(.wrapper) {
@@ -53,6 +67,10 @@
 
 .root.--click-through .content {
 	pointer-events: all;
+}
+
+.root.--contained {
+	position: absolute;
 }
 
 .root.--animated {
