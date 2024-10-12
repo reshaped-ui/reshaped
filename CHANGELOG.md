@@ -3,7 +3,7 @@
 - Grid utility
 
 - Theming: Updated rem calculations to be based on 16px
-- Theming: Updated generated bg neutral faded values (slightly more faded)
+- Theming: Updated generated bg neutral faded values (slightly lighter)
 
 - Package.json added types field for old module resolution
 
@@ -48,4 +48,5 @@
 - View: removed additional div around the content when it has a single child
 - Flyout: Optimized resize observer to only be active when rendered
 - Overlay, Modal: Fixed scroll lock on safari
-- Fixed :focus-visible safari edge cases (back to data-rs-keyboard)
+- Fixed :focus-visible safari edge cases (back to data-rs-keyboard
+  )
