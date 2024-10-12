@@ -2,7 +2,7 @@
 	display: grid;
 }
 
-@responsive [style*="--rs-grid-gap"] {
+@responsive .root[style*="--rs-grid-gap"] {
 	@variable --rs-grid-gap 0;
 
 	--rs-grid-gap-value: calc(var(--rs-grid-gap) * var(--rs-unit-x1));
@@ -10,37 +10,37 @@
 	gap: var(--rs-grid-gap-value);
 }
 
-@responsive [style*="--rs-grid-rows"] {
+@responsive .root[style*="--rs-grid-rows"] {
 	@variable --rs-grid-rows;
 
 	grid-template-rows: var(--rs-grid-rows);
 }
 
-@responsive [style*="--rs-grid-columns"] {
+@responsive .root[style*="--rs-grid-columns"] {
 	@variable --rs-grid-columns;
 
 	grid-template-columns: var(--rs-grid-columns);
 }
 
-@responsive [style*="--rs-grid-areas"] {
+@responsive .root[style*="--rs-grid-areas"] {
 	@variable --rs-grid-areas;
 
 	grid-template-areas: var(--rs-grid-areas);
 }
 
-@responsive [style*="--rs-grid-auto-flow"] {
+@responsive .root[style*="--rs-grid-auto-flow"] {
 	@variable --rs-grid-auto-flow;
 
 	grid-auto-flow: var(--rs-grid-auto-flow);
 }
 
-@responsive [style*="--rs-grid-auto-columns"] {
+@responsive .root[style*="--rs-grid-auto-columns"] {
 	@variable --rs-grid-auto-columns;
 
 	grid-auto-columns: var(--rs-grid-auto-columns);
 }
 
-@responsive [style*="--rs-grid-auto-rows"] {
+@responsive .root[style*="--rs-grid-auto-rows"] {
 	@variable --rs-grid-auto-rows;
 
 	grid-auto-rows: var(--rs-grid-auto-rows);
@@ -48,31 +48,31 @@
 
 /* Item styles */
 
-@responsive [style*="--rs-grid-area"] {
+@responsive .item[style*="--rs-grid-area"] {
 	@variable --rs-grid-area;
 
 	grid-area: var(--rs-grid-area);
 }
 
-@responsive [style*="--rs-grid-col-start"] {
+@responsive .item[style*="--rs-grid-col-start"] {
 	@variable --rs-grid-col-start;
 
 	grid-column-start: var(--rs-grid-col-start);
 }
 
-@responsive [style*="--rs-grid-col-end"] {
+@responsive .item[style*="--rs-grid-col-end"] {
 	@variable --rs-grid-col-end;
 
 	grid-column-end: var(--rs-grid-col-end);
 }
 
-@responsive [style*="--rs-grid-row-start"] {
+@responsive .item[style*="--rs-grid-row-start"] {
 	@variable --rs-grid-row-start;
 
 	grid-row-start: var(--rs-grid-row-start);
 }
 
-@responsive [style*="--rs-grid-row-end"] {
+@responsive .item[style*="--rs-grid-row-end"] {
 	@variable --rs-grid-row-end;
 
 	grid-row-end: var(--rs-grid-row-end);
