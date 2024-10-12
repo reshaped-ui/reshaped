@@ -1,5 +1,5 @@
 import React from "react";
-import { Example } from "utilities/storybook";
+import { Example, Placeholder } from "utilities/storybook";
 import Modal, { type ModalProps } from "components/Modal";
 import View from "components/View";
 import Button from "components/Button";
@@ -169,6 +169,61 @@ export const flags = () => {
 		<Example>
 			<Example.Item title="disableCloseOnOutsideClick">
 				<Demo disableCloseOnOutsideClick />
+			</Example.Item>
+		</Example>
+	);
+};
+
+export const containerRef = () => {
+	const containerRef = React.useRef<HTMLDivElement>(null);
+	const containerRef2 = React.useRef<HTMLDivElement>(null);
+	const toggle = useToggle();
+	const toggle2 = useToggle();
+
+	return (
+		<Example>
+			<Example.Item title={["in scrollable container", "scroll and then open"]}>
+				<View
+					attributes={{ ref: containerRef2 }}
+					borderRadius="medium"
+					height="400px"
+					overflow="auto"
+					backgroundColor="neutral-faded"
+					padding={4}
+				>
+					<View gap={4} align="start">
+						<Button onClick={toggle2.activate}>Open modal</Button>
+						<View height="500px" backgroundColor="primary" width="500px" borderRadius="medium" />
+					</View>
+					<Modal
+						containerRef={containerRef2}
+						active={toggle2.active}
+						onClose={toggle2.deactivate}
+						position="end"
+					>
+						<Placeholder />
+					</Modal>
+				</View>
+			</Example.Item>
+			<Example.Item title="in static container">
+				<View
+					attributes={{ ref: containerRef }}
+					borderRadius="medium"
+					height="400px"
+					overflow="hidden"
+					backgroundColor="neutral-faded"
+					padding={4}
+				>
+					<Button onClick={toggle.activate}>Open modal</Button>
+					<Modal
+						containerRef={containerRef}
+						active={toggle.active}
+						onClose={toggle.deactivate}
+						position="end"
+					>
+						<Placeholder />
+					</Modal>
+				</View>
 			</Example.Item>
 		</Example>
 	);

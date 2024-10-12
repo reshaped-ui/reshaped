@@ -1,24 +1,15 @@
-let originalStyles = {};
+import { StyleCache } from "utilities/css";
 
-const lockSafariScroll = () => {
-	const bodyStyle = document.body.style;
-	const offsetLeft = window.visualViewport?.offsetLeft || 0;
-	const offsetTop = window.visualViewport?.offsetTop || 0;
-	const scrollX = window.scrollX;
-	const scrollY = window.scrollY;
+const styleCache = new StyleCache();
 
-	console.log(scrollY);
+const lockSafariScroll = (containerEl?: HTMLElement | null) => {
+	const viewport = containerEl || window.visualViewport;
+	const offsetLeft = viewport?.offsetLeft || 0;
+	const offsetTop = viewport?.offsetTop || 0;
+	const scrollX = containerEl?.scrollLeft ?? window.scrollX;
+	const scrollY = containerEl?.scrollTop ?? window.scrollY;
 
-	originalStyles = {
-		position: bodyStyle.position,
-		top: bodyStyle.top,
-		left: bodyStyle.left,
-		right: bodyStyle.right,
-		overflowX: bodyStyle.overflowX,
-		overflowY: bodyStyle.overflowY,
-	};
-
-	Object.assign(bodyStyle, {
+	styleCache.set(containerEl || document.body, {
 		position: "fixed",
 		top: `${-(scrollY - Math.floor(offsetTop))}px`,
 		left: `${-(scrollX - Math.floor(offsetLeft))}px`,
@@ -27,11 +18,8 @@ const lockSafariScroll = () => {
 	});
 
 	return () => {
-		Object.assign(bodyStyle, originalStyles);
+		styleCache.reset();
 		window.scrollTo({ top: scrollY, left: scrollX, behavior: "instant" });
-		// window.scrollTo(scrollX, scrollY);
-
-		originalStyles = {};
 	};
 };
 

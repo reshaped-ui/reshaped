@@ -11,6 +11,7 @@ export type Props = {
 	onClose?: (args: { reason: CloseReason }) => void;
 	onOpen?: () => void;
 	disableCloseOnClick?: boolean;
+	containerRef?: React.RefObject<HTMLElement>;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

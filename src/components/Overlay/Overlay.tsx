@@ -23,56 +23,78 @@ const Overlay = (props: T.Props) => {
 		onClose,
 		onOpen,
 		disableCloseOnClick,
+		containerRef,
 		className,
 		attributes,
 	} = props;
+
+	// Selectors wrapped with refs to simplify working with useEffect dependency array
 	const onCloseRef = useHandlerRef(onClose);
 	const onOpenRef = useHandlerRef(onOpen);
-	const clickThrough = transparent === true;
-	const opacity = clickThrough ? 0 : (1 - (transparent || 0)) * 0.7;
+
+	const isTransparent = transparent === true;
+	const opacity = isTransparent ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
+	const [offset, setOffset] = React.useState([0, 0]);
 	const contentRef = React.useRef<HTMLDivElement>(null);
+	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
+
+	// Store overflow value in case we override it when rendering inside containerRef
+	const originalOverflowRef = React.useRef<string | null>(null);
+
+	// Store mouseDown clicks that should close the overlay to then use it in mouseUp
 	const isMouseDownValidRef = React.useRef(false);
-	const { lockScroll, unlockScroll } = useScrollLock();
+
+	// Separating rendered and visible states to make sure animation is triggered only once overlay was added to the dom
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
+
+	// Check that when close was triggered there were no other overlays / flyouts rendered above it
 	const isDismissible = useIsDismissible(active, contentRef);
+
 	const rootClassNames = classNames(
 		s.root,
 		visible && s["--visible"],
-		clickThrough && s["--click-through"],
+		isTransparent && s["--click-through"],
 		blurred && s["--blurred"],
 		animated && s["--animated"],
+		containerRef && s["--contained"],
 		className
 	);
 
-	const isInsideChild = (el: HTMLElement) => {
+	const isInsideContent = (el: HTMLElement) => {
 		if (!contentRef.current) return;
-		const firstChild = contentRef.current!.firstChild;
+		const firstChild = contentRef.current.firstChild;
 
 		if (!firstChild) return;
 		return firstChild.contains(el);
 	};
 
 	const close = React.useCallback(
-		(reason: T.CloseReason) => {
+		(args: { reason: T.CloseReason }) => {
 			if (!visible || !isDismissible()) return;
-			onCloseRef.current?.({ reason });
+
+			if (originalOverflowRef.current && containerRef?.current) {
+				containerRef.current.style.overflow = originalOverflowRef.current;
+				originalOverflowRef.current = null;
+			}
+
+			onCloseRef.current?.({ reason: args.reason });
 		},
-		[visible, isDismissible, onCloseRef]
+		[visible, isDismissible, onCloseRef, containerRef]
 	);
 
 	const handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
-		isMouseDownValidRef.current = !isInsideChild(event.target as HTMLElement);
+		isMouseDownValidRef.current = !isInsideContent(event.target as HTMLElement);
 	};
 
 	const handleMouseUp = (event: React.MouseEvent<HTMLElement>) => {
-		const isMouseUpValid = !isInsideChild(event.target as HTMLElement);
-		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !clickThrough;
+		const isMouseUpValid = !isInsideContent(event.target as HTMLElement);
+		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !isTransparent;
 
 		if (!shouldClose || disableCloseOnClick) return;
-		close("overlay-click");
+		close({ reason: "overlay-click" });
 	};
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
@@ -80,12 +102,17 @@ const Overlay = (props: T.Props) => {
 		setAnimated(false);
 
 		if (visible) return;
-		if (!clickThrough) unlockScroll();
 
+		unlockScroll();
 		remove();
 	};
 
-	useHotkeys({ Escape: () => close("escape-key") }, [close]);
+	useHotkeys(
+		{
+			Escape: () => close({ reason: "escape-key" }),
+		},
+		[close]
+	);
 
 	React.useEffect(() => {
 		setAnimated(true);
@@ -96,16 +123,23 @@ const Overlay = (props: T.Props) => {
 	// Show overlay after it was rendered
 	React.useEffect(() => {
 		if (!rendered) return;
-		if (!clickThrough) lockScroll();
+		if (!isTransparent) lockScroll();
 		onNextFrame(() => {
 			show();
 		});
-	}, [rendered, show, lockScroll, clickThrough]);
+	}, [rendered, show, lockScroll, isTransparent]);
 
 	React.useEffect(() => {
 		if (!rendered || !contentRef.current) return;
 
 		const trapFocus = new TrapFocus(contentRef.current);
+		const containerEl = containerRef?.current;
+
+		if (containerEl) {
+			originalOverflowRef.current = containerEl.style.overflow;
+			containerEl.style.overflow = "hidden";
+			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
+		}
 
 		trapFocus.trap({
 			initialFocusEl: contentRef.current.querySelector("[role=dialog][tabindex='-1']") as
@@ -116,15 +150,12 @@ const Overlay = (props: T.Props) => {
 		onOpenRef.current?.();
 
 		return () => trapFocus.release();
-		// Ignoring onOpen since it might be not memoized when passed
-	}, [rendered, onOpenRef]);
+	}, [rendered, onOpenRef, containerRef]);
 
 	// Unlock scroll on unmount
 	React.useEffect(() => {
-		return () => {
-			if (!clickThrough) unlockScroll();
-		};
-	}, [unlockScroll, clickThrough]);
+		return () => unlockScroll();
+	}, [unlockScroll]);
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -133,13 +164,19 @@ const Overlay = (props: T.Props) => {
 	if (!rendered || !mounted) return null;
 
 	return (
-		<Portal>
+		<Portal targetRef={containerRef}>
 			<Portal.Scope<HTMLDivElement>>
 				{(ref) => (
 					<div
 						{...attributes}
 						ref={ref}
-						style={{ "--rs-overlay-opacity": opacity } as React.CSSProperties}
+						style={
+							{
+								"--rs-overlay-opacity": opacity,
+								"--rs-overlay-offset-x": containerRef ? `${offset[0]}px` : undefined,
+								"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
+							} as React.CSSProperties
+						}
 						role="button"
 						tabIndex={-1}
 						className={rootClassNames}
