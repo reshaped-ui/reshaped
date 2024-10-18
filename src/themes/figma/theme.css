@@ -105,6 +105,9 @@
 --rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
 --rs-shadow-raised: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
 --rs-shadow-overlay: 0px 10px 24px 0px rgba(0, 0, 0, 0.1), 0px 2px 5px 0px rgba(0, 0, 0, 0.04);
+--rs-viewport-m-min: 660;
+--rs-viewport-l-min: 900;
+--rs-viewport-xl-min: 1280;
 			}
 		
 			[data-rs-theme="figma"][data-rs-color-mode="light"] {
