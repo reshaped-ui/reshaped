@@ -1,4 +1,3 @@
-import React from "react";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import View, { type ViewProps } from "components/View";
 
@@ -14,4 +13,4 @@ function Example() {
 	return <View width={25} height={25} backgroundColor={value} />;
 }
 
-export const state = () => <Example />;
+export const base = () => <Example />;

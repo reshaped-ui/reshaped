@@ -1,3 +1,4 @@
+import breakpoints from "constants/breakpoints";
 import type { ThemeDefinition } from "../tokens/types";
 
 const theme: ThemeDefinition = {
@@ -198,9 +199,9 @@ const theme: ThemeDefinition = {
 	},
 
 	viewport: {
-		m: { minPx: 660 },
-		l: { minPx: 900 },
-		xl: { minPx: 1280 },
+		m: { minPx: breakpoints.m },
+		l: { minPx: breakpoints.l },
+		xl: { minPx: breakpoints.xl },
 	},
 };
 

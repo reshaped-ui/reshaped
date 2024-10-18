@@ -49,3 +49,4 @@
 - Flyout: Optimized resize observer to only be active when rendered
 - Fixed :focus-visible safari edge cases (back to data-rs-keyboard)
 - Modal, Overlay: containerRef
+- useResponsiveClientValue: custom theme viewports support
