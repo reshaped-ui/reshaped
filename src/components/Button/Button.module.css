@@ -41,6 +41,9 @@
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
 		transition-property: opacity;
 		opacity: 0;
+
+		/* Avoid edge cases when hovering causes icons to jump in Safari */
+		transform: translateZ(0);
 	}
 }
 
