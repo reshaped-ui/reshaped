@@ -48,3 +48,27 @@ export const vertical = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const label = () => {
+	return (
+		<Example>
+			<Example.Item title="alignment">
+				<View gap={4}>
+					<Divider>Centered label</Divider>
+					<Divider contentPosition="start">Start label</Divider>
+					<Divider contentPosition="end">End label</Divider>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="responsive">
+				<View gap={3} direction={{ s: "column", m: "row" }} align="stretch">
+					<Placeholder />
+					<View.Item>
+						<Divider vertical={{ s: false, m: true }}>or pick second option</Divider>
+					</View.Item>
+					<Placeholder />
+				</View>
+			</Example.Item>
+		</Example>
+	);
+};

@@ -1,38 +1,93 @@
 .root {
-	border: none;
-	height: 1px;
-	background: var(--rs-color-border-neutral-faded);
-	margin: 0;
+	--rs-divider-color: var(--rs-color-border-neutral-faded);
+
+	align-items: center;
+	gap: var(--rs-unit-x2);
+	display: flex;
+	width: 100%;
+	vertical-align: top;
+
+	&::before,
+	&::after {
+		flex-grow: 1;
+		height: 1px;
+		background: var(--rs-divider-color);
+	}
+
+	&::before {
+		content: "";
+	}
 }
 
 .--blank {
-	margin-top: -1px;
-
 	/* Display above other position relative elements */
 	position: relative;
+	margin-top: -1px;
 }
 
 @responsive .--vertical {
 	@value true {
 		height: 100%;
-		width: 1px;
-		display: inline-block;
-		vertical-align: top;
+		width: auto;
+		display: inline-flex;
+		flex-direction: column;
+
+		&::before,
+		&::after {
+			height: auto;
+			width: 1px;
+		}
+
+		&::before {
+			content: "";
+		}
+
+		&::after {
+			content: none;
+		}
 
 		&.--blank {
 			margin-top: 0;
 			margin-inline-start: -1px;
 		}
+
+		& .label {
+			display: none;
+		}
 	}
 
 	@value false {
 		width: 100%;
-		height: 1px;
-		display: block;
+		height: auto;
+		display: flex;
+		flex-direction: row;
+
+		&::before,
+		&::after {
+			height: 1px;
+			width: auto;
+		}
 
 		&.--blank {
 			margin-top: -1px;
 			margin-inline-start: 0;
 		}
+	}
+}
+
+.--content-position-center {
+	&::before,
+	&::after {
+		content: "";
+	}
+}
+
+.--content-position-start {
+	&::before {
+		content: none;
+	}
+
+	&::after {
+		content: "";
 	}
 }

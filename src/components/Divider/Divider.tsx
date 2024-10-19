@@ -1,14 +1,16 @@
 import type React from "react";
 import { classNames, responsiveClassNames } from "utilities/helpers";
+import Text from "components/Text";
 import type * as T from "./Divider.types";
 import s from "./Divider.module.css";
 
 const Divider = (props: T.Props) => {
-	const { vertical, blank, className, attributes } = props;
+	const { vertical, blank, children, contentPosition = "center", className, attributes } = props;
 	const rootClassNames = classNames(
 		s.root,
 		className,
 		blank && s["--blank"],
+		children ? s[`--content-position-${contentPosition}`] : undefined,
 		...responsiveClassNames(s, "--vertical", vertical)
 	);
 
@@ -24,7 +26,13 @@ const Divider = (props: T.Props) => {
 			role="separator"
 			aria-orientation={ariaOrientation}
 			className={rootClassNames}
-		/>
+		>
+			{children && (
+				<Text color="neutral-faded" variant="caption-1" className={s.label}>
+					{children}
+				</Text>
+			)}
+		</div>
 	);
 };
 
