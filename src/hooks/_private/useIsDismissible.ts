@@ -40,14 +40,13 @@ const addToQueue = (id: string, contentRef: Ref, triggerRef?: Ref) => {
 
 const useIsDismissible = (active: boolean = false, contentRef: Ref, triggerRef?: Ref) => {
 	const id = useElementId();
-	const isDismissible = React.useCallback(() => latestId === id, [id]);
+	const isDismissible = React.useCallback(() => (active ? latestId === id : true), [id, active]);
 
 	React.useEffect(() => {
-		if (active) {
-			addToQueue(id, contentRef, triggerRef);
-		} else {
-			removeFromQueue(id);
-		}
+		if (!active) return;
+
+		addToQueue(id, contentRef, triggerRef);
+		return () => removeFromQueue(id);
 	}, [active, id, contentRef, triggerRef]);
 
 	return isDismissible;

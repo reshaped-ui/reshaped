@@ -7,6 +7,7 @@ import Theme from "components/Theme";
 import Button from "components/Button";
 import Flyout, { FlyoutInstance } from "components/_private/Flyout";
 import TextField from "components/TextField";
+import useToggle from "hooks/useToggle";
 
 export default { title: "Utilities/Internal/Flyout" };
 
@@ -121,6 +122,25 @@ export const modes = () => (
 			</Demo>
 		</Example.Item>
 	</Example>
+);
+
+export const widthTrigger = () => (
+	<Flyout triggerType="click" width="trigger" position="bottom">
+		<Flyout.Trigger>
+			{(attributes) => <button {...attributes}>Trigger with long text</button>}
+		</Flyout.Trigger>
+		<Flyout.Content>
+			<div
+				style={{
+					background: "var(--rs-color-background-elevation-overlay)",
+					padding: "var(--rs-unit-x4)",
+					borderRadius: "var(--rs-radius-medium)",
+					border: "1px solid var(--rs-color-border-neutral-faded)",
+					boxSizing: "border-box",
+				}}
+			></div>
+		</Flyout.Content>
+	</Flyout>
 );
 
 export const disableFlags = () => (
@@ -335,24 +355,20 @@ export const testDynamicBounds = () => {
 	);
 };
 
-export const widthTrigger = () => (
-	<Flyout triggerType="click" width="trigger" position="bottom">
-		<Flyout.Trigger>
-			{(attributes) => <button {...attributes}>Trigger with long text</button>}
-		</Flyout.Trigger>
-		<Flyout.Content>
-			<div
-				style={{
-					background: "var(--rs-color-background-elevation-overlay)",
-					padding: "var(--rs-unit-x4)",
-					borderRadius: "var(--rs-radius-medium)",
-					border: "1px solid var(--rs-color-border-neutral-faded)",
-					boxSizing: "border-box",
-				}}
-			></div>
-		</Flyout.Content>
-	</Flyout>
-);
+export const testDisableOutsideClick = () => {
+	const toggle = useToggle();
+
+	return (
+		<Example>
+			<Example.Item title="opening second flyout shouldn't block the first one from closing">
+				<View direction="row" gap={4}>
+					<Demo disableCloseOnOutsideClick />
+					<Demo />
+				</View>
+			</Example.Item>
+		</Example>
+	);
+};
 
 export const scopedTheming = () => (
 	<View gap={3} align="start">

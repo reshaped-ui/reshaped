@@ -50,3 +50,4 @@
 - Fixed :focus-visible safari edge cases (back to data-rs-keyboard)
 - Modal, Overlay: containerRef
 - useResponsiveClientValue: custom theme viewports support
+- Flyout: Fixed disableCloseOnOutsideClick dismissible queue
