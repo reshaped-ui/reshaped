@@ -98,16 +98,9 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const { status, updatePosition, render, hide, remove, show } = flyout;
 	const isRendered = status !== "idle";
 
-	/**
-	 * Dismissible queue controls if other modals / flyouts should stay open when the latest one closes
-	 * - Hover flyouts ignore this rule because they don't close on click
-	 * - Flyouts that don't close on outside click ignore the queue because they only close on trigger click
-	 */
-	const ignoreDismissibleQueue =
-		triggerType === "hover" || (disableCloseOnOutsideClick && !parentFlyoutContentContext);
 	// Don't create dismissible queue for hover flyout because they close all together on mouseout
 	const isDismissible = useIsDismissible(
-		isRendered && !ignoreDismissibleQueue,
+		isRendered && triggerType !== "hover",
 		flyoutElRef,
 		triggerElRef
 	);

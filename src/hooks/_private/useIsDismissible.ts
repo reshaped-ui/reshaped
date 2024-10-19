@@ -24,23 +24,15 @@ const removeFromQueue = (id: string) => {
 };
 
 const addToQueue = (id: string, contentRef: Ref, triggerRef?: Ref) => {
-	const parentItem = latestId ? queue[latestId] : undefined;
-	const insideParent =
-		triggerRef?.current &&
-		parentItem &&
-		parentItem.contentRef.current?.contains(triggerRef.current);
-
-	if (!insideParent && triggerRef && latestId) {
-		removeFromQueue(latestId);
-	}
-
 	queue[id] = { parentId: latestId, triggerRef, contentRef };
 	latestId = id;
 };
 
 const useIsDismissible = (active: boolean = false, contentRef: Ref, triggerRef?: Ref) => {
 	const id = useElementId();
-	const isDismissible = React.useCallback(() => (active ? latestId === id : true), [id, active]);
+	const isDismissible = React.useCallback(() => {
+		return active ? latestId === id : true;
+	}, [id, active]);
 
 	React.useEffect(() => {
 		if (!active) return;
