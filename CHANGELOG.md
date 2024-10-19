@@ -53,3 +53,4 @@
 - Flyout: Fixed disableCloseOnOutsideClick dismissible queue
 - Button: Fixed icon glitching in Safari in some edge cases
 - Divider: children + contentPosition
+- TextField: multiline slot wrapping support

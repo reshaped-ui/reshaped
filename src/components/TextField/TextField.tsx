@@ -14,12 +14,17 @@ const TextFieldSlot = (props: T.SlotProps) => {
 
 	if (!icon && !slot && !affix) return null;
 
+	// In case fragment is used, map over its children instead
+	const renderedSlot =
+		React.isValidElement(slot) && slot.type === React.Fragment ? slot.props.children : slot;
+
 	const content = [
-		slot && (
-			<div className={classNames(s.slot, s[`slot--position-${position}`])} key="slot">
-				{slot}
-			</div>
-		),
+		slot &&
+			React.Children.map(renderedSlot, (child) => (
+				<div className={classNames(s.slot, s[`slot--position-${position}`])} key="slot">
+					{child}
+				</div>
+			)),
 		icon && (
 			<div className={s.icon} key="icon">
 				<Icon

@@ -5,6 +5,7 @@ import FormControl from "components/FormControl";
 import View from "components/View";
 import Text from "components/Text";
 import Button from "components/Button";
+import Badge from "components/Badge";
 
 export default {
 	title: "Components/TextField",
@@ -152,6 +153,17 @@ export const slots = () => (
 				placeholder="Enter your name"
 				value="Reshaped"
 				endSlot={<Button icon={IconZap} size="small" onClick={() => {}} />}
+			/>
+		</Example.Item>
+		<Example.Item title="multiline wrap">
+			<TextField
+				name="Name"
+				placeholder="Enter your name"
+				value="Reshaped"
+				startSlot={[...Array(10).keys()].map((i) => (
+					<Badge key={i}>Item {i + 1}</Badge>
+				))}
+				multiline
 			/>
 		</Example.Item>
 	</Example>
