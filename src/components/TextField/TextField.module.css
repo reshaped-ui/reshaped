@@ -3,6 +3,7 @@
 	--rs-p-h: var(--rs-text-field-gap);
 
 	display: flex;
+	align-items: center;
 	position: relative;
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
@@ -57,7 +58,7 @@
 	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x1) * 2);
 }
 
-.slot--position-end {
+.slot--position-end:last-child {
 	margin-inline-end: calc(var(--rs-unit-x1) * -1);
 }
 
