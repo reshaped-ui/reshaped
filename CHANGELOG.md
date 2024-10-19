@@ -52,3 +52,4 @@
 - useResponsiveClientValue: custom theme viewports support
 - Flyout: Fixed disableCloseOnOutsideClick dismissible queue
 - Button: Fixed icon glitching in Safari in some edge cases
+- Divider: children + contentPosition

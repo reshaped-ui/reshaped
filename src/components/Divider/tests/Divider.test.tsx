@@ -1,10 +1,10 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import Divider from "components/Divider";
 
 const fixtures = {
 	className: "test-className",
 	id: "test-id",
+	content: "test-label",
 };
 
 describe("Components/Divider", () => {
@@ -30,6 +30,14 @@ describe("Components/Divider", () => {
 		const el = screen.getByRole("separator");
 		expect(el).toBeInTheDocument();
 		expect(el).not.toHaveAttribute("aria-orientation");
+	});
+
+	test("renders children", () => {
+		render(<Divider>{fixtures.content}</Divider>);
+
+		const label = screen.getByText(fixtures.content);
+
+		expect(label).toBeInTheDocument();
 	});
 
 	test("works with className and attributes", () => {
