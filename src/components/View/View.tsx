@@ -180,14 +180,19 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 			itemElement = React.cloneElement(child, {
 				className: classNames(className, child.props.className),
 			});
-		} else if (className || (!React.isValidElement(child) && React.Children.count(children) > 1)) {
+		} else if (
+			!className &&
+			(React.isValidElement(child) ||
+				React.Children.count(children === 1) ||
+				typeof child === "string")
+		) {
+			itemElement = child;
+		} else {
 			itemElement = (
 				<div className={className} key={key}>
 					{child}
 				</div>
 			);
-		} else {
-			itemElement = child;
 		}
 
 		// Passing grow here because it's responsive and nowrap should follow it

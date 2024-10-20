@@ -19,14 +19,18 @@ export const layout = () => (
 	<Example>
 		<Example.Item title="base">
 			<Table>
-				<Table.Row>
-					<Table.Heading>Column 1</Table.Heading>
-					<Table.Heading>Column 2</Table.Heading>
-				</Table.Row>
-				<Table.Row>
-					<Table.Cell>Cell 1</Table.Cell>
-					<Table.Cell>Cell 2</Table.Cell>
-				</Table.Row>
+				<Table.Head>
+					<Table.Row>
+						<Table.Heading>Column 1</Table.Heading>
+						<Table.Heading>Column 2</Table.Heading>
+					</Table.Row>
+				</Table.Head>
+				<Table.Body>
+					<Table.Row>
+						<Table.Cell>Cell 1</Table.Cell>
+						<Table.Cell>Cell 2</Table.Cell>
+					</Table.Row>
+				</Table.Body>
 			</Table>
 		</Example.Item>
 		<Example.Item title="colspan: 2 for col 2, rowspan: 2 for cell 3">

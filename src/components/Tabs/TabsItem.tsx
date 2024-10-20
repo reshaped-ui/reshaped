@@ -66,7 +66,7 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 		const shouldScroll = navigatingBack ? threshold < 0.3 : threshold > 0.5;
 
 		if (!shouldScroll) return;
-		itemRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+		itemRef.current?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
 	};
 
 	useIsomorphicLayoutEffect(() => {

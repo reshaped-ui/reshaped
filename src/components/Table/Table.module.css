@@ -35,7 +35,8 @@
 	}
 }
 
-.row:not(:first-child) .cell {
+.row:not(:first-child) .cell,
+.head + .body .row:first-child .cell {
 	border-top: 1px solid var(--rs-color-border-neutral-faded);
 }
 

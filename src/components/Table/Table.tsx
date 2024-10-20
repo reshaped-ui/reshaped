@@ -75,7 +75,7 @@ const TableBody = (props: T.BodyProps) => {
 	const { children, attributes, className } = props;
 
 	return (
-		<tbody {...attributes} className={classNames(className)}>
+		<tbody {...attributes} className={classNames(s.body, className)}>
 			{children}
 		</tbody>
 	);
@@ -85,7 +85,7 @@ const TableHead = (props: T.HeadProps) => {
 	const { children, attributes, className } = props;
 
 	return (
-		<thead {...attributes} className={classNames(className)}>
+		<thead {...attributes} className={classNames(s.head, className)}>
 			{children}
 		</thead>
 	);

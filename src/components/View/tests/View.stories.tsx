@@ -18,11 +18,14 @@ export default {
 	},
 };
 
+const foo = "Foo";
+const bar = "Bar";
+
 export const padding = () => (
 	<Example title="Border is used to highlight the padding value">
 		<Example.Item title="padding: 4">
 			<View padding={4} borderColor="neutral">
-				<Placeholder />
+				{foo}: {bar}
 			</View>
 		</Example.Item>
 		<Example.Item title="padding: 6">
