@@ -77,6 +77,7 @@ const Overlay = (props: T.Props) => {
 
 			if (originalOverflowRef.current && containerRef?.current) {
 				containerRef.current.style.overflow = originalOverflowRef.current;
+				containerRef.current.style.removeProperty("isolation");
 				originalOverflowRef.current = null;
 			}
 
@@ -138,6 +139,7 @@ const Overlay = (props: T.Props) => {
 		if (containerEl) {
 			originalOverflowRef.current = containerEl.style.overflow;
 			containerEl.style.overflow = "hidden";
+			containerEl.style.isolation = "isolate";
 			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
 		}
 
