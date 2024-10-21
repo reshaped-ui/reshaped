@@ -112,14 +112,15 @@ const flyout: Flyout = (args) => {
 	const { position, fallbackPositions, width, container, lastUsedFallback, onFallback } = options;
 	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
 	const triggerBounds = passedTriggerBounds || triggerEl.getBoundingClientRect();
-	const contentGapModifier = parseInt(getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1"));
+	const baseUnit = getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1");
+	const contentGapModifier = baseUnit ? parseInt(baseUnit) : 0;
 
 	// Reset all styles applied on the previous hook execution
 	targetClone.style.cssText = "";
 
 	Object.keys(resetStyles).forEach((key) => {
 		const value = resetStyles[key as keyof T.Styles];
-		targetClone.style[key as any] = value!.toString();
+		if (value) targetClone.style[key as any] = value.toString();
 	});
 
 	if (width) {
@@ -147,7 +148,7 @@ const flyout: Flyout = (args) => {
 	let calculated: ReturnType<typeof calculatePosition> | null = null;
 	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
-	testOrder.some((currentPosition, index) => {
+	testOrder.some((currentPosition) => {
 		const tested = calculatePosition({
 			...options,
 			triggerBounds,
