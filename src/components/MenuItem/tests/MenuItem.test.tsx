@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import MenuItem from "components/MenuItem";
 import {
@@ -19,7 +18,7 @@ const fixtures = {
 describe("Components/MenuItem", () => {
 	test("renders children", () => {
 		render(
-			<MenuItem startSlot={fixtures.start} endSlot={fixtures.end}>
+			<MenuItem startSlot={<div>{fixtures.start}</div>} endSlot={<div>{fixtures.end}</div>}>
 				{fixtures.content}
 			</MenuItem>
 		);

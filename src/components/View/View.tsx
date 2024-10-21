@@ -179,6 +179,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		if (isItem) {
 			itemElement = React.cloneElement(child, {
 				className: classNames(className, child.props.className),
+				key,
 			});
 		} else if (
 			!className &&
