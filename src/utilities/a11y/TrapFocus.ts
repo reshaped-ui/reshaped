@@ -131,12 +131,14 @@ class TrapFocus {
 		});
 
 		this.removeListeners();
-		if (mode === "dialog") this.screenReaderTrap.trap();
 
 		this.mutationObserver.observe(this.root, { childList: true, subtree: true });
+
+		// Don't trap in case there is nothing to focus inside
 		if (!focusable.length && !initialFocusEl) return;
 
 		this.addListeners();
+		if (mode === "dialog") this.screenReaderTrap.trap();
 
 		// Don't add back to the chain if we're traversing back
 		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);

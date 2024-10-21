@@ -18,33 +18,43 @@ const TextFieldSlot = (props: T.SlotProps) => {
 	const renderedSlot =
 		React.isValidElement(slot) && slot.type === React.Fragment ? slot.props.children : slot;
 
-	const content = [
+	const slotNode =
 		slot &&
-			React.Children.map(renderedSlot, (child) => (
-				<div className={classNames(s.slot, s[`slot--position-${position}`])} key="slot">
-					{child}
-				</div>
-			)),
-		icon && (
-			<div className={s.icon} key="icon">
-				<Icon
-					size={responsivePropDependency(size, (size) => {
-						if (size === "large") return 5;
-						if (size === "xlarge") return 6;
-						return 4;
-					})}
-					svg={icon}
-				/>
+		React.Children.map(renderedSlot, (child) => (
+			<div className={classNames(s.slot, s[`slot--position-${position}`])} key="slot">
+				{child}
 			</div>
-		),
-		affix && (
-			<div className={classNames(s.affix, s[`affix--position-${position}`])} key="affix">
-				{affix}
-			</div>
-		),
-	].filter(Boolean);
+		));
+	const iconNode = icon && (
+		<div className={s.icon} key="icon">
+			<Icon
+				size={responsivePropDependency(size, (size) => {
+					if (size === "large") return 5;
+					if (size === "xlarge") return 6;
+					return 4;
+				})}
+				svg={icon}
+			/>
+		</div>
+	);
+	const affixNode = affix && (
+		<div className={classNames(s.affix, s[`affix--position-${position}`])} key="affix">
+			{affix}
+		</div>
+	);
 
-	return position === "end" ? content.reverse() : content;
+	/**
+	 * Start position:
+	 * - Icon is first to indicate a role of the input
+	 * - Affix is last to stay next ot the text
+	 * End position:
+	 * - Icon is first in case it's used for indicating states
+	 * - Slot is the last one in case it's used as a field action
+	 */
+	const content =
+		position === "start" ? [iconNode, slotNode, affixNode] : [iconNode, affixNode, slotNode];
+
+	return content.filter(Boolean);
 };
 
 const TextField = (props: T.Props) => {
