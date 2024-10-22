@@ -39,7 +39,7 @@
 	scrollbar-width: none;
 	margin: 0 calc(var(--rs-unit-x1) * var(--rs-carousel-bleed) * -1);
 	padding: 0 calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
-	scroll-snap-type: inline;
+	scroll-snap-type: x mandatory;
 	scroll-padding-inline-start: calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
 }
 
