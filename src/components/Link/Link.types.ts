@@ -3,7 +3,14 @@ import type { IconProps } from "components/Icon";
 
 export type Props = Pick<
 	ActionableProps,
-	"attributes" | "className" | "disabled" | "children" | "href" | "onClick" | "type"
+	| "attributes"
+	| "className"
+	| "disabled"
+	| "children"
+	| "href"
+	| "onClick"
+	| "type"
+	| "stopPropagation"
 > & {
 	icon?: IconProps["svg"];
 	color?: "inherit" | "critical" | "primary" | "positive" | "warning";

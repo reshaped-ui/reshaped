@@ -6,6 +6,7 @@
 - TextField: Rounded flag
 - Flyout, Popover, DropdownMenu, Tooltip: contentShift, contentGap
 - DropdownMenu: Added attributes.ref support
+- Actionable, Button, Link, MenuItem: Added stopPropagation property for nested buttons
 
 Documentation
 

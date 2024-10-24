@@ -11,6 +11,7 @@ export type Props = {
 	insetFocus?: boolean;
 	disableFocusRing?: boolean;
 	borderRadius?: "inherit";
+	stopPropagation?: boolean;
 	as?: keyof JSX.IntrinsicElements;
 	className?: G.ClassName;
 	// Props are not ommited from attributes since we support all of them

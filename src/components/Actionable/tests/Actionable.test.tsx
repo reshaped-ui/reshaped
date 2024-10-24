@@ -94,6 +94,24 @@ describe("Utilities/Actionable", () => {
 		expect(handleClick).toHaveBeenCalledTimes(0);
 	});
 
+	test("handles stopPropagation", async () => {
+		const handleClickRoot = jest.fn();
+		const handleClickInner = jest.fn();
+
+		render(
+			<Actionable onClick={handleClickRoot}>
+				<Actionable as="div" stopPropagation onClick={handleClickInner} />
+			</Actionable>
+		);
+
+		const innerButton = screen.getAllByRole("button")[1];
+
+		await userEvent.click(innerButton);
+
+		expect(handleClickInner).toHaveBeenCalledTimes(1);
+		expect(handleClickRoot).not.toHaveBeenCalled();
+	});
+
 	test("renders className and attributes", () => {
 		const { container } = render(
 			<Actionable className={fixtures.className} attributes={{ id: fixtures.id }}>

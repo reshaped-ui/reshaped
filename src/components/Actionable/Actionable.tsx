@@ -17,6 +17,7 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		disableFocusRing,
 		borderRadius,
 		as,
+		stopPropagation,
 		fullWidth,
 		className,
 		attributes,
@@ -60,6 +61,7 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 
 	const handlePress: T.Props["onClick"] = (event) => {
 		if (disabled) return;
+		if (stopPropagation) event.stopPropagation();
 
 		onClick?.(event);
 		attributes?.onClick?.(event as any);
@@ -72,6 +74,7 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		if (!isSpace && !isEnter) return;
 		if (rootAttributes.role !== "button") return;
 
+		if (stopPropagation) event.stopPropagation();
 		event.preventDefault();
 		handlePress(event);
 	};

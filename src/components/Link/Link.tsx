@@ -18,6 +18,7 @@ const Link = forwardRef<HTMLButtonElement | HTMLAnchorElement, T.Props>(
 			attributes,
 			type,
 			onClick,
+			stopPropagation,
 		} = props;
 		const rootClassNames = classNames(
 			s.root,
@@ -37,6 +38,7 @@ const Link = forwardRef<HTMLButtonElement | HTMLAnchorElement, T.Props>(
 				type={type}
 				onClick={onClick}
 				ref={ref}
+				stopPropagation={stopPropagation}
 			>
 				{icon && <Icon svg={icon} />}
 				{children}
