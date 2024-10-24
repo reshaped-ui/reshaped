@@ -24,6 +24,19 @@
 			width: auto;
 		}
 	}
+
+	&.--rounded {
+		border-radius: 999px;
+
+		& .affix:first-child,
+		& .icon:first-child {
+			padding-inline-start: var(--rs-unit-x1);
+		}
+
+		& .input:first-child {
+			padding-inline-start: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
+		}
+	}
 }
 
 .input {

@@ -45,6 +45,40 @@ export const variants = () => (
 	</Example>
 );
 
+export const rounded = () => (
+	<Example>
+		<Example.Item title="rounded">
+			<TextField
+				rounded
+				name="Name"
+				placeholder="Enter your name"
+				icon={IconZap}
+				prefix="+31"
+				endSlot={<Button rounded size="small" icon={IconZap} />}
+			/>
+		</Example.Item>
+
+		<Example.Item title="rounded, variant: faded">
+			<View direction="row" gap={2}>
+				<View.Item grow>
+					<TextField
+						rounded
+						variant="faded"
+						name="Name"
+						placeholder="Enter your name"
+						startSlot={
+							<Badge rounded size="small">
+								Hello
+							</Badge>
+						}
+					/>
+				</View.Item>
+				<Button rounded>Submit</Button>
+			</View>
+		</Example.Item>
+	</Example>
+);
+
 export const disabled = () => (
 	<Example>
 		<Example.Item title="disabled, no value">

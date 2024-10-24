@@ -77,7 +77,9 @@ type BaseProps = {
 	triggerType?: "hover" | "click" | "focus";
 	groupTimeouts?: boolean;
 	position?: Position;
-	// @deprecated Use fallbackPosition={false} instead
+	/**
+	 * @deprecated Use fallbackPosition={false} instead
+	 */
 	forcePosition?: boolean;
 	fallbackPositions?: Position[] | false;
 	trapFocusMode?: TrapMode;

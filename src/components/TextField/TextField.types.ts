@@ -12,6 +12,7 @@ type BaseProps = {
 	disabled?: boolean;
 	focused?: boolean;
 	multiline?: boolean;
+	rounded?: boolean;
 	placeholder?: string;
 	icon?: SlotProps["icon"];
 	endIcon?: SlotProps["icon"];

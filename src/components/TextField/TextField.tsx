@@ -76,6 +76,7 @@ const TextField = (props: T.Props) => {
 		variant = "outline",
 		focused,
 		multiline,
+		rounded,
 		className,
 		attributes,
 	} = props;
@@ -94,6 +95,7 @@ const TextField = (props: T.Props) => {
 		disabled && s["--disabled"],
 		focused && s["--focused"],
 		multiline && s["--multiline"],
+		rounded && s["--rounded"],
 		variant && s[`--variant-${variant}`]
 	);
 
