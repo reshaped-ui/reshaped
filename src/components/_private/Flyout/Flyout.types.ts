@@ -20,6 +20,7 @@ export type Options = {
 	lastUsedFallback: Position;
 	onFallback: (position: Position) => void;
 	contentGap?: number;
+	contentShift?: number;
 };
 export type Styles = React.CSSProperties;
 
@@ -92,6 +93,7 @@ type BaseProps = {
 	onClose?: () => void;
 	width?: Width;
 	contentGap?: number;
+	contentShift?: number;
 	contentClassName?: string;
 	contentAttributes?: G.Attributes<"div">;
 	instanceRef?: React.Ref<Instance>;
@@ -145,6 +147,7 @@ export type ContextProps = {
 	| "contentAttributes"
 	| "trapFocusMode"
 	| "contentGap"
+	| "contentShift"
 	| "containerRef"
 	| "disableContentHover"
 >;

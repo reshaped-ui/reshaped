@@ -23,6 +23,7 @@ type Flyout = (
 		flyoutEl: HTMLElement;
 		triggerBounds?: DOMRect | null;
 		contentGap?: number;
+		contentShift?: number;
 	}
 ) => T.FlyoutData;
 
@@ -47,6 +48,7 @@ type UseFlyout = (
 		flyoutElRef: ElementRef;
 		triggerBoundsRef: React.RefObject<DOMRect | undefined>;
 		contentGap?: number;
+		contentShift?: number;
 	}
 ) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
@@ -106,6 +108,7 @@ const flyout: Flyout = (args) => {
 		triggerEl,
 		flyoutEl,
 		triggerBounds: passedTriggerBounds,
+		contentShift = 0,
 		contentGap = 0,
 		...options
 	} = args;
@@ -113,7 +116,7 @@ const flyout: Flyout = (args) => {
 	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
 	const triggerBounds = passedTriggerBounds || triggerEl.getBoundingClientRect();
 	const baseUnit = getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1");
-	const contentGapModifier = baseUnit ? parseInt(baseUnit) : 0;
+	const unitModifier = baseUnit ? parseInt(baseUnit) : 0;
 
 	// Reset all styles applied on the previous hook execution
 	targetClone.style.cssText = "";
@@ -155,7 +158,8 @@ const flyout: Flyout = (args) => {
 			flyoutBounds,
 			scopeOffset,
 			position: currentPosition,
-			contentGap: contentGap * contentGapModifier,
+			contentGap: contentGap * unitModifier,
+			contentShift: contentShift * unitModifier,
 		});
 		const visible = fullyVisible(tested);
 		const validPosition = visible || fallbackPositions?.length === 0;
@@ -209,7 +213,8 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 };
 
 const useFlyout: UseFlyout = (args) => {
-	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, ...options } = args;
+	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, contentShift, ...options } =
+		args;
 	const { position: defaultPosition = "bottom", fallbackPositions, width, container } = options;
 	const lastUsedFallbackRef = React.useRef(defaultPosition);
 	// Memo the array internally to avoid new arrays triggering useCallback
@@ -261,6 +266,7 @@ const useFlyout: UseFlyout = (args) => {
 				rtl: isRTL,
 				container,
 				contentGap,
+				contentShift,
 			});
 
 			if (nextFlyoutData)
@@ -276,6 +282,7 @@ const useFlyout: UseFlyout = (args) => {
 			triggerBoundsRef,
 			width,
 			contentGap,
+			contentShift,
 			handleFallback,
 		]
 	);

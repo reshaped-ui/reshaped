@@ -36,6 +36,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		disableContentHover,
 		disableCloseOnOutsideClick,
 		contentGap = 2,
+		contentShift,
 		contentClassName,
 		contentAttributes,
 		position: passedPosition,
@@ -94,6 +95,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		container: containerRef?.current,
 		fallbackPositions,
 		contentGap,
+		contentShift,
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
 	const isRendered = status !== "idle";

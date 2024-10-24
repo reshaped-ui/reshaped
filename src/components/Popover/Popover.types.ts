@@ -16,6 +16,7 @@ export type Props = Pick<
 	| "active"
 	| "defaultActive"
 	| "contentGap"
+	| "contentShift"
 	| "instanceRef"
 	| "triggerType"
 	| "disableHideAnimation"

@@ -15,6 +15,8 @@ const Tooltip = (props: T.Props) => {
 		onClose,
 		position = "bottom",
 		containerRef,
+		contentGap,
+		contentShift,
 		active,
 		disabled,
 		disableContentHover,
@@ -28,6 +30,8 @@ const Tooltip = (props: T.Props) => {
 			active={active}
 			position={position}
 			disabled={disabled}
+			contentGap={contentGap}
+			contentShift={contentShift}
 			onOpen={onOpen}
 			onClose={onClose}
 			disableContentHover={disableContentHover}

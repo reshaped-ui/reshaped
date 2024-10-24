@@ -33,6 +33,7 @@ const calculatePosition = (
 		rtl,
 		width,
 		contentGap = 0,
+		contentShift = 0,
 	} = args;
 	const isFullWidth = width === "full" || width === "100%";
 	let left = 0;
@@ -53,7 +54,7 @@ const calculatePosition = (
 	switch (position) {
 		case "bottom":
 		case "top":
-			left = centerBySize(triggerBounds.width, flyoutWidth) + triggerBounds.left;
+			left = centerBySize(triggerBounds.width, flyoutWidth) + triggerBounds.left + contentShift;
 			break;
 
 		case "start":
@@ -71,12 +72,12 @@ const calculatePosition = (
 
 		case "top-start":
 		case "bottom-start":
-			left = triggerBounds.left;
+			left = triggerBounds.left + contentShift + contentShift;
 			break;
 
 		case "top-end":
 		case "bottom-end":
-			left = triggerBounds.right - flyoutWidth;
+			left = triggerBounds.right - flyoutWidth + contentShift;
 			break;
 
 		default:
@@ -98,17 +99,17 @@ const calculatePosition = (
 
 		case "start":
 		case "end":
-			top = centerBySize(triggerBounds.height, flyoutHeight) + triggerBounds.top;
+			top = centerBySize(triggerBounds.height, flyoutHeight) + triggerBounds.top + contentShift;
 			break;
 
 		case "start-top":
 		case "end-top":
-			top = triggerBounds.top;
+			top = triggerBounds.top + contentShift;
 			break;
 
 		case "start-bottom":
 		case "end-bottom":
-			top = triggerBounds.bottom - flyoutHeight;
+			top = triggerBounds.bottom - flyoutHeight + contentShift;
 			break;
 
 		default:

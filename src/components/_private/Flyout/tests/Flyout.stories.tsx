@@ -7,7 +7,6 @@ import Theme from "components/Theme";
 import Button from "components/Button";
 import Flyout, { FlyoutInstance } from "components/_private/Flyout";
 import TextField from "components/TextField";
-import useToggle from "hooks/useToggle";
 
 export default { title: "Utilities/Internal/Flyout" };
 
@@ -25,7 +24,7 @@ const Demo = (props: any) => {
 						background: "var(--rs-color-background-elevation-overlay)",
 						padding: "var(--rs-unit-x4)",
 						height: 150,
-						width: 160,
+						minWidth: 160,
 						borderRadius: "var(--rs-radius-medium)",
 						border: "1px solid var(--rs-color-border-neutral-faded)",
 						boxSizing: "border-box",
@@ -38,7 +37,7 @@ const Demo = (props: any) => {
 	);
 };
 
-export const positions = () => (
+export const position = () => (
 	<div style={{ paddingTop: 200 }}>
 		<View gap={3} direction="row">
 			<Demo position="bottom-start" />
@@ -124,23 +123,41 @@ export const modes = () => (
 	</Example>
 );
 
-export const widthTrigger = () => (
-	<Flyout triggerType="click" width="trigger" position="bottom">
-		<Flyout.Trigger>
-			{(attributes) => <button {...attributes}>Trigger with long text</button>}
-		</Flyout.Trigger>
-		<Flyout.Content>
-			<div
-				style={{
-					background: "var(--rs-color-background-elevation-overlay)",
-					padding: "var(--rs-unit-x4)",
-					borderRadius: "var(--rs-radius-medium)",
-					border: "1px solid var(--rs-color-border-neutral-faded)",
-					boxSizing: "border-box",
-				}}
-			></div>
-		</Flyout.Content>
-	</Flyout>
+export const width = () => (
+	<Example>
+		<Example.Item title="width: 300px">
+			<Demo width="300px" position="bottom" />
+		</Example.Item>
+		<Example.Item title="width: trigger">
+			<Flyout triggerType="click" width="trigger" position="bottom">
+				<Flyout.Trigger>
+					{(attributes) => <Button attributes={attributes}>Trigger with long text</Button>}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<div
+						style={{
+							background: "var(--rs-color-background-elevation-overlay)",
+							padding: "var(--rs-unit-x4)",
+							borderRadius: "var(--rs-radius-medium)",
+							border: "1px solid var(--rs-color-border-neutral-faded)",
+							boxSizing: "border-box",
+						}}
+					></div>
+				</Flyout.Content>
+			</Flyout>
+		</Example.Item>
+	</Example>
+);
+
+export const offset = () => (
+	<Example>
+		<Example.Item title="contentGap: x10">
+			<Demo contentGap={10} />
+		</Example.Item>
+		<Example.Item title="contentShift: x10">
+			<Demo contentShift={10} />
+		</Example.Item>
+	</Example>
 );
 
 export const disableFlags = () => (
@@ -246,15 +263,6 @@ export const customPortalTarget = () => {
 	);
 };
 
-export const testWidthOverflowOnMobile = () => (
-	<Demo position="bottom-start" width={600}>
-		Should work on mobile
-		<button type="button">Item 1</button>
-		<button type="button">Item 2</button>
-		<button type="button">Close</button>
-	</Demo>
-);
-
 export const testInsideFixed = () => (
 	<Example>
 		<Example.Item title="should move the content on page scroll">
@@ -356,8 +364,6 @@ export const testDynamicBounds = () => {
 };
 
 export const testDisableOutsideClick = () => {
-	const toggle = useToggle();
-
 	return (
 		<Example>
 			<Example.Item title="opening second flyout shouldn't block the first one from closing">
@@ -370,7 +376,7 @@ export const testDisableOutsideClick = () => {
 	);
 };
 
-export const scopedTheming = () => (
+export const testScopedTheming = () => (
 	<View gap={3} align="start">
 		<Button color="primary">Reshaped button</Button>
 		<Theme name="twitter">

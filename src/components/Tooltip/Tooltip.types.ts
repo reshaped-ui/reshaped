@@ -11,6 +11,8 @@ export type Props = Pick<
 	| "disabled"
 	| "disableContentHover"
 	| "containerRef"
+	| "contentGap"
+	| "contentShift"
 > & {
 	children: (attributes: Parameters<FlyoutTriggerProps["children"]>[0] | {}) => React.ReactNode;
 	text?: React.ReactNode;

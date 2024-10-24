@@ -12,6 +12,7 @@ export type Props = Pick<
 	| "fallbackPositions"
 	| "triggerType"
 	| "contentGap"
+	| "contentShift"
 	| "onOpen"
 	| "onClose"
 	| "active"
