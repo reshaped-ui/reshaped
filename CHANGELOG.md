@@ -5,6 +5,7 @@
 - Carousel: Fixed scroll snapping scrolling the carousel back
 - TextField: Rounded flag
 - Flyout, Popover, DropdownMenu, Tooltip: contentShift, contentGap
+- DropdownMenu: Added attributes.ref support
 
 Documentation
 

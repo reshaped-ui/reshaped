@@ -51,6 +51,7 @@ const DropdownMenuContent = (props: T.ContentProps) => {
 		[subMenuInstance?.current],
 		{
 			disabled: flyout.status === "idle",
+			ref: attributes?.ref as React.RefObject<HTMLDivElement>,
 		}
 	);
 	const contentClassName = classNames(s.menu, className);

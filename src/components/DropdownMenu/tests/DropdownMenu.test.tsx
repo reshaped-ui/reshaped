@@ -1,3 +1,4 @@
+import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import DropdownMenu from "components/DropdownMenu";
@@ -7,6 +8,8 @@ import Reshaped from "components/Reshaped";
 const fixtures = {
 	content1: "Item 1",
 	content2: "Item 2",
+	className: "test-className",
+	id: "test-id",
 };
 
 describe("DropdownMenu", () => {
@@ -53,13 +56,13 @@ describe("DropdownMenu", () => {
 			// TODO: Add support for trapFocus unit testing
 			// expect(menuItems[0]).toHaveFocus();
 
-			expect(handleOpen).toBeCalledTimes(1);
+			expect(handleOpen).toHaveBeenCalledTimes(1);
 		});
 
 		await userEvent.click(button);
 
 		await waitFor(() => {
-			expect(handleClose).toBeCalledTimes(1);
+			expect(handleClose).toHaveBeenCalledTimes(1);
 		});
 
 		// TODO: Add support for handling removal animation
@@ -88,10 +91,10 @@ describe("DropdownMenu", () => {
 		const button = screen.getByRole("button");
 
 		expect(button).toMatchSnapshot();
-		expect(handleOpen).toBeCalledTimes(0);
+		expect(handleOpen).toHaveBeenCalledTimes(0);
 
 		await userEvent.click(button);
-		expect(handleClose).toBeCalledTimes(1);
+		expect(handleClose).toHaveBeenCalledTimes(1);
 		// TODO: Add support for handling removal animation
 		// expect(button).toMatchSnapshot();
 	});
@@ -124,5 +127,31 @@ describe("DropdownMenu", () => {
 
 		// TODO: Add support for handling removal animation
 		// expect(button).toMatchSnapshot();
+	});
+
+	test("content applies className and attributes", () => {
+		const ref = React.createRef<HTMLDivElement>();
+
+		render(
+			<Reshaped>
+				<DropdownMenu defaultActive>
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content
+						className={fixtures.className}
+						attributes={{ "data-testid": fixtures.id, ref }}
+					>
+						<DropdownMenu.Item>{fixtures.content1}</DropdownMenu.Item>
+						<DropdownMenu.Item>{fixtures.content2}</DropdownMenu.Item>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Reshaped>
+		);
+
+		const menu = screen.getByTestId(fixtures.id);
+
+		expect(menu).toHaveClass(fixtures.className);
+		expect(ref.current instanceof HTMLDivElement).toBeTruthy();
 	});
 });
