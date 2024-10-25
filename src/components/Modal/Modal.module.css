@@ -1,4 +1,7 @@
 .root {
+	--rs-modal-container-width: 100vw;
+	--rs-modal-position: fixed;
+
 	transition: var(--rs-easing-accelerate) var(--rs-duration-medium);
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
@@ -9,6 +12,11 @@
 	[data-rs-keyboard] &:focus {
 		outline: none;
 		box-shadow: var(--rs-focus-shadow);
+	}
+
+	&.--contained {
+		--rs-modal-position: absolute;
+		--rs-modal-container-width: 100%;
 	}
 }
 
@@ -22,7 +30,7 @@
 
 		width: var(--rs-modal-size);
 		height: auto;
-		max-width: calc(100% - var(--rs-unit-x8));
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x8));
 		max-height: none;
 		margin: var(--rs-unit-x4);
 		inset: 0;
@@ -45,20 +53,16 @@
 		width: 100%;
 		height: var(--rs-modal-size);
 		max-width: 100%;
-		max-height: calc(100% - var(--rs-unit-x4));
+		max-height: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
 		margin: 0;
 		margin-top: var(--rs-unit-x4);
 		inset: 0;
 		inset-block-start: initial;
 		transform: translate(0, 100%);
-		position: fixed;
+		position: var(--rs-modal-position);
 		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
 		opacity: 1;
-
-		&.--contained {
-			position: absolute;
-		}
 
 		&.--active,
 		[dir="rtl"] &.--active {
@@ -71,21 +75,17 @@
 
 		width: var(--rs-modal-size);
 		height: 100%;
-		max-width: calc(100% - var(--rs-unit-x4));
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
 		max-height: 100%;
 		margin: 0;
 		margin-inline-end: var(--rs-unit-x4);
 		inset: 0;
 		inset-inline-end: initial;
 		transform: translate(-100%, 0);
-		position: fixed;
+		position: var(--rs-modal-position);
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
-
-		&.--contained {
-			position: absolute;
-		}
 
 		[dir="rtl"] & {
 			transform: translate(100%, 0);
@@ -102,21 +102,17 @@
 
 		width: var(--rs-modal-size);
 		height: 100%;
-		max-width: calc(100% - var(--rs-unit-x4));
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
 		max-height: 100%;
 		margin: 0;
 		margin-inline-start: var(--rs-unit-x4);
 		inset: 0;
 		inset-inline-start: initial;
 		transform: translate(100%, 0);
-		position: fixed;
+		position: var(--rs-modal-position);
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
-
-		&.--contained {
-			position: absolute;
-		}
 
 		[dir="rtl"] & {
 			transform: translate(-100%, 0);
@@ -133,20 +129,16 @@
 
 		width: 100%;
 		height: 100%;
-		max-width: 100%;
+		max-width: var(--rs-modal-container-width);
 		max-height: 100%;
 		margin: 0;
 		inset: 0;
 		inset-block-start: initial;
 		transform: translate(0, var(--rs-unit-x4));
-		position: fixed;
+		position: var(--rs-modal-position);
 		border-radius: 0;
 		overflow: auto;
 		opacity: 0;
-
-		&.--contained {
-			position: absolute;
-		}
 
 		&.--active,
 		[dir="rtl"] &.--active {
