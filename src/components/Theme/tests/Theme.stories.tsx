@@ -4,6 +4,7 @@ import View from "components/View";
 import MenuItem from "components/MenuItem";
 import Theme, { useTheme } from "components/Theme";
 import { Example } from "utilities/storybook";
+import Reshaped from "components/Reshaped";
 
 export default {
 	title: "Utilities/Theme",
@@ -19,7 +20,7 @@ const UncontrolledDemo = () => {
 	const { setTheme, theme } = useTheme();
 
 	return (
-		<Button color="primary" onClick={() => setTheme(theme === "reshaped" ? "fake" : "reshaped")}>
+		<Button color="primary" onClick={() => setTheme(theme === "reshaped" ? "slate" : "reshaped")}>
 			Toggle theme
 		</Button>
 	);
@@ -30,6 +31,35 @@ export const uncontrolled = () => {
 		<Example>
 			<Example.Item title="switches theme using useTheme hooks">
 				<UncontrolledDemo />
+			</Example.Item>
+		</Example>
+	);
+};
+
+const NestedOne = () => {
+	const { invertColorMode } = useTheme();
+
+	return (
+		<Button color="primary" variant="faded" onClick={invertColorMode}>
+			Slate
+		</Button>
+	);
+};
+
+export const nestedReshaped = () => {
+	const { invertColorMode } = useTheme();
+
+	return (
+		<Example>
+			<Example.Item title="reshaped + nested slate">
+				<View gap={2} direction="row">
+					<Button color="primary" variant="faded" onClick={invertColorMode}>
+						Reshaped
+					</Button>
+					<Reshaped theme="slate" scoped>
+						<NestedOne />
+					</Reshaped>
+				</View>
 			</Example.Item>
 		</Example>
 	);
@@ -52,6 +82,7 @@ const Demo = () => {
 		</View>
 	);
 };
+
 export const edgeCases = () => (
 	<Example>
 		<Example.Item title="should have no transitions while switching color mode">

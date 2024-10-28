@@ -3,8 +3,8 @@ import React from "react";
 /**
  * Types
  */
-type Callback = (e: KeyboardEvent) => void;
-type PressedMap = Record<string, KeyboardEvent>;
+type Callback = (e?: KeyboardEvent) => void;
+type PressedMap = Map<string, KeyboardEvent>;
 type Hotkeys = Record<string, Callback | null>;
 type HotkeyOptions = { preventDefault?: boolean };
 type Context = {
@@ -26,7 +26,7 @@ type HotkeyData = {
  * Utilities
  */
 const COMBINATION_DELIMETER = "+";
-const pressedMap: PressedMap = {};
+const pressedMap: PressedMap = new Map();
 let modifiedKeys: string[] = [];
 
 const formatHotkey = (hotkey: string) => {
@@ -98,10 +98,9 @@ export class HotkeyStore {
 	};
 
 	handleKeyDown = (pressedMap: PressedMap, e: KeyboardEvent) => {
-		const pressedKeys = Object.keys(pressedMap);
+		if (!pressedMap.size) return;
 
-		if (!pressedKeys.length) return;
-
+		const pressedKeys = [...pressedMap.keys()];
 		const pressedId = getHotkeyId(pressedKeys.join(COMBINATION_DELIMETER));
 		const pressedFormattedKeys = pressedId.split(COMBINATION_DELIMETER);
 
@@ -132,7 +131,7 @@ export class HotkeyStore {
 						return;
 					}
 
-					const resolvedEvent = pressedMap[pressedId];
+					const resolvedEvent = pressedMap.get(pressedId);
 
 					if (data.options.preventDefault) {
 						resolvedEvent?.preventDefault();
@@ -167,15 +166,14 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 			const eventKey = getEventKey(e);
 			if (!eventKey) return;
 
-			pressedMap[eventKey] = e;
-
-			setTriggerCount(Object.keys(pressedMap).length);
+			pressedMap.set(eventKey, e);
+			setTriggerCount(pressedMap.size);
 
 			// Key up won't trigger for other keys while Meta is pressed so we need to cache them
 			// and remove on Meta keyup
-			if (e.metaKey) modifiedKeys.push(...Object.keys(pressedMap));
+			if (e.metaKey) modifiedKeys.push(...pressedMap.keys());
 
-			if (pressedMap.Meta) modifiedKeys.push(eventKey);
+			if (pressedMap.has("Meta")) modifiedKeys.push(eventKey);
 		},
 		[hooksCount]
 	);
@@ -187,20 +185,21 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 			const eventKey = getEventKey(e);
 			if (!eventKey) return;
 
-			delete pressedMap[eventKey];
+			pressedMap.delete(eventKey);
+
 			if (eventKey === "meta" || eventKey === "control") {
-				delete pressedMap.mod;
+				pressedMap.delete("mod");
 			}
 
 			if (eventKey === "meta") {
 				modifiedKeys.forEach((key) => {
-					if (!pressedMap[key]) return;
-					delete pressedMap[key];
+					if (!pressedMap.has(key)) return;
+					pressedMap.delete(key);
 				});
 				modifiedKeys = [];
 			}
 
-			setTriggerCount(Object.keys(pressedMap).length);
+			setTriggerCount(pressedMap.size);
 		},
 		[hooksCount]
 	);
@@ -208,7 +207,7 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 	const isPressed = (hotkey: string) => {
 		const keys = formatHotkey(hotkey).split(COMBINATION_DELIMETER);
 
-		if (keys.some((key) => !pressedMap[key])) return false;
+		if (keys.some((key) => !pressedMap.has(key))) return false;
 		return true;
 	};
 
@@ -232,6 +231,11 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 		[removePressedKey]
 	);
 
+	const handleWindowBlur = React.useCallback(() => {
+		pressedMap.clear();
+		modifiedKeys = [];
+	}, []);
+
 	const addHotkeys: Context["addHotkeys"] = React.useCallback((hotkeys, ref, options = {}) => {
 		setHooksCount((prev) => prev + 1);
 		globalHotkeyStore.bindHotkeys(hotkeys, ref, options);
@@ -245,12 +249,14 @@ export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) =
 	React.useEffect(() => {
 		window.addEventListener("keydown", handleWindowKeyDown);
 		window.addEventListener("keyup", handleWindowKeyUp);
+		window.addEventListener("blur", handleWindowBlur);
 
 		return () => {
 			window.removeEventListener("keydown", handleWindowKeyDown);
 			window.removeEventListener("keyup", handleWindowKeyUp);
+			window.removeEventListener("blur", handleWindowBlur);
 		};
-	}, [handleWindowKeyDown, handleWindowKeyUp]);
+	}, [handleWindowKeyDown, handleWindowKeyUp, handleWindowBlur]);
 
 	return (
 		<HotkeyContext.Provider value={{ addHotkeys, isPressed }}>{children}</HotkeyContext.Provider>

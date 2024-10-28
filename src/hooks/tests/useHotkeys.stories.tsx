@@ -6,8 +6,11 @@ export default { title: "Hooks/useHotkeys" };
 function Example() {
 	const { checkHotkeyState } = useHotkeys({
 		"shift + b + n": () => console.log("pressed"),
-		"c + v": () => console.log(111),
-		"Meta + v": () => console.log(222),
+		"c + v": () => console.log("c + v"),
+		"Meta + k": () => console.log("meta + k"),
+		"Meta + f": () => console.log("meta + f"),
+		"Meta + v": () => console.log("meta + v"),
+		"Meta + b": () => console.log("meta + b"),
 		"control + enter": () => console.log("control + enter"),
 		"meta + enter": () => console.log("meta + enter"),
 		"mod + enter": () => console.log("mod + enter"),
