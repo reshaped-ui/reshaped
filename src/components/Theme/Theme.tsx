@@ -12,15 +12,15 @@ import s from "./Theme.module.css";
 const Theme = (props: T.Props) => <PrivateTheme {...props} />;
 
 export const PrivateTheme = (props: T.PrivateProps) => {
-	const { name, defaultName, colorMode, scoped, children, className } = props;
+	const { name, defaultName, colorMode, scoped, scopeRef, children, className } = props;
 	const [mounted, setMounted] = React.useState(false);
 	const [stateTheme, setStateTheme] = React.useState(defaultName);
 	const globalColorMode = useGlobalColorMode();
 	const parentTheme = useTheme();
 	const isRootProvider = !parentTheme.theme;
 	const usedTheme = name || stateTheme || parentTheme.theme;
-	const rootTheme = isRootProvider ? usedTheme : parentTheme.rootTheme;
-	const parentColorMode = isRootProvider ? globalColorMode : parentTheme.colorMode;
+	const rootTheme = isRootProvider || scoped ? usedTheme : parentTheme.rootTheme;
+	const parentColorMode = isRootProvider || scoped ? globalColorMode.mode : parentTheme.colorMode;
 	const invertedColorMode = parentColorMode === "light" ? "dark" : "light";
 	const usedColorMode = colorMode === "inverted" ? invertedColorMode : colorMode || parentColorMode;
 	const rootClassNames = classNames(s.root, className);
@@ -46,7 +46,7 @@ export const PrivateTheme = (props: T.PrivateProps) => {
 
 	useIsomorphicLayoutEffect(() => {
 		if (!document || !isRootProvider) return;
-		const themeRootEl = getRootThemeEl();
+		const themeRootEl = getRootThemeEl(scopeRef?.current);
 		const hasColorModeApplied = themeRootEl.getAttribute("data-rs-color-mode");
 
 		themeRootEl.setAttribute("data-rs-theme", usedTheme);
@@ -56,7 +56,7 @@ export const PrivateTheme = (props: T.PrivateProps) => {
 			themeRootEl.removeAttribute("data-rs-theme");
 			if (!hasColorModeApplied) themeRootEl.removeAttribute("data-rs-color-mode");
 		};
-	}, [usedTheme, usedColorMode, isRootProvider]);
+	}, [usedTheme, usedColorMode, isRootProvider, scopeRef]);
 
 	const value = React.useMemo(
 		() => ({
@@ -73,6 +73,7 @@ export const PrivateTheme = (props: T.PrivateProps) => {
 		<ThemeContext.Provider value={value}>
 			<div
 				className={rootClassNames}
+				ref={scopeRef}
 				data-rs-root={scoped ? true : undefined}
 				data-rs-theme={isRootProvider ? undefined : usedTheme}
 				/**

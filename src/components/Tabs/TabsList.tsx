@@ -99,28 +99,27 @@ const TabsList = (props: T.ListProps) => {
 		[elScrollableRef]
 	);
 
-	const { ref: hotkeysRef } = useHotkeys<HTMLDivElement>({
-		"ArrowLeft, ArrowUp": (e) => {
-			if (name) return;
-			e.preventDefault();
-			focusPreviousElement(elScrollableRef.current!);
+	const { ref: hotkeysRef } = useHotkeys<HTMLDivElement>(
+		{
+			"ArrowLeft, ArrowUp": () => {
+				focusPreviousElement(elScrollableRef.current!);
+			},
+			"ArrowRight, ArrowDown": () => {
+				focusNextElement(elScrollableRef.current!);
+			},
+			Home: () => {
+				focusFirstElement(elScrollableRef.current!);
+			},
+			End: () => {
+				focusLastElement(elScrollableRef.current!);
+			},
 		},
-		"ArrowRight, ArrowDown": (e) => {
-			if (name) return;
-			e.preventDefault();
-			focusNextElement(elScrollableRef.current!);
-		},
-		Home: (e) => {
-			if (name) return;
-			e.preventDefault();
-			focusFirstElement(elScrollableRef.current!);
-		},
-		End: (e) => {
-			if (name) return;
-			e.preventDefault();
-			focusLastElement(elScrollableRef.current!);
-		},
-	});
+		[],
+		{
+			preventDefault: true,
+			disabled: !!name,
+		}
+	);
 
 	useIsomorphicLayoutEffect(() => {
 		if (value) return;

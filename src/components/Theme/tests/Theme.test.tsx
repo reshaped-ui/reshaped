@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
+import Reshaped from "components/Reshaped";
 import Theme, { useTheme } from "components/Theme";
 
 const Component = () => {
@@ -11,9 +12,11 @@ const Component = () => {
 describe("Utilities/Theme", () => {
 	test("renders light mode", () => {
 		render(
-			<Theme name="reshaped">
-				<Component />
-			</Theme>
+			<Reshaped>
+				<Theme name="reshaped">
+					<Component />
+				</Theme>
+			</Reshaped>
 		);
 
 		expect(screen.getByText("light")).toBeInTheDocument();
@@ -21,9 +24,11 @@ describe("Utilities/Theme", () => {
 
 	test("renders dark mode", () => {
 		render(
-			<Theme name="reshaped" colorMode="dark">
-				<Component />
-			</Theme>
+			<Reshaped>
+				<Theme name="reshaped" colorMode="dark">
+					<Component />
+				</Theme>
+			</Reshaped>
 		);
 
 		expect(screen.getByText("dark")).toBeInTheDocument();
@@ -31,9 +36,11 @@ describe("Utilities/Theme", () => {
 
 	test("renders inverted mode", () => {
 		render(
-			<Theme name="reshaped" colorMode="inverted">
-				<Component />
-			</Theme>
+			<Reshaped>
+				<Theme name="reshaped" colorMode="inverted">
+					<Component />
+				</Theme>
+			</Reshaped>
 		);
 
 		expect(screen.getByText("dark")).toBeInTheDocument();
@@ -49,11 +56,11 @@ describe("Utilities/Theme", () => {
 		};
 
 		render(
-			<Theme defaultName="reshaped" colorMode="inverted">
+			<Reshaped defaultTheme="reshaped">
 				<Theme defaultName="slate" colorMode="inverted">
 					<Component />
 				</Theme>
-			</Theme>
+			</Reshaped>
 		);
 
 		const button = screen.getByRole("button");
@@ -81,11 +88,11 @@ describe("Utilities/Theme", () => {
 		};
 
 		render(
-			<Theme defaultName="reshaped" colorMode="inverted">
+			<Reshaped defaultTheme="reshaped">
 				<Theme defaultName="slate" colorMode="inverted">
 					<Component />
 				</Theme>
-			</Theme>
+			</Reshaped>
 		);
 
 		const button = screen.getByRole("button");

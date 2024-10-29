@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import useSingletonHotkey from "./_private/useSingletonHotkeys";
+import useSingletonHotkey, { type Hotkeys } from "./_private/useSingletonHotkeys";
 
 const useHotkeys = <Element extends HTMLElement>(
-	hotkeys: Record<string, ((e: KeyboardEvent) => void) | null>,
+	hotkeys: Hotkeys,
 	deps: unknown[] = [],
 	options?: { ref?: React.RefObject<Element>; disabled?: boolean; preventDefault?: boolean }
 ) => {

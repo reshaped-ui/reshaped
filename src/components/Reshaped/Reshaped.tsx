@@ -1,8 +1,10 @@
 "use client";
 
+import React from "react";
 import { classNames } from "utilities/helpers";
 import { GlobalColorMode, PrivateTheme } from "components/Theme";
 import { ToastProvider } from "components/Toast";
+import { useGlobalColorMode } from "components/Theme/useTheme";
 import useSingletonKeyboardMode from "hooks/_private/useSingletonKeyboardMode";
 import {
 	SingletonEnvironmentContext,
@@ -31,14 +33,20 @@ const ReshapedInner = (props: T.Props) => {
 const Reshaped = (props: T.Props) => {
 	const { theme, defaultTheme = "reshaped", defaultColorMode, scoped, className } = props;
 	const rootClassNames = classNames(s.root, className);
+	const scopeRef = React.useRef<HTMLDivElement>(null);
+	const parentGlobalColorMode = useGlobalColorMode();
 
 	return (
-		<GlobalColorMode defaultMode={defaultColorMode}>
+		<GlobalColorMode
+			defaultMode={defaultColorMode || parentGlobalColorMode.mode || "light"}
+			scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
+		>
 			<PrivateTheme
 				name={theme}
 				defaultName={defaultTheme}
 				className={rootClassNames}
 				scoped={scoped}
+				scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
 			>
 				<ReshapedInner {...props}>{props.children}</ReshapedInner>
 			</PrivateTheme>

@@ -3,25 +3,35 @@
 import React from "react";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { enableTransitions, disableTransitions, onNextFrame } from "utilities/animation";
+import { useGlobalColorMode } from "./useTheme";
 import { GlobalColorModeContext } from "./Theme.context";
 import { getRootThemeEl } from "./Theme.utilities";
 import type * as T from "./Theme.types";
 
 const GlobalColorMode = (props: T.GlobalColorModeProps) => {
-	const { defaultMode, children } = props;
-	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode || "light");
+	const { defaultMode, scopeRef, children } = props;
+	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode);
+	const parentGlobalColorMode = useGlobalColorMode();
 
-	const changeColorMode = React.useCallback((targetMode: T.ColorMode) => {
-		getRootThemeEl().setAttribute("data-rs-color-mode", targetMode);
-		setMode((prevMode) => {
-			if (prevMode !== targetMode) {
-				// Avoid components styles animating when switching to another color mode
-				disableTransitions();
+	const changeColorMode = React.useCallback(
+		(targetMode: T.ColorMode) => {
+			getRootThemeEl(scopeRef?.current).setAttribute("data-rs-color-mode", targetMode);
+
+			if (parentGlobalColorMode.mode && !scopeRef) {
+				parentGlobalColorMode.setMode(targetMode);
 			}
 
-			return targetMode;
-		});
-	}, []);
+			setMode((prevMode) => {
+				if (prevMode !== targetMode) {
+					// Avoid components styles animating when switching to another color mode
+					disableTransitions();
+				}
+
+				return targetMode;
+			});
+		},
+		[scopeRef, parentGlobalColorMode]
+	);
 
 	useIsomorphicLayoutEffect(() => {
 		onNextFrame(() => {
@@ -34,12 +44,12 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 	 * This could happen if we're receiving the mode on the client but before React hydration
 	 */
 	useIsomorphicLayoutEffect(() => {
-		const nextColorMode = getRootThemeEl().getAttribute("data-rs-color-mode") as
+		const nextColorMode = getRootThemeEl(scopeRef?.current).getAttribute("data-rs-color-mode") as
 			| T.ColorMode
 			| undefined;
 
 		if (nextColorMode) changeColorMode(nextColorMode);
-	}, []);
+	}, [changeColorMode, scopeRef]);
 
 	const value = React.useMemo(
 		() => ({

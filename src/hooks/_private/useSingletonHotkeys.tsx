@@ -5,7 +5,7 @@ import React from "react";
  */
 type Callback = (e?: KeyboardEvent) => void;
 type PressedMap = Map<string, KeyboardEvent>;
-type Hotkeys = Record<string, Callback | null>;
+export type Hotkeys = Record<string, Callback | null>;
 type HotkeyOptions = { preventDefault?: boolean };
 type Context = {
 	isPressed: (key: string) => boolean;
@@ -138,7 +138,7 @@ export class HotkeyStore {
 						e.preventDefault();
 					}
 
-					data.callback(resolvedEvent);
+					data.callback(e);
 				});
 			}
 		});

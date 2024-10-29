@@ -4,9 +4,7 @@ import React from "react";
 import { ThemeContext, GlobalColorModeContext } from "./Theme.context";
 
 export const useGlobalColorMode = () => {
-	const { mode } = React.useContext(GlobalColorModeContext);
-
-	return mode;
+	return React.useContext(GlobalColorModeContext);
 };
 
 export const useTheme = () => {

@@ -7,6 +7,7 @@
 - Flyout, Popover, DropdownMenu, Tooltip: contentShift, contentGap
 - DropdownMenu: Added attributes.ref support
 - Actionable, Button, Link, MenuItem: Added stopPropagation property for nested buttons
+- Reshaped: scoped color mode support for nested Reshaped providers
 
 Documentation
 

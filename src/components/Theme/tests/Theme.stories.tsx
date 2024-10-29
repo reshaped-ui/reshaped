@@ -36,28 +36,39 @@ export const uncontrolled = () => {
 	);
 };
 
-const NestedOne = () => {
-	const { invertColorMode } = useTheme();
+const Nested = () => {
+	const { invertColorMode, colorMode } = useTheme();
 
 	return (
 		<Button color="primary" variant="faded" onClick={invertColorMode}>
-			Slate
+			Slate: {colorMode}
 		</Button>
 	);
 };
 
 export const nestedReshaped = () => {
-	const { invertColorMode } = useTheme();
+	const { invertColorMode, colorMode } = useTheme();
 
 	return (
 		<Example>
-			<Example.Item title="reshaped + nested slate">
+			<Example.Item title="reshaped + scoped slate">
 				<View gap={2} direction="row">
 					<Button color="primary" variant="faded" onClick={invertColorMode}>
-						Reshaped
+						Reshaped: {colorMode}
 					</Button>
 					<Reshaped theme="slate" scoped>
-						<NestedOne />
+						<Nested />
+					</Reshaped>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="reshaped + not scoped slate">
+				<View gap={2} direction="row">
+					<Button color="primary" variant="faded" onClick={invertColorMode}>
+						Reshaped: {colorMode}
+					</Button>
+					<Reshaped theme="slate">
+						<Nested />
 					</Reshaped>
 				</View>
 			</Example.Item>
