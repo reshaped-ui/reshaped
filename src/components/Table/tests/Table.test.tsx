@@ -59,6 +59,22 @@ describe("Components/Table", () => {
 		expect(elBody).toBeInTheDocument();
 	});
 
+	test("adds tabIndex for clickable rows", () => {
+		render(
+			<Table>
+				<Table.Row>...</Table.Row>
+				<Table.Row onClick={() => {}}>...</Table.Row>
+				<Table.Row attributes={{ onClick: () => {} }}>...</Table.Row>
+			</Table>
+		);
+
+		const elRows = screen.getAllByRole("row");
+
+		expect(elRows[0]).not.toHaveAttribute("tabIndex");
+		expect(elRows[1]).toHaveAttribute("tabIndex", "0");
+		expect(elRows[1]).toHaveAttribute("tabIndex", "1");
+	});
+
 	test("works with className and attributes", () => {
 		const { container } = render(
 			<Table className={fixtures.className} attributes={{ id: fixtures.id }}>

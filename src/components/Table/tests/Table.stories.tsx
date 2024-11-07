@@ -136,7 +136,7 @@ export const border = () => (
 	</Example>
 );
 
-export const highlighted = () => (
+export const rows = () => (
 	<Example>
 		<Example.Item title="highlighted for row 2">
 			<Table>
@@ -145,6 +145,18 @@ export const highlighted = () => (
 					<Table.Heading>Column 2</Table.Heading>
 				</Table.Row>
 				<Table.Row highlighted>
+					<Table.Cell>Cell 1</Table.Cell>
+					<Table.Cell>Cell 2</Table.Cell>
+				</Table.Row>
+			</Table>
+		</Example.Item>
+		<Example.Item title="clickable row 2, focus ring">
+			<Table>
+				<Table.Row>
+					<Table.Heading>Column 1</Table.Heading>
+					<Table.Heading>Column 2</Table.Heading>
+				</Table.Row>
+				<Table.Row onClick={() => {}}>
 					<Table.Cell>Cell 1</Table.Cell>
 					<Table.Cell>Cell 2</Table.Cell>
 				</Table.Row>

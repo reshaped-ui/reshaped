@@ -19,6 +19,16 @@
 
 .row {
 	transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
+
+	&[tabindex] {
+		cursor: pointer;
+	}
+
+	[data-rs-keyboard] &:focus {
+		outline: none;
+		z-index: var(--rs-z-index-raised);
+		box-shadow: var(--rs-focus-inset-shadow);
+	}
 }
 
 .cell {

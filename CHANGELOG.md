@@ -8,7 +8,9 @@
 - DropdownMenu: Added attributes.ref support
 - Actionable, Button, Link, MenuItem: Added stopPropagation property for nested buttons
 - Reshaped: scoped color mode support for nested Reshaped providers
+- Table: row onClick support
 
 Documentation
 
 - Included next/font integration for next15
+- SSR examples, improved code snippets

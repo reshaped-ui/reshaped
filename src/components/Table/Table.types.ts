@@ -11,7 +11,9 @@ export type Props = {
 
 export type RowProps = {
 	highlighted?: boolean;
+	onClick?: (e: React.MouseEvent) => void;
 	children: React.ReactNode;
+	className?: G.ClassName;
 	attributes?: G.Attributes<"tr">;
 };
 

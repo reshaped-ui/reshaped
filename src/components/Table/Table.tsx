@@ -61,11 +61,17 @@ const TableHeading = (props: T.HeadingProps) => {
 };
 
 const TableRow = (props: T.RowProps) => {
-	const { highlighted, children, attributes } = props;
-	const rowClassNames = classNames(s.row, highlighted && s["--row-highlighted"]);
+	const { highlighted, children, className, attributes } = props;
+	const onClick = props.onClick || attributes?.onClick;
+	const rowClassNames = classNames(s.row, highlighted && s["--row-highlighted"], className);
 
 	return (
-		<tr {...attributes} className={rowClassNames}>
+		<tr
+			{...attributes}
+			className={rowClassNames}
+			onClick={onClick}
+			tabIndex={onClick ? 0 : undefined}
+		>
 			{children}
 		</tr>
 	);
