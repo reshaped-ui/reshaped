@@ -9,6 +9,7 @@
 - Actionable, Button, Link, MenuItem: Added stopPropagation property for nested buttons
 - Reshaped: scoped color mode support for nested Reshaped providers
 - Table: row onClick support
+- Tabs: new navigation controls and fixed auto scrolling edge cases causing the page the scroll
 
 Documentation
 

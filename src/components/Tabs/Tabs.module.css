@@ -1,14 +1,24 @@
-@property --rs-tabs-stop-l {
-	syntax: "<percentage>";
+@property --rs-tabs-mid-l {
+	syntax: "<length>";
+	initial-value: -24px;
+	inherits: false;
+}
 
-	/* Prevent cssnano from converting it to 0 without % sign */
-	initial-value: 0.01%;
+@property --rs-tabs-stop-l {
+	syntax: "<length>";
+	initial-value: 0;
 	inherits: false;
 }
 
 @property --rs-tabs-stop-r {
-	syntax: "<percentage>";
+	syntax: "<length-percentage>";
 	initial-value: 100%;
+	inherits: false;
+}
+
+@property --rs-tabs-mid-r {
+	syntax: "<length-percentage>";
+	initial-value: calc(100% + 24px);
 	inherits: false;
 }
 
@@ -24,19 +34,24 @@
 }
 
 .list {
+	--rs-tabs-gap: var(--rs-unit-x6);
+
 	position: relative;
+	gap: var(--rs-tabs-gap);
 }
 
 .inner {
 	mask-image: linear-gradient(
 		to right,
 		rgba(0, 0, 0, 0%) 0%,
+		rgba(0, 0, 0, 0%) var(--rs-tabs-mid-l),
 		rgba(0, 0, 0, 100%) var(--rs-tabs-stop-l),
 		rgba(0, 0, 0, 100%) var(--rs-tabs-stop-r),
+		rgba(0, 0, 0, 0%) var(--rs-tabs-mid-r),
 		rgba(0, 0, 0, 0%) 100%
 	);
-	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
-	transition-property: --rs-tabs-stop-l, --rs-tabs-stop-r;
+	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+	transition-property: --rs-tabs-stop-l, --rs-tabs-stop-r, --rs-tabs-mid-l, --rs-tabs-mid-r;
 }
 
 .inner::after {
@@ -47,8 +62,6 @@
 }
 
 .listItem {
-	--rs-tabs-gap: var(--rs-unit-x6);
-
 	flex-shrink: 0;
 	position: relative;
 }
@@ -127,25 +140,36 @@
 	will-change: transform, height, width;
 }
 
-.next,
-.prev {
+.control {
 	position: absolute;
 	inset-block: 0;
-	display: flex;
+	display: none;
 	align-items: center;
 	z-index: var(--rs-z-index-raised);
+	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+	transition-property: opacity, transform;
+	opacity: 0;
+	pointer-events: none;
+
+	&.control--active {
+		opacity: 1;
+		transform: translateX(0);
+		pointer-events: all;
+	}
 
 	[dir="rtl"] & {
 		transform: scaleX(-1);
 	}
 }
 
-.next {
-	inset-inline-end: var(--rs-unit-x1);
+.control--next {
+	inset-inline-end: 0;
+	transform: translateX(var(--rs-unit-x2));
 }
 
-.prev {
-	inset-inline-start: var(--rs-unit-x1);
+.control--prev {
+	inset-inline-start: 0;
+	transform: translateX(calc(var(--rs-unit-x2) * -1));
 }
 
 .panel {
@@ -161,11 +185,6 @@
 }
 
 .--direction-row {
-	/* We're using negative margins here to avoid button focus outline being cut off with overflow: hidden */
-	margin: 0 calc(var(--rs-unit-x2) * -1);
-	padding: 0 var(--rs-unit-x2);
-	overflow: hidden;
-
 	& .inner {
 		white-space: nowrap;
 
@@ -173,8 +192,8 @@
 		overflow: auto;
 
 		/* 1 */
-		margin: 0 calc(var(--rs-unit-x2) * -1) -40px;
-		padding: 0 var(--rs-unit-x2) 40px;
+		margin: 0 calc(var(--rs-unit-x2) * -1);
+		padding: 0 var(--rs-unit-x2);
 		-ms-overflow-style: none;
 
 		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
@@ -199,10 +218,6 @@
 		vertical-align: top;
 		flex-wrap: nowrap;
 		align-items: center;
-	}
-
-	& .listItem + .listItem {
-		margin-inline-start: var(--rs-tabs-gap);
 	}
 
 	& .--item-active::after {
@@ -241,20 +256,14 @@
 	}
 
 	& .list {
+		--rs-tabs-gap: var(--rs-unit-x1);
+
 		display: flex;
 		flex-direction: column;
 	}
 
-	& .listItem {
-		--rs-tabs-gap: var(--rs-unit-x1);
-	}
-
 	& .item {
 		padding-inline-end: var(--rs-unit-x1);
-	}
-
-	& .listItem + .listItem {
-		margin-top: var(--rs-tabs-gap);
 	}
 
 	& .--item-active::after {
@@ -306,8 +315,8 @@
 	}
 }
 
-.--variant-pills .listItem,
-.--variant-pills-elevated .listItem {
+.--variant-pills .list,
+.--variant-pills-elevated .list {
 	--rs-tabs-gap: var(--rs-unit-x1);
 }
 
@@ -388,17 +397,30 @@
 
 [dir="rtl"] .--fade-start .inner,
 .--fade-end .inner {
-	--rs-tabs-stop-r: 85%;
+	--rs-tabs-mid-r: 100%;
+	--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 12);
 }
 
 [dir="rtl"] .--fade-end .inner,
 .--fade-start .inner {
-	--rs-tabs-stop-l: 15%;
+	--rs-tabs-mid-l: 0px;
+	--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 12);
 }
 
-@media (--rs-viewport-s) {
-	.next,
-	.prev {
-		display: none;
+@media (pointer: fine) {
+	.control {
+		display: flex;
+	}
+
+	[dir="rtl"] .--fade-start .inner,
+	.--fade-end .inner {
+		--rs-tabs-mid-r: calc(100% - var(--rs-unit-x1) * 6);
+		--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 12);
+	}
+
+	[dir="rtl"] .--fade-end .inner,
+	.--fade-start .inner {
+		--rs-tabs-mid-l: calc(var(--rs-unit-x1) * 6);
+		--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 12);
 	}
 }

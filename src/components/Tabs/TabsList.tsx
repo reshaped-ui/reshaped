@@ -11,7 +11,8 @@ import {
 } from "utilities/a11y";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";
-import Button from "components/Button";
+import Actionable from "components/Actionable";
+import Icon from "components/Icon";
 import IconChevronRight from "icons/ChevronRight";
 import IconChevronLeft from "icons/ChevronLeft";
 import TabsItem from "./TabsItem";
@@ -185,7 +186,11 @@ const TabsList = (props: T.ListProps) => {
 					{React.Children.map(children, (child: any, index: number) => {
 						if (!child) return null;
 						return (
-							<div className={s.listItem} key={child.props.value || child.key || index}>
+							<div
+								className={s.listItem}
+								key={child.props.value || child.key || index}
+								data-rs-tabs-item
+							>
 								{child}
 							</div>
 						);
@@ -206,29 +211,29 @@ const TabsList = (props: T.ListProps) => {
 				</div>
 			</div>
 
-			{(fadeSide === "start" || fadeSide === "both") && (
-				<span className={s.prev}>
-					<Button
-						onClick={handlePrevClick}
-						size="small"
-						icon={IconChevronLeft}
-						rounded
-						attributes={{ "aria-hidden": true, tabIndex: -1 }}
-					/>
-				</span>
-			)}
+			<Actionable
+				onClick={handlePrevClick}
+				attributes={{ "aria-hidden": true, tabIndex: -1 }}
+				className={[
+					s.control,
+					s["control--prev"],
+					(fadeSide === "start" || fadeSide === "both") && s["control--active"],
+				]}
+			>
+				<Icon svg={IconChevronLeft} size={5} />
+			</Actionable>
 
-			{(fadeSide === "end" || fadeSide === "both") && (
-				<span className={s.next}>
-					<Button
-						onClick={handleNextClick}
-						size="small"
-						icon={IconChevronRight}
-						rounded
-						attributes={{ "aria-hidden": true, tabIndex: -1 }}
-					/>
-				</span>
-			)}
+			<Actionable
+				onClick={handleNextClick}
+				attributes={{ "aria-hidden": true, tabIndex: -1 }}
+				className={[
+					s.control,
+					s["control--next"],
+					(fadeSide === "end" || fadeSide === "both") && s["control--active"],
+				]}
+			>
+				<Icon svg={IconChevronRight} size={5} />
+			</Actionable>
 		</div>
 	);
 };

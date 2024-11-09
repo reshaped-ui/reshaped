@@ -8,7 +8,7 @@
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
-	padding: calc(var(--rs-unit-x1) - 1px) var(--rs-text-field-gap);
+	padding: calc(var(--rs-unit-x1) - 1px) calc(var(--rs-text-field-gap) - 1px);
 	gap: var(--rs-text-field-gap);
 	row-gap: var(--rs-unit-x1);
 

@@ -7,6 +7,7 @@ import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import Text from "components/Text";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+import { findParent } from "utilities/dom";
 import { useTabs } from "./TabsContext";
 import type * as T from "./Tabs.types";
 import s from "./Tabs.module.css";
@@ -36,12 +37,6 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 	};
 
 	const updateRefs = React.useCallback(() => {
-		if (!("current" in itemRef)) {
-			throw new Error(
-				"Reshaped, Tabs: TabItem is expecting an object ref format but received a function ref"
-			);
-		}
-
 		elPrevActiveRef.current = elActiveRef.current;
 		elActiveRef.current = itemRef.current;
 	}, [elActiveRef, elPrevActiveRef]);
@@ -59,14 +54,25 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 			return;
 		}
 
-		const navigatingBack = currentListItem.offsetLeft < prevListItem.offsetLeft;
-		const threshold = (currentListItem.offsetLeft - listEl.scrollLeft) / listEl.clientWidth;
-		// Only scroll if the item is close to getting clipped
-		// Back navigation threshold is 0.3 since its calculated based on offsetLeft
-		const shouldScroll = navigatingBack ? threshold < 0.3 : threshold > 0.5;
+		if (!elScrollableRef.current) return;
 
-		if (!shouldScroll) return;
-		itemRef.current?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+		// Big enough value to show there are more items and not overlap arrow controls
+		const visibilityThreshold = 48;
+		const elItem = findParent(itemRef.current, (el) => el.hasAttribute("data-rs-tabs-item"));
+
+		if (!elItem) return;
+
+		const elScrollable = elScrollableRef.current;
+		const startOverflow = elItem.offsetLeft - elScrollable.scrollLeft;
+		const endOverflow =
+			elScrollable.scrollLeft + elScrollable.clientWidth - (elItem.offsetLeft + elItem.clientWidth);
+
+		if (startOverflow < visibilityThreshold || endOverflow < visibilityThreshold) {
+			elScrollableRef.current.scrollTo({
+				left: elItem.offsetLeft + elItem.clientWidth / 2 - elScrollable.clientWidth / 2,
+				behavior: "smooth",
+			});
+		}
 	};
 
 	useIsomorphicLayoutEffect(() => {
