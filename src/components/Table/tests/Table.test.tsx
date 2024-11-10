@@ -62,9 +62,15 @@ describe("Components/Table", () => {
 	test("adds tabIndex for clickable rows", () => {
 		render(
 			<Table>
-				<Table.Row>...</Table.Row>
-				<Table.Row onClick={() => {}}>...</Table.Row>
-				<Table.Row attributes={{ onClick: () => {} }}>...</Table.Row>
+				<Table.Row>
+					<Table.Cell />
+				</Table.Row>
+				<Table.Row onClick={() => {}}>
+					<Table.Cell />
+				</Table.Row>
+				<Table.Row attributes={{ onClick: () => {} }}>
+					<Table.Cell />
+				</Table.Row>
 			</Table>
 		);
 
@@ -72,7 +78,7 @@ describe("Components/Table", () => {
 
 		expect(elRows[0]).not.toHaveAttribute("tabIndex");
 		expect(elRows[1]).toHaveAttribute("tabIndex", "0");
-		expect(elRows[1]).toHaveAttribute("tabIndex", "1");
+		expect(elRows[2]).toHaveAttribute("tabIndex", "0");
 	});
 
 	test("works with className and attributes", () => {

@@ -101,7 +101,6 @@ const Overlay = (props: T.Props) => {
 	};
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		console.log("TRANSITIOn", e.propertyName, visible);
 		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
 		setAnimated(false);
 
