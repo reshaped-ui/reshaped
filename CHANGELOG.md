@@ -10,6 +10,7 @@
 - Reshaped: scoped color mode support for nested Reshaped providers
 - Table: row onClick support
 - Tabs: new navigation controls and fixed auto scrolling edge cases causing the page the scroll
+- Modal, Overlay: onAfterOpen, onAfterClose
 
 Documentation
 

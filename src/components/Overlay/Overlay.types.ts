@@ -9,7 +9,9 @@ export type Props = {
 	children?: React.ReactNode | ((props: { active: boolean }) => React.ReactNode);
 	active?: boolean;
 	onClose?: (args: { reason: CloseReason }) => void;
+	onAfterClose?: () => void;
 	onOpen?: () => void;
+	onAfterOpen?: () => void;
 	disableCloseOnClick?: boolean;
 	containerRef?: React.RefObject<HTMLElement>;
 	className?: G.ClassName;

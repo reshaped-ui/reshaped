@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import Overlay, { type OverlayProps } from "components/Overlay";
 import Reshaped from "components/Reshaped";
@@ -9,6 +9,15 @@ const fixtures = {
 	content: "Content",
 	testId: "test-id",
 	className: "test-className",
+};
+
+const triggerTransition = (el: HTMLElement) => {
+	const transitionEndEvent = new Event("transitionend", {
+		bubbles: true,
+	});
+	// @ts-ignore: propertyName is readonly in types
+	transitionEndEvent.propertyName = "opacity";
+	fireEvent(el, transitionEndEvent);
 };
 
 describe("Utilities/Overlay", () => {
@@ -34,28 +43,35 @@ describe("Utilities/Overlay", () => {
 		expect(el).toBeInTheDocument();
 	});
 
-	test("triggers onOpen and onClose", async () => {
+	test("triggers onOpen, onClose, onAfterOpen, onAfterClose", async () => {
 		const handleCloseMock = jest.fn();
 		const handleOpenMock = jest.fn();
+		const handleAfterCloseMock = jest.fn();
+		const handleAfterOpenMock = jest.fn();
 		const Component = () => {
 			const [active, setActive] = React.useState(true);
+
+			const handleClick = () => {
+				setActive(true);
+			};
 
 			const handleClose: OverlayProps["onClose"] = (args) => {
 				setActive(false);
 				handleCloseMock(args);
 			};
 
-			const handleOpen = () => {
-				setActive(true);
-				handleOpenMock();
-			};
-
 			return (
 				<Reshaped>
-					<button type="button" data-testid={fixtures.testId} onClick={handleOpen}>
+					<button type="button" data-testid={fixtures.testId} onClick={handleClick}>
 						Open
 					</button>
-					<Overlay active={active} onClose={handleClose}>
+					<Overlay
+						active={active}
+						onClose={handleClose}
+						onOpen={handleOpenMock}
+						onAfterClose={handleAfterCloseMock}
+						onAfterOpen={handleAfterOpenMock}
+					>
 						{fixtures.content}
 					</Overlay>
 				</Reshaped>
@@ -70,13 +86,20 @@ describe("Utilities/Overlay", () => {
 
 		expect(handleCloseMock).toHaveBeenCalledTimes(1);
 		expect(handleCloseMock).toHaveBeenCalledWith({ reason: "overlay-click" });
-		waitFor(() => {
-			expect(screen.getByText(fixtures.content)).not.toBeInTheDocument();
-		});
+
+		triggerTransition(screen.getAllByRole("button")[1]);
+
+		expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
+		expect(handleAfterCloseMock).toHaveBeenCalledTimes(1);
 
 		await userEvent.click(elButton);
+
 		expect(screen.getByText(fixtures.content)).toBeInTheDocument();
 		expect(handleOpenMock).toHaveBeenCalledTimes(1);
+
+		// TODO: Move to E2E testing setup since calling it manually doesn't match regular state + transition order
+		// triggerTransition(screen.getAllByRole("button")[1]);
+		// expect(handleAfterOpenMock).toHaveBeenCalledTimes(1);
 	});
 
 	test("ignores close with disableCloseOnClick", async () => {

@@ -63,6 +63,8 @@ const Modal = (props: T.Props) => {
 		children,
 		onClose,
 		onOpen,
+		onAfterClose,
+		onAfterOpen,
 		active,
 		size,
 		padding = 4,
@@ -236,6 +238,8 @@ const Modal = (props: T.Props) => {
 		<Overlay
 			onClose={onClose}
 			onOpen={onOpen}
+			onAfterClose={onAfterClose}
+			onAfterOpen={onAfterOpen}
 			disableCloseOnClick={disableCloseOnOutsideClick}
 			active={active}
 			transparent={transparentOverlay || hideProgress}

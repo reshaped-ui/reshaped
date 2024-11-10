@@ -22,6 +22,8 @@ const Overlay = (props: T.Props) => {
 		blurred,
 		onClose,
 		onOpen,
+		onAfterClose,
+		onAfterOpen,
 		disableCloseOnClick,
 		containerRef,
 		className,
@@ -99,13 +101,18 @@ const Overlay = (props: T.Props) => {
 	};
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
+		console.log("TRANSITIOn", e.propertyName, visible);
 		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
 		setAnimated(false);
 
-		if (visible) return;
+		if (visible) {
+			onAfterOpen?.();
+			return;
+		}
 
 		unlockScroll();
 		remove();
+		onAfterClose?.();
 	};
 
 	useHotkeys(
