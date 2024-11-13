@@ -7,7 +7,7 @@ const getHeightStyles: T.DynamicStyleUtility<string | number> = (value) => {
 	const variables = responsiveVariables("--rs-h", value);
 	const classNames = responsiveClassNames(
 		s,
-		(value) => (typeof value === "number" ? "--type-unit" : "--type-literal"),
+		(value) => (typeof value === "number" ? "--unit" : "--literal"),
 		value,
 		{ excludeValueFromClassName: true }
 	);
