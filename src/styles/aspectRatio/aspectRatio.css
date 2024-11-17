@@ -1,4 +1,6 @@
-[style*="--rs-ratio"] {
+@responsive [style*="--rs-ratio"] {
+	@variable --rs-ratio 0;
+
 	&:empty {
 		aspect-ratio: var(--rs-ratio);
 	}
@@ -10,8 +12,4 @@
 	& > img {
 		object-fit: cover;
 	}
-}
-
-@responsive [style*="--rs-ratio"] {
-	@variable --rs-ratio 0;
 }

@@ -800,6 +800,19 @@ export const inset = () => (
 				/>
 			</View>
 		</Example.Item>
+
+		<Example.Item title="responsive, [s] insetBottom: 4 [m+] insetEnd: 4">
+			<View backgroundColor="neutral-faded" width={25} height={25}>
+				<View
+					backgroundColor="neutral"
+					position="absolute"
+					insetBottom={{ s: 4, m: "auto" }}
+					insetEnd={{ s: "auto", m: 4 }}
+					height={10}
+					width={10}
+				/>
+			</View>
+		</Example.Item>
 	</Example>
 );
 

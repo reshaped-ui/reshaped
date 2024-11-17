@@ -1,12 +1,12 @@
 import { responsiveVariables } from "utilities/helpers";
 import * as T from "styles/types";
-import s from "./aspectRatio.module.css";
+import "./aspectRatio.css";
 
-const getAspectRatioStyles: T.DynamicStyleUtility<number> = (value) => {
+const getAspectRatioStyles: T.VariableStyleUtility<number> = (value) => {
 	if (!value) return null;
 	const variables = responsiveVariables("--rs-ratio", value);
 
-	return { classNames: s.root, variables };
+	return { variables };
 };
 
 export default getAspectRatioStyles;

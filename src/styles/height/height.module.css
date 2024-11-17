@@ -3,7 +3,7 @@
 	@variable --rs-h auto;
 }
 
-@responsive .- {
+@responsive .--type {
 	@value literal {
 		height: var(--rs-h) !important;
 	}

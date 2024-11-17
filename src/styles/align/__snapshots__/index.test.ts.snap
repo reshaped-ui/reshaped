@@ -2,11 +2,11 @@
 
 exports[`Styles/Align handles responsive value 1`] = `
 {
-  "classNames": [
-    "--align-start",
-    "--align-center--m",
-    "--align-end--l",
-  ],
+  "variables": {
+    "--rs-align-l": "end",
+    "--rs-align-m": "center",
+    "--rs-align-s": "start",
+  },
 }
 `;
 
@@ -14,8 +14,8 @@ exports[`Styles/Align handles undefined value 1`] = `null`;
 
 exports[`Styles/Align handles value 1`] = `
 {
-  "classNames": [
-    "--align-start",
-  ],
+  "variables": {
+    "--rs-align-s": "start",
+  },
 }
 `;

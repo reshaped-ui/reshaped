@@ -1,12 +1,12 @@
-import { responsiveClassNames } from "utilities/helpers";
+import { responsiveVariables } from "utilities/helpers";
 import * as T from "styles/types";
-import s from "./justify.module.css";
+import "./justify.css";
 
-const getJustifyStyles: T.StaticStyleUtility<T.Justify> = (value) => {
+const getJustifyStyles: T.VariableStyleUtility<T.Justify> = (value) => {
 	if (!value) return null;
 
 	return {
-		classNames: responsiveClassNames(s, "--justify", value),
+		variables: responsiveVariables("--rs-justify", value),
 	};
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import Overlay, { type OverlayProps } from "components/Overlay";
 import Reshaped from "components/Reshaped";
@@ -89,10 +89,7 @@ describe("Utilities/Overlay", () => {
 
 		triggerTransition(screen.getAllByRole("button")[1]);
 
-		await waitFor(() => {
-			expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
-		});
-
+		expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
 		expect(handleAfterCloseMock).toHaveBeenCalledTimes(1);
 
 		await userEvent.click(elButton);

@@ -54,11 +54,11 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	borderColor?: G.Responsive<TStyles.BorderColor>;
 	borderRadius?: G.Responsive<TStyles.Radius>;
 	position?: G.Responsive<TStyles.Position>;
-	inset?: G.Responsive<number>;
-	insetStart?: G.Responsive<number>;
-	insetEnd?: G.Responsive<number>;
-	insetTop?: G.Responsive<number>;
-	insetBottom?: G.Responsive<number>;
+	inset?: G.Responsive<TStyles.Inset>;
+	insetStart?: G.Responsive<TStyles.Inset>;
+	insetEnd?: G.Responsive<TStyles.Inset>;
+	insetTop?: G.Responsive<TStyles.Inset>;
+	insetBottom?: G.Responsive<TStyles.Inset>;
 	zIndex?: number;
 	shadow?: "raised" | "overlay";
 	overflow?: "hidden" | "auto";
