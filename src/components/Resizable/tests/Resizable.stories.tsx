@@ -94,7 +94,40 @@ export const base = () => (
 					</Resizable>
 				</Resizable.Item>
 			</Resizable>
-			<div style={{ height: 2000 }} />
 		</Example.Item>
+
+		<Example.Item>
+			<Resizable height="300px" gap={0} variant="bordered">
+				<Resizable.Item minSize="100px" defaultSize="200px">
+					<View align="center" justify="center" height="100%">
+						Panel
+					</View>
+				</Resizable.Item>
+				<Resizable.Handle />
+				<Resizable.Item>
+					<View align="center" justify="center" height="100%">
+						Panel
+					</View>
+				</Resizable.Item>
+				<Resizable.Handle />
+				<Resizable.Item>
+					<Resizable height="100%" direction="column" variant="bordered" gap={0}>
+						<Resizable.Item minSize="50px" maxSize="100px">
+							<View align="center" justify="center" height="100%">
+								Panel
+							</View>
+						</Resizable.Item>
+						<Resizable.Handle />
+						<Resizable.Item>
+							<View align="center" justify="center" height="100%">
+								Panel
+							</View>
+						</Resizable.Item>
+					</Resizable>
+				</Resizable.Item>
+			</Resizable>
+		</Example.Item>
+
+		<div style={{ height: 2000 }} />
 	</Example>
 );

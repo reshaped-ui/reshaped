@@ -2,10 +2,9 @@ import type React from "react";
 import type { ViewProps } from "components/View";
 import type { UseDragCallbackArgs } from "hooks/useDrag";
 
-export type Props = Pick<
-	ViewProps,
-	"children" | "className" | "attributes" | "height" | "direction" | "gap"
->;
+export type Props = {
+	variant?: "bordered" | "borderless";
+} & Pick<ViewProps, "children" | "className" | "attributes" | "height" | "direction" | "gap">;
 
 export type ItemProps = {
 	children: React.ReactNode;

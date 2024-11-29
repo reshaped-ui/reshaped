@@ -21,9 +21,27 @@
 	}
 
 	&::after {
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: opacity, background-color;
+	}
+}
+
+.--variant-bordered .handle {
+	&::after {
+		background: var(--rs-color-border-neutral-faded);
+	}
+
+	[data-rs-keyboard] &:focus::after,
+	&:hover::after,
+	&--dragging::after {
 		background: var(--rs-color-border-neutral);
+	}
+}
+
+.--variant-borderless .handle {
+	&::after {
 		opacity: 0;
-		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+		background: var(--rs-color-border-neutral);
 	}
 
 	[data-rs-keyboard] &:focus::after,
@@ -34,8 +52,12 @@
 }
 
 /* Prevent handle hover in case any other handle is already active */
-body:has(.handle--dragging) .handle:not(.handle--dragging) {
+body:has(.handle--dragging) .--variant-borderless .handle:not(.handle--dragging) {
 	opacity: 0;
+}
+
+body:has(.handle--dragging) .--variant-bordered .handle:not(.handle--dragging)::after {
+	background: var(--rs-color-border-neutral-faded);
 }
 
 /* Keep drag cursor anywhere while dragging */
@@ -59,11 +81,15 @@ body:has(.--direction-column > .handle--dragging) {
 		}
 
 		&::before {
-			width: var(--rs-unit-x4);
+			width: var(--rs-unit-x8);
 		}
 
-		&::after {
+		.--variant-borderless&::after {
 			width: var(--rs-unit-x1);
+		}
+
+		.--variant-bordered&::after {
+			width: 1px;
 		}
 	}
 
@@ -83,11 +109,15 @@ body:has(.--direction-column > .handle--dragging) {
 		}
 
 		&::before {
-			height: var(--rs-unit-x4);
+			height: var(--rs-unit-x8);
 		}
 
-		&::after {
+		.--variant-borderless&::after {
 			height: var(--rs-unit-x1);
+		}
+
+		.--variant-bordered&::after {
+			height: 1px;
 		}
 	}
 
