@@ -32,42 +32,24 @@ module.exports = () => {
 					const [name, ...defaultValueChunks] = variableAtRule.params.split(" ");
 					const defaultValue = defaultValueChunks.join(" ");
 
-					baseRules.push(
-						new Rule({
-							selector,
-							nodes: [
-								new Declaration({
-									prop: `${name}-s`,
-									value: defaultValue,
-								}),
-								new Declaration({
-									prop: `${name}-m`,
-									value: `var(${name}-s)`,
-								}),
-								new Declaration({
-									prop: `${name}-l`,
-									value: `var(${name}-m)`,
-								}),
-								new Declaration({
-									prop: `${name}-xl`,
-									value: `var(${name}-l)`,
-								}),
-								new Declaration({
-									prop: name,
-									value: `var(${name}-s)`,
-								}),
-							],
-						})
-					);
+					["s", "m", "l", "xl"].forEach((viewport, index, arr) => {
+						const isBase = index === 0;
+						const rules = isBase ? baseRules : mqRules[viewport];
+						const prevViewport = arr[index - 1];
+						const fallbackValue = isBase ? defaultValue : `var(${name}-${prevViewport})`;
+						const currentValue = `var(${name}-${viewport})`;
 
-					["m", "l", "xl"].forEach((viewport) => {
-						mqRules[viewport].push(
+						rules.push(
 							new Rule({
 								selector,
 								nodes: [
 									new Declaration({
+										prop: `${name}-${viewport}`,
+										value: fallbackValue,
+									}),
+									new Declaration({
 										prop: name,
-										value: `var(${name}-${viewport})`,
+										value: currentValue,
 									}),
 								],
 							})
