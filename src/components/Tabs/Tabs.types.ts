@@ -27,6 +27,8 @@ export type ListProps = {
 export type PanelProps = {
 	value: string;
 	children?: React.ReactNode;
+	className?: G.ClassName;
+	attributes?: G.Attributes<"div">;
 };
 
 export type BaseProps = {

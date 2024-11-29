@@ -22,6 +22,7 @@ const GridItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemP
 	const resolvedColSpan = responsivePropDependency(colSpan, (value) => value && `span ${value}`);
 	const resolvedRowSpan = responsivePropDependency(rowSpan, (value) => value && `span ${value}`);
 	const rootVariables = {
+		...attributes?.style,
 		...responsiveVariables("--rs-grid-area", area),
 		...responsiveVariables("--rs-grid-col-end", resolvedColSpan),
 		// both span and end use the same css variable but end has a higher prioerity
@@ -71,6 +72,7 @@ const Grid = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 	);
 	const rootClassNames = classNames(s.root, className);
 	const rootVariables = {
+		...attributes?.style,
 		...responsiveVariables("--rs-grid-gap", gap),
 		...responsiveVariables("--rs-grid-rows", resolvedRows),
 		...responsiveVariables("--rs-grid-columns", resolvedColumns),
