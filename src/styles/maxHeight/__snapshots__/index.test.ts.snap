@@ -3,7 +3,7 @@
 exports[`Styles/MaxHeight handles % value 1`] = `
 {
   "classNames": [
-    "literal",
+    "--type-literal",
   ],
   "variables": {
     "--rs-max-h-s": "50%",
@@ -14,7 +14,7 @@ exports[`Styles/MaxHeight handles % value 1`] = `
 exports[`Styles/MaxHeight handles px value 1`] = `
 {
   "classNames": [
-    "literal",
+    "--type-literal",
   ],
   "variables": {
     "--rs-max-h-s": "50px",
@@ -25,8 +25,8 @@ exports[`Styles/MaxHeight handles px value 1`] = `
 exports[`Styles/MaxHeight handles responsive value 1`] = `
 {
   "classNames": [
-    "literal",
-    "literal--l",
+    "--type-literal",
+    "--type-literal--l",
   ],
   "variables": {
     "--rs-max-h-l": "50%",
@@ -40,7 +40,7 @@ exports[`Styles/MaxHeight handles undefined value 1`] = `null`;
 exports[`Styles/MaxHeight handles unit value 1`] = `
 {
   "classNames": [
-    "unit",
+    "--type-unit",
   ],
   "variables": {
     "--rs-max-h-s": 5,

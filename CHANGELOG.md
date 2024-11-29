@@ -1,6 +1,7 @@
 3.3.0
 
 - CSS: More readable responsive styles, fallback variables moved inside mq
+- CSS mixins: Reduce the amount of classes used, rely on variables selectors
 
 - TextField: Updated the order of the attachments
 - trapFocus: Fixed aria-hidden not removing for some of the event handlers combinations
@@ -13,6 +14,7 @@
 - Table: row onClick support
 - Tabs: new navigation controls and fixed auto scrolling edge cases causing the page the scroll
 - Modal, Overlay: onAfterOpen, onAfterClose
+- View: Inset "auto" support
 - Tabs: Added className and attributes for Tab.Panel
 - Grid: Added attributes.style support for grid and grid.item
 

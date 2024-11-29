@@ -1,6 +1,7 @@
 import React from "react";
 import * as G from "types/global";
 
+export type Inset = number | "auto";
 export type TextAlign = "start" | "center" | "end";
 export type Justify = "start" | "center" | "end" | "space-between";
 export type Align = "start" | "center" | "end" | "stretch" | "baseline";
@@ -27,6 +28,14 @@ export type BorderColor =
 export type StaticStyleUtility<Value> = (value?: G.Responsive<Value>) => null | {
 	classNames: G.ClassName;
 };
+
+export type VariableStyleUtilityResult = null | {
+	variables: React.CSSProperties;
+};
+
+export type VariableStyleUtility<Value> = (
+	value?: G.Responsive<Value>
+) => VariableStyleUtilityResult;
 
 /**
  * Utility controlled with classNames and css variables

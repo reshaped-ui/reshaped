@@ -1,19 +1,13 @@
-.literal {
-	max-height: var(--rs-max-h-s, auto);
+@responsive [style*="--rs-max-h-s:"] {
+	@variable --rs-max-h none;
 }
 
-.unit {
-	max-height: calc(var(--rs-max-h-s) * var(--rs-unit-x1));
-}
+@responsive .--type {
+	@value literal {
+		max-height: var(--rs-max-h) !important;
+	}
 
-@each $viewport in m, l, xl {
-	@media (--rs-viewport-$viewport) {
-		.literal--$viewport {
-			max-height: var(--rs-max-h-$viewport);
-		}
-
-		.unit--$viewport {
-			max-height: calc(var(--rs-max-h-$viewport) * var(--rs-unit-x1));
-		}
+	@value unit {
+		max-height: calc(var(--rs-max-h) * var(--rs-unit-x1)) !important;
 	}
 }

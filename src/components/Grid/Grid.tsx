@@ -70,12 +70,7 @@ const Grid = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 	`
 			: undefined
 	);
-	const rootClassNames = classNames(
-		s.root,
-		alignStyles?.classNames,
-		justifyStyles?.classNames,
-		className
-	);
+	const rootClassNames = classNames(s.root, className);
 	const rootVariables = {
 		...attributes?.style,
 		...responsiveVariables("--rs-grid-gap", gap),
@@ -85,6 +80,8 @@ const Grid = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		...responsiveVariables("--rs-grid-auto-flow", autoFlow),
 		...responsiveVariables("--rs-grid-auto-columns", autoColumns),
 		...responsiveVariables("--rs-grid-auto-rows", autoRows),
+		...alignStyles?.variables,
+		...justifyStyles?.variables,
 	};
 
 	return (

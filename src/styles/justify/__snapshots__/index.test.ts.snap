@@ -2,11 +2,11 @@
 
 exports[`Styles/Justify handles responsive value 1`] = `
 {
-  "classNames": [
-    "--justify-start",
-    "--justify-center--m",
-    "--justify-end--l",
-  ],
+  "variables": {
+    "--rs-justify-l": "end",
+    "--rs-justify-m": "center",
+    "--rs-justify-s": "start",
+  },
 }
 `;
 
@@ -14,8 +14,8 @@ exports[`Styles/Justify handles undefined value 1`] = `null`;
 
 exports[`Styles/Justify handles value 1`] = `
 {
-  "classNames": [
-    "--justify-start",
-  ],
+  "variables": {
+    "--rs-justify-s": "start",
+  },
 }
 `;

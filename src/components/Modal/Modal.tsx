@@ -254,7 +254,6 @@ const Modal = (props: T.Props) => {
 				const rootClassNames = classNames(
 					s.root,
 					className,
-					paddingStyles?.classNames,
 					active && s["--active"],
 					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],

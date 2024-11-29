@@ -1,12 +1,12 @@
-import { responsiveClassNames } from "utilities/helpers";
+import { responsiveVariables } from "utilities/helpers";
 import * as T from "styles/types";
-import s from "./textAlign.module.css";
+import "./textAlign.css";
 
-const getTextAlignStyles: T.StaticStyleUtility<T.TextAlign> = (value) => {
+const getTextAlignStyles: T.VariableStyleUtility<T.TextAlign> = (value) => {
 	if (!value) return null;
 
 	return {
-		classNames: [...responsiveClassNames(s, "--text-align", value)],
+		variables: responsiveVariables("--rs-text-align", value),
 	};
 };
 

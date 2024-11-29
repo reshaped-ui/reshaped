@@ -2,10 +2,10 @@
 
 exports[`Styles/Position handles responsive value 1`] = `
 {
-  "classNames": [
-    "--position-absolute",
-    "--position-fixed--l",
-  ],
+  "variables": {
+    "--rs-position-l": "fixed",
+    "--rs-position-s": "absolute",
+  },
 }
 `;
 
@@ -13,8 +13,8 @@ exports[`Styles/Position handles undefined value 1`] = `null`;
 
 exports[`Styles/Position handles value 1`] = `
 {
-  "classNames": [
-    "--position-absolute",
-  ],
+  "variables": {
+    "--rs-position-s": "absolute",
+  },
 }
 `;

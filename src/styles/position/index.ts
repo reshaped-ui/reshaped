@@ -1,12 +1,12 @@
-import { responsiveClassNames } from "utilities/helpers";
+import { responsiveVariables } from "utilities/helpers";
 import * as T from "styles/types";
-import s from "./position.module.css";
+import "./position.css";
 
-const getPositionStyles: T.StaticStyleUtility<T.Position> = (value) => {
+const getPositionStyles: T.VariableStyleUtility<T.Position> = (value) => {
 	if (!value) return null;
-	const classNames = responsiveClassNames(s, "--position", value);
+	const variables = responsiveVariables("--rs-position", value);
 
-	return { classNames };
+	return { variables };
 };
 
 export default getPositionStyles;

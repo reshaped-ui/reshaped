@@ -1,0 +1,5 @@
+@responsive [style*="--rs-position-s:"] {
+	@variable --rs-position;
+
+	position: var(--rs-position) !important;
+}

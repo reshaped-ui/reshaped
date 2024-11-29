@@ -40,7 +40,6 @@ const Card = forwardRef<HTMLElement, T.Props<keyof JSX.IntrinsicElements>>(
 			s.root,
 			radiusStyles?.classNames,
 			bleedStyles?.classNames,
-			paddingStyles?.classNames,
 			heightStyles?.classNames,
 			isActionable && s["--actionable"],
 			elevated && s["--elevated"],
