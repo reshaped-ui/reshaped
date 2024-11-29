@@ -1,4 +1,4 @@
-@responsive [style*="--rs-w:"] {
+@responsive [style*="--rs-w-s:"] {
 	@variable --rs-w auto;
 }
 

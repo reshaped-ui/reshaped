@@ -1,4 +1,4 @@
-@responsive [style*="--rs-text-align:"] {
+@responsive [style*="--rs-text-align-s:"] {
 	@variable --rs-text-align;
 
 	text-align: var(--rs-text-align) !important;

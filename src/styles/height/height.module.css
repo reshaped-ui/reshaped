@@ -1,5 +1,5 @@
 /* --rs-h is used in other components */
-@responsive [style*="--rs-h:"] {
+@responsive [style*="--rs-h-s:"] {
 	@variable --rs-h auto;
 }
 

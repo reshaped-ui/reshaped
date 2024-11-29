@@ -4,25 +4,25 @@
 	inset: calc(var(--rs-inset) * var(--rs-unit-x1));
 }
 
-@responsive [style*="--rs-inset-end:"] {
+@responsive [style*="--rs-inset-end-s:"] {
 	@variable --rs-inset-end 0;
 
 	inset-inline-end: calc(var(--rs-inset-end) * var(--rs-unit-x1));
 }
 
-@responsive [style*="--rs-inset-start:"] {
+@responsive [style*="--rs-inset-start-s:"] {
 	@variable --rs-inset-start 0;
 
 	inset-inline-start: calc(var(--rs-inset-start) * var(--rs-unit-x1));
 }
 
-@responsive [style*="--rs-inset-top:"] {
+@responsive [style*="--rs-inset-top-s:"] {
 	@variable --rs-inset-top 0;
 
 	inset-block-start: calc(var(--rs-inset-top) * var(--rs-unit-x1));
 }
 
-@responsive [style*="--rs-inset-bottom:"] {
+@responsive [style*="--rs-inset-bottom-s:"] {
 	@variable --rs-inset-bottom 0;
 
 	inset-block-end: calc(var(--rs-inset-bottom) * var(--rs-unit-x1));
