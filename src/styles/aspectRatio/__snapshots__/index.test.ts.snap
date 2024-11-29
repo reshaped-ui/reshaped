@@ -4,7 +4,6 @@ exports[`Styles/AspectRatio handles 0 value 1`] = `null`;
 
 exports[`Styles/AspectRatio handles positive value 1`] = `
 {
-  "classNames": "root",
   "variables": {
     "--rs-ratio-s": 0.5,
   },
@@ -13,7 +12,6 @@ exports[`Styles/AspectRatio handles positive value 1`] = `
 
 exports[`Styles/AspectRatio handles responsive value 1`] = `
 {
-  "classNames": "root",
   "variables": {
     "--rs-ratio-l": 2,
     "--rs-ratio-m": 0,
