@@ -7,7 +7,7 @@ const getWidthStyles: T.DynamicStyleUtility<string | number> = (value) => {
 	const variables = responsiveVariables("--rs-w", value);
 	const classNames = responsiveClassNames(
 		s,
-		(value) => (typeof value === "number" ? "unit" : "literal"),
+		(value) => (typeof value === "number" ? "--type-unit" : "--type-literal"),
 		value,
 		{ excludeValueFromClassName: true }
 	);

@@ -6,6 +6,7 @@
 
 	z-index: var(--rs-view-z);
 	gap: var(--rs-view-gap-value);
+	position: relative;
 }
 
 .item {

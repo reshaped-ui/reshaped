@@ -93,7 +93,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		shadow,
 		textAlign,
 		overflow,
-		position = "relative",
+		position,
 		inset,
 		insetTop,
 		insetBottom,
