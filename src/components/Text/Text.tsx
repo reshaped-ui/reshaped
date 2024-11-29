@@ -43,11 +43,11 @@ const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
 		maxLines !== undefined && s[`--clamp`],
 		maxLines === 1 && s["--break-all"],
 		wrap && s[`--wrap-${wrap}`],
-		alignStyles?.classNames,
 		className
 	);
 	const style = {
 		...attributes?.style,
+		...alignStyles?.variables,
 		"--rs-text-lines": maxLines,
 	};
 

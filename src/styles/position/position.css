@@ -1,4 +1,4 @@
-@responsive [style*="--rs-position"] {
+@responsive [style*="--rs-position:"] {
 	@variable --rs-position;
 
 	position: var(--rs-position) !important;

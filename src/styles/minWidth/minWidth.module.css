@@ -1,19 +1,13 @@
-.literal {
-	min-width: var(--rs-min-w-s, auto);
+@responsive [style*="--rs-min-w:"] {
+	@variable --rs-min-w none;
 }
 
-.unit {
-	min-width: calc(var(--rs-min-w-s) * var(--rs-unit-x1));
-}
+@responsive .--type {
+	@value literal {
+		min-width: var(--rs-min-w) !important;
+	}
 
-@each $viewport in m, l, xl {
-	@media (--rs-viewport-$viewport) {
-		.literal--$viewport {
-			min-width: var(--rs-min-w-$viewport);
-		}
-
-		.unit--$viewport {
-			min-width: calc(var(--rs-min-w-$viewport) * var(--rs-unit-x1));
-		}
+	@value unit {
+		min-width: calc(var(--rs-min-w) * var(--rs-unit-x1)) !important;
 	}
 }

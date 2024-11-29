@@ -246,7 +246,6 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		minWidthStyles?.classNames,
 		minHeightStyles?.classNames,
 		borderStyles?.classNames,
-		textAlignStyles?.classNames,
 		backgroundColor && s[`--bg-${backgroundColor}`],
 		shadow && s[`--shadow-${shadow}`],
 		overflow && s[`--overflow-${overflow}`],
@@ -289,6 +288,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		...justifyStyles?.variables,
 		...aspectRatioStyles?.variables,
 		...positionStyles?.variables,
+		...textAlignStyles?.variables,
 		...(zIndex ? { "--rs-view-z": zIndex } : {}),
 	};
 
