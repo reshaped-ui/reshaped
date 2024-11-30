@@ -17,6 +17,7 @@
 - View: Inset "auto" support
 - Tabs: Added className and attributes for Tab.Panel
 - Grid: Added attributes.style support for grid and grid.item
+- Resizable: bordered variant
 
 Documentation
 

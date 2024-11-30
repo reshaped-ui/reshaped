@@ -37,7 +37,7 @@ const Portal = (props: T.Props): any => {
 	/* Preserve the current theme when rendered in body */
 	return [
 		ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl),
-		<div ref={rootRef} className={s.root} />,
+		<div ref={rootRef} className={s.root} key="root" />,
 	];
 };
 
