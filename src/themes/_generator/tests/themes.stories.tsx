@@ -1,3 +1,4 @@
+import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Button from "components/Button";
@@ -256,14 +257,14 @@ export const base = () => (
 );
 
 export const generation = () => (
-	<>
+	<React.Fragment>
 		<style>
 			{cssGenerated}
 			{cssGenerated2}
 		</style>
 		<Theme name="generated">{componentExamples}</Theme>
 		{/* <Theme name="generated2">{componentExamples}</Theme> */}
-	</>
+	</React.Fragment>
 );
 
 const onColorsCss = getThemeCSS(

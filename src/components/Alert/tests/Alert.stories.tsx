@@ -1,3 +1,4 @@
+import React from "react";
 import { Example } from "utilities/storybook";
 import Alert from "components/Alert";
 import Link from "components/Link";
@@ -20,10 +21,10 @@ export const color = () => (
 				title="Alert title goes here"
 				icon={IconZap}
 				actionsSlot={
-					<>
+					<React.Fragment>
 						<Link variant="plain">View now</Link>
 						<Link variant="plain">Dismiss</Link>
-					</>
+					</React.Fragment>
 				}
 			>
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has

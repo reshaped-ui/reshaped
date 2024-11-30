@@ -3,7 +3,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Theme from "components/Theme";
-import { getShadowRoot } from "utilities/dom";
 import type * as T from "./Portal.types";
 import s from "./Portal.module.css";
 
@@ -36,12 +35,10 @@ const Portal = (props: T.Props): any => {
 	const targetEl = nextScopeRef?.current || defaultTargetEl;
 
 	/* Preserve the current theme when rendered in body */
-	return (
-		<>
-			{ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl)}
-			<div ref={rootRef} className={s.root} />
-		</>
-	);
+	return [
+		ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl),
+		<div ref={rootRef} className={s.root} />,
+	];
 };
 
 function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>) {
