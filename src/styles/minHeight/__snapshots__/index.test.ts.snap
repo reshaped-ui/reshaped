@@ -3,7 +3,7 @@
 exports[`Styles/MinHeight handles % value 1`] = `
 {
   "classNames": [
-    "literal",
+    "--type-literal",
   ],
   "variables": {
     "--rs-min-h-s": "50%",
@@ -14,7 +14,7 @@ exports[`Styles/MinHeight handles % value 1`] = `
 exports[`Styles/MinHeight handles px value 1`] = `
 {
   "classNames": [
-    "literal",
+    "--type-literal",
   ],
   "variables": {
     "--rs-min-h-s": "50px",
@@ -25,8 +25,8 @@ exports[`Styles/MinHeight handles px value 1`] = `
 exports[`Styles/MinHeight handles responsive value 1`] = `
 {
   "classNames": [
-    "literal",
-    "literal--l",
+    "--type-literal",
+    "--type-literal--l",
   ],
   "variables": {
     "--rs-min-h-l": "50%",
@@ -40,7 +40,7 @@ exports[`Styles/MinHeight handles undefined value 1`] = `null`;
 exports[`Styles/MinHeight handles unit value 1`] = `
 {
   "classNames": [
-    "unit",
+    "--type-unit",
   ],
   "variables": {
     "--rs-min-h-s": 5,

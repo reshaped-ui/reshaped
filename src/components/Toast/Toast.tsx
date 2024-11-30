@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import View, { type ViewProps } from "components/View";
 import Button, { type ButtonProps } from "components/Button";
 import Icon from "components/Icon";
@@ -35,7 +36,7 @@ const Toast = (props: T.Props & { collapsed: boolean }) => {
 	}
 
 	const textContent = (title || text) && (
-		<>
+		<React.Fragment>
 			{title && (
 				<Text variant="body-3" weight="bold" as={textTagName}>
 					{title}{" "}
@@ -44,7 +45,7 @@ const Toast = (props: T.Props & { collapsed: boolean }) => {
 			<Text variant="body-3" as={textTagName}>
 				{text}
 			</Text>
-		</>
+		</React.Fragment>
 	);
 
 	const toastNode = (

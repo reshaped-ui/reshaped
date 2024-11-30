@@ -22,7 +22,7 @@ const Tooltip = (props: T.Props) => {
 		disableContentHover,
 	} = props;
 
-	if (!text) return <>{children({})}</>;
+	if (!text) return children({});
 
 	return (
 		<Flyout
