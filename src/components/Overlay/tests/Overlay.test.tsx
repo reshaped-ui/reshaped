@@ -11,15 +11,6 @@ const fixtures = {
 	className: "test-className",
 };
 
-const triggerTransition = (el: HTMLElement) => {
-	const transitionEndEvent = new Event("transitionend", {
-		bubbles: true,
-	});
-	// @ts-ignore: propertyName is readonly in types
-	transitionEndEvent.propertyName = "opacity";
-	fireEvent(el, transitionEndEvent);
-};
-
 describe("Utilities/Overlay", () => {
 	test("renders children", () => {
 		render(
@@ -87,7 +78,9 @@ describe("Utilities/Overlay", () => {
 		expect(handleCloseMock).toHaveBeenCalledTimes(1);
 		expect(handleCloseMock).toHaveBeenCalledWith({ reason: "overlay-click" });
 
-		triggerTransition(screen.getAllByRole("button")[1]);
+		fireEvent.transitionEnd(screen.getAllByRole("button")[1], {
+			propertyName: "opacity",
+		});
 
 		await waitFor(() => {
 			expect(screen.queryByText(fixtures.content)).not.toBeInTheDocument();
