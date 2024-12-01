@@ -18,6 +18,7 @@
 - Tabs: Added className and attributes for Tab.Panel
 - Grid: Added attributes.style support for grid and grid.item
 - Resizable: bordered variant
+- TextField: support for clickable affixes
 
 Documentation
 

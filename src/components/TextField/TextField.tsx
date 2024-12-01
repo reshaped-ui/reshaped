@@ -10,7 +10,7 @@ import type * as T from "./TextField.types";
 import s from "./TextField.module.css";
 
 const TextFieldSlot = (props: T.SlotProps) => {
-	const { slot, icon, size, affix, position } = props;
+	const { slot, icon, size, affix, position, id } = props;
 
 	if (!icon && !slot && !affix) return null;
 
@@ -26,7 +26,7 @@ const TextFieldSlot = (props: T.SlotProps) => {
 			</div>
 		));
 	const iconNode = icon && (
-		<div className={s.icon} key="icon">
+		<label className={s.icon} key="icon" htmlFor={id}>
 			<Icon
 				size={responsivePropDependency(size, (size) => {
 					if (size === "large") return 5;
@@ -35,12 +35,16 @@ const TextFieldSlot = (props: T.SlotProps) => {
 				})}
 				svg={icon}
 			/>
-		</div>
+		</label>
 	);
 	const affixNode = affix && (
-		<div className={classNames(s.affix, s[`affix--position-${position}`])} key="affix">
+		<label
+			className={classNames(s.affix, s[`affix--position-${position}`])}
+			key="affix"
+			htmlFor={id}
+		>
 			{affix}
-		</div>
+		</label>
 	);
 
 	/**
@@ -106,7 +110,14 @@ const TextField = (props: T.Props) => {
 
 	return (
 		<div {...attributes} data-rs-aligner-target className={rootClassName}>
-			<TextFieldSlot position="start" icon={icon} slot={startSlot} size={size} affix={prefix} />
+			<TextFieldSlot
+				position="start"
+				icon={icon}
+				slot={startSlot}
+				size={size}
+				affix={prefix}
+				id={id}
+			/>
 
 			<input
 				{...inputAttributes}
@@ -122,7 +133,14 @@ const TextField = (props: T.Props) => {
 				id={inputId}
 			/>
 
-			<TextFieldSlot position="end" icon={endIcon} slot={endSlot} size={size} affix={suffix} />
+			<TextFieldSlot
+				position="end"
+				icon={endIcon}
+				slot={endSlot}
+				size={size}
+				affix={suffix}
+				id={id}
+			/>
 		</div>
 	);
 };
