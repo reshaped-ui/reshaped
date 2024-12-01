@@ -12,7 +12,8 @@
 	gap: var(--rs-text-field-gap);
 	row-gap: var(--rs-unit-x1);
 
-	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus)):focus-within {
+	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus)):focus-within,
+	&:has(label:active) {
 		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
 		border-color: var(--rs-color-border-primary);
 	}
@@ -60,6 +61,11 @@
 	-webkit-text-fill-color: var(--rs-color-foreground-neutral);
 }
 
+.icon,
+.affix {
+	cursor: text;
+}
+
 .slot,
 .icon,
 .affix {
@@ -73,10 +79,6 @@
 
 .slot--position-end:last-child {
 	margin-inline-end: calc(var(--rs-unit-x1) * -1);
-}
-
-.icon {
-	pointer-events: none;
 }
 
 .affix {

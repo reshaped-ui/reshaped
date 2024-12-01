@@ -34,6 +34,7 @@ export type UncontrolledProps = BaseProps & { value?: never; defaultValue?: stri
 export type Props = ControlledProps | UncontrolledProps;
 
 export type SlotProps = {
+	id: string;
 	slot?: React.ReactNode;
 	icon?: IconProps["svg"];
 	size: Size;
