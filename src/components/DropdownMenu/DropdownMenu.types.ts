@@ -22,6 +22,7 @@ export type Props = Pick<
 	| "disableCloseOnOutsideClick"
 	| "instanceRef"
 	| "containerRef"
+	| "originCoordinates"
 > & {
 	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu">;
 };

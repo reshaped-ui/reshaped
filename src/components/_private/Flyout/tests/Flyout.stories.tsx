@@ -5,7 +5,7 @@ import Reshaped from "components/Reshaped";
 import View from "components/View";
 import Theme from "components/Theme";
 import Button from "components/Button";
-import Flyout, { FlyoutInstance } from "components/_private/Flyout";
+import Flyout, { FlyoutInstance, FlyoutProps } from "components/_private/Flyout";
 import TextField from "components/TextField";
 
 export default { title: "Utilities/Internal/Flyout" };
@@ -64,6 +64,38 @@ export const dynamicPosition = () => (
 		<Demo position="top" />
 	</div>
 );
+
+export const originCoordinates = () => {
+	const [coordinates, setCoordinates] = React.useState<FlyoutProps["originCoordinates"] | null>(
+		null
+	);
+
+	return (
+		<Example>
+			<Example.Item>
+				<View
+					height={25}
+					width={25}
+					attributes={{
+						onContextMenu: (e) => {
+							e.preventDefault();
+							setCoordinates({ x: e.clientX, y: e.clientY });
+						},
+					}}
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+				/>
+				<br /> <br />
+				<Demo
+					position="top"
+					originCoordinates={coordinates}
+					active={!!coordinates}
+					onClose={() => setCoordinates(null)}
+				/>
+			</Example.Item>
+		</Example>
+	);
+};
 
 export const modes = () => (
 	<Example>

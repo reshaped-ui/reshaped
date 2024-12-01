@@ -4,7 +4,7 @@ import type * as G from "types/global";
 export type Props = {
 	children: React.ReactNode;
 	scrollbarDisplay?: "visible" | "hover" | "hidden";
-	onScroll?: (args: { x: number; y: number }) => void;
+	onScroll?: (args: G.Coordinates) => void;
 	height?: G.Responsive<string | number>;
 	maxHeight?: G.Responsive<string | number>;
 	className?: G.ClassName;

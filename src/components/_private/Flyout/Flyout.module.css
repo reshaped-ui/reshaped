@@ -4,9 +4,17 @@
 	--rs-flyout-origin-y: 50%;
 
 	position: absolute;
+
+	/* Ignore the padding for non-hover trigger types */
+	pointer-events: none;
+
+	&.--hover {
+		pointer-events: all;
+	}
 }
 
 .inner {
+	pointer-events: all;
 	opacity: 0;
 	transform: scale(0.86) translateY(0);
 	transform-origin: var(--rs-flyout-origin-x) var(--rs-flyout-origin-y);

@@ -13,7 +13,7 @@ const resolveTokenReference = <ReferencedToken>(
 		if (tokenName === ref) referencedToken = (tokenGroup as any)[tokenName];
 	});
 
-	if (!referencedToken) throw new Error(`Referenced token not found for: ${ref}`);
+	if (!referencedToken) throw new Error(`[Reshaped] Referenced token not found for: ${ref}`);
 	return referencedToken;
 };
 

@@ -17,7 +17,7 @@ import {
 const hexToOkHsl = (hex: string) => {
 	const rgb = parseHex(hex) as Rgb;
 
-	if (!rgb) throw new Error(`Can\'t generate rgb from ${hex} color`);
+	if (!rgb) throw new Error(`[Reshaped] Can\'t generate rgb from ${hex} color`);
 
 	const lrgb = convertRgbToLrgb(rgb);
 	const oklab = convertLrgbToOklab(lrgb);
@@ -191,7 +191,7 @@ const validateHexColor = (color: string) => {
 	const hexColorRegex = /^#([A-Fa-f0-9]{3}){2}$/;
 
 	if (!hexColorRegex.test(color)) {
-		throw new Error(`Invalid hex color: ${color}`);
+		throw new Error(`[Reshaped] Invalid hex color: ${color}`);
 	}
 
 	return color;

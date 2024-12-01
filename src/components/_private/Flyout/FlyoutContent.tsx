@@ -55,6 +55,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 
 	const contentClassNames = classNames(
 		s.content,
+		triggerType === "hover" && s["--hover"],
 		status === "visible" && s["--visible"],
 		// animating only when we're opening the first flyout or closing the last flyout within the same cooldown
 		// content is rendered only once flyout is already warm so checking for timer instead

@@ -1,5 +1,7 @@
 3.3.0
 
+- [New component]: ContextMenu
+
 - CSS: More readable responsive styles, fallback variables moved inside mq
 - CSS mixins: Reduce the amount of classes used, rely on variables selectors
 

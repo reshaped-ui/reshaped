@@ -35,6 +35,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		disableHideAnimation,
 		disableContentHover,
 		disableCloseOnOutsideClick,
+		originCoordinates,
 		contentGap = 2,
 		contentShift,
 		contentClassName,
@@ -69,7 +70,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const triggerElRef =
 		(!parentFlyoutContentContext && parentFlyoutTriggerContext?.triggerElRef) ||
 		internalTriggerElRef;
-	const triggerBoundsRef = React.useRef<DOMRect | null | undefined>(null);
+	const triggerBoundsRef = React.useRef<DOMRect>();
 	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
@@ -88,7 +89,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const flyout = useFlyout({
 		triggerElRef,
 		flyoutElRef,
-		triggerBoundsRef,
+		triggerBounds: originCoordinates ?? triggerBoundsRef.current,
 		width,
 		position: passedPosition,
 		defaultActive: resolvedActive,
@@ -224,7 +225,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			 * After animation has started, we're sure about the correct bounds
 			 * so drop the cache to make flyout work when trigger moves around
 			 */
-			triggerBoundsRef.current = null;
+			triggerBoundsRef.current = undefined;
 		},
 		[resolvedActive]
 	);

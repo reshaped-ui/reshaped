@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import View from "components/View";
 import Reshaped from "components/Reshaped";
 import useDrag from "hooks/useDrag";
+import type * as G from "types/global";
 
 const fixtures = {
 	containerId: "container-id",
@@ -10,7 +11,7 @@ const fixtures = {
 
 const Example = (props: {
 	disabled?: boolean;
-	onDrag: (args: { x: number; y: number }) => void;
+	onDrag: (args: G.Coordinates) => void;
 	orientation?: "horizontal" | "vertical";
 }) => {
 	const { onDrag, orientation, disabled } = props;

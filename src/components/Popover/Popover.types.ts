@@ -24,6 +24,7 @@ export type Props = Pick<
 	| "disableCloseOnOutsideClick"
 	| "containerRef"
 	| "initialFocusRef"
+	| "originCoordinates"
 > & {
 	children?: React.ReactNode;
 	padding?: number;

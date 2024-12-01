@@ -1,4 +1,5 @@
 import { getShadowRoot } from "./shadowDom";
+import type * as G from "types/global";
 
 export const getClosestFlyoutTarget = (
 	el: HTMLElement | null,
@@ -19,4 +20,19 @@ export const getClosestFlyoutTarget = (
 	if (el === document.body || !el) return document.body;
 	if ((isScrollable && el.scrollHeight > el.clientHeight) || isFixed) return el;
 	return getClosestFlyoutTarget(el.parentElement, iteration + 1);
+};
+
+export const getRectFromCoordinates = (coordinates: DOMRect | G.Coordinates): DOMRect => {
+	if (coordinates instanceof DOMRect) return coordinates;
+
+	return {
+		...coordinates,
+		width: 0,
+		height: 0,
+		left: coordinates.x,
+		right: coordinates.x,
+		top: coordinates.y,
+		bottom: coordinates.y,
+		toJSON: () => {},
+	};
 };
