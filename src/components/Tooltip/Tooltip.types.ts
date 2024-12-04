@@ -13,6 +13,7 @@ export type Props = Pick<
 	| "containerRef"
 	| "contentGap"
 	| "contentShift"
+	| "originCoordinates"
 > & {
 	children: (attributes: Parameters<FlyoutTriggerProps["children"]>[0] | {}) => React.ReactNode;
 	text?: React.ReactNode;

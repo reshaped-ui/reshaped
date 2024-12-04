@@ -266,7 +266,7 @@ export const customPortalTarget = () => {
 					borderRadius="small"
 					attributes={{ ref: portalRef }}
 				>
-					<Flyout position="bottom-end" containerRef={portalRef} active>
+					<Flyout position="bottom-end" active>
 						<Flyout.Trigger>{(attributes) => <button {...attributes}>Open</button>}</Flyout.Trigger>
 						<Flyout.Content>
 							<div

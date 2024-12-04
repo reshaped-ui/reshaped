@@ -1,6 +1,6 @@
 import React from "react";
 import useRTL from "hooks/useRTL";
-import { getClosestFlyoutTarget, getShadowRoot, getRectFromCoordinates } from "utilities/dom";
+import { findClosestRenderContainer, getShadowRoot, getRectFromCoordinates } from "utilities/dom";
 import calculatePosition from "./utilities/calculatePosition";
 import getPositionFallbacks from "./utilities/getPositionFallbacks";
 import isFullyVisible from "./utilities/isFullyVisible";
@@ -33,14 +33,18 @@ type FlyoutAction =
 	| FlyoutHideAction
 	| FlyoutRemoveAction;
 
-type UseFlyout = (
-	args: T.Options & {
-		defaultActive?: boolean;
-		triggerElRef: React.RefObject<HTMLElement>;
-		flyoutElRef: React.RefObject<HTMLElement>;
-		triggerBounds?: DOMRect | G.Coordinates;
-	}
-) => Pick<T.State, "styles" | "position" | "status"> & {
+type UseFlyout = (args: {
+	width?: T.Width;
+	position?: T.Position;
+	defaultActive?: boolean;
+	fallbackPositions?: T.Position[];
+	contentGap?: number;
+	contentShift?: number;
+	container?: HTMLElement | null;
+	triggerElRef: React.RefObject<HTMLElement>;
+	flyoutElRef: React.RefObject<HTMLElement>;
+	triggerBounds?: DOMRect | G.Coordinates;
+}) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
@@ -115,7 +119,7 @@ const flyout: Flyout = (args) => {
 
 	const flyoutBounds = targetClone.getBoundingClientRect();
 	const containerParent =
-		container || (triggerEl ? getClosestFlyoutTarget(triggerEl) : document.body);
+		container || (triggerEl ? findClosestRenderContainer({ el: triggerEl }) : document.body);
 	const containerBounds = containerParent.getBoundingClientRect();
 
 	const scopeOffset = {

@@ -1,44 +1,42 @@
 "use client";
 
 import React from "react";
-import DropdownMenu, { type DropdownMenuProps } from "components/DropdownMenu";
+import DropdownMenu from "components/DropdownMenu";
+import useScrollLock from "hooks/useScrollLock";
 import type * as G from "types/global";
+import type * as T from "./ContextMenu.types";
 import s from "./ContextMenu.module.css";
 
-const ContextMenuContext = React.createContext(
-	{} as {
-		setCoordinates: (coordinates: G.Coordinates) => void;
-	}
-);
-
-const ContextMenu = (props: Omit<DropdownMenuProps, "active" | "defaultActive">) => {
+const ContextMenu = (props: T.Props) => {
 	const { position = "end-top", ...dropdownMenuProps } = props;
 	const [coordinates, setCoordinates] = React.useState<G.Coordinates>();
+	const containerRef = React.useRef<HTMLDivElement>(null);
+	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
 
 	React.useEffect(() => {
 		const handleContextMenu = (e: MouseEvent) => {
 			e.preventDefault();
 			setCoordinates({ x: e.clientX, y: e.clientY });
+			lockScroll();
 		};
 
 		window.addEventListener("contextmenu", handleContextMenu);
 		return () => window.removeEventListener("contextmenu", handleContextMenu);
-	}, []);
+	}, [lockScroll]);
 
 	return (
-		<ContextMenuContext.Provider value={{ setCoordinates }}>
-			<div className={s.root}>
-				<DropdownMenu
-					{...dropdownMenuProps}
-					position={position}
-					originCoordinates={coordinates}
-					active={!!coordinates}
-					onClose={() => {
-						setCoordinates(undefined);
-					}}
-				/>
-			</div>
-		</ContextMenuContext.Provider>
+		<div className={s.root} ref={containerRef}>
+			<DropdownMenu
+				{...dropdownMenuProps}
+				position={position}
+				originCoordinates={coordinates}
+				active={!!coordinates}
+				onClose={() => {
+					setCoordinates(undefined);
+					unlockScroll();
+				}}
+			/>
+		</div>
 	);
 };
 
@@ -47,4 +45,5 @@ ContextMenu.Item = DropdownMenu.Item;
 ContextMenu.Section = DropdownMenu.Section;
 ContextMenu.SubMenu = DropdownMenu.SubMenu;
 ContextMenu.SubTrigger = DropdownMenu.SubTrigger;
+
 export default ContextMenu;
