@@ -102,6 +102,14 @@ export const submenu = () => (
 							<DropdownMenu.Item onClick={() => {}}>SubItem 2-2</DropdownMenu.Item>
 						</DropdownMenu.Content>
 					</DropdownMenu.SubMenu>
+
+					<DropdownMenu.SubMenu>
+						<DropdownMenu.SubTrigger disabled>Item 4, disabled</DropdownMenu.SubTrigger>
+						<DropdownMenu.Content>
+							<DropdownMenu.Item onClick={() => {}}>SubItem 3-1</DropdownMenu.Item>
+							<DropdownMenu.Item onClick={() => {}}>SubItem 3-2</DropdownMenu.Item>
+						</DropdownMenu.Content>
+					</DropdownMenu.SubMenu>
 				</DropdownMenu.Content>
 			</DropdownMenu>
 		</Example.Item>

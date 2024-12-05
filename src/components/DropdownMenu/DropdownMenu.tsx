@@ -73,7 +73,7 @@ const DropdownMenuSection = (props: T.SectionProps) => {
 	);
 };
 
-const DropdownMenuItem = (props: Omit<MenuItemProps, "roundedCorners">) => {
+const DropdownMenuItem = (props: T.ItemProps) => {
 	const { onClick } = props;
 	const { handleClose } = useFlyoutContext();
 
@@ -111,7 +111,7 @@ const DropdownMenuSubMenu = (props: T.SubMenuProps) => {
 	);
 };
 
-const DropdownMenuSubTriggerItem = (props: Omit<MenuItemProps, "endSlot" | "roundedCorners">) => {
+const DropdownMenuSubTriggerItem = (props: T.SubTriggerProps) => {
 	const { children, attributes, ...menuItemProps } = props;
 	const subMenuInstance = React.useContext(DropdownMenuSubContext);
 	const [rtl] = useRTL();
@@ -137,12 +137,15 @@ const DropdownMenuSubTriggerItem = (props: Omit<MenuItemProps, "endSlot" | "roun
 };
 
 const DropdownMenuSubTrigger = (props: T.SubTriggerProps) => {
-	const { children } = props;
+	const { attributes, ...menuItemProps } = props;
 
 	return (
 		<DropdownMenu.Trigger>
-			{(attributes) => (
-				<DropdownMenuSubTriggerItem attributes={attributes}>{children}</DropdownMenuSubTriggerItem>
+			{(triggerAttributes) => (
+				<DropdownMenuSubTriggerItem
+					{...menuItemProps}
+					attributes={{ ...attributes, ...triggerAttributes }}
+				/>
 			)}
 		</DropdownMenu.Trigger>
 	);
