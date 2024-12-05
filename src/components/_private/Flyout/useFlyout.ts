@@ -1,31 +1,22 @@
 import React from "react";
 import useRTL from "hooks/useRTL";
-import { getClosestFlyoutTarget, getShadowRoot } from "utilities/dom";
+import { findClosestRenderContainer, getShadowRoot, getRectFromCoordinates } from "utilities/dom";
 import calculatePosition from "./utilities/calculatePosition";
 import getPositionFallbacks from "./utilities/getPositionFallbacks";
+import isFullyVisible from "./utilities/isFullyVisible";
+import type * as G from "types/global";
 import type * as T from "./Flyout.types";
 
 /**
  * Typings
  */
-type ElementRef = React.RefObject<HTMLElement>;
-type PassedFlyoutOptions = {
-	width?: T.Width;
-	position?: T.Position;
-	defaultActive?: boolean;
-	fallbackPositions?: T.Position[];
-	container?: HTMLElement | null;
-};
-
 type Flyout = (
 	args: T.Options & {
-		triggerEl: HTMLElement;
 		flyoutEl: HTMLElement;
-		triggerBounds?: DOMRect | null;
-		contentGap?: number;
-		contentShift?: number;
+		triggerEl: HTMLElement | null;
+		triggerBounds?: DOMRect | G.Coordinates;
 	}
-) => T.FlyoutData;
+) => T.FlyoutData | undefined;
 
 type FlyoutRenderAction = { type: "render"; payload?: never };
 type FlyoutPositionAction = {
@@ -42,39 +33,23 @@ type FlyoutAction =
 	| FlyoutHideAction
 	| FlyoutRemoveAction;
 
-type UseFlyout = (
-	args: PassedFlyoutOptions & {
-		triggerElRef: ElementRef;
-		flyoutElRef: ElementRef;
-		triggerBoundsRef: React.RefObject<DOMRect | undefined>;
-		contentGap?: number;
-		contentShift?: number;
-	}
-) => Pick<T.State, "styles" | "position" | "status"> & {
+type UseFlyout = (args: {
+	width?: T.Width;
+	position?: T.Position;
+	defaultActive?: boolean;
+	fallbackPositions?: T.Position[];
+	contentGap?: number;
+	contentShift?: number;
+	container?: HTMLElement | null;
+	triggerElRef: React.RefObject<HTMLElement>;
+	flyoutElRef: React.RefObject<HTMLElement>;
+	triggerBounds?: DOMRect | G.Coordinates;
+}) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
 	remove: () => void;
 	show: () => void;
-};
-
-/**
- * Check if element visually fits on the screen
- */
-const fullyVisible = (args: ReturnType<typeof calculatePosition>) => {
-	const { styles, scopeOffset } = args;
-	const htmlEl = document.documentElement;
-	const pageLeft = htmlEl.scrollLeft;
-	const pageRight = pageLeft + htmlEl.clientWidth;
-	const pageTop = htmlEl.scrollTop;
-	const pageBottom = pageTop + htmlEl.clientHeight;
-
-	return (
-		styles.left + scopeOffset.left >= pageLeft &&
-		styles.left + styles.width + scopeOffset.left <= pageRight &&
-		styles.top + scopeOffset.top >= pageTop &&
-		styles.top + styles.height + scopeOffset.top <= pageBottom
-	);
 };
 
 /**
@@ -93,7 +68,6 @@ const resetStyles: T.Styles = {
 	left: 0,
 	top: 0,
 	position: "fixed",
-	// opacity: 0,
 	visibility: "hidden",
 	animation: "none",
 	transition: "none",
@@ -114,9 +88,13 @@ const flyout: Flyout = (args) => {
 	} = args;
 	const { position, fallbackPositions, width, container, lastUsedFallback, onFallback } = options;
 	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
-	const triggerBounds = passedTriggerBounds || triggerEl.getBoundingClientRect();
 	const baseUnit = getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1");
 	const unitModifier = baseUnit ? parseInt(baseUnit) : 0;
+	const triggerBounds = passedTriggerBounds || triggerEl?.getBoundingClientRect();
+
+	if (!triggerBounds) return;
+
+	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
 
 	// Reset all styles applied on the previous hook execution
 	targetClone.style.cssText = "";
@@ -128,19 +106,20 @@ const flyout: Flyout = (args) => {
 
 	if (width) {
 		if (width === "trigger") {
-			targetClone.style.width = `${triggerBounds.width}px`;
+			targetClone.style.width = `${resolvedTriggerBounds.width}px`;
 		} else if (width !== "full") {
 			targetClone.style.width = width;
 		}
 	}
 
-	const shadowRoot = getShadowRoot(triggerEl);
+	const shadowRoot = triggerEl && getShadowRoot(triggerEl);
 
 	// Insert inside shadow root if possible to make sure styles are applied correctly
 	(shadowRoot || document.body).appendChild(targetClone);
 
 	const flyoutBounds = targetClone.getBoundingClientRect();
-	const containerParent = container || getClosestFlyoutTarget(triggerEl);
+	const containerParent =
+		container || (triggerEl ? findClosestRenderContainer({ el: triggerEl }) : document.body);
 	const containerBounds = containerParent.getBoundingClientRect();
 
 	const scopeOffset = {
@@ -154,14 +133,14 @@ const flyout: Flyout = (args) => {
 	testOrder.some((currentPosition) => {
 		const tested = calculatePosition({
 			...options,
-			triggerBounds,
+			triggerBounds: resolvedTriggerBounds,
 			flyoutBounds,
 			scopeOffset,
 			position: currentPosition,
 			contentGap: contentGap * unitModifier,
 			contentShift: contentShift * unitModifier,
 		});
-		const visible = fullyVisible(tested);
+		const visible = isFullyVisible(tested);
 		const validPosition = visible || fallbackPositions?.length === 0;
 
 		// Saving first try in case non of the options work
@@ -174,7 +153,7 @@ const flyout: Flyout = (args) => {
 	});
 
 	if (!calculated) {
-		throw new Error(`Reshaped: Can't calculate styles for the ${position} position`);
+		throw new Error(`[Reshaped] Can't calculate styles for the ${position} position`);
 	}
 
 	targetClone.parentNode?.removeChild(targetClone);
@@ -208,13 +187,12 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 			return { ...state, status: "idle", styles: resetStyles };
 
 		default:
-			throw new Error("Invalid reducer type");
+			throw new Error("[Reshaped] Invalid flyout reducer type");
 	}
 };
 
 const useFlyout: UseFlyout = (args) => {
-	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, contentShift, ...options } =
-		args;
+	const { triggerElRef, flyoutElRef, triggerBounds, contentGap, contentShift, ...options } = args;
 	const { position: defaultPosition = "bottom", fallbackPositions, width, container } = options;
 	const lastUsedFallbackRef = React.useRef(defaultPosition);
 	// Memo the array internally to avoid new arrays triggering useCallback
@@ -252,12 +230,12 @@ const useFlyout: UseFlyout = (args) => {
 
 	const updatePosition = React.useCallback(
 		(options?: { sync?: boolean }) => {
-			if (!triggerElRef.current || !flyoutElRef.current) return;
+			if (!flyoutElRef.current) return;
 
 			const nextFlyoutData = flyout({
 				triggerEl: triggerElRef.current,
 				flyoutEl: flyoutElRef.current,
-				triggerBounds: triggerBoundsRef.current,
+				triggerBounds,
 				width,
 				position: defaultPosition,
 				fallbackPositions: cachedFallbackPositions,
@@ -269,8 +247,9 @@ const useFlyout: UseFlyout = (args) => {
 				contentShift,
 			});
 
-			if (nextFlyoutData)
+			if (nextFlyoutData) {
 				dispatch({ type: "position", payload: { ...nextFlyoutData, sync: options?.sync } });
+			}
 		},
 		[
 			container,
@@ -279,7 +258,7 @@ const useFlyout: UseFlyout = (args) => {
 			isRTL,
 			flyoutElRef,
 			triggerElRef,
-			triggerBoundsRef,
+			triggerBounds,
 			width,
 			contentGap,
 			contentShift,

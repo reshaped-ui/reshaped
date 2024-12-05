@@ -1,5 +1,8 @@
 3.3.0
 
+- [New component]: ContextMenu
+- Popover, DropdownMenu, Tooltip: originCoordinates
+
 - CSS: More readable responsive styles, fallback variables moved inside mq
 - CSS mixins: Reduce the amount of classes used, rely on variables selectors
 
@@ -19,6 +22,8 @@
 - Grid: Added attributes.style support for grid and grid.item
 - Resizable: bordered variant
 - TextField: support for clickable affixes
+- Flyout: overflow auto detection for rendering inside a container
+- keyboardMode: prevent focus ring from appearing when using mouse but closing with esc
 
 Documentation
 

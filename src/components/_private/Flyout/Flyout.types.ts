@@ -5,6 +5,7 @@ import type { TrapMode } from "utilities/a11y";
 /**
  * Utility
  */
+
 type XSide = "start" | "end";
 type YSide = "top" | "bottom";
 export type Side = XSide | YSide;
@@ -88,6 +89,7 @@ type BaseProps = {
 	disableHideAnimation?: boolean;
 	disableContentHover?: boolean;
 	disableCloseOnOutsideClick?: boolean;
+	originCoordinates?: G.Coordinates;
 	children?: React.ReactNode;
 	onOpen?: () => void;
 	onClose?: () => void;
@@ -124,7 +126,7 @@ export type ContextProps = {
 	id: string;
 	flyout: UseFlyoutData;
 	width?: Width;
-	triggerElRef: React.RefObject<HTMLButtonElement>;
+	triggerElRef?: React.RefObject<HTMLButtonElement>;
 	flyoutElRef: React.RefObject<HTMLDivElement>;
 	handleClose: (options?: { closeParents?: boolean }) => void;
 	handleOpen: () => void;

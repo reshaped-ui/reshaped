@@ -4,7 +4,7 @@ import React from "react";
 import { classNames } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
-import { getClosestFlyoutTarget } from "utilities/dom";
+import { findClosestRenderContainer } from "utilities/dom";
 import cooldown from "./utilities/cooldown";
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
 import type * as T from "./Flyout.types";
@@ -55,6 +55,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 
 	const contentClassNames = classNames(
 		s.content,
+		triggerType === "hover" && s["--hover"],
 		status === "visible" && s["--visible"],
 		// animating only when we're opening the first flyout or closing the last flyout within the same cooldown
 		// content is rendered only once flyout is already warm so checking for timer instead
@@ -112,9 +113,12 @@ const FlyoutContent = (props: T.ContentProps) => {
 		</ContentProvider>
 	);
 
-	const closestScrollable = getClosestFlyoutTarget(triggerElRef.current);
+	const closestScrollable =
+		triggerElRef && findClosestRenderContainer({ el: triggerElRef.current });
 	const scrollableRef =
-		closestScrollable === document.body ? undefined : { current: closestScrollable };
+		closestScrollable === document.body || !closestScrollable
+			? undefined
+			: { current: closestScrollable };
 
 	return <Portal targetRef={containerRef || scrollableRef}>{content}</Portal>;
 };

@@ -46,6 +46,9 @@ export type { CheckboxGroupProps } from "components/CheckboxGroup";
 export { default as Container } from "components/Container";
 export type { ContainerProps } from "components/Container";
 
+export { default as ContextMenu } from "components/ContextMenu";
+export type { ContextMenuProps } from "components/ContextMenu";
+
 export { default as Dismissible } from "components/Dismissible";
 export type { DismissibleProps } from "components/Dismissible";
 

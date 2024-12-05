@@ -18,6 +18,8 @@ export type Viewport = "s" | "m" | "l" | "xl";
 export type ResponsiveOnly<T> = { [key in Viewport]?: T };
 export type Responsive<T> = T | ResponsiveOnly<T>;
 
+export type Coordinates = { x: number; y: number };
+
 /**
  * Form handlers
  */
