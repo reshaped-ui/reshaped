@@ -3,6 +3,7 @@ import { Example } from "utilities/storybook";
 import ScrollArea from "components/ScrollArea";
 import View from "components/View";
 import Button from "components/Button";
+import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Utilities/ScrollArea",
@@ -127,3 +128,37 @@ export const ref = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const edgeCases = () => {
+	const toggle = useToggle(true);
+
+	return (
+		<Example>
+			<Example.Item title="dynamic content update">
+				<View gap={4}>
+					<Button onClick={toggle.toggle}>Toggle</Button>
+					<ScrollArea height="100px" scrollbarDisplay="visible" ref={ref}>
+						<View
+							backgroundColor="neutral-faded"
+							padding={4}
+							width={toggle.active ? "120%" : "90%"}
+						>
+							{toggle.active ? (
+								<>
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+									Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+									unknown printer took a galley of type and scrambled it to make a type specimen
+									book. It has survived not only five centuries, but also the leap into electronic
+									typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+									the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+									with desktop publishing software like Aldus PageMaker including versions of Lorem
+									Ipsum.
+								</>
+							) : null}
+						</View>
+					</ScrollArea>
+				</View>
+			</Example.Item>
+		</Example>
+	);
+};

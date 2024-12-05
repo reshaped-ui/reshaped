@@ -24,6 +24,7 @@
 - TextField: support for clickable affixes
 - Flyout: overflow auto detection for rendering inside a container
 - keyboardMode: prevent focus ring from appearing when using mouse but closing with esc
+- ScrollArea: Fixed dynamic content resizing
 
 Documentation
 
