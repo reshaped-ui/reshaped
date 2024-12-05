@@ -4,7 +4,7 @@ import { getShadowRoot } from "utilities/dom";
 const pseudoFocusAttribute = "data-rs-focus";
 
 export const focusableSelector =
-	'a,button,input:not([type="hidden"]),textarea,select,details,[tabindex]:not([tabindex="-1"])';
+	'a,button,input:not([type="hidden"]),textarea,select,details,[tabindex],[contenteditable]';
 
 export const getActiveElement = (originEl?: HTMLElement | null) => {
 	const shadowRoot = originEl ? getShadowRoot(originEl) : null;
@@ -37,6 +37,8 @@ export const getFocusableElements = (
 	const filteredElements = focusableElements.filter((el) => {
 		if (el.hasAttribute("disabled")) return false;
 		if (el.clientHeight === 0) return false;
+		// Using getAttribute here since browser sets el.tabIndex to -1 by default
+		if (el.getAttribute("tabindex") === "-1") return false;
 
 		if (el.type === "radio") {
 			let sameNameRadioEls: HTMLInputElement[];

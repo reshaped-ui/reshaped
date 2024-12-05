@@ -25,6 +25,8 @@
 - Flyout: overflow auto detection for rendering inside a container
 - keyboardMode: prevent focus ring from appearing when using mouse but closing with esc
 - ScrollArea: Fixed dynamic content resizing
+- trapFocus: Added contenteditable support + elements with custom keydown events
+- trapFocus: Added correct handling for focusable html tags with tabIndex=-1
 
 Documentation
 

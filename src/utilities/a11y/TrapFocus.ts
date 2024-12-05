@@ -40,6 +40,7 @@ class TrapFocus {
 	 * Handle keyboard navigation while focus is trapped
 	 */
 	handleKeyDown = (event: KeyboardEvent) => {
+		// if (event.defaultPrevented) return;
 		if (TrapFocus.chain.tailId !== this.chainId) return;
 
 		const { mode, onNavigateOutside, pseudoFocus, includeTrigger } = this.options;
