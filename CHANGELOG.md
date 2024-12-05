@@ -27,6 +27,7 @@
 - ScrollArea: Fixed dynamic content resizing
 - trapFocus: Added contenteditable support + elements with custom keydown events
 - trapFocus: Added correct handling for focusable html tags with tabIndex=-1
+- Flyout: Updated outside click handlers to only trigger when it's active
 
 Documentation
 

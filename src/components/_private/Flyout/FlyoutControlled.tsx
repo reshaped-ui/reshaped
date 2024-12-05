@@ -81,7 +81,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const transitionStartedRef = React.useRef(false);
 	// Lock blur event while pressing anywhere inside the flyout content
 	const lockedBlurEffects = React.useRef(false);
-	// Focus shouldn't retrun back to the trigger when user intentionally clicks outside the flyout
+	// Focus shouldn't return back to the trigger when user intentionally clicks outside the flyout
 	const shouldReturnFocusRef = React.useRef(true);
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
@@ -358,12 +358,17 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	useHotkeys({ Escape: () => handleClose() }, [handleClose]);
 
-	useOnClickOutside([flyoutElRef, triggerElRef], () => {
-		if (disableCloseOnOutsideClick) return;
-		// Clicking outside changes focused element so we don't need to set it back ourselves
-		shouldReturnFocusRef.current = false;
-		handleClose();
-	});
+	useOnClickOutside(
+		[flyoutElRef, triggerElRef],
+		() => {
+			if (!isRendered) return;
+			if (disableCloseOnOutsideClick) return;
+			// Clicking outside changes focused element so we don't need to set it back ourselves
+			shouldReturnFocusRef.current = false;
+			handleClose();
+		},
+		[isRendered]
+	);
 
 	return (
 		<Provider

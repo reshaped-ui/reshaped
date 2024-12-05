@@ -3,7 +3,8 @@ import React from "react";
 
 const useOnClickOutside = (
 	refs: React.RefObject<HTMLElement>[],
-	handler: (event: Event) => void
+	handler: (event: Event) => void,
+	deps: any[]
 ) => {
 	const handlerRef = useHandlerRef(handler);
 
@@ -17,6 +18,8 @@ const useOnClickOutside = (
 
 			let isInside = false;
 			const clickedEl = event.composedPath()[0];
+
+			console.log(refs);
 
 			refs.forEach((elRef) => {
 				if (!elRef.current) return;
@@ -38,7 +41,7 @@ const useOnClickOutside = (
 			document.removeEventListener("touchstart", handleClick);
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [handlerRef, ...refs]);
+	}, [handlerRef, ...refs, ...deps]);
 };
 
 export default useOnClickOutside;
