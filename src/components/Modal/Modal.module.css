@@ -2,7 +2,7 @@
 	--rs-modal-container-width: 100vw;
 	--rs-modal-position: fixed;
 
-	transition: var(--rs-easing-accelerate) var(--rs-duration-medium);
+	transition: var(--rs-easing-accelerate) var(--rs-duration-fast);
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);

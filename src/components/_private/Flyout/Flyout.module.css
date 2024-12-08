@@ -16,7 +16,7 @@
 .inner {
 	pointer-events: all;
 	opacity: 0;
-	transform: scale(0.86) translateY(0);
+	transform: scale(0.9) translateY(0);
 	transform-origin: var(--rs-flyout-origin-x) var(--rs-flyout-origin-y);
 
 	/* Using 1ms to still trigger transitionEnd event */
@@ -85,11 +85,12 @@
 }
 
 .content.--animated .inner {
-	transition-duration: var(--rs-duration-fast);
+	transition-duration: var(--rs-duration-rapid);
 	transition-property: opacity, transform;
 }
 
 .content.--animated.--visible .inner {
+	transition-duration: var(--rs-duration-fast);
 	transition-timing-function: var(--rs-easing-decelerate);
 }
 

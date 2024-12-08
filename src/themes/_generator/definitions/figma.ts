@@ -152,6 +152,7 @@ const theme: ThemeDefinition = {
 	},
 
 	duration: {
+		rapid: { ms: 100 },
 		fast: { ms: 200 },
 		medium: { ms: 300 },
 		slow: { ms: 400 },

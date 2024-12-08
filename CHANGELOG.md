@@ -30,6 +30,21 @@
 - Flyout: Updated outside click handlers to only trigger when it's active
 - DropdownMenu.SubTrigger: Added all DropdownMenu.Item props support
 
+Theming related:
+
+- Added --rs-duration-rapid
+- Updated border neutral faded
+- Updated bg neutral faded to be semi transparent
+- Updated border faded colors to be more prominent
+- Badge: Updated outline border colors
+- Button: Aligned ghost buttons padding with other variants
+- Button: Added neutral faded color
+- Button: Updated outline buttons to use faded border colors
+- Tabs: elevated pills
+- Table: Switched highlighted cells to use neutral-faded bg
+- Flyout: Speed up the open duration and use rapid for the close duration
+- Modal: Speed up open/close transitions
+
 Documentation
 
 - Included next/font integration for next15

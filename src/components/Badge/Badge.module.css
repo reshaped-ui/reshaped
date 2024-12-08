@@ -1,6 +1,6 @@
 .root {
 	padding: var(--rs-badge-p-v) var(--rs-badge-p-h);
-	border: 1px solid var(--rs-color-background-neutral);
+	border: 1px solid transparent;
 	min-width: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
 	display: inline-flex;
 	align-items: center;
@@ -32,13 +32,12 @@
 .root.--variant {
 	&-faded {
 		background: var(--rs-color-background-neutral-faded);
-		border-color: var(--rs-color-background-neutral-faded);
 		color: var(--rs-color-foreground-neutral-faded);
 	}
 
 	&-outline {
 		background: none;
-		border-color: var(--rs-color-border-neutral-faded);
+		border-color: var(--rs-color-border-neutral);
 	}
 }
 
@@ -56,7 +55,7 @@
 
 		&-outline {
 			background: none;
-			border-color: var(--rs-color-border-positive);
+			border-color: var(--rs-color-border-positive-faded);
 			color: var(--rs-color-foreground-positive);
 		}
 	}
@@ -76,7 +75,7 @@
 
 		&-outline {
 			background: none;
-			border-color: var(--rs-color-border-critical);
+			border-color: var(--rs-color-border-critical-faded);
 			color: var(--rs-color-foreground-critical);
 		}
 	}
@@ -96,7 +95,7 @@
 
 		&-outline {
 			background: none;
-			border-color: var(--rs-color-border-warning);
+			border-color: var(--rs-color-border-warning-faded);
 			color: var(--rs-color-foreground-warning);
 		}
 	}
@@ -116,7 +115,7 @@
 
 		&-outline {
 			background: none;
-			border-color: var(--rs-color-border-primary);
+			border-color: var(--rs-color-border-primary-faded);
 			color: var(--rs-color-foreground-primary);
 		}
 	}

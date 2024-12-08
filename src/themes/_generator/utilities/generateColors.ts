@@ -67,9 +67,13 @@ const generateColorValues = (args: { key: string; hex: string; hexDark?: string 
 	const bgHexDark = okhslToHex(okhslDark);
 
 	const bgFadedHsl =
-		key === "neutral" ? { ...okhsl, l: 0.96 } : { ...okhsl, l: 0.94 + 0.045 * hueLightness };
+		key === "neutral"
+			? { ...okhsl, l: 0, alpha: 0.04 }
+			: { ...okhsl, l: 0.94 + 0.045 * hueLightness };
 	const bgFadedHslDark =
-		key === "neutral" ? { ...okhslDark, l: 0.15 } : { ...okhslDark, l: 0.16, s: okhslDark.s / 2 };
+		key === "neutral"
+			? { ...okhslDark, l: 1, alpha: 0.06 }
+			: { ...okhslDark, l: 0.16, s: okhslDark.s / 2 };
 	const bgFadedHex = okhslToHex(bgFadedHsl);
 	const bgFadedHexDark = okhslToHex(bgFadedHslDark);
 
@@ -99,23 +103,23 @@ const generateColorValues = (args: { key: string; hex: string; hexDark?: string 
 			? okhslToHex({
 					...bgFadedHsl,
 					l: 0,
-					alpha: 0.06,
+					alpha: 0.08,
 				})
 			: okhslToHex({
 					...bgFadedHsl,
 					s: 0.6 - 0.2 * hueLightness,
-					l: bgFadedHsl.l - 0.05,
+					l: bgFadedHsl.l - 0.07,
 				});
 	const bdFadedHexDark =
 		key === "neutral"
 			? okhslToHex({
 					...bgFadedHslDark,
 					l: 1,
-					alpha: 0.09,
+					alpha: 0.08,
 				})
 			: okhslToHex({
 					...bgFadedHslDark,
-					l: bgFadedHslDark.l + 0.08,
+					l: bgFadedHslDark.l + 0.1,
 				});
 
 	const output = {

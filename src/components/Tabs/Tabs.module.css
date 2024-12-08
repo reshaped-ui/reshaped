@@ -315,6 +315,10 @@
 	}
 }
 
+.--variant-pills-elevated .buttonContent {
+	padding: calc(var(--rs-tabs-item-p-v) - var(--rs-unit-x1) / 2) var(--rs-tabs-item-p-h);
+}
+
 .--variant-pills .list,
 .--variant-pills-elevated .list {
 	--rs-tabs-gap: var(--rs-unit-x1);

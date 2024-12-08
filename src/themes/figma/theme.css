@@ -97,6 +97,7 @@
 --rs-color-on-brand: #FFFFFF;
 --rs-color-rgb-white: 255, 255, 255;
 --rs-color-rgb-black: 0, 0, 0;
+--rs-duration-rapid: 100ms;
 --rs-duration-fast: 200ms;
 --rs-duration-medium: 300ms;
 --rs-duration-slow: 400ms;
@@ -124,7 +125,7 @@
 --rs-color-background-warning: #facc15;
 --rs-color-background-warning-faded: #fffae9;
 --rs-color-border-warning: #cfa90f;
---rs-color-border-warning-faded: #faedbb;
+--rs-color-border-warning-faded: #ece2c4;
 --rs-color-foreground-warning: #7b6305;
 --rs-color-background-positive: #14AE5C;
 --rs-color-background-positive-faded: #DAECDF;
@@ -160,7 +161,6 @@
 --rs-color-rgb-background-positive-faded: 218, 236, 223;
 --rs-color-on-background-neutral: #000000;
 --rs-color-rgb-background-neutral: 223, 226, 234;
---rs-color-rgb-background-neutral-faded: 245, 245, 245;
 --rs-color-rgb-background-disabled: 228, 228, 228;
 --rs-color-rgb-background-disabled-faded: 245, 245, 245;
 --rs-color-rgb-background-elevation-base: 255, 255, 255;
@@ -188,7 +188,7 @@
 --rs-color-background-warning: #f1c512;
 --rs-color-background-warning-faded: #2c271f;
 --rs-color-border-warning: #b4920a;
---rs-color-border-warning-faded: #3d3628;
+--rs-color-border-warning-faded: #453c1e;
 --rs-color-foreground-warning: #b4920c;
 --rs-color-background-positive: #198F51;
 --rs-color-background-positive-faded: #3d5749;
@@ -224,7 +224,6 @@
 --rs-color-rgb-background-positive-faded: 61, 87, 73;
 --rs-color-on-background-neutral: #FFFFFF;
 --rs-color-rgb-background-neutral: 68, 68, 68;
---rs-color-rgb-background-neutral-faded: 56, 56, 56;
 --rs-color-rgb-background-disabled: 71, 71, 71;
 --rs-color-rgb-background-disabled-faded: 58, 58, 58;
 --rs-color-rgb-background-elevation-base: 44, 44, 44;

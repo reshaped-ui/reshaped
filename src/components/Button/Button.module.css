@@ -215,7 +215,7 @@
 .root.--variant-faded {
 	--rs-button-border-width: 0px;
 
-	@each $color in primary, critical, positive {
+	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
 			background-color: var(--rs-color-background-$(color)-faded);
 			color: var(--rs-color-foreground-$(color));
@@ -280,7 +280,7 @@
 	@each $color in primary, critical, positive {
 		&.--color-$(color) {
 			color: var(--rs-color-foreground-$(color));
-			border-color: var(--rs-color-border-$(color));
+			border-color: var(--rs-color-border-$(color)-faded);
 
 			&::before {
 				background-color: var(--rs-color-foreground-$(color));
@@ -295,10 +295,19 @@
 
 	&.--color-inherit {
 		color: inherit;
-		border-color: currentcolor;
 
 		&::before {
 			background-color: currentcolor;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			border: 1px solid currentcolor;
+			border-radius: var(--rs-button-radius);
+			opacity: 0.32;
 		}
 
 		&:hover:not(.--loading)::before,
@@ -310,7 +319,6 @@
 
 .root.--variant-ghost {
 	--rs-button-border-width: 0px;
-	--rs-p-h: max(calc(var(--rs-button-p-h) - var(--rs-unit-x1)), var(--rs-unit-x2));
 
 	&.--color-neutral {
 		color: var(--rs-color-foreground-neutral);

@@ -1,6 +1,5 @@
 .root {
-	padding: calc(var(--rs-unit-x1) - 1px) calc(var(--rs-unit-x2) - 1px);
-	border: 1px solid var(--rs-color-background-neutral-faded);
+	padding: var(--rs-unit-x1) var(--rs-unit-x2);
 	min-width: calc(var(--rs-line-height-caption-1) + var(--rs-unit-x1) * 2);
 	display: inline-flex;
 	justify-content: center;
@@ -14,6 +13,5 @@
 
 .--active {
 	background: var(--rs-color-background-neutral);
-	border-color: var(--rs-color-background-neutral);
 	color: var(--rs-color-on-background-neutral);
 }

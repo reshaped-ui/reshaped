@@ -1,3 +1,4 @@
+import React from "react";
 import { useRef } from "react";
 import { Example } from "utilities/storybook";
 import ScrollArea from "components/ScrollArea";
@@ -144,7 +145,7 @@ export const edgeCases = () => {
 							width={toggle.active ? "120%" : "90%"}
 						>
 							{toggle.active ? (
-								<>
+								<React.Fragment>
 									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 									Ipsum has been the industry's standard dummy text ever since the 1500s, when an
 									unknown printer took a galley of type and scrambled it to make a type specimen
@@ -153,7 +154,7 @@ export const edgeCases = () => {
 									the release of Letraset sheets containing Lorem Ipsum passages, and more recently
 									with desktop publishing software like Aldus PageMaker including versions of Lorem
 									Ipsum.
-								</>
+								</React.Fragment>
 							) : null}
 						</View>
 					</ScrollArea>
