@@ -137,16 +137,17 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 		}, []);
 
 		const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-			const scrollableEl = scrollableRef.current;
-			if (!scrollableEl) return;
+			const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
+				e.currentTarget;
 
-			const next = {
-				x: e.currentTarget.scrollLeft / scrollableEl.scrollWidth,
-				y: e.currentTarget.scrollTop / scrollableEl.scrollHeight,
-			};
-
-			setScrollPosition(next);
-			onScroll?.(next);
+			setScrollPosition({
+				x: scrollLeft / scrollWidth,
+				y: scrollTop / scrollHeight,
+			});
+			onScroll?.({
+				x: scrollWidth === clientWidth ? 0 : scrollLeft / (scrollWidth - clientWidth),
+				y: scrollHeight === clientHeight ? 0 : scrollTop / (scrollHeight - clientHeight),
+			});
 		};
 
 		const handleThumbYMove: T.BarProps["onThumbMove"] = (args) => {

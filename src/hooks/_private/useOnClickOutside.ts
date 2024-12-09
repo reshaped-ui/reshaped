@@ -19,8 +19,6 @@ const useOnClickOutside = (
 			let isInside = false;
 			const clickedEl = event.composedPath()[0];
 
-			console.log(refs);
-
 			refs.forEach((elRef) => {
 				if (!elRef.current) return;
 				if (elRef.current === clickedEl || elRef.current.contains(clickedEl as HTMLElement)) {

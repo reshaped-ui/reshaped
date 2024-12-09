@@ -117,11 +117,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	 * Called from the internal actions
 	 */
 	const handleOpen = React.useCallback(() => {
-		const canOpen = !lockedRef.current && !isRendered;
+		if (lockedRef.current) return;
+		if (isRendered && triggerType !== "hover") return;
 
-		if (!canOpen) return;
 		onOpenRef.current?.();
-	}, [isRendered, onOpenRef]);
+	}, [onOpenRef, isRendered, triggerType]);
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {

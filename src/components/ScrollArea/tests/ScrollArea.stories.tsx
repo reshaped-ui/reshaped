@@ -42,7 +42,7 @@ const Demo = () => {
 export const direction = () => (
 	<Example>
 		<Example.Item title="vertical">
-			<ScrollArea height="100px" scrollbarDisplay="visible">
+			<ScrollArea height="100px" scrollbarDisplay="visible" onScroll={console.log}>
 				<View backgroundColor="neutral-faded" padding={4}>
 					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
 					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
@@ -55,7 +55,7 @@ export const direction = () => (
 			</ScrollArea>
 		</Example.Item>
 		<Example.Item title="horizontal">
-			<ScrollArea height="120px" scrollbarDisplay="visible">
+			<ScrollArea height="120px" scrollbarDisplay="visible" onScroll={console.log}>
 				<View backgroundColor="neutral-faded" padding={4} width="500px">
 					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
 					been the industry's standard dummy text ever since the 1500s
