@@ -1,6 +1,8 @@
-@responsive [style*="--rs-ratio-s:"] {
+@responsive [style*="--rs-ratio-"] {
 	@variable --rs-ratio 0;
+}
 
+[style*="--rs-ratio-"] {
 	&:empty {
 		aspect-ratio: var(--rs-ratio);
 	}

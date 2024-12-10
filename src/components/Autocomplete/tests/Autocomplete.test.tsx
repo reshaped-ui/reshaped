@@ -19,6 +19,9 @@ describe("Components/Autocomplete", () => {
 	test("works with keyboard", async () => {
 		const handleChange = jest.fn();
 		const handleInput = jest.fn();
+		const handleItemSelect = jest.fn();
+		const data = { foo: 2 };
+
 		render(
 			<Reshaped>
 				<Autocomplete
@@ -27,8 +30,11 @@ describe("Components/Autocomplete", () => {
 					attributes={{ "data-testid": fixtures.id }}
 					onChange={handleChange}
 					onInput={handleInput}
+					onItemSelect={handleItemSelect}
 				>
-					<Autocomplete.Item value={fixtures.firstValue}>{fixtures.itemContent}</Autocomplete.Item>
+					<Autocomplete.Item value={fixtures.firstValue} data={data}>
+						{fixtures.itemContent}
+					</Autocomplete.Item>
 					<Autocomplete.Item value={fixtures.secondValue}>{fixtures.itemContent}</Autocomplete.Item>
 				</Autocomplete>
 			</Reshaped>
@@ -68,6 +74,9 @@ describe("Components/Autocomplete", () => {
 			expect.objectContaining({ name: fixtures.name, value: fixtures.firstValue })
 		);
 		expect(handleInput).toHaveBeenCalledTimes(1);
+
+		expect(handleItemSelect).toHaveBeenCalledTimes(1);
+		expect(handleItemSelect).toHaveBeenCalledWith({ value: fixtures.firstValue, data });
 	});
 
 	test("works with mouse", async () => {

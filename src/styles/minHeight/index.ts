@@ -12,7 +12,7 @@ const getMinHeightStyles: T.DynamicStyleUtility<string | number> = (value) => {
 		{ excludeValueFromClassName: true }
 	);
 
-	return { classNames, variables };
+	return { classNames: [s.root, classNames], variables };
 };
 
 export default getMinHeightStyles;

@@ -16,7 +16,7 @@ const getBleedStyles: T.DynamicStyleUtility<number> = (value) => {
 	);
 	const variables = responsiveVariables("--rs-bleed", value);
 
-	return { classNames, variables };
+	return { classNames: [s.root, classNames], variables };
 };
 
 export default getBleedStyles;

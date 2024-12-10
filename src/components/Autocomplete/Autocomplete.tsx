@@ -74,7 +74,7 @@ const Autocomplete = (props: T.Props) => {
 
 	const handleItemClick: T.Context["onItemClick"] = (args) => {
 		onChange?.({ value: args.value, name });
-		onItemSelect?.({ value: args.value });
+		onItemSelect?.(args);
 
 		// Prevent dropdown from re-opening when clicked on item with mouse
 		// and focus moves to the item and back to the input
@@ -130,12 +130,12 @@ const Autocomplete = (props: T.Props) => {
 };
 
 const AutocompleteItem = (props: T.ItemProps) => {
-	const { value, onClick, ...menuItemProps } = props;
+	const { value, data, onClick, ...menuItemProps } = props;
 	const { onItemClick } = React.useContext(AutocompleteContext);
 
 	const handleClick: MenuItemProps["onClick"] = (e) => {
 		onClick?.(e);
-		onItemClick({ value });
+		onItemClick({ value, data });
 	};
 
 	return (

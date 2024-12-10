@@ -30,6 +30,7 @@
 - Flyout: Updated outside click handlers to only trigger when it's active
 - DropdownMenu.SubTrigger: Added all DropdownMenu.Item props support
 - ScrollArea: handled onScroll x, y values
+- Autocomplete: Added data support
 
 Theming related:
 

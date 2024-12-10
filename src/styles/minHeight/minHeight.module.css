@@ -1,4 +1,4 @@
-@responsive [style*="--rs-min-h-s:"] {
+@responsive .root[style*="--rs-min-h-"] {
 	@variable --rs-min-h none;
 }
 

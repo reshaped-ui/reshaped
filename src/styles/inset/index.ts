@@ -8,7 +8,7 @@ const getInsetStyles: (
 	side?: "top" | "bottom" | "start" | "end"
 ) => T.VariableStyleUtilityResult = (value, side) => {
 	if (value === undefined) return null;
-	const suffix = side ? `-${side}` : "";
+	const suffix = side ? `-${side}` : "-all";
 	const variableName = `--rs-inset${suffix}` as const;
 	const variables = responsiveVariables(variableName, value);
 

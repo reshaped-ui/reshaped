@@ -1,4 +1,4 @@
-@responsive [style*="--rs-align-s:"] {
+@responsive [style*="--rs-align-"] {
 	@variable --rs-align;
 
 	align-items: var(--rs-align) !important;
