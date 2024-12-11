@@ -14,15 +14,22 @@ const ContextMenu = (props: T.Props) => {
 	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
 
 	React.useEffect(() => {
+		const containerEl = containerRef.current;
+		if (!containerEl) return;
+
 		const handleContextMenu = (e: MouseEvent) => {
 			e.preventDefault();
 			setCoordinates({ x: e.clientX, y: e.clientY });
 			lockScroll();
 		};
 
-		window.addEventListener("contextmenu", handleContextMenu);
-		return () => window.removeEventListener("contextmenu", handleContextMenu);
+		containerEl.addEventListener("contextmenu", handleContextMenu);
+		return () => containerEl.removeEventListener("contextmenu", handleContextMenu);
 	}, [lockScroll]);
+
+	React.useEffect(() => {
+		return () => unlockScroll();
+	}, [unlockScroll]);
 
 	return (
 		<div className={s.root} ref={containerRef}>

@@ -131,7 +131,7 @@ const theme: ThemeDefinition = {
 		borderPositiveFaded: { hex: "#d2eddb", hexDark: "#264431" },
 		foregroundPositive: { hex: "#0d7544", hexDark: "#18ab66" },
 		backgroundNeutral: { hex: "#dfe2ea", hexDark: "#494f60" },
-		backgroundNeutralFaded: { hex: "#0000000A", hexDark: "#ffffff0f" },
+		backgroundNeutralFaded: { hex: "#f3f3f5", hexDark: "#222835" },
 		borderNeutral: { hex: "#0000001f", hexDark: "#ffffff24" },
 		borderNeutralFaded: { hex: "#00000014", hexDark: "#ffffff14" },
 		foregroundNeutral: { hex: "#14181f", hexDark: "#eff1f5" },

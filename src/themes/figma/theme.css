@@ -161,6 +161,7 @@
 --rs-color-rgb-background-positive-faded: 218, 236, 223;
 --rs-color-on-background-neutral: #000000;
 --rs-color-rgb-background-neutral: 223, 226, 234;
+--rs-color-rgb-background-neutral-faded: 245, 245, 245;
 --rs-color-rgb-background-disabled: 228, 228, 228;
 --rs-color-rgb-background-disabled-faded: 245, 245, 245;
 --rs-color-rgb-background-elevation-base: 255, 255, 255;
@@ -224,6 +225,7 @@
 --rs-color-rgb-background-positive-faded: 61, 87, 73;
 --rs-color-on-background-neutral: #FFFFFF;
 --rs-color-rgb-background-neutral: 68, 68, 68;
+--rs-color-rgb-background-neutral-faded: 56, 56, 56;
 --rs-color-rgb-background-disabled: 71, 71, 71;
 --rs-color-rgb-background-disabled-faded: 58, 58, 58;
 --rs-color-rgb-background-elevation-base: 44, 44, 44;

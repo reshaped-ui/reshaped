@@ -25,7 +25,7 @@ const generateBackgroundColors = (
 		const needsDynamicForeground =
 			generateOnColorsFor.includes(tokenName) && !definition.color?.[generatedForegroundName];
 		const needsRGB =
-			(tokenName.startsWith("background") && !tokenName.startsWith("backgroundNeutralFaded")) ||
+			tokenName.startsWith("background") ||
 			tokenName.endsWith("black") ||
 			tokenName.endsWith("white");
 

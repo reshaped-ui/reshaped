@@ -130,7 +130,7 @@
 --rs-color-border-positive-faded: #d2eddb;
 --rs-color-foreground-positive: #0f7f4a;
 --rs-color-background-neutral: #e3e4e8;
---rs-color-background-neutral-faded: #0000000a;
+--rs-color-background-neutral-faded: #f3f3f5;
 --rs-color-border-neutral: #0000001f;
 --rs-color-border-neutral-faded: #00000014;
 --rs-color-foreground-neutral: #2c2e34;
@@ -154,6 +154,7 @@
 --rs-color-rgb-background-positive-faded: 235, 255, 241;
 --rs-color-on-background-neutral: #000000;
 --rs-color-rgb-background-neutral: 227, 228, 232;
+--rs-color-rgb-background-neutral-faded: 243, 243, 245;
 --rs-color-rgb-background-disabled: 237, 238, 239;
 --rs-color-rgb-background-disabled-faded: 246, 246, 247;
 --rs-color-rgb-background-elevation-base: 255, 255, 255;
@@ -185,7 +186,7 @@
 --rs-color-border-positive-faded: #264431;
 --rs-color-foreground-positive: #57b17c;
 --rs-color-background-neutral: #393a42;
---rs-color-background-neutral-faded: #ffffff0f;
+--rs-color-background-neutral-faded: #212227;
 --rs-color-border-neutral: #ffffff24;
 --rs-color-border-neutral-faded: #ffffff14;
 --rs-color-foreground-neutral: #f3f3f5;
@@ -209,6 +210,7 @@
 --rs-color-rgb-background-positive-faded: 21, 42, 29;
 --rs-color-on-background-neutral: #ffffff;
 --rs-color-rgb-background-neutral: 57, 58, 66;
+--rs-color-rgb-background-neutral-faded: 33, 34, 39;
 --rs-color-rgb-background-disabled: 36, 37, 39;
 --rs-color-rgb-background-disabled-faded: 27, 27, 29;
 --rs-color-rgb-background-elevation-base: 22, 22, 23;
