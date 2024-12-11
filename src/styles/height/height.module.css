@@ -1,14 +1,32 @@
-/* --rs-h is used in other components */
-@responsive .root[style*="--rs-h-"] {
-	@variable --rs-h auto;
+/* 
+--rs-h is used in other components
+we're resolving --rs-h separately to make sure it uses the resolved value in other components calc (e.g. Avatar)
+*/
+.root {
+	--rs-h-s: auto;
+	--rs-h-m: var(--rs-h-s);
+	--rs-h-l: var(--rs-h-m);
+	--rs-h-xl: var(--rs-h-l);
+
+	height: var(--rs-h) !important;
 }
 
-@responsive .--type {
-	@value literal {
-		height: var(--rs-h) !important;
-	}
+.--type-literal {
+	--rs-h: var(--rs-h-s);
+}
 
-	@value unit {
-		height: calc(var(--rs-h) * var(--rs-unit-x1)) !important;
+.--type-unit {
+	--rs-h: calc(var(--rs-h-s) * var(--rs-unit-x1));
+}
+
+@each $viewport in m, l, xl {
+	@media (--rs-viewport-$viewport) {
+		.--type-literal--$viewport {
+			--rs-h: var(--rs-h-$viewport);
+		}
+
+		.--type-unit--$viewport {
+			--rs-h: calc(var(--rs-h-$viewport) * var(--rs-unit-x1));
+		}
 	}
 }
