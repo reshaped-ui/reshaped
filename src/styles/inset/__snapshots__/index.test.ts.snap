@@ -3,7 +3,7 @@
 exports[`Styles/Inset handles 0 value 1`] = `
 {
   "variables": {
-    "--rs-inset-s": 0,
+    "--rs-inset-all-s": 0,
   },
 }
 `;
@@ -11,7 +11,7 @@ exports[`Styles/Inset handles 0 value 1`] = `
 exports[`Styles/Inset handles positive value 1`] = `
 {
   "variables": {
-    "--rs-inset-s": 4,
+    "--rs-inset-all-s": 4,
   },
 }
 `;
@@ -19,9 +19,9 @@ exports[`Styles/Inset handles positive value 1`] = `
 exports[`Styles/Inset handles responsive value 1`] = `
 {
   "variables": {
-    "--rs-inset-l": 2,
-    "--rs-inset-m": 0,
-    "--rs-inset-s": 4,
+    "--rs-inset-all-l": 2,
+    "--rs-inset-all-m": 0,
+    "--rs-inset-all-s": 4,
   },
 }
 `;

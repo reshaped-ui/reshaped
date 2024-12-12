@@ -3,7 +3,10 @@
 exports[`Styles/MinWidth handles % value 1`] = `
 {
   "classNames": [
-    "--type-literal",
+    "root",
+    [
+      "--type-literal",
+    ],
   ],
   "variables": {
     "--rs-min-w-s": "50%",
@@ -14,7 +17,10 @@ exports[`Styles/MinWidth handles % value 1`] = `
 exports[`Styles/MinWidth handles px value 1`] = `
 {
   "classNames": [
-    "--type-literal",
+    "root",
+    [
+      "--type-literal",
+    ],
   ],
   "variables": {
     "--rs-min-w-s": "50px",
@@ -25,8 +31,11 @@ exports[`Styles/MinWidth handles px value 1`] = `
 exports[`Styles/MinWidth handles responsive value 1`] = `
 {
   "classNames": [
-    "--type-literal",
-    "--type-literal--l",
+    "root",
+    [
+      "--type-literal",
+      "--type-literal--l",
+    ],
   ],
   "variables": {
     "--rs-min-w-l": "50%",
@@ -40,7 +49,10 @@ exports[`Styles/MinWidth handles undefined value 1`] = `null`;
 exports[`Styles/MinWidth handles unit value 1`] = `
 {
   "classNames": [
-    "--type-unit",
+    "root",
+    [
+      "--type-unit",
+    ],
   ],
   "variables": {
     "--rs-min-w-s": 5,

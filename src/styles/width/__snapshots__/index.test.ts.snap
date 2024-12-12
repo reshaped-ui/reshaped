@@ -3,7 +3,10 @@
 exports[`Styles/Width handles % value 1`] = `
 {
   "classNames": [
-    "--type-literal",
+    "root",
+    [
+      "--type-literal",
+    ],
   ],
   "variables": {
     "--rs-w-s": "50%",
@@ -14,7 +17,10 @@ exports[`Styles/Width handles % value 1`] = `
 exports[`Styles/Width handles px value 1`] = `
 {
   "classNames": [
-    "--type-literal",
+    "root",
+    [
+      "--type-literal",
+    ],
   ],
   "variables": {
     "--rs-w-s": "50px",
@@ -25,8 +31,11 @@ exports[`Styles/Width handles px value 1`] = `
 exports[`Styles/Width handles responsive value 1`] = `
 {
   "classNames": [
-    "--type-literal",
-    "--type-literal--l",
+    "root",
+    [
+      "--type-literal",
+      "--type-literal--l",
+    ],
   ],
   "variables": {
     "--rs-w-l": "50%",
@@ -40,7 +49,10 @@ exports[`Styles/Width handles undefined value 1`] = `null`;
 exports[`Styles/Width handles unit value 1`] = `
 {
   "classNames": [
-    "--type-unit",
+    "root",
+    [
+      "--type-unit",
+    ],
   ],
   "variables": {
     "--rs-w-s": 5,
