@@ -18,7 +18,7 @@
 		"baseUrl": "./src",
 		"rootDir": "./src",
 		"paths": { "*": ["*"] },
-		"types": ["node", "jest", "@testing-library/jest-dom"]
+		"types": ["node", "jest", "@testing-library/jest-dom", "vitest"]
 	},
 	"exclude": ["node_modules", "dist", "tools", "./commitlint.config.ts"]
 }

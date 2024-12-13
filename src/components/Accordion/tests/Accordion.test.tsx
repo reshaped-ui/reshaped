@@ -9,7 +9,7 @@ const fixtures = {
 	id: "test-id",
 };
 
-describe("Utilities/Actionable", () => {
+describe("Utilities/Accordion", () => {
 	test("handles click events", async () => {
 		const handleToggle = jest.fn();
 		render(

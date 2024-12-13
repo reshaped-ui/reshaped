@@ -87,7 +87,8 @@
 		"lint": "yarn lint:js && yarn lint:css",
 		"lint:js": "eslint './src/**/*.{ts,tsx}' --fix",
 		"lint:css": "stylelint 'src/**/*.css'",
-		"commit": "git-cz"
+		"commit": "git-cz",
+		"test:browser": "vitest --workspace=vitest.workspace.ts"
 	},
 	"browserslist": [
 		"defaults and not IE 11"
@@ -117,6 +118,7 @@
 		"@typescript-eslint/eslint-plugin": "7.18.0",
 		"@typescript-eslint/parser": "7.18.0",
 		"@vitejs/plugin-react": "4.3.4",
+		"@vitest/browser": "2.1.8",
 		"chromatic": "11.19.0",
 		"cz-conventional-changelog": "3.3.0",
 		"eslint": "8.57.1",
@@ -132,6 +134,7 @@
 		"jest-environment-jsdom": "29.7.0",
 		"jest-matchmedia-mock": "1.1.0",
 		"lefthook": "1.8.4",
+		"playwright": "1.49.1",
 		"postcss": "8.4.49",
 		"postcss-cli": "11.0.0",
 		"postcss-each": "1.1.0",
@@ -151,7 +154,9 @@
 		"typescript": "5.7.2",
 		"typescript-eslint": "8.16.0",
 		"vite": "6.0.1",
-		"vite-tsconfig-paths": "5.1.3"
+		"vite-tsconfig-paths": "5.1.3",
+		"vitest": "2.1.8",
+		"vitest-browser-react": "0.0.4"
 	},
 	"peerDependencies": {
 		"postcss": "^8",
