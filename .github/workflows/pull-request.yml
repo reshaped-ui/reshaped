@@ -1,4 +1,4 @@
-name: "pull-request"
+name: "pr"
 on:
   pull_request:
     branches:
@@ -49,7 +49,7 @@ jobs:
       - run: yarn build
         id: build
 
-  test_browser:
+  test-browser:
     runs-on: ubuntu-latest
     needs: setup
     steps:
@@ -63,7 +63,7 @@ jobs:
       - run: yarn playwright install
       - run: yarn test:browser
 
-  test_unit:
+  test-unit:
     runs-on: ubuntu-latest
     needs: setup
     steps:
@@ -76,7 +76,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - run: yarn test:unit
 
-  size_limit:
+  size-limit:
     runs-on: ubuntu-latest
     needs: build
     steps:
