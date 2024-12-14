@@ -21,11 +21,8 @@ export default defineConfig({
 			logLevel: "silent",
 			external: ["react", "react-dom"],
 			output: {
-				assetFileNames: (assetInfo) => {
-					if (assetInfo.name === "bundle.umd.js") return "bundle.js";
-					if (assetInfo.name === "style.css") return "bundle.css";
-					return assetInfo.name;
-				},
+				entryFileNames: "bundle.js",
+				chunkFileNames: "[name].js",
 			},
 		},
 	},

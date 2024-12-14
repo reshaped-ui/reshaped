@@ -76,7 +76,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - run: yarn test:unit
 
-  size-limit:
+  test-size:
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -90,6 +90,6 @@ jobs:
       - uses: andresz1/size-limit-action@v1.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          build_script: build
+          build_script: build:bundle:vite
           skip_step: install
           package_manager: yarn
