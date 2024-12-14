@@ -4,8 +4,8 @@ import React from "react";
 import type * as T from "./Flyout.types";
 
 const FlyoutContext = React.createContext({} as T.ContextProps);
-const FlyoutTriggerContext = React.createContext({} as T.TriggerContextProps);
-const FlyoutContentContext = React.createContext(false);
+const FlyoutTriggerContext = React.createContext<T.TriggerContextProps | null>(null);
+const FlyoutContentContext = React.createContext<T.ContentContextProps | null>(null);
 
 const useFlyoutContext = () => React.useContext(FlyoutContext);
 const useFlyoutTriggerContext = () => React.useContext(FlyoutTriggerContext);

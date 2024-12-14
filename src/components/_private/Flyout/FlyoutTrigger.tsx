@@ -58,7 +58,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 	}
 
 	return (
-		<TriggerProvider value={{ triggerElRef }}>
+		<TriggerProvider value={{ elRef: triggerElRef }}>
 			{children(childrenAttributes as T.TriggerAttributes)}
 		</TriggerProvider>
 	);

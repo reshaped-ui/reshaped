@@ -53,8 +53,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const onCloseRef = useHandlerRef(onClose);
 	const resolvedActive = disabled === true ? false : passedActive;
 	const parentFlyoutContext = useFlyoutContext();
-	const parentFlyoutTriggerContext = useFlyoutTriggerContext();
-	const parentFlyoutContentContext = useFlyoutContentContext();
+	const { elRef: parentTriggerRef } = useFlyoutTriggerContext() || {};
+	const { elRef: parentContentRef } = useFlyoutContentContext() || {};
 
 	const isSubmenu =
 		parentFlyoutContext.trapFocusMode === "action-menu" ||
@@ -66,10 +66,15 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	/**
 	 * Reuse the parent trigger ref in case we render nested triggers
 	 * For example, when we apply tooltip and popover to the same button
+	 *
+	 * Resolving the same inside another Flyout.Content should reset the inheritance
+	 * For example, if you have a tooltip -> popover inside another popover.content, tooltip shouldn't use its parent context anymore
 	 */
-	const triggerElRef =
-		(!parentFlyoutContentContext && parentFlyoutTriggerContext?.triggerElRef) ||
-		internalTriggerElRef;
+	const isParentTriggerInsideFlyout =
+		!!parentTriggerRef?.current && parentContentRef?.current?.contains(parentTriggerRef.current);
+	const tryParentTrigger = !parentContentRef || isParentTriggerInsideFlyout;
+
+	const triggerElRef = (tryParentTrigger && parentTriggerRef) || internalTriggerElRef;
 	const triggerBoundsRef = React.useRef<DOMRect>();
 	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
