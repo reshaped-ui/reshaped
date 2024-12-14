@@ -18,7 +18,14 @@
 		"baseUrl": "./src",
 		"rootDir": "./src",
 		"paths": { "*": ["*"] },
-		"types": ["node", "jest", "@testing-library/jest-dom", "vitest"]
+		"types": ["node", "jest", "@testing-library/jest-dom"]
 	},
-	"exclude": ["node_modules", "dist", "tools", "./commitlint.config.ts"]
+	"exclude": [
+		"node_modules",
+		"dist",
+		"tools",
+		"./commitlint.config.ts",
+		"./vitest.config.ts",
+		"./vitest.workspace.ts"
+	]
 }
