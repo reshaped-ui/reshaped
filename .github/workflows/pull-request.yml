@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: yarn
+      - run: yarn --check-files
       - run: yarn lint
       - run: yarn build
       - run: yarn test:browser
