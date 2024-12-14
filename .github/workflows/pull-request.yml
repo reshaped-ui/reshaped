@@ -19,7 +19,6 @@ jobs:
             .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - run: yarn --check-files
-      - run: yarn playwright install
 
   lint:
     runs-on: ubuntu-latest
@@ -61,6 +60,7 @@ jobs:
             node_modules
             .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - run: yarn playwright install
       - run: yarn test:browser
 
   test_unit:
