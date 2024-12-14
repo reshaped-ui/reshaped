@@ -1,0 +1,90 @@
+{
+	"numTotalTestSuites": 1,
+	"numPassedTestSuites": 1,
+	"numFailedTestSuites": 0,
+	"numPendingTestSuites": 0,
+	"numTotalTests": 5,
+	"numPassedTests": 5,
+	"numFailedTests": 0,
+	"numPendingTests": 0,
+	"numTodoTests": 0,
+	"snapshot": {
+		"added": 0,
+		"failure": false,
+		"filesAdded": 0,
+		"filesRemoved": 0,
+		"filesRemovedList": [],
+		"filesUnmatched": 0,
+		"filesUpdated": 0,
+		"matched": 0,
+		"total": 0,
+		"unchecked": 0,
+		"uncheckedKeysByFile": [],
+		"unmatched": 0,
+		"updated": 0,
+		"didUpdate": false
+	},
+	"startTime": 1734181418017,
+	"success": true,
+	"testResults": [
+		{
+			"assertionResults": [
+				{
+					"ancestorTitles": [],
+					"fullName": "onToggle, a11y",
+					"status": "passed",
+					"title": "onToggle, a11y",
+					"duration": 97.30000007152557,
+					"failureMessages": [],
+					"location": { "line": 14, "column": 1 },
+					"meta": {}
+				},
+				{
+					"ancestorTitles": [],
+					"fullName": "active, controlled",
+					"status": "passed",
+					"title": "active, controlled",
+					"duration": 21.5,
+					"failureMessages": [],
+					"location": { "line": 48, "column": 1 },
+					"meta": {}
+				},
+				{
+					"ancestorTitles": [],
+					"fullName": "defaultActive, uncontrolled",
+					"status": "passed",
+					"title": "defaultActive, uncontrolled",
+					"duration": 25.90000009536743,
+					"failureMessages": [],
+					"location": { "line": 70, "column": 1 },
+					"meta": {}
+				},
+				{
+					"ancestorTitles": [],
+					"fullName": "trigger render props",
+					"status": "passed",
+					"title": "trigger render props",
+					"duration": 25.40000009536743,
+					"failureMessages": [],
+					"location": { "line": 89, "column": 1 },
+					"meta": {}
+				},
+				{
+					"ancestorTitles": [],
+					"fullName": "className, attributes",
+					"status": "passed",
+					"title": "className, attributes",
+					"duration": 2.5999999046325684,
+					"failureMessages": [],
+					"location": { "line": 119, "column": 1 },
+					"meta": {}
+				}
+			],
+			"startTime": 1734181419546,
+			"endTime": 1734181419718.6,
+			"status": "passed",
+			"message": "",
+			"name": "/Users/dbelyaev/Development/personal/reshaped/src/components/Accordion/tests/Accordion.browser.test.tsx"
+		}
+	]
+}

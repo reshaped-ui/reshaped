@@ -83,12 +83,12 @@
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
 		"test:vrt": "yarn chromatic",
 		"test:unit": "jest --config tools/jest/jest.config.ts",
+		"test:browser": "vitest run --workspace=vitest.workspace.ts",
 		"test:size": "size-limit",
 		"lint": "yarn lint:js && yarn lint:css",
 		"lint:js": "eslint './src/**/*.{ts,tsx}' --fix",
 		"lint:css": "stylelint 'src/**/*.css'",
-		"commit": "git-cz",
-		"test:browser": "vitest --workspace=vitest.workspace.ts"
+		"commit": "git-cz"
 	},
 	"browserslist": [
 		"defaults and not IE 11"
@@ -119,6 +119,8 @@
 		"@typescript-eslint/parser": "7.18.0",
 		"@vitejs/plugin-react": "4.3.4",
 		"@vitest/browser": "2.1.8",
+		"@vitest/coverage-istanbul": "2.1.8",
+		"@vitest/coverage-v8": "2.1.8",
 		"chromatic": "11.19.0",
 		"cz-conventional-changelog": "3.3.0",
 		"eslint": "8.57.1",

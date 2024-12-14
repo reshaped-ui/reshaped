@@ -11,13 +11,14 @@ export default defineWorkspace([
 	// },
 	{
 		extends: "vite.config.mjs",
+
 		test: {
 			include: ["./src/**/*.browser.test.{ts,tsx}"],
 			name: "browser",
 			browser: {
 				enabled: true,
-				name: "chromium",
 				headless: true,
+				name: "chromium",
 				provider: "playwright",
 				// https://playwright.dev
 				providerOptions: {},
