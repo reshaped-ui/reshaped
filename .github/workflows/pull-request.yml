@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: yarn --check-files
+      - run: yarn playwright install
       - run: yarn lint
       - run: yarn build
       - run: yarn test:browser
