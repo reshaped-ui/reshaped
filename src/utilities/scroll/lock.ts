@@ -1,7 +1,6 @@
 import { isIOS } from "utilities/platform";
 import lockSafariScroll from "./lockSafari";
 import lockStandardScroll from "./lockStandard";
-import { findClosestRenderContainer } from "utilities/dom";
 
 let lockedCount = 0;
 let reset = () => {};
@@ -11,14 +10,10 @@ export const lockScroll = (args: { containerEl?: HTMLElement | null; cb?: () => 
 
 	if (lockedCount > 1) return;
 
-	const customLockTargetEl = args.containerEl
-		? findClosestRenderContainer({ el: args.containerEl, overflowOnly: true })
-		: undefined;
-
 	if (isIOS()) {
-		reset = lockSafariScroll(customLockTargetEl);
+		reset = lockSafariScroll(args.containerEl);
 	} else {
-		reset = lockStandardScroll(customLockTargetEl);
+		reset = lockStandardScroll(args.containerEl);
 	}
 
 	args.cb?.();
