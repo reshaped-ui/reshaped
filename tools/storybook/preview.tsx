@@ -108,7 +108,7 @@ const reshapedDecorator = (Story: React.ComponentType) => (
 			defaultColorMode="dark"
 			toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
 		>
-			<View padding={4} paddingBottom={10}>
+			<View paddingBottom={10}>
 				<Story />
 			</View>
 			<ThemeSwitch />
@@ -118,6 +118,18 @@ const reshapedDecorator = (Story: React.ComponentType) => (
 
 const preview: Preview = {
 	decorators: [reshapedDecorator],
+	parameters: {
+		options: {
+			storySort: (a, b) => {
+				const aLevel = a.title.split("/").length;
+				const bLevel = b.title.split("/").length;
+
+				if (a.componentPath === b.componentPath && aLevel !== bLevel) {
+					return aLevel > bLevel ? 1 : -1;
+				}
+			},
+		},
+	},
 };
 
 export const parameters = {

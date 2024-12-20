@@ -363,7 +363,8 @@
 }
 
 .root.--elevated {
-	[data-rs-keyboard] &:not(:focus) {
+	[data-rs-keyboard] &:not(:focus),
+	&:not(:focus) {
 		box-shadow: var(--rs-shadow-raised);
 	}
 
