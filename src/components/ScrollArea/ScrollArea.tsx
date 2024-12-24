@@ -111,7 +111,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 		const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
 		const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
 		const scrollableRef = React.useRef<HTMLDivElement>(null);
-		const resizeObserverRef = React.useRef<ResizeObserver>();
+		const contentRef = React.useRef<HTMLDivElement>(null);
 		const heightStyles = getHeightStyles(height);
 		const maxHeightStyles = getMaxHeightStyles(maxHeight);
 		const rootClassNames = classNames(
@@ -183,21 +183,21 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 		}, [updateScroll]);
 
 		useIsomorphicLayoutEffect(() => {
-			const scrollableEl = scrollableRef.current;
-			if (!scrollableEl) return;
+			const contentEl = contentRef.current;
+			if (!contentEl) return;
 
-			resizeObserverRef.current = new ResizeObserver(updateScroll);
-			resizeObserverRef.current.observe(scrollableEl);
+			const observer = new ResizeObserver(updateScroll);
 
-			return () => {
-				resizeObserverRef.current?.disconnect();
-			};
+			observer.observe(contentEl);
+			return () => observer.disconnect();
 		}, [updateScroll]);
 
 		return (
 			<div {...attributes} className={rootClassNames} style={rootVariables}>
 				<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll}>
-					{children}
+					<div className={s.content} ref={contentRef}>
+						{children}
+					</div>
 				</div>
 
 				{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
