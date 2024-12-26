@@ -39,7 +39,7 @@ const Alert = (props: T.Props) => {
 		}
 
 		return (
-			<View gap={1}>
+			<View gap={1} grow>
 				{title && (
 					<Text variant="body-3" weight="medium">
 						{title}

@@ -20,8 +20,10 @@ const config: StorybookConfig = {
 	staticDirs: ["./public"],
 	addons: [
 		"@storybook/addon-storysource",
-		"@storybook/addon-controls",
+		"@storybook/addon-actions",
+		"@storybook/experimental-addon-test",
 		"@storybook/addon-a11y",
+		"@storybook/addon-controls",
 		"./plugins/preset.js",
 		{
 			name: "@storybook/addon-docs",
@@ -31,9 +33,24 @@ const config: StorybookConfig = {
 				},
 			},
 		},
-		"@storybook/addon-actions",
-		"@storybook/experimental-addon-test",
 	],
+	async viteFinal(config: UserConfig) {
+		return mergeConfig(config, {
+			plugins: [tsconfigPaths()],
+			css: {
+				postcss: path.resolve(__dirname),
+			},
+			build: {
+				rollupOptions: {
+					logLevel: "silent",
+					onwarn: (warning: { code: string }, warn: (warning: { code: string }) => void) => {
+						if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
+						warn(warning);
+					},
+				},
+			},
+		});
+	},
 };
 
 export default config;

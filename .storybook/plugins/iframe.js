@@ -14,11 +14,17 @@ addons.register(ADDON_ID, (api) => {
 
 			return React.createElement(
 				AddonPanel,
-				props,
+				{ style: { height: "100%" }, ...props },
 				data?.url &&
 					React.createElement("iframe", {
 						src: data.url,
-						style: { width: "100%", height: "100%", outline: "none", border: "none" },
+						style: {
+							width: "100%",
+							height: "100%",
+							outline: "none",
+							border: "none",
+							position: "absolute",
+						},
 					})
 			);
 		},

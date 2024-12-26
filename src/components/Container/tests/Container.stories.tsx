@@ -11,42 +11,65 @@ export default {
 	},
 };
 
-export const padding = () => (
-	<Example>
-		<Example.Item title="padding: default">
-			<Container>
-				<Placeholder />
-			</Container>
-		</Example.Item>
-		<Example.Item title="padding: 0">
-			<Container padding={0}>
-				<Placeholder />
-			</Container>
-		</Example.Item>
-	</Example>
-);
+export const padding = {
+	name: "padding",
+	render: () => (
+		<Example>
+			<Example.Item title="padding: default">
+				<Container>
+					<Placeholder />
+				</Container>
+			</Example.Item>
+			<Example.Item title="padding: 0">
+				<Container padding={0}>
+					<Placeholder />
+				</Container>
+			</Example.Item>
+		</Example>
+	),
+};
 
-export const width = () => (
-	<Example>
-		<Example.Item title="width: 1024px">
-			<Container width="1024px">
-				<Placeholder />
-			</Container>
-		</Example.Item>
-		<Example.Item title={["responsive width", "[s]: 400px", "[m+]: 600px"]}>
-			<Container width={{ s: "400px", m: "600px" }}>
-				<Placeholder />
-			</Container>
-		</Example.Item>
-	</Example>
-);
+export const size = {
+	name: "width, height, maxHeight",
+	render: () => (
+		<Example>
+			<Example.Item title="width: 200px, height: 200px">
+				<Container width="200px" height="200px">
+					<Placeholder h="100%" />
+				</Container>
+			</Example.Item>
+			<Example.Item title="width: 200px, height: 200px, maxHeight: 100px">
+				<Container width="200px" height="200px" maxHeight="100px">
+					<Placeholder h="100%" />
+				</Container>
+			</Example.Item>
+			<Example.Item title="width, height: [s] 100px, [m+] 200px">
+				<Container width={{ s: "100px", m: "200px" }} height={{ s: "100px", m: "200px" }}>
+					<Placeholder h="100%" />
+				</Container>
+			</Example.Item>
+			<Example.Item title="width, height: [s] 100px, [m+] 200px, maxHeight: [s] 50px, [m+]: 100px">
+				<Container
+					width={{ s: "100px", m: "200px" }}
+					height={{ s: "100px", m: "200px" }}
+					maxHeight={{ s: "50px", m: "100px" }}
+				>
+					<Placeholder h="100%" />
+				</Container>
+			</Example.Item>
+		</Example>
+	),
+};
 
-export const layout = () => (
-	<Example>
-		<Example.Item title="center">
-			<Container align="center" justify="center" height="500px">
-				<Placeholder />
-			</Container>
-		</Example.Item>
-	</Example>
-);
+export const flex = {
+	name: "align, justify",
+	render: () => (
+		<Example>
+			<Example.Item title="align: center, justify: center">
+				<Container align="center" justify="center" height="200px">
+					<Placeholder />
+				</Container>
+			</Example.Item>
+		</Example>
+	),
+};

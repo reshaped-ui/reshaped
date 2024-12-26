@@ -32,7 +32,7 @@ const Dismissible = (props: T.Props) => {
 					<Button
 						size="small"
 						{...(variant === "media" ? { color: "media", variant: "faded" } : { variant: "ghost" })}
-						onClick={onClose}
+						onClick={() => onClose?.()}
 						attributes={{ "aria-label": onClose ? closeAriaLabel : undefined }}
 						icon={IconClose}
 					/>

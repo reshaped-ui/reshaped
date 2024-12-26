@@ -10,6 +10,7 @@ import * as keys from "constants/keys";
 import useHotkeys from "hooks/useHotkeys";
 import useHandlerRef from "hooks/useHandlerRef";
 import * as T from "./Autocomplete.types";
+import { onClick } from "components/Actionable/tests/Actionable.test.stories";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
@@ -109,9 +110,14 @@ const Autocomplete = (props: T.Props) => {
 							onChange={handleChange}
 							focused={hasChildren && active}
 							// Ignoring the type check since TS can't infer the correct html element type
-							attributes={{ ...textFieldProps.attributes, ref } as any}
+							attributes={{
+								...textFieldProps.attributes,
+								ref: ref as any,
+								onClick: attributes.onFocus,
+							}}
 							inputAttributes={{
 								...textFieldProps.inputAttributes,
+								...attributes,
 								onFocus: (e) => {
 									attributes.onFocus?.();
 									textFieldProps.onFocus?.(e);

@@ -16,13 +16,6 @@ export default {
 	},
 };
 
-const fixtures = {
-	triggerText: "Trigger",
-	contentText: "Content",
-	className: "test-classname",
-	id: "test-id",
-};
-
 export const handleToggle: StoryObj<{ handleToggle: typeof fn }> = {
 	name: "handleToggle",
 	args: {
@@ -30,8 +23,8 @@ export const handleToggle: StoryObj<{ handleToggle: typeof fn }> = {
 	},
 	render: (args) => (
 		<Accordion onToggle={args.handleToggle}>
-			<Accordion.Trigger>{fixtures.triggerText}</Accordion.Trigger>
-			<Accordion.Content>{fixtures.contentText}</Accordion.Content>
+			<Accordion.Trigger>Trigger</Accordion.Trigger>
+			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
 	play: async ({ canvasElement, args }) => {
@@ -71,8 +64,8 @@ export const controlled: StoryObj<{ handleToggle: typeof fn }> = {
 	},
 	render: (args) => (
 		<Accordion onToggle={args.handleToggle} active>
-			<Accordion.Trigger>{fixtures.triggerText}</Accordion.Trigger>
-			<Accordion.Content>{fixtures.contentText}</Accordion.Content>
+			<Accordion.Trigger>Trigger</Accordion.Trigger>
+			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
 	play: async ({ canvasElement, args }) => {
@@ -100,8 +93,8 @@ export const uncontrolled: StoryObj<{ handleToggle: typeof fn }> = {
 	},
 	render: (args) => (
 		<Accordion onToggle={args.handleToggle} defaultActive>
-			<Accordion.Trigger>{fixtures.triggerText}</Accordion.Trigger>
-			<Accordion.Content>{fixtures.contentText}</Accordion.Content>
+			<Accordion.Trigger>Trigger</Accordion.Trigger>
+			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
 	play: async ({ canvasElement, args }) => {
@@ -131,10 +124,10 @@ export const renderProps: StoryObj<{ handleToggle: typeof fn }> = {
 		<Accordion onToggle={args.handleToggle}>
 			<Accordion.Trigger>
 				{(attributes, { active }) => (
-					<Button attributes={{ ...attributes, "data-active": active }}>Toggle</Button>
+					<Button attributes={{ ...attributes, "data-active": active }}>Trigger</Button>
 				)}
 			</Accordion.Trigger>
-			<Accordion.Content>{fixtures.contentText}</Accordion.Content>
+			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
 	play: async ({ canvasElement, args }) => {
@@ -163,9 +156,9 @@ export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
 		<div data-testid="root">
-			<Accordion className={fixtures.className} attributes={{ id: fixtures.id }}>
-				<Accordion.Trigger>{fixtures.triggerText}</Accordion.Trigger>
-				<Accordion.Content>{fixtures.contentText}</Accordion.Content>
+			<Accordion className="test-classname" attributes={{ id: "test-id" }}>
+				<Accordion.Trigger>Trigger</Accordion.Trigger>
+				<Accordion.Content>Content</Accordion.Content>
 			</Accordion>
 		</div>
 	),
@@ -173,7 +166,7 @@ export const className: StoryObj = {
 		const canvas = within(canvasElement);
 		const root = canvas.getByTestId("root").firstChild;
 
-		expect(root).toHaveClass(fixtures.className);
-		expect(root).toHaveAttribute("id", fixtures.id);
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
