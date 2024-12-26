@@ -17,8 +17,6 @@
 		"src/utilities/testPresets.tsx",
 		"./src/**/tests/*.test.tsx",
 		"./src/**/tests/*.stories.tsx",
-		"./commitlint.config.ts",
-		"./vitest.config.ts",
-		"./vitest.workspace.ts"
+		"./commitlint.config.ts"
 	]
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import View from "components/View";
 import Text from "components/Text";
-import s from "./Example.module.css";
 
 type Props = {
 	title?: string | string[];
@@ -50,7 +49,7 @@ const ExampleItem = (props: Props) => {
 					))}
 				</View>
 			)}
-			<View padding={4} className={s.root}>
+			<View padding={4} backgroundColor="page">
 				{children}
 			</View>
 		</View>

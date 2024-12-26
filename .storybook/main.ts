@@ -16,7 +16,7 @@ const config: StorybookConfig = {
 			propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
 		},
 	},
-	stories: ["../../src/**/*.stories.tsx"],
+	stories: ["../src/**/*.stories.tsx"],
 	staticDirs: ["./public"],
 	addons: [
 		"@storybook/addon-storysource",
@@ -31,16 +31,9 @@ const config: StorybookConfig = {
 				},
 			},
 		},
+		"@storybook/addon-actions",
+		"@storybook/experimental-addon-test",
 	],
-
-	async viteFinal(config: UserConfig) {
-		return mergeConfig(config, {
-			plugins: [tsconfigPaths()],
-			css: {
-				postcss: path.resolve(__dirname),
-			},
-		});
-	},
 };
 
 export default config;

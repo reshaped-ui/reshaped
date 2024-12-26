@@ -15,8 +15,6 @@
 		"./src/**/*.test.tsx",
 		"./src/**/*.test.ts",
 		"./src/**/*.stories.tsx",
-		"./commitlint.config.ts",
-		"./vitest.config.ts",
-		"./vitest.workspace.ts"
+		"./commitlint.config.ts"
 	]
 }

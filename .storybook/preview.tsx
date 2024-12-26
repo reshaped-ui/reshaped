@@ -1,20 +1,20 @@
 import React from "react";
 import { Preview } from "@storybook/react";
-import Reshaped from "../../src/components/Reshaped";
-import Button from "../../src/components/Button";
-import View from "../../src/components/View";
-import Text from "../../src/components/Text";
-import Hidden from "../../src/components/Hidden";
-import DropdownMenu from "../../src/components/DropdownMenu";
-import Icon from "../../src/components/Icon";
-import useRTL from "../../src/hooks/useRTL";
-import IconCheckmark from "../../src/icons/Checkmark";
-import { useTheme } from "../../src/components/Theme";
-import useHotkeys from "../../src/hooks/useHotkeys";
-import "../../src/themes/reshaped/theme.css";
-import "../../src/themes/slate/theme.css";
-import "../../src/themes/figma/theme.css";
-import "../../src/themes/fragments/twitter/theme.css";
+import Reshaped from "../src/components/Reshaped";
+import Button from "../src/components/Button";
+import View from "../src/components/View";
+import Text from "../src/components/Text";
+import Hidden from "../src/components/Hidden";
+import DropdownMenu from "../src/components/DropdownMenu";
+import Icon from "../src/components/Icon";
+import useRTL from "../src/hooks/useRTL";
+import IconCheckmark from "../src/icons/Checkmark";
+import { useTheme } from "../src/components/Theme";
+import useHotkeys from "../src/hooks/useHotkeys";
+import "../src/themes/reshaped/theme.css";
+import "../src/themes/slate/theme.css";
+import "../src/themes/figma/theme.css";
+import "../src/themes/fragments/twitter/theme.css";
 
 const ThemeSwitch = () => {
 	const { invertColorMode, setTheme, theme } = useTheme();
@@ -119,6 +119,9 @@ const reshapedDecorator = (Story: React.ComponentType) => (
 const preview: Preview = {
 	decorators: [reshapedDecorator],
 	parameters: {
+		actions: {
+			disable: true,
+		},
 		options: {
 			storySort: (a, b) => {
 				const aLevel = a.title.split("/").length;
