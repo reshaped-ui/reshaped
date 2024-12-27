@@ -11,10 +11,13 @@ export default {
 	},
 };
 
-export const visibility = () => (
-	<Example>
-		<Example.Item title="pronounced by screen readers">
-			<HiddenVisually>Screen-reader only</HiddenVisually>
-		</Example.Item>
-	</Example>
-);
+export const visibility = {
+	name: "visibility",
+	render: () => (
+		<Example>
+			<Example.Item title="pronounced by screen readers">
+				<HiddenVisually>Screen-reader only</HiddenVisually>
+			</Example.Item>
+		</Example>
+	),
+};

@@ -34,6 +34,7 @@ const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
 	 * It still resolves the attributes correctly based on the tag
 	 */
 	const TagName: any = props.as || (largestVariant && tagMap[largestVariant]) || "div";
+
 	const rootClassName = classNames(
 		s.root,
 		color && s[`--color-${color}`],

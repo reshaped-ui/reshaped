@@ -97,6 +97,7 @@ const Overlay = (props: T.Props) => {
 		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !isTransparent;
 
 		if (!shouldClose || disableCloseOnClick) return;
+
 		close({ reason: "overlay-click" });
 	};
 
