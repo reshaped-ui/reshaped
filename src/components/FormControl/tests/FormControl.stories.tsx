@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react";
 import { within, expect } from "@storybook/test";
 import { Example } from "utilities/storybook";
-import FormControl, { useFormControl } from "components/FormControl";
+import FormControl from "components/FormControl";
 import TextField from "components/TextField";
 
 export default {

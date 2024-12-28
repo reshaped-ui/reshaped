@@ -12,7 +12,7 @@ export default {
 	},
 };
 
-export const as: StoryObj = {
+export const children: StoryObj = {
 	name: "children",
 	render: () => <HiddenVisually>Content</HiddenVisually>,
 	play: ({ canvasElement }) => {

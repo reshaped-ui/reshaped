@@ -341,7 +341,7 @@ export const edgeCaseDom = () => {
 									<Text>Section 1</Text>
 
 									<View gap={1} direction="row">
-										{[...Array(4)].map((i) => (
+										{[...Array(4)].map((_, i) => (
 											<View grow height="100px" backgroundColor="neutral-faded" key={i} />
 										))}
 									</View>
@@ -351,8 +351,8 @@ export const edgeCaseDom = () => {
 									<Text>Section 2</Text>
 
 									<View gap={1} direction="row">
-										{[...Array(4)].map((i) => (
-											<View grow height="100px" backgroundColor="neutral-faded" />
+										{[...Array(4)].map((_, i) => (
+											<View key={i} grow height="100px" backgroundColor="neutral-faded" />
 										))}
 									</View>
 								</View>
@@ -361,8 +361,8 @@ export const edgeCaseDom = () => {
 									<Text>Section 3</Text>
 
 									<View gap={1} direction="row">
-										{[...Array(4)].map((i) => (
-											<View grow height="100px" backgroundColor="neutral-faded" />
+										{[...Array(4)].map((_, i) => (
+											<View key={i} grow height="100px" backgroundColor="neutral-faded" />
 										))}
 									</View>
 								</View>
@@ -371,8 +371,8 @@ export const edgeCaseDom = () => {
 									<Text>Section 4</Text>
 
 									<View gap={1} direction="row">
-										{[...Array(4)].map((i) => (
-											<View grow height="100px" backgroundColor="neutral-faded" />
+										{[...Array(4)].map((_, i) => (
+											<View key={i} grow height="100px" backgroundColor="neutral-faded" />
 										))}
 									</View>
 								</View>

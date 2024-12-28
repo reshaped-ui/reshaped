@@ -1,7 +1,6 @@
 import { StoryObj } from "@storybook/react";
 import { within, expect } from "@storybook/test";
 import Text from "components/Text";
-import { Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Utilities/Text/tests",
@@ -13,12 +12,12 @@ export default {
 	},
 };
 
-export const as: StoryObj = {
+export const asProp: StoryObj = {
 	name: "as",
-	render: () => <Text as="ul">Content</Text>,
+	render: () => <Text as="h1">Content</Text>,
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		const el = canvas.getByRole("list");
+		const el = canvas.getByRole("heading");
 
 		expect(el).toBeInTheDocument();
 	},

@@ -107,7 +107,9 @@ export const color = {
 				<Text color="primary">Primary</Text>
 			</Example.Item>
 			<Example.Item title="color: disabled">
-				<Text color="disabled">Disabled</Text>
+				<Text color="disabled" attributes={{ "aria-disabled": true }}>
+					Disabled
+				</Text>
 			</Example.Item>
 		</Example>
 	),
