@@ -2,16 +2,13 @@
 	--rs-scroll-area-thumb-size: calc(var(--rs-unit-x1) * 1.5);
 	--rs-scroll-area-thumb-offset: calc(var(--rs-unit-x1) / 2);
 
-	overflow: auto;
+	overflow: hidden;
 	height: 100%;
 	position: relative;
 }
 
 .scrollable {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	max-height: 100%;
+	height: 100%;
 	position: relative;
 	overflow: auto;
 	scrollbar-width: none;
@@ -22,6 +19,14 @@
 		width: 0;
 		height: 0;
 	}
+}
+
+/* Inline block that stretches based on the content to trigger ResizeObserver  */
+.content {
+	display: inline-block;
+	vertical-align: top;
+	min-width: 100%;
+	min-height: 100%;
 }
 
 .scrollbar {
@@ -82,7 +87,8 @@
 	opacity: 0.2;
 }
 
-.--display-hover:hover .thumb::before {
+/* Only show the thumb for the current scroll area and not for the nested ones */
+.--display-hover:hover > .scrollbar .thumb::before {
 	opacity: 0.2;
 }
 

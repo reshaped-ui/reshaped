@@ -1,7 +1,7 @@
 import path from "path";
 import type { StorybookConfig } from "@storybook/react-vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { mergeConfig, UserConfig } from "vite";
+import { build, mergeConfig, UserConfig } from "vite";
 
 const config: StorybookConfig = {
 	framework: "@storybook/react-vite",

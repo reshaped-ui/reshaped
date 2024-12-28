@@ -154,4 +154,5 @@ export type ContextProps = {
 	| "disableContentHover"
 >;
 
-export type TriggerContextProps = Pick<ContextProps, "triggerElRef">;
+export type TriggerContextProps = { elRef?: ContextProps["triggerElRef"] };
+export type ContentContextProps = { elRef?: ContextProps["flyoutElRef"] };

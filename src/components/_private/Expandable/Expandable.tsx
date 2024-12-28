@@ -3,6 +3,7 @@
 import React from "react";
 import { classNames } from "utilities/helpers";
 import { onNextFrame } from "utilities/animation";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import * as T from "./Expandable.types";
 import s from "./Expandable.module.css";
 
@@ -32,17 +33,20 @@ const Expandable = (props: T.ContentProps) => {
 		});
 	}, []);
 
-	React.useEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		const rootEl = rootRef.current;
 		if (!rootEl || !mountedRef.current) return;
 
 		if (active) {
 			rootEl.style.height = "auto";
+
 			requestAnimationFrame(() => {
 				const targetHeight = rootEl.clientHeight;
-
 				rootEl.style.height = "0";
-				setAnimatedHeight(targetHeight);
+
+				requestAnimationFrame(() => {
+					setAnimatedHeight(targetHeight);
+				});
 			});
 		} else {
 			rootEl.style.height = `${rootEl.clientHeight}px`;

@@ -132,6 +132,7 @@ export const ref = () => (
 
 export const edgeCases = () => {
 	const toggle = useToggle(true);
+	const [count, setCount] = React.useState(20);
 
 	return (
 		<Example>
@@ -159,6 +160,34 @@ export const edgeCases = () => {
 						</View>
 					</ScrollArea>
 				</View>
+			</Example.Item>
+
+			<Example.Item title="add items">
+				<View gap={4}>
+					<Button onClick={() => setCount((prev) => prev + 10)}>Add</Button>
+
+					<ScrollArea height="200px" scrollbarDisplay="visible">
+						{Array(count)
+							.fill("")
+							.map((_, index) => {
+								return <div key={index}>Item {index + 1}</div>;
+							})}
+					</ScrollArea>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="nested, hover only for the current area">
+				<ScrollArea height="100px">
+					<View padding={8}>
+						<ScrollArea height="200px">
+							{Array(20)
+								.fill("")
+								.map((_, index) => {
+									return <div key={index}>Item {index + 1}</div>;
+								})}
+						</ScrollArea>
+					</View>
+				</ScrollArea>
 			</Example.Item>
 		</Example>
 	);
