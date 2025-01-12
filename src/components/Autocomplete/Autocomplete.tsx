@@ -117,6 +117,7 @@ const Autocomplete = (props: T.Props) => {
 									textFieldProps.onFocus?.(e);
 								},
 								onInput: handleInput,
+								onClick: attributes.onFocus,
 								ref: inputRef,
 								role: "combobox",
 							}}
