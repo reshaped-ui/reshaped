@@ -24,42 +24,6 @@ export default {
 	},
 };
 
-const DemoAsync = () => {
-	const [value, setValue] = React.useState("");
-	const [loading, setLoading] = React.useState(false);
-
-	return (
-		<Autocomplete
-			name="fruit"
-			value={value}
-			placeholder="Pick your food"
-			onChange={({ value }) => {
-				setLoading(true);
-				setTimeout(() => {
-					setLoading(false);
-				}, 500);
-				setValue(value);
-			}}
-		>
-			{loading ? (
-				<View align="center" justify="center" padding={4}>
-					<Loader />
-				</View>
-			) : (
-				["Pizza", "Pie", "Ice-cream"].map((v) => {
-					if (!v.toLowerCase().includes(value.toLowerCase())) return;
-
-					return (
-						<Autocomplete.Item key={v} value={v}>
-							{v}
-						</Autocomplete.Item>
-					);
-				})
-			)}
-		</Autocomplete>
-	);
-};
-
 export const base: StoryObj = {
 	name: "base",
 	render: () => {
@@ -89,7 +53,6 @@ export const base: StoryObj = {
 			</Example>
 		);
 	},
-	play: () => {},
 };
 
 export const multiselect = {

@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import FormControl from "components/FormControl";
 import Radio from "components/Radio";
 import RadioGroup from "components/RadioGroup";
@@ -26,9 +26,7 @@ export const className: StoryObj = {
 			<FormControl.Error>Error</FormControl.Error>
 		</FormControl>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
-
+	play: async ({ canvas }) => {
 		const input = canvas.getByRole("textbox");
 		const label = canvas.getByText("Label");
 
@@ -53,8 +51,7 @@ export const group: StoryObj = {
 			</RadioGroup>
 		</FormControl>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const group = canvas.getByRole("group");
 
 		expect(group).toBeInTheDocument();

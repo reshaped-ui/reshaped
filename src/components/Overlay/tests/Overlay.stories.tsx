@@ -1,10 +1,8 @@
 import { StoryObj } from "@storybook/react";
-import { within, userEvent } from "@storybook/test";
-import { createRoot } from "react-dom/client";
+import { userEvent } from "@storybook/test";
 import { Example } from "utilities/storybook";
 import Overlay from "components/Overlay";
 import Button from "components/Button";
-import Reshaped from "components/Reshaped";
 import useToggle from "hooks/useToggle";
 
 export default {
@@ -33,8 +31,7 @@ export const base: StoryObj = {
 			</Example>
 		);
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const trigger = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(trigger);
@@ -57,8 +54,7 @@ export const transparent: StoryObj = {
 			</Example>
 		);
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const trigger = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(trigger);
@@ -81,8 +77,7 @@ export const blurred: StoryObj = {
 			</Example>
 		);
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const trigger = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(trigger);

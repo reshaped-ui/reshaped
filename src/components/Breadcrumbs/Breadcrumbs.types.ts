@@ -7,6 +7,8 @@ export type Props = {
 	separator?: React.ReactNode;
 	color?: "neutral" | "primary";
 	defaultVisibleItems?: number;
+	// TODO: Make required in the next major
+	expandAriaLabel?: string;
 	disableExpand?: boolean;
 	ariaLabel?: string;
 	className?: G.ClassName;

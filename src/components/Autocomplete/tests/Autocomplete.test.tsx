@@ -15,6 +15,8 @@ const fixtures = {
 	secondValue: "value 2",
 };
 
+// + async demo
+
 describe("Components/Autocomplete", () => {
 	test("works with keyboard", async () => {
 		const handleChange = jest.fn();

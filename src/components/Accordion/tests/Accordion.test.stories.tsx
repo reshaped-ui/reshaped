@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { userEvent, within, expect, fn } from "@storybook/test";
+import { userEvent, expect, fn } from "@storybook/test";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
 
@@ -27,9 +27,8 @@ export const handleToggle: StoryObj<{ handleToggle: typeof fn }> = {
 			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleToggle } = args;
-		const canvas = within(canvasElement);
 
 		const trigger = canvas.getAllByRole("button")[0];
 		const content = canvas.getByRole("region", { hidden: true });
@@ -68,9 +67,8 @@ export const controlled: StoryObj<{ handleToggle: typeof fn }> = {
 			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleToggle } = args;
-		const canvas = within(canvasElement);
 
 		const trigger = canvas.getAllByRole("button")[0];
 
@@ -97,9 +95,8 @@ export const uncontrolled: StoryObj<{ handleToggle: typeof fn }> = {
 			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleToggle } = args;
-		const canvas = within(canvasElement);
 
 		const trigger = canvas.getAllByRole("button")[0];
 
@@ -130,9 +127,8 @@ export const renderProps: StoryObj<{ handleToggle: typeof fn }> = {
 			<Accordion.Content>Content</Accordion.Content>
 		</Accordion>
 	),
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleToggle } = args;
-		const canvas = within(canvasElement);
 
 		const trigger = canvas.getAllByRole("button")[0];
 		const content = canvas.getByRole("region", { hidden: true });
@@ -162,8 +158,7 @@ export const className: StoryObj = {
 			</Accordion>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");

@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import Icon from "components/Icon";
 import IconZap from "icons/Zap";
 
@@ -20,8 +20,7 @@ export const render: StoryObj = {
 			<Icon svg={IconZap} />
 		</div>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toBeInTheDocument();
@@ -36,8 +35,7 @@ export const className: StoryObj = {
 			<Icon svg={IconZap} className="test-classname" attributes={{ id: "test-id" }} />
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");

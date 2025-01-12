@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import Grid from "components/Grid";
 
 export default {
@@ -19,8 +19,7 @@ export const as: StoryObj = {
 			<Grid.Item as="li">Content</Grid.Item>
 		</Grid>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const ul = canvas.getByRole("list");
 		const li = canvas.getByRole("listitem");
 
@@ -40,8 +39,7 @@ export const className: StoryObj = {
 			</Grid>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 		const item = root?.firstChild;
 

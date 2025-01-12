@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import HiddenVisually from "components/HiddenVisually";
 
 export default {
@@ -15,10 +15,9 @@ export default {
 export const children: StoryObj = {
 	name: "children",
 	render: () => <HiddenVisually>Content</HiddenVisually>,
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const el = canvas.getByText("Content");
 
-		expect(el).toBeInTheDocument(0);
+		expect(el).toBeInTheDocument();
 	},
 };

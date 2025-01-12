@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import { Example } from "utilities/storybook";
 import FormControl from "components/FormControl";
 import TextField from "components/TextField";
@@ -37,8 +37,7 @@ export const status: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const inputs = canvas.getAllByRole("textbox");
 
 		expect(inputs[0]).toHaveAccessibleName("Label");
@@ -85,8 +84,7 @@ export const disabled: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const input = canvas.getByRole("textbox");
 
 		expect(input).toBeDisabled();

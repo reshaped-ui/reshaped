@@ -4,11 +4,7 @@ import { within, expect, fn, userEvent, waitFor } from "@storybook/test";
 import Button from "components/Button";
 import Overlay from "components/Overlay";
 import useToggle from "hooks/useToggle";
-import type * as T from "../Overlay.types";
-
-function sleep(milliseconds: number) {
-	return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
+import { sleep } from "utilities/helpers";
 
 export default {
 	title: "Utilities/Overlay/tests",

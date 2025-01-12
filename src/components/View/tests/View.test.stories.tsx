@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import View from "components/View";
 
 export default {
@@ -19,8 +19,7 @@ export const asProp: StoryObj = {
 			<View.Item as="li">Content</View.Item>
 		</View>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const list = canvas.getByRole("list");
 		const item = canvas.getByRole("listitem");
 
@@ -38,8 +37,7 @@ export const className: StoryObj = {
 			</View>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");
@@ -56,8 +54,7 @@ export const itemClassName: StoryObj = {
 			</View.Item>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");

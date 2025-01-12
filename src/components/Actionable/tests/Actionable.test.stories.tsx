@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { userEvent, within, expect, fn } from "@storybook/test";
+import { userEvent, expect, fn } from "@storybook/test";
 import Actionable from "components/Actionable";
 
 export default {
@@ -15,8 +15,7 @@ export default {
 export const children: StoryObj = {
 	name: "children",
 	render: () => <Actionable>Trigger</Actionable>,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const el = canvas.getByText("Trigger");
 
 		expect(el).toBeInTheDocument();
@@ -27,8 +26,7 @@ export const children: StoryObj = {
 export const href: StoryObj = {
 	name: "href",
 	render: () => <Actionable href="https://reshaped.so">Trigger</Actionable>,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const el = canvas.getByRole("link");
 
 		expect(el).toHaveAttribute("href", "https://reshaped.so");
@@ -38,8 +36,7 @@ export const href: StoryObj = {
 export const attributesHref: StoryObj = {
 	name: "attributes.href",
 	render: () => <Actionable attributes={{ href: "https://reshaped.so" }}>Trigger</Actionable>,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const el = canvas.getByRole("link");
 
 		expect(el).toHaveAttribute("href", "https://reshaped.so");
@@ -52,9 +49,8 @@ export const onClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
 		handleClick: fn(),
 	},
 	render: (args) => <Actionable onClick={args.handleClick}>Trigger</Actionable>,
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleClick } = args;
-		const canvas = within(canvasElement);
 		const el = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(el);
@@ -81,9 +77,8 @@ export const hrefOnClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
 			Trigger
 		</Actionable>
 	),
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleClick } = args;
-		const canvas = within(canvasElement);
 		const el = canvas.getByRole("link");
 
 		await userEvent.click(el);
@@ -101,8 +96,7 @@ export const as: StoryObj = {
 			Trigger
 		</Actionable>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const el = canvas.getAllByRole("button")[0];
 
 		expect(el.tagName).toBe("SPAN");
@@ -126,8 +120,7 @@ export const type: StoryObj<{ handleSubmit: ReturnType<typeof fn> }> = {
 			</Actionable>
 		</form>
 	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas, args }) => {
 		const button = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(button);
@@ -148,8 +141,7 @@ export const stopPropagation: StoryObj<{ handleParentClick: ReturnType<typeof fn
 			</Actionable>
 		</div>
 	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas, args }) => {
 		const button = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(button);
@@ -167,8 +159,7 @@ export const className: StoryObj = {
 			</Actionable>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");

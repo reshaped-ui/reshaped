@@ -1,12 +1,11 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect, userEvent } from "@storybook/test";
+import { expect, userEvent } from "@storybook/test";
 import Card from "components/Card";
 import Button from "components/Button";
 import View from "components/View";
 import MenuItem from "components/MenuItem";
 import Theme, { useTheme } from "components/Theme";
 import { Example } from "utilities/storybook";
-import Reshaped from "components/Reshaped";
 
 export default {
 	title: "Utilities/Theme/tests",
@@ -25,8 +24,7 @@ export const light: StoryObj = {
 			<Card attributes={{ "data-testid": "test-id" }}>Content</Card>
 		</Theme>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const root = canvas.getByTestId("test-id").parentNode;
 
 		expect(root).toHaveAttribute("data-rs-theme", "reshaped");
@@ -41,8 +39,7 @@ export const dark: StoryObj = {
 			<Card attributes={{ "data-testid": "test-id" }}>Content</Card>
 		</Theme>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const root = canvas.getByTestId("test-id").parentNode;
 
 		expect(root).toHaveAttribute("data-rs-theme", "reshaped");
@@ -57,8 +54,7 @@ export const inherited: StoryObj = {
 			<Card attributes={{ "data-testid": "test-id" }}>Content</Card>
 		</Theme>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const root = canvas.getByTestId("test-id").parentNode;
 
 		expect(root).toHaveAttribute("data-rs-theme", "reshaped");
@@ -75,8 +71,7 @@ export const inverted: StoryObj = {
 			<Card attributes={{ "data-testid": "test-id" }}>Content</Card>
 		</Theme>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const root = canvas.getByTestId("test-id").parentNode;
 
 		expect(root).toHaveAttribute("data-rs-theme", "reshaped");
@@ -105,8 +100,7 @@ export const controlled: StoryObj = {
 			</div>
 		);
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 		const trigger = canvas.getAllByRole("button")[0];
 
@@ -124,7 +118,7 @@ export const uncontrolled: StoryObj = {
 	name: "uncontrolled",
 	render: () => {
 		const Internal = () => {
-			const { setTheme, theme } = useTheme();
+			const { setTheme } = useTheme();
 
 			return (
 				<Button color="primary" onClick={() => setTheme("slate")}>
@@ -141,8 +135,7 @@ export const uncontrolled: StoryObj = {
 			</div>
 		);
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 		const trigger = canvas.getAllByRole("button")[0];
 

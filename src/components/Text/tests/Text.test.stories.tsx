@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import Text from "components/Text";
 
 export default {
@@ -15,8 +15,7 @@ export default {
 export const asProp: StoryObj = {
 	name: "as",
 	render: () => <Text as="h1">Content</Text>,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const el = canvas.getByRole("heading");
 
 		expect(el).toBeInTheDocument();
@@ -26,8 +25,7 @@ export const asProp: StoryObj = {
 export const headingAs: StoryObj = {
 	name: "heading tag resolving",
 	render: () => <Text variant="title-3">Content</Text>,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const el = canvas.getByRole("heading");
 
 		expect(el.tagName).toBe("H3");
@@ -37,8 +35,7 @@ export const headingAs: StoryObj = {
 export const headingAsResponsive: StoryObj = {
 	name: "heading tag resolving, responsive",
 	render: () => <Text variant={{ s: "title-3", m: "title-4" }}>Content</Text>,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const el = canvas.getByRole("heading");
 
 		expect(el.tagName).toBe("H4");
@@ -54,8 +51,7 @@ export const className: StoryObj = {
 			</Text>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");

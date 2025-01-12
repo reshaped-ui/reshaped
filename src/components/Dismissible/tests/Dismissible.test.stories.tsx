@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect, fn, userEvent } from "@storybook/test";
+import { expect, fn, userEvent } from "@storybook/test";
 import Dismissible from "components/Dismissible";
 import { Placeholder } from "utilities/storybook";
 
@@ -23,8 +23,7 @@ export const closeAriaLabel: StoryObj<{ handleClose: ReturnType<typeof fn> }> = 
 			<Placeholder />
 		</Dismissible>
 	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas, args }) => {
 		const button = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(button);
@@ -49,8 +48,7 @@ export const className: StoryObj = {
 			</Dismissible>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");

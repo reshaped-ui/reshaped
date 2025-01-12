@@ -137,6 +137,16 @@ const preview: Preview = {
 
 export const parameters = {
 	layout: "fullscreen",
+	a11y: {
+		config: {
+			rules: [
+				{
+					id: "region",
+					enabled: true,
+				},
+			],
+		},
+	},
 };
 
 export default preview;

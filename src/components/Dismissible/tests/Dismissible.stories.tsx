@@ -78,8 +78,8 @@ export const hideCloseButton: StoryObj = {
 		</Example>
 	),
 	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement.querySelector("#root")!);
-		const button = canvas.queryByRole("button");
+		const root = within(canvasElement.querySelector("#root")!);
+		const button = root.queryByRole("button");
 
 		expect(button).not.toBeInTheDocument();
 	},

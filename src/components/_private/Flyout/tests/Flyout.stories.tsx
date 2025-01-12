@@ -8,7 +8,7 @@ import Button from "components/Button";
 import Flyout, { FlyoutInstance, FlyoutProps } from "components/_private/Flyout";
 import TextField from "components/TextField";
 
-export default { title: "Utilities/Internal/Flyout" };
+export default { title: "Internal/Flyout" };
 
 const Demo = (props: any) => {
 	const { position = "bottom-start", children, ...rest } = props;

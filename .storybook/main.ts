@@ -1,7 +1,7 @@
 import path from "path";
 import type { StorybookConfig } from "@storybook/react-vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { build, mergeConfig, UserConfig } from "vite";
+import { mergeConfig, UserConfig } from "vite";
 
 const config: StorybookConfig = {
 	framework: "@storybook/react-vite",
@@ -14,6 +14,12 @@ const config: StorybookConfig = {
 				esModuleInterop: false,
 			},
 			propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+		},
+	},
+	core: {
+		builder: {
+			name: "@storybook/builder-vite",
+			options: { fsCache: false },
 		},
 	},
 	stories: ["../src/**/*.stories.tsx"],

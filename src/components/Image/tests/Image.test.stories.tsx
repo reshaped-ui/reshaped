@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect, fn, waitFor } from "@storybook/test";
+import { expect, fn, waitFor } from "@storybook/test";
 import Image from "components/Image";
 
 export default {
@@ -18,8 +18,7 @@ const imgUrl =
 export const src: StoryObj = {
 	name: "src, presentation",
 	render: () => <Image src={imgUrl} />,
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const img = canvas.getByRole("presentation");
 
 		expect(img).toHaveAttribute("src", imgUrl);
@@ -29,8 +28,7 @@ export const src: StoryObj = {
 export const ariaLabel: StoryObj = {
 	name: "src, alt",
 	render: () => <Image src={imgUrl} alt="photo" />,
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const img = canvas.getByRole("img");
 
 		expect(img).toHaveAccessibleName("photo");
@@ -43,9 +41,8 @@ export const onLoad: StoryObj<{ handleLoad: ReturnType<typeof fn> }> = {
 		handleLoad: fn(),
 	},
 	render: (args) => <Image src={imgUrl} alt="photo" onLoad={args.handleLoad} />,
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleLoad } = args;
-		const canvas = within(canvasElement);
 		const img = canvas.getByRole("img");
 
 		await waitFor(() => {
@@ -63,9 +60,8 @@ export const onError: StoryObj<{ handleError: ReturnType<typeof fn> }> = {
 		handleError: fn(),
 	},
 	render: (args) => <Image src="/invalid.png" alt="photo" onError={args.handleError} />,
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvas, args }) => {
 		const { handleError } = args;
-		const canvas = within(canvasElement);
 		const img = canvas.getByRole("img");
 
 		await waitFor(() => {
@@ -84,8 +80,7 @@ export const className: StoryObj = {
 			<Image src={imgUrl} className="test-classname" attributes={{ id: "test-id" }} />
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
 
 		expect(root).toHaveClass("test-classname");
@@ -105,8 +100,7 @@ export const imageAttributes: StoryObj = {
 			/>
 		</div>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas }) => {
 		const img = canvas.getByRole("img");
 
 		expect(img).toHaveAttribute("id", "test-img-id");

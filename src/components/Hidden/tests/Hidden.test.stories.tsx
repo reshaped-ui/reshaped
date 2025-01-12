@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { expect } from "@storybook/test";
 import Hidden from "components/Hidden";
 
 export default {
@@ -15,8 +15,7 @@ export default {
 export const as: StoryObj = {
 	name: "as",
 	render: () => <Hidden as="span">Content</Hidden>,
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const el = canvas.getByText("Content");
 
 		expect(el.tagName).toEqual("SPAN");

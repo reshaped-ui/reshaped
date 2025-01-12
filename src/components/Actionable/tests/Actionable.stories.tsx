@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { userEvent, within, expect } from "@storybook/test";
+import { userEvent, expect } from "@storybook/test";
 import { Example } from "utilities/storybook";
 import Actionable from "components/Actionable";
 import View from "components/View";
@@ -46,8 +46,7 @@ export const disabled: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: ({ canvas }) => {
 		const button = canvas.getAllByRole("button")[0];
 		const link = canvas.getByText("Link");
 

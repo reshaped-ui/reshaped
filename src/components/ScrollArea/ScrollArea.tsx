@@ -194,12 +194,12 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 
 		return (
 			<div {...attributes} className={rootClassNames} style={rootVariables}>
-				<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll}>
+				{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+				<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll} tabIndex={0}>
 					<div className={s.content} ref={contentRef}>
 						{children}
 					</div>
 				</div>
-
 				{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
 					<ScrollAreaBar
 						vertical
@@ -208,7 +208,6 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 						position={scrollPosition.y}
 					/>
 				)}
-
 				{scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
 					<ScrollAreaBar
 						onThumbMove={handleThumbXMove}

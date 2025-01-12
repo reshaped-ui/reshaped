@@ -10,7 +10,6 @@ import * as keys from "constants/keys";
 import useHotkeys from "hooks/useHotkeys";
 import useHandlerRef from "hooks/useHandlerRef";
 import * as T from "./Autocomplete.types";
-import { onClick } from "components/Actionable/tests/Actionable.test.stories";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
@@ -45,7 +44,9 @@ const Autocomplete = (props: T.Props) => {
 
 	useHotkeys(
 		{
-			[keys.BACKSPACE]: () => onBackspaceRef.current?.(),
+			[keys.BACKSPACE]: () => {
+				onBackspaceRef.current?.();
+			},
 		},
 		[onBackspaceRef],
 		{
