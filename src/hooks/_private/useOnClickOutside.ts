@@ -30,14 +30,8 @@ const useOnClickOutside = (
 			handlerRef.current?.(event);
 		};
 
-		// Using events that happen before click to handle cases when element is hidden on click
-		document.addEventListener("mousedown", handleClick);
-		document.addEventListener("touchstart", handleClick);
-
-		return () => {
-			document.removeEventListener("mousedown", handleClick);
-			document.removeEventListener("touchstart", handleClick);
-		};
+		document.addEventListener("click", handleClick);
+		return () => document.removeEventListener("click", handleClick);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [handlerRef, ...refs, ...deps]);
 };
