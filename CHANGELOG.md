@@ -4,3 +4,5 @@
 - ScrollArea: Fixed nested scroll area hover
 - Accordion: fixed animation in Preact
 - DropdownMenu: fixed onClick in submenu with reduced motion
+- Carousel: attributes.style support
+- Carousel: width: 100% for not-fitting items
