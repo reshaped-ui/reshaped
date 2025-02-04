@@ -179,7 +179,6 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		if (isItem) {
 			itemElement = React.cloneElement(child, {
 				className: classNames(className, child.props.className),
-				key,
 			});
 		} else if (
 			!className &&
@@ -200,7 +199,12 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		if (isItem && child.props?.grow) nowrap = child.props.grow;
 		if (isItem && child.props?.gap === "auto") nowrap = true;
 		if ((isItem || isView) && child.props?.grow) isFlex = true;
-		return [dividerElement, itemElement];
+		return (
+			<>
+				{dividerElement}
+				{itemElement}
+			</>
+		);
 	};
 
 	const formattedChildren = React.Children.map(children, (child: any, index) => {

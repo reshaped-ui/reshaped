@@ -4,7 +4,8 @@
 		"jsx": "react-native",
 		"outDir": "./dist",
 		"rootDir": "./src",
-		"baseUrl": "./src"
+		"baseUrl": "./src",
+		"paths": { "*": ["*"] }
 	},
 	"include": ["./src/**/tests/*.stories.tsx", "./src/**/*.d.ts", "./storybook/**.*.tsx"]
 }

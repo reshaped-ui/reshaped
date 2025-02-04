@@ -84,6 +84,7 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 			ref={ref}
 			// rootAttributes can receive ref from Flyout
 			{...rootAttributes}
+			aria-disabled={disabled ? true : undefined}
 			className={rootClassNames}
 			onClick={handlePress}
 			onKeyDown={handleKeyDown}
