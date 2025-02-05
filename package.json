@@ -52,10 +52,10 @@
 			"import": "./dist/bundle.js"
 		},
 		"./bundle.css": "./dist/bundle.css",
-		"./themes/reshaped/theme.css": "./dist/themes/reshaped/theme.css",
-		"./themes/slate/theme.css": "./dist/themes/slate/theme.css",
-		"./themes/figma/theme.css": "./dist/themes/figma/theme.css",
-		"./themes/fragments/twitter/theme.css": "./dist/themes/fragments/twitter/theme.css",
+		"./themes/reshaped/*": "./dist/themes/reshaped/*",
+		"./themes/slate/*": "./dist/themes/slate/*",
+		"./themes/figma/*": "./dist/themes/figma/*",
+		"./themes/fragments/twitter/*": "./dist/themes/fragments/twitter/*",
 		"./package.json": "./package.json"
 	},
 	"sideEffects": false,
