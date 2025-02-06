@@ -21,7 +21,9 @@ import getTextAlignStyles from "styles/textAlign";
 import getAlignStyles from "styles/align";
 import getJustifyStyles from "styles/justify";
 
-const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
+const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(
+	props: T.ItemProps<As>
+): React.ReactNode => {
 	const {
 		columns,
 		grow,
@@ -58,7 +60,9 @@ const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemP
 	);
 };
 
-const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>) => {
+const View = <As extends keyof JSX.IntrinsicElements = "div">(
+	props: T.Props<As>
+): React.ReactNode => {
 	const {
 		/**
 		 * Layout props
@@ -200,18 +204,16 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		if (isItem && child.props?.gap === "auto") nowrap = true;
 		if ((isItem || isView) && child.props?.grow) isFlex = true;
 		return (
-			<>
+			<React.Fragment key={`${key}-fragment`}>
 				{dividerElement}
 				{itemElement}
-			</>
+			</React.Fragment>
 		);
 	};
 
 	const formattedChildren = React.Children.map(children, (child: any, index) => {
 		if (!child) return null;
 
-		// Ignore the indices of the items that rendered nothing
-		const renderedIndex = renderedItemIndex;
 		renderedItemIndex += 1;
 
 		if (child.type === Hidden) {
@@ -220,7 +222,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 
 			return (
 				<Hidden {...hiddenProps} key={key}>
-					{renderItem({ child: hiddenChild, index: renderedIndex })}
+					{renderItem({ child: hiddenChild, index: renderedItemIndex })}
 				</Hidden>
 			);
 		}
@@ -228,13 +230,13 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>
 		if (child.type === React.Fragment && React.Children.count(child.props.children) > 1) {
 			return child.props.children.map((child: any) => {
 				if (!child) return null;
-				const index = renderedIndex;
+				const index = renderedItemIndex;
 				renderedItemIndex += 1;
 				return renderItem({ child, index });
 			});
 		}
 
-		return renderItem({ child, index: renderedIndex });
+		return renderItem({ child, index: renderedItemIndex });
 	});
 
 	// Classnames and attributes are written here so we can assign nowrap to the root element based on the children
