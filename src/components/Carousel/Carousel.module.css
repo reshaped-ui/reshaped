@@ -1,5 +1,8 @@
 .root {
 	position: relative;
+
+	/* Keep parent size even if carousel items don't fit into their allocated space */
+	width: 100%;
 }
 
 .control {

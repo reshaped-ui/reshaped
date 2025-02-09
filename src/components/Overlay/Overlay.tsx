@@ -53,7 +53,7 @@ const Overlay = (props: T.Props) => {
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
 
 	// Check that when close was triggered there were no other overlays / flyouts rendered above it
-	const isDismissible = useIsDismissible(active, contentRef);
+	const isDismissible = useIsDismissible({ active, contentRef, blocking: true });
 
 	const rootClassNames = classNames(
 		s.root,
