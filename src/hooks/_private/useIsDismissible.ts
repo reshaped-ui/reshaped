@@ -28,11 +28,18 @@ const addToQueue = (id: string, contentRef: Ref, triggerRef?: Ref) => {
 	latestId = id;
 };
 
-const useIsDismissible = (active: boolean = false, contentRef: Ref, triggerRef?: Ref) => {
+const useIsDismissible = (args: {
+	active?: boolean;
+	contentRef: Ref;
+	triggerRef?: Ref;
+	blocking?: boolean;
+}) => {
+	const { active, contentRef, triggerRef, blocking } = args;
 	const id = useElementId();
 	const isDismissible = React.useCallback(() => {
+		if (!blocking) return true;
 		return active ? latestId === id : true;
-	}, [id, active]);
+	}, [id, active, blocking]);
 
 	React.useEffect(() => {
 		if (!active) return;

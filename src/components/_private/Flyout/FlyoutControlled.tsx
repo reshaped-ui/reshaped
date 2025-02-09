@@ -107,11 +107,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const isRendered = status !== "idle";
 
 	// Don't create dismissible queue for hover flyout because they close all together on mouseout
-	const isDismissible = useIsDismissible(
-		isRendered && triggerType !== "hover",
-		flyoutElRef,
-		triggerElRef
-	);
+	const isDismissible = useIsDismissible({
+		active: isRendered && triggerType !== "hover",
+		contentRef: flyoutElRef,
+		triggerRef: triggerElRef,
+	});
 
 	const clearTimer = React.useCallback(() => {
 		if (timerRef.current) clearTimeout(timerRef.current);
