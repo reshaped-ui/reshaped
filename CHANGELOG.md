@@ -12,3 +12,4 @@
 - Carousel: attributes.style support
 - Carousel: width: 100% for not-fitting items
 - Breadcrumbs: Added expandAriaLabel
+- Button: loadingAriaLabel

@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Components/Calendar renders calendar for current month 1`] = `"Wednesday, January 1"`;
-
-exports[`Components/Calendar renders calendar for current month 2`] = `"Previous month"`;
-
-exports[`Components/Calendar renders calendar for current month 3`] = `"<span class="text">January 2020<div class="root">Select a month</div></span>"`;
-
-exports[`Components/Calendar renders calendar for current month 4`] = `"Next month"`;

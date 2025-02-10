@@ -16,6 +16,7 @@ const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 		highlighted,
 		fullWidth,
 		loading,
+		loadingAriaLabel,
 		disabled,
 		type,
 		href,
@@ -74,7 +75,10 @@ const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 		<Actionable
 			disabled={disabled || loading}
 			className={rootClassName}
-			attributes={{ ...attributes, "data-rs-aligner-target": true }}
+			attributes={{
+				...attributes,
+				"data-rs-aligner-target": true,
+			}}
 			type={type}
 			onClick={onClick}
 			href={href}
@@ -84,7 +88,7 @@ const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 		>
 			{loading && (
 				<div className={s.loader}>
-					<Loader color="inherit" />
+					<Loader color="inherit" attributes={{ "aria-label": loadingAriaLabel }} />
 				</div>
 			)}
 			{renderIcon("start")}

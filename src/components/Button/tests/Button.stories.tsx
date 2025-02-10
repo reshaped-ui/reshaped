@@ -314,46 +314,48 @@ export const loading = () => (
 	<Example>
 		<Example.Item title="loading, color: neutral, all variants">
 			<View gap={3} direction="row">
-				<Button loading>Button</Button>
-				<Button loading variant="faded">
+				<Button loading loadingAriaLabel="Loading">
 					Button
 				</Button>
-				<Button loading variant="outline">
+				<Button loading loadingAriaLabel="Loading" variant="faded">
 					Button
 				</Button>
-				<Button loading variant="ghost">
+				<Button loading loadingAriaLabel="Loading" variant="outline">
+					Button
+				</Button>
+				<Button loading loadingAriaLabel="Loading" variant="ghost">
 					Button
 				</Button>
 			</View>
 		</Example.Item>
 		<Example.Item title="loading, color critical, all variants">
 			<View gap={3} direction="row">
-				<Button loading color="critical">
+				<Button loading loadingAriaLabel="Loading" color="critical">
 					Button
 				</Button>
-				<Button loading color="critical" variant="faded">
+				<Button loading loadingAriaLabel="Loading" color="critical" variant="faded">
 					Button
 				</Button>
-				<Button loading color="critical" variant="outline">
+				<Button loading loadingAriaLabel="Loading" color="critical" variant="outline">
 					Button
 				</Button>
-				<Button loading color="critical" variant="ghost">
+				<Button loading loadingAriaLabel="Loading" color="critical" variant="ghost">
 					Button
 				</Button>
 			</View>
 		</Example.Item>
 		<Example.Item title="loading, color positive, all variants">
 			<View gap={3} direction="row">
-				<Button loading color="positive">
+				<Button loading loadingAriaLabel="Loading" color="positive">
 					Button
 				</Button>
-				<Button loading color="positive" variant="faded">
+				<Button loading loadingAriaLabel="Loading" color="positive" variant="faded">
 					Button
 				</Button>
-				<Button loading color="positive" variant="outline">
+				<Button loading loadingAriaLabel="Loading" color="positive" variant="outline">
 					Button
 				</Button>
-				<Button loading color="positive" variant="ghost">
+				<Button loading loadingAriaLabel="Loading" color="positive" variant="ghost">
 					Button
 				</Button>
 			</View>
@@ -365,10 +367,10 @@ export const loading = () => (
 
 				<div style={{ position: "absolute", top: 16, left: 16 }}>
 					<View gap={3} direction="row">
-						<Button color="media" loading>
+						<Button color="media" loading loadingAriaLabel="Loading">
 							Button
 						</Button>
-						<Button color="media" variant="faded">
+						<Button color="media" variant="faded" loading loadingAriaLabel="Loading">
 							Button
 						</Button>
 					</View>
@@ -377,13 +379,13 @@ export const loading = () => (
 		</Example.Item>
 
 		<Example.Item title={["loading, long button text", "button size should stay the same"]}>
-			<Button loading color="primary">
+			<Button loading loadingAriaLabel="Loading" color="primary">
 				Long button text
 			</Button>
 		</Example.Item>
 
 		<Example.Item title={["loading, icon only", "button keep square 1/1 ratio"]}>
-			<Button icon={IconZap} rounded loading />
+			<Button icon={IconZap} rounded loading loadingAriaLabel="Loading" />
 		</Example.Item>
 	</Example>
 );
