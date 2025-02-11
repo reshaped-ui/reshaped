@@ -214,6 +214,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(
 	const formattedChildren = React.Children.map(children, (child: any, index) => {
 		if (!child) return null;
 
+		const usedIndex = renderedItemIndex;
 		renderedItemIndex += 1;
 
 		if (child.type === Hidden) {
@@ -222,7 +223,7 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(
 
 			return (
 				<Hidden {...hiddenProps} key={key}>
-					{renderItem({ child: hiddenChild, index: renderedItemIndex })}
+					{renderItem({ child: hiddenChild, index: usedIndex })}
 				</Hidden>
 			);
 		}
@@ -230,13 +231,13 @@ const View = <As extends keyof JSX.IntrinsicElements = "div">(
 		if (child.type === React.Fragment && React.Children.count(child.props.children) > 1) {
 			return child.props.children.map((child: any) => {
 				if (!child) return null;
-				const index = renderedItemIndex;
+				const index = usedIndex;
 				renderedItemIndex += 1;
 				return renderItem({ child, index });
 			});
 		}
 
-		return renderItem({ child, index: renderedItemIndex });
+		return renderItem({ child, index: usedIndex });
 	});
 
 	// Classnames and attributes are written here so we can assign nowrap to the root element based on the children
