@@ -16,7 +16,9 @@ const TextFieldSlot = (props: T.SlotProps) => {
 
 	// In case fragment is used, map over its children instead
 	const renderedSlot =
-		React.isValidElement(slot) && slot.type === React.Fragment ? slot.props.children : slot;
+		React.isValidElement(slot) && slot.type === React.Fragment
+			? (slot.props as any).children
+			: slot;
 
 	const slotNode =
 		slot &&

@@ -15,7 +15,7 @@ const ToastContainer = (props: T.ContainerProps) => {
 	const { timeout = "short" } = toastProps;
 	const { show, hide, remove } = React.useContext(ToastContext);
 	const [toastHeight, setToastHeight] = React.useState<number>();
-	const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
+	const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const resizingRef = React.useRef(false);
 	const wrapperRef = React.useRef<HTMLDivElement>(null);
 	const visible = status === "entered";

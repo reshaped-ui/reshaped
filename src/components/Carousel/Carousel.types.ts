@@ -15,7 +15,7 @@ export enum ControlType {
 
 export type ControlProps = {
 	type: ControlType;
-	scrollElRef: React.RefObject<HTMLElement>;
+	scrollElRef: React.RefObject<HTMLElement | null>;
 	scrollPosition: number;
 	onClick: () => void;
 	isRTL: boolean;

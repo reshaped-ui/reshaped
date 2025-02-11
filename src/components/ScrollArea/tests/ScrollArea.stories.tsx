@@ -139,7 +139,7 @@ export const edgeCases = () => {
 			<Example.Item title="dynamic content update">
 				<View gap={4}>
 					<Button onClick={toggle.toggle}>Toggle</Button>
-					<ScrollArea height="100px" scrollbarDisplay="visible" ref={ref}>
+					<ScrollArea height="100px" scrollbarDisplay="visible">
 						<View
 							backgroundColor="neutral-faded"
 							padding={4}

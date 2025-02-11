@@ -17,7 +17,7 @@ export type Variant =
 	| "caption-1"
 	| "caption-2";
 
-export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
+export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	variant?: G.Responsive<Variant>;
 	weight?: G.Responsive<"regular" | "medium" | "bold">;
 	color?:

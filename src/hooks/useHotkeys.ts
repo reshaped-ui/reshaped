@@ -6,7 +6,7 @@ import useSingletonHotkey, { type Hotkeys } from "./_private/useSingletonHotkeys
 const useHotkeys = <Element extends HTMLElement>(
 	hotkeys: Hotkeys,
 	deps: unknown[] = [],
-	options?: { ref?: React.RefObject<Element>; disabled?: boolean; preventDefault?: boolean }
+	options?: { ref?: React.RefObject<Element | null>; disabled?: boolean; preventDefault?: boolean }
 ) => {
 	const { addHotkeys, isPressed } = useSingletonHotkey();
 	const generatedRef = React.useRef<Element>(null);

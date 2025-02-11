@@ -51,7 +51,7 @@ const DropdownMenuContent = (props: T.ContentProps) => {
 		[subMenuInstance?.current],
 		{
 			disabled: flyout.status === "idle",
-			ref: attributes?.ref as React.RefObject<HTMLDivElement>,
+			ref: attributes?.ref as React.RefObject<HTMLDivElement | null>,
 		}
 	);
 	const contentClassName = classNames(s.menu, className);
@@ -95,7 +95,7 @@ const DropdownMenuItem = (props: T.ItemProps) => {
 
 const DropdownMenuSubMenu = (props: T.SubMenuProps) => {
 	const { children } = props;
-	const dropdownMenuRef = React.useRef<T.Instance>();
+	const dropdownMenuRef = React.useRef<T.Instance>(null);
 
 	return (
 		<DropdownMenuSubContext.Provider value={dropdownMenuRef}>

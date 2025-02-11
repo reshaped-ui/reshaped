@@ -8,8 +8,8 @@ import getBleedStyles from "styles/bleed";
 import getPaddingStyles from "styles/padding";
 import getHeightStyles from "styles/height";
 
-const Card = forwardRef<HTMLElement, T.Props<keyof JSX.IntrinsicElements>>(
-	<As extends keyof JSX.IntrinsicElements = "div">(
+const Card = forwardRef<HTMLElement, T.Props<keyof React.JSX.IntrinsicElements>>(
+	<As extends keyof React.JSX.IntrinsicElements = "div">(
 		props: T.Props<As>,
 		ref: React.Ref<HTMLElement>
 	) => {

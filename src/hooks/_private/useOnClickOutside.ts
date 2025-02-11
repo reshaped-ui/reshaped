@@ -2,7 +2,7 @@ import useHandlerRef from "hooks/useHandlerRef";
 import React from "react";
 
 const useOnClickOutside = (
-	refs: React.RefObject<HTMLElement>[],
+	refs: React.RefObject<HTMLElement | null>[],
 	handler: (event: Event) => void,
 	deps: any[]
 ) => {

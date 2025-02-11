@@ -3,7 +3,7 @@ import getTextAlignStyles from "styles/textAlign";
 import type * as T from "./Text.types";
 import s from "./Text.module.css";
 
-const tagMap: Partial<Record<T.Variant, keyof JSX.IntrinsicElements>> = {
+const tagMap: Partial<Record<T.Variant, keyof React.JSX.IntrinsicElements>> = {
 	"title-1": "h1",
 	"title-2": "h2",
 	"title-3": "h3",
@@ -12,7 +12,7 @@ const tagMap: Partial<Record<T.Variant, keyof JSX.IntrinsicElements>> = {
 	"title-6": "h6",
 };
 
-const Text = <As extends keyof JSX.IntrinsicElements>(props: T.Props<As>) => {
+const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) => {
 	const {
 		variant,
 		color,

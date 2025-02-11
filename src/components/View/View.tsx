@@ -21,7 +21,7 @@ import getTextAlignStyles from "styles/textAlign";
 import getAlignStyles from "styles/align";
 import getJustifyStyles from "styles/justify";
 
-const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(
+const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
 	props: T.ItemProps<As>
 ): React.ReactNode => {
 	const {
@@ -60,7 +60,7 @@ const ViewItem = <As extends keyof JSX.IntrinsicElements = "div">(
 	);
 };
 
-const View = <As extends keyof JSX.IntrinsicElements = "div">(
+const View = <As extends keyof React.JSX.IntrinsicElements = "div">(
 	props: T.Props<As>
 ): React.ReactNode => {
 	const {

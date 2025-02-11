@@ -78,5 +78,5 @@ export type ThumbProps = {
 	step: NonNullable<BaseProps["step"]>;
 	orientation: NonNullable<BaseProps["orientation"]>;
 	renderValue?: BaseProps["renderValue"];
-	tooltipRef: React.RefObject<HTMLDivElement>;
+	tooltipRef: React.RefObject<HTMLDivElement | null>;
 };

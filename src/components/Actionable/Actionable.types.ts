@@ -12,12 +12,12 @@ export type Props = {
 	disableFocusRing?: boolean;
 	borderRadius?: "inherit";
 	stopPropagation?: boolean;
-	as?: keyof JSX.IntrinsicElements;
+	as?: keyof React.JSX.IntrinsicElements;
 	className?: G.ClassName;
 	// Props are not ommited from attributes since we support all of them
 	attributes?: G.Attributes<"button"> &
-		Omit<JSX.IntrinsicElements["a"], keyof G.Attributes<"button">> & {
-			ref?: React.RefObject<HTMLButtonElement | HTMLAnchorElement>;
+		Omit<React.JSX.IntrinsicElements["a"], keyof G.Attributes<"button">> & {
+			ref?: React.RefObject<HTMLButtonElement | HTMLAnchorElement | null>;
 		};
 };
 

@@ -334,7 +334,7 @@ export const testDynamicBounds = () => {
 	const [left, setLeft] = React.useState(50);
 	const [top, setTop] = React.useState(50);
 	const [size, setSize] = React.useState<"medium" | "large">("medium");
-	const flyoutRef = React.useRef<FlyoutInstance>();
+	const flyoutRef = React.useRef<FlyoutInstance>(null);
 
 	React.useEffect(() => {
 		flyoutRef.current?.updatePosition();
