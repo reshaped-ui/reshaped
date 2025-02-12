@@ -25,10 +25,13 @@ export type Props = {
 	children?: React.ReactNode;
 };
 
-export type PrivateProps = Props & { scoped?: boolean; scopeRef?: React.RefObject<HTMLDivElement> };
+export type PrivateProps = Props & {
+	scoped?: boolean;
+	scopeRef?: React.RefObject<HTMLDivElement | null>;
+};
 
 export type GlobalColorModeProps = {
 	defaultMode: ColorMode;
-	scopeRef?: React.RefObject<HTMLDivElement>;
+	scopeRef?: React.RefObject<HTMLDivElement | null>;
 	children?: React.ReactNode;
 };

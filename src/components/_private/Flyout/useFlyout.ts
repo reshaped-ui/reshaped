@@ -14,7 +14,7 @@ type Flyout = (
 	args: T.Options & {
 		flyoutEl: HTMLElement;
 		triggerEl: HTMLElement | null;
-		triggerBounds?: DOMRect | G.Coordinates;
+		triggerBounds?: DOMRect | G.Coordinates | null;
 	}
 ) => T.FlyoutData | undefined;
 
@@ -41,9 +41,9 @@ type UseFlyout = (args: {
 	contentGap?: number;
 	contentShift?: number;
 	container?: HTMLElement | null;
-	triggerElRef: React.RefObject<HTMLElement>;
-	flyoutElRef: React.RefObject<HTMLElement>;
-	triggerBounds?: DOMRect | G.Coordinates;
+	triggerElRef: React.RefObject<HTMLElement | null>;
+	flyoutElRef: React.RefObject<HTMLElement | null>;
+	triggerBounds?: DOMRect | G.Coordinates | null;
 }) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
 	render: () => void;

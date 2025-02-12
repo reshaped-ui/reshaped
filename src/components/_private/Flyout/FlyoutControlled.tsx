@@ -75,10 +75,10 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	const tryParentTrigger = !parentContentRef || isParentTriggerInsideFlyout;
 
 	const triggerElRef = (tryParentTrigger && parentTriggerRef) || internalTriggerElRef;
-	const triggerBoundsRef = React.useRef<DOMRect>();
+	const triggerBoundsRef = React.useRef<DOMRect>(null);
 	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
-	const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
+	const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
 	// Check if transition had enough time to start when opening a flyout
@@ -211,6 +211,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 	const handleTriggerMouseDown = React.useCallback(() => {
 		const rect = triggerElRef.current?.getBoundingClientRect();
+		if (!rect) return;
 		triggerBoundsRef.current = rect;
 	}, [triggerElRef]);
 
@@ -232,7 +233,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			 * After animation has started, we're sure about the correct bounds
 			 * so drop the cache to make flyout work when trigger moves around
 			 */
-			triggerBoundsRef.current = undefined;
+			triggerBoundsRef.current = null;
 		},
 		[resolvedActive]
 	);

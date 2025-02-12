@@ -5,7 +5,7 @@ import type * as TStyles from "styles/types";
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto";
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";
 
-export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
+export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	children?: React.ReactNode;
 	as?: TagName;
 	divided?: boolean;
@@ -67,7 +67,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	attributes?: G.Attributes<TagName>;
 } & Pick<ItemProps, "grow">;
 
-export type ItemProps<TagName extends keyof JSX.IntrinsicElements = "div"> = {
+export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	order?: G.Responsive<number>;
 	columns?: G.Responsive<Columns>;
 	grow?: G.Responsive<boolean>;

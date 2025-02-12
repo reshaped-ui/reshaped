@@ -13,7 +13,7 @@ export type Props = {
 	onOpen?: () => void;
 	onAfterOpen?: () => void;
 	disableCloseOnClick?: boolean;
-	containerRef?: React.RefObject<HTMLElement>;
+	containerRef?: React.RefObject<HTMLElement | null>;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

@@ -11,8 +11,8 @@ export type StyleAttribute =
 // Align with the
 type DataAttributes = {} | Record<`data-${string}`, string | boolean>;
 
-export type Attributes<TagName extends keyof JSX.IntrinsicElements = "div"> =
-	JSX.IntrinsicElements[TagName] & DataAttributes & { style?: StyleAttribute };
+export type Attributes<TagName extends keyof React.JSX.IntrinsicElements = "div"> =
+	React.JSX.IntrinsicElements[TagName] & DataAttributes & { style?: StyleAttribute };
 
 export type Viewport = "s" | "m" | "l" | "xl";
 export type ResponsiveOnly<T> = { [key in Viewport]?: T };

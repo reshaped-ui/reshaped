@@ -176,7 +176,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 			}
 		};
 
-		React.useImperativeHandle(ref, () => scrollableRef.current);
+		React.useImperativeHandle(ref, () => scrollableRef.current!);
 
 		useIsomorphicLayoutEffect(() => {
 			updateScroll();

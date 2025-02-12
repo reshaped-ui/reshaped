@@ -17,7 +17,7 @@ const useDrag = <
 	cb: (args: UseDragCallbackArgs) => void,
 	options?: {
 		disabled?: boolean;
-		containerRef?: React.RefObject<ContainerElement>;
+		containerRef?: React.RefObject<ContainerElement | null>;
 		orientation?: "horizontal" | "vertical" | "all";
 	}
 ) => {

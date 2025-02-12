@@ -1,8 +1,9 @@
+import type React from "react";
 import type { Property } from "csstype";
 import type * as G from "types/global";
 import type * as TStyles from "styles/types";
 
-export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
+export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	gap?: G.Responsive<number>;
 	align?: G.Responsive<TStyles.Align>;
 	justify?: G.Responsive<TStyles.Justify>;
@@ -18,7 +19,7 @@ export type Props<TagName extends keyof JSX.IntrinsicElements = "div"> = {
 	attributes?: G.Attributes<TagName>;
 };
 
-export type ItemProps<TagName extends keyof JSX.IntrinsicElements = "div"> = {
+export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	area?: string;
 	colStart?: G.Responsive<number>;
 	colEnd?: G.Responsive<number>;

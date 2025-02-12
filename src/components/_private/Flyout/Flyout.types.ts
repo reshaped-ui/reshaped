@@ -47,19 +47,17 @@ export type UseFlyoutData = Pick<State, "styles" | "position" | "status"> & {
 /**
  * Component
  */
-export type Instance =
-	| {
-			open: () => void;
-			close: () => void;
-			updatePosition: () => void;
-	  }
-	| undefined;
+export type Instance = {
+	open: () => void;
+	close: () => void;
+	updatePosition: () => void;
+} | null;
 
 type WithUncontrolled = { active?: never; defaultActive?: boolean };
 type WithControlled = { active: boolean; defaultActive?: never };
 
 export type TriggerAttributes = {
-	ref: React.RefObject<HTMLButtonElement>;
+	ref: React.RefObject<HTMLButtonElement | null>;
 	onBlur?: (e: React.FocusEvent) => void;
 	onFocus?: () => void;
 	onMouseDown?: () => void;
@@ -99,8 +97,8 @@ type BaseProps = {
 	contentClassName?: string;
 	contentAttributes?: G.Attributes<"div">;
 	instanceRef?: React.Ref<Instance>;
-	containerRef?: React.RefObject<HTMLElement>;
-	initialFocusRef?: React.RefObject<HTMLElement>;
+	containerRef?: React.RefObject<HTMLElement | null>;
+	initialFocusRef?: React.RefObject<HTMLElement | null>;
 };
 
 export type DefaultProps = Required<{
@@ -126,8 +124,8 @@ export type ContextProps = {
 	id: string;
 	flyout: UseFlyoutData;
 	width?: Width;
-	triggerElRef?: React.RefObject<HTMLButtonElement>;
-	flyoutElRef: React.RefObject<HTMLDivElement>;
+	triggerElRef?: React.RefObject<HTMLButtonElement | null>;
+	flyoutElRef: React.RefObject<HTMLDivElement | null>;
 	handleClose: (options?: { closeParents?: boolean }) => void;
 	handleOpen: () => void;
 	handleMouseEnter: () => void;

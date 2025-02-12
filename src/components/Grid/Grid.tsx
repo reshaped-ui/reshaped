@@ -4,7 +4,7 @@ import getJustifyStyles from "styles/justify";
 import type * as T from "./Grid.types";
 import s from "./Grid.module.css";
 
-const GridItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
+const GridItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
 	const {
 		area,
 		colStart,
@@ -40,7 +40,7 @@ const GridItem = <As extends keyof JSX.IntrinsicElements = "div">(props: T.ItemP
 	);
 };
 
-const Grid = <As extends keyof JSX.IntrinsicElements = "div">(props: T.Props<As>) => {
+const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Props<As>) => {
 	const {
 		areas,
 		columns,

@@ -58,7 +58,8 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 
 		// Big enough value to show there are more items and not overlap arrow controls
 		const visibilityThreshold = 48;
-		const elItem = findParent(itemRef.current, (el) => el.hasAttribute("data-rs-tabs-item"));
+		const elItem =
+			itemRef.current && findParent(itemRef.current, (el) => el.hasAttribute("data-rs-tabs-item"));
 
 		if (!elItem) return;
 

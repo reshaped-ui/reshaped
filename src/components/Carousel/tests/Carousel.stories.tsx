@@ -104,7 +104,7 @@ export const bleed = () => (
 );
 
 const RefDemo = () => {
-	const carouselRef = React.useRef<CarouselInstanceRef>();
+	const carouselRef = React.useRef<CarouselInstanceRef>(null);
 
 	return (
 		<View gap={3}>

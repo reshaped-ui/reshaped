@@ -65,9 +65,9 @@ export type Context = Pick<
 	value?: string;
 	setDefaultValue: (value: string) => void;
 	id: string;
-	elActiveRef: React.MutableRefObject<HTMLDivElement | null>;
-	elPrevActiveRef: React.MutableRefObject<HTMLDivElement | null>;
-	elScrollableRef: React.MutableRefObject<HTMLDivElement | null>;
+	elActiveRef: React.RefObject<HTMLDivElement | null>;
+	elPrevActiveRef: React.RefObject<HTMLDivElement | null>;
+	elScrollableRef: React.RefObject<HTMLDivElement | null>;
 	selection: SelectionState;
 	setSelection: React.Dispatch<React.SetStateAction<SelectionState>>;
 };

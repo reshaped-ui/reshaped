@@ -6,7 +6,7 @@
 import React from "react";
 import useElementId from "hooks/useElementId";
 
-type Ref = React.RefObject<HTMLElement>;
+type Ref = React.RefObject<HTMLElement | null>;
 type QueueItem = { triggerRef?: Ref; contentRef: Ref; parentId: string | null };
 
 let queue: Record<string, QueueItem> = {};
