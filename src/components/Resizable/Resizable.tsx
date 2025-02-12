@@ -206,7 +206,9 @@ const Resizable = (props: T.Props) => {
 				<PrivateResizableItem
 					{...(child.props as T.ItemProps)}
 					index={currentItemIndex++}
-					ref={(el) => (itemsRef.current[index] = { el, props: child.props as T.ItemProps })}
+					ref={(el) => {
+						itemsRef.current[index] = { el, props: child.props as T.ItemProps };
+					}}
 				/>
 			);
 		}
