@@ -14,7 +14,11 @@ const useHotkeys = <Element extends HTMLElement>(
 
 	React.useEffect(() => {
 		if (options?.disabled) return;
-		const remove = addHotkeys(hotkeys, elementRef, { preventDefault: options?.preventDefault });
+		if (!elementRef.current) return;
+
+		const remove = addHotkeys(hotkeys, elementRef as React.RefObject<HTMLElement>, {
+			preventDefault: options?.preventDefault,
+		});
 
 		return () => remove?.();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
