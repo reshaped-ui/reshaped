@@ -6,7 +6,7 @@
 	height: 100%;
 	position: relative;
 
-	&:has(.scrollable:focus) {
+	[data-rs-keyboard] &:has(.scrollable:focus) {
 		box-shadow: var(--rs-focus-shadow);
 	}
 }
