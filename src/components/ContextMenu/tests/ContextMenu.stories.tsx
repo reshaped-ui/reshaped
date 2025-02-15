@@ -17,7 +17,7 @@ export const base = () => (
 	<Example>
 		<Example.Item title="base">
 			<ScrollArea height="200px">
-				<ContextMenu>
+				<ContextMenu onOpen={() => console.log(122112)}>
 					<View height="400px" backgroundColor="neutral-faded" borderRadius="medium" />
 
 					<ContextMenu.Content>

@@ -13,3 +13,6 @@
 - Carousel: width: 100% for not-fitting items
 - Breadcrumbs: Added expandAriaLabel
 - Button: loadingAriaLabel
+- ContextMenu: Added onOpen/onClose handlers support
+- lockScroll + ContextMenu: fixed lockScroll scrollable parent detection
+- Loader: Added ariaLabel prop

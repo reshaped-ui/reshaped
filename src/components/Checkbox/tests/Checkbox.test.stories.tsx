@@ -123,7 +123,9 @@ export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
 		<div data-testid="root">
-			<Checkbox className="test-classname" attributes={{ id: "test-id" }} />
+			<Checkbox className="test-classname" attributes={{ id: "test-id" }}>
+				Content
+			</Checkbox>
 		</div>
 	),
 	play: async ({ canvas }) => {

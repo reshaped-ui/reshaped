@@ -103,7 +103,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 					role={role}
 					{...attributes}
 					id={id}
-					aria-modal={triggerType === "click" ? true : undefined}
+					aria-modal={role === "dialog" ? true : undefined}
 					style={contentAttributes?.style}
 					className={innerClassNames}
 				>

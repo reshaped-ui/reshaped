@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Components/Modal renders correctly when active 1`] = `":r4:-title"`;
-
-exports[`Components/Modal renders correctly when active 2`] = `":r4:-subtitle"`;

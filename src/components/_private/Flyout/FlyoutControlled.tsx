@@ -200,8 +200,6 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	}, [clearTimer, timerRef, handleClose]);
 
 	const handleTriggerClick = React.useCallback(() => {
-		console.log("122121");
-
 		if (!isRendered) {
 			handleOpen();
 		} else {

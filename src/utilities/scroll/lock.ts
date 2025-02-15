@@ -5,15 +5,19 @@ import lockStandardScroll from "./lockStandard";
 let lockedCount = 0;
 let reset = () => {};
 
-export const lockScroll = (args: { containerEl?: HTMLElement | null; cb?: () => void }) => {
+export const lockScroll = (args: {
+	containerEl?: HTMLElement | null;
+	originEl?: HTMLElement | null;
+	cb?: () => void;
+}) => {
 	lockedCount += 1;
 
 	if (lockedCount > 1) return;
 
-	if (isIOS()) {
-		reset = lockSafariScroll(args.containerEl);
+	if (isIOS() && !args.containerEl && !args.originEl) {
+		reset = lockSafariScroll();
 	} else {
-		reset = lockStandardScroll(args.containerEl);
+		reset = lockStandardScroll({ containerEl: args.containerEl, originEl: args.originEl });
 	}
 
 	args.cb?.();
