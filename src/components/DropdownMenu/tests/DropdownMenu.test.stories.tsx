@@ -35,24 +35,26 @@ export const defaultActive: StoryObj<{
 	play: async ({ canvasElement, args }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
 		const trigger = canvas.getAllByRole("button")[0];
-		const item = canvas.getByText("Item");
+		let item = canvas.getByText("Item");
 
 		await userEvent.click(document.body);
 
-		expect(args.handleClose).toHaveBeenCalledTimes(1);
-		expect(args.handleClose).toHaveBeenCalledWith();
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith();
+		});
 
 		expect(item).not.toBeInTheDocument();
 
 		await userEvent.click(trigger);
 
-		expect(args.handleOpen).toHaveBeenCalledTimes(1);
-		expect(args.handleOpen).toHaveBeenCalledWith();
-
 		await waitFor(() => {
-			const item = canvas.getByText("Item");
-			expect(item).toBeInTheDocument();
+			expect(args.handleOpen).toHaveBeenCalledTimes(1);
+			expect(args.handleOpen).toHaveBeenCalledWith();
 		});
+
+		item = canvas.getByText("Item");
+		expect(item).toBeInTheDocument();
 	},
 };
 
@@ -81,8 +83,10 @@ export const active: StoryObj<{
 
 		await userEvent.click(document.body);
 
-		expect(args.handleClose).toHaveBeenCalledTimes(1);
-		expect(args.handleClose).toHaveBeenCalledWith();
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith();
+		});
 
 		expect(item).toBeInTheDocument();
 	},
@@ -113,8 +117,10 @@ export const activeFalse: StoryObj<{
 
 		await userEvent.click(trigger);
 
-		expect(args.handleOpen).toHaveBeenCalledTimes(1);
-		expect(args.handleOpen).toHaveBeenCalledWith();
+		await waitFor(() => {
+			expect(args.handleOpen).toHaveBeenCalledTimes(1);
+			expect(args.handleOpen).toHaveBeenCalledWith();
+		});
 
 		const item = canvas.queryByText("Item");
 		expect(item).not.toBeInTheDocument();

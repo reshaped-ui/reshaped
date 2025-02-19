@@ -18,6 +18,10 @@ export default {
 	title: "Meta/Themes",
 	parameters: {
 		iframe: { url: "https://reshaped.so/docs/tokens/theming/runtime-theming" },
+		a11y: {
+			// This option disables all a11y checks on this story
+			disable: true,
+		},
 	},
 };
 

@@ -20,6 +20,7 @@ export const renderProps: StoryObj = {
 	name: "children, render props",
 	render: () => (
 		<Modal active className="test-classname" attributes={{ "data-testid": "test-id" }}>
+			<Modal.Title>Title</Modal.Title>
 			Content
 		</Modal>
 	),
@@ -60,6 +61,7 @@ export const handlers: StoryObj<{
 					onAfterOpen={args.handleAfterOpen}
 					onAfterClose={args.handleAfterClose}
 				>
+					<Modal.Title>Title</Modal.Title>
 					Content
 				</Modal>
 			</>
@@ -88,41 +90,43 @@ export const handlers: StoryObj<{
 		// Close by changing the state after the trigger click
 		await userEvent.click(trigger);
 
-		// Changing state doesn't trigger onClose
-		expect(args.handleClose).toHaveBeenCalledTimes(0);
-
 		// Wait for transition
 		await waitFor(() => {
+			// Changing state doesn't trigger onClose
+			expect(args.handleClose).toHaveBeenCalledTimes(0);
+
 			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
 			expect(args.handleAfterClose).toHaveBeenCalledWith();
 		});
 
 		// Open
 		await userEvent.click(trigger);
+		await sleep(100);
 
 		overlay = canvas.getAllByRole("button", { hidden: true }).at(-1)!;
 
 		// Close by clicking on the overlay
 		await userEvent.click(overlay);
 
-		expect(args.handleClose).toHaveBeenCalledTimes(1);
-		expect(args.handleClose).toHaveBeenCalledWith({ reason: "overlay-click" });
-
 		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "overlay-click" });
+
 			expect(args.handleAfterClose).toHaveBeenCalledTimes(2);
 			expect(args.handleAfterClose).toHaveBeenCalledWith();
 		});
 
 		// Open
 		await userEvent.click(trigger);
+		await sleep(100);
 
 		// Close by pressing Escape
 		await userEvent.keyboard("{Escape}");
 
-		expect(args.handleClose).toHaveBeenCalledTimes(2);
-		expect(args.handleClose).toHaveBeenCalledWith({ reason: "escape-key" });
-
 		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(2);
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "escape-key" });
+
 			expect(args.handleAfterClose).toHaveBeenCalledTimes(3);
 			expect(args.handleAfterClose).toHaveBeenCalledWith();
 		});
@@ -144,6 +148,7 @@ export const disableCloseOnClick: StoryObj<{
 				args.handleClose(closeArgs);
 			}}
 		>
+			<Modal.Title>Title</Modal.Title>
 			Content
 		</Modal>
 	),
@@ -170,6 +175,7 @@ export const containerRef: StoryObj = {
 			<>
 				<div ref={containerRef} data-testid="test-id" style={{ height: 200 }} />
 				<Modal active containerRef={containerRef}>
+					<Modal.Title>Title</Modal.Title>
 					Content
 				</Modal>
 			</>
@@ -188,6 +194,7 @@ export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
 		<Modal active className="test-classname" attributes={{ "data-testid": "test-id" }}>
+			<Modal.Title>Title</Modal.Title>
 			Content
 		</Modal>
 	),
