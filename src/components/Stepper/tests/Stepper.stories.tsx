@@ -93,9 +93,6 @@ export const labelDisplay = () => (
 
 export const edgeCases = () => (
 	<Example>
-		<Example.Item title="collapsible">
-			<Demo />
-		</Example.Item>
 		<Example.Item
 			title={[
 				"multiline subtitle",

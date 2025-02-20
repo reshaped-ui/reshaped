@@ -15,26 +15,13 @@ export default {
 	},
 };
 
-export const selection = () => (
+export const value = () => (
 	<Example>
-		<Example.Item title="unselected, placeholder">
+		<Example.Item title="defaultValue">
 			<Select
 				name="animal"
-				placeholder="Select an animal"
-				inputAttributes={{ "aria-label": "test select" }}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-			/>
-		</Example.Item>
-
-		<Example.Item title="selected, controlled">
-			<Select
-				name="animal"
-				inputAttributes={{ "aria-label": "test select" }}
-				placeholder="Select an animal"
 				defaultValue="dog"
+				inputAttributes={{ "aria-label": "test select" }}
 				options={[
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },
@@ -42,12 +29,11 @@ export const selection = () => (
 			/>
 		</Example.Item>
 
-		<Example.Item title="selected, uncontrolled">
+		<Example.Item title="placeholder">
 			<Select
 				name="animal"
-				inputAttributes={{ "aria-label": "test select" }}
 				placeholder="Select an animal"
-				value="dog"
+				inputAttributes={{ "aria-label": "test select" }}
 				options={[
 					{ label: "Dog", value: "dog" },
 					{ label: "Turtle", value: "turtle" },

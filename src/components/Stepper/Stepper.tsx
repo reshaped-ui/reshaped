@@ -41,15 +41,8 @@ const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 	);
 
 	return (
-		<View>
-			<View
-				attributes={attributes}
-				className={className}
-				direction="row"
-				gap={2}
-				align="center"
-				position="static"
-			>
+		<View attributes={attributes} className={className}>
+			<View direction="row" gap={2} align="center" position="static">
 				<View.Item>
 					<View
 						align="center"

@@ -1,9 +1,9 @@
-import React from "react";
-import { Example, Placeholder } from "utilities/storybook";
+import { StoryObj } from "@storybook/react";
+import { userEvent, expect, fn } from "@storybook/test";
+import { Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
 import View from "components/View";
-import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Utilities/Accordion",
@@ -18,121 +18,225 @@ export default {
 export const base = {
 	name: "base",
 	render: () => (
-		<Example>
-			<Example.Item title="base">
-				<Accordion defaultActive>
-					<Accordion.Trigger>Trigger</Accordion.Trigger>
-					<Accordion.Content>
-						<View paddingTop={2}>
-							<Placeholder />
-						</View>
-					</Accordion.Content>
-				</Accordion>
-			</Example.Item>
-		</Example>
+		<Accordion defaultActive>
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<Placeholder />
+				</View>
+			</Accordion.Content>
+		</Accordion>
 	),
 };
 
-export const icon = {
-	name: "iconSize, iconPosition",
+export const iconSize = {
+	name: "iconSize",
 	render: () => (
-		<Example>
-			<Example.Item title="iconSize: 6">
-				<Accordion iconSize={6}>
-					<Accordion.Trigger>Trigger</Accordion.Trigger>
-					<Accordion.Content>
-						<View paddingTop={2}>
-							<Placeholder />
-						</View>
-					</Accordion.Content>
-				</Accordion>
-			</Example.Item>
-
-			<Example.Item title="iconPosition: start">
-				<Accordion iconPosition="start">
-					<Accordion.Trigger>Trigger</Accordion.Trigger>
-					<Accordion.Content>
-						<View paddingTop={2}>
-							<Placeholder />
-						</View>
-					</Accordion.Content>
-				</Accordion>
-			</Example.Item>
-		</Example>
+		<Accordion iconSize={6}>
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<Placeholder />
+				</View>
+			</Accordion.Content>
+		</Accordion>
 	),
 };
 
-export const composition = {
-	name: "composition",
-	render: () => {
-		const toggle = useToggle();
-		const [activeValue, setActiveValue] = React.useState<number | null>(null);
+export const iconPosition = {
+	name: "iconPosition",
+	render: () => (
+		<Accordion iconPosition="start">
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<Placeholder />
+				</View>
+			</Accordion.Content>
+		</Accordion>
+	),
+};
 
-		return (
-			<Example>
-				<Example.Item title="custom content size">
-					<Accordion>
-						<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
-						<Accordion.Content>
-							<View paddingTop={2}>
-								<Placeholder h={200} />
-							</View>
-						</Accordion.Content>
-					</Accordion>
-				</Example.Item>
+export const onToggle: StoryObj<{ handleToggle: typeof fn }> = {
+	name: "onToggle",
+	args: {
+		handleToggle: fn(),
+	},
+	render: (args) => (
+		<Accordion onToggle={args.handleToggle}>
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<Placeholder />
+				</View>
+			</Accordion.Content>
+		</Accordion>
+	),
+	play: async ({ canvas, args }) => {
+		const { handleToggle } = args;
 
-				<Example.Item title="inside View">
-					<View backgroundColor="neutral-faded" borderRadius="medium" padding={4}>
-						<Accordion>
-							<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
-							<Accordion.Content>
-								<View paddingTop={2}>
-									<Placeholder />
-								</View>
-							</Accordion.Content>
-						</Accordion>
+		const trigger = canvas.getAllByRole("button")[0];
+		const content = canvas.getByRole("region", { hidden: true });
+
+		expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+		await userEvent.click(trigger);
+
+		const triggerId = trigger.getAttribute("id");
+		const contentId = content.getAttribute("id");
+
+		expect(handleToggle).toBeCalledTimes(1);
+		expect(handleToggle).toBeCalledWith(true);
+		expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+		expect(content).toBeInTheDocument();
+		expect(content.getAttribute("aria-labelledby")).toBe(triggerId);
+		expect(trigger.getAttribute("aria-controls")).toBe(contentId);
+
+		await userEvent.click(trigger);
+
+		expect(handleToggle).toBeCalledTimes(2);
+		expect(handleToggle).toBeCalledWith(false);
+		expect(trigger).toHaveAttribute("aria-expanded", "false");
+	},
+};
+
+export const active: StoryObj<{ handleToggle: typeof fn }> = {
+	name: "active",
+	args: {
+		handleToggle: fn(),
+	},
+	render: (args) => (
+		<Accordion onToggle={args.handleToggle} active>
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<Placeholder />
+				</View>
+			</Accordion.Content>
+		</Accordion>
+	),
+	play: async ({ canvas, args }) => {
+		const { handleToggle } = args;
+
+		const trigger = canvas.getAllByRole("button")[0];
+
+		// Opened by default
+		expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+		await userEvent.click(trigger);
+
+		// Calls handle toggle with a new state
+		expect(handleToggle).toBeCalledWith(false);
+		// Keeps content opened since it's controlled
+		expect(trigger).toHaveAttribute("aria-expanded", "true");
+	},
+};
+
+export const defaultActive: StoryObj<{ handleToggle: typeof fn }> = {
+	name: "defaultActive",
+	args: {
+		handleToggle: fn(),
+	},
+	render: (args) => (
+		<Accordion onToggle={args.handleToggle} defaultActive>
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<Placeholder />
+				</View>
+			</Accordion.Content>
+		</Accordion>
+	),
+	play: async ({ canvas, args }) => {
+		const { handleToggle } = args;
+
+		const trigger = canvas.getAllByRole("button")[0];
+
+		// Opened by default
+		expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+		await userEvent.click(trigger);
+
+		// Calls handle toggle with a new state
+		expect(handleToggle).toBeCalledWith(false);
+		// Keeps content opened since it's controlled
+		expect(trigger).toHaveAttribute("aria-expanded", "false");
+	},
+};
+
+export const renderProps: StoryObj<{ handleToggle: typeof fn }> = {
+	name: "children: render props",
+	args: {
+		handleToggle: fn(),
+	},
+	render: (args) => (
+		<Accordion onToggle={args.handleToggle}>
+			<Accordion.Trigger>
+				{(attributes, { active }) => (
+					<Button attributes={{ ...attributes, "data-active": active }}>Trigger</Button>
+				)}
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<Placeholder />
+				</View>
+			</Accordion.Content>
+		</Accordion>
+	),
+	play: async ({ canvas, args }) => {
+		const { handleToggle } = args;
+
+		const trigger = canvas.getAllByRole("button")[0];
+		const content = canvas.getByRole("region", { hidden: true });
+		const triggerId = trigger.getAttribute("id");
+		const contentId = content.getAttribute("id");
+
+		expect(trigger).toHaveAttribute("aria-expanded", "false");
+		expect(trigger).toHaveAttribute("id", triggerId);
+		expect(trigger).toHaveAttribute("aria-controls", contentId);
+		expect(trigger).toHaveAttribute("data-active", "false");
+
+		await userEvent.click(trigger);
+
+		expect(handleToggle).toBeCalledTimes(1);
+		expect(handleToggle).toBeCalledWith(true);
+		expect(trigger).toHaveAttribute("data-active", "true");
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Accordion className="test-classname" attributes={{ id: "test-id" }}>
+				<Accordion.Trigger>
+					<Placeholder>Trigger</Placeholder>
+				</Accordion.Trigger>
+				<Accordion.Content>
+					<View paddingTop={2}>
+						<Placeholder />
 					</View>
-				</Example.Item>
+				</Accordion.Content>
+			</Accordion>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
 
-				<Example.Item title="multiple items, depending on state">
-					<View gap={2}>
-						{[1, 2, 3].map((i) => (
-							<View
-								key={i}
-								backgroundColor={activeValue === i ? "elevation-base" : undefined}
-								animated
-								borderRadius="medium"
-								borderColor={activeValue === i ? "neutral-faded" : "transparent"}
-								shadow={activeValue === i ? "raised" : undefined}
-								padding={2}
-							>
-								<Accordion
-									active={activeValue === i}
-									onToggle={(active) => setActiveValue(active ? i : null)}
-								>
-									<Accordion.Trigger>Accordion trigger</Accordion.Trigger>
-									<Accordion.Content>
-										<View paddingTop={2}>
-											<Placeholder />
-										</View>
-									</Accordion.Content>
-								</Accordion>
-							</View>
-						))}
-					</View>
-				</Example.Item>
-
-				<Example.Item title="external trigger">
-					<Button onClick={toggle.toggle}>Toggle</Button>
-					<Accordion active={toggle.active}>
-						<Accordion.Content>
-							<View paddingTop={2}>
-								<Placeholder />
-							</View>
-						</Accordion.Content>
-					</Accordion>
-				</Example.Item>
-			</Example>
-		);
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
