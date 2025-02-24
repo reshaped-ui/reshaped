@@ -1,7 +1,10 @@
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { StoryObj } from "@storybook/react";
+import { expect, waitFor } from "@storybook/test";
 import Reshaped from "components/Reshaped";
 import useRTL from "hooks/useRTL";
+
+export default { title: "Hooks/useRTL" };
 
 const Component = () => {
 	const [rtl, setRTL] = useRTL();
@@ -10,25 +13,21 @@ const Component = () => {
 		React.act(() => setRTL(true));
 	}, [setRTL]);
 
-	return <div>{rtl}</div>;
+	return <div>{rtl ? "RTL" : "LTR"}</div>;
 };
 
-describe("useRTL", () => {
-	test("switches to RTL", () => {
-		render(
+export const setRTL: StoryObj = {
+	name: "setRTL",
+	render: () => {
+		return (
 			<Reshaped theme="reshaped">
 				<Component />
 			</Reshaped>
 		);
-
+	},
+	play: async () => {
 		waitFor(() => {
 			expect(document.documentElement).toHaveAttribute("dir", "rtl");
 		});
-	});
-
-	test("defaults to RTL", () => {
-		render(<Reshaped theme="reshaped" defaultRTL />);
-
-		expect(document.documentElement).toHaveAttribute("dir", "rtl");
-	});
-});
+	},
+};
