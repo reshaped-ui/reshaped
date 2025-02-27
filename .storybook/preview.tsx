@@ -101,20 +101,23 @@ const ThemeSwitch = () => {
 	);
 };
 
-const reshapedDecorator = (Story: React.ComponentType) => (
-	<React.StrictMode>
-		<Reshaped
-			defaultTheme="reshaped"
-			defaultColorMode="dark"
-			toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
-		>
-			<View paddingBottom={10}>
-				<Story />
-			</View>
-			{/* <ThemeSwitch /> */}
-		</Reshaped>
-	</React.StrictMode>
-);
+const reshapedDecorator = (Story: React.ComponentType, { parameters }) =>
+	parameters.disableWrapper ? (
+		<Story />
+	) : (
+		<React.StrictMode>
+			<Reshaped
+				defaultTheme="reshaped"
+				defaultColorMode="dark"
+				toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
+			>
+				<View paddingBottom={10}>
+					<Story />
+				</View>
+				<ThemeSwitch />
+			</Reshaped>
+		</React.StrictMode>
+	);
 
 const preview: Preview = {
 	decorators: [reshapedDecorator],
