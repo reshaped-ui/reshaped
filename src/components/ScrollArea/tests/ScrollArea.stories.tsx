@@ -12,6 +12,10 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/utilities/scroll-area",
 		},
+		// Skip because axe core incorrectly reports contrast issues
+		a11y: {
+			disable: true,
+		},
 	},
 };
 

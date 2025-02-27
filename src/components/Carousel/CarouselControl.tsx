@@ -47,14 +47,14 @@ const CarouselControl = (props: T.ControlProps) => {
 	}, [scrollPosition, scrollElRef, mounted, isNext]);
 
 	return (
-		<div className={controlClassNames} aria-hidden="true">
+		<div className={controlClassNames}>
 			<Button
 				onClick={onClick}
 				icon={isDisplayedAsNext ? IconChevronRight : IconChevronLeft}
 				rounded
 				variant="outline"
 				elevated
-				attributes={{ "aria-disabled": !visible }}
+				attributes={{ "aria-disabled": !visible, "aria-hidden": true }}
 			/>
 		</div>
 	);

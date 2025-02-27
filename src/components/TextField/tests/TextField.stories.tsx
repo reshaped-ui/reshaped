@@ -186,7 +186,14 @@ export const slots = () => (
 				name="Name"
 				placeholder="Enter your name"
 				value="Reshaped"
-				endSlot={<Button icon={IconZap} size="small" onClick={() => {}} />}
+				endSlot={
+					<Button
+						icon={IconZap}
+						size="small"
+						onClick={() => {}}
+						attributes={{ "aria-label": "Action" }}
+					/>
+				}
 			/>
 		</Example.Item>
 		<Example.Item title="multiline wrap">

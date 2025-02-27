@@ -144,6 +144,7 @@ export const edgeCases = () => (
 	<iframe src="nskjdfdsdkjfsjkdfhbsjlhdfbsjlhfbs;jhbsdljfhsbljhfsbljhfbsjlfdhbsljhfbsdljhfbsljhfbslufbhsdlfds" />
 </div>`}
 				resize="auto"
+				placeholder="Placeholder"
 			/>
 		</Example.Item>
 	</Example>

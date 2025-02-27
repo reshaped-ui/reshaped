@@ -130,7 +130,7 @@ export const className: StoryObj = {
 				className="test-classname"
 				attributes={{ id: "test-id" }}
 				name="name"
-				inputAttributes={{ id: "test-input-id" }}
+				inputAttributes={{ id: "test-input-id", "aria-label": "Label" }}
 			/>
 		</div>
 	),

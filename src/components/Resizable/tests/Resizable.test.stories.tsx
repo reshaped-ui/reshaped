@@ -16,7 +16,9 @@ export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
 		<div data-testid="root">
-			<Resizable className="test-classname" attributes={{ id: "test-id" }} />
+			<Resizable className="test-classname" attributes={{ id: "test-id" }}>
+				<Resizable.Item>Content</Resizable.Item>
+			</Resizable>
 		</div>
 	),
 	play: async ({ canvas }) => {

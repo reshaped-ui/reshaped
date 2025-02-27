@@ -45,7 +45,7 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 				max={max}
 				min={min}
 				step={step}
-				aria-labelledby={renderValue !== false ? id : undefined}
+				aria-labelledby={id}
 				aria-orientation={orientation}
 			/>
 			<div

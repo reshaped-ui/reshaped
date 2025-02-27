@@ -72,7 +72,10 @@ export const status = () => (
 export const customRender = () => (
 	<Example>
 		<Example.Item title="custom render">
-			<Slider name="slider" defaultValue={30} renderValue={(args) => `$${args.value}`} />
+			<FormControl>
+				<FormControl.Label>Slider value</FormControl.Label>
+				<Slider name="slider" defaultValue={30} renderValue={(args) => `$${args.value}`} />
+			</FormControl>
 		</Example.Item>
 
 		<Example.Item title="no tooltip">
