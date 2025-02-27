@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Styles/MinHeight handles % value 1`] = `
+exports[`Styles/MinHeight > handles % value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_413f32",
     [
-      "--type-literal",
+      "_--type-literal_413f32",
     ],
   ],
   "variables": {
@@ -14,12 +14,12 @@ exports[`Styles/MinHeight handles % value 1`] = `
 }
 `;
 
-exports[`Styles/MinHeight handles px value 1`] = `
+exports[`Styles/MinHeight > handles px value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_413f32",
     [
-      "--type-literal",
+      "_--type-literal_413f32",
     ],
   ],
   "variables": {
@@ -28,13 +28,13 @@ exports[`Styles/MinHeight handles px value 1`] = `
 }
 `;
 
-exports[`Styles/MinHeight handles responsive value 1`] = `
+exports[`Styles/MinHeight > handles responsive value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_413f32",
     [
-      "--type-literal",
-      "--type-literal--l",
+      "_--type-literal_413f32",
+      "_--type-literal--l_413f32",
     ],
   ],
   "variables": {
@@ -44,14 +44,14 @@ exports[`Styles/MinHeight handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/MinHeight handles undefined value 1`] = `null`;
+exports[`Styles/MinHeight > handles undefined value 1`] = `null`;
 
-exports[`Styles/MinHeight handles unit value 1`] = `
+exports[`Styles/MinHeight > handles unit value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_413f32",
     [
-      "--type-unit",
+      "_--type-unit_413f32",
     ],
   ],
   "variables": {

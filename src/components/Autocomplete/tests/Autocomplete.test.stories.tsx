@@ -6,7 +6,6 @@ import Autocomplete from "components/Autocomplete";
 import FormControl from "components/FormControl";
 import { sleep } from "utilities/helpers";
 import userEvent from "@testing-library/user-event";
-import Reshaped from "components/Reshaped";
 
 export default {
 	title: "Components/Autocomplete/tests",
@@ -81,8 +80,8 @@ export const base: StoryObj<{
 
 		expect(options[1]).not.toHaveAttribute("data-rs-focus");
 
-		await userEvent.keyboard("{ArrowDown}");
-		await userEvent.keyboard("{Enter}");
+		await userEvent.keyboard("{ArrowDown/}");
+		await userEvent.keyboard("{Enter/}");
 
 		expect(input).toHaveValue("Pie");
 		expect(args.handleItemSelect).toHaveBeenCalledTimes(1);
@@ -95,7 +94,7 @@ export const base: StoryObj<{
 		await sleep(100);
 
 		// Test click selection after opening with down arrow
-		await userEvent.keyboard("{ArrowDown}");
+		await userEvent.keyboard("{ArrowDown/}");
 
 		await waitFor(() => {
 			options = canvas.getAllByRole("option");
@@ -110,12 +109,13 @@ export const base: StoryObj<{
 			data: { foo: "bar" },
 		});
 
-		// Give browser time to focus on the input
-		await sleep(100);
+		input.focus();
 
-		await userEvent.keyboard("{Backspace}");
+		await userEvent.keyboard("{Backspace/}");
 
-		expect(args.handleBackspace).toHaveBeenCalledTimes(1);
-		expect(args.handleBackspace).toHaveBeenCalledWith();
+		await waitFor(() => {
+			expect(args.handleBackspace).toHaveBeenCalledTimes(1);
+			expect(args.handleBackspace).toHaveBeenCalledWith();
+		});
 	},
 };

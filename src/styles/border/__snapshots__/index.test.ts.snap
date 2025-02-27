@@ -1,23 +1,23 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Styles/Border handles responsive value 1`] = `
+exports[`Styles/Border > handles responsive value 1`] = `
 {
   "classNames": [
-    "root",
-    "null",
-    "--border-neutral--m",
-    "--border-transparent--l",
+    "_root_a76fc7",
+    "_null_a76fc7",
+    "_--border-neutral--m_a76fc7",
+    "_--border-transparent--l_a76fc7",
   ],
 }
 `;
 
-exports[`Styles/Border handles undefined value 1`] = `null`;
+exports[`Styles/Border > handles undefined value 1`] = `null`;
 
-exports[`Styles/Border handles value 1`] = `
+exports[`Styles/Border > handles value 1`] = `
 {
   "classNames": [
-    "root",
-    "--border-primary",
+    "_root_a76fc7",
+    "_--border-primary_a76fc7",
   ],
 }
 `;

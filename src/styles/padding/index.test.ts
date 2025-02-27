@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import getPaddingStyles from "./index";
 
 describe("Styles/Padding", () => {

@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import { getOnColor } from "../color";
 
 describe("cli/utilities/color", () => {

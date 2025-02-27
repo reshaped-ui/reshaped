@@ -5,6 +5,7 @@ import Button from "components/Button";
 import Reshaped from "components/Reshaped";
 import { useRef } from "react";
 import { createRoot } from "react-dom/client";
+import { sleep } from "utilities/helpers";
 
 export default {
 	title: "Internal/Flyout/tests",
@@ -32,14 +33,14 @@ export const defaultActive: StoryObj<{
 		const trigger = canvas.getAllByRole("button")[0];
 		let item = canvas.getByText("Content");
 
+		await sleep(500);
 		await userEvent.click(document.body);
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);
 			expect(args.handleClose).toHaveBeenCalledWith();
+			expect(item).not.toBeInTheDocument();
 		});
-
-		expect(item).not.toBeInTheDocument();
 
 		await userEvent.click(trigger);
 

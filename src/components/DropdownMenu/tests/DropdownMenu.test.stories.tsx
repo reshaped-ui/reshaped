@@ -2,6 +2,7 @@ import { StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
 import Button from "components/Button";
 import DropdownMenu from "components/DropdownMenu";
+import { sleep } from "utilities/helpers";
 
 export default {
 	title: "Components/DropdownMenu/tests",
@@ -37,24 +38,24 @@ export const defaultActive: StoryObj<{
 		const trigger = canvas.getAllByRole("button")[0];
 		let item = canvas.getByText("Item");
 
+		await sleep(500);
 		await userEvent.click(document.body);
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);
 			expect(args.handleClose).toHaveBeenCalledWith();
+			expect(item).not.toBeInTheDocument();
 		});
 
-		expect(item).not.toBeInTheDocument();
-
 		await userEvent.click(trigger);
+
+		item = canvas.getByText("Item");
 
 		await waitFor(() => {
 			expect(args.handleOpen).toHaveBeenCalledTimes(1);
 			expect(args.handleOpen).toHaveBeenCalledWith();
+			expect(item).toBeInTheDocument();
 		});
-
-		item = canvas.getByText("Item");
-		expect(item).toBeInTheDocument();
 	},
 };
 

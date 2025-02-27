@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import getMinWidthStyles from "./index";
 
 describe("Styles/MinWidth", () => {

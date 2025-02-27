@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react";
-import { expect, userEvent, fn } from "@storybook/test";
+import { expect, userEvent, fn, waitFor } from "@storybook/test";
 import Calendar from "components/Calendar";
 
 export default {
@@ -210,23 +210,24 @@ export const keyboardNavigation: StoryObj = {
 	name: "keyboard navigation",
 	render: () => <Calendar defaultMonth={new Date(2020, 0)} />,
 	play: async ({ canvas }) => {
+		const user = userEvent.setup();
 		const dateEls = canvas.getAllByRole("checkbox");
 
 		dateEls[0].focus();
 
-		await userEvent.keyboard("{ArrowRight}", { delay: null });
+		await user.keyboard("{ArrowRight/}");
 		expect(document.activeElement).toHaveAttribute("data-rs-date", "2020-01-02");
 
-		await userEvent.keyboard("{ArrowLeft}", { delay: null });
+		await user.keyboard("{ArrowLeft/}");
 		expect(document.activeElement).toHaveAttribute("data-rs-date", "2020-01-01");
 
-		await userEvent.keyboard("{ArrowDown}", { delay: null });
+		await user.keyboard("{ArrowDown/}");
 		expect(document.activeElement).toHaveAttribute("data-rs-date", "2020-01-08");
 
-		await userEvent.keyboard("{ArrowUp}", { delay: null });
+		await user.keyboard("{ArrowUp/}");
 		expect(document.activeElement).toHaveAttribute("data-rs-date", "2020-01-01");
 
-		await userEvent.keyboard("{ArrowUp}", { delay: null });
+		await user.keyboard("{ArrowUp/}");
 		expect(document.activeElement).toHaveAttribute("data-rs-date", "2019-12-25");
 	},
 };

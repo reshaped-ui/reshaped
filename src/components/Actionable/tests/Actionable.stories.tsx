@@ -68,7 +68,7 @@ export const fullWidth: StoryObj = {
 		</Example>
 	),
 	play: async () => {
-		await userEvent.keyboard("{Tab}");
+		await userEvent.keyboard("{Tab/}");
 	},
 };
 
@@ -84,7 +84,7 @@ export const insetFocus = {
 		</Example>
 	),
 	play: async () => {
-		await userEvent.keyboard("{Tab}");
+		await userEvent.keyboard("{Tab/}");
 	},
 };
 
@@ -100,7 +100,7 @@ export const disableFocusRing = {
 		</Example>
 	),
 	play: async () => {
-		await userEvent.keyboard("{Tab}");
+		await userEvent.keyboard("{Tab/}");
 	},
 };
 
@@ -116,6 +116,6 @@ export const borderRadius = {
 		</Example>
 	),
 	play: async () => {
-		await userEvent.keyboard("{Tab}");
+		await userEvent.keyboard("{Tab/}");
 	},
 };

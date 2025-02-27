@@ -1,6 +1,6 @@
 import React from "react";
 import { StoryObj } from "@storybook/react";
-import { expect, fn, userEvent } from "@storybook/test";
+import { expect, fn, userEvent, waitFor } from "@storybook/test";
 import Button from "components/Button";
 import ScrollArea from "components/ScrollArea";
 import View from "components/View";
@@ -52,9 +52,11 @@ export const onScroll: StoryObj<{ handleScroll: ReturnType<typeof fn> }> = {
 
 		await userEvent.click(trigger);
 
-		expect(args.handleScroll).toHaveBeenCalledTimes(1);
-		// x value is flaky, so only testing y here
-		expect(args.handleScroll).toHaveBeenCalledWith(expect.objectContaining({ y: 0.5 }));
+		await waitFor(() => {
+			expect(args.handleScroll).toHaveBeenCalledTimes(1);
+			// x value is flaky, so only testing y here
+			expect(args.handleScroll).toHaveBeenCalledWith(expect.objectContaining({ y: 0.5 }));
+		});
 	},
 };
 

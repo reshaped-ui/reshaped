@@ -524,7 +524,7 @@ export const group = () => (
 		<Example.Item title="variant: solid">
 			<View gap={2}>
 				{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
-					<Button.Group>
+					<Button.Group key={color}>
 						<Button color={color}>One</Button>
 						<Button color={color}>Two</Button>
 						<Button color={color}>Three</Button>
@@ -535,7 +535,7 @@ export const group = () => (
 		<Example.Item title="variant: outline">
 			<View gap={2}>
 				{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
-					<Button.Group>
+					<Button.Group key={color}>
 						<Button color={color} variant="outline">
 							One
 						</Button>
@@ -552,7 +552,7 @@ export const group = () => (
 		<Example.Item title="variant: faded">
 			<View gap={2}>
 				{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
-					<Button.Group>
+					<Button.Group key={color}>
 						<Button color={color} variant="faded">
 							One
 						</Button>
@@ -570,7 +570,7 @@ export const group = () => (
 		<Example.Item title="variant: ghost">
 			<View gap={2}>
 				{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
-					<Button.Group>
+					<Button.Group key={color}>
 						<Button color={color} variant="ghost">
 							One
 						</Button>

@@ -10,7 +10,7 @@ const Component = () => {
 	const [rtl, setRTL] = useRTL();
 
 	React.useEffect(() => {
-		React.act(() => setRTL(true));
+		setRTL(true);
 	}, [setRTL]);
 
 	return <div>{rtl ? "RTL" : "LTR"}</div>;

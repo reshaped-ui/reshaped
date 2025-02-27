@@ -58,7 +58,7 @@ describe("Utilities/Reshaped", () => {
 		render(<Reshaped theme="reshaped" />);
 
 		expect(document.documentElement).not.toHaveAttribute(attribute);
-		await userEvent.keyboard("{Tab}");
+		await userEvent.keyboard("{Tab/}");
 		expect(document.documentElement).toHaveAttribute(attribute);
 		await userEvent.click(document.body);
 		expect(document.documentElement).not.toHaveAttribute(attribute);

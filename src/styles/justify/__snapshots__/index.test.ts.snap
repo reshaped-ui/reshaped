@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Styles/Justify handles responsive value 1`] = `
+exports[`Styles/Justify > handles responsive value 1`] = `
 {
   "variables": {
     "--rs-justify-l": "end",
@@ -10,9 +10,9 @@ exports[`Styles/Justify handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/Justify handles undefined value 1`] = `null`;
+exports[`Styles/Justify > handles undefined value 1`] = `null`;
 
-exports[`Styles/Justify handles value 1`] = `
+exports[`Styles/Justify > handles value 1`] = `
 {
   "variables": {
     "--rs-justify-s": "start",

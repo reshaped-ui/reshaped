@@ -121,7 +121,7 @@ export const handlers: StoryObj<{
 		await sleep(100);
 
 		// Close by pressing Escape
-		await userEvent.keyboard("{Escape}");
+		await userEvent.keyboard("{Escape/}");
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(2);
@@ -160,7 +160,7 @@ export const disableCloseOnClick: StoryObj<{
 
 		expect(args.handleClose).toHaveBeenCalledTimes(0);
 
-		await userEvent.keyboard("{Escape}");
+		await userEvent.keyboard("{Escape/}");
 
 		expect(args.handleClose).toHaveBeenCalledTimes(1);
 	},

@@ -22,8 +22,16 @@ export default defineWorkspace([
 			coverage: {
 				provider: "istanbul",
 			},
-			isolate: false,
+			// isolate: false,
 			setupFiles: [".storybook/vitest.setup.ts"],
+		},
+	},
+	{
+		extends: "./vite.config.mjs",
+		test: {
+			name: "unit",
+			isolate: false,
+			include: ["./src/**/*.test.ts"],
 		},
 	},
 ]);

@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Styles/MaxHeight handles % value 1`] = `
+exports[`Styles/MaxHeight > handles % value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_7989d5",
     [
-      "--type-literal",
+      "_--type-literal_7989d5",
     ],
   ],
   "variables": {
@@ -14,12 +14,12 @@ exports[`Styles/MaxHeight handles % value 1`] = `
 }
 `;
 
-exports[`Styles/MaxHeight handles px value 1`] = `
+exports[`Styles/MaxHeight > handles px value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_7989d5",
     [
-      "--type-literal",
+      "_--type-literal_7989d5",
     ],
   ],
   "variables": {
@@ -28,13 +28,13 @@ exports[`Styles/MaxHeight handles px value 1`] = `
 }
 `;
 
-exports[`Styles/MaxHeight handles responsive value 1`] = `
+exports[`Styles/MaxHeight > handles responsive value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_7989d5",
     [
-      "--type-literal",
-      "--type-literal--l",
+      "_--type-literal_7989d5",
+      "_--type-literal--l_7989d5",
     ],
   ],
   "variables": {
@@ -44,14 +44,14 @@ exports[`Styles/MaxHeight handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/MaxHeight handles undefined value 1`] = `null`;
+exports[`Styles/MaxHeight > handles undefined value 1`] = `null`;
 
-exports[`Styles/MaxHeight handles unit value 1`] = `
+exports[`Styles/MaxHeight > handles unit value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_7989d5",
     [
-      "--type-unit",
+      "_--type-unit_7989d5",
     ],
   ],
   "variables": {

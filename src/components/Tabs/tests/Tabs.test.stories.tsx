@@ -28,11 +28,13 @@ export const base: StoryObj = {
 	play: async ({ canvas }) => {
 		const list = canvas.getByRole("tablist");
 		const items = canvas.getAllByRole("tab");
-		const panels = canvas.getAllByRole("tabpanel");
+		const panels = canvas.getAllByRole("tabpanel", { hidden: true });
 
 		expect(list).toBeInTheDocument();
 		expect(items).toHaveLength(2);
 		expect(panels).toHaveLength(2);
+		expect(panels[0]).toBeVisible();
+		expect(panels[1]).not.toBeVisible();
 
 		const selectedItem = items[0];
 		const selectedPanel = panels[0];

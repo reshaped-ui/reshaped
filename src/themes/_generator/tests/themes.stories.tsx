@@ -46,11 +46,6 @@ const cssGenerated = getThemeCSS("generated", {
 	}),
 });
 
-const cssGenerated2 = getThemeCSS("generated2", {
-	...baseThemeDefinition,
-	color: generateThemeColors({ primary: "#2383e2" }),
-});
-
 const componentExamples = (
 	<View gap={4} padding={6} backgroundColor="page">
 		<Text variant="featured-2">Hello world</Text>
@@ -261,14 +256,10 @@ export const base = () => (
 );
 
 export const generation = () => (
-	<React.Fragment>
-		<style>
-			{cssGenerated}
-			{cssGenerated2}
-		</style>
+	<div>
+		<style>{cssGenerated}</style>
 		<Theme name="generated">{componentExamples}</Theme>
-		{/* <Theme name="generated2">{componentExamples}</Theme> */}
-	</React.Fragment>
+	</div>
 );
 
 const onColorsCss = getThemeCSS(

@@ -2,7 +2,6 @@ import { StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, waitFor } from "@storybook/test";
 import FormControl from "components/FormControl";
 import PinField from "components/PinField";
-import { act } from "react";
 
 export default {
 	title: "Components/PinField/tests",
@@ -55,10 +54,8 @@ export const defaultValue: StoryObj<{ handleChange?: ReturnType<typeof fn> }> = 
 	play: async ({ canvas, args }) => {
 		const elInput = canvas.getByRole("textbox");
 
-		await act(async () => {
-			elInput.focus();
-			await userEvent.keyboard("3");
-		});
+		elInput.focus();
+		await userEvent.keyboard("3");
 
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
@@ -86,10 +83,8 @@ export const value: StoryObj<{ handleChange?: ReturnType<typeof fn> }> = {
 	play: async ({ canvas, args }) => {
 		const elInput = canvas.getByRole("textbox");
 
-		await act(async () => {
-			elInput.focus();
-			await userEvent.keyboard("3");
-		});
+		elInput.focus();
+		await userEvent.keyboard("3");
 
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
@@ -118,10 +113,8 @@ export const pattern: StoryObj<{ handleChange?: ReturnType<typeof fn> }> = {
 	play: async ({ canvas, args }) => {
 		const elInput = canvas.getByRole("textbox");
 
-		await act(async () => {
-			elInput.focus();
-			await userEvent.keyboard("3");
-		});
+		elInput.focus();
+		await userEvent.keyboard("3");
 
 		expect(elInput).toHaveValue("ab");
 		expect(args.handleChange).toHaveBeenCalledTimes(0);
@@ -153,9 +146,7 @@ export const keyboard: StoryObj = {
 	play: async ({ canvas }) => {
 		const elInput = canvas.getByRole<HTMLInputElement>("textbox");
 
-		await act(() => {
-			elInput.focus();
-		});
+		elInput.focus();
 
 		expect(elInput.selectionStart).toEqual(0);
 		expect(elInput.selectionEnd).toEqual(0);
@@ -175,12 +166,12 @@ export const keyboard: StoryObj = {
 		});
 
 		// Move back to the first character
-		await userEvent.keyboard("{ArrowLeft}");
+		await userEvent.keyboard("{ArrowLeft/}");
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(2);
 			expect(elInput.selectionEnd).toEqual(3);
 		});
-		await userEvent.keyboard("{ArrowLeft}");
+		await userEvent.keyboard("{ArrowLeft/}");
 		await waitFor(() => {
 			expect(elInput.selectionStart).toEqual(1);
 			expect(elInput.selectionEnd).toEqual(2);

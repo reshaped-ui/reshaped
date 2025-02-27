@@ -2,6 +2,7 @@ import { StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within, waitFor } from "@storybook/test";
 import Popover from "components/Popover";
 import Button from "components/Button";
+import { sleep } from "utilities/helpers";
 
 export default {
 	title: "Components/Popover/tests",
@@ -35,14 +36,15 @@ export const defaultActive: StoryObj<{
 		const trigger = canvas.getAllByRole("button")[0];
 		let item = canvas.getByText("Content");
 
+		// Wait for the open animation
+		await sleep(500);
 		await userEvent.click(document.body);
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);
 			expect(args.handleClose).toHaveBeenCalledWith();
+			expect(item).not.toBeInTheDocument();
 		});
-
-		expect(item).not.toBeInTheDocument();
 
 		await userEvent.click(trigger);
 

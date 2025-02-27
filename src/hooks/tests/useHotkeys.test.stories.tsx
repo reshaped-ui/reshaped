@@ -32,7 +32,7 @@ export const modKey: StoryObj<{ handleHotkey: ReturnType<typeof fn> }> = {
 	},
 	render: (args) => <Component hotkeys={{ mod: args.handleHotkey }} />,
 	play: async ({ args }) => {
-		await userEvent.keyboard("{Meta}");
+		await userEvent.keyboard("{Meta/}");
 
 		expect(args.handleHotkey).toHaveBeenCalledTimes(1);
 	},

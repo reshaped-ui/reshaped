@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Styles/MinWidth handles % value 1`] = `
+exports[`Styles/MinWidth > handles % value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_617b2b",
     [
-      "--type-literal",
+      "_--type-literal_617b2b",
     ],
   ],
   "variables": {
@@ -14,12 +14,12 @@ exports[`Styles/MinWidth handles % value 1`] = `
 }
 `;
 
-exports[`Styles/MinWidth handles px value 1`] = `
+exports[`Styles/MinWidth > handles px value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_617b2b",
     [
-      "--type-literal",
+      "_--type-literal_617b2b",
     ],
   ],
   "variables": {
@@ -28,13 +28,13 @@ exports[`Styles/MinWidth handles px value 1`] = `
 }
 `;
 
-exports[`Styles/MinWidth handles responsive value 1`] = `
+exports[`Styles/MinWidth > handles responsive value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_617b2b",
     [
-      "--type-literal",
-      "--type-literal--l",
+      "_--type-literal_617b2b",
+      "_--type-literal--l_617b2b",
     ],
   ],
   "variables": {
@@ -44,14 +44,14 @@ exports[`Styles/MinWidth handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/MinWidth handles undefined value 1`] = `null`;
+exports[`Styles/MinWidth > handles undefined value 1`] = `null`;
 
-exports[`Styles/MinWidth handles unit value 1`] = `
+exports[`Styles/MinWidth > handles unit value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_617b2b",
     [
-      "--type-unit",
+      "_--type-unit_617b2b",
     ],
   ],
   "variables": {
