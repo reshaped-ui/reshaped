@@ -27,6 +27,7 @@ const PrivateResizableHandle = (props: T.PrivateHandleProps) => {
 			attributes={{
 				role: "button",
 				tabIndex: 0,
+				"aria-hidden": true,
 				ref: (el) => {
 					// @ts-ignore
 					ref.current = el;
