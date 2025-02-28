@@ -13,6 +13,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/components/modal",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

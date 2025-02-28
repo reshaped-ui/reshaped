@@ -13,6 +13,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/utilities/form-control",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

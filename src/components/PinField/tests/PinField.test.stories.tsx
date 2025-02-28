@@ -10,6 +10,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/components/pin-field",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

@@ -14,6 +14,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/components/autocomplete",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

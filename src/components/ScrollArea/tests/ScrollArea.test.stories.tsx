@@ -16,6 +16,7 @@ export default {
 		a11y: {
 			disable: true,
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

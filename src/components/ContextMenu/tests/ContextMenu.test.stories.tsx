@@ -11,6 +11,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/components/context-menu",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

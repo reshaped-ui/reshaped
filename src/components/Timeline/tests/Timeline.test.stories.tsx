@@ -9,6 +9,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/components/timeline",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

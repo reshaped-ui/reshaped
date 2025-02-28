@@ -14,6 +14,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/utilities/theme",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

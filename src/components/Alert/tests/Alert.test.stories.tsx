@@ -10,6 +10,7 @@ export default {
 		iframe: {
 			url: "https://reshaped.so/docs/components/alert",
 		},
+		chromatic: { disableSnapshot: true },
 	},
 };
 

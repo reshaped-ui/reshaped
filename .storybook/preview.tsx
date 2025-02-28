@@ -36,7 +36,7 @@ const ThemeSwitch = () => {
 			zIndex={99}
 			insetBottom={2}
 			insetEnd={2}
-			attributes={{ dir: "ltr" }}
+			attributes={{ dir: "ltr", "data-chromatic": "ignore" }}
 		>
 			<Text variant="caption-1" weight="medium">
 				<Hidden hide={{ s: false, m: true }} as="span">
