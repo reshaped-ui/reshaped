@@ -17,3 +17,4 @@
 - lockScroll + ContextMenu: fixed lockScroll scrollable parent detection
 - Loader: Added ariaLabel prop
 - Progress: Added ariaLabel prop
+- generateThemeColors: fixed generation error when called with separate hexDark colors
