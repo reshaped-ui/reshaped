@@ -51,6 +51,8 @@ jobs:
 
   test-browser:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.50.1-noble
     needs: setup
     steps:
       - uses: actions/checkout@v4
@@ -60,7 +62,7 @@ jobs:
             node_modules
             .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn playwright install
+      # - run: yarn playwright install
       - run: yarn test:browser
 
   test-unit:
