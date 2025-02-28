@@ -11,13 +11,16 @@ jobs:
       node_modules_cache: ${{ steps.cache.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v3
-        id: cache
+      - uses: actions/setup-node@v4
         with:
-          path: |
-            node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          node-version: 20
+          cache: "yarn"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/yarn
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
       - run: yarn --check-files
 
   lint:
@@ -56,14 +59,19 @@ jobs:
     needs: setup
     steps:
       - uses: actions/checkout@v4
-      # - uses: actions/cache@v3
-      #   with:
-      #     path: |
-      #       node_modules
-      #       .yarn/cache
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/yarn
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
       # - run: yarn playwright install
-      - run: yarn --check-files
+      - run: yarn
       - run: yarn test:browser
 
   test-unit:
