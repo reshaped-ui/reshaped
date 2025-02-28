@@ -56,13 +56,14 @@ jobs:
     needs: setup
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      # - uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       node_modules
+      #       .yarn/cache
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       # - run: yarn playwright install
+      - run: yarn --check-files
       - run: yarn test:browser
 
   test-unit:
