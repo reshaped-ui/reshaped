@@ -8,6 +8,10 @@ export default {
 	title: "Components/Carousel",
 	component: Carousel,
 	parameters: {
+		// Skip because of the aria-hidden applied to buttons, they're replaced by screen reader navigation
+		a11y: {
+			disable: true,
+		},
 		iframe: {
 			url: "https://reshaped.so/docs/components/carousel",
 		},

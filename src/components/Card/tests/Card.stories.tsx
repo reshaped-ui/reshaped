@@ -98,16 +98,3 @@ export const height = () => (
 		</Example.Item>
 	</Example>
 );
-
-export const testComposition = () => (
-	<Example>
-		<Example.Item title="padding: 0, view with padding inside">
-			<Card padding={0}>
-				<Placeholder />
-				<View padding={4}>
-					<Placeholder />
-				</View>
-			</Card>
-		</Example.Item>
-	</Example>
-);

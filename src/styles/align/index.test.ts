@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import getAlignStyles from "./index";
 
 describe("Styles/Align", () => {

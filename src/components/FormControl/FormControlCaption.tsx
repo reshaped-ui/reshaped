@@ -18,7 +18,7 @@ const FormControlCaption = (props: T.PrivateCaptionProps) => {
 			as="span"
 			variant={size === "large" ? "body-3" : "caption-1"}
 			color={disabled && !variant ? "disabled" : color}
-			attributes={{ id, role: color ? "alert" : undefined, ref }}
+			attributes={{ id, role: color ? "alert" : undefined, "aria-disabled": disabled, ref }}
 			className={s.caption}
 		>
 			{children}

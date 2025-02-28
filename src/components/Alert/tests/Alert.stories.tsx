@@ -14,138 +14,86 @@ export default {
 	},
 };
 
-export const color = () => (
-	<Example>
-		<Example.Item title="color: neutral">
-			<Alert
-				title="Alert title goes here"
-				icon={IconZap}
-				actionsSlot={
-					<React.Fragment>
-						<Link variant="plain">View now</Link>
-						<Link variant="plain">Dismiss</Link>
-					</React.Fragment>
-				}
-			>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-				been the industry's standard
-			</Alert>
-		</Example.Item>
+export const color = {
+	name: "color",
+	render: () => (
+		<Example>
+			{(["neutral", "primary", "critical", "positive", "warning"] as const).map((color) => (
+				<Example.Item title={`color: ${color}`} key={color}>
+					<Alert
+						color={color}
+						title="Alert title goes here"
+						icon={IconZap}
+						actionsSlot={
+							<>
+								<Link
+									variant="plain"
+									color={color === "neutral" ? "primary" : color}
+									onClick={() => {}}
+								>
+									View now
+								</Link>
+								<Link
+									variant="plain"
+									color={color === "neutral" ? "primary" : color}
+									onClick={() => {}}
+								>
+									Dismiss
+								</Link>
+							</>
+						}
+					>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+						has been the industry's standard
+					</Alert>
+				</Example.Item>
+			))}
+		</Example>
+	),
+};
 
-		<Example.Item title="color: primary">
-			<Alert
-				color="primary"
-				title="Alert title goes here"
-				icon={IconZap}
-				actionsSlot={
-					<>
-						<Link variant="plain">View now</Link>
-						<Link variant="plain">Dismiss</Link>
-					</>
-				}
-			>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-				been the industry's standard
-			</Alert>
-		</Example.Item>
+export const inline = {
+	name: "inline",
+	render: () => (
+		<Example>
+			<Example.Item title="inline: true">
+				<Alert
+					inline
+					title="Alert title goes here"
+					icon={IconZap}
+					actionsSlot={
+						<>
+							<Link variant="plain" onClick={() => {}}>
+								View now
+							</Link>
+							<Link variant="plain" onClick={() => {}}>
+								Dismiss
+							</Link>
+						</>
+					}
+				>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+					been the industry's standard
+				</Alert>
+			</Example.Item>
+		</Example>
+	),
+};
 
-		<Example.Item title="color: critical">
-			<Alert
-				color="critical"
-				title="Alert title goes here"
-				icon={IconZap}
-				actionsSlot={
-					<>
-						<Link variant="plain" color="critical">
-							View now
-						</Link>
-						<Link variant="plain" color="critical">
-							Dismiss
-						</Link>
-					</>
-				}
-			>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-				been the industry's standard
-			</Alert>
-		</Example.Item>
-
-		<Example.Item title="color: positive">
-			<Alert
-				color="positive"
-				title="Alert title goes here"
-				icon={IconZap}
-				actionsSlot={
-					<>
-						<Link variant="plain" color="positive">
-							View now
-						</Link>
-						<Link variant="plain" color="positive">
-							Dismiss
-						</Link>
-					</>
-				}
-			>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-				been the industry's standard
-			</Alert>
-		</Example.Item>
-
-		<Example.Item title="color: warning">
-			<Alert
-				color="warning"
-				title="Alert title goes here"
-				icon={IconZap}
-				actionsSlot={
-					<>
-						<Link variant="plain" color="warning">
-							View now
-						</Link>
-						<Link variant="plain" color="warning">
-							Dismiss
-						</Link>
-					</>
-				}
-			>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-				been the industry's standard
-			</Alert>
-		</Example.Item>
-	</Example>
-);
-
-export const inline = () => (
-	<Example>
-		<Example.Item title="inline: true">
-			<Alert
-				inline
-				title="Alert title goes here"
-				icon={IconZap}
-				actionsSlot={
-					<>
-						<Link variant="plain">View now</Link>
-						<Link variant="plain">Dismiss</Link>
-					</>
-				}
-			>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-				been the industry's standard
-			</Alert>
-		</Example.Item>
-	</Example>
-);
-
-export const bleed = () => (
-	<Example>
-		<Example.Item title="bleed: 4">
-			<Alert bleed={4} icon={IconZap}>
-				Content
-			</Alert>
-		</Example.Item>
-		<Example.Item title={["responsive bleed", "[s] 4", "[m+] 0"]}>
-			<Alert bleed={{ s: 4, m: 0 }} icon={IconZap}>
-				Content
-			</Alert>
-		</Example.Item>
-	</Example>
-);
+export const bleed = {
+	name: "bleed",
+	render: () => (
+		<Example>
+			<Example.Item title="bleed: 4">
+				<Alert bleed={4} icon={IconZap}>
+					Content
+				</Alert>
+			</Example.Item>
+			<Example.Item title="bleed: [s] 4, [m+] 0">
+				<Alert bleed={{ s: 4, m: 0 }} icon={IconZap}>
+					Content
+				</Alert>
+			</Example.Item>
+		</Example>
+	),
+};

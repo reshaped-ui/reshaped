@@ -37,6 +37,7 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 		renderMonthAriaLabel,
 		renderDateAriaLabel,
 	} = props;
+
 	const [selectionMode, setSelectionMode] = React.useState<T.SelectionMode>("date");
 	const [monthDate, setMonthDate] = React.useState(defaultMonth || new Date());
 	const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null);

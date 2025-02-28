@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames } from "utilities/helpers";
 import s from "./HiddenInput.module.css";
 import type * as T from "./HiddenInput.types";

@@ -22,6 +22,7 @@ const FormControlLabel = (props: T.LabelProps) => {
 			weight="medium"
 			className={s.label}
 			color={disabled ? "disabled" : undefined}
+			aria-disabled={disabled}
 		>
 			{children}
 			{required && (

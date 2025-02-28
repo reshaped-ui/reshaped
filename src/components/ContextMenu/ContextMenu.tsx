@@ -6,33 +6,36 @@ import useScrollLock from "hooks/useScrollLock";
 import type * as G from "types/global";
 import type * as T from "./ContextMenu.types";
 import s from "./ContextMenu.module.css";
+import useHandlerRef from "hooks/useHandlerRef";
 
 const ContextMenu = (props: T.Props) => {
-	const { position = "end-top", ...dropdownMenuProps } = props;
+	const { position = "end-top", onOpen, onClose, ...dropdownMenuProps } = props;
 	const [coordinates, setCoordinates] = React.useState<G.Coordinates>();
-	const containerRef = React.useRef<HTMLDivElement>(null);
-	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
+	const originRef = React.useRef<HTMLDivElement>(null);
+	const { lockScroll, unlockScroll } = useScrollLock({ originRef });
+	const onOpenRef = useHandlerRef(onOpen);
 
 	React.useEffect(() => {
-		const containerEl = containerRef.current;
-		if (!containerEl) return;
+		const originEl = originRef.current;
+		if (!originEl) return;
 
 		const handleContextMenu = (e: MouseEvent) => {
 			e.preventDefault();
 			setCoordinates({ x: e.clientX, y: e.clientY });
 			lockScroll();
+			onOpenRef.current?.();
 		};
 
-		containerEl.addEventListener("contextmenu", handleContextMenu);
-		return () => containerEl.removeEventListener("contextmenu", handleContextMenu);
-	}, [lockScroll]);
+		originEl.addEventListener("contextmenu", handleContextMenu);
+		return () => originEl.removeEventListener("contextmenu", handleContextMenu);
+	}, [lockScroll, onOpenRef]);
 
 	React.useEffect(() => {
 		return () => unlockScroll();
 	}, [unlockScroll]);
 
 	return (
-		<div className={s.root} ref={containerRef}>
+		<div className={s.root} ref={originRef}>
 			<DropdownMenu
 				{...dropdownMenuProps}
 				position={position}
@@ -41,6 +44,7 @@ const ContextMenu = (props: T.Props) => {
 				onClose={() => {
 					setCoordinates(undefined);
 					unlockScroll();
+					onClose?.();
 				}}
 			/>
 		</div>

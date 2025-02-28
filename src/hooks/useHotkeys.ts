@@ -14,9 +14,8 @@ const useHotkeys = <Element extends HTMLElement>(
 
 	React.useEffect(() => {
 		if (options?.disabled) return;
-		if (!elementRef.current) return;
 
-		const remove = addHotkeys(hotkeys, elementRef as React.RefObject<HTMLElement>, {
+		const remove = addHotkeys(hotkeys, elementRef, {
 			preventDefault: options?.preventDefault,
 		});
 

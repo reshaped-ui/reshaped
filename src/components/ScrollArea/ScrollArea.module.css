@@ -5,6 +5,10 @@
 	overflow: hidden;
 	height: 100%;
 	position: relative;
+
+	[data-rs-keyboard] &:has(.scrollable:focus) {
+		box-shadow: var(--rs-focus-shadow);
+	}
 }
 
 .scrollable {

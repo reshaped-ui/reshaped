@@ -25,6 +25,7 @@ export type Props = Pick<
 	size?: G.Responsive<Size>;
 	rounded?: boolean;
 	loading?: boolean;
+	loadingAriaLabel?: string;
 	elevated?: boolean;
 	fullWidth?: G.Responsive<boolean>;
 	highlighted?: boolean;

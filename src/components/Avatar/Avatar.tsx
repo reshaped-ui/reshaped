@@ -36,9 +36,7 @@ const Avatar = (props: T.Props) => {
 
 	const renderContent = () => {
 		if (src)
-			return (
-				<img role={!initials ? "presentation" : undefined} src={src} alt={alt} className={s.img} />
-			);
+			return <img role={!alt ? "presentation" : undefined} src={src} alt={alt} className={s.img} />;
 		if (icon)
 			return (
 				<Icon svg={icon} size={responsivePropDependency(size, (size) => Math.ceil(size * 0.4))} />

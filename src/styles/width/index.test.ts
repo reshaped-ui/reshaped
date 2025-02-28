@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import getWidthStyles from "./index";
 
 describe("Styles/Width", () => {

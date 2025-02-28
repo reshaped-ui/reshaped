@@ -44,7 +44,9 @@ const Autocomplete = (props: T.Props) => {
 
 	useHotkeys(
 		{
-			[keys.BACKSPACE]: () => onBackspaceRef.current?.(),
+			[keys.BACKSPACE]: () => {
+				onBackspaceRef.current?.();
+			},
 		},
 		[onBackspaceRef],
 		{
@@ -109,9 +111,14 @@ const Autocomplete = (props: T.Props) => {
 							onChange={handleChange}
 							focused={hasChildren && active}
 							// Ignoring the type check since TS can't infer the correct html element type
-							attributes={{ ...textFieldProps.attributes, ref } as any}
+							attributes={{
+								...textFieldProps.attributes,
+								ref: ref as any,
+								onClick: attributes.onFocus,
+							}}
 							inputAttributes={{
 								...textFieldProps.inputAttributes,
+								...attributes,
 								onFocus: (e) => {
 									attributes.onFocus?.();
 									textFieldProps.onFocus?.(e);

@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import getMaxHeightStyles from "./index";
 
 describe("Styles/MaxHeight", () => {

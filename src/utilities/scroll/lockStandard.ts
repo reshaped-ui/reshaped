@@ -1,10 +1,17 @@
+import { findClosestRenderContainer } from "utilities/dom";
 import { getScrollbarWidth } from "./helpers";
 import { StyleCache } from "utilities/css";
 
 const styleCache = new StyleCache();
 
-const lockStandardScroll = (containerEl?: HTMLElement | null) => {
-	const container = containerEl || document.body;
+const lockStandardScroll = (args: {
+	containerEl?: HTMLElement | null;
+	originEl?: HTMLElement | null;
+}) => {
+	let container = document.body;
+	if (args.originEl) container = findClosestRenderContainer({ el: args.originEl });
+	if (args.containerEl) container = args.containerEl;
+
 	const rect = container.getBoundingClientRect();
 	const isOverflowing = rect.left + rect.right < window.innerWidth;
 

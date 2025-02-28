@@ -1,3 +1,4 @@
 .root {
+	box-sizing: content-box;
 	margin: 0 auto;
 }

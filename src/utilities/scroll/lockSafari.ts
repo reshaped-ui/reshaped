@@ -2,14 +2,13 @@ import { StyleCache } from "utilities/css";
 
 const styleCache = new StyleCache();
 
-const lockSafariScroll = (containerEl?: HTMLElement | null) => {
-	const viewport = containerEl || window.visualViewport;
+const lockSafariScroll = () => {
+	const viewport = window.visualViewport;
 	const offsetLeft = viewport?.offsetLeft || 0;
 	const offsetTop = viewport?.offsetTop || 0;
-	const scrollX = containerEl?.scrollLeft ?? window.scrollX;
-	const scrollY = containerEl?.scrollTop ?? window.scrollY;
+	const { scrollX, scrollY } = window;
 
-	styleCache.set(containerEl || document.body, {
+	styleCache.set(document.body, {
 		position: "fixed",
 		top: `${-(scrollY - Math.floor(offsetTop))}px`,
 		left: `${-(scrollX - Math.floor(offsetLeft))}px`,

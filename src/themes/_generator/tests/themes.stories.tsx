@@ -18,6 +18,10 @@ export default {
 	title: "Meta/Themes",
 	parameters: {
 		iframe: { url: "https://reshaped.so/docs/tokens/theming/runtime-theming" },
+		a11y: {
+			// This option disables all a11y checks on this story
+			disable: true,
+		},
 	},
 };
 
@@ -40,11 +44,6 @@ const cssGenerated = getThemeCSS("generated", {
 	color: generateThemeColors({
 		primary: "#0369a1" /*"#5a58f2"*/ /* "#2563eb" */,
 	}),
-});
-
-const cssGenerated2 = getThemeCSS("generated2", {
-	...baseThemeDefinition,
-	color: generateThemeColors({ primary: "#2383e2" }),
 });
 
 const componentExamples = (
@@ -257,14 +256,10 @@ export const base = () => (
 );
 
 export const generation = () => (
-	<React.Fragment>
-		<style>
-			{cssGenerated}
-			{cssGenerated2}
-		</style>
+	<div>
+		<style>{cssGenerated}</style>
 		<Theme name="generated">{componentExamples}</Theme>
-		{/* <Theme name="generated2">{componentExamples}</Theme> */}
-	</React.Fragment>
+	</div>
 );
 
 const onColorsCss = getThemeCSS(

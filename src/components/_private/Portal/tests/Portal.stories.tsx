@@ -1,7 +1,7 @@
 import React from "react";
 import Portal from "components/_private/Portal";
 
-export default { title: "Utilities/Internal/Portal" };
+export default { title: "Internal/Portal" };
 
 export const base = () => {
 	const ref = React.useRef<HTMLDivElement>(null);

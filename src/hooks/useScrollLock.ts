@@ -3,13 +3,20 @@
 import React from "react";
 import { lockScroll, unlockScroll } from "utilities/scroll";
 
-const useScrollLock = (props?: { containerRef?: React.RefObject<HTMLElement | null> }) => {
-	const { containerRef } = props || {};
+const useScrollLock = (props?: {
+	containerRef?: React.RefObject<HTMLElement | null>;
+	originRef?: React.RefObject<HTMLElement | null>;
+}) => {
+	const { containerRef, originRef } = props || {};
 	const [locked, setLocked] = React.useState(false);
 
 	const handleLockScroll = React.useCallback(() => {
-		lockScroll({ containerEl: containerRef?.current, cb: () => setLocked(true) });
-	}, [containerRef]);
+		lockScroll({
+			containerEl: containerRef?.current,
+			originEl: originRef?.current,
+			cb: () => setLocked(true),
+		});
+	}, [containerRef, originRef]);
 
 	const handleUnlockScroll = React.useCallback(() => {
 		unlockScroll(() => setLocked(false));

@@ -16,13 +16,7 @@ export default {
 export const base = () => (
 	<Example>
 		<Example.Item title="range">
-			<Slider
-				range
-				name="slider"
-				defaultMinValue={30}
-				defaultMaxValue={100}
-				renderValue={() => "Hundred more times"}
-			/>
+			<Slider range name="slider" defaultMinValue={30} defaultMaxValue={100} />
 		</Example.Item>
 		<div style={{ height: 2000 }} />
 	</Example>
@@ -78,20 +72,16 @@ export const status = () => (
 export const customRender = () => (
 	<Example>
 		<Example.Item title="custom render">
-			<Slider name="slider" defaultValue={30} renderValue={(args) => `$${args.value}`} />
-		</Example.Item>
-		<Example.Item title="no tooltip">
-			<Slider name="slider" defaultValue={30} renderValue={false} />
-		</Example.Item>
-	</Example>
-);
-
-export const formControl = () => (
-	<Example>
-		<Example.Item title="form control, disabled">
-			<FormControl disabled>
+			<FormControl>
 				<FormControl.Label>Slider value</FormControl.Label>
-				<Slider name="slider" />
+				<Slider name="slider" defaultValue={30} renderValue={(args) => `$${args.value}`} />
+			</FormControl>
+		</Example.Item>
+
+		<Example.Item title="no tooltip">
+			<FormControl>
+				<FormControl.Label>Slider value</FormControl.Label>
+				<Slider name="slider" defaultValue={30} renderValue={false} />
 			</FormControl>
 		</Example.Item>
 	</Example>

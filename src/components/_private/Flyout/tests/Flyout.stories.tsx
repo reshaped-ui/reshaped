@@ -8,7 +8,7 @@ import Button from "components/Button";
 import Flyout, { FlyoutInstance, FlyoutProps } from "components/_private/Flyout";
 import TextField from "components/TextField";
 
-export default { title: "Utilities/Internal/Flyout" };
+export default { title: "Internal/Flyout" };
 
 const Demo = (props: any) => {
 	const { position = "bottom-start", children, ...rest } = props;
@@ -411,12 +411,12 @@ export const testDisableOutsideClick = () => {
 export const testScopedTheming = () => (
 	<View gap={3} align="start">
 		<Button color="primary">Reshaped button</Button>
-		<Theme name="twitter">
+		<Theme name="slate">
 			<Flyout triggerType="click" active position="bottom-start">
 				<Flyout.Trigger>
 					{(attributes) => (
 						<Button color="primary" attributes={attributes}>
-							Twitter button
+							Slate button
 						</Button>
 					)}
 				</Flyout.Trigger>
@@ -431,7 +431,7 @@ export const testScopedTheming = () => (
 					>
 						<View gap={1}>
 							<View.Item>Portal content, rendered in body</View.Item>
-							<Button color="primary">Twitter button</Button>
+							<Button color="primary">Slate button</Button>
 						</View>
 					</div>
 				</Flyout.Content>

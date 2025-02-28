@@ -1,8 +1,8 @@
-import { createRoot } from "react-dom/client";
+import { StoryObj } from "@storybook/react";
+import { userEvent } from "@storybook/test";
 import { Example } from "utilities/storybook";
 import Overlay from "components/Overlay";
 import Button from "components/Button";
-import Reshaped from "components/Reshaped";
 import useToggle from "hooks/useToggle";
 
 export default {
@@ -15,71 +15,71 @@ export default {
 	},
 };
 
-export const base = () => {
-	const baseToggle = useToggle(false);
-	const transparentToggle = useToggle(false);
-	const blurredToggle = useToggle(false);
+export const base: StoryObj = {
+	name: "base",
+	render: () => {
+		const overlayToggle = useToggle(false);
 
-	return (
-		<Example>
-			<Example.Item title="locks scroll">
-				<Button onClick={() => baseToggle.activate()}>Open overlay</Button>
-				<Overlay active={baseToggle.active} onClose={() => baseToggle.deactivate()}>
-					Overlay content
-				</Overlay>
-			</Example.Item>
+		return (
+			<Example>
+				<Example.Item title="base">
+					<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+					<Overlay active={overlayToggle.active} onClose={overlayToggle.deactivate}>
+						Overlay content
+					</Overlay>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvas }) => {
+		const trigger = canvas.getAllByRole("button")[0];
 
-			<Example.Item title="transparent, doesn't lock scroll">
-				<Button onClick={() => transparentToggle.activate()}>Open overlay</Button>
-				<Overlay
-					active={transparentToggle.active}
-					onClose={() => transparentToggle.deactivate()}
-					transparent
-				>
-					Overlay content
-				</Overlay>
-			</Example.Item>
-
-			<Example.Item title="blurred">
-				<Button onClick={() => blurredToggle.activate()}>Open overlay</Button>
-				<Overlay active={blurredToggle.active} onClose={() => blurredToggle.deactivate()} blurred>
-					Overlay content
-				</Overlay>
-			</Example.Item>
-
-			<div style={{ height: 1000 }} />
-		</Example>
-	);
+		await userEvent.click(trigger);
+	},
 };
 
-class CustomElement extends window.HTMLElement {
-	constructor() {
-		super();
-		this.attachShadow({ mode: "open" });
+export const transparent: StoryObj = {
+	name: "transparent",
+	render: () => {
+		const overlayToggle = useToggle(false);
 
-		if (!this.shadowRoot) return;
-
-		const overlay = (
-			<Reshaped>
-				<Overlay active>Content</Overlay>
-			</Reshaped>
+		return (
+			<Example>
+				<Example.Item title="base">
+					<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+					<Overlay active={overlayToggle.active} onClose={overlayToggle.deactivate} transparent>
+						Overlay content
+					</Overlay>
+				</Example.Item>
+			</Example>
 		);
-		const root = createRoot(this.shadowRoot);
-		root.render(overlay);
-	}
-}
+	},
+	play: async ({ canvas }) => {
+		const trigger = canvas.getAllByRole("button")[0];
 
-if (!window.customElements.get("custom-element")) {
-	window.customElements.define("custom-element", CustomElement);
-}
+		await userEvent.click(trigger);
+	},
+};
 
-export const shadowDom = () => {
-	return (
-		<Example>
-			<Example.Item>
-				{/* @ts-ignore */}
-				<custom-element />
-			</Example.Item>
-		</Example>
-	);
+export const blurred: StoryObj = {
+	name: "blurred",
+	render: () => {
+		const overlayToggle = useToggle(false);
+
+		return (
+			<Example>
+				<Example.Item title="base">
+					<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+					<Overlay active={overlayToggle.active} onClose={overlayToggle.deactivate} blurred>
+						Overlay content
+					</Overlay>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvas }) => {
+		const trigger = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(trigger);
+	},
 };

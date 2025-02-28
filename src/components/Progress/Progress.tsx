@@ -11,6 +11,7 @@ const Progress = (props: T.Props) => {
 		color = "primary",
 		size = "medium",
 		duration,
+		ariaLabel,
 		className,
 		attributes,
 	} = props;
@@ -32,6 +33,7 @@ const Progress = (props: T.Props) => {
 			role="progressbar"
 			{...attributes}
 			className={rootClassNames}
+			aria-label={ariaLabel || attributes?.["aria-label"]}
 			aria-valuemax={max}
 			aria-valuemin={min}
 			aria-valuenow={value}

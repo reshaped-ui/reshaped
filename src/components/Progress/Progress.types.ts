@@ -7,6 +7,7 @@ export type Props = {
 	size?: "small" | "medium";
 	color?: "primary" | "critical" | "warning" | "positive" | "media";
 	duration?: number;
+	ariaLabel?: string;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

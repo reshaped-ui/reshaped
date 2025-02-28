@@ -231,9 +231,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(
 		if (child.type === React.Fragment && React.Children.count(child.props.children) > 1) {
 			return child.props.children.map((child: any) => {
 				if (!child) return null;
-				const index = usedIndex;
 				renderedItemIndex += 1;
-				return renderItem({ child, index });
+				return renderItem({ child, index: renderedItemIndex });
 			});
 		}
 

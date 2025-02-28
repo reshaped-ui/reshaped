@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Chain adds items 1`] = `
+exports[`Chain > adds items 1`] = `
 {
   "1": {
     "data": "Test",
@@ -9,7 +9,7 @@ exports[`Chain adds items 1`] = `
 }
 `;
 
-exports[`Chain removes item in the middle 1`] = `
+exports[`Chain > removes item in the middle 1`] = `
 {
   "1": {
     "data": "Test",
@@ -23,7 +23,7 @@ exports[`Chain removes item in the middle 1`] = `
 }
 `;
 
-exports[`Chain removes previous elements till condition is true 1`] = `
+exports[`Chain > removes previous elements till condition is true 1`] = `
 {
   "1": {
     "data": "Test",
@@ -33,7 +33,7 @@ exports[`Chain removes previous elements till condition is true 1`] = `
 }
 `;
 
-exports[`Chain removes side items 1`] = `
+exports[`Chain > removes side items 1`] = `
 {
   "2": {
     "data": "Test 2",

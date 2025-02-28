@@ -16,6 +16,7 @@ const Breadcrumbs = (props: T.Props) => {
 		separator,
 		color,
 		defaultVisibleItems,
+		expandAriaLabel,
 		disableExpand,
 		ariaLabel,
 		className,
@@ -62,6 +63,7 @@ const Breadcrumbs = (props: T.Props) => {
 									size="small"
 									icon={IconDotsHorizontal}
 									onClick={handleExpand}
+									attributes={{ "aria-label": expandAriaLabel }}
 								/>
 							</Button.Aligner>
 						);

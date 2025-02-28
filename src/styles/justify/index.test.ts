@@ -1,3 +1,4 @@
+import { expect, test, describe } from "vitest";
 import getJustifyStyles from "./index";
 
 describe("Styles/Justify", () => {

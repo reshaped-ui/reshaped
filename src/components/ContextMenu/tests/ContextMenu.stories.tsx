@@ -16,7 +16,7 @@ export default {
 export const base = () => (
 	<Example>
 		<Example.Item title="base">
-			<ScrollArea height="200px">
+			<div style={{ height: 200, overflow: "auto" }}>
 				<ContextMenu>
 					<View height="400px" backgroundColor="neutral-faded" borderRadius="medium" />
 
@@ -25,7 +25,7 @@ export const base = () => (
 						<ContextMenu.Item>Item 2</ContextMenu.Item>
 					</ContextMenu.Content>
 				</ContextMenu>
-			</ScrollArea>
+			</div>
 		</Example.Item>
 	</Example>
 );

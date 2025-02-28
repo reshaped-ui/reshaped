@@ -37,6 +37,7 @@ function Example() {
 					attributes={{
 						role: "button",
 						tabIndex: 0,
+						"aria-label": "Drag",
 						ref,
 						style: { translate: `${state.x}px ${state.y}px`, cursor: active ? "grabbing" : "grab" },
 					}}

@@ -15,16 +15,16 @@ export const size = () => {
 	return (
 		<Example>
 			<Example.Item title="size: medium">
-				<Loader size="medium" />
+				<Loader size="medium" ariaLabel="Loading" />
 			</Example.Item>
 			<Example.Item title="size: small">
-				<Loader size="small" />
+				<Loader size="small" ariaLabel="Loading" />
 			</Example.Item>
 			<Example.Item title="size: large">
-				<Loader size="large" />
+				<Loader size="large" ariaLabel="Loading" />
 			</Example.Item>
 			<Example.Item title={["responsive size", "[s] small", "[m+] medium"]}>
-				<Loader size={{ s: "small", m: "medium" }} />
+				<Loader size={{ s: "small", m: "medium" }} ariaLabel="Loading" />
 			</Example.Item>
 		</Example>
 	);
@@ -33,16 +33,16 @@ export const size = () => {
 export const color = () => (
 	<Example>
 		<Example.Item title="color: primary">
-			<Loader />
+			<Loader ariaLabel="Loading" />
 		</Example.Item>
 		<Example.Item title="color: critical">
-			<Loader color="critical" />
+			<Loader color="critical" ariaLabel="Loading" />
 		</Example.Item>
 		<Example.Item title="color: positive">
-			<Loader color="positive" />
+			<Loader color="positive" ariaLabel="Loading" />
 		</Example.Item>
 		<Example.Item title="color: inherit">
-			<Loader color="inherit" />
+			<Loader color="inherit" ariaLabel="Loading" />
 		</Example.Item>
 	</Example>
 );

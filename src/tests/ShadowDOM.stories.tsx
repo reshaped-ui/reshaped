@@ -102,6 +102,7 @@ const Component: React.FC = () => {
 						placeholder="Pick your food"
 						value={valueAutoShadow}
 						onChange={handleChangeAutoShadow}
+						inputAttributes={{ "aria-label": "Label" }}
 					>
 						{optionsAuto.map((option) => (
 							<Autocomplete.Item

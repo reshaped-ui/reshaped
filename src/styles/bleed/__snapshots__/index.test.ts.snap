@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Styles/Bleed handles 0 value 1`] = `
+exports[`Styles/Bleed > handles 0 value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_f6b186",
     [
-      "--bleed-false",
+      "_--bleed-false_f6b186",
     ],
   ],
   "variables": {
@@ -14,12 +14,12 @@ exports[`Styles/Bleed handles 0 value 1`] = `
 }
 `;
 
-exports[`Styles/Bleed handles positive value 1`] = `
+exports[`Styles/Bleed > handles positive value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_f6b186",
     [
-      "--bleed",
+      "_--bleed_f6b186",
     ],
   ],
   "variables": {
@@ -28,14 +28,14 @@ exports[`Styles/Bleed handles positive value 1`] = `
 }
 `;
 
-exports[`Styles/Bleed handles responsive value 1`] = `
+exports[`Styles/Bleed > handles responsive value 1`] = `
 {
   "classNames": [
-    "root",
+    "_root_f6b186",
     [
-      "--bleed",
-      "--bleed-false--m",
-      "--bleed-true--l",
+      "_--bleed_f6b186",
+      "_--bleed-false--m_f6b186",
+      "_--bleed-true--l_f6b186",
     ],
   ],
   "variables": {
@@ -46,4 +46,4 @@ exports[`Styles/Bleed handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/Bleed handles undefined value 1`] = `null`;
+exports[`Styles/Bleed > handles undefined value 1`] = `null`;
