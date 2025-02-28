@@ -1,3 +1,4 @@
+import React from "react";
 import { StoryObj } from "@storybook/react";
 import { expect, userEvent } from "@storybook/test";
 import Button from "components/Button";
@@ -37,11 +38,11 @@ export const activate: StoryObj = {
 		const { activate, active } = useToggle();
 
 		return (
-			<>
+			<React.Fragment>
 				<Button onClick={activate} attributes={{ "data-active": active }}>
 					Activate
 				</Button>
-			</>
+			</React.Fragment>
 		);
 	},
 	play: async ({ canvas }) => {

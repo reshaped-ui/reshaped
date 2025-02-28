@@ -1,3 +1,4 @@
+import React from "react";
 import { StoryObj } from "@storybook/react";
 import { expect, userEvent } from "@storybook/test";
 import Button from "components/Button";
@@ -11,10 +12,10 @@ export const base: StoryObj = {
 		const { lockScroll, unlockScroll, scrollLocked } = useScrollLock();
 
 		return (
-			<>
+			<React.Fragment>
 				<Button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</Button>
 				<div style={{ height: "150vh" }} />
-			</>
+			</React.Fragment>
 		);
 	},
 	play: async ({ canvas }) => {
