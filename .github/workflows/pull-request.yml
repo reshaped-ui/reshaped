@@ -11,6 +11,10 @@ jobs:
       node_modules_cache: ${{ steps.cache.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
       - uses: actions/cache@v4
         id: cache
         with:
@@ -60,6 +64,10 @@ jobs:
     needs: setup
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
       - uses: actions/cache@v4
         with:
           path: |
