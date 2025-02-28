@@ -204,7 +204,7 @@ const generate = (
 		warning?: Color;
 		positive?: Color;
 		neutral?: Color;
-		brand?: string;
+		brand?: Color;
 	} = {}
 ) => {
 	const {
@@ -220,9 +220,11 @@ const generate = (
 		return generateColorValues({
 			key,
 			hex: validateHexColor(typeof color === "string" ? color : color.hex),
-			hexDark: typeof color !== "string" ? validateHexColor(color.hexDark) : undefined,
+			hexDark: validateHexColor(typeof color === "string" ? color : (color.hexDark ?? color.hex)),
 		});
 	};
+
+	const brandColor = brand || primary;
 
 	return {
 		...generateFor("primary", primary),
@@ -230,7 +232,7 @@ const generate = (
 		...generateFor("warning", warning),
 		...generateFor("positive", positive),
 		...generateFor("neutral", neutral),
-		brand: { hex: brand || primary },
+		brand: typeof brandColor === "string" ? { hex: brandColor } : brandColor,
 		white: { hex: "#ffffff" },
 		black: { hex: "#000000" },
 	} as ThemeDefinition["color"];
