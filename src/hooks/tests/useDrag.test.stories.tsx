@@ -3,7 +3,12 @@ import { fireEvent, fn, expect } from "@storybook/test";
 import View from "components/View";
 import useDrag from "hooks/useDrag";
 
-export default { title: "Hooks/useDrag/tests" };
+export default {
+	title: "Hooks/useDrag/tests",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 const Demo = (props: {
 	onDrag: ReturnType<typeof fn>;

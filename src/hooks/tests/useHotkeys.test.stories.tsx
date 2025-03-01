@@ -2,7 +2,12 @@ import { StoryObj } from "@storybook/react";
 import { expect, fn, userEvent } from "@storybook/test";
 import useHotkeys from "hooks/useHotkeys";
 
-export default { title: "Hooks/useHotkeys/tests" };
+export default {
+	title: "Hooks/useHotkeys/tests",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 const Component = (props: { hotkeys: Record<string, (() => void) | null> }) => {
 	const { hotkeys } = props;
