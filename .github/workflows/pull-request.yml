@@ -193,11 +193,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
+      # - name: Set up Node 20
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
+      #     cache: "yarn"
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
