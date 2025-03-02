@@ -36,6 +36,7 @@ jobs:
   setup-playwright:
     name: Playwright setup
     runs-on: ubuntu-latest
+    needs: setup
     outputs:
       playwright_cache: ${{ steps.cache.outputs.cache-hit }}
     steps:
