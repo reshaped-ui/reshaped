@@ -147,7 +147,14 @@ export { default as Switch } from "components/Switch";
 export type { SwitchProps } from "components/Switch";
 
 export { default as Table } from "components/Table";
-export type { TableProps } from "components/Table";
+export type {
+	TableProps,
+	TableBodyProps,
+	TableHeadProps,
+	TableHeadingProps,
+	TableCellProps,
+	TableRowProps,
+} from "components/Table";
 
 export { default as Tabs } from "components/Tabs";
 export type { TabsProps } from "components/Tabs";

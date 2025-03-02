@@ -19,3 +19,4 @@
 - Progress: Added ariaLabel prop
 - generateThemeColors: fixed generation error when called with separate hexDark colors
 - getThemeCSS: updated documentation to mention baseThemeDefinition
+- Table: Added compound component types to the package exports
