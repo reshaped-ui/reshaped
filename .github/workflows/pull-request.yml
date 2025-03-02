@@ -14,12 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
-
       - name: Cache dependencies
         uses: actions/cache@v4
         id: cache
@@ -42,12 +36,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -78,12 +66,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
-
       - name: Restore node_modules cache
         uses: actions/cache@v4
         id: cache
@@ -103,12 +85,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -133,12 +109,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -168,12 +138,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
-
       - name: Restore node_modules cache
         uses: actions/cache@v4
         with:
@@ -192,12 +156,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "yarn"
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
