@@ -6,110 +6,199 @@ on:
 
 jobs:
   setup:
+    name: Dependencies setup
     runs-on: ubuntu-latest
     outputs:
       node_modules_cache: ${{ steps.cache.outputs.cache-hit }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             node_modules
-            .yarn/cache
-            /home/runner/.cache/ms-playwright
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn --check-files
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+  setup-playwright:
+    name: Playwright setup
+    runs-on: ubuntu-latest
+    outputs:
+      playwright_cache: ${{ steps.cache.outputs.cache-hit }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            /home/runner/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - run: yarn playwright install
 
   lint:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v4
+        id: cache
         with:
           path: |
             node_modules
-            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn lint
+
+      - name: Lint CSS and JS code
+        run: yarn lint
 
   build:
     runs-on: ubuntu-latest
     needs: setup
-    outputs:
-      dist: ${{ steps.build.outputs.dist }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v4
+        id: cache
         with:
           path: |
             node_modules
-            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn build
-        id: build
+
+      - name: Build the project
+        run: yarn build
 
   test-browser:
     runs-on: ubuntu-latest
-    needs: setup
+    needs: [setup, setup-playwright]
     strategy:
       fail-fast: false
       matrix:
         shard: [1/4, 2/4, 3/4, 4/4]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
-      - uses: actions/cache@v4
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v4
         with:
           path: |
             node_modules
-            .yarn/cache
-            /home/runner/.cache/ms-playwright
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn test:browser --shard ${{ matrix.shard }}
+
+      - name: Restore playwright cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            /home/runner/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Run tests
+        run: yarn test:browser --shard ${{ matrix.shard }}
 
   test-unit:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v4
         with:
           path: |
             node_modules
-            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn test:unit
+
+      - name: Run tests
+        run: yarn test:unit
 
   test-size:
     runs-on: ubuntu-latest
-    needs: build
+    needs: setup
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Restore node_modules cache
+        uses: actions/cache@v4
         with:
           path: |
             node_modules
-            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - uses: andresz1/size-limit-action@v1.8.0
+
+      - name: Test bundle size
+        uses: andresz1/size-limit-action@v1.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           script: yarn test:size
