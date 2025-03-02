@@ -139,7 +139,7 @@
 		"prettier": "3.5.2",
 		"react": "18",
 		"react-dom": "18",
-		"react-shadow": "20.5.0",
+		"react-shadow": "20.6.0",
 		"resolve-tspaths": "0.8.23",
 		"size-limit": "11.2.0",
 		"storybook": "8.6.2",
