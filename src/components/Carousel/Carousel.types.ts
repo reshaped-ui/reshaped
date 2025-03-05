@@ -5,6 +5,7 @@ export type Instance =
 	| {
 			navigateBack: () => void;
 			navigateForward: () => void;
+			navigateTo: (index: number) => void;
 	  }
 	| undefined;
 
@@ -29,6 +30,7 @@ export type Props = {
 	bleed?: G.Responsive<number>;
 	navigationDisplay?: "hidden";
 	instanceRef?: React.Ref<Instance>;
+	onChange?: (args: { index: number }) => void;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };
