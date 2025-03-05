@@ -179,6 +179,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           package_manager: yarn
           script: yarn test:size
-          build_script: build:size
+          build_script: build
           clean_script: clean
           skip_step: install
