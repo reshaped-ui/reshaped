@@ -20,6 +20,7 @@ jobs:
         with:
           path: |
             node_modules
+            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -43,6 +44,7 @@ jobs:
         with:
           path: |
             node_modules
+            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -72,6 +74,7 @@ jobs:
         with:
           path: |
             node_modules
+            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -92,6 +95,7 @@ jobs:
         with:
           path: |
             node_modules
+            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -115,6 +119,7 @@ jobs:
         with:
           path: |
             node_modules
+            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -143,6 +148,7 @@ jobs:
         with:
           path: |
             node_modules
+            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -162,6 +168,7 @@ jobs:
         with:
           path: |
             node_modules
+            .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
