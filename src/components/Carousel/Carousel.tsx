@@ -5,7 +5,7 @@ import {
 	classNames,
 	responsiveVariables,
 	responsiveClassNames,
-	debounceHandler,
+	throttleHandler,
 } from "utilities/helpers";
 import View from "components/View";
 import useRTL from "hooks/useRTL";
@@ -21,10 +21,13 @@ const Carousel = (props: T.Props) => {
 		visibleItems,
 		bleed,
 		navigationDisplay,
+		onChange,
 		instanceRef,
 		className,
 		attributes,
 	} = props;
+	const currentIndexRef = React.useRef(0);
+	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([]);
 	const [mounted, setMounted] = React.useState(false);
 	const [scrollPosition, setScrollPosition] = React.useState(0);
 	const [isRTL] = useRTL();
@@ -43,9 +46,23 @@ const Carousel = (props: T.Props) => {
 		...responsiveClassNames(s, "--bleed", typeof bleed === "number" ? true : bleedClassNames)
 	);
 
-	const handleScroll = debounceHandler((event: React.UIEvent<HTMLUListElement>) => {
+	const handleItemRef = (el: HTMLLIElement | null, index: number) => {
+		itemRefs.current[index] = el;
+
+		// TODO: Enable in React v19 since it introduced refs cleanup
+		// return () => {
+		// 	itemRefs.current[index] = null;
+		// };
+	};
+
+	const handleScroll = throttleHandler((event: React.UIEvent<HTMLUListElement>) => {
 		const el = event.target as Element;
+		const firstVisibleIndex = getFirstVisibleIndex();
+
 		setScrollPosition(el.scrollLeft);
+
+		if (currentIndexRef.current !== firstVisibleIndex) onChange?.({ index: firstVisibleIndex });
+		currentIndexRef.current = firstVisibleIndex;
 	}, 16);
 
 	const getItemsGap = () => {
@@ -54,6 +71,48 @@ const Carousel = (props: T.Props) => {
 		const xGap = style.gap.split(" ")[0];
 
 		return Number(xGap.replace("px", ""));
+	};
+
+	const getFirstVisibleIndex = () => {
+		let resultIndex = 0;
+		let sizeCalc = 0;
+
+		const scrollEl = scrollElRef.current;
+		if (!scrollEl) return resultIndex;
+
+		const scrollValue = isRTL ? -scrollEl.scrollLeft : scrollEl.scrollLeft;
+
+		const gap = getItemsGap();
+		itemRefs.current.some((el, index) => {
+			if (!el) return false;
+
+			const visible = sizeCalc + el.clientWidth / 2 >= scrollValue;
+
+			if (visible) {
+				resultIndex = index;
+				return true;
+			}
+
+			sizeCalc += el?.clientWidth + gap;
+			return false;
+		});
+
+		return resultIndex;
+	};
+
+	const navigateTo = (index: number) => {
+		const scrollEl = scrollElRef.current!;
+		const el = itemRefs.current[index];
+
+		if (!el) return;
+
+		scrollEl.scrollTo({
+			// Browsers mirror offsetLeft value but we need to also keep the target element on the other side of the container
+			// so adding addition calculations for the width of the content outside the target el
+			left: isRTL ? el.offsetLeft - (scrollEl.clientWidth - el.clientWidth) : el.offsetLeft,
+			top: 0,
+			behavior: "smooth",
+		});
 	};
 
 	const navigateRight = () => {
@@ -82,6 +141,7 @@ const Carousel = (props: T.Props) => {
 	React.useImperativeHandle(instanceRef, () => ({
 		navigateBack,
 		navigateForward,
+		navigateTo,
 	}));
 
 	/**
@@ -121,6 +181,7 @@ const Carousel = (props: T.Props) => {
 					/>
 				</>
 			)}
+
 			<View
 				as="ul"
 				direction="row"
@@ -129,8 +190,12 @@ const Carousel = (props: T.Props) => {
 				className={s.scroll}
 				attributes={{ ref: scrollElRef, onScroll: handleScroll }}
 			>
-				{React.Children.map(children, (child) => (
-					<View.Item className={s.item} as="li">
+				{React.Children.map(children, (child, index) => (
+					<View.Item
+						className={s.item}
+						as="li"
+						attributes={{ ref: (el) => handleItemRef(el, index) }}
+					>
 						{child}
 					</View.Item>
 				))}
