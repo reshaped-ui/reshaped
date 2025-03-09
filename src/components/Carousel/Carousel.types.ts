@@ -31,6 +31,7 @@ export type Props = {
 	navigationDisplay?: "hidden";
 	instanceRef?: React.Ref<Instance>;
 	onChange?: (args: { index: number }) => void;
+	onScroll?: (e: React.UIEvent<HTMLUListElement>) => void;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

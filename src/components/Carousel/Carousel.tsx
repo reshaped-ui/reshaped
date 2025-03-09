@@ -22,6 +22,7 @@ const Carousel = (props: T.Props) => {
 		bleed,
 		navigationDisplay,
 		onChange,
+		onScroll,
 		instanceRef,
 		className,
 		attributes,
@@ -60,6 +61,7 @@ const Carousel = (props: T.Props) => {
 		const firstVisibleIndex = getFirstVisibleIndex();
 
 		setScrollPosition(el.scrollLeft);
+		onScroll?.(event);
 
 		if (currentIndexRef.current !== firstVisibleIndex) onChange?.({ index: firstVisibleIndex });
 		currentIndexRef.current = firstVisibleIndex;

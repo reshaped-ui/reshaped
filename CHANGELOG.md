@@ -23,3 +23,4 @@
 - Carousel: onChange() + instanceRef.navigateTo()
 - Flyout: Render outside scrollable areas
 - Flyout: Position fallback based on the containerRef
+- Carousel: onScroll handler
