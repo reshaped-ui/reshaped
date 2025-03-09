@@ -3,9 +3,11 @@ import calculatePosition from "./calculatePosition";
 /**
  * Check if element visually fits on the screen
  */
-const isFullyVisible = (args: ReturnType<typeof calculatePosition>) => {
-	const { styles, scopeOffset } = args;
-	const htmlEl = document.documentElement;
+const isFullyVisible = (
+	args: ReturnType<typeof calculatePosition> & { container?: HTMLElement | null }
+) => {
+	const { styles, scopeOffset, container } = args;
+	const htmlEl = container || document.documentElement;
 	const pageLeft = htmlEl.scrollLeft;
 	const pageRight = pageLeft + htmlEl.clientWidth;
 	const pageTop = htmlEl.scrollTop;

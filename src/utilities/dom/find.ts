@@ -19,7 +19,7 @@ export const findClosestRenderContainer = (args: {
 	el: HTMLElement | null;
 	iteration?: number;
 	overflowOnly?: boolean;
-}): HTMLElement => {
+}): { el: HTMLElement; scrollable?: boolean } => {
 	const { el, iteration = 0, overflowOnly } = args;
 	const style = el && window.getComputedStyle(el);
 	const overflowY = style?.overflowY;
@@ -30,11 +30,11 @@ export const findClosestRenderContainer = (args: {
 	// Only check shadow root on the first run
 	if (iteration === 0) {
 		const shadowRoot = getShadowRoot(el);
-		if (shadowRoot?.firstElementChild) return shadowRoot.firstElementChild as HTMLElement;
+		if (shadowRoot?.firstElementChild) return { el: shadowRoot.firstElementChild as HTMLElement };
 	}
 
-	if (el === document.body || !el) return document.body;
-	if (isScrollable && el.scrollHeight > el.clientHeight) return el;
-	if (isFixed && !overflowOnly) return el;
+	if (el === document.body || !el) return { el: document.body };
+	if (isScrollable && el.scrollHeight > el.clientHeight) return { el, scrollable: true };
+	if (isFixed && !overflowOnly) return { el };
 	return findClosestRenderContainer({ el: el.parentElement, iteration: iteration + 1 });
 };

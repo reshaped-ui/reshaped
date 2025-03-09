@@ -11,6 +11,11 @@
 	&.--hover {
 		pointer-events: all;
 	}
+
+	&.--hover-disabled,
+	&.--hover-disabled .inner {
+		pointer-events: none;
+	}
 }
 
 .inner {
@@ -92,8 +97,4 @@
 .content.--animated.--visible .inner {
 	transition-duration: var(--rs-duration-fast);
 	transition-timing-function: var(--rs-easing-decelerate);
-}
-
-.content.--hover-disabled {
-	pointer-events: none;
 }

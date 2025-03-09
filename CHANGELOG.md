@@ -21,3 +21,5 @@
 - getThemeCSS: updated documentation to mention baseThemeDefinition
 - Table: Added compound component types to the package exports
 - Carousel: onChange() + instanceRef.navigateTo()
+- Flyout: Render outside scrollable areas
+- Flyout: Position fallback based on the containerRef

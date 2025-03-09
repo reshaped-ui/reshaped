@@ -90,7 +90,8 @@ const flyout: Flyout = (args) => {
 	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
 	const baseUnit = getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1");
 	const unitModifier = baseUnit ? parseInt(baseUnit) : 0;
-	const triggerBounds = passedTriggerBounds || triggerEl?.getBoundingClientRect();
+	const internalTriggerBounds = triggerEl?.getBoundingClientRect();
+	const triggerBounds = passedTriggerBounds || internalTriggerBounds;
 
 	if (!triggerBounds) return;
 
@@ -118,8 +119,14 @@ const flyout: Flyout = (args) => {
 	(shadowRoot || document.body).appendChild(targetClone);
 
 	const flyoutBounds = targetClone.getBoundingClientRect();
+	const closestRenderContainer =
+		!container && triggerEl ? findClosestRenderContainer({ el: triggerEl }) : undefined;
 	const containerParent =
-		container || (triggerEl ? findClosestRenderContainer({ el: triggerEl }) : document.body);
+		container ||
+		// Only render inside non-scrollable container to make sure it doesn't get clipped by overflow auto
+		// We render those cases in the document root and then sync the position on scroll instead
+		(!closestRenderContainer?.scrollable ? closestRenderContainer?.el : undefined) ||
+		document.body;
 	const containerBounds = containerParent.getBoundingClientRect();
 
 	const scopeOffset = {
@@ -140,7 +147,7 @@ const flyout: Flyout = (args) => {
 			contentGap: contentGap * unitModifier,
 			contentShift: contentShift * unitModifier,
 		});
-		const visible = isFullyVisible(tested);
+		const visible = isFullyVisible({ ...tested, container });
 		const validPosition = visible || fallbackPositions?.length === 0;
 
 		// Saving first try in case non of the options work

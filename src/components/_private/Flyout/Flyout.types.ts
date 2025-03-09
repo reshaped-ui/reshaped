@@ -37,7 +37,7 @@ export type FlyoutData = {
 };
 
 export type UseFlyoutData = Pick<State, "styles" | "position" | "status"> & {
-	updatePosition: () => void;
+	updatePosition: (args?: { sync?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
 	remove: () => void;
