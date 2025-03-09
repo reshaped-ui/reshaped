@@ -346,7 +346,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	}, [updatePosition, triggerElRef, isRendered]);
 
 	React.useEffect(() => {
-		updatePosition();
+		updatePosition({ sync: true });
 	}, [isRTL, updatePosition]);
 
 	/**

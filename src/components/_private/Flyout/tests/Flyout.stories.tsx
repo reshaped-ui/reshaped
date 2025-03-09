@@ -330,6 +330,41 @@ export const testInsideFixed = () => (
 	</Example>
 );
 
+export const testInsideScrollable = () => {
+	const containerRef = React.useRef<HTMLDivElement>(null);
+
+	return (
+		<Example>
+			<Example.Item title="shouldn't be cut off by the scroll">
+				<View height={20} overflow="auto" backgroundColor="neutral-faded" borderRadius="small">
+					<View height={50} attributes={{ ref: containerRef }} padding={4} paddingBottom={30}>
+						<Flyout triggerType="click" position="start">
+							<Flyout.Trigger>
+								{(attributes) => <Button attributes={attributes}>Trigger</Button>}
+							</Flyout.Trigger>
+							<Flyout.Content>
+								<div
+									style={{
+										background: "var(--rs-color-background-elevation-overlay)",
+										padding: "var(--rs-unit-x4)",
+										height: 100,
+										minWidth: 100,
+										borderRadius: "var(--rs-radius-medium)",
+										border: "1px solid var(--rs-color-border-neutral-faded)",
+										boxSizing: "border-box",
+									}}
+								>
+									Content
+								</div>
+							</Flyout.Content>
+						</Flyout>
+					</View>
+				</View>
+			</Example.Item>
+		</Example>
+	);
+};
+
 export const testDynamicBounds = () => {
 	const [left, setLeft] = React.useState(50);
 	const [top, setTop] = React.useState(50);

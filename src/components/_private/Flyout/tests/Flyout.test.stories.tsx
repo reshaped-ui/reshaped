@@ -3,6 +3,7 @@ import { expect, fn, userEvent, within, waitFor } from "@storybook/test";
 import Flyout from "components/_private/Flyout";
 import Button from "components/Button";
 import Reshaped from "components/Reshaped";
+import View from "components/View";
 import { useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { sleep } from "utilities/helpers";
@@ -189,14 +190,36 @@ export const containerRef: StoryObj = {
 		const portalRef = useRef<HTMLDivElement>(null);
 
 		return (
-			<div ref={portalRef} data-testid="test-id">
-				<Flyout containerRef={portalRef} active>
+			<View
+				backgroundColor="neutral-faded"
+				borderRadius="small"
+				height={50}
+				attributes={{ ref: portalRef, "data-testid": "test-id" }}
+				justify="end"
+				align="start"
+				padding={4}
+			>
+				<Flyout containerRef={portalRef} active position="bottom-start">
 					<Flyout.Trigger>
 						{(attributes) => <Button attributes={attributes}>Trigger</Button>}
 					</Flyout.Trigger>
-					<Flyout.Content>Content</Flyout.Content>
+					<Flyout.Content>
+						<div
+							style={{
+								background: "var(--rs-color-background-elevation-overlay)",
+								padding: "var(--rs-unit-x4)",
+								height: 100,
+								minWidth: 200,
+								borderRadius: "var(--rs-radius-medium)",
+								border: "1px solid var(--rs-color-border-neutral-faded)",
+								boxSizing: "border-box",
+							}}
+						>
+							Content
+						</div>
+					</Flyout.Content>
 				</Flyout>
-			</div>
+			</View>
 		);
 	},
 	play: async ({ canvasElement }) => {
@@ -231,7 +254,9 @@ class CustomElement extends window.HTMLElement {
 	}
 }
 
-window.customElements.define("custom-element-flyout", CustomElement);
+if (!window.customElements.get("custom-element-flyout")) {
+	window.customElements.define("custom-element-flyout", CustomElement);
+}
 
 export const shadowDom: StoryObj = {
 	name: "shadow DOM",

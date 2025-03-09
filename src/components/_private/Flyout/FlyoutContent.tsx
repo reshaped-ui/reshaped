@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames, throttleHandler } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
 import { findClosestRenderContainer } from "utilities/dom";
@@ -17,6 +17,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 		id,
 		flyoutElRef,
 		triggerElRef,
+		handleClose,
 		handleTransitionEnd,
 		handleTransitionStart,
 		triggerType,
@@ -33,8 +34,19 @@ const FlyoutContent = (props: T.ContentProps) => {
 		containerRef,
 		isSubmenu,
 	} = useFlyoutContext();
-	const { styles, status, position } = flyout;
+	const { styles, status, position, updatePosition } = flyout;
 	const [mounted, setMounted] = React.useState(false);
+	const closestContainer = React.useMemo(() => {
+		if (!mounted) return;
+		if (!triggerElRef) return;
+		return findClosestRenderContainer({ el: triggerElRef.current });
+	}, [mounted, triggerElRef]);
+	const scrollableRef =
+		(mounted && closestContainer?.el === document.body) ||
+		!closestContainer?.el ||
+		closestContainer.scrollable
+			? undefined
+			: { current: closestContainer.el };
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -50,6 +62,33 @@ const FlyoutContent = (props: T.ContentProps) => {
 		el.addEventListener("transitionstart", handleTransitionStart);
 		return () => el.removeEventListener("transitionstart", handleTransitionStart);
 	}, [handleTransitionStart, flyoutElRef, status]);
+
+	React.useEffect(() => {
+		if (!closestContainer?.scrollable) return;
+
+		const triggerEl = triggerElRef?.current;
+		const containerEl = closestContainer.el;
+
+		const handleScroll = throttleHandler(() => {
+			const triggerBounds = triggerEl?.getBoundingClientRect();
+			const containerBounds = containerEl.getBoundingClientRect();
+
+			if (
+				triggerBounds &&
+				(triggerBounds.bottom < containerBounds.top ||
+					triggerBounds.right < containerBounds.left ||
+					triggerBounds.left > containerBounds.right ||
+					triggerBounds.top > containerBounds.bottom)
+			) {
+				handleClose();
+			} else {
+				flyout.updatePosition({ sync: true });
+			}
+		}, 16);
+
+		closestContainer.el.addEventListener("scroll", handleScroll, { passive: true });
+		return () => closestContainer.el.removeEventListener("scroll", handleScroll);
+	}, [closestContainer, flyout, handleClose, triggerElRef]);
 
 	if (status === "idle" || !mounted) return null;
 
@@ -112,13 +151,6 @@ const FlyoutContent = (props: T.ContentProps) => {
 			</div>
 		</ContentProvider>
 	);
-
-	const closestScrollable =
-		triggerElRef && findClosestRenderContainer({ el: triggerElRef.current });
-	const scrollableRef =
-		closestScrollable === document.body || !closestScrollable
-			? undefined
-			: { current: closestScrollable };
 
 	return <Portal targetRef={containerRef || scrollableRef}>{content}</Portal>;
 };
