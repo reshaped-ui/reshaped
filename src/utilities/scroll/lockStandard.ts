@@ -9,7 +9,7 @@ const lockStandardScroll = (args: {
 	originEl?: HTMLElement | null;
 }) => {
 	let container = document.body;
-	if (args.originEl) container = findClosestRenderContainer({ el: args.originEl });
+	if (args.originEl) container = findClosestRenderContainer({ el: args.originEl }).el;
 	if (args.containerEl) container = args.containerEl;
 
 	const rect = container.getBoundingClientRect();

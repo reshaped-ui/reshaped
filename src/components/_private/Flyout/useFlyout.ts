@@ -91,8 +91,7 @@ const flyout: Flyout = (args) => {
 	const baseUnit = getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1");
 	const unitModifier = baseUnit ? parseInt(baseUnit) : 0;
 	const internalTriggerBounds = triggerEl?.getBoundingClientRect();
-	// const triggerBounds = passedTriggerBounds || internalTriggerBounds;
-	const triggerBounds = internalTriggerBounds;
+	const triggerBounds = passedTriggerBounds || internalTriggerBounds;
 
 	if (!triggerBounds) return;
 
