@@ -3,12 +3,13 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import type * as G from "types/global";
 
 type Context = { rtl: [boolean, (state: boolean) => void]; defaultViewport: G.Viewport };
+
 export const SingletonEnvironmentContext = React.createContext<Context>({
 	rtl: [false, () => {}],
 	defaultViewport: "s",
 });
 
-export const useSingletonRTL = (defaultRTL?: boolean) => {
+export const useSingletonEnvironment = (defaultRTL?: boolean) => {
 	const state = React.useState(defaultRTL || false);
 	const [isRTL, setRTL] = state;
 

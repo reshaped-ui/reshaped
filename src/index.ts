@@ -191,6 +191,7 @@ export { default as useToggle } from "hooks/useToggle";
 export { default as useRTL } from "hooks/useRTL";
 export { default as useIsomorphicLayoutEffect } from "hooks/useIsomorphicLayoutEffect";
 export { default as useHotkeys } from "hooks/useHotkeys";
+export { default as useKeyboardMode } from "hooks/useKeyboardMode";
 export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";
 
 /**
