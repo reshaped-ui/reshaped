@@ -24,4 +24,5 @@
 - Flyout: Render outside scrollable areas
 - Flyout: Position fallback based on the containerRef
 - Carousel: onScroll handler
+- useKeyboardMode: new hook
 - ProgressIndicator: New component

@@ -5,11 +5,11 @@ import { classNames } from "utilities/helpers";
 import { GlobalColorMode, PrivateTheme } from "components/Theme";
 import { ToastProvider } from "components/Toast";
 import { useGlobalColorMode } from "components/Theme/useTheme";
-import useSingletonKeyboardMode from "hooks/_private/useSingletonKeyboardMode";
 import {
 	SingletonEnvironmentContext,
-	useSingletonRTL,
+	useSingletonEnvironment,
 } from "hooks/_private/useSingletonEnvironment";
+import { SingletonKeyboardModeProvider } from "hooks/_private/useSingletonKeyboardMode";
 import { SingletonHotkeysProvider } from "hooks/_private/useSingletonHotkeys";
 import type * as T from "./Reshaped.types";
 import "./Reshaped.css";
@@ -17,16 +17,16 @@ import s from "./Reshaped.module.css";
 
 const ReshapedInner = (props: T.Props) => {
 	const { children, defaultRTL, defaultViewport = "s", toastOptions } = props;
-	const rtlState = useSingletonRTL(defaultRTL);
-
-	useSingletonKeyboardMode();
+	const rtlState = useSingletonEnvironment(defaultRTL);
 
 	return (
-		<SingletonEnvironmentContext.Provider value={{ rtl: rtlState, defaultViewport }}>
-			<SingletonHotkeysProvider>
-				<ToastProvider options={toastOptions}>{children}</ToastProvider>
-			</SingletonHotkeysProvider>
-		</SingletonEnvironmentContext.Provider>
+		<SingletonKeyboardModeProvider>
+			<SingletonEnvironmentContext.Provider value={{ rtl: rtlState, defaultViewport }}>
+				<SingletonHotkeysProvider>
+					<ToastProvider options={toastOptions}>{children}</ToastProvider>
+				</SingletonHotkeysProvider>
+			</SingletonEnvironmentContext.Provider>
+		</SingletonKeyboardModeProvider>
 	);
 };
 
