@@ -1,0 +1,117 @@
+.root {
+	line-height: 0;
+}
+
+.container {
+	display: inline-flex;
+	vertical-align: top;
+	position: relative;
+
+	&::after,
+	&::before {
+		content: "";
+		position: absolute;
+		inset-inline-start: calc(var(--rs-unit-x4) * -1);
+		opacity: 0;
+	}
+}
+
+.item,
+.container::before,
+.container::after {
+	background: var(--rs-color-background-neutral);
+	width: var(--rs-unit-x2);
+	height: var(--rs-unit-x2);
+	border-radius: 999px;
+}
+
+.item {
+	margin-inline-start: var(--rs-unit-x2);
+
+	&:first-child {
+		margin-inline-start: 0;
+	}
+
+	&.item--active {
+		transform: scale(1.2);
+		background: var(--rs-color-background-primary);
+	}
+
+	&.item--variant-secondary {
+		opacity: 0.6;
+	}
+
+	&.item--variant-tertiary {
+		opacity: 0.3;
+	}
+
+	&.item--variant-hidden {
+		opacity: 0;
+	}
+}
+
+.--color-media {
+	& .container::before,
+	& .container::after,
+	& .item {
+		background: var(--rs-color-white);
+	}
+
+	& .item {
+		opacity: 0.6;
+
+		&.item--active {
+			opacity: 1;
+		}
+
+		&.item--variant-secondary {
+			opacity: 0.3;
+		}
+
+		&.item--variant-tertiary {
+			opacity: 0.1;
+		}
+
+		&.item--variant-hidden {
+			opacity: 0;
+		}
+	}
+}
+
+.--shift-start .container,
+[dir="rtl"] .--shift-end .container {
+	transform: translateX(var(--rs-unit-x4));
+}
+
+.--shift-end .container,
+[dir="rtl"] .--shift-start .container {
+	transform: translateX(calc(var(--rs-unit-x4) * -1));
+}
+
+.--shift-start .container::before,
+.--shift-end .container::after {
+	opacity: 0.3;
+}
+
+.--shift-start.--color-media .container::before,
+.--shift-end.--color-media .container::after {
+	opacity: 0.1;
+}
+
+.--shift-start .container::before {
+	inset-inline-end: auto;
+	inset-inline-start: calc(var(--rs-unit-x4) * -1);
+}
+
+.--shift-end .container::after {
+	inset-inline-start: auto;
+	inset-inline-end: calc(var(--rs-unit-x4) * -1);
+}
+
+.--animated .container,
+.--animated .container::before,
+.--animated .container::after,
+.--animated .item {
+	transition: var(--rs-duration-slow) var(--rs-easing-decelerate);
+	transition-property: transform, opacity, background-color;
+}
