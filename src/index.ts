@@ -109,6 +109,9 @@ export type { PopoverProps, PopoverInstance } from "components/Popover";
 export { default as Progress } from "components/Progress";
 export type { ProgressProps } from "components/Progress";
 
+export { default as ProgressIndicator } from "components/ProgressIndicator";
+export type { ProgressIndicatorProps } from "components/ProgressIndicator";
+
 export { default as Radio } from "components/Radio";
 export type { RadioProps } from "components/Radio";
 
