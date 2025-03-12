@@ -11,7 +11,7 @@ const MAX_RENDERED_ITEMS = 7;
 const BOUNDARY = (MAX_RENDERED_ITEMS - 1) / 2;
 
 const ProgressIndicator = (props: T.Props) => {
-	const { total, activeIndex = 0, color = "primary", className, attributes } = props;
+	const { total, activeIndex = 0, color = "primary", ariaLabel, className, attributes } = props;
 	const allItemsVisible = total < MAX_RENDERED_ITEMS;
 	const firstRenderedIndex = React.useMemo(() => {
 		if (allItemsVisible) return 0;
@@ -31,6 +31,15 @@ const ProgressIndicator = (props: T.Props) => {
 		color && s[`--color-${color}`],
 		animated && s["--animated"]
 	);
+	const barAttributes = ariaLabel
+		? {
+				"aria-label": ariaLabel,
+				role: "progressbar",
+				"aria-valuenow": activeIndex,
+				"aria-valuemin": 0,
+				"aria-valuemax": total - 1,
+			}
+		: {};
 
 	const setAnimated = (animated: boolean) => {
 		setAnimatedState(animated);
@@ -113,14 +122,7 @@ const ProgressIndicator = (props: T.Props) => {
 
 	return (
 		<div {...attributes} className={rootClassName}>
-			<div
-				className={s.container}
-				onTransitionEnd={handleTransitionEnd}
-				role="progressbar"
-				aria-valuenow={activeIndex}
-				aria-valuemin={0}
-				aria-valuemax={total - 1}
-			>
+			<div {...barAttributes} className={s.container} onTransitionEnd={handleTransitionEnd}>
 				{renderItems()}
 			</div>
 		</div>

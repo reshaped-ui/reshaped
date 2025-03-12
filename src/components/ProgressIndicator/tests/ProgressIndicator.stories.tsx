@@ -51,21 +51,6 @@ export const base: StoryObj = {
 			</Example>
 		);
 	},
-	play: async ({ canvas }) => {
-		const nextButton = canvas.getAllByRole("button")[1];
-		const progress = canvas.getByRole("progressbar");
-
-		expect(progress).toHaveAttribute("aria-valuenow", "0");
-		expect(progress).toHaveAttribute("aria-valuemin", "0");
-		expect(progress).toHaveAttribute("aria-valuemax", "9");
-
-		await userEvent.click(nextButton);
-		await userEvent.click(nextButton);
-		await userEvent.click(nextButton);
-		await userEvent.click(nextButton);
-
-		expect(progress).toHaveAttribute("aria-valuenow", "4");
-	},
 };
 
 export const color = {
@@ -90,6 +75,19 @@ export const color = {
 				</Example.Item>
 			</Example>
 		);
+	},
+};
+
+export const ariaLabel: StoryObj = {
+	name: "ariaLabel",
+	render: () => <ProgressIndicator total={10} className="test-classname" ariaLabel="Progress" />,
+	play: async ({ canvas }) => {
+		const progress = canvas.getByRole("progressbar");
+
+		expect(progress).toHaveAttribute("aria-valuenow", "0");
+		expect(progress).toHaveAttribute("aria-valuemin", "0");
+		expect(progress).toHaveAttribute("aria-valuemax", "9");
+		expect(progress).toHaveAccessibleName("Progress");
 	},
 };
 
