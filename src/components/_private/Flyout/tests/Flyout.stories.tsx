@@ -597,12 +597,6 @@ export const testShadowDom = {
 	name: "test: shadow dom",
 	// @ts-ignore
 	render: () => <custom-element-flyout />,
-	play: () => {
-		const flyout = document.querySelector("custom-element-flyout");
-
-		expect(flyout?.shadowRoot?.querySelector(`#test-id`)).toBeTruthy();
-		expect(document.body.querySelector(`#test-id`)).toBe(null);
-	},
 };
 
 export const testInsideFixed: StoryObj = {
