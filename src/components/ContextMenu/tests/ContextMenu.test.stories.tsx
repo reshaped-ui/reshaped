@@ -62,7 +62,7 @@ export const handlers: StoryObj<{
 		await userEvent.click(root);
 
 		expect(args.handleClose).toHaveBeenCalledTimes(1);
-		expect(args.handleClose).toHaveBeenCalledWith();
+		expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
 
 		await waitFor(
 			() => {

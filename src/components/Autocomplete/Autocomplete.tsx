@@ -23,6 +23,9 @@ const Autocomplete = (props: T.Props) => {
 		containerRef,
 		instanceRef,
 		onBackspace,
+		active,
+		onOpen,
+		onClose,
 		...textFieldProps
 	} = props;
 	const onBackspaceRef = useHandlerRef(onBackspace);
@@ -32,15 +35,45 @@ const Autocomplete = (props: T.Props) => {
 		inputAttributesRef && typeof inputAttributesRef !== "string" && "current" in inputAttributesRef
 			? inputAttributesRef
 			: internalInputRef;
-	const [active, setActive] = React.useState(false);
+	const [internalActive, setInternalActive] = React.useState(false);
 	const hasChildren = !!React.Children.toArray(children).filter(Boolean).length;
 	const lockedRef = React.useRef(false);
+	const onOpenRef = useHandlerRef(onOpen);
+	const onCloseRef = useHandlerRef(onClose);
+	const isDropdownActive = hasChildren && (active ?? internalActive);
 
 	const handleOpen = React.useCallback(() => {
 		if (lockedRef.current) return;
-		setActive(true);
-	}, []);
-	const handleClose = () => setActive(false);
+		setInternalActive(true);
+		onOpenRef.current?.();
+	}, [onOpenRef]);
+
+	const handleClose: T.Props["onClose"] = (args) => {
+		setInternalActive(false);
+		onCloseRef.current?.(args);
+	};
+
+	const handleItemClick: T.Context["onItemClick"] = (args) => {
+		onChange?.({ value: args.value, name });
+		onItemSelect?.(args);
+
+		// Prevent dropdown from re-opening when clicked on item with mouse
+		// and focus moves to the item and back to the input
+		lockedRef.current = true;
+		setTimeout(() => {
+			lockedRef.current = false;
+		}, 100);
+	};
+
+	const handleChange: TextFieldProps["onChange"] = (args) => {
+		onChange?.(args);
+		handleOpen();
+	};
+
+	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		onInput?.({ value: e.currentTarget.value, name, event: e });
+		textFieldProps.inputAttributes?.onInput?.(e);
+	};
 
 	useHotkeys(
 		{
@@ -69,26 +102,6 @@ const Autocomplete = (props: T.Props) => {
 		{ ref: inputRef, preventDefault: true }
 	);
 
-	const handleChange: TextFieldProps["onChange"] = (args) => {
-		onChange?.(args);
-		handleOpen();
-	};
-
-	const handleItemClick: T.Context["onItemClick"] = (args) => {
-		onChange?.({ value: args.value, name });
-		onItemSelect?.(args);
-
-		// Prevent dropdown from re-opening when clicked on item with mouse
-		// and focus moves to the item and back to the input
-		lockedRef.current = true;
-		setTimeout(() => (lockedRef.current = false), 100);
-	};
-
-	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		onInput?.({ value: e.currentTarget.value, name, event: e });
-		textFieldProps.inputAttributes?.onInput?.(e);
-	};
-
 	return (
 		<AutocompleteContext.Provider value={{ onItemClick: handleItemClick }}>
 			<DropdownMenu
@@ -96,7 +109,7 @@ const Autocomplete = (props: T.Props) => {
 				width="trigger"
 				triggerType="focus"
 				trapFocusMode="selection-menu"
-				active={hasChildren && active}
+				active={isDropdownActive}
 				onClose={handleClose}
 				onOpen={handleOpen}
 				containerRef={containerRef}
@@ -109,10 +122,10 @@ const Autocomplete = (props: T.Props) => {
 							{...textFieldProps}
 							name={name}
 							onChange={handleChange}
-							focused={hasChildren && active}
-							// Ignoring the type check since TS can't infer the correct html element type
+							focused={isDropdownActive}
 							attributes={{
 								...textFieldProps.attributes,
+								// Ignoring the type check since TS can't infer the correct html element type
 								ref: ref as any,
 								onClick: attributes.onFocus,
 							}}
@@ -122,6 +135,7 @@ const Autocomplete = (props: T.Props) => {
 								onFocus: (e) => {
 									attributes.onFocus?.();
 									textFieldProps.onFocus?.(e);
+									if (!lockedRef.current) inputRef.current?.select();
 								},
 								onInput: handleInput,
 								onClick: attributes.onFocus,

@@ -5,7 +5,7 @@ import type { DropdownMenuProps, DropdownMenuInstance } from "components/Dropdow
 type SelectArgs = { value: string; data?: unknown };
 
 export type Props = TextFieldProps &
-	Pick<DropdownMenuProps, "containerRef" | "instanceRef"> & {
+	Pick<DropdownMenuProps, "containerRef" | "instanceRef" | "active" | "onOpen" | "onClose"> & {
 		onInput?: TextFieldProps["onChange"];
 		onItemSelect?: (args: SelectArgs) => void;
 		onBackspace?: () => void;

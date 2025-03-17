@@ -8,14 +8,14 @@ const FlyoutUncontrolled = (props: T.UncontrolledProps & T.DefaultProps) => {
 	const { defaultActive, onClose, onOpen } = props;
 	const [active, setActive] = React.useState(defaultActive || false);
 
-	const handleClose = () => {
+	const handleClose: T.Props["onClose"] = (args) => {
 		setActive(false);
-		if (onClose) onClose();
+		onClose?.(args);
 	};
 
 	const handleOpen = () => {
 		setActive(true);
-		if (onOpen) onOpen();
+		onOpen?.();
 	};
 
 	return (

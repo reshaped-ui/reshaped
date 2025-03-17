@@ -182,7 +182,10 @@ const Color = () => {
 							color: "inverted",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [<Button onClick={() => toast.hide(id)}>Close</Button>],
+							actionsSlot: [
+								<Button onClick={() => toast.hide(id)}>Undo</Button>,
+								<Button onClick={() => toast.hide(id)}>Hide</Button>,
+							],
 						});
 					}}
 				>
@@ -197,7 +200,10 @@ const Color = () => {
 							color: "neutral",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [<Button onClick={() => toast.hide(id)}>Close</Button>],
+							actionsSlot: [
+								<Button onClick={() => toast.hide(id)}>Undo</Button>,
+								<Button onClick={() => toast.hide(id)}>Hide</Button>,
+							],
 						});
 					}}
 				>
@@ -212,7 +218,10 @@ const Color = () => {
 							color: "primary",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [<Button onClick={() => toast.hide(id)}>Close</Button>],
+							actionsSlot: [
+								<Button onClick={() => toast.hide(id)}>Undo</Button>,
+								<Button onClick={() => toast.hide(id)}>Hide</Button>,
+							],
 						});
 					}}
 				>
@@ -227,7 +236,10 @@ const Color = () => {
 							color: "positive",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [<Button onClick={() => toast.hide(id)}>Close</Button>],
+							actionsSlot: [
+								<Button onClick={() => toast.hide(id)}>Undo</Button>,
+								<Button onClick={() => toast.hide(id)}>Hide</Button>,
+							],
 						});
 					}}
 				>
@@ -242,7 +254,10 @@ const Color = () => {
 							color: "critical",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [<Button onClick={() => toast.hide(id)}>Close</Button>],
+							actionsSlot: [
+								<Button onClick={() => toast.hide(id)}>Undo</Button>,
+								<Button onClick={() => toast.hide(id)}>Hide</Button>,
+							],
 						});
 					}}
 				>
@@ -258,8 +273,8 @@ const Color = () => {
 							title: "Hey!",
 							icon: IconZap,
 							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Close</Button>,
-								<Button onClick={() => toast.hide(id)}>Close</Button>,
+								<Button onClick={() => toast.hide(id)}>Undo</Button>,
+								<Button onClick={() => toast.hide(id)}>Hide</Button>,
 							],
 						});
 					}}
@@ -270,6 +285,7 @@ const Color = () => {
 		</Example>
 	);
 };
+
 export const color = () => <Color />;
 
 const Timeout = () => {
