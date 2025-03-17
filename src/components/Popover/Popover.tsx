@@ -39,7 +39,7 @@ const Popover = (props: T.Props) => {
 const PopoverDismissible = (props: DismissibleProps) => {
 	const { handleClose } = useFlyoutContext();
 
-	return <Dismissible {...props} onClose={handleClose} />;
+	return <Dismissible {...props} onClose={() => handleClose({})} />;
 };
 
 Popover.Dismissible = PopoverDismissible;

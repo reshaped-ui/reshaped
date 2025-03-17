@@ -135,8 +135,11 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 
 			if (!canClose) return;
 
-			onCloseRef.current?.();
-			if (options?.closeParents) parentFlyoutContext?.handleClose?.();
+			onCloseRef.current?.({ reason: options.reason });
+
+			if (options?.closeParents) {
+				parentFlyoutContext?.handleClose?.({});
+			}
 		},
 		[isRendered, isDismissible, triggerType, onCloseRef, disabled, parentFlyoutContext]
 	);
@@ -158,7 +161,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 				return;
 			}
 
-			handleClose();
+			handleClose({});
 		},
 		[handleClose]
 	);
@@ -196,14 +199,14 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		cooldown.cool();
 
 		clearTimer();
-		timerRef.current = setTimeout(() => handleClose(), timeouts.mouseLeave);
+		timerRef.current = setTimeout(() => handleClose({}), timeouts.mouseLeave);
 	}, [clearTimer, timerRef, handleClose]);
 
 	const handleTriggerClick = React.useCallback(() => {
 		if (!isRendered) {
 			handleOpen();
 		} else {
-			handleClose();
+			handleClose({});
 		}
 	}, [isRendered, handleOpen, handleClose]);
 
@@ -301,7 +304,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			initialFocusEl: initialFocusRef?.current as FocusableElement | undefined,
 			includeTrigger: triggerType === "hover" && trapFocusMode !== "dialog" && !isSubmenu,
 			onNavigateOutside: () => {
-				handleClose();
+				handleClose({});
 			},
 		});
 	}, [status, triggerType, trapFocusMode]);
@@ -356,13 +359,13 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 		instanceRef,
 		() => ({
 			open: handleOpen,
-			close: handleClose,
+			close: () => handleClose({}),
 			updatePosition: () => updatePosition({ sync: true }),
 		}),
 		[handleOpen, handleClose, updatePosition]
 	);
 
-	useHotkeys({ Escape: () => handleClose() }, [handleClose]);
+	useHotkeys({ Escape: () => handleClose({ reason: "escape-key" }) }, [handleClose]);
 
 	useOnClickOutside(
 		[flyoutElRef, triggerElRef],
@@ -371,7 +374,8 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			if (disableCloseOnOutsideClick) return;
 			// Clicking outside changes focused element so we don't need to set it back ourselves
 			shouldReturnFocusRef.current = false;
-			handleClose();
+
+			handleClose({ reason: "outside-click" });
 		},
 		[isRendered]
 	);

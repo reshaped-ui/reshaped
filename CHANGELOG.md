@@ -26,3 +26,8 @@
 - Carousel: onScroll handler
 - useKeyboardMode: new hook
 - ProgressIndicator: New component
+- Autocomplete: Added .select() if value exists on focus
+- Flyout: close reason
+- Autocomplete: active, onOpen, onClose + reason
+
+- Figma, Button: Removed an internal button component to resolve issues with Figma style overrides. Might need swapping to the updated component after an update.

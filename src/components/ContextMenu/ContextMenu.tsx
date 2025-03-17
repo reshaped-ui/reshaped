@@ -41,10 +41,10 @@ const ContextMenu = (props: T.Props) => {
 				position={position}
 				originCoordinates={coordinates}
 				active={!!coordinates}
-				onClose={() => {
+				onClose={(args) => {
 					setCoordinates(undefined);
 					unlockScroll();
-					onClose?.();
+					onClose?.(args);
 				}}
 			/>
 		</div>

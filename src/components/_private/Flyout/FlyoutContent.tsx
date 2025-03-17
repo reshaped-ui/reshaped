@@ -80,7 +80,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 					triggerBounds.left > containerBounds.right ||
 					triggerBounds.top > containerBounds.bottom)
 			) {
-				handleClose();
+				handleClose({});
 			} else {
 				flyout.updatePosition({ sync: true });
 			}

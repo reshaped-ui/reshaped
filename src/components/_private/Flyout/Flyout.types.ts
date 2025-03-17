@@ -10,6 +10,17 @@ type XSide = "start" | "end";
 type YSide = "top" | "bottom";
 export type Side = XSide | YSide;
 
+export type CloseReason =
+	| "escape-key"
+	| "outside-click"
+
+	/**
+	 * Keeping the item selection type here since DropdownMenu items use Flyout context
+	 * and not a separate DropdownMenu context
+	 */
+	| "item-selection"
+	| "close-button";
+
 export type Position = `${YSide}` | `${YSide}-${XSide}` | `${XSide}` | `${XSide}-${YSide}`;
 export type Width = "trigger" | string;
 export type Options = {
@@ -90,7 +101,7 @@ type BaseProps = {
 	originCoordinates?: G.Coordinates;
 	children?: React.ReactNode;
 	onOpen?: () => void;
-	onClose?: () => void;
+	onClose?: (args: { reason?: CloseReason }) => void;
 	width?: Width;
 	contentGap?: number;
 	contentShift?: number;
@@ -126,7 +137,7 @@ export type ContextProps = {
 	width?: Width;
 	triggerElRef?: React.RefObject<HTMLButtonElement | null>;
 	flyoutElRef: React.RefObject<HTMLDivElement | null>;
-	handleClose: (options?: { closeParents?: boolean }) => void;
+	handleClose: (options: { closeParents?: boolean; reason?: CloseReason }) => void;
 	handleOpen: () => void;
 	handleMouseEnter: () => void;
 	handleMouseLeave: () => void;

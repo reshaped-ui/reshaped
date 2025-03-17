@@ -78,7 +78,12 @@ const DropdownMenuItem = (props: T.ItemProps) => {
 	const { handleClose } = useFlyoutContext();
 
 	const handleClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
-		if (handleClose) handleClose({ closeParents: true });
+		/**
+		 * Stop event propagation to make sure outside click doesn't get triggered
+		 * after the content is closed
+		 */
+		e.stopPropagation();
+		if (handleClose) handleClose({ closeParents: true, reason: "item-selection" });
 		if (onClick) onClick(e);
 	};
 

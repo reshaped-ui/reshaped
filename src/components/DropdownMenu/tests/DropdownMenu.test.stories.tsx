@@ -44,7 +44,7 @@ export const defaultActive: StoryObj<{
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith();
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
 			expect(item).not.toBeInTheDocument();
 		});
 
@@ -87,7 +87,7 @@ export const active: StoryObj<{
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith();
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
 		});
 
 		expect(item).toBeInTheDocument();

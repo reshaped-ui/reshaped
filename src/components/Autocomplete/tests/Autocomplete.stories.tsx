@@ -2,7 +2,6 @@ import React from "react";
 import { StoryObj } from "@storybook/react";
 import { Example } from "utilities/storybook";
 import Autocomplete from "components/Autocomplete";
-import Loader from "components/Loader";
 import View from "components/View";
 import Badge from "components/Badge";
 import useToggle from "hooks/useToggle";
@@ -59,6 +58,7 @@ export const multiselect = {
 	name: "multiselect",
 	render: () => {
 		const inputRef = React.useRef<HTMLInputElement>(null);
+		const [active, setActive] = React.useState(false);
 		const [values, setValues] = React.useState<string[]>(["foo", "bar"]);
 		const [query, setQuery] = React.useState("");
 		const [customValueQuery, setCustomValueQuery] = React.useState("");
@@ -106,6 +106,14 @@ export const multiselect = {
 					onBackspace={() => {
 						if (!query.length) handleDismiss(values[values.length - 1]);
 					}}
+					onOpen={() => {
+						setActive(true);
+					}}
+					onClose={(args) => {
+						if (args.reason === "item-selection") return;
+						setActive(false);
+					}}
+					active={active}
 					multiline
 					onChange={(args) => setQuery(args.value)}
 					onItemSelect={(args) => {
