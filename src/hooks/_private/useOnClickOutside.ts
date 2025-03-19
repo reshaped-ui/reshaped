@@ -1,5 +1,5 @@
-import useHandlerRef from "hooks/useHandlerRef";
 import React from "react";
+import useHandlerRef from "hooks/useHandlerRef";
 
 const useOnClickOutside = (
 	refs: React.RefObject<HTMLElement | null>[],
@@ -7,26 +7,43 @@ const useOnClickOutside = (
 	deps: any[]
 ) => {
 	const handlerRef = useHandlerRef(handler);
+	/**
+	 * We're checking the element position in the DOM on mousedown to make sure
+	 * it happens before any other click events that could potentially remove the clicked el
+	 * before we checked if it's inside the refs
+	 */
+	const isMouseDownInsideRef = React.useRef(false);
 
 	React.useEffect(() => {
-		if (!handlerRef.current) return;
+		const handleMouseDown = (event: MouseEvent | TouchEvent) => {
+			isMouseDownInsideRef.current = false;
 
-		const handleClick = (event: MouseEvent | TouchEvent) => {
-			if (event instanceof MouseEvent && event.button === 2) {
-				return;
-			}
-
-			let isInside = false;
-			const clickedEl = event.composedPath()[0];
+			const clickedEl = event.composedPath()[0] as HTMLElement;
 
 			refs.forEach((elRef) => {
 				if (!elRef.current) return;
 				if (elRef.current === clickedEl || elRef.current.contains(clickedEl as HTMLElement)) {
-					isInside = true;
+					isMouseDownInsideRef.current = true;
 				}
 			});
+		};
 
-			if (isInside) return;
+		document.addEventListener("mousedown", handleMouseDown, { passive: true });
+		document.addEventListener("touchstart", handleMouseDown, { passive: true });
+
+		return () => {
+			document.removeEventListener("mousedown", handleMouseDown);
+			document.removeEventListener("touchstart", handleMouseDown);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [...refs]);
+
+	React.useEffect(() => {
+		if (!handlerRef.current) return;
+
+		const handleClick = (event: MouseEvent) => {
+			if (event.button === 2) return;
+			if (isMouseDownInsideRef.current) return;
 			handlerRef.current?.(event);
 		};
 
