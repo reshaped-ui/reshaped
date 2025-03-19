@@ -1685,10 +1685,10 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.0.4.tgz#bedba97f9346bd4c0fe5d39e689713804ec9ac89"
   integrity sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==
 
-"@types/react@19.0.10":
-  version "19.0.10"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.0.10.tgz#d0c66dafd862474190fe95ce11a68de69ed2b0eb"
-  integrity sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==
+"@types/react@19.0.12":
+  version "19.0.12"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.0.12.tgz#338b3f7854adbb784be454b3a83053127af96bd3"
+  integrity sha512-V6Ar115dBDrjbtXSrS+/Oruobc+qVbbUxDFC1RSbRqLt5SYvxxyIDrSC85RWml54g+jfNeEMZhEj7wW07ONQhA==
   dependencies:
     csstype "^3.0.2"
 
@@ -3872,10 +3872,10 @@ eslint-plugin-prettier@5.2.1:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.9.1"
 
-eslint-plugin-react-hooks@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-5.0.0.tgz#72e2eefbac4b694f5324154619fee44f5f60f101"
-  integrity sha512-hIOwI+5hYGpJEc4uPRmz2ulCjAGD/N13Lukkh8cLV0i2IRk/bdZDYjgLVHj+U9Z704kLIdIO6iueGvxNur0sgw==
+eslint-plugin-react-hooks@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-5.2.0.tgz#1be0080901e6ac31ce7971beed3d3ec0a423d9e3"
+  integrity sha512-+f15FfK64YQwZdJNELETdn5ibXEUQmW1DZL6KXhNnc2heoy/sg9VJJeT7n8TlMWouzWqSWavFkIhHyIbIAEapg==
 
 eslint-plugin-react@7.37.2:
   version "7.37.2"
