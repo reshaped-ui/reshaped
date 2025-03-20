@@ -67,7 +67,7 @@ const defaultStyles: T.Styles = {
 const resetStyles: T.Styles = {
 	left: 0,
 	top: 0,
-	position: "fixed",
+	position: "absolute",
 	visibility: "hidden",
 	animation: "none",
 	transition: "none",
