@@ -98,7 +98,7 @@
 		"@commitlint/cli": "19.7.1",
 		"@commitlint/config-conventional": "19.7.1",
 		"@commitlint/types": "19.5.0",
-		"@eslint/js": "9.16.0",
+		"@eslint/js": "9.23.0",
 		"@size-limit/preset-big-lib": "11.2.0",
 		"@storybook/addon-a11y": "8.6.2",
 		"@storybook/addon-actions": "8.6.2",
