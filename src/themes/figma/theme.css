@@ -87,14 +87,14 @@
 --rs-radius-small: 4px;
 --rs-radius-medium: 8px;
 --rs-radius-large: 12px;
---rs-color-brand: #5a58f2;
+--rs-color-brand: #0D99FF;
 --rs-color-white: #FFFFFF;
 --rs-color-black: #000000;
 --rs-color-on-background-primary: #FFFFFF;
 --rs-color-on-background-critical: #000000;
 --rs-color-on-background-warning: #000000;
 --rs-color-on-background-positive: #000000;
---rs-color-on-brand: #FFFFFF;
+--rs-color-on-brand: #000000;
 --rs-color-rgb-white: 255, 255, 255;
 --rs-color-rgb-black: 0, 0, 0;
 --rs-duration-rapid: 100ms;
@@ -147,10 +147,6 @@
 --rs-color-background-elevation-overlay: #FFFFFF;
 --rs-color-background-page: #FFFFFF;
 --rs-color-background-page-faded: #FAFAFA;
---rs-color-background-neutral-highlighted: #D4D8E3;
---rs-color-background-primary-highlighted: #007BE5;
---rs-color-background-positive-highlighted: #009951;
---rs-color-background-critical-highlighted: #DC3412;
 --rs-color-rgb-background-primary: 13, 153, 255;
 --rs-color-rgb-background-primary-faded: 229, 244, 255;
 --rs-color-rgb-background-critical: 242, 72, 34;
@@ -169,10 +165,6 @@
 --rs-color-rgb-background-elevation-overlay: 255, 255, 255;
 --rs-color-rgb-background-page: 255, 255, 255;
 --rs-color-rgb-background-page-faded: 250, 250, 250;
---rs-color-rgb-background-neutral-highlighted: 212, 216, 227;
---rs-color-rgb-background-primary-highlighted: 0, 123, 229;
---rs-color-rgb-background-positive-highlighted: 0, 153, 81;
---rs-color-rgb-background-critical-highlighted: 220, 52, 18;
 			}
 		
 			[data-rs-theme="figma"][data-rs-color-mode="dark"] {
@@ -211,10 +203,6 @@
 --rs-color-background-elevation-overlay: #2C2C2C;
 --rs-color-background-page: #2C2C2C;
 --rs-color-background-page-faded: #1E1E1E;
---rs-color-background-neutral-highlighted: #525252;
---rs-color-background-primary-highlighted: #0A6DC2;
---rs-color-background-positive-highlighted: #078348;
---rs-color-background-critical-highlighted: #C4381C;
 --rs-color-rgb-background-primary: 12, 140, 233;
 --rs-color-rgb-background-primary-faded: 57, 67, 96;
 --rs-color-rgb-background-critical: 224, 62, 26;
@@ -233,9 +221,5 @@
 --rs-color-rgb-background-elevation-overlay: 44, 44, 44;
 --rs-color-rgb-background-page: 44, 44, 44;
 --rs-color-rgb-background-page-faded: 30, 30, 30;
---rs-color-rgb-background-neutral-highlighted: 82, 82, 82;
---rs-color-rgb-background-primary-highlighted: 10, 109, 194;
---rs-color-rgb-background-positive-highlighted: 7, 131, 72;
---rs-color-rgb-background-critical-highlighted: 196, 56, 28;
 			}
 		

@@ -6,7 +6,7 @@ import reactHooksPlugin from "eslint-plugin-react-hooks";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 
 export default defineConfig([
-	globalIgnores(["src/**/*.stories.tsx"]),
+	globalIgnores(["bin/*.js", "src/**/*.stories.tsx"]),
 	esConfig.configs.recommended,
 	...tsConfig.configs.recommended,
 	prettierPlugin,
