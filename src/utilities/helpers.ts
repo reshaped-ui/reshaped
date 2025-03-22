@@ -10,12 +10,14 @@ export const range = (start: number, end: number) => {
 };
 
 // from https://gist.github.com/ca0v/73a31f57b397606c9813472f7493a940
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export const debounce = <T extends Function>(cb: T, wait = 20) => {
 	let timer: ReturnType<typeof setTimeout>;
-	const callable = (...args: any) => {
+	const callable = (...args: unknown[]) => {
 		clearTimeout(timer);
 		timer = setTimeout(() => cb(...args), wait);
 	};
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	return <T>(<any>callable);
 };
 
@@ -31,6 +33,7 @@ export function debounceHandler<T extends React.SyntheticEvent | Event>(
 	};
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export const throttle = <T extends Function>(cb: T, wait: number) => {
 	let waiting = false;
 
@@ -166,7 +169,7 @@ export const resolveViewportValue = <T>(viewport: G.Viewport, value: G.Responsiv
 
 	if (!isResponsive(value)) return value;
 
-	for (let currentViewport of viewports) {
+	for (const currentViewport of viewports) {
 		const viewportValue = value[currentViewport];
 
 		if (viewportValue !== undefined) result = viewportValue;

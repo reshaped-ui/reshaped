@@ -61,7 +61,7 @@ const defaultStyles: T.Styles = {
 	width: "auto",
 	height: "auto",
 	// z-index doesn't accept strings
-	zIndex: "var(--rs-z-index-flyout)" as any,
+	zIndex: "var(--rs-z-index-flyout)",
 };
 
 const resetStyles: T.Styles = {
@@ -71,7 +71,7 @@ const resetStyles: T.Styles = {
 	visibility: "hidden",
 	animation: "none",
 	transition: "none",
-	zIndex: "var(--rs-z-index-tooltip)" as any,
+	zIndex: "var(--rs-z-index-tooltip)",
 };
 
 /**
@@ -102,7 +102,10 @@ const flyout: Flyout = (args) => {
 
 	Object.keys(resetStyles).forEach((key) => {
 		const value = resetStyles[key as keyof T.Styles];
-		if (value) targetClone.style[key as any] = value.toString();
+
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		if (value) targetClone.style[key] = value.toString();
 	});
 
 	if (width) {

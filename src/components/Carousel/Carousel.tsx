@@ -167,7 +167,7 @@ const Carousel = (props: T.Props) => {
 				<>
 					<CarouselControl
 						isRTL={isRTL}
-						type={T.ControlType.back}
+						type="back"
 						scrollElRef={scrollElRef}
 						scrollPosition={scrollPosition}
 						onClick={navigateBack}
@@ -175,7 +175,7 @@ const Carousel = (props: T.Props) => {
 					/>
 					<CarouselControl
 						isRTL={isRTL}
-						type={T.ControlType.forward}
+						type="forward"
 						scrollElRef={scrollElRef}
 						scrollPosition={scrollPosition}
 						onClick={navigateForward}

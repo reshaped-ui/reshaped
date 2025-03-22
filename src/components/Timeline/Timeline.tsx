@@ -30,8 +30,8 @@ const Timeline = (props: T.Props) => {
 
 	return (
 		<ul {...attributes} className={rootClassNames}>
-			{React.Children.map(children, (child: any, index) => {
-				return child?.type === TimelineItem ? (
+			{React.Children.map(children, (child, index) => {
+				return React.isValidElement(child) && child.type === TimelineItem ? (
 					child
 				) : (
 					<TimelineItem key={index}>{child}</TimelineItem>

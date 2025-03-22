@@ -158,7 +158,6 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 
 		inputRef.current.value = updatedValue;
 		inputRef.current.selectionEnd = focusedIndex;
-		inputRef.current.selectionStart = inputRef.current.selectionStart;
 	};
 
 	const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {

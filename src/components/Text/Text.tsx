@@ -29,10 +29,8 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 		typeof variant === "string" ? variant : variant?.xl || variant?.l || variant?.m || variant?.s;
 	const alignStyles = getTextAlignStyles(align);
 
-	/**
-	 * Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-	 * It still resolves the attributes correctly based on the tag
-	 */
+	// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const TagName: any = props.as || (largestVariant && tagMap[largestVariant]) || "div";
 
 	const rootClassName = classNames(

@@ -263,7 +263,7 @@ const Modal = (props: T.Props) => {
 
 				return (
 					<Context.Provider value={value}>
-						{/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+						{}
 						<div
 							{...attributes}
 							style={

@@ -380,7 +380,7 @@ const BLUE = 0.0722;
 const GAMMA = 2.4;
 
 function luminanceWCAG(r: number, g: number, b: number) {
-	var a = [r, g, b].map((v) => {
+	const a = [r, g, b].map((v) => {
 		v /= 255;
 		return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, GAMMA);
 	});
@@ -388,10 +388,10 @@ function luminanceWCAG(r: number, g: number, b: number) {
 }
 
 function contrastWCAG(rgb1: [number, number, number], rgb2: [number, number, number]) {
-	var lum1 = luminanceWCAG(...rgb1);
-	var lum2 = luminanceWCAG(...rgb2);
-	var brightest = Math.max(lum1, lum2);
-	var darkest = Math.min(lum1, lum2);
+	const lum1 = luminanceWCAG(...rgb1);
+	const lum2 = luminanceWCAG(...rgb2);
+	const brightest = Math.max(lum1, lum2);
+	const darkest = Math.min(lum1, lum2);
 	return (brightest + 0.05) / (darkest + 0.05);
 }
 
@@ -424,7 +424,7 @@ function luminanceAPCA({ r, g, b }: RgbColor) {
 
 function contrastAPCA(backgroundLuminance: number, textLuminance: number) {
 	// Calculate the contrast based on APCA
-	let Lc = textLuminance - backgroundLuminance;
+	const Lc = textLuminance - backgroundLuminance;
 	return Math.abs(Lc); // Return the absolute value of contrast
 }
 
@@ -446,13 +446,13 @@ export const getOnColorAPCA = (args: {
 	};
 
 	// Calculate luminance for background and for white & black
-	let backgroundLuminance = luminanceAPCA({ r, g, b });
-	let whiteLuminance = luminanceAPCA({ r: 255, g: 255, b: 255 });
-	let blackLuminance = luminanceAPCA({ r: 0, g: 0, b: 0 });
+	const backgroundLuminance = luminanceAPCA({ r, g, b });
+	const whiteLuminance = luminanceAPCA({ r: 255, g: 255, b: 255 });
+	const blackLuminance = luminanceAPCA({ r: 0, g: 0, b: 0 });
 
 	// Calculate contrast
-	let contrastWithWhite = contrastAPCA(backgroundLuminance, whiteLuminance);
-	let contrastWithBlack = contrastAPCA(backgroundLuminance, blackLuminance);
+	const contrastWithWhite = contrastAPCA(backgroundLuminance, whiteLuminance);
+	const contrastWithBlack = contrastAPCA(backgroundLuminance, blackLuminance);
 
 	// Choose the color with higher contrast
 	return contrastWithWhite > contrastWithBlack ? lightHexColor : darkHexColor;

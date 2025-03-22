@@ -91,14 +91,18 @@ const Stepper = (props: T.Props) => {
 			gap={3}
 			wrap={false}
 		>
-			{React.Children.map(children, (child: any, index) => {
-				const itemId = child.props.id || `${index}`;
+			{React.Children.map(children, (child, index) => {
+				if (!React.isValidElement(child)) return null;
+				if (child.type !== StepperItem) return null;
+
+				const props = child.props as T.ItemProps;
+				const itemId = props.id || `${index}`;
 
 				return (
 					<React.Fragment key={index}>
 						<StepperItemPrivate
-							{...child.props}
-							id={child.props.id || `${index}`}
+							{...props}
+							id={itemId}
 							active={activeId?.toString() === itemId}
 							step={index + 1}
 							last={index === length - 1}

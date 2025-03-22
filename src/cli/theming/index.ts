@@ -34,7 +34,6 @@ const transformDefinition = (
 
 	const logOutput = `Compiled ${chalk.bold(name)} theme${isFragment ? " fragment" : ""}`;
 
-	// eslint-disable-next-line no-console
 	console.log(chalk.green(logOutput));
 };
 

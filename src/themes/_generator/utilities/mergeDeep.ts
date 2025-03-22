@@ -1,7 +1,7 @@
 type Obj = { [key: string]: unknown };
 
-const isObject = (item: any): item is Obj => {
-	return item && typeof item === "object" && !Array.isArray(item);
+const isObject = (item: unknown): item is Obj => {
+	return !!item && typeof item === "object" && !Array.isArray(item);
 };
 
 const mergeDeep = (target: Obj, ...sources: Obj[]): Obj => {

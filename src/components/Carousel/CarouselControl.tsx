@@ -13,8 +13,8 @@ const CarouselControl = (props: T.ControlProps) => {
 	const { type, scrollElRef, scrollPosition, onClick, isRTL, mounted } = props;
 	const [visible, setVisible] = React.useState(false);
 	const [rendered, setRendered] = React.useState(false);
-	const isNext = type === T.ControlType.forward;
-	const isDisplayedAsNext = type === (isRTL ? T.ControlType.back : T.ControlType.forward);
+	const isNext = type === "forward";
+	const isDisplayedAsNext = type === (isRTL ? "back" : "forward");
 	const controlClassNames = classNames(
 		s.control,
 		isDisplayedAsNext ? s["--control-next"] : s["--control-prev"],

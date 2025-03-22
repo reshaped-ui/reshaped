@@ -14,15 +14,16 @@ const toastReducer: T.Reducer = (state, action) => {
 	let nextState: T.Context["queues"];
 
 	switch (action.type) {
-		case "add":
+		case "add": {
 			const { position = "bottom-end", ...toastProps } = action.payload.toastProps || {};
 
 			return {
 				...state,
 				[position]: [...state[position], { id: action.payload.id, toastProps, status: "entering" }],
 			};
+		}
 
-		case "show":
+		case "show": {
 			const { id: showId } = action.payload;
 			nextState = { ...state };
 
@@ -34,8 +35,9 @@ const toastReducer: T.Reducer = (state, action) => {
 			});
 
 			return nextState;
+		}
 
-		case "hide":
+		case "hide": {
 			const { id: hideId } = action.payload;
 			nextState = { ...state };
 
@@ -46,8 +48,9 @@ const toastReducer: T.Reducer = (state, action) => {
 			});
 
 			return nextState;
+		}
 
-		case "remove":
+		case "remove": {
 			const { id: removeId } = action.payload;
 			nextState = { ...state };
 
@@ -56,6 +59,7 @@ const toastReducer: T.Reducer = (state, action) => {
 			});
 
 			return nextState;
+		}
 	}
 };
 

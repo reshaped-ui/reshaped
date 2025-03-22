@@ -24,10 +24,8 @@ const Card = forwardRef<HTMLElement, T.Props<keyof React.JSX.IntrinsicElements>>
 			children,
 			className,
 			attributes,
-			/**
-			 * Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-			 * It still resolves the attributes correctly based on the tag
-			 */
+			// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			as: TagName = "div" as any,
 		} = props;
 		const isActionable = !!href || !!onClick;
@@ -58,7 +56,7 @@ const Card = forwardRef<HTMLElement, T.Props<keyof React.JSX.IntrinsicElements>>
 			return (
 				<Actionable
 					className={rootClassNames}
-					attributes={{ ...attributes, style } as any}
+					attributes={{ ...attributes, style }}
 					href={href}
 					as={TagName}
 					onClick={onClick}

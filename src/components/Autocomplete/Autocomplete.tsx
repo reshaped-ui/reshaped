@@ -126,6 +126,7 @@ const Autocomplete = (props: T.Props) => {
 							attributes={{
 								...textFieldProps.attributes,
 								// Ignoring the type check since TS can't infer the correct html element type
+								// eslint-disable-next-line @typescript-eslint/no-explicit-any
 								ref: ref as any,
 								onClick: attributes.onFocus,
 							}}

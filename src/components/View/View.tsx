@@ -28,6 +28,8 @@ const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
 		columns,
 		grow,
 		gapBefore,
+		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		order,
 		children,
@@ -110,10 +112,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(
 		 */
 		grow,
 
-		/**
-		 * Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-		 * It still resolves the attributes correctly based on the tag
-		 */
+		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		children,
 		divided,
@@ -211,6 +211,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(
 		);
 	};
 
+	// Using any in favor of resolving the props in runtime where we don't know their props definitions
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const formattedChildren = React.Children.map(children, (child: any, index) => {
 		if (!child) return null;
 
@@ -229,6 +231,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(
 		}
 
 		if (child.type === React.Fragment && React.Children.count(child.props.children) > 1) {
+			// Using any in favor of resolving the props in runtime where we don't know their props definitions
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			return child.props.children.map((child: any) => {
 				if (!child) return null;
 				renderedItemIndex += 1;

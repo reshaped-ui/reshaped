@@ -6,7 +6,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import defaultBreakpoints from "constants/breakpoints";
 import type * as G from "types/global";
 
-const useResponsiveClientValue = <T extends unknown>(value: G.Responsive<T>): T | undefined => {
+const useResponsiveClientValue = <T>(value: G.Responsive<T>): T | undefined => {
 	const { defaultViewport } = React.useContext(SingletonEnvironmentContext);
 	const [viewport, setViewport] = React.useState(defaultViewport);
 
