@@ -18,7 +18,7 @@ export default {
 
 export const base = () => (
 	<Example>
-		<Example.Item title="base month">
+		<Example.Item title="base month2">
 			<Calendar defaultMonth={new Date(2023, 11)} onChange={console.log} />
 		</Example.Item>
 	</Example>
