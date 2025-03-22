@@ -14,6 +14,7 @@ const CalendarMonth = (props: T.MonthProps) => {
 		max,
 		range,
 		firstWeekDay,
+		selectedDates,
 		hoveredDate,
 		onDateHover,
 		onDateHoverEnd,
@@ -48,13 +49,7 @@ const CalendarMonth = (props: T.MonthProps) => {
 								const isoToday = getLocalISODate({ date: today });
 								const startValue = value && "start" in value ? value.start : value;
 								const endValue = value && "end" in value ? value.end : value;
-
 								const isoDate = date && getLocalISODate({ date });
-								const isoStartValue = startValue && getLocalISODate({ date: startValue });
-								const isoEndValue = endValue && getLocalISODate({ date: endValue });
-
-								const isActiveStart = !!isoDate && !!isoStartValue && isoDate === isoStartValue;
-								const isActiveEnd = !!isoDate && !!isoEndValue && isoDate === isoEndValue;
 
 								/**
 								 * Decide if date has to be focusable with Tab (only one date should be)
@@ -78,20 +73,20 @@ const CalendarMonth = (props: T.MonthProps) => {
 
 								return (
 									<CalendarDate
-										date={date}
 										key={index}
+										date={date}
+										isoDate={isoDate}
 										disabled={disabled}
 										range={range}
 										focusable={focusable}
 										startValue={startValue}
 										endValue={endValue}
-										isActiveStart={isActiveStart}
-										isActiveEnd={isActiveEnd}
 										onChange={onChange}
 										hoveredDate={hoveredDate}
 										onDateHover={onDateHover}
 										onDateHoverEnd={onDateHoverEnd}
 										renderAriaLabel={renderDateAriaLabel}
+										selectedDates={selectedDates}
 									/>
 								);
 							})}

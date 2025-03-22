@@ -9,10 +9,9 @@ import s from "./Calendar.module.css";
 const CalendarDate = (props: T.DateProps) => {
 	const {
 		date,
+		isoDate,
 		startValue,
 		endValue,
-		isActiveStart,
-		isActiveEnd,
 		disabled,
 		focusable,
 		onChange,
@@ -21,22 +20,46 @@ const CalendarDate = (props: T.DateProps) => {
 		onDateHover,
 		onDateHoverEnd,
 		renderAriaLabel,
+		selectedDates,
 	} = props;
 
 	if (!date) return <td className={s.cell} aria-hidden="true" />;
 
-	const inRange =
-		startValue &&
-		startValue < date &&
-		((endValue && endValue > date) || (hoveredDate && !endValue && hoveredDate > date));
+	const isoStartValue = startValue && getLocalISODate({ date: startValue });
+	const isoEndValue = endValue && getLocalISODate({ date: endValue });
+
+	const isStartValue = !!isoDate && !!isoStartValue && isoDate === isoStartValue;
+	const isEndValue = !!isoDate && !!isoEndValue && isoDate === isoEndValue;
+	const isAfterStartValue = startValue && date > startValue;
+	const isBeforeEndValue = endValue && date < endValue;
+	const isInHoveredRange = hoveredDate && !endValue && hoveredDate > date;
+	const isInSelectedDates = !!selectedDates?.find(
+		(selectedDate) => getLocalISODate({ date: selectedDate }) === isoDate
+	);
+
+	let selection;
+
+	switch (true) {
+		case isAfterStartValue && isInHoveredRange:
+		case isAfterStartValue && isBeforeEndValue:
+			selection = "range";
+			break;
+		case isStartValue && (!range || isEndValue):
+		case isInSelectedDates:
+			selection = "standalone";
+			break;
+		case isStartValue:
+			selection = "start";
+			break;
+		case isEndValue:
+			selection = "end";
+			break;
+	}
+
 	const dateClassNames = classNames([
 		s.cell,
-		!range && isActiveStart && s["cell--active-single"],
-		isActiveStart && s["cell--active-start"],
-		(isActiveEnd ||
-			(!endValue && isActiveStart && !(hoveredDate && startValue && hoveredDate > startValue))) &&
-			s["cell--active-end"],
-		inRange && s["cell--in-range"],
+		selection && s["--active"],
+		selection && s[`--selection-${selection}`],
 	]);
 
 	const handleClick = () => {
@@ -78,7 +101,7 @@ const CalendarDate = (props: T.DateProps) => {
 					"aria-label": renderAriaLabel
 						? renderAriaLabel({ date })
 						: date.toLocaleDateString("en-us", { month: "long", day: "numeric", weekday: "long" }),
-					"aria-checked": isActiveStart || isActiveEnd,
+					"aria-checked": !!selection,
 					"data-rs-date": getLocalISODate({ date }),
 					onMouseEnter: handleMouseEnter,
 					onMouseLeave: handleMouseLeave,

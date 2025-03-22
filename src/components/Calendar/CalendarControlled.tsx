@@ -26,6 +26,7 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 		max,
 		range,
 		firstWeekDay,
+		selectedDates,
 		renderMonthLabel,
 		renderSelectedMonthLabel,
 		renderWeekDay,
@@ -132,6 +133,7 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 						range={range}
 						firstWeekDay={firstWeekDay}
 						hoveredDate={hoveredDate}
+						selectedDates={selectedDates}
 						onDateHover={handleDateHover}
 						onDateHoverEnd={handleDateHoverEnd}
 						renderWeekDay={renderWeekDay}
