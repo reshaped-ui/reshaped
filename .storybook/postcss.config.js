@@ -3,7 +3,7 @@ const customMediaPlugin = require("postcss-custom-media");
 const postcssGlobalData = require("@csstools/postcss-global-data");
 const baseConfig = require("../tools/build/postcss.config");
 
-export default {
+module.exports = {
 	plugins: [
 		...baseConfig.plugins,
 		postcssGlobalData({
