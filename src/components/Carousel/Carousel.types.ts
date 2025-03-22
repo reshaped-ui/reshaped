@@ -9,13 +9,8 @@ export type Instance =
 	  }
 	| undefined;
 
-export enum ControlType {
-	back = "back",
-	forward = "forward",
-}
-
 export type ControlProps = {
-	type: ControlType;
+	type: "back" | "forward";
 	scrollElRef: React.RefObject<HTMLElement | null>;
 	scrollPosition: number;
 	onClick: () => void;

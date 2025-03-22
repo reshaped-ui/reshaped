@@ -29,6 +29,7 @@ const PrivateResizableHandle = (props: T.PrivateHandleProps) => {
 				tabIndex: 0,
 				"aria-hidden": true,
 				ref: (el) => {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 					// @ts-ignore
 					ref.current = el;
 				},

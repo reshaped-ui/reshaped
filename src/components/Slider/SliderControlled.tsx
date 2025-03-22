@@ -126,7 +126,9 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 
 			const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
 
-			// @ts-ignore - creating refs out of handler props loses connection to the range flag
+			// Manually controlled resolving of single/range handlers
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
 			method?.({ minValue: value, maxValue, name });
 		},
 		[maxValue, name, range, onChangeCommitRef, onChangeRef]
@@ -137,13 +139,18 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 			if (range) {
 				const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
 
-				// @ts-ignore - creating refs out of handler props loses connection to the range flag
+				// Manually controlled resolving of single/range handlers
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				method?.({ minValue: minValue!, maxValue: value, name });
 				return;
 			}
 
 			const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
-			// @ts-ignore - creating refs out of handler props loses connection to the range flag
+
+			// Manually controlled resolving of single/range handlers
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
 			method?.({ value, name });
 		},
 		[minValue, name, range, onChangeRef, onChangeCommitRef]

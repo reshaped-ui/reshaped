@@ -125,9 +125,14 @@ const TabsList = (props: T.ListProps) => {
 	useIsomorphicLayoutEffect(() => {
 		if (value) return;
 
-		const firstItem = React.Children.toArray(children)[0] as any;
+		const firstItem = React.Children.toArray(children)[0];
+
+		if (!React.isValidElement(firstItem)) return;
 		if (!firstItem || firstItem.type !== TabsItem) return;
-		setDefaultValue(firstItem.props.value);
+
+		const props = firstItem.props as T.ItemProps;
+
+		setDefaultValue(props.value);
 	}, [value]);
 
 	useIsomorphicLayoutEffect(() => {
@@ -183,14 +188,12 @@ const TabsList = (props: T.ListProps) => {
 		<div {...attributes} className={rootClassNames}>
 			<div className={s.inner} ref={elScrollableRef}>
 				<div className={s.list} role="tablist" ref={hotkeysRef}>
-					{React.Children.map(children, (child: any, index: number) => {
-						if (!child) return null;
+					{React.Children.map(children, (child, index: number) => {
+						if (!React.isValidElement(child)) return null;
+						const props = child.props as T.ItemProps;
+
 						return (
-							<div
-								className={s.listItem}
-								key={child.props.value || child.key || index}
-								data-rs-tabs-item
-							>
+							<div className={s.listItem} key={props.value || child.key || index} data-rs-tabs-item>
 								{child}
 							</div>
 						);

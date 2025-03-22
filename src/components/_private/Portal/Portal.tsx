@@ -16,7 +16,7 @@ export const usePortalScope = () => {
  * Disclaimer: Works only for components that don't show the portal immediately
  * That gives Portal time to receive scope on first render
  */
-const Portal = (props: T.Props): any => {
+const Portal = (props: T.Props) => {
 	const { children, targetRef } = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
 	const rootNode = rootRef.current?.getRootNode();

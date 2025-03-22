@@ -34,7 +34,7 @@ const FlyoutContent = (props: T.ContentProps) => {
 		containerRef,
 		isSubmenu,
 	} = useFlyoutContext();
-	const { styles, status, position, updatePosition } = flyout;
+	const { styles, status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
 	const closestContainer = React.useMemo(() => {
 		if (!mounted) return;

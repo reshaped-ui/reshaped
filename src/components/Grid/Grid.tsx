@@ -15,6 +15,8 @@ const GridItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T
 		rowSpan,
 		children,
 		className,
+		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		attributes,
 	} = props;
@@ -53,6 +55,8 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		autoFlow,
 		children,
 		className,
+		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		attributes,
 	} = props;

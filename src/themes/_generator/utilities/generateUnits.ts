@@ -11,7 +11,6 @@ const generateUnits = (definition: T.PartialDeep<FullThemeDefinition>) => {
 	for (let i = 1; i <= 10; i += 1) {
 		const generatedName = `x${i}` as GeneratedUnitName;
 
-		// eslint-disable-next-line no-param-reassign
 		definition.unit![generatedName] = {
 			px: baseValue * i,
 		};

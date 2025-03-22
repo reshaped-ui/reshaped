@@ -39,6 +39,8 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	// To make sure it doesn't render a span
 	const isButton = Boolean(hasClickHandler || hasFocusHandler || type || attributes?.ref);
 	const renderedAsButton = !isLink && isButton && (!as || as === "button");
+	// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let TagName: any;
 
 	if (isLink) {
@@ -64,7 +66,7 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 		if (stopPropagation) event.stopPropagation();
 
 		onClick?.(event);
-		attributes?.onClick?.(event as any);
+		attributes?.onClick?.(event as React.MouseEvent<HTMLButtonElement>);
 	};
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Popover from "components/Popover";
-import MenuItem, { type MenuItemProps } from "components/MenuItem";
+import MenuItem from "components/MenuItem";
 import Icon from "components/Icon";
 import { useFlyoutContext } from "components/_private/Flyout";
 import IconChevronRight from "icons/ChevronRight";

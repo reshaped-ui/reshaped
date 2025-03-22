@@ -15,12 +15,7 @@ const Icon = (props: T.Props) => {
 		autoWidth && s["--auto"]
 	);
 
-	const icon = React.isValidElement(Component) ? (
-		Component
-	) : (
-		// @ts-ignore
-		<Component />
-	);
+	const icon = React.isValidElement(Component) ? Component : <Component />;
 	const style = { ...attributes?.style, ...heightStyles?.variables };
 
 	return (

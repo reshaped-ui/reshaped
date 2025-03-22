@@ -8,8 +8,7 @@ export type StyleAttribute =
 	| React.CSSProperties
 	| (React.CSSProperties & Record<CSSVariable, string | number | undefined>);
 
-// Align with the
-type DataAttributes = {} | Record<`data-${string}`, string | boolean>;
+type DataAttributes = object | Record<`data-${string}`, string | boolean>;
 
 export type Attributes<TagName extends keyof React.JSX.IntrinsicElements = "div"> =
 	React.JSX.IntrinsicElements[TagName] & DataAttributes & { style?: StyleAttribute };
@@ -23,7 +22,7 @@ export type Coordinates = { x: number; y: number };
 /**
  * Form handlers
  */
-type ChangeHandlerArgs<Value, Event> = Value extends Boolean
+type ChangeHandlerArgs<Value, Event> = Value extends boolean
 	? { name: string; value?: string; checked: Value; event?: Event }
 	: { name: string; value: Value; event?: Event };
 

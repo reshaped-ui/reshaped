@@ -21,7 +21,7 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 		isSubmenu,
 	} = useFlyoutContext();
 
-	let childrenAttributes: Partial<T.TriggerAttributes> = {
+	const childrenAttributes: Partial<T.TriggerAttributes> = {
 		ref: triggerElRef,
 	};
 

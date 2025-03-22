@@ -60,7 +60,6 @@ const generateBackgroundColors = (
 				...onColorHexMap,
 			});
 
-			// eslint-disable-next-line no-param-reassign
 			definition.color![generatedForegroundName] = {
 				hex,
 				hexDark: hex !== hexDark ? hexDark : undefined,
@@ -70,7 +69,7 @@ const generateBackgroundColors = (
 		if (needsRGB) {
 			const rgb = hexToRgb(bgToken.hex!);
 			const rgbDark = bgToken.hexDark && hexToRgb(bgToken.hexDark);
-			// eslint-disable-next-line no-param-reassign
+
 			definition.color![generatedRGBName] = {
 				hex: `${rgb.r}, ${rgb.g}, ${rgb.b}`,
 				hexDark: rgbDark && `${rgbDark.r}, ${rgbDark.g}, ${rgbDark.b}`,

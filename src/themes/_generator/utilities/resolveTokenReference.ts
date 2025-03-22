@@ -10,6 +10,9 @@ const resolveTokenReference = <ReferencedToken>(
 
 	Object.keys(tokenGroup).forEach((tokenName) => {
 		if (referencedToken) return;
+
+		// Relaxed runtime group resolving
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		if (tokenName === ref) referencedToken = (tokenGroup as any)[tokenName];
 	});
 

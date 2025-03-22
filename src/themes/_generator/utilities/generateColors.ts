@@ -17,7 +17,7 @@ import {
 const hexToOkHsl = (hex: string) => {
 	const rgb = parseHex(hex) as Rgb;
 
-	if (!rgb) throw new Error(`[Reshaped] Can\'t generate rgb from ${hex} color`);
+	if (!rgb) throw new Error(`[Reshaped] Can't generate rgb from ${hex} color`);
 
 	const lrgb = convertRgbToLrgb(rgb);
 	const oklab = convertLrgbToOklab(lrgb);

@@ -2,6 +2,7 @@ import reshapedDefinition from "themes/_generator/definitions/reshaped";
 import { camelToKebab } from "utilities/string";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
 import type { ThemeDefinition } from "themes/_generator/tokens/types";
+import type { Name as ColorName } from "themes/_generator/tokens/color/color.types";
 import { bgWithDynamicForeground } from "themes/_generator/constants";
 
 export const getTheme = (theme?: ThemeDefinition) => {
@@ -39,7 +40,7 @@ export const getTheme = (theme?: ThemeDefinition) => {
 			const name = cssTokenName.replace("background-", "");
 			config.backgroundColor[name] = configValue;
 
-			if (bgWithDynamicForeground.includes(tokenName as any)) {
+			if (bgWithDynamicForeground.includes(tokenName as ColorName)) {
 				const cssVariable = ["rs", "color", "on", cssTokenName].join("-");
 				const configValue = `var(--${cssVariable})`;
 				config.textColor[`on-${name}`] = configValue;

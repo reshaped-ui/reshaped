@@ -1,6 +1,6 @@
 import type { ThemeDefinition } from "../tokens/types";
 
-const theme: ThemeDefinition = {
+const theme: Partial<ThemeDefinition> = {
 	fontFamily: {
 		title: {
 			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
@@ -105,7 +105,6 @@ const theme: ThemeDefinition = {
 		radiusLarge: { px: 4 },
 	},
 
-	// @ts-ignore
 	color: {
 		foregroundNeutral: { hex: "#191919", hexDark: "#FFFFFF" },
 		foregroundNeutralFaded: { hex: "#474747", hexDark: "#B2B2B2" },
@@ -113,21 +112,20 @@ const theme: ThemeDefinition = {
 		foregroundPrimary: { hex: "#007BE5", hexDark: "#7CC4F8" },
 		foregroundPositive: { hex: "#009951", hexDark: "#79D297" },
 		foregroundCritical: { hex: "#DC3412", hexDark: "#FCA397" },
+		foregroundWarning: { hex: "#7b6305", hexDark: "#b4920c" },
 
 		backgroundNeutral: { hex: "#DFE2EA", hexDark: "#444444" },
 		backgroundNeutralFaded: { hex: "#F5F5F5", hexDark: "#383838" },
-		backgroundNeutralHighlighted: { hex: "#D4D8E3", hexDark: "#525252" },
 		backgroundDisabled: { hex: "#e4e4e4", hexDark: "#474747" },
 		backgroundDisabledFaded: { hex: "#F5F5F5", hexDark: "#3A3A3A" },
 		backgroundPrimary: { hex: "#0D99FF", hexDark: "#0C8CE9" },
-		backgroundPrimaryHighlighted: { hex: "#007BE5", hexDark: "#0A6DC2" },
 		backgroundPrimaryFaded: { hex: "#E5F4FF", hexDark: "#394360" },
 		backgroundPositive: { hex: "#14AE5C", hexDark: "#198F51" },
 		backgroundPositiveFaded: { hex: "#DAECDF", hexDark: "#3d5749" },
-		backgroundPositiveHighlighted: { hex: "#009951", hexDark: "#078348" },
 		backgroundCritical: { hex: "#F24822", hexDark: "#E03E1A" },
 		backgroundCriticalFaded: { hex: "#FFE2E0", hexDark: "#60332A" },
-		backgroundCriticalHighlighted: { hex: "#DC3412", hexDark: "#C4381C" },
+		backgroundWarning: { hex: "#facc15", hexDark: "#f1c512" },
+		backgroundWarningFaded: { hex: "#fffae9", hexDark: "#2c271f" },
 
 		borderNeutral: { hex: "#E6E6E6", hexDark: "#444444" },
 		borderNeutralFaded: { hex: "#E6E6E6", hexDark: "#444444" },
@@ -138,6 +136,8 @@ const theme: ThemeDefinition = {
 		borderPositiveFaded: { hex: "#BBDDC6", hexDark: "#086338" },
 		borderCritical: { hex: "#DC3412", hexDark: "#FCA397" },
 		borderCriticalFaded: { hex: "#FFC7C2", hexDark: "#803226" },
+		borderWarning: { hex: "#cfa90f", hexDark: "#b4920a" },
+		borderWarningFaded: { hex: "#ece2c4", hexDark: "#453c1e" },
 
 		backgroundPage: { hex: "#FFFFFF", hexDark: "#2C2C2C" },
 		backgroundPageFaded: { hex: "#FAFAFA", hexDark: "#1E1E1E" },
@@ -147,6 +147,7 @@ const theme: ThemeDefinition = {
 
 		onBackgroundPrimary: { hex: "#FFFFFF" },
 
+		brand: { hex: "#0D99FF" },
 		black: { hex: "#000000" },
 		white: { hex: "#FFFFFF" },
 	},
