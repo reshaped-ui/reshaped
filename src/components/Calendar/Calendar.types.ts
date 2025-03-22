@@ -5,6 +5,7 @@ export type BaseProps = {
 	min?: Date;
 	max?: Date;
 	firstWeekDay?: number;
+	selectedDates?: Date[];
 	renderWeekDay?: (args: { weekDay: number; date: Date }) => string;
 	renderSelectedMonthLabel?: (args: { date: Date }) => string;
 	renderMonthLabel?: (args: { month: number; date: Date }) => string;
@@ -66,6 +67,7 @@ export type MonthProps = {
 	| "max"
 	| "min"
 	| "firstWeekDay"
+	| "selectedDates"
 	| "renderMonthLabel"
 	| "renderWeekDay"
 	| "renderSelectedMonthLabel"
@@ -80,16 +82,22 @@ export type YearProps = { monthDate: Date; onMonthClick: (month: number) => void
 
 export type DateProps = {
 	date: Date | null;
+	isoDate: string | null;
 	disabled?: boolean;
 	focusable?: boolean;
 	startValue: Date | null;
 	endValue: Date | null;
-	isActiveStart: boolean;
-	isActiveEnd: boolean;
 	renderAriaLabel?: MonthProps["renderDateAriaLabel"];
 } & Pick<
 	MonthProps,
-	"hoveredDate" | "onDateHover" | "onDateHoverEnd" | "onChange" | "range" | "min" | "max"
+	| "hoveredDate"
+	| "onDateHover"
+	| "onDateHoverEnd"
+	| "onChange"
+	| "range"
+	| "min"
+	| "max"
+	| "selectedDates"
 >;
 
 export type ControlsProps = {
