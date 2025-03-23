@@ -4,8 +4,9 @@ import useHandlerRef from "hooks/useHandlerRef";
 const useOnClickOutside = (
 	refs: React.RefObject<HTMLElement | null>[],
 	handler: (event: Event) => void,
-	deps: unknown[]
+	options?: { disabled?: boolean }
 ) => {
+	const { disabled } = options || {};
 	const handlerRef = useHandlerRef(handler);
 	/**
 	 * We're checking the element position in the DOM on mousedown to make sure
@@ -15,6 +16,11 @@ const useOnClickOutside = (
 	const isMouseDownInsideRef = React.useRef(false);
 
 	React.useEffect(() => {
+		/**
+		 * Not checking for disabled here since some components can enable the hook
+		 * after it was clicked
+		 */
+
 		const handleMouseDown = (event: MouseEvent | TouchEvent) => {
 			isMouseDownInsideRef.current = false;
 
@@ -40,6 +46,7 @@ const useOnClickOutside = (
 
 	React.useEffect(() => {
 		if (!handlerRef.current) return;
+		if (disabled) return;
 
 		const handleClick = (event: MouseEvent) => {
 			if (event.button === 2) return;
@@ -47,10 +54,10 @@ const useOnClickOutside = (
 			handlerRef.current?.(event);
 		};
 
-		document.addEventListener("click", handleClick);
+		document.addEventListener("click", handleClick, { passive: true });
 		return () => document.removeEventListener("click", handleClick);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [handlerRef, ...refs, ...deps]);
+	}, [handlerRef, disabled, ...refs]);
 };
 
 export default useOnClickOutside;

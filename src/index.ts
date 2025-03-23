@@ -187,15 +187,16 @@ export type { ViewProps, ViewItemProps } from "components/View";
  * Hooks
  */
 export { useFormControl } from "components/FormControl";
-export { default as Theme, useTheme } from "components/Theme";
-export type { ThemeProps } from "components/Theme";
+export { default as Theme, useTheme, type ThemeProps } from "components/Theme";
+
+export { default as useHotkeys } from "hooks/useHotkeys";
+export { default as useIsomorphicLayoutEffect } from "hooks/useIsomorphicLayoutEffect";
+export { default as useKeyboardMode } from "hooks/useKeyboardMode";
+export { default as useOnClickOutside } from "hooks/useOnClickOutside";
+export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";
+export { default as useRTL } from "hooks/useRTL";
 export { default as useScrollLock } from "hooks/useScrollLock";
 export { default as useToggle } from "hooks/useToggle";
-export { default as useRTL } from "hooks/useRTL";
-export { default as useIsomorphicLayoutEffect } from "hooks/useIsomorphicLayoutEffect";
-export { default as useHotkeys } from "hooks/useHotkeys";
-export { default as useKeyboardMode } from "hooks/useKeyboardMode";
-export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";
 
 /**
  * Utilities
