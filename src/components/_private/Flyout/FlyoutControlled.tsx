@@ -6,7 +6,7 @@ import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";
-import useOnClickOutside from "hooks/_private/useOnClickOutside";
+import useOnClickOutside from "hooks/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { checkTransitions, onNextFrame } from "utilities/animation";
 import useFlyout from "./useFlyout";
@@ -370,14 +370,13 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	useOnClickOutside(
 		[flyoutElRef, triggerElRef],
 		() => {
-			if (!isRendered) return;
-			if (disableCloseOnOutsideClick) return;
 			// Clicking outside changes focused element so we don't need to set it back ourselves
 			shouldReturnFocusRef.current = false;
-
 			handleClose({ reason: "outside-click" });
 		},
-		[isRendered]
+		{
+			disabled: !isRendered || disableCloseOnOutsideClick,
+		}
 	);
 
 	return (
