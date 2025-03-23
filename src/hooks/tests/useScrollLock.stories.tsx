@@ -3,6 +3,7 @@ import { StoryObj } from "@storybook/react";
 import { expect, userEvent } from "@storybook/test";
 import Button from "components/Button";
 import useScrollLock from "hooks/useScrollLock";
+import View from "components/View";
 
 export default { title: "Hooks/useScrollLock" };
 
@@ -28,5 +29,61 @@ export const base: StoryObj = {
 		await userEvent.click(button);
 
 		expect(document.body).not.toHaveStyle("overflow: hidden");
+	},
+};
+
+export const origin: StoryObj = {
+	name: "originRef",
+	render: () => {
+		const originRef = React.useRef<HTMLDivElement>(null);
+		const { lockScroll, unlockScroll, scrollLocked } = useScrollLock({ originRef });
+
+		return (
+			<View overflow="auto" height={25} attributes={{ ref: originRef, "data-testid": "root" }}>
+				<View height={50} padding={4} backgroundColor="neutral-faded" borderRadius="medium">
+					<Button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</Button>
+				</View>
+			</View>
+		);
+	},
+	play: async ({ canvas }) => {
+		const button = canvas.getAllByRole("button")[0];
+		const root = canvas.getByTestId("root");
+
+		await userEvent.click(button);
+
+		expect(document.body).not.toHaveStyle("overflow: hidden");
+		expect(root).toHaveStyle("overflow: hidden");
+
+		await userEvent.click(button);
+
+		expect(root).not.toHaveStyle("overflow: hidden");
+	},
+};
+
+export const container: StoryObj = {
+	name: "containerRef",
+	render: () => {
+		const containerRef = React.useRef<HTMLDivElement>(null);
+		const { lockScroll, unlockScroll, scrollLocked } = useScrollLock({ containerRef });
+
+		return (
+			<View height={25} attributes={{ ref: containerRef, "data-testid": "root" }}>
+				<Button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</Button>
+			</View>
+		);
+	},
+	play: async ({ canvas }) => {
+		const button = canvas.getAllByRole("button")[0];
+		const root = canvas.getByTestId("root");
+
+		await userEvent.click(button);
+
+		expect(document.body).not.toHaveStyle("overflow: hidden");
+		expect(root).toHaveStyle("overflow: hidden");
+
+		await userEvent.click(button);
+
+		expect(root).not.toHaveStyle("overflow: hidden");
 	},
 };

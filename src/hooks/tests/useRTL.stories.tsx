@@ -1,7 +1,6 @@
 import React from "react";
 import { StoryObj } from "@storybook/react";
-import { expect, waitFor } from "@storybook/test";
-import Reshaped from "components/Reshaped";
+import { expect } from "@storybook/test";
 import useRTL from "hooks/useRTL";
 
 export default { title: "Hooks/useRTL" };
@@ -18,16 +17,8 @@ const Component = () => {
 
 export const setRTL: StoryObj = {
 	name: "setRTL",
-	render: () => {
-		return (
-			<Reshaped theme="reshaped">
-				<Component />
-			</Reshaped>
-		);
-	},
+	render: () => <Component />,
 	play: async () => {
-		waitFor(() => {
-			expect(document.documentElement).toHaveAttribute("dir", "rtl");
-		});
+		expect(document.documentElement).toHaveAttribute("dir", "rtl");
 	},
 };
