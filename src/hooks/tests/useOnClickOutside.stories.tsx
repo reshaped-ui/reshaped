@@ -5,7 +5,12 @@ import Button from "components/Button";
 import useOnClickOutside from "hooks/useOnClickOutside";
 import View from "components/View";
 
-export default { title: "Hooks/useOnClickOutside" };
+export default {
+	title: "Hooks/useOnClickOutside",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 export const base: StoryObj<{ handleOutsideClick: Mock }> = {
 	name: "base",

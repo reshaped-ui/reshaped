@@ -1,10 +1,13 @@
-import React from "react";
 import { StoryObj } from "@storybook/react";
 import { expect, waitFor } from "@storybook/test";
-import Reshaped from "components/Reshaped";
 import useElementId from "hooks/useElementId";
 
-export default { title: "Hooks/useElementId" };
+export default {
+	title: "Hooks/useElementId",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 const Component = (props: { id?: string }) => {
 	const id = useElementId(props.id);

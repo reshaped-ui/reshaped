@@ -1,7 +1,12 @@
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import View, { type ViewProps } from "components/View";
 
-export default { title: "Hooks/useResponsiveClientValue" };
+export default {
+	title: "Hooks/useResponsiveClientValue",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 export const base = {
 	name: "base",

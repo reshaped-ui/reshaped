@@ -3,7 +3,12 @@ import { StoryObj } from "@storybook/react";
 import { expect } from "@storybook/test";
 import useRTL from "hooks/useRTL";
 
-export default { title: "Hooks/useRTL" };
+export default {
+	title: "Hooks/useRTL",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 const Component = () => {
 	const [rtl, setRTL] = useRTL();

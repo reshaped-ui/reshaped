@@ -10,7 +10,7 @@ import Button from "components/Button";
 import Tooltip from "components/Tooltip";
 
 export default {
-	title: "Meta/ShadowDOM",
+	title: "Internal/ShadowDOM",
 };
 
 const getStylesData = () => {
