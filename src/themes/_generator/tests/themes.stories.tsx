@@ -15,7 +15,7 @@ import Text from "components/Text";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
 
 export default {
-	title: "Meta/Themes",
+	title: "Internal/Themes",
 	parameters: {
 		iframe: { url: "https://reshaped.so/docs/tokens/theming/runtime-theming" },
 		a11y: {

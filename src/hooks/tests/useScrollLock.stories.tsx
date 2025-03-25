@@ -5,7 +5,12 @@ import Button from "components/Button";
 import useScrollLock from "hooks/useScrollLock";
 import View from "components/View";
 
-export default { title: "Hooks/useScrollLock" };
+export default {
+	title: "Hooks/useScrollLock",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 export const base: StoryObj = {
 	name: "base",

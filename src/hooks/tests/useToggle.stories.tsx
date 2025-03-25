@@ -4,7 +4,12 @@ import { expect, userEvent } from "@storybook/test";
 import Button from "components/Button";
 import useToggle from "hooks/useToggle";
 
-export default { title: "Hooks/useToggle" };
+export default {
+	title: "Hooks/useToggle",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 export const toggle: StoryObj = {
 	name: "toggle",

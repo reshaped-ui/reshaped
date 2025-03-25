@@ -126,13 +126,8 @@ const preview: Preview = {
 			disable: true,
 		},
 		options: {
-			storySort: (a, b) => {
-				const aLevel = a.title.split("/").length;
-				const bLevel = b.title.split("/").length;
-
-				if (a.componentPath === b.componentPath && aLevel !== bLevel) {
-					return aLevel > bLevel ? 1 : -1;
-				}
+			storySort: {
+				order: ["Components", "Utilities", "Hooks", "Internal"],
 			},
 		},
 	},

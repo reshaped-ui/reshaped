@@ -2,7 +2,7 @@
 
 import React from "react";
 import { classNames } from "utilities/helpers";
-import useDrag from "hooks/useDrag";
+import useDrag from "hooks/_private/useDrag";
 import View from "components/View";
 import type * as T from "./Resizable.types";
 import s from "./Resizable.module.css";

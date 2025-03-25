@@ -1,6 +1,6 @@
 import type React from "react";
 import type { ViewProps } from "components/View";
-import type { UseDragCallbackArgs } from "hooks/useDrag";
+import type { UseDragCallbackArgs } from "hooks/_private/useDrag";
 
 export type Props = {
 	variant?: "bordered" | "borderless";

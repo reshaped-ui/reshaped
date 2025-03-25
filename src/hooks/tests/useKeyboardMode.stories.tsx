@@ -4,7 +4,12 @@ import Button from "components/Button";
 import View from "components/View";
 import useKeyboardMode from "hooks/useKeyboardMode";
 
-export default { title: "Hooks/useKeyboardMode" };
+export default {
+	title: "Hooks/useKeyboardMode",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
 
 const Component = () => {
 	const { activate, deactivate, disable, enable } = useKeyboardMode();
