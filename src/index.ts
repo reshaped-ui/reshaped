@@ -203,6 +203,7 @@ export { default as useToggle } from "hooks/useToggle";
  * Utilities
  */
 export { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
+export { TrapFocus } from "utilities/a11y";
 
 /**
  * Types

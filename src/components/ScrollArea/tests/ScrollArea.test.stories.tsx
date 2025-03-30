@@ -6,7 +6,7 @@ import ScrollArea from "components/ScrollArea";
 import View from "components/View";
 
 export default {
-	title: "Utilities/ScrollArea/tests",
+	title: "Utility components/ScrollArea/tests",
 	component: ScrollArea,
 	parameters: {
 		iframe: {

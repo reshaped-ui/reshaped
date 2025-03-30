@@ -2,7 +2,7 @@ import { Example } from "utilities/storybook";
 import HiddenVisually from "components/HiddenVisually";
 
 export default {
-	title: "Utilities/HiddenVisually",
+	title: "Utility components/HiddenVisually",
 	component: HiddenVisually,
 	parameters: {
 		iframe: {

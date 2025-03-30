@@ -3,7 +3,7 @@ import { userEvent, expect, fn } from "@storybook/test";
 import Actionable from "components/Actionable";
 
 export default {
-	title: "Utilities/Actionable/tests",
+	title: "Utility components/Actionable/tests",
 	component: Actionable,
 	parameters: {
 		iframe: {

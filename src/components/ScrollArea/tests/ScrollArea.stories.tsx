@@ -6,7 +6,7 @@ import View from "components/View";
 import Button from "components/Button";
 
 export default {
-	title: "Utilities/ScrollArea",
+	title: "Utility components/ScrollArea",
 	component: ScrollArea,
 	parameters: {
 		iframe: {

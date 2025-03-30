@@ -8,7 +8,7 @@ import Theme, { useTheme } from "components/Theme";
 import { Example } from "utilities/storybook";
 
 export default {
-	title: "Utilities/Theme/tests",
+	title: "Utility components/Theme/tests",
 	component: Theme,
 	parameters: {
 		iframe: {

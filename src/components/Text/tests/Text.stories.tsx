@@ -2,7 +2,7 @@ import { Example } from "utilities/storybook";
 import Text from "components/Text";
 
 export default {
-	title: "Utilities/Text",
+	title: "Utility components/Text",
 	component: Text,
 	parameters: {
 		iframe: {

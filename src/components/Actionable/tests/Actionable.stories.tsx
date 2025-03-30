@@ -5,7 +5,7 @@ import Actionable from "components/Actionable";
 import View from "components/View";
 
 export default {
-	title: "Utilities/Actionable",
+	title: "Utility components/Actionable",
 	component: Actionable,
 	parameters: {
 		iframe: {

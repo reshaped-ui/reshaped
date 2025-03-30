@@ -5,7 +5,7 @@ import FormControl from "components/FormControl";
 import TextField from "components/TextField";
 
 export default {
-	title: "Utilities/FormControl",
+	title: "Utility components/FormControl",
 	component: FormControl,
 	parameters: {
 		iframe: {

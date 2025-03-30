@@ -3,7 +3,7 @@ import { expect } from "@storybook/test";
 import Text from "components/Text";
 
 export default {
-	title: "Utilities/Text/tests",
+	title: "Utility components/Text/tests",
 	component: Text,
 	parameters: {
 		iframe: {

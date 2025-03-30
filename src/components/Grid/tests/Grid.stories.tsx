@@ -3,7 +3,7 @@ import Grid from "components/Grid";
 import View from "components/View";
 
 export default {
-	title: "Utilities/Grid",
+	title: "Utility components/Grid",
 	component: Grid,
 	parameters: {
 		iframe: {

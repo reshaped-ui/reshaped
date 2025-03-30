@@ -6,6 +6,8 @@
  * the next element on the page after the trigger
  * example: Dropdown Menu
  *
+ * action-bar: Same as action-menu but with horizontal keyboard arrow navigation
+ *
  * content-menu: Include dropdown content into the tab navigation flow and move the focus to
  * the next element on the page after the trigger after navigation through the trapped content
  * example: Header navigation dropdowns
@@ -14,6 +16,6 @@
  * without moving the focus away from the trigger
  * example: Autocomplete
  */
-export type TrapMode = "dialog" | "action-menu" | "content-menu" | "selection-menu";
+export type TrapMode = "dialog" | "action-menu" | "action-bar" | "content-menu" | "selection-menu";
 
 export type FocusableElement = HTMLButtonElement | HTMLInputElement;

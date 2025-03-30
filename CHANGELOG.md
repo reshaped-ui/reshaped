@@ -4,3 +4,4 @@
 - Flyout: fixed onClickOutside to correctly track clicked components that get unmounted (calendar)
 - useOnClickOutside: new hook
 - useHandlerRef: new hook
+- TrapFocus: new utility, new trap mode

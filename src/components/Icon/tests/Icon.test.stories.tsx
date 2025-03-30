@@ -4,7 +4,7 @@ import Icon from "components/Icon";
 import IconZap from "icons/Zap";
 
 export default {
-	title: "Utilities/Icon/tests",
+	title: "Utility components/Icon/tests",
 	component: Icon,
 	parameters: {
 		iframe: {

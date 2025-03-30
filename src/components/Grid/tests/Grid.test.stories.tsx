@@ -3,7 +3,7 @@ import { expect } from "@storybook/test";
 import Grid from "components/Grid";
 
 export default {
-	title: "Utilities/Grid/tests",
+	title: "Utility components/Grid/tests",
 	component: Grid,
 	parameters: {
 		iframe: {
