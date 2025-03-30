@@ -116,6 +116,8 @@ const FlyoutContent = (props: T.ContentProps) => {
 		role = "listbox";
 	} else if (trapFocusMode === "action-menu") {
 		role = "menu";
+	} else if (trapFocusMode === "action-bar") {
+		role = "menubar";
 	}
 
 	const content = (

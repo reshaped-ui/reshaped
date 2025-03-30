@@ -7,7 +7,7 @@ import useToggle from "hooks/useToggle";
 import { sleep } from "utilities/helpers";
 
 export default {
-	title: "Utilities/Overlay/tests",
+	title: "Utility components/Overlay/tests",
 	component: Overlay,
 	parameters: {
 		iframe: {

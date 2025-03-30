@@ -3,7 +3,7 @@ import { expect } from "@storybook/test";
 import View from "components/View";
 
 export default {
-	title: "Utilities/View/tests",
+	title: "Utility components/View/tests",
 	component: View,
 	parameters: {
 		iframe: {

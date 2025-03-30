@@ -127,7 +127,7 @@ const preview: Preview = {
 		},
 		options: {
 			storySort: {
-				order: ["Components", "Utilities", "Hooks", "Internal"],
+				order: ["Components", "Utility components", "Hooks", "Utilities", "Internal"],
 			},
 		},
 	},

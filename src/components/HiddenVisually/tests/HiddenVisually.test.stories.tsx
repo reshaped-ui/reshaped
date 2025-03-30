@@ -3,7 +3,7 @@ import { expect } from "@storybook/test";
 import HiddenVisually from "components/HiddenVisually";
 
 export default {
-	title: "Utilities/HiddenVisually/tests",
+	title: "Utility components/HiddenVisually/tests",
 	component: HiddenVisually,
 	parameters: {
 		iframe: {

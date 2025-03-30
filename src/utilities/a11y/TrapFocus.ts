@@ -8,7 +8,7 @@ import { checkKeyboardMode } from "./keyboardMode";
 
 type ReleaseOptions = { withoutFocusReturn?: boolean };
 type TrapOptions = {
-	onNavigateOutside?: () => void;
+	onRelease?: () => void;
 	includeTrigger?: boolean;
 	initialFocusEl?: FocusableElement | null;
 	mode?: TrapMode;
@@ -43,26 +43,31 @@ class TrapFocus {
 		if (event.defaultPrevented) return;
 		if (TrapFocus.chain.tailId !== this.chainId) return;
 
-		const { mode, onNavigateOutside, pseudoFocus, includeTrigger } = this.options;
+		const { mode, onRelease, pseudoFocus, includeTrigger } = this.options;
 		let navigationMode: "tabs" | "arrows" = "tabs";
-		if (mode === "action-menu" || mode === "selection-menu") navigationMode = "arrows";
+		if (mode === "action-menu" || mode === "selection-menu" || mode === "action-bar") {
+			navigationMode = "arrows";
+		}
 
 		const key = event.key;
 
 		const isTab = key === keys.TAB;
+		const isPrevTab = isTab && event.shiftKey;
 		const isNextTab = isTab && !event.shiftKey;
-		const isBackTab = isTab && event.shiftKey;
-		const isUp = navigationMode === "arrows" && key === keys.UP;
-		const isDown = navigationMode === "arrows" && key === keys.DOWN;
-		const isPrev = (isBackTab && navigationMode === "tabs") || isUp;
-		const isNext = (isNextTab && navigationMode === "tabs") || isDown;
+		const isArrow = [keys.LEFT, keys.RIGHT, keys.UP, keys.DOWN].includes(key);
+		const isPrevArrow =
+			navigationMode === "arrows" && key === (mode === "action-bar" ? keys.LEFT : keys.UP);
+		const isNextArrow =
+			navigationMode === "arrows" && key === (mode === "action-bar" ? keys.RIGHT : keys.DOWN);
+		const isPrev = (isPrevTab && navigationMode === "tabs") || isPrevArrow;
+		const isNext = (isNextTab && navigationMode === "tabs") || isNextArrow;
 		const isFocusedOnTrigger = getActiveElement(this.root) === this.trigger;
 		const focusData = getFocusData({
 			root: this.root,
 			target: isPrev ? "prev" : "next",
 			options: {
 				additionalElement: includeTrigger ? this.trigger : undefined,
-				circular: mode !== "action-menu",
+				circular: mode !== "action-menu" && mode !== "action-bar",
 			},
 		});
 
@@ -73,14 +78,18 @@ class TrapFocus {
 
 		if (hasNavigatedOutside) {
 			// Prevent shift + tab event to avoid focus moving after the trap release
-			if (isBackTab && !isFocusedOnTrigger) event.preventDefault();
+			if (isPrevTab && !isFocusedOnTrigger) event.preventDefault();
 
 			this.release();
-			onNavigateOutside?.();
+			onRelease?.();
 			return;
 		}
 
-		if (!isPrev && !isNext) return;
+		if (!isPrev && !isNext) {
+			// Avoid page from scrolling with arrow keys while focus it trapped
+			if (isArrow && (mode === "action-bar" || mode === "action-menu")) event.preventDefault();
+			return;
+		}
 
 		event.preventDefault();
 

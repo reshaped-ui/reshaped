@@ -49,6 +49,7 @@ const useOnClickOutside = (
 		if (disabled) return;
 
 		const handleClick = (event: MouseEvent) => {
+			if (!(event as PointerEvent).pointerType) return;
 			if (event.button === 2) return;
 			if (isMouseDownInsideRef.current) return;
 			handlerRef.current?.(event);

@@ -4,7 +4,7 @@ import Container from "components/Container";
 import { Placeholder } from "utilities/storybook";
 
 export default {
-	title: "Utilities/Container/tests",
+	title: "Utility components/Container/tests",
 	component: Container,
 	parameters: {
 		iframe: {

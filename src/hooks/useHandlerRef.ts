@@ -13,7 +13,7 @@ const useHandlerRef = <T>(cb: T): React.RefObject<T> => {
 	// Update the callback on every render, keeping the ref instance the same
 	useIsomorphicLayoutEffect(() => {
 		ref.current = cb;
-	});
+	}, [cb]);
 
 	return ref;
 };

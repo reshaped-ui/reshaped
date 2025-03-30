@@ -2,7 +2,7 @@ import { Example, Placeholder } from "utilities/storybook";
 import Container from "components/Container";
 
 export default {
-	title: "Utilities/Container",
+	title: "Utility components/Container",
 	component: Container,
 	parameters: {
 		iframe: {

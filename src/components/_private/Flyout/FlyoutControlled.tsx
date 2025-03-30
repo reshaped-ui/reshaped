@@ -303,7 +303,7 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 			mode: trapFocusMode,
 			initialFocusEl: initialFocusRef?.current as FocusableElement | undefined,
 			includeTrigger: triggerType === "hover" && trapFocusMode !== "dialog" && !isSubmenu,
-			onNavigateOutside: () => {
+			onRelease: () => {
 				handleClose({});
 			},
 		});

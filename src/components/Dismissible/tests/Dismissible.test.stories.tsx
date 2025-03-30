@@ -4,7 +4,7 @@ import Dismissible from "components/Dismissible";
 import { Placeholder } from "utilities/storybook";
 
 export default {
-	title: "Utilities/Dismissible/tests",
+	title: "Utility components/Dismissible/tests",
 	component: Dismissible,
 	parameters: {
 		iframe: {

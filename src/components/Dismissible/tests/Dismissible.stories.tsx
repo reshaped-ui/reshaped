@@ -6,7 +6,7 @@ import Image from "components/Image";
 import View from "components/View";
 
 export default {
-	title: "Utilities/Dismissible",
+	title: "Utility components/Dismissible",
 	components: Dismissible,
 	parameters: {
 		iframe: {

@@ -6,7 +6,7 @@ import IconZap from "icons/Zap";
 import IconMic from "icons/Mic";
 
 export default {
-	title: "Utilities/Icon",
+	title: "Utility components/Icon",
 	component: Icon,
 	parameters: {
 		iframe: {

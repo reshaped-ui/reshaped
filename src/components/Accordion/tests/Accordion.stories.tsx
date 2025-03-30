@@ -6,7 +6,7 @@ import Button from "components/Button";
 import View from "components/View";
 
 export default {
-	title: "Utilities/Accordion",
+	title: "Utility components/Accordion",
 	component: Accordion,
 	parameters: {
 		iframe: {

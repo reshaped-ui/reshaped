@@ -5,7 +5,7 @@ import Button from "components/Button";
 import Reshaped from "../Reshaped";
 
 export default {
-	title: "Utilities/Reshaped",
+	title: "Utility components/Reshaped",
 	parameters: {
 		disableWrapper: true,
 	},

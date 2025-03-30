@@ -7,7 +7,7 @@ import TextField from "components/TextField";
 import View from "components/View";
 
 export default {
-	title: "Utilities/FormControl/tests",
+	title: "Utility components/FormControl/tests",
 	component: FormControl,
 	parameters: {
 		iframe: {

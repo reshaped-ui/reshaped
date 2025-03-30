@@ -9,7 +9,7 @@ import MenuItem from "components/MenuItem";
 import Button from "components/Button";
 
 export default {
-	title: "Utilities/View",
+	title: "Utility components/View",
 	component: View,
 	parameters: {
 		iframe: {

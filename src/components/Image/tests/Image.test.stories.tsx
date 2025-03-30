@@ -3,7 +3,7 @@ import { expect, fn, waitFor } from "@storybook/test";
 import Image from "components/Image";
 
 export default {
-	title: "Utilities/Image/tests",
+	title: "Utility components/Image/tests",
 	component: Image,
 	parameters: {
 		iframe: {

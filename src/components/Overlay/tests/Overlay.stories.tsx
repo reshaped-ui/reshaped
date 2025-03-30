@@ -6,7 +6,7 @@ import Button from "components/Button";
 import useToggle from "hooks/useToggle";
 
 export default {
-	title: "Utilities/Overlay",
+	title: "Utility components/Overlay",
 	component: Overlay,
 	parameters: {
 		iframe: {
