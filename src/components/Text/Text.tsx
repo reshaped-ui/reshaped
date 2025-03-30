@@ -57,4 +57,6 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 	);
 };
 
+Text.displayName = "Text";
+
 export default Text;

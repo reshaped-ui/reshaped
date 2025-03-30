@@ -29,4 +29,6 @@ const Scrim = (props: T.Props) => {
 	);
 };
 
+Scrim.displayName = "Scrim";
+
 export default Scrim;

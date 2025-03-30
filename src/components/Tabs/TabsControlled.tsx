@@ -58,4 +58,6 @@ const TabsControlled = (props: T.PrivateControlledProps) => {
 	);
 };
 
+TabsControlled.displayName = "TabsControlled";
+
 export default TabsControlled;

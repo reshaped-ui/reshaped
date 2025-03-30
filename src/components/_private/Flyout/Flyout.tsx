@@ -15,4 +15,6 @@ const Flyout = (props: T.Props) => {
 Flyout.Trigger = FlyoutTrigger;
 Flyout.Content = FlyoutContent;
 
+Flyout.displayName = "Flyout";
+
 export default Flyout;

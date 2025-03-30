@@ -241,4 +241,6 @@ const TabsList = (props: T.ListProps) => {
 	);
 };
 
+TabsList.displayName = "Tabs.List";
+
 export default TabsList;

@@ -74,4 +74,6 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 	);
 };
 
+SliderThumb.displayName = "SliderThumb";
+
 export default React.forwardRef(SliderThumb);

@@ -59,4 +59,6 @@ const Radio = (props: T.Props) => {
 	);
 };
 
+Radio.displayName = "Radio";
+
 export default Radio;

@@ -53,4 +53,8 @@ function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>) {
 }
 
 Portal.Scope = PortalScope;
+
+Portal.displayName = "Portal";
+PortalScope.displayName = "PortalScope";
+
 export default Portal;

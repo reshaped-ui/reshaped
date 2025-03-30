@@ -89,4 +89,6 @@ const Breadcrumbs = (props: T.Props) => {
 	);
 };
 
+Breadcrumbs.displayName = "Breadcrumbs";
+
 export default Breadcrumbs;

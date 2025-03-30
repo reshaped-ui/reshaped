@@ -75,4 +75,6 @@ const CalendarYear = (props: T.YearProps) => {
 	);
 };
 
+CalendarYear.displayName = "CalendarYear";
+
 export default CalendarYear;

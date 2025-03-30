@@ -28,4 +28,6 @@ const CheckboxGroupControlled = (props: T.ControlledProps) => {
 	);
 };
 
+CheckboxGroupControlled.displayName = "CheckboxGroupControlled";
+
 export default CheckboxGroupControlled;

@@ -54,4 +54,6 @@ const Reshaped = (props: T.Props) => {
 	);
 };
 
+Reshaped.displayName = "Reshaped";
+
 export default Reshaped;

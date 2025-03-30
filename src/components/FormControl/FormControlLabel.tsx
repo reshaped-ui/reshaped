@@ -34,4 +34,6 @@ const FormControlLabel = (props: T.LabelProps) => {
 	);
 };
 
+FormControlLabel.displayName = "FormControl.Label";
+
 export default FormControlLabel;

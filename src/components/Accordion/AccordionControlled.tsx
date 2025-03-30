@@ -34,4 +34,6 @@ const AccordionControlled = (props: T.ControlledProps) => {
 	);
 };
 
+AccordionControlled.displayName = "AccordionControlled";
+
 export default AccordionControlled;

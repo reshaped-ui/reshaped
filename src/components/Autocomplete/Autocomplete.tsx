@@ -171,4 +171,8 @@ const AutocompleteItem = (props: T.ItemProps) => {
 };
 
 Autocomplete.Item = AutocompleteItem;
+
+Autocomplete.displayName = "Autocomplete";
+AutocompleteItem.displayName = "Autocomplete.Item";
+
 export default Autocomplete;

@@ -164,4 +164,11 @@ DropdownMenu.Item = DropdownMenuItem;
 DropdownMenu.SubMenu = DropdownMenuSubMenu;
 DropdownMenu.SubTrigger = DropdownMenuSubTrigger;
 
+DropdownMenu.displayName = "DropdownMenu";
+DropdownMenuContent.displayName = "DropdownMenu.Content";
+DropdownMenuSection.displayName = "DropdownMenu.Section";
+DropdownMenuItem.displayName = "DropdownMenu.Item";
+DropdownMenuSubMenu.displayName = "DropdownMenu.SubMenu";
+DropdownMenuSubTrigger.displayName = "DropdownMenu.SubTrigger";
+
 export default DropdownMenu;

@@ -75,4 +75,7 @@ const Expandable = (props: T.ContentProps) => {
 		</div>
 	);
 };
+
+Expandable.displayName = "Expandable";
+
 export default Expandable;

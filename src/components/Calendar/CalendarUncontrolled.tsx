@@ -34,4 +34,6 @@ const CalendarUncontrolled = (props: T.UncontrolledProps & T.BaseProps) => {
 	);
 };
 
+CalendarUncontrolled.displayName = "CalendarUncontrolled";
+
 export default CalendarUncontrolled;

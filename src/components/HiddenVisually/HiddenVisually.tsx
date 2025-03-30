@@ -7,4 +7,6 @@ const HiddenVisually = (props: T.Props) => {
 	return <div className={s.root}>{children}</div>;
 };
 
+HiddenVisually.displayName = "HiddenVisually";
+
 export default HiddenVisually;

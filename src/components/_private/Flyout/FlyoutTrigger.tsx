@@ -64,4 +64,6 @@ const FlyoutTrigger = (props: T.TriggerProps) => {
 	);
 };
 
+FlyoutTrigger.displayName = "Flyout.Trigger";
+
 export default FlyoutTrigger;

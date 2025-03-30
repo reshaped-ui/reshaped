@@ -60,4 +60,6 @@ const CarouselControl = (props: T.ControlProps) => {
 	);
 };
 
+CarouselControl.displayName = "CarouselControl";
+
 export default CarouselControl;

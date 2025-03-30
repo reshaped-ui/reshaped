@@ -18,4 +18,6 @@ const Slider = (props: T.Props) => {
 	return <SliderUncontrolled {...(rest as T.UncontrolledProps)} min={min} max={max} />;
 };
 
+Slider.displayName = "Slider";
+
 export default Slider;

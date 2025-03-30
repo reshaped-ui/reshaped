@@ -75,4 +75,6 @@ const Switch = (props: T.Props) => {
 	);
 };
 
+Switch.displayName = "Switch";
+
 export default Switch;

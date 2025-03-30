@@ -82,4 +82,6 @@ const Card = forwardRef<HTMLElement, T.Props<keyof React.JSX.IntrinsicElements>>
 	}
 );
 
+Card.displayName = "Card";
+
 export default Card;

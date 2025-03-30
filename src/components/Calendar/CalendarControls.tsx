@@ -106,4 +106,6 @@ const CalendarControls = (props: T.ControlsProps) => {
 	);
 };
 
+CalendarControls.displayName = "CalendarControls";
+
 export default CalendarControls;

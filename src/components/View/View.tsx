@@ -310,4 +310,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(
 };
 
 View.Item = ViewItem;
+
+View.displayName = "View";
+ViewItem.displayName = "View.Item";
+
 export default View;

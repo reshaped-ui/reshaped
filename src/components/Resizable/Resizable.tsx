@@ -235,4 +235,6 @@ const Resizable = (props: T.Props) => {
 Resizable.Item = (() => null) as React.FC<T.ItemProps>;
 Resizable.Handle = (() => null) as React.FC<T.HandleProps>;
 
+Resizable.displayName = "Resizable";
+
 export default Resizable;

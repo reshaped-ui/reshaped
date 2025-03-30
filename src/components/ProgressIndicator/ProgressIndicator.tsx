@@ -129,4 +129,6 @@ const ProgressIndicator = (props: T.Props) => {
 	);
 };
 
+ProgressIndicator.displayName = "ProgressIndicator";
+
 export default ProgressIndicator;

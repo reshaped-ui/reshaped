@@ -9,4 +9,6 @@ const RadioGroup = (props: T.Props) => {
 	return <RadioGroupUncontrolled {...(props as T.UncontrolledProps)} />;
 };
 
+RadioGroup.displayName = "RadioGroup";
+
 export default RadioGroup;

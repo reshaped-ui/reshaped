@@ -156,4 +156,6 @@ const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
 	);
 };
 
+CalendarControlled.displayName = "CalendarControlled";
+
 export default CalendarControlled;

@@ -16,4 +16,6 @@ const PinFieldUncontrolled = (props: T.UncontrolledProps) => {
 	return <PinFieldControlled {...controlledProps} value={value} onChange={handleChange} />;
 };
 
+PinFieldUncontrolled.displayName = "PinFieldUncontrolled";
+
 export default PinFieldUncontrolled;

@@ -59,4 +59,6 @@ const SliderUncontrolled = (props: T.UncontrolledProps & T.DefaultProps) => {
 	);
 };
 
+SliderUncontrolled.displayName = "SliderUncontrolled";
+
 export default SliderUncontrolled;

@@ -112,4 +112,6 @@ const ToastProvider = (props: T.ProviderProps) => {
 	);
 };
 
+ToastProvider.displayName = "ToastProiver";
+
 export default ToastProvider;

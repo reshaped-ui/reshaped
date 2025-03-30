@@ -94,4 +94,6 @@ const ToastRegion = (props: T.RegionProps) => {
 	);
 };
 
+ToastRegion.displayName = "ToastRegion";
+
 export default ToastRegion;

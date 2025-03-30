@@ -7,4 +7,6 @@ const MenuItemAligner = (props: AlignerProps) => {
 	);
 };
 
+MenuItemAligner.displayName = "MenuItem.Aligner";
+
 export default MenuItemAligner;

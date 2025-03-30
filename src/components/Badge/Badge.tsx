@@ -79,4 +79,7 @@ const Badge = forwardRef((props: T.Props, ref: ActionableRef) => {
 }) as T.Export;
 
 Badge.Container = BadgeContainer;
+
+Badge.displayName = "Badge";
+
 export default Badge;

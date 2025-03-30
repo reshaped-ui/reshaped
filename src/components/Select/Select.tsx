@@ -137,4 +137,6 @@ const Select = (props: T.Props) => {
 	);
 };
 
+Select.displayName = "Select";
+
 export default Select;

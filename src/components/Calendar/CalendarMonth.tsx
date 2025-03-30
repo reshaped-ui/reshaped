@@ -98,4 +98,6 @@ const CalendarMonth = (props: T.MonthProps) => {
 	);
 };
 
+CalendarMonth.displayName = "CalendarMonth";
+
 export default CalendarMonth;

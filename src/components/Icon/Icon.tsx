@@ -26,4 +26,6 @@ const Icon = (props: T.Props) => {
 	);
 };
 
+Icon.displayName = "Icon";
+
 export default Icon;

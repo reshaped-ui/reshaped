@@ -100,4 +100,6 @@ const PaginationControlled = (props: T.ControlledProps) => {
 	);
 };
 
+PaginationControlled.displayName = "PaginationControlled";
+
 export default PaginationControlled;

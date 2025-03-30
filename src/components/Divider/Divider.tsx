@@ -36,4 +36,6 @@ const Divider = (props: T.Props) => {
 	);
 };
 
+Divider.displayName = "Divider";
+
 export default Divider;

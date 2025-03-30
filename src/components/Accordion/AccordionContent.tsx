@@ -16,4 +16,6 @@ const AccordionContent = (props: T.ContentProps) => {
 	);
 };
 
+AccordionContent.displayName = "Accordion.Content";
+
 export default AccordionContent;

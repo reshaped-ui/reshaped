@@ -81,4 +81,7 @@ const TextArea = (props: T.Props) => {
 };
 
 TextArea.Aligner = Aligner;
+
+TextArea.displayName = "TextArea";
+
 export default TextArea;

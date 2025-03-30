@@ -29,4 +29,6 @@ const Aligner = (props: T.Props) => {
 	);
 };
 
+Aligner.displayName = "Aligner";
+
 export default Aligner;

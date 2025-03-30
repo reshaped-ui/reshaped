@@ -110,4 +110,6 @@ const Toast = (props: T.Props & { collapsed: boolean }) => {
 	return toastNode;
 };
 
+Toast.displayName = "Toast";
+
 export default Toast;

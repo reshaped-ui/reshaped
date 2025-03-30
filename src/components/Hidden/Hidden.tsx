@@ -13,4 +13,6 @@ const Hidden = (props: T.Props) => {
 	return <TagName className={rootClassNames}>{children}</TagName>;
 };
 
+Hidden.displayName = "Hidden";
+
 export default Hidden;

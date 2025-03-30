@@ -9,4 +9,6 @@ const CheckboxGroup = (props: T.Props) => {
 	return <CheckboxGroupUncontrolled {...(props as T.UncontrolledProps)} />;
 };
 
+CheckboxGroup.displayName = "CheckboxGroup";
+
 export default CheckboxGroup;

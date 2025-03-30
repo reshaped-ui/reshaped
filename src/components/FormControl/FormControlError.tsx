@@ -12,4 +12,6 @@ const FormControlError = (props: T.CaptionProps) => {
 	return <FormControlCaption variant="error">{children}</FormControlCaption>;
 };
 
+FormControlError.displayName = "FormControl.Error";
+
 export default FormControlError;

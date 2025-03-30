@@ -126,4 +126,6 @@ const ToastContainer = (props: T.ContainerProps) => {
 	);
 };
 
+ToastContainer.displayName = "ToastContainer";
+
 export default ToastContainer;

@@ -81,4 +81,6 @@ const Checkbox = (props: T.Props) => {
 	);
 };
 
+Checkbox.displayName = "Checkbox";
+
 export default Checkbox;

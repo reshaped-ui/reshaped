@@ -96,4 +96,6 @@ const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
 	);
 });
 
+Actionable.displayName = "Actionable";
+
 export default Actionable;

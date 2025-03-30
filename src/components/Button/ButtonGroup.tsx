@@ -13,4 +13,6 @@ const ButtonGroup = (props: T.GroupProps) => {
 	);
 };
 
+ButtonGroup.displayName = "Button.Group";
+
 export default ButtonGroup;

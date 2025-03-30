@@ -33,4 +33,6 @@ const ActionBar = (props: T.Props) => {
 	);
 };
 
+ActionBar.displayName = "ActionBar";
+
 export default ActionBar;

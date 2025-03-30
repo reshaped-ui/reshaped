@@ -12,4 +12,6 @@ const ButtonAligner = (props: T.AlignerProps) => {
 	);
 };
 
+ButtonAligner.displayName = "Button.Aligner";
+
 export default ButtonAligner;

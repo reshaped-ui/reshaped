@@ -25,4 +25,6 @@ const TabsPanel = (props: T.PanelProps) => {
 	);
 };
 
+TabsPanel.displayName = "Tabs.Panel";
+
 export default TabsPanel;

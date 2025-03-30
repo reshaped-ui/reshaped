@@ -16,4 +16,6 @@ const AccordionUncontrolled = (props: T.UncontrolledProps) => {
 	return <AccordionControlled {...controlledProps} onToggle={handleToggle} active={active} />;
 };
 
+AccordionUncontrolled.displayName = "AccordionUncontrolled";
+
 export default AccordionUncontrolled;

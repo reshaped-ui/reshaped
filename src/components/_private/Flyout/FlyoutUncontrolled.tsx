@@ -29,4 +29,6 @@ const FlyoutUncontrolled = (props: T.UncontrolledProps & T.DefaultProps) => {
 	);
 };
 
+FlyoutUncontrolled.displayName = "FlyoutUncontrolled";
+
 export default FlyoutUncontrolled;

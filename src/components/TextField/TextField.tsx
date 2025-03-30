@@ -148,4 +148,7 @@ const TextField = (props: T.Props) => {
 };
 
 TextField.Aligner = Aligner;
+
+TextField.displayName = "TextField";
+
 export default TextField;

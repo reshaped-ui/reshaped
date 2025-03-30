@@ -25,4 +25,6 @@ const RadioGroupUncontrolled = (props: T.UncontrolledProps) => {
 	);
 };
 
+RadioGroupUncontrolled.displayName = "RadioGroupUncontrolled";
+
 export default RadioGroupUncontrolled;

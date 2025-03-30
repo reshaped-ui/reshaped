@@ -7,4 +7,6 @@ const Calendar = (props: T.Props) => {
 	return <CalendarUncontrolled {...props} />;
 };
 
+Calendar.displayName = "Calendar";
+
 export default Calendar;

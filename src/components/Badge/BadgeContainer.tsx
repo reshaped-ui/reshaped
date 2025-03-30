@@ -18,4 +18,6 @@ const BadgeContainer = (props: T.ContainerProps) => {
 	);
 };
 
+BadgeContainer.displayName = "Badge.Container";
+
 export default BadgeContainer;

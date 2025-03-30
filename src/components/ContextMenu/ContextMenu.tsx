@@ -57,4 +57,6 @@ ContextMenu.Section = DropdownMenu.Section;
 ContextMenu.SubMenu = DropdownMenu.SubMenu;
 ContextMenu.SubTrigger = DropdownMenu.SubTrigger;
 
+ContextMenu.displayName = "ContextMenu";
+
 export default ContextMenu;

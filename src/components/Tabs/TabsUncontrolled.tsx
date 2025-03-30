@@ -29,4 +29,6 @@ const TabsUncontrolled = (props: T.UncontrolledProps) => {
 	);
 };
 
+TabsUncontrolled.displayName = "TabsUncontrolled";
+
 export default TabsUncontrolled;

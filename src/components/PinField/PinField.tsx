@@ -9,4 +9,6 @@ const PinField = (props: T.Props) => {
 	return <PinFieldUncontrolled {...props} />;
 };
 
+PinField.displayName = "PinField";
+
 export default PinField;

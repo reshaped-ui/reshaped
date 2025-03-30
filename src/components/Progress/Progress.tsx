@@ -51,4 +51,6 @@ const Progress = (props: T.Props) => {
 	);
 };
 
+Progress.displayName = "Progress";
+
 export default Progress;

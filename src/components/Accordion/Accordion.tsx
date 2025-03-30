@@ -13,4 +13,6 @@ const Accordion = (props: T.Props) => {
 
 Accordion.Trigger = AccordionTrigger;
 Accordion.Content = AccordionContent;
+Accordion.displayName = "Accordion";
+
 export default Accordion;

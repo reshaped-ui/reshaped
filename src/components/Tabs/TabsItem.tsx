@@ -118,4 +118,6 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 	);
 };
 
+TabsItem.displayName = "Tabs.Item";
+
 export default React.forwardRef(TabsItem);

@@ -331,4 +331,6 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	);
 };
 
+SliderControlled.displayName = "SliderControlled";
+
 export default SliderControlled;

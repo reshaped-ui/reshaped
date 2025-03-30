@@ -42,4 +42,6 @@ const AccordionTrigger = (props: T.TriggerProps) => {
 	);
 };
 
+AccordionTrigger.displayName = "Accordion.Trigger";
+
 export default AccordionTrigger;

@@ -16,4 +16,6 @@ const PaginationUncontrolled = (props: T.UncontrolledProps) => {
 	return <PaginationControlled {...controlledProps} onChange={handleChange} page={page} />;
 };
 
+PaginationUncontrolled.displayName = "PaginationUncontrolled";
+
 export default PaginationUncontrolled;

@@ -9,4 +9,6 @@ const Pagination = (props: T.Props) => {
 	return <PaginationUncontrolled {...props} />;
 };
 
+Pagination.displayName = "Pagination";
+
 export default Pagination;

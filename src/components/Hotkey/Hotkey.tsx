@@ -21,4 +21,6 @@ const Hotkey = (props: T.Props) => {
 	);
 };
 
+Hotkey.displayName = "Hotkey";
+
 export default Hotkey;

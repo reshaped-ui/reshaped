@@ -42,4 +42,8 @@ const Timeline = (props: T.Props) => {
 };
 
 Timeline.Item = TimelineItem;
+
+Timeline.displayName = "Timeline";
+TimelineItem.displayName = "Timeline.Item";
+
 export default Timeline;

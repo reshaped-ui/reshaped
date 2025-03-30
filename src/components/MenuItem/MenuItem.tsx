@@ -64,4 +64,6 @@ const MenuItem = forwardRef((props: T.Props, ref: ActionableRef) => {
 
 MenuItem.Aligner = MenuItemAligner;
 
+MenuItem.displayName = "MenuItem";
+
 export default MenuItem;

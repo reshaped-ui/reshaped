@@ -47,4 +47,6 @@ const Link = forwardRef<HTMLButtonElement | HTMLAnchorElement, T.Props>(
 	}
 );
 
+Link.displayName = "Link";
+
 export default Link;

@@ -126,4 +126,12 @@ Table.Heading = TableHeading;
 Table.Row = TableRow;
 Table.Body = TableBody;
 Table.Head = TableHead;
+
+Table.displayName = "Table";
+TableCell.displayName = "TableCell";
+TableHeading.displayName = "TableHeading";
+TableRow.displayName = "TableRow";
+TableBody.displayName = "TableBody";
+TableHead.displayName = "TableHead";
+
 export default Table;

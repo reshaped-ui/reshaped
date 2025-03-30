@@ -115,4 +115,6 @@ const CalendarDate = (props: T.DateProps) => {
 	);
 };
 
+CalendarDate.displayName = "CalendarDate";
+
 export default CalendarDate;

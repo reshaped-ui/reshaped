@@ -42,4 +42,6 @@ const Dismissible = (props: T.Props) => {
 	);
 };
 
+Dismissible.displayName = "Dismissible";
+
 export default Dismissible;

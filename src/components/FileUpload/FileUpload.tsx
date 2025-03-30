@@ -96,4 +96,8 @@ const FileUpload = (props: T.Props) => {
 };
 
 FileUpload.Trigger = FileUploadTrigger;
+
+FileUpload.displayName = "FileUpload";
+FileUploadTrigger.displayName = "FileUpload.Trigger";
+
 export default FileUpload;

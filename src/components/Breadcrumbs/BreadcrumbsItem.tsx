@@ -27,4 +27,6 @@ const BreadcrumbsItem = (props: T.ItemProps) => {
 	);
 };
 
+BreadcrumbsItem.displayName = "Breadcrumbs.Item";
+
 export default BreadcrumbsItem;

@@ -246,4 +246,6 @@ const PinFieldControlled = (props: T.ControlledProps) => {
 	);
 };
 
+PinFieldControlled.displayName = "PinFieldControlled";
+
 export default PinFieldControlled;

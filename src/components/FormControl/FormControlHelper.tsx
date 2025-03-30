@@ -11,4 +11,6 @@ const FormControlHelper = (props: T.CaptionProps) => {
 	return <FormControlCaption disabled={disabled}>{children}</FormControlCaption>;
 };
 
+FormControlHelper.displayName = "FormControl.Helper";
+
 export default FormControlHelper;

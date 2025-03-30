@@ -35,4 +35,6 @@ const HiddenInput = (props: T.Props) => {
 	);
 };
 
+HiddenInput.displayName = "HiddenInput";
+
 export default HiddenInput;

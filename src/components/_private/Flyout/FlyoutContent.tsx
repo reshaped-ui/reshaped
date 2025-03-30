@@ -157,4 +157,6 @@ const FlyoutContent = (props: T.ContentProps) => {
 	return <Portal targetRef={containerRef || scrollableRef}>{content}</Portal>;
 };
 
+FlyoutContent.displayName = "Flyout.Content";
+
 export default FlyoutContent;

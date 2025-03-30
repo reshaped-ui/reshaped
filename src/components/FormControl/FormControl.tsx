@@ -19,4 +19,6 @@ FormControl.Label = FormControlLabel;
 FormControl.Helper = FormControlHelper;
 FormControl.Error = FormControlError;
 
+FormControl.displayName = "FormControl";
+
 export default FormControl;

@@ -21,7 +21,7 @@ import {
 import type * as T from "./Flyout.types";
 import useHandlerRef from "hooks/useHandlerRef";
 
-const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
+const FlyoutControlled = (props: T.ControlledProps & T.DefaultProps) => {
 	const {
 		triggerType = "click",
 		groupTimeouts,
@@ -415,4 +415,6 @@ const FlyoutRoot = (props: T.ControlledProps & T.DefaultProps) => {
 	);
 };
 
-export default FlyoutRoot;
+FlyoutControlled.displayName = "FlyoutControlled";
+
+export default FlyoutControlled;

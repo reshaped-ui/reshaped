@@ -206,4 +206,6 @@ const Carousel = (props: T.Props) => {
 	);
 };
 
+Carousel.displayName = "Carousel";
+
 export default Carousel;

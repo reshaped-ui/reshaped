@@ -299,4 +299,9 @@ const Modal = (props: T.Props) => {
 
 Modal.Title = ModalTitle;
 Modal.Subtitle = ModalSubtitle;
+
+Modal.displayName = "Modal";
+ModalTitle.displayName = "Modal.Title";
+ModalSubtitle.displayName = "Modal.Subtitle";
+
 export default Modal;

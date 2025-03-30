@@ -220,4 +220,6 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
 	}
 );
 
+ScrollArea.displayName = "ScrollArea";
+
 export default ScrollArea;

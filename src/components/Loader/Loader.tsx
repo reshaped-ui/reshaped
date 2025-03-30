@@ -25,4 +25,6 @@ const Loader = (props: T.Props) => {
 	);
 };
 
+Loader.displayName = "Loader";
+
 export default Loader;

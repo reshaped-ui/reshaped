@@ -67,4 +67,6 @@ const GlobalColorMode = (props: T.GlobalColorModeProps) => {
 	);
 };
 
+GlobalColorMode.displayName = "GlobalColorMode";
+
 export default GlobalColorMode;

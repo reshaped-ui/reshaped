@@ -15,4 +15,7 @@ const Tabs = (props: T.Props) => {
 Tabs.Item = TabsItem;
 Tabs.List = TabsList;
 Tabs.Panel = TabsPanel;
+
+Tabs.displayName = "Tabs";
+
 export default Tabs;

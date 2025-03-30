@@ -34,4 +34,6 @@ const Container = (props: T.Props) => {
 	);
 };
 
+Container.displayName = "Container";
+
 export default Container;

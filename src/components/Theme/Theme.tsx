@@ -87,4 +87,6 @@ export const PrivateTheme = (props: T.PrivateProps) => {
 	);
 };
 
+Theme.displayName = "Theme";
+
 export default Theme;

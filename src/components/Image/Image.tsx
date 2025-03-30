@@ -94,4 +94,6 @@ const Image = (props: T.Props) => {
 	);
 };
 
+Image.displayName = "Image";
+
 export default Image;

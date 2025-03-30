@@ -123,4 +123,8 @@ const Stepper = (props: T.Props) => {
 };
 
 Stepper.Item = StepperItem;
+
+Stepper.displayName = "Stepper";
+StepperItem.displayName = "Stepper.Item";
+
 export default Stepper;

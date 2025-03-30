@@ -56,4 +56,6 @@ const Avatar = (props: T.Props) => {
 	);
 };
 
+Avatar.displayName = "Avatar";
+
 export default Avatar;

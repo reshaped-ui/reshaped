@@ -101,4 +101,6 @@ const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
 Button.Group = ButtonGroup;
 Button.Aligner = ButtonAligner;
 
+Button.displayName = "Button";
+
 export default Button;

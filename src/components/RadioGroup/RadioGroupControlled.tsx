@@ -19,4 +19,6 @@ const RadioGroupControlled = (props: T.ControlledProps) => {
 	);
 };
 
+RadioGroupControlled.displayName = "RadioGroupControlled";
+
 export default RadioGroupControlled;

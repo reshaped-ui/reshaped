@@ -207,4 +207,6 @@ const Overlay = (props: T.Props) => {
 	);
 };
 
+Overlay.displayName = "Overlay";
+
 export default Overlay;

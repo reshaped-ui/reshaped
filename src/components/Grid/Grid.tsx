@@ -96,4 +96,8 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 };
 
 Grid.Item = GridItem;
+
+Grid.displayName = "Grid";
+GridItem.displayName = "Grid.Item";
+
 export default Grid;

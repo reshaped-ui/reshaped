@@ -46,4 +46,7 @@ Popover.Dismissible = PopoverDismissible;
 Popover.Trigger = Flyout.Trigger;
 Popover.Content = Flyout.Content;
 
+Popover.displayName = "Popover";
+PopoverDismissible.displayName = "Popover.Dismissible";
+
 export default Popover;

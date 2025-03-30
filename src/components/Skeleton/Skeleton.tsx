@@ -19,4 +19,6 @@ const Skeleton = (props: T.Props) => {
 	);
 };
 
+Skeleton.displayName = "Skeleton";
+
 export default Skeleton;
