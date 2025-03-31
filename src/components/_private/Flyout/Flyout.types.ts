@@ -68,7 +68,9 @@ type WithUncontrolled = { active?: never; defaultActive?: boolean };
 type WithControlled = { active: boolean; defaultActive?: never };
 
 export type TriggerAttributes = {
-	ref: React.RefObject<HTMLButtonElement | null>;
+	// FIXME: Once we only support React 19+, we can drop this any
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	ref: React.RefObject<HTMLButtonElement | null> | any;
 	onBlur?: (e: React.FocusEvent) => void;
 	onFocus?: () => void;
 	onMouseDown?: () => void;
