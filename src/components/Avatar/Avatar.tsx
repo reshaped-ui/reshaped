@@ -14,10 +14,11 @@ const Avatar = (props: T.Props) => {
 		squared,
 		initials,
 		icon,
-		alt,
 		className,
+		imageAttributes,
 		attributes,
 	} = props;
+	const alt = props.alt || imageAttributes?.alt;
 	const radius = squared
 		? responsivePropDependency(size, (size) => {
 				if (size >= 24) return "large";
@@ -36,7 +37,15 @@ const Avatar = (props: T.Props) => {
 
 	const renderContent = () => {
 		if (src)
-			return <img role={!alt ? "presentation" : undefined} src={src} alt={alt} className={s.img} />;
+			return (
+				<img
+					{...imageAttributes}
+					role={!alt ? "presentation" : undefined}
+					src={src}
+					alt={alt}
+					className={s.img}
+				/>
+			);
 		if (icon)
 			return (
 				<Icon svg={icon} size={responsivePropDependency(size, (size) => Math.ceil(size * 0.4))} />
