@@ -21,7 +21,8 @@ const Image = (props: T.Props) => {
 		borderRadius,
 		className,
 		attributes,
-		imageAttributes,
+		imageAttributes: passedImageAttributes,
+		renderImage,
 	} = props;
 	const [status, setStatus] = React.useState("loading");
 	const radiusStyles = getRadiusStyles(borderRadius);
@@ -60,16 +61,17 @@ const Image = (props: T.Props) => {
 
 	if (isFallback) {
 		if (typeof fallback === "string") {
-			return (
-				<img
-					{...attributes}
-					src={fallback}
-					alt={alt}
-					role={alt ? undefined : "presentation"}
-					className={fallbackClassNames}
-					style={style}
-				/>
-			);
+			const imageAttributes = {
+				...attributes,
+				src: fallback,
+				alt,
+				role: alt ? undefined : "presentation",
+				className: fallbackClassNames,
+				style,
+			};
+
+			// eslint-disable-next-line jsx-a11y/alt-text
+			return renderImage ? renderImage(imageAttributes) : <img {...imageAttributes} />;
 		}
 
 		return (
@@ -79,19 +81,20 @@ const Image = (props: T.Props) => {
 		);
 	}
 
-	return (
-		<img
-			{...attributes}
-			{...imageAttributes}
-			src={src}
-			alt={alt}
-			role={alt ? undefined : "presentation"}
-			onLoad={handleLoad}
-			onError={handleError}
-			className={imgClassNames}
-			style={style}
-		/>
-	);
+	const imageAttributes = {
+		...attributes,
+		...passedImageAttributes,
+		src,
+		alt,
+		role: alt ? undefined : "presentation",
+		onLoad: handleLoad,
+		onError: handleError,
+		className: imgClassNames,
+		style,
+	};
+
+	// eslint-disable-next-line jsx-a11y/alt-text
+	return renderImage ? renderImage(imageAttributes) : <img {...imageAttributes} />;
 };
 
 Image.displayName = "Image";

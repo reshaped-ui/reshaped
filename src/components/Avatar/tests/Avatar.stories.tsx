@@ -178,6 +178,28 @@ export const fallback: StoryObj<{ handleError: Mock }> = {
 	},
 };
 
+export const renderImage: StoryObj = {
+	name: "renderImage",
+	render: () => (
+		<Example>
+			<Example.Item title="renderImage">
+				<Avatar
+					src="https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80"
+					alt="Amsterdam canal"
+					renderImage={(attributes) => <img {...attributes} id="test-image" />}
+				/>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const img = canvas.getByRole("img");
+
+		expect(img).toBeInTheDocument();
+		expect(img).toHaveAccessibleName("Amsterdam canal");
+		expect(img).toHaveAttribute("id", "test-image");
+	},
+};
+
 export const className: StoryObj = {
 	name: "className, attributes, imageAttributes",
 	render: () => (
