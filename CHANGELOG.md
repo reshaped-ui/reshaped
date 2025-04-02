@@ -9,3 +9,5 @@
 - TrapFocus: new utility, new trap mode
 - Icon: Added vertical alignment in case svg content is smaller that the icon size
 - Avatar: Image attributes, relaxed types, more tests
+- Avatar: renderImage
+- Image: renderImage

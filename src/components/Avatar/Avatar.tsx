@@ -15,10 +15,11 @@ const Avatar = (props: T.Props) => {
 		initials,
 		icon,
 		className,
-		imageAttributes,
+		renderImage,
+		imageAttributes: passedImageAttributes,
 		attributes,
 	} = props;
-	const alt = props.alt || imageAttributes?.alt;
+	const alt = props.alt || passedImageAttributes?.alt;
 	const radius = squared
 		? responsivePropDependency(size, (size) => {
 				if (size >= 24) return "large";
@@ -36,20 +37,28 @@ const Avatar = (props: T.Props) => {
 	);
 
 	const renderContent = () => {
-		if (src)
-			return (
-				<img
-					{...imageAttributes}
-					role={!alt ? "presentation" : undefined}
-					src={src}
-					alt={alt}
-					className={s.img}
-				/>
-			);
-		if (icon)
+		if (src) {
+			/**
+			 * Not all img attributes might be supported by custom Image components
+			 * Here is an example from Next: https://nextjs.org/docs/pages/api-reference/components/image#required-props
+			 */
+			const imageAttributes = {
+				...passedImageAttributes,
+				role: !alt ? "presentation" : undefined,
+				src,
+				alt,
+				className: s.img,
+			};
+
+			// eslint-disable-next-line jsx-a11y/alt-text
+			return renderImage ? renderImage(imageAttributes) : <img {...imageAttributes} />;
+		}
+
+		if (icon) {
 			return (
 				<Icon svg={icon} size={responsivePropDependency(size, (size) => Math.ceil(size * 0.4))} />
 			);
+		}
 		return initials;
 	};
 

@@ -1,3 +1,5 @@
+import { StoryObj } from "@storybook/react";
+import { expect, fn, Mock, waitFor } from "@storybook/test";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Icon from "components/Icon";
@@ -17,15 +19,27 @@ export default {
 const imgUrl =
 	"https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80";
 
-export const base = {
-	name: "base",
+export const src: StoryObj = {
+	name: "src, alt",
 	render: () => (
 		<Example>
-			<Example.Item title="base">
+			<Example.Item title="src, alt">
 				<Image src={imgUrl} alt="Image alt" />
+			</Example.Item>
+
+			<Example.Item title="src">
+				<Image src={imgUrl} />
 			</Example.Item>
 		</Example>
 	),
+	play: ({ canvas }) => {
+		const presentation = canvas.getByRole("presentation");
+		const img = canvas.getByRole("img");
+
+		expect(presentation).toBeInTheDocument();
+		expect(img).toBeInTheDocument();
+		expect(img).toHaveAccessibleName("Image alt");
+	},
 };
 
 export const size = {
@@ -82,22 +96,42 @@ export const displayMode = {
 	),
 };
 
-export const ratio = {
-	name: "composition, aspectRatio",
-	render: () => (
-		<Example>
-			<Example.Item title="ratio: 16/9">
-				<View aspectRatio={16 / 9}>
-					<Image src={imgUrl} />
-				</View>
-			</Example.Item>
-			<Example.Item title="ratio: 16/9, displayMode: contain">
-				<View aspectRatio={16 / 9}>
-					<Image src={imgUrl} displayMode="contain" />
-				</View>
-			</Example.Item>
-		</Example>
-	),
+export const onLoad: StoryObj<{ handleLoad: ReturnType<typeof fn> }> = {
+	name: "onLoad",
+	args: {
+		handleLoad: fn(),
+	},
+	render: (args) => <Image src={imgUrl} alt="photo" onLoad={args.handleLoad} />,
+	play: async ({ canvas, args }) => {
+		const { handleLoad } = args;
+		const img = canvas.getByRole("img");
+
+		await waitFor(() => {
+			expect(handleLoad).toHaveBeenCalledTimes(1);
+			expect(handleLoad).toHaveBeenCalledWith(
+				expect.objectContaining({ target: img, type: "load" })
+			);
+		});
+	},
+};
+
+export const onError: StoryObj<{ handleError: Mock }> = {
+	name: "onError",
+	args: {
+		handleError: fn(),
+	},
+	render: (args) => <Image src="/invalid.png" alt="photo" onError={args.handleError} />,
+	play: async ({ canvas, args }) => {
+		const { handleError } = args;
+		const img = canvas.getByRole("img");
+
+		await waitFor(() => {
+			expect(handleError).toHaveBeenCalledTimes(1);
+			expect(handleError).toHaveBeenCalledWith(
+				expect.objectContaining({ target: img, type: "error" })
+			);
+		});
+	},
 };
 
 export const fallback = {
@@ -131,6 +165,79 @@ export const fallback = {
 					<View aspectRatio={16 / 9}>
 						<Image fallback={<Icon svg={IconZap} size={10} />} />
 					</View>
+				</View>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const renderImage: StoryObj = {
+	name: "renderImage",
+	render: () => (
+		<Example>
+			<Example.Item title="renderImage">
+				<Image
+					src={imgUrl}
+					alt="Amsterdam canal"
+					renderImage={(attributes) => <img {...attributes} id="test-image" />}
+				/>
+			</Example.Item>
+			<Example.Item title="renderImage, fallback">
+				<Image
+					src="error"
+					fallback={imgUrl}
+					alt="Amsterdam canal 2"
+					renderImage={(attributes) => <img {...attributes} id="test-image-fallback" />}
+				/>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const images = canvas.getAllByRole("img");
+
+		expect(images[0]).toHaveAccessibleName("Amsterdam canal");
+		expect(images[0]).toHaveAttribute("id", "test-image");
+
+		expect(images[1]).toHaveAccessibleName("Amsterdam canal 2");
+		expect(images[1]).toHaveAttribute("id", "test-image-fallback");
+	},
+};
+
+export const imageAttributes: StoryObj = {
+	name: "className, attributes,imageAttributes",
+	render: () => (
+		<div data-testid="root">
+			<Image
+				src={imgUrl}
+				alt="photo"
+				className="test-classname"
+				attributes={{ id: "test-id" }}
+				imageAttributes={{ "data-testid": "test-img-id" }}
+			/>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const img = canvas.getByRole("img");
+		const root = canvas.getByTestId("root").firstChild;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+		expect(img).toHaveAttribute("data-testid", "test-img-id");
+	},
+};
+
+export const ratio = {
+	name: "test: aspectRatio",
+	render: () => (
+		<Example>
+			<Example.Item title="ratio: 16/9">
+				<View aspectRatio={16 / 9}>
+					<Image src={imgUrl} />
+				</View>
+			</Example.Item>
+			<Example.Item title="ratio: 16/9, displayMode: contain">
+				<View aspectRatio={16 / 9}>
+					<Image src={imgUrl} displayMode="contain" />
 				</View>
 			</Example.Item>
 		</Example>

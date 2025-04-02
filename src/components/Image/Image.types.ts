@@ -7,12 +7,13 @@ export type Props = {
 	alt?: string;
 	width?: G.Responsive<string | number>;
 	height?: G.Responsive<string | number>;
+	borderRadius?: Extract<TStyles.Radius, "small" | "medium" | "large">;
+	displayMode?: "cover" | "contain";
 	onLoad?: (e: React.SyntheticEvent) => void;
 	onError?: (e: React.SyntheticEvent) => void;
 	fallback?: string | React.ReactNode | boolean;
-	displayMode?: "cover" | "contain";
-	borderRadius?: Extract<TStyles.Radius, "small" | "medium" | "large">;
+	renderImage?: (attributes: G.Attributes<"img">) => React.ReactNode;
+	imageAttributes?: G.Attributes<"img">;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div"> & G.Attributes<"img">;
-	imageAttributes?: G.Attributes<"img">;
 };
