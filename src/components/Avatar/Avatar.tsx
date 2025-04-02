@@ -45,8 +45,8 @@ const Avatar = (props: T.Props) => {
 			const imageAttributes = {
 				...passedImageAttributes,
 				role: !alt ? "presentation" : undefined,
-				src,
-				alt,
+				src: src ?? "",
+				alt: alt ?? "",
 				className: s.img,
 			};
 

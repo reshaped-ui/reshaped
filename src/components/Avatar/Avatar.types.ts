@@ -5,7 +5,9 @@ export type Props = {
 	src?: string;
 	alt?: string;
 	imageAttributes?: G.Attributes<"img">;
-	renderImage?: (attributes: G.Attributes<"img">) => React.ReactNode;
+	renderImage?: (
+		attributes: Omit<G.Attributes<"img">, "src" | "alt"> & { src: string; alt: string }
+	) => React.ReactNode;
 	initials?: string;
 	icon?: IconProps["svg"];
 	squared?: boolean;

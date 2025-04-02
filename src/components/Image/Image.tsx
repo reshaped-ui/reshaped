@@ -63,8 +63,8 @@ const Image = (props: T.Props) => {
 		if (typeof fallback === "string") {
 			const imageAttributes = {
 				...attributes,
-				src: fallback,
-				alt,
+				src: fallback ?? "",
+				alt: alt ?? "",
 				role: alt ? undefined : "presentation",
 				className: fallbackClassNames,
 				style,
@@ -84,8 +84,8 @@ const Image = (props: T.Props) => {
 	const imageAttributes = {
 		...attributes,
 		...passedImageAttributes,
-		src,
-		alt,
+		src: src ?? "",
+		alt: alt ?? "",
 		role: alt ? undefined : "presentation",
 		onLoad: handleLoad,
 		onError: handleError,
