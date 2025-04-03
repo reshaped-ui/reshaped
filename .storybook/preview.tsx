@@ -107,7 +107,7 @@ const reshapedDecorator = (Story: React.ComponentType, { parameters }) =>
 	) : (
 		<React.StrictMode>
 			<Reshaped
-				defaultTheme="reshaped"
+				defaultTheme="slate"
 				defaultColorMode="dark"
 				toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
 			>

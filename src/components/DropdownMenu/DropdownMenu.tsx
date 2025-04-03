@@ -20,7 +20,7 @@ const DropdownMenu = (props: T.Props) => {
 		children,
 		position = "bottom-start",
 		triggerType = "click",
-		trapFocusMode = "action-bar",
+		trapFocusMode = "action-menu",
 		...popoverProps
 	} = props;
 
