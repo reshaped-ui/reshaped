@@ -80,8 +80,10 @@ export const active: StoryObj<{
 
 		await userEvent.click(input);
 
-		expect(args.handleOpen).toHaveBeenCalledTimes(1);
-		expect(args.handleOpen).toHaveBeenLastCalledWith();
+		await waitFor(() => {
+			expect(args.handleOpen).toHaveBeenCalledTimes(1);
+			expect(args.handleOpen).toHaveBeenLastCalledWith();
+		});
 	},
 };
 
