@@ -10,6 +10,7 @@ import * as keys from "constants/keys";
 import useHotkeys from "hooks/useHotkeys";
 import useHandlerRef from "hooks/useHandlerRef";
 import * as T from "./Autocomplete.types";
+import s from "./Autocomplete.module.css";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
@@ -42,6 +43,15 @@ const Autocomplete = (props: T.Props) => {
 	const onCloseRef = useHandlerRef(onClose);
 	const isDropdownActive = hasChildren && (active ?? internalActive);
 
+	const lockDropdown = () => {
+		// Prevent dropdown from re-opening when clicked on item with mouse
+		// and focus moves to the item and back to the input
+		lockedRef.current = true;
+		setTimeout(() => {
+			lockedRef.current = false;
+		}, 100);
+	};
+
 	const handleOpen = React.useCallback(() => {
 		if (lockedRef.current) return;
 		setInternalActive(true);
@@ -56,13 +66,7 @@ const Autocomplete = (props: T.Props) => {
 	const handleItemClick: T.Context["onItemClick"] = (args) => {
 		onChange?.({ value: args.value, name });
 		onItemSelect?.(args);
-
-		// Prevent dropdown from re-opening when clicked on item with mouse
-		// and focus moves to the item and back to the input
-		lockedRef.current = true;
-		setTimeout(() => {
-			lockedRef.current = false;
-		}, 100);
+		lockDropdown();
 	};
 
 	const handleChange: TextFieldProps["onChange"] = (args) => {
@@ -73,6 +77,16 @@ const Autocomplete = (props: T.Props) => {
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		onInput?.({ value: e.currentTarget.value, name, event: e });
 		textFieldProps.inputAttributes?.onInput?.(e);
+	};
+
+	/**
+	 * Make sure focus stays on the input even after user clicks on the content
+	 * but outside the items
+	 */
+	const handleContentClick = () => {
+		// Prevent the content from being selected
+		lockDropdown();
+		inputRef.current?.focus();
 	};
 
 	useHotkeys(
@@ -136,6 +150,7 @@ const Autocomplete = (props: T.Props) => {
 								onFocus: (e) => {
 									attributes.onFocus?.();
 									textFieldProps.onFocus?.(e);
+									// Only select the value when user clicks on the input
 									if (!lockedRef.current) inputRef.current?.select();
 								},
 								onInput: handleInput,
@@ -146,7 +161,9 @@ const Autocomplete = (props: T.Props) => {
 						/>
 					)}
 				</DropdownMenu.Trigger>
-				<DropdownMenu.Content>{children}</DropdownMenu.Content>
+				<DropdownMenu.Content attributes={{ onClick: handleContentClick }}>
+					{children}
+				</DropdownMenu.Content>
 			</DropdownMenu>
 		</AutocompleteContext.Provider>
 	);
@@ -164,7 +181,11 @@ const AutocompleteItem = (props: T.ItemProps) => {
 	return (
 		<DropdownMenu.Item
 			{...menuItemProps}
-			attributes={{ ...menuItemProps.attributes, role: "option" }}
+			className={[menuItemProps.disabled && s["item--disabled"], menuItemProps.className]}
+			attributes={{
+				...menuItemProps.attributes,
+				role: "option",
+			}}
 			onClick={handleClick}
 		/>
 	);

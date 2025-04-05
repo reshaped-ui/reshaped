@@ -1,17 +1,13 @@
 import React from "react";
 import { StoryObj } from "@storybook/react";
+import { fn, expect, Mock, within, waitFor, userEvent, fireEvent } from "@storybook/test";
 import { Example } from "utilities/storybook";
 import Autocomplete from "components/Autocomplete";
 import View from "components/View";
 import Badge from "components/Badge";
 import useToggle from "hooks/useToggle";
-import Modal from "components/Modal";
-import TextField from "components/TextField";
-import Text from "components/Text";
-import Button from "components/Button";
-import PlusIcon from "icons/Plus";
-import Dismissible from "components/Dismissible";
 import FormControl from "components/FormControl";
+import { sleep } from "utilities/helpers";
 
 export default {
 	title: "Components/Autocomplete",
@@ -23,23 +19,37 @@ export default {
 	},
 };
 
-export const base: StoryObj = {
-	name: "base",
-	render: () => {
-		const [value, setValue] = React.useState("");
+export const active: StoryObj<{
+	handleOpen: Mock;
+	handleClose: Mock;
+}> = {
+	name: "active, onOpen, onClose",
+	args: {
+		handleClose: fn(),
+		handleOpen: fn(),
+	},
+	render: (args) => {
+		const toggle = useToggle(true);
 
 		return (
 			<Example>
-				<Example.Item title="Base">
+				<Example.Item title="active, onOpen, onClose">
 					<FormControl>
-						<FormControl.Label>Food</FormControl.Label>
+						<FormControl.Label>Label</FormControl.Label>
 						<Autocomplete
 							name="fruit"
 							placeholder="Pick your food"
-							value={value}
-							onChange={(args) => setValue(args.value)}
+							active={toggle.active}
+							onOpen={() => {
+								args.handleOpen();
+								toggle.activate();
+							}}
+							onClose={() => {
+								args.handleClose();
+								toggle.deactivate();
+							}}
 						>
-							{["Pizza", "Pie", "Ice-cream"].map((v) => {
+							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
 								return (
 									<Autocomplete.Item key={v} value={v}>
 										{v}
@@ -52,31 +62,242 @@ export const base: StoryObj = {
 			</Example>
 		);
 	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		const input = canvas.getByRole("combobox");
+		const list = canvas.getByRole("listbox");
+
+		expect(list).toBeInTheDocument();
+		expect(args.handleOpen).not.toHaveBeenCalled();
+
+		await userEvent.click(document.body);
+
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenLastCalledWith();
+		});
+
+		await userEvent.click(input);
+
+		expect(args.handleOpen).toHaveBeenCalledTimes(1);
+		expect(args.handleOpen).toHaveBeenLastCalledWith();
+	},
+};
+
+export const base: StoryObj<{
+	handleInput: Mock;
+	handleItemSelect: Mock;
+	handleBackspace: Mock;
+}> = {
+	name: "onInput, onItemSelect, onBackspace",
+	args: {
+		handleInput: fn(),
+		handleBackspace: fn(),
+		handleItemSelect: fn(),
+	},
+	render: (args) => {
+		const [value, setValue] = React.useState("");
+
+		return (
+			<Example>
+				<Example.Item title="Base">
+					<FormControl>
+						<FormControl.Label>Food</FormControl.Label>
+						<Autocomplete
+							name="fruit"
+							placeholder="Pick your food"
+							value={value}
+							onChange={(args) => setValue(args.value)}
+							onBackspace={args.handleBackspace}
+							onItemSelect={args.handleItemSelect}
+						>
+							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
+								return (
+									<Autocomplete.Item key={v} value={v}>
+										{v}
+									</Autocomplete.Item>
+								);
+							})}
+						</Autocomplete>
+					</FormControl>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		const input = canvas.getByRole("combobox");
+
+		// Reset the focus
+		document.body.focus();
+
+		// Test keyboard selection after focusing the input
+		input.focus();
+
+		let options: HTMLElement[] = [];
+
+		await waitFor(() => {
+			options = canvas.getAllByRole("option");
+		});
+
+		expect(options).toHaveLength(3);
+
+		await waitFor(() => {
+			expect(options[0]).toHaveAttribute("data-rs-focus");
+		});
+
+		expect(options[1]).not.toHaveAttribute("data-rs-focus");
+
+		await userEvent.keyboard("{ArrowDown/}");
+		await userEvent.keyboard("{Enter/}");
+
+		expect(input).toHaveValue("Pie");
+		expect(args.handleItemSelect).toHaveBeenCalledTimes(1);
+		expect(args.handleItemSelect).toHaveBeenCalledWith({
+			value: "Pie",
+			data: undefined,
+		});
+
+		// Give browser time to focus on the input
+		await sleep(100);
+
+		// Test click selection after opening with down arrow
+		await userEvent.keyboard("{ArrowDown/}");
+
+		await waitFor(() => {
+			options = canvas.getAllByRole("option");
+		});
+
+		await userEvent.click(options[0]);
+
+		expect(input).toHaveValue("Pizza");
+		expect(args.handleItemSelect).toHaveBeenCalledTimes(2);
+		expect(args.handleItemSelect).toHaveBeenCalledWith({
+			value: "Pizza",
+		});
+
+		input.focus();
+
+		await userEvent.keyboard("{Backspace/}");
+
+		await waitFor(() => {
+			expect(args.handleBackspace).toHaveBeenCalledTimes(1);
+			expect(args.handleBackspace).toHaveBeenCalledWith();
+		});
+	},
+};
+
+export const itemData: StoryObj<{
+	handleItemSelect: Mock;
+}> = {
+	name: "item data",
+	args: {
+		handleItemSelect: fn(),
+	},
+	render: (args) => {
+		return (
+			<Example>
+				<Example.Item title="item data">
+					<FormControl>
+						<FormControl.Label>Label</FormControl.Label>
+						<Autocomplete
+							name="fruit"
+							placeholder="Pick your food"
+							onItemSelect={args.handleItemSelect}
+							active
+						>
+							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
+								return (
+									<Autocomplete.Item key={v} value={v} data={i === 1 ? { foo: true } : undefined}>
+										{v}
+									</Autocomplete.Item>
+								);
+							})}
+						</Autocomplete>
+					</FormControl>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const options = canvas.getAllByRole("option");
+
+		await userEvent.click(options[0]);
+
+		expect(args.handleItemSelect).toHaveBeenLastCalledWith({ value: "Pizza" });
+
+		await userEvent.click(options[1]);
+
+		expect(args.handleItemSelect).toHaveBeenLastCalledWith({ value: "Pie", data: { foo: true } });
+	},
+};
+
+export const itemDisabled: StoryObj = {
+	name: "item disabled",
+	render: () => {
+		return (
+			<Example>
+				<Example.Item title="item disabled">
+					<FormControl>
+						<FormControl.Label>Label</FormControl.Label>
+						<Autocomplete name="fruit" placeholder="Pick your food" active>
+							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
+								return (
+									<Autocomplete.Item key={v} value={v} disabled={i === 1}>
+										{v}
+									</Autocomplete.Item>
+								);
+							})}
+						</Autocomplete>
+					</FormControl>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const input = canvas.getByRole("combobox");
+		const options = canvas.getAllByRole("option");
+
+		await fireEvent.click(options[1]);
+
+		expect(options[1]).toBeDisabled();
+		// Check that focus stays on input when clicking on disabled elements
+		expect(document.activeElement).toBe(input);
+	},
 };
 
 export const multiselect = {
-	name: "multiselect",
+	name: "test: multiselect",
 	render: () => {
+		const options = [
+			"Pizza",
+			"Pie",
+			"Ice-cream",
+			"Fries",
+			"Salad",
+			"Option 4",
+			"Option 5",
+			"Option 6",
+		];
+
 		const inputRef = React.useRef<HTMLInputElement>(null);
-		const [active, setActive] = React.useState(false);
-		const [values, setValues] = React.useState<string[]>(["foo", "bar"]);
+		const [values, setValues] = React.useState<string[]>([
+			"Option 4",
+			"Option 5",
+			"Option 6",
+			"Pizza",
+			"Ice-cream",
+		]);
 		const [query, setQuery] = React.useState("");
-		const [customValueQuery, setCustomValueQuery] = React.useState("");
-		const customValueToggle = useToggle();
 
 		const handleDismiss = (dismissedValue: string) => {
 			const nextValues = values.filter((value) => value !== dismissedValue);
 			setValues(nextValues);
 			inputRef.current?.focus();
-		};
-
-		const handleAddCustomValue = () => {
-			if (customValueQuery.length) {
-				setValues((prev) => [...prev, customValueQuery]);
-			}
-
-			customValueToggle.deactivate();
-			setCustomValueQuery("");
 		};
 
 		const valuesNode = !!values.length && (
@@ -86,7 +307,6 @@ export const multiselect = {
 						dismissAriaLabel="Dismiss value"
 						onDismiss={() => handleDismiss(value)}
 						key={value}
-						size="small"
 					>
 						{value}
 					</Badge>
@@ -102,33 +322,15 @@ export const multiselect = {
 					value={query}
 					placeholder="Pick your food"
 					startSlot={valuesNode}
-					inputAttributes={{ ref: inputRef }}
-					onBackspace={() => {
-						if (!query.length) handleDismiss(values[values.length - 1]);
-					}}
-					onOpen={() => {
-						setActive(true);
-					}}
-					onClose={(args) => {
-						if (args.reason === "item-selection") return;
-						setActive(false);
-					}}
-					active={active}
 					multiline
+					inputAttributes={{ ref: inputRef }}
 					onChange={(args) => setQuery(args.value)}
 					onItemSelect={(args) => {
-						setCustomValueQuery(query);
 						setQuery("");
-
-						if (args.value === "_custom") {
-							customValueToggle.activate();
-							return;
-						}
-
 						setValues((prev) => [...prev, args.value]);
 					}}
 				>
-					{["Pizza", "Pie", "Ice-cream"].map((v) => {
+					{options.map((v) => {
 						if (!v.toLowerCase().includes(query.toLowerCase())) return;
 						if (values.includes(v)) return;
 
@@ -138,43 +340,7 @@ export const multiselect = {
 							</Autocomplete.Item>
 						);
 					})}
-					{!!query.length && (
-						<Autocomplete.Item value="_custom" icon={PlusIcon}>
-							Add a custom value
-						</Autocomplete.Item>
-					)}
 				</Autocomplete>
-				<Modal onClose={customValueToggle.deactivate} active={customValueToggle.active}>
-					<View gap={4}>
-						<Dismissible onClose={customValueToggle.deactivate} closeAriaLabel="Close modal">
-							<Modal.Title>
-								<Text variant="body-3" weight="medium">
-									Add a custom value
-								</Text>
-							</Modal.Title>
-						</Dismissible>
-						<View
-							direction="row"
-							gap={3}
-							as="form"
-							attributes={{
-								onSubmit: (e) => {
-									e.preventDefault();
-									handleAddCustomValue();
-								},
-							}}
-						>
-							<View.Item grow>
-								<TextField
-									name="custom"
-									onChange={(args) => setCustomValueQuery(args.value)}
-									value={customValueQuery}
-								/>
-							</View.Item>
-							<Button type="submit">Add</Button>
-						</View>
-					</View>
-				</Modal>
 			</FormControl>
 		);
 	},
