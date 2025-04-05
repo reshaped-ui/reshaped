@@ -91,7 +91,7 @@ const DropdownMenuItem = (props: T.ItemProps) => {
 		<MenuItem
 			{...props}
 			roundedCorners
-			className={s.item}
+			className={[s.item, props.className]}
 			attributes={{ role: "menuitem", ...props.attributes }}
 			onClick={handleClick}
 		/>

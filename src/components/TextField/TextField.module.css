@@ -70,6 +70,7 @@
 .slot,
 .icon,
 .affix {
+	max-width: 100%;
 	position: relative;
 	z-index: 5;
 	display: flex;
