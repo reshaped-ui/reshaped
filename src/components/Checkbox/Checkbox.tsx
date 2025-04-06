@@ -7,6 +7,7 @@ import HiddenInput from "components/_private/HiddenInput";
 import { useFormControl } from "components/FormControl";
 import { useCheckboxGroup } from "components/CheckboxGroup";
 import Icon from "components/Icon";
+import Text from "components/Text";
 import IconCheckmark from "icons/Checkmark";
 import type * as T from "./Checkbox.types";
 import s from "./Checkbox.module.css";
@@ -86,7 +87,18 @@ const Checkbox = (props: T.Props) => {
 				</div>
 			</span>
 
-			{children && <span className={s.text}>{children}</span>}
+			{children && (
+				<Text
+					as="span"
+					variant={responsivePropDependency(size, (size) => {
+						if (size === "large") return "body-2";
+						if (size === "small") return "caption-1";
+						return "body-3";
+					})}
+				>
+					{children}
+				</Text>
+			)}
 		</label>
 	);
 };

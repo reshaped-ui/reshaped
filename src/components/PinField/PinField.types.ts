@@ -1,6 +1,6 @@
 import type * as G from "types/global";
 
-export type Size = "medium" | "large" | "xlarge";
+export type Size = "small" | "medium" | "large" | "xlarge";
 
 type BaseProps = {
 	name: string;

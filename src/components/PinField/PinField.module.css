@@ -1,9 +1,6 @@
 .root {
 	display: inline-flex;
 	vertical-align: top;
-	overflow-y: clip;
-	margin: -1px 0;
-	padding: 1px 0;
 }
 
 .input {
@@ -23,6 +20,7 @@
 
 .item {
 	cursor: text;
+	box-sizing: border-box;
 }
 
 .item--focused {

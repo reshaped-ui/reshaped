@@ -48,27 +48,19 @@
 		}
 	}
 
-	.text {
-		font-size: var(--rs-checkbox-font-size);
-		line-height: var(--rs-checkbox-line-height);
-	}
-
 	@responsive .--size {
 		@value small {
 			--rs-checkbox-line-height: var(--rs-line-height-caption-1);
-			--rs-checkbox-font-size: var(--rs-font-size-caption-1);
 			--rs-checkbox-gap: var(--rs-unit-x1);
 		}
 
 		@value medium {
 			--rs-checkbox-line-height: var(--rs-line-height-body-3);
-			--rs-checkbox-font-size: var(--rs-font-size-body-3);
 			--rs-checkbox-gap: var(--rs-unit-x2);
 		}
 
 		@value large {
 			--rs-checkbox-line-height: var(--rs-line-height-body-2);
-			--rs-checkbox-font-size: var(--rs-font-size-body-2);
 			--rs-checkbox-gap: var(--rs-unit-x2);
 		}
 	}

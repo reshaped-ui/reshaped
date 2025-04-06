@@ -3,7 +3,7 @@ import type * as G from "types/global";
 import type { FormControlProps } from "components/FormControl";
 import type { IconProps } from "components/Icon";
 
-type Size = G.Responsive<"medium" | "large" | "xlarge">;
+type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
 type BaseProps = {
 	id?: string;

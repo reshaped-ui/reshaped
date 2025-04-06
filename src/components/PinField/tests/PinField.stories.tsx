@@ -64,6 +64,14 @@ export const variant = () => (
 
 export const size = () => (
 	<Example>
+		<Example.Item title="size: small">
+			<PinField name="pin" size="small" inputAttributes={{ "aria-label": "Pin" }} />
+		</Example.Item>
+
+		<Example.Item title="size: medium">
+			<PinField name="pin" size="medium" inputAttributes={{ "aria-label": "Pin" }} />
+		</Example.Item>
+
 		<Example.Item title="size: large">
 			<PinField name="pin" size="large" inputAttributes={{ "aria-label": "Pin" }} />
 		</Example.Item>
