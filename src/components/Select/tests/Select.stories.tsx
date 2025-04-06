@@ -77,82 +77,120 @@ export const variants = () => (
 
 export const size = () => (
 	<Example>
-		<Example.Item title="size: medium, slot">
-			<Select
-				size="medium"
-				name="animal"
-				startSlot={<Placeholder h={24} />}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
+		<Example.Item title="size: small">
+			<View direction="row" gap={4}>
+				<View.Item grow>
+					<Select
+						size="small"
+						name="animal"
+						icon={IconZap}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+				<View.Item grow>
+					<Select
+						size="small"
+						name="animal"
+						startSlot={<Placeholder h={16} />}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+			</View>
 		</Example.Item>
 
-		<Example.Item title="size: medium, icon">
-			<Select
-				size="medium"
-				name="animal"
-				icon={IconZap}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
+		<Example.Item title="size: medium">
+			<View direction="row" gap={4}>
+				<View.Item grow>
+					<Select
+						size="medium"
+						name="animal"
+						icon={IconZap}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+				<View.Item grow>
+					<Select
+						size="medium"
+						name="animal"
+						startSlot={<Placeholder h={24} />}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+			</View>
 		</Example.Item>
 
-		<Example.Item title="size: large, slot">
-			<Select
-				size="large"
-				name="animal"
-				startSlot={<Placeholder h={24} />}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
+		<Example.Item title="size: large">
+			<View direction="row" gap={4}>
+				<View.Item grow>
+					<Select
+						size="large"
+						name="animal"
+						icon={IconZap}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+				<View.Item grow>
+					<Select
+						size="large"
+						name="animal"
+						startSlot={<Placeholder h={24} />}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+			</View>
 		</Example.Item>
 
-		<Example.Item title="size: large, icon">
-			<Select
-				size="large"
-				name="animal"
-				icon={IconZap}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-
-		<Example.Item title="size: xlarge, slot">
-			<Select
-				size="xlarge"
-				name="animal"
-				startSlot={<Placeholder h={24} />}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-
-		<Example.Item title="size: xlarge, icon">
-			<Select
-				size="xlarge"
-				name="animal"
-				icon={IconZap}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
+		<Example.Item title="size: xlarge">
+			<View direction="row" gap={4}>
+				<View.Item grow>
+					<Select
+						size="xlarge"
+						name="animal"
+						icon={IconZap}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+				<View.Item grow>
+					<Select
+						size="xlarge"
+						name="animal"
+						startSlot={<Placeholder h={24} />}
+						options={[
+							{ label: "Dog", value: "dog" },
+							{ label: "Turtle", value: "turtle" },
+						]}
+						inputAttributes={{ "aria-label": "test select" }}
+					/>
+				</View.Item>
+			</View>
 		</Example.Item>
 
 		<Example.Item title={["responsive size", "[s] xlarge", "[m+] medium"]}>

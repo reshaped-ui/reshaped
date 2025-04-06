@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames, responsiveClassNames } from "utilities/helpers";
 import HiddenInput from "components/_private/HiddenInput";
 import { useRadioGroup } from "components/RadioGroup";
 import { useFormControl } from "components/FormControl";
@@ -9,8 +9,17 @@ import type * as T from "./Radio.types";
 import s from "./Radio.module.css";
 
 const Radio = (props: T.Props) => {
-	const { children, value, onChange, onFocus, onBlur, className, attributes, inputAttributes } =
-		props;
+	const {
+		children,
+		value,
+		onChange,
+		onFocus,
+		onBlur,
+		size = "medium",
+		className,
+		attributes,
+		inputAttributes,
+	} = props;
 	const formControl = useFormControl();
 	const radioGroup = useRadioGroup();
 	const hasError = formControl?.hasError || props.hasError || radioGroup?.hasError;
@@ -22,7 +31,8 @@ const Radio = (props: T.Props) => {
 		s.root,
 		className,
 		hasError && s["--error"],
-		disabled && s["--disabled"]
+		disabled && s["--disabled"],
+		size && responsiveClassNames(s, "--size", size)
 	);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import HiddenInput from "components/_private/HiddenInput";
 import { useFormControl } from "components/FormControl";
@@ -19,6 +19,7 @@ const Checkbox = (props: T.Props) => {
 		onFocus,
 		onBlur,
 		indeterminate,
+		size = "medium",
 		className,
 		attributes,
 		inputAttributes,
@@ -35,8 +36,9 @@ const Checkbox = (props: T.Props) => {
 	const rootClassName = classNames(
 		s.root,
 		className,
-		hasError && s["--error"],
-		disabled && s["--disabled"]
+		size && hasError && s["--error"],
+		disabled && s["--disabled"],
+		size && responsiveClassNames(s, "--size", size)
 	);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +74,15 @@ const Checkbox = (props: T.Props) => {
 					}}
 				/>
 				<div className={s.decorator}>
-					<Icon svg={IconCheckmark} className={s.icon} />
+					<Icon
+						svg={IconCheckmark}
+						className={s.icon}
+						size={responsivePropDependency(size, (size) => {
+							if (size === "large") return 5;
+							if (size === "small") return 3;
+							return 4;
+						})}
+					/>
 				</div>
 			</span>
 

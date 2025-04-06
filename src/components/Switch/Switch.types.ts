@@ -7,7 +7,7 @@ type BaseProps = {
 	name: string;
 	disabled?: boolean;
 	reversed?: boolean;
-	size?: "medium" | "small" | "large";
+	size?: G.Responsive<"medium" | "small" | "large">;
 	onChange?: G.ChangeHandler<boolean>;
 	onFocus?: (e: React.FocusEvent) => void;
 	onBlur?: (e: React.FocusEvent) => void;

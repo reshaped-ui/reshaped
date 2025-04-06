@@ -4,7 +4,7 @@ import type { FormControlProps } from "components/FormControl";
 import type { ActionableProps } from "components/Actionable";
 import type { IconProps } from "components/Icon";
 
-type Size = G.Responsive<"medium" | "large" | "xlarge">;
+type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
 type Option = {
 	label: string;

@@ -1,5 +1,6 @@
 import { Example } from "utilities/storybook";
 import Switch from "components/Switch";
+import View from "components/View";
 
 export default {
 	title: "Components/Switch",
@@ -36,30 +37,58 @@ export const size = () => (
 		<Example.Item title="size: large">
 			<Switch name="active" size="large" inputAttributes={{ "aria-label": "test switch" }} />
 		</Example.Item>
+		<Example.Item title="size: responsive, s: small, m: large">
+			<Switch
+				name="active"
+				size={{ s: "small", m: "large" }}
+				inputAttributes={{ "aria-label": "test switch" }}
+			/>
+		</Example.Item>
 	</Example>
 );
 
 export const label = () => (
 	<Example>
 		<Example.Item title="size: medium">
-			<Switch name="active" inputAttributes={{ "aria-label": "test switch" }}>
-				Wi-fi
-			</Switch>
+			<View direction="row" gap={8}>
+				<Switch name="active" inputAttributes={{ "aria-label": "test switch" }}>
+					Wi-fi
+				</Switch>
+				<Switch reversed name="active" inputAttributes={{ "aria-label": "test switch" }}>
+					Wi-fi
+				</Switch>
+			</View>
 		</Example.Item>
 		<Example.Item title="size: small">
-			<Switch name="active" size="small" inputAttributes={{ "aria-label": "test switch" }}>
-				Wi-fi
-			</Switch>
+			<View direction="row" gap={8}>
+				<Switch name="active" size="small" inputAttributes={{ "aria-label": "test switch" }}>
+					Wi-fi
+				</Switch>
+				<Switch
+					reversed
+					name="active"
+					size="small"
+					inputAttributes={{ "aria-label": "test switch" }}
+				>
+					Wi-fi
+				</Switch>
+			</View>
 		</Example.Item>
-		<Example.Item title="size: medium, reversed">
-			<Switch reversed name="active" inputAttributes={{ "aria-label": "test switch" }}>
-				Wi-fi
-			</Switch>
-		</Example.Item>
-		<Example.Item title="size: small">
-			<Switch reversed name="active" size="small" inputAttributes={{ "aria-label": "test switch" }}>
-				Wi-fi
-			</Switch>
+
+		<Example.Item title="size: large">
+			<View direction="row" gap={8}>
+				<Switch name="active" size="large" inputAttributes={{ "aria-label": "test switch" }}>
+					Wi-fi
+				</Switch>
+				<Switch
+					reversed
+					name="active"
+					size="large"
+					inputAttributes={{ "aria-label": "test switch" }}
+				>
+					Wi-fi
+				</Switch>
+			</View>
 		</Example.Item>
 	</Example>
 );

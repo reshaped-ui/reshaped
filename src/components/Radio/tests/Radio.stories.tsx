@@ -1,5 +1,6 @@
 import { Example } from "utilities/storybook";
 import Radio from "components/Radio";
+import View from "components/View";
 
 export default {
 	title: "Components/Radio",
@@ -29,6 +30,39 @@ export const selection = () => (
 			<Radio name="controlled" value="dog" checked>
 				Radio
 			</Radio>
+		</Example.Item>
+	</Example>
+);
+
+export const size = () => (
+	<Example>
+		<Example.Item title="size: small">
+			<View gap={4} direction="row">
+				<Radio name="animal" value="dog" size="small" defaultChecked>
+					Radio
+				</Radio>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: medium">
+			<View gap={4} direction="row">
+				<Radio name="animal" value="dog" size="medium">
+					Radio
+				</Radio>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: large">
+			<View gap={4} direction="row">
+				<Radio name="animal" value="dog" size="large">
+					Radio
+				</Radio>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: responsive, s: small, m: large">
+			<View gap={4} direction="row">
+				<Radio name="animal" value="dog" size={{ s: "small", m: "large" }}>
+					Radio
+				</Radio>
+			</View>
 		</Example.Item>
 	</Example>
 );
