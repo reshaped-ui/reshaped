@@ -1,39 +1,66 @@
 import View from "components/View";
 import Image from "components/Image";
-import FormControl from "components/FormControl";
-import Autocomplete from "components/Autocomplete";
-import { useState } from "react";
+import Checkbox from "components/Checkbox";
 
 export default {
 	title: "Sandbox",
 };
 
-export const preview = () => {
-	const [value, setValue] = useState("");
-
+const Preview = (props: { children: React.ReactNode }) => {
 	return (
-		<View padding={20}>
+		<View padding={20} gap={6}>
 			<View position="absolute" insetTop={0} insetStart={0}>
 				<Image src="./logo.svg" />
 			</View>
 
-			<FormControl>
-				<FormControl.Label>Food</FormControl.Label>
-				<Autocomplete
-					name="fruit"
-					placeholder="Pick your food"
-					value={value}
-					onChange={(args) => setValue(args.value)}
-				>
-					{["Pizza", "Pie", "Ice-cream"].map((v) => {
-						return (
-							<Autocomplete.Item key={v} value={v} disabled={v === "Pie"}>
-								{v}
-							</Autocomplete.Item>
-						);
-					})}
-				</Autocomplete>
-			</FormControl>
+			{props.children}
 		</View>
+	);
+};
+
+export const preview = () => {
+	return (
+		<Preview>
+			<View gap={4} direction="row">
+				<View.Item grow>
+					<Checkbox name="animal" value="dog" size="small">
+						Checkbox
+					</Checkbox>
+				</View.Item>
+				<View.Item grow>
+					<Checkbox name="animal" value="dog" size="small" indeterminate>
+						Checkbox
+					</Checkbox>
+				</View.Item>
+			</View>
+
+			<View gap={4} direction="row">
+				<View.Item grow>
+					<Checkbox name="animal" value="dog" size="medium">
+						Checkbox
+					</Checkbox>
+				</View.Item>
+				<View.Item grow>
+					<Checkbox name="animal" value="dog" size="medium" indeterminate>
+						Checkbox
+					</Checkbox>
+				</View.Item>
+			</View>
+
+			<View.Item gapBefore={8}>
+				<View gap={4} direction="row">
+					<View.Item grow>
+						<Checkbox name="animal" value="dog" size="large">
+							Checkbox
+						</Checkbox>
+					</View.Item>
+					<View.Item grow>
+						<Checkbox name="animal" value="dog" size="large" indeterminate>
+							Checkbox
+						</Checkbox>
+					</View.Item>
+				</View>
+			</View.Item>
+		</Preview>
 	);
 };

@@ -19,6 +19,29 @@ export default {
 	},
 };
 
+export const foo = () => {
+	const [value, setValue] = React.useState("");
+	const options = ["Pizza", "Pie", "Ice-cream"];
+
+	return (
+		<FormControl>
+			<FormControl.Label>Favorite food</FormControl.Label>
+			<Autocomplete
+				name="fruit"
+				placeholder="Pick your option"
+				value={value}
+				onChange={(args) => setValue(args.value)}
+			>
+				{options.map((option) => (
+					<Autocomplete.Item key={option} value={option}>
+						{option}
+					</Autocomplete.Item>
+				))}
+			</Autocomplete>
+		</FormControl>
+	);
+};
+
 export const active: StoryObj<{
 	handleOpen: Mock;
 	handleClose: Mock;

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 import { useFormControl } from "components/FormControl";
 import Text from "components/Text";
 import useElementId from "hooks/useElementId";
@@ -13,7 +13,7 @@ const Switch = (props: T.Props) => {
 		children,
 		name,
 		checked,
-		size,
+		size = "medium",
 		reversed,
 		defaultChecked,
 		onChange,
@@ -24,8 +24,8 @@ const Switch = (props: T.Props) => {
 	} = props;
 	const rootClassNames = classNames(
 		s.root,
-		size && s[`root--size-${size}`],
-		reversed && s["root--reversed"],
+		size && responsiveClassNames(s, "--size", size),
+		reversed && s["--reversed"],
 		className
 	);
 	const formControl = useFormControl();
@@ -64,7 +64,11 @@ const Switch = (props: T.Props) => {
 			</span>
 			{children && (
 				<Text
-					variant={size === "small" ? "caption-1" : "body-3"}
+					variant={responsivePropDependency(size, (value) => {
+						if (value === "large") return "body-2";
+						if (value === "medium") return "body-3";
+						return "caption-1";
+					})}
 					weight="medium"
 					color={disabled ? "disabled" : undefined}
 				>

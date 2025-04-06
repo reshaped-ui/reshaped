@@ -8,6 +8,7 @@ type BaseProps = {
 	hasError?: boolean;
 	value?: string;
 	indeterminate?: boolean;
+	size?: G.Responsive<"small" | "medium" | "large">;
 	onChange?: G.ChangeHandler<boolean>;
 	onFocus?: (e: React.FocusEvent) => void;
 	onBlur?: (e: React.FocusEvent) => void;

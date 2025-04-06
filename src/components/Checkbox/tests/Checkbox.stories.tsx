@@ -1,5 +1,6 @@
 import { Example } from "utilities/storybook";
 import Checkbox from "components/Checkbox";
+import View from "components/View";
 
 export default {
 	title: "Components/Checkbox",
@@ -35,6 +36,48 @@ export const selection = () => (
 			<Checkbox name="animal" value="dog" indeterminate>
 				Checkbox
 			</Checkbox>
+		</Example.Item>
+	</Example>
+);
+
+export const size = () => (
+	<Example>
+		<Example.Item title="size: small">
+			<View gap={4} direction="row">
+				<Checkbox name="animal" value="dog" size="small" defaultChecked>
+					Checkbox
+				</Checkbox>
+				<Checkbox name="animal" value="dog" size="small" indeterminate>
+					Checkbox
+				</Checkbox>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: medium">
+			<View gap={4} direction="row">
+				<Checkbox name="animal" value="dog" size="medium" defaultChecked>
+					Checkbox
+				</Checkbox>
+				<Checkbox name="animal" value="dog" size="medium" indeterminate>
+					Checkbox
+				</Checkbox>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: large">
+			<View gap={4} direction="row">
+				<Checkbox name="animal" value="dog" size="large" defaultChecked>
+					Checkbox
+				</Checkbox>
+				<Checkbox name="animal" value="dog" size="large" indeterminate>
+					Checkbox
+				</Checkbox>
+			</View>
+		</Example.Item>
+		<Example.Item title="size: responsive, s: small, m: large">
+			<View gap={4} direction="row">
+				<Checkbox name="animal" value="dog" size={{ s: "small", m: "large" }} defaultChecked>
+					Checkbox
+				</Checkbox>
+			</View>
 		</Example.Item>
 	</Example>
 );
