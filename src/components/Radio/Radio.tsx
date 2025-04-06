@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveClassNames } from "utilities/helpers";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 import HiddenInput from "components/_private/HiddenInput";
+import Text from "components/Text";
 import { useRadioGroup } from "components/RadioGroup";
 import { useFormControl } from "components/FormControl";
 import type * as T from "./Radio.types";
@@ -64,7 +65,18 @@ const Radio = (props: T.Props) => {
 				<div className={s.decorator} />
 			</span>
 
-			{children && <span className={s.text}>{children}</span>}
+			{children && (
+				<Text
+					as="span"
+					variant={responsivePropDependency(size, (size) => {
+						if (size === "large") return "body-2";
+						if (size === "small") return "caption-1";
+						return "body-3";
+					})}
+				>
+					{children}
+				</Text>
+			)}
 		</label>
 	);
 };

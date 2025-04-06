@@ -19,3 +19,5 @@
 - Checkbox: size property - s,m,l
 - Radio: size property - s,m,l
 - Switch: align size styles and support responsive
+- TextField: small size
+- PinField: small size

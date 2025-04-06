@@ -50,19 +50,16 @@
 	@responsive .--size {
 		@value small {
 			--rs-radio-line-height: var(--rs-line-height-caption-1);
-			--rs-radio-font-size: var(--rs-font-size-caption-1);
 			--rs-radio-gap: var(--rs-unit-x1);
 		}
 
 		@value medium {
 			--rs-radio-line-height: var(--rs-line-height-body-3);
-			--rs-radio-font-size: var(--rs-font-size-body-3);
 			--rs-radio-gap: var(--rs-unit-x2);
 		}
 
 		@value large {
 			--rs-radio-line-height: var(--rs-line-height-body-2);
-			--rs-radio-font-size: var(--rs-font-size-body-2);
 			--rs-radio-gap: var(--rs-unit-x2);
 		}
 	}

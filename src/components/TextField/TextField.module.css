@@ -8,7 +8,8 @@
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
 	border: 1px solid var(--rs-color-border-neutral);
-	padding: calc(var(--rs-unit-x1) - 1px) calc(var(--rs-text-field-gap) - 1px);
+	border-radius: var(--rs-text-field-radius);
+	padding: 0 calc(var(--rs-text-field-gap) - 1px);
 	gap: var(--rs-text-field-gap);
 	row-gap: var(--rs-unit-x1);
 
@@ -51,8 +52,9 @@
 	box-sizing: border-box;
 	width: 100%;
 	color: var(--rs-color-foreground-neutral);
-	margin: calc(var(--rs-unit-x1) * -1) calc(var(--rs-text-field-gap) * -1);
+	margin: 0 calc(var(--rs-text-field-gap) * -1);
 	padding-inline: var(--rs-text-field-gap);
+	padding-block: calc(var(--rs-text-field-p-v) - 1px);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 }
@@ -60,6 +62,13 @@
 .input:-webkit-autofill {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: var(--rs-color-foreground-neutral);
+}
+
+.input,
+.affix {
+	font-size: var(--rs-text-field-font-size);
+	line-height: var(--rs-text-field-line-height);
+	letter-spacing: var(--rs-text-field-letter-spacing);
 }
 
 .icon,
@@ -76,11 +85,13 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x1) * 2);
+	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x2) - 2px);
 }
 
 .slot--position-end:last-child {
-	margin-inline-end: calc(var(--rs-unit-x1) * -1);
+	/* margin-inline-end: calc((var(--rs-text-field-gap) - var(--rs-unit-x2) + 1px) * -1); */
+	margin-inline-end: calc(var(--rs-text-field-gap) * -1);
+	padding-inline-end: var(--rs-text-field-action-inset);
 }
 
 .affix {
@@ -123,58 +134,44 @@
 }
 
 @responsive .--size {
+	@value small {
+		--rs-text-field-gap: var(--rs-unit-x2);
+		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-p-v: var(--rs-unit-x1);
+		--rs-text-field-font-size: var(--rs-font-size-body-3);
+		--rs-text-field-line-height: var(--rs-line-height-body-3);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-text-field-action-inset: var(--rs-unit-x1);
+	}
+
 	@value medium {
 		--rs-text-field-gap: var(--rs-unit-x2);
+		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-p-v: var(--rs-unit-x2);
+		--rs-text-field-font-size: var(--rs-font-size-body-3);
 		--rs-text-field-line-height: var(--rs-line-height-body-3);
-
-		border-radius: var(--rs-radius-small);
-
-		& .input {
-			padding-block: var(--rs-unit-x2);
-		}
-
-		& .input,
-		& .affix {
-			font-size: var(--rs-font-size-body-3);
-			line-height: var(--rs-line-height-body-3);
-			letter-spacing: var(--rs-letter-spacing-body-3);
-		}
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-text-field-action-inset: var(--rs-unit-x1);
 	}
 
 	@value large {
 		--rs-text-field-gap: var(--rs-unit-x3);
+		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-p-v: var(--rs-unit-x3);
+		--rs-text-field-font-size: var(--rs-font-size-body-2);
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
-
-		border-radius: var(--rs-radius-medium);
-
-		& .input {
-			padding-block: var(--rs-unit-x3);
-		}
-
-		& .input,
-		& .affix {
-			font-size: var(--rs-font-size-body-2);
-			line-height: var(--rs-line-height-body-2);
-			letter-spacing: var(--rs-letter-spacing-body-2);
-		}
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-text-field-action-inset: var(--rs-unit-x2);
 	}
 
 	@value xlarge {
 		--rs-text-field-gap: var(--rs-unit-x4);
+		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-p-v: var(--rs-unit-x4);
+		--rs-text-field-font-size: var(--rs-font-size-body-2);
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
-
-		border-radius: var(--rs-radius-medium);
-
-		& .input {
-			padding-block: var(--rs-unit-x4);
-		}
-
-		& .input,
-		& .affix {
-			font-size: var(--rs-font-size-body-2);
-			line-height: var(--rs-line-height-body-2);
-			letter-spacing: var(--rs-letter-spacing-body-2);
-		}
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-text-field-action-inset: var(--rs-unit-x1);
 	}
 }
 

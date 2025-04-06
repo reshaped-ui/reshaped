@@ -136,6 +136,10 @@ export const attachments = () => (
 
 export const size = () => (
 	<Example>
+		<Example.Item title="size: small">
+			<TextField name="Name" placeholder="Enter your name" size="small" icon={IconZap} />
+		</Example.Item>
+
 		<Example.Item title="size: medium">
 			<TextField name="Name" placeholder="Enter your name" size="medium" icon={IconZap} />
 		</Example.Item>

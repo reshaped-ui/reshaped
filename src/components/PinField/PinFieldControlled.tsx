@@ -17,6 +17,7 @@ import type * as T from "./PinField.types";
 import s from "./PinField.module.css";
 
 const sizeMap: Record<T.Size, number> = {
+	small: 7,
 	medium: 9,
 	large: 12,
 	xlarge: 14,
