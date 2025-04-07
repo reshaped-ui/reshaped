@@ -21,3 +21,4 @@
 - Switch: align size styles and support responsive
 - TextField: small size
 - PinField: small size
+- Dismissible: added missing use client

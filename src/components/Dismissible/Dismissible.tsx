@@ -1,3 +1,5 @@
+"use client";
+
 import { classNames } from "utilities/helpers";
 import Button from "components/Button";
 import IconClose from "icons/Close";
