@@ -1,8 +1,9 @@
 import { isIOS } from "utilities/platform";
+import { findClosestRenderContainer } from "utilities/dom";
 import lockSafariScroll from "./lockSafari";
 import lockStandardScroll from "./lockStandard";
 
-let lockedCount = 0;
+let bodyLockedCount = 0;
 let reset = () => {};
 
 export const lockScroll = (args: {
@@ -10,23 +11,28 @@ export const lockScroll = (args: {
 	originEl?: HTMLElement | null;
 	cb?: () => void;
 }) => {
-	lockedCount += 1;
+	const isIOSLock = isIOS() && !args.containerEl && !args.originEl;
 
-	if (lockedCount > 1) return;
+	let container = document.body;
+	if (args.originEl && !isIOSLock) container = findClosestRenderContainer({ el: args.originEl }).el;
+	if (args.containerEl && !isIOSLock) container = args.containerEl;
 
-	if (isIOS() && !args.containerEl && !args.originEl) {
+	if (container === document.body) bodyLockedCount += 1;
+	if (bodyLockedCount > 1) return;
+
+	if (isIOSLock) {
 		reset = lockSafariScroll();
 	} else {
-		reset = lockStandardScroll({ containerEl: args.containerEl, originEl: args.originEl });
+		reset = lockStandardScroll({ container });
 	}
 
 	args.cb?.();
 };
 
 export const unlockScroll = (cb?: () => void) => {
-	lockedCount -= 1;
+	bodyLockedCount -= 1;
 
-	if (lockedCount > 0) return;
+	if (bodyLockedCount > 0) return;
 
 	reset();
 	cb?.();

@@ -22,3 +22,4 @@
 - TextField: small size
 - PinField: small size
 - Dismissible: added missing use client
+- useScrollLock: fixed locked count race condition when using it with container ref

@@ -1,6 +1,7 @@
 import React from "react";
 import { StoryObj } from "@storybook/react";
 import { expect, userEvent } from "@storybook/test";
+import { Example } from "utilities/storybook";
 import Button from "components/Button";
 import useScrollLock from "hooks/useScrollLock";
 import View from "components/View";
@@ -90,5 +91,44 @@ export const container: StoryObj = {
 		await userEvent.click(button);
 
 		expect(root).not.toHaveStyle("overflow: hidden");
+	},
+};
+
+export const testContainerAsync: StoryObj = {
+	name: "test: containerRef locked count",
+	render: () => {
+		const containerRef = React.useRef<HTMLDivElement>(null);
+		const globalLock = useScrollLock();
+		const scopedLock = useScrollLock({ containerRef });
+
+		return (
+			<Example>
+				<Example.Item title="calling regular lock and lock with a container only requires a single unlock to remove overflow">
+					<View attributes={{ ref: containerRef }} gap={4} direction="row">
+						<Button
+							onClick={globalLock.scrollLocked ? globalLock.unlockScroll : globalLock.lockScroll}
+						>
+							Toggle
+						</Button>
+						<Button
+							onClick={scopedLock.scrollLocked ? scopedLock.unlockScroll : scopedLock.lockScroll}
+						>
+							Toggle
+						</Button>
+					</View>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvas }) => {
+		const [buttonGlobal, buttonScoped] = canvas.getAllByRole("button");
+
+		await userEvent.click(buttonGlobal);
+		expect(document.body).toHaveStyle("overflow: hidden");
+
+		await userEvent.click(buttonScoped);
+		await userEvent.click(buttonGlobal);
+
+		expect(document.body).not.toHaveStyle("overflow: hidden");
 	},
 };
