@@ -94,6 +94,9 @@ export type { MenuItemProps } from "components/MenuItem";
 export { default as Modal } from "components/Modal";
 export type { ModalProps } from "components/Modal";
 
+export { default as NumberField } from "components/NumberField";
+export type { NumberFieldProps } from "components/NumberField";
+
 export { default as Overlay } from "components/Overlay";
 export type { OverlayProps } from "components/Overlay";
 

@@ -122,8 +122,9 @@ const TextField = (props: T.Props) => {
 			/>
 
 			<input
+				type="text"
 				{...inputAttributes}
-				className={s.input}
+				className={classNames(s.input, inputAttributes.className)}
 				disabled={disabled}
 				name={name}
 				placeholder={placeholder}

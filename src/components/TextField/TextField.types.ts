@@ -5,7 +5,7 @@ import type { IconProps } from "components/Icon";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
-type BaseProps = {
+export type BaseProps = {
 	id?: string;
 	name: string;
 	size?: Size;
