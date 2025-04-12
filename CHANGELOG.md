@@ -25,3 +25,4 @@
 - PinField: small size
 - Dismissible: added missing use client
 - TextField: inputAttributes.className support
+- useScrollLock: fixed locked count race condition when using it with container ref
