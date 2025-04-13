@@ -1,5 +1,7 @@
 3.5.0
 
+- NumberField
+
 - Added .displayName to components
 - Tests: Calendar, TrapFocus, Avatar, Autocomplete, Image, useOnClickOutside, useHandlerRef
 
@@ -22,4 +24,5 @@
 - TextField: small size
 - PinField: small size
 - Dismissible: added missing use client
+- TextField: inputAttributes.className support
 - useScrollLock: fixed locked count race condition when using it with container ref
