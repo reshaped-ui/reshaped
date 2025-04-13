@@ -13,7 +13,7 @@
 	gap: var(--rs-text-field-gap);
 	row-gap: var(--rs-unit-x1);
 
-	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus)):focus-within,
+	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus)):focus-within,
 	&:has(label:active),
 	&.--focused {
 		box-shadow: 0 0 0 1px var(--rs-color-border-primary);

@@ -150,25 +150,25 @@ export const value: StoryObj<{ handleChange: Mock }> = {
 			name: "test-name",
 			value: 23,
 		});
-		expect(input).toHaveValue("2");
+		expect(input).toHaveValue("23");
 
 		await userEvent.click(increaseButton);
 
 		expect(args.handleChange).toBeCalledTimes(2);
 		expect(args.handleChange).toHaveBeenLastCalledWith({
 			name: "test-name",
-			value: 3,
+			value: 24,
 		});
-		expect(input).toHaveValue("2");
+		expect(input).toHaveValue("23");
 
 		await userEvent.click(decreaseButton);
 
 		expect(args.handleChange).toBeCalledTimes(3);
 		expect(args.handleChange).toHaveBeenLastCalledWith({
 			name: "test-name",
-			value: 1,
+			value: 22,
 		});
-		expect(input).toHaveValue("2");
+		expect(input).toHaveValue("23");
 	},
 };
 
@@ -262,7 +262,62 @@ export const formControl: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvas }) => {},
+};
+
+export const valueChanges: StoryObj = {
+	name: "test: keyboard",
+	render: () => (
+		<Example>
+			<Example.Item title="keyboard">
+				<NumberField name="name" increaseAriaLabel="Increase" decreaseAriaLabel="Decrease" />
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas }) => {
+		const input = canvas.getByRole("textbox");
+
+		input.focus();
+
+		await userEvent.keyboard("-");
+		expect(input).toHaveValue("-");
+
+		await userEvent.keyboard("1");
+		expect(input).toHaveValue("-1");
+
+		await userEvent.keyboard("-");
+		expect(input).toHaveValue("-1");
+
+		await userEvent.keyboard("2");
+		expect(input).toHaveValue("-12");
+
+		await userEvent.keyboard("{ArrowUp}");
+		expect(input).toHaveValue("-11");
+
+		await userEvent.keyboard("{ArrowDown}");
+		expect(input).toHaveValue("-12");
+
+		await userEvent.keyboard(".");
+		expect(input).toHaveValue("-12.");
+
+		await userEvent.keyboard("3");
+		expect(input).toHaveValue("-12.3");
+
+		await userEvent.keyboard(".");
+		expect(input).toHaveValue("-12.3");
+
+		await userEvent.keyboard("-");
+		expect(input).toHaveValue("-12.3");
+
+		await userEvent.keyboard("{ArrowUp}");
+		await userEvent.keyboard("{ArrowUp}");
+		await userEvent.keyboard("{ArrowUp}");
+		await userEvent.keyboard("{ArrowUp}");
+		await userEvent.keyboard("{ArrowUp}");
+		expect(input).toHaveValue("-7.3");
+
+		await userEvent.keyboard("{ArrowDown}");
+		expect(input).toHaveValue("-8.3");
+	},
 };
 
 // Value change edge cases

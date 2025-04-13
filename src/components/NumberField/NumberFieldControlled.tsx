@@ -34,6 +34,8 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 		formControl?.attributes.id || (props.inputAttributes?.id as string | undefined) || id;
 	const disabled = formControl?.disabled || props.disabled;
 	const hasError = formControl?.hasError || props.hasError;
+	const increaseDisabled = disabled || (value && max ? value >= max : false);
+	const decreaseDisabled = disabled || (value && min ? value <= min : false);
 
 	const inputRef = React.useRef<HTMLInputElement>(null);
 	const rootRef = React.useRef<HTMLDivElement>(null);
@@ -54,15 +56,20 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 			if (max !== undefined && nextValue > max) nextValue = max;
 			if (min !== undefined && nextValue < min) nextValue = min;
 
-			return nextValue;
+			// Keep the right precision and avoid JS rounding errors
+			const floatPartLength = value?.toString().split(".")[1]?.length || 0;
+			return Number(nextValue.toFixed(floatPartLength));
 		},
 		[step, min, max]
 	);
 
 	const commitValue = React.useCallback(
-		(value: number) => {
+		(value: number, options?: { programmatic?: boolean }) => {
 			onChangeRef.current?.({ value, name });
-			valueRef.current = value;
+
+			// Only update the ref here when typing in the input
+			// Otherwise it will be updated when value changes
+			if (!options?.programmatic) valueRef.current = value;
 		},
 		[name, onChangeRef]
 	);
@@ -70,19 +77,17 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 	const handleIncrease = React.useCallback(() => {
 		const nextValue = calculateDirectionalChange(1);
 
-		setTextValue(nextValue.toString());
-		commitValue(nextValue);
+		commitValue(nextValue, { programmatic: true });
 	}, [calculateDirectionalChange, commitValue]);
 
 	const handleDecrease = React.useCallback(() => {
 		const nextValue = calculateDirectionalChange(-1);
 
-		setTextValue(nextValue.toString());
-		commitValue(nextValue);
+		commitValue(nextValue, { programmatic: true });
 	}, [calculateDirectionalChange, commitValue]);
 
 	const handleChange: TextFieldProps["onChange"] = (args) => {
-		if (!args.value.match(/^(-?)[0-9]*(.?)[0-9]*$/)) return;
+		if (!args.value.match(/^(-?)[0-9]*(\.?)[0-9]*$/)) return;
 
 		setTextValue(args.value);
 
@@ -92,11 +97,17 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 		commitValue(numberValue);
 	};
 
-	const handleControlPointerDown = (callback: () => void) => {
+	const handleControlPointerDown = (
+		e: React.PointerEvent<HTMLButtonElement>,
+		callback: () => void
+	) => {
 		if (disabled) return;
 
 		callback();
-		inputRef.current?.focus();
+
+		if (e.pointerType !== "touch") {
+			inputRef.current?.focus();
+		}
 
 		pressedTimeoutRef.current = setTimeout(() => {
 			changeIntervalRef.current = setInterval(() => {
@@ -133,21 +144,22 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 
 	React.useEffect(() => {
 		valueRef.current = value;
+		setTextValue(value?.toString() ?? "");
 	}, [value]);
 
 	const controlsNode = (
 		<span className={s.controls}>
 			<Actionable
 				className={s.control}
-				disabled={disabled}
+				disabled={increaseDisabled}
 				disableFocusRing
 				as="span"
 				attributes={{
 					"aria-label": increaseAriaLabel,
 					"aria-controls": id,
 					role: "button",
-					tabIndex: disabled ? undefined : -1,
-					onPointerDown: () => handleControlPointerDown(handleIncrease),
+					tabIndex: increaseDisabled ? undefined : -1,
+					onPointerDown: (e) => handleControlPointerDown(e, handleIncrease),
 					onPointerUp: handleControlPointerUp,
 					onPointerLeave: handleControlPointerUp,
 					// Prevent menu from opening on long press
@@ -159,15 +171,15 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 			</Actionable>
 			<Actionable
 				className={s.control}
-				disabled={disabled}
+				disabled={decreaseDisabled}
 				disableFocusRing
 				as="span"
 				attributes={{
 					"aria-label": decreaseAriaLabel,
 					"aria-controls": id,
 					role: "button",
-					tabIndex: disabled ? undefined : -1,
-					onPointerDown: () => handleControlPointerDown(handleDecrease),
+					tabIndex: decreaseDisabled ? undefined : -1,
+					onPointerDown: (e) => handleControlPointerDown(e, handleDecrease),
 					onPointerUp: handleControlPointerUp,
 					onPointerLeave: handleControlPointerUp,
 					// Prevent menu from opening on long press
