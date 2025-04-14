@@ -14,13 +14,31 @@ export default {
 	},
 };
 
-export const base: StoryObj = {
-	name: "base",
+export const variant: StoryObj = {
+	name: "variant",
 	render: () => {
 		return (
 			<Example>
-				<Example.Item title="base">
+				<Example.Item title="variant: outline">
 					<NumberField
+						name="test-name"
+						increaseAriaLabel="Increase"
+						decreaseAriaLabel="Decrease"
+						inputAttributes={{ "aria-label": "Label" }}
+					/>
+				</Example.Item>
+				<Example.Item title="variant: faded">
+					<NumberField
+						variant="faded"
+						name="test-name"
+						increaseAriaLabel="Increase"
+						decreaseAriaLabel="Decrease"
+						inputAttributes={{ "aria-label": "Label" }}
+					/>
+				</Example.Item>
+				<Example.Item title="variant: headless">
+					<NumberField
+						variant="headless"
 						name="test-name"
 						increaseAriaLabel="Increase"
 						decreaseAriaLabel="Decrease"
@@ -31,12 +49,62 @@ export const base: StoryObj = {
 		);
 	},
 	play: async ({ canvas }) => {
-		const input = canvas.getByRole("textbox");
+		const input = canvas.getAllByRole("textbox")[0];
 		const [increaseButton, decreaseButton] = canvas.getAllByRole("button");
 
 		expect(input).toHaveAttribute("name", "test-name");
 		expect(increaseButton).toHaveAccessibleName("Increase");
 		expect(decreaseButton).toHaveAccessibleName("Decrease");
+	},
+};
+
+export const size: StoryObj = {
+	name: "size",
+	render: () => {
+		return (
+			<Example>
+				<Example.Item title="size: small">
+					<NumberField
+						size="small"
+						name="test-name"
+						increaseAriaLabel="Increase"
+						decreaseAriaLabel="Decrease"
+						suffix="m2"
+						inputAttributes={{ "aria-label": "Label" }}
+					/>
+				</Example.Item>
+				<Example.Item title="size: medium">
+					<NumberField
+						size="medium"
+						name="test-name"
+						suffix="m2"
+						increaseAriaLabel="Increase"
+						decreaseAriaLabel="Decrease"
+						inputAttributes={{ "aria-label": "Label" }}
+					/>
+				</Example.Item>
+				<Example.Item title="size: large">
+					<NumberField
+						size="large"
+						name="test-name"
+						suffix="m2"
+						increaseAriaLabel="Increase"
+						decreaseAriaLabel="Decrease"
+						inputAttributes={{ "aria-label": "Label" }}
+					/>
+				</Example.Item>
+				<Example.Item title="size: xlarge">
+					<NumberField
+						size="xlarge"
+						name="test-name"
+						suffix="m2"
+						increaseAriaLabel="Increase"
+						decreaseAriaLabel="Decrease"
+						inputAttributes={{ "aria-label": "Label" }}
+					/>
+				</Example.Item>
+			</Example>
+		);
 	},
 };
 

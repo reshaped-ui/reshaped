@@ -179,7 +179,8 @@
 	background: var(--rs-color-background-neutral-faded);
 	border-color: transparent;
 
-	&:focus-within,
+	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus)):focus-within,
+	&:has(label:active),
 	&.--focused {
 		border-color: var(--rs-color-border-primary);
 	}

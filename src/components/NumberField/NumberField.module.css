@@ -2,6 +2,10 @@
 	font-variant-numeric: tabular-nums;
 }
 
+.controls-wrapper {
+	display: block;
+}
+
 .controls {
 	--rs-number-field-control-border-color: var(--rs-color-border-neutral);
 
@@ -9,8 +13,7 @@
 	flex-direction: column;
 	position: absolute;
 	inset-block: calc(var(--rs-text-field-p-v) * -1 + var(--rs-unit-x1));
-	inset-inline-end: 1px;
-	border-inline-start: 1px solid var(--rs-number-field-control-border-color);
+	inset-inline-end: 0;
 	transition: border-color var(--rs-duration-fast) var(--rs-easing-standard);
 
 	/* Both controls are disabled */
@@ -19,19 +22,74 @@
 	}
 }
 
+@responsive .controls--size {
+	@value small {
+		.control,
+		.controls-wrapper {
+			width: var(--rs-unit-x4);
+		}
+
+		@media (pointer: coarse) and (hover: none) {
+			.controls-wrapper {
+				width: 54px;
+			}
+		}
+	}
+
+	@value medium {
+		.control,
+		.controls-wrapper {
+			width: var(--rs-unit-x5);
+		}
+
+		@media (pointer: coarse) and (hover: none) {
+			.controls-wrapper {
+				width: 70px;
+			}
+		}
+	}
+
+	@value large {
+		.control {
+			width: var(--rs-unit-x6);
+		}
+
+		.controls-wrapper {
+			width: var(--rs-unit-x5);
+		}
+
+		@media (pointer: coarse) and (hover: none) {
+			.controls-wrapper {
+				width: 94px;
+			}
+		}
+	}
+
+	@value xlarge {
+		.control {
+			width: var(--rs-unit-x7);
+		}
+
+		.controls-wrapper {
+			width: var(--rs-unit-x6);
+		}
+
+		@media (pointer: coarse) and (hover: none) {
+			.controls-wrapper {
+				width: 110px;
+			}
+		}
+	}
+}
+
 .control {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-grow: 1;
-	aspect-ratio: 5/4;
 	height: 50%;
 	touch-action: manipulation;
 	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
-
-	&:first-child {
-		box-shadow: 0 1px var(--rs-number-field-control-border-color);
-	}
 
 	&[aria-disabled] {
 		color: var(--rs-color-foreground-disabled);
@@ -43,7 +101,18 @@
 }
 
 .icon--touch {
-	display: none;
+	display: none !important;
+}
+
+.--outline {
+	& .controls {
+		inset-inline-end: 1px;
+		border-inline-start: 1px solid var(--rs-number-field-control-border-color);
+	}
+
+	& .control:first-child {
+		box-shadow: 0 1px var(--rs-number-field-control-border-color);
+	}
 }
 
 @media (pointer: coarse) and (hover: none) {
@@ -52,22 +121,25 @@
 	}
 
 	.control {
-		/* touch-action: manipulation; */
+		touch-action: manipulation;
 		height: 100%;
+		width: auto !important;
 		aspect-ratio: 1;
 		box-sizing: content-box;
-
-		&:first-child {
-			box-shadow: none;
-			border-inline-start: 1px solid var(--rs-color-border-neutral);
-		}
 	}
 
 	.icon--touch {
-		display: block;
+		display: block !important;
 	}
 
 	.icon--mouse {
-		display: none;
+		display: none !important;
+	}
+
+	.--outline {
+		& .control:first-child {
+			box-shadow: none;
+			border-inline-start: 1px solid var(--rs-color-border-neutral);
+		}
 	}
 }

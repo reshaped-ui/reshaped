@@ -4,17 +4,18 @@ import React from "react";
 import Actionable from "components/Actionable";
 import Icon from "components/Icon";
 import TextField, { TextFieldProps } from "components/TextField";
+import { useFormControl } from "components/FormControl";
 import IconChevronUp from "icons/ChevronUp";
 import IconChevronDown from "icons/ChevronDown";
 import IconPlus from "icons/Plus";
 import IconMinus from "icons/Minus";
 import useElementId from "hooks/useElementId";
 import useHotkeys from "hooks/useHotkeys";
+import useHandlerRef from "hooks/useHandlerRef";
 import * as keys from "constants/keys";
+import { responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 import type * as T from "./NumberField.types";
 import s from "./NumberField.module.css";
-import useHandlerRef from "hooks/useHandlerRef";
-import { useFormControl } from "components/FormControl";
 
 const NumberFieldControlled = (props: T.ControlledProps) => {
 	const {
@@ -89,9 +90,12 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 	const handleChange: TextFieldProps["onChange"] = (args) => {
 		if (!args.value.match(/^(-?)[0-9]*(\.?)[0-9]*$/)) return;
 
-		setTextValue(args.value);
-
 		const numberValue = parseFloat(args.value);
+
+		if (numberValue > Number.MAX_SAFE_INTEGER) return;
+		if (numberValue < Number.MIN_SAFE_INTEGER) return;
+
+		setTextValue(args.value);
 
 		if (isNaN(numberValue)) return;
 		commitValue(numberValue);
@@ -147,60 +151,73 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 		setTextValue(value?.toString() ?? "");
 	}, [value]);
 
+	const mouseIconSize = responsivePropDependency(textFieldProps.size, (size) => {
+		return size === "large" || size === "xlarge" ? 4 : 3;
+	});
+	const touchIconSize = responsivePropDependency(textFieldProps.size, (size) => {
+		return size === "small" ? 3 : 4;
+	});
 	const controlsNode = (
-		<span className={s.controls}>
-			<Actionable
-				className={s.control}
-				disabled={increaseDisabled}
-				disableFocusRing
-				as="span"
-				attributes={{
-					"aria-label": increaseAriaLabel,
-					"aria-controls": id,
-					role: "button",
-					tabIndex: increaseDisabled ? undefined : -1,
-					onPointerDown: (e) => handleControlPointerDown(e, handleIncrease),
-					onPointerUp: handleControlPointerUp,
-					onPointerLeave: handleControlPointerUp,
-					// Prevent menu from opening on long press
-					onContextMenu: (e) => e.preventDefault(),
-				}}
-			>
-				<Icon svg={IconChevronUp} size={3} className={s["icon--mouse"]} />
-				<Icon svg={IconPlus} size={4} className={s["icon--touch"]} />
-			</Actionable>
-			<Actionable
-				className={s.control}
-				disabled={decreaseDisabled}
-				disableFocusRing
-				as="span"
-				attributes={{
-					"aria-label": decreaseAriaLabel,
-					"aria-controls": id,
-					role: "button",
-					tabIndex: decreaseDisabled ? undefined : -1,
-					onPointerDown: (e) => handleControlPointerDown(e, handleDecrease),
-					onPointerUp: handleControlPointerUp,
-					onPointerLeave: handleControlPointerUp,
-					// Prevent menu from opening on long press
-					onContextMenu: (e) => e.preventDefault(),
-				}}
-			>
-				<Icon svg={IconChevronDown} size={3} className={s["icon--mouse"]} />
-				<Icon svg={IconMinus} size={4} className={s["icon--touch"]} />
-			</Actionable>
+		<span className={s["controls-wrapper"]}>
+			<span className={s.controls}>
+				<Actionable
+					className={s.control}
+					disabled={increaseDisabled}
+					disableFocusRing
+					as="span"
+					attributes={{
+						"aria-label": increaseAriaLabel,
+						"aria-controls": id,
+						role: "button",
+						tabIndex: increaseDisabled ? undefined : -1,
+						onPointerDown: (e) => handleControlPointerDown(e, handleIncrease),
+						onPointerUp: handleControlPointerUp,
+						onPointerLeave: handleControlPointerUp,
+						// Prevent menu from opening on long press
+						onContextMenu: (e) => e.preventDefault(),
+					}}
+				>
+					<Icon svg={IconChevronUp} size={mouseIconSize} className={s["icon--mouse"]} />
+					<Icon svg={IconPlus} size={touchIconSize} className={s["icon--touch"]} />
+				</Actionable>
+				<Actionable
+					className={s.control}
+					disabled={decreaseDisabled}
+					disableFocusRing
+					as="span"
+					attributes={{
+						"aria-label": decreaseAriaLabel,
+						"aria-controls": id,
+						role: "button",
+						tabIndex: decreaseDisabled ? undefined : -1,
+						onPointerDown: (e) => handleControlPointerDown(e, handleDecrease),
+						onPointerUp: handleControlPointerUp,
+						onPointerLeave: handleControlPointerUp,
+						// Prevent menu from opening on long press
+						onContextMenu: (e) => e.preventDefault(),
+					}}
+				>
+					<Icon svg={IconChevronDown} size={mouseIconSize} className={s["icon--mouse"]} />
+					<Icon svg={IconMinus} size={touchIconSize} className={s["icon--touch"]} />
+				</Actionable>
+			</span>
 		</span>
 	);
 
 	return (
 		<TextField
+			{...textFieldProps}
+			className={[
+				textFieldProps.className,
+				responsiveClassNames(s, "controls--size", textFieldProps.size),
+				!(textFieldProps.variant === "faded" || textFieldProps.variant === "headless") &&
+					s["--outline"],
+			]}
 			attributes={{
 				...textFieldProps.attributes,
 				role: "group",
 				ref: rootRef,
 			}}
-			id={inputId}
-			hasError={hasError}
 			inputAttributes={{
 				...textFieldProps.inputAttributes,
 				ref: inputRef,
@@ -213,7 +230,8 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 				step,
 				className: s.field,
 			}}
-			{...textFieldProps}
+			id={inputId}
+			hasError={hasError}
 			disabled={disabled}
 			value={textValue}
 			onChange={handleChange}
