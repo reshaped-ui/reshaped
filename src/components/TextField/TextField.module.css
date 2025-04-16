@@ -156,7 +156,7 @@
 
 	@value large {
 		--rs-text-field-gap: var(--rs-unit-x3);
-		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-radius: var(--rs-radius-medium);
 		--rs-text-field-p-v: var(--rs-unit-x3);
 		--rs-text-field-font-size: var(--rs-font-size-body-2);
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
@@ -166,7 +166,7 @@
 
 	@value xlarge {
 		--rs-text-field-gap: var(--rs-unit-x4);
-		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-radius: var(--rs-radius-medium);
 		--rs-text-field-p-v: var(--rs-unit-x4);
 		--rs-text-field-font-size: var(--rs-font-size-body-2);
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
