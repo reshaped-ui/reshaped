@@ -8,12 +8,14 @@
 		"property-no-vendor-prefix": null,
 		"declaration-block-no-redundant-longhand-properties": null,
 		"color-function-notation": "legacy",
+		"color-function-alias-notation": null,
 		"at-rule-no-unknown": [
 			true,
 			{
 				"ignoreAtRules": ["responsive", "value", "variable", "each"]
 			}
 		],
+		"layer-name-pattern": "^[a-z][a-z0-9.-]*$",
 		"media-query-no-invalid": null
 	}
 }
