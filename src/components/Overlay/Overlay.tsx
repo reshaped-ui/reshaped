@@ -140,7 +140,7 @@ const Overlay = (props: T.Props) => {
 	React.useEffect(() => {
 		if (!rendered || !contentRef.current) return;
 
-		const trapFocus = new TrapFocus(contentRef.current);
+		const trapFocus = new TrapFocus();
 		const containerEl = containerRef?.current;
 
 		if (containerEl) {
@@ -150,7 +150,7 @@ const Overlay = (props: T.Props) => {
 			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
 		}
 
-		trapFocus.trap({
+		trapFocus.trap(contentRef.current, {
 			initialFocusEl: contentRef.current.querySelector("[role=dialog][tabindex='-1']") as
 				| FocusableElement
 				| undefined,

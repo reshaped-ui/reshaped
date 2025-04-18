@@ -1,7 +1,10 @@
 import type { TextFieldBaseProps } from "components/TextField";
 import type * as G from "types/global";
 
-export type BaseProps = Omit<TextFieldBaseProps, "endSlot" | "onChange"> & {
+export type BaseProps = Omit<
+	TextFieldBaseProps,
+	"endSlot" | "onChange" | "rounded" | "multiline"
+> & {
 	onChange?: G.ChangeHandler<number>;
 	increaseAriaLabel: string;
 	decreaseAriaLabel: string;

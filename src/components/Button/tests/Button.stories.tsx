@@ -1,5 +1,3 @@
-import { Meta, StoryObj } from "@storybook/react";
-
 import { Example, Placeholder } from "utilities/storybook";
 import Button from "components/Button";
 import View from "components/View";

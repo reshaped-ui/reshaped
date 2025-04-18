@@ -72,10 +72,10 @@ const ToastContainer = (props: T.ContainerProps) => {
 	React.useEffect(() => {
 		if (!wrapperRef.current) return;
 
-		const trapFocus = new TrapFocus(wrapperRef.current);
+		const trapFocus = new TrapFocus();
 
 		if (visible) {
-			trapFocus.trap({
+			trapFocus.trap(wrapperRef.current, {
 				includeTrigger: true,
 				mode: "content-menu",
 			});

@@ -50,9 +50,9 @@ export const modeDialog: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({ mode: "dialog" });
+			trapFocus.trap(rootRef.current, { mode: "dialog" });
 			return () => trapFocus.release();
 		}, [trapToggle.active]);
 
@@ -129,9 +129,9 @@ export const modeActionMenu: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(rootRef.current, {
 				mode: "action-menu",
 				onRelease: () => {
 					trapToggle.deactivate();
@@ -213,9 +213,9 @@ export const modeActionBar: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(rootRef.current, {
 				mode: "action-bar",
 				onRelease: () => {
 					trapToggle.deactivate();
@@ -297,9 +297,9 @@ export const modeContentMenu: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(rootRef.current, {
 				mode: "content-menu",
 				onRelease: () => {
 					trapToggle.deactivate();
@@ -380,9 +380,9 @@ export const includeTrigger: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(rootRef.current, {
 				mode: "dialog",
 				includeTrigger: true,
 			});
@@ -443,9 +443,9 @@ export const initialFocusEl: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(rootRef.current, {
 				mode: "dialog",
 				initialFocusEl: initialFocusRef.current,
 			});
@@ -533,9 +533,9 @@ export const focusableElements: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap();
+			trapFocus.trap(rootRef.current);
 			return () => trapFocus.release();
 		}, [trapToggle.active]);
 
@@ -683,9 +683,9 @@ export const nested: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(rootRef.current, {
 				mode: "dialog",
 			});
 
@@ -696,9 +696,9 @@ export const nested: StoryObj = {
 			if (!innerTrapToggle.active) return;
 			if (!innerRootRef.current) return;
 
-			const trapFocus = new TrapFocus(innerRootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(innerRootRef.current, {
 				mode: "dialog",
 			});
 
@@ -789,9 +789,9 @@ export const mutationObserver: StoryObj = {
 			if (!trapToggle.active) return;
 			if (!rootRef.current) return;
 
-			const trapFocus = new TrapFocus(rootRef.current);
+			const trapFocus = new TrapFocus();
 
-			trapFocus.trap({
+			trapFocus.trap(rootRef.current, {
 				mode: "dialog",
 			});
 

@@ -27,6 +27,7 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 		name,
 		value,
 		onChange,
+		size = "medium",
 		...textFieldProps
 	} = props;
 	const formControl = useFormControl();
@@ -151,10 +152,10 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 		setTextValue(value?.toString() ?? "");
 	}, [value]);
 
-	const mouseIconSize = responsivePropDependency(textFieldProps.size, (size) => {
+	const mouseIconSize = responsivePropDependency(size, (size) => {
 		return size === "large" || size === "xlarge" ? 4 : 3;
 	});
-	const touchIconSize = responsivePropDependency(textFieldProps.size, (size) => {
+	const touchIconSize = responsivePropDependency(size, (size) => {
 		return size === "small" ? 3 : 4;
 	});
 	const controlsNode = (
@@ -209,7 +210,7 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 			{...textFieldProps}
 			className={[
 				textFieldProps.className,
-				responsiveClassNames(s, "controls--size", textFieldProps.size),
+				responsiveClassNames(s, "controls--size", size),
 				!(textFieldProps.variant === "faded" || textFieldProps.variant === "headless") &&
 					s["--outline"],
 			]}
@@ -230,6 +231,7 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 				step,
 				className: s.field,
 			}}
+			size={size}
 			id={inputId}
 			hasError={hasError}
 			disabled={disabled}

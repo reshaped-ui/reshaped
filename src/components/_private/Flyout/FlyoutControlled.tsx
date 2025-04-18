@@ -298,8 +298,8 @@ const FlyoutControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		if (status !== "visible" || !flyoutElRef.current) return;
 		if (trapFocusRef.current?.trapped) return;
 
-		trapFocusRef.current = new TrapFocus(flyoutElRef.current);
-		trapFocusRef.current.trap({
+		trapFocusRef.current = new TrapFocus();
+		trapFocusRef.current.trap(flyoutElRef.current, {
 			mode: trapFocusMode,
 			initialFocusEl: initialFocusRef?.current as FocusableElement | undefined,
 			includeTrigger: triggerType === "hover" && trapFocusMode !== "dialog" && !isSubmenu,
