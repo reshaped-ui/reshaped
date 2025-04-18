@@ -337,7 +337,12 @@ export const valueChanges: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="keyboard">
-				<NumberField name="name" increaseAriaLabel="Increase" decreaseAriaLabel="Decrease" />
+				<NumberField
+					name="name"
+					increaseAriaLabel="Increase"
+					decreaseAriaLabel="Decrease"
+					inputAttributes={{ "aria-label": "Label" }}
+				/>
 			</Example.Item>
 		</Example>
 	),

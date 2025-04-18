@@ -168,7 +168,7 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 					as="span"
 					attributes={{
 						"aria-label": increaseAriaLabel,
-						"aria-controls": id,
+						"aria-controls": inputId,
 						role: "button",
 						tabIndex: increaseDisabled ? undefined : -1,
 						onPointerDown: (e) => handleControlPointerDown(e, handleIncrease),
@@ -188,7 +188,7 @@ const NumberFieldControlled = (props: T.ControlledProps) => {
 					as="span"
 					attributes={{
 						"aria-label": decreaseAriaLabel,
-						"aria-controls": id,
+						"aria-controls": inputId,
 						role: "button",
 						tabIndex: decreaseDisabled ? undefined : -1,
 						onPointerDown: (e) => handleControlPointerDown(e, handleDecrease),
