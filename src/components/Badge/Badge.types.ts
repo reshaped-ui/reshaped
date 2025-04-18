@@ -1,5 +1,5 @@
 import type React from "react";
-import type { ActionableProps } from "components/Actionable";
+import type { ActionableProps, ActionableRef } from "components/Actionable";
 import type { IconProps } from "components/Icon";
 import type * as G from "types/global";
 
@@ -44,6 +44,6 @@ export type ContainerProps = {
 	attributes?: G.Attributes<"div">;
 };
 
-export type Export = React.ForwardRefExoticComponent<Props> & {
+export type Export = React.ForwardRefExoticComponent<Props & { ref?: ActionableRef }> & {
 	Container: React.ComponentType<ContainerProps>;
 };

@@ -1,6 +1,6 @@
 import type React from "react";
 import type { IconProps } from "components/Icon";
-import type { ActionableProps } from "components/Actionable";
+import type { ActionableProps, ActionableRef } from "components/Actionable";
 import type { AlignerProps as BaseAlignerProps } from "components/_private/Aligner";
 import type * as G from "types/global";
 
@@ -44,7 +44,7 @@ export type AlignerProps = BaseAlignerProps & {
 	position?: BaseAlignerProps["side"];
 };
 
-export type Export = React.ForwardRefExoticComponent<Props> & {
+export type Export = React.ForwardRefExoticComponent<Props & { ref?: ActionableRef }> & {
 	Aligner: React.ComponentType<AlignerProps>;
 	Group: React.ComponentType<GroupProps>;
 };
