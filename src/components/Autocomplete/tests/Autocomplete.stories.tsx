@@ -66,7 +66,7 @@ export const active: StoryObj<{
 		const canvas = within(canvasElement.ownerDocument.body);
 
 		const input = canvas.getByRole("combobox");
-		const list = canvas.getByRole("listbox");
+		const list = await canvas.findByRole("listbox");
 
 		expect(list).toBeInTheDocument();
 		expect(args.handleOpen).not.toHaveBeenCalled();
@@ -225,7 +225,7 @@ export const itemData: StoryObj<{
 	},
 	play: async ({ canvasElement, args }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
-		const options = canvas.getAllByRole("option");
+		const options = await canvas.findAllByRole("option");
 
 		await userEvent.click(options[0]);
 
@@ -262,7 +262,7 @@ export const itemDisabled: StoryObj = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
 		const input = canvas.getByRole("combobox");
-		const options = canvas.getAllByRole("option");
+		const options = await canvas.findAllByRole("option");
 
 		await fireEvent.click(options[1]);
 
