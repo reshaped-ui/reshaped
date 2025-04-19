@@ -7,7 +7,7 @@
 		"pretty": true,
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
-		"erasableSyntaxOnly": true,
+		// "erasableSyntaxOnly": true,
 		"isolatedModules": true,
 		"skipLibCheck": true,
 		"lib": ["es2022", "dom", "dom.iterable"],
