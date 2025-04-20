@@ -77,7 +77,7 @@
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build",
 		"release": "read -p 'Have you updated chromatic tests?' && yarn release:lib && yarn release:source && yarn build:storybook && yarn release:copy",
 		"release:lib": "yarn build && yarn publish",
-		"release:beta": "yarn build && yarn publish --tag beta",
+		"release:canary": "yarn build && yarn publish --tag canary",
 		"release:test": "yarn build && yarn pack --filename reshaped-test.tgz",
 		"release:source": "sh ./bin/release-source.sh",
 		"release:copy": "sh ./bin/release-copy.sh",
