@@ -1,12 +1,6 @@
 /**
  * Components
  */
-export { default as Accordion } from "components/Accordion";
-export type { AccordionProps } from "components/Accordion";
-
-export { default as Actionable } from "components/Actionable";
-export type { ActionableProps, ActionableRef } from "components/Actionable";
-
 export { default as ActionBar } from "components/ActionBar";
 export type { ActionBarProps } from "components/ActionBar";
 
@@ -43,14 +37,8 @@ export type { CheckboxProps } from "components/Checkbox";
 export { default as CheckboxGroup } from "components/CheckboxGroup";
 export type { CheckboxGroupProps } from "components/CheckboxGroup";
 
-export { default as Container } from "components/Container";
-export type { ContainerProps } from "components/Container";
-
 export { default as ContextMenu } from "components/ContextMenu";
 export type { ContextMenuProps } from "components/ContextMenu";
-
-export { default as Dismissible } from "components/Dismissible";
-export type { DismissibleProps } from "components/Dismissible";
 
 export { default as Divider } from "components/Divider";
 export type { DividerProps } from "components/Divider";
@@ -61,26 +49,8 @@ export type { DropdownMenuProps, DropdownMenuInstance } from "components/Dropdow
 export { default as FileUpload } from "components/FileUpload";
 export type { FileUploadProps } from "components/FileUpload";
 
-export { default as FormControl } from "components/FormControl";
-export type { FormControlProps } from "components/FormControl";
-
-export { default as Grid } from "components/Grid";
-export type { GridProps, GridItemProps } from "components/Grid";
-
-export { default as Hidden } from "components/Hidden";
-export type { HiddenProps } from "components/Hidden";
-
-export { default as HiddenVisually } from "components/HiddenVisually";
-export type { HiddenVisuallyProps } from "components/HiddenVisually";
-
 export { default as Hotkey } from "components/Hotkey";
 export type { HotkeyProps } from "components/Hotkey";
-
-export { default as Icon } from "components/Icon";
-export type { IconProps } from "components/Icon";
-
-export { default as Image } from "components/Image";
-export type { ImageProps } from "components/Image";
 
 export { default as Link } from "components/Link";
 export type { LinkProps } from "components/Link";
@@ -96,9 +66,6 @@ export type { ModalProps } from "components/Modal";
 
 export { default as NumberField } from "components/NumberField";
 export type { NumberFieldProps } from "components/NumberField";
-
-export { default as Overlay } from "components/Overlay";
-export type { OverlayProps } from "components/Overlay";
 
 export { default as Pagination } from "components/Pagination";
 export type { PaginationProps } from "components/Pagination";
@@ -121,21 +88,8 @@ export type { RadioProps } from "components/Radio";
 export { default as RadioGroup } from "components/RadioGroup";
 export type { RadioGroupProps } from "components/RadioGroup";
 
-export { default as Reshaped } from "components/Reshaped";
-export type { ReshapedProps } from "components/Reshaped";
-
-export { default as Resizable } from "components/Resizable";
-export type {
-	ResizableProps,
-	ResizableItemProps,
-	ResizableHandleProps,
-} from "components/Resizable";
-
 export { default as Scrim } from "components/Scrim";
 export type { ScrimProps } from "components/Scrim";
-
-export { default as ScrollArea } from "components/ScrollArea";
-export type { ScrollAreaProps } from "components/ScrollArea";
 
 export { default as Select } from "components/Select";
 export type { SelectProps } from "components/Select";
@@ -165,9 +119,6 @@ export type {
 export { default as Tabs } from "components/Tabs";
 export type { TabsProps } from "components/Tabs";
 
-export { default as Text } from "components/Text";
-export type { TextProps } from "components/Text";
-
 export { default as TextArea } from "components/TextArea";
 export type { TextAreaProps } from "components/TextArea";
 
@@ -182,6 +133,58 @@ export type { ToastProps, ToastProviderProps, ToastShowProps } from "components/
 
 export { default as Tooltip } from "components/Tooltip";
 export type { TooltipProps } from "components/Tooltip";
+
+/**
+ * Utility components
+ */
+export { default as Reshaped } from "components/Reshaped";
+export type { ReshapedProps } from "components/Reshaped";
+
+export { default as Accordion } from "components/Accordion";
+export type { AccordionProps } from "components/Accordion";
+
+export { default as Actionable } from "components/Actionable";
+export type { ActionableProps, ActionableRef } from "components/Actionable";
+
+export { default as Container } from "components/Container";
+export type { ContainerProps } from "components/Container";
+
+export { default as Dismissible } from "components/Dismissible";
+export type { DismissibleProps } from "components/Dismissible";
+
+export { default as FormControl } from "components/FormControl";
+export type { FormControlProps } from "components/FormControl";
+
+export { default as Grid } from "components/Grid";
+export type { GridProps, GridItemProps } from "components/Grid";
+
+export { default as Hidden } from "components/Hidden";
+export type { HiddenProps } from "components/Hidden";
+
+export { default as HiddenVisually } from "components/HiddenVisually";
+export type { HiddenVisuallyProps } from "components/HiddenVisually";
+
+export { default as Icon } from "components/Icon";
+export type { IconProps } from "components/Icon";
+
+export { default as Image } from "components/Image";
+export type { ImageProps } from "components/Image";
+
+export { default as Overlay } from "components/Overlay";
+export type { OverlayProps } from "components/Overlay";
+
+export { default as Resizable } from "components/Resizable";
+export type {
+	ResizableProps,
+	ResizableItemProps,
+	ResizableHandleProps,
+} from "components/Resizable";
+
+export { default as ScrollArea } from "components/ScrollArea";
+export type { ScrollAreaProps } from "components/ScrollArea";
+
+export { default as Text } from "components/Text";
+export type { TextProps } from "components/Text";
 
 export { default as View } from "components/View";
 export type { ViewProps, ViewItemProps } from "components/View";
@@ -203,7 +206,7 @@ export { default as useScrollLock } from "hooks/useScrollLock";
 export { default as useToggle } from "hooks/useToggle";
 
 /**
- * Utilities
+ * Utility functions
  */
 export { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
 export { TrapFocus } from "utilities/a11y";
