@@ -1,5 +1,5 @@
 import { classNames } from "utilities/helpers";
-import Flyout, { useFlyoutContext, type FlyoutProps } from "components/_private/Flyout";
+import Flyout, { useFlyoutContext, type FlyoutProps } from "components/Flyout";
 import Dismissible, { type DismissibleProps } from "components/Dismissible";
 import type * as T from "./Popover.types";
 import s from "./Popover.module.css";

@@ -7,22 +7,11 @@ import Reshaped from "components/Reshaped";
 import View from "components/View";
 import Theme from "components/Theme";
 import Button from "components/Button";
-import Flyout, { FlyoutInstance, FlyoutProps } from "components/_private/Flyout";
+import Flyout, { FlyoutInstance, FlyoutProps } from "components/Flyout";
 import TextField from "components/TextField";
-import MenuItem from "components/MenuItem";
 import { sleep } from "utilities/helpers";
 
-export default { title: "Internal/Flyout" };
-
-/**
- * Unit
- * - groupTimeouts
- * - id
- * - contentClassName
- * - contentAttributes
- * - content attributes
- * - content className
- */
+export default { title: "Utility components/Flyout" };
 
 const Content = (props: {
 	height?: number;
@@ -44,13 +33,15 @@ const Content = (props: {
 	</div>
 );
 
-const Demo = (props: FlyoutProps & { contentHeight?: number; contentWidth?: number | false }) => {
-	const { position = "bottom-start", children, contentHeight, contentWidth, ...rest } = props;
+const Demo = (
+	props: FlyoutProps & { text?: string; contentHeight?: number; contentWidth?: number | false }
+) => {
+	const { position = "bottom-start", text, children, contentHeight, contentWidth, ...rest } = props;
 
 	return (
 		<Flyout position={position} {...rest}>
 			<Flyout.Trigger>
-				{(attributes) => <Button attributes={attributes}>{position}</Button>}
+				{(attributes) => <Button attributes={attributes}>{text || position}</Button>}
 			</Flyout.Trigger>
 			<Flyout.Content>
 				<Content height={contentHeight} width={contentWidth}>
@@ -208,114 +199,66 @@ export const activeFalse: StoryObj<{
 	},
 };
 
+const modeContent = (
+	<View direction="row" gap={2}>
+		<Button onClick={() => {}}>Action 1</Button>
+		<Button onClick={() => {}}>Action 2</Button>
+		<Button onClick={() => {}}>Action 3</Button>
+	</View>
+);
+
 export const modes = {
 	name: "triggerType, trapFocusMode",
 	render: () => {
 		return (
 			<Example>
-				<Example.Item
-					title={[
-						"triggerType: click, trapFocusMode: dialog",
-						"tab navigation, completely traps the focus inside",
-					]}
-				>
-					<Demo position="bottom-start" trapFocusMode="dialog">
-						<View direction="row" gap={2}>
-							<Button onClick={() => {}}>Action 1</Button>
-							<Button onClick={() => {}}>Action 2</Button>
-							<Button onClick={() => {}}>Action 3</Button>
-						</View>
-					</Demo>
+				<Example.Item title="triggerType: click">
+					<View direction="row" gap={4}>
+						<Demo position="bottom-start" trapFocusMode="dialog" text="dialog">
+							{modeContent}
+						</Demo>
+						<Demo position="bottom-start" trapFocusMode="action-menu" text="action-menu">
+							{modeContent}
+						</Demo>
+						<Demo position="bottom-start" trapFocusMode="action-bar" text="action-bar">
+							{modeContent}
+						</Demo>
+						<Demo position="bottom-start" trapFocusMode="content-menu" text="content-menu">
+							{modeContent}
+						</Demo>
+					</View>
 				</Example.Item>
 
-				<Example.Item
-					title={[
-						"triggerType: click, trapFocusMode: action-menu",
-						"arrow navigation, tab closes the content",
-					]}
-				>
-					<Demo position="bottom-start" trapFocusMode="action-menu">
-						<View direction="row" gap={2}>
-							<Button onClick={() => {}}>Action 1</Button>
-							<Button onClick={() => {}}>Action 2</Button>
-							<Button onClick={() => {}}>Action 3</Button>
-						</View>
-					</Demo>
-				</Example.Item>
-
-				<Example.Item
-					title={[
-						"triggerType: click, trapFocusMode: content-menu",
-						"tab navigation, simulates natural focus order for navigation menus",
-					]}
-				>
-					<Demo position="bottom-start" trapFocusMode="content-menu">
-						<View direction="row" gap={2}>
-							<Button onClick={() => {}}>Action 1</Button>
-							<Button onClick={() => {}}>Action 2</Button>
-							<Button onClick={() => {}}>Action 3</Button>
-						</View>
-					</Demo>
-				</Example.Item>
-
-				<Example.Item title="triggerType: hover, trapFocusMode: dialog">
-					<Demo position="bottom-start" trapFocusMode="dialog" triggerType="hover">
-						<View direction="row" gap={2}>
-							<Button onClick={() => {}}>Action 1</Button>
-							<Button onClick={() => {}}>Action 2</Button>
-							<Button onClick={() => {}}>Action 3</Button>
-						</View>
-					</Demo>
-				</Example.Item>
-
-				<Example.Item title="triggerType: hover, trapFocusMode: action-menu">
-					<Demo position="bottom-start" trapFocusMode="action-menu" triggerType="hover">
-						<View direction="row" gap={2}>
-							<Button onClick={() => {}}>Action 1</Button>
-							<Button onClick={() => {}}>Action 2</Button>
-							<Button onClick={() => {}}>Action 3</Button>
-						</View>
-					</Demo>
-				</Example.Item>
-
-				<Example.Item title="triggerType: hover, trapFocusMode: content-menu">
-					<Demo position="bottom-start" trapFocusMode="content-menu" triggerType="hover">
-						<View direction="row" gap={2}>
-							<Button onClick={() => {}}>Action 1</Button>
-							<Button onClick={() => {}}>Action 2</Button>
-							<Button onClick={() => {}}>Action 3</Button>
-						</View>
-					</Demo>
-				</Example.Item>
-
-				<Example.Item
-					title={[
-						"triggerType: hover, trapFocusMode: content-menu, no focusable elements inside",
-						"keeps the focus on trigger",
-					]}
-				>
-					<Demo position="bottom-start" trapFocusMode="content-menu" triggerType="hover" />
-				</Example.Item>
-
-				<Example.Item
-					title={[
-						"triggerType: focus, trapFocusMode: selection-menu",
-						"keeps real focus on trigger and simulates arrow key item selection focus on the content",
-					]}
-				>
-					<Demo position="bottom-start" trapFocusMode="selection-menu" triggerType="focus">
-						<View gap={1}>
-							<MenuItem onClick={() => {}} roundedCorners>
-								Action 1
-							</MenuItem>
-							<MenuItem onClick={() => {}} roundedCorners>
-								Action 2
-							</MenuItem>
-							<MenuItem onClick={() => {}} roundedCorners>
-								Action 3
-							</MenuItem>
-						</View>
-					</Demo>
+				<Example.Item title="triggerType: hover">
+					<View direction="row" gap={4}>
+						<Demo position="bottom-start" trapFocusMode="dialog" triggerType="hover" text="dialog">
+							{modeContent}
+						</Demo>
+						<Demo
+							position="bottom-start"
+							trapFocusMode="action-menu"
+							triggerType="hover"
+							text="action-menu"
+						>
+							{modeContent}
+						</Demo>
+						<Demo
+							position="bottom-start"
+							trapFocusMode="action-bar"
+							triggerType="hover"
+							text="action-bar"
+						>
+							{modeContent}
+						</Demo>
+						<Demo
+							position="bottom-start"
+							trapFocusMode="content-menu"
+							triggerType="hover"
+							text="content-menu"
+						>
+							{modeContent}
+						</Demo>
+					</View>
 				</Example.Item>
 			</Example>
 		);
@@ -327,7 +270,7 @@ export const positionFallbacks = {
 	render: () => {
 		return (
 			<Example>
-				<Example.Item title="position: top, no fallbacks passed">
+				<Example.Item title="position: top, default fallbacks">
 					<View justify="center" align="center">
 						<Demo position="top" />
 					</View>
@@ -383,9 +326,10 @@ export const contentShift = {
 	render: () => <Demo contentShift={10} defaultActive />,
 };
 
-export const disableContentHover = {
+export const disableContentHover: StoryObj = {
 	name: "disableContentHover",
 	render: () => <Demo triggerType="hover" disableContentHover />,
+	// Can't trigger real mouse move from trigger to content in play function, so testing it manually
 };
 
 export const disableCloseOnOutsideClick: StoryObj = {
@@ -757,4 +701,22 @@ export const testScopedTheming = {
 			</Theme>
 		</View>
 	),
+};
+
+export const testWithoutFocusable: StoryObj = {
+	name: "test: without focusable content",
+	render: () => <Demo position="bottom-start" />,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(trigger);
+
+		await waitFor(() => {
+			const content = canvas.getByText("Content");
+			expect(content).toBeVisible();
+		});
+
+		expect(document.activeElement).toBe(trigger);
+	},
 };

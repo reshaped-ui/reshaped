@@ -1,7 +1,7 @@
 import type React from "react";
 import type { PopoverProps, PopoverInstance } from "components/Popover";
 import type { MenuItemProps } from "components/MenuItem";
-import type { FlyoutContentProps } from "components/_private/Flyout";
+import type { FlyoutContentProps } from "components/Flyout";
 
 export type Instance = PopoverInstance;
 

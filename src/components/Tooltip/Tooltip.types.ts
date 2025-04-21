@@ -1,5 +1,5 @@
 import React from "react";
-import type { FlyoutProps, FlyoutTriggerProps } from "components/_private/Flyout";
+import type { FlyoutProps, FlyoutTriggerProps } from "components/Flyout";
 
 export type Props = Pick<
 	FlyoutProps,

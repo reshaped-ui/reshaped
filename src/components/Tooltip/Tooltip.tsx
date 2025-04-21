@@ -2,7 +2,7 @@
 
 import Theme from "components/Theme";
 import Text from "components/Text";
-import Flyout from "components/_private/Flyout";
+import Flyout from "components/Flyout";
 import type * as T from "./Tooltip.types";
 import s from "./Tooltip.module.css";
 

@@ -39,7 +39,7 @@ export type GroupProps = {
 
 export type AlignerProps = BaseAlignerProps & {
 	/**
-	 * @deprecated The method should not be used
+	 * @deprecated use `side` instead, will be remove in v4
 	 */
 	position?: BaseAlignerProps["side"];
 };

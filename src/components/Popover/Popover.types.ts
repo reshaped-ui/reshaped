@@ -1,5 +1,5 @@
 import type React from "react";
-import type { FlyoutProps, FlyoutInstance } from "components/_private/Flyout";
+import type { FlyoutProps, FlyoutInstance } from "components/Flyout";
 
 export type Instance = FlyoutInstance;
 
@@ -28,5 +28,6 @@ export type Props = Pick<
 > & {
 	children?: React.ReactNode;
 	padding?: number;
+	/** @deprecated use Flyout utility instead, will be removed in v4 */
 	variant?: "elevated" | "headless";
 };
