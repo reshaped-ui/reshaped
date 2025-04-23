@@ -1,5 +1,4 @@
 import React from "react";
-import { Preview } from "@storybook/react";
 import Reshaped from "../src/components/Reshaped";
 import Button from "../src/components/Button";
 import View from "../src/components/View";
@@ -101,7 +100,7 @@ const ThemeSwitch = () => {
 	);
 };
 
-const reshapedDecorator = (Story: React.ComponentType, { parameters }) =>
+const reshapedDecorator = (Story, { parameters }) =>
 	parameters.disableWrapper ? (
 		<Story />
 	) : (
@@ -119,7 +118,7 @@ const reshapedDecorator = (Story: React.ComponentType, { parameters }) =>
 		</React.StrictMode>
 	);
 
-const preview: Preview = {
+const preview = {
 	decorators: [reshapedDecorator],
 	parameters: {
 		actions: {
