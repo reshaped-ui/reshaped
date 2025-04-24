@@ -5,7 +5,7 @@ import { useTabs } from "./TabsContext";
 import type * as T from "./Tabs.types";
 import s from "./Tabs.module.css";
 
-const TabsPanel = (props: T.PanelProps) => {
+const TabsPanel: React.FC<T.PanelProps> = (props) => {
 	const { value: panelValue, children, className, attributes } = props;
 	const { value, panelId, buttonId } = useTabs(panelValue);
 	const active = panelValue === value;

@@ -3,7 +3,7 @@ import View from "components/View";
 import * as T from "./Skeleton.types";
 import s from "./Skeleton.module.css";
 
-const Skeleton = (props: T.Props) => {
+const Skeleton: React.FC<T.Props> = (props) => {
 	const { borderRadius = "small", width, height, className, attributes } = props;
 	const rootClassNames = classNames(s.root, className);
 

@@ -5,7 +5,7 @@ import View from "components/View";
 import type * as T from "./Avatar.types";
 import s from "./Avatar.module.css";
 
-const Avatar = (props: T.Props) => {
+const Avatar: React.FC<T.Props> = (props) => {
 	const {
 		color = "neutral",
 		variant,

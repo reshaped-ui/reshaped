@@ -20,7 +20,7 @@ export default {
 	},
 };
 
-const Demo = (props: ModalProps & { title?: string; subtitle?: string }) => {
+const Demo: React.FC<ModalProps & { title?: string; subtitle?: string }> = (props) => {
 	const { active: activeProp, title, subtitle, children, ...modalProps } = props;
 	const { active, activate, deactivate } = useToggle(activeProp);
 

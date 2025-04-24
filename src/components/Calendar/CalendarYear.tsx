@@ -7,7 +7,7 @@ import s from "./Calendar.module.css";
 
 const MONTHS_PER_ROW = 3;
 
-const CalendarYear = (props: T.YearProps) => {
+const CalendarYear: React.FC<T.YearProps> = (props) => {
 	const { renderMonthLabel, renderMonthAriaLabel, monthDate, min, max, onMonthClick } = props;
 	const rootRef = React.useRef<HTMLTableElement>(null);
 	const monthNames = getMonthNames({ renderMonthLabel });

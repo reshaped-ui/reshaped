@@ -83,7 +83,7 @@ export const base = {
 	},
 };
 
-const Component = (props: { hotkeys: Record<string, (() => void) | null> }) => {
+const Component: React.FC<{ hotkeys: Record<string, (() => void) | null> }> = (props) => {
 	const { hotkeys } = props;
 	useHotkeys(hotkeys);
 

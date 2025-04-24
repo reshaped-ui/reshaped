@@ -9,7 +9,7 @@ export default {
 	},
 };
 
-const Component = (props: { id?: string }) => {
+const Component: React.FC<{ id?: string }> = (props) => {
 	const id = useElementId(props.id);
 
 	return <div id={id}>{id}</div>;

@@ -9,7 +9,7 @@ import { useFormControl } from "components/FormControl";
 import type * as T from "./Radio.types";
 import s from "./Radio.module.css";
 
-const Radio = (props: T.Props) => {
+const Radio: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		value,

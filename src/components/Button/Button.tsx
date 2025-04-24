@@ -8,7 +8,7 @@ import ButtonAligner from "./ButtonAligner";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";
 
-const Button = forwardRef((props: T.Props, ref: ActionableRef) => {
+const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {
 		variant = "solid",
 		color = "neutral",

@@ -9,7 +9,7 @@ import Aligner from "components/_private/Aligner";
 import type * as T from "./TextField.types";
 import s from "./TextField.module.css";
 
-const TextFieldSlot = (props: T.SlotProps) => {
+const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 	const { slot, icon, size, affix, position, id } = props;
 
 	if (!icon && !slot && !affix) return null;
@@ -63,7 +63,9 @@ const TextFieldSlot = (props: T.SlotProps) => {
 	return content.filter(Boolean);
 };
 
-const TextField = (props: T.Props) => {
+const TextField: React.FC<T.Props> & {
+	Aligner: typeof Aligner;
+} = (props) => {
 	const {
 		onChange,
 		onFocus,

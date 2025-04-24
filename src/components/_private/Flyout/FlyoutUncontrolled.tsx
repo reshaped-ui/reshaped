@@ -4,7 +4,7 @@ import React from "react";
 import FlyoutControlled from "./FlyoutControlled";
 import type * as T from "./Flyout.types";
 
-const FlyoutUncontrolled = (props: T.UncontrolledProps & T.DefaultProps) => {
+const FlyoutUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (props) => {
 	const { defaultActive, onClose, onOpen } = props;
 	const [active, setActive] = React.useState(defaultActive || false);
 

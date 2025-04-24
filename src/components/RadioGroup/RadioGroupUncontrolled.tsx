@@ -4,7 +4,7 @@ import React from "react";
 import RadioGroupControlled from "./RadioGroupControlled";
 import type * as T from "./RadioGroup.types";
 
-const RadioGroupUncontrolled = (props: T.UncontrolledProps) => {
+const RadioGroupUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange } = props;
 	const [value, setValue] = React.useState(defaultValue || null);
 

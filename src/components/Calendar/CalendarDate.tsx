@@ -6,7 +6,7 @@ import { getLocalISODate } from "./Calendar.utils";
 import type * as T from "./Calendar.types";
 import s from "./Calendar.module.css";
 
-const CalendarDate = (props: T.DateProps) => {
+const CalendarDate: React.FC<T.DateProps> = (props) => {
 	const {
 		date,
 		isoDate,

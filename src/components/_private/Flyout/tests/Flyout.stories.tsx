@@ -14,21 +14,11 @@ import { sleep } from "utilities/helpers";
 
 export default { title: "Internal/Flyout" };
 
-/**
- * Unit
- * - groupTimeouts
- * - id
- * - contentClassName
- * - contentAttributes
- * - content attributes
- * - content className
- */
-
-const Content = (props: {
+const Content: React.FC<{
 	height?: number;
 	width?: number | false;
 	children?: React.ReactNode;
-}) => (
+}> = (props) => (
 	<div
 		style={{
 			background: "var(--rs-color-background-elevation-overlay)",
@@ -44,7 +34,9 @@ const Content = (props: {
 	</div>
 );
 
-const Demo = (props: FlyoutProps & { contentHeight?: number; contentWidth?: number | false }) => {
+const Demo: React.FC<FlyoutProps & { contentHeight?: number; contentWidth?: number | false }> = (
+	props
+) => {
 	const { position = "bottom-start", children, contentHeight, contentWidth, ...rest } = props;
 
 	return (

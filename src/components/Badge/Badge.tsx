@@ -8,7 +8,7 @@ import BadgeContainer from "./BadgeContainer";
 import s from "./Badge.module.css";
 import { forwardRef } from "react";
 
-const Badge = forwardRef((props: T.Props, ref: ActionableRef) => {
+const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {
 		children,
 		color,

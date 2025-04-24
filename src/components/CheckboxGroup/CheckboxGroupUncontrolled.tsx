@@ -4,7 +4,7 @@ import React from "react";
 import CheckboxGroupControlled from "./CheckboxGroupControlled";
 import type * as T from "./CheckboxGroup.types";
 
-const CheckboxGroupUncontrolled = (props: T.UncontrolledProps) => {
+const CheckboxGroupUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange } = props;
 	const [value, setValue] = React.useState(defaultValue || []);
 

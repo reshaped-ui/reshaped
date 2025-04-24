@@ -4,7 +4,7 @@ import React from "react";
 import AccordionControlled from "./AccordionControlled";
 import * as T from "./Accordion.types";
 
-const AccordionUncontrolled = (props: T.UncontrolledProps) => {
+const AccordionUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultActive, onToggle, ...controlledProps } = props;
 	const [active, setActive] = React.useState(defaultActive || false);
 

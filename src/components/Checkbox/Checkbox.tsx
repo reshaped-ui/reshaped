@@ -12,7 +12,7 @@ import IconCheckmark from "icons/Checkmark";
 import type * as T from "./Checkbox.types";
 import s from "./Checkbox.module.css";
 
-const Checkbox = (props: T.Props) => {
+const Checkbox: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		value,

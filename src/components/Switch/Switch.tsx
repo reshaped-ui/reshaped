@@ -8,7 +8,7 @@ import useElementId from "hooks/useElementId";
 import type * as T from "./Switch.types";
 import s from "./Switch.module.css";
 
-const Switch = (props: T.Props) => {
+const Switch: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		name,

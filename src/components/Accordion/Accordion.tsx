@@ -4,7 +4,10 @@ import AccordionTrigger from "./AccordionTrigger";
 import AccordionContent from "./AccordionContent";
 import * as T from "./Accordion.types";
 
-const Accordion = (props: T.Props) => {
+const Accordion: React.FC<T.Props> & {
+	Trigger: typeof AccordionTrigger;
+	Content: typeof AccordionContent;
+} = (props) => {
 	const { active } = props;
 
 	if (active !== undefined) return <AccordionControlled {...props} />;

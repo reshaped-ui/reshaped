@@ -4,7 +4,7 @@ import Text from "components/Text";
 import type * as T from "./Divider.types";
 import s from "./Divider.module.css";
 
-const Divider = (props: T.Props) => {
+const Divider: React.FC<T.Props> = (props) => {
 	const { vertical, blank, children, contentPosition = "center", className, attributes } = props;
 	const rootClassNames = classNames(
 		s.root,

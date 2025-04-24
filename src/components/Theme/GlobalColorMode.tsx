@@ -8,7 +8,7 @@ import { GlobalColorModeContext } from "./Theme.context";
 import { getRootThemeEl } from "./Theme.utilities";
 import type * as T from "./Theme.types";
 
-const GlobalColorMode = (props: T.GlobalColorModeProps) => {
+const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 	const { defaultMode, scopeRef, children } = props;
 	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode);
 	const parentGlobalColorMode = useGlobalColorMode();

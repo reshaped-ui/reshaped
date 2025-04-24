@@ -8,7 +8,7 @@ import { range } from "utilities/helpers";
 import type * as T from "./Pagination.types";
 import s from "./Pagination.module.css";
 
-const PaginationControlled = (props: T.ControlledProps) => {
+const PaginationControlled: React.FC<T.ControlledProps> = (props) => {
 	const {
 		total,
 		page: selectedPage = 1,

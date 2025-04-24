@@ -5,7 +5,11 @@ import type * as T from "./Popover.types";
 import s from "./Popover.module.css";
 import getPaddingStyles from "styles/padding";
 
-const Popover = (props: T.Props) => {
+const Popover: React.FC<T.Props> & {
+	Dismissible: typeof PopoverDismissible;
+	Trigger: typeof Flyout.Trigger;
+	Content: typeof Flyout.Content;
+} = (props) => {
 	const {
 		width,
 		variant = "elevated",
@@ -36,7 +40,7 @@ const Popover = (props: T.Props) => {
 	);
 };
 
-const PopoverDismissible = (props: DismissibleProps) => {
+const PopoverDismissible: React.FC<DismissibleProps> = (props) => {
 	const { handleClose } = useFlyoutContext();
 
 	return <Dismissible {...props} onClose={() => handleClose({})} />;

@@ -2,7 +2,7 @@ import Aligner from "components/_private/Aligner";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";
 
-const ButtonAligner = (props: T.AlignerProps) => {
+const ButtonAligner: React.FC<T.AlignerProps> = (props) => {
 	return (
 		<Aligner
 			{...props}

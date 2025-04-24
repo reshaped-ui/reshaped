@@ -12,7 +12,7 @@ import { useTabs } from "./TabsContext";
 import type * as T from "./Tabs.types";
 import s from "./Tabs.module.css";
 
-const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
+const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const { value, children, icon, href, attributes } = props;
 	const {
 		onChange,
@@ -116,8 +116,8 @@ const TabsItem = (props: T.ItemProps, ref: ActionableRef) => {
 			</Actionable>
 		</div>
 	);
-};
+});
 
 TabsItem.displayName = "Tabs.Item";
 
-export default React.forwardRef(TabsItem);
+export default TabsItem;

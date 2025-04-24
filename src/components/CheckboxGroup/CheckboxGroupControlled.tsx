@@ -3,7 +3,7 @@
 import type * as T from "./CheckboxGroup.types";
 import Context from "./CheckboxGroup.context";
 
-const CheckboxGroupControlled = (props: T.ControlledProps) => {
+const CheckboxGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	const { onChange, name, disabled, value, children, hasError } = props;
 
 	const handleChange: T.Context["onChange"] = (args) => {

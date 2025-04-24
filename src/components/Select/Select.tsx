@@ -11,7 +11,7 @@ import useElementId from "hooks/useElementId";
 import type * as T from "./Select.types";
 import s from "./Select.module.css";
 
-const Select = (props: T.Props) => {
+const Select: React.FC<T.Props> = (props) => {
 	const {
 		onChange,
 		onClick,

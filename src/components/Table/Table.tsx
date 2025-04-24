@@ -5,7 +5,7 @@ import getMinWidthStyles from "styles/minWidth";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
 
-const TableCellPrivate = (props: T.PrivateCellProps) => {
+const TableCellPrivate: React.FC<T.PrivateCellProps> = (props) => {
 	const {
 		minWidth,
 		rowSpan,
@@ -52,15 +52,15 @@ const TableCellPrivate = (props: T.PrivateCellProps) => {
 	);
 };
 
-const TableCell = (props: T.CellProps) => {
+const TableCell: React.FC<T.CellProps> = (props) => {
 	return <TableCellPrivate {...props} tagName="td" />;
 };
 
-const TableHeading = (props: T.HeadingProps) => {
+const TableHeading: React.FC<T.HeadingProps> = (props) => {
 	return <TableCellPrivate {...props} tagName="th" />;
 };
 
-const TableRow = (props: T.RowProps) => {
+const TableRow: React.FC<T.RowProps> = (props) => {
 	const { highlighted, children, className, attributes } = props;
 	const onClick = props.onClick || attributes?.onClick;
 	const rowClassNames = classNames(s.row, highlighted && s["--row-highlighted"], className);
@@ -77,7 +77,7 @@ const TableRow = (props: T.RowProps) => {
 	);
 };
 
-const TableBody = (props: T.BodyProps) => {
+const TableBody: React.FC<T.BodyProps> = (props) => {
 	const { children, attributes, className } = props;
 
 	return (
@@ -87,7 +87,7 @@ const TableBody = (props: T.BodyProps) => {
 	);
 };
 
-const TableHead = (props: T.HeadProps) => {
+const TableHead: React.FC<T.HeadProps> = (props) => {
 	const { children, attributes, className } = props;
 
 	return (
@@ -97,7 +97,13 @@ const TableHead = (props: T.HeadProps) => {
 	);
 };
 
-const Table = (props: T.Props) => {
+const Table: React.FC<T.Props> & {
+	Cell: typeof TableCell;
+	Heading: typeof TableHeading;
+	Row: typeof TableRow;
+	Body: typeof TableBody;
+	Head: typeof TableHead;
+} = (props) => {
 	const { children, border, columnBorder, className, attributes } = props;
 	const rootClassNames = classNames(
 		s.root,
