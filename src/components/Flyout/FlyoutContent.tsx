@@ -11,7 +11,7 @@ import type * as T from "./Flyout.types";
 import s from "./Flyout.module.css";
 
 const FlyoutContent = (props: T.ContentProps) => {
-	const { children, className, attributes, flyoutAttributes, flyoutClassName } = props;
+	const { children, className, attributes } = props;
 	const {
 		flyout,
 		id,
@@ -94,7 +94,6 @@ const FlyoutContent = (props: T.ContentProps) => {
 
 	const rootClassNames = classNames(
 		s.content,
-		flyoutClassName,
 		triggerType === "hover" && s["--hover"],
 		status === "visible" && s["--visible"],
 		// animating only when we're opening the first flyout or closing the last flyout within the same cooldown
@@ -125,14 +124,12 @@ const FlyoutContent = (props: T.ContentProps) => {
 		<ContentProvider value={{ elRef: flyoutElRef }}>
 			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 			<div
-				{...flyoutAttributes}
 				className={rootClassNames}
 				style={
 					{
-						...flyoutAttributes?.style,
 						...styles,
 						"--rs-flyout-gap": contentGap,
-					} as unknown as React.CSSProperties
+					} as React.CSSProperties
 				}
 				ref={flyoutElRef}
 				onTransitionEnd={handleTransitionEnd}

@@ -129,8 +129,6 @@ export type TriggerProps = {
 
 export type ContentProps = {
 	children?: React.ReactNode;
-	flyoutClassName?: G.ClassName;
-	flyoutAttributes?: G.Attributes<"div">;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

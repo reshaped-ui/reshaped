@@ -2,4 +2,3 @@
 
 - Flyout: Exported from the library
 - Flyout: Moved css to css layers
-- Flyout: flyoutClassName, flyoutAttributes?
