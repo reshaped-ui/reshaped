@@ -102,14 +102,14 @@ const ThemeSwitch = () => {
 	);
 };
 
-const reshapedDecorator = (Story, { parameters, globals }) => {
+const reshapedDecorator = (Story, { parameters }) => {
 	if (parameters.disableWrapper) return <Story />;
 
 	return (
 		<React.StrictMode>
 			<Reshaped
-				defaultTheme={localStorage.getItem("__reshaped-theme")}
-				defaultColorMode={localStorage.getItem("__reshaped-mode")}
+				defaultTheme={localStorage.getItem("__reshaped-theme") || "slate"}
+				defaultColorMode={localStorage.getItem("__reshaped-mode") || "dark"}
 				toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
 			>
 				<View paddingBottom={10}>
