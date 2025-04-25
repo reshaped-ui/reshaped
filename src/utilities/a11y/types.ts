@@ -19,3 +19,8 @@
 export type TrapMode = "dialog" | "action-menu" | "action-bar" | "content-menu" | "selection-menu";
 
 export type FocusableElement = HTMLButtonElement | HTMLInputElement;
+
+export type FocusableOptions = {
+	additionalElement?: FocusableElement | null;
+	includeNegativeTabIndex?: boolean;
+};
