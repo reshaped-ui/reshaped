@@ -189,13 +189,17 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		setDraggingId(closestId);
 	};
 
-	const handleMinDragStart = () => {
+	const handleMinDragStart: T.ThumbProps["onDragStart"] = (e) => {
 		if (disabled) return;
+
+		e.stopPropagation();
 		setDraggingId(minId);
 	};
 
-	const handleMaxDragStart = () => {
+	const handleMaxDragStart: T.ThumbProps["onDragStart"] = (e) => {
 		if (disabled) return;
+
+		e.stopPropagation();
 		setDraggingId(maxId);
 	};
 

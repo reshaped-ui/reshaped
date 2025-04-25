@@ -72,7 +72,7 @@ export type ThumbProps = {
 	active?: boolean;
 	position: number;
 	onChange: (value: number, options?: { commit?: boolean }) => void;
-	onDragStart: () => void;
+	onDragStart: (e: React.TouchEvent | React.MouseEvent) => void;
 	max: number;
 	min: number;
 	step: NonNullable<BaseProps["step"]>;
