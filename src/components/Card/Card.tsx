@@ -63,7 +63,7 @@ const Card = forwardRef(
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					ref={ref as any}
 				>
-					<span className={s.content}>{children}</span>
+					{children}
 				</Actionable>
 			);
 		}
@@ -77,7 +77,7 @@ const Card = forwardRef(
 				className={rootClassNames}
 				style={style}
 			>
-				<span className={s.content}>{children}</span>
+				{children}
 			</TagName>
 		);
 	}
