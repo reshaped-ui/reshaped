@@ -7,7 +7,7 @@ import View from "components/View";
 import type * as T from "./Resizable.types";
 import s from "./Resizable.module.css";
 
-const PrivateResizableHandle = (props: T.PrivateHandleProps) => {
+const PrivateResizableHandle: React.FC<T.PrivateHandleProps> = (props) => {
 	const { containerRef, onDrag, index, direction, children } = props;
 	const { ref, active } = useDrag(
 		(args) => {
@@ -38,34 +38,35 @@ const PrivateResizableHandle = (props: T.PrivateHandleProps) => {
 	);
 };
 
-const PrivateResizableItem = React.forwardRef(
-	(props: T.PrivateItemProps, ref: React.Ref<HTMLDivElement>) => {
-		const { children, defaultSize, minSize, maxSize } = props;
-		const itemRef = React.useRef<HTMLDivElement | null>(null);
+const PrivateResizableItem = React.forwardRef<HTMLDivElement, T.PrivateItemProps>((props, ref) => {
+	const { children, defaultSize, minSize, maxSize } = props;
+	const itemRef = React.useRef<HTMLDivElement | null>(null);
 
-		return (
-			<View.Item
-				grow
-				className={s.item}
-				attributes={{
-					ref: (el) => {
-						if (typeof ref === "function") ref(el);
-						itemRef.current = el;
-					},
-					style: {
-						"--rs-resizable-default-size": defaultSize,
-						"--rs-resizable-min-size": minSize,
-						"--rs-resizable-max-size": maxSize,
-					},
-				}}
-			>
-				{children}
-			</View.Item>
-		);
-	}
-);
+	return (
+		<View.Item
+			grow
+			className={s.item}
+			attributes={{
+				ref: (el) => {
+					if (typeof ref === "function") ref(el);
+					itemRef.current = el;
+				},
+				style: {
+					"--rs-resizable-default-size": defaultSize,
+					"--rs-resizable-min-size": minSize,
+					"--rs-resizable-max-size": maxSize,
+				},
+			}}
+		>
+			{children}
+		</View.Item>
+	);
+});
 
-const Resizable = (props: T.Props) => {
+const Resizable: React.FC<T.Props> & {
+	Item: React.FC<T.ItemProps>;
+	Handle: React.FC<T.HandleProps>;
+} = (props) => {
 	const {
 		children,
 		variant = "borderless",
@@ -232,8 +233,8 @@ const Resizable = (props: T.Props) => {
 	);
 };
 
-Resizable.Item = (() => null) as React.FC<T.ItemProps>;
-Resizable.Handle = (() => null) as React.FC<T.HandleProps>;
+Resizable.Item = () => null;
+Resizable.Handle = () => null;
 
 Resizable.displayName = "Resizable";
 

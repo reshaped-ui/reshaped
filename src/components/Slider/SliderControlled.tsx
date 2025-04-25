@@ -15,7 +15,7 @@ import useHandlerRef from "hooks/useHandlerRef";
 
 const THUMB_SIZE = 16;
 
-const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
+const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {
 		name,
 		range,

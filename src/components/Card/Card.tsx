@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { classNames } from "utilities/helpers";
-import Actionable, { type ActionableRef } from "components/Actionable";
+import Actionable from "components/Actionable";
 import type * as T from "./Card.types";
 import s from "./Card.module.css";
 import getRadiusStyles from "styles/radius";
@@ -8,7 +8,7 @@ import getBleedStyles from "styles/bleed";
 import getPaddingStyles from "styles/padding";
 import getHeightStyles from "styles/height";
 
-const Card = forwardRef<HTMLElement, T.Props<keyof React.JSX.IntrinsicElements>>(
+const Card = forwardRef(
 	<As extends keyof React.JSX.IntrinsicElements = "div">(
 		props: T.Props<As>,
 		ref: React.Ref<HTMLElement>
@@ -60,7 +60,8 @@ const Card = forwardRef<HTMLElement, T.Props<keyof React.JSX.IntrinsicElements>>
 					href={href}
 					as={TagName}
 					onClick={onClick}
-					ref={ref as ActionableRef}
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					ref={ref as any}
 				>
 					<span className={s.content}>{children}</span>
 				</Actionable>

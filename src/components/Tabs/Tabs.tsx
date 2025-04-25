@@ -5,7 +5,11 @@ import TabsList from "./TabsList";
 import TabsPanel from "./TabsPanel";
 import type * as T from "./Tabs.types";
 
-const Tabs = (props: T.Props) => {
+const Tabs: React.FC<T.Props> & {
+	Item: typeof TabsItem;
+	List: typeof TabsList;
+	Panel: typeof TabsPanel;
+} = (props) => {
 	const { value } = props;
 
 	if (value !== undefined) return <TabsControlled {...(props as T.PrivateControlledProps)} />;

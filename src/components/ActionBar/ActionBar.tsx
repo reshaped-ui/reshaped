@@ -3,7 +3,7 @@ import View from "components/View";
 import type * as T from "./ActionBar.types";
 import s from "./ActionBar.module.css";
 
-const ActionBar = (props: T.Props) => {
+const ActionBar: React.FC<T.Props> = (props) => {
 	const {
 		position = "bottom",
 		padding,

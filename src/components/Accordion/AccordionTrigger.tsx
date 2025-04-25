@@ -10,7 +10,7 @@ import AccordionContext from "./Accordion.context";
 import * as T from "./Accordion.types";
 import s from "./Accordion.module.css";
 
-const AccordionTrigger = (props: T.TriggerProps) => {
+const AccordionTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;
 	const {
 		active,

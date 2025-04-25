@@ -4,7 +4,7 @@ import React from "react";
 import CalendarControlled from "./CalendarControlled";
 import type * as T from "./Calendar.types";
 
-const CalendarUncontrolled = (props: T.UncontrolledProps & T.BaseProps) => {
+const CalendarUncontrolled: React.FC<T.UncontrolledProps & T.BaseProps> = (props) => {
 	const { onChange, defaultValue, range, ...controlledProps } = props;
 	const [value, setValue] = React.useState(defaultValue || null);
 

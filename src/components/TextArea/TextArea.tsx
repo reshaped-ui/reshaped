@@ -8,7 +8,9 @@ import useElementId from "hooks/useElementId";
 import type * as T from "./TextArea.types";
 import s from "./TextArea.module.css";
 
-const TextArea = (props: T.Props) => {
+const TextArea: React.FC<T.Props> & {
+	Aligner: typeof Aligner;
+} = (props) => {
 	const {
 		onChange,
 		onFocus,

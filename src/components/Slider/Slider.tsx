@@ -2,7 +2,7 @@ import type * as T from "./Slider.types";
 import SliderControlled from "./SliderControlled";
 import SliderUncontrolled from "./SliderUncontrolled";
 
-const Slider = (props: T.Props) => {
+const Slider: React.FC<T.Props> = (props) => {
 	const { min = 0, max = 100, ...rest } = props;
 
 	if (

@@ -21,7 +21,7 @@ import {
 import type * as T from "./Flyout.types";
 import useHandlerRef from "hooks/useHandlerRef";
 
-const FlyoutControlled = (props: T.ControlledProps & T.DefaultProps) => {
+const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {
 		triggerType = "click",
 		groupTimeouts,

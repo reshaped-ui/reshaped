@@ -10,7 +10,7 @@ import { useFlyoutContext, ContentProvider } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 import s from "./Flyout.module.css";
 
-const FlyoutContent = (props: T.ContentProps) => {
+const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const { children, className, attributes } = props;
 	const {
 		flyout,

@@ -4,7 +4,7 @@ import type * as TRadio from "components/Radio/Radio.types";
 import Context from "./RadioGroup.context";
 import type * as T from "./RadioGroup.types";
 
-const RadioGroupControlled = (props: T.ControlledProps) => {
+const RadioGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	const { onChange, name, disabled, value, children, hasError } = props;
 
 	const handleChange: TRadio.Props["onChange"] = ({ event, value }) => {

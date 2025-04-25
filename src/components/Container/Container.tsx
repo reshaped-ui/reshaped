@@ -3,7 +3,7 @@ import View from "components/View";
 import type * as T from "./Container.types";
 import s from "./Container.module.css";
 
-const Container = (props: T.Props) => {
+const Container: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		padding = 4,

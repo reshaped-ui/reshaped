@@ -1,13 +1,12 @@
 import View from "components/View";
 import Image from "components/Image";
-import Checkbox from "components/Checkbox";
 import NumberField from "components/NumberField";
 
 export default {
 	title: "Sandbox",
 };
 
-const Preview = (props: { children: React.ReactNode }) => {
+const Preview: React.FC<{ children: React.ReactNode }> = (props) => {
 	return (
 		<View padding={20} gap={6}>
 			<View position="absolute" insetTop={0} insetStart={0}>

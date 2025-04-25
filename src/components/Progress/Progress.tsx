@@ -3,7 +3,7 @@ import { classNames } from "utilities/helpers";
 import type * as T from "./Progress.types";
 import s from "./Progress.module.css";
 
-const Progress = (props: T.Props) => {
+const Progress: React.FC<T.Props> = (props) => {
 	const {
 		value = 0,
 		min = 0,

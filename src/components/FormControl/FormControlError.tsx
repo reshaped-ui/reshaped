@@ -4,7 +4,7 @@ import { useFormControlPrivate } from "./FormControl.context";
 import FormControlCaption from "./FormControlCaption";
 import type * as T from "./FormControl.types";
 
-const FormControlError = (props: T.CaptionProps) => {
+const FormControlError: React.FC<T.CaptionProps> = (props) => {
 	const { children } = props;
 	const { hasError } = useFormControlPrivate();
 

@@ -59,11 +59,11 @@ function Example() {
 
 export const base = { name: "base", render: () => <Example /> };
 
-const Demo = (props: {
+const Demo: React.FC<{
 	onDrag: ReturnType<typeof fn>;
 	disabled?: boolean;
 	orientation?: "horizontal" | "vertical";
-}) => {
+}> = (props) => {
 	const { ref, containerRef } = useDrag<HTMLDivElement>(
 		(options) => {
 			props.onDrag(options);

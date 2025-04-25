@@ -4,7 +4,7 @@ import React from "react";
 import SliderControlled from "./SliderControlled";
 import type * as T from "./Slider.types";
 
-const SliderUncontrolled = (props: T.UncontrolledProps & T.DefaultProps) => {
+const SliderUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (props) => {
 	const { min, max, onChange, range } = props;
 	const defaultMinValue =
 		("defaultMinValue" in props && props.defaultMinValue !== undefined && props.defaultMinValue) ||

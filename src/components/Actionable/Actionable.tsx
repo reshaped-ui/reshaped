@@ -6,7 +6,7 @@ import * as keys from "constants/keys";
 import type * as T from "./Actionable.types";
 import s from "./Actionable.module.css";
 
-const Actionable = forwardRef((props: T.Props, ref: T.Ref) => {
+const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 	const {
 		children,
 		href,

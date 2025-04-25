@@ -3,7 +3,7 @@ import { classNames } from "utilities/helpers";
 import type * as T from "./Hotkey.types";
 import s from "./Hotkey.module.css";
 
-const Hotkey = (props: T.Props) => {
+const Hotkey: React.FC<T.Props> = (props) => {
 	const { children, active, className, attributes } = props;
 	const rootClassNames = classNames(s.root, active && s["--active"], className);
 

@@ -158,7 +158,7 @@ const globalHotkeyStore = new HotkeyStore();
  */
 export const HotkeyContext = React.createContext({} as Context);
 
-export const SingletonHotkeysProvider = (props: { children: React.ReactNode }) => {
+export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const { children } = props;
 	// eslint-disable-next-line
 	const [_, setTriggerCount] = React.useState<number>(0);

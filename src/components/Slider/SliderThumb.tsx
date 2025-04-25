@@ -8,7 +8,7 @@ import { getPrecision } from "./Slider.utilities";
 import type * as T from "./Slider.types";
 import s from "./Slider.module.css";
 
-const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
+const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) => {
 	const {
 		name,
 		value,
@@ -72,8 +72,8 @@ const SliderThumb = (props: T.ThumbProps, ref: React.Ref<HTMLDivElement>) => {
 			</div>
 		</>
 	);
-};
+});
 
 SliderThumb.displayName = "SliderThumb";
 
-export default React.forwardRef(SliderThumb);
+export default SliderThumb;

@@ -14,7 +14,7 @@ import type * as T from "./Overlay.types";
 import s from "./Overlay.module.css";
 import useHandlerRef from "hooks/useHandlerRef";
 
-const Overlay = (props: T.Props) => {
+const Overlay: React.FC<T.Props> = (props) => {
 	const {
 		active,
 		children,
