@@ -2,7 +2,7 @@ import { classNames, responsiveClassNames } from "utilities/helpers";
 import type * as T from "./Hidden.types";
 import s from "./Hidden.module.css";
 
-const Hidden = (props: T.Props) => {
+const Hidden: React.FC<T.Props> = (props) => {
 	const { as: TagName = "div", children, visibility, hide } = props;
 	const rootClassNames = classNames(
 		s.root,

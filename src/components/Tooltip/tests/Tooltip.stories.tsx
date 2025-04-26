@@ -16,7 +16,7 @@ export default {
 	},
 };
 
-const Demo = (props: any) => {
+const Demo: React.FC<any> = (props) => {
 	const { position, ...rest } = props;
 
 	return (
@@ -26,7 +26,7 @@ const Demo = (props: any) => {
 	);
 };
 
-const DemoResponsive = (props: any) => {
+const DemoResponsive: React.FC<any> = (props) => {
 	const { position, ...rest } = props;
 	const screenSize = useResponsiveClientValue({
 		s: "small",

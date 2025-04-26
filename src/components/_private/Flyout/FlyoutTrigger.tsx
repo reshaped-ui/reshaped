@@ -3,7 +3,7 @@
 import type * as T from "./Flyout.types";
 import { useFlyoutContext, TriggerProvider } from "./Flyout.context";
 
-const FlyoutTrigger = (props: T.TriggerProps) => {
+const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;
 	const {
 		id,

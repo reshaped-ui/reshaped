@@ -6,7 +6,7 @@ import { getCaptionId } from "./FormControl.utilities";
 import type * as T from "./FormControl.types";
 import s from "./FormControl.module.css";
 
-const FormControlCaption = (props: T.PrivateCaptionProps) => {
+const FormControlCaption: React.FC<T.PrivateCaptionProps> = (props) => {
 	const { children, variant, disabled } = props;
 	const { attributes, size, helperRef, errorRef } = useFormControlPrivate();
 	const id = getCaptionId(attributes.id, variant);

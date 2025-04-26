@@ -15,7 +15,7 @@ import useHandlerRef from "hooks/useHandlerRef";
 
 const THUMB_SIZE = 16;
 
-const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
+const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {
 		name,
 		range,
@@ -189,13 +189,17 @@ const SliderControlled = (props: T.ControlledProps & T.DefaultProps) => {
 		setDraggingId(closestId);
 	};
 
-	const handleMinDragStart = () => {
+	const handleMinDragStart: T.ThumbProps["onDragStart"] = (e) => {
 		if (disabled) return;
+
+		e.stopPropagation();
 		setDraggingId(minId);
 	};
 
-	const handleMaxDragStart = () => {
+	const handleMaxDragStart: T.ThumbProps["onDragStart"] = (e) => {
 		if (disabled) return;
+
+		e.stopPropagation();
 		setDraggingId(maxId);
 	};
 

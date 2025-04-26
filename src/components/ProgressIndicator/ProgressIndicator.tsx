@@ -10,7 +10,7 @@ import s from "./ProgressIndicator.module.css";
 const MAX_RENDERED_ITEMS = 7;
 const BOUNDARY = (MAX_RENDERED_ITEMS - 1) / 2;
 
-const ProgressIndicator = (props: T.Props) => {
+const ProgressIndicator: React.FC<T.Props> = (props) => {
 	const { total, activeIndex = 0, color = "primary", ariaLabel, className, attributes } = props;
 	const allItemsVisible = total < MAX_RENDERED_ITEMS;
 	const firstRenderedIndex = React.useMemo(() => {

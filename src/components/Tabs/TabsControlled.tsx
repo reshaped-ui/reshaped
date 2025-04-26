@@ -5,7 +5,7 @@ import useElementId from "hooks/useElementId";
 import { TabsProvider } from "./TabsContext";
 import type * as T from "./Tabs.types";
 
-const TabsControlled = (props: T.PrivateControlledProps) => {
+const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 	const {
 		children,
 		value,

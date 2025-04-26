@@ -2,7 +2,7 @@ import { classNames } from "utilities/helpers";
 import type * as T from "./Scrim.types";
 import s from "./Scrim.module.css";
 
-const Scrim = (props: T.Props) => {
+const Scrim: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		backgroundSlot,

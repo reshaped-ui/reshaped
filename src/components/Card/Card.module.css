@@ -12,11 +12,6 @@
 	transition-property: box-shadow, border-color;
 }
 
-.content {
-	position: relative;
-	z-index: var(--rs-z-index-raised);
-}
-
 .--selected {
 	border-color: transparent;
 	box-shadow: 0 0 0 2px var(--rs-color-border-primary);

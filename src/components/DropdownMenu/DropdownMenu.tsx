@@ -15,7 +15,15 @@ import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
 
-const DropdownMenu = (props: T.Props) => {
+const DropdownMenu: React.FC<T.Props> & {
+	Dismissible: typeof Popover.Dismissible;
+	Trigger: typeof Popover.Trigger;
+	Content: typeof DropdownMenuContent;
+	Section: typeof DropdownMenuSection;
+	Item: typeof DropdownMenuItem;
+	SubMenu: typeof DropdownMenuSubMenu;
+	SubTrigger: typeof DropdownMenuSubTrigger;
+} = (props) => {
 	const {
 		children,
 		position = "bottom-start",
@@ -37,7 +45,7 @@ const DropdownMenu = (props: T.Props) => {
 	);
 };
 
-const DropdownMenuContent = (props: T.ContentProps) => {
+const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 	const { children, attributes, className } = props;
 	const { flyout } = useFlyoutContext();
 	const subMenuInstance = React.useContext(DropdownMenuSubContext);
@@ -63,7 +71,7 @@ const DropdownMenuContent = (props: T.ContentProps) => {
 	);
 };
 
-const DropdownMenuSection = (props: T.SectionProps) => {
+const DropdownMenuSection: React.FC<T.SectionProps> = (props) => {
 	const { children } = props;
 
 	return (
@@ -73,7 +81,7 @@ const DropdownMenuSection = (props: T.SectionProps) => {
 	);
 };
 
-const DropdownMenuItem = (props: T.ItemProps) => {
+const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 	const { onClick } = props;
 	const { handleClose } = useFlyoutContext();
 
@@ -98,7 +106,7 @@ const DropdownMenuItem = (props: T.ItemProps) => {
 	);
 };
 
-const DropdownMenuSubMenu = (props: T.SubMenuProps) => {
+const DropdownMenuSubMenu: React.FC<T.SubMenuProps> = (props) => {
 	const { children } = props;
 	const dropdownMenuRef = React.useRef<T.Instance>(null);
 
@@ -116,7 +124,7 @@ const DropdownMenuSubMenu = (props: T.SubMenuProps) => {
 	);
 };
 
-const DropdownMenuSubTriggerItem = (props: T.SubTriggerProps) => {
+const DropdownMenuSubTriggerItem: React.FC<T.SubTriggerProps> = (props) => {
 	const { children, attributes, ...menuItemProps } = props;
 	const subMenuInstance = React.useContext(DropdownMenuSubContext);
 	const [rtl] = useRTL();
@@ -141,7 +149,7 @@ const DropdownMenuSubTriggerItem = (props: T.SubTriggerProps) => {
 	);
 };
 
-const DropdownMenuSubTrigger = (props: T.SubTriggerProps) => {
+const DropdownMenuSubTrigger: React.FC<T.SubTriggerProps> = (props) => {
 	const { attributes, ...menuItemProps } = props;
 
 	return (

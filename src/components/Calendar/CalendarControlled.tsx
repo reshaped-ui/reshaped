@@ -17,7 +17,7 @@ import CalendarYear from "./CalendarYear";
 import CalendarControls from "./CalendarControls";
 import type * as T from "./Calendar.types";
 
-const CalendarControlled = (props: T.ControlledProps & T.BaseProps) => {
+const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) => {
 	const {
 		value,
 		onChange,

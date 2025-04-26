@@ -8,7 +8,7 @@ type Props = {
 	inverted?: boolean;
 };
 
-const Placeholder = (props: Props) => {
+const Placeholder: React.FC<Props> = (props) => {
 	const { w = "auto", h = 50, minW = h, children } = props;
 
 	return (

@@ -29,7 +29,7 @@ const patternMap: Record<NonNullable<T.Props["pattern"]>, string> = {
 	alphanumeric: regExpAlphaNumericChar,
 };
 
-const PinFieldControlled = (props: T.ControlledProps) => {
+const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	const {
 		valueLength = 4,
 		value,

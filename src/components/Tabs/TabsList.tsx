@@ -26,7 +26,7 @@ const findParentItem = (el: HTMLElement | null, rootEl: HTMLElement): HTMLElemen
 	return findParentItem(el.parentElement, rootEl);
 };
 
-const TabsList = (props: T.ListProps) => {
+const TabsList: React.FC<T.ListProps> = (props) => {
 	const { children, className, attributes } = props;
 	const {
 		value,

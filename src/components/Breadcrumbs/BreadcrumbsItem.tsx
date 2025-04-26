@@ -2,7 +2,7 @@ import Text from "components/Text";
 import Link from "components/Link";
 import type * as T from "./Breadcrumbs.types";
 
-const BreadcrumbsItem = (props: T.ItemProps) => {
+const BreadcrumbsItem: React.FC<T.ItemProps> = (props) => {
 	const { children, onClick, href, icon, disabled } = props;
 
 	if (!href && !onClick && !disabled) {

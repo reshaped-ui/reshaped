@@ -7,7 +7,9 @@ type Props = {
 	children?: React.ReactNode;
 };
 
-const Example = (props: { children: React.ReactNode; title?: React.ReactNode }) => {
+const Example: React.FC<{ children: React.ReactNode; title?: React.ReactNode }> & {
+	Item: typeof ExampleItem;
+} = (props) => {
 	return (
 		<View gap={3} attributes={props.title ? { style: { marginTop: -17 } } : undefined}>
 			{props.title && (
@@ -29,7 +31,7 @@ const Example = (props: { children: React.ReactNode; title?: React.ReactNode }) 
 	);
 };
 
-const ExampleItem = (props: Props) => {
+const ExampleItem: React.FC<Props> = (props) => {
 	const { children } = props;
 	const title = typeof props.title === "string" ? [props.title] : props.title;
 

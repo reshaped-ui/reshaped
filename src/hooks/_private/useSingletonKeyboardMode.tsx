@@ -20,7 +20,7 @@ export const SingletonKeyboardModeContext = React.createContext<ContextProps>({
 	deactivate: () => {},
 });
 
-export const SingletonKeyboardModeProvider = (props: { children: React.ReactNode }) => {
+export const SingletonKeyboardModeProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const disabledRef = React.useRef(false);
 
 	const disable = React.useCallback(() => {

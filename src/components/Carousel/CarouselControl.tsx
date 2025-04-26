@@ -9,7 +9,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import * as T from "./Carousel.types";
 import s from "./Carousel.module.css";
 
-const CarouselControl = (props: T.ControlProps) => {
+const CarouselControl: React.FC<T.ControlProps> = (props) => {
 	const { type, scrollElRef, scrollPosition, onClick, isRTL, mounted } = props;
 	const [visible, setVisible] = React.useState(false);
 	const [rendered, setRendered] = React.useState(false);

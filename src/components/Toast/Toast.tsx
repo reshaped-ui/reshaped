@@ -9,7 +9,7 @@ import Text from "components/Text";
 import type * as T from "./Toast.types";
 import s from "./Toast.module.css";
 
-const Toast = (props: T.Props & { collapsed: boolean }) => {
+const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 	const {
 		size = "small",
 		text,

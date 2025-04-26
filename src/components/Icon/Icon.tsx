@@ -4,7 +4,7 @@ import getHeightStyles from "styles/height";
 import type * as T from "./Icon.types";
 import s from "./Icon.module.css";
 
-const Icon = (props: T.Props) => {
+const Icon: React.FC<T.Props> = (props) => {
 	const { svg: Component, className, color, size = "1em", autoWidth, attributes } = props;
 	const heightStyles = getHeightStyles(size);
 	const rootClassName = classNames(

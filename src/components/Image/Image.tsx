@@ -8,7 +8,7 @@ import getRadiusStyles from "styles/radius";
 import getWidthStyles from "styles/width";
 import getHeightStyles from "styles/height";
 
-const Image = (props: T.Props) => {
+const Image: React.FC<T.Props> = (props) => {
 	const {
 		src,
 		alt,

@@ -2,7 +2,7 @@ import { classNames, responsiveClassNames } from "utilities/helpers";
 import type * as T from "./Loader.types";
 import s from "./Loader.module.css";
 
-const Loader = (props: T.Props) => {
+const Loader: React.FC<T.Props> = (props) => {
 	const { size = "small", color = "primary", className, attributes } = props;
 	const ariaLabel = props.ariaLabel || attributes?.["aria-label"];
 	const rootClassNames = classNames(

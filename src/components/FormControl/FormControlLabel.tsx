@@ -5,7 +5,7 @@ import Text from "components/Text";
 import type * as T from "./FormControl.types";
 import s from "./FormControl.module.css";
 
-const FormControlLabel = (props: T.LabelProps) => {
+const FormControlLabel: React.FC<T.LabelProps> = (props) => {
 	const { children } = props;
 	const { attributes, required, group, disabled, size } = useFormControlPrivate();
 	const id = `${attributes.id}-label`;

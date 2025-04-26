@@ -6,7 +6,7 @@ import IconClose from "icons/Close";
 import type * as T from "./Dismissible.types";
 import s from "./Dismissible.module.css";
 
-const Dismissible = (props: T.Props) => {
+const Dismissible: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		align,

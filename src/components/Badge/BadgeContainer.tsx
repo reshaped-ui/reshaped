@@ -2,7 +2,7 @@ import { classNames } from "utilities/helpers";
 import type * as T from "./Badge.types";
 import s from "./Badge.module.css";
 
-const BadgeContainer = (props: T.ContainerProps) => {
+const BadgeContainer: React.FC<T.ContainerProps> = (props) => {
 	const { children, position = "top-end", overlap, className, attributes } = props;
 	const rootClassNames = classNames(
 		s.container,

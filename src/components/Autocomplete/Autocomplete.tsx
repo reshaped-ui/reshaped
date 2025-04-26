@@ -14,7 +14,7 @@ import s from "./Autocomplete.module.css";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
-const Autocomplete = (props: T.Props) => {
+const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (props) => {
 	const {
 		children,
 		onChange,
@@ -169,7 +169,7 @@ const Autocomplete = (props: T.Props) => {
 	);
 };
 
-const AutocompleteItem = (props: T.ItemProps) => {
+const AutocompleteItem: React.FC<T.ItemProps> = (props) => {
 	const { value, data, onClick, ...menuItemProps } = props;
 	const { onItemClick } = React.useContext(AutocompleteContext);
 

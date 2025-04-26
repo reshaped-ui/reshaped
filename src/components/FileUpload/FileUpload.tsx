@@ -8,13 +8,15 @@ import useToggle from "hooks/useToggle";
 import type * as T from "./FileUpload.types";
 import s from "./FileUpload.module.css";
 
-const FileUploadTrigger = (props: T.TriggerProps) => {
+const FileUploadTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;
 
 	return <span className={s.trigger}>{children}</span>;
 };
 
-const FileUpload = (props: T.Props) => {
+const FileUpload: React.FC<T.Props> & {
+	Trigger: typeof FileUploadTrigger;
+} = (props) => {
 	const { name, children, height, className, attributes, inputAttributes, onChange } = props;
 	const highlightToggle = useToggle();
 	const rootClassNames = classNames(

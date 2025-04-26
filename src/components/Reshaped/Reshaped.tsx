@@ -15,7 +15,7 @@ import type * as T from "./Reshaped.types";
 import "./Reshaped.css";
 import s from "./Reshaped.module.css";
 
-const ReshapedInner = (props: T.Props) => {
+const ReshapedInner: React.FC<T.Props> = (props) => {
 	const { children, defaultRTL, defaultViewport = "s", toastOptions } = props;
 	const rtlState = useSingletonEnvironment(defaultRTL);
 
@@ -30,7 +30,7 @@ const ReshapedInner = (props: T.Props) => {
 	);
 };
 
-const Reshaped = (props: T.Props) => {
+const Reshaped: React.FC<T.Props> = (props) => {
 	const { theme, defaultTheme = "reshaped", defaultColorMode, scoped, className } = props;
 	const rootClassNames = classNames(s.root, className);
 	const scopeRef = React.useRef<HTMLDivElement>(null);

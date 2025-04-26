@@ -14,7 +14,7 @@ export default {
 	},
 };
 
-const Demo = (props: any) => {
+const Demo: React.FC<any> = (props) => {
 	const { position, ...rest } = props;
 	return (
 		<Popover position={position} {...rest}>

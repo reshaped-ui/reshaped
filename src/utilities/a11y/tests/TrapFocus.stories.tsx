@@ -19,10 +19,10 @@ export default {
 	title: "Utilities/TrapFocus",
 };
 
-const TrapContent = (props: {
+const TrapContent: React.FC<{
 	rootRef: React.RefObject<HTMLDivElement | null>;
 	onRelease: () => void;
-}) => {
+}> = (props) => {
 	return (
 		<View
 			gap={4}

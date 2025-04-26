@@ -14,7 +14,7 @@ export default {
 	},
 };
 
-const Demo = (props: { subtitle?: string; activeId?: number }) => {
+const Demo: React.FC<{ subtitle?: string; activeId?: number }> = (props) => {
 	const [activeId, setActiveId] = React.useState(props.activeId ?? 1);
 
 	const content = (

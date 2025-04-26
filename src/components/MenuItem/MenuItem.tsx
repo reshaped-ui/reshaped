@@ -7,7 +7,7 @@ import MenuItemAligner from "./MenuItemAligner";
 import type * as T from "./MenuItem.types";
 import s from "./MenuItem.module.css";
 
-const MenuItem = forwardRef((props: T.Props, ref: ActionableRef) => {
+const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {
 		icon,
 		startSlot,
