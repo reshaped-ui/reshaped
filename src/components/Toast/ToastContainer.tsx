@@ -10,7 +10,7 @@ import { timeouts } from "./Toast.constants";
 import type * as T from "./Toast.types";
 import s from "./Toast.module.css";
 
-const ToastContainer = (props: T.ContainerProps) => {
+const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	const { toastProps, id, status, inspected, index } = props;
 	const { timeout = "short" } = toastProps;
 	const { show, hide, remove } = React.useContext(ToastContext);

@@ -4,7 +4,10 @@ import FlyoutTrigger from "./FlyoutTrigger";
 import FlyoutContent from "./FlyoutContent";
 import type * as T from "./Flyout.types";
 
-const Flyout = (props: T.Props) => {
+const Flyout: React.FC<T.Props> & {
+	Trigger: typeof FlyoutTrigger;
+	Content: typeof FlyoutContent;
+} = (props) => {
 	const { active } = props;
 
 	if (typeof active === "boolean")

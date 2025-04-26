@@ -5,7 +5,7 @@ import Text from "components/Text";
 import * as T from "./Alert.types";
 import s from "./Alert.module.css";
 
-const Alert = (props: T.Props) => {
+const Alert: React.FC<T.Props> = (props) => {
 	const {
 		title,
 		children,

@@ -26,7 +26,7 @@ const Context = React.createContext<T.Context>({
 });
 const useModal = () => React.useContext(Context);
 
-const ModalTitle = (props: T.TitleProps) => {
+const ModalTitle: React.FC<T.TitleProps> = (props) => {
 	const { children } = props;
 	const { id, setTitleMounted } = useModal();
 
@@ -42,7 +42,7 @@ const ModalTitle = (props: T.TitleProps) => {
 	);
 };
 
-const ModalSubtitle = (props: T.SubtitleProps) => {
+const ModalSubtitle: React.FC<T.SubtitleProps> = (props) => {
 	const { children } = props;
 	const { id, setSubtitleMounted } = useModal();
 
@@ -58,7 +58,10 @@ const ModalSubtitle = (props: T.SubtitleProps) => {
 	);
 };
 
-const Modal = (props: T.Props) => {
+const Modal: React.FC<T.Props> & {
+	Title: typeof ModalTitle;
+	Subtitle: typeof ModalSubtitle;
+} = (props) => {
 	const {
 		children,
 		onClose,

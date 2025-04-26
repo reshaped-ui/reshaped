@@ -9,9 +9,9 @@ import { useTheme, useGlobalColorMode } from "./useTheme";
 import * as T from "./Theme.types";
 import s from "./Theme.module.css";
 
-const Theme = (props: T.Props) => <PrivateTheme {...props} />;
+const Theme: React.FC<T.Props> = (props) => <PrivateTheme {...props} />;
 
-export const PrivateTheme = (props: T.PrivateProps) => {
+export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 	const { name, defaultName, colorMode, scoped, scopeRef, children, className } = props;
 	const [mounted, setMounted] = React.useState(false);
 	const [stateTheme, setStateTheme] = React.useState(defaultName);

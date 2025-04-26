@@ -10,7 +10,7 @@ import { onNextFrame } from "utilities/animation";
 import type * as T from "./Calendar.types";
 import s from "./Calendar.module.css";
 
-const CalendarControls = (props: T.ControlsProps) => {
+const CalendarControls: React.FC<T.ControlsProps> = (props) => {
 	const {
 		selectionMode,
 		onMonthTitleClick,

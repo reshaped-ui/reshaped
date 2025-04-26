@@ -2,6 +2,8 @@ import { Example } from "utilities/storybook";
 import Slider from "components/Slider";
 import View from "components/View";
 import FormControl from "components/FormControl";
+import Modal from "components/Modal";
+import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Components/Slider",
@@ -86,3 +88,13 @@ export const customRender = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const testModal = () => {
+	const toggle = useToggle(true);
+
+	return (
+		<Modal active={toggle.active} onClose={toggle.deactivate} position="end">
+			<Slider name="slider" defaultValue={30} renderValue={false} />
+		</Modal>
+	);
+};

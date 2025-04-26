@@ -4,7 +4,7 @@ import React from "react";
 import PinFieldControlled from "./PinFieldControlled";
 import type * as T from "./PinField.types";
 
-const PinFieldUncontrolled = (props: T.UncontrolledProps) => {
+const PinFieldUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange, ...controlledProps } = props;
 	const [value, setValue] = React.useState(defaultValue || "");
 

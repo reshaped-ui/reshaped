@@ -14,7 +14,7 @@ import CarouselControl from "./CarouselControl";
 import * as T from "./Carousel.types";
 import s from "./Carousel.module.css";
 
-const Carousel = (props: T.Props) => {
+const Carousel: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		gap = 3,

@@ -12,7 +12,7 @@ export default {
 	},
 };
 
-const Component = (props: { onEffect: () => void; count: number }) => {
+const Component: React.FC<{ onEffect: () => void; count: number }> = (props) => {
 	const { onEffect, count } = props;
 	const onEffectRef = useHandlerRef(onEffect);
 

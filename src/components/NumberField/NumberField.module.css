@@ -89,6 +89,8 @@
 	flex-grow: 1;
 	height: 50%;
 	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
 	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
 
 	&[aria-disabled] {

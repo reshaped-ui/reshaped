@@ -1,5 +1,4 @@
 import React from "react";
-import { Preview } from "@storybook/react";
 import Reshaped from "../src/components/Reshaped";
 import Button from "../src/components/Button";
 import View from "../src/components/View";
@@ -10,22 +9,24 @@ import Icon from "../src/components/Icon";
 import useRTL from "../src/hooks/useRTL";
 import IconCheckmark from "../src/icons/Checkmark";
 import { useTheme } from "../src/components/Theme";
-import useHotkeys from "../src/hooks/useHotkeys";
 import "../src/themes/reshaped/theme.css";
 import "../src/themes/slate/theme.css";
 import "../src/themes/figma/theme.css";
 import "../src/themes/fragments/twitter/theme.css";
 
 const ThemeSwitch = () => {
-	const { invertColorMode, setTheme, theme } = useTheme();
+	const { invertColorMode, colorMode, setRootTheme, theme } = useTheme();
 	const [rtl, setRTL] = useRTL();
 
-	useHotkeys(
-		{
-			"shift+m": () => invertColorMode(),
-		},
-		[invertColorMode]
-	);
+	const handleThemeChange = (theme) => {
+		setRootTheme(theme);
+		localStorage.setItem("__reshaped-theme", theme);
+	};
+
+	const handleModeChange = () => {
+		invertColorMode();
+		localStorage.setItem("__reshaped-mode", colorMode === "dark" ? "light" : "dark");
+	};
 
 	return (
 		<View
@@ -56,7 +57,7 @@ const ThemeSwitch = () => {
 			<Button onClick={() => setRTL(!rtl)} size="small">
 				Toggle direction
 			</Button>
-			<Button onClick={invertColorMode} size="small">
+			<Button onClick={handleModeChange} size="small">
 				Toggle mode
 			</Button>
 
@@ -70,7 +71,15 @@ const ThemeSwitch = () => {
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					<DropdownMenu.Item
-						onClick={() => setTheme("reshaped")}
+						onClick={() => handleThemeChange("slate")}
+						endSlot={
+							theme === "slate" ? <Icon svg={IconCheckmark} color="primary" size={5} /> : undefined
+						}
+					>
+						Slate
+					</DropdownMenu.Item>
+					<DropdownMenu.Item
+						onClick={() => handleThemeChange("reshaped")}
 						endSlot={
 							theme === "reshaped" ? (
 								<Icon svg={IconCheckmark} color="primary" size={5} />
@@ -80,15 +89,7 @@ const ThemeSwitch = () => {
 						Reshaped
 					</DropdownMenu.Item>
 					<DropdownMenu.Item
-						onClick={() => setTheme("slate")}
-						endSlot={
-							theme === "slate" ? <Icon svg={IconCheckmark} color="primary" size={5} /> : undefined
-						}
-					>
-						Slate
-					</DropdownMenu.Item>
-					<DropdownMenu.Item
-						onClick={() => setTheme("figma")}
+						onClick={() => handleThemeChange("figma")}
 						endSlot={
 							theme === "figma" ? <Icon svg={IconCheckmark} color="primary" size={5} /> : undefined
 						}
@@ -101,14 +102,14 @@ const ThemeSwitch = () => {
 	);
 };
 
-const reshapedDecorator = (Story: React.ComponentType, { parameters }) =>
-	parameters.disableWrapper ? (
-		<Story />
-	) : (
+const reshapedDecorator = (Story, { parameters }) => {
+	if (parameters.disableWrapper) return <Story />;
+
+	return (
 		<React.StrictMode>
 			<Reshaped
-				defaultTheme="slate"
-				defaultColorMode="dark"
+				defaultTheme={localStorage.getItem("__reshaped-theme") || "slate"}
+				defaultColorMode={localStorage.getItem("__reshaped-mode") || "dark"}
 				toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
 			>
 				<View paddingBottom={10}>
@@ -118,8 +119,9 @@ const reshapedDecorator = (Story: React.ComponentType, { parameters }) =>
 			</Reshaped>
 		</React.StrictMode>
 	);
+};
 
-const preview: Preview = {
+const preview = {
 	decorators: [reshapedDecorator],
 	parameters: {
 		actions: {

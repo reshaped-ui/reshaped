@@ -17,7 +17,7 @@ import { responsiveClassNames, responsivePropDependency } from "utilities/helper
 import type * as T from "./NumberField.types";
 import s from "./NumberField.module.css";
 
-const NumberFieldControlled = (props: T.ControlledProps) => {
+const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	const {
 		increaseAriaLabel,
 		decreaseAriaLabel,

@@ -10,7 +10,7 @@ import type * as T from "./ScrollArea.types";
 import s from "./ScrollArea.module.css";
 import useHandlerRef from "hooks/useHandlerRef";
 
-const ScrollAreaBar = (props: T.BarProps) => {
+const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 	const { ratio, position, vertical, onThumbMove } = props;
 	const onThumbMoveRef = useHandlerRef(onThumbMove);
 	const [dragging, setDragging] = React.useState(false);
@@ -97,128 +97,126 @@ const ScrollAreaBar = (props: T.BarProps) => {
 	);
 };
 
-const ScrollArea = forwardRef<HTMLDivElement, T.Props>(
-	(props: T.Props, ref: React.Ref<HTMLDivElement | null>) => {
-		const {
-			children,
-			height,
-			maxHeight,
-			scrollbarDisplay = "hover",
-			onScroll,
-			className,
-			attributes,
-		} = props;
-		const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
-		const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
-		const scrollableRef = React.useRef<HTMLDivElement>(null);
-		const contentRef = React.useRef<HTMLDivElement>(null);
-		const heightStyles = getHeightStyles(height);
-		const maxHeightStyles = getMaxHeightStyles(maxHeight);
-		const rootClassNames = classNames(
-			s.root,
-			scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
-			heightStyles?.classNames,
-			maxHeightStyles?.classNames,
-			className
-		);
-		const rootVariables = {
-			...heightStyles?.variables,
-			...maxHeightStyles?.variables,
-		};
+const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
+	const {
+		children,
+		height,
+		maxHeight,
+		scrollbarDisplay = "hover",
+		onScroll,
+		className,
+		attributes,
+	} = props;
+	const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
+	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
+	const scrollableRef = React.useRef<HTMLDivElement>(null);
+	const contentRef = React.useRef<HTMLDivElement>(null);
+	const heightStyles = getHeightStyles(height);
+	const maxHeightStyles = getMaxHeightStyles(maxHeight);
+	const rootClassNames = classNames(
+		s.root,
+		scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
+		heightStyles?.classNames,
+		maxHeightStyles?.classNames,
+		className
+	);
+	const rootVariables = {
+		...heightStyles?.variables,
+		...maxHeightStyles?.variables,
+	};
 
-		const updateScroll = React.useCallback(() => {
-			const scrollableEl = scrollableRef.current;
-			if (!scrollableEl) return;
+	const updateScroll = React.useCallback(() => {
+		const scrollableEl = scrollableRef.current;
+		if (!scrollableEl) return;
 
-			setScrollRatio({
-				x: scrollableEl.clientWidth / scrollableEl.scrollWidth,
-				y: scrollableEl.clientHeight / scrollableEl.scrollHeight,
-			});
-		}, []);
+		setScrollRatio({
+			x: scrollableEl.clientWidth / scrollableEl.scrollWidth,
+			y: scrollableEl.clientHeight / scrollableEl.scrollHeight,
+		});
+	}, []);
 
-		const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-			const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
-				e.currentTarget;
+	const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+		const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
+			e.currentTarget;
 
-			setScrollPosition({
-				x: scrollLeft / scrollWidth,
-				y: scrollTop / scrollHeight,
-			});
-			onScroll?.({
-				x: scrollWidth === clientWidth ? 0 : scrollLeft / (scrollWidth - clientWidth),
-				y: scrollHeight === clientHeight ? 0 : scrollTop / (scrollHeight - clientHeight),
-			});
-		};
+		setScrollPosition({
+			x: scrollLeft / scrollWidth,
+			y: scrollTop / scrollHeight,
+		});
+		onScroll?.({
+			x: scrollWidth === clientWidth ? 0 : scrollLeft / (scrollWidth - clientWidth),
+			y: scrollHeight === clientHeight ? 0 : scrollTop / (scrollHeight - clientHeight),
+		});
+	};
 
-		const handleThumbYMove: T.BarProps["onThumbMove"] = (args) => {
-			const scrollableEl = scrollableRef.current;
-			if (!scrollableEl) return;
+	const handleThumbYMove: T.BarProps["onThumbMove"] = (args) => {
+		const scrollableEl = scrollableRef.current;
+		if (!scrollableEl) return;
 
-			const value = scrollableEl.scrollHeight * args.value;
+		const value = scrollableEl.scrollHeight * args.value;
 
-			if (args.type === "absolute") {
-				scrollableEl.scrollTop = value;
-			} else {
-				scrollableEl.scrollTop += value;
-			}
-		};
+		if (args.type === "absolute") {
+			scrollableEl.scrollTop = value;
+		} else {
+			scrollableEl.scrollTop += value;
+		}
+	};
 
-		const handleThumbXMove: T.BarProps["onThumbMove"] = (args) => {
-			const scrollableEl = scrollableRef.current;
-			if (!scrollableEl) return;
+	const handleThumbXMove: T.BarProps["onThumbMove"] = (args) => {
+		const scrollableEl = scrollableRef.current;
+		if (!scrollableEl) return;
 
-			const value = scrollableEl.clientWidth * args.value;
+		const value = scrollableEl.clientWidth * args.value;
 
-			if (args.type === "absolute") {
-				scrollableEl.scrollLeft = value;
-			} else {
-				scrollableEl.scrollLeft += value;
-			}
-		};
+		if (args.type === "absolute") {
+			scrollableEl.scrollLeft = value;
+		} else {
+			scrollableEl.scrollLeft += value;
+		}
+	};
 
-		React.useImperativeHandle(ref, () => scrollableRef.current!);
+	React.useImperativeHandle(ref, () => scrollableRef.current!);
 
-		useIsomorphicLayoutEffect(() => {
-			updateScroll();
-		}, [updateScroll]);
+	useIsomorphicLayoutEffect(() => {
+		updateScroll();
+	}, [updateScroll]);
 
-		useIsomorphicLayoutEffect(() => {
-			const contentEl = contentRef.current;
-			if (!contentEl) return;
+	useIsomorphicLayoutEffect(() => {
+		const contentEl = contentRef.current;
+		if (!contentEl) return;
 
-			const observer = new ResizeObserver(updateScroll);
+		const observer = new ResizeObserver(updateScroll);
 
-			observer.observe(contentEl);
-			return () => observer.disconnect();
-		}, [updateScroll]);
+		observer.observe(contentEl);
+		return () => observer.disconnect();
+	}, [updateScroll]);
 
-		return (
-			<div {...attributes} className={rootClassNames} style={rootVariables}>
-				{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-				<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll} tabIndex={0}>
-					<div className={s.content} ref={contentRef}>
-						{children}
-					</div>
+	return (
+		<div {...attributes} className={rootClassNames} style={rootVariables}>
+			{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll} tabIndex={0}>
+				<div className={s.content} ref={contentRef}>
+					{children}
 				</div>
-				{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
-					<ScrollAreaBar
-						vertical
-						onThumbMove={handleThumbYMove}
-						ratio={scrollRatio.y}
-						position={scrollPosition.y}
-					/>
-				)}
-				{scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
-					<ScrollAreaBar
-						onThumbMove={handleThumbXMove}
-						ratio={scrollRatio.x}
-						position={scrollPosition.x}
-					/>
-				)}
 			</div>
-		);
-	}
-);
+			{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
+				<ScrollAreaBar
+					vertical
+					onThumbMove={handleThumbYMove}
+					ratio={scrollRatio.y}
+					position={scrollPosition.y}
+				/>
+			)}
+			{scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
+				<ScrollAreaBar
+					onThumbMove={handleThumbXMove}
+					ratio={scrollRatio.x}
+					position={scrollPosition.x}
+				/>
+			)}
+		</div>
+	);
+});
 
 ScrollArea.displayName = "ScrollArea";
 

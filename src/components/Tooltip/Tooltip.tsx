@@ -6,7 +6,7 @@ import Flyout from "components/Flyout";
 import type * as T from "./Tooltip.types";
 import s from "./Tooltip.module.css";
 
-const Tooltip = (props: T.Props) => {
+const Tooltip: React.FC<T.Props> = (props) => {
 	const { text, children, position = "bottom", ...flyoutProps } = props;
 
 	if (!text) return children({});

@@ -7,7 +7,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import * as T from "./Expandable.types";
 import s from "./Expandable.module.css";
 
-const Expandable = (props: T.ContentProps) => {
+const Expandable: React.FC<T.ContentProps> = (props) => {
 	const { children, active, attributes } = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
 	const mountedRef = React.useRef(false);

@@ -4,7 +4,7 @@ import React from "react";
 import PaginationControlled from "./PaginationControlled";
 import * as T from "./Pagination.types";
 
-const PaginationUncontrolled = (props: T.UncontrolledProps) => {
+const PaginationUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultPage = 1, onChange, ...controlledProps } = props;
 	const [page, setPage] = React.useState(defaultPage || 1);
 

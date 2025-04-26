@@ -2,7 +2,7 @@ import { classNames } from "utilities/helpers";
 import s from "./HiddenInput.module.css";
 import type * as T from "./HiddenInput.types";
 
-const HiddenInput = (props: T.Props) => {
+const HiddenInput: React.FC<T.Props> = (props) => {
 	const {
 		name,
 		value,

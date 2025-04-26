@@ -63,7 +63,7 @@ const toastReducer: T.Reducer = (state, action) => {
 	}
 };
 
-const ToastProvider = (props: T.ProviderProps) => {
+const ToastProvider: React.FC<T.ProviderProps> = (props) => {
 	const { children, options } = props;
 	const toast = useToast();
 	const id = React.useId();

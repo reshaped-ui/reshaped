@@ -10,7 +10,7 @@ import IconCheckmark from "icons/Checkmark";
 import type * as T from "./Stepper.types";
 import s from "./Stepper.module.css";
 
-const StepperItemPrivate = (props: T.ItemPrivateProps) => {
+const StepperItemPrivate: React.FC<T.ItemPrivateProps> = (props) => {
 	const {
 		title,
 		subtitle,
@@ -77,7 +77,9 @@ const StepperItemPrivate = (props: T.ItemPrivateProps) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const StepperItem = (_: T.ItemProps) => null;
 
-const Stepper = (props: T.Props) => {
+const Stepper: React.FC<T.Props> & {
+	Item: typeof StepperItem;
+} = (props) => {
 	const { children, direction = "row", activeId, labelDisplay, className, attributes } = props;
 	const vertical = direction === "column";
 	const length = React.Children.count(children);

@@ -8,7 +8,7 @@ import ToastContext from "./Toast.context";
 import * as T from "./Toast.types";
 import s from "./Toast.module.css";
 
-const ToastRegion = (props: T.RegionProps) => {
+const ToastRegion: React.FC<T.RegionProps> = (props) => {
 	const { position, nested } = props;
 	const { queues, options } = React.useContext(ToastContext);
 	const [inspecting, setInspecting] = React.useState(false);

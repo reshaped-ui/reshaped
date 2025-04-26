@@ -5,7 +5,7 @@ import CalendarDate from "./CalendarDate";
 import type * as T from "./Calendar.types";
 import s from "./Calendar.module.css";
 
-const CalendarMonth = (props: T.MonthProps) => {
+const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 	const {
 		date,
 		value,

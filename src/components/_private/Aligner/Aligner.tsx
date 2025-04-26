@@ -7,12 +7,11 @@
  * on the --rs-p, --rs-p-v and --rs-p-h css variables
  */
 
-import React from "react";
 import { classNames } from "utilities/helpers";
 import type * as T from "./Aligner.types";
 import s from "./Aligner.module.css";
 
-const Aligner = (props: T.Props) => {
+const Aligner: React.FC<T.Props> = (props) => {
 	const { side: passedSide = "all", children, className, attributes } = props;
 	const sides = typeof passedSide === "string" ? [passedSide] : passedSide;
 

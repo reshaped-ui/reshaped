@@ -5,7 +5,7 @@ import { getFocusableDates } from "./Calendar.utils";
 
 const useCalendarKeyboardNavigation = (props: {
 	monthDate: Date;
-	rootRef: React.MutableRefObject<HTMLDivElement | null>;
+	rootRef: React.RefObject<HTMLDivElement | null>;
 	changeToNextMonth: () => void;
 	changeToPreviousMonth: () => void;
 	verticalDelta: number;

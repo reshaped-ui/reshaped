@@ -1,4 +1,4 @@
-import type { FocusableElement } from "./types";
+import type { FocusableElement, FocusableOptions } from "./types";
 import { getShadowRoot } from "utilities/dom";
 
 const pseudoFocusAttribute = "data-rs-focus";
@@ -27,10 +27,7 @@ export const focusElement = (el: FocusableElement, options?: { pseudoFocus?: boo
 	}
 };
 
-export const getFocusableElements = (
-	rootEl: HTMLElement,
-	options?: { additionalElement?: FocusableElement | null }
-) => {
+export const getFocusableElements = (rootEl: HTMLElement, options?: FocusableOptions) => {
 	const focusableElements = Array.from(
 		rootEl.querySelectorAll(focusableSelector)
 	) as FocusableElement[];
@@ -38,7 +35,7 @@ export const getFocusableElements = (
 		if (el.hasAttribute("disabled")) return false;
 		if (el.clientHeight === 0) return false;
 		// Using getAttribute here since browser sets el.tabIndex to -1 by default
-		if (el.getAttribute("tabindex") === "-1") return false;
+		if (!options?.includeNegativeTabIndex && el.getAttribute("tabindex") === "-1") return false;
 
 		if (el.type === "radio") {
 			let sameNameRadioEls: HTMLInputElement[];
@@ -87,13 +84,15 @@ export const getFocusableElements = (
 export const getFocusData = (args: {
 	root: HTMLElement;
 	target: "next" | "prev" | "first" | "last";
-	options?: {
+	options?: FocusableOptions & {
 		circular?: boolean;
-		additionalElement?: FocusableElement | null;
 	};
 }) => {
 	const { root, target, options } = args;
-	const focusable = getFocusableElements(root, { additionalElement: options?.additionalElement });
+	const focusable = getFocusableElements(root, {
+		additionalElement: options?.additionalElement,
+		includeNegativeTabIndex: options?.includeNegativeTabIndex,
+	});
 	const focusableLimit = focusable.length - 1;
 	const currentElement = getActiveElement(root);
 	const currentIndex = focusable.indexOf(currentElement);
@@ -117,12 +116,20 @@ export const getFocusData = (args: {
 	return { overflow: isOverflow, el: focusable[nextIndex] };
 };
 
-const focusTargetElement = (root: HTMLElement, target: "next" | "prev" | "first" | "last") => {
-	const data = getFocusData({ root, target });
+const focusTargetElement = (
+	root: HTMLElement,
+	target: "next" | "prev" | "first" | "last",
+	options?: Pick<FocusableOptions, "includeNegativeTabIndex">
+) => {
+	const data = getFocusData({ root, target, options });
 	focusElement(data.el);
 };
 
-export const focusNextElement = (root: HTMLElement) => focusTargetElement(root, "next");
-export const focusPreviousElement = (root: HTMLElement) => focusTargetElement(root, "prev");
-export const focusFirstElement = (root: HTMLElement) => focusTargetElement(root, "first");
-export const focusLastElement = (root: HTMLElement) => focusTargetElement(root, "last");
+export const focusNextElement = (root: HTMLElement) =>
+	focusTargetElement(root, "next", { includeNegativeTabIndex: true });
+export const focusPreviousElement = (root: HTMLElement) =>
+	focusTargetElement(root, "prev", { includeNegativeTabIndex: true });
+export const focusFirstElement = (root: HTMLElement) =>
+	focusTargetElement(root, "first", { includeNegativeTabIndex: true });
+export const focusLastElement = (root: HTMLElement) =>
+	focusTargetElement(root, "last", { includeNegativeTabIndex: true });

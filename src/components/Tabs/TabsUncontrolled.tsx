@@ -4,7 +4,7 @@ import React from "react";
 import TabsControlled from "./TabsControlled";
 import type * as T from "./Tabs.types";
 
-const TabsUncontrolled = (props: T.UncontrolledProps) => {
+const TabsUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange } = props;
 	const [value, setValue] = React.useState(defaultValue);
 
