@@ -108,7 +108,7 @@
 		"@storybook/experimental-addon-test": "8.6.12",
 		"@storybook/react": "8.6.12",
 		"@storybook/react-vite": "8.6.12",
-		"@types/culori": "2.1.1",
+		"@types/culori": "4.0.0",
 		"@types/events": "3.0.3",
 		"@types/node": "22.14.1",
 		"@types/react": "19.1.2",

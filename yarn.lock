@@ -1737,10 +1737,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/culori@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@types/culori/-/culori-2.1.1.tgz#6c24468aad7a1a5a78cfd4494674b63766a9758b"
-  integrity sha512-NzLYD0vNHLxTdPp8+RlvGbR2NfOZkwxcYGFwxNtm+WH2NuUNV8785zv1h0sulFQ5aFQ9n/jNDUuJeo3Bh7+oFA==
+"@types/culori@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/culori/-/culori-4.0.0.tgz#fe0d3e7697081195a44b35d114fe6d971bcc2c62"
+  integrity sha512-aFljQwjb++sl6TAyEXeHTiK/fk9epZOQ+nMmadjnAvzZFIvNoQ0x8XQYfcOaRTBwmDUPUlghhZCJ66MTcqQAsg==
 
 "@types/doctrine@^0.0.9":
   version "0.0.9"
