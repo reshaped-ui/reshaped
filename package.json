@@ -122,7 +122,7 @@
 		"eslint": "9.25.1",
 		"eslint-config-prettier": "10.1.2",
 		"eslint-plugin-jsx-a11y": "6.10.2",
-		"eslint-plugin-prettier": "5.2.6",
+		"eslint-plugin-prettier": "5.4.0",
 		"eslint-plugin-react": "7.37.5",
 		"eslint-plugin-react-hooks": "5.2.0",
 		"lefthook": "1.11.11",
