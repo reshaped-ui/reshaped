@@ -2,6 +2,7 @@
 
 - Flyout: Exported from the library
 - Flyout: Moved css to css layers
+- Flyout: Support height animations
 
   3.5.1
 

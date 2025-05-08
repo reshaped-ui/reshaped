@@ -9,12 +9,14 @@ import Theme from "components/Theme";
 import Button from "components/Button";
 import Flyout, { FlyoutInstance, FlyoutProps } from "components/Flyout";
 import TextField from "components/TextField";
+import Select from "components/Select";
+import Switch from "components/Switch";
 import { sleep } from "utilities/helpers";
 
 export default { title: "Utility components/Flyout" };
 
 const Content: React.FC<{
-	height?: number;
+	height?: number | false;
 	width?: number | false;
 	children?: React.ReactNode;
 }> = (props) => (
@@ -22,7 +24,7 @@ const Content: React.FC<{
 		style={{
 			background: "var(--rs-color-background-elevation-overlay)",
 			padding: "var(--rs-unit-x4)",
-			height: props.height ?? 150,
+			height: props.height === false ? undefined : props.height || 150,
 			minWidth: props.width === false ? undefined : props.width || 160,
 			borderRadius: "var(--rs-radius-medium)",
 			border: "1px solid var(--rs-color-border-neutral-faded)",
@@ -34,7 +36,12 @@ const Content: React.FC<{
 );
 
 const Demo: React.FC<
-	FlyoutProps & { text?: string; contentHeight?: number; contentWidth?: number | false }
+	FlyoutProps & {
+		text?: string;
+		contentHeight?: number | false;
+		contentWidth?: number | false;
+		height?: false;
+	}
 > = (props) => {
 	const { position = "bottom-start", children, text, contentHeight, contentWidth, ...rest } = props;
 
@@ -56,9 +63,9 @@ export const position = {
 	name: "position",
 	render: () => {
 		return (
-			<View gap={4} padding={50} align="center" justify="center">
+			<View gap={4} padding={50} align="center" justify="center" height="120vh" width="120%">
 				<View gap={4} direction="row">
-					<Demo position="top-start" />
+					<Demo position="top-start" defaultActive />
 					<Demo position="top" />
 					<Demo position="top-end" />
 				</View>
@@ -78,7 +85,7 @@ export const position = {
 				<View gap={4} direction="row">
 					<Demo position="bottom-start" />
 					<Demo position="bottom" />
-					<Demo position="bottom-end" defaultActive />
+					<Demo position="bottom-end" />
 				</View>
 			</View>
 		);
@@ -388,25 +395,55 @@ export const containerRef: StoryObj = {
 	name: "containerRef",
 	render: () => {
 		const portalRef = React.useRef<HTMLDivElement>(null);
+		const portalRef2 = React.useRef<HTMLDivElement>(null);
+		const portalRef3 = React.useRef<HTMLDivElement>(null);
 
 		return (
-			<View
-				backgroundColor="neutral-faded"
-				borderRadius="small"
-				height={80}
-				attributes={{ ref: portalRef, "data-testid": "container" }}
-				justify="end"
-				align="start"
-				padding={4}
-			>
-				<Demo containerRef={portalRef} defaultActive position="bottom-start" />
+			<View gap={4} direction="row">
+				<View
+					grow
+					backgroundColor="neutral-faded"
+					borderRadius="small"
+					height={80}
+					attributes={{ ref: portalRef, "data-testid": "container" }}
+					justify="end"
+					align="start"
+					padding={4}
+				>
+					<Demo containerRef={portalRef} position="bottom-start" defaultActive />
+				</View>
+				<View
+					grow
+					backgroundColor="neutral-faded"
+					borderRadius="small"
+					height={80}
+					attributes={{ ref: portalRef2 }}
+					justify="start"
+					align="end"
+					padding={4}
+				>
+					<Demo containerRef={portalRef2} position="top-end" />
+				</View>
+				<View
+					width={50}
+					backgroundColor="neutral-faded"
+					borderRadius="small"
+					height={80}
+					attributes={{ ref: portalRef3 }}
+					padding={4}
+					overflow="auto"
+				>
+					<View height={120} width="120%" justify="center" align="center">
+						<Demo containerRef={portalRef3} position="bottom-end" />
+					</View>
+				</View>
 			</View>
 		);
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
 		const containerEl = canvas.getByTestId("container");
-		const contentEl = canvas.getByText("Content");
+		const contentEl = canvas.getAllByText("Content")[0];
 
 		expect(containerEl).toContainElement(contentEl);
 	},
@@ -493,7 +530,7 @@ export const contentAttributes: StoryObj = {
 		return (
 			<Flyout position="bottom" defaultActive>
 				<Flyout.Trigger>
-					{(attributes) => <Button attributes={attributes}>`Trigger</Button>}
+					{(attributes) => <Button attributes={attributes}>Trigger</Button>}
 				</Flyout.Trigger>
 				<Flyout.Content attributes={{ "data-testid": "test-id" }} className="test-classname">
 					<Content />
@@ -549,7 +586,7 @@ export const testInsideFixed: StoryObj = {
 		<React.Fragment>
 			<View
 				position="fixed"
-				insetTop={2}
+				insetBottom={2}
 				insetStart={2}
 				insetEnd={2}
 				backgroundColor="elevation-overlay"
@@ -559,7 +596,7 @@ export const testInsideFixed: StoryObj = {
 				zIndex={10}
 				attributes={{ "data-testid": "container" }}
 			>
-				<Demo defaultActive />
+				<Demo defaultActive position="top-start" />
 			</View>
 			<View paddingTop={18} gap={4}>
 				<View height={200} backgroundColor="neutral-faded" borderRadius="small" />
@@ -655,7 +692,12 @@ export const testDynamicBounds = {
 					<Button onClick={() => setSize("medium")}>Small button</Button>
 				</View>
 				<View height={100}>
-					<Flyout position="bottom" instanceRef={flyoutRef} disableCloseOnOutsideClick>
+					<Flyout
+						position="bottom"
+						instanceRef={flyoutRef}
+						disableCloseOnOutsideClick
+						defaultActive
+					>
 						<Flyout.Trigger>
 							{(attributes) => (
 								<div style={{ position: "absolute", left: `${left}%`, top: `${top}%` }}>
@@ -679,13 +721,13 @@ export const testScopedTheming = {
 	name: "test: content uses scope theme",
 	render: () => (
 		<View gap={3} align="start">
-			<Button color="primary">Reshaped button</Button>
-			<Theme name="slate">
+			<Button color="primary">Slate button</Button>
+			<Theme name="reshaped">
 				<Flyout triggerType="click" active position="bottom-start">
 					<Flyout.Trigger>
 						{(attributes) => (
 							<Button color="primary" attributes={attributes}>
-								Slate button
+								Reshaped button
 							</Button>
 						)}
 					</Flyout.Trigger>
@@ -693,7 +735,7 @@ export const testScopedTheming = {
 						<Content>
 							<View gap={1}>
 								<View.Item>Portal content, rendered in body</View.Item>
-								<Button color="primary">Slate button</Button>
+								<Button color="primary">Reshaped button</Button>
 							</View>
 						</Content>
 					</Flyout.Content>
@@ -718,5 +760,59 @@ export const testWithoutFocusable: StoryObj = {
 		});
 
 		expect(document.activeElement).toBe(trigger);
+	},
+};
+
+export const testChangeSize = {
+	name: "test: size updates",
+	render: () => {
+		const [position, setPosition] = React.useState<FlyoutProps["position"]>("bottom-start");
+		const [updatedHeight, setUpdatedHeight] = React.useState(false);
+
+		return (
+			<>
+				<View direction="row" gap={4} align="center">
+					<Select
+						name="position"
+						options={[
+							"bottom-start",
+							"bottom",
+							"bottom-end",
+							"top-start",
+							"top",
+							"top-end",
+							"start-top",
+							"start",
+							"start-bottom",
+							"end-top",
+							"end",
+							"end-bottom",
+						].map((p) => ({ label: p, value: p }))}
+						onChange={(args) => setPosition(args.value as FlyoutProps["position"])}
+						value={position}
+					/>
+					<Switch name="height" onChange={(args) => setUpdatedHeight(args.checked)}>
+						Change height
+					</Switch>
+				</View>
+				<div
+					style={{
+						position: "fixed",
+						top: "50%",
+						left: "50%",
+						transform: "translate(-50%, -50%)",
+					}}
+				>
+					<Demo position={position} disableCloseOnOutsideClick active contentHeight={false}>
+						<View
+							backgroundColor="neutral-faded"
+							borderRadius="small"
+							height={updatedHeight ? 50 : 25}
+							attributes={{ style: { transition: "0.2s ease-in-out" } }}
+						/>
+					</Demo>
+				</div>
+			</>
+		);
 	},
 };

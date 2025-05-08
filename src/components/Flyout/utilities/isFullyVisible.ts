@@ -1,24 +1,39 @@
-import calculatePosition from "./calculatePosition";
-
 /**
  * Check if element visually fits on the screen
  */
-const isFullyVisible = (
-	args: ReturnType<typeof calculatePosition> & { container?: HTMLElement | null }
-) => {
-	const { styles, scopeOffset, container } = args;
-	const htmlEl = container || document.documentElement;
-	const pageLeft = htmlEl.scrollLeft;
-	const pageRight = pageLeft + htmlEl.clientWidth;
-	const pageTop = htmlEl.scrollTop;
-	const pageBottom = pageTop + htmlEl.clientHeight;
+const isFullyVisible = (args: {
+	flyoutBounds: Pick<DOMRect, "left" | "top" | "width" | "height">;
+	visualContainerBounds: DOMRect;
+	renderContainerBounds: DOMRect;
+	container: HTMLElement;
+}) => {
+	const { flyoutBounds, visualContainerBounds, renderContainerBounds, container } = args;
+	const scrollX = container === document.body ? window.scrollX : container.scrollLeft;
+	const scrollY = container === document.body ? window.scrollY : container.scrollTop;
 
-	return (
-		styles.left + scopeOffset.left >= pageLeft &&
-		styles.left + styles.width + scopeOffset.left <= pageRight &&
-		styles.top + scopeOffset.top >= pageTop &&
-		styles.top + styles.height + scopeOffset.top <= pageBottom
-	);
+	if (renderContainerBounds.left + flyoutBounds.left - scrollX < visualContainerBounds.left) {
+		return false;
+	}
+
+	if (renderContainerBounds.top + flyoutBounds.top - scrollY < visualContainerBounds.top) {
+		return false;
+	}
+
+	if (
+		renderContainerBounds.left + flyoutBounds.left + flyoutBounds.width - scrollX >
+		visualContainerBounds.right
+	) {
+		return false;
+	}
+
+	if (
+		renderContainerBounds.top + flyoutBounds.top + flyoutBounds.height - scrollY >
+		visualContainerBounds.bottom
+	) {
+		return false;
+	}
+
+	return true;
 };
 
 export default isFullyVisible;
