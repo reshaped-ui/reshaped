@@ -1,4 +1,8 @@
-WIP 3.5.1
+## WIP 3.5.2
+
+- Tailwind 3: Preflight compatibility
+
+## 3.5.1
 
 - NumberField: user-select none for touch devices
 - Tabs: Fixed arrow navigation
