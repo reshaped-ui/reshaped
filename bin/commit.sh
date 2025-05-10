@@ -2,7 +2,16 @@
 
 set -e
 
+FILE="CHANGELOG.md"
+
 yarn git-cz
-yarn conventional-changelog -p angular -i CHANGELOG.md -s -u 
-git add CHANGELOG.md
+
+sed -i.bak '/^# \[Unreleased/,/^#\+ \[/ {
+  /^#\+ \[/!d
+}' "$FILE"
+
+echo "✅ Unreleased section removed. Backup saved as ${FILE}.bak"
+
+yarn conventional-changelog -p angular -i $FILE -s -u 
+git add $FILE
 git commit --amend --no-edit
