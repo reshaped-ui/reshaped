@@ -25,6 +25,9 @@
 		"type": "git",
 		"url": "https://github.com/formaat-design/reshaped"
 	},
+	"sideEffects": [
+		"*.css"
+	],
 	"files": [
 		"bin/cli.js",
 		"dist/**/*"
@@ -58,7 +61,6 @@
 		"./themes/fragments/twitter/*": "./dist/themes/fragments/twitter/*",
 		"./package.json": "./package.json"
 	},
-	"sideEffects": false,
 	"bin": {
 		"reshaped": "./bin/cli.js"
 	},
@@ -89,7 +91,7 @@
 		"lint": "yarn lint:js && yarn lint:css",
 		"lint:js": "eslint './src/**/*.{ts,tsx}' --fix",
 		"lint:css": "stylelint 'src/**/*.css'",
-		"commit": "git-cz"
+		"commit": "sh ./bin/commit.sh"
 	},
 	"browserslist": [
 		"defaults and not IE 11"
