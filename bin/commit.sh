@@ -2,18 +2,7 @@
 
 set -e
 
-FILE="CHANGELOG.md"
-
 ALLOW_COMMIT=1 yarn git-cz
-
-awk '
-  BEGIN { skip = 0 }
-  /^# \[Unreleased/ { skip = 1; next }
-  skip && /^#+ \[/ { skip = 0 }
-  !skip
-' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
-
-yarn conventional-changelog -p angular -i $FILE -s -u 
-
-git add $FILE
+sh ./update-changelog.ch
+git add .
 ALLOW_COMMIT=1 git commit --amend --no-edit
