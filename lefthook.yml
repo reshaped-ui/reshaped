@@ -9,8 +9,8 @@ pre-commit:
       run: yarn lint:css --fix {staged_files} && git add {staged_files}
 
 prepare-commit-msg:
-  scripts:
-    block-direct-commit:
+  commands:
+    "block commit":
       run: |
         if [ -z "$ALLOW_COMMIT" ]; then
           echo "🚫 Use 'yarn commit' instead of 'git commit'."
