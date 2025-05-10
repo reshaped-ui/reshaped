@@ -3,6 +3,6 @@
 set -e
 
 yarn git-cz
-yarn conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+yarn conventional-changelog -p angular -i CHANGELOG.md -s
 git add CHANGELOG.md
 git commit --amend --no-edit
