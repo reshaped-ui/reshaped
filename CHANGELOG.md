@@ -1,6 +1,7 @@
 ## WIP 3.5.2
 
 - Tailwind 3: Preflight compatibility
+- ScrollArea: fixed maxHeight
 
 ## 3.5.1
 
