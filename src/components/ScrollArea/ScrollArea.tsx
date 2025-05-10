@@ -117,13 +117,9 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		s.root,
 		scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
 		heightStyles?.classNames,
-		maxHeightStyles?.classNames,
 		className
 	);
-	const rootVariables = {
-		...heightStyles?.variables,
-		...maxHeightStyles?.variables,
-	};
+	const contentClassNames = classNames(s.content, maxHeightStyles?.classNames);
 
 	const updateScroll = React.useCallback(() => {
 		const scrollableEl = scrollableRef.current;
@@ -192,10 +188,14 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	}, [updateScroll]);
 
 	return (
-		<div {...attributes} className={rootClassNames} style={rootVariables}>
+		<div {...attributes} className={rootClassNames} style={{ ...heightStyles?.variables }}>
 			{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
 			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll} tabIndex={0}>
-				<div className={s.content} ref={contentRef}>
+				<div
+					className={contentClassNames}
+					ref={contentRef}
+					style={{ ...maxHeightStyles?.variables }}
+				>
 					{children}
 				</div>
 			</div>
