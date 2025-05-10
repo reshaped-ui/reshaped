@@ -1,4 +1,4 @@
-# [Unreleased](https://github.com/formaat-design/reshaped-source/compare/v3.5.1...d89d79c5abaf00bbdd6a645badcc09cf09c312a0) (2025-05-10)
+## [3.5.3](https://github.com/formaat-design/reshaped-source/compare/v3.5.1...v3.5.3) (2025-05-10)
 
 
 ### Bug Fixes
@@ -9,6 +9,10 @@
 * test changelog again ([d89d79c](https://github.com/formaat-design/reshaped-source/commit/d89d79c5abaf00bbdd6a645badcc09cf09c312a0))
 * updated sideEffects to *.css ([fb603ca](https://github.com/formaat-design/reshaped-source/commit/fb603cacb8057cb582f2d1f6b4d07ac0e79b19d8))
 * updated sideEffects to *.css ([4346ddb](https://github.com/formaat-design/reshaped-source/commit/4346ddbe6d7983f22de807f52f504f42fa8fc5e6))
+
+
+
+# Unreleased (2025-05-10)
 
 
 
