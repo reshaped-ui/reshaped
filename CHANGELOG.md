@@ -11,6 +11,17 @@
 
 # [Unreleased](https://github.com/formaat-design/reshaped/compare/v3.5.1...fb603cacb8057cb582f2d1f6b4d07ac0e79b19d8) (2025-05-10)
 
+
+### Bug Fixes
+
+* **Checkbox,Radio:** removed css layers to keep tw3 preflight compatibility ([84d9bae](https://github.com/formaat-design/reshaped/commit/84d9bae98f88ad60950b4d5ab25e405448bf6622))
+* **ScrollArea:** fixed maxHeight ([6ba289f](https://github.com/formaat-design/reshaped/commit/6ba289f55bb62ac98ff8145264bc94c1dc975fa6))
+* updated sideEffects to *.css ([fb603ca](https://github.com/formaat-design/reshaped/commit/fb603cacb8057cb582f2d1f6b4d07ac0e79b19d8))
+
+
+
+# [Unreleased](https://github.com/formaat-design/reshaped/compare/v3.5.1...fb603cacb8057cb582f2d1f6b4d07ac0e79b19d8) (2025-05-10)
+
 ### Bug Fixes
 
 - **Checkbox,Radio:** removed css layers to keep tw3 preflight compatibility ([84d9bae](https://github.com/formaat-design/reshaped/commit/84d9bae98f88ad60950b4d5ab25e405448bf6622))
