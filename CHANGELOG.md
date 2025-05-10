@@ -1,1056 +1,605 @@
-## <small>3.5.1 (2025-04-26)</small>
+# [Unreleased](https://github.com/formaat-design/reshaped/compare/v3.5.1...fb603cacb8057cb582f2d1f6b4d07ac0e79b19d8) (2025-05-10)
 
-* v3.5.1 ([53cfcbe](https://github.com/formaat-design/reshaped/commit/53cfcbe))
-* fix: preserve themes/modes in storybook ([35c28d6](https://github.com/formaat-design/reshaped/commit/35c28d6))
-* fix: storybook theme fallback ([99883b0](https://github.com/formaat-design/reshaped/commit/99883b0))
-* fix(Card): fixed absolute positioning inside the cards ([f069c9d](https://github.com/formaat-design/reshaped/commit/f069c9d))
-* fix(Slider): fixed drag propagation to swipeable modals ([6cc537b](https://github.com/formaat-design/reshaped/commit/6cc537b))
-* fix(Tabs): fixed arrow navigation ([e5d0fe8](https://github.com/formaat-design/reshaped/commit/e5d0fe8))
-* fix(View): switch to inferred return types ([29a2528](https://github.com/formaat-design/reshaped/commit/29a2528))
 
+### Bug Fixes
 
+* **Checkbox,Radio:** removed css layers to keep tw3 preflight compatibility ([84d9bae](https://github.com/formaat-design/reshaped/commit/84d9bae98f88ad60950b4d5ab25e405448bf6622))
+* **ScrollArea:** fixed maxHeight ([6ba289f](https://github.com/formaat-design/reshaped/commit/6ba289f55bb62ac98ff8145264bc94c1dc975fa6))
+* updated sideEffects to *.css ([fb603ca](https://github.com/formaat-design/reshaped/commit/fb603cacb8057cb582f2d1f6b4d07ac0e79b19d8))
 
-## <small>3.5.1-canary.0 (2025-04-24)</small>
 
-* v3.5.1-canary.0 ([81ebfef](https://github.com/formaat-design/reshaped/commit/81ebfef))
-* fix: moved all component types to React.FC ([2200744](https://github.com/formaat-design/reshaped/commit/2200744))
-* fix: rename storybook preview to jsx ([17f3b99](https://github.com/formaat-design/reshaped/commit/17f3b99))
-* fix(NumberField): touch selection ([10ac7ae](https://github.com/formaat-design/reshaped/commit/10ac7ae))
-* fix(NumberField): user-select none for touch controls ([3ba0fe5](https://github.com/formaat-design/reshaped/commit/3ba0fe5))
-* chore: switched storybook preview to JS ([85a4cb1](https://github.com/formaat-design/reshaped/commit/85a4cb1))
-* chore: updated changelog ([28c8af6](https://github.com/formaat-design/reshaped/commit/28c8af6))
-* chore: updated release scripts ([00e0286](https://github.com/formaat-design/reshaped/commit/00e0286))
-* chore(deps): update dependency @vitejs/plugin-react to v4.4.1 ([fcc1c0b](https://github.com/formaat-design/reshaped/commit/fcc1c0b))
-* chore(deps): update dependency lefthook to v1.11.11 ([1d143a4](https://github.com/formaat-design/reshaped/commit/1d143a4))
-* chore(deps): update eslint monorepo to v9.25.1 ([89b0cc1](https://github.com/formaat-design/reshaped/commit/89b0cc1))
-* chore(deps): update vitest monorepo to v3.1.2 ([31a2e42](https://github.com/formaat-design/reshaped/commit/31a2e42))
 
+## [3.5.1](https://github.com/formaat-design/reshaped/compare/v3.5.1-canary.0...v3.5.1) (2025-04-26)
 
 
-## 3.5.0 (2025-04-19)
+### Bug Fixes
 
-* v3.5.0 ([8b1fffc](https://github.com/formaat-design/reshaped/commit/8b1fffc))
+* **Card:** fixed absolute positioning inside the cards ([f069c9d](https://github.com/formaat-design/reshaped/commit/f069c9defa88304b11bfa7e664628d7541ad1a4c))
+* preserve themes/modes in storybook ([35c28d6](https://github.com/formaat-design/reshaped/commit/35c28d67da3f4cedf6f011a550a282ec980f1bef))
+* **Slider:** fixed drag propagation to swipeable modals ([6cc537b](https://github.com/formaat-design/reshaped/commit/6cc537b02ca1ec1e43812fe29576061ea1683b93))
+* storybook theme fallback ([99883b0](https://github.com/formaat-design/reshaped/commit/99883b00c479c7bf08427873883d86e4871de680))
+* **Tabs:** fixed arrow navigation ([e5d0fe8](https://github.com/formaat-design/reshaped/commit/e5d0fe8eb456980ef3645d8cde32993a629d3a51))
+* **View:** switch to inferred return types ([29a2528](https://github.com/formaat-design/reshaped/commit/29a25280040c6fb1ae7d1424efb0050cc57becbc))
 
 
 
-## 3.5.0-rc.0 (2025-04-19)
+## [3.5.1-canary.0](https://github.com/formaat-design/reshaped/compare/v3.5.0...v3.5.1-canary.0) (2025-04-24)
 
-* v3.5.0-rc.0 ([fbcfcfa](https://github.com/formaat-design/reshaped/commit/fbcfcfa))
-* chore: disable erasableSyntaxOnly ([8a3765e](https://github.com/formaat-design/reshaped/commit/8a3765e))
-* chore: updated dependencies ([6842864](https://github.com/formaat-design/reshaped/commit/6842864))
-* test: fixed a11y issues in stories ([d1dc059](https://github.com/formaat-design/reshaped/commit/d1dc059))
-* test: updated story tests ([40fc76a](https://github.com/formaat-design/reshaped/commit/40fc76a))
-* fix: fixed forwardRef types ([1e99390](https://github.com/formaat-design/reshaped/commit/1e99390))
-* fix(NumberField): sizes and paddings ([4262d58](https://github.com/formaat-design/reshaped/commit/4262d58))
-* fix(TextField): radius ([9ae7fd2](https://github.com/formaat-design/reshaped/commit/9ae7fd2))
-* fix(TrapFocus): trap focus API update ([67793f9](https://github.com/formaat-design/reshaped/commit/67793f9))
 
+### Bug Fixes
 
+* moved all component types to React.FC ([2200744](https://github.com/formaat-design/reshaped/commit/22007444afa24a95b002b6f898d8b95ec8b3862d))
+* **NumberField:** touch selection ([10ac7ae](https://github.com/formaat-design/reshaped/commit/10ac7aec2042a932dcb313f78007df4b47d62eaf))
+* **NumberField:** user-select none for touch controls ([3ba0fe5](https://github.com/formaat-design/reshaped/commit/3ba0fe508d18b5be741bb4bd1477f83dbfd7ad92))
+* rename storybook preview to jsx ([17f3b99](https://github.com/formaat-design/reshaped/commit/17f3b99f8a28bd1c5aa20d8b5b1ac57b8a9423e6))
 
-## <small>3.4.7 (2025-04-14)</small>
 
-* feat(Checkbox,Radio,Switch,Select): sizes alignment ([902fe8d](https://github.com/formaat-design/reshaped/commit/902fe8d))
-* feat(PinField,TextField): small size ([f61359f](https://github.com/formaat-design/reshaped/commit/f61359f))
-* v3.4.7 ([01d0e2e](https://github.com/formaat-design/reshaped/commit/01d0e2e))
-* fix(Autocomplete): disabled item handling and tests ([ebabfd0](https://github.com/formaat-design/reshaped/commit/ebabfd0))
-* fix(Calendar): fixed light mode colors ([da7330f](https://github.com/formaat-design/reshaped/commit/da7330f))
-* fix(Dismissible): use client ([b195d41](https://github.com/formaat-design/reshaped/commit/b195d41))
-* fix(useScrollLock): race condition when using regular and container lock ([50f2c59](https://github.com/formaat-design/reshaped/commit/50f2c59))
-* feat(NumberField): improvements ([b0a40c3](https://github.com/formaat-design/reshaped/commit/b0a40c3))
-* feat(NumberField): new component ([725b0c3](https://github.com/formaat-design/reshaped/commit/725b0c3))
-* test(Autocomplete): fixed flaky test ([2b04fdd](https://github.com/formaat-design/reshaped/commit/2b04fdd))
 
+# [3.5.0](https://github.com/formaat-design/reshaped/compare/v3.5.0-rc.0...v3.5.0) (2025-04-19)
 
 
-## <small>3.4.6 (2025-04-03)</small>
 
-* fix(Avatar,Image): fixed type integration with Next ([2ae29ce](https://github.com/formaat-design/reshaped/commit/2ae29ce))
-* v3.4.6 ([0ddb3e5](https://github.com/formaat-design/reshaped/commit/0ddb3e5))
-* fix(DropdownMenu): trap mode ([ac1718f](https://github.com/formaat-design/reshaped/commit/ac1718f))
+# [3.5.0-rc.0](https://github.com/formaat-design/reshaped/compare/v3.4.7...v3.5.0-rc.0) (2025-04-19)
 
 
+### Bug Fixes
 
-## <small>3.4.5 (2025-04-02)</small>
+* fixed forwardRef types ([1e99390](https://github.com/formaat-design/reshaped/commit/1e9939039cc5376d7d929dc160aad41e24239fc0))
+* **NumberField:** sizes and paddings ([4262d58](https://github.com/formaat-design/reshaped/commit/4262d58ccb5ab7d01f1d1069c931543d674a4d7e))
+* **TextField:** radius ([9ae7fd2](https://github.com/formaat-design/reshaped/commit/9ae7fd25e429493848c27d75b296c9338bf04d48))
+* **TrapFocus:** trap focus API update ([67793f9](https://github.com/formaat-design/reshaped/commit/67793f9ec69c0d7dc968577aa2e7049a820f3b78))
 
-* feat(Avatar,Image): renderImage ([d0a3487](https://github.com/formaat-design/reshaped/commit/d0a3487))
-* v3.4.5 ([bd383ca](https://github.com/formaat-design/reshaped/commit/bd383ca))
 
 
+## [3.4.7](https://github.com/formaat-design/reshaped/compare/v3.4.6...v3.4.7) (2025-04-14)
 
-## <small>3.4.4 (2025-03-31)</small>
 
-* v3.4.4 ([e42253c](https://github.com/formaat-design/reshaped/commit/e42253c))
-* feat(Avatar): imageAttributes ([9eea6d5](https://github.com/formaat-design/reshaped/commit/9eea6d5))
-* fix(Flyout): relaxed ref types ([a71e4d2](https://github.com/formaat-design/reshaped/commit/a71e4d2))
-* fix(Icon): smaller content alignment ([0bb897f](https://github.com/formaat-design/reshaped/commit/0bb897f))
+### Bug Fixes
 
+* **Autocomplete:** disabled item handling and tests ([ebabfd0](https://github.com/formaat-design/reshaped/commit/ebabfd02f620a67e9c7c526c2e064c35ceec786e))
+* **Calendar:** fixed light mode colors ([da7330f](https://github.com/formaat-design/reshaped/commit/da7330ff3ec148890fdd1eb5a439978b6baa04f6))
+* **Dismissible:** use client ([b195d41](https://github.com/formaat-design/reshaped/commit/b195d41489bc6c33cbeb36ab35fd6426d9349592))
+* **useScrollLock:** race condition when using regular and container lock ([50f2c59](https://github.com/formaat-design/reshaped/commit/50f2c59d47379e049cfbd59a7f9e0a8c2a18b9fd))
 
 
-## <small>3.4.3 (2025-03-30)</small>
+### Features
 
-* v3.4.3 ([f002f32](https://github.com/formaat-design/reshaped/commit/f002f32))
-* fix: added displayName to components ([e1ad730](https://github.com/formaat-design/reshaped/commit/e1ad730))
-* feat(TrapFocus): exported utility ([159101c](https://github.com/formaat-design/reshaped/commit/159101c))
-* feat(useOnClickOutside): moved to public library api ([62835be](https://github.com/formaat-design/reshaped/commit/62835be))
-* chore(deps): update dependency @types/node to v22.13.13 ([fd89a91](https://github.com/formaat-design/reshaped/commit/fd89a91))
-* chore(deps): update dependency eslint-plugin-prettier to v5.2.5 ([6239b3c](https://github.com/formaat-design/reshaped/commit/6239b3c))
-* chore(deps): update dependency lefthook to v1.11.5 ([dade607](https://github.com/formaat-design/reshaped/commit/dade607))
-* chore(deps): update dependency typescript-eslint to v8.28.0 ([dcc4d8a](https://github.com/formaat-design/reshaped/commit/dcc4d8a))
-* chore(deps): update dependency vite to v6.2.3 ([0a63913](https://github.com/formaat-design/reshaped/commit/0a63913))
-* chore(deps): update storybook monorepo to v8.6.9 ([7d92a10](https://github.com/formaat-design/reshaped/commit/7d92a10))
-* test: updated hooks stories ([6feebe8](https://github.com/formaat-design/reshaped/commit/6feebe8))
-* test: updated hooks tests ([9ee5bbf](https://github.com/formaat-design/reshaped/commit/9ee5bbf))
-
-
-
-## <small>3.4.2 (2025-03-22)</small>
-
-* v3.4.2 ([70afb95](https://github.com/formaat-design/reshaped/commit/70afb95))
-* test(Calendar): updated stories ([c2cf1a5](https://github.com/formaat-design/reshaped/commit/c2cf1a5))
-* chore: updated dependencies ([ae135a0](https://github.com/formaat-design/reshaped/commit/ae135a0))
-* chore: updated eslint and other dependencies ([8e62a70](https://github.com/formaat-design/reshaped/commit/8e62a70))
-* feat(Calendar): added selectedDates support ([0833d16](https://github.com/formaat-design/reshaped/commit/0833d16))
-
-
-
-## <small>3.4.1 (2025-03-20)</small>
-
-* v3.4.1 ([2f30b79](https://github.com/formaat-design/reshaped/commit/2f30b79))
-* fix(useFlyout): submenu position ([83b2ede](https://github.com/formaat-design/reshaped/commit/83b2ede))
-* fix(useOnClickOutside): unmounted component ([d583475](https://github.com/formaat-design/reshaped/commit/d583475))
-
-
-
-## 3.4.0 (2025-03-18)
-
-* v3.4.0 ([208ecfe](https://github.com/formaat-design/reshaped/commit/208ecfe))
-
-
-
-## 3.4.0-rc.0 (2025-03-17)
-
-* v3.4.0-rc.0 ([5df5da7](https://github.com/formaat-design/reshaped/commit/5df5da7))
-* test: flyout tests ([fe09cb3](https://github.com/formaat-design/reshaped/commit/fe09cb3))
-* test(Flyout): updated storybook tests ([1489e49](https://github.com/formaat-design/reshaped/commit/1489e49))
-* test(ProgressIndicator): updated tests ([0517893](https://github.com/formaat-design/reshaped/commit/0517893))
-* feat(Autocomplete): controlled, .select(), stories ([2c19ab0](https://github.com/formaat-design/reshaped/commit/2c19ab0))
-* feat(Carousel): onScroll ([e949e18](https://github.com/formaat-design/reshaped/commit/e949e18))
-* feat(Flyout): render outside scrollable areas and container fallbacks ([8e346d2](https://github.com/formaat-design/reshaped/commit/8e346d2))
-* feat(ProgressIndicator): new component ([254eef7](https://github.com/formaat-design/reshaped/commit/254eef7))
-* feat(useKeyboardMode): expose new hook ([7d77181](https://github.com/formaat-design/reshaped/commit/7d77181))
-* chore: actions ([3e64c24](https://github.com/formaat-design/reshaped/commit/3e64c24))
-* chore: deps ([68fb9f1](https://github.com/formaat-design/reshaped/commit/68fb9f1))
-* chore: deps ([5ab6317](https://github.com/formaat-design/reshaped/commit/5ab6317))
-* chore: deps ([e5277d3](https://github.com/formaat-design/reshaped/commit/e5277d3))
-* chore: deps ([a320168](https://github.com/formaat-design/reshaped/commit/a320168))
-
+* **Checkbox,Radio,Switch,Select:** sizes alignment ([902fe8d](https://github.com/formaat-design/reshaped/commit/902fe8d4b03332ed52653fc69382b227f2c8904c))
+* **NumberField:** improvements ([b0a40c3](https://github.com/formaat-design/reshaped/commit/b0a40c34472237c5b509dd06bf58aec558b32255))
+* **NumberField:** new component ([725b0c3](https://github.com/formaat-design/reshaped/commit/725b0c32e80dd3a526fdf346abc10d14b3f7b09b))
+* **PinField,TextField:** small size ([f61359f](https://github.com/formaat-design/reshaped/commit/f61359f349180ee64a360b44438247c1a1d0ce59))
 
 
-## <small>3.3.13 (2025-03-05)</small>
 
-* v3.3.13 ([1e787a0](https://github.com/formaat-design/reshaped/commit/1e787a0))
-* chore: action ([c9c3a43](https://github.com/formaat-design/reshaped/commit/c9c3a43))
-* chore: actions ([1c12258](https://github.com/formaat-design/reshaped/commit/1c12258))
-* chore: actions ([22768e5](https://github.com/formaat-design/reshaped/commit/22768e5))
-* chore: actions ([0a3ea1f](https://github.com/formaat-design/reshaped/commit/0a3ea1f))
-* chore: actions ([1bbf848](https://github.com/formaat-design/reshaped/commit/1bbf848))
-* chore: actions ([24a0637](https://github.com/formaat-design/reshaped/commit/24a0637))
-* chore: actions ([5f7d730](https://github.com/formaat-design/reshaped/commit/5f7d730))
-* chore: actions ([f22ca1b](https://github.com/formaat-design/reshaped/commit/f22ca1b))
-* chore: actions ([83b08fe](https://github.com/formaat-design/reshaped/commit/83b08fe))
-* chore: actions ([943b0f3](https://github.com/formaat-design/reshaped/commit/943b0f3))
-* chore: actions ([185004d](https://github.com/formaat-design/reshaped/commit/185004d))
-* chore: actions ([dc0806a](https://github.com/formaat-design/reshaped/commit/dc0806a))
-* chore: lint and actions ([5f92599](https://github.com/formaat-design/reshaped/commit/5f92599))
-* chore: revert size-limit ([dd21862](https://github.com/formaat-design/reshaped/commit/dd21862))
-* chore: updated deps ([6325886](https://github.com/formaat-design/reshaped/commit/6325886))
-* chore: vitest update ([9909dc6](https://github.com/formaat-design/reshaped/commit/9909dc6))
-* feat(Carousel): onChange, navigateTo, tests ([fcfeefa](https://github.com/formaat-design/reshaped/commit/fcfeefa))
-* fix(Container): width ([8e27ff8](https://github.com/formaat-design/reshaped/commit/8e27ff8))
-* fix(Table): added Table compound types ([c0e8187](https://github.com/formaat-design/reshaped/commit/c0e8187))
-* docs: changelog ([66a8cd5](https://github.com/formaat-design/reshaped/commit/66a8cd5))
+## [3.4.6](https://github.com/formaat-design/reshaped/compare/v3.4.5...v3.4.6) (2025-04-03)
 
 
+### Bug Fixes
 
-## <small>3.3.12 (2025-02-28)</small>
+* **Avatar,Image:** fixed type integration with Next ([2ae29ce](https://github.com/formaat-design/reshaped/commit/2ae29cecda9188814d85212a592fd0bb7019d3de))
+* **DropdownMenu:** trap mode ([ac1718f](https://github.com/formaat-design/reshaped/commit/ac1718f851671eb8ad28afcbd52ef81c85710014))
 
-* fix ([35e848b](https://github.com/formaat-design/reshaped/commit/35e848b))
-* test ([36caf01](https://github.com/formaat-design/reshaped/commit/36caf01))
-* v3.3.12 ([9e45b7f](https://github.com/formaat-design/reshaped/commit/9e45b7f))
-* test: a11y ([c0c17c6](https://github.com/formaat-design/reshaped/commit/c0c17c6))
-* test: actions ([1a73a5d](https://github.com/formaat-design/reshaped/commit/1a73a5d))
-* test: actions ([9b08496](https://github.com/formaat-design/reshaped/commit/9b08496))
-* test: actions ([0ee4cc5](https://github.com/formaat-design/reshaped/commit/0ee4cc5))
-* test: actions ([4afdf00](https://github.com/formaat-design/reshaped/commit/4afdf00))
-* test: actions ([e43bc2c](https://github.com/formaat-design/reshaped/commit/e43bc2c))
-* test: actions ([93dc82b](https://github.com/formaat-design/reshaped/commit/93dc82b))
-* test: actions ([7e507d5](https://github.com/formaat-design/reshaped/commit/7e507d5))
-* test: disable chromatic for hooks ([6e8b09b](https://github.com/formaat-design/reshaped/commit/6e8b09b))
-* test: fixed build ([5f72c9d](https://github.com/formaat-design/reshaped/commit/5f72c9d))
-* test: migration to storybook test ([4c01072](https://github.com/formaat-design/reshaped/commit/4c01072))
-* test: migration to storybook test ([3f16cac](https://github.com/formaat-design/reshaped/commit/3f16cac))
-* test: storybook ([8aa90b2](https://github.com/formaat-design/reshaped/commit/8aa90b2))
-* test: storybook migration ([d507b88](https://github.com/formaat-design/reshaped/commit/d507b88))
-* test: storybook test ([2654407](https://github.com/formaat-design/reshaped/commit/2654407))
-* test: storybook test ([74784ca](https://github.com/formaat-design/reshaped/commit/74784ca))
-* test: storybook test ([1e32e6e](https://github.com/formaat-design/reshaped/commit/1e32e6e))
-* test: storybook test ([cd3da52](https://github.com/formaat-design/reshaped/commit/cd3da52))
-* test: storybook test ([1fa6ab0](https://github.com/formaat-design/reshaped/commit/1fa6ab0))
-* test: updated actions tests ([adf481d](https://github.com/formaat-design/reshaped/commit/adf481d))
-* test: vitest ([d21765f](https://github.com/formaat-design/reshaped/commit/d21765f))
-* test: vitest ([c59c2b3](https://github.com/formaat-design/reshaped/commit/c59c2b3))
-* test: vitest ([6aed696](https://github.com/formaat-design/reshaped/commit/6aed696))
-* test: vitest ([6d1561e](https://github.com/formaat-design/reshaped/commit/6d1561e))
-* test: vitest ([77507b2](https://github.com/formaat-design/reshaped/commit/77507b2))
-* test: vitest ([6342e06](https://github.com/formaat-design/reshaped/commit/6342e06))
-* test: vitest ([9379add](https://github.com/formaat-design/reshaped/commit/9379add))
-* test: vitest ([30180b9](https://github.com/formaat-design/reshaped/commit/30180b9))
-* test: vitest initial setup ([df1adf7](https://github.com/formaat-design/reshaped/commit/df1adf7))
-* test(Accordion): vitest integration ([6c295b6](https://github.com/formaat-design/reshaped/commit/6c295b6))
-* test(Carousel): vitest ([999d458](https://github.com/formaat-design/reshaped/commit/999d458))
-* test(Checkbox): vitest ([1c8894c](https://github.com/formaat-design/reshaped/commit/1c8894c))
-* fix: fixed generation error when called with separate hexDark colors ([c4e379a](https://github.com/formaat-design/reshaped/commit/c4e379a))
-* ci: parallel jobs ([705e6a2](https://github.com/formaat-design/reshaped/commit/705e6a2))
-* ci: playwright ([aca9f77](https://github.com/formaat-design/reshaped/commit/aca9f77))
-* ci: size limit ([9423ccc](https://github.com/formaat-design/reshaped/commit/9423ccc))
-* ci: size limit ([40a1c2c](https://github.com/formaat-design/reshaped/commit/40a1c2c))
-* ci: update ([f1f669c](https://github.com/formaat-design/reshaped/commit/f1f669c))
-* ci: update ([1146d97](https://github.com/formaat-design/reshaped/commit/1146d97))
-* ci: update ([5305e0c](https://github.com/formaat-design/reshaped/commit/5305e0c))
-* ci: update ([0bf2cac](https://github.com/formaat-design/reshaped/commit/0bf2cac))
-* ci: updated yarn install ([7080876](https://github.com/formaat-design/reshaped/commit/7080876))
-* chore: add playwright for CI ([33c6541](https://github.com/formaat-design/reshaped/commit/33c6541))
 
 
+## [3.4.5](https://github.com/formaat-design/reshaped/compare/v3.4.4...v3.4.5) (2025-04-02)
 
-## <small>3.3.11 (2025-02-12)</small>
 
-* fix ([0fb8a12](https://github.com/formaat-design/reshaped/commit/0fb8a12))
-* v3.3.11 ([b990536](https://github.com/formaat-design/reshaped/commit/b990536))
-* fix: fixed react 19 types ([5ab3ce5](https://github.com/formaat-design/reshaped/commit/5ab3ce5))
-* fix(View): divider ([a10439d](https://github.com/formaat-design/reshaped/commit/a10439d))
+### Features
 
+* **Avatar,Image:** renderImage ([d0a3487](https://github.com/formaat-design/reshaped/commit/d0a34877e9fd701707c90b66aa9405c80ceb2ae7))
 
 
-## <small>3.3.10 (2025-02-09)</small>
 
-* v3.3.10 ([9ef3717](https://github.com/formaat-design/reshaped/commit/9ef3717))
-* fix(Flyout): useIsDismissible blocking flag ([6289e59](https://github.com/formaat-design/reshaped/commit/6289e59))
+## [3.4.4](https://github.com/formaat-design/reshaped/compare/v3.4.3...v3.4.4) (2025-03-31)
 
 
+### Bug Fixes
 
-## <small>3.3.9 (2025-02-06)</small>
+* **Flyout:** relaxed ref types ([a71e4d2](https://github.com/formaat-design/reshaped/commit/a71e4d2c03db5a9aebcaf9ad9663fc4cde013d8f))
+* **Icon:** smaller content alignment ([0bb897f](https://github.com/formaat-design/reshaped/commit/0bb897fee36789c57fffb76e9455d3c229bf788c))
 
-* v3.3.9 ([a7c957e](https://github.com/formaat-design/reshaped/commit/a7c957e))
-* fix(View): keys ([0c14cf2](https://github.com/formaat-design/reshaped/commit/0c14cf2))
 
+### Features
 
+* **Avatar:** imageAttributes ([9eea6d5](https://github.com/formaat-design/reshaped/commit/9eea6d5f03dc11049c0ee2e45e8bdcc814ca2e46))
 
-## <small>3.3.8 (2025-02-05)</small>
 
-* v3.3.8 ([474c541](https://github.com/formaat-design/reshaped/commit/474c541))
-* feat: tailwind v4 support ([be29132](https://github.com/formaat-design/reshaped/commit/be29132))
-* fix(View): key + deps ([b70a6b3](https://github.com/formaat-design/reshaped/commit/b70a6b3))
 
+## [3.4.3](https://github.com/formaat-design/reshaped/compare/v3.4.2...v3.4.3) (2025-03-30)
 
 
-## <small>3.3.7 (2025-01-21)</small>
+### Bug Fixes
 
-* v3.3.7 ([594a163](https://github.com/formaat-design/reshaped/commit/594a163))
-* fix(Carousel): reported bugs ([fa9bd96](https://github.com/formaat-design/reshaped/commit/fa9bd96))
+* added displayName to components ([e1ad730](https://github.com/formaat-design/reshaped/commit/e1ad730e881df123fa3928e0b25eb5c7cfb039f5))
 
 
+### Features
 
-## <small>3.3.7-rc.0 (2025-01-19)</small>
+* **TrapFocus:** exported utility ([159101c](https://github.com/formaat-design/reshaped/commit/159101cfbd7c44c9976bb2d3e3fa1acf24129115))
+* **useOnClickOutside:** moved to public library api ([62835be](https://github.com/formaat-design/reshaped/commit/62835be0a7aaab73b6d34c0fb7716c11bcc4802b))
 
-* v3.3.7-rc.0 ([7ac92f2](https://github.com/formaat-design/reshaped/commit/7ac92f2))
-* fix(Flyout): reduced motion outside click in submenu ([d4498a2](https://github.com/formaat-design/reshaped/commit/d4498a2))
 
 
+## [3.4.2](https://github.com/formaat-design/reshaped/compare/v3.4.1...v3.4.2) (2025-03-22)
 
-## <small>3.3.6 (2025-01-12)</small>
 
-* v3.3.6 ([38bc118](https://github.com/formaat-design/reshaped/commit/38bc118))
-* fix(Autocomplete): open on click ([f088ed7](https://github.com/formaat-design/reshaped/commit/f088ed7))
+### Features
 
+* **Calendar:** added selectedDates support ([0833d16](https://github.com/formaat-design/reshaped/commit/0833d1674d390bb0cdaa56d36f4efc137ffd4130))
 
 
-## <small>3.3.5 (2024-12-25)</small>
 
-* v3.3.5 ([0eba18a](https://github.com/formaat-design/reshaped/commit/0eba18a))
-* fix(Accordion): preact animation ([38b1ae8](https://github.com/formaat-design/reshaped/commit/38b1ae8))
+## [3.4.1](https://github.com/formaat-design/reshaped/compare/v3.4.0...v3.4.1) (2025-03-20)
 
 
+### Bug Fixes
 
-## <small>3.3.4-rc.0 (2024-12-25)</small>
+* **useFlyout:** submenu position ([83b2ede](https://github.com/formaat-design/reshaped/commit/83b2ede0421465810b929139836c0be41964c26c))
+* **useOnClickOutside:** unmounted component ([d583475](https://github.com/formaat-design/reshaped/commit/d5834758ca8ed15ec6118af740f1f55706637ec5))
 
-* v3.3.4-rc.0 ([4189561](https://github.com/formaat-design/reshaped/commit/4189561))
 
 
+# [3.4.0](https://github.com/formaat-design/reshaped/compare/v3.4.0-rc.0...v3.4.0) (2025-03-18)
 
-## <small>3.3.3 (2024-12-24)</small>
 
-* v3.3.3 ([948758e](https://github.com/formaat-design/reshaped/commit/948758e))
-* fix(ScrollArea): nesting and dynamic height change ([79704bc](https://github.com/formaat-design/reshaped/commit/79704bc))
 
+# [3.4.0-rc.0](https://github.com/formaat-design/reshaped/compare/v3.3.13...v3.4.0-rc.0) (2025-03-17)
 
 
-## <small>3.3.2 (2024-12-20)</small>
+### Features
 
-* v3.3.2 ([f651879](https://github.com/formaat-design/reshaped/commit/f651879))
-* fix: silence use client warnings in vite storybook build ([0c49754](https://github.com/formaat-design/reshaped/commit/0c49754))
-* fix(scroll): scroll lock to only lock for container el ([ed3e597](https://github.com/formaat-design/reshaped/commit/ed3e597))
+* **Autocomplete:** controlled, .select(), stories ([2c19ab0](https://github.com/formaat-design/reshaped/commit/2c19ab0acea9d46b14195abf75c8d4ffaa3303d5))
+* **Carousel:** onScroll ([e949e18](https://github.com/formaat-design/reshaped/commit/e949e181c12a29d092cf728fa7e6755f4dc9127a))
+* **Flyout:** render outside scrollable areas and container fallbacks ([8e346d2](https://github.com/formaat-design/reshaped/commit/8e346d299a78dfd2ec9aaedfeedf2da04a893856))
+* **ProgressIndicator:** new component ([254eef7](https://github.com/formaat-design/reshaped/commit/254eef74e1e0868375ff672a725cea99d1281fe9))
+* **useKeyboardMode:** expose new hook ([7d77181](https://github.com/formaat-design/reshaped/commit/7d77181351717084222b1a226c5a0d9346d9b5fd))
 
 
 
-## <small>3.3.1 (2024-12-14)</small>
-
-* fix ([e31d74d](https://github.com/formaat-design/reshaped/commit/e31d74d))
-* v3.3.1 ([6bd4fbf](https://github.com/formaat-design/reshaped/commit/6bd4fbf))
-* fix(Flyout): ref merging inside another popover content ([784ab8f](https://github.com/formaat-design/reshaped/commit/784ab8f))
-
-
-
-## 3.3.0 (2024-12-11)
-
-* changelog ([a13e96f](https://github.com/formaat-design/reshaped/commit/a13e96f))
-* Deleted test release ([aeb0e8b](https://github.com/formaat-design/reshaped/commit/aeb0e8b))
-* feat(Button,MenuItem): added as property support for nested buttons ([ea4fa17](https://github.com/formaat-design/reshaped/commit/ea4fa17))
-* feat(Modal, Overlay): onAfterOpen, onAfterClose ([dba40f5](https://github.com/formaat-design/reshaped/commit/dba40f5))
-* feat(Overlay, Modal): containerRef ([28921db](https://github.com/formaat-design/reshaped/commit/28921db))
-* fix ([bd8e838](https://github.com/formaat-design/reshaped/commit/bd8e838))
-* fix ([6b48406](https://github.com/formaat-design/reshaped/commit/6b48406))
-* fix ([a938ef8](https://github.com/formaat-design/reshaped/commit/a938ef8))
-* fix ([73e341a](https://github.com/formaat-design/reshaped/commit/73e341a))
-* fix ([0ec878f](https://github.com/formaat-design/reshaped/commit/0ec878f))
-* fix ([bfcb0d8](https://github.com/formaat-design/reshaped/commit/bfcb0d8))
-* fix ([c39f25b](https://github.com/formaat-design/reshaped/commit/c39f25b))
-* fix types ([9c38332](https://github.com/formaat-design/reshaped/commit/9c38332))
-* fix(Modal, Flyout): fixes ([e858f71](https://github.com/formaat-design/reshaped/commit/e858f71))
-* fix(Modal,Overlay): fixed safari scroll lock ([9a8ed58](https://github.com/formaat-design/reshaped/commit/9a8ed58))
-* fix(Table, FormControl): small and RSC fixes ([a62d14a](https://github.com/formaat-design/reshaped/commit/a62d14a))
-* fix(TextField, trapFocus): requests ([15c5c3a](https://github.com/formaat-design/reshaped/commit/15c5c3a))
-* fixes ([d9a5979](https://github.com/formaat-design/reshaped/commit/d9a5979))
-* fixes ([0091bd8](https://github.com/formaat-design/reshaped/commit/0091bd8))
-* fixes ([7f8821a](https://github.com/formaat-design/reshaped/commit/7f8821a))
-* initial flyout ([fcbb5d5](https://github.com/formaat-design/reshaped/commit/fcbb5d5))
-* New color generation ([0922c06](https://github.com/formaat-design/reshaped/commit/0922c06))
-* pin field fix ([d8195eb](https://github.com/formaat-design/reshaped/commit/d8195eb))
-* testing v3 ([cde40ca](https://github.com/formaat-design/reshaped/commit/cde40ca))
-* v2.10.0 ([0c79ab1](https://github.com/formaat-design/reshaped/commit/0c79ab1))
-* v2.10.1 ([2736885](https://github.com/formaat-design/reshaped/commit/2736885))
-* v2.10.10 ([8c87bd5](https://github.com/formaat-design/reshaped/commit/8c87bd5))
-* v2.10.11 ([d74594a](https://github.com/formaat-design/reshaped/commit/d74594a))
-* v2.10.12 ([8e5b54e](https://github.com/formaat-design/reshaped/commit/8e5b54e))
-* v2.10.13 ([5470e5b](https://github.com/formaat-design/reshaped/commit/5470e5b))
-* v2.10.14 ([4dda0d0](https://github.com/formaat-design/reshaped/commit/4dda0d0))
-* v2.10.15 ([216f789](https://github.com/formaat-design/reshaped/commit/216f789))
-* v2.10.16 ([a3d3bcd](https://github.com/formaat-design/reshaped/commit/a3d3bcd))
-* v2.10.17 ([c78f8b3](https://github.com/formaat-design/reshaped/commit/c78f8b3))
-* v2.10.18 ([1a2475e](https://github.com/formaat-design/reshaped/commit/1a2475e))
-* v2.10.19 ([9c0af7e](https://github.com/formaat-design/reshaped/commit/9c0af7e))
-* v2.10.2 ([321efbd](https://github.com/formaat-design/reshaped/commit/321efbd))
-* v2.10.3 ([4991b06](https://github.com/formaat-design/reshaped/commit/4991b06))
-* v2.10.4 ([5ec7c96](https://github.com/formaat-design/reshaped/commit/5ec7c96))
-* v2.10.5 ([608998d](https://github.com/formaat-design/reshaped/commit/608998d))
-* v2.10.6 ([7d3e0ee](https://github.com/formaat-design/reshaped/commit/7d3e0ee))
-* v2.10.7 ([7772a0a](https://github.com/formaat-design/reshaped/commit/7772a0a))
-* v2.10.8 ([36988f5](https://github.com/formaat-design/reshaped/commit/36988f5))
-* v2.10.9 ([88ed58d](https://github.com/formaat-design/reshaped/commit/88ed58d))
-* v2.11.0 ([e40f90a](https://github.com/formaat-design/reshaped/commit/e40f90a))
-* v2.11.1 ([30837f9](https://github.com/formaat-design/reshaped/commit/30837f9))
-* v2.11.10 ([c943a96](https://github.com/formaat-design/reshaped/commit/c943a96))
-* v2.11.11 ([eb26f3d](https://github.com/formaat-design/reshaped/commit/eb26f3d))
-* v2.11.12 ([c585a9f](https://github.com/formaat-design/reshaped/commit/c585a9f))
-* v2.11.2 ([31d03fd](https://github.com/formaat-design/reshaped/commit/31d03fd))
-* v2.11.3 ([324b028](https://github.com/formaat-design/reshaped/commit/324b028))
-* v2.11.4 ([100f96f](https://github.com/formaat-design/reshaped/commit/100f96f))
-* v2.11.5 ([7a9cbdf](https://github.com/formaat-design/reshaped/commit/7a9cbdf))
-* v2.11.6 ([f5b02f8](https://github.com/formaat-design/reshaped/commit/f5b02f8))
-* v2.11.7 ([bf03826](https://github.com/formaat-design/reshaped/commit/bf03826))
-* v2.11.8 ([7cd18a8](https://github.com/formaat-design/reshaped/commit/7cd18a8))
-* v2.11.9 ([815d66b](https://github.com/formaat-design/reshaped/commit/815d66b))
-* v2.6.0 ([5506b9c](https://github.com/formaat-design/reshaped/commit/5506b9c))
-* v2.6.1 ([9c03ea9](https://github.com/formaat-design/reshaped/commit/9c03ea9))
-* v2.6.2 ([e2566a2](https://github.com/formaat-design/reshaped/commit/e2566a2))
-* v2.6.3 ([6d70851](https://github.com/formaat-design/reshaped/commit/6d70851))
-* v2.7.0 ([522ef9c](https://github.com/formaat-design/reshaped/commit/522ef9c))
-* v2.7.1 ([769954a](https://github.com/formaat-design/reshaped/commit/769954a))
-* v2.7.2 ([00773fe](https://github.com/formaat-design/reshaped/commit/00773fe))
-* v2.7.3 ([d5f9be2](https://github.com/formaat-design/reshaped/commit/d5f9be2))
-* v2.7.4 ([8eaf208](https://github.com/formaat-design/reshaped/commit/8eaf208))
-* v2.7.5-beta.0 ([ed67067](https://github.com/formaat-design/reshaped/commit/ed67067))
-* v2.8.0 ([3f196aa](https://github.com/formaat-design/reshaped/commit/3f196aa))
-* v2.8.1 ([a453e77](https://github.com/formaat-design/reshaped/commit/a453e77))
-* v2.8.2 ([bc0a684](https://github.com/formaat-design/reshaped/commit/bc0a684))
-* v2.8.3 ([245a07f](https://github.com/formaat-design/reshaped/commit/245a07f))
-* v2.8.4 ([81870e0](https://github.com/formaat-design/reshaped/commit/81870e0))
-* v2.9.0 ([dc74c24](https://github.com/formaat-design/reshaped/commit/dc74c24))
-* v2.9.1 ([ab88c06](https://github.com/formaat-design/reshaped/commit/ab88c06))
-* v2.9.2 ([1e41282](https://github.com/formaat-design/reshaped/commit/1e41282))
-* v2.9.3 ([57e7ecb](https://github.com/formaat-design/reshaped/commit/57e7ecb))
-* v2.9.4 ([ad1513b](https://github.com/formaat-design/reshaped/commit/ad1513b))
-* v2.9.5 ([502f0ab](https://github.com/formaat-design/reshaped/commit/502f0ab))
-* v3.0.0 ([d46a8a9](https://github.com/formaat-design/reshaped/commit/d46a8a9))
-* v3.0.1 ([a29015d](https://github.com/formaat-design/reshaped/commit/a29015d))
-* v3.0.10 ([db4da36](https://github.com/formaat-design/reshaped/commit/db4da36))
-* v3.0.11-rc.0 ([1cfa865](https://github.com/formaat-design/reshaped/commit/1cfa865))
-* v3.0.11-rc.1 ([887793a](https://github.com/formaat-design/reshaped/commit/887793a))
-* v3.0.11-rc.2 ([ba2ca5d](https://github.com/formaat-design/reshaped/commit/ba2ca5d))
-* v3.0.11-rc.3 ([98d5b76](https://github.com/formaat-design/reshaped/commit/98d5b76))
-* v3.0.2 ([b8fa87f](https://github.com/formaat-design/reshaped/commit/b8fa87f))
-* v3.0.3 ([259d939](https://github.com/formaat-design/reshaped/commit/259d939))
-* v3.0.4 ([f9555b7](https://github.com/formaat-design/reshaped/commit/f9555b7))
-* v3.0.5 ([36b53d3](https://github.com/formaat-design/reshaped/commit/36b53d3))
-* v3.0.6 ([718417e](https://github.com/formaat-design/reshaped/commit/718417e))
-* v3.0.7 ([c9e59df](https://github.com/formaat-design/reshaped/commit/c9e59df))
-* v3.0.8-rc.0 ([9052a28](https://github.com/formaat-design/reshaped/commit/9052a28))
-* v3.0.8-rc.1 ([df2e32e](https://github.com/formaat-design/reshaped/commit/df2e32e))
-* v3.0.9 ([07192e3](https://github.com/formaat-design/reshaped/commit/07192e3))
-* v3.1.0 ([0cc4d1d](https://github.com/formaat-design/reshaped/commit/0cc4d1d))
-* v3.1.1 ([67bd139](https://github.com/formaat-design/reshaped/commit/67bd139))
-* v3.1.2 ([268c889](https://github.com/formaat-design/reshaped/commit/268c889))
-* v3.1.3 ([69b2e6e](https://github.com/formaat-design/reshaped/commit/69b2e6e))
-* v3.1.4 ([aa97be6](https://github.com/formaat-design/reshaped/commit/aa97be6))
-* v3.1.5 ([3099f22](https://github.com/formaat-design/reshaped/commit/3099f22))
-* v3.1.6 ([700bed0](https://github.com/formaat-design/reshaped/commit/700bed0))
-* v3.1.7 ([e584270](https://github.com/formaat-design/reshaped/commit/e584270))
-* v3.1.8 ([53e50b7](https://github.com/formaat-design/reshaped/commit/53e50b7))
-* v3.2.0 ([80df006](https://github.com/formaat-design/reshaped/commit/80df006))
-* v3.2.0-canary.0 ([cd625a4](https://github.com/formaat-design/reshaped/commit/cd625a4))
-* v3.2.0-canary.1 ([c9b14d7](https://github.com/formaat-design/reshaped/commit/c9b14d7))
-* v3.2.0-canary.2 ([255c31b](https://github.com/formaat-design/reshaped/commit/255c31b))
-* v3.2.0-canary.3 ([5286ae9](https://github.com/formaat-design/reshaped/commit/5286ae9))
-* v3.2.0-canary.4 ([2e0a70b](https://github.com/formaat-design/reshaped/commit/2e0a70b))
-* v3.2.0-canary.5 ([6d320a0](https://github.com/formaat-design/reshaped/commit/6d320a0))
-* v3.2.0-canary.6 ([0ebf6a4](https://github.com/formaat-design/reshaped/commit/0ebf6a4))
-* v3.2.0-canary.7 ([6aa85e4](https://github.com/formaat-design/reshaped/commit/6aa85e4))
-* v3.2.1 ([676599e](https://github.com/formaat-design/reshaped/commit/676599e))
-* v3.2.2 ([fd4a071](https://github.com/formaat-design/reshaped/commit/fd4a071))
-* v3.2.3 ([f230bed](https://github.com/formaat-design/reshaped/commit/f230bed))
-* v3.2.4 ([5e6cfd2](https://github.com/formaat-design/reshaped/commit/5e6cfd2))
-* v3.2.5 ([4002c38](https://github.com/formaat-design/reshaped/commit/4002c38))
-* v3.2.6-rc.0 ([4df55e6](https://github.com/formaat-design/reshaped/commit/4df55e6))
-* v3.2.7 ([4b4f98f](https://github.com/formaat-design/reshaped/commit/4b4f98f))
-* v3.3.0 ([ef1cfc2](https://github.com/formaat-design/reshaped/commit/ef1cfc2))
-* fix: added missing reset layer ([5e25efa](https://github.com/formaat-design/reshaped/commit/5e25efa))
-* fix: backport v3 hotkeys ([015801f](https://github.com/formaat-design/reshaped/commit/015801f))
-* fix: changelog ([b498c67](https://github.com/formaat-design/reshaped/commit/b498c67))
-* fix: ci error ([465127b](https://github.com/formaat-design/reshaped/commit/465127b))
-* fix: component style fixes ([099c146](https://github.com/formaat-design/reshaped/commit/099c146))
-* fix: fix ([41b7c39](https://github.com/formaat-design/reshaped/commit/41b7c39))
-* fix: fixed repeat hotkeys ([c235d8b](https://github.com/formaat-design/reshaped/commit/c235d8b))
-* fix: fixed reported issues ([eda473a](https://github.com/formaat-design/reshaped/commit/eda473a))
-* fix: fixed typings ([3ca33d6](https://github.com/formaat-design/reshaped/commit/3ca33d6))
-* fix: fixed Vite build warning about @layer ([0c0d9e7](https://github.com/formaat-design/reshaped/commit/0c0d9e7))
-* fix: flyout + theming types ([20e3813](https://github.com/formaat-design/reshaped/commit/20e3813))
-* fix: flyout hover timeout ([1648417](https://github.com/formaat-design/reshaped/commit/1648417))
-* fix: flyout responsive visibility ([6560389](https://github.com/formaat-design/reshaped/commit/6560389))
-* fix: focus visible ([96d9360](https://github.com/formaat-design/reshaped/commit/96d9360))
-* fix: gitHub requests fixes ([ad1dcaa](https://github.com/formaat-design/reshaped/commit/ad1dcaa))
-* fix: image attributes style ([e3736c5](https://github.com/formaat-design/reshaped/commit/e3736c5))
-* fix: ios scroll lock ([528d09e](https://github.com/formaat-design/reshaped/commit/528d09e))
-* fix: light mode neutral faded color ([9cf7217](https://github.com/formaat-design/reshaped/commit/9cf7217))
-* fix: minor improvements for react 19 rc ([3e04cfa](https://github.com/formaat-design/reshaped/commit/3e04cfa))
-* fix: mixins ([ccaabd3](https://github.com/formaat-design/reshaped/commit/ccaabd3))
-* fix: mixins ([49cc873](https://github.com/formaat-design/reshaped/commit/49cc873))
-* fix: nested popovers fix ([b73e250](https://github.com/formaat-design/reshaped/commit/b73e250))
-* fix: overlay transitions ([bfa6dbb](https://github.com/formaat-design/reshaped/commit/bfa6dbb))
-* fix: patch ([9378d70](https://github.com/formaat-design/reshaped/commit/9378d70))
-* fix: popover transition ([2e35b8a](https://github.com/formaat-design/reshaped/commit/2e35b8a))
-* fix: pre-release ([0f1d3fc](https://github.com/formaat-design/reshaped/commit/0f1d3fc))
-* fix: pre-release ([6ead87f](https://github.com/formaat-design/reshaped/commit/6ead87f))
-* fix: pre-release fixes ([ac86db9](https://github.com/formaat-design/reshaped/commit/ac86db9))
-* fix: pre-release updates ([0ac773f](https://github.com/formaat-design/reshaped/commit/0ac773f))
-* fix: release ([47c42da](https://github.com/formaat-design/reshaped/commit/47c42da))
-* fix: release fixes ([b995af8](https://github.com/formaat-design/reshaped/commit/b995af8))
-* fix: release fixes ([89d1468](https://github.com/formaat-design/reshaped/commit/89d1468))
-* fix: removed container ref and added auto shadow root detection ([33a9c40](https://github.com/formaat-design/reshaped/commit/33a9c40))
-* fix: removed double effect ([f17f844](https://github.com/formaat-design/reshaped/commit/f17f844))
-* fix: removed global css reset layer ([2bf94cf](https://github.com/formaat-design/reshaped/commit/2bf94cf))
-* fix: removed logs ([5049648](https://github.com/formaat-design/reshaped/commit/5049648))
-* fix: reset styles in rs.reset ([48b6baa](https://github.com/formaat-design/reshaped/commit/48b6baa))
-* fix: revert exports ([536de4f](https://github.com/formaat-design/reshaped/commit/536de4f))
-* fix: slider attempt ([aa79a8a](https://github.com/formaat-design/reshaped/commit/aa79a8a))
-* fix: small css fixes ([d248635](https://github.com/formaat-design/reshaped/commit/d248635))
-* fix: small css fixes ([52b5647](https://github.com/formaat-design/reshaped/commit/52b5647))
-* fix: small fixes ([f6f76a1](https://github.com/formaat-design/reshaped/commit/f6f76a1))
-* fix: snapshots ([034c0d0](https://github.com/formaat-design/reshaped/commit/034c0d0))
-* fix: stories ([f6d836a](https://github.com/formaat-design/reshaped/commit/f6d836a))
-* fix: stories ([4172535](https://github.com/formaat-design/reshaped/commit/4172535))
-* fix: switch disabled text color ([8651b33](https://github.com/formaat-design/reshaped/commit/8651b33))
-* fix: tests ([cbfd241](https://github.com/formaat-design/reshaped/commit/cbfd241))
-* fix: theming ([c988bc5](https://github.com/formaat-design/reshaped/commit/c988bc5))
-* fix: typo ([944a13c](https://github.com/formaat-design/reshaped/commit/944a13c))
-* fix: update ([aa780f4](https://github.com/formaat-design/reshaped/commit/aa780f4))
-* fix: updated @layer implementation ([39157b9](https://github.com/formaat-design/reshaped/commit/39157b9))
-* fix: updated attributes types ([867b55b](https://github.com/formaat-design/reshaped/commit/867b55b))
-* fix: updated radius variables naming ([09a4d37](https://github.com/formaat-design/reshaped/commit/09a4d37))
-* fix: updates themes ([7899036](https://github.com/formaat-design/reshaped/commit/7899036))
-* fix: useHotkeys ([3235e4f](https://github.com/formaat-design/reshaped/commit/3235e4f))
-* fix: v3 prep ([35b6f51](https://github.com/formaat-design/reshaped/commit/35b6f51))
-* fix: v3 updates ([2714f21](https://github.com/formaat-design/reshaped/commit/2714f21))
-* fix: vrt ([5782a0e](https://github.com/formaat-design/reshaped/commit/5782a0e))
-* fix(Accordion): expand transition ([d128a23](https://github.com/formaat-design/reshaped/commit/d128a23))
-* fix(Accordion): fixed accordion content transition delay ([0429896](https://github.com/formaat-design/reshaped/commit/0429896))
-* fix(Accordion): fixed for RSC ([8cf93a8](https://github.com/formaat-design/reshaped/commit/8cf93a8))
-* fix(Actionable): form submission ([e27e2f1](https://github.com/formaat-design/reshaped/commit/e27e2f1))
-* fix(Actionable): form submission ([b049925](https://github.com/formaat-design/reshaped/commit/b049925))
-* fix(ActionBar): fixed elevated variant shadow blocking events ([f7b919a](https://github.com/formaat-design/reshaped/commit/f7b919a))
-* fix(Alert): increased gap before actions when using inline layout ([d2b0323](https://github.com/formaat-design/reshaped/commit/d2b0323))
-* fix(Autocomplete): fixed inputAttributes not applying to the component ([34110b1](https://github.com/formaat-design/reshaped/commit/34110b1))
-* fix(Avatar): fixed label size ([49a8c47](https://github.com/formaat-design/reshaped/commit/49a8c47))
-* fix(Button): safari icon glitching in the docs ([799dea5](https://github.com/formaat-design/reshaped/commit/799dea5))
-* fix(Calendar): fixed single date hover styles ([83863af](https://github.com/formaat-design/reshaped/commit/83863af))
-* fix(Carousel): fixed scroll snapping ([2e5316e](https://github.com/formaat-design/reshaped/commit/2e5316e))
-* fix(deps): update dependency commander to v11.1.0 ([3a7e2fd](https://github.com/formaat-design/reshaped/commit/3a7e2fd))
-* fix(deps): update dependency cssnano to v7.0.6 ([7b744d6](https://github.com/formaat-design/reshaped/commit/7b744d6))
-* fix(Dismissible): fixed empty reserved space ([daf1b8f](https://github.com/formaat-design/reshaped/commit/daf1b8f))
-* fix(DropdownMenu): attributes ref ([5c884c6](https://github.com/formaat-design/reshaped/commit/5c884c6))
-* fix(DropdownMenu): fixed double enter press handling ([d4234ec](https://github.com/formaat-design/reshaped/commit/d4234ec))
-* fix(Expandable): fixed animation duration ([830d29c](https://github.com/formaat-design/reshaped/commit/830d29c))
-* fix(Flyout): adjusted animation timeouts ([0c37a63](https://github.com/formaat-design/reshaped/commit/0c37a63))
-* fix(Flyout): blur for content menu ([2aec8d1](https://github.com/formaat-design/reshaped/commit/2aec8d1))
-* fix(Flyout): calculate position correctly inside fixed position containers that are not top: 0 ([016793d](https://github.com/formaat-design/reshaped/commit/016793d))
-* fix(Flyout): disconnect observer when closed ([42d3fe1](https://github.com/formaat-design/reshaped/commit/42d3fe1))
-* fix(Flyout): dismissible queue fixed for disabled outside click ([c51546f](https://github.com/formaat-design/reshaped/commit/c51546f))
-* fix(Flyout): fixed cooldown and disabled ([65e3da4](https://github.com/formaat-design/reshaped/commit/65e3da4))
-* fix(Flyout): fixed error logs on unmount ([412caa6](https://github.com/formaat-design/reshaped/commit/412caa6))
-* fix(Flyout): fixed flyout state on the fastest repeat ([8024efa](https://github.com/formaat-design/reshaped/commit/8024efa))
-* fix(Flyout): fixed positioning for scaled elements ([91ef576](https://github.com/formaat-design/reshaped/commit/91ef576))
-* fix(Flyout): fixed submenu animation ([b3ee08d](https://github.com/formaat-design/reshaped/commit/b3ee08d))
-* fix(Flyout): fixed type errors ([f28c912](https://github.com/formaat-design/reshaped/commit/f28c912))
-* fix(Flyout): keyboard mode for focus events ([aa77e35](https://github.com/formaat-design/reshaped/commit/aa77e35))
-* fix(Flyout): nested flyout cooldown ([fdc1ba5](https://github.com/formaat-design/reshaped/commit/fdc1ba5))
-* fix(Flyout): outside click ([87195a6](https://github.com/formaat-design/reshaped/commit/87195a6))
-* fix(Flyout): responsive visibility support ([02e4696](https://github.com/formaat-design/reshaped/commit/02e4696))
-* fix(Flyout): shadow dom support ([99839ae](https://github.com/formaat-design/reshaped/commit/99839ae))
-* fix(Flyout): updatePosition while flyout is active ([96ec74b](https://github.com/formaat-design/reshaped/commit/96ec74b))
-* fix(FormControl): fixed import paths for Remix Vite setup ([8552910](https://github.com/formaat-design/reshaped/commit/8552910))
-* fix(Grid): css modules in next ([cf3f28c](https://github.com/formaat-design/reshaped/commit/cf3f28c))
-* fix(height): returned important ([6df1ecc](https://github.com/formaat-design/reshaped/commit/6df1ecc))
-* fix(Icon): fixed svg rendering defined in components with prop types ([ad7c93a](https://github.com/formaat-design/reshaped/commit/ad7c93a))
-* fix(Icon): width and height html overrides ([8904e65](https://github.com/formaat-design/reshaped/commit/8904e65))
-* fix(Link): fixed iOS Safari currentcolor ([a090189](https://github.com/formaat-design/reshaped/commit/a090189))
-* fix(MenuItem): fixed Tailwind CSS reset overriding button styles ([a2481b8](https://github.com/formaat-design/reshaped/commit/a2481b8))
-* fix(minHeight): updated function name ([1d2d7ec](https://github.com/formaat-design/reshaped/commit/1d2d7ec))
-* fix(Modal): added attributes.ref support ([f4b6b20](https://github.com/formaat-design/reshaped/commit/f4b6b20))
-* fix(Modal): autofocus and aialabel support ([4a5dd86](https://github.com/formaat-design/reshaped/commit/4a5dd86))
-* fix(Modal): fixed swipe gestures when user is scrolling ([302f5a2](https://github.com/formaat-design/reshaped/commit/302f5a2))
-* fix(Modal): fixed swipe to close in scrollable areas ([7567058](https://github.com/formaat-design/reshaped/commit/7567058))
-* fix(Modal): shadow dom rendering ([b342347](https://github.com/formaat-design/reshaped/commit/b342347))
-* fix(Modal): swipe improvements ([2cfc100](https://github.com/formaat-design/reshaped/commit/2cfc100))
-* fix(Modal): width ([f5fa0fc](https://github.com/formaat-design/reshaped/commit/f5fa0fc))
-* fix(overlay): blur 1px glitch ([04efb9b](https://github.com/formaat-design/reshaped/commit/04efb9b))
-* fix(Overlay): fixed role button cursor reset in Tailwind ([38154f6](https://github.com/formaat-design/reshaped/commit/38154f6))
-* fix(Overlay): fixed transparent overlay transition event ([116ebbe](https://github.com/formaat-design/reshaped/commit/116ebbe))
-* fix(overlay): zindex ([d4cfbde](https://github.com/formaat-design/reshaped/commit/d4cfbde))
-* fix(PinField): edit mode on mount ([e68f4b0](https://github.com/formaat-design/reshaped/commit/e68f4b0))
-* fix(Reshaped): fixed global html bg color ([c475c30](https://github.com/formaat-design/reshaped/commit/c475c30))
-* fix(Resizable): fixed auto height for handle ([3cfa949](https://github.com/formaat-design/reshaped/commit/3cfa949))
-* fix(ScrollArea): dynamic content resizing ([c7330e0](https://github.com/formaat-design/reshaped/commit/c7330e0))
-* fix(ScrollArea): fixed scrollbar visibility in iOS safari ([3c313af](https://github.com/formaat-design/reshaped/commit/3c313af))
-* fix(ScrollArea): implementation fixes ([1519118](https://github.com/formaat-design/reshaped/commit/1519118))
-* fix(ScrollArea): onScroll args ([3c39bb4](https://github.com/formaat-design/reshaped/commit/3c39bb4))
-* fix(ScrollArea): thumb hover effects ([5bc79d1](https://github.com/formaat-design/reshaped/commit/5bc79d1))
-* fix(Slider): fit thumbs within the bar area not to cause overflow ([d813eb2](https://github.com/formaat-design/reshaped/commit/d813eb2))
-* fix(Slider): fixed horizontal scrolling on mount in safari ([5302691](https://github.com/formaat-design/reshaped/commit/5302691))
-* fix(Slider): fixed tooltip hover ([d6b72f0](https://github.com/formaat-design/reshaped/commit/d6b72f0))
-* fix(Slider): float value support ([b438d3f](https://github.com/formaat-design/reshaped/commit/b438d3f))
-* fix(Slider): keep tooltip inside the viewport ([bcc8e7c](https://github.com/formaat-design/reshaped/commit/bcc8e7c))
-* fix(Tabs): animations triggered by external user events ([4a5aa5f](https://github.com/formaat-design/reshaped/commit/4a5aa5f))
-* fix(Tabs): fixed animation transition ([02644e6](https://github.com/formaat-design/reshaped/commit/02644e6))
-* fix(tailwind): border radius config ([c928830](https://github.com/formaat-design/reshaped/commit/c928830))
-* fix(Text): fixed clamp word break ([aed7e01](https://github.com/formaat-design/reshaped/commit/aed7e01))
-* fix(TextArea): fixed placeholder color misalignment with TextField ([bdc9ccc](https://github.com/formaat-design/reshaped/commit/bdc9ccc))
-* fix(TextArea): fixed sizing when using values without spaces in them ([8558fbe](https://github.com/formaat-design/reshaped/commit/8558fbe))
-* fix(Theming): improved contrast for the light mode neutral faded generated value ([ac67342](https://github.com/formaat-design/reshaped/commit/ac67342))
-* fix(theming): neutral bg ([e2a38ae](https://github.com/formaat-design/reshaped/commit/e2a38ae))
-* fix(Toast): Added translateZ ([5180a1a](https://github.com/formaat-design/reshaped/commit/5180a1a))
-* fix(Tooltip): support for optional text ([2687d30](https://github.com/formaat-design/reshaped/commit/2687d30))
-* fix(trapFocus): fixed behaviour for input radio elements inside the trap focus area ([d3c15ed](https://github.com/formaat-design/reshaped/commit/d3c15ed))
-* fix(TrapFocus): fixed screen reader trap for shadow root ([ea3741b](https://github.com/formaat-design/reshaped/commit/ea3741b))
-* fix(trapFocus): tabIndex -1 handling ([bc3c5a9](https://github.com/formaat-design/reshaped/commit/bc3c5a9))
-* fix(useHotkeys): mod+enter on windows ([b713b29](https://github.com/formaat-design/reshaped/commit/b713b29))
-* fix(useIsDismissible): simplify implementation ([28f096b](https://github.com/formaat-design/reshaped/commit/28f096b))
-* fix(useResponsiveClientValue): boolean support ([e7fcd3f](https://github.com/formaat-design/reshaped/commit/e7fcd3f))
-* fix(View): fixed divided flag compatibility with React Fragments ([6819b96](https://github.com/formaat-design/reshaped/commit/6819b96))
-* fix(View): fixed rendering of null elements inside a fragment ([a07c896](https://github.com/formaat-design/reshaped/commit/a07c896))
-* fix(View): fixed rendering with a single fragment ([e2e96fd](https://github.com/formaat-design/reshaped/commit/e2e96fd))
-* feat: added getConfig function for postcss setup ([308086b](https://github.com/formaat-design/reshaped/commit/308086b))
-* feat: added theme json output ([419d415](https://github.com/formaat-design/reshaped/commit/419d415))
-* feat: added viewports to the theme definition ([2edd577](https://github.com/formaat-design/reshaped/commit/2edd577))
-* feat: added warning and brand color support ([96441eb](https://github.com/formaat-design/reshaped/commit/96441eb))
-* feat: apca color palette ([43a240c](https://github.com/formaat-design/reshaped/commit/43a240c))
-* feat: blurred overlay ([1cf0f64](https://github.com/formaat-design/reshaped/commit/1cf0f64))
-* feat: context menu ([da3ae97](https://github.com/formaat-design/reshaped/commit/da3ae97))
-* feat: disableCloseOnOutsideClick ([ccbf738](https://github.com/formaat-design/reshaped/commit/ccbf738))
-* feat: fluid typography ([ced1302](https://github.com/formaat-design/reshaped/commit/ced1302))
-* feat: flyout in shadow dom ([94bbbc8](https://github.com/formaat-design/reshaped/commit/94bbbc8))
-* feat: migrate mixins ([bb96ac5](https://github.com/formaat-design/reshaped/commit/bb96ac5))
-* feat: migrated the package to use exports field ([159a59a](https://github.com/formaat-design/reshaped/commit/159a59a))
-* feat: minor version bump ([c081b70](https://github.com/formaat-design/reshaped/commit/c081b70))
-* feat: minor version bump ([7f9219c](https://github.com/formaat-design/reshaped/commit/7f9219c))
-* feat: mixins ([04ec201](https://github.com/formaat-design/reshaped/commit/04ec201))
-* feat: mixins ([ca32d6d](https://github.com/formaat-design/reshaped/commit/ca32d6d))
-* feat: modal and overlay onClock reason ([dfe1bd5](https://github.com/formaat-design/reshaped/commit/dfe1bd5))
-* feat: modal full-screen position ([ae4a727](https://github.com/formaat-design/reshaped/commit/ae4a727))
-* feat: modal overflow prop ([bdf8fef](https://github.com/formaat-design/reshaped/commit/bdf8fef))
-* feat: modal/overlay outside click ([b967a9b](https://github.com/formaat-design/reshaped/commit/b967a9b))
-* feat: postcss rsponsive css ([ca6b304](https://github.com/formaat-design/reshaped/commit/ca6b304))
-* feat: pre 2.8.0 features ([40fe590](https://github.com/formaat-design/reshaped/commit/40fe590))
-* feat: rename splitter to resizable ([9b34083](https://github.com/formaat-design/reshaped/commit/9b34083))
-* feat: resizable bordered variant ([4045c7c](https://github.com/formaat-design/reshaped/commit/4045c7c))
-* feat: scoped styling ([ba8d96a](https://github.com/formaat-design/reshaped/commit/ba8d96a))
-* feat: shadow dom support ([e6e4d83](https://github.com/formaat-design/reshaped/commit/e6e4d83))
-* feat: stopPropagation ([08b0c44](https://github.com/formaat-design/reshaped/commit/08b0c44))
-* feat: table attributes and useHotkeys alt modification ([8b4f64b](https://github.com/formaat-design/reshaped/commit/8b4f64b))
-* feat: updated postcss setup to the latest custom media and excluded it from the internal build ([53f8ee5](https://github.com/formaat-design/reshaped/commit/53f8ee5))
-* feat: updated shadows ([de3818d](https://github.com/formaat-design/reshaped/commit/de3818d))
-* feat: updated the default rem size ([ce82fc5](https://github.com/formaat-design/reshaped/commit/ce82fc5))
-* feat: updated themes ([9c0a481](https://github.com/formaat-design/reshaped/commit/9c0a481))
-* feat: updated theming ([9469b23](https://github.com/formaat-design/reshaped/commit/9469b23))
-* feat: useHandlerRef for effects ([3f969e5](https://github.com/formaat-design/reshaped/commit/3f969e5))
-* feat(Actionable): migrated to :focus-visible ([6b7bfb6](https://github.com/formaat-design/reshaped/commit/6b7bfb6))
-* feat(Actionable): wrapped styles with rs.reset layer ([7afdf30](https://github.com/formaat-design/reshaped/commit/7afdf30))
-* feat(Autocomplete): instanceRef ([42ffb29](https://github.com/formaat-design/reshaped/commit/42ffb29))
-* feat(Autocomplete): multi value features ([4ca31d2](https://github.com/formaat-design/reshaped/commit/4ca31d2))
-* feat(Breadcrumbs): added a disableExpand flag ([5c6d4a4](https://github.com/formaat-design/reshaped/commit/5c6d4a4))
-* feat(Button): added flex composition, increased space for slots ([7c3b35e](https://github.com/formaat-design/reshaped/commit/7c3b35e))
-* feat(Calendar): keyboard navigation edge cases ([9166ba6](https://github.com/formaat-design/reshaped/commit/9166ba6))
-* feat(Calendar): new component ([e84a5e0](https://github.com/formaat-design/reshaped/commit/e84a5e0))
-* feat(Calendar): range selection and translations ([d4dd94b](https://github.com/formaat-design/reshaped/commit/d4dd94b))
-* feat(ContextMenu): new component ([3bb8105](https://github.com/formaat-design/reshaped/commit/3bb8105))
-* feat(Divider): added label support ([c85dee7](https://github.com/formaat-design/reshaped/commit/c85dee7))
-* feat(DropdownMenu): all item props on subtrigger ([6b20628](https://github.com/formaat-design/reshaped/commit/6b20628))
-* feat(Expandable): switched to css transitions ([c6f03b7](https://github.com/formaat-design/reshaped/commit/c6f03b7))
-* feat(FileUpload): added height prop support ([eab8c30](https://github.com/formaat-design/reshaped/commit/eab8c30))
-* feat(Flyout): containerRef support ([4d31bf2](https://github.com/formaat-design/reshaped/commit/4d31bf2))
-* feat(flyout): contentShift ([fb429e8](https://github.com/formaat-design/reshaped/commit/fb429e8))
-* feat(Flyout): dynamic positioning ([2a4d105](https://github.com/formaat-design/reshaped/commit/2a4d105))
-* feat(Flyout): fallback + gap calculations ([4a810bb](https://github.com/formaat-design/reshaped/commit/4a810bb))
-* feat(Flyout): fallbackPositions and history ([9a97f87](https://github.com/formaat-design/reshaped/commit/9a97f87))
-* feat(Flyout): improve flyout timeouts ([44f44b5](https://github.com/formaat-design/reshaped/commit/44f44b5))
-* feat(Flyout): initifal focus ([6596ccc](https://github.com/formaat-design/reshaped/commit/6596ccc))
-* feat(Flyout): support for disabled content hover ([c3d80e8](https://github.com/formaat-design/reshaped/commit/c3d80e8))
-* feat(Grid): new utility ([2ba8bcc](https://github.com/formaat-design/reshaped/commit/2ba8bcc))
-* feat(hidden): switched to display contents ([e52e5db](https://github.com/formaat-design/reshaped/commit/e52e5db))
-* feat(Link): added warning color ([d0e7f02](https://github.com/formaat-design/reshaped/commit/d0e7f02))
-* feat(Loader): large size ([7a60235](https://github.com/formaat-design/reshaped/commit/7a60235))
-* feat(Modal): added overlayClassName support ([d74db3f](https://github.com/formaat-design/reshaped/commit/d74db3f))
-* feat(Modal): disableSwipeGesture ([6bf5ccd](https://github.com/formaat-design/reshaped/commit/6bf5ccd))
-* feat(Modal): swipe to close handling ([e99cc02](https://github.com/formaat-design/reshaped/commit/e99cc02))
-* feat(Pagination): new component ([dfc0f61](https://github.com/formaat-design/reshaped/commit/dfc0f61))
-* feat(PinField): initial commit ([cd81d96](https://github.com/formaat-design/reshaped/commit/cd81d96))
-* feat(Popover): added support for using tooltip and popover on the same element ([c078f3e](https://github.com/formaat-design/reshaped/commit/c078f3e))
-* feat(Popover): dismissible ([1419356](https://github.com/formaat-design/reshaped/commit/1419356))
-* feat(Reshaped): scoped dark mode ([faee9e0](https://github.com/formaat-design/reshaped/commit/faee9e0))
-* feat(Resizable): edge cases ([0fbdde5](https://github.com/formaat-design/reshaped/commit/0fbdde5))
-* feat(ScrollArea): new utility ([796acfb](https://github.com/formaat-design/reshaped/commit/796acfb))
-* feat(Slider): vertical direction support ([9dac5fd](https://github.com/formaat-design/reshaped/commit/9dac5fd))
-* feat(Slider): vertical orientation ([16846c6](https://github.com/formaat-design/reshaped/commit/16846c6))
-* feat(Splitter): keyboard + custom handle ([62327aa](https://github.com/formaat-design/reshaped/commit/62327aa))
-* feat(Table): row on click ([cfbe310](https://github.com/formaat-design/reshaped/commit/cfbe310))
-* feat(Tabs): added fade animation ([3d5c4cd](https://github.com/formaat-design/reshaped/commit/3d5c4cd))
-* feat(Tabs): auto scrolling and new nav controls ([1bf78cd](https://github.com/formaat-design/reshaped/commit/1bf78cd))
-* feat(Tabs): increase item spacing ([492f96a](https://github.com/formaat-design/reshaped/commit/492f96a))
-* feat(Text): added wrap balance ([a4b4486](https://github.com/formaat-design/reshaped/commit/a4b4486))
-* feat(Text): responsive weight ([1fec604](https://github.com/formaat-design/reshaped/commit/1fec604))
-* feat(TextArea): resize auto and none ([e221a55](https://github.com/formaat-design/reshaped/commit/e221a55))
-* feat(TextField): clickable affixes ([60f393f](https://github.com/formaat-design/reshaped/commit/60f393f))
-* feat(TextField): slot multiline wrapping ([71783ce](https://github.com/formaat-design/reshaped/commit/71783ce))
-* feat(theming): added auto-generation for the s viewport maxPx value ([2e7bb23](https://github.com/formaat-design/reshaped/commit/2e7bb23))
-* feat(theming): added rgb border colors and updated contrast to use APCA ([49331e4](https://github.com/formaat-design/reshaped/commit/49331e4))
-* feat(theming): letter spacing support ([803e13c](https://github.com/formaat-design/reshaped/commit/803e13c))
-* feat(theming): updated radius and font weight tokens structure ([ef424bd](https://github.com/formaat-design/reshaped/commit/ef424bd))
-* feat(Toast): added support for toast render boundaries ([2a73fad](https://github.com/formaat-design/reshaped/commit/2a73fad))
-* feat(Toast): added warning color ([bb9bb81](https://github.com/formaat-design/reshaped/commit/bb9bb81))
-* feat(Tooltip): added animation cooldown, disabled flag and fixed positioning ([eab13ed](https://github.com/formaat-design/reshaped/commit/eab13ed))
-* feat(useDrag): hook implementation + splitter initial ([c8a4d5c](https://github.com/formaat-design/reshaped/commit/c8a4d5c))
-* feat(useResponsiveClientValue): custom viewports support ([30dc800](https://github.com/formaat-design/reshaped/commit/30dc800))
-* feat(View): added responsive text align support ([304efc7](https://github.com/formaat-design/reshaped/commit/304efc7))
-* feat(View): responsive border color ([c260cc2](https://github.com/formaat-design/reshaped/commit/c260cc2))
-* test: comment ([8be2914](https://github.com/formaat-design/reshaped/commit/8be2914))
-* test: fixed keys ([47f11f0](https://github.com/formaat-design/reshaped/commit/47f11f0))
-* test: fixed tests ([1a5df40](https://github.com/formaat-design/reshaped/commit/1a5df40))
-* test: fixed unit tests ([9d6f9ba](https://github.com/formaat-design/reshaped/commit/9d6f9ba))
-* test: overlay transition test update ([d72e2b5](https://github.com/formaat-design/reshaped/commit/d72e2b5))
-* test: stories ([ffdabfc](https://github.com/formaat-design/reshaped/commit/ffdabfc))
-* test: update snapshots ([75361ba](https://github.com/formaat-design/reshaped/commit/75361ba))
-* test: updated overlay unit ([8460db5](https://github.com/formaat-design/reshaped/commit/8460db5))
-* test: updated snapshots ([6600a66](https://github.com/formaat-design/reshaped/commit/6600a66))
-* test: updated tests ([c14ccd0](https://github.com/formaat-design/reshaped/commit/c14ccd0))
-* test: updated unit tests ([fc466ef](https://github.com/formaat-design/reshaped/commit/fc466ef))
-* test(Calendar): unit tests and stories ([a7a6873](https://github.com/formaat-design/reshaped/commit/a7a6873))
-* test(FileUpload): added tests ([363a464](https://github.com/formaat-design/reshaped/commit/363a464))
-* test(Modal): commented a flaky test ([cca6001](https://github.com/formaat-design/reshaped/commit/cca6001))
-* test(PinField): updated unit tests ([c95c428](https://github.com/formaat-design/reshaped/commit/c95c428))
-* test(Reshaped): scoped tests ([e1fe374](https://github.com/formaat-design/reshaped/commit/e1fe374))
-* test(TextField): added new text field story ([023cb9e](https://github.com/formaat-design/reshaped/commit/023cb9e))
-* chore: changelog ([ea93b9d](https://github.com/formaat-design/reshaped/commit/ea93b9d))
-* chore: changelog ([6369c2b](https://github.com/formaat-design/reshaped/commit/6369c2b))
-* chore: delete airbnb eslint config ([52d7eaa](https://github.com/formaat-design/reshaped/commit/52d7eaa))
-* chore: deleted test release ([0475246](https://github.com/formaat-design/reshaped/commit/0475246))
-* chore: deleted tgz ([bb90069](https://github.com/formaat-design/reshaped/commit/bb90069))
-* chore: migrated to react-jsx ([88d28e0](https://github.com/formaat-design/reshaped/commit/88d28e0))
-* chore: removed unused semantic-release dependencies ([a4bee9c](https://github.com/formaat-design/reshaped/commit/a4bee9c))
-* chore: update commander ([d8d2c70](https://github.com/formaat-design/reshaped/commit/d8d2c70))
-* chore: update dependencies ([b022a93](https://github.com/formaat-design/reshaped/commit/b022a93))
-* chore: updated commitlint ([1adc51e](https://github.com/formaat-design/reshaped/commit/1adc51e))
-* chore: updated dependencies ([58c93f7](https://github.com/formaat-design/reshaped/commit/58c93f7))
-* chore: updated dependencies ([c37e2fb](https://github.com/formaat-design/reshaped/commit/c37e2fb))
-* chore: updated dependencies ([9f349a9](https://github.com/formaat-design/reshaped/commit/9f349a9))
-* chore: updated dependencies ([8c8f3ab](https://github.com/formaat-design/reshaped/commit/8c8f3ab))
-* chore: updated dependencies ([c8acbaf](https://github.com/formaat-design/reshaped/commit/c8acbaf))
-* chore: updated dependencies and eslint config ([0184047](https://github.com/formaat-design/reshaped/commit/0184047))
-* chore: updated deps ([3d6ef1f](https://github.com/formaat-design/reshaped/commit/3d6ef1f))
-* chore: updated lefthook ([3cbc680](https://github.com/formaat-design/reshaped/commit/3cbc680))
-* chore: updated npm package license ([14248d2](https://github.com/formaat-design/reshaped/commit/14248d2))
-* chore: updated peerDeps ([8168f97](https://github.com/formaat-design/reshaped/commit/8168f97))
-* chore: updated release process ([6dbf42b](https://github.com/formaat-design/reshaped/commit/6dbf42b))
-* chore: updated size-limit ([cd1203c](https://github.com/formaat-design/reshaped/commit/cd1203c))
-* chore: updated storybook ([be1455d](https://github.com/formaat-design/reshaped/commit/be1455d))
-* chore: updated stylelint ([2867071](https://github.com/formaat-design/reshaped/commit/2867071))
-* chore: updated tsconfig ([df4d5f3](https://github.com/formaat-design/reshaped/commit/df4d5f3))
-* chore(deps): update andresz1/size-limit-action action to v1.8.0 ([46ab34b](https://github.com/formaat-design/reshaped/commit/46ab34b))
-* chore(deps): update commitlint monorepo ([351010d](https://github.com/formaat-design/reshaped/commit/351010d))
-* chore(deps): update commitlint monorepo to v18.4.3 ([31c07a8](https://github.com/formaat-design/reshaped/commit/31c07a8))
-* chore(deps): update dependency @size-limit/preset-big-lib to v11.1.6 ([d90e44f](https://github.com/formaat-design/reshaped/commit/d90e44f))
-* chore(deps): update dependency @testing-library/jest-dom to v6.1.6 ([937bcfb](https://github.com/formaat-design/reshaped/commit/937bcfb))
-* chore(deps): update dependency @testing-library/react to v14.1.2 ([20cbc23](https://github.com/formaat-design/reshaped/commit/20cbc23))
-* chore(deps): update dependency @testing-library/user-event to v14.5.2 ([ce8dbc1](https://github.com/formaat-design/reshaped/commit/ce8dbc1))
-* chore(deps): update dependency @types/jest to v29.5.11 ([3d9aa18](https://github.com/formaat-design/reshaped/commit/3d9aa18))
-* chore(deps): update dependency @types/node to v20.10.6 ([c50918d](https://github.com/formaat-design/reshaped/commit/c50918d))
-* chore(deps): update dependency @types/node to v20.9.0 ([27535d2](https://github.com/formaat-design/reshaped/commit/27535d2))
-* chore(deps): update dependency @types/node to v20.9.2 ([0098a5d](https://github.com/formaat-design/reshaped/commit/0098a5d))
-* chore(deps): update dependency @types/node to v22.7.7 ([6fd253a](https://github.com/formaat-design/reshaped/commit/6fd253a))
-* chore(deps): update dependency @vitejs/plugin-react to v4.2.0 ([645f98d](https://github.com/formaat-design/reshaped/commit/645f98d))
-* chore(deps): update dependency @vitejs/plugin-react to v4.2.1 ([1107c1b](https://github.com/formaat-design/reshaped/commit/1107c1b))
-* chore(deps): update dependency chromatic to v9 ([ec390e3](https://github.com/formaat-design/reshaped/commit/ec390e3))
-* chore(deps): update dependency eslint to v8.54.0 ([b21015a](https://github.com/formaat-design/reshaped/commit/b21015a))
-* chore(deps): update dependency eslint-plugin-import to v2.29.0 ([d6d8f11](https://github.com/formaat-design/reshaped/commit/d6d8f11))
-* chore(deps): update dependency eslint-plugin-import to v2.29.1 ([ef3954b](https://github.com/formaat-design/reshaped/commit/ef3954b))
-* chore(deps): update dependency lefthook to v1.7.22 ([e437ae0](https://github.com/formaat-design/reshaped/commit/e437ae0))
-* chore(deps): update dependency postcss to v8.4.32 ([070b6ee](https://github.com/formaat-design/reshaped/commit/070b6ee))
-* chore(deps): update dependency prettier to v3.1.0 ([11ccc19](https://github.com/formaat-design/reshaped/commit/11ccc19))
-* chore(deps): update dependency prettier to v3.1.1 ([bc4b1ae](https://github.com/formaat-design/reshaped/commit/bc4b1ae))
-* chore(deps): update dependency semantic-release to v22.0.7 ([ea48e84](https://github.com/formaat-design/reshaped/commit/ea48e84))
-* chore(deps): update dependency semantic-release to v22.0.8 ([c0144fa](https://github.com/formaat-design/reshaped/commit/c0144fa))
-* chore(deps): update dependency typescript to v5.3.3 ([62acf42](https://github.com/formaat-design/reshaped/commit/62acf42))
-* chore(deps): update dependency vite to v5 ([88c73c9](https://github.com/formaat-design/reshaped/commit/88c73c9))
-* chore(deps): update dependency vite to v5 ([86e1e4c](https://github.com/formaat-design/reshaped/commit/86e1e4c))
-* chore(deps): update react monorepo ([3936c20](https://github.com/formaat-design/reshaped/commit/3936c20))
-* chore(deps): update storybook monorepo to v8.3.6 ([9e3b588](https://github.com/formaat-design/reshaped/commit/9e3b588))
-* chore(deps): update typescript-eslint monorepo to v6.11.0 ([e650d94](https://github.com/formaat-design/reshaped/commit/e650d94))
-* chore(deps): update typescript-eslint monorepo to v6.16.0 ([5f8dccb](https://github.com/formaat-design/reshaped/commit/5f8dccb))
-* docs: added docgen for storybook ([52b3092](https://github.com/formaat-design/reshaped/commit/52b3092))
-* docs: added storybook autodocs ([542e0ad](https://github.com/formaat-design/reshaped/commit/542e0ad))
-* docs: changelog ([ee5bdf4](https://github.com/formaat-design/reshaped/commit/ee5bdf4))
-* docs: changelog ([372989d](https://github.com/formaat-design/reshaped/commit/372989d))
-* docs: storybook docs ([c49e093](https://github.com/formaat-design/reshaped/commit/c49e093))
-* docs: updated stories ([bc5d7d5](https://github.com/formaat-design/reshaped/commit/bc5d7d5))
-* docs(View): updated divided examples ([fec6871](https://github.com/formaat-design/reshaped/commit/fec6871))
-* refactor: moved from shadow root event handlers to event composedPath ([03b23b0](https://github.com/formaat-design/reshaped/commit/03b23b0))
-* refactor: refactored a11y utilities ([a14d68b](https://github.com/formaat-design/reshaped/commit/a14d68b))
-* refactor: refs types, tests and stories ([8378792](https://github.com/formaat-design/reshaped/commit/8378792))
-* refactor(PinField): updated charPattern to pattern ([70551b4](https://github.com/formaat-design/reshaped/commit/70551b4))
-* build: migrated to package.json exports field ([18a9bb4](https://github.com/formaat-design/reshaped/commit/18a9bb4))
-* ci: added github actions setup ([0d70830](https://github.com/formaat-design/reshaped/commit/0d70830))
-
-
-
-## <small>2.5.9 (2023-11-07)</small>
-
-* chore: publish ([d9a657a](https://github.com/formaat-design/reshaped/commit/d9a657a))
-* chore: reverted size-limit renovate ([e186756](https://github.com/formaat-design/reshaped/commit/e186756))
-* chore(deps): update dependency @types/events to v3.0.3 ([8d4b3e8](https://github.com/formaat-design/reshaped/commit/8d4b3e8))
-* chore(deps): update dependency @types/jest to v29.5.8 ([e3bc22d](https://github.com/formaat-design/reshaped/commit/e3bc22d))
-* chore(deps): update dependency @vitejs/plugin-react to v4.1.1 ([45eed00](https://github.com/formaat-design/reshaped/commit/45eed00))
-* chore(deps): update dependency eslint-plugin-jsx-a11y to v6.8.0 ([c5c15b7](https://github.com/formaat-design/reshaped/commit/c5c15b7))
-* chore(deps): update dependency eslint-plugin-prettier to v5.0.1 ([8fff713](https://github.com/formaat-design/reshaped/commit/8fff713))
-* chore(deps): update dependency size-limit to v10 ([a43a6e3](https://github.com/formaat-design/reshaped/commit/a43a6e3))
-* chore(deps): update dependency stylelint to v15.11.0 ([33e9b36](https://github.com/formaat-design/reshaped/commit/33e9b36))
-* chore(deps): update react monorepo ([5bb0bd0](https://github.com/formaat-design/reshaped/commit/5bb0bd0))
-* chore(deps): update storybook monorepo to v7.5.3 ([b50d426](https://github.com/formaat-design/reshaped/commit/b50d426))
-* build: fixed build errors ([3bb901b](https://github.com/formaat-design/reshaped/commit/3bb901b))
-* fix(Breadcrumbs): fixed breadcrumbs rendering when used in RSC ([98c14bc](https://github.com/formaat-design/reshaped/commit/98c14bc))
-* fix(Themes): added a way control individual "on" colors to fix themes with non-gray foreground color ([506e38c](https://github.com/formaat-design/reshaped/commit/506e38c))
-
-
-
-## <small>2.5.8 (2023-11-04)</small>
-
-* chore: publish ([fa85a38](https://github.com/formaat-design/reshaped/commit/fa85a38))
-* fix(Select): fixed custom trigger start padding when used without slots ([e3c81a9](https://github.com/formaat-design/reshaped/commit/e3c81a9))
-
-
-
-## <small>2.5.7 (2023-11-04)</small>
-
-* chore: publish ([6e64aff](https://github.com/formaat-design/reshaped/commit/6e64aff))
-* fix(Popover): fixed default render styles and improved transition for trigger width ([e4e4584](https://github.com/formaat-design/reshaped/commit/e4e4584))
-
-
-
-## <small>2.5.6 (2023-11-01)</small>
-
-* chore: publish ([4b16d63](https://github.com/formaat-design/reshaped/commit/4b16d63))
-* chore(deps): update dependency @types/jest to v29.5.7 ([4283975](https://github.com/formaat-design/reshaped/commit/4283975))
-* chore(deps): update dependency @types/node to v20.8.10 ([00e1743](https://github.com/formaat-design/reshaped/commit/00e1743))
-* chore(deps): update dependency @vitejs/plugin-react to v4.1.0 ([78e70b4](https://github.com/formaat-design/reshaped/commit/78e70b4))
-* fix(Flyout): added support for automatic positioning inside position: fixed parent ([04c8239](https://github.com/formaat-design/reshaped/commit/04c8239))
-* fix(Toast): removed logs ([15ee2c5](https://github.com/formaat-design/reshaped/commit/15ee2c5))
-
-
-
-## <small>2.5.5 (2023-10-31)</small>
-
-* chore: publish ([4406204](https://github.com/formaat-design/reshaped/commit/4406204))
-* chore: updated release setup ([63723c3](https://github.com/formaat-design/reshaped/commit/63723c3))
-* chore(deps): update dependency @types/events to v3.0.2 ([b80013a](https://github.com/formaat-design/reshaped/commit/b80013a))
-* chore(deps): update dependency chromatic to v7.6.0 ([9831460](https://github.com/formaat-design/reshaped/commit/9831460))
-* chore(deps): update dependency eslint to v8.52.0 ([3b7688a](https://github.com/formaat-design/reshaped/commit/3b7688a))
-* chore(deps): update dependency vite to v4.5.0 ([5f7626f](https://github.com/formaat-design/reshaped/commit/5f7626f))
-* fix(deps): update dependency autoprefixer to v10.4.16 ([f9a4361](https://github.com/formaat-design/reshaped/commit/f9a4361))
-* Update dependency resolve-tspaths to v0.8.17 ([4d8dfa9](https://github.com/formaat-design/reshaped/commit/4d8dfa9))
-* Update typescript-eslint monorepo to v6.9.1 ([cdfde24](https://github.com/formaat-design/reshaped/commit/cdfde24))
-
-
-
-## <small>2.5.4 (2023-10-31)</small>
-
-* chore: added semantic-release ([50bc269](https://github.com/formaat-design/reshaped/commit/50bc269))
-* chore: remove commitlint file from tsconfig ([f372480](https://github.com/formaat-design/reshaped/commit/f372480))
-* chore(deps): update dependency @testing-library/jest-dom to v5.17.0 ([35e1d6f](https://github.com/formaat-design/reshaped/commit/35e1d6f))
-* chore(deps): update dependency @testing-library/jest-dom to v6.1.4 ([1394570](https://github.com/formaat-design/reshaped/commit/1394570))
-* chore(deps): update dependency @types/node to v20.4.2 ([117c0b7](https://github.com/formaat-design/reshaped/commit/117c0b7))
-* chore(deps): update dependency @types/node to v20.4.4 ([7b037b3](https://github.com/formaat-design/reshaped/commit/7b037b3))
-* chore(deps): update dependency @types/node to v20.4.5 ([8be2f45](https://github.com/formaat-design/reshaped/commit/8be2f45))
-* chore(deps): update dependency @types/node to v20.4.8 ([f1f458c](https://github.com/formaat-design/reshaped/commit/f1f458c))
-* chore(deps): update dependency @types/react to v18.2.17 ([31686d4](https://github.com/formaat-design/reshaped/commit/31686d4))
-* chore(deps): update dependency @types/react to v18.2.18 ([389bf64](https://github.com/formaat-design/reshaped/commit/389bf64))
-* chore(deps): update dependency @vitejs/plugin-react to v4.0.3 ([597c5e9](https://github.com/formaat-design/reshaped/commit/597c5e9))
-* chore(deps): update dependency @vitejs/plugin-react to v4.0.4 ([eb15e12](https://github.com/formaat-design/reshaped/commit/eb15e12))
-* chore(deps): update dependency chromatic to v6.20.0 ([1ce945e](https://github.com/formaat-design/reshaped/commit/1ce945e))
-* chore(deps): update dependency eslint to v8.45.0 ([78e52ca](https://github.com/formaat-design/reshaped/commit/78e52ca))
-* chore(deps): update dependency eslint to v8.46.0 ([8951628](https://github.com/formaat-design/reshaped/commit/8951628))
-* chore(deps): update dependency eslint-config-airbnb-typescript to v17.1.0 ([b0cd48e](https://github.com/formaat-design/reshaped/commit/b0cd48e))
-* chore(deps): update dependency eslint-config-prettier to v8.10.0 ([eadb489](https://github.com/formaat-design/reshaped/commit/eadb489))
-* chore(deps): update dependency eslint-config-prettier to v9 ([ae328fe](https://github.com/formaat-design/reshaped/commit/ae328fe))
-* chore(deps): update dependency eslint-plugin-import to v2.28.0 ([8d2d792](https://github.com/formaat-design/reshaped/commit/8d2d792))
-* chore(deps): update dependency eslint-plugin-import to v2.28.1 ([9996d59](https://github.com/formaat-design/reshaped/commit/9996d59))
-* chore(deps): update dependency eslint-plugin-prettier to v5 ([69d9107](https://github.com/formaat-design/reshaped/commit/69d9107))
-* chore(deps): update dependency eslint-plugin-react to v7.33.0 ([d20faf1](https://github.com/formaat-design/reshaped/commit/d20faf1))
-* chore(deps): update dependency eslint-plugin-react to v7.33.1 ([a736e10](https://github.com/formaat-design/reshaped/commit/a736e10))
-* chore(deps): update dependency lefthook to v1.4.5 ([94c7dd4](https://github.com/formaat-design/reshaped/commit/94c7dd4))
-* chore(deps): update dependency lefthook to v1.4.6 ([12f5ba2](https://github.com/formaat-design/reshaped/commit/12f5ba2))
-* chore(deps): update dependency lefthook to v1.4.7 ([88eed54](https://github.com/formaat-design/reshaped/commit/88eed54))
-* chore(deps): update dependency lefthook to v1.4.8 ([1021e6a](https://github.com/formaat-design/reshaped/commit/1021e6a))
-* chore(deps): update dependency lefthook to v1.5.2 ([013f6da](https://github.com/formaat-design/reshaped/commit/013f6da))
-* chore(deps): update dependency postcss to v8.4.26 ([6e2aa84](https://github.com/formaat-design/reshaped/commit/6e2aa84))
-* chore(deps): update dependency postcss to v8.4.27 ([eaf9925](https://github.com/formaat-design/reshaped/commit/eaf9925))
-* chore(deps): update dependency prettier to v3 ([94f469a](https://github.com/formaat-design/reshaped/commit/94f469a))
-* chore(deps): update dependency prettier to v3.0.1 ([6198357](https://github.com/formaat-design/reshaped/commit/6198357))
-* chore(deps): update dependency resolve-tspaths to v0.8.14 ([64b3783](https://github.com/formaat-design/reshaped/commit/64b3783))
-* chore(deps): update dependency resolve-tspaths to v0.8.15 ([b3fbee5](https://github.com/formaat-design/reshaped/commit/b3fbee5))
-* chore(deps): update dependency stylelint to v15.10.0 ([fb6bfdd](https://github.com/formaat-design/reshaped/commit/fb6bfdd))
-* chore(deps): update dependency stylelint to v15.10.1 ([15e4fa5](https://github.com/formaat-design/reshaped/commit/15e4fa5))
-* chore(deps): update dependency stylelint to v15.10.2 ([eb64966](https://github.com/formaat-design/reshaped/commit/eb64966))
-* chore(deps): update dependency stylelint-config-standard to v34 ([48d8af7](https://github.com/formaat-design/reshaped/commit/48d8af7))
-* chore(deps): update dependency ts-jest to v29.1.1 ([9be9aa1](https://github.com/formaat-design/reshaped/commit/9be9aa1))
-* chore(deps): update dependency typescript to v5.1.6 ([9adc238](https://github.com/formaat-design/reshaped/commit/9adc238))
-* chore(deps): update dependency vite to v4.4.4 ([d160459](https://github.com/formaat-design/reshaped/commit/d160459))
-* chore(deps): update dependency vite to v4.4.6 ([a1056dd](https://github.com/formaat-design/reshaped/commit/a1056dd))
-* chore(deps): update dependency vite to v4.4.7 ([b8b317f](https://github.com/formaat-design/reshaped/commit/b8b317f))
-* chore(deps): update dependency vite to v4.4.8 ([d0683e7](https://github.com/formaat-design/reshaped/commit/d0683e7))
-* chore(deps): update jest monorepo ([a7a3317](https://github.com/formaat-design/reshaped/commit/a7a3317))
-* chore(deps): update jest monorepo ([e41d3bf](https://github.com/formaat-design/reshaped/commit/e41d3bf))
-* chore(deps): update jest monorepo to v29.6.0 ([6ef78b2](https://github.com/formaat-design/reshaped/commit/6ef78b2))
-* chore(deps): update jest monorepo to v29.6.2 ([4245786](https://github.com/formaat-design/reshaped/commit/4245786))
-* chore(deps): update react monorepo ([f01dff6](https://github.com/formaat-design/reshaped/commit/f01dff6))
-* chore(deps): update react monorepo ([9876be9](https://github.com/formaat-design/reshaped/commit/9876be9))
-* chore(deps): update storybook monorepo to v7.0.25 ([f2bf448](https://github.com/formaat-design/reshaped/commit/f2bf448))
-* chore(deps): update storybook monorepo to v7.0.27 ([bf8c60f](https://github.com/formaat-design/reshaped/commit/bf8c60f))
-* chore(deps): update storybook monorepo to v7.1.0 ([f9f237c](https://github.com/formaat-design/reshaped/commit/f9f237c))
-* chore(deps): update storybook monorepo to v7.1.1 ([40dc916](https://github.com/formaat-design/reshaped/commit/40dc916))
-* chore(deps): update storybook monorepo to v7.2.1 ([9f7ce71](https://github.com/formaat-design/reshaped/commit/9f7ce71))
-* chore(deps): update storybook monorepo to v7.4.6 ([c8d2aab](https://github.com/formaat-design/reshaped/commit/c8d2aab))
-* chore(deps): update typescript-eslint monorepo to v5.61.0 ([4de5e7a](https://github.com/formaat-design/reshaped/commit/4de5e7a))
-* chore(deps): update typescript-eslint monorepo to v5.62.0 ([f8002f4](https://github.com/formaat-design/reshaped/commit/f8002f4))
-* chore(deps): update typescript-eslint monorepo to v6 ([7e2314f](https://github.com/formaat-design/reshaped/commit/7e2314f))
-* chore(deps): update typescript-eslint monorepo to v6.2.0 ([0abac97](https://github.com/formaat-design/reshaped/commit/0abac97))
-* chore(deps): update typescript-eslint monorepo to v6.2.1 ([ccad43e](https://github.com/formaat-design/reshaped/commit/ccad43e))
-* chore(deps): update typescript-eslint monorepo to v6.6.0 ([f12faf7](https://github.com/formaat-design/reshaped/commit/f12faf7))
-* chore(global): publish ([bbcf984](https://github.com/formaat-design/reshaped/commit/bbcf984))
-* fix(deps): update dependency autoprefixer to v10.4.15 ([66b415c](https://github.com/formaat-design/reshaped/commit/66b415c))
-* fix(Themes): improved baseThemeDefiniion typings ([1bbb457](https://github.com/formaat-design/reshaped/commit/1bbb457)), closes [#183](https://github.com/formaat-design/reshaped/issues/183)
-* Aligner implementation ([3279645](https://github.com/formaat-design/reshaped/commit/3279645))
-* Aligner utility ([9737be7](https://github.com/formaat-design/reshaped/commit/9737be7))
-* Autocomplete ([4ad0c55](https://github.com/formaat-design/reshaped/commit/4ad0c55))
-* Badge large size, icon support, dimissible ([be1ca95](https://github.com/formaat-design/reshaped/commit/be1ca95))
-* Bug fixes ([baed7ee](https://github.com/formaat-design/reshaped/commit/baed7ee))
-* Bug fixes ([f0bc7f0](https://github.com/formaat-design/reshaped/commit/f0bc7f0))
-* Button group docs and dropdown menu position fixes ([7988f58](https://github.com/formaat-design/reshaped/commit/7988f58))
-* Button icon only size ([bbfdf34](https://github.com/formaat-design/reshaped/commit/bbfdf34))
-* changelog ([b85ddb6](https://github.com/formaat-design/reshaped/commit/b85ddb6))
-* changelog ([b55d007](https://github.com/formaat-design/reshaped/commit/b55d007))
-* Changelog ([ee195a9](https://github.com/formaat-design/reshaped/commit/ee195a9))
-* Changelog ([f1103f0](https://github.com/formaat-design/reshaped/commit/f1103f0))
-* Changelog ([c4b738d](https://github.com/formaat-design/reshaped/commit/c4b738d))
-* Checkbox / radio transitions ([cbefd69](https://github.com/formaat-design/reshaped/commit/cbefd69))
-* Commented next config ([3b31463](https://github.com/formaat-design/reshaped/commit/3b31463))
-* Component fixes ([0f12e94](https://github.com/formaat-design/reshaped/commit/0f12e94))
-* Component improvements ([2757686](https://github.com/formaat-design/reshaped/commit/2757686))
-* Figma theme improvements ([9e00a26](https://github.com/formaat-design/reshaped/commit/9e00a26))
-* Fixed accordiong overflow, input text autocomplete position and updated generateColors ([7341aa0](https://github.com/formaat-design/reshaped/commit/7341aa0))
-* Fixed button padding ([acde165](https://github.com/formaat-design/reshaped/commit/acde165))
-* Fixed jest query error ([6a6a783](https://github.com/formaat-design/reshaped/commit/6a6a783))
-* Fixed media generation ([d581766](https://github.com/formaat-design/reshaped/commit/d581766))
-* Fixed MenuItem gap ([cab2ddf](https://github.com/formaat-design/reshaped/commit/cab2ddf))
-* Fixed onColors generation ([6446c96](https://github.com/formaat-design/reshaped/commit/6446c96))
-* Fixed popover hover events ([bd87c58](https://github.com/formaat-design/reshaped/commit/bd87c58))
-* Fixed responsive plugin ([a277a49](https://github.com/formaat-design/reshaped/commit/a277a49))
-* Fixed text field growing in safari ([916ef04](https://github.com/formaat-design/reshaped/commit/916ef04))
-* Fixed TS error ([706746a](https://github.com/formaat-design/reshaped/commit/706746a))
-* Fixed types ([09868ab](https://github.com/formaat-design/reshaped/commit/09868ab))
-* Fixed types ([b40a98e](https://github.com/formaat-design/reshaped/commit/b40a98e))
-* Fixed typing issue ([824c3ed](https://github.com/formaat-design/reshaped/commit/824c3ed))
-* Fixed unit test act warnings ([ce884d0](https://github.com/formaat-design/reshaped/commit/ce884d0))
-* fixes ([b4aa285](https://github.com/formaat-design/reshaped/commit/b4aa285))
-* fixes ([b9604d7](https://github.com/formaat-design/reshaped/commit/b9604d7))
-* Flyout inside scrollable areas ([0b3e50a](https://github.com/formaat-design/reshaped/commit/0b3e50a))
-* gitignore ([4571ab9](https://github.com/formaat-design/reshaped/commit/4571ab9))
-* Implemented Button.Group ([307e21d](https://github.com/formaat-design/reshaped/commit/307e21d))
-* Initial commit ([58727c9](https://github.com/formaat-design/reshaped/commit/58727c9))
-* Lock file ([ff40e1d](https://github.com/formaat-design/reshaped/commit/ff40e1d))
-* Migrated build to vite ([62056f4](https://github.com/formaat-design/reshaped/commit/62056f4))
-* Nested dropdown menu keyboard navigation improvements ([686e4dc](https://github.com/formaat-design/reshaped/commit/686e4dc))
-* Release beta test ([b5acabf](https://github.com/formaat-design/reshaped/commit/b5acabf))
-* Release copy script ([454e9e2](https://github.com/formaat-design/reshaped/commit/454e9e2))
-* Remove mobile tap highlight ([700ffb3](https://github.com/formaat-design/reshaped/commit/700ffb3))
-* Removed ds_store ([aad0cd1](https://github.com/formaat-design/reshaped/commit/aad0cd1))
-* Removed limit script ([02be83b](https://github.com/formaat-design/reshaped/commit/02be83b))
-* Removed SegoeUI from the default themes, Added Menu item box shadow animation ([0537c61](https://github.com/formaat-design/reshaped/commit/0537c61))
-* Reported GH issues ([a6339d4](https://github.com/formaat-design/reshaped/commit/a6339d4))
-* Reverted color mode effect ([d326428](https://github.com/formaat-design/reshaped/commit/d326428))
-* Runtime theming ([200d018](https://github.com/formaat-design/reshaped/commit/200d018))
-* Runtime theming stories ([79d02ae](https://github.com/formaat-design/reshaped/commit/79d02ae))
-* Size limit setup ([f643dda](https://github.com/formaat-design/reshaped/commit/f643dda))
-* Slate theme ([6d96d86](https://github.com/formaat-design/reshaped/commit/6d96d86))
-* Slider implementation ([a3596e6](https://github.com/formaat-design/reshaped/commit/a3596e6))
-* Slider improvements ([49f2bb1](https://github.com/formaat-design/reshaped/commit/49f2bb1))
-* Small component updates ([90f8e24](https://github.com/formaat-design/reshaped/commit/90f8e24))
-* SSR theming ([d9a44c3](https://github.com/formaat-design/reshaped/commit/d9a44c3))
-* Stepper ([bb636ac](https://github.com/formaat-design/reshaped/commit/bb636ac))
-* Stepper ([e945a13](https://github.com/formaat-design/reshaped/commit/e945a13))
-* Stepper label visibility, View flex detection ([e48f959](https://github.com/formaat-design/reshaped/commit/e48f959))
-* Storybook theme update ([aefadf0](https://github.com/formaat-design/reshaped/commit/aefadf0))
-* Table component ([d76f005](https://github.com/formaat-design/reshaped/commit/d76f005))
-* Table documentation and updates ([7fc146b](https://github.com/formaat-design/reshaped/commit/7fc146b))
-* TextField and TextArea fixes ([ae6572c](https://github.com/formaat-design/reshaped/commit/ae6572c))
-* Theme generation ([1052f2a](https://github.com/formaat-design/reshaped/commit/1052f2a))
-* Update ([6ed4d3d](https://github.com/formaat-design/reshaped/commit/6ed4d3d))
-* Update actions/checkout action to v4 ([db03996](https://github.com/formaat-design/reshaped/commit/db03996))
-* Update dependency @size-limit/preset-big-lib to v8.2.6 ([a561ebc](https://github.com/formaat-design/reshaped/commit/a561ebc))
-* Update dependency @size-limit/preset-big-lib to v9 ([4a804ef](https://github.com/formaat-design/reshaped/commit/4a804ef))
-* Update dependency @testing-library/jest-dom to v6 ([e6879ac](https://github.com/formaat-design/reshaped/commit/e6879ac))
-* Update dependency @testing-library/user-event to v14.5.1 ([ac34cf0](https://github.com/formaat-design/reshaped/commit/ac34cf0))
-* Update dependency @types/node to v20.3.3 ([4a0a138](https://github.com/formaat-design/reshaped/commit/4a0a138))
-* Update dependency @types/node to v20.6.0 ([2933d36](https://github.com/formaat-design/reshaped/commit/2933d36))
-* Update dependency @types/node to v20.8.6 ([321e848](https://github.com/formaat-design/reshaped/commit/321e848))
-* Update dependency @types/react to v18.2.14 ([37eb4f8](https://github.com/formaat-design/reshaped/commit/37eb4f8))
-* Update dependency @types/react to v18.2.21 ([0b17f14](https://github.com/formaat-design/reshaped/commit/0b17f14))
-* Update dependency @vitejs/plugin-react to v4.0.1 ([350d825](https://github.com/formaat-design/reshaped/commit/350d825))
-* Update dependency chromatic to v6.19.8 ([6ba1b5a](https://github.com/formaat-design/reshaped/commit/6ba1b5a))
-* Update dependency chromatic to v6.19.9 ([c040444](https://github.com/formaat-design/reshaped/commit/c040444))
-* Update dependency chromatic to v6.24.1 ([9a9b0ca](https://github.com/formaat-design/reshaped/commit/9a9b0ca))
-* Update dependency chromatic to v7 ([9c4e60f](https://github.com/formaat-design/reshaped/commit/9c4e60f))
-* Update dependency commander to v11 ([eeb994c](https://github.com/formaat-design/reshaped/commit/eeb994c))
-* Update dependency eslint to v8.43.0 ([8afb799](https://github.com/formaat-design/reshaped/commit/8afb799))
-* Update dependency eslint to v8.44.0 ([1e605d5](https://github.com/formaat-design/reshaped/commit/1e605d5))
-* Update dependency eslint to v8.49.0 ([951d84a](https://github.com/formaat-design/reshaped/commit/951d84a))
-* Update dependency eslint-plugin-react to v7.33.2 ([091949f](https://github.com/formaat-design/reshaped/commit/091949f))
-* Update dependency lefthook to v1.4.10 ([964a7df](https://github.com/formaat-design/reshaped/commit/964a7df))
-* Update dependency lefthook to v1.4.3 ([77a50b9](https://github.com/formaat-design/reshaped/commit/77a50b9))
-* Update dependency postcss to v8.4.29 ([daaddef](https://github.com/formaat-design/reshaped/commit/daaddef))
-* Update dependency postcss to v8.4.31 ([f5097d8](https://github.com/formaat-design/reshaped/commit/f5097d8))
-* Update dependency prettier to v3.0.3 ([0861c35](https://github.com/formaat-design/reshaped/commit/0861c35))
-* Update dependency size-limit to v8.2.6 ([bf2f914](https://github.com/formaat-design/reshaped/commit/bf2f914))
-* Update dependency size-limit to v9 ([5ddd3d5](https://github.com/formaat-design/reshaped/commit/5ddd3d5))
-* Update dependency stylelint to v15.10.3 ([ac93f4d](https://github.com/formaat-design/reshaped/commit/ac93f4d))
-* Update dependency stylelint to v15.8.0 ([b1c6acb](https://github.com/formaat-design/reshaped/commit/b1c6acb))
-* Update dependency stylelint to v15.9.0 ([a740558](https://github.com/formaat-design/reshaped/commit/a740558))
-* Update dependency typescript to v5.2.2 ([9a9964c](https://github.com/formaat-design/reshaped/commit/9a9964c))
-* Update dependency vite to v4.4.9 ([e0cad28](https://github.com/formaat-design/reshaped/commit/e0cad28))
-* Update dependency vite-tsconfig-paths to v4.2.1 ([272c89e](https://github.com/formaat-design/reshaped/commit/272c89e))
-* Update jest monorepo ([89e4dd1](https://github.com/formaat-design/reshaped/commit/89e4dd1))
-* Update licensing and published tests ([2293dde](https://github.com/formaat-design/reshaped/commit/2293dde))
-* Update package publishing ([5a1042f](https://github.com/formaat-design/reshaped/commit/5a1042f))
-* Update packages ([04d3221](https://github.com/formaat-design/reshaped/commit/04d3221))
-* Update react monorepo ([3710033](https://github.com/formaat-design/reshaped/commit/3710033))
-* Update responsive output ([fd4ce85](https://github.com/formaat-design/reshaped/commit/fd4ce85))
-* Update setup ([34f2dfa](https://github.com/formaat-design/reshaped/commit/34f2dfa))
-* Update size-limit config ([ffc4bf3](https://github.com/formaat-design/reshaped/commit/ffc4bf3))
-* Update size-limit config ([ecff43c](https://github.com/formaat-design/reshaped/commit/ecff43c))
-* Update stories ([b3ffa06](https://github.com/formaat-design/reshaped/commit/b3ffa06))
-* Update stories accessibility ([320b06b](https://github.com/formaat-design/reshaped/commit/320b06b))
-* Update storybook manager ([aea5fac](https://github.com/formaat-design/reshaped/commit/aea5fac))
-* Update storybook monorepo to v7.0.21 ([2e67fe8](https://github.com/formaat-design/reshaped/commit/2e67fe8))
-* Update storybook monorepo to v7.0.22 ([a84e583](https://github.com/formaat-design/reshaped/commit/a84e583))
-* Update storybook monorepo to v7.0.23 ([31668a6](https://github.com/formaat-design/reshaped/commit/31668a6))
-* Update text field and select ([0ae9647](https://github.com/formaat-design/reshaped/commit/0ae9647))
-* Update typescript-eslint monorepo to v5.60.0 ([47c55bc](https://github.com/formaat-design/reshaped/commit/47c55bc))
-* Update typescript-eslint monorepo to v5.60.1 ([bea4679](https://github.com/formaat-design/reshaped/commit/bea4679))
-* Update typescript-eslint monorepo to v6.7.5 ([5ecd2a1](https://github.com/formaat-design/reshaped/commit/5ecd2a1))
-* Updated actions ([1cb2a16](https://github.com/formaat-design/reshaped/commit/1cb2a16))
-* Updated aligner implemnetation, added side for all components ([6fcfe6d](https://github.com/formaat-design/reshaped/commit/6fcfe6d))
-* Updated env ([34ea4b0](https://github.com/formaat-design/reshaped/commit/34ea4b0))
-* Updated keywords ([0208ed7](https://github.com/formaat-design/reshaped/commit/0208ed7))
-* Updated publish scripts ([e8b1673](https://github.com/formaat-design/reshaped/commit/e8b1673))
-* Updated release script ([964578e](https://github.com/formaat-design/reshaped/commit/964578e))
-* Updated responsive css output ([966ca78](https://github.com/formaat-design/reshaped/commit/966ca78))
-* Updated select end padding ([a20ab0b](https://github.com/formaat-design/reshaped/commit/a20ab0b))
-* Updated size tests ([f235cbb](https://github.com/formaat-design/reshaped/commit/f235cbb))
-* Updated size tests ([9f895b7](https://github.com/formaat-design/reshaped/commit/9f895b7))
-* Updated stories ([ba2aab0](https://github.com/formaat-design/reshaped/commit/ba2aab0))
-* Updated tests ([f5adc46](https://github.com/formaat-design/reshaped/commit/f5adc46))
-* Updated teting library ([1b7262a](https://github.com/formaat-design/reshaped/commit/1b7262a))
-* Updated text field and select gaps ([4ffc3d7](https://github.com/formaat-design/reshaped/commit/4ffc3d7))
-* Updated theme definitions, using generated theme as a default ([bdc7512](https://github.com/formaat-design/reshaped/commit/bdc7512))
-* Updated themes ([a28b9a7](https://github.com/formaat-design/reshaped/commit/a28b9a7))
-* Updated theming client implementation ([6dbb038](https://github.com/formaat-design/reshaped/commit/6dbb038))
-* Updated types ([c3407da](https://github.com/formaat-design/reshaped/commit/c3407da))
-* Updated unit tests ([32b885c](https://github.com/formaat-design/reshaped/commit/32b885c))
-* v2 updates ([839a87f](https://github.com/formaat-design/reshaped/commit/839a87f))
-* v2.0.0 ([560b883](https://github.com/formaat-design/reshaped/commit/560b883))
-* v2.0.0-nightly.6 ([08047ce](https://github.com/formaat-design/reshaped/commit/08047ce))
-* v2.1.0 ([842687d](https://github.com/formaat-design/reshaped/commit/842687d))
-* v2.2.0 ([a314295](https://github.com/formaat-design/reshaped/commit/a314295))
-* v2.2.1 ([4ac25ac](https://github.com/formaat-design/reshaped/commit/4ac25ac))
-* v2.3.0 ([1ea34d3](https://github.com/formaat-design/reshaped/commit/1ea34d3))
-* v2.3.1 ([5330fb9](https://github.com/formaat-design/reshaped/commit/5330fb9))
-* v2.3.2 ([ef257ae](https://github.com/formaat-design/reshaped/commit/ef257ae))
-* v2.4.0 ([9cbd770](https://github.com/formaat-design/reshaped/commit/9cbd770))
-* v2.4.1 ([adae62f](https://github.com/formaat-design/reshaped/commit/adae62f))
-* v2.4.2 ([d9e7cc6](https://github.com/formaat-design/reshaped/commit/d9e7cc6))
-* v2.4.3 ([16b7ff6](https://github.com/formaat-design/reshaped/commit/16b7ff6))
-* v2.4.4 ([eb51cf6](https://github.com/formaat-design/reshaped/commit/eb51cf6))
-* v2.4.5 ([f8f429f](https://github.com/formaat-design/reshaped/commit/f8f429f))
-* v2.4.6 ([2eb5a7b](https://github.com/formaat-design/reshaped/commit/2eb5a7b))
-* v2.4.7 ([f9babd3](https://github.com/formaat-design/reshaped/commit/f9babd3))
-* v2.4.8 ([1f214d7](https://github.com/formaat-design/reshaped/commit/1f214d7))
-* v2.4.9 ([4c12df4](https://github.com/formaat-design/reshaped/commit/4c12df4))
-* v2.5.0 ([35a3b3b](https://github.com/formaat-design/reshaped/commit/35a3b3b))
-* v2.5.1 ([513e674](https://github.com/formaat-design/reshaped/commit/513e674))
-* v2.5.2 ([2a206cb](https://github.com/formaat-design/reshaped/commit/2a206cb))
-* v2.5.3 ([4352e2c](https://github.com/formaat-design/reshaped/commit/4352e2c))
-* themes: added support for 0 blur radius in shadows ([8fd86f5](https://github.com/formaat-design/reshaped/commit/8fd86f5))
-* Tabs: Auto scroll ([8163be6](https://github.com/formaat-design/reshaped/commit/8163be6))
-* Tabs: Router support ([2b800e1](https://github.com/formaat-design/reshaped/commit/2b800e1))
-* Toast: Fixed immediate close ([7961217](https://github.com/formaat-design/reshaped/commit/7961217))
-* useHotkeys: Added support for `mod` hotkey ([43a918c](https://github.com/formaat-design/reshaped/commit/43a918c))
-* Overlay: Fixed transitionEnd triggering from children components ([b476130](https://github.com/formaat-design/reshaped/commit/b476130))
-* Text: Add automatic default tags for title variants ([36b530b](https://github.com/formaat-design/reshaped/commit/36b530b))
+## [3.3.13](https://github.com/formaat-design/reshaped/compare/v3.3.12...v3.3.13) (2025-03-05)
+
+
+### Bug Fixes
+
+* **Container:** width ([8e27ff8](https://github.com/formaat-design/reshaped/commit/8e27ff8da8738a52515306220338ee3731c1af75))
+* **Table:** added Table compound types ([c0e8187](https://github.com/formaat-design/reshaped/commit/c0e8187a0feeed73d7524cac977a6d3989f6b261))
+
+
+### Features
+
+* **Carousel:** onChange, navigateTo, tests ([fcfeefa](https://github.com/formaat-design/reshaped/commit/fcfeefa7a42faa930c45f4043c2489daaed470fd))
+
+
+
+## [3.3.12](https://github.com/formaat-design/reshaped/compare/v3.3.11...v3.3.12) (2025-02-28)
+
+
+### Bug Fixes
+
+* fixed generation error when called with separate hexDark colors ([c4e379a](https://github.com/formaat-design/reshaped/commit/c4e379aea5164072201449c823bc410debf361e8))
+
+
+
+## [3.3.11](https://github.com/formaat-design/reshaped/compare/v3.3.10...v3.3.11) (2025-02-12)
+
+
+### Bug Fixes
+
+* fixed react 19 types ([5ab3ce5](https://github.com/formaat-design/reshaped/commit/5ab3ce50fb2c36a63d20bcdd037e6de93cba468b))
+* **View:** divider ([a10439d](https://github.com/formaat-design/reshaped/commit/a10439dd44cea297a8e9980b33f5709459435fc3))
+
+
+
+## [3.3.10](https://github.com/formaat-design/reshaped/compare/v3.3.9...v3.3.10) (2025-02-09)
+
+
+### Bug Fixes
+
+* **Flyout:** useIsDismissible blocking flag ([6289e59](https://github.com/formaat-design/reshaped/commit/6289e59d1853e89aff38c343c3f4e891a2295521))
+
+
+
+## [3.3.9](https://github.com/formaat-design/reshaped/compare/v3.3.8...v3.3.9) (2025-02-06)
+
+
+### Bug Fixes
+
+* **View:** keys ([0c14cf2](https://github.com/formaat-design/reshaped/commit/0c14cf2d932c9de9524c0e86a9a650cdce229ff8))
+
+
+
+## [3.3.8](https://github.com/formaat-design/reshaped/compare/v3.3.7...v3.3.8) (2025-02-05)
+
+
+### Bug Fixes
+
+* **View:** key + deps ([b70a6b3](https://github.com/formaat-design/reshaped/commit/b70a6b345644ac92f23550c1e6a755dad6c058b4))
+
+
+### Features
+
+* tailwind v4 support ([be29132](https://github.com/formaat-design/reshaped/commit/be291327a5b5d8cd3f1af4e1406e1e1b6b48299f))
+
+
+
+## [3.3.7](https://github.com/formaat-design/reshaped/compare/v3.3.7-rc.0...v3.3.7) (2025-01-21)
+
+
+### Bug Fixes
+
+* **Carousel:** reported bugs ([fa9bd96](https://github.com/formaat-design/reshaped/commit/fa9bd9660bc08cc8c613fb41bcbd314727d8affb))
+
+
+
+## [3.3.7-rc.0](https://github.com/formaat-design/reshaped/compare/v3.3.6...v3.3.7-rc.0) (2025-01-19)
+
+
+### Bug Fixes
+
+* **Flyout:** reduced motion outside click in submenu ([d4498a2](https://github.com/formaat-design/reshaped/commit/d4498a2b9d30f37e8136a6ad0e53ca4425783cf7))
+
+
+
+## [3.3.6](https://github.com/formaat-design/reshaped/compare/v3.3.5...v3.3.6) (2025-01-12)
+
+
+### Bug Fixes
+
+* **Autocomplete:** open on click ([f088ed7](https://github.com/formaat-design/reshaped/commit/f088ed74b33a1ddf30f6343534bca3565f386716))
+
+
+
+## [3.3.5](https://github.com/formaat-design/reshaped/compare/v3.3.4-rc.0...v3.3.5) (2024-12-25)
+
+
+### Bug Fixes
+
+* **Accordion:** preact animation ([38b1ae8](https://github.com/formaat-design/reshaped/commit/38b1ae8c42942fc33a7738de9c537a1ec54849e5))
+
+
+
+## [3.3.4-rc.0](https://github.com/formaat-design/reshaped/compare/v3.3.3...v3.3.4-rc.0) (2024-12-25)
+
+
+
+## [3.3.3](https://github.com/formaat-design/reshaped/compare/v3.3.2...v3.3.3) (2024-12-24)
+
+
+### Bug Fixes
+
+* **ScrollArea:** nesting and dynamic height change ([79704bc](https://github.com/formaat-design/reshaped/commit/79704bcccf73847b2fad5cc8469a616d8698b91f))
+
+
+
+## [3.3.2](https://github.com/formaat-design/reshaped/compare/v3.3.1...v3.3.2) (2024-12-20)
+
+
+### Bug Fixes
+
+* **scroll:** scroll lock to only lock for container el ([ed3e597](https://github.com/formaat-design/reshaped/commit/ed3e597241fec671a982cca4cc8ca98e84fe1fc4))
+* silence use client warnings in vite storybook build ([0c49754](https://github.com/formaat-design/reshaped/commit/0c497548d71f7f7272adb3c8eb0d34631127d30b))
+
+
+
+## [3.3.1](https://github.com/formaat-design/reshaped/compare/v3.3.0...v3.3.1) (2024-12-14)
+
+
+### Bug Fixes
+
+* **Flyout:** ref merging inside another popover content ([784ab8f](https://github.com/formaat-design/reshaped/commit/784ab8faae48d75a1d9164c36af1c3ed50e4bfaf))
+
+
+
+# [3.3.0](https://github.com/formaat-design/reshaped/compare/v2.5.9...v3.3.0) (2024-12-11)
+
+
+### Bug Fixes
+
+* **Accordion:** expand transition ([d128a23](https://github.com/formaat-design/reshaped/commit/d128a23bece1707450d5fa15b28775069e654fb5))
+* **Accordion:** fixed accordion content transition delay ([0429896](https://github.com/formaat-design/reshaped/commit/0429896723a6005a8f993b22827c8638c23aa15d))
+* **Accordion:** fixed for RSC ([8cf93a8](https://github.com/formaat-design/reshaped/commit/8cf93a8eea9cdee208063664df68eb3a399ea91d))
+* **Actionable:** form submission ([e27e2f1](https://github.com/formaat-design/reshaped/commit/e27e2f1c324def6c19c695b2b2b978cefe7c358a))
+* **Actionable:** form submission ([b049925](https://github.com/formaat-design/reshaped/commit/b049925b3ec239aa938fd296397837558cc567fc))
+* **ActionBar:** fixed elevated variant shadow blocking events ([f7b919a](https://github.com/formaat-design/reshaped/commit/f7b919a07c860fa2e835e7f93b137378e73b0f81))
+* added missing reset layer ([5e25efa](https://github.com/formaat-design/reshaped/commit/5e25efa0851c738bedb133802d949e4ba9897a28))
+* **Alert:** increased gap before actions when using inline layout ([d2b0323](https://github.com/formaat-design/reshaped/commit/d2b03233d998c9dbf9620e587f8d98c4586c435a))
+* **Autocomplete:** fixed inputAttributes not applying to the component ([34110b1](https://github.com/formaat-design/reshaped/commit/34110b114c155cf94587f5a2426af1a343d70e8b))
+* **Avatar:** fixed label size ([49a8c47](https://github.com/formaat-design/reshaped/commit/49a8c471bc74351f593d2d43091ab8ad149d53f7))
+* backport v3 hotkeys ([015801f](https://github.com/formaat-design/reshaped/commit/015801fcfe5fcd132b6ccaf3b8d43b06070fbb52))
+* **Button:** safari icon glitching in the docs ([799dea5](https://github.com/formaat-design/reshaped/commit/799dea526a6141a727c6e8ee9b95ed0520526043))
+* **Calendar:** fixed single date hover styles ([83863af](https://github.com/formaat-design/reshaped/commit/83863af7b63d15b2a7485eb47544b110c35e75d4))
+* **Carousel:** fixed scroll snapping ([2e5316e](https://github.com/formaat-design/reshaped/commit/2e5316ef5e85f7ee4e6232fa56a9f0aff42270e2))
+* changelog ([b498c67](https://github.com/formaat-design/reshaped/commit/b498c67be67011358df499c60ba14548e9d27fbb))
+* ci error ([465127b](https://github.com/formaat-design/reshaped/commit/465127b7d0c406fa8d9d53df3e851d38845c23db))
+* component style fixes ([099c146](https://github.com/formaat-design/reshaped/commit/099c146e60b3d027443df331205c16fe0d0b6467))
+* **deps:** update dependency commander to v11.1.0 ([3a7e2fd](https://github.com/formaat-design/reshaped/commit/3a7e2fd0059e0dc70ea7c029c1fd87babc4bfb89))
+* **deps:** update dependency cssnano to v7.0.6 ([7b744d6](https://github.com/formaat-design/reshaped/commit/7b744d6bb79bfbce440330e12ba4b5f856e2e54c))
+* **Dismissible:** fixed empty reserved space ([daf1b8f](https://github.com/formaat-design/reshaped/commit/daf1b8ff6c203de5eee4872ddf14761e470eb80d))
+* **DropdownMenu:** attributes ref ([5c884c6](https://github.com/formaat-design/reshaped/commit/5c884c6152777b6835d221864b520305136a59b0))
+* **DropdownMenu:** fixed double enter press handling ([d4234ec](https://github.com/formaat-design/reshaped/commit/d4234ec381b43d7275da7ddca34c1fd93bcef89a))
+* **Expandable:** fixed animation duration ([830d29c](https://github.com/formaat-design/reshaped/commit/830d29c61856c9bf9bb9f4b5dbd52729659e9186))
+* fix ([41b7c39](https://github.com/formaat-design/reshaped/commit/41b7c392e22e05402565bd81fb02c749b877c183))
+* fixed repeat hotkeys ([c235d8b](https://github.com/formaat-design/reshaped/commit/c235d8b7798f7098b1810b442ea3866a8729f558))
+* fixed reported issues ([eda473a](https://github.com/formaat-design/reshaped/commit/eda473a130a76ed0c5f87218a0e78a792592b478))
+* fixed typings ([3ca33d6](https://github.com/formaat-design/reshaped/commit/3ca33d6abb87fe26e365b314cf2f57c781bfae71))
+* fixed Vite build warning about [@layer](https://github.com/layer) ([0c0d9e7](https://github.com/formaat-design/reshaped/commit/0c0d9e774e498af1dbae6929a4b277eb96f80b7e))
+* flyout + theming types ([20e3813](https://github.com/formaat-design/reshaped/commit/20e38133c8b04386bd9d9f96c4f732b1839abd91))
+* flyout hover timeout ([1648417](https://github.com/formaat-design/reshaped/commit/164841701172bc8b11010c6147db654c55f9f8cf))
+* flyout responsive visibility ([6560389](https://github.com/formaat-design/reshaped/commit/6560389cc1b190804217efa4e9dbc0d6c6f5ddae))
+* **Flyout:** adjusted animation timeouts ([0c37a63](https://github.com/formaat-design/reshaped/commit/0c37a63e99cdac77d32fae3d91b31548b20a875a))
+* **Flyout:** blur for content menu ([2aec8d1](https://github.com/formaat-design/reshaped/commit/2aec8d163e823327c6573a78ccb163c69d3b49a3))
+* **Flyout:** calculate position correctly inside fixed position containers that are not top: 0 ([016793d](https://github.com/formaat-design/reshaped/commit/016793dc9047d884feb970cda37debeff3aa6629))
+* **Flyout:** disconnect observer when closed ([42d3fe1](https://github.com/formaat-design/reshaped/commit/42d3fe11028e1d357d977993a7a0069057958660))
+* **Flyout:** dismissible queue fixed for disabled outside click ([c51546f](https://github.com/formaat-design/reshaped/commit/c51546f969eb5245b642b6119b71bbcf6c101578))
+* **Flyout:** fixed cooldown and disabled ([65e3da4](https://github.com/formaat-design/reshaped/commit/65e3da465d568337b89c85296754abf690247e48))
+* **Flyout:** fixed error logs on unmount ([412caa6](https://github.com/formaat-design/reshaped/commit/412caa6b062f1ce76dfd922a150aba600be7debe))
+* **Flyout:** fixed flyout state on the fastest repeat ([8024efa](https://github.com/formaat-design/reshaped/commit/8024efa04dbf0d27ab1828882ad92f9b15379522))
+* **Flyout:** fixed positioning for scaled elements ([91ef576](https://github.com/formaat-design/reshaped/commit/91ef576cde5f8a922ab6e0809a41df6319d5654a))
+* **Flyout:** fixed submenu animation ([b3ee08d](https://github.com/formaat-design/reshaped/commit/b3ee08d1bba2bee0c97937bc3b96516c9dc584b4))
+* **Flyout:** fixed type errors ([f28c912](https://github.com/formaat-design/reshaped/commit/f28c91253a32d6dadc948d5b5c583fe7d3728511))
+* **Flyout:** keyboard mode for focus events ([aa77e35](https://github.com/formaat-design/reshaped/commit/aa77e35c0cdcb5ffa220b869b785ed0767e2ed02))
+* **Flyout:** nested flyout cooldown ([fdc1ba5](https://github.com/formaat-design/reshaped/commit/fdc1ba563862eb67bd439d676e011ec4bfbe30f6))
+* **Flyout:** outside click ([87195a6](https://github.com/formaat-design/reshaped/commit/87195a6d8139a1e8373b6a397f7863d570b8bb1d))
+* **Flyout:** responsive visibility support ([02e4696](https://github.com/formaat-design/reshaped/commit/02e46969c7671acfbc6272a51930aaab16df545f))
+* **Flyout:** shadow dom support ([99839ae](https://github.com/formaat-design/reshaped/commit/99839ae022f531b9810f8b1a722300bbdf657629))
+* **Flyout:** updatePosition while flyout is active ([96ec74b](https://github.com/formaat-design/reshaped/commit/96ec74b3416e09de82d76ecacdc7ee2f7df7ef34))
+* focus visible ([96d9360](https://github.com/formaat-design/reshaped/commit/96d936089ba5c59283406a8604b5f192a236217f))
+* **FormControl:** fixed import paths for Remix Vite setup ([8552910](https://github.com/formaat-design/reshaped/commit/855291041a4a825399ae42a2e2d0813cd453c0a3))
+* gitHub requests fixes ([ad1dcaa](https://github.com/formaat-design/reshaped/commit/ad1dcaaba829eae4e610afd93e7ca9796a9dba9f))
+* **Grid:** css modules in next ([cf3f28c](https://github.com/formaat-design/reshaped/commit/cf3f28c6077cf02654d49d262e1b624488c6f1aa))
+* **height:** returned important ([6df1ecc](https://github.com/formaat-design/reshaped/commit/6df1ecc5b464a4e875da5892ab1725e319543b33))
+* **Icon:** fixed svg rendering defined in components with prop types ([ad7c93a](https://github.com/formaat-design/reshaped/commit/ad7c93a900840641846ab7473975b47f23206d10))
+* **Icon:** width and height html overrides ([8904e65](https://github.com/formaat-design/reshaped/commit/8904e654758ce14f9036923ec0311ec83709341b))
+* image attributes style ([e3736c5](https://github.com/formaat-design/reshaped/commit/e3736c5ab7eee1cf0a6a1919382490463ef0430b))
+* ios scroll lock ([528d09e](https://github.com/formaat-design/reshaped/commit/528d09ea127487d620ecd7f753088a3f660a32c4))
+* light mode neutral faded color ([9cf7217](https://github.com/formaat-design/reshaped/commit/9cf7217d9ecd517af9d29e21096042b20b1c0a1c))
+* **Link:** fixed iOS Safari currentcolor ([a090189](https://github.com/formaat-design/reshaped/commit/a090189a34429d167634080ebcdbb635d208f31a))
+* **MenuItem:** fixed Tailwind CSS reset overriding button styles ([a2481b8](https://github.com/formaat-design/reshaped/commit/a2481b8431dec354d9dc92873a8e258d729881cc))
+* **minHeight:** updated function name ([1d2d7ec](https://github.com/formaat-design/reshaped/commit/1d2d7ec6906c9a1766d97843d440e2f2bf4cfb52))
+* minor improvements for react 19 rc ([3e04cfa](https://github.com/formaat-design/reshaped/commit/3e04cfaec5f73505e0b0e7a8110cf828352473ae))
+* mixins ([ccaabd3](https://github.com/formaat-design/reshaped/commit/ccaabd36a6a0600a4dc2e42a226ceee65b138d75))
+* mixins ([49cc873](https://github.com/formaat-design/reshaped/commit/49cc873af2beb846232cab9a03ec938178371877))
+* **Modal, Flyout:** fixes ([e858f71](https://github.com/formaat-design/reshaped/commit/e858f716baad45bb3789dfe8c970d57848b4505b))
+* **Modal,Overlay:** fixed safari scroll lock ([9a8ed58](https://github.com/formaat-design/reshaped/commit/9a8ed58e740a6de9502c2b05db39d0ba4c39bc06))
+* **Modal:** added attributes.ref support ([f4b6b20](https://github.com/formaat-design/reshaped/commit/f4b6b20e258ea2f8acc5489f6ac6328f34c8ecc4))
+* **Modal:** autofocus and aialabel support ([4a5dd86](https://github.com/formaat-design/reshaped/commit/4a5dd86e12aaff68e05df47a38613b069eefad0f))
+* **Modal:** fixed swipe gestures when user is scrolling ([302f5a2](https://github.com/formaat-design/reshaped/commit/302f5a29fff36230f46a76808a2b3183979949a1))
+* **Modal:** fixed swipe to close in scrollable areas ([7567058](https://github.com/formaat-design/reshaped/commit/7567058bae9beec9d00e8670d8cb5be3fd42e126))
+* **Modal:** shadow dom rendering ([b342347](https://github.com/formaat-design/reshaped/commit/b3423476823f4ed86d9e3c65499d6f0c04eb41bc))
+* **Modal:** swipe improvements ([2cfc100](https://github.com/formaat-design/reshaped/commit/2cfc100d9b9099c41a726e3985889106bacada22))
+* **Modal:** width ([f5fa0fc](https://github.com/formaat-design/reshaped/commit/f5fa0fc5e869fd4919c988259eef9b6327fd94c9))
+* nested popovers fix ([b73e250](https://github.com/formaat-design/reshaped/commit/b73e25079456b95a965847e067024358a753fa6d))
+* overlay transitions ([bfa6dbb](https://github.com/formaat-design/reshaped/commit/bfa6dbbb51ba974ce83b52ffb35c10e608bd92b4))
+* **overlay:** blur 1px glitch ([04efb9b](https://github.com/formaat-design/reshaped/commit/04efb9bedff3b84ab8caa388849aae7a694945c8))
+* **Overlay:** fixed role button cursor reset in Tailwind ([38154f6](https://github.com/formaat-design/reshaped/commit/38154f625f836b4ec333898e3bd7f4c728a5abd0))
+* **Overlay:** fixed transparent overlay transition event ([116ebbe](https://github.com/formaat-design/reshaped/commit/116ebbec08fe26d99de95da90fd7fc94bb20dd38))
+* **overlay:** zindex ([d4cfbde](https://github.com/formaat-design/reshaped/commit/d4cfbde6d7db7371b08d5d975375deae2f5b6a4d))
+* patch ([9378d70](https://github.com/formaat-design/reshaped/commit/9378d704b9173c4f9e20af08a2840ca7cd3b2465))
+* **PinField:** edit mode on mount ([e68f4b0](https://github.com/formaat-design/reshaped/commit/e68f4b0c9189d7a76f7fbd3e3c75336c19e095de))
+* popover transition ([2e35b8a](https://github.com/formaat-design/reshaped/commit/2e35b8ab111367a75c0488913daefd49cad929b1))
+* pre-release ([0f1d3fc](https://github.com/formaat-design/reshaped/commit/0f1d3fc0e70a5d4cc7d15bcfe1326aa371beeebd))
+* pre-release ([6ead87f](https://github.com/formaat-design/reshaped/commit/6ead87fa61ad31977a639f60d98a9d7fea8154b4))
+* pre-release fixes ([ac86db9](https://github.com/formaat-design/reshaped/commit/ac86db964372b2107a2d4a8d9f24b6c34d3241c0))
+* pre-release updates ([0ac773f](https://github.com/formaat-design/reshaped/commit/0ac773f4f978fe133b5f9dc9a41a7f142f2f91fb))
+* release ([47c42da](https://github.com/formaat-design/reshaped/commit/47c42da45a3a6d2095a59f01fc400ded2f53c041))
+* release fixes ([b995af8](https://github.com/formaat-design/reshaped/commit/b995af8b8ec93cd296a2e8d7135f1f52a88b9455))
+* release fixes ([89d1468](https://github.com/formaat-design/reshaped/commit/89d1468aee904e343a9d0c16ef26ba5f9f4d31b1))
+* removed container ref and added auto shadow root detection ([33a9c40](https://github.com/formaat-design/reshaped/commit/33a9c4053ed0eb8bdde0a2518e51a6ee68b28ca1))
+* removed double effect ([f17f844](https://github.com/formaat-design/reshaped/commit/f17f84414ceaede101ea4ebe81bd3ce7338eb64e))
+* removed global css reset layer ([2bf94cf](https://github.com/formaat-design/reshaped/commit/2bf94cfe9dcdb0ceadcacd39d682d056c9e259ca))
+* removed logs ([5049648](https://github.com/formaat-design/reshaped/commit/504964849723033fe536e3f4cbffe9ec7dee0975))
+* reset styles in rs.reset ([48b6baa](https://github.com/formaat-design/reshaped/commit/48b6baa83d204b40c66c5346d0ebd28d652909db))
+* **Reshaped:** fixed global html bg color ([c475c30](https://github.com/formaat-design/reshaped/commit/c475c300497f390be43dcd70bdb277e6387dc3b5))
+* **Resizable:** fixed auto height for handle ([3cfa949](https://github.com/formaat-design/reshaped/commit/3cfa949a2e2fd741886f4742cc2853c834b57917))
+* revert exports ([536de4f](https://github.com/formaat-design/reshaped/commit/536de4fb40aeb45212df353c5c7c4d4e880b82b5))
+* **ScrollArea:** dynamic content resizing ([c7330e0](https://github.com/formaat-design/reshaped/commit/c7330e0c6bb548d15ebfd7b222ed3a64de064ccf))
+* **ScrollArea:** fixed scrollbar visibility in iOS safari ([3c313af](https://github.com/formaat-design/reshaped/commit/3c313af48c64060d4e8dadd5c5854bf23c826ece))
+* **ScrollArea:** implementation fixes ([1519118](https://github.com/formaat-design/reshaped/commit/15191188262081cb6296f6bfb7c1b3c68c6f6f2a))
+* **ScrollArea:** onScroll args ([3c39bb4](https://github.com/formaat-design/reshaped/commit/3c39bb42b0fcdadb2c7aa93f95723db1e083613f))
+* **ScrollArea:** thumb hover effects ([5bc79d1](https://github.com/formaat-design/reshaped/commit/5bc79d1810d66c4f20a311833f14ba46000d191f))
+* slider attempt ([aa79a8a](https://github.com/formaat-design/reshaped/commit/aa79a8a3bf955c3886af296b862c5e598949769f))
+* **Slider:** fit thumbs within the bar area not to cause overflow ([d813eb2](https://github.com/formaat-design/reshaped/commit/d813eb297e837f95d3acdfeb7c36d138d362cb08))
+* **Slider:** fixed horizontal scrolling on mount in safari ([5302691](https://github.com/formaat-design/reshaped/commit/5302691248b00468fd2adebaa85c5db37d74330c))
+* **Slider:** fixed tooltip hover ([d6b72f0](https://github.com/formaat-design/reshaped/commit/d6b72f016c4a9631ca82a6945fd83492ccd429ee))
+* **Slider:** float value support ([b438d3f](https://github.com/formaat-design/reshaped/commit/b438d3fbcd4b053df4fdf79302b42749fbd540c3))
+* **Slider:** keep tooltip inside the viewport ([bcc8e7c](https://github.com/formaat-design/reshaped/commit/bcc8e7c9ac7973b075d48acc89883fdcc93565c0))
+* small css fixes ([d248635](https://github.com/formaat-design/reshaped/commit/d24863542e20a4ac1ddd961bd92c0bfdab3dd5fa))
+* small css fixes ([52b5647](https://github.com/formaat-design/reshaped/commit/52b5647b6bfd74b81c0ffebb478f593d64babc4e))
+* small fixes ([f6f76a1](https://github.com/formaat-design/reshaped/commit/f6f76a15ff247c156ce5439cda5723f86e062150))
+* snapshots ([034c0d0](https://github.com/formaat-design/reshaped/commit/034c0d05e02c71dc6ed307f1578b93f46eb5bc49))
+* stories ([f6d836a](https://github.com/formaat-design/reshaped/commit/f6d836a60aeeaabb18a52c43388d4994e01f40c9))
+* stories ([4172535](https://github.com/formaat-design/reshaped/commit/4172535e7f73fe589fc7ca225f7fd7fe2c41ee26))
+* switch disabled text color ([8651b33](https://github.com/formaat-design/reshaped/commit/8651b330eff0715ebacecbcf7f80b60c4ebda6f5))
+* **Table, FormControl:** small and RSC fixes ([a62d14a](https://github.com/formaat-design/reshaped/commit/a62d14a78870f847f100f0feb0fd217da3c5206e))
+* **Tabs:** animations triggered by external user events ([4a5aa5f](https://github.com/formaat-design/reshaped/commit/4a5aa5f67b84da56ec97283469ed0c1f1820e310))
+* **Tabs:** fixed animation transition ([02644e6](https://github.com/formaat-design/reshaped/commit/02644e638d2746aa4c9c572895897d4c6711c96c))
+* **tailwind:** border radius config ([c928830](https://github.com/formaat-design/reshaped/commit/c928830634c770c436a948d5217ced1e64cd706f))
+* tests ([cbfd241](https://github.com/formaat-design/reshaped/commit/cbfd24193f3d692f286a39e35df4ab2a388e9455))
+* **TextArea:** fixed placeholder color misalignment with TextField ([bdc9ccc](https://github.com/formaat-design/reshaped/commit/bdc9cccc866c44415a35e3e62178dee546fa4dd8))
+* **TextArea:** fixed sizing when using values without spaces in them ([8558fbe](https://github.com/formaat-design/reshaped/commit/8558fbe64d2d6f4e6c4a47f6b6d2cb68e57a198b))
+* **TextField, trapFocus:** requests ([15c5c3a](https://github.com/formaat-design/reshaped/commit/15c5c3a5516e717bcf77b11d5dbb0130a156e14d))
+* **Text:** fixed clamp word break ([aed7e01](https://github.com/formaat-design/reshaped/commit/aed7e01bc6dab2069cfa0e2a174a4ddac274ae44))
+* theming ([c988bc5](https://github.com/formaat-design/reshaped/commit/c988bc529b672783e1d40b899b278cba8a694ba2))
+* **Theming:** improved contrast for the light mode neutral faded generated value ([ac67342](https://github.com/formaat-design/reshaped/commit/ac673424b4f589ad3b1ea70631360e4dfb958cb8))
+* **theming:** neutral bg ([e2a38ae](https://github.com/formaat-design/reshaped/commit/e2a38ae2592b4bb011cfaf4c39a301d8ed9a54cb))
+* **Toast:** Added translateZ ([5180a1a](https://github.com/formaat-design/reshaped/commit/5180a1a380c1c191aa7f8ec73e511802ff158440))
+* **Tooltip:** support for optional text ([2687d30](https://github.com/formaat-design/reshaped/commit/2687d304cc75f10117da05df10be4b50892e68a2))
+* **trapFocus:** fixed behaviour for input radio elements inside the trap focus area ([d3c15ed](https://github.com/formaat-design/reshaped/commit/d3c15ed1ea9da6ebca094659c29f98c940280668))
+* **TrapFocus:** fixed screen reader trap for shadow root ([ea3741b](https://github.com/formaat-design/reshaped/commit/ea3741b9d02e21c8df431c849547bd35d8544132))
+* **trapFocus:** tabIndex -1 handling ([bc3c5a9](https://github.com/formaat-design/reshaped/commit/bc3c5a9f399d737161981704714f65bdef4a345c))
+* typo ([944a13c](https://github.com/formaat-design/reshaped/commit/944a13cf86a03cc7f89d180b4a9fea4dec06626c))
+* update ([aa780f4](https://github.com/formaat-design/reshaped/commit/aa780f4220a1ddff2fb257b56b77bb06f97ea1e1))
+* updated [@layer](https://github.com/layer) implementation ([39157b9](https://github.com/formaat-design/reshaped/commit/39157b99b3938fdbec188a308dc80d9f6eb0dfb7))
+* updated attributes types ([867b55b](https://github.com/formaat-design/reshaped/commit/867b55bcd4d94c4541a53041116c90d3ffbdbd9d))
+* updated radius variables naming ([09a4d37](https://github.com/formaat-design/reshaped/commit/09a4d37018dededaff6c3dd3ad3aac67c772ecb5))
+* updates themes ([7899036](https://github.com/formaat-design/reshaped/commit/78990365e621a3a5766c9386310a3c737f4856e7))
+* useHotkeys ([3235e4f](https://github.com/formaat-design/reshaped/commit/3235e4fc20c7cab491b588696e49b949e1cea342))
+* **useHotkeys:** mod+enter on windows ([b713b29](https://github.com/formaat-design/reshaped/commit/b713b29abbc9a868d633cae3eb47a5d58c0458c1))
+* **useIsDismissible:** simplify implementation ([28f096b](https://github.com/formaat-design/reshaped/commit/28f096bce6085192b7a694d2d531b1b054059940))
+* **useResponsiveClientValue:** boolean support ([e7fcd3f](https://github.com/formaat-design/reshaped/commit/e7fcd3f7ef71c6051a9441fc0152248ee9726521))
+* v3 prep ([35b6f51](https://github.com/formaat-design/reshaped/commit/35b6f511d17aa0f57e08e13da4b5e62b223f970d))
+* v3 updates ([2714f21](https://github.com/formaat-design/reshaped/commit/2714f2119d911b07ad55dea27a4a7a63b1af3327))
+* **View:** fixed divided flag compatibility with React Fragments ([6819b96](https://github.com/formaat-design/reshaped/commit/6819b9600b90767f4e04c156705e24a0a6a2275d))
+* **View:** fixed rendering of null elements inside a fragment ([a07c896](https://github.com/formaat-design/reshaped/commit/a07c896c377c230f618c78a05e4bd591e8984594))
+* **View:** fixed rendering with a single fragment ([e2e96fd](https://github.com/formaat-design/reshaped/commit/e2e96fdf22abe7a7273d688450c374b464bac56b))
+* vrt ([5782a0e](https://github.com/formaat-design/reshaped/commit/5782a0e1a4fd9da7b093887b6fdf3af4220a0b84))
+
+
+### Features
+
+* **Actionable:** migrated to :focus-visible ([6b7bfb6](https://github.com/formaat-design/reshaped/commit/6b7bfb6d8f38d477a4605c036f14ad490633512f))
+* **Actionable:** wrapped styles with rs.reset layer ([7afdf30](https://github.com/formaat-design/reshaped/commit/7afdf3081b5ad84b8633c7dbee5f4992527bd352))
+* added getConfig function for postcss setup ([308086b](https://github.com/formaat-design/reshaped/commit/308086b8c595bea646bf9474e90f4458c6002c5d))
+* added theme json output ([419d415](https://github.com/formaat-design/reshaped/commit/419d41553aa583b4b0c567d5ccd872741410b04e))
+* added viewports to the theme definition ([2edd577](https://github.com/formaat-design/reshaped/commit/2edd577760a7728624b18449dee2e5f9fc7b95ec))
+* added warning and brand color support ([96441eb](https://github.com/formaat-design/reshaped/commit/96441eb2f1b93f6046af281fe8af5853b674db6d))
+* apca color palette ([43a240c](https://github.com/formaat-design/reshaped/commit/43a240cc6b49c92552ce97b5aac3f4a20a43a882))
+* **Autocomplete:** instanceRef ([42ffb29](https://github.com/formaat-design/reshaped/commit/42ffb29a2da09e663648e42b96af6a3668d367f7))
+* **Autocomplete:** multi value features ([4ca31d2](https://github.com/formaat-design/reshaped/commit/4ca31d2a2a4f8a852c84fef458ca31589d983685))
+* blurred overlay ([1cf0f64](https://github.com/formaat-design/reshaped/commit/1cf0f64cd826b808e9c7bc027ec9d9d9d25dc150))
+* **Breadcrumbs:** added a disableExpand flag ([5c6d4a4](https://github.com/formaat-design/reshaped/commit/5c6d4a468e30a7192d80ff1554cedc6eb9372a92))
+* **Button,MenuItem:** added as property support for nested buttons ([ea4fa17](https://github.com/formaat-design/reshaped/commit/ea4fa178fe77a12ec53b8b4f32a331b018110d3c))
+* **Button:** added flex composition, increased space for slots ([7c3b35e](https://github.com/formaat-design/reshaped/commit/7c3b35eccd6c4ff9e7d83225bc98c1f319fc452e))
+* **Calendar:** keyboard navigation edge cases ([9166ba6](https://github.com/formaat-design/reshaped/commit/9166ba689d78c1f4a1a3f4af2563f2d68534662f))
+* **Calendar:** new component ([e84a5e0](https://github.com/formaat-design/reshaped/commit/e84a5e0748bdd522a627609cb48bcf729f46fe79))
+* **Calendar:** range selection and translations ([d4dd94b](https://github.com/formaat-design/reshaped/commit/d4dd94b343c9bebc28426328964a6ad2fd0b653b))
+* context menu ([da3ae97](https://github.com/formaat-design/reshaped/commit/da3ae97cddfbc8028a60bd77ec7bf54123806883))
+* **ContextMenu:** new component ([3bb8105](https://github.com/formaat-design/reshaped/commit/3bb8105de88665d49a1d29a96ec2b48f53b5f12d))
+* disableCloseOnOutsideClick ([ccbf738](https://github.com/formaat-design/reshaped/commit/ccbf738d7f80ed5d231eaa5bbb67859c36b1c6fa))
+* **Divider:** added label support ([c85dee7](https://github.com/formaat-design/reshaped/commit/c85dee7d29e8e2268c9928f14bd9e8d12474894d))
+* **DropdownMenu:** all item props on subtrigger ([6b20628](https://github.com/formaat-design/reshaped/commit/6b20628aaacbb8075136b97189d5da36b7bbf90e))
+* **Expandable:** switched to css transitions ([c6f03b7](https://github.com/formaat-design/reshaped/commit/c6f03b7da6f844605695fd227b2bd257beace9c7))
+* **FileUpload:** added height prop support ([eab8c30](https://github.com/formaat-design/reshaped/commit/eab8c30b51dcc38fe3b21a78f3e4f03e7d9573f7))
+* fluid typography ([ced1302](https://github.com/formaat-design/reshaped/commit/ced13024b2485ef66c99f664e20cfc5e910e8528))
+* flyout in shadow dom ([94bbbc8](https://github.com/formaat-design/reshaped/commit/94bbbc8ae7bc8f93118ba963860026dfe8f319a1))
+* **Flyout:** containerRef support ([4d31bf2](https://github.com/formaat-design/reshaped/commit/4d31bf2c43f667e6e0bc77890ff4d7ed83f2619d))
+* **flyout:** contentShift ([fb429e8](https://github.com/formaat-design/reshaped/commit/fb429e899303a9c246635615e8937f791caff0d6))
+* **Flyout:** dynamic positioning ([2a4d105](https://github.com/formaat-design/reshaped/commit/2a4d105c44db1e26ecae24124418838dca426ff1))
+* **Flyout:** fallback + gap calculations ([4a810bb](https://github.com/formaat-design/reshaped/commit/4a810bbf867f6b11d96a869b103fd1ca31b0b0f6))
+* **Flyout:** fallbackPositions and history ([9a97f87](https://github.com/formaat-design/reshaped/commit/9a97f87cce79c060e838094660a005289492c247))
+* **Flyout:** improve flyout timeouts ([44f44b5](https://github.com/formaat-design/reshaped/commit/44f44b522b97dfa22aaf5e7c1e79ea23dc15e57b))
+* **Flyout:** initifal focus ([6596ccc](https://github.com/formaat-design/reshaped/commit/6596cccf94ce9b460aa59c61284fb29a7300c8ce))
+* **Flyout:** support for disabled content hover ([c3d80e8](https://github.com/formaat-design/reshaped/commit/c3d80e8d40bb84d7dd08bf375d6b3907a3a2fd6a))
+* **Grid:** new utility ([2ba8bcc](https://github.com/formaat-design/reshaped/commit/2ba8bcc54b36d6e07eeb0a759e544302ebde07a5))
+* **hidden:** switched to display contents ([e52e5db](https://github.com/formaat-design/reshaped/commit/e52e5db78ddbfaa1adaa3ed421fb47e67f5bac13))
+* **Link:** added warning color ([d0e7f02](https://github.com/formaat-design/reshaped/commit/d0e7f0292487dcbb1b6d40db26caacc01ff1afb1))
+* **Loader:** large size ([7a60235](https://github.com/formaat-design/reshaped/commit/7a602353261a8e2aa1b5052f387fcf4fbc469868))
+* migrate mixins ([bb96ac5](https://github.com/formaat-design/reshaped/commit/bb96ac56853e9ed61c8d4b63e7b359e38afecabd))
+* migrated the package to use exports field ([159a59a](https://github.com/formaat-design/reshaped/commit/159a59afdf728154fa9db34c1be694ff1cd00a10))
+* minor version bump ([c081b70](https://github.com/formaat-design/reshaped/commit/c081b704388f16fe70975c021c01445111819f08))
+* minor version bump ([7f9219c](https://github.com/formaat-design/reshaped/commit/7f9219c89eeb2d4a7c984884c28a652ebc1ed6cc))
+* mixins ([04ec201](https://github.com/formaat-design/reshaped/commit/04ec2018427ad4fc517c02c118865234745a5d39))
+* mixins ([ca32d6d](https://github.com/formaat-design/reshaped/commit/ca32d6d74a5e28a3a92b88297115a40c9bf2ddfd))
+* modal and overlay onClock reason ([dfe1bd5](https://github.com/formaat-design/reshaped/commit/dfe1bd5b2cbe9ae475d91aeb756b1ae8690b5c7a))
+* modal full-screen position ([ae4a727](https://github.com/formaat-design/reshaped/commit/ae4a727fc708f802e495ff40320f36cfad41583e))
+* modal overflow prop ([bdf8fef](https://github.com/formaat-design/reshaped/commit/bdf8fef4a109eb5a2b756df29a3c3ab73fac6105))
+* **Modal, Overlay:** onAfterOpen, onAfterClose ([dba40f5](https://github.com/formaat-design/reshaped/commit/dba40f57c1cc85eada28dac6f907666094d14e48))
+* modal/overlay outside click ([b967a9b](https://github.com/formaat-design/reshaped/commit/b967a9b57e5a652a96193592f4befc9a2afa7095))
+* **Modal:** added overlayClassName support ([d74db3f](https://github.com/formaat-design/reshaped/commit/d74db3f15f8131262776008c631d63baac1f8d2f))
+* **Modal:** disableSwipeGesture ([6bf5ccd](https://github.com/formaat-design/reshaped/commit/6bf5ccdb2231cfba636e689a9ee16a246e392578))
+* **Modal:** swipe to close handling ([e99cc02](https://github.com/formaat-design/reshaped/commit/e99cc02f2d2ec01de07e78d8b5611738ce892b97))
+* **Overlay, Modal:** containerRef ([28921db](https://github.com/formaat-design/reshaped/commit/28921db3616f9e0c40bd51b619d583202ce54dca))
+* **Pagination:** new component ([dfc0f61](https://github.com/formaat-design/reshaped/commit/dfc0f61231f69854a055c387483bd992b4e1702e))
+* **PinField:** initial commit ([cd81d96](https://github.com/formaat-design/reshaped/commit/cd81d968a271d7cee392dc54973dbc50e90916cb))
+* **Popover:** added support for using tooltip and popover on the same element ([c078f3e](https://github.com/formaat-design/reshaped/commit/c078f3eaaa598a645dfcdac4ddcd8e49fe0f569c))
+* **Popover:** dismissible ([1419356](https://github.com/formaat-design/reshaped/commit/14193569cb7fcd0a0771edc4bfa37e8f1d57d93e))
+* postcss rsponsive css ([ca6b304](https://github.com/formaat-design/reshaped/commit/ca6b304ac58750d081796de946e0a26fe5424880))
+* pre 2.8.0 features ([40fe590](https://github.com/formaat-design/reshaped/commit/40fe590902748292ac9dce299d5706a6f9fda285))
+* rename splitter to resizable ([9b34083](https://github.com/formaat-design/reshaped/commit/9b34083cf7cbfc9b31d63ea68b94184af5204603))
+* **Reshaped:** scoped dark mode ([faee9e0](https://github.com/formaat-design/reshaped/commit/faee9e08754e84d9d06555b2a098080bde02ae03))
+* resizable bordered variant ([4045c7c](https://github.com/formaat-design/reshaped/commit/4045c7cc6960a07e0474821c5ecd9bbcee8ddea0))
+* **Resizable:** edge cases ([0fbdde5](https://github.com/formaat-design/reshaped/commit/0fbdde5b4a2f46b4b22ed8e1acd1a2dea522b881))
+* scoped styling ([ba8d96a](https://github.com/formaat-design/reshaped/commit/ba8d96a4ec9cf15f9658ad7d1acebc0c372a41ec))
+* **ScrollArea:** new utility ([796acfb](https://github.com/formaat-design/reshaped/commit/796acfb9b1c31d9c9c1b2826a3df417b2136a0b0))
+* shadow dom support ([e6e4d83](https://github.com/formaat-design/reshaped/commit/e6e4d8373e3472a98f50527f46131aca48ab5389))
+* **Slider:** vertical direction support ([9dac5fd](https://github.com/formaat-design/reshaped/commit/9dac5fd6196b3e114b5fffea966176e85b84f431))
+* **Slider:** vertical orientation ([16846c6](https://github.com/formaat-design/reshaped/commit/16846c6971c43dfd5f64a2431cb476e35bb9d381))
+* **Splitter:** keyboard + custom handle ([62327aa](https://github.com/formaat-design/reshaped/commit/62327aa8c20de57c728780b93e793c9d7defa50a))
+* stopPropagation ([08b0c44](https://github.com/formaat-design/reshaped/commit/08b0c44af3a93320370dad0d7145918937732ef1))
+* table attributes and useHotkeys alt modification ([8b4f64b](https://github.com/formaat-design/reshaped/commit/8b4f64b185bdfc1d077f0574724c94c6c328481e))
+* **Table:** row on click ([cfbe310](https://github.com/formaat-design/reshaped/commit/cfbe310d9f251a6ae6f9dd315da7987bd5e2d081))
+* **Tabs:** added fade animation ([3d5c4cd](https://github.com/formaat-design/reshaped/commit/3d5c4cd6d78bde233b460762c76e504db020a91f))
+* **Tabs:** auto scrolling and new nav controls ([1bf78cd](https://github.com/formaat-design/reshaped/commit/1bf78cd69b3ca591d8bb3fc6eea93f96dbafffbd))
+* **Tabs:** increase item spacing ([492f96a](https://github.com/formaat-design/reshaped/commit/492f96aa9a9152d00d3f6c6fa02ce18740a7da56))
+* **Text:** added wrap balance ([a4b4486](https://github.com/formaat-design/reshaped/commit/a4b4486e532e3ac684b3020aed940a9ef075188d))
+* **TextArea:** resize auto and none ([e221a55](https://github.com/formaat-design/reshaped/commit/e221a5508261005e0d64f56a42c3aa04f9c1e06e))
+* **TextField:** clickable affixes ([60f393f](https://github.com/formaat-design/reshaped/commit/60f393f3ccdb2008c1f786d3024bfeefb827e215))
+* **TextField:** slot multiline wrapping ([71783ce](https://github.com/formaat-design/reshaped/commit/71783ce6851ea352eed02138bdd50b9254cc074d))
+* **Text:** responsive weight ([1fec604](https://github.com/formaat-design/reshaped/commit/1fec6043134ca1a24a63e03d36f937af58e38bc6))
+* **theming:** added auto-generation for the s viewport maxPx value ([2e7bb23](https://github.com/formaat-design/reshaped/commit/2e7bb23b69f9dc5d5ff7836e10b84f1508f09ec4))
+* **theming:** added rgb border colors and updated contrast to use APCA ([49331e4](https://github.com/formaat-design/reshaped/commit/49331e4fb828d52881adca852e457a78e3fdfa39))
+* **theming:** letter spacing support ([803e13c](https://github.com/formaat-design/reshaped/commit/803e13cc0f7d5f67da267d70bc09276c6212c94d))
+* **theming:** updated radius and font weight tokens structure ([ef424bd](https://github.com/formaat-design/reshaped/commit/ef424bd6e46a3440482d94c549ec21f3c22e6153))
+* **Toast:** added support for toast render boundaries ([2a73fad](https://github.com/formaat-design/reshaped/commit/2a73fadc47555c1941981e547c355b3d7fff0aa9))
+* **Toast:** added warning color ([bb9bb81](https://github.com/formaat-design/reshaped/commit/bb9bb81c0f9ea78454bf559908b5b9a9b33d69ab))
+* **Tooltip:** added animation cooldown, disabled flag and fixed positioning ([eab13ed](https://github.com/formaat-design/reshaped/commit/eab13edb905ed6c915d190d534ff67c2c0d8a12a))
+* updated postcss setup to the latest custom media and excluded it from the internal build ([53f8ee5](https://github.com/formaat-design/reshaped/commit/53f8ee53fcaceb5f5b7e509ddfaf357ef99a8c26))
+* updated shadows ([de3818d](https://github.com/formaat-design/reshaped/commit/de3818db0b19336ed4acf2a869ec8ae0be48f373))
+* updated the default rem size ([ce82fc5](https://github.com/formaat-design/reshaped/commit/ce82fc54f6108a0e7851a6cf17eef281fe5f8c8f))
+* updated themes ([9c0a481](https://github.com/formaat-design/reshaped/commit/9c0a4815a6785510446ab119afcad167d9babb48))
+* updated theming ([9469b23](https://github.com/formaat-design/reshaped/commit/9469b23943b6006694ea8a2128fbbec48d9df252))
+* **useDrag:** hook implementation + splitter initial ([c8a4d5c](https://github.com/formaat-design/reshaped/commit/c8a4d5c4977f0d7bdc43988c75bf52fd5b7f2010))
+* useHandlerRef for effects ([3f969e5](https://github.com/formaat-design/reshaped/commit/3f969e5fb852292608729f50a89bc20450881536))
+* **useResponsiveClientValue:** custom viewports support ([30dc800](https://github.com/formaat-design/reshaped/commit/30dc800b6ad64f92e197064755c2849a57a022f9))
+* **View:** added responsive text align support ([304efc7](https://github.com/formaat-design/reshaped/commit/304efc7077ade79fe4d10a44eb4a1a3c3cc8f0e5))
+* **View:** responsive border color ([c260cc2](https://github.com/formaat-design/reshaped/commit/c260cc21796755aa954eebb3735393daa1db8617))
+
+
+
+## [2.5.9](https://github.com/formaat-design/reshaped/compare/v2.5.8...v2.5.9) (2023-11-07)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fixed breadcrumbs rendering when used in RSC ([98c14bc](https://github.com/formaat-design/reshaped/commit/98c14bc885707431ea2421fe865e9acf436ec650))
+* **Themes:** added a way control individual "on" colors to fix themes with non-gray foreground color ([506e38c](https://github.com/formaat-design/reshaped/commit/506e38c4f0b3b45ce8c240f5fac6304a427de2b1))
+
+
+
+## [2.5.8](https://github.com/formaat-design/reshaped/compare/v2.5.7...v2.5.8) (2023-11-04)
+
+
+### Bug Fixes
+
+* **Select:** fixed custom trigger start padding when used without slots ([e3c81a9](https://github.com/formaat-design/reshaped/commit/e3c81a92c13f159ecdb9a529e832ea25cd0ec6a5))
+
+
+
+## [2.5.7](https://github.com/formaat-design/reshaped/compare/v2.5.6...v2.5.7) (2023-11-04)
+
+
+### Bug Fixes
+
+* **Popover:** fixed default render styles and improved transition for trigger width ([e4e4584](https://github.com/formaat-design/reshaped/commit/e4e4584b34d6d6b9f43107b6a6c591a6c549542d))
+
+
+
+## [2.5.6](https://github.com/formaat-design/reshaped/compare/v2.5.5...v2.5.6) (2023-11-01)
+
+
+### Bug Fixes
+
+* **Flyout:** added support for automatic positioning inside position: fixed parent ([04c8239](https://github.com/formaat-design/reshaped/commit/04c8239264397b1aae90bbef3cb6bd6f75227707))
+* **Toast:** removed logs ([15ee2c5](https://github.com/formaat-design/reshaped/commit/15ee2c5fe758287c11fccaef0fc49a36a38cf0bb))
+
+
+
+## [2.5.5](https://github.com/formaat-design/reshaped/compare/v2.5.4...v2.5.5) (2023-10-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v10.4.16 ([f9a4361](https://github.com/formaat-design/reshaped/commit/f9a4361398eb17b8c0675e3f1259dfb731723fe1))
+
+
+
+## [2.5.4](https://github.com/formaat-design/reshaped/compare/v1.0.0...v2.5.4) (2023-10-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency autoprefixer to v10.4.15 ([66b415c](https://github.com/formaat-design/reshaped/commit/66b415c308544779017b6799d9432c9ab168ef38))
+* **Themes:** improved baseThemeDefiniion typings ([1bbb457](https://github.com/formaat-design/reshaped/commit/1bbb457c8ba1e76ced1a488aec308c8a7b14525e)), closes [#183](https://github.com/formaat-design/reshaped/issues/183)
 
 
 
