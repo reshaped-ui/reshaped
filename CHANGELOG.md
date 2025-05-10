@@ -2,6 +2,7 @@
 
 - Tailwind 3: Preflight compatibility
 - ScrollArea: fixed maxHeight
+- Updated sideEffects to \*.css
 
 ## 3.5.1
 
