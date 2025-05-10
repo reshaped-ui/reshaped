@@ -91,7 +91,7 @@
 		"lint": "yarn lint:js && yarn lint:css",
 		"lint:js": "eslint './src/**/*.{ts,tsx}' --fix",
 		"lint:css": "stylelint 'src/**/*.css'",
-		"commit": "git-cz"
+		"commit": "sh ./bin/commit.sh"
 	},
 	"browserslist": [
 		"defaults and not IE 11"
