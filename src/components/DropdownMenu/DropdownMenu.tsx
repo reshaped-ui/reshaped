@@ -4,7 +4,7 @@ import React from "react";
 import Popover from "components/Popover";
 import MenuItem from "components/MenuItem";
 import Icon from "components/Icon";
-import { useFlyoutContext } from "components/_private/Flyout";
+import { useFlyoutContext } from "components/Flyout";
 import IconChevronRight from "icons/ChevronRight";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";

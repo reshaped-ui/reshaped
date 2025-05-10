@@ -1,23 +1,13 @@
 import React from "react";
 import useRTL from "hooks/useRTL";
-import { findClosestRenderContainer, getShadowRoot, getRectFromCoordinates } from "utilities/dom";
-import calculatePosition from "./utilities/calculatePosition";
-import getPositionFallbacks from "./utilities/getPositionFallbacks";
-import isFullyVisible from "./utilities/isFullyVisible";
+import flyout from "./utilities/flyout";
+import { defaultStyles, resetStyles } from "./Flyout.constants";
 import type * as G from "types/global";
 import type * as T from "./Flyout.types";
 
 /**
  * Typings
  */
-type Flyout = (
-	args: T.Options & {
-		flyoutEl: HTMLElement;
-		triggerEl: HTMLElement | null;
-		triggerBounds?: DOMRect | G.Coordinates | null;
-	}
-) => T.FlyoutData | undefined;
-
 type FlyoutRenderAction = { type: "render"; payload?: never };
 type FlyoutPositionAction = {
 	type: "position";
@@ -50,124 +40,6 @@ type UseFlyout = (args: {
 	hide: () => void;
 	remove: () => void;
 	show: () => void;
-};
-
-/**
- * Order of keys here is responsible for the order of styles applied
- */
-const defaultStyles: T.Styles = {
-	left: 0,
-	top: 0,
-	width: "auto",
-	height: "auto",
-	// z-index doesn't accept strings
-	zIndex: "var(--rs-z-index-flyout)",
-};
-
-const resetStyles: T.Styles = {
-	left: 0,
-	top: 0,
-	position: "absolute",
-	visibility: "hidden",
-	animation: "none",
-	transition: "none",
-	zIndex: "var(--rs-z-index-tooltip)",
-};
-
-/**
- * Set position of the target element to fit on the screen
- */
-const flyout: Flyout = (args) => {
-	const {
-		triggerEl,
-		flyoutEl,
-		triggerBounds: passedTriggerBounds,
-		contentShift = 0,
-		contentGap = 0,
-		...options
-	} = args;
-	const { position, fallbackPositions, width, container, lastUsedFallback, onFallback } = options;
-	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
-	const baseUnit = getComputedStyle(flyoutEl).getPropertyValue("--rs-unit-x1");
-	const unitModifier = baseUnit ? parseInt(baseUnit) : 0;
-	const internalTriggerBounds = triggerEl?.getBoundingClientRect();
-	const triggerBounds = passedTriggerBounds || internalTriggerBounds;
-
-	if (!triggerBounds) return;
-
-	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
-
-	// Reset all styles applied on the previous hook execution
-	targetClone.style.cssText = "";
-
-	Object.keys(resetStyles).forEach((key) => {
-		const value = resetStyles[key as keyof T.Styles];
-
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		if (value) targetClone.style[key] = value.toString();
-	});
-
-	if (width) {
-		if (width === "trigger") {
-			targetClone.style.width = `${resolvedTriggerBounds.width}px`;
-		} else if (width !== "full") {
-			targetClone.style.width = width;
-		}
-	}
-
-	const shadowRoot = triggerEl && getShadowRoot(triggerEl);
-
-	// Insert inside shadow root if possible to make sure styles are applied correctly
-	(shadowRoot || document.body).appendChild(targetClone);
-
-	const flyoutBounds = targetClone.getBoundingClientRect();
-	const closestRenderContainer =
-		!container && triggerEl ? findClosestRenderContainer({ el: triggerEl }) : undefined;
-	const containerParent =
-		container ||
-		// Only render inside non-scrollable container to make sure it doesn't get clipped by overflow auto
-		// We render those cases in the document root and then sync the position on scroll instead
-		(!closestRenderContainer?.scrollable ? closestRenderContainer?.el : undefined) ||
-		document.body;
-	const containerBounds = containerParent.getBoundingClientRect();
-
-	const scopeOffset = {
-		top: containerBounds.top + document.documentElement.scrollTop - containerParent.scrollTop,
-		left: containerBounds.left + document.documentElement.scrollLeft - containerParent.scrollLeft,
-	};
-
-	let calculated: ReturnType<typeof calculatePosition> | null = null;
-	const testOrder = getPositionFallbacks(position, fallbackPositions);
-
-	testOrder.some((currentPosition) => {
-		const tested = calculatePosition({
-			...options,
-			triggerBounds: resolvedTriggerBounds,
-			flyoutBounds,
-			scopeOffset,
-			position: currentPosition,
-			contentGap: contentGap * unitModifier,
-			contentShift: contentShift * unitModifier,
-		});
-		const visible = isFullyVisible({ ...tested, container });
-		const validPosition = visible || fallbackPositions?.length === 0;
-
-		// Saving first try in case non of the options work
-		if (validPosition || lastUsedFallback === currentPosition) {
-			calculated = tested;
-			onFallback(currentPosition);
-		}
-
-		return validPosition;
-	});
-
-	if (!calculated) {
-		throw new Error(`[Reshaped] Can't calculate styles for the ${position} position`);
-	}
-
-	targetClone.parentNode?.removeChild(targetClone);
-	return calculated;
 };
 
 const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {

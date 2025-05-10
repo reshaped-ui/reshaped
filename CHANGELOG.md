@@ -1,4 +1,10 @@
-3.5.1
+3.6.0
+
+- Flyout: Exported from the library
+- Flyout: Moved css to css layers
+- Flyout: Support height animations
+
+  3.5.1
 
 - NumberField: user-select none for touch devices
 - Tabs: Fixed arrow navigation
@@ -6,5 +12,3 @@
 - Card: Removed internal content wrapper to fix Safari absolute positioning of contents inside the card
 - [Pro] Storybook: Preserve theme and mode values while navigating stories
 - [Pro] Storybook config: switched to js to resolve TS resolving issues
-
-WIP 3.6.0

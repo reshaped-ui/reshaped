@@ -11,30 +11,36 @@ export const findParent = (element: HTMLElement, condition: (el: HTMLElement) =>
 	return null;
 };
 
-/**
- * Containers used for scoping the rendering,
- * mostly used in flyouts since the have to accommodate for positioning and overflow
- */
-export const findClosestRenderContainer = (args: {
+export const findClosestPositionContainer = (args: {
+	el: HTMLElement | null;
+	iteration?: number;
+}): HTMLElement => {
+	const { el, iteration = 0 } = args;
+	const style = el && window.getComputedStyle(el);
+	const position = style?.position;
+	const isFixed = position === "fixed" || position === "sticky";
+
+	if (iteration === 0) {
+		const shadowRoot = getShadowRoot(el);
+		if (shadowRoot?.firstElementChild) return shadowRoot.firstElementChild as HTMLElement;
+	}
+
+	if (el === document.body || !el) return document.body;
+	if (isFixed) return el;
+	return findClosestPositionContainer({ el: el.parentElement, iteration: iteration + 1 });
+};
+
+export const findClosestScrollableContainer = (args: {
 	el: HTMLElement | null;
 	iteration?: number;
 	overflowOnly?: boolean;
-}): { el: HTMLElement; scrollable?: boolean } => {
-	const { el, iteration = 0, overflowOnly } = args;
+}): HTMLElement => {
+	const { el, iteration = 0 } = args;
 	const style = el && window.getComputedStyle(el);
 	const overflowY = style?.overflowY;
-	const position = style?.position;
 	const isScrollable = overflowY?.includes("scroll") || overflowY?.includes("auto");
-	const isFixed = position === "fixed" || position === "sticky";
 
-	// Only check shadow root on the first run
-	if (iteration === 0) {
-		const shadowRoot = getShadowRoot(el);
-		if (shadowRoot?.firstElementChild) return { el: shadowRoot.firstElementChild as HTMLElement };
-	}
-
-	if (el === document.body || !el) return { el: document.body };
-	if (isScrollable && el.scrollHeight > el.clientHeight) return { el, scrollable: true };
-	if (isFixed && !overflowOnly) return { el };
-	return findClosestRenderContainer({ el: el.parentElement, iteration: iteration + 1 });
+	if (el === document.body || !el) return document.body;
+	if (isScrollable && el.scrollHeight > el.clientHeight) return el;
+	return findClosestScrollableContainer({ el: el.parentElement, iteration: iteration + 1 });
 };

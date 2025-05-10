@@ -4,7 +4,7 @@ import React from "react";
 import { classNames, throttleHandler } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
-import { findClosestRenderContainer } from "utilities/dom";
+import { findClosestPositionContainer, findClosestScrollableContainer } from "utilities/dom";
 import cooldown from "./utilities/cooldown";
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
 import type * as T from "./Flyout.types";
@@ -31,22 +31,22 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		trapFocusMode,
 		disableContentHover,
 		width,
-		containerRef,
+		containerRef: passedContainerRef,
 		isSubmenu,
 	} = useFlyoutContext();
 	const { styles, status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
-	const closestContainer = React.useMemo(() => {
+	const closestFixedContainer = React.useMemo(() => {
+		if (!mounted) return null;
+		if (!triggerElRef) return null;
+		return findClosestPositionContainer({ el: triggerElRef.current });
+	}, [mounted, triggerElRef]);
+	const closestScrollableContainer = React.useMemo(() => {
 		if (!mounted) return;
 		if (!triggerElRef) return;
-		return findClosestRenderContainer({ el: triggerElRef.current });
+		return findClosestScrollableContainer({ el: triggerElRef.current });
 	}, [mounted, triggerElRef]);
-	const scrollableRef =
-		(mounted && closestContainer?.el === document.body) ||
-		!closestContainer?.el ||
-		closestContainer.scrollable
-			? undefined
-			: { current: closestContainer.el };
+	const containerRef = passedContainerRef || { current: closestFixedContainer };
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -64,10 +64,11 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	}, [handleTransitionStart, flyoutElRef, status]);
 
 	React.useEffect(() => {
-		if (!closestContainer?.scrollable) return;
+		if (closestScrollableContainer === document.body) return;
+		if (!closestScrollableContainer) return;
 
 		const triggerEl = triggerElRef?.current;
-		const containerEl = closestContainer.el;
+		const containerEl = closestScrollableContainer;
 
 		const handleScroll = throttleHandler(() => {
 			const triggerBounds = triggerEl?.getBoundingClientRect();
@@ -86,13 +87,13 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 			}
 		}, 16);
 
-		closestContainer.el.addEventListener("scroll", handleScroll, { passive: true });
-		return () => closestContainer.el.removeEventListener("scroll", handleScroll);
-	}, [closestContainer, flyout, handleClose, triggerElRef]);
+		closestScrollableContainer.addEventListener("scroll", handleScroll, { passive: true });
+		return () => closestScrollableContainer.removeEventListener("scroll", handleScroll);
+	}, [closestScrollableContainer, flyout, handleClose, triggerElRef]);
 
 	if (status === "idle" || !mounted) return null;
 
-	const contentClassNames = classNames(
+	const rootClassNames = classNames(
 		s.content,
 		triggerType === "hover" && s["--hover"],
 		status === "visible" && s["--visible"],
@@ -124,7 +125,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		<ContentProvider value={{ elRef: flyoutElRef }}>
 			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 			<div
-				className={contentClassNames}
+				className={rootClassNames}
 				style={
 					{
 						...styles,
@@ -154,7 +155,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		</ContentProvider>
 	);
 
-	return <Portal targetRef={containerRef || scrollableRef}>{content}</Portal>;
+	return <Portal targetRef={containerRef}>{content}</Portal>;
 };
 
 FlyoutContent.displayName = "Flyout.Content";

@@ -91,7 +91,7 @@ type BaseProps = {
 	groupTimeouts?: boolean;
 	position?: Position;
 	/**
-	 * @deprecated Use fallbackPosition={false} instead
+	 * @deprecated Use fallbackPosition={false} instead, will be removed in v4
 	 */
 	forcePosition?: boolean;
 	fallbackPositions?: Position[] | false;

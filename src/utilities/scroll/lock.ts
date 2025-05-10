@@ -1,5 +1,5 @@
 import { isIOS } from "utilities/platform";
-import { findClosestRenderContainer } from "utilities/dom";
+import { findClosestScrollableContainer } from "utilities/dom";
 import lockSafariScroll from "./lockSafari";
 import lockStandardScroll from "./lockStandard";
 
@@ -14,7 +14,9 @@ export const lockScroll = (args: {
 	const isIOSLock = isIOS() && !args.containerEl && !args.originEl;
 
 	let container = document.body;
-	if (args.originEl && !isIOSLock) container = findClosestRenderContainer({ el: args.originEl }).el;
+	if (args.originEl && !isIOSLock) {
+		container = findClosestScrollableContainer({ el: args.originEl });
+	}
 	if (args.containerEl && !isIOSLock) container = args.containerEl;
 
 	if (container === document.body) bodyLockedCount += 1;
