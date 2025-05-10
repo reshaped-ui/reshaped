@@ -6,11 +6,12 @@ FILE="CHANGELOG.md"
 
 yarn git-cz
 
-sed -i.bak '/^# \[Unreleased/,/^#\+ \[/ {
-  /^#\+ \[/!d
-}' "$FILE"
-
-echo "✅ Unreleased section removed. Backup saved as ${FILE}.bak"
+awk '
+  BEGIN { skip = 0 }
+  /^# \[Unreleased/ { skip = 1; next }
+  skip && /^#+ \[/ { skip = 0 }
+  !skip
+' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
 
 yarn conventional-changelog -p angular -i $FILE -s -u 
 git add $FILE
