@@ -78,6 +78,7 @@ export const active: StoryObj<{
 			expect(args.handleClose).toHaveBeenLastCalledWith();
 		});
 
+		await sleep(500);
 		await userEvent.click(input);
 
 		await waitFor(() => {
