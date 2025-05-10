@@ -8,6 +8,15 @@ pre-commit:
       glob: "*.css"
       run: yarn lint:css --fix {staged_files} && git add {staged_files}
 
+prepare-commit-msg:
+  scripts:
+    block-direct-commit:
+      run: |
+        if [ -z "$ALLOW_COMMIT" ]; then
+          echo "🚫 Use 'yarn commit' instead of 'git commit'."
+          exit 1
+        fi
+
 commit-msg:
   commands:
     "lint commit message":

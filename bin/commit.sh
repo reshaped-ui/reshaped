@@ -4,7 +4,7 @@ set -e
 
 FILE="CHANGELOG.md"
 
-yarn git-cz
+ALLOW_COMMIT=1 yarn git-cz
 
 awk '
   BEGIN { skip = 0 }
@@ -16,4 +16,4 @@ awk '
 yarn conventional-changelog -p angular -i $FILE -s -u 
 
 git add $FILE
-git commit --amend --no-edit
+ALLOW_COMMIT=1 git commit --amend --no-edit
