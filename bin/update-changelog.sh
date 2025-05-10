@@ -12,4 +12,6 @@ awk '
 ' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
 
 yarn conventional-changelog -p angular -i $FILE -s -u 
+git add .
+ALLOW_COMMIT=1 git commit --amend --no-edit
 
