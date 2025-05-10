@@ -1,124 +1,133 @@
-@layer rs.checkbox.base;
+/* 
+Not using layers for now to avoid conflicts with Tailwind v3 preflight 
+since it reset the border width/color without using @layer
+*/
+
+/* @layer rs.checkbox.base;
 @layer rs.checkbox.error;
 @layer rs.checkbox.checked;
 @layer rs.checkbox.disabled;
 
-@layer rs.checkbox.base {
-	.root {
-		display: inline-flex;
-		gap: var(--rs-checkbox-gap);
-		vertical-align: top;
-		align-items: center;
-		cursor: pointer;
-		user-select: none;
-		-webkit-tap-highlight-color: transparent;
-	}
+@layer rs.checkbox.base { */
+.root {
+	display: inline-flex;
+	gap: var(--rs-checkbox-gap);
+	vertical-align: top;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
 
-	.root:hover .decorator {
-		background: var(--rs-color-background-neutral-faded);
-	}
+.root:hover .decorator {
+	background: var(--rs-color-background-neutral-faded);
+}
 
-	.field {
-		position: relative;
-	}
+.field {
+	position: relative;
+}
 
-	.decorator {
-		width: var(--rs-checkbox-line-height);
-		height: var(--rs-checkbox-line-height);
-		border-radius: var(--rs-radius-small);
-		color: var(--rs-color-on-background-primary);
-		border: 1px solid var(--rs-color-border-neutral);
-		background: var(--rs-color-background-elevation-base);
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
-		transition-property: background-color, border-color;
+.decorator {
+	width: var(--rs-checkbox-line-height);
+	height: var(--rs-checkbox-line-height);
+	border-radius: var(--rs-radius-small);
+	color: var(--rs-color-on-background-primary);
+	border: 1px solid var(--rs-color-border-neutral);
+	background: var(--rs-color-background-elevation-base);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: background-color, border-color;
 
-		&::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			height: 1.5px;
-			border-radius: 999px;
-			width: calc(var(--rs-checkbox-line-height) * 0.5);
-			background: var(--rs-color-on-background-primary);
-			opacity: 0;
-			transform: translate(-50%, -50%) scale(0);
-			transition: var(--rs-duration-fast) var(--rs-easing-standard);
-			transition-property: opacity, transform;
-		}
-	}
-
-	@responsive .--size {
-		@value small {
-			--rs-checkbox-line-height: var(--rs-line-height-caption-1);
-			--rs-checkbox-gap: var(--rs-unit-x1);
-		}
-
-		@value medium {
-			--rs-checkbox-line-height: var(--rs-line-height-body-3);
-			--rs-checkbox-gap: var(--rs-unit-x2);
-		}
-
-		@value large {
-			--rs-checkbox-line-height: var(--rs-line-height-body-2);
-			--rs-checkbox-gap: var(--rs-unit-x2);
-		}
-	}
-
-	.icon {
+	&::before {
+		content: "";
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%) scale(0);
+		height: 1.5px;
+		border-radius: 999px;
+		width: calc(var(--rs-checkbox-line-height) * 0.5);
+		background: var(--rs-color-on-background-primary);
 		opacity: 0;
+		transform: translate(-50%, -50%) scale(0);
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
 		transition-property: opacity, transform;
 	}
+}
 
-	[data-rs-keyboard] .input:focus-visible + .decorator {
-		box-shadow: var(--rs-focus-shadow);
+@responsive .--size {
+	@value small {
+		--rs-checkbox-line-height: var(--rs-line-height-caption-1);
+		--rs-checkbox-gap: var(--rs-unit-x1);
+	}
+
+	@value medium {
+		--rs-checkbox-line-height: var(--rs-line-height-body-3);
+		--rs-checkbox-gap: var(--rs-unit-x2);
+	}
+
+	@value large {
+		--rs-checkbox-line-height: var(--rs-line-height-body-2);
+		--rs-checkbox-gap: var(--rs-unit-x2);
 	}
 }
 
-@layer rs.checkbox.error {
-	.root.--error .decorator {
-		border-color: var(--rs-color-border-critical);
-	}
+.icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	opacity: 0;
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: opacity, transform;
 }
 
-@layer rs.checkbox.checked {
-	.input:indeterminate + .decorator,
-	.input:checked + .decorator {
-		border-color: var(--rs-color-background-primary);
-		background: var(--rs-color-background-primary);
-	}
-
-	.input:indeterminate + .decorator::before,
-	.input:checked + .decorator .icon {
-		opacity: 1;
-		transform: translate(-50%, -50%) scale(1);
-	}
+[data-rs-keyboard] .input:focus-visible + .decorator {
+	box-shadow: var(--rs-focus-shadow);
 }
 
-@layer rs.checkbox.disabled {
-	.root.--disabled {
-		cursor: not-allowed;
+/* } */
+
+/* @layer rs.checkbox.error { */
+.root.--error .decorator {
+	border-color: var(--rs-color-border-critical);
+}
+
+/* } */
+
+/* @layer rs.checkbox.checked { */
+.input:indeterminate + .decorator,
+.input:checked + .decorator {
+	border-color: var(--rs-color-background-primary);
+	background: var(--rs-color-background-primary);
+}
+
+.input:indeterminate + .decorator::before,
+.input:checked + .decorator .icon {
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+/* } */
+
+/* @layer rs.checkbox.disabled { */
+.root.--disabled {
+	cursor: not-allowed;
+	color: var(--rs-color-foreground-disabled);
+
+	& .decorator {
+		background: var(--rs-color-background-disabled-faded);
+		border-color: var(--rs-color-border-disabled);
 		color: var(--rs-color-foreground-disabled);
+	}
 
-		& .decorator {
-			background: var(--rs-color-background-disabled-faded);
-			border-color: var(--rs-color-border-disabled);
-			color: var(--rs-color-foreground-disabled);
-		}
+	& .input:checked + .decorator,
+	& .input:indeterminate + .decorator {
+		background: var(--rs-color-background-disabled);
+		border-color: transparent;
 
-		& .input:checked + .decorator,
-		& .input:indeterminate + .decorator {
-			background: var(--rs-color-background-disabled);
-			border-color: transparent;
-
-			&::before {
-				background-color: var(--rs-color-foreground-disabled);
-			}
+		&::before {
+			background-color: var(--rs-color-foreground-disabled);
 		}
 	}
 }
+
+/* } */

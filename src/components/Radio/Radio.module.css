@@ -1,109 +1,118 @@
-@layer rs.radio.base;
+/* 
+Not using layers for now to avoid conflicts with Tailwind v3 preflight 
+since it reset the border width/color without using @layer
+*/
+
+/* @layer rs.radio.base;
 @layer rs.radio.error;
 @layer rs.radio.checked;
-@layer rs.radio.disabled;
+@layer rs.radio.disabled; */
 
-@layer rs.radio.base {
-	.root {
-		display: inline-flex;
-		gap: var(--rs-radio-gap);
-		vertical-align: top;
-		align-items: center;
-		cursor: pointer;
-		user-select: none;
-		-webkit-tap-highlight-color: transparent;
+/* @layer rs.radio.base { */
+.root {
+	display: inline-flex;
+	gap: var(--rs-radio-gap);
+	vertical-align: top;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
 
-		&:hover .decorator {
-			background: var(--rs-color-background-neutral-faded);
-		}
+	&:hover .decorator {
+		background: var(--rs-color-background-neutral-faded);
 	}
+}
 
-	.field {
-		position: relative;
-	}
+.field {
+	position: relative;
+}
 
-	.decorator {
-		width: var(--rs-radio-line-height);
-		height: var(--rs-radio-line-height);
+.decorator {
+	width: var(--rs-radio-line-height);
+	height: var(--rs-radio-line-height);
+	border-radius: 50%;
+	border: 1px solid var(--rs-color-border-neutral);
+	background: var(--rs-color-background-elevation-base);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: background-color, border-color;
+
+	&::after {
+		content: "";
+		position: absolute;
+		height: calc(var(--rs-radio-line-height) * 0.4);
+		width: calc(var(--rs-radio-line-height) * 0.4);
+		background: var(--rs-color-on-background-primary);
 		border-radius: 50%;
-		border: 1px solid var(--rs-color-border-neutral);
-		background: var(--rs-color-background-elevation-base);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0);
+		opacity: 0;
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
-		transition-property: background-color, border-color;
+		transition-property: opacity, transform;
+	}
+}
+
+@responsive .--size {
+	@value small {
+		--rs-radio-line-height: var(--rs-line-height-caption-1);
+		--rs-radio-gap: var(--rs-unit-x1);
+	}
+
+	@value medium {
+		--rs-radio-line-height: var(--rs-line-height-body-3);
+		--rs-radio-gap: var(--rs-unit-x2);
+	}
+
+	@value large {
+		--rs-radio-line-height: var(--rs-line-height-body-2);
+		--rs-radio-gap: var(--rs-unit-x2);
+	}
+}
+
+[data-rs-keyboard] .input:focus + .decorator {
+	box-shadow: var(--rs-focus-shadow);
+}
+
+/* } */
+
+/* @layer rs.radio.error { */
+.root.--error .decorator {
+	border-color: var(--rs-color-border-critical);
+}
+
+/* } */
+
+/* @layer rs.radio.checked { */
+.input:checked + .decorator {
+	border-color: var(--rs-color-background-primary);
+	background: var(--rs-color-background-primary);
+
+	&::after {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+/* } */
+
+/* @layer rs.radio.disabled { */
+.root.--disabled {
+	cursor: not-allowed;
+	color: var(--rs-color-foreground-disabled);
+
+	& .decorator {
+		background: var(--rs-color-background-disabled-faded);
+		border-color: var(--rs-color-border-disabled);
 
 		&::after {
-			content: "";
-			position: absolute;
-			height: calc(var(--rs-radio-line-height) * 0.4);
-			width: calc(var(--rs-radio-line-height) * 0.4);
-			background: var(--rs-color-on-background-primary);
-			border-radius: 50%;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%) scale(0);
-			opacity: 0;
-			transition: var(--rs-duration-fast) var(--rs-easing-standard);
-			transition-property: opacity, transform;
+			background-color: var(--rs-color-foreground-disabled);
 		}
 	}
 
-	@responsive .--size {
-		@value small {
-			--rs-radio-line-height: var(--rs-line-height-caption-1);
-			--rs-radio-gap: var(--rs-unit-x1);
-		}
-
-		@value medium {
-			--rs-radio-line-height: var(--rs-line-height-body-3);
-			--rs-radio-gap: var(--rs-unit-x2);
-		}
-
-		@value large {
-			--rs-radio-line-height: var(--rs-line-height-body-2);
-			--rs-radio-gap: var(--rs-unit-x2);
-		}
-	}
-
-	[data-rs-keyboard] .input:focus + .decorator {
-		box-shadow: var(--rs-focus-shadow);
+	& .input:checked + .decorator {
+		background: var(--rs-color-background-disabled);
+		border-color: transparent;
 	}
 }
 
-@layer rs.radio.error {
-	.root.--error .decorator {
-		border-color: var(--rs-color-border-critical);
-	}
-}
-
-@layer rs.radio.checked {
-	.input:checked + .decorator {
-		border-color: var(--rs-color-background-primary);
-		background: var(--rs-color-background-primary);
-
-		&::after {
-			opacity: 1;
-			transform: translate(-50%, -50%) scale(1);
-		}
-	}
-}
-
-@layer rs.radio.disabled {
-	.root.--disabled {
-		cursor: not-allowed;
-		color: var(--rs-color-foreground-disabled);
-
-		& .decorator {
-			background: var(--rs-color-background-disabled-faded);
-			border-color: var(--rs-color-border-disabled);
-
-			&::after {
-				background-color: var(--rs-color-foreground-disabled);
-			}
-		}
-
-		& .input:checked + .decorator {
-			background: var(--rs-color-background-disabled);
-			border-color: transparent;
-		}
-	}
-}
+/* } */
