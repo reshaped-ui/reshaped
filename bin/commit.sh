@@ -3,6 +3,6 @@
 set -e
 
 yarn git-cz
-yarn conventional-changelog -p angular -i CHANGELOG.md -s -c changelog.config.cjs
+yarn conventional-changelog -c ../changelog.config.cjs -i CHANGELOG.md -s 
 git add CHANGELOG.md
 git commit --amend --no-edit
