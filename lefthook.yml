@@ -10,7 +10,7 @@ pre-commit:
 
 prepare-commit-msg:
   commands:
-    "block commit":
+    "review commit method":
       run: |
         if [ -z "$ALLOW_COMMIT" ]; then
           echo "🚫 Use 'yarn commit' instead of 'git commit'."
