@@ -13,5 +13,5 @@ awk '
 
 yarn conventional-changelog -p angular -i $FILE -s -u 
 git add .
-ALLOW_COMMIT=1 git commit --amend --no-edit
+git commit --amend --no-edit
 
