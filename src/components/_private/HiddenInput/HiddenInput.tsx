@@ -1,4 +1,4 @@
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import s from "./HiddenInput.module.css";
 import type * as T from "./HiddenInput.types";
 

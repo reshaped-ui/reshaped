@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import Theme from "components/Theme";
 import Text from "components/Text";
 import { getPrecision } from "./Slider.utilities";

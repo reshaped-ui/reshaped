@@ -1,4 +1,4 @@
-import { classNames, responsiveVariables, responsivePropDependency } from "utilities/helpers";
+import { classNames, responsiveVariables, responsivePropDependency } from "utilities/props";
 import getAlignStyles from "styles/align";
 import getJustifyStyles from "styles/justify";
 import type * as T from "./Grid.types";

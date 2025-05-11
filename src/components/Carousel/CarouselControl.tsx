@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import Button from "components/Button";
 import IconChevronRight from "icons/ChevronRight";
 import IconChevronLeft from "icons/ChevronLeft";

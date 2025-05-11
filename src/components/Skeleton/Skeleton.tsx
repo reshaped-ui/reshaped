@@ -1,4 +1,4 @@
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import View from "components/View";
 import * as T from "./Skeleton.types";
 import s from "./Skeleton.module.css";

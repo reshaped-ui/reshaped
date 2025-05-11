@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import useDrag from "hooks/_private/useDrag";
 import View from "components/View";
 import type * as T from "./Resizable.types";

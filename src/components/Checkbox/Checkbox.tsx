@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import HiddenInput from "components/_private/HiddenInput";
 import { useFormControl } from "components/FormControl";

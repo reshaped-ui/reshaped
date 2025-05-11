@@ -1,5 +1,5 @@
 import Text from "components/Text";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import type * as T from "./Hotkey.types";
 import s from "./Hotkey.module.css";
 

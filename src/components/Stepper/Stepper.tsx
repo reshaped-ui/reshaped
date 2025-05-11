@@ -1,5 +1,5 @@
 import React from "react";
-import { responsivePropDependency } from "utilities/helpers";
+import { responsivePropDependency } from "utilities/props";
 import Expandable from "components/_private/Expandable";
 import View from "components/View";
 import Text from "components/Text";

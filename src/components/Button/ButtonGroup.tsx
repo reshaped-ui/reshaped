@@ -1,4 +1,4 @@
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";
 

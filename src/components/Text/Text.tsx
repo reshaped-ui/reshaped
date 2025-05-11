@@ -1,4 +1,4 @@
-import { classNames, responsiveClassNames } from "utilities/helpers";
+import { classNames, responsiveClassNames } from "utilities/props";
 import getTextAlignStyles from "styles/textAlign";
 import type * as T from "./Text.types";
 import s from "./Text.module.css";

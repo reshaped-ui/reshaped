@@ -8,7 +8,7 @@ import { useFlyoutContext } from "components/Flyout";
 import IconChevronRight from "icons/ChevronRight";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import * as keys from "constants/keys";
 import type * as T from "./DropdownMenu.types";
 import s from "./DropdownMenu.module.css";

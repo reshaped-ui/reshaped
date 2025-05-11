@@ -1,4 +1,4 @@
-import { classNames, responsiveClassNames } from "utilities/helpers";
+import { classNames, responsiveClassNames } from "utilities/props";
 import type * as T from "./Loader.types";
 import s from "./Loader.module.css";
 

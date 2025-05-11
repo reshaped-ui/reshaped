@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import HiddenInput from "components/_private/HiddenInput";
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";

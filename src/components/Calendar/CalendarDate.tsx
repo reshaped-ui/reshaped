@@ -1,7 +1,7 @@
 "use client";
 
 import Actionable from "components/Actionable";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { getLocalISODate } from "./Calendar.utils";
 import type * as T from "./Calendar.types";
 import s from "./Calendar.module.css";

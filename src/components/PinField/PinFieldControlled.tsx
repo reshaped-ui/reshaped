@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { responsivePropDependency } from "utilities/helpers";
+import { responsivePropDependency } from "utilities/props";
 import View from "components/View";
 import Text from "components/Text";
 import useHotkeys from "hooks/useHotkeys";

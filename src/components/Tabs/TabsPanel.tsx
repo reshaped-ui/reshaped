@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { useTabs } from "./TabsContext";
 import type * as T from "./Tabs.types";
 import s from "./Tabs.module.css";

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
 import Icon from "components/Icon";
 import Loader from "components/Loader";
 import Actionable, { type ActionableRef } from "components/Actionable";

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
 import Icon from "components/Icon";

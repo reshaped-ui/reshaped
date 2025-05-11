@@ -13,7 +13,7 @@ import useElementId from "hooks/useElementId";
 import useHotkeys from "hooks/useHotkeys";
 import useHandlerRef from "hooks/useHandlerRef";
 import * as keys from "constants/keys";
-import { responsiveClassNames, responsivePropDependency } from "utilities/helpers";
+import { responsiveClassNames, responsivePropDependency } from "utilities/props";
 import type * as T from "./NumberField.types";
 import s from "./NumberField.module.css";
 

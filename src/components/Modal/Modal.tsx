@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveVariables, responsiveClassNames } from "utilities/helpers";
+import { classNames, responsiveVariables, responsiveClassNames } from "utilities/props";
 import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import { enableScroll, disableScroll } from "utilities/scroll";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";

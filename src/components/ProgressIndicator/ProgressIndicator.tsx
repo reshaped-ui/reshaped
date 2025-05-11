@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { onNextFrame } from "utilities/animation";
 import usePrevious from "hooks/_private/usePrevious";
 import type * as T from "./ProgressIndicator.types";

@@ -1,4 +1,4 @@
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import View from "components/View";
 import type * as T from "./ActionBar.types";
 import s from "./ActionBar.module.css";
