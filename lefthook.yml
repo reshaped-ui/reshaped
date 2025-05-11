@@ -8,21 +8,6 @@ pre-commit:
       glob: "*.css"
       run: yarn lint:css --fix {staged_files} && git add {staged_files}
 
-prepare-commit-msg:
-  commands:
-    "review commit method":
-      run: |
-        COMMIT_MSG_FILE="$1"
-
-        if [ ! -s "$COMMIT_MSG_FILE" ]; then
-          exit 0
-        fi
-
-        if [ -z "$ALLOW_COMMIT" ]; then
-          echo "🚫 Use 'yarn commit' instead of 'git commit'."
-          exit 1
-        fi
-
 commit-msg:
   commands:
     "lint commit message":
