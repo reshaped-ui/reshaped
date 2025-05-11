@@ -1,4 +1,4 @@
-import { responsiveVariables } from "utilities/helpers";
+import { responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import "./padding.css";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import View from "components/View";
 import Icon from "components/Icon";
 import Text from "components/Text";

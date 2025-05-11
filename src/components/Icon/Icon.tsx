@@ -1,5 +1,5 @@
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import getHeightStyles from "styles/height";
 import type * as T from "./Icon.types";
 import s from "./Icon.module.css";

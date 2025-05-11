@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { classNames, throttleHandler } from "utilities/helpers";
+import { classNames } from "utilities/props";
+import { throttleHandler } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
 import { findClosestPositionContainer, findClosestScrollableContainer } from "utilities/dom";

@@ -1,5 +1,5 @@
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import type * as T from "./Progress.types";
 import s from "./Progress.module.css";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { ThemeContext } from "./Theme.context";
 import { getRootThemeEl } from "./Theme.utilities";

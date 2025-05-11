@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { GlobalColorMode, PrivateTheme } from "components/Theme";
 import { ToastProvider } from "components/Toast";
 import { useGlobalColorMode } from "components/Theme/useTheme";

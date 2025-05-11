@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import useElementId from "hooks/useElementId";
 import AccordionContext from "./Accordion.context";
 import * as T from "./Accordion.types";

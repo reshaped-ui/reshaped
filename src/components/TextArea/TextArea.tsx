@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveClassNames } from "utilities/helpers";
+import { classNames, responsiveClassNames } from "utilities/props";
 import { useFormControl } from "components/FormControl";
 import Aligner from "components/_private/Aligner";
 import useElementId from "hooks/useElementId";

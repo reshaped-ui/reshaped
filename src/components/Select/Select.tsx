@@ -6,7 +6,7 @@ import { useFormControl } from "components/FormControl";
 import Actionable from "components/Actionable";
 import Text from "components/Text";
 import IconArrow from "icons/ChevronVertical";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
 import useElementId from "hooks/useElementId";
 import type * as T from "./Select.types";
 import s from "./Select.module.css";

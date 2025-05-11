@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import * as T from "./Image.types";
 import s from "./Image.module.css";
 import getRadiusStyles from "styles/radius";

@@ -3,6 +3,7 @@
 - Flyout: Exported from the library
 - Flyout: Moved css to css layers
 - Flyout: Support height animations
+- Exposed classNames and responsivePropDependency
 
 ## 3.5.3
 

@@ -211,7 +211,7 @@ export { default as useToggle } from "hooks/useToggle";
 /**
  * Utility functions
  */
-export { classNames, responsiveClassNames, responsivePropDependency } from "utilities/helpers";
+export { classNames, responsivePropDependency } from "utilities/props";
 export { TrapFocus } from "utilities/a11y";
 
 /**

@@ -1,5 +1,5 @@
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import View from "components/View";
 import type * as T from "./Timeline.types";
 import s from "./Timeline.module.css";

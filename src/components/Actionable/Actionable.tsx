@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import * as keys from "constants/keys";
 import type * as T from "./Actionable.types";
 import s from "./Actionable.module.css";

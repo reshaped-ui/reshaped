@@ -7,7 +7,7 @@
  * on the --rs-p, --rs-p-v and --rs-p-h css variables
  */
 
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import type * as T from "./Aligner.types";
 import s from "./Aligner.module.css";
 

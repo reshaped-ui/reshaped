@@ -1,4 +1,4 @@
-import { classNames, responsivePropDependency } from "utilities/helpers";
+import { classNames, responsivePropDependency } from "utilities/props";
 import getHeightStyles from "styles/height";
 import Icon from "components/Icon";
 import View from "components/View";

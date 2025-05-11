@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { disableUserSelect, enableUserSelect } from "utilities/dom";
 import getHeightStyles from "styles/height";
 import getMaxHeightStyles from "styles/maxHeight";

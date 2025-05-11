@@ -2,7 +2,7 @@ import {
 	responsiveClassNames,
 	responsiveVariables,
 	responsivePropDependency,
-} from "utilities/helpers";
+} from "utilities/props";
 import * as T from "styles/types";
 import s from "./bleed.module.css";
 

@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { classNames, throttle } from "utilities/helpers";
+import { classNames } from "utilities/props";
+import { throttle } from "utilities/helpers";
 import useRTL from "hooks/useRTL";
 import {
 	focusNextElement,

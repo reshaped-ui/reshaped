@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import Button from "components/Button";
 import IconClose from "icons/Close";
 import type * as T from "./Dismissible.types";

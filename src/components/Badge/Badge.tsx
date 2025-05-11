@@ -1,4 +1,4 @@
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import Text from "components/Text";
 import Icon from "components/Icon";
 import IconClose from "icons/Close";

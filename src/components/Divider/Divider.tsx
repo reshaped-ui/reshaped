@@ -1,5 +1,5 @@
 import type React from "react";
-import { classNames, responsiveClassNames } from "utilities/helpers";
+import { classNames, responsiveClassNames } from "utilities/props";
 import Text from "components/Text";
 import type * as T from "./Divider.types";
 import s from "./Divider.module.css";

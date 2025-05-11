@@ -1,4 +1,4 @@
-import { responsiveClassNames } from "utilities/helpers";
+import { responsiveClassNames } from "utilities/props";
 import * as T from "styles/types";
 import s from "./border.module.css";
 

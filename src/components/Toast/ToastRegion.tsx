@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { focusableSelector } from "utilities/a11y";
 import ToastContainer from "./ToastContainer";
 import ToastContext from "./Toast.context";

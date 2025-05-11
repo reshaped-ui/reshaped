@@ -1,4 +1,4 @@
-import { responsiveClassNames, responsiveVariables } from "utilities/helpers";
+import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import s from "./minWidth.module.css";
 

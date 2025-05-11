@@ -1,5 +1,5 @@
 import React from "react";
-import { classNames, responsiveVariables } from "utilities/helpers";
+import { classNames, responsiveVariables } from "utilities/props";
 import getWidthStyles from "styles/width";
 import getMinWidthStyles from "styles/minWidth";
 import type * as T from "./Table.types";

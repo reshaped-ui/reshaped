@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import View from "components/View";
 import HiddenVisually from "components/HiddenVisually";
 import useToggle from "hooks/useToggle";

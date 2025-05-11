@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import { disableScroll, enableScroll } from "utilities/scroll";
 import useRTL from "hooks/useRTL";

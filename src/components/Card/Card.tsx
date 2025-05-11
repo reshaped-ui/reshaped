@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import Actionable from "components/Actionable";
 import type * as T from "./Card.types";
 import s from "./Card.module.css";

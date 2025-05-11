@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/helpers";
+import { classNames } from "utilities/props";
 import { onNextFrame } from "utilities/animation";
 import { checkKeyboardMode, TrapFocus } from "utilities/a11y";
 import Toast from "./Toast";
