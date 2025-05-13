@@ -15,6 +15,7 @@ const Popover: React.FC<T.Props> & {
 		variant = "elevated",
 		triggerType = "click",
 		position = "bottom",
+		elevation,
 		...flyoutProps
 	} = props;
 	const padding = props.padding ?? (variant === "headless" ? 0 : 4);
@@ -24,7 +25,8 @@ const Popover: React.FC<T.Props> & {
 	const contentClassName = classNames(
 		s.content,
 		!!width && s["content--has-width"],
-		variant && s[`content--variant-${variant}`]
+		variant && s[`content--variant-${variant}`],
+		elevation && s[`content--elevation-${elevation}`]
 	);
 
 	return (
