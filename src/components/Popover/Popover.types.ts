@@ -28,6 +28,7 @@ export type Props = Pick<
 > & {
 	children?: React.ReactNode;
 	padding?: number;
+	elevation?: "raised" | "overlay";
 	/** @deprecated use Flyout utility instead, will be removed in v4 */
 	variant?: "elevated" | "headless";
 };

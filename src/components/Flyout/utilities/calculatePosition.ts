@@ -149,7 +149,7 @@ const calculatePosition = (
 	return {
 		position,
 		styles: {
-			width: widthStyle,
+			width: widthStyle ?? width,
 			left: right === null ? 0 : undefined,
 			right: right === null ? undefined : 0,
 			top: bottom === null ? 0 : undefined,

@@ -1,4 +1,7 @@
+import { StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within, waitFor } from "@storybook/test";
 import { Example } from "utilities/storybook";
+import { sleep } from "utilities/helpers";
 import View from "components/View";
 import Popover from "components/Popover";
 import Tooltip from "components/Tooltip";
@@ -31,117 +34,260 @@ const Demo: React.FC<any> = (props) => {
 	);
 };
 
-export const position = () => (
-	<Example>
-		<Example.Item title="position: bottom">
-			<View align="center" justify="center" gap={8} direction="row">
-				<Demo position="bottom-start" />
-				<Demo position="bottom" />
-				<Demo position="bottom-end" />
-			</View>
-		</Example.Item>
-		<Example.Item title="position: top">
-			<View align="center" justify="center" gap={8} direction="row">
-				<Demo position="top-start" />
-				<Demo position="top" />
-				<Demo position="top-end" />
-			</View>
-		</Example.Item>
-		<Example.Item title="position: start">
-			<View align="center" justify="center" gap={8} direction="row">
-				<Demo position="start-top" />
-				<Demo position="start" />
-				<Demo position="start-bottom" />
-			</View>
-		</Example.Item>
-		<Example.Item title="position: end">
-			<View align="center" justify="center" gap={8} direction="row">
-				<Demo position="end-top" />
-				<Demo position="end" />
-				<Demo position="end-bottom" />
-			</View>
-		</Example.Item>
-		<Example.Item title={["position: bottom", "changes to top-start because it doesn't fit"]}>
-			<View align="center">
-				<Demo position="bottom" />
-			</View>
-		</Example.Item>
-	</Example>
-);
+export const position = {
+	name: "position",
+	render: () => (
+		<Example>
+			<Example.Item title="position: bottom">
+				<View align="center" justify="center" gap={8} direction="row">
+					<Demo position="bottom-start" />
+					<Demo position="bottom" />
+					<Demo position="bottom-end" />
+				</View>
+			</Example.Item>
+			<Example.Item title="position: top">
+				<View align="center" justify="center" gap={8} direction="row">
+					<Demo position="top-start" />
+					<Demo position="top" />
+					<Demo position="top-end" />
+				</View>
+			</Example.Item>
+			<Example.Item title="position: start">
+				<View align="center" justify="center" gap={8} direction="row">
+					<Demo position="start-top" />
+					<Demo position="start" />
+					<Demo position="start-bottom" />
+				</View>
+			</Example.Item>
+			<Example.Item title="position: end">
+				<View align="center" justify="center" gap={8} direction="row">
+					<Demo position="end-top" />
+					<Demo position="end" />
+					<Demo position="end-bottom" defaultActive />
+				</View>
+			</Example.Item>
+		</Example>
+	),
+};
 
-export const width = () => (
-	<Example>
-		<Example.Item title="width: 400">
-			<Demo width="400px" />
-		</Example.Item>
-		<Example.Item title="width: 100%">
-			<Demo width="100%" />
-		</Example.Item>
-	</Example>
-);
+export const widthNumber = {
+	name: "width: px",
+	render: () => <Demo width="400px" defaultActive />,
+};
 
-export const variant = () => (
-	<Example>
-		<Example.Item title="variant: headless">
-			<Popover variant="headless">
+export const widthFull = {
+	name: "width: 100%",
+	render: () => <Demo width="100%" defaultActive />,
+};
+
+export const padding = {
+	name: "padding",
+	render: () => (
+		<Example>
+			<Example.Item title="padding: 0">
+				<Demo padding={0} />
+			</Example.Item>
+			<Example.Item title="padding: 6">
+				<Demo padding={6} defaultActive />
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const elevation = {
+	name: "elevation",
+	render: () => (
+		<Example>
+			<Example.Item title="elevation: raised">
+				<Demo elevation="raised" defaultActive />
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const defaultActive: StoryObj<{
+	handleOpen: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "defaultActive, uncontrolled",
+	args: {
+		handleOpen: fn(),
+		handleClose: fn(),
+	},
+	render: (args) => (
+		<Popover onOpen={args.handleOpen} onClose={args.handleClose} defaultActive>
+			<Popover.Trigger>
+				{(attributes) => <Button attributes={attributes}>Open</Button>}
+			</Popover.Trigger>
+			<Popover.Content>Content</Popover.Content>
+		</Popover>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+		let item = canvas.getByText("Content");
+
+		// Wait for the open animation
+		await sleep(500);
+		await userEvent.click(document.body);
+
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
+			expect(item).not.toBeInTheDocument();
+		});
+
+		await userEvent.click(trigger);
+
+		await waitFor(() => {
+			expect(args.handleOpen).toHaveBeenCalledTimes(1);
+			expect(args.handleOpen).toHaveBeenCalledWith();
+		});
+
+		item = canvas.getByText("Content");
+		expect(item).toBeInTheDocument();
+	},
+};
+
+export const active: StoryObj<{
+	handleOpen: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "active, controlled",
+	args: {
+		handleOpen: fn(),
+		handleClose: fn(),
+	},
+	render: (args) => (
+		<Popover onOpen={args.handleOpen} onClose={args.handleClose} active>
+			<Popover.Trigger>
+				{(attributes) => <Button attributes={attributes}>Open</Button>}
+			</Popover.Trigger>
+			<Popover.Content>Content</Popover.Content>
+		</Popover>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const item = canvas.getByText("Content");
+
+		await userEvent.click(document.body);
+
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
+		});
+
+		expect(item).toBeInTheDocument();
+	},
+};
+
+export const activeFalse: StoryObj<{
+	handleOpen: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "active false, controlled",
+	args: {
+		handleOpen: fn(),
+		handleClose: fn(),
+	},
+	render: (args) => (
+		<Popover onOpen={args.handleOpen} onClose={args.handleClose} active={false}>
+			<Popover.Trigger>
+				{(attributes) => <Button attributes={attributes}>Open</Button>}
+			</Popover.Trigger>
+			<Popover.Content>Content</Popover.Content>
+		</Popover>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(trigger);
+
+		await waitFor(() => {
+			expect(args.handleOpen).toHaveBeenCalledTimes(1);
+			expect(args.handleOpen).toHaveBeenCalledWith();
+		});
+
+		const item = canvas.queryByText("Content");
+		expect(item).not.toBeInTheDocument();
+	},
+};
+
+export const dismissible: StoryObj<{
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "dismissible, onClose, className, attributes, closeAriaLabel",
+	args: {
+		handleClose: fn(),
+	},
+	render: (args) => (
+		<Popover onClose={args.handleClose} defaultActive>
+			<Popover.Trigger>
+				{(attributes) => <Button attributes={attributes}>Open</Button>}
+			</Popover.Trigger>
+			<Popover.Content>
+				<Popover.Dismissible
+					closeAriaLabel="Close"
+					attributes={{ "data-testid": "test-id" }}
+					className="test-classname"
+				>
+					Content
+				</Popover.Dismissible>
+			</Popover.Content>
+		</Popover>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await sleep(300);
+
+		const dismissible = canvas.getByTestId("test-id");
+		const closeButton = within(dismissible).getByRole("button");
+
+		expect(dismissible).toHaveClass("test-classname");
+		expect(closeButton).toHaveAccessibleName("Close");
+
+		await userEvent.click(closeButton);
+
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith({});
+		});
+
+		await sleep(300);
+
+		const trigger = canvas.getAllByRole("button")[0];
+		await userEvent.click(trigger);
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Popover active>
 				<Popover.Trigger>
 					{(attributes) => <Button attributes={attributes}>Open</Button>}
 				</Popover.Trigger>
-				<Popover.Content>
-					<View
-						height="100px"
-						width="100px"
-						borderColor="primary"
-						borderRadius="medium"
-						backgroundColor="neutral-faded"
-					/>
+				<Popover.Content className="test-classname" attributes={{ "data-testid": "test-id" }}>
+					Content
 				</Popover.Content>
 			</Popover>
-		</Example.Item>
-	</Example>
-);
+		</div>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const menu = await canvas.findByTestId("test-id");
 
-export const padding = () => (
-	<Example>
-		<Example.Item title="padding: 0">
-			<Demo padding={0} />
-		</Example.Item>
-		<Example.Item title="padding: 6">
-			<Demo padding={6} />
-		</Example.Item>
-	</Example>
-);
-
-export const triggerType = () => (
-	<Example>
-		<Example.Item title="triggerType: hover">
-			<Demo triggerType="hover" />
-		</Example.Item>
-	</Example>
-);
-
-export const dismissible = () => {
-	return (
-		<Example>
-			<Example.Item title="with dismissible">
-				<Popover>
-					<Popover.Trigger>
-						{(attributes) => <Button attributes={attributes}>Open</Button>}
-					</Popover.Trigger>
-					<Popover.Content>
-						<Popover.Dismissible closeAriaLabel="Close" align="center">
-							Popover content
-						</Popover.Dismissible>
-					</Popover.Content>
-				</Popover>
-			</Example.Item>
-		</Example>
-	);
+		expect(menu).toHaveClass("test-classname");
+	},
 };
 
-export const edgeCases = () => (
-	<Example>
-		<Example.Item title="Popover with tooltip">
+export const testWithTooltip = {
+	name: "test: with tooltip",
+	render: () => (
+		<View paddingTop={10}>
 			<Tooltip position="top" text="Hello">
 				{(tooltipAttributes) => (
 					<Popover position="bottom">
@@ -166,6 +312,30 @@ export const edgeCases = () => (
 					</Popover>
 				)}
 			</Tooltip>
-		</Example.Item>
-	</Example>
-);
+		</View>
+	),
+};
+
+export const variant = {
+	name: "variant [deprecated]",
+	render: () => (
+		<Example>
+			<Example.Item title="variant: headless">
+				<Popover variant="headless" defaultActive position="bottom-start">
+					<Popover.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</Popover.Trigger>
+					<Popover.Content>
+						<View
+							height="100px"
+							width="100px"
+							borderColor="primary"
+							borderRadius="medium"
+							backgroundColor="primary-faded"
+						/>
+					</Popover.Content>
+				</Popover>
+			</Example.Item>
+		</Example>
+	),
+};

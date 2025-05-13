@@ -4,6 +4,7 @@
 - Flyout: Moved css to css layers
 - Flyout: Support height animations
 - Exposed classNames and responsivePropDependency
+- Popover: Added elevation prop, updated tests
 
 ## 3.5.3
 
