@@ -2,7 +2,7 @@
 
 import React from "react";
 import { classNames } from "utilities/props";
-import { throttleHandler } from "utilities/helpers";
+import { rafThrottle } from "utilities/helpers";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import Portal from "components/_private/Portal";
 import { findClosestPositionContainer, findClosestScrollableContainer } from "utilities/dom";
@@ -71,7 +71,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		const triggerEl = triggerElRef?.current;
 		const containerEl = closestScrollableContainer;
 
-		const handleScroll = throttleHandler(() => {
+		const handleScroll = rafThrottle(() => {
 			const triggerBounds = triggerEl?.getBoundingClientRect();
 			const containerBounds = containerEl.getBoundingClientRect();
 
@@ -86,7 +86,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 			} else {
 				flyout.updatePosition({ sync: true });
 			}
-		}, 16);
+		});
 
 		closestScrollableContainer.addEventListener("scroll", handleScroll, { passive: true });
 		return () => closestScrollableContainer.removeEventListener("scroll", handleScroll);

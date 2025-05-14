@@ -2,7 +2,6 @@
 
 import React from "react";
 import { classNames } from "utilities/props";
-import { throttle } from "utilities/helpers";
 import useRTL from "hooks/useRTL";
 import {
 	focusNextElement,
@@ -12,6 +11,7 @@ import {
 } from "utilities/a11y";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useHotkeys from "hooks/useHotkeys";
+import useFadeSide from "hooks/_private/useFadeSide";
 import Actionable from "components/Actionable";
 import Icon from "components/Icon";
 import IconChevronRight from "icons/ChevronRight";
@@ -44,7 +44,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		elScrollableRef,
 	} = useTabs();
 	const [rtl] = useRTL();
-	const [fadeSide, setFadeSide] = React.useState<"start" | "end" | "both" | null>(null);
+	const fadeSide = useFadeSide(elScrollableRef);
 	const rootClassNames = classNames(
 		s.root,
 		size && s[`--size-${size}`],
@@ -152,38 +152,6 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		if (!selectionStyle) return;
 		setSelection({ ...selectionStyle, status: "animated" });
 	}, [selection]);
-
-	useIsomorphicLayoutEffect(() => {
-		const elScrollable = elScrollableRef.current;
-		if (!elScrollable || direction === "column") return;
-
-		const updateArrowNav = () => {
-			const isScrollable = elScrollable.clientWidth < elScrollable.scrollWidth;
-			if (!isScrollable) setFadeSide(null);
-
-			// scrollLeft in RTL starts from 1 instead of 0, so we compare values using this delta
-			const scrollLeft = elScrollable.scrollLeft * (rtl ? -1 : 1);
-			const cutOffStart = scrollLeft > 1;
-			const cutOffEnd = scrollLeft + elScrollable.clientWidth < elScrollable.scrollWidth - 1;
-
-			if (cutOffEnd && cutOffStart) return setFadeSide("both");
-			if (cutOffStart) return setFadeSide("start");
-			if (cutOffEnd) return setFadeSide("end");
-		};
-		const debouncedUpdateArrowNav = throttle(updateArrowNav, 16);
-
-		// Use RaF when scroll to have scrollWidth calculated correctly on the first effect
-		// For example: And edge case inside the complex flexbox layout
-		requestAnimationFrame(() => {
-			updateArrowNav();
-		});
-		window.addEventListener("resize", debouncedUpdateArrowNav);
-		elScrollable.addEventListener("scroll", debouncedUpdateArrowNav);
-		return () => {
-			window.removeEventListener("resize", debouncedUpdateArrowNav);
-			elScrollable.removeEventListener("scroll", debouncedUpdateArrowNav);
-		};
-	}, [rtl]);
 
 	return (
 		<div {...attributes} className={rootClassNames}>

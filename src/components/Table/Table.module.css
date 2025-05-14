@@ -1,14 +1,26 @@
+@property --rs-table-fade-start {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+
+@property --rs-table-fade-end {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+
 .root {
 	overflow: auto;
-	margin: 0 calc(var(--rs-unit-x4) * -1);
-	padding: 0 var(--rs-unit-x4);
 	mask-image: linear-gradient(
 		to right,
 		rgba(0, 0, 0, 0%) 0,
-		rgba(0, 0, 0, 100%) var(--rs-unit-x4),
-		rgba(0, 0, 0, 100%) calc(100% - var(--rs-unit-x4)),
+		rgba(0, 0, 0, 100%) var(--rs-table-fade-start),
+		rgba(0, 0, 0, 100%) calc(100% - var(--rs-table-fade-end)),
 		rgba(0, 0, 0, 0%) 100%
 	);
+	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+	transition-property: --rs-table-fade-start, --rs-table-fade-end;
 }
 
 .table {
@@ -83,4 +95,14 @@
 	&:not(:last-child) {
 		padding-inline-end: calc(var(--rs-unit-x1) * var(--rs-table-p-horizontal-s));
 	}
+}
+
+.--fade-start,
+[dir="rtl"] .--fade-end {
+	--rs-table-fade-start: var(--rs-unit-x4);
+}
+
+.--fade-end,
+[dir="rtl"] .--fade-start {
+	--rs-table-fade-end: var(--rs-unit-x4);
 }

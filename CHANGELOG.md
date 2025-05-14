@@ -5,6 +5,8 @@
 - Flyout: Support height animations
 - Exposed classNames and responsivePropDependency
 - Popover: Added elevation prop, updated tests
+- ScrollArea: Fixed resize observer
+- Table: Fixed scrolling inside ScrollArea
 
 ## 3.5.3
 

@@ -110,7 +110,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
 	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
 	const scrollableRef = React.useRef<HTMLDivElement>(null);
-	const contentRef = React.useRef<HTMLDivElement>(null);
+	const rootRef = React.useRef<HTMLDivElement>(null);
 	const heightStyles = getHeightStyles(height);
 	const maxHeightStyles = getMaxHeightStyles(maxHeight);
 	const rootClassNames = classNames(
@@ -178,24 +178,25 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	}, [updateScroll]);
 
 	useIsomorphicLayoutEffect(() => {
-		const contentEl = contentRef.current;
-		if (!contentEl) return;
+		const rootEl = rootRef.current;
+		if (!rootEl) return;
 
 		const observer = new ResizeObserver(updateScroll);
 
-		observer.observe(contentEl);
+		observer.observe(rootEl);
 		return () => observer.disconnect();
 	}, [updateScroll]);
 
 	return (
-		<div {...attributes} className={rootClassNames} style={{ ...heightStyles?.variables }}>
+		<div
+			{...attributes}
+			ref={rootRef}
+			className={rootClassNames}
+			style={{ ...heightStyles?.variables }}
+		>
 			{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
 			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll} tabIndex={0}>
-				<div
-					className={contentClassNames}
-					ref={contentRef}
-					style={{ ...maxHeightStyles?.variables }}
-				>
+				<div className={contentClassNames} style={{ ...maxHeightStyles?.variables }}>
 					{children}
 				</div>
 			</div>

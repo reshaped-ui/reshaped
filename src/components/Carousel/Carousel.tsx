@@ -2,7 +2,7 @@
 
 import React from "react";
 import { classNames, responsiveVariables, responsiveClassNames } from "utilities/props";
-import { throttleHandler } from "utilities/helpers";
+import { rafThrottle } from "utilities/helpers";
 import View from "components/View";
 import useRTL from "hooks/useRTL";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
@@ -52,7 +52,7 @@ const Carousel: React.FC<T.Props> = (props) => {
 		// };
 	};
 
-	const handleScroll = throttleHandler((event: React.UIEvent<HTMLUListElement>) => {
+	const handleScroll = rafThrottle((event: React.UIEvent<HTMLUListElement>) => {
 		const el = event.target as Element;
 		const firstVisibleIndex = getFirstVisibleIndex();
 
@@ -61,7 +61,7 @@ const Carousel: React.FC<T.Props> = (props) => {
 
 		if (currentIndexRef.current !== firstVisibleIndex) onChange?.({ index: firstVisibleIndex });
 		currentIndexRef.current = firstVisibleIndex;
-	}, 16);
+	});
 
 	const getItemsGap = () => {
 		const style = getComputedStyle(scrollElRef.current!);
