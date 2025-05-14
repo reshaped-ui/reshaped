@@ -7,58 +7,19 @@ export const range = (start: number, end: number) => {
 	return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 };
 
-// from https://gist.github.com/ca0v/73a31f57b397606c9813472f7493a940
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export const debounce = <T extends Function>(cb: T, wait = 20) => {
-	let timer: ReturnType<typeof setTimeout>;
-	const callable = (...args: unknown[]) => {
-		clearTimeout(timer);
-		timer = setTimeout(() => cb(...args), wait);
-	};
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return <T>(<any>callable);
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const rafThrottle = <T extends (...args: any[]) => void>(fn: T): T => {
+	let rafId: number | null = null;
+	let args: Parameters<T> | null = null;
 
-export function debounceHandler<T extends React.SyntheticEvent | Event>(
-	handler: (event: T) => void,
-	timeout: number
-): (event: T) => void {
-	const debounced = debounce(handler, timeout);
+	return function (...newArgs: Parameters<T>) {
+		args = newArgs;
 
-	return (event) => {
-		if ("persist" in event) event.persist();
-		return debounced(event);
-	};
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export const throttle = <T extends Function>(cb: T, wait: number) => {
-	let waiting = false;
-
-	return (...args: unknown[]) => {
-		if (!waiting) {
-			cb(...args);
-			waiting = true;
-			setTimeout(() => {
-				waiting = false;
-
-				setTimeout(() => {
-					if (waiting) return;
-					cb(...args);
-				}, wait);
-			}, wait);
+		if (rafId === null) {
+			rafId = requestAnimationFrame(() => {
+				rafId = null;
+				fn(...args!);
+			});
 		}
-	};
+	} as T;
 };
-
-export function throttleHandler<T extends React.SyntheticEvent | Event>(
-	handler: (event: T) => void,
-	timeout: number
-): (event: T) => void {
-	const throttled = throttle(handler, timeout);
-
-	return (event) => {
-		if ("persist" in event) event.persist();
-		return throttled(event);
-	};
-}

@@ -4,6 +4,7 @@ import getWidthStyles from "styles/width";
 import getMinWidthStyles from "styles/minWidth";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
+import useFadeSide from "hooks/_private/useFadeSide";
 
 const TableCellPrivate: React.FC<T.PrivateCellProps> = (props) => {
 	const {
@@ -105,16 +106,20 @@ const Table: React.FC<T.Props> & {
 	Head: typeof TableHead;
 } = (props) => {
 	const { children, border, columnBorder, className, attributes } = props;
+	const rootRef = React.useRef<HTMLDivElement>(null);
+	const fadeSide = useFadeSide(rootRef);
 	const rootClassNames = classNames(
 		s.root,
 		className,
 		border && s["--border-outer"],
-		columnBorder && s["--border-column"]
+		columnBorder && s["--border-column"],
+		(fadeSide === "start" || fadeSide === "both") && s["--fade-start"],
+		(fadeSide === "end" || fadeSide === "both") && s["--fade-end"]
 	);
 	const [firstChild] = React.Children.toArray(children);
 
 	return (
-		<div {...attributes} className={rootClassNames}>
+		<div {...attributes} className={rootClassNames} ref={rootRef}>
 			<table className={s.table}>
 				{React.isValidElement(firstChild) &&
 				(firstChild.type === TableBody || firstChild.type === TableHead) ? (
