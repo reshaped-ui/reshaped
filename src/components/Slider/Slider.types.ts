@@ -5,6 +5,8 @@ export type SingleChangeArgs = {
 	minValue?: never;
 	maxValue?: never;
 	name: string;
+	minName?: never;
+	maxName?: never;
 };
 
 export type RangeChangeArgs = {
@@ -12,17 +14,44 @@ export type RangeChangeArgs = {
 	minValue: number;
 	maxValue: number;
 	name: string;
+	minName?: never;
+	maxName?: never;
+};
+
+export type NameRangeChangeArgs = {
+	value?: never;
+	minValue: number;
+	maxValue: number;
+	name?: never;
+	minName: string;
+	maxName: string;
+};
+
+type SingleSelectionProps = {
+	range?: false;
+	name: string;
+	minName?: never;
+	maxName?: never;
+	onChange?: (args: SingleChangeArgs) => void;
+	onChangeCommit?: (args: SingleChangeArgs) => void;
 };
 
 type RangeSelectionProps = {
 	range: true;
+	name: string;
+	minName?: never;
+	maxName?: never;
 	onChange?: (args: RangeChangeArgs) => void;
 	onChangeCommit?: (args: RangeChangeArgs) => void;
 };
-type SingleSelectionProps = {
-	range?: false;
-	onChange?: (args: SingleChangeArgs) => void;
-	onChangeCommit?: (args: SingleChangeArgs) => void;
+
+type NameRangeSelectionProps = {
+	range: true;
+	name?: never;
+	minName: string;
+	maxName: string;
+	onChange?: (args: RangeChangeArgs) => void;
+	onChangeCommit?: (args: RangeChangeArgs) => void;
 };
 
 type ControlledSingleProps = { value: number; defaultValue?: never };
@@ -42,7 +71,6 @@ type UncontrolledRangeProps = {
 };
 
 type BaseProps = {
-	name: string;
 	step?: number;
 	disabled?: boolean;
 	min?: number;
@@ -54,11 +82,14 @@ type BaseProps = {
 };
 
 export type ControlledProps = BaseProps &
-	((ControlledSingleProps & SingleSelectionProps) | (ControlledRangeProps & RangeSelectionProps));
+	(
+		| (ControlledSingleProps & SingleSelectionProps)
+		| (ControlledRangeProps & (RangeSelectionProps | NameRangeSelectionProps))
+	);
 export type UncontrolledProps = BaseProps &
 	(
 		| (UncontrolledSingleProps & SingleSelectionProps)
-		| (UncontrolledRangeProps & RangeSelectionProps)
+		| (UncontrolledRangeProps & (RangeSelectionProps | NameRangeSelectionProps))
 	);
 
 export type Props = ControlledProps | UncontrolledProps;

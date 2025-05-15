@@ -4,6 +4,9 @@ import React from "react";
 import SliderControlled from "./SliderControlled";
 import type * as T from "./Slider.types";
 
+const normalizeValue = (value: number, min: number, max: number) =>
+	Math.min(Math.max(value, min), max);
+
 const SliderUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (props) => {
 	const { min, max, onChange, range } = props;
 	const defaultMinValue =
@@ -14,8 +17,8 @@ const SliderUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (prop
 		("defaultMaxValue" in props && props.defaultMaxValue !== undefined && props.defaultMaxValue) ||
 		("defaultValue" in props && props.defaultValue !== undefined && props.defaultValue) ||
 		(range ? max : min);
-	const [minValue, setMinValue] = React.useState(defaultMinValue);
-	const [maxValue, setMaxValue] = React.useState(defaultMaxValue);
+	const [minValue, setMinValue] = React.useState(normalizeValue(defaultMinValue, min, max));
+	const [maxValue, setMaxValue] = React.useState(normalizeValue(defaultMaxValue, min, max));
 
 	const handleSingleChange = (args: T.SingleChangeArgs) => {
 		if (range) return;

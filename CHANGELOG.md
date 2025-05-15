@@ -7,6 +7,9 @@
 - Popover: Added elevation prop, updated tests
 - ScrollArea: Fixed resize observer
 - Table: Fixed scrolling inside ScrollArea
+- Slider: Fixed start boundary tooltip position adjustment
+- Slider: minName, maxName
+- Slider: updated tests
 
 ## 3.5.3
 
