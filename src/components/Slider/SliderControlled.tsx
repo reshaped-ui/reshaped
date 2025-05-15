@@ -35,6 +35,8 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const minValue =
 		range && props.minValue !== undefined ? applyStepToValue(props.minValue, step) : undefined;
 	const maxValue = applyStepToValue(range ? props.maxValue : props.value, step);
+	const minName = props.minName ?? props.name;
+	const maxName = props.maxName ?? props.name;
 	const barRef = React.useRef<HTMLDivElement>(null);
 	const minRef = React.useRef<HTMLDivElement>(null);
 	const maxRef = React.useRef<HTMLDivElement>(null);
@@ -103,7 +105,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			const tooltipRightSide = thumbRect && draggingRect && thumbRect.left + draggingRect.width / 2;
 
 			// Crosses the left slider boundary
-			if (tooltipLeftSide && barLeftSide && tooltipLeftSide < barLeftSide - 8) {
+			if (tooltipLeftSide && barLeftSide && tooltipLeftSide < barLeftSide) {
 				nextTooltipOffset = draggingRect.width / 2 - 8;
 			}
 
@@ -129,9 +131,9 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			// Manually controlled resolving of single/range handlers
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			method?.({ minValue: value, maxValue, name });
+			method?.({ minValue: value, maxValue, name, minName, maxName });
 		},
-		[maxValue, name, range, onChangeCommitRef, onChangeRef]
+		[maxValue, name, minName, maxName, range, onChangeCommitRef, onChangeRef]
 	);
 
 	const handleMaxChange: T.ThumbProps["onChange"] = React.useCallback(
@@ -142,7 +144,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				// Manually controlled resolving of single/range handlers
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
-				method?.({ minValue: minValue!, maxValue: value, name });
+				method?.({ minValue: minValue!, maxValue: value, name, minName, maxName });
 				return;
 			}
 
@@ -153,7 +155,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			// @ts-ignore
 			method?.({ value, name });
 		},
-		[minValue, name, range, onChangeRef, onChangeCommitRef]
+		[minValue, name, minName, maxName, range, onChangeRef, onChangeCommitRef]
 	);
 
 	const handleMouseDown = ({ nativeEvent }: React.MouseEvent | React.TouchEvent) => {
@@ -297,7 +299,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 					<SliderThumb
 						id={minId}
 						active={minId === draggingId}
-						name={name}
+						name={minName}
 						disabled={disabled}
 						onChange={handleMinChange}
 						value={minValue}
@@ -316,7 +318,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				<SliderThumb
 					id={maxId}
 					active={maxId === draggingId}
-					name={name}
+					name={maxName}
 					disabled={disabled}
 					onChange={handleMaxChange}
 					value={maxValue}

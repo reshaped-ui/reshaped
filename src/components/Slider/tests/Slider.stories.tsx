@@ -1,3 +1,5 @@
+import { StoryObj } from "@storybook/react";
+import { expect, fireEvent, fn, Mock } from "@storybook/test";
 import { Example } from "utilities/storybook";
 import Slider from "components/Slider";
 import View from "components/View";
@@ -15,86 +17,345 @@ export default {
 	},
 };
 
-export const base = () => (
-	<Example>
-		<Example.Item title="range">
-			<Slider range name="slider" defaultMinValue={30} defaultMaxValue={100} />
-		</Example.Item>
-		<div style={{ height: 2000 }} />
-	</Example>
-);
-
-export const direction = () => (
-	<Example>
-		<Example.Item title="vertical">
-			<View height="200px">
+export const base: StoryObj = {
+	name: "name, minName, maxName, range",
+	render: () => (
+		<Example>
+			<Example.Item title="single, name">
+				<Slider name="slider-single" defaultValue={30} />
+			</Example.Item>
+			<Example.Item title="range, name">
+				<Slider range name="slider-range" defaultMinValue={30} defaultMaxValue={85} />
+			</Example.Item>
+			<Example.Item title="range, minName, maxName">
 				<Slider
 					range
-					name="slider"
+					minName="slider-min"
+					maxName="slider-max"
 					defaultMinValue={30}
-					defaultMaxValue={100}
-					orientation="vertical"
+					defaultMaxValue={85}
 				/>
-			</View>
+			</Example.Item>
+			<div style={{ height: 2000 }} />
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const inputs = canvas.getAllByRole("slider");
+
+		expect(inputs[0]).toHaveAttribute("name", "slider-single");
+
+		expect(inputs[1]).toHaveAttribute("name", "slider-range");
+		expect(inputs[2]).toHaveAttribute("name", "slider-range");
+
+		expect(inputs[3]).toHaveAttribute("name", "slider-min");
+		expect(inputs[4]).toHaveAttribute("name", "slider-max");
+	},
+};
+
+export const orientation = {
+	name: "orientation",
+	render: () => (
+		<Example>
+			<Example.Item title="orientation: vertical">
+				<View height="200px">
+					<Slider
+						range
+						name="slider"
+						defaultMinValue={30}
+						defaultMaxValue={85}
+						orientation="vertical"
+					/>
+				</View>
+			</Example.Item>
 			<View height="2000px" />
-		</Example.Item>
-	</Example>
-);
+		</Example>
+	),
+};
 
-export const step = () => (
-	<Example>
-		<Example.Item title="float step">
-			<Slider name="slider" defaultValue={30} step={0.01} />
-		</Example.Item>
-	</Example>
-);
+export const minMax: StoryObj = {
+	name: "min, max",
+	render: () => (
+		<Example>
+			<Example.Item title="min, max">
+				<Slider name="name" min={50} max={70} defaultValue={60} />
+			</Example.Item>
+			<Example.Item title="min, max, value < min">
+				<Slider name="name" min={50} max={70} defaultValue={30} />
+			</Example.Item>
+			<Example.Item title="min, max, value > max">
+				<Slider name="name" min={50} max={70} defaultValue={80} />
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas }) => {
+		const inputs = canvas.getAllByRole("slider");
 
-export const boundaries = () => (
-	<Example>
-		<Example.Item title="min: 20, max: 30, value: 25">
-			<Slider name="slider" defaultValue={25} min={20} max={30} />
-		</Example.Item>
-		<Example.Item title="step: 10, value: 4, renders as 0">
-			<Slider name="slider" defaultValue={4} step={10} />
-		</Example.Item>
-	</Example>
-);
+		expect(inputs[0]).toHaveAttribute("min", "50");
+		expect(inputs[0]).toHaveAttribute("max", "70");
+		expect(inputs[0]).toHaveValue("60");
 
-export const status = () => (
-	<Example>
-		<Example.Item title="disabled">
-			<Slider name="slider" defaultValue={30} disabled />
-		</Example.Item>
-		<Example.Item title="step">
-			<Slider range name="slider" defaultMinValue={30} defaultMaxValue={70} disabled />
-		</Example.Item>
-	</Example>
-);
+		fireEvent.change(inputs[0], { target: { value: 30 } });
+		expect(inputs[0]).toHaveValue("50");
 
-export const customRender = () => (
-	<Example>
-		<Example.Item title="custom render">
-			<FormControl>
-				<FormControl.Label>Slider value</FormControl.Label>
-				<Slider name="slider" defaultValue={30} renderValue={(args) => `$${args.value}`} />
-			</FormControl>
-		</Example.Item>
+		fireEvent.change(inputs[0], { target: { value: 80 } });
+		expect(inputs[0]).toHaveValue("70");
 
-		<Example.Item title="no tooltip">
-			<FormControl>
-				<FormControl.Label>Slider value</FormControl.Label>
-				<Slider name="slider" defaultValue={30} renderValue={false} />
-			</FormControl>
-		</Example.Item>
-	</Example>
-);
+		expect(inputs[1]).toHaveValue("50");
+		expect(inputs[2]).toHaveValue("70");
+	},
+};
 
-export const testModal = () => {
-	const toggle = useToggle(true);
+export const step: StoryObj = {
+	name: "step",
+	render: () => (
+		<Example>
+			<Example.Item title="step: 5">
+				<Slider name="slider" defaultValue={30} step={5} />
+			</Example.Item>
 
-	return (
-		<Modal active={toggle.active} onClose={toggle.deactivate} position="end">
-			<Slider name="slider" defaultValue={30} renderValue={false} />
-		</Modal>
-	);
+			<Example.Item title="step: 5, defaultValue: 31, rounded down to 30">
+				<Slider name="slider" defaultValue={31} step={5} />
+			</Example.Item>
+
+			<Example.Item title="step: 0.01, float">
+				<Slider name="slider" defaultValue={30} step={0.01} />
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const inputs = canvas.getAllByRole("slider");
+
+		expect(inputs[0]).toHaveValue("30");
+
+		fireEvent.change(inputs[0], { target: { value: 31 } });
+		expect(inputs[0]).toHaveValue("30");
+
+		fireEvent.change(inputs[0], { target: { value: 34 } });
+		expect(inputs[0]).toHaveValue("35");
+
+		expect(inputs[1]).toHaveValue("30");
+	},
+};
+
+export const disabled: StoryObj = {
+	name: "disabled",
+	render: () => (
+		<Example>
+			<Example.Item title="disabled">
+				<Slider name="slider" defaultValue={30} disabled />
+			</Example.Item>
+
+			<Example.Item title="disabled, range">
+				<Slider name="slider" range defaultMinValue={30} defaultMaxValue={80} disabled />
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas }) => {
+		const inputs = canvas.getAllByRole("slider");
+
+		expect(inputs[0]).toBeDisabled();
+		expect(inputs[1]).toBeDisabled();
+	},
+};
+
+export const renderValue: StoryObj = {
+	name: "renderValue",
+	render: () => (
+		<Example>
+			<Example.Item title="renderValue: $">
+				<Slider name="name" defaultValue={50} renderValue={(args) => `$${args.value}`} />
+			</Example.Item>
+			<Example.Item title="renderValue: false">
+				<Slider name="name" defaultValue={50} renderValue={false} />
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas }) => {
+		const tooltip = canvas.getByText("$50");
+		const hiddenTooltip = canvas.queryByText("50");
+
+		expect(tooltip).toBeInTheDocument();
+		expect(hiddenTooltip).not.toBeInTheDocument();
+	},
+};
+
+export const defaultValue: StoryObj<{
+	handleChange: Mock;
+	handleChangeCommit: Mock;
+}> = {
+	name: "defaultValue, onChange, onChangeCommit",
+	args: {
+		handleChange: fn(),
+		handleChangeCommit: fn(),
+	},
+	render: (args) => (
+		<View paddingTop={10}>
+			<Slider
+				name="test-name"
+				defaultValue={50}
+				onChange={args.handleChange}
+				onChangeCommit={args.handleChangeCommit}
+			/>
+		</View>
+	),
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("slider");
+
+		expect(input).toHaveValue("50");
+
+		fireEvent.change(input, { target: { value: 51 } });
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({ value: 51, name: "test-name" });
+		expect(input).toHaveValue("51");
+	},
+};
+
+export const value: StoryObj<{
+	handleChange: Mock;
+	handleChangeCommit: Mock;
+}> = {
+	name: "value, onChange, onChangeCommit",
+	args: {
+		handleChange: fn(),
+		handleChangeCommit: fn(),
+	},
+	render: (args) => (
+		<View paddingTop={10}>
+			<Slider
+				name="test-name"
+				value={50}
+				onChange={args.handleChange}
+				onChangeCommit={args.handleChangeCommit}
+			/>
+		</View>
+	),
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("slider");
+
+		expect(input).toHaveValue("50");
+
+		fireEvent.change(input, { target: { value: 51 } });
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({ value: 51, name: "test-name" });
+		expect(input).toHaveValue("50");
+	},
+};
+
+export const rangeDefaultValue: StoryObj<{
+	handleChange: Mock;
+	handleChangeCommit: Mock;
+}> = {
+	name: "range, defaultValue, onChange, onChangeCommit",
+	args: {
+		handleChange: fn(),
+		handleChangeCommit: fn(),
+	},
+	render: (args) => (
+		<View paddingTop={10}>
+			<Slider
+				range
+				name="test-name"
+				defaultMinValue={50}
+				defaultMaxValue={70}
+				onChange={args.handleChange}
+				onChangeCommit={args.handleChangeCommit}
+			/>
+		</View>
+	),
+	play: async ({ canvas, args }) => {
+		const [minInput, maxInput] = canvas.getAllByRole("slider");
+
+		expect(minInput).toHaveValue("50");
+		expect(maxInput).toHaveValue("70");
+
+		fireEvent.change(minInput, { target: { value: 51 } });
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			minValue: 51,
+			maxValue: 70,
+			name: "test-name",
+			minName: "test-name",
+			maxName: "test-name",
+		});
+
+		expect(minInput).toHaveValue("51");
+		expect(maxInput).toHaveValue("70");
+	},
+};
+
+export const rangeValue: StoryObj<{
+	handleChange: Mock;
+	handleChangeCommit: Mock;
+}> = {
+	name: "range, value, onChange, onChangeCommit, minName, maxName",
+	args: {
+		handleChange: fn(),
+		handleChangeCommit: fn(),
+	},
+	render: (args) => (
+		<View paddingTop={10}>
+			<Slider
+				range
+				minName="test-name-min"
+				maxName="test-name-max"
+				minValue={50}
+				maxValue={70}
+				onChange={args.handleChange}
+				onChangeCommit={args.handleChangeCommit}
+			/>
+		</View>
+	),
+	play: async ({ canvas, args }) => {
+		const [minInput, maxInput] = canvas.getAllByRole("slider");
+
+		expect(minInput).toHaveValue("50");
+		expect(maxInput).toHaveValue("70");
+
+		fireEvent.change(minInput, { target: { value: 51 } });
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			minValue: 51,
+			maxValue: 70,
+			minName: "test-name-min",
+			maxName: "test-name-max",
+		});
+
+		expect(minInput).toHaveValue("50");
+		expect(maxInput).toHaveValue("70");
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Slider name="name" className="test-classname" attributes={{ id: "test-id" }} />
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+	},
+};
+
+export const testSwipe = {
+	name: "test: prevents parent swipe",
+	render: () => {
+		const toggle = useToggle(true);
+
+		return (
+			<Modal active={toggle.active} onClose={toggle.deactivate} position="end">
+				<View gap={4}>
+					<Modal.Title>Modal</Modal.Title>
+					<Slider name="slider" defaultValue={30} />
+				</View>
+			</Modal>
+		);
+	},
 };
