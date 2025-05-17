@@ -16,6 +16,7 @@
 	position: relative;
 	overflow: auto;
 	scrollbar-width: none;
+	outline: none;
 	-webkit-overflow-scrolling: touch;
 
 	&::-webkit-scrollbar {
