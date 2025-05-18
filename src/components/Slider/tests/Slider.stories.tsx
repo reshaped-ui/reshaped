@@ -1,3 +1,4 @@
+import React from "react";
 import { StoryObj } from "@storybook/react";
 import { expect, fireEvent, fn, Mock } from "@storybook/test";
 import { Example } from "utilities/storybook";
@@ -340,6 +341,60 @@ export const className: StoryObj = {
 
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");
+	},
+};
+
+export const testForm: StoryObj<{ handleFormChange: Mock; handleFormInit: Mock }> = {
+	name: "test: form onChange",
+	args: {
+		handleFormChange: fn(),
+		handleFormInit: fn(),
+	},
+	render: (args) => {
+		const formRef = React.useRef<HTMLFormElement>(null);
+		const [data, setData] = React.useState<[string, FormDataEntryValue][]>([]);
+
+		const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
+			const formData = new FormData(e.currentTarget);
+			const nextState = [...formData.entries()];
+
+			args.handleFormChange({ formData: nextState });
+			setData(nextState);
+		};
+
+		React.useEffect(() => {
+			const formData = new FormData(formRef.current!);
+			const nextState = [...formData.entries()];
+
+			args.handleFormInit({ formData: nextState });
+			setData(nextState);
+		}, []);
+
+		return (
+			<View paddingTop={10} gap={4}>
+				<form onChange={handleChange} ref={formRef}>
+					<Slider
+						range
+						minName="slider-min"
+						maxName="slider-max"
+						defaultMinValue={30}
+						defaultMaxValue={50}
+					/>
+				</form>
+
+				{data.map((v) => v.join(": ")).join(", ")}
+			</View>
+		);
+	},
+	play: async () => {
+		/**
+		 * Placeholder
+		 *
+		 * No way to test dragging here without calling fireEvent.change
+		 * Which defeats the purpose of testing custom emitted events
+		 *
+		 * Test this behavior manually in Storybook by dragging the thumbs
+		 */
 	},
 };
 

@@ -22,6 +22,7 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 		onDragStart,
 		renderValue,
 		tooltipRef,
+		inputRef,
 		orientation,
 	} = props;
 	const id = React.useId();
@@ -30,7 +31,7 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 	const tooltipValue = renderValue ? renderValue({ value }) : value.toFixed(precision);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		onChange(+e.target.value);
+		onChange(+e.target.value, { native: true });
 	};
 
 	return (
@@ -47,6 +48,7 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 				step={step}
 				aria-labelledby={id}
 				aria-orientation={orientation}
+				ref={inputRef}
 			/>
 			<div
 				ref={ref}
