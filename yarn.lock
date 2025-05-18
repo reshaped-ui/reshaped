@@ -9134,10 +9134,10 @@ vite@6.3.5:
   optionalDependencies:
     fsevents "~2.3.3"
 
-vitest-browser-react@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/vitest-browser-react/-/vitest-browser-react-0.1.1.tgz#5e05d0e6ba8c9a362894074700dfc322bfd2b101"
-  integrity sha512-n9l+sIAexKqqfBuEkjVGdfZ4xAn1Gn/+wc4Mo8KsUSUOVoM9evSY0rVXdMIzCQqloT/zvmFGAtziFINkqu+t7g==
+vitest-browser-react@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vitest-browser-react/-/vitest-browser-react-0.2.0.tgz#92d9d229bdbd8cb60cd3e81c2c585f5136e9b0ec"
+  integrity sha512-tVUVngdcTMFPSywxEo42hAAO074VjEF7Q1QkV8wqjI9oiYuguUfqp6Uw4mTbZ+DLFSITHXiked+PYQFH69XkLQ==
 
 vitest@3.1.3:
   version "3.1.3"
