@@ -76,7 +76,7 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 const useFlyout: UseFlyout = (args) => {
 	const { triggerElRef, flyoutElRef, triggerBounds, contentGap, contentShift, ...options } = args;
 	const { position: defaultPosition = "bottom", fallbackPositions, width, container } = options;
-	const lastUsedFallbackRef = React.useRef(defaultPosition);
+	const lastUsedPositionRef = React.useRef(defaultPosition);
 	// Memo the array internally to avoid new arrays triggering useCallback
 	const cachedFallbackPositions = React.useMemo(
 		() => fallbackPositions,
@@ -106,23 +106,24 @@ const useFlyout: UseFlyout = (args) => {
 		dispatch({ type: "remove" });
 	}, []);
 
-	const handleFallback = React.useCallback((position: T.Position) => {
-		lastUsedFallbackRef.current = position;
+	const handlePosition = React.useCallback((position: T.Position) => {
+		lastUsedPositionRef.current = position;
 	}, []);
 
 	const updatePosition = React.useCallback(
-		(options?: { sync?: boolean }) => {
+		(options?: { sync?: boolean; fallback?: boolean }) => {
 			if (!flyoutElRef.current) return;
 
+			const changePositon = options?.fallback !== false;
 			const nextFlyoutData = flyout({
 				triggerEl: triggerElRef.current,
 				flyoutEl: flyoutElRef.current,
 				triggerBounds,
 				width,
-				position: defaultPosition,
-				fallbackPositions: cachedFallbackPositions,
-				lastUsedFallback: lastUsedFallbackRef.current,
-				onFallback: handleFallback,
+				position: changePositon ? defaultPosition : lastUsedPositionRef.current,
+				fallbackPositions: changePositon ? cachedFallbackPositions : [],
+				lastUsedPosition: lastUsedPositionRef.current,
+				onPositionChoose: handlePosition,
 				rtl: isRTL,
 				container,
 				contentGap,
@@ -130,7 +131,10 @@ const useFlyout: UseFlyout = (args) => {
 			});
 
 			if (nextFlyoutData) {
-				dispatch({ type: "position", payload: { ...nextFlyoutData, sync: options?.sync } });
+				dispatch({
+					type: "position",
+					payload: { ...nextFlyoutData, sync: options?.sync },
+				});
 			}
 		},
 		[
@@ -144,7 +148,7 @@ const useFlyout: UseFlyout = (args) => {
 			width,
 			contentGap,
 			contentShift,
-			handleFallback,
+			handlePosition,
 		]
 	);
 

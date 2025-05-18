@@ -26,8 +26,8 @@ const flyout = (
 		fallbackPositions,
 		width,
 		container: passedContainer,
-		lastUsedFallback,
-		onFallback,
+		lastUsedPosition,
+		onPositionChoose,
 		rtl,
 	} = args;
 	const targetClone = flyoutEl.cloneNode(true) as HTMLElement;
@@ -97,10 +97,10 @@ const flyout = (
 		});
 		const validPosition = visible || fallbackPositions?.length === 0;
 
-		// Saving first try in case non of the options work
-		if (validPosition || lastUsedFallback === currentPosition) {
+		// Saving first try in case none of the options work
+		if (validPosition || lastUsedPosition === currentPosition) {
 			calculated = tested;
-			onFallback(currentPosition);
+			onPositionChoose(currentPosition);
 		}
 
 		return validPosition;

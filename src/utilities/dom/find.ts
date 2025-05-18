@@ -31,7 +31,7 @@ export const findClosestPositionContainer = (args: {
 };
 
 export const findClosestScrollableContainer = (args: {
-	el: HTMLElement | null;
+	el: HTMLElement;
 	iteration?: number;
 	overflowOnly?: boolean;
 }): HTMLElement => {
@@ -40,7 +40,7 @@ export const findClosestScrollableContainer = (args: {
 	const overflowY = style?.overflowY;
 	const isScrollable = overflowY?.includes("scroll") || overflowY?.includes("auto");
 
-	if (el === document.body || !el) return document.body;
+	if (!el.parentElement) return el;
 	if (isScrollable && el.scrollHeight > el.clientHeight) return el;
 	return findClosestScrollableContainer({ el: el.parentElement, iteration: iteration + 1 });
 };
