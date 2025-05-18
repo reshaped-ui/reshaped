@@ -102,7 +102,7 @@ export type ThumbProps = {
 	value: number;
 	active?: boolean;
 	position: number;
-	onChange: (value: number, options?: { commit?: boolean }) => void;
+	onChange: (value: number, options?: { commit?: boolean; native?: boolean }) => void;
 	onDragStart: (e: React.TouchEvent | React.MouseEvent) => void;
 	max: number;
 	min: number;
@@ -110,4 +110,5 @@ export type ThumbProps = {
 	orientation: NonNullable<BaseProps["orientation"]>;
 	renderValue?: BaseProps["renderValue"];
 	tooltipRef: React.RefObject<HTMLDivElement | null>;
+	inputRef: React.RefObject<HTMLInputElement | null>;
 };

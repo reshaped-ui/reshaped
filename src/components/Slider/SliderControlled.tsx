@@ -2,7 +2,7 @@
 
 import React from "react";
 import { classNames } from "utilities/props";
-import { enableUserSelect, disableUserSelect } from "utilities/dom";
+import { enableUserSelect, disableUserSelect, triggerChangeEvent } from "utilities/dom";
 import { disableScroll, enableScroll } from "utilities/scroll";
 import useRTL from "hooks/useRTL";
 import useElementId from "hooks/useElementId";
@@ -42,6 +42,8 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const maxRef = React.useRef<HTMLDivElement>(null);
 	const minTooltipRef = React.useRef<HTMLDivElement>(null);
 	const maxTooltipRef = React.useRef<HTMLDivElement>(null);
+	const minInputRef = React.useRef<HTMLInputElement>(null);
+	const maxInputRef = React.useRef<HTMLInputElement>(null);
 	const [draggingId, setDraggingId] = React.useState<string | null>(null);
 	const [rtl] = useRTL();
 	const formControl = useFormControl();
@@ -123,37 +125,43 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	);
 
 	const handleMinChange: T.ThumbProps["onChange"] = React.useCallback(
-		(value, options) => {
+		(value, options = {}) => {
 			if (!range) return;
 
-			const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
+			const args = { minValue: value, maxValue, name, minName, maxName };
 
 			// Manually controlled resolving of single/range handlers
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			method?.({ minValue: value, maxValue, name, minName, maxName });
+			if (options.commit) onChangeCommitRef.current?.(args);
+
+			// Manually controlled resolving of single/range handlers
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			if (options.native) onChangeRef.current?.(args);
+
+			triggerChangeEvent(minInputRef.current!, value.toString());
 		},
 		[maxValue, name, minName, maxName, range, onChangeCommitRef, onChangeRef]
 	);
 
 	const handleMaxChange: T.ThumbProps["onChange"] = React.useCallback(
-		(value, options) => {
-			if (range) {
-				const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
-
-				// Manually controlled resolving of single/range handlers
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore
-				method?.({ minValue: minValue!, maxValue: value, name, minName, maxName });
-				return;
-			}
-
-			const method = options?.commit ? onChangeCommitRef.current : onChangeRef.current;
+		(value, options = {}) => {
+			const args = range
+				? { minValue: minValue!, maxValue: value, name, minName, maxName }
+				: { value, name };
 
 			// Manually controlled resolving of single/range handlers
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			method?.({ value, name });
+			if (options.commit) onChangeCommitRef.current?.(args);
+
+			// Manually controlled resolving of single/range handlers
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			if (options.native) onChangeRef.current?.(args);
+
+			triggerChangeEvent(maxInputRef.current!, value.toString());
 		},
 		[minValue, name, minName, maxName, range, onChangeRef, onChangeCommitRef]
 	);
@@ -309,6 +317,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 						min={min}
 						ref={minRef}
 						tooltipRef={minTooltipRef}
+						inputRef={minInputRef}
 						renderValue={renderValue}
 						step={step}
 						orientation={orientation}
@@ -328,6 +337,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 					min={min}
 					ref={maxRef}
 					tooltipRef={maxTooltipRef}
+					inputRef={maxInputRef}
 					renderValue={renderValue}
 					step={step}
 					orientation={orientation}

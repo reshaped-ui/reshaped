@@ -10,6 +10,7 @@
 - Slider: Fixed start boundary tooltip position adjustment
 - Slider: minName, maxName
 - Slider: updated tests
+- Slider: Trigger form/input native onChange when dragging
 - ScrollArea: Added missing outline reset
 
 ## 3.5.3
