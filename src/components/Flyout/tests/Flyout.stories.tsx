@@ -12,6 +12,7 @@ import TextField from "components/TextField";
 import Select from "components/Select";
 import Switch from "components/Switch";
 import { sleep } from "utilities/helpers";
+import Modal from "components/Modal";
 
 export default { title: "Utility components/Flyout" };
 
@@ -595,6 +596,7 @@ export const testInsideFixed: StoryObj = {
 				padding={4}
 				zIndex={10}
 				attributes={{ "data-testid": "container" }}
+				height={20}
 			>
 				<Demo defaultActive position="top-start" />
 			</View>
@@ -650,13 +652,31 @@ export const testInsideScrollable = {
 		const containerRef = React.useRef<HTMLDivElement>(null);
 
 		return (
-			<View padding={50}>
+			<View padding={20}>
 				<View height={30} overflow="auto" backgroundColor="neutral-faded" borderRadius="small">
-					<View height={50} attributes={{ ref: containerRef }} padding={4} paddingBottom={30}>
-						<Demo position="start" />
+					<View height={50} attributes={{ ref: containerRef }} padding={20} paddingBottom={30}>
+						<Demo position="bottom" />
 					</View>
 				</View>
 			</View>
+		);
+	},
+};
+
+export const testInsideModal = {
+	name: "test: inside modal",
+	render: () => {
+		return (
+			<Modal active position="end">
+				<View gap={4} align="start">
+					<Modal.Title>Title</Modal.Title>
+					<Demo position="bottom-start" />
+					<View height={300} width={25} backgroundColor="neutral-faded" />
+					<Demo position="start" />
+					<View height={300} width={25} backgroundColor="neutral-faded" />
+					<Demo position="bottom-start" />
+				</View>
+			</Modal>
 		);
 	},
 };

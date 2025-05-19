@@ -6,6 +6,7 @@ export type CloseReason = "overlay-click" | "escape-key";
 export type Props = {
 	transparent?: boolean | number;
 	blurred?: boolean;
+	overflow?: "auto" | "hidden";
 	children?: React.ReactNode | ((props: { active: boolean }) => React.ReactNode);
 	active?: boolean;
 	onClose?: (args: { reason: CloseReason }) => void;

@@ -1,7 +1,12 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveVariables, responsiveClassNames } from "utilities/props";
+import {
+	classNames,
+	responsiveVariables,
+	responsiveClassNames,
+	responsivePropDependency,
+} from "utilities/props";
 import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import { enableScroll, disableScroll } from "utilities/scroll";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
@@ -247,6 +252,7 @@ const Modal: React.FC<T.Props> & {
 			active={active}
 			transparent={transparentOverlay || hideProgress}
 			blurred={blurredOverlay}
+			overflow={responsivePropDependency(position, (p) => (p === "center" ? "auto" : "hidden"))}
 			className={overlayClassName}
 			containerRef={containerRef}
 			attributes={{

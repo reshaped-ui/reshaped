@@ -12,6 +12,10 @@
 - Slider: updated tests
 - Slider: Trigger form/input native onChange when dragging
 - ScrollArea: Added missing outline reset
+- Overlay: overflow property
+- Flyout: Positioning inside modals
+- Flyout: Updated trigger boundaries detection inside scrollable
+- Flyout: Avoid using fallbacks inside scrollable when already opened (to match regular flyouts)
 
 ## 3.5.3
 

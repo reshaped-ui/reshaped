@@ -1,6 +1,5 @@
 .root {
 	--rs-modal-container-width: 100vw;
-	--rs-modal-position: fixed;
 
 	transition: var(--rs-easing-accelerate) var(--rs-duration-fast);
 	transition-property: transform, opacity;
@@ -15,7 +14,6 @@
 	}
 
 	&.--contained {
-		--rs-modal-position: absolute;
 		--rs-modal-container-width: 100%;
 	}
 }
@@ -59,7 +57,7 @@
 		inset: 0;
 		inset-block-start: initial;
 		transform: translate(0, 100%);
-		position: var(--rs-modal-position);
+		position: absolute;
 		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
 		opacity: 1;
@@ -82,7 +80,7 @@
 		inset: 0;
 		inset-inline-end: initial;
 		transform: translate(-100%, 0);
-		position: var(--rs-modal-position);
+		position: absolute;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
@@ -109,7 +107,7 @@
 		inset: 0;
 		inset-inline-start: initial;
 		transform: translate(100%, 0);
-		position: var(--rs-modal-position);
+		position: absolute;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 1;
@@ -135,7 +133,7 @@
 		inset: 0;
 		inset-block-start: initial;
 		transform: translate(0, var(--rs-unit-x4));
-		position: var(--rs-modal-position);
+		position: absolute;
 		border-radius: 0;
 		overflow: auto;
 		opacity: 0;

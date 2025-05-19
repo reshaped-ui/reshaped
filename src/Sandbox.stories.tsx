@@ -1,6 +1,14 @@
 import View from "components/View";
 import Image from "components/Image";
-import Table from "components/Table";
+import Text from "components/Text";
+import DropdownMenu from "components/DropdownMenu";
+import Select from "components/Select";
+import TextField from "components/TextField";
+import { ReactNode, useState } from "react";
+import Button from "components/Button";
+import FormControl from "components/FormControl";
+import Skeleton from "components/Skeleton";
+import Modal from "components/Modal";
 
 export default {
 	title: "Sandbox",
@@ -22,38 +30,7 @@ const Preview: React.FC<{ children: React.ReactNode }> = (props) => {
 export const preview = () => {
 	return (
 		<Preview>
-			<Table>
-				<Table.Head>
-					<Table.Row>
-						<Table.Heading paddingInline={0} width="120px">
-							Column 1
-						</Table.Heading>
-						<Table.Heading paddingInline={0} width="120px">
-							Column 2
-						</Table.Heading>
-						<Table.Heading paddingInline={0} width="120px">
-							Column 3
-						</Table.Heading>
-						<Table.Heading paddingInline={0} width="120px">
-							Column 4
-						</Table.Heading>
-					</Table.Row>
-				</Table.Head>
-				<Table.Body>
-					<Table.Row>
-						<Table.Cell paddingInline={0}>Cell 1</Table.Cell>
-						<Table.Cell paddingInline={0}>Cell 2</Table.Cell>
-						<Table.Cell paddingInline={0}>Cell 3</Table.Cell>
-						<Table.Cell paddingInline={0}>Cell 4</Table.Cell>
-					</Table.Row>
-					<Table.Row>
-						<Table.Cell paddingInline={0}>Cell 1</Table.Cell>
-						<Table.Cell paddingInline={0}>Cell 2</Table.Cell>
-						<Table.Cell paddingInline={0}>Cell 3</Table.Cell>
-						<Table.Cell paddingInline={0}>Cell 4</Table.Cell>
-					</Table.Row>
-				</Table.Body>
-			</Table>
+			<Button onClick={() => {}}>Hello</Button>
 		</Preview>
 	);
 };

@@ -20,6 +20,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		children,
 		transparent,
 		blurred,
+		overflow,
 		onClose,
 		onOpen,
 		onAfterClose,
@@ -62,6 +63,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		blurred && s["--blurred"],
 		animated && s["--animated"],
 		containerRef && s["--contained"],
+		overflow === "auto" && s["--overflow-auto"],
 		className
 	);
 

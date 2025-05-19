@@ -44,7 +44,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	}, [mounted, triggerElRef]);
 	const closestScrollableContainer = React.useMemo(() => {
 		if (!mounted) return;
-		if (!triggerElRef) return;
+		if (!triggerElRef?.current) return;
 		return findClosestScrollableContainer({ el: triggerElRef.current });
 	}, [mounted, triggerElRef]);
 	const containerRef = passedContainerRef || { current: closestFixedContainer };
@@ -65,7 +65,11 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	}, [handleTransitionStart, flyoutElRef, status]);
 
 	React.useEffect(() => {
-		if (closestScrollableContainer === document.body) return;
+		if (status !== "visible") return;
+
+		console.log(closestScrollableContainer);
+
+		// if (closestScrollableContainer === document.body) return;
 		if (!closestScrollableContainer) return;
 
 		const triggerEl = triggerElRef?.current;
@@ -77,20 +81,20 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 
 			if (
 				triggerBounds &&
-				(triggerBounds.bottom < containerBounds.top ||
-					triggerBounds.right < containerBounds.left ||
-					triggerBounds.left > containerBounds.right ||
-					triggerBounds.top > containerBounds.bottom)
+				(triggerBounds.top < containerBounds.top ||
+					triggerBounds.left < containerBounds.left ||
+					triggerBounds.right > containerBounds.right ||
+					triggerBounds.bottom > containerBounds.bottom)
 			) {
 				handleClose({});
 			} else {
-				flyout.updatePosition({ sync: true });
+				flyout.updatePosition({ sync: true, fallback: false });
 			}
 		});
 
 		closestScrollableContainer.addEventListener("scroll", handleScroll, { passive: true });
 		return () => closestScrollableContainer.removeEventListener("scroll", handleScroll);
-	}, [closestScrollableContainer, flyout, handleClose, triggerElRef]);
+	}, [closestScrollableContainer, flyout, status, handleClose, triggerElRef]);
 
 	if (status === "idle" || !mounted) return null;
 

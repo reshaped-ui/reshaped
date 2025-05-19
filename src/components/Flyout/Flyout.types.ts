@@ -29,8 +29,8 @@ export type Options = {
 	container?: HTMLElement | null;
 	rtl: boolean;
 	fallbackPositions?: Position[];
-	lastUsedFallback: Position;
-	onFallback: (position: Position) => void;
+	lastUsedPosition: Position;
+	onPositionChoose: (position: Position) => void;
 	contentGap?: number;
 	contentShift?: number;
 };
@@ -48,7 +48,7 @@ export type FlyoutData = {
 };
 
 export type UseFlyoutData = Pick<State, "styles" | "position" | "status"> & {
-	updatePosition: (args?: { sync?: boolean }) => void;
+	updatePosition: (args?: { sync?: boolean; fallback?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
 	remove: () => void;

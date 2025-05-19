@@ -4,7 +4,6 @@
 	--rs-overlay-offset-x: 0px;
 
 	position: fixed;
-	overflow: auto;
 	overflow-x: clip;
 	-webkit-overflow-scrolling: touch;
 
@@ -80,4 +79,8 @@
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);
 	}
+}
+
+.root.--overflow-auto {
+	overflow: auto;
 }
