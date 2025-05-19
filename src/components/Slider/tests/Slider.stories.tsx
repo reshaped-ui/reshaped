@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryObj } from "@storybook/react";
-import { expect, fireEvent, fn, Mock } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fireEvent, fn, Mock } from "storybook/test";
 import { Example } from "utilities/storybook";
 import Slider from "components/Slider";
 import View from "components/View";

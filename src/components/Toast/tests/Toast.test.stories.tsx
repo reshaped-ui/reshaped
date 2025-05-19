@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, within, userEvent, waitFor } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, within, userEvent, waitFor } from "storybook/test";
 import { useToast, ToastProvider } from "components/Toast";
 import Button from "components/Button";
 

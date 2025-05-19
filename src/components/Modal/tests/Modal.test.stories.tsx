@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryObj } from "@storybook/react";
-import { within, expect, fn, userEvent, waitFor } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { within, expect, fn, userEvent, waitFor } from "storybook/test";
 import Button from "components/Button";
 import Modal from "components/Modal";
 import useToggle from "hooks/useToggle";

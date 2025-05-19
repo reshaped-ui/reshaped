@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryObj } from "@storybook/react";
-import { userEvent, expect, waitFor, fn, Mock } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { userEvent, expect, waitFor, fn, Mock } from "storybook/test";
 import { Example } from "utilities/storybook";
 import ScrollArea from "components/ScrollArea";
 import View from "components/View";

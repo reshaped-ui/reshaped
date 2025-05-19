@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { within, expect } from "storybook/test";
 import { Example, Placeholder } from "utilities/storybook";
 import Dismissible from "components/Dismissible";
 import Image from "components/Image";

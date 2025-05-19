@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { userEvent, expect, fn } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { userEvent, expect, fn } from "storybook/test";
 import Link from "components/Link";
 
 export default {

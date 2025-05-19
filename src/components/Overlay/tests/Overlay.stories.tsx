@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { userEvent } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { userEvent } from "storybook/test";
 import { Example } from "utilities/storybook";
 import Overlay from "components/Overlay";
 import Button from "components/Button";

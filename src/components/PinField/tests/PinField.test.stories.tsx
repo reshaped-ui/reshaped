@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, waitFor } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, waitFor } from "storybook/test";
 import FormControl from "components/FormControl";
 import PinField from "components/PinField";
 

@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { userEvent, expect, fn } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { userEvent, expect, fn } from "storybook/test";
 import { Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";

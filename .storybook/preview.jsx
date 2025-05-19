@@ -132,6 +132,9 @@ const preview = {
 				order: ["Components", "Utility components", "Hooks", "Utilities", "Internal"],
 			},
 		},
+		docs: {
+			codePanel: true,
+		},
 	},
 };
 

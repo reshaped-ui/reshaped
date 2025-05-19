@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryObj } from "@storybook/react";
-import { expect, fn } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn } from "storybook/test";
 import { Example } from "utilities/storybook";
 import Avatar from "components/Avatar";
 import View from "components/View";

@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryObj } from "@storybook/react";
-import { expect, userEvent } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, userEvent } from "storybook/test";
 import { Example } from "utilities/storybook";
 import ProgressIndicator from "components/ProgressIndicator";
 import View from "components/View";

@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 import Scrim from "components/Scrim";
 
 export default {

@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, waitFor } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, waitFor } from "storybook/test";
 import useElementId from "hooks/useElementId";
 
 export default {
