@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { fn, userEvent, expect } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { fn, userEvent, expect } from "storybook/test";
 import CheckboxGroup from "components/CheckboxGroup";
 import Checkbox from "components/Checkbox";
 

@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, fn, userEvent } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent } from "storybook/test";
 import TextArea from "components/TextArea";
 
 export default {

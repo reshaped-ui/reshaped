@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within, waitFor } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within, waitFor } from "storybook/test";
 import { Example } from "utilities/storybook";
 import { sleep } from "utilities/helpers";
 import View from "components/View";

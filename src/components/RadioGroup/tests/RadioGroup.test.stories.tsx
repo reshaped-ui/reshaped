@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { fn, userEvent, expect } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { fn, userEvent, expect } from "storybook/test";
 import RadioGroup from "components/RadioGroup";
 import Radio from "components/Radio";
 

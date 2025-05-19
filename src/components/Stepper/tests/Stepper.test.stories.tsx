@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 import Stepper from "components/Stepper";
 
 export default {

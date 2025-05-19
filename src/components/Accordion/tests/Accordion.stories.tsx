@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { userEvent, expect, fn } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { userEvent, expect, fn, Mock } from "storybook/test";
 import { Placeholder } from "utilities/storybook";
 import Accordion from "components/Accordion";
 import Button from "components/Button";
@@ -63,7 +63,7 @@ export const iconPosition = {
 	),
 };
 
-export const onToggle: StoryObj<{ handleToggle: typeof fn }> = {
+export const onToggle: StoryObj<{ handleToggle: Mock }> = {
 	name: "onToggle",
 	args: {
 		handleToggle: fn(),
@@ -109,7 +109,7 @@ export const onToggle: StoryObj<{ handleToggle: typeof fn }> = {
 	},
 };
 
-export const active: StoryObj<{ handleToggle: typeof fn }> = {
+export const active: StoryObj<{ handleToggle: Mock }> = {
 	name: "active",
 	args: {
 		handleToggle: fn(),
@@ -143,7 +143,7 @@ export const active: StoryObj<{ handleToggle: typeof fn }> = {
 	},
 };
 
-export const defaultActive: StoryObj<{ handleToggle: typeof fn }> = {
+export const defaultActive: StoryObj<{ handleToggle: Mock }> = {
 	name: "defaultActive",
 	args: {
 		handleToggle: fn(),
@@ -177,7 +177,7 @@ export const defaultActive: StoryObj<{ handleToggle: typeof fn }> = {
 	},
 };
 
-export const renderProps: StoryObj<{ handleToggle: typeof fn }> = {
+export const renderProps: StoryObj<{ handleToggle: Mock }> = {
 	name: "children: render props",
 	args: {
 		handleToggle: fn(),

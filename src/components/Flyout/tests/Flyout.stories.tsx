@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { StoryObj } from "@storybook/react";
-import { userEvent, waitFor, within, expect, fn } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { userEvent, waitFor, within, expect, fn } from "storybook/test";
 import { Example } from "utilities/storybook";
 import Reshaped from "components/Reshaped";
 import View from "components/View";

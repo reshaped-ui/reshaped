@@ -25,11 +25,8 @@ const config: StorybookConfig = {
 	stories: ["../src/**/*.stories.tsx"],
 	staticDirs: ["./public"],
 	addons: [
-		"@storybook/addon-storysource",
-		"@storybook/addon-actions",
-		"@storybook/experimental-addon-test",
+		"@storybook/addon-vitest",
 		"@storybook/addon-a11y",
-		"@storybook/addon-controls",
 		"./plugins/preset.js",
 		{
 			name: "@storybook/addon-docs",

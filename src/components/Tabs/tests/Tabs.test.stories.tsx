@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, within, userEvent, waitFor, fn } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, within, userEvent, waitFor, fn } from "storybook/test";
 import Tabs from "components/Tabs";
 
 export default {

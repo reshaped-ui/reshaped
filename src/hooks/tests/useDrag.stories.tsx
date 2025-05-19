@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryObj } from "@storybook/react";
-import { fireEvent, fn, expect } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { fireEvent, fn, expect } from "storybook/test";
 import View from "components/View";
 import useDrag from "hooks/_private/useDrag";
 import useToggle from "hooks/useToggle";

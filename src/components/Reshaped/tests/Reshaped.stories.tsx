@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, userEvent } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, userEvent } from "storybook/test";
 import { useTheme } from "components/Theme";
 import Button from "components/Button";
 import Reshaped from "../Reshaped";

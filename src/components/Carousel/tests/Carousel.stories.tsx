@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, waitFor } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, waitFor } from "storybook/test";
 import { Example, Placeholder } from "utilities/storybook";
 import Carousel, { type CarouselInstanceRef } from "components/Carousel";
 import Button from "components/Button";

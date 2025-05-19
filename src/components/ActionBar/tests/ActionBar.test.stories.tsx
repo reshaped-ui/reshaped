@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 import ActionBar from "components/ActionBar";
 import { Placeholder } from "utilities/storybook";
 

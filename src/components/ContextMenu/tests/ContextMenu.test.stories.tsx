@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, waitFor, within } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import ContextMenu from "components/ContextMenu";
 import View from "components/View";
 import { sleep } from "utilities/helpers";

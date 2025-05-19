@@ -1,5 +1,5 @@
-import { StoryObj } from "@storybook/react";
-import { fn, expect, userEvent } from "@storybook/test";
+import { StoryObj } from "@storybook/react-vite";
+import { fn, expect, userEvent } from "storybook/test";
 import Breadcrumbs from "components/Breadcrumbs";
 
 export default {
