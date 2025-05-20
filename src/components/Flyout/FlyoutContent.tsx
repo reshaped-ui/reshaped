@@ -67,9 +67,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	React.useEffect(() => {
 		if (status !== "visible") return;
 
-		console.log(closestScrollableContainer);
-
-		// if (closestScrollableContainer === document.body) return;
 		if (!closestScrollableContainer) return;
 
 		const triggerEl = triggerElRef?.current;

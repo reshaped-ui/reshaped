@@ -16,6 +16,7 @@
 - Flyout: Positioning inside modals
 - Flyout: Updated trigger boundaries detection inside scrollable
 - Flyout: Avoid using fallbacks inside scrollable when already opened (to match regular flyouts)
+- Flyout: Updated dialog trap mode flyouts to be blocking for Esc keys / clicking outside
 
 ## 3.5.3
 

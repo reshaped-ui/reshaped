@@ -30,7 +30,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		children,
 		disabled,
 		forcePosition,
-		trapFocusMode,
+		trapFocusMode = "dialog",
 		width,
 		disableHideAnimation,
 		disableContentHover,
@@ -111,6 +111,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		active: isRendered && triggerType !== "hover",
 		contentRef: flyoutElRef,
 		triggerRef: triggerElRef,
+		blocking: trapFocusMode === "dialog",
 	});
 
 	const clearTimer = React.useCallback(() => {
