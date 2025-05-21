@@ -30,7 +30,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		children,
 		disabled,
 		forcePosition,
-		trapFocusMode,
+		trapFocusMode = "dialog",
 		width,
 		disableHideAnimation,
 		disableContentHover,
@@ -111,6 +111,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		active: isRendered && triggerType !== "hover",
 		contentRef: flyoutElRef,
 		triggerRef: triggerElRef,
+		blocking: trapFocusMode === "dialog",
 	});
 
 	const clearTimer = React.useCallback(() => {
@@ -297,6 +298,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	useIsomorphicLayoutEffect(() => {
 		if (status !== "visible" || !flyoutElRef.current) return;
 		if (trapFocusRef.current?.trapped) return;
+		if (trapFocusMode === false) return;
 
 		trapFocusRef.current = new TrapFocus();
 		trapFocusRef.current.trap(flyoutElRef.current, {

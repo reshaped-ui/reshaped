@@ -14,6 +14,7 @@ import type * as T from "./DropdownMenu.types";
 import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
+const DropdownMenuSubTriggerContext = React.createContext<boolean>(false);
 
 const DropdownMenu: React.FC<T.Props> & {
 	Dismissible: typeof Popover.Dismissible;
@@ -84,6 +85,7 @@ const DropdownMenuSection: React.FC<T.SectionProps> = (props) => {
 const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 	const { onClick } = props;
 	const { handleClose } = useFlyoutContext();
+	const subTriggerContext = React.useContext(DropdownMenuSubTriggerContext);
 
 	const handleClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
 		/**
@@ -91,7 +93,13 @@ const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 		 * after the content is closed
 		 */
 		e.stopPropagation();
-		if (handleClose) handleClose({ closeParents: true, reason: "item-selection" });
+
+		/**
+		 * Don't close the menu when clicking on a trigger of a submenu
+		 */
+		if (handleClose && !subTriggerContext) {
+			handleClose({ closeParents: true, reason: "item-selection" });
+		}
 		if (onClick) onClick(e);
 	};
 
@@ -153,14 +161,21 @@ const DropdownMenuSubTrigger: React.FC<T.SubTriggerProps> = (props) => {
 	const { attributes, ...menuItemProps } = props;
 
 	return (
-		<DropdownMenu.Trigger>
-			{(triggerAttributes) => (
-				<DropdownMenuSubTriggerItem
-					{...menuItemProps}
-					attributes={{ ...attributes, ...triggerAttributes }}
-				/>
-			)}
-		</DropdownMenu.Trigger>
+		<DropdownMenuSubTriggerContext.Provider value={true}>
+			<DropdownMenu.Trigger>
+				{(triggerAttributes) => {
+					return (
+						<DropdownMenuSubTriggerItem
+							{...menuItemProps}
+							attributes={{
+								...attributes,
+								...triggerAttributes,
+							}}
+						/>
+					);
+				}}
+			</DropdownMenu.Trigger>
+		</DropdownMenuSubTriggerContext.Provider>
 	);
 };
 

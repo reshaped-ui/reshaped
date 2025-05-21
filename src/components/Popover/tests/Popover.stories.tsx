@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within, waitFor } from "storybook/test";
 import { Example } from "utilities/storybook";
@@ -6,6 +7,8 @@ import View from "components/View";
 import Popover from "components/Popover";
 import Tooltip from "components/Tooltip";
 import Button from "components/Button";
+import MenuItem from "components/MenuItem";
+import ScrollArea from "components/ScrollArea";
 
 export default {
 	title: "Components/Popover",
@@ -338,4 +341,59 @@ export const variant = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const teslContentEditable = {
+	name: "test: contenteditable",
+	render: () => {
+		const [active, setActive] = useState(false);
+
+		return (
+			<Popover>
+				<Popover.Trigger>
+					{(attributes) => <Button attributes={attributes}>Open</Button>}
+				</Popover.Trigger>
+				<Popover.Content>
+					<View gap={4}>
+						<View.Item>
+							<Button onClick={() => {}}>Hello</Button>
+						</View.Item>
+
+						<ScrollArea height="100px">
+							<div
+								style={{ height: "200px" }}
+								contentEditable
+								tabIndex={0}
+								onInput={(e) => {
+									setActive(e.currentTarget.innerText.startsWith("@"));
+								}}
+								onKeyDown={(e) => {
+									console.log(e.key);
+									if (e.key === "Enter" && active) {
+										e.preventDefault();
+										e.currentTarget.innerText = "@hello";
+										setActive(false);
+									}
+								}}
+							/>
+						</ScrollArea>
+
+						<Popover
+							active={active}
+							onClose={() => setActive(false)}
+							originCoordinates={{ x: 300, y: 300 }}
+							trapFocusMode="selection-menu"
+						>
+							<Popover.Content>
+								<View gap={4}>
+									<MenuItem onClick={() => {}}>Action</MenuItem>
+									<MenuItem onClick={() => {}}>Close</MenuItem>
+								</View>
+							</Popover.Content>
+						</Popover>
+					</View>
+				</Popover.Content>
+			</Popover>
+		);
+	},
 };
