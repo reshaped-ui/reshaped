@@ -19,6 +19,7 @@
 - Flyout: Updated dialog trap mode flyouts to be blocking for Esc keys / clicking outside
 - Flyout: trapFocusMode=false support
 - DropdownMenu: Submenu trigger doesn't close the menu on click
+- Accordion: Fixed iconPosition prop memoization
 
 ## 3.5.3
 
