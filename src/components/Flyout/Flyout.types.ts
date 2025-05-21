@@ -95,7 +95,7 @@ type BaseProps = {
 	 */
 	forcePosition?: boolean;
 	fallbackPositions?: Position[] | false;
-	trapFocusMode?: TrapMode;
+	trapFocusMode?: TrapMode | false;
 	disabled?: boolean;
 	disableHideAnimation?: boolean;
 	disableContentHover?: boolean;

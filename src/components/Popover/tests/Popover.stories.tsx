@@ -365,13 +365,13 @@ export const teslContentEditable = {
 								contentEditable
 								tabIndex={0}
 								onInput={(e) => {
-									setActive(e.target.innerText.startsWith("@"));
+									setActive(e.currentTarget.innerText.startsWith("@"));
 								}}
 								onKeyDown={(e) => {
 									console.log(e.key);
 									if (e.key === "Enter" && active) {
 										e.preventDefault();
-										e.target.innerText = "@hello";
+										e.currentTarget.innerText = "@hello";
 										setActive(false);
 									}
 								}}

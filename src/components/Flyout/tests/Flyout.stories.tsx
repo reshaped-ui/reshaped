@@ -234,6 +234,9 @@ export const modes = {
 						<Demo position="bottom-start" trapFocusMode="content-menu" text="content-menu">
 							{modeContent}
 						</Demo>
+						<Demo position="bottom-start" trapFocusMode={false} text="false">
+							{modeContent}
+						</Demo>
 					</View>
 				</Example.Item>
 

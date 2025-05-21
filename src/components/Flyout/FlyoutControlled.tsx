@@ -298,6 +298,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	useIsomorphicLayoutEffect(() => {
 		if (status !== "visible" || !flyoutElRef.current) return;
 		if (trapFocusRef.current?.trapped) return;
+		if (trapFocusMode === false) return;
 
 		trapFocusRef.current = new TrapFocus();
 		trapFocusRef.current.trap(flyoutElRef.current, {
