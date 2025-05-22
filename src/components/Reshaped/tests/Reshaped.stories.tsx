@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, userEvent } from "storybook/test";
-import { useTheme } from "components/Theme";
+import { useTheme, ColorMode } from "components/Theme";
 import Button from "components/Button";
 import Reshaped from "../Reshaped";
 
@@ -18,6 +19,34 @@ export const rtl = {
 			Hello
 		</Reshaped>
 	),
+};
+
+export const controlledMode: StoryObj = {
+	name: "colorMode, controlled",
+	render: () => {
+		const [mode, setMode] = useState<ColorMode>("dark");
+
+		return (
+			<Reshaped theme="reshaped" colorMode={mode}>
+				<Button
+					onClick={() => {
+						setMode(mode === "dark" ? "light" : "dark");
+					}}
+				>
+					Toggle color mode
+				</Button>
+			</Reshaped>
+		);
+	},
+	play: async ({ canvas }) => {
+		const button = canvas.getAllByRole("button")[0];
+
+		expect(document.documentElement.getAttribute("data-rs-color-mode")).toEqual("dark");
+
+		await userEvent.click(button);
+
+		expect(document.documentElement.getAttribute("data-rs-color-mode")).toEqual("light");
+	},
 };
 
 export const lightMode = {

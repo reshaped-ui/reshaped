@@ -31,6 +31,7 @@ export type PrivateProps = Props & {
 };
 
 export type GlobalColorModeProps = {
+	mode?: ColorMode;
 	defaultMode: ColorMode;
 	scopeRef?: React.RefObject<HTMLDivElement | null>;
 	children?: React.ReactNode;

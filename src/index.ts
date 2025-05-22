@@ -197,6 +197,7 @@ export type { ViewProps, ViewItemProps } from "components/View";
  */
 export { useFormControl } from "components/FormControl";
 export { default as Theme, useTheme, type ThemeProps } from "components/Theme";
+export type { ColorMode } from "components/Theme";
 
 export { default as useHandlerRef } from "hooks/useHandlerRef";
 export { default as useHotkeys } from "hooks/useHotkeys";

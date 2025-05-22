@@ -8,6 +8,7 @@ export type Props = {
 	theme?: NonNullable<ThemeProps["name"]>;
 	defaultTheme?: NonNullable<ThemeProps["defaultName"]>;
 	defaultRTL?: boolean;
+	colorMode?: GlobalColorModeProps["mode"];
 	defaultColorMode?: GlobalColorModeProps["defaultMode"];
 	defaultViewport?: G.Viewport;
 	toastOptions?: ToastProviderProps["options"];

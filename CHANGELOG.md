@@ -21,6 +21,8 @@
 - DropdownMenu: Submenu trigger doesn't close the menu on click
 - Accordion: Fixed iconPosition prop memoization
 - Avatar: use rs-font-weight-bold instead of hardcoded weight
+- Exported ColorMode type
+- Reshaped: colorMode conrolled prop support
 
 ## 3.5.3
 

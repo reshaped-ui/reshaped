@@ -31,7 +31,14 @@ const ReshapedInner: React.FC<T.Props> = (props) => {
 };
 
 const Reshaped: React.FC<T.Props> = (props) => {
-	const { theme, defaultTheme = "reshaped", defaultColorMode, scoped, className } = props;
+	const {
+		theme,
+		defaultTheme = "reshaped",
+		colorMode,
+		defaultColorMode,
+		scoped,
+		className,
+	} = props;
 	const rootClassNames = classNames(s.root, className);
 	const scopeRef = React.useRef<HTMLDivElement>(null);
 	const parentGlobalColorMode = useGlobalColorMode();
@@ -39,6 +46,7 @@ const Reshaped: React.FC<T.Props> = (props) => {
 	return (
 		<GlobalColorMode
 			defaultMode={defaultColorMode || parentGlobalColorMode.mode || "light"}
+			mode={colorMode}
 			scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
 		>
 			<PrivateTheme

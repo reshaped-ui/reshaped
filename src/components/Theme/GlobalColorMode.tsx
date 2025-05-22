@@ -9,7 +9,7 @@ import { getRootThemeEl } from "./Theme.utilities";
 import type * as T from "./Theme.types";
 
 const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
-	const { defaultMode, scopeRef, children } = props;
+	const { defaultMode, mode: passedMode, scopeRef, children } = props;
 	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode);
 	const parentGlobalColorMode = useGlobalColorMode();
 
@@ -21,23 +21,18 @@ const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 				parentGlobalColorMode.setMode(targetMode);
 			}
 
-			setMode((prevMode) => {
-				if (prevMode !== targetMode) {
-					// Avoid components styles animating when switching to another color mode
-					disableTransitions();
-				}
-
-				return targetMode;
-			});
+			setMode(targetMode);
 		},
 		[scopeRef, parentGlobalColorMode]
 	);
 
 	useIsomorphicLayoutEffect(() => {
+		disableTransitions();
+
 		onNextFrame(() => {
 			enableTransitions();
 		});
-	}, [mode]);
+	}, [mode, passedMode]);
 
 	/**
 	 * In case color mode was set in html but was not provided to the provider - hydrate the state
@@ -53,13 +48,13 @@ const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 
 	const value = React.useMemo(
 		() => ({
-			mode,
+			mode: passedMode || mode,
 			setMode: changeColorMode,
 			invertMode: () => {
 				changeColorMode(mode === "light" ? "dark" : "light");
 			},
 		}),
-		[mode, changeColorMode]
+		[mode, passedMode, changeColorMode]
 	);
 
 	return (
