@@ -5,7 +5,7 @@
 
 	/* Depends on getHeightStyles */
 	font-size: calc(var(--rs-h) / 3);
-	font-weight: bold;
+	font-weight: var(--rs-font-weight-bold);
 	aspect-ratio: 1;
 	line-height: 100%;
 }

@@ -20,6 +20,7 @@
 - Flyout: trapFocusMode=false support
 - DropdownMenu: Submenu trigger doesn't close the menu on click
 - Accordion: Fixed iconPosition prop memoization
+- Avatar: use rs-font-weight-bold instead of hardcoded weight
 
 ## 3.5.3
 
