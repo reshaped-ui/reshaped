@@ -2810,10 +2810,10 @@ chokidar@^4.0.3:
   dependencies:
     readdirp "^4.0.1"
 
-chromatic@11.28.2:
-  version "11.28.2"
-  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-11.28.2.tgz#c0b9f59dcc323ca8bf2c2790f3c9e3d285834efb"
-  integrity sha512-aCmUPcZUs4/p9zRZdMreOoO/5JqO2DiJC3md1/vRx8dlMRcmR/YI5ZbgXZcai2absVR+6hsXZ5XiPxV2sboTuQ==
+chromatic@11.29.0:
+  version "11.29.0"
+  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-11.29.0.tgz#da556dbd3b043e8c6a3134d1afa3bb4ad7317410"
+  integrity sha512-yisBlntp9hHVj19lIQdpTlcYIXuU9H/DbFuu6tyWHmj6hWT2EtukCCcxYXL78XdQt1vm2GfIrtgtKpj/Rzmo4A==
 
 chrome-trace-event@^1.0.2:
   version "1.0.3"

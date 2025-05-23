@@ -111,7 +111,7 @@
 		"@vitest/browser": "3.1.4",
 		"@vitest/coverage-istanbul": "3.1.4",
 		"@vitest/coverage-v8": "3.1.4",
-		"chromatic": "11.28.2",
+		"chromatic": "11.29.0",
 		"conventional-changelog-cli": "5.0.0",
 		"cz-conventional-changelog": "3.3.0",
 		"eslint": "9.27.0",
