@@ -1,16 +1,22 @@
-import type { PartialThemeDefinition, ColorHue } from "themes/_generator/tokens/types";
+import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
+import type { HexColor, Hue, OklchColor } from "themes/_generator/tokens/color/color.types";
 
 export type ReshapedConfig = {
-	themes?: Record<string, PartialThemeDefinition>;
-	themeFragments?: Record<string, PartialThemeDefinition>;
+	themes?: Record<string, PassedThemeDefinition>;
+	themeFragments?: Record<string, PassedThemeDefinition>;
 	themeOptions?: {
-		generateOnColorsFor?: string[];
 		colorContrastAlgorithm?: "wcag" | "apca";
+		generateOnColorsFor?: string[];
 		onColorValues?: {
-			[key in ColorHue]?: {
-				hexDark: string;
-				hexLight: string;
-			};
+			[key in Hue]?:
+				| {
+						hexDark: HexColor;
+						hexLight: HexColor;
+				  }
+				| {
+						oklchDark: OklchColor;
+						oklchLight: OklchColor;
+				  };
 		};
 	};
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Button from "components/Button";
@@ -13,6 +12,7 @@ import IconZap from "icons/Mic";
 import Link from "components/Link";
 import Text from "components/Text";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
+import { useEffect } from "react";
 
 export default {
 	title: "Internal/Themes",
@@ -23,6 +23,31 @@ export default {
 			disable: true,
 		},
 	},
+};
+
+export const test = () => {
+	const colors = generateThemeColors();
+
+	useEffect(() => {
+		console.log(colors);
+	});
+
+	return (
+		<View direction="row" gap={4}>
+			{/* {Object.entries(colors).map(([key, token]) => {
+				return (
+					<div
+						key={key}
+						style={{
+							height: 100,
+							width: 100,
+							backgroundColor: `oklch(${token.oklch?.l}, ${token.oklch?.c}, ${token.oklch?.h || 0})`,
+						}}
+					/>
+				);
+			})} */}
+		</View>
+	);
 };
 
 const css = getThemeCSS("green", {

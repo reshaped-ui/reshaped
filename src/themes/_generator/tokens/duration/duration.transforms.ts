@@ -1,7 +1,7 @@
 import type * as T from "./duration.types";
 import type { Transformer } from "../types";
 
-const transformedToken: Transformer<T.Token> = (name, token) => [
+const transformToken: Transformer<T.Token> = (name, token) => [
 	{
 		name,
 		tokenType: "duration",
@@ -10,4 +10,4 @@ const transformedToken: Transformer<T.Token> = (name, token) => [
 	},
 ];
 
-export default transformedToken;
+export default transformToken;

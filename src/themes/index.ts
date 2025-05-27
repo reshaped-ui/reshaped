@@ -1,12 +1,11 @@
-import type * as T from "themes/_generator/types";
-import type { FullThemeDefinition } from "themes/_generator/tokens/types";
 import transform from "themes/_generator/transform";
-import generateColors from "themes/_generator/utilities/generateColors";
+import type * as T from "themes/_generator/types";
+import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
 
 /**
  * Exported types
  */
-export type { FullThemeDefinition } from "themes/_generator/tokens/types";
+export type { ThemeDefinition } from "themes/_generator/tokens/types";
 export type { Name as ColorTokenName } from "themes/_generator/tokens/color/color.types";
 export type { Name as DurationTokenName } from "themes/_generator/tokens/duration/duration.types";
 export type { Name as EasingTokenName } from "themes/_generator/tokens/easing/easing.types";
@@ -22,19 +21,11 @@ export type { Name as ViewportTokenName } from "themes/_generator/tokens/viewpor
  * Exported runtime code
  */
 export { default as baseThemeDefinition } from "themes/_generator/definitions/reshaped";
-
-export const generateThemeColors = (options: {
-	primary: T.Color;
-	critical?: T.Color;
-	positive?: T.Color;
-	neutral?: T.Color;
-}) => {
-	return generateColors(options);
-};
+export { default as generateThemeColors } from "themes/_generator/tokens/color/utilities/generateColors";
 
 export const getThemeCSS = (
 	name: string,
-	definition: T.PartialDeep<FullThemeDefinition>,
+	definition: PassedThemeDefinition,
 	options?: T.PublicOptions["themeOptions"]
 ) => {
 	const code = transform(name, definition, { themeOptions: options, isFragment: true });

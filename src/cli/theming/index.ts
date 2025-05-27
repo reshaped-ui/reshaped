@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import chalk from "chalk";
-import type { PartialThemeDefinition, FullThemeDefinition } from "themes/_generator/tokens/types";
+import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
 import type * as T from "themes/_generator/types";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
 import transform from "themes/_generator/transform";
@@ -10,7 +10,7 @@ import { transformToTailwind } from "./tailwind";
 
 const transformDefinition = (
 	name: string,
-	definition: T.PartialDeep<FullThemeDefinition>,
+	definition: PassedThemeDefinition,
 	options: T.CLIOptions
 ) => {
 	const { isFragment, outputPath } = options;
@@ -39,7 +39,7 @@ const transformDefinition = (
 
 export const addThemeFragment = (
 	name: string,
-	definition: PartialThemeDefinition,
+	definition: PassedThemeDefinition,
 	options: T.CLIOptions
 ) => {
 	transformDefinition(name, definition, { ...options, isFragment: true });
@@ -47,7 +47,7 @@ export const addThemeFragment = (
 
 export const addTheme = (
 	name: string,
-	definition: PartialThemeDefinition,
+	definition: PassedThemeDefinition,
 	options: T.CLIOptions
 ) => {
 	transformDefinition(name, mergeDefinitions(reshapedDefinition, definition), options);

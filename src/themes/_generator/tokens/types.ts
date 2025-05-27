@@ -8,6 +8,7 @@ import type * as TShadow from "./shadow/shadow.types";
 import type * as TUnit from "./unit/unit.types";
 import type * as TRadius from "./radius/radius.types";
 import type * as TViewport from "./viewport/viewport.types";
+import { PartialDeep } from "../types";
 
 export type TokenType =
 	| "fontFamily"
@@ -21,12 +22,13 @@ export type TokenType =
 	| "easing"
 	| "shadow";
 
-export type ColorHue = "primary" | "positive" | "critical" | "neutral";
-
 type TokenSet<Name extends string, Token> = Record<Name, Token> & {
 	[tokenName: string]: Token;
 };
 
+/**
+ * Internal theme definition with all required tokens
+ */
 export type ThemeDefinition = {
 	unit: TokenSet<TUnit.Name, TUnit.Token>;
 	radius: TokenSet<TRadius.Name, TRadius.Token>;
@@ -40,24 +42,27 @@ export type ThemeDefinition = {
 	viewport: Record<Exclude<TViewport.Name, "s">, TViewport.Token>;
 };
 
-export type PartialThemeDefinition = {
-	unit?: Partial<ThemeDefinition["unit"]>;
-	radius?: Partial<ThemeDefinition["radius"]>;
-	fontFamily?: Partial<ThemeDefinition["fontFamily"]>;
-	fontWeight?: Partial<ThemeDefinition["fontWeight"]>;
-	font?: Partial<ThemeDefinition["font"]>;
-	color?: Partial<ThemeDefinition["color"]>;
-	duration?: Partial<ThemeDefinition["duration"]>;
-	easing?: Partial<ThemeDefinition["easing"]>;
-	shadow?: Partial<ThemeDefinition["shadow"]>;
-	viewport?: Partial<ThemeDefinition["viewport"]>;
+/**
+ * Externally configured theme which might override just some of the tokens
+ * but also might include custom "on" colors
+ */
+export type PassedThemeDefinition = Omit<PartialDeep<ThemeDefinition>, "color"> & {
+	color?: Partial<TokenSet<TColor.Name | TColor.GeneratedOnName, TColor.Token>>;
 };
 
-// Includes generated colors
-export type FullThemeDefinition = ThemeDefinition & {
-	color: Record<TColor.GeneratedOnName | TColor.GeneratedRGBName | TColor.Name, TColor.Token>;
-	unit: Record<TUnit.GeneratedName | TUnit.Name, TUnit.Token>;
-	viewport: Record<TViewport.Name, TViewport.Token | TViewport.SToken>;
+/**
+ * Theme generation output which includes all generated tokens
+ * but might not include some of the tokens when used for theme fragments
+ */
+export type GeneratedThemeDefinition = Omit<
+	PassedThemeDefinition,
+	"color" | "unit" | "viewport"
+> & {
+	color: Partial<
+		TokenSet<TColor.GeneratedOnName | TColor.GeneratedRGBName | TColor.Name, TColor.Token>
+	>;
+	unit: Partial<TokenSet<TUnit.GeneratedName | TUnit.Name, TUnit.Token>>;
+	viewport: Partial<TokenSet<TViewport.Name, TViewport.Token | TViewport.SToken>>;
 };
 
 export type TransformedToken = {
@@ -73,5 +78,5 @@ export type TransformedToken = {
 export type Transformer<Token> = (
 	name: string,
 	token: Token,
-	theme: FullThemeDefinition
+	theme: GeneratedThemeDefinition
 ) => TransformedToken[];

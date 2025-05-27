@@ -1,3 +1,7 @@
+import type { Oklch } from "culori/fn";
+
+export type Hue = "primary" | "positive" | "critical" | "warning" | "neutral" | "brand";
+
 export type Name =
 	| "foregroundNeutral"
 	| "foregroundNeutralFaded"
@@ -64,4 +68,21 @@ export type GeneratedRGBName =
 	| "rgbBackgroundElevationRaised"
 	| "rgbBackgroundElevationOverlay";
 
-export type Token = { hex: string; hexDark?: string };
+export type RgbColor = { r: number; g: number; b: number };
+export type OklchColor = Oklch;
+export type HexColor = string;
+
+export type ColorValue = HexColor | Token;
+
+export type OklchOnlyToken = {
+	oklch: OklchColor;
+	oklchDark?: OklchColor;
+};
+export type OklchToken = OklchOnlyToken & { hex?: never; hexDark?: never };
+export type HexToken = { hex: HexColor; hexDark?: HexColor; oklch?: never; oklchDark?: never };
+
+export type Token = OklchToken | HexToken;
+export type InternalToken = {
+	oklch: Oklch;
+	oklchDark?: Oklch;
+};
