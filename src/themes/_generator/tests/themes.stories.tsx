@@ -34,18 +34,18 @@ export const test = () => {
 
 	return (
 		<View direction="row" gap={4}>
-			{/* {Object.entries(colors).map(([key, token]) => {
+			{Object.entries(colors).map(([key, token]) => {
 				return (
 					<div
 						key={key}
 						style={{
 							height: 100,
 							width: 100,
-							backgroundColor: `oklch(${token.oklch?.l}, ${token.oklch?.c}, ${token.oklch?.h || 0})`,
+							backgroundColor: `oklch(${token.oklch?.l} ${token.oklch?.c} ${token.oklch?.h || 0})`,
 						}}
 					/>
 				);
-			})} */}
+			})}
 		</View>
 	);
 };
