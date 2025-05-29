@@ -122,7 +122,7 @@
 		"eslint-plugin-react-hooks": "5.2.0",
 		"lefthook": "1.11.13",
 		"playwright": "1.52.0",
-		"postcss": "8.5.3",
+		"postcss": "8.5.4",
 		"postcss-cli": "11.0.1",
 		"postcss-each": "1.1.0",
 		"postcss-nested": "7.0.2",
