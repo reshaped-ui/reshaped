@@ -4,10 +4,7 @@ import { oklchToRgb } from "./convert";
 const getOnColorWCAG = (args: { bgColor: Oklch; lightColor: Oklch; darkColor: Oklch }) => {
 	const { bgColor, lightColor, darkColor } = args;
 
-	const lightContrast = wcagContrast(bgColor, lightColor);
-	const darkContrast = wcagContrast(bgColor, darkColor);
-
-	return lightContrast > darkContrast ? lightColor : darkColor;
+	return wcagContrast(bgColor, lightColor) > 4.5 ? lightColor : darkColor;
 };
 
 function luminanceAPCA(oklch: Oklch) {

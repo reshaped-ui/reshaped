@@ -15,9 +15,11 @@ export const hexToOklch = (hex: string): Oklch => {
 
 export const oklchToRgb = (oklch: Oklch) => rgb(oklch);
 
-export const tokenToOklchToken = (token: TColor.Token): TColor.OklchOnlyToken => {
+export const tokenToOklchToken = (token: TColor.Token): TColor.InternalToken => {
+	const hexDarkFallback = token.hexDark ? hexToOklch(token.hexDark) : undefined;
+
 	return {
-		oklch: token.oklch || hexToOklch(token.hex),
-		oklchDark: token.oklchDark || (token.hexDark ? hexToOklch(token.hexDark) : undefined),
+		oklch: token.oklch ? { ...token.oklch, mode: "oklch" } : hexToOklch(token.hex),
+		oklchDark: token.oklchDark ? { ...token.oklchDark, mode: "oklch" } : hexDarkFallback,
 	};
 };

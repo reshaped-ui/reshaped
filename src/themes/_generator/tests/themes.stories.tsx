@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Button from "components/Button";
@@ -7,12 +8,14 @@ import Card from "components/Card";
 import Avatar from "components/Avatar";
 import DropdownMenu from "components/DropdownMenu";
 import TextField from "components/TextField";
-import Theme from "components/Theme";
+import Theme, { useTheme } from "components/Theme";
 import IconZap from "icons/Mic";
 import Link from "components/Link";
 import Text from "components/Text";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
-import { useEffect } from "react";
+import ThemePlayground from "./ThemesPlayground";
+import Actionable from "components/Actionable";
+import Switch from "components/Switch";
 
 export default {
 	title: "Internal/Themes",
@@ -26,27 +29,82 @@ export default {
 };
 
 export const test = () => {
-	const colors = generateThemeColors();
+	const colors = [
+		"#2563eb",
+		"#4f39f6",
+		"#4a8200",
+		"#0891b2",
+		"#34d399",
+		// "#facc15",
+		// "#d97706",
+		"#fe9a00",
+		"#be185d",
+		"#ff2056",
+		"#000000",
+	];
+	const { colorMode } = useTheme();
+	const [activeColor, setColor] = useState(colors[0]);
+	const [theme, setTheme] = useState("");
+	const [algo, setAlgo] = useState<"wcag" | "apca">("wcag");
 
-	useEffect(() => {
-		console.log(colors);
-	});
+	useLayoutEffect(() => {
+		setTheme(
+			getThemeCSS(
+				"test",
+				{
+					color: generateThemeColors({
+						// primary: activeColor,
+						// oklch(0.59 0.24 262.67)
+						primary: { oklch: { l: 0.59, c: 0.24, h: 262.67 } },
+					}),
+				},
+				{
+					colorContrastAlgorithm: algo,
+				}
+			)
+		);
+	}, [activeColor, algo]);
 
 	return (
-		<View direction="row" gap={4}>
-			{Object.entries(colors).map(([key, token]) => {
-				return (
-					<div
-						key={key}
-						style={{
-							height: 100,
-							width: 100,
-							backgroundColor: `oklch(${token.oklch?.l} ${token.oklch?.c} ${token.oklch?.h || 0})`,
-						}}
-					/>
-				);
-			})}
-		</View>
+		<>
+			<style>{theme}</style>
+			<Theme name="test">
+				<View gap={4}>
+					<View direction="row" align="center" gap={4}>
+						{colors.map((color) => {
+							const hex = colorMode === "dark" && color === "#000000" ? "#ffffff" : color;
+
+							return (
+								<Actionable key={color} onClick={() => setColor(color)} borderRadius="inherit">
+									<View
+										width={5}
+										height={5}
+										borderRadius="circular"
+										attributes={{
+											style: {
+												transition: `box-shadow var(--rs-duration-fast) var(--rs-easing-standard)`,
+												background: hex,
+												boxShadow:
+													color === activeColor
+														? `0 0 0 3px var(--rs-color-background-elevation-base), 0 0 0 5px ${hex}`
+														: undefined,
+											},
+										}}
+									/>
+								</Actionable>
+							);
+						})}
+						<View.Item gapBefore="auto">
+							<Switch name="algo" onChange={(args) => setAlgo(args.checked ? "apca" : "wcag")}>
+								Use APCA
+							</Switch>
+						</View.Item>
+					</View>
+
+					<ThemePlayground />
+				</View>
+			</Theme>
+		</>
 	);
 };
 

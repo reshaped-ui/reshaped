@@ -69,7 +69,7 @@ export type GeneratedRGBName =
 	| "rgbBackgroundElevationOverlay";
 
 export type RgbColor = { r: number; g: number; b: number };
-export type OklchColor = Oklch;
+export type OklchColor = Omit<Oklch, "mode">;
 export type HexColor = string;
 
 export type ColorValue = HexColor | Token;

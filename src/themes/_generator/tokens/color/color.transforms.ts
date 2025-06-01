@@ -5,8 +5,8 @@ const transformTokenForMode = (args: { hex?: T.HexColor; oklch?: T.OklchColor })
 	const { hex, oklch } = args;
 
 	if (oklch) {
-		const components = `${oklch.l} ${oklch.c} ${oklch.h || 0}`;
-		const alphaSuffix = oklch?.alpha === undefined ? "" : ` \\ ${oklch.alpha}`;
+		const components = `${oklch.l.toFixed(4)} ${oklch.c.toFixed(4)} ${oklch.h?.toFixed(4) || 0}`;
+		const alphaSuffix = oklch?.alpha === undefined ? "" : ` / ${oklch.alpha.toFixed(4)}`;
 		return `oklch(${components}${alphaSuffix})`;
 	}
 

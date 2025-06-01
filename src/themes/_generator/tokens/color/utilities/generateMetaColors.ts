@@ -12,7 +12,7 @@ const blackColor = hexToOklch("#000000");
 const generateMetaColors = (
 	definition: PassedThemeDefinition,
 	themeOptions: T.PublicOptions["themeOptions"] = {}
-) => {
+): GeneratedThemeDefinition["color"] | undefined => {
 	if (!definition.color) return;
 	const { onColorValues = {}, colorContrastAlgorithm } = themeOptions;
 	const result: GeneratedThemeDefinition["color"] = {};
@@ -47,10 +47,11 @@ const generateMetaColors = (
 				onColor && "hexDark" in onColor
 					? hexToOklch(onColor.hexDark)
 					: onColor?.oklchDark || blackColor;
+
 			const light = getOnColor({
 				bgColor: oklchBgToken.oklch,
-				lightColor,
-				darkColor,
+				lightColor: { ...lightColor, mode: "oklch" },
+				darkColor: { ...darkColor, mode: "oklch" },
 				algorithm: colorContrastAlgorithm,
 			});
 
@@ -58,8 +59,8 @@ const generateMetaColors = (
 				oklchBgToken.oklchDark &&
 				getOnColor({
 					bgColor: oklchBgToken.oklchDark,
-					lightColor,
-					darkColor,
+					lightColor: { ...lightColor, mode: "oklch" },
+					darkColor: { ...darkColor, mode: "oklch" },
 					algorithm: colorContrastAlgorithm,
 				});
 
@@ -74,8 +75,8 @@ const generateMetaColors = (
 			const rgbDark = oklchBgToken.oklchDark && oklchToRgb(oklchBgToken.oklchDark);
 
 			result[generatedRGBName] = {
-				hex: `${rgb.r}, ${rgb.g}, ${rgb.b}`,
-				hexDark: rgbDark && `${rgbDark.r}, ${rgbDark.g}, ${rgbDark.b}`,
+				hex: `${rgb.r * 255}, ${rgb.g * 255}, ${rgb.b * 255}`,
+				hexDark: rgbDark && `${rgbDark.r * 255}, ${rgbDark.g * 255}, ${rgbDark.b * 255}`,
 			};
 		}
 	});
