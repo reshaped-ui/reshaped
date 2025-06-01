@@ -1,4 +1,4 @@
-import { wcagContrast, type Oklch } from "culori";
+import { wcagContrast, type Oklch } from "culori/fn";
 import { oklchToRgb } from "./convert";
 
 const getOnColorWCAG = (args: { bgColor: Oklch; lightColor: Oklch; darkColor: Oklch }) => {
