@@ -57,7 +57,7 @@ const getDarkModeColor = (lch: OklchColor) => {
 	// Make sure dark mode value doesn't become too dark and is still visible on dark page background
 	const clampedDarkL = Math.max(0.36, darkL);
 
-	return { ...lch, c: c * 0.9, l: clampedDarkL };
+	return { ...lch, c: c * 0.8, l: clampedDarkL };
 };
 
 const generateColorValues = (
@@ -79,7 +79,7 @@ const generateColorValues = (
 		...bgDark,
 		l: 0.25,
 		// For primary color with low chroma, we still have to make sure it stays low
-		c: neutral ? 0.01 : bgDark.c / 4,
+		c: neutral ? 0.01 : bgDark.c / 5,
 	};
 
 	const fg = neutral ? { ...bg, l: 0.2 } : { ...bg, l: 0.5 };
@@ -144,7 +144,7 @@ const generateColorValues = (
 		};
 		output[`backgroundElevationRaised`] = {
 			oklch: { ...bg, l: 1, c: 0 },
-			oklchDark: { ...bgDark, l: 0.21 },
+			oklchDark: { ...bgDark, l: 0.21, c: 0 },
 		};
 		output[`backgroundElevationOverlay`] = {
 			oklch: { ...bg, l: 1, c: 0 },
@@ -170,11 +170,11 @@ const getOklchToken = (color: ColorValue) => {
 
 const generateColors = (args: Partial<Record<Hue, ColorValue>> = {}) => {
 	const {
-		primary = "#1469ff",
-		critical = "#e22c2c",
-		warning = "#facc15",
-		positive = "#118850",
-		neutral = "#e3e4e8",
+		primary = { oklch: { l: 0.55, c: 0.24, h: 262.67 } },
+		critical = { oklch: { l: 0.59, c: 0.22, h: 26.97 } },
+		warning = { oklch: { l: 0.86, c: 0.18, h: 89.84 } },
+		positive = { oklch: { l: 0.53, c: 0.13, h: 153.78 } },
+		neutral = { oklch: { l: 0.92, c: 0.01, h: 262.67 } },
 		brand,
 	} = args;
 

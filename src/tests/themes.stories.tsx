@@ -28,18 +28,19 @@ export default {
 	},
 };
 
+const colors = [
+	"#2563eb",
+	"#4f39f6",
+	"#4a8200",
+	"#0891b2",
+	"#34d399",
+	"#fe9a00",
+	"#be185d",
+	"#ff2056",
+	"#000000",
+];
+
 export const test = () => {
-	const colors = [
-		"#2563eb",
-		"#4f39f6",
-		"#4a8200",
-		"#0891b2",
-		"#34d399",
-		"#fe9a00",
-		"#be185d",
-		"#ff2056",
-		"#000000",
-	];
 	const { colorMode } = useTheme();
 	const [activeColor, setColor] = useState(colors[0]);
 	const [theme, setTheme] = useState("");
@@ -51,9 +52,7 @@ export const test = () => {
 				"test",
 				{
 					color: generateThemeColors({
-						primary: activeColor,
-						// oklch(0.59 0.24 262.67)
-						// primary: { oklch: { l: 0.59, c: 0.24, h: 262.67 } },
+						primary: activeColor === colors[0] ? undefined : activeColor,
 					}),
 				},
 				{

@@ -1,0 +1,1051 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] = `
+{
+  "backgroundCritical": {
+    "oklch": {
+      "c": 0.22,
+      "h": 26.97,
+      "l": 0.59,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.17600000000000002,
+      "h": 26.97,
+      "l": 0.5874079999999999,
+      "mode": "oklch",
+    },
+  },
+  "backgroundCriticalFaded": {
+    "oklch": {
+      "c": 0.02,
+      "h": 26.97,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0352,
+      "h": 26.97,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundDisabled": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.95,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.28,
+      "mode": "oklch",
+    },
+  },
+  "backgroundDisabledFaded": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.98,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.23,
+      "mode": "oklch",
+    },
+  },
+  "backgroundElevationBase": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.2,
+      "mode": "oklch",
+    },
+  },
+  "backgroundElevationOverlay": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.22,
+      "mode": "oklch",
+    },
+  },
+  "backgroundElevationRaised": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.21,
+      "mode": "oklch",
+    },
+  },
+  "backgroundNeutral": {
+    "oklch": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.92,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.008,
+      "h": 262.67,
+      "l": 0.36,
+      "mode": "oklch",
+    },
+  },
+  "backgroundNeutralFaded": {
+    "oklch": {
+      "c": 0.005,
+      "h": 262.67,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPage": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.16,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPageFaded": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.18,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPositive": {
+    "oklch": {
+      "c": 0.13,
+      "h": 153.78,
+      "l": 0.53,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.10400000000000001,
+      "h": 153.78,
+      "l": 0.516176,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPositiveFaded": {
+    "oklch": {
+      "c": 0.02,
+      "h": 153.78,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.020800000000000003,
+      "h": 153.78,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPrimary": {
+    "oklch": {
+      "c": 0,
+      "h": 0,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 0,
+      "l": 1,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPrimaryFaded": {
+    "oklch": {
+      "c": 0.02,
+      "h": 0,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 0,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundWarning": {
+    "oklch": {
+      "c": 0.18,
+      "h": 89.84,
+      "l": 0.86,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.144,
+      "h": 89.84,
+      "l": 0.8035519999999999,
+      "mode": "oklch",
+    },
+  },
+  "backgroundWarningFaded": {
+    "oklch": {
+      "c": 0.04,
+      "h": 89.84,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0288,
+      "h": 89.84,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "black": {
+    "oklch": {
+      "c": 0,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": undefined,
+  },
+  "borderCritical": {
+    "oklch": {
+      "c": 0.22,
+      "h": 26.97,
+      "l": 0.51,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.17600000000000002,
+      "h": 26.97,
+      "l": 0.6674079999999999,
+      "mode": "oklch",
+    },
+  },
+  "borderCriticalFaded": {
+    "oklch": {
+      "c": 0.03,
+      "h": 26.97,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0352,
+      "h": 26.97,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "borderDisabled": {
+    "oklch": {
+      "alpha": 0.06,
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.28,
+      "mode": "oklch",
+    },
+  },
+  "borderNeutral": {
+    "oklch": {
+      "alpha": 0.12,
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "alpha": 0.16,
+      "c": 0.008,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+  },
+  "borderNeutralFaded": {
+    "oklch": {
+      "alpha": 0.08,
+      "c": 0.005,
+      "h": 262.67,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "alpha": 0.08,
+      "c": 0.01,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+  },
+  "borderPositive": {
+    "oklch": {
+      "c": 0.13,
+      "h": 153.78,
+      "l": 0.45,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.10400000000000001,
+      "h": 153.78,
+      "l": 0.5961759999999999,
+      "mode": "oklch",
+    },
+  },
+  "borderPositiveFaded": {
+    "oklch": {
+      "c": 0.03,
+      "h": 153.78,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.020800000000000003,
+      "h": 153.78,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "borderPrimary": {
+    "oklch": {
+      "c": 0,
+      "h": 0,
+      "l": -0.08,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 0,
+      "l": 1.08,
+      "mode": "oklch",
+    },
+  },
+  "borderPrimaryFaded": {
+    "oklch": {
+      "c": 0.03,
+      "h": 0,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 0,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "borderWarning": {
+    "oklch": {
+      "c": 0.18,
+      "h": 89.84,
+      "l": 0.78,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.144,
+      "h": 89.84,
+      "l": 0.8835519999999999,
+      "mode": "oklch",
+    },
+  },
+  "borderWarningFaded": {
+    "oklch": {
+      "c": 0.05,
+      "h": 89.84,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0288,
+      "h": 89.84,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "brand": {
+    "oklch": {
+      "c": 0,
+      "h": 0,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": undefined,
+  },
+  "foregroundCritical": {
+    "oklch": {
+      "c": 0.22,
+      "h": 26.97,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.187,
+      "h": 26.97,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "foregroundDisabled": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.84,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.4,
+      "mode": "oklch",
+    },
+  },
+  "foregroundNeutral": {
+    "oklch": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.2,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.008,
+      "h": 262.67,
+      "l": 0.96,
+      "mode": "oklch",
+    },
+  },
+  "foregroundNeutralFaded": {
+    "oklch": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.45,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.008,
+      "h": 262.67,
+      "l": 0.8099999999999999,
+      "mode": "oklch",
+    },
+  },
+  "foregroundPositive": {
+    "oklch": {
+      "c": 0.13,
+      "h": 153.78,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.1105,
+      "h": 153.78,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "foregroundPrimary": {
+    "oklch": {
+      "c": 0,
+      "h": 0,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 0,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "foregroundWarning": {
+    "oklch": {
+      "c": 0.18,
+      "h": 89.84,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.153,
+      "h": 89.84,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "white": {
+    "oklch": {
+      "c": 0,
+      "l": 0.999999993473546,
+      "mode": "oklch",
+    },
+    "oklchDark": undefined,
+  },
+}
+`;
+
+exports[`themes/tokens/color/utilities/generateColors > with default values 1`] = `
+{
+  "backgroundCritical": {
+    "oklch": {
+      "c": 0.22,
+      "h": 26.97,
+      "l": 0.59,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.17600000000000002,
+      "h": 26.97,
+      "l": 0.5874079999999999,
+      "mode": "oklch",
+    },
+  },
+  "backgroundCriticalFaded": {
+    "oklch": {
+      "c": 0.02,
+      "h": 26.97,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0352,
+      "h": 26.97,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundDisabled": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.95,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.28,
+      "mode": "oklch",
+    },
+  },
+  "backgroundDisabledFaded": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.98,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.23,
+      "mode": "oklch",
+    },
+  },
+  "backgroundElevationBase": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.2,
+      "mode": "oklch",
+    },
+  },
+  "backgroundElevationOverlay": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.22,
+      "mode": "oklch",
+    },
+  },
+  "backgroundElevationRaised": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.21,
+      "mode": "oklch",
+    },
+  },
+  "backgroundNeutral": {
+    "oklch": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.92,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.008,
+      "h": 262.67,
+      "l": 0.36,
+      "mode": "oklch",
+    },
+  },
+  "backgroundNeutralFaded": {
+    "oklch": {
+      "c": 0.005,
+      "h": 262.67,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPage": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.16,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPageFaded": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.18,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPositive": {
+    "oklch": {
+      "c": 0.13,
+      "h": 153.78,
+      "l": 0.53,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.10400000000000001,
+      "h": 153.78,
+      "l": 0.516176,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPositiveFaded": {
+    "oklch": {
+      "c": 0.02,
+      "h": 153.78,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.020800000000000003,
+      "h": 153.78,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPrimary": {
+    "oklch": {
+      "c": 0.24,
+      "h": 262.67,
+      "l": 0.55,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.192,
+      "h": 262.67,
+      "l": 0.54984,
+      "mode": "oklch",
+    },
+  },
+  "backgroundPrimaryFaded": {
+    "oklch": {
+      "c": 0.02,
+      "h": 262.67,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.038400000000000004,
+      "h": 262.67,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "backgroundWarning": {
+    "oklch": {
+      "c": 0.18,
+      "h": 89.84,
+      "l": 0.86,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.144,
+      "h": 89.84,
+      "l": 0.8035519999999999,
+      "mode": "oklch",
+    },
+  },
+  "backgroundWarningFaded": {
+    "oklch": {
+      "c": 0.04,
+      "h": 89.84,
+      "l": 0.97,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0288,
+      "h": 89.84,
+      "l": 0.25,
+      "mode": "oklch",
+    },
+  },
+  "black": {
+    "oklch": {
+      "c": 0,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": undefined,
+  },
+  "borderCritical": {
+    "oklch": {
+      "c": 0.22,
+      "h": 26.97,
+      "l": 0.51,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.17600000000000002,
+      "h": 26.97,
+      "l": 0.6674079999999999,
+      "mode": "oklch",
+    },
+  },
+  "borderCriticalFaded": {
+    "oklch": {
+      "c": 0.03,
+      "h": 26.97,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0352,
+      "h": 26.97,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "borderDisabled": {
+    "oklch": {
+      "alpha": 0.06,
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.28,
+      "mode": "oklch",
+    },
+  },
+  "borderNeutral": {
+    "oklch": {
+      "alpha": 0.12,
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "alpha": 0.16,
+      "c": 0.008,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+  },
+  "borderNeutralFaded": {
+    "oklch": {
+      "alpha": 0.08,
+      "c": 0.005,
+      "h": 262.67,
+      "l": 0,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "alpha": 0.08,
+      "c": 0.01,
+      "h": 262.67,
+      "l": 1,
+      "mode": "oklch",
+    },
+  },
+  "borderPositive": {
+    "oklch": {
+      "c": 0.13,
+      "h": 153.78,
+      "l": 0.45,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.10400000000000001,
+      "h": 153.78,
+      "l": 0.5961759999999999,
+      "mode": "oklch",
+    },
+  },
+  "borderPositiveFaded": {
+    "oklch": {
+      "c": 0.03,
+      "h": 153.78,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.020800000000000003,
+      "h": 153.78,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "borderPrimary": {
+    "oklch": {
+      "c": 0.24,
+      "h": 262.67,
+      "l": 0.47000000000000003,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.192,
+      "h": 262.67,
+      "l": 0.62984,
+      "mode": "oklch",
+    },
+  },
+  "borderPrimaryFaded": {
+    "oklch": {
+      "c": 0.03,
+      "h": 262.67,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.038400000000000004,
+      "h": 262.67,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "borderWarning": {
+    "oklch": {
+      "c": 0.18,
+      "h": 89.84,
+      "l": 0.78,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.144,
+      "h": 89.84,
+      "l": 0.8835519999999999,
+      "mode": "oklch",
+    },
+  },
+  "borderWarningFaded": {
+    "oklch": {
+      "c": 0.05,
+      "h": 89.84,
+      "l": 0.9199999999999999,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.0288,
+      "h": 89.84,
+      "l": 0.35,
+      "mode": "oklch",
+    },
+  },
+  "brand": {
+    "oklch": {
+      "c": 0.24,
+      "h": 262.67,
+      "l": 0.55,
+      "mode": "oklch",
+    },
+    "oklchDark": undefined,
+  },
+  "foregroundCritical": {
+    "oklch": {
+      "c": 0.22,
+      "h": 26.97,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.187,
+      "h": 26.97,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "foregroundDisabled": {
+    "oklch": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.84,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0,
+      "h": 262.67,
+      "l": 0.4,
+      "mode": "oklch",
+    },
+  },
+  "foregroundNeutral": {
+    "oklch": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.2,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.008,
+      "h": 262.67,
+      "l": 0.96,
+      "mode": "oklch",
+    },
+  },
+  "foregroundNeutralFaded": {
+    "oklch": {
+      "c": 0.01,
+      "h": 262.67,
+      "l": 0.45,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.008,
+      "h": 262.67,
+      "l": 0.8099999999999999,
+      "mode": "oklch",
+    },
+  },
+  "foregroundPositive": {
+    "oklch": {
+      "c": 0.13,
+      "h": 153.78,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.1105,
+      "h": 153.78,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "foregroundPrimary": {
+    "oklch": {
+      "c": 0.24,
+      "h": 262.67,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.204,
+      "h": 262.67,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "foregroundWarning": {
+    "oklch": {
+      "c": 0.18,
+      "h": 89.84,
+      "l": 0.5,
+      "mode": "oklch",
+    },
+    "oklchDark": {
+      "c": 0.153,
+      "h": 89.84,
+      "l": 0.75,
+      "mode": "oklch",
+    },
+  },
+  "white": {
+    "oklch": {
+      "c": 0,
+      "l": 0.999999993473546,
+      "mode": "oklch",
+    },
+    "oklchDark": undefined,
+  },
+}
+`;
