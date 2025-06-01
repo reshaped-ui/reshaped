@@ -35,8 +35,6 @@ export const test = () => {
 		"#4a8200",
 		"#0891b2",
 		"#34d399",
-		// "#facc15",
-		// "#d97706",
 		"#fe9a00",
 		"#be185d",
 		"#ff2056",
@@ -53,9 +51,9 @@ export const test = () => {
 				"test",
 				{
 					color: generateThemeColors({
-						// primary: activeColor,
+						primary: activeColor,
 						// oklch(0.59 0.24 262.67)
-						primary: { oklch: { l: 0.59, c: 0.24, h: 262.67 } },
+						// primary: { oklch: { l: 0.59, c: 0.24, h: 262.67 } },
 					}),
 				},
 				{
