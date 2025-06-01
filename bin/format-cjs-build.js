@@ -10,12 +10,30 @@ const path = require("path");
 const distPath = path.resolve(__dirname, "../dist/");
 const distThemesPath = path.resolve(distPath, "themes");
 const distCjsThemesPath = path.resolve(distPath, "cjs/themes");
-const culoriFilePath = path.resolve(distCjsThemesPath, "_generator/utilities/generateColors.js");
 
-const content = fs.readFileSync(culoriFilePath, "utf-8");
-const updatedContent = content.replace("culori/fn", "culori/require");
+function replaceInFile(filePath, searchValue, replaceValue) {
+	const content = fs.readFileSync(filePath, "utf-8");
+	if (content.includes(searchValue)) {
+		const updatedContent = content.replaceAll(searchValue, replaceValue);
+		fs.writeFileSync(filePath, updatedContent, "utf-8");
+		console.log(`Updated culori import in ${filePath}`);
+	}
+}
 
-fs.writeFileSync(culoriFilePath, updatedContent, "utf-8");
+function processDirectory(dir) {
+	const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+	for (const entry of entries) {
+		const fullPath = path.join(dir, entry.name);
+		if (entry.isDirectory()) {
+			processDirectory(fullPath);
+		} else if (entry.isFile() && fullPath.endsWith(".js")) {
+			replaceInFile(fullPath, "culori/fn", "culori/require");
+		}
+	}
+}
+
+processDirectory(distCjsThemesPath);
 
 console.log("Updated culori imports for the CJS build");
 
