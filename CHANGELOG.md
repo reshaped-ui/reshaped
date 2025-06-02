@@ -19,7 +19,7 @@
 - Flyout: Updated trigger boundaries detection inside scrollable
 - Flyout: Avoid using fallbacks inside scrollable when already opened (to match regular flyouts)
 - Flyout: Updated dialog trap mode flyouts to be blocking for Esc keys / clicking outside
-- Flyout: trapFocusMode=false support
+- Flyout, DropdownMenu: trapFocusMode=false support
 - DropdownMenu: Submenu trigger doesn't close the menu on click
 - Accordion: Fixed iconPosition prop memoization
 - Avatar: use rs-font-weight-bold instead of hardcoded weight

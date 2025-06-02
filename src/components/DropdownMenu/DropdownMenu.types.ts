@@ -25,7 +25,7 @@ export type Props = Pick<
 	| "containerRef"
 	| "originCoordinates"
 > & {
-	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu">;
+	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu"> | false;
 };
 
 export type ContentProps = Pick<FlyoutContentProps, "attributes" | "children" | "className">;
