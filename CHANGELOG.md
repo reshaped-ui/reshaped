@@ -26,6 +26,8 @@
 - Exported ColorMode type
 - Reshaped: colorMode conrolled prop support
 
+- Added node engine v20+ to package.json
+
 ## 3.5.3
 
 - Tailwind 3: Preflight compatibility
