@@ -1,37 +1,65 @@
 import type * as T from "./types";
-import type { FullThemeDefinition, TokenType, TransformedToken } from "./tokens/types";
+import type {
+	PassedThemeDefinition,
+	GeneratedThemeDefinition,
+	TokenType,
+	TransformedToken,
+} from "./tokens/types";
 import * as transforms from "./tokens/transforms";
-import { variablesTemplate, mediaTemplate } from "./utilities/css";
-import generateBackgroundColors from "./utilities/generateBackgroundColors";
-import generateUnits from "./utilities/generateUnits";
+import { variablesTemplate, mediaTemplate } from "./tokens/css";
+import { generateUnits } from "./tokens/unit/utilities/generate";
+import generateMetaColors from "./tokens/color/utilities/generateMetaColors";
+import { formatHex } from "culori/fn";
+import { Token } from "./tokens/color/color.types";
 
-const transform = (
-	name: string,
-	definition: T.PartialDeep<FullThemeDefinition>,
-	options: T.PrivateOptions
-) => {
+const transform = (name: string, definition: PassedThemeDefinition, options: T.PrivateOptions) => {
 	const { isFragment, themeOptions } = options;
+	const generatedUnits = isFragment ? {} : generateUnits(definition);
+	const generatedViewports = definition.viewport?.m?.minPx
+		? { s: { maxPx: definition.viewport.m.minPx - 1 } }
+		: {};
+	const generatedMetaColors = generateMetaColors(definition, themeOptions);
+	const generatedColors = Object.entries({
+		...definition.color,
+		...generatedMetaColors,
+	}).reduce<GeneratedThemeDefinition["color"]>((res, [key, token]) => {
+		const next = { ...token } as Token;
+		if (!token) return res;
+		if (!token.hex && token.oklch) {
+			next.hex = formatHex({ ...token.oklch, mode: "oklch" });
+		}
+		if (!token.hexDark && token.oklchDark) {
+			next.hexDark = formatHex({ ...token.oklchDark, mode: "oklch" });
+		}
 
-	generateBackgroundColors(definition, themeOptions);
-	generateUnits(definition);
+		return { ...res, [key]: next };
+	}, {});
 
-	// Generate s viewport
-	if (definition.viewport?.m?.minPx) {
-		definition.viewport.s = { maxPx: definition.viewport.m.minPx - 1 };
-	}
+	const theme: GeneratedThemeDefinition = {
+		...definition,
+		color: generatedColors,
+		unit: {
+			...definition.unit,
+			...generatedUnits,
+		},
+		viewport: {
+			...definition.viewport,
+			...generatedViewports,
+		},
+	};
 
 	const transformedStorage: Record<TransformedToken["type"], TransformedToken[]> = {
 		variable: [],
 		media: [],
 	};
 
-	Object.entries(definition).forEach(([tokenType, tokenValues]) => {
+	Object.entries(theme).forEach(([tokenType, tokenValues]) => {
 		if (!tokenValues) return;
 
 		const transform = transforms.css[tokenType as TokenType];
 
 		Object.entries(tokenValues).forEach(([tokenName, token]) => {
-			const transformedTokens = transform(tokenName, token, definition as FullThemeDefinition);
+			const transformedTokens = transform(tokenName, token, theme);
 
 			transformedTokens.forEach((transformedToken) => {
 				transformedStorage[transformedToken.type].push(transformedToken);
@@ -42,6 +70,7 @@ const transform = (
 	return {
 		variables: variablesTemplate(name, transformedStorage.variable),
 		media: !isFragment ? mediaTemplate(transformedStorage.media) : undefined,
+		theme,
 	};
 };
 

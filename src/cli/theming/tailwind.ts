@@ -3,11 +3,10 @@
  */
 import reshapedDefinition from "themes/_generator/definitions/reshaped";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
-import type { FullThemeDefinition, ThemeDefinition } from "themes/_generator/tokens/types";
-import type * as T from "themes/_generator/types";
+import type { GeneratedThemeDefinition, ThemeDefinition } from "themes/_generator/tokens/types";
 import { camelToKebab } from "utilities/string";
 
-export const transformToTailwind = (theme?: T.PartialDeep<FullThemeDefinition>) => {
+export const transformToTailwind = (theme?: GeneratedThemeDefinition) => {
 	const variables: Record<string, string> = {};
 
 	const definition = theme

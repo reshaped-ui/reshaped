@@ -1,8 +1,11 @@
-import type * as T from "themes/_generator/types";
-import type { FullThemeDefinition } from "themes/_generator/tokens/types";
+import type {
+	GeneratedThemeDefinition,
+	PassedThemeDefinition,
+} from "themes/_generator/tokens/types";
 import type { GeneratedName as GeneratedUnitName } from "themes/_generator/tokens/unit/unit.types";
 
-const generateUnits = (definition: T.PartialDeep<FullThemeDefinition>) => {
+export const generateUnits = (definition: PassedThemeDefinition) => {
+	const result: Partial<GeneratedThemeDefinition["unit"]> = {};
 	const baseValue = definition.unit?.base?.px;
 
 	// If base value hasn't changed, we don't need to regenerate tokens
@@ -10,11 +13,8 @@ const generateUnits = (definition: T.PartialDeep<FullThemeDefinition>) => {
 
 	for (let i = 1; i <= 10; i += 1) {
 		const generatedName = `x${i}` as GeneratedUnitName;
-
-		definition.unit![generatedName] = {
-			px: baseValue * i,
-		};
+		result[generatedName] = { px: baseValue * i };
 	}
-};
 
-export default generateUnits;
+	return result;
+};

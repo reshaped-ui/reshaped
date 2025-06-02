@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * DOM
+ */
 type ClassNameValue = string | null | undefined | false;
 export type ClassName = ClassNameValue | ClassNameValue[] | ClassName[];
 

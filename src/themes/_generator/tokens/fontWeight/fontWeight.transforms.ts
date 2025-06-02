@@ -1,7 +1,7 @@
 import type * as T from "./fontWeight.types";
 import type { Transformer } from "../types";
 
-const transformedToken: Transformer<T.Token> = (name, token) => [
+const transformToken: Transformer<T.Token> = (name, token) => [
 	{
 		name,
 		tokenType: "fontWeight",
@@ -10,4 +10,4 @@ const transformedToken: Transformer<T.Token> = (name, token) => [
 	},
 ];
 
-export default transformedToken;
+export default transformToken;

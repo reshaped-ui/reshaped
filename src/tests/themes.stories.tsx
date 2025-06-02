@@ -1,4 +1,4 @@
-import React from "react";
+import { useLayoutEffect, useState } from "react";
 import { Example } from "utilities/storybook";
 import View from "components/View";
 import Button from "components/Button";
@@ -8,11 +8,14 @@ import Card from "components/Card";
 import Avatar from "components/Avatar";
 import DropdownMenu from "components/DropdownMenu";
 import TextField from "components/TextField";
-import Theme from "components/Theme";
+import Theme, { useTheme } from "components/Theme";
 import IconZap from "icons/Mic";
 import Link from "components/Link";
 import Text from "components/Text";
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
+import ThemePlayground from "./ThemesPlayground";
+import Actionable from "components/Actionable";
+import Switch from "components/Switch";
 
 export default {
 	title: "Internal/Themes",
@@ -23,6 +26,83 @@ export default {
 			disable: true,
 		},
 	},
+};
+
+const colors = [
+	"#2563eb",
+	"#4f39f6",
+	"#4a8200",
+	"#0891b2",
+	"#34d399",
+	"#fe9a00",
+	"#be185d",
+	"#ff2056",
+	"#000000",
+];
+
+export const test = () => {
+	const { colorMode } = useTheme();
+	const [activeColor, setColor] = useState(colors[0]);
+	const [theme, setTheme] = useState("");
+	const [algo, setAlgo] = useState<"wcag" | "apca">("wcag");
+
+	useLayoutEffect(() => {
+		setTheme(
+			getThemeCSS(
+				"test",
+				{
+					color: generateThemeColors({
+						primary: activeColor === colors[0] ? undefined : activeColor,
+					}),
+				},
+				{
+					colorContrastAlgorithm: algo,
+				}
+			)
+		);
+	}, [activeColor, algo]);
+
+	return (
+		<>
+			<style>{theme}</style>
+			<Theme name="test">
+				<View gap={4}>
+					<View direction="row" align="center" gap={4}>
+						{colors.map((color) => {
+							const hex = colorMode === "dark" && color === "#000000" ? "#ffffff" : color;
+
+							return (
+								<Actionable key={color} onClick={() => setColor(color)} borderRadius="inherit">
+									<View
+										width={5}
+										height={5}
+										borderRadius="circular"
+										attributes={{
+											style: {
+												transition: `box-shadow var(--rs-duration-fast) var(--rs-easing-standard)`,
+												background: hex,
+												boxShadow:
+													color === activeColor
+														? `0 0 0 3px var(--rs-color-background-elevation-base), 0 0 0 5px ${hex}`
+														: undefined,
+											},
+										}}
+									/>
+								</Actionable>
+							);
+						})}
+						<View.Item gapBefore="auto">
+							<Switch name="algo" onChange={(args) => setAlgo(args.checked ? "apca" : "wcag")}>
+								Use APCA
+							</Switch>
+						</View.Item>
+					</View>
+
+					<ThemePlayground />
+				</View>
+			</Theme>
+		</>
+	);
 };
 
 const css = getThemeCSS("green", {

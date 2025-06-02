@@ -1,11 +1,10 @@
 import type { ReshapedConfig } from "types/config";
 
-export type Color = string | { hex: string; hexDark: string };
-
-type Primitive = string | number | boolean;
-export type PartialDeep<T> = T extends Primitive
-	? Partial<T>
-	: { [Key in keyof T]?: PartialDeep<T[Key]> };
+export type PartialDeep<T> = {
+	[K in keyof T]?: {
+		[K2 in keyof T[K]]?: T[K][K2];
+	};
+};
 
 export type PublicOptions = {
 	themeOptions?: ReshapedConfig["themeOptions"];

@@ -1,7 +1,7 @@
 import type * as T from "./viewport.types";
 import type { TransformedToken, Transformer } from "../types";
 
-const transformedToken: Transformer<T.Token | T.SToken> = (name, token) => {
+const transformToken: Transformer<T.Token | T.SToken> = (name, token) => {
 	const value: string[] = [];
 
 	if (token.minPx) value.push(`(min-width: ${token.minPx}px)`);
@@ -28,4 +28,4 @@ const transformedToken: Transformer<T.Token | T.SToken> = (name, token) => {
 	return result;
 };
 
-export default transformedToken;
+export default transformToken;

@@ -1,10 +1,10 @@
 import type * as T from "./font.types";
 import type { Transformer, TransformedToken } from "../types";
-import { getVariableName } from "../../utilities/css";
+import { getVariableName } from "../css";
 
 const BASE_REM_SIZE = 16;
 
-const transformedToken: Transformer<T.Token> = (name, token) => {
+const transformToken: Transformer<T.Token> = (name, token) => {
 	const result: TransformedToken[] = [];
 
 	result.push({
@@ -49,4 +49,4 @@ const transformedToken: Transformer<T.Token> = (name, token) => {
 	return result;
 };
 
-export default transformedToken;
+export default transformToken;

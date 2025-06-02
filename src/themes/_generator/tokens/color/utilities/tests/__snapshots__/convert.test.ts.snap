@@ -1,0 +1,105 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`themes/tokens/color/utilities/convert > hexToOklch > black 1`] = `
+{
+  "c": 0,
+  "l": 0,
+  "mode": "oklch",
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > hexToOklch > red 1`] = `
+{
+  "c": 0.25768330773615683,
+  "h": 29.2338851923426,
+  "l": 0.6279553606145515,
+  "mode": "oklch",
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > hexToOklch > white 1`] = `
+{
+  "c": 0,
+  "l": 0.999999993473546,
+  "mode": "oklch",
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > oklchToRgb > black 1`] = `
+{
+  "b": 0,
+  "g": 0,
+  "mode": "rgb",
+  "r": 0,
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > oklchToRgb > red 1`] = `
+{
+  "b": 0,
+  "g": 0,
+  "mode": "rgb",
+  "r": 1,
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > oklchToRgb > white 1`] = `
+{
+  "b": 1,
+  "g": 1,
+  "mode": "rgb",
+  "r": 1,
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > hex 1`] = `
+{
+  "oklch": {
+    "c": 0,
+    "l": 0.999999993473546,
+    "mode": "oklch",
+  },
+  "oklchDark": undefined,
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > hex and hexDark 1`] = `
+{
+  "oklch": {
+    "c": 0,
+    "l": 0.999999993473546,
+    "mode": "oklch",
+  },
+  "oklchDark": {
+    "c": 0,
+    "l": 0,
+    "mode": "oklch",
+  },
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > oklch 1`] = `
+{
+  "oklch": {
+    "c": 0,
+    "l": 0.999999993473546,
+    "mode": "oklch",
+  },
+  "oklchDark": undefined,
+}
+`;
+
+exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > oklch and oklchDark 1`] = `
+{
+  "oklch": {
+    "c": 0,
+    "l": 0.999999993473546,
+    "mode": "oklch",
+  },
+  "oklchDark": {
+    "c": 0,
+    "l": 0,
+    "mode": "oklch",
+  },
+}
+`;

@@ -1,8 +1,8 @@
-import { hexToRgb } from "../../utilities/color";
 import type { Transformer } from "../types";
+import { hexToOklch, oklchToRgb } from "../color/utilities/convert";
 import type * as T from "./shadow.types";
 
-const transformedToken: Transformer<T.Token> = (name, token, theme) => [
+const transformToken: Transformer<T.Token> = (name, token, theme) => [
 	{
 		name,
 		tokenType: "shadow",
@@ -12,7 +12,7 @@ const transformedToken: Transformer<T.Token> = (name, token, theme) => [
 				const blur = ` ${value.blurRadius || 0}px`;
 				const spread = ` ${value.spreadRadius || 0}px`;
 				const colorRef = theme.color[value.colorToken];
-				const rgb = hexToRgb(colorRef.hex);
+				const rgb = oklchToRgb(hexToOklch(colorRef?.hex || "#000000"));
 				const rgbString = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
 				const color = `rgba(${rgbString}, ${value.opacity || 1})`;
 
@@ -22,4 +22,4 @@ const transformedToken: Transformer<T.Token> = (name, token, theme) => [
 	},
 ];
 
-export default transformedToken;
+export default transformToken;

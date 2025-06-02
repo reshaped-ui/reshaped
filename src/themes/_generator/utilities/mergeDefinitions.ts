@@ -1,12 +1,14 @@
-type Obj = { [key: string]: unknown };
+type Obj = Record<string, unknown>;
 
-// Level 1 is token types, level 2 is token values
-// { color: { foreground: {} } }
-// We don't merge token values
+/**
+ * Stop at level 2 to not merge the token values, they should completely override the defaults
+ * Level 1 is token types
+ * Level 2 is token values
+ * Example: theme = { color: { foreground: {} } }
+ */
 const MAX_LEVEL = 2;
 
 const mergeDefinitions = (originalDefinition: Obj, newDefinition: Obj, currentLevel = 1) => {
-	// Overwrite the token value
 	if (currentLevel > MAX_LEVEL) return newDefinition;
 
 	const mergedDefinition = { ...originalDefinition };
