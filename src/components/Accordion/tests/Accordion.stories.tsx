@@ -63,6 +63,20 @@ export const iconPosition = {
 	),
 };
 
+export const gap = {
+	name: "gap",
+	render: () => (
+		<Accordion defaultActive gap={4}>
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<Placeholder />
+			</Accordion.Content>
+		</Accordion>
+	),
+};
+
 export const onToggle: StoryObj<{ handleToggle: Mock }> = {
 	name: "onToggle",
 	args: {

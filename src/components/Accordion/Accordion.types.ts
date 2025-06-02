@@ -5,6 +5,7 @@ import type * as G from "types/global";
 export type BaseProps = {
 	iconSize?: IconProps["size"];
 	iconPosition?: "start" | "end";
+	gap?: G.Responsive<number>;
 	children?: React.ReactNode;
 	onToggle?: (active: boolean) => void;
 	className?: G.ClassName;
@@ -33,7 +34,7 @@ export type ControlledProps = BaseProps & { active: boolean; defaultActive?: nev
 export type UncontrolledProps = BaseProps & { active?: never; defaultActive?: boolean };
 export type Props = ControlledProps | UncontrolledProps;
 
-export type ContextProps = Pick<BaseProps, "iconSize" | "iconPosition"> & {
+export type ContextProps = Pick<BaseProps, "iconSize" | "iconPosition" | "gap"> & {
 	triggerId: string;
 	contentId: string;
 	active: boolean;

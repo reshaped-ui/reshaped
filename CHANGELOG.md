@@ -25,6 +25,7 @@
 - Avatar: use rs-font-weight-bold instead of hardcoded weight
 - Exported ColorMode type
 - Reshaped: colorMode conrolled prop support
+- Accordion: gap property support
 
 - Added node engine v20+ to package.json
 

@@ -8,7 +8,7 @@ import * as T from "./Accordion.types";
 import useHandlerRef from "hooks/useHandlerRef";
 
 const AccordionControlled: React.FC<T.ControlledProps> = (props) => {
-	const { children, onToggle, active, iconPosition, iconSize, className, attributes } = props;
+	const { children, onToggle, active, iconPosition, iconSize, gap, className, attributes } = props;
 	const rootClassNames = classNames(className);
 	const id = useElementId();
 	const onToggleRef = useHandlerRef(onToggle);
@@ -21,8 +21,9 @@ const AccordionControlled: React.FC<T.ControlledProps> = (props) => {
 			onToggle: onToggleRef.current,
 			iconPosition,
 			iconSize,
+			gap,
 		}),
-		[active, iconPosition, iconSize, id, onToggleRef]
+		[active, iconPosition, iconSize, id, onToggleRef, gap]
 	);
 
 	return (
