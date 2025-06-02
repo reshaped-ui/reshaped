@@ -13,7 +13,16 @@ export const hexToOklch = (hex: string): Oklch => {
 	return result;
 };
 
-export const oklchToRgb = (oklch: Oklch) => rgb(oklch);
+export const oklchToRgb = (oklch: Oklch) => {
+	const value = rgb(oklch);
+
+	return {
+		...value,
+		r: Number(value.r.toFixed(4)),
+		g: Number(value.g.toFixed(4)),
+		b: Number(value.b.toFixed(4)),
+	};
+};
 
 export const tokenToOklchToken = (token: TColor.Token): TColor.InternalToken => {
 	const hexDarkFallback = token.hexDark ? hexToOklch(token.hexDark) : undefined;

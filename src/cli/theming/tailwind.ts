@@ -3,10 +3,10 @@
  */
 import reshapedDefinition from "themes/_generator/definitions/reshaped";
 import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
-import type { PassedThemeDefinition, ThemeDefinition } from "themes/_generator/tokens/types";
+import type { GeneratedThemeDefinition, ThemeDefinition } from "themes/_generator/tokens/types";
 import { camelToKebab } from "utilities/string";
 
-export const transformToTailwind = (theme?: PassedThemeDefinition) => {
+export const transformToTailwind = (theme?: GeneratedThemeDefinition) => {
 	const variables: Record<string, string> = {};
 
 	const definition = theme

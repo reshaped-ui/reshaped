@@ -9,21 +9,35 @@ import * as transforms from "./tokens/transforms";
 import { variablesTemplate, mediaTemplate } from "./tokens/css";
 import { generateUnits } from "./tokens/unit/utilities/generate";
 import generateMetaColors from "./tokens/color/utilities/generateMetaColors";
+import { formatHex } from "culori";
+import { Token } from "./tokens/color/color.types";
 
 const transform = (name: string, definition: PassedThemeDefinition, options: T.PrivateOptions) => {
 	const { isFragment, themeOptions } = options;
 	const generatedUnits = isFragment ? {} : generateUnits(definition);
-	const generatedMetaColors = generateMetaColors(definition, themeOptions);
 	const generatedViewports = definition.viewport?.m?.minPx
 		? { s: { maxPx: definition.viewport.m.minPx - 1 } }
 		: {};
+	const generatedMetaColors = generateMetaColors(definition, themeOptions);
+	const generatedColors = Object.entries({
+		...definition.color,
+		...generatedMetaColors,
+	}).reduce<GeneratedThemeDefinition["color"]>((res, [key, token]) => {
+		const next = { ...token } as Token;
+		if (!token) return res;
+		if (!token.hex && token.oklch) {
+			next.hex = formatHex({ ...token.oklch, mode: "oklch" });
+		}
+		if (!token.hexDark && token.oklchDark) {
+			next.hexDark = formatHex({ ...token.oklchDark, mode: "oklch" });
+		}
+
+		return { ...res, [key]: next };
+	}, {});
 
 	const theme: GeneratedThemeDefinition = {
 		...definition,
-		color: {
-			...definition.color,
-			...generatedMetaColors,
-		},
+		color: generatedColors,
 		unit: {
 			...definition.unit,
 			...generatedUnits,
@@ -56,6 +70,7 @@ const transform = (name: string, definition: PassedThemeDefinition, options: T.P
 	return {
 		variables: variablesTemplate(name, transformedStorage.variable),
 		media: !isFragment ? mediaTemplate(transformedStorage.media) : undefined,
+		theme,
 	};
 };
 

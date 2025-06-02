@@ -5,8 +5,8 @@ const transformTokenForMode = (args: { hex?: T.HexColor; oklch?: T.OklchColor })
 	const { hex, oklch } = args;
 
 	if (oklch) {
-		const components = `${oklch.l.toFixed(4)} ${oklch.c.toFixed(4)} ${oklch.h?.toFixed(4) || 0}`;
-		const alphaSuffix = oklch?.alpha === undefined ? "" : ` / ${oklch.alpha.toFixed(4)}`;
+		const components = `${Number(oklch.l.toFixed(4))} ${Number(oklch.c.toFixed(4))} ${Number(oklch.h?.toFixed(4) || 0)}`;
+		const alphaSuffix = oklch?.alpha === undefined ? "" : ` / ${Number(oklch.alpha.toFixed(4))}`;
 		return `oklch(${components}${alphaSuffix})`;
 	}
 
@@ -19,24 +19,27 @@ const transformToken: Transformer<T.Token> = (name, token) => {
 	const { hex, hexDark, oklch, oklchDark } = token;
 	// Apply color to both modes if dark mode is not available
 	const hasDark = !!hexDark || !!oklchDark;
-	const defaultMode = hasDark ? "light" : undefined;
+	const value = transformTokenForMode({ oklch, hex });
+	const darkValue = hasDark ? transformTokenForMode({ oklch: oklchDark, hex: hexDark }) : undefined;
+	const separateModes = hasDark && value !== darkValue;
+	const defaultMode = separateModes ? "light" : undefined;
 
 	const result: TransformedToken[] = [
 		{
 			name,
 			tokenType: "color",
 			type: "variable",
-			value: transformTokenForMode({ oklch, hex }),
+			value,
 			mode: defaultMode,
 		},
 	];
 
-	if (hasDark) {
+	if (darkValue && separateModes) {
 		result.push({
 			name,
 			tokenType: "color",
 			type: "variable",
-			value: transformTokenForMode({ oklch: oklchDark, hex: hexDark }),
+			value: darkValue,
 			mode: "dark",
 		});
 	}
