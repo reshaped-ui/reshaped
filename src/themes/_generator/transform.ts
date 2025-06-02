@@ -9,7 +9,7 @@ import * as transforms from "./tokens/transforms";
 import { variablesTemplate, mediaTemplate } from "./tokens/css";
 import { generateUnits } from "./tokens/unit/utilities/generate";
 import generateMetaColors from "./tokens/color/utilities/generateMetaColors";
-import { formatHex } from "culori";
+import { formatHex } from "culori/fn";
 import { Token } from "./tokens/color/color.types";
 
 const transform = (name: string, definition: PassedThemeDefinition, options: T.PrivateOptions) => {

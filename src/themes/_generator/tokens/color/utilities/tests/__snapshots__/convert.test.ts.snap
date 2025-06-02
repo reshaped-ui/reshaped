@@ -36,19 +36,19 @@ exports[`themes/tokens/color/utilities/convert > oklchToRgb > black 1`] = `
 
 exports[`themes/tokens/color/utilities/convert > oklchToRgb > red 1`] = `
 {
-  "b": 1.0758061108617766e-15,
-  "g": 2.2412627309620348e-15,
+  "b": 0,
+  "g": 0,
   "mode": "rgb",
-  "r": 0.9999999999999994,
+  "r": 1,
 }
 `;
 
 exports[`themes/tokens/color/utilities/convert > oklchToRgb > white 1`] = `
 {
-  "b": 1.0000001062495965,
-  "g": 1.00000000005861,
+  "b": 1,
+  "g": 1,
   "mode": "rgb",
-  "r": 0.9999999608276361,
+  "r": 1,
 }
 `;
 
