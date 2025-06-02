@@ -1,1 +1,21 @@
-{"color":{"backgroundPrimary":{"hex":"#1da1f2"},"backgroundPrimaryHighlighted":{"hex":"#1a90da"},"onBackgroundPrimary":{"hex":"#ffffff"},"rgbBackgroundPrimary":{"hex":"28.993499999999997, 161.00699999999998, 241.99499999999998"},"rgbBackgroundPrimaryHighlighted":{"hex":"26.009999999999998, 143.9985, 217.9995"}},"unit":{},"viewport":{}}
+{
+  "color": {
+    "backgroundPrimary": {
+      "hex": "#1da1f2"
+    },
+    "backgroundPrimaryHighlighted": {
+      "hex": "#1a90da"
+    },
+    "onBackgroundPrimary": {
+      "hex": "#ffffff"
+    },
+    "rgbBackgroundPrimary": {
+      "hex": "28.993499999999997, 161.00699999999998, 241.99499999999998"
+    },
+    "rgbBackgroundPrimaryHighlighted": {
+      "hex": "26.009999999999998, 143.9985, 217.9995"
+    }
+  },
+  "unit": {},
+  "viewport": {}
+}

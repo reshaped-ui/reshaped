@@ -27,7 +27,7 @@ const transformDefinition = (
 
 	fs.mkdirSync(themeFolderPath, { recursive: true });
 	fs.writeFileSync(themePath, code.variables);
-	fs.writeFileSync(themeJsonPath, JSON.stringify(code.theme));
+	fs.writeFileSync(themeJsonPath, JSON.stringify(code.theme, null, 2));
 	fs.writeFileSync(twPath, transformToTailwind(code.theme));
 
 	if (code.media) fs.writeFileSync(themeMediaPath, code.media);

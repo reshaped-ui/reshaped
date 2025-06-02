@@ -1,5 +1,7 @@
 ## WIP 3.6.0
 
+- OKLCH color support in themes
+
 - Flyout: Exported from the library
 - Flyout: Moved css to css layers
 - Flyout: Support height animations
