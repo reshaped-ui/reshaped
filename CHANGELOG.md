@@ -26,6 +26,7 @@
 - Exported ColorMode type
 - Reshaped: colorMode conrolled prop support
 - Accordion: gap property support
+- ScrollArea: Removed tabIndex since it's handled natively including cases when there are actionable elements inside
 
 - Added node engine v20+ to package.json
 

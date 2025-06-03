@@ -194,8 +194,8 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 			className={rootClassNames}
 			style={{ ...heightStyles?.variables }}
 		>
-			{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll} tabIndex={0}>
+			{}
+			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll}>
 				<div className={contentClassNames} style={{ ...maxHeightStyles?.variables }}>
 					{children}
 				</div>
