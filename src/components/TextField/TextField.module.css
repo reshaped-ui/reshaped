@@ -10,8 +10,7 @@
 	border: 1px solid var(--rs-color-border-neutral);
 	border-radius: var(--rs-text-field-radius);
 	padding: 0 calc(var(--rs-text-field-gap) - 1px);
-	gap: var(--rs-text-field-gap);
-	row-gap: 0;
+	column-gap: var(--rs-text-field-gap);
 
 	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus)):focus-within,
 	&:has(label:active),
@@ -40,6 +39,12 @@
 			padding-inline-start: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
 		}
 	}
+}
+
+.inner {
+	display: inline-flex;
+	flex-grow: 1;
+	column-gap: var(--rs-text-field-gap);
 }
 
 .input {
@@ -88,8 +93,14 @@
 	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px);
 }
 
+/* Ensure that when wrapping to the new line, end attachments stay in the end */
+.input + .icon--position-end,
+.input + .affix--position-end,
+.input + .slot--position-end {
+	margin-inline-start: auto;
+}
+
 .slot--position-end:last-child {
-	/* margin-inline-end: calc((var(--rs-text-field-gap) - var(--rs-unit-x2) + 1px) * -1); */
 	margin-inline-end: calc(var(--rs-text-field-gap) * -1);
 	padding-inline-end: var(--rs-text-field-action-inset);
 }

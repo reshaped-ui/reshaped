@@ -28,6 +28,7 @@
 - Accordion: gap property support
 - ScrollArea: Removed tabIndex since it's handled natively including cases when there are actionable elements inside
 - TextField: Fixed the gap/min-height of the attachments
+- TextField: Improved end attachment wrapping
 
 - Added node engine v20+ to package.json
 

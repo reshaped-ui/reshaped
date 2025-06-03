@@ -28,7 +28,7 @@ const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 			</div>
 		));
 	const iconNode = icon && (
-		<label className={s.icon} key="icon" htmlFor={id}>
+		<label className={classNames(s.icon, s[`icon--position-${position}`])} key="icon" htmlFor={id}>
 			<Icon
 				size={responsivePropDependency(size, (size) => {
 					if (size === "large") return 5;
@@ -123,29 +123,31 @@ const TextField: React.FC<T.Props> & {
 				id={id}
 			/>
 
-			<input
-				type="text"
-				{...inputAttributes}
-				className={classNames(s.input, inputAttributes.className)}
-				disabled={disabled}
-				name={name}
-				placeholder={placeholder}
-				value={value}
-				defaultValue={defaultValue}
-				onChange={handleChange}
-				onFocus={onFocus || inputAttributes?.onFocus}
-				onBlur={onBlur || inputAttributes?.onBlur}
-				id={inputId}
-			/>
+			<div className={s.inner}>
+				<input
+					type="text"
+					{...inputAttributes}
+					className={classNames(s.input, inputAttributes.className)}
+					disabled={disabled}
+					name={name}
+					placeholder={placeholder}
+					value={value}
+					defaultValue={defaultValue}
+					onChange={handleChange}
+					onFocus={onFocus || inputAttributes?.onFocus}
+					onBlur={onBlur || inputAttributes?.onBlur}
+					id={inputId}
+				/>
 
-			<TextFieldSlot
-				position="end"
-				icon={endIcon}
-				slot={endSlot}
-				size={size}
-				affix={suffix}
-				id={id}
-			/>
+				<TextFieldSlot
+					position="end"
+					icon={endIcon}
+					slot={endSlot}
+					size={size}
+					affix={suffix}
+					id={id}
+				/>
+			</div>
 		</div>
 	);
 };
