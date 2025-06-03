@@ -1,4 +1,4 @@
-@theme {
+@theme inline {
     --background-color-primary: var(--rs-color-background-primary);
 --background-color-primary-faded: var(--rs-color-background-primary-faded);
 --border-color-primary: var(--rs-color-border-primary);

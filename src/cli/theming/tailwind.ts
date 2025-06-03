@@ -88,7 +88,7 @@ export const transformToTailwind = (theme?: GeneratedThemeDefinition) => {
 		variables[`--breakpoint-${tokenName}`] = `${tokenValue.minPx}px`;
 	});
 
-	return `@theme {
+	return `@theme inline {
     ${Object.entries(variables)
 			.map(([key, value]) => `${key}: ${value};`)
 			.join("\n")}

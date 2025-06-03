@@ -1,6 +1,7 @@
 ## WIP 3.6.0
 
 - OKLCH color support in themes
+- Tailwind: Added scoped theming / color mode support for Tailwind v4 (rebuild themes)
 
 - Flyout: Exported from the library
 - Flyout: Moved css to css layers
