@@ -304,19 +304,11 @@ export const multiselect = {
 			inputRef.current?.focus();
 		};
 
-		const valuesNode = !!values.length && (
-			<View direction="row" gap={1}>
-				{values.map((value) => (
-					<Badge
-						dismissAriaLabel="Dismiss value"
-						onDismiss={() => handleDismiss(value)}
-						key={value}
-					>
-						{value}
-					</Badge>
-				))}
-			</View>
-		);
+		const valuesNode = values.map((value) => (
+			<Badge dismissAriaLabel="Dismiss value" onDismiss={() => handleDismiss(value)} key={value}>
+				{value}
+			</Badge>
+		));
 
 		return (
 			<FormControl>

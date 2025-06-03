@@ -27,6 +27,7 @@
 - Reshaped: colorMode conrolled prop support
 - Accordion: gap property support
 - ScrollArea: Removed tabIndex since it's handled natively including cases when there are actionable elements inside
+- TextField: Fixed the gap/min-height of the attachments
 
 - Added node engine v20+ to package.json
 

@@ -11,7 +11,7 @@
 	border-radius: var(--rs-text-field-radius);
 	padding: 0 calc(var(--rs-text-field-gap) - 1px);
 	gap: var(--rs-text-field-gap);
-	row-gap: var(--rs-unit-x1);
+	row-gap: 0;
 
 	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus)):focus-within,
 	&:has(label:active),
@@ -85,7 +85,7 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x2) - 2px);
+	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px);
 }
 
 .slot--position-end:last-child {
