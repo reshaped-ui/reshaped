@@ -2775,10 +2775,10 @@ chokidar@^4.0.3:
   dependencies:
     readdirp "^4.0.1"
 
-chromatic@12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-12.0.0.tgz#4519a51ae66db6973268fed0bd241b63a2e42b76"
-  integrity sha512-X7v26BLfAzHCU92nxPsCuvt+MazmA7S6cN7pCRRhnDYChDxHES48YvXarOybLdlH9kNP/3lMyknu6iseTh0T9A==
+chromatic@12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-12.2.0.tgz#2f22865d66fa82d7c5565170f70eabb613223671"
+  integrity sha512-GswmBW9ZptAoTns1BMyjbm55Z7EsIJnUvYKdQqXIBZIKbGErmpA+p4c0BYA+nzw5B0M+rb3Iqp1IaH8TFwIQew==
 
 chrome-trace-event@^1.0.2:
   version "1.0.3"
