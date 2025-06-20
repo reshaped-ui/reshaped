@@ -9,7 +9,7 @@
 	@value true {
 		border-left-style: none !important;
 		border-right-style: none !important;
-		border-radius: 0;
+		border-radius: 0 !important;
 	}
 
 	@value false {
@@ -17,6 +17,6 @@
 		border-right-style: solid !important;
 
 		/* Depends on the radius css utility */
-		border-radius: var(--rs-radius);
+		border-radius: var(--rs-radius) !important;
 	}
 }

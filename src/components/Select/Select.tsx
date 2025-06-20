@@ -119,7 +119,8 @@ const Select: React.FC<T.Props> = (props) => {
 						}}
 					>
 						{startContent}
-						{children || (placeholder ? <Text color="neutral-faded">{placeholder}</Text> : null)}
+						{children ? <Text maxLines={1}>{children}</Text> : null}
+						{placeholder && !children ? <Text color="neutral-faded">{placeholder}</Text> : null}
 					</Actionable>
 					<input type="hidden" value={value} name={name} />
 				</>

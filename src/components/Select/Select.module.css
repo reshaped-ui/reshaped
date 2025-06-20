@@ -36,6 +36,7 @@
 		var(--rs-select-chevron-size) + var(--rs-select-gap) * 2 + var(--rs-unit-x1)
 	);
 	padding-inline-start: var(--rs-select-gap);
+	text-overflow: ellipsis;
 
 	&::-ms-expand {
 		display: none;
