@@ -14,7 +14,7 @@ import { Token } from "./tokens/color/color.types";
 
 const transform = (name: string, definition: PassedThemeDefinition, options: T.PrivateOptions) => {
 	const { isFragment, themeOptions } = options;
-	const generatedUnits = isFragment ? {} : generateUnits(definition);
+	const generatedUnits = generateUnits(definition);
 	const generatedViewports = definition.viewport?.m?.minPx
 		? { s: { maxPx: definition.viewport.m.minPx - 1 } }
 		: {};
