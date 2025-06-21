@@ -241,14 +241,13 @@ export const value: StoryObj<{ handleChange: Mock }> = {
 };
 
 export const minMax: StoryObj = {
-	name: "min, max, step",
+	name: "min, max",
 	render: () => (
 		<NumberField
 			name="test-name"
 			defaultValue={6}
 			min={5}
-			max={15}
-			step={5}
+			max={10}
 			increaseAriaLabel="Increase"
 			decreaseAriaLabel="Decrease"
 			inputAttributes={{ "aria-label": "Label" }}
@@ -261,19 +260,48 @@ export const minMax: StoryObj = {
 		expect(input).toHaveValue("6");
 
 		await userEvent.click(increaseButton);
+		await userEvent.click(increaseButton);
+		await userEvent.click(increaseButton);
+		await userEvent.click(increaseButton);
+		await userEvent.click(increaseButton);
 
-		expect(input).toHaveValue("11");
+		expect(input).toHaveValue("10");
 
+		await userEvent.click(decreaseButton);
+		await userEvent.click(decreaseButton);
+		await userEvent.click(decreaseButton);
+		await userEvent.click(decreaseButton);
 		await userEvent.click(decreaseButton);
 		await userEvent.click(decreaseButton);
 
 		expect(input).toHaveValue("5");
+	},
+};
+
+export const step: StoryObj = {
+	name: "step",
+	render: () => (
+		<NumberField
+			name="test-name"
+			defaultValue={6}
+			step={0.5}
+			increaseAriaLabel="Increase"
+			decreaseAriaLabel="Decrease"
+			inputAttributes={{ "aria-label": "Label" }}
+		/>
+	),
+	play: async ({ canvas }) => {
+		const input = canvas.getByRole("textbox");
+		const [increaseButton, decreaseButton] = canvas.getAllByRole("button");
+
+		expect(input).toHaveValue("6");
 
 		await userEvent.click(increaseButton);
-		await userEvent.click(increaseButton);
-		await userEvent.click(increaseButton);
+		expect(input).toHaveValue("6.5");
 
-		expect(input).toHaveValue("15");
+		await userEvent.click(decreaseButton);
+		await userEvent.click(decreaseButton);
+		expect(input).toHaveValue("5.5");
 	},
 };
 

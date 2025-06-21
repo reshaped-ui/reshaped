@@ -32,6 +32,7 @@
 - TextField: Improved end attachment wrapping
 - Select: Added label text truncation
 - Card: Fixed bleed utility specitficity
+- NumberField: Fixed float number onChange
 
 - Added node engine v20+ to package.json
 

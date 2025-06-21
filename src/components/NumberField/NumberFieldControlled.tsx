@@ -59,7 +59,9 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			if (min !== undefined && nextValue < min) nextValue = min;
 
 			// Keep the right precision and avoid JS rounding errors
-			const floatPartLength = value?.toString().split(".")[1]?.length || 0;
+			const stepFloatPartLength = step.toString().split(".")[1]?.length || 0;
+			const valueFloatPartLength = value?.toString().split(".")[1]?.length || 0;
+			const floatPartLength = Math.max(stepFloatPartLength, valueFloatPartLength);
 			return Number(nextValue.toFixed(floatPartLength));
 		},
 		[step, min, max]
