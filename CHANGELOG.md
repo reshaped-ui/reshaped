@@ -4,6 +4,7 @@
 - Tailwind: Added scoped theming / color mode support for Tailwind v4 (rebuild themes)
 - Website: Added DS comparison
 - Website: Updated supported browsers for OKLCH usage
+- Removed irrelevant hover effects for touch events not using a pointer device
 
 - Flyout: Exported from the library
 - Flyout: Moved css to css layers

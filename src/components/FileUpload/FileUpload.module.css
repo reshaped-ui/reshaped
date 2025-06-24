@@ -12,8 +12,10 @@
 		box-shadow: var(--rs-focus-shadow);
 	}
 
-	&:hover:not(:has(.trigger)) {
-		background: rgba(var(--rs-color-rgb-background-neutral), 16%);
+	@media (hover: hover) and (pointer: fine) {
+		&:hover:not(:has(.trigger)) {
+			background: rgba(var(--rs-color-rgb-background-neutral), 16%);
+		}
 	}
 
 	&:has(.trigger) {

@@ -22,8 +22,10 @@
 		padding: 2px;
 		isolation: isolate;
 
-		&:hover .cell-button {
-			background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+		@media (hover: hover) and (pointer: fine) {
+			&:hover .cell-button {
+				background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+			}
 		}
 
 		&.--active .cell-button {
@@ -79,11 +81,18 @@
 
 		&.--selection-start + .--selection-range,
 		&.--selection-range + .--selection-range,
-		&.--selection-range + .--selection-end,
-		&.--selection-range + :hover,
-		&.--selection-start + :hover {
+		&.--selection-range + .--selection-end {
 			& .cell-button::before {
 				background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+			}
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&.--selection-range + :hover,
+			&.--selection-start + :hover {
+				& .cell-button::before {
+					background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+				}
 			}
 		}
 	}

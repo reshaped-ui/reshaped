@@ -43,7 +43,9 @@
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 	}
 
-	&:hover::before {
-		opacity: 1;
+	@media (hover: hover) and (pointer: fine) {
+		&:hover::before {
+			opacity: 1;
+		}
 	}
 }

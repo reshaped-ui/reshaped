@@ -28,9 +28,11 @@
 	transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 	opacity: 1;
 
-	&:hover:not(.--disabled) {
-		/* Same as in button */
-		opacity: 0.8;
+	@media (hover: hover) and (pointer: fine) {
+		&:hover:not(.--disabled) {
+			/* Same as in button */
+			opacity: 0.8;
+		}
 	}
 }
 
@@ -39,8 +41,10 @@
 	text-decoration-color: currentcolor;
 	transition: text-decoration-color var(--rs-duration-fast) var(--rs-easing-standard);
 
-	&:hover:not(.--disabled) {
-		text-decoration-color: transparent;
+	@media (hover: hover) and (pointer: fine) {
+		&:hover:not(.--disabled) {
+			text-decoration-color: transparent;
+		}
 	}
 }
 

@@ -89,8 +89,10 @@
 	box-sizing: border-box;
 	border-radius: var(--rs-radius-medium);
 
-	&:hover {
-		color: var(--rs-color-foreground-neutral-faded);
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			color: var(--rs-color-foreground-neutral-faded);
+		}
 	}
 }
 
@@ -310,8 +312,10 @@
 	margin: 0;
 	padding: var(--rs-tabs-item-p-v) var(--rs-tabs-item-p-h);
 
-	&:hover {
-		background: none;
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			background: none;
+		}
 	}
 }
 
