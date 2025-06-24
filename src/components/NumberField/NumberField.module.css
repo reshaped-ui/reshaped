@@ -12,7 +12,7 @@
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	inset-block: calc(var(--rs-text-field-p-v) * -1 + var(--rs-unit-x1));
+	inset-block: 0;
 	inset-inline-end: 0;
 	transition: border-color var(--rs-duration-fast) var(--rs-easing-standard);
 
@@ -97,8 +97,10 @@
 		color: var(--rs-color-foreground-disabled);
 	}
 
-	&:not([aria-disabled]):hover {
-		background: rgba(var(--rs-color-rgb-background-neutral), 32%);
+	@media (hover: hover) and (pointer: fine) {
+		&:not([aria-disabled]):hover {
+			background: rgba(var(--rs-color-rgb-background-neutral), 32%);
+		}
 	}
 }
 

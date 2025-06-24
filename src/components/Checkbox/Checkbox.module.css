@@ -19,8 +19,10 @@ since it reset the border width/color without using @layer
 	-webkit-tap-highlight-color: transparent;
 }
 
-.root:hover .decorator {
-	background: var(--rs-color-background-neutral-faded);
+@media (hover: hover) and (pointer: fine) {
+	.root:hover .decorator {
+		background: var(--rs-color-background-neutral-faded);
+	}
 }
 
 .field {

@@ -66,29 +66,44 @@ button.root {
 .--color-neutral {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
-	&:hover,
 	&.--selected,
 	&[data-rs-focus] {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+		}
 	}
 }
 
 .--color-critical {
 	--rs-menu-item-color: var(--rs-color-foreground-critical);
 
-	&:hover,
 	&.--selected,
 	&[data-rs-focus] {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-critical), 12%);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-critical), 12%);
+		}
 	}
 }
 
 .--color-primary {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
-	&:hover,
 	&[data-rs-focus] {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+		}
 	}
 
 	&.--selected,

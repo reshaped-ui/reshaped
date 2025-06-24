@@ -172,9 +172,14 @@
 		background-color: var(--rs-color-on-background-neutral);
 	}
 
-	&:hover:not(.--loading)::before,
 	&.--highlighted::before {
 		opacity: 0.04;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover:not(.--loading)::before {
+			opacity: 0.04;
+		}
 	}
 }
 
@@ -190,9 +195,14 @@
 				background-color: var(--rs-color-on-background-$(color));
 			}
 
-			&:hover:not(.--loading)::before,
 			&.--highlighted::before {
 				opacity: 0.08;
+			}
+
+			@media (hover: hover) and (pointer: fine) {
+				&:hover:not(.--loading)::before {
+					opacity: 0.08;
+				}
 			}
 		}
 	}
@@ -205,9 +215,14 @@
 			background-color: var(--rs-color-black);
 		}
 
-		&:hover:not(.--loading, .--disabled)::before,
 		&.--highlighted::before {
 			opacity: 0.04;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--loading, .--disabled)::before {
+				opacity: 0.04;
+			}
 		}
 	}
 }
@@ -224,9 +239,14 @@
 				background-color: var(--rs-color-foreground-$(color));
 			}
 
-			&:hover:not(.--loading)::before,
 			&.--highlighted::before {
 				opacity: 0.04;
+			}
+
+			@media (hover: hover) and (pointer: fine) {
+				&:hover:not(.--loading)::before {
+					opacity: 0.04;
+				}
 			}
 		}
 	}
@@ -239,9 +259,14 @@
 			opacity: 0.28;
 		}
 
-		&:hover:not(.--loading, .--disabled)::before,
 		&.--highlighted::before {
 			opacity: 0.32;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--loading, .--disabled)::before {
+				opacity: 0.32;
+			}
 		}
 	}
 
@@ -253,9 +278,14 @@
 			opacity: 0.16;
 		}
 
-		&:hover:not(.--loading)::before,
 		&.--highlighted::before {
 			opacity: 0.2;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--loading)::before {
+				opacity: 0.2;
+			}
 		}
 	}
 }
@@ -271,9 +301,14 @@
 			background-color: var(--rs-color-foreground-neutral);
 		}
 
-		&:hover:not(.--loading)::before,
 		&.--highlighted::before {
 			opacity: 0.04;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--loading)::before {
+				opacity: 0.04;
+			}
 		}
 	}
 
@@ -286,9 +321,14 @@
 				background-color: var(--rs-color-foreground-$(color));
 			}
 
-			&:hover:not(.--loading)::before,
 			&.--highlighted::before {
 				opacity: 0.08;
+			}
+
+			@media (hover: hover) and (pointer: fine) {
+				&:hover:not(.--loading)::before {
+					opacity: 0.08;
+				}
 			}
 		}
 	}
@@ -310,9 +350,14 @@
 			opacity: 0.32;
 		}
 
-		&:hover:not(.--loading)::before,
 		&.--highlighted::before {
 			opacity: 0.08;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--loading)::before {
+				opacity: 0.08;
+			}
 		}
 	}
 }
@@ -327,9 +372,14 @@
 			background-color: var(--rs-color-background-neutral);
 		}
 
-		&:hover:not(.--loading)::before,
 		&.--highlighted::before {
 			opacity: 0.32;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--loading)::before {
+				opacity: 0.32;
+			}
 		}
 	}
 
@@ -341,9 +391,14 @@
 				background-color: var(--rs-color-background-$(color));
 			}
 
-			&:hover:not(.--loading)::before,
 			&.--highlighted::before {
 				opacity: 0.12;
+			}
+
+			@media (hover: hover) and (pointer: fine) {
+				&:hover:not(.--loading)::before {
+					opacity: 0.12;
+				}
 			}
 		}
 	}
@@ -355,9 +410,14 @@
 			background-color: currentcolor;
 		}
 
-		&:hover:not(.--loading)::before,
 		&.--highlighted::before {
 			opacity: 0.08;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--loading)::before {
+				opacity: 0.08;
+			}
 		}
 	}
 }
