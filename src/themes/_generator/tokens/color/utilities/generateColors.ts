@@ -172,7 +172,7 @@ const generateColors = (args: Partial<Record<Hue, ColorValue>> = {}) => {
 	const {
 		primary = { oklch: { l: 0.55, c: 0.24, h: 262.67 } },
 		critical = { oklch: { l: 0.59, c: 0.22, h: 26.97 } },
-		warning = { oklch: { l: 0.86, c: 0.18, h: 89.84 } },
+		warning = { oklch: { l: 0.83, c: 0.2, h: 80 } },
 		positive = { oklch: { l: 0.53, c: 0.13, h: 153.78 } },
 		neutral = { oklch: { l: 0.92, c: 0.01, h: 262.67 } },
 		brand,
