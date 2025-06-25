@@ -172,14 +172,14 @@
 		background-color: var(--rs-color-on-background-neutral);
 	}
 
-	&.--highlighted::before {
-		opacity: 0.04;
-	}
-
 	@media (hover: hover) and (pointer: fine) {
 		&:hover:not(.--loading)::before {
 			opacity: 0.04;
 		}
+	}
+
+	&.--highlighted::before {
+		opacity: 0.08 !important;
 	}
 }
 
@@ -195,14 +195,14 @@
 				background-color: var(--rs-color-on-background-$(color));
 			}
 
-			&.--highlighted::before {
-				opacity: 0.08;
-			}
-
 			@media (hover: hover) and (pointer: fine) {
 				&:hover:not(.--loading)::before {
 					opacity: 0.08;
 				}
+			}
+
+			&.--highlighted::before {
+				opacity: 0.12 !important;
 			}
 		}
 	}
@@ -215,14 +215,14 @@
 			background-color: var(--rs-color-black);
 		}
 
-		&.--highlighted::before {
-			opacity: 0.04;
-		}
-
 		@media (hover: hover) and (pointer: fine) {
 			&:hover:not(.--loading, .--disabled)::before {
-				opacity: 0.04;
+				opacity: 0.06;
 			}
+		}
+
+		&.--highlighted::before {
+			opacity: 0.1 !important;
 		}
 	}
 }
@@ -239,14 +239,14 @@
 				background-color: var(--rs-color-foreground-$(color));
 			}
 
-			&.--highlighted::before {
-				opacity: 0.04;
-			}
-
 			@media (hover: hover) and (pointer: fine) {
 				&:hover:not(.--loading)::before {
-					opacity: 0.04;
+					opacity: 0.06;
 				}
+			}
+
+			&.--highlighted::before {
+				opacity: 0.1 !important;
 			}
 		}
 	}
@@ -259,14 +259,14 @@
 			opacity: 0.28;
 		}
 
-		&.--highlighted::before {
-			opacity: 0.32;
-		}
-
 		@media (hover: hover) and (pointer: fine) {
 			&:hover:not(.--loading, .--disabled)::before {
 				opacity: 0.32;
 			}
+		}
+
+		&.--highlighted::before {
+			opacity: 0.36 !important;
 		}
 	}
 
@@ -278,14 +278,14 @@
 			opacity: 0.16;
 		}
 
-		&.--highlighted::before {
-			opacity: 0.2;
-		}
-
 		@media (hover: hover) and (pointer: fine) {
 			&:hover:not(.--loading)::before {
 				opacity: 0.2;
 			}
+		}
+
+		&.--highlighted::before {
+			opacity: 0.24 !important;
 		}
 	}
 }
@@ -301,14 +301,14 @@
 			background-color: var(--rs-color-foreground-neutral);
 		}
 
-		&.--highlighted::before {
-			opacity: 0.04;
-		}
-
 		@media (hover: hover) and (pointer: fine) {
 			&:hover:not(.--loading)::before {
-				opacity: 0.04;
+				opacity: 0.06;
 			}
+		}
+
+		&.--highlighted::before {
+			opacity: 0.1 !important;
 		}
 	}
 
@@ -321,14 +321,14 @@
 				background-color: var(--rs-color-foreground-$(color));
 			}
 
-			&.--highlighted::before {
-				opacity: 0.08;
-			}
-
 			@media (hover: hover) and (pointer: fine) {
 				&:hover:not(.--loading)::before {
-					opacity: 0.08;
+					opacity: 0.06;
 				}
+			}
+
+			&.--highlighted::before {
+				opacity: 0.1 !important;
 			}
 		}
 	}
@@ -350,14 +350,14 @@
 			opacity: 0.32;
 		}
 
-		&.--highlighted::before {
-			opacity: 0.08;
-		}
-
 		@media (hover: hover) and (pointer: fine) {
 			&:hover:not(.--loading)::before {
-				opacity: 0.08;
+				opacity: 0.06;
 			}
+		}
+
+		&.--highlighted::before {
+			opacity: 0.1 !important;
 		}
 	}
 }
@@ -369,17 +369,17 @@
 		color: var(--rs-color-foreground-neutral);
 
 		&::before {
-			background-color: var(--rs-color-background-neutral);
-		}
-
-		&.--highlighted::before {
-			opacity: 0.32;
+			background-color: var(--rs-color-foreground-neutral);
 		}
 
 		@media (hover: hover) and (pointer: fine) {
 			&:hover:not(.--loading)::before {
-				opacity: 0.32;
+				opacity: 0.06;
 			}
+		}
+
+		&.--highlighted::before {
+			opacity: 0.1 !important;
 		}
 	}
 
@@ -388,17 +388,17 @@
 			color: var(--rs-color-foreground-$(color));
 
 			&::before {
-				background-color: var(--rs-color-background-$(color));
-			}
-
-			&.--highlighted::before {
-				opacity: 0.12;
+				background-color: var(--rs-color-foreground-$(color));
 			}
 
 			@media (hover: hover) and (pointer: fine) {
 				&:hover:not(.--loading)::before {
-					opacity: 0.12;
+					opacity: 0.06;
 				}
+			}
+
+			&.--highlighted::before {
+				opacity: 0.1 !important;
 			}
 		}
 	}
@@ -410,14 +410,14 @@
 			background-color: currentcolor;
 		}
 
-		&.--highlighted::before {
-			opacity: 0.08;
-		}
-
 		@media (hover: hover) and (pointer: fine) {
 			&:hover:not(.--loading)::before {
 				opacity: 0.08;
 			}
+		}
+
+		&.--highlighted::before {
+			opacity: 0.1 !important;
 		}
 	}
 }

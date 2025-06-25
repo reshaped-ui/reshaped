@@ -17,7 +17,7 @@ export const toggle: StoryObj = {
 		const { toggle, active } = useToggle();
 
 		return (
-			<Button onClick={toggle} attributes={{ "data-active": active }}>
+			<Button onClick={() => toggle()} attributes={{ "data-active": active }}>
 				{active ? "Deactivate" : "Activate"}
 			</Button>
 		);

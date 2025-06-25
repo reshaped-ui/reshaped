@@ -51,7 +51,7 @@ export const handlers: StoryObj<{
 
 		return (
 			<>
-				<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+				<Button onClick={() => overlayToggle.toggle()}>Open overlay</Button>
 				<Modal
 					active={overlayToggle.active}
 					onClose={(closeArgs) => {
