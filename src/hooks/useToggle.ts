@@ -13,8 +13,8 @@ const useToggle = (defaultValue?: boolean) => {
 		setActive(false);
 	}, []);
 
-	const toggle = React.useCallback(() => {
-		setActive((active) => !active);
+	const toggle = React.useCallback((targetValue?: boolean) => {
+		setActive(targetValue ?? ((active) => !active));
 	}, []);
 
 	return React.useMemo(

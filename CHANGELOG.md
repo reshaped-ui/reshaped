@@ -5,7 +5,9 @@
 - Website: Added DS comparison
 - Website: Updated supported browsers for OKLCH usage
 - Removed irrelevant hover effects for touch events not using a pointer device
+- ToggleButton, ToggleButtonGroup
 
+- Button: Updated highlighted state opacity to differ from the hover
 - Flyout: Exported from the library
 - Flyout: Moved css to css layers
 - Flyout: Support height animations
@@ -36,6 +38,7 @@
 - Select: Added label text truncation
 - Card: Fixed bleed utility specitficity
 - NumberField: Fixed float number onChange
+- useToggle: .toggle(targetValue) support
 
 - Added node engine v20+ to package.json
 
