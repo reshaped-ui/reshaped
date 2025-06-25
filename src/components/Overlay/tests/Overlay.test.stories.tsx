@@ -50,7 +50,7 @@ export const handlers: StoryObj<{
 
 		return (
 			<>
-				<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+				<Button onClick={() => overlayToggle.toggle()}>Open overlay</Button>
 				<Overlay
 					active={overlayToggle.active}
 					onClose={(closeArgs) => {

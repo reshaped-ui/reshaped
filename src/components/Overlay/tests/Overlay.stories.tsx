@@ -23,7 +23,7 @@ export const base: StoryObj = {
 		return (
 			<Example>
 				<Example.Item title="base">
-					<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+					<Button onClick={overlayToggle.activate}>Open overlay</Button>
 					<Overlay active={overlayToggle.active} onClose={overlayToggle.deactivate}>
 						Overlay content
 					</Overlay>
@@ -46,7 +46,7 @@ export const transparent: StoryObj = {
 		return (
 			<Example>
 				<Example.Item title="base">
-					<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+					<Button onClick={overlayToggle.activate}>Open overlay</Button>
 					<Overlay active={overlayToggle.active} onClose={overlayToggle.deactivate} transparent>
 						Overlay content
 					</Overlay>
@@ -69,7 +69,7 @@ export const blurred: StoryObj = {
 		return (
 			<Example>
 				<Example.Item title="base">
-					<Button onClick={overlayToggle.toggle}>Open overlay</Button>
+					<Button onClick={overlayToggle.activate}>Open overlay</Button>
 					<Overlay active={overlayToggle.active} onClose={overlayToggle.deactivate} blurred>
 						Overlay content
 					</Overlay>

@@ -50,7 +50,7 @@ function Example() {
 					}}
 				/>
 			</View>
-			<Button onClick={disabledToggle.toggle}>
+			<Button onClick={() => disabledToggle.toggle()}>
 				{disabledToggle.active ? "Enable" : "Disable"}
 			</Button>
 		</View>
