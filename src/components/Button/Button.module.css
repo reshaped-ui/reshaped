@@ -1,7 +1,11 @@
 .root {
-	/* Using --rs-button-p and --rs-p to dynamically reasign --rs-p for all sizes of ghost buttns */
+	/* Using --rs-button-p and --rs-p to dynamically reasign --rs-p for all sizes of ghost buttons */
 	--rs-p-v: var(--rs-button-p-v);
 	--rs-p-h: var(--rs-button-p-h);
+	--rs-button-highlight-opacity: 0;
+	--rs-button-highlight-opacity-base: 0;
+	--rs-button-border-color: transparent;
+	--rs-button-border-width: 0px;
 
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform;
@@ -18,7 +22,7 @@
 	justify-content: center;
 	text-decoration: none;
 	overflow: hidden;
-	border: var(--rs-button-border-width) solid transparent;
+	border: var(--rs-button-border-width) solid var(--rs-button-border-color);
 	-webkit-tap-highlight-color: transparent;
 	font-family: var(--rs-font-family-body);
 	font-weight: var(--rs-font-weight-medium);
@@ -29,6 +33,8 @@
 	min-width: calc(
 		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
 	);
+	background-color: var(--rs-button-background-color);
+	color: var(--rs-button-foreground-color);
 
 	&:active {
 		transform: scale(0.98);
@@ -40,10 +46,23 @@
 		inset: 0;
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
 		transition-property: opacity;
-		opacity: 0;
+		opacity: var(--rs-button-highlight-opacity-base);
+
+		/* Use highlight based on the text color with an ability to override it */
+		background: var(--rs-button-highlight-color, var(--rs-button-foreground-color));
 
 		/* Avoid edge cases when hovering causes icons to jump in Safari */
 		transform: translateZ(0);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover:not(.--loading, .--highlighted, .--disabled)::before {
+			opacity: var(--rs-button-highlight-opacity);
+		}
+	}
+
+	&.--highlighted::before {
+		opacity: calc(var(--rs-button-highlight-opacity) + var(--rs-button-highlight-opacity) / 2);
 	}
 }
 
@@ -57,14 +76,14 @@
 	/* Starts with 1x and then grows based on the padding size */
 	margin-inline-end: var(--rs-button-gap);
 
-	&.--icon-position-end {
-		margin-inline-end: 0;
-		margin-inline-start: var(--rs-button-gap);
-	}
-
 	/* Icon only */
 	&:last-child {
 		margin-inline-end: 0;
+	}
+
+	&.--icon-position-end {
+		margin-inline-end: 0;
+		margin-inline-start: var(--rs-button-gap);
 	}
 }
 
@@ -163,182 +182,75 @@
 	}
 }
 
-.root.--variant-solid.--color-neutral,
-.root.--variant-faded.--color-neutral {
-	background-color: var(--rs-color-background-neutral);
-	color: var(--rs-color-on-background-neutral);
-
-	&::before {
-		background-color: var(--rs-color-on-background-neutral);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(.--loading)::before {
-			opacity: 0.04;
-		}
-	}
-
-	&.--highlighted::before {
-		opacity: 0.08 !important;
-	}
-}
-
 .root.--variant-solid {
-	--rs-button-border-width: 0px;
+	&.--color-neutral {
+		--rs-button-highlight-opacity: 0.04;
+		--rs-button-background-color: var(--rs-color-background-neutral);
+		--rs-button-foreground-color: var(--rs-color-on-background-neutral);
+	}
 
 	@each $color in primary, critical, positive {
 		&.--color-$(color) {
-			background-color: var(--rs-color-background-$(color));
-			color: var(--rs-color-on-background-$(color));
-
-			&::before {
-				background-color: var(--rs-color-on-background-$(color));
-			}
-
-			@media (hover: hover) and (pointer: fine) {
-				&:hover:not(.--loading)::before {
-					opacity: 0.08;
-				}
-			}
-
-			&.--highlighted::before {
-				opacity: 0.12 !important;
-			}
+			--rs-button-highlight-opacity: 0.08;
+			--rs-button-background-color: var(--rs-color-background-$(color));
+			--rs-button-foreground-color: var(--rs-color-on-background-$(color));
 		}
 	}
 
 	&.--color-media {
-		background-color: var(--rs-color-white);
-		color: var(--rs-color-black);
-
-		&::before {
-			background-color: var(--rs-color-black);
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(.--loading, .--disabled)::before {
-				opacity: 0.06;
-			}
-		}
-
-		&.--highlighted::before {
-			opacity: 0.1 !important;
-		}
+		--rs-button-highlight-opacity: 0.06;
+		--rs-button-background-color: var(--rs-color-white);
+		--rs-button-foreground-color: var(--rs-color-black);
 	}
 }
 
 .root.--variant-faded {
-	--rs-button-border-width: 0px;
-
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
-			background-color: var(--rs-color-background-$(color)-faded);
-			color: var(--rs-color-foreground-$(color));
-
-			&::before {
-				background-color: var(--rs-color-foreground-$(color));
-			}
-
-			@media (hover: hover) and (pointer: fine) {
-				&:hover:not(.--loading)::before {
-					opacity: 0.06;
-				}
-			}
-
-			&.--highlighted::before {
-				opacity: 0.1 !important;
-			}
+			--rs-button-highlight-opacity: 0.06;
+			--rs-button-background-color: var(--rs-color-background-$(color)-faded);
+			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
 		}
 	}
 
 	&.--color-media {
-		color: var(--rs-color-white);
-
-		&::before {
-			background-color: var(--rs-color-black);
-			opacity: 0.28;
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(.--loading, .--disabled)::before {
-				opacity: 0.32;
-			}
-		}
-
-		&.--highlighted::before {
-			opacity: 0.36 !important;
-		}
+		--rs-button-highlight-opacity-base: 0.24;
+		--rs-button-highlight-opacity: 0.32;
+		--rs-button-foreground-color: var(--rs-color-white);
+		--rs-button-highlight-color: var(--rs-color-black);
 	}
 
 	&.--color-inherit {
-		color: inherit;
-
-		&::before {
-			background-color: currentcolor;
-			opacity: 0.16;
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(.--loading)::before {
-				opacity: 0.2;
-			}
-		}
-
-		&.--highlighted::before {
-			opacity: 0.24 !important;
-		}
+		--rs-button-highlight-opacity-base: 0.16;
+		--rs-button-highlight-opacity: 0.2;
+		--rs-button-foreground-color: inherit;
+		--rs-button-highlight-color: currentcolor;
 	}
 }
 
 .root.--variant-outline {
 	--rs-button-border-width: 1px;
-
-	&.--color-neutral {
-		color: var(--rs-color-foreground-neutral);
-		border-color: var(--rs-color-border-neutral);
-
-		&::before {
-			background-color: var(--rs-color-foreground-neutral);
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(.--loading)::before {
-				opacity: 0.06;
-			}
-		}
-
-		&.--highlighted::before {
-			opacity: 0.1 !important;
-		}
-	}
+	--rs-button-highlight-opacity: 0.06;
 
 	@each $color in primary, critical, positive {
 		&.--color-$(color) {
-			color: var(--rs-color-foreground-$(color));
-			border-color: var(--rs-color-border-$(color)-faded);
-
-			&::before {
-				background-color: var(--rs-color-foreground-$(color));
-			}
-
-			@media (hover: hover) and (pointer: fine) {
-				&:hover:not(.--loading)::before {
-					opacity: 0.06;
-				}
-			}
-
-			&.--highlighted::before {
-				opacity: 0.1 !important;
-			}
+			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
+			--rs-button-border-color: var(--rs-color-border-$(color)-faded);
+			--rs-button-highlight-color: var(--rs-color-background-$(color));
 		}
 	}
 
-	&.--color-inherit {
-		color: inherit;
+	&.--color-neutral {
+		--rs-button-highlight-opacity: 0.24;
+		--rs-button-foreground-color: var(--rs-color-foreground-neutral);
+		--rs-button-border-color: var(--rs-color-border-neutral);
+		--rs-button-highlight-color: var(--rs-color-background-neutral);
+	}
 
-		&::before {
-			background-color: currentcolor;
-		}
+	&.--color-inherit {
+		--rs-button-border-width: 0px;
+		--rs-button-foreground-color: inherit;
+		--rs-button-highlight-color: currentcolor;
 
 		&::after {
 			content: "";
@@ -347,78 +259,30 @@
 			pointer-events: none;
 			border: 1px solid currentcolor;
 			border-radius: var(--rs-button-radius);
-			opacity: 0.32;
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(.--loading)::before {
-				opacity: 0.06;
-			}
-		}
-
-		&.--highlighted::before {
-			opacity: 0.1 !important;
+			opacity: 0.28;
 		}
 	}
 }
 
 .root.--variant-ghost {
-	--rs-button-border-width: 0px;
+	--rs-button-highlight-opacity: 0.12;
 
-	&.--color-neutral {
-		color: var(--rs-color-foreground-neutral);
-
-		&::before {
-			background-color: var(--rs-color-foreground-neutral);
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(.--loading)::before {
-				opacity: 0.06;
-			}
-		}
-
-		&.--highlighted::before {
-			opacity: 0.1 !important;
+	@each $color in neutral, primary, critical, positive {
+		&.--color-$(color) {
+			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
+			--rs-button-highlight-color: var(--rs-color-background-$(color));
 		}
 	}
 
-	@each $color in primary, critical, positive {
-		&.--color-$(color) {
-			color: var(--rs-color-foreground-$(color));
-
-			&::before {
-				background-color: var(--rs-color-foreground-$(color));
-			}
-
-			@media (hover: hover) and (pointer: fine) {
-				&:hover:not(.--loading)::before {
-					opacity: 0.06;
-				}
-			}
-
-			&.--highlighted::before {
-				opacity: 0.1 !important;
-			}
-		}
+	&.--color-neutral {
+		--rs-button-highlight-opacity: 0.32;
+		--rs-button-foreground-color: var(--rs-color-foreground-neutral);
+		--rs-button-highlight-color: var(--rs-color-background-neutral);
 	}
 
 	&.--color-inherit {
-		color: inherit;
-
-		&::before {
-			background-color: currentcolor;
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(.--loading)::before {
-				opacity: 0.08;
-			}
-		}
-
-		&.--highlighted::before {
-			opacity: 0.1 !important;
-		}
+		--rs-button-foreground-color: inherit;
+		--rs-button-highlight-color: currentcolor;
 	}
 }
 

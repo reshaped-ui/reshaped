@@ -49,11 +49,22 @@ export const variantAndColor = () => (
 				<Button onClick={() => {}} color="positive" variant="faded">
 					Button
 				</Button>
-				<div style={{ color: "#029CFD" }}>
+				<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
 					<Button onClick={() => {}} color="inherit" variant="faded">
 						Inherit
 					</Button>
-				</div>
+				</View>
+
+				<View padding={4} backgroundColor="black" borderRadius="medium">
+					<Button onClick={() => {}} color="inherit" variant="faded">
+						Inherit
+					</Button>
+				</View>
+				<View padding={4} backgroundColor="white" borderRadius="medium">
+					<Button onClick={() => {}} color="inherit" variant="faded">
+						Inherit
+					</Button>
+				</View>
 			</View>
 		</Example.Item>
 		<Example.Item title="variant: outline">
@@ -71,11 +82,22 @@ export const variantAndColor = () => (
 					Button
 				</Button>
 
-				<div style={{ color: "#029CFD" }}>
+				<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
 					<Button onClick={() => {}} color="inherit" variant="outline">
 						Inherit
 					</Button>
-				</div>
+				</View>
+
+				<View padding={4} backgroundColor="black" borderRadius="medium">
+					<Button onClick={() => {}} color="inherit" variant="outline">
+						Inherit
+					</Button>
+				</View>
+				<View padding={4} backgroundColor="white" borderRadius="medium">
+					<Button onClick={() => {}} color="inherit" variant="outline">
+						Inherit
+					</Button>
+				</View>
 			</View>
 		</Example.Item>
 		<Example.Item title="variant: ghost">
@@ -92,11 +114,22 @@ export const variantAndColor = () => (
 				<Button onClick={() => {}} color="positive" variant="ghost">
 					Button
 				</Button>
-				<div style={{ color: "#029CFD" }}>
+				<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
 					<Button onClick={() => {}} color="inherit" variant="ghost">
 						Inherit
 					</Button>
-				</div>
+				</View>
+
+				<View padding={4} backgroundColor="black" borderRadius="medium">
+					<Button onClick={() => {}} color="inherit" variant="ghost">
+						Inherit
+					</Button>
+				</View>
+				<View padding={4} backgroundColor="white" borderRadius="medium">
+					<Button onClick={() => {}} color="inherit" variant="ghost">
+						Inherit
+					</Button>
+				</View>
 			</View>
 		</Example.Item>
 		<Example.Item title="color: media">
