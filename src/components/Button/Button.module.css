@@ -62,7 +62,9 @@
 	}
 
 	&.--highlighted::before {
-		opacity: calc(var(--rs-button-highlight-opacity) + var(--rs-button-highlight-opacity) / 2);
+		opacity: calc(
+			var(--rs-button-highlight-opacity) + max(0.04, var(--rs-button-highlight-opacity) / 2)
+		);
 	}
 }
 
@@ -207,7 +209,7 @@
 .root.--variant-faded {
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
-			--rs-button-highlight-opacity: 0.06;
+			--rs-button-highlight-opacity: 0.04;
 			--rs-button-background-color: var(--rs-color-background-$(color)-faded);
 			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
 		}
@@ -221,8 +223,8 @@
 	}
 
 	&.--color-inherit {
-		--rs-button-highlight-opacity-base: 0.16;
-		--rs-button-highlight-opacity: 0.2;
+		--rs-button-highlight-opacity-base: 0.12;
+		--rs-button-highlight-opacity: 0.16;
 		--rs-button-foreground-color: inherit;
 		--rs-button-highlight-color: currentcolor;
 	}
@@ -267,17 +269,15 @@
 .root.--variant-ghost {
 	--rs-button-highlight-opacity: 0.12;
 
+	&.--color-neutral {
+		--rs-button-highlight-opacity: 0.32;
+	}
+
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
 			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
 			--rs-button-highlight-color: var(--rs-color-background-$(color));
 		}
-	}
-
-	&.--color-neutral {
-		--rs-button-highlight-opacity: 0.32;
-		--rs-button-foreground-color: var(--rs-color-foreground-neutral);
-		--rs-button-highlight-color: var(--rs-color-background-neutral);
 	}
 
 	&.--color-inherit {
