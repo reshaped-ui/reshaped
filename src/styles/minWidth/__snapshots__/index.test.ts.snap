@@ -3,9 +3,9 @@
 exports[`Styles/MinWidth > handles % value 1`] = `
 {
   "classNames": [
-    "_root_617b2b",
+    "_root_27728a",
     [
-      "_--type-literal_617b2b",
+      "_--type-literal_27728a",
     ],
   ],
   "variables": {
@@ -17,9 +17,9 @@ exports[`Styles/MinWidth > handles % value 1`] = `
 exports[`Styles/MinWidth > handles px value 1`] = `
 {
   "classNames": [
-    "_root_617b2b",
+    "_root_27728a",
     [
-      "_--type-literal_617b2b",
+      "_--type-literal_27728a",
     ],
   ],
   "variables": {
@@ -31,10 +31,10 @@ exports[`Styles/MinWidth > handles px value 1`] = `
 exports[`Styles/MinWidth > handles responsive value 1`] = `
 {
   "classNames": [
-    "_root_617b2b",
+    "_root_27728a",
     [
-      "_--type-literal_617b2b",
-      "_--type-literal--l_617b2b",
+      "_--type-literal_27728a",
+      "_--type-literal--l_27728a",
     ],
   ],
   "variables": {
@@ -49,9 +49,9 @@ exports[`Styles/MinWidth > handles undefined value 1`] = `null`;
 exports[`Styles/MinWidth > handles unit value 1`] = `
 {
   "classNames": [
-    "_root_617b2b",
+    "_root_27728a",
     [
-      "_--type-unit_617b2b",
+      "_--type-unit_27728a",
     ],
   ],
   "variables": {
