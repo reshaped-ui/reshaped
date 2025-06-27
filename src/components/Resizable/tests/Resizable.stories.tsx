@@ -10,7 +10,7 @@ export default {
 	component: Resizable,
 	parameters: {
 		iframe: {
-			url: "https://reshaped.so/docs/utilities/Resizable",
+			url: "https://reshaped.so/docs/utilities/resizable",
 		},
 		// Skip because of the aria-hidden applied to buttons, they're not needed for the screen reader navigation
 		a11y: {

@@ -43,7 +43,7 @@
 - Resizable: Added direction and status props to the handle children rendering
 - Resized: Fixed reduced handle size due to panel overlapping
 
-- Added node engine v20+ to package.json
+- Added node engine v22+ to package.json
 
 ## 3.5.3
 
