@@ -65,7 +65,10 @@ const transform = (name: string, definition: PassedThemeDefinition, options: T.P
 		const transform = transforms.css[tokenType as TokenType];
 
 		Object.entries(tokenValues).forEach(([tokenName, token]) => {
-			const transformedTokens = transform(tokenName, token, theme);
+			const transformedTokens = transform(tokenName, token, {
+				theme,
+				themeOptions: options.themeOptions,
+			});
 
 			transformedTokens.forEach((transformedToken) => {
 				transformedStorage[transformedToken.type].push(transformedToken);

@@ -1,8 +1,8 @@
 import reshapedDefinition from "./reshaped";
-import type { ThemeDefinition } from "themes/_generator/tokens/types";
+import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
 import generateColors from "themes/_generator/tokens/color/utilities/generateColors";
 
-const theme: ThemeDefinition = {
+const theme: PassedThemeDefinition = {
 	...reshapedDefinition,
 	color: generateColors(),
 	unit: reshapedDefinition.unit,

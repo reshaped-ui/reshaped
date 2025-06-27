@@ -3,10 +3,10 @@
 exports[`Styles/Border > handles responsive value 1`] = `
 {
   "classNames": [
-    "_root_a76fc7",
-    "_null_a76fc7",
-    "_--border-neutral--m_a76fc7",
-    "_--border-transparent--l_a76fc7",
+    "_root_5fd06f",
+    "_null_5fd06f",
+    "_--border-neutral--m_5fd06f",
+    "_--border-transparent--l_5fd06f",
   ],
 }
 `;
@@ -16,8 +16,8 @@ exports[`Styles/Border > handles undefined value 1`] = `null`;
 exports[`Styles/Border > handles value 1`] = `
 {
   "classNames": [
-    "_root_a76fc7",
-    "_--border-primary_a76fc7",
+    "_root_5fd06f",
+    "_--border-primary_5fd06f",
   ],
 }
 `;

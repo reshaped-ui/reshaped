@@ -1,6 +1,6 @@
-import type { ThemeDefinition } from "themes/_generator/tokens/types";
+import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
 import {
-	Token,
+	PassedToken,
 	HexColor,
 	OklchToken,
 	type Name as TokenName,
@@ -10,7 +10,7 @@ import {
 } from "../color.types";
 import { hexToOklch, tokenToOklchToken } from "./convert";
 
-const parseColor = (color: HexColor | Token) => {
+const parseColor = (color: HexColor | PassedToken) => {
 	const isString = typeof color === "string";
 
 	if (!isString && "oklch" in color && color.oklch) {
@@ -187,7 +187,7 @@ const generateColors = (args: Partial<Record<Hue, ColorValue>> = {}) => {
 		brand: getOklchToken(brand || primary),
 		white: getOklchToken("#ffffff"),
 		black: getOklchToken("#000000"),
-	} as ThemeDefinition["color"];
+	} as NonNullable<PassedThemeDefinition["color"]>;
 };
 
 export default generateColors;

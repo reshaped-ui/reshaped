@@ -19,8 +19,6 @@ const config: ReshapedConfig = {
 			},
 		},
 	},
-
-	themeOptions: {},
 };
 
 export default config;

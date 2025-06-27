@@ -3,9 +3,9 @@
 exports[`Styles/Bleed > handles 0 value 1`] = `
 {
   "classNames": [
-    "_root_f6b186",
+    "_root_bc2b46",
     [
-      "_--bleed-false_f6b186",
+      "_--bleed-false_bc2b46",
     ],
   ],
   "variables": {
@@ -17,9 +17,9 @@ exports[`Styles/Bleed > handles 0 value 1`] = `
 exports[`Styles/Bleed > handles positive value 1`] = `
 {
   "classNames": [
-    "_root_f6b186",
+    "_root_bc2b46",
     [
-      "_--bleed_f6b186",
+      "_--bleed_bc2b46",
     ],
   ],
   "variables": {
@@ -31,11 +31,11 @@ exports[`Styles/Bleed > handles positive value 1`] = `
 exports[`Styles/Bleed > handles responsive value 1`] = `
 {
   "classNames": [
-    "_root_f6b186",
+    "_root_bc2b46",
     [
-      "_--bleed_f6b186",
-      "_--bleed-false--m_f6b186",
-      "_--bleed-true--l_f6b186",
+      "_--bleed_bc2b46",
+      "_--bleed-false--m_bc2b46",
+      "_--bleed-true--l_bc2b46",
     ],
   ],
   "variables": {

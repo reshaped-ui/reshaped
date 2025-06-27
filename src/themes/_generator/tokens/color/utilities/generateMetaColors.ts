@@ -1,7 +1,7 @@
 import { capitalize } from "utilities/string";
 import type * as TColor from "../color.types";
 import type * as T from "../../../types";
-import { GeneratedThemeDefinition, PassedThemeDefinition } from "../../types";
+import { PassedThemeDefinition } from "../../types";
 import { bgWithDynamicForeground } from "../../../constants";
 import { hexToOklch, oklchToRgb, tokenToOklchToken } from "./convert";
 import { getOnColor } from "./a11y";
@@ -12,10 +12,10 @@ const blackColor = hexToOklch("#000000");
 const generateMetaColors = (
 	definition: PassedThemeDefinition,
 	themeOptions: T.PublicOptions["themeOptions"] = {}
-): GeneratedThemeDefinition["color"] | undefined => {
+): PassedThemeDefinition["color"] | undefined => {
 	if (!definition.color) return;
 	const { onColorValues = {}, colorContrastAlgorithm } = themeOptions;
-	const result: GeneratedThemeDefinition["color"] = {};
+	const result: PassedThemeDefinition["color"] = {};
 
 	Object.keys(definition.color).forEach((tokenName) => {
 		const bgToken = definition.color?.[tokenName as TColor.Name];

@@ -72,7 +72,7 @@ export type RgbColor = { r: number; g: number; b: number };
 export type OklchColor = Omit<Oklch, "mode">;
 export type HexColor = string;
 
-export type ColorValue = HexColor | Token;
+export type ColorValue = HexColor | PassedToken;
 
 export type OklchOnlyToken = {
 	oklch: OklchColor;
@@ -81,8 +81,9 @@ export type OklchOnlyToken = {
 export type OklchToken = OklchOnlyToken & { hex?: never; hexDark?: never };
 export type HexToken = { hex: HexColor; hexDark?: HexColor; oklch?: never; oklchDark?: never };
 
-export type Token = OklchToken | HexToken;
+export type PassedToken = HexToken | OklchToken;
 export type InternalToken = {
 	oklch: Oklch;
 	oklchDark?: Oklch;
 };
+export type Token = Pick<HexToken, "hex" | "hexDark"> & Partial<OklchOnlyToken>;
