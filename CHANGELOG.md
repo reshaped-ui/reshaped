@@ -39,6 +39,9 @@
 - Card: Fixed bleed utility specitficity
 - NumberField: Fixed float number onChange
 - useToggle: .toggle(targetValue) support
+- Resizable: Support for extracting handles into separate components
+- Resizable: Added direction and status props to the handle children rendering
+- Resized: Fixed reduced handle size due to panel overlapping
 
 - Added node engine v20+ to package.json
 

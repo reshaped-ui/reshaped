@@ -4,7 +4,8 @@ import type { UseDragCallbackArgs } from "hooks/_private/useDrag";
 
 export type Props = {
 	variant?: "bordered" | "borderless";
-} & Pick<ViewProps, "children" | "className" | "attributes" | "height" | "direction" | "gap">;
+	direction?: Extract<ViewProps["direction"], "row" | "column">;
+} & Pick<ViewProps, "children" | "className" | "attributes" | "height" | "gap">;
 
 export type ItemProps = {
 	children: React.ReactNode;
@@ -18,10 +19,13 @@ export type PrivateItemProps = ItemProps & {
 };
 
 export type HandleProps = {
-	children?: (attributes: { ref: React.RefObject<HTMLButtonElement | null> }) => React.ReactNode;
+	children?: (
+		attributes: { ref: React.RefObject<HTMLButtonElement | null> },
+		props: Pick<Props, "direction"> & { status: "idle" | "dragging" }
+	) => React.ReactNode;
 };
 
-export type PrivateHandleProps = HandleProps & {
+export type HandleContext = {
 	containerRef: React.RefObject<HTMLDivElement | null>;
 	index: number;
 	onDrag: (args: UseDragCallbackArgs & { index: number }) => void;
