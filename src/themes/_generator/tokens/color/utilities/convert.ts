@@ -24,7 +24,7 @@ export const oklchToRgb = (oklch: Oklch) => {
 	};
 };
 
-export const tokenToOklchToken = (token: TColor.Token): TColor.InternalToken => {
+export const tokenToOklchToken = (token: TColor.PassedToken): TColor.InternalToken => {
 	const hexDarkFallback = token.hexDark ? hexToOklch(token.hexDark) : undefined;
 
 	return {

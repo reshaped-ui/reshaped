@@ -1,10 +1,14 @@
 import type * as T from "./color.types";
+import { PrivateOptions } from "themes/_generator/types";
 import type { Transformer, TransformedToken } from "../types";
 
-const transformTokenForMode = (args: { hex?: T.HexColor; oklch?: T.OklchColor }): string => {
+const transformTokenForMode = (
+	args: { hex?: T.HexColor; oklch?: T.OklchColor },
+	themeOptions: PrivateOptions["themeOptions"]
+): string => {
 	const { hex, oklch } = args;
 
-	if (oklch) {
+	if (oklch && themeOptions?.colorOutputFormat !== "hex") {
 		const components = `${Number(oklch.l.toFixed(4))} ${Number(oklch.c.toFixed(4))} ${Number(oklch.h?.toFixed(4) || 0)}`;
 		const alphaSuffix = oklch?.alpha === undefined ? "" : ` / ${Number(oklch.alpha.toFixed(4))}`;
 		return `oklch(${components}${alphaSuffix})`;
@@ -15,12 +19,14 @@ const transformTokenForMode = (args: { hex?: T.HexColor; oklch?: T.OklchColor })
 	throw new Error(`[Reshaped] ${JSON.stringify(args)} is missing a color value`);
 };
 
-const transformToken: Transformer<T.Token> = (name, token) => {
+const transformToken: Transformer<T.Token> = (name, token, { themeOptions }) => {
 	const { hex, hexDark, oklch, oklchDark } = token;
 	// Apply color to both modes if dark mode is not available
 	const hasDark = !!hexDark || !!oklchDark;
-	const value = transformTokenForMode({ oklch, hex });
-	const darkValue = hasDark ? transformTokenForMode({ oklch: oklchDark, hex: hexDark }) : undefined;
+	const value = transformTokenForMode({ oklch, hex }, themeOptions);
+	const darkValue = hasDark
+		? transformTokenForMode({ oklch: oklchDark, hex: hexDark }, themeOptions)
+		: undefined;
 	const separateModes = hasDark && value !== darkValue;
 	const defaultMode = separateModes ? "light" : undefined;
 

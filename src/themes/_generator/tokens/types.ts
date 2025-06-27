@@ -8,7 +8,7 @@ import type * as TShadow from "./shadow/shadow.types";
 import type * as TUnit from "./unit/unit.types";
 import type * as TRadius from "./radius/radius.types";
 import type * as TViewport from "./viewport/viewport.types";
-import { PartialDeep } from "../types";
+import { PartialDeep, PrivateOptions } from "../types";
 
 export type TokenType =
 	| "fontFamily"
@@ -35,7 +35,7 @@ export type ThemeDefinition = {
 	fontFamily: TokenSet<TFontFamily.Name, TFontFamily.Token>;
 	fontWeight: TokenSet<TFontWeight.Name, TFontWeight.Token>;
 	font: TokenSet<TFont.Name, TFont.Token>;
-	color: TokenSet<TColor.Name, TColor.Token>;
+	color: TokenSet<TColor.Name, TColor.PassedToken>;
 	duration: TokenSet<TDuration.Name, TDuration.Token>;
 	easing: TokenSet<TEasing.Name, TEasing.Token>;
 	shadow: TokenSet<TShadow.Name, TShadow.Token>;
@@ -47,7 +47,7 @@ export type ThemeDefinition = {
  * but also might include custom "on" colors
  */
 export type PassedThemeDefinition = Omit<PartialDeep<ThemeDefinition>, "color"> & {
-	color?: Partial<TokenSet<TColor.Name | TColor.GeneratedOnName, TColor.Token>>;
+	color?: Partial<TokenSet<TColor.Name | TColor.GeneratedOnName, TColor.PassedToken>>;
 };
 
 /**
@@ -78,5 +78,8 @@ export type TransformedToken = {
 export type Transformer<Token> = (
 	name: string,
 	token: Token,
-	theme: GeneratedThemeDefinition
+	options: {
+		theme: GeneratedThemeDefinition;
+		themeOptions: PrivateOptions["themeOptions"];
+	}
 ) => TransformedToken[];

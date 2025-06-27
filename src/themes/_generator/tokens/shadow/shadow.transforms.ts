@@ -2,7 +2,7 @@ import type { Transformer } from "../types";
 import { hexToOklch, oklchToRgb } from "../color/utilities/convert";
 import type * as T from "./shadow.types";
 
-const transformToken: Transformer<T.Token> = (name, token, theme) => [
+const transformToken: Transformer<T.Token> = (name, token, { theme }) => [
 	{
 		name,
 		tokenType: "shadow",

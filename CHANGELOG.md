@@ -1,6 +1,7 @@
 ## WIP 3.6.0
 
 - OKLCH color support in themes
+- Theming: colorOutputFormat option
 - Tailwind: Added scoped theming / color mode support for Tailwind v4 (rebuild themes)
 - Website: Added DS comparison
 - Website: Updated supported browsers for OKLCH usage

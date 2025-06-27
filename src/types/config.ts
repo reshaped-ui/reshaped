@@ -5,6 +5,7 @@ export type ReshapedConfig = {
 	themes?: Record<string, PassedThemeDefinition>;
 	themeFragments?: Record<string, PassedThemeDefinition>;
 	themeOptions?: {
+		colorOutputFormat?: "oklch" | "hex";
 		colorContrastAlgorithm?: "wcag" | "apca";
 		generateOnColorsFor?: string[];
 		onColorValues?: {
