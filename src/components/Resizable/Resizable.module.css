@@ -1,3 +1,7 @@
+.root {
+	isolation: isolate;
+}
+
 .item {
 	--rs-resizable-default-size: none;
 	--rs-resizable-min-size: 0;
@@ -12,6 +16,7 @@
 .handle {
 	flex-shrink: 0;
 	position: relative;
+	z-index: var(--rs-z-index-raised);
 
 	&::before,
 	&::after {
@@ -81,7 +86,7 @@ body:has(.--direction-column > .handle--dragging) {
 		}
 
 		&::before {
-			width: var(--rs-unit-x8);
+			width: var(--rs-unit-x6);
 		}
 
 		.--variant-borderless&::after {
@@ -109,7 +114,7 @@ body:has(.--direction-column > .handle--dragging) {
 		}
 
 		&::before {
-			height: var(--rs-unit-x8);
+			height: var(--rs-unit-x6);
 		}
 
 		.--variant-borderless&::after {

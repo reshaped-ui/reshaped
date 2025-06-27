@@ -2,41 +2,10 @@
 
 import React from "react";
 import { classNames } from "utilities/props";
-import useDrag from "hooks/_private/useDrag";
 import View from "components/View";
+import ResizableHandle, { ResizableHandleContext } from "./ResizableHandle";
 import type * as T from "./Resizable.types";
 import s from "./Resizable.module.css";
-
-const PrivateResizableHandle: React.FC<T.PrivateHandleProps> = (props) => {
-	const { containerRef, onDrag, index, direction, children } = props;
-	const { ref, active } = useDrag(
-		(args) => {
-			onDrag({ ...args, index });
-		},
-		{
-			containerRef,
-			orientation: direction === "row" ? "horizontal" : "vertical",
-		}
-	);
-	const handleClassNames = classNames(s.handle, active && s["handle--dragging"]);
-
-	if (children) return <View.Item>{children({ ref })}</View.Item>;
-	return (
-		<View.Item
-			className={handleClassNames}
-			attributes={{
-				role: "button",
-				tabIndex: 0,
-				"aria-hidden": true,
-				ref: (el) => {
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
-					ref.current = el;
-				},
-			}}
-		/>
-	);
-};
 
 const PrivateResizableItem = React.forwardRef<HTMLDivElement, T.PrivateItemProps>((props, ref) => {
 	const { children, defaultSize, minSize, maxSize } = props;
@@ -107,7 +76,7 @@ const Resizable: React.FC<T.Props> & {
 		return false;
 	};
 
-	const onDrag: T.PrivateHandleProps["onDrag"] = (args) => {
+	const onDrag: T.HandleContext["onDrag"] = (args) => {
 		const { index, x, y, triggerX, triggerY } = args;
 		const startItem = itemsRef.current[index];
 		const endItem = itemsRef.current[index + 1];
@@ -190,19 +159,17 @@ const Resizable: React.FC<T.Props> & {
 	const output = React.Children.map(children, (child) => {
 		const isComponent = React.isValidElement(child);
 
-		if (isComponent && child.type === Resizable.Handle && child.props) {
+		if (isComponent && child.props && child.type !== Resizable.Item) {
 			return (
-				<PrivateResizableHandle
-					{...(child.props as T.HandleProps)}
-					containerRef={containerRef}
-					index={currentHandleIndex++}
-					onDrag={onDrag}
-					direction={direction}
-				/>
+				<ResizableHandleContext.Provider
+					value={{ containerRef, index: currentHandleIndex++, onDrag, direction }}
+				>
+					{child}
+				</ResizableHandleContext.Provider>
 			);
 		}
 
-		if (isComponent && child.type === Resizable.Item && child.props) {
+		if (isComponent && child.props && child.type === Resizable.Item) {
 			const index = currentHandleIndex;
 
 			return (
@@ -234,7 +201,7 @@ const Resizable: React.FC<T.Props> & {
 };
 
 Resizable.Item = () => null;
-Resizable.Handle = () => null;
+Resizable.Handle = ResizableHandle;
 
 Resizable.displayName = "Resizable";
 
