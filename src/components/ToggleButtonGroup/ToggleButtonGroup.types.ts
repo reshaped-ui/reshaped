@@ -1,14 +1,14 @@
 import type React from "react";
+import type { ButtonGroupProps } from "components/Button";
 import type { ToggleButtonProps } from "components/ToggleButton";
 
 type BaseProps = {
-	children?: React.ReactNode;
 	selectionMode?: "single" | "multiple";
 	onChange?: (args: {
 		value: string[];
 		event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
 	}) => void;
-};
+} & ButtonGroupProps;
 
 export type ControlledProps = BaseProps & { value: string[]; defaultValue?: never };
 export type UncontrolledProps = BaseProps & { value?: never; defaultValue?: string[] };

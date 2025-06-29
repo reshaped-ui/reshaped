@@ -151,3 +151,22 @@ export const multiple: StoryObj<{
 		});
 	},
 };
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<ToggleButtonGroup className="test-classname" attributes={{ id: "test-id" }}>
+				<ToggleButton>Button 1</ToggleButton>
+				<ToggleButton>Button 1</ToggleButton>
+			</ToggleButtonGroup>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+		const input = canvas.getByRole("checkbox");
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+	},
+};

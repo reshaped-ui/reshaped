@@ -12,7 +12,7 @@ import {
 } from "utilities/a11y";
 
 const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
-	const { onChange, value, children, selectionMode = "single" } = props;
+	const { onChange, value, selectionMode = "single", ...buttonGroupProps } = props;
 
 	const handleChange: T.Context["onChange"] = (args) => {
 		const { event, value: itemValue, checked } = args;
@@ -54,7 +54,10 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 
 	return (
 		<Context.Provider value={{ onChange: handleChange, value }}>
-			<Button.Group attributes={{ ref: hotkeysRef }}>{children}</Button.Group>
+			<Button.Group
+				{...buttonGroupProps}
+				attributes={{ ref: hotkeysRef, ...buttonGroupProps?.attributes }}
+			/>
 		</Context.Provider>
 	);
 };

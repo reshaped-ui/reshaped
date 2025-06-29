@@ -17,7 +17,7 @@ export { default as Badge } from "components/Badge";
 export type { BadgeProps } from "components/Badge";
 
 export { default as Button } from "components/Button";
-export type { ButtonProps, ButtonAlignerProps } from "components/Button";
+export type { ButtonProps, ButtonAlignerProps, ButtonGroupProps } from "components/Button";
 
 export { default as Breadcrumbs } from "components/Breadcrumbs";
 export type { BreadcrumbsProps } from "components/Breadcrumbs";
