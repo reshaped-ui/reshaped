@@ -90,7 +90,7 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px);
+	min-height: var(--rs-text-field-attachment-height);
 }
 
 /* Ensure that when wrapping to the new line, end attachments stay in the end */
@@ -153,6 +153,9 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-3);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
+		--rs-text-field-attachment-height: calc(
+			var(--rs-text-field-line-height) + var(--rs-unit-x2) - 2px
+		);
 	}
 
 	@value medium {
@@ -163,6 +166,9 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-3);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
+		--rs-text-field-attachment-height: calc(
+			var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px
+		);
 	}
 
 	@value large {
@@ -173,6 +179,9 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-text-field-action-inset: var(--rs-unit-x2);
+		--rs-text-field-attachment-height: calc(
+			var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px
+		);
 	}
 
 	@value xlarge {
@@ -183,6 +192,9 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
+		--rs-text-field-attachment-height: calc(
+			var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px
+		);
 	}
 }
 
