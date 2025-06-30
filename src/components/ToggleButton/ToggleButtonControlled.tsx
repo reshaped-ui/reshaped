@@ -21,7 +21,15 @@ const ToggleButtonControlled: React.FC<T.ControlledProps> = (props) => {
 		}
 	};
 
-	return <Button {...buttonProps} variant={variant} onClick={handleClick} highlighted={checked} />;
+	return (
+		<Button
+			{...buttonProps}
+			variant={variant}
+			onClick={handleClick}
+			highlighted={checked}
+			attributes={{ ...buttonProps.attributes, "aria-pressed": checked }}
+		/>
+	);
 };
 
 ToggleButtonControlled.displayName = "ToggleButtonControlled";

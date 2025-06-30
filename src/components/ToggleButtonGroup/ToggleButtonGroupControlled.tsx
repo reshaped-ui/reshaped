@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Button from "components/Button";
 import useHotkeys from "hooks/useHotkeys";
 import type * as T from "./ToggleButtonGroup.types";
@@ -10,9 +11,50 @@ import {
 	focusNextElement,
 	focusPreviousElement,
 } from "utilities/a11y";
+import ToggleButton, { ToggleButtonProps } from "components/ToggleButton";
+
+const ToggleButtonGroupItem: React.FC<
+	ToggleButtonProps & { focusable: boolean; onFocus: () => void }
+> = (props) => {
+	const { focusable, onFocus, ...buttonProps } = props;
+
+	return (
+		<ToggleButton
+			{...buttonProps}
+			attributes={{
+				...buttonProps.attributes,
+				tabIndex: focusable ? 0 : -1,
+				onFocus,
+			}}
+		/>
+	);
+};
 
 const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
-	const { onChange, value, selectionMode = "single", ...buttonGroupProps } = props;
+	const { onChange, value, selectionMode = "single", children, ...buttonGroupProps } = props;
+	const focusableIndexRef = React.useRef(0);
+
+	let toggleButtonIndex = 0;
+	const renderedChildren = React.Children.map(children, (child) => {
+		if (!React.isValidElement(child) || child.type !== ToggleButton || !child.props) {
+			return child;
+		}
+
+		const boundIndex = toggleButtonIndex;
+		toggleButtonIndex += 1;
+
+		const focusable = focusableIndexRef.current === boundIndex;
+
+		return (
+			<ToggleButtonGroupItem
+				{...child.props}
+				focusable={focusable}
+				onFocus={() => {
+					focusableIndexRef.current = boundIndex;
+				}}
+			/>
+		);
+	});
 
 	const handleChange: T.Context["onChange"] = (args) => {
 		const { event, value: itemValue, checked } = args;
@@ -57,7 +99,9 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 			<Button.Group
 				{...buttonGroupProps}
 				attributes={{ ref: hotkeysRef, ...buttonGroupProps?.attributes }}
-			/>
+			>
+				{renderedChildren}
+			</Button.Group>
 		</Context.Provider>
 	);
 };
