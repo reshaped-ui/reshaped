@@ -5,6 +5,7 @@ import View from "components/View";
 import Text from "components/Text";
 import ScrollArea from "components/ScrollArea";
 import IconZap from "icons/Zap";
+import Button from "components/Button";
 
 export default {
 	title: "Components/Tabs",
@@ -139,7 +140,7 @@ export const direction = () => (
 
 export const composition = () => (
 	<Example>
-		<Example.Item title="switching panels">
+		<Example.Item title="panels without focusable content">
 			<Tabs>
 				<View gap={4}>
 					<Tabs.List>
@@ -151,6 +152,28 @@ export const composition = () => (
 					<Tabs.Panel value="0">Tab 1</Tabs.Panel>
 					<Tabs.Panel value="1">Tab 2</Tabs.Panel>
 					<Tabs.Panel value="2">Tab 3</Tabs.Panel>
+				</View>
+			</Tabs>
+		</Example.Item>
+
+		<Example.Item title="panels with focusable content">
+			<Tabs>
+				<View gap={4}>
+					<Tabs.List>
+						<Tabs.Item value="0">Item 1</Tabs.Item>
+						<Tabs.Item value="1">Long item 2</Tabs.Item>
+						<Tabs.Item value="2">Very long item 3</Tabs.Item>
+					</Tabs.List>
+
+					<Tabs.Panel value="0">
+						<Button onClick={() => {}}>Tab 1 action</Button>
+					</Tabs.Panel>
+					<Tabs.Panel value="1">
+						<Button onClick={() => {}}>Tab 2 action</Button>
+					</Tabs.Panel>
+					<Tabs.Panel value="2">
+						<Button onClick={() => {}}>Tab 3 action</Button>
+					</Tabs.Panel>
 				</View>
 			</Tabs>
 		</Example.Item>

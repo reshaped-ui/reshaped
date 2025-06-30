@@ -1,6 +1,7 @@
 export {
 	focusableSelector,
 	getActiveElement,
+	getFocusableElements,
 	focusNextElement,
 	focusPreviousElement,
 	focusFirstElement,
