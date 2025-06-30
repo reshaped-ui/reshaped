@@ -362,14 +362,6 @@ export const testForm: StoryObj<{ handleFormChange: Mock; handleFormInit: Mock }
 			setData(nextState);
 		};
 
-		React.useEffect(() => {
-			const formData = new FormData(formRef.current!);
-			const nextState = [...formData.entries()];
-
-			args.handleFormInit({ formData: nextState });
-			setData(nextState);
-		}, []);
-
 		return (
 			<View paddingTop={10} gap={4}>
 				<form onChange={handleChange} ref={formRef}>

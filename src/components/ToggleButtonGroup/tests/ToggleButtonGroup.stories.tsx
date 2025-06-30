@@ -164,7 +164,6 @@ export const className: StoryObj = {
 	),
 	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
-		const input = canvas.getByRole("checkbox");
 
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");
