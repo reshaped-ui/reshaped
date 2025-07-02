@@ -13,6 +13,7 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	autoFlow?: G.Responsive<Property.GridAutoFlow>;
 	autoColumns?: G.Responsive<Property.GridAutoColumns>;
 	autoRows?: G.Responsive<Property.GridAutoRows>;
+	maxWidth?: G.Responsive<string | number>;
 	children?: React.ReactNode;
 	as?: TagName;
 	className?: G.ClassName;

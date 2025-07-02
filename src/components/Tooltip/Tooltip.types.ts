@@ -14,6 +14,8 @@ export type Props = Pick<
 	| "contentGap"
 	| "contentShift"
 	| "originCoordinates"
+	| "contentAttributes"
+	| "contentClassName"
 > & {
 	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	children: (attributes: Parameters<FlyoutTriggerProps["children"]>[0] | {}) => React.ReactNode;

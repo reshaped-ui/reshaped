@@ -1,6 +1,7 @@
 import { classNames, responsiveVariables, responsivePropDependency } from "utilities/props";
 import getAlignStyles from "styles/align";
 import getJustifyStyles from "styles/justify";
+import getMaxWidthStyles from "styles/maxWidth";
 import type * as T from "./Grid.types";
 import s from "./Grid.module.css";
 
@@ -55,6 +56,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		autoFlow,
 		children,
 		className,
+		maxWidth,
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
@@ -62,6 +64,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	} = props;
 	const alignStyles = getAlignStyles(align);
 	const justifyStyles = getJustifyStyles(justify);
+	const maxWidthStyles = getMaxWidthStyles(maxWidth);
 	const resolvedRows = responsivePropDependency(rows, (value) =>
 		typeof value === "number" ? `repeat(${value}, 1fr)` : value
 	);
@@ -74,7 +77,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	`
 			: undefined
 	);
-	const rootClassNames = classNames(s.root, className);
+	const rootClassNames = classNames(s.root, maxWidthStyles?.classNames, className);
 	const rootVariables = {
 		...attributes?.style,
 		...responsiveVariables("--rs-grid-gap", gap),
@@ -86,6 +89,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...responsiveVariables("--rs-grid-auto-rows", autoRows),
 		...alignStyles?.variables,
 		...justifyStyles?.variables,
+		...maxWidthStyles?.variables,
 	};
 
 	return (
