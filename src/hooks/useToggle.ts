@@ -14,7 +14,9 @@ const useToggle = (defaultValue?: boolean) => {
 	}, []);
 
 	const toggle = React.useCallback((targetValue?: boolean) => {
-		setActive(targetValue ?? ((active) => !active));
+		// Checking the targetValue type for backwards compatibility if something like handler events
+		// are passed automatically e.g. onClick={toggle}
+		setActive(typeof targetValue === "boolean" ? targetValue : (active) => !active);
 	}, []);
 
 	return React.useMemo(

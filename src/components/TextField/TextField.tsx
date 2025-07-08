@@ -36,6 +36,7 @@ const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 					return 4;
 				})}
 				svg={icon}
+				autoWidth
 			/>
 		</label>
 	);

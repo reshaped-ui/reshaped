@@ -2,12 +2,9 @@ import View from "components/View";
 import Image from "components/Image";
 import Button from "components/Button";
 import React from "react";
-import Badge from "components/Badge";
-import FormControl from "components/FormControl";
-import Autocomplete from "components/Autocomplete";
-import IconZap from "icons/Zap";
 import ToggleButtonGroup from "components/ToggleButtonGroup";
 import ToggleButton from "components/ToggleButton";
+import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Sandbox",
@@ -35,13 +32,11 @@ export const preview = () => {
 };
 
 const Component = () => {
+	const { toggle, active } = useToggle();
+
 	return (
 		<View align="center" justify="center" height="150px">
-			<ToggleButtonGroup>
-				<ToggleButton value="1">Button 1</ToggleButton>
-				<ToggleButton value="2">Button 2</ToggleButton>
-				<ToggleButton value="3">Button 3</ToggleButton>
-			</ToggleButtonGroup>
+			<Button onClick={toggle}>{active.toString()}</Button>
 		</View>
 	);
 };
