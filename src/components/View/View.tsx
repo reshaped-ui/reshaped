@@ -292,7 +292,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...insetEndStyles?.variables,
 		...alignStyles?.variables,
 		...justifyStyles?.variables,
-		...aspectRatioStyles?.variables,
 		...positionStyles?.variables,
 		...textAlignStyles?.variables,
 		...(zIndex ? { "--rs-view-z": zIndex } : {}),
