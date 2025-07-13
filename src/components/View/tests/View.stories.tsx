@@ -7,6 +7,7 @@ import Tabs from "components/Tabs";
 import Avatar from "components/Avatar";
 import MenuItem from "components/MenuItem";
 import Button from "components/Button";
+import IconPlus from "icons/Plus";
 
 export default {
 	title: "Utility components/View",
@@ -1306,6 +1307,25 @@ export const testComposition = {
 	name: "composition, edge cases",
 	render: () => (
 		<Example>
+			<Example.Item>
+				<View direction="row" align="center" gap={4} padding={4}>
+					<View width="80px" height="60px" backgroundColor="neutral-faded" borderRadius="small" />
+
+					<View direction="row" align="center" gap={1} grow>
+						<View.Item shrink>
+							<Text>Text (like Jeff's Puzzles)</Text>
+						</View.Item>
+
+						<View minWidth="auto" grow>
+							<Button size="small" color="neutral" icon={IconPlus} />
+						</View>
+					</View>
+
+					<Button color="primary" rounded>
+						Button
+					</Button>
+				</View>
+			</Example.Item>
 			<Example.Item
 				title={[
 					"View.Item, MenuItem, Aspect ratio",
@@ -1327,29 +1347,26 @@ export const testComposition = {
 				</View>
 			</Example.Item>
 			<Example.Item title="Scrollable tabs inside View.Item with grow">
-				<View gap={3}>
+				<View direction="row" align="center" gap={3}>
 					<Placeholder />
-					<View direction="row" align="center" gap={3}>
-						<Placeholder />
-						<View.Item grow>
-							<View padding={0} align="center">
-								<Tabs variant="pills">
-									<Tabs.List>
-										<Tabs.Item value="1">Very long item</Tabs.Item>
-										<Tabs.Item value="2">Very long item</Tabs.Item>
-										<Tabs.Item value="3">Very long item</Tabs.Item>
-										<Tabs.Item value="4">Very long item</Tabs.Item>
-										<Tabs.Item value="5">Very long item</Tabs.Item>
-										<Tabs.Item value="6">Very long item</Tabs.Item>
-									</Tabs.List>
-									{[1, 2, 3, 5, 6].map((i) => (
-										<Tabs.Panel key={i} value={i.toString()} />
-									))}
-								</Tabs>
-							</View>
-						</View.Item>
-						<Placeholder />
-					</View>
+					<View.Item grow>
+						<View padding={0} align="center">
+							<Tabs variant="pills">
+								<Tabs.List>
+									<Tabs.Item value="1">Very long item</Tabs.Item>
+									<Tabs.Item value="2">Very long item</Tabs.Item>
+									<Tabs.Item value="3">Very long item</Tabs.Item>
+									<Tabs.Item value="4">Very long item</Tabs.Item>
+									<Tabs.Item value="5">Very long item</Tabs.Item>
+									<Tabs.Item value="6">Very long item</Tabs.Item>
+								</Tabs.List>
+								{[1, 2, 3, 5, 6].map((i) => (
+									<Tabs.Panel key={i} value={i.toString()} />
+								))}
+							</Tabs>
+						</View>
+					</View.Item>
+					<Placeholder />
 				</View>
 			</Example.Item>
 			<Example.Item title="2nd item has grow, Avatar stays circle">

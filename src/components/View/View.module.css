@@ -222,10 +222,10 @@
 @responsive .item--grow {
 	@value true {
 		flex-grow: 1;
+		flex-shrink: 1;
 
 		/* Fixes nested View with nowrap inside the grow item */
 		min-width: 0;
-		flex-shrink: 1;
 		flex-basis: 0;
 	}
 
@@ -235,6 +235,10 @@
 		flex-basis: auto;
 		min-width: auto;
 	}
+}
+
+.item--shrink {
+	flex-shrink: 1;
 }
 
 .item--columns {

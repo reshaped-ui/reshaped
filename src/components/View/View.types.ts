@@ -65,12 +65,13 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	animated?: boolean;
 	className?: G.ClassName;
 	attributes?: G.Attributes<TagName>;
-} & Pick<ItemProps, "grow">;
+} & Pick<ItemProps, "grow" | "shrink">;
 
 export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	order?: G.Responsive<number>;
 	columns?: G.Responsive<Columns>;
 	grow?: G.Responsive<boolean>;
+	shrink?: boolean;
 	gapBefore?: G.Responsive<number> | "auto";
 	as?: TagName;
 	attributes?: G.Attributes<TagName>;

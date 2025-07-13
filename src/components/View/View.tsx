@@ -25,6 +25,7 @@ const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T
 	const {
 		columns,
 		grow,
+		shrink,
 		gapBefore,
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,6 +41,7 @@ const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T
 		gapBefore === "auto" && s["item--gap-auto"],
 		gapBefore !== undefined && s["item--gap-before"],
 		columns && s["item--columns"],
+		shrink && s["item--shrink"],
 		...responsiveClassNames(s, "item--grow", grow),
 		...responsiveClassNames(s, "item--columns", columns)
 	);
@@ -107,6 +109,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		 * Item prop
 		 */
 		grow,
+		shrink,
 
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -196,9 +199,12 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		}
 
 		// Passing grow here because it's responsive and nowrap should follow it
-		if (isItem && child.props?.grow) nowrap = child.props.grow;
+		if ((isItem || isView) && child.props?.grow) {
+			nowrap = child.props.grow;
+			isFlex = true;
+		}
 		if (isItem && child.props?.gap === "auto") nowrap = true;
-		if ((isItem || isView) && child.props?.grow) isFlex = true;
+
 		return (
 			<React.Fragment key={`${key}-fragment`}>
 				{dividerElement}
@@ -265,7 +271,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...responsiveClassNames(s, "--nowrap", nowrap || wrap === false),
 		...responsiveClassNames(s, "--wrap", wrap),
 		// Item classnames
-		...responsiveClassNames(s, "item--grow", grow)
+		...responsiveClassNames(s, "item--grow", grow),
+		shrink && s["item--shrink"]
 	);
 
 	const rootVariables = {
