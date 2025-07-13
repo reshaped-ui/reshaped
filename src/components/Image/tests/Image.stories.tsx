@@ -43,7 +43,7 @@ export const src: StoryObj = {
 };
 
 export const size = {
-	name: "width, height",
+	name: "width, height, maxWidth, aspectRatio",
 	render: () => (
 		<Example>
 			<Example.Item title="width: 200px">
@@ -51,6 +51,12 @@ export const size = {
 			</Example.Item>
 			<Example.Item title="height: 200px">
 				<Image src={imgUrl} height="200px" />
+			</Example.Item>
+			<Example.Item title="maxWidth: 200px">
+				<Image src={imgUrl} maxWidth="200px" />
+			</Example.Item>
+			<Example.Item title="aspectRatio: 1/1">
+				<Image src={imgUrl} aspectRatio={1 / 1} width="300px" />
 			</Example.Item>
 			<Example.Item title={["responsive width", "[s] 200px", "[m+] 300px"]}>
 				<Image src={imgUrl} width={{ s: "200px", m: "300px" }} />

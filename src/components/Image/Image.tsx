@@ -7,13 +7,17 @@ import s from "./Image.module.css";
 import getRadiusStyles from "styles/radius";
 import getWidthStyles from "styles/width";
 import getHeightStyles from "styles/height";
+import getAspectRatioStyles from "styles/aspectRatio";
+import getMaxWidthStyles from "styles/maxWidth";
 
 const Image: React.FC<T.Props> = (props) => {
 	const {
 		src,
 		alt,
 		width,
+		maxWidth,
 		height,
+		aspectRatio,
 		onLoad,
 		onError,
 		fallback,
@@ -28,11 +32,14 @@ const Image: React.FC<T.Props> = (props) => {
 	const radiusStyles = getRadiusStyles(borderRadius);
 	const widthStyles = getWidthStyles(width);
 	const heightStyles = getHeightStyles(height);
+	const maxWidthStyles = getMaxWidthStyles(maxWidth);
+	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
 	const baseClassNames = classNames(
 		s.root,
 		radiusStyles?.classNames,
 		widthStyles?.classNames,
 		heightStyles?.classNames,
+		maxWidthStyles?.classNames,
 		displayMode && s[`--display-mode-${displayMode}`],
 		className
 	);
@@ -43,6 +50,8 @@ const Image: React.FC<T.Props> = (props) => {
 		...attributes?.style,
 		...widthStyles?.variables,
 		...heightStyles?.variables,
+		...maxWidthStyles?.variables,
+		...aspectRatioStyles?.variables,
 	} as React.CSSProperties;
 
 	const handleLoad = (e: React.SyntheticEvent) => {

@@ -7,6 +7,8 @@ export type Props = {
 	alt?: string;
 	width?: G.Responsive<string | number>;
 	height?: G.Responsive<string | number>;
+	maxWidth?: G.Responsive<string | number>;
+	aspectRatio?: G.Responsive<number>;
 	borderRadius?: Extract<TStyles.Radius, "small" | "medium" | "large">;
 	displayMode?: "cover" | "contain";
 	onLoad?: (e: React.SyntheticEvent) => void;
