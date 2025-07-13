@@ -225,7 +225,7 @@ export { TrapFocus } from "utilities/a11y";
  * Types
  */
 export type { ReshapedConfig } from "types/config";
-export type { Responsive } from "types/global";
+export type { Responsive, Attributes } from "types/global";
 
 /**
  * Dev utilities
