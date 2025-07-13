@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Placeholder, Example } from "utilities/storybook";
 import View, { type ViewProps } from "components/View";
 import Hidden from "components/Hidden";
@@ -8,6 +8,7 @@ import Avatar from "components/Avatar";
 import MenuItem from "components/MenuItem";
 import Button from "components/Button";
 import IconPlus from "icons/Plus";
+import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Utility components/View",
@@ -1261,6 +1262,37 @@ export const hiddenItem = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+const KeyItem = (props: { children: React.ReactNode }) => {
+	const [timer, setTimer] = useState(0);
+
+	useEffect(() => {
+		const t = setInterval(() => setTimer((t) => t + 1), 500);
+		return () => clearInterval(t);
+	}, []);
+
+	return (
+		<div>
+			{props.children}, timer: {timer}
+		</div>
+	);
+};
+
+export const keys = {
+	name: "item, key",
+	render: () => {
+		const toggle = useToggle();
+
+		return (
+			<View gap={2}>
+				<Button onClick={() => toggle.toggle()}>Toggle</Button>
+				<View.Item>Item 1</View.Item>
+				{toggle.active && <KeyItem>Item 2</KeyItem>}
+				<KeyItem>Item 3</KeyItem>
+			</View>
+		);
+	},
 };
 
 export const nestedGaps = {

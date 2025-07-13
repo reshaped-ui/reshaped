@@ -175,7 +175,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const renderItem: T.RenderItem = ({ className, child, index }) => {
 		const isItem = child.type === ViewItem;
 		const isView = child.type === View;
-		const key = child.key || index;
+		const key = child.key;
 		const dividerElement = !!index && divided && renderDivider({ className, key });
 		let itemElement;
 
@@ -206,7 +206,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		if (isItem && child.props?.gap === "auto") nowrap = true;
 
 		return (
-			<React.Fragment key={`${key}-fragment`}>
+			<React.Fragment key={key ? `${key}-fragment` : undefined}>
 				{dividerElement}
 				{itemElement}
 			</React.Fragment>
