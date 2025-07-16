@@ -13,7 +13,7 @@ import type * as T from "./Tabs.types";
 import s from "./Tabs.module.css";
 
 const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
-	const { value, children, icon, href, attributes } = props;
+	const { value, children, icon, href, disabled, attributes } = props;
 	const {
 		onChange,
 		panelId,
@@ -87,8 +87,9 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 				ref={ref}
 				href={href}
 				insetFocus
+				disabled={disabled}
 				onClick={!name ? handleChange : undefined}
-				className={s.button}
+				className={[s.button, disabled && s["button--disabled"]]}
 				as={name ? "label" : undefined}
 				attributes={{
 					...(!isFormControl && tabAttributes),

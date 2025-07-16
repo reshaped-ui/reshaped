@@ -15,6 +15,7 @@ export type ItemProps = {
 	children?: React.ReactNode;
 	icon?: IconProps["svg"];
 	href?: string;
+	disabled?: boolean;
 	attributes?: G.Attributes<"div">;
 };
 

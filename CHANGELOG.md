@@ -5,3 +5,4 @@
 - Image: added aspectRatio property
 - View: Added shrink prop support for View and View.Item
 - View: Removed index based key inference for item rendering
+- Tabs: Added Tabs.Item disabled prop

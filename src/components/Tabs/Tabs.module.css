@@ -80,6 +80,16 @@
 	/* Highlighting causes background animation to get cut off */
 	-webkit-tap-highlight-color: transparent;
 	border-radius: var(--rs-radius-medium);
+
+	@media (hover: hover) and (pointer: fine) {
+		&:not(.button--disabled):hover {
+			color: var(--rs-color-foreground-neutral-faded);
+		}
+	}
+
+	&.button--disabled {
+		color: var(--rs-color-foreground-disabled);
+	}
 }
 
 .buttonContent {
@@ -88,12 +98,6 @@
 	align-items: center;
 	box-sizing: border-box;
 	border-radius: var(--rs-radius-medium);
-
-	@media (hover: hover) and (pointer: fine) {
-		&:hover {
-			color: var(--rs-color-foreground-neutral-faded);
-		}
-	}
 }
 
 .icon {
