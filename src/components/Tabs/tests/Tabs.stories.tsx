@@ -288,7 +288,7 @@ export const disabled: StoryObj = {
 					<Tabs defaultValue="1">
 						<Tabs.List>
 							<Tabs.Item value="1">Item 1</Tabs.Item>
-							<Tabs.Item value="2" disabled>
+							<Tabs.Item value="2" disabled icon={IconZap}>
 								Item 2
 							</Tabs.Item>
 							<Tabs.Item value="3">Item 3</Tabs.Item>
@@ -312,7 +312,7 @@ export const disabled: StoryObj = {
 							<Tabs.Item href="#item1" value="1">
 								Item 1
 							</Tabs.Item>
-							<Tabs.Item href="#item2" value="2" disabled>
+							<Tabs.Item href="#item2" value="2" disabled icon={IconZap}>
 								Item 2
 							</Tabs.Item>
 							<Tabs.Item href="#item3" value="3">
