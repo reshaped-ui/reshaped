@@ -20,6 +20,7 @@ export type Variant =
 export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	variant?: G.Responsive<Variant>;
 	weight?: G.Responsive<"regular" | "medium" | "bold">;
+	monospace?: boolean;
 	color?:
 		| "neutral"
 		| "neutral-faded"

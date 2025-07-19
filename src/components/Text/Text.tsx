@@ -21,6 +21,7 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 		decoration,
 		maxLines,
 		wrap,
+		monospace,
 		children,
 		className,
 		attributes,
@@ -42,6 +43,7 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 		maxLines !== undefined && s[`--clamp`],
 		maxLines === 1 && s["--break-all"],
 		wrap && s[`--wrap-${wrap}`],
+		monospace && s["--monospace"],
 		className
 	);
 	const style = {

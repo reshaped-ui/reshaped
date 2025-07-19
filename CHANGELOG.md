@@ -1,8 +1,11 @@
 ## 3.7.0
 
 - Added Attributes type to the package exports
+- Added `mono` font family to the themes
+
 - Image: added maxWidth property
 - Image: added aspectRatio property
 - View: Added shrink prop support for View and View.Item
 - View: Removed index based key inference for item rendering
 - Tabs: Added Tabs.Item disabled prop
+- Text: Added monospace prop

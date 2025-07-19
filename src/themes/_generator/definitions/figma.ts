@@ -8,6 +8,9 @@ const theme: Partial<ThemeDefinition> = {
 		body: {
 			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
 		},
+		monospace: {
+			family: "SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
+		},
 	},
 
 	fontWeight: {

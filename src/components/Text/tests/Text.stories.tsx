@@ -1,3 +1,5 @@
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 import { Example } from "utilities/storybook";
 import Text from "components/Text";
 
@@ -139,6 +141,22 @@ export const wrap = {
 	),
 };
 
+export const mono = {
+	name: "monospace",
+	render: () => (
+		<Example>
+			<Example.Item title="monospace">
+				<Text monospace>Content</Text>
+			</Example.Item>
+			<Example.Item title="monospace, variant, weight">
+				<Text monospace variant="title-1" weight="regular">
+					Content
+				</Text>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const maxLines = {
 	name: "maxLines",
 	render: () => (
@@ -179,4 +197,39 @@ export const align = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const asProp: StoryObj = {
+	name: "as",
+	render: () => (
+		<>
+			<Text as="h1">Content</Text>
+			<Text variant="title-3">Content</Text>
+			<Text variant={{ s: "title-3", m: "title-4" }}>Content</Text>
+		</>
+	),
+	play: async ({ canvas }) => {
+		const els = canvas.getAllByRole("heading");
+
+		expect(els[0].tagName).toEqual("H1");
+		expect(els[1].tagName).toBe("H3");
+		expect(els[2].tagName).toBe("H4");
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Text className="test-classname" attributes={{ id: "test-id" }}>
+				Content
+			</Text>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+	},
 };

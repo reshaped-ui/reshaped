@@ -2,6 +2,7 @@
 			[data-rs-theme="slate"] {
 					--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-body: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+--rs-font-family-mono: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 --rs-font-weight-regular: 400;
 --rs-font-weight-medium: 500;
 --rs-font-weight-semibold: 600;

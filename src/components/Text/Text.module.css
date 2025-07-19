@@ -155,3 +155,7 @@
 .--decoration-line-through {
 	text-decoration: line-through;
 }
+
+.--monospace {
+	font-family: var(--rs-font-family-monospace);
+}

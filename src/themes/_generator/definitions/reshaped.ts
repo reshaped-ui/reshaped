@@ -9,6 +9,10 @@ const theme: ThemeDefinition = {
 		body: {
 			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
 		},
+		monospace: {
+			family:
+				"Geist Mono, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
+		},
 	},
 
 	fontWeight: {
