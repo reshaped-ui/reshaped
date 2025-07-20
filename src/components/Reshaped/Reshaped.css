@@ -1,11 +1,3 @@
-:root {
-	--rs-z-index-raised: 5;
-	--rs-z-index-flyout: 80;
-	--rs-z-index-fixed: 90;
-	--rs-z-index-overlay: 100;
-	--rs-z-index-notification: 110;
-}
-
 @layer rs.reset {
 	[data-rs-theme] body,
 	[data-rs-theme] h1,

@@ -8,6 +8,7 @@ import shadow from "./shadow/shadow.transforms";
 import unit from "./unit/unit.transforms";
 import radius from "./radius/radius.transforms";
 import viewport from "./viewport/viewport.transforms";
+import zIndex from "./zIndex/zIndex.transforms";
 
 export const css = {
 	color,
@@ -20,4 +21,5 @@ export const css = {
 	unit,
 	radius,
 	viewport,
+	zIndex,
 };

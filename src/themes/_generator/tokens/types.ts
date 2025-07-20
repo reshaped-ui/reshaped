@@ -8,6 +8,7 @@ import type * as TShadow from "./shadow/shadow.types";
 import type * as TUnit from "./unit/unit.types";
 import type * as TRadius from "./radius/radius.types";
 import type * as TViewport from "./viewport/viewport.types";
+import * as TZIndex from "./zIndex/zIndex.types";
 import { PartialDeep, PrivateOptions } from "../types";
 
 export type TokenType =
@@ -20,7 +21,8 @@ export type TokenType =
 	| "color"
 	| "duration"
 	| "easing"
-	| "shadow";
+	| "shadow"
+	| "zIndex";
 
 type TokenSet<Name extends string, Token> = Record<Name, Token> & {
 	[tokenName: string]: Token;
@@ -40,6 +42,7 @@ export type ThemeDefinition = {
 	easing: TokenSet<TEasing.Name, TEasing.Token>;
 	shadow: TokenSet<TShadow.Name, TShadow.Token>;
 	viewport: Record<Exclude<TViewport.Name, "s">, TViewport.Token>;
+	zIndex: Record<TZIndex.Name, TZIndex.Token>;
 };
 
 /**

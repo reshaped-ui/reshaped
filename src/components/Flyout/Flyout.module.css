@@ -4,6 +4,7 @@
 	--rs-flyout-origin-y: 50%;
 
 	position: absolute;
+	isolation: isolate;
 
 	/* Ignore the padding for non-hover trigger types */
 	pointer-events: none;

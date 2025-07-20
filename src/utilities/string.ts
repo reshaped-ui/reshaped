@@ -1,5 +1,10 @@
 export const camelToKebab = (s: string) => {
-	return s.replace(/([a-z][a-z])([A-Z]|[0-9])/g, "$1-$2").toLowerCase();
+	return s
+		.replace(/([a-z]+)([A-Z0-9]+)/g, (_, p1, p2) =>
+			// Keep values like x1 - as is
+			p1.length === 1 && /^[0-9]+$/.test(p2) ? `${p1}${p2}` : `${p1}-${p2}`
+		)
+		.toLowerCase();
 };
 
 export const capitalize = (s: string) => {

@@ -201,6 +201,12 @@ const theme: Partial<ThemeDefinition> = {
 		l: { minPx: 900 },
 		xl: { minPx: 1280 },
 	},
+
+	zIndex: {
+		relative: { level: 10 },
+		absolute: { level: 100 },
+		fixed: { level: 200 },
+	},
 };
 
 export default theme;

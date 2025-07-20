@@ -16,7 +16,7 @@
 .handle {
 	flex-shrink: 0;
 	position: relative;
-	z-index: var(--rs-z-index-raised);
+	z-index: var(--rs-z-index-relative);
 
 	&::before,
 	&::after {

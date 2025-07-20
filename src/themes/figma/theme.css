@@ -2,7 +2,7 @@
 			[data-rs-theme="figma"] {
 					--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-body: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
---rs-font-family-mono: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+--rs-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 --rs-font-weight-regular: 400;
 --rs-font-weight-medium: 500;
 --rs-font-weight-semibold: 600;
@@ -110,6 +110,9 @@
 --rs-viewport-m-min: 660;
 --rs-viewport-l-min: 900;
 --rs-viewport-xl-min: 1280;
+--rs-z-index-relative: 10;
+--rs-z-index-absolute: 100;
+--rs-z-index-fixed: 200;
 			}
 		
 			[data-rs-theme="figma"][data-rs-color-mode="light"] {

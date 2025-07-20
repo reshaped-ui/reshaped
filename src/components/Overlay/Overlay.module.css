@@ -12,11 +12,12 @@
 	top: var(--rs-overlay-offset-y);
 	height: 100%;
 	width: 100%;
-	z-index: var(--rs-z-index-overlay);
+	z-index: var(--rs-z-index-fixed);
 	color: var(--rs-color-white);
 	background-color: rgba(var(--rs-color-rgb-black), 0);
 	opacity: 0;
 	outline: none;
+	isolation: isolate;
 
 	/* Override default Tailwind reset */
 	cursor: default !important;

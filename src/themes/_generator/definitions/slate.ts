@@ -5,7 +5,6 @@ import generateColors from "themes/_generator/tokens/color/utilities/generateCol
 const theme: PassedThemeDefinition = {
 	...reshapedDefinition,
 	color: generateColors(),
-	unit: reshapedDefinition.unit,
 };
 
 export default theme;

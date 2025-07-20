@@ -16,7 +16,7 @@
 
 	&--index-0 {
 		/* Show first toast above others to avoid shadow of other toasts shown when animating */
-		z-index: var(--rs-z-index-raised);
+		z-index: var(--rs-z-index-relative);
 	}
 
 	&--index-1 {
@@ -64,12 +64,15 @@
 
 .region {
 	position: fixed;
-	z-index: var(--rs-z-index-notification);
 	padding: var(--rs-unit-x4);
 	display: flex;
 	flex-direction: column;
 	max-width: 100%;
 	width: 100%;
+	isolation: isolate;
+
+	/* Show above everything */
+	z-index: calc(var(--rs-z-index-fixed) + 1);
 
 	&--nested {
 		position: absolute;

@@ -1,5 +1,6 @@
 .root {
 	position: relative;
+	isolation: isolate;
 
 	/* Keep parent size even if carousel items don't fit into their allocated space */
 	width: 100%;
@@ -14,7 +15,7 @@
 	transform-origin: 50%;
 	transform: translate(-50%, -50%) scale(0.75);
 	display: none;
-	z-index: var(--rs-z-index-raised);
+	z-index: var(--rs-z-index-relative);
 }
 
 .--control-prev {

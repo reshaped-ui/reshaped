@@ -208,6 +208,12 @@ const theme: ThemeDefinition = {
 		l: { minPx: breakpoints.l },
 		xl: { minPx: breakpoints.xl },
 	},
+
+	zIndex: {
+		relative: { level: 10 },
+		absolute: { level: 100 },
+		fixed: { level: 200 },
+	},
 };
 
 export default theme;

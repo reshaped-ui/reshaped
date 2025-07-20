@@ -9,7 +9,7 @@ export const defaultStyles: T.Styles = {
 	top: 0,
 	width: "auto",
 	height: "auto",
-	zIndex: "var(--rs-z-index-flyout)",
+	zIndex: "var(--rs-z-index-absolute)",
 };
 
 export const resetStyles: T.Styles = {
@@ -19,5 +19,5 @@ export const resetStyles: T.Styles = {
 	visibility: "hidden",
 	animation: "none",
 	transition: "none",
-	zIndex: "var(--rs-z-index-flyout)",
+	zIndex: "var(--rs-z-index-absolute)",
 };

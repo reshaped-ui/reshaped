@@ -6,8 +6,8 @@
     "body": {
       "family": "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif"
     },
-    "mono": {
-      "family": "SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace"
+    "monospace": {
+      "family": "Geist Mono, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace"
     }
   },
   "fontWeight": {
@@ -594,6 +594,17 @@
     },
     "s": {
       "maxPx": 659
+    }
+  },
+  "zIndex": {
+    "relative": {
+      "level": 10
+    },
+    "absolute": {
+      "level": 100
+    },
+    "fixed": {
+      "level": 200
     }
   }
 }

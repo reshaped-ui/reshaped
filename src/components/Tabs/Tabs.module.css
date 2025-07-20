@@ -24,6 +24,7 @@
 
 .root {
 	position: relative;
+	isolation: isolate;
 	box-sizing: initial;
 
 	/* 
@@ -122,7 +123,7 @@
 	position: absolute;
 	border-radius: calc(var(--rs-radius-medium) - 1px);
 	background: var(--rs-color-border-primary);
-	z-index: var(--rs-z-index-raised);
+	z-index: var(--rs-z-index-relative);
 }
 
 .selector {
@@ -151,7 +152,7 @@
 	inset-block: 0;
 	display: none;
 	align-items: center;
-	z-index: var(--rs-z-index-raised);
+	z-index: var(--rs-z-index-relative);
 	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
 	transition-property: opacity, transform;
 	opacity: 0;

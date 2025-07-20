@@ -38,7 +38,7 @@
 
 	[data-rs-keyboard] &:focus {
 		outline: none;
-		z-index: var(--rs-z-index-raised);
+		z-index: var(--rs-z-index-relative);
 		box-shadow: var(--rs-focus-inset-shadow);
 	}
 }
