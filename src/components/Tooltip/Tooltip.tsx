@@ -7,7 +7,7 @@ import type * as T from "./Tooltip.types";
 import s from "./Tooltip.module.css";
 
 const Tooltip: React.FC<T.Props> = (props) => {
-	const { text, children, position = "bottom", ...flyoutProps } = props;
+	const { text, children, position = "bottom", color = "inverted", ...flyoutProps } = props;
 
 	if (!text) return children({});
 
@@ -15,7 +15,7 @@ const Tooltip: React.FC<T.Props> = (props) => {
 		<Flyout {...flyoutProps} position={position} triggerType="hover" groupTimeouts>
 			<Flyout.Trigger>{children}</Flyout.Trigger>
 			<Flyout.Content>
-				<Theme colorMode="inverted">
+				<Theme colorMode={color}>
 					<Text variant="caption-1" className={s.root}>
 						{text}
 					</Text>

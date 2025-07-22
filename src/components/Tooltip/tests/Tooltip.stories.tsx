@@ -97,6 +97,17 @@ export const position = () => (
 	</Example>
 );
 
+export const color = () => (
+	<Example>
+		<Example.Item title="color: inverted">
+			<Demo color="inverted" position="bottom" />
+		</Example.Item>
+		<Example.Item title="color: dark">
+			<Demo color="dark" position="bottom" />
+		</Example.Item>
+	</Example>
+);
+
 export const controlled = () => (
 	<Example>
 		<Example.Item title="active, controlled, position: bottom">

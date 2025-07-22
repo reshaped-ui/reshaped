@@ -11,3 +11,4 @@
 - View: Removed index based key inference for item rendering
 - Tabs: Added Tabs.Item disabled prop
 - Text: Added monospace prop
+- Tooltip: Added color prop
