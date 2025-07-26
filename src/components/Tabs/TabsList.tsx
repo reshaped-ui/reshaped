@@ -51,6 +51,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		direction && s[`--direction-${direction}`],
 		itemWidth && s[`--item-width-${itemWidth}`],
 		variant && s[`--variant-${variant}`],
+		fadeSide && s["--scrollable"],
 		(fadeSide === "start" || fadeSide === "both") && s["--fade-start"],
 		(fadeSide === "end" || fadeSide === "both") && s["--fade-end"],
 		className

@@ -12,3 +12,4 @@
 - Tabs: Added Tabs.Item disabled prop
 - Text: Added monospace prop
 - Tooltip: Added color prop
+- Tabs: Fixed horizontal scrolling caused by negative margins

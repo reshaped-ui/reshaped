@@ -41,20 +41,6 @@
 	gap: var(--rs-tabs-gap);
 }
 
-.inner {
-	mask-image: linear-gradient(
-		to right,
-		rgba(0, 0, 0, 0%) 0%,
-		rgba(0, 0, 0, 0%) var(--rs-tabs-mid-l),
-		rgba(0, 0, 0, 100%) var(--rs-tabs-stop-l),
-		rgba(0, 0, 0, 100%) var(--rs-tabs-stop-r),
-		rgba(0, 0, 0, 0%) var(--rs-tabs-mid-r),
-		rgba(0, 0, 0, 0%) 100%
-	);
-	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
-	transition-property: --rs-tabs-stop-l, --rs-tabs-stop-r, --rs-tabs-mid-l, --rs-tabs-mid-r;
-}
-
 .inner::after {
 	content: "";
 	position: absolute;
@@ -160,7 +146,6 @@
 
 	&.control--active {
 		opacity: 1;
-		transform: translateX(0);
 		pointer-events: all;
 	}
 
@@ -171,12 +156,10 @@
 
 .control--next {
 	inset-inline-end: 0;
-	transform: translateX(var(--rs-unit-x2));
 }
 
 .control--prev {
 	inset-inline-start: 0;
-	transform: translateX(calc(var(--rs-unit-x2) * -1));
 }
 
 .panel {
@@ -191,33 +174,40 @@
 	display: none;
 }
 
-.--direction-row {
+.--scrollable {
 	& .inner {
-		white-space: nowrap;
-
-		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		overflow: auto;
-
-		/* 1 */
-		margin: 0 calc(var(--rs-unit-x2) * -1);
-		padding: 0 var(--rs-unit-x2);
-		-ms-overflow-style: none;
-
 		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
 		overflow: -moz-scrollbars-none;
 		scrollbar-width: none;
-	}
+		-ms-overflow-style: none;
+		mask-image: linear-gradient(
+			to right,
+			rgba(0, 0, 0, 0%) 0%,
+			rgba(0, 0, 0, 0%) var(--rs-tabs-mid-l),
+			rgba(0, 0, 0, 100%) var(--rs-tabs-stop-l),
+			rgba(0, 0, 0, 100%) var(--rs-tabs-stop-r),
+			rgba(0, 0, 0, 0%) var(--rs-tabs-mid-r),
+			rgba(0, 0, 0, 0%) 100%
+		);
+		transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+		transition-property: --rs-tabs-stop-l, --rs-tabs-stop-r, --rs-tabs-mid-l, --rs-tabs-mid-r;
 
-	& .inner::-webkit-scrollbar {
-		display: none;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+}
+
+.--direction-row {
+	& .inner {
+		white-space: nowrap;
 	}
 
 	& .inner::after {
 		height: 1px;
-
-		/* 1 */
-		inset-inline: var(--rs-unit-x2);
 		bottom: 0;
+		inset-inline: 0;
 	}
 
 	& .list {
@@ -241,7 +231,6 @@
 	}
 
 	& .button {
-		/* 1 */
 		margin: var(--rs-unit-x1) calc(var(--rs-unit-x2) * -1);
 		padding: 0 var(--rs-unit-x2);
 		box-sizing: initial;
@@ -256,8 +245,7 @@
 .--direction-column {
 	& .inner::after {
 		inset-inline-end: 0;
-		top: 0;
-		bottom: 0;
+		inset-block: 0;
 		height: 100%;
 		width: 1px;
 	}
@@ -411,13 +399,13 @@
 [dir="rtl"] .--fade-start .inner,
 .--fade-end .inner {
 	--rs-tabs-mid-r: 100%;
-	--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 12);
+	--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 10);
 }
 
 [dir="rtl"] .--fade-end .inner,
 .--fade-start .inner {
 	--rs-tabs-mid-l: 0px;
-	--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 12);
+	--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 10);
 }
 
 @media (pointer: fine) {
@@ -427,13 +415,13 @@
 
 	[dir="rtl"] .--fade-start .inner,
 	.--fade-end .inner {
-		--rs-tabs-mid-r: calc(100% - var(--rs-unit-x1) * 6);
-		--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 12);
+		--rs-tabs-mid-r: calc(100% - var(--rs-unit-x1) * 4);
+		--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 10);
 	}
 
 	[dir="rtl"] .--fade-end .inner,
 	.--fade-start .inner {
-		--rs-tabs-mid-l: calc(var(--rs-unit-x1) * 6);
-		--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 12);
+		--rs-tabs-mid-l: calc(var(--rs-unit-x1) * 4);
+		--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 10);
 	}
 }
