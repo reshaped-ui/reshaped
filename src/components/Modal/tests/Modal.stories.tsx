@@ -260,6 +260,14 @@ export const edgeCases = () => {
 					</View>
 				</Demo>
 			</Example.Item>
+			<Example.Item title="Focus moves to the input with autoFocus">
+				<Demo title="Modal title">
+					<View gap={3} direction="row">
+						<Button onClick={() => {}}>Button</Button>
+						<TextField name="name" placeholder="autofocus" inputAttributes={{ autoFocus: true }} />
+					</View>
+				</Demo>
+			</Example.Item>
 			<Example.Item title="scrollable area in modal ignores swipe-to-close">
 				<View gap={3} direction="row">
 					<Button onClick={scrollModalToggle.activate}>Open</Button>

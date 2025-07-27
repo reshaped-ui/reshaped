@@ -14,3 +14,4 @@
 - Tooltip: Added color prop
 - Tabs: Fixed horizontal scrolling caused by negative margins
 - Carousel: Updated outline styles when there are no focusable elements inside the carousel
+- TrapFocus: Keep the focus on the manually focused elements

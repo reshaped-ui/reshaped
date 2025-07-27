@@ -156,9 +156,15 @@ class TrapFocus {
 
 		// Don't add back to the chain if we're traversing back
 		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
+		const currentActiveElement = getActiveElement(this.#root);
+
 		if (!tailItem || this.#root !== tailItem.data.#root) {
 			this.#chainId = TrapFocus.chain.add(this);
-			focusElement(initialFocusEl || focusable[0], { pseudoFocus });
+
+			// If the focus was moved manually (e.g. with autoFocus) - keep it there
+			if (!this.#root.contains(currentActiveElement)) {
+				focusElement(initialFocusEl || focusable[0], { pseudoFocus });
+			}
 		}
 
 		this.trapped = true;
