@@ -5,8 +5,12 @@
 
 .root::after {
 	content: attr(data-rs-textarea-value) " ";
-	white-space: pre-wrap;
 	visibility: hidden;
+
+	/* Align with the textarea native behavior */
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	overflow: hidden;
 }
 
 .root::after,
@@ -19,7 +23,6 @@
 	box-sizing: border-box;
 	flex-grow: 1;
 	width: 100%;
-	word-break: break-all;
 }
 
 .input {
