@@ -5,6 +5,7 @@
 
 import React from "react";
 import useElementId from "hooks/useElementId";
+import { onNextFrame } from "utilities/animation";
 
 type Ref = React.RefObject<HTMLElement | null>;
 type QueueItem = { triggerRef?: Ref; contentRef: Ref; parentId: string | null };
@@ -28,27 +29,26 @@ const addToQueue = (id: string, contentRef: Ref, triggerRef?: Ref) => {
 	latestId = id;
 };
 
-const useIsDismissible = (args: {
-	active?: boolean;
-	contentRef: Ref;
-	triggerRef?: Ref;
-	blocking?: boolean;
-}) => {
-	const { active, contentRef, triggerRef, blocking } = args;
+const useIsDismissible = (args: { active?: boolean; contentRef: Ref; triggerRef?: Ref }) => {
+	const { active, contentRef, triggerRef } = args;
 	const id = useElementId();
-	const isDismissible = React.useCallback(() => {
-		if (!blocking) return true;
-		return active ? latestId === id : true;
-	}, [id, active, blocking]);
 
 	React.useEffect(() => {
 		if (!active) return;
 
-		addToQueue(id, contentRef, triggerRef);
+		if (queue.length) {
+			// Make sure new item is added to the queue after others unmount first
+			onNextFrame(() => addToQueue(id, contentRef, triggerRef));
+		} else {
+			addToQueue(id, contentRef, triggerRef);
+		}
+
 		return () => removeFromQueue(id);
 	}, [active, id, contentRef, triggerRef]);
 
-	return isDismissible;
+	return React.useCallback(() => {
+		return active ? latestId === id : true;
+	}, [id, active]);
 };
 
 export default useIsDismissible;

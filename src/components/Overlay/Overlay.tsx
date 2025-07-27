@@ -52,9 +52,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	// Separating rendered and visible states to make sure animation is triggered only once overlay was added to the dom
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
-
-	// Check that when close was triggered there were no other overlays / flyouts rendered above it
-	const isDismissible = useIsDismissible({ active, contentRef, blocking: true });
+	const isDismissible = useIsDismissible({ active, contentRef });
 
 	const rootClassNames = classNames(
 		s.root,

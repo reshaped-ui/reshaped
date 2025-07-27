@@ -9,6 +9,7 @@ export type Props = TextFieldProps &
 		onInput?: TextFieldProps["onChange"];
 		onItemSelect?: (args: SelectArgs) => void;
 		onBackspace?: () => void;
+		onEnter?: () => void;
 		children: React.ReactNode;
 	};
 

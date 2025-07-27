@@ -111,7 +111,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		active: isRendered && triggerType !== "hover",
 		contentRef: flyoutElRef,
 		triggerRef: triggerElRef,
-		blocking: false,
 	});
 
 	const clearTimer = React.useCallback(() => {

@@ -287,6 +287,28 @@ export const className: StoryObj = {
 	},
 };
 
+export const testNested = {
+	name: "test: nested",
+	render: () => (
+		<Popover position="bottom">
+			<Popover.Trigger>
+				{(attributes) => <Button attributes={attributes}>Open</Button>}
+			</Popover.Trigger>
+			<Popover.Content>
+				<View gap={2} align="start">
+					Popover content
+					<Popover>
+						<Popover.Trigger>
+							{(attributes) => <Button attributes={attributes}>Open</Button>}
+						</Popover.Trigger>
+						<Popover.Content>Hello</Popover.Content>
+					</Popover>
+				</View>
+			</Popover.Content>
+		</Popover>
+	),
+};
+
 export const testWithTooltip = {
 	name: "test: with tooltip",
 	render: () => (
@@ -319,31 +341,7 @@ export const testWithTooltip = {
 	),
 };
 
-export const variant = {
-	name: "variant [deprecated]",
-	render: () => (
-		<Example>
-			<Example.Item title="variant: headless">
-				<Popover variant="headless" defaultActive position="bottom-start">
-					<Popover.Trigger>
-						{(attributes) => <Button attributes={attributes}>Open</Button>}
-					</Popover.Trigger>
-					<Popover.Content>
-						<View
-							height="100px"
-							width="100px"
-							borderColor="primary"
-							borderRadius="medium"
-							backgroundColor="primary-faded"
-						/>
-					</Popover.Content>
-				</Popover>
-			</Example.Item>
-		</Example>
-	),
-};
-
-export const teslContentEditable = {
+export const testContentEditable = {
 	name: "test: contenteditable",
 	render: () => {
 		const [active, setActive] = useState(false);
@@ -396,4 +394,28 @@ export const teslContentEditable = {
 			</Popover>
 		);
 	},
+};
+
+export const variant = {
+	name: "variant [deprecated]",
+	render: () => (
+		<Example>
+			<Example.Item title="variant: headless">
+				<Popover variant="headless" defaultActive position="bottom-start">
+					<Popover.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</Popover.Trigger>
+					<Popover.Content>
+						<View
+							height="100px"
+							width="100px"
+							borderColor="primary"
+							borderRadius="medium"
+							backgroundColor="primary-faded"
+						/>
+					</Popover.Content>
+				</Popover>
+			</Example.Item>
+		</Example>
+	),
 };

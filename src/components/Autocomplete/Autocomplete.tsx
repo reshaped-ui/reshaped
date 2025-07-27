@@ -24,12 +24,14 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 		containerRef,
 		instanceRef,
 		onBackspace,
+		onEnter,
 		active,
 		onOpen,
 		onClose,
 		...textFieldProps
 	} = props;
 	const onBackspaceRef = useHandlerRef(onBackspace);
+	const onEnterRef = useHandlerRef(onEnter);
 	const internalInputRef = React.useRef<HTMLInputElement>(null);
 	const inputAttributesRef = textFieldProps.inputAttributes?.ref;
 	const inputRef =
@@ -94,11 +96,14 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 			[keys.BACKSPACE]: () => {
 				onBackspaceRef.current?.();
 			},
+			[keys.ENTER]: () => {
+				onEnterRef.current?.();
+			},
 		},
-		[onBackspaceRef],
+		[onBackspaceRef, onEnterRef],
 		{
 			ref: inputRef,
-			disabled: !onBackspaceRef.current,
+			disabled: !onBackspaceRef.current && !onEnterRef.current,
 		}
 	);
 
