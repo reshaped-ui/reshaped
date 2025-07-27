@@ -127,6 +127,7 @@ const TextField: React.FC<T.Props> & {
 			<div className={s.inner}>
 				<input
 					type="text"
+					autoComplete="off"
 					{...inputAttributes}
 					className={classNames(s.input, inputAttributes.className)}
 					disabled={disabled}

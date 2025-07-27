@@ -45,6 +45,11 @@
 	padding: 0 calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
 	scroll-snap-type: x mandatory;
 	scroll-padding-inline-start: calc(var(--rs-unit-x1) * var(--rs-carousel-bleed));
+	outline: none;
+
+	[data-rs-keyboard] &:focus {
+		box-shadow: var(--rs-focus-shadow);
+	}
 }
 
 .scroll::-webkit-scrollbar {

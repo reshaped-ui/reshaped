@@ -13,3 +13,4 @@
 - Text: Added monospace prop
 - Tooltip: Added color prop
 - Tabs: Fixed horizontal scrolling caused by negative margins
+- Carousel: Updated outline styles when there are no focusable elements inside the carousel
