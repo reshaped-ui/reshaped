@@ -22,6 +22,7 @@ export type Props = Pick<
 	| "disableHideAnimation"
 	| "disableContentHover"
 	| "disableCloseOnOutsideClick"
+	| "autoFocus"
 	| "containerRef"
 	| "initialFocusRef"
 	| "originCoordinates"

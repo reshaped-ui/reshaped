@@ -2,9 +2,8 @@ import View from "components/View";
 import Image from "components/Image";
 import Button from "components/Button";
 import React from "react";
-import ToggleButtonGroup from "components/ToggleButtonGroup";
-import ToggleButton from "components/ToggleButton";
 import useToggle from "hooks/useToggle";
+import Popover from "components/Popover";
 
 export default {
 	title: "Sandbox",
@@ -36,7 +35,20 @@ const Component = () => {
 
 	return (
 		<View align="center" justify="center" height="150px">
-			<Button onClick={toggle}>{active.toString()}</Button>
+			<Popover autoFocus={false}>
+				<Popover.Trigger>
+					{(attributes) => <Button attributes={attributes}>Open</Button>}
+				</Popover.Trigger>
+				<Popover.Content>
+					<View gap={2} align="start">
+						Popover content
+						<View direction="row" gap={2}>
+							<Button onClick={() => {}}>Action 1</Button>
+							<Button onClick={() => {}}>Action 2</Button>
+						</View>
+					</View>
+				</Popover.Content>
+			</Popover>
 		</View>
 	);
 };

@@ -35,6 +35,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		disableHideAnimation,
 		disableContentHover,
 		disableCloseOnOutsideClick,
+		autoFocus = true,
 		originCoordinates,
 		contentGap = 2,
 		contentShift,
@@ -299,16 +300,22 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (trapFocusRef.current?.trapped) return;
 		if (trapFocusMode === false) return;
 
+		const initialFocusEl = (
+			!autoFocus
+				? flyoutElRef.current.querySelector("[role][tabindex='-1']")
+				: initialFocusRef?.current
+		) as FocusableElement | undefined;
+
 		trapFocusRef.current = new TrapFocus();
 		trapFocusRef.current.trap(flyoutElRef.current, {
 			mode: trapFocusMode,
-			initialFocusEl: initialFocusRef?.current as FocusableElement | undefined,
+			initialFocusEl,
 			includeTrigger: triggerType === "hover" && trapFocusMode !== "dialog" && !isSubmenu,
 			onRelease: () => {
 				handleClose({});
 			},
 		});
-	}, [status, triggerType, trapFocusMode]);
+	}, [status, triggerType, trapFocusMode, autoFocus]);
 
 	React.useEffect(() => {
 		if (!disableHideAnimation && status !== "hidden") return;
@@ -408,6 +415,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				contentAttributes,
 				containerRef,
 				disableContentHover,
+				autoFocus,
 				isSubmenu,
 			}}
 		>

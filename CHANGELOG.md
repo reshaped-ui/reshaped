@@ -18,3 +18,4 @@
 - TextArea: Removed custom word-break that was used for autogrow text areas
 - Autocomplete: Added onEnter handler
 - Flyout: Make nested flyouts blocking to make sure they are closed one by one
+- Flyout, Popover: autoFocus=false prop support (aligned with modals)

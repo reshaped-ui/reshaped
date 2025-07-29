@@ -31,6 +31,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		contentAttributes,
 		trapFocusMode,
 		disableContentHover,
+		autoFocus,
 		width,
 		containerRef: passedContainerRef,
 		isSubmenu,
@@ -147,6 +148,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 					role={role}
 					{...attributes}
 					id={id}
+					tabIndex={!autoFocus ? -1 : undefined}
 					aria-modal={role === "dialog" ? true : undefined}
 					style={contentAttributes?.style}
 					className={innerClassNames}

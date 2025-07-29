@@ -30,7 +30,10 @@ const Demo: React.FC<any> = (props) => {
 			<Popover.Content>
 				<View gap={2} align="start">
 					Popover content
-					<Button onClick={() => {}}>Button</Button>
+					<View direction="row" gap={2}>
+						<Button onClick={() => {}}>Action 1</Button>
+						<Button onClick={() => {}}>Action 2</Button>
+					</View>
 				</View>
 			</Popover.Content>
 		</Popover>
@@ -262,6 +265,27 @@ export const dismissible: StoryObj<{
 
 		const trigger = canvas.getAllByRole("button")[0];
 		await userEvent.click(trigger);
+	},
+};
+
+export const autoFocus: StoryObj = {
+	name: "autoFocus",
+	render: () => (
+		<Example>
+			<Example.Item title="autoFocus=false">
+				<Demo autoFocus={false} />
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(trigger);
+
+		await waitFor(() => {
+			expect(document.activeElement).toHaveRole("dialog");
+		});
 	},
 };
 

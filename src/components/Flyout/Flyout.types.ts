@@ -100,6 +100,7 @@ type BaseProps = {
 	disableHideAnimation?: boolean;
 	disableContentHover?: boolean;
 	disableCloseOnOutsideClick?: boolean;
+	autoFocus?: boolean;
 	originCoordinates?: G.Coordinates;
 	children?: React.ReactNode;
 	onOpen?: () => void;
@@ -163,6 +164,7 @@ export type ContextProps = {
 	| "contentShift"
 	| "containerRef"
 	| "disableContentHover"
+	| "autoFocus"
 >;
 
 export type TriggerContextProps = { elRef?: ContextProps["triggerElRef"] };

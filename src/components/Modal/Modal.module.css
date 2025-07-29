@@ -7,9 +7,9 @@
 	color: var(--rs-color-foreground-neutral);
 	box-shadow: var(--rs-shadow-overlay);
 	will-change: transform;
+	outline: none;
 
 	[data-rs-keyboard] &:focus {
-		outline: none;
 		box-shadow: var(--rs-focus-shadow);
 	}
 
