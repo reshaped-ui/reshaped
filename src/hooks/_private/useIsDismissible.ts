@@ -36,13 +36,7 @@ const useIsDismissible = (args: { active?: boolean; contentRef: Ref; triggerRef?
 	React.useEffect(() => {
 		if (!active) return;
 
-		if (queue.length) {
-			// Make sure new item is added to the queue after others unmount first
-			onNextFrame(() => addToQueue(id, contentRef, triggerRef));
-		} else {
-			addToQueue(id, contentRef, triggerRef);
-		}
-
+		onNextFrame(() => addToQueue(id, contentRef, triggerRef));
 		return () => removeFromQueue(id);
 	}, [active, id, contentRef, triggerRef]);
 

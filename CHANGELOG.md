@@ -19,3 +19,4 @@
 - Autocomplete: Added onEnter handler
 - Flyout: Make nested flyouts blocking to make sure they are closed one by one
 - Flyout, Popover: autoFocus=false prop support (aligned with modals)
+- Button: Fixed Buttons in groups wrapped with popover from losing border radius

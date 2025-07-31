@@ -5,6 +5,8 @@ import ReactDOM from "react-dom";
 import Theme from "components/Theme";
 import type * as T from "./Portal.types";
 import s from "./Portal.module.css";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+import useToggle from "hooks/useToggle";
 
 const PortalScopeContext = React.createContext<T.Context>({} as T.Context);
 
@@ -18,6 +20,7 @@ export const usePortalScope = () => {
  */
 const Portal: React.FC<T.Props> & { Scope: typeof PortalScope } = (props) => {
 	const { children, targetRef } = props;
+	const mountedToggle = useToggle();
 	const rootRef = React.useRef<HTMLDivElement>(null);
 	const rootNode = rootRef.current?.getRootNode();
 	const isShadowDom = rootNode instanceof ShadowRoot;
@@ -34,10 +37,16 @@ const Portal: React.FC<T.Props> & { Scope: typeof PortalScope } = (props) => {
 	const nextScopeRef = targetRef || portal.scopeRef;
 	const targetEl = nextScopeRef?.current || defaultTargetEl;
 
+	useIsomorphicLayoutEffect(() => {
+		mountedToggle.activate();
+		return () => mountedToggle.deactivate();
+	}, []);
+
 	/* Preserve the current theme when rendered in body */
 	return [
 		ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl),
-		<div ref={rootRef} className={s.root} key="root" />,
+		// Make sure this element doesn't affect components using :last-child when their children use portals
+		!mountedToggle.active && <div ref={rootRef} className={s.root} key="root" />,
 	];
 };
 
