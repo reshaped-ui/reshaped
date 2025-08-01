@@ -1,5 +1,5 @@
 
-			[data-rs-theme="slate"] {
+			[data-rs-theme="slate"],[data-rs-theme*=" slate "] {
 					--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-body: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-monospace: Geist Mono, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
@@ -112,7 +112,7 @@
 --rs-z-index-fixed: 200;
 			}
 		
-			[data-rs-theme="slate"][data-rs-color-mode="light"] {
+			[data-rs-theme="slate"][data-rs-color-mode="light"],[data-rs-theme*=" slate "][data-rs-color-mode="light"] {
 					--rs-color-background-primary: oklch(0.55 0.24 262.67);
 --rs-color-background-primary-faded: oklch(0.97 0.02 262.67);
 --rs-color-border-primary: oklch(0.47 0.24 262.67);
@@ -168,7 +168,7 @@
 --rs-color-rgb-background-page-faded: 244.953, 244.953, 244.953;
 			}
 		
-			[data-rs-theme="slate"][data-rs-color-mode="dark"] {
+			[data-rs-theme="slate"][data-rs-color-mode="dark"],[data-rs-theme*=" slate "][data-rs-color-mode="dark"] {
 					--rs-color-background-primary: oklch(0.5498 0.192 262.67);
 --rs-color-background-primary-faded: oklch(0.25 0.0384 262.67);
 --rs-color-border-primary: oklch(0.6298 0.192 262.67);

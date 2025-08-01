@@ -32,3 +32,10 @@ type ChangeHandlerArgs<Value, Event> = Value extends boolean
 export type ChangeHandler<Value, Event = React.ChangeEvent<HTMLInputElement>> = (
 	args: ChangeHandlerArgs<Value, Event>
 ) => void;
+
+/**
+ * Theming
+ */
+
+export type ColorMode = "light" | "dark";
+export type Theme = string | string[];

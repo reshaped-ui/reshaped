@@ -6,15 +6,54 @@ import View from "components/View";
 import MenuItem from "components/MenuItem";
 import Theme, { useTheme } from "components/Theme";
 import { Example } from "utilities/storybook";
+import Popover from "components/Popover";
 
 export default {
-	title: "Utility components/Theme/tests",
+	title: "Utility components/Theme",
 	component: Theme,
 	parameters: {
 		iframe: {
 			url: "https://reshaped.so/docs/utilities/theme",
 		},
 		chromatic: { disableSnapshot: true },
+	},
+};
+
+export const scoped: StoryObj = {
+	name: "scoped",
+	render: () => (
+		<Example>
+			<Example.Item title="scoped, single">
+				<Theme name="reshaped">
+					<Card attributes={{ "data-testid": "test-id" }}>
+						<Button color="primary">Action</Button>
+					</Card>
+				</Theme>
+			</Example.Item>
+
+			<Example.Item title="scoped, multiple">
+				<Theme name={["reshaped", "figma"]}>
+					<Card attributes={{ "data-testid": "test-id" }}>
+						<View direction="row" gap={4}>
+							<Button color="primary">Action</Button>
+
+							<Popover>
+								<Popover.Trigger>
+									{(attributes) => <Button attributes={attributes}>Popover</Button>}
+								</Popover.Trigger>
+								<Popover.Content>Content</Popover.Content>
+							</Popover>
+						</View>
+					</Card>
+				</Theme>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const root = canvas.getByTestId("test-id").parentNode;
+
+		expect(root).toHaveAttribute("data-rs-theme", "reshaped");
+		expect(root).toHaveAttribute("data-rs-color-mode", "light");
 	},
 };
 

@@ -36,8 +36,8 @@ export const variablesTemplate = (themeName: string, tokens: T.TransformedToken[
 	Object.entries(filteredTokens).forEach(([type, tokens]) => {
 		const selector =
 			type === "root"
-				? `[data-rs-theme="${themeName}"]`
-				: `[data-rs-theme="${themeName}"][data-rs-color-mode="${type}"]`;
+				? `[data-rs-theme="${themeName}"],[data-rs-theme*=" ${themeName} "]`
+				: `[data-rs-theme="${themeName}"][data-rs-color-mode="${type}"],[data-rs-theme*=" ${themeName} "][data-rs-color-mode="${type}"]`;
 
 		if (!tokens.length) return;
 

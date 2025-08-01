@@ -9,12 +9,17 @@ import { useTheme, useGlobalColorMode } from "./useTheme";
 import * as T from "./Theme.types";
 import s from "./Theme.module.css";
 
+const getThemeAttribute = (theme: NonNullable<T.Props["name"]>) => {
+	if (typeof theme === "string") return theme;
+	return ` ${theme.join(" ")} `;
+};
+
 const Theme: React.FC<T.Props> = (props) => <PrivateTheme {...props} />;
 
 export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 	const { name, defaultName, colorMode, scoped, scopeRef, children, className } = props;
 	const [mounted, setMounted] = React.useState(false);
-	const [stateTheme, setStateTheme] = React.useState(defaultName);
+	const [stateTheme, setStateTheme] = React.useState<T.Props["defaultName"]>(defaultName);
 	const globalColorMode = useGlobalColorMode();
 	const parentTheme = useTheme();
 	const isRootProvider = !parentTheme.theme;
@@ -25,8 +30,8 @@ export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 	const usedColorMode = colorMode === "inverted" ? invertedColorMode : colorMode || parentColorMode;
 	const rootClassNames = classNames(s.root, className);
 
-	const setRootTheme = React.useCallback(
-		(theme: string) => {
+	const setRootTheme: T.ThemeContextData["setRootTheme"] = React.useCallback(
+		(theme) => {
 			if (isRootProvider) {
 				setStateTheme(theme);
 			} else {
@@ -36,7 +41,7 @@ export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 		[isRootProvider, parentTheme]
 	);
 
-	const setTheme = React.useCallback((theme: string) => {
+	const setTheme: T.ThemeContextData["setTheme"] = React.useCallback((theme) => {
 		setStateTheme(theme);
 	}, []);
 
@@ -49,7 +54,7 @@ export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 		const themeRootEl = getRootThemeEl(scopeRef?.current);
 		const hasColorModeApplied = themeRootEl.getAttribute("data-rs-color-mode");
 
-		themeRootEl.setAttribute("data-rs-theme", usedTheme);
+		themeRootEl.setAttribute("data-rs-theme", getThemeAttribute(usedTheme));
 		if (!hasColorModeApplied) themeRootEl.setAttribute("data-rs-color-mode", usedColorMode);
 
 		return () => {
@@ -75,7 +80,7 @@ export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 				className={rootClassNames}
 				ref={scopeRef}
 				data-rs-root={scoped ? true : undefined}
-				data-rs-theme={isRootProvider ? undefined : usedTheme}
+				data-rs-theme={isRootProvider ? undefined : getThemeAttribute(usedTheme)}
 				/**
 				 * Root provider uses theme and color mode from <html>
 				 */

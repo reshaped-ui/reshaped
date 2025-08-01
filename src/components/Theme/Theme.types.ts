@@ -1,26 +1,24 @@
 import React from "react";
 import * as G from "types/global";
 
-export type ColorMode = "light" | "dark";
-
 export type GlobalColorModeContextData = {
-	mode: ColorMode;
-	setMode: (mode: ColorMode) => void;
+	mode: G.ColorMode;
+	setMode: (mode: G.ColorMode) => void;
 	invertMode: () => void;
 };
 
 export type ThemeContextData = {
-	colorMode: ColorMode;
-	theme: string;
-	setTheme: (theme: string) => void;
-	rootTheme: string;
-	setRootTheme: (theme: string) => void;
+	colorMode: G.ColorMode;
+	theme: G.Theme;
+	setTheme: (theme: G.Theme) => void;
+	rootTheme: G.Theme;
+	setRootTheme: (theme: G.Theme) => void;
 };
 
 export type Props = {
-	name?: string;
-	defaultName?: string;
-	colorMode?: ColorMode | "inverted";
+	name?: G.Theme;
+	defaultName?: G.Theme;
+	colorMode?: G.ColorMode | "inverted";
 	className?: G.ClassName;
 	children?: React.ReactNode;
 };
@@ -31,8 +29,8 @@ export type PrivateProps = Props & {
 };
 
 export type GlobalColorModeProps = {
-	mode?: ColorMode;
-	defaultMode: ColorMode;
+	mode?: G.ColorMode;
+	defaultMode: G.ColorMode;
 	scopeRef?: React.RefObject<HTMLDivElement | null>;
 	children?: React.ReactNode;
 };

@@ -21,3 +21,4 @@
 - Flyout, Popover: autoFocus=false prop support (aligned with modals)
 - Button: Fixed Buttons in groups wrapped with popover from losing border radius
 - Button: Updated :active styles
+- Theme: Supports passing multiple theme fragments to the same provider
