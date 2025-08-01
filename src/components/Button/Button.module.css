@@ -36,10 +36,6 @@
 	background-color: var(--rs-button-background-color);
 	color: var(--rs-button-foreground-color);
 
-	&:active {
-		transform: scale(0.98);
-	}
-
 	&::before {
 		content: "";
 		position: absolute;
@@ -56,12 +52,13 @@
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(.--loading, .--highlighted, .--disabled)::before {
+		&:hover:not(.--loading, .--highlighted, .--disabled, :active)::before {
 			opacity: var(--rs-button-highlight-opacity);
 		}
 	}
 
-	&.--highlighted::before {
+	&.--highlighted::before,
+	&:active:not(.--loading, .--disabled)::before {
 		opacity: calc(
 			var(--rs-button-highlight-opacity) + max(0.04, var(--rs-button-highlight-opacity) / 2)
 		);
@@ -111,10 +108,6 @@
 
 .root.--loading {
 	cursor: default;
-
-	&:active {
-		transform: none;
-	}
 
 	& .text,
 	& .icon {
@@ -303,10 +296,6 @@
 }
 
 .root.--disabled {
-	&:active {
-		transform: none !important;
-	}
-
 	&.--color-neutral,
 	&.--color-primary,
 	&.--color-positive,
@@ -314,6 +303,7 @@
 	&.--color-inherit {
 		&,
 		&:hover,
+		&:active,
 		&.--highlighted {
 			color: var(--rs-color-foreground-disabled) !important;
 			border-color: var(--rs-color-border-disabled) !important;
@@ -341,6 +331,7 @@
 	&.--color-media {
 		&,
 		&:hover,
+		&:active,
 		&.--highlighted {
 			opacity: 0.4 !important;
 		}
