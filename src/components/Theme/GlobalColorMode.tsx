@@ -3,6 +3,7 @@
 import React from "react";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { enableTransitions, disableTransitions, onNextFrame } from "utilities/animation";
+import type * as G from "types/global";
 import { useGlobalColorMode } from "./useTheme";
 import { GlobalColorModeContext } from "./Theme.context";
 import { getRootThemeEl } from "./Theme.utilities";
@@ -10,11 +11,11 @@ import type * as T from "./Theme.types";
 
 const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 	const { defaultMode, mode: passedMode, scopeRef, children } = props;
-	const [mode, setMode] = React.useState<T.ColorMode>(defaultMode);
+	const [mode, setMode] = React.useState<G.ColorMode>(defaultMode);
 	const parentGlobalColorMode = useGlobalColorMode();
 
 	const changeColorMode = React.useCallback(
-		(targetMode: T.ColorMode) => {
+		(targetMode: G.ColorMode) => {
 			getRootThemeEl(scopeRef?.current).setAttribute("data-rs-color-mode", targetMode);
 
 			if (parentGlobalColorMode.mode && !scopeRef) {
@@ -40,7 +41,7 @@ const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 	 */
 	useIsomorphicLayoutEffect(() => {
 		const nextColorMode = getRootThemeEl(scopeRef?.current).getAttribute("data-rs-color-mode") as
-			| T.ColorMode
+			| G.ColorMode
 			| undefined;
 
 		if (nextColorMode) changeColorMode(nextColorMode);

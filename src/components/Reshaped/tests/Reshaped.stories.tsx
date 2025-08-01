@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, userEvent } from "storybook/test";
-import { useTheme, ColorMode } from "components/Theme";
+import { useTheme } from "components/Theme";
 import Button from "components/Button";
+import type * as G from "types/global";
 import Reshaped from "../Reshaped";
 
 export default {
@@ -24,7 +25,7 @@ export const rtl = {
 export const controlledMode: StoryObj = {
 	name: "colorMode, controlled",
 	render: () => {
-		const [mode, setMode] = useState<ColorMode>("dark");
+		const [mode, setMode] = useState<G.ColorMode>("dark");
 
 		return (
 			<Reshaped theme="reshaped" colorMode={mode}>
