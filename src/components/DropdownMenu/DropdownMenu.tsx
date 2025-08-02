@@ -65,8 +65,19 @@ const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 	);
 	const contentClassName = classNames(s.menu, className);
 
+	const handleClick = (e: React.MouseEvent) => {
+		/**
+		 * Stop event propagation to make sure outside click doesn't get triggered
+		 * after the content is closed
+		 */
+		e.stopPropagation();
+	};
+
 	return (
-		<Popover.Content className={contentClassName} attributes={{ ...attributes, ref }}>
+		<Popover.Content
+			className={contentClassName}
+			attributes={{ ...attributes, ref, onClick: handleClick }}
+		>
 			{children}
 		</Popover.Content>
 	);
@@ -88,12 +99,6 @@ const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 	const subTriggerContext = React.useContext(DropdownMenuSubTriggerContext);
 
 	const handleClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
-		/**
-		 * Stop event propagation to make sure outside click doesn't get triggered
-		 * after the content is closed
-		 */
-		e.stopPropagation();
-
 		/**
 		 * Don't close the menu when clicking on a trigger of a submenu
 		 */

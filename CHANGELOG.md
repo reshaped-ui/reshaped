@@ -23,3 +23,4 @@
 - Button: Updated :active styles
 - Theme: Supports passing multiple theme fragments to the same provider
 - FormControl: Label margin-bottom: 0 for the last child for better composition
+- DropdownMenu: Fixed items not working inside router links
