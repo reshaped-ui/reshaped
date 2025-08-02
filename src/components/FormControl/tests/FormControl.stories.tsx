@@ -3,6 +3,7 @@ import { expect } from "storybook/test";
 import { Example } from "utilities/storybook";
 import FormControl from "components/FormControl";
 import TextField from "components/TextField";
+import View from "components/View";
 
 export default {
 	title: "Utility components/FormControl",
@@ -100,6 +101,26 @@ export const required = {
 					<FormControl.Label>Label</FormControl.Label>
 					<TextField name="name" />
 					<FormControl.Helper>Caption</FormControl.Helper>
+				</FormControl>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const composition = {
+	name: "test: composition",
+	render: () => (
+		<Example>
+			<Example.Item title="horizontal">
+				<FormControl>
+					<View direction="row" gap={10} align="center">
+						<View width="100px">
+							<FormControl.Label>Label</FormControl.Label>
+						</View>
+						<View.Item grow>
+							<TextField name="name" placeholder="Enter value" />
+						</View.Item>
+					</View>
 				</FormControl>
 			</Example.Item>
 		</Example>

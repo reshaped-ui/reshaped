@@ -5,6 +5,10 @@
 .label {
 	display: block;
 	margin-bottom: var(--rs-unit-x1);
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .caption {
