@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { forwardRef, useState } from "react";
 import { classNames } from "utilities/props";
 import Button from "components/Button";
 import IconChevronRight from "icons/ChevronRight";
@@ -9,10 +9,11 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import * as T from "./Carousel.types";
 import s from "./Carousel.module.css";
 
-const CarouselControl: React.FC<T.ControlProps> = (props) => {
-	const { type, scrollElRef, scrollPosition, onClick, isRTL, mounted } = props;
-	const [visible, setVisible] = React.useState(false);
-	const [rendered, setRendered] = React.useState(false);
+const CarouselControl = forwardRef<HTMLButtonElement, T.ControlProps>((props, ref) => {
+	const { type, scrollElRef, oppositeControlElRef, scrollPosition, onClick, isRTL, mounted } =
+		props;
+	const [visible, setVisible] = useState(false);
+	const [rendered, setRendered] = useState(false);
 	const isNext = type === "forward";
 	const isDisplayedAsNext = type === (isRTL ? "back" : "forward");
 	const controlClassNames = classNames(
@@ -36,6 +37,8 @@ const CarouselControl: React.FC<T.ControlProps> = (props) => {
 		if (hideControl) {
 			setVisible(false);
 			timer = setTimeout(() => setRendered(false), 1500);
+
+			oppositeControlElRef.current?.focus();
 		} else {
 			setRendered(true);
 			setVisible(true);
@@ -49,16 +52,18 @@ const CarouselControl: React.FC<T.ControlProps> = (props) => {
 	return (
 		<div className={controlClassNames}>
 			<Button
+				size="small"
 				onClick={onClick}
 				icon={isDisplayedAsNext ? IconChevronRight : IconChevronLeft}
 				rounded
 				variant="outline"
 				elevated
 				attributes={{ "aria-disabled": !visible, "aria-hidden": true }}
+				ref={ref}
 			/>
 		</div>
 	);
-};
+});
 
 CarouselControl.displayName = "CarouselControl";
 

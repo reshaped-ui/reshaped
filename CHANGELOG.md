@@ -27,3 +27,6 @@
 - Tooltip: Only apply aria-describedby when tooltip is active
 - TextArea, TextField, Select: Updated placeholder color
 - Tabs: Added missing id to the button elements
+- Carousel: Updated control buttons to use small size
+- Carousel: Fixed shadow conflicting with clip content on buttons in Figma
+- Carousel: Return focus to the other control when one of them gets hidden

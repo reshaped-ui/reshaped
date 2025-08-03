@@ -29,6 +29,8 @@ const Carousel: React.FC<T.Props> = (props) => {
 	const [scrollPosition, setScrollPosition] = React.useState(0);
 	const [isRTL] = useRTL();
 	const scrollElRef = React.useRef<HTMLUListElement>(null);
+	const prevControlElRef = React.useRef<HTMLButtonElement>(null);
+	const nextControlElRef = React.useRef<HTMLButtonElement>(null);
 	const bleedClassNames: Record<string, boolean> = {};
 
 	if (typeof bleed === "object") {
@@ -164,6 +166,8 @@ const Carousel: React.FC<T.Props> = (props) => {
 					<CarouselControl
 						isRTL={isRTL}
 						type="back"
+						ref={prevControlElRef}
+						oppositeControlElRef={nextControlElRef}
 						scrollElRef={scrollElRef}
 						scrollPosition={scrollPosition}
 						onClick={navigateBack}
@@ -172,6 +176,8 @@ const Carousel: React.FC<T.Props> = (props) => {
 					<CarouselControl
 						isRTL={isRTL}
 						type="forward"
+						ref={nextControlElRef}
+						oppositeControlElRef={prevControlElRef}
 						scrollElRef={scrollElRef}
 						scrollPosition={scrollPosition}
 						onClick={navigateForward}

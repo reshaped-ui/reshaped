@@ -1,9 +1,8 @@
 import View from "components/View";
 import Image from "components/Image";
-import Button from "components/Button";
 import React from "react";
-import useToggle from "hooks/useToggle";
-import Popover from "components/Popover";
+import Carousel from "components/Carousel";
+import { Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Sandbox",
@@ -31,24 +30,16 @@ export const preview = () => {
 };
 
 const Component = () => {
-	const { toggle, active } = useToggle();
-
 	return (
 		<View align="center" justify="center" height="150px">
-			<Popover autoFocus={false}>
-				<Popover.Trigger>
-					{(attributes) => <Button attributes={attributes}>Open</Button>}
-				</Popover.Trigger>
-				<Popover.Content>
-					<View gap={2} align="start">
-						Popover content
-						<View direction="row" gap={2}>
-							<Button onClick={() => {}}>Action 1</Button>
-							<Button onClick={() => {}}>Action 2</Button>
-						</View>
-					</View>
-				</Popover.Content>
-			</Popover>
+			<Carousel attributes={{ "data-testid": "test-id" }} visibleItems={2}>
+				<Placeholder h={100}>Content</Placeholder>
+				<Placeholder h={100}>Content</Placeholder>
+				<Placeholder h={100}>Content</Placeholder>
+				<Placeholder h={100}>Content</Placeholder>
+				<Placeholder h={100}>Content</Placeholder>
+				<Placeholder h={100}>Content</Placeholder>
+			</Carousel>
 		</View>
 	);
 };

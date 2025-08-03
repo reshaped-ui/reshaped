@@ -11,6 +11,7 @@ export type Instance =
 
 export type ControlProps = {
 	type: "back" | "forward";
+	oppositeControlElRef: React.RefObject<HTMLButtonElement | null>;
 	scrollElRef: React.RefObject<HTMLElement | null>;
 	scrollPosition: number;
 	onClick: () => void;
