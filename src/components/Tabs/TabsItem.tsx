@@ -17,6 +17,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const {
 		onChange,
 		panelId,
+		buttonId,
 		name,
 		size,
 		value: tabsValue,
@@ -94,6 +95,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 				attributes={{
 					...(!isFormControl && tabAttributes),
 					"aria-controls": panelId,
+					id: buttonId,
 				}}
 			>
 				{name && (

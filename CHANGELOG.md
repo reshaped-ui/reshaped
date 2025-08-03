@@ -26,3 +26,4 @@
 - DropdownMenu: Fixed items not working inside router links
 - Tooltip: Only apply aria-describedby when tooltip is active
 - TextArea, TextField, Select: Updated placeholder color
+- Tabs: Added missing id to the button elements
