@@ -20,6 +20,7 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 		trapFocusMode,
 		isSubmenu,
 	} = useFlyoutContext();
+	const active = flyout.status !== "idle";
 
 	const childrenAttributes: Partial<T.TriggerAttributes> = {
 		ref: triggerElRef,
@@ -40,7 +41,7 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 	if ((triggerType === "hover" && !isSubmenu) || triggerType === "focus") {
 		childrenAttributes.onFocus = handleFocus;
 		childrenAttributes.onBlur = handleBlur;
-		childrenAttributes["aria-describedby"] = id;
+		childrenAttributes["aria-describedby"] = active ? id : undefined;
 	}
 
 	if (triggerType === "click" || triggerType === "focus" || trapFocusMode === "action-menu") {
@@ -53,8 +54,8 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 			childrenAttributes["aria-haspopup"] = "menu";
 		}
 
-		childrenAttributes["aria-expanded"] = flyout.status !== "idle";
-		childrenAttributes["aria-controls"] = flyout.status !== "idle" ? id : undefined;
+		childrenAttributes["aria-expanded"] = active;
+		childrenAttributes["aria-controls"] = active ? id : undefined;
 	}
 
 	return (
