@@ -157,7 +157,7 @@
 }
 
 .root.--placeholder .input {
-	color: var(--rs-color-foreground-neutral-faded);
+	color: var(--rs-color-foreground-disabled);
 }
 
 .root.--disabled {

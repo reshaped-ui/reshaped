@@ -65,8 +65,7 @@
 
 	[data-rs-theme] textarea::placeholder,
 	[data-rs-theme] input::placeholder {
-		opacity: 0.5;
-		color: var(--rs-color-foreground-neutral-faded);
+		color: var(--rs-color-foreground-disabled);
 	}
 
 	html[data-rs-theme] {
