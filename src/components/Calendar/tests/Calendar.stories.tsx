@@ -331,11 +331,20 @@ export const keyboardNavigation: StoryObj = {
 		</Example>
 	),
 	play: async ({ canvas }) => {
-		const dateEls = canvas.getAllByRole("checkbox");
+		const buttons = canvas.getAllByRole("button");
 
-		dateEls[0].focus();
+		buttons[2].focus();
+
+		await userEvent.keyboard("{Tab/}");
+		expect(document.activeElement).toHaveAttribute("data-rs-date", "2020-01-01");
 
 		await userEvent.keyboard("{ArrowRight/}");
+		waitFor(() => {
+			expect(document.activeElement).toHaveAttribute("data-rs-date", "2020-01-02");
+		});
+
+		await userEvent.keyboard("{Shift>}{Tab/}{/Shift}");
+		await userEvent.keyboard("{Tab/}");
 		waitFor(() => {
 			expect(document.activeElement).toHaveAttribute("data-rs-date", "2020-01-02");
 		});

@@ -30,3 +30,4 @@
 - Carousel: Updated control buttons to use small size
 - Carousel: Fixed shadow conflicting with clip content on buttons in Figma
 - Carousel: Return focus to the other control when one of them gets hidden
+- Calendar: Improved tabIndex management for the dates

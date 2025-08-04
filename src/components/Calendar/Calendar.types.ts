@@ -88,6 +88,7 @@ export type DateProps = {
 	startValue: Date | null;
 	endValue: Date | null;
 	renderAriaLabel?: MonthProps["renderDateAriaLabel"];
+	onDateFocus: (date: Date) => void;
 } & Pick<
 	MonthProps,
 	| "hoveredDate"

@@ -3,6 +3,7 @@ import Image from "components/Image";
 import React from "react";
 import Carousel from "components/Carousel";
 import { Placeholder } from "utilities/storybook";
+import Calendar from "components/Calendar";
 
 export default {
 	title: "Sandbox",
@@ -31,15 +32,8 @@ export const preview = () => {
 
 const Component = () => {
 	return (
-		<View align="center" justify="center" height="150px">
-			<Carousel attributes={{ "data-testid": "test-id" }} visibleItems={2}>
-				<Placeholder h={100}>Content</Placeholder>
-				<Placeholder h={100}>Content</Placeholder>
-				<Placeholder h={100}>Content</Placeholder>
-				<Placeholder h={100}>Content</Placeholder>
-				<Placeholder h={100}>Content</Placeholder>
-				<Placeholder h={100}>Content</Placeholder>
-			</Carousel>
+		<View align="center" justify="center" height="150px" paddingTop={20}>
+			<Calendar />
 		</View>
 	);
 };

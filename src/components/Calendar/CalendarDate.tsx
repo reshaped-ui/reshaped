@@ -19,6 +19,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 		hoveredDate,
 		onDateHover,
 		onDateHoverEnd,
+		onDateFocus,
 		renderAriaLabel,
 		selectedDates,
 	} = props;
@@ -86,6 +87,11 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 		onDateHoverEnd(date);
 	};
 
+	const handleFocus = () => {
+		handleMouseEnter();
+		onDateFocus(date);
+	};
+
 	return (
 		<td className={dateClassNames} role={disabled ? "presentation" : "gridcell"}>
 			<Actionable
@@ -105,7 +111,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 					"data-rs-date": getLocalISODate({ date }),
 					onMouseEnter: handleMouseEnter,
 					onMouseLeave: handleMouseLeave,
-					onFocus: handleMouseEnter,
+					onFocus: handleFocus,
 					onBlur: handleMouseLeave,
 				}}
 			>
