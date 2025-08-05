@@ -3,6 +3,7 @@
 - Added Attributes type to the package exports
 - Added `mono` font family to the themes
 - Added zIndex tokens to the themes, updated components to use new zIndex tokens
+- Increased contrast of primary border color in dark mode
 - Added isolation: isolate to components for better zIndex handling
 
 - Image: added maxWidth property

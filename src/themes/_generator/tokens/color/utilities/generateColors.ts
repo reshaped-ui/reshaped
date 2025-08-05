@@ -86,7 +86,7 @@ const generateColorValues = (
 	const fgDark = neutral ? { ...bgDark, l: 0.96 } : { ...bgDark, l: 0.75, c: bg.c * 0.85 };
 
 	const bd = neutral ? { ...bg, l: 0, alpha: 0.12 } : { ...bg, l: bg.l - 0.08 };
-	const bdDark = neutral ? { ...bgDark, l: 1, alpha: 0.16 } : { ...bgDark, l: bgDark.l + 0.08 };
+	const bdDark = neutral ? { ...bgDark, l: 1, alpha: 0.16 } : { ...bgDark, l: bgDark.l + 0.1 };
 	const bdFaded = neutral
 		? { ...bgFaded, l: 0, alpha: 0.08 }
 		: { ...bgFaded, l: bgFaded.l - 0.05, c: bgFaded.c + 0.01 };
