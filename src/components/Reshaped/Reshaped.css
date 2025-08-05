@@ -1,4 +1,8 @@
 @layer rs.reset {
+	[data-rs-theme] {
+		--rs-radius-circular: 9999px;
+	}
+
 	[data-rs-theme] body,
 	[data-rs-theme] h1,
 	[data-rs-theme] h2,

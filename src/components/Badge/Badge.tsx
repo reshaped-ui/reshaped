@@ -50,6 +50,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			className={rootClassName}
 			attributes={attributes}
 			ref={ref}
+			touchHitbox
 		>
 			{icon && <Icon svg={icon} autoWidth size={iconSize} />}
 			{children && (
@@ -70,6 +71,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 					className={s.dismiss}
 					as="span"
 					attributes={{ "aria-label": dismissAriaLabel }}
+					touchHitbox
 				>
 					<Icon svg={IconClose} size={iconSize} />
 				</Actionable>

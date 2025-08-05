@@ -186,6 +186,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 
 			<Actionable
 				onClick={handlePrevClick}
+				touchHitbox
 				attributes={{ "aria-hidden": true, tabIndex: -1 }}
 				className={[
 					s.control,
@@ -198,6 +199,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 
 			<Actionable
 				onClick={handleNextClick}
+				touchHitbox
 				attributes={{ "aria-hidden": true, tabIndex: -1 }}
 				className={[
 					s.control,

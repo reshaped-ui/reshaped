@@ -64,7 +64,7 @@
 	border: 2px solid transparent;
 	height: var(--rs-switch-height);
 	width: var(--rs-switch-width);
-	border-radius: 999px;
+	border-radius: var(--rs-radius-circular);
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
@@ -73,11 +73,19 @@
 	transition-property: background, border;
 }
 
+.hitbox {
+	position: absolute;
+	height: 24px;
+	inset-inline: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
 .thumb {
 	height: calc(var(--rs-switch-height) - var(--rs-unit-x1));
 	width: calc(var(--rs-switch-height) - var(--rs-unit-x1));
 	background: var(--rs-color-white);
-	border-radius: 999px;
+	border-radius: var(--rs-radius-circular);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: transform;
 	box-shadow: var(--rs-shadow-raised);

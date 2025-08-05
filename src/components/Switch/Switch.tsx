@@ -60,6 +60,7 @@ const Switch: React.FC<T.Props> = (props) => {
 				id={id}
 			/>
 			<span className={s.area} aria-hidden="true">
+				<span className={s.hitbox} />
 				<span className={s.thumb} />
 			</span>
 			{children && (

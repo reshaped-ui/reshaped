@@ -5,6 +5,7 @@
 - Added zIndex tokens to the themes, updated components to use new zIndex tokens
 - Increased contrast of primary border color in dark mode
 - Added isolation: isolate to components for better zIndex handling
+- Added `--rs-radius-circular`
 
 - Image: added maxWidth property
 - Image: added aspectRatio property
@@ -32,3 +33,7 @@
 - Carousel: Fixed shadow conflicting with clip content on buttons in Figma
 - Carousel: Return focus to the other control when one of them gets hidden
 - Calendar: Improved tabIndex management for the dates
+- Actionable: touchHitbox prop
+- Badge: Increased min touch hitbox for actionable badges and dismiss button
+- Switch: Increased min touch hitbox
+- Tabs: Increase touch hitbox for the navigation arrows

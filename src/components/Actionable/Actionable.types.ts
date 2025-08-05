@@ -7,6 +7,7 @@ export type Props = {
 	href?: string;
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
 	disabled?: boolean;
+	touchHitbox?: boolean;
 	fullWidth?: boolean;
 	insetFocus?: boolean;
 	disableFocusRing?: boolean;

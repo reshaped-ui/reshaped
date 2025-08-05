@@ -13,8 +13,21 @@
 		margin: 0;
 		background: none;
 		position: relative;
+		isolation: isolate;
 		-webkit-tap-highlight-color: transparent;
 	}
+}
+
+.touch {
+	position: absolute;
+	inset: 50%;
+	height: 100%;
+	width: 100%;
+	transform: translate(-50%, -50%);
+
+	/* WCAG AA size requirement */
+	min-width: 24px;
+	min-height: 24px;
 }
 
 .root:focus {

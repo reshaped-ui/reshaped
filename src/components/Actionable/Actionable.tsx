@@ -19,6 +19,7 @@ const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 		as,
 		stopPropagation,
 		fullWidth,
+		touchHitbox,
 		className,
 		attributes,
 	} = props;
@@ -91,6 +92,7 @@ const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 			onClick={handlePress}
 			onKeyDown={handleKeyDown}
 		>
+			{touchHitbox && (isLink || isButton) && !disabled && <span className={s.touch} />}
 			{children}
 		</TagName>
 	);
