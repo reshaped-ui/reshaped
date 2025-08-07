@@ -132,6 +132,7 @@ export const icon = {
 					<Badge icon={IconCheckmark} endIcon={IconChevronRight} size="small">
 						Badge
 					</Badge>
+					<Badge icon={IconCheckmark} size="small" />
 				</View>
 			</Example.Item>
 			<Example.Item title="size: medium">
@@ -139,6 +140,7 @@ export const icon = {
 					<Badge icon={IconCheckmark} endIcon={IconChevronRight}>
 						Badge
 					</Badge>
+					<Badge icon={IconCheckmark} />
 				</View>
 			</Example.Item>
 			<Example.Item title="size: large">
@@ -146,6 +148,8 @@ export const icon = {
 					<Badge size="large" icon={IconCheckmark} endIcon={IconChevronRight}>
 						Badge
 					</Badge>
+
+					<Badge icon={IconCheckmark} size="large" />
 				</View>
 			</Example.Item>
 		</Example>
@@ -227,6 +231,13 @@ export const empty = {
 					<Badge rounded size="small" color="critical" />
 					<Badge rounded color="critical" />
 					<Badge rounded size="large" color="critical" />
+				</View>
+			</Example.Item>
+			<Example.Item title="empty, rounded, all sizes, color: neutral">
+				<View direction="row" gap={3}>
+					<Badge rounded size="small" color="neutral" />
+					<Badge rounded />
+					<Badge rounded size="large" />
 				</View>
 			</Example.Item>
 		</Example>

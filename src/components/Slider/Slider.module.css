@@ -70,7 +70,7 @@
 		position: absolute;
 		width: var(--rs-slider-thumb-size);
 		height: var(--rs-slider-thumb-size);
-		border-radius: 999px;
+		border-radius: var(--rs-radius-circular);
 		background: var(--rs-color-background-primary);
 		box-shadow: 0 0 0 2px var(--rs-color-background-elevation-base);
 		box-sizing: border-box;

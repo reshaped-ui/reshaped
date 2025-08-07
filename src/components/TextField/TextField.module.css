@@ -28,7 +28,7 @@
 	}
 
 	&.--rounded {
-		border-radius: 999px;
+		border-radius: var(--rs-radius-circular);
 
 		& .affix:first-child,
 		& .icon:first-child {

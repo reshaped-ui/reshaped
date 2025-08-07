@@ -4,8 +4,8 @@ import type { IconProps } from "components/Icon";
 import type * as G from "types/global";
 
 type BaseProps = {
+	color?: "neutral" | "critical" | "warning" | "positive" | "primary";
 	size?: "small" | "medium" | "large";
-	icon?: IconProps["svg"];
 	endIcon?: IconProps["svg"];
 	rounded?: boolean;
 	hidden?: boolean;
@@ -13,14 +13,14 @@ type BaseProps = {
 } & Pick<ActionableProps, "href" | "onClick" | "attributes">;
 
 type WithChildren = BaseProps & {
-	children: React.ReactNode;
-	color?: "neutral" | "critical" | "warning" | "positive" | "primary";
+	children?: React.ReactNode;
+	icon?: IconProps["svg"];
 	variant?: "faded" | "outline";
 };
 
 type WithEmpty = BaseProps & {
-	color: "critical" | "warning" | "positive" | "primary";
 	children?: never;
+	icon?: never;
 	variant?: never;
 };
 

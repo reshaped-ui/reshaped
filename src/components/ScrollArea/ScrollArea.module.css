@@ -48,7 +48,7 @@
 	&::before {
 		content: "";
 		display: block;
-		border-radius: 999px;
+		border-radius: var(--rs-radius-circular);
 		background: var(--rs-color-foreground-neutral);
 		opacity: 0;
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);

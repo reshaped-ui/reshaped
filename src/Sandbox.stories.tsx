@@ -1,13 +1,8 @@
 import View from "components/View";
 import Image from "components/Image";
 import React from "react";
-import Carousel from "components/Carousel";
-import { Placeholder } from "utilities/storybook";
-import Calendar from "components/Calendar";
-import DropdownMenu from "components/DropdownMenu";
 import Button from "components/Button";
-import Modal from "components/Modal";
-import useToggle from "hooks/useToggle";
+import { useToast } from "components/Toast";
 
 export default {
 	title: "Sandbox",
@@ -35,32 +30,25 @@ export const preview = () => {
 };
 
 const Component = () => {
-	const menuModalToggle = useToggle();
+	const toast = useToast();
+
 	return (
-		<View align="center" justify="center" height="150px" paddingTop={20}>
-			<DropdownMenu>
-				<DropdownMenu.Trigger>
-					{(attributes) => <Button attributes={attributes}>Open menu</Button>}
-				</DropdownMenu.Trigger>
-				<DropdownMenu.Content>
-					<DropdownMenu.Item onClick={menuModalToggle.activate}>Open dialog</DropdownMenu.Item>
-					<DropdownMenu.Item>Item 2</DropdownMenu.Item>
-				</DropdownMenu.Content>
-			</DropdownMenu>
-			<Modal active={menuModalToggle.active} onClose={menuModalToggle.deactivate}>
-				<View gap={3} direction="row">
-					<DropdownMenu>
-						<DropdownMenu.Trigger>
-							{(attributes) => <Button attributes={attributes}>Open menu</Button>}
-						</DropdownMenu.Trigger>
-						<DropdownMenu.Content>
-							<DropdownMenu.Item>Item 1</DropdownMenu.Item>
-							<DropdownMenu.Item>Item 2</DropdownMenu.Item>
-						</DropdownMenu.Content>
-					</DropdownMenu>
-					<Button onClick={menuModalToggle.deactivate}>Close</Button>
-				</View>
-			</Modal>
+		<View align="center" direction="row" justify="center" gap={4} paddingTop={10}>
+			<Button
+				color="critical"
+				onClick={() => {
+					const id = toast.show({
+						color: "neutral",
+						text: "Product deleted",
+						actionsSlot: <Button onClick={() => toast.hide(id)}>Undo</Button>,
+					});
+				}}
+			>
+				Delete product
+			</Button>
+			<Button variant="outline" onClick={() => {}}>
+				Edit product
+			</Button>
 		</View>
 	);
 };

@@ -211,7 +211,9 @@ export const slots = () => (
 				placeholder="Enter your name"
 				value="Reshaped"
 				startSlot={[...Array(10).keys()].map((i) => (
-					<Badge key={i}>Item {i + 1}</Badge>
+					<Badge size="small" key={i}>
+						Item {i + 1}
+					</Badge>
 				))}
 				multiline
 			/>

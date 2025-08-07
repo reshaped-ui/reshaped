@@ -22,7 +22,7 @@
 	background: var(--rs-color-background-neutral);
 	width: var(--rs-unit-x2);
 	height: var(--rs-unit-x2);
-	border-radius: 999px;
+	border-radius: var(--rs-radius-circular);
 }
 
 .item {

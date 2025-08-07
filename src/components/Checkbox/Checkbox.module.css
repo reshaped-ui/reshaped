@@ -45,7 +45,7 @@ since it reset the border width/color without using @layer
 		top: 50%;
 		left: 50%;
 		height: 1.5px;
-		border-radius: 999px;
+		border-radius: var(--rs-radius-circular);
 		width: calc(var(--rs-checkbox-line-height) * 0.5);
 		background: var(--rs-color-on-background-primary);
 		opacity: 0;

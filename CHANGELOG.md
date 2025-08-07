@@ -37,3 +37,7 @@
 - Badge: Increased min touch hitbox for actionable badges and dismiss button
 - Switch: Increased min touch hitbox
 - Tabs: Increase touch hitbox for the navigation arrows
+- Badge: Icon only support
+- Badge: Neutral empty
+- Badge aligned small badge size with the overal unit scaling
+- Grid: Added height/width props support

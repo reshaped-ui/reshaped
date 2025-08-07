@@ -22,7 +22,7 @@
 	&::after {
 		content: "";
 		position: absolute;
-		border-radius: 999px;
+		border-radius: var(--rs-radius-circular);
 	}
 
 	&::after {

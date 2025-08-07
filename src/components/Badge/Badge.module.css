@@ -2,6 +2,7 @@
 	padding: var(--rs-badge-p-v) var(--rs-badge-p-h);
 	border: 1px solid transparent;
 	min-width: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
+	min-height: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -16,6 +17,20 @@
 	backface-visibility: hidden;
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
 	transition-property: transform, opacity;
+
+	&:empty {
+		width: var(--rs-badge-empty-size);
+		height: var(--rs-badge-empty-size);
+		min-width: auto;
+		min-height: auto;
+		padding: 0;
+	}
+}
+
+.icon {
+	&:only-child {
+		margin-inline: calc(var(--rs-unit-x1) * -1);
+	}
 }
 
 .dismiss {
@@ -125,7 +140,7 @@
 
 .root.--size {
 	&-small {
-		--rs-badge-p-v: 0px;
+		--rs-badge-p-v: 1px;
 		--rs-badge-p-h: var(--rs-unit-x1);
 		--rs-badge-line-height: var(--rs-line-height-caption-1);
 		--rs-badge-empty-size: var(--rs-unit-x2);
@@ -150,15 +165,7 @@
 }
 
 .root.--rounded {
-	/* Hack to achieve rounded corners */
-	border-radius: 999px;
-}
-
-.root:empty {
-	width: var(--rs-badge-empty-size);
-	height: var(--rs-badge-empty-size);
-	min-width: auto;
-	padding: 0;
+	border-radius: var(--rs-radius-circular);
 }
 
 .root.--hidden {

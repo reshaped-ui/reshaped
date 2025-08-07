@@ -13,7 +13,7 @@ export default {
 };
 
 export const base = {
-	name: "gap, align, justify, maxWidth",
+	name: "gap, align, justify, maxWidth, width, height",
 	render: () => (
 		<Example>
 			<Example.Item title="gap: 2">
@@ -48,6 +48,17 @@ export const base = {
 
 			<Example.Item title="maxWidth: 400px">
 				<Grid gap={2} columns="200px 200px" maxWidth="400px">
+					<View backgroundColor="neutral-faded" borderRadius="medium" padding={4}>
+						1
+					</View>
+					<View backgroundColor="neutral-faded" borderRadius="medium" padding={4}>
+						2
+					</View>
+				</Grid>
+			</Example.Item>
+
+			<Example.Item title="width: 400px, height: 200px">
+				<Grid gap={2} columns={2} width="400px" height="200px">
 					<View backgroundColor="neutral-faded" borderRadius="medium" padding={4}>
 						1
 					</View>
