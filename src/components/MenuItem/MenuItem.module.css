@@ -67,7 +67,8 @@ button.root {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
 	&.--selected,
-	&[data-rs-focus] {
+	&[data-rs-focus],
+	&.--highlighted {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
 	}
 
@@ -82,7 +83,8 @@ button.root {
 	--rs-menu-item-color: var(--rs-color-foreground-critical);
 
 	&.--selected,
-	&[data-rs-focus] {
+	&[data-rs-focus],
+	&.--highlighted {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-critical), 12%);
 	}
 
@@ -96,7 +98,8 @@ button.root {
 .--color-primary {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
-	&[data-rs-focus] {
+	&[data-rs-focus],
+	&.--highlighted {
 		--rs-menu-item-bg-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
 	}
 

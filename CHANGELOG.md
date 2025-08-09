@@ -41,3 +41,5 @@
 - Badge: Neutral empty
 - Badge aligned small badge size with the overal unit scaling
 - Grid: Added height/width props support
+- MenuItem: Added highlighted property
+- Autocomplete: Improved screen reader navigation

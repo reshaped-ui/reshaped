@@ -15,6 +15,7 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		children,
 		color = "primary",
 		selected,
+		highlighted,
 		disabled,
 		onClick,
 		href,
@@ -32,7 +33,8 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		responsiveClassNames(s, "--rounded-corners", roundedCorners),
 		color && s[`--color-${color}`],
 		selected && s["--selected"],
-		disabled && s["--disabled"]
+		disabled && s["--disabled"],
+		highlighted && s["--highlighted"]
 	);
 	const gapSize = responsivePropDependency(size, (size) => (size === "large" ? 3 : 2));
 	const iconSize = responsivePropDependency(size, (size) => (size === "large" ? 5 : 4));

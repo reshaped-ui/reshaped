@@ -17,6 +17,8 @@ export type ItemProps = MenuItemProps & SelectArgs;
 
 export type Context = {
 	onItemClick: (args: SelectArgs) => void;
+	highlightedId?: string;
+	setHighlightedId: (value?: string) => void;
 };
 
 export type Instance = DropdownMenuInstance;

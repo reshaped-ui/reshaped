@@ -1,8 +1,9 @@
 import View from "components/View";
 import Image from "components/Image";
 import React from "react";
-import Button from "components/Button";
-import { useToast } from "components/Toast";
+import Tabs from "components/Tabs";
+import Card from "components/Card";
+import { Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Sandbox",
@@ -30,25 +31,19 @@ export const preview = () => {
 };
 
 const Component = () => {
-	const toast = useToast();
-
 	return (
-		<View align="center" direction="row" justify="center" gap={4} paddingTop={10}>
-			<Button
-				color="critical"
-				onClick={() => {
-					const id = toast.show({
-						color: "neutral",
-						text: "Product deleted",
-						actionsSlot: <Button onClick={() => toast.hide(id)}>Undo</Button>,
-					});
-				}}
-			>
-				Delete product
-			</Button>
-			<Button variant="outline" onClick={() => {}}>
-				Edit product
-			</Button>
+		<View gap={4} paddingTop={10}>
+			<Tabs variant="pills">
+				<Tabs.List>
+					<Tabs.Item value="0">List view</Tabs.Item>
+					<Tabs.Item value="1">Map view</Tabs.Item>
+					<Tabs.Item value="2">Grid view</Tabs.Item>
+				</Tabs.List>
+			</Tabs>
+
+			<Card onClick={() => {}}>
+				<Placeholder />
+			</Card>
 		</View>
 	);
 };

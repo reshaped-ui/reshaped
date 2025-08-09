@@ -21,6 +21,7 @@ export type Props = Pick<
 	startSlot?: React.ReactNode;
 	children: React.ReactNode;
 	endSlot?: React.ReactNode;
+	highlighted?: boolean;
 	selected?: boolean;
 	size?: G.Responsive<Size>;
 	roundedCorners?: G.Responsive<boolean>;

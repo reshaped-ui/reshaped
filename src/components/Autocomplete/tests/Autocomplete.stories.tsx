@@ -48,6 +48,7 @@ export const active: StoryObj<{
 								args.handleClose();
 								toggle.deactivate();
 							}}
+							onChange={(args) => console.log(args)}
 						>
 							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
 								return (
@@ -64,24 +65,18 @@ export const active: StoryObj<{
 	},
 	play: async ({ canvasElement, args }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
-
-		const input = canvas.getByRole("combobox");
+		// const input = canvas.getByRole("combobox");
 		const list = await canvas.findByRole("listbox");
-
 		expect(list).toBeInTheDocument();
 		expect(args.handleOpen).not.toHaveBeenCalled();
-
 		await userEvent.click(document.body);
-
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);
 			expect(args.handleClose).toHaveBeenLastCalledWith();
 		});
-
 		// TODO: Flaky behavior in node env tests, works in the browser
 		// await sleep(500);
 		// await userEvent.click(input);
-
 		// await waitFor(() => {
 		// 	expect(args.handleOpen).toHaveBeenCalledTimes(1);
 		// 	expect(args.handleOpen).toHaveBeenLastCalledWith();

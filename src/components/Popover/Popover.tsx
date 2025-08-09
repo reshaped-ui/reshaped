@@ -20,7 +20,7 @@ const Popover: React.FC<T.Props> & {
 	} = props;
 	const padding = props.padding ?? (variant === "headless" ? 0 : 4);
 	const trapFocusMode =
-		props.trapFocusMode || (triggerType === "hover" ? "content-menu" : undefined);
+		props.trapFocusMode ?? (triggerType === "hover" ? "content-menu" : undefined);
 	const paddingStyles = getPaddingStyles(padding);
 	const contentClassName = classNames(
 		s.content,

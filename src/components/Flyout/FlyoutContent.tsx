@@ -110,7 +110,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	);
 	// className is applied to inner element because it has the transform and is treated like a real root element
 	const innerClassNames = classNames(s.inner, className, contentClassName);
-	let role;
+	let role = attributes?.role;
 
 	if (triggerType === "hover") {
 		role = "tooltip";
