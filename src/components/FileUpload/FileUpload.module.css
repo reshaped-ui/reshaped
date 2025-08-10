@@ -1,23 +1,50 @@
 .root {
-	&.--highlighted .triggerLayer {
-		background: rgba(var(--rs-color-rgb-background-primary), 8%);
-		border-color: var(--rs-color-border-primary);
-	}
-}
+	--rs-file-upload-radius: var(--rs-radius-medium);
 
-.triggerLayer {
-	border: 1px dashed var(--rs-color-border-neutral);
+	display: block;
 
 	[data-rs-keyboard] &:focus-within {
 		box-shadow: var(--rs-focus-shadow);
 	}
+}
 
-	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(:has(.trigger)) {
-			background: rgba(var(--rs-color-rgb-background-neutral), 16%);
-		}
+.--inline {
+	--rs-file-upload-radius: var(--rs-radius-small);
+
+	&,
+	& .triggerLayer {
+		display: inline-block;
+		vertical-align: top;
 	}
 
+	[data-rs-keyboard] &:focus-within {
+		box-shadow: none;
+	}
+
+	[data-rs-keyboard] &:focus-within .triggerLayer > * {
+		box-shadow: var(--rs-focus-shadow);
+	}
+}
+
+.--variant-outline {
+	& .triggerLayer {
+		border: 1px dashed var(--rs-color-border-neutral);
+		border-radius: var(--rs-file-upload-radius);
+
+		.--highlighted& {
+			background: rgba(var(--rs-color-rgb-background-primary), 0.08);
+			border-color: var(--rs-color-border-primary);
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(:has(.trigger)) {
+				background: rgba(var(--rs-color-rgb-background-neutral), 0.16);
+			}
+		}
+	}
+}
+
+.triggerLayer {
 	&:has(.trigger) {
 		pointer-events: none;
 

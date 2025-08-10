@@ -1,6 +1,10 @@
 ## 3.7.0
 
+Highlights:
+
+- Accessibility
 - ActionBar: Added active, offset, more positions, positionType, blurred props
+- FileUpload: variant + inline + render props
 
 - Added Attributes type to the package exports
 - Added `mono` font family to the themes

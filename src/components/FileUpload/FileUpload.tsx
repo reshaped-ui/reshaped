@@ -17,10 +17,22 @@ const FileUploadTrigger: React.FC<T.TriggerProps> = (props) => {
 const FileUpload: React.FC<T.Props> & {
 	Trigger: typeof FileUploadTrigger;
 } = (props) => {
-	const { name, children, height, className, attributes, inputAttributes, onChange } = props;
+	const {
+		name,
+		children,
+		height,
+		variant = "outline",
+		inline,
+		className,
+		attributes,
+		inputAttributes,
+		onChange,
+	} = props;
 	const highlightToggle = useToggle();
 	const rootClassNames = classNames(
 		s.root,
+		variant && s[`--variant-${variant}`],
+		inline && s[`--inline`],
 		highlightToggle.active && s["--highlighted"],
 		className
 	);
@@ -58,6 +70,21 @@ const FileUpload: React.FC<T.Props> & {
 		inputAttributes?.onChange?.(event);
 	};
 
+	const inputNode = (
+		<HiddenVisually>
+			<input
+				{...inputAttributes}
+				type="file"
+				className={s.field}
+				name={name}
+				onChange={handleChange}
+			/>
+		</HiddenVisually>
+	);
+
+	const childrenNode =
+		typeof children === "function" ? children({ highlighted: highlightToggle.active }) : children;
+
 	return (
 		<View
 			className={rootClassNames}
@@ -70,29 +97,28 @@ const FileUpload: React.FC<T.Props> & {
 				onDrop: handleDrop,
 			}}
 		>
-			<View
-				as="label"
-				className={s.triggerLayer}
-				padding={6}
-				borderRadius="medium"
-				gap={2}
-				align="center"
-				justify="center"
-				textAlign="center"
-				animated
-				height="100%"
-			>
-				<View.Item>{children}</View.Item>
-				<HiddenVisually>
-					<input
-						{...inputAttributes}
-						type="file"
-						className={s.field}
-						name={name}
-						onChange={handleChange}
-					/>
-				</HiddenVisually>
-			</View>
+			{variant === "outline" && !inline ? (
+				<View
+					as="label"
+					className={s.triggerLayer}
+					padding={6}
+					borderRadius="medium"
+					gap={2}
+					align="center"
+					justify="center"
+					textAlign="center"
+					animated
+					height="100%"
+				>
+					{inputNode}
+					<View.Item>{childrenNode}</View.Item>
+				</View>
+			) : (
+				<label className={s.triggerLayer}>
+					{inputNode}
+					{childrenNode}
+				</label>
+			)}
 		</View>
 	);
 };

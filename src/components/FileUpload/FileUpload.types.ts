@@ -4,12 +4,14 @@ import type * as G from "types/global";
 
 export type Props = {
 	name: string;
-	children?: React.ReactNode;
+	children?: React.ReactNode | ((props: { highlighted?: boolean }) => React.ReactNode);
 	onChange?: G.ChangeHandler<
 		File[],
 		React.DragEvent<HTMLDivElement> | React.ChangeEvent<HTMLInputElement>
 	>;
 	height?: ViewProps["height"];
+	variant?: "outline" | "headless";
+	inline?: boolean;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 	inputAttributes?: G.Attributes<"input">;
