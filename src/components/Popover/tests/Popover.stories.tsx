@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within, waitFor } from "storybook/test";
 import { Example } from "utilities/storybook";
@@ -22,14 +22,16 @@ export default {
 
 const Demo: React.FC<any> = (props) => {
 	const { position, ...rest } = props;
+	const id = useId();
+
 	return (
 		<Popover position={position} {...rest}>
 			<Popover.Trigger>
 				{(attributes) => <Button attributes={attributes}>{position || "Open"}</Button>}
 			</Popover.Trigger>
-			<Popover.Content>
+			<Popover.Content attributes={{ "aria-labelledby": id }}>
 				<View gap={2} align="start">
-					Popover content
+					<span id={id}>Popover content</span>
 					<View direction="row" gap={2}>
 						<Button onClick={() => {}}>Action 1</Button>
 						<Button onClick={() => {}}>Action 2</Button>
