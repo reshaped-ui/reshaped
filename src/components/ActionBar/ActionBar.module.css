@@ -13,7 +13,7 @@
 	border-radius: var(--rs-action-bar-radius);
 }
 
-@responsive [style*="--rs-action-bar-offset-"] {
+@responsive .root[style*="--rs-action-bar-offset-"] {
 	@variable --rs-action-bar-offset 0;
 
 	--rs-action-bar-radius: var(--rs-radius-medium);
