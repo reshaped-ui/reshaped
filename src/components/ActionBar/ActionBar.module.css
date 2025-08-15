@@ -83,12 +83,6 @@
 	transition-timing-function: var(--rs-easing-decelerate);
 }
 
-.--blurred {
-	--rs-action-bar-background-opacity: 0.84;
-
-	backdrop-filter: blur(10px);
-}
-
 .--elevated {
 	--rs-action-bar-background-rgb: var(--rs-color-rgb-background-elevation-raised);
 

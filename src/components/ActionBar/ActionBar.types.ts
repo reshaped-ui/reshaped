@@ -7,7 +7,6 @@ export type Props = Pick<ViewProps, "paddingBlock" | "paddingInline" | "padding"
 	offset?: G.Responsive<number>;
 	position?: "top" | "top-end" | "top-start" | "bottom" | "bottom-start" | "bottom-end";
 	positionType?: G.Responsive<"relative" | "absolute" | "fixed">;
-	blurred?: boolean;
 	elevated?: boolean;
 	children?: React.ReactNode;
 	className?: G.ClassName;

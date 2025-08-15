@@ -14,21 +14,20 @@ const ActionBar: React.FC<T.Props> = (props) => {
 		paddingBlock = 3,
 		paddingInline = 4,
 		children,
-		blurred,
 		elevated,
 		active = true,
 		className,
 		attributes,
 	} = props;
 	const positionType =
-		passedPositionType ?? (fullWidthPositions.includes(position) ? "relative" : "absolute");
+		passedPositionType ??
+		(passedOffset ? "absolute" : fullWidthPositions.includes(position) ? "relative" : "absolute");
 	const offset = passedOffset ?? (positionType === "relative" ? undefined : 4);
 	const offsetVariables = offset && responsiveVariables("--rs-action-bar-offset", offset);
 	const rootClassNames = classNames(
 		s.root,
 		(elevated || !!offsetVariables) && s["--elevated"],
 		position && s[`--position-${position}`],
-		blurred && s["--blurred"],
 		active && s["--active"],
 		className
 	);

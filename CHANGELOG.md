@@ -3,7 +3,7 @@
 Highlights:
 
 - Accessibility
-- ActionBar: Added active, offset, more positions, positionType, blurred props
+- ActionBar: Added active, offset, more positions, positionType props
 - FileUpload: variant + inline + render props
 
 - Added Attributes type to the package exports
