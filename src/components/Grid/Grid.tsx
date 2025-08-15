@@ -1,9 +1,9 @@
 import { classNames, responsiveVariables, responsivePropDependency } from "utilities/props";
-import getAlignStyles from "styles/align";
-import getJustifyStyles from "styles/justify";
-import getMaxWidthStyles from "styles/maxWidth";
-import getWidthStyles from "styles/width";
-import getHeightStyles from "styles/height";
+import { resolveMixin } from "styles/mixin";
+import getJustifyStyles from "styles/resolvers/justify";
+import getMaxWidthStyles from "styles/resolvers/maxWidth";
+import getWidthStyles from "styles/resolvers/width";
+import getHeightStyles from "styles/resolvers/height";
 import type * as T from "./Grid.types";
 import s from "./Grid.module.css";
 
@@ -66,7 +66,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		as: TagName = "div" as any,
 		attributes,
 	} = props;
-	const alignStyles = getAlignStyles(align);
+	const mixinStyles = resolveMixin({ align });
 	const justifyStyles = getJustifyStyles(justify);
 	const maxWidthStyles = getMaxWidthStyles(maxWidth);
 	const widthStyles = getWidthStyles(width);
@@ -85,6 +85,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	);
 	const rootClassNames = classNames(
 		s.root,
+		mixinStyles.classNames,
 		maxWidthStyles?.classNames,
 		widthStyles?.classNames,
 		heightStyles?.classNames,
@@ -99,7 +100,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...responsiveVariables("--rs-grid-auto-flow", autoFlow),
 		...responsiveVariables("--rs-grid-auto-columns", autoColumns),
 		...responsiveVariables("--rs-grid-auto-rows", autoRows),
-		...alignStyles?.variables,
+		...mixinStyles.variables,
 		...justifyStyles?.variables,
 		...maxWidthStyles?.variables,
 		...widthStyles?.variables,

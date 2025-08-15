@@ -3,7 +3,7 @@ import Flyout, { useFlyoutContext, type FlyoutProps } from "components/Flyout";
 import Dismissible, { type DismissibleProps } from "components/Dismissible";
 import type * as T from "./Popover.types";
 import s from "./Popover.module.css";
-import getPaddingStyles from "styles/padding";
+import getPaddingStyles from "styles/resolvers/padding";
 
 const Popover: React.FC<T.Props> & {
 	Dismissible: typeof PopoverDismissible;

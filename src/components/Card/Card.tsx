@@ -3,10 +3,10 @@ import { classNames } from "utilities/props";
 import Actionable from "components/Actionable";
 import type * as T from "./Card.types";
 import s from "./Card.module.css";
-import getRadiusStyles from "styles/radius";
-import getBleedStyles from "styles/bleed";
-import getPaddingStyles from "styles/padding";
-import getHeightStyles from "styles/height";
+import getRadiusStyles from "styles/resolvers/radius";
+import getBleedStyles from "styles/resolvers/bleed";
+import getPaddingStyles from "styles/resolvers/padding";
+import getHeightStyles from "styles/resolvers/height";
 
 const Card = forwardRef(
 	<As extends keyof React.JSX.IntrinsicElements = "div">(

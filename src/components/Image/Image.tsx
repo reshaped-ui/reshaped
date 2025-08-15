@@ -4,11 +4,11 @@ import React from "react";
 import { classNames } from "utilities/props";
 import * as T from "./Image.types";
 import s from "./Image.module.css";
-import getRadiusStyles from "styles/radius";
-import getWidthStyles from "styles/width";
-import getHeightStyles from "styles/height";
-import getAspectRatioStyles from "styles/aspectRatio";
-import getMaxWidthStyles from "styles/maxWidth";
+import getRadiusStyles from "styles/resolvers/radius";
+import getWidthStyles from "styles/resolvers/width";
+import getHeightStyles from "styles/resolvers/height";
+import getAspectRatioStyles from "styles/resolvers/aspectRatio";
+import getMaxWidthStyles from "styles/resolvers/maxWidth";
 
 const Image: React.FC<T.Props> = (props) => {
 	const {

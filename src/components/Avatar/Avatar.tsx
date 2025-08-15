@@ -1,5 +1,5 @@
 import { classNames, responsivePropDependency } from "utilities/props";
-import getHeightStyles from "styles/height";
+import getHeightStyles from "styles/resolvers/height";
 import Icon from "components/Icon";
 import View from "components/View";
 import type * as T from "./Avatar.types";

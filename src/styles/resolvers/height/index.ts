@@ -1,10 +1,10 @@
 import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
-import s from "./width.module.css";
+import s from "./height.module.css";
 
-const getWidthStyles: T.DynamicStyleUtility<string | number> = (value) => {
-	if (!value) return null;
-	const variables = responsiveVariables("--rs-w", value);
+const getHeightStyles: T.StyleResolver<T.Height> = (value) => {
+	if (!value) return {};
+	const variables = responsiveVariables("--rs-h", value);
 	const classNames = responsiveClassNames(
 		s,
 		(value) => (typeof value === "number" ? "--type-unit" : "--type-literal"),
@@ -15,4 +15,4 @@ const getWidthStyles: T.DynamicStyleUtility<string | number> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getWidthStyles;
+export default getHeightStyles;

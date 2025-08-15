@@ -1,10 +1,10 @@
 import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
-import s from "./maxHeight.module.css";
+import s from "./minWidth.module.css";
 
-const getMaxHeightStyles: T.DynamicStyleUtility<string | number> = (value) => {
-	if (!value) return null;
-	const variables = responsiveVariables("--rs-max-h", value);
+const getMinWidthStyles: T.StyleResolver<T.MinWidth> = (value) => {
+	if (!value) return {};
+	const variables = responsiveVariables("--rs-min-w", value);
 	const classNames = responsiveClassNames(
 		s,
 		(value) => (typeof value === "number" ? "--type-unit" : "--type-literal"),
@@ -15,4 +15,4 @@ const getMaxHeightStyles: T.DynamicStyleUtility<string | number> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getMaxHeightStyles;
+export default getMinWidthStyles;

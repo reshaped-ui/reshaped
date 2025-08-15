@@ -6,8 +6,8 @@ import {
 import * as T from "styles/types";
 import s from "./bleed.module.css";
 
-const getBleedStyles: T.DynamicStyleUtility<number> = (value) => {
-	if (value === undefined) return null;
+const getBleedStyles: T.StyleResolver<T.Bleed> = (value) => {
+	if (value === undefined) return {};
 
 	const classNames = responsiveClassNames(
 		s,

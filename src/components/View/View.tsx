@@ -5,21 +5,21 @@ import Hidden from "components/Hidden";
 import type * as G from "types/global";
 import type * as T from "./View.types";
 import s from "./View.module.css";
-import getRadiusStyles from "styles/radius";
-import getBleedStyles from "styles/bleed";
-import getWidthStyles from "styles/width";
-import getHeightStyles from "styles/height";
-import getMaxWidthStyles from "styles/maxWidth";
-import getMaxHeightStyles from "styles/maxHeight";
-import getMinWidthStyles from "styles/minWidth";
-import getMinHeightStyles from "styles/minHeight";
-import getPositionStyles from "styles/position";
-import getInsetStyles from "styles/inset";
-import getAspectRatioStyles from "styles/aspectRatio";
-import getBorderStyles from "styles/border";
-import getTextAlignStyles from "styles/textAlign";
-import getAlignStyles from "styles/align";
-import getJustifyStyles from "styles/justify";
+import getRadiusStyles from "styles/resolvers/radius";
+import getBleedStyles from "styles/resolvers/bleed";
+import getWidthStyles from "styles/resolvers/width";
+import getHeightStyles from "styles/resolvers/height";
+import getMaxWidthStyles from "styles/resolvers/maxWidth";
+import getMaxHeightStyles from "styles/resolvers/maxHeight";
+import getMinWidthStyles from "styles/resolvers/minWidth";
+import getMinHeightStyles from "styles/resolvers/minHeight";
+import getPositionStyles from "styles/resolvers/position";
+import getInsetStyles from "styles/resolvers/inset";
+import getAspectRatioStyles from "styles/resolvers/aspectRatio";
+import getBorderStyles from "styles/resolvers/border";
+import getTextAlignStyles from "styles/resolvers/textAlign";
+import getJustifyStyles from "styles/resolvers/justify";
+import { resolveMixin } from "styles/mixin";
 
 const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
 	const {
@@ -138,8 +138,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
 	const borderStyles = getBorderStyles(borderColor);
 	const textAlignStyles = getTextAlignStyles(textAlign);
-	const alignStyles = getAlignStyles(align);
 	const justifyStyles = getJustifyStyles(justify);
+	const mixinStyles = resolveMixin({ align });
 
 	let renderedItemIndex = 0;
 	// If wrap is not defined, it can be set based on item grow and split usage
@@ -249,6 +249,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const rootClassNames = classNames(
 		s.root,
 		className,
+		mixinStyles.classNames,
 		radiusStyles?.classNames,
 		bleedStyles?.classNames,
 		widthStyles?.classNames,
@@ -297,10 +298,10 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...insetBottomStyles?.variables,
 		...insetStartStyles?.variables,
 		...insetEndStyles?.variables,
-		...alignStyles?.variables,
 		...justifyStyles?.variables,
 		...positionStyles?.variables,
 		...textAlignStyles?.variables,
+		...mixinStyles.variables,
 		...(zIndex ? { "--rs-view-z": zIndex } : {}),
 	};
 

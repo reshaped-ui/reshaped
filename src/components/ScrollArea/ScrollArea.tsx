@@ -3,8 +3,8 @@
 import React, { forwardRef } from "react";
 import { classNames } from "utilities/props";
 import { disableUserSelect, enableUserSelect } from "utilities/dom";
-import getHeightStyles from "styles/height";
-import getMaxHeightStyles from "styles/maxHeight";
+import getHeightStyles from "styles/resolvers/height";
+import getMaxHeightStyles from "styles/resolvers/maxHeight";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import type * as T from "./ScrollArea.types";
 import s from "./ScrollArea.module.css";

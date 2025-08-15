@@ -15,7 +15,7 @@ import Overlay from "components/Overlay";
 import useElementId from "hooks/useElementId";
 import type * as T from "./Modal.types";
 import s from "./Modal.module.css";
-import getPaddingStyles from "styles/padding";
+import getPaddingStyles from "styles/resolvers/padding";
 import useHandlerRef from "hooks/useHandlerRef";
 
 const DRAG_THRESHOLD = 32;

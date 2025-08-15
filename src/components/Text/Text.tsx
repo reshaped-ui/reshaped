@@ -1,5 +1,5 @@
 import { classNames, responsiveClassNames } from "utilities/props";
-import getTextAlignStyles from "styles/textAlign";
+import getTextAlignStyles from "styles/resolvers/textAlign";
 import type * as T from "./Text.types";
 import s from "./Text.module.css";
 

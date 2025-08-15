@@ -1,6 +1,6 @@
 import React from "react";
 import { classNames } from "utilities/props";
-import getHeightStyles from "styles/height";
+import getHeightStyles from "styles/resolvers/height";
 import type * as T from "./Icon.types";
 import s from "./Icon.module.css";
 

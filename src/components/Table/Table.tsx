@@ -2,8 +2,8 @@
 
 import React from "react";
 import { classNames, responsiveVariables } from "utilities/props";
-import getWidthStyles from "styles/width";
-import getMinWidthStyles from "styles/minWidth";
+import getWidthStyles from "styles/resolvers/width";
+import getMinWidthStyles from "styles/resolvers/minWidth";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
 import useFadeSide from "hooks/_private/useFadeSide";
