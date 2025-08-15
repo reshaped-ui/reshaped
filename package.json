@@ -104,7 +104,7 @@
 		"@storybook/react-vite": "9.0.13",
 		"@types/culori": "4.0.0",
 		"@types/events": "3.0.3",
-		"@types/node": "24.0.4",
+		"@types/node": "24.3.0",
 		"@types/react": "19.1.8",
 		"@types/react-dom": "19.1.6",
 		"@vitejs/plugin-react": "4.6.0",
