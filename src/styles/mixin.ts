@@ -3,7 +3,7 @@ import aspectRatio from "styles/resolvers/aspectRatio";
 import bleed from "styles/resolvers/bleed";
 import border from "styles/resolvers/border";
 import height from "styles/resolvers/height";
-import inset from "styles/resolvers/inset";
+import inset, { insetTop, insetBottom, insetStart, insetEnd } from "styles/resolvers/inset";
 import justify from "styles/resolvers/justify";
 import maxHeight from "styles/resolvers/maxHeight";
 import maxWidth from "styles/resolvers/maxWidth";
@@ -23,6 +23,10 @@ const mixinMap = {
 	border,
 	height,
 	inset,
+	insetTop,
+	insetBottom,
+	insetStart,
+	insetEnd,
 	justify,
 	maxHeight,
 	maxWidth,

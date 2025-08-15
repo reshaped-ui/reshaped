@@ -2,7 +2,7 @@ import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import s from "./minWidth.module.css";
 
-const getMinWidthStyles: T.StyleResolver<T.MinWidth> = (value) => {
+const minWidth: T.StyleResolver<T.MinWidth> = (value) => {
 	if (!value) return {};
 	const variables = responsiveVariables("--rs-min-w", value);
 	const classNames = responsiveClassNames(
@@ -15,4 +15,4 @@ const getMinWidthStyles: T.StyleResolver<T.MinWidth> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getMinWidthStyles;
+export default minWidth;

@@ -1,16 +1,16 @@
 import { expect, test, describe } from "vitest";
-import getPositionStyles from "./index";
+import position from "./index";
 
 describe("Styles/Position", () => {
 	test("handles value", () => {
-		expect(getPositionStyles("absolute")).toMatchSnapshot();
+		expect(position("absolute")).toMatchSnapshot();
 	});
 
 	test("handles undefined value", () => {
-		expect(getPositionStyles()).toMatchSnapshot();
+		expect(position()).toMatchSnapshot();
 	});
 
 	test("handles responsive value", async () => {
-		expect(getPositionStyles({ s: "absolute", l: "fixed" })).toMatchSnapshot();
+		expect(position({ s: "absolute", l: "fixed" })).toMatchSnapshot();
 	});
 });

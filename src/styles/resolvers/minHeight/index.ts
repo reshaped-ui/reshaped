@@ -2,8 +2,8 @@ import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import s from "./minHeight.module.css";
 
-const getMinHeightStyles: T.DynamicStyleUtility<string | number> = (value) => {
-	if (!value) return null;
+const minHeight: T.StyleResolver<T.MinHeight> = (value) => {
+	if (!value) return {};
 	const variables = responsiveVariables("--rs-min-h", value);
 	const classNames = responsiveClassNames(
 		s,
@@ -15,4 +15,4 @@ const getMinHeightStyles: T.DynamicStyleUtility<string | number> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getMinHeightStyles;
+export default minHeight;

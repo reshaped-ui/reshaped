@@ -1,16 +1,16 @@
 import { expect, test, describe } from "vitest";
-import getJustifyStyles from "./index";
+import justify from "./index";
 
 describe("Styles/Justify", () => {
 	test("handles value", () => {
-		expect(getJustifyStyles("start")).toMatchSnapshot();
+		expect(justify("start")).toMatchSnapshot();
 	});
 
 	test("handles undefined value", () => {
-		expect(getJustifyStyles()).toMatchSnapshot();
+		expect(justify()).toMatchSnapshot();
 	});
 
 	test("handles responsive value", async () => {
-		expect(getJustifyStyles({ s: "start", m: "center", l: "end" })).toMatchSnapshot();
+		expect(justify({ s: "start", m: "center", l: "end" })).toMatchSnapshot();
 	});
 });

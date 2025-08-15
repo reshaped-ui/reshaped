@@ -2,7 +2,7 @@ import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import s from "./maxHeight.module.css";
 
-const getMaxHeightStyles: T.StyleResolver<T.MaxHeight> = (value) => {
+const maxHeight: T.StyleResolver<T.MaxHeight> = (value) => {
 	if (!value) return {};
 	const variables = responsiveVariables("--rs-max-h", value);
 	const classNames = responsiveClassNames(
@@ -15,4 +15,4 @@ const getMaxHeightStyles: T.StyleResolver<T.MaxHeight> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getMaxHeightStyles;
+export default maxHeight;

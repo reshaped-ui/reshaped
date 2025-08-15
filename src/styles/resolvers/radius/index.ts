@@ -2,7 +2,7 @@ import { responsiveClassNames } from "utilities/props";
 import * as T from "styles/types";
 import s from "./radius.module.css";
 
-const getRadiusStyles: T.StyleResolver<T.Radius> = (value) => {
+const radius: T.StyleResolver<T.Radius> = (value) => {
 	if (!value) return {};
 
 	return {
@@ -10,4 +10,4 @@ const getRadiusStyles: T.StyleResolver<T.Radius> = (value) => {
 	};
 };
 
-export default getRadiusStyles;
+export default radius;

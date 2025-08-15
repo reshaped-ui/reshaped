@@ -2,8 +2,8 @@ import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import s from "./maxWidth.module.css";
 
-const getMaxWidthStyles: T.DynamicStyleUtility<string | number> = (value) => {
-	if (!value) return null;
+const maxWidth: T.StyleResolver<T.MaxWidth> = (value) => {
+	if (!value) return {};
 	const variables = responsiveVariables("--rs-max-w", value);
 	const classNames = responsiveClassNames(
 		s,
@@ -15,4 +15,4 @@ const getMaxWidthStyles: T.DynamicStyleUtility<string | number> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getMaxWidthStyles;
+export default maxWidth;

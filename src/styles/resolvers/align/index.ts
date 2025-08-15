@@ -2,7 +2,7 @@ import { responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import "./align.css";
 
-const getAlignStyles: T.StyleResolver<T.Align> = (value) => {
+const align: T.StyleResolver<T.Align> = (value) => {
 	if (!value) return {};
 
 	return {
@@ -10,4 +10,4 @@ const getAlignStyles: T.StyleResolver<T.Align> = (value) => {
 	};
 };
 
-export default getAlignStyles;
+export default align;

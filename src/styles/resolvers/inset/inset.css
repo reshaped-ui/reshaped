@@ -1,7 +1,7 @@
-@responsive [style*="--rs-inset-all-"] {
-	@variable --rs-inset-all 0;
+@responsive [style*="--rs-inset-s:"] {
+	@variable --rs-inset 0;
 
-	inset: calc(var(--rs-inset-all) * var(--rs-unit-x1));
+	inset: calc(var(--rs-inset) * var(--rs-unit-x1));
 }
 
 @responsive [style*="--rs-inset-end-"] {

@@ -2,9 +2,9 @@
 
 TODO:
 
-- Move all utilities to resolvers
-- Solve css for sides, like inset, padding
-- Add margin
+- Add side insets
+- Add individual paddings from view
+- Add margins
 - Move their usage in components to resolveMixin
 - Add mixin property to all components
 

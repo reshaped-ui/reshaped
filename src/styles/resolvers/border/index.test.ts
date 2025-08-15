@@ -1,16 +1,16 @@
 import { expect, test, describe } from "vitest";
-import getBorderStyles from "./index";
+import border from "./index";
 
 describe("Styles/Border", () => {
 	test("handles value", () => {
-		expect(getBorderStyles("primary")).toMatchSnapshot();
+		expect(border("primary")).toMatchSnapshot();
 	});
 
 	test("handles undefined value", () => {
-		expect(getBorderStyles()).toMatchSnapshot();
+		expect(border()).toMatchSnapshot();
 	});
 
 	test("handles responsive value", async () => {
-		expect(getBorderStyles({ s: undefined, m: "neutral", l: "transparent" })).toMatchSnapshot();
+		expect(border({ s: undefined, m: "neutral", l: "transparent" })).toMatchSnapshot();
 	});
 });

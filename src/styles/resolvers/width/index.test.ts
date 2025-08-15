@@ -1,24 +1,24 @@
 import { expect, test, describe } from "vitest";
-import getWidthStyles from "./index";
+import width from "./index";
 
 describe("Styles/Width", () => {
 	test("handles px value", () => {
-		expect(getWidthStyles("50px")).toMatchSnapshot();
+		expect(width("50px")).toMatchSnapshot();
 	});
 
 	test("handles % value", () => {
-		expect(getWidthStyles("50%")).toMatchSnapshot();
+		expect(width("50%")).toMatchSnapshot();
 	});
 
 	test("handles unit value", () => {
-		expect(getWidthStyles(5)).toMatchSnapshot();
+		expect(width(5)).toMatchSnapshot();
 	});
 
 	test("handles undefined value", () => {
-		expect(getWidthStyles()).toMatchSnapshot();
+		expect(width()).toMatchSnapshot();
 	});
 
 	test("handles responsive value", async () => {
-		expect(getWidthStyles({ s: "50px", l: "50%" })).toMatchSnapshot();
+		expect(width({ s: "50px", l: "50%" })).toMatchSnapshot();
 	});
 });

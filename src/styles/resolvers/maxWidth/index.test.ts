@@ -1,24 +1,24 @@
 import { expect, test, describe } from "vitest";
-import getMaxWidthStyles from "./index";
+import maxWidth from "./index";
 
 describe("Styles/MaxWidth", () => {
 	test("handles px value", () => {
-		expect(getMaxWidthStyles("50px")).toMatchSnapshot();
+		expect(maxWidth("50px")).toMatchSnapshot();
 	});
 
 	test("handles % value", () => {
-		expect(getMaxWidthStyles("50%")).toMatchSnapshot();
+		expect(maxWidth("50%")).toMatchSnapshot();
 	});
 
 	test("handles unit value", () => {
-		expect(getMaxWidthStyles(5)).toMatchSnapshot();
+		expect(maxWidth(5)).toMatchSnapshot();
 	});
 
 	test("handles undefined value", () => {
-		expect(getMaxWidthStyles()).toMatchSnapshot();
+		expect(maxWidth()).toMatchSnapshot();
 	});
 
 	test("handles responsive value", async () => {
-		expect(getMaxWidthStyles({ s: "50px", l: "50%" })).toMatchSnapshot();
+		expect(maxWidth({ s: "50px", l: "50%" })).toMatchSnapshot();
 	});
 });

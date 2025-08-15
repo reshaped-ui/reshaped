@@ -6,7 +6,7 @@ import {
 import * as T from "styles/types";
 import s from "./bleed.module.css";
 
-const getBleedStyles: T.StyleResolver<T.Bleed> = (value) => {
+const bleed: T.StyleResolver<T.Bleed> = (value) => {
 	if (value === undefined) return {};
 
 	const classNames = responsiveClassNames(
@@ -19,4 +19,4 @@ const getBleedStyles: T.StyleResolver<T.Bleed> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getBleedStyles;
+export default bleed;

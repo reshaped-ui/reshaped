@@ -14,7 +14,6 @@ import getMaxHeightStyles from "styles/resolvers/maxHeight";
 import getMinWidthStyles from "styles/resolvers/minWidth";
 import getMinHeightStyles from "styles/resolvers/minHeight";
 import getPositionStyles from "styles/resolvers/position";
-import getInsetStyles from "styles/resolvers/inset";
 import getAspectRatioStyles from "styles/resolvers/aspectRatio";
 import getBorderStyles from "styles/resolvers/border";
 import getTextAlignStyles from "styles/resolvers/textAlign";
@@ -130,16 +129,11 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const minWidthStyles = getMinWidthStyles(minWidth);
 	const minHeightStyles = getMinHeightStyles(minHeight);
 	const positionStyles = getPositionStyles(position);
-	const insetStyles = getInsetStyles(inset);
-	const insetTopStyles = getInsetStyles(insetTop, "top");
-	const insetBottomStyles = getInsetStyles(insetBottom, "bottom");
-	const insetStartStyles = getInsetStyles(insetStart, "start");
-	const insetEndStyles = getInsetStyles(insetEnd, "end");
 	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
 	const borderStyles = getBorderStyles(borderColor);
 	const textAlignStyles = getTextAlignStyles(textAlign);
 	const justifyStyles = getJustifyStyles(justify);
-	const mixinStyles = resolveMixin({ align });
+	const mixinStyles = resolveMixin({ align, inset, insetTop, insetBottom, insetStart, insetEnd });
 
 	let renderedItemIndex = 0;
 	// If wrap is not defined, it can be set based on item grow and split usage
@@ -293,11 +287,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...maxHeightStyles?.variables,
 		...minWidthStyles?.variables,
 		...minHeightStyles?.variables,
-		...insetStyles?.variables,
-		...insetTopStyles?.variables,
-		...insetBottomStyles?.variables,
-		...insetStartStyles?.variables,
-		...insetEndStyles?.variables,
 		...justifyStyles?.variables,
 		...positionStyles?.variables,
 		...textAlignStyles?.variables,

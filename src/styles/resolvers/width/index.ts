@@ -2,7 +2,7 @@ import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import s from "./width.module.css";
 
-const getWidthStyles: T.StyleResolver<T.Width> = (value) => {
+const width: T.StyleResolver<T.Width> = (value) => {
 	if (!value) return {};
 	const variables = responsiveVariables("--rs-w", value);
 	const classNames = responsiveClassNames(
@@ -15,4 +15,4 @@ const getWidthStyles: T.StyleResolver<T.Width> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getWidthStyles;
+export default width;

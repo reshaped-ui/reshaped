@@ -1,24 +1,24 @@
 import { expect, test, describe } from "vitest";
-import getMaxHeightStyles from "./index";
+import maxHeight from "./index";
 
 describe("Styles/MaxHeight", () => {
 	test("handles px value", () => {
-		expect(getMaxHeightStyles("50px")).toMatchSnapshot();
+		expect(maxHeight("50px")).toMatchSnapshot();
 	});
 
 	test("handles % value", () => {
-		expect(getMaxHeightStyles("50%")).toMatchSnapshot();
+		expect(maxHeight("50%")).toMatchSnapshot();
 	});
 
 	test("handles unit value", () => {
-		expect(getMaxHeightStyles(5)).toMatchSnapshot();
+		expect(maxHeight(5)).toMatchSnapshot();
 	});
 
 	test("handles undefined value", () => {
-		expect(getMaxHeightStyles()).toMatchSnapshot();
+		expect(maxHeight()).toMatchSnapshot();
 	});
 
 	test("handles responsive value", async () => {
-		expect(getMaxHeightStyles({ s: "50px", l: "50%" })).toMatchSnapshot();
+		expect(maxHeight({ s: "50px", l: "50%" })).toMatchSnapshot();
 	});
 });

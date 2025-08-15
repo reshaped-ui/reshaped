@@ -2,7 +2,7 @@ import { responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import "./aspectRatio.css";
 
-const getAspectRatioStyles: T.StyleResolver<T.AspectRatio> = (value) => {
+const aspectRatio: T.StyleResolver<T.AspectRatio> = (value) => {
 	if (!value) return {};
 
 	return {
@@ -10,4 +10,4 @@ const getAspectRatioStyles: T.StyleResolver<T.AspectRatio> = (value) => {
 	};
 };
 
-export default getAspectRatioStyles;
+export default aspectRatio;

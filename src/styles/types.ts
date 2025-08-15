@@ -55,6 +55,10 @@ export type Mixin = {
 	border?: G.Responsive<BorderColor>;
 	height?: G.Responsive<Height>;
 	inset?: G.Responsive<Inset>;
+	insetTop?: G.Responsive<Inset>;
+	insetBottom?: G.Responsive<Inset>;
+	insetStart?: G.Responsive<Inset>;
+	insetEnd?: G.Responsive<Inset>;
 	justify?: G.Responsive<Justify>;
 	maxHeight?: G.Responsive<MaxHeight>;
 	maxWidth?: G.Responsive<MaxWidth>;

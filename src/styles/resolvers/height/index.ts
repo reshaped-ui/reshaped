@@ -2,7 +2,7 @@ import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
 import s from "./height.module.css";
 
-const getHeightStyles: T.StyleResolver<T.Height> = (value) => {
+const height: T.StyleResolver<T.Height> = (value) => {
 	if (!value) return {};
 	const variables = responsiveVariables("--rs-h", value);
 	const classNames = responsiveClassNames(
@@ -15,4 +15,4 @@ const getHeightStyles: T.StyleResolver<T.Height> = (value) => {
 	return { classNames: [s.root, classNames], variables };
 };
 
-export default getHeightStyles;
+export default height;

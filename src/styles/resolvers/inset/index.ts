@@ -1,18 +1,30 @@
 import { responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
-import * as G from "types/global";
 import "./inset.css";
 
-const getInsetStyles: (
-	value?: G.Responsive<number | "auto">,
-	side?: "top" | "bottom" | "start" | "end"
-) => T.VariableStyleUtilityResult = (value, side) => {
-	if (value === undefined) return null;
-	const suffix = side ? `-${side}` : "-all";
-	const variableName = `--rs-inset${suffix}` as const;
-	const variables = responsiveVariables(variableName, value);
-
-	return { variables };
+const inset: T.StyleResolver<T.Inset> = (value) => {
+	if (value === undefined) return {};
+	return { variables: responsiveVariables("--rs-inset", value) };
 };
 
-export default getInsetStyles;
+export const insetTop: T.StyleResolver<T.Inset> = (value) => {
+	if (value === undefined) return {};
+	return { variables: responsiveVariables("--rs-inset-top", value) };
+};
+
+export const insetBottom: T.StyleResolver<T.Inset> = (value) => {
+	if (value === undefined) return {};
+	return { variables: responsiveVariables("--rs-inset-bottom", value) };
+};
+
+export const insetStart: T.StyleResolver<T.Inset> = (value) => {
+	if (value === undefined) return {};
+	return { variables: responsiveVariables("--rs-inset-start", value) };
+};
+
+export const insetEnd: T.StyleResolver<T.Inset> = (value) => {
+	if (value === undefined) return {};
+	return { variables: responsiveVariables("--rs-inset-end", value) };
+};
+
+export default inset;
