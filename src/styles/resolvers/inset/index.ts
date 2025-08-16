@@ -27,4 +27,14 @@ export const insetEnd: T.StyleResolver<T.Inset> = (value) => {
 	return { variables: responsiveVariables("--rs-inset-end", value) };
 };
 
+export const insetInline: T.StyleResolver<T.Inset> = (value) => {
+	if (value === undefined) return {};
+	return { variables: responsiveVariables("--rs-inset-inline", value) };
+};
+
+export const insetBlock: T.StyleResolver<T.Inset> = (value) => {
+	if (value === undefined) return {};
+	return { variables: responsiveVariables("--rs-inset-block", value) };
+};
+
 export default inset;

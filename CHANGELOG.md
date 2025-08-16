@@ -2,9 +2,9 @@
 
 TODO:
 
-- Add side insets
-- Add individual paddings from view
 - Add margins
+- Add border side, inline, block
+- Use border shadow in components
 - Move their usage in components to resolveMixin
 - Add mixin property to all components
 

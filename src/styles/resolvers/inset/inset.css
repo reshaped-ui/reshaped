@@ -4,6 +4,18 @@
 	inset: calc(var(--rs-inset) * var(--rs-unit-x1));
 }
 
+@responsive [style*="--rs-inset-inline-"] {
+	@variable --rs-inset-inline 0;
+
+	inset-inline: calc(var(--rs-inset-inline) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-inset-block-"] {
+	@variable --rs-inset-block 0;
+
+	inset-block: calc(var(--rs-inset-block) * var(--rs-unit-x1));
+}
+
 @responsive [style*="--rs-inset-end-"] {
 	@variable --rs-inset-end 0;
 

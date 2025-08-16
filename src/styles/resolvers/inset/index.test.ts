@@ -1,5 +1,12 @@
 import { expect, test, describe } from "vitest";
-import inset, { insetTop, insetBottom, insetStart, insetEnd } from "./index";
+import inset, {
+	insetTop,
+	insetBottom,
+	insetStart,
+	insetEnd,
+	insetInline,
+	insetBlock,
+} from "./index";
 
 describe("Styles/Inset", () => {
 	test("handles positive value", () => {
@@ -88,5 +95,41 @@ describe("Styles/Inset/End", () => {
 
 	test("handles responsive value", async () => {
 		expect(insetEnd({ s: 4, m: 0, l: 2 })).toMatchSnapshot();
+	});
+});
+
+describe("Styles/Inset/Inline", () => {
+	test("handles positive value", () => {
+		expect(insetInline(4)).toMatchSnapshot();
+	});
+
+	test("handles 0 value", () => {
+		expect(insetInline(0)).toMatchSnapshot();
+	});
+
+	test("handles undefined value", () => {
+		expect(insetInline()).toMatchSnapshot();
+	});
+
+	test("handles responsive value", async () => {
+		expect(insetInline({ s: 4, m: 0, l: 2 })).toMatchSnapshot();
+	});
+});
+
+describe("Styles/Inset/Block", () => {
+	test("handles positive value", () => {
+		expect(insetBlock(4)).toMatchSnapshot();
+	});
+
+	test("handles 0 value", () => {
+		expect(insetBlock(0)).toMatchSnapshot();
+	});
+
+	test("handles undefined value", () => {
+		expect(insetBlock()).toMatchSnapshot();
+	});
+
+	test("handles responsive value", async () => {
+		expect(insetBlock({ s: 4, m: 0, l: 2 })).toMatchSnapshot();
 	});
 });
