@@ -3,9 +3,9 @@
 exports[`Styles/MaxHeight > handles % value 1`] = `
 {
   "classNames": [
-    "_root_bbb71a",
+    "_root_9fb38e",
     [
-      "_--type-literal_bbb71a",
+      "_--type-literal_9fb38e",
     ],
   ],
   "variables": {
@@ -17,9 +17,9 @@ exports[`Styles/MaxHeight > handles % value 1`] = `
 exports[`Styles/MaxHeight > handles px value 1`] = `
 {
   "classNames": [
-    "_root_bbb71a",
+    "_root_9fb38e",
     [
-      "_--type-literal_bbb71a",
+      "_--type-literal_9fb38e",
     ],
   ],
   "variables": {
@@ -31,10 +31,10 @@ exports[`Styles/MaxHeight > handles px value 1`] = `
 exports[`Styles/MaxHeight > handles responsive value 1`] = `
 {
   "classNames": [
-    "_root_bbb71a",
+    "_root_9fb38e",
     [
-      "_--type-literal_bbb71a",
-      "_--type-literal--l_bbb71a",
+      "_--type-literal_9fb38e",
+      "_--type-literal--l_9fb38e",
     ],
   ],
   "variables": {
@@ -44,14 +44,14 @@ exports[`Styles/MaxHeight > handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/MaxHeight > handles undefined value 1`] = `null`;
+exports[`Styles/MaxHeight > handles undefined value 1`] = `{}`;
 
 exports[`Styles/MaxHeight > handles unit value 1`] = `
 {
   "classNames": [
-    "_root_bbb71a",
+    "_root_9fb38e",
     [
-      "_--type-unit_bbb71a",
+      "_--type-unit_9fb38e",
     ],
   ],
   "variables": {

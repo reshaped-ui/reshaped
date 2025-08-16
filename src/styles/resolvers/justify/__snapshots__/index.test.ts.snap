@@ -10,7 +10,7 @@ exports[`Styles/Justify > handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/Justify > handles undefined value 1`] = `null`;
+exports[`Styles/Justify > handles undefined value 1`] = `{}`;
 
 exports[`Styles/Justify > handles value 1`] = `
 {

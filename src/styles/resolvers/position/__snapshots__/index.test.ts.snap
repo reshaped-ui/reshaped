@@ -9,7 +9,7 @@ exports[`Styles/Position > handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/Position > handles undefined value 1`] = `null`;
+exports[`Styles/Position > handles undefined value 1`] = `{}`;
 
 exports[`Styles/Position > handles value 1`] = `
 {

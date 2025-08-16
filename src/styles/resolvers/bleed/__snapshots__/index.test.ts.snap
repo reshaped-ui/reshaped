@@ -3,9 +3,9 @@
 exports[`Styles/Bleed > handles 0 value 1`] = `
 {
   "classNames": [
-    "_root_bc2b46",
+    "_root_173dfa",
     [
-      "_--bleed-false_bc2b46",
+      "_--bleed-false_173dfa",
     ],
   ],
   "variables": {
@@ -17,9 +17,9 @@ exports[`Styles/Bleed > handles 0 value 1`] = `
 exports[`Styles/Bleed > handles positive value 1`] = `
 {
   "classNames": [
-    "_root_bc2b46",
+    "_root_173dfa",
     [
-      "_--bleed_bc2b46",
+      "_--bleed_173dfa",
     ],
   ],
   "variables": {
@@ -31,11 +31,11 @@ exports[`Styles/Bleed > handles positive value 1`] = `
 exports[`Styles/Bleed > handles responsive value 1`] = `
 {
   "classNames": [
-    "_root_bc2b46",
+    "_root_173dfa",
     [
-      "_--bleed_bc2b46",
-      "_--bleed-false--m_bc2b46",
-      "_--bleed-true--l_bc2b46",
+      "_--bleed_173dfa",
+      "_--bleed-false--m_173dfa",
+      "_--bleed-true--l_173dfa",
     ],
   ],
   "variables": {
@@ -46,4 +46,4 @@ exports[`Styles/Bleed > handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/Bleed > handles undefined value 1`] = `null`;
+exports[`Styles/Bleed > handles undefined value 1`] = `{}`;

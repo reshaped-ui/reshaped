@@ -10,7 +10,7 @@ exports[`Styles/Align > handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/Align > handles undefined value 1`] = `null`;
+exports[`Styles/Align > handles undefined value 1`] = `{}`;
 
 exports[`Styles/Align > handles value 1`] = `
 {

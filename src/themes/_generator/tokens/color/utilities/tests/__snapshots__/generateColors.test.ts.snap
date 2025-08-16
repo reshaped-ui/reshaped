@@ -258,7 +258,7 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
     "oklchDark": {
       "c": 0.17600000000000002,
       "h": 26.97,
-      "l": 0.6674079999999999,
+      "l": 0.6874079999999999,
       "mode": "oklch",
     },
   },
@@ -333,7 +333,7 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
     "oklchDark": {
       "c": 0.10400000000000001,
       "h": 153.78,
-      "l": 0.5961759999999999,
+      "l": 0.616176,
       "mode": "oklch",
     },
   },
@@ -361,7 +361,7 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
     "oklchDark": {
       "c": 0,
       "h": 0,
-      "l": 1.08,
+      "l": 1.1,
       "mode": "oklch",
     },
   },
@@ -389,7 +389,7 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
     "oklchDark": {
       "c": 0.16000000000000003,
       "h": 80,
-      "l": 0.8835999999999999,
+      "l": 0.9036,
       "mode": "oklch",
     },
   },
@@ -783,7 +783,7 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
     "oklchDark": {
       "c": 0.17600000000000002,
       "h": 26.97,
-      "l": 0.6674079999999999,
+      "l": 0.6874079999999999,
       "mode": "oklch",
     },
   },
@@ -858,7 +858,7 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
     "oklchDark": {
       "c": 0.10400000000000001,
       "h": 153.78,
-      "l": 0.5961759999999999,
+      "l": 0.616176,
       "mode": "oklch",
     },
   },
@@ -886,7 +886,7 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
     "oklchDark": {
       "c": 0.192,
       "h": 262.67,
-      "l": 0.62984,
+      "l": 0.64984,
       "mode": "oklch",
     },
   },
@@ -914,7 +914,7 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
     "oklchDark": {
       "c": 0.16000000000000003,
       "h": 80,
-      "l": 0.8835999999999999,
+      "l": 0.9036,
       "mode": "oklch",
     },
   },

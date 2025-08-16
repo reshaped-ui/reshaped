@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Styles/AspectRatio > handles 0 value 1`] = `null`;
+exports[`Styles/AspectRatio > handles 0 value 1`] = `{}`;
 
 exports[`Styles/AspectRatio > handles positive value 1`] = `
 {
@@ -20,4 +20,4 @@ exports[`Styles/AspectRatio > handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/AspectRatio > handles undefined value 1`] = `null`;
+exports[`Styles/AspectRatio > handles undefined value 1`] = `{}`;

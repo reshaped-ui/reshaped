@@ -3,9 +3,9 @@
 exports[`Styles/Height > handles % value 1`] = `
 {
   "classNames": [
-    "_root_7f3504",
+    "_root_4e7a72",
     [
-      "_--type-literal_7f3504",
+      "_--type-literal_4e7a72",
     ],
   ],
   "variables": {
@@ -17,9 +17,9 @@ exports[`Styles/Height > handles % value 1`] = `
 exports[`Styles/Height > handles px value 1`] = `
 {
   "classNames": [
-    "_root_7f3504",
+    "_root_4e7a72",
     [
-      "_--type-literal_7f3504",
+      "_--type-literal_4e7a72",
     ],
   ],
   "variables": {
@@ -31,10 +31,10 @@ exports[`Styles/Height > handles px value 1`] = `
 exports[`Styles/Height > handles responsive value 1`] = `
 {
   "classNames": [
-    "_root_7f3504",
+    "_root_4e7a72",
     [
-      "_--type-literal_7f3504",
-      "_--type-literal--l_7f3504",
+      "_--type-literal_4e7a72",
+      "_--type-literal--l_4e7a72",
     ],
   ],
   "variables": {
@@ -44,14 +44,14 @@ exports[`Styles/Height > handles responsive value 1`] = `
 }
 `;
 
-exports[`Styles/Height > handles undefined value 1`] = `null`;
+exports[`Styles/Height > handles undefined value 1`] = `{}`;
 
 exports[`Styles/Height > handles unit value 1`] = `
 {
   "classNames": [
-    "_root_7f3504",
+    "_root_4e7a72",
     [
-      "_--type-unit_7f3504",
+      "_--type-unit_4e7a72",
     ],
   ],
   "variables": {
