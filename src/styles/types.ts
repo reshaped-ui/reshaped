@@ -6,6 +6,7 @@ type Unit = number;
 type Literal = string;
 type Size = Literal | Unit;
 
+export type Margin = Unit;
 export type Padding = Unit;
 export type Inset = Unit | "auto";
 export type AspectRatio = number;
@@ -50,22 +51,43 @@ export type StyleResolver<Value> = (value?: G.Responsive<Value>) => {
 
 export type Mixin = {
 	align?: G.Responsive<Align>;
+	justify?: G.Responsive<Justify>;
+	textAlign?: G.Responsive<TextAlign>;
+
+	radius?: G.Responsive<Radius>;
 	aspectRatio?: G.Responsive<AspectRatio>;
 	bleed?: G.Responsive<Bleed>;
 	border?: G.Responsive<BorderColor>;
+
+	width?: G.Responsive<Width>;
 	height?: G.Responsive<Height>;
+	maxWidth?: G.Responsive<MaxWidth>;
+	maxHeight?: G.Responsive<MaxHeight>;
+	minWidth?: G.Responsive<MinWidth>;
+	minHeight?: G.Responsive<MinHeight>;
+
+	position?: G.Responsive<Position>;
 	inset?: G.Responsive<Inset>;
 	insetTop?: G.Responsive<Inset>;
 	insetBottom?: G.Responsive<Inset>;
 	insetStart?: G.Responsive<Inset>;
 	insetEnd?: G.Responsive<Inset>;
-	justify?: G.Responsive<Justify>;
-	maxHeight?: G.Responsive<MaxHeight>;
-	maxWidth?: G.Responsive<MaxWidth>;
-	minHeight?: G.Responsive<MinHeight>;
-	minWidth?: G.Responsive<MinWidth>;
-	position?: G.Responsive<Position>;
-	radius?: G.Responsive<Radius>;
-	textAlign?: G.Responsive<TextAlign>;
-	width?: G.Responsive<Width>;
+	insetInline?: G.Responsive<Inset>;
+	insetBlock?: G.Responsive<Inset>;
+
+	padding?: G.Responsive<Padding>;
+	paddingTop?: G.Responsive<Padding>;
+	paddingBottom?: G.Responsive<Padding>;
+	paddingStart?: G.Responsive<Padding>;
+	paddingEnd?: G.Responsive<Padding>;
+	paddingInline?: G.Responsive<Padding>;
+	paddingBlock?: G.Responsive<Padding>;
+
+	margin?: G.Responsive<Margin>;
+	marginTop?: G.Responsive<Margin>;
+	marginBottom?: G.Responsive<Margin>;
+	marginStart?: G.Responsive<Margin>;
+	marginEnd?: G.Responsive<Margin>;
+	marginInline?: G.Responsive<Margin>;
+	marginBlock?: G.Responsive<Margin>;
 };

@@ -213,23 +213,6 @@ export const active = {
 	},
 };
 
-export const blurred = {
-	name: "blurred",
-	render: () => (
-		<Example>
-			<Example.Item title="blurred">
-				<View backgroundColor="neutral-faded" height="200px" align="end" justify="end" padding={8}>
-					<Button color="primary">Action</Button>
-
-					<ActionBar position="bottom-end" blurred>
-						<View width={20} height={20} />
-					</ActionBar>
-				</View>
-			</Example.Item>
-		</Example>
-	),
-};
-
 export const padding = {
 	name: "padding, paddingBlock, paddingInline",
 	render: () => (

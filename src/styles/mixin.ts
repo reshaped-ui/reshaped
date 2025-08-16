@@ -3,7 +3,14 @@ import aspectRatio from "styles/resolvers/aspectRatio";
 import bleed from "styles/resolvers/bleed";
 import border from "styles/resolvers/border";
 import height from "styles/resolvers/height";
-import inset, { insetTop, insetBottom, insetStart, insetEnd } from "styles/resolvers/inset";
+import inset, {
+	insetTop,
+	insetBottom,
+	insetStart,
+	insetEnd,
+	insetInline,
+	insetBlock,
+} from "styles/resolvers/inset";
 import justify from "styles/resolvers/justify";
 import maxHeight from "styles/resolvers/maxHeight";
 import maxWidth from "styles/resolvers/maxWidth";
@@ -13,6 +20,14 @@ import position from "styles/resolvers/position";
 import radius from "styles/resolvers/radius";
 import textAlign from "styles/resolvers/textAlign";
 import width from "styles/resolvers/width";
+import padding, {
+	paddingTop,
+	paddingBottom,
+	paddingStart,
+	paddingEnd,
+	paddingInline,
+	paddingBlock,
+} from "styles/resolvers/padding";
 import type { Mixin } from "styles/types";
 import type * as G from "types/global";
 
@@ -22,11 +37,20 @@ const mixinMap = {
 	bleed,
 	border,
 	height,
+	padding,
+	paddingTop,
+	paddingBottom,
+	paddingStart,
+	paddingEnd,
+	paddingInline,
+	paddingBlock,
 	inset,
 	insetTop,
 	insetBottom,
 	insetStart,
 	insetEnd,
+	insetInline,
+	insetBlock,
 	justify,
 	maxHeight,
 	maxWidth,
@@ -36,7 +60,7 @@ const mixinMap = {
 	radius,
 	textAlign,
 	width,
-} as const;
+};
 
 export const resolveMixin = (mixin: Mixin) => {
 	const output = {
@@ -47,6 +71,8 @@ export const resolveMixin = (mixin: Mixin) => {
 	entries.forEach(([key, value]) => {
 		const mixin = mixinMap[key as keyof typeof mixinMap];
 
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore - too complex to resolve inference without manual typing every method
 		const result = mixin(value);
 
 		if (result.variables) output.variables = { ...output.variables, ...result.variables };
