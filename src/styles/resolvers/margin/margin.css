@@ -1,4 +1,4 @@
-@responsive [style*="--rs-m-s"] {
+@responsive [style*="--rs-m-s:"] {
 	@variable --rs-m 0;
 
 	margin: calc(var(--rs-m) * var(--rs-unit-x1));

@@ -1,4 +1,4 @@
-@responsive .root[style*="--rs-bleed-"] {
+@responsive .root[style*="--rs-bleed-s:"] {
 	@variable --rs-bleed 0;
 
 	margin-left: calc(var(--rs-unit-x1) * var(--rs-bleed) * -1);

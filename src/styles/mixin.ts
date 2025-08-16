@@ -1,7 +1,15 @@
 import align from "styles/resolvers/align";
 import aspectRatio from "styles/resolvers/aspectRatio";
 import bleed from "styles/resolvers/bleed";
-import border from "styles/resolvers/border";
+import border, {
+	borderColor,
+	borderTop,
+	borderBottom,
+	borderStart,
+	borderEnd,
+	borderInline,
+	borderBlock,
+} from "styles/resolvers/border";
 import height from "styles/resolvers/height";
 import inset, {
 	insetTop,
@@ -36,6 +44,13 @@ const mixinMap = {
 	aspectRatio,
 	bleed,
 	border,
+	borderTop,
+	borderBottom,
+	borderStart,
+	borderEnd,
+	borderInline,
+	borderBlock,
+	borderColor,
 	height,
 	padding,
 	paddingTop,

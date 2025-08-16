@@ -2,7 +2,6 @@
 
 TODO:
 
-- Add mixin property to all components
 - Add border side, inline, block
 
 Highlights:

@@ -1,9 +1,3 @@
-.root {
-	--rs-border-w: 1px;
-
-	border: var(--rs-border-w) solid var(--rs-border-color);
-}
-
 @responsive .--border {
 	@value neutral {
 		--rs-border-color: var(--rs-color-border-neutral);

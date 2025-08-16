@@ -79,6 +79,12 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		animated,
 		backgroundColor,
 		borderColor,
+		borderTop,
+		borderBottom,
+		borderStart,
+		borderEnd,
+		borderInline,
+		borderBlock,
 		borderRadius,
 		shadow,
 		textAlign,
@@ -105,6 +111,11 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		className,
 		attributes,
 	} = props;
+	const border =
+		props.border ??
+		(borderColor
+			? !borderTop && !borderBottom && !borderStart && !borderEnd && !borderInline && !borderBlock
+			: undefined);
 	let isFlex = !!align || !!justify || !!gap || !!props.direction;
 	const direction = props.direction || (isFlex ? "column" : undefined);
 	const mixinStyles = resolveMixin({
@@ -132,7 +143,14 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		paddingEnd,
 		paddingStart,
 		paddingTop,
-		border: borderColor,
+		borderColor,
+		border,
+		borderTop,
+		borderBottom,
+		borderStart,
+		borderEnd,
+		borderInline,
+		borderBlock,
 		radius: borderRadius,
 	});
 

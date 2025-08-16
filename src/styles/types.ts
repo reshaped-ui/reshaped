@@ -25,6 +25,7 @@ export type Align = "start" | "center" | "end" | "stretch" | "baseline";
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
 
+export type Border = boolean;
 export type BorderColor =
 	| "neutral"
 	| "neutral-faded"
@@ -57,7 +58,15 @@ export type Mixin = {
 	radius?: G.Responsive<Radius>;
 	aspectRatio?: G.Responsive<AspectRatio>;
 	bleed?: G.Responsive<Bleed>;
-	border?: G.Responsive<BorderColor>;
+
+	borderColor?: G.Responsive<BorderColor>;
+	border?: G.Responsive<Border>;
+	borderTop?: G.Responsive<Border>;
+	borderBottom?: G.Responsive<Border>;
+	borderStart?: G.Responsive<Border>;
+	borderEnd?: G.Responsive<Border>;
+	borderInline?: G.Responsive<Border>;
+	borderBlock?: G.Responsive<Border>;
 
 	width?: G.Responsive<Width>;
 	height?: G.Responsive<Height>;

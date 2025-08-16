@@ -634,7 +634,7 @@ export const background = {
 	),
 };
 
-export const border = {
+export const borderColor = {
 	name: "borderColor",
 	render: () => (
 		<Example>
@@ -709,6 +709,82 @@ export const border = {
 					Content
 				</View>
 			</Example.Item>
+		</Example>
+	),
+};
+
+export const border = {
+	name: "border",
+	render: () => (
+		<Example>
+			<Example.Item title="border: true">
+				<View border borderColor="neutral" padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item title="borderTop: true">
+				<View borderTop borderColor="neutral" padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item title="borderBottom: true">
+				<View borderBottom borderColor="neutral" padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item title="borderStart: true">
+				<View borderStart borderColor="neutral" padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item title="borderEnd: true">
+				<View borderEnd borderColor="neutral" padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item title="borderInline: true">
+				<View borderInline borderColor="neutral" padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item title="borderBlock: true">
+				<View borderBlock borderColor="neutral" padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item title="borderTop: true, borderStart: true, ">
+				<View borderColor="neutral" borderTop borderStart padding={4}>
+					Content
+				</View>
+			</Example.Item>
+
+			<Example.Item
+				title={[
+					"responsive",
+					"[s] borderTop: true, borderStart: true",
+					"[m+] borderBottom: true, borderEnd: true",
+				]}
+			>
+				<View
+					borderColor="neutral"
+					borderTop={{ s: true, m: false }}
+					borderStart={{ s: true, m: false }}
+					borderBottom={{ s: false, m: true }}
+					borderEnd={{ s: false, m: true }}
+					padding={4}
+				>
+					Content
+				</View>
+			</Example.Item>
+
+			<div style={{ height: 100 }} />
 		</Example>
 	),
 };

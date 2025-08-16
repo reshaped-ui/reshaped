@@ -52,6 +52,13 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 		| "white"
 		| "black";
 	borderColor?: G.Responsive<TStyles.BorderColor>;
+	border?: G.Responsive<TStyles.Border>;
+	borderTop?: G.Responsive<TStyles.Border>;
+	borderBottom?: G.Responsive<TStyles.Border>;
+	borderStart?: G.Responsive<TStyles.Border>;
+	borderEnd?: G.Responsive<TStyles.Border>;
+	borderInline?: G.Responsive<TStyles.Border>;
+	borderBlock?: G.Responsive<TStyles.Border>;
 	borderRadius?: G.Responsive<TStyles.Radius>;
 	position?: G.Responsive<TStyles.Position>;
 	inset?: G.Responsive<TStyles.Inset>;
