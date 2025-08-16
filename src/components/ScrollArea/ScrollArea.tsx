@@ -3,8 +3,7 @@
 import React, { forwardRef } from "react";
 import { classNames } from "utilities/props";
 import { disableUserSelect, enableUserSelect } from "utilities/dom";
-import getHeightStyles from "styles/resolvers/height";
-import getMaxHeightStyles from "styles/resolvers/maxHeight";
+import { resolveMixin } from "styles/mixin";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import type * as T from "./ScrollArea.types";
 import s from "./ScrollArea.module.css";
@@ -111,15 +110,13 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
 	const scrollableRef = React.useRef<HTMLDivElement>(null);
 	const rootRef = React.useRef<HTMLDivElement>(null);
-	const heightStyles = getHeightStyles(height);
-	const maxHeightStyles = getMaxHeightStyles(maxHeight);
+	const mixinStyles = resolveMixin({ height, maxHeight });
 	const rootClassNames = classNames(
 		s.root,
 		scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
-		heightStyles?.classNames,
 		className
 	);
-	const contentClassNames = classNames(s.content, maxHeightStyles?.classNames);
+	const contentClassNames = classNames(s.content, mixinStyles.classNames);
 
 	const updateScroll = React.useCallback(() => {
 		const scrollableEl = scrollableRef.current;
@@ -188,15 +185,9 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	}, [updateScroll]);
 
 	return (
-		<div
-			{...attributes}
-			ref={rootRef}
-			className={rootClassNames}
-			style={{ ...heightStyles?.variables }}
-		>
-			{}
+		<div {...attributes} ref={rootRef} className={rootClassNames}>
 			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll}>
-				<div className={contentClassNames} style={{ ...maxHeightStyles?.variables }}>
+				<div className={contentClassNames} style={{ ...mixinStyles.variables }}>
 					{children}
 				</div>
 			</div>

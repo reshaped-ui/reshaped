@@ -1,9 +1,5 @@
 import { classNames, responsiveVariables, responsivePropDependency } from "utilities/props";
 import { resolveMixin } from "styles/mixin";
-import getJustifyStyles from "styles/resolvers/justify";
-import getMaxWidthStyles from "styles/resolvers/maxWidth";
-import getWidthStyles from "styles/resolvers/width";
-import getHeightStyles from "styles/resolvers/height";
 import type * as T from "./Grid.types";
 import s from "./Grid.module.css";
 
@@ -66,11 +62,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		as: TagName = "div" as any,
 		attributes,
 	} = props;
-	const mixinStyles = resolveMixin({ align });
-	const justifyStyles = getJustifyStyles(justify);
-	const maxWidthStyles = getMaxWidthStyles(maxWidth);
-	const widthStyles = getWidthStyles(width);
-	const heightStyles = getHeightStyles(height);
+	const mixinStyles = resolveMixin({ align, justify, width, height, maxWidth });
 	const resolvedRows = responsivePropDependency(rows, (value) =>
 		typeof value === "number" ? `repeat(${value}, 1fr)` : value
 	);
@@ -83,14 +75,7 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	`
 			: undefined
 	);
-	const rootClassNames = classNames(
-		s.root,
-		mixinStyles.classNames,
-		maxWidthStyles?.classNames,
-		widthStyles?.classNames,
-		heightStyles?.classNames,
-		className
-	);
+	const rootClassNames = classNames(s.root, mixinStyles.classNames, className);
 	const rootVariables = {
 		...attributes?.style,
 		...responsiveVariables("--rs-grid-gap", gap),
@@ -101,10 +86,6 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...responsiveVariables("--rs-grid-auto-columns", autoColumns),
 		...responsiveVariables("--rs-grid-auto-rows", autoRows),
 		...mixinStyles.variables,
-		...justifyStyles?.variables,
-		...maxWidthStyles?.variables,
-		...widthStyles?.variables,
-		...heightStyles?.variables,
 	};
 
 	return (

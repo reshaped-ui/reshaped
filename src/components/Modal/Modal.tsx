@@ -15,7 +15,7 @@ import Overlay from "components/Overlay";
 import useElementId from "hooks/useElementId";
 import type * as T from "./Modal.types";
 import s from "./Modal.module.css";
-import getPaddingStyles from "styles/resolvers/padding";
+import { resolveMixin } from "styles/mixin";
 import useHandlerRef from "hooks/useHandlerRef";
 
 const DRAG_THRESHOLD = 32;
@@ -103,7 +103,7 @@ const Modal: React.FC<T.Props> & {
 	const dragDirectionRef = React.useRef(0);
 	const [dragDistance, setDragDistance] = React.useState(0);
 	const [hideProgress, setHideProgress] = React.useState(0);
-	const paddingStyles = getPaddingStyles(padding);
+	const mixinStyles = resolveMixin({ padding });
 
 	const value = React.useMemo(
 		() => ({
@@ -267,7 +267,8 @@ const Modal: React.FC<T.Props> & {
 					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],
 					containerRef && s["--contained"],
-					responsiveClassNames(s, "--position", position)
+					responsiveClassNames(s, "--position", position),
+					mixinStyles.classNames
 				);
 
 				return (
@@ -277,7 +278,7 @@ const Modal: React.FC<T.Props> & {
 							{...attributes}
 							style={
 								{
-									...paddingStyles?.variables,
+									...mixinStyles.variables,
 									...responsiveVariables("--rs-modal-size", size),
 									"--rs-modal-drag":
 										Math.abs(dragDistance) < DRAG_THRESHOLD

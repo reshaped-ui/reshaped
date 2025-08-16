@@ -1,41 +1,41 @@
 @responsive [style*="--rs-p-s"] {
 	@variable --rs-p 0;
 
-	padding: calc(var(--rs-p) * var(--rs-unit-x1));
+	padding: calc(var(--rs-p) * var(--rs-unit-x1) - var(--rs-border-w, 0px));
 }
 
 @responsive [style*="--rs-p-top-"] {
 	@variable --rs-p-top 0;
 
-	padding-top: calc(var(--rs-p-top) * var(--rs-unit-x1));
+	padding-top: calc(var(--rs-p-top) * var(--rs-unit-x1) - var(--rs-border-w, 0px));
 }
 
 @responsive [style*="--rs-p-bottom-"] {
 	@variable --rs-p-bottom 0;
 
-	padding-bottom: calc(var(--rs-p-bottom) * var(--rs-unit-x1));
+	padding-bottom: calc(var(--rs-p-bottom) * var(--rs-unit-x1) - var(--rs-border-w, 0px));
 }
 
 @responsive [style*="--rs-p-start-"] {
 	@variable --rs-p-start 0;
 
-	padding-inline-start: calc(var(--rs-p-start) * var(--rs-unit-x1));
+	padding-inline-start: calc(var(--rs-p-start) * var(--rs-unit-x1) - var(--rs-border-w, 0px));
 }
 
 @responsive [style*="--rs-p-end-"] {
 	@variable --rs-p-end 0;
 
-	padding-inline-end: calc(var(--rs-p-end) * var(--rs-unit-x1));
+	padding-inline-end: calc(var(--rs-p-end) * var(--rs-unit-x1) - var(--rs-border-w, 0px));
 }
 
 @responsive [style*="--rs-p-block-"] {
 	@variable --rs-p-block 0;
 
-	padding-block: calc(var(--rs-p-block) * var(--rs-unit-x1));
+	padding-block: calc(var(--rs-p-block) * var(--rs-unit-x1) - var(--rs-border-w, 0px));
 }
 
 @responsive [style*="--rs-p-inline-"] {
 	@variable --rs-p-inline 0;
 
-	padding-inline: calc(var(--rs-p-inline) * var(--rs-unit-x1));
+	padding-inline: calc(var(--rs-p-inline) * var(--rs-unit-x1) - var(--rs-border-w, 0px));
 }

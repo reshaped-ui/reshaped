@@ -6,14 +6,13 @@
 	border-radius: var(--rs-radius-medium);
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	border: 1px solid var(--rs-color-border-neutral-faded);
-	box-shadow: var(--rs-shadow-overlay);
+	box-shadow: var(--rs-shadow-border-faded), var(--rs-shadow-overlay);
 	overflow: hidden;
 	min-width: 220px;
 }
 
 .content--variant-elevated.content--elevation-raised {
-	box-shadow: var(--rs-shadow-raised);
+	box-shadow: var(--rs-shadow-border-faded), var(--rs-shadow-raised);
 }
 
 .content.content--has-width {

@@ -2,13 +2,9 @@
 
 import React from "react";
 import { classNames } from "utilities/props";
+import { resolveMixin } from "styles/mixin";
 import * as T from "./Image.types";
 import s from "./Image.module.css";
-import getRadiusStyles from "styles/resolvers/radius";
-import getWidthStyles from "styles/resolvers/width";
-import getHeightStyles from "styles/resolvers/height";
-import getAspectRatioStyles from "styles/resolvers/aspectRatio";
-import getMaxWidthStyles from "styles/resolvers/maxWidth";
 
 const Image: React.FC<T.Props> = (props) => {
 	const {
@@ -29,17 +25,10 @@ const Image: React.FC<T.Props> = (props) => {
 		renderImage,
 	} = props;
 	const [status, setStatus] = React.useState("loading");
-	const radiusStyles = getRadiusStyles(borderRadius);
-	const widthStyles = getWidthStyles(width);
-	const heightStyles = getHeightStyles(height);
-	const maxWidthStyles = getMaxWidthStyles(maxWidth);
-	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
+	const mixinStyles = resolveMixin({ radius: borderRadius, width, height, maxWidth, aspectRatio });
 	const baseClassNames = classNames(
 		s.root,
-		radiusStyles?.classNames,
-		widthStyles?.classNames,
-		heightStyles?.classNames,
-		maxWidthStyles?.classNames,
+		mixinStyles.classNames,
 		displayMode && s[`--display-mode-${displayMode}`],
 		className
 	);
@@ -48,10 +37,7 @@ const Image: React.FC<T.Props> = (props) => {
 	const isFallback = (status === "error" || !src) && !!fallback;
 	const style = {
 		...attributes?.style,
-		...widthStyles?.variables,
-		...heightStyles?.variables,
-		...maxWidthStyles?.variables,
-		...aspectRatioStyles?.variables,
+		...mixinStyles.variables,
 	} as React.CSSProperties;
 
 	const handleLoad = (e: React.SyntheticEvent) => {

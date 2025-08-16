@@ -3,7 +3,7 @@ import Flyout, { useFlyoutContext, type FlyoutProps } from "components/Flyout";
 import Dismissible, { type DismissibleProps } from "components/Dismissible";
 import type * as T from "./Popover.types";
 import s from "./Popover.module.css";
-import getPaddingStyles from "styles/resolvers/padding";
+import { resolveMixin } from "styles/mixin";
 
 const Popover: React.FC<T.Props> & {
 	Dismissible: typeof PopoverDismissible;
@@ -21,12 +21,13 @@ const Popover: React.FC<T.Props> & {
 	const padding = props.padding ?? (variant === "headless" ? 0 : 4);
 	const trapFocusMode =
 		props.trapFocusMode ?? (triggerType === "hover" ? "content-menu" : undefined);
-	const paddingStyles = getPaddingStyles(padding);
+	const mixinStyles = resolveMixin({ padding });
 	const contentClassName = classNames(
 		s.content,
 		!!width && s["content--has-width"],
 		variant && s[`content--variant-${variant}`],
-		elevation && s[`content--elevation-${elevation}`]
+		elevation && s[`content--elevation-${elevation}`],
+		mixinStyles.classNames
 	);
 
 	return (
@@ -37,7 +38,7 @@ const Popover: React.FC<T.Props> & {
 			triggerType={triggerType}
 			width={width}
 			contentClassName={contentClassName}
-			contentAttributes={{ style: { ...paddingStyles?.variables } }}
+			contentAttributes={{ style: { ...mixinStyles.variables } }}
 		/>
 	);
 };

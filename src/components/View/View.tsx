@@ -5,19 +5,6 @@ import Hidden from "components/Hidden";
 import type * as G from "types/global";
 import type * as T from "./View.types";
 import s from "./View.module.css";
-import getRadiusStyles from "styles/resolvers/radius";
-import getBleedStyles from "styles/resolvers/bleed";
-import getWidthStyles from "styles/resolvers/width";
-import getHeightStyles from "styles/resolvers/height";
-import getMaxWidthStyles from "styles/resolvers/maxWidth";
-import getMaxHeightStyles from "styles/resolvers/maxHeight";
-import getMinWidthStyles from "styles/resolvers/minWidth";
-import getMinHeightStyles from "styles/resolvers/minHeight";
-import getPositionStyles from "styles/resolvers/position";
-import getAspectRatioStyles from "styles/resolvers/aspectRatio";
-import getBorderStyles from "styles/resolvers/border";
-import getTextAlignStyles from "styles/resolvers/textAlign";
-import getJustifyStyles from "styles/resolvers/justify";
 import { resolveMixin } from "styles/mixin";
 
 const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
@@ -120,20 +107,34 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	} = props;
 	let isFlex = !!align || !!justify || !!gap || !!props.direction;
 	const direction = props.direction || (isFlex ? "column" : undefined);
-	const radiusStyles = getRadiusStyles(borderRadius);
-	const bleedStyles = getBleedStyles(bleed);
-	const widthStyles = getWidthStyles(width);
-	const heightStyles = getHeightStyles(height);
-	const maxWidthStyles = getMaxWidthStyles(maxWidth);
-	const maxHeightStyles = getMaxHeightStyles(maxHeight);
-	const minWidthStyles = getMinWidthStyles(minWidth);
-	const minHeightStyles = getMinHeightStyles(minHeight);
-	const positionStyles = getPositionStyles(position);
-	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
-	const borderStyles = getBorderStyles(borderColor);
-	const textAlignStyles = getTextAlignStyles(textAlign);
-	const justifyStyles = getJustifyStyles(justify);
-	const mixinStyles = resolveMixin({ align, inset, insetTop, insetBottom, insetStart, insetEnd });
+	const mixinStyles = resolveMixin({
+		align,
+		inset,
+		insetTop,
+		insetBottom,
+		insetStart,
+		insetEnd,
+		bleed,
+		width,
+		height,
+		maxWidth,
+		maxHeight,
+		minWidth,
+		minHeight,
+		position,
+		aspectRatio,
+		textAlign,
+		justify,
+		padding,
+		paddingInline,
+		paddingBlock,
+		paddingBottom,
+		paddingEnd,
+		paddingStart,
+		paddingTop,
+		border: borderColor,
+		radius: borderRadius,
+	});
 
 	let renderedItemIndex = 0;
 	// If wrap is not defined, it can be set based on item grow and split usage
@@ -244,22 +245,11 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		s.root,
 		className,
 		mixinStyles.classNames,
-		radiusStyles?.classNames,
-		bleedStyles?.classNames,
-		widthStyles?.classNames,
-		heightStyles?.classNames,
-		maxWidthStyles?.classNames,
-		maxHeightStyles?.classNames,
-		minWidthStyles?.classNames,
-		minHeightStyles?.classNames,
-		borderStyles?.classNames,
 		backgroundColor && s[`--bg-${backgroundColor}`],
 		shadow && s[`--shadow-${shadow}`],
 		overflow && s[`--overflow-${overflow}`],
 		animated && s["--animated"],
 		divided && s["--divided"],
-		(padding !== undefined || paddingInline !== undefined || paddingBlock !== undefined) &&
-			s["--padding"],
 		(isFlex || nowrap) && s["--flex"],
 		...responsiveClassNames(s, "--direction", direction),
 		// Wrap and nowrap are separate here because inverting any of them could result into a false value which will be ignored by classNames
@@ -273,23 +263,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const rootVariables = {
 		...attributes?.style,
 		...responsiveVariables("--rs-view-gap", gap),
-		...responsiveVariables("--rs-view-p-vertical", paddingBlock || padding),
-		...responsiveVariables("--rs-view-p-horizontal", paddingInline || padding),
-		...responsiveVariables("--rs-view-p-bottom", paddingBottom),
-		...responsiveVariables("--rs-view-p-top", paddingTop),
-		...responsiveVariables("--rs-view-p-start", paddingStart),
-		...responsiveVariables("--rs-view-p-end", paddingEnd),
-		...bleedStyles?.variables,
-		...widthStyles?.variables,
-		...heightStyles?.variables,
-		...aspectRatioStyles?.variables,
-		...maxWidthStyles?.variables,
-		...maxHeightStyles?.variables,
-		...minWidthStyles?.variables,
-		...minHeightStyles?.variables,
-		...justifyStyles?.variables,
-		...positionStyles?.variables,
-		...textAlignStyles?.variables,
 		...mixinStyles.variables,
 		...(zIndex ? { "--rs-view-z": zIndex } : {}),
 	};

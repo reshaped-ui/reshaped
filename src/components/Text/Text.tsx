@@ -1,5 +1,5 @@
 import { classNames, responsiveClassNames } from "utilities/props";
-import getTextAlignStyles from "styles/resolvers/textAlign";
+import { resolveMixin } from "styles/mixin";
 import type * as T from "./Text.types";
 import s from "./Text.module.css";
 
@@ -28,7 +28,7 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 	} = props;
 	const largestVariant =
 		typeof variant === "string" ? variant : variant?.xl || variant?.l || variant?.m || variant?.s;
-	const alignStyles = getTextAlignStyles(align);
+	const mixinStyles = resolveMixin({ textAlign: align });
 
 	// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,11 +44,12 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 		maxLines === 1 && s["--break-all"],
 		wrap && s[`--wrap-${wrap}`],
 		monospace && s["--monospace"],
-		className
+		className,
+		mixinStyles.classNames
 	);
 	const style = {
 		...attributes?.style,
-		...alignStyles?.variables,
+		...mixinStyles.variables,
 		"--rs-text-lines": maxLines,
 	};
 

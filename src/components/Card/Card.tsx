@@ -3,10 +3,7 @@ import { classNames } from "utilities/props";
 import Actionable from "components/Actionable";
 import type * as T from "./Card.types";
 import s from "./Card.module.css";
-import getRadiusStyles from "styles/resolvers/radius";
-import getBleedStyles from "styles/resolvers/bleed";
-import getPaddingStyles from "styles/resolvers/padding";
-import getHeightStyles from "styles/resolvers/height";
+import { resolveMixin } from "styles/mixin";
 
 const Card = forwardRef(
 	<As extends keyof React.JSX.IntrinsicElements = "div">(
@@ -29,16 +26,16 @@ const Card = forwardRef(
 			as: TagName = "div" as any,
 		} = props;
 		const isActionable = !!href || !!onClick;
-		const radiusStyles = getRadiusStyles("medium");
-		const bleedStyles = getBleedStyles(bleed);
-		const paddingStyles = getPaddingStyles(padding);
-		const heightStyles = getHeightStyles(height);
+		const mixinStyles = resolveMixin({
+			radius: "medium",
+			bleed,
+			height,
+			padding,
+		});
 
 		const rootClassNames = classNames(
 			s.root,
-			radiusStyles?.classNames,
-			bleedStyles?.classNames,
-			heightStyles?.classNames,
+			mixinStyles.classNames,
 			isActionable && s["--actionable"],
 			elevated && s["--elevated"],
 			selected && s["--selected"],
@@ -47,9 +44,7 @@ const Card = forwardRef(
 
 		const style = {
 			...attributes?.style,
-			...bleedStyles?.variables,
-			...paddingStyles?.variables,
-			...heightStyles?.variables,
+			...mixinStyles.variables,
 		};
 
 		if (isActionable) {
