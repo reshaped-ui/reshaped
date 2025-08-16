@@ -221,7 +221,7 @@ export const blurred = {
 				<View backgroundColor="neutral-faded" height="200px" align="end" justify="end" padding={8}>
 					<Button color="primary">Action</Button>
 
-					<ActionBar position="bottom-end" blurred>
+					<ActionBar position="bottom-end">
 						<View width={20} height={20} />
 					</ActionBar>
 				</View>
