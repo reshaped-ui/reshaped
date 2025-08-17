@@ -379,21 +379,21 @@
 
 .--item-width-equal {
 	max-width: none;
-}
 
-.--item-width-equal .inner {
-	flex-wrap: wrap;
-	overflow: hidden;
-}
+	& .inner {
+		flex-wrap: wrap;
+	}
 
-.--item-width-equal .list {
-	display: flex;
-}
+	& .list {
+		display: flex;
+		overflow: hidden;
+	}
 
-.--item-width-equal .listItem {
-	flex-grow: 1;
-	flex-basis: 0;
-	margin: 0;
+	& .listItem {
+		flex-grow: 1;
+		flex-basis: 0;
+		margin: 0;
+	}
 }
 
 [dir="rtl"] .--fade-start .inner,

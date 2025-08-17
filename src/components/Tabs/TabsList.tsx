@@ -44,7 +44,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		elScrollableRef,
 	} = useTabs();
 	const [rtl] = useRTL();
-	const fadeSide = useFadeSide(elScrollableRef);
+	const fadeSide = useFadeSide(elScrollableRef, { disabled: itemWidth === "equal" });
 	const rootClassNames = classNames(
 		s.root,
 		size && s[`--size-${size}`],
