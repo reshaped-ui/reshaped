@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/TextAlign > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-text-align-l": "end",
+    "--rs-text-align-m": "center",
+    "--rs-text-align-s": "start",
+  },
+}
+`;
+
+exports[`Styles/TextAlign > handles undefined value 1`] = `{}`;
+
+exports[`Styles/TextAlign > handles value 1`] = `
+{
+  "variables": {
+    "--rs-text-align-s": "start",
+  },
+}
+`;

@@ -1,0 +1,41 @@
+@responsive [style*="--rs-inset-s:"] {
+	@variable --rs-inset 0;
+
+	inset: calc(var(--rs-inset) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-inset-inline-"] {
+	@variable --rs-inset-inline 0;
+
+	inset-inline: calc(var(--rs-inset-inline) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-inset-block-"] {
+	@variable --rs-inset-block 0;
+
+	inset-block: calc(var(--rs-inset-block) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-inset-end-"] {
+	@variable --rs-inset-end 0;
+
+	inset-inline-end: calc(var(--rs-inset-end) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-inset-start-"] {
+	@variable --rs-inset-start 0;
+
+	inset-inline-start: calc(var(--rs-inset-start) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-inset-top-"] {
+	@variable --rs-inset-top 0;
+
+	inset-block-start: calc(var(--rs-inset-top) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-inset-bottom-"] {
+	@variable --rs-inset-bottom 0;
+
+	inset-block-end: calc(var(--rs-inset-bottom) * var(--rs-unit-x1));
+}

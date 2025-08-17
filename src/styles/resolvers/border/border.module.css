@@ -1,0 +1,53 @@
+@responsive .--border {
+	@value neutral {
+		--rs-border-color: var(--rs-color-border-neutral);
+	}
+
+	@value neutral-faded {
+		--rs-border-color: var(--rs-color-border-neutral-faded);
+	}
+
+	@value positive {
+		--rs-border-color: var(--rs-color-border-positive);
+	}
+
+	@value positive-faded {
+		--rs-border-color: var(--rs-color-border-positive-faded);
+	}
+
+	@value warning {
+		--rs-border-color: var(--rs-color-border-warning);
+	}
+
+	@value warning-faded {
+		--rs-border-color: var(--rs-color-border-warning-faded);
+	}
+
+	@value critical {
+		--rs-border-color: var(--rs-color-border-critical);
+	}
+
+	@value critical-faded {
+		--rs-border-color: var(--rs-color-border-critical-faded);
+	}
+
+	@value primary {
+		--rs-border-color: var(--rs-color-border-primary);
+	}
+
+	@value primary-faded {
+		--rs-border-color: var(--rs-color-border-primary-faded);
+	}
+
+	@value disabled {
+		--rs-border-color: var(--rs-color-border-disabled);
+	}
+
+	@value brand {
+		--rs-border-color: var(--rs-color-brand);
+	}
+
+	@value transparent {
+		--rs-border-color: transparent;
+	}
+}

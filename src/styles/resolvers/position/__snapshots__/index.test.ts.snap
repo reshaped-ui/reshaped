@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/Position > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-position-l": "fixed",
+    "--rs-position-s": "absolute",
+  },
+}
+`;
+
+exports[`Styles/Position > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Position > handles value 1`] = `
+{
+  "variables": {
+    "--rs-position-s": "absolute",
+  },
+}
+`;

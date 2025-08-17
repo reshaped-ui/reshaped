@@ -124,7 +124,7 @@ export const handlers: StoryObj<{
 		await sleep(100);
 
 		// Close by pressing Escape
-		await userEvent.keyboard("{Escape/}");
+		await userEvent.keyboard("{Escape}");
 
 		expect(args.handleClose).toHaveBeenCalledTimes(2);
 		expect(args.handleClose).toHaveBeenCalledWith({ reason: "escape-key" });
@@ -160,9 +160,12 @@ export const disableCloseOnClick: StoryObj<{
 
 		await userEvent.click(overlay);
 
+		// TODO: Fails CLI tests in Storybook without a timeout
+		await sleep(100);
+
 		expect(args.handleClose).toHaveBeenCalledTimes(0);
 
-		await userEvent.keyboard("{Escape/}");
+		await userEvent.keyboard("{Escape}");
 
 		expect(args.handleClose).toHaveBeenCalledTimes(1);
 	},

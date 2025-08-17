@@ -1,0 +1,13 @@
+@responsive .root[style*="--rs-max-w-s:"] {
+	@variable --rs-max-w none;
+}
+
+@responsive .--type {
+	@value literal {
+		max-width: var(--rs-max-w) !important;
+	}
+
+	@value unit {
+		max-width: calc(var(--rs-max-w) * var(--rs-unit-x1)) !important;
+	}
+}

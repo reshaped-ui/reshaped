@@ -2,8 +2,7 @@
 
 import React from "react";
 import { classNames, responsiveVariables } from "utilities/props";
-import getWidthStyles from "styles/width";
-import getMinWidthStyles from "styles/minWidth";
+import { resolveMixin } from "styles/mixin";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
 import useFadeSide from "hooks/_private/useFadeSide";
@@ -24,20 +23,17 @@ const TableCellPrivate: React.FC<T.PrivateCellProps> = (props) => {
 		attributes,
 	} = props;
 	const width = props.width === "auto" ? "0px" : props.width;
-	const widthStyles = getWidthStyles(width);
-	const minWidthStyles = getMinWidthStyles(minWidth || width);
+	const mixinStyles = resolveMixin({ width, minWidth });
 	const headingClassNames = classNames(
 		s.cell,
-		widthStyles?.classNames,
-		minWidthStyles?.classNames,
+		mixinStyles.classNames,
 		(width === 0 || width === "0px") && s["cell--width-auto"],
 		align && s[`cell--align-${align}`],
 		verticalAlign && s[`cell--valign-${verticalAlign}`],
 		className
 	);
 	const headingStyle = {
-		...widthStyles?.variables,
-		...minWidthStyles?.variables,
+		...mixinStyles.variables,
 		...responsiveVariables("--rs-table-p-vertical", paddingBlock ?? padding),
 		...responsiveVariables("--rs-table-p-horizontal", paddingInline ?? padding),
 	};

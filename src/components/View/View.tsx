@@ -5,21 +5,7 @@ import Hidden from "components/Hidden";
 import type * as G from "types/global";
 import type * as T from "./View.types";
 import s from "./View.module.css";
-import getRadiusStyles from "styles/radius";
-import getBleedStyles from "styles/bleed";
-import getWidthStyles from "styles/width";
-import getHeightStyles from "styles/height";
-import getMaxWidthStyles from "styles/maxWidth";
-import getMaxHeightStyles from "styles/maxHeight";
-import getMinWidthStyles from "styles/minWidth";
-import getMinHeightStyles from "styles/minHeight";
-import getPositionStyles from "styles/position";
-import getInsetStyles from "styles/inset";
-import getAspectRatioStyles from "styles/aspectRatio";
-import getBorderStyles from "styles/border";
-import getTextAlignStyles from "styles/textAlign";
-import getAlignStyles from "styles/align";
-import getJustifyStyles from "styles/justify";
+import { resolveMixin } from "styles/mixin";
 
 const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
 	const {
@@ -93,6 +79,12 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		animated,
 		backgroundColor,
 		borderColor,
+		borderTop,
+		borderBottom,
+		borderStart,
+		borderEnd,
+		borderInline,
+		borderBlock,
 		borderRadius,
 		shadow,
 		textAlign,
@@ -119,27 +111,48 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		className,
 		attributes,
 	} = props;
+	const border =
+		props.border ??
+		(borderColor
+			? !borderTop && !borderBottom && !borderStart && !borderEnd && !borderInline && !borderBlock
+			: undefined);
 	let isFlex = !!align || !!justify || !!gap || !!props.direction;
 	const direction = props.direction || (isFlex ? "column" : undefined);
-	const radiusStyles = getRadiusStyles(borderRadius);
-	const bleedStyles = getBleedStyles(bleed);
-	const widthStyles = getWidthStyles(width);
-	const heightStyles = getHeightStyles(height);
-	const maxWidthStyles = getMaxWidthStyles(maxWidth);
-	const maxHeightStyles = getMaxHeightStyles(maxHeight);
-	const minWidthStyles = getMinWidthStyles(minWidth);
-	const minHeightStyles = getMinHeightStyles(minHeight);
-	const positionStyles = getPositionStyles(position);
-	const insetStyles = getInsetStyles(inset);
-	const insetTopStyles = getInsetStyles(insetTop, "top");
-	const insetBottomStyles = getInsetStyles(insetBottom, "bottom");
-	const insetStartStyles = getInsetStyles(insetStart, "start");
-	const insetEndStyles = getInsetStyles(insetEnd, "end");
-	const aspectRatioStyles = getAspectRatioStyles(aspectRatio);
-	const borderStyles = getBorderStyles(borderColor);
-	const textAlignStyles = getTextAlignStyles(textAlign);
-	const alignStyles = getAlignStyles(align);
-	const justifyStyles = getJustifyStyles(justify);
+	const mixinStyles = resolveMixin({
+		align,
+		inset,
+		insetTop,
+		insetBottom,
+		insetStart,
+		insetEnd,
+		bleed,
+		width,
+		height,
+		maxWidth,
+		maxHeight,
+		minWidth,
+		minHeight,
+		position,
+		aspectRatio,
+		textAlign,
+		justify,
+		padding,
+		paddingInline,
+		paddingBlock,
+		paddingBottom,
+		paddingEnd,
+		paddingStart,
+		paddingTop,
+		borderColor,
+		border,
+		borderTop,
+		borderBottom,
+		borderStart,
+		borderEnd,
+		borderInline,
+		borderBlock,
+		radius: borderRadius,
+	});
 
 	let renderedItemIndex = 0;
 	// If wrap is not defined, it can be set based on item grow and split usage
@@ -249,22 +262,12 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const rootClassNames = classNames(
 		s.root,
 		className,
-		radiusStyles?.classNames,
-		bleedStyles?.classNames,
-		widthStyles?.classNames,
-		heightStyles?.classNames,
-		maxWidthStyles?.classNames,
-		maxHeightStyles?.classNames,
-		minWidthStyles?.classNames,
-		minHeightStyles?.classNames,
-		borderStyles?.classNames,
+		mixinStyles.classNames,
 		backgroundColor && s[`--bg-${backgroundColor}`],
 		shadow && s[`--shadow-${shadow}`],
 		overflow && s[`--overflow-${overflow}`],
 		animated && s["--animated"],
 		divided && s["--divided"],
-		(padding !== undefined || paddingInline !== undefined || paddingBlock !== undefined) &&
-			s["--padding"],
 		(isFlex || nowrap) && s["--flex"],
 		...responsiveClassNames(s, "--direction", direction),
 		// Wrap and nowrap are separate here because inverting any of them could result into a false value which will be ignored by classNames
@@ -278,29 +281,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const rootVariables = {
 		...attributes?.style,
 		...responsiveVariables("--rs-view-gap", gap),
-		...responsiveVariables("--rs-view-p-vertical", paddingBlock || padding),
-		...responsiveVariables("--rs-view-p-horizontal", paddingInline || padding),
-		...responsiveVariables("--rs-view-p-bottom", paddingBottom),
-		...responsiveVariables("--rs-view-p-top", paddingTop),
-		...responsiveVariables("--rs-view-p-start", paddingStart),
-		...responsiveVariables("--rs-view-p-end", paddingEnd),
-		...bleedStyles?.variables,
-		...widthStyles?.variables,
-		...heightStyles?.variables,
-		...aspectRatioStyles?.variables,
-		...maxWidthStyles?.variables,
-		...maxHeightStyles?.variables,
-		...minWidthStyles?.variables,
-		...minHeightStyles?.variables,
-		...insetStyles?.variables,
-		...insetTopStyles?.variables,
-		...insetBottomStyles?.variables,
-		...insetStartStyles?.variables,
-		...insetEndStyles?.variables,
-		...alignStyles?.variables,
-		...justifyStyles?.variables,
-		...positionStyles?.variables,
-		...textAlignStyles?.variables,
+		...mixinStyles.variables,
 		...(zIndex ? { "--rs-view-z": zIndex } : {}),
 	};
 

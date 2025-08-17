@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/MinHeight > handles % value 1`] = `
+{
+  "classNames": [
+    "_root_940136",
+    [
+      "_--type-literal_940136",
+    ],
+  ],
+  "variables": {
+    "--rs-min-h-s": "50%",
+  },
+}
+`;
+
+exports[`Styles/MinHeight > handles px value 1`] = `
+{
+  "classNames": [
+    "_root_940136",
+    [
+      "_--type-literal_940136",
+    ],
+  ],
+  "variables": {
+    "--rs-min-h-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MinHeight > handles responsive value 1`] = `
+{
+  "classNames": [
+    "_root_940136",
+    [
+      "_--type-literal_940136",
+      "_--type-literal--l_940136",
+    ],
+  ],
+  "variables": {
+    "--rs-min-h-l": "50%",
+    "--rs-min-h-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MinHeight > handles undefined value 1`] = `{}`;
+
+exports[`Styles/MinHeight > handles unit value 1`] = `
+{
+  "classNames": [
+    "_root_940136",
+    [
+      "_--type-unit_940136",
+    ],
+  ],
+  "variables": {
+    "--rs-min-h-s": 5,
+  },
+}
+`;

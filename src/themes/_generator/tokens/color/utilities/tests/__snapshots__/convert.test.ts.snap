@@ -10,9 +10,9 @@ exports[`themes/tokens/color/utilities/convert > hexToOklch > black 1`] = `
 
 exports[`themes/tokens/color/utilities/convert > hexToOklch > red 1`] = `
 {
-  "c": 0.25768330773615683,
-  "h": 29.2338851923426,
-  "l": 0.6279553606145515,
+  "c": 0.2576833038053608,
+  "h": 29.233880279627854,
+  "l": 0.6279553639214311,
   "mode": "oklch",
 }
 `;
@@ -20,7 +20,7 @@ exports[`themes/tokens/color/utilities/convert > hexToOklch > red 1`] = `
 exports[`themes/tokens/color/utilities/convert > hexToOklch > white 1`] = `
 {
   "c": 0,
-  "l": 0.999999993473546,
+  "l": 1.0000000000000002,
   "mode": "oklch",
 }
 `;
@@ -36,7 +36,7 @@ exports[`themes/tokens/color/utilities/convert > oklchToRgb > black 1`] = `
 
 exports[`themes/tokens/color/utilities/convert > oklchToRgb > red 1`] = `
 {
-  "b": 0,
+  "b": -0,
   "g": 0,
   "mode": "rgb",
   "r": 1,
@@ -56,7 +56,7 @@ exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > hex 1`] = `
 {
   "oklch": {
     "c": 0,
-    "l": 0.999999993473546,
+    "l": 1.0000000000000002,
     "mode": "oklch",
   },
   "oklchDark": undefined,
@@ -67,7 +67,7 @@ exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > hex and hex
 {
   "oklch": {
     "c": 0,
-    "l": 0.999999993473546,
+    "l": 1.0000000000000002,
     "mode": "oklch",
   },
   "oklchDark": {
@@ -82,7 +82,7 @@ exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > oklch 1`] =
 {
   "oklch": {
     "c": 0,
-    "l": 0.999999993473546,
+    "l": 1.0000000000000002,
     "mode": "oklch",
   },
   "oklchDark": undefined,
@@ -93,7 +93,7 @@ exports[`themes/tokens/color/utilities/convert > tokenToOklchToken > oklch and o
 {
   "oklch": {
     "c": 0,
-    "l": 0.999999993473546,
+    "l": 1.0000000000000002,
     "mode": "oklch",
   },
   "oklchDark": {

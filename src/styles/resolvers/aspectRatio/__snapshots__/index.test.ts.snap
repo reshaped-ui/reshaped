@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/AspectRatio > handles 0 value 1`] = `{}`;
+
+exports[`Styles/AspectRatio > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-ratio-s": 0.5,
+  },
+}
+`;
+
+exports[`Styles/AspectRatio > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-ratio-l": 2,
+    "--rs-ratio-m": 0,
+    "--rs-ratio-s": 4,
+  },
+}
+`;
+
+exports[`Styles/AspectRatio > handles undefined value 1`] = `{}`;

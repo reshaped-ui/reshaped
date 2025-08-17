@@ -1,5 +1,9 @@
 ## 3.7.0
 
+TODO:
+
+- Add border side, inline, block
+
 Highlights:
 
 - Accessibility

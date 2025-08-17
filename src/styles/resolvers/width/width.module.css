@@ -1,0 +1,13 @@
+@responsive .root[style*="--rs-w-s:"] {
+	@variable --rs-w auto;
+}
+
+@responsive .--type {
+	@value literal {
+		width: var(--rs-w) !important;
+	}
+
+	@value unit {
+		width: calc(var(--rs-w) * var(--rs-unit-x1)) !important;
+	}
+}

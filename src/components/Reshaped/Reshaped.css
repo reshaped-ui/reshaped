@@ -1,6 +1,7 @@
 @layer rs.reset {
 	[data-rs-theme] {
 		--rs-radius-circular: 9999px;
+		--rs-shadow-border-faded: 0px 0px 0px 1px var(--rs-color-border-neutral-faded);
 	}
 
 	[data-rs-theme] body,

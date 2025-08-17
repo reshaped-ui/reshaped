@@ -65,12 +65,13 @@ const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 	);
 	const contentClassName = classNames(s.menu, className);
 
-	const handleClick = (e: React.MouseEvent) => {
+	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		/**
 		 * Stop event propagation to make sure outside click doesn't get triggered
 		 * after the content is closed
 		 */
 		e.stopPropagation();
+		attributes?.onClick?.(e);
 	};
 
 	return (

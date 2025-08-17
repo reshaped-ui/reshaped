@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/MinWidth > handles % value 1`] = `
+{
+  "classNames": [
+    "_root_f00fd4",
+    [
+      "_--type-literal_f00fd4",
+    ],
+  ],
+  "variables": {
+    "--rs-min-w-s": "50%",
+  },
+}
+`;
+
+exports[`Styles/MinWidth > handles px value 1`] = `
+{
+  "classNames": [
+    "_root_f00fd4",
+    [
+      "_--type-literal_f00fd4",
+    ],
+  ],
+  "variables": {
+    "--rs-min-w-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MinWidth > handles responsive value 1`] = `
+{
+  "classNames": [
+    "_root_f00fd4",
+    [
+      "_--type-literal_f00fd4",
+      "_--type-literal--l_f00fd4",
+    ],
+  ],
+  "variables": {
+    "--rs-min-w-l": "50%",
+    "--rs-min-w-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MinWidth > handles undefined value 1`] = `{}`;
+
+exports[`Styles/MinWidth > handles unit value 1`] = `
+{
+  "classNames": [
+    "_root_f00fd4",
+    [
+      "_--type-unit_f00fd4",
+    ],
+  ],
+  "variables": {
+    "--rs-min-w-s": 5,
+  },
+}
+`;

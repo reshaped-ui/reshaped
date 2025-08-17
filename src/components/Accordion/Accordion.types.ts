@@ -1,6 +1,7 @@
 import type React from "react";
 import type { IconProps } from "components/Icon";
 import type * as G from "types/global";
+import type * as S from "styles/types";
 
 export type BaseProps = {
 	iconSize?: IconProps["size"];
@@ -8,6 +9,7 @@ export type BaseProps = {
 	gap?: G.Responsive<number>;
 	children?: React.ReactNode;
 	onToggle?: (active: boolean) => void;
+	mixin?: Pick<S.Mixin, "margin">;
 	className?: G.ClassName;
 	attributes?: G.Attributes<"div">;
 };

@@ -1,5 +1,5 @@
 import { classNames, responsivePropDependency } from "utilities/props";
-import getHeightStyles from "styles/height";
+import { resolveMixin } from "styles/mixin";
 import Icon from "components/Icon";
 import View from "components/View";
 import type * as T from "./Avatar.types";
@@ -27,11 +27,11 @@ const Avatar: React.FC<T.Props> = (props) => {
 				return "small";
 			})
 		: "circular";
-	const heightStyles = getHeightStyles(size);
+	const mixinStyles = resolveMixin({ height: size });
 	const rootClassNames = classNames(
 		s.root,
 		className,
-		heightStyles?.classNames,
+		mixinStyles?.classNames,
 		color && s[`--color-${color}`],
 		variant && s[`--variant-${variant}`]
 	);
@@ -65,7 +65,7 @@ const Avatar: React.FC<T.Props> = (props) => {
 	return (
 		<View
 			borderRadius={radius}
-			attributes={{ ...attributes, style: { ...heightStyles?.variables } }}
+			attributes={{ ...attributes, style: { ...mixinStyles?.variables } }}
 			backgroundColor={variant === "faded" ? `${color}-${variant}` : color}
 			className={rootClassNames}
 		>

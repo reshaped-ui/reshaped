@@ -1,0 +1,41 @@
+@responsive [style*="--rs-m-s:"] {
+	@variable --rs-m 0;
+
+	margin: calc(var(--rs-m) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-m-top-"] {
+	@variable --rs-m-top 0;
+
+	margin-top: calc(var(--rs-m-top) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-m-bottom-"] {
+	@variable --rs-m-bottom 0;
+
+	margin-bottom: calc(var(--rs-m-bottom) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-m-start-"] {
+	@variable --rs-m-start 0;
+
+	margin-inline-start: calc(var(--rs-m-start) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-m-end-"] {
+	@variable --rs-m-end 0;
+
+	margin-inline-end: calc(var(--rs-m-end) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-m-block-"] {
+	@variable --rs-m-block 0;
+
+	margin-block: calc(var(--rs-m-block) * var(--rs-unit-x1));
+}
+
+@responsive [style*="--rs-m-inline-"] {
+	@variable --rs-m-inline 0;
+
+	margin-inline: calc(var(--rs-m-inline) * var(--rs-unit-x1));
+}

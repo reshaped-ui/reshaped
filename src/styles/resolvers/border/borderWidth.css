@@ -1,0 +1,41 @@
+@responsive [style*="--rs-border-w-s:"] {
+	@variable --rs-border-w 1px;
+
+	border: var(--rs-border-w) solid var(--rs-border-color);
+}
+
+@responsive [style*="--rs-border-w-top"] {
+	@variable --rs-border-w-top 1px;
+
+	border-top: var(--rs-border-w-top) solid var(--rs-border-color);
+}
+
+@responsive [style*="--rs-border-w-bottom"] {
+	@variable --rs-border-w-bottom 1px;
+
+	border-bottom: var(--rs-border-w-bottom) solid var(--rs-border-color);
+}
+
+@responsive [style*="--rs-border-w-start"] {
+	@variable --rs-border-w-start 1px;
+
+	border-inline-start: var(--rs-border-w-start) solid var(--rs-border-color);
+}
+
+@responsive [style*="--rs-border-w-end"] {
+	@variable --rs-border-w-end 1px;
+
+	border-inline-end: var(--rs-border-w-end) solid var(--rs-border-color);
+}
+
+@responsive [style*="--rs-border-w-inline"] {
+	@variable --rs-border-w-inline 1px;
+
+	border-inline: var(--rs-border-w-inline) solid var(--rs-border-color);
+}
+
+@responsive [style*="--rs-border-w-block"] {
+	@variable --rs-border-w-block 1px;
+
+	border-block: var(--rs-border-w-block) solid var(--rs-border-color);
+}

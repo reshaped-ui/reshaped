@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/Radius > handles none 1`] = `
+{
+  "classNames": [
+    "_root_7a5532",
+    "_--radius-none_7a5532",
+  ],
+}
+`;
+
+exports[`Styles/Radius > handles responsive value 1`] = `
+{
+  "classNames": [
+    "_root_7a5532",
+    "_--radius-small_7a5532",
+    "_--radius-none--m_7a5532",
+    "_--radius-circular--l_7a5532",
+  ],
+}
+`;
+
+exports[`Styles/Radius > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Radius > handles value 1`] = `
+{
+  "classNames": [
+    "_root_7a5532",
+    "_--radius-large_7a5532",
+  ],
+}
+`;

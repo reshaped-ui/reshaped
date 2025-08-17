@@ -1,0 +1,197 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/Inset > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-inset-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-l": 2,
+    "--rs-inset-m": 0,
+    "--rs-inset-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Inset/Block > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-inset-block-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset/Block > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-block-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Block > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-block-l": 2,
+    "--rs-inset-block-m": 0,
+    "--rs-inset-block-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Block > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Inset/Bottom > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-inset-bottom-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset/Bottom > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-bottom-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Bottom > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-bottom-l": 2,
+    "--rs-inset-bottom-m": 0,
+    "--rs-inset-bottom-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Bottom > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Inset/End > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-inset-end-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset/End > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-end-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/End > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-end-l": 2,
+    "--rs-inset-end-m": 0,
+    "--rs-inset-end-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/End > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Inset/Inline > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-inset-inline-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset/Inline > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-inline-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Inline > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-inline-l": 2,
+    "--rs-inset-inline-m": 0,
+    "--rs-inset-inline-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Inline > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Inset/Start > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-inset-start-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset/Start > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-start-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Start > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-start-l": 2,
+    "--rs-inset-start-m": 0,
+    "--rs-inset-start-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Start > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Inset/Top > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-inset-top-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Inset/Top > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-top-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Top > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-inset-top-l": 2,
+    "--rs-inset-top-m": 0,
+    "--rs-inset-top-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Inset/Top > handles undefined value 1`] = `{}`;

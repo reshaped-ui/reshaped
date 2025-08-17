@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/Bleed > handles 0 value 1`] = `
+{
+  "classNames": [
+    "_root_173dfa",
+    [
+      "_--bleed-false_173dfa",
+    ],
+  ],
+  "variables": {
+    "--rs-bleed-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Bleed > handles positive value 1`] = `
+{
+  "classNames": [
+    "_root_173dfa",
+    [
+      "_--bleed_173dfa",
+    ],
+  ],
+  "variables": {
+    "--rs-bleed-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Bleed > handles responsive value 1`] = `
+{
+  "classNames": [
+    "_root_173dfa",
+    [
+      "_--bleed_173dfa",
+      "_--bleed-false--m_173dfa",
+      "_--bleed-true--l_173dfa",
+    ],
+  ],
+  "variables": {
+    "--rs-bleed-l": 2,
+    "--rs-bleed-m": 0,
+    "--rs-bleed-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Bleed > handles undefined value 1`] = `{}`;

@@ -1,0 +1,175 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/Border > handles false value 1`] = `{}`;
+
+exports[`Styles/Border > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-l": "1px",
+    "--rs-border-w-m": "0px",
+    "--rs-border-w-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/Border > handles true value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/Border > handles undefined value 1`] = `{}`;
+
+exports[`Styles/BorderBlock > handles false value 1`] = `{}`;
+
+exports[`Styles/BorderBlock > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-block-l": "1px",
+    "--rs-border-w-block-m": "0px",
+    "--rs-border-w-block-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderBlock > handles true value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-block-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderBlock > handles undefined value 1`] = `{}`;
+
+exports[`Styles/BorderBottom > handles false value 1`] = `{}`;
+
+exports[`Styles/BorderBottom > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-bottom-l": "1px",
+    "--rs-border-w-bottom-m": "0px",
+    "--rs-border-w-bottom-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderBottom > handles true value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-bottom-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderBottom > handles undefined value 1`] = `{}`;
+
+exports[`Styles/BorderColor > handles responsive value 1`] = `
+{
+  "classNames": [
+    "_null_26181c",
+    "_--border-neutral--m_26181c",
+    "_--border-transparent--l_26181c",
+  ],
+}
+`;
+
+exports[`Styles/BorderColor > handles undefined value 1`] = `{}`;
+
+exports[`Styles/BorderColor > handles value 1`] = `
+{
+  "classNames": [
+    "_--border-primary_26181c",
+  ],
+}
+`;
+
+exports[`Styles/BorderEnd > handles false value 1`] = `{}`;
+
+exports[`Styles/BorderEnd > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-end-l": "1px",
+    "--rs-border-w-end-m": "0px",
+    "--rs-border-w-end-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderEnd > handles true value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-end-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderEnd > handles undefined value 1`] = `{}`;
+
+exports[`Styles/BorderInline > handles false value 1`] = `{}`;
+
+exports[`Styles/BorderInline > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-inline-l": "1px",
+    "--rs-border-w-inline-m": "0px",
+    "--rs-border-w-inline-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderInline > handles true value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-inline-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderInline > handles undefined value 1`] = `{}`;
+
+exports[`Styles/BorderStart > handles false value 1`] = `{}`;
+
+exports[`Styles/BorderStart > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-start-l": "1px",
+    "--rs-border-w-start-m": "0px",
+    "--rs-border-w-start-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderStart > handles true value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-start-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderStart > handles undefined value 1`] = `{}`;
+
+exports[`Styles/BorderTop > handles false value 1`] = `{}`;
+
+exports[`Styles/BorderTop > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-top-l": "1px",
+    "--rs-border-w-top-m": "0px",
+    "--rs-border-w-top-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderTop > handles true value 1`] = `
+{
+  "variables": {
+    "--rs-border-w-top-s": "1px",
+  },
+}
+`;
+
+exports[`Styles/BorderTop > handles undefined value 1`] = `{}`;

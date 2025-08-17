@@ -103,7 +103,7 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 		const contentEl = contentRef.current;
 
 		if (!contentEl) return [];
-		return Array.from(contentEl.querySelectorAll("[role=option]")) as HTMLElement[];
+		return Array.from(contentEl.querySelectorAll("[role=option]:not([disabled])")) as HTMLElement[];
 	}, []);
 
 	useHotkeys(
@@ -224,9 +224,10 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 };
 
 const AutocompleteItem: React.FC<T.ItemProps> = (props) => {
-	const { value, data, onClick, ...menuItemProps } = props;
+	const { value, data, onClick, disabled, ...menuItemProps } = props;
 	const { onItemClick, highlightedId } = React.useContext(AutocompleteContext);
 	const id = useElementId();
+	const highlighted = highlightedId === id;
 
 	const handleClick: MenuItemProps["onClick"] = (e) => {
 		onClick?.(e);
@@ -236,13 +237,14 @@ const AutocompleteItem: React.FC<T.ItemProps> = (props) => {
 	return (
 		<DropdownMenu.Item
 			{...menuItemProps}
-			className={[menuItemProps.disabled && s["item--disabled"], menuItemProps.className]}
-			highlighted={highlightedId === id}
+			className={[disabled && s["item--disabled"], menuItemProps.className]}
+			highlighted={highlighted}
+			disabled={disabled}
 			attributes={{
 				...menuItemProps.attributes,
 				role: "option",
 				id,
-				tabIndex: -1,
+				tabIndex: highlighted ? 0 : -1,
 			}}
 			onClick={handleClick}
 		/>

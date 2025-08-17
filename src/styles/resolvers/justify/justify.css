@@ -1,0 +1,5 @@
+@responsive [style*="--rs-justify-s:"] {
+	@variable --rs-justify;
+
+	justify-content: var(--rs-justify) !important;
+}

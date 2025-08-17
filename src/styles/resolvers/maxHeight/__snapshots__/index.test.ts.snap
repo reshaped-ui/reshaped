@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/MaxHeight > handles % value 1`] = `
+{
+  "classNames": [
+    "_root_9fb38e",
+    [
+      "_--type-literal_9fb38e",
+    ],
+  ],
+  "variables": {
+    "--rs-max-h-s": "50%",
+  },
+}
+`;
+
+exports[`Styles/MaxHeight > handles px value 1`] = `
+{
+  "classNames": [
+    "_root_9fb38e",
+    [
+      "_--type-literal_9fb38e",
+    ],
+  ],
+  "variables": {
+    "--rs-max-h-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MaxHeight > handles responsive value 1`] = `
+{
+  "classNames": [
+    "_root_9fb38e",
+    [
+      "_--type-literal_9fb38e",
+      "_--type-literal--l_9fb38e",
+    ],
+  ],
+  "variables": {
+    "--rs-max-h-l": "50%",
+    "--rs-max-h-s": "50px",
+  },
+}
+`;
+
+exports[`Styles/MaxHeight > handles undefined value 1`] = `{}`;
+
+exports[`Styles/MaxHeight > handles unit value 1`] = `
+{
+  "classNames": [
+    "_root_9fb38e",
+    [
+      "_--type-unit_9fb38e",
+    ],
+  ],
+  "variables": {
+    "--rs-max-h-s": 5,
+  },
+}
+`;

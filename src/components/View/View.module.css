@@ -2,7 +2,6 @@
 	--rs-view-gaps-count-multiplier: 1;
 	--rs-view-z: auto;
 	--rs-view-gap-value: calc(var(--rs-view-gap) * var(--rs-unit-x1));
-	--rs-view-border-width: 0px;
 
 	z-index: var(--rs-view-z);
 	gap: var(--rs-view-gap-value);
@@ -17,55 +16,9 @@
 	order: var(--rs-view-item-order);
 }
 
-.--padding {
-	padding: calc(
-			var(--rs-unit-x1) * var(--rs-view-p-vertical, var(--rs-view-p-top)) -
-				var(--rs-view-border-width)
-		)
-		calc(
-			var(--rs-unit-x1) * var(--rs-view-p-horizontal, var(--rs-view-p-start)) -
-				var(--rs-view-border-width)
-		);
-}
-
-@responsive .--padding {
-	@variable --rs-view-p-vertical 0;
-	@variable --rs-view-p-horizontal 0;
-}
-
-@responsive .root[style*="--rs-view-p-top"] {
-	@variable --rs-view-p-top 0;
-
-	padding-top: calc(var(--rs-unit-x1) * var(--rs-view-p-top));
-}
-
-@responsive .root[style*="--rs-view-p-bottom"] {
-	@variable --rs-view-p-bottom 0;
-
-	padding-bottom: calc(var(--rs-unit-x1) * var(--rs-view-p-bottom));
-}
-
-@responsive .root[style*="--rs-view-p-start"] {
-	@variable --rs-view-p-start 0;
-
-	padding-inline-start: calc(var(--rs-unit-x1) * var(--rs-view-p-start));
-}
-
-@responsive .root[style*="--rs-view-p-end"] {
-	@variable --rs-view-p-end 0;
-
-	padding-inline-end: calc(var(--rs-unit-x1) * var(--rs-view-p-end));
-}
-
 .--animated {
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
 	transition-property: background-color, color, border-color, box-shadow;
-}
-
-@each $alignment in start, center, end {
-	.--align-text-$alignment {
-		text-align: $alignment;
-	}
 }
 
 @each $color in neutral, positive, warning, critical, primary {

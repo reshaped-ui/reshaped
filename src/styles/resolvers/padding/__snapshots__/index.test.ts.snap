@@ -1,0 +1,191 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/Padding > handles 0 value 1`] = `{}`;
+
+exports[`Styles/Padding > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-p-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-p-l": 2,
+    "--rs-p-m": 0,
+    "--rs-p-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Padding/Block > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-p-block-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Padding/Block > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-p-block-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Block > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-p-block-l": 2,
+    "--rs-p-block-m": 0,
+    "--rs-p-block-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Block > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Padding/Bottom > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-p-bottom-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Padding/Bottom > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-p-bottom-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Bottom > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-p-bottom-l": 2,
+    "--rs-p-bottom-m": 0,
+    "--rs-p-bottom-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Bottom > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Padding/End > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-p-end-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Padding/End > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-p-end-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/End > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-p-end-l": 2,
+    "--rs-p-end-m": 0,
+    "--rs-p-end-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/End > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Padding/Inline > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-p-inline-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Padding/Inline > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-p-inline-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Inline > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-p-inline-l": 2,
+    "--rs-p-inline-m": 0,
+    "--rs-p-inline-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Inline > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Padding/Start > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-p-start-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Padding/Start > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-p-start-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Start > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-p-start-l": 2,
+    "--rs-p-start-m": 0,
+    "--rs-p-start-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Start > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Padding/Top > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-p-top-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Padding/Top > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-p-top-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Top > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-p-top-l": 2,
+    "--rs-p-top-m": 0,
+    "--rs-p-top-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Padding/Top > handles undefined value 1`] = `{}`;

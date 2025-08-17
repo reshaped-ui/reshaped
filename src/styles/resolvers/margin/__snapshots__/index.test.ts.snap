@@ -1,0 +1,191 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/Margin > handles 0 value 1`] = `{}`;
+
+exports[`Styles/Margin > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-m-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-m-l": 2,
+    "--rs-m-m": 0,
+    "--rs-m-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Margin/Block > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-m-block-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Margin/Block > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-m-block-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Block > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-m-block-l": 2,
+    "--rs-m-block-m": 0,
+    "--rs-m-block-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Block > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Margin/Bottom > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-m-bottom-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Margin/Bottom > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-m-bottom-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Bottom > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-m-bottom-l": 2,
+    "--rs-m-bottom-m": 0,
+    "--rs-m-bottom-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Bottom > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Margin/End > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-m-end-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Margin/End > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-m-end-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/End > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-m-end-l": 2,
+    "--rs-m-end-m": 0,
+    "--rs-m-end-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/End > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Margin/Inline > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-m-inline-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Margin/Inline > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-m-inline-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Inline > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-m-inline-l": 2,
+    "--rs-m-inline-m": 0,
+    "--rs-m-inline-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Inline > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Margin/Start > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-m-start-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Margin/Start > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-m-start-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Start > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-m-start-l": 2,
+    "--rs-m-start-m": 0,
+    "--rs-m-start-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Start > handles undefined value 1`] = `{}`;
+
+exports[`Styles/Margin/Top > handles 0 value 1`] = `
+{
+  "variables": {
+    "--rs-m-top-s": 0,
+  },
+}
+`;
+
+exports[`Styles/Margin/Top > handles positive value 1`] = `
+{
+  "variables": {
+    "--rs-m-top-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Top > handles responsive value 1`] = `
+{
+  "variables": {
+    "--rs-m-top-l": 2,
+    "--rs-m-top-m": 0,
+    "--rs-m-top-s": 4,
+  },
+}
+`;
+
+exports[`Styles/Margin/Top > handles undefined value 1`] = `{}`;
