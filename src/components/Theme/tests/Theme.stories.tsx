@@ -33,7 +33,7 @@ export const scoped: StoryObj = {
 
 			<Example.Item title="scoped, multiple">
 				<Theme name={["reshaped", "figma"]}>
-					<Card attributes={{ "data-testid": "test-id" }}>
+					<Card attributes={{ "data-testid": "test-id-multi" }}>
 						<View direction="row" gap={4}>
 							<Button color="primary">Action</Button>
 
@@ -51,9 +51,13 @@ export const scoped: StoryObj = {
 	),
 	play: ({ canvas }) => {
 		const root = canvas.getByTestId("test-id").parentNode;
+		const rootMultiple = canvas.getByTestId("test-id-multi").parentNode;
 
 		expect(root).toHaveAttribute("data-rs-theme", "reshaped");
-		expect(root).toHaveAttribute("data-rs-color-mode", "light");
+		expect(root).toHaveAttribute("data-rs-color-mode", "dark");
+
+		expect(rootMultiple).toHaveAttribute("data-rs-theme", " reshaped figma ");
+		expect(root).toHaveAttribute("data-rs-color-mode", "dark");
 	},
 };
 

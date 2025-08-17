@@ -144,13 +144,13 @@ export const base: StoryObj<{
 		expect(options).toHaveLength(3);
 
 		await waitFor(() => {
-			expect(options[0]).toHaveAttribute("data-rs-focus");
+			expect(options[0]).toHaveAttribute("tabindex", "0");
 		});
 
-		expect(options[1]).not.toHaveAttribute("data-rs-focus");
+		expect(options[1]).toHaveAttribute("tabindex", "-1");
 
-		await userEvent.keyboard("{ArrowDown/}");
-		await userEvent.keyboard("{Enter/}");
+		await userEvent.keyboard("{ArrowDown}");
+		await userEvent.keyboard("{Enter}");
 
 		expect(input).toHaveValue("Pie");
 		expect(args.handleItemSelect).toHaveBeenCalledTimes(1);
@@ -163,7 +163,7 @@ export const base: StoryObj<{
 		await sleep(100);
 
 		// Test click selection after opening with down arrow
-		await userEvent.keyboard("{ArrowDown/}");
+		await userEvent.keyboard("{ArrowDown}");
 
 		await waitFor(() => {
 			options = canvas.getAllByRole("option");
@@ -179,7 +179,7 @@ export const base: StoryObj<{
 
 		input.focus();
 
-		await userEvent.keyboard("{Backspace/}");
+		await userEvent.keyboard("{Backspace}");
 
 		await waitFor(() => {
 			expect(args.handleBackspace).toHaveBeenCalledTimes(1);

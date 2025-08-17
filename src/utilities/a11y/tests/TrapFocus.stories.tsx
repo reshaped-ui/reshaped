@@ -797,7 +797,7 @@ export const mutationObserver: StoryObj = {
 
 			setTimeout(() => {
 				setMutated(true);
-			}, 500);
+			}, 50);
 
 			return () => trapFocus.release();
 		}, [trapToggle.active]);
@@ -843,17 +843,17 @@ export const mutationObserver: StoryObj = {
 
 		expect(document.activeElement).toBe(trapContentActions[0]);
 
-		await sleep(500);
+		await sleep(100);
 
 		trapContentActions = canvas.getAllByRole("button");
 
 		expect(document.activeElement).toBe(trapContentActions[0]);
 
 		// Check that trap still works after mutation
-		await userEvent.keyboard("{Tab/}");
+		await userEvent.keyboard("{Tab}");
 		expect(document.activeElement).toBe(trapContentActions[1]);
 
-		await userEvent.keyboard("{Tab/}");
+		await userEvent.keyboard("{Tab}");
 		expect(document.activeElement).toBe(trapContentActions[0]);
 
 		// Check that it still knows about the original trigger
