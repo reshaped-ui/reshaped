@@ -13,7 +13,8 @@ const useToggle = (defaultValue?: boolean) => {
 		setActive(false);
 	}, []);
 
-	const toggle = React.useCallback((targetValue?: boolean) => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const toggle = React.useCallback((targetValue?: any) => {
 		// Checking the targetValue type for backwards compatibility if something like handler events
 		// are passed automatically e.g. onClick={toggle}
 		setActive(typeof targetValue === "boolean" ? targetValue : (active) => !active);
