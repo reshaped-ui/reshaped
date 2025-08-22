@@ -17,8 +17,13 @@ export type Props = Pick<
 	| "contentAttributes"
 	| "contentClassName"
 > & {
+	/** Node for inserting children */
 	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	children: (attributes: Parameters<FlyoutTriggerProps["children"]>[0] | {}) => React.ReactNode;
+	/** Text content for the tooltip */
 	text?: React.ReactNode;
+	/** Color of the tooltip
+	 * @default "inverted"
+	 */
 	color?: "inverted" | "dark";
 };

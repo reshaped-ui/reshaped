@@ -16,10 +16,15 @@ export type ThemeContextData = {
 };
 
 export type Props = {
+	/** Name of the theme to use, enables controlled mode */
 	name?: G.Theme;
+	/** Default name of the theme to use, enables uncontrolled mode */
 	defaultName?: G.Theme;
+	/** Color mode to use */
 	colorMode?: G.ColorMode | "inverted";
+	/** Additional classname for the root element */
 	className?: G.ClassName;
+	/** Node for inserting children */
 	children?: React.ReactNode;
 };
 

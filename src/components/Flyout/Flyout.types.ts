@@ -59,13 +59,26 @@ export type UseFlyoutData = Pick<State, "styles" | "position" | "status"> & {
  * Component
  */
 export type Instance = {
+	/** Open the flyout content */
 	open: () => void;
+	/** Close the flyout content */
 	close: () => void;
+	/** Sync the flyout content position with the trigger element position */
 	updatePosition: () => void;
 } | null;
 
-type WithUncontrolled = { active?: never; defaultActive?: boolean };
-type WithControlled = { active: boolean; defaultActive?: never };
+type WithUncontrolled = {
+	/** Control the content visibility, enables controlled mode */
+	active?: never;
+	/** Control the content default visibility, enables uncontrolled mode */
+	defaultActive?: boolean;
+};
+type WithControlled = {
+	/** Control the content visibility, enables controlled mode */
+	active: boolean;
+	/** Control the content default visibility, enables uncontrolled mode */
+	defaultActive?: never;
+};
 
 export type TriggerAttributes = {
 	// FIXME: Once we only support React 19+, we can drop this any
@@ -86,32 +99,59 @@ export type TriggerAttributes = {
 };
 
 type BaseProps = {
+	/** Unique id for the flyout content and trigger */
 	id?: string;
+	/** Event used for displaying the content */
 	triggerType?: "hover" | "click" | "focus";
+	/** Removes the content display delay if another flyout is already active */
 	groupTimeouts?: boolean;
+	/** Content position relative to the trigger element */
 	position?: Position;
 	/**
 	 * @deprecated Use fallbackPosition={false} instead, will be removed in v4
 	 */
 	forcePosition?: boolean;
+	/** Fallback positions for the content when it doesn't fit into the viewport or container */
 	fallbackPositions?: Position[] | false;
+	/** Change component trap focus keyboard behavior and shortcuts */
 	trapFocusMode?: TrapMode | false;
+	/** Disable the flyout content interactivity */
 	disabled?: boolean;
+	/** Disable the flyout content hide animation */
 	disableHideAnimation?: boolean;
+	/** Ignore the content hover events and hide it if the triggerType is hover */
 	disableContentHover?: boolean;
+	/** Disable the flyout content close on outside click */
 	disableCloseOnOutsideClick?: boolean;
+	/** Automatically focus the first focusable element in the content, when false the content container will be focused instead
+	 * @default true
+	 */
 	autoFocus?: boolean;
+	/** Origin coordinates for the content when there is no trigger element */
 	originCoordinates?: G.Coordinates;
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Callback when the content is opened */
 	onOpen?: () => void;
+	/** Callback when the content is closed */
 	onClose?: (args: { reason?: CloseReason }) => void;
+	/** Content width, literal css value or unit token multiplier */
 	width?: Width;
+	/** Gap between the content and the trigger element */
 	contentGap?: number;
+	/** Shift the content on the secondary axis, relative to its original position */
 	contentShift?: number;
+	/** Additional classname for the content element */
 	contentClassName?: string;
+	/** Additional attributes for the content element */
 	contentAttributes?: G.Attributes<"div">;
+	/** Ref accessor for the flyout methods */
 	instanceRef?: React.Ref<Instance>;
+	/** Container to render the content in using a portal, position is calculated based on the container bounds
+	 * @default document.body
+	 */
 	containerRef?: React.RefObject<HTMLElement | null>;
+	/** Element to focus when the content is opened */
 	initialFocusRef?: React.RefObject<HTMLElement | null>;
 };
 
@@ -125,12 +165,16 @@ export type ControlledProps = BaseProps & WithControlled;
 export type Props = ControlledProps | UncontrolledProps;
 
 export type TriggerProps = {
+	/** Node for inserting children, provides attributes for the trigger element */
 	children: (attributes: TriggerAttributes) => React.ReactNode;
 };
 
 export type ContentProps = {
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Additional classname for the content element */
 	className?: G.ClassName;
+	/** Additional attributes for the content element */
 	attributes?: G.Attributes<"div">;
 };
 

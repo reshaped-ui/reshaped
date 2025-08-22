@@ -24,6 +24,7 @@ export const src: StoryObj = {
 				<Avatar
 					src="https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80"
 					alt="Amsterdam canal"
+					size={12}
 				/>
 			</Example.Item>
 

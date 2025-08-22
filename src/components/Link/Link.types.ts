@@ -12,7 +12,14 @@ export type Props = Pick<
 	| "type"
 	| "stopPropagation"
 > & {
+	/** Icon at the start position */
 	icon?: IconProps["svg"];
+	/** Link color, based on the color tokens
+	 * @default "primary"
+	 */
 	color?: "inherit" | "critical" | "primary" | "positive" | "warning";
+	/** Link render variant
+	 * @default "underline"
+	 */
 	variant?: "plain" | "underline";
 };

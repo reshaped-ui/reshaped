@@ -21,7 +21,7 @@ export const selection = () => (
 		</Example.Item>
 
 		<Example.Item title="checked, uncontrolled">
-			<Checkbox name="animal" value="dog" defaultChecked>
+			<Checkbox name="animal" value="dog">
 				Checkbox
 			</Checkbox>
 		</Example.Item>
