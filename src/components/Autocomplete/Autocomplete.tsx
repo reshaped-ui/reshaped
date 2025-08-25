@@ -118,6 +118,13 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 			[keys.BACKSPACE]: () => {
 				onBackspaceRef.current?.();
 			},
+		},
+		[getOptionElements, onEnterRef, onBackspaceRef, highlightedId],
+		{ ref: inputRef }
+	);
+
+	useHotkeys(
+		{
 			[keys.UP]: () => {
 				const options = getOptionElements();
 
