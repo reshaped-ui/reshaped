@@ -1,3 +1,7 @@
+## Canary
+
+- Figma: Migrated to lucide icons
+
 ## 3.7.3
 
 ### Bug Fixes

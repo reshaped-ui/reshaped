@@ -72,17 +72,17 @@ export const variant = {
 	render: () => (
 		<Example>
 			<Example.Item title="variant: default">
-				<Tabs>
+				<Tabs defaultValue="0">
 					<Tabs.List>
-						<Tabs.Item value="1">Long item 2</Tabs.Item>
-						<Tabs.Item value="0">Item 1</Tabs.Item>
+						<Tabs.Item value="0">Long item 2</Tabs.Item>
+						<Tabs.Item value="1">Item 1</Tabs.Item>
 						<Tabs.Item value="2">Very long item 3</Tabs.Item>
 					</Tabs.List>
 				</Tabs>
 			</Example.Item>
 
 			<Example.Item title="variant: pills">
-				<Tabs variant="pills">
+				<Tabs variant="pills" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -92,7 +92,7 @@ export const variant = {
 			</Example.Item>
 
 			<Example.Item title="variant: pills-elevated">
-				<Tabs variant="pills-elevated">
+				<Tabs variant="pills-elevated" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -102,7 +102,7 @@ export const variant = {
 			</Example.Item>
 
 			<Example.Item title="variant: borderless">
-				<Tabs variant="borderless">
+				<Tabs variant="borderless" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
