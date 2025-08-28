@@ -1,8 +1,13 @@
 import type { ButtonProps } from "components/Button";
 
 type BaseProps = Omit<ButtonProps, "variant" | "higlighted"> & {
+	/** Component render variant
+	 * @default "outline"
+	 */
 	variant?: Extract<ButtonProps["variant"], "outline" | "ghost">;
+	/** Value of the toggle button, enables controlled mode for the ToggleButtonGroup */
 	value?: string;
+	/** Callback when the toggle button value changes */
 	onChange?: (args: {
 		checked: boolean;
 		value: string;
@@ -10,6 +15,16 @@ type BaseProps = Omit<ButtonProps, "variant" | "higlighted"> & {
 	}) => void;
 };
 
-export type ControlledProps = BaseProps & { defaultChecked?: never; checked: boolean };
-export type UncontrolledProps = BaseProps & { defaultChecked?: boolean; checked?: never };
+export type ControlledProps = BaseProps & {
+	/** Default value of the toggle button, enables uncontrolled mode */
+	defaultChecked?: never;
+	/** Value of the toggle button, enables controlled mode */
+	checked: boolean;
+};
+export type UncontrolledProps = BaseProps & {
+	/** Default value of the toggle button, enables uncontrolled mode */
+	defaultChecked?: boolean;
+	/** Value of the toggle button, enables controlled mode */
+	checked?: never;
+};
 export type Props = ControlledProps | UncontrolledProps;

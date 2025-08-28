@@ -22,6 +22,7 @@ export type { Name as ViewportTokenName } from "themes/_generator/tokens/viewpor
  */
 export { default as baseThemeDefinition } from "themes/_generator/definitions/reshaped";
 export { default as generateThemeColors } from "themes/_generator/tokens/color/utilities/generateColors";
+export { default as transform } from "themes/_generator/transform";
 
 export const getThemeCSS = (
 	name: string,

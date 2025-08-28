@@ -316,6 +316,11 @@ export const multiselect = {
 					multiline
 					inputAttributes={{ ref: inputRef }}
 					onChange={(args) => setQuery(args.value)}
+					onBackspace={() => {
+						if (query.length === 0) {
+							setValues((prev) => prev.slice(0, -1));
+						}
+					}}
 					onItemSelect={(args) => {
 						setQuery("");
 						setValues((prev) => [...prev, args.value]);

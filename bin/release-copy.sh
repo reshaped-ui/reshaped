@@ -2,7 +2,3 @@
 version=$(jq -r .version package.json)
 mkdir -p ../reshaped-website/releases/$version
 mv ./reshaped-source-v$version.zip ../reshaped-website/releases/$version/reshaped-source-v$version.zip
-
-# Move storybook build
-rm -rf ../reshaped-website/public/storybook
-cp -r ./dist/app ../reshaped-website/public/storybook

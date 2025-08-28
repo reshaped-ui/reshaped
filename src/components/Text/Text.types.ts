@@ -18,9 +18,13 @@ export type Variant =
 	| "caption-2";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
+	/** Text render variant */
 	variant?: G.Responsive<Variant>;
+	/** Text font weight */
 	weight?: G.Responsive<"regular" | "medium" | "bold">;
+	/** Render monospace font */
 	monospace?: boolean;
+	/** Text color, based on the color tokens */
 	color?:
 		| "neutral"
 		| "neutral-faded"
@@ -29,12 +33,20 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 		| "positive"
 		| "primary"
 		| "disabled";
+	/** Text alignment */
 	align?: G.Responsive<"start" | "center" | "end">;
+	/** CSS wrapping style */
 	wrap?: "balance";
+	/** CSS text decoration style */
 	decoration?: "line-through";
+	/** Maximum number of lines to render, used for text truncation */
 	maxLines?: number;
+	/** Render as a different html tag */
 	as?: TagName;
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Additional classname for the root element */
 	className?: G.ClassName;
+	/** Additional attributes for the root element */
 	attributes?: G.Attributes<TagName>;
 };

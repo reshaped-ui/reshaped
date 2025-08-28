@@ -11,39 +11,61 @@ export type SelectionState = {
 };
 
 export type ItemProps = {
+	/** Value of the item used for the active item selection */
 	value: string;
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Icon of the item at the start position */
 	icon?: IconProps["svg"];
+	/** Link of the item, renders as an anchor element */
 	href?: string;
+	/** Disable the item user interaction */
 	disabled?: boolean;
+	/** Additional attributes for the item element */
 	attributes?: G.Attributes<"div">;
 };
 
 export type ListProps = {
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Additional classname for the list element */
 	className?: G.ClassName;
+	/** Additional attributes for the list element */
 	attributes?: G.Attributes<"div">;
 };
 
 export type PanelProps = {
+	/** Value of the panel used for the active panel selection */
 	value: string;
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Additional classname for the panel element */
 	className?: G.ClassName;
+	/** Additional attributes for the panel element */
 	attributes?: G.Attributes<"div">;
 };
 
 export type BaseProps = {
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Direction of the tab buttons */
 	direction?: "column" | "row";
+	/** Equal width for the tab buttons */
 	itemWidth?: "equal";
+	/** Render variant for component */
 	variant?: "bordered" | "borderless" | "pills" | "pills-elevated";
+	/** Component size */
 	size?: "medium" | "large";
+	/** Name of the tab buttons group when used as a form control */
 	name?: string;
+	/** Callback when the active tab value changes */
 	onChange?: (args: { value: string; name?: string }) => void;
 };
 
 export type ControlledProps = BaseProps & {
+	/** Value of the active tab, enables controlled mode */
 	value?: string;
+	/** Default value of the active tab, enables uncontrolled mode */
 	defaultValue?: never;
 };
 
@@ -52,7 +74,9 @@ export type PrivateControlledProps = ControlledProps & {
 };
 
 export type UncontrolledProps = BaseProps & {
+	/** Value of the active tab, enables controlled mode */
 	value?: never;
+	/** Default value of the active tab, enables uncontrolled mode */
 	defaultValue?: string;
 };
 

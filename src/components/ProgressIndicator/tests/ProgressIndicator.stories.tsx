@@ -45,7 +45,17 @@ export const base: StoryObj = {
 							</Button>
 							<Text weight="medium">Index: {activeIndex}</Text>
 						</View>
-						<ProgressIndicator total={total} activeIndex={activeIndex} />
+
+						<View borderRadius="medium" overflow="hidden" width="300px">
+							<Scrim
+								position="bottom"
+								backgroundSlot={<View aspectRatio={16 / 9} backgroundColor="neutral-faded" />}
+							>
+								<View align="center">
+									<ProgressIndicator total={total} activeIndex={activeIndex} color="media" />
+								</View>
+							</Scrim>
+						</View>
 					</View>
 				</Example.Item>
 			</Example>

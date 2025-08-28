@@ -150,7 +150,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 					id={id}
 					tabIndex={!autoFocus ? -1 : undefined}
 					aria-modal={role === "dialog" ? true : undefined}
-					style={contentAttributes?.style}
+					style={{ ...attributes?.style, ...contentAttributes?.style }}
 					className={innerClassNames}
 				>
 					{children}

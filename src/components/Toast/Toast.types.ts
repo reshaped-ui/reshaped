@@ -8,25 +8,43 @@ export type Timeout = TimeoutAlias | number;
 export type Position = "top" | "top-end" | "top-start" | "bottom" | "bottom-start" | "bottom-end";
 
 export type Props = {
+	/** Component size
+	 * @default "small"
+	 */
 	size?: "small" | "medium" | "large";
+	/** Icon at the inline start position of the toast */
 	icon?: IconProps["svg"];
+	/** Node for inserting content at the inline start position of the toast */
 	startSlot?: React.ReactNode;
+	/** Title value for the toast */
 	title?: React.ReactNode;
+	/** Text content for the toast */
 	text?: React.ReactNode;
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Node for inserting content after the toast actions */
 	actionsSlot?: React.ReactNode;
+	/** Color of the toast
+	 * @default "inverted"
+	 */
 	color?: "neutral" | "primary" | "critical" | "positive" | "warning" | "inverted";
+	/** Additional classname for the root element */
 	className?: G.ClassName;
+	/** Additional attributes for the root element */
 	attributes?: G.Attributes<"div">;
 };
 
 export type ProviderProps = {
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Options for the toast */
 	options?: Partial<
 		Record<
 			RegionProps["position"],
 			{
+				/** Width of the toasts rendered inside the region */
 				width?: string;
+				/** Always render the toast stack as expanded inside the region */
 				expanded?: boolean;
 			}
 		>

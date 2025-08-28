@@ -25,6 +25,7 @@ export type Props = Pick<
 	| "containerRef"
 	| "originCoordinates"
 > & {
+	/** Change component trap focus keyboard behavior and shortcuts */
 	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu"> | false;
 };
 
@@ -33,10 +34,12 @@ export type ContentProps = Pick<FlyoutContentProps, "attributes" | "children" | 
 export type ItemProps = Omit<MenuItemProps, "roundedCorners">;
 
 export type SectionProps = {
+	/** Node for inserting children */
 	children: React.ReactNode;
 };
 
 export type SubMenuProps = {
+	/** Node for inserting children */
 	children: React.ReactNode;
 };
 

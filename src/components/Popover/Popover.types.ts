@@ -27,8 +27,11 @@ export type Props = Pick<
 	| "initialFocusRef"
 	| "originCoordinates"
 > & {
+	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Content element padding, unit token multiplier */
 	padding?: number;
+	/** Component elevation level */
 	elevation?: "raised" | "overlay";
 	/** @deprecated use Flyout utility instead, will be removed in v4 */
 	variant?: "elevated" | "headless";

@@ -1,9 +1,12 @@
 import View from "components/View";
 import Image from "components/Image";
 import React from "react";
-import Tabs from "components/Tabs";
-import Card from "components/Card";
-import { Placeholder } from "utilities/storybook";
+import Text from "components/Text";
+import Button from "components/Button";
+import ProgressIndicator from "components/ProgressIndicator";
+import Scrim from "components/Scrim";
+import IconChevronLeft from "icons/ChevronLeft";
+import IconChevronRight from "icons/ChevronRight";
 
 export default {
 	title: "Sandbox",
@@ -31,19 +34,38 @@ export const preview = () => {
 };
 
 const Component = () => {
-	return (
-		<View gap={4} paddingTop={10}>
-			<Tabs variant="pills">
-				<Tabs.List>
-					<Tabs.Item value="0">List view</Tabs.Item>
-					<Tabs.Item value="1">Map view</Tabs.Item>
-					<Tabs.Item value="2">Grid view</Tabs.Item>
-				</Tabs.List>
-			</Tabs>
+	const [activeIndex, setActiveIndex] = React.useState(0);
+	const total = 10;
 
-			<Card onClick={() => {}}>
-				<Placeholder />
-			</Card>
+	return (
+		<View gap={4} align="center" justify="center">
+			<View direction="row" gap={2} align="center">
+				<Button
+					variant="outline"
+					onClick={() => {
+						setActiveIndex((prev) => Math.max(0, prev - 1));
+					}}
+					icon={IconChevronLeft}
+				/>
+				<Button
+					variant="outline"
+					onClick={() => {
+						setActiveIndex((prev) => Math.min(total - 1, prev + 1));
+					}}
+					icon={IconChevronRight}
+				/>
+			</View>
+
+			<View borderRadius="medium" overflow="hidden" width="300px">
+				<Scrim
+					position="bottom"
+					backgroundSlot={<View aspectRatio={16 / 9} backgroundColor="neutral-faded" />}
+				>
+					<View align="center">
+						<ProgressIndicator total={total} activeIndex={activeIndex} color="media" />
+					</View>
+				</Scrim>
+			</View>
 		</View>
 	);
 };

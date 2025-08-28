@@ -1,51 +1,33 @@
 import type * as G from "types/global";
 
 export type BaseProps = {
-	/**
-	 * Total number of pages available
-	 */
+	/** Total number of pages available */
 	total: number;
-	/**
-	 * Event handler triggered when the current page changes
-	 */
+	/** Callback when the current page changes */
 	onChange?: (args: { page: number }) => void;
-	/**
-	 * Function to dynamically get an aria-label for each
-	 */
+	/** Function to dynamically get an aria-label for each page */
 	pageAriaLabel?: (args: { page: number }) => string;
-	/**
-	 * aria-label for the previous page button
-	 */
+	/** aria-label attribute for the previous page button */
 	previousAriaLabel: string;
-	/**
-	 * aria-label for the next page button
-	 */
+	/** aria-label attribute for the next page button */
 	nextAriaLabel: string;
-	/**
-	 * Custom root element className
-	 */
+	/** Additional classname for the root element */
 	className?: G.ClassName;
-	/**
-	 * Custom root element attributes
-	 */
+	/** Additional attributes for the root element */
 	attributes?: G.Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps & {
-	/**
-	 * Currently selected page number, starts with 1.
-	 * Enables controlled component behavior.
-	 */
+	/** Currently selected page number, starts with 1, enables controlled mode */
 	page: number;
+	/** Default selected page number, starts with 1, enables uncontrolled mode */
 	defaultPage?: never;
 };
 
 export type UncontrolledProps = BaseProps & {
+	/** Currently selected page number, starts with 1, enables controlled mode */
 	page?: never;
-	/**
-	 * Default selected page number, starts with 1.
-	 * Enables uncontrolled component behavior.
-	 */
+	/** Default selected page number, starts with 1, enables uncontrolled mode */
 	defaultPage?: number;
 };
 

@@ -29,7 +29,11 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const itemRef = React.useRef<HTMLDivElement>(null);
 	const active = tabsValue === value;
 	const visuallySelected = active && selection.status === "idle";
-	const itemClassNames = classNames(s.item, visuallySelected && s["--item-active"]);
+	const itemClassNames = classNames(
+		s.item,
+		visuallySelected && s["--item-active"],
+		disabled && s["--item-disabled"]
+	);
 	const isFormControl = !!name;
 	const tabAttributes = {
 		role: "tab",
@@ -90,7 +94,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 				insetFocus
 				disabled={disabled}
 				onClick={!name ? handleChange : undefined}
-				className={[s.button, disabled && s["button--disabled"]]}
+				className={s.button}
 				as={name ? "label" : undefined}
 				attributes={{
 					...(!isFormControl && tabAttributes),

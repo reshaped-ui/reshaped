@@ -18,7 +18,7 @@ export const defaultMonth: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="defaultMonth: 2020 January">
-				<Calendar defaultMonth={new Date(2020, 0)} />
+				<Calendar defaultMonth={new Date(2020, 0)} range />
 			</Example.Item>
 		</Example>
 	),

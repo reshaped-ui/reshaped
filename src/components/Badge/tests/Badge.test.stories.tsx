@@ -15,7 +15,11 @@ export default {
 
 export const href: StoryObj = {
 	name: "href",
-	render: () => <Badge href="https://reshaped.so">Badge</Badge>,
+	render: () => (
+		<Badge href="https://reshaped.so" dismissAriaLabel="Dismiss">
+			Badge
+		</Badge>
+	),
 	play: async ({ canvas }) => {
 		const link = canvas.getByRole("link");
 

@@ -53,8 +53,10 @@ export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 		if (!document || !isRootProvider) return;
 		const themeRootEl = getRootThemeEl(scopeRef?.current);
 		const hasColorModeApplied = themeRootEl.getAttribute("data-rs-color-mode");
+		const themeAttribute = getThemeAttribute(usedTheme);
 
-		themeRootEl.setAttribute("data-rs-theme", getThemeAttribute(usedTheme));
+		// Checking in case there is no global theme applied
+		if (themeAttribute) themeRootEl.setAttribute("data-rs-theme", themeAttribute);
 		if (!hasColorModeApplied) themeRootEl.setAttribute("data-rs-color-mode", usedColorMode);
 
 		return () => {
