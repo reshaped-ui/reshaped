@@ -1,6 +1,8 @@
-## Canary
+## 3.7.4
 
-- Figma: Migrated to lucide icons
+### Bug Fixes
+
+- **Autocomplete:** correct backspace handling ([c6eb011](https://github.com/formaat-design/reshaped-source/commit/c6eb011f4c8a64aca15997d9194d0b1d12ad2709))
 
 ## 3.7.3
 
