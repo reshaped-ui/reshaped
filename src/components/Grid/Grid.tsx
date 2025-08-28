@@ -47,6 +47,8 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		columns,
 		rows,
 		gap,
+		columnGap,
+		rowGap,
 		align,
 		justify,
 		autoColumns,
@@ -79,6 +81,8 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const rootVariables = {
 		...attributes?.style,
 		...responsiveVariables("--rs-grid-gap", gap),
+		...responsiveVariables("--rs-grid-column-gap", columnGap),
+		...responsiveVariables("--rs-grid-row-gap", rowGap),
 		...responsiveVariables("--rs-grid-rows", resolvedRows),
 		...responsiveVariables("--rs-grid-columns", resolvedColumns),
 		...responsiveVariables("--rs-grid-areas", resolvedAreas),

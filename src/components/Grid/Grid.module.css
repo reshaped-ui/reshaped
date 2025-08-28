@@ -10,6 +10,22 @@
 	gap: var(--rs-grid-gap-value);
 }
 
+@responsive .root[style*="--rs-grid-column-gap"] {
+	@variable --rs-grid-column-gap 0;
+
+	--rs-grid-column-gap-value: calc(var(--rs-grid-column-gap) * var(--rs-unit-x1));
+
+	column-gap: var(--rs-grid-column-gap-value);
+}
+
+@responsive .root[style*="--rs-grid-row-gap"] {
+	@variable --rs-grid-row-gap 0;
+
+	--rs-grid-row-gap-value: calc(var(--rs-grid-row-gap) * var(--rs-unit-x1));
+
+	row-gap: var(--rs-grid-row-gap-value);
+}
+
 @responsive .root[style*="--rs-grid-rows"] {
 	@variable --rs-grid-rows;
 

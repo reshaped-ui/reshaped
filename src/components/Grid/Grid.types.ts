@@ -6,6 +6,10 @@ import type * as TStyles from "styles/types";
 export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	/** Gap between grid items */
 	gap?: G.Responsive<number>;
+	/** Horizontal gap between grid items */
+	columnGap?: G.Responsive<number>;
+	/** Vertical gap between grid items */
+	rowGap?: G.Responsive<number>;
 	/** Align grid items vertically */
 	align?: G.Responsive<TStyles.Align>;
 	/** Justify grid items horizontally */
