@@ -155,7 +155,7 @@
 		"react-dom": "^18 || ^19"
 	},
 	"dependencies": {
-		"@csstools/postcss-global-data": "3.0.0",
+		"@csstools/postcss-global-data": "3.1.0",
 		"chalk": "4.1.2",
 		"commander": "14.0.0",
 		"cssnano": "7.1.1",

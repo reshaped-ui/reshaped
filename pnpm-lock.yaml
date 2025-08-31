@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@csstools/postcss-global-data':
-        specifier: 3.0.0
-        version: 3.0.0(postcss@8.5.6)
+        specifier: 3.1.0
+        version: 3.1.0(postcss@8.5.6)
       chalk:
         specifier: 4.1.2
         version: 4.1.2
@@ -390,8 +390,8 @@ packages:
       '@csstools/css-parser-algorithms': ^3.0.5
       '@csstools/css-tokenizer': ^3.0.4
 
-  '@csstools/postcss-global-data@3.0.0':
-    resolution: {integrity: sha512-3dR5+RDhPW1uqPWZUyTBSVn03gGbxzoSyCEpXugy9UMtXeyKjrB84dX3V8eggzooCsX8wcraKehzdouNO+MlsA==}
+  '@csstools/postcss-global-data@3.1.0':
+    resolution: {integrity: sha512-qfS0bUxBukuyxEyxTTZG+px2xwAQPf7Qk6B7lFdjWnovb/O6h0t3sxrVY81nJLh7z0KvEMhjxTURNtEmOrADpQ==}
     engines: {node: '>=18'}
     peerDependencies:
       postcss: ^8.4
@@ -4613,7 +4613,7 @@ snapshots:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
 
-  '@csstools/postcss-global-data@3.0.0(postcss@8.5.6)':
+  '@csstools/postcss-global-data@3.1.0(postcss@8.5.6)':
     dependencies:
       postcss: 8.5.6
 
