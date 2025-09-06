@@ -18,8 +18,17 @@
 		"accessibility",
 		"accessible"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/reshaped-ui/reshaped.git"
+	},
 	"bugs": {
-		"url": "https://github.com/formaat-design/reshaped/issues"
+		"url": "https://github.com/reshaped-ui/reshaped/issues"
+	},
+	"author": {
+		"name": "Dmitry Belyaev",
+		"email": "blv.dmitry@gmail.com",
+		"url": "https://reshaped.so"
 	},
 	"sideEffects": [
 		"*.css"
