@@ -1,6 +1,6 @@
 # Reshaped
 
-<img width="1200" height="630" alt="preview" src="https://github.com/user-attachments/assets/b9cfc482-209c-4cf6-bd24-d309fcea25ff" />
+<img width="2400" height="1260" alt="3 0 (1)" src="https://github.com/user-attachments/assets/ef632fe9-9446-430f-b87d-bebebe6fb595" />
 <br /><br />
 
 Reshaped is a library with professionally crafted React & Figma components for building beautiful products or starting your own design system.
