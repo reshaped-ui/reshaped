@@ -20,19 +20,24 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Cache dependencies
         uses: actions/cache@v4
         id: cache
         with:
           path: |
             node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
   setup-playwright:
     name: Playwright setup
@@ -49,16 +54,21 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Restore node_modules cache
         uses: actions/cache@v4
         id: node_modules_cache
         with:
           path: |
             node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -66,11 +76,11 @@ jobs:
         with:
           path: |
             /home/runner/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
-      - run: yarn playwright install
+      - run: pnpm playwright install
 
   lint:
     runs-on: ubuntu-latest
@@ -84,19 +94,24 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Restore node_modules cache
         uses: actions/cache@v4
         id: cache
         with:
           path: |
             node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Lint CSS and JS code
-        run: yarn lint
+        run: pnpm lint
 
   build:
     runs-on: ubuntu-latest
@@ -110,19 +125,24 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Restore node_modules cache
         uses: actions/cache@v4
         id: cache
         with:
           path: |
             node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Build the project
-        run: yarn build
+        run: pnpm build
 
   test-browser:
     runs-on: ubuntu-latest
@@ -140,27 +160,32 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Restore node_modules cache
         uses: actions/cache@v4
         with:
           path: |
             node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Restore playwright cache
         uses: actions/cache@v4
         with:
           path: |
             /home/runner/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
       - name: Run tests
-        run: yarn test:browser --shard ${{ matrix.shard }}
+        run: pnpm test:browser --shard ${{ matrix.shard }}
 
   test-unit:
     runs-on: ubuntu-latest
@@ -174,18 +199,23 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Restore node_modules cache
         uses: actions/cache@v4
         with:
           path: |
             node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Run tests
-        run: yarn test:unit
+        run: pnpm test:unit
 
   test-size:
     runs-on: ubuntu-latest
@@ -199,21 +229,26 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Restore node_modules cache
         uses: actions/cache@v4
         with:
           path: |
             node_modules
-            .yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Test bundle size
         uses: andresz1/size-limit-action@v1.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          package_manager: yarn
+          package_manager: pnpm
           build_script: build
           clean_script: clean
           skip_step: install
