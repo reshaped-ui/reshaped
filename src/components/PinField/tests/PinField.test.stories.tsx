@@ -221,6 +221,27 @@ export const keyboard: StoryObj = {
 	},
 };
 
+export const overwriteOnFull: StoryObj = {
+	name: "overwrite when full (click + type)",
+	render: () => (
+		<PinField name="test-name" defaultValue="1234" inputAttributes={{ "aria-label": "Label" }} />
+	),
+	play: async ({ canvas }) => {
+		const elInput = canvas.getByRole<HTMLInputElement>("textbox");
+
+		// Ensure input is focused first, then click the first cell and type
+		elInput.focus();
+		await userEvent.click(canvas.getByText("1"));
+
+		// Selection should immediately select the first character
+		expect(elInput.selectionStart).toEqual(0);
+		expect(elInput.selectionEnd).toEqual(1);
+
+		await userEvent.keyboard("8");
+		expect(elInput).toHaveValue("8234");
+	},
+};
+
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (

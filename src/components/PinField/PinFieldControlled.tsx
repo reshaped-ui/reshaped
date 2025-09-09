@@ -61,6 +61,10 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	 */
 	const modeRef = React.useRef<"type" | "edit">(value.length === valueLength ? "edit" : "type");
 	const inputRef = React.useRef<HTMLInputElement>(null);
+	// Track if beforeinput is supported/firing; if not, use keydown fallback for reliability
+	const supportsBeforeInputRef = React.useRef(false);
+	// When focusing via pointer, remember the requested index/mode
+	const pendingFocusIndexRef = React.useRef<number | null>(null);
 	const nodes = [];
 
 	/**
@@ -137,6 +141,16 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		 * so we're resetting that behavior
 		 */
 
+		// If focus was initiated by clicking a specific item, respect that index
+		if (pendingFocusIndexRef.current !== null) {
+			const index = pendingFocusIndexRef.current;
+			modeRef.current = index >= value.length ? "type" : "edit";
+			syncSelection(index);
+			pendingFocusIndexRef.current = null;
+			return;
+		}
+
+		// Default behavior (e.g., focus via Tab): place caret based on current value
 		syncSelection(value.length);
 	};
 
@@ -184,6 +198,89 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		});
 	};
 
+	// Use onBeforeInput to enforce overwrite semantics when full and block invalid chars.
+	const handleBeforeInput = (event: React.FormEvent<HTMLInputElement>) => {
+		// Mark environment as supporting beforeinput to avoid double-handling in keydown
+		supportsBeforeInputRef.current = true;
+		const native = event.nativeEvent as InputEvent;
+		const el = event.target as HTMLInputElement;
+		if (!native || !el) return;
+
+		if (native.inputType !== "insertText") return;
+
+		const data = native.data ?? "";
+		if (!data || !new RegExp(`^${patternRegexp}$`).test(data)) {
+			// Block invalid characters completely to avoid DOM flicker
+			event.preventDefault();
+			return;
+		}
+
+		if (el.selectionStart === null || el.selectionEnd === null) return;
+
+		const start = el.selectionStart;
+		const end = el.selectionEnd;
+		const current = el.value;
+		let composed = current.slice(0, start) + data + current.slice(end);
+		if (composed.length > valueLength) composed = composed.slice(0, valueLength);
+
+		event.preventDefault();
+		const nextPos = Math.min(start + 1, valueLength);
+		const nextMode =
+			nextPos === composed.length && composed.length !== valueLength ? "type" : "edit";
+		modeRef.current = nextMode;
+		onChange?.({
+			event: event as unknown as React.ChangeEvent<HTMLInputElement>,
+			name,
+			value: composed,
+		});
+		onNextFrame(() => {
+			el.setSelectionRange(nextPos, nextPos);
+			syncSelection(nextPos);
+		});
+	};
+
+	// Fallback for environments where beforeinput is unreliable
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const el = event.currentTarget;
+		// If beforeinput works, prefer it to avoid duplicate handling
+		if (supportsBeforeInputRef.current) return;
+
+		// Ignore control keys and composition
+		if (event.ctrlKey || event.metaKey || event.altKey) return;
+		const { key } = event;
+		if (!key || key.length !== 1) return; // not a printable single char
+
+		// Validate character against pattern
+		if (!new RegExp(`^${patternRegexp}$`).test(key)) {
+			event.preventDefault();
+			return;
+		}
+
+		if (el.selectionStart === null || el.selectionEnd === null) return;
+
+		const start = el.selectionStart;
+		const end = el.selectionEnd;
+		const current = el.value;
+		let composed = current.slice(0, start) + key + current.slice(end);
+		if (composed.length > valueLength) composed = composed.slice(0, valueLength);
+
+		// Prevent native insertion and update manually to enforce overwrite semantics
+		event.preventDefault();
+		const nextPos = Math.min(start + 1, valueLength);
+		const nextMode =
+			nextPos === composed.length && composed.length !== valueLength ? "type" : "edit";
+		modeRef.current = nextMode;
+		onChange?.({
+			event: event as unknown as React.ChangeEvent<HTMLInputElement>,
+			name,
+			value: composed,
+		});
+		onNextFrame(() => {
+			el.setSelectionRange(nextPos, nextPos);
+			syncSelection(nextPos);
+		});
+	};
+
 	/**
 	 * Manually handle correct caret position when any of the items are clicked
 	 */
@@ -191,10 +288,19 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		if (!inputRef.current) return;
 
 		event.preventDefault();
-		inputRef.current.focus();
 
-		modeRef.current = index >= value.length ? "type" : "edit";
-		syncSelection(index);
+		const isAlreadyFocused = document.activeElement === inputRef.current;
+		const nextMode = index >= value.length ? "type" : "edit";
+
+		if (isAlreadyFocused) {
+			modeRef.current = nextMode;
+			syncSelection(index);
+			return;
+		}
+
+		// Defer selection setup to the ensuing focus event to avoid race conditions
+		pendingFocusIndexRef.current = index;
+		inputRef.current.focus();
 	};
 
 	for (let i = 0; i < valueLength; i++) {
@@ -231,6 +337,8 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				{...formControl.attributes}
 				type="text"
 				className={s.input}
+				onBeforeInput={handleBeforeInput}
+				onKeyDown={handleKeyDown}
 				onFocus={handleFocus}
 				onBlur={handleBlur}
 				onPaste={handlePaste}
