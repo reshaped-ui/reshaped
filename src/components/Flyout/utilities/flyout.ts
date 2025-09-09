@@ -3,6 +3,7 @@ import { getRectFromCoordinates, getShadowRoot, findClosestPositionContainer } f
 import calculatePosition from "./calculatePosition";
 import getPositionFallbacks from "./getPositionFallbacks";
 import isFullyVisible from "./isFullyVisible";
+import shiftIntoView from "./shiftIntoView";
 import { resetStyles } from "../Flyout.constants";
 import type * as T from "../Flyout.types";
 
@@ -76,7 +77,7 @@ const flyout = (
 	let calculated: ReturnType<typeof calculatePosition> | null = null;
 	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
-	testOrder.some((currentPosition) => {
+	const foundValidPosition = testOrder.some((currentPosition) => {
 		const tested = calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
 			flyoutBounds,
@@ -105,6 +106,10 @@ const flyout = (
 
 		return validPosition;
 	});
+
+	if (!foundValidPosition && calculated) {
+		calculated = shiftIntoView(calculated, visualContainerBounds, 0);
+	}
 
 	if (!calculated) {
 		throw new Error(`[Reshaped] Can't calculate styles for the ${position} position`);

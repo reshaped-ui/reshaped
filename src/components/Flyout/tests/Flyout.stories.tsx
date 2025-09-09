@@ -786,6 +786,61 @@ export const testWithoutFocusable: StoryObj = {
 	},
 };
 
+export const testShiftIntoView: StoryObj = {
+	name: "test: inside shift into view",
+	render: () => (
+		<React.Fragment>
+			<View
+				height="calc(100vh - 60px)"
+				width="100%"
+				position="relative"
+				attributes={{ style: { overflow: "hidden" } }}
+			>
+				<View
+					position="absolute"
+					insetStart={0}
+					backgroundColor="elevation-overlay"
+					borderColor="neutral-faded"
+					borderRadius="small"
+					padding={4}
+					overflow="hidden"
+					attributes={{ "data-testid": "container", style: { bottom: "20px" } }}
+				>
+					<Demo contentHeight={false} position="end-top">
+						<View
+							justify="end"
+							attributes={{ style: { height: "90vh" }, "data-testid": "content" }}
+						>
+							Content
+						</View>
+					</Demo>
+				</View>
+			</View>
+		</React.Fragment>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(trigger);
+
+		await waitFor(() => {
+			const content = canvas.getByText("Content");
+			expect(content).toBeVisible();
+		
+			// Check if it's in the viewport
+			const rect = content.getBoundingClientRect();
+			const inViewport =
+				rect.top >= 0 &&
+				rect.left >= 0 &&
+				rect.bottom <= window.innerHeight &&
+				rect.right <= window.innerWidth;
+		
+			expect(inViewport, "Content is in the viewport").toBe(true);
+		});
+	},
+};
+
 export const testChangeSize = {
 	name: "test: size updates",
 	render: () => {
