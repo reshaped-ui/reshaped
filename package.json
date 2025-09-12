@@ -120,7 +120,7 @@
 		"@testing-library/user-event": "^14.6.1",
 		"@types/culori": "4.0.0",
 		"@types/events": "3.0.3",
-		"@types/node": "24.3.0",
+		"@types/node": "24.3.2",
 		"@types/react": "19.1.12",
 		"@types/react-dom": "19.1.9",
 		"@vitejs/plugin-react": "4.6.0",
