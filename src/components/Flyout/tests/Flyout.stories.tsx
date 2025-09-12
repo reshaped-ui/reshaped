@@ -787,7 +787,7 @@ export const testWithoutFocusable: StoryObj = {
 };
 
 export const testShiftIntoView: StoryObj = {
-	name: "test: inside shift into view",
+	name: "test: shift into view",
 	render: () => (
 		<React.Fragment>
 			<View
