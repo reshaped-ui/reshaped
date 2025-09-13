@@ -9,7 +9,7 @@ Reshaped is a library with professionally crafted React & Figma components for b
 
 ## Documentation
 
-To get started, check out the [Reshaped documentation](https://reshaped.so/docs/changelog).
+To get started, check out the [Reshaped documentation](https://reshaped.so/docs/getting-started/overview).
 
 ## Contributing
 

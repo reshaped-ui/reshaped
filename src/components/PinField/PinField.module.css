@@ -14,8 +14,10 @@
 	outline: none;
 	caret-color: transparent;
 	vertical-align: top;
-	inset: 0;
+	inset-inline-start: 0;
+	inset-block: 0;
 	padding-left: 100%;
+	clip-path: inset(0 calc(50% + var(--rs-unit-x2)) 0 0);
 }
 
 .item {
