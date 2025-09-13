@@ -64,7 +64,7 @@ export const position = {
 	name: "position",
 	render: () => {
 		return (
-			<View gap={4} padding={50} align="center" justify="center" height="120vh" width="120%">
+			<View gap={4} padding={50} align="center" justify="center" height="100vh" width="100%">
 				<View gap={4} direction="row">
 					<Demo position="top-start" defaultActive />
 					<Demo position="top" />
@@ -304,15 +304,35 @@ export const positionFallbacks = {
 export const fallbackAdjustLayout = {
 	name: "fallbackAdjustLayout",
 	render: () => {
+		const portalRef = React.useRef<HTMLDivElement>(null);
+
 		return (
-			<View height="calc(100vh - 30px)" width="100%">
+			<View height="calc(100vh - 30px)" width="100%" align="center" justify="center">
+				<View
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					height={80}
+					width={80}
+					attributes={{ ref: portalRef }}
+					padding={4}
+					paddingInline={8}
+				>
+					<Demo
+						containerRef={portalRef}
+						position="bottom-end"
+						fallbackAdjustLayout
+						contentWidth={250}
+					/>
+				</View>
+
 				{/* Left side */}
-				<View position="absolute" insetTop={10} gap={2}>
+				<View position="absolute" insetStart={4} insetTop={10} gap={2}>
 					<Demo
 						contentHeight="200px"
 						position="end"
 						fallbackPositions={false}
 						fallbackAdjustLayout
+						defaultActive
 					/>
 					<Demo
 						contentHeight="200px"
@@ -337,6 +357,23 @@ export const fallbackAdjustLayout = {
 					/>
 				</View>
 
+				<View position="absolute" insetBottom={10} insetStart={4} gap={2}>
+					<Demo
+						contentHeight="200px"
+						position="end-top"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+					<Demo
+						contentHeight="200px"
+						position="end"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+				</View>
+
+				{/* Right side */}
+
 				<View position="absolute" insetTop={10} insetEnd={4} gap={2}>
 					<Demo
 						contentHeight="200px"
@@ -347,22 +384,6 @@ export const fallbackAdjustLayout = {
 					<Demo
 						contentHeight="200px"
 						position="start-bottom"
-						fallbackPositions={false}
-						fallbackAdjustLayout
-					/>
-				</View>
-
-				{/* Right side */}
-				<View position="absolute" insetBottom={10} gap={2}>
-					<Demo
-						contentHeight="200px"
-						position="end-top"
-						fallbackPositions={false}
-						fallbackAdjustLayout
-					/>
-					<Demo
-						contentHeight="200px"
-						position="end"
 						fallbackPositions={false}
 						fallbackAdjustLayout
 					/>
