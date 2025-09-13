@@ -17,7 +17,7 @@ import Modal from "components/Modal";
 export default { title: "Utility components/Flyout" };
 
 const Content: React.FC<{
-	height?: number | false;
+	height?: number | false | string;
 	width?: number | false;
 	children?: React.ReactNode;
 }> = (props) => (
@@ -39,7 +39,7 @@ const Content: React.FC<{
 const Demo: React.FC<
 	FlyoutProps & {
 		text?: string;
-		contentHeight?: number | false;
+		contentHeight?: number | false | string;
 		contentWidth?: number | false;
 		height?: false;
 	}
@@ -297,6 +297,102 @@ export const positionFallbacks = {
 					</View>
 				</Example.Item>
 			</Example>
+		);
+	},
+};
+
+export const fallbackAdjustLayout = {
+	name: "fallbackAdjustLayout",
+	render: () => {
+		return (
+			<View height="calc(100vh - 30px)" width="100%">
+				{/* Left side */}
+				<View position="absolute" insetTop={10} gap={2}>
+					<Demo
+						contentHeight="200px"
+						position="end"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+					<Demo
+						contentHeight="200px"
+						position="end-bottom"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+				</View>
+
+				<View position="absolute" insetStart={4} insetTop={80} gap={2}>
+					<Demo
+						position="bottom-end"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+						contentWidth={300}
+					/>
+					<Demo
+						position="bottom"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+						contentWidth={300}
+					/>
+				</View>
+
+				<View position="absolute" insetTop={10} insetEnd={4} gap={2}>
+					<Demo
+						contentHeight="200px"
+						position="start"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+					<Demo
+						contentHeight="200px"
+						position="start-bottom"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+				</View>
+
+				{/* Right side */}
+				<View position="absolute" insetBottom={10} gap={2}>
+					<Demo
+						contentHeight="200px"
+						position="end-top"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+					<Demo
+						contentHeight="200px"
+						position="end"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+				</View>
+
+				<View position="absolute" insetEnd={4} insetTop={80} gap={2}>
+					<Demo
+						position="top-start"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+						contentWidth={300}
+					/>
+					<Demo position="top" fallbackPositions={false} fallbackAdjustLayout contentWidth={300} />
+				</View>
+
+				<View position="absolute" insetBottom={10} insetEnd={4} gap={2}>
+					<Demo
+						contentHeight="200px"
+						position="start-top"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+					<Demo
+						contentHeight="200px"
+						position="start"
+						fallbackPositions={false}
+						fallbackAdjustLayout
+					/>
+				</View>
+			</View>
 		);
 	},
 };
@@ -783,61 +879,6 @@ export const testWithoutFocusable: StoryObj = {
 		});
 
 		expect(document.activeElement).toBe(trigger);
-	},
-};
-
-export const testShiftIntoView: StoryObj = {
-	name: "test: inside shift into view",
-	render: () => (
-		<React.Fragment>
-			<View
-				height="calc(100vh - 60px)"
-				width="100%"
-				position="relative"
-				attributes={{ style: { overflow: "hidden" } }}
-			>
-				<View
-					position="absolute"
-					insetStart={0}
-					backgroundColor="elevation-overlay"
-					borderColor="neutral-faded"
-					borderRadius="small"
-					padding={4}
-					overflow="hidden"
-					attributes={{ "data-testid": "container", style: { bottom: "20px" } }}
-				>
-					<Demo contentHeight={false} position="end-top">
-						<View
-							justify="end"
-							attributes={{ style: { height: "90vh" }, "data-testid": "content" }}
-						>
-							Content
-						</View>
-					</Demo>
-				</View>
-			</View>
-		</React.Fragment>
-	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			const content = canvas.getByText("Content");
-			expect(content).toBeVisible();
-		
-			// Check if it's in the viewport
-			const rect = content.getBoundingClientRect();
-			const inViewport =
-				rect.top >= 0 &&
-				rect.left >= 0 &&
-				rect.bottom <= window.innerHeight &&
-				rect.right <= window.innerWidth;
-		
-			expect(inViewport, "Content is in the viewport").toBe(true);
-		});
 	},
 };
 

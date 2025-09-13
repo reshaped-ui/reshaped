@@ -30,6 +30,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		children,
 		disabled,
 		forcePosition,
+		fallbackAdjustLayout,
 		trapFocusMode = "dialog",
 		width,
 		disableHideAnimation,
@@ -101,6 +102,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		defaultActive: resolvedActive,
 		container: containerRef?.current,
 		fallbackPositions,
+		fallbackAdjustLayout,
 		contentGap,
 		contentShift,
 	});

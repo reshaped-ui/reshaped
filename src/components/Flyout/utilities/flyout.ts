@@ -3,7 +3,6 @@ import { getRectFromCoordinates, getShadowRoot, findClosestPositionContainer } f
 import calculatePosition from "./calculatePosition";
 import getPositionFallbacks from "./getPositionFallbacks";
 import isFullyVisible from "./isFullyVisible";
-import shiftIntoView from "./shiftIntoView";
 import { resetStyles } from "../Flyout.constants";
 import type * as T from "../Flyout.types";
 
@@ -25,6 +24,7 @@ const flyout = (
 		contentGap = 0,
 		position,
 		fallbackPositions,
+		fallbackAdjustLayout,
 		width,
 		container: passedContainer,
 		lastUsedPosition,
@@ -74,47 +74,45 @@ const flyout = (
 	const renderContainerBounds = container.getBoundingClientRect();
 	const visualContainerBounds = (passedContainer || document.body).getBoundingClientRect();
 
-	let calculated: ReturnType<typeof calculatePosition> | null = null;
-	const testOrder = getPositionFallbacks(position, fallbackPositions);
-
-	const foundValidPosition = testOrder.some((currentPosition) => {
-		const tested = calculatePosition({
+	const applyPosition = (position: T.Position) => {
+		return calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
 			flyoutBounds,
 			containerBounds: renderContainerBounds,
-			position: currentPosition,
+			position,
 			contentGap: contentGap * unitModifier,
 			contentShift: contentShift * unitModifier,
 			rtl,
 			width,
 			passedContainer,
+			fallbackAdjustLayout,
 		});
+	};
 
-		const visible = isFullyVisible({
-			flyoutBounds: tested.boundaries,
+	const testVisibility = (calculated: ReturnType<typeof calculatePosition>) => {
+		return isFullyVisible({
+			flyoutBounds: calculated.boundaries,
 			visualContainerBounds,
 			renderContainerBounds,
 			container,
 		});
-		const validPosition = visible || fallbackPositions?.length === 0;
+	};
 
-		// Saving first try in case none of the options work
-		if (validPosition || lastUsedPosition === currentPosition) {
-			calculated = tested;
-			onPositionChoose(currentPosition);
-		}
+	let calculated: ReturnType<typeof calculatePosition> | null = null;
+	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
-		return validPosition;
+	testOrder.some((currentPosition) => {
+		const tested = applyPosition(currentPosition);
+		const visible = testVisibility(tested);
+
+		if (visible) calculated = tested;
+
+		return visible;
 	});
 
-	if (!foundValidPosition && calculated) {
-		calculated = shiftIntoView(calculated, visualContainerBounds, 0);
-	}
+	if (!calculated) calculated = applyPosition(lastUsedPosition);
 
-	if (!calculated) {
-		throw new Error(`[Reshaped] Can't calculate styles for the ${position} position`);
-	}
-
+	onPositionChoose(calculated.position);
 	targetClone.parentNode?.removeChild(targetClone);
 	return calculated;
 };
