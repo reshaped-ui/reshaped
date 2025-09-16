@@ -1,3 +1,17 @@
+## 3.8.0-canary.1
+
+
+### Bug Fixes
+
+* **Flyout:** fixed fallbackAdjustLayout positioning ([eaa9739](https://github.com/reshaped-ui/reshaped/commit/eaa9739bd340a60e942e3689fef46fa3ccd94f31))
+* **PinField:** fixed incorrect overwrite behavior edge case when default value is provided ([8a3d269](https://github.com/reshaped-ui/reshaped/commit/8a3d269fbffad5530669445f2f0c9e107ac93eb0))
+
+
+### Features
+
+* **flyout:** add shiftIntoView fallback for constrained containers ([7547e9a](https://github.com/reshaped-ui/reshaped/commit/7547e9ad7bd445a49463b60f87d87fcd8eed430b)), closes [#423](https://github.com/reshaped-ui/reshaped/issues/423)
+* **Flyout:** added fallbackAdjustLayout ([88255e4](https://github.com/reshaped-ui/reshaped/commit/88255e47b71e9166db31a5f54239be2ea59c2fb0))
+
 ## 3.8.1-canary.0
 
 
