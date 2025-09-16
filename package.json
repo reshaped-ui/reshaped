@@ -1,7 +1,7 @@
 {
 	"name": "reshaped",
 	"description": "Professionally crafted design system in React & Figma for building products of any scale and complexity",
-	"version": "3.8.2-canary.0",
+	"version": "3.8.0-canary.0",
 	"license": "MIT",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
@@ -89,7 +89,7 @@
 		"release:minor": "node bin/release.js minor",
 		"release:major": "node bin/release.js major",
 		"release:lib": "pnpm build && pnpm publish",
-		"release:canary": "pnpm build && pnpm version prepatch --preid canary && pnpm publish --tag canary",
+		"release:canary": "pnpm build && yarn publish --tag canary",
 		"release:test": "pnpm build && pnpm pack --filename reshaped-test.tgz",
 		"release:copy": "sh ./bin/release-copy.sh",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
