@@ -48,22 +48,36 @@ const calculatePosition = (
 	const flyoutWidth = flyoutBounds.width + (isHorizontalPosition ? contentGap : 0);
 	const flyoutHeight = flyoutBounds.height + (!isHorizontalPosition ? contentGap : 0);
 
-	const triggerHeight = triggerBounds.height;
 	const triggerWidth = triggerBounds.width;
-	const containerY = passedContainer?.scrollTop || 0;
-	const containerX = passedContainer?.scrollLeft || 0;
+	const triggerHeight = triggerBounds.height;
 
-	const relativeLeft = triggerBounds.left - containerBounds.left + containerX;
-	const relativeTop = triggerBounds.top - containerBounds.top + containerY;
-	const relativeRight = containerBounds.right - triggerBounds.right - containerX;
-	const relativeBottom = containerBounds.bottom - triggerBounds.bottom - containerY;
+	// Detect passed container scroll to sync the flyout position with it
+	const containerX = passedContainer?.scrollLeft;
+	const containerY = passedContainer?.scrollTop;
+
+	const scrollX = containerX ?? window.scrollX;
+	const scrollY = containerY ?? window.scrollY;
+
+	const renderContainerHeight = passedContainer?.clientHeight ?? window.innerHeight;
+	const renderContainerWidth = passedContainer?.clientWidth ?? window.innerWidth;
+
+	// When rendering in the body, bottom bounds will be larrger than the viewport so we calculate it manually
+	const containerBoundsBottom = passedContainer
+		? containerBounds.bottom
+		: window.innerHeight - scrollY;
+
+	// When inside a container, adjut position based on the container scroll since flyout is rendered outside the scroll area
+	const relativeLeft = triggerBounds.left - containerBounds.left + (containerX || 0);
+	const relativeRight = containerBounds.right - triggerBounds.right - (containerX || 0);
+	const relativeTop = triggerBounds.top - containerBounds.top + (containerY || 0);
+	const relativeBottom = containerBoundsBottom - triggerBounds.bottom - (containerY || 0);
 
 	switch (position) {
 		case "start":
 		case "start-top":
 		case "start-bottom":
-			right = relativeRight + triggerWidth;
 			left = relativeLeft - flyoutWidth;
+			right = relativeRight + triggerWidth;
 			break;
 
 		case "end":
@@ -84,8 +98,8 @@ const calculatePosition = (
 
 		case "top-end":
 		case "bottom-end":
-			right = relativeRight - contentShift;
 			left = relativeLeft + triggerWidth - flyoutWidth + contentShift;
+			right = relativeRight - contentShift;
 			break;
 
 		default:
@@ -96,8 +110,8 @@ const calculatePosition = (
 		case "top":
 		case "top-start":
 		case "top-end":
-			bottom = relativeBottom + triggerHeight;
 			top = relativeTop - flyoutHeight;
+			bottom = relativeBottom + triggerHeight;
 			break;
 
 		case "bottom":
@@ -127,27 +141,26 @@ const calculatePosition = (
 	}
 
 	if (fallbackAdjustLayout) {
-		const topOverflowSize = -top;
-		const bottomOverflowSize = top + flyoutHeight - containerBounds.bottom;
-		const leftOverflowSize = -left;
-		const rightOverflowSize = left + flyoutWidth - containerBounds.right;
+		const topOverflowSize = -top + scrollY + SCREEN_OFFSET;
+		const bottomOverflowSize = top + flyoutHeight + SCREEN_OFFSET - scrollY - renderContainerHeight;
+		const leftOverflowSize = -left + scrollX + SCREEN_OFFSET;
+		const rightOverflowSize = left + flyoutWidth + SCREEN_OFFSET - scrollX - renderContainerWidth;
 
-		if (topOverflowSize > 0) {
-			// Can happen for start/end and start-bottom/end-bottom
-			if (bottom !== null) bottom = bottom - topOverflowSize - SCREEN_OFFSET;
-			top = SCREEN_OFFSET;
-		} else if (bottomOverflowSize > 0) {
-			// Can happen for start-top/end-top
-			top = top - bottomOverflowSize - SCREEN_OFFSET;
-		}
-
-		if (leftOverflowSize > 0) {
-			// Can happen for top/bottom and top-end/bottom-end
-			if (right !== null) right = right - leftOverflowSize - SCREEN_OFFSET;
-			left = SCREEN_OFFSET;
-		} else if (rightOverflowSize > 0) {
-			// Can happen for top-start/bottom-start
-			left = left - rightOverflowSize - SCREEN_OFFSET;
+		if (isHorizontalPosition) {
+			if (topOverflowSize > 0) {
+				top = SCREEN_OFFSET + scrollY;
+				if (bottom !== null) bottom = bottom - topOverflowSize;
+			} else if (bottomOverflowSize > 0) {
+				console.log({ bottomOverflowSize, renderContainerHeight });
+				top = top - bottomOverflowSize;
+			}
+		} else {
+			if (leftOverflowSize > 0) {
+				left = SCREEN_OFFSET + scrollX;
+				if (right !== null) right = right - leftOverflowSize;
+			} else if (rightOverflowSize > 0) {
+				left = left - rightOverflowSize;
+			}
 		}
 	}
 

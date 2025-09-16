@@ -96,7 +96,7 @@
 	[data-rs-theme] body {
 		color: var(--rs-color-foreground-neutral);
 		background: var(--rs-color-background-page);
-		height: 100%;
+		min-height: 100vh;
 		scroll-behavior: smooth;
 	}
 }

@@ -84,7 +84,9 @@ const flyout = (
 			contentShift: contentShift * unitModifier,
 			rtl,
 			width,
-			passedContainer,
+			passedContainer:
+				passedContainer ||
+				(closestFixedContainer !== document.body ? closestFixedContainer : undefined),
 			fallbackAdjustLayout,
 		});
 	};
