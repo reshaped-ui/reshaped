@@ -1,10 +1,14 @@
 /**
- * Check if element visually fits on the screen
+ * Check if element visually fits within its render container
  */
 const isFullyVisible = (args: {
+	/** Bounds of the flyout content */
 	flyoutBounds: Pick<DOMRect, "left" | "top" | "width" | "height">;
+	/** Bounds of the container where the flyout content should fit */
 	visualContainerBounds: DOMRect;
+	/** Bounds of the container where flyout content is rendered */
 	renderContainerBounds: DOMRect;
+	/** Container where the flyout content is rendered */
 	container: HTMLElement;
 }) => {
 	const { flyoutBounds, visualContainerBounds, renderContainerBounds, container } = args;

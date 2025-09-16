@@ -17,7 +17,7 @@ import Modal from "components/Modal";
 export default { title: "Utility components/Flyout" };
 
 const Content: React.FC<{
-	height?: number | false;
+	height?: number | false | string;
 	width?: number | false;
 	children?: React.ReactNode;
 }> = (props) => (
@@ -39,7 +39,7 @@ const Content: React.FC<{
 const Demo: React.FC<
 	FlyoutProps & {
 		text?: string;
-		contentHeight?: number | false;
+		contentHeight?: number | false | string;
 		contentWidth?: number | false;
 		height?: false;
 	}
@@ -64,7 +64,7 @@ export const position = {
 	name: "position",
 	render: () => {
 		return (
-			<View gap={4} padding={50} align="center" justify="center" height="120vh" width="120%">
+			<View gap={4} padding={50} align="center" justify="center" height="100vh" width="120%">
 				<View gap={4} direction="row">
 					<Demo position="top-start" defaultActive />
 					<Demo position="top" />
@@ -297,6 +297,158 @@ export const positionFallbacks = {
 					</View>
 				</Example.Item>
 			</Example>
+		);
+	},
+};
+
+const FallbackAdjustLayoutControls = ({
+	containerRef,
+}: {
+	containerRef?: React.RefObject<HTMLDivElement | null>;
+}) => (
+	<>
+		{/* Left side */}
+		<View position="absolute" insetStart={4} insetTop={10} gap={2}>
+			<Demo
+				contentHeight="200px"
+				position="end"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				containerRef={containerRef}
+			/>
+			<Demo
+				contentHeight="200px"
+				position="end-bottom"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				containerRef={containerRef}
+			/>
+		</View>
+
+		<View position="absolute" insetStart={4} insetTop={80} gap={2}>
+			<Demo
+				position="bottom-end"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				contentWidth={300}
+				containerRef={containerRef}
+			/>
+			<Demo
+				position="bottom"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				contentWidth={300}
+				containerRef={containerRef}
+			/>
+		</View>
+
+		<View position="absolute" insetBottom={4} insetStart={4} gap={2}>
+			<Demo
+				contentHeight="200px"
+				position="end-top"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				containerRef={containerRef}
+			/>
+			<Demo
+				contentHeight="200px"
+				position="end"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				containerRef={containerRef}
+			/>
+		</View>
+
+		{/* Right side */}
+
+		<View position="absolute" insetTop={10} insetEnd={4} gap={2}>
+			<Demo contentHeight="200px" position="start" fallbackPositions={false} fallbackAdjustLayout />
+			<Demo
+				contentHeight="200px"
+				position="start-bottom"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				containerRef={containerRef}
+			/>
+		</View>
+
+		<View position="absolute" insetEnd={4} insetTop={80} gap={2}>
+			<Demo
+				position="top-start"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				contentWidth={300}
+				containerRef={containerRef}
+			/>
+			<Demo
+				position="top"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				contentWidth={300}
+				containerRef={containerRef}
+			/>
+		</View>
+
+		<View position="absolute" insetBottom={4} insetEnd={4} gap={2}>
+			<Demo
+				contentHeight="200px"
+				position="start-top"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				containerRef={containerRef}
+			/>
+			<Demo
+				contentHeight="200px"
+				position="start"
+				fallbackPositions={false}
+				fallbackAdjustLayout
+				containerRef={containerRef}
+			/>
+		</View>
+	</>
+);
+
+export const fallbackAdjustLayout = {
+	name: "fallbackAdjustLayout",
+	render: () => {
+		const containerRef = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<View gap={10}>
+				<View height="95vh" width="100%" align="center" justify="center">
+					<View
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						height="1000px"
+						width="600px"
+						padding={4}
+						paddingBlock={15}
+						overflow="auto"
+					>
+						<FallbackAdjustLayoutControls />
+						<View height="150%" width="150%" attributes={{ style: { pointerEvents: "none" } }} />
+					</View>
+				</View>
+
+				<View height="95vh" width="100%" align="center" justify="center">
+					<View
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						height="1000px"
+						width="600px"
+						attributes={{ ref: containerRef }}
+						padding={4}
+						paddingBlock={15}
+						overflow="auto"
+					>
+						<FallbackAdjustLayoutControls containerRef={containerRef} />
+						<View height="150%" width="150%" attributes={{ style: { pointerEvents: "none" } }} />
+					</View>
+				</View>
+
+				<FallbackAdjustLayoutControls />
+				<div style={{ height: "100vh", width: "250%" }} />
+			</View>
 		);
 	},
 };

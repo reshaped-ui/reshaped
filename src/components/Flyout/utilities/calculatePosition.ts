@@ -1,19 +1,7 @@
 import type * as T from "../Flyout.types";
+import { getRTLPosition, centerBySize } from "./helpers";
 
-const SCREEN_OFFSET = 16;
-
-const getRTLPosition = (position: T.Position) => {
-	if (position.includes("start")) return position.replace("start", "end") as T.Position;
-	if (position.includes("end")) return position.replace("end", "start") as T.Position;
-	return position;
-};
-
-/**
- * Get a position value which centers 2 elements vertically or horizontally
- */
-const centerBySize = (originSize: number, targetSize: number) => {
-	return Math.floor(originSize / 2 - targetSize / 2);
-};
+const SCREEN_OFFSET = 8;
 
 /**
  * Calculate styles for the current position
@@ -24,7 +12,10 @@ const calculatePosition = (
 		flyoutBounds: { width: number; height: number };
 		passedContainer?: HTMLElement | null;
 		containerBounds: DOMRect;
-	} & Pick<T.Options, "position" | "rtl" | "width" | "contentGap" | "contentShift">
+	} & Pick<
+		T.Options,
+		"position" | "rtl" | "width" | "contentGap" | "contentShift" | "fallbackAdjustLayout"
+	>
 ) => {
 	const {
 		triggerBounds,
@@ -36,6 +27,7 @@ const calculatePosition = (
 		contentGap = 0,
 		contentShift = 0,
 		passedContainer,
+		fallbackAdjustLayout,
 	} = args;
 	const isFullWidth = width === "full" || width === "100%";
 	let left: number = 0;
@@ -50,29 +42,42 @@ const calculatePosition = (
 	}
 
 	const isHorizontalPosition = !!position.match(/^(start|end)/);
-	const isVerticalPosition = !!position.match(/^(top|bottom)/);
 
 	// contentGap adds padding to the flyout to make sure it doesn't disapper while moving the mouse to the content
 	// So its width/height is bigger than the visible part of the content
 	const flyoutWidth = flyoutBounds.width + (isHorizontalPosition ? contentGap : 0);
-	const flyoutHeight = flyoutBounds.height + (isVerticalPosition ? contentGap : 0);
+	const flyoutHeight = flyoutBounds.height + (!isHorizontalPosition ? contentGap : 0);
 
-	const triggerHeight = triggerBounds.height;
 	const triggerWidth = triggerBounds.width;
-	const containerY = passedContainer?.scrollTop || 0;
-	const containerX = passedContainer?.scrollLeft || 0;
+	const triggerHeight = triggerBounds.height;
 
-	const relativeLeft = triggerBounds.left - containerBounds.left + containerX;
-	const relativeTop = triggerBounds.top - containerBounds.top + containerY;
-	const relativeRight = containerBounds.right - triggerBounds.right - containerX;
-	const relativeBottom = containerBounds.bottom - triggerBounds.bottom - containerY;
+	// Detect passed container scroll to sync the flyout position with it
+	const containerX = passedContainer?.scrollLeft;
+	const containerY = passedContainer?.scrollTop;
+
+	const scrollX = containerX ?? window.scrollX;
+	const scrollY = containerY ?? window.scrollY;
+
+	const renderContainerHeight = passedContainer?.clientHeight ?? window.innerHeight;
+	const renderContainerWidth = passedContainer?.clientWidth ?? window.innerWidth;
+
+	// When rendering in the body, bottom bounds will be larrger than the viewport so we calculate it manually
+	const containerBoundsBottom = passedContainer
+		? containerBounds.bottom
+		: window.innerHeight - scrollY;
+
+	// When inside a container, adjut position based on the container scroll since flyout is rendered outside the scroll area
+	const relativeLeft = triggerBounds.left - containerBounds.left + (containerX || 0);
+	const relativeRight = containerBounds.right - triggerBounds.right - (containerX || 0);
+	const relativeTop = triggerBounds.top - containerBounds.top + (containerY || 0);
+	const relativeBottom = containerBoundsBottom - triggerBounds.bottom - (containerY || 0);
 
 	switch (position) {
 		case "start":
 		case "start-top":
 		case "start-bottom":
-			right = relativeRight + triggerWidth;
 			left = relativeLeft - flyoutWidth;
+			right = relativeRight + triggerWidth;
 			break;
 
 		case "end":
@@ -93,8 +98,8 @@ const calculatePosition = (
 
 		case "top-end":
 		case "bottom-end":
-			right = relativeRight - contentShift;
 			left = relativeLeft + triggerWidth - flyoutWidth + contentShift;
+			right = relativeRight - contentShift;
 			break;
 
 		default:
@@ -105,8 +110,8 @@ const calculatePosition = (
 		case "top":
 		case "top-start":
 		case "top-end":
-			bottom = relativeBottom + triggerHeight;
 			top = relativeTop - flyoutHeight;
+			bottom = relativeBottom + triggerHeight;
 			break;
 
 		case "bottom":
@@ -127,12 +132,36 @@ const calculatePosition = (
 
 		case "start-bottom":
 		case "end-bottom":
-			bottom = relativeBottom - contentShift;
 			top = relativeTop + triggerHeight - flyoutHeight + contentShift;
+			bottom = relativeBottom - contentShift;
 			break;
 
 		default:
 			break;
+	}
+
+	if (fallbackAdjustLayout) {
+		const topOverflowSize = -top + scrollY + SCREEN_OFFSET;
+		const bottomOverflowSize = top + flyoutHeight + SCREEN_OFFSET - scrollY - renderContainerHeight;
+		const leftOverflowSize = -left + scrollX + SCREEN_OFFSET;
+		const rightOverflowSize = left + flyoutWidth + SCREEN_OFFSET - scrollX - renderContainerWidth;
+
+		if (isHorizontalPosition) {
+			if (topOverflowSize > 0) {
+				top = SCREEN_OFFSET + scrollY;
+				if (bottom !== null) bottom = bottom - topOverflowSize;
+			} else if (bottomOverflowSize > 0) {
+				console.log({ bottomOverflowSize, renderContainerHeight });
+				top = top - bottomOverflowSize;
+			}
+		} else {
+			if (leftOverflowSize > 0) {
+				left = SCREEN_OFFSET + scrollX;
+				if (right !== null) right = right - leftOverflowSize;
+			} else if (rightOverflowSize > 0) {
+				left = left - rightOverflowSize;
+			}
+		}
 	}
 
 	let widthStyle;

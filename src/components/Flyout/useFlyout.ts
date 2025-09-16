@@ -28,6 +28,7 @@ type UseFlyout = (args: {
 	position?: T.Position;
 	defaultActive?: boolean;
 	fallbackPositions?: T.Position[];
+	fallbackAdjustLayout?: boolean;
 	contentGap?: number;
 	contentShift?: number;
 	container?: HTMLElement | null;
@@ -75,7 +76,13 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 
 const useFlyout: UseFlyout = (args) => {
 	const { triggerElRef, flyoutElRef, triggerBounds, contentGap, contentShift, ...options } = args;
-	const { position: defaultPosition = "bottom", fallbackPositions, width, container } = options;
+	const {
+		position: defaultPosition = "bottom",
+		fallbackPositions,
+		width,
+		container,
+		fallbackAdjustLayout,
+	} = options;
 	const lastUsedPositionRef = React.useRef(defaultPosition);
 	// Memo the array internally to avoid new arrays triggering useCallback
 	const cachedFallbackPositions = React.useMemo(
@@ -122,6 +129,7 @@ const useFlyout: UseFlyout = (args) => {
 				width,
 				position: changePositon ? defaultPosition : lastUsedPositionRef.current,
 				fallbackPositions: changePositon ? cachedFallbackPositions : [],
+				fallbackAdjustLayout,
 				lastUsedPosition: lastUsedPositionRef.current,
 				onPositionChoose: handlePosition,
 				rtl: isRTL,
@@ -141,6 +149,7 @@ const useFlyout: UseFlyout = (args) => {
 			container,
 			defaultPosition,
 			cachedFallbackPositions,
+			fallbackAdjustLayout,
 			isRTL,
 			flyoutElRef,
 			triggerElRef,

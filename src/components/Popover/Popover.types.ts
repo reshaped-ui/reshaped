@@ -9,6 +9,7 @@ export type Props = Pick<
 	| "position"
 	| "forcePosition"
 	| "fallbackPositions"
+	| "fallbackAdjustLayout"
 	| "onOpen"
 	| "onClose"
 	| "width"

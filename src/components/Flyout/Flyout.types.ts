@@ -29,6 +29,7 @@ export type Options = {
 	container?: HTMLElement | null;
 	rtl: boolean;
 	fallbackPositions?: Position[];
+	fallbackAdjustLayout?: boolean;
 	lastUsedPosition: Position;
 	onPositionChoose: (position: Position) => void;
 	contentGap?: number;
@@ -113,6 +114,8 @@ type BaseProps = {
 	forcePosition?: boolean;
 	/** Fallback positions for the content when it doesn't fit into the viewport or container */
 	fallbackPositions?: Position[] | false;
+	/** Adjust the content size and shift its position to fit into the container when none of the fallback positions work */
+	fallbackAdjustLayout?: boolean;
 	/** Change component trap focus keyboard behavior and shortcuts */
 	trapFocusMode?: TrapMode | false;
 	/** Disable the flyout content interactivity */
