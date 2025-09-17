@@ -94,6 +94,17 @@ export const disabled: StoryObj = {
 	},
 };
 
+export const render: StoryObj = {
+	name: "render",
+	render: () => <Link render={(props) => <section {...props} />}>Trigger</Link>,
+	play: async ({ canvas }) => {
+		const el = canvas.getByText("Trigger");
+
+		expect(el).toBeInTheDocument();
+		expect(el.tagName).toBe("SECTION");
+	},
+};
+
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (

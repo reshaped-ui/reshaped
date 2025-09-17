@@ -9,6 +9,7 @@ import s from "./Actionable.module.css";
 const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 	const {
 		children,
+		render,
 		href,
 		onClick,
 		type,
@@ -82,20 +83,26 @@ const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 		handlePress(event);
 	};
 
-	return (
-		<TagName
-			ref={ref}
-			// rootAttributes can receive ref from Flyout
-			{...rootAttributes}
-			aria-disabled={disabled ? true : undefined}
-			className={rootClassNames}
-			onClick={handlePress}
-			onKeyDown={handleKeyDown}
-		>
+	const childrenNode = (
+		<>
 			{touchHitbox && (isLink || isButton) && !disabled && <span className={s.touch} />}
 			{children}
-		</TagName>
+		</>
 	);
+
+	const tagAttributes = {
+		ref: ref as T.AttributesRef,
+		// rootAttributes can receive ref from Flyout
+		...rootAttributes,
+		className: rootClassNames,
+		onClick: handlePress,
+		onKeyDown: handleKeyDown,
+		"aria-disabled": disabled ? true : undefined,
+		children: childrenNode,
+	};
+
+	if (render) return render(tagAttributes);
+	return <TagName {...tagAttributes} />;
 });
 
 Actionable.displayName = "Actionable";

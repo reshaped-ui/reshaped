@@ -23,6 +23,7 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		roundedCorners,
 		stopPropagation,
 		as,
+		render,
 		className,
 		attributes,
 	} = props;
@@ -49,6 +50,7 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			ref={ref}
 			as={as}
 			stopPropagation={stopPropagation}
+			render={render}
 		>
 			<View direction="row" gap={gapSize} align="center">
 				{icon && <Icon svg={icon} className={s.icon} size={iconSize} />}
