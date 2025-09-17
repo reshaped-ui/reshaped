@@ -4,7 +4,7 @@ type BaseProps = Omit<ButtonProps, "variant" | "higlighted"> & {
 	/** Component render variant
 	 * @default "outline"
 	 */
-	variant?: Extract<ButtonProps["variant"], "outline" | "ghost">;
+	variant?: ButtonProps["variant"];
 	/** Value of the toggle button, enables controlled mode for the ToggleButtonGroup */
 	value?: string;
 	/** Callback when the toggle button value changes */
