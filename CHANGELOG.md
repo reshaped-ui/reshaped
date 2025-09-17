@@ -1,3 +1,10 @@
+## 3.8.0-canary.2
+
+
+### Features
+
+* **ToggleButton:** relaxed variant types ([416ddaa](https://github.com/reshaped-ui/reshaped/commit/416ddaa3ebbeed9e12acfdc7e0fb3027943dfbbf))
+
 ## 3.8.0-canary.1
 
 ### Bug Fixes
