@@ -11,6 +11,7 @@ export type Props = Pick<
 	| "onClick"
 	| "type"
 	| "stopPropagation"
+	| "render"
 > & {
 	/** Icon at the start position */
 	icon?: IconProps["svg"];

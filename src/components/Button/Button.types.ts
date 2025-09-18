@@ -17,6 +17,7 @@ export type Props = Pick<
 	| "type"
 	| "as"
 	| "stopPropagation"
+	| "render"
 > & {
 	/** Component color scheme
 	 * @default "neutral"

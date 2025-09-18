@@ -1,6 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
 import { userEvent, expect, fn } from "storybook/test";
 import MenuItem from "components/MenuItem";
+import Example from "utilities/storybook/Example";
+import Actionable from "components/Actionable";
 
 export default {
 	title: "Components/MenuItem/tests",
@@ -91,6 +93,30 @@ export const disabled: StoryObj = {
 		const el = canvas.getAllByRole("button")[0];
 
 		expect(el).toBeDisabled();
+	},
+};
+
+export const as: StoryObj = {
+	name: "as, render",
+	render: () => (
+		<Example>
+			<Example.Item title="render, disabled">
+				<MenuItem
+					disabled
+					onClick={() => {}}
+					render={(props) => <section {...props} />}
+					attributes={{ "data-testid": "render-el" }}
+				>
+					Trigger
+				</MenuItem>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const renderEl = canvas.getByTestId("render-el");
+
+		expect(renderEl.tagName).toBe("SECTION");
+		expect(renderEl).toHaveAttribute("aria-disabled", "true");
 	},
 };
 

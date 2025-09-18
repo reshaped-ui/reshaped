@@ -18,6 +18,7 @@ const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		type,
 		onClick,
 		stopPropagation,
+		render,
 	} = props;
 	const rootClassNames = classNames(
 		s.root,
@@ -38,6 +39,7 @@ const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			onClick={onClick}
 			ref={ref}
 			stopPropagation={stopPropagation}
+			render={render}
 		>
 			{icon && <Icon svg={icon} />}
 			{children}

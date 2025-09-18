@@ -15,6 +15,7 @@ export type Props = Pick<
 	| "onClick"
 	| "as"
 	| "stopPropagation"
+	| "render"
 > & {
 	/** Component color, based on the color tokens */
 	color?: "neutral" | "critical" | "primary";

@@ -1,6 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import { userEvent, expect, fn } from "storybook/test";
 import Button from "components/Button";
+import Example from "utilities/storybook/Example";
 
 export default {
 	title: "Components/Button/tests",
@@ -91,6 +92,38 @@ export const disabled: StoryObj = {
 		const el = canvas.getAllByRole("button")[0];
 
 		expect(el).toBeDisabled();
+	},
+};
+
+export const as: StoryObj = {
+	name: "as, render",
+	render: () => (
+		<Example>
+			<Example.Item title="as: span">
+				<Button onClick={() => {}} as="span">
+					Trigger
+				</Button>
+			</Example.Item>
+			<Example.Item title="render, disabled">
+				<Button
+					disabled
+					onClick={() => {}}
+					render={(props) => <section {...props} />}
+					attributes={{ "data-testid": "render-el" }}
+				>
+					Trigger
+				</Button>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const [asEl] = canvas.getAllByText("Trigger");
+		const renderEl = canvas.getByTestId("render-el");
+
+		expect(asEl.tagName).toBe("SPAN");
+
+		expect(renderEl.tagName).toBe("SECTION");
+		expect(renderEl).toHaveAttribute("aria-disabled", "true");
 	},
 };
 

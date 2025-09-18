@@ -28,6 +28,7 @@ const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		endIcon,
 		stopPropagation,
 		as,
+		render,
 		className,
 		attributes,
 	} = props;
@@ -85,6 +86,7 @@ const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			ref={ref}
 			as={as}
 			stopPropagation={stopPropagation}
+			render={render}
 		>
 			{loading && (
 				<div className={s.loader}>
