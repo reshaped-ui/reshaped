@@ -208,6 +208,7 @@ export { default as useHandlerRef } from "hooks/useHandlerRef";
 export { default as useHotkeys } from "hooks/useHotkeys";
 export { default as useIsomorphicLayoutEffect } from "hooks/useIsomorphicLayoutEffect";
 export { default as useKeyboardMode } from "hooks/useKeyboardMode";
+export { default as useMenuItemNavigation } from "hooks/useMenuItemNavigation";
 export { default as useOnClickOutside } from "hooks/useOnClickOutside";
 export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";
 export { default as useRTL } from "hooks/useRTL";
