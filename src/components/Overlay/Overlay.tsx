@@ -52,7 +52,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	// Separating rendered and visible states to make sure animation is triggered only once overlay was added to the dom
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
-	const isDismissible = useIsDismissible({ active, contentRef });
+	const isDismissible = useIsDismissible({ active, contentRef, hasTrigger: false });
 
 	const rootClassNames = classNames(
 		s.root,
