@@ -1,3 +1,10 @@
+## 3.8.0-canary.3
+
+
+### Features
+
+* **Actionable, Link, Button, MenuItem:** added render prop ([104e594](https://github.com/reshaped-ui/reshaped/commit/104e594dcb086fd9f6a38c8085ebceda8a2ec9cf))
+
 ## 3.8.0-canary.2
 
 
