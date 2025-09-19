@@ -231,6 +231,7 @@ export const containerRef = () => {
 
 export const edgeCases = () => {
 	const menuModalToggle = useToggle();
+	const menuModalToggleInner = useToggle();
 	const scrollModalToggle = useToggle();
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -310,7 +311,11 @@ export const edgeCases = () => {
 								<DropdownMenu.Item>Item 2</DropdownMenu.Item>
 							</DropdownMenu.Content>
 						</DropdownMenu>
+						<Button onClick={menuModalToggleInner.activate}>Open dialog</Button>
 						<Button onClick={menuModalToggle.deactivate}>Close</Button>
+						<Modal active={menuModalToggleInner.active} onClose={menuModalToggleInner.deactivate}>
+							<Button onClick={menuModalToggleInner.deactivate}>Close</Button>
+						</Modal>
 					</View>
 				</Modal>
 			</Example.Item>

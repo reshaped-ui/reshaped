@@ -5,7 +5,6 @@
 
 import React from "react";
 import useElementId from "hooks/useElementId";
-import { onNextFrame } from "utilities/animation";
 
 type Ref = React.RefObject<HTMLElement | null>;
 type QueueItem = { triggerRef?: Ref; contentRef: Ref; parentId: string | null };
@@ -36,20 +35,12 @@ const useIsDismissible = (args: { active?: boolean; contentRef: Ref; triggerRef?
 	React.useEffect(() => {
 		if (!active) return;
 
-		onNextFrame(() => addToQueue(id, contentRef, triggerRef));
+		addToQueue(id, contentRef, triggerRef);
 		return () => removeFromQueue(id);
 	}, [active, id, contentRef, triggerRef]);
 
 	return React.useCallback(() => {
 		if (!active) return true;
-
-		const latest = latestId ? queue[latestId] : undefined;
-		const latestTrigger = latest?.triggerRef?.current;
-		const prev = latest?.parentId ? queue[latest.parentId] : undefined;
-		const prevContent = prev?.contentRef.current;
-
-		// Don't block independently rendered components that are not nested in each other
-		if (!prevContent || !latestTrigger || !prevContent.contains(latestTrigger)) return true;
 		return latestId === id;
 	}, [id, active]);
 };
