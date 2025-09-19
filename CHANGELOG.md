@@ -1,3 +1,10 @@
+## 3.8.0-canary.4
+
+
+### Bug Fixes
+
+* **Modal:** fixed nested modals not closing one by one ([e8af4ed](https://github.com/reshaped-ui/reshaped/commit/e8af4ed80b8eabd1b7e5466fd0be6adb90a9d70f))
+
 ## 3.8.0-canary.3
 
 
