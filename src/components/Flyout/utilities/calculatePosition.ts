@@ -234,7 +234,7 @@ const calculatePosition = (
 		boundaries: {
 			left,
 			top,
-			height: Math.ceil(flyoutHeight),
+			height: height ?? Math.ceil(flyoutHeight),
 			width: width ?? Math.ceil(flyoutWidth),
 		},
 	};

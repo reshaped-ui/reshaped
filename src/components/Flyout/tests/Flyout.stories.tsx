@@ -468,7 +468,6 @@ export const fallbackAdjustLayout = {
 				position="bottom-start"
 				width="200px"
 				fallbackAdjustLayout
-				fallbackPositions={false}
 				defaultActive
 			>
 				<div style={{ height: "600px" }}>Content</div>

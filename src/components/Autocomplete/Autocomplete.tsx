@@ -29,6 +29,9 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 		active,
 		onOpen,
 		onClose,
+		fallbackAdjustLayout,
+		fallbackMinWidth,
+		fallbackMinHeight,
 		...textFieldProps
 	} = props;
 	const [highlightedId, setHighlightedId] = React.useState<string>();
@@ -183,6 +186,9 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 				onClose={handleClose}
 				onOpen={handleOpen}
 				containerRef={containerRef}
+				fallbackAdjustLayout={fallbackAdjustLayout}
+				fallbackMinWidth={fallbackMinWidth}
+				fallbackMinHeight={fallbackMinHeight}
 				disableHideAnimation
 				instanceRef={instanceRef}
 			>

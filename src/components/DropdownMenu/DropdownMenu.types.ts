@@ -12,6 +12,8 @@ export type Props = Pick<
 	| "forcePosition"
 	| "fallbackPositions"
 	| "fallbackAdjustLayout"
+	| "fallbackMinWidth"
+	| "fallbackMinHeight"
 	| "triggerType"
 	| "contentGap"
 	| "contentShift"
