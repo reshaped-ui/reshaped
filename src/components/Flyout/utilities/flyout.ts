@@ -25,6 +25,8 @@ const flyout = (
 		position,
 		fallbackPositions,
 		fallbackAdjustLayout,
+		fallbackMinWidth,
+		fallbackMinHeight,
 		width,
 		container: passedContainer,
 		lastUsedPosition,
@@ -88,6 +90,8 @@ const flyout = (
 				passedContainer ||
 				(closestFixedContainer !== document.body ? closestFixedContainer : undefined),
 			fallbackAdjustLayout,
+			fallbackMinWidth,
+			fallbackMinHeight,
 		});
 	};
 

@@ -23,17 +23,21 @@ export type CloseReason =
 
 export type Position = `${YSide}` | `${YSide}-${XSide}` | `${XSide}` | `${XSide}-${YSide}`;
 export type Width = "trigger" | string;
-export type Options = {
-	width?: Width;
+export type Options = Pick<
+	BaseProps,
+	| "width"
+	| "fallbackAdjustLayout"
+	| "fallbackMinWidth"
+	| "fallbackMinHeight"
+	| "contentGap"
+	| "contentShift"
+> & {
 	position: Position;
+	fallbackPositions?: Position[];
 	container?: HTMLElement | null;
 	rtl: boolean;
-	fallbackPositions?: Position[];
-	fallbackAdjustLayout?: boolean;
 	lastUsedPosition: Position;
 	onPositionChoose: (position: Position) => void;
-	contentGap?: number;
-	contentShift?: number;
 };
 export type Styles = React.CSSProperties;
 
@@ -116,6 +120,10 @@ type BaseProps = {
 	fallbackPositions?: Position[] | false;
 	/** Adjust the content size and shift its position to fit into the container when none of the fallback positions work */
 	fallbackAdjustLayout?: boolean;
+	/** Minimum width for the content when fallbackAdjustLayout is true */
+	fallbackMinWidth?: string;
+	/** Minimum height for the content when fallbackAdjustLayout is true */
+	fallbackMinHeight?: string;
 	/** Change component trap focus keyboard behavior and shortcuts */
 	trapFocusMode?: TrapMode | false;
 	/** Disable the flyout content interactivity */
@@ -206,9 +214,8 @@ export type ContextProps = {
 	| "triggerType"
 	| "contentClassName"
 	| "contentAttributes"
-	| "trapFocusMode"
 	| "contentGap"
-	| "contentShift"
+	| "trapFocusMode"
 	| "containerRef"
 	| "disableContentHover"
 	| "autoFocus"

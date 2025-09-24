@@ -23,19 +23,25 @@ type FlyoutAction =
 	| FlyoutHideAction
 	| FlyoutRemoveAction;
 
-type UseFlyout = (args: {
-	width?: T.Width;
-	position?: T.Position;
-	defaultActive?: boolean;
-	fallbackPositions?: T.Position[];
-	fallbackAdjustLayout?: boolean;
-	contentGap?: number;
-	contentShift?: number;
-	container?: HTMLElement | null;
-	triggerElRef: React.RefObject<HTMLElement | null>;
-	flyoutElRef: React.RefObject<HTMLElement | null>;
-	triggerBounds?: DOMRect | G.Coordinates | null;
-}) => Pick<T.State, "styles" | "position" | "status"> & {
+type UseFlyout = (
+	args: Pick<
+		T.Props,
+		| "width"
+		| "position"
+		| "defaultActive"
+		| "fallbackAdjustLayout"
+		| "fallbackMinWidth"
+		| "fallbackMinHeight"
+		| "contentGap"
+		| "contentShift"
+	> & {
+		fallbackPositions?: T.Position[];
+		container?: HTMLElement | null;
+		triggerElRef: React.RefObject<HTMLElement | null>;
+		flyoutElRef: React.RefObject<HTMLElement | null>;
+		triggerBounds?: DOMRect | G.Coordinates | null;
+	}
+) => Pick<T.State, "styles" | "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
@@ -79,9 +85,11 @@ const useFlyout: UseFlyout = (args) => {
 	const {
 		position: defaultPosition = "bottom",
 		fallbackPositions,
+		fallbackAdjustLayout,
+		fallbackMinWidth,
+		fallbackMinHeight,
 		width,
 		container,
-		fallbackAdjustLayout,
 	} = options;
 	const lastUsedPositionRef = React.useRef(defaultPosition);
 	// Memo the array internally to avoid new arrays triggering useCallback
@@ -130,6 +138,8 @@ const useFlyout: UseFlyout = (args) => {
 				position: changePositon ? defaultPosition : lastUsedPositionRef.current,
 				fallbackPositions: changePositon ? cachedFallbackPositions : [],
 				fallbackAdjustLayout,
+				fallbackMinWidth,
+				fallbackMinHeight,
 				lastUsedPosition: lastUsedPositionRef.current,
 				onPositionChoose: handlePosition,
 				rtl: isRTL,
@@ -158,6 +168,8 @@ const useFlyout: UseFlyout = (args) => {
 			contentGap,
 			contentShift,
 			handlePosition,
+			fallbackMinWidth,
+			fallbackMinHeight,
 		]
 	);
 
