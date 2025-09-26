@@ -22,9 +22,14 @@
 .inner {
 	pointer-events: all;
 	opacity: 0;
-	transform: scale(0.9) translateY(0);
+	transform: scale(0.92) translateY(0);
 	transform-origin: var(--rs-flyout-origin-x) var(--rs-flyout-origin-y);
 	outline: none;
+	height: 100%;
+	overflow: auto;
+	max-width: 100%;
+	max-height: 100%;
+	backface-visibility: hidden;
 
 	/* Using 1ms to still trigger transitionEnd event */
 	transition: 1ms var(--rs-easing-accelerate);

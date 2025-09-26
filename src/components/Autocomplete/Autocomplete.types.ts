@@ -10,7 +10,17 @@ type SelectArgs = {
 };
 
 export type Props = TextFieldProps &
-	Pick<DropdownMenuProps, "containerRef" | "instanceRef" | "active" | "onOpen" | "onClose"> & {
+	Pick<
+		DropdownMenuProps,
+		| "containerRef"
+		| "instanceRef"
+		| "active"
+		| "onOpen"
+		| "onClose"
+		| "fallbackAdjustLayout"
+		| "fallbackMinWidth"
+		| "fallbackMinHeight"
+	> & {
 		/** Callback for when value changes from user input */
 		onInput?: TextFieldProps["onChange"];
 		/** Callback for when an item is selected in the dropdown */

@@ -18,7 +18,7 @@ export default { title: "Utility components/Flyout" };
 
 const Content: React.FC<{
 	height?: number | false | string;
-	width?: number | false;
+	width?: number | false | string;
 	children?: React.ReactNode;
 }> = (props) => (
 	<div
@@ -26,7 +26,7 @@ const Content: React.FC<{
 			background: "var(--rs-color-background-elevation-overlay)",
 			padding: "var(--rs-unit-x4)",
 			height: props.height === false ? undefined : props.height || 150,
-			minWidth: props.width === false ? undefined : props.width || 160,
+			width: props.width === false ? undefined : props.width || 160,
 			borderRadius: "var(--rs-radius-medium)",
 			border: "1px solid var(--rs-color-border-neutral-faded)",
 			boxSizing: "border-box",
@@ -40,7 +40,7 @@ const Demo: React.FC<
 	FlyoutProps & {
 		text?: string;
 		contentHeight?: number | false | string;
-		contentWidth?: number | false;
+		contentWidth?: number | false | string;
 		height?: false;
 	}
 > = (props) => {
@@ -51,10 +51,20 @@ const Demo: React.FC<
 			<Flyout.Trigger>
 				{(attributes) => <Button attributes={attributes}>{text || position}</Button>}
 			</Flyout.Trigger>
-			<Flyout.Content>
-				<Content height={contentHeight} width={contentWidth}>
-					{children}
-				</Content>
+			<Flyout.Content
+				attributes={{
+					style: {
+						background: "var(--rs-color-background-elevation-overlay)",
+						padding: "var(--rs-unit-x4)",
+						height: contentHeight === false ? undefined : contentHeight || 150,
+						width: contentWidth === false ? undefined : contentWidth || 160,
+						borderRadius: "var(--rs-radius-medium)",
+						border: "1px solid var(--rs-color-border-neutral-faded)",
+						boxSizing: "border-box",
+					},
+				}}
+			>
+				{children || "Content"}
 			</Flyout.Content>
 		</Flyout>
 	);
@@ -303,113 +313,171 @@ export const positionFallbacks = {
 
 const FallbackAdjustLayoutControls = ({
 	containerRef,
+	large,
 }: {
 	containerRef?: React.RefObject<HTMLDivElement | null>;
-}) => (
-	<>
-		{/* Left side */}
-		<View position="absolute" insetStart={4} insetTop={10} gap={2}>
-			<Demo
-				contentHeight="200px"
-				position="end"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				containerRef={containerRef}
-			/>
-			<Demo
-				contentHeight="200px"
-				position="end-bottom"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				containerRef={containerRef}
-			/>
-		</View>
+	large?: boolean;
+}) => {
+	const contentHeight = large ? "2000px" : "200px";
+	const contentWidth = large ? "2000px" : "300px";
 
-		<View position="absolute" insetStart={4} insetTop={80} gap={2}>
-			<Demo
-				position="bottom-end"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				contentWidth={300}
-				containerRef={containerRef}
-			/>
-			<Demo
-				position="bottom"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				contentWidth={300}
-				containerRef={containerRef}
-			/>
-		</View>
+	return (
+		<>
+			{/* Left side */}
+			<View position="absolute" insetStart={4} insetTop={10} gap={2}>
+				<Demo
+					contentHeight={contentHeight}
+					position="end"
+					fallbackAdjustLayout
+					fallbackPositions={false}
+					containerRef={containerRef}
+				/>
+				<Demo
+					contentHeight={contentHeight}
+					position="end-bottom"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					containerRef={containerRef}
+				/>
+			</View>
 
-		<View position="absolute" insetBottom={4} insetStart={4} gap={2}>
-			<Demo
-				contentHeight="200px"
-				position="end-top"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				containerRef={containerRef}
-			/>
-			<Demo
-				contentHeight="200px"
-				position="end"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				containerRef={containerRef}
-			/>
-		</View>
+			<View position="absolute" insetStart={4} insetTop={80} gap={2}>
+				<Demo
+					position="top"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+				<Demo
+					position="top-end"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+				<Demo
+					position="bottom-end"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+				<Demo
+					position="bottom"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+			</View>
 
-		{/* Right side */}
+			<View position="absolute" insetBottom={4} insetStart={4} gap={2}>
+				<Demo
+					contentHeight={contentHeight}
+					position="end-top"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					containerRef={containerRef}
+				/>
+				<Demo
+					contentHeight={contentHeight}
+					position="end"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					containerRef={containerRef}
+				/>
+			</View>
 
-		<View position="absolute" insetTop={10} insetEnd={4} gap={2}>
-			<Demo contentHeight="200px" position="start" fallbackPositions={false} fallbackAdjustLayout />
-			<Demo
-				contentHeight="200px"
-				position="start-bottom"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				containerRef={containerRef}
-			/>
-		</View>
+			{/* Right side */}
 
-		<View position="absolute" insetEnd={4} insetTop={80} gap={2}>
-			<Demo
-				position="top-start"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				contentWidth={300}
-				containerRef={containerRef}
-			/>
-			<Demo
-				position="top"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				contentWidth={300}
-				containerRef={containerRef}
-			/>
-		</View>
+			<View position="absolute" insetTop={10} insetEnd={4} gap={2}>
+				<Demo
+					contentHeight={contentHeight}
+					position="start"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					containerRef={containerRef}
+				/>
+				<Demo
+					contentHeight={contentHeight}
+					position="start-bottom"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					containerRef={containerRef}
+				/>
+			</View>
 
-		<View position="absolute" insetBottom={4} insetEnd={4} gap={2}>
-			<Demo
-				contentHeight="200px"
-				position="start-top"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				containerRef={containerRef}
-			/>
-			<Demo
-				contentHeight="200px"
-				position="start"
-				fallbackPositions={false}
-				fallbackAdjustLayout
-				containerRef={containerRef}
-			/>
-		</View>
-	</>
-);
+			<View position="absolute" insetEnd={4} insetTop={80} gap={2}>
+				<Demo
+					position="top-start"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+				<Demo
+					position="top"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+				<Demo
+					position="bottom-start"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+				<Demo
+					position="bottom"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					contentWidth={contentWidth}
+					containerRef={containerRef}
+				/>
+			</View>
+
+			<View position="absolute" insetBottom={4} insetEnd={4} gap={2}>
+				<Demo
+					contentHeight={contentHeight}
+					position="start-top"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					containerRef={containerRef}
+				/>
+				<Demo
+					contentHeight={contentHeight}
+					position="start"
+					fallbackPositions={false}
+					fallbackAdjustLayout
+					containerRef={containerRef}
+				/>
+			</View>
+		</>
+	);
+};
 
 export const fallbackAdjustLayout = {
 	name: "fallbackAdjustLayout",
+	render: () => {
+		return (
+			<Demo
+				contentHeight={false}
+				position="bottom-start"
+				width="200px"
+				fallbackAdjustLayout
+				defaultActive
+			>
+				<div style={{ height: "600px" }}>Content</div>
+			</Demo>
+		);
+	},
+};
+
+export const fallbackAdjustLayoutShift = {
+	name: "fallbackAdjustLayout, shift",
 	render: () => {
 		const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -447,6 +515,51 @@ export const fallbackAdjustLayout = {
 				</View>
 
 				<FallbackAdjustLayoutControls />
+				<div style={{ height: "100vh", width: "250%" }} />
+			</View>
+		);
+	},
+};
+
+export const fallbackAdjustLayoutSize = {
+	name: "fallbackAdjustLayout, size",
+	render: () => {
+		const containerRef = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<View gap={10}>
+				<View height="95vh" width="100%" align="center" justify="center">
+					<View
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						height="1000px"
+						width="600px"
+						padding={4}
+						paddingBlock={15}
+						overflow="auto"
+					>
+						<FallbackAdjustLayoutControls large />
+						<View height="150%" width="150%" attributes={{ style: { pointerEvents: "none" } }} />
+					</View>
+				</View>
+
+				<View height="95vh" width="100%" align="center" justify="center">
+					<View
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						height="1000px"
+						width="600px"
+						attributes={{ ref: containerRef }}
+						padding={4}
+						paddingBlock={15}
+						overflow="auto"
+					>
+						<FallbackAdjustLayoutControls containerRef={containerRef} large />
+						<View height="150%" width="150%" attributes={{ style: { pointerEvents: "none" } }} />
+					</View>
+				</View>
+
+				<FallbackAdjustLayoutControls large />
 				<div style={{ height: "100vh", width: "250%" }} />
 			</View>
 		);

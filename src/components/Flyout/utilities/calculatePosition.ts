@@ -14,7 +14,14 @@ const calculatePosition = (
 		containerBounds: DOMRect;
 	} & Pick<
 		T.Options,
-		"position" | "rtl" | "width" | "contentGap" | "contentShift" | "fallbackAdjustLayout"
+		| "position"
+		| "rtl"
+		| "width"
+		| "contentGap"
+		| "contentShift"
+		| "fallbackAdjustLayout"
+		| "fallbackMinWidth"
+		| "fallbackMinHeight"
 	>
 ) => {
 	const {
@@ -23,17 +30,21 @@ const calculatePosition = (
 		containerBounds,
 		position: passedPosition,
 		rtl,
-		width,
+		width: passedWidth,
 		contentGap = 0,
 		contentShift = 0,
 		passedContainer,
 		fallbackAdjustLayout,
+		fallbackMinWidth,
+		fallbackMinHeight,
 	} = args;
-	const isFullWidth = width === "full" || width === "100%";
+	const isFullWidth = passedWidth === "full" || passedWidth === "100%";
 	let left: number = 0;
 	let top: number = 0;
 	let bottom: number | null = null;
 	let right: number | null = null;
+	let height: number | undefined = undefined;
+	let width: number | undefined = undefined;
 
 	let position = passedPosition;
 	if (rtl) position = getRTLPosition(position);
@@ -141,35 +152,69 @@ const calculatePosition = (
 	}
 
 	if (fallbackAdjustLayout) {
-		const topOverflowSize = -top + scrollY + SCREEN_OFFSET;
-		const bottomOverflowSize = top + flyoutHeight + SCREEN_OFFSET - scrollY - renderContainerHeight;
-		const leftOverflowSize = -left + scrollX + SCREEN_OFFSET;
-		const rightOverflowSize = left + flyoutWidth + SCREEN_OFFSET - scrollX - renderContainerWidth;
+		const getOverflow = () => {
+			return {
+				top: -top + scrollY + SCREEN_OFFSET,
+				bottom: top + flyoutHeight + SCREEN_OFFSET - scrollY - renderContainerHeight,
+				left: -left + scrollX + SCREEN_OFFSET,
+				right: left + flyoutWidth + SCREEN_OFFSET - scrollX - renderContainerWidth,
+			};
+		};
+
+		const overflow = getOverflow();
 
 		if (isHorizontalPosition) {
-			if (topOverflowSize > 0) {
+			if (overflow.top > 0) {
 				top = SCREEN_OFFSET + scrollY;
-				if (bottom !== null) bottom = bottom - topOverflowSize;
-			} else if (bottomOverflowSize > 0) {
-				console.log({ bottomOverflowSize, renderContainerHeight });
-				top = top - bottomOverflowSize;
+				if (bottom !== null) bottom = bottom - overflow.top;
+			} else if (overflow.bottom > 0) {
+				top = top - overflow.bottom;
 			}
 		} else {
-			if (leftOverflowSize > 0) {
+			if (overflow.left > 0) {
 				left = SCREEN_OFFSET + scrollX;
-				if (right !== null) right = right - leftOverflowSize;
-			} else if (rightOverflowSize > 0) {
-				left = left - rightOverflowSize;
+				if (right !== null) right = right - overflow.left;
+			} else if (overflow.right > 0) {
+				left = left - overflow.right;
 			}
+		}
+
+		const updatedOverflow = getOverflow();
+
+		if (updatedOverflow.top > 0) {
+			height = Math.max(
+				fallbackMinHeight ? parseInt(fallbackMinHeight) : 0,
+				flyoutHeight - updatedOverflow.top
+			);
+			top = top + (flyoutHeight - height);
+		} else if (updatedOverflow.bottom > 0) {
+			height = Math.max(
+				fallbackMinHeight ? parseInt(fallbackMinHeight) : 0,
+				flyoutHeight - updatedOverflow.bottom
+			);
+			if (bottom !== null) bottom = bottom + (flyoutHeight - height);
+		}
+
+		if (updatedOverflow.left > 0) {
+			width = Math.max(
+				fallbackMinWidth ? parseInt(fallbackMinWidth) : 0,
+				flyoutWidth - updatedOverflow.left
+			);
+			left = left + (flyoutWidth - width);
+		} else if (updatedOverflow.right > 0) {
+			width = Math.max(
+				fallbackMinWidth ? parseInt(fallbackMinWidth) : 0,
+				flyoutWidth - updatedOverflow.right
+			);
+			if (right !== null) right = right + (flyoutWidth - width);
 		}
 	}
 
-	let widthStyle;
 	if (isFullWidth) {
 		left = SCREEN_OFFSET;
-		widthStyle = window.innerWidth - SCREEN_OFFSET * 2;
-	} else if (width === "trigger") {
-		widthStyle = triggerBounds.width;
+		width = window.innerWidth - SCREEN_OFFSET * 2;
+	} else if (passedWidth === "trigger") {
+		width = triggerBounds.width;
 	}
 
 	const translateX = right !== null ? -right : left;
@@ -178,18 +223,19 @@ const calculatePosition = (
 	return {
 		position,
 		styles: {
-			width: widthStyle ?? width,
 			left: right === null ? 0 : undefined,
 			right: right === null ? undefined : 0,
 			top: bottom === null ? 0 : undefined,
 			bottom: bottom === null ? undefined : 0,
 			transform: `translate(${translateX}px, ${translateY}px)`,
+			height,
+			width: width ?? passedWidth,
 		},
 		boundaries: {
 			left,
 			top,
-			height: Math.ceil(flyoutHeight),
-			width: widthStyle ?? Math.ceil(flyoutWidth),
+			height: height ?? Math.ceil(flyoutHeight),
+			width: width ?? Math.ceil(flyoutWidth),
 		},
 	};
 };
