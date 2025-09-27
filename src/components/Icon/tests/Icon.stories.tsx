@@ -77,7 +77,7 @@ export const color = {
 };
 
 export const autoWidth = {
-	name: "autoWidth",
+	name: "autoWidth, blank",
 	render: () => (
 		<Example>
 			<Example.Item title="square boundaries">
@@ -88,6 +88,11 @@ export const autoWidth = {
 			<Example.Item title="auto width boundaries">
 				<div style={{ background: "var(--rs-color-background-neutral)", display: "inline-block" }}>
 					<Icon svg={IconMic} size={10} autoWidth />
+				</div>
+			</Example.Item>
+			<Example.Item title="blank">
+				<div style={{ background: "var(--rs-color-background-neutral)", display: "inline-block" }}>
+					<Icon svg={null} size={10} />
 				</div>
 			</Example.Item>
 		</Example>
