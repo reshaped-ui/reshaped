@@ -30,6 +30,7 @@ const DropdownMenu: React.FC<T.Props> & {
 		position = "bottom-start",
 		triggerType = "click",
 		trapFocusMode = "action-menu",
+		borderRadius = "small",
 		...popoverProps
 	} = props;
 
@@ -40,6 +41,8 @@ const DropdownMenu: React.FC<T.Props> & {
 			padding={0}
 			trapFocusMode={trapFocusMode}
 			triggerType={triggerType}
+			borderRadius={borderRadius}
+			disableHideAnimation
 		>
 			{children}
 		</Popover>

@@ -36,6 +36,8 @@ export type Props = Pick<
 	padding?: number;
 	/** Component elevation level */
 	elevation?: "raised" | "overlay";
+	/** Border radius for the content */
+	borderRadius?: "small" | "medium";
 	/** @deprecated use Flyout utility instead, will be removed in v4 */
 	variant?: "elevated" | "headless";
 };

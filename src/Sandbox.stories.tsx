@@ -7,6 +7,7 @@ import ProgressIndicator from "components/ProgressIndicator";
 import Scrim from "components/Scrim";
 import IconChevronLeft from "icons/ChevronLeft";
 import IconChevronRight from "icons/ChevronRight";
+import Select from "components/Select";
 
 export default {
 	title: "Sandbox",
@@ -34,38 +35,17 @@ export const preview = () => {
 };
 
 const Component = () => {
-	const [activeIndex, setActiveIndex] = React.useState(0);
-	const total = 10;
-
 	return (
-		<View gap={4} align="center" justify="center">
-			<View direction="row" gap={2} align="center">
-				<Button
-					variant="outline"
-					onClick={() => {
-						setActiveIndex((prev) => Math.max(0, prev - 1));
-					}}
-					icon={IconChevronLeft}
-				/>
-				<Button
-					variant="outline"
-					onClick={() => {
-						setActiveIndex((prev) => Math.min(total - 1, prev + 1));
-					}}
-					icon={IconChevronRight}
-				/>
-			</View>
+		<Select.Custom name="animal" placeholder="Select an animal">
+			<Select.OptionGroup label="Birds">
+				<Select.Option value="pigeon">Pigeon</Select.Option>
+				<Select.Option value="parrot">Parrot</Select.Option>
+			</Select.OptionGroup>
 
-			<View borderRadius="medium" overflow="hidden" width="300px">
-				<Scrim
-					position="bottom"
-					backgroundSlot={<View aspectRatio={16 / 9} backgroundColor="neutral-faded" />}
-				>
-					<View align="center">
-						<ProgressIndicator total={total} activeIndex={activeIndex} color="media" />
-					</View>
-				</Scrim>
-			</View>
-		</View>
+			<Select.OptionGroup label="Sea Mammals">
+				<Select.Option value="dog">Whale</Select.Option>
+				<Select.Option value="turtle">Dolphin</Select.Option>
+			</Select.OptionGroup>
+		</Select.Custom>
 	);
 };

@@ -15,6 +15,10 @@
 	box-shadow: var(--rs-shadow-border-faded), var(--rs-shadow-raised);
 }
 
+.content--radius-small {
+	border-radius: var(--rs-radius-small);
+}
+
 .content.content--has-width {
 	max-width: none;
 	min-width: 0;

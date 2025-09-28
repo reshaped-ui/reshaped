@@ -16,6 +16,7 @@ const Popover: React.FC<T.Props> & {
 		triggerType = "click",
 		position = "bottom",
 		elevation,
+		borderRadius,
 		...flyoutProps
 	} = props;
 	const padding = props.padding ?? (variant === "headless" ? 0 : 4);
@@ -27,6 +28,7 @@ const Popover: React.FC<T.Props> & {
 		!!width && s["content--has-width"],
 		variant && s[`content--variant-${variant}`],
 		elevation && s[`content--elevation-${elevation}`],
+		borderRadius && s[`content--radius-${borderRadius}`],
 		mixinStyles.classNames
 	);
 
