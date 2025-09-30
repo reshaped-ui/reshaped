@@ -10,7 +10,10 @@ import SelectTrigger from "./SelectTrigger";
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const { children, value, name, placeholder, size } = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
-
+	const searchStringRef = React.useRef<string>("");
+	const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+	const dropdownRef = React.useRef<HTMLDivElement>(null);
+	const indexedOptions: Array<{ value: string; text: string }> = [];
 	let selectedOption: T.OptionProps | null = null;
 
 	const traverseOptionList = (children: React.ReactNode): React.ReactNode => {
@@ -24,6 +27,11 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 				const selected = matchingValue || (!placeholder && !value && index === 0);
 
 				if (selected) selectedOption = option;
+
+				indexedOptions.push({
+					value: option.value,
+					text: typeof option.children === "string" ? option.children : option.value,
+				});
 
 				return React.cloneElement(component, {
 					key: option.value,
@@ -54,6 +62,33 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 
 	const resolvedChildren = traverseOptionList(children);
 
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+		const key = e.key;
+
+		// Only handle alphanumeric and space characters for type-ahead
+		if (key.length !== 1 || !key.match(/[\w\s]/)) return;
+
+		if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
+
+		searchStringRef.current += key.toLowerCase();
+
+		const matchingOption = indexedOptions.find((option) =>
+			option.text.toLowerCase().startsWith(searchStringRef.current)
+		);
+
+		if (matchingOption && dropdownRef.current) {
+			const button = dropdownRef.current.querySelector<HTMLButtonElement>(
+				`[value="${matchingOption.value}"]`
+			);
+
+			button?.focus();
+		}
+
+		searchTimeoutRef.current = setTimeout(() => {
+			searchStringRef.current = "";
+		}, 1000);
+	};
+
 	return (
 		<SelectRoot {...props}>
 			{(props) => {
@@ -83,7 +118,9 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 								);
 							}}
 						</DropdownMenu.Trigger>
-						<DropdownMenu.Content>{resolvedChildren}</DropdownMenu.Content>
+						<DropdownMenu.Content attributes={{ ref: dropdownRef, onKeyDown: handleKeyDown }}>
+							{resolvedChildren}
+						</DropdownMenu.Content>
 					</DropdownMenu>
 				);
 			}}
