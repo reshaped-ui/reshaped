@@ -1,5 +1,5 @@
 import React from "react";
-import { classNames } from "utilities/props";
+import { classNames, isMatchingComponentChildId, setComponentChildId } from "utilities/props";
 import View from "components/View";
 import type * as T from "./Timeline.types";
 import s from "./Timeline.module.css";
@@ -33,7 +33,7 @@ const Timeline: React.FC<T.Props> & {
 	return (
 		<ul {...attributes} className={rootClassNames}>
 			{React.Children.map(children, (child, index) => {
-				return React.isValidElement(child) && child.type === TimelineItem ? (
+				return isMatchingComponentChildId(child, "Timeline.Item") ? (
 					child
 				) : (
 					<TimelineItem key={index}>{child}</TimelineItem>
@@ -44,6 +44,7 @@ const Timeline: React.FC<T.Props> & {
 };
 
 Timeline.Item = TimelineItem;
+setComponentChildId(Timeline.Item, "Timeline.Item");
 
 Timeline.displayName = "Timeline";
 TimelineItem.displayName = "Timeline.Item";

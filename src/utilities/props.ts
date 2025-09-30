@@ -117,7 +117,7 @@ export const setComponentChildId = (Component: React.FC<any>, id: string) => {
 	return (Component.__reshapedChildId = getComponentChildId(id));
 };
 
-export const isMatchingComponentChildId = (child: React.ReactElement, id: string) => {
+export const isMatchingComponentChildId = (child: React.ReactNode, id: string) => {
 	if (!React.isValidElement(child)) return null;
 	/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
 	// @ts-ignore
