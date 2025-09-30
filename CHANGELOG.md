@@ -1,3 +1,12 @@
+## 3.8.0-canary.6
+
+
+### Features
+
+* **Flyout, Popover, DropdownMenu, Autocomplete:** added size calculations for fallbackAdjustLayout, added fallbackMinWidth and fallbackMinHeight ([16cbbd0](https://github.com/reshaped-ui/reshaped/commit/16cbbd0a2ee4c081ac836fec821d686af0305a2f))
+* **Flyout, Popover, DropdownMenu, Autocomplete:** added size for fallbackAdjustLayout, fallbackMinWidth and fallbackMinHeight ([a3ef7d0](https://github.com/reshaped-ui/reshaped/commit/a3ef7d0c2b5a258f53c28d764b471db91a5288b6))
+* **Icon:** blank icon support ([40dec33](https://github.com/reshaped-ui/reshaped/commit/40dec336607cae9b6ec3d1acad0458e37f552807))
+
 ## 3.8.0-canary.5
 
 
