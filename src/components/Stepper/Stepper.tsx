@@ -80,7 +80,15 @@ const StepperItem = (_: T.ItemProps) => null;
 const Stepper: React.FC<T.Props> & {
 	Item: typeof StepperItem;
 } = (props) => {
-	const { children, direction = "row", activeId, labelDisplay, className, attributes } = props;
+	const {
+		children,
+		direction = "row",
+		activeId,
+		labelDisplay,
+		gap = 3,
+		className,
+		attributes,
+	} = props;
 	const vertical = direction === "column";
 	const length = React.Children.count(children);
 
@@ -90,7 +98,7 @@ const Stepper: React.FC<T.Props> & {
 			direction={direction}
 			align={vertical ? "stretch" : "center"}
 			className={className}
-			gap={3}
+			gap={gap}
 			wrap={false}
 		>
 			{React.Children.map(children, (child, index) => {
