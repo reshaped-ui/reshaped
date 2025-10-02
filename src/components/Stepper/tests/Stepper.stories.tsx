@@ -62,20 +62,6 @@ export const direction = () => (
 				<Stepper.Item title="Step 3 very long title" />
 			</Stepper>
 		</Example.Item>
-		<Example.Item title="direction: row, gap: 5">
-			<Stepper activeId="1" gap={5}>
-				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
-				<Stepper.Item title="Step 2" />
-				<Stepper.Item title="Step 3 very long title" />
-			</Stepper>
-		</Example.Item>
-		<Example.Item title="direction: column, gap: 5">
-			<Stepper activeId="1" direction="column" gap={5}>
-				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
-				<Stepper.Item title="Step 2" />
-				<Stepper.Item title="Step 3 very long title" />
-			</Stepper>
-		</Example.Item>
 	</Example>
 );
 
@@ -107,36 +93,8 @@ export const labelDisplay = () => (
 
 export const gap = () => (
 	<Example>
-		<Example.Item title="gap: 1, direction: row">
-			<Stepper activeId="1" gap={1}>
-				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
-				<Stepper.Item title="Step 2" />
-				<Stepper.Item title="Step 3 very long title" />
-			</Stepper>
-		</Example.Item>
-		<Example.Item title="gap: 3, direction: row (default)">
-			<Stepper activeId="1" gap={3}>
-				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
-				<Stepper.Item title="Step 2" />
-				<Stepper.Item title="Step 3 very long title" />
-			</Stepper>
-		</Example.Item>
 		<Example.Item title="gap: 6, direction: row">
 			<Stepper activeId="1" gap={6}>
-				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
-				<Stepper.Item title="Step 2" />
-				<Stepper.Item title="Step 3 very long title" />
-			</Stepper>
-		</Example.Item>
-		<Example.Item title="gap: 1, direction: column">
-			<Stepper activeId="1" direction="column" gap={1}>
-				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
-				<Stepper.Item title="Step 2" />
-				<Stepper.Item title="Step 3 very long title" />
-			</Stepper>
-		</Example.Item>
-		<Example.Item title="gap: 3, direction: column (default)">
-			<Stepper activeId="1" direction="column" gap={3}>
 				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
 				<Stepper.Item title="Step 2" />
 				<Stepper.Item title="Step 3 very long title" />
@@ -149,15 +107,8 @@ export const gap = () => (
 				<Stepper.Item title="Step 3 very long title" />
 			</Stepper>
 		</Example.Item>
-		<Example.Item title={["responsive gap, direction: row", "[s] 2", "[m+] 5"]}>
+		<Example.Item title={["responsive gap", "[s] 2", "[m+] 5"]}>
 			<Stepper activeId="1" gap={{ s: 2, m: 5 }}>
-				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
-				<Stepper.Item title="Step 2" />
-				<Stepper.Item title="Step 3 very long title" />
-			</Stepper>
-		</Example.Item>
-		<Example.Item title={["responsive gap, direction: column", "[s] 2", "[m+] 5"]}>
-			<Stepper activeId="1" direction="column" gap={{ s: 2, m: 5 }}>
 				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
 				<Stepper.Item title="Step 2" />
 				<Stepper.Item title="Step 3 very long title" />
