@@ -10,6 +10,8 @@ export type Props = {
 	children?: React.ReactNode;
 	/** Direction of the stepper */
 	direction?: "row" | "column";
+	/** Gap between items (default: 3) */
+	gap?: G.Responsive<number>;
 	/** Additional classname for the root element */
 	className?: G.ClassName;
 	/** Additional attributes for the root element */
