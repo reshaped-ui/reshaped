@@ -3,9 +3,7 @@ import type * as G from "types/global";
 
 export type Props = {
 	/** Icon svg component or node */
-	svg: React.ReactElement | React.ComponentType;
-	/** Hide the rendered svg while preserving the space */
-	blank?: boolean;
+	svg: React.ReactElement | React.ComponentType | null;
 	/** Icon size, literal css value or unit token multiplier */
 	size?: G.Responsive<number | string>;
 	/** Icon color, based on the color tokens */

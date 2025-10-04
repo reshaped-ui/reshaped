@@ -1,13 +1,10 @@
 import View from "components/View";
 import Image from "components/Image";
 import React from "react";
-import Text from "components/Text";
-import Button from "components/Button";
-import ProgressIndicator from "components/ProgressIndicator";
-import Scrim from "components/Scrim";
-import IconChevronLeft from "icons/ChevronLeft";
-import IconChevronRight from "icons/ChevronRight";
 import Select from "components/Select";
+import useToggle from "hooks/useToggle";
+import Modal from "components/Modal";
+import MenuItem from "components/MenuItem";
 
 export default {
 	title: "Sandbox",
@@ -35,17 +32,44 @@ export const preview = () => {
 };
 
 const Component = () => {
-	return (
-		<Select.Custom name="animal" placeholder="Select an animal">
-			<Select.OptionGroup label="Birds">
-				<Select.Option value="pigeon">Pigeon</Select.Option>
-				<Select.Option value="parrot">Parrot</Select.Option>
-			</Select.OptionGroup>
+	const toggle = useToggle();
+	const [value, setValue] = React.useState("Dog");
 
-			<Select.OptionGroup label="Sea Mammals">
-				<Select.Option value="dog">Whale</Select.Option>
-				<Select.Option value="turtle">Dolphin</Select.Option>
-			</Select.OptionGroup>
-		</Select.Custom>
+	const handleClick = () => {
+		toggle.toggle();
+	};
+
+	return (
+		<>
+			<Select name="animal" placeholder="Select an animal" onClick={handleClick}>
+				{value}
+			</Select>
+			<Modal active={toggle.active} onClose={toggle.deactivate} position="bottom" padding={2}>
+				<MenuItem
+					roundedCorners
+					onClick={() => {
+						setValue("Dog");
+						toggle.deactivate();
+					}}
+					attributes={{
+						role: "option",
+					}}
+				>
+					Dog
+				</MenuItem>
+				<MenuItem
+					roundedCorners
+					attributes={{
+						role: "option",
+					}}
+					onClick={() => {
+						setValue("Turtle");
+						toggle.deactivate();
+					}}
+				>
+					Turtle
+				</MenuItem>
+			</Modal>
+		</>
 	);
 };

@@ -5,7 +5,7 @@ import type * as T from "./Icon.types";
 import s from "./Icon.module.css";
 
 const Icon: React.FC<T.Props> = (props) => {
-	const { svg: Component, blank, className, color, size = "1em", autoWidth, attributes } = props;
+	const { svg: Component, className, color, size = "1em", autoWidth, attributes } = props;
 	const mixinStyles = resolveMixin({ height: size });
 	const rootClassName = classNames(
 		s.root,
@@ -15,13 +15,13 @@ const Icon: React.FC<T.Props> = (props) => {
 		autoWidth && s["--auto"]
 	);
 
-	const icon = React.isValidElement(Component) ? Component : <Component />;
+	const icon = React.isValidElement(Component) || Component === null ? Component : <Component />;
 	const style = { ...attributes?.style, ...mixinStyles.variables };
 
 	return (
 		// All icons are decorative, a11y attributes should be set for buttons wrapping them
 		<span {...attributes} aria-hidden="true" className={rootClassName} style={style}>
-			{!blank && React.cloneElement(icon, { focusable: false })}
+			{icon && React.cloneElement(icon, { focusable: false })}
 		</span>
 	);
 };

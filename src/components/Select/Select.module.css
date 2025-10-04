@@ -91,7 +91,7 @@
 		--rs-select-radius: var(--rs-radius-small);
 
 		& .input {
-			padding-block: calc(var(--rs-unit-x1) - 1px);
+			padding-block: var(--rs-unit-x1);
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
 			letter-spacing: var(--rs-letter-spacing-body-3);
@@ -104,7 +104,7 @@
 		--rs-select-radius: var(--rs-radius-small);
 
 		& .input {
-			padding-block: calc(var(--rs-unit-x2) - 1px);
+			padding-block: var(--rs-unit-x2);
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
 			letter-spacing: var(--rs-letter-spacing-body-3);
@@ -117,7 +117,7 @@
 		--rs-select-radius: var(--rs-radius-medium);
 
 		& .input {
-			padding-block: calc(var(--rs-unit-x3) - 1px);
+			padding-block: var(--rs-unit-x3);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 			letter-spacing: var(--rs-letter-spacing-body-2);
@@ -130,7 +130,7 @@
 		--rs-select-radius: var(--rs-radius-medium);
 
 		& .input {
-			padding-block: calc(var(--rs-unit-x4) - 1px);
+			padding-block: var(--rs-unit-x4);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 			letter-spacing: var(--rs-letter-spacing-body-2);
@@ -140,7 +140,10 @@
 
 .root.--variant-faded {
 	background: var(--rs-color-background-neutral-faded);
-	border-color: transparent;
+
+	&::after {
+		box-shadow: none;
+	}
 
 	&:focus-within {
 		border-color: var(--rs-color-border-primary);
@@ -149,21 +152,27 @@
 
 .root.--variant-headless {
 	background: transparent;
-	border-color: transparent;
+
+	&::after {
+		box-shadow: none;
+	}
 
 	&:focus-within,
 	&.--status-error,
 	&.--status-error:focus-within {
 		border-color: transparent;
-		box-shadow: none;
+
+		&::after {
+			box-shadow: none;
+		}
 	}
 }
 
 .root.--status-error {
-	border-color: var(--rs-color-border-critical);
+	box-shadow: 0 0 0 1px var(--rs-color-border-critical);
 
-	&:focus-within {
-		border-color: var(--rs-color-border-primary);
+	&::after {
+		box-shadow: 0 0 0 1px var(--rs-color-border-critical) inset;
 	}
 }
 

@@ -22,6 +22,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 		placeholder,
 		value,
 		name,
+		id,
 	} = props;
 
 	return (
@@ -43,7 +44,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				<SelectEndContent disabled={disabled} size={size} />
 			</Actionable>
 
-			<input type="hidden" value={value} name={name} />
+			<input type="hidden" value={value} name={name} id={id} />
 		</>
 	);
 };

@@ -53,7 +53,7 @@ type BaseFragment = {
 	/** Show an error state, automatically inherited when component is used inside FormControl */
 	hasError?: boolean;
 	/** Callback when the trigger is clicked */
-	onClick?: () => void;
+	onClick?: ActionableProps["onClick"];
 	/** Additional classname for the root element */
 	className?: G.ClassName;
 	/** Additional attributes for the root element */
@@ -121,6 +121,7 @@ export type TriggerProps = Pick<
 	| "placeholder"
 	| "value"
 	| "name"
+	| "id"
 > & {
 	children?: React.ReactNode;
 };

@@ -39,7 +39,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 						props.onChange?.({ value: option.value, name });
 						option.onClick?.(e);
 					},
-					startSlot: option?.startSlot || (value && <Icon svg={CheckmarkIcon} blank={!selected} />),
+					startSlot: option?.startSlot || (value && <Icon svg={selected ? CheckmarkIcon : null} />),
 					attributes: {
 						...component.props.attributes,
 						ref: selected ? initialFocusRef : undefined,
