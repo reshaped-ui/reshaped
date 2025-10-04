@@ -124,15 +124,16 @@ const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 };
 
 const DropdownMenuSubMenu: React.FC<T.SubMenuProps> = (props) => {
-	const { children } = props;
+	const { children, position = "end-top", contentGap = 0.5, ...dropdownMenuProps } = props;
 	const dropdownMenuRef = React.useRef<T.Instance>(null);
 
 	return (
 		<DropdownMenuSubContext.Provider value={dropdownMenuRef}>
 			<DropdownMenu
+				{...dropdownMenuProps}
 				triggerType="hover"
-				position="end-top"
-				contentGap={0.5}
+				position={position}
+				contentGap={contentGap}
 				instanceRef={dropdownMenuRef}
 			>
 				{children}

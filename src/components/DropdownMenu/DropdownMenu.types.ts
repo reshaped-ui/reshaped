@@ -47,6 +47,18 @@ export type SectionProps = {
 export type SubMenuProps = {
 	/** Node for inserting children */
 	children: React.ReactNode;
-};
+} & Pick<
+	PopoverProps,
+	| "position"
+	| "forcePosition"
+	| "fallbackPositions"
+	| "fallbackAdjustLayout"
+	| "fallbackMinWidth"
+	| "fallbackMinHeight"
+	| "contentGap"
+	| "contentShift"
+	| "width"
+	| "containerRef"
+>;
 
 export type SubTriggerProps = Omit<MenuItemProps, "endSlot" | "roundedCorners">;

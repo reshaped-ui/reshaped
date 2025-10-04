@@ -91,6 +91,32 @@ export const labelDisplay = () => (
 	</Example>
 );
 
+export const gap = () => (
+	<Example>
+		<Example.Item title="gap: 6, direction: row">
+			<Stepper activeId="1" gap={6}>
+				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
+				<Stepper.Item title="Step 2" />
+				<Stepper.Item title="Step 3 very long title" />
+			</Stepper>
+		</Example.Item>
+		<Example.Item title="gap: 6, direction: column">
+			<Stepper activeId="1" direction="column" gap={6}>
+				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
+				<Stepper.Item title="Step 2" />
+				<Stepper.Item title="Step 3 very long title" />
+			</Stepper>
+		</Example.Item>
+		<Example.Item title={["responsive gap", "[s] 2", "[m+] 5"]}>
+			<Stepper activeId="1" gap={{ s: 2, m: 5 }}>
+				<Stepper.Item completed title="Step 1" subtitle="Step subtitle" />
+				<Stepper.Item title="Step 2" />
+				<Stepper.Item title="Step 3 very long title" />
+			</Stepper>
+		</Example.Item>
+	</Example>
+);
+
 export const edgeCases = () => (
 	<Example>
 		<Example.Item
