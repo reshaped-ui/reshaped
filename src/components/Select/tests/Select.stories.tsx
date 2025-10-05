@@ -1,5 +1,5 @@
 import React from "react";
-import { expect, fn, Mock, userEvent, within } from "storybook/test";
+import { expect, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
 import IconZap from "icons/Zap";
 import { Example, Placeholder } from "utilities/storybook";
@@ -111,10 +111,11 @@ export const customRender: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvas, canvasElement }) => {
-		const [trigger, triggerWithGroups] = canvas.getAllByRole("button");
+	play: async ({ canvas, canvasElement, mount }) => {
+		await mount();
+		const [trigger] = canvas.getAllByRole("button");
 		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
-		const [hiddenInput, hiddenInputWithGroups] = Array.from(hiddenInputs);
+		const [hiddenInput] = Array.from(hiddenInputs);
 
 		// Testing only options
 
@@ -131,19 +132,26 @@ export const customRender: StoryObj = {
 		expect(options[1]).toHaveTextContent("Turtle");
 
 		// Testing options with groups
+		// Remount to instantly close select
+		await mount();
+
+		const [_, triggerWithGroups] = canvas.getAllByRole("button");
+		const hiddenInputs2 = canvasElement.querySelectorAll('input[type="hidden"]');
+		const [__, hiddenInputWithGroups] = Array.from(hiddenInputs2);
+
+		await userEvent.click(triggerWithGroups);
+
+		const optionsWithGroups = within(canvasElement.ownerDocument.body).getAllByRole("option");
+		const optionGroups = within(canvasElement.ownerDocument.body).getAllByRole("group");
 
 		expect(hiddenInputWithGroups).toHaveAttribute("name", "animal-2");
 		expect(hiddenInputWithGroups).toHaveAttribute("id", "animal-2");
 		expect(triggerWithGroups).toHaveTextContent("Select an animal");
 
-		await userEvent.click(triggerWithGroups);
-
-		const optionGroups = within(canvasElement.ownerDocument.body).getAllByRole("group");
-		const optionsWithGroups = within(canvasElement.ownerDocument.body).getAllByRole("option");
-
 		expect(optionGroups).toHaveLength(2);
 		expect(optionGroups[0]).toHaveTextContent("Birds");
 		expect(optionGroups[1]).toHaveTextContent("Sea Mammals");
+
 		expect(optionsWithGroups).toHaveLength(4);
 		expect(optionsWithGroups[0]).toHaveTextContent("Pigeon");
 		expect(optionsWithGroups[1]).toHaveTextContent("Parrot");
@@ -308,10 +316,12 @@ export const customHandlers: StoryObj<{
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvas, canvasElement, args }) => {
-		const [uncontrolled, controlled, focusable] = canvas.getAllByRole("button");
+	play: async ({ canvas, canvasElement, args, mount }) => {
+		await mount();
+
+		const [uncontrolled] = canvas.getAllByRole("button");
 		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
-		const [inputUncontrolled, inputControlled] = Array.from(hiddenInputs);
+		const [inputUncontrolled] = Array.from(hiddenInputs);
 
 		// Uncontrolled
 
@@ -332,18 +342,26 @@ export const customHandlers: StoryObj<{
 
 		// Controlled
 
+		await mount();
+
+		const [__, controlled, focusable] = canvas.getAllByRole("button");
+		const hiddenInputs2 = canvasElement.querySelectorAll('input[type="hidden"]');
+		const [___, inputControlled] = Array.from(hiddenInputs2);
+
 		expect(inputControlled).toHaveValue("dog");
 
 		await userEvent.click(controlled);
 
-		const [__, controlledOption] = within(canvasElement.ownerDocument.body).getAllByRole("option");
+		const [____, controlledOption] = within(canvasElement.ownerDocument.body).getAllByRole(
+			"option"
+		);
 
 		await userEvent.click(controlledOption);
 
 		expect(inputControlled).toHaveValue("dog");
-		expect(args.handleChange).toHaveBeenCalledTimes(1);
-		expect(args.handleChange).toHaveBeenCalledWith({
-			name: "animal",
+		expect(args.handleControlledChange).toHaveBeenCalledTimes(1);
+		expect(args.handleControlledChange).toHaveBeenCalledWith({
+			name: "animal-2",
 			value: "turtle",
 		});
 
@@ -428,6 +446,51 @@ export const triggerOnly: StoryObj<{ handleClick: Mock }> = {
 
 		expect(args.handleClick).toHaveBeenCalledTimes(1);
 		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: trigger }));
+	},
+};
+
+export const multiple: StoryObj<{ handleChange: Mock }> = {
+	name: "multiple",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="multiple">
+				<Select.Custom
+					multiple
+					name="animal"
+					placeholder="Select an animal"
+					defaultValue={["dog"]}
+					onChange={args.handleChange}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas, canvasElement, args }) => {
+		const [uncontrolled] = canvas.getAllByRole("button");
+		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
+		const [inputUncontrolled] = Array.from(hiddenInputs);
+
+		// Uncontrolled
+
+		expect(inputUncontrolled).toHaveValue('["dog"]');
+
+		await userEvent.click(uncontrolled);
+
+		const [_, uncontrolledOption] = within(canvasElement.ownerDocument.body).getAllByRole("option");
+
+		await userEvent.click(uncontrolledOption);
+
+		expect(inputUncontrolled).toHaveValue('["dog","turtle"]');
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "animal",
+			value: ["dog", "turtle"],
+		});
 	},
 };
 

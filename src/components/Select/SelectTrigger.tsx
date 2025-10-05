@@ -44,7 +44,12 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				<SelectEndContent disabled={disabled} size={size} />
 			</Actionable>
 
-			<input type="hidden" value={value} name={name} id={id} />
+			<input
+				type="hidden"
+				value={typeof value === "string" ? value : JSON.stringify(value)}
+				name={name}
+				id={id}
+			/>
 		</>
 	);
 };

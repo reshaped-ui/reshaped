@@ -65,8 +65,6 @@ type BaseFragment = {
 export type CustomFragment = {
 	/** Options for the select */
 	options?: never;
-	/** Callback when the input value changes */
-	onChange?: G.ChangeHandler<string>;
 	/** Callback when the input is focused */
 	onFocus?: (e: React.FocusEvent<HTMLButtonElement>) => void;
 	/** Callback when the input is blurred */
@@ -81,8 +79,6 @@ export type NativeFragment = {
 	/** Options for the select */
 	/** @deprecated Use <option /> children instead */
 	options?: NativeOption[];
-	/** Callback when the input value changes */
-	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
 	/** Callback when the input is focused */
 	onFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 	/** Callback when the input is blurred */
@@ -91,13 +87,54 @@ export type NativeFragment = {
 	inputAttributes?: G.Attributes<"select">;
 };
 
-export type ControlledFragment = { value: string; defaultValue?: never };
-export type UncontrolledFragment = { value?: never; defaultValue?: string };
+export type NativeControlledFragment = {
+	value: string;
+	defaultValue?: never;
+	/** Callback when the input value changes */
+	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
+};
+export type NativeUncontrolledFragment = {
+	value?: never;
+	defaultValue?: string;
+	/** Callback when the input value changes */
+	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
+};
 
-export type NativeControlledProps = BaseFragment & NativeFragment & ControlledFragment;
-export type NativeUncontrolledProps = BaseFragment & NativeFragment & UncontrolledFragment;
-export type CustomControlledProps = BaseFragment & CustomFragment & ControlledFragment;
-export type CustomUncontrolledProps = BaseFragment & CustomFragment & UncontrolledFragment;
+export type CustomControlledFragment =
+	| {
+			multiple?: false;
+			value: string;
+			defaultValue?: never;
+			/** Callback when the input value changes */
+			onChange?: G.ChangeHandler<string>;
+	  }
+	| {
+			multiple: true;
+			value: string[];
+			defaultValue?: never[];
+			/** Callback when the input value changes */
+			onChange?: G.ChangeHandler<string[]>;
+	  };
+export type CustomUncontrolledFragment =
+	| {
+			multiple?: false;
+			value?: never;
+			defaultValue?: string;
+			/** Callback when the input value changes */
+			onChange?: G.ChangeHandler<string>;
+	  }
+	| {
+			multiple: true;
+			value?: never[];
+			defaultValue?: string[];
+			/** Callback when the input value changes */
+			onChange?: G.ChangeHandler<string[]>;
+	  };
+
+export type NativeControlledProps = BaseFragment & NativeFragment & NativeControlledFragment;
+export type NativeUncontrolledProps = BaseFragment & NativeFragment & NativeUncontrolledFragment;
+export type CustomControlledProps = BaseFragment & CustomFragment & CustomControlledFragment;
+export type CustomUncontrolledProps = BaseFragment & CustomFragment & CustomUncontrolledFragment;
 
 export type NativeProps = NativeControlledProps | NativeUncontrolledProps;
 export type CustomProps = CustomControlledProps | CustomUncontrolledProps;
