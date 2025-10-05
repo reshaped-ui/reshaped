@@ -1,3 +1,18 @@
+## 3.8.0-canary.7
+
+
+### Bug Fixes
+
+* added child id to all components used in React.Children.map ([179bc06](https://github.com/reshaped-ui/reshaped/commit/179bc06b0c016753de0a92221b711d604101140f))
+
+
+### Features
+
+* **DropdownMenu:** pass through more menu props to submenu ([9a46c7e](https://github.com/reshaped-ui/reshaped/commit/9a46c7e3a260c560aec795afa73a87b31fc1dd29))
+* **Select:** added custom select support ([d9fa60f](https://github.com/reshaped-ui/reshaped/commit/d9fa60f810abefe18735d23346cb22ba0353e57b))
+* **Select:** added keyboard selection ([3734ba0](https://github.com/reshaped-ui/reshaped/commit/3734ba0b0bb59096b70c63b2ecf16f9ece498f2d))
+* **Stepper:** make gap property configurable ([6a391e4](https://github.com/reshaped-ui/reshaped/commit/6a391e464db6f78e82a08da2afcbd854baf9aefa))
+
 ## 3.8.0-canary.6
 
 
