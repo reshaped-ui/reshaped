@@ -100,7 +100,6 @@ const flyout = (
 			flyoutBounds: calculated.boundaries,
 			visualContainerBounds,
 			renderContainerBounds,
-			container,
 		});
 	};
 
@@ -110,6 +109,8 @@ const flyout = (
 	testOrder.some((currentPosition) => {
 		const tested = applyPosition(currentPosition);
 		const visible = testVisibility(tested);
+
+		console.log(currentPosition, tested, visible ? "yes" : "no");
 
 		if (visible) calculated = tested;
 

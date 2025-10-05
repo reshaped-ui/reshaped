@@ -1,5 +1,11 @@
 import React from "react";
-import { classNames, responsiveClassNames, responsiveVariables } from "utilities/props";
+import {
+	classNames,
+	isMatchingComponentChildId,
+	responsiveClassNames,
+	responsiveVariables,
+	setComponentChildId,
+} from "utilities/props";
 import Divider, { type DividerProps } from "components/Divider";
 import Hidden from "components/Hidden";
 import type * as G from "types/global";
@@ -186,8 +192,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	};
 
 	const renderItem: T.RenderItem = ({ className, child, index }) => {
-		const isItem = child.type === ViewItem;
-		const isView = child.type === View;
+		const isItem = isMatchingComponentChildId(child, "View.Item");
+		const isView = isMatchingComponentChildId(child, "View");
 		const key = child.key;
 		const dividerElement = !!index && divided && renderDivider({ className, key });
 		let itemElement;
@@ -234,7 +240,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		const usedIndex = renderedItemIndex;
 		renderedItemIndex += 1;
 
-		if (child.type === Hidden) {
+		if (isMatchingComponentChildId(child, "Hidden")) {
 			const { children: hiddenChild, ...hiddenProps } = child.props;
 			const key = child.key || index;
 
@@ -293,6 +299,9 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 };
 
 View.Item = ViewItem;
+
+setComponentChildId(View.Item, "View.Item");
+setComponentChildId(View, "View");
 
 View.displayName = "View";
 ViewItem.displayName = "View.Item";

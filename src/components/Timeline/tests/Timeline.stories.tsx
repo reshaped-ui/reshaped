@@ -60,9 +60,6 @@ export const marker = () => (
 				<Timeline.Item markerSlot={null}>
 					<Placeholder />
 				</Timeline.Item>
-				<Timeline.Item>
-					<Placeholder />
-				</Timeline.Item>
 			</Timeline>
 		</Example.Item>
 	</Example>

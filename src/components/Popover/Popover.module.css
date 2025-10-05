@@ -7,12 +7,15 @@
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
 	box-shadow: var(--rs-shadow-border-faded), var(--rs-shadow-overlay);
-	overflow: hidden;
 	min-width: 220px;
 }
 
 .content--variant-elevated.content--elevation-raised {
 	box-shadow: var(--rs-shadow-border-faded), var(--rs-shadow-raised);
+}
+
+.content--radius-small {
+	border-radius: var(--rs-radius-small);
 }
 
 .content.content--has-width {

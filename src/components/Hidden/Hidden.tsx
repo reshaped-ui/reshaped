@@ -1,4 +1,4 @@
-import { classNames, responsiveClassNames } from "utilities/props";
+import { classNames, responsiveClassNames, setComponentChildId } from "utilities/props";
 import type * as T from "./Hidden.types";
 import s from "./Hidden.module.css";
 
@@ -14,5 +14,6 @@ const Hidden: React.FC<T.Props> = (props) => {
 };
 
 Hidden.displayName = "Hidden";
+setComponentChildId(Hidden, "Hidden");
 
 export default Hidden;

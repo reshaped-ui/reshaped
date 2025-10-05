@@ -1,12 +1,10 @@
 import View from "components/View";
 import Image from "components/Image";
 import React from "react";
-import Text from "components/Text";
-import Button from "components/Button";
-import ProgressIndicator from "components/ProgressIndicator";
-import Scrim from "components/Scrim";
-import IconChevronLeft from "icons/ChevronLeft";
-import IconChevronRight from "icons/ChevronRight";
+import Select from "components/Select";
+import useToggle from "hooks/useToggle";
+import Modal from "components/Modal";
+import MenuItem from "components/MenuItem";
 
 export default {
 	title: "Sandbox",
@@ -34,38 +32,44 @@ export const preview = () => {
 };
 
 const Component = () => {
-	const [activeIndex, setActiveIndex] = React.useState(0);
-	const total = 10;
+	const toggle = useToggle();
+	const [value, setValue] = React.useState("Dog");
+
+	const handleClick = () => {
+		toggle.toggle();
+	};
 
 	return (
-		<View gap={4} align="center" justify="center">
-			<View direction="row" gap={2} align="center">
-				<Button
-					variant="outline"
+		<>
+			<Select name="animal" placeholder="Select an animal" onClick={handleClick}>
+				{value}
+			</Select>
+			<Modal active={toggle.active} onClose={toggle.deactivate} position="bottom" padding={2}>
+				<MenuItem
+					roundedCorners
 					onClick={() => {
-						setActiveIndex((prev) => Math.max(0, prev - 1));
+						setValue("Dog");
+						toggle.deactivate();
 					}}
-					icon={IconChevronLeft}
-				/>
-				<Button
-					variant="outline"
-					onClick={() => {
-						setActiveIndex((prev) => Math.min(total - 1, prev + 1));
+					attributes={{
+						role: "option",
 					}}
-					icon={IconChevronRight}
-				/>
-			</View>
-
-			<View borderRadius="medium" overflow="hidden" width="300px">
-				<Scrim
-					position="bottom"
-					backgroundSlot={<View aspectRatio={16 / 9} backgroundColor="neutral-faded" />}
 				>
-					<View align="center">
-						<ProgressIndicator total={total} activeIndex={activeIndex} color="media" />
-					</View>
-				</Scrim>
-			</View>
-		</View>
+					Dog
+				</MenuItem>
+				<MenuItem
+					roundedCorners
+					attributes={{
+						role: "option",
+					}}
+					onClick={() => {
+						setValue("Turtle");
+						toggle.deactivate();
+					}}
+				>
+					Turtle
+				</MenuItem>
+			</Modal>
+		</>
 	);
 };

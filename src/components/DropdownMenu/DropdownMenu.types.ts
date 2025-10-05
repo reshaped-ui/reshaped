@@ -27,6 +27,9 @@ export type Props = Pick<
 	| "instanceRef"
 	| "containerRef"
 	| "originCoordinates"
+	| "borderRadius"
+	| "elevation"
+	| "initialFocusRef"
 > & {
 	/** Change component trap focus keyboard behavior and shortcuts */
 	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu"> | false;

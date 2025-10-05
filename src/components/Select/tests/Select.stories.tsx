@@ -1,8 +1,12 @@
-import { Example, Placeholder } from "utilities/storybook";
+import React from "react";
+import { expect, fn, Mock, userEvent, within } from "storybook/test";
+import { StoryObj } from "@storybook/react-vite";
 import IconZap from "icons/Zap";
-import Select from "components/Select";
-import View from "components/View";
-import DropdownMenu from "components/DropdownMenu/DropdownMenu";
+import { Example, Placeholder } from "utilities/storybook";
+import useToggle from "hooks/useToggle";
+import Modal from "components/Modal";
+import MenuItem from "components/MenuItem";
+import Select, { SelectProps } from "components/Select";
 import FormControl from "components/FormControl";
 
 export default {
@@ -15,325 +19,642 @@ export default {
 	},
 };
 
-export const value = () => (
-	<Example>
-		<Example.Item title="defaultValue">
-			<Select
-				name="animal"
-				defaultValue="dog"
-				inputAttributes={{ "aria-label": "test select" }}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-			/>
-		</Example.Item>
+export const nativeRender: StoryObj = {
+	name: "native rendering, options, name, id",
+	render: () => (
+		<Example>
+			<Example.Item title="native with options prop">
+				<Select
+					name="animal"
+					id="animal-1"
+					placeholder="Select an animal"
+					options={[
+						{ label: "Dog", value: "dog" },
+						{ label: "Turtle", value: "turtle" },
+					]}
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
+				/>
+			</Example.Item>
+			<Example.Item title="native with option tags">
+				<Select
+					name="animal"
+					id="animal-2"
+					placeholder="Select an animal"
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
+				>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const [selectWithProp, selectWithTags] = canvas.getAllByRole("combobox");
+		const optionsFromProps = within(selectWithProp).getAllByRole("option");
+		const optionsFromTags = within(selectWithTags).getAllByRole("option");
 
-		<Example.Item title="placeholder">
-			<Select
-				name="animal"
-				placeholder="Select an animal"
-				inputAttributes={{ "aria-label": "test select" }}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-			/>
-		</Example.Item>
-	</Example>
-);
+		expect(selectWithProp).toHaveAttribute("name", "animal");
+		expect(selectWithProp).toHaveAttribute("id", "animal-1");
+		expect(optionsFromProps).toHaveLength(3);
+		expect(optionsFromProps[0]).toHaveTextContent("Select an animal");
+		expect(optionsFromProps[1]).toHaveTextContent("Dog");
+		expect(optionsFromProps[2]).toHaveTextContent("Turtle");
 
-export const variants = () => (
-	<Example>
-		<Example.Item title="variant: faded">
-			<Select
-				variant="faded"
-				name="animal"
-				placeholder="Select an animal"
-				value="dog"
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
+		expect(selectWithTags).toHaveAttribute("name", "animal");
+		expect(selectWithTags).toHaveAttribute("id", "animal-2");
+		expect(optionsFromTags).toHaveLength(3);
+		expect(optionsFromTags[0]).toHaveTextContent("Select an animal");
+		expect(optionsFromTags[1]).toHaveTextContent("Dog");
+		expect(optionsFromTags[2]).toHaveTextContent("Turtle");
+	},
+};
 
-		<Example.Item title="variant: headless">
-			<Select
-				variant="headless"
-				name="animal"
-				placeholder="Select an animal"
-				value="dog"
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-	</Example>
-);
+export const customRender: StoryObj = {
+	name: "custom rendering, name, id, option groups",
+	render: () => (
+		<Example>
+			<Example.Item title="custom with options">
+				<Select.Custom
+					name="animal"
+					id="animal-1"
+					placeholder="Select an animal"
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+			<Example.Item title="native with option tags">
+				<Select.Custom
+					name="animal-2"
+					id="animal-2"
+					placeholder="Select an animal"
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
+				>
+					<Select.OptionGroup label="Birds">
+						<Select.Option value="pigeon">Pigeon</Select.Option>
+						<Select.Option value="parrot">Parrot</Select.Option>
+					</Select.OptionGroup>
+					<Select.OptionGroup label="Sea Mammals">
+						<Select.Option value="whale">Whale</Select.Option>
+						<Select.Option value="dolphin">Dolphin</Select.Option>
+					</Select.OptionGroup>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas, canvasElement }) => {
+		const [trigger, triggerWithGroups] = canvas.getAllByRole("button");
+		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
+		const [hiddenInput, hiddenInputWithGroups] = Array.from(hiddenInputs);
 
-export const size = () => (
-	<Example>
-		<Example.Item title="size: small">
-			<View direction="row" gap={4}>
-				<View.Item grow>
-					<Select
-						size="small"
-						name="animal"
-						icon={IconZap}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-				<View.Item grow>
-					<Select
-						size="small"
-						name="animal"
-						startSlot={<Placeholder h={16} />}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-			</View>
-		</Example.Item>
+		// Testing only options
 
-		<Example.Item title="size: medium">
-			<View direction="row" gap={4}>
-				<View.Item grow>
-					<Select
-						size="medium"
-						name="animal"
-						icon={IconZap}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-				<View.Item grow>
-					<Select
-						size="medium"
-						name="animal"
-						startSlot={<Placeholder h={24} />}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-			</View>
-		</Example.Item>
+		expect(hiddenInput).toHaveAttribute("name", "animal");
+		expect(hiddenInput).toHaveAttribute("id", "animal-1");
+		expect(trigger).toHaveTextContent("Select an animal");
 
-		<Example.Item title="size: large">
-			<View direction="row" gap={4}>
-				<View.Item grow>
-					<Select
-						size="large"
-						name="animal"
-						icon={IconZap}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-				<View.Item grow>
-					<Select
-						size="large"
-						name="animal"
-						startSlot={<Placeholder h={24} />}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-			</View>
-		</Example.Item>
+		await userEvent.click(trigger);
 
-		<Example.Item title="size: xlarge">
-			<View direction="row" gap={4}>
-				<View.Item grow>
-					<Select
-						size="xlarge"
-						name="animal"
-						icon={IconZap}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-				<View.Item grow>
-					<Select
-						size="xlarge"
-						name="animal"
-						startSlot={<Placeholder h={24} />}
-						options={[
-							{ label: "Dog", value: "dog" },
-							{ label: "Turtle", value: "turtle" },
-						]}
-						inputAttributes={{ "aria-label": "test select" }}
-					/>
-				</View.Item>
-			</View>
-		</Example.Item>
+		const options = within(canvasElement.ownerDocument.body).getAllByRole("option");
 
-		<Example.Item title={["responsive size", "[s] xlarge", "[m+] medium"]}>
-			<Select
-				name="animal"
-				size={{ s: "xlarge", m: "medium" }}
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-	</Example>
-);
+		expect(options).toHaveLength(2);
+		expect(options[0]).toHaveTextContent("Dog");
+		expect(options[1]).toHaveTextContent("Turtle");
 
-export const disabled = () => (
-	<Example>
-		<Example.Item title="disabled">
-			<Select
-				disabled
-				name="animal"
-				placeholder="Select an animal"
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-	</Example>
-);
+		// Testing options with groups
 
-export const error = () => (
-	<Example>
-		<Example.Item title="error">
-			<Select
-				name="animal"
-				hasError
-				placeholder="Select an animal"
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-	</Example>
-);
+		expect(hiddenInputWithGroups).toHaveAttribute("name", "animal-2");
+		expect(hiddenInputWithGroups).toHaveAttribute("id", "animal-2");
+		expect(triggerWithGroups).toHaveTextContent("Select an animal");
 
-export const icon = () => (
-	<Example>
-		<Example.Item title="icon">
-			<Select
-				name="animal"
-				placeholder="Select an animal"
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				icon={IconZap}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-	</Example>
-);
+		await userEvent.click(triggerWithGroups);
 
-export const slots = () => (
-	<Example>
-		<Example.Item title="startSlot">
-			<Select
-				name="animal"
-				placeholder="Select an animal"
-				options={[
-					{ label: "Dog", value: "dog" },
-					{ label: "Turtle", value: "turtle" },
-				]}
-				startSlot={
-					<View height="20px" width="20px" backgroundColor="neutral" borderRadius="small" />
-				}
-				inputAttributes={{ "aria-label": "test select" }}
-			/>
-		</Example.Item>
-	</Example>
-);
+		const optionGroups = within(canvasElement.ownerDocument.body).getAllByRole("group");
+		const optionsWithGroups = within(canvasElement.ownerDocument.body).getAllByRole("option");
 
-export const triggerComposition = () => (
-	<Example>
-		<Example.Item title="select with dropdown menu">
-			<DropdownMenu width="trigger">
-				<DropdownMenu.Trigger>
-					{(attributes) => (
-						<Select
-							name="animal"
-							placeholder="Select an animal"
-							startSlot={
-								<View height="20px" width="20px" backgroundColor="neutral" borderRadius="small" />
-							}
-							inputAttributes={attributes}
+		expect(optionGroups).toHaveLength(2);
+		expect(optionGroups[0]).toHaveTextContent("Birds");
+		expect(optionGroups[1]).toHaveTextContent("Sea Mammals");
+		expect(optionsWithGroups).toHaveLength(4);
+		expect(optionsWithGroups[0]).toHaveTextContent("Pigeon");
+		expect(optionsWithGroups[1]).toHaveTextContent("Parrot");
+		expect(optionsWithGroups[2]).toHaveTextContent("Whale");
+		expect(optionsWithGroups[3]).toHaveTextContent("Dolphin");
+	},
+};
+
+export const nativeHandlers: StoryObj<{
+	handleChange: Mock;
+	handleControlledChange: Mock;
+	handleFocus: Mock;
+	handleBlur: Mock;
+	handleClick: Mock;
+}> = {
+	name: "native, controlled, uncontrolled, onFocus, onBlur, onChange",
+	args: {
+		handleChange: fn(),
+		handleControlledChange: fn(),
+		handleFocus: fn(),
+		handleBlur: fn(),
+		handleClick: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="native, uncontrolled, onChange">
+				<Select
+					name="animal"
+					placeholder="Select an animal"
+					defaultValue="dog"
+					onChange={args.handleChange}
+				>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+			<Example.Item title="native, controlled, onChange">
+				<Select
+					name="animal"
+					placeholder="Select an animal"
+					value="dog"
+					onChange={args.handleControlledChange}
+				>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+			<Example.Item title="native, onFocus, onBlur, onClick">
+				<Select
+					name="animal"
+					placeholder="Select an animal"
+					defaultValue="dog"
+					onFocus={args.handleFocus}
+					onBlur={args.handleBlur}
+					onClick={args.handleClick}
+				>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas, args }) => {
+		const [uncontrolled, controlled, focusable] = canvas.getAllByRole("combobox");
+
+		// Uncontrolled
+
+		expect(uncontrolled).toHaveValue("dog");
+
+		await userEvent.selectOptions(uncontrolled, "turtle");
+
+		expect(uncontrolled).toHaveValue("turtle");
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "animal",
+			value: "turtle",
+			event: expect.objectContaining({ target: uncontrolled }),
+		});
+
+		// Controlled
+
+		expect(controlled).toHaveValue("dog");
+
+		await userEvent.selectOptions(controlled, "turtle");
+
+		expect(controlled).toHaveValue("dog");
+		expect(args.handleControlledChange).toHaveBeenCalledTimes(1);
+		expect(args.handleControlledChange).toHaveBeenCalledWith({
+			name: "animal",
+			value: "turtle",
+			event: expect.objectContaining({ target: controlled }),
+		});
+
+		// Focus + blur
+
+		await userEvent.click(focusable);
+
+		expect(args.handleFocus).toHaveBeenCalledTimes(1);
+		expect(args.handleFocus).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
+
+		expect(args.handleClick).toHaveBeenCalledTimes(1);
+		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
+
+		await userEvent.click(document.body);
+
+		expect(args.handleBlur).toHaveBeenCalledTimes(1);
+		expect(args.handleBlur).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
+	},
+};
+
+export const customHandlers: StoryObj<{
+	handleChange: Mock;
+	handleControlledChange: Mock;
+	handleFocus: Mock;
+	handleBlur: Mock;
+	handleClick: Mock;
+}> = {
+	name: "custom, controlled, uncontrolled, onFocus, onBlur, onChange",
+	args: {
+		handleChange: fn(),
+		handleControlledChange: fn(),
+		handleFocus: fn(),
+		handleBlur: fn(),
+		handleClick: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="custom, uncontrolled, onChange">
+				<Select.Custom
+					name="animal"
+					placeholder="Select an animal"
+					defaultValue="dog"
+					onChange={args.handleChange}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+			<Example.Item title="custom, controlled, onChange">
+				<Select.Custom
+					name="animal-2"
+					placeholder="Select an animal"
+					value="dog"
+					onChange={args.handleControlledChange}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+			<Example.Item title="native, onFocus, onBlur, onClick">
+				<Select.Custom
+					name="animal-3"
+					placeholder="Select an animal"
+					defaultValue="dog"
+					onFocus={args.handleFocus}
+					onBlur={args.handleBlur}
+					onClick={args.handleClick}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas, canvasElement, args }) => {
+		const [uncontrolled, controlled, focusable] = canvas.getAllByRole("button");
+		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
+		const [inputUncontrolled, inputControlled] = Array.from(hiddenInputs);
+
+		// Uncontrolled
+
+		expect(inputUncontrolled).toHaveValue("dog");
+
+		await userEvent.click(uncontrolled);
+
+		const [_, uncontrolledOption] = within(canvasElement.ownerDocument.body).getAllByRole("option");
+
+		await userEvent.click(uncontrolledOption);
+
+		expect(inputUncontrolled).toHaveValue("turtle");
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "animal",
+			value: "turtle",
+		});
+
+		// Controlled
+
+		expect(inputControlled).toHaveValue("dog");
+
+		await userEvent.click(controlled);
+
+		const [__, controlledOption] = within(canvasElement.ownerDocument.body).getAllByRole("option");
+
+		await userEvent.click(controlledOption);
+
+		expect(inputControlled).toHaveValue("dog");
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "animal",
+			value: "turtle",
+		});
+
+		// Focus + blur + click
+
+		await userEvent.click(focusable);
+
+		expect(args.handleFocus).toHaveBeenCalledTimes(1);
+		expect(args.handleFocus).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
+
+		expect(args.handleClick).toHaveBeenCalledTimes(1);
+		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
+
+		await userEvent.click(document.body);
+
+		expect(args.handleBlur).toHaveBeenCalledTimes(1);
+		expect(args.handleBlur).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
+	},
+};
+
+export const triggerOnly: StoryObj<{ handleClick: Mock }> = {
+	name: "trigger only, onClick",
+	args: {
+		handleClick: fn(),
+	},
+	render: (args) => {
+		const toggle = useToggle();
+		const [value, setValue] = React.useState("Dog");
+
+		const handleClick: SelectProps["onClick"] = (e) => {
+			args.handleClick(e);
+			toggle.toggle();
+		};
+
+		return (
+			<Example>
+				<Example.Item title="trigger only, onClick">
+					<Select name="animal" placeholder="Select an animal" onClick={handleClick} value="dog">
+						{value}
+					</Select>
+					<Modal active={toggle.active} onClose={toggle.deactivate} position="bottom" padding={2}>
+						<MenuItem
+							roundedCorners
+							onClick={() => {
+								setValue("Dog");
+								toggle.deactivate();
+							}}
+							attributes={{
+								role: "option",
+							}}
 						>
-							Hello
-						</Select>
-					)}
-				</DropdownMenu.Trigger>
-				<DropdownMenu.Content>
-					<DropdownMenu.Item>Item 1</DropdownMenu.Item>
-					<DropdownMenu.Item>Item 2</DropdownMenu.Item>
-				</DropdownMenu.Content>
-			</DropdownMenu>
-		</Example.Item>
-	</Example>
-);
+							Dog
+						</MenuItem>
+						<MenuItem
+							roundedCorners
+							attributes={{
+								role: "option",
+							}}
+							onClick={() => {
+								setValue("Turtle");
+								toggle.deactivate();
+							}}
+						>
+							Turtle
+						</MenuItem>
+					</Modal>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvas, args, canvasElement }) => {
+		const [trigger] = canvas.getAllByRole("button");
 
-export const formControl = () => (
-	<Example>
-		<Example.Item title={["with helper", "error is hidden"]}>
-			<FormControl>
-				<FormControl.Label>Name</FormControl.Label>
+		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
+		const [input] = Array.from(hiddenInputs);
+
+		expect(trigger).toHaveTextContent("Dog");
+		expect(input).toHaveAttribute("name", "animal");
+		expect(input).toHaveValue("dog");
+
+		await userEvent.click(trigger);
+
+		expect(args.handleClick).toHaveBeenCalledTimes(1);
+		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: trigger }));
+	},
+};
+
+export const variant: StoryObj = {
+	name: "variant",
+	render: () => (
+		<Example>
+			<Example.Item title="variant: faded, native">
+				<Select variant="faded" name="animal" placeholder="Select an animal">
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+
+			<Example.Item title="variant: faded, custom">
+				<Select.Custom variant="faded" name="animal" placeholder="Select an animal">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+
+			<Example.Item title="variant: headless, native">
+				<Select variant="headless" name="animal" placeholder="Select an animal">
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+
+			<Example.Item title="variant: headless, custom">
+				<Select.Custom variant="headless" name="animal" placeholder="Select an animal">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const size: StoryObj = {
+	name: "size",
+	render: () => (
+		<Example>
+			<Example.Item title="size: small">
+				<Select.Custom size="small" name="animal" placeholder="Select an animal">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+			<Example.Item title="size: medium">
+				<Select.Custom size="medium" name="animal" placeholder="Select an animal">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+			<Example.Item title="size: large">
+				<Select.Custom size="large" name="animal" placeholder="Select an animal">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+			<Example.Item title="size: xlarge">
+				<Select.Custom size="xlarge" name="animal" placeholder="Select an animal">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const startSlot: StoryObj = {
+	name: "icon,startSlot",
+	render: () => (
+		<Example>
+			<Example.Item title="icon">
+				<Select.Custom name="animal" placeholder="Select an animal" icon={IconZap}>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+
+			<Example.Item title="startSlot">
+				<Select.Custom
+					name="animal"
+					placeholder="Select an animal"
+					startSlot={<Placeholder h={20} />}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const error: StoryObj = {
+	name: "error",
+	render: () => (
+		<Example>
+			<Example.Item title="error">
+				<Select.Custom name="animal" placeholder="Select an animal" hasError>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const disabled: StoryObj = {
+	name: "disabled",
+	render: () => (
+		<Example>
+			<Example.Item title="disabled, native">
+				<Select name="animal" placeholder="Select an animal" disabled>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+			<Example.Item title="disabled, custom">
+				<Select.Custom name="animal" placeholder="Select an animal" disabled>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const [native] = canvas.getAllByRole("combobox");
+		const [custom] = canvas.getAllByRole("button");
+
+		expect(native).toBeDisabled();
+		expect(custom).toBeDisabled();
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes, inputAttributes",
+	render: () => (
+		<Example>
+			<Example.Item title="native, className, attributes, inputAttributes">
 				<Select
 					name="animal"
 					placeholder="Select an animal"
-					options={[
-						{ label: "Dog", value: "dog" },
-						{ label: "Turtle", value: "turtle" },
-					]}
-				/>
-				<FormControl.Helper>Helper</FormControl.Helper>
-				<FormControl.Error>This field is required</FormControl.Error>
-			</FormControl>
-		</Example.Item>
-		<Example.Item title={["with error"]}>
-			<FormControl hasError>
-				<FormControl.Label>Name</FormControl.Label>
-				<Select
+					className="native-class"
+					attributes={{ id: "test-id" }}
+					inputAttributes={{ "aria-label": "test-label" }}
+				>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+			<Example.Item title="custom, className, attributes, inputAttributes">
+				<Select.Custom
 					name="animal"
 					placeholder="Select an animal"
-					options={[
-						{ label: "Dog", value: "dog" },
-						{ label: "Turtle", value: "turtle" },
-					]}
-				/>
-				<FormControl.Error>This field is required</FormControl.Error>
-			</FormControl>
-		</Example.Item>
-	</Example>
-);
+					className="custom-class"
+					attributes={{ id: "test-id" }}
+					inputAttributes={{ "aria-label": "test-label" }}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas, canvasElement }) => {
+		const native = canvasElement.querySelector(".native-class");
+		const nativeInput = canvas.getByRole("combobox");
+		const custom = canvasElement.querySelector(".custom-class");
+		const [customTrigger] = canvas.getAllByRole("button");
+
+		expect(native).toHaveAttribute("id", "test-id");
+		expect(nativeInput).toHaveAttribute("aria-label", "test-label");
+
+		expect(custom).toHaveAttribute("id", "test-id");
+		expect(customTrigger).toHaveAttribute("aria-label", "test-label");
+	},
+};
+
+export const fallback: StoryObj = {
+	name: "test: fallbackAdjustLayout",
+	render: () => (
+		<Example>
+			<Example.Item title="fallback">
+				<Select.Custom
+					name="animal"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
+					{[...Array(100)].map((_, index) => (
+						<Select.Option key={index} value={`item-${index}`}>
+							Item {index + 1}
+						</Select.Option>
+					))}
+				</Select.Custom>
+				<div style={{ height: "1000px" }}></div>
+				<Select.Custom
+					name="animal"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
+					{[...Array(100)].map((_, index) => (
+						<Select.Option key={index} value={`item-${index}`}>
+							Item {index + 1}
+						</Select.Option>
+					))}
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const formControl: StoryObj = {
+	name: "test: with FormControl",
+	render: () => (
+		<Example>
+			<Example.Item title="FormControl">
+				<FormControl hasError>
+					<FormControl.Label>Animal</FormControl.Label>
+					<Select.Custom name="animal" placeholder="Select an animal">
+						<Select.Option value="dog">Dog</Select.Option>
+						<Select.Option value="turtle">Turtle</Select.Option>
+					</Select.Custom>
+					<FormControl.Error>This field is required</FormControl.Error>
+				</FormControl>
+			</Example.Item>
+		</Example>
+	),
+};
