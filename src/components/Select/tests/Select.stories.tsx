@@ -7,6 +7,7 @@ import useToggle from "hooks/useToggle";
 import Modal from "components/Modal";
 import MenuItem from "components/MenuItem";
 import Select, { SelectProps } from "components/Select";
+import FormControl from "components/FormControl";
 
 export default {
 	title: "Components/Select",
@@ -607,6 +608,53 @@ export const className: StoryObj = {
 	},
 };
 
-/**
- *  - form control
- */
+export const fallback: StoryObj = {
+	name: "test: fallbackAdjustLayout",
+	render: () => (
+		<Example>
+			<Example.Item title="fallback">
+				<Select.Custom
+					name="animal"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
+					{[...Array(100)].map((_, index) => (
+						<Select.Option key={index} value={`item-${index}`}>
+							Item {index + 1}
+						</Select.Option>
+					))}
+				</Select.Custom>
+				<div style={{ height: "1000px" }}></div>
+				<Select.Custom
+					name="animal"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
+					{[...Array(100)].map((_, index) => (
+						<Select.Option key={index} value={`item-${index}`}>
+							Item {index + 1}
+						</Select.Option>
+					))}
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const formControl: StoryObj = {
+	name: "test: with FormControl",
+	render: () => (
+		<Example>
+			<Example.Item title="FormControl">
+				<FormControl hasError>
+					<FormControl.Label>Animal</FormControl.Label>
+					<Select.Custom name="animal" placeholder="Select an animal">
+						<Select.Option value="dog">Dog</Select.Option>
+						<Select.Option value="turtle">Turtle</Select.Option>
+					</Select.Custom>
+					<FormControl.Error>This field is required</FormControl.Error>
+				</FormControl>
+			</Example.Item>
+		</Example>
+	),
+};

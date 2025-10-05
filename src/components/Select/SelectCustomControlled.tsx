@@ -96,6 +96,10 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 					<DropdownMenu
 						width="trigger"
 						disableHideAnimation
+						position="bottom"
+						fallbackPositions={["bottom", "top"]}
+						fallbackAdjustLayout
+						fallbackMinHeight="150px"
 						borderRadius={responsivePropDependency(size, (size) =>
 							size === "large" || size === "xlarge" ? "medium" : "small"
 						)}

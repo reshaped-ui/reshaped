@@ -92,7 +92,7 @@ export const autoWidth = {
 			</Example.Item>
 			<Example.Item title="blank">
 				<div style={{ background: "var(--rs-color-background-neutral)", display: "inline-block" }}>
-					<Icon svg={IconMic} size={10} blank />
+					<Icon svg={null} size={10} />
 				</div>
 			</Example.Item>
 		</Example>

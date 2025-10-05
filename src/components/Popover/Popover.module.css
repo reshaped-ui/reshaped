@@ -7,7 +7,6 @@
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
 	box-shadow: var(--rs-shadow-border-faded), var(--rs-shadow-overlay);
-	overflow: hidden;
 	min-width: 220px;
 }
 

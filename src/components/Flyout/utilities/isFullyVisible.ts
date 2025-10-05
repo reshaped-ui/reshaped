@@ -8,30 +8,26 @@ const isFullyVisible = (args: {
 	visualContainerBounds: DOMRect;
 	/** Bounds of the container where flyout content is rendered */
 	renderContainerBounds: DOMRect;
-	/** Container where the flyout content is rendered */
-	container: HTMLElement;
 }) => {
-	const { flyoutBounds, visualContainerBounds, renderContainerBounds, container } = args;
-	const scrollX = container === document.body ? window.scrollX : container.scrollLeft;
-	const scrollY = container === document.body ? window.scrollY : container.scrollTop;
+	const { flyoutBounds, visualContainerBounds, renderContainerBounds } = args;
 
-	if (renderContainerBounds.left + flyoutBounds.left - scrollX < visualContainerBounds.left) {
+	if (renderContainerBounds.left + flyoutBounds.left < visualContainerBounds.left) {
 		return false;
 	}
 
-	if (renderContainerBounds.top + flyoutBounds.top - scrollY < visualContainerBounds.top) {
+	if (renderContainerBounds.top + flyoutBounds.top < visualContainerBounds.top) {
 		return false;
 	}
 
 	if (
-		renderContainerBounds.left + flyoutBounds.left + flyoutBounds.width - scrollX >
+		renderContainerBounds.left + flyoutBounds.left + flyoutBounds.width >
 		visualContainerBounds.right
 	) {
 		return false;
 	}
 
 	if (
-		renderContainerBounds.top + flyoutBounds.top + flyoutBounds.height - scrollY >
+		renderContainerBounds.top + flyoutBounds.top + flyoutBounds.height >
 		visualContainerBounds.bottom
 	) {
 		return false;
