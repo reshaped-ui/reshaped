@@ -1,9 +1,13 @@
-const path = require("path");
-const customMediaPlugin = require("postcss-custom-media");
-const postcssGlobalData = require("@csstools/postcss-global-data");
-const baseConfig = require("../tools/build/postcss.config");
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import customMediaPlugin from "postcss-custom-media";
+import postcssGlobalData from "@csstools/postcss-global-data";
+import baseConfig from "../tools/build/postcss.config";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default {
 	plugins: [
 		...baseConfig.plugins,
 		postcssGlobalData({
