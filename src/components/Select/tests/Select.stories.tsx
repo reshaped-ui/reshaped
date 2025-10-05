@@ -431,6 +431,51 @@ export const triggerOnly: StoryObj<{ handleClick: Mock }> = {
 	},
 };
 
+export const multiple: StoryObj<{ handleChange: Mock }> = {
+	name: "multiple",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="multiple">
+				<Select.Custom
+					multiple
+					name="animal"
+					placeholder="Select an animal"
+					defaultValue={["dog"]}
+					onChange={args.handleChange}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas, canvasElement, args }) => {
+		const [uncontrolled] = canvas.getAllByRole("button");
+		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
+		const [inputUncontrolled] = Array.from(hiddenInputs);
+
+		// Uncontrolled
+
+		expect(inputUncontrolled).toHaveValue('["dog"]');
+
+		await userEvent.click(uncontrolled);
+
+		const [_, uncontrolledOption] = within(canvasElement.ownerDocument.body).getAllByRole("option");
+
+		await userEvent.click(uncontrolledOption);
+
+		expect(inputUncontrolled).toHaveValue('["dog","turtle"]');
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "animal",
+			value: ["dog", "turtle"],
+		});
+	},
+};
+
 export const variant: StoryObj = {
 	name: "variant",
 	render: () => (

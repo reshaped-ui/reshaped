@@ -110,8 +110,6 @@ const flyout = (
 		const tested = applyPosition(currentPosition);
 		const visible = testVisibility(tested);
 
-		console.log(currentPosition, tested, visible ? "yes" : "no");
-
 		if (visible) calculated = tested;
 
 		return visible;

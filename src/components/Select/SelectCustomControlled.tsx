@@ -8,13 +8,14 @@ import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
-	const { children, value, name, placeholder, size } = props;
+	const { children, value, name, placeholder, size, multiple } = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
 	const searchStringRef = React.useRef<string>("");
 	const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 	const dropdownRef = React.useRef<HTMLDivElement>(null);
 	const indexedOptions: Array<{ value: string; text: string }> = [];
-	let selectedOption: T.OptionProps | null = null;
+	const selectedOptions: T.OptionProps[] = [];
+	const hasValue = multiple ? value.length > 0 : value;
 
 	const traverseOptionList = (children: React.ReactNode): React.ReactNode => {
 		return React.Children.map(children, (child, index) => {
@@ -23,10 +24,10 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 			if (isMatchingComponentChildId(child, "Select.Option")) {
 				const component = child as React.ReactElement<T.OptionProps>;
 				const option = component.props;
-				const matchingValue = option.value === value;
+				const matchingValue = multiple ? value.includes(option.value) : option.value === value;
 				const selected = matchingValue || (!placeholder && !value && index === 0);
 
-				if (selected) selectedOption = option;
+				if (selected) selectedOptions.push(option);
 
 				indexedOptions.push({
 					value: option.value,
@@ -36,10 +37,19 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 				return React.cloneElement(component, {
 					key: option.value,
 					onClick: (e) => {
-						props.onChange?.({ value: option.value, name });
 						option.onClick?.(e);
+						if (multiple) {
+							const nextValue = selected
+								? value.filter((v) => v !== option.value)
+								: [...value, option.value];
+
+							props.onChange?.({ value: nextValue, name });
+						} else {
+							props.onChange?.({ value: option.value, name });
+						}
 					},
-					startSlot: option?.startSlot || (value && <Icon svg={selected ? CheckmarkIcon : null} />),
+					startSlot:
+						option?.startSlot || (hasValue && <Icon svg={selected ? CheckmarkIcon : null} />),
 					attributes: {
 						...component.props.attributes,
 						ref: selected ? initialFocusRef : undefined,
@@ -116,8 +126,8 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 								} as T.TriggerProps;
 
 								return (
-									<SelectTrigger {...triggerProps} value={selectedOption?.value || ""}>
-										{value && selectedOption?.children}
+									<SelectTrigger {...triggerProps} value={value}>
+										{selectedOptions?.map((option) => option.children).join(", ")}
 									</SelectTrigger>
 								);
 							}}
