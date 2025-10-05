@@ -91,13 +91,13 @@ export type NativeControlledFragment = {
 	value: string;
 	defaultValue?: never;
 	/** Callback when the input value changes */
-	onChange?: G.ChangeHandler<string>;
+	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
 };
 export type NativeUncontrolledFragment = {
 	value?: never;
 	defaultValue?: string;
 	/** Callback when the input value changes */
-	onChange?: G.ChangeHandler<string>;
+	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
 };
 
 export type CustomControlledFragment =
@@ -111,7 +111,7 @@ export type CustomControlledFragment =
 	| {
 			multiple: true;
 			value: string[];
-			defaultValue?: never;
+			defaultValue?: never[];
 			/** Callback when the input value changes */
 			onChange?: G.ChangeHandler<string[]>;
 	  };
@@ -125,7 +125,7 @@ export type CustomUncontrolledFragment =
 	  }
 	| {
 			multiple: true;
-			value?: never;
+			value?: never[];
 			defaultValue?: string[];
 			/** Callback when the input value changes */
 			onChange?: G.ChangeHandler<string[]>;
