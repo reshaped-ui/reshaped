@@ -6,7 +6,7 @@ import type * as T from "./Select.types";
 
 const SelectCustomUncontrolled: React.FC<T.CustomUncontrolledProps> = (props) => {
 	const { defaultValue, onChange, multiple, ...controlledProps } = props;
-	const [value, setValue] = React.useState<string | string[]>(defaultValue || multiple ? [] : "");
+	const [value, setValue] = React.useState<string | string[]>(defaultValue || (multiple ? [] : ""));
 
 	return (
 		// @ts-expect-error -- avoid complicating the types and implementation
