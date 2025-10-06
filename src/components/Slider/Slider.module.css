@@ -106,7 +106,7 @@
 	}
 
 	[data-rs-keyboard] .input:focus + &::before {
-		box-shadow: var(--rs-focus-shadow);
+		box-shadow: var(--rs-shadow-focus);
 	}
 }
 

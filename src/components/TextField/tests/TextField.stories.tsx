@@ -20,12 +20,7 @@ export default {
 export const value = () => (
 	<Example>
 		<Example.Item title="no value, placeholder">
-			<TextField
-				name="Name"
-				placeholder="Enter your name"
-				icon={IconZap}
-				endIcon={<div>EndIconHere</div>}
-			/>
+			<TextField name="Name" placeholder="Enter your name" />
 		</Example.Item>
 
 		<Example.Item title="value, uncontrolled">

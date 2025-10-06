@@ -237,6 +237,12 @@ export const edgeCases = () => {
 
 	return (
 		<Example>
+			<Example.Item title="Scrolls with long content on touch devices">
+				<Demo position="center">
+					<Button onClick={() => {}}>Action</Button>
+					<View height="2000px" backgroundColor="primary-faded" />
+				</Demo>
+			</Example.Item>
 			<Example.Item title="keyboard focus stays on the modal first">
 				<Demo title="Modal title" autoFocus={false} />
 			</Example.Item>

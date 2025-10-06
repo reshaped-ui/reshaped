@@ -1,4 +1,7 @@
 .root {
+	--rs-textarea-border-color: var(--rs-color-border-neutral);
+	--rs-textarea-border-width: 1px;
+
 	position: relative;
 	display: grid;
 }
@@ -16,13 +19,13 @@
 .root::after,
 .input {
 	grid-area: 1 / 1 / 2 / 2;
-	border: 1px solid var(--rs-color-border-neutral);
-	padding: calc(var(--rs-p) - 1px);
+	padding: var(--rs-p);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 	box-sizing: border-box;
 	flex-grow: 1;
 	width: 100%;
+	border: 0;
 }
 
 .input {
@@ -32,17 +35,17 @@
 	color: var(--rs-color-foreground-neutral);
 	background: var(--rs-color-background-elevation-base);
 	border-radius: var(--rs-radius-small);
+	box-shadow: 0 0 0 var(--rs-textarea-border-width) var(--rs-textarea-border-color) inset;
 
 	&:focus {
-		border-color: var(--rs-color-border-primary);
-		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
+		box-shadow: 0 0 0 2px var(--rs-color-border-primary) inset;
 	}
 
 	&[disabled] {
 		cursor: not-allowed;
 		color: var(--rs-color-foreground-disabled);
 		background: var(--rs-color-background-disabled-faded);
-		border-color: var(--rs-color-border-disabled);
+		box-shadow: 0 0 0 1px var(--rs-color-border-disabled) inset;
 	}
 }
 
@@ -50,9 +53,8 @@
 	@value medium {
 		--rs-p: var(--rs-unit-x2);
 
-		border-radius: var(--rs-radius-small);
-
 		& .input {
+			border-radius: var(--rs-radius-small);
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
 			letter-spacing: var(--rs-letter-spacing-body-3);
@@ -62,9 +64,8 @@
 	@value large {
 		--rs-p: var(--rs-unit-x3);
 
-		border-radius: var(--rs-radius-medium);
-
 		& .input {
+			border-radius: var(--rs-radius-medium);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 			letter-spacing: var(--rs-letter-spacing-body-2);
@@ -74,9 +75,8 @@
 	@value xlarge {
 		--rs-p: var(--rs-unit-x4);
 
-		border-radius: var(--rs-radius-medium);
-
 		& .input {
+			border-radius: var(--rs-radius-medium);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 			letter-spacing: var(--rs-letter-spacing-body-2);
@@ -85,40 +85,30 @@
 }
 
 .root.--variant-faded {
+	--rs-textarea-border-color: transparent;
+
 	& .input {
 		background: var(--rs-color-background-neutral-faded);
-		border-color: transparent;
-	}
-
-	& .input:focus {
-		border-color: var(--rs-color-border-primary);
 	}
 }
 
 .root.--variant-headless {
+	--rs-textarea-border-color: transparent;
+
 	& .input {
 		background: transparent;
-		border-color: transparent;
 	}
 
 	& .input:focus,
 	&.--status-error .input,
 	&.--status-error .input:focus {
-		border-color: transparent;
 		box-shadow: none;
 	}
 }
 
 .root.--status-error {
-	& .input {
-		border-color: var(--rs-color-border-critical);
-	}
-
-	& .input:focus,
-	& .input:active {
-		border-color: var(--rs-color-border-primary);
-		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
-	}
+	--rs-textarea-border-color: var(--rs-color-border-critical);
+	--rs-textarea-border-width: 2px;
 }
 
 .root.--resize-none .input,

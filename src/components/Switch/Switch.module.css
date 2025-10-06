@@ -37,7 +37,7 @@
 	}
 
 	[data-rs-keyboard] &:focus + .area {
-		box-shadow: var(--rs-focus-shadow);
+		box-shadow: var(--rs-shadow-focus);
 	}
 
 	&[disabled] + .area {

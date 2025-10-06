@@ -72,7 +72,7 @@ since it reset the border width/color without using @layer
 }
 
 [data-rs-keyboard] .input:focus + .decorator {
-	box-shadow: var(--rs-focus-shadow);
+	box-shadow: var(--rs-shadow-focus);
 }
 
 /* } */

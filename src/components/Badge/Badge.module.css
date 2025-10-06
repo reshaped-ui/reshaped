@@ -1,8 +1,9 @@
 .root {
+	--rs-badge-border-color: transparent;
+
 	padding: var(--rs-badge-p-v) var(--rs-badge-p-h);
-	border: 1px solid transparent;
-	min-width: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
-	min-height: calc(var(--rs-badge-line-height) + 2px + (var(--rs-badge-p-v) * 2));
+	min-width: calc(var(--rs-badge-line-height) + (var(--rs-badge-p-v) * 2));
+	min-height: calc(var(--rs-badge-line-height) + (var(--rs-badge-p-v) * 2));
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -12,6 +13,7 @@
 	background: var(--rs-color-background-neutral);
 	color: var(--rs-color-foreground-neutral);
 	box-sizing: border-box;
+	box-shadow: 0 0 0 1px var(--rs-badge-border-color) inset;
 
 	/* GPU for container positioning */
 	backface-visibility: hidden;
@@ -53,26 +55,26 @@
 	}
 
 	&-outline {
+		--rs-badge-border-color: var(--rs-color-border-neutral);
+
 		background: none;
-		border-color: var(--rs-color-border-neutral);
 	}
 }
 
 .root.--color-positive {
 	background: var(--rs-color-background-positive);
 	color: var(--rs-color-on-background-positive);
-	border-color: var(--rs-color-background-positive);
 
 	&.--variant {
 		&-faded {
 			background: var(--rs-color-background-positive-faded);
-			border-color: var(--rs-color-background-positive-faded);
 			color: var(--rs-color-foreground-positive);
 		}
 
 		&-outline {
+			--rs-badge-border-color: var(--rs-color-border-positive-faded);
+
 			background: none;
-			border-color: var(--rs-color-border-positive-faded);
 			color: var(--rs-color-foreground-positive);
 		}
 	}
@@ -81,18 +83,17 @@
 .root.--color-critical {
 	background: var(--rs-color-background-critical);
 	color: var(--rs-color-on-background-critical);
-	border-color: var(--rs-color-background-critical);
 
 	&.--variant {
 		&-faded {
 			background: var(--rs-color-background-critical-faded);
-			border-color: var(--rs-color-background-critical-faded);
 			color: var(--rs-color-foreground-critical);
 		}
 
 		&-outline {
+			--rs-badge-border-color: var(--rs-color-border-critical-faded);
+
 			background: none;
-			border-color: var(--rs-color-border-critical-faded);
 			color: var(--rs-color-foreground-critical);
 		}
 	}
@@ -101,18 +102,17 @@
 .root.--color-warning {
 	background: var(--rs-color-background-warning);
 	color: var(--rs-color-on-background-warning);
-	border-color: var(--rs-color-background-warning);
 
 	&.--variant {
 		&-faded {
 			background: var(--rs-color-background-warning-faded);
-			border-color: var(--rs-color-background-warning-faded);
 			color: var(--rs-color-foreground-warning);
 		}
 
 		&-outline {
+			--rs-badge-border-color: var(--rs-color-border-warning-faded);
+
 			background: none;
-			border-color: var(--rs-color-border-warning-faded);
 			color: var(--rs-color-foreground-warning);
 		}
 	}
@@ -121,18 +121,17 @@
 .root.--color-primary {
 	background: var(--rs-color-background-primary);
 	color: var(--rs-color-on-background-primary);
-	border-color: var(--rs-color-background-primary);
 
 	&.--variant {
 		&-faded {
 			background: var(--rs-color-background-primary-faded);
-			border-color: var(--rs-color-background-primary-faded);
 			color: var(--rs-color-foreground-primary);
 		}
 
 		&-outline {
+			--rs-badge-border-color: var(--rs-color-border-primary-faded);
+
 			background: none;
-			border-color: var(--rs-color-border-primary-faded);
 			color: var(--rs-color-foreground-primary);
 		}
 	}
@@ -140,7 +139,7 @@
 
 .root.--size {
 	&-small {
-		--rs-badge-p-v: 1px;
+		--rs-badge-p-v: calc(var(--rs-unit-x1) / 2);
 		--rs-badge-p-h: var(--rs-unit-x1);
 		--rs-badge-line-height: var(--rs-line-height-caption-1);
 		--rs-badge-empty-size: var(--rs-unit-x2);
@@ -148,16 +147,16 @@
 	}
 
 	&-medium {
-		--rs-badge-p-v: calc(var(--rs-unit-x1) - 1px);
-		--rs-badge-p-h: calc(var(--rs-unit-x2) - 1px);
+		--rs-badge-p-v: var(--rs-unit-x1);
+		--rs-badge-p-h: var(--rs-unit-x2);
 		--rs-badge-line-height: var(--rs-line-height-caption-1);
 		--rs-badge-empty-size: var(--rs-unit-x3);
 		--rs-badge-gap: var(--rs-unit-x1);
 	}
 
 	&-large {
-		--rs-badge-p-v: calc(var(--rs-unit-x1) - 1px);
-		--rs-badge-p-h: calc(var(--rs-unit-x2) - 1px);
+		--rs-badge-p-v: var(--rs-unit-x1);
+		--rs-badge-p-h: var(--rs-unit-x2);
 		--rs-badge-line-height: var(--rs-line-height-body-3);
 		--rs-badge-empty-size: var(--rs-unit-x4);
 		--rs-badge-gap: var(--rs-unit-x1);
