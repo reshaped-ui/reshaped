@@ -506,7 +506,7 @@ export const disabled: StoryObj = {
 		<Example>
 			<Example.Item title="disabled, color: neutral, all variants">
 				<View gap={3} direction="row">
-					<Button disabled icon={IconZap}>
+					<Button disabled icon={IconZap} onClick={() => {}}>
 						Button
 					</Button>
 					<Button disabled variant="faded" icon={IconZap}>

@@ -8,6 +8,7 @@ import Dismissible from "components/Dismissible";
 import IconZap from "icons/Zap";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
+import { sleep } from "utilities/helpers";
 
 export default {
 	title: "Components/Toast",
@@ -425,9 +426,9 @@ export const base: StoryObj = {
 
 		await userEvent.click(action);
 
-		await waitFor(() => {
-			expect(title).not.toBeInTheDocument();
-		});
+		await sleep(500);
+
+		expect(title).not.toBeInTheDocument();
 	},
 };
 

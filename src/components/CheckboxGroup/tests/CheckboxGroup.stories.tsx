@@ -97,7 +97,7 @@ export const disabled: StoryObj = {
 		</CheckboxGroup>
 	),
 	play: async ({ canvas }) => {
-		const input = canvas.getByRole("checkbox");
+		const [input] = canvas.getAllByRole("checkbox");
 
 		expect(input).toBeDisabled();
 	},
