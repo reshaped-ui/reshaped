@@ -1,8 +1,9 @@
-import React from "react";
-import { Example } from "utilities/storybook";
+import { Example, Placeholder } from "utilities/storybook";
 import Alert from "components/Alert";
 import Link from "components/Link";
 import IconZap from "icons/Zap";
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 
 export default {
 	title: "Components/Alert",
@@ -96,4 +97,21 @@ export const bleed = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Alert className="test-classname" attributes={{ id: "test-id" }}>
+				<Placeholder />
+			</Alert>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+	},
 };

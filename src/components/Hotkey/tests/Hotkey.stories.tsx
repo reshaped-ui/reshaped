@@ -3,6 +3,8 @@ import useHotkeys from "hooks/useHotkeys";
 import View from "components/View";
 import TextField from "components/TextField";
 import Hotkey from "../Hotkey";
+import { expect } from "storybook/test";
+import { StoryObj } from "@storybook/react-vite";
 
 export default {
 	title: "Components/Hotkey",
@@ -46,3 +48,21 @@ export const base = () => (
 		</Example.Item>
 	</Example>
 );
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Hotkey className="test-classname" attributes={{ id: "test-id" }}>
+				⌘K
+			</Hotkey>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild as HTMLElement;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+		expect(root?.tagName).toBe("KBD");
+	},
+};

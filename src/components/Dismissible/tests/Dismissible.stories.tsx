@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { within, expect } from "storybook/test";
+import { within, expect, userEvent, fn } from "storybook/test";
 import { Example, Placeholder } from "utilities/storybook";
 import Dismissible from "components/Dismissible";
 import Image from "components/Image";
@@ -82,5 +82,48 @@ export const hideCloseButton: StoryObj = {
 		const button = root.queryByRole("button");
 
 		expect(button).not.toBeInTheDocument();
+	},
+};
+
+export const closeAriaLabel: StoryObj<{ handleClose: ReturnType<typeof fn> }> = {
+	args: {
+		handleClose: fn(),
+	},
+	name: "onClose, closeAriaLabel",
+	render: (args) => (
+		<Dismissible closeAriaLabel="Close" onClose={args.handleClose}>
+			<Placeholder />
+		</Dismissible>
+	),
+	play: async ({ canvas, args }) => {
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(button);
+
+		expect(button).toHaveAttribute("aria-label", "Close");
+		expect(args.handleClose).toHaveBeenCalledTimes(1);
+		expect(args.handleClose).toHaveBeenCalledWith();
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Dismissible
+				closeAriaLabel="Close"
+				onClose={() => {}}
+				className="test-classname"
+				attributes={{ id: "test-id" }}
+			>
+				<Placeholder />
+			</Dismissible>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
 	},
 };

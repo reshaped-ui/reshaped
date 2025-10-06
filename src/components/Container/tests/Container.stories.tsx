@@ -1,5 +1,7 @@
 import { Example, Placeholder } from "utilities/storybook";
 import Container from "components/Container";
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 
 export default {
 	title: "Utility components/Container",
@@ -72,4 +74,21 @@ export const flex = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Container className="test-classname" attributes={{ id: "test-id" }}>
+				<Placeholder />
+			</Container>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+	},
 };
