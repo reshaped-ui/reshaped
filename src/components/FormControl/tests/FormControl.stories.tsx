@@ -4,6 +4,8 @@ import { Example } from "utilities/storybook";
 import FormControl from "components/FormControl";
 import TextField from "components/TextField";
 import View from "components/View";
+import RadioGroup from "components/RadioGroup";
+import Radio from "components/Radio";
 
 export default {
 	title: "Utility components/FormControl",
@@ -125,4 +127,46 @@ export const composition = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<FormControl id="test-id" hasError>
+			<FormControl.Label>Label</FormControl.Label>
+			<TextField name="name" />
+			<FormControl.Helper>Caption</FormControl.Helper>
+			<FormControl.Error>Error</FormControl.Error>
+		</FormControl>
+	),
+	play: async ({ canvas }) => {
+		const input = canvas.getByRole("textbox");
+		const label = canvas.getByText("Label");
+
+		expect(input).toHaveAttribute("id", "test-id");
+		expect(input).toHaveAttribute("aria-describedby", `test-id-caption test-id-error`);
+
+		expect(label).toHaveAttribute("for", "test-id");
+		expect(label).toHaveAttribute("id", `test-id-label`);
+	},
+};
+
+export const group: StoryObj = {
+	name: "group",
+	render: () => (
+		<FormControl group>
+			<FormControl.Label>Label</FormControl.Label>
+			<RadioGroup name="name">
+				<View gap={2}>
+					<Radio value="1">One</Radio>
+					<Radio value="2">Two</Radio>
+				</View>
+			</RadioGroup>
+		</FormControl>
+	),
+	play: async ({ canvas }) => {
+		const group = canvas.getByRole("group");
+
+		expect(group).toBeInTheDocument();
+	},
 };

@@ -6,6 +6,8 @@ import Image from "components/Image";
 import Text from "components/Text";
 import Dismissible from "components/Dismissible";
 import IconZap from "icons/Zap";
+import { expect, userEvent, waitFor, within } from "storybook/test";
+import { StoryObj } from "@storybook/react-vite";
 
 export default {
 	title: "Components/Toast",
@@ -15,34 +17,6 @@ export default {
 		},
 	},
 };
-
-const Base = () => {
-	const toast = useToast();
-	return (
-		<Button
-			onClick={() => {
-				const id = toast.show({
-					icon: IconZap,
-					title: "Hey!",
-					text: "Event completed",
-					actionsSlot: [
-						<Button onClick={() => toast.hide(id)}>Undo</Button>,
-						<Button onClick={() => toast.hide(id)}>Show</Button>,
-					],
-				});
-			}}
-		>
-			Show toast
-		</Button>
-	);
-};
-export const base = () => (
-	<Example>
-		<Example.Item title="title, children, icon, actions">
-			<Base />
-		</Example.Item>
-	</Example>
-);
 
 const Size = () => {
 	const toast = useToast();
@@ -85,7 +59,7 @@ const Size = () => {
 		</Example>
 	);
 };
-export const size = () => <Size />;
+export const size = { name: "size", render: () => <Size /> };
 
 const Position = () => {
 	const toast = useToast();
@@ -167,7 +141,7 @@ const Position = () => {
 		</Example>
 	);
 };
-export const position = () => <Position />;
+export const position = { name: "position", render: () => <Position /> };
 
 const Color = () => {
 	const toast = useToast();
@@ -286,7 +260,7 @@ const Color = () => {
 	);
 };
 
-export const color = () => <Color />;
+export const color = { name: "color", render: () => <Color /> };
 
 const Timeout = () => {
 	const toast = useToast();
@@ -332,7 +306,7 @@ const Timeout = () => {
 		</Example>
 	);
 };
-export const timeout = () => <Timeout />;
+export const timeout = { name: "timeout", render: () => <Timeout /> };
 
 const Expanded = () => {
 	const toast = useToast();
@@ -354,7 +328,7 @@ const Expanded = () => {
 		</Example>
 	);
 };
-export const regionOptions = () => <Expanded />;
+export const regionOptions = { name: "expanded", render: () => <Expanded /> };
 
 const Slots = () => {
 	const toast = useToast();
@@ -404,7 +378,130 @@ const Slots = () => {
 		</Example>
 	);
 };
-export const slots = () => <Slots />;
+export const slots = { name: "slots", render: () => <Slots /> };
+
+export const base: StoryObj = {
+	name: "base",
+	render: () => {
+		const toast = useToast();
+
+		return (
+			<Button
+				onClick={() => {
+					const id = toast.show({
+						title: "Title",
+						text: "Text",
+						children: "Children",
+						startSlot: "Slot",
+						actionsSlot: (
+							<Button attributes={{ "data-testid": "trigger-id" }} onClick={() => toast.hide(id)}>
+								Trigger
+							</Button>
+						),
+					});
+				}}
+			>
+				Show toast
+			</Button>
+		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(button);
+
+		const title = canvas.getByText("Title");
+		const text = canvas.getByText("Text");
+		const children = canvas.getByText("Children");
+		const slot = canvas.getByText("Slot");
+		const action = canvas.getByTestId("trigger-id");
+
+		expect(title).toBeInTheDocument();
+		expect(text).toBeInTheDocument();
+		expect(children).toBeInTheDocument();
+		expect(slot).toBeInTheDocument();
+		expect(action).toBeInTheDocument();
+
+		await userEvent.click(action);
+
+		await waitFor(() => {
+			expect(title).not.toBeInTheDocument();
+		});
+	},
+};
+
+const NestedDemo = () => {
+	const toast = useToast();
+
+	return (
+		<Button
+			onClick={() => {
+				toast.show({
+					text: "Content",
+				});
+			}}
+		>
+			Show toast
+		</Button>
+	);
+};
+
+export const nested: StoryObj = {
+	name: "ToastProvider",
+	render: () => {
+		return (
+			<div data-testid="test-container-id">
+				<ToastProvider>
+					<NestedDemo />
+				</ToastProvider>
+			</div>
+		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(button);
+
+		const container = canvas.getByTestId("test-container-id");
+		const toast = within(container).getByText("Content");
+
+		expect(toast).toBeInTheDocument();
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => {
+		const toast = useToast();
+
+		return (
+			<Button
+				onClick={() => {
+					const id = toast.show({
+						text: "Content",
+						attributes: { "data-testid": "test-id" },
+						className: "test-classname",
+					});
+				}}
+			>
+				Show toast
+			</Button>
+		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(button);
+
+		const toast = canvas.getByTestId("test-id");
+
+		expect(toast).toBeInTheDocument();
+		expect(toast).toHaveClass("test-classname");
+	},
+};
 
 const Multiline = () => {
 	const toast = useToast();
@@ -439,15 +536,18 @@ const Nested = () => {
 		</View>
 	);
 };
-export const edgeCases = () => (
-	<Example>
-		<Example.Item title="Multiline, should support dynamic height">
-			<Multiline />
-		</Example.Item>
-		<Example.Item title="Nested ToastProvider">
-			<ToastProvider>
-				<Nested />
-			</ToastProvider>
-		</Example.Item>
-	</Example>
-);
+export const edgeCases = {
+	name: "test: edge cases",
+	render: () => (
+		<Example>
+			<Example.Item title="Multiline, should support dynamic height">
+				<Multiline />
+			</Example.Item>
+			<Example.Item title="Nested ToastProvider">
+				<ToastProvider>
+					<Nested />
+				</ToastProvider>
+			</Example.Item>
+		</Example>
+	),
+};

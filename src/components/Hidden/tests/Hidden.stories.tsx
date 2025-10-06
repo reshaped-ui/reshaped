@@ -1,5 +1,7 @@
 import { Example } from "utilities/storybook";
 import Hidden from "components/Hidden";
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 
 export default {
 	title: "Utility components/Hidden",
@@ -40,4 +42,14 @@ export const visibility = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const as: StoryObj = {
+	name: "as",
+	render: () => <Hidden as="span">Content</Hidden>,
+	play: ({ canvas }) => {
+		const el = canvas.getByText("Content");
+
+		expect(el.tagName).toEqual("SPAN");
+	},
 };

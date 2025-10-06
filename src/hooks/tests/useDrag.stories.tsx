@@ -7,7 +7,7 @@ import useToggle from "hooks/useToggle";
 import Button from "components/Button";
 
 export default {
-	title: "Internal/Hooks/useDrag",
+	title: "Internal/useDrag",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
