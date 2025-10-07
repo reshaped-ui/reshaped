@@ -1,3 +1,10 @@
+## 3.8.0-canary.9
+
+
+### Bug Fixes
+
+* updated selector for variable based css utilities ([54174aa](https://github.com/reshaped-ui/reshaped/commit/54174aa522fb0a208f5df60add7c8681274bba18))
+
 ## 3.8.0-canary.8
 
 
