@@ -1,3 +1,5 @@
+import { expect, fn, userEvent } from "storybook/test";
+import { StoryObj } from "@storybook/react-vite";
 import { Example } from "utilities/storybook";
 import Breadcrumbs from "components/Breadcrumbs";
 import Badge from "components/Badge";
@@ -97,8 +99,8 @@ export const slots = {
 	),
 };
 
-export const collapsed = {
-	name: "collapse",
+export const collapsed: StoryObj = {
+	name: "collapsed",
 	render: () => (
 		<Example>
 			<Example.Item title="collapsed, 3 items shown by default">
@@ -140,6 +142,22 @@ export const collapsed = {
 			</Example.Item>
 		</Example>
 	),
+	play: async ({ canvas }) => {
+		let triggers = canvas.getAllByRole("button");
+
+		expect(triggers[0]).toHaveTextContent("Item 1");
+		expect(triggers[1]).toHaveAccessibleName("Expand items");
+		expect(triggers[2]).toHaveTextContent("Item 4");
+
+		await userEvent.click(triggers[1]);
+
+		triggers = canvas.getAllByRole("button");
+
+		expect(triggers[0]).toHaveTextContent("Item 1");
+		expect(triggers[1]).toHaveTextContent("Item 2");
+		expect(triggers[2]).toHaveTextContent("Item 3");
+		expect(triggers[3]).toHaveTextContent("Item 4");
+	},
 };
 
 export const multiline = {
@@ -157,4 +175,62 @@ export const multiline = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const onClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
+	name: "item, onClick, disabled",
+	args: {
+		handleClick: fn(),
+	},
+	render: (args) => (
+		<Breadcrumbs>
+			<Breadcrumbs.Item onClick={args.handleClick}>Trigger</Breadcrumbs.Item>
+			<Breadcrumbs.Item onClick={args.handleClick} disabled>
+				Trigger
+			</Breadcrumbs.Item>
+		</Breadcrumbs>
+	),
+	play: async ({ args, canvas }) => {
+		const triggers = canvas.getAllByRole("button");
+
+		await userEvent.click(triggers[0]);
+
+		expect(args.handleClick).toHaveBeenCalledTimes(1);
+		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: triggers[0] }));
+
+		await userEvent.click(triggers[1]);
+
+		expect(args.handleClick).toHaveBeenCalledTimes(1);
+	},
+};
+
+export const href: StoryObj = {
+	name: "item, href",
+	render: () => (
+		<Breadcrumbs>
+			<Breadcrumbs.Item href="https://reshaped.so">Trigger</Breadcrumbs.Item>
+		</Breadcrumbs>
+	),
+	play: async ({ canvas }) => {
+		const triggers = canvas.getAllByRole("link");
+
+		expect(triggers[0]).toHaveAttribute("href", "https://reshaped.so");
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
+			<Breadcrumbs className="test-classname" attributes={{ id: "test-id" }}>
+				<Breadcrumbs.Item>Trigger</Breadcrumbs.Item>
+			</Breadcrumbs>
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+	},
 };

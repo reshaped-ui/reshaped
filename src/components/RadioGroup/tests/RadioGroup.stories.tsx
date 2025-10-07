@@ -1,7 +1,7 @@
-import { Example } from "utilities/storybook";
-import View from "components/View";
 import RadioGroup from "components/RadioGroup";
 import Radio from "components/Radio";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent } from "storybook/test";
 
 export default {
 	title: "Components/RadioGroup",
@@ -13,46 +13,85 @@ export default {
 	},
 };
 
-export const selection = () => (
-	<Example>
-		<Example.Item title="unselected">
-			<RadioGroup name="unselected">
-				<View gap={3}>
-					<Radio value="dog">Radio 1</Radio>
-					<Radio value="cat">Radio 2</Radio>
-				</View>
-			</RadioGroup>
-		</Example.Item>
+export const value: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
+	name: "value, controlled",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<RadioGroup name="test-name" value="1" onChange={args.handleChange}>
+			{/* checked should be ignored */}
+			<Radio value="1" checked={false}>
+				Content
+			</Radio>
 
-		<Example.Item title="checked, uncontrolled">
-			<RadioGroup name="uncontrolled" defaultValue={"dog"}>
-				<View gap={3}>
-					<Radio value="dog">Radio 1</Radio>
-					<Radio value="cat">Radio 2</Radio>
-				</View>
-			</RadioGroup>
-		</Example.Item>
+			<Radio value="2">Content 2</Radio>
+		</RadioGroup>
+	),
+	play: async ({ canvas, args }) => {
+		const inputs = canvas.getAllByRole("radio");
 
-		<Example.Item title="checked, controlled">
-			<RadioGroup name="controlled" value={"dog"}>
-				<View gap={3}>
-					<Radio value="dog">Radio 1</Radio>
-					<Radio value="cat">Radio 2</Radio>
-				</View>
-			</RadioGroup>
-		</Example.Item>
-	</Example>
-);
+		expect(inputs[0]).toBeChecked();
 
-export const disabled = () => (
-	<Example>
-		<Example.Item title="disabled">
-			<RadioGroup name="disabled" disabled>
-				<View gap={3}>
-					<Radio value="dog">Dog</Radio>
-					<Radio value="cat">Cat</Radio>
-				</View>
-			</RadioGroup>
-		</Example.Item>
-	</Example>
-);
+		await userEvent.click(inputs[1]);
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "test-name",
+			value: "2",
+			event: expect.objectContaining({ target: inputs[1] }),
+		});
+
+		// Still checked because it's controlled
+		expect(inputs[0]).toBeChecked();
+		expect(inputs[1]).not.toBeChecked();
+	},
+};
+
+export const defaultValue: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
+	name: "defaultValue, uncontrolled",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<RadioGroup name="test-name" defaultValue="1" onChange={args.handleChange}>
+			{/* checked should be ignored */}
+			<Radio value="1" checked={false}>
+				Content
+			</Radio>
+
+			<Radio value="2">Content 2</Radio>
+		</RadioGroup>
+	),
+	play: async ({ canvas, args }) => {
+		const inputs = canvas.getAllByRole("radio");
+
+		expect(inputs[0]).toBeChecked();
+
+		await userEvent.click(inputs[1]);
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "test-name",
+			value: "2",
+			event: expect.objectContaining({ target: inputs[1] }),
+		});
+
+		expect(inputs[0]).not.toBeChecked();
+		expect(inputs[1]).toBeChecked();
+	},
+};
+
+export const disabled: StoryObj = {
+	name: "disabled",
+	render: () => (
+		<RadioGroup name="test-name" disabled>
+			<Radio value="test-value">Content</Radio>
+		</RadioGroup>
+	),
+	play: async ({ canvas }) => {
+		const input = canvas.getByRole("radio");
+
+		expect(input).toBeDisabled();
+	},
+};

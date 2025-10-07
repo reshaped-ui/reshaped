@@ -1,6 +1,8 @@
 import { Example } from "utilities/storybook";
 import Switch from "components/Switch";
 import View from "components/View";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent } from "storybook/test";
 
 export default {
 	title: "Components/Switch",
@@ -11,20 +13,6 @@ export default {
 		},
 	},
 };
-
-export const selection = () => (
-	<Example>
-		<Example.Item title="unselected">
-			<Switch name="active" inputAttributes={{ "aria-label": "test switch" }} />
-		</Example.Item>
-		<Example.Item title="selected, uncontrolled">
-			<Switch name="active" defaultChecked inputAttributes={{ "aria-label": "test switch" }} />
-		</Example.Item>
-		<Example.Item title="selected, controlled">
-			<Switch name="active" checked inputAttributes={{ "aria-label": "test switch" }} />
-		</Example.Item>
-	</Example>
-);
 
 export const size = () => (
 	<Example>
@@ -93,23 +81,108 @@ export const label = () => (
 	</Example>
 );
 
-export const disabled = () => (
-	<Example>
-		<Example.Item title="disabled, unselected">
-			<Switch name="active" disabled inputAttributes={{ "aria-label": "test switch" }} />
-		</Example.Item>
-		<Example.Item title="disabled, selected">
+export const defaultChecked: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
+	name: "defaultChecked, uncontrolled",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<Switch name="test-name" defaultChecked onChange={args.handleChange}>
+			Label
+		</Switch>
+	),
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("checkbox");
+
+		expect(input).toBeChecked();
+
+		await userEvent.click(input);
+
+		expect(args.handleChange).toBeCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "test-name",
+			checked: false,
+			event: expect.objectContaining({ target: input }),
+		});
+		expect(input).not.toBeChecked();
+	},
+};
+
+export const checked: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
+	name: "checked, uncontrolled",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<Switch name="test-name" checked onChange={args.handleChange}>
+			Label
+		</Switch>
+	),
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("checkbox");
+
+		expect(input).toBeChecked();
+
+		await userEvent.click(input);
+
+		expect(args.handleChange).toBeCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "test-name",
+			checked: false,
+			event: expect.objectContaining({ target: input }),
+		});
+		expect(input).toBeChecked();
+	},
+};
+
+export const disabled: StoryObj = {
+	name: "disabled",
+	render: () => (
+		<Example>
+			<Example.Item title="disabled, unselected">
+				<Switch name="active" disabled inputAttributes={{ "aria-label": "test switch" }} />
+			</Example.Item>
+			<Example.Item title="disabled, selected">
+				<Switch
+					name="active"
+					disabled
+					defaultChecked
+					inputAttributes={{ "aria-label": "test switch" }}
+				/>
+			</Example.Item>
+			<Example.Item title="disabled, with label">
+				<Switch name="active" disabled>
+					Switch
+				</Switch>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas }) => {
+		const [input] = canvas.getAllByRole("checkbox");
+		expect(input).toBeDisabled();
+	},
+};
+
+export const className: StoryObj = {
+	name: "className, attributes",
+	render: () => (
+		<div data-testid="root">
 			<Switch
-				name="active"
-				disabled
-				defaultChecked
-				inputAttributes={{ "aria-label": "test switch" }}
-			/>
-		</Example.Item>
-		<Example.Item title="disabled, with label">
-			<Switch name="active" disabled>
-				Switch
+				className="test-classname"
+				attributes={{ id: "test-id" }}
+				inputAttributes={{ "aria-label": "test select", id: "test-input-id" }}
+				name="name"
+			>
+				Label
 			</Switch>
-		</Example.Item>
-	</Example>
-);
+		</div>
+	),
+	play: async ({ canvas }) => {
+		const root = canvas.getByTestId("root").firstChild;
+		const input = canvas.getByRole("checkbox");
+
+		expect(root).toHaveClass("test-classname");
+		expect(root).toHaveAttribute("id", "test-id");
+		expect(input).toHaveAttribute("id", "test-input-id");
+	},
+};
