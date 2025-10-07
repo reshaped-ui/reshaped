@@ -1,3 +1,15 @@
+## 3.8.0-canary.8
+
+
+### Bug Fixes
+
+* **Modal, Select, TextField, TextArea:** fixed mobile scrolling and border dimensions ([#457](https://github.com/reshaped-ui/reshaped/issues/457)) ([9b422c9](https://github.com/reshaped-ui/reshaped/commit/9b422c98b6ccaeb5687c7dc961540c459a1b5fab))
+
+
+### Features
+
+* **Select:** added multiple support ([#453](https://github.com/reshaped-ui/reshaped/issues/453)) ([01eea4a](https://github.com/reshaped-ui/reshaped/commit/01eea4a6b72fc8269f9e7af034a44842267f8119))
+
 ## 3.8.0-canary.7
 
 
