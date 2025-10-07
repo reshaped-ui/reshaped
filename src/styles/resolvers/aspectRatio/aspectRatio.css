@@ -1,4 +1,4 @@
-@responsive [style*="--rs-ratio-s:"] {
+@responsive [style*="--rs-ratio-"] {
 	@variable --rs-ratio 0;
 }
 
