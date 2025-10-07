@@ -9,7 +9,7 @@ import s from "./Tooltip.module.css";
 const Tooltip: React.FC<T.Props> = (props) => {
 	const { text, children, position = "bottom", color = "inverted", ...flyoutProps } = props;
 
-	if (!text) return children({});
+	if (!text) return children({ ref: null });
 
 	return (
 		<Flyout {...flyoutProps} position={position} triggerType="hover" groupTimeouts>
