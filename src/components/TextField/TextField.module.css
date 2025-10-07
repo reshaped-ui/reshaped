@@ -1,22 +1,26 @@
 .root {
 	/* This variable is only used by Aligner */
 	--rs-p-h: var(--rs-text-field-gap);
+	--rs-text-field-border-color: var(--rs-color-border-neutral);
+	--rs-text-field-focus-border-color: var(--rs-color-border-primary);
+	--rs-text-field-border-width: 1px;
 
 	display: flex;
 	align-items: center;
 	position: relative;
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
-	border: 1px solid var(--rs-color-border-neutral);
 	border-radius: var(--rs-text-field-radius);
-	padding: 0 calc(var(--rs-text-field-gap) - 1px);
+	padding: 0 var(--rs-text-field-gap);
 	column-gap: var(--rs-text-field-gap);
+	box-shadow: 0 0 0 var(--rs-text-field-border-width) var(--rs-text-field-border-color) inset;
 
-	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus)):focus-within,
-	&:has(label:active),
+	&:not(
+			:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus, select:focus)
+		):focus-within,
+	&:has(.icon:active),
 	&.--focused {
-		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
-		border-color: var(--rs-color-border-primary);
+		box-shadow: 0 0 0 2px var(--rs-text-field-focus-border-color) inset;
 	}
 
 	&.--multiline {
@@ -59,7 +63,7 @@
 	color: var(--rs-color-foreground-neutral);
 	margin: 0 calc(var(--rs-text-field-gap) * -1);
 	padding-inline: var(--rs-text-field-gap);
-	padding-block: calc(var(--rs-text-field-p-v) - 1px);
+	padding-block: var(--rs-text-field-p-v);
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 }
@@ -76,8 +80,7 @@
 	letter-spacing: var(--rs-text-field-letter-spacing);
 }
 
-.icon,
-.affix {
+.icon {
 	cursor: text;
 }
 
@@ -134,7 +137,8 @@
 }
 
 .root.--disabled {
-	border-color: var(--rs-color-border-disabled);
+	--rs-text-field-border-color: var(--rs-color-border-disabled);
+
 	background: var(--rs-color-background-disabled-faded);
 
 	&,
@@ -153,9 +157,7 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-3);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
-		--rs-text-field-attachment-height: calc(
-			var(--rs-text-field-line-height) + var(--rs-unit-x2) - 2px
-		);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x2));
 	}
 
 	@value medium {
@@ -166,9 +168,7 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-3);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
-		--rs-text-field-attachment-height: calc(
-			var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px
-		);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
 	}
 
 	@value large {
@@ -179,9 +179,7 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-text-field-action-inset: var(--rs-unit-x2);
-		--rs-text-field-attachment-height: calc(
-			var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px
-		);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
 	}
 
 	@value xlarge {
@@ -192,43 +190,26 @@
 		--rs-text-field-line-height: var(--rs-line-height-body-2);
 		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
-		--rs-text-field-attachment-height: calc(
-			var(--rs-text-field-line-height) + var(--rs-unit-x4) - 2px
-		);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
 	}
 }
 
 .root.--variant-faded {
-	background: var(--rs-color-background-neutral-faded);
-	border-color: transparent;
+	--rs-text-field-border-color: transparent;
 
-	&:not(:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus)):focus-within,
-	&:has(label:active),
-	&.--focused {
-		border-color: var(--rs-color-border-primary);
-	}
+	background: var(--rs-color-background-neutral-faded);
 }
 
 .root.--variant-headless {
-	background: transparent;
-	border-color: transparent;
+	--rs-text-field-border-color: transparent;
+	--rs-text-field-focus-border-color: transparent;
 
-	&:focus-within,
-	&.--status-error,
-	&.--status-error:focus-within,
-	&.--status-error.--focused {
-		border-color: transparent;
-		box-shadow: none;
-	}
+	background: transparent;
 }
 
 .root.--status-error {
-	border-color: var(--rs-color-border-critical);
-
-	&:focus-within,
-	&.--focused {
-		border-color: var(--rs-color-border-primary);
-	}
+	--rs-text-field-border-color: var(--rs-color-border-critical);
+	--rs-text-field-border-width: 2px;
 }
 
 @media (--rs-viewport-s) and (hover: none) {

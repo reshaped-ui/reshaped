@@ -1,6 +1,4 @@
 .root {
-	/* Minus border size */
-
 	display: flex;
 	position: relative;
 	z-index: 0;
@@ -13,15 +11,13 @@
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
-		box-shadow: var(--rs-shadow-border-faded);
+		box-shadow: 0 0 0 1px var(--rs-color-border-neutral) inset;
 		border-radius: var(--rs-select-radius);
 	}
 
 	[data-rs-keyboard] &:focus-within {
-		box-shadow: 0 0 0 1px var(--rs-color-border-primary);
-
 		&::after {
-			box-shadow: 0 0 0 1px var(--rs-color-border-primary) inset;
+			box-shadow: 0 0 0 2px var(--rs-color-border-primary) inset;
 		}
 	}
 }
@@ -169,16 +165,18 @@
 }
 
 .root.--status-error {
-	box-shadow: 0 0 0 1px var(--rs-color-border-critical);
-
 	&::after {
-		box-shadow: 0 0 0 1px var(--rs-color-border-critical) inset;
+		box-shadow: 0 0 0 2px var(--rs-color-border-critical) inset;
 	}
 }
 
 .root.--disabled {
 	background: var(--rs-color-background-disabled-faded);
 	border-color: var(--rs-color-border-disabled);
+
+	&::after {
+		box-shadow: 0 0 0 1px var(--rs-color-border-disabled) inset;
+	}
 
 	& .input,
 	& .arrow {

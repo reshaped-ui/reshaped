@@ -3,6 +3,7 @@ import type * as G from "types/global";
 import type { IconProps } from "components/Icon";
 import type { ActionableProps } from "components/Actionable";
 import type { MenuItemProps } from "components/MenuItem";
+import { DropdownMenuProps } from "components/DropdownMenu";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
@@ -69,11 +70,10 @@ export type CustomFragment = {
 	onFocus?: (e: React.FocusEvent<HTMLButtonElement>) => void;
 	/** Callback when the input is blurred */
 	onBlur?: (e: React.FocusEvent<HTMLButtonElement>) => void;
-	// TODO: Replace / add trigger attributes in v4, currently they're passed to the Actionable component
-	// instead of the input to enable Flyout positioning
+	// TODO: Replace / add trigger attributes in v4, currently they're passed to the Actionable component instead of the input to enable Flyout positioning
 	/** Additional attributes for the trigger element */
 	inputAttributes?: ActionableProps["attributes"];
-};
+} & Pick<DropdownMenuProps, "position" | "width" | "fallbackPositions">;
 
 export type NativeFragment = {
 	/** Options for the select */

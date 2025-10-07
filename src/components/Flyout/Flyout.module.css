@@ -35,7 +35,7 @@
 	transition: 1ms var(--rs-easing-accelerate);
 
 	[data-rs-keyboard] &:focus {
-		box-shadow: var(--rs-focus-shadow);
+		box-shadow: var(--rs-shadow-focus);
 	}
 }
 

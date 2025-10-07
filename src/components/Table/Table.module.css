@@ -39,7 +39,7 @@
 	[data-rs-keyboard] &:focus {
 		outline: none;
 		z-index: var(--rs-z-index-relative);
-		box-shadow: var(--rs-focus-inset-shadow);
+		box-shadow: var(--rs-shadow-focus-inset);
 	}
 }
 

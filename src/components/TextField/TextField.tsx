@@ -41,13 +41,9 @@ const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 		</label>
 	);
 	const affixNode = affix && (
-		<label
-			className={classNames(s.affix, s[`affix--position-${position}`])}
-			key="affix"
-			htmlFor={id}
-		>
+		<span className={classNames(s.affix, s[`affix--position-${position}`])} key="affix">
 			{affix}
-		</label>
+		</span>
 	);
 
 	/**

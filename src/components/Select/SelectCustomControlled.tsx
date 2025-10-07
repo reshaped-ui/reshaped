@@ -8,7 +8,17 @@ import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
-	const { children, value, name, placeholder, size, multiple } = props;
+	const {
+		children,
+		value,
+		name,
+		placeholder,
+		size,
+		multiple,
+		width = "trigger",
+		position,
+		fallbackPositions,
+	} = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
 	const searchStringRef = React.useRef<string>("");
 	const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -104,10 +114,10 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 			{(props) => {
 				return (
 					<DropdownMenu
-						width="trigger"
+						width={width}
 						disableHideAnimation
-						position="bottom"
-						fallbackPositions={["bottom", "top"]}
+						position={position ?? "bottom"}
+						fallbackPositions={fallbackPositions ?? (position ? undefined : ["bottom", "top"])}
 						fallbackAdjustLayout
 						fallbackMinHeight="150px"
 						borderRadius={responsivePropDependency(size, (size) =>
@@ -132,7 +142,14 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 								);
 							}}
 						</DropdownMenu.Trigger>
-						<DropdownMenu.Content attributes={{ ref: dropdownRef, onKeyDown: handleKeyDown }}>
+						<DropdownMenu.Content
+							attributes={{
+								ref: dropdownRef,
+								onKeyDown: handleKeyDown,
+								// Ignore the default menu role since we're using options
+								role: undefined,
+							}}
+						>
 							{resolvedChildren}
 						</DropdownMenu.Content>
 					</DropdownMenu>

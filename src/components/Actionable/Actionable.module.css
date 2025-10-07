@@ -38,11 +38,11 @@
 	&:focus {
 		outline: none;
 		z-index: var(--rs-z-index-relative);
-		box-shadow: var(--rs-focus-shadow);
+		box-shadow: var(--rs-shadow-focus);
 	}
 
 	&.--inset:focus {
-		box-shadow: var(--rs-focus-inset-shadow);
+		box-shadow: var(--rs-shadow-focus-inset);
 	}
 
 	&.--disabled-focus-ring:focus {
@@ -55,11 +55,11 @@
 		}
 
 		&:focus > * {
-			box-shadow: var(--rs-focus-shadow);
+			box-shadow: var(--rs-shadow-focus);
 		}
 
 		&.--inset:focus > * {
-			box-shadow: var(--rs-focus-inset-shadow);
+			box-shadow: var(--rs-shadow-focus-inset);
 		}
 	}
 }

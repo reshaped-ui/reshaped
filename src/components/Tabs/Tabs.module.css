@@ -83,7 +83,7 @@
 }
 
 [data-rs-keyboard] .radio:focus + .buttonContent {
-	box-shadow: var(--rs-focus-inset-shadow);
+	box-shadow: var(--rs-shadow-focus-inset);
 }
 
 .icon:not(:last-child) {
@@ -171,7 +171,7 @@
 }
 
 [data-rs-keyboard] .panel:focus {
-	box-shadow: var(--rs-focus-shadow);
+	box-shadow: var(--rs-shadow-focus);
 }
 
 .--panel-hidden {

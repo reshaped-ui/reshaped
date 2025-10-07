@@ -141,7 +141,7 @@ const Modal: React.FC<T.Props> & {
 			currentEl = currentEl ? currentEl.parentElement : null;
 		}
 
-		// Prevent the drag handling when browser tab swiping is triggering
+		// Prevent the drag handling when browser is trying to navigate to a previous page
 		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
 
 		disableUserSelect();

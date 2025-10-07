@@ -183,6 +183,9 @@ export const nativeHandlers: StoryObj<{
 					placeholder="Select an animal"
 					defaultValue="dog"
 					onChange={args.handleChange}
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
 				>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
@@ -190,10 +193,13 @@ export const nativeHandlers: StoryObj<{
 			</Example.Item>
 			<Example.Item title="native, controlled, onChange">
 				<Select
-					name="animal"
+					name="animal-2"
 					placeholder="Select an animal"
 					value="dog"
 					onChange={args.handleControlledChange}
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
 				>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
@@ -201,12 +207,15 @@ export const nativeHandlers: StoryObj<{
 			</Example.Item>
 			<Example.Item title="native, onFocus, onBlur, onClick">
 				<Select
-					name="animal"
+					name="animal-3"
 					placeholder="Select an animal"
 					defaultValue="dog"
 					onFocus={args.handleFocus}
 					onBlur={args.handleBlur}
 					onClick={args.handleClick}
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
 				>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
@@ -240,7 +249,7 @@ export const nativeHandlers: StoryObj<{
 		expect(controlled).toHaveValue("dog");
 		expect(args.handleControlledChange).toHaveBeenCalledTimes(1);
 		expect(args.handleControlledChange).toHaveBeenCalledWith({
-			name: "animal",
+			name: "animal-2",
 			value: "turtle",
 			event: expect.objectContaining({ target: controlled }),
 		});
@@ -285,6 +294,9 @@ export const customHandlers: StoryObj<{
 					placeholder="Select an animal"
 					defaultValue="dog"
 					onChange={args.handleChange}
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
 				>
 					<Select.Option value="dog">Dog</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
@@ -296,6 +308,9 @@ export const customHandlers: StoryObj<{
 					placeholder="Select an animal"
 					value="dog"
 					onChange={args.handleControlledChange}
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
 				>
 					<Select.Option value="dog">Dog</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
@@ -309,6 +324,9 @@ export const customHandlers: StoryObj<{
 					onFocus={args.handleFocus}
 					onBlur={args.handleBlur}
 					onClick={args.handleClick}
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
 				>
 					<Select.Option value="dog">Dog</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
@@ -399,34 +417,50 @@ export const triggerOnly: StoryObj<{ handleClick: Mock }> = {
 		return (
 			<Example>
 				<Example.Item title="trigger only, onClick">
-					<Select name="animal" placeholder="Select an animal" onClick={handleClick} value="dog">
+					<Select
+						name="animal"
+						placeholder="Select an animal"
+						onClick={handleClick}
+						value="dog"
+						inputAttributes={{
+							"aria-label": "Select an animal",
+						}}
+					>
 						{value}
 					</Select>
-					<Modal active={toggle.active} onClose={toggle.deactivate} position="bottom" padding={2}>
-						<MenuItem
-							roundedCorners
-							onClick={() => {
-								setValue("Dog");
-								toggle.deactivate();
-							}}
-							attributes={{
-								role: "option",
-							}}
-						>
-							Dog
-						</MenuItem>
-						<MenuItem
-							roundedCorners
-							attributes={{
-								role: "option",
-							}}
-							onClick={() => {
-								setValue("Turtle");
-								toggle.deactivate();
-							}}
-						>
-							Turtle
-						</MenuItem>
+					<Modal
+						active={toggle.active}
+						onClose={toggle.deactivate}
+						position="bottom"
+						padding={2}
+						attributes={{ "aria-label": "Select an animal" }}
+					>
+						<div role="listbox" aria-label="Select an animal">
+							<MenuItem
+								roundedCorners
+								onClick={() => {
+									setValue("Dog");
+									toggle.deactivate();
+								}}
+								attributes={{
+									role: "option",
+								}}
+							>
+								Dog
+							</MenuItem>
+							<MenuItem
+								roundedCorners
+								attributes={{
+									role: "option",
+								}}
+								onClick={() => {
+									setValue("Turtle");
+									toggle.deactivate();
+								}}
+							>
+								Turtle
+							</MenuItem>
+						</div>
 					</Modal>
 				</Example.Item>
 			</Example>
@@ -499,28 +533,48 @@ export const variant: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="variant: faded, native">
-				<Select variant="faded" name="animal" placeholder="Select an animal">
+				<Select
+					variant="faded"
+					name="animal"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
 				</Select>
 			</Example.Item>
 
 			<Example.Item title="variant: faded, custom">
-				<Select.Custom variant="faded" name="animal" placeholder="Select an animal">
+				<Select.Custom
+					variant="faded"
+					name="animal-2"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
 					<Select.Option value="dog">Dog</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
 				</Select.Custom>
 			</Example.Item>
 
 			<Example.Item title="variant: headless, native">
-				<Select variant="headless" name="animal" placeholder="Select an animal">
+				<Select
+					variant="headless"
+					name="animal-3"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
 				</Select>
 			</Example.Item>
 
 			<Example.Item title="variant: headless, custom">
-				<Select.Custom variant="headless" name="animal" placeholder="Select an animal">
+				<Select.Custom
+					variant="headless"
+					name="animal-4"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
 					<Select.Option value="dog">Dog</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
 				</Select.Custom>
@@ -605,13 +659,23 @@ export const disabled: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="disabled, native">
-				<Select name="animal" placeholder="Select an animal" disabled>
+				<Select
+					name="animal"
+					placeholder="Select an animal"
+					disabled
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
 					<option value="dog">Dog</option>
 					<option value="turtle">Turtle</option>
 				</Select>
 			</Example.Item>
 			<Example.Item title="disabled, custom">
-				<Select.Custom name="animal" placeholder="Select an animal" disabled>
+				<Select.Custom
+					name="animal-2"
+					placeholder="Select an animal"
+					disabled
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
 					<Select.Option value="dog">Dog</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
 				</Select.Custom>
