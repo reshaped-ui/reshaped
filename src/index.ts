@@ -159,7 +159,7 @@ export { default as Dismissible } from "components/Dismissible";
 export type { DismissibleProps } from "components/Dismissible";
 
 export { default as Flyout } from "components/Flyout";
-export type { FlyoutProps, FlyoutInstance } from "components/Flyout";
+export type { FlyoutProps, FlyoutInstance, FlyoutTriggerAttributes } from "components/Flyout";
 
 export { default as FormControl } from "components/FormControl";
 export type { FormControlProps } from "components/FormControl";

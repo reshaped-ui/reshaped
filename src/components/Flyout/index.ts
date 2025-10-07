@@ -6,4 +6,5 @@ export type {
 	TriggerProps as FlyoutTriggerProps,
 	ContentProps as FlyoutContentProps,
 	CloseReason as FlyoutCloseReason,
+	TriggerAttributes as FlyoutTriggerAttributes,
 } from "./Flyout.types";

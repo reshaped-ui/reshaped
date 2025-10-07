@@ -1,5 +1,5 @@
 import React from "react";
-import type { FlyoutProps, FlyoutTriggerProps } from "components/Flyout";
+import type { FlyoutProps, FlyoutTriggerAttributes } from "components/Flyout";
 
 export type Props = Pick<
 	FlyoutProps,
@@ -18,8 +18,7 @@ export type Props = Pick<
 	| "contentClassName"
 > & {
 	/** Node for inserting children */
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	children: (attributes: Parameters<FlyoutTriggerProps["children"]>[0] | {}) => React.ReactNode;
+	children: (attributes: FlyoutTriggerAttributes) => React.ReactNode;
 	/** Text content for the tooltip */
 	text?: React.ReactNode;
 	/** Color of the tooltip
