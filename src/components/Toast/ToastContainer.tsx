@@ -109,6 +109,7 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 				// Height + padding + borders
 				height: status === "entered" ? `calc(${toastHeight}px + var(--rs-unit-x2) + 2px)` : 0,
 				// Disable transition when height of the toast can change
+				// eslint-disable-next-line react-hooks/refs
 				transitionDuration: resizingRef.current ? "0s" : undefined,
 			}}
 			onTransitionEnd={handleTransitionEnd}

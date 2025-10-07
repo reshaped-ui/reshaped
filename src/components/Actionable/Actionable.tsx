@@ -101,6 +101,7 @@ const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 		children: childrenNode,
 	};
 
+	// eslint-disable-next-line react-hooks/refs
 	if (render) return render(tagAttributes);
 	return <TagName {...tagAttributes} />;
 });

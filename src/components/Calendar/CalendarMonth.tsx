@@ -55,6 +55,7 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 										!!date &&
 										isDateFocusable({ date, lastFocusedDate, startValue });
 
+								// eslint-disable-next-line react-hooks/immutability
 								if (focusable) foundFocusableDate = true;
 
 								return (

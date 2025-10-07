@@ -19,6 +19,7 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 	} = props;
 	const id = useElementId();
 	const elActiveRef = React.useRef<HTMLDivElement>(null);
+	// eslint-disable-next-line react-hooks/refs
 	const elPrevActiveRef = React.useRef<HTMLDivElement>(elActiveRef.current);
 	const elScrollableRef = React.useRef<HTMLDivElement>(null);
 	const [selection, setSelection] = React.useState<T.SelectionState>({

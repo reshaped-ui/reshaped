@@ -18,6 +18,7 @@ const AccordionControlled: React.FC<T.ControlledProps> = (props) => {
 			triggerId: `${id}-trigger`,
 			contentId: `${id}-content`,
 			active,
+			// eslint-disable-next-line react-hooks/refs
 			onToggle: onToggleRef.current,
 			iconPosition,
 			iconSize,

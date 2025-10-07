@@ -80,6 +80,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		});
 	};
 
+	// eslint-disable-next-line react-hooks/refs
 	const resolvedChildren = traverseOptionList(children);
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {

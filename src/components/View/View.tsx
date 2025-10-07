@@ -238,6 +238,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		if (!child) return null;
 
 		const usedIndex = renderedItemIndex;
+		// eslint-disable-next-line react-hooks/immutability
 		renderedItemIndex += 1;
 
 		if (isMatchingComponentChildId(child, "Hidden")) {

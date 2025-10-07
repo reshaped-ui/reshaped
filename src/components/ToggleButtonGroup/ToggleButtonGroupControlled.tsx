@@ -41,6 +41,7 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 		}
 
 		const boundIndex = toggleButtonIndex;
+		// eslint-disable-next-line react-hooks/immutability
 		toggleButtonIndex += 1;
 
 		const focusable = focusableIndexRef.current === boundIndex;

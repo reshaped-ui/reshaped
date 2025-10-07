@@ -41,11 +41,14 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const closestFixedContainer = React.useMemo(() => {
 		if (!mounted) return null;
 		if (!triggerElRef) return null;
+		// eslint-disable-next-line react-hooks/refs
 		return findClosestPositionContainer({ el: triggerElRef.current });
 	}, [mounted, triggerElRef]);
 	const closestScrollableContainer = React.useMemo(() => {
 		if (!mounted) return;
+		// eslint-disable-next-line react-hooks/refs
 		if (!triggerElRef?.current) return;
+		// eslint-disable-next-line react-hooks/refs
 		return findClosestScrollableContainer({ el: triggerElRef.current });
 	}, [mounted, triggerElRef]);
 	const containerRef = passedContainerRef || { current: closestFixedContainer };

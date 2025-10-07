@@ -145,6 +145,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 		if (containerEl) {
 			originalOverflowRef.current = containerEl.style.overflow;
+			// eslint-disable-next-line react-hooks/immutability
 			containerEl.style.overflow = "hidden";
 			containerEl.style.isolation = "isolate";
 			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);

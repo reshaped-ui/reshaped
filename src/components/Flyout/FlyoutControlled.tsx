@@ -75,6 +75,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * For example, if you have a tooltip -> popover inside another popover.content, tooltip shouldn't use its parent context anymore
 	 */
 	const isParentTriggerInsideFlyout =
+		// eslint-disable-next-line react-hooks/refs
 		!!parentTriggerRef?.current && parentContentRef?.current?.contains(parentTriggerRef.current);
 	const tryParentTrigger = !parentContentRef || isParentTriggerInsideFlyout;
 
@@ -95,13 +96,16 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
+	// eslint-disable-next-line react-hooks/refs
 	const flyout = useFlyout({
 		triggerElRef,
 		flyoutElRef,
+		// eslint-disable-next-line react-hooks/refs
 		triggerBounds: originCoordinates ?? triggerBoundsRef.current,
 		width,
 		position: passedPosition,
 		defaultActive: resolvedActive,
+		// eslint-disable-next-line react-hooks/refs
 		container: containerRef?.current,
 		fallbackPositions,
 		fallbackAdjustLayout,

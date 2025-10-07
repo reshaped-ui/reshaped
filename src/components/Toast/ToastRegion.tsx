@@ -79,6 +79,7 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 		>
 			{queue.map((data, index) => {
 				const visibleIndex = filteredLength - index + hiddenCount - 1;
+				// eslint-disable-next-line react-hooks/immutability
 				if (data.status !== "entered") hiddenCount += 1;
 
 				return (

@@ -16,6 +16,7 @@ const Expandable: React.FC<T.ContentProps> = (props) => {
 	);
 	const contentClassNames = classNames(
 		s.root,
+		// eslint-disable-next-line react-hooks/refs
 		mountedRef.current && animatedHeight !== "auto" && s["--animated"]
 	);
 

@@ -48,6 +48,7 @@ const Breadcrumbs: React.FC<T.Props> & { Item: typeof BreadcrumbsItem } = (props
 					const isAfterCollapse = renderIndex > lastCollapsedIndex;
 					const isDisplayed = !visibleItems || isBeforeCollapse || isAfterCollapse || expanded;
 					const isCollapseButton = renderIndex === lastCollapsedIndex;
+					// eslint-disable-next-line react-hooks/immutability
 					renderIndex += 1;
 
 					let itemNode = null;

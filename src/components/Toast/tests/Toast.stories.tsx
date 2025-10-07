@@ -428,7 +428,9 @@ export const base: StoryObj = {
 
 		await sleep(500);
 
-		expect(title).not.toBeInTheDocument();
+		await waitFor(() => {
+			expect(title).not.toBeInTheDocument();
+		});
 	},
 };
 

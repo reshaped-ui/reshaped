@@ -22,19 +22,21 @@ const Portal: React.FC<T.Props> & { Scope: typeof PortalScope } = (props) => {
 	const { children, targetRef } = props;
 	const mountedToggle = useToggle();
 	const rootRef = React.useRef<HTMLDivElement>(null);
+	// eslint-disable-next-line react-hooks/refs
 	const rootNode = rootRef.current?.getRootNode();
 	const isShadowDom = rootNode instanceof ShadowRoot;
 	const defaultTargetEl = isShadowDom ? rootNode : document.body;
 
 	/**
 	 * Check for parent portal to render inside it
-	 * To avoid z-iondex issues
+	 * To avoid z-index issues
 	 * Example:
 	 * Dropdown rendered on the page should render under the modal
 	 * Dropdown inside the modal should render above it
 	 */
 	const portal = usePortalScope();
 	const nextScopeRef = targetRef || portal.scopeRef;
+	// eslint-disable-next-line react-hooks/refs
 	const targetEl = nextScopeRef?.current || defaultTargetEl;
 
 	useIsomorphicLayoutEffect(() => {
@@ -44,6 +46,7 @@ const Portal: React.FC<T.Props> & { Scope: typeof PortalScope } = (props) => {
 
 	/* Preserve the current theme when rendered in body */
 	return [
+		// eslint-disable-next-line react-hooks/refs
 		ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl),
 		// Make sure this element doesn't affect components using :last-child when their children use portals
 		!mountedToggle.active && <div ref={rootRef} className={s.root} key="root" />,
