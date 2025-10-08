@@ -1,12 +1,7 @@
 "use client";
 
-import React from "react";
-import {
-	classNames,
-	isMatchingComponentChildId,
-	responsiveVariables,
-	setComponentChildId,
-} from "utilities/props";
+import React, { isValidElement } from "react";
+import { classNames, responsiveVariables } from "utilities/props";
 import { resolveMixin } from "styles/mixin";
 import type * as T from "./Table.types";
 import s from "./Table.module.css";
@@ -120,8 +115,9 @@ const Table: React.FC<T.Props> & {
 		(fadeSide === "end" || fadeSide === "both") && s["--fade-end"]
 	);
 	const [firstChild] = React.Children.toArray(children);
-	const isBody = isMatchingComponentChildId(firstChild, "Table.Body");
-	const isHead = isMatchingComponentChildId(firstChild, "Table.Head");
+	const isElement = isValidElement(firstChild);
+	const isBody = isElement && firstChild.type === TableBody;
+	const isHead = isElement && firstChild.type === TableHead;
 
 	return (
 		<div {...attributes} className={rootClassNames} ref={rootRef}>
@@ -137,9 +133,6 @@ Table.Heading = TableHeading;
 Table.Row = TableRow;
 Table.Body = TableBody;
 Table.Head = TableHead;
-
-setComponentChildId(Table.Body, "Table.Body");
-setComponentChildId(Table.Head, "Table.Head");
 
 Table.displayName = "Table";
 TableCell.displayName = "TableCell";

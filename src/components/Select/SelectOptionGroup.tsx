@@ -2,7 +2,6 @@ import React from "react";
 import View from "components/View";
 import Text from "components/Text";
 import type * as T from "./Select.types";
-import { setComponentChildId } from "utilities/props";
 
 const SelectOptionGroup: React.FC<T.OptionGroupProps> = (props) => {
 	const { label, children } = props;
@@ -20,6 +19,5 @@ const SelectOptionGroup: React.FC<T.OptionGroupProps> = (props) => {
 };
 
 SelectOptionGroup.displayName = "Select.OptionGroup";
-setComponentChildId(SelectOptionGroup, "Select.OptionGroup");
 
 export default SelectOptionGroup;

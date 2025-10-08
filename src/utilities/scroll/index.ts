@@ -1,2 +1,2 @@
 export { disableScroll, enableScroll } from "./disable";
-export { lockScroll, unlockScroll } from "./lock";
+export { lockScroll } from "./lock";
