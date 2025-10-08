@@ -90,7 +90,7 @@
 		"release:major": "node bin/release.js major",
 		"release:lib": "pnpm build && pnpm publish",
 		"release:canary": "pnpm build && yarn publish --tag canary && git push --follow-tags",
-		"release:test": "pnpm build && pnpm pack --filename reshaped-test.tgz",
+		"release:test": "pnpm build && pnpm pack --out reshaped-test.tgz",
 		"release:copy": "sh ./bin/release-copy.sh",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
 		"test:vrt": "pnpm chromatic",

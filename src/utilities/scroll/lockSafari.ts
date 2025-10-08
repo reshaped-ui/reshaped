@@ -17,6 +17,7 @@ const lockSafariScroll = () => {
 	});
 
 	return () => {
+		console.log("reset safari scroll", styleCache);
 		styleCache.reset();
 		window.scrollTo({ top: scrollY, left: scrollX, behavior: "instant" });
 	};

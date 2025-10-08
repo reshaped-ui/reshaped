@@ -2,10 +2,12 @@ import React from "react";
 import DropdownMenu from "components/DropdownMenu";
 import Icon from "components/Icon";
 import CheckmarkIcon from "icons/Checkmark";
-import { isMatchingComponentChildId, responsivePropDependency } from "utilities/props";
+import { responsivePropDependency } from "utilities/props";
 import type * as T from "./Select.types";
 import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
+import SelectOption from "./SelectOption";
+import SelectOptionGroup from "./SelectOptionGroup";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const {
@@ -31,7 +33,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		return React.Children.map(children, (child, index) => {
 			if (!React.isValidElement(child)) return null;
 
-			if (isMatchingComponentChildId(child, "Select.Option")) {
+			if (child.type === SelectOption) {
 				const component = child as React.ReactElement<T.OptionProps>;
 				const option = component.props;
 				const matchingValue = multiple ? value.includes(option.value) : option.value === value;
@@ -67,7 +69,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 				});
 			}
 
-			if (isMatchingComponentChildId(child, "Select.OptionGroup")) {
+			if (child.type === SelectOptionGroup) {
 				const component = child as React.ReactElement<T.OptionGroupProps>;
 				const optionGroup = component.props;
 

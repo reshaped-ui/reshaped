@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { lockScroll, unlockScroll } from "utilities/scroll";
+import { lockScroll } from "utilities/scroll";
 
 const useScrollLock = (options?: {
 	containerRef?: React.RefObject<HTMLElement | null>;
@@ -9,9 +9,10 @@ const useScrollLock = (options?: {
 }) => {
 	const { containerRef, originRef } = options || {};
 	const [locked, setLocked] = React.useState(false);
+	const unlockScrollRef = React.useRef<ReturnType<typeof lockScroll> | null>(null);
 
 	const handleLockScroll = React.useCallback(() => {
-		lockScroll({
+		unlockScrollRef.current = lockScroll({
 			containerEl: containerRef?.current,
 			originEl: originRef?.current,
 			cb: () => setLocked(true),
@@ -19,7 +20,8 @@ const useScrollLock = (options?: {
 	}, [containerRef, originRef]);
 
 	const handleUnlockScroll = React.useCallback(() => {
-		unlockScroll(() => setLocked(false));
+		unlockScrollRef.current?.(() => setLocked(false));
+		unlockScrollRef.current = null;
 	}, []);
 
 	return React.useMemo(

@@ -1,11 +1,5 @@
-import React from "react";
-import {
-	classNames,
-	isMatchingComponentChildId,
-	responsiveClassNames,
-	responsiveVariables,
-	setComponentChildId,
-} from "utilities/props";
+import React, { isValidElement } from "react";
+import { classNames, responsiveClassNames, responsiveVariables } from "utilities/props";
 import Divider, { type DividerProps } from "components/Divider";
 import Hidden from "components/Hidden";
 import type * as G from "types/global";
@@ -192,14 +186,16 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	};
 
 	const renderItem: T.RenderItem = ({ className, child, index }) => {
-		const isItem = isMatchingComponentChildId(child, "View.Item");
-		const isView = isMatchingComponentChildId(child, "View");
+		const isElement = isValidElement(child);
+		const isItem = isElement && child.type === ViewItem;
+		const isView = isElement && child.type === View;
 		const key = child.key;
 		const dividerElement = !!index && divided && renderDivider({ className, key });
 		let itemElement;
 
 		if (isItem) {
 			itemElement = React.cloneElement(child, {
+				// @ts-expect-error -- child is guaranteed to be an element
 				className: classNames(className, child.props.className),
 			});
 		} else if (
@@ -218,10 +214,13 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		}
 
 		// Passing grow here because it's responsive and nowrap should follow it
+		// @ts-expect-error -- child is guaranteed to be an element
 		if ((isItem || isView) && child.props?.grow) {
+			// @ts-expect-error -- child is guaranteed to be an element
 			nowrap = child.props.grow;
 			isFlex = true;
 		}
+		// @ts-expect-error -- child is guaranteed to be an element
 		if (isItem && child.props?.gap === "auto") nowrap = true;
 
 		return (
@@ -241,7 +240,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		// eslint-disable-next-line react-hooks/immutability
 		renderedItemIndex += 1;
 
-		if (isMatchingComponentChildId(child, "Hidden")) {
+		if (isValidElement(child) && child.type === Hidden) {
+			// @ts-expect-error -- child is guaranteed to be an element
 			const { children: hiddenChild, ...hiddenProps } = child.props;
 			const key = child.key || index;
 
@@ -300,9 +300,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 };
 
 View.Item = ViewItem;
-
-setComponentChildId(View.Item, "View.Item");
-setComponentChildId(View, "View");
 
 View.displayName = "View";
 ViewItem.displayName = "View.Item";

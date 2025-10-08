@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { classNames, setComponentChildId, isMatchingComponentChildId } from "utilities/props";
+import { classNames } from "utilities/props";
 import View from "components/View";
 import ResizableHandle, { ResizableHandleContext } from "./ResizableHandle";
 import type * as T from "./Resizable.types";
@@ -159,7 +159,7 @@ const Resizable: React.FC<T.Props> & {
 	const output = React.Children.map(children, (child) => {
 		const isComponent = React.isValidElement(child);
 
-		if (isComponent && child.props && !isMatchingComponentChildId(child, "Resizable.Item")) {
+		if (isComponent && child.props && child.type !== Resizable.Item) {
 			return (
 				<ResizableHandleContext.Provider
 					value={{ containerRef, index: currentHandleIndex++, onDrag, direction }}
@@ -169,7 +169,7 @@ const Resizable: React.FC<T.Props> & {
 			);
 		}
 
-		if (isComponent && child.props && isMatchingComponentChildId(child, "Resizable.Item")) {
+		if (isComponent && child.props && child.type === Resizable.Item) {
 			const index = currentHandleIndex;
 
 			return (
@@ -201,7 +201,6 @@ const Resizable: React.FC<T.Props> & {
 };
 
 Resizable.Item = () => null;
-setComponentChildId(Resizable.Item, "Resizable.Item");
 Resizable.Handle = ResizableHandle;
 
 Resizable.displayName = "Resizable";

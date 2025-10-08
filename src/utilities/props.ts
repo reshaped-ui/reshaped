@@ -1,4 +1,3 @@
-import React from "react";
 import type * as G from "types/global";
 
 type Value = string | boolean | number | undefined;
@@ -102,24 +101,4 @@ export const responsivePropDependency = <Result, T>(
 		if (viewportValue === undefined || viewportValue === null) return acc;
 		return { ...acc, [viewport]: resolver(viewportValue, viewport) };
 	}, {} as Result);
-};
-
-/**
- * Add unique ids to components relying on React.Children.map
- * Relying on an id instead of child.type makes it work in dev mode during HMR
- */
-
-const getComponentChildId = (id: string) => `__rs-child-${id}`;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setComponentChildId = (Component: React.FC<any>, id: string) => {
-	/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-	// @ts-ignore
-	return (Component.__reshapedChildId = getComponentChildId(id));
-};
-
-export const isMatchingComponentChildId = (child: React.ReactNode, id: string) => {
-	if (!React.isValidElement(child)) return null;
-	/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-	// @ts-ignore
-	return child.type.__reshapedChildId === getComponentChildId(id);
 };
