@@ -1,3 +1,15 @@
+## 3.8.0-canary.10
+
+
+### Bug Fixes
+
+* **useScrollLock:** fixed reset conflict when using container on ios ([#459](https://github.com/reshaped-ui/reshaped/issues/459)) ([d13c364](https://github.com/reshaped-ui/reshaped/commit/d13c364ee719e6a8b78d4f38167d802220b3e9a6))
+
+
+### Features
+
+* **Flyout:** exposed TriggerAttributes types ([#458](https://github.com/reshaped-ui/reshaped/issues/458)) ([b5230ed](https://github.com/reshaped-ui/reshaped/commit/b5230edecc7aac21a8a866b7f7101e1f87f4a213))
+
 ## 3.8.0-canary.9
 
 
