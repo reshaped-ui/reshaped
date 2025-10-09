@@ -1,5 +1,5 @@
 import type React from "react";
-import type { ButtonGroupProps } from "components/Button";
+import type { ButtonGroupProps, ButtonProps } from "components/Button";
 import type { ToggleButtonProps } from "components/ToggleButton";
 
 type BaseProps = {
@@ -12,6 +12,15 @@ type BaseProps = {
 		value: string[];
 		event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
 	}) => void;
+	/** Component color scheme for all buttons in the group
+	 * Individual button colors take priority over this
+	 * @default "neutral"
+	 */
+	color?: ButtonProps["color"];
+	/** Component color scheme for selected buttons in the group
+	 * Individual button colors take priority over this
+	 */
+	selectedColor?: ButtonProps["color"];
 } & ButtonGroupProps;
 
 export type ControlledProps = BaseProps & {
@@ -31,4 +40,6 @@ export type Props = ControlledProps | UncontrolledProps;
 export type Context = {
 	onChange: ToggleButtonProps["onChange"];
 	value?: string[];
+	color?: ButtonProps["color"];
+	selectedColor?: ButtonProps["color"];
 };

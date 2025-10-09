@@ -3,6 +3,7 @@ import { expect, fn, Mock, userEvent } from "storybook/test";
 import { Example } from "utilities/storybook";
 import ToggleButtonGroup from "components/ToggleButtonGroup";
 import ToggleButton from "components/ToggleButton";
+import View from "components/View";
 
 export default {
 	title: "Components/ToggleButtonGroup",
@@ -150,6 +151,79 @@ export const multiple: StoryObj<{
 			event: expect.objectContaining({ target: controlledButton2 }),
 		});
 	},
+};
+
+export const selectedColor: StoryObj = {
+	name: "selectedColor",
+	render: () => (
+		<Example>
+			<Example.Item title="selectedColor: primary">
+				<ToggleButtonGroup selectedColor="primary" defaultValue={["1"]}>
+					<ToggleButton value="1">Button 1</ToggleButton>
+					<ToggleButton value="2">Button 2</ToggleButton>
+					<ToggleButton value="3">Button 3</ToggleButton>
+				</ToggleButtonGroup>
+			</Example.Item>
+			<Example.Item title="color: neutral, selectedColor: primary">
+				<ToggleButtonGroup color="neutral" selectedColor="primary" defaultValue={["1"]}>
+					<ToggleButton value="1">Button 1</ToggleButton>
+					<ToggleButton value="2">Button 2</ToggleButton>
+					<ToggleButton value="3">Button 3</ToggleButton>
+				</ToggleButtonGroup>
+			</Example.Item>
+			<Example.Item title="priority: individual color overrides group colors">
+				<ToggleButtonGroup color="neutral" selectedColor="primary" defaultValue={["2"]}>
+					<ToggleButton value="1">Button 1</ToggleButton>
+					<ToggleButton value="2" color="critical">
+						Button 2 (critical)
+					</ToggleButton>
+					<ToggleButton value="3">Button 3</ToggleButton>
+				</ToggleButtonGroup>
+			</Example.Item>
+			<Example.Item title="multiple selection with selectedColor">
+				<ToggleButtonGroup
+					selectionMode="multiple"
+					selectedColor="positive"
+					defaultValue={["1", "3"]}
+				>
+					<ToggleButton value="1">Button 1</ToggleButton>
+					<ToggleButton value="2">Button 2</ToggleButton>
+					<ToggleButton value="3">Button 3</ToggleButton>
+				</ToggleButtonGroup>
+			</Example.Item>
+			<Example.Item title="all selectedColors">
+				<View gap={2}>
+					{(["primary", "critical", "positive", "neutral"] as const).map((selectedColor) => (
+						<ToggleButtonGroup
+							key={selectedColor}
+							selectedColor={selectedColor}
+							defaultValue={["1"]}
+						>
+							<ToggleButton value="1">Selected: {selectedColor}</ToggleButton>
+							<ToggleButton value="2">Button 2</ToggleButton>
+							<ToggleButton value="3">Button 3</ToggleButton>
+						</ToggleButtonGroup>
+					))}
+				</View>
+			</Example.Item>
+			<Example.Item title="all colors with selectedColor: primary">
+				<View gap={2}>
+					{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
+						<ToggleButtonGroup
+							key={color}
+							color={color}
+							selectedColor="primary"
+							defaultValue={["1"]}
+						>
+							<ToggleButton value="1">{color} 1</ToggleButton>
+							<ToggleButton value="2">{color} 2</ToggleButton>
+							<ToggleButton value="3">{color} 3</ToggleButton>
+						</ToggleButtonGroup>
+					))}
+				</View>
+			</Example.Item>
+		</Example>
+	),
 };
 
 export const className: StoryObj = {

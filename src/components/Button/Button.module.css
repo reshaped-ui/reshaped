@@ -396,6 +396,23 @@
 	&.--variant-ghost.--color-white {
 		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.28);
 	}
+
+	/* Right border color overrides for adjacent selected buttons */
+	&.--right-border-primary {
+		border-inline-end-color: var(--rs-color-border-primary-faded);
+	}
+
+	&.--right-border-critical {
+		border-inline-end-color: var(--rs-color-border-critical-faded);
+	}
+
+	&.--right-border-positive {
+		border-inline-end-color: var(--rs-color-border-positive-faded);
+	}
+
+	&.--right-border-neutral {
+		border-inline-end-color: var(--rs-color-border-neutral);
+	}
 }
 
 /* Button aligner */

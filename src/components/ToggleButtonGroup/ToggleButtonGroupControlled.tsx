@@ -12,15 +12,23 @@ import {
 	focusPreviousElement,
 } from "utilities/a11y";
 import ToggleButton, { ToggleButtonProps } from "components/ToggleButton";
+import buttonStyles from "components/Button/Button.module.css";
+import { classNames } from "utilities/props";
 
 const ToggleButtonGroupItem: React.FC<
-	ToggleButtonProps & { focusable: boolean; onFocus: () => void }
+	ToggleButtonProps & { focusable: boolean; onFocus: () => void; nextSelectedColor?: string }
 > = (props) => {
-	const { focusable, onFocus, ...buttonProps } = props;
+	const { focusable, onFocus, nextSelectedColor, ...buttonProps } = props;
+
+	// Generate className for right border color override
+	const rightBorderClassName = nextSelectedColor
+		? buttonStyles[`--right-border-${nextSelectedColor}`]
+		: undefined;
 
 	return (
 		<ToggleButton
 			{...buttonProps}
+			className={classNames(buttonProps.className, rightBorderClassName)}
 			attributes={{
 				...buttonProps.attributes,
 				tabIndex: focusable ? 0 : -1,
@@ -31,10 +39,22 @@ const ToggleButtonGroupItem: React.FC<
 };
 
 const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
-	const { onChange, value, selectionMode = "single", children, ...buttonGroupProps } = props;
+	const {
+		onChange,
+		value,
+		selectionMode = "single",
+		children,
+		color,
+		selectedColor,
+		...buttonGroupProps
+	} = props;
 	const focusableIndexRef = React.useRef(0);
 
 	let toggleButtonIndex = 0;
+	const childrenArray = React.Children.toArray(children).filter(
+		(child) => React.isValidElement(child) && child.type === ToggleButton
+	) as React.ReactElement<ToggleButtonProps>[];
+
 	const renderedChildren = React.Children.map(children, (child) => {
 		if (!React.isValidElement(child) || child.type !== ToggleButton || !child.props) {
 			return child;
@@ -46,10 +66,24 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 
 		const focusable = focusableIndexRef.current === boundIndex;
 
+		// Check if the next button is selected and determine its effective color
+		const nextChild = childrenArray[boundIndex + 1];
+		const isNextSelected = nextChild && value?.includes(nextChild.props.value || "");
+
+		// Determine the effective color of the next button using the same priority logic as ToggleButtonControlled
+		let nextEffectiveColor: string | undefined;
+		if (nextChild && isNextSelected) {
+			// Priority: individual button color > selectedColor (when selected) > group color
+			nextEffectiveColor = nextChild.props.color || selectedColor || color;
+		}
+
+		const nextSelectedColor = nextEffectiveColor;
+
 		return (
 			<ToggleButtonGroupItem
 				{...child.props}
 				focusable={focusable}
+				nextSelectedColor={nextSelectedColor}
 				onFocus={() => {
 					focusableIndexRef.current = boundIndex;
 				}}
@@ -96,7 +130,7 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	);
 
 	return (
-		<Context.Provider value={{ onChange: handleChange, value }}>
+		<Context.Provider value={{ onChange: handleChange, value, color, selectedColor }}>
 			<Button.Group
 				{...buttonGroupProps}
 				attributes={{ ref: hotkeysRef, ...buttonGroupProps?.attributes }}
