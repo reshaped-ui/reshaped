@@ -188,13 +188,18 @@ export const overlay = {
 	),
 };
 
-export const flags = {
+export const flags: StoryObj<{
+	handleClose: ReturnType<typeof fn>;
+}> = {
 	name: "disableCloseOnOutsideClick",
-	render: () => {
+	args: {
+		handleClose: fn(),
+	},
+	render: (args) => {
 		return (
 			<Example>
 				<Example.Item title="disableCloseOnOutsideClick">
-					<Demo disableCloseOnOutsideClick />
+					<Demo disableCloseOnOutsideClick onClose={args.handleClose} active />
 				</Example.Item>
 			</Example>
 		);
@@ -373,39 +378,6 @@ export const handlers: StoryObj<{
 			expect(args.handleAfterClose).toHaveBeenCalledTimes(3);
 			expect(args.handleAfterClose).toHaveBeenCalledWith();
 		});
-	},
-};
-
-export const disableCloseOnClick: StoryObj<{
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "disableCloseOnOutsideClick",
-	args: {
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<Modal
-			active
-			disableCloseOnOutsideClick
-			onClose={(closeArgs) => {
-				args.handleClose(closeArgs);
-			}}
-		>
-			<Modal.Title>Title</Modal.Title>
-			Content
-		</Modal>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const overlay = canvas.getByText("Content");
-
-		await userEvent.click(overlay);
-
-		expect(args.handleClose).toHaveBeenCalledTimes(0);
-
-		await userEvent.keyboard("{Escape}");
-
-		expect(args.handleClose).toHaveBeenCalledTimes(1);
 	},
 };
 
