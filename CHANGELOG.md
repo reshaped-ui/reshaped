@@ -1,3 +1,17 @@
+## 3.8.0-canary.11
+
+
+### Bug Fixes
+
+* **useOnClickOutside:** removed pointerType check blocking ios17 execution ([2f4ec1d](https://github.com/reshaped-ui/reshaped/commit/2f4ec1d8e3aa53fb7107050950c6895559c41e1e))
+* **useScrollLock:** fixed reset conflict when using container on ios ([#459](https://github.com/reshaped-ui/reshaped/issues/459)) ([d13c364](https://github.com/reshaped-ui/reshaped/commit/d13c364ee719e6a8b78d4f38167d802220b3e9a6))
+
+
+### Features
+
+* **Flyout:** exposed TriggerAttributes types ([#458](https://github.com/reshaped-ui/reshaped/issues/458)) ([b5230ed](https://github.com/reshaped-ui/reshaped/commit/b5230edecc7aac21a8a866b7f7101e1f87f4a213))
+* **Text:** added low priority css reset for global styles ([#460](https://github.com/reshaped-ui/reshaped/issues/460)) ([04090ec](https://github.com/reshaped-ui/reshaped/commit/04090ec23285e05975a24e0f2e6789d25aa96de1))
+
 ## 3.8.0-canary.10
 
 
