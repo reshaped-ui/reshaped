@@ -83,7 +83,7 @@ export const error = {
 };
 
 export const attachments = {
-	name: "icon, endIcon, suffix, prefix, startSlot, endSlot",
+	name: "icon, endIcon, suffix, prefix, startSlot, endSlot, startSlotPadding, endSlotPadding",
 	render: () => (
 		<Example>
 			<Example.Item title="icon">
@@ -91,18 +91,6 @@ export const attachments = {
 			</Example.Item>
 			<Example.Item title="endIcon">
 				<TextField name="Name" placeholder="Enter your name" value="Reshaped" endIcon={IconZap} />
-			</Example.Item>
-
-			<Example.Item title="width affixes">
-				<TextField
-					name="Name"
-					placeholder="Enter your name"
-					value="Reshaped"
-					endIcon={IconZap}
-					icon={IconZap}
-					prefix="Estimated value"
-					suffix="m2"
-				/>
 			</Example.Item>
 
 			<Example.Item title={["startSlot", "vertical and horizontal padding aligned"]}>
@@ -113,6 +101,7 @@ export const attachments = {
 					startSlot={<Placeholder h={20} />}
 				/>
 			</Example.Item>
+
 			<Example.Item title={["endSlot", "vertical and horizontal padding aligned"]}>
 				<TextField
 					name="Name"
@@ -128,6 +117,33 @@ export const attachments = {
 					}
 				/>
 			</Example.Item>
+
+			<Example.Item title="paddingSlotStart=4, paddingSlotEnd=2">
+				<TextField
+					name="Name"
+					placeholder="Enter your name"
+					value="Reshaped"
+					startSlotPadding={4}
+					endSlotPadding={2}
+					startSlot={<Placeholder h={20} />}
+					endSlot={<Placeholder h={20} />}
+				/>
+			</Example.Item>
+
+			<Example.Item title="with all affixes">
+				<TextField
+					name="Name"
+					placeholder="Enter your name"
+					value="Reshaped"
+					endIcon={IconZap}
+					icon={IconZap}
+					prefix="Estimated value"
+					suffix="m2"
+					startSlot={<Placeholder h={20} />}
+					endSlot={<Placeholder h={20} />}
+				/>
+			</Example.Item>
+
 			<Example.Item title="multiline wrap">
 				<TextField
 					name="Name"
