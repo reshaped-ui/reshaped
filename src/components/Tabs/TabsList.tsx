@@ -3,14 +3,8 @@
 import React from "react";
 import { classNames } from "utilities/props";
 import useRTL from "hooks/useRTL";
-import {
-	focusNextElement,
-	focusPreviousElement,
-	focusFirstElement,
-	focusLastElement,
-} from "utilities/a11y";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import useHotkeys from "hooks/useHotkeys";
+import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
 import useFadeSide from "hooks/_private/useFadeSide";
 import Actionable from "components/Actionable";
 import Icon from "components/Icon";
@@ -102,27 +96,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		[elScrollableRef]
 	);
 
-	const { ref: hotkeysRef } = useHotkeys<HTMLDivElement>(
-		{
-			"ArrowLeft, ArrowUp": () => {
-				focusPreviousElement(elScrollableRef.current!);
-			},
-			"ArrowRight, ArrowDown": () => {
-				focusNextElement(elScrollableRef.current!);
-			},
-			Home: () => {
-				focusFirstElement(elScrollableRef.current!);
-			},
-			End: () => {
-				focusLastElement(elScrollableRef.current!);
-			},
-		},
-		[],
-		{
-			preventDefault: true,
-			disabled: !!name,
-		}
-	);
+	useKeyboardArrowNavigation({ ref: elScrollableRef, disabled: !!name });
 
 	useIsomorphicLayoutEffect(() => {
 		if (value) return;
@@ -157,7 +131,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 	return (
 		<div {...attributes} className={rootClassNames}>
 			<div className={s.inner} ref={elScrollableRef}>
-				<div className={s.list} role="tablist" ref={hotkeysRef}>
+				<div className={s.list} role="tablist">
 					{React.Children.map(children, (child, index: number) => {
 						if (!React.isValidElement(child)) return null;
 						const props = child.props as T.ItemProps;
