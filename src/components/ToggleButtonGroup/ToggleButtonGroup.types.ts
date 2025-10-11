@@ -7,6 +7,14 @@ type BaseProps = {
 	 * @default "single"
 	 */
 	selectionMode?: "single" | "multiple";
+	/** Component color scheme applied to each button
+	 * @default "neutral"
+	 */
+	color?: ToggleButtonProps["color"];
+	/** Component color scheme for the selected button
+	 * @default "neutral"
+	 */
+	selectedColor?: ToggleButtonProps["selectedColor"];
 	/** Callback when the toggle button group value changes */
 	onChange?: (args: {
 		value: string[];
@@ -30,5 +38,7 @@ export type Props = ControlledProps | UncontrolledProps;
 
 export type Context = {
 	onChange: ToggleButtonProps["onChange"];
+	selectedColor?: ToggleButtonProps["selectedColor"];
+	color?: ToggleButtonProps["color"];
 	value?: string[];
 };

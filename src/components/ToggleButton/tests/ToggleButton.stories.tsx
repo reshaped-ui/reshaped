@@ -27,6 +27,19 @@ export const variant = {
 	),
 };
 
+export const selectedColor = {
+	name: "selectedColor",
+	render: () => (
+		<Example>
+			<Example.Item title="selectedColor: primary">
+				<ToggleButton selectedColor="primary" defaultChecked>
+					Button
+				</ToggleButton>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const onChange: StoryObj<{ handleUncontrolledChange: Mock; handleControlledChange: Mock }> =
 	{
 		name: "checked, defaultChecked, onChange",
