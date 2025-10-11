@@ -792,7 +792,7 @@ export const group: StoryObj = {
 			</Example.Item>
 			<Example.Item title="variant: outline">
 				<View gap={2}>
-					{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
+					{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
 						<Button.Group key={color}>
 							<Button color={color} variant="outline">
 								One

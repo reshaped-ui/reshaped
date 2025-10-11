@@ -7,7 +7,7 @@
 	--rs-button-border-color: transparent;
 	--rs-button-border-width: 0px;
 
-	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition: 2s var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform;
 	padding: calc(var(--rs-unit-x1) - var(--rs-button-border-width))
 		calc(var(--rs-p-h) - var(--rs-button-border-width));
@@ -40,7 +40,7 @@
 		content: "";
 		position: absolute;
 		inset: 0;
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition: 2s var(--rs-easing-standard);
 		transition-property: opacity;
 		opacity: var(--rs-button-highlight-opacity-base);
 
@@ -52,7 +52,7 @@
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(.--loading, .--highlighted, .--disabled, :active)::before {
+		&:hover:not(.--loading, .--highlighted, .--disabled)::before {
 			opacity: var(--rs-button-highlight-opacity);
 		}
 	}
@@ -342,14 +342,11 @@
 
 .group .root {
 	border-radius: 0;
+	border-inline: 1px solid var(--rs-button-group-separator-color);
 
 	&:first-child {
 		border-start-start-radius: var(--rs-button-radius);
 		border-end-start-radius: var(--rs-button-radius);
-	}
-
-	&:not(:first-child) {
-		border-inline-start: 1px solid var(--rs-button-group-separator-color);
 	}
 
 	&:last-child {
@@ -357,44 +354,48 @@
 		border-end-end-radius: var(--rs-button-radius);
 	}
 
+	&:not(:last-child) {
+		border-inline-end-width: 0;
+	}
+
+	&.--highlighted {
+		border-inline-end-width: 1px;
+
+		& + .root {
+			border-inline-start-width: 0;
+		}
+	}
+
 	@each $color in neutral, positive, critical, primary {
 		&.--variant-solid.--color-$(color) {
 			--rs-button-group-separator-color: var(--rs-color-border-$(color));
 		}
+	}
 
-		&.--variant-ghost.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
-		}
+	&.--variant-faded.--color-neutral,
+	&.--variant-outline.--color-neutral {
+		--rs-button-group-separator-color: var(--rs-color-border-neutral);
 	}
 
 	@each $color in positive, critical, primary {
+		&.--variant-outline.--color-$(color),
 		&.--variant-faded.--color-$(color) {
 			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
 		}
 	}
 
-	&.--variant-solid.--color-black {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.28);
+	@each $color in neutral, positive, critical, primary {
+		&.--variant-ghost.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
+		}
 	}
 
-	&.--variant-faded.--color-black {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.14);
+	&.--variant-solid.--color-media {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.12);
 	}
 
-	&.--variant-ghost.--color-black {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.2);
-	}
-
-	&.--variant-solid.--color-white {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.2);
-	}
-
-	&.--variant-faded.--color-white {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.2);
-	}
-
-	&.--variant-ghost.--color-white {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.28);
+	&.--variant-faded.--color-media {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
 	}
 }
 

@@ -5,6 +5,10 @@ type BaseProps = Omit<ButtonProps, "variant" | "higlighted"> & {
 	 * @default "outline"
 	 */
 	variant?: ButtonProps["variant"];
+	/** Component color scheme when selected
+	 * @default "neutral"
+	 */
+	selectedColor?: ButtonProps["color"];
 	/** Value of the toggle button, enables controlled mode for the ToggleButtonGroup */
 	value?: string;
 	/** Callback when the toggle button value changes */
