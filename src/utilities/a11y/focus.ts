@@ -113,7 +113,7 @@ export const getFocusData = (args: {
 		}
 	}
 
-	return { overflow: isOverflow, el: focusable[nextIndex] };
+	return { overflow: isOverflow, el: focusable[nextIndex], focusableElements: focusable };
 };
 
 const focusTargetElement = (
@@ -123,6 +123,8 @@ const focusTargetElement = (
 ) => {
 	const data = getFocusData({ root, target, options });
 	focusElement(data.el);
+
+	return { el: data.el, focusableElements: data.focusableElements };
 };
 
 export const focusNextElement = (root: HTMLElement) =>
