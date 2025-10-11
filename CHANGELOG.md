@@ -1,3 +1,11 @@
+## 3.8.0-canary.13
+
+
+### Features
+
+* **ToggleButton,ToggleButtonGroup:** added selectedColor ([#466](https://github.com/reshaped-ui/reshaped/issues/466)) ([e5987e4](https://github.com/reshaped-ui/reshaped/commit/e5987e454dc8cb2b93c45089b68c07a82ed6ac93))
+* **useKeyboardArrowNavigation:** added new hook ([#465](https://github.com/reshaped-ui/reshaped/issues/465)) ([104947f](https://github.com/reshaped-ui/reshaped/commit/104947f4bd000b1c62964b1b5ebad764e9bc4c7c))
+
 ## 3.8.0-canary.12
 
 
