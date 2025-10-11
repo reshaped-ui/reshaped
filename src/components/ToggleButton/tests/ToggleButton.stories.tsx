@@ -32,7 +32,9 @@ export const selectedColor = {
 	render: () => (
 		<Example>
 			<Example.Item title="selectedColor: primary">
-				<ToggleButton selectedColor="primary">Button</ToggleButton>
+				<ToggleButton selectedColor="primary" defaultChecked>
+					Button
+				</ToggleButton>
 			</Example.Item>
 		</Example>
 	),

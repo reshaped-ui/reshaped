@@ -7,7 +7,14 @@ import Context from "./ToggleButtonGroup.context";
 import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
 
 const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
-	const { onChange, value, selectionMode = "single", children, ...buttonGroupProps } = props;
+	const {
+		onChange,
+		value,
+		selectionMode = "single",
+		children,
+		selectedColor,
+		...buttonGroupProps
+	} = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
 
 	const handleChange: T.Context["onChange"] = (args) => {
@@ -32,7 +39,7 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	});
 
 	return (
-		<Context.Provider value={{ onChange: handleChange, value }}>
+		<Context.Provider value={{ onChange: handleChange, value, selectedColor }}>
 			<Button.Group
 				{...buttonGroupProps}
 				attributes={{ ref: rootRef, ...buttonGroupProps?.attributes }}
