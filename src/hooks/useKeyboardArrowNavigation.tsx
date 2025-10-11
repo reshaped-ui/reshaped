@@ -12,10 +12,11 @@ type Props = {
 	ref: React.RefObject<HTMLElement | null>;
 	disabled?: boolean;
 	orientation?: "vertical" | "horizontal";
+	circular?: boolean;
 };
 
 const useKeyboardArrowNavigation = (props: Props) => {
-	const { ref, disabled, orientation } = props;
+	const { ref, disabled, orientation, circular } = props;
 	const backHotkeys = [];
 	const forwardHotkeys = [];
 
@@ -33,7 +34,8 @@ const useKeyboardArrowNavigation = (props: Props) => {
 		(options: { el?: HTMLElement; focusableElements: HTMLElement[] }) => {
 			const { el, focusableElements } = options;
 
-			const activeEl = el ?? focusableElements[0];
+			const initialEl = focusableElements.find((el) => el.getAttribute("tabindex") !== "-1");
+			const activeEl = el ?? initialEl ?? focusableElements[0];
 
 			focusableElements.forEach((el) => el.setAttribute("tabindex", "-1"));
 			activeEl?.setAttribute("tabindex", "0");
@@ -43,22 +45,23 @@ const useKeyboardArrowNavigation = (props: Props) => {
 
 	useEffect(() => {
 		if (!ref.current) return;
+		if (disabled) return;
 
 		const focusableElements = getFocusableElements(ref.current);
 
 		updateTabIndex({ focusableElements });
-	}, [ref, updateTabIndex]);
+	}, [ref, updateTabIndex, disabled]);
 
 	useHotkeys<HTMLElement>(
 		{
 			[backHotkeys.join(", ")]: () => {
 				if (!ref.current) return;
-				const data = focusPreviousElement(ref.current);
+				const data = focusPreviousElement(ref.current, { circular });
 				updateTabIndex(data);
 			},
 			[forwardHotkeys.join(", ")]: () => {
 				if (!ref.current) return;
-				const data = focusNextElement(ref.current);
+				const data = focusNextElement(ref.current, { circular });
 				updateTabIndex(data);
 			},
 			Home: () => {
@@ -72,7 +75,7 @@ const useKeyboardArrowNavigation = (props: Props) => {
 				updateTabIndex(data);
 			},
 		},
-		[updateTabIndex],
+		[updateTabIndex, circular],
 		{
 			ref,
 			preventDefault: true,

@@ -119,7 +119,7 @@ export const getFocusData = (args: {
 const focusTargetElement = (
 	root: HTMLElement,
 	target: "next" | "prev" | "first" | "last",
-	options?: Pick<FocusableOptions, "includeNegativeTabIndex">
+	options?: Pick<FocusableOptions, "includeNegativeTabIndex"> & { circular?: boolean }
 ) => {
 	const data = getFocusData({ root, target, options });
 	focusElement(data.el);
@@ -127,11 +127,14 @@ const focusTargetElement = (
 	return { el: data.el, focusableElements: data.focusableElements };
 };
 
-export const focusNextElement = (root: HTMLElement) =>
-	focusTargetElement(root, "next", { includeNegativeTabIndex: true });
-export const focusPreviousElement = (root: HTMLElement) =>
-	focusTargetElement(root, "prev", { includeNegativeTabIndex: true });
+export const focusNextElement = (root: HTMLElement, options?: { circular?: boolean }) =>
+	focusTargetElement(root, "next", { ...options, includeNegativeTabIndex: true });
+
+export const focusPreviousElement = (root: HTMLElement, options?: { circular?: boolean }) =>
+	focusTargetElement(root, "prev", { ...options, includeNegativeTabIndex: true });
+
 export const focusFirstElement = (root: HTMLElement) =>
 	focusTargetElement(root, "first", { includeNegativeTabIndex: true });
+
 export const focusLastElement = (root: HTMLElement) =>
 	focusTargetElement(root, "last", { includeNegativeTabIndex: true });

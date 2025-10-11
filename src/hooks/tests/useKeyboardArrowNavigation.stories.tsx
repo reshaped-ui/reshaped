@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
+import { expect, userEvent } from "storybook/test";
 import useRTL from "hooks/useRTL";
 import View from "components/View";
 import Button from "components/Button";
@@ -11,20 +11,6 @@ export default {
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
-};
-
-const Foo = () => {
-	const ref = useRef<HTMLDivElement>(null);
-
-	useKeyboardArrowNavigation({ ref });
-
-	return (
-		<View gap={2} direction="row" attributes={{ ref }}>
-			<Button onClick={() => {}}>Action 1</Button>
-			<Button onClick={() => {}}>Action 2</Button>
-			<Button onClick={() => {}}>Action 3</Button>
-		</View>
-	);
 };
 
 export const base: StoryObj = {
@@ -42,7 +28,154 @@ export const base: StoryObj = {
 			</View>
 		);
 	},
-	play: async () => {
-		expect(document.documentElement).toHaveAttribute("dir", "rtl");
+	play: async ({ canvas }) => {
+		const buttons = canvas.getAllByRole("button");
+
+		buttons[0].focus();
+
+		await userEvent.keyboard("{ArrowRight/}");
+
+		expect(document.activeElement).toBe(buttons[1]);
+
+		await userEvent.keyboard("{ArrowDown/}");
+		expect(document.activeElement).toBe(buttons[2]);
+
+		await userEvent.keyboard("{ArrowUp/}");
+		expect(document.activeElement).toBe(buttons[1]);
+
+		await userEvent.keyboard("{ArrowLeft/}");
+		expect(document.activeElement).toBe(buttons[0]);
+	},
+};
+
+export const horizontal: StoryObj = {
+	name: "orientation: horizontal",
+	render: () => {
+		const ref = useRef<HTMLDivElement>(null);
+
+		useKeyboardArrowNavigation({ ref, orientation: "horizontal" });
+
+		return (
+			<View gap={2} direction="row" attributes={{ ref }}>
+				<Button onClick={() => {}}>Action 1</Button>
+				<Button onClick={() => {}}>Action 2</Button>
+				<Button onClick={() => {}}>Action 3</Button>
+			</View>
+		);
+	},
+	play: async ({ canvas }) => {
+		const buttons = canvas.getAllByRole("button");
+
+		expect(buttons[0]).toHaveAttribute("tabindex", "0");
+		expect(buttons[1]).toHaveAttribute("tabindex", "-1");
+		expect(buttons[2]).toHaveAttribute("tabindex", "-1");
+
+		buttons[0].focus();
+
+		await userEvent.keyboard("{ArrowRight/}");
+
+		expect(document.activeElement).toBe(buttons[1]);
+
+		await userEvent.keyboard("{ArrowLeft/}");
+		expect(document.activeElement).toBe(buttons[0]);
+
+		await userEvent.keyboard("{ArrowDown/}");
+		expect(document.activeElement).toBe(buttons[0]);
+
+		await userEvent.keyboard("{ArrowUp/}");
+		expect(document.activeElement).toBe(buttons[0]);
+	},
+};
+
+export const vertical: StoryObj = {
+	name: "orientation: vertical",
+	render: () => {
+		const ref = useRef<HTMLDivElement>(null);
+
+		useKeyboardArrowNavigation({ ref, orientation: "vertical" });
+
+		return (
+			<View gap={2} direction="column" attributes={{ ref }}>
+				<Button onClick={() => {}}>Action 1</Button>
+				<Button onClick={() => {}}>Action 2</Button>
+				<Button onClick={() => {}}>Action 3</Button>
+			</View>
+		);
+	},
+	play: async ({ canvas }) => {
+		const buttons = canvas.getAllByRole("button");
+
+		buttons[0].focus();
+
+		await userEvent.keyboard("{ArrowDown/}");
+
+		expect(document.activeElement).toBe(buttons[1]);
+
+		await userEvent.keyboard("{ArrowUp/}");
+		expect(document.activeElement).toBe(buttons[0]);
+
+		await userEvent.keyboard("{ArrowRight/}");
+		expect(document.activeElement).toBe(buttons[0]);
+
+		await userEvent.keyboard("{ArrowLeft/}");
+		expect(document.activeElement).toBe(buttons[0]);
+	},
+};
+
+export const circular: StoryObj = {
+	name: "circular",
+	render: () => {
+		const ref = useRef<HTMLDivElement>(null);
+
+		useKeyboardArrowNavigation({ ref, circular: true });
+
+		return (
+			<View gap={2} direction="row" attributes={{ ref }}>
+				<Button onClick={() => {}}>Action 1</Button>
+				<Button onClick={() => {}}>Action 2</Button>
+				<Button onClick={() => {}}>Action 3</Button>
+			</View>
+		);
+	},
+	play: async ({ canvas }) => {
+		const buttons = canvas.getAllByRole("button");
+
+		buttons[0].focus();
+
+		await userEvent.keyboard("{ArrowRight/}");
+		await userEvent.keyboard("{ArrowRight/}");
+		expect(document.activeElement).toBe(buttons[2]);
+
+		await userEvent.keyboard("{ArrowRight/}");
+		expect(document.activeElement).toBe(buttons[0]);
+
+		await userEvent.keyboard("{ArrowLeft/}");
+		expect(document.activeElement).toBe(buttons[2]);
+	},
+};
+
+export const disabled: StoryObj = {
+	name: "disabled",
+	render: () => {
+		const ref = useRef<HTMLDivElement>(null);
+
+		useKeyboardArrowNavigation({ ref, disabled: true });
+
+		return (
+			<View gap={2} direction="row" attributes={{ ref }}>
+				<Button onClick={() => {}}>Action 1</Button>
+				<Button onClick={() => {}}>Action 2</Button>
+				<Button onClick={() => {}}>Action 3</Button>
+			</View>
+		);
+	},
+	play: async ({ canvas }) => {
+		const buttons = canvas.getAllByRole("button");
+
+		buttons[0].focus();
+
+		await userEvent.keyboard("{ArrowRight/}");
+		expect(document.activeElement).toBe(buttons[0]);
+		expect(buttons[0]).not.toHaveAttribute("tabindex");
 	},
 };
