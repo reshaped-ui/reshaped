@@ -75,6 +75,8 @@ const TextField: React.FC<T.Props> & {
 		endIcon,
 		startSlot,
 		endSlot,
+		startSlotPadding,
+		endSlotPadding,
 		prefix,
 		suffix,
 		size = "medium",
@@ -110,7 +112,24 @@ const TextField: React.FC<T.Props> & {
 	};
 
 	return (
-		<div {...attributes} data-rs-aligner-target className={rootClassName}>
+		<div
+			{...attributes}
+			style={
+				{
+					...(attributes?.style as React.CSSProperties),
+					"--rs-text-field-start-slot-padding":
+						startSlotPadding !== undefined && startSlotPadding >= 0
+							? `calc(var(--rs-unit-x1) * ${startSlotPadding})`
+							: undefined,
+					"--rs-text-field-end-slot-padding":
+						endSlotPadding !== undefined && endSlotPadding >= 0
+							? `calc(var(--rs-unit-x1) * ${endSlotPadding})`
+							: undefined,
+				} as React.CSSProperties
+			}
+			data-rs-aligner-target
+			className={rootClassName}
+		>
 			<TextFieldSlot
 				position="start"
 				icon={icon}
