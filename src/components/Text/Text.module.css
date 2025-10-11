@@ -1,6 +1,17 @@
 @layer rs.text.reset {
 	.root {
-		all: unset;
+		font-family: unset;
+		font-size: unset;
+		font-weight: unset;
+		margin: 0;
+		padding: 0;
+		font-style: normal;
+		letter-spacing: 0;
+		text-align: left;
+		text-decoration: none;
+		text-indent: 0;
+		text-shadow: none;
+		text-transform: none;
 	}
 }
 
