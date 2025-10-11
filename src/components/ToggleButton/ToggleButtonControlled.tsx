@@ -16,7 +16,10 @@ const ToggleButtonControlled: React.FC<T.ControlledProps> = (props) => {
 	} = props;
 	const toggleButtonGroup = useToggleButtonGroup();
 	const checked = (value ? toggleButtonGroup?.value?.includes(value) : undefined) ?? props.checked;
-	const color = (checked && (selectedColor || toggleButtonGroup?.selectedColor)) || buttonColor;
+	const color =
+		(checked && (selectedColor || toggleButtonGroup?.selectedColor)) ||
+		buttonColor ||
+		toggleButtonGroup?.color;
 
 	const handleClick: ButtonProps["onClick"] = (event) => {
 		const changeArgs = { checked: !checked, value: value ?? "", event };

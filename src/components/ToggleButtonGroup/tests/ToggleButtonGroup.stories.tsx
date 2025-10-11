@@ -153,11 +153,17 @@ export const multiple: StoryObj<{
 };
 
 export const selectedColor: StoryObj = {
-	name: "selectedColor",
+	name: "color,selectedColor",
 	render: () => (
 		<Example>
 			<Example.Item title="selectedColor: primary">
 				<ToggleButtonGroup selectedColor="primary" defaultValue={["2"]}>
+					<ToggleButton value="1">Button</ToggleButton>
+					<ToggleButton value="2">Button</ToggleButton>
+				</ToggleButtonGroup>
+			</Example.Item>
+			<Example.Item title="color: primary, selectedColor: critical">
+				<ToggleButtonGroup color="primary" selectedColor="critical" defaultValue={["2"]}>
 					<ToggleButton value="1">Button</ToggleButton>
 					<ToggleButton value="2">Button</ToggleButton>
 				</ToggleButtonGroup>
