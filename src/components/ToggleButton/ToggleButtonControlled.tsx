@@ -36,7 +36,11 @@ const ToggleButtonControlled: React.FC<T.ControlledProps> = (props) => {
 			variant={variant}
 			onClick={handleClick}
 			highlighted={checked}
-			attributes={{ ...buttonProps.attributes, "aria-pressed": checked }}
+			attributes={{
+				...buttonProps.attributes,
+				"aria-pressed": checked,
+				tabIndex: toggleButtonGroup?.value?.length ? (checked ? 0 : -1) : undefined,
+			}}
 		/>
 	);
 };

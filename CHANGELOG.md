@@ -1,3 +1,15 @@
+## 3.8.0-canary.12
+
+
+### Bug Fixes
+
+* **Text:** fixed text css reset ([f6526ef](https://github.com/reshaped-ui/reshaped/commit/f6526ef1865280c93688deacbb2b50f7ecf8b459))
+
+
+### Features
+
+* **TextField:** startSlotPadding and endSlotPadding support ([#464](https://github.com/reshaped-ui/reshaped/issues/464)) ([2f33180](https://github.com/reshaped-ui/reshaped/commit/2f33180630773ebd119fa65575b2ff6c437d7970))
+
 ## 3.8.0-canary.11
 
 
