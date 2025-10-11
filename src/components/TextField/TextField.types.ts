@@ -34,8 +34,12 @@ export type BaseProps = {
 	endSlot?: SlotProps["slot"];
 	/** Node for inserting text content before the text field value */
 	prefix?: React.ReactNode;
-	/** Node for inserting textcontent after the text field value */
+	/** Node for inserting text content after the text field value */
 	suffix?: React.ReactNode;
+	/** Padding inline end, base unit token number multiplier */
+	startSlotPadding?: number;
+	/** Padding inline start, base unit token number multiplier */
+	endSlotPadding?: number;
 	/** Component render variant
 	 * @default "outline"
 	 */

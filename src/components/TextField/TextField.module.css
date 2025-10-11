@@ -4,6 +4,8 @@
 	--rs-text-field-border-color: var(--rs-color-border-neutral);
 	--rs-text-field-focus-border-color: var(--rs-color-border-primary);
 	--rs-text-field-border-width: 1px;
+	--rs-text-field-start-slot-padding: var(--rs-unit-x2);
+	--rs-text-field-end-slot-padding: var(--rs-unit-x1);
 
 	display: flex;
 	align-items: center;
@@ -103,9 +105,12 @@
 	margin-inline-start: auto;
 }
 
-.slot--position-end:last-child {
-	margin-inline-end: calc(var(--rs-text-field-gap) * -1);
-	padding-inline-end: var(--rs-text-field-action-inset);
+.slot--position-start {
+	margin-inline-start: calc(var(--rs-text-field-start-slot-padding) - var(--rs-text-field-gap));
+}
+
+.slot--position-end {
+	margin-inline-end: calc(var(--rs-text-field-end-slot-padding) - var(--rs-text-field-gap));
 }
 
 .affix {
