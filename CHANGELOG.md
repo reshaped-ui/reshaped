@@ -1,10 +1,10 @@
-## 3.8.0-canary.13
-
 ## 3.8.0-canary.14
 
 ### Patch Changes
 
 - 8fb8f3e: switched changelog generation to use changesets cli
+
+## 3.8.0-canary.13
 
 ### Features
 

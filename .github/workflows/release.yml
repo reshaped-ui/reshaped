@@ -1,0 +1,85 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - "v*" # Trigger on version tags like v1.0.0, v3.8.0, etc.
+
+permissions:
+  contents: write # Required to create releases
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for changelog generation
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Get version from tag
+        id: tag_name
+        run: |
+          echo "current_version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Extract changelog for current version
+        id: changelog
+        run: |
+          # Extract the changelog content for this version
+          VERSION="${{ steps.tag_name.outputs.current_version }}"
+
+          # Read CHANGELOG.md and extract the section for this version
+          # This assumes your changelog follows the format: ## VERSION
+          if grep -q "## $VERSION" CHANGELOG.md; then
+            # Extract content between this version and the next version heading
+            CHANGELOG_CONTENT=$(awk "/## $VERSION/,/## [0-9]/" CHANGELOG.md | sed '1d;$d' | sed '/^$/d')
+            
+            # If changelog is empty, use a default message
+            if [ -z "$CHANGELOG_CONTENT" ]; then
+              CHANGELOG_CONTENT="Release version $VERSION"
+            fi
+          else
+            CHANGELOG_CONTENT="Release version $VERSION"
+          fi
+
+          # Write to file to preserve formatting
+          echo "$CHANGELOG_CONTENT" > changelog_excerpt.md
+
+          # Also output for logging
+          echo "Changelog content:"
+          cat changelog_excerpt.md
+
+      - name: Check if pre-release
+        id: prerelease
+        run: |
+          # Check if version contains pre-release indicators
+          VERSION="${{ steps.tag_name.outputs.current_version }}"
+          if [[ "$VERSION" == *"canary"* ]] || [[ "$VERSION" == *"alpha"* ]] || [[ "$VERSION" == *"beta"* ]] || [[ "$VERSION" == *"rc"* ]]; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag_name.outputs.tag }}
+          name: Release ${{ steps.tag_name.outputs.current_version }}
+          body_path: changelog_excerpt.md
+          draft: false
+          prerelease: ${{ steps.prerelease.outputs.is_prerelease }}
+          generate_release_notes: false # We're using our own changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
