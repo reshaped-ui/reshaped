@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.8.0-canary.17
+
+### Patch Changes
+
+- edab409: updated changelog version title
+- fc82110: Added a comment to Aligner
+
 ## 3.8.0-canary.16
 
 ### Patch Changes
