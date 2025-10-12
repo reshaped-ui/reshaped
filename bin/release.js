@@ -6,54 +6,25 @@ const readline = require("readline");
 /**
  * Comprehensive release script that handles the entire release process:
  * 1. Prompts about tests
- * 2. Bumps version and creates tag
- * 3. Generates and commits changelog
+ * 2. Runs Changesets to bump version and update changelog
+ * 3. Commits changes and creates tag
  * 4. Builds and publishes package
  * 5. Pushes changes and tags to git
  */
 
-function getVersionType() {
-	const args = process.argv.slice(2);
-	const versionType = args[0];
+function checkForChangesets() {
+	const fs = require("fs");
+	const path = require("path");
+	const changesetsDir = path.join(process.cwd(), ".changeset");
 
-	if (versionType && ["patch", "minor", "major"].includes(versionType)) {
-		return versionType;
+	if (!fs.existsSync(changesetsDir)) {
+		return false;
 	}
 
-	return null;
-}
+	const files = fs.readdirSync(changesetsDir);
+	const changesetFiles = files.filter((file) => file.endsWith(".md") && file !== "README.md");
 
-function promptForVersionType() {
-	return new Promise((resolve) => {
-		const rl = readline.createInterface({
-			input: process.stdin,
-			output: process.stdout,
-		});
-
-		console.log("📦 Select release type:");
-		console.log("  1. patch (bug fixes)");
-		console.log("  2. minor (new features)");
-		console.log("  3. major (breaking changes)");
-
-		rl.question("Enter choice (1-3): ", (answer) => {
-			rl.close();
-
-			switch (answer.trim()) {
-				case "1":
-					resolve("patch");
-					break;
-				case "2":
-					resolve("minor");
-					break;
-				case "3":
-					resolve("major");
-					break;
-				default:
-					console.log("❌ Invalid choice. Exiting.");
-					process.exit(1);
-			}
-		});
-	});
+	return changesetFiles.length > 0;
 }
 
 function promptForConfirmation(message) {
@@ -115,6 +86,15 @@ async function main() {
 	const currentBranch = getCurrentBranch();
 	console.log(`📍 Current branch: ${currentBranch}`);
 
+	// Check for changesets
+	if (!checkForChangesets()) {
+		console.log("❌ No changesets found. Please create changesets before releasing.");
+		console.log("💡 Run 'pnpm changeset' to create a changeset.");
+		process.exit(1);
+	}
+
+	console.log("✅ Found changesets to release\n");
+
 	// Prompt about chromatic tests
 	const testsConfirmed = await promptForConfirmation("🧪 Have you updated chromatic tests?");
 	if (!testsConfirmed) {
@@ -122,17 +102,9 @@ async function main() {
 		process.exit(1);
 	}
 
-	// Get version type
-	let versionType = getVersionType();
-	if (!versionType) {
-		versionType = await promptForVersionType();
-	}
-
-	console.log(`\n📦 Releasing ${versionType} version...\n`);
-
 	// Final confirmation
 	const releaseConfirmed = await promptForConfirmation(
-		`🔥 Ready to release ${versionType} version?`
+		`🔥 Ready to consume changesets and release?`
 	);
 	if (!releaseConfirmed) {
 		console.log("❌ Release cancelled.");
@@ -141,17 +113,26 @@ async function main() {
 
 	console.log("\n🎯 Starting release process...\n");
 
-	// Step 1: Version bump and changelog
-	runCommand(`npm version ${versionType}`, `Bump ${versionType} version and generate changelog`);
+	// Step 1: Version bump using Changesets
+	runCommand(`pnpm changeset version`, `Consume changesets and update version`);
 
-	// Step 2: Build and publish
-	runCommand("yarn build", "Build package");
-	runCommand("yarn publish", "Publish to npm");
+	// Step 2: Commit the version changes
+	runCommand(`git add .`, `Stage version and changelog changes`);
+	runCommand(`git commit -m "chore: release version"`, `Commit version changes`);
 
-	// Step 3: Run release copy script
+	// Step 3: Create git tag
+	const packageJson = require("../package.json");
+	const newVersion = packageJson.version;
+	runCommand(`git tag v${newVersion}`, `Create tag v${newVersion}`);
+
+	// Step 4: Build and publish
+	runCommand("pnpm build", "Build package");
+	runCommand("pnpm publish --no-git-checks", "Publish to npm");
+
+	// Step 5: Run release copy script
 	runCommand("sh ./bin/release-copy.sh", "Copy release files");
 
-	// Step 4: Push to git
+	// Step 6: Push to git
 	runCommand("git push", "Push commits to git");
 	runCommand("git push --tags", "Push tags to git");
 

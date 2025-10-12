@@ -82,14 +82,9 @@
 		"build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
 		"build:storybook": "storybook build -o dist/app --disable-telemetry",
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build",
-		"changelog": "node bin/generate-changelog.js",
-		"version": "pnpm changelog && git add CHANGELOG.md",
+		"version": "changeset version",
 		"release": "node bin/release.js",
-		"release:patch": "node bin/release.js patch",
-		"release:minor": "node bin/release.js minor",
-		"release:major": "node bin/release.js major",
-		"release:lib": "pnpm build && pnpm publish",
-		"release:canary": "pnpm build && yarn publish --tag canary && git push --follow-tags",
+		"release:canary": "pnpm build && pnpm changeset publish --snapshot canary --tag canary",
 		"release:test": "pnpm build && pnpm pack --out reshaped-test.tgz",
 		"release:copy": "sh ./bin/release-copy.sh",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
@@ -101,7 +96,9 @@
 		"lint": "pnpm lint:js && pnpm lint:css",
 		"lint:js": "eslint './src/**/*.{ts,tsx}' --fix",
 		"lint:css": "stylelint 'src/**/*.css'",
-		"commit": "git-cz"
+		"commit": "git-cz",
+		"changeset": "changeset",
+		"changeset:status": "changeset status"
 	},
 	"browserslist": [
 		"defaults and not IE 11"
@@ -127,9 +124,8 @@
 		"@vitest/browser": "3.2.4",
 		"@vitest/coverage-istanbul": "3.2.4",
 		"@vitest/coverage-v8": "3.2.4",
+		"@changesets/cli": "2.27.8",
 		"chromatic": "13.3.0",
-		"conventional-changelog-cli": "5.0.0",
-		"cz-conventional-changelog": "3.3.0",
 		"eslint": "9.37.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-plugin-jsx-a11y": "6.10.2",

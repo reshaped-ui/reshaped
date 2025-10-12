@@ -28,17 +28,27 @@ For all new features, we recommend to start with a feature proposal first where 
 
 ## Changelog
 
-We're using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) to generate changelog entries.
-Whenever you make a commit, our script will validate the commit message format and during the release process all commits will be added to the changelog automatically.
+We use [Changesets](https://github.com/changesets/changesets) to manage versions and generate changelogs.
 
-### Changelog script API
+### Adding a changeset
 
-`yarn changelog` – runs automatically after a version bump. Generates changelog entries for the latest version.
+Every PR with user-facing changes should include a changeset:
 
-`yarn changelog --dry` – shows changelog entries without saving to file.
+1. Run `pnpm changeset` and follow the prompts to choose the bump type:
+   - **patch**: bug fixes and internal tweaks
+   - **minor**: backward-compatible feature additions
+   - **major**: breaking changes (rare; coordinate with maintainers first)
 
-`yarn changelog --unreleased --dry` – generates changelog entries for the upcoming release before a new version was created.
-Can be used to preview the changelog entries beforehand.
+2. Write a concise summary describing what changed and why. This becomes part of the changelog.
 
-`yarn changelog [version]` – generates changelog entries for a specific version.
-Can be used with `--dry` to preview the changelog entries beforehand.
+3. Commit the generated `.md` file under `.changeset/` directory with your PR.
+
+### Useful commands
+
+- `pnpm changeset` – create a new changeset
+- `pnpm changeset:status` – preview what will be released
+- `pnpm version` – consume all changesets and bump package version (used during release)
+
+### Commit message format
+
+We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages. Our commit-msg hook will validate the format when you commit.
