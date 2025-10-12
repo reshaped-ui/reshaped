@@ -7,6 +7,7 @@ import IconCheckmark from "icons/Checkmark";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
 import { sleep } from "utilities/helpers";
+import Theme from "components/Theme";
 
 export default {
 	title: "Components/DropdownMenu",
@@ -289,7 +290,7 @@ const ThemeSwitching = () => {
 
 	return (
 		<View gap={3} direction="row">
-			<DropdownMenu defaultActive>
+			<DropdownMenu>
 				<DropdownMenu.Trigger>
 					{(attributes) => <Button attributes={attributes}>Open</Button>}
 				</DropdownMenu.Trigger>
@@ -303,12 +304,31 @@ const ThemeSwitching = () => {
 	);
 };
 
-export const testThemeSwitching = {
-	name: "test: theme switching",
+const ThemeMultiple = () => {
+	return (
+		<Theme name={["reshaped", "figma"]}>
+			<DropdownMenu>
+				<DropdownMenu.Trigger>
+					{(attributes) => <Button attributes={attributes}>Open</Button>}
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content>
+					<DropdownMenu.Item>Item 1</DropdownMenu.Item>
+					<DropdownMenu.Item>Item 2</DropdownMenu.Item>
+				</DropdownMenu.Content>
+			</DropdownMenu>
+		</Theme>
+	);
+};
+
+export const testTheme = {
+	name: "test: theme",
 	render: () => (
 		<Example>
-			<Example.Item title="Switch color mode while dropdown is active and check that it still works">
+			<Example.Item title="switch color mode while dropdown is active and check that it still works">
 				<ThemeSwitching />
+			</Example.Item>
+			<Example.Item title="dropdown inherits multiple themes">
+				<ThemeMultiple />
 			</Example.Item>
 		</Example>
 	),

@@ -244,6 +244,19 @@ export const empty = {
 	),
 };
 
+export const highlighted = {
+	name: "highlighted",
+	render: () => (
+		<Example>
+			<Example.Item title="highlighted, color: neutral">
+				<View gap={3} direction="row">
+					<Badge highlighted>Badge</Badge>
+				</View>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const container = {
 	name: "container",
 	render: () => {

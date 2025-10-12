@@ -16,6 +16,8 @@ type BaseProps = {
 	endIcon?: IconProps["svg"];
 	/** Change border radius to fully rounded corners */
 	rounded?: boolean;
+	/** Highlight the component when component is used for an active state */
+	highlighted?: boolean;
 	/** Transition the component to hidden state */
 	hidden?: boolean;
 	/** Additional classname for the root element */

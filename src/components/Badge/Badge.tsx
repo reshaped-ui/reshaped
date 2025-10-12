@@ -18,6 +18,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		endIcon,
 		variant,
 		hidden,
+		highlighted,
 		href,
 		onClick,
 		onDismiss,
@@ -35,7 +36,8 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		size && s[`--size-${size}`],
 		color && s[`--color-${color}`],
 		variant && s[`--variant-${variant}`],
-		isActionable && s["--actionable"]
+		isActionable && s["--actionable"],
+		highlighted && s["--highlighted"]
 	);
 
 	const hnadleDismiss: ActionableProps["onClick"] = (e) => {

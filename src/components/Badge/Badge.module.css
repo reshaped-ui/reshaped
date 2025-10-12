@@ -41,6 +41,10 @@
 	transition-property: opacity;
 }
 
+.root.--highlighted {
+	opacity: 0.8;
+}
+
 @media (hover: hover) and (pointer: fine) {
 	.root.--actionable:hover:not(:has(.dismiss:hover)),
 	.root .dismiss:hover {
