@@ -4,5 +4,12 @@
   "initialVersions": {
     "reshaped": "3.8.0-canary.17"
   },
-  "changesets": []
+  "changesets": [
+    "chatty-points-doubt",
+    "curvy-news-buy",
+    "rare-mangos-marry",
+    "tender-scissors-wave",
+    "unlucky-buckets-hope",
+    "wicked-files-search"
+  ]
 }
