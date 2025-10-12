@@ -1,16 +1,5 @@
 # Changelog
 
-## 3.8.0-canary.18
-
-### Patch Changes
-
-- edab409: updated changelog version title
-- aa75e22: github releases
-- 8fb8f3e: switched changelog generation to use changesets cli
-- fc82110: Added a comment to Aligner
-- 442deb5: updated changelog generation script
-- 0d6e04c: updated changelog version order
-
 ## 3.8.0-canary.17
 
 ### Patch Changes

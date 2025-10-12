@@ -11,15 +11,15 @@ NC='\033[0m' # No Color
 
 # Function to print colored output
 print_status() {
-    echo -e "${BLUE}🔄 $1...${NC}"
+    echo "${BLUE}🔄 $1...${NC}"
 }
 
 print_success() {
-    echo -e "${GREEN}✅ $1${NC}"
+    echo "${GREEN}✅ $1${NC}"
 }
 
 print_error() {
-    echo -e "${RED}❌ $1${NC}"
+    echo "${RED}❌ $1${NC}"
 }
 
 # Function to prompt for confirmation
@@ -66,7 +66,7 @@ if ! prompt_for_confirmation "🔥 Ready to consume changesets and release?"; th
 fi
 
 echo
-echo -e "${BLUE}🎯 Starting release process...${NC}"
+echo "${BLUE}🎯 Starting release process...${NC}"
 echo
 
 pnpm build
@@ -83,6 +83,6 @@ git push --tags
 
 echo
 print_success "Release completed successfully!"
-echo -e "${GREEN}📦 Package published to npm${NC}"
-echo -e "${GREEN}🏷️ Tags pushed to git${NC}"
-echo -e "${GREEN}📝 Changelog updated${NC}"
+echo "${GREEN}📦 Package published to npm${NC}"
+echo "${GREEN}🏷️ Tags pushed to git${NC}"
+echo "${GREEN}📝 Changelog updated${NC}"
