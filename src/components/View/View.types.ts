@@ -109,7 +109,7 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	/** z-index style */
 	zIndex?: number;
 	/** Shadow style, based on the shadow tokens */
-	shadow?: "raised" | "overlay" | "inset";
+	shadow?: "raised" | "overlay";
 	/** Overflow style */
 	overflow?: "hidden" | "auto";
 	/** Add transition for the properties */
