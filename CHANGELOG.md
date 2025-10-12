@@ -1,5 +1,13 @@
 ## 3.8.0-canary.15
 
+## 3.8.0-canary.16
+
+### Patch Changes
+
+- aa75e22: github releases
+- 8fb8f3e: switched changelog generation to use changesets cli
+- 0d6e04c: updated changelog version order
+
 ### Patch Changes
 
 - aa75e22: github releases

@@ -1,0 +1,12 @@
+{
+  "mode": "pre",
+  "tag": "canary",
+  "initialVersions": {
+    "reshaped": "3.8.0-canary.15"
+  },
+  "changesets": [
+    "curvy-news-buy",
+    "rare-mangos-marry",
+    "wicked-files-search"
+  ]
+}
