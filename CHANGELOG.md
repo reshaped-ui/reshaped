@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.0-canary.19
+
+### Patch Changes
+
+- [`d4a95e8`](https://github.com/reshaped-ui/reshaped/commit/d4a95e8e966982c71d65b3a9fe2e7fb54c735ee7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - test
+
 ## 3.8.0-canary.17
 
 ### Patch Changes
