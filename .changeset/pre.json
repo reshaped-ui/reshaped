@@ -2,9 +2,10 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.8.0-canary.18"
+    "reshaped": "3.8.0-canary.19"
   },
   "changesets": [
-    "healthy-jokes-drive"
+    "healthy-jokes-drive",
+    "six-pugs-rest"
   ]
 }
