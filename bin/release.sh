@@ -74,7 +74,7 @@ pnpm build
 pnpm changeset version
 
 git add .
-git commit -m 'chore: release version'
+git commit -m 'chore: release'
 
 pnpm changeset publish
 
