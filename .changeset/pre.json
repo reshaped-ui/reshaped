@@ -1,0 +1,8 @@
+{
+  "mode": "exit",
+  "tag": "canary",
+  "initialVersions": {
+    "reshaped": "3.8.0-canary.17"
+  },
+  "changesets": []
+}
