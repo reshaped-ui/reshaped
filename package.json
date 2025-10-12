@@ -72,6 +72,8 @@
 	"scripts": {
 		"dev": "storybook dev -p 3001 --disable-telemetry",
 		"clean": "sh ./bin/clean.sh",
+		"commit": "git-cz",
+		"changeset": "changeset",
 		"build": "pnpm clean && pnpm build:stories && pnpm build:esm && pnpm build:css && pnpm build:cjs && pnpm build:bundle",
 		"build:themes": "node bin/cli.js theming --config dist/cjs/cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
@@ -82,11 +84,9 @@
 		"build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
 		"build:storybook": "storybook build -o dist/app --disable-telemetry",
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build",
-		"version": "changeset version",
-		"release": "node bin/release.js",
-		"release:canary": "pnpm build && pnpm changeset publish --snapshot canary --tag canary",
-		"release:test": "pnpm build && pnpm pack --out reshaped-test.tgz",
-		"release:copy": "sh ./bin/release-copy.sh",
+		"release": "sh ./bin/release.sh",
+		"release:canary": "sh ./bin/release-canary.sh",
+		"release:local": "pnpm build && pnpm pack --out reshaped-local.tgz",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
 		"test:vrt": "pnpm chromatic",
 		"test:vrt:turbo": "pnpm chromatic --only-changed",
@@ -95,10 +95,7 @@
 		"test:size": "size-limit",
 		"lint": "pnpm lint:js && pnpm lint:css",
 		"lint:js": "eslint './src/**/*.{ts,tsx}' --fix",
-		"lint:css": "stylelint 'src/**/*.css'",
-		"commit": "git-cz",
-		"changeset": "changeset",
-		"changeset:status": "changeset status"
+		"lint:css": "stylelint 'src/**/*.css'"
 	},
 	"browserslist": [
 		"defaults and not IE 11"
