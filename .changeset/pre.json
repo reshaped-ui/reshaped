@@ -2,9 +2,10 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.8.0-canary.19"
+    "reshaped": "3.8.0-canary.20"
   },
   "changesets": [
+    "five-tigers-occur",
     "healthy-jokes-drive",
     "six-pugs-rest"
   ]
