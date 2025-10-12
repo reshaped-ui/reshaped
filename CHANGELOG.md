@@ -1,10 +1,10 @@
-## 3.8.0-canary.14
-
 ## 3.8.0-canary.15
 
 ### Patch Changes
 
 - aa75e22: github releases
+
+## 3.8.0-canary.14
 
 ### Patch Changes
 
