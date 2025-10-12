@@ -46,9 +46,6 @@ pnpm changeset version
 print_status "Building package"
 pnpm build
 
-print_status "Publishing to npm"
-pnpm changeset publish
-
 print_status "Exiting pre mode"
 pnpm changeset pre exit
 
@@ -58,6 +55,11 @@ git commit -m 'chore: canary release'
 
 print_status "Pushing to git"
 git push
+
+print_status "Publishing to npm"
+pnpm changeset publish
+
+print_status "Pushing tags"
 git push --tags
 
 echo
