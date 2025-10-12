@@ -1,10 +1,11 @@
 {
-  "mode": "exit",
+  "mode": "pre",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.8.0-canary.13"
+    "reshaped": "3.8.0-canary.14"
   },
   "changesets": [
+    "curvy-news-buy",
     "rare-mangos-marry"
   ]
 }
