@@ -161,49 +161,47 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		return size === "small" ? 3 : 4;
 	});
 	const controlsNode = (
-		<span className={s["controls-wrapper"]}>
-			<span className={s.controls}>
-				<Actionable
-					className={s.control}
-					disabled={increaseDisabled}
-					disableFocusRing
-					as="span"
-					attributes={{
-						"aria-label": increaseAriaLabel,
-						"aria-controls": inputId,
-						role: "button",
-						tabIndex: increaseDisabled ? undefined : -1,
-						onPointerDown: (e) => handleControlPointerDown(e, handleIncrease),
-						onPointerUp: handleControlPointerUp,
-						onPointerLeave: handleControlPointerUp,
-						// Prevent menu from opening on long press
-						onContextMenu: (e) => e.preventDefault(),
-					}}
-				>
-					<Icon svg={IconChevronUp} size={mouseIconSize} className={s["icon--mouse"]} />
-					<Icon svg={IconPlus} size={touchIconSize} className={s["icon--touch"]} />
-				</Actionable>
-				<Actionable
-					className={s.control}
-					disabled={decreaseDisabled}
-					disableFocusRing
-					as="span"
-					attributes={{
-						"aria-label": decreaseAriaLabel,
-						"aria-controls": inputId,
-						role: "button",
-						tabIndex: decreaseDisabled ? undefined : -1,
-						onPointerDown: (e) => handleControlPointerDown(e, handleDecrease),
-						onPointerUp: handleControlPointerUp,
-						onPointerLeave: handleControlPointerUp,
-						// Prevent menu from opening on long press
-						onContextMenu: (e) => e.preventDefault(),
-					}}
-				>
-					<Icon svg={IconChevronDown} size={mouseIconSize} className={s["icon--mouse"]} />
-					<Icon svg={IconMinus} size={touchIconSize} className={s["icon--touch"]} />
-				</Actionable>
-			</span>
+		<span className={s.controls}>
+			<Actionable
+				className={s.control}
+				disabled={increaseDisabled}
+				disableFocusRing
+				as="span"
+				attributes={{
+					"aria-label": increaseAriaLabel,
+					"aria-controls": inputId,
+					role: "button",
+					tabIndex: increaseDisabled ? undefined : -1,
+					onPointerDown: (e) => handleControlPointerDown(e, handleIncrease),
+					onPointerUp: handleControlPointerUp,
+					onPointerLeave: handleControlPointerUp,
+					// Prevent menu from opening on long press
+					onContextMenu: (e) => e.preventDefault(),
+				}}
+			>
+				<Icon svg={IconChevronUp} size={mouseIconSize} className={s["icon--mouse"]} />
+				<Icon svg={IconPlus} size={touchIconSize} className={s["icon--touch"]} />
+			</Actionable>
+			<Actionable
+				className={s.control}
+				disabled={decreaseDisabled}
+				disableFocusRing
+				as="span"
+				attributes={{
+					"aria-label": decreaseAriaLabel,
+					"aria-controls": inputId,
+					role: "button",
+					tabIndex: decreaseDisabled ? undefined : -1,
+					onPointerDown: (e) => handleControlPointerDown(e, handleDecrease),
+					onPointerUp: handleControlPointerUp,
+					onPointerLeave: handleControlPointerUp,
+					// Prevent menu from opening on long press
+					onContextMenu: (e) => e.preventDefault(),
+				}}
+			>
+				<Icon svg={IconChevronDown} size={mouseIconSize} className={s["icon--mouse"]} />
+				<Icon svg={IconMinus} size={touchIconSize} className={s["icon--touch"]} />
+			</Actionable>
 		</span>
 	);
 
@@ -241,6 +239,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			onChange={handleChange}
 			name={name}
 			endSlot={controlsNode}
+			endSlotPadding={0}
 		/>
 	);
 };
