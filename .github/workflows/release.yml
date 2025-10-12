@@ -42,9 +42,18 @@ jobs:
 
           # Read CHANGELOG.md and extract the section for this version
           # This assumes your changelog follows the format: ## VERSION
-          if grep -q "## $VERSION" CHANGELOG.md; then
+          if grep -q "^## $VERSION" CHANGELOG.md; then
             # Extract content between this version and the next version heading
-            CHANGELOG_CONTENT=$(awk "/## $VERSION/,/## [0-9]/" CHANGELOG.md | sed '1d;$d' | sed '/^$/d')
+            # Start printing after the version line, stop at the next version heading
+            CHANGELOG_CONTENT=$(awk "
+              BEGIN { found=0; }
+              /^## $VERSION\$/ { found=1; next; }
+              found && /^## [0-9]/ { exit; }
+              found { print; }
+            " CHANGELOG.md)
+            
+            # Trim leading and trailing empty lines
+            CHANGELOG_CONTENT=$(echo "$CHANGELOG_CONTENT" | sed -e '/./,$!d' -e :a -e '/^\n*$/{$d;N;ba' -e '}')
             
             # If changelog is empty, use a default message
             if [ -z "$CHANGELOG_CONTENT" ]; then
