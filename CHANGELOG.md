@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.8.0-canary.22
+
+### Minor Changes
+
+- [`5f00d0a`](https://github.com/reshaped-ui/reshaped/commit/5f00d0a66c78fac8d52e67f181e8b5cc16b60dbf) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Badge: Added highlighted property
+  - DropdownMenu: Added a story with multiple themes
+
+### Patch Changes
+
+- [`65af058`](https://github.com/reshaped-ui/reshaped/commit/65af0583372cfa27786a15a59d64ba8b36b99a68) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Applied correct text overflow when using equal width items
+
 ## 3.8.0-canary.21
 
 ### Patch Changes
