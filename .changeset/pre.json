@@ -2,12 +2,13 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.8.0-canary.21"
+    "reshaped": "3.8.0-canary.22"
   },
   "changesets": [
     "five-tigers-occur",
     "healthy-jokes-drive",
     "late-squids-admire",
+    "many-trees-appear",
     "six-pugs-rest",
     "twelve-vans-tan"
   ]

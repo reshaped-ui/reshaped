@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.0-canary.23
+
+### Patch Changes
+
+- [`0fbcc35`](https://github.com/reshaped-ui/reshaped/commit/0fbcc3541b62b96259aaa983c9b18cf90eba4fb3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - NumberField: Fixed end slot padding for the field controls
+
 ## 3.8.0-canary.22
 
 ### Minor Changes
