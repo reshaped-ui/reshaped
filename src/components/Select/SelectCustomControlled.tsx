@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import DropdownMenu from "components/DropdownMenu";
 import Icon from "components/Icon";

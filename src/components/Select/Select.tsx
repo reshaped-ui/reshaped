@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import type * as T from "./Select.types";
 import SelectNative from "./SelectNative";
