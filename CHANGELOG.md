@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.0-canary.24
+
+### Patch Changes
+
+- [`f728853`](https://github.com/reshaped-ui/reshaped/commit/f7288530056f3343c51a12c0d5b36e7e88c711f7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Added RSC support for the custom select
+
 ## 3.8.0-canary.23
 
 ### Patch Changes
