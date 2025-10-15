@@ -342,7 +342,7 @@
 
 .group .root {
 	border-radius: 0;
-	border-inline: 1px solid var(--rs-button-group-separator-color);
+	border-inline-end: 1px solid var(--rs-button-group-separator-color);
 
 	&:first-child {
 		border-start-start-radius: var(--rs-button-radius);
@@ -352,10 +352,15 @@
 	&:last-child {
 		border-start-end-radius: var(--rs-button-radius);
 		border-end-end-radius: var(--rs-button-radius);
+		border-inline-end-width: 0;
 	}
 
-	&:not(:last-child) {
-		border-inline-end-width: 0;
+	&.--variant-outline {
+		border-inline: 1px solid var(--rs-button-group-separator-color);
+
+		&:not(:last-child) {
+			border-inline-end-width: 0;
+		}
 	}
 
 	&.--highlighted {

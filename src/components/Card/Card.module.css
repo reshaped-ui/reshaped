@@ -1,5 +1,5 @@
 .root {
-	--rs-card-shadow-border: 0 0 0 1px var(--rs-color-border-neutral-faded);
+	--rs-card-shadow-border: 0 0 0 1px var(--rs-color-border-neutral-faded) inset;
 	--rs-card-shadow-elevation: 0 0 transparent;
 
 	box-shadow: var(--rs-card-shadow-border), var(--rs-card-shadow-elevation);
