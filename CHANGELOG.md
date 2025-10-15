@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.8.0
+
+### Minor Changes
+
+- [`5f00d0a`](https://github.com/reshaped-ui/reshaped/commit/5f00d0a66c78fac8d52e67f181e8b5cc16b60dbf) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Badge: Added highlighted property
+  - DropdownMenu: Added a story with multiple themes
+
+### Patch Changes
+
+- [`ff3c392`](https://github.com/reshaped-ui/reshaped/commit/ff3c3925c1b0e78cf830d3f9a3657a5e57e6e995) Thanks [@blvdmitry](https://github.com/blvdmitry)! - updated release process
+
+- [`d4a95e8`](https://github.com/reshaped-ui/reshaped/commit/d4a95e8e966982c71d65b3a9fe2e7fb54c735ee7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - test
+
+- [`0fbcc35`](https://github.com/reshaped-ui/reshaped/commit/0fbcc3541b62b96259aaa983c9b18cf90eba4fb3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - NumberField: Fixed end slot padding for the field controls
+
+- [`f728853`](https://github.com/reshaped-ui/reshaped/commit/f7288530056f3343c51a12c0d5b36e7e88c711f7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Added RSC support for the custom select
+
+- [`1dcbf57`](https://github.com/reshaped-ui/reshaped/commit/1dcbf576e0d657de92bd206321e84f48e4d6c720) Thanks [@blvdmitry](https://github.com/blvdmitry)! - updated github releases notes
+
+- [`65af058`](https://github.com/reshaped-ui/reshaped/commit/65af0583372cfa27786a15a59d64ba8b36b99a68) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Applied correct text overflow when using equal width items
+
 ## 3.8.0-canary.24
 
 ### Patch Changes
