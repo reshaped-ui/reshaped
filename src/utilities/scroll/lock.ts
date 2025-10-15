@@ -20,8 +20,6 @@ export const lockScroll = (args: {
 	const lockedBodyScroll = container === document.body;
 
 	if (lockedBodyScroll) bodyLockedCount += 1;
-
-	console.log("bodyLockedCount", { bodyLockedCount, lockedBodyScroll, isIOSLock });
 	if (lockedBodyScroll && bodyLockedCount > 1) return;
 
 	if (isIOSLock && lockedBodyScroll) {
@@ -34,7 +32,6 @@ export const lockScroll = (args: {
 
 	return (cb?: () => void) => {
 		if (lockedBodyScroll) bodyLockedCount -= 1;
-		console.log("bodyLockedCount remove", bodyLockedCount, lockedBodyScroll);
 
 		reset();
 		cb?.();
