@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.8.1
+
+### Patch Changes
+
+- [`302091c`](https://github.com/reshaped-ui/reshaped/commit/302091cae7fec4d7faa4efe02c95ca725412e657) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - ButtonGroup: Fixed divider regression in the solid variant
+  - NumberField: Fixed arrow controls position
+  - Card: Fixed the color of the applied border
+
 ## 3.8.0
 
 ### Minor Changes
