@@ -73,12 +73,13 @@ pnpm build
 
 pnpm changeset version
 
-git add .
+git add -A
 git commit -m 'chore: release'
+
+git push
 
 pnpm changeset publish
 
-git push
 git push --tags
 
 echo

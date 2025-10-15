@@ -40,11 +40,11 @@ echo
 print_status "Entering pre mode"
 pnpm changeset pre enter canary
 
-print_status "Versioning changesets"
-pnpm changeset version
-
 print_status "Building package"
 pnpm build
+
+print_status "Versioning changesets"
+pnpm changeset version
 
 print_status "Exiting pre mode"
 pnpm changeset pre exit
