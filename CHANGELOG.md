@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.2
+
+### Patch Changes
+
+- [`3b00c4b`](https://github.com/reshaped-ui/reshaped/commit/3b00c4bd4c506cf519109e7bf31301abc3740649) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed button group highlighted borders
+
 ## 3.8.1
 
 ### Patch Changes
