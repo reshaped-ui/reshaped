@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.3
+
+### Patch Changes
+
+- [`a5441de`](https://github.com/reshaped-ui/reshaped/commit/a5441de5c14fca4bb02d4d34fdc68c76b4976451) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed the content shifting by 1px in highlight buttons in groups with min width
+
 ## 3.8.2
 
 ### Patch Changes
