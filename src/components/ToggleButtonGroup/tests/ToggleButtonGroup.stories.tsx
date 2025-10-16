@@ -164,8 +164,12 @@ export const selectedColor: StoryObj = {
 			</Example.Item>
 			<Example.Item title="color: primary, selectedColor: critical">
 				<ToggleButtonGroup color="primary" selectedColor="critical" defaultValue={["2"]}>
-					<ToggleButton value="1">Button</ToggleButton>
-					<ToggleButton value="2">Button</ToggleButton>
+					<ToggleButton value="1" variant="ghost">
+						Button
+					</ToggleButton>
+					<ToggleButton value="2" variant="ghost">
+						Button
+					</ToggleButton>
 				</ToggleButtonGroup>
 			</Example.Item>
 		</Example>

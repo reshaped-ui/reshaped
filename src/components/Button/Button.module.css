@@ -342,17 +342,28 @@
 
 .group .root {
 	border-radius: 0;
-	border-inline-end: 1px solid var(--rs-button-group-separator-color);
+	border-inline-start: 1px solid var(--rs-button-group-separator-color);
+
+	/* Set the color to prevent it from transitioning when highlighted */
+	border-inline-end: 0 solid var(--rs-button-group-separator-color);
 
 	&:first-child {
 		border-start-start-radius: var(--rs-button-radius);
 		border-end-start-radius: var(--rs-button-radius);
+		border-inline-start-width: 0;
 	}
 
 	&:last-child {
 		border-start-end-radius: var(--rs-button-radius);
 		border-end-end-radius: var(--rs-button-radius);
-		border-inline-end-width: 0;
+	}
+
+	&.--highlighted:not(:last-child) {
+		border-inline-end-width: 1px;
+
+		& + .root {
+			border-inline-start-width: 0;
+		}
 	}
 
 	&.--variant-outline {
@@ -361,15 +372,23 @@
 		&:not(:last-child) {
 			border-inline-end-width: 0;
 		}
-	}
 
-	&.--highlighted {
-		border-inline-end-width: 1px;
+		&.--highlighted {
+			border-inline-end-width: 1px;
 
-		& + .root {
-			border-inline-start-width: 0;
+			& + .root {
+				border-inline-start-width: 0;
+			}
 		}
 	}
+
+	/* &.--highlighted:not(:last-child) {
+		border-inline-end: 1px solid var(--rs-button-group-separator-color);
+
+		& + .root {
+			border-inline-start-width: 0 !important;
+		}
+	} */
 
 	@each $color in neutral, positive, critical, primary {
 		&.--variant-solid.--color-$(color) {
