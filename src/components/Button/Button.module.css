@@ -9,13 +9,12 @@
 
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform;
-	padding: calc(var(--rs-unit-x1) - var(--rs-button-border-width))
+	padding: calc(var(--rs-p-v) - var(--rs-button-border-width))
 		calc(var(--rs-p-h) - var(--rs-button-border-width));
 	border-radius: var(--rs-button-radius);
 	cursor: pointer;
 	position: relative;
 	z-index: 0;
-	box-sizing: border-box;
 	text-align: initial;
 	display: inline-flex;
 	align-items: center;
@@ -29,10 +28,11 @@
 	font-size: var(--rs-button-font-size);
 	line-height: var(--rs-button-line-height);
 	letter-spacing: var(--rs-button-letter-spacing);
-	min-height: calc(var(--rs-button-line-height) + var(--rs-p-v) * 2);
-	min-width: calc(
-		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
-	);
+
+	/* prevent button content from shifting when removing borders in button group */
+	box-sizing: content-box;
+	min-height: var(--rs-button-line-height);
+	min-width: calc(var(--rs-button-line-height) - (var(--rs-p-h) - var(--rs-p-v)) * 2);
 	background-color: var(--rs-button-background-color);
 	color: var(--rs-button-foreground-color);
 
@@ -342,15 +342,10 @@
 
 .group .root {
 	border-radius: 0;
-	border-inline-start: 1px solid var(--rs-button-group-separator-color);
-
-	/* Set the color to prevent it from transitioning when highlighted */
-	border-inline-end: 0 solid var(--rs-button-group-separator-color);
 
 	&:first-child {
 		border-start-start-radius: var(--rs-button-radius);
 		border-end-start-radius: var(--rs-button-radius);
-		border-inline-start-width: 0;
 	}
 
 	&:last-child {
@@ -358,22 +353,13 @@
 		border-end-end-radius: var(--rs-button-radius);
 	}
 
-	&.--highlighted:not(:last-child) {
-		border-inline-end-width: 1px;
-
-		& + .root {
-			border-inline-start-width: 0;
-		}
-	}
-
+	/* Highlighted buttons render border on both sides to make sure the corect color is used */
 	&.--variant-outline {
-		border-inline: 1px solid var(--rs-button-group-separator-color);
-
 		&:not(:last-child) {
 			border-inline-end-width: 0;
 		}
 
-		&.--highlighted {
+		&.--highlighted:not(:last-child) {
 			border-inline-end-width: 1px;
 
 			& + .root {
@@ -382,13 +368,21 @@
 		}
 	}
 
-	/* &.--highlighted:not(:last-child) {
-		border-inline-end: 1px solid var(--rs-button-group-separator-color);
+	&:not(.--variant-outline) {
+		border-inline-end: 0 solid var(--rs-button-group-separator-color);
 
-		& + .root {
-			border-inline-start-width: 0 !important;
+		&:not(:first-child) {
+			border-inline-start: 1px solid var(--rs-button-group-separator-color);
 		}
-	} */
+
+		&.--highlighted:not(:last-child) {
+			border-inline-end-width: 1px;
+
+			& + .root {
+				border-inline-start-width: 0;
+			}
+		}
+	}
 
 	@each $color in neutral, positive, critical, primary {
 		&.--variant-solid.--color-$(color) {

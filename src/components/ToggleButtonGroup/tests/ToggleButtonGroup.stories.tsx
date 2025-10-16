@@ -160,6 +160,7 @@ export const selectedColor: StoryObj = {
 				<ToggleButtonGroup selectedColor="primary" defaultValue={["2"]}>
 					<ToggleButton value="1">Button</ToggleButton>
 					<ToggleButton value="2">Button</ToggleButton>
+					<ToggleButton value="3">Button</ToggleButton>
 				</ToggleButtonGroup>
 			</Example.Item>
 			<Example.Item title="color: primary, selectedColor: critical">
@@ -168,6 +169,9 @@ export const selectedColor: StoryObj = {
 						Button
 					</ToggleButton>
 					<ToggleButton value="2" variant="ghost">
+						Button
+					</ToggleButton>
+					<ToggleButton value="3" variant="ghost">
 						Button
 					</ToggleButton>
 				</ToggleButtonGroup>
