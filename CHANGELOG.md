@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.8.4-canary.0
+
+### Patch Changes
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed compound component imports from within RSC in Next
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed esm node imports of configuration files
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Removed the outdated cjs build
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Fixed incorrect ActionableRef types
+
+- [`bdc9194`](https://github.com/reshaped-ui/reshaped/commit/bdc9194878facb37c203aae0419945cea600c9ed) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Preserver content box styles to support custom css overrides
+
 ## 3.8.3
 
 ### Patch Changes
