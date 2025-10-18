@@ -3,7 +3,6 @@ import { classNames, responsiveClassNames, responsivePropDependency } from "util
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import View from "components/View";
-import MenuItemAligner from "./MenuItemAligner";
 import type * as T from "./MenuItem.types";
 import s from "./MenuItem.module.css";
 
@@ -64,9 +63,7 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			</View>
 		</Actionable>
 	);
-}) as T.Export;
-
-MenuItem.Aligner = MenuItemAligner;
+});
 
 MenuItem.displayName = "MenuItem";
 

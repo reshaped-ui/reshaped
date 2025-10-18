@@ -7,7 +7,9 @@ import type * as T from "./View.types";
 import s from "./View.module.css";
 import { resolveMixin } from "styles/mixin";
 
-const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
+export const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
+	props: T.ItemProps<As>
+) => {
 	const {
 		columns,
 		grow,
@@ -298,8 +300,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		</TagName>
 	);
 };
-
-View.Item = ViewItem;
 
 View.displayName = "View";
 ViewItem.displayName = "View.Item";

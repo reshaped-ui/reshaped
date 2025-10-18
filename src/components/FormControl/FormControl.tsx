@@ -5,15 +5,8 @@ import useElementId from "hooks/useElementId";
 import { Provider } from "./FormControl.context";
 import { getCaptionId } from "./FormControl.utilities";
 import type * as T from "./FormControl.types";
-import FormControlLabel from "./FormControlLabel";
-import FormControlHelper from "./FormControlHelper";
-import FormControlError from "./FormControlError";
 
-const FormControl: React.FC<T.Props> & {
-	Label: typeof FormControlLabel;
-	Helper: typeof FormControlHelper;
-	Error: typeof FormControlError;
-} = (props) => {
+const FormControl: React.FC<T.Props> = (props) => {
 	const { children, id: passedId, required, hasError, group, disabled, size } = props;
 	const id = useElementId(passedId);
 	const WrapperTagName = group ? "fieldset" : "div";
@@ -46,9 +39,6 @@ const FormControl: React.FC<T.Props> & {
 	);
 };
 
-FormControl.Label = FormControlLabel;
-FormControl.Helper = FormControlHelper;
-FormControl.Error = FormControlError;
 FormControl.displayName = "FormControl";
 
 export default FormControl;

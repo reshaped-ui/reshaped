@@ -3,6 +3,7 @@
 import React from "react";
 import { classNames, responsiveVariables, responsiveClassNames } from "utilities/props";
 import { rafThrottle } from "utilities/helpers";
+import type { ActionableRef } from "components/Actionable";
 import View from "components/View";
 import useRTL from "hooks/useRTL";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
@@ -29,8 +30,8 @@ const Carousel: React.FC<T.Props> = (props) => {
 	const [scrollPosition, setScrollPosition] = React.useState(0);
 	const [isRTL] = useRTL();
 	const scrollElRef = React.useRef<HTMLUListElement>(null);
-	const prevControlElRef = React.useRef<HTMLButtonElement>(null);
-	const nextControlElRef = React.useRef<HTMLButtonElement>(null);
+	const prevControlElRef = React.useRef<ActionableRef>(null);
+	const nextControlElRef = React.useRef<ActionableRef>(null);
 	const bleedClassNames: Record<string, boolean> = {};
 
 	if (typeof bleed === "object") {

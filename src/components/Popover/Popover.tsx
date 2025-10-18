@@ -5,11 +5,7 @@ import type * as T from "./Popover.types";
 import s from "./Popover.module.css";
 import { resolveMixin } from "styles/mixin";
 
-const Popover: React.FC<T.Props> & {
-	Dismissible: typeof PopoverDismissible;
-	Trigger: typeof Flyout.Trigger;
-	Content: typeof Flyout.Content;
-} = (props) => {
+const Popover: React.FC<T.Props> = (props) => {
 	const {
 		width,
 		variant = "elevated",
@@ -45,15 +41,11 @@ const Popover: React.FC<T.Props> & {
 	);
 };
 
-const PopoverDismissible: React.FC<DismissibleProps> = (props) => {
+export const PopoverDismissible: React.FC<DismissibleProps> = (props) => {
 	const { handleClose } = useFlyoutContext();
 
 	return <Dismissible {...props} onClose={() => handleClose({})} />;
 };
-
-Popover.Dismissible = PopoverDismissible;
-Popover.Trigger = Flyout.Trigger;
-Popover.Content = Flyout.Content;
 
 Popover.displayName = "Popover";
 PopoverDismissible.displayName = "Popover.Dismissible";

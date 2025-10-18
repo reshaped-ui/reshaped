@@ -5,15 +5,8 @@ import type * as T from "./Select.types";
 import SelectNative from "./SelectNative";
 import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
-import SelectOption from "./SelectOption";
-import SelectOptionGroup from "./SelectOptionGroup";
-import SelectCustom from "./SelectCustom";
 
-const Select: React.FC<T.NativeProps> & {
-	Custom: typeof SelectCustom;
-	Option: typeof SelectOption;
-	OptionGroup: typeof SelectOptionGroup;
-} = (props) => {
+const Select: React.FC<T.NativeProps> = (props) => {
 	const { children } = props;
 	return (
 		<SelectRoot {...props}>
@@ -44,9 +37,5 @@ const Select: React.FC<T.NativeProps> & {
 };
 
 Select.displayName = "Select";
-
-Select.Custom = SelectCustom;
-Select.Option = SelectOption;
-Select.OptionGroup = SelectOptionGroup;
 
 export default Select;

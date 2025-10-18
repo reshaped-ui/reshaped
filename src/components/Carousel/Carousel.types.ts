@@ -1,5 +1,6 @@
 import type React from "react";
 import type * as G from "types/global";
+import type { ActionableRef } from "components/Actionable";
 
 export type Instance =
 	| {
@@ -14,7 +15,7 @@ export type Instance =
 
 export type ControlProps = {
 	type: "back" | "forward";
-	oppositeControlElRef: React.RefObject<HTMLButtonElement | null>;
+	oppositeControlElRef: React.RefObject<ActionableRef | null>;
 	scrollElRef: React.RefObject<HTMLElement | null>;
 	scrollPosition: number;
 	onClick: () => void;

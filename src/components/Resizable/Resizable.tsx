@@ -3,9 +3,11 @@
 import React from "react";
 import { classNames } from "utilities/props";
 import View from "components/View";
-import ResizableHandle, { ResizableHandleContext } from "./ResizableHandle";
+import { ResizableHandleContext } from "./ResizableHandle";
 import type * as T from "./Resizable.types";
 import s from "./Resizable.module.css";
+
+export const ResizableItem: React.FC<T.ItemProps> = () => null;
 
 const PrivateResizableItem = React.forwardRef<HTMLDivElement, T.PrivateItemProps>((props, ref) => {
 	const { children, defaultSize, minSize, maxSize } = props;
@@ -32,10 +34,7 @@ const PrivateResizableItem = React.forwardRef<HTMLDivElement, T.PrivateItemProps
 	);
 });
 
-const Resizable: React.FC<T.Props> & {
-	Item: React.FC<T.ItemProps>;
-	Handle: React.FC<T.HandleProps>;
-} = (props) => {
+const Resizable: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		variant = "borderless",
@@ -159,7 +158,7 @@ const Resizable: React.FC<T.Props> & {
 	const output = React.Children.map(children, (child) => {
 		const isComponent = React.isValidElement(child);
 
-		if (isComponent && child.props && child.type !== Resizable.Item) {
+		if (isComponent && child.props && child.type !== ResizableItem) {
 			return (
 				<ResizableHandleContext.Provider
 					value={{ containerRef, index: currentHandleIndex++, onDrag, direction }}
@@ -169,7 +168,7 @@ const Resizable: React.FC<T.Props> & {
 			);
 		}
 
-		if (isComponent && child.props && child.type === Resizable.Item) {
+		if (isComponent && child.props && child.type === ResizableItem) {
 			const index = currentHandleIndex;
 
 			return (
@@ -199,9 +198,6 @@ const Resizable: React.FC<T.Props> & {
 		</View>
 	);
 };
-
-Resizable.Item = () => null;
-Resizable.Handle = ResizableHandle;
 
 Resizable.displayName = "Resizable";
 

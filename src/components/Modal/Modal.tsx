@@ -31,7 +31,7 @@ const Context = React.createContext<T.Context>({
 });
 const useModal = () => React.useContext(Context);
 
-const ModalTitle: React.FC<T.TitleProps> = (props) => {
+export const ModalTitle: React.FC<T.TitleProps> = (props) => {
 	const { children } = props;
 	const { id, setTitleMounted } = useModal();
 
@@ -47,7 +47,7 @@ const ModalTitle: React.FC<T.TitleProps> = (props) => {
 	);
 };
 
-const ModalSubtitle: React.FC<T.SubtitleProps> = (props) => {
+export const ModalSubtitle: React.FC<T.SubtitleProps> = (props) => {
 	const { children } = props;
 	const { id, setSubtitleMounted } = useModal();
 
@@ -63,10 +63,7 @@ const ModalSubtitle: React.FC<T.SubtitleProps> = (props) => {
 	);
 };
 
-const Modal: React.FC<T.Props> & {
-	Title: typeof ModalTitle;
-	Subtitle: typeof ModalSubtitle;
-} = (props) => {
+const Modal: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		onClose,
@@ -306,9 +303,6 @@ const Modal: React.FC<T.Props> & {
 		</Overlay>
 	);
 };
-
-Modal.Title = ModalTitle;
-Modal.Subtitle = ModalSubtitle;
 
 Modal.displayName = "Modal";
 ModalTitle.displayName = "Modal.Title";

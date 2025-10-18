@@ -2,6 +2,7 @@
 
 import { forwardRef, useState } from "react";
 import { classNames } from "utilities/props";
+import type { ActionableRef } from "components/Actionable";
 import Button from "components/Button";
 import IconChevronRight from "icons/ChevronRight";
 import IconChevronLeft from "icons/ChevronLeft";
@@ -9,7 +10,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import * as T from "./Carousel.types";
 import s from "./Carousel.module.css";
 
-const CarouselControl = forwardRef<HTMLButtonElement, T.ControlProps>((props, ref) => {
+const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) => {
 	const { type, scrollElRef, oppositeControlElRef, scrollPosition, onClick, isRTL, mounted } =
 		props;
 	const [visible, setVisible] = useState(false);

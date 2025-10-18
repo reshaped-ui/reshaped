@@ -51,15 +51,15 @@ const TableCellPrivate: React.FC<T.PrivateCellProps> = (props) => {
 	);
 };
 
-const TableCell: React.FC<T.CellProps> = (props) => {
+export const TableCell: React.FC<T.CellProps> = (props) => {
 	return <TableCellPrivate {...props} tagName="td" />;
 };
 
-const TableHeading: React.FC<T.HeadingProps> = (props) => {
+export const TableHeading: React.FC<T.HeadingProps> = (props) => {
 	return <TableCellPrivate {...props} tagName="th" />;
 };
 
-const TableRow: React.FC<T.RowProps> = (props) => {
+export const TableRow: React.FC<T.RowProps> = (props) => {
 	const { highlighted, children, className, attributes } = props;
 	const onClick = props.onClick || attributes?.onClick;
 	const rowClassNames = classNames(s.row, highlighted && s["--row-highlighted"], className);
@@ -76,7 +76,7 @@ const TableRow: React.FC<T.RowProps> = (props) => {
 	);
 };
 
-const TableBody: React.FC<T.BodyProps> = (props) => {
+export const TableBody: React.FC<T.BodyProps> = (props) => {
 	const { children, attributes, className } = props;
 
 	return (
@@ -86,7 +86,7 @@ const TableBody: React.FC<T.BodyProps> = (props) => {
 	);
 };
 
-const TableHead: React.FC<T.HeadProps> = (props) => {
+export const TableHead: React.FC<T.HeadProps> = (props) => {
 	const { children, attributes, className } = props;
 
 	return (
@@ -96,13 +96,7 @@ const TableHead: React.FC<T.HeadProps> = (props) => {
 	);
 };
 
-const Table: React.FC<T.Props> & {
-	Cell: typeof TableCell;
-	Heading: typeof TableHeading;
-	Row: typeof TableRow;
-	Body: typeof TableBody;
-	Head: typeof TableHead;
-} = (props) => {
+const Table: React.FC<T.Props> = (props) => {
 	const { children, border, columnBorder, className, attributes } = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
 	const fadeSide = useFadeSide(rootRef);
@@ -127,12 +121,6 @@ const Table: React.FC<T.Props> & {
 		</div>
 	);
 };
-
-Table.Cell = TableCell;
-Table.Heading = TableHeading;
-Table.Row = TableRow;
-Table.Body = TableBody;
-Table.Head = TableHead;
 
 Table.displayName = "Table";
 TableCell.displayName = "TableCell";

@@ -8,13 +8,7 @@ import type * as T from "./ContextMenu.types";
 import s from "./ContextMenu.module.css";
 import useHandlerRef from "hooks/useHandlerRef";
 
-const ContextMenu: React.FC<T.Props> & {
-	Content: typeof DropdownMenu.Content;
-	Item: typeof DropdownMenu.Item;
-	Section: typeof DropdownMenu.Section;
-	SubMenu: typeof DropdownMenu.SubMenu;
-	SubTrigger: typeof DropdownMenu.SubTrigger;
-} = (props) => {
+const ContextMenu: React.FC<T.Props> = (props) => {
 	const { position = "end-top", onOpen, onClose, ...dropdownMenuProps } = props;
 	const [coordinates, setCoordinates] = React.useState<G.Coordinates>();
 	const originRef = React.useRef<HTMLDivElement>(null);
@@ -56,12 +50,6 @@ const ContextMenu: React.FC<T.Props> & {
 		</div>
 	);
 };
-
-ContextMenu.Content = DropdownMenu.Content;
-ContextMenu.Item = DropdownMenu.Item;
-ContextMenu.Section = DropdownMenu.Section;
-ContextMenu.SubMenu = DropdownMenu.SubMenu;
-ContextMenu.SubTrigger = DropdownMenu.SubTrigger;
 
 ContextMenu.displayName = "ContextMenu";
 

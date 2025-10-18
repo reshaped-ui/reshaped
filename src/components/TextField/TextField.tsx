@@ -5,7 +5,6 @@ import { classNames, responsiveClassNames, responsivePropDependency } from "util
 import useElementId from "hooks/useElementId";
 import { useFormControl } from "components/FormControl";
 import Icon from "components/Icon";
-import Aligner from "components/_private/Aligner";
 import type * as T from "./TextField.types";
 import s from "./TextField.module.css";
 
@@ -60,9 +59,7 @@ const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 	return content.filter(Boolean);
 };
 
-const TextField: React.FC<T.Props> & {
-	Aligner: typeof Aligner;
-} = (props) => {
+const TextField: React.FC<T.Props> = (props) => {
 	const {
 		onChange,
 		onFocus,
@@ -168,8 +165,6 @@ const TextField: React.FC<T.Props> & {
 		</div>
 	);
 };
-
-TextField.Aligner = Aligner;
 
 TextField.displayName = "TextField";
 

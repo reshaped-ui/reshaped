@@ -4,7 +4,7 @@ import View from "components/View";
 import type * as T from "./Timeline.types";
 import s from "./Timeline.module.css";
 
-const TimelineItem: React.FC<T.ItemProps> = (props) => {
+export const TimelineItem: React.FC<T.ItemProps> = (props) => {
 	const { children, markerSlot, className, attributes } = props;
 	const hasMarker = markerSlot !== null;
 	const itemClassNames = classNames(s.item, !hasMarker && s["item--full-width"], className);
@@ -24,9 +24,7 @@ const TimelineItem: React.FC<T.ItemProps> = (props) => {
 	);
 };
 
-const Timeline: React.FC<T.Props> & {
-	Item: typeof TimelineItem;
-} = (props) => {
+const Timeline: React.FC<T.Props> = (props) => {
 	const { children, className, attributes } = props;
 	const rootClassNames = classNames(className);
 
@@ -42,8 +40,6 @@ const Timeline: React.FC<T.Props> & {
 		</ul>
 	);
 };
-
-Timeline.Item = TimelineItem;
 
 Timeline.displayName = "Timeline";
 TimelineItem.displayName = "Timeline.Item";
