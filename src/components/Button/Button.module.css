@@ -1,3 +1,7 @@
+/*
+- Button overflow shouldn't be hidden to make sure the button group separators are visible
+*/
+
 .root {
 	/* Using --rs-button-p and --rs-p to dynamically reasign --rs-p for all sizes of ghost buttons */
 	--rs-p-v: var(--rs-button-p-v);
@@ -9,7 +13,7 @@
 
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform;
-	padding: calc(var(--rs-p-v) - var(--rs-button-border-width))
+	padding: calc(var(--rs-unit-x1) - var(--rs-button-border-width))
 		calc(var(--rs-p-h) - var(--rs-button-border-width));
 	border-radius: var(--rs-button-radius);
 	cursor: pointer;
@@ -20,7 +24,6 @@
 	align-items: center;
 	justify-content: center;
 	text-decoration: none;
-	overflow: hidden;
 	border: var(--rs-button-border-width) solid var(--rs-button-border-color);
 	-webkit-tap-highlight-color: transparent;
 	font-family: var(--rs-font-family-body);
@@ -28,11 +31,11 @@
 	font-size: var(--rs-button-font-size);
 	line-height: var(--rs-button-line-height);
 	letter-spacing: var(--rs-button-letter-spacing);
-
-	/* prevent button content from shifting when removing borders in button group */
-	box-sizing: content-box;
-	min-height: var(--rs-button-line-height);
-	min-width: calc(var(--rs-button-line-height) - (var(--rs-p-h) - var(--rs-p-v)) * 2);
+	box-sizing: border-box;
+	min-height: calc(var(--rs-button-line-height) + var(--rs-p-v) * 2);
+	min-width: calc(
+		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
+	);
 	background-color: var(--rs-button-background-color);
 	color: var(--rs-button-foreground-color);
 
@@ -43,6 +46,7 @@
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
 		transition-property: opacity, background-color;
 		opacity: var(--rs-button-highlight-opacity-base);
+		border-radius: var(--rs-button-radius);
 
 		/* Use highlight based on the text color with an ability to override it */
 		background: var(--rs-button-highlight-color, var(--rs-button-foreground-color));
@@ -341,46 +345,51 @@
 /* Button group */
 
 .group .root {
-	border-radius: 0;
+	&,
+	&::before {
+		border-radius: 0;
+	}
 
 	&:first-child {
-		border-start-start-radius: var(--rs-button-radius);
-		border-end-start-radius: var(--rs-button-radius);
+		&,
+		&::before {
+			border-start-start-radius: var(--rs-button-radius);
+			border-end-start-radius: var(--rs-button-radius);
+		}
 	}
 
 	&:last-child {
-		border-start-end-radius: var(--rs-button-radius);
-		border-end-end-radius: var(--rs-button-radius);
-	}
-
-	/* Highlighted buttons render border on both sides to make sure the corect color is used */
-	&.--variant-outline {
-		&:not(:last-child) {
-			border-inline-end-width: 0;
-		}
-
-		&.--highlighted:not(:last-child) {
-			border-inline-end-width: 1px;
-
-			& + .root {
-				border-inline-start-width: 0;
-			}
+		&,
+		&::before {
+			border-start-end-radius: var(--rs-button-radius);
+			border-end-end-radius: var(--rs-button-radius);
 		}
 	}
 
-	&:not(.--variant-outline) {
+	&:not(:first-child) {
+		border-inline-start: 1px solid var(--rs-button-group-separator-color);
+	}
+
+	&:not(:last-child) {
+		border-inline-end: 0;
 		border-inline-end: 0 solid var(--rs-button-group-separator-color);
+	}
 
-		&:not(:first-child) {
-			border-inline-start: 1px solid var(--rs-button-group-separator-color);
+	&.--highlighted:not(:last-child) {
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: 0;
+			inset-inline-end: -1px;
+			pointer-events: none;
+			border-inline-end: 1px solid var(--rs-button-group-separator-color);
 		}
 
-		&.--highlighted:not(:last-child) {
-			border-inline-end-width: 1px;
+		& + .root {
+			border-inline-start-width: 0;
 
-			& + .root {
-				border-inline-start-width: 0;
-			}
+			/* there is no border so increasing the padding by 1px */
+			padding-inline-start: var(--rs-p-h);
 		}
 	}
 

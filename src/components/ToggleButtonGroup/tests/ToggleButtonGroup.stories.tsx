@@ -3,6 +3,9 @@ import { expect, fn, Mock, userEvent } from "storybook/test";
 import { Example } from "utilities/storybook";
 import ToggleButtonGroup from "components/ToggleButtonGroup";
 import ToggleButton from "components/ToggleButton";
+import IconPlus from "icons/Plus";
+import IconMinus from "icons/Minus";
+import IconCheckmark from "icons/Checkmark";
 
 export default {
 	title: "Components/ToggleButtonGroup",
@@ -196,4 +199,19 @@ export const className: StoryObj = {
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");
 	},
+};
+
+export const testIcon = {
+	name: "test: icon only",
+	render: () => (
+		<Example>
+			<Example.Item title="icon only">
+				<ToggleButtonGroup selectedColor="primary">
+					<ToggleButton value="1" icon={IconPlus} />
+					<ToggleButton value="2" icon={IconMinus} />
+					<ToggleButton value="3" icon={IconCheckmark} />
+				</ToggleButtonGroup>
+			</Example.Item>
+		</Example>
+	),
 };
