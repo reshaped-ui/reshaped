@@ -45,14 +45,17 @@
 		},
 		"./themes": {
 			"types": "./dist/themes/index.d.ts",
+			"import": "./dist/themes/index.js",
 			"default": "./dist/cjs/themes/index.js"
 		},
 		"./config/postcss": {
 			"types": "./dist/config/postcss.d.ts",
+			"import": "./dist/config/postcss.js",
 			"default": "./dist/cjs/config/postcss.js"
 		},
 		"./config/tailwind": {
 			"types": "./dist/config/tailwind.d.ts",
+			"import": "./dist/config/tailwind.js",
 			"default": "./dist/cjs/config/tailwind.js"
 		},
 		"./bundle": {
