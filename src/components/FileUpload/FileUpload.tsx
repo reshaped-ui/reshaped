@@ -8,15 +8,13 @@ import useToggle from "hooks/useToggle";
 import type * as T from "./FileUpload.types";
 import s from "./FileUpload.module.css";
 
-const FileUploadTrigger: React.FC<T.TriggerProps> = (props) => {
+export const FileUploadTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;
 
 	return <span className={s.trigger}>{children}</span>;
 };
 
-const FileUpload: React.FC<T.Props> & {
-	Trigger: typeof FileUploadTrigger;
-} = (props) => {
+const FileUpload: React.FC<T.Props> = (props) => {
 	const {
 		name,
 		children,
@@ -122,8 +120,6 @@ const FileUpload: React.FC<T.Props> & {
 		</View>
 	);
 };
-
-FileUpload.Trigger = FileUploadTrigger;
 
 FileUpload.displayName = "FileUpload";
 FileUploadTrigger.displayName = "FileUpload.Trigger";

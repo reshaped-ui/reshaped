@@ -236,7 +236,7 @@ const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (pro
 	);
 };
 
-const AutocompleteItem: React.FC<T.ItemProps> = (props) => {
+export const AutocompleteItem: React.FC<T.ItemProps> = (props) => {
 	const { value, data, onClick, disabled, ...menuItemProps } = props;
 	const { onItemClick, highlightedId } = React.useContext(AutocompleteContext);
 	const id = useElementId();
@@ -263,8 +263,6 @@ const AutocompleteItem: React.FC<T.ItemProps> = (props) => {
 		/>
 	);
 };
-
-Autocomplete.Item = AutocompleteItem;
 
 Autocomplete.displayName = "Autocomplete";
 AutocompleteItem.displayName = "Autocomplete.Item";

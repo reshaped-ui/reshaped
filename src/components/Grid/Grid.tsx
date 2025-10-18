@@ -3,7 +3,9 @@ import { resolveMixin } from "styles/mixin";
 import type * as T from "./Grid.types";
 import s from "./Grid.module.css";
 
-const GridItem = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.ItemProps<As>) => {
+export const GridItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
+	props: T.ItemProps<As>
+) => {
 	const {
 		area,
 		colStart,
@@ -98,8 +100,6 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		</TagName>
 	);
 };
-
-Grid.Item = GridItem;
 
 Grid.displayName = "Grid";
 GridItem.displayName = "Grid.Item";

@@ -75,11 +75,9 @@ const StepperItemPrivate: React.FC<T.ItemPrivateProps> = (props) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const StepperItem = (_: T.ItemProps) => null;
+export const StepperItem = (_: T.ItemProps) => null;
 
-const Stepper: React.FC<T.Props> & {
-	Item: typeof StepperItem;
-} = (props) => {
+const Stepper: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		direction = "row",
@@ -131,8 +129,6 @@ const Stepper: React.FC<T.Props> & {
 		</View>
 	);
 };
-
-Stepper.Item = StepperItem;
 
 Stepper.displayName = "Stepper";
 StepperItem.displayName = "Stepper.Item";

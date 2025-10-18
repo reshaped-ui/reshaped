@@ -8,10 +8,9 @@ import Text from "components/Text";
 import Button from "components/Button";
 import IconChevronRight from "icons/ChevronRight";
 import IconDotsHorizontal from "icons/DotsHorizontal";
-import BreadcrumbsItem from "./BreadcrumbsItem";
 import * as T from "./Breadcrumbs.types";
 
-const Breadcrumbs: React.FC<T.Props> & { Item: typeof BreadcrumbsItem } = (props) => {
+const Breadcrumbs: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		separator,
@@ -91,7 +90,6 @@ const Breadcrumbs: React.FC<T.Props> & { Item: typeof BreadcrumbsItem } = (props
 	);
 };
 
-Breadcrumbs.Item = BreadcrumbsItem;
 Breadcrumbs.displayName = "Breadcrumbs";
 
 export default Breadcrumbs;

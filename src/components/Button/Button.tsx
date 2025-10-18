@@ -3,8 +3,6 @@ import { classNames, responsiveClassNames, responsivePropDependency } from "util
 import Icon from "components/Icon";
 import Loader from "components/Loader";
 import Actionable, { type ActionableRef } from "components/Actionable";
-import ButtonGroup from "./ButtonGroup";
-import ButtonAligner from "./ButtonAligner";
 import type * as T from "./Button.types";
 import s from "./Button.module.css";
 
@@ -98,10 +96,7 @@ const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			{renderIcon("end")}
 		</Actionable>
 	);
-}) as T.Export;
-
-Button.Group = ButtonGroup;
-Button.Aligner = ButtonAligner;
+});
 
 Button.displayName = "Button";
 

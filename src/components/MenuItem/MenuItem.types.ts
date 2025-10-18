@@ -1,6 +1,6 @@
 import type React from "react";
 import type { IconProps } from "components/Icon";
-import type { ActionableProps, ActionableRef } from "components/Actionable";
+import type { ActionableProps } from "components/Actionable";
 import type * as G from "types/global";
 
 export type Size = "small" | "medium" | "large";
@@ -44,8 +44,4 @@ export type AlignerProps = {
 	className?: G.ClassName;
 	/** Additional attributes for the root element */
 	attributes?: G.Attributes<"div">;
-};
-
-export type Export = React.ForwardRefExoticComponent<Props & { ref?: ActionableRef }> & {
-	Aligner: React.ComponentType<AlignerProps>;
 };

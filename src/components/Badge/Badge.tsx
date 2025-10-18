@@ -4,7 +4,6 @@ import Icon from "components/Icon";
 import IconClose from "icons/Close";
 import Actionable, { type ActionableProps, type ActionableRef } from "components/Actionable";
 import type * as T from "./Badge.types";
-import BadgeContainer from "./BadgeContainer";
 import s from "./Badge.module.css";
 import { forwardRef } from "react";
 
@@ -80,9 +79,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			)}
 		</Actionable>
 	);
-}) as T.Export;
-
-Badge.Container = BadgeContainer;
+});
 
 Badge.displayName = "Badge";
 

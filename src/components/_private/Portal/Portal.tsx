@@ -53,7 +53,7 @@ const Portal: React.FC<T.Props> & { Scope: typeof PortalScope } = (props) => {
 	];
 };
 
-function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>): React.ReactNode {
+export function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>): React.ReactNode {
 	const { children } = props;
 	const ref = React.useRef<T>(null);
 
@@ -63,8 +63,6 @@ function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>): React.React
 		</PortalScopeContext.Provider>
 	);
 }
-
-Portal.Scope = PortalScope;
 
 Portal.displayName = "Portal";
 PortalScope.displayName = "PortalScope";

@@ -45,15 +45,11 @@ const Popover: React.FC<T.Props> & {
 	);
 };
 
-const PopoverDismissible: React.FC<DismissibleProps> = (props) => {
+export const PopoverDismissible: React.FC<DismissibleProps> = (props) => {
 	const { handleClose } = useFlyoutContext();
 
 	return <Dismissible {...props} onClose={() => handleClose({})} />;
 };
-
-Popover.Dismissible = PopoverDismissible;
-Popover.Trigger = Flyout.Trigger;
-Popover.Content = Flyout.Content;
 
 Popover.displayName = "Popover";
 PopoverDismissible.displayName = "Popover.Dismissible";

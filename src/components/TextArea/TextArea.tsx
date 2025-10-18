@@ -3,14 +3,11 @@
 import React from "react";
 import { classNames, responsiveClassNames } from "utilities/props";
 import { useFormControl } from "components/FormControl";
-import Aligner from "components/_private/Aligner";
 import useElementId from "hooks/useElementId";
 import type * as T from "./TextArea.types";
 import s from "./TextArea.module.css";
 
-const TextArea: React.FC<T.Props> & {
-	Aligner: typeof Aligner;
-} = (props) => {
+const TextArea: React.FC<T.Props> = (props) => {
 	const {
 		onChange,
 		onFocus,
@@ -81,8 +78,6 @@ const TextArea: React.FC<T.Props> & {
 		</div>
 	);
 };
-
-TextArea.Aligner = Aligner;
 
 TextArea.displayName = "TextArea";
 
