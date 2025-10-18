@@ -175,7 +175,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 	return (
 		<Portal targetRef={containerRef}>
-			<Portal.Scope<HTMLDivElement>>
+			<Portal.Scope>
 				{(ref) => (
 					<div
 						{...attributes}

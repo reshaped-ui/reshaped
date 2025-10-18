@@ -53,9 +53,9 @@ const Portal: React.FC<T.Props> = (props) => {
 	];
 };
 
-export function PortalScope<T extends HTMLElement>(props: T.ScopeProps<T>): React.ReactNode {
+export function PortalScope(props: T.ScopeProps<HTMLDivElement>): React.ReactNode {
 	const { children } = props;
-	const ref = React.useRef<T>(null);
+	const ref = React.useRef<HTMLDivElement>(null);
 
 	return (
 		<PortalScopeContext.Provider value={{ scopeRef: ref }}>
