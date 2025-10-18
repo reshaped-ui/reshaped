@@ -24,9 +24,7 @@ export const TimelineItem: React.FC<T.ItemProps> = (props) => {
 	);
 };
 
-const Timeline: React.FC<T.Props> & {
-	Item: typeof TimelineItem;
-} = (props) => {
+const Timeline: React.FC<T.Props> = (props) => {
 	const { children, className, attributes } = props;
 	const rootClassNames = classNames(className);
 

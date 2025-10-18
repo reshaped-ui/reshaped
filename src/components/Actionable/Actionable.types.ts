@@ -50,4 +50,4 @@ export type Props = {
 	attributes?: Attributes;
 };
 
-export type Ref = React.Ref<HTMLButtonElement | HTMLAnchorElement>;
+export type Ref = HTMLButtonElement | HTMLAnchorElement;

@@ -1,7 +1,6 @@
 import Autocomplete, { AutocompleteItem } from "./Autocomplete";
-import type * as T from "./Autocomplete.types";
 
-const AutocompleteRoot = Autocomplete as React.FC<T.Props> & {
+const AutocompleteRoot = Autocomplete as typeof Autocomplete & {
 	Item: typeof AutocompleteItem;
 };
 

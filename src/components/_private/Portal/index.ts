@@ -1,6 +1,8 @@
 import Portal, { PortalScope } from "./Portal";
 
-Portal.Scope = PortalScope;
+const PortalRoot = Portal as typeof Portal & {
+	Scope: typeof PortalScope;
+};
 
-export default Portal;
+export default PortalRoot;
 export type { Props as PortalProps } from "./Portal.types";

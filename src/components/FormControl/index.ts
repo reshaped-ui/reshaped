@@ -2,9 +2,8 @@ import FormControl from "./FormControl";
 import FormControlLabel from "./FormControlLabel";
 import FormControlHelper from "./FormControlHelper";
 import FormControlError from "./FormControlError";
-import type * as T from "./FormControl.types";
 
-const FormControlRoot = FormControl as React.FC<T.Props> & {
+const FormControlRoot = FormControl as typeof FormControl & {
 	Label: typeof FormControlLabel;
 	Helper: typeof FormControlHelper;
 	Error: typeof FormControlError;

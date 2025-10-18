@@ -1,8 +1,7 @@
 import Breadcrumbs from "./Breadcrumbs";
 import BreadcrumbsItem from "./BreadcrumbsItem";
-import type * as T from "./Breadcrumbs.types";
 
-const BreadcrumbsRoot = Breadcrumbs as React.FC<T.Props> & {
+const BreadcrumbsRoot = Breadcrumbs as typeof Breadcrumbs & {
 	Item: typeof BreadcrumbsItem;
 };
 

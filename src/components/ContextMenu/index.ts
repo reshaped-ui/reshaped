@@ -1,8 +1,7 @@
 import DropdownMenu from "components/DropdownMenu";
 import ContextMenu from "./ContextMenu";
-import type * as T from "./ContextMenu.types";
 
-const ContextMenuRoot = ContextMenu as React.FC<T.Props> & {
+const ContextMenuRoot = ContextMenu as typeof ContextMenu & {
 	Content: typeof DropdownMenu.Content;
 	Item: typeof DropdownMenu.Item;
 	Section: typeof DropdownMenu.Section;

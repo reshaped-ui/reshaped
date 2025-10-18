@@ -1,7 +1,6 @@
 import View, { ViewItem } from "./View";
-import type * as T from "./View.types";
 
-const ViewRoot = View as React.FC<T.Props> & {
+const ViewRoot = View as typeof View & {
 	Item: typeof ViewItem;
 };
 

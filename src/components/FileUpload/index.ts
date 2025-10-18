@@ -1,7 +1,6 @@
 import FileUpload, { FileUploadTrigger } from "./FileUpload";
-import type * as T from "./FileUpload.types";
 
-const FileUploadRoot = FileUpload as React.FC<T.Props> & {
+const FileUploadRoot = FileUpload as typeof FileUpload & {
 	Trigger: typeof FileUploadTrigger;
 };
 

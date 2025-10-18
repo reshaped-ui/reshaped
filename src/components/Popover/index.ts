@@ -1,8 +1,7 @@
 import Flyout from "components/Flyout";
 import Popover, { PopoverDismissible } from "./Popover";
-import type * as T from "./Popover.types";
 
-const PopoverRoot = Popover as React.FC<T.Props> & {
+const PopoverRoot = Popover as typeof Popover & {
 	Dismissible: typeof PopoverDismissible;
 	Trigger: typeof Flyout.Trigger;
 	Content: typeof Flyout.Content;

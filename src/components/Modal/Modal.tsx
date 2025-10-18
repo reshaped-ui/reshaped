@@ -63,10 +63,7 @@ export const ModalSubtitle: React.FC<T.SubtitleProps> = (props) => {
 	);
 };
 
-const Modal: React.FC<T.Props> & {
-	Title: typeof ModalTitle;
-	Subtitle: typeof ModalSubtitle;
-} = (props) => {
+const Modal: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		onClose,

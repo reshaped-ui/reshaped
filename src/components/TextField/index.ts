@@ -1,8 +1,7 @@
 import Aligner from "components/_private/Aligner";
 import TextField from "./TextField";
-import type * as T from "./TextField.types";
 
-const TextFieldRoot = TextField as React.FC<T.Props> & {
+const TextFieldRoot = TextField as typeof TextField & {
 	Aligner: typeof Aligner;
 };
 

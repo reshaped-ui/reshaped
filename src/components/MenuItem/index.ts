@@ -1,8 +1,7 @@
 import MenuItem from "./MenuItem";
 import MenuItemAligner from "./MenuItemAligner";
-import type * as T from "./MenuItem.types";
 
-const MenuItemRoot = MenuItem as unknown as React.FC<T.Props> & {
+const MenuItemRoot = MenuItem as typeof MenuItem & {
 	Aligner: typeof MenuItemAligner;
 };
 

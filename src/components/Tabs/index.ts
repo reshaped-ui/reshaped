@@ -2,9 +2,8 @@ import Tabs from "./Tabs";
 import TabsItem from "./TabsItem";
 import TabsList from "./TabsList";
 import TabsPanel from "./TabsPanel";
-import type * as T from "./Tabs.types";
 
-const TabsRoot = Tabs as React.FC<T.Props> & {
+const TabsRoot = Tabs as typeof Tabs & {
 	Item: typeof TabsItem;
 	List: typeof TabsList;
 	Panel: typeof TabsPanel;

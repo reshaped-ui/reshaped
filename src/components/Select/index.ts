@@ -2,9 +2,8 @@ import Select from "./Select";
 import SelectCustom from "./SelectCustom";
 import SelectOption from "./SelectOption";
 import SelectOptionGroup from "./SelectOptionGroup";
-import type * as T from "./Select.types";
 
-const SelectRoot = Select as React.FC<T.NativeProps> & {
+const SelectRoot = Select as typeof Select & {
 	Custom: typeof SelectCustom;
 	Option: typeof SelectOption;
 	OptionGroup: typeof SelectOptionGroup;

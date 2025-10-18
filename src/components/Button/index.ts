@@ -1,9 +1,8 @@
 import Button from "./Button";
 import ButtonAligner from "./ButtonAligner";
 import ButtonGroup from "./ButtonGroup";
-import type * as T from "./Button.types";
 
-const ButtonRoot = Button as unknown as React.FC<T.Props> & {
+const ButtonRoot = Button as typeof Button & {
 	Aligner: typeof ButtonAligner;
 	Group: typeof ButtonGroup;
 };

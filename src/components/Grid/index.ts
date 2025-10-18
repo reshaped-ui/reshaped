@@ -1,7 +1,6 @@
 import Grid, { GridItem } from "./Grid";
-import type * as T from "./Grid.types";
 
-const GridRoot = Grid as React.FC<T.Props> & {
+const GridRoot = Grid as typeof Grid & {
 	Item: typeof GridItem;
 };
 

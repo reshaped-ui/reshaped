@@ -1,7 +1,6 @@
 import Table, { TableCell, TableHeading, TableRow, TableBody, TableHead } from "./Table";
-import type * as T from "./Table.types";
 
-const TableRoot = Table as React.FC<T.Props> & {
+const TableRoot = Table as typeof Table & {
 	Cell: typeof TableCell;
 	Heading: typeof TableHeading;
 	Row: typeof TableRow;

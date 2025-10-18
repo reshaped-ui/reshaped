@@ -1,7 +1,6 @@
 import Stepper, { StepperItem } from "./Stepper";
-import type * as T from "./Stepper.types";
 
-const StepperRoot = Stepper as React.FC<T.Props> & {
+const StepperRoot = Stepper as typeof Stepper & {
 	Item: typeof StepperItem;
 };
 

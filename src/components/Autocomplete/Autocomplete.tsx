@@ -15,7 +15,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
-const Autocomplete: React.FC<T.Props> & { Item: typeof AutocompleteItem } = (props) => {
+const Autocomplete: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		onChange,

@@ -7,7 +7,7 @@ import { ResizableHandleContext } from "./ResizableHandle";
 import type * as T from "./Resizable.types";
 import s from "./Resizable.module.css";
 
-export const ResizableItem: React.FC<React.PropsWithChildren> = () => null;
+export const ResizableItem: React.FC<T.ItemProps> = () => null;
 
 const PrivateResizableItem = React.forwardRef<HTMLDivElement, T.PrivateItemProps>((props, ref) => {
 	const { children, defaultSize, minSize, maxSize } = props;

@@ -5,11 +5,7 @@ import type * as T from "./Popover.types";
 import s from "./Popover.module.css";
 import { resolveMixin } from "styles/mixin";
 
-const Popover: React.FC<T.Props> & {
-	Dismissible: typeof PopoverDismissible;
-	Trigger: typeof Flyout.Trigger;
-	Content: typeof Flyout.Content;
-} = (props) => {
+const Popover: React.FC<T.Props> = (props) => {
 	const {
 		width,
 		variant = "elevated",

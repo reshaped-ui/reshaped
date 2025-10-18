@@ -1,8 +1,7 @@
 import Badge from "./Badge";
 import BadgeContainer from "./BadgeContainer";
-import type * as T from "./Badge.types";
 
-const BadgeRoot = Badge as unknown as React.FC<T.Props> & {
+const BadgeRoot = Badge as typeof Badge & {
 	Container: typeof BadgeContainer;
 };
 

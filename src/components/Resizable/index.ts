@@ -1,8 +1,7 @@
 import Resizable, { ResizableItem } from "./Resizable";
 import ResizableHandle from "./ResizableHandle";
-import type * as T from "./Resizable.types";
 
-const ResizableRoot = Resizable as React.FC<T.Props> & {
+const ResizableRoot = Resizable as typeof Resizable & {
 	Item: typeof ResizableItem;
 	Handle: typeof ResizableHandle;
 };

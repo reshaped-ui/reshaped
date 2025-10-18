@@ -1,9 +1,8 @@
 import Accordion from "./Accordion";
 import AccordionTrigger from "./AccordionTrigger";
 import AccordionContent from "./AccordionContent";
-import type * as T from "./Accordion.types";
 
-const AccordionRoot = Accordion as React.FC<T.Props> & {
+const AccordionRoot = Accordion as typeof Accordion & {
 	Trigger: typeof AccordionTrigger;
 	Content: typeof AccordionContent;
 };

@@ -1,9 +1,8 @@
 import Flyout from "./Flyout";
 import FlyoutTrigger from "./FlyoutTrigger";
 import FlyoutContent from "./FlyoutContent";
-import type * as T from "./Flyout.types";
 
-const FlyoutRoot = Flyout as React.FC<T.Props> & {
+const FlyoutRoot = Flyout as typeof Flyout & {
 	Trigger: typeof FlyoutTrigger;
 	Content: typeof FlyoutContent;
 };

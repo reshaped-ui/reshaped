@@ -1,7 +1,6 @@
 import Modal, { ModalTitle, ModalSubtitle } from "./Modal";
-import type * as T from "./Modal.types";
 
-const ModalRoot = Modal as React.FC<T.Props> & {
+const ModalRoot = Modal as typeof Modal & {
 	Title: typeof ModalTitle;
 	Subtitle: typeof ModalSubtitle;
 };

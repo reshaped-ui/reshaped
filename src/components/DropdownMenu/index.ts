@@ -6,9 +6,8 @@ import DropdownMenu, {
 	DropdownMenuSubMenu,
 	DropdownMenuSubTrigger,
 } from "./DropdownMenu";
-import type * as T from "./DropdownMenu.types";
 
-const DropdownMenuRoot = DropdownMenu as React.FC<T.Props> & {
+const DropdownMenuRoot = DropdownMenu as typeof DropdownMenu & {
 	Dismissible: typeof Popover.Dismissible;
 	Trigger: typeof Popover.Trigger;
 	Content: typeof DropdownMenuContent;

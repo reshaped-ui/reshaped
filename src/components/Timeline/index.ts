@@ -1,7 +1,6 @@
 import Timeline, { TimelineItem } from "./Timeline";
-import type * as T from "./Timeline.types";
 
-const TimelineRoot = Timeline as React.FC<T.Props> & {
+const TimelineRoot = Timeline as typeof Timeline & {
 	Item: typeof TimelineItem;
 };
 

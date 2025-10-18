@@ -18,7 +18,7 @@ export const usePortalScope = () => {
  * Disclaimer: Works only for components that don't show the portal immediately
  * That gives Portal time to receive scope on first render
  */
-const Portal: React.FC<T.Props> & { Scope: typeof PortalScope } = (props) => {
+const Portal: React.FC<T.Props> = (props) => {
 	const { children, targetRef } = props;
 	const mountedToggle = useToggle();
 	const rootRef = React.useRef<HTMLDivElement>(null);

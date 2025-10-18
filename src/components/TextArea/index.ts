@@ -1,8 +1,7 @@
 import Aligner from "components/_private/Aligner";
 import TextArea from "./TextArea";
-import type * as T from "./TextArea.types";
 
-const TextAreaRoot = TextArea as React.FC<T.Props> & {
+const TextAreaRoot = TextArea as typeof TextArea & {
 	Aligner: typeof Aligner;
 };
 
