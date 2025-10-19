@@ -33,8 +33,8 @@ export type OptionProps = Pick<
 	value: string;
 };
 
-export type OptionGroupProps = {
-	label: string;
+export type GroupProps = {
+	label?: string;
 	children: React.ReactNode;
 };
 
@@ -169,5 +169,3 @@ export type TriggerProps = Pick<
 export type RootProps = Omit<Props, "children"> & {
 	children: (props: Omit<Props, "children">) => React.ReactNode;
 };
-
-export type SelectContextProps = CustomControlledProps;

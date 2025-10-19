@@ -10,6 +10,8 @@ import Select, { SelectProps } from "components/Select";
 import Text from "components/Text";
 import FormControl from "components/FormControl";
 import Badge from "components/Badge";
+import IconPlus from "icons/Plus";
+import TextField from "components/TextField";
 
 export default {
 	title: "Components/Select",
@@ -101,14 +103,14 @@ export const customRender: StoryObj = {
 						"aria-label": "Select an animal",
 					}}
 				>
-					<Select.OptionGroup label="Birds">
+					<Select.Group label="Birds">
 						<Select.Option value="pigeon">Pigeon</Select.Option>
 						<Select.Option value="parrot">Parrot</Select.Option>
-					</Select.OptionGroup>
-					<Select.OptionGroup label="Sea Mammals">
+					</Select.Group>
+					<Select.Group label="Sea Mammals">
 						<Select.Option value="whale">Whale</Select.Option>
 						<Select.Option value="dolphin">Dolphin</Select.Option>
-					</Select.OptionGroup>
+					</Select.Group>
 				</Select.Custom>
 			</Example.Item>
 		</Example>
@@ -868,6 +870,30 @@ export const formControl: StoryObj = {
 					</Select.Custom>
 					<FormControl.Error>This field is required</FormControl.Error>
 				</FormControl>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const testComposition: StoryObj = {
+	name: "test: composition",
+	render: () => (
+		<Example>
+			<Example.Item title="custom with options">
+				<Select.Custom
+					name="animal"
+					id="animal"
+					placeholder="Select an animal"
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
+				>
+					<Select.Group>
+						<Select.Option value="dog">Dog</Select.Option>
+						<Select.Option value="turtle">Turtle</Select.Option>
+					</Select.Group>
+					<Select.Group>Hello</Select.Group>
+				</Select.Custom>
 			</Example.Item>
 		</Example>
 	),

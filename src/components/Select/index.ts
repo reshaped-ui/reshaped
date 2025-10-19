@@ -1,17 +1,19 @@
 import Select from "./Select";
 import SelectCustom from "./SelectCustom";
 import SelectOption from "./SelectOption";
-import SelectOptionGroup from "./SelectOptionGroup";
+import SelectGroup from "./SelectGroup";
 
 const SelectRoot = Select as typeof Select & {
 	Custom: typeof SelectCustom;
 	Option: typeof SelectOption;
-	OptionGroup: typeof SelectOptionGroup;
+	Group: typeof SelectGroup;
+	OptionGroup: typeof SelectGroup;
 };
 
 SelectRoot.Custom = SelectCustom;
 SelectRoot.Option = SelectOption;
-SelectRoot.OptionGroup = SelectOptionGroup;
+SelectRoot.Group = SelectGroup;
+SelectRoot.OptionGroup = SelectGroup;
 
 export default SelectRoot;
 export type { Props as SelectProps } from "./Select.types";

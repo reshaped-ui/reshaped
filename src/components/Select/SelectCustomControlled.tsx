@@ -9,7 +9,7 @@ import type * as T from "./Select.types";
 import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
 import SelectOption from "./SelectOption";
-import SelectOptionGroup from "./SelectOptionGroup";
+import SelectGroup from "./SelectGroup";
 import View from "components/View";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
@@ -75,16 +75,17 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 				});
 			}
 
-			if (child.type === SelectOptionGroup) {
-				const component = child as React.ReactElement<T.OptionGroupProps>;
-				const optionGroup = component.props;
+			if (child.type === SelectGroup) {
+				const component = child as React.ReactElement<T.GroupProps>;
+				const group = component.props;
 
 				return React.cloneElement(component, {
-					key: optionGroup.label,
-					children: traverseOptionList(optionGroup.children),
+					key: group.label ?? index,
+					children: traverseOptionList(group.children),
 				});
 			}
-			return null;
+
+			return child;
 		});
 	};
 
