@@ -39,7 +39,9 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				}}
 			>
 				<SelectStartContent startSlot={startSlot} icon={icon} size={size} />
-				{children ? <Text maxLines={1}>{children}</Text> : null}
+				{children ? (
+					<Text maxLines={typeof children === "string" ? 1 : undefined}>{children}</Text>
+				) : null}
 				{placeholder && !children ? <Text color="disabled">{placeholder}</Text> : null}
 				<SelectEndContent disabled={disabled} size={size} />
 			</Actionable>

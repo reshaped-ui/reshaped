@@ -7,6 +7,9 @@ import { DropdownMenuProps } from "components/DropdownMenu";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
+type RenderSingleValue = (args: { value: string }) => React.ReactNode;
+type RenderMultipleValues = (args: { value: string[] }) => React.ReactNode;
+
 type NativeOption = {
 	/** Option text label */
 	label: string;
@@ -90,13 +93,13 @@ export type NativeFragment = {
 export type NativeControlledFragment = {
 	value: string;
 	defaultValue?: never;
-	/** Callback when the input value changes */
+	renderValue?: never;
 	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
 };
 export type NativeUncontrolledFragment = {
 	value?: never;
 	defaultValue?: string;
-	/** Callback when the input value changes */
+	renderValue?: never;
 	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
 };
 
@@ -105,14 +108,14 @@ export type CustomControlledFragment =
 			multiple?: false;
 			value: string;
 			defaultValue?: never;
-			/** Callback when the input value changes */
+			renderValue?: RenderSingleValue;
 			onChange?: G.ChangeHandler<string>;
 	  }
 	| {
 			multiple: true;
 			value: string[];
 			defaultValue?: never[];
-			/** Callback when the input value changes */
+			renderValue?: RenderMultipleValues;
 			onChange?: G.ChangeHandler<string[]>;
 	  };
 export type CustomUncontrolledFragment =
@@ -120,14 +123,14 @@ export type CustomUncontrolledFragment =
 			multiple?: false;
 			value?: never;
 			defaultValue?: string;
-			/** Callback when the input value changes */
+			renderValue?: RenderSingleValue;
 			onChange?: G.ChangeHandler<string>;
 	  }
 	| {
 			multiple: true;
 			value?: never[];
 			defaultValue?: string[];
-			/** Callback when the input value changes */
+			renderValue?: RenderMultipleValues;
 			onChange?: G.ChangeHandler<string[]>;
 	  };
 

@@ -7,7 +7,9 @@ import useToggle from "hooks/useToggle";
 import Modal from "components/Modal";
 import MenuItem from "components/MenuItem";
 import Select, { SelectProps } from "components/Select";
+import Text from "components/Text";
 import FormControl from "components/FormControl";
+import Badge from "components/Badge";
 
 export default {
 	title: "Components/Select",
@@ -638,6 +640,91 @@ export const startSlot: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const renderValue = {
+	name: "renderValue",
+	render: () => {
+		const options = [
+			{
+				value: "1",
+				label: "Title 1",
+				subtitle: "Subtitle 1",
+			},
+			{
+				value: "2",
+				label: "Title 2",
+				subtitle: "Subtitle 2",
+			},
+		];
+
+		return (
+			<Example>
+				<Example.Item title="default renderer, single">
+					<Select.Custom name="animal" defaultValue="1" placeholder="Nothing selected">
+						{options.map((option) => (
+							<Select.Option key={option.value} value={option.value}>
+								<Text weight="medium">{option.label}</Text>
+								<Text weight="regular" color="neutral-faded">
+									{option.subtitle}
+								</Text>
+							</Select.Option>
+						))}
+					</Select.Custom>
+				</Example.Item>
+
+				<Example.Item title="default renderer, multiple">
+					<Select.Custom name="animal" defaultValue={["1"]} multiple placeholder="Nothing selected">
+						{options.map((option) => (
+							<Select.Option key={option.value} value={option.value}>
+								<Text weight="medium">{option.label}</Text>
+								<Text weight="regular" color="neutral-faded">
+									{option.subtitle}
+								</Text>
+							</Select.Option>
+						))}
+					</Select.Custom>
+				</Example.Item>
+
+				<Example.Item title="renderValue, single">
+					<Select.Custom
+						name="animal"
+						defaultValue="1"
+						placeholder="Nothing selected"
+						renderValue={(args) => <Badge>Title {args.value}</Badge>}
+					>
+						{options.map((option) => (
+							<Select.Option key={option.value} value={option.value}>
+								<Text weight="medium">{option.label}</Text>
+								<Text weight="regular" color="neutral-faded">
+									{option.subtitle}
+								</Text>
+							</Select.Option>
+						))}
+					</Select.Custom>
+				</Example.Item>
+
+				<Example.Item title="renderValue, multiple">
+					<Select.Custom
+						name="animal"
+						defaultValue={["1"]}
+						multiple
+						placeholder="Nothing selected"
+						renderValue={(args) => <Badge>Titles {args.value.join(", ")}</Badge>}
+					>
+						{options.map((option) => (
+							<Select.Option key={option.value} value={option.value}>
+								<Text weight="medium">{option.label}</Text>
+								<Text weight="regular" color="neutral-faded">
+									{option.subtitle}
+								</Text>
+							</Select.Option>
+						))}
+					</Select.Custom>
+				</Example.Item>
+			</Example>
+		);
+	},
 };
 
 export const error: StoryObj = {
