@@ -10,6 +10,7 @@ import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
 import SelectOption from "./SelectOption";
 import SelectOptionGroup from "./SelectOptionGroup";
+import View from "components/View";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const {
@@ -22,6 +23,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		width = "trigger",
 		position,
 		fallbackPositions,
+		renderValue: passedRenderValue,
 	} = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
 	const searchStringRef = React.useRef<string>("");
@@ -63,7 +65,9 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 						}
 					},
 					startSlot:
-						option?.startSlot || (hasValue && <Icon svg={selected ? CheckmarkIcon : null} />),
+						option?.startSlot !== undefined
+							? option.startSlot
+							: hasValue && <Icon svg={selected ? CheckmarkIcon : null} />,
 					attributes: {
 						...component.props.attributes,
 						ref: selected ? initialFocusRef : undefined,
@@ -114,6 +118,27 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		}, 1000);
 	};
 
+	const renderValue = () => {
+		if (passedRenderValue) {
+			// Returning the same call for correct type inference
+			if (multiple) return passedRenderValue({ value });
+			return passedRenderValue({ value });
+		}
+
+		if (selectedOptions.length === 1) return selectedOptions[0].children;
+		if (selectedOptions.length > 1) {
+			return (
+				<View direction="row" gap={4}>
+					{selectedOptions.map((option) => (
+						<View.Item key={option.value}>{option.children}</View.Item>
+					))}
+				</View>
+			);
+		}
+
+		return null;
+	};
+
 	return (
 		<SelectRoot {...props}>
 			{(props) => {
@@ -142,7 +167,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 
 								return (
 									<SelectTrigger {...triggerProps} value={value}>
-										{selectedOptions?.map((option) => option.children).join(", ")}
+										{renderValue()}
 									</SelectTrigger>
 								);
 							}}

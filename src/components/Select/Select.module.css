@@ -80,6 +80,17 @@
 	z-index: 5;
 }
 
+.group-label {
+	margin-inline: calc(var(--rs-unit-x1) * -1 + 1px);
+	padding: var(--rs-unit-x2) calc(var(--rs-unit-x4) - 1px) var(--rs-unit-x1);
+}
+
+.group:not(:first-child) .group-label {
+	padding-top: var(--rs-unit-x3);
+	margin-top: var(--rs-unit-x1);
+	border-top: 1px solid var(--rs-color-border-neutral-faded);
+}
+
 @responsive .--size {
 	@value small {
 		--rs-select-gap: var(--rs-unit-x2);
