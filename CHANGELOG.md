@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.8.4-canary.1
+
+### Patch Changes
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added separate cjs build for the postcss config
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useOnClickOutside: fixed keyboard onClose interaction
+
 ## 3.8.4-canary.0
 
 ### Patch Changes

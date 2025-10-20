@@ -48,14 +48,18 @@ const useOnClickOutside = (
 		if (!handlerRef.current) return;
 		if (disabled) return;
 
-		const handleClick = (event: MouseEvent) => {
-			if (event.button === 2) return;
+		const handleClick = (event: MouseEvent | TouchEvent) => {
+			if ("button" in event && event.button === 2) return;
 			if (isMouseDownInsideRef.current) return;
 			handlerRef.current?.(event);
 		};
 
-		document.addEventListener("click", handleClick, { passive: true });
-		return () => document.removeEventListener("click", handleClick);
+		document.addEventListener("mouseup", handleClick, { passive: true });
+		document.addEventListener("touchend", handleClick, { passive: true });
+		return () => {
+			document.removeEventListener("mouseup", handleClick);
+			document.removeEventListener("touchend", handleClick);
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [handlerRef, disabled, ...refs]);
 };

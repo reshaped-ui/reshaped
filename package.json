@@ -1,7 +1,7 @@
 {
 	"name": "reshaped",
 	"description": "Professionally crafted design system in React & Figma for building products of any scale and complexity",
-	"version": "3.8.4-canary.0",
+	"version": "3.8.4-canary.1",
 	"license": "MIT",
 	"email": "hello@reshaped.so",
 	"homepage": "https://reshaped.so",
@@ -49,7 +49,8 @@
 		},
 		"./config/postcss": {
 			"types": "./dist/config/postcss.d.ts",
-			"import": "./dist/config/postcss.js"
+			"import": "./dist/config/postcss.js",
+			"default": "./dist/config/postcss.cjs"
 		},
 		"./config/tailwind": {
 			"types": "./dist/config/tailwind.d.ts",
