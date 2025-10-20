@@ -2,12 +2,14 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.8.3"
+    "reshaped": "3.8.4-canary.0"
   },
   "changesets": [
     "fluffy-oranges-dress",
     "orange-knives-wave",
     "pink-bulldogs-rest",
+    "slow-chefs-rule",
+    "soft-flowers-eat",
     "tender-pots-deny",
     "wet-bananas-swim"
   ]
