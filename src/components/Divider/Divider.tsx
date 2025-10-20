@@ -5,11 +5,20 @@ import type * as T from "./Divider.types";
 import s from "./Divider.module.css";
 
 const Divider: React.FC<T.Props> = (props) => {
-	const { vertical, blank, children, contentPosition = "center", className, attributes } = props;
+	const {
+		vertical,
+		blank,
+		children,
+		contentPosition = "center",
+		color,
+		className,
+		attributes,
+	} = props;
 	const rootClassNames = classNames(
 		s.root,
 		className,
 		blank && s["--blank"],
+		color && s[`--color-${color}`],
 		children ? s[`--content-position-${contentPosition}`] : undefined,
 		...responsiveClassNames(s, "--vertical", vertical)
 	);

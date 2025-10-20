@@ -92,6 +92,14 @@
 	}
 }
 
+.root.--variant-ghost {
+	--rs-textarea-border-color: transparent;
+
+	& .input {
+		background: transparent;
+	}
+}
+
 .root.--variant-headless {
 	--rs-textarea-border-color: transparent;
 

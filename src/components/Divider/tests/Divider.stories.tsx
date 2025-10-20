@@ -35,6 +35,20 @@ export const rendering: StoryObj = {
 	},
 };
 
+export const color: StoryObj = {
+	name: "color",
+	render: () => (
+		<Example>
+			<Example.Item title="neutral-faded">
+				<Divider color="neutral-faded" />
+			</Example.Item>
+			<Example.Item title="neutral">
+				<Divider color="neutral" />
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const vertical: StoryObj = {
 	name: "vertical",
 	render: () => (

@@ -70,6 +70,10 @@ const Demo: React.FC<
 	);
 };
 
+export const foo = () => {
+	return <Demo />;
+};
+
 export const position = {
 	name: "position",
 	render: () => {

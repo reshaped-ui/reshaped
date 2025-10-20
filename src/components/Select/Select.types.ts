@@ -45,7 +45,7 @@ type BaseFragment = {
 	/** Component size */
 	size?: Size;
 	/** Component render variant */
-	variant?: "outline" | "faded" | "headless";
+	variant?: "outline" | "faded" | "ghost" | "headless";
 	/** Disable the select user interaction and form submission */
 	disabled?: boolean;
 	/** Placeholder text when there is no value selected */

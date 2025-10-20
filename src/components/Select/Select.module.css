@@ -167,6 +167,7 @@
 	}
 }
 
+.root.--variant-ghost,
 .root.--variant-headless {
 	background: transparent;
 
@@ -178,7 +179,13 @@
 	&.--status-error,
 	&.--status-error:focus-within {
 		border-color: transparent;
+	}
+}
 
+.root.--variant-headless {
+	&:focus-within,
+	&.--status-error,
+	&.--status-error:focus-within {
 		&::after {
 			box-shadow: none;
 		}

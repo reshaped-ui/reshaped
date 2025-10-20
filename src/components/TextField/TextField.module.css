@@ -205,6 +205,12 @@
 	background: var(--rs-color-background-neutral-faded);
 }
 
+.root.--variant-ghost {
+	--rs-text-field-border-color: transparent;
+
+	background: transparent;
+}
+
 .root.--variant-headless {
 	--rs-text-field-border-color: transparent;
 	--rs-text-field-focus-border-color: transparent;
