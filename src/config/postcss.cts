@@ -15,7 +15,7 @@ export const config = {
 	},
 };
 
-export default function getConfig(options: { themeMediaCSSPath?: string }) {
+export const getConfig = (options: { themeMediaCSSPath: string }) => {
 	const { themeMediaCSSPath = defaultThemeMediaCSSPath } = options;
 
 	return {
@@ -27,4 +27,4 @@ export default function getConfig(options: { themeMediaCSSPath?: string }) {
 			cssnano: { preset: ["default", { calc: false }] },
 		},
 	};
-}
+};

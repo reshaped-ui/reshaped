@@ -1,5 +1,29 @@
 # Changelog
 
+## 3.8.5
+
+### Patch Changes
+
+- [`e73eede`](https://github.com/reshaped-ui/reshaped/commit/e73eede89aee9160cc3245499a036a7b85121b39) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated cjs postcss config exports
+
+## 3.8.4
+
+### Patch Changes
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed compound component imports from within RSC in Next
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed esm node imports of configuration files
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Removed the outdated cjs build
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added separate cjs build for the postcss config
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useOnClickOutside: fixed keyboard onClose interaction
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Fixed incorrect ActionableRef types
+
+- [`bdc9194`](https://github.com/reshaped-ui/reshaped/commit/bdc9194878facb37c203aae0419945cea600c9ed) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Preserver content box styles to support custom css overrides
+
 ## 3.8.4-canary.1
 
 ### Patch Changes
