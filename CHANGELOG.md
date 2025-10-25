@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.5
+
+### Patch Changes
+
+- [`e73eede`](https://github.com/reshaped-ui/reshaped/commit/e73eede89aee9160cc3245499a036a7b85121b39) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated cjs postcss config exports
+
 ## 3.8.4
 
 ### Patch Changes
