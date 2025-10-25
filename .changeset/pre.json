@@ -1,0 +1,12 @@
+{
+  "mode": "exit",
+  "tag": "canary",
+  "initialVersions": {
+    "reshaped": "3.8.5"
+  },
+  "changesets": [
+    "fast-vans-kiss",
+    "swift-turtles-relax",
+    "thirty-dragons-float"
+  ]
+}

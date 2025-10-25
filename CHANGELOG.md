@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.9.0-canary.0
+
+### Minor Changes
+
+- [#477](https://github.com/reshaped-ui/reshaped/pull/477) [`6d73d64`](https://github.com/reshaped-ui/reshaped/commit/6d73d6448297fee5b580e12797a1c76db31697c2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Select: renamed OptionGroup to Group, old naming is still available for backwards compatibility
+  - Select: made Group label optional
+  - Select: added support for custom children components in Select.Custom
+
+- [#481](https://github.com/reshaped-ui/reshaped/pull/481) [`62441ec`](https://github.com/reshaped-ui/reshaped/commit/62441ecab868b8060e755f45dd37cb41204a6458) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Divider: Added offset property
+  - Divider: Added color property
+  - Select, DropdownMenu, Popover, Tooltip, Flyout: Added positionRef prop to calculate the position of the content relative to a different element
+
+- [#476](https://github.com/reshaped-ui/reshaped/pull/476) [`d8eb69b`](https://github.com/reshaped-ui/reshaped/commit/d8eb69b9f6ba85b395fb86f2970deb86da83d695) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Select: Fixed react node rendering of the selected value
+  - Select: Support passing null as startSlot to hide the default checkmark icon
+  - Select: Added `renderValue` prop to customize the value rendering in custom select
+
 ## 3.8.5
 
 ### Patch Changes
