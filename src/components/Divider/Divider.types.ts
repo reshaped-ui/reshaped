@@ -6,6 +6,8 @@ export type Props = {
 	blank?: boolean;
 	/** Change component to render vertically */
 	vertical?: G.Responsive<boolean>;
+	/** Offset the divider from the container bounds */
+	offset?: string;
 	/** Color of the divider
 	 * @default "neutral-faded"
 	 */

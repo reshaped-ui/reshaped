@@ -7,10 +7,8 @@ import type * as T from "./Flyout.types";
 const FlyoutUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (props) => {
 	const { defaultActive, onClose, onOpen } = props;
 	const [active, setActive] = React.useState(defaultActive || false);
-	console.log("active", active);
 
 	const handleClose: T.Props["onClose"] = (args) => {
-		console.log("close");
 		setActive(false);
 		onClose?.(args);
 	};
@@ -19,10 +17,6 @@ const FlyoutUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (prop
 		setActive(true);
 		onOpen?.();
 	};
-
-	React.useEffect(() => {
-		console.log("mount");
-	}, []);
 
 	return (
 		<FlyoutControlled

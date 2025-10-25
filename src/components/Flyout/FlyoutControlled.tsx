@@ -50,6 +50,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		instanceRef,
 		containerRef,
 		initialFocusRef,
+		positionRef,
 	} = props;
 	const fallbackPositions =
 		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
@@ -98,7 +99,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
 	// eslint-disable-next-line react-hooks/refs
 	const flyout = useFlyout({
-		triggerElRef,
+		triggerElRef: positionRef ?? triggerElRef,
 		flyoutElRef,
 		// eslint-disable-next-line react-hooks/refs
 		triggerBounds: originCoordinates ?? triggerBoundsRef.current,
@@ -222,10 +223,11 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [isRendered, handleOpen, handleClose]);
 
 	const handleTriggerMouseDown = React.useCallback(() => {
-		const rect = triggerElRef.current?.getBoundingClientRect();
+		const triggerEl = positionRef?.current ?? triggerElRef.current;
+		const rect = triggerEl?.getBoundingClientRect();
 		if (!rect) return;
 		triggerBoundsRef.current = rect;
-	}, [triggerElRef]);
+	}, [triggerElRef, positionRef]);
 
 	const handleContentMouseDown = () => {
 		lockedBlurEffects.current = true;

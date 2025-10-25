@@ -2,6 +2,7 @@ import type React from "react";
 import { classNames, responsiveClassNames } from "utilities/props";
 import Text from "components/Text";
 import type * as T from "./Divider.types";
+import type * as G from "types/global";
 import s from "./Divider.module.css";
 
 const Divider: React.FC<T.Props> = (props) => {
@@ -11,6 +12,7 @@ const Divider: React.FC<T.Props> = (props) => {
 		children,
 		contentPosition = "center",
 		color,
+		offset,
 		className,
 		attributes,
 	} = props;
@@ -35,6 +37,7 @@ const Divider: React.FC<T.Props> = (props) => {
 			role="separator"
 			aria-orientation={ariaOrientation}
 			className={rootClassNames}
+			style={{ ...attributes?.style, "--rs-divider-offset": offset } as G.StyleAttribute}
 		>
 			{children && (
 				<Text color="neutral-faded" variant="caption-1" className={s.label}>
