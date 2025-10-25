@@ -11,6 +11,7 @@ export type Props = Pick<
 	| "disabled"
 	| "disableContentHover"
 	| "containerRef"
+	| "positionRef"
 	| "contentGap"
 	| "contentShift"
 	| "originCoordinates"

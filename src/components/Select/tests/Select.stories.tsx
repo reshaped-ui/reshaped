@@ -560,10 +560,34 @@ export const variant: StoryObj = {
 				</Select.Custom>
 			</Example.Item>
 
+			<Example.Item title="variant: ghost, native">
+				<Select
+					variant="ghost"
+					name="animal-3"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
+					<option value="dog">Dog</option>
+					<option value="turtle">Turtle</option>
+				</Select>
+			</Example.Item>
+
+			<Example.Item title="variant: ghost, custom">
+				<Select.Custom
+					variant="ghost"
+					name="animal-4"
+					placeholder="Select an animal"
+					inputAttributes={{ "aria-label": "Select an animal" }}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select.Custom>
+			</Example.Item>
+
 			<Example.Item title="variant: headless, native">
 				<Select
 					variant="headless"
-					name="animal-3"
+					name="animal-5"
 					placeholder="Select an animal"
 					inputAttributes={{ "aria-label": "Select an animal" }}
 				>
@@ -575,7 +599,7 @@ export const variant: StoryObj = {
 			<Example.Item title="variant: headless, custom">
 				<Select.Custom
 					variant="headless"
-					name="animal-4"
+					name="animal-6"
 					placeholder="Select an animal"
 					inputAttributes={{ "aria-label": "Select an animal" }}
 				>
@@ -892,7 +916,9 @@ export const testComposition: StoryObj = {
 						<Select.Option value="dog">Dog</Select.Option>
 						<Select.Option value="turtle">Turtle</Select.Option>
 					</Select.Group>
-					<Select.Group>Hello</Select.Group>
+					<Select.Group>
+						<div>hello</div>
+					</Select.Group>
 				</Select.Custom>
 			</Example.Item>
 		</Example>

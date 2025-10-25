@@ -45,7 +45,7 @@ type BaseFragment = {
 	/** Component size */
 	size?: Size;
 	/** Component render variant */
-	variant?: "outline" | "faded" | "headless";
+	variant?: "outline" | "faded" | "ghost" | "headless";
 	/** Disable the select user interaction and form submission */
 	disabled?: boolean;
 	/** Placeholder text when there is no value selected */
@@ -76,7 +76,7 @@ export type CustomFragment = {
 	// TODO: Replace / add trigger attributes in v4, currently they're passed to the Actionable component instead of the input to enable Flyout positioning
 	/** Additional attributes for the trigger element */
 	inputAttributes?: ActionableProps["attributes"];
-} & Pick<DropdownMenuProps, "position" | "width" | "fallbackPositions">;
+} & Pick<DropdownMenuProps, "position" | "width" | "fallbackPositions" | "positionRef">;
 
 export type NativeFragment = {
 	/** Options for the select */

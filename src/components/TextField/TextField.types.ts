@@ -43,7 +43,7 @@ export type BaseProps = {
 	/** Component render variant
 	 * @default "outline"
 	 */
-	variant?: "outline" | "faded" | "headless";
+	variant?: "outline" | "faded" | "ghost" | "headless";
 	/** Callback when the text field value changes */
 	onChange?: G.ChangeHandler<string>;
 	/** Callback when the text field is focused */

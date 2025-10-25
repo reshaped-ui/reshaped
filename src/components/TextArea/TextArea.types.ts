@@ -16,7 +16,7 @@ type BaseProps = {
 	/** Component render variant
 	 * @default "outline"
 	 */
-	variant?: "outline" | "faded" | "headless";
+	variant?: "outline" | "faded" | "ghost" | "headless";
 	/** Disable the text area user interaction */
 	disabled?: boolean;
 	/** Placeholder text when there is no value */

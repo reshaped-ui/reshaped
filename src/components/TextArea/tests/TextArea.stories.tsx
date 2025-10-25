@@ -25,6 +25,10 @@ export const variants = {
 				<TextArea variant="faded" name="Name" placeholder="Enter your name" />
 			</Example.Item>
 
+			<Example.Item title="variant: ghost">
+				<TextArea variant="ghost" name="Name" placeholder="Enter your name" />
+			</Example.Item>
+
 			<Example.Item title="variant: headless">
 				<TextArea variant="headless" name="Name" placeholder="Enter your name" />
 			</Example.Item>

@@ -162,6 +162,8 @@ type BaseProps = {
 	 * @default document.body
 	 */
 	containerRef?: React.RefObject<HTMLElement | null>;
+	/** Element used to calculate the position of the content against */
+	positionRef?: React.RefObject<HTMLElement | null>;
 	/** Element to focus when the content is opened */
 	initialFocusRef?: React.RefObject<HTMLElement | null>;
 };

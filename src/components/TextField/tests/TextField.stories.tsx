@@ -6,8 +6,10 @@ import View from "components/View";
 import Text from "components/Text";
 import Button from "components/Button";
 import Badge from "components/Badge";
+import Select from "components/Select";
 import { expect, fn, userEvent } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
+import Divider from "components/Divider";
 
 export default {
 	title: "Components/TextField",
@@ -25,6 +27,10 @@ export const variant = {
 		<Example>
 			<Example.Item title="variant: faded">
 				<TextField variant="faded" name="Name" placeholder="Enter your name" />
+			</Example.Item>
+
+			<Example.Item title="variant: headless">
+				<TextField variant="ghost" name="Name" placeholder="Enter your name" />
 			</Example.Item>
 
 			<Example.Item title="variant: headless">
@@ -369,4 +375,27 @@ export const formControl = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+export const foo = () => {
+	return (
+		<TextField
+			name="test-name"
+			inputAttributes={{ "aria-label": "Label" }}
+			endSlotPadding={0}
+			endSlot={
+				<View gap={0} direction="row" align="stretch">
+					<Divider color="neutral" vertical />
+					<Select.Custom
+						name="test-name"
+						inputAttributes={{ "aria-label": "Label" }}
+						variant="ghost"
+					>
+						<Select.Option value="dog">Dog</Select.Option>
+						<Select.Option value="turtle">Turtle</Select.Option>
+					</Select.Custom>
+				</View>
+			}
+		/>
+	);
 };

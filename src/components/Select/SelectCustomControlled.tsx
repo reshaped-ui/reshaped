@@ -23,6 +23,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		width = "trigger",
 		position,
 		fallbackPositions,
+		positionRef,
 		renderValue: passedRenderValue,
 	} = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
@@ -150,11 +151,12 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 						position={position ?? "bottom"}
 						fallbackPositions={fallbackPositions ?? (position ? undefined : ["bottom", "top"])}
 						fallbackAdjustLayout
-						fallbackMinHeight="150px"
+						fallbackMinHeight="220px"
 						borderRadius={responsivePropDependency(size, (size) =>
 							size === "large" || size === "xlarge" ? "medium" : "small"
 						)}
 						initialFocusRef={initialFocusRef}
+						positionRef={positionRef}
 					>
 						<DropdownMenu.Trigger>
 							{(attributes) => {

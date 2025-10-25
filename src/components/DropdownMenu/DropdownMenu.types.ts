@@ -26,6 +26,7 @@ export type Props = Pick<
 	| "disableCloseOnOutsideClick"
 	| "instanceRef"
 	| "containerRef"
+	| "positionRef"
 	| "originCoordinates"
 	| "borderRadius"
 	| "elevation"

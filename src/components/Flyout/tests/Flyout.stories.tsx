@@ -718,6 +718,42 @@ export const containerRef: StoryObj = {
 	},
 };
 
+export const positionRef: StoryObj = {
+	name: "positionRef",
+	render: () => {
+		const ref = React.useRef<HTMLButtonElement>(null);
+
+		return (
+			<View gap={10}>
+				<View.Item>
+					<Flyout position="bottom" positionRef={ref} width="trigger" active>
+						<Flyout.Trigger>
+							{(attributes) => <Button attributes={attributes}>Trigger</Button>}
+						</Flyout.Trigger>
+						<Flyout.Content
+							attributes={{
+								style: {
+									background: "var(--rs-color-background-elevation-overlay)",
+									padding: "var(--rs-unit-x4)",
+									borderRadius: "var(--rs-radius-medium)",
+									border: "1px solid var(--rs-color-border-neutral-faded)",
+									boxSizing: "border-box",
+								},
+							}}
+						>
+							Content
+						</Flyout.Content>
+					</Flyout>
+				</View.Item>
+
+				<Button onClick={() => {}} ref={ref}>
+					Trigger 2
+				</Button>
+			</View>
+		);
+	},
+};
+
 export const initialFocusRef: StoryObj = {
 	name: "initialFocusRef",
 	render: () => {

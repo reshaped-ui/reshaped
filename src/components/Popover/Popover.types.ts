@@ -27,6 +27,7 @@ export type Props = Pick<
 	| "disableCloseOnOutsideClick"
 	| "autoFocus"
 	| "containerRef"
+	| "positionRef"
 	| "initialFocusRef"
 	| "originCoordinates"
 > & {

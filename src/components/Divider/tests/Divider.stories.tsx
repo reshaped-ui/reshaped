@@ -35,6 +35,20 @@ export const rendering: StoryObj = {
 	},
 };
 
+export const color: StoryObj = {
+	name: "color",
+	render: () => (
+		<Example>
+			<Example.Item title="neutral-faded">
+				<Divider color="neutral-faded" />
+			</Example.Item>
+			<Example.Item title="neutral">
+				<Divider color="neutral" />
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const vertical: StoryObj = {
 	name: "vertical",
 	render: () => (
@@ -66,6 +80,24 @@ export const vertical: StoryObj = {
 		expect(el).toHaveAttribute("aria-orientation", "vertical");
 		expect(elResponsive).not.toHaveAttribute("aria-orientation");
 	},
+};
+
+export const offset: StoryObj = {
+	name: "offset",
+	render: () => (
+		<Example>
+			<Example.Item title="offset: 10px">
+				<View width="100px" backgroundColor="neutral" paddingBlock={4}>
+					<Divider offset="40px" />
+				</View>
+			</Example.Item>
+			<Example.Item title="offset: 10px, vertical">
+				<View height="100px" backgroundColor="neutral" paddingInline={4} width="33px">
+					<Divider vertical offset="40px" />
+				</View>
+			</Example.Item>
+		</Example>
+	),
 };
 
 export const label = {
