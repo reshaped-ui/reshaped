@@ -41,11 +41,13 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js"
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
 		},
 		"./themes": {
 			"types": "./dist/themes/index.d.ts",
-			"import": "./dist/themes/index.js"
+			"import": "./dist/themes/index.js",
+			"default": "./dist/themes/index.js"
 		},
 		"./config/postcss": {
 			"types": "./dist/config/postcss.d.ts",
@@ -54,11 +56,13 @@
 		},
 		"./config/tailwind": {
 			"types": "./dist/config/tailwind.d.ts",
-			"import": "./dist/config/tailwind.js"
+			"import": "./dist/config/tailwind.js",
+			"default": "./dist/config/tailwind.js"
 		},
 		"./bundle": {
 			"types": "./dist/bundle.d.ts",
-			"import": "./dist/bundle.js"
+			"import": "./dist/bundle.js",
+			"default": "./dist/bundle.js"
 		},
 		"./bundle.css": "./dist/bundle.css",
 		"./themes/reshaped/*": "./dist/themes/reshaped/*",
