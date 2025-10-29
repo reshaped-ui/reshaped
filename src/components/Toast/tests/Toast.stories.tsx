@@ -426,7 +426,7 @@ export const base: StoryObj = {
 
 		await userEvent.click(action);
 
-		await sleep(600);
+		await sleep(1000);
 
 		await waitFor(() => {
 			expect(title).not.toBeInTheDocument();

@@ -1,7 +1,11 @@
-import path from "path";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve } from "node:path";
 import type { StorybookConfig } from "@storybook/react-vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { mergeConfig, UserConfig } from "vite";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const config: StorybookConfig = {
 	framework: "@storybook/react-vite",
@@ -27,7 +31,7 @@ const config: StorybookConfig = {
 	addons: [
 		"@storybook/addon-vitest",
 		"@storybook/addon-a11y",
-		"./plugins/preset.js",
+		"./plugins/preset.mjs",
 		{
 			name: "@storybook/addon-docs",
 			options: {
@@ -41,7 +45,7 @@ const config: StorybookConfig = {
 		return mergeConfig(config, {
 			plugins: [tsconfigPaths()],
 			css: {
-				postcss: path.resolve(__dirname),
+				postcss: resolve(__dirname),
 			},
 			build: {
 				rollupOptions: {

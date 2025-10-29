@@ -10,7 +10,7 @@ export default defineConfig([
 	esConfig.configs.recommended,
 	...tsConfig.configs.recommended,
 	prettierPlugin,
-	reactHooksPlugin.configs["recommended-latest"],
+	reactHooksPlugin.configs.flat.recommended,
 	jsxA11yPlugin.flatConfigs.recommended,
 	{
 		rules: {
