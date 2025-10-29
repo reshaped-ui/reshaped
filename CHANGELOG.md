@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.8.6
+
+### Patch Changes
+
+- [`a9226d2`](https://github.com/reshaped-ui/reshaped/commit/a9226d283f95b6dcc4cde90f1b6bdbbc2e1198e6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added default entrypoints in package.json
+
+- [`47abe60`](https://github.com/reshaped-ui/reshaped/commit/47abe60ad3c1d126c9cd8e84f927a1dba046b3d8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed rounded ghost button radius
+
+- [#486](https://github.com/reshaped-ui/reshaped/pull/486) [`9c75b5b`](https://github.com/reshaped-ui/reshaped/commit/9c75b5bb0ca288f31950e7d7cf3b1c7cb21f4fc3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated theme css selector to ~=
+
+- [`47abe60`](https://github.com/reshaped-ui/reshaped/commit/47abe60ad3c1d126c9cd8e84f927a1dba046b3d8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Added correct font-weight for body, caption and featured variants
+
 ## 3.8.5
 
 ### Patch Changes
