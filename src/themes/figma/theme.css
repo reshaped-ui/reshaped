@@ -1,5 +1,5 @@
 
-			[data-rs-theme="figma"],[data-rs-theme*=" figma "] {
+			[data-rs-theme~="figma"] {
 					--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-body: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
@@ -115,7 +115,7 @@
 --rs-z-index-fixed: 200;
 			}
 		
-			[data-rs-theme="figma"][data-rs-color-mode="light"],[data-rs-theme*=" figma "][data-rs-color-mode="light"] {
+			[data-rs-theme~="figma"][data-rs-color-mode="light"] {
 					--rs-color-background-primary: #0D99FF;
 --rs-color-background-primary-faded: #E5F4FF;
 --rs-color-border-primary: #007BE5;
@@ -171,7 +171,7 @@
 --rs-color-rgb-background-page-faded: 250.002, 250.002, 250.002;
 			}
 		
-			[data-rs-theme="figma"][data-rs-color-mode="dark"],[data-rs-theme*=" figma "][data-rs-color-mode="dark"] {
+			[data-rs-theme~="figma"][data-rs-color-mode="dark"] {
 					--rs-color-background-primary: #0C8CE9;
 --rs-color-background-primary-faded: #394360;
 --rs-color-border-primary: #7CC4F8;

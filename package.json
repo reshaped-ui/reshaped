@@ -76,7 +76,7 @@
 		"commit": "git-cz",
 		"changeset": "changeset",
 		"build": "pnpm clean && pnpm build:stories && pnpm build:esm && pnpm build:css && pnpm build:bundle",
-		"build:themes": "node bin/cli.js theming --config dist/cjs/cli/theming/reshaped.config.js --output src/themes",
+		"build:themes": "node bin/cli.js theming --config dist/cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
 		"build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",
