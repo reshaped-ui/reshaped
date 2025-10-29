@@ -124,7 +124,10 @@
 }
 
 .root.--rounded {
-	border-radius: var(--rs-radius-circular);
+	&,
+	&::before {
+		border-radius: var(--rs-radius-circular);
+	}
 }
 
 @responsive .--size {
