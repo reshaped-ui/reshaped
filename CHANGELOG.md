@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.8.7
+
+### Patch Changes
+
+- [`6dd6376`](https://github.com/reshaped-ui/reshaped/commit/6dd6376cb2e714e7690f3e5f4caf6f1ad37126b8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - DropdownMenu: fixed onClick handlers in submenu not firing
+
+- [`f5eec64`](https://github.com/reshaped-ui/reshaped/commit/f5eec64fc8b55637fe4e120bbefcca4b75428379) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Card: Fixed content overlaying the card border
+
 ## 3.8.6
 
 ### Patch Changes
