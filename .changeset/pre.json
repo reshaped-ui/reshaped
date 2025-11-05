@@ -2,10 +2,15 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.8.5"
+    "reshaped": "3.9.0-canary.0"
   },
   "changesets": [
     "fast-vans-kiss",
+    "gentle-pumas-reply",
+    "perky-deer-shave",
+    "real-snakes-give",
+    "sour-clubs-cut",
+    "stupid-planets-deliver",
     "swift-turtles-relax",
     "thirty-dragons-float"
   ]

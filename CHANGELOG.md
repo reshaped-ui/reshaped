@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.9.0-canary.1
+
+### Patch Changes
+
+- [`7387577`](https://github.com/reshaped-ui/reshaped/commit/7387577c1330237684912e72b0e18e15f510629f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed horizontal aligner padding value for icon only buttons
+
+- [`d8fec9f`](https://github.com/reshaped-ui/reshaped/commit/d8fec9f6677aadc032e382c951795e0ee14017a3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated dependencies
+
+- [`7387577`](https://github.com/reshaped-ui/reshaped/commit/7387577c1330237684912e72b0e18e15f510629f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Icon: Added color transition to align with Text
+
+- [`d7745fb`](https://github.com/reshaped-ui/reshaped/commit/d7745fb80bb5f2538e32cfdd9e3f3680653003e3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Flyout: Improved the speed of switching between within a tooltip group
+  - DropdownMenu: Kept the hide animation when triggerType is hover
+
+- [`1ec5ad2`](https://github.com/reshaped-ui/reshaped/commit/1ec5ad23353d9fe2b2d1c1d17f5008747f1a4f18) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Theme: Moved global css variables definition to data-rs-theme elements
+
 ## 3.9.0-canary.0
 
 ### Minor Changes
@@ -15,6 +30,7 @@
 - [#476](https://github.com/reshaped-ui/reshaped/pull/476) [`d8eb69b`](https://github.com/reshaped-ui/reshaped/commit/d8eb69b9f6ba85b395fb86f2970deb86da83d695) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Select: Fixed react node rendering of the selected value
   - Select: Support passing null as startSlot to hide the default checkmark icon
   - Select: Added `renderValue` prop to customize the value rendering in custom select
+
 ## 3.8.7
 
 ### Patch Changes
