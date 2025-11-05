@@ -127,7 +127,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const clearTimer = React.useCallback(() => {
 		if (timerRef.current) clearTimeout(timerRef.current);
-	}, [timerRef]);
+	}, []);
 
 	/**
 	 * Component open/close handlers
@@ -200,19 +200,17 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				() => {
 					handleOpen();
 				},
-				groupTimeouts && cooldown.status === "warming"
-					? timeouts.mouseEnter
-					: timeouts.mouseEnterShort
+				groupTimeouts && cooldown.status === "warming" ? timeouts.mouseEnter : 0
 			);
 		}
-	}, [clearTimer, timerRef, handleOpen, groupTimeouts]);
+	}, [clearTimer, handleOpen, groupTimeouts]);
 
 	const handleMouseLeave = React.useCallback(() => {
 		cooldown.cool();
 
 		clearTimer();
-		timerRef.current = setTimeout(() => handleClose({}), timeouts.mouseLeave);
-	}, [clearTimer, timerRef, handleClose]);
+		handleClose({});
+	}, [clearTimer, handleClose]);
 
 	const handleTriggerClick = React.useCallback(() => {
 		if (!isRendered) {

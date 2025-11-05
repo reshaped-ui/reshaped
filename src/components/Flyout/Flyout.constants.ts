@@ -1,8 +1,6 @@
 import type * as T from "./Flyout.types";
 
-export const mouseEnter = 800;
-export const mouseEnterShort = 100;
-export const mouseLeave = 150;
+export const mouseEnter = 600;
 
 export const defaultStyles: T.Styles = {
 	left: 0,

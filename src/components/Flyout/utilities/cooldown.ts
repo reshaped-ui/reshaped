@@ -1,5 +1,3 @@
-import * as timeouts from "../Flyout.constants";
-
 class Cooldown {
 	status: "warming" | "warm" | "cooling" | "cold" = "cold";
 
@@ -18,7 +16,7 @@ class Cooldown {
 		this.timer = setTimeout(() => {
 			this.status = "warm";
 			this.timer = undefined;
-		}, timeouts.mouseEnterShort);
+		}, 100);
 	};
 
 	cool = () => {
