@@ -16,7 +16,7 @@
 }
 
 .root {
-	/* In case parent changes its color */
+	/* In case parent changes its color, aligned with Icon */
 	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
 }
 

@@ -4,6 +4,9 @@
 	justify-content: center;
 	align-items: center;
 	aspect-ratio: 1;
+
+	/* In case parent changes its color, aligned with Text */
+	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
 }
 
 .--auto {

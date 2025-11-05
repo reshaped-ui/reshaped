@@ -586,7 +586,7 @@ export const aligner = {
 				<View padding={4} borderColor="neutral-faded" direction="row" gap={2}>
 					<View.Item grow>Content</View.Item>
 					<Button.Aligner>
-						<Button icon={IconZap} variant="ghost" />
+						<Button icon={IconZap} variant="ghost" size="small" />
 					</Button.Aligner>
 				</View>
 			</Example.Item>

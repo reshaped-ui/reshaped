@@ -105,9 +105,8 @@
 }
 
 .root.--icon-only {
-	& .icon {
-		margin: 0 calc(var(--rs-unit-x1) * -1);
-	}
+	/* Reduce the padding to make sure the button keeps the square shape */
+	--rs-p-h: calc(var(--rs-button-p-h) - var(--rs-unit-x1) / 2);
 }
 
 .root.--loading {

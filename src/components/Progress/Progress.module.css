@@ -11,8 +11,9 @@
 	height: 100%;
 	width: 100%;
 	background: var(--rs-color-background-neutral-faded);
-	transition: transform var(--rs-easing-decelerate);
-	transition-duration: var(--rs-progress-duration, var(--rs-duration-slow));
+	transition: var(--rs-easing-decelerate);
+	transition-property: transform, background-color;
+	transition-duration: var(--rs-progress-duration, var(--rs-duration-medium));
 	transform: translateX(var(--rs-progress-value));
 
 	[dir="rtl"] & {
