@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.8
+
+### Patch Changes
+
+- [`1ec5ad2`](https://github.com/reshaped-ui/reshaped/commit/1ec5ad23353d9fe2b2d1c1d17f5008747f1a4f18) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Theme: Moved global css variables definition to data-rs-theme elements
+
 ## 3.8.7
 
 ### Patch Changes
