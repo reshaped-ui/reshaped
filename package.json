@@ -46,7 +46,8 @@
 		},
 		"./themes": {
 			"types": "./dist/themes/index.d.ts",
-			"import": "./dist/themes/index.js"
+			"import": "./dist/themes/index.js",
+			"default": "./dist/themes/index.js"
 		},
 		"./config/postcss": {
 			"types": "./dist/config/postcss.d.ts",
@@ -55,11 +56,13 @@
 		},
 		"./config/tailwind": {
 			"types": "./dist/config/tailwind.d.ts",
-			"import": "./dist/config/tailwind.js"
+			"import": "./dist/config/tailwind.js",
+			"default": "./dist/config/tailwind.js"
 		},
 		"./bundle": {
 			"types": "./dist/bundle.d.ts",
-			"import": "./dist/bundle.js"
+			"import": "./dist/bundle.js",
+			"default": "./dist/bundle.js"
 		},
 		"./bundle.css": "./dist/bundle.css",
 		"./themes/reshaped/*": "./dist/themes/reshaped/*",
@@ -77,7 +80,7 @@
 		"commit": "git-cz",
 		"changeset": "changeset",
 		"build": "pnpm clean && pnpm build:esm && pnpm build:css && pnpm build:bundle",
-		"build:themes": "node bin/cli.js theming --config dist/cjs/cli/theming/reshaped.config.js --output src/themes",
+		"build:themes": "node bin/cli.js theming --config dist/cli/theming/reshaped.config.js --output src/themes",
 		"build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
 		"build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",

@@ -54,11 +54,9 @@ const useOnClickOutside = (
 			handlerRef.current?.(event);
 		};
 
-		document.addEventListener("mouseup", handleClick, { passive: true });
-		document.addEventListener("touchend", handleClick, { passive: true });
+		document.addEventListener("click", handleClick);
 		return () => {
-			document.removeEventListener("mouseup", handleClick);
-			document.removeEventListener("touchend", handleClick);
+			document.removeEventListener("click", handleClick);
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [handlerRef, disabled, ...refs]);

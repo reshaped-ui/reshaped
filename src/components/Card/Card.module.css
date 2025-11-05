@@ -1,8 +1,7 @@
 .root {
-	--rs-card-shadow-border: 0 0 0 1px var(--rs-color-border-neutral-faded) inset;
-	--rs-card-shadow-elevation: 0 0 transparent;
+	--rs-border-w: 1px;
 
-	box-shadow: var(--rs-card-shadow-border), var(--rs-card-shadow-elevation);
+	border: var(--rs-border-w) solid var(--rs-color-border-neutral-faded);
 	background: var(--rs-color-background-elevation-base);
 	color: var(--rs-color-foreground-neutral);
 	display: block;
@@ -20,9 +19,8 @@
 }
 
 .--elevated {
-	--rs-card-shadow-elevation: var(--rs-shadow-raised);
-
 	background: var(--rs-color-background-elevation-raised);
+	box-shadow: var(--rs-shadow-raised);
 }
 
 .--actionable:not(.--selected) {
@@ -32,7 +30,7 @@
 	color: inherit;
 
 	[data-rs-keyboard] &:focus {
-		--rs-card-shadow-border: var(--rs-shadow-focus);
+		box-shadow: var(--rs-shadow-focus);
 	}
 
 	&::before {

@@ -395,7 +395,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			handleClose({ reason: "outside-click" });
 		},
 		{
-			disabled: !isRendered || disableCloseOnOutsideClick,
+			disabled: Boolean(status !== "visible" || disableCloseOnOutsideClick),
 		}
 	);
 
