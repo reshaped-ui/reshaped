@@ -1,4 +1,13 @@
 @layer rs.reset {
+	[data-rs-theme] {
+		--rs-radius-circular: 9999px;
+		--rs-shadow-focus:
+			0 0 0 2px var(--rs-color-background-elevation-base), 0 0 0 4px var(--rs-color-border-primary);
+		--rs-shadow-focus-inset:
+			inset 0 0 0 2px var(--rs-color-border-primary),
+			inset 0 0 0 4px var(--rs-color-background-elevation-base);
+	}
+
 	[data-rs-theme] body,
 	[data-rs-theme] h1,
 	[data-rs-theme] h2,
