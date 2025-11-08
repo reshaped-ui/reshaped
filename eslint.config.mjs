@@ -1,10 +1,10 @@
-import { defineConfig, globalIgnores } from "eslint/config";
 import esConfig from "@eslint/js";
-import tsConfig from "typescript-eslint";
+import { defineConfig, globalIgnores } from "eslint/config";
+import importPlugin from "eslint-plugin-import";
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import prettierPlugin from "eslint-plugin-prettier/recommended";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
-import importPlugin from "eslint-plugin-import";
+import tsConfig from "typescript-eslint";
 
 export default defineConfig([
 	globalIgnores(["bin/*.js", "src/**/*.stories.tsx"]),
@@ -22,15 +22,7 @@ export default defineConfig([
 			"import/order": [
 				"error",
 				{
-					groups: [
-						"builtin",
-						"external",
-						"internal",
-						"parent",
-						"sibling",
-						"index",
-						"type",
-					],
+					groups: ["builtin", "external", "internal", "parent", "sibling", "index", "type"],
 					pathGroups: [
 						{
 							pattern: "@/**",
@@ -38,7 +30,8 @@ export default defineConfig([
 							position: "before",
 						},
 						{
-							pattern: "{components,hooks,utilities,config,constants,icons,styles,themes,types,cli,tests}/**",
+							pattern:
+								"{components,hooks,utilities,config,constants,icons,styles,themes,types,cli,tests}/**",
 							group: "internal",
 							position: "before",
 						},
