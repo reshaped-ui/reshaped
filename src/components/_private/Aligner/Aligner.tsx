@@ -8,8 +8,10 @@
  */
 
 import { classNames } from "utilities/props";
-import type * as T from "./Aligner.types";
+
 import s from "./Aligner.module.css";
+
+import type * as T from "./Aligner.types";
 
 const Aligner: React.FC<T.Props> = (props) => {
 	const { side: passedSide = "all", children, className, attributes } = props;

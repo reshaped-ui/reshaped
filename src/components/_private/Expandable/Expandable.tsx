@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
-import { onNextFrame } from "utilities/animation";
+
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import * as T from "./Expandable.types";
+import { onNextFrame } from "utilities/animation";
+import { classNames } from "utilities/props";
+
 import s from "./Expandable.module.css";
+import * as T from "./Expandable.types";
 
 const Expandable: React.FC<T.ContentProps> = (props) => {
 	const { children, active, attributes } = props;

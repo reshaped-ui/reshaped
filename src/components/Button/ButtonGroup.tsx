@@ -1,6 +1,8 @@
 import { classNames } from "utilities/props";
-import type * as T from "./Button.types";
+
 import s from "./Button.module.css";
+
+import type * as T from "./Button.types";
 
 const ButtonGroup: React.FC<T.GroupProps> = (props) => {
 	const { children, className, attributes } = props;

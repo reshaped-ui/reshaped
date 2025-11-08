@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import generateColors from "../generateColors";
 
 describe("themes/tokens/color/utilities/generateColors", () => {

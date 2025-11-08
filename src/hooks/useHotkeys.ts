@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import useSingletonHotkey, { type Hotkeys } from "./_private/useSingletonHotkeys";
 
 const useHotkeys = <Element extends HTMLElement>(

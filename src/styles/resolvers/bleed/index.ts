@@ -1,9 +1,10 @@
+import * as T from "styles/types";
 import {
 	responsiveClassNames,
 	responsiveVariables,
 	responsivePropDependency,
 } from "utilities/props";
-import * as T from "styles/types";
+
 import s from "./bleed.module.css";
 
 const bleed: T.StyleResolver<T.Bleed> = (value) => {

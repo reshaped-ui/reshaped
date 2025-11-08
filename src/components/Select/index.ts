@@ -1,7 +1,7 @@
 import Select from "./Select";
 import SelectCustom from "./SelectCustom";
-import SelectOption from "./SelectOption";
 import SelectGroup from "./SelectGroup";
+import SelectOption from "./SelectOption";
 
 const SelectRoot = Select as typeof Select & {
 	Custom: typeof SelectCustom;

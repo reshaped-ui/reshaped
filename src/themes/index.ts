@@ -1,6 +1,7 @@
 import transform from "themes/_generator/transform";
-import type * as T from "themes/_generator/types";
+
 import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
+import type * as T from "themes/_generator/types";
 
 /**
  * Exported types

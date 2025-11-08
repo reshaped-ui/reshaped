@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import {
 	focusFirstElement,
 	focusLastElement,
@@ -6,6 +7,7 @@ import {
 	focusPreviousElement,
 	getFocusableElements,
 } from "utilities/a11y";
+
 import useHotkeys from "./useHotkeys";
 
 type Props = {

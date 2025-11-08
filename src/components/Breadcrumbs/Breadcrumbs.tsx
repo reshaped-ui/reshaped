@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
-import View from "components/View";
+
+import Button from "components/Button";
 import Icon from "components/Icon";
 import Text from "components/Text";
-import Button from "components/Button";
+import View from "components/View";
 import IconChevronRight from "icons/ChevronRight";
 import IconDotsHorizontal from "icons/DotsHorizontal";
+import { classNames } from "utilities/props";
+
 import * as T from "./Breadcrumbs.types";
 
 const Breadcrumbs: React.FC<T.Props> = (props) => {

@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+
 import RadioGroupControlled from "./RadioGroupControlled";
+
 import type * as T from "./RadioGroup.types";
 
 const RadioGroupUncontrolled: React.FC<T.UncontrolledProps> = (props) => {

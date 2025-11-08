@@ -1,22 +1,25 @@
 "use client";
 
 import React from "react";
+
+import Overlay from "components/Overlay";
+import Text from "components/Text";
+import useElementId from "hooks/useElementId";
+import useHandlerRef from "hooks/useHandlerRef";
+import useResponsiveClientValue from "hooks/useResponsiveClientValue";
+import { resolveMixin } from "styles/mixin";
+import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import {
 	classNames,
 	responsiveVariables,
 	responsiveClassNames,
 	responsivePropDependency,
 } from "utilities/props";
-import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import { enableScroll, disableScroll } from "utilities/scroll";
-import useResponsiveClientValue from "hooks/useResponsiveClientValue";
-import Text from "components/Text";
-import Overlay from "components/Overlay";
-import useElementId from "hooks/useElementId";
-import type * as T from "./Modal.types";
+
 import s from "./Modal.module.css";
-import { resolveMixin } from "styles/mixin";
-import useHandlerRef from "hooks/useHandlerRef";
+
+import type * as T from "./Modal.types";
 
 const DRAG_THRESHOLD = 32;
 const DRAG_OPPOSITE_THRESHOLD = 100;

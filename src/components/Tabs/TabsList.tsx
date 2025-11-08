@@ -1,19 +1,22 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
-import useRTL from "hooks/useRTL";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
-import useFadeSide from "hooks/_private/useFadeSide";
+
 import Actionable from "components/Actionable";
 import Icon from "components/Icon";
-import IconChevronRight from "icons/ChevronRight";
+import useFadeSide from "hooks/_private/useFadeSide";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
+import useRTL from "hooks/useRTL";
 import IconChevronLeft from "icons/ChevronLeft";
-import TabsItem from "./TabsItem";
-import { useTabs } from "./TabsContext";
-import type * as T from "./Tabs.types";
+import IconChevronRight from "icons/ChevronRight";
+import { classNames } from "utilities/props";
+
 import s from "./Tabs.module.css";
+import { useTabs } from "./TabsContext";
+import TabsItem from "./TabsItem";
+
+import type * as T from "./Tabs.types";
 
 const findParentItem = (el: HTMLElement | null, rootEl: HTMLElement): HTMLElement | null => {
 	if (el === rootEl || !el) return null;

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import { lockScroll } from "utilities/scroll";
 
 const useScrollLock = (options?: {

@@ -1,6 +1,6 @@
-import type React from "react";
-import type { IconProps } from "components/Icon";
 import type { ActionableProps } from "components/Actionable";
+import type { IconProps } from "components/Icon";
+import type React from "react";
 import type * as G from "types/global";
 
 export type Size = "small" | "medium" | "large";

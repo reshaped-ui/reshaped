@@ -1,16 +1,18 @@
-import type * as T from "./types";
+import { formatHex8, formatHex } from "culori/fn";
+
+import { Token } from "./tokens/color/color.types";
+import generateMetaColors from "./tokens/color/utilities/generateMetaColors";
+import { variablesTemplate, mediaTemplate } from "./tokens/css";
+import * as transforms from "./tokens/transforms";
+import { generateUnits } from "./tokens/unit/utilities/generate";
+
 import type {
 	PassedThemeDefinition,
 	GeneratedThemeDefinition,
 	TokenType,
 	TransformedToken,
 } from "./tokens/types";
-import * as transforms from "./tokens/transforms";
-import { variablesTemplate, mediaTemplate } from "./tokens/css";
-import { generateUnits } from "./tokens/unit/utilities/generate";
-import generateMetaColors from "./tokens/color/utilities/generateMetaColors";
-import { formatHex8, formatHex } from "culori/fn";
-import { Token } from "./tokens/color/color.types";
+import type * as T from "./types";
 
 const transform = (name: string, definition: PassedThemeDefinition, options: T.PrivateOptions) => {
 	const { isFragment, themeOptions } = options;

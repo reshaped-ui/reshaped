@@ -1,18 +1,21 @@
 "use client";
 
 import React from "react";
+
+import Portal from "components/_private/Portal";
+import useIsDismissible from "hooks/_private/useIsDismissible";
+import useHandlerRef from "hooks/useHandlerRef";
+import useHotkeys from "hooks/useHotkeys";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+import useScrollLock from "hooks/useScrollLock";
+import useToggle from "hooks/useToggle";
+import { TrapFocus, type FocusableElement } from "utilities/a11y";
 import { onNextFrame } from "utilities/animation";
 import { classNames } from "utilities/props";
-import { TrapFocus, type FocusableElement } from "utilities/a11y";
-import useToggle from "hooks/useToggle";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import useHotkeys from "hooks/useHotkeys";
-import useScrollLock from "hooks/useScrollLock";
-import useIsDismissible from "hooks/_private/useIsDismissible";
-import Portal from "components/_private/Portal";
-import type * as T from "./Overlay.types";
+
 import s from "./Overlay.module.css";
-import useHandlerRef from "hooks/useHandlerRef";
+
+import type * as T from "./Overlay.types";
 
 const Overlay: React.FC<T.Props> = (props) => {
 	const {

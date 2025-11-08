@@ -1,8 +1,10 @@
 import Icon from "components/Icon";
-import { responsivePropDependency } from "utilities/props";
 import IconArrow from "icons/ChevronVertical";
-import type * as T from "./Select.types";
+import { responsivePropDependency } from "utilities/props";
+
 import s from "./Select.module.css";
+
+import type * as T from "./Select.types";
 
 const SelectEndContent: React.FC<Pick<T.Props, "disabled" | "size">> = (props) => {
 	const { disabled, size } = props;

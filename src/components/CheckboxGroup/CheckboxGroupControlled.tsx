@@ -1,7 +1,8 @@
 "use client";
 
-import type * as T from "./CheckboxGroup.types";
 import Context from "./CheckboxGroup.context";
+
+import type * as T from "./CheckboxGroup.types";
 
 const CheckboxGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	const { onChange, name, disabled, value, children, hasError } = props;

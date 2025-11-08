@@ -1,7 +1,10 @@
 import React from "react";
+
 import { classNames } from "utilities/props";
-import type * as T from "./Progress.types";
+
 import s from "./Progress.module.css";
+
+import type * as T from "./Progress.types";
 
 const Progress: React.FC<T.Props> = (props) => {
 	const {

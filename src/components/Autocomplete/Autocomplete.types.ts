@@ -1,6 +1,6 @@
-import type { TextFieldProps } from "components/TextField";
-import type { MenuItemProps } from "components/MenuItem";
 import type { DropdownMenuProps, DropdownMenuInstance } from "components/DropdownMenu";
+import type { MenuItemProps } from "components/MenuItem";
+import type { TextFieldProps } from "components/TextField";
 
 type SelectArgs = {
 	/** Value that will be passed to the input on selection */

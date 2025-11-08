@@ -1,6 +1,6 @@
-import type React from "react";
 import type { ActionableProps } from "components/Actionable";
 import type { ViewProps } from "components/View";
+import type React from "react";
 import type * as G from "types/global";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {

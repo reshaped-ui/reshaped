@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
+
 import View from "components/View";
 import useDrag from "hooks/_private/useDrag";
-import type * as T from "./Resizable.types";
+import { classNames } from "utilities/props";
+
 import s from "./Resizable.module.css";
+
+import type * as T from "./Resizable.types";
 
 export const ResizableHandleContext = React.createContext({} as T.HandleContext);
 

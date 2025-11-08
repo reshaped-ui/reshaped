@@ -1,5 +1,5 @@
-import { responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
+import { responsiveVariables } from "utilities/props";
 import "./textAlign.css";
 
 const textAlign: T.StyleResolver<T.TextAlign> = (value) => {

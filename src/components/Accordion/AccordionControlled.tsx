@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
+
 import useElementId from "hooks/useElementId";
+import useHandlerRef from "hooks/useHandlerRef";
+import { classNames } from "utilities/props";
+
 import AccordionContext from "./Accordion.context";
 import * as T from "./Accordion.types";
-import useHandlerRef from "hooks/useHandlerRef";
 
 const AccordionControlled: React.FC<T.ControlledProps> = (props) => {
 	const { children, onToggle, active, iconPosition, iconSize, gap, className, attributes } = props;

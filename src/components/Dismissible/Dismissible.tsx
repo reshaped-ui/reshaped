@@ -1,10 +1,12 @@
 "use client";
 
-import { classNames } from "utilities/props";
 import Button from "components/Button";
 import IconClose from "icons/Close";
-import type * as T from "./Dismissible.types";
+import { classNames } from "utilities/props";
+
 import s from "./Dismissible.module.css";
+
+import type * as T from "./Dismissible.types";
 
 const Dismissible: React.FC<T.Props> = (props) => {
 	const {

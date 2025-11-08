@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+
 import TabsControlled from "./TabsControlled";
+
 import type * as T from "./Tabs.types";
 
 const TabsUncontrolled: React.FC<T.UncontrolledProps> = (props) => {

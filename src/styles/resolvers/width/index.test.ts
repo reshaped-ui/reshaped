@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import width from "./index";
 
 describe("Styles/Width", () => {

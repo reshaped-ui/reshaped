@@ -1,9 +1,11 @@
-import { classNames, responsivePropDependency } from "utilities/props";
-import { resolveMixin } from "styles/mixin";
 import Icon from "components/Icon";
 import View from "components/View";
-import type * as T from "./Avatar.types";
+import { resolveMixin } from "styles/mixin";
+import { classNames, responsivePropDependency } from "utilities/props";
+
 import s from "./Avatar.module.css";
+
+import type * as T from "./Avatar.types";
 
 const Avatar: React.FC<T.Props> = (props) => {
 	const {

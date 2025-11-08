@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+
 import View from "components/View";
 import { onNextFrame } from "utilities/animation";
+
 import {
 	setMonthToPrevious,
 	setMonthToNext,
@@ -11,10 +13,11 @@ import {
 	setYearToPrevious,
 	applyNavigationBounds,
 } from "./Calendar.utils";
-import useCalendarKeyboardNavigation from "./useCalendarKeyboardNavigation";
+import CalendarControls from "./CalendarControls";
 import CalendarMonth from "./CalendarMonth";
 import CalendarYear from "./CalendarYear";
-import CalendarControls from "./CalendarControls";
+import useCalendarKeyboardNavigation from "./useCalendarKeyboardNavigation";
+
 import type * as T from "./Calendar.types";
 
 const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) => {

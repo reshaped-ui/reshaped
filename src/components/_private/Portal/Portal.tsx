@@ -2,11 +2,14 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+
 import Theme from "components/Theme";
-import type * as T from "./Portal.types";
-import s from "./Portal.module.css";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useToggle from "hooks/useToggle";
+
+import s from "./Portal.module.css";
+
+import type * as T from "./Portal.types";
 
 const PortalScopeContext = React.createContext<T.Context>({} as T.Context);
 

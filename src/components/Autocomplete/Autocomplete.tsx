@@ -1,17 +1,20 @@
 "use client";
 
 import React from "react";
-import TextField from "components/TextField";
-import type { TextFieldProps } from "components/TextField";
+
 import DropdownMenu from "components/DropdownMenu";
-import type { MenuItemProps } from "components/MenuItem";
+import TextField from "components/TextField";
 import * as keys from "constants/keys";
-import useHotkeys from "hooks/useHotkeys";
-import useHandlerRef from "hooks/useHandlerRef";
-import * as T from "./Autocomplete.types";
-import s from "./Autocomplete.module.css";
 import useElementId from "hooks/useElementId";
+import useHandlerRef from "hooks/useHandlerRef";
+import useHotkeys from "hooks/useHotkeys";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+
+import s from "./Autocomplete.module.css";
+import * as T from "./Autocomplete.types";
+
+import type { MenuItemProps } from "components/MenuItem";
+import type { TextFieldProps } from "components/TextField";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 

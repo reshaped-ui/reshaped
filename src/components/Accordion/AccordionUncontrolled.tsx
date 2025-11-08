@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import AccordionControlled from "./AccordionControlled";
+
 import * as T from "./Accordion.types";
+import AccordionControlled from "./AccordionControlled";
 
 const AccordionUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultActive, onToggle, ...controlledProps } = props;

@@ -1,17 +1,20 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
-import { enableUserSelect, disableUserSelect, triggerChangeEvent } from "utilities/dom";
-import { disableScroll, enableScroll } from "utilities/scroll";
-import useRTL from "hooks/useRTL";
-import useElementId from "hooks/useElementId";
+
 import { useFormControl } from "components/FormControl";
-import SliderThumb from "./SliderThumb";
-import { applyStepToValue, getDragCoord } from "./Slider.utilities";
-import type * as T from "./Slider.types";
-import s from "./Slider.module.css";
+import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
+import useRTL from "hooks/useRTL";
+import { enableUserSelect, disableUserSelect, triggerChangeEvent } from "utilities/dom";
+import { classNames } from "utilities/props";
+import { disableScroll, enableScroll } from "utilities/scroll";
+
+import s from "./Slider.module.css";
+import { applyStepToValue, getDragCoord } from "./Slider.utilities";
+import SliderThumb from "./SliderThumb";
+
+import type * as T from "./Slider.types";
 
 const THUMB_SIZE = 16;
 

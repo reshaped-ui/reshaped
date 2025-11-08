@@ -1,15 +1,18 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
-import { rafThrottle } from "utilities/helpers";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+
 import Portal from "components/_private/Portal";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { findClosestPositionContainer, findClosestScrollableContainer } from "utilities/dom";
-import cooldown from "./utilities/cooldown";
+import { rafThrottle } from "utilities/helpers";
+import { classNames } from "utilities/props";
+
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
-import type * as T from "./Flyout.types";
 import s from "./Flyout.module.css";
+import cooldown from "./utilities/cooldown";
+
+import type * as T from "./Flyout.types";
 
 const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const { children, className, attributes } = props;

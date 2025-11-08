@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import type * as T from "./Tabs.types";
 
 const Context = React.createContext({} as T.Context);

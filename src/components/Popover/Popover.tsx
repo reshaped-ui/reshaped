@@ -1,9 +1,11 @@
-import { classNames } from "utilities/props";
-import Flyout, { useFlyoutContext, type FlyoutProps } from "components/Flyout";
 import Dismissible, { type DismissibleProps } from "components/Dismissible";
-import type * as T from "./Popover.types";
-import s from "./Popover.module.css";
+import Flyout, { useFlyoutContext, type FlyoutProps } from "components/Flyout";
 import { resolveMixin } from "styles/mixin";
+import { classNames } from "utilities/props";
+
+import s from "./Popover.module.css";
+
+import type * as T from "./Popover.types";
 
 const Popover: React.FC<T.Props> = (props) => {
 	const {

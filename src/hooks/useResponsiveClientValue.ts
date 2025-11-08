@@ -1,9 +1,11 @@
 "use client";
 
 import React from "react";
+
+import defaultBreakpoints from "constants/breakpoints";
 import { SingletonEnvironmentContext } from "hooks/_private/useSingletonEnvironment";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import defaultBreakpoints from "constants/breakpoints";
+
 import type * as G from "types/global";
 
 const useResponsiveClientValue = <T>(value: G.Responsive<T>): T | undefined => {

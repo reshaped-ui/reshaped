@@ -1,5 +1,6 @@
 import CheckboxGroupControlled from "./CheckboxGroupControlled";
 import CheckboxGroupUncontrolled from "./CheckboxGroupUncontrolled";
+
 import type * as T from "./CheckboxGroup.types";
 
 const CheckboxGroup: React.FC<T.Props> = (props) => {

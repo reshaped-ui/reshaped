@@ -1,9 +1,12 @@
 import React from "react";
+
 import useRTL from "hooks/useRTL";
-import flyout from "./utilities/flyout";
+
 import { defaultStyles, resetStyles } from "./Flyout.constants";
-import type * as G from "types/global";
+import flyout from "./utilities/flyout";
+
 import type * as T from "./Flyout.types";
+import type * as G from "types/global";
 
 /**
  * Typings

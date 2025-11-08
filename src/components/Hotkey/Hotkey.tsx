@@ -1,7 +1,9 @@
 import Text from "components/Text";
 import { classNames } from "utilities/props";
-import type * as T from "./Hotkey.types";
+
 import s from "./Hotkey.module.css";
+
+import type * as T from "./Hotkey.types";
 
 const Hotkey: React.FC<T.Props> = (props) => {
 	const { children, active, className, attributes } = props;

@@ -1,14 +1,17 @@
 "use client";
 
 import { forwardRef, useState } from "react";
-import { classNames } from "utilities/props";
-import type { ActionableRef } from "components/Actionable";
+
 import Button from "components/Button";
-import IconChevronRight from "icons/ChevronRight";
-import IconChevronLeft from "icons/ChevronLeft";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import * as T from "./Carousel.types";
+import IconChevronLeft from "icons/ChevronLeft";
+import IconChevronRight from "icons/ChevronRight";
+import { classNames } from "utilities/props";
+
 import s from "./Carousel.module.css";
+import * as T from "./Carousel.types";
+
+import type { ActionableRef } from "components/Actionable";
 
 const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) => {
 	const { type, scrollElRef, oppositeControlElRef, scrollPosition, onClick, isRTL, mounted } =

@@ -1,11 +1,14 @@
-import { classNames } from "utilities/props";
-import Text from "components/Text";
-import Icon from "components/Icon";
-import IconClose from "icons/Close";
-import Actionable, { type ActionableProps, type ActionableRef } from "components/Actionable";
-import type * as T from "./Badge.types";
-import s from "./Badge.module.css";
 import { forwardRef } from "react";
+
+import Actionable, { type ActionableProps, type ActionableRef } from "components/Actionable";
+import Icon from "components/Icon";
+import Text from "components/Text";
+import IconClose from "icons/Close";
+import { classNames } from "utilities/props";
+
+import s from "./Badge.module.css";
+
+import type * as T from "./Badge.types";
 
 const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {

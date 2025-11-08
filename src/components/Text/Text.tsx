@@ -1,7 +1,9 @@
-import { classNames, responsiveClassNames } from "utilities/props";
 import { resolveMixin } from "styles/mixin";
-import type * as T from "./Text.types";
+import { classNames, responsiveClassNames } from "utilities/props";
+
 import s from "./Text.module.css";
+
+import type * as T from "./Text.types";
 
 const tagMap: Partial<Record<T.Variant, keyof React.JSX.IntrinsicElements>> = {
 	"title-1": "h1",

@@ -1,5 +1,6 @@
 import RadioGroupControlled from "./RadioGroupControlled";
 import RadioGroupUncontrolled from "./RadioGroupUncontrolled";
+
 import type * as T from "./RadioGroup.types";
 
 const RadioGroup: React.FC<T.Props> = (props) => {

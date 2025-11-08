@@ -1,7 +1,7 @@
-import type React from "react";
-import type * as G from "types/global";
 import type { FormControlProps } from "components/FormControl";
 import type { IconProps } from "components/Icon";
+import type React from "react";
+import type * as G from "types/global";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 

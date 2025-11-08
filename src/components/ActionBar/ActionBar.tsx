@@ -1,7 +1,9 @@
-import { classNames, responsiveVariables } from "utilities/props";
 import View from "components/View";
-import type * as T from "./ActionBar.types";
+import { classNames, responsiveVariables } from "utilities/props";
+
 import s from "./ActionBar.module.css";
+
+import type * as T from "./ActionBar.types";
 
 const fullWidthPositions: T.Props["position"][] = ["top", "bottom"];
 

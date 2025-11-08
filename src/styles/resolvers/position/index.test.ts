@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import position from "./index";
 
 describe("Styles/Position", () => {

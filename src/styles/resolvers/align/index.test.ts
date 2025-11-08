@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import align from "./index";
 
 describe("Styles/Align", () => {

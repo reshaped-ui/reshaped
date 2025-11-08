@@ -1,6 +1,6 @@
 import Accordion from "./Accordion";
-import AccordionTrigger from "./AccordionTrigger";
 import AccordionContent from "./AccordionContent";
+import AccordionTrigger from "./AccordionTrigger";
 
 const AccordionRoot = Accordion as typeof Accordion & {
 	Trigger: typeof AccordionTrigger;

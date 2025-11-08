@@ -1,10 +1,12 @@
-import Chain from "utilities/Chain";
 import * as keys from "constants/keys";
-import TrapScreenReader from "./TrapScreenReader";
-import { getActiveElement, getFocusableElements, focusElement, getFocusData } from "./focus";
-import type { FocusableElement, TrapMode } from "./types";
+import Chain from "utilities/Chain";
 import { getShadowRoot } from "utilities/dom";
+
+import { getActiveElement, getFocusableElements, focusElement, getFocusData } from "./focus";
 import { checkKeyboardMode } from "./keyboardMode";
+import TrapScreenReader from "./TrapScreenReader";
+
+import type { FocusableElement, TrapMode } from "./types";
 
 type ReleaseOptions = { withoutFocusReturn?: boolean };
 type TrapOptions = {

@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
+
 import { classNames } from "utilities/props";
-import SelectStartContent from "./SelectStartContent";
-import SelectEndContent from "./SelectEndContent";
-import type * as T from "./Select.types";
+
 import s from "./Select.module.css";
+import SelectEndContent from "./SelectEndContent";
+import SelectStartContent from "./SelectStartContent";
+
+import type * as T from "./Select.types";
 
 const SelectNative: React.FC<T.NativeProps> = (props) => {
 	const {

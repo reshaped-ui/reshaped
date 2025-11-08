@@ -1,6 +1,7 @@
-import reshapedDefinition from "themes/_generator/definitions/reshaped";
 import figmaDefinition from "themes/_generator/definitions/figma";
+import reshapedDefinition from "themes/_generator/definitions/reshaped";
 import slateDefinition from "themes/_generator/definitions/slate";
+
 import type { ReshapedConfig } from "types/config";
 
 const config: ReshapedConfig = {

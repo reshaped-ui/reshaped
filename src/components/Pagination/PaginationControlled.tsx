@@ -5,8 +5,10 @@ import View from "components/View";
 import IconChevronLeft from "icons/ChevronLeft";
 import IconChevronRight from "icons/ChevronRight";
 import { range } from "utilities/helpers";
-import type * as T from "./Pagination.types";
+
 import s from "./Pagination.module.css";
+
+import type * as T from "./Pagination.types";
 
 const PaginationControlled: React.FC<T.ControlledProps> = (props) => {
 	const {

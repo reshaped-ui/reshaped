@@ -1,14 +1,17 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
-import { onNextFrame } from "utilities/animation";
+
 import { checkKeyboardMode, TrapFocus } from "utilities/a11y";
+import { onNextFrame } from "utilities/animation";
+import { classNames } from "utilities/props";
+
 import Toast from "./Toast";
-import ToastContext from "./Toast.context";
 import { timeouts } from "./Toast.constants";
-import type * as T from "./Toast.types";
+import ToastContext from "./Toast.context";
 import s from "./Toast.module.css";
+
+import type * as T from "./Toast.types";
 
 const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	const { toastProps, id, status, inspected, index } = props;

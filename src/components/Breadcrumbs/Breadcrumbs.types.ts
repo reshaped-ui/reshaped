@@ -1,5 +1,5 @@
-import type React from "react";
 import type { LinkProps } from "components/Link";
+import type React from "react";
 import type * as G from "types/global";
 
 export type Props = {

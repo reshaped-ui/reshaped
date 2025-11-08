@@ -1,4 +1,3 @@
-import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
 import {
 	PassedToken,
 	HexColor,
@@ -8,7 +7,10 @@ import {
 	Hue,
 	OklchColor,
 } from "../color.types";
+
 import { hexToOklch, tokenToOklchToken } from "./convert";
+
+import type { PassedThemeDefinition } from "themes/_generator/tokens/types";
 
 const parseColor = (color: HexColor | PassedToken) => {
 	const isString = typeof color === "string";

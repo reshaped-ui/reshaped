@@ -1,4 +1,5 @@
 import React from "react";
+
 import * as G from "types/global";
 
 export type GlobalColorModeContextData = {

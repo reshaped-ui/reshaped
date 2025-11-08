@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import bleed from "./index";
 
 describe("Styles/Bleed", () => {

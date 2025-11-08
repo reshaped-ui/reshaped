@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import type * as T from "./Select.types";
+
 import SelectNative from "./SelectNative";
 import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
+
+import type * as T from "./Select.types";
 
 const Select: React.FC<T.NativeProps> = (props) => {
 	const { children } = props;

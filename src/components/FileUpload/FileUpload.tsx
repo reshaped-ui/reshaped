@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
-import View from "components/View";
+
 import HiddenVisually from "components/HiddenVisually";
+import View from "components/View";
 import useToggle from "hooks/useToggle";
-import type * as T from "./FileUpload.types";
+import { classNames } from "utilities/props";
+
 import s from "./FileUpload.module.css";
+
+import type * as T from "./FileUpload.types";
 
 export const FileUploadTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;

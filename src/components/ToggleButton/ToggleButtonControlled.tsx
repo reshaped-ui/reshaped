@@ -1,8 +1,9 @@
 "use client";
 
-import type * as T from "./ToggleButton.types";
 import Button, { ButtonProps } from "components/Button";
 import { useToggleButtonGroup } from "components/ToggleButtonGroup";
+
+import type * as T from "./ToggleButton.types";
 
 const ToggleButtonControlled: React.FC<T.ControlledProps> = (props) => {
 	const {

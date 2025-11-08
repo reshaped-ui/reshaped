@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import textAlign from "./index";
 
 describe("Styles/TextAlign", () => {

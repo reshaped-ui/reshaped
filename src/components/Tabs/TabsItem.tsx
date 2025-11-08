@@ -1,16 +1,19 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
+
 import HiddenInput from "components/_private/HiddenInput";
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import Text from "components/Text";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { findParent } from "utilities/dom";
-import { useTabs } from "./TabsContext";
-import type * as T from "./Tabs.types";
+import { classNames } from "utilities/props";
+
 import s from "./Tabs.module.css";
+import { useTabs } from "./TabsContext";
+
+import type * as T from "./Tabs.types";
 
 const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const { value, children, icon, href, disabled, attributes } = props;

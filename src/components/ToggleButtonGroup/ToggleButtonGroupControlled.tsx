@@ -1,10 +1,13 @@
 "use client";
 
 import React from "react";
+
 import Button from "components/Button";
-import type * as T from "./ToggleButtonGroup.types";
-import Context from "./ToggleButtonGroup.context";
 import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
+
+import Context from "./ToggleButtonGroup.context";
+
+import type * as T from "./ToggleButtonGroup.types";
 
 const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	const {

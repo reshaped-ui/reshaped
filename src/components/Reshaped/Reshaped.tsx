@@ -1,19 +1,23 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
+
 import { GlobalColorMode, PrivateTheme } from "components/Theme";
-import { ToastProvider } from "components/Toast";
 import { useGlobalColorMode } from "components/Theme/useTheme";
+import { ToastProvider } from "components/Toast";
 import {
 	SingletonEnvironmentContext,
 	useSingletonEnvironment,
 } from "hooks/_private/useSingletonEnvironment";
-import { SingletonKeyboardModeProvider } from "hooks/_private/useSingletonKeyboardMode";
 import { SingletonHotkeysProvider } from "hooks/_private/useSingletonHotkeys";
-import type * as T from "./Reshaped.types";
-import "./Reshaped.css";
+import { SingletonKeyboardModeProvider } from "hooks/_private/useSingletonKeyboardMode";
+import { classNames } from "utilities/props";
+
 import s from "./Reshaped.module.css";
+
+import type * as T from "./Reshaped.types";
+
+import "./Reshaped.css";
 
 const ReshapedInner: React.FC<T.Props> = (props) => {
 	const { children, defaultRTL, defaultViewport = "s", toastOptions } = props;

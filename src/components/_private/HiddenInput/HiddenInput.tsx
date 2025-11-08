@@ -1,5 +1,7 @@
 import { classNames } from "utilities/props";
+
 import s from "./HiddenInput.module.css";
+
 import type * as T from "./HiddenInput.types";
 
 const HiddenInput: React.FC<T.Props> = (props) => {

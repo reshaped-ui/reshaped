@@ -1,5 +1,6 @@
-import type * as T from "./color.types";
 import { PrivateOptions } from "themes/_generator/types";
+
+import type * as T from "./color.types";
 import type { Transformer, TransformedToken } from "../types";
 
 const transformTokenForMode = (

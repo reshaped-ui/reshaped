@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
+
 import useElementId from "hooks/useElementId";
+
 import { TabsProvider } from "./TabsContext";
+
 import type * as T from "./Tabs.types";
 
 const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {

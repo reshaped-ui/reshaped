@@ -1,5 +1,6 @@
-import { getScrollbarWidth } from "./helpers";
 import { StyleCache } from "utilities/css";
+
+import { getScrollbarWidth } from "./helpers";
 
 const styleCache = new StyleCache();
 

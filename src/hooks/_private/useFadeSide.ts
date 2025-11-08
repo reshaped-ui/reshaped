@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import useRTL from "hooks/useRTL";
+
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+import useRTL from "hooks/useRTL";
 import { rafThrottle } from "utilities/helpers";
 
 const useFadeSide = (

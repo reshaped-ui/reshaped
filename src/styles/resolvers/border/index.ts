@@ -1,9 +1,10 @@
+import * as T from "styles/types";
 import {
 	responsiveClassNames,
 	responsivePropDependency,
 	responsiveVariables,
 } from "utilities/props";
-import * as T from "styles/types";
+
 import s from "./border.module.css";
 import "./borderWidth.css";
 

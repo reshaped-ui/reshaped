@@ -1,6 +1,6 @@
+import type { RadioProps } from "components/Radio";
 import type React from "react";
 import type * as G from "types/global";
-import type { RadioProps } from "components/Radio";
 
 type BaseProps = {
 	/** Unique identifier for the radio group */

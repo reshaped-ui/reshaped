@@ -1,13 +1,16 @@
 "use client";
 
 import React from "react";
-import View, { type ViewProps } from "components/View";
+
 import Button, { type ButtonProps } from "components/Button";
 import Icon from "components/Icon";
-import Theme from "components/Theme";
 import Text from "components/Text";
-import type * as T from "./Toast.types";
+import Theme from "components/Theme";
+import View, { type ViewProps } from "components/View";
+
 import s from "./Toast.module.css";
+
+import type * as T from "./Toast.types";
 
 const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 	const {

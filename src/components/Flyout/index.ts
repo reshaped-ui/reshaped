@@ -1,6 +1,6 @@
 import Flyout from "./Flyout";
-import FlyoutTrigger from "./FlyoutTrigger";
 import FlyoutContent from "./FlyoutContent";
+import FlyoutTrigger from "./FlyoutTrigger";
 
 const FlyoutRoot = Flyout as typeof Flyout & {
 	Trigger: typeof FlyoutTrigger;

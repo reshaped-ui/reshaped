@@ -24,10 +24,6 @@ import maxHeight from "styles/resolvers/maxHeight";
 import maxWidth from "styles/resolvers/maxWidth";
 import minHeight from "styles/resolvers/minHeight";
 import minWidth from "styles/resolvers/minWidth";
-import position from "styles/resolvers/position";
-import radius from "styles/resolvers/radius";
-import textAlign from "styles/resolvers/textAlign";
-import width from "styles/resolvers/width";
 import padding, {
 	paddingTop,
 	paddingBottom,
@@ -36,6 +32,11 @@ import padding, {
 	paddingInline,
 	paddingBlock,
 } from "styles/resolvers/padding";
+import position from "styles/resolvers/position";
+import radius from "styles/resolvers/radius";
+import textAlign from "styles/resolvers/textAlign";
+import width from "styles/resolvers/width";
+
 import type { Mixin } from "styles/types";
 import type * as G from "types/global";
 

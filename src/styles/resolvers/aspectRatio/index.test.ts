@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import aspectRatio from "./index";
 
 describe("Styles/AspectRatio", () => {

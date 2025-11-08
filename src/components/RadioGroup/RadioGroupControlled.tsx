@@ -1,8 +1,9 @@
 "use client";
 
-import type * as TRadio from "components/Radio/Radio.types";
 import Context from "./RadioGroup.context";
+
 import type * as T from "./RadioGroup.types";
+import type * as TRadio from "components/Radio/Radio.types";
 
 const RadioGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	const { onChange, name, disabled, value, children, hasError } = props;

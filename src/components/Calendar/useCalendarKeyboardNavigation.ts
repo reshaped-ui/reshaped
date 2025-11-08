@@ -1,6 +1,8 @@
 import React from "react";
-import useHotkeys from "hooks/useHotkeys";
+
 import * as keys from "constants/keys";
+import useHotkeys from "hooks/useHotkeys";
+
 import { getFocusableDates } from "./Calendar.utils";
 
 const useCalendarKeyboardNavigation = (props: {

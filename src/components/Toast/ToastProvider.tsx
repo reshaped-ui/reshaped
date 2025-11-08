@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
+
+import { positions, defaultContextData } from "./Toast.constants";
 import ToastContext from "./Toast.context";
+import * as T from "./Toast.types";
 import ToastRegion from "./ToastRegion";
 import useToast from "./useToast";
-import { positions, defaultContextData } from "./Toast.constants";
-import * as T from "./Toast.types";
 
 let counter = 0;
 const generateId = () => `__rs-toast-${counter++}`;

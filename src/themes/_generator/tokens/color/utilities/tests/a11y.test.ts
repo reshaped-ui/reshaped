@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import { getOnColor } from "../a11y";
 
 const white = { l: 1, c: 0, h: 0, mode: "oklch" } as const;

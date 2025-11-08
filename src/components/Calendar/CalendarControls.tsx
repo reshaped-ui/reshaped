@@ -1,14 +1,17 @@
 import React from "react";
+
 import Button from "components/Button";
-import View from "components/View";
 import Hidden from "components/Hidden";
-import Text from "components/Text";
 import HiddenVisually from "components/HiddenVisually";
+import Text from "components/Text";
+import View from "components/View";
 import IconChevronLeft from "icons/ChevronLeft";
 import IconChevronRight from "icons/ChevronRight";
 import { onNextFrame } from "utilities/animation";
-import type * as T from "./Calendar.types";
+
 import s from "./Calendar.module.css";
+
+import type * as T from "./Calendar.types";
 
 const CalendarControls: React.FC<T.ControlsProps> = (props) => {
 	const {

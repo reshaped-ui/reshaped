@@ -1,10 +1,13 @@
 import { forwardRef } from "react";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+
+import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import Loader from "components/Loader";
-import Actionable, { type ActionableRef } from "components/Actionable";
-import type * as T from "./Button.types";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+
 import s from "./Button.module.css";
+
+import type * as T from "./Button.types";
 
 const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {

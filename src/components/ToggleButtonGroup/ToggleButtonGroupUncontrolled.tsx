@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+
 import ToggleButtonGroupControlled from "./ToggleButtonGroupControlled";
+
 import type * as T from "./ToggleButtonGroup.types";
 
 const ToggleButtonGroupUncontrolled: React.FC<T.UncontrolledProps> = (props) => {

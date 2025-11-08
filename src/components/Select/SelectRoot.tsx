@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
-import useElementId from "hooks/useElementId";
+
 import { useFormControl } from "components/FormControl";
+import useElementId from "hooks/useElementId";
 import { classNames, responsiveClassNames } from "utilities/props";
-import type * as T from "./Select.types";
+
 import s from "./Select.module.css";
+
+import type * as T from "./Select.types";
 
 const SelectRoot: React.FC<T.RootProps> = (passedProps) => {
 	const formControl = useFormControl();

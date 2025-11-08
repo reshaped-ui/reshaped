@@ -1,10 +1,12 @@
 "use client";
 
 import Text from "components/Text";
+
 import { useFormControlPrivate } from "./FormControl.context";
-import { getCaptionId } from "./FormControl.utilities";
-import type * as T from "./FormControl.types";
 import s from "./FormControl.module.css";
+import { getCaptionId } from "./FormControl.utilities";
+
+import type * as T from "./FormControl.types";
 
 const FormControlCaption: React.FC<T.PrivateCaptionProps> = (props) => {
 	const { children, variant, disabled } = props;

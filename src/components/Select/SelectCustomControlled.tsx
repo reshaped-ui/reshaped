@@ -1,16 +1,19 @@
 "use client";
 
 import React from "react";
+
 import DropdownMenu from "components/DropdownMenu";
 import Icon from "components/Icon";
+import View from "components/View";
 import CheckmarkIcon from "icons/Checkmark";
 import { responsivePropDependency } from "utilities/props";
-import type * as T from "./Select.types";
+
+import SelectGroup from "./SelectGroup";
+import SelectOption from "./SelectOption";
 import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
-import SelectOption from "./SelectOption";
-import SelectGroup from "./SelectGroup";
-import View from "components/View";
+
+import type * as T from "./Select.types";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const {

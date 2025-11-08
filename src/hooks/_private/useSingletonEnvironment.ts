@@ -1,5 +1,7 @@
 import React from "react";
+
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+
 import type * as G from "types/global";
 
 type Context = { rtl: [boolean, (state: boolean) => void]; defaultViewport: G.Viewport };

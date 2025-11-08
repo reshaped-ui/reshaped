@@ -1,13 +1,16 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+
 import HiddenInput from "components/_private/HiddenInput";
-import Text from "components/Text";
-import { useRadioGroup } from "components/RadioGroup";
 import { useFormControl } from "components/FormControl";
-import type * as T from "./Radio.types";
+import { useRadioGroup } from "components/RadioGroup";
+import Text from "components/Text";
+import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+
 import s from "./Radio.module.css";
+
+import type * as T from "./Radio.types";
 
 const Radio: React.FC<T.Props> = (props) => {
 	const {

@@ -1,6 +1,7 @@
+import { getVariableName } from "../css";
+
 import type * as T from "./font.types";
 import type { Transformer, TransformedToken } from "../types";
-import { getVariableName } from "../css";
 
 const BASE_REM_SIZE = 16;
 

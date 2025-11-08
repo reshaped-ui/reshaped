@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
-import { classNames, responsiveClassNames } from "utilities/props";
+
 import { useFormControl } from "components/FormControl";
 import useElementId from "hooks/useElementId";
-import type * as T from "./TextArea.types";
+import { classNames, responsiveClassNames } from "utilities/props";
+
 import s from "./TextArea.module.css";
+
+import type * as T from "./TextArea.types";
 
 const TextArea: React.FC<T.Props> = (props) => {
 	const {

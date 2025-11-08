@@ -1,4 +1,5 @@
 import { expect, test, describe } from "vitest";
+
 import justify from "./index";
 
 describe("Styles/Justify", () => {

@@ -1,7 +1,9 @@
-import { classNames } from "utilities/props";
 import View from "components/View";
-import type * as T from "./Container.types";
+import { classNames } from "utilities/props";
+
 import s from "./Container.module.css";
+
+import type * as T from "./Container.types";
 
 const Container: React.FC<T.Props> = (props) => {
 	const {

@@ -1,8 +1,11 @@
 import React, { isValidElement } from "react";
-import { classNames } from "utilities/props";
+
 import View from "components/View";
-import type * as T from "./Timeline.types";
+import { classNames } from "utilities/props";
+
 import s from "./Timeline.module.css";
+
+import type * as T from "./Timeline.types";
 
 export const TimelineItem: React.FC<T.ItemProps> = (props) => {
 	const { children, markerSlot, className, attributes } = props;

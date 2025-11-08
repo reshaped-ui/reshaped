@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
+
 import { focusableSelector } from "utilities/a11y";
-import ToastContainer from "./ToastContainer";
+import { classNames } from "utilities/props";
+
 import ToastContext from "./Toast.context";
-import * as T from "./Toast.types";
 import s from "./Toast.module.css";
+import * as T from "./Toast.types";
+import ToastContainer from "./ToastContainer";
 
 const ToastRegion: React.FC<T.RegionProps> = (props) => {
 	const { position, nested } = props;

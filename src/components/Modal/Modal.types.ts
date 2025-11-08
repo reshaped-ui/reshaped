@@ -1,6 +1,6 @@
+import type { OverlayProps, OverlayCloseReason } from "components/Overlay";
 import type React from "react";
 import type * as G from "types/global";
-import type { OverlayProps, OverlayCloseReason } from "components/Overlay";
 
 export type Context = {
 	id: string;

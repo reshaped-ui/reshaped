@@ -1,5 +1,6 @@
-import { isIOS } from "utilities/platform";
 import { findClosestScrollableContainer } from "utilities/dom";
+import { isIOS } from "utilities/platform";
+
 import lockSafariScroll from "./lockSafari";
 import lockStandardScroll from "./lockStandard";
 

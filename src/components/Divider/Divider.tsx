@@ -1,9 +1,11 @@
-import type React from "react";
-import { classNames, responsiveClassNames } from "utilities/props";
 import Text from "components/Text";
-import type * as T from "./Divider.types";
-import type * as G from "types/global";
+import { classNames, responsiveClassNames } from "utilities/props";
+
 import s from "./Divider.module.css";
+
+import type * as T from "./Divider.types";
+import type React from "react";
+import type * as G from "types/global";
 
 const Divider: React.FC<T.Props> = (props) => {
 	const {

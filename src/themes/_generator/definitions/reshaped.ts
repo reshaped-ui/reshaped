@@ -1,4 +1,5 @@
 import breakpoints from "constants/breakpoints";
+
 import type { ThemeDefinition } from "../tokens/types";
 
 const theme: ThemeDefinition = {

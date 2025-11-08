@@ -1,5 +1,6 @@
-import type { Transformer } from "../types";
 import { hexToOklch, oklchToRgb } from "../color/utilities/convert";
+
+import type { Transformer } from "../types";
 import type * as T from "./shadow.types";
 
 const transformToken: Transformer<T.Token> = (name, token, { theme }) => [

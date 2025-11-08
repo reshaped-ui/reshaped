@@ -1,7 +1,10 @@
 import React from "react";
+
 import DropdownMenu from "components/DropdownMenu";
-import type * as T from "./Select.types";
+
 import s from "./Select.module.css";
+
+import type * as T from "./Select.types";
 
 const SelectOption: React.FC<T.OptionProps> = (props) => {
 	const { value, ...menuItemProps } = props;

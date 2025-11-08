@@ -1,9 +1,12 @@
 import React, { forwardRef } from "react";
-import { classNames } from "utilities/props";
+
 import Actionable from "components/Actionable";
-import type * as T from "./Card.types";
-import s from "./Card.module.css";
 import { resolveMixin } from "styles/mixin";
+import { classNames } from "utilities/props";
+
+import s from "./Card.module.css";
+
+import type * as T from "./Card.types";
 
 const Card = forwardRef(
 	<As extends keyof React.JSX.IntrinsicElements = "div">(

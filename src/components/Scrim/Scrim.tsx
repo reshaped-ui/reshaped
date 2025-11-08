@@ -1,6 +1,8 @@
 import { classNames } from "utilities/props";
-import type * as T from "./Scrim.types";
+
 import s from "./Scrim.module.css";
+
+import type * as T from "./Scrim.types";
 
 const Scrim: React.FC<T.Props> = (props) => {
 	const {

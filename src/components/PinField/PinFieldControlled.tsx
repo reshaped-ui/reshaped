@@ -1,20 +1,23 @@
 "use client";
 
 import React from "react";
-import { responsivePropDependency } from "utilities/props";
-import View from "components/View";
-import Text from "components/Text";
-import useHotkeys from "hooks/useHotkeys";
+
 import { useFormControl } from "components/FormControl";
-import { onNextFrame } from "utilities/animation";
+import Text from "components/Text";
+import View from "components/View";
 import * as keys from "constants/keys";
+import useHotkeys from "hooks/useHotkeys";
+import { onNextFrame } from "utilities/animation";
+import { responsivePropDependency } from "utilities/props";
+
 import {
 	regExpNumericChar,
 	regExpAlphabeticChar,
 	regExpAlphaNumericChar,
 } from "./PinField.constants";
-import type * as T from "./PinField.types";
 import s from "./PinField.module.css";
+
+import type * as T from "./PinField.types";
 
 const sizeMap: Record<T.Size, number> = {
 	small: 7,

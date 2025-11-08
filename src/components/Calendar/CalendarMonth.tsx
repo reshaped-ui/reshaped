@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+
+import s from "./Calendar.module.css";
 import { getMonthWeeks, getWeekdayNames, getLocalISODate, isDateFocusable } from "./Calendar.utils";
 import CalendarDate from "./CalendarDate";
+
 import type * as T from "./Calendar.types";
-import s from "./Calendar.module.css";
 
 const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 	const {

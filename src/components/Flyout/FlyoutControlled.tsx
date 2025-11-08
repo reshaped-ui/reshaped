@@ -1,25 +1,28 @@
 "use client";
 
 import React from "react";
-import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
+
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import useElementId from "hooks/useElementId";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+import useHandlerRef from "hooks/useHandlerRef";
 import useHotkeys from "hooks/useHotkeys";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useOnClickOutside from "hooks/useOnClickOutside";
 import useRTL from "hooks/useRTL";
+import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
 import { checkTransitions, onNextFrame } from "utilities/animation";
-import useFlyout from "./useFlyout";
+
 import * as timeouts from "./Flyout.constants";
-import cooldown from "./utilities/cooldown";
 import {
 	Provider,
 	useFlyoutTriggerContext,
 	useFlyoutContext,
 	useFlyoutContentContext,
 } from "./Flyout.context";
+import useFlyout from "./useFlyout";
+import cooldown from "./utilities/cooldown";
+
 import type * as T from "./Flyout.types";
-import useHandlerRef from "hooks/useHandlerRef";
 
 const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {

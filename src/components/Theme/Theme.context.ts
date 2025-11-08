@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import type * as T from "./Theme.types";
 
 /* Context used to store data responsible for switching between modes of a theme */

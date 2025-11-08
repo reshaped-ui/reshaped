@@ -1,6 +1,6 @@
+import type { ActionableRef } from "components/Actionable";
 import type React from "react";
 import type * as G from "types/global";
-import type { ActionableRef } from "components/Actionable";
 
 export type Instance =
 	| {

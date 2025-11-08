@@ -1,5 +1,6 @@
-import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
+import { responsiveClassNames, responsiveVariables } from "utilities/props";
+
 import s from "./height.module.css";
 
 const height: T.StyleResolver<T.Height> = (value) => {

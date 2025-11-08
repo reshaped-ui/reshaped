@@ -1,9 +1,12 @@
 import React from "react";
+
 import Actionable from "components/Actionable";
 import { onNextFrame } from "utilities/animation";
-import { getMonthNames } from "./Calendar.utils";
-import type * as T from "./Calendar.types";
+
 import s from "./Calendar.module.css";
+import { getMonthNames } from "./Calendar.utils";
+
+import type * as T from "./Calendar.types";
 
 const MONTHS_PER_ROW = 3;
 

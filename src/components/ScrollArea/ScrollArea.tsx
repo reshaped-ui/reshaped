@@ -1,13 +1,16 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { classNames } from "utilities/props";
-import { disableUserSelect, enableUserSelect } from "utilities/dom";
-import { resolveMixin } from "styles/mixin";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import type * as T from "./ScrollArea.types";
-import s from "./ScrollArea.module.css";
+
 import useHandlerRef from "hooks/useHandlerRef";
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+import { resolveMixin } from "styles/mixin";
+import { disableUserSelect, enableUserSelect } from "utilities/dom";
+import { classNames } from "utilities/props";
+
+import s from "./ScrollArea.module.css";
+
+import type * as T from "./ScrollArea.types";
 
 const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 	const { ratio, position, vertical, onThumbMove } = props;

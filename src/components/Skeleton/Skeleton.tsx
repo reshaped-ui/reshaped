@@ -1,7 +1,8 @@
-import { classNames } from "utilities/props";
 import View from "components/View";
-import * as T from "./Skeleton.types";
+import { classNames } from "utilities/props";
+
 import s from "./Skeleton.module.css";
+import * as T from "./Skeleton.types";
 
 const Skeleton: React.FC<T.Props> = (props) => {
 	const { borderRadius = "small", width, height, className, attributes } = props;

@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+
 import SliderControlled from "./SliderControlled";
+
 import type * as T from "./Slider.types";
 
 const normalizeValue = (value: number, min: number, max: number) =>

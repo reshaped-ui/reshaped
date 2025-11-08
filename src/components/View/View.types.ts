@@ -1,6 +1,6 @@
 import type React from "react";
-import type * as G from "types/global";
 import type * as TStyles from "styles/types";
+import type * as G from "types/global";
 
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto";
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";

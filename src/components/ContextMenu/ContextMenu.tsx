@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
+
 import DropdownMenu from "components/DropdownMenu";
-import useScrollLock from "hooks/useScrollLock";
-import type * as G from "types/global";
-import type * as T from "./ContextMenu.types";
-import s from "./ContextMenu.module.css";
 import useHandlerRef from "hooks/useHandlerRef";
+import useScrollLock from "hooks/useScrollLock";
+
+import s from "./ContextMenu.module.css";
+
+import type * as T from "./ContextMenu.types";
+import type * as G from "types/global";
 
 const ContextMenu: React.FC<T.Props> = (props) => {
 	const { position = "end-top", onOpen, onClose, ...dropdownMenuProps } = props;

@@ -1,5 +1,6 @@
-import type * as T from "../Flyout.types";
 import { getRTLPosition, centerBySize } from "./helpers";
+
+import type * as T from "../Flyout.types";
 
 const SCREEN_OFFSET = 8;
 

@@ -1,6 +1,7 @@
 import React from "react";
-import View from "components/View";
+
 import Text from "components/Text";
+import View from "components/View";
 
 type Props = {
 	title?: string | string[];

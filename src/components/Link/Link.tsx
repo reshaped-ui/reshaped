@@ -1,9 +1,12 @@
 import { forwardRef } from "react";
-import { classNames } from "utilities/props";
+
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
-import type * as T from "./Link.types";
+import { classNames } from "utilities/props";
+
 import s from "./Link.module.css";
+
+import type * as T from "./Link.types";
 
 const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {

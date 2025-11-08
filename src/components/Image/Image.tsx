@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import { classNames } from "utilities/props";
+
 import { resolveMixin } from "styles/mixin";
-import * as T from "./Image.types";
+import { classNames } from "utilities/props";
+
 import s from "./Image.module.css";
+import * as T from "./Image.types";
 
 const Image: React.FC<T.Props> = (props) => {
 	const {

@@ -1,10 +1,13 @@
-import type * as G from "types/global";
 import { getRectFromCoordinates, getShadowRoot, findClosestPositionContainer } from "utilities/dom";
+
+import { resetStyles } from "../Flyout.constants";
+
 import calculatePosition from "./calculatePosition";
 import getPositionFallbacks from "./getPositionFallbacks";
 import isFullyVisible from "./isFullyVisible";
-import { resetStyles } from "../Flyout.constants";
+
 import type * as T from "../Flyout.types";
+import type * as G from "types/global";
 
 /**
  * Set position of the target element to fit on the screen

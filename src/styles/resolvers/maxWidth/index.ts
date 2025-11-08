@@ -1,5 +1,6 @@
-import { responsiveClassNames, responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
+import { responsiveClassNames, responsiveVariables } from "utilities/props";
+
 import s from "./maxWidth.module.css";
 
 const maxWidth: T.StyleResolver<T.MaxWidth> = (value) => {

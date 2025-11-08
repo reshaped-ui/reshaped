@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
+
 import Expandable from "components/_private/Expandable";
 import View from "components/View";
+
 import AccordionContext from "./Accordion.context";
+
 import type * as T from "./Accordion.types";
 
 const AccordionContent: React.FC<T.ContentProps> = (props) => {

@@ -1,6 +1,6 @@
-import type * as TUnit from "../unit/unit.types";
-import type * as TFontWeight from "../fontWeight/fontWeight.types";
 import type * as TFontFamily from "../fontFamily/fontFamily.types";
+import type * as TFontWeight from "../fontWeight/fontWeight.types";
+import type * as TUnit from "../unit/unit.types";
 
 export type Name =
 	| "title1"

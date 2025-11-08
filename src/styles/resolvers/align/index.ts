@@ -1,5 +1,5 @@
-import { responsiveVariables } from "utilities/props";
 import * as T from "styles/types";
+import { responsiveVariables } from "utilities/props";
 import "./align.css";
 
 const align: T.StyleResolver<T.Align> = (value) => {

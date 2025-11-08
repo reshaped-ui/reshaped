@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import { ThemeContext, GlobalColorModeContext } from "./Theme.context";
 
 export const useGlobalColorMode = () => {

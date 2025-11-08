@@ -1,9 +1,11 @@
 import React from "react";
-import type * as G from "types/global";
-import type { IconProps } from "components/Icon";
-import type { ActionableProps } from "components/Actionable";
-import type { MenuItemProps } from "components/MenuItem";
+
 import { DropdownMenuProps } from "components/DropdownMenu";
+
+import type { ActionableProps } from "components/Actionable";
+import type { IconProps } from "components/Icon";
+import type { MenuItemProps } from "components/MenuItem";
+import type * as G from "types/global";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 

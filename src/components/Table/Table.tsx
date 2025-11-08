@@ -1,11 +1,14 @@
 "use client";
 
 import React, { isValidElement } from "react";
-import { classNames, responsiveVariables } from "utilities/props";
-import { resolveMixin } from "styles/mixin";
-import type * as T from "./Table.types";
-import s from "./Table.module.css";
+
 import useFadeSide from "hooks/_private/useFadeSide";
+import { resolveMixin } from "styles/mixin";
+import { classNames, responsiveVariables } from "utilities/props";
+
+import s from "./Table.module.css";
+
+import type * as T from "./Table.types";
 
 const TableCellPrivate: React.FC<T.PrivateCellProps> = (props) => {
 	const {

@@ -1,5 +1,6 @@
 import ToggleButtonGroupControlled from "./ToggleButtonGroupControlled";
 import ToggleButtonGroupUncontrolled from "./ToggleButtonGroupUncontrolled";
+
 import type * as T from "./ToggleButtonGroup.types";
 
 const ToggleButtonGroup: React.FC<T.Props> = (props) => {

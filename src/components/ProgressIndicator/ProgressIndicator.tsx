@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
+
 import { classNames } from "utilities/props";
-import type * as T from "./ProgressIndicator.types";
+
 import s from "./ProgressIndicator.module.css";
+
+import type * as T from "./ProgressIndicator.types";
 
 const VISIBLE_ITEMS = 7;
 const HALF_ITEMS = Math.floor(VISIBLE_ITEMS / 2);

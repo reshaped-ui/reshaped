@@ -1,7 +1,9 @@
-import { classNames, responsiveVariables, responsivePropDependency } from "utilities/props";
 import { resolveMixin } from "styles/mixin";
-import type * as T from "./Grid.types";
+import { classNames, responsiveVariables, responsivePropDependency } from "utilities/props";
+
 import s from "./Grid.module.css";
+
+import type * as T from "./Grid.types";
 
 export const GridItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
 	props: T.ItemProps<As>

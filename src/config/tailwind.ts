@@ -1,9 +1,10 @@
-import reshapedDefinition from "themes/_generator/definitions/reshaped";
-import { camelToKebab } from "utilities/string";
-import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
-import type { ThemeDefinition } from "themes/_generator/tokens/types";
-import type { Name as ColorName } from "themes/_generator/tokens/color/color.types";
 import { bgWithDynamicForeground } from "themes/_generator/constants";
+import reshapedDefinition from "themes/_generator/definitions/reshaped";
+import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
+import { camelToKebab } from "utilities/string";
+
+import type { Name as ColorName } from "themes/_generator/tokens/color/color.types";
+import type { ThemeDefinition } from "themes/_generator/tokens/types";
 
 export const getTheme = (theme?: ThemeDefinition) => {
 	const config: Record<
