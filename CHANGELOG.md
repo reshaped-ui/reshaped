@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.9.0-canary.2
+
+### Minor Changes
+
+- [`7423b9a`](https://github.com/reshaped-ui/reshaped/commit/7423b9ac289280187a85bd1dc6a27ec3f7ee135d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: renderDateSlot support
+  Text: Fixed text alignment reset
+
+### Patch Changes
+
+- [`c5f162f`](https://github.com/reshaped-ui/reshaped/commit/c5f162fc9186a89e57fdf54bc26f5f48e2f672f5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Handler keydown when input is focused
+
+- [`bd54b79`](https://github.com/reshaped-ui/reshaped/commit/bd54b79c6fef5a5ef1e374b1767ede81610dfd99) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tooltip: Disable group timeouts for controlled tooltips
+
+- [`11a667a`](https://github.com/reshaped-ui/reshaped/commit/11a667a77153e0ae8a8573e978bf7e98f917b4c9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - DropdownMenu, Select: Enable circular navigation
+
 ## 3.9.0-canary.1
 
 ### Patch Changes
