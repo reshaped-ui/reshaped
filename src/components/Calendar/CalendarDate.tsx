@@ -22,8 +22,9 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 		onDateHover,
 		onDateHoverEnd,
 		onDateFocus,
-		renderAriaLabel,
 		selectedDates,
+		renderAriaLabel,
+		renderSlot,
 	} = props;
 
 	if (!date) return <td className={s.cell} aria-hidden="true" />;
@@ -118,6 +119,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 				}}
 			>
 				{date.getDate()}
+				{renderSlot?.({ date, selected: Boolean(selection && selection !== "range") })}
 			</Actionable>
 		</td>
 	);

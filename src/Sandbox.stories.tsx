@@ -1,10 +1,9 @@
 import View from "components/View";
 import Image from "components/Image";
 import React from "react";
-import Select from "components/Select";
 import useToggle from "hooks/useToggle";
-import Modal from "components/Modal";
-import MenuItem from "components/MenuItem";
+import Calendar from "components/Calendar";
+import Text from "components/Text";
 
 export default {
 	title: "Sandbox",
@@ -41,35 +40,18 @@ const Component = () => {
 
 	return (
 		<>
-			<Select name="animal" placeholder="Select an animal" onClick={handleClick}>
-				{value}
-			</Select>
-			<Modal active={toggle.active} onClose={toggle.deactivate} position="bottom" padding={2}>
-				<MenuItem
-					roundedCorners
-					onClick={() => {
-						setValue("Dog");
-						toggle.deactivate();
-					}}
-					attributes={{
-						role: "option",
-					}}
-				>
-					Dog
-				</MenuItem>
-				<MenuItem
-					roundedCorners
-					attributes={{
-						role: "option",
-					}}
-					onClick={() => {
-						setValue("Turtle");
-						toggle.deactivate();
-					}}
-				>
-					Turtle
-				</MenuItem>
-			</Modal>
+			<Calendar 
+					defaultMonth={new Date(2020, 0)} 
+					renderDateSlot={(args) => (
+						<Text 
+							color={args.date.getDate() < 15 ? "positive" : "neutral-faded"} 
+							align="center" 
+							variant="caption-2"
+						>
+							{args.date.getDate() < 15 ? '$150' : '$200'}
+						</Text>
+					)} 
+				/>
 		</>
 	);
 };

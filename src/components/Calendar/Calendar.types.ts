@@ -21,6 +21,8 @@ export type BaseProps = {
 	renderSelectedMonthLabel?: (args: { date: Date }) => string;
 	/** Render a custom month label, can be used for localization */
 	renderMonthLabel?: (args: { month: number; date: Date }) => string;
+	/** Render a custom date slot content under the date number */
+	renderDateSlot?: (args: { date: Date; selected: boolean }) => React.ReactNode;
 	/** Aria label for the previous month button */
 	previousMonthAriaLabel?: string;
 	nextMonthAriaLabel?: string;
@@ -102,6 +104,7 @@ export type MonthProps = {
 	| "renderWeekDay"
 	| "renderSelectedMonthLabel"
 	| "renderDateAriaLabel"
+	| "renderDateSlot"
 > &
 	Pick<ControlledProps, "value" | "onChange" | "range">;
 
@@ -118,6 +121,7 @@ export type DateProps = {
 	startValue: Date | null;
 	endValue: Date | null;
 	renderAriaLabel?: MonthProps["renderDateAriaLabel"];
+	renderSlot?: MonthProps["renderDateSlot"];
 	onDateFocus: (date: Date) => void;
 } & Pick<
 	MonthProps,
