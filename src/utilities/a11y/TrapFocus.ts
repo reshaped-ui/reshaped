@@ -67,7 +67,7 @@ class TrapFocus {
 			target: isPrev ? "prev" : "next",
 			options: {
 				additionalElement: includeTrigger ? this.#trigger : undefined,
-				circular: mode !== "action-menu" && mode !== "action-bar",
+				circular: true,
 			},
 		});
 
