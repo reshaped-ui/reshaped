@@ -1,21 +1,20 @@
 .content {
+	--rs-border-w: 1px;
+
 	max-width: 360px;
+	border: var(--rs-border-w) solid var(--rs-color-border-neutral-faded);
 }
 
 .content--variant-elevated {
 	border-radius: var(--rs-radius-medium);
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	box-shadow:
-		0 0 0 1px var(--rs-color-border-neutral-faded) inset,
-		var(--rs-shadow-overlay);
+	box-shadow: var(--rs-shadow-overlay);
 	min-width: 220px;
 }
 
 .content--variant-elevated.content--elevation-raised {
-	box-shadow:
-		0 0 0 1px var(--rs-color-border-neutral-faded) inset,
-		var(--rs-shadow-raised);
+	box-shadow: var(--rs-shadow-raised);
 }
 
 .content--radius-small {
