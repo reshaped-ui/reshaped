@@ -99,6 +99,8 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		const key = e.key;
 
+		// Ignore search when user is typing, e.g. if there is a filter input inside the dropdown
+		if (document.activeElement?.tagName === "INPUT") return;
 		// Only handle alphanumeric and space characters for type-ahead
 		if (key.length !== 1 || !key.match(/[\w\s]/)) return;
 
