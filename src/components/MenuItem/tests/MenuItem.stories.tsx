@@ -1,11 +1,12 @@
-import { Example, Placeholder } from "utilities/storybook";
-import View from "components/View";
-import Text from "components/Text";
-import MenuItem from "components/MenuItem";
-import IconZap from "icons/Zap";
-import Hotkey from "components/Hotkey";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
+
+import Hotkey from "components/Hotkey";
+import MenuItem from "components/MenuItem";
+import Text from "components/Text";
+import View from "components/View";
+import IconZap from "icons/Zap";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Components/MenuItem",

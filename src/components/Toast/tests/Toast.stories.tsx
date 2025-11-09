@@ -1,14 +1,15 @@
-import { Example } from "utilities/storybook";
-import { useToast, ToastProvider } from "components/Toast";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, waitFor, within } from "storybook/test";
+
 import Button from "components/Button";
-import View from "components/View";
+import Dismissible from "components/Dismissible";
 import Image from "components/Image";
 import Text from "components/Text";
-import Dismissible from "components/Dismissible";
+import { useToast, ToastProvider } from "components/Toast";
+import View from "components/View";
 import IconZap from "icons/Zap";
-import { expect, userEvent, waitFor, within } from "storybook/test";
-import { StoryObj } from "@storybook/react-vite";
 import { sleep } from "utilities/helpers";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Toast",
@@ -482,7 +483,7 @@ export const className: StoryObj = {
 		return (
 			<Button
 				onClick={() => {
-					const id = toast.show({
+					toast.show({
 						text: "Content",
 						attributes: { "data-testid": "test-id" },
 						className: "test-classname",

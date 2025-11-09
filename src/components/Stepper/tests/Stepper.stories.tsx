@@ -1,10 +1,11 @@
-import React from "react";
-import { Example, Placeholder } from "utilities/storybook";
-import Stepper from "components/Stepper";
-import Button from "components/Button";
-import View from "components/View";
-import { expect } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
+import { expect } from "storybook/test";
+
+import Button from "components/Button";
+import Stepper from "components/Stepper";
+import View from "components/View";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Components/Stepper",

@@ -1,17 +1,16 @@
-import React from "react";
-import { expect, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
-import IconZap from "icons/Zap";
-import { Example, Placeholder } from "utilities/storybook";
-import useToggle from "hooks/useToggle";
-import Modal from "components/Modal";
+import React from "react";
+import { expect, fn, Mock, userEvent, within } from "storybook/test";
+
+import Badge from "components/Badge";
+import FormControl from "components/FormControl";
 import MenuItem from "components/MenuItem";
+import Modal from "components/Modal";
 import Select, { SelectProps } from "components/Select";
 import Text from "components/Text";
-import FormControl from "components/FormControl";
-import Badge from "components/Badge";
-import IconPlus from "icons/Plus";
-import TextField from "components/TextField";
+import useToggle from "hooks/useToggle";
+import IconZap from "icons/Zap";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Components/Select",
@@ -139,8 +138,10 @@ export const customRender: StoryObj = {
 		// Remount to instantly close select
 		await mount();
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [_, triggerWithGroups] = canvas.getAllByRole("button");
 		const hiddenInputs2 = canvasElement.querySelectorAll('input[type="hidden"]');
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [__, hiddenInputWithGroups] = Array.from(hiddenInputs2);
 
 		await userEvent.click(triggerWithGroups);
@@ -351,6 +352,7 @@ export const customHandlers: StoryObj<{
 
 		await userEvent.click(uncontrolled);
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [_, uncontrolledOption] = within(canvasElement.ownerDocument.body).getAllByRole("option");
 
 		await userEvent.click(uncontrolledOption);
@@ -366,14 +368,17 @@ export const customHandlers: StoryObj<{
 
 		await mount();
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [__, controlled, focusable] = canvas.getAllByRole("button");
 		const hiddenInputs2 = canvasElement.querySelectorAll('input[type="hidden"]');
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [___, inputControlled] = Array.from(hiddenInputs2);
 
 		expect(inputControlled).toHaveValue("dog");
 
 		await userEvent.click(controlled);
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [____, controlledOption] = within(canvasElement.ownerDocument.body).getAllByRole(
 			"option"
 		);
@@ -519,6 +524,7 @@ export const multiple: StoryObj<{ handleChange: Mock }> = {
 
 		await userEvent.click(uncontrolled);
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [_, uncontrolledOption] = within(canvasElement.ownerDocument.body).getAllByRole("option");
 
 		await userEvent.click(uncontrolledOption);

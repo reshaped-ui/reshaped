@@ -1,8 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { userEvent, expect, fn } from "storybook/test";
-import { Example } from "utilities/storybook";
+
 import Actionable from "components/Actionable";
 import View from "components/View";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Utility components/Actionable",
@@ -244,6 +245,7 @@ export const stopPropagation: StoryObj<{ handleParentClick: ReturnType<typeof fn
 		handleParentClick: fn(),
 	},
 	render: (args) => (
+		// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
 		<div onClick={args.handleParentClick}>
 			<Actionable stopPropagation onClick={() => {}}>
 				Trigger

@@ -1,9 +1,10 @@
-import { Example } from "utilities/storybook";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent } from "storybook/test";
+
 import Link from "components/Link";
 import Text from "components/Text";
 import IconZap from "icons/Zap";
-import { expect, fn, userEvent } from "storybook/test";
-import { StoryObj } from "@storybook/react-vite";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Link",

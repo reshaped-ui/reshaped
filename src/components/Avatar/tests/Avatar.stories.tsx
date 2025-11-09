@@ -1,10 +1,11 @@
-import { useState } from "react";
 import { StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
 import { expect, fn, Mock, waitFor } from "storybook/test";
-import { Example } from "utilities/storybook";
+
 import Avatar from "components/Avatar";
 import View from "components/View";
 import IconZap from "icons/Zap";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Avatar",
@@ -187,7 +188,7 @@ export const renderImage: StoryObj = {
 				<Avatar
 					src="https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80"
 					alt="Amsterdam canal"
-					renderImage={(attributes) => <img {...attributes} id="test-image" />}
+					renderImage={(attributes) => <img {...attributes} id="test-image" alt="" />}
 				/>
 			</Example.Item>
 		</Example>

@@ -1,18 +1,19 @@
+import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { StoryObj } from "@storybook/react-vite";
 import { userEvent, waitFor, within, expect, fn } from "storybook/test";
-import { Example } from "utilities/storybook";
-import Reshaped from "components/Reshaped";
-import View from "components/View";
-import Theme from "components/Theme";
+
 import Button from "components/Button";
 import Flyout, { FlyoutInstance, FlyoutProps } from "components/Flyout";
-import TextField from "components/TextField";
+import Modal from "components/Modal";
+import Reshaped from "components/Reshaped";
 import Select from "components/Select";
 import Switch from "components/Switch";
+import TextField from "components/TextField";
+import Theme from "components/Theme";
+import View from "components/View";
 import { sleep } from "utilities/helpers";
-import Modal from "components/Modal";
+import { Example } from "utilities/storybook";
 
 export default { title: "Utility components/Flyout" };
 
@@ -881,7 +882,7 @@ if (!window.customElements.get("custom-element-flyout")) {
 
 export const testShadowDom = {
 	name: "test: shadow dom",
-	// @ts-ignore
+	// @ts-expect-error - custom-element-flyout is not a valid HTML element
 	render: () => <custom-element-flyout />,
 };
 

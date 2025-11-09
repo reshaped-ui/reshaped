@@ -1,19 +1,21 @@
-import React from "react";
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { expect, userEvent } from "storybook/test";
-import { Example } from "utilities/storybook";
+
 import Button from "components/Button";
-import useToggle from "hooks/useToggle";
-import View from "components/View";
-import TextField from "components/TextField";
-import RadioGroup from "components/RadioGroup";
-import Radio from "components/Radio";
-import * as keys from "constants/keys";
-import TrapFocus from "../TrapFocus";
 import Link from "components/Link";
-import TextArea from "components/TextArea";
+import Radio from "components/Radio";
+import RadioGroup from "components/RadioGroup";
 import Select from "components/Select";
+import TextArea from "components/TextArea";
+import TextField from "components/TextField";
+import View from "components/View";
+import * as keys from "constants/keys";
+import useToggle from "hooks/useToggle";
 import { sleep } from "utilities/helpers";
+import { Example } from "utilities/storybook";
+
+import TrapFocus from "../TrapFocus";
 
 export default {
 	title: "Utilities/TrapFocus",
@@ -139,7 +141,7 @@ export const modeActionMenu: StoryObj = {
 			});
 
 			return () => trapFocus.release();
-		}, [trapToggle.active]);
+		}, [trapToggle]);
 
 		return (
 			<Example>
@@ -223,7 +225,7 @@ export const modeActionBar: StoryObj = {
 			});
 
 			return () => trapFocus.release();
-		}, [trapToggle.active]);
+		}, [trapToggle]);
 
 		return (
 			<Example>
@@ -307,7 +309,7 @@ export const modeContentMenu: StoryObj = {
 			});
 
 			return () => trapFocus.release();
-		}, [trapToggle.active]);
+		}, [trapToggle]);
 
 		return (
 			<Example>

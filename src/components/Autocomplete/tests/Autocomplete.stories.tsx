@@ -1,13 +1,13 @@
-import React from "react";
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { fn, expect, Mock, within, waitFor, userEvent, fireEvent } from "storybook/test";
-import { Example } from "utilities/storybook";
+
 import Autocomplete from "components/Autocomplete";
-import View from "components/View";
 import Badge from "components/Badge";
-import useToggle from "hooks/useToggle";
 import FormControl from "components/FormControl";
+import useToggle from "hooks/useToggle";
 import { sleep } from "utilities/helpers";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Autocomplete",
@@ -50,7 +50,7 @@ export const active: StoryObj<{
 							}}
 							onChange={(args) => console.log(args)}
 						>
-							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
+							{["Pizza", "Pie", "Ice-cream"].map((v) => {
 								return (
 									<Autocomplete.Item key={v} value={v}>
 										{v}
@@ -111,7 +111,7 @@ export const base: StoryObj<{
 							onBackspace={args.handleBackspace}
 							onItemSelect={args.handleItemSelect}
 						>
-							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
+							{["Pizza", "Pie", "Ice-cream"].map((v) => {
 								return (
 									<Autocomplete.Item key={v} value={v}>
 										{v}

@@ -1,7 +1,8 @@
-import { Example } from "utilities/storybook";
-import Pagination from "components/Pagination";
-import { expect, fn, userEvent, within } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
+
+import Pagination from "components/Pagination";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Pagination",

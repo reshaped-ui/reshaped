@@ -1,10 +1,11 @@
-import React from "react";
-import { Example } from "utilities/storybook";
-import View from "components/View";
-import Progress from "components/Progress";
-import Button from "components/Button";
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { expect } from "storybook/test";
+
+import Button from "components/Button";
+import Progress from "components/Progress";
+import View from "components/View";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Progress",

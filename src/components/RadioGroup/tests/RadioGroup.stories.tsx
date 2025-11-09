@@ -1,7 +1,8 @@
-import RadioGroup from "components/RadioGroup";
-import Radio from "components/Radio";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
+
+import Radio from "components/Radio";
+import RadioGroup from "components/RadioGroup";
 
 export default {
 	title: "Components/RadioGroup",

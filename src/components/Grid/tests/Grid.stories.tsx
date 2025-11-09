@@ -1,8 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
-import { Example } from "utilities/storybook";
+
 import Grid from "components/Grid";
 import View from "components/View";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Utility components/Grid",

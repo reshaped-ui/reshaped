@@ -1,7 +1,8 @@
-import { Example, Placeholder } from "utilities/storybook";
-import Timeline from "components/Timeline";
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
+
+import Timeline from "components/Timeline";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Components/Timeline",

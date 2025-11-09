@@ -1,17 +1,18 @@
+import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { Example, Placeholder } from "utilities/storybook";
-import Modal, { type ModalProps } from "components/Modal";
-import View from "components/View";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+
 import Button from "components/Button";
 import Dismissible from "components/Dismissible";
 import DropdownMenu from "components/DropdownMenu";
+import Modal, { type ModalProps } from "components/Modal";
+import Radio from "components/Radio";
 import Switch from "components/Switch";
 import TextField from "components/TextField";
+import View from "components/View";
 import useToggle from "hooks/useToggle";
-import Radio from "components/Radio";
-import { StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { sleep } from "utilities/helpers";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Components/Modal",
@@ -414,6 +415,7 @@ export const edgeCases = {
 					</Demo>
 				</Example.Item>
 				<Example.Item title="keyboard focus stays on the modal first">
+					{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
 					<Demo title="Modal title" autoFocus={false} />
 				</Example.Item>
 				<Example.Item title="trap focus works with custom children components">

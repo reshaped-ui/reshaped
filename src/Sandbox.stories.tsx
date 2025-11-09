@@ -1,9 +1,9 @@
-import View from "components/View";
-import Image from "components/Image";
 import React from "react";
-import useToggle from "hooks/useToggle";
+
 import Calendar from "components/Calendar";
+import Image from "components/Image";
 import Text from "components/Text";
+import View from "components/View";
 
 export default {
 	title: "Sandbox",
@@ -31,27 +31,20 @@ export const preview = () => {
 };
 
 const Component = () => {
-	const toggle = useToggle();
-	const [value, setValue] = React.useState("Dog");
-
-	const handleClick = () => {
-		toggle.toggle();
-	};
-
 	return (
 		<>
-			<Calendar 
-					defaultMonth={new Date(2020, 0)} 
-					renderDateSlot={(args) => (
-						<Text 
-							color={args.date.getDate() < 15 ? "positive" : "neutral-faded"} 
-							align="center" 
-							variant="caption-2"
-						>
-							{args.date.getDate() < 15 ? '$150' : '$200'}
-						</Text>
-					)} 
-				/>
+			<Calendar
+				defaultMonth={new Date(2020, 0)}
+				renderDateSlot={(args) => (
+					<Text
+						color={args.date.getDate() < 15 ? "positive" : "neutral-faded"}
+						align="center"
+						variant="caption-2"
+					>
+						{args.date.getDate() < 15 ? "$150" : "$200"}
+					</Text>
+				)}
+			/>
 		</>
 	);
 };

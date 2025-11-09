@@ -1,14 +1,15 @@
-import { useState, useId } from "react";
 import { StoryObj } from "@storybook/react-vite";
+import { useState, useId } from "react";
 import { expect, fn, userEvent, within, waitFor } from "storybook/test";
-import { Example } from "utilities/storybook";
-import { sleep } from "utilities/helpers";
-import View from "components/View";
-import Popover from "components/Popover";
-import Tooltip from "components/Tooltip";
+
 import Button from "components/Button";
 import MenuItem from "components/MenuItem";
+import Popover, { type PopoverProps } from "components/Popover";
 import ScrollArea from "components/ScrollArea";
+import Tooltip from "components/Tooltip";
+import View from "components/View";
+import { sleep } from "utilities/helpers";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Popover",
@@ -20,7 +21,7 @@ export default {
 	},
 };
 
-const Demo: React.FC<any> = (props) => {
+const Demo: React.FC<PopoverProps> = (props) => {
 	const { position, ...rest } = props;
 	const id = useId();
 
@@ -275,6 +276,7 @@ export const autoFocus: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="autoFocus=false">
+				{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
 				<Demo autoFocus={false} />
 			</Example.Item>
 		</Example>
@@ -387,6 +389,7 @@ export const testContentEditable = {
 							<div
 								style={{ height: "200px" }}
 								contentEditable
+								role="textbox"
 								tabIndex={0}
 								onInput={(e) => {
 									setActive(e.currentTarget.innerText.startsWith("@"));

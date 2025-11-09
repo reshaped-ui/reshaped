@@ -1,9 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import { within, expect, userEvent, fn } from "storybook/test";
-import { Example, Placeholder } from "utilities/storybook";
+
 import Dismissible from "components/Dismissible";
 import Image from "components/Image";
 import View from "components/View";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Utility components/Dismissible",

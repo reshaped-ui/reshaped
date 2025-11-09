@@ -1,7 +1,8 @@
-import { Example } from "utilities/storybook";
-import Skeleton from "components/Skeleton";
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
+
+import Skeleton from "components/Skeleton";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Skeleton",

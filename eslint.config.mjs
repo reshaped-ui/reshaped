@@ -7,7 +7,7 @@ import reactHooksPlugin from "eslint-plugin-react-hooks";
 import tsConfig from "typescript-eslint";
 
 export default defineConfig([
-	globalIgnores(["bin/*.js", "src/**/*.stories.tsx"]),
+	globalIgnores(["bin/*.js"]),
 	esConfig.configs.recommended,
 	...tsConfig.configs.recommended,
 	prettierPlugin,
@@ -59,6 +59,12 @@ export default defineConfig([
 					project: "./tsconfig.json",
 				},
 			},
+		},
+	},
+	{
+		files: ["**/*.stories.tsx"],
+		rules: {
+			"react-hooks/rules-of-hooks": "off",
 		},
 	},
 ]);

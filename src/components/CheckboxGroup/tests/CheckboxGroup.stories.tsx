@@ -1,9 +1,9 @@
-import { Example } from "utilities/storybook";
-import View from "components/View";
-import CheckboxGroup from "components/CheckboxGroup";
-import Checkbox from "components/Checkbox";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
+
+import Checkbox from "components/Checkbox";
+import CheckboxGroup from "components/CheckboxGroup";
+import View from "components/View";
 
 export default {
 	title: "Components/CheckboxGroup",

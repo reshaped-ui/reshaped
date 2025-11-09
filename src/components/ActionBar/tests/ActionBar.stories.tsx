@@ -1,10 +1,11 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
-import { Placeholder, Example } from "utilities/storybook";
+
 import ActionBar from "components/ActionBar";
-import View from "components/View";
 import Button from "components/Button";
+import View from "components/View";
 import useToggle from "hooks/useToggle";
+import { Placeholder, Example } from "utilities/storybook";
 
 export default {
 	title: "Components/ActionBar",

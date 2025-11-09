@@ -1,8 +1,9 @@
-import { Example } from "utilities/storybook";
-import Checkbox from "components/Checkbox";
-import View from "components/View";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
+
+import Checkbox from "components/Checkbox";
+import View from "components/View";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Checkbox",

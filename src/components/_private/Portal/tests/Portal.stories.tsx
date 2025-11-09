@@ -1,4 +1,5 @@
 import React from "react";
+
 import Portal from "components/_private/Portal";
 
 export default { title: "Internal/Portal" };

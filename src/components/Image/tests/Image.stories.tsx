@@ -1,9 +1,11 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, Mock, waitFor } from "storybook/test";
-import { Example } from "utilities/storybook";
-import View from "components/View";
+
 import Icon from "components/Icon";
+import View from "components/View";
 import IconZap from "icons/Zap";
+import { Example } from "utilities/storybook";
+
 import Image from "../Image";
 
 export default {
@@ -185,7 +187,7 @@ export const renderImage: StoryObj = {
 				<Image
 					src={imgUrl}
 					alt="Amsterdam canal"
-					renderImage={(attributes) => <img {...attributes} id="test-image" />}
+					renderImage={(attributes) => <img {...attributes} id="test-image" alt="test-image" />}
 				/>
 			</Example.Item>
 			<Example.Item title="renderImage, fallback">
@@ -193,7 +195,9 @@ export const renderImage: StoryObj = {
 					src="error"
 					fallback={imgUrl}
 					alt="Amsterdam canal 2"
-					renderImage={(attributes) => <img {...attributes} id="test-image-fallback" />}
+					renderImage={(attributes) => (
+						<img {...attributes} id="test-image-fallback" alt="test-image-fallback" />
+					)}
 				/>
 			</Example.Item>
 		</Example>

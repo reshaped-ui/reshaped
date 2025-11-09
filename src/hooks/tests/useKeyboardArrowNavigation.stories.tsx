@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
 import { StoryObj } from "@storybook/react-vite";
+import { useRef } from "react";
 import { expect, userEvent } from "storybook/test";
-import useRTL from "hooks/useRTL";
-import View from "components/View";
+
 import Button from "components/Button";
+import View from "components/View";
 import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
 
 export default {

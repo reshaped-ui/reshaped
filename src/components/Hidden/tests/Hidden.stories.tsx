@@ -1,7 +1,8 @@
-import { Example } from "utilities/storybook";
-import Hidden from "components/Hidden";
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
+
+import Hidden from "components/Hidden";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Utility components/Hidden",

@@ -1,11 +1,12 @@
-import { Example } from "utilities/storybook";
-import Tooltip from "components/Tooltip";
-import Popover from "components/Popover";
+import { StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+
 import Button from "components/Button";
+import Popover from "components/Popover";
+import Tooltip, { TooltipProps } from "components/Tooltip";
 import View from "components/View";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
-import { StoryObj } from "@storybook/react-vite";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Tooltip",
@@ -17,7 +18,7 @@ export default {
 	},
 };
 
-const Demo: React.FC<any> = (props) => {
+const Demo: React.FC<Omit<TooltipProps, "children">> = (props) => {
 	const { position, ...rest } = props;
 
 	return (
@@ -27,7 +28,7 @@ const Demo: React.FC<any> = (props) => {
 	);
 };
 
-const DemoResponsive: React.FC<any> = (props) => {
+const DemoResponsive: React.FC<Omit<TooltipProps, "children">> = (props) => {
 	const { position, ...rest } = props;
 	const screenSize = useResponsiveClientValue({
 		s: "small",

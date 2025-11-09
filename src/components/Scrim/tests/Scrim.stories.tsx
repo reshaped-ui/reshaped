@@ -1,7 +1,8 @@
-import { Example, Placeholder } from "utilities/storybook";
-import Scrim from "components/Scrim";
-import { expect } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
+
+import Scrim from "components/Scrim";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Components/Scrim",

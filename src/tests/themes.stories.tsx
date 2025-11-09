@@ -1,21 +1,24 @@
 import { useLayoutEffect, useState } from "react";
-import { Example } from "utilities/storybook";
-import View from "components/View";
-import Button from "components/Button";
-import Badge from "components/Badge";
+
+import Actionable from "components/Actionable";
 import Alert from "components/Alert";
-import Card from "components/Card";
 import Avatar from "components/Avatar";
+import Badge from "components/Badge";
+import Button from "components/Button";
+import Card from "components/Card";
 import DropdownMenu from "components/DropdownMenu";
+import Link from "components/Link";
+import Switch from "components/Switch";
+import Text from "components/Text";
 import TextField from "components/TextField";
 import Theme, { useTheme } from "components/Theme";
+import View from "components/View";
 import IconZap from "icons/Mic";
-import Link from "components/Link";
-import Text from "components/Text";
+import { Example } from "utilities/storybook";
+
 import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
+
 import ThemePlayground from "./ThemesPlayground";
-import Actionable from "components/Actionable";
-import Switch from "components/Switch";
 
 export default {
 	title: "Internal/Themes",

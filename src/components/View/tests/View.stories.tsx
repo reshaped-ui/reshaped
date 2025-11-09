@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Placeholder, Example } from "utilities/storybook";
-import View, { type ViewProps } from "components/View";
-import Hidden from "components/Hidden";
-import Text from "components/Text";
-import Tabs from "components/Tabs";
-import Avatar from "components/Avatar";
-import MenuItem from "components/MenuItem";
-import Button from "components/Button";
-import IconPlus from "icons/Plus";
-import useToggle from "hooks/useToggle";
-import { expect } from "storybook/test";
 import { StoryObj } from "@storybook/react-vite";
+import React, { useEffect, useState } from "react";
+import { expect } from "storybook/test";
+
+import Avatar from "components/Avatar";
+import Button from "components/Button";
+import Hidden from "components/Hidden";
+import MenuItem from "components/MenuItem";
+import Tabs from "components/Tabs";
+import Text from "components/Text";
+import View, { type ViewProps } from "components/View";
+import useToggle from "hooks/useToggle";
+import IconPlus from "icons/Plus";
+import { Placeholder, Example } from "utilities/storybook";
 
 export default {
 	title: "Utility components/View",
@@ -891,7 +892,7 @@ export const positioning = {
 			</Example.Item>
 
 			<Example.Item title="position: sticky">
-				<div style={{ overflow: "auto", height: 100 }} tabIndex={0}>
+				<div style={{ overflow: "auto", height: 100 }} tabIndex={0} role="button">
 					<View position="sticky" borderColor="primary" insetTop={0}>
 						Content
 					</View>
@@ -900,7 +901,11 @@ export const positioning = {
 			</Example.Item>
 
 			<Example.Item title={["responsive", "[s] position: absolute", "[m+]: position: relative"]}>
-				<div style={{ overflow: "auto", height: 100, position: "relative" }} tabIndex={0}>
+				<div
+					style={{ overflow: "auto", height: 100, position: "relative" }}
+					tabIndex={0}
+					role="button"
+				>
 					<View position={{ s: "absolute", m: "relative" }} borderColor="primary" insetTop={0}>
 						Content
 					</View>

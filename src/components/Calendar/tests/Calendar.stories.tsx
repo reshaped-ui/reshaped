@@ -1,8 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { fn, expect, userEvent, within, type Mock, waitFor } from "storybook/test";
-import { Example } from "utilities/storybook";
+
 import Calendar from "components/Calendar";
 import Text from "components/Text";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Calendar",
@@ -188,19 +189,25 @@ export const renderDateSlot: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="renderDateSlot">
-				<Calendar 
-					defaultMonth={new Date(2020, 0)} 
+				<Calendar
+					defaultMonth={new Date(2020, 0)}
 					defaultValue={new Date(2020, 0, 10)}
 					renderDateSlot={(args) => {
 						return (
-							<Text 
-								color={args.selected ? undefined : (args.date.getDate() < 15 ? "positive" : "neutral-faded")} 
+							<Text
+								color={
+									args.selected
+										? undefined
+										: args.date.getDate() < 15
+											? "positive"
+											: "neutral-faded"
+								}
 								variant="caption-2"
 							>
-								{args.date.getDate() < 15 ? '$150' : '$200'}
+								{args.date.getDate() < 15 ? "$150" : "$200"}
 							</Text>
 						);
-          }}
+					}}
 				/>
 			</Example.Item>
 		</Example>

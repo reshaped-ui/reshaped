@@ -1,9 +1,10 @@
-import { Example, Placeholder } from "utilities/storybook";
+import { StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
+
 import Alert from "components/Alert";
 import Link from "components/Link";
 import IconZap from "icons/Zap";
-import { StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
+import { Example, Placeholder } from "utilities/storybook";
 
 export default {
 	title: "Components/Alert",

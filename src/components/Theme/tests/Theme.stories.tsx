@@ -1,12 +1,13 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, userEvent } from "storybook/test";
-import Card from "components/Card";
+
 import Button from "components/Button";
-import View from "components/View";
+import Card from "components/Card";
 import MenuItem from "components/MenuItem";
-import Theme, { useTheme } from "components/Theme";
-import { Example } from "utilities/storybook";
 import Popover from "components/Popover";
+import Theme, { useTheme } from "components/Theme";
+import View from "components/View";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Utility components/Theme",
@@ -127,7 +128,7 @@ export const controlled: StoryObj = {
 	name: "controlled",
 	render: () => {
 		const Internal = () => {
-			const { setTheme, theme } = useTheme();
+			const { setTheme } = useTheme();
 
 			return (
 				<Button color="primary" onClick={() => setTheme("slate")}>

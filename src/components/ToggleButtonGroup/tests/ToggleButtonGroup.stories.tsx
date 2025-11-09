@@ -1,11 +1,12 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, Mock, userEvent } from "storybook/test";
-import { Example } from "utilities/storybook";
-import ToggleButtonGroup from "components/ToggleButtonGroup";
+
 import ToggleButton from "components/ToggleButton";
-import IconPlus from "icons/Plus";
-import IconMinus from "icons/Minus";
+import ToggleButtonGroup from "components/ToggleButtonGroup";
 import IconCheckmark from "icons/Checkmark";
+import IconMinus from "icons/Minus";
+import IconPlus from "icons/Plus";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/ToggleButtonGroup",

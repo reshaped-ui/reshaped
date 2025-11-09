@@ -1,15 +1,15 @@
-import React from "react";
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { expect, userEvent, fn } from "storybook/test";
-import { Example } from "utilities/storybook";
+
+import Button from "components/Button";
 import FileUpload from "components/FileUpload";
-import View from "components/View";
+import Icon from "components/Icon";
 import Image from "components/Image";
 import Link from "components/Link";
-import Icon from "components/Icon";
+import View from "components/View";
 import IconMic from "icons/Mic";
-import Button from "components/Button";
-import TextField from "components/TextField";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/FileUpload",

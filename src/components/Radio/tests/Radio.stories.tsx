@@ -1,8 +1,9 @@
-import { Example } from "utilities/storybook";
-import Radio from "components/Radio";
-import View from "components/View";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
+
+import Radio from "components/Radio";
+import View from "components/View";
+import { Example } from "utilities/storybook";
 
 export default {
 	title: "Components/Radio",
@@ -89,7 +90,7 @@ export const checked: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
 			Content
 		</Radio>
 	),
-	play: async ({ canvas, args }) => {
+	play: async ({ canvas }) => {
 		const input = canvas.getByRole("radio") as HTMLInputElement;
 
 		expect(input).toBeChecked();
@@ -136,7 +137,7 @@ export const defaultChecked: StoryObj<{ handleChange: ReturnType<typeof fn> }> =
 			Content
 		</Radio>
 	),
-	play: async ({ canvas, args }) => {
+	play: async ({ canvas }) => {
 		const input = canvas.getByRole("radio") as HTMLInputElement;
 
 		expect(input).toBeChecked();
