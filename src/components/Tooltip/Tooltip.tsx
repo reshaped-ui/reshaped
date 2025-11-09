@@ -14,7 +14,13 @@ const Tooltip: React.FC<T.Props> = (props) => {
 	if (!text) return children({ ref: null });
 
 	return (
-		<Flyout {...flyoutProps} position={position} triggerType="hover" groupTimeouts>
+		<Flyout
+			{...flyoutProps}
+			position={position}
+			triggerType="hover"
+			// Disable group timeouts by default since it's not controlled by the default user events
+			groupTimeouts={flyoutProps.active === undefined ? true : false}
+		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>
 			<Flyout.Content>
 				<Theme colorMode={color}>
