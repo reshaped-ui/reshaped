@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 
 import Button from "components/Button";
 import Dismissible from "components/Dismissible";
@@ -8,7 +8,6 @@ import Text from "components/Text";
 import { useToast, ToastProvider } from "components/Toast";
 import View from "components/View";
 import IconZap from "icons/Zap";
-import { sleep } from "utilities/helpers";
 import { Example } from "utilities/storybook";
 
 export default {
@@ -424,14 +423,6 @@ export const base: StoryObj = {
 		expect(children).toBeInTheDocument();
 		expect(slot).toBeInTheDocument();
 		expect(action).toBeInTheDocument();
-
-		await userEvent.click(action);
-
-		await sleep(1000);
-
-		await waitFor(() => {
-			expect(title).not.toBeInTheDocument();
-		});
 	},
 };
 

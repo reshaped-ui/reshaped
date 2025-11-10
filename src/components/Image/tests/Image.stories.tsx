@@ -187,7 +187,8 @@ export const renderImage: StoryObj = {
 				<Image
 					src={imgUrl}
 					alt="Amsterdam canal"
-					renderImage={(attributes) => <img {...attributes} id="test-image" alt="test-image" />}
+					// eslint-disable-next-line jsx-a11y/alt-text
+					renderImage={(attributes) => <img {...attributes} id="test-image" />}
 				/>
 			</Example.Item>
 			<Example.Item title="renderImage, fallback">
@@ -195,9 +196,8 @@ export const renderImage: StoryObj = {
 					src="error"
 					fallback={imgUrl}
 					alt="Amsterdam canal 2"
-					renderImage={(attributes) => (
-						<img {...attributes} id="test-image-fallback" alt="test-image-fallback" />
-					)}
+					// eslint-disable-next-line jsx-a11y/alt-text
+					renderImage={(attributes) => <img {...attributes} id="test-image-fallback" />}
 				/>
 			</Example.Item>
 		</Example>

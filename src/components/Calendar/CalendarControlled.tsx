@@ -30,6 +30,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 		range,
 		firstWeekDay,
 		selectedDates,
+		monthsToRender = 1,
 		renderMonthLabel,
 		renderSelectedMonthLabel,
 		renderWeekDay,
@@ -109,42 +110,67 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 
 	return (
 		<View gap={2}>
-			<CalendarControls
-				renderSelectedMonthLabel={renderSelectedMonthLabel}
-				monthDate={monthDate}
-				selectionMode={selectionMode}
-				isFirstMonth={bounds.isFirstMonth}
-				isLastMonth={bounds.isLastMonth}
-				monthTitleRef={monthTitleRef}
-				onMonthTitleClick={handleMonthTitleClick}
-				onNextClick={handleNextClick}
-				onPreviousClick={handlePreviousClick}
-				previousMonthAriaLabel={previousMonthAriaLabel}
-				previousYearAriaLabel={previousYearAriaLabel}
-				nextMonthAriaLabel={nextMonthAriaLabel}
-				nextYearAriaLabel={nextYearAriaLabel}
-				monthSelectionAriaLabel={monthSelectionAriaLabel}
-			/>
+			<View direction="row" gap={4}>
+				{Array.from({ length: selectionMode === "date" ? monthsToRender : 1 }).map((_, index) => {
+					const hidePrevious = bounds.isFirstMonth || (monthsToRender > 0 && index > 0);
+					const hideNext =
+						bounds.isLastMonth ||
+						(selectionMode === "date" && monthsToRender > 0 && index < monthsToRender - 1);
+					const currentMonthDate = new Date(monthDate);
 
-			<View.Item attributes={{ ref: selectionRootRef }}>
-				{selectionMode === "date" && (
-					<CalendarMonth
-						date={monthDate}
-						value={value}
-						onChange={onChange}
-						min={min}
-						max={max}
-						range={range}
-						firstWeekDay={firstWeekDay}
-						hoveredDate={hoveredDate}
-						selectedDates={selectedDates}
-						onDateHover={handleDateHover}
-						onDateHoverEnd={handleDateHoverEnd}
-						renderWeekDay={renderWeekDay}
-						renderDateAriaLabel={renderDateAriaLabel}
-						renderDateSlot={renderDateSlot}
-					/>
-				)}
+					currentMonthDate.setMonth(currentMonthDate.getMonth() + index);
+
+					return (
+						<View.Item grow>
+							<CalendarControls
+								renderSelectedMonthLabel={renderSelectedMonthLabel}
+								monthDate={currentMonthDate}
+								selectionMode={selectionMode}
+								hidePrevious={hidePrevious}
+								hideNext={hideNext}
+								monthTitleRef={index === 0 ? monthTitleRef : undefined}
+								onMonthTitleClick={handleMonthTitleClick}
+								onNextClick={handleNextClick}
+								onPreviousClick={handlePreviousClick}
+								previousMonthAriaLabel={previousMonthAriaLabel}
+								previousYearAriaLabel={previousYearAriaLabel}
+								nextMonthAriaLabel={nextMonthAriaLabel}
+								nextYearAriaLabel={nextYearAriaLabel}
+								monthSelectionAriaLabel={monthSelectionAriaLabel}
+								monthsToRender={monthsToRender}
+							/>
+						</View.Item>
+					);
+				})}
+			</View>
+
+			<View direction="row" gap={4} attributes={{ ref: selectionRootRef }}>
+				{selectionMode === "date" &&
+					Array.from({ length: monthsToRender }).map((_, index) => {
+						const currentMonthDate = new Date(monthDate);
+						currentMonthDate.setMonth(currentMonthDate.getMonth() + index);
+
+						return (
+							<View.Item grow>
+								<CalendarMonth
+									date={currentMonthDate}
+									value={value}
+									onChange={onChange}
+									min={min}
+									max={max}
+									range={range}
+									firstWeekDay={firstWeekDay}
+									hoveredDate={hoveredDate}
+									selectedDates={selectedDates}
+									onDateHover={handleDateHover}
+									onDateHoverEnd={handleDateHoverEnd}
+									renderWeekDay={renderWeekDay}
+									renderDateAriaLabel={renderDateAriaLabel}
+									renderDateSlot={renderDateSlot}
+								/>
+							</View.Item>
+						);
+					})}
 
 				{selectionMode === "month" && (
 					<CalendarYear
@@ -156,7 +182,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 						max={max}
 					/>
 				)}
-			</View.Item>
+			</View>
 		</View>
 	);
 };

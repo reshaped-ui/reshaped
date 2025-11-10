@@ -20,8 +20,8 @@ const CalendarControls: React.FC<T.ControlsProps> = (props) => {
 		monthTitleRef,
 		monthDate,
 		renderSelectedMonthLabel,
-		isFirstMonth,
-		isLastMonth,
+		hidePrevious,
+		hideNext,
 		onNextClick,
 		onPreviousClick,
 		monthSelectionAriaLabel = "Select a month",
@@ -34,30 +34,30 @@ const CalendarControls: React.FC<T.ControlsProps> = (props) => {
 	const nextRef = React.useRef<HTMLButtonElement>(null);
 
 	React.useEffect(() => {
-		if (!isFirstMonth) return;
+		if (!hidePrevious) return;
 		if (document.activeElement !== prevRef.current) return;
 
-		const targetEl = nextRef.current || monthTitleRef.current;
+		const targetEl = nextRef.current || monthTitleRef?.current;
 
 		onNextFrame(() => {
 			targetEl?.focus();
 		});
-	}, [isFirstMonth, monthTitleRef]);
+	}, [hidePrevious, monthTitleRef]);
 
 	React.useEffect(() => {
-		if (!isLastMonth) return;
+		if (!hideNext) return;
 		if (document.activeElement !== nextRef.current) return;
 
-		const targetEl = prevRef.current || monthTitleRef.current;
+		const targetEl = prevRef.current || monthTitleRef?.current;
 
 		onNextFrame(() => {
 			targetEl?.focus();
 		});
-	}, [isLastMonth, monthTitleRef]);
+	}, [hideNext, monthTitleRef]);
 
 	return (
 		<View direction="row" gap={2} align="center">
-			<Hidden visibility hide={isFirstMonth}>
+			<Hidden visibility hide={hidePrevious}>
 				<div className={s.control}>
 					<Button
 						variant="ghost"
@@ -92,7 +92,7 @@ const CalendarControls: React.FC<T.ControlsProps> = (props) => {
 					</Text>
 				)}
 			</View.Item>
-			<Hidden visibility hide={isLastMonth}>
+			<Hidden visibility hide={hideNext}>
 				<div className={s.control}>
 					<Button
 						variant="ghost"

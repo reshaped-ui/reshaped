@@ -184,6 +184,17 @@ export const controlled: StoryObj<{ handleChange: Mock }> = {
 	},
 };
 
+export const monthsToRender: StoryObj = {
+	name: "monthsToRender",
+	render: () => (
+		<Example>
+			<Example.Item title="monthsToRender: 2">
+				<Calendar defaultMonth={new Date(2020, 0)} monthsToRender={2} range />
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const renderDateSlot: StoryObj = {
 	name: "renderDateSlot",
 	render: () => (

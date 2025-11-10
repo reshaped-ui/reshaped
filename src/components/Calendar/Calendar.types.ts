@@ -9,6 +9,10 @@ export type BaseProps = {
 	min?: Date;
 	/** Maximum date that can be selected */
 	max?: Date;
+	/** Number of months to render at the same time
+	 * @default 1
+	 */
+	monthsToRender?: number;
 	/** First day of the week
 	 * @default 1, Monday
 	 */
@@ -137,12 +141,13 @@ export type DateProps = {
 
 export type ControlsProps = {
 	selectionMode: SelectionMode;
+	monthsToRender: number;
 	onMonthTitleClick: () => void;
-	monthTitleRef: React.MutableRefObject<HTMLButtonElement | null>;
+	monthTitleRef?: React.RefObject<HTMLButtonElement | null>;
 	monthDate: Date;
 	renderSelectedMonthLabel?: BaseProps["renderSelectedMonthLabel"];
-	isFirstMonth?: boolean;
-	isLastMonth?: boolean;
+	hidePrevious?: boolean;
+	hideNext?: boolean;
 	onNextClick: () => void;
 	onPreviousClick: () => void;
 } & Pick<
