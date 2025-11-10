@@ -37,7 +37,7 @@ const CalendarControls: React.FC<T.ControlsProps> = (props) => {
 		if (!hidePrevious) return;
 		if (document.activeElement !== prevRef.current) return;
 
-		const targetEl = nextRef.current || monthTitleRef.current;
+		const targetEl = nextRef.current || monthTitleRef?.current;
 
 		onNextFrame(() => {
 			targetEl?.focus();
@@ -48,7 +48,7 @@ const CalendarControls: React.FC<T.ControlsProps> = (props) => {
 		if (!hideNext) return;
 		if (document.activeElement !== nextRef.current) return;
 
-		const targetEl = prevRef.current || monthTitleRef.current;
+		const targetEl = prevRef.current || monthTitleRef?.current;
 
 		onNextFrame(() => {
 			targetEl?.focus();
