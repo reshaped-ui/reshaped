@@ -176,21 +176,19 @@ export const modeActionMenu: StoryObj = {
 		expect(document.activeElement).toBe(trapContentActions[0]);
 
 		await userEvent.keyboard("{ArrowUp/}");
-		expect(document.activeElement).toBe(trapContentActions[0]);
+		expect(document.activeElement).toBe(trapContentActions[3]);
 
 		await userEvent.keyboard("{ArrowRight/}");
+		expect(document.activeElement).toBe(trapContentActions[3]);
+
+		await userEvent.keyboard("{ArrowDown/}");
 		expect(document.activeElement).toBe(trapContentActions[0]);
 
 		await userEvent.keyboard("{ArrowDown/}");
-		await userEvent.keyboard("{ArrowDown/}");
-		await userEvent.keyboard("{ArrowDown/}");
-		expect(document.activeElement).toBe(trapContentActions[3]);
-
-		await userEvent.keyboard("{ArrowDown/}");
-		expect(document.activeElement).toBe(trapContentActions[3]);
+		expect(document.activeElement).toBe(trapContentActions[1]);
 
 		await userEvent.keyboard("{ArrowLeft/}");
-		expect(document.activeElement).toBe(trapContentActions[3]);
+		expect(document.activeElement).toBe(trapContentActions[1]);
 
 		await userEvent.keyboard("{Shift>}{Tab/}");
 		expect(document.activeElement).toBe(trigger);
@@ -260,21 +258,19 @@ export const modeActionBar: StoryObj = {
 		expect(document.activeElement).toBe(trapContentActions[0]);
 
 		await userEvent.keyboard("{ArrowLeft/}");
-		expect(document.activeElement).toBe(trapContentActions[0]);
+		expect(document.activeElement).toBe(trapContentActions[3]);
 
 		await userEvent.keyboard("{ArrowDown/}");
+		expect(document.activeElement).toBe(trapContentActions[3]);
+
+		await userEvent.keyboard("{ArrowRight/}");
 		expect(document.activeElement).toBe(trapContentActions[0]);
 
 		await userEvent.keyboard("{ArrowRight/}");
-		await userEvent.keyboard("{ArrowRight/}");
-		await userEvent.keyboard("{ArrowRight/}");
-		expect(document.activeElement).toBe(trapContentActions[3]);
-
-		await userEvent.keyboard("{ArrowRight/}");
-		expect(document.activeElement).toBe(trapContentActions[3]);
+		expect(document.activeElement).toBe(trapContentActions[1]);
 
 		await userEvent.keyboard("{ArrowUp/}");
-		expect(document.activeElement).toBe(trapContentActions[3]);
+		expect(document.activeElement).toBe(trapContentActions[1]);
 
 		await userEvent.keyboard("{Shift>}{Tab/}");
 		expect(document.activeElement).toBe(trigger);
