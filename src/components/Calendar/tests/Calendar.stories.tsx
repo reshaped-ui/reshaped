@@ -15,8 +15,8 @@ export default {
 	},
 };
 
-export const defaultMonth: StoryObj = {
-	name: "defaultMonth",
+export const base: StoryObj = {
+	name: "base",
 	render: () => (
 		<Example>
 			<Example.Item title="defaultMonth: 2020 January">
@@ -47,6 +47,76 @@ export const defaultMonth: StoryObj = {
 		expect(prevButton).toHaveAccessibleName("Previous month");
 		expect(monthButton).toHaveAccessibleName("January 2020 Select a month");
 		expect(nextButton).toHaveAccessibleName("Next month");
+	},
+};
+
+export const month: StoryObj<{ handleDefaultMonthChange: Mock; handleMonthChange: Mock }> = {
+	name: "defaultMonth, month, onMonthChange",
+	args: {
+		handleDefaultMonthChange: fn(),
+		handleMonthChange: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="defaultMonth: 2020 January">
+				<Calendar defaultMonth={new Date(2020, 0)} onMonthChange={args.handleDefaultMonthChange} />
+			</Example.Item>
+			<Example.Item title="month: 2020 January">
+				<Calendar month={new Date(2020, 0)} onMonthChange={args.handleMonthChange} />
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas, args }) => {
+		const [
+			prevButton,
+			monthButton,
+			nextButton,
+			prevButtonControlled,
+			monthButtonControlled,
+			nextButtonControlled,
+		] = canvas.getAllByRole("button");
+
+		// Uncontrolled
+		await userEvent.click(prevButton);
+		expect(args.handleDefaultMonthChange).toHaveBeenCalledTimes(1);
+		expect(args.handleDefaultMonthChange).toHaveBeenLastCalledWith({ date: new Date(2019, 11) });
+
+		await userEvent.click(nextButton);
+		expect(args.handleDefaultMonthChange).toHaveBeenCalledTimes(2);
+		expect(args.handleDefaultMonthChange).toHaveBeenLastCalledWith({ date: new Date(2020, 0) });
+
+		await userEvent.click(monthButton);
+
+		const [grid] = canvas.getAllByRole("grid");
+		const months = within(grid)
+			.getAllByRole("button")
+			.filter((el) => el.hasAttribute("data-rs-date"));
+
+		await userEvent.click(months[3]);
+
+		expect(args.handleDefaultMonthChange).toHaveBeenCalledTimes(3);
+		expect(args.handleDefaultMonthChange).toHaveBeenLastCalledWith({ date: new Date(2020, 3) });
+
+		// Controlled
+		await userEvent.click(prevButtonControlled);
+		expect(args.handleMonthChange).toHaveBeenCalledTimes(1);
+		expect(args.handleMonthChange).toHaveBeenLastCalledWith({ date: new Date(2019, 11) });
+
+		await userEvent.click(nextButtonControlled);
+		expect(args.handleMonthChange).toHaveBeenCalledTimes(2);
+		expect(args.handleMonthChange).toHaveBeenLastCalledWith({ date: new Date(2020, 1) });
+
+		await userEvent.click(monthButtonControlled);
+
+		const [, gridControlled] = canvas.getAllByRole("grid");
+		const monthsControlled = within(gridControlled)
+			.getAllByRole("button")
+			.filter((el) => el.hasAttribute("data-rs-date"));
+
+		await userEvent.click(monthsControlled[3]);
+
+		expect(args.handleMonthChange).toHaveBeenCalledTimes(3);
+		expect(args.handleMonthChange).toHaveBeenLastCalledWith({ date: new Date(2020, 3) });
 	},
 };
 

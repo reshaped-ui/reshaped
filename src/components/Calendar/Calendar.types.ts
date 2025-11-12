@@ -1,10 +1,14 @@
 export type SelectionMode = "date" | "month";
 
 export type BaseProps = {
-	/** Default month to display
+	/** Default month to display. Used in uncontrolled mode to provide the initial month and then updated by the component internally
 	 * @default Date.now()
 	 */
 	defaultMonth?: Date;
+	/** Month to display. Used in controlled mode and should be updated using the `onMonthChange` callback */
+	month?: Date;
+	/** Callback when the month changes */
+	onMonthChange?: (args: { date: Date }) => void;
 	/** Minimum date that can be selected */
 	min?: Date;
 	/** Maximum date that can be selected */

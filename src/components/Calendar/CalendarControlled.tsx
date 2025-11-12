@@ -25,6 +25,8 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 		value,
 		onChange,
 		defaultMonth,
+		month,
+		onMonthChange,
 		min,
 		max,
 		range,
@@ -45,7 +47,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 	} = props;
 
 	const [selectionMode, setSelectionMode] = React.useState<T.SelectionMode>("date");
-	const [monthDate, setMonthDate] = React.useState(defaultMonth || new Date());
+	const [monthDate, setMonthDate] = React.useState(month || defaultMonth || new Date());
 	const [hoveredDate, setHoveredDate] = React.useState<Date | null>(null);
 	const monthTitleRef = React.useRef<HTMLButtonElement>(null);
 	const prevSelectionModeRef = React.useRef<typeof selectionMode>(selectionMode);
@@ -54,20 +56,34 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 
 	const handlePreviousClick = () => {
 		if (selectionMode === "month") {
-			setMonthDate((prev) => setYearToPrevious(prev));
+			const updatedMonth = setYearToPrevious(monthDate);
+
+			onMonthChange?.({ date: updatedMonth });
+			if (month === undefined) setMonthDate(updatedMonth);
+
 			return;
 		}
 
-		setMonthDate((prev) => setMonthToPrevious(prev));
+		const updatedMonth = setMonthToPrevious(monthDate);
+
+		onMonthChange?.({ date: updatedMonth });
+		if (month === undefined) setMonthDate(updatedMonth);
 	};
 
 	const handleNextClick = () => {
 		if (selectionMode === "month") {
-			setMonthDate((prev) => setYearToNext(prev));
+			const updatedMonth = setYearToNext(monthDate);
+
+			onMonthChange?.({ date: updatedMonth });
+			if (month === undefined) setMonthDate(updatedMonth);
+
 			return;
 		}
 
-		setMonthDate((prev) => setMonthToNext(prev));
+		const updatedMonth = setMonthToNext(monthDate);
+
+		onMonthChange?.({ date: updatedMonth });
+		if (month === undefined) setMonthDate(updatedMonth);
 	};
 
 	const handleMonthTitleClick = () => {
@@ -75,7 +91,11 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 	};
 
 	const handleMonthClick = (i: number) => {
-		setMonthDate((prev) => setMonthTo(prev, i));
+		const updatedMonth = setMonthTo(monthDate, i);
+
+		onMonthChange?.({ date: updatedMonth });
+		if (month === undefined) setMonthDate(updatedMonth);
+
 		setSelectionMode("date");
 	};
 
@@ -96,6 +116,14 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 
 		prevSelectionModeRef.current = selectionMode;
 	}, [selectionMode]);
+
+	/**
+	 * Handle rendering in controlled mode
+	 */
+	React.useEffect(() => {
+		if (!month) return;
+		setMonthDate(month);
+	}, [month]);
 
 	useCalendarKeyboardNavigation({
 		monthDate,
@@ -121,7 +149,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 					currentMonthDate.setMonth(currentMonthDate.getMonth() + index);
 
 					return (
-						<View.Item grow>
+						<View.Item grow key={index}>
 							<CalendarControls
 								renderSelectedMonthLabel={renderSelectedMonthLabel}
 								monthDate={currentMonthDate}
@@ -151,7 +179,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 						currentMonthDate.setMonth(currentMonthDate.getMonth() + index);
 
 						return (
-							<View.Item grow>
+							<View.Item grow key={index}>
 								<CalendarMonth
 									date={currentMonthDate}
 									value={value}
