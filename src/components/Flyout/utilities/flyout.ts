@@ -49,7 +49,7 @@ const flyout = (
 	targetClone.style.cssText = "";
 
 	Object.keys(resetStyles).forEach((key) => {
-		const value = resetStyles[key as keyof T.Styles];
+		const value = resetStyles[key as keyof React.CSSProperties];
 
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
@@ -122,7 +122,12 @@ const flyout = (
 
 	onPositionChoose(calculated.position);
 	targetClone.parentNode?.removeChild(targetClone);
-	return calculated;
+
+	Object.entries(calculated.styles).forEach(([key, value]) => {
+		flyoutEl.style.setProperty(key, value);
+	});
+
+	return { position: calculated.position };
 };
 
 export default flyout;

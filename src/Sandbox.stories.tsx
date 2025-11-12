@@ -1,8 +1,11 @@
 import React from "react";
 
-import Calendar from "components/Calendar";
+import Autocomplete from "components/Autocomplete";
+import Container from "components/Container";
+import FormControl from "components/FormControl";
 import Image from "components/Image";
 import View from "components/View";
+import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Sandbox",
@@ -30,9 +33,32 @@ export const preview = () => {
 };
 
 const Component = () => {
+	const toggle = useToggle(true);
 	return (
-		<>
-			<Calendar defaultMonth={new Date(2020, 0)} monthsToRender={2} range />
-		</>
+		<Container width="300px">
+			<FormControl>
+				<FormControl.Label>Label</FormControl.Label>
+				<Autocomplete
+					name="fruit"
+					placeholder="Pick your food"
+					active={toggle.active}
+					onOpen={() => {
+						toggle.activate();
+					}}
+					onClose={() => {
+						toggle.deactivate();
+					}}
+					onChange={(args) => console.log(args)}
+				>
+					{["Pizza", "Pie", "Ice-cream"].map((v) => {
+						return (
+							<Autocomplete.Item key={v} value={v}>
+								{v}
+							</Autocomplete.Item>
+						);
+					})}
+				</Autocomplete>
+			</FormControl>
+		</Container>
 	);
 };
