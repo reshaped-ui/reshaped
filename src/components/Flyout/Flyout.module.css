@@ -1,5 +1,6 @@
 .content {
 	--rs-flyout-gap: 0;
+	--rs-flyout-max-h: 100%;
 	--rs-flyout-origin-x: 50%;
 	--rs-flyout-origin-y: 50%;
 
@@ -28,7 +29,7 @@
 	height: 100%;
 	overflow: auto;
 	max-width: 100%;
-	max-height: 100%;
+	max-height: var(--rs-flyout-max-h);
 	backface-visibility: hidden;
 
 	/* Using 1ms to still trigger transitionEnd event */

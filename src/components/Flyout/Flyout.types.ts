@@ -153,6 +153,8 @@ type BaseProps = {
 	contentGap?: number;
 	/** Shift the content on the secondary axis, relative to its original position */
 	contentShift?: number;
+	/** Maximum height for the content */
+	contentMaxHeight?: string;
 	/** Additional classname for the content element */
 	contentClassName?: string;
 	/** Additional attributes for the content element */
@@ -218,6 +220,7 @@ export type ContextProps = {
 	| "contentClassName"
 	| "contentAttributes"
 	| "contentGap"
+	| "contentMaxHeight"
 	| "trapFocusMode"
 	| "containerRef"
 	| "disableContentHover"

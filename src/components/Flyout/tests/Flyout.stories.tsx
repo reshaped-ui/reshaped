@@ -321,6 +321,7 @@ const FallbackAdjustLayoutControls = ({
 }) => {
 	const contentHeight = large ? "2000px" : "200px";
 	const contentWidth = large ? "2000px" : "300px";
+	const content = <div style={{ height: "1500px" }}>Content</div>;
 
 	return (
 		<>
@@ -332,6 +333,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					fallbackPositions={false}
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					contentHeight={contentHeight}
@@ -339,6 +341,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
+					children={content}
 				/>
 			</View>
 
@@ -349,6 +352,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					position="top-end"
@@ -356,6 +360,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					position="bottom-end"
@@ -363,6 +368,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					position="bottom"
@@ -370,6 +376,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 			</View>
 
@@ -380,6 +387,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					contentHeight={contentHeight}
@@ -387,6 +395,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
+					children={content}
 				/>
 			</View>
 
@@ -399,6 +408,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					contentHeight={contentHeight}
@@ -406,6 +416,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
+					children={content}
 				/>
 			</View>
 
@@ -416,6 +427,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					position="top"
@@ -423,6 +435,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					position="bottom-start"
@@ -430,6 +443,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					position="bottom"
@@ -437,6 +451,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
+					children={content}
 				/>
 			</View>
 
@@ -447,6 +462,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
+					children={content}
 				/>
 				<Demo
 					contentHeight={contentHeight}
@@ -454,6 +470,7 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
+					children={content}
 				/>
 			</View>
 		</>
@@ -601,6 +618,19 @@ export const contentGap = {
 export const contentShift = {
 	name: "contentShift",
 	render: () => <Demo contentShift={10} defaultActive />,
+};
+
+export const contentMaxHeight = {
+	name: "contentMaxHeight",
+	render: () => (
+		<Demo contentMaxHeight="500px" defaultActive contentHeight={false} fallbackAdjustLayout>
+			<View gap={4}>
+				{Array.from({ length: 20 }).map((_, index) => (
+					<View.Item key={index}>Item {index + 1}</View.Item>
+				))}
+			</View>
+		</Demo>
+	),
 };
 
 export const disableContentHover: StoryObj = {

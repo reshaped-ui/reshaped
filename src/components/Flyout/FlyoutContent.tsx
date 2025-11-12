@@ -32,6 +32,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		contentClassName,
 		contentAttributes,
 		contentGap,
+		contentMaxHeight,
 		trapFocusMode,
 		disableContentHover,
 		autoFocus,
@@ -139,6 +140,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 					{
 						...styles,
 						"--rs-flyout-gap": contentGap,
+						"--rs-flyout-max-h": contentMaxHeight,
 					} as React.CSSProperties
 				}
 				ref={flyoutElRef}

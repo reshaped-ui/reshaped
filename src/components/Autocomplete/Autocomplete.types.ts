@@ -20,6 +20,7 @@ export type Props = TextFieldProps &
 		| "fallbackAdjustLayout"
 		| "fallbackMinWidth"
 		| "fallbackMinHeight"
+		| "contentMaxHeight"
 	> & {
 		/** Callback for when value changes from user input */
 		onInput?: TextFieldProps["onChange"];

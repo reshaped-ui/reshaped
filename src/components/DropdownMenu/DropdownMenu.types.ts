@@ -17,6 +17,7 @@ export type Props = Pick<
 	| "triggerType"
 	| "contentGap"
 	| "contentShift"
+	| "contentMaxHeight"
 	| "onOpen"
 	| "onClose"
 	| "active"
