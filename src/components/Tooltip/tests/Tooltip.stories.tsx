@@ -151,7 +151,9 @@ export const defaultActive: StoryObj<{
 			expect(args.handleClose).toHaveBeenCalledWith({});
 		});
 
-		expect(item).not.toBeInTheDocument();
+		await waitFor(() => {
+			expect(item).not.toBeInTheDocument();
+		});
 	},
 };
 
