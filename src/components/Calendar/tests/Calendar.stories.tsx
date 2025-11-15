@@ -316,6 +316,27 @@ export const selectedDates: StoryObj = {
 	},
 };
 
+export const disabledDates: StoryObj = {
+	name: "disabledDates",
+	render: () => (
+		<Example>
+			<Example.Item title="disabledDates: [4,8]">
+				<Calendar
+					defaultMonth={new Date(2020, 0)}
+					value={null}
+					disabledDates={[new Date(2020, 0, 4), new Date(2020, 0, 8)]}
+				/>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const dates = canvas.getAllByRole("checkbox", { hidden: true });
+
+		expect(dates[3]).toBeDisabled();
+		expect(dates[7]).toBeDisabled();
+	},
+};
+
 export const minMax: StoryObj = {
 	name: "min, max",
 	render: () => (

@@ -18,6 +18,7 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 		range,
 		firstWeekDay,
 		selectedDates,
+		disabledDates,
 		hoveredDate,
 		onDateHover,
 		onDateHoverEnd,
@@ -78,6 +79,7 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 										onDateFocus={setLastFocusedDate}
 										renderAriaLabel={renderDateAriaLabel}
 										selectedDates={selectedDates}
+										disabledDates={disabledDates}
 										renderSlot={renderDateSlot}
 									/>
 								);
