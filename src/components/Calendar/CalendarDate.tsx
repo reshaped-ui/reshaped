@@ -14,7 +14,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 		isoDate,
 		startValue,
 		endValue,
-		disabled,
+		disabled: passedDisabled,
 		focusable,
 		onChange,
 		range,
@@ -23,6 +23,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 		onDateHoverEnd,
 		onDateFocus,
 		selectedDates,
+		disabledDates,
 		renderAriaLabel,
 		renderSlot,
 	} = props;
@@ -37,9 +38,12 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 	const isAfterStartValue = Boolean(isoDate && isoStartValue && isoDate > isoStartValue);
 	const isBeforeEndValue = Boolean(isoDate && isoEndValue && isoDate < isoEndValue);
 	const isInHoveredRange = Boolean(hoveredDate && !endValue && hoveredDate > date);
-	const isInSelectedDates = !!selectedDates?.find(
+	const isInSelectedDates = !!selectedDates?.some(
 		(selectedDate) => getLocalISODate({ date: selectedDate }) === isoDate
 	);
+	const disabled =
+		passedDisabled ||
+		disabledDates?.some((disabledDate) => getLocalISODate({ date: disabledDate }) === isoDate);
 
 	let selection;
 

@@ -23,6 +23,8 @@ export type BaseProps = {
 	firstWeekDay?: number;
 	/** Dates that are selected */
 	selectedDates?: Date[];
+	/** Dates that are disabled */
+	disabledDates?: Date[];
 	/** Render a custom weekday label, can be used for localization */
 	renderWeekDay?: (args: { weekDay: number; date: Date }) => string;
 	/** Render a custom month label, can be used for localization */
@@ -108,6 +110,7 @@ export type MonthProps = {
 	| "min"
 	| "firstWeekDay"
 	| "selectedDates"
+	| "disabledDates"
 	| "renderMonthLabel"
 	| "renderWeekDay"
 	| "renderSelectedMonthLabel"
@@ -141,6 +144,7 @@ export type DateProps = {
 	| "min"
 	| "max"
 	| "selectedDates"
+	| "disabledDates"
 >;
 
 export type ControlsProps = {
