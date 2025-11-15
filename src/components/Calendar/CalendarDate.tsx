@@ -32,11 +32,11 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 	const isoStartValue = startValue && getLocalISODate({ date: startValue });
 	const isoEndValue = endValue && getLocalISODate({ date: endValue });
 
-	const isStartValue = !!isoDate && !!isoStartValue && isoDate === isoStartValue;
-	const isEndValue = !!isoDate && !!isoEndValue && isoDate === isoEndValue;
-	const isAfterStartValue = startValue && date > startValue;
-	const isBeforeEndValue = endValue && date < endValue;
-	const isInHoveredRange = hoveredDate && !endValue && hoveredDate > date;
+	const isStartValue = Boolean(isoDate && !!isoStartValue && isoDate === isoStartValue);
+	const isEndValue = Boolean(isoDate && !!isoEndValue && isoDate === isoEndValue);
+	const isAfterStartValue = Boolean(isoDate && isoStartValue && isoDate > isoStartValue);
+	const isBeforeEndValue = Boolean(isoDate && isoEndValue && isoDate < isoEndValue);
+	const isInHoveredRange = Boolean(hoveredDate && !endValue && hoveredDate > date);
 	const isInSelectedDates = !!selectedDates?.find(
 		(selectedDate) => getLocalISODate({ date: selectedDate }) === isoDate
 	);
