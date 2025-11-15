@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.9.0-canary.4
+
+### Minor Changes
+
+- [#519](https://github.com/reshaped-ui/reshaped/pull/519) [`2d54ccc`](https://github.com/reshaped-ui/reshaped/commit/2d54ccc7e98816f96f6119e72703cb74d389b555) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Added support for an array of disabled dates
+
+### Patch Changes
+
+- [`877f557`](https://github.com/reshaped-ui/reshaped/commit/877f557d18b74083bd336163afdbc217a9beffb4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Fixed end date selection for timezone edge cases
+
 ## 3.9.0-canary.3
 
 ### Minor Changes

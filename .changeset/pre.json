@@ -2,14 +2,16 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.2"
+    "reshaped": "3.9.0-canary.3"
   },
   "changesets": [
     "big-rules-teach",
     "eleven-otters-bake",
     "fast-vans-kiss",
     "fine-tables-count",
+    "gentle-glasses-see",
     "gentle-pumas-reply",
+    "good-lizards-carry",
     "lovely-facts-dress",
     "olive-spoons-lose",
     "perky-deer-shave",
