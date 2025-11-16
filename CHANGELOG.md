@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.9.0-canary.5
+
+### Minor Changes
+
+- [#520](https://github.com/reshaped-ui/reshaped/pull/520) [`e1f551d`](https://github.com/reshaped-ui/reshaped/commit/e1f551d96f7b7deb7c47ce25b04006b630dbb876) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Switched flyout position calculation to style.setProperty
+
+### Patch Changes
+
+- [#521](https://github.com/reshaped-ui/reshaped/pull/521) [`b4fffb8`](https://github.com/reshaped-ui/reshaped/commit/b4fffb873b40b970d81fa5fe30defe44743f352d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: fixed handleMouseLeave for triggerType hover after the timeout removal
+
 ## 3.9.0-canary.4
 
 ### Minor Changes

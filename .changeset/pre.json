@@ -2,10 +2,11 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.3"
+    "reshaped": "3.9.0-canary.4"
   },
   "changesets": [
     "big-rules-teach",
+    "clean-donuts-rescue",
     "eleven-otters-bake",
     "fast-vans-kiss",
     "fine-tables-count",
@@ -19,6 +20,7 @@
     "quiet-cars-type",
     "real-snakes-give",
     "sour-clubs-cut",
+    "stale-donuts-stay",
     "strong-impalas-allow",
     "stupid-planets-deliver",
     "swift-turtles-relax",
