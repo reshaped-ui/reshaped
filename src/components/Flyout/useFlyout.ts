@@ -54,26 +54,21 @@ type UseFlyout = (
 const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 	switch (action.type) {
 		case "render":
-			if (state.status !== "idle") return state;
 			// Disable events before it's positioned to avoid mouseleave getting triggered
 			return { ...state, status: "rendered" };
 		case "position":
-			if (!action.payload.sync && state.status !== "rendered") return state;
-			if (action.payload.sync && state.status !== "visible") return state;
-
 			return {
 				...state,
-				status: action.payload.sync ? "visible" : "positioned",
+				status: action.payload.sync ? state.status : "positioned",
 				position: action.payload.position,
 			};
 		case "show":
+			// Checking because we're positioning inside nextAnimationFrame
 			if (state.status !== "positioned") return state;
 			return { ...state, status: "visible" };
 		case "hide":
-			if (state.status !== "visible") return state;
 			return { ...state, status: "hidden" };
 		case "remove":
-			if (state.status !== "hidden" && state.status !== "visible") return state;
 			return { ...state, status: "idle" };
 
 		default:
