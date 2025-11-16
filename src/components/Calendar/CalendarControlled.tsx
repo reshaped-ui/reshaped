@@ -32,6 +32,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 		range,
 		firstWeekDay,
 		selectedDates,
+		disabledDates,
 		monthsToRender = 1,
 		renderMonthLabel,
 		renderSelectedMonthLabel,
@@ -190,6 +191,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 									firstWeekDay={firstWeekDay}
 									hoveredDate={hoveredDate}
 									selectedDates={selectedDates}
+									disabledDates={disabledDates}
 									onDateHover={handleDateHover}
 									onDateHoverEnd={handleDateHoverEnd}
 									renderWeekDay={renderWeekDay}

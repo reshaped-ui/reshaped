@@ -1,7 +1,8 @@
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
-import { defineConfig } from "vite";
+
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,10 +24,15 @@ export default defineConfig({
 		},
 		rollupOptions: {
 			logLevel: "silent",
-			external: ["react", "react-dom"],
+			external: ["react", "react/jsx-runtime", "react-dom"],
 			output: {
 				entryFileNames: "bundle.js",
 				chunkFileNames: "[name].js",
+				globals: {
+					react: "React",
+					"react-dom": "ReactDOM",
+					"react/jsx-runtime": "react/jsx-runtime",
+				},
 			},
 		},
 	},

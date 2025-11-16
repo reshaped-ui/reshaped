@@ -1,5 +1,31 @@
 # Changelog
 
+## 3.9.0-canary.4
+
+### Minor Changes
+
+- [#519](https://github.com/reshaped-ui/reshaped/pull/519) [`2d54ccc`](https://github.com/reshaped-ui/reshaped/commit/2d54ccc7e98816f96f6119e72703cb74d389b555) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Added support for an array of disabled dates
+
+### Patch Changes
+
+- [`877f557`](https://github.com/reshaped-ui/reshaped/commit/877f557d18b74083bd336163afdbc217a9beffb4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Fixed end date selection for timezone edge cases
+
+## 3.9.0-canary.3
+
+### Minor Changes
+
+- [#509](https://github.com/reshaped-ui/reshaped/pull/509) [`fcb5d91`](https://github.com/reshaped-ui/reshaped/commit/fcb5d91b0fa52d61579578299fefa516ffe3b9a2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: added monthsToRender support
+
+- [#511](https://github.com/reshaped-ui/reshaped/pull/511) [`bd82c0e`](https://github.com/reshaped-ui/reshaped/commit/bd82c0ebe34a72b4be613abe3c41d589d5559f70) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Added `month` and `onMonthChange` support
+
+- [`5246549`](https://github.com/reshaped-ui/reshaped/commit/5246549aa49a91596257c195d66a5ba7053a4f1f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout, Popover, DropdownMenu, ContextMenu, Autocomplete: Added contentMaxHeight support
+
+### Patch Changes
+
+- [`effa062`](https://github.com/reshaped-ui/reshaped/commit/effa062004075d73de17b4a1b690edd188f2c77a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Popover: Aligned the border styling approach with Card
+
+- [`5ed9e4b`](https://github.com/reshaped-ui/reshaped/commit/5ed9e4bcaf4709f9ed7109e7ed1a8ceddb978d68) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated externals for the vite bundle
+
 ## 3.9.0-canary.2
 
 ### Minor Changes
