@@ -7,6 +7,10 @@
 	position: absolute;
 	isolation: isolate;
 
+	/* Make content child grow based on its max height with flex grow */
+	display: flex;
+	flex-direction: column;
+
 	/* Ignore the padding for non-hover trigger types */
 	pointer-events: none;
 
@@ -31,6 +35,9 @@
 	max-width: 100%;
 	max-height: var(--rs-flyout-max-h);
 	backface-visibility: hidden;
+
+	/* Grow based on its parent's max height */
+	flex-grow: 1;
 
 	/* Using 1ms to still trigger transitionEnd event */
 	transition: 1ms var(--rs-easing-accelerate);
