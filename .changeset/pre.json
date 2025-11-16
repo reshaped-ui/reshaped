@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.4"
+    "reshaped": "3.9.0-canary.5"
   },
   "changesets": [
     "big-rules-teach",
@@ -19,6 +19,7 @@
     "purple-stamps-film",
     "quiet-cars-type",
     "real-snakes-give",
+    "salty-boats-reply",
     "sour-clubs-cut",
     "stale-donuts-stay",
     "strong-impalas-allow",

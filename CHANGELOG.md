@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.9.0-canary.6
+
+### Patch Changes
+
+- [#522](https://github.com/reshaped-ui/reshaped/pull/522) [`5d7240a`](https://github.com/reshaped-ui/reshaped/commit/5d7240a7a8aee2b3458e4a3f4c3ec9261392e331) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Relaxed reducer conditions to avoid transition edge cases
+
 ## 3.9.0-canary.5
 
 ### Minor Changes
