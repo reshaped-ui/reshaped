@@ -48,9 +48,11 @@ export const position = {
 		<Example>
 			<Example.Item title="position: bottom-start">
 				<View direction="row" gap={2}>
-					<Demo position="bottom-start" text="Tooltip 1" />
-					<Demo position="bottom-start" text="Tooltip 2" />
-					<Demo position="bottom-start" text="Tooltip 3" />
+					<Button.Group>
+						<Demo position="bottom-start" text="Tooltip 1" />
+						<Demo position="bottom" text="Tooltip 2" />
+						<Demo position="bottom-end" text="Tooltip 3" />
+					</Button.Group>
 				</View>
 			</Example.Item>
 			<Example.Item title="position: bottom">
