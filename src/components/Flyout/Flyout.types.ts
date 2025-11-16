@@ -91,7 +91,7 @@ export type TriggerAttributes = {
 	onFocus?: () => void;
 	onMouseDown?: () => void;
 	onMouseEnter?: () => void;
-	onMouseLeave?: () => void;
+	onMouseLeave?: (e: React.MouseEvent) => void;
 	onTouchStart?: () => void;
 	onClick?: () => void;
 	"aria-describedby"?: string;
@@ -200,7 +200,7 @@ export type ContextProps = {
 	handleClose: (options: { closeParents?: boolean; reason?: CloseReason }) => void;
 	handleOpen: () => void;
 	handleMouseEnter: () => void;
-	handleMouseLeave: () => void;
+	handleMouseLeave: (e: React.MouseEvent) => void;
 	handleMouseDown: () => void;
 	handleTransitionEnd: (e: React.TransitionEvent) => void;
 	handleTransitionStart: (e: TransitionEvent) => void;
