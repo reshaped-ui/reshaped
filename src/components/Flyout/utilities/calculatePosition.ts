@@ -224,13 +224,13 @@ const calculatePosition = (
 	return {
 		position,
 		styles: {
-			left: right === null ? 0 : undefined,
-			right: right === null ? undefined : 0,
-			top: bottom === null ? 0 : undefined,
-			bottom: bottom === null ? undefined : 0,
+			left: right === null ? "0px" : null,
+			right: right === null ? null : "0px",
+			top: bottom === null ? "0px" : null,
+			bottom: bottom === null ? null : "0px",
 			transform: `translate(${translateX}px, ${translateY}px)`,
-			height,
-			width: width ?? passedWidth,
+			height: height !== undefined ? `${height}px` : null,
+			width: width !== undefined ? `${width}px` : (passedWidth ?? null),
 		},
 		boundaries: {
 			left,

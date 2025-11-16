@@ -40,7 +40,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		containerRef: passedContainerRef,
 		isSubmenu,
 	} = useFlyoutContext();
-	const { styles, status, position } = flyout;
+	const { status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
 	const closestFixedContainer = React.useMemo(() => {
 		if (!mounted) return null;
@@ -138,7 +138,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 				className={rootClassNames}
 				style={
 					{
-						...styles,
 						"--rs-flyout-gap": contentGap,
 						"--rs-flyout-max-h": contentMaxHeight,
 					} as React.CSSProperties

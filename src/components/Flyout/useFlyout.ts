@@ -2,7 +2,6 @@ import React from "react";
 
 import useRTL from "hooks/useRTL";
 
-import { defaultStyles, resetStyles } from "./Flyout.constants";
 import flyout from "./utilities/flyout";
 
 import type * as T from "./Flyout.types";
@@ -14,7 +13,7 @@ import type * as G from "types/global";
 type FlyoutRenderAction = { type: "render"; payload?: never };
 type FlyoutPositionAction = {
 	type: "position";
-	payload: Pick<T.State, "styles" | "position"> & { sync?: boolean };
+	payload: Pick<T.State, "position"> & { sync?: boolean };
 };
 type FlyoutShowAction = { type: "show"; payload?: never };
 type FlyoutHideAction = { type: "hide"; payload?: never };
@@ -44,7 +43,7 @@ type UseFlyout = (
 		flyoutElRef: React.RefObject<HTMLElement | null>;
 		triggerBounds?: DOMRect | G.Coordinates | null;
 	}
-) => Pick<T.State, "styles" | "position" | "status"> & {
+) => Pick<T.State, "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
@@ -57,7 +56,7 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 		case "render":
 			if (state.status !== "idle") return state;
 			// Disable events before it's positioned to avoid mouseleave getting triggered
-			return { ...state, status: "rendered", styles: { pointerEvents: "none", ...resetStyles } };
+			return { ...state, status: "rendered" };
 		case "position":
 			if (!action.payload.sync && state.status !== "rendered") return state;
 			if (action.payload.sync && state.status !== "visible") return state;
@@ -66,7 +65,6 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 				...state,
 				status: action.payload.sync ? "visible" : "positioned",
 				position: action.payload.position,
-				styles: { ...defaultStyles, ...action.payload.styles },
 			};
 		case "show":
 			if (state.status !== "positioned") return state;
@@ -76,7 +74,7 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 			return { ...state, status: "hidden" };
 		case "remove":
 			if (state.status !== "hidden" && state.status !== "visible") return state;
-			return { ...state, status: "idle", styles: resetStyles };
+			return { ...state, status: "idle" };
 
 		default:
 			throw new Error("[Reshaped] Invalid flyout reducer type");
@@ -104,7 +102,6 @@ const useFlyout: UseFlyout = (args) => {
 	const [isRTL] = useRTL();
 	const [state, dispatch] = React.useReducer(flyoutReducer, {
 		position: defaultPosition,
-		styles: defaultStyles,
 		status: "idle",
 	});
 
@@ -183,7 +180,6 @@ const useFlyout: UseFlyout = (args) => {
 	return React.useMemo(
 		() => ({
 			position: state.position,
-			styles: state.styles,
 			status: state.status,
 			updatePosition,
 			render,
@@ -191,7 +187,7 @@ const useFlyout: UseFlyout = (args) => {
 			remove,
 			show,
 		}),
-		[render, updatePosition, hide, remove, show, state.position, state.styles, state.status]
+		[render, updatePosition, hide, remove, show, state.position, state.status]
 	);
 };
 

@@ -1,8 +1,6 @@
-import type * as T from "./Flyout.types";
-
 export const mouseEnter = 600;
 
-export const defaultStyles: T.Styles = {
+export const defaultStyles: React.CSSProperties = {
 	left: 0,
 	top: 0,
 	width: "auto",
@@ -10,7 +8,7 @@ export const defaultStyles: T.Styles = {
 	zIndex: "var(--rs-z-index-absolute)",
 };
 
-export const resetStyles: T.Styles = {
+export const resetStyles: React.CSSProperties = {
 	left: 0,
 	top: 0,
 	position: "absolute",

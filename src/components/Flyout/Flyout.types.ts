@@ -40,20 +40,17 @@ export type Options = Pick<
 	lastUsedPosition: Position;
 	onPositionChoose: (position: Position) => void;
 };
-export type Styles = React.CSSProperties;
 
 export type State = {
-	styles: Styles;
 	position?: Position;
 	status: "idle" | "rendered" | "positioned" | "visible" | "hidden";
 };
 
 export type FlyoutData = {
-	styles: Styles;
 	position: Position;
 };
 
-export type UseFlyoutData = Pick<State, "styles" | "position" | "status"> & {
+export type UseFlyoutData = Pick<State, "position" | "status"> & {
 	updatePosition: (args?: { sync?: boolean; fallback?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
