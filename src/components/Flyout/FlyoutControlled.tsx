@@ -209,12 +209,17 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		}
 	}, [clearTimer, handleOpen, groupTimeouts]);
 
-	const handleMouseLeave = React.useCallback(() => {
-		cooldown.cool();
+	const handleMouseLeave = React.useCallback(
+		(e: React.MouseEvent) => {
+			if (e.relatedTarget === flyoutElRef.current) return;
+			if (e.relatedTarget === triggerElRef.current) return;
 
-		clearTimer();
-		handleClose({});
-	}, [clearTimer, handleClose]);
+			cooldown.cool();
+			clearTimer();
+			handleClose({});
+		},
+		[clearTimer, handleClose, triggerElRef, flyoutElRef]
+	);
 
 	const handleTriggerClick = React.useCallback(() => {
 		if (!isRendered) {
