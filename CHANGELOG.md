@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.9.0-canary.7
+
+### Minor Changes
+
+- [`dbb1476`](https://github.com/reshaped-ui/reshaped/commit/dbb14761c602b9aaa33c8ff5b53d7dca97d8b0f5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Avatar: Added semi transparent outline for better visual contrast between the image and the page background
+  - Badge: Added support for clickable badges
+  - FileUpload: Added support for non-trigger buttons inside the dropzone
+
+### Patch Changes
+
+- [`70086f7`](https://github.com/reshaped-ui/reshaped/commit/70086f788f5a289e26fee22864404f5d66663109) Thanks [@blvdmitry](https://github.com/blvdmitry)! - FileUpload: Synced focus ring border radius
+
+- [`ec6bcbd`](https://github.com/reshaped-ui/reshaped/commit/ec6bcbd17775f45a27646ae002bbfec375ea02f4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Fixed content resizing during children mutations with fallbackAdjustLayout used
+
 ## 3.9.0-canary.6
 
 ### Patch Changes

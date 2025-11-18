@@ -2,12 +2,14 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.5"
+    "reshaped": "3.9.0-canary.6"
   },
   "changesets": [
     "big-rules-teach",
     "clean-donuts-rescue",
     "eleven-otters-bake",
+    "fair-bananas-grin",
+    "fancy-buses-worry",
     "fast-vans-kiss",
     "fine-tables-count",
     "gentle-glasses-see",
@@ -26,6 +28,7 @@
     "stupid-planets-deliver",
     "swift-turtles-relax",
     "thirty-dragons-float",
+    "violet-nights-punch",
     "wild-breads-go"
   ]
 }
