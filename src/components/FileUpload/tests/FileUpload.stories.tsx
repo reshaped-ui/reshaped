@@ -178,3 +178,17 @@ export const className: StoryObj = {
 		expect(input).toHaveAttribute("id", "test-input-id");
 	},
 };
+
+export const testWithButton = {
+	name: "test: with button",
+	render: () => (
+		<FileUpload name="file">
+			<View gap={2} direction="row">
+				<FileUpload.Trigger>
+					<Button>Upload</Button>
+				</FileUpload.Trigger>
+				<Button onClick={console.log}>Another button</Button>
+			</View>
+		</FileUpload>
+	),
+};

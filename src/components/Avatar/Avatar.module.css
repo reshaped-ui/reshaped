@@ -8,6 +8,15 @@
 	font-weight: var(--rs-font-weight-bold);
 	aspect-ratio: 1;
 	line-height: 100%;
+
+	&:has(.img)::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		pointer-events: none;
+		border: 1px solid var(--rs-color-border-neutral);
+	}
 }
 
 .img {

@@ -48,7 +48,8 @@
 	&:has(.trigger) {
 		pointer-events: none;
 
-		& .trigger {
+		& .trigger,
+		& button {
 			pointer-events: all;
 		}
 	}
