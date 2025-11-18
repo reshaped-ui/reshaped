@@ -90,6 +90,8 @@ const FileUpload: React.FC<T.Props> = (props) => {
 		<View
 			className={rootClassNames}
 			height={height}
+			// For the focus ring radius
+			borderRadius="medium"
 			attributes={{
 				...attributes,
 				onDragOver: handleDragOver,
