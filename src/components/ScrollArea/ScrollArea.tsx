@@ -159,7 +159,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		const scrollableEl = scrollableRef.current;
 		if (!scrollableEl) return;
 
-		const value = scrollableEl.clientWidth * args.value;
+		const value = scrollableEl.scrollWidth * args.value;
 
 		if (args.type === "absolute") {
 			scrollableEl.scrollLeft = value;
