@@ -1,12 +1,12 @@
 .root {
 	--rs-modal-container-width: 100vw;
 
-	transition: var(--rs-easing-accelerate) var(--rs-duration-fast);
+	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	box-shadow: var(--rs-shadow-overlay);
-	will-change: transform;
+	box-shadow: var(--rs-shadow-raised);
+	will-change: transform, opacity;
 	outline: none;
 
 	[data-rs-keyboard] &:focus {
@@ -32,15 +32,15 @@
 		max-height: none;
 		margin: var(--rs-unit-x4);
 		inset: 0;
-		transform: scale(0.96);
 		position: relative;
 		border-radius: var(--rs-radius-large);
 		overflow: hidden;
 		opacity: 0;
+		transform: translate(0, var(--rs-unit-x4));
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, 0) scale(1) !important;
+			transform: translate(0, 0) !important;
 			opacity: 1;
 		}
 	}
@@ -64,7 +64,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px)) scale(1) !important;
+			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px)) !important;
 		}
 	}
 
@@ -91,7 +91,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0) scale(1) !important;
+			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0) !important;
 		}
 	}
 
@@ -118,7 +118,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0) scale(1) !important;
+			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0) !important;
 		}
 	}
 
