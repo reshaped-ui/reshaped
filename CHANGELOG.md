@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.9.0-canary.8
+
+### Patch Changes
+
+- [#527](https://github.com/reshaped-ui/reshaped/pull/527) [`6209265`](https://github.com/reshaped-ui/reshaped/commit/6209265961919c07d8a8abcae003f96b2f2c548d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Fixed horizontall scrolling ratio on thumb dragging
+
 ## 3.9.0-canary.7
 
 ### Minor Changes

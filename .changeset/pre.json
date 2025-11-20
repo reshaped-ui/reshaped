@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.6"
+    "reshaped": "3.9.0-canary.7"
   },
   "changesets": [
     "big-rules-teach",
@@ -15,6 +15,7 @@
     "gentle-glasses-see",
     "gentle-pumas-reply",
     "good-lizards-carry",
+    "loud-emus-kneel",
     "lovely-facts-dress",
     "olive-spoons-lose",
     "perky-deer-shave",
