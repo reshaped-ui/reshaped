@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.9
+
+### Patch Changes
+
+- [`1209003`](https://github.com/reshaped-ui/reshaped/commit/1209003a830c3d4a3c3648b9f0729e76c32584f0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Fixed horizontall scrolling ratio on thumb dragging
+
 ## 3.8.8
 
 ### Patch Changes
