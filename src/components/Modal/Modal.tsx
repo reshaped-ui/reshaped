@@ -9,12 +9,7 @@ import useHandlerRef from "hooks/useHandlerRef";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import { resolveMixin } from "styles/mixin";
 import { enableUserSelect, disableUserSelect } from "utilities/dom";
-import {
-	classNames,
-	responsiveVariables,
-	responsiveClassNames,
-	responsivePropDependency,
-} from "utilities/props";
+import { classNames, responsiveVariables, responsiveClassNames } from "utilities/props";
 import { enableScroll, disableScroll } from "utilities/scroll";
 
 import s from "./Modal.module.css";
@@ -252,7 +247,7 @@ const Modal: React.FC<T.Props> = (props) => {
 			active={active}
 			transparent={transparentOverlay || hideProgress}
 			blurred={blurredOverlay}
-			overflow={responsivePropDependency(position, (p) => (p === "center" ? "auto" : "hidden"))}
+			overflow={clientPosition === "center" ? "auto" : "hidden"}
 			className={overlayClassName}
 			containerRef={containerRef}
 			attributes={{
