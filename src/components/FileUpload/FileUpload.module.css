@@ -30,6 +30,8 @@
 	& .triggerLayer {
 		border: 1px dashed var(--rs-color-border-neutral);
 		border-radius: var(--rs-file-upload-radius);
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: background-color, border-color;
 
 		.--highlighted& {
 			background: rgba(var(--rs-color-rgb-background-primary), 0.08);
@@ -49,7 +51,8 @@
 		pointer-events: none;
 
 		& .trigger,
-		& button {
+		& button,
+		& a {
 			pointer-events: all;
 		}
 	}

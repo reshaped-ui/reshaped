@@ -179,6 +179,17 @@ export const maxLines = {
 	),
 };
 
+export const numeric = {
+	name: "numeric",
+	render: () => (
+		<Example>
+			<Example.Item title="numeric">
+				<Text numeric>1234567890</Text>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const align = {
 	name: "align",
 	render: () => (

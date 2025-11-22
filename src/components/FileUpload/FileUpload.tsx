@@ -110,7 +110,6 @@ const FileUpload: React.FC<T.Props> = (props) => {
 					align="center"
 					justify="center"
 					textAlign="center"
-					animated
 					height="100%"
 				>
 					{inputNode}

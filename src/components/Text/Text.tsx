@@ -24,6 +24,7 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 		maxLines,
 		wrap,
 		monospace,
+		numeric,
 		children,
 		className,
 		attributes,
@@ -46,6 +47,7 @@ const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) 
 		maxLines === 1 && s["--break-all"],
 		wrap && s[`--wrap-${wrap}`],
 		monospace && s["--monospace"],
+		numeric && s["--numeric"],
 		className,
 		mixinStyles.classNames
 	);

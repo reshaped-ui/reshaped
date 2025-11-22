@@ -41,6 +41,8 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	decoration?: "line-through";
 	/** Maximum number of lines to render, used for text truncation */
 	maxLines?: number;
+	/** Render as a numeric value to preserve the width of each character */
+	numeric?: true;
 	/** Render as a different html tag */
 	as?: TagName;
 	/** Node for inserting children */
