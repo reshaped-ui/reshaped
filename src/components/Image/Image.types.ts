@@ -16,9 +16,11 @@ export type Props = {
 	/** Image aspect ratio, width / height */
 	aspectRatio?: G.Responsive<number>;
 	/** Image border radius, based on the radius tokens */
-	borderRadius?: Extract<TStyles.Radius, "small" | "medium" | "large">;
+	borderRadius?: Extract<TStyles.Radius, "small" | "medium" | "large" | "circular">;
 	/** Image display mode for controlling how it fits into the provided boundaries */
 	displayMode?: "cover" | "contain";
+	/** Add a semi-transparent border on top of the image for better background contrast */
+	outline?: boolean;
 	/** Image on load event */
 	onLoad?: (e: React.SyntheticEvent) => void;
 	/** Image on error event */

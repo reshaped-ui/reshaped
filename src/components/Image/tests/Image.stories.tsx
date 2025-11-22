@@ -86,6 +86,11 @@ export const radius = {
 					<Image src={imgUrl} borderRadius="large" />
 				</View>
 			</Example.Item>
+			<Example.Item title="radius: circular">
+				<View width="300px">
+					<Image src={imgUrl} borderRadius="circular" />
+				</View>
+			</Example.Item>
 		</Example>
 	),
 };
@@ -99,6 +104,17 @@ export const displayMode = {
 			</Example.Item>
 			<Example.Item title="mode: contain">
 				<Image src={imgUrl} height="200px" width="100%" displayMode="contain" />
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const outline = {
+	name: "outline",
+	render: () => (
+		<Example>
+			<Example.Item title="outline: true">
+				<Image src={imgUrl} height="200px" width="100%" outline borderRadius="small" />
 			</Example.Item>
 		</Example>
 	),

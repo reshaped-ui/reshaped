@@ -1,4 +1,5 @@
 import Icon from "components/Icon";
+import Image, { type ImageProps } from "components/Image";
 import View from "components/View";
 import { resolveMixin } from "styles/mixin";
 import { classNames, responsivePropDependency } from "utilities/props";
@@ -18,10 +19,10 @@ const Avatar: React.FC<T.Props> = (props) => {
 		icon,
 		className,
 		renderImage,
-		imageAttributes: passedImageAttributes,
+		imageAttributes,
 		attributes,
 	} = props;
-	const alt = props.alt || passedImageAttributes?.alt;
+	const alt = props.alt || imageAttributes?.alt;
 	const radius = squared
 		? responsivePropDependency(size, (size) => {
 				if (size >= 24) return "large";
@@ -29,6 +30,24 @@ const Avatar: React.FC<T.Props> = (props) => {
 				return "small";
 			})
 		: "circular";
+
+	if (src) {
+		return (
+			<Image
+				src={src}
+				alt={alt}
+				renderImage={renderImage}
+				outline
+				borderRadius={radius}
+				width={size}
+				aspectRatio={1}
+				className={className}
+				attributes={attributes as ImageProps["attributes"]}
+				imageAttributes={imageAttributes}
+			/>
+		);
+	}
+
 	const mixinStyles = resolveMixin({ height: size });
 	const rootClassNames = classNames(
 		s.root,
@@ -38,32 +57,6 @@ const Avatar: React.FC<T.Props> = (props) => {
 		variant && s[`--variant-${variant}`]
 	);
 
-	const renderContent = () => {
-		if (src) {
-			/**
-			 * Not all img attributes might be supported by custom Image components
-			 * Here is an example from Next: https://nextjs.org/docs/pages/api-reference/components/image#required-props
-			 */
-			const imageAttributes = {
-				...passedImageAttributes,
-				role: !alt ? "presentation" : undefined,
-				src: src ?? "",
-				alt: alt ?? "",
-				className: s.img,
-			};
-
-			// eslint-disable-next-line jsx-a11y/alt-text
-			return renderImage ? renderImage(imageAttributes) : <img {...imageAttributes} />;
-		}
-
-		if (icon) {
-			return (
-				<Icon svg={icon} size={responsivePropDependency(size, (size) => Math.ceil(size * 0.4))} />
-			);
-		}
-		return initials;
-	};
-
 	return (
 		<View
 			borderRadius={radius}
@@ -71,7 +64,11 @@ const Avatar: React.FC<T.Props> = (props) => {
 			backgroundColor={variant === "faded" ? `${color}-${variant}` : color}
 			className={rootClassNames}
 		>
-			{renderContent()}
+			{icon ? (
+				<Icon svg={icon} size={responsivePropDependency(size, (size) => Math.ceil(size * 0.4))} />
+			) : (
+				initials
+			)}
 		</View>
 	);
 };

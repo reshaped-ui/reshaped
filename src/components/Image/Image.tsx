@@ -19,6 +19,7 @@ const Image: React.FC<T.Props> = (props) => {
 		onLoad,
 		onError,
 		fallback,
+		outline,
 		displayMode = "cover",
 		borderRadius,
 		className,
@@ -28,28 +29,32 @@ const Image: React.FC<T.Props> = (props) => {
 	} = props;
 	const [status, setStatus] = React.useState("loading");
 	const mixinStyles = resolveMixin({ radius: borderRadius, width, height, maxWidth, aspectRatio });
-	const baseClassNames = classNames(
+	const rootClassNames = classNames(
 		s.root,
 		mixinStyles.classNames,
-		displayMode && s[`--display-mode-${displayMode}`],
+		outline && s["--outline"],
 		className
 	);
-	const imgClassNames = classNames(s.image, baseClassNames);
-	const fallbackClassNames = classNames(s.fallback, baseClassNames);
+	const imageClassNames = classNames([
+		s.image,
+		displayMode && s[`image--display-mode-${displayMode}`],
+	]);
 	const isFallback = (status === "error" || !src) && !!fallback;
 	const style = {
 		...attributes?.style,
 		...mixinStyles.variables,
 	} as React.CSSProperties;
 
-	const handleLoad = (e: React.SyntheticEvent) => {
+	const handleLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
 		setStatus("success");
 		onLoad?.(e);
+		passedImageAttributes?.onLoad?.(e);
 	};
 
-	const handleError = (e: React.SyntheticEvent) => {
+	const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
 		setStatus("error");
 		onError?.(e);
+		passedImageAttributes?.onError?.(e);
 	};
 
 	React.useEffect(() => {
@@ -63,7 +68,7 @@ const Image: React.FC<T.Props> = (props) => {
 				src: fallback ?? "",
 				alt: alt ?? "",
 				role: alt ? undefined : "presentation",
-				className: fallbackClassNames,
+				className: imageClassNames,
 				style,
 			};
 
@@ -72,7 +77,7 @@ const Image: React.FC<T.Props> = (props) => {
 		}
 
 		return (
-			<div {...attributes} className={fallbackClassNames} style={style}>
+			<div {...attributes} className={classNames([s.fallback, rootClassNames])} style={style}>
 				{fallback}
 			</div>
 		);
@@ -86,12 +91,20 @@ const Image: React.FC<T.Props> = (props) => {
 		role: alt ? undefined : "presentation",
 		onLoad: handleLoad,
 		onError: handleError,
-		className: imgClassNames,
+		className: outline ? imageClassNames : classNames([imageClassNames, rootClassNames]),
 		style,
 	};
 
 	// eslint-disable-next-line jsx-a11y/alt-text
-	return renderImage ? renderImage(imageAttributes) : <img {...imageAttributes} />;
+	const imageNode = renderImage ? renderImage(imageAttributes) : <img {...imageAttributes} />;
+
+	return outline ? (
+		<div {...attributes} className={rootClassNames} style={style}>
+			{imageNode}
+		</div>
+	) : (
+		imageNode
+	);
 };
 
 Image.displayName = "Image";
