@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import HiddenInput from "components/_private/HiddenInput";
 import { useFormControl } from "components/FormControl";
+import HiddenInput from "components/HiddenInput";
 import { useRadioGroup } from "components/RadioGroup";
 import Text from "components/Text";
 import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";

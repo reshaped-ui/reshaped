@@ -2,9 +2,9 @@
 
 import React from "react";
 
-import HiddenInput from "components/_private/HiddenInput";
 import { useCheckboxGroup } from "components/CheckboxGroup";
 import { useFormControl } from "components/FormControl";
+import HiddenInput from "components/HiddenInput";
 import Icon from "components/Icon";
 import Text from "components/Text";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
