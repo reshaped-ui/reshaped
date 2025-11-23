@@ -25,6 +25,7 @@ const FileUpload: React.FC<T.Props> = (props) => {
 		variant = "outline",
 		inline,
 		className,
+		disabled,
 		attributes,
 		inputAttributes,
 		onChange,
@@ -35,6 +36,7 @@ const FileUpload: React.FC<T.Props> = (props) => {
 		variant && s[`--variant-${variant}`],
 		inline && s[`--inline`],
 		highlightToggle.active && s["--highlighted"],
+		disabled && s["--disabled"],
 		className
 	);
 
@@ -78,6 +80,7 @@ const FileUpload: React.FC<T.Props> = (props) => {
 				type="file"
 				className={s.field}
 				name={name}
+				disabled={disabled}
 				onChange={handleChange}
 			/>
 		</HiddenVisually>

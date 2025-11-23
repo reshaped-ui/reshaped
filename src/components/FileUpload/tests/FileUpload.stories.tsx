@@ -155,6 +155,19 @@ export const onChange: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
 	},
 };
 
+export const disabled: StoryObj = {
+	name: "disabled",
+	render: () => (
+		<FileUpload name="test-name" disabled>
+			Content
+		</FileUpload>
+	),
+	play: async ({ canvas }) => {
+		const input = canvas.getByTestId("root").querySelector("input");
+		expect(input).toBeDisabled();
+	},
+};
+
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (

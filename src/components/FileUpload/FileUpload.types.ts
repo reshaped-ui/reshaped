@@ -5,6 +5,8 @@ import type * as G from "types/global";
 export type Props = {
 	/** Name of the input element */
 	name: string;
+	/** Disable the file upload input */
+	disabled?: boolean;
 	/** Node for inserting children, can be a render function that receives component state */
 	children?: React.ReactNode | ((props: { highlighted?: boolean }) => React.ReactNode);
 	/** Callback when the component value is changed */
