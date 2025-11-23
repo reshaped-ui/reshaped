@@ -39,6 +39,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		elActiveRef,
 		elPrevActiveRef,
 		elScrollableRef,
+		disableSelectionAnimation,
 	} = useTabs();
 	const [rtl] = useRTL();
 	const fadeSide = useFadeSide(elScrollableRef, { disabled: itemWidth === "equal" });
@@ -55,8 +56,8 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 	);
 	const selectorClassNames = classNames(
 		s.selector,
-		selection.status === "idle" && s["--selector-hidden"],
-		selection.status === "animated" && s["--selector-animated"]
+		selection.status === "idle" && s["selector--hidden"],
+		selection.status === "animated" && s["selector--animated"]
 	);
 
 	const handleNextClick = () => {
@@ -120,8 +121,14 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		const selectionStyle = getElementSelectionStyle(elPrevActiveRef.current);
 
 		if (!selectionStyle) return;
+
+		if (disableSelectionAnimation) {
+			setSelection({ ...selectionStyle, status: "idle" });
+			return;
+		}
+
 		setSelection({ ...selectionStyle, status: "prepared" });
-	}, [value, getElementSelectionStyle]);
+	}, [value, getElementSelectionStyle, disableSelectionAnimation]);
 
 	useIsomorphicLayoutEffect(() => {
 		if (selection.status !== "prepared" || !elActiveRef.current) return;
@@ -146,18 +153,20 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 						);
 					})}
 
-					<div
-						onTransitionEnd={handleTransitionEnd}
-						className={selectorClassNames}
-						style={
-							{
-								"--rs-tab-selection-x": selection.left,
-								"--rs-tab-selection-y": selection.top,
-								"--rs-tab-selection-scale-x": selection.scaleX,
-								"--rs-tab-selection-scale-y": selection.scaleY,
-							} as React.CSSProperties
-						}
-					/>
+					{!disableSelectionAnimation && (
+						<div
+							onTransitionEnd={handleTransitionEnd}
+							className={selectorClassNames}
+							style={
+								{
+									"--rs-tab-selection-x": selection.left,
+									"--rs-tab-selection-y": selection.top,
+									"--rs-tab-selection-scale-x": selection.scaleX,
+									"--rs-tab-selection-scale-y": selection.scaleY,
+								} as React.CSSProperties
+							}
+						/>
+					)}
 				</div>
 			</div>
 

@@ -16,7 +16,7 @@ const TabsPanel: React.FC<T.PanelProps> = (props) => {
 	const [needsTabIndex, setNeedsTabIndex] = React.useState(true);
 	const rootRef = React.useRef<HTMLDivElement>(null);
 	const active = panelValue === value;
-	const panelClassNames = classNames(s.panel, !active && s["--panel-hidden"], className);
+	const panelClassNames = classNames(s.panel, !active && s["panel--hidden"], className);
 
 	React.useEffect(() => {
 		const el = rootRef.current;

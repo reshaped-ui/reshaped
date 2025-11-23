@@ -58,6 +58,8 @@ export type BaseProps = {
 	size?: "medium" | "large";
 	/** Name of the tab buttons group when used as a form control */
 	name?: string;
+	/** Disable the animation of the tab button selection */
+	disableSelectionAnimation?: boolean;
 	/** Callback when the active tab value changes */
 	onChange?: (args: { value: string; name?: string }) => void;
 };
@@ -84,7 +86,7 @@ export type Props = ControlledProps | UncontrolledProps;
 
 export type Context = Pick<
 	BaseProps,
-	"itemWidth" | "onChange" | "variant" | "name" | "direction"
+	"itemWidth" | "onChange" | "variant" | "name" | "direction" | "disableSelectionAnimation"
 > & {
 	size: NonNullable<BaseProps["size"]>;
 	value?: string;
