@@ -45,15 +45,6 @@ const Checkbox: React.FC<T.Props> = (props) => {
 		size && responsiveClassNames(s, "--size", size)
 	);
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (!name) return;
-		const { checked } = event.target;
-		const changeArgs = { name, value, checked, event };
-
-		if (onChange) onChange(changeArgs);
-		if (checkboxGroup?.onChange) checkboxGroup.onChange(changeArgs);
-	};
-
 	useIsomorphicLayoutEffect(() => {
 		inputRef.current!.indeterminate = indeterminate || false;
 	}, [indeterminate, checked]);
@@ -69,7 +60,7 @@ const Checkbox: React.FC<T.Props> = (props) => {
 					name={name}
 					disabled={disabled}
 					value={value}
-					onChange={handleChange}
+					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					attributes={{

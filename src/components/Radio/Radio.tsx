@@ -39,16 +39,6 @@ const Radio: React.FC<T.Props> = (props) => {
 		size && responsiveClassNames(s, "--size", size)
 	);
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (!name) return;
-
-		const { checked } = event.target;
-		const changeArgs = { name, value, checked, event };
-
-		if (onChange) onChange(changeArgs);
-		if (radioGroup?.onChange) radioGroup.onChange(changeArgs);
-	};
-
 	return (
 		<label {...attributes} className={rootClassName}>
 			<span className={s.field}>
@@ -60,7 +50,7 @@ const Radio: React.FC<T.Props> = (props) => {
 					name={name}
 					disabled={disabled}
 					value={value}
-					onChange={handleChange}
+					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					attributes={inputAttributes}
