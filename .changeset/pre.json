@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.7"
+    "reshaped": "3.9.0-canary.8"
   },
   "changesets": [
     "big-rules-teach",
@@ -12,24 +12,30 @@
     "fancy-buses-worry",
     "fast-vans-kiss",
     "fine-tables-count",
+    "fresh-dolls-nail",
+    "funny-rabbits-laugh",
     "gentle-glasses-see",
     "gentle-pumas-reply",
     "good-lizards-carry",
     "loud-emus-kneel",
     "lovely-facts-dress",
+    "nice-aliens-wear",
     "olive-spoons-lose",
     "perky-deer-shave",
     "purple-stamps-film",
     "quiet-cars-type",
     "real-snakes-give",
     "salty-boats-reply",
+    "sharp-turkeys-push",
     "sour-clubs-cut",
     "stale-donuts-stay",
     "strong-impalas-allow",
     "stupid-planets-deliver",
     "swift-turtles-relax",
+    "thin-rocks-hang",
     "thirty-dragons-float",
     "violet-nights-punch",
-    "wild-breads-go"
+    "wild-breads-go",
+    "yellow-shirts-heal"
   ]
 }

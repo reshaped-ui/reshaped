@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.9.0-canary.9
+
+### Minor Changes
+
+- [`1aa5ae3`](https://github.com/reshaped-ui/reshaped/commit/1aa5ae335a2078e226bb89d7c9a02bdfc3f8a76b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - HiddenInput: converted private to a public utility exported from the library
+
+- [`1b6c05d`](https://github.com/reshaped-ui/reshaped/commit/1b6c05d06a79b451809aed179e68b6185c7e9207) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Text: Added numeric flag
+  - FileUpload: Added transition for the inline variant with outline
+  - FileUpload: Added support for rendering links inside the dropzone
+
+- [`bbf07a8`](https://github.com/reshaped-ui/reshaped/commit/bbf07a87443838b7c6b4a7fbbc2f0686e161da43) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Scrim: Added padding, paddingInline, paddingBlock, borderRadius support
+
+- [`55d5a07`](https://github.com/reshaped-ui/reshaped/commit/55d5a071e924c3eddb791e002a4ce71e5a4d0aa0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Image: added outline property
+  - Avatar: migrated to Image component internally
+
+- [`4763825`](https://github.com/reshaped-ui/reshaped/commit/4763825931c7c854c94ab27c0c10caa45ed6c7aa) Thanks [@blvdmitry](https://github.com/blvdmitry)! - FileUpload: disabled property support
+
+### Patch Changes
+
+- [#528](https://github.com/reshaped-ui/reshaped/pull/528) [`8e35bbc`](https://github.com/reshaped-ui/reshaped/commit/8e35bbcd215f73ca3a5f3d8d0a9c4cab4565e193) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Modal: Fixed large modal scrolling when using responsive position
+
 ## 3.9.0-canary.8
 
 ### Patch Changes
