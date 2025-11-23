@@ -1,3 +1,4 @@
+import View from "components/View";
 import { classNames } from "utilities/props";
 
 import s from "./Scrim.module.css";
@@ -9,25 +10,40 @@ const Scrim: React.FC<T.Props> = (props) => {
 		children,
 		backgroundSlot,
 		position = "cover",
+		paddingInline,
+		paddingBlock,
+		padding,
+		borderRadius,
 		attributes,
 		className,
 		scrimClassName,
 	} = props;
-	const rootClassNames = classNames(
-		s.root,
-		!!backgroundSlot && s["--with-background"],
-		position && s[`--position-${position}`],
-		className
-	);
+	const rootClassNames = classNames(s.root, position && s[`--position-${position}`], className);
 	const scrimClassNames = classNames(s.scrim, scrimClassName);
 
 	return (
-		<div {...attributes} className={rootClassNames}>
+		<View
+			borderRadius={borderRadius}
+			attributes={attributes}
+			className={rootClassNames}
+			position={backgroundSlot ? "relative" : "absolute"}
+			inset={backgroundSlot ? undefined : 0}
+			overflow="hidden"
+		>
 			{backgroundSlot}
 			<div className={scrimClassNames}>
-				<div className={s.content}>{children}</div>
+				<View
+					paddingInline={paddingInline ?? padding ?? 4}
+					paddingBlock={paddingBlock ?? padding ?? 3}
+					zIndex={5}
+					height={["start", "end"].includes(position) ? "100%" : undefined}
+					width={["top", "bottom", "cover"].includes(position) ? "100%" : undefined}
+					textAlign={position === "cover" ? "center" : undefined}
+				>
+					{children}
+				</View>
 			</div>
-		</div>
+		</View>
 	);
 };
 

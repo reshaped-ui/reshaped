@@ -1,5 +1,6 @@
 import React from "react";
 
+import type { ViewProps } from "components/View";
 import type * as G from "types/global";
 
 export type Props = {
@@ -15,4 +16,4 @@ export type Props = {
 	className?: G.ClassName;
 	/** Additional attributes for the root element */
 	attributes?: G.Attributes<"div">;
-};
+} & Pick<ViewProps, "paddingInline" | "paddingBlock" | "padding" | "borderRadius">;
