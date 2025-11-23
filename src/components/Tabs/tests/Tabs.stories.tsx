@@ -418,6 +418,30 @@ export const value: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
 	},
 };
 
+export const disableSelectionAnimation: StoryObj = {
+	name: "disableSelectionAnimation",
+	render: () => (
+		<Example>
+			<Example.Item title="disableSelectionAnimation">
+				<Tabs disableSelectionAnimation>
+					<Tabs.List>
+						<Tabs.Item value="1">Item 1</Tabs.Item>
+						<Tabs.Item value="2">Item 2</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</Example.Item>
+			<Example.Item title="disableSelectionAnimation, href">
+				<Tabs disableSelectionAnimation variant="pills">
+					<Tabs.List>
+						<Tabs.Item value="1">Item 1</Tabs.Item>
+						<Tabs.Item value="2">Item 2</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (

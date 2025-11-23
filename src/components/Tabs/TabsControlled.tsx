@@ -17,6 +17,7 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 		itemWidth,
 		variant,
 		name,
+		disableSelectionAnimation,
 		direction = "row",
 		size = "medium",
 	} = props;
@@ -55,6 +56,7 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 				elScrollableRef,
 				selection,
 				setSelection,
+				disableSelectionAnimation,
 			}}
 		>
 			{children}
