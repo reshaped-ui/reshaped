@@ -170,6 +170,9 @@ export type { GridProps, GridItemProps } from "components/Grid";
 export { default as Hidden } from "components/Hidden";
 export type { HiddenProps } from "components/Hidden";
 
+export { default as HiddenInput } from "components/HiddenInput";
+export type { HiddenInputProps } from "components/HiddenInput";
+
 export { default as HiddenVisually } from "components/HiddenVisually";
 export type { HiddenVisuallyProps } from "components/HiddenVisually";
 
