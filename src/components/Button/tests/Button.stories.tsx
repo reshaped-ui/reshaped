@@ -853,6 +853,25 @@ export const group: StoryObj = {
 	},
 };
 
+export const groupFullWidth: StoryObj = {
+	name: "group, fullWidth",
+	render: () => (
+		<Example>
+			<Example.Item title="fullWidth">
+				<Button.Group>
+					<Button variant="outline" fullWidth>
+						Button 1
+					</Button>
+					<Button variant="outline" fullWidth>
+						Button 2
+					</Button>
+					<Button variant="outline">Button 3</Button>
+				</Button.Group>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const groupClassName: StoryObj = {
 	name: "group className, attributes",
 	render: () => (

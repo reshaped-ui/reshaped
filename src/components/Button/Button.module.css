@@ -346,7 +346,14 @@
 
 /* Button group */
 
+.group {
+	display: flex;
+}
+
 .group .root {
+	flex-shrink: 0;
+	width: auto;
+
 	&,
 	&::before {
 		border-radius: 0;
@@ -425,6 +432,10 @@
 
 	&.--variant-faded.--color-media {
 		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
+	}
+
+	&.--full-width {
+		flex-grow: 1;
 	}
 }
 
