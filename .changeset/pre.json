@@ -2,9 +2,10 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.8"
+    "reshaped": "3.9.0-canary.9"
   },
   "changesets": [
+    "afraid-eyes-guess",
     "big-rules-teach",
     "clean-donuts-rescue",
     "eleven-otters-bake",

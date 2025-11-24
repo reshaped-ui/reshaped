@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.9.0-canary.10
+
+### Minor Changes
+
+- [#530](https://github.com/reshaped-ui/reshaped/pull/530) [`aa2872c`](https://github.com/reshaped-ui/reshaped/commit/aa2872c3b8b7d8b941dcef1e8a7b411efa8b1040) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Added disableSelectionAnimation flag
+
 ## 3.9.0-canary.9
 
 ### Minor Changes
