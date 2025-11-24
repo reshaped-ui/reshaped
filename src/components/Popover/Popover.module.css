@@ -17,6 +17,10 @@
 	box-shadow: var(--rs-shadow-raised);
 }
 
+.content--variant-headless {
+	border: none;
+}
+
 .content--radius-small {
 	border-radius: var(--rs-radius-small);
 }

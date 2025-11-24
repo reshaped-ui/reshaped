@@ -19,7 +19,7 @@ const HiddenInput: React.FC<T.Props> = (props) => {
 		formControl?.disabled ?? props.disabled ?? checkboxGroup?.disabled ?? radioGroup?.disabled;
 	const checked =
 		(value && checkboxGroup?.value?.includes(value)) ||
-		radioGroup?.value === value ||
+		(value && radioGroup?.value === value) ||
 		props.checked;
 	const defaultChecked = checkboxGroup ? undefined : props.defaultChecked;
 
