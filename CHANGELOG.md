@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.9.0-canary.11
+
+### Patch Changes
+
+- [#531](https://github.com/reshaped-ui/reshaped/pull/531) [`a7ea5e7`](https://github.com/reshaped-ui/reshaped/commit/a7ea5e7924889229dfcfd130e4c18e3a3f5047e6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Fixed scrolling detection inside small-sized View children
+
 ## 3.9.0-canary.10
 
 ### Minor Changes
