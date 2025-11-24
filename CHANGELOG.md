@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.9.0-canary.12
+
+### Patch Changes
+
+- [`2c58151`](https://github.com/reshaped-ui/reshaped/commit/2c58151cde796628d2080f0ba9df794ed5dd2967) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ButtonGroup, ToggleButtonGroup: added support for fullWidth buttons
+
 ## 3.9.0-canary.11
 
 ### Patch Changes
