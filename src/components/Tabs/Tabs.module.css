@@ -56,6 +56,8 @@
 }
 
 .button {
+	--rs-tabs-focus-ring-inset: calc(var(--rs-unit-x2) * -1);
+
 	width: 100%;
 
 	/* 
@@ -64,11 +66,20 @@
 	*/
 	z-index: 1;
 	position: relative;
-	overflow: hidden;
 
 	/* Highlighting causes background animation to get cut off */
 	-webkit-tap-highlight-color: transparent;
 	border-radius: var(--rs-radius-medium);
+
+	[data-rs-keyboard] &:focus::after {
+		content: "";
+		pointer-events: none;
+		position: absolute;
+		inset: 0;
+		inset-inline: var(--rs-tabs-focus-ring-inset);
+		border-radius: var(--rs-radius-medium);
+		box-shadow: var(--rs-shadow-focus-inset);
+	}
 }
 
 .buttonContent {
@@ -243,8 +254,7 @@
 	}
 
 	& .button {
-		margin: var(--rs-unit-x1) calc(var(--rs-unit-x2) * -1);
-		padding: 0 var(--rs-unit-x2);
+		margin-block: var(--rs-unit-x1);
 		box-sizing: initial;
 	}
 
@@ -287,6 +297,8 @@
 	}
 
 	& .button {
+		--rs-tabs-focus-ring-inset: 0;
+
 		padding: var(--rs-unit-x2);
 		margin-inline-start: calc(var(--rs-unit-x2) * -1);
 		width: calc(100% + var(--rs-unit-x1));
@@ -308,6 +320,8 @@
 	--rs-tabs-gap: var(--rs-unit-x1);
 
 	& .button {
+		--rs-tabs-focus-ring-inset: 0;
+
 		margin: 0;
 		padding: 0;
 	}
@@ -408,6 +422,10 @@
 	& .buttonText {
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+
+	& .button {
+		--rs-tabs-focus-ring-inset: 0;
 	}
 }
 

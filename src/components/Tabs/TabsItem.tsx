@@ -94,7 +94,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 			<Actionable
 				ref={ref}
 				href={href}
-				insetFocus
+				disableFocusRing
 				disabled={disabled}
 				onClick={!name ? handleChange : undefined}
 				className={s.button}
