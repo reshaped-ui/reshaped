@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.9.0-canary.13
+
+### Patch Changes
+
+- [#533](https://github.com/reshaped-ui/reshaped/pull/533) [`95e634d`](https://github.com/reshaped-ui/reshaped/commit/95e634d95e51731e5d9cb470bda4de47d48e1208) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Tooltip: Added instanceRef support
+  - Flyout: Added automatic position updates on content resize
+
 ## 3.9.0-canary.12
 
 ### Patch Changes
