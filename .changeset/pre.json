@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.11"
+    "reshaped": "3.9.0-canary.12"
   },
   "changesets": [
     "afraid-eyes-guess",
