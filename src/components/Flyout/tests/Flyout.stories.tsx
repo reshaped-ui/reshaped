@@ -1022,6 +1022,7 @@ export const testDynamicBounds = {
 		const [left, setLeft] = React.useState(50);
 		const [top, setTop] = React.useState(50);
 		const [size, setSize] = React.useState<"medium" | "large">("medium");
+		const [contentSize, setContentSize] = React.useState<"medium" | "large">("medium");
 		const flyoutRef = React.useRef<FlyoutInstance>(null);
 
 		React.useEffect(() => {
@@ -1045,6 +1046,8 @@ export const testDynamicBounds = {
 					</Button>
 					<Button onClick={() => setSize("large")}>Large button</Button>
 					<Button onClick={() => setSize("medium")}>Small button</Button>
+					<Button onClick={() => setContentSize("large")}>Large content</Button>
+					<Button onClick={() => setContentSize("medium")}>Small content</Button>
 				</View>
 				<View height={100}>
 					<Flyout
@@ -1063,7 +1066,10 @@ export const testDynamicBounds = {
 							)}
 						</Flyout.Trigger>
 						<Flyout.Content>
-							<Content />
+							<Content
+								height={contentSize === "large" ? 200 : undefined}
+								width={contentSize === "large" ? 200 : undefined}
+							/>
 						</Flyout.Content>
 					</Flyout>
 				</View>

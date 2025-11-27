@@ -18,6 +18,7 @@ export type Props = Pick<
 	| "originCoordinates"
 	| "contentAttributes"
 	| "contentClassName"
+	| "instanceRef"
 > & {
 	/** Node for inserting children */
 	children: (attributes: FlyoutTriggerAttributes) => React.ReactNode;

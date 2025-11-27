@@ -371,9 +371,10 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 		resizeObserver.observe(document.body);
 		if (triggerElRef.current) resizeObserver.observe(triggerElRef.current);
+		if (flyoutElRef.current) resizeObserver.observe(flyoutElRef.current);
 
 		return () => resizeObserver.disconnect();
-	}, [updatePosition, triggerElRef, isRendered]);
+	}, [updatePosition, triggerElRef, isRendered, flyoutElRef]);
 
 	React.useEffect(() => {
 		updatePosition({ sync: true });
