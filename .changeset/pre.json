@@ -2,12 +2,13 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.12"
+    "reshaped": "3.9.0-canary.13"
   },
   "changesets": [
     "afraid-eyes-guess",
     "big-rules-teach",
     "clean-donuts-rescue",
+    "clever-pillows-shake",
     "crisp-rabbits-watch",
     "dirty-kids-fly",
     "eleven-otters-bake",

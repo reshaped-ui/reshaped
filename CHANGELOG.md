@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.9.0-canary.14
+
+### Patch Changes
+
+- [#534](https://github.com/reshaped-ui/reshaped/pull/534) [`1eb06cb`](https://github.com/reshaped-ui/reshaped/commit/1eb06cbeff9f8ccf4437085330cb8d4004ded0f4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Tooltip, Flyout: Added contentMaxWidth support
+  - Flyout: Added small screen position fallbacks
+
 ## 3.9.0-canary.13
 
 ### Patch Changes
