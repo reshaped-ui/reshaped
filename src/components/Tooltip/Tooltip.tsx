@@ -9,7 +9,14 @@ import s from "./Tooltip.module.css";
 import type * as T from "./Tooltip.types";
 
 const Tooltip: React.FC<T.Props> = (props) => {
-	const { text, children, position = "bottom", color = "inverted", ...flyoutProps } = props;
+	const {
+		text,
+		children,
+		position = "bottom",
+		color = "inverted",
+		contentMaxWidth = "360px",
+		...flyoutProps
+	} = props;
 
 	if (!text) return children({ ref: null });
 
@@ -20,6 +27,7 @@ const Tooltip: React.FC<T.Props> = (props) => {
 			triggerType="hover"
 			// Disable group timeouts by default since it's not controlled by the default user events
 			groupTimeouts={flyoutProps.active === undefined ? true : false}
+			contentMaxWidth={contentMaxWidth}
 		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>
 			<Flyout.Content>
