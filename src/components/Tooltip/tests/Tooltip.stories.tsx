@@ -160,6 +160,41 @@ export const defaultActive: StoryObj<{
 	},
 };
 
+export const contentMaxWidth = {
+	name: "contentMaxWidth",
+	render: () => (
+		<Example>
+			<Example.Item title="contentMaxWidth: 200px">
+				<Tooltip
+					contentMaxWidth="200px"
+					text="Very long tooltip test text that should trigger position update"
+					position="top"
+					active
+				>
+					{(attributes) => <Button attributes={attributes}>Show tooltip</Button>}
+				</Tooltip>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const testLongText = {
+	name: "test: long text",
+	render: () => (
+		<Example>
+			<Example.Item title="long text">
+				<Tooltip
+					active
+					text="Very long tooltip test text that should trigger position update"
+					position="top"
+				>
+					{(attributes) => <Button attributes={attributes}>Show tooltip</Button>}
+				</Tooltip>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const edgeCases = {
 	name: "test: edge cases",
 	render: () => (

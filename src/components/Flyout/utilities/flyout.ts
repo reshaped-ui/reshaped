@@ -79,7 +79,7 @@ const flyout = (
 	const renderContainerBounds = container.getBoundingClientRect();
 	const visualContainerBounds = (passedContainer || document.body).getBoundingClientRect();
 
-	const applyPosition = (position: T.Position) => {
+	const applyPosition = (position: T.Position, options?: { width?: T.Width }) => {
 		return calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
 			flyoutBounds,
@@ -88,7 +88,7 @@ const flyout = (
 			contentGap: contentGap * unitModifier,
 			contentShift: contentShift * unitModifier,
 			rtl,
-			width,
+			width: options?.width || width,
 			passedContainer:
 				passedContainer ||
 				(closestFixedContainer !== document.body ? closestFixedContainer : undefined),
@@ -117,6 +117,22 @@ const flyout = (
 
 		return visible;
 	});
+
+	// Try full width positions in case it doesn't fit on any side
+	if (!calculated) {
+		const smallScreenFallbackPositions: T.Position[] = (["top", "bottom"] as const).filter(
+			(position) => testOrder.includes(position)
+		);
+
+		smallScreenFallbackPositions.some((position) => {
+			const tested = applyPosition(position, { width: "full" });
+			const visible = testVisibility(tested);
+
+			if (visible) calculated = tested;
+
+			return visible;
+		});
+	}
 
 	if (!calculated) calculated = applyPosition(lastUsedPosition);
 

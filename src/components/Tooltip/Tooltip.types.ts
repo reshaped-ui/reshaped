@@ -15,6 +15,7 @@ export type Props = Pick<
 	| "positionRef"
 	| "contentGap"
 	| "contentShift"
+	| "contentMaxWidth"
 	| "originCoordinates"
 	| "contentAttributes"
 	| "contentClassName"

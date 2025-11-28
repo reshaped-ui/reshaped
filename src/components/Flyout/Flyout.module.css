@@ -1,6 +1,7 @@
 .content {
 	--rs-flyout-gap: 0;
 	--rs-flyout-max-h: 100%;
+	--rs-flyout-max-w: 100%;
 	--rs-flyout-origin-x: 50%;
 	--rs-flyout-origin-y: 50%;
 
@@ -32,7 +33,7 @@
 	outline: none;
 	height: 100%;
 	overflow: auto;
-	max-width: 100%;
+	max-width: var(--rs-flyout-max-w);
 	max-height: var(--rs-flyout-max-h);
 	backface-visibility: hidden;
 
