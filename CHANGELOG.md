@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.9.0-canary.15
+
+### Patch Changes
+
+- [#535](https://github.com/reshaped-ui/reshaped/pull/535) [`2bc837a`](https://github.com/reshaped-ui/reshaped/commit/2bc837a22382956bd8388f8a549c8955f30e788a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Flyout: Correctly calculate fallbackMinHeight and fallbackMinWidth when rendered in document.body
+  - Flyout: Fixed trigger type hover mouseLeave handler edge cases
+
 ## 3.9.0-canary.14
 
 ### Patch Changes

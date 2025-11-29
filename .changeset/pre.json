@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.13"
+    "reshaped": "3.9.0-canary.14"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -11,6 +11,7 @@
     "clever-pillows-shake",
     "crisp-rabbits-watch",
     "dirty-kids-fly",
+    "eighty-jars-knock",
     "eleven-otters-bake",
     "fair-bananas-grin",
     "fancy-buses-worry",
