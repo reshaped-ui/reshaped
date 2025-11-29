@@ -77,7 +77,6 @@ const flyout = (
 		closestFixedContainer ||
 		document.body;
 	const renderContainerBounds = container.getBoundingClientRect();
-	const visualContainerBounds = (passedContainer || document.body).getBoundingClientRect();
 
 	const applyPosition = (position: T.Position, options?: { width?: T.Width }) => {
 		return calculatePosition({
@@ -99,6 +98,13 @@ const flyout = (
 	};
 
 	const testVisibility = (calculated: ReturnType<typeof calculatePosition>) => {
+		const visualContainerBounds = passedContainer?.getBoundingClientRect() ?? {
+			width: window.innerWidth,
+			height: window.innerHeight,
+			left: window.scrollX,
+			top: window.scrollY,
+		};
+
 		return isFullyVisible({
 			flyoutBounds: calculated.boundaries,
 			visualContainerBounds,
