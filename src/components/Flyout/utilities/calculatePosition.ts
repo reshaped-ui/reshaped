@@ -1,8 +1,7 @@
+import { SCREEN_OFFSET } from "./constants";
 import { getRTLPosition, centerBySize } from "./helpers";
 
 import type * as T from "../Flyout.types";
-
-const SCREEN_OFFSET = 8;
 
 /**
  * Calculate styles for the current position

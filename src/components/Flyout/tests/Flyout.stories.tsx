@@ -494,6 +494,26 @@ export const fallbackAdjustLayout = {
 	},
 };
 
+export const fallbackMinHeight = {
+	name: "fallbackAdjustLayout, fallbackMinHeight",
+	render: () => {
+		return (
+			<div style={{ height: "1000px", paddingTop: "700px" }}>
+				<Demo
+					contentHeight={false}
+					position="bottom-start"
+					width="200px"
+					fallbackAdjustLayout
+					defaultActive
+					fallbackMinHeight="150px"
+				>
+					<div style={{ height: "600px" }}>Content</div>
+				</Demo>
+			</div>
+		);
+	},
+};
+
 export const fallbackAdjustLayoutShift = {
 	name: "fallbackAdjustLayout, shift",
 	render: () => {
@@ -600,7 +620,7 @@ export const width = {
 	render: () => (
 		<Example>
 			<Example.Item title="width: 300px">
-				<Demo width="300px" position="bottom" />
+				<Demo width="300px" contentWidth={false} position="bottom" />
 			</Example.Item>
 
 			<Example.Item title="width: trigger">

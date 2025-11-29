@@ -23,6 +23,7 @@ import useFlyout from "./useFlyout";
 import cooldown from "./utilities/cooldown";
 
 import type * as T from "./Flyout.types";
+import type * as G from "types/global";
 
 const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {
@@ -102,12 +103,15 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
+
+	const originCoordinatesRef = React.useRef<G.Coordinates | null>(originCoordinates ?? null);
 	// eslint-disable-next-line react-hooks/refs
+	originCoordinatesRef.current = originCoordinates ?? null;
+
 	const flyout = useFlyout({
 		triggerElRef: positionRef ?? triggerElRef,
 		flyoutElRef,
-		// eslint-disable-next-line react-hooks/refs
-		triggerBounds: originCoordinates ?? triggerBoundsRef.current,
+		triggerBoundsRef: originCoordinates ? originCoordinatesRef : triggerBoundsRef,
 		width,
 		position: passedPosition,
 		defaultActive: resolvedActive,
@@ -212,8 +216,16 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleMouseLeave = React.useCallback(
 		(e: React.MouseEvent) => {
-			if (e.relatedTarget === flyoutElRef.current) return;
-			if (e.relatedTarget === triggerElRef.current) return;
+			if (
+				e.relatedTarget === flyoutElRef.current ||
+				(e.relatedTarget instanceof Node && flyoutElRef.current?.contains(e.relatedTarget))
+			)
+				return;
+			if (
+				e.relatedTarget === triggerElRef.current ||
+				(e.relatedTarget instanceof Node && triggerElRef.current?.contains(e.relatedTarget))
+			)
+				return;
 
 			cooldown.cool();
 			clearTimer();
