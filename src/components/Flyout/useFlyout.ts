@@ -41,7 +41,7 @@ type UseFlyout = (
 		container?: HTMLElement | null;
 		triggerElRef: React.RefObject<HTMLElement | null>;
 		flyoutElRef: React.RefObject<HTMLElement | null>;
-		triggerBounds?: DOMRect | G.Coordinates | null;
+		triggerBoundsRef: React.RefObject<DOMRect | G.Coordinates | null>;
 	}
 ) => Pick<T.State, "position" | "status"> & {
 	updatePosition: (options?: { sync?: boolean }) => void;
@@ -77,7 +77,8 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 };
 
 const useFlyout: UseFlyout = (args) => {
-	const { triggerElRef, flyoutElRef, triggerBounds, contentGap, contentShift, ...options } = args;
+	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, contentShift, ...options } =
+		args;
 	const {
 		position: defaultPosition = "bottom",
 		fallbackPositions,
@@ -128,7 +129,7 @@ const useFlyout: UseFlyout = (args) => {
 			const nextFlyoutData = flyout({
 				triggerEl: triggerElRef.current,
 				flyoutEl: flyoutElRef.current,
-				triggerBounds,
+				triggerBounds: triggerBoundsRef.current,
 				width,
 				position: changePositon ? defaultPosition : lastUsedPositionRef.current,
 				fallbackPositions: changePositon ? cachedFallbackPositions : [],
@@ -158,7 +159,7 @@ const useFlyout: UseFlyout = (args) => {
 			isRTL,
 			flyoutElRef,
 			triggerElRef,
-			triggerBounds,
+			triggerBoundsRef,
 			width,
 			contentGap,
 			contentShift,

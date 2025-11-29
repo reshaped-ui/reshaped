@@ -620,7 +620,7 @@ export const width = {
 	render: () => (
 		<Example>
 			<Example.Item title="width: 300px">
-				<Demo width="300px" position="bottom" />
+				<Demo width="300px" contentWidth={false} position="bottom" />
 			</Example.Item>
 
 			<Example.Item title="width: trigger">
