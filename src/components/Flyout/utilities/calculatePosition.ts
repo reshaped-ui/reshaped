@@ -35,7 +35,7 @@ const calculatePosition = (
 		contentShift = 0,
 		passedContainer,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
+		// fallbackMinWidth,
 		fallbackMinHeight,
 	} = args;
 	const isFullWidth = passedWidth === "full" || passedWidth === "100%";
@@ -195,19 +195,20 @@ const calculatePosition = (
 			if (bottom !== null) bottom = bottom + (flyoutHeight - height);
 		}
 
-		if (updatedOverflow.left > 0) {
-			width = Math.max(
-				fallbackMinWidth ? parseInt(fallbackMinWidth) : 0,
-				flyoutWidth - updatedOverflow.left
-			);
-			left = left + (flyoutWidth - width);
-		} else if (updatedOverflow.right > 0) {
-			width = Math.max(
-				fallbackMinWidth ? parseInt(fallbackMinWidth) : 0,
-				flyoutWidth - updatedOverflow.right
-			);
-			if (right !== null) right = right + (flyoutWidth - width);
-		}
+		// TODO: Decide if we need horizontal scrolling for the fallbacks, might be a bad practice anyways
+		// if (updatedOverflow.left > 0) {
+		// 	width = Math.max(
+		// 		fallbackMinWidth ? parseInt(fallbackMinWidth) : 0,
+		// 		flyoutWidth - updatedOverflow.left
+		// 	);
+		// 	left = left + (flyoutWidth - width);
+		// } else if (updatedOverflow.right > 0) {
+		// 	width = Math.max(
+		// 		fallbackMinWidth ? parseInt(fallbackMinWidth) : 0,
+		// 		flyoutWidth - updatedOverflow.right
+		// 	);
+		// 	if (right !== null) right = right + (flyoutWidth - width);
+		// }
 	}
 
 	if (isFullWidth) {
