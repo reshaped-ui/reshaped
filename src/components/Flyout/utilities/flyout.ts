@@ -3,6 +3,7 @@ import { getRectFromCoordinates, getShadowRoot, findClosestPositionContainer } f
 import { resetStyles } from "../Flyout.constants";
 
 import calculatePosition from "./calculatePosition";
+import { SCREEN_OFFSET } from "./constants";
 import getPositionFallbacks from "./getPositionFallbacks";
 import isFullyVisible from "./isFullyVisible";
 
@@ -67,8 +68,6 @@ const flyout = (
 	// Insert inside shadow root if possible to make sure styles are applied correctly
 	(shadowRoot || document.body).appendChild(targetClone);
 
-	const cloneRect = targetClone.getBoundingClientRect();
-	const flyoutBounds = { width: cloneRect.width, height: cloneRect.height };
 	const closestFixedContainer =
 		!passedContainer && triggerEl ? findClosestPositionContainer({ el: triggerEl }) : undefined;
 	const container =
@@ -79,6 +78,13 @@ const flyout = (
 	const renderContainerBounds = container.getBoundingClientRect();
 
 	const applyPosition = (position: T.Position, options?: { width?: T.Width }) => {
+		// Need to apply real width if it's full width since it might affect the height calculation
+		targetClone.style.width =
+			options?.width === "full" ? `calc(100% - ${SCREEN_OFFSET * 2}px)` : "";
+
+		const cloneRect = targetClone.getBoundingClientRect();
+		const flyoutBounds = { width: cloneRect.width, height: cloneRect.height };
+
 		return calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
 			flyoutBounds,
