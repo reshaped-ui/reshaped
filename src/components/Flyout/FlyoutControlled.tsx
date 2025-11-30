@@ -159,7 +159,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			onCloseRef.current?.({ reason: options.reason });
 
 			if (options?.closeParents) {
-				parentFlyoutContext?.handleClose?.({});
+				parentFlyoutContext?.handleClose?.({ closeParents: true, reason: options.reason });
 			}
 		},
 		[isRendered, isDismissible, triggerType, onCloseRef, disabled, parentFlyoutContext]
