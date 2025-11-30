@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.9.0-canary.16
+
+### Patch Changes
+
+- [`63747fb`](https://github.com/reshaped-ui/reshaped/commit/63747fb9c42ca3a21a889ac9a13c5c130882da56) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Removed horizontal scrolling from the fallbackAdjustLayout
+
 ## 3.9.0-canary.15
 
 ### Patch Changes

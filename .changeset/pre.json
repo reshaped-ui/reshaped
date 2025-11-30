@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.14"
+    "reshaped": "3.9.0-canary.15"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -42,6 +42,7 @@
     "violet-nights-punch",
     "wide-lamps-fail",
     "wild-breads-go",
+    "yellow-items-stick",
     "yellow-shirts-heal"
   ]
 }
