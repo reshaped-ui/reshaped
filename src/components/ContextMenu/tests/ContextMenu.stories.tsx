@@ -97,7 +97,7 @@ export const handlers: StoryObj<{
 	},
 };
 
-export const menuData = [
+const menuData = [
 	{ label: "Action 1" },
 	{ label: "Action 2" },
 	{
@@ -198,7 +198,7 @@ const renderMenuItems = (items: NonNullable<(typeof menuData)[number]["children"
 };
 
 export const menu: StoryObj = {
-	name: "menuData",
+	name: "test: nested menu items",
 	render: () => (
 		<View padding={4}>
 			<ContextMenu fallbackAdjustLayout>

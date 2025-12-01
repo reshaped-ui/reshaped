@@ -114,8 +114,7 @@ export const customRender: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvas, canvasElement, mount }) => {
-		await mount();
+	play: async ({ canvas, canvasElement }) => {
 		const [trigger] = canvas.getAllByRole("button");
 		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
 		const [hiddenInput] = Array.from(hiddenInputs);
@@ -134,9 +133,7 @@ export const customRender: StoryObj = {
 		expect(options[0]).toHaveTextContent("Dog");
 		expect(options[1]).toHaveTextContent("Turtle");
 
-		// Testing options with groups
-		// Remount to instantly close select
-		await mount();
+		await userEvent.click(document.body);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [_, triggerWithGroups] = canvas.getAllByRole("button");
@@ -339,9 +336,7 @@ export const customHandlers: StoryObj<{
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvas, canvasElement, args, mount }) => {
-		await mount();
-
+	play: async ({ canvas, canvasElement, args }) => {
 		const [uncontrolled] = canvas.getAllByRole("button");
 		const hiddenInputs = canvasElement.querySelectorAll('input[type="hidden"]');
 		const [inputUncontrolled] = Array.from(hiddenInputs);
@@ -365,8 +360,7 @@ export const customHandlers: StoryObj<{
 		});
 
 		// Controlled
-
-		await mount();
+		await userEvent.click(document.body);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const [__, controlled, focusable] = canvas.getAllByRole("button");

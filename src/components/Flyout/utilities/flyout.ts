@@ -78,9 +78,16 @@ const flyout = (
 	const renderContainerBounds = container.getBoundingClientRect();
 
 	const applyPosition = (position: T.Position, options?: { width?: T.Width }) => {
-		// Need to apply real width if it's full width since it might affect the height calculation
-		targetClone.style.width =
-			options?.width === "full" ? `calc(100% - ${SCREEN_OFFSET * 2}px)` : "";
+		const widthOption = options?.width || width;
+
+		// If there is a width override, apply it to calculate the position and the height correctly
+		if (widthOption === "full") {
+			targetClone.style.width = `calc(100% - ${SCREEN_OFFSET * 2}px)`;
+		} else if (widthOption === "trigger") {
+			targetClone.style.width = `${resolvedTriggerBounds.width}px`;
+		} else {
+			targetClone.style.width = "";
+		}
 
 		const cloneRect = targetClone.getBoundingClientRect();
 		const flyoutBounds = { width: cloneRect.width, height: cloneRect.height };
@@ -93,7 +100,7 @@ const flyout = (
 			contentGap: contentGap * unitModifier,
 			contentShift: contentShift * unitModifier,
 			rtl,
-			width: options?.width || width,
+			width: widthOption,
 			passedContainer:
 				passedContainer ||
 				(closestFixedContainer !== document.body ? closestFixedContainer : undefined),
