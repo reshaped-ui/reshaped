@@ -91,7 +91,7 @@
 		"release": "sh ./bin/release.sh",
 		"release:canary": "sh ./bin/release-canary.sh",
 		"release:local": "pnpm build && pnpm pack --out reshaped-local.tgz",
-		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic)",
+		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic) --only-changed --externals '.storybook/public/**'",
 		"test:vrt": "pnpm chromatic",
 		"test:vrt:turbo": "pnpm chromatic --only-changed",
 		"test:browser": "vitest run --project=storybook",
