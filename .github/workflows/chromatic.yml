@@ -30,3 +30,6 @@ jobs:
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true
+          buildScriptName: "build:chromatic"
+          externals: "**/public/**"
