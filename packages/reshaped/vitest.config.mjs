@@ -18,7 +18,7 @@ export default mergeConfig(
 					extends: true,
 					plugins: [
 						storybookTest({
-							configDir: path.join(dirname, ".storybook"),
+							configDir: path.join(dirname, "../../.storybook"),
 							storybookScript: "pnpm dev --no-open",
 						}),
 					],
@@ -35,7 +35,7 @@ export default mergeConfig(
 						coverage: {
 							provider: "istanbul",
 						},
-						setupFiles: ["./.storybook/vitest.setup.ts"],
+						setupFiles: ["../../.storybook/vitest.setup.ts"],
 					},
 				},
 				{

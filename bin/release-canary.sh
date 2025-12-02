@@ -40,7 +40,7 @@ echo
 print_status "Entering pre mode"
 pnpm changeset pre enter canary
 
-print_status "Building package"
+print_status "Building packages"
 pnpm build
 
 print_status "Versioning changesets"
@@ -64,6 +64,6 @@ git push --tags
 
 echo
 print_success "Canary release completed successfully!"
-echo "${GREEN}📦 Package published to npm${NC}"
+echo "${GREEN}📦 Packages published to npm${NC}"
 echo "${GREEN}🏷️ Tags pushed to git${NC}"
 echo "${GREEN}📝 Changelog updated${NC}"

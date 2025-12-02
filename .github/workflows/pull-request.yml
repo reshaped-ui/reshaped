@@ -151,7 +151,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Build the project
+      - name: Build all packages
         run: pnpm build
 
   test-browser:
