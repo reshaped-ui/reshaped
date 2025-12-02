@@ -5,11 +5,13 @@ import type * as G from "types/global";
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto";
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";
 
-export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
+export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Node for inserting the content */
 	children?: React.ReactNode;
 	/** Render as a different element */
-	as?: TagName;
+	as?: TagName extends keyof React.JSX.IntrinsicElements
+		? TagName
+		: keyof React.JSX.IntrinsicElements;
 	/** Render a divider between each child */
 	divided?: boolean;
 	/** Flex direction for the content */
@@ -120,7 +122,7 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	attributes?: G.Attributes<TagName>;
 } & Pick<ItemProps, "grow" | "shrink">;
 
-export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
+export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Flex order of the item inside the parent */
 	order?: G.Responsive<number>;
 	/** Number of columns the item should span in the parent, View uses 12 columns */
@@ -132,7 +134,9 @@ export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements = "div">
 	/** Individual gap before the item, overrides the parent View gap */
 	gapBefore?: G.Responsive<number> | "auto";
 	/** Render as a different element */
-	as?: TagName;
+	as?: TagName extends keyof React.JSX.IntrinsicElements
+		? TagName
+		: keyof React.JSX.IntrinsicElements;
 	/** Additional attributes for the root element */
 	attributes?: G.Attributes<TagName>;
 	/** Additional classname for the root element */

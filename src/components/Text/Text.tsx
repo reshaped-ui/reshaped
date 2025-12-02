@@ -14,7 +14,7 @@ const tagMap: Partial<Record<T.Variant, keyof React.JSX.IntrinsicElements>> = {
 	"title-6": "h6",
 };
 
-const Text = <As extends keyof React.JSX.IntrinsicElements>(props: T.Props<As>) => {
+const Text = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Props<As>) => {
 	const {
 		variant,
 		color,
