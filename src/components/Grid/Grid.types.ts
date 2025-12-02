@@ -3,7 +3,7 @@ import type React from "react";
 import type * as TStyles from "styles/types";
 import type * as G from "types/global";
 
-export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
+export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Gap between grid items */
 	gap?: G.Responsive<number>;
 	/** Horizontal gap between grid items */
@@ -35,14 +35,16 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Custom root element html tag */
-	as?: TagName;
+	as?: TagName extends keyof React.JSX.IntrinsicElements
+		? TagName
+		: keyof React.JSX.IntrinsicElements;
 	/** Additional classname for the root element */
 	className?: G.ClassName;
 	/** Additional attributes for the root element */
 	attributes?: G.Attributes<TagName>;
 };
 
-export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
+export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Grid area for template syntax */
 	area?: string;
 	/** Starting column position */
@@ -60,7 +62,9 @@ export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements = "div">
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Custom item element html tag */
-	as?: TagName;
+	as?: TagName extends keyof React.JSX.IntrinsicElements
+		? TagName
+		: keyof React.JSX.IntrinsicElements;
 	/** Additional classname for the item element */
 	className?: G.ClassName;
 	/** Additional attributes for the item element */

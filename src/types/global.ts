@@ -13,8 +13,12 @@ export type StyleAttribute =
 
 type DataAttributes = object | Record<`data-${string}`, string | boolean>;
 
-export type Attributes<TagName extends keyof React.JSX.IntrinsicElements = "div"> =
-	React.JSX.IntrinsicElements[TagName] & DataAttributes & { style?: StyleAttribute };
+export type Attributes<TagName extends keyof React.JSX.IntrinsicElements | void = void> =
+	// If tag name is not passed, fallback to HTMLElement attributes
+	(TagName extends keyof React.JSX.IntrinsicElements
+		? React.JSX.IntrinsicElements[TagName]
+		: React.HTMLAttributes<HTMLElement>) &
+		DataAttributes & { style?: StyleAttribute };
 
 export type Viewport = "s" | "m" | "l" | "xl";
 export type ResponsiveOnly<T> = { [key in Viewport]?: T };

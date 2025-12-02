@@ -17,7 +17,7 @@ export type Variant =
 	| "caption-1"
 	| "caption-2";
 
-export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
+export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Text render variant */
 	variant?: G.Responsive<Variant>;
 	/** Text font weight */
@@ -43,12 +43,14 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements = "div"> = {
 	maxLines?: number;
 	/** Render as a numeric value to preserve the width of each character */
 	numeric?: true;
-	/** Render as a different html tag */
-	as?: TagName;
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the root element */
 	className?: G.ClassName;
 	/** Additional attributes for the root element */
 	attributes?: G.Attributes<TagName>;
+	/** Render as a different html tag */
+	as?: TagName extends keyof React.JSX.IntrinsicElements
+		? TagName
+		: keyof React.JSX.IntrinsicElements;
 };
