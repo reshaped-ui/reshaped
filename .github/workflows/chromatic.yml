@@ -1,17 +1,62 @@
 name: "chromatic"
 on:
-  workflow_dispatch:
-  push:
-    branches-ignore:
-      - main
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [edited]
 
 jobs:
+  post-comment:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Find existing comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: "<!-- chromatic-trigger -->"
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            <!-- chromatic-trigger -->
+            ### 🎨 Chromatic Visual Testing
+
+            - [ ] Run Chromatic
+
+            _Check the box above to trigger a visual regression test._
+          edit-mode: replace
+
   chromatic:
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '<!-- chromatic-trigger -->') &&
+      contains(github.event.comment.body, '[x] Run Chromatic')
     steps:
+      - name: Get PR head ref
+        id: pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            core.setOutput('ref', pr.data.head.ref);
+            core.setOutput('sha', pr.data.head.sha);
+
       - name: Checkout code
         uses: actions/checkout@v5
         with:
+          ref: ${{ steps.pr.outputs.ref }}
           fetch-depth: 0
 
       - name: Setup Node.js 22
@@ -34,3 +79,17 @@ jobs:
           onlyChanged: true
           buildScriptName: "build:chromatic"
           externals: "**/public/**"
+
+      - name: Uncheck the checkbox
+        uses: peter-evans/create-or-update-comment@v4
+        if: always()
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          body: |
+            <!-- chromatic-trigger -->
+            ### 🎨 Chromatic Visual Testing
+
+            - [ ] Run Chromatic
+
+            _Check the box above to trigger a visual regression test._
+          edit-mode: replace
