@@ -1,12 +1,18 @@
 name: "chromatic"
 on:
-  push:
-    branches-ignore:
-      - main
+  pull_request:
+    types: [opened, synchronize, labeled]
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
-  chromatic:
+  test:
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      (github.event.action == 'labeled' && github.event.label.name == 'chromatic')
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -33,3 +39,15 @@ jobs:
           onlyChanged: true
           buildScriptName: "build:chromatic"
           externals: "**/public/**"
+
+      - name: Remove label
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              name: 'chromatic'
+            });
