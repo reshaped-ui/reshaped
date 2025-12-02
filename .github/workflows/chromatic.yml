@@ -10,6 +10,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: chromatic-approval
     if: |
       github.event_name == 'pull_request' &&
       (github.event.action == 'labeled' && github.event.label.name == 'chromatic')
