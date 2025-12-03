@@ -84,6 +84,6 @@ git push --tags
 
 echo
 print_success "Release completed successfully!"
-echo "${GREEN}📦 Package published to npm${NC}"
+echo "${GREEN}📦 Packages published to npm${NC}"
 echo "${GREEN}🏷️ Tags pushed to git${NC}"
 echo "${GREEN}📝 Changelog updated${NC}"

@@ -7,7 +7,7 @@ import reactHooksPlugin from "eslint-plugin-react-hooks";
 import tsConfig from "typescript-eslint";
 
 export default defineConfig([
-	globalIgnores(["bin/*.js"]),
+	globalIgnores(["**/bin/*.js", "**/dist/**"]),
 	esConfig.configs.recommended,
 	...tsConfig.configs.recommended,
 	prettierPlugin,
@@ -56,7 +56,7 @@ export default defineConfig([
 			"import/resolver": {
 				typescript: {
 					alwaysTryTypes: true,
-					project: "./tsconfig.json",
+					project: ["./packages/*/tsconfig.json", "./packages/*/*/tsconfig.json"],
 				},
 			},
 		},

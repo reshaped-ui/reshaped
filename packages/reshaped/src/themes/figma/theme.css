@@ -1,8 +1,8 @@
 
 			[data-rs-theme~="figma"] {
-					--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
---rs-font-family-body: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
---rs-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+					--rs-font-family-title: inter, blinkmacsystemfont, -apple-system, roboto, helvetica, arial, sans-serif;
+--rs-font-family-body: inter, blinkmacsystemfont, -apple-system, roboto, helvetica, arial, sans-serif;
+--rs-font-family-monospace: sfmono-regular, menlo, monaco, consolas, liberation mono, courier new, monospace;
 --rs-font-weight-regular: 400;
 --rs-font-weight-medium: 500;
 --rs-font-weight-semibold: 600;
@@ -89,13 +89,13 @@
 --rs-radius-medium: 8px;
 --rs-radius-large: 12px;
 --rs-color-brand: #0D99FF;
---rs-color-white: #FFFFFF;
---rs-color-black: #000000;
---rs-color-on-background-primary: #FFFFFF;
---rs-color-on-background-critical: oklch(0 0 0);
---rs-color-on-background-warning: oklch(0 0 0);
---rs-color-on-background-positive: oklch(0 0 0);
---rs-color-on-brand: oklch(0 0 0);
+--rs-color-white: #FFF;
+--rs-color-black: #000;
+--rs-color-on-background-primary: #FFF;
+--rs-color-on-background-critical: oklch(0% 0 0deg);
+--rs-color-on-background-warning: oklch(0% 0 0deg);
+--rs-color-on-background-positive: oklch(0% 0 0deg);
+--rs-color-on-brand: oklch(0% 0 0deg);
 --rs-color-rgb-white: 255, 255, 255;
 --rs-color-rgb-black: 0, 0, 0;
 --rs-duration-rapid: 100ms;
@@ -105,8 +105,8 @@
 --rs-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
 --rs-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 --rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
---rs-shadow-raised: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
---rs-shadow-overlay: 0px 10px 24px 0px rgba(0, 0, 0, 0.1), 0px 2px 5px 0px rgba(0, 0, 0, 0.04);
+--rs-shadow-raised: 0px 1px 3px 0px rgba(0, 0, 0, 15%);
+--rs-shadow-overlay: 0px 10px 24px 0px rgba(0, 0, 0, 10%), 0px 2px 5px 0px rgba(0, 0, 0, 4%);
 --rs-viewport-m-min: 660;
 --rs-viewport-l-min: 900;
 --rs-viewport-xl-min: 1280;
@@ -146,10 +146,10 @@
 --rs-color-background-disabled-faded: #F5F5F5;
 --rs-color-border-disabled: #E6E6E6;
 --rs-color-foreground-disabled: #B2B2B2;
---rs-color-background-elevation-base: #FFFFFF;
---rs-color-background-elevation-raised: #FFFFFF;
---rs-color-background-elevation-overlay: #FFFFFF;
---rs-color-background-page: #FFFFFF;
+--rs-color-background-elevation-base: #FFF;
+--rs-color-background-elevation-raised: #FFF;
+--rs-color-background-elevation-overlay: #FFF;
+--rs-color-background-page: #FFF;
 --rs-color-background-page-faded: #FAFAFA;
 --rs-color-rgb-background-primary: 13.004999999999999, 153, 255;
 --rs-color-rgb-background-primary-faded: 228.99, 244.0095, 255;
@@ -159,7 +159,7 @@
 --rs-color-rgb-background-warning-faded: 255, 250.002, 232.99349999999998;
 --rs-color-rgb-background-positive: 19.992, 174.012, 92.004;
 --rs-color-rgb-background-positive-faded: 217.9995, 236.0025, 222.9975;
---rs-color-on-background-neutral: oklch(0 0 0);
+--rs-color-on-background-neutral: oklch(0% 0 0deg);
 --rs-color-rgb-background-neutral: 222.9975, 226.0065, 233.988;
 --rs-color-rgb-background-neutral-faded: 245.004, 245.004, 245.004;
 --rs-color-rgb-background-disabled: 227.9955, 227.9955, 227.9955;
@@ -192,11 +192,11 @@
 --rs-color-border-positive: #79D297;
 --rs-color-border-positive-faded: #086338;
 --rs-color-foreground-positive: #79D297;
---rs-color-background-neutral: #444444;
+--rs-color-background-neutral: #444;
 --rs-color-background-neutral-faded: #383838;
---rs-color-border-neutral: #444444;
---rs-color-border-neutral-faded: #444444;
---rs-color-foreground-neutral: #FFFFFF;
+--rs-color-border-neutral: #444;
+--rs-color-border-neutral-faded: #444;
+--rs-color-foreground-neutral: #FFF;
 --rs-color-foreground-neutral-faded: #B2B2B2;
 --rs-color-background-disabled: #474747;
 --rs-color-background-disabled-faded: #3A3A3A;
@@ -215,7 +215,7 @@
 --rs-color-rgb-background-warning-faded: 43.9875, 38.9895, 31.008;
 --rs-color-rgb-background-positive: 24.990000000000002, 143.004, 80.988;
 --rs-color-rgb-background-positive-faded: 60.996, 87.006, 73.0065;
---rs-color-on-background-neutral: oklch(1 0 0);
+--rs-color-on-background-neutral: oklch(100% 0 0deg);
 --rs-color-rgb-background-neutral: 68.0085, 68.0085, 68.0085;
 --rs-color-rgb-background-neutral-faded: 55.998, 55.998, 55.998;
 --rs-color-rgb-background-disabled: 70.99199999999999, 70.99199999999999, 70.99199999999999;

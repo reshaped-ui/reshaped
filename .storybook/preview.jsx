@@ -1,18 +1,18 @@
 import React from "react";
-import Reshaped from "../src/components/Reshaped";
-import Button from "../src/components/Button";
-import View from "../src/components/View";
-import Text from "../src/components/Text";
-import Hidden from "../src/components/Hidden";
-import DropdownMenu from "../src/components/DropdownMenu";
-import Icon from "../src/components/Icon";
-import useRTL from "../src/hooks/useRTL";
-import IconCheckmark from "../src/icons/Checkmark";
-import { useTheme } from "../src/components/Theme";
-import "../src/themes/reshaped/theme.css";
-import "../src/themes/slate/theme.css";
-import "../src/themes/figma/theme.css";
-import "../src/themes/fragments/twitter/theme.css";
+import Reshaped from "../packages/reshaped/src/components/Reshaped";
+import Button from "../packages/reshaped/src/components/Button";
+import View from "../packages/reshaped/src/components/View";
+import Text from "../packages/reshaped/src/components/Text";
+import Hidden from "../packages/reshaped/src/components/Hidden";
+import DropdownMenu from "../packages/reshaped/src/components/DropdownMenu";
+import Icon from "../packages/reshaped/src/components/Icon";
+import useRTL from "../packages/reshaped/src/hooks/useRTL";
+import IconCheckmark from "../packages/reshaped/src/icons/Checkmark";
+import { useTheme } from "../packages/reshaped/src/components/Theme";
+import "../packages/reshaped/src/themes/reshaped/theme.css";
+import "../packages/reshaped/src/themes/slate/theme.css";
+import "../packages/reshaped/src/themes/figma/theme.css";
+import "../packages/reshaped/src/themes/fragments/twitter/theme.css";
 
 const ThemeSwitch = () => {
 	const { invertColorMode, colorMode, setRootTheme, theme } = useTheme();

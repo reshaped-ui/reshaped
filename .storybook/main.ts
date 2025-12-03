@@ -28,7 +28,7 @@ const config: StorybookConfig = {
 			options: { fsCache: false },
 		},
 	},
-	stories: ["../src/**/*.stories.tsx"],
+	stories: ["../packages/reshaped/src/**/*.stories.tsx"],
 	staticDirs: ["./public"],
 	addons: [
 		"@storybook/addon-vitest",
@@ -45,7 +45,11 @@ const config: StorybookConfig = {
 	],
 	async viteFinal(config: UserConfig) {
 		return mergeConfig(config, {
-			plugins: [tsconfigPaths()],
+			plugins: [
+				tsconfigPaths({
+					projects: [resolve(__dirname, "../packages/reshaped/tsconfig.json")],
+				}),
+			],
 			css: {
 				postcss: resolve(__dirname),
 			},
