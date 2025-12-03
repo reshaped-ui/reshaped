@@ -23,7 +23,7 @@
 		"test:vrt": "pnpm chromatic",
 		"test:browser": "pnpm --filter reshaped run test:browser",
 		"test:unit": "pnpm --filter reshaped run test:unit",
-		"test:size": "pnpm --filter reshaped run test:size",
+		"test:size": "size-limit",
 		"lint": "pnpm lint:js && pnpm lint:css",
 		"lint:js": "eslint './packages/**/*.{ts,tsx}' --fix",
 		"lint:css": "stylelint 'packages/**/*.css'"
@@ -90,5 +90,27 @@
 	},
 	"engines": {
 		"node": ">=22"
-	}
+	},
+	"size-limit": [
+		{
+			"name": "Library / JS",
+			"path": "packages/reshaped/dist/bundle.js",
+			"webpack": false
+		},
+		{
+			"name": "Library / CSS",
+			"path": "packages/reshaped/dist/bundle.css",
+			"webpack": false
+		},
+		{
+			"name": "Theming / JS",
+			"path": "packages/reshaped/dist/tests/themingWithoutDefinition.js",
+			"webpack": true
+		},
+		{
+			"name": "Theming with a default theme definition / JS",
+			"path": "packages/reshaped/dist/tests/themingWithDefinition.js",
+			"webpack": true
+		}
+	]
 }

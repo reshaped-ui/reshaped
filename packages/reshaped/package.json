@@ -105,27 +105,5 @@
 		"csstype": "3.1.3",
 		"culori": "4.0.2",
 		"postcss-custom-media": "11.0.6"
-	},
-	"size-limit": [
-		{
-			"name": "Library / JS",
-			"path": "dist/bundle.js",
-			"webpack": false
-		},
-		{
-			"name": "Library / CSS",
-			"path": "dist/bundle.css",
-			"webpack": false
-		},
-		{
-			"name": "Theming / JS",
-			"path": "dist/tests/themingWithoutDefinition.js",
-			"webpack": true
-		},
-		{
-			"name": "Theming with a default theme definition / JS",
-			"path": "dist/tests/themingWithDefinition.js",
-			"webpack": true
-		}
-	]
+	}
 }
