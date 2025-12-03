@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@changesets/changelog-github':
+        specifier: 0.5.1
+        version: 0.5.1
       '@changesets/cli':
         specifier: 2.29.7
         version: 2.29.7(@types/node@24.9.2)
@@ -20,6 +23,9 @@ importers:
       '@commitlint/types':
         specifier: 20.0.0
         version: 20.0.0
+      '@csstools/postcss-global-data':
+        specifier: 3.1.0
+        version: 3.1.0(postcss@8.5.6)
       '@eslint/js':
         specifier: 9.38.0
         version: 9.38.0
@@ -77,6 +83,9 @@ importers:
       chromatic:
         specifier: 13.3.2
         version: 13.3.2
+      cssnano:
+        specifier: 7.1.1
+        version: 7.1.1(postcss@8.5.6)
       eslint:
         specifier: 9.38.0
         version: 9.38.0(jiti@2.5.1)
@@ -113,6 +122,9 @@ importers:
       postcss-cli:
         specifier: 11.0.1
         version: 11.0.1(jiti@2.5.1)(postcss@8.5.6)
+      postcss-custom-media:
+        specifier: 11.0.6
+        version: 11.0.6(postcss@8.5.6)
       postcss-each:
         specifier: 1.1.0
         version: 1.1.0(postcss@8.5.6)
@@ -182,9 +194,6 @@ importers:
 
   packages/reshaped:
     dependencies:
-      '@changesets/changelog-github':
-        specifier: 0.5.1
-        version: 0.5.1
       '@csstools/postcss-global-data':
         specifier: 3.1.0
         version: 3.1.0(postcss@8.5.6)

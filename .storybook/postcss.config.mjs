@@ -1,7 +1,9 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import customMediaPlugin from "postcss-custom-media";
+
 import postcssGlobalData from "@csstools/postcss-global-data";
+import customMediaPlugin from "postcss-custom-media";
+
 import baseConfig from "../packages/reshaped/tools/build/postcss.config.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
