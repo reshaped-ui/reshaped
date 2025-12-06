@@ -2,7 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.9.0-canary.15"
+    "@reshaped/core": "3.9.0-canary.16",
+    "reshaped": "3.9.0-canary.16"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -10,7 +11,9 @@
     "clean-donuts-rescue",
     "clever-pillows-shake",
     "crisp-rabbits-watch",
+    "dark-coins-sneeze",
     "dirty-kids-fly",
+    "easy-crews-knock",
     "eighty-jars-knock",
     "eleven-otters-bake",
     "fair-bananas-grin",
@@ -27,11 +30,13 @@
     "nice-aliens-wear",
     "olive-spoons-lose",
     "perky-deer-shave",
+    "petite-plums-help",
     "purple-stamps-film",
     "quiet-cars-type",
     "real-snakes-give",
     "salty-boats-reply",
     "sharp-turkeys-push",
+    "shiny-monkeys-study",
     "sour-clubs-cut",
     "stale-donuts-stay",
     "strong-impalas-allow",
