@@ -1,4 +1,5 @@
 export const mouseEnter = 600;
+export const mouseLeave = 150;
 
 export const defaultStyles: React.CSSProperties = {
 	left: 0,

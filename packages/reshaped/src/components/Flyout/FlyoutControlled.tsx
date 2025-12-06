@@ -209,10 +209,14 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				() => {
 					handleOpen();
 				},
-				groupTimeouts && cooldown.status === "warming" ? timeouts.mouseEnter : 0
+				groupTimeouts && cooldown.status === "warming"
+					? timeouts.mouseEnter
+					: isSubmenu
+						? timeouts.mouseEnter
+						: 0
 			);
 		}
-	}, [clearTimer, handleOpen, groupTimeouts]);
+	}, [clearTimer, handleOpen, groupTimeouts, isSubmenu]);
 
 	const handleMouseLeave = React.useCallback(
 		(e: React.MouseEvent) => {
@@ -229,9 +233,16 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 			cooldown.cool();
 			clearTimer();
-			handleClose({});
+
+			if (isSubmenu) {
+				timerRef.current = setTimeout(() => {
+					handleClose({});
+				}, timeouts.mouseLeave);
+			} else {
+				handleClose({});
+			}
 		},
-		[clearTimer, handleClose, triggerElRef, flyoutElRef]
+		[clearTimer, handleClose, triggerElRef, flyoutElRef, isSubmenu]
 	);
 
 	const handleTriggerClick = React.useCallback(() => {
