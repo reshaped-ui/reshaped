@@ -10,6 +10,7 @@ import { classNames } from "utilities/props";
 
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
 import s from "./Flyout.module.css";
+import FlyoutSafeArea from "./FlyoutSafeArea";
 import cooldown from "./utilities/cooldown";
 
 import type * as T from "./Flyout.types";
@@ -40,6 +41,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		width,
 		containerRef: passedContainerRef,
 		isSubmenu,
+		safeAreaOrigin,
 	} = useFlyoutContext();
 	const { status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
@@ -132,6 +134,10 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		role = "menubar";
 	}
 
+	// Show safe area only when mouse has left the trigger (safeAreaOrigin is set)
+	const showSafeArea =
+		triggerType === "hover" && !disableContentHover && position && safeAreaOrigin;
+
 	const content = (
 		<ContentProvider value={{ elRef: flyoutElRef }}>
 			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
@@ -153,6 +159,8 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 				onMouseUp={handleContentMouseUp}
 				onTouchEnd={handleContentMouseUp}
 			>
+				{/* Safe area must be inside flyoutElRef so handleMouseLeave recognizes it as part of the flyout */}
+				{showSafeArea && <FlyoutSafeArea position={position} origin={safeAreaOrigin} />}
 				<div
 					role={role}
 					{...attributes}

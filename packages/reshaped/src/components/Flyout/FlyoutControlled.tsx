@@ -108,6 +108,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// eslint-disable-next-line react-hooks/refs
 	originCoordinatesRef.current = originCoordinates ?? null;
 
+	// Track where mouse left the trigger for safe area positioning
+	const [safeAreaOrigin, setSafeAreaOrigin] = React.useState<T.SafeAreaOrigin>(null);
+
 	const flyout = useFlyout({
 		triggerElRef: positionRef ?? triggerElRef,
 		flyoutElRef,
@@ -199,6 +202,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleMouseEnter = React.useCallback(() => {
 		clearTimer();
+		// Clear safe area origin when mouse enters content
+		setSafeAreaOrigin(null);
+
 		if (hoverTriggeredWithTouchEventRef.current) {
 			handleOpen();
 			hoverTriggeredWithTouchEventRef.current = false;
@@ -227,11 +233,16 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			)
 				return;
 
+			// Capture mouse position when leaving trigger for safe area
+			if (triggerType === "hover" && isRendered) {
+				setSafeAreaOrigin({ x: e.clientX, y: e.clientY });
+			}
+
 			cooldown.cool();
 			clearTimer();
 			handleClose({});
 		},
-		[clearTimer, handleClose, triggerElRef, flyoutElRef]
+		[clearTimer, handleClose, triggerElRef, flyoutElRef, triggerType, isRendered]
 	);
 
 	const handleTriggerClick = React.useCallback(() => {
@@ -452,6 +463,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				disableContentHover,
 				autoFocus,
 				isSubmenu,
+				safeAreaOrigin,
 			}}
 		>
 			{children}

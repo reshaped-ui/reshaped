@@ -193,6 +193,8 @@ export type ContentProps = {
 	attributes?: G.Attributes<"div">;
 };
 
+export type SafeAreaOrigin = { x: number; y: number } | null;
+
 export type ContextProps = {
 	id: string;
 	flyout: UseFlyoutData;
@@ -213,6 +215,8 @@ export type ContextProps = {
 	handleContentMouseDown: () => void;
 	handleContentMouseUp: () => void;
 	isSubmenu: boolean;
+	/** Coordinates where mouse left the trigger, used for safe area origin */
+	safeAreaOrigin: SafeAreaOrigin;
 } & Pick<
 	Props,
 	| "triggerType"
