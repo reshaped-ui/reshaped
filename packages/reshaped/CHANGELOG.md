@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.0-canary.18
+
+### Patch Changes
+
+- [`bca3487`](https://github.com/reshaped-ui/reshaped/commit/bca34879d5590f18d91cc2d2784f363bdaad73e6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed incorrect color compilation
+
 ## 3.9.0-canary.17
 
 ### Patch Changes
