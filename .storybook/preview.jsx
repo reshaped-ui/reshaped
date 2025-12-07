@@ -127,11 +127,13 @@ const preview = {
 		actions: {
 			disable: true,
 		},
+
 		options: {
 			storySort: {
 				order: ["Components", "Utility components", "Hooks", "Utilities", "Internal"],
 			},
 		},
+
 		docs: {
 			codePanel: true,
 		},

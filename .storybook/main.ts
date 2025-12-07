@@ -11,6 +11,10 @@ const __dirname = dirname(__filename);
 
 const config: StorybookConfig = {
 	framework: "@storybook/react-vite",
+	features: {
+		experimentalComponentsManifest: true,
+		experimentalCodeExamples: true,
+	},
 	typescript: {
 		reactDocgen: "react-docgen-typescript",
 		reactDocgenTypescriptOptions: {
@@ -42,6 +46,7 @@ const config: StorybookConfig = {
 				},
 			},
 		},
+		"@storybook/addon-mcp",
 	],
 	async viteFinal(config: UserConfig) {
 		return mergeConfig(config, {
