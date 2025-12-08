@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.0-canary.19
+
+### Patch Changes
+
+- [`19a9a3c`](https://github.com/reshaped-ui/reshaped/commit/19a9a3c6fec8768a3add9e1a83fa14d6d64f9e65) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated global body min-heigh reset to use dvh
+
 ## 3.9.0-canary.18
 
 ### Patch Changes

@@ -2,8 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.17",
-    "reshaped": "3.9.0-canary.17"
+    "@reshaped/core": "3.9.0-canary.18",
+    "reshaped": "3.9.0-canary.18"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -35,6 +35,7 @@
     "purple-stamps-film",
     "quiet-cars-type",
     "real-snakes-give",
+    "red-phones-check",
     "salty-boats-reply",
     "sharp-turkeys-push",
     "shiny-monkeys-study",
