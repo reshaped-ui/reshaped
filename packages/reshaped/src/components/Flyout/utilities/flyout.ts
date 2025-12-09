@@ -92,8 +92,6 @@ const flyout = (
 		const cloneRect = targetClone.getBoundingClientRect();
 		const flyoutBounds = { width: cloneRect.width, height: cloneRect.height };
 
-		console.log(cloneRect.width, widthOption, cloneRect);
-
 		return calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
 			flyoutBounds,
