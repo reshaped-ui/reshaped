@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.0-canary.20
+
+### Patch Changes
+
+- [`bb34749`](https://github.com/reshaped-ui/reshaped/commit/bb347494a7010db103bf575784976d970724c262) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: fixed passed width
+
 ## 3.9.0-canary.19
 
 ### Patch Changes
