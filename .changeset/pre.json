@@ -2,8 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.18",
-    "reshaped": "3.9.0-canary.18"
+    "@reshaped/core": "3.9.0-canary.19",
+    "reshaped": "3.9.0-canary.19"
   },
   "changesets": [
     "afraid-eyes-guess",
