@@ -86,11 +86,13 @@ const flyout = (
 		} else if (widthOption === "trigger") {
 			targetClone.style.width = `${resolvedTriggerBounds.width}px`;
 		} else {
-			targetClone.style.width = "";
+			targetClone.style.width = widthOption || "";
 		}
 
 		const cloneRect = targetClone.getBoundingClientRect();
 		const flyoutBounds = { width: cloneRect.width, height: cloneRect.height };
+
+		console.log(cloneRect.width, widthOption, cloneRect);
 
 		return calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
@@ -117,6 +119,13 @@ const flyout = (
 			left: window.scrollX,
 			top: window.scrollY,
 		};
+
+		console.log(
+			"visualContainerBounds",
+			calculated.position,
+			visualContainerBounds,
+			calculated.boundaries
+		);
 
 		return isFullyVisible({
 			flyoutBounds: calculated.boundaries,
