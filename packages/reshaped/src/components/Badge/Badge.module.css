@@ -18,7 +18,7 @@
 	/* GPU for container positioning */
 	backface-visibility: hidden;
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
-	transition-property: transform, opacity;
+	transition-property: transform, opacity, box-shadow, background-color;
 
 	&:empty {
 		width: var(--rs-badge-empty-size);

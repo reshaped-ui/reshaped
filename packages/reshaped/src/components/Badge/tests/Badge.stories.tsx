@@ -372,3 +372,16 @@ export const className: StoryObj = {
 		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
+
+export const animated = {
+	name: "test: animated",
+	render: () => {
+		const [active, setActive] = React.useState(false);
+
+		return (
+			<Badge onClick={() => setActive(!active)} color={active ? "primary" : "neutral"}>
+				Badge
+			</Badge>
+		);
+	},
+};
