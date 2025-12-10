@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.0-canary.22
+
+### Patch Changes
+
+- [`cd68d7d`](https://github.com/reshaped-ui/reshaped/commit/cd68d7d93ae5790529ac406aa6a97fcd75b4467b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Forcing a release after updating npm tokens
+
 ## 3.9.0-canary.21
 
 ### Patch Changes

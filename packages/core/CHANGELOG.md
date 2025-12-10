@@ -1,5 +1,7 @@
 # @reshaped/core
 
+## 3.9.0-canary.22
+
 ## 3.9.0-canary.21
 
 ## 3.9.0-canary.20
