@@ -8,7 +8,6 @@ import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import { resolveMixin } from "styles/mixin";
-import { enableUserSelect, disableUserSelect } from "utilities/dom";
 import { classNames, responsiveVariables, responsiveClassNames } from "utilities/props";
 import { enableScroll, disableScroll } from "utilities/scroll";
 
@@ -139,7 +138,6 @@ const Modal: React.FC<T.Props> = (props) => {
 		// Prevent the drag handling when browser is trying to navigate to a previous page
 		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
 
-		disableUserSelect();
 		disableScroll();
 		setDragging(true);
 	};
@@ -157,7 +155,6 @@ const Modal: React.FC<T.Props> = (props) => {
 		if (!dragging) return;
 
 		const handleDragEnd = () => {
-			enableUserSelect();
 			enableScroll();
 			setDragging(false);
 

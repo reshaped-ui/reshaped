@@ -6,7 +6,7 @@ import { useFormControl } from "components/FormControl";
 import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
 import useRTL from "hooks/useRTL";
-import { enableUserSelect, disableUserSelect, triggerChangeEvent } from "utilities/dom";
+import { triggerChangeEvent } from "utilities/dom";
 import { classNames } from "utilities/props";
 import { disableScroll, enableScroll } from "utilities/scroll";
 
@@ -197,15 +197,15 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (closestId === minId) handleMinChange(nextValue);
 		if (closestId === maxId) handleMaxChange(nextValue);
 
-		disableUserSelect();
-		disableScroll();
 		setDraggingId(closestId);
 	};
 
 	const handleMinDragStart: T.ThumbProps["onDragStart"] = (e) => {
 		if (disabled) return;
 
+		console.log("handleMinDragStart");
 		e.stopPropagation();
+		disableScroll();
 		setDraggingId(minId);
 	};
 
@@ -213,6 +213,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (disabled) return;
 
 		e.stopPropagation();
+		disableScroll();
 		setDraggingId(maxId);
 	};
 
@@ -225,7 +226,6 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			handleMaxChange(maxValue, { commit: true });
 		}
 
-		enableUserSelect();
 		enableScroll();
 		setDraggingId(null);
 	}, [minValue, maxValue, handleMinChange, handleMaxChange, draggingId, minId, maxId]);

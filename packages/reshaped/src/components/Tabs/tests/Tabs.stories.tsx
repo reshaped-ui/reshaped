@@ -253,6 +253,22 @@ export const equalWidth = {
 					</Tabs.List>
 				</Tabs>
 			</Example.Item>
+
+			<Example.Item title="equal width items, pills-elevated">
+				<Tabs onChange={console.log} itemWidth="equal" variant="pills-elevated">
+					<Tabs.List>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
+						<Tabs.Item value="1" icon={IconZap}>
+							Long item 2
+						</Tabs.Item>
+						<Tabs.Item value="2" icon={IconZap}>
+							Very long item 3 sdkjds skd
+						</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</Example.Item>
 		</Example>
 	),
 };

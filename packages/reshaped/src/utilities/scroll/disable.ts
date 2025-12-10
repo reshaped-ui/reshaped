@@ -5,11 +5,13 @@ export const preventDefault = (e: Event) => e.preventDefault();
  * without locking the page with overflow
  */
 export const disableScroll = () => {
-	window.addEventListener("wheel", preventDefault);
-	window.addEventListener("touchmove", preventDefault);
+	window.addEventListener("wheel", preventDefault, { passive: false });
+	window.addEventListener("touchmove", preventDefault, { passive: false });
+	document.body.style.userSelect = "none";
 };
 
 export const enableScroll = () => {
 	window.removeEventListener("wheel", preventDefault);
 	window.removeEventListener("touchmove", preventDefault);
+	document.body.style.userSelect = "";
 };

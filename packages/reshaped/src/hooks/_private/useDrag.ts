@@ -6,7 +6,6 @@ import * as keys from "constants/keys";
 import useHandlerRef from "hooks/useHandlerRef";
 import useHotkeys from "hooks/useHotkeys";
 import useToggle from "hooks/useToggle";
-import { disableUserSelect, enableUserSelect } from "utilities/dom";
 import { disableScroll, enableScroll } from "utilities/scroll";
 
 export type UseDragCallbackArgs = { x: number; y: number; triggerX: number; triggerY: number };
@@ -106,7 +105,6 @@ const useDrag = <
 		const handleDragEnd = () => {
 			triggerCompensationRef.current = { x: 0, y: 0 };
 			toggle.deactivate();
-			enableUserSelect();
 			enableScroll();
 		};
 
@@ -138,7 +136,6 @@ const useDrag = <
 			};
 
 			toggle.activate();
-			disableUserSelect();
 			disableScroll();
 		};
 

@@ -5,8 +5,8 @@ import React, { forwardRef } from "react";
 import useHandlerRef from "hooks/useHandlerRef";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { resolveMixin } from "styles/mixin";
-import { disableUserSelect, enableUserSelect } from "utilities/dom";
 import { classNames } from "utilities/props";
+import { disableScroll, enableScroll } from "utilities/scroll";
 
 import s from "./ScrollArea.module.css";
 
@@ -58,15 +58,15 @@ const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 		[vertical, dragging, onThumbMoveRef]
 	);
 
-	const handleDragEnd = React.useCallback(() => {
-		setDragging(false);
-		enableUserSelect();
-	}, []);
-
 	const handleDragStart = () => {
 		setDragging(true);
-		disableUserSelect();
+		disableScroll();
 	};
+
+	const handleDragEnd = React.useCallback(() => {
+		setDragging(false);
+		enableScroll();
+	}, []);
 
 	React.useEffect(() => {
 		if (!dragging) return;
