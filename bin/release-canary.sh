@@ -56,6 +56,14 @@ git commit -m 'chore: canary release'
 print_status "Pushing to git"
 git push
 
+print_status "Checking npm authentication"
+if ! npm whoami &>/dev/null; then
+    print_status "Authenticating with npm (will open browser for passkey)"
+    npm login --auth-type=web
+else
+    print_success "Already authenticated with npm"
+fi
+
 print_status "Publishing to npm"
 pnpm changeset publish
 
