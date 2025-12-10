@@ -1,5 +1,19 @@
 # reshaped
 
+## 3.9.0-canary.21
+
+### Patch Changes
+
+- [`a0f2bba`](https://github.com/reshaped-ui/reshaped/commit/a0f2bba6c21f0ab3f8351b269fc2fd01a5673dfe) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Fixed shadow clipping in equal width tabs with pills-elevated variant
+
+- [`a5b7cd0`](https://github.com/reshaped-ui/reshaped/commit/a5b7cd0d17c5aa92f0dd2808bdbceb41fe2289f7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Automatically add focus ring for labels with hidden inputs inside
+
+- [`65fc994`](https://github.com/reshaped-ui/reshaped/commit/65fc9940853cca340da66ba420ebc51824f5d6fc) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Added transitions for switching between colors and ariants
+
+- [`5d94cee`](https://github.com/reshaped-ui/reshaped/commit/5d94cee36d9d4e3d04711a052cb3e5d64f469433) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: `as` support
+
+- [`a0f2bba`](https://github.com/reshaped-ui/reshaped/commit/a0f2bba6c21f0ab3f8351b269fc2fd01a5673dfe) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Prevent page scrolling when dragging the thumb on touch devices
+
 ## 3.9.0-canary.20
 
 ### Patch Changes

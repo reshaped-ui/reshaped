@@ -2,8 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.19",
-    "reshaped": "3.9.0-canary.19"
+    "@reshaped/core": "3.9.0-canary.20",
+    "reshaped": "3.9.0-canary.20"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -17,6 +17,7 @@
     "easy-crews-knock",
     "eighty-jars-knock",
     "eleven-otters-bake",
+    "empty-owls-roll",
     "fair-bananas-grin",
     "fancy-buses-worry",
     "fast-vans-kiss",
@@ -29,14 +30,17 @@
     "loud-emus-kneel",
     "lovely-facts-dress",
     "nice-aliens-wear",
+    "ninety-wolves-bet",
     "olive-spoons-lose",
     "perky-deer-shave",
     "petite-plums-help",
+    "plain-teams-taste",
     "purple-stamps-film",
     "quiet-cars-type",
     "real-snakes-give",
     "red-phones-check",
     "salty-boats-reply",
+    "shaky-crabs-push",
     "sharp-turkeys-push",
     "shiny-monkeys-study",
     "sour-clubs-cut",
@@ -51,6 +55,7 @@
     "wild-breads-go",
     "yellow-items-stick",
     "yellow-shirts-heal",
+    "young-rockets-chew",
     "yummy-insects-stare"
   ]
 }
