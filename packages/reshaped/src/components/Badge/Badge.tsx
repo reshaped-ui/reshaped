@@ -27,6 +27,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		dismissAriaLabel,
 		className,
 		attributes,
+		as,
 	} = props;
 	const isActionable = !!(onClick || href);
 	const iconSize = size === "small" ? 3 : 4;
@@ -54,6 +55,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			className={rootClassName}
 			attributes={attributes}
 			ref={ref}
+			as={as}
 			touchHitbox
 		>
 			{icon && <Icon svg={icon} autoWidth size={iconSize} className={s.icon} />}

@@ -9,3 +9,8 @@
 	border: 0;
 	opacity: 0;
 }
+
+label:has(.root:focus) {
+	z-index: var(--rs-z-index-relative);
+	box-shadow: var(--rs-shadow-focus);
+}

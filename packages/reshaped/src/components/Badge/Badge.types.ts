@@ -22,7 +22,7 @@ type BaseProps = {
 	hidden?: boolean;
 	/** Additional classname for the root element */
 	className?: G.ClassName;
-} & Pick<ActionableProps, "href" | "onClick" | "attributes">;
+} & Pick<ActionableProps, "href" | "onClick" | "attributes" | "as">;
 
 type WithChildren = BaseProps & {
 	/** Node for inserting text or other content */

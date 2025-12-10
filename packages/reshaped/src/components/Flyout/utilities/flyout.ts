@@ -118,13 +118,6 @@ const flyout = (
 			top: window.scrollY,
 		};
 
-		console.log(
-			"visualContainerBounds",
-			calculated.position,
-			visualContainerBounds,
-			calculated.boundaries
-		);
-
 		return isFullyVisible({
 			flyoutBounds: calculated.boundaries,
 			visualContainerBounds,
