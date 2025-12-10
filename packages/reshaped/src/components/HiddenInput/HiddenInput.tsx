@@ -46,6 +46,7 @@ const HiddenInput: React.FC<T.Props> = (props) => {
 			onChange={handleChange}
 			onFocus={onFocus || attributes?.onFocus}
 			onBlur={onBlur || attributes?.onBlur}
+			data-rs-hidden-input
 		/>
 	);
 };

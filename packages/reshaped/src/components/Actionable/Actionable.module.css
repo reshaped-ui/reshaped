@@ -70,6 +70,12 @@ button.root,
 	user-select: none;
 }
 
+/* In case there are hidden inputs rendered inside, automatically apply focus ring */
+label.root:has([data-rs-hidden-input]:focus) {
+	z-index: var(--rs-z-index-relative);
+	box-shadow: var(--rs-shadow-focus);
+}
+
 .root.--disabled,
 .root[disabled] {
 	cursor: not-allowed;
