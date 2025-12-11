@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.0-canary.24
+
+### Patch Changes
+
+- [`0707a48`](https://github.com/reshaped-ui/reshaped/commit/0707a484a1997ed3614e5bd180dc03ef1a3fe7cd) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated ignored files
+
 ## 3.9.0-canary.23
 
 ### Patch Changes

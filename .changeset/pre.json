@@ -2,8 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.22",
-    "reshaped": "3.9.0-canary.22"
+    "@reshaped/core": "3.9.0-canary.23",
+    "reshaped": "3.9.0-canary.23"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -30,6 +30,7 @@
     "good-lizards-carry",
     "loud-emus-kneel",
     "lovely-facts-dress",
+    "modern-teams-itch",
     "nice-aliens-wear",
     "ninety-wolves-bet",
     "olive-spoons-lose",
