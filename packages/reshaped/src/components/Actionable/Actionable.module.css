@@ -71,7 +71,7 @@ button.root,
 }
 
 /* In case there are hidden inputs rendered inside, automatically apply focus ring */
-label.root:has([data-rs-hidden-input]:focus) {
+[data-rs-keyboard] label.root:has([data-rs-hidden-input]:focus) {
 	z-index: var(--rs-z-index-relative);
 	box-shadow: var(--rs-shadow-focus);
 }
