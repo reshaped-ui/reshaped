@@ -3,10 +3,10 @@
 
 	max-width: 360px;
 	border: var(--rs-border-w) solid var(--rs-color-border-neutral-faded);
+	border-radius: var(--rs-radius-medium);
 }
 
 .content--variant-elevated {
-	border-radius: var(--rs-radius-medium);
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
 	box-shadow: var(--rs-shadow-overlay);
