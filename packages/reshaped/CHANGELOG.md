@@ -1,5 +1,13 @@
 # reshaped
 
+## 3.9.0-canary.25
+
+### Patch Changes
+
+- [`aee5a55`](https://github.com/reshaped-ui/reshaped/commit/aee5a55a3901bd0b089287d498b4ce5d84a82ec1) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Only show focus ring for labels when keyboard mode is enabled
+
+- [`532135e`](https://github.com/reshaped-ui/reshaped/commit/532135eb770738c5b1a42674aae6ecde4f59a1a6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Popover: Moved border radius styles to the root element
+
 ## 3.9.0-canary.24
 
 ### Patch Changes
