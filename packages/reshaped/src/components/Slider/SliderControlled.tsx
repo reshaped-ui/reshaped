@@ -203,7 +203,6 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleMinDragStart: T.ThumbProps["onDragStart"] = (e) => {
 		if (disabled) return;
 
-		console.log("handleMinDragStart");
 		e.stopPropagation();
 		disableScroll();
 		setDraggingId(minId);
@@ -220,10 +219,12 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleDragStop = React.useCallback(() => {
 		if (draggingId === minId && minValue !== undefined) {
 			handleMinChange(minValue, { commit: true });
+			minInputRef.current?.focus();
 		}
 
 		if (draggingId === maxId) {
 			handleMaxChange(maxValue, { commit: true });
+			maxInputRef.current?.focus();
 		}
 
 		enableScroll();
