@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.0-canary.27
+
+### Patch Changes
+
+- [`d2ba0a4`](https://github.com/reshaped-ui/reshaped/commit/d2ba0a4e5cb63e73ea0bc1f1a05897503499f6ab) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Updated content z-index
+
 ## 3.9.0-canary.26
 
 ### Patch Changes
