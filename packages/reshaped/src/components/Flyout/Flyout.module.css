@@ -7,7 +7,7 @@
 
 	position: absolute;
 	isolation: isolate;
-	z-index: var(--rs-z-index-flyout);
+	z-index: var(--rs-z-index-absolute);
 
 	/* Make content child grow based on its max height with flex grow */
 	display: flex;
