@@ -2,8 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.24",
-    "reshaped": "3.9.0-canary.24"
+    "@reshaped/core": "3.9.0-canary.25",
+    "reshaped": "3.9.0-canary.25"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -29,6 +29,7 @@
     "gentle-glasses-see",
     "gentle-pumas-reply",
     "good-lizards-carry",
+    "jolly-pens-jump",
     "loud-emus-kneel",
     "lovely-facts-dress",
     "modern-teams-itch",
