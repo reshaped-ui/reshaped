@@ -3,7 +3,10 @@ name: Create Release
 on:
   push:
     tags:
-      - "v*" # Trigger on version tags like v1.0.0, v3.8.0, etc.
+      # Changesets creates tags in format: package-name@version or @scope/package@version
+      # Trigger on all package releases since packages are versioned together
+      - "reshaped@*"
+      - "@reshaped/core@*"
 
 permissions:
   contents: write # Required to create releases
@@ -28,20 +31,28 @@ jobs:
         with:
           version: 9
 
-      - name: Get version from tag
-        id: tag_name
+      - name: Get package name and version from tag
+        id: tag_info
         run: |
-          echo "current_version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          # Extract tag name (e.g., "reshaped@3.9.0-canary.27" or "@reshaped/core@3.9.0-canary.27")
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+
+          # Extract version (everything after the last @)
+          VERSION="${TAG_NAME##*@}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+          # Create release name from tag (e.g., "reshaped@3.9.0-canary.27" or "@reshaped/core@3.9.0-canary.27")
+          echo "release_name=$TAG_NAME" >> $GITHUB_OUTPUT
 
       - name: Extract changelog for current version
         id: changelog
         run: |
           # Extract the changelog content for this version
-          VERSION="${{ steps.tag_name.outputs.current_version }}"
+          VERSION="${{ steps.tag_info.outputs.version }}"
 
           # Read CHANGELOG.md and extract the section for this version
-          # This assumes your changelog follows the format: ## VERSION
+          # Changesets uses format: ## VERSION (e.g., ## 3.9.0-canary.27)
           if grep -q "^## $VERSION" CHANGELOG.md; then
             # Extract content between this version and the next version heading
             # Start printing after the version line, stop at the next version heading
@@ -74,7 +85,7 @@ jobs:
         id: prerelease
         run: |
           # Check if version contains pre-release indicators
-          VERSION="${{ steps.tag_name.outputs.current_version }}"
+          VERSION="${{ steps.tag_info.outputs.version }}"
           if [[ "$VERSION" == *"canary"* ]] || [[ "$VERSION" == *"alpha"* ]] || [[ "$VERSION" == *"beta"* ]] || [[ "$VERSION" == *"rc"* ]]; then
             echo "is_prerelease=true" >> $GITHUB_OUTPUT
           else
@@ -84,8 +95,8 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.tag_name.outputs.tag }}
-          name: Release ${{ steps.tag_name.outputs.current_version }}
+          tag_name: ${{ steps.tag_info.outputs.tag }}
+          name: ${{ steps.tag_info.outputs.release_name }}
           body_path: changelog_excerpt.md
           draft: false
           prerelease: ${{ steps.prerelease.outputs.is_prerelease }}
