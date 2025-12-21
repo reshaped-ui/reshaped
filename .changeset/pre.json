@@ -2,8 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.28",
-    "reshaped": "3.9.0-canary.28"
+    "@reshaped/core": "3.9.0-canary.29",
+    "reshaped": "3.9.0-canary.29"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -62,6 +62,7 @@
     "thin-rocks-hang",
     "thirty-dragons-float",
     "tricky-bats-clean",
+    "upset-eyes-appear",
     "violet-nights-punch",
     "wide-lamps-fail",
     "wild-breads-go",
