@@ -4,9 +4,9 @@ on:
   push:
     tags:
       # Changesets creates tags in format: package-name@version or @scope/package@version
-      # Trigger on all package releases since packages are versioned together
+      # Only trigger on main package tag since packages are versioned together
+      # We'll combine changelogs from all packages for a single release
       - "reshaped@*"
-      - "@reshaped/core@*"
 
 permissions:
   contents: write # Required to create releases
@@ -42,40 +42,69 @@ jobs:
           VERSION="${TAG_NAME##*@}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-          # Create release name from tag (e.g., "reshaped@3.9.0-canary.27" or "@reshaped/core@3.9.0-canary.27")
-          echo "release_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          # Create release name from version (e.g., "v3.9.0-canary.27")
+          # Since packages are versioned together, use a single release name
+          echo "release_name=v$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Extract changelog for current version
+      - name: Extract and combine changelogs for current version
         id: changelog
         run: |
           # Extract the changelog content for this version
           VERSION="${{ steps.tag_info.outputs.version }}"
-
-          # Read CHANGELOG.md and extract the section for this version
-          # Changesets uses format: ## VERSION (e.g., ## 3.9.0-canary.27)
-          if grep -q "^## $VERSION" CHANGELOG.md; then
-            # Extract content between this version and the next version heading
-            # Start printing after the version line, stop at the next version heading
-            CHANGELOG_CONTENT=$(awk "
-              BEGIN { found=0; }
-              /^## $VERSION\$/ { found=1; next; }
-              found && /^## [0-9]/ { exit; }
-              found { print; }
-            " CHANGELOG.md)
+          
+          # Function to extract changelog section from a file
+          extract_changelog() {
+            local file="$1"
+            local version="$2"
             
-            # Trim leading and trailing empty lines
-            CHANGELOG_CONTENT=$(echo "$CHANGELOG_CONTENT" | sed -e '/./,$!d' -e :a -e '/^\n*$/{$d;N;ba' -e '}')
-            
-            # If changelog is empty, use a default message
-            if [ -z "$CHANGELOG_CONTENT" ]; then
-              CHANGELOG_CONTENT="Release version $VERSION"
+            if [ ! -f "$file" ]; then
+              return
             fi
-          else
-            CHANGELOG_CONTENT="Release version $VERSION"
+            
+            if grep -q "^## $version" "$file"; then
+              # Extract content between this version and the next version heading
+              awk "
+                BEGIN { found=0; }
+                /^## $version\$/ { found=1; next; }
+                found && /^## [0-9]/ { exit; }
+                found { print; }
+              " "$file"
+            fi
+          }
+          
+          # Extract changelogs from both packages
+          RESHAPED_CHANGELOG=$(extract_changelog "packages/reshaped/CHANGELOG.md" "$VERSION")
+          CORE_CHANGELOG=$(extract_changelog "packages/core/CHANGELOG.md" "$VERSION")
+          
+          # Combine changelogs
+          COMBINED_CHANGELOG=""
+          
+          if [ -n "$RESHAPED_CHANGELOG" ]; then
+            COMBINED_CHANGELOG="$RESHAPED_CHANGELOG"
+          fi
+          
+          if [ -n "$CORE_CHANGELOG" ]; then
+            if [ -n "$COMBINED_CHANGELOG" ]; then
+              COMBINED_CHANGELOG="$COMBINED_CHANGELOG
+
+$CORE_CHANGELOG"
+            else
+              COMBINED_CHANGELOG="$CORE_CHANGELOG"
+            fi
+          fi
+          
+          # Trim leading and trailing empty lines
+          if [ -n "$COMBINED_CHANGELOG" ]; then
+            COMBINED_CHANGELOG=$(echo "$COMBINED_CHANGELOG" | sed -e '/./,$!d' -e :a -e '/^\n*$/{$d;N;ba' -e '}')
+          fi
+          
+          # If changelog is empty, use a default message
+          if [ -z "$COMBINED_CHANGELOG" ]; then
+            COMBINED_CHANGELOG="Release version $VERSION"
           fi
 
           # Write to file to preserve formatting
-          echo "$CHANGELOG_CONTENT" > changelog_excerpt.md
+          echo "$COMBINED_CHANGELOG" > changelog_excerpt.md
 
           # Also output for logging
           echo "Changelog content:"
@@ -95,6 +124,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          # Use the main package tag, but create a single release per version
           tag_name: ${{ steps.tag_info.outputs.tag }}
           name: ${{ steps.tag_info.outputs.release_name }}
           body_path: changelog_excerpt.md
