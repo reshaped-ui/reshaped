@@ -63,6 +63,9 @@ export const size = {
 			<Example.Item title={["responsive width", "[s] 200px", "[m+] 300px"]}>
 				<Image src={imgUrl} width={{ s: "200px", m: "300px" }} />
 			</Example.Item>
+			<Example.Item title="width: 200px, fallback">
+				<Image fallback={imgUrl} width="200px" />
+			</Example.Item>
 		</Example>
 	),
 };

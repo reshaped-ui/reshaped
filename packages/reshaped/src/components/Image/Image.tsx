@@ -68,7 +68,7 @@ const Image: React.FC<T.Props> = (props) => {
 				src: fallback ?? "",
 				alt: alt ?? "",
 				role: alt ? undefined : "presentation",
-				className: imageClassNames,
+				className: rootClassNames,
 				style,
 			};
 
