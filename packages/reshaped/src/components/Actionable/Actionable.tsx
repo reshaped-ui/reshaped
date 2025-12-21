@@ -6,8 +6,6 @@ import {
 } from "@reshaped/core";
 import { forwardRef } from "react";
 
-import { classNames } from "utilities/props";
-
 import s from "./Actionable.module.css";
 
 import type * as T from "./Actionable.types";
@@ -28,15 +26,15 @@ const Actionable = forwardRef<UnstyledActionableRef, T.Props>((props, ref) => {
 
 		...unstyledProps
 	} = props;
-	const rootClassNames = classNames(
+	const rootClassNames = [
 		s.root,
 		className,
 		disabled && s["--disabled"],
 		borderRadius && s[`--radius-${borderRadius}`],
 		insetFocus && s["--inset"],
 		disableFocusRing && s["--disabled-focus-ring"],
-		fullWidth && s["--full-width"]
-	);
+		fullWidth && s["--full-width"],
+	];
 
 	return (
 		<UnstyledActionable {...unstyledProps} className={rootClassNames} disabled={disabled} ref={ref}>

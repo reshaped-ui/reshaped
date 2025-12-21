@@ -1,10 +1,10 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
-import { classNames } from "utilities/props";
 
 import AccordionContext from "./Accordion.context";
 import * as T from "./Accordion.types";

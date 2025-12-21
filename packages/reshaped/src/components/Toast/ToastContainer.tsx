@@ -1,10 +1,10 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import { checkKeyboardMode, TrapFocus } from "utilities/a11y";
 import { onNextFrame } from "utilities/animation";
-import { classNames } from "utilities/props";
 
 import Toast from "./Toast";
 import { timeouts } from "./Toast.constants";

@@ -1,7 +1,7 @@
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import { resolveMixin } from "styles/mixin";
-import { classNames } from "utilities/props";
 
 import s from "./Icon.module.css";
 

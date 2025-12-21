@@ -1,10 +1,11 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import { useFormControl } from "components/FormControl";
 import useElementId from "hooks/useElementId";
-import { classNames, responsiveClassNames } from "utilities/props";
+import { responsiveClassNames } from "utilities/props";
 
 import s from "./TextArea.module.css";
 

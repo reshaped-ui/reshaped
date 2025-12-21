@@ -1,5 +1,6 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import Portal from "components/_private/Portal";
@@ -11,7 +12,6 @@ import useScrollLock from "hooks/useScrollLock";
 import useToggle from "hooks/useToggle";
 import { TrapFocus, type FocusableElement } from "utilities/a11y";
 import { onNextFrame } from "utilities/animation";
-import { classNames } from "utilities/props";
 
 import s from "./Overlay.module.css";
 

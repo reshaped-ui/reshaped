@@ -1,8 +1,9 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
+
 import Button from "components/Button";
 import IconClose from "icons/Close";
-import { classNames } from "utilities/props";
 
 import s from "./Dismissible.module.css";
 

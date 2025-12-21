@@ -1,8 +1,8 @@
+import { classNames } from "@reshaped/core";
 import { forwardRef } from "react";
 
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
-import { classNames } from "utilities/props";
 
 import s from "./Link.module.css";
 

@@ -1,9 +1,9 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import { resolveMixin } from "styles/mixin";
-import { classNames } from "utilities/props";
 
 import s from "./Image.module.css";
 import * as T from "./Image.types";

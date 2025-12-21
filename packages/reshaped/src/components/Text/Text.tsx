@@ -1,5 +1,7 @@
+import { classNames } from "@reshaped/core";
+
 import { resolveMixin } from "styles/mixin";
-import { classNames, responsiveClassNames } from "utilities/props";
+import { responsiveClassNames } from "utilities/props";
 
 import s from "./Text.module.css";
 

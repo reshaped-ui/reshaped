@@ -1,4 +1,6 @@
-import { classNames, responsiveClassNames } from "utilities/props";
+import { classNames } from "@reshaped/core";
+
+import { responsiveClassNames } from "utilities/props";
 
 import s from "./Hidden.module.css";
 

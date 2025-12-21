@@ -1,12 +1,12 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import Portal from "components/_private/Portal";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { findClosestPositionContainer, findClosestScrollableContainer } from "utilities/dom";
 import { rafThrottle } from "utilities/helpers";
-import { classNames } from "utilities/props";
 
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
 import s from "./Flyout.module.css";

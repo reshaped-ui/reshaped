@@ -1,10 +1,10 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import Text from "components/Text";
 import Theme from "components/Theme";
-import { classNames } from "utilities/props";
 
 import s from "./Slider.module.css";
 import { getPrecision } from "./Slider.utilities";

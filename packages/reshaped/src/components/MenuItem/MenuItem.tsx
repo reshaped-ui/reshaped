@@ -1,9 +1,10 @@
+import { classNames } from "@reshaped/core";
 import { forwardRef } from "react";
 
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import View from "components/View";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+import { responsiveClassNames, responsivePropDependency } from "utilities/props";
 
 import s from "./MenuItem.module.css";
 

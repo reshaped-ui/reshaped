@@ -1,8 +1,7 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
-
-import { classNames } from "utilities/props";
 
 import s from "./Select.module.css";
 import SelectEndContent from "./SelectEndContent";

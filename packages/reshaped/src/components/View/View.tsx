@@ -1,9 +1,10 @@
+import { classNames } from "@reshaped/core";
 import React, { isValidElement } from "react";
 
 import Divider, { type DividerProps } from "components/Divider";
 import Hidden from "components/Hidden";
 import { resolveMixin } from "styles/mixin";
-import { classNames, responsiveClassNames, responsiveVariables } from "utilities/props";
+import { responsiveClassNames, responsiveVariables } from "utilities/props";
 
 import s from "./View.module.css";
 

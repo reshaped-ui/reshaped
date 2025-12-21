@@ -1,4 +1,4 @@
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/core";
 
 import s from "./Badge.module.css";
 

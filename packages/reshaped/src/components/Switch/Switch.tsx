@@ -1,11 +1,12 @@
 "use client";
 
+import { classNames } from "@reshaped/core";
 import React from "react";
 
 import { useFormControl } from "components/FormControl";
 import Text from "components/Text";
 import useElementId from "hooks/useElementId";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+import { responsiveClassNames, responsivePropDependency } from "utilities/props";
 
 import s from "./Switch.module.css";
 

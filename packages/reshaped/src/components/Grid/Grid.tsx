@@ -1,5 +1,7 @@
+import { classNames } from "@reshaped/core";
+
 import { resolveMixin } from "styles/mixin";
-import { classNames, responsiveVariables, responsivePropDependency } from "utilities/props";
+import { responsiveVariables, responsivePropDependency } from "utilities/props";
 
 import s from "./Grid.module.css";
 
