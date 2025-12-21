@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.0-canary.31
+
+### Patch Changes
+
+- [`6db15b6`](https://github.com/reshaped-ui/reshaped/commit/6db15b6153742490dabaf7d81993fecf0a6c1b05) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated release process
+
 ## 3.9.0-canary.30
 
 ### Patch Changes

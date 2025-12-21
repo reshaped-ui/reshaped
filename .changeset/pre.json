@@ -2,8 +2,8 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.29",
-    "reshaped": "3.9.0-canary.29"
+    "@reshaped/core": "3.9.0-canary.30",
+    "reshaped": "3.9.0-canary.30"
   },
   "changesets": [
     "afraid-eyes-guess",
@@ -15,6 +15,7 @@
     "common-suits-tease",
     "crisp-rabbits-watch",
     "cuddly-hands-fly",
+    "cyan-games-live",
     "dark-coins-sneeze",
     "dirty-kids-fly",
     "dirty-monkeys-stand",
