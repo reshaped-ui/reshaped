@@ -72,24 +72,54 @@ jobs:
             fi
           }
 
-          # Extract changelogs from both packages
-          RESHAPED_CHANGELOG=$(extract_changelog "packages/reshaped/CHANGELOG.md" "$VERSION")
-          CORE_CHANGELOG=$(extract_changelog "packages/core/CHANGELOG.md" "$VERSION")
+          # Function to get package name from package.json
+          get_package_name() {
+            local package_dir="$1"
+            local package_json="$package_dir/package.json"
+            
+            if [ ! -f "$package_json" ]; then
+              return
+            fi
+            
+            # Extract the "name" field from package.json
+            grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "$package_json" | head -1 | sed 's/.*"name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/'
+          }
 
-          # Combine changelogs
+          # Discover all packages and combine their changelogs
           COMBINED_CHANGELOG=""
 
-          if [ -n "$RESHAPED_CHANGELOG" ]; then
-            COMBINED_CHANGELOG="$RESHAPED_CHANGELOG"
-          fi
-
-          if [ -n "$CORE_CHANGELOG" ]; then
-            if [ -n "$COMBINED_CHANGELOG" ]; then
-              COMBINED_CHANGELOG=$(printf "%s\n\n%s" "$COMBINED_CHANGELOG" "$CORE_CHANGELOG")
-            else
-              COMBINED_CHANGELOG="$CORE_CHANGELOG"
+          # Loop through all directories in packages/
+          for package_dir in packages/*/; do
+            # Remove trailing slash
+            package_dir="${package_dir%/}"
+            
+            # Check if this package has a CHANGELOG.md
+            changelog_file="$package_dir/CHANGELOG.md"
+            if [ ! -f "$changelog_file" ]; then
+              continue
             fi
-          fi
+            
+            # Extract changelog for this version
+            package_changelog=$(extract_changelog "$changelog_file" "$VERSION")
+            
+            # If this package has changelog content for this version
+            if [ -n "$package_changelog" ]; then
+              # Get package name
+              package_name=$(get_package_name "$package_dir")
+              
+              # If we couldn't get package name, use directory name as fallback
+              if [ -z "$package_name" ]; then
+                package_name=$(basename "$package_dir")
+              fi
+              
+              # Add to combined changelog with package title
+              if [ -n "$COMBINED_CHANGELOG" ]; then
+                COMBINED_CHANGELOG=$(printf "%s\n\n## %s\n\n%s" "$COMBINED_CHANGELOG" "$package_name" "$package_changelog")
+              else
+                COMBINED_CHANGELOG=$(printf "## %s\n\n%s" "$package_name" "$package_changelog")
+              fi
+            fi
+          done
 
           # Trim leading and trailing empty lines
           if [ -n "$COMBINED_CHANGELOG" ]; then
