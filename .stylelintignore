@@ -1,4 +1,4 @@
 dist
 node_modules
 
-/src/themes
+packages/reshaped/src/themes

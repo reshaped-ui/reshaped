@@ -1,0 +1,75 @@
+.root {
+	--rs-file-upload-radius: var(--rs-radius-medium);
+	--rs-file-upload-border-color: var(--rs-color-border-neutral);
+	--rs-file-upload-hover-background-color: rgba(var(--rs-color-rgb-background-neutral), 0.16);
+
+	display: block;
+
+	[data-rs-keyboard] &:focus-within {
+		box-shadow: var(--rs-shadow-focus);
+	}
+}
+
+.triggerLayer {
+	&:has(.trigger) {
+		pointer-events: none;
+
+		& .trigger,
+		& button,
+		& a {
+			pointer-events: all;
+		}
+	}
+}
+
+.trigger {
+	display: contents;
+}
+
+.--inline {
+	--rs-file-upload-radius: var(--rs-radius-small);
+
+	&,
+	& .triggerLayer {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	[data-rs-keyboard] &:focus-within {
+		box-shadow: none;
+	}
+
+	[data-rs-keyboard] &:focus-within .triggerLayer > * {
+		box-shadow: var(--rs-shadow-focus);
+	}
+}
+
+.--variant-outline {
+	& .triggerLayer {
+		border: 1px dashed var(--rs-file-upload-border-color);
+		border-radius: var(--rs-file-upload-radius);
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: background-color, border-color;
+
+		.--highlighted& {
+			background: rgba(var(--rs-color-rgb-background-primary), 0.08);
+			border-color: var(--rs-color-border-primary);
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(:has(.trigger)) {
+				background: var(--rs-file-upload-hover-background-color);
+			}
+		}
+	}
+}
+
+.--disabled {
+	--rs-file-upload-border-color: var(--rs-color-border-disabled);
+	--rs-file-upload-hover-background-color: transparent;
+
+	& .triggerLayer {
+		cursor: not-allowed;
+		opacity: 0.4;
+	}
+}

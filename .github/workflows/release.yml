@@ -3,7 +3,10 @@ name: Create Release
 on:
   push:
     tags:
-      - "v*" # Trigger on version tags like v1.0.0, v3.8.0, etc.
+      # Changesets creates tags in format: package-name@version or @scope/package@version
+      # Only trigger on main package tag since packages are versioned together
+      # We'll combine changelogs from all packages for a single release
+      - "reshaped@*"
 
 permissions:
   contents: write # Required to create releases
@@ -28,43 +31,108 @@ jobs:
         with:
           version: 9
 
-      - name: Get version from tag
-        id: tag_name
+      - name: Get package name and version from tag
+        id: tag_info
         run: |
-          echo "current_version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          # Extract tag name (e.g., "reshaped@3.9.0-canary.27" or "@reshaped/core@3.9.0-canary.27")
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
 
-      - name: Extract changelog for current version
+          # Extract version (everything after the last @)
+          VERSION="${TAG_NAME##*@}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+          # Create release name from version (e.g., "v3.9.0-canary.27")
+          # Since packages are versioned together, use a single release name
+          echo "release_name=v$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Extract and combine changelogs for current version
         id: changelog
         run: |
           # Extract the changelog content for this version
-          VERSION="${{ steps.tag_name.outputs.current_version }}"
+          VERSION="${{ steps.tag_info.outputs.version }}"
 
-          # Read CHANGELOG.md and extract the section for this version
-          # This assumes your changelog follows the format: ## VERSION
-          if grep -q "^## $VERSION" CHANGELOG.md; then
-            # Extract content between this version and the next version heading
-            # Start printing after the version line, stop at the next version heading
-            CHANGELOG_CONTENT=$(awk "
-              BEGIN { found=0; }
-              /^## $VERSION\$/ { found=1; next; }
-              found && /^## [0-9]/ { exit; }
-              found { print; }
-            " CHANGELOG.md)
+          # Function to extract changelog section from a file
+          extract_changelog() {
+            local file="$1"
+            local version="$2"
             
-            # Trim leading and trailing empty lines
-            CHANGELOG_CONTENT=$(echo "$CHANGELOG_CONTENT" | sed -e '/./,$!d' -e :a -e '/^\n*$/{$d;N;ba' -e '}')
-            
-            # If changelog is empty, use a default message
-            if [ -z "$CHANGELOG_CONTENT" ]; then
-              CHANGELOG_CONTENT="Release version $VERSION"
+            if [ ! -f "$file" ]; then
+              return
             fi
-          else
-            CHANGELOG_CONTENT="Release version $VERSION"
+            
+            if grep -q "^## $version" "$file"; then
+              # Extract content between this version and the next version heading
+              awk "
+                BEGIN { found=0; }
+                /^## $version\$/ { found=1; next; }
+                found && /^## [0-9]/ { exit; }
+                found { print; }
+              " "$file"
+            fi
+          }
+
+          # Function to get package name from package.json
+          get_package_name() {
+            local package_dir="$1"
+            local package_json="$package_dir/package.json"
+            
+            if [ ! -f "$package_json" ]; then
+              return
+            fi
+            
+            # Extract the "name" field from package.json
+            grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "$package_json" | head -1 | sed 's/.*"name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/'
+          }
+
+          # Discover all packages and combine their changelogs
+          COMBINED_CHANGELOG=""
+
+          # Loop through all directories in packages/
+          for package_dir in packages/*/; do
+            # Remove trailing slash
+            package_dir="${package_dir%/}"
+            
+            # Check if this package has a CHANGELOG.md
+            changelog_file="$package_dir/CHANGELOG.md"
+            if [ ! -f "$changelog_file" ]; then
+              continue
+            fi
+            
+            # Extract changelog for this version
+            package_changelog=$(extract_changelog "$changelog_file" "$VERSION")
+            
+            # If this package has changelog content for this version
+            if [ -n "$package_changelog" ]; then
+              # Get package name
+              package_name=$(get_package_name "$package_dir")
+              
+              # If we couldn't get package name, use directory name as fallback
+              if [ -z "$package_name" ]; then
+                package_name=$(basename "$package_dir")
+              fi
+              
+              # Add to combined changelog with package title
+              if [ -n "$COMBINED_CHANGELOG" ]; then
+                COMBINED_CHANGELOG=$(printf "%s\n\n## %s\n\n%s" "$COMBINED_CHANGELOG" "$package_name" "$package_changelog")
+              else
+                COMBINED_CHANGELOG=$(printf "## %s\n\n%s" "$package_name" "$package_changelog")
+              fi
+            fi
+          done
+
+          # Trim leading and trailing empty lines
+          if [ -n "$COMBINED_CHANGELOG" ]; then
+            COMBINED_CHANGELOG=$(echo "$COMBINED_CHANGELOG" | sed -e '/./,$!d' -e :a -e '/^\n*$/{$d;N;ba' -e '}')
+          fi
+
+          # If changelog is empty, use a default message
+          if [ -z "$COMBINED_CHANGELOG" ]; then
+            COMBINED_CHANGELOG="Release version $VERSION"
           fi
 
           # Write to file to preserve formatting
-          echo "$CHANGELOG_CONTENT" > changelog_excerpt.md
+          echo "$COMBINED_CHANGELOG" > changelog_excerpt.md
 
           # Also output for logging
           echo "Changelog content:"
@@ -74,7 +142,7 @@ jobs:
         id: prerelease
         run: |
           # Check if version contains pre-release indicators
-          VERSION="${{ steps.tag_name.outputs.current_version }}"
+          VERSION="${{ steps.tag_info.outputs.version }}"
           if [[ "$VERSION" == *"canary"* ]] || [[ "$VERSION" == *"alpha"* ]] || [[ "$VERSION" == *"beta"* ]] || [[ "$VERSION" == *"rc"* ]]; then
             echo "is_prerelease=true" >> $GITHUB_OUTPUT
           else
@@ -84,8 +152,9 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.tag_name.outputs.tag }}
-          name: Release ${{ steps.tag_name.outputs.current_version }}
+          # Use the main package tag, but create a single release per version
+          tag_name: ${{ steps.tag_info.outputs.tag }}
+          name: ${{ steps.tag_info.outputs.release_name }}
           body_path: changelog_excerpt.md
           draft: false
           prerelease: ${{ steps.prerelease.outputs.is_prerelease }}

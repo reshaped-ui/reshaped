@@ -1,0 +1,31 @@
+.root {
+	/* Center svg in squared icon */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 1;
+
+	/* In case parent changes its color, aligned with Text */
+	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
+}
+
+.--auto {
+	aspect-ratio: auto;
+	justify-content: flex-start;
+	width: auto;
+}
+
+.root svg {
+	display: block;
+
+	/* Override the sizes that might be defined on the svg element in html */
+	min-width: 100%;
+	height: 100%;
+	width: auto;
+}
+
+@each $color in neutral, neutral-faded, primary, positive, warning, critical, disabled {
+	.--color-$(color) {
+		color: var(--rs-color-foreground-$(color));
+	}
+}

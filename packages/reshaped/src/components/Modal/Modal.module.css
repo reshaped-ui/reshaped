@@ -1,0 +1,160 @@
+.root {
+	--rs-modal-container-width: 100vw;
+
+	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
+	transition-property: transform, opacity;
+	background: var(--rs-color-background-elevation-overlay);
+	color: var(--rs-color-foreground-neutral);
+	box-shadow: var(--rs-shadow-raised);
+	will-change: transform, opacity;
+	outline: none;
+
+	[data-rs-keyboard] &:focus {
+		box-shadow: var(--rs-shadow-focus);
+	}
+
+	&.--contained {
+		--rs-modal-container-width: 100%;
+	}
+}
+
+@responsive .root {
+	@variable --rs-modal-size calc(var(--rs-unit-x1) * 100);
+}
+
+@responsive .--position {
+	@value center {
+		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+
+		width: var(--rs-modal-size);
+		height: auto;
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x8));
+		max-height: none;
+		margin: var(--rs-unit-x4);
+		inset: 0;
+		position: relative;
+		border-radius: var(--rs-radius-large);
+		overflow: hidden;
+		opacity: 0;
+		transform: translate(0, var(--rs-unit-x4));
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate(0, 0) !important;
+			opacity: 1;
+		}
+	}
+
+	@value bottom {
+		--rs-modal-size-s: auto;
+
+		width: 100%;
+		height: var(--rs-modal-size);
+		max-width: 100%;
+		max-height: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
+		margin: 0;
+		margin-top: var(--rs-unit-x4);
+		inset: 0;
+		inset-block-start: initial;
+		transform: translate(0, 100%);
+		position: absolute;
+		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
+		overflow: auto;
+		opacity: 1;
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px)) !important;
+		}
+	}
+
+	@value start {
+		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+
+		width: var(--rs-modal-size);
+		height: 100%;
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
+		max-height: 100%;
+		margin: 0;
+		margin-inline-end: var(--rs-unit-x4);
+		inset: 0;
+		inset-inline-end: initial;
+		transform: translate(-100%, 0);
+		position: absolute;
+		border-radius: 0;
+		overflow: auto;
+		opacity: 1;
+
+		[dir="rtl"] & {
+			transform: translate(100%, 0);
+		}
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0) !important;
+		}
+	}
+
+	@value end {
+		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+
+		width: var(--rs-modal-size);
+		height: 100%;
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
+		max-height: 100%;
+		margin: 0;
+		margin-inline-start: var(--rs-unit-x4);
+		inset: 0;
+		inset-inline-start: initial;
+		transform: translate(100%, 0);
+		position: absolute;
+		border-radius: 0;
+		overflow: auto;
+		opacity: 1;
+
+		[dir="rtl"] & {
+			transform: translate(-100%, 0);
+		}
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0) !important;
+		}
+	}
+
+	@value full-screen {
+		--rs-modal-size-s: 100%;
+
+		width: 100%;
+		height: 100%;
+		max-width: var(--rs-modal-container-width);
+		max-height: 100%;
+		margin: 0;
+		inset: 0;
+		inset-block-start: initial;
+		transform: translate(0, var(--rs-unit-x4));
+		position: absolute;
+		border-radius: 0;
+		overflow: auto;
+		opacity: 0;
+
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate(0, 0) !important;
+			opacity: 1;
+		}
+	}
+}
+
+.--active,
+[dir="rtl"] .--active {
+	transition-timing-function: var(--rs-easing-decelerate);
+}
+
+.--dragging {
+	transition: none;
+}
+
+.--overflow-visible {
+	overflow: visible;
+}

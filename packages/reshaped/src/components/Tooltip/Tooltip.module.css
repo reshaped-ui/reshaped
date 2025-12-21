@@ -1,0 +1,7 @@
+.root {
+	color: var(--rs-color-foreground-neutral);
+	background: var(--rs-color-background-elevation-overlay);
+	box-shadow: var(--rs-shadow-overlay);
+	border-radius: var(--rs-radius-small);
+	padding: var(--rs-unit-x1) var(--rs-unit-x2);
+}

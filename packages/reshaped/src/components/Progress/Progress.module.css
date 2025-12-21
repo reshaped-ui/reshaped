@@ -1,0 +1,58 @@
+.root {
+	border-radius: var(--rs-radius-small);
+	overflow: hidden;
+	background: var(--rs-color-background-neutral-faded);
+	display: flex;
+	align-items: flex-start;
+}
+
+.value {
+	border-radius: var(--rs-radius-small);
+	height: 100%;
+	width: 100%;
+	background: var(--rs-color-background-neutral-faded);
+	transition: var(--rs-easing-decelerate);
+	transition-property: transform, background-color;
+	transition-duration: var(--rs-progress-duration, var(--rs-duration-medium));
+	transform: translateX(var(--rs-progress-value));
+
+	[dir="rtl"] & {
+		transform: translateX(calc(var(--rs-progress-value) * -1));
+	}
+}
+
+.--duration .value {
+	transition-timing-function: linear;
+}
+
+.--size-small {
+	height: var(--rs-unit-x1);
+}
+
+.--size-medium {
+	height: var(--rs-unit-x2);
+}
+
+.--color-primary .value {
+	background: var(--rs-color-background-primary);
+}
+
+.--color-critical .value {
+	background: var(--rs-color-background-critical);
+}
+
+.--color-warning .value {
+	background: var(--rs-color-background-warning);
+}
+
+.--color-positive .value {
+	background: var(--rs-color-background-positive);
+}
+
+.--color-media {
+	background: rgba(var(--rs-color-rgb-white), 28%);
+}
+
+.--color-media .value {
+	background: var(--rs-color-white);
+}

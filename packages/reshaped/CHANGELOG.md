@@ -1,0 +1,611 @@
+# reshaped
+
+## 3.9.0-canary.31
+
+### Patch Changes
+
+- [`6db15b6`](https://github.com/reshaped-ui/reshaped/commit/6db15b6153742490dabaf7d81993fecf0a6c1b05) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated release process
+
+## 3.9.0-canary.30
+
+### Patch Changes
+
+- [`0374264`](https://github.com/reshaped-ui/reshaped/commit/037426409fafec2f0c04a59de854010cbb843add) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated release process
+
+## 3.9.0-canary.29
+
+### Patch Changes
+
+- [`d8c7c6c`](https://github.com/reshaped-ui/reshaped/commit/d8c7c6caded3940b8049ab01c690e0246d47deee) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated release process
+
+## 3.9.0-canary.28
+
+### Patch Changes
+
+- [`6c210f4`](https://github.com/reshaped-ui/reshaped/commit/6c210f4e418c330d13a84b6d74cf5bb669dad798) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated reduced motion reset to use correct 0s animation duration
+
+- [`987df81`](https://github.com/reshaped-ui/reshaped/commit/987df81ac6ce2bbec2cbceaf54b377e0c4cfc86c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Added support for keyboard navigation after changing the value with mouse
+
+- [`f59b30a`](https://github.com/reshaped-ui/reshaped/commit/f59b30a90d0cc491e918b7e7bc1bdc5df4e07cae) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Image: Added missing fallback image attributes
+
+- [`8a54d20`](https://github.com/reshaped-ui/reshaped/commit/8a54d20b767053ea208dca9702b77bd8c0ec95c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Reshaped: Moved font theme reset to the reset layer
+
+## 3.9.0-canary.27
+
+### Patch Changes
+
+- [`d2ba0a4`](https://github.com/reshaped-ui/reshaped/commit/d2ba0a4e5cb63e73ea0bc1f1a05897503499f6ab) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Updated content z-index
+
+## 3.9.0-canary.26
+
+### Patch Changes
+
+- [`7a85600`](https://github.com/reshaped-ui/reshaped/commit/7a856002ff03ae83cf68ad4b0730b6b3c2f1de99) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Updated content z-index
+
+## 3.9.0-canary.25
+
+### Patch Changes
+
+- [`aee5a55`](https://github.com/reshaped-ui/reshaped/commit/aee5a55a3901bd0b089287d498b4ce5d84a82ec1) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Only show focus ring for labels when keyboard mode is enabled
+
+- [`532135e`](https://github.com/reshaped-ui/reshaped/commit/532135eb770738c5b1a42674aae6ecde4f59a1a6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Popover: Moved border radius styles to the root element
+
+## 3.9.0-canary.24
+
+### Patch Changes
+
+- [`0707a48`](https://github.com/reshaped-ui/reshaped/commit/0707a484a1997ed3614e5bd180dc03ef1a3fe7cd) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated ignored files
+
+## 3.9.0-canary.23
+
+### Patch Changes
+
+- [`f5183cb`](https://github.com/reshaped-ui/reshaped/commit/f5183cb59d9ea5f4130a8df9d7270accccbd59d7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated publish scripts
+
+## 3.9.0-canary.22
+
+### Patch Changes
+
+- [`cd68d7d`](https://github.com/reshaped-ui/reshaped/commit/cd68d7d93ae5790529ac406aa6a97fcd75b4467b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Forcing a release after updating npm tokens
+
+## 3.9.0-canary.21
+
+### Patch Changes
+
+- [`a0f2bba`](https://github.com/reshaped-ui/reshaped/commit/a0f2bba6c21f0ab3f8351b269fc2fd01a5673dfe) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Fixed shadow clipping in equal width tabs with pills-elevated variant
+
+- [`a5b7cd0`](https://github.com/reshaped-ui/reshaped/commit/a5b7cd0d17c5aa92f0dd2808bdbceb41fe2289f7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Automatically add focus ring for labels with hidden inputs inside
+
+- [`65fc994`](https://github.com/reshaped-ui/reshaped/commit/65fc9940853cca340da66ba420ebc51824f5d6fc) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Added transitions for switching between colors and ariants
+
+- [`5d94cee`](https://github.com/reshaped-ui/reshaped/commit/5d94cee36d9d4e3d04711a052cb3e5d64f469433) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: `as` support
+
+- [`a0f2bba`](https://github.com/reshaped-ui/reshaped/commit/a0f2bba6c21f0ab3f8351b269fc2fd01a5673dfe) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Prevent page scrolling when dragging the thumb on touch devices
+
+## 3.9.0-canary.20
+
+### Patch Changes
+
+- [`bb34749`](https://github.com/reshaped-ui/reshaped/commit/bb347494a7010db103bf575784976d970724c262) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: fixed passed width
+
+## 3.9.0-canary.19
+
+### Patch Changes
+
+- [`19a9a3c`](https://github.com/reshaped-ui/reshaped/commit/19a9a3c6fec8768a3add9e1a83fa14d6d64f9e65) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated global body min-heigh reset to use dvh
+
+## 3.9.0-canary.18
+
+### Patch Changes
+
+- [`bca3487`](https://github.com/reshaped-ui/reshaped/commit/bca34879d5590f18d91cc2d2784f363bdaad73e6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed incorrect color compilation
+
+## 3.9.0-canary.17
+
+### Patch Changes
+
+- [#542](https://github.com/reshaped-ui/reshaped/pull/542) [`0b2008a`](https://github.com/reshaped-ui/reshaped/commit/0b2008a5c6837a7cf810a0e4481b1d547b16fcb6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - fix(Flyout): added a timeout for hover type submenus
+
+- [#540](https://github.com/reshaped-ui/reshaped/pull/540) [`59b23f3`](https://github.com/reshaped-ui/reshaped/commit/59b23f36578962d2f8b10d55d12b7184d920c374) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Switched project to a monorepo
+
+- [#536](https://github.com/reshaped-ui/reshaped/pull/536) [`f4862c7`](https://github.com/reshaped-ui/reshaped/commit/f4862c767285622b9d478e6ad789c21d96268f70) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Simplified generic types for components supporting a combination of as and attributes, helps with easier implementation of wrapper components inheriting the types
+
+- [`7725506`](https://github.com/reshaped-ui/reshaped/commit/7725506755dca32720d6c22b82fada02977d9afd) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Fixed close handler for dropdown menus with mutltiple levels of nesting
+
+## 3.9.0-canary.16
+
+### Patch Changes
+
+- [`63747fb`](https://github.com/reshaped-ui/reshaped/commit/63747fb9c42ca3a21a889ac9a13c5c130882da56) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Removed horizontal scrolling from the fallbackAdjustLayout
+
+## 3.9.0-canary.15
+
+### Patch Changes
+
+- [#535](https://github.com/reshaped-ui/reshaped/pull/535) [`2bc837a`](https://github.com/reshaped-ui/reshaped/commit/2bc837a22382956bd8388f8a549c8955f30e788a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Flyout: Correctly calculate fallbackMinHeight and fallbackMinWidth when rendered in document.body
+  - Flyout: Fixed trigger type hover mouseLeave handler edge cases
+
+## 3.9.0-canary.14
+
+### Patch Changes
+
+- [#534](https://github.com/reshaped-ui/reshaped/pull/534) [`1eb06cb`](https://github.com/reshaped-ui/reshaped/commit/1eb06cbeff9f8ccf4437085330cb8d4004ded0f4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Tooltip, Flyout: Added contentMaxWidth support
+  - Flyout: Added small screen position fallbacks
+
+## 3.9.0-canary.13
+
+### Patch Changes
+
+- [#533](https://github.com/reshaped-ui/reshaped/pull/533) [`95e634d`](https://github.com/reshaped-ui/reshaped/commit/95e634d95e51731e5d9cb470bda4de47d48e1208) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Tooltip: Added instanceRef support
+  - Flyout: Added automatic position updates on content resize
+
+## 3.9.0-canary.12
+
+### Patch Changes
+
+- [`2c58151`](https://github.com/reshaped-ui/reshaped/commit/2c58151cde796628d2080f0ba9df794ed5dd2967) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ButtonGroup, ToggleButtonGroup: added support for fullWidth buttons
+
+## 3.9.0-canary.11
+
+### Patch Changes
+
+- [#531](https://github.com/reshaped-ui/reshaped/pull/531) [`a7ea5e7`](https://github.com/reshaped-ui/reshaped/commit/a7ea5e7924889229dfcfd130e4c18e3a3f5047e6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Fixed scrolling detection inside small-sized View children
+
+## 3.9.0-canary.10
+
+### Minor Changes
+
+- [#530](https://github.com/reshaped-ui/reshaped/pull/530) [`aa2872c`](https://github.com/reshaped-ui/reshaped/commit/aa2872c3b8b7d8b941dcef1e8a7b411efa8b1040) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Added disableSelectionAnimation flag
+
+## 3.9.0-canary.9
+
+### Minor Changes
+
+- [`1aa5ae3`](https://github.com/reshaped-ui/reshaped/commit/1aa5ae335a2078e226bb89d7c9a02bdfc3f8a76b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - HiddenInput: converted private to a public utility exported from the library
+
+- [`1b6c05d`](https://github.com/reshaped-ui/reshaped/commit/1b6c05d06a79b451809aed179e68b6185c7e9207) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Text: Added numeric flag
+  - FileUpload: Added transition for the inline variant with outline
+  - FileUpload: Added support for rendering links inside the dropzone
+
+- [`bbf07a8`](https://github.com/reshaped-ui/reshaped/commit/bbf07a87443838b7c6b4a7fbbc2f0686e161da43) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Scrim: Added padding, paddingInline, paddingBlock, borderRadius support
+
+- [`55d5a07`](https://github.com/reshaped-ui/reshaped/commit/55d5a071e924c3eddb791e002a4ce71e5a4d0aa0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Image: added outline property
+  - Avatar: migrated to Image component internally
+
+- [`4763825`](https://github.com/reshaped-ui/reshaped/commit/4763825931c7c854c94ab27c0c10caa45ed6c7aa) Thanks [@blvdmitry](https://github.com/blvdmitry)! - FileUpload: disabled property support
+
+### Patch Changes
+
+- [#528](https://github.com/reshaped-ui/reshaped/pull/528) [`8e35bbc`](https://github.com/reshaped-ui/reshaped/commit/8e35bbcd215f73ca3a5f3d8d0a9c4cab4565e193) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Modal: Fixed large modal scrolling when using responsive position
+
+## 3.9.0-canary.8
+
+### Patch Changes
+
+- [#527](https://github.com/reshaped-ui/reshaped/pull/527) [`6209265`](https://github.com/reshaped-ui/reshaped/commit/6209265961919c07d8a8abcae003f96b2f2c548d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Fixed horizontall scrolling ratio on thumb dragging
+
+## 3.9.0-canary.7
+
+### Minor Changes
+
+- [`dbb1476`](https://github.com/reshaped-ui/reshaped/commit/dbb14761c602b9aaa33c8ff5b53d7dca97d8b0f5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Avatar: Added semi transparent outline for better visual contrast between the image and the page background
+  - Badge: Added support for clickable badges
+  - FileUpload: Added support for non-trigger buttons inside the dropzone
+
+### Patch Changes
+
+- [`70086f7`](https://github.com/reshaped-ui/reshaped/commit/70086f788f5a289e26fee22864404f5d66663109) Thanks [@blvdmitry](https://github.com/blvdmitry)! - FileUpload: Synced focus ring border radius
+
+- [`ec6bcbd`](https://github.com/reshaped-ui/reshaped/commit/ec6bcbd17775f45a27646ae002bbfec375ea02f4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Fixed content resizing during children mutations with fallbackAdjustLayout used
+
+## 3.9.0-canary.6
+
+### Patch Changes
+
+- [#522](https://github.com/reshaped-ui/reshaped/pull/522) [`5d7240a`](https://github.com/reshaped-ui/reshaped/commit/5d7240a7a8aee2b3458e4a3f4c3ec9261392e331) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Relaxed reducer conditions to avoid transition edge cases
+
+## 3.9.0-canary.5
+
+### Minor Changes
+
+- [#520](https://github.com/reshaped-ui/reshaped/pull/520) [`e1f551d`](https://github.com/reshaped-ui/reshaped/commit/e1f551d96f7b7deb7c47ce25b04006b630dbb876) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Switched flyout position calculation to style.setProperty
+
+### Patch Changes
+
+- [#521](https://github.com/reshaped-ui/reshaped/pull/521) [`b4fffb8`](https://github.com/reshaped-ui/reshaped/commit/b4fffb873b40b970d81fa5fe30defe44743f352d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: fixed handleMouseLeave for triggerType hover after the timeout removal
+
+## 3.9.0-canary.4
+
+### Minor Changes
+
+- [#519](https://github.com/reshaped-ui/reshaped/pull/519) [`2d54ccc`](https://github.com/reshaped-ui/reshaped/commit/2d54ccc7e98816f96f6119e72703cb74d389b555) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Added support for an array of disabled dates
+
+### Patch Changes
+
+- [`877f557`](https://github.com/reshaped-ui/reshaped/commit/877f557d18b74083bd336163afdbc217a9beffb4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Fixed end date selection for timezone edge cases
+
+## 3.9.0-canary.3
+
+### Minor Changes
+
+- [#509](https://github.com/reshaped-ui/reshaped/pull/509) [`fcb5d91`](https://github.com/reshaped-ui/reshaped/commit/fcb5d91b0fa52d61579578299fefa516ffe3b9a2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: added monthsToRender support
+
+- [#511](https://github.com/reshaped-ui/reshaped/pull/511) [`bd82c0e`](https://github.com/reshaped-ui/reshaped/commit/bd82c0ebe34a72b4be613abe3c41d589d5559f70) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Added `month` and `onMonthChange` support
+
+- [`5246549`](https://github.com/reshaped-ui/reshaped/commit/5246549aa49a91596257c195d66a5ba7053a4f1f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout, Popover, DropdownMenu, ContextMenu, Autocomplete: Added contentMaxHeight support
+
+### Patch Changes
+
+- [`effa062`](https://github.com/reshaped-ui/reshaped/commit/effa062004075d73de17b4a1b690edd188f2c77a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Popover: Aligned the border styling approach with Card
+
+- [`5ed9e4b`](https://github.com/reshaped-ui/reshaped/commit/5ed9e4bcaf4709f9ed7109e7ed1a8ceddb978d68) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated externals for the vite bundle
+
+## 3.9.0-canary.2
+
+### Minor Changes
+
+- [`7423b9a`](https://github.com/reshaped-ui/reshaped/commit/7423b9ac289280187a85bd1dc6a27ec3f7ee135d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: renderDateSlot support
+  Text: Fixed text alignment reset
+
+### Patch Changes
+
+- [`c5f162f`](https://github.com/reshaped-ui/reshaped/commit/c5f162fc9186a89e57fdf54bc26f5f48e2f672f5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Handler keydown when input is focused
+
+- [`bd54b79`](https://github.com/reshaped-ui/reshaped/commit/bd54b79c6fef5a5ef1e374b1767ede81610dfd99) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tooltip: Disable group timeouts for controlled tooltips
+
+- [`11a667a`](https://github.com/reshaped-ui/reshaped/commit/11a667a77153e0ae8a8573e978bf7e98f917b4c9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - DropdownMenu, Select: Enable circular navigation
+
+## 3.9.0-canary.1
+
+### Patch Changes
+
+- [`7387577`](https://github.com/reshaped-ui/reshaped/commit/7387577c1330237684912e72b0e18e15f510629f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed horizontal aligner padding value for icon only buttons
+
+- [`d8fec9f`](https://github.com/reshaped-ui/reshaped/commit/d8fec9f6677aadc032e382c951795e0ee14017a3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated dependencies
+
+- [`7387577`](https://github.com/reshaped-ui/reshaped/commit/7387577c1330237684912e72b0e18e15f510629f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Icon: Added color transition to align with Text
+
+- [`d7745fb`](https://github.com/reshaped-ui/reshaped/commit/d7745fb80bb5f2538e32cfdd9e3f3680653003e3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Flyout: Improved the speed of switching between within a tooltip group
+  - DropdownMenu: Kept the hide animation when triggerType is hover
+
+- [`1ec5ad2`](https://github.com/reshaped-ui/reshaped/commit/1ec5ad23353d9fe2b2d1c1d17f5008747f1a4f18) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Theme: Moved global css variables definition to data-rs-theme elements
+
+## 3.9.0-canary.0
+
+### Minor Changes
+
+- [#477](https://github.com/reshaped-ui/reshaped/pull/477) [`6d73d64`](https://github.com/reshaped-ui/reshaped/commit/6d73d6448297fee5b580e12797a1c76db31697c2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Select: renamed OptionGroup to Group, old naming is still available for backwards compatibility
+  - Select: made Group label optional
+  - Select: added support for custom children components in Select.Custom
+
+- [#481](https://github.com/reshaped-ui/reshaped/pull/481) [`62441ec`](https://github.com/reshaped-ui/reshaped/commit/62441ecab868b8060e755f45dd37cb41204a6458) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Divider: Added offset property
+  - Divider: Added color property
+  - Select, DropdownMenu, Popover, Tooltip, Flyout: Added positionRef prop to calculate the position of the content relative to a different element
+
+- [#476](https://github.com/reshaped-ui/reshaped/pull/476) [`d8eb69b`](https://github.com/reshaped-ui/reshaped/commit/d8eb69b9f6ba85b395fb86f2970deb86da83d695) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Select: Fixed react node rendering of the selected value
+  - Select: Support passing null as startSlot to hide the default checkmark icon
+  - Select: Added `renderValue` prop to customize the value rendering in custom select
+
+## 3.8.7
+
+### Patch Changes
+
+- [`6dd6376`](https://github.com/reshaped-ui/reshaped/commit/6dd6376cb2e714e7690f3e5f4caf6f1ad37126b8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - DropdownMenu: fixed onClick handlers in submenu not firing
+
+- [`f5eec64`](https://github.com/reshaped-ui/reshaped/commit/f5eec64fc8b55637fe4e120bbefcca4b75428379) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Card: Fixed content overlaying the card border
+
+## 3.8.6
+
+### Patch Changes
+
+- [`a9226d2`](https://github.com/reshaped-ui/reshaped/commit/a9226d283f95b6dcc4cde90f1b6bdbbc2e1198e6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added default entrypoints in package.json
+
+- [`47abe60`](https://github.com/reshaped-ui/reshaped/commit/47abe60ad3c1d126c9cd8e84f927a1dba046b3d8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed rounded ghost button radius
+
+- [#486](https://github.com/reshaped-ui/reshaped/pull/486) [`9c75b5b`](https://github.com/reshaped-ui/reshaped/commit/9c75b5bb0ca288f31950e7d7cf3b1c7cb21f4fc3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated theme css selector to ~=
+
+- [`47abe60`](https://github.com/reshaped-ui/reshaped/commit/47abe60ad3c1d126c9cd8e84f927a1dba046b3d8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Added correct font-weight for body, caption and featured variants
+
+## 3.8.5
+
+### Patch Changes
+
+- [`e73eede`](https://github.com/reshaped-ui/reshaped/commit/e73eede89aee9160cc3245499a036a7b85121b39) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated cjs postcss config exports
+
+## 3.8.4
+
+### Patch Changes
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed compound component imports from within RSC in Next
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed esm node imports of configuration files
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Removed the outdated cjs build
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added separate cjs build for the postcss config
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useOnClickOutside: fixed keyboard onClose interaction
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Fixed incorrect ActionableRef types
+
+- [`bdc9194`](https://github.com/reshaped-ui/reshaped/commit/bdc9194878facb37c203aae0419945cea600c9ed) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Preserver content box styles to support custom css overrides
+
+## 3.8.4-canary.1
+
+### Patch Changes
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added separate cjs build for the postcss config
+
+- [`bf47ce9`](https://github.com/reshaped-ui/reshaped/commit/bf47ce935196b92921314a83f11a5c2c2dfc4129) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useOnClickOutside: fixed keyboard onClose interaction
+
+## 3.8.4-canary.0
+
+### Patch Changes
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed compound component imports from within RSC in Next
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed esm node imports of configuration files
+
+- [#473](https://github.com/reshaped-ui/reshaped/pull/473) [`633e436`](https://github.com/reshaped-ui/reshaped/commit/633e436dc3d2cae17f090e84890f75348f5f82c4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Removed the outdated cjs build
+
+- [#474](https://github.com/reshaped-ui/reshaped/pull/474) [`14c4091`](https://github.com/reshaped-ui/reshaped/commit/14c409126f8c9150379d80b3c3f56520eef9e381) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Fixed incorrect ActionableRef types
+
+- [`bdc9194`](https://github.com/reshaped-ui/reshaped/commit/bdc9194878facb37c203aae0419945cea600c9ed) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Preserver content box styles to support custom css overrides
+
+## 3.8.3
+
+### Patch Changes
+
+- [`a5441de`](https://github.com/reshaped-ui/reshaped/commit/a5441de5c14fca4bb02d4d34fdc68c76b4976451) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed the content shifting by 1px in highlight buttons in groups with min width
+
+## 3.8.2
+
+### Patch Changes
+
+- [`3b00c4b`](https://github.com/reshaped-ui/reshaped/commit/3b00c4bd4c506cf519109e7bf31301abc3740649) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Fixed button group highlighted borders
+
+## 3.8.1
+
+### Patch Changes
+
+- [`302091c`](https://github.com/reshaped-ui/reshaped/commit/302091cae7fec4d7faa4efe02c95ca725412e657) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - ButtonGroup: Fixed divider regression in the solid variant
+  - NumberField: Fixed arrow controls position
+  - Card: Fixed the color of the applied border
+
+## 3.8.0
+
+### Minor Changes
+
+- [`5f00d0a`](https://github.com/reshaped-ui/reshaped/commit/5f00d0a66c78fac8d52e67f181e8b5cc16b60dbf) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Badge: Added highlighted property
+  - DropdownMenu: Added a story with multiple themes
+
+### Patch Changes
+
+- [`ff3c392`](https://github.com/reshaped-ui/reshaped/commit/ff3c3925c1b0e78cf830d3f9a3657a5e57e6e995) Thanks [@blvdmitry](https://github.com/blvdmitry)! - updated release process
+
+- [`d4a95e8`](https://github.com/reshaped-ui/reshaped/commit/d4a95e8e966982c71d65b3a9fe2e7fb54c735ee7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - test
+
+- [`0fbcc35`](https://github.com/reshaped-ui/reshaped/commit/0fbcc3541b62b96259aaa983c9b18cf90eba4fb3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - NumberField: Fixed end slot padding for the field controls
+
+- [`f728853`](https://github.com/reshaped-ui/reshaped/commit/f7288530056f3343c51a12c0d5b36e7e88c711f7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Added RSC support for the custom select
+
+- [`1dcbf57`](https://github.com/reshaped-ui/reshaped/commit/1dcbf576e0d657de92bd206321e84f48e4d6c720) Thanks [@blvdmitry](https://github.com/blvdmitry)! - updated github releases notes
+
+- [`65af058`](https://github.com/reshaped-ui/reshaped/commit/65af0583372cfa27786a15a59d64ba8b36b99a68) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Applied correct text overflow when using equal width items
+
+## 3.8.0-canary.24
+
+### Patch Changes
+
+- [`f728853`](https://github.com/reshaped-ui/reshaped/commit/f7288530056f3343c51a12c0d5b36e7e88c711f7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Added RSC support for the custom select
+
+## 3.8.0-canary.23
+
+### Patch Changes
+
+- [`0fbcc35`](https://github.com/reshaped-ui/reshaped/commit/0fbcc3541b62b96259aaa983c9b18cf90eba4fb3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - NumberField: Fixed end slot padding for the field controls
+
+## 3.8.0-canary.22
+
+### Minor Changes
+
+- [`5f00d0a`](https://github.com/reshaped-ui/reshaped/commit/5f00d0a66c78fac8d52e67f181e8b5cc16b60dbf) Thanks [@blvdmitry](https://github.com/blvdmitry)! - - Badge: Added highlighted property
+  - DropdownMenu: Added a story with multiple themes
+
+### Patch Changes
+
+- [`65af058`](https://github.com/reshaped-ui/reshaped/commit/65af0583372cfa27786a15a59d64ba8b36b99a68) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Applied correct text overflow when using equal width items
+
+## 3.8.0-canary.21
+
+### Patch Changes
+
+- [`ff3c392`](https://github.com/reshaped-ui/reshaped/commit/ff3c3925c1b0e78cf830d3f9a3657a5e57e6e995) Thanks [@blvdmitry](https://github.com/blvdmitry)! - updated release process
+
+## 3.8.0-canary.20
+
+### Patch Changes
+
+- [`1dcbf57`](https://github.com/reshaped-ui/reshaped/commit/1dcbf576e0d657de92bd206321e84f48e4d6c720) Thanks [@blvdmitry](https://github.com/blvdmitry)! - updated github releases notes
+
+## 3.8.0-canary.19
+
+### Patch Changes
+
+- [`d4a95e8`](https://github.com/reshaped-ui/reshaped/commit/d4a95e8e966982c71d65b3a9fe2e7fb54c735ee7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - test
+
+## 3.8.0-canary.17
+
+### Patch Changes
+
+- edab409: updated changelog version title
+- fc82110: Added a comment to Aligner
+
+## 3.8.0-canary.16
+
+### Patch Changes
+
+- 0d6e04c: updated changelog version order
+
+## 3.8.0-canary.15
+
+### Patch Changes
+
+- aa75e22: github releases
+
+## 3.8.0-canary.14
+
+### Patch Changes
+
+- 8fb8f3e: switched changelog generation to use changesets cli
+
+## 3.8.0-canary.13
+
+### Features
+
+- **ToggleButton,ToggleButtonGroup:** added selectedColor ([#466](https://github.com/reshaped-ui/reshaped/issues/466)) ([e5987e4](https://github.com/reshaped-ui/reshaped/commit/e5987e454dc8cb2b93c45089b68c07a82ed6ac93))
+- **useKeyboardArrowNavigation:** added new hook ([#465](https://github.com/reshaped-ui/reshaped/issues/465)) ([104947f](https://github.com/reshaped-ui/reshaped/commit/104947f4bd000b1c62964b1b5ebad764e9bc4c7c))
+
+## 3.8.0-canary.12
+
+### Bug Fixes
+
+- **Text:** fixed text css reset ([f6526ef](https://github.com/reshaped-ui/reshaped/commit/f6526ef1865280c93688deacbb2b50f7ecf8b459))
+
+### Features
+
+- **TextField:** startSlotPadding and endSlotPadding support ([#464](https://github.com/reshaped-ui/reshaped/issues/464)) ([2f33180](https://github.com/reshaped-ui/reshaped/commit/2f33180630773ebd119fa65575b2ff6c437d7970))
+
+## 3.8.0-canary.11
+
+### Bug Fixes
+
+- **useOnClickOutside:** removed pointerType check blocking ios17 execution ([2f4ec1d](https://github.com/reshaped-ui/reshaped/commit/2f4ec1d8e3aa53fb7107050950c6895559c41e1e))
+- **useScrollLock:** fixed reset conflict when using container on ios ([#459](https://github.com/reshaped-ui/reshaped/issues/459)) ([d13c364](https://github.com/reshaped-ui/reshaped/commit/d13c364ee719e6a8b78d4f38167d802220b3e9a6))
+
+### Features
+
+- **Flyout:** exposed TriggerAttributes types ([#458](https://github.com/reshaped-ui/reshaped/issues/458)) ([b5230ed](https://github.com/reshaped-ui/reshaped/commit/b5230edecc7aac21a8a866b7f7101e1f87f4a213))
+- **Text:** added low priority css reset for global styles ([#460](https://github.com/reshaped-ui/reshaped/issues/460)) ([04090ec](https://github.com/reshaped-ui/reshaped/commit/04090ec23285e05975a24e0f2e6789d25aa96de1))
+
+## 3.8.0-canary.10
+
+### Bug Fixes
+
+- **useScrollLock:** fixed reset conflict when using container on ios ([#459](https://github.com/reshaped-ui/reshaped/issues/459)) ([d13c364](https://github.com/reshaped-ui/reshaped/commit/d13c364ee719e6a8b78d4f38167d802220b3e9a6))
+
+### Features
+
+- **Flyout:** exposed TriggerAttributes types ([#458](https://github.com/reshaped-ui/reshaped/issues/458)) ([b5230ed](https://github.com/reshaped-ui/reshaped/commit/b5230edecc7aac21a8a866b7f7101e1f87f4a213))
+
+## 3.8.0-canary.9
+
+### Bug Fixes
+
+- updated selector for variable based css utilities ([54174aa](https://github.com/reshaped-ui/reshaped/commit/54174aa522fb0a208f5df60add7c8681274bba18))
+
+## 3.8.0-canary.8
+
+### Bug Fixes
+
+- **Modal, Select, TextField, TextArea:** fixed mobile scrolling and border dimensions ([#457](https://github.com/reshaped-ui/reshaped/issues/457)) ([9b422c9](https://github.com/reshaped-ui/reshaped/commit/9b422c98b6ccaeb5687c7dc961540c459a1b5fab))
+
+### Features
+
+- **Select:** added multiple support ([#453](https://github.com/reshaped-ui/reshaped/issues/453)) ([01eea4a](https://github.com/reshaped-ui/reshaped/commit/01eea4a6b72fc8269f9e7af034a44842267f8119))
+
+## 3.8.0-canary.7
+
+### Bug Fixes
+
+- added child id to all components used in React.Children.map ([179bc06](https://github.com/reshaped-ui/reshaped/commit/179bc06b0c016753de0a92221b711d604101140f))
+
+### Features
+
+- **DropdownMenu:** pass through more menu props to submenu ([9a46c7e](https://github.com/reshaped-ui/reshaped/commit/9a46c7e3a260c560aec795afa73a87b31fc1dd29))
+- **Select:** added custom select support ([d9fa60f](https://github.com/reshaped-ui/reshaped/commit/d9fa60f810abefe18735d23346cb22ba0353e57b))
+- **Select:** added keyboard selection ([3734ba0](https://github.com/reshaped-ui/reshaped/commit/3734ba0b0bb59096b70c63b2ecf16f9ece498f2d))
+- **Stepper:** make gap property configurable ([6a391e4](https://github.com/reshaped-ui/reshaped/commit/6a391e464db6f78e82a08da2afcbd854baf9aefa))
+
+## 3.8.0-canary.6
+
+### Features
+
+- **Flyout, Popover, DropdownMenu, Autocomplete:** added size calculations for fallbackAdjustLayout, added fallbackMinWidth and fallbackMinHeight ([16cbbd0](https://github.com/reshaped-ui/reshaped/commit/16cbbd0a2ee4c081ac836fec821d686af0305a2f))
+- **Flyout, Popover, DropdownMenu, Autocomplete:** added size for fallbackAdjustLayout, fallbackMinWidth and fallbackMinHeight ([a3ef7d0](https://github.com/reshaped-ui/reshaped/commit/a3ef7d0c2b5a258f53c28d764b471db91a5288b6))
+- **Icon:** blank icon support ([40dec33](https://github.com/reshaped-ui/reshaped/commit/40dec336607cae9b6ec3d1acad0458e37f552807))
+
+## 3.8.0-canary.5
+
+### Bug Fixes
+
+- **Modal:** additional fix for the nested closing modals ([9da48ba](https://github.com/reshaped-ui/reshaped/commit/9da48ba42c41af914af9da6748997b7c229f8083))
+
+## 3.8.0-canary.4
+
+### Bug Fixes
+
+- **Modal:** fixed nested modals not closing one by one ([e8af4ed](https://github.com/reshaped-ui/reshaped/commit/e8af4ed80b8eabd1b7e5466fd0be6adb90a9d70f))
+
+## 3.8.0-canary.3
+
+### Features
+
+- **Actionable, Link, Button, MenuItem:** added render prop ([104e594](https://github.com/reshaped-ui/reshaped/commit/104e594dcb086fd9f6a38c8085ebceda8a2ec9cf))
+
+## 3.8.0-canary.2
+
+### Features
+
+- **ToggleButton:** relaxed variant types ([416ddaa](https://github.com/reshaped-ui/reshaped/commit/416ddaa3ebbeed9e12acfdc7e0fb3027943dfbbf))
+
+## 3.8.0-canary.1
+
+### Bug Fixes
+
+- **Flyout:** fixed fallbackAdjustLayout positioning ([eaa9739](https://github.com/reshaped-ui/reshaped/commit/eaa9739bd340a60e942e3689fef46fa3ccd94f31))
+- **PinField:** fixed incorrect overwrite behavior edge case when default value is provided ([8a3d269](https://github.com/reshaped-ui/reshaped/commit/8a3d269fbffad5530669445f2f0c9e107ac93eb0))
+
+### Features
+
+- **flyout:** add shiftIntoView fallback for constrained containers ([7547e9a](https://github.com/reshaped-ui/reshaped/commit/7547e9ad7bd445a49463b60f87d87fcd8eed430b)), closes [#423](https://github.com/reshaped-ui/reshaped/issues/423)
+- **Flyout:** added fallbackAdjustLayout ([88255e4](https://github.com/reshaped-ui/reshaped/commit/88255e47b71e9166db31a5f54239be2ea59c2fb0))
+
+## 3.8.0-canary.0
+
+### Bug Fixes
+
+- **Flyout:** added support for attributes.style ([24a414f](https://github.com/formaat-design/reshaped-source/commit/24a414fa050bd3f6f91d0d0dae37030dd1677aba))
+- **Theme:** added additional check when used without name and there is no parent theme ([3cca4d1](https://github.com/formaat-design/reshaped-source/commit/3cca4d1ea0bb1a33f706bdc74f28f8f955a6a841))
+
+### Features
+
+- **Grid:** added columnGap and rowGap properties ([3aaaea6](https://github.com/formaat-design/reshaped-source/commit/3aaaea66e497636638397b2672e57e5d0a8be9ee))
+- **ProgressIndicator:** updated the dots design and simplified the implementation ([e881361](https://github.com/formaat-design/reshaped-source/commit/e881361880b8d6381f56431078b253a78cec293b))
+- remove chromatic token ([18685a7](https://github.com/formaat-design/reshaped-source/commit/18685a7b100c85094cc64d34a47f605bbb41c580))
+- **Tabs:** removed hover effect from the active tabs ([5708280](https://github.com/formaat-design/reshaped-source/commit/5708280515f164b1b21c8ab5ea84eaadaa7f5379))
+- **themes:** added transform helper to the exports ([ca8dd87](https://github.com/formaat-design/reshaped-source/commit/ca8dd870974920da01b93dfcff16e918080b0125))
+
+## 3.7.4
+
+### Bug Fixes
+
+- **Autocomplete:** correct backspace handling ([c6eb011](https://github.com/formaat-design/reshaped-source/commit/c6eb011f4c8a64aca15997d9194d0b1d12ad2709))
+
+## 3.7.3
+
+### Bug Fixes
+
+- **Tabs:** item equal scroll ([d1ce792](https://github.com/formaat-design/reshaped-source/commit/d1ce792de460092a9381fa61276db30209faf324))
+
+## 3.7.2
+
+### Bug Fixes
+
+- padding fallbacks ([250fa5b](https://github.com/formaat-design/reshaped-source/commit/250fa5be907c81699ff8a9c2e9646c70194183b6))
+
+## 3.8.0
+
+- Added tsdoc for all components
+
+- DropdownMenu: Added support for attributes.style on the content

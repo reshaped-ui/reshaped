@@ -1,0 +1,90 @@
+@layer rs.reset {
+	.root {
+		display: inline-block;
+		vertical-align: top;
+		text-decoration: none;
+		color: inherit;
+		line-height: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		text-align: initial;
+		padding: 0;
+		border: 0;
+		margin: 0;
+		background: none;
+		position: relative;
+		isolation: isolate;
+		-webkit-tap-highlight-color: transparent;
+	}
+}
+
+.touch {
+	position: absolute;
+	inset: 50%;
+	height: 100%;
+	width: 100%;
+	transform: translate(-50%, -50%);
+
+	/* WCAG AA size requirement */
+	min-width: 24px;
+	min-height: 24px;
+}
+
+.root:focus {
+	outline: none;
+}
+
+[data-rs-keyboard] .root {
+	&:focus {
+		outline: none;
+		z-index: var(--rs-z-index-relative);
+		box-shadow: var(--rs-shadow-focus);
+	}
+
+	&.--inset:focus {
+		box-shadow: var(--rs-shadow-focus-inset);
+	}
+
+	&.--disabled-focus-ring:focus {
+		box-shadow: none;
+	}
+
+	&.--radius-inherit {
+		&:focus {
+			box-shadow: none;
+		}
+
+		&:focus > * {
+			box-shadow: var(--rs-shadow-focus);
+		}
+
+		&.--inset:focus > * {
+			box-shadow: var(--rs-shadow-focus-inset);
+		}
+	}
+}
+
+button.root,
+[role="button"].root {
+	cursor: pointer;
+	user-select: none;
+}
+
+/* In case there are hidden inputs rendered inside, automatically apply focus ring */
+[data-rs-keyboard] label.root:has([data-rs-hidden-input]:focus) {
+	z-index: var(--rs-z-index-relative);
+	box-shadow: var(--rs-shadow-focus);
+}
+
+.root.--disabled,
+.root[disabled] {
+	cursor: not-allowed;
+
+	&:active {
+		transform: none;
+	}
+}
+
+.root.--full-width {
+	width: 100%;
+}

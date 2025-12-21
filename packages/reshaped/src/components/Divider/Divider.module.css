@@ -1,0 +1,104 @@
+.root {
+	--rs-divider-color: var(--rs-color-border-neutral-faded);
+	--rs-divider-offset: 0px;
+
+	align-items: center;
+	gap: var(--rs-unit-x2);
+	display: flex;
+	width: 100%;
+	vertical-align: top;
+	padding-block: 0;
+	padding-inline: var(--rs-divider-offset);
+
+	&::before,
+	&::after {
+		flex-grow: 1;
+		height: 1px;
+		background: var(--rs-divider-color);
+	}
+
+	&::before {
+		content: "";
+	}
+}
+
+.--color-neutral {
+	--rs-divider-color: var(--rs-color-border-neutral);
+}
+
+.--blank {
+	/* Display above other position relative elements */
+	position: relative;
+	margin-top: -1px;
+}
+
+@responsive .--vertical {
+	@value true {
+		min-height: 100%;
+		width: auto;
+		display: inline-flex;
+		flex-direction: column;
+		padding-block: var(--rs-divider-offset);
+		padding-inline: 0;
+
+		&::before,
+		&::after {
+			height: auto;
+			width: 1px;
+		}
+
+		&::before {
+			content: "";
+		}
+
+		&::after {
+			content: none;
+		}
+
+		&.--blank {
+			margin-top: 0;
+			margin-inline-start: -1px;
+		}
+
+		& .label {
+			display: none;
+		}
+	}
+
+	@value false {
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-direction: row;
+		padding-block: 0;
+		padding-inline: var(--rs-divider-offset);
+
+		&::before,
+		&::after {
+			height: 1px;
+			width: auto;
+		}
+
+		&.--blank {
+			margin-top: -1px;
+			margin-inline-start: 0;
+		}
+	}
+}
+
+.--content-position-center {
+	&::before,
+	&::after {
+		content: "";
+	}
+}
+
+.--content-position-start {
+	&::before {
+		content: none;
+	}
+
+	&::after {
+		content: "";
+	}
+}

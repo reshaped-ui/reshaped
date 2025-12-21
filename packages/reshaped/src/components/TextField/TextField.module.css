@@ -1,0 +1,230 @@
+.root {
+	/* This variable is only used by Aligner */
+	--rs-p-h: var(--rs-text-field-gap);
+	--rs-text-field-border-color: var(--rs-color-border-neutral);
+	--rs-text-field-focus-border-color: var(--rs-color-border-primary);
+	--rs-text-field-border-width: 1px;
+	--rs-text-field-start-slot-padding: var(--rs-unit-x2);
+	--rs-text-field-end-slot-padding: var(--rs-unit-x1);
+
+	display: flex;
+	align-items: center;
+	position: relative;
+	z-index: 0;
+	background: var(--rs-color-background-elevation-base);
+	border-radius: var(--rs-text-field-radius);
+	padding: 0 var(--rs-text-field-gap);
+	column-gap: var(--rs-text-field-gap);
+	box-shadow: 0 0 0 var(--rs-text-field-border-width) var(--rs-text-field-border-color) inset;
+
+	&:not(
+			:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus, select:focus)
+		):focus-within,
+	&:has(.icon:active),
+	&.--focused {
+		box-shadow: 0 0 0 2px var(--rs-text-field-focus-border-color) inset;
+	}
+
+	&.--multiline {
+		flex-wrap: wrap;
+
+		& .input {
+			width: auto;
+		}
+	}
+
+	&.--rounded {
+		border-radius: var(--rs-radius-circular);
+
+		& .affix:first-child,
+		& .icon:first-child {
+			padding-inline-start: var(--rs-unit-x1);
+		}
+
+		& .input:first-child {
+			padding-inline-start: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
+		}
+	}
+}
+
+.inner {
+	display: inline-flex;
+	flex-grow: 1;
+	column-gap: var(--rs-text-field-gap);
+}
+
+.input {
+	border: none;
+	outline: none;
+	position: relative;
+	z-index: 1;
+	background: none;
+	flex-grow: 1;
+	box-sizing: border-box;
+	width: 100%;
+	color: var(--rs-color-foreground-neutral);
+	margin: 0 calc(var(--rs-text-field-gap) * -1);
+	padding-inline: var(--rs-text-field-gap);
+	padding-block: var(--rs-text-field-p-v);
+	font-weight: var(--rs-font-weight-regular);
+	font-family: var(--rs-font-family-body);
+}
+
+.input:-webkit-autofill {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: var(--rs-color-foreground-neutral);
+}
+
+.input,
+.affix {
+	font-size: var(--rs-text-field-font-size);
+	line-height: var(--rs-text-field-line-height);
+	letter-spacing: var(--rs-text-field-letter-spacing);
+}
+
+.icon {
+	cursor: text;
+}
+
+.slot,
+.icon,
+.affix {
+	max-width: 100%;
+	position: relative;
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	min-height: var(--rs-text-field-attachment-height);
+}
+
+/* Ensure that when wrapping to the new line, end attachments stay in the end */
+.input + .icon--position-end,
+.input + .affix--position-end,
+.input + .slot--position-end {
+	margin-inline-start: auto;
+}
+
+.slot--position-start {
+	margin-inline-start: calc(var(--rs-text-field-start-slot-padding) - var(--rs-text-field-gap));
+}
+
+.slot--position-end {
+	margin-inline-end: calc(var(--rs-text-field-end-slot-padding) - var(--rs-text-field-gap));
+}
+
+.affix {
+	color: var(--rs-color-foreground-neutral-faded);
+
+	&.affix--position-start {
+		padding-inline-end: var(--rs-text-field-gap);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: var(--rs-unit-x1);
+			inset-inline-end: 0;
+			border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
+		}
+	}
+
+	&.affix--position-end {
+		padding-inline-start: var(--rs-text-field-gap);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: var(--rs-unit-x1);
+			inset-inline-start: 0;
+			border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+		}
+	}
+}
+
+.root.--disabled {
+	--rs-text-field-border-color: var(--rs-color-border-disabled);
+
+	background: var(--rs-color-background-disabled-faded);
+
+	&,
+	& .input {
+		color: var(--rs-color-foreground-disabled);
+		cursor: not-allowed;
+	}
+}
+
+@responsive .--size {
+	@value small {
+		--rs-text-field-gap: var(--rs-unit-x2);
+		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-p-v: var(--rs-unit-x1);
+		--rs-text-field-font-size: var(--rs-font-size-body-3);
+		--rs-text-field-line-height: var(--rs-line-height-body-3);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-text-field-action-inset: var(--rs-unit-x1);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x2));
+	}
+
+	@value medium {
+		--rs-text-field-gap: var(--rs-unit-x2);
+		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-p-v: var(--rs-unit-x2);
+		--rs-text-field-font-size: var(--rs-font-size-body-3);
+		--rs-text-field-line-height: var(--rs-line-height-body-3);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-text-field-action-inset: var(--rs-unit-x1);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
+	}
+
+	@value large {
+		--rs-text-field-gap: var(--rs-unit-x3);
+		--rs-text-field-radius: var(--rs-radius-medium);
+		--rs-text-field-p-v: var(--rs-unit-x3);
+		--rs-text-field-font-size: var(--rs-font-size-body-2);
+		--rs-text-field-line-height: var(--rs-line-height-body-2);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-text-field-action-inset: var(--rs-unit-x2);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
+	}
+
+	@value xlarge {
+		--rs-text-field-gap: var(--rs-unit-x4);
+		--rs-text-field-radius: var(--rs-radius-medium);
+		--rs-text-field-p-v: var(--rs-unit-x4);
+		--rs-text-field-font-size: var(--rs-font-size-body-2);
+		--rs-text-field-line-height: var(--rs-line-height-body-2);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-text-field-action-inset: var(--rs-unit-x1);
+		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
+	}
+}
+
+.root.--variant-faded {
+	--rs-text-field-border-color: transparent;
+
+	background: var(--rs-color-background-neutral-faded);
+}
+
+.root.--variant-ghost {
+	--rs-text-field-border-color: transparent;
+
+	background: transparent;
+}
+
+.root.--variant-headless {
+	--rs-text-field-border-color: transparent;
+	--rs-text-field-focus-border-color: transparent;
+
+	background: transparent;
+}
+
+.root.--status-error {
+	--rs-text-field-border-color: var(--rs-color-border-critical);
+	--rs-text-field-border-width: 2px;
+}
+
+@media (--rs-viewport-s) and (hover: none) {
+	.input {
+		font-size: var(--rs-font-size-body-2) !important;
+	}
+}

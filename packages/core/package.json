@@ -1,0 +1,40 @@
+{
+	"name": "@reshaped/core",
+	"description": "Headless utilities and primitives for Reshaped design system",
+	"version": "3.9.0-canary.31",
+	"license": "MIT",
+	"homepage": "https://reshaped.so",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/reshaped-ui/reshaped.git",
+		"directory": "packages/core"
+	},
+	"bugs": {
+		"url": "https://github.com/reshaped-ui/reshaped/issues"
+	},
+	"author": {
+		"name": "Dmitry Belyaev",
+		"email": "blv.dmitry@gmail.com",
+		"url": "https://reshaped.so"
+	},
+	"files": [
+		"dist/**/*"
+	],
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"clean": "rm -rf dist",
+		"build": "pnpm clean && tsc -p tsconfig.json"
+	},
+	"peerDependencies": {
+		"react": "^18 || ^19",
+		"react-dom": "^18 || ^19"
+	}
+}

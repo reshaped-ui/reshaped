@@ -1,0 +1,43 @@
+.root {
+	position: relative;
+
+	/* If we wrap an image to add an otline, we should inherit the parent layout */
+	& .image {
+		height: 100%;
+		width: 100%;
+		border-radius: inherit;
+	}
+}
+
+.image {
+	max-width: 100%;
+	display: block;
+}
+
+.fallback {
+	background: var(--rs-color-background-neutral-faded);
+	color: var(--rs-color-foreground-disabled);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.--outline {
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		pointer-events: none;
+		border: 1px solid var(--rs-color-border-neutral-faded);
+	}
+}
+
+/* Important to override AspectRatio defaults */
+.image--display-mode-cover {
+	object-fit: cover !important;
+}
+
+.image--display-mode-contain {
+	object-fit: scale-down !important;
+}

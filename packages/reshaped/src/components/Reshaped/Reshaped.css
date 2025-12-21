@@ -1,0 +1,138 @@
+@layer rs.reset {
+	[data-rs-theme] {
+		--rs-radius-circular: 9999px;
+		--rs-shadow-focus:
+			0 0 0 2px var(--rs-color-background-elevation-base), 0 0 0 4px var(--rs-color-border-primary);
+		--rs-shadow-focus-inset:
+			inset 0 0 0 2px var(--rs-color-border-primary),
+			inset 0 0 0 4px var(--rs-color-background-elevation-base);
+	}
+
+	[data-rs-theme] body,
+	[data-rs-theme] h1,
+	[data-rs-theme] h2,
+	[data-rs-theme] h3,
+	[data-rs-theme] h4,
+	[data-rs-theme] h5,
+	[data-rs-theme] h6,
+	[data-rs-theme] p,
+	[data-rs-theme] ul,
+	[data-rs-theme] ol,
+	[data-rs-theme] li,
+	[data-rs-theme] figure,
+	[data-rs-theme] figcaption,
+	[data-rs-theme] blockquote,
+	[data-rs-theme] dl,
+	[data-rs-theme] dd {
+		margin: 0;
+		padding: 0;
+	}
+
+	[data-rs-theme] ul[class],
+	[data-rs-theme] ol[class] {
+		list-style: none;
+	}
+
+	[data-rs-theme] textarea {
+		resize: vertical;
+	}
+
+	[data-rs-theme] table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	[data-rs-theme] fieldset {
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	[data-rs-theme] img {
+		max-width: 100%;
+		display: block;
+	}
+
+	[data-rs-theme] input,
+	[data-rs-theme] button,
+	[data-rs-theme] textarea,
+	[data-rs-theme] select {
+		font: inherit;
+	}
+
+	/* 
+	Setting background for Windows browsers that have white background by default 
+	which doesn't work well in dark mode
+	*/
+	[data-rs-theme] option {
+		background: var(--rs-color-background-elevation-base);
+	}
+
+	[data-rs-theme] label {
+		cursor: pointer;
+	}
+
+	[data-rs-theme] textarea::placeholder,
+	[data-rs-theme] input::placeholder {
+		color: var(--rs-color-foreground-disabled);
+	}
+
+	html[data-rs-theme] {
+		/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust */
+		-webkit-text-size-adjust: 100%;
+		-webkit-font-smoothing: antialiased;
+
+		/* https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering */
+		text-rendering: optimizelegibility;
+
+		/* https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action#values */
+		touch-action: manipulation;
+
+		/* Use 14px as base for rem values */
+		font-size: 100%;
+	}
+
+	[data-rs-theme] * {
+		box-sizing: border-box;
+	}
+
+	html[data-rs-theme],
+	[data-rs-theme] body {
+		color: var(--rs-color-foreground-neutral);
+		background: var(--rs-color-background-page);
+		min-height: 100dvh;
+		scroll-behavior: smooth;
+	}
+
+	[data-rs-theme] body,
+	[data-rs-theme]:not(html) {
+		font-size: var(--rs-font-size-body-3);
+		line-height: var(--rs-line-height-body-3);
+		letter-spacing: var(--rs-letter-spacing-body-3);
+		font-family: var(--rs-font-family-body);
+		font-weight: var(--rs-font-weight-regular);
+	}
+}
+
+[data-rs-color-mode="light"] {
+	color-scheme: light;
+}
+
+[data-rs-color-mode="dark"] {
+	color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0s !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0s !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+[data-rs-no-transition] *,
+[data-rs-no-transition] *::before,
+[data-rs-no-transition] *::after {
+	transition: none !important;
+}

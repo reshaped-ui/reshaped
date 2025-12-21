@@ -1,0 +1,131 @@
+.root {
+	--rs-textarea-border-color: var(--rs-color-border-neutral);
+	--rs-textarea-border-width: 1px;
+
+	position: relative;
+	display: grid;
+}
+
+.root::after {
+	content: attr(data-rs-textarea-value) " ";
+	visibility: hidden;
+
+	/* Align with the textarea native behavior */
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	overflow: hidden;
+}
+
+.root::after,
+.input {
+	grid-area: 1 / 1 / 2 / 2;
+	padding: var(--rs-p);
+	font-weight: var(--rs-font-weight-regular);
+	font-family: var(--rs-font-family-body);
+	box-sizing: border-box;
+	flex-grow: 1;
+	width: 100%;
+	border: 0;
+}
+
+.input {
+	outline: none;
+	position: relative;
+	z-index: 1;
+	color: var(--rs-color-foreground-neutral);
+	background: var(--rs-color-background-elevation-base);
+	border-radius: var(--rs-radius-small);
+	box-shadow: 0 0 0 var(--rs-textarea-border-width) var(--rs-textarea-border-color) inset;
+
+	&:focus {
+		box-shadow: 0 0 0 2px var(--rs-color-border-primary) inset;
+	}
+
+	&[disabled] {
+		cursor: not-allowed;
+		color: var(--rs-color-foreground-disabled);
+		background: var(--rs-color-background-disabled-faded);
+		box-shadow: 0 0 0 1px var(--rs-color-border-disabled) inset;
+	}
+}
+
+@responsive .--size {
+	@value medium {
+		--rs-p: var(--rs-unit-x2);
+
+		& .input {
+			border-radius: var(--rs-radius-small);
+			font-size: var(--rs-font-size-body-3);
+			line-height: var(--rs-line-height-body-3);
+			letter-spacing: var(--rs-letter-spacing-body-3);
+		}
+	}
+
+	@value large {
+		--rs-p: var(--rs-unit-x3);
+
+		& .input {
+			border-radius: var(--rs-radius-medium);
+			font-size: var(--rs-font-size-body-2);
+			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
+		}
+	}
+
+	@value xlarge {
+		--rs-p: var(--rs-unit-x4);
+
+		& .input {
+			border-radius: var(--rs-radius-medium);
+			font-size: var(--rs-font-size-body-2);
+			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
+		}
+	}
+}
+
+.root.--variant-faded {
+	--rs-textarea-border-color: transparent;
+
+	& .input {
+		background: var(--rs-color-background-neutral-faded);
+	}
+}
+
+.root.--variant-ghost {
+	--rs-textarea-border-color: transparent;
+
+	& .input {
+		background: transparent;
+	}
+}
+
+.root.--variant-headless {
+	--rs-textarea-border-color: transparent;
+
+	& .input {
+		background: transparent;
+	}
+
+	& .input:focus,
+	&.--status-error .input,
+	&.--status-error .input:focus {
+		box-shadow: none;
+	}
+}
+
+.root.--status-error {
+	--rs-textarea-border-color: var(--rs-color-border-critical);
+	--rs-textarea-border-width: 2px;
+}
+
+.root.--resize-none .input,
+.root.--resize-auto .input {
+	resize: none;
+}
+
+@media (--rs-viewport-s) and (hover: none) {
+	.input {
+		font-size: var(--rs-font-size-body-2) !important;
+	}
+}

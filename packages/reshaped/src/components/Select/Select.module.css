@@ -1,0 +1,220 @@
+.root {
+	display: flex;
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+	background: var(--rs-color-background-elevation-base);
+	border-radius: var(--rs-select-radius);
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		box-shadow: 0 0 0 1px var(--rs-color-border-neutral) inset;
+		border-radius: var(--rs-select-radius);
+	}
+
+	[data-rs-keyboard] &:focus-within {
+		&::after {
+			box-shadow: 0 0 0 2px var(--rs-color-border-primary) inset;
+		}
+	}
+}
+
+.input {
+	display: flex;
+	align-items: center;
+	border: 0;
+	outline: none;
+	position: relative;
+	background: none;
+	z-index: 1;
+	flex-grow: 1;
+	width: 100%;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	appearance: none;
+	cursor: pointer;
+	color: var(--rs-color-foreground-neutral);
+	font-weight: var(--rs-font-weight-regular);
+	font-family: var(--rs-font-family-body);
+	padding-inline-end: calc(
+		var(--rs-select-chevron-size) + var(--rs-select-gap) * 2 + var(--rs-unit-x1)
+	);
+	padding-inline-start: var(--rs-select-gap);
+	text-overflow: ellipsis;
+
+	&::-ms-expand {
+		display: none;
+	}
+
+	&.input--placeholder {
+		color: var(--rs-color-foreground-disabled);
+	}
+}
+
+.slot {
+	position: relative;
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	padding-inline-start: var(--rs-select-gap);
+}
+
+/* Custom trigger with slot rendered inside trigger */
+.input .slot {
+	padding-inline-start: 0;
+	padding-inline-end: var(--rs-select-gap);
+}
+
+.arrow {
+	color: var(--rs-color-foreground-neutral-faded);
+	display: flex;
+	inset-block-start: 50%;
+	inset-inline-end: var(--rs-select-gap);
+	pointer-events: none;
+	position: absolute;
+	transform: translateY(-50%);
+	z-index: 5;
+}
+
+.group {
+	--rs-select-group-padding: calc(var(--rs-unit-x1) - 1px);
+
+	margin-inline: calc((var(--rs-select-group-padding) * -1));
+	padding-inline: var(--rs-select-group-padding);
+
+	&:not(:first-child) {
+		border-top: 1px solid var(--rs-color-border-neutral-faded);
+		margin-top: var(--rs-select-group-padding);
+		padding-top: var(--rs-select-group-padding);
+
+		& .group-label {
+			padding-top: var(--rs-unit-x3);
+		}
+	}
+}
+
+.group-label {
+	padding: var(--rs-unit-x2) var(--rs-unit-x3) var(--rs-unit-x1);
+}
+
+@responsive .--size {
+	@value small {
+		--rs-select-gap: var(--rs-unit-x2);
+		--rs-select-chevron-size: var(--rs-unit-x4);
+		--rs-select-radius: var(--rs-radius-small);
+
+		& .input {
+			padding-block: var(--rs-unit-x1);
+			font-size: var(--rs-font-size-body-3);
+			line-height: var(--rs-line-height-body-3);
+			letter-spacing: var(--rs-letter-spacing-body-3);
+		}
+	}
+
+	@value medium {
+		--rs-select-gap: var(--rs-unit-x2);
+		--rs-select-chevron-size: var(--rs-unit-x4);
+		--rs-select-radius: var(--rs-radius-small);
+
+		& .input {
+			padding-block: var(--rs-unit-x2);
+			font-size: var(--rs-font-size-body-3);
+			line-height: var(--rs-line-height-body-3);
+			letter-spacing: var(--rs-letter-spacing-body-3);
+		}
+	}
+
+	@value large {
+		--rs-select-gap: var(--rs-unit-x3);
+		--rs-select-chevron-size: var(--rs-unit-x5);
+		--rs-select-radius: var(--rs-radius-medium);
+
+		& .input {
+			padding-block: var(--rs-unit-x3);
+			font-size: var(--rs-font-size-body-2);
+			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
+		}
+	}
+
+	@value xlarge {
+		--rs-select-gap: var(--rs-unit-x4);
+		--rs-select-chevron-size: var(--rs-unit-x5);
+		--rs-select-radius: var(--rs-radius-medium);
+
+		& .input {
+			padding-block: var(--rs-unit-x4);
+			font-size: var(--rs-font-size-body-2);
+			line-height: var(--rs-line-height-body-2);
+			letter-spacing: var(--rs-letter-spacing-body-2);
+		}
+	}
+}
+
+.root.--variant-faded {
+	background: var(--rs-color-background-neutral-faded);
+
+	&::after {
+		box-shadow: none;
+	}
+
+	&:focus-within {
+		border-color: var(--rs-color-border-primary);
+	}
+}
+
+.root.--variant-ghost,
+.root.--variant-headless {
+	background: transparent;
+
+	&::after {
+		box-shadow: none;
+	}
+
+	&:focus-within,
+	&.--status-error,
+	&.--status-error:focus-within {
+		border-color: transparent;
+	}
+}
+
+.root.--variant-headless {
+	&:focus-within,
+	&.--status-error,
+	&.--status-error:focus-within {
+		&::after {
+			box-shadow: none;
+		}
+	}
+}
+
+.root.--status-error {
+	&::after {
+		box-shadow: 0 0 0 2px var(--rs-color-border-critical) inset;
+	}
+}
+
+.root.--disabled {
+	background: var(--rs-color-background-disabled-faded);
+	border-color: var(--rs-color-border-disabled);
+
+	&::after {
+		box-shadow: 0 0 0 1px var(--rs-color-border-disabled) inset;
+	}
+
+	& .input,
+	& .arrow {
+		cursor: not-allowed;
+		color: var(--rs-color-foreground-disabled);
+	}
+}
+
+@media (--rs-viewport-s) and (hover: none) {
+	.input {
+		font-size: var(--rs-font-size-body-2) !important;
+	}
+}

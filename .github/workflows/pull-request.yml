@@ -70,6 +70,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Cache dependencies
         uses: actions/cache@v4
         id: cache
@@ -109,6 +112,9 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Lint CSS and JS code
         run: pnpm lint
@@ -151,7 +157,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Build the project
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
         run: pnpm build
 
   test-browser:
@@ -194,6 +203,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Run tests
         run: pnpm test:browser --shard ${{ matrix.shard }}
 
@@ -224,6 +236,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Run tests
         run: pnpm test:unit
 
@@ -253,6 +268,9 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Test bundle size
         uses: andresz1/size-limit-action@v1.8.0

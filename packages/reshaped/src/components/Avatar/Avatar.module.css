@@ -1,0 +1,33 @@
+.root {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	/* Depends on getHeightStyles */
+	font-size: calc(var(--rs-h) / 3);
+	font-weight: var(--rs-font-weight-bold);
+	aspect-ratio: 1;
+	line-height: 100%;
+}
+
+.--variant-faded {
+	&.--color-neutral {
+		color: var(--rs-color-foreground-neutral);
+	}
+
+	&.--color-critical {
+		color: var(--rs-color-foreground-critical);
+	}
+
+	&.--color-positive {
+		color: var(--rs-color-foreground-positive);
+	}
+
+	&.--color-warning {
+		color: var(--rs-color-foreground-warning);
+	}
+
+	&.--color-primary {
+		color: var(--rs-color-foreground-primary);
+	}
+}

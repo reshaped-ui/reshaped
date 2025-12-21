@@ -1,0 +1,74 @@
+.root {
+	--rs-scrim-gradient-padding: calc(var(--rs-unit-x1) * 16);
+	--rs-scrim-gradient:
+		rgba(var(--rs-color-rgb-black), 0%), rgba(var(--rs-color-rgb-black), 0.52%),
+		rgba(var(--rs-color-rgb-black), 2.13%), rgba(var(--rs-color-rgb-black), 4.9%),
+		rgba(var(--rs-color-rgb-black), 8.84%), rgba(var(--rs-color-rgb-black), 13.91%),
+		rgba(var(--rs-color-rgb-black), 19.91%), rgba(var(--rs-color-rgb-black), 26.56%),
+		rgba(var(--rs-color-rgb-black), 33.44%), rgba(var(--rs-color-rgb-black), 40.09%),
+		rgba(var(--rs-color-rgb-black), 46.09%), rgba(var(--rs-color-rgb-black), 51.16%),
+		rgba(var(--rs-color-rgb-black), 55.1%), rgba(var(--rs-color-rgb-black), 57.87%),
+		rgba(var(--rs-color-rgb-black), 59.48%), rgba(var(--rs-color-rgb-black), 60%);
+
+	pointer-events: none;
+}
+
+.scrim {
+	color: var(--rs-color-white);
+	position: absolute;
+	inset: 0;
+
+	/*
+    Turn on GPU acceleration for handling events on underlying elements properly
+    Example: Media slider scrolling with css snapping
+    */
+	transform: translateZ(0);
+}
+
+.--position-cover .scrim {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.--position-cover .scrim::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-color: var(--rs-color-black);
+	opacity: 0.5;
+}
+
+.--position-top .scrim {
+	inset-block-end: auto;
+	background: linear-gradient(to top, var(--rs-scrim-gradient));
+	padding-block-end: var(--rs-scrim-gradient-padding);
+}
+
+.--position-bottom .scrim {
+	inset-block-start: auto;
+	background: linear-gradient(to bottom, var(--rs-scrim-gradient));
+	padding-block-start: var(--rs-scrim-gradient-padding);
+}
+
+.--position-start .scrim {
+	width: auto;
+	inset-inline-end: auto;
+	background: linear-gradient(to left, var(--rs-scrim-gradient));
+	padding-inline-end: var(--rs-scrim-gradient-padding);
+
+	[dir="rtl"] & {
+		background: linear-gradient(to right, var(--rs-scrim-gradient));
+	}
+}
+
+.--position-end .scrim {
+	width: auto;
+	inset-inline-start: auto;
+	background: linear-gradient(to right, var(--rs-scrim-gradient));
+	padding-inline-start: var(--rs-scrim-gradient-padding);
+
+	[dir="rtl"] & {
+		background: linear-gradient(to left, var(--rs-scrim-gradient));
+	}
+}

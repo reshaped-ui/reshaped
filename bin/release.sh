@@ -78,12 +78,21 @@ git commit -m 'chore: release'
 
 git push
 
+print_status "Checking npm authentication"
+if ! npm whoami &>/dev/null; then
+    print_status "Authenticating with npm (will open browser for passkey)"
+    npm login --auth-type=web
+else
+    print_success "Already authenticated with npm"
+fi
+
+print_status "Publishing packages"
 pnpm changeset publish
 
 git push --tags
 
 echo
 print_success "Release completed successfully!"
-echo "${GREEN}📦 Package published to npm${NC}"
+echo "${GREEN}📦 Packages published to npm${NC}"
 echo "${GREEN}🏷️ Tags pushed to git${NC}"
 echo "${GREEN}📝 Changelog updated${NC}"

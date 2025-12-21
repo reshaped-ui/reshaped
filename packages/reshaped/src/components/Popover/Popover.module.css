@@ -1,0 +1,37 @@
+.content {
+	--rs-border-w: 1px;
+
+	max-width: 360px;
+	border: var(--rs-border-w) solid var(--rs-color-border-neutral-faded);
+	border-radius: var(--rs-radius-medium);
+}
+
+.content--variant-elevated {
+	background: var(--rs-color-background-elevation-overlay);
+	color: var(--rs-color-foreground-neutral);
+	box-shadow: var(--rs-shadow-overlay);
+	min-width: 220px;
+}
+
+.content--variant-elevated.content--elevation-raised {
+	box-shadow: var(--rs-shadow-raised);
+}
+
+.content--variant-headless {
+	border: none;
+}
+
+.content--radius-small {
+	border-radius: var(--rs-radius-small);
+}
+
+.content.content--has-width {
+	max-width: none;
+	min-width: 0;
+}
+
+@media (--rs-viewport-s) {
+	.content {
+		max-width: none;
+	}
+}

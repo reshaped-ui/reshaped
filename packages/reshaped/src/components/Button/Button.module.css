@@ -1,0 +1,447 @@
+/*
+- Button overflow shouldn't be hidden to make sure the button group separators are visible
+*/
+
+.root {
+	/* Using --rs-button-p and --rs-p to dynamically reasign --rs-p for all sizes of ghost buttons */
+	--rs-p-v: var(--rs-button-p-v);
+	--rs-p-h: var(--rs-button-p-h);
+	--rs-button-highlight-opacity: 0;
+	--rs-button-highlight-opacity-base: 0;
+	--rs-button-border-color: transparent;
+	--rs-button-border-width: 0px;
+
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: background-color, box-shadow, border-color, color, transform;
+	padding: calc(var(--rs-unit-x1) - var(--rs-button-border-width))
+		calc(var(--rs-p-h) - var(--rs-button-border-width));
+	border-radius: var(--rs-button-radius);
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
+	text-align: initial;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	border: var(--rs-button-border-width) solid var(--rs-button-border-color);
+	-webkit-tap-highlight-color: transparent;
+	font-family: var(--rs-font-family-body);
+	font-weight: var(--rs-font-weight-medium);
+	font-size: var(--rs-button-font-size);
+	line-height: var(--rs-button-line-height);
+	letter-spacing: var(--rs-button-letter-spacing);
+	box-sizing: border-box;
+	min-height: calc(var(--rs-button-line-height) + var(--rs-p-v) * 2);
+	min-width: calc(
+		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
+	);
+	background-color: var(--rs-button-background-color);
+	color: var(--rs-button-foreground-color);
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: opacity, background-color;
+		opacity: var(--rs-button-highlight-opacity-base);
+		border-radius: var(--rs-button-radius);
+
+		/* Use highlight based on the text color with an ability to override it */
+		background: var(--rs-button-highlight-color, var(--rs-button-foreground-color));
+
+		/* Avoid edge cases when hovering causes icons to jump in Safari */
+		transform: translateZ(0);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover:not(.--loading, .--highlighted, .--disabled)::before {
+			opacity: var(--rs-button-highlight-opacity);
+		}
+	}
+
+	&.--highlighted::before,
+	&:active:not(.--loading, .--disabled)::before {
+		opacity: calc(
+			var(--rs-button-highlight-opacity) + max(0.04, var(--rs-button-highlight-opacity) / 2)
+		);
+	}
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	gap: var(--rs-button-gap);
+}
+
+.icon {
+	/* Starts with 1x and then grows based on the padding size */
+	margin-inline-end: var(--rs-button-gap);
+
+	/* Icon only */
+	&:last-child {
+		margin-inline-end: 0;
+	}
+
+	&.--icon-position-end {
+		margin-inline-end: 0;
+		margin-inline-start: var(--rs-button-gap);
+	}
+}
+
+.text,
+.icon {
+	position: relative;
+	z-index: 5;
+}
+
+.loader {
+	position: absolute;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+.root.--icon-only {
+	/* Reduce the padding to make sure the button keeps the square shape */
+	--rs-p-h: calc(var(--rs-button-p-h) - var(--rs-unit-x1) / 2);
+}
+
+.root.--loading {
+	cursor: default;
+
+	& .text,
+	& .icon {
+		visibility: hidden;
+	}
+
+	& .loader {
+		display: flex;
+	}
+}
+
+.root.--rounded {
+	&,
+	&::before {
+		border-radius: var(--rs-radius-circular);
+	}
+}
+
+@responsive .--size {
+	@value small {
+		--rs-button-p-v: var(--rs-unit-x1);
+		--rs-button-p-h: var(--rs-unit-x2);
+		--rs-button-gap: var(--rs-unit-x1);
+		--rs-button-line-height: var(--rs-line-height-body-3);
+		--rs-button-font-size: var(--rs-font-size-body-3);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-button-radius: var(--rs-radius-small);
+	}
+
+	@value medium {
+		--rs-button-p-v: var(--rs-unit-x2);
+		--rs-button-p-h: var(--rs-unit-x3);
+		--rs-button-gap: var(--rs-unit-x2);
+		--rs-button-line-height: var(--rs-line-height-body-3);
+		--rs-button-font-size: var(--rs-font-size-body-3);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-button-radius: var(--rs-radius-small);
+	}
+
+	@value large {
+		--rs-button-p-v: var(--rs-unit-x3);
+		--rs-button-p-h: var(--rs-unit-x4);
+		--rs-button-gap: var(--rs-unit-x2);
+		--rs-button-line-height: var(--rs-line-height-body-2);
+		--rs-button-font-size: var(--rs-font-size-body-2);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-button-radius: var(--rs-radius-medium);
+	}
+
+	@value xlarge {
+		--rs-button-p-v: var(--rs-unit-x4);
+		--rs-button-p-h: var(--rs-unit-x5);
+		--rs-button-gap: var(--rs-unit-x3);
+		--rs-button-line-height: var(--rs-line-height-body-2);
+		--rs-button-font-size: var(--rs-font-size-body-2);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-button-radius: var(--rs-radius-medium);
+	}
+}
+
+@responsive .--full-width {
+	@value true {
+		width: 100%;
+		text-align: center;
+	}
+
+	@value false {
+		width: auto;
+		text-align: initial;
+	}
+}
+
+.root.--variant-solid {
+	&.--color-neutral {
+		--rs-button-highlight-opacity: 0.04;
+		--rs-button-background-color: var(--rs-color-background-neutral);
+		--rs-button-foreground-color: var(--rs-color-on-background-neutral);
+	}
+
+	@each $color in primary, critical, positive {
+		&.--color-$(color) {
+			--rs-button-highlight-opacity: 0.08;
+			--rs-button-background-color: var(--rs-color-background-$(color));
+			--rs-button-foreground-color: var(--rs-color-on-background-$(color));
+		}
+	}
+
+	&.--color-media {
+		--rs-button-highlight-opacity: 0.06;
+		--rs-button-background-color: var(--rs-color-white);
+		--rs-button-foreground-color: var(--rs-color-black);
+	}
+}
+
+.root.--variant-faded {
+	@each $color in neutral, primary, critical, positive {
+		&.--color-$(color) {
+			--rs-button-highlight-opacity: 0.04;
+			--rs-button-background-color: var(--rs-color-background-$(color)-faded);
+			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
+		}
+	}
+
+	&.--color-media {
+		--rs-button-highlight-opacity-base: 0.24;
+		--rs-button-highlight-opacity: 0.32;
+		--rs-button-foreground-color: var(--rs-color-white);
+		--rs-button-highlight-color: var(--rs-color-black);
+	}
+
+	&.--color-inherit {
+		--rs-button-highlight-opacity-base: 0.12;
+		--rs-button-highlight-opacity: 0.16;
+		--rs-button-foreground-color: inherit;
+		--rs-button-highlight-color: currentcolor;
+	}
+}
+
+.root.--variant-outline {
+	--rs-button-border-width: 1px;
+	--rs-button-highlight-opacity: 0.06;
+
+	@each $color in primary, critical, positive {
+		&.--color-$(color) {
+			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
+			--rs-button-border-color: var(--rs-color-border-$(color)-faded);
+			--rs-button-highlight-color: var(--rs-color-background-$(color));
+		}
+	}
+
+	&.--color-neutral {
+		--rs-button-highlight-opacity: 0.24;
+		--rs-button-foreground-color: var(--rs-color-foreground-neutral);
+		--rs-button-border-color: var(--rs-color-border-neutral);
+		--rs-button-highlight-color: var(--rs-color-background-neutral);
+	}
+
+	&.--color-inherit {
+		--rs-button-border-width: 0px;
+		--rs-button-foreground-color: inherit;
+		--rs-button-highlight-color: currentcolor;
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			border: 1px solid currentcolor;
+			border-radius: var(--rs-button-radius);
+			opacity: 0.28;
+		}
+	}
+}
+
+.root.--variant-ghost {
+	--rs-button-highlight-opacity: 0.12;
+
+	&.--color-neutral {
+		--rs-button-highlight-opacity: 0.32;
+	}
+
+	@each $color in neutral, primary, critical, positive {
+		&.--color-$(color) {
+			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
+			--rs-button-highlight-color: var(--rs-color-background-$(color));
+		}
+	}
+
+	&.--color-inherit {
+		--rs-button-foreground-color: inherit;
+		--rs-button-highlight-color: currentcolor;
+	}
+}
+
+.root.--elevated {
+	[data-rs-keyboard] &:not(:focus),
+	&:not(:focus) {
+		box-shadow: var(--rs-shadow-raised);
+	}
+
+	&.--variant-outline {
+		&.--color-neutral,
+		&.--color-primary,
+		&.--color-critical,
+		&.--color-positive {
+			background: var(--rs-color-background-elevation-raised);
+		}
+	}
+}
+
+.root.--disabled {
+	&.--color-neutral,
+	&.--color-primary,
+	&.--color-positive,
+	&.--color-critical,
+	&.--color-inherit {
+		&,
+		&:hover,
+		&:active,
+		&.--highlighted {
+			color: var(--rs-color-foreground-disabled) !important;
+			border-color: var(--rs-color-border-disabled) !important;
+			background-color: var(--rs-color-background-disabled) !important;
+
+			&::before {
+				opacity: 0 !important;
+			}
+
+			&.--variant-faded {
+				background-color: var(--rs-color-background-disabled-faded) !important;
+			}
+
+			&.--variant-outline {
+				background-color: transparent !important;
+			}
+
+			&.--variant-ghost {
+				background-color: transparent !important;
+				border-color: transparent !important;
+			}
+		}
+	}
+
+	&.--color-media {
+		&,
+		&:hover,
+		&:active,
+		&.--highlighted {
+			opacity: 0.4 !important;
+		}
+	}
+}
+
+/* Button group */
+
+.group {
+	display: flex;
+}
+
+.group .root {
+	flex-shrink: 0;
+	width: auto;
+
+	&,
+	&::before {
+		border-radius: 0;
+	}
+
+	&:first-child {
+		&,
+		&::before {
+			border-start-start-radius: var(--rs-button-radius);
+			border-end-start-radius: var(--rs-button-radius);
+		}
+	}
+
+	&:last-child {
+		&,
+		&::before {
+			border-start-end-radius: var(--rs-button-radius);
+			border-end-end-radius: var(--rs-button-radius);
+		}
+	}
+
+	&:not(:first-child) {
+		border-inline-start: 1px solid var(--rs-button-group-separator-color);
+	}
+
+	&:not(:last-child) {
+		border-inline-end: 0;
+		border-inline-end: 0 solid var(--rs-button-group-separator-color);
+	}
+
+	&.--highlighted:not(:last-child) {
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: 0;
+			inset-inline-end: -1px;
+			pointer-events: none;
+			border-inline-end: 1px solid var(--rs-button-group-separator-color);
+		}
+
+		& + .root {
+			border-inline-start-width: 0;
+
+			/* there is no border so increasing the padding by 1px */
+			padding-inline-start: var(--rs-p-h);
+		}
+	}
+
+	@each $color in neutral, positive, critical, primary {
+		&.--variant-solid.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color));
+		}
+	}
+
+	&.--variant-faded.--color-neutral,
+	&.--variant-outline.--color-neutral {
+		--rs-button-group-separator-color: var(--rs-color-border-neutral);
+	}
+
+	@each $color in positive, critical, primary {
+		&.--variant-outline.--color-$(color),
+		&.--variant-faded.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
+		}
+	}
+
+	@each $color in neutral, positive, critical, primary {
+		&.--variant-ghost.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
+		}
+	}
+
+	&.--variant-solid.--color-media {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.12);
+	}
+
+	&.--variant-faded.--color-media {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
+	}
+
+	&.--full-width {
+		flex-grow: 1;
+	}
+}
+
+/* Button aligner */
+
+/* Prevent buttons inside the aligned from adding parent line-height */
+.aligner {
+	line-height: 0;
+}

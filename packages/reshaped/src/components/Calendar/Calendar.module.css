@@ -1,0 +1,94 @@
+.selection {
+	table-layout: fixed;
+	width: 100%;
+}
+
+.weekday {
+	color: var(--rs-color-foreground-neutral-faded);
+	font-weight: var(--rs-font-weight-regular);
+	padding-bottom: var(--rs-unit-x2);
+}
+
+[dir="rtl"] .control {
+	transform: scaleX(-1);
+}
+
+.cell {
+	padding: 2px;
+	isolation: isolate;
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover .cell-button {
+			background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+		}
+	}
+
+	&.--active .cell-button {
+		color: var(--rs-color-on-background-primary);
+		background-color: var(--rs-color-background-primary);
+	}
+
+	&.--selection-range .cell-button {
+		color: var(--rs-color-foreground-neutral);
+		background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+	}
+
+	&.--selection-range:not(:last-child),
+	&.--selection-start:not(:last-child) {
+		& .cell-button {
+			border-start-end-radius: 0;
+			border-end-end-radius: 0;
+		}
+	}
+
+	&.--selection-range + :hover,
+	&.--selection-start + :hover,
+	&.--selection-range:not(:first-child),
+	&.--selection-end:not(:first-child) {
+		& .cell-button {
+			border-start-start-radius: 0;
+			border-end-start-radius: 0;
+		}
+	}
+
+	&.--selection-start + .--selection-range,
+	&.--selection-range + .--selection-range,
+	&.--selection-range + .--selection-end {
+		& .cell-button::before {
+			background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&.--selection-range + :hover,
+		&.--selection-start + :hover {
+			& .cell-button::before {
+				background-color: rgba(var(--rs-color-rgb-background-neutral), 32%);
+			}
+		}
+	}
+}
+
+.cell-button {
+	border-radius: var(--rs-radius-small);
+	padding: var(--rs-unit-x2);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: color, background-color, border-radius;
+	text-align: center;
+	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset-block: 0;
+		width: 4px;
+		inset-inline-start: -4px;
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: background-color;
+	}
+}
+
+.cell-button[disabled] {
+	color: var(--rs-color-foreground-disabled) !important;
+	background-color: transparent !important;
+}

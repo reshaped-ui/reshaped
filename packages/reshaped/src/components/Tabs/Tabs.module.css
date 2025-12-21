@@ -1,0 +1,460 @@
+@property --rs-tabs-mid-l {
+	syntax: "<length>";
+	initial-value: -24px;
+	inherits: false;
+}
+
+@property --rs-tabs-stop-l {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+
+@property --rs-tabs-stop-r {
+	syntax: "<length-percentage>";
+	initial-value: 100%;
+	inherits: false;
+}
+
+@property --rs-tabs-mid-r {
+	syntax: "<length-percentage>";
+	initial-value: calc(100% + 24px);
+	inherits: false;
+}
+
+.root {
+	--rs-tabs-gap: var(--rs-unit-x6);
+
+	position: relative;
+	isolation: isolate;
+	box-sizing: initial;
+
+	/* 
+	Make sure that tab is not stretching the flex container when is in the middle of other flex children
+	Example is available in View.stories 
+	*/
+	max-width: 100%;
+}
+
+.inner {
+	&::after {
+		content: "";
+		position: absolute;
+		background-color: var(--rs-color-border-neutral-faded);
+		z-index: 2;
+	}
+}
+
+.list {
+	position: relative;
+	gap: var(--rs-tabs-gap);
+}
+
+.listItem {
+	flex-shrink: 0;
+	position: relative;
+}
+
+.button {
+	--rs-tabs-focus-ring-inset: calc(var(--rs-unit-x2) * -1);
+
+	width: 100%;
+
+	/* 
+	Keep transform working with absolute positioned elements
+	Without z-index actionable goes behind them
+	*/
+	z-index: 1;
+	position: relative;
+
+	/* Highlighting causes background animation to get cut off */
+	-webkit-tap-highlight-color: transparent;
+	border-radius: var(--rs-radius-medium);
+
+	[data-rs-keyboard] &:focus::after {
+		content: "";
+		pointer-events: none;
+		position: absolute;
+		inset: 0;
+		inset-inline: var(--rs-tabs-focus-ring-inset);
+		border-radius: var(--rs-radius-medium);
+		box-shadow: var(--rs-shadow-focus-inset);
+	}
+}
+
+.buttonContent {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	border-radius: var(--rs-radius-medium);
+}
+
+.icon {
+	color: inherit;
+	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
+
+	&:not(:last-child) {
+		margin-inline-end: var(--rs-unit-x2);
+	}
+}
+
+[data-rs-keyboard] .radio:focus + .buttonContent {
+	box-shadow: var(--rs-shadow-focus-inset);
+}
+
+.item {
+	color: var(--rs-color-foreground-neutral);
+
+	&::after {
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+
+		.item--active& {
+			opacity: 1;
+		}
+	}
+
+	&.item--disabled {
+		color: var(--rs-color-foreground-disabled);
+	}
+}
+
+/** If there is no selector, we have disabled the sliding animation and need a simple transition instead */
+.root:not(:has(.selector)) .item::after {
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
+	transition-property: opacity;
+}
+
+.item::after,
+.selector {
+	position: absolute;
+	border-radius: var(--rs-radius-medium);
+	background: var(--rs-color-border-primary);
+	z-index: var(--rs-z-index-relative);
+}
+
+.selector {
+	--rs-tab-selection-x: 0;
+	--rs-tab-selection-y: 0;
+	--rs-tab-selection-scale-x: 0;
+	--rs-tab-selection-scale-y: 0;
+
+	transform-origin: 0 0;
+	transform: translate(calc(var(--rs-tab-selection-x) * 1px), calc(var(--rs-tab-selection-y) * 1px))
+		translateZ(0);
+
+	&.selector--hidden {
+		visibility: hidden;
+	}
+
+	&.selector--animated {
+		transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+		transition-property: transform, height, width;
+		will-change: transform, height, width;
+	}
+}
+
+.control {
+	position: absolute;
+	inset-block: 0;
+	display: none;
+	align-items: center;
+	z-index: var(--rs-z-index-relative);
+	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+	transition-property: opacity, transform;
+	opacity: 0;
+	pointer-events: none;
+
+	&.control--active {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	[dir="rtl"] & {
+		transform: scaleX(-1);
+	}
+
+	&.control--next {
+		inset-inline-end: 0;
+	}
+
+	&.control--prev {
+		inset-inline-start: 0;
+	}
+}
+
+.panel {
+	outline: none;
+
+	[data-rs-keyboard] &:focus {
+		box-shadow: var(--rs-shadow-focus);
+	}
+
+	&.panel--hidden {
+		display: none;
+	}
+}
+
+.--scrollable {
+	& .inner {
+		overflow: auto;
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+		overflow: -moz-scrollbars-none;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+		mask-image: linear-gradient(
+			to right,
+			rgba(0, 0, 0, 0%) 0%,
+			rgba(0, 0, 0, 0%) var(--rs-tabs-mid-l),
+			rgba(0, 0, 0, 100%) var(--rs-tabs-stop-l),
+			rgba(0, 0, 0, 100%) var(--rs-tabs-stop-r),
+			rgba(0, 0, 0, 0%) var(--rs-tabs-mid-r),
+			rgba(0, 0, 0, 0%) 100%
+		);
+		transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+		transition-property: --rs-tabs-stop-l, --rs-tabs-stop-r, --rs-tabs-mid-l, --rs-tabs-mid-r;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+}
+
+.--direction-row {
+	& .inner {
+		white-space: nowrap;
+
+		&::after {
+			height: 1px;
+			bottom: 0;
+			inset-inline: 0;
+		}
+	}
+
+	& .list {
+		display: inline-flex;
+		vertical-align: top;
+		flex-wrap: nowrap;
+		align-items: center;
+	}
+
+	& .item::after {
+		inset-inline: 0;
+		bottom: 0;
+		height: 2px;
+	}
+
+	& .selector {
+		left: 0;
+		bottom: 0;
+		height: 2px;
+		width: calc(var(--rs-tab-selection-scale-x) * 1px);
+	}
+
+	& .button {
+		margin-block: var(--rs-unit-x1);
+		box-sizing: initial;
+	}
+
+	& .buttonContent {
+		justify-content: center;
+		padding: var(--rs-tabs-item-p-v) 0;
+	}
+}
+
+.--direction-column {
+	--rs-tabs-gap: var(--rs-unit-x1);
+
+	& .inner::after {
+		inset-inline-end: 0;
+		inset-block: 0;
+		height: 100%;
+		width: 1px;
+	}
+
+	& .list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	& .item {
+		padding-inline-end: var(--rs-unit-x1);
+	}
+
+	& .item::after {
+		inset-block: 0;
+		inset-inline-end: 0;
+		width: 2px;
+	}
+
+	& .selector {
+		top: 0;
+		width: 2px;
+		inset-inline-end: 0;
+		height: calc(var(--rs-tab-selection-scale-y) * 1px);
+	}
+
+	& .button {
+		--rs-tabs-focus-ring-inset: 0;
+
+		padding: var(--rs-unit-x2);
+		margin-inline-start: calc(var(--rs-unit-x2) * -1);
+		width: calc(100% + var(--rs-unit-x1));
+	}
+
+	& .buttonContent {
+		justify-content: flex-start;
+	}
+}
+
+.--variant-borderless .inner::after,
+.--variant-pills .inner::after,
+.--variant-pills-elevated .inner::after {
+	content: none;
+}
+
+.--variant-pills,
+.--variant-pills-elevated {
+	--rs-tabs-gap: var(--rs-unit-x1);
+
+	& .button {
+		--rs-tabs-focus-ring-inset: 0;
+
+		margin: 0;
+		padding: 0;
+	}
+
+	& .buttonContent {
+		margin: 0;
+		padding: var(--rs-tabs-item-p-v) var(--rs-tabs-item-p-h);
+	}
+
+	& .selector {
+		background-color: var(--rs-color-background-neutral);
+		z-index: 0;
+		width: calc(var(--rs-tab-selection-scale-x) * 1px);
+		height: calc(var(--rs-tab-selection-scale-y) * 1px);
+	}
+
+	& .item::after {
+		background-color: var(--rs-color-background-neutral);
+		z-index: 0;
+	}
+
+	&.--direction-column {
+		& .item::after {
+			width: 100%;
+		}
+
+		& .selector {
+			left: 0;
+		}
+	}
+
+	&.--direction-row {
+		& .item::after {
+			height: 100%;
+		}
+
+		& .selector {
+			top: 0;
+		}
+	}
+}
+
+.--variant-pills {
+	& .item--active::after,
+	& .selector {
+		opacity: 0.6;
+	}
+}
+
+.--variant-pills-elevated {
+	& .list {
+		border-radius: var(--rs-radius-medium);
+		background: var(--rs-color-background-neutral-faded);
+		border: 2px solid transparent;
+	}
+
+	& .buttonContent {
+		padding: calc(var(--rs-tabs-item-p-v) - var(--rs-unit-x1) / 2) var(--rs-tabs-item-p-h);
+	}
+
+	& .item::after,
+	& .selector {
+		background: var(--rs-color-background-elevation-raised);
+		box-shadow: var(--rs-shadow-raised);
+		box-sizing: border-box;
+		border-radius: calc(var(--rs-radius-medium) - 1px);
+	}
+}
+
+.--size-medium {
+	--rs-tabs-item-p-v: var(--rs-unit-x2);
+	--rs-tabs-item-p-h: var(--rs-unit-x3);
+}
+
+.--size-large {
+	--rs-tabs-item-p-v: var(--rs-unit-x3);
+	--rs-tabs-item-p-h: var(--rs-unit-x4);
+}
+
+.--item-width-equal {
+	max-width: none;
+
+	& .inner {
+		flex-wrap: wrap;
+	}
+
+	& .list {
+		display: flex;
+	}
+
+	& .listItem {
+		flex-grow: 1;
+		flex-basis: 0;
+		min-width: 0;
+		margin: 0;
+	}
+
+	& .buttonText {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	& .button {
+		--rs-tabs-focus-ring-inset: 0;
+	}
+}
+
+[dir="rtl"] .--fade-start .inner,
+.--fade-end .inner {
+	--rs-tabs-mid-r: 100%;
+	--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 10);
+}
+
+[dir="rtl"] .--fade-end .inner,
+.--fade-start .inner {
+	--rs-tabs-mid-l: 0px;
+	--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 10);
+}
+
+@media (pointer: fine) {
+	.control {
+		display: flex;
+	}
+
+	[dir="rtl"] .--fade-start .inner,
+	.--fade-end .inner {
+		--rs-tabs-mid-r: calc(100% - var(--rs-unit-x1) * 4);
+		--rs-tabs-stop-r: calc(100% - var(--rs-unit-x1) * 10);
+	}
+
+	[dir="rtl"] .--fade-end .inner,
+	.--fade-start .inner {
+		--rs-tabs-mid-l: calc(var(--rs-unit-x1) * 4);
+		--rs-tabs-stop-l: calc(var(--rs-unit-x1) * 10);
+	}
+}
