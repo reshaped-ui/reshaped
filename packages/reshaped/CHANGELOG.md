@@ -1,5 +1,17 @@
 # reshaped
 
+## 3.9.0-canary.28
+
+### Patch Changes
+
+- [`6c210f4`](https://github.com/reshaped-ui/reshaped/commit/6c210f4e418c330d13a84b6d74cf5bb669dad798) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated reduced motion reset to use correct 0s animation duration
+
+- [`987df81`](https://github.com/reshaped-ui/reshaped/commit/987df81ac6ce2bbec2cbceaf54b377e0c4cfc86c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Added support for keyboard navigation after changing the value with mouse
+
+- [`f59b30a`](https://github.com/reshaped-ui/reshaped/commit/f59b30a90d0cc491e918b7e7bc1bdc5df4e07cae) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Image: Added missing fallback image attributes
+
+- [`8a54d20`](https://github.com/reshaped-ui/reshaped/commit/8a54d20b767053ea208dca9702b77bd8c0ec95c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Reshaped: Moved font theme reset to the reset layer
+
 ## 3.9.0-canary.27
 
 ### Patch Changes

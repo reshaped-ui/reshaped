@@ -2,13 +2,14 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0-canary.26",
-    "reshaped": "3.9.0-canary.26"
+    "@reshaped/core": "3.9.0-canary.27",
+    "reshaped": "3.9.0-canary.27"
   },
   "changesets": [
     "afraid-eyes-guess",
     "big-rules-teach",
     "chilly-snakes-flash",
+    "chubby-papayas-ask",
     "clean-donuts-rescue",
     "clever-pillows-shake",
     "common-suits-tease",
@@ -16,6 +17,7 @@
     "cuddly-hands-fly",
     "dark-coins-sneeze",
     "dirty-kids-fly",
+    "dirty-monkeys-stand",
     "easy-crews-knock",
     "eighty-jars-knock",
     "eleven-otters-bake",
@@ -55,8 +57,10 @@
     "stupid-planets-deliver",
     "sweet-buttons-sink",
     "swift-turtles-relax",
+    "tender-mirrors-act",
     "thin-rocks-hang",
     "thirty-dragons-float",
+    "tricky-bats-clean",
     "violet-nights-punch",
     "wide-lamps-fail",
     "wild-breads-go",
