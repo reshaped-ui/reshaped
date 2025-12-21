@@ -31,7 +31,8 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"build": "pnpm clean && tsc -p tsconfig.json"
+		"build": "pnpm clean && pnpm build:esm",
+		"build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json"
 	},
 	"peerDependencies": {
 		"react": "^18 || ^19",

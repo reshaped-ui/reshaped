@@ -1,0 +1,16 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outDir": "dist",
+		"baseUrl": "./src",
+		"rootDir": "./src",
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"paths": { "*": ["*"] }
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+	]
+}

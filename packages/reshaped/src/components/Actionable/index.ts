@@ -1,2 +1,4 @@
 export { default } from "./Actionable";
-export type { Props as ActionableProps, Ref as ActionableRef } from "./Actionable.types";
+export type { Props as ActionableProps } from "./Actionable.types";
+
+export type { ActionableRef } from "@reshaped/core";
