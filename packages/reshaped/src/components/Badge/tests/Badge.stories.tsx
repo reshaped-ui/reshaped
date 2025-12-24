@@ -1,7 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
-import userEvent from "@testing-library/user-event";
 import React from "react";
-import { expect, fn } from "storybook/test";
+import { expect, fn, userEvent } from "storybook/test";
 
 import Avatar from "components/Avatar";
 import Badge from "components/Badge";
