@@ -1,8 +1,8 @@
 import { expect, test, describe } from "vitest";
 
-import getPositionFallbacks from "utilities/getPositionFallbacks";
+import getPositionFallbacks from "flyout/utilities/getPositionFallbacks";
 
-describe("utilities/getPositionFallbacks", () => {
+describe("flyout/getPositionFallbacks", () => {
 	test("returns original position first for top-start", () => {
 		const result = getPositionFallbacks("top-start");
 		expect(result[0]).toBe("top-start");

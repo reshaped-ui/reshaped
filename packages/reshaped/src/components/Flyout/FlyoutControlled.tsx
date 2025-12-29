@@ -35,7 +35,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		disabled,
 		forcePosition,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		trapFocusMode = "dialog",
 		width,
@@ -119,7 +118,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		container: containerRef?.current,
 		fallbackPositions,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		contentGap,
 		contentShift,
@@ -391,7 +389,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	React.useEffect(() => {
 		if (!isRendered) return;
 
-		const resizeObserver = new ResizeObserver(() => updatePosition({ sync: true }));
+		const resizeObserver = new ResizeObserver(() => updatePosition());
 
 		resizeObserver.observe(document.body);
 		if (triggerElRef.current) resizeObserver.observe(triggerElRef.current);
@@ -401,7 +399,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [updatePosition, triggerElRef, isRendered, flyoutElRef]);
 
 	React.useEffect(() => {
-		updatePosition({ sync: true });
+		updatePosition();
 	}, [isRTL, updatePosition]);
 
 	/**
@@ -412,7 +410,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		() => ({
 			open: handleOpen,
 			close: () => handleClose({}),
-			updatePosition: () => updatePosition({ sync: true }),
+			updatePosition: () => updatePosition(),
 		}),
 		[handleOpen, handleClose, updatePosition]
 	);

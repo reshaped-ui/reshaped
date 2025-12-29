@@ -26,12 +26,7 @@ export type Position = `${YSide}` | `${YSide}-${XSide}` | `${XSide}` | `${XSide}
 export type Width = "trigger" | string;
 export type Options = Pick<
 	BaseProps,
-	| "width"
-	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
-	| "fallbackMinHeight"
-	| "contentGap"
-	| "contentShift"
+	"width" | "fallbackAdjustLayout" | "fallbackMinHeight" | "contentGap" | "contentShift"
 > & {
 	position: Position;
 	fallbackPositions?: Position[];
@@ -118,7 +113,7 @@ type BaseProps = {
 	fallbackPositions?: Position[] | false;
 	/** Adjust the content size and shift its position to fit into the container when none of the fallback positions work */
 	fallbackAdjustLayout?: boolean;
-	/** Minimum width for the content when fallbackAdjustLayout is true */
+	/** @deprecated Minimum width for the content when fallbackAdjustLayout is true */
 	fallbackMinWidth?: string;
 	/** Minimum height for the content when fallbackAdjustLayout is true */
 	fallbackMinHeight?: string;

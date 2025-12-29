@@ -13,7 +13,7 @@ import type * as G from "types/global";
 type FlyoutRenderAction = { type: "render"; payload?: never };
 type FlyoutPositionAction = {
 	type: "position";
-	payload: Pick<T.State, "position"> & { sync?: boolean };
+	payload: Pick<T.State, "position">;
 };
 type FlyoutShowAction = { type: "show"; payload?: never };
 type FlyoutHideAction = { type: "hide"; payload?: never };
@@ -32,7 +32,6 @@ type UseFlyout = (
 		| "position"
 		| "defaultActive"
 		| "fallbackAdjustLayout"
-		| "fallbackMinWidth"
 		| "fallbackMinHeight"
 		| "contentGap"
 		| "contentShift"
@@ -44,7 +43,7 @@ type UseFlyout = (
 		triggerBoundsRef: React.RefObject<DOMRect | G.Coordinates | null>;
 	}
 ) => Pick<T.State, "position" | "status"> & {
-	updatePosition: (options?: { sync?: boolean }) => void;
+	updatePosition: (options?: { fallback?: boolean }) => void;
 	render: () => void;
 	hide: () => void;
 	remove: () => void;
@@ -59,7 +58,7 @@ const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
 		case "position":
 			return {
 				...state,
-				status: action.payload.sync ? state.status : "positioned",
+				status: state.status === "rendered" ? "positioned" : state.status,
 				position: action.payload.position,
 			};
 		case "show":
@@ -83,7 +82,6 @@ const useFlyout: UseFlyout = (args) => {
 		position: defaultPosition = "bottom",
 		fallbackPositions,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		width,
 		container,
@@ -122,7 +120,7 @@ const useFlyout: UseFlyout = (args) => {
 	}, []);
 
 	const updatePosition = React.useCallback(
-		(options?: { sync?: boolean; fallback?: boolean }) => {
+		(options?: { fallback?: boolean }) => {
 			if (!flyoutElRef.current) return;
 
 			const changePositon = options?.fallback !== false;
@@ -134,7 +132,6 @@ const useFlyout: UseFlyout = (args) => {
 				position: changePositon ? defaultPosition : lastUsedPositionRef.current,
 				fallbackPositions: changePositon ? cachedFallbackPositions : [],
 				fallbackAdjustLayout,
-				fallbackMinWidth,
 				fallbackMinHeight,
 				lastUsedPosition: lastUsedPositionRef.current,
 				onPositionChoose: handlePosition,
@@ -147,7 +144,7 @@ const useFlyout: UseFlyout = (args) => {
 			if (nextFlyoutData) {
 				dispatch({
 					type: "position",
-					payload: { ...nextFlyoutData, sync: options?.sync },
+					payload: { ...nextFlyoutData },
 				});
 			}
 		},
@@ -164,7 +161,6 @@ const useFlyout: UseFlyout = (args) => {
 			contentGap,
 			contentShift,
 			handlePosition,
-			fallbackMinWidth,
 			fallbackMinHeight,
 		]
 	);

@@ -1,8 +1,8 @@
 import { expect, test, describe } from "vitest";
 
-import centerBySize from "utilities/centerBySize";
+import centerBySize from "flyout/utilities/centerBySize";
 
-describe("utilities/centerBySize", () => {
+describe("flyout/centerBySize", () => {
 	test("centers even value", () => {
 		expect(centerBySize(100, 50)).toEqual(25);
 	});

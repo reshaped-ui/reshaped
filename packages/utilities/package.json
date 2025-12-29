@@ -1,6 +1,6 @@
 {
-	"name": "@reshaped/flyout",
-	"description": "Headless utility for implementing  Reshaped design system",
+	"name": "@reshaped/utilities",
+	"description": "Vanilla JS utilities for implementing common UI patterns",
 	"version": "3.9.0",
 	"license": "MIT",
 	"homepage": "https://reshaped.so",
@@ -32,7 +32,10 @@
 	"scripts": {
 		"clean": "rm -rf dist",
 		"build": "pnpm clean && tsc -p tsconfig.json",
-    "test:unit": "vitest run --project=unit"
+    "test:unit": "vitest run --project=browser"
+	},
+	"dependencies": {
+		"@reshaped/utilities": "workspace:*"
 	},
 	"peerDependencies": {
 		"react": "^18 || ^19",

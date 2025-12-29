@@ -29,7 +29,6 @@ const flyout = (
 		position,
 		fallbackPositions,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		width,
 		container: passedContainer,
@@ -89,8 +88,7 @@ const flyout = (
 			targetClone.style.width = widthOption || "";
 		}
 
-		const cloneRect = targetClone.getBoundingClientRect();
-		const flyoutBounds = { width: cloneRect.width, height: cloneRect.height };
+		const flyoutBounds = targetClone.getBoundingClientRect();
 
 		return calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
@@ -105,7 +103,6 @@ const flyout = (
 				passedContainer ||
 				(closestFixedContainer !== document.body ? closestFixedContainer : undefined),
 			fallbackAdjustLayout,
-			fallbackMinWidth,
 			fallbackMinHeight,
 		});
 	};

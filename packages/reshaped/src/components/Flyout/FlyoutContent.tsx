@@ -94,7 +94,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 			) {
 				handleClose({});
 			} else {
-				flyout.updatePosition({ sync: true, fallback: false });
+				flyout.updatePosition({ fallback: false });
 			}
 		});
 

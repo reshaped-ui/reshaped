@@ -1,8 +1,8 @@
 import { expect, test, describe } from "vitest";
 
-import getRTLPosition from "utilities/getRTLPosition";
+import getRTLPosition from "flyout/utilities/getRTLPosition";
 
-describe("utilities/getRTLPosition", () => {
+describe("flyout/getRTLPosition", () => {
 	test("keeps top position", () => {
 		expect(getRTLPosition("top")).toEqual("top");
 	});

@@ -1,8 +1,8 @@
 import { expect, test, describe } from "vitest";
 
-import isFullyVisible from "utilities/isFullyVisible";
+import isFullyVisible from "flyout/utilities/isFullyVisible";
 
-describe("utilities/isFullyVisible", () => {
+describe("flyout/isFullyVisible", () => {
 	test("returns true when flyout is fully visible within visual container", () => {
 		const result = isFullyVisible({
 			flyoutBounds: { left: 8, top: 8, width: 50, height: 50 },
