@@ -28,14 +28,13 @@ const applyPosition = (
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 		width,
-		onPosition,
 		lastUsedPosition,
 	} = args;
 	const rtl = isRTL();
 	const contentClone = content.cloneNode(true) as HTMLElement;
 	const triggerBounds = passedTriggerBounds || trigger?.getBoundingClientRect();
 
-	if (!triggerBounds) return;
+	if (!triggerBounds) throw new Error("Trigger bounds are required");
 
 	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
 
@@ -132,9 +131,7 @@ const applyPosition = (
 	// None of the positions fit, use the last used position or the default position
 	if (!calculated) calculated = testPosition(lastUsedPosition ?? position);
 
-	onPosition?.(calculated.position);
 	root.removeChild(contentClone);
-
 	Object.entries(calculated.styles).forEach(([key, value]) => {
 		content.style.setProperty(key, value);
 	});

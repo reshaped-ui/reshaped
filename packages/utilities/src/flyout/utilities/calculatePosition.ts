@@ -12,11 +12,11 @@ type Args = {
 	passedContainer?: HTMLElement | null;
 	position: Position;
 	rtl: boolean;
-	width: Width;
+	width?: Width;
 	contentGap: number;
 	contentShift: number;
-	fallbackAdjustLayout: boolean;
-	fallbackMinHeight: number;
+	fallbackAdjustLayout?: boolean;
+	fallbackMinHeight?: string;
 };
 
 const calculatePosition = (args: Args) => {
@@ -171,10 +171,10 @@ const calculatePosition = (args: Args) => {
 		const updatedOverflow = getOverflow();
 
 		if (updatedOverflow.top > 0) {
-			height = Math.max(fallbackMinHeight ?? 0, flyoutHeight - updatedOverflow.top);
+			height = Math.max(parseInt(fallbackMinHeight ?? "0"), flyoutHeight - updatedOverflow.top);
 			top = top + (flyoutHeight - height);
 		} else if (updatedOverflow.bottom > 0) {
-			height = Math.max(fallbackMinHeight ?? 0, flyoutHeight - updatedOverflow.bottom);
+			height = Math.max(parseInt(fallbackMinHeight ?? "0"), flyoutHeight - updatedOverflow.bottom);
 			if (bottom !== null) bottom = bottom + (flyoutHeight - height);
 		}
 	}

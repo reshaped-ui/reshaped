@@ -5,7 +5,8 @@
 		"baseUrl": "./src",
 		"rootDir": "./src",
 		"module": "ESNext",
-		"moduleResolution": "Node"
+		"moduleResolution": "Node",
+		"paths": { "*": ["*"] }
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist"]

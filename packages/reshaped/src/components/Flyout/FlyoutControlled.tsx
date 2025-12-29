@@ -10,7 +10,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useOnClickOutside from "hooks/useOnClickOutside";
 import useRTL from "hooks/useRTL";
 import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
-import { checkTransitions, onNextFrame } from "utilities/animation";
+import { checkTransitions } from "utilities/animation";
 
 import * as timeouts from "./Flyout.constants";
 import {
@@ -323,8 +323,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [resolvedActive, render, hide, remove, disableHideAnimation, disabled, groupTimeouts]);
 
 	React.useEffect(() => {
-		// Wait after positioning before show is triggered to animate flyout from the right side
-		if (status === "positioned") onNextFrame(() => show());
+		if (status === "rendered") show();
 	}, [status, show]);
 
 	/**

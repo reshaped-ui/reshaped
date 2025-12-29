@@ -12,14 +12,16 @@ export type Options = {
 	container?: HTMLElement | null;
 	triggerBounds: DOMRect | Coordinates | null;
 
-	width: Width;
-	fallbackAdjustLayout: boolean;
-	fallbackMinHeight: number;
-	contentGap: number;
-	contentShift: number;
 	position: Position;
 	fallbackPositions?: Position[];
 
-	onPosition?: (position: Position) => void;
+	width?: Width;
+	fallbackAdjustLayout?: boolean;
+	fallbackMinHeight?: string;
+
+	// TODO: Should be strings?
+	contentGap?: number;
+	contentShift?: number;
+
 	onClose: () => void;
 };

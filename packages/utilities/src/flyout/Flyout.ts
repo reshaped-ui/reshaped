@@ -13,21 +13,22 @@ class Flyout {
 		this.#options = options;
 	}
 
-	update = (options?: { fallback?: boolean }) => {
+	update = (options?: { fallback?: boolean }): ReturnType<typeof applyPosition> => {
 		const result = applyPosition({
 			...this.#options,
 			fallbackPositions: options?.fallback ? this.#options.fallbackPositions : [],
 			lastUsedPosition: this.#lastUsedPosition,
 		});
 
-		if (!result) return;
-
 		this.#lastUsedPosition = result.position;
+		return result;
 	};
 
-	open = () => {
-		this.update();
+	open = (): ReturnType<typeof this.update> => {
+		const result = this.update();
 		this.#addParentScrollHandler();
+
+		return result;
 	};
 
 	close = () => {

@@ -1,29 +1,8 @@
-import React from "react";
-
-import useRTL from "hooks/useRTL";
-
-import flyout from "./utilities/flyout";
+import { Flyout } from "@reshaped/utilities";
+import React, { useEffect } from "react";
 
 import type * as T from "./Flyout.types";
 import type * as G from "types/global";
-
-/**
- * Typings
- */
-type FlyoutRenderAction = { type: "render"; payload?: never };
-type FlyoutPositionAction = {
-	type: "position";
-	payload: Pick<T.State, "position">;
-};
-type FlyoutShowAction = { type: "show"; payload?: never };
-type FlyoutHideAction = { type: "hide"; payload?: never };
-type FlyoutRemoveAction = { type: "remove"; payload?: never };
-type FlyoutAction =
-	| FlyoutRenderAction
-	| FlyoutPositionAction
-	| FlyoutShowAction
-	| FlyoutHideAction
-	| FlyoutRemoveAction;
 
 type UseFlyout = (
 	args: Pick<
@@ -50,31 +29,6 @@ type UseFlyout = (
 	show: () => void;
 };
 
-const flyoutReducer = (state: T.State, action: FlyoutAction): T.State => {
-	switch (action.type) {
-		case "render":
-			// Disable events before it's positioned to avoid mouseleave getting triggered
-			return { ...state, status: "rendered" };
-		case "position":
-			return {
-				...state,
-				status: state.status === "rendered" ? "positioned" : state.status,
-				position: action.payload.position,
-			};
-		case "show":
-			// Checking because we're positioning inside nextAnimationFrame
-			if (state.status !== "positioned") return state;
-			return { ...state, status: "visible" };
-		case "hide":
-			return { ...state, status: "hidden" };
-		case "remove":
-			return { ...state, status: "idle" };
-
-		default:
-			throw new Error("[Reshaped] Invalid flyout reducer type");
-	}
-};
-
 const useFlyout: UseFlyout = (args) => {
 	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, contentShift, ...options } =
 		args;
@@ -86,100 +40,90 @@ const useFlyout: UseFlyout = (args) => {
 		width,
 		container,
 	} = options;
-	const lastUsedPositionRef = React.useRef(defaultPosition);
+	const [status, setStatus] = React.useState<T.State["status"]>("idle");
+	const [position, setPosition] = React.useState<T.Position>(defaultPosition);
+	const flyoutRef = React.useRef<Flyout | null>(null);
 	// Memo the array internally to avoid new arrays triggering useCallback
 	const cachedFallbackPositions = React.useMemo(
 		() => fallbackPositions,
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[fallbackPositions?.join(" ")]
 	);
-	const [isRTL] = useRTL();
-	const [state, dispatch] = React.useReducer(flyoutReducer, {
-		position: defaultPosition,
-		status: "idle",
-	});
 
 	const render = React.useCallback(() => {
-		dispatch({ type: "render" });
+		setStatus("rendered");
 	}, []);
 
 	const show = React.useCallback(() => {
-		dispatch({ type: "show" });
+		if (!flyoutRef.current) return;
+
+		const result = flyoutRef.current.open();
+
+		setPosition(result.position);
+		setStatus("visible");
 	}, []);
 
 	const hide = React.useCallback(() => {
-		dispatch({ type: "hide" });
+		setStatus("hidden");
 	}, []);
 
 	const remove = React.useCallback(() => {
-		dispatch({ type: "remove" });
+		if (!flyoutRef.current) return;
+
+		setStatus("idle");
+		flyoutRef.current.close();
 	}, []);
 
-	const handlePosition = React.useCallback((position: T.Position) => {
-		lastUsedPositionRef.current = position;
+	const updatePosition = React.useCallback((options?: { fallback?: boolean }) => {
+		if (!flyoutRef.current) return;
+
+		const result = flyoutRef.current.update(options);
+		setPosition(result.position);
 	}, []);
 
-	const updatePosition = React.useCallback(
-		(options?: { fallback?: boolean }) => {
-			if (!flyoutElRef.current) return;
+	useEffect(() => {
+		if (!flyoutElRef.current) return;
 
-			const changePositon = options?.fallback !== false;
-			const nextFlyoutData = flyout({
-				triggerEl: triggerElRef.current,
-				flyoutEl: flyoutElRef.current,
-				triggerBounds: triggerBoundsRef.current,
-				width,
-				position: changePositon ? defaultPosition : lastUsedPositionRef.current,
-				fallbackPositions: changePositon ? cachedFallbackPositions : [],
-				fallbackAdjustLayout,
-				fallbackMinHeight,
-				lastUsedPosition: lastUsedPositionRef.current,
-				onPositionChoose: handlePosition,
-				rtl: isRTL,
-				container,
-				contentGap,
-				contentShift,
-			});
-
-			if (nextFlyoutData) {
-				dispatch({
-					type: "position",
-					payload: { ...nextFlyoutData },
-				});
-			}
-		},
-		[
+		flyoutRef.current = new Flyout({
+			trigger: triggerElRef.current,
+			content: flyoutElRef.current,
 			container,
-			defaultPosition,
-			cachedFallbackPositions,
-			fallbackAdjustLayout,
-			isRTL,
-			flyoutElRef,
-			triggerElRef,
-			triggerBoundsRef,
+			triggerBounds: triggerBoundsRef.current,
 			width,
+			position: defaultPosition,
+			fallbackPositions: cachedFallbackPositions,
+			fallbackAdjustLayout,
+			fallbackMinHeight,
+			onClose: hide,
 			contentGap,
 			contentShift,
-			handlePosition,
-			fallbackMinHeight,
-		]
-	);
-
-	React.useEffect(() => {
-		if (state.status === "rendered") updatePosition();
-	}, [state.status, updatePosition]);
+		});
+	}, [
+		cachedFallbackPositions,
+		container,
+		contentGap,
+		contentShift,
+		defaultPosition,
+		fallbackAdjustLayout,
+		fallbackMinHeight,
+		triggerBoundsRef,
+		triggerElRef,
+		width,
+		flyoutElRef,
+		hide,
+	]);
 
 	return React.useMemo(
 		() => ({
-			position: state.position,
-			status: state.status,
+			position,
+			status,
 			updatePosition,
 			render,
 			hide,
 			remove,
 			show,
 		}),
-		[render, updatePosition, hide, remove, show, state.position, state.status]
+		[render, updatePosition, hide, remove, show, position, status]
 	);
 };
 

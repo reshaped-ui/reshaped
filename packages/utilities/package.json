@@ -31,11 +31,8 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"build": "pnpm clean && tsc -p tsconfig.json",
+		"build": "pnpm clean && tsc && resolve-tspaths",
     "test:unit": "vitest run --project=browser"
-	},
-	"dependencies": {
-		"@reshaped/utilities": "workspace:*"
 	},
 	"peerDependencies": {
 		"react": "^18 || ^19",

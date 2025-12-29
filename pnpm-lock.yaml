@@ -191,6 +191,9 @@ importers:
       '@csstools/postcss-global-data':
         specifier: 3.1.0
         version: 3.1.0(postcss@8.5.6)
+      '@reshaped/utilities':
+        specifier: workspace:*
+        version: link:../utilities
       chalk:
         specifier: 4.1.2
         version: 4.1.2
@@ -221,9 +224,6 @@ importers:
 
   packages/utilities:
     dependencies:
-      '@reshaped/utilities':
-        specifier: workspace:*
-        version: 'link:'
       react:
         specifier: ^18 || ^19
         version: 18.3.1

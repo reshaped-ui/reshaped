@@ -38,7 +38,7 @@ export type Options = Pick<
 
 export type State = {
 	position?: Position;
-	status: "idle" | "rendered" | "positioned" | "visible" | "hidden";
+	status: "idle" | "rendered" | "visible" | "hidden";
 };
 
 export type FlyoutData = {
