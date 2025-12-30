@@ -72,6 +72,8 @@ const calculatePosition = (args: Args) => {
 	const relativeTop = triggerBounds.top - containerBounds.top + (containerY || 0);
 	const relativeBottom = containerBoundsBottom - triggerBounds.bottom - (containerY || 0);
 
+	console.log("position", position);
+
 	switch (position) {
 		case "start":
 		case "start-top":
@@ -89,11 +91,13 @@ const calculatePosition = (args: Args) => {
 		case "bottom":
 		case "top":
 			left = relativeLeft + centerBySize(triggerWidth, flyoutWidth) + contentShift;
+			console.log("left", left);
 			break;
 
 		case "top-start":
 		case "bottom-start":
 			left = relativeLeft + contentShift;
+			console.log("left", left);
 			break;
 
 		case "top-end":

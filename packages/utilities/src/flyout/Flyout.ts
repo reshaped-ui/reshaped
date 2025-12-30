@@ -6,37 +6,14 @@ import findClosestScrollableContainer from "./utilities/findClosestScrollableCon
 import type { Position, Options } from "./types";
 
 class Flyout {
+	#active = false;
 	#lastUsedPosition: Position | null = null;
 	#options: Options;
+	#handlerCleanupMap: Record<string, () => void> = {};
 
 	constructor(options: Options) {
 		this.#options = options;
 	}
-
-	update = (options?: { fallback?: boolean }): ReturnType<typeof applyPosition> => {
-		const result = applyPosition({
-			...this.#options,
-			fallbackPositions: options?.fallback ? this.#options.fallbackPositions : [],
-			lastUsedPosition: this.#lastUsedPosition,
-		});
-
-		this.#lastUsedPosition = result.position;
-		return result;
-	};
-
-	open = (): ReturnType<typeof this.update> => {
-		const result = this.update();
-		this.#addParentScrollHandler();
-
-		return result;
-	};
-
-	close = () => {
-		this.#lastUsedPosition = null;
-		this.#removeParentScrollHandler?.();
-	};
-
-	#removeParentScrollHandler: (() => void) | null = null;
 
 	#addParentScrollHandler = () => {
 		const { trigger, onClose } = this.#options;
@@ -47,6 +24,8 @@ class Flyout {
 		if (!container) return;
 
 		const handleScroll = rafThrottle(() => {
+			if (!this.#active) return;
+
 			const triggerBounds = trigger.getBoundingClientRect();
 			const containerBounds = container.getBoundingClientRect();
 
@@ -63,7 +42,71 @@ class Flyout {
 		});
 
 		container.addEventListener("scroll", handleScroll, { passive: true });
-		this.#removeParentScrollHandler = () => container.removeEventListener("scroll", handleScroll);
+		this.#handlerCleanupMap.scroll = () => container.removeEventListener("scroll", handleScroll);
+	};
+
+	#addRTLHandler = () => {
+		const observer = new MutationObserver(() => {
+			if (!this.#active) return;
+			this.update();
+		});
+
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["dir"],
+		});
+
+		this.#handlerCleanupMap.rtl = () => observer.disconnect();
+	};
+
+	#addResizeHandler = () => {
+		const observer = new ResizeObserver(() => {
+			if (!this.#active) return;
+			this.update();
+		});
+
+		observer.observe(document.body);
+		if (this.#options.trigger) observer.observe(this.#options.trigger);
+		if (this.#options.content) observer.observe(this.#options.content);
+
+		this.#handlerCleanupMap.resize = () => observer.disconnect();
+	};
+
+	#removeHandlers = () => {
+		Object.values(this.#handlerCleanupMap).forEach((cleanup) => cleanup());
+		this.#handlerCleanupMap = {};
+	};
+
+	/**
+	 * Public methods
+	 */
+
+	update = (options?: { fallback?: boolean }): ReturnType<typeof applyPosition> => {
+		const result = applyPosition({
+			...this.#options,
+			fallbackPositions: options?.fallback === false ? [] : this.#options.fallbackPositions,
+			lastUsedPosition: this.#lastUsedPosition,
+		});
+
+		this.#lastUsedPosition = result.position;
+		return result;
+	};
+
+	open = (): ReturnType<typeof this.update> => {
+		const result = this.update();
+
+		this.#addParentScrollHandler();
+		this.#addRTLHandler();
+		this.#addResizeHandler();
+		this.#active = true;
+
+		return result;
+	};
+
+	close = () => {
+		this.#lastUsedPosition = null;
+		this.#active = false;
+		this.#removeHandlers();
 	};
 }
 

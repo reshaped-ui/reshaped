@@ -8,7 +8,6 @@ import useHandlerRef from "hooks/useHandlerRef";
 import useHotkeys from "hooks/useHotkeys";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useOnClickOutside from "hooks/useOnClickOutside";
-import useRTL from "hooks/useRTL";
 import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
 import { checkTransitions } from "utilities/animation";
 
@@ -70,7 +69,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		parentFlyoutContext.trapFocusMode === "action-menu" ||
 		parentFlyoutContext.trapFocusMode === "content-menu";
 
-	const [isRTL] = useRTL();
 	const internalTriggerElRef = React.useRef<HTMLButtonElement>(null);
 
 	/**
@@ -92,9 +90,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
-	// Check if transition had enough time to start when opening a flyout
-	// In some cases there is not enough time to start, like when you're holding tab key
-	const transitionStartedRef = React.useRef(false);
 	// Lock blur event while pressing anywhere inside the flyout content
 	const lockedBlurEffects = React.useRef(false);
 	// Focus shouldn't return back to the trigger when user intentionally clicks outside the flyout
@@ -244,12 +239,13 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	);
 
 	const handleTriggerClick = React.useCallback(() => {
+		console.log("handleTriggerClick", isRendered, status);
 		if (!isRendered) {
 			handleOpen();
 		} else {
 			handleClose({});
 		}
-	}, [isRendered, handleOpen, handleClose]);
+	}, [isRendered, handleOpen, handleClose, status]);
 
 	const handleTriggerMouseDown = React.useCallback(() => {
 		const triggerEl = positionRef?.current ?? triggerElRef.current;
@@ -270,7 +266,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		(e: TransitionEvent) => {
 			if (!resolvedActive) return;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			transitionStartedRef.current = true;
 
 			/**
 			 * After animation has started, we're sure about the correct bounds
@@ -284,10 +279,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			if (status === "hidden") {
-				transitionStartedRef.current = false;
-				remove();
-			}
+			if (status === "hidden") remove();
 		},
 		[remove, status]
 	);
@@ -312,7 +304,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (
 			checkTransitions() &&
 			!disableHideAnimation &&
-			transitionStartedRef.current &&
 			(cooldown.status === "cooling" || !groupTimeouts)
 		) {
 			hide();
@@ -381,25 +372,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	React.useEffect(() => {
 		return () => trapFocusRef.current?.release();
 	}, []);
-
-	/**
-	 * Update position on resize or RTL
-	 */
-	React.useEffect(() => {
-		if (!isRendered) return;
-
-		const resizeObserver = new ResizeObserver(() => updatePosition());
-
-		resizeObserver.observe(document.body);
-		if (triggerElRef.current) resizeObserver.observe(triggerElRef.current);
-		if (flyoutElRef.current) resizeObserver.observe(flyoutElRef.current);
-
-		return () => resizeObserver.disconnect();
-	}, [updatePosition, triggerElRef, isRendered, flyoutElRef]);
-
-	React.useEffect(() => {
-		updatePosition();
-	}, [isRTL, updatePosition]);
 
 	/**
 	 * Imperative methods for controlling Flyout

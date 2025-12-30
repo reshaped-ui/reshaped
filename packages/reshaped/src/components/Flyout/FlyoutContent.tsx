@@ -4,8 +4,7 @@ import React from "react";
 
 import Portal from "components/_private/Portal";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import { findClosestPositionContainer, findClosestScrollableContainer } from "utilities/dom";
-import { rafThrottle } from "utilities/helpers";
+import { findClosestPositionContainer } from "utilities/dom";
 import { classNames } from "utilities/props";
 
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
@@ -21,7 +20,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		id,
 		flyoutElRef,
 		triggerElRef,
-		handleClose,
 		handleTransitionEnd,
 		handleTransitionStart,
 		triggerType,
@@ -49,13 +47,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		// eslint-disable-next-line react-hooks/refs
 		return findClosestPositionContainer({ el: triggerElRef.current });
 	}, [mounted, triggerElRef]);
-	const closestScrollableContainer = React.useMemo(() => {
-		if (!mounted) return;
-		// eslint-disable-next-line react-hooks/refs
-		if (!triggerElRef?.current) return;
-		// eslint-disable-next-line react-hooks/refs
-		return findClosestScrollableContainer({ el: triggerElRef.current });
-	}, [mounted, triggerElRef]);
 	const containerRef = passedContainerRef || { current: closestFixedContainer };
 
 	useIsomorphicLayoutEffect(() => {
@@ -72,35 +63,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		el.addEventListener("transitionstart", handleTransitionStart);
 		return () => el.removeEventListener("transitionstart", handleTransitionStart);
 	}, [handleTransitionStart, flyoutElRef, status]);
-
-	React.useEffect(() => {
-		if (status !== "visible") return;
-
-		if (!closestScrollableContainer) return;
-
-		const triggerEl = triggerElRef?.current;
-		const containerEl = closestScrollableContainer;
-
-		const handleScroll = rafThrottle(() => {
-			const triggerBounds = triggerEl?.getBoundingClientRect();
-			const containerBounds = containerEl.getBoundingClientRect();
-
-			if (
-				triggerBounds &&
-				(triggerBounds.top < containerBounds.top ||
-					triggerBounds.left < containerBounds.left ||
-					triggerBounds.right > containerBounds.right ||
-					triggerBounds.bottom > containerBounds.bottom)
-			) {
-				handleClose({});
-			} else {
-				flyout.updatePosition({ fallback: false });
-			}
-		});
-
-		closestScrollableContainer.addEventListener("scroll", handleScroll, { passive: true });
-		return () => closestScrollableContainer.removeEventListener("scroll", handleScroll);
-	}, [closestScrollableContainer, flyout, status, handleClose, triggerElRef]);
 
 	if (status === "idle" || !mounted) return null;
 

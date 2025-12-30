@@ -1,5 +1,5 @@
 import { Flyout } from "@reshaped/utilities";
-import React, { useEffect } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import type * as T from "./Flyout.types";
 import type * as G from "types/global";
@@ -40,48 +40,25 @@ const useFlyout: UseFlyout = (args) => {
 		width,
 		container,
 	} = options;
-	const [status, setStatus] = React.useState<T.State["status"]>("idle");
-	const [position, setPosition] = React.useState<T.Position>(defaultPosition);
-	const flyoutRef = React.useRef<Flyout | null>(null);
+	const [status, setStatus] = useState<T.State["status"]>("idle");
+	const [position, setPosition] = useState<T.Position>(defaultPosition);
+	const flyoutRef = useRef<Flyout | null>(null);
 	// Memo the array internally to avoid new arrays triggering useCallback
-	const cachedFallbackPositions = React.useMemo(
+	const cachedFallbackPositions = useMemo(
 		() => fallbackPositions,
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[fallbackPositions?.join(" ")]
 	);
 
-	const render = React.useCallback(() => {
+	const render = useCallback(() => {
 		setStatus("rendered");
 	}, []);
 
-	const show = React.useCallback(() => {
-		if (!flyoutRef.current) return;
-
-		const result = flyoutRef.current.open();
-
-		setPosition(result.position);
-		setStatus("visible");
-	}, []);
-
-	const hide = React.useCallback(() => {
+	const hide = useCallback(() => {
 		setStatus("hidden");
 	}, []);
 
-	const remove = React.useCallback(() => {
-		if (!flyoutRef.current) return;
-
-		setStatus("idle");
-		flyoutRef.current.close();
-	}, []);
-
-	const updatePosition = React.useCallback((options?: { fallback?: boolean }) => {
-		if (!flyoutRef.current) return;
-
-		const result = flyoutRef.current.update(options);
-		setPosition(result.position);
-	}, []);
-
-	useEffect(() => {
+	const show = useCallback(() => {
 		if (!flyoutElRef.current) return;
 
 		flyoutRef.current = new Flyout({
@@ -98,6 +75,11 @@ const useFlyout: UseFlyout = (args) => {
 			contentGap,
 			contentShift,
 		});
+
+		const result = flyoutRef.current.open();
+
+		setPosition(result.position);
+		setStatus("visible");
 	}, [
 		cachedFallbackPositions,
 		container,
@@ -109,11 +91,25 @@ const useFlyout: UseFlyout = (args) => {
 		triggerBoundsRef,
 		triggerElRef,
 		width,
-		flyoutElRef,
 		hide,
+		flyoutElRef,
 	]);
 
-	return React.useMemo(
+	const remove = useCallback(() => {
+		if (!flyoutRef.current) return;
+
+		flyoutRef.current.close();
+		setStatus("idle");
+	}, []);
+
+	const updatePosition = useCallback((options?: { fallback?: boolean }) => {
+		if (!flyoutRef.current) return;
+
+		const result = flyoutRef.current.update(options);
+		setPosition(result.position);
+	}, []);
+
+	return useMemo(
 		() => ({
 			position,
 			status,

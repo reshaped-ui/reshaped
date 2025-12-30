@@ -34,6 +34,8 @@ const applyPosition = (
 	const contentClone = content.cloneNode(true) as HTMLElement;
 	const triggerBounds = passedTriggerBounds || trigger?.getBoundingClientRect();
 
+	contentClone.style.cssText = "";
+
 	if (!triggerBounds) throw new Error("Trigger bounds are required");
 
 	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
@@ -106,6 +108,8 @@ const applyPosition = (
 	testOrder.some((currentPosition) => {
 		const tested = testPosition(currentPosition);
 		const visible = testVisibility(tested);
+
+		console.log("tested", currentPosition, tested, visible);
 
 		if (visible) calculated = tested;
 

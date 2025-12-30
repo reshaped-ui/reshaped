@@ -8,7 +8,7 @@
 		"url": "https://github.com/reshaped-ui/reshaped.git"
 	},
 	"scripts": {
-		"dev": "storybook dev -p 3001 --disable-telemetry",
+		"dev": "pnpm --filter reshaped run dev",
 		"clean": "pnpm -r run clean",
 		"commit": "git-cz",
 		"changeset": "changeset",
