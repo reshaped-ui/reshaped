@@ -25,7 +25,7 @@ const Portal: React.FC<T.Props> = (props) => {
 	const { children, targetRef } = props;
 	const mountedToggle = useToggle();
 	const rootRef = React.useRef<HTMLDivElement>(null);
-	// eslint-disable-next-line react-hooks/refs
+
 	const rootNode = rootRef.current?.getRootNode();
 	const isShadowDom = rootNode instanceof ShadowRoot;
 	const defaultTargetEl = isShadowDom ? rootNode : document.body;
@@ -39,7 +39,7 @@ const Portal: React.FC<T.Props> = (props) => {
 	 */
 	const portal = usePortalScope();
 	const nextScopeRef = targetRef || portal.scopeRef;
-	// eslint-disable-next-line react-hooks/refs
+
 	const targetEl = nextScopeRef?.current || defaultTargetEl;
 
 	useIsomorphicLayoutEffect(() => {
@@ -49,7 +49,6 @@ const Portal: React.FC<T.Props> = (props) => {
 
 	/* Preserve the current theme when rendered in body */
 	return [
-		// eslint-disable-next-line react-hooks/refs
 		ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl),
 		// Make sure this element doesn't affect components using :last-child when their children use portals
 		!mountedToggle.active && <div ref={rootRef} className={s.root} key="root" />,

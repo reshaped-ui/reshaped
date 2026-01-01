@@ -58,7 +58,6 @@ const Carousel: React.FC<T.Props> = (props) => {
 		// };
 	};
 
-	// eslint-disable-next-line react-hooks/refs
 	const handleScroll = rafThrottle((event: React.UIEvent<HTMLUListElement>) => {
 		const el = event.target as Element;
 		const firstVisibleIndex = getFirstVisibleIndex();

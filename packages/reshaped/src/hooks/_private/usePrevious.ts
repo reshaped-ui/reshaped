@@ -19,7 +19,6 @@ const usePrevious = <T>(value?: T, clean = false) => {
 		ref.current = clean ? copy<T>(value) : value;
 	}, [value, clean]);
 
-	// eslint-disable-next-line react-hooks/refs
 	return ref.current;
 };
 
