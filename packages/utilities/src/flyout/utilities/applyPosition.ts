@@ -19,7 +19,7 @@ const applyPosition = (
 	const {
 		trigger,
 		content,
-		triggerBounds: passedTriggerBounds,
+		triggerCoordinates,
 		container: passedContainer,
 		contentShift = 0,
 		contentGap = 0,
@@ -32,15 +32,13 @@ const applyPosition = (
 	} = args;
 	const rtl = isRTL();
 	const contentClone = content.cloneNode(true) as HTMLElement;
-	const triggerBounds = passedTriggerBounds || trigger?.getBoundingClientRect();
+	const triggerBounds = triggerCoordinates || trigger?.getBoundingClientRect();
 
 	contentClone.style.cssText = "";
 
 	if (!triggerBounds) throw new Error("Trigger bounds are required");
 
-	const resolvedTriggerBounds = getRectFromCoordinates(
-		triggerBounds ?? trigger?.getBoundingClientRect()
-	);
+	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
 
 	Object.keys(RESET_STYLES).forEach((_key) => {
 		const key = _key as keyof typeof RESET_STYLES;

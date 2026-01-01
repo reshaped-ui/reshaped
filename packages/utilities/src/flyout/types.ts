@@ -10,7 +10,7 @@ export type Options = {
 	content: HTMLElement;
 	trigger?: HTMLElement | null;
 	container?: HTMLElement | null;
-	triggerBounds: DOMRect | Coordinates | null;
+	triggerCoordinates: Coordinates | null;
 
 	position: Position;
 	fallbackPositions?: Position[];

@@ -1,6 +1,8 @@
 import { Flyout } from "@reshaped/utilities";
 import { useCallback, useMemo, useRef, useState } from "react";
 
+import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
+
 import type * as T from "./Flyout.types";
 import type * as G from "types/global";
 
@@ -20,7 +22,7 @@ type UseFlyout = (
 		container?: HTMLElement | null;
 		triggerElRef: React.RefObject<HTMLElement | null>;
 		flyoutElRef: React.RefObject<HTMLElement | null>;
-		triggerBoundsRef: React.RefObject<DOMRect | G.Coordinates | null>;
+		triggerCoordinatesRef: React.RefObject<DOMRect | G.Coordinates | null>;
 	}
 ) => Pick<T.State, "position" | "status"> & {
 	updatePosition: (options?: { fallback?: boolean }) => void;
@@ -34,7 +36,7 @@ const useFlyout: UseFlyout = (args) => {
 	const {
 		triggerElRef,
 		flyoutElRef,
-		triggerBoundsRef,
+		triggerCoordinatesRef,
 		contentGap,
 		contentShift,
 		onClose,
@@ -66,7 +68,7 @@ const useFlyout: UseFlyout = (args) => {
 		setStatus("hidden");
 	}, []);
 
-	const show = useCallback(() => {
+	const getFlyoutOptions = useCallback(() => {
 		if (!flyoutElRef.current) return;
 
 		const baseUnit = getComputedStyle(flyoutElRef.current).getPropertyValue("--rs-unit-x1");
@@ -77,11 +79,11 @@ const useFlyout: UseFlyout = (args) => {
 			hide();
 		};
 
-		flyoutRef.current = new Flyout({
+		return {
 			trigger: triggerElRef.current,
 			content: flyoutElRef.current,
 			container,
-			triggerBounds: triggerBoundsRef.current,
+			triggerCoordinates: triggerCoordinatesRef.current,
 			width,
 			position: defaultPosition,
 			fallbackPositions: cachedFallbackPositions,
@@ -90,12 +92,7 @@ const useFlyout: UseFlyout = (args) => {
 			contentGap: (contentGap ?? 0) * unitModifier,
 			contentShift: (contentShift ?? 0) * unitModifier,
 			onClose: handleClose,
-		});
-
-		const result = flyoutRef.current.open();
-
-		setPosition(result.position);
-		setStatus("visible");
+		};
 	}, [
 		cachedFallbackPositions,
 		container,
@@ -104,13 +101,25 @@ const useFlyout: UseFlyout = (args) => {
 		defaultPosition,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
-		triggerBoundsRef,
+		triggerCoordinatesRef,
 		triggerElRef,
 		width,
 		hide,
 		onClose,
 		flyoutElRef,
 	]);
+
+	const show = useCallback(() => {
+		const flyoutOptions = getFlyoutOptions();
+
+		if (!flyoutOptions) return;
+		flyoutRef.current = new Flyout(flyoutOptions);
+
+		const result = flyoutRef.current.open();
+
+		setPosition(result.position);
+		setStatus("visible");
+	}, [getFlyoutOptions]);
 
 	const remove = useCallback(() => {
 		if (!flyoutRef.current) return;
@@ -119,12 +128,19 @@ const useFlyout: UseFlyout = (args) => {
 		setStatus("idle");
 	}, []);
 
-	const updatePosition = useCallback((options?: { fallback?: boolean }) => {
-		if (!flyoutRef.current) return;
+	const updatePosition = useCallback(() => {
+		const flyoutOptions = getFlyoutOptions();
 
-		const result = flyoutRef.current.update(options);
+		if (!flyoutRef.current) return;
+		if (!flyoutOptions) return;
+
+		const result = flyoutRef.current.update(flyoutOptions);
 		setPosition(result.position);
-	}, []);
+	}, [getFlyoutOptions]);
+
+	useIsomorphicLayoutEffect(() => {
+		updatePosition();
+	}, [defaultPosition]);
 
 	return useMemo(
 		() => ({

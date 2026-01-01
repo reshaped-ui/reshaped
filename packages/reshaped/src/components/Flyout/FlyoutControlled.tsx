@@ -104,7 +104,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const flyout = useFlyout({
 		triggerElRef: positionRef ?? triggerElRef,
 		flyoutElRef,
-		triggerBoundsRef: originCoordinatesRef,
+		triggerCoordinatesRef: originCoordinatesRef,
 		width,
 		position: passedPosition,
 		defaultActive: active,

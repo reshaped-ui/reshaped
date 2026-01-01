@@ -15,6 +15,17 @@ class Flyout {
 		this.#options = options;
 	}
 
+	#update = (options?: { fallback?: boolean }): ReturnType<typeof applyPosition> => {
+		const result = applyPosition({
+			...this.#options,
+			fallbackPositions: options?.fallback === false ? [] : this.#options.fallbackPositions,
+			lastUsedPosition: this.#lastUsedPosition,
+		});
+
+		this.#lastUsedPosition = result.position;
+		return result;
+	};
+
 	#addParentScrollHandler = () => {
 		const { trigger, onClose } = this.#options;
 		if (!trigger) return;
@@ -37,7 +48,7 @@ class Flyout {
 			) {
 				onClose();
 			} else {
-				this.update({ fallback: false });
+				this.#update({ fallback: false });
 			}
 		});
 
@@ -48,7 +59,7 @@ class Flyout {
 	#addRTLHandler = () => {
 		const observer = new MutationObserver(() => {
 			if (!this.#active) return;
-			this.update();
+			this.#update();
 		});
 
 		observer.observe(document.documentElement, {
@@ -62,7 +73,7 @@ class Flyout {
 	#addResizeHandler = () => {
 		const observer = new ResizeObserver(() => {
 			if (!this.#active) return;
-			this.update();
+			this.#update();
 		});
 
 		observer.observe(document.documentElement);
@@ -81,19 +92,13 @@ class Flyout {
 	 * Public methods
 	 */
 
-	update = (options?: { fallback?: boolean }): ReturnType<typeof applyPosition> => {
-		const result = applyPosition({
-			...this.#options,
-			fallbackPositions: options?.fallback === false ? [] : this.#options.fallbackPositions,
-			lastUsedPosition: this.#lastUsedPosition,
-		});
-
-		this.#lastUsedPosition = result.position;
-		return result;
+	update = (options?: Partial<Options>): ReturnType<typeof applyPosition> => {
+		if (options) this.#options = { ...this.#options, ...options };
+		return this.#update();
 	};
 
 	open = (): ReturnType<typeof this.update> => {
-		const result = this.update();
+		const result = this.#update();
 
 		this.#addParentScrollHandler();
 		this.#addRTLHandler();
