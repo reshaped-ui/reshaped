@@ -65,7 +65,7 @@ class Flyout {
 			this.update();
 		});
 
-		observer.observe(document.body);
+		observer.observe(document.documentElement);
 		if (this.#options.trigger) observer.observe(this.#options.trigger);
 		if (this.#options.content) observer.observe(this.#options.content);
 

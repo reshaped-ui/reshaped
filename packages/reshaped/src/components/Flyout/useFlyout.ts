@@ -61,6 +61,9 @@ const useFlyout: UseFlyout = (args) => {
 	const show = useCallback(() => {
 		if (!flyoutElRef.current) return;
 
+		const baseUnit = getComputedStyle(flyoutElRef.current).getPropertyValue("--rs-unit-x1");
+		const unitModifier = baseUnit ? parseInt(baseUnit) : 4;
+
 		flyoutRef.current = new Flyout({
 			trigger: triggerElRef.current,
 			content: flyoutElRef.current,
@@ -71,9 +74,9 @@ const useFlyout: UseFlyout = (args) => {
 			fallbackPositions: cachedFallbackPositions,
 			fallbackAdjustLayout,
 			fallbackMinHeight,
+			contentGap: (contentGap ?? 0) * unitModifier,
+			contentShift: (contentShift ?? 0) * unitModifier,
 			onClose: hide,
-			contentGap,
-			contentShift,
 		});
 
 		const result = flyoutRef.current.open();

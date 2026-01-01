@@ -43,10 +43,8 @@ const calculatePosition = (args: Args) => {
 	let height: number | null = null;
 	let width: number | null = null;
 
-	// contentGap adds padding to the flyout to make sure it doesn't disapper while moving the mouse to the content
-	// So its width/height is bigger than the visible part of the content
-	const flyoutWidth = flyoutBounds.width + (isHorizontalPosition ? contentGap : 0);
-	const flyoutHeight = flyoutBounds.height + (!isHorizontalPosition ? contentGap : 0);
+	const flyoutWidth = flyoutBounds.width;
+	const flyoutHeight = flyoutBounds.height;
 
 	const triggerWidth = triggerBounds.width;
 	const triggerHeight = triggerBounds.height;
@@ -69,35 +67,33 @@ const calculatePosition = (args: Args) => {
 	// When inside a container, adjut position based on the container scroll since flyout is rendered outside the scroll area
 	const relativeLeft = triggerBounds.left - containerBounds.left + (containerX || 0);
 	const relativeRight = containerBounds.right - triggerBounds.right - (containerX || 0);
-	const relativeTop = triggerBounds.top - containerBounds.top + (containerY || 0);
+	const relativeTop = triggerBounds.top - containerBounds.top - (containerY || 0);
 	const relativeBottom = containerBoundsBottom - triggerBounds.bottom - (containerY || 0);
 
-	console.log("position", position);
+	console.log(containerBounds);
 
 	switch (position) {
 		case "start":
 		case "start-top":
 		case "start-bottom":
-			left = relativeLeft - flyoutWidth;
-			right = relativeRight + triggerWidth;
+			left = relativeLeft - flyoutWidth - contentGap;
+			right = relativeRight + triggerWidth + contentGap;
 			break;
 
 		case "end":
 		case "end-top":
 		case "end-bottom":
-			left = relativeLeft + triggerWidth;
+			left = relativeLeft + triggerWidth + contentGap;
 			break;
 
 		case "bottom":
 		case "top":
 			left = relativeLeft + centerBySize(triggerWidth, flyoutWidth) + contentShift;
-			console.log("left", left);
 			break;
 
 		case "top-start":
 		case "bottom-start":
 			left = relativeLeft + contentShift;
-			console.log("left", left);
 			break;
 
 		case "top-end":
@@ -114,14 +110,14 @@ const calculatePosition = (args: Args) => {
 		case "top":
 		case "top-start":
 		case "top-end":
-			top = relativeTop - flyoutHeight;
-			bottom = relativeBottom + triggerHeight;
+			top = relativeTop - flyoutHeight - contentGap;
+			bottom = relativeBottom + triggerHeight + contentGap;
 			break;
 
 		case "bottom":
 		case "bottom-start":
 		case "bottom-end":
-			top = relativeTop + triggerHeight;
+			top = relativeTop + triggerHeight + contentGap;
 			break;
 
 		case "start":
@@ -201,8 +197,8 @@ const calculatePosition = (args: Args) => {
 			top: bottom === null ? "0px" : null,
 			bottom: bottom === null ? null : "0px",
 			transform: `translate(${translateX}px, ${translateY}px)`,
-			height: height !== undefined ? `${height}px` : null,
-			width: width !== undefined ? `${width}px` : (passedWidth ?? null),
+			height: height !== null ? `${height}px` : null,
+			width: width !== null ? `${width}px` : (passedWidth ?? null),
 		},
 		boundaries: {
 			left,

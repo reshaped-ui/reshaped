@@ -68,6 +68,8 @@ const applyPosition = (
 			contentClone.style.width = `${resolvedTriggerBounds.width}px`;
 		} else if (width) {
 			contentClone.style.width = width;
+		} else {
+			contentClone.style.width = "";
 		}
 
 		return calculatePosition({
@@ -108,8 +110,6 @@ const applyPosition = (
 	testOrder.some((currentPosition) => {
 		const tested = testPosition(currentPosition);
 		const visible = testVisibility(tested);
-
-		console.log("tested", currentPosition, tested, visible);
 
 		if (visible) calculated = tested;
 

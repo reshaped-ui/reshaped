@@ -57,7 +57,7 @@ const Demo: React.FC<
 					style: {
 						background: "var(--rs-color-background-elevation-overlay)",
 						padding: "var(--rs-unit-x4)",
-						height: contentHeight === false ? undefined : contentHeight || 150,
+						height: contentHeight === false ? undefined : contentHeight || 160,
 						width: contentWidth === false ? undefined : contentWidth || 160,
 						borderRadius: "var(--rs-radius-medium)",
 						border: "1px solid var(--rs-color-border-neutral-faded)",

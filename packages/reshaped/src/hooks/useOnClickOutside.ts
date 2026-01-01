@@ -1,5 +1,6 @@
 import React from "react";
 
+import * as keys from "constants/keys";
 import useHandlerRef from "hooks/useHandlerRef";
 
 const useOnClickOutside = (
@@ -22,7 +23,7 @@ const useOnClickOutside = (
 		 * after it was clicked
 		 */
 
-		const handleMouseDown = (event: MouseEvent | TouchEvent) => {
+		const handleMouseDown = (event: MouseEvent | TouchEvent | KeyboardEvent) => {
 			isMouseDownInsideRef.current = false;
 
 			const clickedEl = event.composedPath()[0] as HTMLElement;
@@ -35,12 +36,19 @@ const useOnClickOutside = (
 			});
 		};
 
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (![keys.ENTER, keys.SPACE].includes(event.key)) return;
+			handleMouseDown(event);
+		};
+
 		document.addEventListener("mousedown", handleMouseDown, { passive: true });
 		document.addEventListener("touchstart", handleMouseDown, { passive: true });
+		document.addEventListener("keydown", handleKeyDown, { passive: true });
 
 		return () => {
 			document.removeEventListener("mousedown", handleMouseDown);
 			document.removeEventListener("touchstart", handleMouseDown);
+			document.removeEventListener("keydown", handleKeyDown);
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [...refs]);

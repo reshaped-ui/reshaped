@@ -3,6 +3,7 @@
 import React from "react";
 
 import useIsDismissible from "hooks/_private/useIsDismissible";
+import usePrevious from "hooks/_private/usePrevious";
 import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
 import useHotkeys from "hooks/useHotkeys";
@@ -60,7 +61,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
 	const onOpenRef = useHandlerRef(onOpen);
 	const onCloseRef = useHandlerRef(onClose);
-	const resolvedActive = disabled === true ? false : passedActive;
+	const active = disabled === true ? false : passedActive;
+	const prevActive = usePrevious(active);
 	const parentFlyoutContext = useFlyoutContext();
 	const { elRef: parentTriggerRef } = useFlyoutTriggerContext() || {};
 	const { elRef: parentContentRef } = useFlyoutContentContext() || {};
@@ -108,7 +110,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		triggerBoundsRef: originCoordinates ? originCoordinatesRef : triggerBoundsRef,
 		width,
 		position: passedPosition,
-		defaultActive: resolvedActive,
+		defaultActive: active,
 		// eslint-disable-next-line react-hooks/refs
 		container: containerRef?.current,
 		fallbackPositions,
@@ -239,13 +241,12 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	);
 
 	const handleTriggerClick = React.useCallback(() => {
-		console.log("handleTriggerClick", isRendered, status);
 		if (!isRendered) {
 			handleOpen();
 		} else {
 			handleClose({});
 		}
-	}, [isRendered, handleOpen, handleClose, status]);
+	}, [isRendered, handleOpen, handleClose]);
 
 	const handleTriggerMouseDown = React.useCallback(() => {
 		const triggerEl = positionRef?.current ?? triggerElRef.current;
@@ -264,7 +265,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleTransitionStart = React.useCallback(
 		(e: TransitionEvent) => {
-			if (!resolvedActive) return;
+			if (!active) return;
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
 
 			/**
@@ -273,7 +274,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			 */
 			triggerBoundsRef.current = null;
 		},
-		[resolvedActive]
+		[active]
 	);
 
 	const handleTransitionEnd = React.useCallback(
@@ -288,18 +289,15 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * Control the display based on the props
 	 */
 	useIsomorphicLayoutEffect(() => {
-		if (resolvedActive) {
+		if (active) {
 			render();
 			return;
 		}
 
 		if (disabled) cooldown.cool();
 
-		/**
-		 * Check that transitions are enabled and it has been triggered on tooltip open
-		 * - keyboard focus navigation could move too fast and ignore the transitions completely
-		 * - warmed up tooltips get removed instantly
-		 */
+		// Prevent calling hide on component mount
+		if (prevActive === active) return;
 
 		if (
 			checkTransitions() &&
@@ -311,9 +309,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			// In case transitions are disabled globally - remove from the DOM immediately
 			remove();
 		}
-	}, [resolvedActive, render, hide, remove, disableHideAnimation, disabled, groupTimeouts]);
+	}, [active, prevActive, render, hide, remove, disableHideAnimation, disabled, groupTimeouts]);
 
-	React.useEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		if (status === "rendered") show();
 	}, [status, show]);
 
