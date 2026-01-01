@@ -1009,7 +1009,7 @@ export const testInsideScrollable = {
 		return (
 			<View padding={20}>
 				<View height={30} overflow="auto" backgroundColor="neutral-faded" borderRadius="small">
-					<View height={50} attributes={{ ref: containerRef }} padding={20} paddingBottom={30}>
+					<View height={50} attributes={{ ref: containerRef }} padding={20} paddingBottom={50}>
 						<Demo position="bottom" />
 					</View>
 				</View>

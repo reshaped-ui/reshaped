@@ -81,12 +81,10 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * For example, if you have a tooltip -> popover inside another popover.content, tooltip shouldn't use its parent context anymore
 	 */
 	const isParentTriggerInsideFlyout =
-		// eslint-disable-next-line react-hooks/refs
 		!!parentTriggerRef?.current && parentContentRef?.current?.contains(parentTriggerRef.current);
 	const tryParentTrigger = !parentContentRef || isParentTriggerInsideFlyout;
 
 	const triggerElRef = (tryParentTrigger && parentTriggerRef) || internalTriggerElRef;
-	const triggerBoundsRef = React.useRef<DOMRect>(null);
 	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
@@ -101,23 +99,22 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
 
 	const originCoordinatesRef = React.useRef<G.Coordinates | null>(originCoordinates ?? null);
-	// eslint-disable-next-line react-hooks/refs
 	originCoordinatesRef.current = originCoordinates ?? null;
 
 	const flyout = useFlyout({
 		triggerElRef: positionRef ?? triggerElRef,
 		flyoutElRef,
-		triggerBoundsRef: originCoordinates ? originCoordinatesRef : triggerBoundsRef,
+		triggerBoundsRef: originCoordinatesRef,
 		width,
 		position: passedPosition,
 		defaultActive: active,
-		// eslint-disable-next-line react-hooks/refs
 		container: containerRef?.current,
 		fallbackPositions,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 		contentGap,
 		contentShift,
+		onClose: onCloseRef.current,
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
 	const isRendered = status !== "idle";
@@ -248,13 +245,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		}
 	}, [isRendered, handleOpen, handleClose]);
 
-	const handleTriggerMouseDown = React.useCallback(() => {
-		const triggerEl = positionRef?.current ?? triggerElRef.current;
-		const rect = triggerEl?.getBoundingClientRect();
-		if (!rect) return;
-		triggerBoundsRef.current = rect;
-	}, [triggerElRef, positionRef]);
-
 	const handleContentMouseDown = () => {
 		lockedBlurEffects.current = true;
 		hoverTriggeredWithTouchEventRef.current = true;
@@ -262,20 +252,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleContentMouseUp = () => {
 		lockedBlurEffects.current = false;
 	};
-
-	const handleTransitionStart = React.useCallback(
-		(e: TransitionEvent) => {
-			if (!active) return;
-			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-
-			/**
-			 * After animation has started, we're sure about the correct bounds
-			 * so drop the cache to make flyout work when trigger moves around
-			 */
-			triggerBoundsRef.current = null;
-		},
-		[active]
-	);
 
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
@@ -413,9 +389,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				handleMouseEnter,
 				handleMouseLeave,
 				handleTouchStart,
-				handleTransitionStart,
 				handleTransitionEnd,
-				handleMouseDown: handleTriggerMouseDown,
 				handleClick: handleTriggerClick,
 				handleContentMouseDown,
 				handleContentMouseUp,

@@ -70,8 +70,6 @@ const calculatePosition = (args: Args) => {
 	const relativeTop = triggerBounds.top - containerBounds.top - (containerY || 0);
 	const relativeBottom = containerBoundsBottom - triggerBounds.bottom - (containerY || 0);
 
-	console.log(containerBounds);
-
 	switch (position) {
 		case "start":
 		case "start-top":

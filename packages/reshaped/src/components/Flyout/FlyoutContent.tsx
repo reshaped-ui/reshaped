@@ -21,7 +21,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		flyoutElRef,
 		triggerElRef,
 		handleTransitionEnd,
-		handleTransitionStart,
 		triggerType,
 		handleMouseEnter,
 		handleMouseLeave,
@@ -43,7 +42,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const closestFixedContainer = React.useMemo(() => {
 		if (!mounted) return null;
 		if (!triggerElRef) return null;
-		// eslint-disable-next-line react-hooks/refs
+
 		return findClosestPositionContainer({ el: triggerElRef.current });
 	}, [mounted, triggerElRef]);
 	const containerRef = passedContainerRef || { current: closestFixedContainer };
@@ -51,17 +50,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
 	}, []);
-
-	/**
-	 * transitionStart doesn't exist as a jsx event handler and needs to be handled with vanilla js
-	 */
-	React.useEffect(() => {
-		const el = flyoutElRef.current;
-		if (!el) return;
-
-		el.addEventListener("transitionstart", handleTransitionStart);
-		return () => el.removeEventListener("transitionstart", handleTransitionStart);
-	}, [handleTransitionStart, flyoutElRef, status]);
 
 	if (status === "idle" || !mounted) return null;
 

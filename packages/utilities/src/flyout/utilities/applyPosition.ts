@@ -38,7 +38,9 @@ const applyPosition = (
 
 	if (!triggerBounds) throw new Error("Trigger bounds are required");
 
-	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
+	const resolvedTriggerBounds = getRectFromCoordinates(
+		triggerBounds ?? trigger?.getBoundingClientRect()
+	);
 
 	Object.keys(RESET_STYLES).forEach((_key) => {
 		const key = _key as keyof typeof RESET_STYLES;

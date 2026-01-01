@@ -14,6 +14,7 @@ type UseFlyout = (
 		| "fallbackMinHeight"
 		| "contentGap"
 		| "contentShift"
+		| "onClose"
 	> & {
 		fallbackPositions?: T.Position[];
 		container?: HTMLElement | null;
@@ -30,8 +31,15 @@ type UseFlyout = (
 };
 
 const useFlyout: UseFlyout = (args) => {
-	const { triggerElRef, flyoutElRef, triggerBoundsRef, contentGap, contentShift, ...options } =
-		args;
+	const {
+		triggerElRef,
+		flyoutElRef,
+		triggerBoundsRef,
+		contentGap,
+		contentShift,
+		onClose,
+		...options
+	} = args;
 	const {
 		position: defaultPosition = "bottom",
 		fallbackPositions,
@@ -64,6 +72,11 @@ const useFlyout: UseFlyout = (args) => {
 		const baseUnit = getComputedStyle(flyoutElRef.current).getPropertyValue("--rs-unit-x1");
 		const unitModifier = baseUnit ? parseInt(baseUnit) : 4;
 
+		const handleClose = () => {
+			onClose?.({});
+			hide();
+		};
+
 		flyoutRef.current = new Flyout({
 			trigger: triggerElRef.current,
 			content: flyoutElRef.current,
@@ -76,7 +89,7 @@ const useFlyout: UseFlyout = (args) => {
 			fallbackMinHeight,
 			contentGap: (contentGap ?? 0) * unitModifier,
 			contentShift: (contentShift ?? 0) * unitModifier,
-			onClose: hide,
+			onClose: handleClose,
 		});
 
 		const result = flyoutRef.current.open();
@@ -95,6 +108,7 @@ const useFlyout: UseFlyout = (args) => {
 		triggerElRef,
 		width,
 		hide,
+		onClose,
 		flyoutElRef,
 	]);
 
