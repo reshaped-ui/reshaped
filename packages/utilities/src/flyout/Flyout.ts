@@ -71,16 +71,21 @@ class Flyout {
 	};
 
 	#addResizeHandler = () => {
-		const observer = new ResizeObserver(() => {
+		const handleResize = () => {
 			if (!this.#active) return;
 			this.#update();
-		});
+		};
 
-		observer.observe(document.documentElement);
+		const observer = new ResizeObserver(handleResize);
+
+		window.addEventListener("resize", handleResize);
 		if (this.#options.trigger) observer.observe(this.#options.trigger);
 		if (this.#options.content) observer.observe(this.#options.content);
 
-		this.#handlerCleanupMap.resize = () => observer.disconnect();
+		this.#handlerCleanupMap.resize = () => {
+			observer.disconnect();
+			window.removeEventListener("resize", handleResize);
+		};
 	};
 
 	#removeHandlers = () => {
