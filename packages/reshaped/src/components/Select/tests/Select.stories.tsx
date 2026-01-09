@@ -76,6 +76,52 @@ export const nativeRender: StoryObj = {
 	},
 };
 
+export const nativeOptgroup: StoryObj = {
+	name: "native with optgroup",
+	render: () => (
+		<Example>
+			<Example.Item title="native with optgroup">
+				<Select
+					name="animal"
+					id="animal-optgroup"
+					placeholder="Select an animal"
+					inputAttributes={{
+						"aria-label": "Select an animal",
+					}}
+				>
+					<optgroup label="Mammals">
+						<option value="dog">Dog</option>
+						<option value="cat">Cat</option>
+					</optgroup>
+					<optgroup label="Reptiles">
+						<option value="turtle">Turtle</option>
+						<option value="lizard">Lizard</option>
+					</optgroup>
+				</Select>
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const select = canvas.getByRole("combobox");
+		const options = within(select).getAllByRole("option");
+		const optgroups = within(select).getAllByRole("group");
+
+		expect(select).toHaveAttribute("name", "animal");
+		expect(select).toHaveAttribute("id", "animal-optgroup");
+
+		// Should have 2 optgroups
+		expect(optgroups).toHaveLength(2);
+
+		// Should have 5 options total (1 placeholder + 4 options)
+		expect(options).toHaveLength(5);
+		expect(options[0]).toHaveTextContent("Select an animal");
+		expect(options[1]).toHaveTextContent("Dog");
+		expect(options[2]).toHaveTextContent("Cat");
+		expect(options[3]).toHaveTextContent("Turtle");
+		expect(options[4]).toHaveTextContent("Lizard");
+	},
+};
+
 export const customRender: StoryObj = {
 	name: "custom rendering, name, id, option groups",
 	render: () => (

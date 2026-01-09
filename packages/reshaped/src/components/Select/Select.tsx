@@ -15,7 +15,9 @@ const Select: React.FC<T.NativeProps> = (props) => {
 			{(props) => {
 				const { options } = props;
 				const hasOptionChildren = React.Children.toArray(children).some((child) => {
-					return React.isValidElement(child) && child.type === "option";
+					return (
+						React.isValidElement(child) && (child.type === "option" || child.type === "optgroup")
+					);
 				});
 				const hasOptions = Boolean(options || hasOptionChildren);
 
