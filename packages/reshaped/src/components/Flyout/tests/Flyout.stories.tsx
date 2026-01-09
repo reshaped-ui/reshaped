@@ -253,7 +253,7 @@ export const modes = {
 
 				<Example.Item title="triggerType: hover">
 					<View direction="row" gap={4}>
-						<Demo position="bottom-start" trapFocusMode="dialog" triggerType="hover" text="dialog">
+						<Demo position="end" trapFocusMode="dialog" triggerType="hover" text="dialog">
 							{modeContent}
 						</Demo>
 						<Demo

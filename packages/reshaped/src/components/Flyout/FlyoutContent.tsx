@@ -22,7 +22,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		triggerElRef,
 		handleTransitionEnd,
 		triggerType,
-		handleMouseEnter,
+		handleContentMouseEnter,
 		handleMouseLeave,
 		handleContentMouseDown,
 		handleContentMouseUp,
@@ -94,7 +94,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 				}
 				ref={flyoutElRef}
 				onTransitionEnd={handleTransitionEnd}
-				onMouseEnter={triggerType === "hover" ? handleMouseEnter : undefined}
+				onMouseEnter={triggerType === "hover" ? handleContentMouseEnter : undefined}
 				onMouseLeave={triggerType === "hover" ? handleMouseLeave : undefined}
 				onMouseDown={handleContentMouseDown}
 				onTouchStart={handleContentMouseDown}

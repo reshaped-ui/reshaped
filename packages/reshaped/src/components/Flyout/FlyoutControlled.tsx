@@ -21,6 +21,7 @@ import {
 } from "./Flyout.context";
 import useFlyout from "./useFlyout";
 import cooldown from "./utilities/cooldown";
+import { createSafeArea } from "./utilities/safeArea";
 
 import type * as T from "./Flyout.types";
 import type * as G from "types/global";
@@ -97,6 +98,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
+	// Cleanup function for safe area tracking
+	const safeAreaRef = React.useRef<{ origin: G.Coordinates; cleanup: () => void } | null>(null);
 
 	const originCoordinatesRef = React.useRef<G.Coordinates | null>(originCoordinates ?? null);
 	originCoordinatesRef.current = originCoordinates ?? null;
@@ -131,6 +134,26 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, []);
 
 	/**
+	 * Disable all triggers while mouse is moving over the safe area
+	 */
+	const disableTriggers = React.useCallback(() => {
+		if (triggerType !== "hover") return;
+
+		document.querySelectorAll("[data-rs-flyout-active]").forEach((el) => {
+			if (el === triggerElRef.current) return;
+			(el as HTMLElement).style.pointerEvents = "none";
+		});
+	}, [triggerElRef, triggerType]);
+
+	const enableTriggers = React.useCallback(() => {
+		if (triggerType !== "hover") return;
+
+		document.querySelectorAll("[data-rs-flyout-active]").forEach((el) => {
+			(el as HTMLElement).style.removeProperty("pointer-events");
+		});
+	}, [triggerType]);
+
+	/**
 	 * Component open/close handlers
 	 * Called from the internal actions
 	 */
@@ -139,7 +162,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (isRendered && triggerType !== "hover") return;
 
 		onOpenRef.current?.();
-	}, [onOpenRef, isRendered, triggerType]);
+		disableTriggers();
+	}, [onOpenRef, isRendered, triggerType, disableTriggers]);
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
@@ -149,12 +173,21 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			if (!canClose) return;
 
 			onCloseRef.current?.({ reason: options.reason });
+			enableTriggers();
 
 			if (options?.closeParents) {
 				parentFlyoutContext?.handleClose?.({ closeParents: true, reason: options.reason });
 			}
 		},
-		[isRendered, isDismissible, triggerType, onCloseRef, disabled, parentFlyoutContext]
+		[
+			isRendered,
+			isDismissible,
+			triggerType,
+			onCloseRef,
+			disabled,
+			parentFlyoutContext,
+			enableTriggers,
+		]
 	);
 
 	/**
@@ -189,8 +222,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		hoverTriggeredWithTouchEventRef.current = true;
 	}, [triggerType]);
 
-	const handleMouseEnter = React.useCallback(() => {
+	const handleContentMouseEnter = React.useCallback(() => {
 		clearTimer();
+
 		if (hoverTriggeredWithTouchEventRef.current) {
 			handleOpen();
 			hoverTriggeredWithTouchEventRef.current = false;
@@ -201,14 +235,21 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				() => {
 					handleOpen();
 				},
-				groupTimeouts && cooldown.status === "warming"
-					? timeouts.mouseEnter
-					: isSubmenu
-						? timeouts.mouseEnter
-						: 0
+				groupTimeouts && cooldown.status === "warming" ? timeouts.mouseEnter : 0
 			);
 		}
-	}, [clearTimer, handleOpen, groupTimeouts, isSubmenu]);
+	}, [clearTimer, handleOpen, groupTimeouts]);
+
+	const handleTriggerMouseEnter = React.useCallback(
+		(e: React.MouseEvent) => {
+			if (e.currentTarget === triggerElRef.current) {
+				safeAreaRef.current?.cleanup();
+			}
+
+			handleContentMouseEnter();
+		},
+		[triggerElRef, handleContentMouseEnter]
+	);
 
 	const handleMouseLeave = React.useCallback(
 		(e: React.MouseEvent) => {
@@ -226,15 +267,28 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			cooldown.cool();
 			clearTimer();
 
-			if (isSubmenu) {
-				timerRef.current = setTimeout(() => {
-					handleClose({});
-				}, timeouts.mouseLeave);
+			safeAreaRef.current?.cleanup();
+
+			if (triggerType === "hover" && isRendered) {
+				// Safe area coordinates are defined based on the trigger mouse out, even when returning mouse from content to trigger
+				const origin =
+					e.currentTarget === flyoutElRef.current && safeAreaRef.current?.origin
+						? safeAreaRef.current.origin
+						: { x: e.clientX, y: e.clientY };
+				const cleanup = createSafeArea({
+					contentRef: flyoutElRef,
+					triggerRef: triggerElRef,
+					position: flyout.position,
+					onClose: () => handleClose({}),
+					origin,
+				});
+
+				safeAreaRef.current = { origin, cleanup };
 			} else {
 				handleClose({});
 			}
 		},
-		[clearTimer, handleClose, triggerElRef, flyoutElRef, isSubmenu]
+		[clearTimer, handleClose, triggerElRef, flyoutElRef, triggerType, isRendered, flyout.position]
 	);
 
 	const handleTriggerClick = React.useCallback(() => {
@@ -328,7 +382,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 		if (trapFocusRef.current?.trapped) {
 			/* Locking the popover to not open it again on trigger focus */
-			if (triggerType === "hover") {
+			if (triggerType === "hover" && checkKeyboardMode()) {
 				lockedRef.current = true;
 				setTimeout(() => {
 					lockedRef.current = false;
@@ -346,6 +400,14 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	React.useEffect(() => {
 		return () => trapFocusRef.current?.release();
 	}, []);
+
+	/**
+	 * Clean up safe polygon tracking on unmount or when flyout closes
+	 */
+	React.useEffect(() => {
+		if (!isRendered) safeAreaRef.current?.cleanup();
+		return () => safeAreaRef.current?.cleanup();
+	}, [isRendered]);
 
 	/**
 	 * Imperative methods for controlling Flyout
@@ -386,7 +448,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				handleOpen,
 				handleFocus,
 				handleBlur,
-				handleMouseEnter,
+				handleTriggerMouseEnter,
+				handleContentMouseEnter,
 				handleMouseLeave,
 				handleTouchStart,
 				handleTransitionEnd,

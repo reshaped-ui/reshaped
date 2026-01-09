@@ -85,7 +85,7 @@ export type TriggerAttributes = {
 	onBlur?: (e: React.FocusEvent) => void;
 	onFocus?: () => void;
 	onMouseDown?: () => void;
-	onMouseEnter?: () => void;
+	onMouseEnter?: (e: React.MouseEvent) => void;
 	onMouseLeave?: (e: React.MouseEvent) => void;
 	onTouchStart?: () => void;
 	onClick?: () => void;
@@ -94,6 +94,9 @@ export type TriggerAttributes = {
 	"aria-autocomplete"?: "list";
 	"aria-expanded"?: boolean;
 	"aria-controls"?: string;
+
+	// Data attributes
+	"data-rs-flyout-active"?: boolean;
 };
 
 type BaseProps = {
@@ -196,7 +199,8 @@ export type ContextProps = {
 	flyoutElRef: React.RefObject<HTMLDivElement | null>;
 	handleClose: (options: { closeParents?: boolean; reason?: CloseReason }) => void;
 	handleOpen: () => void;
-	handleMouseEnter: () => void;
+	handleTriggerMouseEnter: (e: React.MouseEvent) => void;
+	handleContentMouseEnter: (e: React.MouseEvent) => void;
 	handleMouseLeave: (e: React.MouseEvent) => void;
 	handleTransitionEnd: (e: React.TransitionEvent) => void;
 	handleClick: () => void;

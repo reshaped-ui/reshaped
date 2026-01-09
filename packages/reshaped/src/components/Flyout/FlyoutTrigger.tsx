@@ -13,7 +13,7 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 		flyout,
 		handleFocus,
 		handleBlur,
-		handleMouseEnter,
+		handleTriggerMouseEnter,
 		handleMouseLeave,
 		handleTouchStart,
 		handleClick,
@@ -24,6 +24,7 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 
 	const childrenAttributes: Partial<T.TriggerAttributes> = {
 		ref: triggerElRef,
+		"data-rs-flyout-active": active,
 	};
 
 	if (triggerType === "click" || trapFocusMode === "action-menu") {
@@ -31,7 +32,7 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 	}
 
 	if (triggerType === "hover") {
-		childrenAttributes.onMouseEnter = handleMouseEnter;
+		childrenAttributes.onMouseEnter = handleTriggerMouseEnter;
 		childrenAttributes.onMouseLeave = handleMouseLeave;
 		childrenAttributes.onTouchStart = handleTouchStart;
 	}

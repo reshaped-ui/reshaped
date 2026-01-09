@@ -127,11 +127,18 @@ class TrapFocus {
 		});
 		const pseudoFocus = mode === "selection-menu";
 
+		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
+		const currentActiveElement = getActiveElement(this.#root);
+		const isLastInChain = tailItem && tailItem.data.#root === this.#root;
+
 		this.#options = { ...options, pseudoFocus };
 		this.#trigger = trigger;
 
 		this.#mutationObserver = new MutationObserver(() => {
 			if (!this.#root) return;
+
+			// Avoid focus changes while the focus is trapped somewhere else atm
+			if (!isLastInChain) return;
 
 			const currentActiveElement = getActiveElement(this.#root);
 
@@ -157,10 +164,7 @@ class TrapFocus {
 		if (mode === "dialog") this.#screenReaderTrap.trap();
 
 		// Don't add back to the chain if we're traversing back
-		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
-		const currentActiveElement = getActiveElement(this.#root);
-
-		if (!tailItem || this.#root !== tailItem.data.#root) {
+		if (!isLastInChain) {
 			this.#chainId = TrapFocus.chain.add(this);
 
 			// If the focus was moved manually (e.g. with autoFocus) - keep it there
