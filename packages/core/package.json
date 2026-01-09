@@ -31,6 +31,7 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
+		"dev": "tsc --watch -p tsconfig.json",
 		"build": "pnpm clean && tsc -p tsconfig.json"
 	},
 	"peerDependencies": {

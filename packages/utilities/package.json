@@ -31,8 +31,9 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"build": "pnpm clean && tsc && resolve-tspaths",
-    "test:unit": "vitest run --project=browser"
+		"dev": "tsc-watch --onSuccess \"resolve-tspaths\"",
+		"build": "tsc && resolve-tspaths",
+		"test:unit": "vitest run --project=browser"
 	},
 	"peerDependencies": {
 		"react": "^18 || ^19",

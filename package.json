@@ -8,7 +8,7 @@
 		"url": "https://github.com/reshaped-ui/reshaped.git"
 	},
 	"scripts": {
-		"dev": "pnpm --filter reshaped run dev",
+		"dev": "pnpm -r --parallel run dev",
 		"clean": "pnpm -r run clean",
 		"commit": "git-cz",
 		"changeset": "changeset",
@@ -85,7 +85,8 @@
 		"vite": "7.3.0",
 		"vite-tsconfig-paths": "5.1.4",
 		"vitest": "4.0.16",
-		"vitest-browser-react": "2.0.2"
+		"vitest-browser-react": "2.0.2",
+		"tsc-watch": "7.2.0"
 	},
 	"engines": {
 		"node": ">=22"
