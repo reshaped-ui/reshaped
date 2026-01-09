@@ -141,6 +141,10 @@ export const applyNavigationBounds = (args: { date: Date; min?: Date; max?: Date
 	};
 };
 
+const isMonthMatch = (date1: Date, date2: Date) => {
+	return date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear();
+};
+
 /**
  * Decide if date has to be focusable with Tab (only one date should be)
  * 1. If there is a selected value - it's focusable
@@ -154,17 +158,13 @@ export const isDateFocusable = (args: {
 }) => {
 	const { date, startValue, lastFocusedDate } = args;
 	const today = new Date();
-	const renderedMonth = date.getMonth();
-	const valueMonth = startValue?.getMonth();
-	const todayMonth = today.getMonth();
-	const lastFocusedMonth = lastFocusedDate?.getMonth();
 	const isoDate = getLocalISODate({ date });
 	const isoToday = getLocalISODate({ date: today });
 	const isoValueDate = startValue && getLocalISODate({ date: startValue });
 	const isoLastFocusedDate = lastFocusedDate && getLocalISODate({ date: lastFocusedDate });
 
-	if (lastFocusedDate && renderedMonth === lastFocusedMonth) return isoDate === isoLastFocusedDate;
-	if (startValue && renderedMonth === valueMonth) return isoDate === isoValueDate;
-	if (renderedMonth === todayMonth) return isoDate === isoToday;
+	if (lastFocusedDate && isMonthMatch(date, lastFocusedDate)) return isoDate === isoLastFocusedDate;
+	if (startValue && isMonthMatch(date, startValue)) return isoDate === isoValueDate;
+	if (isMonthMatch(date, today)) return isoDate === isoToday;
 	return true;
 };

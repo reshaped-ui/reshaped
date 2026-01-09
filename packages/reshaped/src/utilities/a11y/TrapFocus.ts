@@ -111,6 +111,11 @@ class TrapFocus {
 		el.removeEventListener("keydown", this.#handleKeyDown as EventListener);
 	};
 
+	#isLast = () => {
+		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
+		return tailItem && tailItem.data.#root === this.#root;
+	};
+
 	/**
 	 * Trap the focus, add observer and keyboard event listeners
 	 * and create a chain item
@@ -132,6 +137,7 @@ class TrapFocus {
 
 		this.#mutationObserver = new MutationObserver(() => {
 			if (!this.#root) return;
+			if (!this.#isLast()) return;
 
 			const currentActiveElement = getActiveElement(this.#root);
 
@@ -147,7 +153,6 @@ class TrapFocus {
 		});
 
 		this.#removeListeners();
-
 		this.#mutationObserver.observe(this.#root, { childList: true, subtree: true });
 
 		// Don't trap in case there is nothing to focus inside
@@ -156,11 +161,11 @@ class TrapFocus {
 		this.#addListeners();
 		if (mode === "dialog") this.#screenReaderTrap.trap();
 
-		// Don't add back to the chain if we're traversing back
-		const tailItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
 		const currentActiveElement = getActiveElement(this.#root);
+		const isLastInChain = this.#isLast();
 
-		if (!tailItem || this.#root !== tailItem.data.#root) {
+		// Don't add back to the chain if we're traversing back
+		if (!isLastInChain) {
 			this.#chainId = TrapFocus.chain.add(this);
 
 			// If the focus was moved manually (e.g. with autoFocus) - keep it there

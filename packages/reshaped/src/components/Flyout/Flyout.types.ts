@@ -26,12 +26,7 @@ export type Position = `${YSide}` | `${YSide}-${XSide}` | `${XSide}` | `${XSide}
 export type Width = "trigger" | string;
 export type Options = Pick<
 	BaseProps,
-	| "width"
-	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
-	| "fallbackMinHeight"
-	| "contentGap"
-	| "contentShift"
+	"width" | "fallbackAdjustLayout" | "fallbackMinHeight" | "contentGap" | "contentShift"
 > & {
 	position: Position;
 	fallbackPositions?: Position[];
@@ -43,7 +38,7 @@ export type Options = Pick<
 
 export type State = {
 	position?: Position;
-	status: "idle" | "rendered" | "positioned" | "visible" | "hidden";
+	status: "idle" | "rendered" | "visible" | "hidden";
 };
 
 export type FlyoutData = {
@@ -90,7 +85,7 @@ export type TriggerAttributes = {
 	onBlur?: (e: React.FocusEvent) => void;
 	onFocus?: () => void;
 	onMouseDown?: () => void;
-	onMouseEnter?: () => void;
+	onMouseEnter?: (e: React.MouseEvent) => void;
 	onMouseLeave?: (e: React.MouseEvent) => void;
 	onTouchStart?: () => void;
 	onClick?: () => void;
@@ -99,6 +94,9 @@ export type TriggerAttributes = {
 	"aria-autocomplete"?: "list";
 	"aria-expanded"?: boolean;
 	"aria-controls"?: string;
+
+	// Data attributes
+	"data-rs-flyout-active"?: boolean;
 };
 
 type BaseProps = {
@@ -118,7 +116,7 @@ type BaseProps = {
 	fallbackPositions?: Position[] | false;
 	/** Adjust the content size and shift its position to fit into the container when none of the fallback positions work */
 	fallbackAdjustLayout?: boolean;
-	/** Minimum width for the content when fallbackAdjustLayout is true */
+	/** @deprecated Minimum width for the content when fallbackAdjustLayout is true */
 	fallbackMinWidth?: string;
 	/** Minimum height for the content when fallbackAdjustLayout is true */
 	fallbackMinHeight?: string;
@@ -201,11 +199,10 @@ export type ContextProps = {
 	flyoutElRef: React.RefObject<HTMLDivElement | null>;
 	handleClose: (options: { closeParents?: boolean; reason?: CloseReason }) => void;
 	handleOpen: () => void;
-	handleMouseEnter: () => void;
+	handleTriggerMouseEnter: (e: React.MouseEvent) => void;
+	handleContentMouseEnter: (e: React.MouseEvent) => void;
 	handleMouseLeave: (e: React.MouseEvent) => void;
-	handleMouseDown: () => void;
 	handleTransitionEnd: (e: React.TransitionEvent) => void;
-	handleTransitionStart: (e: TransitionEvent) => void;
 	handleClick: () => void;
 	handleBlur: (e: React.FocusEvent) => void;
 	handleFocus: () => void;

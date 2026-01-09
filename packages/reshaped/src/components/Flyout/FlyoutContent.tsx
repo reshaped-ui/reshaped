@@ -4,8 +4,7 @@ import React from "react";
 
 import Portal from "components/_private/Portal";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import { findClosestPositionContainer, findClosestScrollableContainer } from "utilities/dom";
-import { rafThrottle } from "utilities/helpers";
+import { findClosestPositionContainer } from "utilities/dom";
 import { classNames } from "utilities/props";
 
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
@@ -21,17 +20,14 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		id,
 		flyoutElRef,
 		triggerElRef,
-		handleClose,
 		handleTransitionEnd,
-		handleTransitionStart,
 		triggerType,
-		handleMouseEnter,
+		handleContentMouseEnter,
 		handleMouseLeave,
 		handleContentMouseDown,
 		handleContentMouseUp,
 		contentClassName,
 		contentAttributes,
-		contentGap,
 		contentMaxHeight,
 		contentMaxWidth,
 		trapFocusMode,
@@ -46,61 +42,14 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const closestFixedContainer = React.useMemo(() => {
 		if (!mounted) return null;
 		if (!triggerElRef) return null;
-		// eslint-disable-next-line react-hooks/refs
+
 		return findClosestPositionContainer({ el: triggerElRef.current });
-	}, [mounted, triggerElRef]);
-	const closestScrollableContainer = React.useMemo(() => {
-		if (!mounted) return;
-		// eslint-disable-next-line react-hooks/refs
-		if (!triggerElRef?.current) return;
-		// eslint-disable-next-line react-hooks/refs
-		return findClosestScrollableContainer({ el: triggerElRef.current });
 	}, [mounted, triggerElRef]);
 	const containerRef = passedContainerRef || { current: closestFixedContainer };
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
 	}, []);
-
-	/**
-	 * transitionStart doesn't exist as a jsx event handler and needs to be handled with vanilla js
-	 */
-	React.useEffect(() => {
-		const el = flyoutElRef.current;
-		if (!el) return;
-
-		el.addEventListener("transitionstart", handleTransitionStart);
-		return () => el.removeEventListener("transitionstart", handleTransitionStart);
-	}, [handleTransitionStart, flyoutElRef, status]);
-
-	React.useEffect(() => {
-		if (status !== "visible") return;
-
-		if (!closestScrollableContainer) return;
-
-		const triggerEl = triggerElRef?.current;
-		const containerEl = closestScrollableContainer;
-
-		const handleScroll = rafThrottle(() => {
-			const triggerBounds = triggerEl?.getBoundingClientRect();
-			const containerBounds = containerEl.getBoundingClientRect();
-
-			if (
-				triggerBounds &&
-				(triggerBounds.top < containerBounds.top ||
-					triggerBounds.left < containerBounds.left ||
-					triggerBounds.right > containerBounds.right ||
-					triggerBounds.bottom > containerBounds.bottom)
-			) {
-				handleClose({});
-			} else {
-				flyout.updatePosition({ sync: true, fallback: false });
-			}
-		});
-
-		closestScrollableContainer.addEventListener("scroll", handleScroll, { passive: true });
-		return () => closestScrollableContainer.removeEventListener("scroll", handleScroll);
-	}, [closestScrollableContainer, flyout, status, handleClose, triggerElRef]);
 
 	if (status === "idle" || !mounted) return null;
 
@@ -139,14 +88,13 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 				className={rootClassNames}
 				style={
 					{
-						"--rs-flyout-gap": contentGap,
 						"--rs-flyout-max-h": contentMaxHeight,
 						"--rs-flyout-max-w": contentMaxWidth,
 					} as React.CSSProperties
 				}
 				ref={flyoutElRef}
 				onTransitionEnd={handleTransitionEnd}
-				onMouseEnter={triggerType === "hover" ? handleMouseEnter : undefined}
+				onMouseEnter={triggerType === "hover" ? handleContentMouseEnter : undefined}
 				onMouseLeave={triggerType === "hover" ? handleMouseLeave : undefined}
 				onMouseDown={handleContentMouseDown}
 				onTouchStart={handleContentMouseDown}

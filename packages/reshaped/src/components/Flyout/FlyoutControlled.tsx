@@ -3,14 +3,14 @@
 import React from "react";
 
 import useIsDismissible from "hooks/_private/useIsDismissible";
+import usePrevious from "hooks/_private/usePrevious";
 import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
 import useHotkeys from "hooks/useHotkeys";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useOnClickOutside from "hooks/useOnClickOutside";
-import useRTL from "hooks/useRTL";
 import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
-import { checkTransitions, onNextFrame } from "utilities/animation";
+import { checkTransitions } from "utilities/animation";
 
 import * as timeouts from "./Flyout.constants";
 import {
@@ -21,6 +21,7 @@ import {
 } from "./Flyout.context";
 import useFlyout from "./useFlyout";
 import cooldown from "./utilities/cooldown";
+import { createSafeArea } from "./utilities/safeArea";
 
 import type * as T from "./Flyout.types";
 import type * as G from "types/global";
@@ -35,7 +36,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		disabled,
 		forcePosition,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		trapFocusMode = "dialog",
 		width,
@@ -62,7 +62,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
 	const onOpenRef = useHandlerRef(onOpen);
 	const onCloseRef = useHandlerRef(onClose);
-	const resolvedActive = disabled === true ? false : passedActive;
+	const active = disabled === true ? false : passedActive;
+	const prevActive = usePrevious(active);
 	const parentFlyoutContext = useFlyoutContext();
 	const { elRef: parentTriggerRef } = useFlyoutTriggerContext() || {};
 	const { elRef: parentContentRef } = useFlyoutContentContext() || {};
@@ -71,7 +72,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		parentFlyoutContext.trapFocusMode === "action-menu" ||
 		parentFlyoutContext.trapFocusMode === "content-menu";
 
-	const [isRTL] = useRTL();
 	const internalTriggerElRef = React.useRef<HTMLButtonElement>(null);
 
 	/**
@@ -82,20 +82,15 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * For example, if you have a tooltip -> popover inside another popover.content, tooltip shouldn't use its parent context anymore
 	 */
 	const isParentTriggerInsideFlyout =
-		// eslint-disable-next-line react-hooks/refs
 		!!parentTriggerRef?.current && parentContentRef?.current?.contains(parentTriggerRef.current);
 	const tryParentTrigger = !parentContentRef || isParentTriggerInsideFlyout;
 
 	const triggerElRef = (tryParentTrigger && parentTriggerRef) || internalTriggerElRef;
-	const triggerBoundsRef = React.useRef<DOMRect>(null);
 	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
-	// Check if transition had enough time to start when opening a flyout
-	// In some cases there is not enough time to start, like when you're holding tab key
-	const transitionStartedRef = React.useRef(false);
 	// Lock blur event while pressing anywhere inside the flyout content
 	const lockedBlurEffects = React.useRef(false);
 	// Focus shouldn't return back to the trigger when user intentionally clicks outside the flyout
@@ -103,26 +98,26 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
+	// Cleanup function for safe area tracking
+	const safeAreaRef = React.useRef<{ origin: G.Coordinates; cleanup: () => void } | null>(null);
 
 	const originCoordinatesRef = React.useRef<G.Coordinates | null>(originCoordinates ?? null);
-	// eslint-disable-next-line react-hooks/refs
 	originCoordinatesRef.current = originCoordinates ?? null;
 
 	const flyout = useFlyout({
 		triggerElRef: positionRef ?? triggerElRef,
 		flyoutElRef,
-		triggerBoundsRef: originCoordinates ? originCoordinatesRef : triggerBoundsRef,
+		triggerCoordinatesRef: originCoordinatesRef,
 		width,
 		position: passedPosition,
-		defaultActive: resolvedActive,
-		// eslint-disable-next-line react-hooks/refs
+		defaultActive: active,
 		container: containerRef?.current,
 		fallbackPositions,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		contentGap,
 		contentShift,
+		onClose: onCloseRef.current,
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
 	const isRendered = status !== "idle";
@@ -139,6 +134,26 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, []);
 
 	/**
+	 * Disable all triggers while mouse is moving over the safe area
+	 */
+	const disableTriggers = React.useCallback(() => {
+		if (triggerType !== "hover") return;
+
+		document.querySelectorAll("[data-rs-flyout-active]").forEach((el) => {
+			if (el === triggerElRef.current) return;
+			(el as HTMLElement).style.pointerEvents = "none";
+		});
+	}, [triggerElRef, triggerType]);
+
+	const enableTriggers = React.useCallback(() => {
+		if (triggerType !== "hover") return;
+
+		document.querySelectorAll("[data-rs-flyout-active]").forEach((el) => {
+			(el as HTMLElement).style.removeProperty("pointer-events");
+		});
+	}, [triggerType]);
+
+	/**
 	 * Component open/close handlers
 	 * Called from the internal actions
 	 */
@@ -147,7 +162,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (isRendered && triggerType !== "hover") return;
 
 		onOpenRef.current?.();
-	}, [onOpenRef, isRendered, triggerType]);
+		disableTriggers();
+	}, [onOpenRef, isRendered, triggerType, disableTriggers]);
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
@@ -157,12 +173,21 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			if (!canClose) return;
 
 			onCloseRef.current?.({ reason: options.reason });
+			enableTriggers();
 
 			if (options?.closeParents) {
 				parentFlyoutContext?.handleClose?.({ closeParents: true, reason: options.reason });
 			}
 		},
-		[isRendered, isDismissible, triggerType, onCloseRef, disabled, parentFlyoutContext]
+		[
+			isRendered,
+			isDismissible,
+			triggerType,
+			onCloseRef,
+			disabled,
+			parentFlyoutContext,
+			enableTriggers,
+		]
 	);
 
 	/**
@@ -197,8 +222,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		hoverTriggeredWithTouchEventRef.current = true;
 	}, [triggerType]);
 
-	const handleMouseEnter = React.useCallback(() => {
+	const handleContentMouseEnter = React.useCallback(() => {
 		clearTimer();
+
 		if (hoverTriggeredWithTouchEventRef.current) {
 			handleOpen();
 			hoverTriggeredWithTouchEventRef.current = false;
@@ -209,14 +235,21 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				() => {
 					handleOpen();
 				},
-				groupTimeouts && cooldown.status === "warming"
-					? timeouts.mouseEnter
-					: isSubmenu
-						? timeouts.mouseEnter
-						: 0
+				groupTimeouts && cooldown.status === "warming" ? timeouts.mouseEnter : 0
 			);
 		}
-	}, [clearTimer, handleOpen, groupTimeouts, isSubmenu]);
+	}, [clearTimer, handleOpen, groupTimeouts]);
+
+	const handleTriggerMouseEnter = React.useCallback(
+		(e: React.MouseEvent) => {
+			if (e.currentTarget === triggerElRef.current) {
+				safeAreaRef.current?.cleanup();
+			}
+
+			handleContentMouseEnter();
+		},
+		[triggerElRef, handleContentMouseEnter]
+	);
 
 	const handleMouseLeave = React.useCallback(
 		(e: React.MouseEvent) => {
@@ -234,15 +267,28 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			cooldown.cool();
 			clearTimer();
 
-			if (isSubmenu) {
-				timerRef.current = setTimeout(() => {
-					handleClose({});
-				}, timeouts.mouseLeave);
+			safeAreaRef.current?.cleanup();
+
+			if (triggerType === "hover" && isRendered) {
+				// Safe area coordinates are defined based on the trigger mouse out, even when returning mouse from content to trigger
+				const origin =
+					e.currentTarget === flyoutElRef.current && safeAreaRef.current?.origin
+						? safeAreaRef.current.origin
+						: { x: e.clientX, y: e.clientY };
+				const cleanup = createSafeArea({
+					contentRef: flyoutElRef,
+					triggerRef: triggerElRef,
+					position: flyout.position,
+					onClose: () => handleClose({}),
+					origin,
+				});
+
+				safeAreaRef.current = { origin, cleanup };
 			} else {
 				handleClose({});
 			}
 		},
-		[clearTimer, handleClose, triggerElRef, flyoutElRef, isSubmenu]
+		[clearTimer, handleClose, triggerElRef, flyoutElRef, triggerType, isRendered, flyout.position]
 	);
 
 	const handleTriggerClick = React.useCallback(() => {
@@ -253,13 +299,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		}
 	}, [isRendered, handleOpen, handleClose]);
 
-	const handleTriggerMouseDown = React.useCallback(() => {
-		const triggerEl = positionRef?.current ?? triggerElRef.current;
-		const rect = triggerEl?.getBoundingClientRect();
-		if (!rect) return;
-		triggerBoundsRef.current = rect;
-	}, [triggerElRef, positionRef]);
-
 	const handleContentMouseDown = () => {
 		lockedBlurEffects.current = true;
 		hoverTriggeredWithTouchEventRef.current = true;
@@ -268,28 +307,10 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		lockedBlurEffects.current = false;
 	};
 
-	const handleTransitionStart = React.useCallback(
-		(e: TransitionEvent) => {
-			if (!resolvedActive) return;
-			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			transitionStartedRef.current = true;
-
-			/**
-			 * After animation has started, we're sure about the correct bounds
-			 * so drop the cache to make flyout work when trigger moves around
-			 */
-			triggerBoundsRef.current = null;
-		},
-		[resolvedActive]
-	);
-
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			if (status === "hidden") {
-				transitionStartedRef.current = false;
-				remove();
-			}
+			if (status === "hidden") remove();
 		},
 		[remove, status]
 	);
@@ -298,23 +319,19 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * Control the display based on the props
 	 */
 	useIsomorphicLayoutEffect(() => {
-		if (resolvedActive) {
+		if (active) {
 			render();
 			return;
 		}
 
 		if (disabled) cooldown.cool();
 
-		/**
-		 * Check that transitions are enabled and it has been triggered on tooltip open
-		 * - keyboard focus navigation could move too fast and ignore the transitions completely
-		 * - warmed up tooltips get removed instantly
-		 */
+		// Prevent calling hide on component mount
+		if (prevActive === active) return;
 
 		if (
 			checkTransitions() &&
 			!disableHideAnimation &&
-			transitionStartedRef.current &&
 			(cooldown.status === "cooling" || !groupTimeouts)
 		) {
 			hide();
@@ -322,11 +339,10 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			// In case transitions are disabled globally - remove from the DOM immediately
 			remove();
 		}
-	}, [resolvedActive, render, hide, remove, disableHideAnimation, disabled, groupTimeouts]);
+	}, [active, prevActive, render, hide, remove, disableHideAnimation, disabled, groupTimeouts]);
 
-	React.useEffect(() => {
-		// Wait after positioning before show is triggered to animate flyout from the right side
-		if (status === "positioned") onNextFrame(() => show());
+	useIsomorphicLayoutEffect(() => {
+		if (status === "rendered") show();
 	}, [status, show]);
 
 	/**
@@ -366,7 +382,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 		if (trapFocusRef.current?.trapped) {
 			/* Locking the popover to not open it again on trigger focus */
-			if (triggerType === "hover") {
+			if (triggerType === "hover" && checkKeyboardMode()) {
 				lockedRef.current = true;
 				setTimeout(() => {
 					lockedRef.current = false;
@@ -386,23 +402,12 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, []);
 
 	/**
-	 * Update position on resize or RTL
+	 * Clean up safe polygon tracking on unmount or when flyout closes
 	 */
 	React.useEffect(() => {
-		if (!isRendered) return;
-
-		const resizeObserver = new ResizeObserver(() => updatePosition({ sync: true }));
-
-		resizeObserver.observe(document.body);
-		if (triggerElRef.current) resizeObserver.observe(triggerElRef.current);
-		if (flyoutElRef.current) resizeObserver.observe(flyoutElRef.current);
-
-		return () => resizeObserver.disconnect();
-	}, [updatePosition, triggerElRef, isRendered, flyoutElRef]);
-
-	React.useEffect(() => {
-		updatePosition({ sync: true });
-	}, [isRTL, updatePosition]);
+		if (!isRendered) safeAreaRef.current?.cleanup();
+		return () => safeAreaRef.current?.cleanup();
+	}, [isRendered]);
 
 	/**
 	 * Imperative methods for controlling Flyout
@@ -412,7 +417,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		() => ({
 			open: handleOpen,
 			close: () => handleClose({}),
-			updatePosition: () => updatePosition({ sync: true }),
+			updatePosition: () => updatePosition(),
 		}),
 		[handleOpen, handleClose, updatePosition]
 	);
@@ -443,12 +448,11 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				handleOpen,
 				handleFocus,
 				handleBlur,
-				handleMouseEnter,
+				handleTriggerMouseEnter,
+				handleContentMouseEnter,
 				handleMouseLeave,
 				handleTouchStart,
-				handleTransitionStart,
 				handleTransitionEnd,
-				handleMouseDown: handleTriggerMouseDown,
 				handleClick: handleTriggerClick,
 				handleContentMouseDown,
 				handleContentMouseUp,
