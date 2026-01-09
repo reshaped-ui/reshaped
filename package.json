@@ -22,7 +22,7 @@
 		"release:local": "pnpm --filter reshaped run release:local",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic) --only-changed --externals '.storybook/public/**'",
 		"test:vrt": "pnpm chromatic",
-		"test:browser": "pnpm --filter reshaped,@reshaped/flyout run test:browser",
+		"test:browser": "pnpm --filter reshaped run test:browser",
 		"test:unit": "pnpm -r run test:unit",
 		"test:size": "size-limit",
 		"lint": "pnpm lint:js && pnpm lint:css",

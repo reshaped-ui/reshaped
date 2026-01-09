@@ -33,7 +33,7 @@
 		"clean": "rm -rf dist",
 		"dev": "tsc-watch --onSuccess \"resolve-tspaths\"",
 		"build": "tsc && resolve-tspaths",
-		"test:unit": "vitest run --project=browser"
+		"test:browser": "vitest run --project=browser"
 	},
 	"peerDependencies": {
 		"react": "^18 || ^19",

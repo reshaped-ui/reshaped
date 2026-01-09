@@ -211,7 +211,7 @@ jobs:
 
   test-unit:
     runs-on: ubuntu-latest
-    needs: [setup, setup-playwright]
+    needs: setup
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
