@@ -7,20 +7,16 @@ type Attributes = G.Attributes<"button"> &
 		ref?: AttributesRef;
 	};
 
+export type RenderAttributes = G.Attributes<"a"> & {
+	ref: React.RefObject<HTMLAnchorElement | null>;
+	children: React.ReactNode;
+};
+
 export type Props = {
 	/** Node for inserting the content */
 	children?: React.ReactNode;
 	/** Render a custom root element, useful for integrating with routers */
-	render?: (
-		attributes: Attributes & {
-			ref: AttributesRef;
-			className: string;
-			onClick: (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
-			onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => void;
-			"aria-disabled"?: boolean;
-			children: React.ReactNode;
-		}
-	) => React.ReactNode;
+	render?: (attributes: RenderAttributes) => React.ReactNode;
 	/** Callback when clicked, renders it as a button tag if href is not provided */
 	onClick?: (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
 	/** URL, renders it as an anchor tag */

@@ -82,7 +82,7 @@ const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 		children: children,
 	};
 
-	if (render) return render(tagAttributes);
+	if (render) return render(tagAttributes as T.RenderAttributes);
 	return <TagName {...tagAttributes} />;
 });
 
