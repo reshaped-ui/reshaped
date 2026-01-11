@@ -19,14 +19,14 @@
 	backface-visibility: hidden;
 	transition: var(--rs-duration-medium) var(--rs-easing-standard);
 	transition-property: transform, opacity, box-shadow, background-color;
+}
 
-	&:empty {
-		width: var(--rs-badge-empty-size);
-		height: var(--rs-badge-empty-size);
-		min-width: auto;
-		min-height: auto;
-		padding: 0;
-	}
+.root.--empty {
+	width: var(--rs-badge-empty-size);
+	height: var(--rs-badge-empty-size);
+	min-width: auto;
+	min-height: auto;
+	padding: 0;
 }
 
 .icon {

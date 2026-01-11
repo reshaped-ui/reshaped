@@ -31,6 +31,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	} = props;
 	const isActionable = !!(onClick || href);
 	const iconSize = size === "small" ? 3 : 4;
+	const empty = !children && !icon && !endIcon;
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -40,10 +41,11 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		color && s[`--color-${color}`],
 		variant && s[`--variant-${variant}`],
 		isActionable && s["--actionable"],
-		highlighted && s["--highlighted"]
+		highlighted && s["--highlighted"],
+		empty && s["--empty"]
 	);
 
-	const hnadleDismiss: ActionableProps["onClick"] = (e) => {
+	const handleDismiss: ActionableProps["onClick"] = (e) => {
 		e.stopPropagation();
 		onDismiss?.();
 	};
@@ -56,7 +58,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			attributes={attributes}
 			ref={ref}
 			as={as}
-			touchHitbox
+			touchHitbox={isActionable}
 		>
 			{icon && <Icon svg={icon} autoWidth size={iconSize} className={s.icon} />}
 			{children && (
@@ -73,7 +75,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			{endIcon && <Icon svg={endIcon} autoWidth size={iconSize} className={s.icon} />}
 			{onDismiss && (
 				<Actionable
-					onClick={hnadleDismiss}
+					onClick={handleDismiss}
 					className={s.dismiss}
 					as="span"
 					attributes={{ "aria-label": dismissAriaLabel }}
