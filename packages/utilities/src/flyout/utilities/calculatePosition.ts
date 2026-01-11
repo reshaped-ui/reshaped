@@ -59,15 +59,15 @@ const calculatePosition = (args: Args) => {
 	const renderContainerHeight = passedContainer?.clientHeight ?? window.innerHeight;
 	const renderContainerWidth = passedContainer?.clientWidth ?? window.innerWidth;
 
-	// When rendering in the body, bottom bounds will be larrger than the viewport so we calculate it manually
+	// When rendering in the body, bottom bounds will be larger than the viewport so we calculate it manually
 	const containerBoundsBottom = passedContainer
 		? containerBounds.bottom
 		: window.innerHeight - scrollY;
 
-	// When inside a container, adjut position based on the container scroll since flyout is rendered outside the scroll area
+	// When inside a container, adjust position based on the container scroll since flyout is rendered outside the scroll area
 	const relativeLeft = triggerBounds.left - containerBounds.left + (containerX || 0);
 	const relativeRight = containerBounds.right - triggerBounds.right - (containerX || 0);
-	const relativeTop = triggerBounds.top - containerBounds.top - (containerY || 0);
+	const relativeTop = triggerBounds.top - containerBounds.top + (containerY || 0);
 	const relativeBottom = containerBoundsBottom - triggerBounds.bottom - (containerY || 0);
 
 	switch (position) {

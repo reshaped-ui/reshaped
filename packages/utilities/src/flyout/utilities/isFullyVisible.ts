@@ -19,6 +19,8 @@ const isFullyVisible = (args: {
 	const containerLeft = visualContainerBounds.left;
 	const containerTop = visualContainerBounds.top;
 
+	console.log(flyoutTop + flyoutBounds.height, containerTop + visualContainerBounds.height);
+
 	if (flyoutLeft < containerLeft + CONTAINER_OFFSET) return false;
 	if (flyoutTop < containerTop + CONTAINER_OFFSET) return false;
 

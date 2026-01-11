@@ -93,8 +93,8 @@ const applyPosition = (
 		const visualContainerBounds = passedContainer?.getBoundingClientRect() ?? {
 			width: window.innerWidth,
 			height: window.innerHeight,
-			left: window.scrollX,
-			top: window.scrollY,
+			left: 0,
+			top: 0,
 		};
 
 		return isFullyVisible({
