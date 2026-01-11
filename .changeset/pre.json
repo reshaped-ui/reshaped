@@ -1,15 +1,10 @@
 {
-  "mode": "exit",
-  "tag": "canary",
-  "initialVersions": {
-    "@reshaped/core": "3.9.1-canary.1",
-    "reshaped": "3.9.1-canary.1",
-    "@reshaped/utilities": "3.9.1-canary.1"
-  },
-  "changesets": [
-    "chubby-yaks-shave",
-    "easy-pots-sneeze",
-    "hip-planets-tap",
-    "thirty-rings-tickle"
-  ]
+	"mode": "exit",
+	"tag": "canary",
+	"initialVersions": {
+		"@reshaped/core": "3.9.1-canary.2",
+		"reshaped": "3.9.1-canary.2",
+		"@reshaped/utilities": "3.9.1-canary.2"
+	},
+	"changesets": ["chubby-yaks-shave", "easy-pots-sneeze", "hip-planets-tap", "thirty-rings-tickle"]
 }
