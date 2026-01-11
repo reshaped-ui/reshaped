@@ -1,5 +1,11 @@
 # reshaped
 
+## 3.9.1-canary.1
+
+### Patch Changes
+
+- [#561](https://github.com/reshaped-ui/reshaped/pull/561) [`9d50a3e`](https://github.com/reshaped-ui/reshaped/commit/9d50a3edd1fe67b5246e9e3a65e101c9f72104f3) Thanks [@petewins](https://github.com/petewins)! - Fix Select component to support native optgroup elements. The component now correctly recognizes `<optgroup>` elements as valid containers for options, allowing native select dropdowns to render with grouped options.
+
 ## 3.9.1-canary.0
 
 ### Patch Changes

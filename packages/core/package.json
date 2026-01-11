@@ -1,7 +1,7 @@
 {
 	"name": "@reshaped/core",
 	"description": "Headless utilities and primitives for Reshaped design system",
-	"version": "3.9.1-canary.0",
+	"version": "3.9.1-canary.1",
 	"license": "MIT",
 	"homepage": "https://reshaped.so",
 	"repository": {

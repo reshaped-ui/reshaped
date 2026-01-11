@@ -2,11 +2,12 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/core": "3.9.0",
-    "reshaped": "3.9.0",
-    "@reshaped/utilities": "3.9.0"
+    "@reshaped/core": "3.9.1-canary.0",
+    "reshaped": "3.9.1-canary.0",
+    "@reshaped/utilities": "3.9.1-canary.0"
   },
   "changesets": [
+    "chubby-yaks-shave",
     "easy-pots-sneeze",
     "hip-planets-tap"
   ]
