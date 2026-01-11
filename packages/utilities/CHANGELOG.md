@@ -1,5 +1,11 @@
 # @reshaped/core
 
+## 3.9.1-canary.2
+
+### Patch Changes
+
+- [`4629116`](https://github.com/reshaped-ui/reshaped/commit/4629116fc1ae48f7b704271ca2ba7474b8b49f00) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: New utility
+
 ## 3.9.1-canary.0
 
 ### Patch Changes

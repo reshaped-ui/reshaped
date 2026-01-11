@@ -1,5 +1,12 @@
 # reshaped
 
+## 3.9.1-canary.2
+
+### Patch Changes
+
+- Updated dependencies [[`4629116`](https://github.com/reshaped-ui/reshaped/commit/4629116fc1ae48f7b704271ca2ba7474b8b49f00)]:
+  - @reshaped/utilities@3.9.1-canary.2
+
 ## 3.9.1-canary.1
 
 ### Patch Changes
