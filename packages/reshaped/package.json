@@ -1,7 +1,7 @@
 {
   "name": "reshaped",
   "description": "Professionally crafted design system in React & Figma for building products of any scale and complexity",
-  "version": "3.9.0",
+  "version": "3.9.1-canary.0",
   "license": "MIT",
   "email": "hello@reshaped.so",
   "homepage": "https://reshaped.so",
@@ -77,7 +77,7 @@
   },
   "scripts": {
     "clean": "sh ./bin/clean.sh",
-		"dev": "storybook dev -p 3001 -c ../../.storybook --disable-telemetry",
+    "dev": "storybook dev -p 3001 -c ../../.storybook --disable-telemetry",
     "build": "pnpm clean && pnpm build:esm && pnpm build:css && pnpm build:bundle",
     "build:themes": "node bin/cli.js theming --config dist/cli/theming/reshaped.config.js --output src/themes",
     "build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
@@ -99,7 +99,7 @@
     "react-dom": "^18 || ^19"
   },
   "dependencies": {
-		"@reshaped/utilities": "workspace:*",
+    "@reshaped/utilities": "workspace:*",
     "@csstools/postcss-global-data": "3.1.0",
     "chalk": "4.1.2",
     "commander": "14.0.2",

@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.9.1-canary.0
+
+### Patch Changes
+
+- [#562](https://github.com/reshaped-ui/reshaped/pull/562) [`b81637f`](https://github.com/reshaped-ui/reshaped/commit/b81637ff2139dedcaf4350c35b80ab2d0777c777) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Updated render prop attributes types to better match router libraries types
+
+- Updated dependencies [[`4742502`](https://github.com/reshaped-ui/reshaped/commit/474250201d1ea8dc8e5f6086ac4e1e8af20b5404)]:
+  - @reshaped/utilities@3.9.1-canary.0
+
 ## 3.9.0
 
 ### Minor Changes

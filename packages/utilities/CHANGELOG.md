@@ -1,5 +1,11 @@
 # @reshaped/core
 
+## 3.9.1-canary.0
+
+### Patch Changes
+
+- [#557](https://github.com/reshaped-ui/reshaped/pull/557) [`4742502`](https://github.com/reshaped-ui/reshaped/commit/474250201d1ea8dc8e5f6086ac4e1e8af20b5404) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Moved implementation to the new utilities package
+
 ## 3.9.0
 
 ### Patch Changes
