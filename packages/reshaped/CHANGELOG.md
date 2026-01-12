@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.9.1-canary.3
+
+### Patch Changes
+
+- [`875c365`](https://github.com/reshaped-ui/reshaped/commit/875c3658f53aacf65dbf43812decc1e65d7631b0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Fixed touch hitbox styles
+
+- Updated dependencies [[`ed23b45`](https://github.com/reshaped-ui/reshaped/commit/ed23b4575f401954ff137d9d510f384c5fa6df1b), [`5d83fff`](https://github.com/reshaped-ui/reshaped/commit/5d83fff1dc4b964fcf867aea062434d52d395a22), [`f2b61ed`](https://github.com/reshaped-ui/reshaped/commit/f2b61ed8365da5a9bc5c7fef034c980a9af91122)]:
+  - @reshaped/utilities@3.9.1-canary.3
+
 ## 3.9.1-canary.2
 
 ### Patch Changes

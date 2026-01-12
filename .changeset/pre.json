@@ -7,9 +7,13 @@
     "@reshaped/utilities": "3.9.1-canary.2"
   },
   "changesets": [
+    "big-ants-design",
+    "calm-dogs-joke",
     "chubby-yaks-shave",
     "easy-pots-sneeze",
+    "great-adults-tie",
     "hip-planets-tap",
+    "perky-worms-sip",
     "thirty-rings-tickles"
   ]
 }

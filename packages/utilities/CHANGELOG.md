@@ -1,5 +1,15 @@
 # @reshaped/core
 
+## 3.9.1-canary.3
+
+### Patch Changes
+
+- [`ed23b45`](https://github.com/reshaped-ui/reshaped/commit/ed23b4575f401954ff137d9d510f384c5fa6df1b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Simplified position calculations
+
+- [`5d83fff`](https://github.com/reshaped-ui/reshaped/commit/5d83fff1dc4b964fcf867aea062434d52d395a22) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: improved positioning inside containers and other edge cases
+
+- [`f2b61ed`](https://github.com/reshaped-ui/reshaped/commit/f2b61ed8365da5a9bc5c7fef034c980a9af91122) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: fixed position inside scrollable containers
+
 ## 3.9.1-canary.2
 
 ### Patch Changes
