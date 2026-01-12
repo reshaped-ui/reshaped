@@ -15,10 +15,9 @@ class Flyout {
 		this.#options = options;
 	}
 
-	#update = (options?: { fallback?: boolean }): ReturnType<typeof applyPosition> => {
+	#update = (): ReturnType<typeof applyPosition> => {
 		const result = applyPosition({
 			...this.#options,
-			fallbackPositions: options?.fallback === false ? [] : this.#options.fallbackPositions,
 			lastUsedPosition: this.#lastUsedPosition,
 		});
 
@@ -31,11 +30,15 @@ class Flyout {
 		if (!trigger) return;
 
 		const container = findClosestScrollableContainer({ el: trigger });
-
-		if (!container) return;
+		const root = container || window;
 
 		const handleScroll = rafThrottle(() => {
 			if (!this.#active) return;
+
+			if (!container) {
+				this.#update();
+				return;
+			}
 
 			const triggerBounds = trigger.getBoundingClientRect();
 			const containerBounds = container.getBoundingClientRect();
@@ -48,12 +51,12 @@ class Flyout {
 			) {
 				onClose();
 			} else {
-				this.#update({ fallback: false });
+				this.#update();
 			}
 		});
 
-		container.addEventListener("scroll", handleScroll, { passive: true });
-		this.#handlerCleanupMap.scroll = () => container.removeEventListener("scroll", handleScroll);
+		root.addEventListener("scroll", handleScroll, { passive: true });
+		this.#handlerCleanupMap.scroll = () => root.removeEventListener("scroll", handleScroll);
 	};
 
 	#addRTLHandler = () => {

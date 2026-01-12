@@ -1,10 +1,9 @@
 import getShadowRoot from "dom/getShadowRoot";
 import isRTL from "i18n/isRTL";
 
-import { CONTAINER_OFFSET, RESET_STYLES } from "../constants";
+import { VIEWPORT_OFFSET, RESET_STYLES } from "../constants";
 
 import calculatePosition from "./calculatePosition";
-import findClosestFixedContainer from "./findClosestFixedContainer";
 import getPositionFallbacks from "./getPositionFallbacks";
 import getRectFromCoordinates from "./getRectFromCoordinates";
 import isFullyVisible from "./isFullyVisible";
@@ -20,7 +19,7 @@ const applyPosition = (
 		trigger,
 		content,
 		triggerCoordinates,
-		container: passedContainer,
+		container,
 		contentShift = 0,
 		contentGap = 0,
 		position,
@@ -33,6 +32,12 @@ const applyPosition = (
 	const rtl = isRTL();
 	const contentClone = content.cloneNode(true) as HTMLElement;
 	const triggerBounds = triggerCoordinates || trigger?.getBoundingClientRect();
+	const containerBounds = container?.getBoundingClientRect() ?? {
+		width: window.innerWidth,
+		height: window.innerHeight,
+		left: window.scrollX,
+		top: window.scrollY,
+	};
 
 	contentClone.style.cssText = "";
 
@@ -52,18 +57,9 @@ const applyPosition = (
 
 	root.appendChild(contentClone);
 
-	const closestFixedContainer =
-		!passedContainer && trigger ? findClosestFixedContainer({ el: trigger }) : undefined;
-	const container =
-		passedContainer ||
-		// Render inside fixed position container automatically to keep their position synced on scroll
-		closestFixedContainer ||
-		document.body;
-	const renderContainerBounds = container.getBoundingClientRect();
-
 	const testPosition = (position: Position, options?: { width?: Width }) => {
 		if (options?.width === "100%") {
-			contentClone.style.width = `calc(100% - ${CONTAINER_OFFSET * 2}px)`;
+			contentClone.style.width = `calc(100% - ${VIEWPORT_OFFSET * 2}px)`;
 		} else if (options?.width === "trigger") {
 			contentClone.style.width = `${resolvedTriggerBounds.width}px`;
 		} else if (width) {
@@ -75,36 +71,25 @@ const applyPosition = (
 		return calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
 			flyoutBounds: contentClone.getBoundingClientRect(),
-			containerBounds: renderContainerBounds,
 			position,
 			contentGap,
 			contentShift,
 			rtl,
 			width,
-			passedContainer:
-				passedContainer ||
-				(closestFixedContainer !== document.body ? closestFixedContainer : undefined),
 			fallbackAdjustLayout,
 			fallbackMinHeight,
 		});
 	};
 
 	const testVisibility = (calculated: ReturnType<typeof calculatePosition>) => {
-		const visualContainerBounds = passedContainer?.getBoundingClientRect() ?? {
-			width: window.innerWidth,
-			height: window.innerHeight,
-			left: 0,
-			top: 0,
-		};
-
 		return isFullyVisible({
 			flyoutBounds: calculated.boundaries,
-			visualContainerBounds,
-			renderContainerBounds,
+			containerBounds,
 		});
 	};
 
 	let calculated: ReturnType<typeof calculatePosition> | null = null;
+
 	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
 	testOrder.some((currentPosition) => {

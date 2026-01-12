@@ -1,40 +1,27 @@
-import { CONTAINER_OFFSET } from "../constants";
+import { VIEWPORT_OFFSET } from "../constants";
 
 type Bounds = Pick<DOMRect, "left" | "top" | "width" | "height">;
 
 /**
  * Check if element visually fits within its render container
  * @param flyoutBounds - Bounds of the flyout content
- * @param visualContainerBounds - Bounds of the container where the flyout content should visually fit
- * @param renderContainerBounds - Bounds of the container where flyout content is rendered
+ * @param containerBounds - Bounds of the container where the flyout content should visually fit
  */
-const isFullyVisible = (args: {
-	flyoutBounds: Bounds;
-	visualContainerBounds: Bounds;
-	renderContainerBounds: Bounds;
-}) => {
-	const { flyoutBounds, visualContainerBounds, renderContainerBounds } = args;
-	const flyoutLeft = renderContainerBounds.left + flyoutBounds.left;
-	const flyoutTop = renderContainerBounds.top + flyoutBounds.top;
-	const containerLeft = visualContainerBounds.left;
-	const containerTop = visualContainerBounds.top;
+const isFullyVisible = (args: { flyoutBounds: Bounds; containerBounds: Bounds }) => {
+	const { flyoutBounds, containerBounds } = args;
+	const flyoutLeft = flyoutBounds.left;
+	const flyoutTop = flyoutBounds.top;
+	const containerLeft = containerBounds.left;
+	const containerTop = containerBounds.top;
 
-	console.log(flyoutTop + flyoutBounds.height, containerTop + visualContainerBounds.height);
+	if (flyoutLeft < containerLeft + VIEWPORT_OFFSET) return false;
+	if (flyoutTop < containerTop + VIEWPORT_OFFSET) return false;
 
-	if (flyoutLeft < containerLeft + CONTAINER_OFFSET) return false;
-	if (flyoutTop < containerTop + CONTAINER_OFFSET) return false;
-
-	if (
-		flyoutLeft + flyoutBounds.width >
-		containerLeft + visualContainerBounds.width - CONTAINER_OFFSET
-	) {
+	if (flyoutLeft + flyoutBounds.width > containerLeft + containerBounds.width - VIEWPORT_OFFSET) {
 		return false;
 	}
 
-	if (
-		flyoutTop + flyoutBounds.height >
-		containerTop + visualContainerBounds.height - CONTAINER_OFFSET
-	) {
+	if (flyoutTop + flyoutBounds.height > containerTop + containerBounds.height - VIEWPORT_OFFSET) {
 		return false;
 	}
 

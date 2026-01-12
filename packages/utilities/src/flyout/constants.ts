@@ -1,4 +1,4 @@
-export const CONTAINER_OFFSET = 8;
+export const VIEWPORT_OFFSET = 8;
 
 export const RESET_STYLES = {
 	left: "0",

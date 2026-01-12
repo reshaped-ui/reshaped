@@ -724,7 +724,7 @@ export const containerRef: StoryObj = {
 					grow
 					backgroundColor="neutral-faded"
 					borderRadius="small"
-					height={80}
+					height={120}
 					attributes={{ ref: portalRef, "data-testid": "container" }}
 					justify="end"
 					align="start"
@@ -736,7 +736,7 @@ export const containerRef: StoryObj = {
 					grow
 					backgroundColor="neutral-faded"
 					borderRadius="small"
-					height={80}
+					height={120}
 					attributes={{ ref: portalRef2 }}
 					justify="start"
 					align="end"
@@ -748,12 +748,12 @@ export const containerRef: StoryObj = {
 					width={50}
 					backgroundColor="neutral-faded"
 					borderRadius="small"
-					height={80}
+					height={120}
 					attributes={{ ref: portalRef3 }}
 					padding={4}
 					overflow="auto"
 				>
-					<View height={120} width="120%" justify="center" align="center">
+					<View height={200} width="120%" justify="center" align="center">
 						<Demo containerRef={portalRef3} position="bottom-end" />
 					</View>
 				</View>

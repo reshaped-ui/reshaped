@@ -1,4 +1,4 @@
-import { CONTAINER_OFFSET } from "../constants";
+import { VIEWPORT_OFFSET } from "../constants";
 
 import centerBySize from "./centerBySize";
 import getRTLPosition from "./getRTLPosition";
@@ -8,8 +8,6 @@ import type { Width, Position } from "../types";
 type Args = {
 	triggerBounds: DOMRect;
 	flyoutBounds: DOMRect;
-	containerBounds: DOMRect;
-	passedContainer?: HTMLElement | null;
 	position: Position;
 	rtl: boolean;
 	width?: Width;
@@ -23,13 +21,11 @@ const calculatePosition = (args: Args) => {
 	const {
 		triggerBounds,
 		flyoutBounds,
-		containerBounds,
 		position: passedPosition,
 		rtl,
 		width: passedWidth,
 		contentGap = 0,
 		contentShift = 0,
-		passedContainer,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 	} = args;
@@ -43,32 +39,22 @@ const calculatePosition = (args: Args) => {
 	let height: number | null = null;
 	let width: number | null = null;
 
-	const flyoutWidth = flyoutBounds.width;
-	const flyoutHeight = flyoutBounds.height;
+	const { width: flyoutWidth, height: flyoutHeight } = flyoutBounds;
+	const {
+		width: triggerWidth,
+		height: triggerHeight,
+		left: triggerLeft,
+		top: triggerTop,
+		right: triggerRight,
+		bottom: triggerBottom,
+	} = triggerBounds;
+	const { innerHeight: containerHeight, innerWidth: containerWidth, scrollX, scrollY } = window;
 
-	const triggerWidth = triggerBounds.width;
-	const triggerHeight = triggerBounds.height;
-
-	// Detect passed container scroll to sync the flyout position with it
-	const containerX = passedContainer?.scrollLeft;
-	const containerY = passedContainer?.scrollTop;
-
-	const scrollX = containerX ?? window.scrollX;
-	const scrollY = containerY ?? window.scrollY;
-
-	const renderContainerHeight = passedContainer?.clientHeight ?? window.innerHeight;
-	const renderContainerWidth = passedContainer?.clientWidth ?? window.innerWidth;
-
-	// When rendering in the body, bottom bounds will be larger than the viewport so we calculate it manually
-	const containerBoundsBottom = passedContainer
-		? containerBounds.bottom
-		: window.innerHeight - scrollY;
-
-	// When inside a container, adjust position based on the container scroll since flyout is rendered outside the scroll area
-	const relativeLeft = triggerBounds.left - containerBounds.left + (containerX || 0);
-	const relativeRight = containerBounds.right - triggerBounds.right - (containerX || 0);
-	const relativeTop = triggerBounds.top - containerBounds.top + (containerY || 0);
-	const relativeBottom = containerBoundsBottom - triggerBounds.bottom - (containerY || 0);
+	// Convert rect values to css position values
+	const relativeLeft = triggerLeft + scrollX;
+	const relativeRight = containerWidth - triggerRight - scrollX;
+	const relativeTop = triggerTop + scrollY;
+	const relativeBottom = containerHeight - triggerBottom - scrollY;
 
 	switch (position) {
 		case "start":
@@ -141,10 +127,10 @@ const calculatePosition = (args: Args) => {
 	if (fallbackAdjustLayout) {
 		const getOverflow = () => {
 			return {
-				top: -top + scrollY + CONTAINER_OFFSET,
-				bottom: top + flyoutHeight + CONTAINER_OFFSET - scrollY - renderContainerHeight,
-				left: -left + scrollX + CONTAINER_OFFSET,
-				right: left + flyoutWidth + CONTAINER_OFFSET - scrollX - renderContainerWidth,
+				top: -top + scrollY + VIEWPORT_OFFSET,
+				bottom: top + flyoutHeight + VIEWPORT_OFFSET - scrollY - containerHeight,
+				left: -left + scrollX + VIEWPORT_OFFSET,
+				right: left + flyoutWidth + VIEWPORT_OFFSET - scrollX - containerWidth,
 			};
 		};
 
@@ -152,14 +138,14 @@ const calculatePosition = (args: Args) => {
 
 		if (isHorizontalPosition) {
 			if (overflow.top > 0) {
-				top = CONTAINER_OFFSET + scrollY;
+				top = VIEWPORT_OFFSET + scrollY;
 				if (bottom !== null) bottom = bottom - overflow.top;
 			} else if (overflow.bottom > 0) {
 				top = top - overflow.bottom;
 			}
 		} else {
 			if (overflow.left > 0) {
-				left = CONTAINER_OFFSET + scrollX;
+				left = VIEWPORT_OFFSET + scrollX;
 				if (right !== null) right = right - overflow.left;
 			} else if (overflow.right > 0) {
 				left = left - overflow.right;
@@ -178,8 +164,8 @@ const calculatePosition = (args: Args) => {
 	}
 
 	if (passedWidth === "100%") {
-		left = CONTAINER_OFFSET;
-		width = window.innerWidth - CONTAINER_OFFSET * 2;
+		left = VIEWPORT_OFFSET;
+		width = window.innerWidth - VIEWPORT_OFFSET * 2;
 	} else if (passedWidth === "trigger") {
 		width = triggerBounds.width;
 	}

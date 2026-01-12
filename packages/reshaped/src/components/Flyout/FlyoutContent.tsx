@@ -4,7 +4,6 @@ import React from "react";
 
 import Portal from "components/_private/Portal";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import { findClosestPositionContainer } from "utilities/dom";
 import { classNames } from "utilities/props";
 
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
@@ -19,7 +18,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		flyout,
 		id,
 		flyoutElRef,
-		triggerElRef,
 		handleTransitionEnd,
 		triggerType,
 		handleContentMouseEnter,
@@ -34,18 +32,10 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		disableContentHover,
 		autoFocus,
 		width,
-		containerRef: passedContainerRef,
 		isSubmenu,
 	} = useFlyoutContext();
 	const { status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
-	const closestFixedContainer = React.useMemo(() => {
-		if (!mounted) return null;
-		if (!triggerElRef) return null;
-
-		return findClosestPositionContainer({ el: triggerElRef.current });
-	}, [mounted, triggerElRef]);
-	const containerRef = passedContainerRef || { current: closestFixedContainer };
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -116,7 +106,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		</ContentProvider>
 	);
 
-	return <Portal targetRef={containerRef}>{content}</Portal>;
+	return <Portal>{content}</Portal>;
 };
 
 FlyoutContent.displayName = "Flyout.Content";

@@ -1,6 +1,6 @@
 import { expect, test, describe, vi } from "vitest";
 
-import { CONTAINER_OFFSET } from "flyout/constants";
+import { VIEWPORT_OFFSET } from "flyout/constants";
 import calculatePosition from "flyout/utilities/calculatePosition";
 
 describe("flyout/calculatePosition", () => {
@@ -21,12 +21,10 @@ describe("flyout/calculatePosition", () => {
 	test("calculates position for top placement", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const result = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			contentGap: 0,
@@ -48,12 +46,10 @@ describe("flyout/calculatePosition", () => {
 	test("calculates position for bottom, start, and end placements", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const bottom = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "bottom",
 			rtl: false,
 			contentGap: 0,
@@ -68,7 +64,6 @@ describe("flyout/calculatePosition", () => {
 		const start = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "start",
 			rtl: false,
 			contentGap: 0,
@@ -83,7 +78,6 @@ describe("flyout/calculatePosition", () => {
 		const end = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "end",
 			rtl: false,
 			contentGap: 0,
@@ -99,12 +93,10 @@ describe("flyout/calculatePosition", () => {
 	test("calculates position for top-start, top-end, bottom-start, and bottom-end", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const topStart = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top-start",
 			rtl: false,
 			contentGap: 0,
@@ -119,7 +111,6 @@ describe("flyout/calculatePosition", () => {
 		const topEnd = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top-end",
 			rtl: false,
 			contentGap: 0,
@@ -135,7 +126,6 @@ describe("flyout/calculatePosition", () => {
 		const bottomStart = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "bottom-start",
 			rtl: false,
 			contentGap: 0,
@@ -150,7 +140,6 @@ describe("flyout/calculatePosition", () => {
 		const bottomEnd = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "bottom-end",
 			rtl: false,
 			contentGap: 0,
@@ -166,12 +155,10 @@ describe("flyout/calculatePosition", () => {
 	test("calculates position for start-top, start-bottom, end-top, and end-bottom", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const startTop = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "start-top",
 			rtl: false,
 			contentGap: 0,
@@ -186,7 +173,6 @@ describe("flyout/calculatePosition", () => {
 		const startBottom = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "start-bottom",
 			rtl: false,
 			contentGap: 0,
@@ -202,7 +188,6 @@ describe("flyout/calculatePosition", () => {
 		const endTop = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "end-top",
 			rtl: false,
 			contentGap: 0,
@@ -217,7 +202,6 @@ describe("flyout/calculatePosition", () => {
 		const endBottom = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "end-bottom",
 			rtl: false,
 			contentGap: 0,
@@ -233,12 +217,10 @@ describe("flyout/calculatePosition", () => {
 	test("applies contentGap correctly", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const top = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			contentGap: 10,
@@ -251,7 +233,6 @@ describe("flyout/calculatePosition", () => {
 		const bottom = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "bottom",
 			rtl: false,
 			contentGap: 10,
@@ -264,7 +245,6 @@ describe("flyout/calculatePosition", () => {
 		const start = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "start",
 			rtl: false,
 			contentGap: 10,
@@ -278,7 +258,6 @@ describe("flyout/calculatePosition", () => {
 		const end = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "end",
 			rtl: false,
 			contentGap: 10,
@@ -292,12 +271,10 @@ describe("flyout/calculatePosition", () => {
 	test("applies contentShift correctly", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const top = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			contentGap: 0,
@@ -310,7 +287,6 @@ describe("flyout/calculatePosition", () => {
 		const topStart = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top-start",
 			rtl: false,
 			contentGap: 0,
@@ -323,7 +299,6 @@ describe("flyout/calculatePosition", () => {
 		const start = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "start",
 			rtl: false,
 			contentGap: 0,
@@ -337,13 +312,11 @@ describe("flyout/calculatePosition", () => {
 	test("handles RTL by converting positions", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		// In RTL, "start" should behave like "end" in LTR
 		const startRTL = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "start",
 			rtl: true,
 			contentGap: 0,
@@ -353,7 +326,6 @@ describe("flyout/calculatePosition", () => {
 		const endLTR = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "end",
 			rtl: false,
 			contentGap: 0,
@@ -367,7 +339,6 @@ describe("flyout/calculatePosition", () => {
 		const topStartRTL = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top-start",
 			rtl: true,
 			contentGap: 0,
@@ -377,7 +348,6 @@ describe("flyout/calculatePosition", () => {
 		const topEndLTR = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top-end",
 			rtl: false,
 			contentGap: 0,
@@ -388,47 +358,16 @@ describe("flyout/calculatePosition", () => {
 		expect(topStartRTL.position).toBe("top-end");
 	});
 
-	test("handles container scrolling", () => {
-		const triggerBounds = createBounds(100, 200, 50, 30);
-		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
-		const container = {
-			scrollLeft: 50,
-			scrollTop: 100,
-			clientWidth: 1000,
-			clientHeight: 800,
-		} as unknown as HTMLElement;
-
-		const result = calculatePosition({
-			triggerBounds,
-			flyoutBounds,
-			containerBounds,
-			passedContainer: container,
-			position: "top",
-			rtl: false,
-			contentGap: 0,
-			contentShift: 0,
-		});
-
-		// With container scroll, relativeLeft should account for scrollLeft
-		// relativeLeft = triggerBounds.left - containerBounds.left + containerX
-		// = 100 - 0 + 50 = 150
-		// So left = 150 + centerBySize(50, 40) = 155
-		expect(result.boundaries.left).toBe(150 + 5);
-	});
-
 	test("handles window scrolling when no container is provided", () => {
 		Object.defineProperty(window, "scrollX", { value: 100, writable: true });
 		Object.defineProperty(window, "scrollY", { value: 200, writable: true });
 
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const result = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			contentGap: 0,
@@ -439,7 +378,7 @@ describe("flyout/calculatePosition", () => {
 		// relativeLeft = triggerBounds.left - containerBounds.left + 0 = 100
 		// left = 100 + centerBySize(50, 40) = 105
 		// Window scrollX/Y only affect overflow calculations, not position calculations
-		expect(result.boundaries.left).toBe(105);
+		expect(result.boundaries.left).toBe(205);
 
 		Object.defineProperty(window, "scrollX", { value: 0, writable: true });
 		Object.defineProperty(window, "scrollY", { value: 0, writable: true });
@@ -448,29 +387,23 @@ describe("flyout/calculatePosition", () => {
 	test("calculates transform correctly for left and right positioning", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const start = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "start",
 			rtl: false,
 			contentGap: 0,
 			contentShift: 0,
 		});
 
-		// start position sets right internally, so translateX should be -right
-		// right = relativeRight + triggerWidth = 850 + 50 = 900
-		// translateX = -900
 		expect(start.styles.right).toBe("0px");
 		expect(start.styles.left).toBe(null);
-		expect(start.styles.transform).toContain("translate(-900px");
+		expect(start.styles.transform).toContain("translate(-314px");
 
 		const end = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "end",
 			rtl: false,
 			contentGap: 0,
@@ -489,12 +422,10 @@ describe("flyout/calculatePosition", () => {
 		const triggerHeight = 30;
 		const triggerBounds = createBounds(100, triggerTop, 50, triggerHeight);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const top = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			contentGap: 0,
@@ -510,7 +441,6 @@ describe("flyout/calculatePosition", () => {
 		const bottom = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "bottom",
 			rtl: false,
 			contentGap: 0,
@@ -527,12 +457,10 @@ describe("flyout/calculatePosition", () => {
 	test("handles width option '100%'", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const result = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			width: "100%",
@@ -540,20 +468,18 @@ describe("flyout/calculatePosition", () => {
 			contentShift: 0,
 		});
 
-		expect(result.boundaries.left).toBe(CONTAINER_OFFSET);
-		expect(result.boundaries.width).toBe(window.innerWidth - CONTAINER_OFFSET * 2);
-		expect(result.styles.width).toBe(`${window.innerWidth - CONTAINER_OFFSET * 2}px`);
+		expect(result.boundaries.left).toBe(VIEWPORT_OFFSET);
+		expect(result.boundaries.width).toBe(window.innerWidth - VIEWPORT_OFFSET * 2);
+		expect(result.styles.width).toBe(`${window.innerWidth - VIEWPORT_OFFSET * 2}px`);
 	});
 
 	test("handles width option 'trigger'", () => {
 		const triggerBounds = createBounds(100, 200, 50, 30);
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		const result = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			width: "trigger",
@@ -568,7 +494,6 @@ describe("flyout/calculatePosition", () => {
 	test("handles fallbackAdjustLayout for vertical positions with horizontal overflow", () => {
 		const triggerBounds = createBounds(0, 200, 50, 30); // At left edge
 		const flyoutBounds = createBounds(0, 0, 40, 60);
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		Object.defineProperty(window, "scrollX", { value: 0, writable: true });
 		Object.defineProperty(window, "scrollY", { value: 0, writable: true });
@@ -576,7 +501,6 @@ describe("flyout/calculatePosition", () => {
 		const result = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top", // Vertical position - checks horizontal overflow
 			rtl: false,
 			contentGap: 0,
@@ -586,13 +510,12 @@ describe("flyout/calculatePosition", () => {
 
 		// left = 0 + centerBySize(50, 40) = 5
 		// overflow.left = -5 + 0 + 8 = 3 > 0, so left = 8
-		expect(result.boundaries.left).toBe(CONTAINER_OFFSET);
+		expect(result.boundaries.left).toBe(VIEWPORT_OFFSET);
 	});
 
 	test("handles fallbackAdjustLayout for vertical positions with overflow and height adjustment", () => {
 		const triggerBounds = createBounds(100, 5, 50, 30); // Very close to top
 		const flyoutBounds = createBounds(0, 0, 40, 200); // Large flyout
-		const containerBounds = createBounds(0, 0, 1000, 800);
 
 		Object.defineProperty(window, "scrollX", { value: 0, writable: true });
 		Object.defineProperty(window, "scrollY", { value: 0, writable: true });
@@ -600,7 +523,6 @@ describe("flyout/calculatePosition", () => {
 		const result = calculatePosition({
 			triggerBounds,
 			flyoutBounds,
-			containerBounds,
 			position: "top",
 			rtl: false,
 			contentGap: 0,
@@ -610,7 +532,7 @@ describe("flyout/calculatePosition", () => {
 		});
 
 		// Should adjust height when overflowing top
-		if (result.boundaries.top < CONTAINER_OFFSET) {
+		if (result.boundaries.top < VIEWPORT_OFFSET) {
 			expect(result.styles.height).not.toBe(null);
 			if (result.styles.height) {
 				const height = parseInt(result.styles.height);
