@@ -3,6 +3,7 @@ import isRTL from "i18n/isRTL";
 
 import { VIEWPORT_OFFSET, RESET_STYLES } from "../constants";
 
+import calculateLayoutAdjustment from "./calculateLayoutAdjustment";
 import calculatePosition from "./calculatePosition";
 import getPositionFallbacks from "./getPositionFallbacks";
 import getRectFromCoordinates from "./getRectFromCoordinates";
@@ -35,8 +36,8 @@ const applyPosition = (
 	const containerBounds = container?.getBoundingClientRect() ?? {
 		width: window.innerWidth,
 		height: window.innerHeight,
-		left: window.scrollX,
-		top: window.scrollY,
+		left: 0,
+		top: 0,
 	};
 
 	contentClone.style.cssText = "";
@@ -68,27 +69,46 @@ const applyPosition = (
 			contentClone.style.width = "";
 		}
 
-		return calculatePosition({
+		const flyoutBounds = contentClone.getBoundingClientRect();
+
+		const result = calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
-			flyoutBounds: contentClone.getBoundingClientRect(),
+			flyoutBounds,
 			position,
 			contentGap,
 			contentShift,
 			rtl,
-			width,
+		});
+
+		const adjustedResult = calculateLayoutAdjustment({
+			...result,
 			fallbackAdjustLayout,
 			fallbackMinHeight,
+			width,
+			flyoutBounds,
+			containerBounds,
+			triggerBounds: resolvedTriggerBounds,
 		});
+
+		return adjustedResult;
 	};
 
-	const testVisibility = (calculated: ReturnType<typeof calculatePosition>) => {
+	const testVisibility = (calculated: ReturnType<typeof calculateLayoutAdjustment>) => {
+		const flyoutBounds = {
+			// Flyout is rendered in body with position absolute, so bounds need to include the page scroll
+			left: calculated.styles.left,
+			top: calculated.styles.top,
+			height: calculated.styles.height ?? Math.ceil(contentClone.clientHeight),
+			width: calculated.styles.width ?? Math.ceil(contentClone.clientWidth),
+		};
+
 		return isFullyVisible({
-			flyoutBounds: calculated.boundaries,
+			flyoutBounds,
 			containerBounds,
 		});
 	};
 
-	let calculated: ReturnType<typeof calculatePosition> | null = null;
+	let calculated: ReturnType<typeof calculateLayoutAdjustment> | null = null;
 
 	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
@@ -121,7 +141,24 @@ const applyPosition = (
 	if (!calculated) calculated = testPosition(lastUsedPosition ?? position);
 
 	root.removeChild(contentClone);
-	Object.entries(calculated.styles).forEach(([key, value]) => {
+
+	const { styles } = calculated;
+	const translateX = (styles.right !== null ? -styles.right : styles.left) + window.scrollX;
+	const translateY = (styles.bottom !== null ? -styles.bottom : styles.top) + window.scrollY;
+	const resolvedStyles = {
+		left: styles.right === null ? "0px" : undefined,
+		right: styles.right === null ? undefined : "0px",
+		top: styles.bottom === null ? "0px" : undefined,
+		bottom: styles.bottom === null ? undefined : "0px",
+		height: styles.height !== null ? `${styles.height}px` : undefined,
+		width: styles.width !== null ? `${styles.width}px` : (width ?? undefined),
+		transform: `translate(${translateX}px, ${translateY}px)`,
+	};
+
+	content.style.cssText = "";
+
+	Object.entries(resolvedStyles).forEach(([key, value]) => {
+		if (!value) return;
 		content.style.setProperty(key, value);
 	});
 

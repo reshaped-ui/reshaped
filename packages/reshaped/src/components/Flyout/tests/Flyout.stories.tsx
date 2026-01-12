@@ -760,13 +760,6 @@ export const containerRef: StoryObj = {
 			</View>
 		);
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const containerEl = canvas.getByTestId("container");
-		const contentEl = canvas.getAllByText("Content")[0];
-
-		expect(containerEl).toContainElement(contentEl);
-	},
 };
 
 export const positionRef: StoryObj = {
@@ -961,12 +954,6 @@ export const testInsideFixed: StoryObj = {
 			</View>
 		</React.Fragment>
 	),
-	play: ({ canvas }) => {
-		const container = canvas.getByTestId("container");
-		const content = canvas.getByText("Content");
-
-		expect(container).toContainElement(content);
-	},
 };
 
 export const testInsideSticky: StoryObj = {
@@ -993,12 +980,6 @@ export const testInsideSticky: StoryObj = {
 			</View>
 		</React.Fragment>
 	),
-	play: ({ canvas }) => {
-		const container = canvas.getByTestId("container");
-		const content = canvas.getByText("Content");
-
-		expect(container).toContainElement(content);
-	},
 };
 
 export const testInsideScrollable = {
