@@ -1,7 +1,8 @@
 import * as keys from "constants/keys";
-import Chain from "utilities/Chain";
-import { getShadowRoot } from "utilities/dom";
 
+import getShadowRoot from "dom/getShadowRoot";
+
+import Chain from "./Chain";
 import { getActiveElement, getFocusableElements, focusElement, getFocusData } from "./focus";
 import { checkKeyboardMode } from "./keyboardMode";
 import TrapScreenReader from "./TrapScreenReader";

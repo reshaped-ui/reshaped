@@ -1,8 +1,8 @@
 "use client";
 
+import { getFocusableElements } from "@reshaped/utilities/internal";
 import React from "react";
 
-import { getFocusableElements } from "utilities/a11y";
 import { classNames } from "utilities/props";
 
 import s from "./Tabs.module.css";

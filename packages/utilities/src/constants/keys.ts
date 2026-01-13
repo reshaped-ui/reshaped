@@ -1,0 +1,11 @@
+export const ESC = "Escape";
+export const SPACE = " ";
+export const ENTER = "Enter";
+export const TAB = "Tab";
+export const UP = "ArrowUp";
+export const DOWN = "ArrowDown";
+export const RIGHT = "ArrowRight";
+export const LEFT = "ArrowLeft";
+export const HOME = "Home";
+export const END = "End";
+export const BACKSPACE = "Backspace";

@@ -4,8 +4,8 @@
 		"outDir": "./dist",
 		"baseUrl": "./src",
 		"rootDir": "./src",
-		"module": "ESNext",
-		"moduleResolution": "Node",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"paths": { "*": ["*"] }
 	},
 	"include": ["src/**/*"],

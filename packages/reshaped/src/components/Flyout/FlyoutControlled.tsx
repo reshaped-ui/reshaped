@@ -1,5 +1,7 @@
 "use client";
 
+import { TrapFocus } from "@reshaped/utilities";
+import { checkKeyboardMode, type FocusableElement } from "@reshaped/utilities/internal";
 import React from "react";
 
 import useIsDismissible from "hooks/_private/useIsDismissible";
@@ -9,7 +11,6 @@ import useHandlerRef from "hooks/useHandlerRef";
 import useHotkeys from "hooks/useHotkeys";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useOnClickOutside from "hooks/useOnClickOutside";
-import { TrapFocus, checkKeyboardMode, type FocusableElement } from "utilities/a11y";
 import { checkTransitions } from "utilities/animation";
 
 import * as timeouts from "./Flyout.constants";

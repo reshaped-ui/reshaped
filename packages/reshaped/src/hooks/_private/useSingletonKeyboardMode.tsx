@@ -1,9 +1,9 @@
 "use client";
 
+import { activateKeyboardMode, deactivateKeyboardMode } from "@reshaped/utilities/internal";
 import React from "react";
 
 import * as keys from "constants/keys";
-import { activateKeyboardMode, deactivateKeyboardMode } from "utilities/a11y";
 
 type ContextProps = {
 	disabledRef: React.RefObject<boolean> | null;
