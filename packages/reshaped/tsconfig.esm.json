@@ -6,7 +6,7 @@
 		"rootDir": "./src",
 		"target": "ES2022",
 		"module": "ESNext",
-		"moduleResolution": "Node",
+		"moduleResolution": "Bundler",
 		"paths": { "*": ["*"] }
 	},
 	"exclude": [
