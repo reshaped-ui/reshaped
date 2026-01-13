@@ -1,5 +1,4 @@
 import { expect, test, describe, beforeEach, afterEach, vi } from "vitest";
-import { userEvent } from "vitest/browser";
 
 import TrapFocus from "../TrapFocus";
 
