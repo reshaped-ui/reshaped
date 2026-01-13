@@ -1,7 +1,7 @@
 import React from "react";
 
+import type { TrapMode } from "@reshaped/utilities/internal";
 import type * as G from "types/global";
-import type { TrapMode } from "utilities/a11y";
 
 /**
  * Utility

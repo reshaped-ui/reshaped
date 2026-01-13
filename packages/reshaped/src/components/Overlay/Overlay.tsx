@@ -1,5 +1,7 @@
 "use client";
 
+import { TrapFocus } from "@reshaped/utilities";
+import { type FocusableElement } from "@reshaped/utilities/internal";
 import React from "react";
 
 import Portal from "components/_private/Portal";
@@ -9,7 +11,6 @@ import useHotkeys from "hooks/useHotkeys";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "hooks/useScrollLock";
 import useToggle from "hooks/useToggle";
-import { TrapFocus, type FocusableElement } from "utilities/a11y";
 import { onNextFrame } from "utilities/animation";
 import { classNames } from "utilities/props";
 

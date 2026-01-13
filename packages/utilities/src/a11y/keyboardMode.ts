@@ -1,4 +1,4 @@
-const keyboardModeAttribute = "data-rs-keyboard";
+export const keyboardModeAttribute = "data-rs-keyboard";
 
 export const activateKeyboardMode = () => {
 	document.documentElement.setAttribute(keyboardModeAttribute, "true");

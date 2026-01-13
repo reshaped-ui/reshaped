@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-
 import {
 	focusFirstElement,
 	focusLastElement,
 	focusNextElement,
 	focusPreviousElement,
 	getFocusableElements,
-} from "utilities/a11y";
+} from "@reshaped/utilities/internal";
+import React, { useEffect } from "react";
 
 import useHotkeys from "./useHotkeys";
 

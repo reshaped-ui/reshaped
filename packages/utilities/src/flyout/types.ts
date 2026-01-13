@@ -10,7 +10,7 @@ export type Options = {
 	content: HTMLElement;
 	trigger?: HTMLElement | null;
 	container?: HTMLElement | null;
-	triggerCoordinates: Coordinates | null;
+	triggerCoordinates?: Coordinates | null;
 
 	position: Position;
 	fallbackPositions?: Position[];
@@ -19,7 +19,6 @@ export type Options = {
 	fallbackAdjustLayout?: boolean;
 	fallbackMinHeight?: string;
 
-	// TODO: Should be strings?
 	contentGap?: number;
 	contentShift?: number;
 

@@ -4,10 +4,11 @@
 		"outDir": "./dist",
 		"baseUrl": "./src",
 		"rootDir": "./src",
+		"target": "ES2022",
 		"module": "ESNext",
-		"moduleResolution": "Node",
+		"moduleResolution": "Bundler",
 		"paths": { "*": ["*"] }
 	},
 	"include": ["src/**/*"],
-	"exclude": ["node_modules", "dist"]
+	"exclude": ["node_modules", "dist", "src/**/*.test.ts"]
 }
