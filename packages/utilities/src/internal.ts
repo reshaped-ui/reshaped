@@ -21,3 +21,6 @@ export {
 export type { TrapMode, FocusableElement } from "./a11y";
 
 export { disableScroll, enableScroll } from "./scroll";
+
+export { rafThrottle } from "./helpers";
+export { getShadowRoot, findParent } from "./dom";

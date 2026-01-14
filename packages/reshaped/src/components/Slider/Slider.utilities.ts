@@ -31,3 +31,19 @@ export const getDragCoord = ({
 	if (event instanceof MouseEvent) return event.clientX;
 	return event.changedTouches[0].clientX;
 };
+
+/**
+ * Workaround for changing a hidden input value with triggering
+ * React input onChange and form onChange handlers
+ *
+ * Based on https://stackoverflow.com/a/60378508
+ */
+export const triggerChangeEvent = (el: HTMLInputElement, value: string) => {
+	const nativeInputValueSetter = Object!.getOwnPropertyDescriptor(
+		window.HTMLInputElement.prototype,
+		"value"
+	)!.set;
+
+	nativeInputValueSetter!.call(el, value);
+	el.dispatchEvent(new Event("change", { bubbles: true }));
+};
