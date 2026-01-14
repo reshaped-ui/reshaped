@@ -1,5 +1,6 @@
-import View from "components/View";
 import { classNames } from "@reshaped/utilities";
+
+import View from "components/View";
 
 import s from "./Scrim.module.css";
 

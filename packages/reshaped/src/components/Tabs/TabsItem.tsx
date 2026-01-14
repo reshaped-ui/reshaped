@@ -1,5 +1,6 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import Actionable, { type ActionableRef } from "components/Actionable";
@@ -8,7 +9,6 @@ import Icon from "components/Icon";
 import Text from "components/Text";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import { findParent } from "utilities/dom";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./Tabs.module.css";
 import { useTabs } from "./TabsContext";

@@ -1,6 +1,5 @@
-import React from "react";
-
 import { classNames } from "@reshaped/utilities";
+import React from "react";
 
 import s from "./Progress.module.css";
 

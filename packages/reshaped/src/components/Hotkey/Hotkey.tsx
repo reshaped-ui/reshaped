@@ -1,5 +1,6 @@
-import Text from "components/Text";
 import { classNames } from "@reshaped/utilities";
+
+import Text from "components/Text";
 
 import s from "./Hotkey.module.css";
 

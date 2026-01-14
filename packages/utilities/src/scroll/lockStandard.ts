@@ -1,4 +1,4 @@
-import { StyleCache } from "utilities/css";
+import { StyleCache } from "@/css";
 
 import { getScrollbarWidth } from "./helpers";
 

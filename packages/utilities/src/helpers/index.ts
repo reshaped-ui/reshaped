@@ -1,2 +1,2 @@
-export { default as classNames, type ClassName } from "./classNames";
+// Internal
 export { default as rafThrottle } from "./rafThrottle";

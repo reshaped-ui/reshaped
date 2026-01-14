@@ -1,6 +1,5 @@
-import * as keys from "constants/keys";
-
-import getShadowRoot from "dom/getShadowRoot";
+import * as keys from "@/constants/keys";
+import { getShadowRoot } from "@/dom";
 
 import Chain from "./Chain";
 import { getActiveElement, getFocusableElements, focusElement, getFocusData } from "./focus";

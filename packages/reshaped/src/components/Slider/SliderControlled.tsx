@@ -1,5 +1,7 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
+import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 import React from "react";
 
 import { useFormControl } from "components/FormControl";
@@ -7,8 +9,6 @@ import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
 import useRTL from "hooks/useRTL";
 import { triggerChangeEvent } from "utilities/dom";
-import { classNames } from "@reshaped/utilities";
-import { disableScroll, enableScroll } from "utilities/scroll";
 
 import s from "./Slider.module.css";
 import { applyStepToValue, getDragCoord } from "./Slider.utilities";

@@ -1,6 +1,6 @@
 import { expect, test, describe } from "vitest";
 
-import findClosestScrollableContainer from "flyout/utilities/findClosestScrollableContainer";
+import findClosestScrollableContainer from "dom/findClosestScrollableContainer";
 
 describe("flyout/findClosestScrollableContainer", () => {
 	test("returns null when element has no parent", () => {

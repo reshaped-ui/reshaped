@@ -1,9 +1,8 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import { focusableSelector } from "@reshaped/utilities/internal";
 import React from "react";
-
-import { classNames } from "@reshaped/utilities";
 
 import ToastContext from "./Toast.context";
 import s from "./Toast.module.css";

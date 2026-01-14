@@ -1,5 +1,5 @@
 const testPlatform = (re: RegExp) => {
-	// Using experimentral and deprecated features here since that's the only way to detect platform consistently
+	// Using experimental and deprecated features here since that's the only way to detect platform consistently
 	const platform =
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore

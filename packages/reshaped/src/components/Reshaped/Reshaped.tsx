@@ -1,5 +1,6 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import { GlobalColorMode, PrivateTheme } from "components/Theme";
@@ -11,7 +12,6 @@ import {
 } from "hooks/_private/useSingletonEnvironment";
 import { SingletonHotkeysProvider } from "hooks/_private/useSingletonHotkeys";
 import { SingletonKeyboardModeProvider } from "hooks/_private/useSingletonKeyboardMode";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./Reshaped.module.css";
 
