@@ -1,11 +1,12 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import { useFormControl } from "components/FormControl";
 import Icon from "components/Icon";
 import useElementId from "hooks/useElementId";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+import { responsiveClassNames, responsivePropDependency } from "utilities/props";
 
 import s from "./TextField.module.css";
 

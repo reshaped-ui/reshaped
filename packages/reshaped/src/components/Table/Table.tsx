@@ -1,10 +1,11 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React, { isValidElement } from "react";
 
 import useFadeSide from "hooks/_private/useFadeSide";
 import { resolveMixin } from "styles/mixin";
-import { classNames, responsiveVariables } from "utilities/props";
+import { responsiveVariables } from "utilities/props";
 
 import s from "./Table.module.css";
 

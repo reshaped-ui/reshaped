@@ -3,23 +3,6 @@ import type * as G from "types/global";
 type Value = string | boolean | number | undefined;
 type ClassNameResolver = string | ((value: Value) => string);
 
-/**
- * Resolve an array of values into a classname string
- */
-export const classNames = (...args: G.ClassName[]): string => {
-	return args
-		.reduce<string>((acc, cur) => {
-			if (Array.isArray(cur)) {
-				const className = classNames(...cur);
-				if (!className) return acc;
-				return `${acc} ${className}`;
-			}
-			if (cur) return `${acc} ${cur}`;
-			return acc;
-		}, "")
-		.trim();
-};
-
 const applyClassName = (
 	passedClassName: ClassNameResolver,
 	value: Value,

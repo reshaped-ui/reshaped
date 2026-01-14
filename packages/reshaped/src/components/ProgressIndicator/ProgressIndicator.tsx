@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./ProgressIndicator.module.css";
 

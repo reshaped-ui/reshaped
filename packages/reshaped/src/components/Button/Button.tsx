@@ -1,9 +1,10 @@
+import { classNames } from "@reshaped/utilities";
 import { forwardRef } from "react";
 
 import Actionable, { type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import Loader from "components/Loader";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+import { responsiveClassNames, responsivePropDependency } from "utilities/props";
 
 import s from "./Button.module.css";
 

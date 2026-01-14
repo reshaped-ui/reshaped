@@ -4,7 +4,7 @@ import React from "react";
 
 import View from "components/View";
 import useDrag from "hooks/_private/useDrag";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Resizable.module.css";
 

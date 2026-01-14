@@ -1,7 +1,7 @@
 import React, { isValidElement } from "react";
 
 import View from "components/View";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Timeline.module.css";
 

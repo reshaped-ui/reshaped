@@ -12,7 +12,7 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "hooks/useScrollLock";
 import useToggle from "hooks/useToggle";
 import { onNextFrame } from "utilities/animation";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Overlay.module.css";
 
