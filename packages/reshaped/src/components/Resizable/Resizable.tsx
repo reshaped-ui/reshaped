@@ -1,9 +1,9 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import View from "components/View";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./Resizable.module.css";
 import { ResizableHandleContext } from "./ResizableHandle";

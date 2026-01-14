@@ -1,7 +1,7 @@
-import rafThrottle from "helpers/rafThrottle";
+import { findClosestScrollableContainer } from "@/dom";
+import { rafThrottle } from "@/helpers";
 
 import applyPosition from "./utilities/applyPosition";
-import findClosestScrollableContainer from "./utilities/findClosestScrollableContainer";
 
 import type { Position, Options } from "./types";
 

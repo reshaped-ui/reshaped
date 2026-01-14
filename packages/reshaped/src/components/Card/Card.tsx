@@ -1,8 +1,8 @@
+import { classNames } from "@reshaped/utilities";
 import React, { forwardRef } from "react";
 
 import Actionable from "components/Actionable";
 import { resolveMixin } from "styles/mixin";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./Card.module.css";
 

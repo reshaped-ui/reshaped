@@ -1,5 +1,5 @@
-import getShadowRoot from "dom/getShadowRoot";
-import isRTL from "i18n/isRTL";
+import { getShadowRoot } from "@/dom";
+import isRTL from "@/i18n/isRTL";
 
 import { VIEWPORT_OFFSET, RESET_STYLES } from "../constants";
 

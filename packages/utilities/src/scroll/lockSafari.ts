@@ -1,4 +1,4 @@
-import { StyleCache } from "utilities/css";
+import { StyleCache } from "@/css";
 
 const styleCache = new StyleCache();
 

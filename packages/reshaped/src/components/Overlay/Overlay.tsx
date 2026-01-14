@@ -1,6 +1,7 @@
 "use client";
 
 import { TrapFocus } from "@reshaped/utilities";
+import { classNames } from "@reshaped/utilities";
 import { type FocusableElement } from "@reshaped/utilities/internal";
 import React from "react";
 
@@ -12,7 +13,6 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "hooks/useScrollLock";
 import useToggle from "hooks/useToggle";
 import { onNextFrame } from "utilities/animation";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./Overlay.module.css";
 

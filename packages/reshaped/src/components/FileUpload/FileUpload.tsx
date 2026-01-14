@@ -1,11 +1,11 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import HiddenVisually from "components/HiddenVisually";
 import View from "components/View";
 import useToggle from "hooks/useToggle";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./FileUpload.module.css";
 

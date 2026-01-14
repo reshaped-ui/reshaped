@@ -1,4 +1,4 @@
-import getShadowRoot from "dom/getShadowRoot";
+import { getShadowRoot } from "@/dom";
 
 import type { FocusableElement, FocusableOptions } from "./types";
 
