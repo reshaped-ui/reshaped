@@ -1,6 +1,7 @@
 "use client";
 
 import { TrapFocus } from "@reshaped/utilities";
+import { classNames } from "@reshaped/utilities";
 import { type FocusableElement } from "@reshaped/utilities/internal";
 import React from "react";
 
@@ -12,7 +13,6 @@ import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "hooks/useScrollLock";
 import useToggle from "hooks/useToggle";
 import { onNextFrame } from "utilities/animation";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./Overlay.module.css";
 
@@ -31,6 +31,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		onAfterOpen,
 		disableCloseOnClick,
 		containerRef,
+		keepPositionFixed,
 		className,
 		attributes,
 	} = props;
@@ -57,6 +58,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
 	const isDismissible = useIsDismissible({ active, contentRef, hasTrigger: false });
+	const shouldBeContained = containerRef && !keepPositionFixed;
 
 	const rootClassNames = classNames(
 		s.root,
@@ -64,7 +66,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		isTransparent && s["--click-through"],
 		blurred && s["--blurred"],
 		animated && s["--animated"],
-		containerRef && s["--contained"],
+		shouldBeContained && s["--contained"],
 		overflow === "auto" && s["--overflow-auto"],
 		className
 	);
