@@ -11,17 +11,6 @@ import { getPrecision } from "./Slider.utilities";
 
 import type * as T from "./Slider.types";
 
-const COMMIT_KEYS = new Set([
-	"ArrowLeft",
-	"ArrowRight",
-	"ArrowUp",
-	"ArrowDown",
-	"Home",
-	"End",
-	"PageUp",
-	"PageDown",
-]);
-
 const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) => {
 	const {
 		name,
@@ -48,12 +37,6 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 		onChange(+e.target.value, { native: true });
 	};
 
-	const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (!COMMIT_KEYS.has(e.key)) return;
-
-		onChange(+e.currentTarget.value, { commit: true });
-	};
-
 	return (
 		<>
 			<input
@@ -62,7 +45,6 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 				name={name}
 				value={value}
 				onChange={handleChange}
-				onKeyUp={handleKeyUp}
 				disabled={disabled}
 				max={max}
 				min={min}

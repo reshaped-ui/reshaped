@@ -138,6 +138,11 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			// @ts-ignore
 			if (options.commit) onChangeCommitRef.current?.(args);
 
+			// Keyboard changes should commit immediately
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			if (options.native && !draggingId) onChangeCommitRef.current?.(args);
+
 			// Manually controlled resolving of single/range handlers
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
@@ -145,7 +150,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 			triggerChangeEvent(minInputRef.current!, value.toString());
 		},
-		[maxValue, name, minName, maxName, range, onChangeCommitRef, onChangeRef]
+		[range, maxValue, name, minName, maxName, draggingId, onChangeCommitRef, onChangeRef]
 	);
 
 	const handleMaxChange: T.ThumbProps["onChange"] = React.useCallback(
@@ -159,6 +164,11 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			// @ts-ignore
 			if (options.commit) onChangeCommitRef.current?.(args);
 
+			// Keyboard changes should commit immediately
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			if (options.native && !draggingId) onChangeCommitRef.current?.(args);
+
 			// Manually controlled resolving of single/range handlers
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
@@ -166,7 +176,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 			triggerChangeEvent(maxInputRef.current!, value.toString());
 		},
-		[minValue, name, minName, maxName, range, onChangeRef, onChangeCommitRef]
+		[range, minValue, name, minName, maxName, onChangeCommitRef, draggingId, onChangeRef]
 	);
 
 	const handleMouseDown = ({ nativeEvent }: React.MouseEvent | React.TouchEvent) => {
