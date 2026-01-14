@@ -212,8 +212,10 @@ export const containerRef = {
 	render: () => {
 		const containerRef = React.useRef<HTMLDivElement>(null);
 		const containerRef2 = React.useRef<HTMLDivElement>(null);
+		const containerRef3 = React.useRef<HTMLDivElement>(null);
 		const toggle = useToggle();
 		const toggle2 = useToggle();
+		const toggle3 = useToggle();
 
 		return (
 			<Example>
@@ -254,6 +256,27 @@ export const containerRef = {
 							containerRef={containerRef}
 							active={toggle.active}
 							onClose={toggle.deactivate}
+							position="end"
+						>
+							<Placeholder />
+						</Modal>
+					</View>
+				</Example.Item>
+				<Example.Item title="ignoring container size">
+					<View
+						attributes={{ ref: containerRef3 }}
+						borderRadius="medium"
+						height="400px"
+						overflow="hidden"
+						backgroundColor="neutral-faded"
+						padding={4}
+					>
+						<Button onClick={toggle3.activate}>Open modal</Button>
+						<Modal
+							keepPositionFixed
+							containerRef={containerRef3}
+							active={toggle3.active}
+							onClose={toggle3.deactivate}
 							position="end"
 						>
 							<Placeholder />

@@ -265,7 +265,7 @@ export const containerRef: StoryObj = {
 };
 
 export const containerRefWithKeepFixedPosition: StoryObj = {
-	name: "containerRef with keepFixedPosition",
+	name: "containerRef with keepPositionFixed",
 	render: () => {
 		const containerRef = React.useRef<HTMLDivElement>(null);
 
