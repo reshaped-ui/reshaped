@@ -1,5 +1,6 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import { useCheckboxGroup } from "components/CheckboxGroup";
@@ -9,7 +10,7 @@ import Icon from "components/Icon";
 import Text from "components/Text";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import IconCheckmark from "icons/Checkmark";
-import { classNames, responsiveClassNames, responsivePropDependency } from "utilities/props";
+import { responsiveClassNames, responsivePropDependency } from "utilities/props";
 
 import s from "./Checkbox.module.css";
 

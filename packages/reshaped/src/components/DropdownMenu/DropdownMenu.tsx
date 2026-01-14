@@ -10,7 +10,7 @@ import * as keys from "constants/keys";
 import useHotkeys from "hooks/useHotkeys";
 import useRTL from "hooks/useRTL";
 import IconChevronRight from "icons/ChevronRight";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./DropdownMenu.module.css";
 

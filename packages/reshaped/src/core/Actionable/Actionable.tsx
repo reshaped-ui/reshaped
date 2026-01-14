@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react";
 
 import * as keys from "constants/keys";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import type * as T from "./Actionable.types";
 

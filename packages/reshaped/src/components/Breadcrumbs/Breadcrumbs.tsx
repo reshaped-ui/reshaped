@@ -8,7 +8,7 @@ import Text from "components/Text";
 import View from "components/View";
 import IconChevronRight from "icons/ChevronRight";
 import IconDotsHorizontal from "icons/DotsHorizontal";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import * as T from "./Breadcrumbs.types";
 

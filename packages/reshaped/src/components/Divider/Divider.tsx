@@ -1,5 +1,7 @@
+import { classNames } from "@reshaped/utilities";
+
 import Text from "components/Text";
-import { classNames, responsiveClassNames } from "utilities/props";
+import { responsiveClassNames } from "utilities/props";
 
 import s from "./Divider.module.css";
 

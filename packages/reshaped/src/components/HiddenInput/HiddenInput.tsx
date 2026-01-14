@@ -1,7 +1,7 @@
 import { useCheckboxGroup } from "components/CheckboxGroup";
 import { useFormControl } from "components/FormControl";
 import { useRadioGroup } from "components/RadioGroup";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./HiddenInput.module.css";
 

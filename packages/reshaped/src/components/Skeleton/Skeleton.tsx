@@ -1,5 +1,5 @@
 import View from "components/View";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Skeleton.module.css";
 import * as T from "./Skeleton.types";

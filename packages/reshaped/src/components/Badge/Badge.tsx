@@ -4,7 +4,7 @@ import Actionable, { type ActionableProps, type ActionableRef } from "components
 import Icon from "components/Icon";
 import Text from "components/Text";
 import IconClose from "icons/Close";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Badge.module.css";
 

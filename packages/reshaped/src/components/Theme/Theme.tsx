@@ -3,7 +3,7 @@
 import React from "react";
 
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import { ThemeContext } from "./Theme.context";
 import s from "./Theme.module.css";

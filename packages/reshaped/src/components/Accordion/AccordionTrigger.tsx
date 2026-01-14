@@ -6,7 +6,7 @@ import Actionable from "components/Actionable";
 import Icon from "components/Icon";
 import View from "components/View";
 import IconChevronDown from "icons/ChevronDown";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import AccordionContext from "./Accordion.context";
 import s from "./Accordion.module.css";

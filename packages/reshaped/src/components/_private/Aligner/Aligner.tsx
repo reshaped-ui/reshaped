@@ -7,7 +7,7 @@
  * on the --rs-p, --rs-p-v and --rs-p-h css variables
  */
 
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Aligner.module.css";
 

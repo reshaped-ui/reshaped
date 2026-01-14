@@ -6,7 +6,7 @@ import Button from "components/Button";
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import IconChevronLeft from "icons/ChevronLeft";
 import IconChevronRight from "icons/ChevronRight";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Carousel.module.css";
 import * as T from "./Carousel.types";

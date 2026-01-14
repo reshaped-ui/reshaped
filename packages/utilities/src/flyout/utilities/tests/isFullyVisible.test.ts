@@ -1,6 +1,5 @@
-import { expect, test, describe } from "vitest";
-
 import isFullyVisible from "flyout/utilities/isFullyVisible";
+import { expect, test, describe } from "vitest";
 
 describe("flyout/isFullyVisible", () => {
 	test("returns true when flyout is fully visible within visual container", () => {

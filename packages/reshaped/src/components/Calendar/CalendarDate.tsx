@@ -1,7 +1,7 @@
 "use client";
 
 import Actionable from "components/Actionable";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Calendar.module.css";
 import { getLocalISODate } from "./Calendar.utils";

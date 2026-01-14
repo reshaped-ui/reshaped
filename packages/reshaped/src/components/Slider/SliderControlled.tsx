@@ -7,7 +7,7 @@ import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
 import useRTL from "hooks/useRTL";
 import { triggerChangeEvent } from "utilities/dom";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 import { disableScroll, enableScroll } from "utilities/scroll";
 
 import s from "./Slider.module.css";

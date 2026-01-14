@@ -1,5 +1,6 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import Overlay from "components/Overlay";
@@ -8,7 +9,7 @@ import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
 import useResponsiveClientValue from "hooks/useResponsiveClientValue";
 import { resolveMixin } from "styles/mixin";
-import { classNames, responsiveVariables, responsiveClassNames } from "utilities/props";
+import { responsiveVariables, responsiveClassNames } from "utilities/props";
 import { enableScroll, disableScroll } from "utilities/scroll";
 
 import s from "./Modal.module.css";

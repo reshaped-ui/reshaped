@@ -10,7 +10,7 @@ import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
 import useRTL from "hooks/useRTL";
 import IconChevronLeft from "icons/ChevronLeft";
 import IconChevronRight from "icons/ChevronRight";
-import { classNames } from "utilities/props";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Tabs.module.css";
 import { useTabs } from "./TabsContext";
