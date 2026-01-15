@@ -1,7 +1,7 @@
 {
 	"name": "@reshaped/utilities",
 	"description": "Vanilla JS utilities for implementing common UI patterns",
-	"version": "3.9.1-canary.3",
+	"version": "3.10.0-canary.4",
 	"license": "MIT",
 	"homepage": "https://reshaped.so",
 	"repository": {

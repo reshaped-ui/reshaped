@@ -1,5 +1,17 @@
 # @reshaped/core
 
+## 3.10.0-canary.4
+
+### Minor Changes
+
+- [#564](https://github.com/reshaped-ui/reshaped/pull/564) [`b5ea590`](https://github.com/reshaped-ui/reshaped/commit/b5ea590927b1f70ffa4e5522531c3fe2fc0ae40a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - TrapFocus: Moved to the @reshaped/utilities package and re-exported from reshaped
+
+### Patch Changes
+
+- [#565](https://github.com/reshaped-ui/reshaped/pull/565) [`f84659d`](https://github.com/reshaped-ui/reshaped/commit/f84659d7b75441dcc61a4908c5d09109a83117dd) Thanks [@blvdmitry](https://github.com/blvdmitry)! - classNames: moved to @reshaped/utilities and re-exported from reshaped
+
+- [#570](https://github.com/reshaped-ui/reshaped/pull/570) [`a23c79d`](https://github.com/reshaped-ui/reshaped/commit/a23c79d4508f6d16a44e0d2372385b14c9d26691) Thanks [@blvdmitry](https://github.com/blvdmitry)! - lockScroll: moved to @reshaped/utilities and re-exported from reshaped
+
 ## 3.9.1-canary.3
 
 ### Patch Changes
