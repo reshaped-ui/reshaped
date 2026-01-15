@@ -273,7 +273,7 @@ export const containerRef = {
 					>
 						<Button onClick={toggle3.activate}>Open modal</Button>
 						<Modal
-							keepPositionFixed
+							contained={false}
 							containerRef={containerRef3}
 							active={toggle3.active}
 							onClose={toggle3.deactivate}

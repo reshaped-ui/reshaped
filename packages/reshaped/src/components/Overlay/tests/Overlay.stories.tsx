@@ -264,15 +264,15 @@ export const containerRef: StoryObj = {
 	},
 };
 
-export const containerRefWithKeepFixedPosition: StoryObj = {
-	name: "containerRef with keepPositionFixed",
+export const containerRefNotContained: StoryObj = {
+	name: "containerRef with contained={false}",
 	render: () => {
 		const containerRef = React.useRef<HTMLDivElement>(null);
 
 		return (
 			<>
 				<div ref={containerRef} data-testid="test-id" style={{ height: 200 }} />
-				<Overlay active containerRef={containerRef} keepPositionFixed>
+				<Overlay active containerRef={containerRef} contained={false}>
 					Content
 				</Overlay>
 			</>

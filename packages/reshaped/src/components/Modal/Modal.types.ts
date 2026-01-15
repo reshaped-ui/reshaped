@@ -55,5 +55,5 @@ export type Props = {
 	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
 } & Pick<
 	OverlayProps,
-	"onOpen" | "onAfterOpen" | "onAfterClose" | "active" | "containerRef" | "keepPositionFixed"
+	"onOpen" | "onAfterOpen" | "onAfterClose" | "active" | "containerRef" | "contained"
 >;

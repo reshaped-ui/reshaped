@@ -26,8 +26,8 @@ export type Props = {
 	disableCloseOnClick?: boolean;
 	/** Element to render the component in */
 	containerRef?: React.RefObject<HTMLElement | null>;
-	/** Keep the fixed position of the component even when it is rendered inside a container */
-	keepPositionFixed?: boolean;
+	/** Contain the component within the container element. Defaults to true when containerRef is provided */
+	contained?: boolean;
 	/** Additional classname for the root element */
 	className?: G.ClassName;
 	/** Additional attributes for the root element */
