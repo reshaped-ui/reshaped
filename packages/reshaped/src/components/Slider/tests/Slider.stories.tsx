@@ -208,6 +208,10 @@ export const defaultValue: StoryObj<{
 
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({ value: 51, name: "test-name" });
+
+		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
+		expect(args.handleChangeCommit).toHaveBeenCalledWith({ value: 51, name: "test-name" });
+
 		expect(input).toHaveValue("51");
 	},
 };
@@ -240,6 +244,10 @@ export const value: StoryObj<{
 
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({ value: 51, name: "test-name" });
+
+		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
+		expect(args.handleChangeCommit).toHaveBeenCalledWith({ value: 51, name: "test-name" });
+
 		expect(input).toHaveValue("50");
 	},
 };
@@ -275,6 +283,15 @@ export const rangeDefaultValue: StoryObj<{
 
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
+			minValue: 51,
+			maxValue: 70,
+			name: "test-name",
+			minName: "test-name",
+			maxName: "test-name",
+		});
+
+		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
+		expect(args.handleChangeCommit).toHaveBeenCalledWith({
 			minValue: 51,
 			maxValue: 70,
 			name: "test-name",
@@ -319,6 +336,14 @@ export const rangeValue: StoryObj<{
 
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
+			minValue: 51,
+			maxValue: 70,
+			minName: "test-name-min",
+			maxName: "test-name-max",
+		});
+
+		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
+		expect(args.handleChangeCommit).toHaveBeenCalledWith({
 			minValue: 51,
 			maxValue: 70,
 			minName: "test-name-min",
