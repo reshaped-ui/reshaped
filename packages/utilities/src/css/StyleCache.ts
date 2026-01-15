@@ -1,6 +1,6 @@
 type Styles = Record<string, string>;
 
-export class StyleCache {
+class StyleCache {
 	cache: Map<HTMLElement, Record<string, string>> = new Map();
 
 	set = (el: HTMLElement, styles: Styles) => {
@@ -23,3 +23,5 @@ export class StyleCache {
 		this.cache.clear();
 	};
 }
+
+export default StyleCache;

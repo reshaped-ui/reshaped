@@ -1,9 +1,9 @@
 "use client";
 
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import { classNames } from "@reshaped/utilities";
 
 import { ThemeContext } from "./Theme.context";
 import s from "./Theme.module.css";

@@ -1,11 +1,11 @@
 "use client";
 
 import { TrapFocus } from "@reshaped/utilities";
+import { classNames } from "@reshaped/utilities";
 import { checkKeyboardMode } from "@reshaped/utilities/internal";
 import React from "react";
 
 import { onNextFrame } from "utilities/animation";
-import { classNames } from "@reshaped/utilities";
 
 import Toast from "./Toast";
 import { timeouts } from "./Toast.constants";

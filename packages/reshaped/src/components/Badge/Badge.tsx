@@ -1,10 +1,10 @@
+import { classNames } from "@reshaped/utilities";
 import { forwardRef } from "react";
 
 import Actionable, { type ActionableProps, type ActionableRef } from "components/Actionable";
 import Icon from "components/Icon";
 import Text from "components/Text";
 import IconClose from "icons/Close";
-import { classNames } from "@reshaped/utilities";
 
 import s from "./Badge.module.css";
 

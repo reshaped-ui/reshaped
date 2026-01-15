@@ -1,8 +1,7 @@
 "use client";
 
+import { lockScroll } from "@reshaped/utilities";
 import React from "react";
-
-import { lockScroll } from "utilities/scroll";
 
 const useScrollLock = (options?: {
 	containerRef?: React.RefObject<HTMLElement | null>;
@@ -16,12 +15,12 @@ const useScrollLock = (options?: {
 		unlockScrollRef.current = lockScroll({
 			containerEl: containerRef?.current,
 			originEl: originRef?.current,
-			cb: () => setLocked(true),
+			callback: () => setLocked(true),
 		});
 	}, [containerRef, originRef]);
 
 	const handleUnlockScroll = React.useCallback(() => {
-		unlockScrollRef.current?.(() => setLocked(false));
+		unlockScrollRef.current?.({ callback: () => setLocked(false) });
 		unlockScrollRef.current = null;
 	}, []);
 
