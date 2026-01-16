@@ -1,5 +1,11 @@
 # @reshaped/headless
 
+## 3.10.0-canary.5
+
+### Patch Changes
+
+- [`54c43ee`](https://github.com/reshaped-ui/reshaped/commit/54c43ee5c55dd4427b2261ce52e742d5094b41f4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added package readme
+
 ## 3.10.0-canary.4
 
 ### Minor Changes
