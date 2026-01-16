@@ -26,7 +26,7 @@ class Flyout {
 	};
 
 	#addParentScrollHandler = () => {
-		const { trigger, onClose } = this.#options;
+		const { trigger, onDeactivate } = this.#options;
 		if (!trigger) return;
 
 		const container = findClosestScrollableContainer({ el: trigger });
@@ -49,7 +49,7 @@ class Flyout {
 				triggerBounds.right > containerBounds.right ||
 				triggerBounds.bottom > containerBounds.bottom
 			) {
-				onClose();
+				onDeactivate();
 			} else {
 				this.#update();
 			}
@@ -105,7 +105,7 @@ class Flyout {
 		return this.#update();
 	};
 
-	open = (): ReturnType<typeof this.update> => {
+	activate = (): ReturnType<typeof this.update> => {
 		const result = this.#update();
 
 		this.#addParentScrollHandler();
@@ -116,7 +116,7 @@ class Flyout {
 		return result;
 	};
 
-	close = () => {
+	deactivate = () => {
 		this.#lastUsedPosition = null;
 		this.#active = false;
 		this.#removeHandlers();

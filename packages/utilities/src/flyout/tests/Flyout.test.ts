@@ -36,10 +36,10 @@ describe("flyout/Flyout", () => {
 			trigger,
 			triggerCoordinates: null,
 			position: "top",
-			onClose,
+			onDeactivate: onClose,
 		});
 
-		const result = flyout.open();
+		const result = flyout.activate();
 
 		expect(result.position).toBe("top");
 
@@ -66,10 +66,10 @@ describe("flyout/Flyout", () => {
 			trigger,
 			triggerCoordinates: null,
 			position: "top",
-			onClose,
+			onDeactivate: onClose,
 		});
 
-		flyout.open();
+		flyout.activate();
 
 		// Scroll trigger out of bounds
 		trigger.style.position = "absolute";
@@ -108,10 +108,10 @@ describe("flyout/Flyout", () => {
 			trigger,
 			triggerCoordinates: null,
 			position: "top",
-			onClose,
+			onDeactivate: onClose,
 		});
 
-		flyout.open();
+		flyout.activate();
 
 		// Scroll within bounds
 		container.scrollTop = 50;
@@ -135,10 +135,10 @@ describe("flyout/Flyout", () => {
 			trigger,
 			triggerCoordinates: null,
 			position: "start",
-			onClose,
+			onDeactivate: onClose,
 		});
 
-		const initialResult = flyout.open();
+		const initialResult = flyout.activate();
 
 		expect(initialResult.position).toBe("start");
 

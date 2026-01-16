@@ -22,5 +22,5 @@ export type Options = {
 	contentGap?: number;
 	contentShift?: number;
 
-	onClose: () => void;
+	onDeactivate: () => void;
 };

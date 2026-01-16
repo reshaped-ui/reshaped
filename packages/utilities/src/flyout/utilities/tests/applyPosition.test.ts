@@ -35,7 +35,7 @@ describe("flyout/applyPosition", () => {
 			triggerCoordinates: null,
 			position: "top",
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		expect(result.position).toBe("top");
@@ -51,7 +51,7 @@ describe("flyout/applyPosition", () => {
 			triggerCoordinates: null,
 			position: "top",
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		expect(result.position).toBe("bottom");
@@ -68,7 +68,7 @@ describe("flyout/applyPosition", () => {
 			triggerCoordinates,
 			position: "top",
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		expect(result.position).toBe("top");
@@ -82,7 +82,7 @@ describe("flyout/applyPosition", () => {
 				triggerCoordinates: null,
 				position: "top",
 				lastUsedPosition: null,
-				onClose: vi.fn(),
+				onDeactivate: vi.fn(),
 			});
 		}).toThrow("Trigger bounds are required");
 	});
@@ -95,7 +95,7 @@ describe("flyout/applyPosition", () => {
 			position: "top",
 			width: "200px",
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		expect(content.style.width).toBe("200px");
@@ -109,7 +109,7 @@ describe("flyout/applyPosition", () => {
 			position: "top",
 			width: "trigger",
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		expect(result.position).toBeTruthy();
@@ -126,7 +126,7 @@ describe("flyout/applyPosition", () => {
 			triggerCoordinates: null,
 			position: "top",
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		// Should try full-width positions
@@ -144,7 +144,7 @@ describe("flyout/applyPosition", () => {
 			position: "top",
 			fallbackPositions: ["start"],
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		expect(result.position).toBe("start");
@@ -159,7 +159,7 @@ describe("flyout/applyPosition", () => {
 			triggerCoordinates: null,
 			position: "top",
 			lastUsedPosition: null,
-			onClose: vi.fn(),
+			onDeactivate: vi.fn(),
 		});
 
 		// Clone should be removed

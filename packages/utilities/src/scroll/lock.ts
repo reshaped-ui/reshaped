@@ -4,7 +4,7 @@ import { isIOS } from "@/platform";
 import lockSafariScroll from "./lockSafari";
 import lockStandardScroll from "./lockStandard";
 
-export const lockScroll = (args: {
+export const lockScroll = (args?: {
 	containerEl?: HTMLElement | null;
 	originEl?: HTMLElement | null;
 	callback?: () => void;
@@ -13,8 +13,8 @@ export const lockScroll = (args: {
 	let reset = () => {};
 
 	const container =
-		args.containerEl ??
-		(args.originEl && findClosestScrollableContainer({ el: args.originEl })) ??
+		args?.containerEl ??
+		(args?.originEl && findClosestScrollableContainer({ el: args.originEl })) ??
 		document.body;
 	const lockedBodyScroll = container === document.body;
 
@@ -27,7 +27,7 @@ export const lockScroll = (args: {
 		reset = lockStandardScroll({ container });
 	}
 
-	args.callback?.();
+	args?.callback?.();
 
 	return (args?: { callback?: () => void }) => {
 		reset();

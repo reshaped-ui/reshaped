@@ -91,7 +91,7 @@ const useFlyout: UseFlyout = (args) => {
 			fallbackMinHeight,
 			contentGap: (contentGap ?? 0) * unitModifier,
 			contentShift: (contentShift ?? 0) * unitModifier,
-			onClose: handleClose,
+			onDeactivate: handleClose,
 		};
 	}, [
 		cachedFallbackPositions,
@@ -115,7 +115,7 @@ const useFlyout: UseFlyout = (args) => {
 		if (!flyoutOptions) return;
 		flyoutRef.current = new Flyout(flyoutOptions);
 
-		const result = flyoutRef.current.open();
+		const result = flyoutRef.current.activate();
 
 		setPosition(result.position);
 		setStatus("visible");
@@ -124,7 +124,7 @@ const useFlyout: UseFlyout = (args) => {
 	const remove = useCallback(() => {
 		if (!flyoutRef.current) return;
 
-		flyoutRef.current.close();
+		flyoutRef.current.deactivate();
 		setStatus("idle");
 	}, []);
 
