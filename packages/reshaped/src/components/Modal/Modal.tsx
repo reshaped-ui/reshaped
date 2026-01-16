@@ -80,6 +80,7 @@ const Modal: React.FC<T.Props> = (props) => {
 		disableSwipeGesture,
 		disableCloseOnOutsideClick,
 		containerRef,
+		contained,
 		overlayClassName,
 		className,
 		attributes,
@@ -99,6 +100,7 @@ const Modal: React.FC<T.Props> = (props) => {
 	const [dragDistance, setDragDistance] = React.useState(0);
 	const [hideProgress, setHideProgress] = React.useState(0);
 	const mixinStyles = resolveMixin({ padding });
+	const shouldBeContained = containerRef && contained !== false;
 
 	const value = React.useMemo(
 		() => ({
@@ -247,6 +249,7 @@ const Modal: React.FC<T.Props> = (props) => {
 			blurred={blurredOverlay}
 			overflow={clientPosition === "center" ? "auto" : "hidden"}
 			className={overlayClassName}
+			contained={contained}
 			containerRef={containerRef}
 			attributes={{
 				onTouchStart: handleDragStart,
@@ -259,7 +262,7 @@ const Modal: React.FC<T.Props> = (props) => {
 					active && s["--active"],
 					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],
-					containerRef && s["--contained"],
+					shouldBeContained && s["--contained"],
 					responsiveClassNames(s, "--position", position),
 					mixinStyles.classNames
 				);

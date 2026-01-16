@@ -264,6 +264,29 @@ export const containerRef: StoryObj = {
 	},
 };
 
+export const containerRefNotContained: StoryObj = {
+	name: "containerRef with contained={false}",
+	render: () => {
+		const containerRef = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<>
+				<div ref={containerRef} data-testid="test-id" style={{ height: 200 }} />
+				<Overlay active containerRef={containerRef} contained={false}>
+					Content
+				</Overlay>
+			</>
+		);
+	},
+	play: ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const container = canvas.getByTestId("test-id");
+		const overlay = canvas.getByText("Content");
+
+		expect(container).toContainElement(overlay);
+	},
+};
+
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
