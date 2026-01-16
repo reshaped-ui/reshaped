@@ -1,2 +1,2 @@
-// @reshaped/headless - Headless utilities and primitives
-export {};
+// Utilities
+export { classNames, TrapFocus } from "@reshaped/utilities";

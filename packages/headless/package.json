@@ -37,5 +37,8 @@
 	"peerDependencies": {
 		"react": "^18 || ^19",
 		"react-dom": "^18 || ^19"
+	},
+	"dependencies": {
+		"@reshaped/utilities": "workspace:*"
 	}
 }

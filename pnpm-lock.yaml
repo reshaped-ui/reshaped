@@ -186,8 +186,11 @@ importers:
         specifier: 2.0.2
         version: 2.0.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@4.0.16)
 
-  packages/core:
+  packages/headless:
     dependencies:
+      '@reshaped/utilities':
+        specifier: workspace:*
+        version: link:../utilities
       react:
         specifier: ^18 || ^19
         version: 18.3.1
