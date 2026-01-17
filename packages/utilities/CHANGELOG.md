@@ -1,5 +1,11 @@
 # @reshaped/headless
 
+## 3.10.0-canary.6
+
+### Patch Changes
+
+- [`69d77c8`](https://github.com/reshaped-ui/reshaped/commit/69d77c83a005fbea596f31499b32ca0aa98b8feb) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Fixed width resolving for contentMaxWidth and fallback edge cases
+
 ## 3.10.0-canary.5
 
 ### Patch Changes

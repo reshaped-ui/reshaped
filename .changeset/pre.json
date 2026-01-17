@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.10.0-canary.4",
-    "reshaped": "3.10.0-canary.4",
-    "@reshaped/utilities": "3.10.0-canary.4"
+    "@reshaped/headless": "3.10.0-canary.5",
+    "reshaped": "3.10.0-canary.5",
+    "@reshaped/utilities": "3.10.0-canary.5"
   },
   "changesets": [
     "big-ants-design",
@@ -13,9 +13,13 @@
     "chubby-yaks-shave",
     "easy-pots-sneeze",
     "fast-bars-learn",
+    "fiery-toys-cover",
     "great-adults-tie",
     "hip-planets-tap",
     "perky-worms-sip",
+    "plenty-colts-lie",
+    "ready-donuts-marry",
+    "shaky-eagles-rescue",
     "silver-geese-notice",
     "sweet-planets-marry",
     "thirty-rings-tickles",

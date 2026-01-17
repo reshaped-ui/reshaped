@@ -1,5 +1,16 @@
 # @reshaped/headless
 
+## 3.10.0-canary.6
+
+### Minor Changes
+
+- [`6d9283f`](https://github.com/reshaped-ui/reshaped/commit/6d9283f3a235e470df521f01793efb456619a5b0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Exposed classNames and TrapFocus
+
+### Patch Changes
+
+- Updated dependencies [[`69d77c8`](https://github.com/reshaped-ui/reshaped/commit/69d77c83a005fbea596f31499b32ca0aa98b8feb)]:
+  - @reshaped/utilities@3.10.0-canary.6
+
 ## 3.10.0-canary.5
 
 ## 3.10.0-canary.4

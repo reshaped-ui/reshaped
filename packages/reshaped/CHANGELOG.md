@@ -1,5 +1,18 @@
 # reshaped
 
+## 3.10.0-canary.6
+
+### Minor Changes
+
+- [#571](https://github.com/reshaped-ui/reshaped/pull/571) [`48dbffb`](https://github.com/reshaped-ui/reshaped/commit/48dbffb6e5a4c38783305a537bd6d7a3316a5513) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout, Popover, DropdownMenu, Tooltip, ContextMenu, Autocomplete: Added contentZIndex property
+
+- [#569](https://github.com/reshaped-ui/reshaped/pull/569) [`cb5a628`](https://github.com/reshaped-ui/reshaped/commit/cb5a628c0a4f76aaadcf327a22fde7b4c8551b90) Thanks [@erickcelio](https://github.com/erickcelio)! - Modal/Overlay: Adding the contained prop to control whether the component should be contained within the container element.
+
+### Patch Changes
+
+- Updated dependencies [[`69d77c8`](https://github.com/reshaped-ui/reshaped/commit/69d77c83a005fbea596f31499b32ca0aa98b8feb)]:
+  - @reshaped/utilities@3.10.0-canary.6
+
 ## 3.10.0-canary.5
 
 ### Patch Changes
