@@ -640,6 +640,26 @@ export const contentShift = {
 	render: () => <Demo contentShift={10} defaultActive />,
 };
 
+export const contentZIndex = {
+	name: "contentZIndex",
+	render: () => (
+		<View gap={6}>
+			<View direction="row" gap={20}>
+				<Demo contentZIndex={8999} active />
+				<Demo contentZIndex={9001} active />
+			</View>
+			<View
+				backgroundColor="primary-faded"
+				height={100}
+				width={100}
+				borderRadius="medium"
+				position="relative"
+				zIndex={9000}
+			/>
+		</View>
+	),
+};
+
 export const contentMaxHeight = {
 	name: "contentMaxHeight",
 	render: () => (

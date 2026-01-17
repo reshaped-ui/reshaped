@@ -36,6 +36,7 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 		fallbackMinWidth,
 		fallbackMinHeight,
 		contentMaxHeight,
+		contentZIndex,
 		...textFieldProps
 	} = props;
 	const [highlightedId, setHighlightedId] = React.useState<string>();
@@ -194,6 +195,7 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 				fallbackMinWidth={fallbackMinWidth}
 				fallbackMinHeight={fallbackMinHeight}
 				contentMaxHeight={contentMaxHeight}
+				contentZIndex={contentZIndex}
 				disableHideAnimation
 				instanceRef={instanceRef}
 			>

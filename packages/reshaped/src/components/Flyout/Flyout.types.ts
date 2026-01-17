@@ -152,6 +152,8 @@ type BaseProps = {
 	contentMaxHeight?: string;
 	/** Maximum width for the content */
 	contentMaxWidth?: string;
+	/** Z-index for the content element */
+	contentZIndex?: number;
 	/** Additional classname for the content element */
 	contentClassName?: string;
 	/** Additional attributes for the content element */
@@ -218,6 +220,7 @@ export type ContextProps = {
 	| "contentGap"
 	| "contentMaxHeight"
 	| "contentMaxWidth"
+	| "contentZIndex"
 	| "trapFocusMode"
 	| "containerRef"
 	| "disableContentHover"

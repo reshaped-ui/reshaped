@@ -28,6 +28,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		contentAttributes,
 		contentMaxHeight,
 		contentMaxWidth,
+		contentZIndex,
 		trapFocusMode,
 		disableContentHover,
 		autoFocus,
@@ -71,6 +72,8 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		role = "menubar";
 	}
 
+	console.log("contentZIndex", contentZIndex);
+
 	const content = (
 		<ContentProvider value={{ elRef: flyoutElRef }}>
 			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
@@ -80,6 +83,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 					{
 						"--rs-flyout-max-h": contentMaxHeight,
 						"--rs-flyout-max-w": contentMaxWidth,
+						"--rs-flyout-z-index": contentZIndex,
 					} as React.CSSProperties
 				}
 				ref={flyoutElRef}

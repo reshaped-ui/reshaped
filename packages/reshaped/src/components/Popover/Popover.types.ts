@@ -21,6 +21,7 @@ export type Props = Pick<
 	| "contentGap"
 	| "contentShift"
 	| "contentMaxHeight"
+	| "contentZIndex"
 	| "instanceRef"
 	| "triggerType"
 	| "disableHideAnimation"

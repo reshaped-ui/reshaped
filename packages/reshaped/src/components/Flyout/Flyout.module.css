@@ -1,12 +1,13 @@
 .content {
 	--rs-flyout-max-h: 100%;
 	--rs-flyout-max-w: 100%;
+	--rs-flyout-z-index: var(--rs-z-index-absolute);
 	--rs-flyout-origin-x: 50%;
 	--rs-flyout-origin-y: 50%;
 
 	position: absolute;
 	isolation: isolate;
-	z-index: var(--rs-z-index-absolute);
+	z-index: var(--rs-flyout-z-index);
 
 	/* Make content child grow based on its max height with flex grow */
 	display: flex;
