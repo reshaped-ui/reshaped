@@ -21,6 +21,7 @@ export type Props = TextFieldProps &
 		| "fallbackMinWidth"
 		| "fallbackMinHeight"
 		| "contentMaxHeight"
+		| "contentZIndex"
 	> & {
 		/** Callback for when value changes from user input */
 		onInput?: TextFieldProps["onChange"];

@@ -155,9 +155,9 @@ const applyPosition = (
 		transform: `translate(${translateX}px, ${translateY}px)`,
 	};
 
-	content.style.cssText = "";
-
 	Object.entries(resolvedStyles).forEach(([key, value]) => {
+		content.style.removeProperty(key);
+
 		if (!value) return;
 		content.style.setProperty(key, value);
 	});

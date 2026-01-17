@@ -18,6 +18,7 @@ export type Props = Pick<
 	| "contentGap"
 	| "contentShift"
 	| "contentMaxHeight"
+	| "contentZIndex"
 	| "onOpen"
 	| "onClose"
 	| "active"
