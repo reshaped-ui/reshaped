@@ -72,8 +72,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		role = "menubar";
 	}
 
-	console.log("contentZIndex", contentZIndex);
-
 	const content = (
 		<ContentProvider value={{ elRef: flyoutElRef }}>
 			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}

@@ -84,7 +84,7 @@ const applyPosition = (
 			...result,
 			fallbackAdjustLayout,
 			fallbackMinHeight,
-			width,
+			width: options?.width,
 			flyoutBounds,
 			containerBounds,
 			triggerBounds: resolvedTriggerBounds,
@@ -113,7 +113,7 @@ const applyPosition = (
 	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
 	testOrder.some((currentPosition) => {
-		const tested = testPosition(currentPosition);
+		const tested = testPosition(currentPosition, { width });
 		const visible = testVisibility(tested);
 
 		if (visible) calculated = tested;
@@ -138,7 +138,7 @@ const applyPosition = (
 	}
 
 	// None of the positions fit, use the last used position or the default position
-	if (!calculated) calculated = testPosition(lastUsedPosition ?? position);
+	if (!calculated) calculated = testPosition(lastUsedPosition ?? position, { width });
 
 	root.removeChild(contentClone);
 
