@@ -5,7 +5,7 @@
  * If you want to use one of these utilities, open an issue or a PR about moving it to the public API file
  */
 
-export { lockScroll, Flyout } from "@reshaped/utilities";
+export { Flyout } from "@reshaped/utilities";
 
 export {
 	disableScroll,

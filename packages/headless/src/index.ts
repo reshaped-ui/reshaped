@@ -12,6 +12,7 @@ export { default as useKeyboardMode } from "./hooks/useKeyboardMode";
 export { default as useRTL } from "./hooks/useRTL";
 export { default as useIsomorphicLayoutEffect } from "./hooks/useIsomorphicLayoutEffect";
 export { default as useOnClickOutside } from "./hooks/useOnClickOutside";
+export { default as useScrollLock } from "./hooks/useScrollLock";
 
 // Types
 export type { ClassName } from "@reshaped/utilities";

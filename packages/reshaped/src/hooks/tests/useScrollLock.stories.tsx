@@ -1,10 +1,10 @@
+import { useScrollLock } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent } from "storybook/test";
 
 import Button from "components/Button";
 import View from "components/View";
-import useScrollLock from "hooks/useScrollLock";
 import { Example } from "utilities/storybook";
 
 export default {

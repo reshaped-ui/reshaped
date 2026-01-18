@@ -1,10 +1,9 @@
 "use client";
 
-import { useHandlerRef } from "@reshaped/headless";
+import { useHandlerRef, useScrollLock } from "@reshaped/headless";
 import React from "react";
 
 import DropdownMenu from "components/DropdownMenu";
-import useScrollLock from "hooks/useScrollLock";
 
 import s from "./ContextMenu.module.css";
 

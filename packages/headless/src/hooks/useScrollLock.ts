@@ -1,6 +1,6 @@
 "use client";
 
-import { lockScroll } from "@reshaped/headless/internal";
+import { lockScroll } from "@reshaped/utilities";
 import React from "react";
 
 const useScrollLock = (options?: {
