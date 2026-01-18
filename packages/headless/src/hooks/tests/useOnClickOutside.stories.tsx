@@ -1,13 +1,11 @@
-import { useOnClickOutside } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, type Mock } from "storybook/test";
 
-import Button from "components/Button";
-import View from "components/View";
+import useOnClickOutside from "../useOnClickOutside";
 
 export default {
-	title: "Hooks/useOnClickOutside",
+	title: "Headless/Hooks/useOnClickOutside",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
@@ -28,12 +26,12 @@ export const base: StoryObj<{ handleOutsideClick: Mock }> = {
 		});
 
 		return (
-			<View gap={4} align="start">
-				<Button attributes={{ ref }} onClick={() => setTarget("inside")}>
+			<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
+				<button ref={ref} onClick={() => setTarget("inside")}>
 					Trigger
-				</Button>
+				</button>
 				{target && `Clicked ${target}`}
-			</View>
+			</div>
 		);
 	},
 	play: async ({ canvas, args }) => {
@@ -64,10 +62,10 @@ export const refs: StoryObj<{ handleOutsideClick: Mock }> = {
 		});
 
 		return (
-			<View gap={4} align="start">
-				<Button attributes={{ ref }}>Trigger</Button>
-				<Button attributes={{ ref: ref2 }}>Trigger 2</Button>
-			</View>
+			<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
+				<button ref={ref}>Trigger</button>
+				<button ref={ref2}>Trigger 2</button>
+			</div>
 		);
 	},
 	play: async ({ canvas, args }) => {
@@ -106,11 +104,7 @@ export const disabled: StoryObj<{ handleOutsideClick: Mock }> = {
 			}
 		);
 
-		return (
-			<View gap={4} align="start">
-				<Button attributes={{ ref }}>Trigger</Button>
-			</View>
-		);
+		return <button ref={ref}>Trigger</button>;
 	},
 	play: async ({ args }) => {
 		await userEvent.click(document.body);
@@ -133,9 +127,9 @@ export const deps: StoryObj<{ handleOutsideClick: Mock }> = {
 		});
 
 		return (
-			<Button attributes={{ ref }} onClick={() => setCount((prev) => prev + 1)}>
+			<button ref={ref} onClick={() => setCount((prev) => prev + 1)}>
 				Trigger
-			</Button>
+			</button>
 		);
 	},
 	play: async ({ canvas, args }) => {

@@ -1,14 +1,11 @@
-import { useScrollLock } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent } from "storybook/test";
 
-import Button from "components/Button";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import useScrollLock from "../useScrollLock";
 
 export default {
-	title: "Hooks/useScrollLock",
+	title: "Headless/Hooks/useScrollLock",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
@@ -21,7 +18,9 @@ export const base: StoryObj = {
 
 		return (
 			<React.Fragment>
-				<Button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</Button>
+				<button onClick={scrollLocked ? unlockScroll : lockScroll}>
+					{scrollLocked ? "Unlock" : "Lock"}
+				</button>
 				<div style={{ height: "150vh" }} />
 			</React.Fragment>
 		);
@@ -46,11 +45,11 @@ export const origin: StoryObj = {
 		const { lockScroll, unlockScroll, scrollLocked } = useScrollLock({ originRef });
 
 		return (
-			<View overflow="auto" height={25} attributes={{ ref: originRef, "data-testid": "root" }}>
-				<View height={50} padding={4} backgroundColor="neutral-faded" borderRadius="medium">
-					<Button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</Button>
-				</View>
-			</View>
+			<div style={{ overflow: "auto", height: 100 }} ref={originRef} data-testid="root">
+				<div style={{ height: 200, padding: 15, backgroundColor: "#1f1f1f", borderRadius: 8 }}>
+					<button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</button>
+				</div>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -75,9 +74,9 @@ export const container: StoryObj = {
 		const { lockScroll, unlockScroll, scrollLocked } = useScrollLock({ containerRef });
 
 		return (
-			<View height={25} attributes={{ ref: containerRef, "data-testid": "root" }}>
-				<Button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</Button>
-			</View>
+			<div style={{ overflow: "auto", height: 100 }} ref={containerRef} data-testid="root">
+				<button onClick={scrollLocked ? unlockScroll : lockScroll}>Toggle</button>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -103,22 +102,14 @@ export const testContainerAsync: StoryObj = {
 		const scopedLock = useScrollLock({ containerRef });
 
 		return (
-			<Example>
-				<Example.Item title="calling regular lock and lock with a container only requires a single unlock to remove overflow">
-					<View attributes={{ ref: containerRef }} gap={4} direction="row">
-						<Button
-							onClick={globalLock.scrollLocked ? globalLock.unlockScroll : globalLock.lockScroll}
-						>
-							Toggle
-						</Button>
-						<Button
-							onClick={scopedLock.scrollLocked ? scopedLock.unlockScroll : scopedLock.lockScroll}
-						>
-							Toggle
-						</Button>
-					</View>
-				</Example.Item>
-			</Example>
+			<div style={{ display: "flex", gap: 16, flexDirection: "row" }} ref={containerRef}>
+				<button onClick={globalLock.scrollLocked ? globalLock.unlockScroll : globalLock.lockScroll}>
+					Toggle
+				</button>
+				<button onClick={scopedLock.scrollLocked ? scopedLock.unlockScroll : scopedLock.lockScroll}>
+					Toggle
+				</button>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {

@@ -1,13 +1,11 @@
-import { useHandlerRef } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, Mock, userEvent } from "storybook/test";
 
-import Button from "components/Button";
-import View from "components/View";
+import useHandlerRef from "../useHandlerRef";
 
 export default {
-	title: "Hooks/useHandlerRef",
+	title: "Headless/Hooks/useHandlerRef",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
@@ -38,16 +36,16 @@ export const base: StoryObj<{ handleEffect: Mock }> = {
 		};
 
 		return (
-			<View gap={4}>
-				<Button onClick={() => setCount((prev) => prev + 1)}>Increase count</Button>
+			<div style={{ display: "flex", gap: "4px" }}>
+				<button onClick={() => setCount((prev) => prev + 1)}>Increase count</button>
 				<Component onEffect={handleEffect} count={count} />
-			</View>
+			</div>
 		);
 	},
 	play: async ({ canvas, args }) => {
 		const button = canvas.getAllByRole("button")[0];
 
-		// mount, triggerred twice in dev mode
+		// mount, triggered twice in dev mode
 		expect(args.handleEffect).toHaveBeenCalledTimes(2);
 
 		await userEvent.click(button);

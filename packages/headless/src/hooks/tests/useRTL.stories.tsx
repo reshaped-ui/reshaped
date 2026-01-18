@@ -1,10 +1,11 @@
-import { useRTL } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect } from "storybook/test";
 
+import useRTL from "../useRTL";
+
 export default {
-	title: "Hooks/useRTL",
+	title: "Headless/Hooks/useRTL",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

@@ -1,13 +1,11 @@
-import { useKeyboardArrowNavigation } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import { useRef } from "react";
 import { expect, userEvent } from "storybook/test";
 
-import Button from "components/Button";
-import View from "components/View";
+import useKeyboardArrowNavigation from "../useKeyboardArrowNavigation";
 
 export default {
-	title: "Hooks/useKeyboardArrowNavigation",
+	title: "Headless/Hooks/useKeyboardArrowNavigation",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
@@ -21,11 +19,11 @@ export const base: StoryObj = {
 		useKeyboardArrowNavigation({ ref });
 
 		return (
-			<View gap={2} direction="row" attributes={{ ref }}>
-				<Button onClick={() => {}}>Action 1</Button>
-				<Button onClick={() => {}}>Action 2</Button>
-				<Button onClick={() => {}}>Action 3</Button>
-			</View>
+			<div style={{ display: "flex", gap: 8, flexDirection: "row" }} ref={ref}>
+				<button onClick={() => {}}>Action 1</button>
+				<button onClick={() => {}}>Action 2</button>
+				<button onClick={() => {}}>Action 3</button>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -56,11 +54,11 @@ export const horizontal: StoryObj = {
 		useKeyboardArrowNavigation({ ref, orientation: "horizontal" });
 
 		return (
-			<View gap={2} direction="row" attributes={{ ref }}>
-				<Button onClick={() => {}}>Action 1</Button>
-				<Button onClick={() => {}}>Action 2</Button>
-				<Button onClick={() => {}}>Action 3</Button>
-			</View>
+			<div style={{ display: "flex", gap: 8, flexDirection: "row" }} ref={ref}>
+				<button onClick={() => {}}>Action 1</button>
+				<button onClick={() => {}}>Action 2</button>
+				<button onClick={() => {}}>Action 3</button>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -95,11 +93,11 @@ export const vertical: StoryObj = {
 		useKeyboardArrowNavigation({ ref, orientation: "vertical" });
 
 		return (
-			<View gap={2} direction="column" attributes={{ ref }}>
-				<Button onClick={() => {}}>Action 1</Button>
-				<Button onClick={() => {}}>Action 2</Button>
-				<Button onClick={() => {}}>Action 3</Button>
-			</View>
+			<div style={{ display: "flex", gap: 8, flexDirection: "column" }} ref={ref}>
+				<button onClick={() => {}}>Action 1</button>
+				<button onClick={() => {}}>Action 2</button>
+				<button onClick={() => {}}>Action 3</button>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -130,11 +128,11 @@ export const circular: StoryObj = {
 		useKeyboardArrowNavigation({ ref, circular: true });
 
 		return (
-			<View gap={2} direction="row" attributes={{ ref }}>
-				<Button onClick={() => {}}>Action 1</Button>
-				<Button onClick={() => {}}>Action 2</Button>
-				<Button onClick={() => {}}>Action 3</Button>
-			</View>
+			<div style={{ display: "flex", gap: 8, flexDirection: "row" }} ref={ref}>
+				<button onClick={() => {}}>Action 1</button>
+				<button onClick={() => {}}>Action 2</button>
+				<button onClick={() => {}}>Action 3</button>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -162,11 +160,11 @@ export const disabled: StoryObj = {
 		useKeyboardArrowNavigation({ ref, disabled: true });
 
 		return (
-			<View gap={2} direction="row" attributes={{ ref }}>
-				<Button onClick={() => {}}>Action 1</Button>
-				<Button onClick={() => {}}>Action 2</Button>
-				<Button onClick={() => {}}>Action 3</Button>
-			</View>
+			<div style={{ display: "flex", gap: 8, flexDirection: "row" }} ref={ref}>
+				<button onClick={() => {}}>Action 1</button>
+				<button onClick={() => {}}>Action 2</button>
+				<button onClick={() => {}}>Action 3</button>
+			</div>
 		);
 	},
 	play: async ({ canvas }) => {

@@ -1,12 +1,10 @@
-import { useKeyboardMode } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, userEvent } from "storybook/test";
 
-import Button from "components/Button";
-import View from "components/View";
+import useKeyboardMode from "../useKeyboardMode";
 
 export default {
-	title: "Hooks/useKeyboardMode",
+	title: "Headless/Hooks/useKeyboardMode",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
@@ -16,12 +14,12 @@ const Component = () => {
 	const { activate, deactivate, disable, enable } = useKeyboardMode();
 
 	return (
-		<View direction="row" gap={2}>
-			<Button onClick={activate}>Activate</Button>
-			<Button onClick={deactivate}>Deactivate</Button>
-			<Button onClick={disable}>Disable</Button>
-			<Button onClick={enable}>Enable</Button>
-		</View>
+		<div style={{ display: "flex", gap: 8, flexDirection: "row" }}>
+			<button onClick={activate}>Activate</button>
+			<button onClick={deactivate}>Deactivate</button>
+			<button onClick={disable}>Disable</button>
+			<button onClick={enable}>Enable</button>
+		</div>
 	);
 };
 

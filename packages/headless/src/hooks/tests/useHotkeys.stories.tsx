@@ -1,11 +1,10 @@
-import { useHotkeys } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import View from "components/View";
+import useHotkeys from "../useHotkeys";
 
 export default {
-	title: "Hooks/useHotkeys",
+	title: "Headless/Hooks/useHotkeys",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
@@ -38,48 +37,42 @@ export const base = {
 		const nActive = checkHotkeyState("n");
 
 		return (
-			<View
-				animated
-				gap={2}
-				direction="row"
-				backgroundColor={active ? "positive-faded" : undefined}
-				padding={2}
-				borderRadius="small"
+			<div
+				style={{
+					display: "flex",
+					gap: 8,
+					padding: 8,
+					background: active ? "violet" : "transparent",
+				}}
 			>
-				<View
-					paddingInline={4}
-					paddingBlock={2}
-					borderRadius="small"
-					borderColor="neutral-faded"
-					animated
-					backgroundColor={shiftActive ? "neutral-faded" : "elevation-raised"}
-					shadow={shiftActive ? undefined : "raised"}
+				<div
+					style={{
+						padding: 4,
+						borderRadius: 4,
+						backgroundColor: shiftActive ? "tomato" : "transparent",
+					}}
 				>
 					Shift
-				</View>
-				<View
-					paddingInline={4}
-					paddingBlock={2}
-					borderRadius="small"
-					borderColor="neutral-faded"
-					animated
-					backgroundColor={bActive ? "neutral-faded" : "elevation-raised"}
-					shadow={bActive ? undefined : "raised"}
+				</div>
+				<div
+					style={{
+						padding: 4,
+						borderRadius: 4,
+						backgroundColor: bActive ? "tomato" : "transparent",
+					}}
 				>
 					b
-				</View>
-				<View
-					paddingInline={4}
-					paddingBlock={2}
-					borderRadius="small"
-					borderColor="neutral-faded"
-					animated
-					backgroundColor={nActive ? "neutral-faded" : "elevation-raised"}
-					shadow={nActive ? undefined : "raised"}
+				</div>
+				<div
+					style={{
+						padding: 4,
+						borderRadius: 4,
+						backgroundColor: nActive ? "tomato" : "transparent",
+					}}
 				>
 					n
-				</View>
-			</View>
+				</div>
+			</div>
 		);
 	},
 };

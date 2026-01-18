@@ -26,13 +26,10 @@ const config: StorybookConfig = {
 			propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
 		},
 	},
-	// core: {
-	// 	builder: {
-	// 		name: "@storybook/builder-vite",
-	// 		options: { fsCache: false },
-	// 	},
-	// },
-	stories: ["../packages/reshaped/src/**/*.stories.tsx"],
+	stories: [
+		"../packages/reshaped/src/**/*.stories.tsx",
+		"../packages/headless/src/**/*.stories.tsx",
+	],
 	staticDirs: ["./public"],
 	addons: [
 		"@storybook/addon-vitest",
