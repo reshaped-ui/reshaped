@@ -5,6 +5,7 @@ export { classNames, TrapFocus } from "@reshaped/utilities";
 export { default as Reshaped, type ReshapedProps } from "./components/Reshaped";
 
 // Hooks
+export { default as useHandlerRef } from "./hooks/useHandlerRef";
 export { default as useHotkeys } from "./hooks/useHotkeys";
 export { default as useKeyboardMode } from "./hooks/useKeyboardMode";
 export { default as useRTL } from "./hooks/useRTL";

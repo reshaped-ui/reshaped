@@ -1,12 +1,11 @@
 "use client";
 
-import { classNames, useRTL } from "@reshaped/headless";
+import { classNames, useRTL, useHandlerRef } from "@reshaped/headless";
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React from "react";
 
 import { useFormControl } from "components/FormControl";
 import useElementId from "hooks/useElementId";
-import useHandlerRef from "hooks/useHandlerRef";
 
 import s from "./Slider.module.css";
 import { applyStepToValue, getDragCoord, triggerChangeEvent } from "./Slider.utilities";

@@ -1,10 +1,9 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
+import { classNames, useIsomorphicLayoutEffect, useHandlerRef } from "@reshaped/headless";
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React, { forwardRef } from "react";
 
-import useHandlerRef from "hooks/useHandlerRef";
 import { resolveMixin } from "styles/mixin";
 
 import s from "./ScrollArea.module.css";

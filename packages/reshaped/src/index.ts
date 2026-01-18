@@ -204,12 +204,17 @@ export type { ViewProps, ViewItemProps } from "components/View";
 /**
  * Hooks
  */
-export { useHotkeys, useIsomorphicLayoutEffect, useRTL, useKeyboardMode } from "@reshaped/headless";
+export {
+	useHotkeys,
+	useIsomorphicLayoutEffect,
+	useRTL,
+	useKeyboardMode,
+	useHandlerRef,
+} from "@reshaped/headless";
 
 export { useFormControl } from "components/FormControl";
 export { default as Theme, useTheme, type ThemeProps } from "components/Theme";
 
-export { default as useHandlerRef } from "hooks/useHandlerRef";
 export { default as useKeyboardArrowNavigation } from "hooks/useKeyboardArrowNavigation";
 export { default as useOnClickOutside } from "hooks/useOnClickOutside";
 export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";

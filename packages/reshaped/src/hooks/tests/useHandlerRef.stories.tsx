@@ -1,10 +1,10 @@
+import { useHandlerRef } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, Mock, userEvent } from "storybook/test";
 
 import Button from "components/Button";
 import View from "components/View";
-import useHandlerRef from "hooks/useHandlerRef";
 
 export default {
 	title: "Hooks/useHandlerRef",
