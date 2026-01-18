@@ -1,5 +1,5 @@
-import Icon from "components/Icon";
-import { responsivePropDependency } from "utilities/props";
+import Icon from "@/components/Icon";
+import { responsivePropDependency } from "@/utilities/props";
 
 import s from "./Select.module.css";
 

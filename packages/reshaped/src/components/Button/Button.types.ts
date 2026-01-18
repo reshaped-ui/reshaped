@@ -1,9 +1,9 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { AlignerProps as BaseAlignerProps } from "components/_private/Aligner";
-import type { ActionableProps } from "components/Actionable";
-import type { IconProps } from "components/Icon";
+import type { AlignerProps as BaseAlignerProps } from "@/components/_private/Aligner";
+import type { ActionableProps } from "@/components/Actionable";
+import type { IconProps } from "@/components/Icon";
 import type React from "react";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 export type Size = "xlarge" | "large" | "medium" | "small";
 

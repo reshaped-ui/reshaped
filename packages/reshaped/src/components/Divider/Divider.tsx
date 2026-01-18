@@ -1,7 +1,7 @@
 import { classNames, type StyleAttribute } from "@reshaped/headless";
 
-import Text from "components/Text";
-import { responsiveClassNames } from "utilities/props";
+import Text from "@/components/Text";
+import { responsiveClassNames } from "@/utilities/props";
 
 import s from "./Divider.module.css";
 

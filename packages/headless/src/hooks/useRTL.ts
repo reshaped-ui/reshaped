@@ -1,3 +1,3 @@
-import { useSingletonRTL } from "@/hooks/_internal/useSingletonRTL";
+import { useSingletonRTL } from "./_internal/useSingletonRTL";
 
 export default useSingletonRTL;

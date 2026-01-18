@@ -1,12 +1,12 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Button from "components/Button";
-import FormControl from "components/FormControl";
-import Text from "components/Text";
-import TextArea from "components/TextArea";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import FormControl from "@/components/FormControl";
+import Text from "@/components/Text";
+import TextArea from "@/components/TextArea";
+import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/TextArea",

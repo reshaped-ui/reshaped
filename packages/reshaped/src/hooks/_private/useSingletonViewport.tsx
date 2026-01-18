@@ -3,9 +3,9 @@
 import { useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
-import defaultBreakpoints from "constants/breakpoints";
+import defaultBreakpoints from "@/constants/breakpoints";
 
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 const SingletonViewportContext = React.createContext<{
 	viewport: G.Viewport;

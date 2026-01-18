@@ -1,7 +1,7 @@
 import { classNames } from "@reshaped/headless";
 
-import View from "components/View";
-import { responsiveVariables } from "utilities/props";
+import View from "@/components/View";
+import { responsiveVariables } from "@/utilities/props";
 
 import s from "./ActionBar.module.css";
 

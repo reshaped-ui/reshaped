@@ -1,7 +1,7 @@
 import { classNames } from "@reshaped/headless";
 import React from "react";
 
-import { resolveMixin } from "styles/mixin";
+import { resolveMixin } from "@/styles/mixin";
 
 import s from "./Icon.module.css";
 

@@ -1,8 +1,8 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
 import type { Property } from "csstype";
 import type React from "react";
-import type * as TStyles from "styles/types";
-import type * as G from "types/global";
+import type * as TStyles from "@/styles/types";
+import type * as G from "@/types/global";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Gap between grid items */

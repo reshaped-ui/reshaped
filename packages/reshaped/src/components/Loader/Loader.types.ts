@@ -1,5 +1,5 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 export type Props = {
 	/** Component size */

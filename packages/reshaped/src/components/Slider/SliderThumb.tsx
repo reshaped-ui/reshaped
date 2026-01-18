@@ -3,8 +3,8 @@
 import { classNames } from "@reshaped/headless";
 import React from "react";
 
-import Text from "components/Text";
-import Theme from "components/Theme";
+import Text from "@/components/Text";
+import Theme from "@/components/Theme";
 
 import s from "./Slider.module.css";
 import { getPrecision } from "./Slider.utilities";

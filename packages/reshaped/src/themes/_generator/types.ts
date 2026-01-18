@@ -1,4 +1,4 @@
-import type { ReshapedConfig } from "types/config";
+import type { ReshapedConfig } from "@/types/config";
 
 export type PartialDeep<T> = {
 	[K in keyof T]?: {

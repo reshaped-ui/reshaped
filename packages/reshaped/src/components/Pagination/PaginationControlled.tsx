@@ -1,10 +1,10 @@
 "use client";
 
-import Button from "components/Button";
-import View from "components/View";
-import IconChevronLeft from "icons/ChevronLeft";
-import IconChevronRight from "icons/ChevronRight";
-import { range } from "utilities/helpers";
+import Button from "@/components/Button";
+import View from "@/components/View";
+import IconChevronLeft from "@/icons/ChevronLeft";
+import IconChevronRight from "@/icons/ChevronRight";
+import { range } from "@/utilities/helpers";
 
 import s from "./Pagination.module.css";
 

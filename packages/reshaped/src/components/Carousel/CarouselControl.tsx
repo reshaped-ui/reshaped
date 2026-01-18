@@ -3,14 +3,14 @@
 import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import { forwardRef, useState } from "react";
 
-import Button from "components/Button";
-import IconChevronLeft from "icons/ChevronLeft";
-import IconChevronRight from "icons/ChevronRight";
+import Button from "@/components/Button";
+import IconChevronLeft from "@/icons/ChevronLeft";
+import IconChevronRight from "@/icons/ChevronRight";
 
 import s from "./Carousel.module.css";
 import * as T from "./Carousel.types";
 
-import type { ActionableRef } from "components/Actionable";
+import type { ActionableRef } from "@/components/Actionable";
 
 const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) => {
 	const { type, scrollElRef, oppositeControlElRef, scrollPosition, onClick, isRTL, mounted } =

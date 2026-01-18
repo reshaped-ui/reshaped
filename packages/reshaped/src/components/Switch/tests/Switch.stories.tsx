@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Switch from "components/Switch";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import Switch from "@/components/Switch";
+import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Switch",

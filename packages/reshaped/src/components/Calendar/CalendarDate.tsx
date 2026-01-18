@@ -2,7 +2,7 @@
 
 import { classNames } from "@reshaped/headless";
 
-import Actionable from "components/Actionable";
+import Actionable from "@/components/Actionable";
 
 import s from "./Calendar.module.css";
 import { getLocalISODate } from "./Calendar.utils";

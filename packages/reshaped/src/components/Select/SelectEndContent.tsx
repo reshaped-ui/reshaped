@@ -1,6 +1,6 @@
-import Icon from "components/Icon";
-import IconArrow from "icons/ChevronVertical";
-import { responsivePropDependency } from "utilities/props";
+import Icon from "@/components/Icon";
+import IconArrow from "@/icons/ChevronVertical";
+import { responsivePropDependency } from "@/utilities/props";
 
 import s from "./Select.module.css";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import Text from "components/Text";
+import Text from "@/components/Text";
 
 import { useFormControlPrivate } from "./FormControl.context";
 import s from "./FormControl.module.css";

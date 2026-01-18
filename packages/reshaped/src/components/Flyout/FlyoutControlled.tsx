@@ -14,10 +14,10 @@ import {
 } from "@reshaped/headless/internal";
 import React from "react";
 
-import useIsDismissible from "hooks/_private/useIsDismissible";
-import usePrevious from "hooks/_private/usePrevious";
-import useElementId from "hooks/useElementId";
-import { checkTransitions } from "utilities/animation";
+import useIsDismissible from "@/hooks/_private/useIsDismissible";
+import usePrevious from "@/hooks/_private/usePrevious";
+import useElementId from "@/hooks/useElementId";
+import { checkTransitions } from "@/utilities/animation";
 
 import * as timeouts from "./Flyout.constants";
 import {

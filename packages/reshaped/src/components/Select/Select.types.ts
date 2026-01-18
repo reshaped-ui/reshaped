@@ -1,11 +1,11 @@
 import React from "react";
 
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { ActionableProps } from "components/Actionable";
-import type { DropdownMenuProps } from "components/DropdownMenu";
-import type { IconProps } from "components/Icon";
-import type { MenuItemProps } from "components/MenuItem";
-import type * as G from "types/global";
+import type { ActionableProps } from "@/components/Actionable";
+import type { DropdownMenuProps } from "@/components/DropdownMenu";
+import type { IconProps } from "@/components/Icon";
+import type { MenuItemProps } from "@/components/MenuItem";
+import type * as G from "@/types/global";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 

@@ -1,14 +1,15 @@
 {
-	"extends": "./tsconfig.json",
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"outDir": "dist",
+		"outDir": "./dist",
 		"baseUrl": "./src",
 		"rootDir": "./src",
 		"target": "ES2022",
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
-		"paths": { "*": ["*"] }
+		"paths": { "@/*": ["./*"] }
 	},
+	"include": ["src/**/*"],
 	"exclude": [
 		"node_modules",
 		"dist",

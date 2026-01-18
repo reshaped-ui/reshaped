@@ -1,13 +1,13 @@
 import React from "react";
 
-import Expandable from "components/_private/Expandable";
-import Divider from "components/Divider";
-import Hidden from "components/Hidden";
-import Icon from "components/Icon";
-import Text from "components/Text";
-import View from "components/View";
-import IconCheckmark from "icons/Checkmark";
-import { responsivePropDependency } from "utilities/props";
+import Expandable from "@/components/_private/Expandable";
+import Divider from "@/components/Divider";
+import Hidden from "@/components/Hidden";
+import Icon from "@/components/Icon";
+import Text from "@/components/Text";
+import View from "@/components/View";
+import IconCheckmark from "@/icons/Checkmark";
+import { responsivePropDependency } from "@/utilities/props";
 
 import s from "./Stepper.module.css";
 

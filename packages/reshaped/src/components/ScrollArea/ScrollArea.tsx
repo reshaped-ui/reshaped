@@ -4,7 +4,7 @@ import { classNames, useIsomorphicLayoutEffect, useHandlerRef } from "@reshaped/
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React, { forwardRef } from "react";
 
-import { resolveMixin } from "styles/mixin";
+import { resolveMixin } from "@/styles/mixin";
 
 import s from "./ScrollArea.module.css";
 

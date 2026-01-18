@@ -4,7 +4,7 @@ import { useHotkeys, useHandlerRef, useToggle } from "@reshaped/headless";
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React from "react";
 
-import * as keys from "constants/keys";
+import * as keys from "@/constants/keys";
 
 export type UseDragCallbackArgs = { x: number; y: number; triggerX: number; triggerY: number };
 

@@ -1,14 +1,14 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
-import Button from "components/Button";
-import DropdownMenu from "components/DropdownMenu";
-import Theme from "components/Theme";
-import { useTheme } from "components/Theme/useTheme";
-import View from "components/View";
-import IconCheckmark from "icons/Checkmark";
-import { sleep } from "utilities/helpers";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import DropdownMenu from "@/components/DropdownMenu";
+import Theme from "@/components/Theme";
+import { useTheme } from "@/components/Theme/useTheme";
+import View from "@/components/View";
+import IconCheckmark from "@/icons/Checkmark";
+import { sleep } from "@/utilities/helpers";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/DropdownMenu",

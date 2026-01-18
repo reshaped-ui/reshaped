@@ -1,4 +1,4 @@
-import type { ActionableProps as UnstyledActionableProps } from "core/Actionable";
+import type { ActionableProps as UnstyledActionableProps } from "@/core/Actionable";
 
 export type Props = UnstyledActionableProps & {
 	/** Enable a minimum required touch hitbox */

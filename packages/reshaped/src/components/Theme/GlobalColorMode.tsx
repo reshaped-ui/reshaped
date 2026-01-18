@@ -3,14 +3,14 @@
 import { useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
-import { enableTransitions, disableTransitions, onNextFrame } from "utilities/animation";
+import { enableTransitions, disableTransitions, onNextFrame } from "@/utilities/animation";
 
 import { GlobalColorModeContext } from "./Theme.context";
 import { getRootThemeEl } from "./Theme.utilities";
 import { useGlobalColorMode } from "./useTheme";
 
 import type * as T from "./Theme.types";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 	const { defaultMode, mode: passedMode, scopeRef, children } = props;

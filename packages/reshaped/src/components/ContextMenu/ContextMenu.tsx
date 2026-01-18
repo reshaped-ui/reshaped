@@ -3,7 +3,7 @@
 import { useHandlerRef, useScrollLock } from "@reshaped/headless";
 import React from "react";
 
-import DropdownMenu from "components/DropdownMenu";
+import DropdownMenu from "@/components/DropdownMenu";
 
 import s from "./ContextMenu.module.css";
 

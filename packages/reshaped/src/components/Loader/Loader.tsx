@@ -1,6 +1,6 @@
 import { classNames } from "@reshaped/headless";
 
-import { responsiveClassNames } from "utilities/props";
+import { responsiveClassNames } from "@/utilities/props";
 
 import s from "./Loader.module.css";
 

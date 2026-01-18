@@ -1,13 +1,13 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Avatar from "components/Avatar";
-import Button from "components/Button";
-import Hotkey from "components/Hotkey";
-import Image from "components/Image";
-import View from "components/View";
-import IconZap from "icons/Zap";
-import { Example, Placeholder } from "utilities/storybook";
+import Avatar from "@/components/Avatar";
+import Button from "@/components/Button";
+import Hotkey from "@/components/Hotkey";
+import Image from "@/components/Image";
+import View from "@/components/View";
+import IconZap from "@/icons/Zap";
+import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Button",

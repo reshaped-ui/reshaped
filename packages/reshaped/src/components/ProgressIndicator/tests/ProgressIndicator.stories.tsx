@@ -2,12 +2,12 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect } from "storybook/test";
 
-import Button from "components/Button";
-import ProgressIndicator from "components/ProgressIndicator";
-import Scrim from "components/Scrim";
-import Text from "components/Text";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import ProgressIndicator from "@/components/ProgressIndicator";
+import Scrim from "@/components/Scrim";
+import Text from "@/components/Text";
+import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/ProgressIndicator",

@@ -1,5 +1,5 @@
-import Link from "components/Link";
-import Text from "components/Text";
+import Link from "@/components/Link";
+import Text from "@/components/Text";
 
 import type * as T from "./Breadcrumbs.types";
 

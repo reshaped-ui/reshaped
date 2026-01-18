@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { fn, expect, userEvent, within, type Mock, waitFor } from "storybook/test";
 
-import Calendar from "components/Calendar";
-import Text from "components/Text";
-import { Example } from "utilities/storybook";
+import Calendar from "@/components/Calendar";
+import Text from "@/components/Text";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Calendar",

@@ -1,7 +1,7 @@
 import { useHotkeys } from "@reshaped/headless";
 import React from "react";
 
-import * as keys from "constants/keys";
+import * as keys from "@/constants/keys";
 
 import { getFocusableDates } from "./Calendar.utils";
 

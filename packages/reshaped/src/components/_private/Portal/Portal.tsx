@@ -4,7 +4,7 @@ import { useIsomorphicLayoutEffect, useToggle } from "@reshaped/headless";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Theme from "components/Theme";
+import Theme from "@/components/Theme";
 
 import s from "./Portal.module.css";
 

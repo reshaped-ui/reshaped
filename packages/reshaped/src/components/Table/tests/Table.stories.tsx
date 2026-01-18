@@ -2,11 +2,11 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect } from "storybook/test";
 
-import Card from "components/Card";
-import Checkbox from "components/Checkbox";
-import Table from "components/Table";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import Card from "@/components/Card";
+import Checkbox from "@/components/Checkbox";
+import Table from "@/components/Table";
+import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Table",

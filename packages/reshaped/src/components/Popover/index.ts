@@ -1,4 +1,4 @@
-import Flyout from "components/Flyout";
+import Flyout from "@/components/Flyout";
 
 import Popover, { PopoverDismissible } from "./Popover";
 

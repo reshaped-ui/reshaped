@@ -1,7 +1,7 @@
 "use client";
 
-import Button, { ButtonProps } from "components/Button";
-import { useToggleButtonGroup } from "components/ToggleButtonGroup";
+import Button, { ButtonProps } from "@/components/Button";
+import { useToggleButtonGroup } from "@/components/ToggleButtonGroup";
 
 import type * as T from "./ToggleButton.types";
 

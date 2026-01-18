@@ -1,4 +1,4 @@
-import Aligner from "components/_private/Aligner";
+import Aligner from "@/components/_private/Aligner";
 
 import s from "./Button.module.css";
 

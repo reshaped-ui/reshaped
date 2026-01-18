@@ -1,6 +1,6 @@
-import align from "styles/resolvers/align";
-import aspectRatio from "styles/resolvers/aspectRatio";
-import bleed from "styles/resolvers/bleed";
+import align from "@/styles/resolvers/align";
+import aspectRatio from "@/styles/resolvers/aspectRatio";
+import bleed from "@/styles/resolvers/bleed";
 import border, {
 	borderColor,
 	borderTop,
@@ -9,8 +9,8 @@ import border, {
 	borderEnd,
 	borderInline,
 	borderBlock,
-} from "styles/resolvers/border";
-import height from "styles/resolvers/height";
+} from "@/styles/resolvers/border";
+import height from "@/styles/resolvers/height";
 import inset, {
 	insetTop,
 	insetBottom,
@@ -18,12 +18,12 @@ import inset, {
 	insetEnd,
 	insetInline,
 	insetBlock,
-} from "styles/resolvers/inset";
-import justify from "styles/resolvers/justify";
-import maxHeight from "styles/resolvers/maxHeight";
-import maxWidth from "styles/resolvers/maxWidth";
-import minHeight from "styles/resolvers/minHeight";
-import minWidth from "styles/resolvers/minWidth";
+} from "@/styles/resolvers/inset";
+import justify from "@/styles/resolvers/justify";
+import maxHeight from "@/styles/resolvers/maxHeight";
+import maxWidth from "@/styles/resolvers/maxWidth";
+import minHeight from "@/styles/resolvers/minHeight";
+import minWidth from "@/styles/resolvers/minWidth";
 import padding, {
 	paddingTop,
 	paddingBottom,
@@ -31,14 +31,14 @@ import padding, {
 	paddingEnd,
 	paddingInline,
 	paddingBlock,
-} from "styles/resolvers/padding";
-import position from "styles/resolvers/position";
-import radius from "styles/resolvers/radius";
-import textAlign from "styles/resolvers/textAlign";
-import width from "styles/resolvers/width";
+} from "@/styles/resolvers/padding";
+import position from "@/styles/resolvers/position";
+import radius from "@/styles/resolvers/radius";
+import textAlign from "@/styles/resolvers/textAlign";
+import width from "@/styles/resolvers/width";
 
 import type { ClassName } from "@reshaped/headless";
-import type { Mixin } from "styles/types";
+import type { Mixin } from "@/styles/types";
 
 const mixinMap = {
 	align,

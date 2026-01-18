@@ -3,7 +3,7 @@
 import { classNames, useHandlerRef } from "@reshaped/headless";
 import React from "react";
 
-import useElementId from "hooks/useElementId";
+import useElementId from "@/hooks/useElementId";
 
 import AccordionContext from "./Accordion.context";
 import * as T from "./Accordion.types";

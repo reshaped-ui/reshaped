@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 
-import UnstyledActionable, { type ActionableRef as UnstyledActionableRef } from "core/Actionable";
+import UnstyledActionable, { type ActionableRef as UnstyledActionableRef } from "@/core/Actionable";
 
 import s from "./Actionable.module.css";
 

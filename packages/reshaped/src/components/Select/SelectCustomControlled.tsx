@@ -2,11 +2,11 @@
 
 import React from "react";
 
-import DropdownMenu from "components/DropdownMenu";
-import Icon from "components/Icon";
-import View from "components/View";
-import CheckmarkIcon from "icons/Checkmark";
-import { responsivePropDependency } from "utilities/props";
+import DropdownMenu from "@/components/DropdownMenu";
+import Icon from "@/components/Icon";
+import View from "@/components/View";
+import CheckmarkIcon from "@/icons/Checkmark";
+import { responsivePropDependency } from "@/utilities/props";
 
 import SelectGroup from "./SelectGroup";
 import SelectOption from "./SelectOption";

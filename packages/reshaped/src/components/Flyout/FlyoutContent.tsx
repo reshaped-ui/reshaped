@@ -3,7 +3,7 @@
 import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
-import Portal from "components/_private/Portal";
+import Portal from "@/components/_private/Portal";
 
 import { useFlyoutContext, ContentProvider } from "./Flyout.context";
 import s from "./Flyout.module.css";

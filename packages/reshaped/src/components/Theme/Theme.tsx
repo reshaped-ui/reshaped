@@ -30,8 +30,6 @@ export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 	const usedColorMode = colorMode === "inverted" ? invertedColorMode : colorMode || parentColorMode;
 	const rootClassNames = classNames(s.root, className);
 
-	console.log(defaultName, "defaultName2");
-
 	const setRootTheme: T.ThemeContextData["setRootTheme"] = React.useCallback(
 		(theme) => {
 			if (isRootProvider) {

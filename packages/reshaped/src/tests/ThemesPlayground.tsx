@@ -1,27 +1,27 @@
 import { useToggle } from "@reshaped/headless";
 import React from "react";
 
-import Alert from "components/Alert";
-import Avatar from "components/Avatar";
-import Badge from "components/Badge";
-import Button from "components/Button";
-import Card from "components/Card";
-import Checkbox from "components/Checkbox";
-import CheckboxGroup from "components/CheckboxGroup";
-import Divider from "components/Divider";
-import DropdownMenu from "components/DropdownMenu";
-import FormControl from "components/FormControl";
-import Grid from "components/Grid";
-import Image from "components/Image";
-import Link from "components/Link";
-import Switch from "components/Switch";
-import Table from "components/Table";
-import Text from "components/Text";
-import TextField from "components/TextField";
-import View, { ViewProps } from "components/View";
-import IconChevronDown from "icons/ChevronDown";
-import IconChevronRight from "icons/ChevronRight";
-import IconZap from "icons/Zap";
+import Alert from "@/components/Alert";
+import Avatar from "@/components/Avatar";
+import Badge from "@/components/Badge";
+import Button from "@/components/Button";
+import Card from "@/components/Card";
+import Checkbox from "@/components/Checkbox";
+import CheckboxGroup from "@/components/CheckboxGroup";
+import Divider from "@/components/Divider";
+import DropdownMenu from "@/components/DropdownMenu";
+import FormControl from "@/components/FormControl";
+import Grid from "@/components/Grid";
+import Image from "@/components/Image";
+import Link from "@/components/Link";
+import Switch from "@/components/Switch";
+import Table from "@/components/Table";
+import Text from "@/components/Text";
+import TextField from "@/components/TextField";
+import View, { ViewProps } from "@/components/View";
+import IconChevronDown from "@/icons/ChevronDown";
+import IconChevronRight from "@/icons/ChevronRight";
+import IconZap from "@/icons/Zap";
 
 const Color = (props: Pick<ViewProps, "backgroundColor" | "borderColor" | "children">) => {
 	return (

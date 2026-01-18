@@ -1,6 +1,6 @@
 import React from "react";
 
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 
 /**
  * Hook for wrapping event handlers passed as props with a ref

@@ -1,5 +1,5 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { IconProps } from "components/Icon";
+import type { IconProps } from "@/components/Icon";
 import type React from "react";
 
 export type Status = "entering" | "entered" | "exited";

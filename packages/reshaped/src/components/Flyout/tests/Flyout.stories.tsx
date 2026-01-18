@@ -3,17 +3,17 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { userEvent, waitFor, within, expect, fn } from "storybook/test";
 
-import Button from "components/Button";
-import Flyout, { FlyoutInstance, FlyoutProps } from "components/Flyout";
-import Modal from "components/Modal";
-import Reshaped from "components/Reshaped";
-import Select from "components/Select";
-import Switch from "components/Switch";
-import TextField from "components/TextField";
-import Theme from "components/Theme";
-import View from "components/View";
-import { sleep } from "utilities/helpers";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import Flyout, { FlyoutInstance, FlyoutProps } from "@/components/Flyout";
+import Modal from "@/components/Modal";
+import Reshaped from "@/components/Reshaped";
+import Select from "@/components/Select";
+import Switch from "@/components/Switch";
+import TextField from "@/components/TextField";
+import Theme from "@/components/Theme";
+import View from "@/components/View";
+import { sleep } from "@/utilities/helpers";
+import { Example } from "@/utilities/storybook";
 
 export default { title: "Utility components/Flyout" };
 

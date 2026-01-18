@@ -3,7 +3,7 @@
 import { classNames } from "@reshaped/headless";
 import React from "react";
 
-import { resolveMixin } from "styles/mixin";
+import { resolveMixin } from "@/styles/mixin";
 
 import s from "./Image.module.css";
 import * as T from "./Image.types";

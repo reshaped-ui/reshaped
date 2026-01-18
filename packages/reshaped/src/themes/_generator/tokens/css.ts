@@ -1,4 +1,4 @@
-import { camelToKebab } from "utilities/string";
+import { camelToKebab } from "@/utilities/string";
 
 import type * as T from "../tokens/types";
 

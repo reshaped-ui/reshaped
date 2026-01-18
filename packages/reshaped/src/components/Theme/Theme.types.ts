@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as G from "types/global";
+import * as G from "@/types/global";
 
 import type { ClassName } from "@reshaped/headless";
 

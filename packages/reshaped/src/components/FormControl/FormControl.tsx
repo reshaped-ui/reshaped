@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import useElementId from "hooks/useElementId";
+import useElementId from "@/hooks/useElementId";
 
 import { Provider } from "./FormControl.context";
 import { getCaptionId } from "./FormControl.utilities";

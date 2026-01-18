@@ -1,8 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
-import Loader from "components/Loader";
-import { Example } from "utilities/storybook";
+import Loader from "@/components/Loader";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Loader",

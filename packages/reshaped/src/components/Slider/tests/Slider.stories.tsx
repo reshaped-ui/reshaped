@@ -3,10 +3,10 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fireEvent, fn, Mock } from "storybook/test";
 
-import Modal from "components/Modal";
-import Slider from "components/Slider";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import Modal from "@/components/Modal";
+import Slider from "@/components/Slider";
+import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Slider",

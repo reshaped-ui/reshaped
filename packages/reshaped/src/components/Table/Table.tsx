@@ -3,9 +3,9 @@
 import { classNames } from "@reshaped/headless";
 import React, { isValidElement } from "react";
 
-import useFadeSide from "hooks/_private/useFadeSide";
-import { resolveMixin } from "styles/mixin";
-import { responsiveVariables } from "utilities/props";
+import useFadeSide from "@/hooks/_private/useFadeSide";
+import { resolveMixin } from "@/styles/mixin";
+import { responsiveVariables } from "@/utilities/props";
 
 import s from "./Table.module.css";
 

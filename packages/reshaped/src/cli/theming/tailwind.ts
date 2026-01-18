@@ -1,11 +1,11 @@
 /**
  * Transform JS theme defintion to Tailwind 4 CSS definition
  */
-import reshapedDefinition from "themes/_generator/definitions/reshaped";
-import mergeDefinitions from "themes/_generator/utilities/mergeDefinitions";
-import { camelToKebab } from "utilities/string";
+import reshapedDefinition from "@/themes/_generator/definitions/reshaped";
+import mergeDefinitions from "@/themes/_generator/utilities/mergeDefinitions";
+import { camelToKebab } from "@/utilities/string";
 
-import type { GeneratedThemeDefinition, ThemeDefinition } from "themes/_generator/tokens/types";
+import type { GeneratedThemeDefinition, ThemeDefinition } from "@/themes/_generator/tokens/types";
 
 export const transformToTailwind = (theme?: GeneratedThemeDefinition) => {
 	const variables: Record<string, string> = {};

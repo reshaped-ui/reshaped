@@ -1,8 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
-import Text from "components/Text";
-import { Example } from "utilities/storybook";
+import Text from "@/components/Text";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/Text",

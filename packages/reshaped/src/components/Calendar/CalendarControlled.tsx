@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import View from "components/View";
-import { onNextFrame } from "utilities/animation";
+import View from "@/components/View";
+import { onNextFrame } from "@/utilities/animation";
 
 import {
 	setMonthToPrevious,

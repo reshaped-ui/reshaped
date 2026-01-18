@@ -1,8 +1,8 @@
 import { classNames } from "@reshaped/headless";
 
-import Dismissible, { type DismissibleProps } from "components/Dismissible";
-import Flyout, { useFlyoutContext, type FlyoutProps } from "components/Flyout";
-import { resolveMixin } from "styles/mixin";
+import Dismissible, { type DismissibleProps } from "@/components/Dismissible";
+import Flyout, { useFlyoutContext, type FlyoutProps } from "@/components/Flyout";
+import { resolveMixin } from "@/styles/mixin";
 
 import s from "./Popover.module.css";
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 type BaseProps = {
 	/** Node for inserting children */

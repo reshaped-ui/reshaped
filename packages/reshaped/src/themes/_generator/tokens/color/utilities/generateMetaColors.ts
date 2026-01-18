@@ -1,4 +1,4 @@
-import { capitalize } from "utilities/string";
+import { capitalize } from "@/utilities/string";
 
 import { bgWithDynamicForeground } from "../../../constants";
 import { PassedThemeDefinition } from "../../types";

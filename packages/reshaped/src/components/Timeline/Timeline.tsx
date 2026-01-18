@@ -1,7 +1,7 @@
 import { classNames } from "@reshaped/headless";
 import React, { isValidElement } from "react";
 
-import View from "components/View";
+import View from "@/components/View";
 
 import s from "./Timeline.module.css";
 
