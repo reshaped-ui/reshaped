@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { ActionableRef } from "components/Actionable";
 import type React from "react";
 import type * as G from "types/global";
@@ -41,7 +42,7 @@ export type Props = {
 	/** Callback when the carousel scrolls */
 	onScroll?: (e: React.UIEvent<HTMLUListElement>) => void;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };

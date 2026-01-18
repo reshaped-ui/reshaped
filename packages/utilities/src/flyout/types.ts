@@ -1,9 +1,10 @@
+import type { Coordinates } from "@/types/global";
+
 type XSide = "start" | "end";
 type YSide = "top" | "bottom";
 
 export type Side = XSide | YSide;
 export type Position = `${YSide}` | `${YSide}-${XSide}` | `${XSide}` | `${XSide}-${YSide}`;
-export type Coordinates = { x: number; y: number };
 export type Width = "trigger" | string;
 
 export type Options = {

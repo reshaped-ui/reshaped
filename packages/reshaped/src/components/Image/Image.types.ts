@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 import type * as TStyles from "styles/types";
 import type * as G from "types/global";
@@ -30,12 +31,12 @@ export type Props = {
 	/** Image render function, can be used for integrating with Image component in 3rd party frameworks */
 	renderImage?: (
 		// Next.js requires you to pass src and alt
-		attributes: Omit<G.Attributes<"img">, "src" | "alt"> & { src: string; alt: string }
+		attributes: Omit<Attributes<"img">, "src" | "alt"> & { src: string; alt: string }
 	) => React.ReactNode;
 	/** Additional attributes for the image element */
-	imageAttributes?: G.Attributes<"img">;
+	imageAttributes?: Attributes<"img">;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div"> & G.Attributes<"img">;
+	attributes?: Attributes<"div"> & Attributes<"img">;
 };

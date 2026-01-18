@@ -37,8 +37,8 @@ import radius from "styles/resolvers/radius";
 import textAlign from "styles/resolvers/textAlign";
 import width from "styles/resolvers/width";
 
+import type { ClassName } from "@reshaped/headless";
 import type { Mixin } from "styles/types";
-import type * as G from "types/global";
 
 const mixinMap = {
 	align,
@@ -81,7 +81,7 @@ const mixinMap = {
 export const resolveMixin = (mixin: Mixin) => {
 	const output = {
 		variables: {} as React.CSSProperties,
-		classNames: [] as G.ClassName[],
+		classNames: [] as ClassName[],
 	};
 	const entries = Object.entries(mixin);
 	entries.forEach(([key, value]) => {

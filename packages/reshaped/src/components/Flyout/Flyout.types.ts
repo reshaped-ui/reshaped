@@ -1,7 +1,7 @@
 import React from "react";
 
-import type { TrapMode } from "@reshaped/utilities/internal";
-import type * as G from "types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
+import type { TrapMode, Coordinates } from "@reshaped/headless/internal";
 
 /**
  * Utility
@@ -135,7 +135,7 @@ type BaseProps = {
 	 */
 	autoFocus?: boolean;
 	/** Origin coordinates for the content when there is no trigger element */
-	originCoordinates?: G.Coordinates;
+	originCoordinates?: Coordinates;
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Callback when the content is opened */
@@ -157,7 +157,7 @@ type BaseProps = {
 	/** Additional classname for the content element */
 	contentClassName?: string;
 	/** Additional attributes for the content element */
-	contentAttributes?: G.Attributes<"div">;
+	contentAttributes?: Attributes<"div">;
 	/** Ref accessor for the flyout methods */
 	instanceRef?: React.Ref<Instance>;
 	/** Container to render the content in using a portal, position is calculated based on the container bounds
@@ -188,9 +188,9 @@ export type ContentProps = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the content element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the content element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type ContextProps = {

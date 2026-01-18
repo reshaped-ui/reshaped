@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 /**
@@ -156,7 +158,7 @@ const globalHotkeyStore = new HotkeyStore();
 /**
  * Components / Hooks
  */
-export const HotkeyContext = React.createContext({} as Context);
+const HotkeyContext = React.createContext({} as Context);
 
 export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const { children } = props;
@@ -269,6 +271,4 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 	);
 };
 
-const useSingletonHotkeys = () => React.useContext(HotkeyContext);
-
-export default useSingletonHotkeys;
+export const useSingletonHotkeys = () => React.useContext(HotkeyContext);

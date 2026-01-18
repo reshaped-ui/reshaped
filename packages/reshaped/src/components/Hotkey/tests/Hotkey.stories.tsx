@@ -1,9 +1,9 @@
+import { useHotkeys } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
 import TextField from "components/TextField";
 import View from "components/View";
-import useHotkeys from "hooks/useHotkeys";
 import { Example } from "utilities/storybook";
 
 import Hotkey from "../Hotkey";

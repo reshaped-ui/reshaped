@@ -1,3 +1,4 @@
+import type { CSSVariable } from "@reshaped/headless";
 import type * as G from "types/global";
 
 type Value = string | boolean | number | undefined;
@@ -48,13 +49,13 @@ export const responsiveClassNames = <V extends G.Responsive<Value>>(
 };
 
 export const responsiveVariables = <V extends Value = Value>(
-	variableName: G.CSSVariable,
+	variableName: CSSVariable,
 	value?: G.Responsive<V>
-): Record<G.CSSVariable, V> => {
+): Record<CSSVariable, V> => {
 	if (value === undefined) return {};
 	if (typeof value !== "object") return { [`${variableName}-s`]: value };
 
-	return Object.keys(value).reduce<Record<G.CSSVariable, V>>((acc, key) => {
+	return Object.keys(value).reduce<Record<CSSVariable, V>>((acc, key) => {
 		const viewportValue = value[key as G.Viewport];
 
 		if (viewportValue === undefined) return acc;

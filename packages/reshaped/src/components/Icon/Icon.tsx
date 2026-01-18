@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/utilities";
+import { classNames } from "@reshaped/headless";
 import React from "react";
 
 import { resolveMixin } from "styles/mixin";

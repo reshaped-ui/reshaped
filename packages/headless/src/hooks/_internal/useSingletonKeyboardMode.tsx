@@ -3,7 +3,7 @@
 import { activateKeyboardMode, deactivateKeyboardMode } from "@reshaped/utilities/internal";
 import React from "react";
 
-import * as keys from "constants/keys";
+const ESC = "Escape";
 
 type ContextProps = {
 	disabledRef: React.RefObject<boolean> | null;
@@ -13,7 +13,7 @@ type ContextProps = {
 	deactivate: () => void;
 };
 
-export const SingletonKeyboardModeContext = React.createContext<ContextProps>({
+const SingletonKeyboardModeContext = React.createContext<ContextProps>({
 	disabledRef: null,
 	disable: () => {},
 	enable: () => {},
@@ -46,7 +46,7 @@ export const SingletonKeyboardModeProvider: React.FC<{ children: React.ReactNode
 		(e: KeyboardEvent) => {
 			if (e.metaKey || e.altKey || e.ctrlKey) return;
 			// Prevent focus ring from appearing when using mouse but closing with esc
-			if (e.key === keys.ESC) return;
+			if (e.key === ESC) return;
 			activate();
 		},
 		[activate]
@@ -83,3 +83,5 @@ export const SingletonKeyboardModeProvider: React.FC<{ children: React.ReactNode
 		</SingletonKeyboardModeContext.Provider>
 	);
 };
+
+export const useSingletonKeyboardMode = () => React.useContext(SingletonKeyboardModeContext);

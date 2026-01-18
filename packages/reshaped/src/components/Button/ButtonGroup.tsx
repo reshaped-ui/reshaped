@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/utilities";
+import { classNames } from "@reshaped/headless";
 
 import s from "./Button.module.css";
 

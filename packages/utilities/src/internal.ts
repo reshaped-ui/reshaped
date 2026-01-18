@@ -24,3 +24,5 @@ export { disableScroll, enableScroll } from "./scroll";
 
 export { rafThrottle } from "./helpers";
 export { getShadowRoot, findParent } from "./dom";
+
+export type { Coordinates } from "./types/global";

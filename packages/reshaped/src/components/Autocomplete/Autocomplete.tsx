@@ -1,5 +1,6 @@
 "use client";
 
+import { useIsomorphicLayoutEffect, useHotkeys } from "@reshaped/headless";
 import React from "react";
 
 import DropdownMenu from "components/DropdownMenu";
@@ -7,8 +8,6 @@ import TextField from "components/TextField";
 import * as keys from "constants/keys";
 import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
-import useHotkeys from "hooks/useHotkeys";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 
 import s from "./Autocomplete.module.css";
 import * as T from "./Autocomplete.types";

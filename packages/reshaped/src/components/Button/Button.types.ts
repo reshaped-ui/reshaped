@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { AlignerProps as BaseAlignerProps } from "components/_private/Aligner";
 import type { ActionableProps } from "components/Actionable";
 import type { IconProps } from "components/Icon";
@@ -53,9 +54,9 @@ export type GroupProps = {
 	/** Node for inserting child Button components */
 	children: React.ReactNode;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type AlignerProps = BaseAlignerProps & {

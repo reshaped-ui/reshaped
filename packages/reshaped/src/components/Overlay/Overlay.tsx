@@ -1,15 +1,13 @@
 "use client";
 
-import { TrapFocus } from "@reshaped/utilities";
-import { classNames } from "@reshaped/utilities";
-import { type FocusableElement } from "@reshaped/utilities/internal";
+import { TrapFocus, useHotkeys, useIsomorphicLayoutEffect } from "@reshaped/headless";
+import { classNames } from "@reshaped/headless";
+import { type FocusableElement } from "@reshaped/headless/internal";
 import React from "react";
 
 import Portal from "components/_private/Portal";
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import useHandlerRef from "hooks/useHandlerRef";
-import useHotkeys from "hooks/useHotkeys";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "hooks/useScrollLock";
 import useToggle from "hooks/useToggle";
 import { onNextFrame } from "utilities/animation";
@@ -151,9 +149,9 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 		if (containerEl) {
 			originalOverflowRef.current = containerEl.style.overflow;
-			// eslint-disable-next-line react-hooks/immutability
-			containerEl.style.overflow = "hidden";
-			containerEl.style.isolation = "isolate";
+
+			containerEl.style.setProperty("overflow", "hidden");
+			containerEl.style.setProperty("isolation", "isolate");
 			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
 		}
 

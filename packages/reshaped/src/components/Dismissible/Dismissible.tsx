@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
+import { classNames } from "@reshaped/headless";
 
 import Button from "components/Button";
 import IconClose from "icons/Close";

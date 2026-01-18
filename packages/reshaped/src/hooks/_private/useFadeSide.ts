@@ -1,10 +1,8 @@
 "use client";
 
-import { rafThrottle } from "@reshaped/utilities/internal";
+import { useIsomorphicLayoutEffect, useRTL } from "@reshaped/headless";
+import { rafThrottle } from "@reshaped/headless/internal";
 import React from "react";
-
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import useRTL from "hooks/useRTL";
 
 const useFadeSide = (
 	scrollableRef: React.RefObject<HTMLElement | null>,

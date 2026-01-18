@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
+import { classNames } from "@reshaped/headless";
 import React, { forwardRef } from "react";
 
 import * as keys from "constants/keys";
