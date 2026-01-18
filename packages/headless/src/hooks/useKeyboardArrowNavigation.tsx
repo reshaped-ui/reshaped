@@ -1,12 +1,13 @@
-import { useHotkeys } from "@reshaped/headless";
 import {
 	focusFirstElement,
 	focusLastElement,
 	focusNextElement,
 	focusPreviousElement,
 	getFocusableElements,
-} from "@reshaped/headless/internal";
+} from "@reshaped/utilities/internal";
 import React, { useEffect } from "react";
+
+import useHotkeys from "./useHotkeys";
 
 type Props = {
 	ref: React.RefObject<HTMLElement | null>;

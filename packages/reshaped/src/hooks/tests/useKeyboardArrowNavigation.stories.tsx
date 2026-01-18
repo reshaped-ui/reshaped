@@ -1,10 +1,10 @@
+import { useKeyboardArrowNavigation } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import { useRef } from "react";
 import { expect, userEvent } from "storybook/test";
 
 import Button from "components/Button";
 import View from "components/View";
-import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
 
 export default {
 	title: "Hooks/useKeyboardArrowNavigation",

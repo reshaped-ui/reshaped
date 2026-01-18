@@ -208,6 +208,7 @@ export {
 	useHotkeys,
 	useIsomorphicLayoutEffect,
 	useRTL,
+	useKeyboardArrowNavigation,
 	useKeyboardMode,
 	useHandlerRef,
 } from "@reshaped/headless";
@@ -215,7 +216,6 @@ export {
 export { useFormControl } from "components/FormControl";
 export { default as Theme, useTheme, type ThemeProps } from "components/Theme";
 
-export { default as useKeyboardArrowNavigation } from "hooks/useKeyboardArrowNavigation";
 export { default as useOnClickOutside } from "hooks/useOnClickOutside";
 export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";
 export { default as useScrollLock } from "hooks/useScrollLock";

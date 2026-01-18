@@ -1,12 +1,16 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect, useRTL } from "@reshaped/headless";
+import {
+	classNames,
+	useIsomorphicLayoutEffect,
+	useRTL,
+	useKeyboardArrowNavigation,
+} from "@reshaped/headless";
 import React from "react";
 
 import Actionable from "components/Actionable";
 import Icon from "components/Icon";
 import useFadeSide from "hooks/_private/useFadeSide";
-import useKeyboardArrowNavigation from "hooks/useKeyboardArrowNavigation";
 import IconChevronLeft from "icons/ChevronLeft";
 import IconChevronRight from "icons/ChevronRight";
 
