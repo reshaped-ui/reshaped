@@ -11,6 +11,7 @@ export { default as useKeyboardArrowNavigation } from "./hooks/useKeyboardArrowN
 export { default as useKeyboardMode } from "./hooks/useKeyboardMode";
 export { default as useRTL } from "./hooks/useRTL";
 export { default as useIsomorphicLayoutEffect } from "./hooks/useIsomorphicLayoutEffect";
+export { default as useOnClickOutside } from "./hooks/useOnClickOutside";
 
 // Types
 export type { ClassName } from "@reshaped/utilities";

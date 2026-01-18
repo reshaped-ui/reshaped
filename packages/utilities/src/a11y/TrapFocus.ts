@@ -1,4 +1,4 @@
-import * as keys from "@/constants/keys";
+import keys from "@/constants/keys";
 import { getShadowRoot } from "@/dom";
 
 import Chain from "./Chain";

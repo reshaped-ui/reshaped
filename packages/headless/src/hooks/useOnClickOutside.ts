@@ -1,7 +1,7 @@
-import { useHandlerRef } from "@reshaped/headless";
+import { keys } from "@reshaped/utilities";
 import React from "react";
 
-import * as keys from "constants/keys";
+import useHandlerRef from "./useHandlerRef";
 
 const useOnClickOutside = (
 	refs: React.RefObject<HTMLElement | null>[],

@@ -211,12 +211,12 @@ export {
 	useKeyboardArrowNavigation,
 	useKeyboardMode,
 	useHandlerRef,
+	useOnClickOutside,
 } from "@reshaped/headless";
 
 export { useFormControl } from "components/FormControl";
 export { default as Theme, useTheme, type ThemeProps } from "components/Theme";
 
-export { default as useOnClickOutside } from "hooks/useOnClickOutside";
 export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";
 export { default as useScrollLock } from "hooks/useScrollLock";
 export { default as useToggle } from "hooks/useToggle";

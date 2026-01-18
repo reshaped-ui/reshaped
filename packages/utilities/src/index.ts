@@ -4,3 +4,4 @@ export { TrapFocus } from "./a11y";
 export { lockScroll } from "./scroll";
 export { isRTL } from "./i18n";
 export { classNames, type ClassName } from "./css";
+export { default as keys } from "./constants/keys";
