@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-import Card from "components/Card";
-import FormControl from "components/FormControl";
-import HiddenInput from "components/HiddenInput";
-import Image from "components/Image";
-import RadioGroup from "components/RadioGroup";
-import Text from "components/Text";
-import View from "components/View";
+import Card from "@/components/Card";
+import FormControl from "@/components/FormControl";
+import HiddenInput from "@/components/HiddenInput";
+import Image from "@/components/Image";
+import RadioGroup from "@/components/RadioGroup";
+import Text from "@/components/Text";
+import View from "@/components/View";
 
 export default {
 	title: "Sandbox",

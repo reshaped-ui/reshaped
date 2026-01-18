@@ -1,6 +1,6 @@
 import React from "react";
 
-import DropdownMenu from "components/DropdownMenu";
+import DropdownMenu from "@/components/DropdownMenu";
 
 import s from "./Select.module.css";
 

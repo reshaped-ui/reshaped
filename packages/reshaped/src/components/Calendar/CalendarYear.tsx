@@ -1,7 +1,7 @@
 import React from "react";
 
-import Actionable from "components/Actionable";
-import { onNextFrame } from "utilities/animation";
+import Actionable from "@/components/Actionable";
+import { onNextFrame } from "@/utilities/animation";
 
 import s from "./Calendar.module.css";
 import { getMonthNames } from "./Calendar.utils";

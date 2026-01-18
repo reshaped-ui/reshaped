@@ -1,8 +1,8 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { ActionableProps } from "components/Actionable";
-import type { ViewProps } from "components/View";
+import type { ActionableProps } from "@/components/Actionable";
+import type { ViewProps } from "@/components/View";
 import type React from "react";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Component padding, base unit multiplier */

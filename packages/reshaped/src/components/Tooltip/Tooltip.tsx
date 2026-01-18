@@ -1,8 +1,8 @@
 "use client";
 
-import Flyout from "components/Flyout";
-import Text from "components/Text";
-import Theme from "components/Theme";
+import Flyout from "@/components/Flyout";
+import Text from "@/components/Text";
+import Theme from "@/components/Theme";
 
 import s from "./Tooltip.module.css";
 

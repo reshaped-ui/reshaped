@@ -1,4 +1,4 @@
-import type { ButtonProps } from "components/Button";
+import type { ButtonProps } from "@/components/Button";
 
 type BaseProps = Omit<ButtonProps, "variant" | "highlighted"> & {
 	/** Component render variant

@@ -1,7 +1,7 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { ActionableRef } from "components/Actionable";
+import type { ActionableRef } from "@/components/Actionable";
 import type React from "react";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 export type Instance =
 	| {

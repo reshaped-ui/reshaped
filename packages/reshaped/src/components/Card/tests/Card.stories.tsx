@@ -2,8 +2,8 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Card from "components/Card";
-import { Example, Placeholder } from "utilities/storybook";
+import Card from "@/components/Card";
+import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Card",

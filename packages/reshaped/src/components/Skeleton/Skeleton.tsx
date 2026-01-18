@@ -1,6 +1,6 @@
 import { classNames } from "@reshaped/headless";
 
-import View from "components/View";
+import View from "@/components/View";
 
 import s from "./Skeleton.module.css";
 import * as T from "./Skeleton.types";

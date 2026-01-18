@@ -1,13 +1,13 @@
 import React from "react";
 
-import Button from "components/Button";
-import Hidden from "components/Hidden";
-import HiddenVisually from "components/HiddenVisually";
-import Text from "components/Text";
-import View from "components/View";
-import IconChevronLeft from "icons/ChevronLeft";
-import IconChevronRight from "icons/ChevronRight";
-import { onNextFrame } from "utilities/animation";
+import Button from "@/components/Button";
+import Hidden from "@/components/Hidden";
+import HiddenVisually from "@/components/HiddenVisually";
+import Text from "@/components/Text";
+import View from "@/components/View";
+import IconChevronLeft from "@/icons/ChevronLeft";
+import IconChevronRight from "@/icons/ChevronRight";
+import { onNextFrame } from "@/utilities/animation";
 
 import s from "./Calendar.module.css";
 

@@ -3,8 +3,8 @@
 import { classNames, useToggle } from "@reshaped/headless";
 import React from "react";
 
-import HiddenVisually from "components/HiddenVisually";
-import View from "components/View";
+import HiddenVisually from "@/components/HiddenVisually";
+import View from "@/components/View";
 
 import s from "./FileUpload.module.css";
 

@@ -1,8 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
-import Container from "components/Container";
-import { Example, Placeholder } from "utilities/storybook";
+import Container from "@/components/Container";
+import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/Container",

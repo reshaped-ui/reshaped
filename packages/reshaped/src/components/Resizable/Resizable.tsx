@@ -3,7 +3,7 @@
 import { classNames } from "@reshaped/headless";
 import React from "react";
 
-import View from "components/View";
+import View from "@/components/View";
 
 import s from "./Resizable.module.css";
 import { ResizableHandleContext } from "./ResizableHandle";

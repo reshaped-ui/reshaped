@@ -1,12 +1,12 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
-import Button from "components/Button";
-import Popover from "components/Popover";
-import Tooltip, { TooltipProps } from "components/Tooltip";
-import View from "components/View";
-import useResponsiveClientValue from "hooks/useResponsiveClientValue";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import Popover from "@/components/Popover";
+import Tooltip, { TooltipProps } from "@/components/Tooltip";
+import View from "@/components/View";
+import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Tooltip",

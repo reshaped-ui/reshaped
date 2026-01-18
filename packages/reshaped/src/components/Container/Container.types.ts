@@ -1,7 +1,7 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { ViewProps } from "components/View";
+import type { ViewProps } from "@/components/View";
 import type React from "react";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 export type Props = Pick<ViewProps, "align" | "justify" | "height" | "maxHeight"> & {
 	/** Component inline padding */

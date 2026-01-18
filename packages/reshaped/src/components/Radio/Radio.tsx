@@ -3,11 +3,11 @@
 import { classNames } from "@reshaped/headless";
 import React from "react";
 
-import { useFormControl } from "components/FormControl";
-import HiddenInput from "components/HiddenInput";
-import { useRadioGroup } from "components/RadioGroup";
-import Text from "components/Text";
-import { responsiveClassNames, responsivePropDependency } from "utilities/props";
+import { useFormControl } from "@/components/FormControl";
+import HiddenInput from "@/components/HiddenInput";
+import { useRadioGroup } from "@/components/RadioGroup";
+import Text from "@/components/Text";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 
 import s from "./Radio.module.css";
 

@@ -1,5 +1,5 @@
-import type { ActionableProps } from "components/Actionable";
-import type { IconProps } from "components/Icon";
+import type { ActionableProps } from "@/components/Actionable";
+import type { IconProps } from "@/components/Icon";
 
 export type Props = Pick<
 	ActionableProps,

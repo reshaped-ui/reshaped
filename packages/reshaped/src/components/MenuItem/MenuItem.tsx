@@ -1,10 +1,10 @@
 import { classNames } from "@reshaped/headless";
 import { forwardRef } from "react";
 
-import Actionable, { type ActionableRef } from "components/Actionable";
-import Icon from "components/Icon";
-import View from "components/View";
-import { responsiveClassNames, responsivePropDependency } from "utilities/props";
+import Actionable, { type ActionableRef } from "@/components/Actionable";
+import Icon from "@/components/Icon";
+import View from "@/components/View";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 
 import s from "./MenuItem.module.css";
 

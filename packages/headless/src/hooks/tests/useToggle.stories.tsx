@@ -1,12 +1,11 @@
-import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent } from "storybook/test";
 
-import Button from "components/Button";
+import useToggle from "../useToggle";
 
 export default {
-	title: "Hooks/useToggle",
+	title: "Headless/Hooks/useToggle",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
@@ -18,9 +17,9 @@ export const toggle: StoryObj = {
 		const { toggle, active } = useToggle();
 
 		return (
-			<Button onClick={() => toggle()} attributes={{ "data-active": active }}>
+			<button onClick={() => toggle()} data-active={active}>
 				{active ? "Deactivate" : "Activate"}
-			</Button>
+			</button>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -44,11 +43,9 @@ export const activate: StoryObj = {
 		const { activate, active } = useToggle();
 
 		return (
-			<React.Fragment>
-				<Button onClick={activate} attributes={{ "data-active": active }}>
-					Activate
-				</Button>
-			</React.Fragment>
+			<button onClick={activate} data-active={active}>
+				Activate
+			</button>
 		);
 	},
 	play: async ({ canvas }) => {
@@ -68,9 +65,9 @@ export const deactivate: StoryObj = {
 		const { deactivate, active } = useToggle(true);
 
 		return (
-			<Button onClick={deactivate} attributes={{ "data-active": active }}>
+			<button onClick={deactivate} data-active={active}>
 				Deactivate
-			</Button>
+			</button>
 		);
 	},
 	play: async ({ canvas }) => {

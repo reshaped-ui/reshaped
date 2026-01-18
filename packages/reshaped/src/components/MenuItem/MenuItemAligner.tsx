@@ -1,4 +1,4 @@
-import Aligner, { type AlignerProps } from "components/_private/Aligner";
+import Aligner, { type AlignerProps } from "@/components/_private/Aligner";
 
 import s from "./MenuItem.module.css";
 

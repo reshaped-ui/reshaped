@@ -3,11 +3,11 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { fn, expect, Mock, within, waitFor, userEvent, fireEvent } from "storybook/test";
 
-import Autocomplete from "components/Autocomplete";
-import Badge from "components/Badge";
-import FormControl from "components/FormControl";
-import { sleep } from "utilities/helpers";
-import { Example } from "utilities/storybook";
+import Autocomplete from "@/components/Autocomplete";
+import Badge from "@/components/Badge";
+import FormControl from "@/components/FormControl";
+import { sleep } from "@/utilities/helpers";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Autocomplete",

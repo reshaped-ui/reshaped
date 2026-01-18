@@ -3,16 +3,16 @@
 import { useIsomorphicLayoutEffect, useHotkeys, useHandlerRef } from "@reshaped/headless";
 import React from "react";
 
-import DropdownMenu from "components/DropdownMenu";
-import TextField from "components/TextField";
-import * as keys from "constants/keys";
-import useElementId from "hooks/useElementId";
+import DropdownMenu from "@/components/DropdownMenu";
+import TextField from "@/components/TextField";
+import * as keys from "@/constants/keys";
+import useElementId from "@/hooks/useElementId";
 
 import s from "./Autocomplete.module.css";
 import * as T from "./Autocomplete.types";
 
-import type { MenuItemProps } from "components/MenuItem";
-import type { TextFieldProps } from "components/TextField";
+import type { MenuItemProps } from "@/components/MenuItem";
+import type { TextFieldProps } from "@/components/TextField";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 

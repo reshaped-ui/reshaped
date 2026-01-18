@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import Actionable from "components/Actionable";
-import Text from "components/Text";
+import Actionable from "@/components/Actionable";
+import Text from "@/components/Text";
 
 import s from "./Select.module.css";
 import SelectEndContent from "./SelectEndContent";

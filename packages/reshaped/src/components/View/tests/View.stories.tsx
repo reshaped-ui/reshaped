@@ -3,15 +3,15 @@ import { StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useState } from "react";
 import { expect } from "storybook/test";
 
-import Avatar from "components/Avatar";
-import Button from "components/Button";
-import Hidden from "components/Hidden";
-import MenuItem from "components/MenuItem";
-import Tabs from "components/Tabs";
-import Text from "components/Text";
-import View, { type ViewProps } from "components/View";
-import IconPlus from "icons/Plus";
-import { Placeholder, Example } from "utilities/storybook";
+import Avatar from "@/components/Avatar";
+import Button from "@/components/Button";
+import Hidden from "@/components/Hidden";
+import MenuItem from "@/components/MenuItem";
+import Tabs from "@/components/Tabs";
+import Text from "@/components/Text";
+import View, { type ViewProps } from "@/components/View";
+import IconPlus from "@/icons/Plus";
+import { Placeholder, Example } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/View",

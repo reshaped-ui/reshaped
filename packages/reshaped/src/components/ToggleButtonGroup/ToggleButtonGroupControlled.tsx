@@ -3,7 +3,7 @@
 import { useKeyboardArrowNavigation } from "@reshaped/headless";
 import React from "react";
 
-import Button from "components/Button";
+import Button from "@/components/Button";
 
 import Context from "./ToggleButtonGroup.context";
 

@@ -12,9 +12,9 @@ import { classNames } from "@reshaped/headless";
 import { type FocusableElement } from "@reshaped/headless/internal";
 import React from "react";
 
-import Portal from "components/_private/Portal";
-import useIsDismissible from "hooks/_private/useIsDismissible";
-import { onNextFrame } from "utilities/animation";
+import Portal from "@/components/_private/Portal";
+import useIsDismissible from "@/hooks/_private/useIsDismissible";
+import { onNextFrame } from "@/utilities/animation";
 
 import s from "./Overlay.module.css";
 

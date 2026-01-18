@@ -2,13 +2,13 @@ import { StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Badge from "components/Badge";
-import CheckboxGroup from "components/CheckboxGroup";
-import FormControl from "components/FormControl";
-import HiddenInput from "components/HiddenInput";
-import RadioGroup from "components/RadioGroup";
-import View from "components/View";
-import Example from "utilities/storybook/Example";
+import Badge from "@/components/Badge";
+import CheckboxGroup from "@/components/CheckboxGroup";
+import FormControl from "@/components/FormControl";
+import HiddenInput from "@/components/HiddenInput";
+import RadioGroup from "@/components/RadioGroup";
+import View from "@/components/View";
+import Example from "@/utilities/storybook/Example";
 
 export default {
 	title: "Utility components/HiddenInput",

@@ -1,7 +1,7 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { IconProps } from "components/Icon";
+import type { IconProps } from "@/components/Icon";
 import type React from "react";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 export type BaseProps = {
 	/** Expand / collapse icon size in units */

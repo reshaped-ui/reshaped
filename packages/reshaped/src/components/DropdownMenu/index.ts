@@ -1,4 +1,4 @@
-import Popover from "components/Popover";
+import Popover from "@/components/Popover";
 
 import DropdownMenu, {
 	DropdownMenuContent,

@@ -4,7 +4,7 @@ import { TrapFocus, classNames } from "@reshaped/headless";
 import { checkKeyboardMode } from "@reshaped/headless/internal";
 import React from "react";
 
-import { onNextFrame } from "utilities/animation";
+import { onNextFrame } from "@/utilities/animation";
 
 import Toast from "./Toast";
 import { timeouts } from "./Toast.constants";

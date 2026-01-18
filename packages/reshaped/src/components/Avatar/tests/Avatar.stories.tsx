@@ -2,10 +2,10 @@ import { StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { expect, fn, Mock, waitFor } from "storybook/test";
 
-import Avatar from "components/Avatar";
-import View from "components/View";
-import IconZap from "icons/Zap";
-import { Example } from "utilities/storybook";
+import Avatar from "@/components/Avatar";
+import View from "@/components/View";
+import IconZap from "@/icons/Zap";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Avatar",

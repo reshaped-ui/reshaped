@@ -1,8 +1,8 @@
 import type { Attributes, ClassName } from "@reshaped/headless";
-import type { GlobalColorModeProps, ThemeProps } from "components/Theme";
-import type { ToastProviderProps } from "components/Toast";
+import type { GlobalColorModeProps, ThemeProps } from "@/components/Theme";
+import type { ToastProviderProps } from "@/components/Toast";
 import type React from "react";
-import type * as G from "types/global";
+import type * as G from "@/types/global";
 
 export type Props = {
 	/** Node for inserting children */

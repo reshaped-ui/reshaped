@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import Expandable from "components/_private/Expandable";
-import View from "components/View";
+import Expandable from "@/components/_private/Expandable";
+import View from "@/components/View";
 
 import AccordionContext from "./Accordion.context";
 

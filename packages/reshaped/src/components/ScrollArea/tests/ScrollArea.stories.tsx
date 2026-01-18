@@ -2,10 +2,10 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { userEvent, expect, waitFor, fn, Mock } from "storybook/test";
 
-import Button from "components/Button";
-import ScrollArea from "components/ScrollArea";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import ScrollArea from "@/components/ScrollArea";
+import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/ScrollArea",

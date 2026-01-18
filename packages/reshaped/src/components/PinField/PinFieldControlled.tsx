@@ -3,12 +3,12 @@
 import { useHotkeys } from "@reshaped/headless";
 import React from "react";
 
-import { useFormControl } from "components/FormControl";
-import Text from "components/Text";
-import View from "components/View";
-import * as keys from "constants/keys";
-import { onNextFrame } from "utilities/animation";
-import { responsivePropDependency } from "utilities/props";
+import { useFormControl } from "@/components/FormControl";
+import Text from "@/components/Text";
+import View from "@/components/View";
+import * as keys from "@/constants/keys";
+import { onNextFrame } from "@/utilities/animation";
+import { responsivePropDependency } from "@/utilities/props";
 
 import {
 	regExpNumericChar,

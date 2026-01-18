@@ -2,11 +2,11 @@
 
 import React from "react";
 
-import Button, { type ButtonProps } from "components/Button";
-import Icon from "components/Icon";
-import Text from "components/Text";
-import Theme from "components/Theme";
-import View, { type ViewProps } from "components/View";
+import Button, { type ButtonProps } from "@/components/Button";
+import Icon from "@/components/Icon";
+import Text from "@/components/Text";
+import Theme from "@/components/Theme";
+import View, { type ViewProps } from "@/components/View";
 
 import s from "./Toast.module.css";
 

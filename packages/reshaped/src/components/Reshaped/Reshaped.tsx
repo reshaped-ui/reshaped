@@ -3,10 +3,10 @@
 import { Reshaped as HeadlessReshaped, classNames } from "@reshaped/headless";
 import React from "react";
 
-import { GlobalColorMode, PrivateTheme } from "components/Theme";
-import { useGlobalColorMode } from "components/Theme/useTheme";
-import { ToastProvider } from "components/Toast";
-import { SingletonViewportProvider } from "hooks/_private/useSingletonViewport";
+import { GlobalColorMode, PrivateTheme } from "@/components/Theme";
+import { useGlobalColorMode } from "@/components/Theme/useTheme";
+import { ToastProvider } from "@/components/Toast";
+import { SingletonViewportProvider } from "@/hooks/_private/useSingletonViewport";
 
 import s from "./Reshaped.module.css";
 

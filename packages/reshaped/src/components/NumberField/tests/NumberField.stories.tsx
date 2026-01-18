@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, Mock, userEvent } from "storybook/test";
 
-import FormControl from "components/FormControl";
-import NumberField from "components/NumberField";
-import { Example } from "utilities/storybook";
+import FormControl from "@/components/FormControl";
+import NumberField from "@/components/NumberField";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/NumberField",

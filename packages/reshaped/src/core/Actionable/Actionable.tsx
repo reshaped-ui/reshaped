@@ -3,7 +3,7 @@
 import { classNames } from "@reshaped/headless";
 import React, { forwardRef } from "react";
 
-import * as keys from "constants/keys";
+import * as keys from "@/constants/keys";
 
 import type * as T from "./Actionable.types";
 

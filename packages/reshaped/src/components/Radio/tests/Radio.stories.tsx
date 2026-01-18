@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Radio from "components/Radio";
-import View from "components/View";
-import { Example } from "utilities/storybook";
+import Radio from "@/components/Radio";
+import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Radio",

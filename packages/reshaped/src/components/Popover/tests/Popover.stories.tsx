@@ -2,14 +2,14 @@ import { StoryObj } from "@storybook/react-vite";
 import { useState, useId } from "react";
 import { expect, fn, userEvent, within, waitFor } from "storybook/test";
 
-import Button from "components/Button";
-import MenuItem from "components/MenuItem";
-import Popover, { type PopoverProps } from "components/Popover";
-import ScrollArea from "components/ScrollArea";
-import Tooltip from "components/Tooltip";
-import View from "components/View";
-import { sleep } from "utilities/helpers";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import MenuItem from "@/components/MenuItem";
+import Popover, { type PopoverProps } from "@/components/Popover";
+import ScrollArea from "@/components/ScrollArea";
+import Tooltip from "@/components/Tooltip";
+import View from "@/components/View";
+import { sleep } from "@/utilities/helpers";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Popover",

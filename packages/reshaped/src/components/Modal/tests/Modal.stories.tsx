@@ -3,16 +3,16 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
-import Button from "components/Button";
-import Dismissible from "components/Dismissible";
-import DropdownMenu from "components/DropdownMenu";
-import Modal, { type ModalProps } from "components/Modal";
-import Radio from "components/Radio";
-import Switch from "components/Switch";
-import TextField from "components/TextField";
-import View from "components/View";
-import { sleep } from "utilities/helpers";
-import { Example, Placeholder } from "utilities/storybook";
+import Button from "@/components/Button";
+import Dismissible from "@/components/Dismissible";
+import DropdownMenu from "@/components/DropdownMenu";
+import Modal, { type ModalProps } from "@/components/Modal";
+import Radio from "@/components/Radio";
+import Switch from "@/components/Switch";
+import TextField from "@/components/TextField";
+import View from "@/components/View";
+import { sleep } from "@/utilities/helpers";
+import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Modal",

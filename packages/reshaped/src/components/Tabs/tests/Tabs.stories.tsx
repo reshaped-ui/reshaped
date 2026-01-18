@@ -2,13 +2,13 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
-import Button from "components/Button";
-import ScrollArea from "components/ScrollArea";
-import Tabs from "components/Tabs";
-import Text from "components/Text";
-import View from "components/View";
-import IconZap from "icons/Zap";
-import { Example } from "utilities/storybook";
+import Button from "@/components/Button";
+import ScrollArea from "@/components/ScrollArea";
+import Tabs from "@/components/Tabs";
+import Text from "@/components/Text";
+import View from "@/components/View";
+import IconZap from "@/icons/Zap";
+import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Tabs",
