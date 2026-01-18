@@ -213,13 +213,12 @@ export {
 	useHandlerRef,
 	useOnClickOutside,
 	useScrollLock,
+	useToggle,
 } from "@reshaped/headless";
 
 export { useFormControl } from "components/FormControl";
 export { default as Theme, useTheme, type ThemeProps } from "components/Theme";
-
 export { default as useResponsiveClientValue } from "hooks/useResponsiveClientValue";
-export { default as useToggle } from "hooks/useToggle";
 
 /**
  * Utility functions

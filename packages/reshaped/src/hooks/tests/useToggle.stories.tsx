@@ -1,9 +1,9 @@
+import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent } from "storybook/test";
 
 import Button from "components/Button";
-import useToggle from "hooks/useToggle";
 
 export default {
 	title: "Hooks/useToggle",

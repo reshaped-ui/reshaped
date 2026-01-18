@@ -6,6 +6,7 @@ import {
 	useIsomorphicLayoutEffect,
 	useHandlerRef,
 	useScrollLock,
+	useToggle,
 } from "@reshaped/headless";
 import { classNames } from "@reshaped/headless";
 import { type FocusableElement } from "@reshaped/headless/internal";
@@ -13,7 +14,6 @@ import React from "react";
 
 import Portal from "components/_private/Portal";
 import useIsDismissible from "hooks/_private/useIsDismissible";
-import useToggle from "hooks/useToggle";
 import { onNextFrame } from "utilities/animation";
 
 import s from "./Overlay.module.css";

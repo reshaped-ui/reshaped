@@ -1,11 +1,10 @@
 "use client";
 
-import { useHotkeys, useHandlerRef } from "@reshaped/headless";
+import { useHotkeys, useHandlerRef, useToggle } from "@reshaped/headless";
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React from "react";
 
 import * as keys from "constants/keys";
-import useToggle from "hooks/useToggle";
 
 export type UseDragCallbackArgs = { x: number; y: number; triggerX: number; triggerY: number };
 

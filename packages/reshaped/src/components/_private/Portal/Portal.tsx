@@ -1,11 +1,10 @@
 "use client";
 
-import { useIsomorphicLayoutEffect } from "@reshaped/headless";
+import { useIsomorphicLayoutEffect, useToggle } from "@reshaped/headless";
 import React from "react";
 import ReactDOM from "react-dom";
 
 import Theme from "components/Theme";
-import useToggle from "hooks/useToggle";
 
 import s from "./Portal.module.css";
 
