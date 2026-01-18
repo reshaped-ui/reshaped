@@ -1,19 +1,19 @@
-import type * as G from "types/global";
+import type { Coordinates } from "@reshaped/headless/internal";
 
 type SafePolygonOptions = {
 	contentRef: React.RefObject<HTMLElement | null>;
 	triggerRef: React.RefObject<HTMLElement | null>;
 	position: string | null | undefined;
 	onClose: () => void;
-	origin: G.Coordinates;
+	origin: Coordinates;
 };
 
 /**
  * Checks if a point is inside a triangle using barycentric coordinates
  */
 function isPointInTriangle(
-	point: G.Coordinates,
-	triangle: [G.Coordinates, G.Coordinates, G.Coordinates]
+	point: Coordinates,
+	triangle: [Coordinates, Coordinates, Coordinates]
 ): boolean {
 	const [p1, p2, p3] = triangle;
 
@@ -32,7 +32,7 @@ function isPointInTriangle(
 function getContentCorners(
 	contentRect: DOMRect,
 	position: string | null | undefined
-): [G.Coordinates, G.Coordinates] {
+): [Coordinates, Coordinates] {
 	const corners = {
 		topLeft: { x: contentRect.left, y: contentRect.top },
 		topRight: { x: contentRect.right, y: contentRect.top },
@@ -55,7 +55,7 @@ function getContentCorners(
  * Checks if the mouse is over the trigger or content elements
  */
 function isMouseOverElement(
-	point: G.Coordinates,
+	point: Coordinates,
 	contentRef: React.RefObject<HTMLElement | null>,
 	triggerRef: React.RefObject<HTMLElement | null>
 ): boolean {
@@ -94,7 +94,7 @@ export function createSafeArea(options: SafePolygonOptions): () => void {
 		origin.x -= buffer;
 	}
 
-	const triangle: [G.Coordinates, G.Coordinates, G.Coordinates] = [origin, corner1, corner2];
+	const triangle: [Coordinates, Coordinates, Coordinates] = [origin, corner1, corner2];
 
 	let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
@@ -115,7 +115,7 @@ export function createSafeArea(options: SafePolygonOptions): () => void {
 	};
 
 	const handleMouseMove = (e: MouseEvent) => {
-		const currentPoint: G.Coordinates = { x: e.clientX, y: e.clientY };
+		const currentPoint: Coordinates = { x: e.clientX, y: e.clientY };
 
 		if (isMouseOverElement(currentPoint, contentRef, triggerRef)) {
 			cleanup();

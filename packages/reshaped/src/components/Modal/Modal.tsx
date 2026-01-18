@@ -1,7 +1,7 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
-import { enableScroll, disableScroll } from "@reshaped/utilities/internal";
+import { classNames } from "@reshaped/headless";
+import { enableScroll, disableScroll } from "@reshaped/headless/internal";
 import React from "react";
 
 import Overlay from "components/Overlay";

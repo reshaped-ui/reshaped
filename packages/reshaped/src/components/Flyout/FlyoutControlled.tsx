@@ -1,15 +1,17 @@
 "use client";
 
-import { TrapFocus } from "@reshaped/utilities";
-import { checkKeyboardMode, type FocusableElement } from "@reshaped/utilities/internal";
+import { TrapFocus, useHotkeys, useIsomorphicLayoutEffect } from "@reshaped/headless";
+import {
+	checkKeyboardMode,
+	type FocusableElement,
+	type Coordinates,
+} from "@reshaped/headless/internal";
 import React from "react";
 
 import useIsDismissible from "hooks/_private/useIsDismissible";
 import usePrevious from "hooks/_private/usePrevious";
 import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
-import useHotkeys from "hooks/useHotkeys";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 import useOnClickOutside from "hooks/useOnClickOutside";
 import { checkTransitions } from "utilities/animation";
 
@@ -25,7 +27,6 @@ import cooldown from "./utilities/cooldown";
 import { createSafeArea } from "./utilities/safeArea";
 
 import type * as T from "./Flyout.types";
-import type * as G from "types/global";
 
 const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {
@@ -101,9 +102,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
 	// Cleanup function for safe area tracking
-	const safeAreaRef = React.useRef<{ origin: G.Coordinates; cleanup: () => void } | null>(null);
+	const safeAreaRef = React.useRef<{ origin: Coordinates; cleanup: () => void } | null>(null);
 
-	const originCoordinatesRef = React.useRef<G.Coordinates | null>(originCoordinates ?? null);
+	const originCoordinatesRef = React.useRef<Coordinates | null>(originCoordinates ?? null);
 	originCoordinatesRef.current = originCoordinates ?? null;
 
 	const flyout = useFlyout({

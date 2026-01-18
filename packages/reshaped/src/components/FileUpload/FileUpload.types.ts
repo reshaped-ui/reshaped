@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { ViewProps } from "components/View";
 import type React from "react";
 import type * as G from "types/global";
@@ -21,11 +22,11 @@ export type Props = {
 	/** Change component to render inline making it more compact */
 	inline?: boolean;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 	/** Additional attributes for the input element */
-	inputAttributes?: G.Attributes<"input">;
+	inputAttributes?: Attributes<"input">;
 };
 
 export type TriggerProps = {

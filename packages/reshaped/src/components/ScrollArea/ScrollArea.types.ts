@@ -1,3 +1,5 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
+import type { Coordinates } from "@reshaped/headless/internal";
 import type React from "react";
 import type * as G from "types/global";
 
@@ -7,15 +9,15 @@ export type Props = {
 	/** Scrollbar visibility behavior based on the user interaction */
 	scrollbarDisplay?: "visible" | "hover" | "hidden";
 	/** Callback when the scroll area is scrolled */
-	onScroll?: (args: G.Coordinates) => void;
+	onScroll?: (args: Coordinates) => void;
 	/** Height of the scroll area, literal css value or unit token multiplier */
 	height?: G.Responsive<string | number>;
 	/** Maximum height of the scroll area, literal css value or unit token multiplier */
 	maxHeight?: G.Responsive<string | number>;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type BarProps = {

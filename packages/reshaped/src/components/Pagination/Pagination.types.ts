@@ -1,4 +1,4 @@
-import type * as G from "types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 
 export type BaseProps = {
 	/** Total number of pages available */
@@ -12,9 +12,9 @@ export type BaseProps = {
 	/** aria-label attribute for the next page button */
 	nextAriaLabel: string;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps & {

@@ -1,9 +1,7 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
+import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
-
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
 
 import { ThemeContext } from "./Theme.context";
 import s from "./Theme.module.css";
@@ -31,6 +29,8 @@ export const PrivateTheme: React.FC<T.PrivateProps> = (props) => {
 	const invertedColorMode = parentColorMode === "light" ? "dark" : "light";
 	const usedColorMode = colorMode === "inverted" ? invertedColorMode : colorMode || parentColorMode;
 	const rootClassNames = classNames(s.root, className);
+
+	console.log(defaultName, "defaultName2");
 
 	const setRootTheme: T.ThemeContextData["setRootTheme"] = React.useCallback(
 		(theme) => {

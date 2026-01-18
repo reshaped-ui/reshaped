@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 import type * as G from "types/global";
 
@@ -18,7 +19,7 @@ export type Props = {
 	/** Use the width of the svg asset instead of providing a square bounding box */
 	autoWidth?: boolean;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"span">;
+	attributes?: Attributes<"span">;
 };

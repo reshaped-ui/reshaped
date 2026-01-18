@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 import type * as G from "types/global";
 
@@ -46,9 +47,9 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<TagName>;
+	attributes?: Attributes<TagName>;
 	/** Render as a different html tag */
 	as?: TagName extends keyof React.JSX.IntrinsicElements
 		? TagName

@@ -186,7 +186,7 @@ importers:
         specifier: 2.0.2
         version: 2.0.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@4.0.16)
 
-  packages/core:
+  packages/headless:
     dependencies:
       '@reshaped/utilities':
         specifier: workspace:*
@@ -203,9 +203,9 @@ importers:
       '@csstools/postcss-global-data':
         specifier: 3.1.0
         version: 3.1.0(postcss@8.5.6)
-      '@reshaped/utilities':
+      '@reshaped/headless':
         specifier: workspace:*
-        version: link:../utilities
+        version: link:../headless
       chalk:
         specifier: 4.1.2
         version: 4.1.2

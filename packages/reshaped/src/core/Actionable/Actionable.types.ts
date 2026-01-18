@@ -1,13 +1,13 @@
+import type { Attributes as AttributesType, ClassName } from "@reshaped/headless";
 import type React from "react";
-import type * as G from "types/global";
 
 export type AttributesRef = React.RefObject<HTMLButtonElement | null>;
-type Attributes = G.Attributes<"button"> &
-	Omit<React.JSX.IntrinsicElements["a"], keyof G.Attributes<"button">> & {
+type Attributes = AttributesType<"button"> &
+	Omit<React.JSX.IntrinsicElements["a"], keyof AttributesType<"button">> & {
 		ref?: AttributesRef;
 	};
 
-export type RenderAttributes = G.Attributes<"a"> & {
+export type RenderAttributes = AttributesType<"a"> & {
 	ref: React.RefObject<HTMLAnchorElement | null>;
 	children: React.ReactNode;
 };
@@ -30,7 +30,7 @@ export type Props = {
 	/** Render as a different element */
 	as?: keyof React.JSX.IntrinsicElements;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
 	attributes?: Attributes;
 };

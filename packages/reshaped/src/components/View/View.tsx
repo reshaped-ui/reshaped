@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/utilities";
+import { classNames } from "@reshaped/headless";
 import React, { isValidElement } from "react";
 
 import Divider, { type DividerProps } from "components/Divider";

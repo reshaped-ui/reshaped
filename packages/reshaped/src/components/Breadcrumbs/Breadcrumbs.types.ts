@@ -1,6 +1,6 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { LinkProps } from "components/Link";
 import type React from "react";
-import type * as G from "types/global";
 
 export type Props = {
 	/** Node for inserting children to position items */
@@ -21,9 +21,9 @@ export type Props = {
 	/** aria-label attribute for the component */
 	ariaLabel?: string;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"nav">;
+	attributes?: Attributes<"nav">;
 };
 
 export type ItemProps = Pick<LinkProps, "icon" | "href" | "onClick" | "disabled" | "children">;

@@ -1,4 +1,4 @@
-import type { Coordinates } from "../types";
+import type { Coordinates } from "@/types/global";
 
 /**
  * Include any missing properties to match DOMRect interface when coordinates are passed

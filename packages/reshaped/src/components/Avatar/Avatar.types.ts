@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { IconProps } from "components/Icon";
 import type * as G from "types/global";
 
@@ -7,10 +8,10 @@ export type Props = {
 	/** Image alt text */
 	alt?: string;
 	/** Additional attributes for the image element */
-	imageAttributes?: G.Attributes<"img">;
+	imageAttributes?: Attributes<"img">;
 	/** Render prop for the image element, useful for integrating with the Image component from third party frameworks */
 	renderImage?: (
-		attributes: Omit<G.Attributes<"img">, "src" | "alt"> & { src: string; alt: string }
+		attributes: Omit<Attributes<"img">, "src" | "alt"> & { src: string; alt: string }
 	) => React.ReactNode;
 	/** Initials to display if no image is provided */
 	initials?: string;
@@ -31,7 +32,7 @@ export type Props = {
 	 */
 	size?: G.Responsive<number>;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };

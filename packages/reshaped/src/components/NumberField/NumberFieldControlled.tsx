@@ -1,5 +1,6 @@
 "use client";
 
+import { useHotkeys } from "@reshaped/headless";
 import React from "react";
 
 import Actionable from "components/Actionable";
@@ -9,7 +10,6 @@ import TextField, { TextFieldProps } from "components/TextField";
 import * as keys from "constants/keys";
 import useElementId from "hooks/useElementId";
 import useHandlerRef from "hooks/useHandlerRef";
-import useHotkeys from "hooks/useHotkeys";
 import IconChevronDown from "icons/ChevronDown";
 import IconChevronUp from "icons/ChevronUp";
 import IconMinus from "icons/Minus";

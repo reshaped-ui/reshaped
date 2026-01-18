@@ -1,10 +1,8 @@
-import { Flyout } from "@reshaped/utilities";
+import { useIsomorphicLayoutEffect } from "@reshaped/headless";
+import { Flyout, type Coordinates } from "@reshaped/headless/internal";
 import { useCallback, useMemo, useRef, useState } from "react";
 
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-
 import type * as T from "./Flyout.types";
-import type * as G from "types/global";
 
 type UseFlyout = (
 	args: Pick<
@@ -22,7 +20,7 @@ type UseFlyout = (
 		container?: HTMLElement | null;
 		triggerElRef: React.RefObject<HTMLElement | null>;
 		flyoutElRef: React.RefObject<HTMLElement | null>;
-		triggerCoordinatesRef: React.RefObject<DOMRect | G.Coordinates | null>;
+		triggerCoordinatesRef: React.RefObject<DOMRect | Coordinates | null>;
 	}
 ) => Pick<T.State, "position" | "status"> & {
 	updatePosition: (options?: { fallback?: boolean }) => void;

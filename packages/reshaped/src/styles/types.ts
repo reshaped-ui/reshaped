@@ -2,6 +2,8 @@ import React from "react";
 
 import * as G from "types/global";
 
+import type { ClassName } from "@reshaped/headless";
+
 /* Values */
 type Unit = number;
 type Literal = string;
@@ -48,7 +50,7 @@ export type BorderColor =
 
 export type StyleResolver<Value> = (value?: G.Responsive<Value>) => {
 	variables?: React.CSSProperties;
-	classNames?: G.ClassName;
+	classNames?: ClassName;
 };
 
 export type Mixin = {

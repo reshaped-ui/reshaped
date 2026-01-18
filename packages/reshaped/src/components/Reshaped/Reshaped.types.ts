@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { GlobalColorModeProps, ThemeProps } from "components/Theme";
 import type { ToastProviderProps } from "components/Toast";
 import type React from "react";
@@ -23,7 +24,7 @@ export type Props = {
 	/** Enable scoped mode for applications not using Reshaped provider at the application root */
 	scoped?: boolean;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };

@@ -1,5 +1,5 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
-import type * as G from "types/global";
 
 type WithClose = {
 	/** Hide the close button */
@@ -25,7 +25,7 @@ export type Props = CloseProps & {
 	/** Callback when the component is dismissed */
 	onClose?: () => void;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };

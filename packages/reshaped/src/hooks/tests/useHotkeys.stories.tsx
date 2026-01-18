@@ -1,8 +1,8 @@
+import { useHotkeys } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
 import View from "components/View";
-import useHotkeys from "hooks/useHotkeys";
 
 export default {
 	title: "Hooks/useHotkeys",

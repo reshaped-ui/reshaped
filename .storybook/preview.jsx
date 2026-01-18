@@ -1,4 +1,5 @@
 import React from "react";
+import { useRTL } from "../packages/headless";
 import Reshaped from "../packages/reshaped/src/components/Reshaped";
 import Button from "../packages/reshaped/src/components/Button";
 import View from "../packages/reshaped/src/components/View";
@@ -6,9 +7,8 @@ import Text from "../packages/reshaped/src/components/Text";
 import Hidden from "../packages/reshaped/src/components/Hidden";
 import DropdownMenu from "../packages/reshaped/src/components/DropdownMenu";
 import Icon from "../packages/reshaped/src/components/Icon";
-import useRTL from "../packages/reshaped/src/hooks/useRTL";
+import useTheme from "../packages/reshaped/src/components/Theme";
 import IconCheckmark from "../packages/reshaped/src/icons/Checkmark";
-import { useTheme } from "../packages/reshaped/src/components/Theme";
 import "../packages/reshaped/src/themes/reshaped/theme.css";
 import "../packages/reshaped/src/themes/slate/theme.css";
 import "../packages/reshaped/src/themes/figma/theme.css";

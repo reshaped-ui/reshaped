@@ -1,12 +1,10 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
-import { rafThrottle } from "@reshaped/utilities/internal";
+import { classNames, useIsomorphicLayoutEffect, useRTL } from "@reshaped/headless";
+import { rafThrottle } from "@reshaped/headless/internal";
 import React from "react";
 
 import View from "components/View";
-import useIsomorphicLayoutEffect from "hooks/useIsomorphicLayoutEffect";
-import useRTL from "hooks/useRTL";
 import { responsiveVariables, responsiveClassNames } from "utilities/props";
 
 import s from "./Carousel.module.css";

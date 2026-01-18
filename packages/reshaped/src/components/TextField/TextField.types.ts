@@ -1,3 +1,4 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { FormControlProps } from "components/FormControl";
 import type { IconProps } from "components/Icon";
 import type React from "react";
@@ -51,11 +52,11 @@ export type BaseProps = {
 	/** Callback when the text field is blurred */
 	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 	/** Additional attributes for the input element */
-	inputAttributes?: G.Attributes<"input">;
+	inputAttributes?: Attributes<"input">;
 } & Pick<FormControlProps, "hasError">;
 
 export type ControlledProps = BaseProps & {

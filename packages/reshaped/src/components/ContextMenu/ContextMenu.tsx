@@ -9,11 +9,11 @@ import useScrollLock from "hooks/useScrollLock";
 import s from "./ContextMenu.module.css";
 
 import type * as T from "./ContextMenu.types";
-import type * as G from "types/global";
+import type { Coordinates } from "@reshaped/headless/internal";
 
 const ContextMenu: React.FC<T.Props> = (props) => {
 	const { position = "end-top", onOpen, onClose, ...dropdownMenuProps } = props;
-	const [coordinates, setCoordinates] = React.useState<G.Coordinates>();
+	const [coordinates, setCoordinates] = React.useState<Coordinates>();
 	const originRef = React.useRef<HTMLDivElement>(null);
 	const { lockScroll, unlockScroll } = useScrollLock({ originRef });
 	const onOpenRef = useHandlerRef(onOpen);
