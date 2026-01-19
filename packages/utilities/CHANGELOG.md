@@ -1,5 +1,11 @@
 # @reshaped/headless
 
+## 3.10.0-canary.7
+
+### Minor Changes
+
+- [#572](https://github.com/reshaped-ui/reshaped/pull/572) [`e69c177`](https://github.com/reshaped-ui/reshaped/commit/e69c177c2bd2478670aed9b13d0ecef86f5ee740) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Extracted Reshaped provider and all of its dependencies into @reshaped/headless
+
 ## 3.10.0-canary.6
 
 ### Patch Changes
