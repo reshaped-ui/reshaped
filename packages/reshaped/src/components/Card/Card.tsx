@@ -8,78 +8,80 @@ import s from "./Card.module.css";
 
 import type * as T from "./Card.types";
 
-const Card = forwardRef(
+export type Component = {
 	<As extends keyof React.JSX.IntrinsicElements = "div">(
-		props: T.Props<As>,
-		ref: React.Ref<HTMLElement>
-	) => {
-		const { padding = 4 } = props;
-		const {
-			selected,
-			elevated,
-			bleed,
-			height,
-			onClick,
-			href,
-			children,
-			className,
-			attributes,
-			// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			as: TagName = "div" as any,
-		} = props;
-		const isActionable = !!href || !!onClick;
-		const mixinStyles = resolveMixin({
-			radius: "medium",
-			bleed,
-			height,
-			padding,
-		});
+		props: T.Props<As> & React.RefAttributes<HTMLElement>
+	): React.ReactNode;
+	displayName?: string;
+};
 
-		const rootClassNames = classNames(
-			s.root,
-			mixinStyles.classNames,
-			isActionable && s["--actionable"],
-			elevated && s["--elevated"],
-			selected && s["--selected"],
-			className
-		);
+const Card: Component = forwardRef((props, ref) => {
+	const { padding = 4 } = props;
+	const {
+		selected,
+		elevated,
+		bleed,
+		height,
+		onClick,
+		href,
+		children,
+		className,
+		attributes,
+		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		as: TagName = "div" as any,
+	} = props;
+	const isActionable = !!href || !!onClick;
+	const mixinStyles = resolveMixin({
+		radius: "medium",
+		bleed,
+		height,
+		padding,
+	});
 
-		const style = {
-			...attributes?.style,
-			...mixinStyles.variables,
-		};
+	const rootClassNames = classNames(
+		s.root,
+		mixinStyles.classNames,
+		isActionable && s["--actionable"],
+		elevated && s["--elevated"],
+		selected && s["--selected"],
+		className
+	);
 
-		if (isActionable) {
-			return (
-				<Actionable
-					className={rootClassNames}
-					attributes={{ ...attributes, style }}
-					href={href}
-					as={TagName}
-					onClick={onClick}
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					ref={ref as any}
-				>
-					{children}
-				</Actionable>
-			);
-		}
+	const style = {
+		...attributes?.style,
+		...mixinStyles.variables,
+	};
 
+	if (isActionable) {
 		return (
-			<TagName
-				{...attributes}
-				onClick={onClick}
-				href={href}
-				ref={ref}
+			<Actionable
 				className={rootClassNames}
-				style={style}
+				attributes={{ ...attributes, style }}
+				href={href}
+				as={TagName}
+				onClick={onClick}
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				ref={ref as any}
 			>
 				{children}
-			</TagName>
+			</Actionable>
 		);
 	}
-);
+
+	return (
+		<TagName
+			{...attributes}
+			onClick={onClick}
+			href={href}
+			ref={ref}
+			className={rootClassNames}
+			style={style}
+		>
+			{children}
+		</TagName>
+	);
+});
 
 Card.displayName = "Card";
 

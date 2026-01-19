@@ -1,4 +1,5 @@
-import type { Attributes as AttributesType, ClassName } from "@reshaped/headless";
+import type { Attributes as AttributesType } from "@/types/global";
+import type { ClassName } from "@reshaped/utilities";
 import type React from "react";
 
 export type AttributesRef = React.RefObject<HTMLButtonElement | null>;

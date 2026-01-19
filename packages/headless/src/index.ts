@@ -2,6 +2,11 @@
 export { classNames, TrapFocus } from "@reshaped/utilities";
 
 // Components
+export {
+	default as Actionable,
+	type ActionableRef,
+	type ActionableProps,
+} from "./components/Actionable";
 export { default as Reshaped, type ReshapedProps } from "./components/Reshaped";
 
 // Hooks
