@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.10.0-canary.9",
-    "reshaped": "3.10.0-canary.9",
-    "@reshaped/utilities": "3.10.0-canary.9"
+    "@reshaped/headless": "3.10.0-canary.10",
+    "reshaped": "3.10.0-canary.10",
+    "@reshaped/utilities": "3.10.0-canary.10"
   },
   "changesets": [
     "big-ants-design",
