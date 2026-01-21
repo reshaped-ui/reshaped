@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.0-canary.10
+
+### Patch Changes
+
+- [`763b71b`](https://github.com/reshaped-ui/reshaped/commit/763b71b8b6f03aa72001d3ed20ff8e288cbeb6a9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated tailwind theme definitions
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.0-canary.10
+
 ## 3.10.0-canary.9
 
 ### Patch Changes

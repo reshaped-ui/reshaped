@@ -1,5 +1,12 @@
 # @reshaped/headless
 
+## 3.10.0-canary.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @reshaped/utilities@3.10.0-canary.10
+
 ## 3.10.0-canary.9
 
 ### Patch Changes
