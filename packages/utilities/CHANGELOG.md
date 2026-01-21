@@ -1,5 +1,7 @@
 # @reshaped/headless
 
+## 3.10.0-canary.8
+
 ## 3.10.0-canary.7
 
 ### Minor Changes

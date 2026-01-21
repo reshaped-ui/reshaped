@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.0-canary.8
+
+### Patch Changes
+
+- [`e67ea70`](https://github.com/reshaped-ui/reshaped/commit/e67ea708c4f7d01e8b2ebcd7a117cba4526c2151) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Removed the safe area buffer
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.0-canary.8
+
 ## 3.10.0-canary.7
 
 ### Minor Changes
