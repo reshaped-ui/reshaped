@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.10.0-canary.7",
-    "reshaped": "3.10.0-canary.7",
-    "@reshaped/utilities": "3.10.0-canary.7"
+    "@reshaped/headless": "3.10.0-canary.8",
+    "reshaped": "3.10.0-canary.8",
+    "@reshaped/utilities": "3.10.0-canary.8"
   },
   "changesets": [
     "big-ants-design",
@@ -17,6 +17,7 @@
     "fast-bars-learn",
     "fiery-toys-cover",
     "free-windows-stand",
+    "fresh-tables-brush",
     "great-adults-tie",
     "heavy-baboons-walk",
     "hip-planets-tap",

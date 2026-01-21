@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.0-canary.9
+
+### Patch Changes
+
+- [`ab5a698`](https://github.com/reshaped-ui/reshaped/commit/ab5a698f3066110d2e1a70e194b193a3bcca4340) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added outline tokens support in the tailwind integration
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.0-canary.9
+
 ## 3.10.0-canary.8
 
 ### Patch Changes
