@@ -79,20 +79,7 @@ export function createSafeArea(options: SafePolygonOptions): () => void {
 
 	const contentRect = contentRef.current.getBoundingClientRect();
 	const [corner1, corner2] = getContentCorners(contentRect, position);
-
-	// Add buffer to origin based on position to extend safe area
-	const buffer = 10;
 	const origin = { x: passedOrigin.x, y: passedOrigin.y };
-
-	if (position?.startsWith("bottom")) {
-		origin.y -= buffer;
-	} else if (position?.startsWith("top")) {
-		origin.y += buffer;
-	} else if (position?.startsWith("start")) {
-		origin.x += buffer;
-	} else if (position?.startsWith("end")) {
-		origin.x -= buffer;
-	}
 
 	const triangle: [Coordinates, Coordinates, Coordinates] = [origin, corner1, corner2];
 
