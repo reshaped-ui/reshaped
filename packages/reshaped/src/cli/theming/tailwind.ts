@@ -47,6 +47,7 @@ export const transformToTailwind = (theme?: GeneratedThemeDefinition) => {
 			const name = cssTokenName.replace("border-", "");
 
 			variables[`--border-color-${name}`] = configValue;
+			variables[`--outline-color-${name}`] = configValue;
 			return;
 		}
 
