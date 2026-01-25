@@ -1,3 +1,4 @@
+/* stylelint-disable plugin/browser-compat -- graceful degradation for Firefox */
 @property --rs-tabs-mid-l {
 	syntax: "<length>";
 	initial-value: -24px;
@@ -21,6 +22,7 @@
 	initial-value: calc(100% + 24px);
 	inherits: false;
 }
+/* stylelint-enable plugin/browser-compat */
 
 .root {
 	--rs-tabs-gap: var(--rs-unit-x6);

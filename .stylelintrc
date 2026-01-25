@@ -1,5 +1,6 @@
 {
 	"extends": ["stylelint-config-standard"],
+	"plugins": ["stylelint-browser-compat"],
 	"rules": {
 		"selector-class-pattern": null,
 		"no-descending-specificity": null,
@@ -17,6 +18,21 @@
 			}
 		],
 		"layer-name-pattern": "^[a-z][a-z0-9.-]*$",
-		"media-query-no-invalid": null
+		"media-query-no-invalid": null,
+		"plugin/browser-compat": [
+			true,
+			{
+				"browserslist": ["baseline widely available with downstream"],
+				"allow": {
+					"features": [
+						"selectors.has",
+						"selectors.-webkit-scrollbar",
+						"selectors.not.selector_list",
+						"properties.scrollbar-width",
+						"properties.-webkit-tap-highlight-color"
+					]
+				}
+			}
+		]
 	}
 }

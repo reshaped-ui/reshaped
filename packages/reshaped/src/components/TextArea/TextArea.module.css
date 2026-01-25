@@ -121,6 +121,7 @@
 
 .root.--resize-none .input,
 .root.--resize-auto .input {
+	/* stylelint-disable-next-line plugin/browser-compat -- only for desktop browsers */
 	resize: none;
 }
 

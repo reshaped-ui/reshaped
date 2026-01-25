@@ -31,6 +31,7 @@
 }
 
 .--wrap-balance {
+	/* stylelint-disable-next-line plugin/browser-compat -- enabled manually with a prop */
 	text-wrap: balance;
 }
 

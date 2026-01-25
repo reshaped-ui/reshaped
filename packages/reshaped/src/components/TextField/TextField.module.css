@@ -71,6 +71,7 @@
 }
 
 .input:-webkit-autofill {
+	/* stylelint-disable-next-line plugin/browser-compat -- only for webkit */
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: var(--rs-color-foreground-neutral);
 }

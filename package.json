@@ -80,6 +80,7 @@
 		"size-limit": "12.0.0",
 		"storybook": "10.1.10",
 		"stylelint": "16.26.1",
+		"stylelint-browser-compat": "1.0.0-beta.180",
 		"stylelint-config-prettier": "9.0.5",
 		"stylelint-config-standard": "39.0.1",
 		"tsc-watch": "7.2.0",

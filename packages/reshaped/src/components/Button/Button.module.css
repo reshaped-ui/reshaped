@@ -3,7 +3,7 @@
 */
 
 .root {
-	/* Using --rs-button-p and --rs-p to dynamically reasign --rs-p for all sizes of ghost buttons */
+	/* Using --rs-button-p and --rs-p to dynamically reassign --rs-p for all sizes of ghost buttons */
 	--rs-p-v: var(--rs-button-p-v);
 	--rs-p-h: var(--rs-button-p-h);
 	--rs-button-highlight-opacity: 0;
