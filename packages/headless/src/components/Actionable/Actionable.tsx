@@ -84,6 +84,6 @@ const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 	return <TagName {...tagAttributes} />;
 });
 
-Actionable.displayName = "Actionable";
+Actionable.displayName = "Headless.Actionable";
 
 export default Actionable;

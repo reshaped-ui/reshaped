@@ -229,23 +229,26 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	return (
 		<View gap={2} direction="row" className={[s.root, className]} attributes={attributes}>
 			{nodes}
-			<input
-				{...inputAttributes}
-				{...formControl.attributes}
-				type="text"
-				className={s.input}
-				onFocus={handleFocus}
-				onBlur={handleBlur}
-				onPaste={handlePaste}
-				onInput={handleInput}
-				value={value}
-				name={name}
-				maxLength={valueLength}
-				ref={inputRef}
-				autoComplete={inputAttributes?.autoComplete || "one-time-code"}
-				inputMode={pattern === "numeric" ? "numeric" : undefined}
-				pattern={`${patternRegexp}{${valueLength}}`}
-			/>
+
+			<div className={s.inputWrapper}>
+				<input
+					{...inputAttributes}
+					{...formControl.attributes}
+					type="text"
+					className={s.input}
+					onFocus={handleFocus}
+					onBlur={handleBlur}
+					onPaste={handlePaste}
+					onInput={handleInput}
+					value={value}
+					name={name}
+					maxLength={valueLength}
+					ref={inputRef}
+					autoComplete={inputAttributes?.autoComplete || "one-time-code"}
+					inputMode={pattern === "numeric" ? "numeric" : undefined}
+					pattern={`${patternRegexp}{${valueLength}}`}
+				/>
+			</div>
 		</View>
 	);
 };

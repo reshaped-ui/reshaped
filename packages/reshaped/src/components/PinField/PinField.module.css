@@ -3,6 +3,13 @@
 	vertical-align: top;
 }
 
+.inputWrapper {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+
 .input {
 	position: absolute;
 	font-size: 16px;
@@ -15,6 +22,7 @@
 	caret-color: transparent;
 	vertical-align: top;
 	inset-inline-start: 0;
+	pointer-events: all;
 	inset-block: 0;
 	padding-left: 100%;
 	clip-path: inset(0 calc(50% + var(--rs-unit-x2)) 0 0);
