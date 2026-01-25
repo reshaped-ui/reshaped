@@ -53,6 +53,7 @@
 		"@vitest/browser-playwright": "4.0.16",
 		"@vitest/coverage-istanbul": "4.0.16",
 		"@vitest/coverage-v8": "4.0.16",
+		"babel-plugin-react-compiler": "1.0.0",
 		"chromatic": "13.3.4",
 		"cssnano": "7.1.2",
 		"eslint": "9.39.2",
@@ -87,6 +88,7 @@
 		"typescript": "5.9.3",
 		"typescript-eslint": "8.50.1",
 		"vite": "7.3.0",
+		"vite-plugin-dts": "4.5.4",
 		"vite-tsconfig-paths": "5.1.4",
 		"vitest": "4.0.16",
 		"vitest-browser-react": "2.0.2"

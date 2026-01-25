@@ -80,10 +80,10 @@
     "dev": "storybook dev -p 3001 -c ../../.storybook --disable-telemetry",
     "build": "pnpm clean && pnpm build:esm && pnpm build:css && pnpm build:bundle",
     "build:themes": "node bin/cli.js theming --config dist/cli/theming/reshaped.config.js --output src/themes",
-    "build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
+    "build:esm": "vite build",
     "build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
     "build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",
-    "build:bundle": "vite build && shx cp dist/index.d.ts dist/bundle.d.ts",
+    "build:bundle": "vite build --mode bundle && shx cp dist/index.d.ts dist/bundle.d.ts",
     "build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
     "release:local": "pnpm build && pnpm pack --out reshaped-local.tgz",
     "test:browser": "vitest run --project=storybook",
@@ -106,6 +106,7 @@
     "cssnano": "7.1.1",
     "csstype": "3.1.3",
     "culori": "4.0.2",
-    "postcss-custom-media": "11.0.6"
+    "postcss-custom-media": "11.0.6",
+    "react-compiler-runtime": "^1.0.0"
   }
 }

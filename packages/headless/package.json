@@ -37,13 +37,14 @@
 	"scripts": {
 		"clean": "rm -rf dist",
 		"dev": "tsc-watch --onSuccess \"resolve-tspaths\"",
-		"build": "tsc && resolve-tspaths"
+		"build": "vite build"
 	},
 	"peerDependencies": {
 		"react": "^18 || ^19",
 		"react-dom": "^18 || ^19"
 	},
 	"dependencies": {
-		"@reshaped/utilities": "workspace:*"
+		"@reshaped/utilities": "workspace:*",
+		"react-compiler-runtime": "1.0.0"
 	}
 }
