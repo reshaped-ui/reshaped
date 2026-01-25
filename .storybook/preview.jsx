@@ -7,7 +7,7 @@ import Text from "../packages/reshaped/src/components/Text";
 import Hidden from "../packages/reshaped/src/components/Hidden";
 import DropdownMenu from "../packages/reshaped/src/components/DropdownMenu";
 import Icon from "../packages/reshaped/src/components/Icon";
-import useTheme from "../packages/reshaped/src/components/Theme";
+import { useTheme } from "../packages/reshaped/src/components/Theme";
 import IconCheckmark from "../packages/reshaped/src/icons/Checkmark";
 import "../packages/reshaped/src/themes/reshaped/theme.css";
 import "../packages/reshaped/src/themes/slate/theme.css";

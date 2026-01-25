@@ -55,7 +55,6 @@ const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 			mode: passedMode || mode,
 			setMode: changeColorMode,
 			invertMode: () => {
-				console.log("1221");
 				changeColorMode(mode === "light" ? "dark" : "light");
 			},
 		}),
