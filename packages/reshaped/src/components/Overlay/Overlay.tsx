@@ -1,20 +1,18 @@
 "use client";
 
-import {
-	TrapFocus,
-	useHotkeys,
-	useIsomorphicLayoutEffect,
-	useHandlerRef,
-	useScrollLock,
-	useToggle,
-} from "@reshaped/headless";
-import { classNames } from "@reshaped/headless";
-import { type FocusableElement } from "@reshaped/headless/internal";
 import React from "react";
 
 import Portal from "@/components/_private/Portal";
 import useIsDismissible from "@/hooks/_private/useIsDismissible";
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useHotkeys from "@/hooks/useHotkeys";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import useScrollLock from "@/hooks/useScrollLock";
+import useToggle from "@/hooks/useToggle";
+import { TrapFocus } from "@/utilities/a11y";
+import { type FocusableElement } from "@/utilities/a11y";
 import { onNextFrame } from "@/utilities/animation";
+import { classNames } from "@/utilities/css";
 
 import s from "./Overlay.module.css";
 

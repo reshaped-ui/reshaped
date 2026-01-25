@@ -1,4 +1,4 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type * as G from "@/types/global";
 
 export type Props = {
 	/** Total amount of progress indicator dots */
@@ -12,7 +12,7 @@ export type Props = {
 	/** aria-label attribute for the root element */
 	ariaLabel?: string;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 };

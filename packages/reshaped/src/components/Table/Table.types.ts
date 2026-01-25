@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type * as G from "@/types/global";
 
 export type Props = {
 	/** Add border around the table */
@@ -10,9 +10,9 @@ export type Props = {
 	/** Node for inserting children */
 	children: React.ReactNode;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 };
 
 export type RowProps = {
@@ -23,9 +23,9 @@ export type RowProps = {
 	/** Node for inserting children */
 	children: React.ReactNode;
 	/** Additional classname for the row element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the row element */
-	attributes?: Attributes<"tr">;
+	attributes?: G.Attributes<"tr">;
 };
 
 export type CellProps = {
@@ -50,32 +50,32 @@ export type CellProps = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the cell element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the cell element */
-	attributes?: Attributes<"td">;
+	attributes?: G.Attributes<"td">;
 };
 
 export type HeadingProps = CellProps & {
 	/** Additional attributes for the heading element */
-	attributes?: Attributes<"th">;
+	attributes?: G.Attributes<"th">;
 };
 
 export type BodyProps = {
 	/** Node for inserting children */
 	children: React.ReactNode;
 	/** Additional classname for the body element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the body element */
-	attributes?: Attributes<"tbody">;
+	attributes?: G.Attributes<"tbody">;
 };
 
 export type HeadProps = {
 	/** Node for inserting children */
 	children: React.ReactNode;
 	/** Additional classname for the head element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the head element */
-	attributes?: Attributes<"thead">;
+	attributes?: G.Attributes<"thead">;
 };
 
 export type PrivateCellProps = CellProps & {

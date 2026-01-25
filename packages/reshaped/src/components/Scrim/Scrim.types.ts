@@ -1,7 +1,7 @@
 import React from "react";
 
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { ViewProps } from "@/components/View";
+import type * as G from "@/types/global";
 
 export type Props = {
 	/** Node for inserting content */
@@ -11,9 +11,9 @@ export type Props = {
 	/** Component content position */
 	position?: "full" | "top" | "bottom" | "start" | "end";
 	/** Additional classname for the scrim element */
-	scrimClassName?: ClassName;
+	scrimClassName?: G.ClassName;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 } & Pick<ViewProps, "paddingInline" | "paddingBlock" | "padding" | "borderRadius">;

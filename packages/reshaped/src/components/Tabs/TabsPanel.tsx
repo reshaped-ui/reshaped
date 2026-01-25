@@ -1,8 +1,9 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
-import { getFocusableElements } from "@reshaped/headless/internal";
 import React from "react";
+
+import { getFocusableElements } from "@/utilities/a11y";
+import { classNames } from "@/utilities/css";
 
 import s from "./Tabs.module.css";
 import { useTabs } from "./TabsContext";

@@ -1,6 +1,5 @@
 import React from "react";
 
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { ActionableProps } from "@/components/Actionable";
 import type { DropdownMenuProps } from "@/components/DropdownMenu";
 import type { IconProps } from "@/components/Icon";
@@ -61,9 +60,9 @@ type BaseFragment = {
 	/** Callback when the trigger is clicked */
 	onClick?: ActionableProps["onClick"];
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 	/** Node for inserting children */
 	children?: React.ReactNode;
 };
@@ -89,7 +88,7 @@ export type NativeFragment = {
 	/** Callback when the input is blurred */
 	onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 	/** Additional attributes for the input element */
-	inputAttributes?: Attributes<"select">;
+	inputAttributes?: G.Attributes<"select">;
 };
 
 export type NativeControlledFragment = {

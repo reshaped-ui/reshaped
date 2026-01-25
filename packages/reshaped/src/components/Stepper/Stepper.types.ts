@@ -1,6 +1,5 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
-import type React from "react";
 import type * as G from "@/types/global";
+import type React from "react";
 
 export type Props = {
 	/** Id of the item to display as active */
@@ -14,9 +13,9 @@ export type Props = {
 	/** Gap between items (default: 3) */
 	gap?: G.Responsive<number>;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ItemProps = {
@@ -31,9 +30,9 @@ export type ItemProps = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ItemPrivateProps = ItemProps & {

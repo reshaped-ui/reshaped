@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@/utilities/css";
 import React from "react";
 
 import s from "./Progress.module.css";

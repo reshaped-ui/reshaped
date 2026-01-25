@@ -1,6 +1,6 @@
 "use client";
 
-import { useToggle } from "@reshaped/headless";
+import useToggle from "@/hooks/useToggle";
 
 import ToggleButtonControlled from "./ToggleButtonControlled";
 

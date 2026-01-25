@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@/utilities/css";
 
 import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames } from "@/utilities/props";

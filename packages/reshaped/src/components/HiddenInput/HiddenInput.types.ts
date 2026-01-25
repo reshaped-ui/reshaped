@@ -1,6 +1,5 @@
 import React from "react";
 
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type * as G from "@/types/global";
 
 export type Props = {
@@ -23,7 +22,7 @@ export type Props = {
 	/** Type of the input element */
 	type: "checkbox" | "radio";
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the input element */
-	attributes?: Attributes<"input">;
+	attributes?: G.Attributes<"input">;
 };

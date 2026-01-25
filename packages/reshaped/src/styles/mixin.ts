@@ -37,8 +37,8 @@ import radius from "@/styles/resolvers/radius";
 import textAlign from "@/styles/resolvers/textAlign";
 import width from "@/styles/resolvers/width";
 
-import type { ClassName } from "@reshaped/headless";
 import type { Mixin } from "@/styles/types";
+import type { ClassName } from "@/types/global";
 
 const mixinMap = {
 	align,

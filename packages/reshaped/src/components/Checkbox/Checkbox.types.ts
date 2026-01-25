@@ -1,6 +1,5 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
-import type React from "react";
 import type * as G from "@/types/global";
+import type React from "react";
 
 type BaseProps = {
 	/** Node for inserting the label */
@@ -26,11 +25,11 @@ type BaseProps = {
 	/** Callback when the component is blurred */
 	onBlur?: (e: React.FocusEvent) => void;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"label">;
+	attributes?: G.Attributes<"label">;
 	/** Additional attributes for the input element */
-	inputAttributes?: Attributes<"input">;
+	inputAttributes?: G.Attributes<"input">;
 };
 
 export type ControlledProps = BaseProps & {

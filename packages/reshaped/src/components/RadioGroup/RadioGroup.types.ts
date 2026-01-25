@@ -1,7 +1,6 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { RadioProps } from "@/components/Radio";
-import type React from "react";
 import type * as G from "@/types/global";
+import type React from "react";
 
 type BaseProps = {
 	/** Unique identifier for the radio group */
@@ -17,9 +16,9 @@ type BaseProps = {
 	/** Callback when the input value changes */
 	onChange?: G.ChangeHandler<string>;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps & {

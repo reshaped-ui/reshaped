@@ -1,11 +1,12 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import { forwardRef, useState } from "react";
 
 import Button from "@/components/Button";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import IconChevronLeft from "@/icons/ChevronLeft";
 import IconChevronRight from "@/icons/ChevronRight";
+import { classNames } from "@/utilities/css";
 
 import s from "./Carousel.module.css";
 import * as T from "./Carousel.types";

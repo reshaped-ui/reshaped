@@ -1,8 +1,7 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { ActionableProps } from "@/components/Actionable";
 import type { IconProps } from "@/components/Icon";
-import type React from "react";
 import type * as G from "@/types/global";
+import type React from "react";
 
 export type Size = "small" | "medium" | "large";
 
@@ -42,7 +41,7 @@ export type AlignerProps = {
 	/** Node for inserting children */
 	children: React.ReactElement;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 };

@@ -1,4 +1,3 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type * as G from "@/types/global";
 
 export type Props = {
@@ -9,7 +8,7 @@ export type Props = {
 	/** aria-label attribute for the root element */
 	ariaLabel?: string;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"span">;
+	attributes?: G.Attributes<"span">;
 };

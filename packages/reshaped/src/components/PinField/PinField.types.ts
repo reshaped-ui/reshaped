@@ -1,4 +1,3 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type * as G from "@/types/global";
 
 export type Size = "small" | "medium" | "large" | "xlarge";
@@ -17,11 +16,11 @@ type BaseProps = {
 	/** Callback when the input value changes */
 	onChange?: G.ChangeHandler<string>;
 	/** Additional attributes for the input element */
-	inputAttributes?: Attributes<"input">;
+	inputAttributes?: G.Attributes<"input">;
 	/** Additional classname for the root element */
-	className?: ClassName;
+	className?: G.ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"div">;
+	attributes?: G.Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps & {

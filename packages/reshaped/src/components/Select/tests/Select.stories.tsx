@@ -1,4 +1,3 @@
-import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, Mock, userEvent, within } from "storybook/test";
@@ -9,6 +8,7 @@ import MenuItem from "@/components/MenuItem";
 import Modal from "@/components/Modal";
 import Select, { SelectProps } from "@/components/Select";
 import Text from "@/components/Text";
+import useToggle from "@/hooks/useToggle";
 import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
 

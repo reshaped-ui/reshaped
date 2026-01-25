@@ -5,6 +5,6 @@
 	"access": "public",
 	"baseBranch": "main",
 	"updateInternalDependencies": "patch",
-	"fixed": [["reshaped", "@reshaped/headless", "@reshaped/utilities"]],
+	"fixed": [["reshaped"]],
 	"ignore": []
 }

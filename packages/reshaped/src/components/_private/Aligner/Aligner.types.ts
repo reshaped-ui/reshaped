@@ -1,4 +1,4 @@
-import type { ClassName, Attributes } from "@reshaped/headless";
+import type { ClassName, Attributes } from "@/types/global";
 
 type Side = "start" | "end" | "top" | "bottom" | "inline" | "block" | "all";
 

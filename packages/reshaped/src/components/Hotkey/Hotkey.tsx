@@ -1,6 +1,5 @@
-import { classNames } from "@reshaped/headless";
-
 import Text from "@/components/Text";
+import { classNames } from "@/utilities/css";
 
 import s from "./Hotkey.module.css";
 

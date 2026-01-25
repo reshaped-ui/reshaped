@@ -1,6 +1,5 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
 import React from "react";
 
 import Button from "@/components/Button";
@@ -9,6 +8,7 @@ import Text from "@/components/Text";
 import View from "@/components/View";
 import IconChevronRight from "@/icons/ChevronRight";
 import IconDotsHorizontal from "@/icons/DotsHorizontal";
+import { classNames } from "@/utilities/css";
 
 import * as T from "./Breadcrumbs.types";
 

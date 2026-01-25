@@ -1,4 +1,3 @@
-import { useToggle } from "@reshaped/headless";
 import React from "react";
 
 import Alert from "@/components/Alert";
@@ -19,6 +18,7 @@ import Table from "@/components/Table";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import View, { ViewProps } from "@/components/View";
+import useToggle from "@/hooks/useToggle";
 import IconChevronDown from "@/icons/ChevronDown";
 import IconChevronRight from "@/icons/ChevronRight";
 import IconZap from "@/icons/Zap";

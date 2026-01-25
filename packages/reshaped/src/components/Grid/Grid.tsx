@@ -1,6 +1,5 @@
-import { classNames } from "@reshaped/headless";
-
 import { resolveMixin } from "@/styles/mixin";
+import { classNames } from "@/utilities/css";
 import { responsiveVariables, responsivePropDependency } from "@/utilities/props";
 
 import s from "./Grid.module.css";

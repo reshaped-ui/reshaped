@@ -206,9 +206,9 @@ importers:
       '@csstools/postcss-global-data':
         specifier: 3.1.0
         version: 3.1.0(postcss@8.5.6)
-      '@reshaped/headless':
+      '@reshaped/utilities':
         specifier: workspace:*
-        version: link:../headless
+        version: link:../utilities
       chalk:
         specifier: 4.1.2
         version: 4.1.2

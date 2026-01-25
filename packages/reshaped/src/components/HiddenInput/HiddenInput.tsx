@@ -1,8 +1,7 @@
-import { classNames } from "@reshaped/headless";
-
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
 import { useFormControl } from "@/components/FormControl";
 import { useRadioGroup } from "@/components/RadioGroup";
+import { classNames } from "@/utilities/css";
 
 import s from "./HiddenInput.module.css";
 

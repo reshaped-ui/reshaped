@@ -1,8 +1,8 @@
 "use client";
 
-import { useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import { enableTransitions, disableTransitions, onNextFrame } from "@/utilities/animation";
 
 import { GlobalColorModeContext } from "./Theme.context";
@@ -55,6 +55,7 @@ const GlobalColorMode: React.FC<T.GlobalColorModeProps> = (props) => {
 			mode: passedMode || mode,
 			setMode: changeColorMode,
 			invertMode: () => {
+				console.log("1221");
 				changeColorMode(mode === "light" ? "dark" : "light");
 			},
 		}),

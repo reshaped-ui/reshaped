@@ -1,5 +1,4 @@
-import { classNames } from "@reshaped/headless";
-
+import { classNames } from "@/utilities/css";
 import { responsiveClassNames } from "@/utilities/props";
 
 import s from "./Hidden.module.css";
