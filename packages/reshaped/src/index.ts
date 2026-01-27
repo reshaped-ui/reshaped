@@ -204,16 +204,17 @@ export type { ViewProps, ViewItemProps } from "@/components/View";
 /**
  * Hooks
  */
-
-export { default as useHotkeys } from "@/hooks/useHotkeys";
-export { default as useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
-export { default as useRTL } from "@/hooks/useRTL";
-export { default as useKeyboardArrowNavigation } from "@/hooks/useKeyboardArrowNavigation";
-export { default as useKeyboardMode } from "@/hooks/useKeyboardMode";
-export { default as useHandlerRef } from "@/hooks/useHandlerRef";
-export { default as useOnClickOutside } from "@/hooks/useOnClickOutside";
-export { default as useScrollLock } from "@/hooks/useScrollLock";
-export { default as useToggle } from "@/hooks/useToggle";
+export {
+	useHotkeys,
+	useIsomorphicLayoutEffect,
+	useRTL,
+	useKeyboardArrowNavigation,
+	useKeyboardMode,
+	useHandlerRef,
+	useOnClickOutside,
+	useScrollLock,
+	useToggle,
+} from "@reshaped/headless";
 
 export { useFormControl } from "@/components/FormControl";
 export { default as Theme, useTheme, type ThemeProps } from "@/components/Theme";
@@ -223,14 +224,14 @@ export { default as useResponsiveClientValue } from "@/hooks/useResponsiveClient
  * Utility functions
  */
 export { responsivePropDependency } from "@/utilities/props";
-export { TrapFocus } from "@/utilities/a11y";
-export { classNames } from "@/utilities/css";
+export { TrapFocus, classNames } from "@reshaped/headless";
 
 /**
  * Types
  */
+export type { Attributes } from "@reshaped/headless";
 export type { ReshapedConfig } from "@/types/config";
-export type { Responsive, ColorMode, Attributes } from "@/types/global";
+export type { Responsive, ColorMode } from "@/types/global";
 
 /**
  * Dev utilities

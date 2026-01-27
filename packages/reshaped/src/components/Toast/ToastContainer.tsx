@@ -1,11 +1,10 @@
 "use client";
 
+import { TrapFocus, classNames } from "@reshaped/headless";
+import { checkKeyboardMode } from "@reshaped/headless/internal";
 import React from "react";
 
-import { checkKeyboardMode } from "@/utilities/a11y";
-import { TrapFocus } from "@/utilities/a11y";
 import { onNextFrame } from "@/utilities/animation";
-import { classNames } from "@/utilities/css";
 
 import Toast from "./Toast";
 import { timeouts } from "./Toast.constants";

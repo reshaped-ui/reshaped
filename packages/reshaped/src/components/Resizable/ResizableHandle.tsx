@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "@/utilities/css";
+import { classNames } from "@reshaped/headless";
 import React from "react";
 
 import View from "@/components/View";

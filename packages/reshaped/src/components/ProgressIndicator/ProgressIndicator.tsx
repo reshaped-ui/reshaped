@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "@/utilities/css";
+import { classNames } from "@reshaped/headless";
 import React from "react";
 
 import s from "./ProgressIndicator.module.css";

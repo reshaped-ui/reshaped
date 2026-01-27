@@ -1,5 +1,5 @@
 import React from "react";
-import useRTL from "../packages/reshaped/src/hooks/useRTL";
+import { useRTL } from "../packages/headless";
 import Reshaped from "../packages/reshaped/src/components/Reshaped";
 import Button from "../packages/reshaped/src/components/Button";
 import View from "../packages/reshaped/src/components/View";

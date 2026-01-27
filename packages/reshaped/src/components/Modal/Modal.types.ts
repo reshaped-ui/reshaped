@@ -1,6 +1,7 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { OverlayProps, OverlayCloseReason } from "@/components/Overlay";
-import type * as G from "@/types/global";
 import type React from "react";
+import type * as G from "@/types/global";
 
 export type Context = {
 	id: string;
@@ -48,11 +49,11 @@ export type Props = {
 	/** aria-label attribute for the root element, useful when there is no visible title */
 	ariaLabel?: string;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional classname for the overlay element */
-	overlayClassName?: G.ClassName;
+	overlayClassName?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
+	attributes?: Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
 } & Pick<
 	OverlayProps,
 	"onOpen" | "onAfterOpen" | "onAfterClose" | "active" | "containerRef" | "contained"

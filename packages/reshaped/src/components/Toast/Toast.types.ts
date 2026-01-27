@@ -1,5 +1,5 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { IconProps } from "@/components/Icon";
-import type * as G from "@/types/global";
 import type React from "react";
 
 export type Status = "entering" | "entered" | "exited";
@@ -29,9 +29,9 @@ export type Props = {
 	 */
 	color?: "neutral" | "primary" | "critical" | "positive" | "warning" | "inverted";
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type ProviderProps = {

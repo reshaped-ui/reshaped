@@ -1,8 +1,9 @@
+import { classNames } from "@reshaped/headless";
+
 import Icon from "@/components/Icon";
 import Image, { type ImageProps } from "@/components/Image";
 import View from "@/components/View";
 import { resolveMixin } from "@/styles/mixin";
-import { classNames } from "@/utilities/css";
 import { responsivePropDependency } from "@/utilities/props";
 
 import s from "./Avatar.module.css";

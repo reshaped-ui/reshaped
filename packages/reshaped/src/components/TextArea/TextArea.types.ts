@@ -1,5 +1,6 @@
 import React from "react";
 
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { FormControlProps } from "@/components/FormControl";
 import type * as G from "@/types/global";
 
@@ -29,11 +30,11 @@ type BaseProps = {
 	/** Callback when the text area is blurred */
 	onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 	/** Additional attributes for the input element */
-	inputAttributes?: G.Attributes<"textarea">;
+	inputAttributes?: Attributes<"textarea">;
 	/** Enable or disable the text area resizing, supports auto-sizing */
 	resize?: "none" | "auto";
 } & Pick<FormControlProps, "hasError">;

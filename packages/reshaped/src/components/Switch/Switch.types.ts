@@ -1,5 +1,6 @@
 import React from "react";
 
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type * as G from "@/types/global";
 
 type BaseProps = {
@@ -22,11 +23,11 @@ type BaseProps = {
 	/** Callback when the switch is blurred */
 	onBlur?: (e: React.FocusEvent) => void;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"label">;
+	attributes?: Attributes<"label">;
 	/** Additional attributes for the input element */
-	inputAttributes?: G.Attributes<"input">;
+	inputAttributes?: Attributes<"input">;
 };
 
 export type ControlledProps = BaseProps & {
