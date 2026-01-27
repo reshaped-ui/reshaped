@@ -1,6 +1,7 @@
 import type { ActionableProps } from "@/components/Actionable";
 import type { ViewProps } from "@/components/View";
 import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
@@ -20,9 +21,9 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	href?: string;
 
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<TagName> & ActionableProps["attributes"];
+	attributes?: Attributes<TagName> & ActionableProps["attributes"];
 	/** Custom component tag name
 	 * @default "div"
 	 */

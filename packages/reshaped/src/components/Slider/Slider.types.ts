@@ -1,4 +1,4 @@
-import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 
 export type SingleChangeArgs = {
 	/** Value of the slider, enables controlled mode */
@@ -140,9 +140,9 @@ type BaseProps = {
 	/** Render a custom value in the thumb tooltip */
 	renderValue?: ((args: { value: number }) => string) | false;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type ControlledProps = BaseProps &

@@ -1,5 +1,6 @@
-import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
+import type * as G from "@/types/global";
 
 export type Props = {
 	/** Change component to take no space, useful for using it as a border in components like Tabs */
@@ -17,7 +18,7 @@ export type Props = {
 	/** Node for inserting text labels or custom components as a part of divider */
 	children?: React.ReactNode;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"hr">;
+	attributes?: Attributes<"hr">;
 };

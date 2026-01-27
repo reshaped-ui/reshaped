@@ -1,5 +1,5 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { IconProps } from "@/components/Icon";
-import type * as G from "@/types/global";
 import type React from "react";
 
 export type SelectionState = {
@@ -22,16 +22,16 @@ export type ItemProps = {
 	/** Disable the item user interaction */
 	disabled?: boolean;
 	/** Additional attributes for the item element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type ListProps = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the list element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the list element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type PanelProps = {
@@ -40,9 +40,9 @@ export type PanelProps = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the panel element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the panel element */
-	attributes?: G.Attributes<"div">;
+	attributes?: Attributes<"div">;
 };
 
 export type BaseProps = {

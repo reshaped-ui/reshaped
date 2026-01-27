@@ -1,4 +1,4 @@
-import type { Attributes, ClassName } from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 
 export type BaseProps = {
 	/** Total number of pages available */

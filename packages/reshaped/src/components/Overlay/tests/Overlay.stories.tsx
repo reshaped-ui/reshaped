@@ -1,10 +1,10 @@
+import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Overlay from "@/components/Overlay";
-import useToggle from "@/hooks/useToggle";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 

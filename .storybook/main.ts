@@ -26,7 +26,10 @@ const config: StorybookConfig = {
 			propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
 		},
 	},
-	stories: ["../packages/reshaped/src/**/*.stories.tsx"],
+	stories: [
+		"../packages/reshaped/src/**/*.stories.tsx",
+		"../packages/headless/src/**/*.stories.tsx",
+	],
 	staticDirs: ["./public"],
 	addons: [
 		"@storybook/addon-vitest",
@@ -44,9 +47,17 @@ const config: StorybookConfig = {
 	],
 	async viteFinal(config: UserConfig) {
 		return mergeConfig(config, {
+			resolve: {
+				alias: {
+					"@reshaped/headless": resolve(__dirname, "../packages/headless/src"),
+				},
+			},
 			plugins: [
 				tsconfigPaths({
-					projects: [resolve(__dirname, "../packages/reshaped/tsconfig.json")],
+					projects: [
+						resolve(__dirname, "../packages/reshaped/tsconfig.json"),
+						resolve(__dirname, "../packages/headless/tsconfig.json"),
+					],
 				}),
 			],
 			css: {

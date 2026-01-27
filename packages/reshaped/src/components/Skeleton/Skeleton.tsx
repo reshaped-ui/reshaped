@@ -1,4 +1,4 @@
-import { classNames } from "@/utilities/css";
+import { classNames } from "@reshaped/headless";
 
 import View from "@/components/View";
 

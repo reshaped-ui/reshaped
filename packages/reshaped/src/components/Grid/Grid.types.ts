@@ -1,7 +1,8 @@
-import type * as TStyles from "@/styles/types";
-import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type { Property } from "csstype";
 import type React from "react";
+import type * as TStyles from "@/styles/types";
+import type * as G from "@/types/global";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	/** Gap between grid items */
@@ -39,9 +40,9 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 		? TagName
 		: keyof React.JSX.IntrinsicElements;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<TagName>;
+	attributes?: Attributes<TagName>;
 };
 
 export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
@@ -66,7 +67,7 @@ export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void =
 		? TagName
 		: keyof React.JSX.IntrinsicElements;
 	/** Additional classname for the item element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the item element */
-	attributes?: G.Attributes<TagName>;
+	attributes?: Attributes<TagName>;
 };

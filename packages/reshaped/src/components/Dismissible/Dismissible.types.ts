@@ -1,4 +1,4 @@
-import type { Attributes, ClassName } from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 
 type WithClose = {

@@ -1,5 +1,6 @@
+import { classNames } from "@reshaped/headless";
+
 import View from "@/components/View";
-import { classNames } from "@/utilities/css";
 
 import s from "./Container.module.css";
 

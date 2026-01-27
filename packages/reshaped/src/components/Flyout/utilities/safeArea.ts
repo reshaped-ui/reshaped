@@ -1,4 +1,4 @@
-import type { Coordinates } from "@/types/global";
+import type { Coordinates } from "@reshaped/headless/internal";
 
 type SafePolygonOptions = {
 	contentRef: React.RefObject<HTMLElement | null>;

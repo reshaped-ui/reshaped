@@ -1,4 +1,4 @@
-import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 
 export type Props = {
@@ -7,7 +7,7 @@ export type Props = {
 	/** Highlight the component, can be used to show when hotkey is pressed */
 	active?: boolean;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<"span">;
+	attributes?: Attributes<"span">;
 };

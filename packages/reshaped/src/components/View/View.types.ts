@@ -1,6 +1,7 @@
+import type { Attributes, ClassName } from "@reshaped/headless";
+import type React from "react";
 import type * as TStyles from "@/styles/types";
 import type * as G from "@/types/global";
-import type React from "react";
 
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto";
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";
@@ -117,9 +118,9 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	/** Add transition for the properties */
 	animated?: boolean;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<TagName>;
+	attributes?: Attributes<TagName>;
 } & Pick<ItemProps, "grow" | "shrink">;
 
 export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
@@ -138,9 +139,9 @@ export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void =
 		? TagName
 		: keyof React.JSX.IntrinsicElements;
 	/** Additional attributes for the root element */
-	attributes?: G.Attributes<TagName>;
+	attributes?: Attributes<TagName>;
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Node for inserting the item content */
 	children?: React.ReactNode;
 };

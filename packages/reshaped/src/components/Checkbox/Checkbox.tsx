@@ -1,5 +1,6 @@
 "use client";
 
+import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
@@ -7,9 +8,7 @@ import { useFormControl } from "@/components/FormControl";
 import HiddenInput from "@/components/HiddenInput";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import IconCheckmark from "@/icons/Checkmark";
-import { classNames } from "@/utilities/css";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 
 import s from "./Checkbox.module.css";

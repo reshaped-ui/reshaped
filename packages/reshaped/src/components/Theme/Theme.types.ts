@@ -1,6 +1,8 @@
 import React from "react";
 
-import type * as G from "@/types/global";
+import * as G from "@/types/global";
+
+import type { ClassName } from "@reshaped/headless";
 
 export type GlobalColorModeContextData = {
 	mode: G.ColorMode;
@@ -24,7 +26,7 @@ export type Props = {
 	/** Color mode to use */
 	colorMode?: G.ColorMode | "inverted";
 	/** Additional classname for the root element */
-	className?: G.ClassName;
+	className?: ClassName;
 	/** Node for inserting children */
 	children?: React.ReactNode;
 };
