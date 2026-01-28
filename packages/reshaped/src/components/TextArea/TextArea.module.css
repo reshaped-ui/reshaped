@@ -34,7 +34,7 @@
 	z-index: 1;
 	color: var(--rs-color-foreground-neutral);
 	background: var(--rs-color-background-elevation-base);
-	border-radius: var(--rs-radius-small);
+	border-radius: var(--rs-radius-control-medium);
 	box-shadow: 0 0 0 var(--rs-textarea-border-width) var(--rs-textarea-border-color) inset;
 
 	&:focus {
@@ -54,7 +54,7 @@
 		--rs-p: var(--rs-unit-x2);
 
 		& .input {
-			border-radius: var(--rs-radius-small);
+			border-radius: var(--rs-radius-control-medium);
 			font-size: var(--rs-font-size-body-3);
 			line-height: var(--rs-line-height-body-3);
 			letter-spacing: var(--rs-letter-spacing-body-3);
@@ -65,7 +65,7 @@
 		--rs-p: var(--rs-unit-x3);
 
 		& .input {
-			border-radius: var(--rs-radius-medium);
+			border-radius: var(--rs-radius-control-large);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 			letter-spacing: var(--rs-letter-spacing-body-2);
@@ -76,7 +76,7 @@
 		--rs-p: var(--rs-unit-x4);
 
 		& .input {
-			border-radius: var(--rs-radius-medium);
+			border-radius: var(--rs-radius-control-xlarge);
 			font-size: var(--rs-font-size-body-2);
 			line-height: var(--rs-line-height-body-2);
 			letter-spacing: var(--rs-letter-spacing-body-2);

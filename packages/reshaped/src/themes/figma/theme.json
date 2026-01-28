@@ -217,6 +217,18 @@
     },
     "large": {
       "px": 12
+    },
+    "control-small": {
+      "radiusToken": "small"
+    },
+    "control-medium": {
+      "radiusToken": "small"
+    },
+    "control-large": {
+      "radiusToken": "medium"
+    },
+    "control-xlarge": {
+      "radiusToken": "medium"
     }
   },
   "color": {

@@ -137,7 +137,7 @@
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
 		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
-		--rs-button-radius: var(--rs-radius-small);
+		--rs-button-radius: var(--rs-radius-control-small);
 	}
 
 	@value medium {
@@ -147,7 +147,7 @@
 		--rs-button-line-height: var(--rs-line-height-body-3);
 		--rs-button-font-size: var(--rs-font-size-body-3);
 		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
-		--rs-button-radius: var(--rs-radius-small);
+		--rs-button-radius: var(--rs-radius-control-medium);
 	}
 
 	@value large {
@@ -157,7 +157,7 @@
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
 		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
-		--rs-button-radius: var(--rs-radius-medium);
+		--rs-button-radius: var(--rs-radius-control-large);
 	}
 
 	@value xlarge {
@@ -167,7 +167,7 @@
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
 		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
-		--rs-button-radius: var(--rs-radius-medium);
+		--rs-button-radius: var(--rs-radius-control-xlarge);
 	}
 }
 

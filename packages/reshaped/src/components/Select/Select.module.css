@@ -105,7 +105,7 @@
 	@value small {
 		--rs-select-gap: var(--rs-unit-x2);
 		--rs-select-chevron-size: var(--rs-unit-x4);
-		--rs-select-radius: var(--rs-radius-small);
+		--rs-select-radius: var(--rs-radius-control-small);
 
 		& .input {
 			padding-block: var(--rs-unit-x1);
@@ -118,7 +118,7 @@
 	@value medium {
 		--rs-select-gap: var(--rs-unit-x2);
 		--rs-select-chevron-size: var(--rs-unit-x4);
-		--rs-select-radius: var(--rs-radius-small);
+		--rs-select-radius: var(--rs-radius-control-medium);
 
 		& .input {
 			padding-block: var(--rs-unit-x2);
@@ -131,7 +131,7 @@
 	@value large {
 		--rs-select-gap: var(--rs-unit-x3);
 		--rs-select-chevron-size: var(--rs-unit-x5);
-		--rs-select-radius: var(--rs-radius-medium);
+		--rs-select-radius: var(--rs-radius-control-large);
 
 		& .input {
 			padding-block: var(--rs-unit-x3);
@@ -144,7 +144,7 @@
 	@value xlarge {
 		--rs-select-gap: var(--rs-unit-x4);
 		--rs-select-chevron-size: var(--rs-unit-x5);
-		--rs-select-radius: var(--rs-radius-medium);
+		--rs-select-radius: var(--rs-radius-control-xlarge);
 
 		& .input {
 			padding-block: var(--rs-unit-x4);
