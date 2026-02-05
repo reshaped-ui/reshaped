@@ -1,5 +1,20 @@
 # reshaped
 
+## 3.10.0-canary.11
+
+### Patch Changes
+
+- [`aa26010`](https://github.com/reshaped-ui/reshaped/commit/aa26010c974e4636113559aa6a2eaa845fcd37b9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - PinField: Fixed container scroll on focus
+
+- [#582](https://github.com/reshaped-ui/reshaped/pull/582) [`0064c14`](https://github.com/reshaped-ui/reshaped/commit/0064c1420a20d1a0e218b59d1251382a1b90db6e) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Added semibold and extrabold weight support
+
+- [`872434b`](https://github.com/reshaped-ui/reshaped/commit/872434b6198008e1f9cc2ea478f6f0ec800a1540) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Updated reset to use inherit instead of unset
+
+- [`296d9eb`](https://github.com/reshaped-ui/reshaped/commit/296d9ebe3645d088650123275e17130be00acaf7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added baseline browser compatility for stylelint
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.0-canary.11
+
 ## 3.10.0-canary.10
 
 ### Patch Changes
