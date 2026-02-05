@@ -61,6 +61,15 @@ export const transformToTailwind = (theme?: GeneratedThemeDefinition) => {
 		return;
 	});
 
+	Object.keys(definition.fontWeight).forEach((tokenName) => {
+		const cssTokenName = camelToKebab(tokenName);
+		const cssVariable = ["rs", "font-weight", cssTokenName].join("-");
+		const configValue = `var(--${cssVariable})`;
+
+		variables[`--font-weight-${cssTokenName}`] = configValue;
+		return;
+	});
+
 	Object.keys(definition.unit).forEach((tokenName) => {
 		if (tokenName.startsWith("base")) {
 			[...Array(11).keys()].forEach((i) => {

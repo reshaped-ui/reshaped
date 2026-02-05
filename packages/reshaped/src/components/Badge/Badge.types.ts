@@ -1,6 +1,6 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { ActionableProps } from "@/components/Actionable";
 import type { IconProps } from "@/components/Icon";
+import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 
 type BaseProps = {

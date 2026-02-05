@@ -1,8 +1,8 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { ActionableProps } from "@/components/Actionable";
 import type { IconProps } from "@/components/Icon";
-import type React from "react";
 import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
+import type React from "react";
 
 export type Size = "small" | "medium" | "large";
 
