@@ -1,6 +1,6 @@
+import type * as G from "@/types/global";
 import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
-import type * as G from "@/types/global";
 
 export type Variant =
 	| "title-1"
@@ -22,7 +22,7 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	/** Text render variant */
 	variant?: G.Responsive<Variant>;
 	/** Text font weight */
-	weight?: G.Responsive<"regular" | "medium" | "bold">;
+	weight?: G.Responsive<"regular" | "medium" | "semibold" | "bold" | "extrabold">;
 	/** Render monospace font */
 	monospace?: boolean;
 	/** Text color, based on the color tokens */

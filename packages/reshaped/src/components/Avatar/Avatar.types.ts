@@ -1,6 +1,6 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { IconProps } from "@/components/Icon";
 import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 
 export type Props = {
 	/** Image URL */

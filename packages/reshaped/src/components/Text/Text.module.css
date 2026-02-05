@@ -162,8 +162,16 @@
 		font-weight: var(--rs-font-weight-medium) !important;
 	}
 
+	@value semibold {
+		font-weight: var(--rs-font-weight-semibold) !important;
+	}
+
 	@value bold {
 		font-weight: var(--rs-font-weight-bold) !important;
+	}
+
+	@value extrabold {
+		font-weight: var(--rs-font-weight-extrabold) !important;
 	}
 }
 

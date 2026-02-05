@@ -1,8 +1,8 @@
 import React from "react";
 
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type { FormControlProps } from "@/components/FormControl";
 import type * as G from "@/types/global";
+import type { Attributes, ClassName } from "@reshaped/headless";
 
 type Size = G.Responsive<"medium" | "large" | "xlarge">;
 

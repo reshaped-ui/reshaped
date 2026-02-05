@@ -1,6 +1,6 @@
+import type * as G from "@/types/global";
 import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
-import type * as G from "@/types/global";
 
 export type Props = {
 	/** Icon svg component or node */
