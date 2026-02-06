@@ -184,6 +184,24 @@ export const selectedColor: StoryObj = {
 	),
 };
 
+export const disabled: StoryObj = {
+	name: "disabled",
+	render: () => (
+		<Example>
+			<Example.Item title="disabled">
+				<ToggleButtonGroup selectedColor="critical" value={["1"]}>
+					<ToggleButton disabled value="1" color="critical">
+						Button
+					</ToggleButton>
+					<ToggleButton disabled value="2" color="critical">
+						Button
+					</ToggleButton>
+				</ToggleButtonGroup>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
