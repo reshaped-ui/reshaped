@@ -434,6 +434,10 @@
 		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
 	}
 
+	&.--disabled {
+		--rs-button-group-separator-color: var(--rs-color-border-disabled) !important;
+	}
+
 	&.--full-width {
 		flex-grow: 1;
 	}
