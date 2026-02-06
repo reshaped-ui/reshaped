@@ -99,8 +99,9 @@
     "react-dom": "^18 || ^19"
   },
   "dependencies": {
-    "@reshaped/headless": "workspace:*",
     "@csstools/postcss-global-data": "3.1.0",
+    "@reshaped/headless": "workspace:*",
+    "@types/culori": "4.0.1",
     "chalk": "4.1.2",
     "commander": "14.0.2",
     "cssnano": "7.1.1",
