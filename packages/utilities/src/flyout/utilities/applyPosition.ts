@@ -42,7 +42,7 @@ const applyPosition = (
 
 	contentClone.style.cssText = "";
 
-	if (!triggerBounds) throw new Error("Trigger bounds are required");
+	if (!triggerBounds) return { position };
 
 	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
 
