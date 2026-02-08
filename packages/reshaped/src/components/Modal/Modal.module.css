@@ -1,5 +1,6 @@
 .root {
 	--rs-modal-container-width: 100vw;
+	--rs-modal-container-height: 100vh;
 
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
@@ -15,6 +16,7 @@
 
 	&.--contained {
 		--rs-modal-container-width: 100%;
+		--rs-modal-container-height: 100%;
 	}
 }
 
@@ -51,7 +53,7 @@
 		width: 100%;
 		height: var(--rs-modal-size);
 		max-width: 100%;
-		max-height: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
+		max-height: calc(var(--rs-modal-container-height) - var(--rs-unit-x4));
 		margin: 0;
 		margin-top: var(--rs-unit-x4);
 		inset: 0;
