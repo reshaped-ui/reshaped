@@ -1,5 +1,11 @@
 # @reshaped/headless
 
+## 3.10.0-canary.12
+
+### Patch Changes
+
+- [`12e2e83`](https://github.com/reshaped-ui/reshaped/commit/12e2e8379a02835e0f2cd2587f515ab5d7c76f89) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Removed thrown errors for not found trigger bounds and return the passed position instead
+
 ## 3.10.0-canary.11
 
 ## 3.10.0-canary.10

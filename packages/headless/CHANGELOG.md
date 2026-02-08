@@ -1,5 +1,12 @@
 # @reshaped/headless
 
+## 3.10.0-canary.12
+
+### Patch Changes
+
+- Updated dependencies [[`12e2e83`](https://github.com/reshaped-ui/reshaped/commit/12e2e8379a02835e0f2cd2587f515ab5d7c76f89)]:
+  - @reshaped/utilities@3.10.0-canary.12
+
 ## 3.10.0-canary.11
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # reshaped
 
+## 3.10.0-canary.12
+
+### Patch Changes
+
+- [#584](https://github.com/reshaped-ui/reshaped/pull/584) [`6d716e4`](https://github.com/reshaped-ui/reshaped/commit/6d716e4173088aef04b9b77bc46df372d0bd923a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ButtonGroup: Fixed separator color in the disabled button group
+
+- [`1896c60`](https://github.com/reshaped-ui/reshaped/commit/1896c6056b6632d86f008cd46e3d2304cd920d3d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Modal: fix incorrect max-height value for the bottom position
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.0-canary.12
+
 ## 3.10.0-canary.11
 
 ### Patch Changes

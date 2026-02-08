@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.10.0-canary.10",
-    "reshaped": "3.10.0-canary.10",
-    "@reshaped/utilities": "3.10.0-canary.10"
+    "@reshaped/headless": "3.10.0-canary.11",
+    "reshaped": "3.10.0-canary.11",
+    "@reshaped/utilities": "3.10.0-canary.11"
   },
   "changesets": [
     "big-ants-design",
@@ -16,10 +16,12 @@
     "eleven-webs-check",
     "fast-bars-learn",
     "fiery-toys-cover",
+    "four-bikes-move",
     "free-windows-stand",
     "fresh-tables-brush",
     "goofy-eagles-repair",
     "great-adults-tie",
+    "grumpy-beers-sneeze",
     "heavy-baboons-walk",
     "hip-planets-tap",
     "honest-foxes-care",
@@ -28,6 +30,7 @@
     "metal-cobras-bathe",
     "perky-worms-sip",
     "plenty-colts-lie",
+    "rare-eyes-return",
     "ready-donuts-marry",
     "shaky-eagles-rescue",
     "short-comics-wish",
