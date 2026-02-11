@@ -140,7 +140,7 @@ const Modal: React.FC<T.Props> = (props) => {
 		// Prevent the drag handling when browser is trying to navigate to a previous page
 		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
 
-		disableScroll();
+		if (containerRef?.current) disableScroll();
 		setDragging(true);
 	};
 
@@ -157,7 +157,7 @@ const Modal: React.FC<T.Props> = (props) => {
 		if (!dragging) return;
 
 		const handleDragEnd = () => {
-			enableScroll();
+			if (containerRef?.current) enableScroll();
 			setDragging(false);
 
 			// Close only when dragging in the closing direction
@@ -219,7 +219,7 @@ const Modal: React.FC<T.Props> = (props) => {
 			document.removeEventListener("touchmove", handleDrag);
 			document.removeEventListener("touchend", handleDragEnd);
 		};
-	}, [dragging, clientPosition, onCloseRef, position, rootRef]);
+	}, [dragging, clientPosition, onCloseRef, position, rootRef, containerRef]);
 
 	// Syncing distance to the ref to avoid having a dependency on dragDistance in handleDragEnd
 	React.useEffect(() => {
