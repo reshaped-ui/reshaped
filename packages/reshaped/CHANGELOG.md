@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.0-canary.14
+
+### Patch Changes
+
+- [`ccb87a5`](https://github.com/reshaped-ui/reshaped/commit/ccb87a565d70c49e89cf8cffb281e6b9a0af74a7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Addded additional edge cases handling for flyout closing
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.0-canary.14
+
 ## 3.10.0-canary.13
 
 ### Patch Changes

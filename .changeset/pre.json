@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.10.0-canary.12",
-    "reshaped": "3.10.0-canary.12",
-    "@reshaped/utilities": "3.10.0-canary.12"
+    "@reshaped/headless": "3.10.0-canary.13",
+    "reshaped": "3.10.0-canary.13",
+    "@reshaped/utilities": "3.10.0-canary.13"
   },
   "changesets": [
     "big-ants-design",
@@ -38,6 +38,7 @@
     "silver-geese-notice",
     "sunny-deer-wink",
     "sweet-planets-marry",
+    "swift-hounds-lay",
     "thirty-rings-tickles",
     "two-tools-thank",
     "wise-drinks-throw",
