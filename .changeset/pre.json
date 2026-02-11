@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.10.0-canary.11",
-    "reshaped": "3.10.0-canary.11",
-    "@reshaped/utilities": "3.10.0-canary.11"
+    "@reshaped/headless": "3.10.0-canary.12",
+    "reshaped": "3.10.0-canary.12",
+    "@reshaped/utilities": "3.10.0-canary.12"
   },
   "changesets": [
     "big-ants-design",
@@ -29,6 +29,7 @@
     "many-actors-rhyme",
     "metal-cobras-bathe",
     "perky-worms-sip",
+    "pink-animals-exist",
     "plenty-colts-lie",
     "rare-eyes-return",
     "ready-donuts-marry",
