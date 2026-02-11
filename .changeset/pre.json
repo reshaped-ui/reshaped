@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.10.0-canary.14",
-    "reshaped": "3.10.0-canary.14",
-    "@reshaped/utilities": "3.10.0-canary.14"
+    "@reshaped/headless": "3.10.0-canary.15",
+    "reshaped": "3.10.0-canary.15",
+    "@reshaped/utilities": "3.10.0-canary.15"
   },
   "changesets": [
     "big-ants-design",
@@ -28,6 +28,7 @@
     "lucky-coats-fix",
     "many-actors-rhyme",
     "metal-cobras-bathe",
+    "metal-crabs-rest",
     "perky-worms-sip",
     "pink-animals-exist",
     "plenty-colts-lie",
