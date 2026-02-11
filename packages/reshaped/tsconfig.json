@@ -4,7 +4,8 @@
 		"outDir": "./dist",
 		"baseUrl": "./src",
 		"rootDir": "./src",
-		"moduleResolution": "Bundler",
+		"moduleResolution": "bundler",
+		"module": "ESNext",
 		"paths": { "@/*": ["./*"] }
 	},
 	"exclude": ["node_modules", "dist", "tools", "./commitlint.config.ts"]

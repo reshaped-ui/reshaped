@@ -78,7 +78,7 @@
   "scripts": {
     "clean": "bash ./bin/clean.sh",
     "dev": "storybook dev -p 3001 -c ../../.storybook --disable-telemetry",
-    "build": "pnpm clean && pnpm build:esm && pnpm build:css && pnpm build:bundle",
+    "build": "pnpm clean && pnpm build:esm && pnpm build:css && pnpm build:bundle && pnpm build:stories",
     "build:themes": "node bin/cli.js theming --config dist/cli/theming/reshaped.config.js --output src/themes",
     "build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
     "build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
