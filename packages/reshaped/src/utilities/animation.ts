@@ -15,5 +15,7 @@ export const enableTransitions = () => {
 };
 
 export const checkTransitions = () => {
-	return !document.documentElement.hasAttribute(transitionAttribute);
+	if (document.documentElement.hasAttribute(transitionAttribute)) return false;
+	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+	return true;
 };

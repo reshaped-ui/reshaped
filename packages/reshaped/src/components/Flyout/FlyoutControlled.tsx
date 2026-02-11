@@ -402,19 +402,19 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, isRendered, triggerType, disableHideAnimation]);
 
 	/**
+	 * Clean up safe polygon tracking on unmount or when flyout closes
+	 */
+	React.useEffect(() => {
+		if (!isRendered) return;
+		return () => safeAreaRef.current?.cleanup();
+	}, [isRendered]);
+
+	/**
 	 * Release focus trapping on unmount
 	 */
 	React.useEffect(() => {
 		return () => trapFocusRef.current?.release();
 	}, []);
-
-	/**
-	 * Clean up safe polygon tracking on unmount or when flyout closes
-	 */
-	React.useEffect(() => {
-		if (!isRendered) safeAreaRef.current?.cleanup();
-		return () => safeAreaRef.current?.cleanup();
-	}, [isRendered]);
 
 	/**
 	 * Imperative methods for controlling Flyout

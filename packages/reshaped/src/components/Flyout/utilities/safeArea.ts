@@ -109,7 +109,7 @@ export function createSafeArea(options: SafePolygonOptions): () => void {
 			return;
 		}
 
-		if (isPointInTriangle(currentPoint, triangle)) {
+		if (isPointInTriangle(currentPoint, triangle) && contentRef.current && triggerRef.current) {
 			startTimeout();
 		} else {
 			onClose();
