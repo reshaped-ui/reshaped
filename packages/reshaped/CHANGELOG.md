@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.0-canary.15
+
+### Patch Changes
+
+- [`c5cc8c5`](https://github.com/reshaped-ui/reshaped/commit/c5cc8c595ac1e788c79a18ee1545424e82f0df5e) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Modal: Fixed scroll locking when using together with swipe gestures
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.0-canary.15
+
 ## 3.10.0-canary.14
 
 ### Patch Changes
