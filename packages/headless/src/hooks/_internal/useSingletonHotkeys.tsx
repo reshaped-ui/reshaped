@@ -162,55 +162,43 @@ const HotkeyContext = React.createContext({} as Context);
 
 export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const { children } = props;
-	// eslint-disable-next-line
-	const [_, setTriggerCount] = React.useState<number>(0);
-	// Only handle key presses when there is at least one hook listening for hotkeys
-	const [hooksCount, setHooksCount] = React.useState(0);
+	const hooksCountRef = React.useRef(0);
 
-	const addPressedKey = React.useCallback(
-		(e: KeyboardEvent) => {
-			if (e.repeat || hooksCount === 0) return;
+	const addPressedKey = React.useCallback((e: KeyboardEvent) => {
+		if (e.repeat || hooksCountRef.current === 0) return;
 
-			const eventKey = getEventKey(e);
-			if (!eventKey) return;
+		const eventKey = getEventKey(e);
+		if (!eventKey) return;
 
-			pressedMap.set(eventKey, e);
-			setTriggerCount(pressedMap.size);
+		pressedMap.set(eventKey, e);
 
-			// Key up won't trigger for other keys while Meta is pressed so we need to cache them
-			// and remove on Meta keyup
-			if (e.metaKey) modifiedKeys.push(...pressedMap.keys());
+		// Key up won't trigger for other keys while Meta is pressed so we need to cache them
+		// and remove on Meta keyup
+		if (e.metaKey) modifiedKeys.push(...pressedMap.keys());
 
-			if (pressedMap.has("Meta")) modifiedKeys.push(eventKey);
-		},
-		[hooksCount]
-	);
+		if (pressedMap.has("Meta")) modifiedKeys.push(eventKey);
+	}, []);
 
-	const removePressedKey = React.useCallback(
-		(e: KeyboardEvent) => {
-			if (hooksCount === 0) return;
+	const removePressedKey = React.useCallback((e: KeyboardEvent) => {
+		if (hooksCountRef.current === 0) return;
 
-			const eventKey = getEventKey(e);
-			if (!eventKey) return;
+		const eventKey = getEventKey(e);
+		if (!eventKey) return;
 
-			pressedMap.delete(eventKey);
+		pressedMap.delete(eventKey);
 
-			if (eventKey === "meta" || eventKey === "control") {
-				pressedMap.delete("mod");
-			}
+		if (eventKey === "meta" || eventKey === "control") {
+			pressedMap.delete("mod");
+		}
 
-			if (eventKey === "meta") {
-				modifiedKeys.forEach((key) => {
-					if (!pressedMap.has(key)) return;
-					pressedMap.delete(key);
-				});
-				modifiedKeys = [];
-			}
-
-			setTriggerCount(pressedMap.size);
-		},
-		[hooksCount]
-	);
+		if (eventKey === "meta") {
+			modifiedKeys.forEach((key) => {
+				if (!pressedMap.has(key)) return;
+				pressedMap.delete(key);
+			});
+			modifiedKeys = [];
+		}
+	}, []);
 
 	const isPressed = (hotkey: string) => {
 		const keys = formatHotkey(hotkey).split(COMBINATION_DELIMETER);
@@ -245,11 +233,11 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 	}, []);
 
 	const addHotkeys: Context["addHotkeys"] = React.useCallback((hotkeys, ref, options = {}) => {
-		setHooksCount((prev) => prev + 1);
+		hooksCountRef.current += 1;
 		globalHotkeyStore.bindHotkeys(hotkeys, ref, options);
 
 		return () => {
-			setHooksCount((prev) => prev - 1);
+			hooksCountRef.current -= 1;
 			globalHotkeyStore.unbindHotkeys(hotkeys);
 		};
 	}, []);
