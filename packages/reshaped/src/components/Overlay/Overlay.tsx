@@ -47,6 +47,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
 	const [offset, setOffset] = React.useState([0, 0]);
+	const scopeRef = React.useRef<HTMLDivElement>(null);
 	const contentRef = React.useRef<HTMLDivElement>(null);
 	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
 
@@ -74,11 +75,11 @@ const Overlay: React.FC<T.Props> = (props) => {
 	);
 
 	const isInsideContent = (el: HTMLElement) => {
-		if (!contentRef.current) return;
-		const firstChild = contentRef.current.firstChild;
+		// Clicked on another portal rendered above the overlay so it's considered as a part of the modal
+		if (!scopeRef.current?.contains(el)) return true;
 
-		if (!firstChild) return;
-		return firstChild.contains(el);
+		if (el === contentRef.current && el.firstElementChild) return false;
+		return Boolean(contentRef.current?.contains(el));
 	};
 
 	const close = React.useCallback(
@@ -183,7 +184,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 	return (
 		<Portal targetRef={containerRef}>
-			<Portal.Scope>
+			<Portal.Scope scopeRef={scopeRef}>
 				{(ref) => (
 					<div
 						{...attributes}

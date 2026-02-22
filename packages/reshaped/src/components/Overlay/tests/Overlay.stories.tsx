@@ -1,10 +1,12 @@
 import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import ReactDOM from "react-dom";
+import { expect, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Overlay from "@/components/Overlay";
+import View from "@/components/View";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 
@@ -171,7 +173,7 @@ export const handlers: StoryObj<{
 		// Open
 		await userEvent.click(trigger);
 
-		overlay = canvas.getByText("Content");
+		overlay = canvas.getByText("Content").parentElement!;
 
 		// TODO: Fails CLI tests in Storybook without a timeout
 		await sleep(100);
@@ -299,5 +301,68 @@ export const className: StoryObj = {
 		const root = canvas.getByTestId("test-id");
 
 		expect(root).toHaveClass("test-classname");
+	},
+};
+
+export const testPortal: StoryObj<{
+	handleClose: Mock;
+}> = {
+	name: "test: second portal",
+	args: {
+		handleClose: fn(),
+	},
+	render: (args) => {
+		const overlayToggle = useToggle(false);
+
+		const handleClose = () => {
+			args.handleClose();
+			overlayToggle.deactivate();
+		};
+
+		return (
+			<Example>
+				<Example.Item title="base">
+					<Button onClick={overlayToggle.activate}>Open overlay</Button>
+					<Overlay active={overlayToggle.active} onClose={handleClose}>
+						Overlay content
+						{ReactDOM.createPortal(
+							<View
+								position="absolute"
+								insetTop={4}
+								insetStart={4}
+								width={30}
+								height={30}
+								backgroundColor="neutral-faded"
+								zIndex={9999}
+								padding={4}
+								borderRadius="small"
+								align="center"
+								justify="center"
+								attributes={{ "data-testid": "portal" }}
+							>
+								Portal
+							</View>,
+							document.body
+						)}
+					</Overlay>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(trigger);
+
+		await sleep(300);
+
+		const portal = canvas.getByTestId("portal");
+
+		expect(portal).toBeInTheDocument();
+
+		await userEvent.click(portal);
+
+		expect(args.handleClose).toHaveBeenCalledTimes(0);
 	},
 };

@@ -6,6 +6,7 @@ export type Props = {
 };
 
 export type ScopeProps<T extends HTMLElement> = {
+	scopeRef?: React.RefObject<T | null>;
 	children: (ref: React.RefObject<T | null>) => React.ReactNode;
 };
 
