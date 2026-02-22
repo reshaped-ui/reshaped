@@ -344,6 +344,10 @@
 	}
 }
 
+.root.--highlighted {
+	z-index: var(--rs-z-index-relative);
+}
+
 /* Button group */
 
 .group {
@@ -377,18 +381,24 @@
 
 	&:not(:first-child) {
 		border-inline-start: 1px solid var(--rs-button-group-separator-color);
+
+		/* Compensate left separator width so label alignment doesn't shift */
+		padding-inline-start: calc(var(--rs-p-h) - 1px);
 	}
 
 	&:not(:last-child) {
 		border-inline-end: 0;
 		border-inline-end: 0 solid var(--rs-button-group-separator-color);
+
+		/* Keep internal horizontal space equal across grouped variants */
+		padding-inline-end: var(--rs-p-h);
 	}
 
 	&.--highlighted:not(:last-child) {
 		&::after {
 			content: "";
 			position: absolute;
-			inset-block: 0;
+			inset-block: calc(var(--rs-button-border-width) * -1);
 			inset-inline-end: -1px;
 			pointer-events: none;
 			border-inline-end: 1px solid var(--rs-button-group-separator-color);
@@ -397,14 +407,14 @@
 		& + .root {
 			border-inline-start-width: 0;
 
-			/* there is no border so increasing the padding by 1px */
+			/* Keep text position stable after removing the 1px group separator */
 			padding-inline-start: var(--rs-p-h);
 		}
 	}
 
 	@each $color in neutral, positive, critical, primary {
 		&.--variant-solid.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-$(color));
+			--rs-button-group-separator-color: transparent;
 		}
 	}
 

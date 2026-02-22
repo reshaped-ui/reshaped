@@ -7,12 +7,13 @@ import type * as T from "./ToggleButton.types";
 
 const ToggleButtonControlled: React.FC<T.ControlledProps> = (props) => {
 	const {
-		variant = "outline",
 		selectedColor,
+		selectedVariant,
 		value,
 		onChange,
 		onClick,
 		color: buttonColor,
+		variant: buttonVariant = "outline",
 		...buttonProps
 	} = props;
 	const toggleButtonGroup = useToggleButtonGroup();
@@ -21,6 +22,8 @@ const ToggleButtonControlled: React.FC<T.ControlledProps> = (props) => {
 		(checked && (selectedColor || toggleButtonGroup?.selectedColor)) ||
 		buttonColor ||
 		toggleButtonGroup?.color;
+	const variant =
+		(checked && (selectedVariant || toggleButtonGroup?.selectedVariant)) || buttonVariant;
 
 	const handleClick: ButtonProps["onClick"] = (event) => {
 		const changeArgs = { checked: !checked, value: value ?? "", event };

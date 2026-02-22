@@ -30,11 +30,16 @@ export const variant = {
 };
 
 export const selectedColor = {
-	name: "selectedColor",
+	name: "selectedColor, selectedVariant",
 	render: () => (
 		<Example>
 			<Example.Item title="selectedColor: primary">
 				<ToggleButton selectedColor="primary" defaultChecked>
+					Button
+				</ToggleButton>
+			</Example.Item>
+			<Example.Item title="selectedVariant: solid">
+				<ToggleButton selectedVariant="solid" defaultChecked>
 					Button
 				</ToggleButton>
 			</Example.Item>

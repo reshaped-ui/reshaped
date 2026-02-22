@@ -17,6 +17,7 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 		children,
 		color,
 		selectedColor,
+		selectedVariant,
 		...buttonGroupProps
 	} = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
@@ -43,7 +44,9 @@ const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	});
 
 	return (
-		<Context.Provider value={{ onChange: handleChange, value, selectedColor, color }}>
+		<Context.Provider
+			value={{ onChange: handleChange, value, selectedColor, color, selectedVariant }}
+		>
 			<Button.Group
 				{...buttonGroupProps}
 				attributes={{ ref: rootRef, ...buttonGroupProps?.attributes }}
