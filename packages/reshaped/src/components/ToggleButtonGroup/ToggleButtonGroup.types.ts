@@ -15,6 +15,8 @@ type BaseProps = {
 	 * @default "neutral"
 	 */
 	selectedColor?: ToggleButtonProps["selectedColor"];
+	/** Component variant for the selected button */
+	selectedVariant?: ToggleButtonProps["variant"];
 	/** Callback when the toggle button group value changes */
 	onChange?: (args: {
 		value: string[];
@@ -39,6 +41,7 @@ export type Props = ControlledProps | UncontrolledProps;
 export type Context = {
 	onChange: ToggleButtonProps["onChange"];
 	selectedColor?: ToggleButtonProps["selectedColor"];
+	selectedVariant?: ToggleButtonProps["variant"];
 	color?: ToggleButtonProps["color"];
 	value?: string[];
 };

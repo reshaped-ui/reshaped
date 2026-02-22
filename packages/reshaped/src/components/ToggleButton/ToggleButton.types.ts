@@ -9,6 +9,8 @@ type BaseProps = Omit<ButtonProps, "variant" | "highlighted"> & {
 	 * @default "neutral"
 	 */
 	selectedColor?: ButtonProps["color"];
+	/** Component variant when selected */
+	selectedVariant?: ButtonProps["variant"];
 	/** Value of the toggle button, enables controlled mode for the ToggleButtonGroup */
 	value?: string;
 	/** Callback when the toggle button value changes */
