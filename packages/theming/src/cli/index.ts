@@ -3,14 +3,14 @@ import path from "node:path";
 
 import chalk from "chalk";
 
-import reshapedDefinition from "@/themes/_generator/definitions/reshaped";
-import transform from "@/themes/_generator/transform";
-import mergeDefinitions from "@/themes/_generator/utilities/mergeDefinitions";
+import baseDefinition from "@/generation/definitions/slate";
+import transform from "@/generation/transform";
+import mergeDefinitions from "@/generation/utilities/mergeDefinitions";
 
 import { transformToTailwind } from "./tailwind";
 
-import type { PassedThemeDefinition } from "@/themes/_generator/tokens/types";
-import type * as T from "@/themes/_generator/types";
+import type { PassedThemeDefinition } from "@/generation/tokens/types";
+import type * as T from "@/generation/types";
 
 const transformDefinition = (
 	name: string,
@@ -54,5 +54,5 @@ export const addTheme = (
 	definition: PassedThemeDefinition,
 	options: T.CLIOptions
 ) => {
-	transformDefinition(name, mergeDefinitions(reshapedDefinition, definition), options);
+	transformDefinition(name, mergeDefinitions(baseDefinition, definition), options);
 };

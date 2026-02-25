@@ -1,5 +1,5 @@
-import type { HexColor, Hue, OklchColor } from "@/themes/_generator/tokens/color/color.types";
-import type { PassedThemeDefinition } from "@/themes/_generator/tokens/types";
+import type { HexColor, Hue, OklchColor } from "@/generation/tokens/color/color.types";
+import type { PassedThemeDefinition } from "@/generation/tokens/types";
 
 export type ReshapedConfig = {
 	themes?: Record<string, PassedThemeDefinition>;

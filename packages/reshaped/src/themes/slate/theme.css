@@ -1,6 +1,16 @@
 
 			[data-rs-theme~="slate"] {
-					--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+					--rs-color-brand: oklch(0.55 0.24 262.67);
+--rs-color-white: oklch(1 0 0);
+--rs-color-black: oklch(0 0 0);
+--rs-color-on-background-primary: oklch(1 0 0);
+--rs-color-on-background-critical: oklch(1 0 0);
+--rs-color-on-background-warning: oklch(0 0 0);
+--rs-color-on-background-positive: oklch(1 0 0);
+--rs-color-on-brand: oklch(1 0 0);
+--rs-color-rgb-white: 255, 255, 255;
+--rs-color-rgb-black: 0, 0, 0;
+--rs-font-family-title: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-body: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 --rs-font-family-monospace: Geist Mono, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 --rs-font-weight-regular: 400;
@@ -85,16 +95,6 @@
 --rs-radius-small: 4px;
 --rs-radius-medium: 8px;
 --rs-radius-large: 12px;
---rs-color-brand: oklch(0.55 0.24 262.67);
---rs-color-white: oklch(1 0 0);
---rs-color-black: oklch(0 0 0);
---rs-color-on-background-primary: oklch(1 0 0);
---rs-color-on-background-critical: oklch(1 0 0);
---rs-color-on-background-warning: oklch(0 0 0);
---rs-color-on-background-positive: oklch(1 0 0);
---rs-color-on-brand: oklch(1 0 0);
---rs-color-rgb-white: 255, 255, 255;
---rs-color-rgb-black: 0, 0, 0;
 --rs-duration-rapid: 100ms;
 --rs-duration-fast: 200ms;
 --rs-duration-medium: 300ms;

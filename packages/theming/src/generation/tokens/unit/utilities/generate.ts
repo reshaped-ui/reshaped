@@ -1,8 +1,5 @@
-import type {
-	GeneratedThemeDefinition,
-	PassedThemeDefinition,
-} from "@/themes/_generator/tokens/types";
-import type { GeneratedName as GeneratedUnitName } from "@/themes/_generator/tokens/unit/unit.types";
+import type { GeneratedThemeDefinition, PassedThemeDefinition } from "@/generation/tokens/types";
+import type { GeneratedName as GeneratedUnitName } from "@/generation/tokens/unit/unit.types";
 
 export const generateUnits = (definition: PassedThemeDefinition) => {
 	const result: Partial<GeneratedThemeDefinition["unit"]> = {};

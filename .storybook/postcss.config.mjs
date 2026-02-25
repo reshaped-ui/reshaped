@@ -13,7 +13,7 @@ export default {
 	plugins: [
 		...baseConfig.plugins,
 		postcssGlobalData({
-			files: [path.resolve(__dirname, "../packages/reshaped/src/themes/reshaped/media.css")],
+			files: [path.resolve(__dirname, "../packages/reshaped/src/themes/slate/media.css")],
 		}),
 		customMediaPlugin(),
 	],

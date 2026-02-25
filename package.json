@@ -14,7 +14,7 @@
 		"changeset": "changeset",
 		"build": "pnpm -r run build",
 		"build:stories": "pnpm --filter reshaped run build:stories",
-		"build:themes": "pnpm --filter reshaped run build:themes",
+		"build:themes": "pnpm --filter @reshaped/theming run build && pnpm --filter reshaped run build:themes",
 		"build:storybook": "storybook build -o dist/app --disable-telemetry",
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build",
 		"release": "bash ./bin/release.sh",

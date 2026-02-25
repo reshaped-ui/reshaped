@@ -45,20 +45,10 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./themes": {
-      "types": "./dist/themes/index.d.ts",
-      "import": "./dist/themes/index.js",
-      "default": "./dist/themes/index.js"
-    },
     "./config/postcss": {
       "types": "./dist/config/postcss.d.ts",
       "import": "./dist/config/postcss.js",
       "default": "./dist/config/postcss.cjs"
-    },
-    "./config/tailwind": {
-      "types": "./dist/config/tailwind.d.ts",
-      "import": "./dist/config/tailwind.js",
-      "default": "./dist/config/tailwind.js"
     },
     "./bundle": {
       "types": "./dist/bundle.d.ts",
@@ -66,10 +56,6 @@
       "default": "./dist/bundle.js"
     },
     "./bundle.css": "./dist/bundle.css",
-    "./themes/reshaped/*": "./dist/themes/reshaped/*",
-    "./themes/slate/*": "./dist/themes/slate/*",
-    "./themes/figma/*": "./dist/themes/figma/*",
-    "./themes/fragments/twitter/*": "./dist/themes/fragments/twitter/*",
     "./package.json": "./package.json"
   },
   "bin": {
@@ -79,7 +65,7 @@
     "clean": "bash ./bin/clean.sh",
     "dev": "storybook dev -p 3001 -c ../../.storybook --disable-telemetry",
     "build": "pnpm clean && pnpm build:stories && pnpm build:esm && pnpm build:css && pnpm build:bundle",
-    "build:themes": "node bin/cli.js theming --config dist/cli/theming/reshaped.config.js --output src/themes",
+    "build:themes": "node bin/cli.js theming --output src/themes",
     "build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
     "build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
     "build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",
@@ -101,12 +87,11 @@
   "dependencies": {
     "@csstools/postcss-global-data": "3.1.0",
     "@reshaped/headless": "workspace:*",
-    "@types/culori": "4.0.1",
+    "@reshaped/theming": "workspace:*",
     "chalk": "4.1.2",
     "commander": "14.0.2",
     "cssnano": "7.1.1",
     "csstype": "3.1.3",
-    "culori": "4.0.2",
     "postcss-custom-media": "11.0.6"
   }
 }

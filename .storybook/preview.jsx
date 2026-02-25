@@ -9,7 +9,6 @@ import DropdownMenu from "../packages/reshaped/src/components/DropdownMenu";
 import Icon from "../packages/reshaped/src/components/Icon";
 import { useTheme } from "../packages/reshaped/src/components/Theme";
 import IconCheckmark from "../packages/reshaped/src/icons/Checkmark";
-import "../packages/reshaped/src/themes/reshaped/theme.css";
 import "../packages/reshaped/src/themes/slate/theme.css";
 import "../packages/reshaped/src/themes/figma/theme.css";
 import "../packages/reshaped/src/themes/fragments/twitter/theme.css";
@@ -78,16 +77,7 @@ const ThemeSwitch = () => {
 					>
 						Slate
 					</DropdownMenu.Item>
-					<DropdownMenu.Item
-						onClick={() => handleThemeChange("reshaped")}
-						endSlot={
-							theme === "reshaped" ? (
-								<Icon svg={IconCheckmark} color="primary" size={5} />
-							) : undefined
-						}
-					>
-						Reshaped
-					</DropdownMenu.Item>
+					
 					<DropdownMenu.Item
 						onClick={() => handleThemeChange("figma")}
 						endSlot={

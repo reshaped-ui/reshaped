@@ -1,14 +1,12 @@
-import figmaDefinition from "@/themes/_generator/definitions/figma";
-import reshapedDefinition from "@/themes/_generator/definitions/reshaped";
-import slateDefinition from "@/themes/_generator/definitions/slate";
+import figmaDefinition from "@/generation/definitions/figma";
+import slateDefinition from "@/generation/definitions/slate";
 
 import type { ReshapedConfig } from "@/types/config";
 
 const config: ReshapedConfig = {
 	themes: {
-		reshaped: reshapedDefinition,
-		figma: figmaDefinition,
 		slate: slateDefinition,
+		figma: figmaDefinition,
 	},
 
 	themeFragments: {

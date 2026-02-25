@@ -10,7 +10,7 @@ import {
 
 import { hexToOklch, tokenToOklchToken } from "./convert";
 
-import type { PassedThemeDefinition } from "@/themes/_generator/tokens/types";
+import type { ThemeDefinition } from "@/generation/tokens/types";
 
 const parseColor = (color: HexColor | PassedToken) => {
 	const isString = typeof color === "string";
@@ -189,7 +189,7 @@ const generateColors = (args: Partial<Record<Hue, ColorValue>> = {}) => {
 		brand: getOklchToken(brand || primary),
 		white: getOklchToken("#ffffff"),
 		black: getOklchToken("#000000"),
-	} as NonNullable<PassedThemeDefinition["color"]>;
+	} as NonNullable<ThemeDefinition["color"]>;
 };
 
 export default generateColors;
