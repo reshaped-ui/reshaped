@@ -1,6 +1,7 @@
 import type { DropdownMenuProps, DropdownMenuInstance } from "@/components/DropdownMenu";
 import type { MenuItemProps } from "@/components/MenuItem";
 import type { TextFieldProps } from "@/components/TextField";
+import type * as G from "@/types/global";
 
 type SelectArgs = {
 	/** Value that will be passed to the input on selection */
@@ -24,7 +25,7 @@ export type Props = TextFieldProps &
 		| "contentZIndex"
 	> & {
 		/** Callback for when value changes from user input */
-		onInput?: TextFieldProps["onChange"];
+		onInput?: G.ChangeHandler<string, React.InputEvent<HTMLInputElement>>;
 		/** Callback for when an item is selected in the dropdown */
 		onItemSelect?: (args: SelectArgs) => void;
 		/** Callback for when the backspace key is pressed while the input is focused */
