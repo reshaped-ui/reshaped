@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.1
+
+### Patch Changes
+
+- [`52221cc`](https://github.com/reshaped-ui/reshaped/commit/52221cc6da56a03e8c2c8fc8e24ecdf644333362) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Fixed postcss-custom-media import
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.1
+
 ## 3.10.0
 
 ### Minor Changes
