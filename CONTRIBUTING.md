@@ -49,6 +49,4 @@ Every PR with user-facing changes should include a changeset:
 - `pnpm changeset:status` – preview what will be released
 - `pnpm version` – consume all changesets and bump package version (used during release)
 
-### Commit message format
 
-We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages. Our commit-msg hook will validate the format when you commit.

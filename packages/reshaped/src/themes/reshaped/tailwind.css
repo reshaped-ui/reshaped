@@ -57,6 +57,12 @@
 --radius-small: var(--rs-radius-small);
 --radius-medium: var(--rs-radius-medium);
 --radius-large: var(--rs-radius-large);
+--font-weight-regular: var(--rs-font-weight-regular);
+--font-weight-medium: var(--rs-font-weight-medium);
+--font-weight-semibold: var(--rs-font-weight-semibold);
+--font-weight-bold: var(--rs-font-weight-bold);
+--font-weight-extrabold: var(--rs-font-weight-extrabold);
+--font-weight-black: var(--rs-font-weight-black);
 --spacing-0: 0px;
 --spacing-x1: var(--rs-unit-x1);
 --spacing-x2: var(--rs-unit-x2);

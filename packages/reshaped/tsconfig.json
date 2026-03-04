@@ -8,6 +8,6 @@
 		"module": "ESNext",
 		"paths": { "@/*": ["./*"] }
 	},
-	"exclude": ["node_modules", "dist", "tools", "./commitlint.config.ts"]
+	"exclude": ["node_modules", "dist", "tools"]
 }
 

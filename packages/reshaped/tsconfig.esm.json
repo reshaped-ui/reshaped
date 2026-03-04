@@ -18,6 +18,5 @@
 		"./src/**/*.test.tsx",
 		"./src/**/*.test.ts",
 		"./src/**/*.stories.tsx",
-		"./commitlint.config.ts"
 	]
 }
