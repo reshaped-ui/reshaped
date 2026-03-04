@@ -141,11 +141,8 @@ export const handlers: StoryObj<{
 	play: async ({ canvasElement, args }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
 		const trigger = canvas.getAllByRole("button")[0];
-		let overlay: HTMLElement;
 
 		await userEvent.click(trigger);
-
-		overlay = canvas.getByText("Content");
 
 		await waitFor(() => {
 			expect(args.handleOpen).toHaveBeenCalledTimes(1);
@@ -173,7 +170,7 @@ export const handlers: StoryObj<{
 		// Open
 		await userEvent.click(trigger);
 
-		overlay = canvas.getByText("Content").parentElement!;
+		const overlay = canvas.getByText("Content").parentElement!;
 
 		// TODO: Fails CLI tests in Storybook without a timeout
 		await sleep(100);
