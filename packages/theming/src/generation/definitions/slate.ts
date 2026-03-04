@@ -1,5 +1,5 @@
-import breakpoints from "@/constants/breakpoints";
 import generateColors from "@/generation/tokens/color/utilities/generateColors";
+import { breakpoints } from "@/generation/tokens/viewport/viewport.constants";
 
 import type { ThemeDefinition } from "@/generation/tokens/types";
 

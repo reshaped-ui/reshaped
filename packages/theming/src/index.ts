@@ -25,6 +25,7 @@ export type { Name as ViewportTokenName } from "@/generation/tokens/viewport/vie
  */
 export { default as baseThemeDefinition } from "@/generation/definitions/slate";
 export { default as generateThemeColors } from "@/generation/tokens/color/utilities/generateColors";
+export { breakpoints } from "@/generation/tokens/viewport/viewport.constants";
 export { default as transform } from "@/generation/transform";
 
 export const getThemeCSS = (

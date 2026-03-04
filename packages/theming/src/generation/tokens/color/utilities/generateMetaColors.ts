@@ -1,7 +1,7 @@
 import { capitalize } from "@/utilities/string";
 
-import { bgWithDynamicForeground } from "../../../constants";
 import { PassedThemeDefinition } from "../../types";
+import { bgWithDynamicForeground } from "../color.constants";
 
 import { getOnColor } from "./a11y";
 import { hexToOklch, oklchToRgb, tokenToOklchToken } from "./convert";
