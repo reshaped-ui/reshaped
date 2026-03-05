@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.2
+
+### Patch Changes
+
+- [`a945557`](https://github.com/reshaped-ui/reshaped/commit/a945557e217d3c02c932dc0aac3e308f1fd4087b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Fixed safeArea timeout edge case causing the timer to stop without restarting
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.2
+
 ## 3.10.1
 
 ### Patch Changes
