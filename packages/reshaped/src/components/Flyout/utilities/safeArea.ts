@@ -51,23 +51,6 @@ function getContentCorners(
 	}
 }
 
-/**
- * Checks if the mouse is over the trigger or content elements
- */
-function isMouseOverElement(
-	point: Coordinates,
-	contentRef: React.RefObject<HTMLElement | null>,
-	triggerRef: React.RefObject<HTMLElement | null>
-): boolean {
-	const elements = document.elementsFromPoint(point.x, point.y);
-
-	return elements.some(
-		(el) =>
-			(contentRef.current && contentRef.current.contains(el)) ||
-			(triggerRef.current && triggerRef.current.contains(el))
-	);
-}
-
 export function createSafeArea(options: SafePolygonOptions): () => void {
 	const { contentRef, triggerRef, position, onClose, origin: passedOrigin } = options;
 
@@ -103,11 +86,6 @@ export function createSafeArea(options: SafePolygonOptions): () => void {
 
 	const handleMouseMove = (e: MouseEvent) => {
 		const currentPoint: Coordinates = { x: e.clientX, y: e.clientY };
-
-		if (isMouseOverElement(currentPoint, contentRef, triggerRef)) {
-			cleanup();
-			return;
-		}
 
 		if (isPointInTriangle(currentPoint, triangle) && contentRef.current && triggerRef.current) {
 			startTimeout();
