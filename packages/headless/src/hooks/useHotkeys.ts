@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useSingletonHotkeys, type Hotkeys } from "./_internal/useSingletonHotkeys";
+import { type Hotkeys, useSingletonHotkeys } from "./_internal/useSingletonHotkeys";
 
 const useHotkeys = <Element extends HTMLElement>(
 	hotkeys: Hotkeys,

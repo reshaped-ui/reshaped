@@ -1,4 +1,4 @@
-import { expect, test, describe, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
 import { VIEWPORT_OFFSET } from "flyout/constants";
 import calculateLayoutAdjustment from "flyout/utilities/calculateLayoutAdjustment";

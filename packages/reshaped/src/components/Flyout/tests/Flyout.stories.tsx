@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { userEvent, waitFor, within, expect, fn } from "storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Flyout, { FlyoutInstance, FlyoutProps } from "@/components/Flyout";

@@ -5,7 +5,7 @@ import { rafThrottle } from "@reshaped/headless/internal";
 import React from "react";
 
 import View from "@/components/View";
-import { responsiveVariables, responsiveClassNames } from "@/utilities/props";
+import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
 
 import s from "./Carousel.module.css";
 import * as T from "./Carousel.types";

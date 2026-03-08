@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, userEvent, fn } from "storybook/test";
+import { expect, fn, userEvent } from "storybook/test";
 
 import Button from "@/components/Button";
 import FileUpload from "@/components/FileUpload";

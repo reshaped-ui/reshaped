@@ -1,7 +1,7 @@
 import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { fn, expect, Mock, within, waitFor, userEvent, fireEvent } from "storybook/test";
+import { expect, fireEvent, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 
 import Autocomplete from "@/components/Autocomplete";
 import Badge from "@/components/Badge";

@@ -1,2 +1,2 @@
 export { default } from "./Overlay";
-export type { Props as OverlayProps, CloseReason as OverlayCloseReason } from "./Overlay.types";
+export type { CloseReason as OverlayCloseReason, Props as OverlayProps } from "./Overlay.types";

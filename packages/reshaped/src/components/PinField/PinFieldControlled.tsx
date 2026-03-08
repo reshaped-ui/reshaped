@@ -11,9 +11,9 @@ import { onNextFrame } from "@/utilities/animation";
 import { responsivePropDependency } from "@/utilities/props";
 
 import {
-	regExpNumericChar,
 	regExpAlphabeticChar,
 	regExpAlphaNumericChar,
+	regExpNumericChar,
 } from "./PinField.constants";
 import s from "./PinField.module.css";
 

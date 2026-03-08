@@ -1,5 +1,5 @@
 import { type StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, type Mock } from "storybook/test";
+import { expect, fn, type Mock, userEvent } from "storybook/test";
 
 import { Example } from "@/utilities/storybook";
 

@@ -3,8 +3,8 @@
 import {
 	classNames,
 	useIsomorphicLayoutEffect,
-	useRTL,
 	useKeyboardArrowNavigation,
+	useRTL,
 } from "@reshaped/headless";
 import React from "react";
 

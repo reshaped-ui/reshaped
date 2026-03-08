@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames, useRTL, useHandlerRef } from "@reshaped/headless";
+import { classNames, useHandlerRef, useRTL } from "@reshaped/headless";
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React from "react";
 

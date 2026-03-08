@@ -1,6 +1,6 @@
 export { default } from "./Carousel";
 export type {
-	Props as CarouselProps,
-	Instance as CarouselInstanceRef,
 	Instance as CarouselInstance,
+	Instance as CarouselInstanceRef,
+	Props as CarouselProps,
 } from "./Carousel.types";

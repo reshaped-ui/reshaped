@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { userEvent, expect, fn } from "storybook/test";
+import { expect, fn, userEvent } from "storybook/test";
 
 import Actionable from "@/components/Actionable";
 import View from "@/components/View";

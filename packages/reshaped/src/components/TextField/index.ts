@@ -9,4 +9,4 @@ const TextFieldRoot = TextField as typeof TextField & {
 TextFieldRoot.Aligner = Aligner;
 
 export default TextFieldRoot;
-export type { Props as TextFieldProps, BaseProps as TextFieldBaseProps } from "./TextField.types";
+export type { BaseProps as TextFieldBaseProps, Props as TextFieldProps } from "./TextField.types";

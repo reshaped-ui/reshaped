@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import s from "./Calendar.module.css";
-import { getMonthWeeks, getWeekdayNames, getLocalISODate, isDateFocusable } from "./Calendar.utils";
+import { getLocalISODate, getMonthWeeks, getWeekdayNames, isDateFocusable } from "./Calendar.utils";
 import CalendarDate from "./CalendarDate";
 
 import type * as T from "./Calendar.types";

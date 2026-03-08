@@ -7,4 +7,4 @@ const TimelineRoot = Timeline as typeof Timeline & {
 TimelineRoot.Item = TimelineItem;
 
 export default TimelineRoot;
-export type { Props as TimelineProps, ItemProps as TimelineItemProps } from "./Timeline.types";
+export type { ItemProps as TimelineItemProps, Props as TimelineProps } from "./Timeline.types";

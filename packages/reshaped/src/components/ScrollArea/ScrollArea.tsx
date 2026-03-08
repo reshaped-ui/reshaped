@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect, useHandlerRef } from "@reshaped/headless";
+import { classNames, useHandlerRef, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React, { forwardRef } from "react";
 

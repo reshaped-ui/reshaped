@@ -1,5 +1,5 @@
-import type * as T from "./easing.types";
 import type { Transformer } from "../types";
+import type * as T from "./easing.types";
 
 const transformToken: Transformer<T.Token> = (name, token) => [
 	{

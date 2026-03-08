@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import root from "react-shadow";
 
 import Autocomplete, { type AutocompleteProps } from "@/components/Autocomplete";

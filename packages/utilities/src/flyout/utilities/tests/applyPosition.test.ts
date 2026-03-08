@@ -1,4 +1,4 @@
-import { expect, test, describe, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import applyPosition from "flyout/utilities/applyPosition";
 

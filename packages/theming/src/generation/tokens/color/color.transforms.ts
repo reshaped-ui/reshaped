@@ -1,7 +1,7 @@
 import { PrivateOptions } from "@/generation/types";
 
+import type { TransformedToken, Transformer } from "../types";
 import type * as T from "./color.types";
-import type { Transformer, TransformedToken } from "../types";
 
 const transformTokenForMode = (
 	args: { hex?: T.HexColor; oklch?: T.OklchColor },

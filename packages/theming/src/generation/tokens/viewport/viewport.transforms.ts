@@ -1,5 +1,5 @@
-import type * as T from "./viewport.types";
 import type { TransformedToken, Transformer } from "../types";
+import type * as T from "./viewport.types";
 
 const transformToken: Transformer<T.Token | T.SToken> = (name, token) => {
 	const value: string[] = [];

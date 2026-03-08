@@ -6,16 +6,15 @@
  */
 
 export { Flyout } from "@reshaped/utilities";
-
 export {
+	checkKeyboardMode,
+	type Coordinates,
 	disableScroll,
 	enableScroll,
-	rafThrottle,
-	checkKeyboardMode,
 	findParent,
-	getFocusableElements,
-	focusableSelector,
 	type FocusableElement,
+	focusableSelector,
+	getFocusableElements,
+	rafThrottle,
 	type TrapMode,
-	type Coordinates,
 } from "@reshaped/utilities/internal";

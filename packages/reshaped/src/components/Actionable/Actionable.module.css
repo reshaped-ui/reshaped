@@ -36,9 +36,9 @@
 
 [data-rs-keyboard] .root {
 	&:focus {
-		outline: none;
+		outline: var(--rs-outline);
+		outline-offset: var(--rs-outline-width);
 		z-index: var(--rs-z-index-relative);
-		box-shadow: var(--rs-shadow-focus);
 	}
 
 	&.--inset:focus {

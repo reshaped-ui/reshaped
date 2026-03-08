@@ -7,7 +7,7 @@ import { ThemeContext } from "./Theme.context";
 import s from "./Theme.module.css";
 import * as T from "./Theme.types";
 import { getRootThemeEl } from "./Theme.utilities";
-import { useTheme, useGlobalColorMode } from "./useTheme";
+import { useGlobalColorMode, useTheme } from "./useTheme";
 
 const getThemeAttribute = (theme: NonNullable<T.Props["name"]>) => {
 	if (typeof theme === "string") return theme;

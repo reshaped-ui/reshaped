@@ -5,7 +5,7 @@ import { expect } from "storybook/test";
 import ActionBar from "@/components/ActionBar";
 import Button from "@/components/Button";
 import View from "@/components/View";
-import { Placeholder, Example } from "@/utilities/storybook";
+import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Components/ActionBar",

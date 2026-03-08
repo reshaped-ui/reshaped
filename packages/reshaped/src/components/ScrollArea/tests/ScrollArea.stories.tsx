@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { userEvent, expect, waitFor, fn, Mock } from "storybook/test";
+import { expect, fn, Mock, userEvent, waitFor } from "storybook/test";
 
 import Button from "@/components/Button";
 import ScrollArea from "@/components/ScrollArea";

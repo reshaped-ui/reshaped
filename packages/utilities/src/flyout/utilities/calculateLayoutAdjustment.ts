@@ -1,7 +1,7 @@
 import { VIEWPORT_OFFSET } from "../constants";
 
-import type { CalculatePositionResult } from "./calculatePosition";
 import type { Options } from "../types";
+import type { CalculatePositionResult } from "./calculatePosition";
 
 type CalculateLayoutAdjustmentArgs = CalculatePositionResult &
 	Pick<Options, "fallbackAdjustLayout" | "fallbackMinHeight" | "width"> & {

@@ -1,4 +1,4 @@
-import type { DropdownMenuProps, DropdownMenuInstance } from "@/components/DropdownMenu";
+import type { DropdownMenuInstance, DropdownMenuProps } from "@/components/DropdownMenu";
 import type { MenuItemProps } from "@/components/MenuItem";
 import type { TextFieldProps } from "@/components/TextField";
 import type * as G from "@/types/global";

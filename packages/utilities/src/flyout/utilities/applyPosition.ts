@@ -1,7 +1,7 @@
 import { getShadowRoot } from "@/dom";
 import isRTL from "@/i18n/isRTL";
 
-import { VIEWPORT_OFFSET, RESET_STYLES } from "../constants";
+import { RESET_STYLES, VIEWPORT_OFFSET } from "../constants";
 
 import calculateLayoutAdjustment from "./calculateLayoutAdjustment";
 import calculatePosition from "./calculatePosition";
@@ -9,7 +9,7 @@ import getPositionFallbacks from "./getPositionFallbacks";
 import getRectFromCoordinates from "./getRectFromCoordinates";
 import isFullyVisible from "./isFullyVisible";
 
-import type { Position, Width, Options } from "../types";
+import type { Options, Position, Width } from "../types";
 
 const applyPosition = (
 	args: Options & {

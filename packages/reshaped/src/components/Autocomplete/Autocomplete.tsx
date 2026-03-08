@@ -1,6 +1,6 @@
 "use client";
 
-import { useIsomorphicLayoutEffect, useHotkeys, useHandlerRef } from "@reshaped/headless";
+import { useHandlerRef, useHotkeys, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
 import DropdownMenu from "@/components/DropdownMenu";

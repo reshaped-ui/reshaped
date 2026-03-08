@@ -1,6 +1,6 @@
 "use client";
 
-import { Reshaped as HeadlessReshaped, classNames } from "@reshaped/headless";
+import { classNames, Reshaped as HeadlessReshaped } from "@reshaped/headless";
 import React from "react";
 
 import { GlobalColorMode, PrivateTheme } from "@/components/Theme";
@@ -8,11 +8,10 @@ import { useGlobalColorMode } from "@/components/Theme/useTheme";
 import { ToastProvider } from "@/components/Toast";
 import { SingletonViewportProvider } from "@/hooks/_private/useSingletonViewport";
 
+import "./Reshaped.css";
 import s from "./Reshaped.module.css";
 
 import type * as T from "./Reshaped.types";
-
-import "./Reshaped.css";
 
 const Reshaped: React.FC<T.Props> = (props) => {
 	const {
@@ -21,6 +20,7 @@ const Reshaped: React.FC<T.Props> = (props) => {
 		colorMode,
 		defaultColorMode,
 		defaultViewport,
+		defaultRTL,
 		toastOptions,
 		scoped,
 		className,
@@ -30,7 +30,7 @@ const Reshaped: React.FC<T.Props> = (props) => {
 	const parentGlobalColorMode = useGlobalColorMode();
 
 	return (
-		<HeadlessReshaped>
+		<HeadlessReshaped defaultRTL={defaultRTL}>
 			<GlobalColorMode
 				defaultMode={defaultColorMode || parentGlobalColorMode.mode || "light"}
 				mode={colorMode}

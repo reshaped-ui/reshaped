@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { userEvent, expect, fn, Mock } from "storybook/test";
+import { expect, fn, Mock, userEvent } from "storybook/test";
 
 import Accordion from "@/components/Accordion";
 import Button from "@/components/Button";

@@ -3,7 +3,7 @@
 import { useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
-import { enableTransitions, disableTransitions, onNextFrame } from "@/utilities/animation";
+import { disableTransitions, enableTransitions, onNextFrame } from "@/utilities/animation";
 
 import { GlobalColorModeContext } from "./Theme.context";
 import { getRootThemeEl } from "./Theme.utilities";

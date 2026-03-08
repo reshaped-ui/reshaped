@@ -5,8 +5,8 @@ import {
 	responsiveVariables,
 } from "@/utilities/props";
 
-import s from "./border.module.css";
 import "./borderWidth.css";
+import s from "./border.module.css";
 
 const border: T.StyleResolver<T.Border> = (value) => {
 	if (!value) return {};

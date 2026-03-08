@@ -6,12 +6,12 @@ import View from "@/components/View";
 import { onNextFrame } from "@/utilities/animation";
 
 import {
-	setMonthToPrevious,
-	setMonthToNext,
+	applyNavigationBounds,
 	setMonthTo,
+	setMonthToNext,
+	setMonthToPrevious,
 	setYearToNext,
 	setYearToPrevious,
-	applyNavigationBounds,
 } from "./Calendar.utils";
 import CalendarControls from "./CalendarControls";
 import CalendarMonth from "./CalendarMonth";

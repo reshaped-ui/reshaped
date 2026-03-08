@@ -2,15 +2,15 @@
 
 import {
 	TrapFocus,
+	useHandlerRef,
 	useHotkeys,
 	useIsomorphicLayoutEffect,
-	useHandlerRef,
 	useOnClickOutside,
 } from "@reshaped/headless";
 import {
 	checkKeyboardMode,
-	type FocusableElement,
 	type Coordinates,
+	type FocusableElement,
 } from "@reshaped/headless/internal";
 import React from "react";
 
@@ -22,9 +22,9 @@ import { checkTransitions } from "@/utilities/animation";
 import * as timeouts from "./Flyout.constants";
 import {
 	Provider,
-	useFlyoutTriggerContext,
-	useFlyoutContext,
 	useFlyoutContentContext,
+	useFlyoutContext,
+	useFlyoutTriggerContext,
 } from "./Flyout.context";
 import useFlyout from "./useFlyout";
 import cooldown from "./utilities/cooldown";

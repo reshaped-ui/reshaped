@@ -1,4 +1,4 @@
-import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "@reshaped/theming";
+import { baseThemeDefinition, generateThemeColors, getThemeCSS } from "@reshaped/theming";
 import { useLayoutEffect, useState } from "react";
 
 import Actionable from "@/components/Actionable";

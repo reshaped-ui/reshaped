@@ -1,4 +1,4 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
 import getPositionFallbacks from "flyout/utilities/getPositionFallbacks";
 

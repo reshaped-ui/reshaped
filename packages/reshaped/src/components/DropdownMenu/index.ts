@@ -2,8 +2,8 @@ import Popover from "@/components/Popover";
 
 import DropdownMenu, {
 	DropdownMenuContent,
-	DropdownMenuSection,
 	DropdownMenuItem,
+	DropdownMenuSection,
 	DropdownMenuSubMenu,
 	DropdownMenuSubTrigger,
 } from "./DropdownMenu";
@@ -28,6 +28,6 @@ DropdownMenuRoot.SubTrigger = DropdownMenuSubTrigger;
 
 export default DropdownMenuRoot;
 export type {
-	Props as DropdownMenuProps,
 	Instance as DropdownMenuInstance,
+	Props as DropdownMenuProps,
 } from "./DropdownMenu.types";

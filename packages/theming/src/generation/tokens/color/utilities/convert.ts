@@ -1,4 +1,4 @@
-import { useMode, modeOklch, type Oklch, formatHex, modeRgb } from "culori/fn";
+import { formatHex, modeOklch, modeRgb, type Oklch, useMode } from "culori/fn";
 
 import type * as TColor from "../color.types";
 

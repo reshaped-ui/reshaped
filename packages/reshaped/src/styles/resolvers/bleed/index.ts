@@ -1,8 +1,8 @@
 import * as T from "@/styles/types";
 import {
 	responsiveClassNames,
-	responsiveVariables,
 	responsivePropDependency,
+	responsiveVariables,
 } from "@/utilities/props";
 
 import s from "./bleed.module.css";

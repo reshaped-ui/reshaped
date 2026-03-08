@@ -1,6 +1,6 @@
 "use client";
 
-import { useFlyoutContext, TriggerProvider } from "./Flyout.context";
+import { TriggerProvider, useFlyoutContext } from "./Flyout.context";
 
 import type * as T from "./Flyout.types";
 

@@ -2,22 +2,22 @@ import align from "@/styles/resolvers/align";
 import aspectRatio from "@/styles/resolvers/aspectRatio";
 import bleed from "@/styles/resolvers/bleed";
 import border, {
-	borderColor,
-	borderTop,
+	borderBlock,
 	borderBottom,
-	borderStart,
+	borderColor,
 	borderEnd,
 	borderInline,
-	borderBlock,
+	borderStart,
+	borderTop,
 } from "@/styles/resolvers/border";
 import height from "@/styles/resolvers/height";
 import inset, {
-	insetTop,
+	insetBlock,
 	insetBottom,
-	insetStart,
 	insetEnd,
 	insetInline,
-	insetBlock,
+	insetStart,
+	insetTop,
 } from "@/styles/resolvers/inset";
 import justify from "@/styles/resolvers/justify";
 import maxHeight from "@/styles/resolvers/maxHeight";
@@ -25,12 +25,12 @@ import maxWidth from "@/styles/resolvers/maxWidth";
 import minHeight from "@/styles/resolvers/minHeight";
 import minWidth from "@/styles/resolvers/minWidth";
 import padding, {
-	paddingTop,
+	paddingBlock,
 	paddingBottom,
-	paddingStart,
 	paddingEnd,
 	paddingInline,
-	paddingBlock,
+	paddingStart,
+	paddingTop,
 } from "@/styles/resolvers/padding";
 import position from "@/styles/resolvers/position";
 import radius from "@/styles/resolvers/radius";

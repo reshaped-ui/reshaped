@@ -1,4 +1,4 @@
-import type { OverlayProps, OverlayCloseReason } from "@/components/Overlay";
+import type { OverlayCloseReason, OverlayProps } from "@/components/Overlay";
 import type * as G from "@/types/global";
 import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";

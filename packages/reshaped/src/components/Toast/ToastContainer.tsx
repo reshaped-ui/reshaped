@@ -1,6 +1,6 @@
 "use client";
 
-import { TrapFocus, classNames } from "@reshaped/headless";
+import { classNames, TrapFocus } from "@reshaped/headless";
 import { checkKeyboardMode } from "@reshaped/headless/internal";
 import React from "react";
 

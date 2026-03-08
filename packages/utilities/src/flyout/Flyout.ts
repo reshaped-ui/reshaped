@@ -3,7 +3,7 @@ import { rafThrottle } from "@/helpers";
 
 import applyPosition from "./utilities/applyPosition";
 
-import type { Position, Options } from "./types";
+import type { Options, Position } from "./types";
 
 class Flyout {
 	#active = false;

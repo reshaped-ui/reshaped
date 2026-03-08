@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
-import { useState, useId } from "react";
-import { expect, fn, userEvent, within, waitFor } from "storybook/test";
+import { useId, useState } from "react";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import MenuItem from "@/components/MenuItem";

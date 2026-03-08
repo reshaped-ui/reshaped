@@ -2,9 +2,9 @@
 
 import {
 	TrapFocus,
+	useHandlerRef,
 	useHotkeys,
 	useIsomorphicLayoutEffect,
-	useHandlerRef,
 	useScrollLock,
 	useToggle,
 } from "@reshaped/headless";

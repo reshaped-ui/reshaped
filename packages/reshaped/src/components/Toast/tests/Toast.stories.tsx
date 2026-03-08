@@ -5,7 +5,7 @@ import Button from "@/components/Button";
 import Dismissible from "@/components/Dismissible";
 import Image from "@/components/Image";
 import Text from "@/components/Text";
-import { useToast, ToastProvider } from "@/components/Toast";
+import { ToastProvider, useToast } from "@/components/Toast";
 import View from "@/components/View";
 import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";

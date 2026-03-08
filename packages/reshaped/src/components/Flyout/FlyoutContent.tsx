@@ -5,7 +5,7 @@ import React from "react";
 
 import Portal from "@/components/_private/Portal";
 
-import { useFlyoutContext, ContentProvider } from "./Flyout.context";
+import { ContentProvider, useFlyoutContext } from "./Flyout.context";
 import s from "./Flyout.module.css";
 import cooldown from "./utilities/cooldown";
 

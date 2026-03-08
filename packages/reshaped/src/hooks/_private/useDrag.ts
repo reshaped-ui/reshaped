@@ -1,6 +1,6 @@
 "use client";
 
-import { useHotkeys, useHandlerRef, useToggle } from "@reshaped/headless";
+import { useHandlerRef, useHotkeys, useToggle } from "@reshaped/headless";
 import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React from "react";
 

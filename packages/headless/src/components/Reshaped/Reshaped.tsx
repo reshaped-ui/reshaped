@@ -9,10 +9,10 @@ import { SingletonRTLProvider } from "@/hooks/_internal/useSingletonRTL";
 import type * as T from "./Reshaped.types";
 
 const Reshaped: React.FC<T.Props> = (props) => {
-	const { children } = props;
+	const { children, defaultRTL } = props;
 
 	return (
-		<SingletonRTLProvider>
+		<SingletonRTLProvider defaultRTL={defaultRTL}>
 			<SingletonKeyboardModeProvider>
 				<SingletonHotkeysProvider>{children}</SingletonHotkeysProvider>
 			</SingletonKeyboardModeProvider>

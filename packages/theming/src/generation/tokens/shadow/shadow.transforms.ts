@@ -1,6 +1,6 @@
 import { hexToOklch, oklchToRgb } from "../color/utilities/convert";
 
-import type { Transformer, TransformedToken } from "../types";
+import type { TransformedToken, Transformer } from "../types";
 import type * as T from "./shadow.types";
 
 const transformShadowParts = (

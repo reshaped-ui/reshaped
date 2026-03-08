@@ -13,10 +13,10 @@ FlyoutRoot.Content = FlyoutContent;
 export default FlyoutRoot;
 export { useFlyoutContext } from "./Flyout.context";
 export type {
-	Props as FlyoutProps,
-	Instance as FlyoutInstance,
-	TriggerProps as FlyoutTriggerProps,
-	ContentProps as FlyoutContentProps,
 	CloseReason as FlyoutCloseReason,
+	ContentProps as FlyoutContentProps,
+	Instance as FlyoutInstance,
+	Props as FlyoutProps,
 	TriggerAttributes as FlyoutTriggerAttributes,
+	TriggerProps as FlyoutTriggerProps,
 } from "./Flyout.types";

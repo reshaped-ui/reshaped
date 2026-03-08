@@ -1,4 +1,4 @@
-import { expect, test, describe, beforeEach, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
 import rafThrottle from "../rafThrottle";
 

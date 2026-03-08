@@ -2,7 +2,7 @@ import keys from "@/constants/keys";
 import { getShadowRoot } from "@/dom";
 
 import Chain from "./Chain";
-import { getActiveElement, getFocusableElements, focusElement, getFocusData } from "./focus";
+import { focusElement, getActiveElement, getFocusableElements, getFocusData } from "./focus";
 import { checkKeyboardMode } from "./keyboardMode";
 import TrapScreenReader from "./TrapScreenReader";
 

@@ -1,7 +1,7 @@
 import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { fireEvent, fn, expect } from "storybook/test";
+import { expect, fireEvent, fn } from "storybook/test";
 
 import Button from "@/components/Button";
 import View from "@/components/View";

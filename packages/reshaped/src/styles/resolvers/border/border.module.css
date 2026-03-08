@@ -3,40 +3,40 @@
 		--rs-border-color: var(--rs-color-border-neutral);
 	}
 
-	@value neutral-faded {
-		--rs-border-color: var(--rs-color-border-neutral-faded);
+	@value neutral-muted {
+		--rs-border-color: var(--rs-color-border-neutral-muted);
 	}
 
 	@value positive {
 		--rs-border-color: var(--rs-color-border-positive);
 	}
 
-	@value positive-faded {
-		--rs-border-color: var(--rs-color-border-positive-faded);
+	@value positive-muted {
+		--rs-border-color: var(--rs-color-border-positive-muted);
 	}
 
 	@value warning {
 		--rs-border-color: var(--rs-color-border-warning);
 	}
 
-	@value warning-faded {
-		--rs-border-color: var(--rs-color-border-warning-faded);
+	@value warning-muted {
+		--rs-border-color: var(--rs-color-border-warning-muted);
 	}
 
 	@value critical {
 		--rs-border-color: var(--rs-color-border-critical);
 	}
 
-	@value critical-faded {
-		--rs-border-color: var(--rs-color-border-critical-faded);
+	@value critical-muted {
+		--rs-border-color: var(--rs-color-border-critical-muted);
 	}
 
 	@value primary {
 		--rs-border-color: var(--rs-color-border-primary);
 	}
 
-	@value primary-faded {
-		--rs-border-color: var(--rs-color-border-primary-faded);
+	@value primary-muted {
+		--rs-border-color: var(--rs-color-border-primary-muted);
 	}
 
 	@value disabled {

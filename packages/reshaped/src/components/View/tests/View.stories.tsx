@@ -11,7 +11,7 @@ import Tabs from "@/components/Tabs";
 import Text from "@/components/Text";
 import View, { type ViewProps } from "@/components/View";
 import IconPlus from "@/icons/Plus";
-import { Placeholder, Example } from "@/utilities/storybook";
+import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/View",

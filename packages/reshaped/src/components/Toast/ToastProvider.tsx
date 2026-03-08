@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { positions, defaultContextData } from "./Toast.constants";
+import { defaultContextData, positions } from "./Toast.constants";
 import ToastContext from "./Toast.context";
 import * as T from "./Toast.types";
 import ToastRegion from "./ToastRegion";

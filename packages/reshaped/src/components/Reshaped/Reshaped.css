@@ -1,11 +1,8 @@
 @layer rs.reset {
 	[data-rs-theme] {
+		--rs-outline-width: 1.5px;
+		--rs-outline: 1.5px solid var(--rs-color-border-primary);
 		--rs-radius-circular: 9999px;
-		--rs-shadow-focus:
-			0 0 0 2px var(--rs-color-background-elevation-base), 0 0 0 4px var(--rs-color-border-primary);
-		--rs-shadow-focus-inset:
-			inset 0 0 0 2px var(--rs-color-border-primary),
-			inset 0 0 0 4px var(--rs-color-background-elevation-base);
 	}
 
 	[data-rs-theme] body,
@@ -106,13 +103,22 @@
 
 	[data-rs-theme] body,
 	[data-rs-theme]:not(html) {
-		font-size: var(--rs-font-size-body-3);
-		line-height: var(--rs-line-height-body-3);
-		letter-spacing: var(--rs-letter-spacing-body-3);
+		font-size: var(--rs-font-size-body-2);
+		line-height: var(--rs-line-height-body-2);
+		letter-spacing: var(--rs-letter-spacing-body-2);
 		font-family: var(--rs-font-family-body);
 		font-weight: var(--rs-font-weight-regular);
 	}
 }
+
+[data-rs-theme] {
+	/* Reset for scoped themes */
+	color: var(--rs-color-foreground-neutral);
+}
+
+
+
+
 
 [data-rs-color-mode="light"] {
 	color-scheme: light;

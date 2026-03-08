@@ -13,4 +13,4 @@ PopoverRoot.Trigger = Flyout.Trigger;
 PopoverRoot.Content = Flyout.Content;
 
 export default PopoverRoot;
-export type { Props as PopoverProps, Instance as PopoverInstance } from "./Popover.types";
+export type { Instance as PopoverInstance, Props as PopoverProps } from "./Popover.types";
