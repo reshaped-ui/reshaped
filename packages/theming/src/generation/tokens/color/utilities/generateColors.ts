@@ -72,6 +72,7 @@ const generateColorValues = (
 	const warning = key === "warning";
 
 	const bgDark = dark || getDarkModeColor(bg);
+
 	const bgMuted = neutral
 		? { ...bg, l: 0, c: 0, alpha: 0.03 }
 		: {
@@ -88,6 +89,9 @@ const generateColorValues = (
 				// For primary color with low chroma, we still have to make sure it stays low
 				c: bgDark.c / 7.5,
 			};
+
+	const bgHighlightedMuted = neutral ? { ...bg, alpha: 0.4 } : { ...bg, alpha: 0.06 };
+	const bgHighlightedMutedDark = neutral ? { ...bgDark, alpha: 0.48 } : { ...bgDark, alpha: 0.06 };
 
 	const fg = neutral ? { ...bg, l: 0.24 } : { ...bg, l: 0.52 };
 	const fgDark = neutral ? { ...bgDark, l: 0.96 } : { ...bgDark, l: 0.75, c: bg.c * 0.85 };
@@ -107,6 +111,10 @@ const generateColorValues = (
 		[`background${capitalizedKey}Muted`]: {
 			oklch: bgMuted,
 			oklchDark: bgMutedDark,
+		},
+		[`background${capitalizedKey}HighlightedMuted`]: {
+			oklch: bgHighlightedMuted,
+			oklchDark: bgHighlightedMutedDark,
 		},
 		[`border${capitalizedKey}`]: {
 			oklch: bd,
