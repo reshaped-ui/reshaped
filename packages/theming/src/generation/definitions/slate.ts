@@ -309,7 +309,7 @@ const theme: ThemeDefinition = {
 				],
 			},
 		},
-		borderFaded: {
+		borderMuted: {
 			parts: [
 				{
 					offsetX: 0,
@@ -365,7 +365,7 @@ const theme: ThemeDefinition = {
 				],
 			},
 		},
-		borderFadedRaised: {
+		borderMutedRaised: {
 			parts: [
 				{
 					offsetX: 0,
@@ -421,7 +421,7 @@ const theme: ThemeDefinition = {
 				],
 			},
 		},
-		borderFadedOverlay: {
+		borderMutedOverlay: {
 			parts: [
 				{
 					offsetX: 0,
