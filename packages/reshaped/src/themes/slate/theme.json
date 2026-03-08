@@ -339,18 +339,18 @@
     "backgroundNeutralFaded": {
       "oklch": {
         "l": 0.97,
-        "c": 0.005,
+        "c": 0,
         "h": 262.67,
         "mode": "oklch"
       },
       "oklchDark": {
         "l": 0.25,
-        "c": 0.01,
+        "c": 0,
         "h": 262.67,
         "mode": "oklch"
       },
-      "hex": "#f3f5f9",
-      "hexDark": "#1f2227"
+      "hex": "#f5f5f5",
+      "hexDark": "#222222"
     },
     "borderNeutral": {
       "oklch": {
@@ -373,20 +373,20 @@
     "borderNeutralFaded": {
       "oklch": {
         "l": 0,
-        "c": 0.005,
+        "c": 0,
         "h": 262.67,
         "mode": "oklch",
         "alpha": 0.08
       },
       "oklchDark": {
         "l": 1,
-        "c": 0.01,
+        "c": 0,
         "h": 262.67,
         "mode": "oklch",
         "alpha": 0.08
       },
       "hex": "#00000014",
-      "hexDark": "#fcffff14"
+      "hexDark": "#ffffff14"
     },
     "foregroundNeutral": {
       "oklch": {
@@ -697,8 +697,8 @@
       "hexDark": "58.8285, 61.149, 65.43299999999999"
     },
     "rgbBackgroundNeutralFaded": {
-      "hex": "243.219, 245.10600000000002, 248.523",
-      "hexDark": "31.0335, 33.6855, 38.556"
+      "hex": "244.953, 244.953, 244.953",
+      "hexDark": "33.5325, 33.5325, 33.5325"
     },
     "rgbBackgroundDisabled": {
       "hex": "238.29749999999999, 238.29749999999999, 238.29749999999999",

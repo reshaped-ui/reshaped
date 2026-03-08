@@ -164,8 +164,8 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		inputRef.current.selectionEnd = focusedIndex;
 	};
 
-	const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const el = event.target;
+	const handleInput = (event: React.InputEvent<HTMLInputElement>) => {
+		const el = event.currentTarget;
 		const nextValue = el.value;
 
 		const matcher = new RegExp(`^${patternRegexp}+$`);
@@ -181,7 +181,11 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				: "type";
 
 		modeRef.current = nextMode;
-		onChange?.({ event, name, value: nextValue });
+		onChange?.({
+			event: event as unknown as React.ChangeEvent<HTMLInputElement>,
+			name,
+			value: nextValue,
+		});
 		onNextFrame(() => {
 			syncSelection();
 		});

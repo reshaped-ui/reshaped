@@ -116,13 +116,13 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
   },
   "backgroundNeutralFaded": {
     "oklch": {
-      "c": 0.005,
+      "c": 0,
       "h": 262.67,
       "l": 0.97,
       "mode": "oklch",
     },
     "oklchDark": {
-      "c": 0.01,
+      "c": 0,
       "h": 262.67,
       "l": 0.25,
       "mode": "oklch",
@@ -310,14 +310,14 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
   "borderNeutralFaded": {
     "oklch": {
       "alpha": 0.08,
-      "c": 0.005,
+      "c": 0,
       "h": 262.67,
       "l": 0,
       "mode": "oklch",
     },
     "oklchDark": {
       "alpha": 0.08,
-      "c": 0.01,
+      "c": 0,
       "h": 262.67,
       "l": 1,
       "mode": "oklch",
@@ -641,13 +641,13 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
   },
   "backgroundNeutralFaded": {
     "oklch": {
-      "c": 0.005,
+      "c": 0,
       "h": 262.67,
       "l": 0.97,
       "mode": "oklch",
     },
     "oklchDark": {
-      "c": 0.01,
+      "c": 0,
       "h": 262.67,
       "l": 0.25,
       "mode": "oklch",
@@ -835,14 +835,14 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
   "borderNeutralFaded": {
     "oklch": {
       "alpha": 0.08,
-      "c": 0.005,
+      "c": 0,
       "h": 262.67,
       "l": 0,
       "mode": "oklch",
     },
     "oklchDark": {
       "alpha": 0.08,
-      "c": 0.01,
+      "c": 0,
       "h": 262.67,
       "l": 1,
       "mode": "oklch",

@@ -90,7 +90,7 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 		handleOpen();
 	};
 
-	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInput = (e: React.InputEvent<HTMLInputElement>) => {
 		onInput?.({ value: e.currentTarget.value, name, event: e });
 		textFieldProps.inputAttributes?.onInput?.(e);
 	};

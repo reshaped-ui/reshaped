@@ -75,13 +75,13 @@ const generateColorValues = (
 	const bgFaded = {
 		...bg,
 		l: 0.97,
-		c: neutral ? 0.005 : warning ? 0.04 : 0.02,
+		c: neutral ? 0 : warning ? 0.04 : 0.02,
 	};
 	const bgFadedDark = {
 		...bgDark,
 		l: 0.25,
 		// For primary color with low chroma, we still have to make sure it stays low
-		c: neutral ? 0.01 : bgDark.c / 5,
+		c: neutral ? 0 : bgDark.c / 5,
 	};
 
 	const fg = neutral ? { ...bg, l: 0.2 } : { ...bg, l: 0.5 };

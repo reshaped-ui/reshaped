@@ -342,11 +342,8 @@ export const handlers: StoryObj<{
 	play: async ({ canvasElement, args }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
 		const trigger = canvas.getAllByRole("button")[0];
-		let overlay: HTMLElement;
 
 		await userEvent.click(trigger);
-
-		overlay = canvas.getByText("Content");
 
 		await waitFor(() => {
 			expect(args.handleOpen).toHaveBeenCalledTimes(1);
@@ -375,7 +372,7 @@ export const handlers: StoryObj<{
 		await userEvent.click(trigger);
 		await sleep(100);
 
-		overlay = canvas.getAllByRole("button", { hidden: true }).at(-1)!;
+		const overlay = canvas.getAllByRole("button", { hidden: true }).at(-1)!;
 
 		// Close by clicking on the overlay
 		await userEvent.click(overlay);
