@@ -158,9 +158,6 @@ importers:
       stylelint-config-prettier:
         specifier: 9.0.5
         version: 9.0.5(stylelint@17.4.0(typescript@5.9.3))
-      stylelint-config-recommended:
-        specifier: ^18.0.0
-        version: 18.0.0(stylelint@17.4.0(typescript@5.9.3))
       stylelint-config-standard:
         specifier: 40.0.0
         version: 40.0.0(stylelint@17.4.0(typescript@5.9.3))

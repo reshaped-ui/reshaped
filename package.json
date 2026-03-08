@@ -79,7 +79,6 @@
 		"stylelint": "17.4.0",
 		"stylelint-browser-compat": "1.0.0-beta.180",
 		"stylelint-config-prettier": "9.0.5",
-		"stylelint-config-recommended": "^18.0.0",
 		"stylelint-config-standard": "40.0.0",
 		"tsc-watch": "7.2.0",
 		"typescript": "5.9.3",
