@@ -13,5 +13,8 @@ export const generateUnits = (definition: PassedThemeDefinition) => {
 		result[generatedName] = { px: baseValue * i };
 	}
 
+	result["x0_5"] = { px: baseValue * 0.5 };
+	result["x1_5"] = { px: baseValue * 1.5 };
+
 	return result;
 };

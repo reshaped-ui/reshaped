@@ -744,6 +744,9 @@
     }
   },
   "fontFamily": {
+    "headline": {
+      "family": "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif"
+    },
     "title": {
       "family": "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif"
     },
@@ -775,47 +778,27 @@
     }
   },
   "font": {
-    "title1": {
-      "fontSize": {
-        "px": 96
-      },
-      "lineHeight": {
-        "px": 100
-      },
-      "fontWeightToken": "extrabold",
-      "fontFamilyToken": "title"
-    },
-    "title2": {
+    "headline1": {
       "fontSize": {
         "px": 80
       },
       "lineHeight": {
         "px": 84
       },
-      "fontWeightToken": "extrabold",
-      "fontFamilyToken": "title"
+      "fontWeightToken": "bold",
+      "fontFamilyToken": "headline"
     },
-    "title3": {
+    "headline2": {
       "fontSize": {
         "px": 64
       },
       "lineHeight": {
         "px": 68
       },
-      "fontWeightToken": "extrabold",
-      "fontFamilyToken": "title"
-    },
-    "title4": {
-      "fontSize": {
-        "px": 56
-      },
-      "lineHeight": {
-        "px": 60
-      },
       "fontWeightToken": "bold",
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "headline"
     },
-    "title5": {
+    "headline3": {
       "fontSize": {
         "px": 48
       },
@@ -823,55 +806,63 @@
         "px": 52
       },
       "fontWeightToken": "bold",
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "headline"
     },
-    "title6": {
-      "fontSize": {
-        "px": 36
-      },
-      "lineHeight": {
-        "px": 40
-      },
-      "fontWeightToken": "bold",
-      "fontFamilyToken": "title"
-    },
-    "featured1": {
+    "title1": {
       "fontSize": {
         "px": 32
       },
       "lineHeight": {
-        "px": 40
+        "px": 36
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "title"
     },
-    "featured2": {
+    "title2": {
+      "fontSize": {
+        "px": 28
+      },
+      "lineHeight": {
+        "px": 32
+      },
+      "fontFamilyToken": "title"
+    },
+    "title3": {
       "fontSize": {
         "px": 24
       },
       "lineHeight": {
         "px": 32
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "title"
     },
-    "featured3": {
+    "title4": {
+      "fontSize": {
+        "px": 22
+      },
+      "lineHeight": {
+        "px": 28
+      },
+      "fontFamilyToken": "title"
+    },
+    "title5": {
       "fontSize": {
         "px": 20
       },
       "lineHeight": {
         "px": 28
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "title"
     },
-    "body1": {
+    "title6": {
       "fontSize": {
         "px": 18
       },
       "lineHeight": {
-        "px": 28
+        "px": 24
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "title"
     },
-    "body2": {
+    "body1": {
       "fontSize": {
         "px": 16
       },
@@ -880,7 +871,7 @@
       },
       "fontFamilyToken": "body"
     },
-    "body3": {
+    "body2": {
       "fontSize": {
         "px": 14
       },
@@ -941,6 +932,12 @@
     },
     "x10": {
       "px": 40
+    },
+    "x0_5": {
+      "px": 2
+    },
+    "x1_5": {
+      "px": 6
     }
   },
   "radius": {
@@ -948,7 +945,7 @@
       "px": 4
     },
     "medium": {
-      "px": 8
+      "px": 6
     },
     "large": {
       "px": 12
@@ -959,20 +956,20 @@
       "ms": 100
     },
     "fast": {
-      "ms": 200
+      "ms": 150
     },
     "medium": {
-      "ms": 300
+      "ms": 200
     },
     "slow": {
-      "ms": 400
+      "ms": 300
     }
   },
   "easing": {
     "standard": {
-      "x1": 0.4,
+      "x1": 0.2,
       "y1": 0,
-      "x2": 0.2,
+      "x2": 0,
       "y2": 1
     },
     "accelerate": {
@@ -989,39 +986,428 @@
     }
   },
   "shadow": {
-    "raised": [
-      {
-        "offsetX": 0,
-        "offsetY": 1,
-        "blurRadius": 5,
-        "spreadRadius": -4,
-        "colorToken": "black",
-        "opacity": 0.5
-      },
-      {
-        "offsetX": 0,
-        "offsetY": 4,
-        "blurRadius": 8,
-        "colorToken": "black",
-        "opacity": 0.05
+    "border": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 1,
+          "blurRadius": 2,
+          "spreadRadius": -0.5,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 2,
+          "blurRadius": 3,
+          "spreadRadius": -1,
+          "colorToken": "black",
+          "opacity": 0.05
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 6,
+          "blurRadius": 0,
+          "spreadRadius": 1,
+          "colorToken": "black",
+          "opacity": 0.1
+        }
+      ],
+      "dark": {
+        "parts": [
+          {
+            "offsetX": 0,
+            "offsetY": -1,
+            "blurRadius": 2,
+            "spreadRadius": -0.5,
+            "colorToken": "white",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": -1,
+            "blurRadius": 3,
+            "spreadRadius": -1,
+            "colorToken": "white",
+            "opacity": 0.05
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 6,
+            "blurRadius": 0,
+            "spreadRadius": 1,
+            "colorToken": "white",
+            "opacity": 0.1
+          }
+        ]
       }
-    ],
-    "overlay": [
-      {
-        "offsetX": 0,
-        "offsetY": 5,
-        "blurRadius": 10,
-        "colorToken": "black",
-        "opacity": 0.05
-      },
-      {
-        "offsetX": 0,
-        "offsetY": 15,
-        "blurRadius": 25,
-        "colorToken": "black",
-        "opacity": 0.07
+    },
+    "borderRaised": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 8,
+          "blurRadius": 12,
+          "spreadRadius": -4,
+          "colorToken": "black",
+          "opacity": 0.08
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 1,
+          "blurRadius": 2,
+          "spreadRadius": 0,
+          "colorToken": "black",
+          "opacity": 0.1
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 0,
+          "blurRadius": 0,
+          "spreadRadius": 1,
+          "colorToken": "black",
+          "opacity": 0.1
+        }
+      ],
+      "dark": {
+        "parts": [
+          {
+            "offsetX": 0,
+            "offsetY": 8,
+            "blurRadius": 12,
+            "spreadRadius": -4,
+            "colorToken": "black",
+            "opacity": 0.08
+          },
+          {
+            "offsetX": 0,
+            "offsetY": -2,
+            "blurRadius": 2,
+            "spreadRadius": -1,
+            "colorToken": "white",
+            "opacity": 0.1
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "blurRadius": 0,
+            "spreadRadius": 1,
+            "colorToken": "white",
+            "opacity": 0.1
+          }
+        ]
       }
-    ]
+    },
+    "borderOverlay": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 32,
+          "blurRadius": 48,
+          "spreadRadius": -8,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 16,
+          "blurRadius": 24,
+          "spreadRadius": -6,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 8,
+          "blurRadius": 12,
+          "spreadRadius": -4,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 0,
+          "blurRadius": 0,
+          "spreadRadius": 1,
+          "colorToken": "black",
+          "opacity": 0.1
+        }
+      ],
+      "dark": {
+        "parts": [
+          {
+            "offsetX": 0,
+            "offsetY": 32,
+            "blurRadius": 48,
+            "spreadRadius": -8,
+            "colorToken": "black",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 16,
+            "blurRadius": 24,
+            "spreadRadius": -6,
+            "colorToken": "black",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 8,
+            "blurRadius": 12,
+            "spreadRadius": -4,
+            "colorToken": "black",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "blurRadius": 0,
+            "spreadRadius": 1,
+            "colorToken": "white",
+            "opacity": 0.1
+          }
+        ]
+      }
+    },
+    "borderFaded": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 1,
+          "blurRadius": 2,
+          "spreadRadius": -0.5,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 2,
+          "blurRadius": 3,
+          "spreadRadius": -1,
+          "colorToken": "black",
+          "opacity": 0.05
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 6,
+          "blurRadius": 0,
+          "spreadRadius": 1,
+          "colorToken": "black",
+          "opacity": 0.08
+        }
+      ],
+      "dark": {
+        "parts": [
+          {
+            "offsetX": 0,
+            "offsetY": -1,
+            "blurRadius": 2,
+            "spreadRadius": -0.5,
+            "colorToken": "white",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": -1,
+            "blurRadius": 3,
+            "spreadRadius": -1,
+            "colorToken": "white",
+            "opacity": 0.05
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 6,
+            "blurRadius": 0,
+            "spreadRadius": 1,
+            "colorToken": "white",
+            "opacity": 0.08
+          }
+        ]
+      }
+    },
+    "borderFadedRaised": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 8,
+          "blurRadius": 12,
+          "spreadRadius": -4,
+          "colorToken": "black",
+          "opacity": 0.08
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 1,
+          "blurRadius": 2,
+          "spreadRadius": 0,
+          "colorToken": "black",
+          "opacity": 0.1
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 0,
+          "blurRadius": 0,
+          "spreadRadius": 1,
+          "colorToken": "black",
+          "opacity": 0.08
+        }
+      ],
+      "dark": {
+        "parts": [
+          {
+            "offsetX": 0,
+            "offsetY": 8,
+            "blurRadius": 12,
+            "spreadRadius": -4,
+            "colorToken": "black",
+            "opacity": 0.08
+          },
+          {
+            "offsetX": 0,
+            "offsetY": -2,
+            "blurRadius": 2,
+            "spreadRadius": -1,
+            "colorToken": "white",
+            "opacity": 0.1
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "blurRadius": 0,
+            "spreadRadius": 1,
+            "colorToken": "white",
+            "opacity": 0.08
+          }
+        ]
+      }
+    },
+    "borderFadedOverlay": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 32,
+          "blurRadius": 48,
+          "spreadRadius": -8,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 16,
+          "blurRadius": 24,
+          "spreadRadius": -6,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 8,
+          "blurRadius": 12,
+          "spreadRadius": -4,
+          "colorToken": "black",
+          "opacity": 0.06
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 0,
+          "blurRadius": 0,
+          "spreadRadius": 1,
+          "colorToken": "black",
+          "opacity": 0.08
+        }
+      ],
+      "dark": {
+        "parts": [
+          {
+            "offsetX": 0,
+            "offsetY": 32,
+            "blurRadius": 48,
+            "spreadRadius": -8,
+            "colorToken": "black",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 16,
+            "blurRadius": 24,
+            "spreadRadius": -6,
+            "colorToken": "black",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 8,
+            "blurRadius": 12,
+            "spreadRadius": -4,
+            "colorToken": "black",
+            "opacity": 0.06
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "blurRadius": 0,
+            "spreadRadius": 1,
+            "colorToken": "white",
+            "opacity": 0.08
+          }
+        ]
+      }
+    },
+    "raised": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 10,
+          "blurRadius": 12,
+          "spreadRadius": -4,
+          "colorToken": "black",
+          "opacity": 0.08
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 2,
+          "blurRadius": 4,
+          "colorToken": "black",
+          "opacity": 0.1
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 1,
+          "blurRadius": 4,
+          "colorToken": "black",
+          "opacity": 0.1
+        }
+      ]
+    },
+    "overlay": {
+      "parts": [
+        {
+          "offsetX": 0,
+          "offsetY": 32,
+          "blurRadius": 48,
+          "spreadRadius": -8,
+          "colorToken": "black",
+          "opacity": 0.1
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 16,
+          "blurRadius": 24,
+          "spreadRadius": -6,
+          "colorToken": "black",
+          "opacity": 0.1
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 8,
+          "blurRadius": 12,
+          "spreadRadius": -4,
+          "colorToken": "black",
+          "opacity": 0.1
+        }
+      ]
+    }
   },
   "viewport": {
     "m": {

@@ -6,6 +6,9 @@ import type { ThemeDefinition } from "@/generation/tokens/types";
 const theme: ThemeDefinition = {
 	color: generateColors(),
 	fontFamily: {
+		headline: {
+			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
+		},
 		title: {
 			family: "Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif",
 		},
@@ -28,68 +31,60 @@ const theme: ThemeDefinition = {
 	},
 
 	font: {
-		title1: {
-			fontSize: { px: 96 },
-			lineHeight: { px: 100 },
-			fontWeightToken: "extrabold",
-			fontFamilyToken: "title",
-		},
-		title2: {
+		headline1: {
 			fontSize: { px: 80 },
 			lineHeight: { px: 84 },
-			fontWeightToken: "extrabold",
-			fontFamilyToken: "title",
+			fontWeightToken: "bold",
+			fontFamilyToken: "headline",
 		},
-		title3: {
+		headline2: {
 			fontSize: { px: 64 },
 			lineHeight: { px: 68 },
-			fontWeightToken: "extrabold",
-			fontFamilyToken: "title",
-		},
-		title4: {
-			fontSize: { px: 56 },
-			lineHeight: { px: 60 },
 			fontWeightToken: "bold",
-			fontFamilyToken: "title",
+			fontFamilyToken: "headline",
 		},
-		title5: {
+		headline3: {
 			fontSize: { px: 48 },
 			lineHeight: { px: 52 },
 			fontWeightToken: "bold",
+			fontFamilyToken: "headline",
+		},
+		title1: {
+			fontSize: { px: 32 },
+			lineHeight: { px: 36 },
+			fontFamilyToken: "title",
+		},
+		title2: {
+			fontSize: { px: 28 },
+			lineHeight: { px: 32 },
+			fontFamilyToken: "title",
+		},
+		title3: {
+			fontSize: { px: 24 },
+			lineHeight: { px: 32 },
+			fontFamilyToken: "title",
+		},
+		title4: {
+			fontSize: { px: 22 },
+			lineHeight: { px: 28 },
+			fontFamilyToken: "title",
+		},
+		title5: {
+			fontSize: { px: 20 },
+			lineHeight: { px: 28 },
 			fontFamilyToken: "title",
 		},
 		title6: {
-			fontSize: { px: 36 },
-			lineHeight: { px: 40 },
-			fontWeightToken: "bold",
+			fontSize: { px: 18 },
+			lineHeight: { px: 24 },
 			fontFamilyToken: "title",
 		},
-		featured1: {
-			fontSize: { px: 32 },
-			lineHeight: { px: 40 },
-			fontFamilyToken: "body",
-		},
-		featured2: {
-			fontSize: { px: 24 },
-			lineHeight: { px: 32 },
-			fontFamilyToken: "body",
-		},
-		featured3: {
-			fontSize: { px: 20 },
-			lineHeight: { px: 28 },
-			fontFamilyToken: "body",
-		},
 		body1: {
-			fontSize: { px: 18 },
-			lineHeight: { px: 28 },
-			fontFamilyToken: "body",
-		},
-		body2: {
 			fontSize: { px: 16 },
 			lineHeight: { px: 24 },
 			fontFamilyToken: "body",
 		},
-		body3: {
+		body2: {
 			fontSize: { px: 14 },
 			lineHeight: { px: 20 },
 			fontFamilyToken: "body",
@@ -112,57 +107,446 @@ const theme: ThemeDefinition = {
 
 	radius: {
 		small: { px: 4 },
-		medium: { px: 8 },
+		medium: { px: 6 },
 		large: { px: 12 },
 	},
 
 	duration: {
 		rapid: { ms: 100 },
-		fast: { ms: 200 },
-		medium: { ms: 300 },
-		slow: { ms: 400 },
+		fast: { ms: 150 },
+		medium: { ms: 200 },
+		slow: { ms: 300 },
 	},
 
 	easing: {
-		standard: { x1: 0.4, y1: 0, x2: 0.2, y2: 1 },
-		accelerate: { x1: 0.4, y1: 0, x2: 1, y2: 1 },
-		decelerate: { x1: 0, y1: 0, x2: 0.2, y2: 1 },
+		standard: { x1: 0.2, y1: 0, x2: 0, y2: 1 }, // subtle UI transitions
+		accelerate: { x1: 0.4, y1: 0, x2: 1, y2: 1 }, // exit / moving away
+		decelerate: { x1: 0, y1: 0, x2: 0.2, y2: 1 }, // enter / appearing
 	},
 
 	shadow: {
-		raised: [
-			{
-				offsetX: 0,
-				offsetY: 1,
-				blurRadius: 5,
-				spreadRadius: -4,
-				colorToken: "black",
-				opacity: 0.5,
+		border: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 1,
+					blurRadius: 2,
+					spreadRadius: -0.5,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 2,
+					blurRadius: 3,
+					spreadRadius: -1,
+					colorToken: "black",
+					opacity: 0.05,
+				},
+				{
+					offsetX: 0,
+					offsetY: 6,
+					blurRadius: 0,
+					spreadRadius: 1,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+			],
+			dark: {
+				parts: [
+					{
+						offsetX: 0,
+						offsetY: -1,
+						blurRadius: 2,
+						spreadRadius: -0.5,
+						colorToken: "white",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: -1,
+						blurRadius: 3,
+						spreadRadius: -1,
+						colorToken: "white",
+						opacity: 0.05,
+					},
+					{
+						offsetX: 0,
+						offsetY: 6,
+						blurRadius: 0,
+						spreadRadius: 1,
+						colorToken: "white",
+						opacity: 0.1,
+					},
+				],
 			},
-			{
-				offsetX: 0,
-				offsetY: 4,
-				blurRadius: 8,
-				colorToken: "black",
-				opacity: 0.05,
+		},
+		borderRaised: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 8,
+					blurRadius: 12,
+					spreadRadius: -4,
+					colorToken: "black",
+					opacity: 0.08,
+				},
+				{
+					offsetX: 0,
+					offsetY: 1,
+					blurRadius: 2,
+					spreadRadius: 0,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+				{
+					offsetX: 0,
+					offsetY: 0,
+					blurRadius: 0,
+					spreadRadius: 1,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+			],
+			dark: {
+				parts: [
+					{
+						offsetX: 0,
+						offsetY: 8,
+						blurRadius: 12,
+						spreadRadius: -4,
+						colorToken: "black",
+						opacity: 0.08,
+					},
+					{
+						offsetX: 0,
+						offsetY: -2,
+						blurRadius: 2,
+						spreadRadius: -1,
+						colorToken: "white",
+						opacity: 0.1,
+					},
+					{
+						offsetX: 0,
+						offsetY: 0,
+						blurRadius: 0,
+						spreadRadius: 1,
+						colorToken: "white",
+						opacity: 0.1,
+					},
+				],
 			},
-		],
-		overlay: [
-			{
-				offsetX: 0,
-				offsetY: 5,
-				blurRadius: 10,
-				colorToken: "black",
-				opacity: 0.05,
+		},
+		borderOverlay: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 32,
+					blurRadius: 48,
+					spreadRadius: -8,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 16,
+					blurRadius: 24,
+					spreadRadius: -6,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 8,
+					blurRadius: 12,
+					spreadRadius: -4,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 0,
+					blurRadius: 0,
+					spreadRadius: 1,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+			],
+			dark: {
+				parts: [
+					{
+						offsetX: 0,
+						offsetY: 32,
+						blurRadius: 48,
+						spreadRadius: -8,
+						colorToken: "black",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: 16,
+						blurRadius: 24,
+						spreadRadius: -6,
+						colorToken: "black",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: 8,
+						blurRadius: 12,
+						spreadRadius: -4,
+						colorToken: "black",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: 0,
+						blurRadius: 0,
+						spreadRadius: 1,
+						colorToken: "white",
+						opacity: 0.1,
+					},
+				],
 			},
-			{
-				offsetX: 0,
-				offsetY: 15,
-				blurRadius: 25,
-				colorToken: "black",
-				opacity: 0.07,
+		},
+		borderFaded: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 1,
+					blurRadius: 2,
+					spreadRadius: -0.5,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 2,
+					blurRadius: 3,
+					spreadRadius: -1,
+					colorToken: "black",
+					opacity: 0.05,
+				},
+				{
+					offsetX: 0,
+					offsetY: 6,
+					blurRadius: 0,
+					spreadRadius: 1,
+					colorToken: "black",
+					opacity: 0.08,
+				},
+			],
+			dark: {
+				parts: [
+					{
+						offsetX: 0,
+						offsetY: -1,
+						blurRadius: 2,
+						spreadRadius: -0.5,
+						colorToken: "white",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: -1,
+						blurRadius: 3,
+						spreadRadius: -1,
+						colorToken: "white",
+						opacity: 0.05,
+					},
+					{
+						offsetX: 0,
+						offsetY: 6,
+						blurRadius: 0,
+						spreadRadius: 1,
+						colorToken: "white",
+						opacity: 0.08,
+					},
+				],
 			},
-		],
+		},
+		borderFadedRaised: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 8,
+					blurRadius: 12,
+					spreadRadius: -4,
+					colorToken: "black",
+					opacity: 0.08,
+				},
+				{
+					offsetX: 0,
+					offsetY: 1,
+					blurRadius: 2,
+					spreadRadius: 0,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+				{
+					offsetX: 0,
+					offsetY: 0,
+					blurRadius: 0,
+					spreadRadius: 1,
+					colorToken: "black",
+					opacity: 0.08,
+				},
+			],
+			dark: {
+				parts: [
+					{
+						offsetX: 0,
+						offsetY: 8,
+						blurRadius: 12,
+						spreadRadius: -4,
+						colorToken: "black",
+						opacity: 0.08,
+					},
+					{
+						offsetX: 0,
+						offsetY: -2,
+						blurRadius: 2,
+						spreadRadius: -1,
+						colorToken: "white",
+						opacity: 0.1,
+					},
+					{
+						offsetX: 0,
+						offsetY: 0,
+						blurRadius: 0,
+						spreadRadius: 1,
+						colorToken: "white",
+						opacity: 0.08,
+					},
+				],
+			},
+		},
+		borderFadedOverlay: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 32,
+					blurRadius: 48,
+					spreadRadius: -8,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 16,
+					blurRadius: 24,
+					spreadRadius: -6,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 8,
+					blurRadius: 12,
+					spreadRadius: -4,
+					colorToken: "black",
+					opacity: 0.06,
+				},
+				{
+					offsetX: 0,
+					offsetY: 0,
+					blurRadius: 0,
+					spreadRadius: 1,
+					colorToken: "black",
+					opacity: 0.08,
+				},
+			],
+			dark: {
+				parts: [
+					{
+						offsetX: 0,
+						offsetY: 32,
+						blurRadius: 48,
+						spreadRadius: -8,
+						colorToken: "black",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: 16,
+						blurRadius: 24,
+						spreadRadius: -6,
+						colorToken: "black",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: 8,
+						blurRadius: 12,
+						spreadRadius: -4,
+						colorToken: "black",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: 0,
+						blurRadius: 0,
+						spreadRadius: 1,
+						colorToken: "white",
+						opacity: 0.08,
+					},
+				],
+			},
+		},
+		raised: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 10,
+					blurRadius: 12,
+					spreadRadius: -4,
+					colorToken: "black",
+					opacity: 0.08,
+				},
+				{
+					offsetX: 0,
+					offsetY: 2,
+					blurRadius: 4,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+				{
+					offsetX: 0,
+					offsetY: 1,
+					blurRadius: 4,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+			],
+		},
+		overlay: {
+			parts: [
+				{
+					offsetX: 0,
+					offsetY: 32,
+					blurRadius: 48,
+					spreadRadius: -8,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+				{
+					offsetX: 0,
+					offsetY: 16,
+					blurRadius: 24,
+					spreadRadius: -6,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+				{
+					offsetX: 0,
+					offsetY: 8,
+					blurRadius: 12,
+					spreadRadius: -4,
+					colorToken: "black",
+					opacity: 0.1,
+				},
+			],
+		},
 	},
 
 	viewport: {
