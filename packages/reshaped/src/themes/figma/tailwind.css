@@ -74,6 +74,12 @@
 --spacing-x8: var(--rs-unit-x8);
 --spacing-x9: var(--rs-unit-x9);
 --spacing-x10: var(--rs-unit-x10);
+--shadow-border: var(--rs-shadow-border);
+--shadow-border-raised: var(--rs-shadow-border-raised);
+--shadow-border-overlay: var(--rs-shadow-border-overlay);
+--shadow-border-faded: var(--rs-shadow-border-faded);
+--shadow-border-faded-raised: var(--rs-shadow-border-faded-raised);
+--shadow-border-faded-overlay: var(--rs-shadow-border-faded-overlay);
 --shadow-raised: var(--rs-shadow-raised);
 --shadow-overlay: var(--rs-shadow-overlay);
 --breakpoint-m: 660px;

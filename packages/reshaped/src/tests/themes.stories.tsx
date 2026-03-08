@@ -1,3 +1,4 @@
+import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "@reshaped/theming";
 import { useLayoutEffect, useState } from "react";
 
 import Actionable from "@/components/Actionable";
@@ -15,8 +16,6 @@ import Theme, { useTheme } from "@/components/Theme";
 import View from "@/components/View";
 import IconZap from "@/icons/Mic";
 import { Example } from "@/utilities/storybook";
-
-import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
 
 import ThemePlayground from "./ThemesPlayground";
 

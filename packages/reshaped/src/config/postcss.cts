@@ -1,6 +1,6 @@
 import path from "path";
 
-const defaultThemeMediaCSSPath = path.resolve(__dirname, "../themes/reshaped/media.css");
+const defaultThemeMediaCSSPath = path.resolve(__dirname, "../themes/slate/media.css");
 
 // Using [plugin]: { ...options } format here because it's supported by the most frameworks
 // - require('plugin') is not supported by Next

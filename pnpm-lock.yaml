@@ -200,9 +200,9 @@ importers:
       '@reshaped/headless':
         specifier: workspace:*
         version: link:../headless
-      '@types/culori':
-        specifier: 4.0.1
-        version: 4.0.1
+      '@reshaped/theming':
+        specifier: workspace:*
+        version: link:../theming
       chalk:
         specifier: 4.1.2
         version: 4.1.2
@@ -210,14 +210,11 @@ importers:
         specifier: 14.0.3
         version: 14.0.3
       cssnano:
-        specifier: 7.1.2
-        version: 7.1.2(postcss@8.5.6)
+        specifier: 7.1.1
+        version: 7.1.1(postcss@8.5.6)
       csstype:
         specifier: 3.2.3
         version: 3.2.3
-      culori:
-        specifier: 4.0.2
-        version: 4.0.2
       postcss:
         specifier: ^8
         version: 8.5.6
@@ -230,6 +227,21 @@ importers:
       react-dom:
         specifier: ^18 || ^19
         version: 18.3.1(react@18.3.1)
+
+  packages/theming:
+    dependencies:
+      '@types/culori':
+        specifier: 4.0.1
+        version: 4.0.1
+      chalk:
+        specifier: 4.1.2
+        version: 4.1.2
+      commander:
+        specifier: 14.0.2
+        version: 14.0.2
+      culori:
+        specifier: 4.0.2
+        version: 4.0.2
 
   packages/utilities:
     dependencies:
@@ -1849,6 +1861,10 @@ packages:
     resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
     engines: {node: '>=18'}
 
+  commander@14.0.2:
+    resolution: {integrity: sha512-TywoWNNRbhoD0BXs1P3ZEScW8W5iKrnbithIl0YH+uCmBd0QpPOA8yc82DS3BIE5Ma6FnBVUsJ7wVUDz4dvOWQ==}
+    engines: {node: '>=20'}
+
   commander@14.0.3:
     resolution: {integrity: sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==}
     engines: {node: '>=20'}
@@ -1920,6 +1936,12 @@ packages:
 
   cssnano-utils@5.0.1:
     resolution: {integrity: sha512-ZIP71eQgG9JwjVZsTPSqhc6GHgEr53uJ7tK5///VfyWj6Xp2DBmixWHqJgPno+PqATzn48pL42ww9x5SSGmhZg==}
+    engines: {node: ^18.12.0 || ^20.9.0 || >=22.0}
+    peerDependencies:
+      postcss: ^8.4.32
+
+  cssnano@7.1.1:
+    resolution: {integrity: sha512-fm4D8ti0dQmFPeF8DXSAA//btEmqCOgAc/9Oa3C1LW94h5usNrJEfrON7b4FkPZgnDEn6OUs5NdxiJZmAtGOpQ==}
     engines: {node: ^18.12.0 || ^20.9.0 || >=22.0}
     peerDependencies:
       postcss: ^8.4.32
@@ -6396,6 +6418,8 @@ snapshots:
 
   commander@12.1.0: {}
 
+  commander@14.0.2: {}
+
   commander@14.0.3: {}
 
   commander@2.20.3: {}
@@ -6537,7 +6561,7 @@ snapshots:
     dependencies:
       postcss: 8.5.8
 
-  cssnano@7.1.2(postcss@8.5.6):
+  cssnano@7.1.1(postcss@8.5.6):
     dependencies:
       cssnano-preset-default: 7.0.10(postcss@8.5.6)
       lilconfig: 3.1.3

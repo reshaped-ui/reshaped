@@ -230,10 +230,32 @@ export { TrapFocus, classNames } from "@reshaped/headless";
  * Types
  */
 export type { Attributes } from "@reshaped/headless";
-export type { ReshapedConfig } from "@/types/config";
 export type { Responsive, ColorMode } from "@/types/global";
 
 /**
  * Dev utilities
  */
 export { default as Placeholder } from "@/utilities/storybook/Placeholder";
+
+/** Theming */
+export type {
+	ReshapedConfig,
+	ThemeDefinition,
+	ColorTokenName,
+	DurationTokenName,
+	EasingTokenName,
+	FontTokenName,
+	FontFamilyTokenName,
+	FontWeightTokenName,
+	RadiusTokenName,
+	ShadowTokenName,
+	UnitTokenName,
+	ViewportTokenName,
+} from "@reshaped/theming";
+
+export {
+	baseThemeDefinition,
+	generateThemeColors,
+	transform,
+	getThemeCSS,
+} from "@reshaped/theming";
