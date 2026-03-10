@@ -19,11 +19,11 @@ export const size = {
 	render: () => {
 		return (
 			<Example>
-				<Example.Item title="size: medium">
-					<Loader size="medium" ariaLabel="Loading" />
-				</Example.Item>
 				<Example.Item title="size: small">
 					<Loader size="small" ariaLabel="Loading" />
+				</Example.Item>
+				<Example.Item title="size: medium">
+					<Loader size="medium" ariaLabel="Loading" />
 				</Example.Item>
 				<Example.Item title="size: large">
 					<Loader size="large" ariaLabel="Loading" />

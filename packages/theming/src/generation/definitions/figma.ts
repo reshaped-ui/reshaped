@@ -105,7 +105,7 @@ const theme: Partial<ThemeDefinition> = {
 
 	color: {
 		foregroundNeutral: { hex: "#191919", hexDark: "#FFFFFF" },
-		foregroundNeutralMuted: { hex: "#474747", hexDark: "#B2B2B2" },
+		foregroundNeutralFaded: { hex: "#474747", hexDark: "#B2B2B2" },
 		foregroundDisabled: { hex: "#B2B2B2", hexDark: "#656565" },
 		foregroundPrimary: { hex: "#007BE5", hexDark: "#7CC4F8" },
 		foregroundPositive: { hex: "#009951", hexDark: "#79D297" },
@@ -113,37 +113,37 @@ const theme: Partial<ThemeDefinition> = {
 		foregroundWarning: { hex: "#7b6305", hexDark: "#b4920c" },
 
 		backgroundNeutral: { hex: "#DFE2EA", hexDark: "#444444" },
-		backgroundNeutralMuted: { hex: "#F5F5F5", hexDark: "#383838" },
-		backgroundNeutralHighlightedMuted: { hex: "#DFE2EA66", hexDark: "#44444466" },
+		backgroundNeutralFaded: { hex: "#F5F5F5", hexDark: "#383838" },
+		backgroundNeutralHighlightedFaded: { hex: "#DFE2EA66", hexDark: "#44444466" },
 		backgroundDisabled: { hex: "#e4e4e4", hexDark: "#474747" },
-		backgroundDisabledMuted: { hex: "#F5F5F5", hexDark: "#3A3A3A" },
+		backgroundDisabledFaded: { hex: "#F5F5F5", hexDark: "#3A3A3A" },
 		backgroundPrimary: { hex: "#0D99FF", hexDark: "#0C8CE9" },
-		backgroundPrimaryMuted: { hex: "#E5F4FF", hexDark: "#394360" },
-		backgroundPrimaryHighlightedMuted: { hex: "#0D99FF0F", hexDark: "#0C8CE90F" },
+		backgroundPrimaryFaded: { hex: "#E5F4FF", hexDark: "#394360" },
+		backgroundPrimaryHighlightedFaded: { hex: "#0D99FF0F", hexDark: "#0C8CE90F" },
 		backgroundPositive: { hex: "#14AE5C", hexDark: "#198F51" },
-		backgroundPositiveMuted: { hex: "#DAECDF", hexDark: "#3d5749" },
-		backgroundPositiveHighlightedMuted: { hex: "#14AE5C0F", hexDark: "#198F510F" },
+		backgroundPositiveFaded: { hex: "#DAECDF", hexDark: "#3d5749" },
+		backgroundPositiveHighlightedFaded: { hex: "#14AE5C0F", hexDark: "#198F510F" },
 		backgroundCritical: { hex: "#F24822", hexDark: "#E03E1A" },
-		backgroundCriticalMuted: { hex: "#FFE2E0", hexDark: "#60332A" },
-		backgroundCriticalHighlightedMuted: { hex: "#F248220F", hexDark: "#E03E1A0F" },
+		backgroundCriticalFaded: { hex: "#FFE2E0", hexDark: "#60332A" },
+		backgroundCriticalHighlightedFaded: { hex: "#F248220F", hexDark: "#E03E1A0F" },
 		backgroundWarning: { hex: "#facc15", hexDark: "#f1c512" },
-		backgroundWarningMuted: { hex: "#fffae9", hexDark: "#2c271f" },
-		backgroundWarningHighlightedMuted: { hex: "#facc150F", hexDark: "#f1c5120F" },
+		backgroundWarningFaded: { hex: "#fffae9", hexDark: "#2c271f" },
+		backgroundWarningHighlightedFaded: { hex: "#facc150F", hexDark: "#f1c5120F" },
 
 		borderNeutral: { hex: "#E6E6E6", hexDark: "#444444" },
-		borderNeutralMuted: { hex: "#E6E6E6", hexDark: "#444444" },
+		borderNeutralFaded: { hex: "#E6E6E6", hexDark: "#444444" },
 		borderDisabled: { hex: "#E6E6E6", hexDark: "#3E3E3E" },
 		borderPrimary: { hex: "#007BE5", hexDark: "#7CC4F8" },
-		borderPrimaryMuted: { hex: "#BDE3FF", hexDark: "#2A4D72" },
+		borderPrimaryFaded: { hex: "#BDE3FF", hexDark: "#2A4D72" },
 		borderPositive: { hex: "#009951", hexDark: "#79D297" },
-		borderPositiveMuted: { hex: "#BBDDC6", hexDark: "#086338" },
+		borderPositiveFaded: { hex: "#BBDDC6", hexDark: "#086338" },
 		borderCritical: { hex: "#DC3412", hexDark: "#FCA397" },
-		borderCriticalMuted: { hex: "#FFC7C2", hexDark: "#803226" },
+		borderCriticalFaded: { hex: "#FFC7C2", hexDark: "#803226" },
 		borderWarning: { hex: "#cfa90f", hexDark: "#b4920a" },
-		borderWarningMuted: { hex: "#ece2c4", hexDark: "#453c1e" },
+		borderWarningFaded: { hex: "#ece2c4", hexDark: "#453c1e" },
 
 		backgroundPage: { hex: "#FFFFFF", hexDark: "#2C2C2C" },
-		backgroundPageMuted: { hex: "#FAFAFA", hexDark: "#1E1E1E" },
+		backgroundPageFaded: { hex: "#FAFAFA", hexDark: "#1E1E1E" },
 		backgroundElevationBase: { hex: "#FFFFFF", hexDark: "#2C2C2C" },
 		backgroundElevationRaised: { hex: "#FFFFFF", hexDark: "#2C2C2C" },
 		backgroundElevationOverlay: { hex: "#FFFFFF", hexDark: "#2C2C2C" },
@@ -353,7 +353,7 @@ const theme: Partial<ThemeDefinition> = {
 				],
 			},
 		},
-		borderMuted: {
+		borderFaded: {
 			parts: [
 				{
 					offsetX: 0,
@@ -409,7 +409,7 @@ const theme: Partial<ThemeDefinition> = {
 				],
 			},
 		},
-		borderMutedRaised: {
+		borderFadedRaised: {
 			parts: [
 				{
 					offsetX: 0,
@@ -465,7 +465,7 @@ const theme: Partial<ThemeDefinition> = {
 				],
 			},
 		},
-		borderMutedOverlay: {
+		borderFadedOverlay: {
 			parts: [
 				{
 					offsetX: 0,

@@ -73,7 +73,7 @@ const generateColorValues = (
 
 	const bgDark = dark || getDarkModeColor(bg);
 
-	const bgMuted = neutral
+	const bgFaded = neutral
 		? { ...bg, l: 0, c: 0, alpha: 0.03 }
 		: {
 				...bg,
@@ -81,48 +81,48 @@ const generateColorValues = (
 				// Keep muted colors subtle but avoid introducing tint for low-chroma inputs.
 				c: Math.min(warning ? 0.04 : 0.02, bg.c / 5),
 			};
-	const bgMutedDark = neutral
+	const bgFadedDark = neutral
 		? { ...bgDark, l: 1, alpha: 0.03 }
 		: {
 				...bgDark,
-				l: 0.25,
+				l: 0.24,
 				// For primary color with low chroma, we still have to make sure it stays low
-				c: bgDark.c / 7.5,
+				c: bgDark.c / 9.8,
 			};
 
-	const bgHighlightedMuted = neutral ? { ...bg, alpha: 0.4 } : { ...bg, alpha: 0.06 };
-	const bgHighlightedMutedDark = neutral ? { ...bgDark, alpha: 0.48 } : { ...bgDark, alpha: 0.06 };
+	const bgHighlightedFaded = neutral ? { ...bg, alpha: 0.4 } : { ...bg, alpha: 0.06 };
+	const bgHighlightedFadedDark = neutral ? { ...bgDark, alpha: 0.48 } : { ...bgDark, alpha: 0.06 };
 
 	const fg = neutral ? { ...bg, l: 0.24 } : { ...bg, l: 0.52 };
 	const fgDark = neutral ? { ...bgDark, l: 0.96 } : { ...bgDark, l: 0.75, c: bg.c * 0.85 };
 
 	const bd = neutral ? { ...bg, l: 0, alpha: 0.12 } : { ...bg, l: bg.l - 0.08 };
 	const bdDark = neutral ? { ...bgDark, l: 1, alpha: 0.12 } : { ...bgDark, l: bgDark.l + 0.1 };
-	const bdMuted = neutral ? { ...bgMuted, l: 0, alpha: 0.08 } : { ...bgMuted, l: bgMuted.l - 0.03 };
-	const bdMutedDark = neutral
-		? { ...bgMutedDark, l: 1, alpha: 0.08 }
-		: { ...bgMutedDark, l: bgMutedDark.l + 0.06 };
+	const bdFaded = neutral ? { ...bgFaded, l: 0, alpha: 0.08 } : { ...bgFaded, l: bgFaded.l - 0.04 };
+	const bdFadedDark = neutral
+		? { ...bgFadedDark, l: 1, alpha: 0.08 }
+		: { ...bgFadedDark, l: bgFadedDark.l + 0.06 };
 
 	const output = {
 		[`background${capitalizedKey}`]: {
 			oklch: bg,
 			oklchDark: bgDark,
 		},
-		[`background${capitalizedKey}Muted`]: {
-			oklch: bgMuted,
-			oklchDark: bgMutedDark,
+		[`background${capitalizedKey}Faded`]: {
+			oklch: bgFaded,
+			oklchDark: bgFadedDark,
 		},
-		[`background${capitalizedKey}HighlightedMuted`]: {
-			oklch: bgHighlightedMuted,
-			oklchDark: bgHighlightedMutedDark,
+		[`background${capitalizedKey}HighlightedFaded`]: {
+			oklch: bgHighlightedFaded,
+			oklchDark: bgHighlightedFadedDark,
 		},
 		[`border${capitalizedKey}`]: {
 			oklch: bd,
 			oklchDark: bdDark,
 		},
-		[`border${capitalizedKey}Muted`]: {
-			oklch: bdMuted,
-			oklchDark: bdMutedDark,
+		[`border${capitalizedKey}Faded`]: {
+			oklch: bdFaded,
+			oklchDark: bdFadedDark,
 		},
 		[`foreground${capitalizedKey}`]: {
 			oklch: fg,
@@ -131,7 +131,7 @@ const generateColorValues = (
 	};
 
 	if (neutral) {
-		output[`foreground${capitalizedKey}Muted`] = {
+		output[`foreground${capitalizedKey}Faded`] = {
 			oklch: { ...fg, l: fg.l + 0.25 },
 			oklchDark: { ...fgDark, l: fgDark.l - 0.15 },
 		};
@@ -139,7 +139,7 @@ const generateColorValues = (
 			oklch: { ...bg, l: 0.95, c: 0 },
 			oklchDark: { ...bgDark, l: 0.28, c: 0 },
 		};
-		output[`backgroundDisabledMuted`] = {
+		output[`backgroundDisabledFaded`] = {
 			oklch: { ...bg, l: 0.98, c: 0 },
 			oklchDark: { ...bgDark, l: 0.23, c: 0 },
 		};
@@ -167,7 +167,7 @@ const generateColorValues = (
 			oklch: { ...bg, l: 1, c: 0 },
 			oklchDark: { ...bgDark, l: 0.16, c: 0 },
 		};
-		output[`backgroundPageMuted`] = {
+		output[`backgroundPageFaded`] = {
 			oklch: { ...bg, l: 0.98, c: 0 },
 			oklchDark: { ...bgDark, l: 0.18, c: 0 },
 		};

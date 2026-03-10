@@ -6,9 +6,9 @@ export type Name =
 	| "border"
 	| "borderRaised"
 	| "borderOverlay"
-	| "borderMuted"
-	| "borderMutedRaised"
-	| "borderMutedOverlay";
+	| "borderFaded"
+	| "borderFadedRaised"
+	| "borderFadedOverlay";
 
 type Part = {
 	offsetX: number;

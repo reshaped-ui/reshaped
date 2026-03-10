@@ -2,4 +2,4 @@
 "@reshaped/theming": patch
 ---
 
-Added highlighted muted background colors to theme config
+Added highlighted faded background colors to theme config

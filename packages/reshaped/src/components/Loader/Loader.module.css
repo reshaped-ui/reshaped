@@ -1,21 +1,7 @@
-@keyframes rs-reshaped-loader {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	50% {
-		transform: rotate(540deg);
-	}
-
-	100% {
-		transform: rotate(1080deg);
-	}
-}
-
 .root {
 	position: relative;
 	display: block;
-	animation: rs-reshaped-loader 2.2s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
+	animation: rs-reshaped-loader 2.2s infinite cubic-bezier(0.6,0.3,0.3,0.9);
 	width: var(--rs-loader-size);
 	height: var(--rs-loader-size);
 }
@@ -90,5 +76,19 @@
 	@value large {
 		--rs-loader-size: var(--rs-unit-x10);
 		--rs-loader-stroke: 5px;
+	}
+}
+
+@keyframes rs-reshaped-loader {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(540deg);
+	}
+
+	100% {
+		transform: rotate(1080deg);
 	}
 }
