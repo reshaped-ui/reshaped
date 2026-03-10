@@ -75,16 +75,15 @@ describe("flyout/applyPosition", () => {
 		expect(content.style.transform).toBe(`translate(150px, ${250 - window.innerHeight}px)`);
 	});
 
-	test("throws error when triggerBounds are missing", () => {
-		expect(() => {
-			applyPosition({
-				content,
-				triggerCoordinates: null,
-				position: "top",
-				lastUsedPosition: null,
-				onDeactivate: vi.fn(),
-			});
-		}).toThrow("Trigger bounds are required");
+	test("returns early with position when triggerBounds are missing", () => {
+		const result = applyPosition({
+			content,
+			triggerCoordinates: null,
+			position: "top",
+			lastUsedPosition: null,
+			onDeactivate: vi.fn(),
+		});
+		expect(result).toEqual({ position: "top" });
 	});
 
 	test("applies custom width when provided", () => {
