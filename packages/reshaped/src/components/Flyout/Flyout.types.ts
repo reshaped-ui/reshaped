@@ -108,16 +108,10 @@ type BaseProps = {
 	groupTimeouts?: boolean;
 	/** Content position relative to the trigger element */
 	position?: Position;
-	/**
-	 * @deprecated Use fallbackPosition={false} instead, will be removed in v4
-	 */
-	forcePosition?: boolean;
 	/** Fallback positions for the content when it doesn't fit into the viewport or container */
 	fallbackPositions?: Position[] | false;
 	/** Adjust the content size and shift its position to fit into the container when none of the fallback positions work */
 	fallbackAdjustLayout?: boolean;
-	/** @deprecated Minimum width for the content when fallbackAdjustLayout is true */
-	fallbackMinWidth?: string;
 	/** Minimum height for the content when fallbackAdjustLayout is true */
 	fallbackMinHeight?: string;
 	/** Change component trap focus keyboard behavior and shortcuts */

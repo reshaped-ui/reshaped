@@ -40,7 +40,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		onClose,
 		children,
 		disabled,
-		forcePosition,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 		trapFocusMode = "dialog",
@@ -54,6 +53,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		contentShift,
 		contentMaxHeight,
 		contentMaxWidth,
+		fallbackPositions,
 		contentZIndex,
 		contentClassName,
 		contentAttributes,
@@ -65,8 +65,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		initialFocusRef,
 		positionRef,
 	} = props;
-	const fallbackPositions =
-		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
 	const onOpenRef = useHandlerRef(onOpen);
 	const onCloseRef = useHandlerRef(onClose);
 	const active = disabled === true ? false : passedActive;
@@ -119,7 +117,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		position: passedPosition,
 		defaultActive: active,
 		container: containerRef?.current,
-		fallbackPositions,
+		fallbackPositions: fallbackPositions === false ? [] : fallbackPositions,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 		contentGap,

@@ -60,7 +60,7 @@ const ThemeSwitch = () => {
 				Toggle mode
 			</Button>
 
-			<DropdownMenu position="top-end" forcePosition>
+			<DropdownMenu position="top-end" fallbackPositions={[]}>
 				<DropdownMenu.Trigger>
 					{(attributes) => (
 						<Button attributes={attributes} size="small">

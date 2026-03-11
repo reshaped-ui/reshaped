@@ -7,10 +7,8 @@ export type Props = Pick<
 	FlyoutProps,
 	| "id"
 	| "position"
-	| "forcePosition"
 	| "fallbackPositions"
 	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
 	| "fallbackMinHeight"
 	| "onOpen"
 	| "onClose"

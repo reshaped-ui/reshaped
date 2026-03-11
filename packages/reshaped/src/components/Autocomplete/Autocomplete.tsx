@@ -31,7 +31,6 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 		onOpen,
 		onClose,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		contentMaxHeight,
 		contentZIndex,
@@ -190,7 +189,6 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 				onOpen={handleOpen}
 				containerRef={containerRef}
 				fallbackAdjustLayout={fallbackAdjustLayout}
-				fallbackMinWidth={fallbackMinWidth}
 				fallbackMinHeight={fallbackMinHeight}
 				contentMaxHeight={contentMaxHeight}
 				contentZIndex={contentZIndex}

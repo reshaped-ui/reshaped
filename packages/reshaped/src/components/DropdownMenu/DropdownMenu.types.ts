@@ -9,10 +9,8 @@ export type Props = Pick<
 	PopoverProps,
 	| "children"
 	| "position"
-	| "forcePosition"
 	| "fallbackPositions"
 	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
 	| "fallbackMinHeight"
 	| "triggerType"
 	| "contentGap"
@@ -53,10 +51,8 @@ export type SubMenuProps = {
 } & Pick<
 	PopoverProps,
 	| "position"
-	| "forcePosition"
 	| "fallbackPositions"
 	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
 	| "fallbackMinHeight"
 	| "contentGap"
 	| "contentShift"

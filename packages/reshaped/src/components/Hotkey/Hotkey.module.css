@@ -4,14 +4,13 @@
 	display: inline-flex;
 	justify-content: center;
 	vertical-align: top;
-	background: var(--rs-color-background-neutral-faded);
+	background: var(--rs-color-background-neutral);
+	color: var(--rs-color-on-background-neutral);
 	border-radius: var(--rs-radius-small);
-	color: var(--rs-color-foreground-neutral);
 	transition: var(--rs-easing-standard) var(--rs-duration-fast);
 	transition-property: color, background-color, border-color;
 }
 
 .--active {
 	background: var(--rs-color-background-neutral);
-	color: var(--rs-color-on-background-neutral);
 }
