@@ -70,7 +70,12 @@
     "./themes/slate/*": "./dist/themes/slate/*",
     "./themes/figma/*": "./dist/themes/figma/*",
     "./themes/fragments/twitter/*": "./dist/themes/fragments/twitter/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./_private/useIsDismissible": {
+      "types": "./dist/hooks/_private/useIsDismissible.d.ts",
+      "import": "./dist/hooks/_private/useIsDismissible.js",
+      "default": "./dist/hooks/_private/useIsDismissible.js"
+    }
   },
   "bin": {
     "reshaped": "./bin/cli.js"
