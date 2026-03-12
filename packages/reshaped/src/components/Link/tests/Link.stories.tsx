@@ -39,19 +39,29 @@ export const color = {
 	render: () => (
 		<Example>
 			<Example.Item title="color: primary">
-				<Link color="primary">Link</Link>
+				<Link color="primary" onClick={() => {}}>
+					Link
+				</Link>
 			</Example.Item>
 			<Example.Item title="color: critical">
-				<Link color="critical">Link</Link>
+				<Link color="critical" onClick={() => {}}>
+					Link
+				</Link>
 			</Example.Item>
 			<Example.Item title="color: positive">
-				<Link color="positive">Link</Link>
+				<Link color="positive" onClick={() => {}}>
+					Link
+				</Link>
 			</Example.Item>
 			<Example.Item title="color: warning">
-				<Link color="warning">Link</Link>
+				<Link color="warning" onClick={() => {}}>
+					Link
+				</Link>
 			</Example.Item>
 			<Example.Item title="color: inherit">
-				<Link color="inherit">Link</Link>
+				<Link color="inherit" onClick={() => {}}>
+					Link
+				</Link>
 			</Example.Item>
 		</Example>
 	),
@@ -62,10 +72,12 @@ export const icon = {
 	render: () => (
 		<Example>
 			<Example.Item title="icon, variant: underline">
-				<Link icon={IconZap}>Link</Link>
+				<Link icon={IconZap} onClick={() => {}}>
+					Link
+				</Link>
 			</Example.Item>
 			<Example.Item title="icon, variant: plain">
-				<Link icon={IconZap} variant="plain">
+				<Link icon={IconZap} variant="plain" onClick={() => {}}>
 					Link
 				</Link>
 			</Example.Item>
@@ -73,7 +85,7 @@ export const icon = {
 				title={["icon, variant: underline", "should inherit display-1 size from the parent"]}
 			>
 				<Text variant="title-3">
-					<Link icon={IconZap} variant="underline">
+					<Link icon={IconZap} variant="underline" onClick={() => {}}>
 						Instant delivery
 					</Link>
 				</Text>

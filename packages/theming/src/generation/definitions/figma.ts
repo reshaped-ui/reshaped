@@ -189,7 +189,7 @@ const theme: Partial<ThemeDefinition> = {
 				},
 				{
 					offsetX: 0,
-					offsetY: 6,
+					offsetY: 0,
 					blurRadius: 0,
 					spreadRadius: 1,
 					colorToken: "black",
@@ -216,7 +216,7 @@ const theme: Partial<ThemeDefinition> = {
 					},
 					{
 						offsetX: 0,
-						offsetY: 6,
+						offsetY: 0,
 						blurRadius: 0,
 						spreadRadius: 1,
 						colorToken: "white",

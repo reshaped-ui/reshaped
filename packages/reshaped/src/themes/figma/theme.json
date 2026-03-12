@@ -530,10 +530,10 @@
     "x10": {
       "px": 40
     },
-    "x0_5": {
+    "x0-5": {
       "px": 2
     },
-    "x1_5": {
+    "x1-5": {
       "px": 6
     }
   },
@@ -603,7 +603,7 @@
         },
         {
           "offsetX": 0,
-          "offsetY": 6,
+          "offsetY": 0,
           "blurRadius": 0,
           "spreadRadius": 1,
           "colorToken": "black",
@@ -630,7 +630,7 @@
           },
           {
             "offsetX": 0,
-            "offsetY": 6,
+            "offsetY": 0,
             "blurRadius": 0,
             "spreadRadius": 1,
             "colorToken": "white",

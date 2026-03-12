@@ -19,20 +19,19 @@ const Alert: React.FC<T.Props> = (props) => {
 		className,
 		attributes,
 	} = props;
-	const isNeutral = color === "neutral";
 
 	const renderContent = () => {
 		if (inline) {
 			return (
 				<>
 					{title && (
-						<Text variant="body-3" weight="medium" as="span">
+						<Text variant="body-2" weight="medium" as="span">
 							{title}
 						</Text>
 					)}
 					{title && children && " "}
 					{children && (
-						<Text variant="body-3" as="span">
+						<Text variant="body-2" as="span">
 							{children}
 						</Text>
 					)}
@@ -43,11 +42,11 @@ const Alert: React.FC<T.Props> = (props) => {
 		return (
 			<View gap={1} grow>
 				{title && (
-					<Text variant="body-3" weight="medium">
+					<Text variant="body-2" weight="medium">
 						{title}
 					</Text>
 				)}
-				{children && <Text variant="body-3">{children}</Text>}
+				{children && <Text variant="body-2">{children}</Text>}
 			</View>
 		);
 	};
@@ -59,7 +58,7 @@ const Alert: React.FC<T.Props> = (props) => {
 			<View gap={inline ? 4 : 2} direction={inline ? "row" : "column"}>
 				{inline ? <View.Item grow>{content}</View.Item> : content}
 				{actionsSlot && (
-					<Text variant="body-3" weight="medium">
+					<Text variant="body-2" weight="medium">
 						<View direction="row" gap={3}>
 							{actionsSlot}
 						</View>
@@ -87,7 +86,7 @@ const Alert: React.FC<T.Props> = (props) => {
 			{icon ? (
 				<>
 					<div className={s.icon}>
-						<Icon svg={icon} size={5} color={isNeutral ? "primary" : color} />
+						<Icon svg={icon} size={4} color={color} />
 					</div>
 					<View.Item grow>{applyActions(renderContent())}</View.Item>
 				</>

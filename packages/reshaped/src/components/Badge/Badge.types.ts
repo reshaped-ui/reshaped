@@ -32,7 +32,7 @@ type WithChildren = BaseProps & {
 	/** Component render variant
 	 * @default "solid"
 	 */
-	variant?: "solid" | "faded" | "outline";
+	variant?: "solid" | "faded";
 };
 
 type WithEmpty = BaseProps & {

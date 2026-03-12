@@ -89,8 +89,8 @@
 --rs-unit-x8: 32px;
 --rs-unit-x9: 36px;
 --rs-unit-x10: 40px;
---rs-unit-x0_5: 2px;
---rs-unit-x1_5: 6px;
+--rs-unit-x0-5: 2px;
+--rs-unit-x1-5: 6px;
 --rs-radius-small: 4px;
 --rs-radius-medium: 6px;
 --rs-radius-large: 12px;
@@ -175,7 +175,7 @@
 --rs-color-rgb-background-elevation-overlay: 255, 255, 255;
 --rs-color-rgb-background-page: 255, 255, 255;
 --rs-color-rgb-background-page-faded: 250.002, 250.002, 250.002;
---rs-shadow-border: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.05), 0px 6px 0px 1px rgba(0, 0, 0, 0.1);
+--rs-shadow-border: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.05), 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
 --rs-shadow-border-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
 --rs-shadow-border-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
 --rs-shadow-border-faded: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.05), 0px 6px 0px 1px rgba(0, 0, 0, 0.08);
@@ -247,7 +247,7 @@
 --rs-color-rgb-background-elevation-overlay: 43.9875, 43.9875, 43.9875;
 --rs-color-rgb-background-page: 43.9875, 43.9875, 43.9875;
 --rs-color-rgb-background-page-faded: 29.988, 29.988, 29.988;
---rs-shadow-border: 0px -1px 2px -0.5px rgba(1, 1, 1, 0.06), 0px -1px 3px -1px rgba(1, 1, 1, 0.05), 0px 6px 0px 1px rgba(1, 1, 1, 0.1);
+--rs-shadow-border: 0px -1px 2px -0.5px rgba(1, 1, 1, 0.06), 0px -1px 3px -1px rgba(1, 1, 1, 0.05), 0px 0px 0px 1px rgba(1, 1, 1, 0.1);
 --rs-shadow-border-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px -2px 2px -1px rgba(1, 1, 1, 0.1), 0px 0px 0px 1px rgba(1, 1, 1, 0.1);
 --rs-shadow-border-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(1, 1, 1, 0.1);
 --rs-shadow-border-faded: 0px -1px 2px -0.5px rgba(1, 1, 1, 0.06), 0px -1px 3px -1px rgba(1, 1, 1, 0.05), 0px 6px 0px 1px rgba(1, 1, 1, 0.08);

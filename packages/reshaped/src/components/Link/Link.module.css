@@ -57,5 +57,5 @@
 .root.--with-icon {
 	display: inline-flex;
 	align-items: center;
-	gap: calc(1em / 3.5);
+	gap: round(down, calc(1em / 2), var(--rs-unit-x0-5));
 }
