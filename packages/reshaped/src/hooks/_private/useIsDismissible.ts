@@ -42,7 +42,13 @@ const useIsDismissible = (args: {
 		if (!active) return;
 
 		addToQueue(id, contentRef, triggerRef);
-		return () => removeFromQueue(id);
+		// Defer removal so the queue stays intact during the same event tick.
+		// Without this, a child overlay closing synchronously removes itself before
+		// a parent overlay's useOnClickOutside handler checks isDismissible(),
+		// causing both to close instead of just the child.
+		return () => {
+			setTimeout(() => removeFromQueue(id), 0);
+		};
 	}, [active, id, contentRef, triggerRef]);
 
 	return React.useCallback(() => {
