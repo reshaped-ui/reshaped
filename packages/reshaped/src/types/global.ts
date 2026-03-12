@@ -1,7 +1,12 @@
 import React from "react";
 
 export type Viewport = "s" | "m" | "l" | "xl";
-export type ResponsiveOnly<T> = { [key in Viewport]?: T };
+
+// if ResponsiveOnly<T> is { [key in Viewport]?: T } without the intersection and T is an object such as ButtonProps,
+// Responsive<T> would allow mixing keys of T with viewport keys without any type error
+export type ResponsiveOnly<T> = { [key in Viewport]?: T } & (T extends object
+	? { [K in Exclude<keyof T & string, Viewport>]?: never }
+	: Record<never, never>);
 export type Responsive<T> = T | ResponsiveOnly<T>;
 
 /**
