@@ -20,14 +20,6 @@ import inset, {
 	insetTop,
 } from "@/styles/resolvers/inset";
 import justify from "@/styles/resolvers/justify";
-import margin, {
-	marginBlock,
-	marginBottom,
-	marginEnd,
-	marginInline,
-	marginStart,
-	marginTop,
-} from "@/styles/resolvers/margin";
 import maxHeight from "@/styles/resolvers/maxHeight";
 import maxWidth from "@/styles/resolvers/maxWidth";
 import minHeight from "@/styles/resolvers/minHeight";
@@ -68,13 +60,6 @@ const mixinMap = {
 	paddingEnd,
 	paddingInline,
 	paddingBlock,
-	margin,
-	marginTop,
-	marginBottom,
-	marginStart,
-	marginEnd,
-	marginInline,
-	marginBlock,
 	inset,
 	insetTop,
 	insetBottom,
