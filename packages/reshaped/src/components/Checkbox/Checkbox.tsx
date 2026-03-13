@@ -85,9 +85,9 @@ const Checkbox: React.FC<T.Props> = (props) => {
 				<Text
 					as="span"
 					variant={responsivePropDependency(size, (size) => {
-						if (size === "large") return "body-2";
+						if (size === "large") return "body-1";
 						if (size === "small") return "caption-1";
-						return "body-3";
+						return "body-2";
 					})}
 				>
 					{children}

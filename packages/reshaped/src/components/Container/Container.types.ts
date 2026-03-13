@@ -8,10 +8,6 @@ export type Props = Pick<ViewProps, "align" | "justify" | "height" | "maxHeight"
 	padding?: ViewProps["padding"];
 	/** Component width, literal css value or unit token multiplier */
 	width?: G.Responsive<string | number>;
-	/** Component height, literal css value or unit token multiplier */
-	height?: G.Responsive<string | number>;
-	/** Component max height, literal css value or unit token multiplier */
-	maxHeight?: G.Responsive<string | number>;
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Additional classname for the root element */

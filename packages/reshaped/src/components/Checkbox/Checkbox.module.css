@@ -58,16 +58,16 @@ since it reset the border width/color without using @layer
 @responsive .--size {
 	@value small {
 		--rs-checkbox-line-height: var(--rs-line-height-caption-1);
-		--rs-checkbox-gap: var(--rs-unit-x1);
+		--rs-checkbox-gap: var(--rs-unit-x1-5);
 	}
 
 	@value medium {
-		--rs-checkbox-line-height: var(--rs-line-height-body-3);
+		--rs-checkbox-line-height: var(--rs-line-height-body-2);
 		--rs-checkbox-gap: var(--rs-unit-x2);
 	}
 
 	@value large {
-		--rs-checkbox-line-height: var(--rs-line-height-body-2);
+		--rs-checkbox-line-height: var(--rs-line-height-body-1);
 		--rs-checkbox-gap: var(--rs-unit-x2);
 	}
 }
@@ -82,8 +82,9 @@ since it reset the border width/color without using @layer
 	transition-property: opacity, transform;
 }
 
-[data-rs-keyboard] .input:focus-visible + .decorator {
-	box-shadow: var(--rs-shadow-focus);
+[data-rs-keyboard] .input:focus + .decorator {
+	border-color: var(--rs-color-border-primary);
+	border-width: 1.5px;
 }
 
 /* } */
@@ -91,6 +92,7 @@ since it reset the border width/color without using @layer
 /* @layer rs.checkbox.error { */
 .root.--error .decorator {
 	border-color: var(--rs-color-border-critical);
+	border-width: 1.5px;
 }
 
 /* } */
