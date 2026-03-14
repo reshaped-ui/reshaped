@@ -27,6 +27,13 @@ export type Justify = "start" | "center" | "end" | "space-between";
 export type Align = "start" | "center" | "end" | "stretch" | "baseline";
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
+export type Shadow =
+	| "base"
+	| "baseIntense"
+	| "raised"
+	| "raisedIntense"
+	| "overlay"
+	| "overlayIntense";
 
 export type Border = boolean;
 export type BorderColor =
@@ -70,6 +77,8 @@ export type Mixin = {
 	borderEnd?: G.Responsive<Border>;
 	borderInline?: G.Responsive<Border>;
 	borderBlock?: G.Responsive<Border>;
+
+	shadow?: Shadow;
 
 	width?: G.Responsive<Width>;
 	height?: G.Responsive<Height>;

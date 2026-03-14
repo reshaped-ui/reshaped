@@ -1,7 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
-import React from "react";
+import { useState } from "react";
 import { expect, fn, userEvent } from "storybook/test";
 
+import Button from "@/components/Button";
 import Card from "@/components/Card";
 import { Example, Placeholder } from "@/utilities/storybook";
 
@@ -48,23 +49,32 @@ export const padding = {
 
 export const selected = {
 	name: "selected",
-	render: () => (
-		<Example>
-			<Example.Item title="selected">
-				<Card selected>
-					<Placeholder />
-				</Card>
-			</Example.Item>
-		</Example>
-	),
+	render: () => {
+		const [selected, setSelected] = useState(true);
+
+		return (
+			<Example title={<Button onClick={() => setSelected(!selected)}>Toggle selecion</Button>}>
+				<Example.Item title="selected">
+					<Card selected={selected}>
+						<Placeholder />
+					</Card>
+				</Example.Item>
+			</Example>
+		);
+	},
 };
 
 export const elevated = {
-	name: "elevated",
+	name: "elevation",
 	render: () => (
 		<Example>
-			<Example.Item title="elevated">
-				<Card elevated>
+			<Example.Item title="elevation: raised">
+				<Card elevation="raised">
+					<Placeholder />
+				</Card>
+			</Example.Item>
+			<Example.Item title="elevation: overlay">
+				<Card elevation="overlay">
 					<Placeholder />
 				</Card>
 			</Example.Item>

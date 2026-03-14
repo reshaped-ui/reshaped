@@ -34,6 +34,7 @@ import padding, {
 } from "@/styles/resolvers/padding";
 import position from "@/styles/resolvers/position";
 import radius from "@/styles/resolvers/radius";
+import shadow from "@/styles/resolvers/shadow";
 import textAlign from "@/styles/resolvers/textAlign";
 import width from "@/styles/resolvers/width";
 
@@ -76,6 +77,7 @@ const mixinMap = {
 	radius,
 	textAlign,
 	width,
+	shadow,
 };
 
 export const resolveMixin = (mixin: Mixin) => {

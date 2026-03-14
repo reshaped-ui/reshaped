@@ -13,7 +13,7 @@ const transformShadowParts = (
 			const spread = ` ${value.spreadRadius || 0}px`;
 			const colorRef = theme.color[value.colorToken];
 			const rgb = oklchToRgb(hexToOklch(colorRef?.hex || "#000000"));
-			const rgbString = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+			const rgbString = `${rgb.r * 255}, ${rgb.g * 255}, ${rgb.b * 255}`;
 			const color = `rgba(${rgbString}, ${value.opacity || 1})`;
 
 			return `${value.offsetX}px ${value.offsetY}px${blur}${spread} ${color}`;

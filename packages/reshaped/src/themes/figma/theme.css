@@ -101,8 +101,8 @@
 --rs-easing-standard: cubic-bezier(0.2, 0, 0, 1);
 --rs-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 --rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
---rs-shadow-raised: 0px 10px 12px -4px rgba(0, 0, 0, 0.08), 0px 2px 4px 0px rgba(0, 0, 0, 0.1), 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
---rs-shadow-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.1), 0px 16px 24px -6px rgba(0, 0, 0, 0.1), 0px 8px 12px -4px rgba(0, 0, 0, 0.1);
+--rs-shadow-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06);
+--rs-shadow-overlay-intense: 0px 32px 48px -8px rgba(0, 0, 0, 0.08), 0px 16px 24px -6px rgba(0, 0, 0, 0.08), 0px 8px 12px -4px rgba(0, 0, 0, 0.08);
 --rs-viewport-m-min: 660;
 --rs-viewport-l-min: 900;
 --rs-viewport-xl-min: 1280;
@@ -175,12 +175,10 @@
 --rs-color-rgb-background-elevation-overlay: 255, 255, 255;
 --rs-color-rgb-background-page: 255, 255, 255;
 --rs-color-rgb-background-page-faded: 250.002, 250.002, 250.002;
---rs-shadow-border: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.05), 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
---rs-shadow-border-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
---rs-shadow-border-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
---rs-shadow-border-faded: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.05), 0px 6px 0px 1px rgba(0, 0, 0, 0.08);
---rs-shadow-border-faded-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
---rs-shadow-border-faded-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+--rs-shadow-base: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.06);
+--rs-shadow-base-intense: 0px 1px 2px 0px rgba(0, 0, 0, 0.08), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+--rs-shadow-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+--rs-shadow-raised-intense: 0px 12px 12px -4px rgba(0, 0, 0, 0.1), 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
 			}
 		
 			[data-rs-theme~="figma"][data-rs-color-mode="dark"] {
@@ -247,11 +245,9 @@
 --rs-color-rgb-background-elevation-overlay: 43.9875, 43.9875, 43.9875;
 --rs-color-rgb-background-page: 43.9875, 43.9875, 43.9875;
 --rs-color-rgb-background-page-faded: 29.988, 29.988, 29.988;
---rs-shadow-border: 0px -1px 2px -0.5px rgba(1, 1, 1, 0.06), 0px -1px 3px -1px rgba(1, 1, 1, 0.05), 0px 0px 0px 1px rgba(1, 1, 1, 0.1);
---rs-shadow-border-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px -2px 2px -1px rgba(1, 1, 1, 0.1), 0px 0px 0px 1px rgba(1, 1, 1, 0.1);
---rs-shadow-border-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(1, 1, 1, 0.1);
---rs-shadow-border-faded: 0px -1px 2px -0.5px rgba(1, 1, 1, 0.06), 0px -1px 3px -1px rgba(1, 1, 1, 0.05), 0px 6px 0px 1px rgba(1, 1, 1, 0.08);
---rs-shadow-border-faded-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px -2px 2px -1px rgba(1, 1, 1, 0.1), 0px 0px 0px 1px rgba(1, 1, 1, 0.08);
---rs-shadow-border-faded-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(1, 1, 1, 0.08);
+--rs-shadow-base: 0px -1px 2px -0.5px rgba(255, 255, 255, 0.06), 0px -1px 3px -1px rgba(255, 255, 255, 0.05);
+--rs-shadow-base-intense: 0px -1px 2px 0px rgba(255, 255, 255, 0.08), 0px -1px 3px 0px rgba(255, 255, 255, 0.08);
+--rs-shadow-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px -2px 2px -1px rgba(255, 255, 255, 0.1);
+--rs-shadow-raised-intense: 0px 12px 12px -4px rgba(0, 0, 0, 0.1), 0px -2px 2px 0px rgba(255, 255, 255, 0.1);
 			}
 		

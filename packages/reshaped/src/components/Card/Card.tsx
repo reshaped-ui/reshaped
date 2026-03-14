@@ -16,10 +16,10 @@ export type Component = {
 };
 
 const Card: Component = forwardRef((props, ref) => {
-	const { padding = 4 } = props;
 	const {
+		padding = 4,
 		selected,
-		elevated,
+		elevation = "base",
 		bleed,
 		height,
 		onClick,
@@ -35,6 +35,11 @@ const Card: Component = forwardRef((props, ref) => {
 	const mixinStyles = resolveMixin({
 		radius: "medium",
 		bleed,
+		borderColor: "neutral-faded",
+		border: true,
+		shadow: elevation,
+	});
+	const contentMixinStyles = resolveMixin({
 		height,
 		padding,
 	});
@@ -43,7 +48,7 @@ const Card: Component = forwardRef((props, ref) => {
 		s.root,
 		mixinStyles.classNames,
 		isActionable && s["--actionable"],
-		elevated && s["--elevated"],
+		elevation && s[`--elevation-${elevation}`],
 		selected && s["--selected"],
 		className
 	);
@@ -52,6 +57,15 @@ const Card: Component = forwardRef((props, ref) => {
 		...attributes?.style,
 		...mixinStyles.variables,
 	};
+
+	const contentNode = (
+		<div
+			className={classNames(s.content, contentMixinStyles.classNames)}
+			style={contentMixinStyles.variables}
+		>
+			{children}
+		</div>
+	);
 
 	if (isActionable) {
 		return (
@@ -64,7 +78,7 @@ const Card: Component = forwardRef((props, ref) => {
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				ref={ref as any}
 			>
-				{children}
+				{contentNode}
 			</Actionable>
 		);
 	}
@@ -78,7 +92,7 @@ const Card: Component = forwardRef((props, ref) => {
 			className={rootClassNames}
 			style={style}
 		>
-			{children}
+			{contentNode}
 		</TagName>
 	);
 });

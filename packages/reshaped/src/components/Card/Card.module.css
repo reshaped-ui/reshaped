@@ -1,50 +1,43 @@
 .root {
-	--rs-border-w: 1px;
-
-	border: var(--rs-border-w) solid var(--rs-color-border-neutral-faded);
 	background: var(--rs-color-background-elevation-base);
 	color: var(--rs-color-foreground-neutral);
 	display: block;
 	position: relative;
-	overflow: hidden;
 	text-align: initial;
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
-	transition-property: box-shadow, border-color;
+	transition-property: box-shadow;
+}
+
+.content {
+	overflow: hidden;
 }
 
 .--selected {
-	border-color: transparent;
-	box-shadow: 0 0 0 2px var(--rs-color-border-primary);
+	box-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-primary) inset;
 	transition-timing-function: var(--rs-easing-decelerate);
 }
 
-.--elevated {
+.--elevation-raised {
 	background: var(--rs-color-background-elevation-raised);
-	box-shadow: var(--rs-shadow-raised);
+}
+
+.--elevation-overlay {
+	background: var(--rs-color-background-elevation-overlay);
 }
 
 .--actionable:not(.--selected) {
-	cursor: pointer;
-	outline: none;
-	text-decoration: none;
-	color: inherit;
-
-	[data-rs-keyboard] &:focus {
-		box-shadow: var(--rs-shadow-focus);
-	}
-
-	&::before {
+	& .content::before {
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: rgba(var(--rs-color-rgb-background-neutral-faded), 32%);
+		background: var(--rs-color-background-neutral-faded);
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		&:hover::before {
+		&:hover .content::before {
 			opacity: 1;
 		}
 	}

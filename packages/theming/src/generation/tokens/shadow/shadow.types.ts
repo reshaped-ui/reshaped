@@ -1,14 +1,12 @@
 import type * as TColor from "../color/color.types";
 
 export type Name =
+	| "base"
 	| "raised"
 	| "overlay"
-	| "border"
-	| "borderRaised"
-	| "borderOverlay"
-	| "borderFaded"
-	| "borderFadedRaised"
-	| "borderFadedOverlay";
+	| "baseIntense"
+	| "raisedIntense"
+	| "overlayIntense";
 
 type Part = {
 	offsetX: number;
