@@ -90,8 +90,8 @@ const generateColorValues = (
 				c: bgDark.c / 9.8,
 			};
 
-	const bgHighlightedFaded = neutral ? { ...bg, alpha: 0.4 } : { ...bg, alpha: 0.06 };
-	const bgHighlightedFadedDark = neutral ? { ...bgDark, alpha: 0.48 } : { ...bgDark, alpha: 0.06 };
+	const bgHighlightedFaded = neutral ? { ...bg, alpha: 0.48 } : { ...bg, alpha: 0.06 };
+	const bgHighlightedFadedDark = neutral ? { ...bgDark, alpha: 0.28 } : { ...bgDark, alpha: 0.08 };
 
 	const fg = neutral ? { ...bg, l: 0.24 } : { ...bg, l: 0.52 };
 	const fgDark = neutral ? { ...bgDark, l: 0.96 } : { ...bgDark, l: 0.75, c: bg.c * 0.85 };

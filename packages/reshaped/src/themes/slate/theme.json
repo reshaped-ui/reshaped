@@ -45,10 +45,10 @@
         "c": 0.192,
         "h": 262.67,
         "mode": "oklch",
-        "alpha": 0.06
+        "alpha": 0.08
       },
       "hex": "#1860fa0f",
-      "hexDark": "#2f68df0f"
+      "hexDark": "#2f68df14"
     },
     "borderPrimary": {
       "oklch": {
@@ -143,10 +143,10 @@
         "c": 0.164,
         "h": 20.28,
         "mode": "oklch",
-        "alpha": 0.06
+        "alpha": 0.08
       },
       "hex": "#dc32460f",
-      "hexDark": "#ca49510f"
+      "hexDark": "#ca495114"
     },
     "borderCritical": {
       "oklch": {
@@ -241,10 +241,10 @@
         "c": 0.17600000000000002,
         "h": 80,
         "mode": "oklch",
-        "alpha": 0.06
+        "alpha": 0.08
       },
       "hex": "#ffae000f",
-      "hexDark": "#fcb2000f"
+      "hexDark": "#fcb20014"
     },
     "borderWarning": {
       "oklch": {
@@ -339,10 +339,10 @@
         "c": 0.10400000000000001,
         "h": 151.8,
         "mode": "oklch",
-        "alpha": 0.06
+        "alpha": 0.08
       },
       "hex": "#2386490f",
-      "hexDark": "#357c4c0f"
+      "hexDark": "#357c4c14"
     },
     "borderPositive": {
       "oklch": {
@@ -432,17 +432,17 @@
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.4
+        "alpha": 0.48
       },
       "oklchDark": {
         "l": 0.32,
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.48
+        "alpha": 0.28
       },
-      "hex": "#ebebeb66",
-      "hexDark": "#3333337a"
+      "hex": "#ebebeb7a",
+      "hexDark": "#33333347"
     },
     "borderNeutral": {
       "oklch": {
@@ -1061,7 +1061,7 @@
       "px": 6
     },
     "large": {
-      "px": 12
+      "px": 10
     }
   },
   "duration": {

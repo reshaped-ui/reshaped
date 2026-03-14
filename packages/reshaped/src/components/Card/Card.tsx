@@ -38,7 +38,7 @@ const Card: Component = forwardRef((props, ref) => {
 	} = props;
 	const isActionable = !!href || !!onClick;
 	const mixinStyles = resolveMixin({
-		radius: "medium",
+		radius: "large",
 		bleed,
 		borderColor: "neutral-faded",
 		border: true,

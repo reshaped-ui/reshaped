@@ -79,7 +79,7 @@ button.root,
 
 .root.--disabled,
 .root[disabled] {
-	cursor: not-allowed;
+	cursor: default;
 
 	&:active {
 		transform: none;

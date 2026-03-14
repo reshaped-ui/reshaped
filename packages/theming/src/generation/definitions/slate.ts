@@ -108,7 +108,7 @@ const theme: ThemeDefinition = {
 	radius: {
 		small: { px: 4 },
 		medium: { px: 6 },
-		large: { px: 12 },
+		large: { px: 10 },
 	},
 
 	duration: {
