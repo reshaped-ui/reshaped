@@ -8,9 +8,6 @@
 	transition-property: box-shadow;
 }
 
-.content {
-	overflow: hidden;
-}
 
 .--selected {
 	box-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-primary) inset;

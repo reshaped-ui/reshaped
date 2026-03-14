@@ -100,12 +100,19 @@ export const bleed = {
 	),
 };
 
-export const height = {
-	name: "height",
+export const layout = {
+	name: "height, direction, gap, align, justify",
 	render: () => (
 		<Example>
 			<Example.Item title="height: 200px">
 				<Card height="200px" />
+			</Example.Item>
+
+			<Example.Item title="direction: row, gap: 4, align: center, justify: space-between">
+				<Card direction="row" gap={4} align="center" justify="space-between">
+					<Placeholder />
+					<Placeholder h={100} />
+				</Card>
 			</Example.Item>
 		</Example>
 	),

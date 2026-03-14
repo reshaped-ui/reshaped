@@ -2,6 +2,7 @@ import { classNames } from "@reshaped/headless";
 import React, { forwardRef } from "react";
 
 import Actionable from "@/components/Actionable";
+import View from "@/components/View";
 import { resolveMixin } from "@/styles/mixin";
 
 import s from "./Card.module.css";
@@ -22,6 +23,10 @@ const Card: Component = forwardRef((props, ref) => {
 		elevation = "base",
 		bleed,
 		height,
+		direction,
+		gap,
+		align,
+		justify,
 		onClick,
 		href,
 		children,
@@ -39,10 +44,6 @@ const Card: Component = forwardRef((props, ref) => {
 		border: true,
 		shadow: elevation,
 	});
-	const contentMixinStyles = resolveMixin({
-		height,
-		padding,
-	});
 
 	const rootClassNames = classNames(
 		s.root,
@@ -59,12 +60,17 @@ const Card: Component = forwardRef((props, ref) => {
 	};
 
 	const contentNode = (
-		<div
-			className={classNames(s.content, contentMixinStyles.classNames)}
-			style={contentMixinStyles.variables}
+		<View
+			className={s.content}
+			height={height}
+			padding={padding}
+			direction={direction}
+			gap={gap}
+			align={align}
+			justify={justify}
 		>
 			{children}
-		</div>
+		</View>
 	);
 
 	if (isActionable) {

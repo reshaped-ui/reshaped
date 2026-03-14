@@ -1,15 +1,13 @@
 import type { ActionableProps } from "@/components/Actionable";
 import type { ViewProps } from "@/components/View";
 import type * as TStyles from "@/styles/types";
-import type * as G from "@/types/global";
 import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
 
-export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
-	/** Component padding, base unit multiplier */
-	padding?: G.Responsive<number>;
-	/** Remove side borders and apply negative margins, base unit multiplier */
-	bleed?: G.Responsive<number>;
+export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = Pick<
+	ViewProps,
+	"padding" | "bleed" | "height" | "direction" | "gap" | "align" | "justify"
+> & {
 	/** Highlight the component when component is used for an active state */
 	selected?: boolean;
 	/** Apply elevated styles to the component */
@@ -31,4 +29,4 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	as?: TagName extends keyof React.JSX.IntrinsicElements
 		? TagName
 		: keyof React.JSX.IntrinsicElements;
-} & Pick<ViewProps, "height">;
+};

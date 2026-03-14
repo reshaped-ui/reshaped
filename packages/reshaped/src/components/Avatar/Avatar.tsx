@@ -64,6 +64,7 @@ const Avatar: React.FC<T.Props> = (props) => {
 			borderRadius={radius}
 			attributes={{ ...attributes, style: { ...mixinStyles?.variables } }}
 			backgroundColor={variant === "faded" ? `${color}-${variant}` : color}
+			borderColor={variant === "faded" ? `${color}-faded` : undefined}
 			className={rootClassNames}
 		>
 			{icon ? (
