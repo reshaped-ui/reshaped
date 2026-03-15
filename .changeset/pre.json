@@ -1,0 +1,13 @@
+{
+  "mode": "exit",
+  "tag": "canary",
+  "initialVersions": {
+    "@reshaped/headless": "3.10.2",
+    "reshaped": "3.10.2",
+    "@reshaped/utilities": "3.10.2"
+  },
+  "changesets": [
+    "quick-dingos-stand",
+    "some-planes-kick"
+  ]
+}
