@@ -8,6 +8,7 @@
   },
   "changesets": [
     "quick-dingos-stand",
+    "sixty-queens-do",
     "some-planes-kick"
   ]
 }

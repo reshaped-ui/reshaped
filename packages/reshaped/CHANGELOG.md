@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.11.0-canary.1
+
+### Patch Changes
+
+- [`dc6ba78`](https://github.com/reshaped-ui/reshaped/commit/dc6ba78fd02526d83b995b55d7478c21a4ff08c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useElementId: exported from headless
+
+- Updated dependencies []:
+  - @reshaped/headless@3.11.0-canary.1
+
 ## 3.11.0-canary.0
 
 ### Minor Changes
