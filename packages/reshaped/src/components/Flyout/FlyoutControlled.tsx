@@ -6,6 +6,8 @@ import {
 	useIsomorphicLayoutEffect,
 	useHandlerRef,
 	useOnClickOutside,
+	useIsDismissible,
+	useElementId,
 } from "@reshaped/headless";
 import {
 	checkKeyboardMode,
@@ -14,9 +16,7 @@ import {
 } from "@reshaped/headless/internal";
 import React from "react";
 
-import useIsDismissible from "@/hooks/_private/useIsDismissible";
 import usePrevious from "@/hooks/_private/usePrevious";
-import useElementId from "@/hooks/useElementId";
 import { checkTransitions } from "@/utilities/animation";
 
 import * as timeouts from "./Flyout.constants";

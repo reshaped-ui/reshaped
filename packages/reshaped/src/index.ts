@@ -214,6 +214,7 @@ export {
 	useOnClickOutside,
 	useScrollLock,
 	useToggle,
+	useIsDismissible,
 } from "@reshaped/headless";
 
 export { useFormControl } from "@/components/FormControl";
