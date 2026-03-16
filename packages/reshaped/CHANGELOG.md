@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.11.0-canary.3
+
+### Patch Changes
+
+- [`a904f6a`](https://github.com/reshaped-ui/reshaped/commit/a904f6a14d1fcaec645cd65ae625bbf1f3e8c5c7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Canary release
+
+- Updated dependencies []:
+  - @reshaped/headless@3.11.0-canary.3
+
 ## 3.11.0-canary.2
 
 ### Minor Changes
