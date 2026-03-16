@@ -15,7 +15,7 @@ const FormControlLabel: React.FC<T.LabelProps> = (props) => {
 
 	return (
 		<Text
-			variant={size === "large" ? "body-2" : "body-3"}
+			variant={size === "large" ? "body-1" : "body-2"}
 			weight="medium"
 			className={s.label}
 			color={disabled ? "disabled" : undefined}

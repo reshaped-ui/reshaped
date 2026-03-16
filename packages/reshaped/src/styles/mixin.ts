@@ -87,7 +87,9 @@ export const resolveMixin = (mixin: Mixin) => {
 	};
 	const entries = Object.entries(mixin);
 	entries.forEach(([key, value]) => {
+		if (value === undefined) return;
 		const mixin = mixinMap[key as keyof typeof mixinMap];
+		console.log(mixinMap, key);
 
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore - too complex to resolve inference without manual typing every method

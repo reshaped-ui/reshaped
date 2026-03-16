@@ -1,15 +1,16 @@
 "use client";
 
-import { useElementId } from "@reshaped/headless";
+import { classNames, useElementId } from "@reshaped/headless";
 import React from "react";
 
 import { Provider } from "./FormControl.context";
+import s from "./FormControl.module.css";
 import { getCaptionId } from "./FormControl.utilities";
 
 import type * as T from "./FormControl.types";
 
 const FormControl: React.FC<T.Props> = (props) => {
-	const { children, id: passedId, required, hasError, group, disabled, size } = props;
+	const { children, id: passedId, required, hasError, group, disabled, size, gap } = props;
 	const id = useElementId(passedId);
 	const WrapperTagName = group ? "fieldset" : "div";
 	const [helperRendered, setHelperRendered] = React.useState(false);
@@ -31,7 +32,10 @@ const FormControl: React.FC<T.Props> = (props) => {
 	};
 
 	return (
-		<WrapperTagName>
+		<WrapperTagName
+			className={classNames(s.root, size && s["--size-large"])}
+			style={{ "--rs-form-control-gap": gap } as React.CSSProperties}
+		>
 			<Provider
 				value={{ required, hasError, errorRef, helperRef, attributes, group, disabled, size }}
 			>

@@ -28,7 +28,7 @@ const Demo = () => {
 		<View gap={2}>
 			<FileUpload name="file" onChange={(args) => setFiles((prev) => [...prev, ...args.value])}>
 				<View gap={3}>
-					<Icon svg={IconMic} size={8} />
+					<Icon svg={IconMic} size={5} />
 					Drop files to attach
 				</View>
 			</FileUpload>

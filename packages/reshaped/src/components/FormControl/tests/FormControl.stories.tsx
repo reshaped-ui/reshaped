@@ -153,9 +153,9 @@ export const className: StoryObj = {
 };
 
 export const group: StoryObj = {
-	name: "group",
+	name: "group, gap",
 	render: () => (
-		<FormControl group>
+		<FormControl group gap={2}>
 			<FormControl.Label>Label</FormControl.Label>
 			<RadioGroup name="name">
 				<View gap={2}>

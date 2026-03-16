@@ -18,7 +18,7 @@ const FormControlCaption: React.FC<T.PrivateCaptionProps> = (props) => {
 	return (
 		<Text
 			as="span"
-			variant={size === "large" ? "body-3" : "caption-1"}
+			variant={size === "large" ? "body-2" : "caption-1"}
 			color={disabled && !variant ? "disabled" : color}
 			attributes={{ id, role: color ? "alert" : undefined, "aria-disabled": disabled, ref }}
 			className={s.caption}
