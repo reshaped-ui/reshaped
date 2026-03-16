@@ -45,6 +45,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 		renderMonthAriaLabel,
 		renderDateAriaLabel,
 		renderDateSlot,
+		renderDateValue,
 	} = props;
 
 	const [selectionMode, setSelectionMode] = React.useState<T.SelectionMode>("date");
@@ -197,6 +198,7 @@ const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) =>
 									renderWeekDay={renderWeekDay}
 									renderDateAriaLabel={renderDateAriaLabel}
 									renderDateSlot={renderDateSlot}
+									renderDateValue={renderDateValue}
 								/>
 							</View.Item>
 						);

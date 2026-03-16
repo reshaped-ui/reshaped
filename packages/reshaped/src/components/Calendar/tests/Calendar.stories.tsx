@@ -265,8 +265,8 @@ export const monthsToRender: StoryObj = {
 	),
 };
 
-export const renderDateSlot: StoryObj = {
-	name: "renderDateSlot",
+export const renderDate: StoryObj = {
+	name: "renderDateSlot, renderDateValue",
 	render: () => (
 		<Example>
 			<Example.Item title="renderDateSlot">
@@ -287,6 +287,23 @@ export const renderDateSlot: StoryObj = {
 							>
 								{args.date.getDate() < 15 ? "$150" : "$200"}
 							</Text>
+						);
+					}}
+				/>
+			</Example.Item>
+			<Example.Item title="renderDateValue">
+				<Calendar
+					defaultMonth={new Date(2020, 0)}
+					defaultValue={new Date(2020, 0, 10)}
+					renderDateValue={({ date }) => {
+						const label = date.getDate();
+
+						return date.getDate() === 3 ? (
+							<Text color="primary" weight="bold">
+								{label}
+							</Text>
+						) : (
+							label
 						);
 					}}
 				/>
