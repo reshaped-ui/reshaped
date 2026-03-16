@@ -157,6 +157,7 @@ export {
 	useRTL,
 	useScrollLock,
 	useToggle,
+	useIsDismissible,
 } from "@reshaped/headless";
 
 /**

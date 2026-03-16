@@ -1,10 +1,9 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
+import { classNames, useElementId } from "@reshaped/headless";
 import React from "react";
 
 import { useFormControl } from "@/components/FormControl";
-import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames } from "@/utilities/props";
 
 import s from "./Select.module.css";

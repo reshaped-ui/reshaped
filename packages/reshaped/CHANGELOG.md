@@ -1,5 +1,27 @@
 # reshaped
 
+## 3.11.0-canary.1
+
+### Patch Changes
+
+- [`dc6ba78`](https://github.com/reshaped-ui/reshaped/commit/dc6ba78fd02526d83b995b55d7478c21a4ff08c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useElementId: exported from headless
+
+- Updated dependencies []:
+  - @reshaped/headless@3.11.0-canary.1
+
+## 3.11.0-canary.0
+
+### Minor Changes
+
+- [`7afb98c`](https://github.com/reshaped-ui/reshaped/commit/7afb98c3e146918fc50cd6ddd02d9229f1d74e97) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useIsDismissible: exported hook for advanced use cases
+
+### Patch Changes
+
+- [`e1a857d`](https://github.com/reshaped-ui/reshaped/commit/e1a857df0388529ddd1f4e241d4e3b28e858e499) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Updated text color to use on-background for neutral badges
+
+- Updated dependencies [[`7afb98c`](https://github.com/reshaped-ui/reshaped/commit/7afb98c3e146918fc50cd6ddd02d9229f1d74e97)]:
+  - @reshaped/headless@3.11.0-canary.0
+
 ## 3.10.2
 
 ### Patch Changes

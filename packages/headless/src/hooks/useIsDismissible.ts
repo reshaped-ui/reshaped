@@ -29,13 +29,8 @@ const addToQueue = (id: string, contentRef: Ref, triggerRef?: Ref) => {
 	latestId = id;
 };
 
-const useIsDismissible = (args: {
-	active?: boolean;
-	contentRef: Ref;
-	triggerRef?: Ref;
-	hasTrigger?: boolean;
-}) => {
-	const { active, contentRef, triggerRef, hasTrigger = true } = args;
+const useIsDismissible = (args: { active?: boolean; contentRef: Ref; triggerRef?: Ref }) => {
+	const { active, contentRef, triggerRef } = args;
 	const id = useElementId();
 
 	React.useEffect(() => {
@@ -55,9 +50,9 @@ const useIsDismissible = (args: {
 		const nested = prevContent && latestTrigger && prevContent.contains(latestTrigger);
 
 		// Don't block independently rendered components that are not nested in each other
-		if (hasTrigger && !nested) return true;
+		if (triggerRef?.current && !nested) return true;
 		return !latestId || latestId === id;
-	}, [id, active, hasTrigger]);
+	}, [id, active, triggerRef]);
 };
 
 export default useIsDismissible;

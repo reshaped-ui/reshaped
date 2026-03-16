@@ -8,12 +8,11 @@ import {
 	useScrollLock,
 	useToggle,
 } from "@reshaped/headless";
-import { classNames } from "@reshaped/headless";
+import { classNames, useIsDismissible } from "@reshaped/headless";
 import { type FocusableElement } from "@reshaped/headless/internal";
 import React from "react";
 
 import Portal from "@/components/_private/Portal";
-import useIsDismissible from "@/hooks/_private/useIsDismissible";
 import { onNextFrame } from "@/utilities/animation";
 
 import s from "./Overlay.module.css";
@@ -60,7 +59,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	// Separating rendered and visible states to make sure animation is triggered only once overlay was added to the dom
 	const { active: rendered, activate: render, deactivate: remove } = useToggle(active || false);
 	const { active: visible, activate: show, deactivate: hide } = useToggle(active || false);
-	const isDismissible = useIsDismissible({ active, contentRef, hasTrigger: false });
+	const isDismissible = useIsDismissible({ active, contentRef });
 	const shouldBeContained = containerRef && contained !== false;
 
 	const rootClassNames = classNames(

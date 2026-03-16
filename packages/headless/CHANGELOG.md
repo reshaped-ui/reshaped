@@ -1,5 +1,23 @@
 # @reshaped/headless
 
+## 3.11.0-canary.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @reshaped/utilities@3.11.0-canary.1
+
+## 3.11.0-canary.0
+
+### Minor Changes
+
+- [`7afb98c`](https://github.com/reshaped-ui/reshaped/commit/7afb98c3e146918fc50cd6ddd02d9229f1d74e97) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useIsDismissible: exported hook for advanced use cases
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @reshaped/utilities@3.11.0-canary.0
+
 ## 3.10.2
 
 ### Patch Changes
