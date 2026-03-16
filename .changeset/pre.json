@@ -7,6 +7,7 @@
     "@reshaped/utilities": "3.11.0-canary.1"
   },
   "changesets": [
+    "bright-eagles-cover",
     "quick-dingos-stand",
     "sixty-queens-do",
     "some-planes-kick"
