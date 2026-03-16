@@ -4,7 +4,6 @@ import { expect } from "storybook/test";
 
 import Button from "@/components/Button";
 import ProgressIndicator from "@/components/ProgressIndicator";
-import Scrim from "@/components/Scrim";
 import Text from "@/components/Text";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
@@ -47,15 +46,23 @@ export const base: StoryObj = {
 							<Text weight="medium">Index: {activeIndex}</Text>
 						</View>
 
-						<View borderRadius="medium" overflow="hidden" width="300px">
-							<Scrim
-								position="bottom"
-								backgroundSlot={<View aspectRatio={16 / 9} backgroundColor="neutral-faded" />}
+						<View
+							borderRadius="medium"
+							overflow="hidden"
+							width="300px"
+							backgroundColor="black"
+							height="200px"
+						>
+							<View
+								position="absolute"
+								insetBottom={4}
+								insetStart={4}
+								insetEnd={4}
+								align="center"
+								justify="center"
 							>
-								<View align="center">
-									<ProgressIndicator total={total} activeIndex={activeIndex} color="media" />
-								</View>
-							</Scrim>
+								<ProgressIndicator total={total} activeIndex={activeIndex} color="media" />
+							</View>
 						</View>
 					</View>
 				</Example.Item>
@@ -73,15 +80,23 @@ export const color = {
 					<ProgressIndicator total={10} activeIndex={5} color="primary" />
 				</Example.Item>
 				<Example.Item title="color: media">
-					<View borderRadius="medium" overflow="hidden" width="300px">
-						<Scrim
-							position="bottom"
-							backgroundSlot={<View aspectRatio={16 / 9} backgroundColor="neutral-faded" />}
+					<View
+						borderRadius="medium"
+						overflow="hidden"
+						width="300px"
+						backgroundColor="black"
+						height="200px"
+					>
+						<View
+							position="absolute"
+							insetBottom={4}
+							insetStart={4}
+							insetEnd={4}
+							align="center"
+							justify="center"
 						>
-							<View align="center">
-								<ProgressIndicator total={10} activeIndex={5} color="media" />
-							</View>
-						</Scrim>
+							<ProgressIndicator total={10} activeIndex={5} color="media" />
+						</View>
 					</View>
 				</Example.Item>
 			</Example>
