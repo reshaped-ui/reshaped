@@ -3,16 +3,16 @@ import React from "react";
 import { expect } from "storybook/test";
 
 import Button from "@/components/Button";
-import Progress from "@/components/Progress";
+import ProgressBar from "@/components/ProgressBar";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
 
 export default {
-	title: "Components/Progress",
-	component: Progress,
+	title: "Components/ProgressBar",
+	component: ProgressBar,
 	parameters: {
 		iframe: {
-			url: "https://reshaped.so/docs/components/progress",
+			url: "https://reshaped.so/docs/components/progress-bar",
 		},
 	},
 };
@@ -22,13 +22,13 @@ export const value = {
 	render: () => (
 		<Example>
 			<Example.Item title="value: 50">
-				<Progress value={50} ariaLabel="rating value" />
+				<ProgressBar value={50} ariaLabel="rating value" />
 			</Example.Item>
 			<Example.Item title="value: 20, min: 0, max: 40">
-				<Progress value={20} min={0} max={40} ariaLabel="rating value" />
+				<ProgressBar value={20} min={0} max={40} ariaLabel="rating value" />
 			</Example.Item>
 			<Example.Item title="value: 50, min: 0, max: 40">
-				<Progress value={50} min={0} max={40} ariaLabel="rating value" />
+				<ProgressBar value={50} min={0} max={40} ariaLabel="rating value" />
 			</Example.Item>
 		</Example>
 	),
@@ -39,10 +39,10 @@ export const size = {
 	render: () => (
 		<Example>
 			<Example.Item title="size: small, value: 50">
-				<Progress value={50} size="small" ariaLabel="rating value" />
+				<ProgressBar value={50} size="small" ariaLabel="rating value" />
 			</Example.Item>
 			<Example.Item title="size: medium, value: 50">
-				<Progress value={50} size="medium" ariaLabel="rating value" />
+				<ProgressBar value={50} size="medium" ariaLabel="rating value" />
 			</Example.Item>
 		</Example>
 	),
@@ -52,18 +52,21 @@ export const color = {
 	name: "color",
 	render: () => (
 		<Example>
+			<Example.Item title="color: neutral, value: 50">
+				<ProgressBar value={50} color="neutral" ariaLabel="rating value" />
+			</Example.Item>
 			<Example.Item title="color: critical, value: 50">
-				<Progress value={50} color="critical" ariaLabel="rating value" />
+				<ProgressBar value={50} color="critical" ariaLabel="rating value" />
 			</Example.Item>
 			<Example.Item title="color: warning, value: 50">
-				<Progress value={50} color="warning" ariaLabel="rating value" />
+				<ProgressBar value={50} color="warning" ariaLabel="rating value" />
 			</Example.Item>
 			<Example.Item title="color: positive, value: 50">
-				<Progress value={50} color="positive" ariaLabel="rating value" />
+				<ProgressBar value={50} color="positive" ariaLabel="rating value" />
 			</Example.Item>
 			<Example.Item title="color: media, value: 50">
 				<View padding={4} backgroundColor="black" borderRadius="medium">
-					<Progress value={50} color="media" ariaLabel="rating value" />
+					<ProgressBar value={50} color="media" ariaLabel="rating value" />
 				</View>
 			</Example.Item>
 		</Example>
@@ -87,7 +90,7 @@ export const duration = {
 							<Button onClick={handleChange}>Change</Button>
 						</View.Item>
 
-						<Progress value={active ? 100 : 0} duration={2000} ariaLabel="rating value" />
+						<ProgressBar value={active ? 100 : 0} duration={2000} ariaLabel="rating value" />
 					</View>
 				</Example.Item>
 			</Example>
@@ -97,7 +100,7 @@ export const duration = {
 
 export const render: StoryObj = {
 	name: "rendering",
-	render: () => <Progress value={75} min={50} max={100} ariaLabel="progress" />,
+	render: () => <ProgressBar value={75} min={50} max={100} ariaLabel="progress" />,
 	play: async ({ canvas }) => {
 		const el = canvas.getByRole("progressbar");
 
@@ -113,7 +116,7 @@ export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
 		<div data-testid="root">
-			<Progress className="test-classname" attributes={{ id: "test-id" }} ariaLabel="progress" />
+			<ProgressBar className="test-classname" attributes={{ id: "test-id" }} ariaLabel="progress" />
 		</div>
 	),
 	play: async ({ canvas }) => {

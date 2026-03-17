@@ -1,11 +1,11 @@
 import { classNames } from "@reshaped/headless";
 import React from "react";
 
-import s from "./Progress.module.css";
+import s from "./ProgressBar.module.css";
 
-import type * as T from "./Progress.types";
+import type * as T from "./ProgressBar.types";
 
-const Progress: React.FC<T.Props> = (props) => {
+const ProgressBar: React.FC<T.Props> = (props) => {
 	const {
 		value = 0,
 		min = 0,
@@ -53,6 +53,6 @@ const Progress: React.FC<T.Props> = (props) => {
 	);
 };
 
-Progress.displayName = "Progress";
+ProgressBar.displayName = "ProgressBar";
 
-export default Progress;
+export default ProgressBar;

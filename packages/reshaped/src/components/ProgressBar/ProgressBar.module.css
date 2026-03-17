@@ -33,6 +33,10 @@
 	height: var(--rs-unit-x2);
 }
 
+.--color-neutral .value {
+	background: var(--rs-color-background-neutral);
+}
+
 .--color-primary .value {
 	background: var(--rs-color-background-primary);
 }
