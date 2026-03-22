@@ -98,6 +98,7 @@ const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			{renderIcon("start")}
 			{children && <span className={s.text}>{children}</span>}
 			{renderIcon("end")}
+			{["outline", "ghost"].includes(variant) && <span className={s.highlight} />}
 		</Actionable>
 	);
 });

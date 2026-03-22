@@ -27,7 +27,7 @@ export const variantAndColor = {
 	render: () => (
 		<Example>
 			<Example.Item title="variant: solid">
-				<View gap={4} direction="row">
+				<View gap={4} direction="row" align="center">
 					<Button onClick={() => {}}>Neutral</Button>
 					<Button onClick={() => {}} color="primary">
 						Primary
@@ -38,7 +38,7 @@ export const variantAndColor = {
 					<Button onClick={() => {}} color="positive">
 						Positive
 					</Button>
-					<View backgroundColor="primary" borderRadius="medium" padding={4} direction="row" gap={4}>
+					<View backgroundColor="primary" borderRadius="medium" padding={2} direction="row" gap={4}>
 						<Button onClick={() => {}} color="media">
 							Media
 						</Button>
@@ -49,30 +49,19 @@ export const variantAndColor = {
 			<Example.Item title="variant: outline">
 				<View direction="row" gap={4}>
 					<Button onClick={() => {}} variant="outline">
-						Button
+						Neutral
 					</Button>
 					<Button onClick={() => {}} color="primary" variant="outline">
-						Button
+						Primary
 					</Button>
 					<Button onClick={() => {}} color="critical" variant="outline">
-						Button
+						Critical
 					</Button>
 					<Button onClick={() => {}} color="positive" variant="outline">
-						Button
+						Positive
 					</Button>
 
-					<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
-						<Button onClick={() => {}} color="inherit" variant="outline">
-							Inherit
-						</Button>
-					</View>
-
-					<View padding={4} backgroundColor="black" borderRadius="medium">
-						<Button onClick={() => {}} color="inherit" variant="outline">
-							Inherit
-						</Button>
-					</View>
-					<View padding={4} backgroundColor="white" borderRadius="medium">
+					<View attributes={{ style: { color: "#029CFD" } }}>
 						<Button onClick={() => {}} color="inherit" variant="outline">
 							Inherit
 						</Button>
@@ -80,31 +69,32 @@ export const variantAndColor = {
 				</View>
 			</Example.Item>
 			<Example.Item title="variant: ghost">
-				<View direction="row" gap={4}>
+				<View direction="row" gap={4} align="center">
 					<Button onClick={() => {}} variant="ghost">
-						Button
+						Neutral
 					</Button>
 					<Button onClick={() => {}} color="primary" variant="ghost">
-						Button
+						Primary
 					</Button>
 					<Button onClick={() => {}} color="critical" variant="ghost">
-						Button
+						Critical
 					</Button>
 					<Button onClick={() => {}} color="positive" variant="ghost">
-						Button
+						Positive
 					</Button>
-					<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
+					<View attributes={{ style: { color: "#029CFD" } }}>
 						<Button onClick={() => {}} color="inherit" variant="ghost">
 							Inherit
 						</Button>
 					</View>
 
-					<View padding={4} backgroundColor="black" borderRadius="medium">
+					<View padding={2} backgroundColor="primary" borderRadius="medium">
 						<Button onClick={() => {}} color="inherit" variant="ghost">
 							Inherit
 						</Button>
 					</View>
-					<View padding={4} backgroundColor="white" borderRadius="medium">
+
+					<View padding={2} backgroundColor="white" borderRadius="medium">
 						<Button onClick={() => {}} color="inherit" variant="ghost">
 							Inherit
 						</Button>
