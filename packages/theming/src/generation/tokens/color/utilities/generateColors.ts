@@ -107,12 +107,11 @@ const generateColorValues = (
 
 	const fgLightness = neutral ? 0.24 : 0.52;
 	const fgDarkLightness = neutral ? 0.96 : 0.75;
-	const highlightedShift = neutral ? 0.06 : 0.1;
-	const bgHighlighted = adjustLightnessByForegroundDirection(bg, fgLightness, highlightedShift);
+	const bgHighlighted = adjustLightnessByForegroundDirection(bg, fgLightness, neutral ? 0.04 : 0.1);
 	const bgHighlightedDark = adjustLightnessByForegroundDirection(
 		bgDark,
 		fgDarkLightness,
-		highlightedShift
+		neutral ? 0.06 : 0.1
 	);
 	const bgHighlightedFaded = neutral ? { ...bg, alpha: 0.48 } : { ...bg, alpha: 0.06 };
 	const bgHighlightedFadedDark = neutral ? { ...bgDark, alpha: 0.28 } : { ...bgDark, alpha: 0.08 };

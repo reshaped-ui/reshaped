@@ -492,7 +492,7 @@
     },
     "backgroundNeutralHighlighted": {
       "oklch": {
-        "l": 0.8835999999999999,
+        "l": 0.9024,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
@@ -503,7 +503,7 @@
         "h": 89.88,
         "mode": "oklch"
       },
-      "hex": "#d8d8d8",
+      "hex": "#dfdfdf",
       "hexDark": "#3d3d3d"
     },
     "backgroundNeutralHighlightedFaded": {
@@ -906,7 +906,7 @@
       "hexDark": "255, 255, 255"
     },
     "rgbBackgroundNeutralHighlighted": {
-      "hex": "216.444, 216.444, 216.444",
+      "hex": "222.58950000000002, 222.58950000000002, 222.58950000000002",
       "hexDark": "61.199999999999996, 61.199999999999996, 61.199999999999996"
     },
     "rgbBackgroundNeutralHighlightedFaded": {

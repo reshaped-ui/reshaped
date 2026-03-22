@@ -2,10 +2,12 @@ import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
+import Badge from "@/components/Badge";
 import Button from "@/components/Button";
-import Hotkey from "@/components/Hotkey";
 import Image from "@/components/Image";
+import Text from "@/components/Text";
 import View from "@/components/View";
+import IconPlus from "@/icons/Plus";
 import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
 
@@ -110,7 +112,7 @@ export const icon = {
 	render: () => (
 		<Example>
 			<Example.Item title="icon">
-				<Button onClick={() => {}} icon={IconZap}>
+				<Button onClick={() => {}} icon={IconPlus}>
 					Button
 				</Button>
 			</Example.Item>
@@ -201,16 +203,16 @@ export const size = {
 	),
 };
 
-export const elevated = {
-	name: "elevated",
+export const raised = {
+	name: "raised",
 	render: () => (
 		<Example>
 			<Example.Item title="elevated, color: neutral">
 				<View direction="row" gap={4}>
-					<Button elevated onClick={() => {}}>
+					<Button raised onClick={() => {}}>
 						Button
 					</Button>
-					<Button elevated variant="outline" onClick={() => {}}>
+					<Button raised variant="outline" onClick={() => {}}>
 						Button
 					</Button>
 				</View>
@@ -218,17 +220,20 @@ export const elevated = {
 
 			<Example.Item title="elevated, color">
 				<View direction="row" gap={4}>
-					<Button elevated color="primary">
+					<Button raised color="primary">
 						Button
 					</Button>
-					<Button elevated variant="outline" color="primary">
+					<Button raised variant="outline" color="primary">
 						Button
 					</Button>
-					<View backgroundColor="primary" padding={4} borderRadius="medium">
-						<Button color="media" elevated>
-							Button
-						</Button>
-					</View>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="excluded">
+				<View backgroundColor="primary" padding={4} borderRadius="medium">
+					<Button color="media" raised>
+						Button
+					</Button>
 				</View>
 			</Example.Item>
 		</Example>
@@ -571,11 +576,22 @@ export const composition = {
 	name: "test: composition",
 	render: () => (
 		<Example>
-			<Example.Item title="slot gap">
+			<Example.Item title="slot start">
 				<Button variant="outline">
 					<Avatar size={6} initials="RS" />
 					Label
-					<Hotkey>B</Hotkey>
+				</Button>
+			</Example.Item>
+			<Example.Item title="slot end">
+				<Button variant="outline">
+					Label
+					<Badge size="small">B</Badge>
+				</Button>
+			</Example.Item>
+
+			<Example.Item title="slot with text component">
+				<Button variant="outline">
+					<Text>Label</Text>
 				</Button>
 			</Example.Item>
 		</Example>

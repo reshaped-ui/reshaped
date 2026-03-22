@@ -65,6 +65,14 @@
 	display: flex;
 	align-items: center;
 	gap: var(--rs-button-gap);
+
+	& > :is(:first-child):not(.label, :only-child) {
+		margin-inline-start: calc(var(--rs-button-icon-align) * -1);
+	}
+
+	&:not(:only-child) > :is(:last-child):not(.label, :only-child) {
+		margin-inline-end: calc(var(--rs-button-icon-align) * -1);
+	}
 }
 
 .icon {
@@ -149,7 +157,7 @@
 	@value medium {
 		--rs-button-p-v: var(--rs-unit-x2);
 		--rs-button-p-h: var(--rs-unit-x3);
-		--rs-button-gap: var(--rs-unit-x1-5);
+		--rs-button-gap: var(--rs-unit-x2);
 		--rs-button-icon-align: var(--rs-unit-x0-5);
 		--rs-button-line-height: var(--rs-line-height-body-2);
 		--rs-button-font-size: var(--rs-font-size-body-2);
@@ -270,7 +278,7 @@
 }
 
 .root.--variant-outline,
-.root.--elevated {
+.root.--raised {
 	&::after {
 		content: "";
 		position: absolute;
@@ -281,7 +289,7 @@
 	}
 }
 
-.root.--elevated {
+.root.--raised {
 	&::after {
 		box-shadow: var(--rs-shadow-raised-intense);
 	}
