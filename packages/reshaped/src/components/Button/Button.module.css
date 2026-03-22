@@ -3,18 +3,16 @@
 */
 
 .root {
-	/* Using --rs-button-p and --rs-p to dynamically reassign --rs-p for all sizes of ghost buttons */
+	/* Using --rs-button-p and --rs-p to dynamically reassign --rs-p for all sizes of ghost buttons, used by Aligner */
 	--rs-p-v: var(--rs-button-p-v);
 	--rs-p-h: var(--rs-button-p-h);
 	--rs-button-highlight-opacity: 0;
 	--rs-button-highlight-opacity-base: 0;
 	--rs-button-border-color: transparent;
-	--rs-button-border-width: 0px;
 
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform;
-	padding: calc(var(--rs-unit-x1) - var(--rs-button-border-width))
-		calc(var(--rs-p-h) - var(--rs-button-border-width));
+	padding: var(--rs-unit-x1) var(--rs-p-h);
 	border-radius: var(--rs-button-radius);
 	cursor: pointer;
 	position: relative;
@@ -24,7 +22,6 @@
 	align-items: center;
 	justify-content: center;
 	text-decoration: none;
-	border: var(--rs-button-border-width) solid var(--rs-button-border-color);
 	-webkit-tap-highlight-color: transparent;
 	font-family: var(--rs-font-family-body);
 	font-weight: var(--rs-font-weight-medium);
@@ -37,35 +34,10 @@
 		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
 	);
 	background-color: var(--rs-button-background-color);
-	color: var(--rs-button-foreground-color);
+	color: var(--rs-button-color);
 
-	&::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
-		transition-property: opacity, background-color;
-		opacity: var(--rs-button-highlight-opacity-base);
-		border-radius: var(--rs-button-radius);
-
-		/* Use highlight based on the text color with an ability to override it */
-		background: var(--rs-button-highlight-color, var(--rs-button-foreground-color));
-
-		/* Avoid edge cases when hovering causes icons to jump in Safari */
-		transform: translateZ(0);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(.--loading, .--highlighted, .--disabled)::before {
-			opacity: var(--rs-button-highlight-opacity);
-		}
-	}
-
-	&.--highlighted::before,
-	&:active:not(.--loading, .--disabled)::before {
-		opacity: calc(
-			var(--rs-button-highlight-opacity) + max(0.04, var(--rs-button-highlight-opacity) / 2)
-		);
+	&:hover {
+		background-color: var(--rs-color-background-primary-highlighted);
 	}
 }
 
@@ -134,9 +106,9 @@
 		--rs-button-p-v: var(--rs-unit-x1);
 		--rs-button-p-h: var(--rs-unit-x2);
 		--rs-button-gap: var(--rs-unit-x1);
-		--rs-button-line-height: var(--rs-line-height-body-3);
-		--rs-button-font-size: var(--rs-font-size-body-3);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-button-line-height: var(--rs-line-height-caption-1);
+		--rs-button-font-size: var(--rs-font-size-caption-1);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-caption-1);
 		--rs-button-radius: var(--rs-radius-small);
 	}
 
@@ -144,19 +116,19 @@
 		--rs-button-p-v: var(--rs-unit-x2);
 		--rs-button-p-h: var(--rs-unit-x3);
 		--rs-button-gap: var(--rs-unit-x2);
-		--rs-button-line-height: var(--rs-line-height-body-3);
-		--rs-button-font-size: var(--rs-font-size-body-3);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-3);
-		--rs-button-radius: var(--rs-radius-small);
+		--rs-button-line-height: var(--rs-line-height-body-2);
+		--rs-button-font-size: var(--rs-font-size-body-2);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-button-radius: var(--rs-radius-medium);
 	}
 
 	@value large {
 		--rs-button-p-v: var(--rs-unit-x3);
 		--rs-button-p-h: var(--rs-unit-x4);
 		--rs-button-gap: var(--rs-unit-x2);
-		--rs-button-line-height: var(--rs-line-height-body-2);
-		--rs-button-font-size: var(--rs-font-size-body-2);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-button-line-height: var(--rs-line-height-body-1);
+		--rs-button-font-size: var(--rs-font-size-body-1);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-1);
 		--rs-button-radius: var(--rs-radius-medium);
 	}
 
@@ -164,9 +136,9 @@
 		--rs-button-p-v: var(--rs-unit-x4);
 		--rs-button-p-h: var(--rs-unit-x5);
 		--rs-button-gap: var(--rs-unit-x3);
-		--rs-button-line-height: var(--rs-line-height-body-2);
-		--rs-button-font-size: var(--rs-font-size-body-2);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-button-line-height: var(--rs-line-height-body-1);
+		--rs-button-font-size: var(--rs-font-size-body-1);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-body-1);
 		--rs-button-radius: var(--rs-radius-medium);
 	}
 }
@@ -187,70 +159,45 @@
 	&.--color-neutral {
 		--rs-button-highlight-opacity: 0.04;
 		--rs-button-background-color: var(--rs-color-background-neutral);
-		--rs-button-foreground-color: var(--rs-color-on-background-neutral);
+		--rs-button-color: var(--rs-color-on-background-neutral);
 	}
 
 	@each $color in primary, critical, positive {
 		&.--color-$(color) {
 			--rs-button-highlight-opacity: 0.08;
 			--rs-button-background-color: var(--rs-color-background-$(color));
-			--rs-button-foreground-color: var(--rs-color-on-background-$(color));
-		}
-	}
-
-	&.--color-media {
-		--rs-button-highlight-opacity: 0.06;
-		--rs-button-background-color: var(--rs-color-white);
-		--rs-button-foreground-color: var(--rs-color-black);
-	}
-}
-
-.root.--variant-faded {
-	@each $color in neutral, primary, critical, positive {
-		&.--color-$(color) {
-			--rs-button-highlight-opacity: 0.04;
-			--rs-button-background-color: var(--rs-color-background-$(color)-faded);
-			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
+			--rs-button-color: var(--rs-color-on-background-$(color));
 		}
 	}
 
 	&.--color-media {
 		--rs-button-highlight-opacity-base: 0.24;
 		--rs-button-highlight-opacity: 0.32;
-		--rs-button-foreground-color: var(--rs-color-white);
+		--rs-button-color: var(--rs-color-white);
 		--rs-button-highlight-color: var(--rs-color-black);
-	}
-
-	&.--color-inherit {
-		--rs-button-highlight-opacity-base: 0.12;
-		--rs-button-highlight-opacity: 0.16;
-		--rs-button-foreground-color: inherit;
-		--rs-button-highlight-color: currentcolor;
 	}
 }
 
 .root.--variant-outline {
-	--rs-button-border-width: 1px;
 	--rs-button-highlight-opacity: 0.06;
 
 	@each $color in primary, critical, positive {
 		&.--color-$(color) {
-			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
-			--rs-button-border-color: var(--rs-color-border-$(color)-faded);
+			--rs-button-color: var(--rs-color-foreground-$(color));
+			--rs-button-border-color: var(--rs-color-border-neutral);
 			--rs-button-highlight-color: var(--rs-color-background-$(color));
 		}
 	}
 
 	&.--color-neutral {
 		--rs-button-highlight-opacity: 0.24;
-		--rs-button-foreground-color: var(--rs-color-foreground-neutral);
+		--rs-button-color: var(--rs-color-foreground-neutral);
 		--rs-button-border-color: var(--rs-color-border-neutral);
 		--rs-button-highlight-color: var(--rs-color-background-neutral);
 	}
 
 	&.--color-inherit {
-		--rs-button-border-width: 0px;
-		--rs-button-foreground-color: inherit;
+		--rs-button-color: inherit;
 		--rs-button-highlight-color: currentcolor;
 
 		&::after {
@@ -274,14 +221,43 @@
 
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
-			--rs-button-foreground-color: var(--rs-color-foreground-$(color));
+			--rs-button-color: var(--rs-color-foreground-$(color));
 			--rs-button-highlight-color: var(--rs-color-background-$(color));
 		}
 	}
 
 	&.--color-inherit {
-		--rs-button-foreground-color: inherit;
+		--rs-button-color: inherit;
 		--rs-button-highlight-color: currentcolor;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: opacity, background-color;
+		opacity: var(--rs-button-highlight-opacity-base);
+		border-radius: var(--rs-button-radius);
+
+		/* Use highlight based on the text color with an ability to override it */
+		background: var(--rs-button-highlight-color, var(--rs-button-color));
+
+		/* Avoid edge cases when hovering causes icons to jump in Safari */
+		transform: translateZ(0);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover:not(.--loading, .--highlighted, .--disabled)::before {
+			opacity: var(--rs-button-highlight-opacity);
+		}
+	}
+
+	&.--highlighted::before,
+	&:active:not(.--loading, .--disabled)::before {
+		opacity: calc(
+			var(--rs-button-highlight-opacity) + max(0.04, var(--rs-button-highlight-opacity) / 2)
+		);
 	}
 }
 
@@ -317,10 +293,6 @@
 
 			&::before {
 				opacity: 0 !important;
-			}
-
-			&.--variant-faded {
-				background-color: var(--rs-color-background-disabled-faded) !important;
 			}
 
 			&.--variant-outline {
@@ -398,7 +370,7 @@
 		&::after {
 			content: "";
 			position: absolute;
-			inset-block: calc(var(--rs-button-border-width) * -1);
+			inset-block: 0;
 			inset-inline-end: -1px;
 			pointer-events: none;
 			border-inline-end: 1px solid var(--rs-button-group-separator-color);
@@ -418,15 +390,13 @@
 		}
 	}
 
-	&.--variant-faded.--color-neutral,
 	&.--variant-outline.--color-neutral {
 		--rs-button-group-separator-color: var(--rs-color-border-neutral);
 	}
 
 	@each $color in positive, critical, primary {
-		&.--variant-outline.--color-$(color),
-		&.--variant-faded.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
+		&.--variant-outline.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-neutral);
 		}
 	}
 
@@ -437,10 +407,6 @@
 	}
 
 	&.--variant-solid.--color-media {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-black), 0.12);
-	}
-
-	&.--variant-faded.--color-media {
 		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
 	}
 

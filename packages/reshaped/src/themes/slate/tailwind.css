@@ -1,6 +1,7 @@
 @theme inline {
     --background-color-primary: var(--rs-color-background-primary);
 --background-color-primary-faded: var(--rs-color-background-primary-faded);
+--background-color-primary-highlighted: var(--rs-color-background-primary-highlighted);
 --background-color-primary-highlighted-faded: var(--rs-color-background-primary-highlighted-faded);
 --border-color-primary: var(--rs-color-border-primary);
 --outline-color-primary: var(--rs-color-border-primary);
@@ -9,6 +10,7 @@
 --text-color-primary: var(--rs-color-foreground-primary);
 --background-color-critical: var(--rs-color-background-critical);
 --background-color-critical-faded: var(--rs-color-background-critical-faded);
+--background-color-critical-highlighted: var(--rs-color-background-critical-highlighted);
 --background-color-critical-highlighted-faded: var(--rs-color-background-critical-highlighted-faded);
 --border-color-critical: var(--rs-color-border-critical);
 --outline-color-critical: var(--rs-color-border-critical);
@@ -17,6 +19,7 @@
 --text-color-critical: var(--rs-color-foreground-critical);
 --background-color-warning: var(--rs-color-background-warning);
 --background-color-warning-faded: var(--rs-color-background-warning-faded);
+--background-color-warning-highlighted: var(--rs-color-background-warning-highlighted);
 --background-color-warning-highlighted-faded: var(--rs-color-background-warning-highlighted-faded);
 --border-color-warning: var(--rs-color-border-warning);
 --outline-color-warning: var(--rs-color-border-warning);
@@ -25,6 +28,7 @@
 --text-color-warning: var(--rs-color-foreground-warning);
 --background-color-positive: var(--rs-color-background-positive);
 --background-color-positive-faded: var(--rs-color-background-positive-faded);
+--background-color-positive-highlighted: var(--rs-color-background-positive-highlighted);
 --background-color-positive-highlighted-faded: var(--rs-color-background-positive-highlighted-faded);
 --border-color-positive: var(--rs-color-border-positive);
 --outline-color-positive: var(--rs-color-border-positive);
@@ -33,6 +37,7 @@
 --text-color-positive: var(--rs-color-foreground-positive);
 --background-color-neutral: var(--rs-color-background-neutral);
 --background-color-neutral-faded: var(--rs-color-background-neutral-faded);
+--background-color-neutral-highlighted: var(--rs-color-background-neutral-highlighted);
 --background-color-neutral-highlighted-faded: var(--rs-color-background-neutral-highlighted-faded);
 --border-color-neutral: var(--rs-color-border-neutral);
 --outline-color-neutral: var(--rs-color-border-neutral);

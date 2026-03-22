@@ -27,7 +27,7 @@ export type Props = Pick<
 	/** Component render variant
 	 * @default "solid"
 	 */
-	variant?: "solid" | "outline" | "ghost" | "faded";
+	variant?: "solid" | "outline" | "ghost";
 	/** SVG component for the icon */
 	icon?: IconProps["svg"];
 	/** SVG component for the end position icon */

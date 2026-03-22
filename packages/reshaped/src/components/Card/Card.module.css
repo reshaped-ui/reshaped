@@ -18,7 +18,6 @@
 	background: var(--rs-color-background-elevation-raised);
 }
 
-
 .--actionable:not(.--selected) {
 	& .content::before {
 		content: "";
