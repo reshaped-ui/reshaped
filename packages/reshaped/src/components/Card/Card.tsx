@@ -20,7 +20,7 @@ const Card: Component = forwardRef((props, ref) => {
 	const {
 		padding = 4,
 		selected,
-		elevation = "base",
+		raised,
 		bleed,
 		height,
 		direction,
@@ -42,14 +42,14 @@ const Card: Component = forwardRef((props, ref) => {
 		bleed,
 		borderColor: "neutral-faded",
 		border: true,
-		shadow: elevation,
+		shadow: raised ? "raised" : "base",
 	});
 
 	const rootClassNames = classNames(
 		s.root,
 		mixinStyles.classNames,
 		isActionable && s["--actionable"],
-		elevation && s[`--elevation-${elevation}`],
+		raised && s["--elevation-raised"],
 		selected && s["--selected"],
 		className
 	);

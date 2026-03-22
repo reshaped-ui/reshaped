@@ -2,10 +2,12 @@ import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
+import Badge from "@/components/Badge";
 import Button from "@/components/Button";
-import Hotkey from "@/components/Hotkey";
 import Image from "@/components/Image";
+import Text from "@/components/Text";
 import View from "@/components/View";
+import IconPlus from "@/icons/Plus";
 import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
 
@@ -27,78 +29,41 @@ export const variantAndColor = {
 	render: () => (
 		<Example>
 			<Example.Item title="variant: solid">
-				<View gap={4} direction="row">
-					<Button onClick={() => {}}>Button</Button>
+				<View gap={4} direction="row" align="center">
+					<Button onClick={() => {}}>Neutral</Button>
 					<Button onClick={() => {}} color="primary">
-						Button
+						Primary
 					</Button>
 					<Button onClick={() => {}} color="critical">
-						Button
+						Critical
 					</Button>
 					<Button onClick={() => {}} color="positive">
-						Button
+						Positive
 					</Button>
-				</View>
-			</Example.Item>
-			<Example.Item title="variant: faded">
-				<View direction="row" gap={4}>
-					<Button onClick={() => {}} variant="faded">
-						Button
-					</Button>
-					<Button onClick={() => {}} color="primary" variant="faded">
-						Button
-					</Button>
-					<Button onClick={() => {}} color="critical" variant="faded">
-						Button
-					</Button>
-					<Button onClick={() => {}} color="positive" variant="faded">
-						Button
-					</Button>
-					<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
-						<Button onClick={() => {}} color="inherit" variant="faded">
-							Inherit
+					<View backgroundColor="primary" borderRadius="medium" padding={2} direction="row" gap={4}>
+						<Button onClick={() => {}} color="media">
+							Media
 						</Button>
 					</View>
+				</View>
+			</Example.Item>
 
-					<View padding={4} backgroundColor="black" borderRadius="medium">
-						<Button onClick={() => {}} color="inherit" variant="faded">
-							Inherit
-						</Button>
-					</View>
-					<View padding={4} backgroundColor="white" borderRadius="medium">
-						<Button onClick={() => {}} color="inherit" variant="faded">
-							Inherit
-						</Button>
-					</View>
-				</View>
-			</Example.Item>
 			<Example.Item title="variant: outline">
 				<View direction="row" gap={4}>
 					<Button onClick={() => {}} variant="outline">
-						Button
+						Neutral
 					</Button>
 					<Button onClick={() => {}} color="primary" variant="outline">
-						Button
+						Primary
 					</Button>
 					<Button onClick={() => {}} color="critical" variant="outline">
-						Button
+						Critical
 					</Button>
 					<Button onClick={() => {}} color="positive" variant="outline">
-						Button
+						Positive
 					</Button>
 
-					<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
-						<Button onClick={() => {}} color="inherit" variant="outline">
-							Inherit
-						</Button>
-					</View>
-
-					<View padding={4} backgroundColor="black" borderRadius="medium">
-						<Button onClick={() => {}} color="inherit" variant="outline">
-							Inherit
-						</Button>
-					</View>
-					<View padding={4} backgroundColor="white" borderRadius="medium">
+					<View attributes={{ style: { color: "#029CFD" } }}>
 						<Button onClick={() => {}} color="inherit" variant="outline">
 							Inherit
 						</Button>
@@ -106,46 +71,36 @@ export const variantAndColor = {
 				</View>
 			</Example.Item>
 			<Example.Item title="variant: ghost">
-				<View direction="row" gap={4}>
+				<View direction="row" gap={4} align="center">
 					<Button onClick={() => {}} variant="ghost">
-						Button
+						Neutral
 					</Button>
 					<Button onClick={() => {}} color="primary" variant="ghost">
-						Button
+						Primary
 					</Button>
 					<Button onClick={() => {}} color="critical" variant="ghost">
-						Button
+						Critical
 					</Button>
 					<Button onClick={() => {}} color="positive" variant="ghost">
-						Button
+						Positive
 					</Button>
-					<View padding={4} borderRadius="medium" attributes={{ style: { color: "#029CFD" } }}>
+					<View attributes={{ style: { color: "#029CFD" } }}>
 						<Button onClick={() => {}} color="inherit" variant="ghost">
 							Inherit
 						</Button>
 					</View>
 
-					<View padding={4} backgroundColor="black" borderRadius="medium">
+					<View padding={2} backgroundColor="primary" borderRadius="medium">
 						<Button onClick={() => {}} color="inherit" variant="ghost">
 							Inherit
 						</Button>
 					</View>
-					<View padding={4} backgroundColor="white" borderRadius="medium">
-						<Button onClick={() => {}} color="inherit" variant="ghost">
-							Inherit
-						</Button>
-					</View>
-				</View>
-			</Example.Item>
-			<Example.Item title="color: media">
-				<View backgroundColor="primary" borderRadius="medium" padding={4} direction="row" gap={4}>
-					<Button onClick={() => {}} color="media">
-						Button
-					</Button>
 
-					<Button onClick={() => {}} color="media" variant="faded">
-						Button
-					</Button>
+					<View padding={2} backgroundColor="white" borderRadius="medium">
+						<Button onClick={() => {}} color="inherit" variant="ghost">
+							Inherit
+						</Button>
+					</View>
 				</View>
 			</Example.Item>
 		</Example>
@@ -157,7 +112,7 @@ export const icon = {
 	render: () => (
 		<Example>
 			<Example.Item title="icon">
-				<Button onClick={() => {}} icon={IconZap}>
+				<Button onClick={() => {}} icon={IconPlus}>
 					Button
 				</Button>
 			</Example.Item>
@@ -248,16 +203,16 @@ export const size = {
 	),
 };
 
-export const elevated = {
-	name: "elevated",
+export const raised = {
+	name: "raised",
 	render: () => (
 		<Example>
 			<Example.Item title="elevated, color: neutral">
 				<View direction="row" gap={4}>
-					<Button elevated onClick={() => {}}>
+					<Button raised onClick={() => {}}>
 						Button
 					</Button>
-					<Button elevated variant="outline" onClick={() => {}}>
+					<Button raised variant="outline" onClick={() => {}}>
 						Button
 					</Button>
 				</View>
@@ -265,17 +220,20 @@ export const elevated = {
 
 			<Example.Item title="elevated, color">
 				<View direction="row" gap={4}>
-					<Button elevated color="primary">
+					<Button raised color="primary">
 						Button
 					</Button>
-					<Button elevated variant="outline" color="primary">
+					<Button raised variant="outline" color="primary">
 						Button
 					</Button>
-					<View backgroundColor="primary" padding={4} borderRadius="medium">
-						<Button color="media" elevated>
-							Button
-						</Button>
-					</View>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="excluded">
+				<View backgroundColor="primary" padding={4} borderRadius="medium">
+					<Button color="media" raised>
+						Button
+					</Button>
 				</View>
 			</Example.Item>
 		</Example>
@@ -343,9 +301,6 @@ export const fullWidth = {
 			<Example.Item title="fullWidth, all variants">
 				<View gap={3}>
 					<Button fullWidth>Neutral</Button>
-					<Button fullWidth variant="faded">
-						Faded
-					</Button>
 					<Button fullWidth variant="outline">
 						Outline
 					</Button>
@@ -371,9 +326,6 @@ export const loading = {
 					<Button loading loadingAriaLabel="Loading">
 						Button
 					</Button>
-					<Button loading loadingAriaLabel="Loading" variant="faded">
-						Button
-					</Button>
 					<Button loading loadingAriaLabel="Loading" variant="outline">
 						Button
 					</Button>
@@ -387,9 +339,6 @@ export const loading = {
 					<Button loading loadingAriaLabel="Loading" color="critical">
 						Button
 					</Button>
-					<Button loading loadingAriaLabel="Loading" color="critical" variant="faded">
-						Button
-					</Button>
 					<Button loading loadingAriaLabel="Loading" color="critical" variant="outline">
 						Button
 					</Button>
@@ -401,9 +350,6 @@ export const loading = {
 			<Example.Item title="loading, color positive, all variants">
 				<View gap={3} direction="row">
 					<Button loading loadingAriaLabel="Loading" color="positive">
-						Button
-					</Button>
-					<Button loading loadingAriaLabel="Loading" color="positive" variant="faded">
 						Button
 					</Button>
 					<Button loading loadingAriaLabel="Loading" color="positive" variant="outline">
@@ -422,9 +368,6 @@ export const loading = {
 					<div style={{ position: "absolute", top: 16, left: 16 }}>
 						<View gap={3} direction="row">
 							<Button color="media" loading loadingAriaLabel="Loading">
-								Button
-							</Button>
-							<Button color="media" variant="faded" loading loadingAriaLabel="Loading">
 								Button
 							</Button>
 						</View>
@@ -454,9 +397,6 @@ export const highlighted = {
 					<Button highlighted icon={IconZap}>
 						Button
 					</Button>
-					<Button highlighted variant="faded" icon={IconZap}>
-						Button
-					</Button>
 					<Button highlighted variant="outline" icon={IconZap}>
 						Button
 					</Button>
@@ -470,9 +410,6 @@ export const highlighted = {
 					<Button highlighted color="critical" icon={IconZap}>
 						Button
 					</Button>
-					<Button highlighted color="critical" variant="faded" icon={IconZap}>
-						Button
-					</Button>
 					<Button highlighted color="critical" variant="outline" icon={IconZap}>
 						Button
 					</Button>
@@ -484,9 +421,6 @@ export const highlighted = {
 			<Example.Item title="highlighted, color: positive, all variants">
 				<View gap={3} direction="row">
 					<Button highlighted color="positive" icon={IconZap}>
-						Button
-					</Button>
-					<Button highlighted color="positive" variant="faded" icon={IconZap}>
 						Button
 					</Button>
 					<Button highlighted color="positive" variant="outline" icon={IconZap}>
@@ -510,9 +444,6 @@ export const disabled: StoryObj = {
 					<Button disabled icon={IconZap} onClick={() => {}}>
 						Button
 					</Button>
-					<Button disabled variant="faded" icon={IconZap}>
-						Button
-					</Button>
 					<Button disabled variant="outline" icon={IconZap}>
 						Button
 					</Button>
@@ -526,9 +457,6 @@ export const disabled: StoryObj = {
 					<Button disabled color="critical" icon={IconZap}>
 						Button
 					</Button>
-					<Button disabled color="critical" variant="faded" icon={IconZap}>
-						Button
-					</Button>
 					<Button disabled color="critical" variant="outline" icon={IconZap}>
 						Button
 					</Button>
@@ -540,9 +468,6 @@ export const disabled: StoryObj = {
 			<Example.Item title="disabled, color: positive, all variants">
 				<View gap={3} direction="row">
 					<Button disabled color="positive" icon={IconZap}>
-						Button
-					</Button>
-					<Button disabled color="positive" variant="faded" icon={IconZap}>
 						Button
 					</Button>
 					<Button disabled color="positive" variant="outline" icon={IconZap}>
@@ -561,9 +486,6 @@ export const disabled: StoryObj = {
 					<div style={{ position: "absolute", top: 16, left: 16 }}>
 						<View gap={3} direction="row">
 							<Button color="media" disabled>
-								Button
-							</Button>
-							<Button color="media" variant="faded" disabled>
 								Button
 							</Button>
 						</View>
@@ -654,11 +576,22 @@ export const composition = {
 	name: "test: composition",
 	render: () => (
 		<Example>
-			<Example.Item title="slot gap">
+			<Example.Item title="slot start">
 				<Button variant="outline">
 					<Avatar size={6} initials="RS" />
 					Label
-					<Hotkey>B</Hotkey>
+				</Button>
+			</Example.Item>
+			<Example.Item title="slot end">
+				<Button variant="outline">
+					Label
+					<Badge size="small">B</Badge>
+				</Button>
+			</Example.Item>
+
+			<Example.Item title="slot with text component">
+				<Button variant="outline">
+					<Text>Label</Text>
 				</Button>
 			</Example.Item>
 		</Example>
@@ -802,23 +735,6 @@ export const group: StoryObj = {
 								Two
 							</Button>
 							<Button color={color} variant="outline">
-								Three
-							</Button>
-						</Button.Group>
-					))}
-				</View>
-			</Example.Item>
-			<Example.Item title="variant: faded">
-				<View gap={2}>
-					{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
-						<Button.Group key={color}>
-							<Button color={color} variant="faded">
-								One
-							</Button>
-							<Button color={color} variant="faded">
-								Two
-							</Button>
-							<Button color={color} variant="faded">
 								Three
 							</Button>
 						</Button.Group>

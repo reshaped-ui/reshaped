@@ -62,6 +62,21 @@ const getDarkModeColor = (lch: OklchColor) => {
 	return { ...lch, c: c * 0.8, l: clampedDarkL };
 };
 
+const adjustLightnessByForegroundDirection = (
+	background: OklchColor,
+	foregroundLightness: number,
+	amount: number
+) => {
+	if (foregroundLightness === background.l) return background;
+
+	const isForegroundLighter = foregroundLightness > background.l;
+	const l = isForegroundLighter
+		? background.l + (1 - background.l) * amount
+		: background.l - background.l * amount;
+
+	return { ...background, l };
+};
+
 const generateColorValues = (
 	key: string,
 	token: ColorValue
@@ -90,11 +105,21 @@ const generateColorValues = (
 				c: bgDark.c / 9.8,
 			};
 
+	const fgLightness = neutral ? 0.24 : 0.52;
+	const fgDarkLightness = neutral ? 0.96 : 0.75;
+	const bgHighlighted = adjustLightnessByForegroundDirection(bg, fgLightness, neutral ? 0.04 : 0.1);
+	const bgHighlightedDark = adjustLightnessByForegroundDirection(
+		bgDark,
+		fgDarkLightness,
+		neutral ? 0.06 : 0.1
+	);
 	const bgHighlightedFaded = neutral ? { ...bg, alpha: 0.48 } : { ...bg, alpha: 0.06 };
 	const bgHighlightedFadedDark = neutral ? { ...bgDark, alpha: 0.28 } : { ...bgDark, alpha: 0.08 };
 
-	const fg = neutral ? { ...bg, l: 0.24 } : { ...bg, l: 0.52 };
-	const fgDark = neutral ? { ...bgDark, l: 0.96 } : { ...bgDark, l: 0.75, c: bg.c * 0.85 };
+	const fg = { ...bg, l: fgLightness };
+	const fgDark = neutral
+		? { ...bgDark, l: fgDarkLightness }
+		: { ...bgDark, l: fgDarkLightness, c: bg.c * 0.85 };
 
 	const bd = neutral ? { ...bg, l: 0, alpha: 0.12 } : { ...bg, l: bg.l - 0.08 };
 	const bdDark = neutral ? { ...bgDark, l: 1, alpha: 0.12 } : { ...bgDark, l: bgDark.l + 0.1 };
@@ -111,6 +136,10 @@ const generateColorValues = (
 		[`background${capitalizedKey}Faded`]: {
 			oklch: bgFaded,
 			oklchDark: bgFadedDark,
+		},
+		[`background${capitalizedKey}Highlighted`]: {
+			oklch: bgHighlighted,
+			oklchDark: bgHighlightedDark,
 		},
 		[`background${capitalizedKey}HighlightedFaded`]: {
 			oklch: bgHighlightedFaded,

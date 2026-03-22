@@ -23,11 +23,11 @@ export type Props = Pick<
 	/** Component color scheme
 	 * @default "neutral"
 	 */
-	color?: "primary" | "critical" | "positive" | "neutral" | "media" | "inherit";
+	color?: "primary" | "critical" | "positive" | "neutral" | "warning" | "media" | "inherit";
 	/** Component render variant
 	 * @default "solid"
 	 */
-	variant?: "solid" | "outline" | "ghost" | "faded";
+	variant?: "solid" | "outline" | "ghost";
 	/** SVG component for the icon */
 	icon?: IconProps["svg"];
 	/** SVG component for the end position icon */
@@ -42,8 +42,8 @@ export type Props = Pick<
 	loading?: boolean;
 	/** aria-label attribute for the loading indicator */
 	loadingAriaLabel?: string;
-	/** Apply elevated styles to the component */
-	elevated?: boolean;
+	/** Apply raised styles to the component */
+	raised?: boolean;
 	/** Make the component take the full width of the parent element */
 	fullWidth?: G.Responsive<boolean>;
 	/** Highlight the component when component is used for an active state */

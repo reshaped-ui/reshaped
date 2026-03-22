@@ -64,17 +64,12 @@ export const selected = {
 	},
 };
 
-export const elevated = {
-	name: "elevation",
+export const raised = {
+	name: "raised",
 	render: () => (
 		<Example>
-			<Example.Item title="elevation: raised">
-				<Card elevation="raised">
-					<Placeholder />
-				</Card>
-			</Example.Item>
-			<Example.Item title="elevation: overlay">
-				<Card elevation="overlay">
+			<Example.Item title="raised">
+				<Card raised>
 					<Placeholder />
 				</Card>
 			</Example.Item>
