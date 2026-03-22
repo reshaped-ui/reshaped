@@ -73,11 +73,6 @@ export const elevated = {
 					<Placeholder />
 				</Card>
 			</Example.Item>
-			<Example.Item title="elevation: overlay">
-				<Card elevation="overlay">
-					<Placeholder />
-				</Card>
-			</Example.Item>
 		</Example>
 	),
 };

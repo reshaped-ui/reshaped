@@ -18,9 +18,6 @@
 	background: var(--rs-color-background-elevation-raised);
 }
 
-.--elevation-overlay {
-	background: var(--rs-color-background-elevation-overlay);
-}
 
 .--actionable:not(.--selected) {
 	& .content::before {
