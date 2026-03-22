@@ -239,6 +239,9 @@ export const highlighted = {
 		<Example>
 			<Example.Item title="highlighted, color: neutral">
 				<View gap={3} direction="row">
+					<Badge highlighted color="primary">
+						Badge
+					</Badge>
 					<Badge highlighted>Badge</Badge>
 				</View>
 			</Example.Item>

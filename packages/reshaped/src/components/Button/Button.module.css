@@ -6,10 +6,9 @@
 	/* Using --rs-button-p and --rs-p to dynamically reassign --rs-p for all sizes of ghost buttons, used by Aligner */
 	--rs-p-v: var(--rs-button-p-v);
 	--rs-p-h: var(--rs-button-p-h);
-	--rs-button-border-color: transparent;
 
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: background-color, box-shadow, border-color, color, transform;
+	transition-property: background-color, box-shadow, border-color, color, transform, opacity;
 	padding: var(--rs-unit-x1) var(--rs-p-h);
 	border-radius: var(--rs-button-radius);
 	cursor: pointer;
@@ -204,6 +203,7 @@
   --rs-button-border-width: 0px;
 
 	&.--color-neutral {
+		--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
 		--rs-button-background-color: var(--rs-color-background-neutral);
 		--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted);
 		--rs-button-color: var(--rs-color-on-background-neutral);
@@ -211,6 +211,7 @@
 
 	@each $color in primary, critical, positive {
 		&.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-$(color));
 			--rs-button-background-color: var(--rs-color-background-$(color));
 			--rs-button-highlight-color: var(--rs-color-background-$(color)-highlighted);
 			--rs-button-color: var(--rs-color-on-background-$(color));
@@ -218,6 +219,7 @@
 	}
 
 	&.--color-media {
+		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
 		--rs-button-color: var(--rs-color-white);
 		--rs-button-background-color: rgb(var(--rs-color-rgb-black), 0.28);
 		--rs-button-highlight-color: rgb(var(--rs-color-rgb-black), 0.36);
@@ -232,7 +234,7 @@
 		position: absolute;
 		pointer-events: none;
 		border-radius: inherit;
-		z-index: var(--rs-z-index-relative);
+		z-index: calc(var(--rs-z-index-relative) - 1);
 		inset: 0;
 		border: var(--rs-button-border-width) solid var(--rs-color-border-neutral);
 	}
@@ -243,6 +245,7 @@
 	
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-neutral);
 			--rs-button-color: var(--rs-color-foreground-$(color));
 			--rs-button-background-color: var(--rs-color-background-elevation-base);
 			--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted-faded);
@@ -250,6 +253,7 @@
 	}
 
 	&.--color-inherit {
+		--rs-button-group-separator-color: var(--rs-color-border-neutral);
 		--rs-button-color: currentcolor;
 		--rs-button-background-color: var(--rs-color-background-elevation-base);
 		--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted-faded);
@@ -261,6 +265,7 @@
 
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
+			--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
 			--rs-button-color: var(--rs-color-foreground-$(color));
 			--rs-button-background-color: transparent;
 			--rs-button-highlight-color: var(--rs-color-background-$(color)-highlighted-faded);
@@ -268,6 +273,7 @@
 	}
 
 	&.--color-inherit {
+		--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
 		--rs-button-color: inherit;
 		--rs-button-highlight-color: currentcolor;
 
@@ -350,21 +356,59 @@
 /* Button group */
 
 .group {
-	display: flex;
+	display: inline-flex;
+	position: relative;
+
+	&:has(.--full-width) {
+		display: flex;
+	}
+
+	&:has(.--variant-outline) {
+    &::before, &::after {
+      border-radius: var(--rs-radius-medium);
+    }
+
+    &:has(.--size-small) {
+      border-radius: var(--rs-radius-small);
+    }
+
+		&::before {
+			content: "";
+			position: absolute;
+			pointer-events: none;
+			z-index: var(--rs-z-index-relative);
+			inset: 0;
+			border: 1px solid var(--rs-color-border-neutral);
+			border-radius: 6px;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 1px;
+			pointer-events: none;
+			border-radius: inherit;
+			z-index: var(--rs-z-index-relative);
+		}
+	}
 }
 
 .group .root {
 	flex-shrink: 0;
 	width: auto;
 
+	&:active {
+		transform: scale(1);
+	}
+
 	&,
-	&::before {
+	& .highlight {
 		border-radius: 0;
 	}
 
 	&:first-child {
 		&,
-		&::before {
+		& .highlight {
 			border-start-start-radius: var(--rs-button-radius);
 			border-end-start-radius: var(--rs-button-radius);
 		}
@@ -372,73 +416,37 @@
 
 	&:last-child {
 		&,
-		&::before {
+		& .highlight {
 			border-start-end-radius: var(--rs-button-radius);
 			border-end-end-radius: var(--rs-button-radius);
 		}
 	}
 
-	&:not(:first-child) {
-		border-inline-start: 1px solid var(--rs-button-group-separator-color);
-
-		/* Compensate left separator width so label alignment doesn't shift */
-		padding-inline-start: calc(var(--rs-p-h) - 1px);
+	/* Reset outline border */
+	&::before {
+		border: none;
+		inset-inline-end: auto;
+		border-radius: 0;
+		transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
 	}
 
-	&:not(:last-child) {
-		border-inline-end: 0;
-		border-inline-end: 0 solid var(--rs-button-group-separator-color);
-
-		/* Keep internal horizontal space equal across grouped variants */
-		padding-inline-end: var(--rs-p-h);
+	/* Reset outline shadow */
+	&::after {
+		content: none;
 	}
 
-	&.--highlighted:not(:last-child) {
-		&::after {
-			content: "";
-			position: absolute;
-			inset-block: 0;
-			inset-inline-end: -1px;
-			pointer-events: none;
-			border-inline-end: 1px solid var(--rs-button-group-separator-color);
-		}
-
-		& + .root {
-			border-inline-start-width: 0;
-
-			/* Keep text position stable after removing the 1px group separator */
-			padding-inline-start: var(--rs-p-h);
-		}
+	&:not(:first-child)::before {
+		content: '';
+		position: absolute;
+		width: 1px;
+		inset-block: var(--rs-unit-x1);
+		inset-inline-start: -0.5px;
+		border-radius: var(--rs-radius-circular);
+		background-color: var(--rs-button-group-separator-color);
 	}
 
-	@each $color in neutral, positive, critical, primary {
-		&.--variant-solid.--color-$(color) {
-			--rs-button-group-separator-color: transparent;
-		}
-	}
-
-	&.--variant-outline.--color-neutral {
-		--rs-button-group-separator-color: var(--rs-color-border-neutral);
-	}
-
-	@each $color in positive, critical, primary {
-		&.--variant-outline.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-neutral);
-		}
-	}
-
-	@each $color in neutral, positive, critical, primary {
-		&.--variant-ghost.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-$(color)-faded);
-		}
-	}
-
-	&.--variant-solid.--color-media {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
-	}
-
-	&.--disabled {
-		--rs-button-group-separator-color: var(--rs-color-border-disabled) !important;
+	&.--variant-outline {
+		background: transparent;
 	}
 
 	&.--full-width {

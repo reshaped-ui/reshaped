@@ -1,7 +1,7 @@
 .root {
 	border-radius: var(--rs-radius-small);
 	overflow: hidden;
-	background: var(--rs-color-background-neutral-faded);
+	background: var(--rs-color-background-neutral);
 	display: flex;
 	align-items: flex-start;
 }

@@ -714,18 +714,25 @@ export const group: StoryObj = {
 				</Button.Group>
 			</Example.Item>
 			<Example.Item title="variant: solid">
-				<View gap={2}>
-					{(["neutral", "primary", "critical", "positive", "media"] as const).map((color) => (
+				<View gap={2} align="start">
+					{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
 						<Button.Group key={color}>
 							<Button color={color}>One</Button>
 							<Button color={color}>Two</Button>
 							<Button color={color}>Three</Button>
 						</Button.Group>
 					))}
+					<View backgroundColor="primary" padding={4} borderRadius="medium">
+						<Button.Group>
+							<Button color="media">One</Button>
+							<Button color="media">Two</Button>
+							<Button color="media">Three</Button>
+						</Button.Group>
+					</View>
 				</View>
 			</Example.Item>
 			<Example.Item title="variant: outline">
-				<View gap={2}>
+				<View gap={2} align="start" j>
 					{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
 						<Button.Group key={color}>
 							<Button color={color} variant="outline">
@@ -743,7 +750,7 @@ export const group: StoryObj = {
 			</Example.Item>
 
 			<Example.Item title="variant: ghost">
-				<View gap={2}>
+				<View gap={2} align="start">
 					{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
 						<Button.Group key={color}>
 							<Button color={color} variant="ghost">
