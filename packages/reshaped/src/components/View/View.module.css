@@ -51,14 +51,6 @@
 	color: var(--rs-color-white);
 }
 
-.--shadow-raised {
-	box-shadow: var(--rs-shadow-raised);
-}
-
-.--shadow-overlay {
-	box-shadow: var(--rs-shadow-overlay);
-}
-
 .--overflow-hidden {
 	overflow: hidden;
 }

@@ -27,8 +27,8 @@ const Avatar: React.FC<T.Props> = (props) => {
 	const alt = props.alt || imageAttributes?.alt;
 	const radius = squared
 		? responsivePropDependency(size, (size) => {
-				if (size >= 24) return "large";
-				if (size >= 12) return "medium";
+				if (size >= 20) return "large";
+				if (size >= 9) return "medium";
 				return "small";
 			})
 		: "circular";

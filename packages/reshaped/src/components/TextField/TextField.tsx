@@ -5,6 +5,7 @@ import React from "react";
 
 import { useFormControl } from "@/components/FormControl";
 import Icon from "@/components/Icon";
+import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 
 import s from "./TextField.module.css";
@@ -93,10 +94,16 @@ const TextField: React.FC<T.Props> = (props) => {
 		formControl?.attributes.id || (props.inputAttributes?.id as string | undefined) || id;
 	const disabled = formControl?.disabled || props.disabled;
 	const hasError = formControl?.hasError || props.hasError;
+	const mixin = resolveMixin({
+		shadow: variant === "outline" ? "base" : undefined,
+		borderColor: disabled ? "disabled" : "neutral",
+		border: variant === "outline" ? true : undefined,
+	});
 	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
 	const rootClassName = classNames(
 		s.root,
 		className,
+		...mixin.classNames,
 		size && responsiveClassNames(s, "--size", size),
 		hasError && s["--status-error"],
 		disabled && s["--disabled"],
@@ -125,6 +132,7 @@ const TextField: React.FC<T.Props> = (props) => {
 						endSlotPadding !== undefined && endSlotPadding >= 0
 							? `calc(var(--rs-unit-x1) * ${endSlotPadding})`
 							: undefined,
+					...mixin.variables,
 				} as React.CSSProperties
 			}
 			data-rs-aligner-target

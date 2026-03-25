@@ -158,6 +158,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		borderInline,
 		borderBlock,
 		radius: borderRadius,
+		shadow,
 	});
 
 	let renderedItemIndex = 0;
@@ -277,7 +278,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		className,
 		mixinStyles.classNames,
 		backgroundColor && s[`--bg-${backgroundColor}`],
-		shadow && s[`--shadow-${shadow}`],
 		overflow && s[`--overflow-${overflow}`],
 		animated && s["--animated"],
 		divided && s["--divided"],

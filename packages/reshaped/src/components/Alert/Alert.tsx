@@ -74,7 +74,7 @@ const Alert: React.FC<T.Props> = (props) => {
 			gap={3}
 			padding={4}
 			bleed={bleed}
-			borderRadius="medium"
+			borderRadius="large"
 			borderColor={`${color}-faded`}
 			backgroundColor={`${color}-faded`}
 			className={className}
@@ -86,7 +86,7 @@ const Alert: React.FC<T.Props> = (props) => {
 			{icon ? (
 				<>
 					<div className={s.icon}>
-						<Icon svg={icon} size={4} color={color} />
+						<Icon svg={icon} size={4} color={color === "neutral" ? "neutral-faded" : color} />
 					</div>
 					<View.Item grow>{applyActions(renderContent())}</View.Item>
 				</>
