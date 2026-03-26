@@ -1,7 +1,7 @@
 .root {
 	/* This variable is only used by Aligner */
 	--rs-p-h: var(--rs-text-field-p-h);
-	--rs-p-v: 0;
+	--rs-p-v: 0px;
 	--rs-text-field-start-slot-padding: var(--rs-unit-x2);
 	--rs-text-field-end-slot-padding: var(--rs-unit-x2);
 	--rs-text-field-focus-border-color: var(--rs-color-border-primary);
@@ -20,7 +20,7 @@
 		):focus-within,
 	&:has(.icon:active),
 	&.--focused {
-		box-shadow: 0 0 0 var(--rs-outline-width) var(--rs-text-field-focus-border-color) inset;
+		box-shadow: var(--rs-outline-shadow);
 	}
 
 	&.--multiline {
@@ -229,9 +229,9 @@
 		--rs-text-field-p-v: var(--rs-unit-x4);
 		--rs-text-field-p-h: var(--rs-unit-x5);
 		--rs-text-field-icon-align: var(--rs-unit-x1);
-		--rs-text-field-font-size: var(--rs-font-size-title-6);
-		--rs-text-field-line-height: var(--rs-line-height-title-6);
-		--rs-text-field-letter-spacing: var(--rs-letter-spacing-title-6);
+		--rs-text-field-font-size: var(--rs-font-size-body-1);
+		--rs-text-field-line-height: var(--rs-line-height-body-1);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-1);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
 		--rs-text-field-min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4) * 2);
 	}

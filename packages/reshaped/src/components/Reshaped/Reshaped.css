@@ -1,7 +1,8 @@
 @layer rs.reset {
 	[data-rs-theme] {
 		--rs-outline-width: 1.5px;
-		--rs-outline: 1.5px solid var(--rs-color-border-primary);
+		--rs-outline: var(--rs-outline-width) solid var(--rs-color-border-primary);
+		--rs-outline-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-primary) inset;
 		--rs-radius-circular: 9999px;
 	}
 

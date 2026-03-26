@@ -22,6 +22,10 @@ export const variants = {
 	name: "variant",
 	render: () => (
 		<Example>
+			<Example.Item title="variant: outline">
+				<TextArea name="Name" placeholder="Enter your name" />
+			</Example.Item>
+
 			<Example.Item title="variant: faded">
 				<TextArea variant="faded" name="Name" placeholder="Enter your name" />
 			</Example.Item>
