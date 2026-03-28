@@ -27,7 +27,7 @@ export const base = {
 		<Example>
 			<Example.Item title="vertical scroll">
 				<ScrollArea height="100px" scrollbarDisplay="visible">
-					<View backgroundColor="elevation-base" padding={4}>
+					<View backgroundColor="neutral-faded" padding={4}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -41,7 +41,7 @@ export const base = {
 
 			<Example.Item title="horizontal scroll">
 				<ScrollArea height="100px" scrollbarDisplay="visible">
-					<View backgroundColor="elevation-base" padding={4} width="150%" height="100px">
+					<View backgroundColor="neutral-faded" padding={4} width="150%" height="100px">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s
 					</View>
@@ -50,7 +50,7 @@ export const base = {
 
 			<Example.Item title="horizontal and vertical scroll">
 				<ScrollArea height="100px" scrollbarDisplay="visible">
-					<View backgroundColor="elevation-base" padding={4} width="150%">
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -71,7 +71,7 @@ export const scrollbarDisplay = {
 		<Example>
 			<Example.Item title="scrollbarDisplay: hover">
 				<ScrollArea height="100px">
-					<View backgroundColor="elevation-base" padding={4} width="150%">
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -85,7 +85,7 @@ export const scrollbarDisplay = {
 
 			<Example.Item title="scrollbarDisplay: hidden">
 				<ScrollArea height="100px" scrollbarDisplay="hidden">
-					<View backgroundColor="elevation-base" padding={4} width="150%">
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -99,7 +99,7 @@ export const scrollbarDisplay = {
 
 			<Example.Item title="scrollbarDisplay: visible">
 				<ScrollArea height="100px" scrollbarDisplay="visible">
-					<View backgroundColor="elevation-base" padding={4} width="150%">
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -120,7 +120,7 @@ export const height = {
 		<Example>
 			<Example.Item title="height: 80px">
 				<ScrollArea height="80px">
-					<View backgroundColor="elevation-base" padding={4}>
+					<View backgroundColor="neutral-faded" padding={4}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -134,7 +134,7 @@ export const height = {
 
 			<Example.Item title="responsive height: s 80px, m: 120px">
 				<ScrollArea height={{ s: "80px", m: "120px" }}>
-					<View backgroundColor="elevation-base" padding={4}>
+					<View backgroundColor="neutral-faded" padding={4}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -148,7 +148,7 @@ export const height = {
 
 			<Example.Item title="maxHeight: 80px">
 				<ScrollArea maxHeight="80px">
-					<View backgroundColor="elevation-base" padding={4}>
+					<View backgroundColor="neutral-faded" padding={4}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
@@ -162,7 +162,7 @@ export const height = {
 
 			<Example.Item title="responsive max height: s 80px, m: 200px">
 				<ScrollArea maxHeight={{ s: "80px", m: "200px" }}>
-					<View backgroundColor="elevation-base" padding={4}>
+					<View backgroundColor="neutral-faded" padding={4}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
 						printer took a galley of type and scrambled it to make a type specimen book. It has
