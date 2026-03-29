@@ -249,6 +249,7 @@
 	--rs-text-field-focus-border-color: transparent;
 
 	background: transparent;
+	box-shadow: none !important;
 }
 
 .root.--status-error:not(.--variant-headless) {

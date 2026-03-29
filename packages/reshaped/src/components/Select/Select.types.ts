@@ -12,15 +12,6 @@ type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 type RenderSingleValue = (args: { value: string }) => React.ReactNode;
 type RenderMultipleValues = (args: { value: string[] }) => React.ReactNode;
 
-type NativeOption = {
-	/** Option text label */
-	label: string;
-	/** Option value used in the form submission */
-	value: string;
-	/** Disable the option from the selection */
-	disabled?: boolean;
-};
-
 export type OptionProps = Pick<
 	MenuItemProps,
 	| "attributes"
@@ -69,8 +60,6 @@ type BaseFragment = {
 };
 
 export type CustomFragment = {
-	/** Options for the select */
-	options?: never;
 	/** Callback when the input is focused */
 	onFocus?: (e: React.FocusEvent<HTMLButtonElement>) => void;
 	/** Callback when the input is blurred */
@@ -81,9 +70,6 @@ export type CustomFragment = {
 } & Pick<DropdownMenuProps, "position" | "width" | "fallbackPositions" | "positionRef">;
 
 export type NativeFragment = {
-	/** Options for the select */
-	/** @deprecated Use <option /> children instead */
-	options?: NativeOption[];
 	/** Callback when the input is focused */
 	onFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 	/** Callback when the input is blurred */
@@ -152,7 +138,10 @@ export type Props =
 
 export type TriggerProps = Pick<
 	CustomControlledProps,
+	| "attributes"
+	| "className"
 	| "disabled"
+	| "hasError"
 	| "onClick"
 	| "onFocus"
 	| "onBlur"
@@ -160,6 +149,7 @@ export type TriggerProps = Pick<
 	| "startSlot"
 	| "icon"
 	| "size"
+	| "variant"
 	| "placeholder"
 	| "value"
 	| "name"

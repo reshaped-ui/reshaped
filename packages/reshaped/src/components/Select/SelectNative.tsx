@@ -3,6 +3,9 @@
 import { classNames } from "@reshaped/headless";
 import React from "react";
 
+import { resolveMixin } from "@/styles/mixin";
+import { responsiveClassNames } from "@/utilities/props";
+
 import s from "./Select.module.css";
 import SelectEndContent from "./SelectEndContent";
 import SelectStartContent from "./SelectStartContent";
@@ -13,7 +16,7 @@ const SelectNative: React.FC<T.NativeProps> = (props) => {
 	const {
 		startSlot,
 		icon,
-		size,
+		size = "medium",
 		inputAttributes,
 		onFocus,
 		onBlur,
@@ -23,12 +26,34 @@ const SelectNative: React.FC<T.NativeProps> = (props) => {
 		defaultValue,
 		onChange,
 		onClick,
+		variant = "outline",
+		hasError,
+		className,
+		attributes,
 		placeholder,
 		id,
 		children,
 	} = props;
+	const mixin = resolveMixin({
+		shadow: variant === "outline" ? "outline" : undefined,
+		borderColor: disabled ? "disabled" : "neutral",
+		border: variant === "outline" ? true : undefined,
+	});
+	const rootClassName = classNames(
+		s.root,
+		className,
+		...mixin.classNames,
+		size && responsiveClassNames(s, "--size", size),
+		hasError && s["--status-error"],
+		disabled && s["--disabled"],
+		variant && s[`--variant-${variant}`]
+	);
 	const [empty, setEmpty] = React.useState(value === undefined ? !defaultValue : !value);
-	const selectClassNames = classNames(s.input, placeholder && empty && s["input--placeholder"]);
+	const selectClassNames = classNames(
+		s.input,
+		inputAttributes?.className,
+		placeholder && empty && s["input--placeholder"]
+	);
 
 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const nextValue = event.target.value;
@@ -47,7 +72,15 @@ const SelectNative: React.FC<T.NativeProps> = (props) => {
 	}, [value]);
 
 	return (
-		<>
+		<div
+			{...attributes}
+			style={{
+				...(attributes?.style as React.CSSProperties),
+				...mixin.variables,
+			}}
+			data-rs-aligner-target
+			className={rootClassName}
+		>
 			<SelectStartContent startSlot={startSlot} icon={icon} size={size} />
 			<select
 				{...inputAttributes}
@@ -66,7 +99,7 @@ const SelectNative: React.FC<T.NativeProps> = (props) => {
 				{children}
 			</select>
 			<SelectEndContent disabled={disabled} size={size} />
-		</>
+		</div>
 	);
 };
 

@@ -54,6 +54,7 @@
 	overflow: auto;
 	max-height: 100%;
 	flex-grow: 1;
+	overscroll-behavior: none;
 }
 
 .positioner.--width-trigger .content {

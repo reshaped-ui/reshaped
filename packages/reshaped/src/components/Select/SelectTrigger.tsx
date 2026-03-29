@@ -1,9 +1,12 @@
 "use client";
 
+import { classNames } from "@reshaped/headless";
 import React from "react";
 
 import Actionable from "@/components/Actionable";
 import Text from "@/components/Text";
+import { resolveMixin } from "@/styles/mixin";
+import { responsiveClassNames } from "@/utilities/props";
 
 import s from "./Select.module.css";
 import SelectEndContent from "./SelectEndContent";
@@ -18,27 +21,53 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 		onClick,
 		onFocus,
 		onBlur,
+		attributes,
+		className,
+		variant = "outline",
+		hasError,
 		inputAttributes,
 		startSlot,
 		icon,
-		size,
+		size = "medium",
 		placeholder,
 		value,
 		name,
 		id,
 	} = props;
+	const mixin = resolveMixin({
+		shadow: variant === "outline" ? "outline" : undefined,
+		borderColor: disabled ? "disabled" : "neutral",
+		border: variant === "outline" ? true : undefined,
+	});
+	const rootClassName = classNames(
+		s.root,
+		className,
+		...mixin.classNames,
+		size && responsiveClassNames(s, "--size", size),
+		hasError && s["--status-error"],
+		disabled && s["--disabled"],
+		variant && s[`--variant-${variant}`]
+	);
 
 	return (
-		<>
+		<div
+			{...attributes}
+			style={{
+				...(attributes?.style as React.CSSProperties),
+				...mixin.variables,
+			}}
+			className={rootClassName}
+			data-rs-aligner-target
+		>
 			<Actionable
-				className={s.input}
+				className={classNames(s.input, inputAttributes?.className)}
 				disabled={disabled}
 				disableFocusRing
 				onClick={onClick}
 				attributes={{
+					...inputAttributes,
 					onFocus: onFocus || inputAttributes?.onFocus,
 					onBlur: onBlur || inputAttributes?.onBlur,
-					...inputAttributes,
 				}}
 			>
 				<SelectStartContent startSlot={startSlot} icon={icon} size={size} />
@@ -55,7 +84,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				name={name}
 				id={id}
 			/>
-		</>
+		</div>
 	);
 };
 

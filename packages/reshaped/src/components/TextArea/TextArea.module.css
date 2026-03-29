@@ -97,10 +97,7 @@
 
 .root.--variant-headless {
 	background: transparent;
-
-	&:focus-within {
-		box-shadow: none;
-	}
+	box-shadow: none !important;
 }
 
 .root.--status-error:not(.--variant-headless) {

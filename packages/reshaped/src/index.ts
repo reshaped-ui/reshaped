@@ -1,8 +1,6 @@
 /**
  * Components
  */
-export type { ActionBarProps } from "@/components/ActionBar";
-export { default as ActionBar } from "@/components/ActionBar";
 export type { AlertProps } from "@/components/Alert";
 export { default as Alert } from "@/components/Alert";
 export type { AutocompleteInstance, AutocompleteProps } from "@/components/Autocomplete";
@@ -33,8 +31,6 @@ export type { DropdownMenuInstance, DropdownMenuProps } from "@/components/Dropd
 export { default as DropdownMenu } from "@/components/DropdownMenu";
 export type { FileUploadProps } from "@/components/FileUpload";
 export { default as FileUpload } from "@/components/FileUpload";
-export type { HotkeyProps } from "@/components/Hotkey";
-export { default as Hotkey } from "@/components/Hotkey";
 export type { LinkProps } from "@/components/Link";
 export { default as Link } from "@/components/Link";
 export type { LoaderProps } from "@/components/Loader";
@@ -51,24 +47,20 @@ export type { PinFieldProps } from "@/components/PinField";
 export { default as PinField } from "@/components/PinField";
 export type { PopoverInstance, PopoverProps } from "@/components/Popover";
 export { default as Popover } from "@/components/Popover";
-export type { ProgressProps } from "@/components/ProgressBar";
-export { default as Progress } from "@/components/ProgressBar";
+export type { ProgressBarProps } from "@/components/ProgressBar";
+export { default as ProgressBar } from "@/components/ProgressBar";
 export type { ProgressIndicatorProps } from "@/components/ProgressIndicator";
 export { default as ProgressIndicator } from "@/components/ProgressIndicator";
 export type { RadioProps } from "@/components/Radio";
 export { default as Radio } from "@/components/Radio";
 export type { RadioGroupProps } from "@/components/RadioGroup";
 export { default as RadioGroup } from "@/components/RadioGroup";
-export type { ScrimProps } from "@/components/Scrim";
-export { default as Scrim } from "@/components/Scrim";
-export type { SelectProps } from "@/components/Select";
-export { default as Select } from "@/components/Select";
+export type { SelectProps, SelectTriggerProps } from "@/components/Select";
+export { default as Select, SelectTrigger } from "@/components/Select";
 export type { SkeletonProps } from "@/components/Skeleton";
 export { default as Skeleton } from "@/components/Skeleton";
 export type { SliderProps } from "@/components/Slider";
 export { default as Slider } from "@/components/Slider";
-export type { StepperProps } from "@/components/Stepper";
-export { default as Stepper } from "@/components/Stepper";
 export type { SwitchProps } from "@/components/Switch";
 export { default as Switch } from "@/components/Switch";
 export type {
@@ -86,8 +78,6 @@ export type { TextAreaProps } from "@/components/TextArea";
 export { default as TextArea } from "@/components/TextArea";
 export type { TextFieldProps } from "@/components/TextField";
 export { default as TextField } from "@/components/TextField";
-export type { TimelineItemProps, TimelineProps } from "@/components/Timeline";
-export { default as Timeline } from "@/components/Timeline";
 export type { ToastProps, ToastProviderProps, ToastShowProps } from "@/components/Toast";
 export { ToastProvider, useToast } from "@/components/Toast";
 export type { ToggleButtonProps } from "@/components/ToggleButton";
