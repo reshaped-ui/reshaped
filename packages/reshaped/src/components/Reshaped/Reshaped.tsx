@@ -21,7 +21,6 @@ const Reshaped: React.FC<T.Props> = (props) => {
 		defaultColorMode,
 		defaultViewport,
 		defaultRTL,
-		toastOptions,
 		scoped,
 		className,
 	} = props;
@@ -44,7 +43,7 @@ const Reshaped: React.FC<T.Props> = (props) => {
 					scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
 				>
 					<SingletonViewportProvider defaultViewport={defaultViewport}>
-						<ToastProvider options={toastOptions}>{props.children}</ToastProvider>
+						<ToastProvider>{props.children}</ToastProvider>
 					</SingletonViewportProvider>
 				</PrivateTheme>
 			</GlobalColorMode>

@@ -11,12 +11,20 @@ import ToastContainer from "./ToastContainer";
 
 const ToastRegion: React.FC<T.RegionProps> = (props) => {
 	const { position, nested } = props;
-	const { queues, options } = React.useContext(ToastContext);
+	const { queues } = React.useContext(ToastContext);
 	const [inspecting, setInspecting] = React.useState(false);
 	const ignoreHoverRef = React.useRef(false);
 	const rootRef = React.useRef<HTMLUListElement>(null);
 	const queue = queues[position];
-	const { width, expanded } = options?.[position] || {};
+	const collapsedWidth = React.useMemo(() => {
+		for (let index = queue.length - 1; index >= 0; index -= 1) {
+			const item = queue[index];
+			if (item.status === "exiting") continue;
+			return item.toastProps.width;
+		}
+
+		return undefined;
+	}, [queue]);
 	const regionClassNames = classNames(
 		s.region,
 		s[`region--position-${position}`],
@@ -76,7 +84,6 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 			onClick={handleClick}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			style={{ width }}
 		>
 			{queue.map((data, index) => {
 				const visibleIndex = filteredLength - index + hiddenCount - 1;
@@ -88,7 +95,8 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 						key={data.id}
 						{...data}
 						index={visibleIndex}
-						inspected={inspecting || !!expanded}
+						inspected={inspecting}
+						collapsedWidth={collapsedWidth}
 					/>
 				);
 			})}

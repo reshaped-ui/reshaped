@@ -7,15 +7,23 @@ import React from "react";
 import { onNextFrame } from "@/utilities/animation";
 
 import Toast from "./Toast";
-import { timeouts } from "./Toast.constants";
+import { timeouts, toastWidths } from "./Toast.constants";
 import ToastContext from "./Toast.context";
 import s from "./Toast.module.css";
 
 import type * as T from "./Toast.types";
 
+const isWidthPreset = (width: T.ShowProps["width"]): width is T.WidthPreset =>
+	width === "short" || width === "long";
+
+const resolveWidth = (width?: T.ShowProps["width"]) => {
+	if (isWidthPreset(width)) return toastWidths[width];
+	return width;
+};
+
 const ToastContainer: React.FC<T.ContainerProps> = (props) => {
-	const { toastProps, id, status, inspected, index } = props;
-	const { timeout = "short" } = toastProps;
+	const { toastProps, id, status, inspected, index, collapsedWidth } = props;
+	const { timeout = "short", width } = toastProps;
 	const { show, hide, remove } = React.useContext(ToastContext);
 	const [toastHeight, setToastHeight] = React.useState<number>();
 	const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null);
@@ -29,6 +37,7 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 		!inspected && (index === 1 || index === 2) && s[`container--index-${index}`],
 		!inspected && index >= 3 && s["container--index-overflow"]
 	);
+	const resolvedWidth = resolveWidth(inspected ? width : (collapsedWidth ?? width));
 
 	const stopTimer = React.useCallback(() => {
 		if (!timeoutRef.current) return;
@@ -109,6 +118,8 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 		<li
 			className={containerClassNames}
 			style={{
+				width: resolvedWidth,
+				maxWidth: "100%",
 				// Height + padding + borders
 				height: status === "entered" ? `calc(${toastHeight}px + var(--rs-unit-x2) + 2px)` : 0,
 				// Disable transition when height of the toast can change

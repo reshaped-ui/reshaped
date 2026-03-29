@@ -1,44 +1,14 @@
-import { useToggle } from "@reshaped/headless";
 import React from "react";
 
 import Button from "@/components/Button";
-import Dismissible from "@/components/Dismissible";
 import Image from "@/components/Image";
-import Modal from "@/components/Modal";
-import TextField from "@/components/TextField";
 import View from "@/components/View";
 
-import type { ModalProps } from "@/components/Modal";
+import { useToast } from "./components/Toast";
 
 export default {
 	title: "Sandbox",
 	chromatic: { disableSnapshot: true },
-};
-
-const Demo: React.FC<ModalProps & { title?: string; subtitle?: string }> = (props) => {
-	const { active: activeProp, title, subtitle, children, ...modalProps } = props;
-	const { active, activate, deactivate } = useToggle(activeProp);
-
-	return (
-		<>
-			<Button onClick={activate}>Open dialog</Button>
-			<Modal {...modalProps} active={active} onClose={deactivate}>
-				<View gap={3}>
-					{(title || subtitle) && (
-						<Dismissible onClose={deactivate} closeAriaLabel="Close modal">
-							{title && <Modal.Title>{title}</Modal.Title>}
-							{subtitle && <Modal.Subtitle>{subtitle}</Modal.Subtitle>}
-						</Dismissible>
-					)}
-					{children ||
-						"Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."}
-					<Button onClick={deactivate}>Close</Button>
-					<TextField name="hey" />
-					<View height="1000px" backgroundColor="neutral-faded" />
-				</View>
-			</Modal>
-		</>
-	);
 };
 
 const Preview: React.FC<{ children: React.ReactNode }> = (props) => {
@@ -62,5 +32,25 @@ export const preview = () => {
 };
 
 const Component = () => {
-	return <Demo position="start" />;
+	const widths = ["260px", "360px", "420px"] as const;
+	const counterRef = React.useRef(0);
+	const toast = useToast();
+
+	return (
+		<View align="center" justify="center" height="100%">
+			<Button
+				onClick={() => {
+					const width = widths[counterRef.current % widths.length];
+					counterRef.current += 1;
+					toast.show({
+						title: `Toast width ${width}`,
+						text: "Stack to inspect collapsed and expanded widths",
+						width,
+					});
+				}}
+			>
+				Show notification
+			</Button>
+		</View>
+	);
 };
