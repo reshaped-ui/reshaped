@@ -48,25 +48,29 @@ const Demo: React.FC<
 	const { position = "bottom-start", children, text, contentHeight, contentWidth, ...rest } = props;
 
 	return (
-		<Flyout position={position} {...rest}>
+		<Flyout
+			position={position}
+			{...rest}
+			scrollableAttributes={{
+				style: {
+					padding: "var(--rs-unit-x4)",
+				},
+			}}
+			contentAttributes={{
+				style: {
+					background: "var(--rs-color-background-elevation-overlay)",
+					height: contentHeight === false ? undefined : contentHeight || 160,
+					width: contentWidth === false ? undefined : contentWidth || 160,
+					borderRadius: "var(--rs-radius-medium)",
+					border: "1px solid var(--rs-color-border-neutral-faded)",
+					boxSizing: "border-box",
+				},
+			}}
+		>
 			<Flyout.Trigger>
 				{(attributes) => <Button attributes={attributes}>{text || position}</Button>}
 			</Flyout.Trigger>
-			<Flyout.Content
-				attributes={{
-					style: {
-						background: "var(--rs-color-background-elevation-overlay)",
-						padding: "var(--rs-unit-x4)",
-						height: contentHeight === false ? undefined : contentHeight || 160,
-						width: contentWidth === false ? undefined : contentWidth || 160,
-						borderRadius: "var(--rs-radius-medium)",
-						border: "1px solid var(--rs-color-border-neutral-faded)",
-						boxSizing: "border-box",
-					},
-				}}
-			>
-				{children || "Content"}
-			</Flyout.Content>
+			<Flyout.Content>{children || "Content"}</Flyout.Content>
 		</Flyout>
 	);
 };

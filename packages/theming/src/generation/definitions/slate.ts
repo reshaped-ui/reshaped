@@ -125,7 +125,7 @@ const theme: ThemeDefinition = {
 	},
 
 	shadow: {
-		base: {
+		outline: {
 			parts: [
 				{
 					offsetX: 0,
@@ -165,7 +165,7 @@ const theme: ThemeDefinition = {
 				],
 			},
 		},
-		baseIntense: {
+		outlineIntense: {
 			parts: [
 				{
 					offsetX: 0,
@@ -289,17 +289,9 @@ const theme: ThemeDefinition = {
 			parts: [
 				{
 					offsetX: 0,
-					offsetY: 32,
-					blurRadius: 48,
-					spreadRadius: -8,
-					colorToken: "black",
-					opacity: 0.06,
-				},
-				{
-					offsetX: 0,
 					offsetY: 16,
 					blurRadius: 24,
-					spreadRadius: -6,
+					spreadRadius: -4,
 					colorToken: "black",
 					opacity: 0.06,
 				},
@@ -311,22 +303,22 @@ const theme: ThemeDefinition = {
 					colorToken: "black",
 					opacity: 0.06,
 				},
+				{
+					offsetX: 0,
+					offsetY: 4,
+					blurRadius: 6,
+					spreadRadius: -2,
+					colorToken: "black",
+					opacity: 0.06,
+				},
 			],
 			dark: {
 				parts: [
 					{
 						offsetX: 0,
-						offsetY: 32,
-						blurRadius: 48,
-						spreadRadius: -8,
-						colorToken: "black",
-						opacity: 0.06,
-					},
-					{
-						offsetX: 0,
 						offsetY: 16,
 						blurRadius: 24,
-						spreadRadius: -6,
+						spreadRadius: -4,
 						colorToken: "black",
 						opacity: 0.06,
 					},
@@ -334,6 +326,14 @@ const theme: ThemeDefinition = {
 						offsetX: 0,
 						offsetY: 8,
 						blurRadius: 12,
+						spreadRadius: -4,
+						colorToken: "black",
+						opacity: 0.06,
+					},
+					{
+						offsetX: 0,
+						offsetY: 8,
+						blurRadius: 6,
 						spreadRadius: -4,
 						colorToken: "black",
 						opacity: 0.06,

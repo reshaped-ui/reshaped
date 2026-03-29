@@ -34,7 +34,7 @@ const TextArea: React.FC<T.Props> = (props) => {
 	const disabled = formControl?.disabled || props.disabled;
 	const hasError = formControl?.hasError || props.hasError;
 	const decoratorMixin = resolveMixin({
-		shadow: variant === "outline" ? "base" : undefined,
+		shadow: variant === "outline" ? "outline" : undefined,
 		borderColor: disabled ? "disabled" : "neutral",
 		border: variant === "outline" ? true : undefined,
 	});

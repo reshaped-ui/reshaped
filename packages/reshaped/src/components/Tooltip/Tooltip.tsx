@@ -23,6 +23,7 @@ const Tooltip: React.FC<T.Props> = (props) => {
 	return (
 		<Flyout
 			{...flyoutProps}
+			contentGap={flyoutProps.contentGap ?? 1.5}
 			position={position}
 			triggerType="hover"
 			// Disable group timeouts by default since it's not controlled by the default user events

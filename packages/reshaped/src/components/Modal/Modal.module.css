@@ -6,13 +6,13 @@
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	box-shadow: var(--rs-shadow-raised);
+	box-shadow: var(--rs-shadow-overlay);
 	will-change: transform, opacity;
 	outline: none;
 	overscroll-behavior: none;
 
 	[data-rs-keyboard] &:focus {
-		box-shadow: var(--rs-shadow-focus);
+		outline: var(--rs-outline);
 	}
 
 	&.--contained {

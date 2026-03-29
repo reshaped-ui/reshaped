@@ -52,6 +52,14 @@ since it reset the border width/color without using @layer
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
 		transition-property: opacity, transform;
 	}
+
+	[data-rs-keyboard] & {
+		transition: none;
+
+		&::after {
+			transition: none;
+		}
+	}
 }
 
 @responsive .--size {
@@ -72,8 +80,8 @@ since it reset the border width/color without using @layer
 }
 
 [data-rs-keyboard] .input:focus + .decorator {
-	border-color: var(--rs-color-border-primary);
-	border-width: var(--rs-outline-width);
+	outline: var(--rs-outline);
+	outline-offset: var(--rs-outline-width);
 }
 
 /* } */

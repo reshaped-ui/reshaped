@@ -1,10 +1,10 @@
 import type * as TColor from "../color/color.types";
 
 export type Name =
-	| "base"
+	| "outline"
 	| "raised"
 	| "overlay"
-	| "baseIntense"
+	| "outlineIntense"
 	| "raisedIntense"
 	| "overlayIntense";
 

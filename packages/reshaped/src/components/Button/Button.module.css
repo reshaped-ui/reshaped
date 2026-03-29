@@ -240,7 +240,7 @@
 	}
 
 	&::after {
-		box-shadow: var(--rs-shadow-base);
+		box-shadow: var(--rs-shadow-outline);
 	}
 	
 	@each $color in neutral, primary, critical, positive {

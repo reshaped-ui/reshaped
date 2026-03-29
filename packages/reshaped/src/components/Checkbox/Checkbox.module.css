@@ -83,8 +83,8 @@ since it reset the border width/color without using @layer
 }
 
 [data-rs-keyboard] .input:focus + .decorator {
-	border-color: var(--rs-color-border-primary);
-	border-width: var(--rs-outline-width);
+	outline: var(--rs-outline);
+	outline-offset: var(--rs-outline-width);
 }
 
 /* } */

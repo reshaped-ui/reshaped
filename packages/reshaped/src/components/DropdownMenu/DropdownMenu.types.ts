@@ -28,7 +28,6 @@ export type Props = Pick<
 	| "containerRef"
 	| "positionRef"
 	| "originCoordinates"
-	| "borderRadius"
 	| "elevation"
 	| "initialFocusRef"
 > & {

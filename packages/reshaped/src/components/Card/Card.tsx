@@ -42,7 +42,7 @@ const Card: Component = forwardRef((props, ref) => {
 		bleed,
 		borderColor: "neutral-faded",
 		border: true,
-		shadow: raised ? "raised" : "base",
+		shadow: raised ? "raised" : "outline",
 	});
 
 	const rootClassNames = classNames(

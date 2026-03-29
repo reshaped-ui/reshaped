@@ -98,7 +98,6 @@
 --rs-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
 --rs-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 --rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
---rs-shadow-overlay: 0px 32px 48px -8px rgba(0, 0, 0, 0.06), 0px 16px 24px -6px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06);
 --rs-shadow-overlay-intense: 0px 32px 48px -8px rgba(0, 0, 0, 0.08), 0px 16px 24px -6px rgba(0, 0, 0, 0.08), 0px 8px 12px -4px rgba(0, 0, 0, 0.08);
 --rs-viewport-m-min: 660;
 --rs-viewport-l-min: 900;
@@ -182,10 +181,11 @@
 --rs-color-rgb-background-elevation-overlay: 255, 255, 255;
 --rs-color-rgb-background-page: 255, 255, 255;
 --rs-color-rgb-background-page-faded: 248.2935, 248.2935, 248.2935;
---rs-shadow-base: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.06);
---rs-shadow-base-intense: 0px 1px 2px 0px rgba(0, 0, 0, 0.08), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+--rs-shadow-outline: 0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.06);
+--rs-shadow-outline-intense: 0px 1px 2px 0px rgba(0, 0, 0, 0.08), 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
 --rs-shadow-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
 --rs-shadow-raised-intense: 0px 12px 12px -4px rgba(0, 0, 0, 0.1), 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
+--rs-shadow-overlay: 0px 16px 24px -4px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 4px 6px -2px rgba(0, 0, 0, 0.06);
 			}
 		
 			[data-rs-theme~="slate"][data-rs-color-mode="dark"] {
@@ -262,9 +262,10 @@
 --rs-color-rgb-background-elevation-overlay: 28.815, 28.815, 28.815;
 --rs-color-rgb-background-page: 13.209, 13.209, 13.209;
 --rs-color-rgb-background-page-faded: 17.5185, 17.5185, 17.5185;
---rs-shadow-base: 0px -1px 2px -0.5px rgba(255, 255, 255, 0.06), 0px -1px 3px -1px rgba(255, 255, 255, 0.05);
---rs-shadow-base-intense: 0px -1px 2px 0px rgba(255, 255, 255, 0.08), 0px -1px 3px 0px rgba(255, 255, 255, 0.08);
+--rs-shadow-outline: 0px -1px 2px -0.5px rgba(255, 255, 255, 0.06), 0px -1px 3px -1px rgba(255, 255, 255, 0.05);
+--rs-shadow-outline-intense: 0px -1px 2px 0px rgba(255, 255, 255, 0.08), 0px -1px 3px 0px rgba(255, 255, 255, 0.08);
 --rs-shadow-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px -2px 2px -1px rgba(255, 255, 255, 0.1);
 --rs-shadow-raised-intense: 0px 12px 12px -4px rgba(0, 0, 0, 0.1), 0px -2px 2px 0px rgba(255, 255, 255, 0.1);
+--rs-shadow-overlay: 0px 16px 24px -4px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 8px 6px -4px rgba(0, 0, 0, 0.06);
 			}
 		

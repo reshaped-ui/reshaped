@@ -424,27 +424,3 @@ export const testContentEditable = {
 		);
 	},
 };
-
-export const variant = {
-	name: "variant [deprecated]",
-	render: () => (
-		<Example>
-			<Example.Item title="variant: headless">
-				<Popover variant="headless" defaultActive position="bottom-start">
-					<Popover.Trigger>
-						{(attributes) => <Button attributes={attributes}>Open</Button>}
-					</Popover.Trigger>
-					<Popover.Content>
-						<View
-							height="100px"
-							width="100px"
-							borderColor="primary"
-							borderRadius="medium"
-							backgroundColor="primary-faded"
-						/>
-					</Popover.Content>
-				</Popover>
-			</Example.Item>
-		</Example>
-	),
-};

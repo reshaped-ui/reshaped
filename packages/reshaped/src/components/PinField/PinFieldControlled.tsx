@@ -211,7 +211,7 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				width={responsiveInputSize}
 				borderRadius={responsiveRadius}
 				borderColor={variant === "faded" ? undefined : "neutral"}
-				shadow={variant === "faded" ? undefined : "base"}
+				shadow={variant === "faded" ? undefined : "outline"}
 				backgroundColor={variant === "faded" ? "neutral-faded" : "elevation-base"}
 				align="center"
 				justify="center"

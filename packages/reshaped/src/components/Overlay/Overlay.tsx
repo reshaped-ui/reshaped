@@ -87,7 +87,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 			if (originalOverflowRef.current && containerRef?.current) {
 				containerRef.current.style.overflow = originalOverflowRef.current;
-				containerRef.current.style.removeProperty("isolation");
 				originalOverflowRef.current = null;
 			}
 
@@ -155,7 +154,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 			originalOverflowRef.current = containerEl.style.overflow;
 
 			containerEl.style.setProperty("overflow", "hidden");
-			containerEl.style.setProperty("isolation", "isolate");
 			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
 		}
 
@@ -206,6 +204,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 							{
 								"--rs-overlay-offset-x": containerRef ? `${offset[0]}px` : undefined,
 								"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
+								"--rs-overlay-opacity": transparent ? 0 : undefined,
 							} as React.CSSProperties
 						}
 						role="button"

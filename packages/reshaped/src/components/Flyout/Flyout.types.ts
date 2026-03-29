@@ -152,6 +152,10 @@ type BaseProps = {
 	contentClassName?: string;
 	/** Additional attributes for the content element */
 	contentAttributes?: Attributes<"div">;
+	/** Additional classname for the scrollable element */
+	scrollableClassName?: string;
+	/** Additional attributes for the scrollable element */
+	scrollableAttributes?: Attributes<"div">;
 	/** Ref accessor for the flyout methods */
 	instanceRef?: React.Ref<Instance>;
 	/** Container to render the content in using a portal, position is calculated based on the container bounds
@@ -211,6 +215,8 @@ export type ContextProps = {
 	| "triggerType"
 	| "contentClassName"
 	| "contentAttributes"
+	| "scrollableClassName"
+	| "scrollableAttributes"
 	| "contentGap"
 	| "contentMaxHeight"
 	| "contentMaxWidth"

@@ -28,8 +28,8 @@ export type Align = "start" | "center" | "end" | "stretch" | "baseline";
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
 export type Shadow =
-	| "base"
-	| "baseIntense"
+	| "outline"
+	| "outlineIntense"
 	| "raised"
 	| "raisedIntense"
 	| "overlay"

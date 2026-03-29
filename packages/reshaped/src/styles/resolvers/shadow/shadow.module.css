@@ -1,6 +1,5 @@
 .root {
 	position: relative;
-	isolation: isolate;
 
 	/* Using after while borders are using before */
 	&::after {
@@ -15,13 +14,13 @@
 
 .--shadow-base {
 	&::after {
-		box-shadow: var(--rs-shadow-base);
+		box-shadow: var(--rs-shadow-outline);
 	}
 }
 
 .--shadow-base-intense {
 	&::after {
-		box-shadow: var(--rs-shadow-base-intense);
+		box-shadow: var(--rs-shadow-outline-intense);
 	}
 }
 

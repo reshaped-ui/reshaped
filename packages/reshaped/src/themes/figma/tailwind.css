@@ -84,8 +84,8 @@
 --spacing-x8: var(--rs-unit-x8);
 --spacing-x9: var(--rs-unit-x9);
 --spacing-x10: var(--rs-unit-x10);
---shadow-base: var(--rs-shadow-base);
---shadow-base-intense: var(--rs-shadow-base-intense);
+--shadow-outline: var(--rs-shadow-outline);
+--shadow-outline-intense: var(--rs-shadow-outline-intense);
 --shadow-raised: var(--rs-shadow-raised);
 --shadow-raised-intense: var(--rs-shadow-raised-intense);
 --shadow-overlay: var(--rs-shadow-overlay);
