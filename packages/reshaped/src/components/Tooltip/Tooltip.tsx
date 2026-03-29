@@ -29,15 +29,14 @@ const Tooltip: React.FC<T.Props> = (props) => {
 			// Disable group timeouts by default since it's not controlled by the default user events
 			groupTimeouts={flyoutProps.active === undefined ? true : false}
 			contentMaxWidth={contentMaxWidth}
+			contentClassName={s.root}
 		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>
-			<Flyout.Content>
-				<Theme colorMode={color}>
-					<Text variant="caption-1" className={s.root}>
-						{text}
-					</Text>
-				</Theme>
-			</Flyout.Content>
+			<Theme colorMode={color}>
+				<Flyout.Content>
+					<Text variant="caption-1">{text}</Text>
+				</Flyout.Content>
+			</Theme>
 		</Flyout>
 	);
 };
