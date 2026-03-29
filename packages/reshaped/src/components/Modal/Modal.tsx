@@ -2,9 +2,18 @@
 
 import { classNames, useHandlerRef, useElementId } from "@reshaped/headless";
 import { enableScroll, disableScroll } from "@reshaped/headless/internal";
-import React from "react";
+import {
+	useCallback,
+	createContext,
+	useContext,
+	useEffect,
+	useMemo,
+	useState,
+	useRef,
+	type FC,
+} from "react";
 
-import Overlay from "@/components/Overlay";
+import Overlay, { type OverlayInstance } from "@/components/Overlay";
 import Text from "@/components/Text";
 import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
 import { resolveMixin } from "@/styles/mixin";
@@ -17,49 +26,50 @@ import type * as T from "./Modal.types";
 const DRAG_THRESHOLD = 32;
 const DRAG_OPPOSITE_THRESHOLD = 100;
 const DRAG_EDGE_BOUNDARY = 32;
+const DRAG_SCROLL_LOCK_THRESHOLD = 8;
 
-const Context = React.createContext<T.Context>({
+const Context = createContext<T.Context>({
 	id: "",
 	titleMounted: false,
 	setTitleMounted: () => {},
 	subtitleMounted: false,
 	setSubtitleMounted: () => {},
 });
-const useModal = () => React.useContext(Context);
+const useModal = () => useContext(Context);
 
-export const ModalTitle: React.FC<T.TitleProps> = (props) => {
+export const ModalTitle: FC<T.TitleProps> = (props) => {
 	const { children } = props;
 	const { id, setTitleMounted } = useModal();
 
-	React.useEffect(() => {
+	useEffect(() => {
 		setTitleMounted(true);
 		return () => setTitleMounted(false);
 	}, [setTitleMounted]);
 
 	return (
-		<Text variant="featured-3" weight="bold" attributes={{ id: `${id}-title` }}>
+		<Text variant="title-6" weight="bold" attributes={{ id: `${id}-title` }}>
 			{children}
 		</Text>
 	);
 };
 
-export const ModalSubtitle: React.FC<T.SubtitleProps> = (props) => {
+export const ModalSubtitle: FC<T.SubtitleProps> = (props) => {
 	const { children } = props;
 	const { id, setSubtitleMounted } = useModal();
 
-	React.useEffect(() => {
+	useEffect(() => {
 		setSubtitleMounted(true);
 		return () => setSubtitleMounted(false);
 	}, [setSubtitleMounted]);
 
 	return (
-		<Text variant="body-3" color="neutral-faded" attributes={{ id: `${id}-subtitle` }}>
+		<Text variant="body-2" color="neutral-faded" attributes={{ id: `${id}-subtitle` }}>
 			{children}
 		</Text>
 	);
 };
 
-const Modal: React.FC<T.Props> = (props) => {
+const Modal: FC<T.Props> = (props) => {
 	const {
 		children,
 		onClose,
@@ -86,21 +96,46 @@ const Modal: React.FC<T.Props> = (props) => {
 	const onCloseRef = useHandlerRef(onClose);
 	const id = useElementId();
 	const clientPosition = useResponsiveClientValue(position)!;
-	const [titleMounted, setTitleMounted] = React.useState(false);
-	const [subtitleMounted, setSubtitleMounted] = React.useState(false);
-	const [dragging, setDragging] = React.useState(false);
-	const internalRootRef = React.useRef<HTMLDivElement>(null);
+	const [titleMounted, setTitleMounted] = useState(false);
+	const [subtitleMounted, setSubtitleMounted] = useState(false);
+	const [dragging, setDragging] = useState(false);
+	const internalRootRef = useRef<HTMLDivElement>(null);
 	const rootRef = attributes?.ref || internalRootRef;
-	const dragStartCoordinatesRef = React.useRef({ x: 0, y: 0 });
-	const dragLastCoordinateRef = React.useRef(0);
-	const dragDistanceRef = React.useRef(0);
-	const dragDirectionRef = React.useRef(0);
-	const [dragDistance, setDragDistance] = React.useState(0);
-	const [hideProgress, setHideProgress] = React.useState(0);
+	const dragStartCoordinatesRef = useRef({ x: 0, y: 0 });
+	const dragLastCoordinateRef = useRef(0);
+	const dragDistanceRef = useRef(0);
+	const dragFrameRef = useRef<number | null>(null);
+	const dragPendingDistanceRef = useRef(0);
+	const dragSizeRef = useRef(1);
+	const overlayRef = useRef<OverlayInstance>(null);
+	const dragDirectionRef = useRef(0);
+	const dragShouldCloseRef = useRef(false);
 	const mixinStyles = resolveMixin({ padding });
 	const shouldBeContained = containerRef && contained !== false;
 
-	const value = React.useMemo(
+	const setDragStyles = useCallback(
+		// eslint-disable-next-line react-hooks/preserve-manual-memoization
+		(distance: number) => {
+			const rootEl = rootRef.current;
+			if (!rootEl) return;
+
+			const dragOffset =
+				Math.abs(distance) < DRAG_THRESHOLD
+					? 0
+					: distance + DRAG_THRESHOLD * (clientPosition === "start" ? 1 : -1);
+
+			rootEl.style.setProperty("--rs-modal-drag", `${dragOffset}px`);
+
+			if (!transparentOverlay && overlayRef.current) {
+				const progress = Math.min(1, Math.abs(distance) / dragSizeRef.current);
+				const opacity = Math.max(0, 1 - progress * 0.5);
+				overlayRef.current.setOpacity(opacity);
+			}
+		},
+		[clientPosition, overlayRef, transparentOverlay, rootRef]
+	);
+
+	const value = useMemo(
 		() => ({
 			titleMounted,
 			setTitleMounted,
@@ -111,15 +146,29 @@ const Modal: React.FC<T.Props> = (props) => {
 		[id, subtitleMounted, titleMounted]
 	);
 
-	const resetDragData = () => {
+	const resetDragData = useCallback(() => {
+		dragDistanceRef.current = 0;
+		dragPendingDistanceRef.current = 0;
 		dragStartCoordinatesRef.current = { x: 0, y: 0 };
 		dragLastCoordinateRef.current = 0;
 		dragDirectionRef.current = 0;
-		setDragDistance(0);
-	};
+		dragShouldCloseRef.current = false;
+		setDragStyles(0);
+	}, [setDragStyles]);
+
+	// eslint-disable-next-line react-hooks/preserve-manual-memoization
+	const unlockDragScroll = useCallback(() => {
+		rootRef.current?.style.removeProperty("overflow");
+	}, [rootRef]);
+
+	// eslint-disable-next-line react-hooks/preserve-manual-memoization
+	const lockDragScroll = useCallback(() => {
+		rootRef.current?.style.setProperty("overflow", "hidden");
+	}, [rootRef]);
 
 	const handleDragStart = (e: React.TouchEvent) => {
 		if (disableSwipeGesture) return;
+		dragShouldCloseRef.current = false;
 
 		// Prevent swipe to close from happening when user is working with text selection
 		if (window.getSelection()?.toString()) return;
@@ -139,6 +188,11 @@ const Modal: React.FC<T.Props> = (props) => {
 		// Prevent the drag handling when browser is trying to navigate to a previous page
 		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
 
+		if (rootEl) {
+			const isInline = ["start", "end"].includes(clientPosition);
+			dragSizeRef.current = Math.max(1, isInline ? rootEl.clientWidth : rootEl.clientHeight);
+		}
+
 		if (containerRef?.current) disableScroll();
 		setDragging(true);
 	};
@@ -150,21 +204,23 @@ const Modal: React.FC<T.Props> = (props) => {
 		if (e.currentTarget !== e.target) return;
 
 		resetDragData();
+		unlockDragScroll();
 	};
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (!dragging) return;
 
 		const handleDragEnd = () => {
-			if (containerRef?.current) enableScroll();
-			setDragging(false);
-
-			// Close only when dragging in the closing direction
-			// Changing to a different direction will keep the modal opened
 			const shouldClose =
 				clientPosition === "start" ? dragDirectionRef.current < 0 : dragDirectionRef.current > 0;
+			dragShouldCloseRef.current =
+				Math.abs(dragDistanceRef.current) > DRAG_THRESHOLD && shouldClose;
 
-			if (Math.abs(dragDistanceRef.current) > DRAG_THRESHOLD && shouldClose) {
+			if (containerRef?.current) enableScroll();
+			if (!dragShouldCloseRef.current) unlockDragScroll();
+			setDragging(false);
+
+			if (dragShouldCloseRef.current) {
 				onCloseRef.current?.({ reason: "drag" });
 			} else {
 				resetDragData();
@@ -204,46 +260,63 @@ const Modal: React.FC<T.Props> = (props) => {
 			dragDirectionRef.current = coordinate[key] - dragLastCoordinateRef.current;
 			dragLastCoordinateRef.current = coordinate[key];
 
-			setDragDistance((prev) =>
+			const isClosingDirection =
+				clientPosition === "start" ? dragDirectionRef.current < 0 : dragDirectionRef.current > 0;
+
+			if (next > DRAG_SCROLL_LOCK_THRESHOLD && isClosingDirection) {
+				lockDragScroll();
+			}
+
+			dragDistanceRef.current =
 				clientPosition === "start"
-					? Math.min(0, prev + dragDirectionRef.current)
-					: Math.max(0, prev + dragDirectionRef.current)
-			);
+					? Math.min(0, dragDistanceRef.current + dragDirectionRef.current)
+					: Math.max(0, dragDistanceRef.current + dragDirectionRef.current);
+
+			dragPendingDistanceRef.current = dragDistanceRef.current;
+
+			if (dragFrameRef.current === null) {
+				dragFrameRef.current = window.requestAnimationFrame(() => {
+					setDragStyles(dragPendingDistanceRef.current);
+					dragFrameRef.current = null;
+				});
+			}
 		};
 
 		document.addEventListener("touchmove", handleDrag, { passive: true });
 		document.addEventListener("touchend", handleDragEnd, { passive: true });
 
 		return () => {
+			if (dragFrameRef.current !== null) {
+				window.cancelAnimationFrame(dragFrameRef.current);
+				dragFrameRef.current = null;
+			}
+			if (!dragShouldCloseRef.current) unlockDragScroll();
 			document.removeEventListener("touchmove", handleDrag);
 			document.removeEventListener("touchend", handleDragEnd);
 		};
-	}, [dragging, clientPosition, onCloseRef, position, rootRef, containerRef]);
-
-	// Syncing distance to the ref to avoid having a dependency on dragDistance in handleDragEnd
-	React.useEffect(() => {
-		const rootEl = rootRef.current;
-
-		if (!rootEl || !clientPosition) return;
-
-		const isInline = ["start", "end"].includes(clientPosition);
-
-		const size = isInline ? rootEl.clientWidth : rootEl.clientHeight;
-		const progress = Math.abs(dragDistance) / size;
-
-		setHideProgress(progress / 2);
-		dragDistanceRef.current = dragDistance;
-	}, [dragDistance, clientPosition, rootRef]);
+	}, [
+		dragging,
+		clientPosition,
+		onCloseRef,
+		position,
+		rootRef,
+		containerRef,
+		setDragStyles,
+		resetDragData,
+		lockDragScroll,
+		unlockDragScroll,
+	]);
 
 	return (
 		<Overlay
+			instanceRef={overlayRef}
 			onClose={onClose}
 			onOpen={onOpen}
 			onAfterClose={onAfterClose}
 			onAfterOpen={onAfterOpen}
 			disableCloseOnClick={disableCloseOnOutsideClick}
 			active={active}
-			transparent={transparentOverlay || hideProgress}
+			transparent={transparentOverlay}
 			blurred={blurredOverlay}
 			overflow={clientPosition === "center" ? "auto" : "hidden"}
 			className={overlayClassName}
@@ -274,12 +347,7 @@ const Modal: React.FC<T.Props> = (props) => {
 								{
 									...mixinStyles.variables,
 									...responsiveVariables("--rs-modal-size", size),
-									"--rs-modal-drag":
-										Math.abs(dragDistance) < DRAG_THRESHOLD
-											? "0px"
-											: `${
-													dragDistance + DRAG_THRESHOLD * (clientPosition === "start" ? 1 : -1)
-												}px`,
+									"--rs-modal-drag": "0px",
 								} as React.CSSProperties
 							}
 							aria-labelledby={titleMounted ? `${id}-title` : undefined}

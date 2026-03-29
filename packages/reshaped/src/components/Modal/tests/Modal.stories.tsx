@@ -43,6 +43,7 @@ const Demo: React.FC<ModalProps & { title?: string; subtitle?: string }> = (prop
 						"Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."}
 					<Button onClick={deactivate}>Close</Button>
 					<TextField name="hey" />
+					<View height="1000px" backgroundColor="primary-faded" />
 				</View>
 			</Modal>
 		</>

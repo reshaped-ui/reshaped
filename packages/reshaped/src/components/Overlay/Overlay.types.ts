@@ -3,9 +3,13 @@ import type React from "react";
 
 export type CloseReason = "overlay-click" | "escape-key";
 
+export type Instance = {
+	setOpacity: (value: number) => void;
+} | null;
+
 export type Props = {
 	/** Make the overlay transparent */
-	transparent?: boolean | number;
+	transparent?: boolean;
 	/** Make the overlay blurred */
 	blurred?: boolean;
 	/** Control the overflow of the component content */
@@ -30,6 +34,8 @@ export type Props = {
 	contained?: boolean;
 	/** Additional classname for the root element */
 	className?: ClassName;
+	/** Ref accessor for the overlay methods */
+	instanceRef?: React.RefObject<Instance>;
 	/** Additional attributes for the root element */
 	attributes?: Attributes<"div">;
 };

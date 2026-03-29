@@ -14,13 +14,20 @@
 	width: 100%;
 	z-index: var(--rs-z-index-fixed);
 	color: var(--rs-color-white);
-	background-color: rgba(var(--rs-color-rgb-black), 0);
+	background-color: var(--rs-color-black);
 	opacity: 0;
 	outline: none;
 	isolation: isolate;
 
 	/* Override default Tailwind reset */
 	cursor: default !important;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
 }
 
 .wrapper {
@@ -42,7 +49,7 @@
 }
 
 .root.--visible {
-	background-color: rgba(var(--rs-color-rgb-black), var(--rs-overlay-opacity));
+	background-color: rgba(var(--rs-color-rgb-black), calc(var(--rs-overlay-opacity) * 0.7));
 	opacity: 1;
 }
 
@@ -74,7 +81,7 @@
 }
 
 .root.--animated {
-	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
+	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
 	transition-property: background-color, opacity;
 
 	&.--visible {
@@ -84,4 +91,5 @@
 
 .root.--overflow-auto {
 	overflow: auto;
+	overscroll-behavior: none;
 }

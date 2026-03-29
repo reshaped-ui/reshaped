@@ -9,6 +9,7 @@
 	box-shadow: var(--rs-shadow-raised);
 	will-change: transform, opacity;
 	outline: none;
+	overscroll-behavior: none;
 
 	[data-rs-keyboard] &:focus {
 		box-shadow: var(--rs-shadow-focus);
@@ -37,6 +38,7 @@
 		position: relative;
 		border-radius: var(--rs-radius-large);
 		overflow: hidden;
+		overscroll-behavior: auto;
 		opacity: 0;
 		transform: translate(0, var(--rs-unit-x4));
 
@@ -62,6 +64,7 @@
 		position: absolute;
 		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 1;
 
 		&.--active,
@@ -85,6 +88,7 @@
 		position: absolute;
 		border-radius: 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
@@ -112,6 +116,7 @@
 		position: absolute;
 		border-radius: 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
@@ -138,6 +143,7 @@
 		position: absolute;
 		border-radius: 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 0;
 
 		&.--active,

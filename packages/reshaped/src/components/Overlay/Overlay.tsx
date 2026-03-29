@@ -34,6 +34,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		containerRef,
 		contained,
 		className,
+		instanceRef,
 		attributes,
 	} = props;
 
@@ -41,11 +42,10 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const onCloseRef = useHandlerRef(onClose);
 	const onOpenRef = useHandlerRef(onOpen);
 
-	const isTransparent = transparent === true;
-	const opacity = isTransparent ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
 	const [offset, setOffset] = React.useState([0, 0]);
+	const rootRef = React.useRef<HTMLDivElement>(null);
 	const scopeRef = React.useRef<HTMLDivElement>(null);
 	const contentRef = React.useRef<HTMLDivElement>(null);
 	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
@@ -65,7 +65,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const rootClassNames = classNames(
 		s.root,
 		visible && s["--visible"],
-		isTransparent && s["--click-through"],
+		transparent && s["--click-through"],
 		blurred && s["--blurred"],
 		animated && s["--animated"],
 		shouldBeContained && s["--contained"],
@@ -102,7 +102,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 	const handleMouseUp = (event: React.MouseEvent<HTMLElement>) => {
 		const isMouseUpValid = !isInsideContent(event.target as HTMLElement);
-		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !isTransparent;
+		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !transparent;
 
 		if (!shouldClose || disableCloseOnClick) return;
 
@@ -139,11 +139,11 @@ const Overlay: React.FC<T.Props> = (props) => {
 	// Show overlay after it was rendered
 	React.useEffect(() => {
 		if (!rendered) return;
-		if (!isTransparent) lockScroll();
+		if (!transparent) lockScroll();
 		onNextFrame(() => {
 			show();
 		});
-	}, [rendered, show, lockScroll, isTransparent]);
+	}, [rendered, show, lockScroll, transparent]);
 
 	React.useEffect(() => {
 		if (!rendered || !contentRef.current) return;
@@ -179,6 +179,17 @@ const Overlay: React.FC<T.Props> = (props) => {
 		setMounted(true);
 	}, []);
 
+	React.useImperativeHandle(
+		instanceRef,
+		() => ({
+			setOpacity: (value: number) => {
+				if (transparent) return;
+				rootRef.current?.style.setProperty("--rs-overlay-opacity", `${value}`);
+			},
+		}),
+		[transparent]
+	);
+
 	if (!rendered || !mounted) return null;
 
 	return (
@@ -187,10 +198,12 @@ const Overlay: React.FC<T.Props> = (props) => {
 				{(ref) => (
 					<div
 						{...attributes}
-						ref={ref}
+						ref={(node) => {
+							rootRef.current = node;
+							ref.current = node;
+						}}
 						style={
 							{
-								"--rs-overlay-opacity": opacity,
 								"--rs-overlay-offset-x": containerRef ? `${offset[0]}px` : undefined,
 								"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
 							} as React.CSSProperties
