@@ -17,7 +17,7 @@ export type { CalendarProps } from "@/components/Calendar";
 export { default as Calendar } from "@/components/Calendar";
 export type { CardProps } from "@/components/Card";
 export { default as Card } from "@/components/Card";
-export type { CarouselInstance, CarouselInstanceRef, CarouselProps } from "@/components/Carousel";
+export type { CarouselInstance, CarouselProps } from "@/components/Carousel";
 export { default as Carousel } from "@/components/Carousel";
 export type { CheckboxProps } from "@/components/Checkbox";
 export { default as Checkbox } from "@/components/Checkbox";
