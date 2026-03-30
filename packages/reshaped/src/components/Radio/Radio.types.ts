@@ -17,10 +17,6 @@ type BaseProps = {
 	size?: G.Responsive<"small" | "medium" | "large">;
 	/** Callback when the input value changes */
 	onChange?: G.ChangeHandler<boolean>;
-	/** Callback when the input is focused */
-	onFocus?: (e: React.FocusEvent) => void;
-	/** Callback when the input is blurred */
-	onBlur?: (e: React.FocusEvent) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Additional attributes for the root element */

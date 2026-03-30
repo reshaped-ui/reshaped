@@ -216,9 +216,8 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 							inputAttributes={{
 								...textFieldProps.inputAttributes,
 								...attributes,
-								onFocus: (e) => {
+								onFocus: () => {
 									attributes.onFocus?.();
-									textFieldProps.onFocus?.(e);
 									// Only select the value when user clicks on the input
 									if (!lockedRef.current) inputRef.current?.select();
 								},

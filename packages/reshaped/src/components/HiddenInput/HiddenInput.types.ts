@@ -1,5 +1,3 @@
-import React from "react";
-
 import type * as G from "@/types/global";
 import type { Attributes, ClassName } from "@reshaped/headless";
 
@@ -16,10 +14,6 @@ export type Props = {
 	disabled?: boolean;
 	/** Callback when the input value changes */
 	onChange?: G.ChangeHandler<boolean>;
-	/** Callback when the input or label is focused */
-	onFocus?: (e: React.FocusEvent) => void;
-	/** Callback when the input or label is blurred */
-	onBlur?: (e: React.FocusEvent) => void;
 	/** Type of the input element */
 	type: "checkbox" | "radio";
 	/** Additional classname for the root element */

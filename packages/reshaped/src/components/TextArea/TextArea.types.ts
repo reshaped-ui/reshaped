@@ -25,10 +25,6 @@ type BaseProps = {
 	placeholder?: string;
 	/** Callback when the text area value changes */
 	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLTextAreaElement>>;
-	/** Callback when the text area is focused */
-	onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-	/** Callback when the text area is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Additional attributes for the root element */

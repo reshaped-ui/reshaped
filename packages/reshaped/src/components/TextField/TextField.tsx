@@ -66,8 +66,6 @@ const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 const TextField: React.FC<T.Props> = (props) => {
 	const {
 		onChange,
-		onFocus,
-		onBlur,
 		name,
 		value,
 		defaultValue,
@@ -159,8 +157,6 @@ const TextField: React.FC<T.Props> = (props) => {
 					value={value}
 					defaultValue={defaultValue}
 					onChange={handleChange}
-					onFocus={onFocus || inputAttributes?.onFocus}
-					onBlur={onBlur || inputAttributes?.onBlur}
 					id={inputId}
 				/>
 

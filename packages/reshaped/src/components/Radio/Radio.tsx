@@ -18,8 +18,6 @@ const Radio: React.FC<T.Props> = (props) => {
 		children,
 		value,
 		onChange,
-		onFocus,
-		onBlur,
 		size = "medium",
 		className,
 		attributes,
@@ -52,8 +50,6 @@ const Radio: React.FC<T.Props> = (props) => {
 					disabled={disabled}
 					value={value}
 					onChange={onChange}
-					onFocus={onFocus}
-					onBlur={onBlur}
 					attributes={inputAttributes}
 				/>
 				<div className={s.decorator} />

@@ -18,10 +18,6 @@ type BaseProps = {
 	size?: G.Responsive<"medium" | "small" | "large">;
 	/** Callback when the switch value changes */
 	onChange?: G.ChangeHandler<boolean>;
-	/** Callback when the switch is focused */
-	onFocus?: (e: React.FocusEvent) => void;
-	/** Callback when the switch is blurred */
-	onBlur?: (e: React.FocusEvent) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Additional attributes for the root element */

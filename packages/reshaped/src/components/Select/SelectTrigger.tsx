@@ -19,8 +19,6 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 		children,
 		disabled,
 		onClick,
-		onFocus,
-		onBlur,
 		attributes,
 		className,
 		variant = "outline",
@@ -64,11 +62,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				disabled={disabled}
 				disableFocusRing
 				onClick={onClick}
-				attributes={{
-					...inputAttributes,
-					onFocus: onFocus || inputAttributes?.onFocus,
-					onBlur: onBlur || inputAttributes?.onBlur,
-				}}
+				attributes={inputAttributes}
 			>
 				<SelectStartContent startSlot={startSlot} icon={icon} size={size} />
 				{children ? (

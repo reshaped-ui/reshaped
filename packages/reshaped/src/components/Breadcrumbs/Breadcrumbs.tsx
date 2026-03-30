@@ -81,7 +81,7 @@ const Breadcrumbs: React.FC<T.Props> = (props) => {
 									{separator || <Icon svg={IconChevronRight} size={3} />}
 								</Text>
 							)}
-							<Text variant="body-3" color={color === "primary" ? "primary" : "neutral-faded"}>
+							<Text variant="body-2" color={color === "primary" ? "primary" : "neutral-faded"}>
 								{itemNode}
 							</Text>
 						</View>

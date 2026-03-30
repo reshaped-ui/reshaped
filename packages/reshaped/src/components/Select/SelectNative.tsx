@@ -18,8 +18,6 @@ const SelectNative: React.FC<T.NativeProps> = (props) => {
 		icon,
 		size = "medium",
 		inputAttributes,
-		onFocus,
-		onBlur,
 		disabled,
 		name,
 		value,
@@ -84,8 +82,6 @@ const SelectNative: React.FC<T.NativeProps> = (props) => {
 			<SelectStartContent startSlot={startSlot} icon={icon} size={size} />
 			<select
 				{...inputAttributes}
-				onFocus={onFocus || inputAttributes?.onFocus}
-				onBlur={onBlur || inputAttributes?.onBlur}
 				onClick={onClick || inputAttributes?.onClick}
 				className={selectClassNames}
 				disabled={disabled}

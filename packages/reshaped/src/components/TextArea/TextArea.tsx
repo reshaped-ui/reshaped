@@ -14,8 +14,6 @@ import type * as T from "./TextArea.types";
 const TextArea: React.FC<T.Props> = (props) => {
 	const {
 		onChange,
-		onFocus,
-		onBlur,
 		name,
 		value,
 		defaultValue,
@@ -81,8 +79,6 @@ const TextArea: React.FC<T.Props> = (props) => {
 				value={value}
 				defaultValue={defaultValue}
 				onChange={handleChange}
-				onFocus={onFocus || inputAttributes?.onFocus}
-				onBlur={onBlur || inputAttributes?.onBlur}
 				id={inputId}
 			/>
 

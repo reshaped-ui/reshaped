@@ -9,7 +9,7 @@ import s from "./HiddenInput.module.css";
 import type * as T from "./HiddenInput.types";
 
 const HiddenInput: React.FC<T.Props> = (props) => {
-	const { type, value, className, onBlur, onFocus, onChange, attributes } = props;
+	const { type, value, className, onChange, attributes } = props;
 	const rootClassNames = classNames(s.root, className);
 	const checkboxGroup = useCheckboxGroup();
 	const radioGroup = useRadioGroup();
@@ -45,8 +45,6 @@ const HiddenInput: React.FC<T.Props> = (props) => {
 			defaultChecked={defaultChecked}
 			disabled={disabled}
 			onChange={handleChange}
-			onFocus={onFocus || attributes?.onFocus}
-			onBlur={onBlur || attributes?.onBlur}
 			data-rs-hidden-input
 		/>
 	);

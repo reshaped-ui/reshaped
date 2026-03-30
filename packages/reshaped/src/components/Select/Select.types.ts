@@ -60,20 +60,12 @@ type BaseFragment = {
 };
 
 export type CustomFragment = {
-	/** Callback when the input is focused */
-	onFocus?: (e: React.FocusEvent<HTMLButtonElement>) => void;
-	/** Callback when the input is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLButtonElement>) => void;
 	// TODO: Replace / add trigger attributes in v4, currently they're passed to the Actionable component instead of the input to enable Flyout positioning
 	/** Additional attributes for the trigger element */
 	inputAttributes?: ActionableProps["attributes"];
 } & Pick<DropdownMenuProps, "position" | "width" | "fallbackPositions" | "positionRef">;
 
 export type NativeFragment = {
-	/** Callback when the input is focused */
-	onFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
-	/** Callback when the input is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 	/** Additional attributes for the input element */
 	inputAttributes?: Attributes<"select">;
 };
@@ -143,8 +135,6 @@ export type TriggerProps = Pick<
 	| "disabled"
 	| "hasError"
 	| "onClick"
-	| "onFocus"
-	| "onBlur"
 	| "inputAttributes"
 	| "startSlot"
 	| "icon"

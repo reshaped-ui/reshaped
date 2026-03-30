@@ -573,16 +573,12 @@ export const nativeOptgroup: StoryObj = {
 export const nativeHandlers: StoryObj<{
 	handleChange: Mock;
 	handleControlledChange: Mock;
-	handleFocus: Mock;
-	handleBlur: Mock;
 	handleClick: Mock;
 }> = {
-	name: "native, controlled, uncontrolled, onFocus, onBlur, onChange",
+	name: "native, controlled, uncontrolled, onChange",
 	args: {
 		handleChange: fn(),
 		handleControlledChange: fn(),
-		handleFocus: fn(),
-		handleBlur: fn(),
 		handleClick: fn(),
 	},
 	render: (args) => (
@@ -615,13 +611,11 @@ export const nativeHandlers: StoryObj<{
 					<option value="turtle">Turtle</option>
 				</Select>
 			</Example.Item>
-			<Example.Item title="native, onFocus, onBlur, onClick">
+			<Example.Item title="native, onClick">
 				<Select
 					name="animal-3"
 					placeholder="Select an animal"
 					defaultValue="dog"
-					onFocus={args.handleFocus}
-					onBlur={args.handleBlur}
 					onClick={args.handleClick}
 					inputAttributes={{
 						"aria-label": "Select an animal",
@@ -668,32 +662,20 @@ export const nativeHandlers: StoryObj<{
 
 		await userEvent.click(focusable);
 
-		expect(args.handleFocus).toHaveBeenCalledTimes(1);
-		expect(args.handleFocus).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
-
 		expect(args.handleClick).toHaveBeenCalledTimes(1);
 		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
-
-		await userEvent.click(document.body);
-
-		expect(args.handleBlur).toHaveBeenCalledTimes(1);
-		expect(args.handleBlur).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
 	},
 };
 
 export const defaultHandlers: StoryObj<{
 	handleChange: Mock;
 	handleControlledChange: Mock;
-	handleFocus: Mock;
-	handleBlur: Mock;
 	handleClick: Mock;
 }> = {
 	name: "default, controlled, uncontrolled, onFocus, onBlur, onChange",
 	args: {
 		handleChange: fn(),
 		handleControlledChange: fn(),
-		handleFocus: fn(),
-		handleBlur: fn(),
 		handleClick: fn(),
 	},
 	render: (args) => (
@@ -726,13 +708,11 @@ export const defaultHandlers: StoryObj<{
 					<Select.Option value="turtle">Turtle</Select.Option>
 				</Select>
 			</Example.Item>
-			<Example.Item title="default, onFocus, onBlur, onClick">
+			<Example.Item title="default, onClick">
 				<Select
 					name="animal-3"
 					placeholder="Select an animal"
 					defaultValue="dog"
-					onFocus={args.handleFocus}
-					onBlur={args.handleBlur}
 					onClick={args.handleClick}
 					inputAttributes={{
 						"aria-label": "Select an animal",
@@ -794,20 +774,10 @@ export const defaultHandlers: StoryObj<{
 			value: "turtle",
 		});
 
-		// Focus + blur + click
-
 		await userEvent.click(focusable);
-
-		expect(args.handleFocus).toHaveBeenCalledTimes(1);
-		expect(args.handleFocus).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
 
 		expect(args.handleClick).toHaveBeenCalledTimes(1);
 		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
-
-		await userEvent.click(document.body);
-
-		expect(args.handleBlur).toHaveBeenCalledTimes(1);
-		expect(args.handleBlur).toHaveBeenCalledWith(expect.objectContaining({ target: focusable }));
 	},
 };
 

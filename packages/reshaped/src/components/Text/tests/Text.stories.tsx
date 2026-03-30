@@ -57,7 +57,7 @@ export const variant = {
 			<Example.Item title="variant: caption-2">
 				<Text variant="caption-2">Caption 2</Text>
 			</Example.Item>
-			<Example.Item title={["responsive variant", "[s] body-3", "[m+] title-4"]}>
+			<Example.Item title={["responsive variant", "[s] body-2", "[m+] title-4"]}>
 				<Text variant={{ s: "body-2", m: "title-4" }}>Responsive</Text>
 			</Example.Item>
 		</Example>

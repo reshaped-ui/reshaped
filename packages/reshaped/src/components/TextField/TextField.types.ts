@@ -47,10 +47,6 @@ export type BaseProps = {
 	variant?: "outline" | "faded" | "ghost" | "headless";
 	/** Callback when the text field value changes */
 	onChange?: G.ChangeHandler<string>;
-	/** Callback when the text field is focused */
-	onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-	/** Callback when the text field is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Additional attributes for the root element */
