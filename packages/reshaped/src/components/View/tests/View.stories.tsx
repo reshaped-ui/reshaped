@@ -827,23 +827,65 @@ export const shadow = {
 	name: "shadow",
 	render: () => (
 		<Example>
+			<Example.Item title="shadow: outline, radius: medium">
+				<View direction="row" gap={4}>
+					<View
+						height="100px"
+						width="100px"
+						shadow="outline"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="elevation-base"
+					/>
+					<View
+						height="100px"
+						width="100px"
+						shadow="outline-intense"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="primary"
+					/>
+				</View>
+			</Example.Item>
 			<Example.Item title="shadow: raised, radius: medium">
-				<View
-					height="100px"
-					width="100px"
-					shadow="raised"
-					borderRadius="medium"
-					backgroundColor="elevation-raised"
-				/>
+				<View direction="row" gap={4}>
+					<View
+						height="100px"
+						width="100px"
+						shadow="raised"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="elevation-base"
+					/>
+					<View
+						height="100px"
+						width="100px"
+						shadow="raised-intense"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="primary"
+					/>
+				</View>
 			</Example.Item>
 			<Example.Item title="shadow: overlay, radius: medium">
-				<View
-					height="100px"
-					width="100px"
-					shadow="overlay"
-					borderRadius="medium"
-					backgroundColor="elevation-overlay"
-				/>
+				<View direction="row" gap={4}>
+					<View
+						height="100px"
+						width="100px"
+						shadow="overlay"
+						borderRadius="medium"
+						borderColor="neutral-faded"
+						backgroundColor="elevation-overlay"
+					/>
+					<View
+						height="100px"
+						width="100px"
+						shadow="overlay-intense"
+						borderRadius="medium"
+						borderColor="neutral-faded"
+						backgroundColor="primary"
+					/>
+				</View>
 			</Example.Item>
 		</Example>
 	),

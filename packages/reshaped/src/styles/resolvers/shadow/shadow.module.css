@@ -12,13 +12,13 @@
 	}
 }
 
-.--shadow-base {
+.--shadow-outline {
 	&::after {
 		box-shadow: var(--rs-shadow-outline);
 	}
 }
 
-.--shadow-base-intense {
+.--shadow-outline-intense {
 	&::after {
 		box-shadow: var(--rs-shadow-outline-intense);
 	}

@@ -17,7 +17,7 @@
 }
 
 .--animated {
-	transition: var(--rs-duration-medium) var(--rs-easing-standard);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, color, border-color, box-shadow;
 }
 

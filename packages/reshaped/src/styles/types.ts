@@ -29,11 +29,11 @@ export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
 export type Shadow =
 	| "outline"
-	| "outlineIntense"
+	| "outline-intense"
 	| "raised"
-	| "raisedIntense"
+	| "raised-intense"
 	| "overlay"
-	| "overlayIntense";
+	| "overlay-intense";
 
 export type Border = boolean;
 export type BorderColor =

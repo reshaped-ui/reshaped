@@ -34,7 +34,7 @@
 }
 
 .--color-neutral .value {
-	background: var(--rs-color-background-neutral);
+	background: var(--rs-color-foreground-neutral-faded);
 }
 
 .--color-primary .value {
@@ -54,7 +54,7 @@
 }
 
 .--color-media {
-	background: rgba(var(--rs-color-rgb-white), 28%);
+	background: rgba(var(--rs-color-rgb-white), 24%);
 }
 
 .--color-media .value {

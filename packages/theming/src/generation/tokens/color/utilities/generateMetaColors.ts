@@ -4,7 +4,7 @@ import { PassedThemeDefinition } from "../../types";
 import { bgWithDynamicForeground } from "../color.constants";
 
 import { getOnColor } from "./a11y";
-import { hexToOklch, oklchToRgb, tokenToOklchToken } from "./convert";
+import { hexToOklch, tokenToOklchToken } from "./convert";
 
 import type * as T from "../../../types";
 import type * as TColor from "../color.types";
@@ -23,17 +23,12 @@ const generateMetaColors = (
 	Object.keys(definition.color).forEach((tokenName) => {
 		const bgToken = definition.color?.[tokenName as TColor.Name];
 		const generatedForegroundName = `on${capitalize(tokenName)}` as TColor.GeneratedOnName;
-		const generatedRGBName = `rgb${capitalize(tokenName)}` as TColor.GeneratedRGBName;
 		const generateOnColorsFor = [
 			...bgWithDynamicForeground,
 			...(themeOptions?.generateOnColorsFor || []),
 		];
 		const needsDynamicForeground =
 			generateOnColorsFor.includes(tokenName) && !definition.color?.[generatedForegroundName];
-		const needsRGB =
-			tokenName.startsWith("background") ||
-			tokenName.endsWith("black") ||
-			tokenName.endsWith("white");
 
 		if (!bgToken) return;
 		const oklchBgToken = tokenToOklchToken(bgToken);
@@ -70,16 +65,6 @@ const generateMetaColors = (
 			result[generatedForegroundName] = {
 				oklch: light,
 				oklchDark: dark,
-			};
-		}
-
-		if (needsRGB) {
-			const rgb = oklchToRgb(oklchBgToken.oklch);
-			const rgbDark = oklchBgToken.oklchDark && oklchToRgb(oklchBgToken.oklchDark);
-
-			result[generatedRGBName] = {
-				hex: `${rgb.r * 255}, ${rgb.g * 255}, ${rgb.b * 255}`,
-				hexDark: rgbDark && `${rgbDark.r * 255}, ${rgbDark.g * 255}, ${rgbDark.b * 255}`,
 			};
 		}
 	});

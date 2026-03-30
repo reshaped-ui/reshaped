@@ -21,7 +21,7 @@
 		rgba(0, 0, 0, 100%) calc(100% - var(--rs-table-fade-end)),
 		rgba(0, 0, 0, 0%) 100%
 	);
-	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
 	transition-property: --rs-table-fade-start, --rs-table-fade-end;
 }
 

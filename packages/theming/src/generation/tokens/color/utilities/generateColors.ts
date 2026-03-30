@@ -107,7 +107,7 @@ const generateColorValues = (
 
 	const fgLightness = neutral ? 0.24 : 0.52;
 	const fgDarkLightness = neutral ? 0.96 : 0.75;
-	const bgHighlighted = adjustLightnessByForegroundDirection(bg, fgLightness, neutral ? 0.04 : 0.1);
+	const bgHighlighted = adjustLightnessByForegroundDirection(bg, fgLightness, neutral ? 0.03 : 0.1);
 	const bgHighlightedDark = adjustLightnessByForegroundDirection(
 		bgDark,
 		fgDarkLightness,
@@ -121,7 +121,7 @@ const generateColorValues = (
 		? { ...bgDark, l: fgDarkLightness }
 		: { ...bgDark, l: fgDarkLightness, c: bg.c * 0.85 };
 
-	const bd = neutral ? { ...bg, l: 0, alpha: 0.12 } : { ...bg, l: bg.l - 0.08 };
+	const bd = neutral ? { ...bg, l: 0, alpha: 0.12 } : { ...bg, l: bg.l - 0.04 };
 	const bdDark = neutral ? { ...bgDark, l: 1, alpha: 0.12 } : { ...bgDark, l: bgDark.l + 0.1 };
 	const bdFaded = neutral ? { ...bgFaded, l: 0, alpha: 0.08 } : { ...bgFaded, l: bgFaded.l - 0.04 };
 	const bdFadedDark = neutral
@@ -170,11 +170,11 @@ const generateColorValues = (
 		};
 		output[`backgroundDisabledFaded`] = {
 			oklch: { ...bg, l: 0.98, c: 0 },
-			oklchDark: { ...bgDark, l: 0.23, c: 0 },
+			oklchDark: { ...bgDark, l: 0.225, c: 0 },
 		};
 		output[`borderDisabled`] = {
 			oklch: { ...bd, l: 0, c: 0, alpha: 0.06 },
-			oklchDark: { ...bgDark, l: 1, c: 0, alpha: 0.04 },
+			oklchDark: { ...bgDark, l: 1, c: 0, alpha: 0.06 },
 		};
 		output[`foregroundDisabled`] = {
 			oklch: { ...fg, l: 0.84, c: 0 },

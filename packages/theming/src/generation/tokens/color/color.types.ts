@@ -59,25 +59,6 @@ export type GeneratedOnName =
 	| "onBackgroundWarning"
 	| "onBackgroundCritical";
 
-export type GeneratedRGBName =
-	| "rgbBackgroundNeutral"
-	| "rgbBackgroundNeutralFaded"
-	| "rgbBackgroundDisabled"
-	| "rgbBackgroundDisabledFaded"
-	| "rgbBackgroundPrimary"
-	| "rgbBackgroundPrimaryFaded"
-	| "rgbBackgroundCritical"
-	| "rgbBackgroundCriticalFaded"
-	| "rgbBackgroundWarning"
-	| "rgbBackgroundWarningFaded"
-	| "rgbBackgroundPositive"
-	| "rgbBackgroundPositiveFaded"
-	| "rgbBackgroundPage"
-	| "rgbBackgroundPageFaded"
-	| "rgbBackgroundElevationBase"
-	| "rgbBackgroundElevationRaised"
-	| "rgbBackgroundElevationOverlay";
-
 export type RgbColor = { r: number; g: number; b: number };
 export type OklchColor = Omit<Oklch, "mode">;
 export type HexColor = string;

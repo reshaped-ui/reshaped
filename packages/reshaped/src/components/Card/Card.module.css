@@ -10,7 +10,7 @@
 
 
 .--selected {
-	box-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-primary) inset;
+	box-shadow: 0 0 0 2px var(--rs-color-border-primary) inset;
 	transition-timing-function: var(--rs-easing-decelerate);
 }
 

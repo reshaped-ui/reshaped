@@ -192,22 +192,6 @@
     "onBackgroundPrimary": {
       "hex": "#FFFFFF"
     },
-    "rgbBackgroundPrimary": {
-      "hex": "13.004999999999999, 153, 255",
-      "hexDark": "12.0105, 139.995, 232.99349999999998"
-    },
-    "rgbBackgroundPrimaryFaded": {
-      "hex": "228.99, 244.0095, 255",
-      "hexDark": "56.9925, 66.9885, 96.00750000000001"
-    },
-    "rgbBackgroundPrimaryHighlighted": {
-      "hex": "56.9925, 172.992, 255",
-      "hexDark": "56.9925, 162.0015, 241.99499999999998"
-    },
-    "rgbBackgroundPrimaryHighlightedFaded": {
-      "hex": "13.004999999999999, 153, 255",
-      "hexDark": "12.0105, 139.995, 232.99349999999998"
-    },
     "onBackgroundCritical": {
       "oklch": {
         "mode": "oklch",
@@ -221,22 +205,6 @@
       },
       "hex": "#000000",
       "hexDark": "#000000"
-    },
-    "rgbBackgroundCritical": {
-      "hex": "241.99499999999998, 72.012, 33.9915",
-      "hexDark": "223.992, 61.990500000000004, 26.009999999999998"
-    },
-    "rgbBackgroundCriticalFaded": {
-      "hex": "255, 226.0065, 223.992",
-      "hexDark": "96.00750000000001, 51, 41.9985"
-    },
-    "rgbBackgroundCriticalHighlighted": {
-      "hex": "251.99099999999999, 162.996, 151.011",
-      "hexDark": "247.9875, 151.011, 139.00050000000002"
-    },
-    "rgbBackgroundCriticalHighlightedFaded": {
-      "hex": "241.99499999999998, 72.012, 33.9915",
-      "hexDark": "223.992, 61.990500000000004, 26.009999999999998"
     },
     "onBackgroundWarning": {
       "oklch": {
@@ -252,22 +220,6 @@
       "hex": "#000000",
       "hexDark": "#000000"
     },
-    "rgbBackgroundWarning": {
-      "hex": "250.002, 204, 21.012",
-      "hexDark": "241.00050000000002, 196.98749999999998, 18.003"
-    },
-    "rgbBackgroundWarningFaded": {
-      "hex": "255, 250.002, 232.99349999999998",
-      "hexDark": "43.9875, 38.9895, 31.008"
-    },
-    "rgbBackgroundWarningHighlighted": {
-      "hex": "180.00449999999998, 145.9875, 9.996",
-      "hexDark": "168.9885, 137.0115, 9.0015"
-    },
-    "rgbBackgroundWarningHighlightedFaded": {
-      "hex": "250.002, 204, 21.012",
-      "hexDark": "241.00050000000002, 196.98749999999998, 18.003"
-    },
     "onBackgroundPositive": {
       "oklch": {
         "mode": "oklch",
@@ -281,22 +233,6 @@
       },
       "hex": "#000000",
       "hexDark": "#000000"
-    },
-    "rgbBackgroundPositive": {
-      "hex": "19.992, 174.012, 92.004",
-      "hexDark": "24.990000000000002, 143.004, 80.988"
-    },
-    "rgbBackgroundPositiveFaded": {
-      "hex": "217.9995, 236.0025, 222.9975",
-      "hexDark": "60.996, 87.006, 73.0065"
-    },
-    "rgbBackgroundPositiveHighlighted": {
-      "hex": "120.99749999999999, 209.9925, 151.011",
-      "hexDark": "117.9885, 194.00400000000002, 139.00050000000002"
-    },
-    "rgbBackgroundPositiveHighlightedFaded": {
-      "hex": "19.992, 174.012, 92.004",
-      "hexDark": "24.990000000000002, 143.004, 80.988"
     },
     "onBackgroundNeutral": {
       "oklch": {
@@ -312,50 +248,6 @@
       "hex": "#000000",
       "hexDark": "#ffffff"
     },
-    "rgbBackgroundNeutral": {
-      "hex": "222.9975, 226.0065, 233.988",
-      "hexDark": "68.0085, 68.0085, 68.0085"
-    },
-    "rgbBackgroundNeutralFaded": {
-      "hex": "245.004, 245.004, 245.004",
-      "hexDark": "55.998, 55.998, 55.998"
-    },
-    "rgbBackgroundNeutralHighlighted": {
-      "hex": "199.9965, 205.989, 217.005",
-      "hexDark": "77.00999999999999, 77.00999999999999, 77.00999999999999"
-    },
-    "rgbBackgroundNeutralHighlightedFaded": {
-      "hex": "222.9975, 226.0065, 233.988",
-      "hexDark": "68.0085, 68.0085, 68.0085"
-    },
-    "rgbBackgroundDisabled": {
-      "hex": "227.9955, 227.9955, 227.9955",
-      "hexDark": "70.99199999999999, 70.99199999999999, 70.99199999999999"
-    },
-    "rgbBackgroundDisabledFaded": {
-      "hex": "245.004, 245.004, 245.004",
-      "hexDark": "58.0125, 58.0125, 58.0125"
-    },
-    "rgbBackgroundElevationBase": {
-      "hex": "255, 255, 255",
-      "hexDark": "43.9875, 43.9875, 43.9875"
-    },
-    "rgbBackgroundElevationRaised": {
-      "hex": "255, 255, 255",
-      "hexDark": "43.9875, 43.9875, 43.9875"
-    },
-    "rgbBackgroundElevationOverlay": {
-      "hex": "255, 255, 255",
-      "hexDark": "43.9875, 43.9875, 43.9875"
-    },
-    "rgbBackgroundPage": {
-      "hex": "255, 255, 255",
-      "hexDark": "43.9875, 43.9875, 43.9875"
-    },
-    "rgbBackgroundPageFaded": {
-      "hex": "250.002, 250.002, 250.002",
-      "hexDark": "29.988, 29.988, 29.988"
-    },
     "onBrand": {
       "oklch": {
         "mode": "oklch",
@@ -363,12 +255,6 @@
         "c": 0
       },
       "hex": "#000000"
-    },
-    "rgbWhite": {
-      "hex": "255, 255, 255"
-    },
-    "rgbBlack": {
-      "hex": "0, 0, 0"
     }
   },
   "fontFamily": {
@@ -669,17 +555,17 @@
           "offsetX": 0,
           "offsetY": 1,
           "blurRadius": 2,
-          "spreadRadius": 0,
+          "spreadRadius": -0.5,
           "colorToken": "black",
-          "opacity": 0.08
+          "opacity": 0.12
         },
         {
           "offsetX": 0,
           "offsetY": 2,
           "blurRadius": 3,
-          "spreadRadius": 0,
+          "spreadRadius": -1,
           "colorToken": "black",
-          "opacity": 0.08
+          "opacity": 0.12
         }
       ],
       "dark": {
@@ -688,17 +574,17 @@
             "offsetX": 0,
             "offsetY": -1,
             "blurRadius": 2,
-            "spreadRadius": 0,
+            "spreadRadius": -0.5,
             "colorToken": "white",
-            "opacity": 0.08
+            "opacity": 0.12
           },
           {
             "offsetX": 0,
             "offsetY": -1,
             "blurRadius": 3,
-            "spreadRadius": 0,
+            "spreadRadius": -1,
             "colorToken": "white",
-            "opacity": 0.08
+            "opacity": 0.1
           }
         ]
       }
@@ -747,38 +633,38 @@
       "parts": [
         {
           "offsetX": 0,
-          "offsetY": 12,
+          "offsetY": 8,
           "blurRadius": 12,
           "spreadRadius": -4,
           "colorToken": "black",
-          "opacity": 0.1
+          "opacity": 0.16
         },
         {
           "offsetX": 0,
           "offsetY": 1,
-          "blurRadius": 4,
+          "blurRadius": 2,
           "spreadRadius": 0,
           "colorToken": "black",
-          "opacity": 0.1
+          "opacity": 0.2
         }
       ],
       "dark": {
         "parts": [
           {
             "offsetX": 0,
-            "offsetY": 12,
+            "offsetY": 8,
             "blurRadius": 12,
             "spreadRadius": -4,
             "colorToken": "black",
-            "opacity": 0.1
+            "opacity": 0.16
           },
           {
             "offsetX": 0,
             "offsetY": -2,
             "blurRadius": 2,
-            "spreadRadius": 0,
+            "spreadRadius": -1,
             "colorToken": "white",
-            "opacity": 0.1
+            "opacity": 0.2
           }
         ]
       }
@@ -843,19 +729,11 @@
       "parts": [
         {
           "offsetX": 0,
-          "offsetY": 32,
-          "blurRadius": 48,
-          "spreadRadius": -8,
-          "colorToken": "black",
-          "opacity": 0.08
-        },
-        {
-          "offsetX": 0,
           "offsetY": 16,
           "blurRadius": 24,
-          "spreadRadius": -6,
+          "spreadRadius": -4,
           "colorToken": "black",
-          "opacity": 0.08
+          "opacity": 0.12
         },
         {
           "offsetX": 0,
@@ -863,26 +741,26 @@
           "blurRadius": 12,
           "spreadRadius": -4,
           "colorToken": "black",
-          "opacity": 0.08
+          "opacity": 0.12
+        },
+        {
+          "offsetX": 0,
+          "offsetY": 4,
+          "blurRadius": 6,
+          "spreadRadius": -2,
+          "colorToken": "black",
+          "opacity": 0.12
         }
       ],
       "dark": {
         "parts": [
           {
             "offsetX": 0,
-            "offsetY": 32,
-            "blurRadius": 48,
-            "spreadRadius": -8,
-            "colorToken": "black",
-            "opacity": 0.08
-          },
-          {
-            "offsetX": 0,
             "offsetY": 16,
             "blurRadius": 24,
-            "spreadRadius": -6,
+            "spreadRadius": -4,
             "colorToken": "black",
-            "opacity": 0.08
+            "opacity": 0.12
           },
           {
             "offsetX": 0,
@@ -890,7 +768,15 @@
             "blurRadius": 12,
             "spreadRadius": -4,
             "colorToken": "black",
-            "opacity": 0.08
+            "opacity": 0.12
+          },
+          {
+            "offsetX": 0,
+            "offsetY": 8,
+            "blurRadius": 6,
+            "spreadRadius": -4,
+            "colorToken": "black",
+            "opacity": 0.12
           }
         ]
       }

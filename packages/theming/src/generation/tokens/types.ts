@@ -63,9 +63,7 @@ export type GeneratedThemeDefinition = Omit<
 	PassedThemeDefinition,
 	"color" | "unit" | "viewport"
 > & {
-	color: Partial<
-		TokenSet<TColor.GeneratedOnName | TColor.GeneratedRGBName | TColor.Name, TColor.Token>
-	>;
+	color: Partial<TokenSet<TColor.GeneratedOnName | TColor.Name, TColor.Token>>;
 	unit: Partial<TokenSet<TUnit.GeneratedName | TUnit.Name, TUnit.Token>>;
 	viewport: Partial<TokenSet<TViewport.Name, TViewport.Token | TViewport.SToken>>;
 };
