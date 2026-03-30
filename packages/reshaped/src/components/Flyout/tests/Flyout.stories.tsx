@@ -1152,31 +1152,38 @@ export const testWithoutFocusable: StoryObj = {
 export const testChangeSize = {
 	name: "test: size updates",
 	render: () => {
-		const [position, setPosition] = React.useState<FlyoutProps["position"]>("bottom-start");
+		const [position, setPosition] =
+			React.useState<NonNullable<FlyoutProps["position"]>>("bottom-start");
 		const [updatedHeight, setUpdatedHeight] = React.useState(false);
+		const positions = [
+			"bottom-start",
+			"bottom",
+			"bottom-end",
+			"top-start",
+			"top",
+			"top-end",
+			"start-top",
+			"start",
+			"start-bottom",
+			"end-top",
+			"end",
+			"end-bottom",
+		] as const;
 
 		return (
 			<>
 				<View direction="row" gap={4} align="center">
 					<Select
 						name="position"
-						options={[
-							"bottom-start",
-							"bottom",
-							"bottom-end",
-							"top-start",
-							"top",
-							"top-end",
-							"start-top",
-							"start",
-							"start-bottom",
-							"end-top",
-							"end",
-							"end-bottom",
-						].map((p) => ({ label: p, value: p }))}
-						onChange={(args) => setPosition(args.value as FlyoutProps["position"])}
+						onChange={(args) => setPosition(args.value as NonNullable<FlyoutProps["position"]>)}
 						value={position}
-					/>
+					>
+						{positions.map((p) => (
+							<Select.Option key={p} value={p}>
+								{p}
+							</Select.Option>
+						))}
+					</Select>
 					<Switch name="height" onChange={(args) => setUpdatedHeight(args.checked)}>
 						Change height
 					</Switch>

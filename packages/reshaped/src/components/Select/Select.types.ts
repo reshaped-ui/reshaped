@@ -95,7 +95,7 @@ export type CustomControlledFragment =
 			multiple: true;
 			value: string[];
 			defaultValue?: never[];
-			renderValue?: RenderMultipleValues;
+			renderValue: RenderMultipleValues;
 			onChange?: G.ChangeHandler<string[]>;
 	  };
 export type CustomUncontrolledFragment =
@@ -110,7 +110,7 @@ export type CustomUncontrolledFragment =
 			multiple: true;
 			value?: never[];
 			defaultValue?: string[];
-			renderValue?: RenderMultipleValues;
+			renderValue: RenderMultipleValues;
 			onChange?: G.ChangeHandler<string[]>;
 	  };
 

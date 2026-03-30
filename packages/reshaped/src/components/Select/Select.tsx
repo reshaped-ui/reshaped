@@ -10,7 +10,11 @@ import SelectNative from "./SelectNative";
 
 import type * as T from "./Select.types";
 
-const Select: React.FC<T.Props> = (passedProps) => {
+function Select(props: T.NativeControlledProps): React.JSX.Element;
+function Select(props: T.NativeUncontrolledProps): React.JSX.Element;
+function Select(props: T.CustomControlledProps): React.JSX.Element;
+function Select(props: T.CustomUncontrolledProps): React.JSX.Element;
+function Select(passedProps: T.Props): React.JSX.Element {
 	const formControl = useFormControl();
 	const internalId = useElementId(passedProps.id);
 	const props = {
@@ -31,7 +35,7 @@ const Select: React.FC<T.Props> = (passedProps) => {
 	}
 
 	return <SelectCustom {...(props as T.CustomProps)} />;
-};
+}
 
 Select.displayName = "Select";
 

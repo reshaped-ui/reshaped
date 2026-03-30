@@ -291,7 +291,7 @@ export const edgeCases = {
 				</Table>
 			</Example.Item>
 			<Example.Item title="card with highlighted heading">
-				<Card elevation="raised" padding={0}>
+				<Card raised padding={0}>
 					<Table>
 						<Table.Row highlighted>
 							<Table.Heading width="50%" minWidth="200px">

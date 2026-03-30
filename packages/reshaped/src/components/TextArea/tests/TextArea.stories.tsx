@@ -95,7 +95,7 @@ export const aligner = {
 		<Example>
 			<Example.Item title="aligner">
 				<View gap={2}>
-					<Text variant="featured-2">What problem are you trying to solve?</Text>
+					<Text variant="title-5">What problem are you trying to solve?</Text>
 					<TextArea.Aligner>
 						<TextArea
 							variant="headless"

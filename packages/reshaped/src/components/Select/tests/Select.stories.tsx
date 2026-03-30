@@ -122,6 +122,7 @@ export const multiple: StoryObj<{ handleChange: Mock }> = {
 					placeholder="Select an animal"
 					defaultValue={["dog"]}
 					onChange={args.handleChange}
+					renderValue={(args) => args.value.join(", ")}
 				>
 					<Select.Option value="dog">Dog</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
@@ -282,7 +283,13 @@ export const renderValue = {
 				</Example.Item>
 
 				<Example.Item title="default renderer, multiple">
-					<Select name="animal" defaultValue={["1"]} multiple placeholder="Nothing selected">
+					<Select
+						name="animal"
+						defaultValue={["1"]}
+						multiple
+						placeholder="Nothing selected"
+						renderValue={(args) => args.value.join(", ")}
+					>
 						{options.map((option) => (
 							<Select.Option key={option.value} value={option.value}>
 								<Text weight="medium">{option.label}</Text>

@@ -36,7 +36,7 @@ const Dismissible: React.FC<T.Props> = (props) => {
 				<WrapperTag className={s.close}>
 					<Button
 						size="small"
-						{...(variant === "media" ? { color: "media", variant: "faded" } : { variant: "ghost" })}
+						{...(variant === "media" ? { color: "media" } : { variant: "ghost" })}
 						onClick={() => onClose?.()}
 						attributes={{ "aria-label": onClose ? closeAriaLabel : undefined }}
 						icon={IconClose}

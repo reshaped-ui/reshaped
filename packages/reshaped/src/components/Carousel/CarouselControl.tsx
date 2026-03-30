@@ -60,7 +60,7 @@ const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) =
 				icon={isDisplayedAsNext ? IconChevronRight : IconChevronLeft}
 				rounded
 				variant="outline"
-				elevated
+				raised
 				attributes={{ "aria-disabled": !visible, "aria-hidden": true }}
 				ref={ref}
 			/>
