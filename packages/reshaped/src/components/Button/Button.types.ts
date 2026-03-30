@@ -1,4 +1,3 @@
-import type { AlignerProps as BaseAlignerProps } from "@/components/_private/Aligner";
 import type { ActionableProps } from "@/components/Actionable";
 import type { IconProps } from "@/components/Icon";
 import type * as G from "@/types/global";
@@ -59,9 +58,4 @@ export type GroupProps = {
 	attributes?: Attributes<"div">;
 };
 
-export type AlignerProps = BaseAlignerProps & {
-	/**
-	 * @deprecated use `side` instead, will be remove in v4
-	 */
-	position?: BaseAlignerProps["side"];
-};
+export type { AlignerProps } from "@/components/_private/Aligner";
