@@ -54,7 +54,7 @@
 }
 
 .--color-media {
-	background: rgba(var(--rs-color-rgb-white), 24%);
+	background: rgb(from var(--rs-color-white) r g b / 24%);
 }
 
 .--color-media .value {

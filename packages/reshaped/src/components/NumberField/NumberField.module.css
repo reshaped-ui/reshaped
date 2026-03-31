@@ -99,7 +99,7 @@
 
 	@media (hover: hover) and (pointer: fine) {
 		&:not([aria-disabled]):hover {
-			background: rgba(var(--rs-color-rgb-background-neutral), 32%);
+			background: var(--rs-color-background-neutral-highlighted-faded);
 		}
 	}
 }

@@ -15,7 +15,7 @@
 	width: 100%;
 	z-index: var(--rs-z-index-fixed);
 	color: var(--rs-color-white);
-	background-color: calc(var(--rs-color-rgb-black), 0);
+	background-color: rgb(from var(--rs-color-black) r g b / 0%);
 	opacity: 0;
 	outline: none;
 	isolation: isolate;
@@ -45,7 +45,7 @@
 .root.--visible {
 	--rs-overlay-opacity: 1;
 
-	background-color: rgba(var(--rs-color-rgb-black), calc(var(--rs-overlay-opacity) * 0.7));
+	background-color: rgb(from var(--rs-color-black) r g b / calc(var(--rs-overlay-opacity) * 0.7));
 	opacity: 1;
 }
 

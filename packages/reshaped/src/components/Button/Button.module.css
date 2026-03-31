@@ -219,10 +219,10 @@
 	}
 
 	&.--color-media {
-		--rs-button-group-separator-color: rgba(var(--rs-color-rgb-white), 0.12);
+		--rs-button-group-separator-color: rgb(from var(--rs-color-white) r g b / 12%);
 		--rs-button-color: var(--rs-color-white);
-		--rs-button-background-color: rgb(var(--rs-color-rgb-black), 0.28);
-		--rs-button-highlight-color: rgb(var(--rs-color-rgb-black), 0.36);
+		--rs-button-background-color: rgb(from var(--rs-color-black) r g b / 28%);
+		--rs-button-highlight-color: rgb(from var(--rs-color-black) r g b / 36%);
 	}
 }
 
@@ -262,6 +262,8 @@
 
 .root.--variant-ghost {
   --rs-button-border-width: 0px;
+	
+	transition-duration: var(--rs-duration-rapid);
 
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
