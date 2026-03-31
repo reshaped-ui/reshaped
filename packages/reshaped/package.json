@@ -45,6 +45,11 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./themes": {
+      "types": "./dist/themes.d.ts",
+      "import": "./dist/themes.js",
+      "default": "./dist/themes.js"
+    },
     "./config/postcss": {
       "types": "./dist/config/postcss.d.ts",
       "import": "./dist/config/postcss.js",

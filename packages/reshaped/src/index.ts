@@ -166,25 +166,3 @@ export type { Attributes } from "@reshaped/headless";
  * Dev utilities
  */
 export { default as Placeholder } from "@/utilities/storybook/Placeholder";
-
-/** Theming */
-export type {
-	ColorTokenName,
-	DurationTokenName,
-	EasingTokenName,
-	FontFamilyTokenName,
-	FontTokenName,
-	FontWeightTokenName,
-	RadiusTokenName,
-	ReshapedConfig,
-	ShadowTokenName,
-	ThemeDefinition,
-	UnitTokenName,
-	ViewportTokenName,
-} from "@reshaped/theming";
-export {
-	baseThemeDefinition,
-	generateThemeColors,
-	getThemeCSS,
-	transform,
-} from "@reshaped/theming";
