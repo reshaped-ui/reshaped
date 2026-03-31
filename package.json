@@ -23,7 +23,7 @@
 		"test:vrt": "pnpm chromatic",
 		"test:browser": "pnpm -r run test:browser",
 		"test:unit": "pnpm -r run test:unit",
-		"test:size": "size-limit",
+		"test:size": "pnpm --filter @reshaped/theming run build && pnpm --filter reshaped run build:size && size-limit",
 		"lint": "pnpm lint:js && pnpm lint:css",
 		"lint:js": "eslint './packages/**/*.{ts,tsx}' --fix",
 		"lint:css": "stylelint 'packages/**/*.css'"
@@ -104,12 +104,12 @@
 		},
 		{
 			"name": "Theming / JS",
-			"path": "packages/reshaped/dist/tests/themingWithoutDefinition.js",
+			"path": "packages/theming/dist/tests/themingWithoutDefinition.js",
 			"webpack": true
 		},
 		{
 			"name": "Theming with a default theme definition / JS",
-			"path": "packages/reshaped/dist/tests/themingWithDefinition.js",
+			"path": "packages/theming/dist/tests/themingWithDefinition.js",
 			"webpack": true
 		}
 	]
