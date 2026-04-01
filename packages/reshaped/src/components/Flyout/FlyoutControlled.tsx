@@ -128,10 +128,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
 	const isRendered = status !== "idle";
-
-	// Don't create dismissible queue for hover flyout because they close all together on mouseout
 	const isDismissible = useIsDismissible({
-		active: isRendered && triggerType !== "hover",
+		active: isRendered,
 		contentRef: flyoutElRef,
 		triggerRef: triggerElRef,
 	});
