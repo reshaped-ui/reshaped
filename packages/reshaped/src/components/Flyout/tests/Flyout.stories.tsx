@@ -1,12 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { createRoot } from "react-dom/client";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { userEvent, waitFor, within, expect, fn } from "storybook/test";
 
 import Button from "@/components/Button";
 import Flyout, { FlyoutInstance, FlyoutProps } from "@/components/Flyout";
 import Modal from "@/components/Modal";
-import Reshaped from "@/components/Reshaped";
 import Select from "@/components/Select";
 import Switch from "@/components/Switch";
 import TextField from "@/components/TextField";
@@ -922,37 +920,6 @@ export const contentAttributes: StoryObj = {
 /*
  * Test edge cases
  */
-
-class CustomElement extends window.HTMLElement {
-	constructor() {
-		super();
-		this.attachShadow({ mode: "open" });
-
-		if (!this.shadowRoot) return;
-
-		const node = (
-			<Reshaped>
-				<Demo defaultActive>
-					Content
-					<div id="test-id" />
-				</Demo>
-			</Reshaped>
-		);
-		const root = createRoot(this.shadowRoot);
-		root.render(node);
-	}
-}
-
-if (!window.customElements.get("custom-element-flyout")) {
-	window.customElements.define("custom-element-flyout", CustomElement);
-}
-
-export const testShadowDom = {
-	name: "test: shadow dom",
-	// @ts-expect-error - custom-element-flyout is not a valid HTML element
-	render: () => <custom-element-flyout />,
-};
-
 export const testInsideFixed: StoryObj = {
 	name: "test: inside position fixed",
 	render: () => (

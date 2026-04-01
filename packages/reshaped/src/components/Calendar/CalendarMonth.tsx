@@ -25,6 +25,7 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 		renderWeekDay,
 		renderDateAriaLabel,
 		renderDateSlot,
+		renderDateValue,
 	} = props;
 	let foundFocusableDate = false;
 	const [lastFocusedDate, setLastFocusedDate] = useState<Date>();
@@ -81,6 +82,7 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 										selectedDates={selectedDates}
 										disabledDates={disabledDates}
 										renderSlot={renderDateSlot}
+										renderValue={renderDateValue}
 									/>
 								);
 							})}

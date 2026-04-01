@@ -242,9 +242,15 @@ export const edgeCases = {
 												{(attributes) => <Button attributes={attributes}>Open</Button>}
 											</Popover.Trigger>
 											<Popover.Content>
-												<Popover.Dismissible align="center" closeAriaLabel="Close">
-													Another popover content
-												</Popover.Dismissible>
+												<View gap={2}>
+													<Popover.Dismissible align="center" closeAriaLabel="Close">
+														Another popover content
+													</Popover.Dismissible>
+
+													<Tooltip text="Tooltip">
+														{(attributes) => <Button attributes={attributes}>Button</Button>}
+													</Tooltip>
+												</View>
 											</Popover.Content>
 										</Popover>
 									</View>

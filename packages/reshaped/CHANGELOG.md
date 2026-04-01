@@ -1,5 +1,25 @@
 # reshaped
 
+## 3.11.0-canary.3
+
+### Patch Changes
+
+- [`a904f6a`](https://github.com/reshaped-ui/reshaped/commit/a904f6a14d1fcaec645cd65ae625bbf1f3e8c5c7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Canary release
+
+- Updated dependencies []:
+  - @reshaped/headless@3.11.0-canary.3
+
+## 3.11.0-canary.2
+
+### Minor Changes
+
+- [#602](https://github.com/reshaped-ui/reshaped/pull/602) [`1cf5e37`](https://github.com/reshaped-ui/reshaped/commit/1cf5e376df29e2ca8543349718450432808346c3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Added `renderDateValue` support
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @reshaped/headless@3.11.0-canary.2
+
 ## 3.11.0-canary.1
 
 ### Patch Changes

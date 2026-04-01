@@ -2,11 +2,13 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.11.0-canary.0",
-    "reshaped": "3.11.0-canary.0",
-    "@reshaped/utilities": "3.11.0-canary.0"
+    "@reshaped/headless": "3.11.0-canary.2",
+    "reshaped": "3.11.0-canary.2",
+    "@reshaped/utilities": "3.11.0-canary.2"
   },
   "changesets": [
+    "bright-eagles-cover",
+    "pink-olives-fry",
     "quick-dingos-stand",
     "sixty-queens-do",
     "some-planes-kick"

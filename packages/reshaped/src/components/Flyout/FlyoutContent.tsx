@@ -16,6 +16,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const {
 		flyout,
 		id,
+		triggerElRef,
 		flyoutElRef,
 		handleTransitionEnd,
 		triggerType,
@@ -38,6 +39,10 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	} = useFlyoutContext();
 	const { status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
+
+	const shadowRootRef = React.useRef<ShadowRoot | null>(null);
+	const rootNode = triggerElRef?.current?.getRootNode();
+	if (rootNode instanceof ShadowRoot) shadowRootRef.current = rootNode;
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -122,7 +127,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		</ContentProvider>
 	);
 
-	return <Portal>{content}</Portal>;
+	return <Portal targetRef={shadowRootRef.current ? shadowRootRef : undefined}>{content}</Portal>;
 };
 
 FlyoutContent.displayName = "Flyout.Content";
