@@ -11,6 +11,33 @@ import isFullyVisible from "./isFullyVisible";
 
 import type { Position, Width, Options } from "../types";
 
+/**
+ * Get the viewport-relative rect of the element's containing block.
+ * When the content is inside a positioned ancestor (e.g. a fixed overlay),
+ * we need to account for its offset instead of using page scroll.
+ */
+const getContainingBlockRect = (
+	el: HTMLElement
+): { left: number; top: number; right: number; bottom: number } => {
+	const offsetParent = el.offsetParent as HTMLElement | null;
+
+	if (
+		!offsetParent ||
+		offsetParent === document.body ||
+		offsetParent === document.documentElement
+	) {
+		return {
+			left: -window.scrollX,
+			top: -window.scrollY,
+			right: window.innerWidth - window.scrollX,
+			bottom: window.innerHeight - window.scrollY,
+		};
+	}
+
+	const rect = offsetParent.getBoundingClientRect();
+	return { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
+};
+
 const applyPosition = (
 	args: Options & {
 		lastUsedPosition: Position | null;
@@ -143,8 +170,15 @@ const applyPosition = (
 	root.removeChild(contentClone);
 
 	const { styles } = calculated;
-	const translateX = (styles.right !== null ? -styles.right : styles.left) + window.scrollX;
-	const translateY = (styles.bottom !== null ? -styles.bottom : styles.top) + window.scrollY;
+	const containingBlockRect = getContainingBlockRect(content);
+	const translateX =
+		styles.right !== null
+			? window.innerWidth - styles.right - containingBlockRect.right
+			: styles.left - containingBlockRect.left;
+	const translateY =
+		styles.bottom !== null
+			? window.innerHeight - styles.bottom - containingBlockRect.bottom
+			: styles.top - containingBlockRect.top;
 	const resolvedStyles = {
 		left: styles.right === null ? "0px" : undefined,
 		right: styles.right === null ? undefined : "0px",
