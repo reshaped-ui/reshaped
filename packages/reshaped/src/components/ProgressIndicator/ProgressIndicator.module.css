@@ -7,10 +7,10 @@
 	box-sizing: initial;
 	mask-image: linear-gradient(
 		to right,
-		rgba(0, 0, 0, 0%) 0%,
-		rgba(0, 0, 0, 100%) var(--rs-unit-x4),
-		rgba(0, 0, 0, 100%) calc(100% - var(--rs-unit-x4)),
-		rgba(0, 0, 0, 0%) 100%
+		rgb(0 0 0 / 0%) 0%,
+		rgb(0 0 0 / 100%) var(--rs-unit-x4),
+		rgb(0 0 0 / 100%) calc(100% - var(--rs-unit-x4)),
+		rgb(0 0 0 / 0%) 100%
 	);
 }
 

@@ -208,12 +208,12 @@
 		-ms-overflow-style: none;
 		mask-image: linear-gradient(
 			to right,
-			rgba(0, 0, 0, 0%) 0%,
-			rgba(0, 0, 0, 0%) var(--rs-tabs-mid-l),
-			rgba(0, 0, 0, 100%) var(--rs-tabs-stop-l),
-			rgba(0, 0, 0, 100%) var(--rs-tabs-stop-r),
-			rgba(0, 0, 0, 0%) var(--rs-tabs-mid-r),
-			rgba(0, 0, 0, 0%) 100%
+			rgb(0 0 0 / 0%) 0%,
+			rgb(0 0 0 / 0%) var(--rs-tabs-mid-l),
+			rgb(0 0 0 / 100%) var(--rs-tabs-stop-l),
+			rgb(0 0 0 / 100%) var(--rs-tabs-stop-r),
+			rgb(0 0 0 / 0%) var(--rs-tabs-mid-r),
+			rgb(0 0 0 / 0%) 100%
 		);
 		transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
 		transition-property: --rs-tabs-stop-l, --rs-tabs-stop-r, --rs-tabs-mid-l, --rs-tabs-mid-r;
