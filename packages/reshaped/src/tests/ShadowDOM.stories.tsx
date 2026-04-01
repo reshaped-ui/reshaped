@@ -62,7 +62,7 @@ const ShadowDiv = forwardRef<HTMLDivElement, React.PropsWithChildren>((props, re
 	}, []);
 
 	return (
-		<Reshaped>
+		<Reshaped theme="slate">
 			<root.div className="quote" ref={shadowRef}>
 				<div ref={ref}>
 					{/* 
