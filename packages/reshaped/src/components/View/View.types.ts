@@ -1,6 +1,7 @@
 import type * as TStyles from "@/styles/types";
 import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type { Attributes } from "@/types/global";
+import type { ClassName } from "@reshaped/utilities";
 import type React from "react";
 
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto";

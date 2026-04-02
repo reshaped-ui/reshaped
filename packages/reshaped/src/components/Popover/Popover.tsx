@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import Dismissible, { type DismissibleProps } from "@/components/Dismissible";
 import Flyout, { type FlyoutProps, useFlyoutContext } from "@/components/Flyout";

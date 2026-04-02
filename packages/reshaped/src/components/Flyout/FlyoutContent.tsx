@@ -1,9 +1,10 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import Portal from "@/components/_private/Portal";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 
 import { ContentProvider, useFlyoutContext } from "./Flyout.context";
 import s from "./Flyout.module.css";

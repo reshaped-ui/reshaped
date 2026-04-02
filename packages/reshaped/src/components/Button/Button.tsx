@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import { forwardRef } from "react";
 import React from "react";
 

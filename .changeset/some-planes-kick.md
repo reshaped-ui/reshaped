@@ -1,5 +1,4 @@
 ---
-"@reshaped/headless": minor
 "reshaped": minor
 ---
 

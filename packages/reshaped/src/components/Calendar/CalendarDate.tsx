@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
 

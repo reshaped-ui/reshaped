@@ -1,11 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
-import React from "react";
 import { expect, userEvent } from "storybook/test";
 
 import useToggle from "../useToggle";
 
 export default {
-	title: "Headless/Hooks/useToggle",
+	title: "Hooks/useToggle",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

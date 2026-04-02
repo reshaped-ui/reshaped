@@ -5,7 +5,7 @@ import { expect, fn, type Mock, userEvent } from "storybook/test";
 import useOnClickOutside from "../useOnClickOutside";
 
 export default {
-	title: "Headless/Hooks/useOnClickOutside",
+	title: "Hooks/useOnClickOutside",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

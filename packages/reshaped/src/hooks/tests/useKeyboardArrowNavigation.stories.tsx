@@ -5,7 +5,7 @@ import { expect, userEvent } from "storybook/test";
 import useKeyboardArrowNavigation from "../useKeyboardArrowNavigation";
 
 export default {
-	title: "Headless/Hooks/useKeyboardArrowNavigation",
+	title: "Hooks/useKeyboardArrowNavigation",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

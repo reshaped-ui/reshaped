@@ -1,10 +1,10 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import View from "@/components/View";
-import useDrag from "@/hooks/_private/useDrag";
+import useDrag from "@/hooks/_internal/useDrag";
 
 import s from "./Resizable.module.css";
 

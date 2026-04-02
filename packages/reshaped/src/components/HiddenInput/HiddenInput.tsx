@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
 import { useFormControl } from "@/components/FormControl";

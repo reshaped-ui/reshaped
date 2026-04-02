@@ -4,7 +4,7 @@ import { expect, fn, userEvent } from "storybook/test";
 import useHotkeys from "../useHotkeys";
 
 export default {
-	title: "Headless/Hooks/useHotkeys",
+	title: "Hooks/useHotkeys",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

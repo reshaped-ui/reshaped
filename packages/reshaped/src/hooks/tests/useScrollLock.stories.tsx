@@ -5,7 +5,7 @@ import { expect, userEvent } from "storybook/test";
 import useScrollLock from "../useScrollLock";
 
 export default {
-	title: "Headless/Hooks/useScrollLock",
+	title: "Hooks/useScrollLock",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

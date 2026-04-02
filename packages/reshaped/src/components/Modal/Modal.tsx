@@ -1,7 +1,7 @@
 "use client";
 
-import { classNames, useHandlerRef, useElementId } from "@reshaped/headless";
-import { enableScroll, disableScroll } from "@reshaped/headless/internal";
+import { classNames } from "@reshaped/utilities";
+import { enableScroll, disableScroll } from "@reshaped/utilities/internal";
 import {
 	useCallback,
 	createContext,
@@ -15,6 +15,8 @@ import {
 
 import Overlay, { type OverlayInstance } from "@/components/Overlay";
 import Text from "@/components/Text";
+import useElementId from "@/hooks/useElementId";
+import useHandlerRef from "@/hooks/useHandlerRef";
 import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
 import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";

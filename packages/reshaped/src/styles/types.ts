@@ -2,7 +2,7 @@ import React from "react";
 
 import * as G from "@/types/global";
 
-import type { ClassName } from "@reshaped/headless";
+import type { ClassName } from "@reshaped/utilities";
 
 /* Values */
 type Unit = number;

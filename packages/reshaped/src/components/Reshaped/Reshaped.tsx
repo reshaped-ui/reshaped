@@ -1,12 +1,15 @@
 "use client";
 
-import { classNames, Reshaped as HeadlessReshaped } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import { GlobalColorMode, PrivateTheme } from "@/components/Theme";
 import { useGlobalColorMode } from "@/components/Theme/useTheme";
 import { ToastProvider } from "@/components/Toast";
-import { SingletonViewportProvider } from "@/hooks/_private/useSingletonViewport";
+import { SingletonHotkeysProvider } from "@/hooks/_internal/useSingletonHotkeys";
+import { SingletonKeyboardModeProvider } from "@/hooks/_internal/useSingletonKeyboardMode";
+import { SingletonRTLProvider } from "@/hooks/_internal/useSingletonRTL";
+import { SingletonViewportProvider } from "@/hooks/_internal/useSingletonViewport";
 
 import "./Reshaped.css";
 import s from "./Reshaped.module.css";
@@ -29,25 +32,29 @@ const Reshaped: React.FC<T.Props> = (props) => {
 	const parentGlobalColorMode = useGlobalColorMode();
 
 	return (
-		<HeadlessReshaped defaultRTL={defaultRTL}>
-			<GlobalColorMode
-				defaultMode={defaultColorMode || parentGlobalColorMode.mode || "light"}
-				mode={colorMode}
-				scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
-			>
-				<PrivateTheme
-					name={theme}
-					defaultName={defaultTheme}
-					className={rootClassNames}
-					scoped={scoped}
-					scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
-				>
-					<SingletonViewportProvider defaultViewport={defaultViewport}>
-						<ToastProvider>{props.children}</ToastProvider>
-					</SingletonViewportProvider>
-				</PrivateTheme>
-			</GlobalColorMode>
-		</HeadlessReshaped>
+		<SingletonRTLProvider defaultRTL={defaultRTL}>
+			<SingletonKeyboardModeProvider>
+				<SingletonHotkeysProvider>
+					<GlobalColorMode
+						defaultMode={defaultColorMode || parentGlobalColorMode.mode || "light"}
+						mode={colorMode}
+						scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
+					>
+						<PrivateTheme
+							name={theme}
+							defaultName={defaultTheme}
+							className={rootClassNames}
+							scoped={scoped}
+							scopeRef={!!parentGlobalColorMode && scoped ? scopeRef : undefined}
+						>
+							<SingletonViewportProvider defaultViewport={defaultViewport}>
+								<ToastProvider>{props.children}</ToastProvider>
+							</SingletonViewportProvider>
+						</PrivateTheme>
+					</GlobalColorMode>
+				</SingletonHotkeysProvider>
+			</SingletonKeyboardModeProvider>
+		</SingletonRTLProvider>
 	);
 };
 

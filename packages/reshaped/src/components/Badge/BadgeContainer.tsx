@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import s from "./Badge.module.css";
 

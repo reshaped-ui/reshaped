@@ -1,9 +1,9 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React, { isValidElement } from "react";
 
-import useFadeSide from "@/hooks/_private/useFadeSide";
+import useFadeSide from "@/hooks/_internal/useFadeSide";
 import { resolveMixin } from "@/styles/mixin";
 import { responsiveVariables } from "@/utilities/props";
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
 
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import { disableTransitions, enableTransitions, onNextFrame } from "@/utilities/animation";
 
 import { GlobalColorModeContext } from "./Theme.context";

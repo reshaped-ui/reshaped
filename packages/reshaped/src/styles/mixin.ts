@@ -39,7 +39,7 @@ import textAlign from "@/styles/resolvers/textAlign";
 import width from "@/styles/resolvers/width";
 
 import type { Mixin } from "@/styles/types";
-import type { ClassName } from "@reshaped/headless";
+import type { ClassName } from "@reshaped/utilities";
 
 const mixinMap = {
 	align,

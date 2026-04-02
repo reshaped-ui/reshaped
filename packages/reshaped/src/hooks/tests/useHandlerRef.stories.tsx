@@ -5,7 +5,7 @@ import { expect, fn, Mock, userEvent } from "storybook/test";
 import useHandlerRef from "../useHandlerRef";
 
 export default {
-	title: "Headless/Hooks/useHandlerRef",
+	title: "Hooks/useHandlerRef",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

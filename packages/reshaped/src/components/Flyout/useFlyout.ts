@@ -1,6 +1,8 @@
-import { useIsomorphicLayoutEffect } from "@reshaped/headless";
-import { type Coordinates, Flyout } from "@reshaped/headless/internal";
+import { Flyout } from "@reshaped/utilities";
+import { type Coordinates } from "@reshaped/utilities/internal";
 import { useCallback, useMemo, useRef, useState } from "react";
+
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 
 import type * as T from "./Flyout.types";
 

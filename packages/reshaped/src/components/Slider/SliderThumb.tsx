@@ -1,6 +1,6 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import Text from "@/components/Text";

@@ -1,10 +1,11 @@
 "use client";
 
-import { classNames, useElementId } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import { useFormControl } from "@/components/FormControl";
 import Icon from "@/components/Icon";
+import useElementId from "@/hooks/useElementId";
 import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 

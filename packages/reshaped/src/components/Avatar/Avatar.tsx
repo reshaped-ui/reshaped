@@ -1,4 +1,4 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import Icon from "@/components/Icon";
 import Image, { type ImageProps } from "@/components/Image";

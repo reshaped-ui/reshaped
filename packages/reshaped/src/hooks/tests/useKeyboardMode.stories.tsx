@@ -4,7 +4,7 @@ import { expect, userEvent } from "storybook/test";
 import useKeyboardMode from "../useKeyboardMode";
 
 export default {
-	title: "Headless/Hooks/useKeyboardMode",
+	title: "Hooks/useKeyboardMode",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

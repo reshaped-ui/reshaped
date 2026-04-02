@@ -5,7 +5,7 @@ import { expect } from "storybook/test";
 import useRTL from "../useRTL";
 
 export default {
-	title: "Headless/Hooks/useRTL",
+	title: "Hooks/useRTL",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

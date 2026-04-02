@@ -1,4 +1,3 @@
-import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fireEvent, fn, Mock, userEvent, waitFor, within } from "storybook/test";
@@ -6,6 +5,7 @@ import { expect, fireEvent, fn, Mock, userEvent, waitFor, within } from "storybo
 import Autocomplete from "@/components/Autocomplete";
 import Badge from "@/components/Badge";
 import FormControl from "@/components/FormControl";
+import useToggle from "@/hooks/useToggle";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 

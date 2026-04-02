@@ -1,10 +1,11 @@
 "use client";
 
-import { classNames, useElementId } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
 import { useFormControl } from "@/components/FormControl";
 import Text from "@/components/Text";
+import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 
 import s from "./Switch.module.css";

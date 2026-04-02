@@ -1,5 +1,6 @@
 import type { LinkProps } from "@/components/Link";
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type { Attributes } from "@/types/global";
+import type { ClassName } from "@reshaped/utilities";
 import type React from "react";
 
 export type Props = {

@@ -1,4 +1,5 @@
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type { Attributes } from "@/types/global";
+import type { ClassName } from "@reshaped/utilities";
 
 export type Props = {
 	/** Value of the progress bar controlling the size of the fill */

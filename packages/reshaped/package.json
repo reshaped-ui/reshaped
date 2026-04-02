@@ -86,8 +86,8 @@
   },
   "dependencies": {
     "@csstools/postcss-global-data": "4.0.0",
-    "@reshaped/headless": "workspace:*",
     "@reshaped/theming": "workspace:*",
+    "@reshaped/utilities": "workspace:*",
     "chalk": "4.1.2",
     "commander": "14.0.3",
     "cssnano": "7.1.1",

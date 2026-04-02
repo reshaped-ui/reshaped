@@ -1,9 +1,9 @@
 "use client";
 
-import { useIsomorphicLayoutEffect } from "@reshaped/headless";
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
 
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import { onNextFrame } from "@/utilities/animation";
 
 import s from "./Expandable.module.css";

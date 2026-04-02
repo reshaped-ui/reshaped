@@ -1,8 +1,9 @@
 "use client";
 
-import { useIsomorphicLayoutEffect } from "@reshaped/headless";
 import { breakpoints as defaultBreakpoints } from "@reshaped/theming";
 import React from "react";
+
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 
 import type * as G from "@/types/global";
 

@@ -1,7 +1,9 @@
 "use client";
 
-import { classNames, useElementId } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 import React from "react";
+
+import useElementId from "@/hooks/useElementId";
 
 import { Provider } from "./FormControl.context";
 import s from "./FormControl.module.css";
