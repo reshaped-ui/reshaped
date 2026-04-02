@@ -19,7 +19,7 @@ import type * as T from "./Reshaped.types";
 const Reshaped: React.FC<T.Props> = (props) => {
 	const {
 		theme,
-		defaultTheme = "reshaped",
+		defaultTheme = "slate",
 		colorMode,
 		defaultColorMode,
 		defaultViewport,
