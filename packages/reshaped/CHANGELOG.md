@@ -1,5 +1,16 @@
 # reshaped
 
+## 3.11.0-canary.4
+
+### Patch Changes
+
+- [`abe3012`](https://github.com/reshaped-ui/reshaped/commit/abe3012d03e3b69240b8161bbcb764df0781b83c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: enabled dismissible queue for hover flyouts
+
+- [#610](https://github.com/reshaped-ui/reshaped/pull/610) [`117ec29`](https://github.com/reshaped-ui/reshaped/commit/117ec29b7b48e2f26785626e457ebc6004231338) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Fixed shadow dom and nested modal positioning
+
+- Updated dependencies []:
+  - @reshaped/headless@3.11.0-canary.4
+
 ## 3.11.0-canary.3
 
 ### Patch Changes

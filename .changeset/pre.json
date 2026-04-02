@@ -2,14 +2,16 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.11.0-canary.2",
-    "@reshaped/utilities": "3.11.0-canary.2"
+    "reshaped": "3.11.0-canary.3",
+    "@reshaped/utilities": "3.11.0-canary.3"
   },
   "changesets": [
     "bright-eagles-cover",
     "pink-olives-fry",
+    "plenty-boxes-work",
     "quick-dingos-stand",
     "sixty-queens-do",
-    "some-planes-kick"
+    "some-planes-kick",
+    "wise-goats-report"
   ]
 }

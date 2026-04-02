@@ -1,5 +1,7 @@
 # @reshaped/headless
 
+## 3.11.0-canary.4
+
 ## 3.11.0-canary.3
 
 ## 3.11.0-canary.2
