@@ -90,7 +90,7 @@
     "@reshaped/utilities": "workspace:*",
     "chalk": "4.1.2",
     "commander": "14.0.3",
-    "cssnano": "7.1.1",
+    "cssnano": "7.1.4",
     "csstype": "3.2.3",
     "postcss-custom-media": "12.0.1"
   }

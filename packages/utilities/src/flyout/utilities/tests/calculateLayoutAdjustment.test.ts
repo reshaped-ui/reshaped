@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
-import { VIEWPORT_OFFSET } from "flyout/constants";
-import calculateLayoutAdjustment from "flyout/utilities/calculateLayoutAdjustment";
+import { VIEWPORT_OFFSET } from "../../constants";
+import calculateLayoutAdjustment from "../calculateLayoutAdjustment";
 
 describe("flyout/calculateLayoutAdjustment", () => {
 	const createBounds = (left: number, top: number, width: number, height: number): DOMRect => {

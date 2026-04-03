@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
-import calculatePosition from "flyout/utilities/calculatePosition";
+import calculatePosition from "../calculatePosition";
 
 describe("flyout/calculatePosition", () => {
 	const createBounds = (left: number, top: number, width: number, height: number): DOMRect => {

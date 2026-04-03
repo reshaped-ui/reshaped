@@ -11,10 +11,6 @@ const __dirname = dirname(__filename);
 
 const config: StorybookConfig = {
 	framework: "@storybook/react-vite",
-	features: {
-		experimentalComponentsManifest: true,
-		experimentalCodeExamples: true,
-	},
 	typescript: {
 		reactDocgen: "react-docgen-typescript",
 		reactDocgenTypescriptOptions: {
