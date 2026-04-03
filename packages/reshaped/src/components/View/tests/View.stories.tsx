@@ -11,7 +11,6 @@ import Text from "@/components/Text";
 import View, { type ViewProps } from "@/components/View";
 import useToggle from "@/hooks/useToggle";
 import { Example, Placeholder } from "@/utilities/storybook";
-import IconPlus from "@/icons/Plus";
 
 export default {
 	title: "Utility components/View",
