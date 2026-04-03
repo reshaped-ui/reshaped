@@ -1,7 +1,7 @@
 "use client";
 
-import { activateKeyboardMode, deactivateKeyboardMode } from "@reshaped/utilities/internal";
 import React from "react";
+import { activateKeyboardMode, deactivateKeyboardMode } from "@reshaped/utilities/internal";
 
 const ESC = "Escape";
 

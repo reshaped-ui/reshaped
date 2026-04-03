@@ -1,13 +1,12 @@
 "use client";
 
+import React from "react";
 import { classNames } from "@reshaped/utilities";
 import { getFocusableElements } from "@reshaped/utilities/internal";
-import React from "react";
-
-import s from "./Tabs.module.css";
-import { useTabs } from "./TabsContext";
 
 import type * as T from "./Tabs.types";
+import { useTabs } from "./TabsContext";
+import s from "./Tabs.module.css";
 
 const TabsPanel: React.FC<T.PanelProps> = (props) => {
 	const { value: panelValue, children, className, attributes } = props;

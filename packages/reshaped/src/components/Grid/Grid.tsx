@@ -1,11 +1,9 @@
 import { classNames } from "@reshaped/utilities";
 
-import { resolveMixin } from "@/styles/mixin";
 import { responsivePropDependency, responsiveVariables } from "@/utilities/props";
-
-import s from "./Grid.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Grid.types";
+import s from "./Grid.module.css";
 
 export const GridItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
 	props: T.ItemProps<As>
@@ -21,7 +19,6 @@ export const GridItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
 		children,
 		className,
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		attributes,
 	} = props;
@@ -66,7 +63,6 @@ const Grid = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		height,
 		maxWidth,
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		attributes,
 	} = props;

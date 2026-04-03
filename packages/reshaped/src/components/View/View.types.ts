@@ -1,8 +1,9 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type * as TStyles from "@/styles/types";
 import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
-import type { ClassName } from "@reshaped/utilities";
-import type React from "react";
 
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto";
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";
@@ -150,7 +151,6 @@ export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void =
 export type RenderItem = (args: {
 	className?: string;
 	// Using any in favor of resolving the props in runtime where we don't know their props definitions
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	child: any;
 	index: number;
 }) => React.ReactNode;

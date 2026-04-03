@@ -1,14 +1,12 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import View from "@/components/View";
-
-import s from "./Resizable.module.css";
-import { ResizableHandleContext } from "./ResizableHandle";
-
 import type * as T from "./Resizable.types";
+import { ResizableHandleContext } from "./ResizableHandle";
+import s from "./Resizable.module.css";
 
 export const ResizableItem: React.FC<T.ItemProps> = () => null;
 

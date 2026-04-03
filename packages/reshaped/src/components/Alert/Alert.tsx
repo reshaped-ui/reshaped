@@ -3,9 +3,8 @@ import React from "react";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
 import View from "@/components/View";
-
-import s from "./Alert.module.css";
 import * as T from "./Alert.types";
+import s from "./Alert.module.css";
 
 const Alert: React.FC<T.Props> = (props) => {
 	const {

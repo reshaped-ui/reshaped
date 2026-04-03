@@ -1,13 +1,11 @@
-import { classNames } from "@reshaped/utilities";
 import React, { forwardRef } from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
 import View from "@/components/View";
 import { resolveMixin } from "@/styles/mixin";
-
-import s from "./Card.module.css";
-
 import type * as T from "./Card.types";
+import s from "./Card.module.css";
 
 export type Component = {
 	<As extends keyof React.JSX.IntrinsicElements = "div">(
@@ -33,7 +31,6 @@ const Card: Component = forwardRef((props, ref) => {
 		className,
 		attributes,
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 	} = props;
 	const isActionable = !!href || !!onClick;
@@ -81,7 +78,6 @@ const Card: Component = forwardRef((props, ref) => {
 				href={href}
 				as={TagName}
 				onClick={onClick}
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				ref={ref as any}
 			>
 				{contentNode}

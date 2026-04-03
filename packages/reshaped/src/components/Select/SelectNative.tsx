@@ -1,16 +1,14 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
-import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames } from "@/utilities/props";
-
-import s from "./Select.module.css";
+import { resolveMixin } from "@/styles/mixin";
+import type * as T from "./Select.types";
 import SelectEndContent from "./SelectEndContent";
 import SelectStartContent from "./SelectStartContent";
-
-import type * as T from "./Select.types";
+import s from "./Select.module.css";
 
 const SelectNative: React.FC<T.NativeProps> = (props) => {
 	const {

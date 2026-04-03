@@ -1,6 +1,7 @@
+import type { ClassName } from "@reshaped/utilities";
+
 import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
-import type { ClassName } from "@reshaped/utilities";
 
 export type Props = {
 	/** Component size */

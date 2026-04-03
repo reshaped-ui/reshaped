@@ -7,8 +7,8 @@ import FormControl from "@/components/FormControl";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/TextField",

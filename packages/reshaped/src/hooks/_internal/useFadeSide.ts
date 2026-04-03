@@ -1,7 +1,7 @@
 "use client";
 
-import { rafThrottle } from "@reshaped/utilities/internal";
 import React from "react";
+import { rafThrottle } from "@reshaped/utilities/internal";
 
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useRTL from "@/hooks/useRTL";

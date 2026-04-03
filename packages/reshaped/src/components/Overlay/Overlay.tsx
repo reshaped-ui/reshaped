@@ -1,8 +1,8 @@
 "use client";
 
+import React from "react";
 import { TrapFocus, classNames } from "@reshaped/utilities";
 import { type FocusableElement } from "@reshaped/utilities/internal";
-import React from "react";
 
 import Portal from "@/components/_private/Portal";
 import useHandlerRef from "@/hooks/useHandlerRef";
@@ -12,10 +12,8 @@ import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "@/hooks/useScrollLock";
 import useToggle from "@/hooks/useToggle";
 import { onNextFrame } from "@/utilities/animation";
-
-import s from "./Overlay.module.css";
-
 import type * as T from "./Overlay.types";
+import s from "./Overlay.module.css";
 
 const Overlay: React.FC<T.Props> = (props) => {
 	const {
@@ -205,6 +203,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 								"--rs-overlay-opacity": transparent ? 0 : undefined,
 							} as React.CSSProperties
 						}
+						// oxlint-disable-next-line jsx_a11y/prefer-tag-over-role
 						role="button"
 						tabIndex={-1}
 						className={rootClassNames}

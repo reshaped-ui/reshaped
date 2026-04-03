@@ -1,10 +1,9 @@
 "use client";
 
-import { breakpoints as defaultBreakpoints } from "@reshaped/theming";
 import React from "react";
+import { breakpoints as defaultBreakpoints } from "@reshaped/theming";
 
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-
 import type * as G from "@/types/global";
 
 const SingletonViewportContext = React.createContext<{

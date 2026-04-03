@@ -1,8 +1,9 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type { IconProps } from "@/components/Icon";
 import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
-import type { ClassName } from "@reshaped/utilities";
-import type React from "react";
 
 export type Props = {
 	/** SVG component for the icon */

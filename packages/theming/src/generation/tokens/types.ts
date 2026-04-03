@@ -1,7 +1,4 @@
 import { PartialDeep, PrivateOptions } from "../types";
-
-import * as TZIndex from "./zIndex/zIndex.types";
-
 import type * as TColor from "./color/color.types";
 import type * as TDuration from "./duration/duration.types";
 import type * as TEasing from "./easing/easing.types";
@@ -12,6 +9,7 @@ import type * as TRadius from "./radius/radius.types";
 import type * as TShadow from "./shadow/shadow.types";
 import type * as TUnit from "./unit/unit.types";
 import type * as TViewport from "./viewport/viewport.types";
+import * as TZIndex from "./zIndex/zIndex.types";
 
 export type TokenType =
 	| "fontFamily"

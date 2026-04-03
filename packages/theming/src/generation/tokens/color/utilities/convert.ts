@@ -2,9 +2,9 @@ import { formatHex, modeOklch, modeRgb, type Oklch, useMode } from "culori/fn";
 
 import type * as TColor from "../color.types";
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
+// oxlint-disable-next-line react-hooks/rules-of-hooks
 const oklch = useMode(modeOklch);
-// eslint-disable-next-line react-hooks/rules-of-hooks
+// oxlint-disable-next-line react-hooks/rules-of-hooks
 const rgb = useMode(modeRgb);
 
 export const hexToOklch = (hex: string): Oklch => {

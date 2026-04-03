@@ -1,8 +1,9 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type * as TStyles from "@/styles/types";
 import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
-import type { ClassName } from "@reshaped/utilities";
-import type React from "react";
 
 export type Props = {
 	/** Image URL */

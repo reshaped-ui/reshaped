@@ -3,9 +3,8 @@ import { expect, fn, Mock, waitFor } from "storybook/test";
 
 import Icon from "@/components/Icon";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
-
+import IconZap from "@/icons/Zap";
 import Image from "../Image";
 
 export default {
@@ -206,7 +205,7 @@ export const renderImage: StoryObj = {
 				<Image
 					src={imgUrl}
 					alt="Amsterdam canal"
-					// eslint-disable-next-line jsx-a11y/alt-text
+					// oxlint-disable-next-line jsx_a11y/alt-text
 					renderImage={(attributes) => <img {...attributes} id="test-image" />}
 				/>
 			</Example.Item>
@@ -215,7 +214,7 @@ export const renderImage: StoryObj = {
 					src="error"
 					fallback={imgUrl}
 					alt="Amsterdam canal 2"
-					// eslint-disable-next-line jsx-a11y/alt-text
+					// oxlint-disable-next-line jsx_a11y/alt-text
 					renderImage={(attributes) => <img {...attributes} id="test-image-fallback" />}
 				/>
 			</Example.Item>

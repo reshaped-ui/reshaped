@@ -8,8 +8,8 @@ import Icon from "@/components/Icon";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import View from "@/components/View";
-import IconMic from "@/icons/Mic";
 import { Example } from "@/utilities/storybook";
+import IconMic from "@/icons/Mic";
 
 export default {
 	title: "Components/FileUpload",

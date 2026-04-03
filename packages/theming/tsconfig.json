@@ -7,14 +7,9 @@
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
 		"paths": {
-			"@/*": ["./src/*"],
+			"@/*": ["./src/*"]
 		}
 	},
 	"include": ["src/**/*"],
-	"exclude": [
-		"node_modules",
-		"dist",
-		"./src/**/*.test.tsx",
-		"./src/**/*.test.ts"
-	]
+	"exclude": ["node_modules", "dist", "./src/**/*.test.tsx", "./src/**/*.test.ts"]
 }

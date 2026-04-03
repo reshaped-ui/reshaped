@@ -1,4 +1,5 @@
 import React from "react";
+import type { ClassName } from "@reshaped/utilities";
 
 import type { ActionableProps } from "@/components/Actionable";
 import type { DropdownMenuProps } from "@/components/DropdownMenu";
@@ -6,7 +7,6 @@ import type { IconProps } from "@/components/Icon";
 import type { MenuItemProps } from "@/components/MenuItem";
 import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
-import type { ClassName } from "@reshaped/utilities";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 

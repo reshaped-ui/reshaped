@@ -1,5 +1,4 @@
 import { PrivateOptions } from "@/generation/types";
-
 import type { TransformedToken, Transformer } from "../types";
 import type * as T from "./color.types";
 

@@ -1,6 +1,7 @@
-import type { Attributes } from "@/types/global";
-import type { ClassName } from "@reshaped/utilities";
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
+import type { Attributes } from "@/types/global";
 
 type WithClose = {
 	/** Hide the close button */

@@ -1,10 +1,8 @@
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-
+import type { StorybookConfig } from "@storybook/react-vite";
 import { mergeConfig, UserConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-
-import type { StorybookConfig } from "@storybook/react-vite";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

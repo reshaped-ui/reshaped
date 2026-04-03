@@ -1,5 +1,6 @@
-import type { Attributes } from "@/types/global";
 import type { ClassName } from "@reshaped/utilities";
+
+import type { Attributes } from "@/types/global";
 
 export type Props = {
 	/** Total amount of progress indicator dots */

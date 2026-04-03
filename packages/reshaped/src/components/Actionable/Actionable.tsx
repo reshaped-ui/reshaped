@@ -1,11 +1,10 @@
 "use client";
 
-import { classNames, keys } from "@reshaped/utilities";
 import React, { forwardRef } from "react";
-
-import s from "./Actionable.module.css";
+import { classNames, keys } from "@reshaped/utilities";
 
 import type * as T from "./Actionable.types";
+import s from "./Actionable.module.css";
 
 const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 	const {
@@ -35,7 +34,6 @@ const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {
 	const isButton = Boolean(hasClickHandler || hasFocusHandler || type || attributes?.ref);
 	const renderedAsButton = !isLink && isButton && (!as || as === "button");
 	// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let TagName: any;
 
 	if (isLink) {

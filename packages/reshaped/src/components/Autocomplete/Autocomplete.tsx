@@ -3,18 +3,16 @@
 import React from "react";
 
 import DropdownMenu from "@/components/DropdownMenu";
+import type { MenuItemProps } from "@/components/MenuItem";
 import TextField from "@/components/TextField";
-import * as keys from "@/constants/keys";
+import type { TextFieldProps } from "@/components/TextField";
 import useElementId from "@/hooks/useElementId";
 import useHandlerRef from "@/hooks/useHandlerRef";
 import useHotkeys from "@/hooks/useHotkeys";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-
-import s from "./Autocomplete.module.css";
+import * as keys from "@/constants/keys";
 import * as T from "./Autocomplete.types";
-
-import type { MenuItemProps } from "@/components/MenuItem";
-import type { TextFieldProps } from "@/components/TextField";
+import s from "./Autocomplete.module.css";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
@@ -207,7 +205,6 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 							attributes={{
 								...textFieldProps.attributes,
 								// Ignoring the type check since TS can't infer the correct html element type
-								// eslint-disable-next-line @typescript-eslint/no-explicit-any
 								ref: ref as any,
 								onClick: attributes.onFocus,
 							}}

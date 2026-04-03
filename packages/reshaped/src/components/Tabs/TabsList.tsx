@@ -1,7 +1,7 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
 import Icon from "@/components/Icon";
@@ -11,12 +11,10 @@ import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation";
 import useRTL from "@/hooks/useRTL";
 import IconChevronLeft from "@/icons/ChevronLeft";
 import IconChevronRight from "@/icons/ChevronRight";
-
-import s from "./Tabs.module.css";
+import type * as T from "./Tabs.types";
 import { useTabs } from "./TabsContext";
 import TabsItem from "./TabsItem";
-
-import type * as T from "./Tabs.types";
+import s from "./Tabs.module.css";
 
 const findParentItem = (el: HTMLElement | null, rootEl: HTMLElement): HTMLElement | null => {
 	if (el === rootEl || !el) return null;

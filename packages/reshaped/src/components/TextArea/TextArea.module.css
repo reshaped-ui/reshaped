@@ -6,7 +6,7 @@
 	position: relative;
 	display: grid;
 	border-radius: var(--rs-radius-medium);
-	background: var(--rs-color-background-elevation-base);	
+	background: var(--rs-color-background-elevation-base);
 	isolation: isolate;
 
 	&:has(.input[disabled]) {
@@ -14,13 +14,13 @@
 	}
 
 	&:focus-within {
-		box-shadow: var(--rs-outline-shadow) !important; 
+		box-shadow: var(--rs-outline-shadow) !important;
 	}
 
 	&::after {
 		content: attr(data-rs-textarea-value) " ";
 		visibility: hidden;
-	
+
 		/* Align with the textarea native behavior */
 		white-space: pre-wrap;
 		overflow-wrap: break-word;

@@ -1,7 +1,7 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { GlobalColorMode, PrivateTheme } from "@/components/Theme";
 import { useGlobalColorMode } from "@/components/Theme/useTheme";
@@ -10,11 +10,9 @@ import { SingletonHotkeysProvider } from "@/hooks/_internal/useSingletonHotkeys"
 import { SingletonKeyboardModeProvider } from "@/hooks/_internal/useSingletonKeyboardMode";
 import { SingletonRTLProvider } from "@/hooks/_internal/useSingletonRTL";
 import { SingletonViewportProvider } from "@/hooks/_internal/useSingletonViewport";
-
+import type * as T from "./Reshaped.types";
 import "./Reshaped.css";
 import s from "./Reshaped.module.css";
-
-import type * as T from "./Reshaped.types";
 
 const Reshaped: React.FC<T.Props> = (props) => {
 	const {

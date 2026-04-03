@@ -57,7 +57,7 @@
 	&.--selection-start + .--selection-range,
 	&.--selection-start + :hover,
 	&.--selection-range + .--selection-range,
-	&.--selection-range + :hover, 
+	&.--selection-range + :hover,
 	&.--selection-range + .--selection-end {
 		& .cell-button::before {
 			background-color: var(--rs-color-background-neutral-highlighted-faded);
@@ -104,4 +104,3 @@
 		z-index: -10;
 	}
 }
-

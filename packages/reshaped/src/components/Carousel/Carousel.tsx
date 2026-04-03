@@ -1,19 +1,17 @@
 "use client";
 
+import React from "react";
 import { classNames } from "@reshaped/utilities";
 import { rafThrottle } from "@reshaped/utilities/internal";
-import React from "react";
 
+import type { ActionableRef } from "@/components/Actionable";
 import View from "@/components/View";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useRTL from "@/hooks/useRTL";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-
-import s from "./Carousel.module.css";
 import * as T from "./Carousel.types";
 import CarouselControl from "./CarouselControl";
-
-import type { ActionableRef } from "@/components/Actionable";
+import s from "./Carousel.module.css";
 
 const Carousel: React.FC<T.Props> = (props) => {
 	const {

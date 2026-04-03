@@ -1,17 +1,15 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
 import HiddenInput from "@/components/HiddenInput";
 import { useRadioGroup } from "@/components/RadioGroup";
 import Text from "@/components/Text";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./Radio.module.css";
-
 import type * as T from "./Radio.types";
+import s from "./Radio.module.css";
 
 const Radio: React.FC<T.Props> = (props) => {
 	const {

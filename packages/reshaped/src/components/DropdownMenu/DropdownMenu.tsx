@@ -6,14 +6,12 @@ import { useFlyoutContext } from "@/components/Flyout";
 import Icon from "@/components/Icon";
 import MenuItem from "@/components/MenuItem";
 import Popover from "@/components/Popover";
-import * as keys from "@/constants/keys";
 import useHotkeys from "@/hooks/useHotkeys";
 import useRTL from "@/hooks/useRTL";
+import * as keys from "@/constants/keys";
 import IconChevronRight from "@/icons/ChevronRight";
-
-import s from "./DropdownMenu.module.css";
-
 import type * as T from "./DropdownMenu.types";
+import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
 const DropdownMenuSubTriggerContext = React.createContext<boolean>(false);

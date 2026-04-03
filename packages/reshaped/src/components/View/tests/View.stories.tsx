@@ -10,8 +10,8 @@ import Tabs from "@/components/Tabs";
 import Text from "@/components/Text";
 import View, { type ViewProps } from "@/components/View";
 import useToggle from "@/hooks/useToggle";
-import IconPlus from "@/icons/Plus";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconPlus from "@/icons/Plus";
 
 export default {
 	title: "Utility components/View",
@@ -934,6 +934,7 @@ export const positioning = {
 			</Example.Item>
 
 			<Example.Item title="position: sticky">
+				{/* oxlint-disable-next-line jsx_a11y/prefer-tag-over-role */}
 				<div style={{ overflow: "auto", height: 100 }} tabIndex={0} role="button">
 					<View position="sticky" borderColor="primary" insetTop={0}>
 						Content
@@ -946,6 +947,7 @@ export const positioning = {
 				<div
 					style={{ overflow: "auto", height: 100, position: "relative" }}
 					tabIndex={0}
+					// oxlint-disable-next-line jsx_a11y/prefer-tag-over-role
 					role="button"
 				>
 					<View position={{ s: "absolute", m: "relative" }} borderColor="primary" insetTop={0}>

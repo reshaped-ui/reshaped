@@ -108,9 +108,11 @@
 }
 
 .slot {
-	/* slots can have negative margin to based on the slot padding value passed to the component */ 
-	&.slot--position-start { 
-		--rs-text-field-slot-adjustment: calc(var(--rs-text-field-start-slot-padding) - var(--rs-text-field-p-h));
+	/* slots can have negative margin to based on the slot padding value passed to the component */
+	&.slot--position-start {
+		--rs-text-field-slot-adjustment: calc(
+			var(--rs-text-field-start-slot-padding) - var(--rs-text-field-p-h)
+		);
 
 		margin-inline-start: var(--rs-text-field-slot-adjustment);
 
@@ -123,17 +125,20 @@
 			in case it had negative margin – reset it and add the regular gap 
 			this approach lets us align slots rendered on multiple lines
 			*/
-			margin-inline-end: calc(max(calc(var(--rs-text-field-slot-adjustment) * -1), 0px) + var(--rs-text-field-gap));
+			margin-inline-end: calc(
+				max(calc(var(--rs-text-field-slot-adjustment) * -1), 0px) + var(--rs-text-field-gap)
+			);
 		}
 	}
-	
+
 	&.slot--position-end {
-		--rs-text-field-slot-adjustment: calc(var(--rs-text-field-end-slot-padding) - var(--rs-text-field-p-h));
+		--rs-text-field-slot-adjustment: calc(
+			var(--rs-text-field-end-slot-padding) - var(--rs-text-field-p-h)
+		);
 
 		margin-inline-end: var(--rs-text-field-slot-adjustment);
 	}
 }
-
 
 .affix {
 	color: var(--rs-color-foreground-neutral-faded);
@@ -162,7 +167,6 @@
 		}
 	}
 }
-
 
 /* Ensure that when wrapping to the new line, end attachments stay in the end */
 .input + .icon--position-end,

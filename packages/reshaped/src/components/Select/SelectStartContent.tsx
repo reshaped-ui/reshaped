@@ -1,9 +1,7 @@
 import Icon from "@/components/Icon";
 import { responsivePropDependency } from "@/utilities/props";
-
-import s from "./Select.module.css";
-
 import type * as T from "./Select.types";
+import s from "./Select.module.css";
 
 const SelectStartContent: React.FC<Pick<T.Props, "startSlot" | "icon" | "size">> = (props) => {
 	const { startSlot, icon, size } = props;

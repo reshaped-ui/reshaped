@@ -11,7 +11,6 @@ const waitForNextFrame = (): Promise<void> => {
 };
 
 describe("helpers/rafThrottle", () => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let mockFn: ReturnType<typeof vi.fn<(...args: any[]) => void>>;
 
 	beforeEach(() => {

@@ -1,7 +1,7 @@
 "use client";
 
-import { isRTL } from "@reshaped/utilities";
 import React from "react";
+import { isRTL } from "@reshaped/utilities";
 
 import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
 

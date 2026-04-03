@@ -1,5 +1,5 @@
-import { keys } from "@reshaped/utilities";
 import React from "react";
+import { keys } from "@reshaped/utilities";
 
 import useHandlerRef from "./useHandlerRef";
 
@@ -50,7 +50,7 @@ const useOnClickOutside = (
 			document.removeEventListener("touchstart", handleMouseDown);
 			document.removeEventListener("keydown", handleKeyDown);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
 	}, [...refs]);
 
 	React.useEffect(() => {
@@ -67,7 +67,7 @@ const useOnClickOutside = (
 		return () => {
 			document.removeEventListener("click", handleClick);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
 	}, [handlerRef, disabled, ...refs]);
 };
 

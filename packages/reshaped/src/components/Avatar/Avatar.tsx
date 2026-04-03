@@ -3,12 +3,10 @@ import { classNames } from "@reshaped/utilities";
 import Icon from "@/components/Icon";
 import Image, { type ImageProps } from "@/components/Image";
 import View from "@/components/View";
-import { resolveMixin } from "@/styles/mixin";
 import { responsivePropDependency } from "@/utilities/props";
-
-import s from "./Avatar.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Avatar.types";
+import s from "./Avatar.module.css";
 
 const Avatar: React.FC<T.Props> = (props) => {
 	const {

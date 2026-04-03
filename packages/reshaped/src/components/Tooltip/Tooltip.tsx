@@ -3,10 +3,8 @@
 import Flyout from "@/components/Flyout";
 import Text from "@/components/Text";
 import Theme from "@/components/Theme";
-
-import s from "./Tooltip.module.css";
-
 import type * as T from "./Tooltip.types";
+import s from "./Tooltip.module.css";
 
 const Tooltip: React.FC<T.Props> = (props) => {
 	const {

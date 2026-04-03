@@ -3,10 +3,8 @@ import { classNames } from "@reshaped/utilities";
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
 import { useFormControl } from "@/components/FormControl";
 import { useRadioGroup } from "@/components/RadioGroup";
-
-import s from "./HiddenInput.module.css";
-
 import type * as T from "./HiddenInput.types";
+import s from "./HiddenInput.module.css";
 
 const HiddenInput: React.FC<T.Props> = (props) => {
 	const { type, value, className, onChange, attributes } = props;

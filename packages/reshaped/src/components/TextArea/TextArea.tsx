@@ -1,16 +1,14 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
 import useElementId from "@/hooks/useElementId";
-import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames } from "@/utilities/props";
-
-import s from "./TextArea.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./TextArea.types";
+import s from "./TextArea.module.css";
 
 const TextArea: React.FC<T.Props> = (props) => {
 	const {

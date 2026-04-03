@@ -4,10 +4,8 @@ import { expect, userEvent } from "storybook/test";
 
 import Button from "@/components/Button";
 import { useTheme } from "@/components/Theme";
-
-import Reshaped from "../Reshaped";
-
 import type * as G from "@/types/global";
+import Reshaped from "../Reshaped";
 
 export default {
 	title: "Utility components/Reshaped",

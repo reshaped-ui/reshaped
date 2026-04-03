@@ -16,6 +16,6 @@
 		"src/utilities/testPresets.tsx",
 		"./src/**/*.test.tsx",
 		"./src/**/*.test.ts",
-		"./src/**/*.stories.tsx",
+		"./src/**/*.stories.tsx"
 	]
 }

@@ -8,8 +8,8 @@ import Image from "@/components/Image";
 import Text from "@/components/Text";
 import { ToastProvider, useToast } from "@/components/Toast";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/Toast",
@@ -26,7 +26,7 @@ const Orientation = () => {
 		icon: IconZap,
 		title: "Hey!",
 		text: "Event completed",
-		actionsSlot: [<Button>Action</Button>],
+		actionsSlot: <Button>Action</Button>,
 	};
 
 	return (
@@ -158,10 +158,12 @@ const Color = () => {
 							color: "neutral",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -176,10 +178,12 @@ const Color = () => {
 							color: "primary",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -194,10 +198,12 @@ const Color = () => {
 							color: "positive",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -212,10 +218,12 @@ const Color = () => {
 							color: "critical",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -231,10 +239,12 @@ const Color = () => {
 							title: "Hey!",
 							icon: IconZap,
 							timeout: 0,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>

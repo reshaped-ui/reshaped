@@ -269,7 +269,7 @@ export const testDynamicHeight: StoryObj = {
 
 				<ScrollArea height="200px" scrollbarDisplay="visible">
 					<View gap={2}>
-						{new Array(count).fill("").map((_, i) => (
+						{Array.from({ length: count }).map((_, i) => (
 							<View.Item key={i}>Item {i + 1}</View.Item>
 						))}
 					</View>

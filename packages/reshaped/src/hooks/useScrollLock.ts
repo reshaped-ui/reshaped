@@ -1,7 +1,7 @@
 "use client";
 
-import { lockScroll } from "@reshaped/utilities";
 import React from "react";
+import { lockScroll } from "@reshaped/utilities";
 
 const useScrollLock = (options?: {
 	containerRef?: React.RefObject<HTMLElement | null>;

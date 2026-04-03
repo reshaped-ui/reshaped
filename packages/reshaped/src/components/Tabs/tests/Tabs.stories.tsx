@@ -7,8 +7,8 @@ import ScrollArea from "@/components/ScrollArea";
 import Tabs from "@/components/Tabs";
 import Text from "@/components/Text";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/Tabs",

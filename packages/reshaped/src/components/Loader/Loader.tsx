@@ -1,10 +1,8 @@
 import { classNames } from "@reshaped/utilities";
 
 import { responsiveClassNames } from "@/utilities/props";
-
-import s from "./Loader.module.css";
-
 import type * as T from "./Loader.types";
+import s from "./Loader.module.css";
 
 const Loader: React.FC<T.Props> = (props) => {
 	const { size = "small", color = "primary", className, attributes } = props;

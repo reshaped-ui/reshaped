@@ -1,11 +1,9 @@
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { resolveMixin } from "@/styles/mixin";
-
-import s from "./Icon.module.css";
-
 import type * as T from "./Icon.types";
+import s from "./Icon.module.css";
 
 const Icon: React.FC<T.Props> = (props) => {
 	const { svg: Component, className, color, size = "1em", autoWidth, attributes } = props;

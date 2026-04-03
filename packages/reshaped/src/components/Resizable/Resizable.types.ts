@@ -1,6 +1,7 @@
+import type React from "react";
+
 import type { ViewProps } from "@/components/View";
 import type { UseDragCallbackArgs } from "@/hooks/_internal/useDrag";
-import type React from "react";
 
 export type Props = {
 	/** Component render variant */

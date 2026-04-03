@@ -1,7 +1,8 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type { LinkProps } from "@/components/Link";
 import type { Attributes } from "@/types/global";
-import type { ClassName } from "@reshaped/utilities";
-import type React from "react";
 
 export type Props = {
 	/** Node for inserting children to position items */

@@ -53,7 +53,6 @@ const getEventKey = (e: KeyboardEvent) => {
 };
 
 // Removing the unknown gets highlighted an invalid syntax
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
 const walkHotkeys = <T extends unknown>(
 	hotkeys: Record<string, T>,
 	cb: (id: string, hotkeyData: T) => void

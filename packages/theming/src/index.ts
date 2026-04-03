@@ -1,6 +1,5 @@
-import transform from "@/generation/transform";
-
 import type { PassedThemeDefinition } from "@/generation/tokens/types";
+import transform from "@/generation/transform";
 import type * as T from "@/generation/types";
 
 /**

@@ -1,12 +1,12 @@
 "use client";
 
+import React from "react";
 import { TrapFocus } from "@reshaped/utilities";
 import {
 	checkKeyboardMode,
 	type Coordinates,
 	type FocusableElement,
 } from "@reshaped/utilities/internal";
-import React from "react";
 
 import usePrevious from "@/hooks/_internal/usePrevious";
 import useElementId from "@/hooks/useElementId";
@@ -16,7 +16,6 @@ import useIsDismissible from "@/hooks/useIsDismissible";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { checkTransitions } from "@/utilities/animation";
-
 import * as timeouts from "./Flyout.constants";
 import {
 	Provider,
@@ -24,11 +23,10 @@ import {
 	useFlyoutContext,
 	useFlyoutTriggerContext,
 } from "./Flyout.context";
+import type * as T from "./Flyout.types";
 import useFlyout from "./useFlyout";
 import cooldown from "./utilities/cooldown";
 import { createSafeArea } from "./utilities/safeArea";
-
-import type * as T from "./Flyout.types";
 
 const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {

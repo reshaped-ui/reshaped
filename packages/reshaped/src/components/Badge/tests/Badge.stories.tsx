@@ -7,9 +7,9 @@ import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 import IconCheckmark from "@/icons/Checkmark";
 import IconPlus from "@/icons/Plus";
-import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Badge",

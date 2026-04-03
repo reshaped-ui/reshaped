@@ -1,18 +1,16 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
 import Text from "@/components/Text";
-import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames } from "@/utilities/props";
-
-import s from "./Select.module.css";
+import { resolveMixin } from "@/styles/mixin";
+import type * as T from "./Select.types";
 import SelectEndContent from "./SelectEndContent";
 import SelectStartContent from "./SelectStartContent";
-
-import type * as T from "./Select.types";
+import s from "./Select.module.css";
 
 const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 	const {

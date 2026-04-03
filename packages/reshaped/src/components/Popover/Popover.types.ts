@@ -1,5 +1,6 @@
-import type { FlyoutInstance, FlyoutProps } from "@/components/Flyout";
 import type React from "react";
+
+import type { FlyoutInstance, FlyoutProps } from "@/components/Flyout";
 
 export type Instance = FlyoutInstance;
 

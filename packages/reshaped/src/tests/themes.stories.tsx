@@ -1,5 +1,5 @@
-import { baseThemeDefinition, generateThemeColors, getThemeCSS } from "@reshaped/theming";
 import { useLayoutEffect, useState } from "react";
+import { baseThemeDefinition, generateThemeColors, getThemeCSS } from "@reshaped/theming";
 
 import Actionable from "@/components/Actionable";
 import Alert from "@/components/Alert";
@@ -14,9 +14,8 @@ import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import Theme, { useTheme } from "@/components/Theme";
 import View from "@/components/View";
-import IconZap from "@/icons/Mic";
 import { Example } from "@/utilities/storybook";
-
+import IconZap from "@/icons/Mic";
 import ThemePlayground from "./ThemesPlayground";
 
 export default {
@@ -42,7 +41,7 @@ const colors = [
 	"#000000",
 ];
 
-export const test = () => {
+export const Test = () => {
 	const { colorMode } = useTheme();
 	const [activeColor, setColor] = useState(colors[0]);
 	const [theme, setTheme] = useState("");

@@ -5,8 +5,8 @@ import Badge from "@/components/Badge";
 import MenuItem from "@/components/MenuItem";
 import Text from "@/components/Text";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/MenuItem",

@@ -1,13 +1,14 @@
 import React from "react";
-import useRTL from "../packages/reshaped/src/hooks/useRTL";
-import Reshaped from "../packages/reshaped/src/components/Reshaped";
+
 import Button from "../packages/reshaped/src/components/Button";
-import View from "../packages/reshaped/src/components/View";
-import Text from "../packages/reshaped/src/components/Text";
-import Hidden from "../packages/reshaped/src/components/Hidden";
 import DropdownMenu from "../packages/reshaped/src/components/DropdownMenu";
+import Hidden from "../packages/reshaped/src/components/Hidden";
 import Icon from "../packages/reshaped/src/components/Icon";
+import Reshaped from "../packages/reshaped/src/components/Reshaped";
+import Text from "../packages/reshaped/src/components/Text";
 import { useTheme } from "../packages/reshaped/src/components/Theme";
+import View from "../packages/reshaped/src/components/View";
+import useRTL from "../packages/reshaped/src/hooks/useRTL";
 import IconCheckmark from "../packages/reshaped/src/icons/Checkmark";
 import "../packages/reshaped/src/themes/slate/theme.css";
 import "../packages/reshaped/src/themes/figma/theme.css";
@@ -77,7 +78,7 @@ const ThemeSwitch = () => {
 					>
 						Slate
 					</DropdownMenu.Item>
-					
+
 					<DropdownMenu.Item
 						onClick={() => handleThemeChange("figma")}
 						endSlot={

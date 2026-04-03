@@ -1,7 +1,6 @@
 import generateColors from "@/generation/tokens/color/utilities/generateColors";
-import { breakpoints } from "@/generation/tokens/viewport/viewport.constants";
-
 import type { ThemeDefinition } from "@/generation/tokens/types";
+import { breakpoints } from "@/generation/tokens/viewport/viewport.constants";
 
 const theme: ThemeDefinition = {
 	color: generateColors(),

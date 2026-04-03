@@ -1,9 +1,7 @@
 import { findClosestScrollableContainer } from "@/dom";
 import { rafThrottle } from "@/helpers";
-
-import applyPosition from "./utilities/applyPosition";
-
 import type { Options, Position } from "./types";
+import applyPosition from "./utilities/applyPosition";
 
 class Flyout {
 	#active = false;

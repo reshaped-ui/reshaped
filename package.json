@@ -24,15 +24,15 @@
 		"test:browser": "pnpm -r run test:browser",
 		"test:unit": "pnpm -r run test:unit",
 		"test:size": "pnpm --filter @reshaped/theming run build && pnpm --filter reshaped run build:size && size-limit",
-		"lint": "pnpm lint:js && pnpm lint:css",
-		"lint:js": "eslint './packages/**/*.{ts,tsx}' --fix",
-		"lint:css": "stylelint 'packages/**/*.css'"
+		"lint": "pnpm lint:format && pnpm lint:js && pnpm lint:css",
+		"lint:js": "oxlint",
+		"lint:css": "stylelint 'packages/**/*.css'",
+		"lint:format": "oxfmt"
 	},
 	"devDependencies": {
 		"@changesets/changelog-github": "0.6.0",
 		"@changesets/cli": "2.30.0",
 		"@csstools/postcss-global-data": "4.0.0",
-		"@eslint/js": "9.39.4",
 		"@size-limit/preset-big-lib": "12.0.0",
 		"@storybook/addon-a11y": "10.3.4",
 		"@storybook/addon-docs": "10.3.4",
@@ -51,15 +51,9 @@
 		"@vitest/coverage-v8": "4.1.2",
 		"chromatic": "16.1.0",
 		"cssnano": "7.1.4",
-		"eslint": "9.39.4",
-		"eslint-config-prettier": "10.1.8",
-		"eslint-import-resolver-typescript": "4.4.4",
-		"eslint-plugin-import": "2.32.0",
-		"eslint-plugin-jsx-a11y": "6.10.2",
-		"eslint-plugin-prettier": "5.5.5",
-		"eslint-plugin-react": "7.37.5",
-		"eslint-plugin-react-hooks": "7.0.1",
 		"lefthook": "2.1.4",
+		"oxfmt": "^0.43.0",
+		"oxlint": "^1.58.0",
 		"playwright": "1.59.1",
 		"postcss": "8.5.8",
 		"postcss-cli": "11.0.1",
@@ -81,14 +75,10 @@
 		"stylelint-config-standard": "40.0.0",
 		"tsc-watch": "7.2.0",
 		"typescript": "6.0.2",
-		"typescript-eslint": "8.58.0",
 		"vite": "8.0.3",
 		"vite-tsconfig-paths": "6.1.1",
 		"vitest": "4.1.2",
 		"vitest-browser-react": "2.1.0"
-	},
-	"engines": {
-		"node": ">=22"
 	},
 	"size-limit": [
 		{
@@ -111,5 +101,8 @@
 			"path": "packages/theming/dist/tests/themingWithDefinition.js",
 			"webpack": true
 		}
-	]
+	],
+	"engines": {
+		"node": ">=22"
+	}
 }

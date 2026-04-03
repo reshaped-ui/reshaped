@@ -1,17 +1,15 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
 import Icon from "@/components/Icon";
 import useElementId from "@/hooks/useElementId";
-import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./TextField.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./TextField.types";
+import s from "./TextField.module.css";
 
 const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 	const { slot, icon, size, affix, position, id } = props;

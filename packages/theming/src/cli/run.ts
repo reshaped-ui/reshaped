@@ -1,12 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
-
 import chalk from "chalk";
 import { Command } from "commander";
 
 import defaultConfig from "./reshaped.config";
-
 import { addTheme, addThemeFragment } from "./index";
 
 const program = new Command();
@@ -14,7 +12,6 @@ const program = new Command();
 const importJSConfig = (configPath: string) => {
 	console.log(chalk.yellow(`Using Reshaped config at ${configPath}`));
 
-	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	const config = require(configPath);
 	return config.default || config;
 };

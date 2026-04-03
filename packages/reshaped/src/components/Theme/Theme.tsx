@@ -1,15 +1,14 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-
 import { ThemeContext } from "./Theme.context";
-import s from "./Theme.module.css";
 import * as T from "./Theme.types";
 import { getRootThemeEl } from "./Theme.utilities";
 import { useGlobalColorMode, useTheme } from "./useTheme";
+import s from "./Theme.module.css";
 
 const getThemeAttribute = (theme: NonNullable<T.Props["name"]>) => {
 	if (typeof theme === "string") return theme;

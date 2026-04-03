@@ -7,9 +7,9 @@ import Button from "@/components/Button";
 import Image from "@/components/Image";
 import Text from "@/components/Text";
 import View from "@/components/View";
+import { Example, Placeholder } from "@/utilities/storybook";
 import IconPlus from "@/icons/Plus";
 import IconZap from "@/icons/Zap";
-import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Components/Button",

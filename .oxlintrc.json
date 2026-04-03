@@ -1,0 +1,14 @@
+{
+	"plugins": ["react", "jsx-a11y"],
+	"rules": {
+		"react/rules-of-hooks": "error"
+	},
+	"overrides": [
+		{
+			"files": ["**/*.stories.*", "**/*.story.*"],
+			"rules": {
+				"react/rules-of-hooks": "off"
+			}
+		}
+	]
+}

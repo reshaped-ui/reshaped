@@ -1,17 +1,15 @@
 "use client";
 
+import React from "react";
 import { classNames, TrapFocus } from "@reshaped/utilities";
 import { checkKeyboardMode } from "@reshaped/utilities/internal";
-import React from "react";
 
 import { onNextFrame } from "@/utilities/animation";
-
 import Toast from "./Toast";
 import { timeouts, toastWidths } from "./Toast.constants";
 import ToastContext from "./Toast.context";
-import s from "./Toast.module.css";
-
 import type * as T from "./Toast.types";
+import s from "./Toast.module.css";
 
 const isWidthPreset = (width: T.ShowProps["width"]): width is T.WidthPreset =>
 	width === "short" || width === "long";

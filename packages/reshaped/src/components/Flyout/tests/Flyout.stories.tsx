@@ -335,16 +335,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					fallbackPositions={false}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="end-bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetStart={4} insetTop={80} gap={2}>
@@ -354,32 +356,36 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="top-end"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom-end"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetBottom={4} insetStart={4} gap={2}>
@@ -389,16 +395,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="end"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			{/* Right side */}
@@ -410,16 +418,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="start-bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetEnd={4} insetTop={80} gap={2}>
@@ -429,32 +439,36 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="top"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom-start"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetBottom={4} insetEnd={4} gap={2}>
@@ -464,16 +478,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="start"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 		</>
 	);

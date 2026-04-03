@@ -3,11 +3,9 @@
 import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
-
-import s from "./Calendar.module.css";
-import { getLocalISODate } from "./Calendar.utils";
-
 import type * as T from "./Calendar.types";
+import { getLocalISODate } from "./Calendar.utils";
+import s from "./Calendar.module.css";
 
 const CalendarDate: React.FC<T.DateProps> = (props) => {
 	const {

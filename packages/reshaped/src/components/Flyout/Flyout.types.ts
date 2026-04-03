@@ -1,8 +1,8 @@
 import React from "react";
-
-import type { Attributes } from "@/types/global";
 import type { ClassName } from "@reshaped/utilities";
 import type { Coordinates, TrapMode } from "@reshaped/utilities/internal";
+
+import type { Attributes } from "@/types/global";
 
 /**
  * Utility
@@ -81,7 +81,6 @@ type WithControlled = {
 
 export type TriggerAttributes = {
 	// FIXME: Once we only support React 19+, we can drop this any
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	ref: React.RefObject<HTMLButtonElement | null> | any;
 	onBlur?: (e: React.FocusEvent) => void;
 	onFocus?: () => void;

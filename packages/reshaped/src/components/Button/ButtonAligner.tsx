@@ -1,8 +1,6 @@
 import Aligner from "@/components/_private/Aligner";
-
-import s from "./Button.module.css";
-
 import type * as T from "./Button.types";
+import s from "./Button.module.css";
 
 const ButtonAligner: React.FC<T.AlignerProps> = (props) => {
 	return <Aligner {...props} className={[s.aligner, props.className]} />;

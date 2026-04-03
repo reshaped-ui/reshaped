@@ -1,9 +1,8 @@
 import { classNames } from "@reshaped/utilities";
 
 import View from "@/components/View";
-
-import s from "./Skeleton.module.css";
 import * as T from "./Skeleton.types";
+import s from "./Skeleton.module.css";
 
 const Skeleton: React.FC<T.Props> = (props) => {
 	const { borderRadius = "small", width, height, className, attributes } = props;

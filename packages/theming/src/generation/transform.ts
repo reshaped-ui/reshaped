@@ -4,14 +4,13 @@ import { Token } from "./tokens/color/color.types";
 import generateMetaColors from "./tokens/color/utilities/generateMetaColors";
 import { mediaTemplate, variablesTemplate } from "./tokens/css";
 import * as transforms from "./tokens/transforms";
-import { generateUnits } from "./tokens/unit/utilities/generate";
-
 import type {
 	GeneratedThemeDefinition,
 	PassedThemeDefinition,
 	TokenType,
 	TransformedToken,
 } from "./tokens/types";
+import { generateUnits } from "./tokens/unit/utilities/generate";
 import type * as T from "./types";
 
 const transform = (name: string, definition: PassedThemeDefinition, options: T.PrivateOptions) => {

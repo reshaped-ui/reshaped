@@ -3,7 +3,6 @@ import React from "react";
 import Button from "@/components/Button";
 import Image from "@/components/Image";
 import View from "@/components/View";
-
 import { useToast } from "./components/Toast";
 
 export default {

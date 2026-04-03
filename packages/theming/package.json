@@ -1,30 +1,30 @@
 {
 	"name": "@reshaped/theming",
-	"description": "Theme generation and theming utilities for Reshaped",
 	"version": "3.10.0-canary.16",
-	"license": "MIT",
+	"description": "Theme generation and theming utilities for Reshaped",
 	"homepage": "https://reshaped.so",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/reshaped-ui/reshaped.git",
-		"directory": "packages/theming"
-	},
 	"bugs": {
 		"url": "https://github.com/reshaped-ui/reshaped/issues"
 	},
+	"license": "MIT",
 	"author": {
 		"name": "Dmitry Belyaev",
 		"email": "blv.dmitry@gmail.com",
 		"url": "https://reshaped.so"
 	},
-	"sideEffects": [
-		"*.css"
-	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/reshaped-ui/reshaped.git",
+		"directory": "packages/theming"
+	},
 	"files": [
 		"bin/cli.js",
 		"dist/**/*",
 		"src/themes/**/*.css",
 		"src/themes/**/*.json"
+	],
+	"sideEffects": [
+		"*.css"
 	],
 	"types": "./dist/index.d.ts",
 	"exports": {

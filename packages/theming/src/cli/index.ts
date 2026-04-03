@@ -1,16 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
-
 import chalk from "chalk";
 
 import baseDefinition from "@/generation/definitions/slate";
-import transform from "@/generation/transform";
-import mergeDefinitions from "@/generation/utilities/mergeDefinitions";
-
-import { transformToTailwind } from "./tailwind";
-
 import type { PassedThemeDefinition } from "@/generation/tokens/types";
+import transform from "@/generation/transform";
 import type * as T from "@/generation/types";
+import mergeDefinitions from "@/generation/utilities/mergeDefinitions";
+import { transformToTailwind } from "./tailwind";
 
 const transformDefinition = (
 	name: string,

@@ -1,16 +1,14 @@
 "use client";
 
+import React, { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
 import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
-import React, { forwardRef } from "react";
 
 import useHandlerRef from "@/hooks/useHandlerRef";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import { resolveMixin } from "@/styles/mixin";
-
-import s from "./ScrollArea.module.css";
-
 import type * as T from "./ScrollArea.types";
+import s from "./ScrollArea.module.css";
 
 const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 	const { ratio, position, vertical, onThumbMove } = props;

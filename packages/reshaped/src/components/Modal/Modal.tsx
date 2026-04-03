@@ -1,7 +1,5 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
-import { enableScroll, disableScroll } from "@reshaped/utilities/internal";
 import {
 	useCallback,
 	createContext,
@@ -12,18 +10,18 @@ import {
 	useRef,
 	type FC,
 } from "react";
+import { classNames } from "@reshaped/utilities";
+import { enableScroll, disableScroll } from "@reshaped/utilities/internal";
 
 import Overlay, { type OverlayInstance } from "@/components/Overlay";
 import Text from "@/components/Text";
 import useElementId from "@/hooks/useElementId";
 import useHandlerRef from "@/hooks/useHandlerRef";
 import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
-import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-
-import s from "./Modal.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Modal.types";
+import s from "./Modal.module.css";
 
 const DRAG_THRESHOLD = 32;
 const DRAG_OPPOSITE_THRESHOLD = 100;
@@ -116,7 +114,6 @@ const Modal: FC<T.Props> = (props) => {
 	const shouldBeContained = containerRef && contained !== false;
 
 	const setDragStyles = useCallback(
-		// eslint-disable-next-line react-hooks/preserve-manual-memoization
 		(distance: number) => {
 			const rootEl = rootRef.current;
 			if (!rootEl) return;
@@ -158,12 +155,10 @@ const Modal: FC<T.Props> = (props) => {
 		setDragStyles(0);
 	}, [setDragStyles]);
 
-	// eslint-disable-next-line react-hooks/preserve-manual-memoization
 	const unlockDragScroll = useCallback(() => {
 		rootRef.current?.style.removeProperty("overflow");
 	}, [rootRef]);
 
-	// eslint-disable-next-line react-hooks/preserve-manual-memoization
 	const lockDragScroll = useCallback(() => {
 		rootRef.current?.style.setProperty("overflow", "hidden");
 	}, [rootRef]);

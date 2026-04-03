@@ -117,10 +117,6 @@
 	color: var(--rs-color-foreground-neutral);
 }
 
-
-
-
-
 [data-rs-color-mode="light"] {
 	color-scheme: light;
 }

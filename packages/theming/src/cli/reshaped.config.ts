@@ -1,6 +1,5 @@
 import figmaDefinition from "@/generation/definitions/figma";
 import slateDefinition from "@/generation/definitions/slate";
-
 import type { ReshapedConfig } from "@/types/config";
 
 const config: ReshapedConfig = {

@@ -51,7 +51,6 @@
 		}
 	}
 
-
 	@media (hover: hover) and (pointer: fine) {
 		&:hover:not(:has(.highlight)),
 		&:hover .highlight {
@@ -200,7 +199,7 @@
 }
 
 .root.--variant-solid {
-  --rs-button-border-width: 0px;
+	--rs-button-border-width: 0px;
 
 	&.--color-neutral {
 		--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
@@ -227,9 +226,9 @@
 }
 
 .root.--variant-outline {
-  --rs-button-border-width: 1px;
+	--rs-button-border-width: 1px;
 
-  &::before {
+	&::before {
 		content: "";
 		position: absolute;
 		pointer-events: none;
@@ -242,7 +241,7 @@
 	&::after {
 		box-shadow: var(--rs-shadow-outline);
 	}
-	
+
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
 			--rs-button-group-separator-color: var(--rs-color-border-neutral);
@@ -261,8 +260,8 @@
 }
 
 .root.--variant-ghost {
-  --rs-button-border-width: 0px;
-	
+	--rs-button-border-width: 0px;
+
 	transition-duration: var(--rs-duration-rapid);
 
 	@each $color in neutral, primary, critical, positive {
@@ -310,7 +309,7 @@
 	}
 
 	&.--variant-outline {
-    background-color: var(--rs-color-background-elevation-raised);
+		background-color: var(--rs-color-background-elevation-raised);
 	}
 }
 
@@ -349,11 +348,10 @@
 	&:hover,
 	&:active,
 	&.--highlighted {
-		opacity: 0.6 !important;		
+		opacity: 0.6 !important;
 		background-color: var(--rs-button-background-color) !important;
 	}
 }
-
 
 /* Button group */
 
@@ -366,13 +364,14 @@
 	}
 
 	&:has(.--variant-outline) {
-    &::before, &::after {
-      border-radius: var(--rs-radius-medium);
-    }
+		&::before,
+		&::after {
+			border-radius: var(--rs-radius-medium);
+		}
 
-    &:has(.--size-small) {
-      border-radius: var(--rs-radius-small);
-    }
+		&:has(.--size-small) {
+			border-radius: var(--rs-radius-small);
+		}
 
 		&::before {
 			content: "";
@@ -438,7 +437,7 @@
 	}
 
 	&:not(:first-child)::before {
-		content: '';
+		content: "";
 		position: absolute;
 		width: 1px;
 		inset-block: var(--rs-unit-x1);

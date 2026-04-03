@@ -5,19 +5,17 @@ import React from "react";
 import { useFormControl } from "@/components/FormControl";
 import Text from "@/components/Text";
 import View from "@/components/View";
-import * as keys from "@/constants/keys";
 import useHotkeys from "@/hooks/useHotkeys";
 import { onNextFrame } from "@/utilities/animation";
 import { responsivePropDependency } from "@/utilities/props";
-
+import * as keys from "@/constants/keys";
 import {
 	regExpAlphabeticChar,
 	regExpAlphaNumericChar,
 	regExpNumericChar,
 } from "./PinField.constants";
-import s from "./PinField.module.css";
-
 import type * as T from "./PinField.types";
+import s from "./PinField.module.css";
 
 const sizeMap: Record<T.Size, number> = {
 	small: 7,

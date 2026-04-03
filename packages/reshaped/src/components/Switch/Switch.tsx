@@ -1,16 +1,14 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
 import Text from "@/components/Text";
 import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./Switch.module.css";
-
 import type * as T from "./Switch.types";
+import s from "./Switch.module.css";
 
 const Switch: React.FC<T.Props> = (props) => {
 	const {

@@ -1,16 +1,15 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
 import Icon from "@/components/Icon";
 import View from "@/components/View";
 import IconChevronDown from "@/icons/ChevronDown";
-
 import AccordionContext from "./Accordion.context";
-import s from "./Accordion.module.css";
 import * as T from "./Accordion.types";
+import s from "./Accordion.module.css";
 
 const AccordionTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;

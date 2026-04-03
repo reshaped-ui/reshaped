@@ -1,13 +1,13 @@
 "use client";
 
+import React from "react";
 import { classNames } from "@reshaped/utilities";
 import { focusableSelector } from "@reshaped/utilities/internal";
-import React from "react";
 
 import ToastContext from "./Toast.context";
-import s from "./Toast.module.css";
 import * as T from "./Toast.types";
 import ToastContainer from "./ToastContainer";
+import s from "./Toast.module.css";
 
 const ToastRegion: React.FC<T.RegionProps> = (props) => {
 	const { position, nested } = props;
@@ -74,7 +74,7 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 
 	return (
 		// We only use onClick for touch devices since touchend is not supported
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+		// oxlint-disable-next-line jsx_a11y/no-noninteractive-element-interactions, jsx_a11y/click-events-have-key-events
 		<ul
 			role="region"
 			aria-live="polite"
@@ -87,7 +87,6 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 		>
 			{queue.map((data, index) => {
 				const visibleIndex = filteredLength - index + hiddenCount - 1;
-				// eslint-disable-next-line react-hooks/immutability
 				if (data.status !== "entered") hiddenCount += 1;
 
 				return (

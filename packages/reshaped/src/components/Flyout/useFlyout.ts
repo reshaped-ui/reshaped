@@ -1,9 +1,8 @@
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Flyout } from "@reshaped/utilities";
 import { type Coordinates } from "@reshaped/utilities/internal";
-import { useCallback, useMemo, useRef, useState } from "react";
 
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-
 import type * as T from "./Flyout.types";
 
 type UseFlyout = (
@@ -56,7 +55,7 @@ const useFlyout: UseFlyout = (args) => {
 	// Memo the array internally to avoid new arrays triggering useCallback
 	const cachedFallbackPositions = useMemo(
 		() => fallbackPositions,
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
 		[fallbackPositions?.join(" ")]
 	);
 

@@ -1,3 +1,5 @@
+import type { ClassName } from "@reshaped/utilities";
+
 import align from "@/styles/resolvers/align";
 import aspectRatio from "@/styles/resolvers/aspectRatio";
 import bleed from "@/styles/resolvers/bleed";
@@ -37,9 +39,7 @@ import radius from "@/styles/resolvers/radius";
 import shadow from "@/styles/resolvers/shadow";
 import textAlign from "@/styles/resolvers/textAlign";
 import width from "@/styles/resolvers/width";
-
 import type { Mixin } from "@/styles/types";
-import type { ClassName } from "@reshaped/utilities";
 
 const mixinMap = {
 	align,
@@ -90,7 +90,6 @@ export const resolveMixin = (mixin: Mixin) => {
 		if (value === undefined) return;
 		const mixin = mixinMap[key as keyof typeof mixinMap];
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore - too complex to resolve inference without manual typing every method
 		const result = mixin(value);
 

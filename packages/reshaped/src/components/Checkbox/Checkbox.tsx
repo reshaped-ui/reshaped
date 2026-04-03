@@ -1,7 +1,7 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
 import { useFormControl } from "@/components/FormControl";
@@ -9,12 +9,10 @@ import HiddenInput from "@/components/HiddenInput";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import IconCheckmark from "@/icons/Checkmark";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./Checkbox.module.css";
-
+import IconCheckmark from "@/icons/Checkmark";
 import type * as T from "./Checkbox.types";
+import s from "./Checkbox.module.css";
 
 const Checkbox: React.FC<T.Props> = (props) => {
 	const {

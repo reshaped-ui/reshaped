@@ -1,6 +1,5 @@
 import path from "path";
 import { fileURLToPath } from "url";
-
 import postcssGlobalData from "@csstools/postcss-global-data";
 import customMediaPlugin from "postcss-custom-media";
 

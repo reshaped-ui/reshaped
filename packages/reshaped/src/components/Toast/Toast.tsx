@@ -6,10 +6,8 @@ import Button, { type ButtonProps } from "@/components/Button";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
 import View, { type ViewProps } from "@/components/View";
-
-import s from "./Toast.module.css";
-
 import type * as T from "./Toast.types";
+import s from "./Toast.module.css";
 
 const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 	const {

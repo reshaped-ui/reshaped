@@ -276,7 +276,7 @@ export const autoFocus: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="autoFocus=false">
-				{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+				{/* oxlint-disable-next-line jsx_a11y/no-autofocus */}
 				<Demo autoFocus={false} />
 			</Example.Item>
 		</Example>

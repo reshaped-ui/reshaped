@@ -1,3 +1,4 @@
+import type { ThemeDefinition } from "@/generation/tokens/types";
 import {
 	type ColorValue,
 	HexColor,
@@ -7,10 +8,7 @@ import {
 	OklchToken,
 	PassedToken,
 } from "../color.types";
-
 import { hexToOklch, tokenToOklchToken } from "./convert";
-
-import type { ThemeDefinition } from "@/generation/tokens/types";
 
 const parseColor = (color: HexColor | PassedToken) => {
 	const isString = typeof color === "string";

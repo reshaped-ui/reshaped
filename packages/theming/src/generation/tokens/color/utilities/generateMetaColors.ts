@@ -1,13 +1,10 @@
 import { capitalize } from "@/utilities/string";
-
+import type * as T from "../../../types";
 import { PassedThemeDefinition } from "../../types";
 import { bgWithDynamicForeground } from "../color.constants";
-
+import type * as TColor from "../color.types";
 import { getOnColor } from "./a11y";
 import { hexToOklch, tokenToOklchToken } from "./convert";
-
-import type * as T from "../../../types";
-import type * as TColor from "../color.types";
 
 const whiteColor = hexToOklch("#ffffff");
 const blackColor = hexToOklch("#000000");

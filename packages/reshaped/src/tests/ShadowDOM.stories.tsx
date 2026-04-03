@@ -65,7 +65,7 @@ const ShadowDiv = forwardRef<HTMLDivElement, React.PropsWithChildren>((props, re
 		<Reshaped theme="slate">
 			<root.div className="quote" ref={shadowRef}>
 				<div ref={ref}>
-					{/* 
+					{/*
 						Adding padding here since otherwise mouseenter won't trigger on contents 
 						when mouse is switching from outside the shadow dom
 					*/}

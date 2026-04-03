@@ -9,4 +9,3 @@
 	},
 	"exclude": ["node_modules", "dist", "tools"]
 }
-

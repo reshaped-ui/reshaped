@@ -1,5 +1,5 @@
 .root {
-  --rs-form-control-gap: 1;
+	--rs-form-control-gap: 1;
 	--rs-form-control-gap-value: calc(var(--rs-form-control-gap) * var(--rs-unit-x1));
 
 	border: none;
@@ -7,7 +7,7 @@
 
 .label {
 	display: block;
-		margin-bottom: var(--rs-form-control-gap-value);
+	margin-bottom: var(--rs-form-control-gap-value);
 
 	&:last-child {
 		margin-bottom: 0;

@@ -1,5 +1,4 @@
 import Flyout from "@/components/Flyout";
-
 import Popover, { PopoverDismissible } from "./Popover";
 
 const PopoverRoot = Popover as typeof Popover & {

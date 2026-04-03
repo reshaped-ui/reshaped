@@ -3,8 +3,8 @@ import { expect, fn, userEvent } from "storybook/test";
 
 import Link from "@/components/Link";
 import Text from "@/components/Text";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/Link",

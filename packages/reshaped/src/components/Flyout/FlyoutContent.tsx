@@ -1,16 +1,14 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Portal from "@/components/_private/Portal";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-
 import { ContentProvider, useFlyoutContext } from "./Flyout.context";
-import s from "./Flyout.module.css";
-import cooldown from "./utilities/cooldown";
-
 import type * as T from "./Flyout.types";
+import cooldown from "./utilities/cooldown";
+import s from "./Flyout.module.css";
 
 const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const { children, className, attributes } = props;
@@ -91,7 +89,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 
 	const content = (
 		<ContentProvider value={{ elRef: flyoutElRef }}>
-			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+			{/* oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
 			<div
 				className={positionerClassNames}
 				style={

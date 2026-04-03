@@ -1,6 +1,5 @@
 import { findClosestScrollableContainer } from "@/dom";
 import { isIOS } from "@/platform";
-
 import lockSafariScroll from "./lockSafari";
 import lockStandardScroll from "./lockStandard";
 

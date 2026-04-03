@@ -1,15 +1,13 @@
 "use client";
 
-import { classNames } from "@reshaped/utilities";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import useElementId from "@/hooks/useElementId";
-
 import { Provider } from "./FormControl.context";
-import s from "./FormControl.module.css";
-import { getCaptionId } from "./FormControl.utilities";
-
 import type * as T from "./FormControl.types";
+import { getCaptionId } from "./FormControl.utilities";
+import s from "./FormControl.module.css";
 
 const FormControl: React.FC<T.Props> = (props) => {
 	const { children, id: passedId, required, hasError, group, disabled, size, gap } = props;

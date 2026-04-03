@@ -435,7 +435,7 @@ export const edgeCases = {
 					</Demo>
 				</Example.Item>
 				<Example.Item title="keyboard focus stays on the modal first">
-					{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+					{/* oxlint-disable-next-line jsx_a11y/no-autofocus */}
 					<Demo title="Modal title" autoFocus={false} />
 				</Example.Item>
 				<Example.Item title="trap focus works with custom children components">

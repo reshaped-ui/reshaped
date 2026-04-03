@@ -21,14 +21,14 @@ const useHotkeys = <Element extends HTMLElement>(
 		});
 
 		return () => remove?.();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
 	}, [
 		addHotkeys,
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
 		Object.keys(hotkeys).join(","),
 		options?.disabled,
 		options?.preventDefault,
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
 		...deps,
 	]);
 
