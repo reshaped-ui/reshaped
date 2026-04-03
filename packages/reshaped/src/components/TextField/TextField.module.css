@@ -51,7 +51,10 @@
 	box-sizing: border-box;
 	width: 100%;
 	color: var(--rs-color-foreground-neutral);
-	margin: 0 calc(var(--rs-text-field-gap) * -1);
+	min-height: var(--rs-text-field-min-height);
+
+	/* Take the full height to make input clickable */
+	margin: calc(var(--rs-text-field-p-v) * -1) calc(var(--rs-text-field-gap) * -1);
 	padding-inline: var(--rs-text-field-gap);
 	padding-block: 0;
 	font-weight: var(--rs-font-weight-regular);
