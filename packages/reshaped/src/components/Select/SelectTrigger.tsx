@@ -22,6 +22,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 		variant = "outline",
 		hasError,
 		inputAttributes,
+		triggerAttributes,
 		startSlot,
 		icon,
 		size = "medium",
@@ -60,7 +61,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				disabled={disabled}
 				disableFocusRing
 				onClick={onClick}
-				attributes={inputAttributes}
+				attributes={triggerAttributes}
 			>
 				<SelectStartContent startSlot={startSlot} icon={icon} size={size} />
 				{children ? (
@@ -71,6 +72,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 			</Actionable>
 
 			<input
+				{...inputAttributes}
 				type="hidden"
 				value={typeof value === "string" ? value : JSON.stringify(value)}
 				name={name}

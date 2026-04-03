@@ -61,9 +61,8 @@ type BaseFragment = {
 };
 
 export type CustomFragment = {
-	// TODO: Replace / add trigger attributes in v4, currently they're passed to the Actionable component instead of the input to enable Flyout positioning
-	/** Additional attributes for the trigger element */
-	inputAttributes?: ActionableProps["attributes"];
+	/** Additional attributes for the native input element */
+	inputAttributes?: Attributes<"input">;
 } & Pick<DropdownMenuProps, "position" | "width" | "fallbackPositions" | "positionRef">;
 
 export type NativeFragment = {
@@ -147,6 +146,7 @@ export type TriggerProps = Pick<
 	| "id"
 > & {
 	children?: React.ReactNode;
+	triggerAttributes?: ActionableProps["attributes"];
 };
 
 export type RootProps = Omit<Props, "children"> & {

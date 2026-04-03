@@ -152,21 +152,11 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 			positionRef={positionRef}
 		>
 			<DropdownMenu.Trigger>
-				{(attributes) => {
-					const triggerProps = {
-						...props,
-						inputAttributes: {
-							...props.inputAttributes,
-							...attributes,
-						},
-					} as T.TriggerProps;
-
-					return (
-						<SelectTrigger {...triggerProps} value={value}>
-							{renderValue()}
-						</SelectTrigger>
-					);
-				}}
+				{(attributes) => (
+					<SelectTrigger {...props} triggerAttributes={attributes} value={value}>
+						{renderValue()}
+					</SelectTrigger>
+				)}
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content
 				attributes={{
