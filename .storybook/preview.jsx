@@ -105,7 +105,7 @@ const reshapedDecorator = (Story, { parameters }) => {
 				<View paddingBottom={10}>
 					<Story />
 				</View>
-				{/* <ThemeSwitch /> */}
+				<ThemeSwitch />
 			</Reshaped>
 		</React.StrictMode>
 	);

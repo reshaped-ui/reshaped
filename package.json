@@ -25,8 +25,8 @@
 		"test:unit": "pnpm -r run test:unit",
 		"test:size": "pnpm --filter @reshaped/theming run build && pnpm --filter reshaped run build:size && size-limit",
 		"lint": "pnpm lint:format && pnpm lint:js && pnpm lint:css",
-		"lint:js": "oxlint",
-		"lint:css": "stylelint 'packages/**/*.css'",
+		"lint:js": "oxlint --deny-warnings",
+		"lint:css": "stylelint --max-warnings 0 'packages/**/*.css'",
 		"lint:format": "oxfmt"
 	},
 	"devDependencies": {
