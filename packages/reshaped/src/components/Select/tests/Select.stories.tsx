@@ -106,6 +106,26 @@ export const base: StoryObj = {
 	},
 };
 
+export const selectedIconPosition: StoryObj = {
+	name: "selectedIconPosition",
+	render: () => (
+		<Example>
+			<Example.Item title="selectedIconPosition: start">
+				<Select name="animal" placeholder="Select an animal" selectedIconPosition="start">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select>
+			</Example.Item>
+			<Example.Item title="selectedIconPosition: end">
+				<Select name="animal" placeholder="Select an animal" selectedIconPosition="end">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const multiple: StoryObj<{ handleChange: Mock }> = {
 	name: "multiple",
 	args: {
@@ -241,6 +261,32 @@ export const startSlot: StoryObj = {
 			<Example.Item title="startSlot">
 				<Select name="animal" placeholder="Select an animal" startSlot={<Placeholder h={20} />}>
 					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select>
+			</Example.Item>
+
+			<Example.Item title="selectedIconPosition: end">
+				<Select
+					name="animal"
+					placeholder="Select an animal"
+					selectedIconPosition="end"
+					defaultValue="dog"
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select>
+			</Example.Item>
+
+			<Example.Item title="selectedIconPosition: end (endSlot overrides check)">
+				<Select
+					name="animal"
+					placeholder="Select an animal"
+					selectedIconPosition="end"
+					defaultValue="dog"
+				>
+					<Select.Option value="dog" endSlot={<Placeholder w={20} h={20} />}>
+						Dog
+					</Select.Option>
 					<Select.Option value="turtle">Turtle</Select.Option>
 				</Select>
 			</Example.Item>

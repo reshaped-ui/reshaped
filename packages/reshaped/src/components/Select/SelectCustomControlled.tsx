@@ -18,6 +18,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		name,
 		placeholder,
 		multiple,
+		selectedIconPosition = "start",
 		width = "trigger",
 		position,
 		fallbackPositions,
@@ -64,9 +65,15 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 						}
 					},
 					startSlot:
-						option?.startSlot !== undefined
-							? option.startSlot
-							: hasValue && <Icon svg={selected ? CheckmarkIcon : null} />,
+						option.startSlot ??
+						(selectedIconPosition === "start" && hasValue ? (
+							<Icon svg={selected ? CheckmarkIcon : null} />
+						) : null),
+					endSlot:
+						option.endSlot ??
+						(selectedIconPosition === "end" && hasValue ? (
+							<Icon svg={selected ? CheckmarkIcon : null} />
+						) : null),
 					attributes: {
 						...component.props.attributes,
 						ref: selected ? initialFocusRef : undefined,

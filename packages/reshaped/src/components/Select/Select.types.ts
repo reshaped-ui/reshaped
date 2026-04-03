@@ -48,6 +48,8 @@ type BaseFragment = {
 	icon?: IconProps["svg"];
 	/** Node for inserting content before the select value */
 	startSlot?: React.ReactNode;
+	/** Position of the selected checkmark icon in custom options */
+	selectedIconPosition?: "start" | "end";
 	/** Show an error state, automatically inherited when component is used inside FormControl */
 	hasError?: boolean;
 	/** Callback when the trigger is clicked */
