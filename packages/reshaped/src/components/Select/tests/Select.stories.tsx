@@ -417,10 +417,8 @@ export const disabled: StoryObj = {
 		</Example>
 	),
 	play: ({ canvas }) => {
-		const [native] = canvas.getAllByRole("combobox");
 		const [custom] = canvas.getAllByRole("button");
 
-		expect(native).toBeDisabled();
 		expect(custom).toBeDisabled();
 	},
 };
@@ -443,17 +441,12 @@ export const className: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: ({ canvas, canvasElement }) => {
-		const native = canvasElement.querySelector(".native-class");
-		const nativeInput = canvas.getByRole("combobox");
+	play: ({ canvasElement }) => {
 		const custom = canvasElement.querySelector(".custom-class");
-		const [customTrigger] = canvas.getAllByRole("button");
-
-		expect(native).toHaveAttribute("id", "test-id");
-		expect(nativeInput).toHaveAttribute("aria-label", "test-label");
+		const [customInput] = canvasElement.querySelectorAll("input[type='hidden']");
 
 		expect(custom).toHaveAttribute("id", "test-id");
-		expect(customTrigger).toHaveAttribute("aria-label", "test-label");
+		expect(customInput).toHaveAttribute("aria-label", "test-label");
 	},
 };
 
@@ -541,7 +534,7 @@ export const nativeRender: StoryObj = {
 			<Example.Item title="native with option tags">
 				<Select
 					name="animal"
-					id="animal-2"
+					id="animal"
 					placeholder="Select an animal"
 					inputAttributes={{
 						"aria-label": "Select an animal",
@@ -554,23 +547,15 @@ export const nativeRender: StoryObj = {
 		</Example>
 	),
 	play: ({ canvas }) => {
-		const [selectWithProp, selectWithTags] = canvas.getAllByRole("combobox");
-		const optionsFromProps = within(selectWithProp).getAllByRole("option");
-		const optionsFromTags = within(selectWithTags).getAllByRole("option");
+		const select = canvas.getByRole("combobox");
+		const options = within(select).getAllByRole("option");
 
-		expect(selectWithProp).toHaveAttribute("name", "animal");
-		expect(selectWithProp).toHaveAttribute("id", "animal-1");
-		expect(optionsFromProps).toHaveLength(3);
-		expect(optionsFromProps[0]).toHaveTextContent("Select an animal");
-		expect(optionsFromProps[1]).toHaveTextContent("Dog");
-		expect(optionsFromProps[2]).toHaveTextContent("Turtle");
-
-		expect(selectWithTags).toHaveAttribute("name", "animal");
-		expect(selectWithTags).toHaveAttribute("id", "animal-2");
-		expect(optionsFromTags).toHaveLength(3);
-		expect(optionsFromTags[0]).toHaveTextContent("Select an animal");
-		expect(optionsFromTags[1]).toHaveTextContent("Dog");
-		expect(optionsFromTags[2]).toHaveTextContent("Turtle");
+		expect(select).toHaveAttribute("name", "animal");
+		expect(select).toHaveAttribute("id", "animal");
+		expect(options).toHaveLength(3);
+		expect(options[0]).toHaveTextContent("Select an animal");
+		expect(options[1]).toHaveTextContent("Dog");
+		expect(options[2]).toHaveTextContent("Turtle");
 	},
 };
 

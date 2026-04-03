@@ -20,7 +20,14 @@ const toastReducer: T.Reducer = (state, action) => {
 
 			return {
 				...state,
-				[position]: [...state[position], { id: action.payload.id, toastProps, status: "entering" }],
+				[position]: [
+					...state[position],
+					{
+						id: action.payload.id,
+						toastProps: { ...toastProps, width: "short" },
+						status: "entering",
+					},
+				],
 			};
 		}
 

@@ -395,6 +395,7 @@ const Slots = () => {
 							color: "neutral",
 							position: "bottom-start",
 							timeout: 0,
+							width: "long",
 						});
 					}}
 				>

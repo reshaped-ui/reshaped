@@ -1466,25 +1466,6 @@ export const testComposition = {
 	name: "composition, edge cases",
 	render: () => (
 		<Example>
-			<Example.Item>
-				<View direction="row" align="center" gap={4} padding={4}>
-					<View width="80px" height="60px" backgroundColor="neutral-faded" borderRadius="small" />
-
-					<View direction="row" align="center" gap={1} grow>
-						<View.Item shrink>
-							<Text>Text (like Jeff's Puzzles)</Text>
-						</View.Item>
-
-						<View minWidth="auto" grow>
-							<Button size="small" color="neutral" icon={IconPlus} />
-						</View>
-					</View>
-
-					<Button color="primary" rounded>
-						Button
-					</Button>
-				</View>
-			</Example.Item>
 			<Example.Item
 				title={[
 					"View.Item, MenuItem, Aspect ratio",

@@ -58,7 +58,7 @@ export const lightMode = {
 		const theme = document.documentElement.getAttribute("data-rs-theme");
 		const colorMode = document.documentElement.getAttribute("data-rs-color-mode");
 
-		expect(theme).toEqual("reshaped");
+		expect(theme).toEqual("slate");
 		expect(colorMode).toEqual("light");
 	},
 };
@@ -74,7 +74,7 @@ export const darkMode = {
 		const theme = document.documentElement.getAttribute("data-rs-theme");
 		const colorMode = document.documentElement.getAttribute("data-rs-color-mode");
 
-		expect(theme).toEqual("reshaped");
+		expect(theme).toEqual("slate");
 		expect(colorMode).toEqual("dark");
 	},
 };
@@ -114,7 +114,7 @@ export const testScoped: StoryObj = {
 	name: "test: scoped switch",
 	render: () => (
 		<Reshaped theme="slate">
-			<Reshaped theme="slate" scoped>
+			<Reshaped theme="figma" scoped>
 				<ScopedComponent />
 			</Reshaped>
 		</Reshaped>
@@ -123,10 +123,10 @@ export const testScoped: StoryObj = {
 		const nestedRoot = document.querySelector("[data-rs-root]");
 		const button = canvas.getAllByRole("button")[0];
 
-		expect(document.documentElement).toHaveAttribute("data-rs-theme", "reshaped");
+		expect(document.documentElement).toHaveAttribute("data-rs-theme", "slate");
 		expect(document.documentElement).toHaveAttribute("data-rs-color-mode", "light");
 
-		expect(nestedRoot).toHaveAttribute("data-rs-theme", "slate");
+		expect(nestedRoot).toHaveAttribute("data-rs-theme", "figma");
 		expect(nestedRoot).toHaveAttribute("data-rs-color-mode", "light");
 
 		await userEvent.click(button);

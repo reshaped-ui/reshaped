@@ -11,29 +11,38 @@ export default {
 	},
 };
 
+const DemoBase = (props: { onOutsideClick: () => void }) => {
+	const ref = React.useRef(null);
+	const [target, setTarget] = React.useState<"inside" | "outside" | null>(null);
+
+	useOnClickOutside([ref], () => {
+		props.onOutsideClick();
+		console.log("clicked outside");
+		setTarget("outside");
+	});
+
+	return (
+		<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
+			<button
+				ref={ref}
+				onClick={() => {
+					console.log("clicked inside");
+					setTarget("inside");
+				}}
+			>
+				Trigger
+			</button>
+			{target && `Clicked ${target}`}
+		</div>
+	);
+};
+
 export const base: StoryObj<{ handleOutsideClick: Mock }> = {
 	name: "base",
 	args: {
 		handleOutsideClick: fn(),
 	},
-	render: (args) => {
-		const ref = React.useRef(null);
-		const [target, setTarget] = React.useState<"inside" | "outside" | null>(null);
-
-		useOnClickOutside([ref], () => {
-			args.handleOutsideClick();
-			setTarget("outside");
-		});
-
-		return (
-			<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
-				<button ref={ref} onClick={() => setTarget("inside")}>
-					Trigger
-				</button>
-				{target && `Clicked ${target}`}
-			</div>
-		);
-	},
+	render: (args) => <DemoBase onOutsideClick={args.handleOutsideClick} />,
 	play: async ({ canvas, args }) => {
 		const button = canvas.getAllByRole("button")[0];
 
@@ -48,26 +57,28 @@ export const base: StoryObj<{ handleOutsideClick: Mock }> = {
 	},
 };
 
+const DemoRefs = (props: { onOutsideClick: () => void }) => {
+	const ref = React.useRef(null);
+	const ref2 = React.useRef(null);
+
+	useOnClickOutside([ref, ref2], () => {
+		props.onOutsideClick();
+	});
+
+	return (
+		<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
+			<button ref={ref}>Trigger</button>
+			<button ref={ref2}>Trigger 2</button>
+		</div>
+	);
+};
+
 export const refs: StoryObj<{ handleOutsideClick: Mock }> = {
 	name: "multiple refs",
 	args: {
 		handleOutsideClick: fn(),
 	},
-	render: (args) => {
-		const ref = React.useRef(null);
-		const ref2 = React.useRef(null);
-
-		useOnClickOutside([ref, ref2], () => {
-			args.handleOutsideClick();
-		});
-
-		return (
-			<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
-				<button ref={ref}>Trigger</button>
-				<button ref={ref2}>Trigger 2</button>
-			</div>
-		);
-	},
+	render: (args) => <DemoRefs onOutsideClick={args.handleOutsideClick} />,
 	play: async ({ canvas, args }) => {
 		const [button, button2] = canvas.getAllByRole("button");
 
@@ -113,25 +124,27 @@ export const disabled: StoryObj<{ handleOutsideClick: Mock }> = {
 	},
 };
 
+const DemoDeps = (props: { onOutsideClick: (props: { count: number }) => void }) => {
+	const ref = React.useRef(null);
+	const [count, setCount] = React.useState(0);
+
+	useOnClickOutside([ref], () => {
+		props.onOutsideClick({ count });
+	});
+
+	return (
+		<button ref={ref} onClick={() => setCount((prev) => prev + 1)}>
+			Trigger
+		</button>
+	);
+};
+
 export const deps: StoryObj<{ handleOutsideClick: Mock }> = {
 	name: "test: handler uses latest state",
 	args: {
 		handleOutsideClick: fn(),
 	},
-	render: (args) => {
-		const ref = React.useRef(null);
-		const [count, setCount] = React.useState(0);
-
-		useOnClickOutside([ref], () => {
-			args.handleOutsideClick({ count });
-		});
-
-		return (
-			<button ref={ref} onClick={() => setCount((prev) => prev + 1)}>
-				Trigger
-			</button>
-		);
-	},
+	render: (args) => <DemoDeps onOutsideClick={args.handleOutsideClick} />,
 	play: async ({ canvas, args }) => {
 		const button = canvas.getAllByRole("button")[0];
 

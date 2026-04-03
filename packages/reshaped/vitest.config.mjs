@@ -25,6 +25,8 @@ export default mergeConfig(
 					],
 					test: {
 						name: "storybook",
+						// Storybook merges `root` to the repo root; keep test discovery scoped to this package.
+						dir: dirname,
 						// Enable browser mode
 						browser: {
 							enabled: true,
@@ -36,7 +38,6 @@ export default mergeConfig(
 						coverage: {
 							provider: "istanbul",
 						},
-						setupFiles: ["../../.storybook/vitest.setup.ts"],
 					},
 				},
 				{

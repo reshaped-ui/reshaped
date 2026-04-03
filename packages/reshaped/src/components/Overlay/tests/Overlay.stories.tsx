@@ -308,6 +308,14 @@ export const testPortal: StoryObj<{
 	args: {
 		handleClose: fn(),
 	},
+	parameters: {
+		docs: {
+			source: {
+				type: "code",
+				code: [],
+			},
+		},
+	},
 	render: (args) => {
 		const overlayToggle = useToggle(false);
 
