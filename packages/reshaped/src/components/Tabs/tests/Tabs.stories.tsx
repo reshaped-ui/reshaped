@@ -278,6 +278,7 @@ export const icon = {
 					</Tabs.List>
 				</Tabs>
 			</Example.Item>
+
 			<Example.Item title="icon only">
 				<Tabs variant="pills-raised" defaultValue="0">
 					<Tabs.List>

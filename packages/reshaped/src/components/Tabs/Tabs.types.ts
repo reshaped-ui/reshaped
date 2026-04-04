@@ -89,6 +89,9 @@ export type Context = Pick<
 	size: NonNullable<BaseProps["size"]>;
 	value?: string;
 	id: string;
+	registerPanel: (value: string) => void;
+	unregisterPanel: (value: string) => void;
+	hasPanel: (value: string) => boolean;
 	elActiveRef: React.RefObject<HTMLDivElement | null>;
 	elPrevActiveRef: React.RefObject<HTMLDivElement | null>;
 	elScrollableRef: React.RefObject<HTMLDivElement | null>;
