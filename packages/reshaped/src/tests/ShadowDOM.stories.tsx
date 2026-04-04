@@ -4,7 +4,7 @@ import root from "react-shadow";
 import Autocomplete, { type AutocompleteProps } from "@/components/Autocomplete";
 import Button from "@/components/Button";
 import DropdownMenu from "@/components/DropdownMenu";
-import Select from "@/components/Select";
+import { SelectTrigger } from "@/components/Select";
 import Theme from "@/components/Theme";
 import Tooltip from "@/components/Tooltip";
 import View from "@/components/View";
@@ -62,8 +62,8 @@ const ShadowDiv = forwardRef<HTMLDivElement, React.PropsWithChildren>((props, re
 	}, []);
 
 	return (
-		<Theme name="slate">
-			<root.div className="quote" ref={shadowRef}>
+		<root.div className="quote" ref={shadowRef}>
+			<Theme name="slate">
 				<div ref={ref}>
 					{/*
 						Adding padding here since otherwise mouseenter won't trigger on contents 
@@ -71,8 +71,8 @@ const ShadowDiv = forwardRef<HTMLDivElement, React.PropsWithChildren>((props, re
 					*/}
 					<View padding={4}>{props.children}</View>
 				</div>
-			</root.div>
-		</Theme>
+			</Theme>
+		</root.div>
 	);
 });
 
@@ -119,9 +119,14 @@ const Component: React.FC = () => {
 					<DropdownMenu>
 						<DropdownMenu.Trigger>
 							{(attributes) => (
-								<Select placeholder="Pick your animal" name="font" inputAttributes={attributes}>
+								<SelectTrigger
+									placeholder="Pick your animal"
+									name="font"
+									value={valueDropdownShadow}
+									triggerAttributes={attributes}
+								>
 									{valueDropdownShadow}
-								</Select>
+								</SelectTrigger>
 							)}
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>
