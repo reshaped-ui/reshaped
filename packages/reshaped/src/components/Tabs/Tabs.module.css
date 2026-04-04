@@ -97,7 +97,7 @@
 	transition: color var(--rs-duration-fast) var(--rs-easing-standard);
 
 	&:not(:last-child) {
-		margin-inline-end: var(--rs-unit-x2);
+		margin-inline-end: var(--rs-tabs-icon-gap);
 	}
 }
 
@@ -417,14 +417,22 @@
 	}
 }
 
+.--size-small {
+	--rs-tabs-item-p-v: var(--rs-unit-x1);
+	--rs-tabs-item-p-h: var(--rs-unit-x2);
+	--rs-tabs-icon-gap: var(--rs-unit-x1-5);
+}
+
 .--size-medium {
 	--rs-tabs-item-p-v: var(--rs-unit-x2);
 	--rs-tabs-item-p-h: var(--rs-unit-x3);
+	--rs-tabs-icon-gap: var(--rs-unit-x2);
 }
 
 .--size-large {
 	--rs-tabs-item-p-v: var(--rs-unit-x3);
 	--rs-tabs-item-p-h: var(--rs-unit-x4);
+	--rs-tabs-icon-gap: var(--rs-unit-x2);
 }
 
 .--item-width-equal {

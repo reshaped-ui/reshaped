@@ -119,10 +119,60 @@ export const size = {
 	name: "size",
 	render: () => (
 		<Example>
+			<Example.Item title="variant: default, size: small">
+				<Tabs size="small" defaultValue="0">
+					<Tabs.List>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
+						<Tabs.Item value="1">Long item 2</Tabs.Item>
+						<Tabs.Item value="2">Very long item 3</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</Example.Item>
+
+			<Example.Item title="variant: pills, size: small">
+				<Tabs variant="pills" size="small" defaultValue="0">
+					<Tabs.List>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
+						<Tabs.Item value="1">Long item 2</Tabs.Item>
+						<Tabs.Item value="2">Very long item 3</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</Example.Item>
+
+			<Example.Item title="variant: pills-raised, size: small">
+				<Tabs variant="pills-raised" size="small" defaultValue="0">
+					<Tabs.List>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
+						<Tabs.Item value="1">Long item 2</Tabs.Item>
+						<Tabs.Item value="2">Very long item 3</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</Example.Item>
+
+			<Example.Item title="variant: borderless, size: small">
+				<Tabs variant="borderless" size="small" defaultValue="0">
+					<Tabs.List>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
+						<Tabs.Item value="1">Long item 2</Tabs.Item>
+						<Tabs.Item value="2">Very long item 3</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</Example.Item>
+
 			<Example.Item title="variant: default, size: large">
 				<Tabs size="large" defaultValue="0">
 					<Tabs.List>
-						<Tabs.Item value="0">Item 1</Tabs.Item>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
 						<Tabs.Item value="2">Very long item 3</Tabs.Item>
 					</Tabs.List>
@@ -132,7 +182,9 @@ export const size = {
 			<Example.Item title="variant: pills, size: large">
 				<Tabs variant="pills" size="large" defaultValue="0">
 					<Tabs.List>
-						<Tabs.Item value="0">Item 1</Tabs.Item>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
 						<Tabs.Item value="2">Very long item 3</Tabs.Item>
 					</Tabs.List>
@@ -142,7 +194,9 @@ export const size = {
 			<Example.Item title="variant: pills-raised, size: large">
 				<Tabs variant="pills-raised" size="large" defaultValue="0">
 					<Tabs.List>
-						<Tabs.Item value="0">Item 1</Tabs.Item>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
 						<Tabs.Item value="2">Very long item 3</Tabs.Item>
 					</Tabs.List>
@@ -152,7 +206,9 @@ export const size = {
 			<Example.Item title="variant: borderless, size: large">
 				<Tabs variant="borderless" size="large" defaultValue="0">
 					<Tabs.List>
-						<Tabs.Item value="0">Item 1</Tabs.Item>
+						<Tabs.Item value="0" icon={IconZap}>
+							Item 1
+						</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
 						<Tabs.Item value="2">Very long item 3</Tabs.Item>
 					</Tabs.List>

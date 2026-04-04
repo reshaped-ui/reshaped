@@ -57,7 +57,7 @@ export type BaseProps = {
 	/** Render variant for component */
 	variant?: "bordered" | "borderless" | "pills" | "pills-raised";
 	/** Component size */
-	size?: "medium" | "large";
+	size?: "small" | "medium" | "large";
 	/** Name of the tab buttons group when used as a form control */
 	name?: string;
 	/** Disable the animation of the tab button selection */
