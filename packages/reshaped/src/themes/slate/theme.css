@@ -208,8 +208,8 @@
 --rs-color-on-background-neutral: oklch(1 0 0);
 --rs-shadow-outline: 0px -1px 2px -0.5px rgba(255, 255, 255, 0.06), 0px -1px 3px -1px rgba(255, 255, 255, 0.05);
 --rs-shadow-outline-intense: 0px -1px 2px -0.5px rgba(255, 255, 255, 0.12), 0px -1px 3px -1px rgba(255, 255, 255, 0.1);
---rs-shadow-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px -2px 2px -1px rgba(255, 255, 255, 0.1);
---rs-shadow-raised-intense: 0px 8px 12px -4px rgba(0, 0, 0, 0.16), 0px -2px 2px -1px rgba(255, 255, 255, 0.2);
+--rs-shadow-raised: 0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px -1.5px 2px -1px rgba(255, 255, 255, 0.1);
+--rs-shadow-raised-intense: 0px 8px 12px -4px rgba(0, 0, 0, 0.16), 0px -1.5px 2px -1px rgba(255, 255, 255, 0.2);
 --rs-shadow-overlay: 0px 16px 24px -4px rgba(0, 0, 0, 0.06), 0px 8px 12px -4px rgba(0, 0, 0, 0.06), 0px 8px 6px -4px rgba(0, 0, 0, 0.06);
 --rs-shadow-overlay-intense: 0px 16px 24px -4px rgba(0, 0, 0, 0.12), 0px 8px 12px -4px rgba(0, 0, 0, 0.12), 0px 8px 6px -4px rgba(0, 0, 0, 0.12);
 			}

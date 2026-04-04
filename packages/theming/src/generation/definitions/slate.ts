@@ -235,7 +235,7 @@ const theme: ThemeDefinition = {
 					},
 					{
 						offsetX: 0,
-						offsetY: -2,
+						offsetY: -1.5,
 						blurRadius: 2,
 						spreadRadius: -1,
 						colorToken: "white",
@@ -275,7 +275,7 @@ const theme: ThemeDefinition = {
 					},
 					{
 						offsetX: 0,
-						offsetY: -2,
+						offsetY: -1.5,
 						blurRadius: 2,
 						spreadRadius: -1,
 						colorToken: "white",

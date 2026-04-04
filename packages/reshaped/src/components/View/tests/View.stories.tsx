@@ -1490,7 +1490,7 @@ export const testComposition = {
 					<Placeholder />
 					<View.Item grow>
 						<View padding={0} align="center">
-							<Tabs variant="pills">
+							<Tabs variant="pills" defaultValue="1">
 								<Tabs.List>
 									<Tabs.Item value="1">Very long item</Tabs.Item>
 									<Tabs.Item value="2">Very long item</Tabs.Item>

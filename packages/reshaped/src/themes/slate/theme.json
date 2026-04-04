@@ -1196,7 +1196,7 @@
           },
           {
             "offsetX": 0,
-            "offsetY": -2,
+            "offsetY": -1.5,
             "blurRadius": 2,
             "spreadRadius": -1,
             "colorToken": "white",
@@ -1236,7 +1236,7 @@
           },
           {
             "offsetX": 0,
-            "offsetY": -2,
+            "offsetY": -1.5,
             "blurRadius": 2,
             "spreadRadius": -1,
             "colorToken": "white",

@@ -33,6 +33,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const itemClassNames = classNames(
 		s.item,
 		visuallySelected && s["item--active"],
+		active && s["item-selected"],
 		disabled && s["item--disabled"]
 	);
 	const isFormControl = !!name;

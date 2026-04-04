@@ -23,7 +23,7 @@ export default {
 export const base: StoryObj = {
 	name: "base",
 	render: () => (
-		<Tabs>
+		<Tabs defaultValue="1">
 			<Tabs.List>
 				<Tabs.Item value="1">Item 1</Tabs.Item>
 				<Tabs.Item value="2">Item 2</Tabs.Item>
@@ -92,8 +92,8 @@ export const variant = {
 				</Tabs>
 			</Example.Item>
 
-			<Example.Item title="variant: pills-elevated">
-				<Tabs variant="pills-elevated" defaultValue="0">
+			<Example.Item title="variant: pills-raised">
+				<Tabs variant="pills-raised" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -120,7 +120,7 @@ export const size = {
 	render: () => (
 		<Example>
 			<Example.Item title="variant: default, size: large">
-				<Tabs size="large">
+				<Tabs size="large" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -130,7 +130,7 @@ export const size = {
 			</Example.Item>
 
 			<Example.Item title="variant: pills, size: large">
-				<Tabs variant="pills" size="large">
+				<Tabs variant="pills" size="large" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -139,8 +139,8 @@ export const size = {
 				</Tabs>
 			</Example.Item>
 
-			<Example.Item title="variant: pills-elevated, size: large">
-				<Tabs variant="pills-elevated" size="large">
+			<Example.Item title="variant: pills-raised, size: large">
+				<Tabs variant="pills-raised" size="large" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -150,7 +150,7 @@ export const size = {
 			</Example.Item>
 
 			<Example.Item title="variant: borderless, size: large">
-				<Tabs variant="borderless" size="large">
+				<Tabs variant="borderless" size="large" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -167,7 +167,7 @@ export const direction = {
 	render: () => (
 		<Example>
 			<Example.Item title="direction: column, variant: underline">
-				<Tabs direction="column">
+				<Tabs direction="column" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -176,7 +176,7 @@ export const direction = {
 				</Tabs>
 			</Example.Item>
 			<Example.Item title="direction: column, variant: pills">
-				<Tabs direction="column" variant="pills">
+				<Tabs direction="column" variant="pills" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -184,8 +184,8 @@ export const direction = {
 					</Tabs.List>
 				</Tabs>
 			</Example.Item>
-			<Example.Item title="direction: column, variant: pills-elevated">
-				<Tabs direction="column" variant="pills-elevated">
+			<Example.Item title="direction: column, variant: pills-raised">
+				<Tabs direction="column" variant="pills-raised" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -194,7 +194,7 @@ export const direction = {
 				</Tabs>
 			</Example.Item>
 			<Example.Item title="direction: column, variant: borderless">
-				<Tabs direction="column" variant="borderless">
+				<Tabs direction="column" variant="borderless" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -211,7 +211,7 @@ export const icon = {
 	render: () => (
 		<Example>
 			<Example.Item title="icon">
-				<Tabs>
+				<Tabs defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0" icon={IconZap}>
 							Item 1
@@ -223,7 +223,7 @@ export const icon = {
 				</Tabs>
 			</Example.Item>
 			<Example.Item title="icon only">
-				<Tabs variant="pills-elevated">
+				<Tabs variant="pills-raised" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0" icon={IconZap} attributes={{ "aria-label": "Tab 1" }} />
 						<Tabs.Item value="1" icon={IconZap} attributes={{ "aria-label": "Tab 2" }} />
@@ -239,7 +239,7 @@ export const equalWidth = {
 	render: () => (
 		<Example>
 			<Example.Item title="equal width items">
-				<Tabs onChange={console.log} itemWidth="equal">
+				<Tabs onChange={console.log} itemWidth="equal" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0" icon={IconZap}>
 							Item 1
@@ -254,8 +254,8 @@ export const equalWidth = {
 				</Tabs>
 			</Example.Item>
 
-			<Example.Item title="equal width items, pills-elevated">
-				<Tabs onChange={console.log} itemWidth="equal" variant="pills-elevated">
+			<Example.Item title="equal width items, pills-raised">
+				<Tabs onChange={console.log} itemWidth="equal" variant="pills-raised" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0" icon={IconZap}>
 							Item 1
@@ -439,7 +439,7 @@ export const disableSelectionAnimation: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="disableSelectionAnimation">
-				<Tabs disableSelectionAnimation>
+				<Tabs disableSelectionAnimation defaultValue="1">
 					<Tabs.List>
 						<Tabs.Item value="1">Item 1</Tabs.Item>
 						<Tabs.Item value="2">Item 2</Tabs.Item>
@@ -447,7 +447,7 @@ export const disableSelectionAnimation: StoryObj = {
 				</Tabs>
 			</Example.Item>
 			<Example.Item title="disableSelectionAnimation, href">
-				<Tabs disableSelectionAnimation variant="pills">
+				<Tabs disableSelectionAnimation variant="pills" defaultValue="1">
 					<Tabs.List>
 						<Tabs.Item value="1">Item 1</Tabs.Item>
 						<Tabs.Item value="2">Item 2</Tabs.Item>
@@ -462,7 +462,7 @@ export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
 		<div data-testid="root">
-			<Tabs>
+			<Tabs defaultValue="1">
 				<Tabs.List attributes={{ id: "test-list-id" }} className="test-list-classname">
 					<Tabs.Item attributes={{ id: "test-item-id" }} value="1">
 						Item
@@ -495,7 +495,7 @@ export const testFocusableContent = {
 	render: () => (
 		<Example>
 			<Example.Item title="panels without focusable content">
-				<Tabs>
+				<Tabs defaultValue="0">
 					<View gap={4}>
 						<Tabs.List>
 							<Tabs.Item value="0">Item 1</Tabs.Item>
@@ -511,7 +511,7 @@ export const testFocusableContent = {
 			</Example.Item>
 
 			<Example.Item title="panels with focusable content">
-				<Tabs>
+				<Tabs defaultValue="0">
 					<View gap={4}>
 						<Tabs.List>
 							<Tabs.Item value="0">Item 1</Tabs.Item>
@@ -540,7 +540,7 @@ export const testComposition = {
 	render: () => (
 		<Example>
 			<Example.Item title="Viewport overflow">
-				<Tabs>
+				<Tabs defaultValue="0">
 					<Tabs.List>
 						{[...Array(8)].map((_, i) => (
 							<Tabs.Item value={`${i}`} key={i} icon={IconZap}>
@@ -557,7 +557,7 @@ export const testComposition = {
 				</Tabs>
 			</Example.Item>
 			<Example.Item>
-				<Tabs onChange={console.log} variant="pills-elevated" name="hey">
+				<Tabs onChange={console.log} variant="pills-raised" name="hey" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<Tabs.Item value="1">Long item 2</Tabs.Item>
@@ -570,7 +570,7 @@ export const testComposition = {
 				</Tabs>
 			</Example.Item>
 			<Example.Item title="Custom non-interactive list children">
-				<Tabs direction="column">
+				<Tabs direction="column" defaultValue="0">
 					<Tabs.List>
 						<Tabs.Item value="0">Item 1</Tabs.Item>
 						<View height={6} backgroundColor="neutral-faded" borderRadius="small" />

@@ -6,12 +6,11 @@ import useElementId from "@/hooks/useElementId";
 import type * as T from "./Tabs.types";
 import { TabsProvider } from "./TabsContext";
 
-const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
+const TabsControlled: React.FC<T.ControlledProps> = (props) => {
 	const {
 		children,
 		value,
 		onChange,
-		onSilentChange,
 		itemWidth,
 		variant,
 		name,
@@ -32,11 +31,6 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 		status: "idle",
 	});
 
-	const setDefaultValue = (value: string) => {
-		if (value === undefined) return;
-		if (onSilentChange) onSilentChange({ value, name });
-	};
-
 	return (
 		<TabsProvider
 			value={{
@@ -48,7 +42,6 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 				variant,
 				onChange,
 				id,
-				setDefaultValue,
 				elActiveRef,
 				elPrevActiveRef,
 				elScrollableRef,

@@ -55,7 +55,7 @@ export type BaseProps = {
 	/** Equal width for the tab buttons */
 	itemWidth?: "equal";
 	/** Render variant for component */
-	variant?: "bordered" | "borderless" | "pills" | "pills-elevated";
+	variant?: "bordered" | "borderless" | "pills" | "pills-raised";
 	/** Component size */
 	size?: "medium" | "large";
 	/** Name of the tab buttons group when used as a form control */
@@ -68,20 +68,16 @@ export type BaseProps = {
 
 export type ControlledProps = BaseProps & {
 	/** Value of the active tab, enables controlled mode */
-	value?: string;
+	value: string;
 	/** Default value of the active tab, enables uncontrolled mode */
 	defaultValue?: never;
-};
-
-export type PrivateControlledProps = ControlledProps & {
-	onSilentChange: BaseProps["onChange"];
 };
 
 export type UncontrolledProps = BaseProps & {
 	/** Value of the active tab, enables controlled mode */
 	value?: never;
 	/** Default value of the active tab, enables uncontrolled mode */
-	defaultValue?: string;
+	defaultValue: string;
 };
 
 export type Props = ControlledProps | UncontrolledProps;
@@ -92,7 +88,6 @@ export type Context = Pick<
 > & {
 	size: NonNullable<BaseProps["size"]>;
 	value?: string;
-	setDefaultValue: (value: string) => void;
 	id: string;
 	elActiveRef: React.RefObject<HTMLDivElement | null>;
 	elPrevActiveRef: React.RefObject<HTMLDivElement | null>;
