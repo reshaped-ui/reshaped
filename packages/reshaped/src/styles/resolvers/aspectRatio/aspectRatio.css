@@ -3,15 +3,5 @@
 }
 
 [style*="--rs-ratio-s:"] {
-	&:empty {
-		aspect-ratio: var(--rs-ratio);
-	}
-
-	&:not(:empty) > * {
-		aspect-ratio: var(--rs-ratio);
-	}
-
-	& > img {
-		object-fit: cover;
-	}
+	aspect-ratio: var(--rs-ratio);
 }
