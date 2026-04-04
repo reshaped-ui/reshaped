@@ -12,7 +12,7 @@ const TabsControlled: React.FC<T.ControlledProps> = (props) => {
 		value,
 		onChange,
 		itemWidth,
-		variant,
+		variant = "bordered",
 		name,
 		disableSelectionAnimation,
 		direction = "row",

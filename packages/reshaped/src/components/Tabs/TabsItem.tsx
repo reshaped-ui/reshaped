@@ -30,11 +30,10 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const itemRef = React.useRef<HTMLDivElement>(null);
 	const active = tabsValue === value;
 	const visuallySelected = active && selection.status === "idle";
-	const itemClassNames = classNames(
-		s.item,
-		visuallySelected && s["item--active"],
-		active && s["item-selected"],
-		disabled && s["item--disabled"]
+	const buttonClassNames = classNames(
+		s.button,
+		visuallySelected && s["button--active"],
+		disabled && s["button--disabled"]
 	);
 	const isFormControl = !!name;
 	const tabAttributes = {
@@ -89,45 +88,45 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	}, [active, updateRefs]);
 
 	return (
-		<div {...attributes} className={itemClassNames} ref={itemRef} role="presentation">
-			<Actionable
-				ref={ref}
-				href={href}
-				disableFocusRing
-				disabled={disabled}
-				onClick={!name ? handleChange : undefined}
-				className={s.button}
-				as={name ? "label" : undefined}
-				attributes={{
-					...(!isFormControl && tabAttributes),
-					"aria-controls": panelId,
-					id: buttonId,
-				}}
-			>
-				{name && (
-					<HiddenInput
-						type="radio"
-						name={name}
-						value={value}
-						checked={visuallySelected}
-						onChange={handleChange}
-						className={s.radio}
-					/>
+		<Actionable
+			ref={ref}
+			href={href}
+			disableFocusRing
+			disabled={disabled}
+			onClick={!name ? handleChange : undefined}
+			className={buttonClassNames}
+			as={name ? "label" : undefined}
+			attributes={{
+				...attributes,
+				...(!isFormControl && tabAttributes),
+				"aria-controls": panelId,
+				id: buttonId,
+			}}
+		>
+			{name && (
+				<HiddenInput
+					type="radio"
+					name={name}
+					value={value}
+					checked={visuallySelected}
+					onChange={handleChange}
+					className={s.radio}
+				/>
+			)}
+
+			<span className={s.buttonContent} ref={itemRef}>
+				{icon && <Icon svg={icon} className={s.icon} size={4} />}
+				{children && (
+					<Text
+						variant={size === "large" ? "body-1" : "body-2"}
+						weight="medium"
+						className={s.buttonText}
+					>
+						{children}
+					</Text>
 				)}
-				<span className={s.buttonContent}>
-					{icon && <Icon svg={icon} className={s.icon} size={4} />}
-					{children && (
-						<Text
-							variant={size === "large" ? "body-1" : "body-2"}
-							weight="medium"
-							className={s.buttonText}
-						>
-							{children}
-						</Text>
-					)}
-				</span>
-			</Actionable>
-		</div>
+			</span>
+		</Actionable>
 	);
 });
 

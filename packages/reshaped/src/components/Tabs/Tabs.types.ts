@@ -1,6 +1,7 @@
 import type React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
+import type { ActionableProps } from "@/components/Actionable";
 import type { IconProps } from "@/components/Icon";
 import type { Attributes } from "@/types/global";
 
@@ -24,7 +25,7 @@ export type ItemProps = {
 	/** Disable the item user interaction */
 	disabled?: boolean;
 	/** Additional attributes for the item element */
-	attributes?: Attributes<"div">;
+	attributes?: ActionableProps["attributes"];
 };
 
 export type ListProps = {

@@ -17,7 +17,7 @@ import s from "./Tabs.module.css";
 
 const findParentItem = (el: HTMLElement | null, rootEl: HTMLElement): HTMLElement | null => {
 	if (el === rootEl || !el) return null;
-	if (el.classList.contains(s.listItem)) return el;
+	if (el.classList.contains(s.button)) return el;
 	return findParentItem(el.parentElement, rootEl);
 };
 
@@ -128,16 +128,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		<div {...attributes} className={rootClassNames}>
 			<div className={s.inner} ref={elScrollableRef}>
 				<div className={s.list} role="tablist" ref={listRef}>
-					{React.Children.map(children, (child, index: number) => {
-						if (!React.isValidElement(child)) return null;
-						const props = child.props as T.ItemProps;
-
-						return (
-							<div className={s.listItem} key={props.value || child.key || index} data-rs-tabs-item>
-								{child}
-							</div>
-						);
-					})}
+					{children}
 
 					{!disableSelectionAnimation && (
 						<div
