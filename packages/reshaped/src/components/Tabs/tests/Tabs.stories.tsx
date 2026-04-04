@@ -521,7 +521,7 @@ export const className: StoryObj = {
 		<div data-testid="root">
 			<Tabs defaultValue="1">
 				<Tabs.List attributes={{ id: "test-list-id" }} className="test-list-classname">
-					<Tabs.Item attributes={{ id: "test-item-id" }} value="1">
+					<Tabs.Item attributes={{ "data-test-id": "test-item-id" }} value="1">
 						Item
 					</Tabs.Item>
 				</Tabs.List>
@@ -536,12 +536,12 @@ export const className: StoryObj = {
 	),
 	play: async ({ canvas }) => {
 		const list = canvas.getByTestId("root").firstChild as HTMLElement;
-		const item = within(list).getByRole("presentation");
+		const item = within(list).getByRole("tab");
 		const panel = canvas.getByRole("tabpanel");
 
 		expect(list).toHaveClass("test-list-classname");
 		expect(list).toHaveAttribute("id", "test-list-id");
-		expect(item).toHaveAttribute("id", "test-item-id");
+		expect(item).toHaveAttribute("data-test-id", "test-item-id");
 		expect(panel).toHaveClass("test-panel-classname");
 		expect(panel).toHaveAttribute("data-testid", "test-panel-id");
 	},
