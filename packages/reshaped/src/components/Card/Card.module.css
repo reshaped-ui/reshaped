@@ -8,6 +8,12 @@
 	transition-property: box-shadow;
 }
 
+.content {
+	overflow: hidden;
+	border-radius: inherit;
+	height: 100%;
+}
+
 .--selected {
 	box-shadow: 0 0 0 2px var(--rs-color-border-primary) inset;
 	transition-timing-function: var(--rs-easing-decelerate);

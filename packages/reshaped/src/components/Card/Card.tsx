@@ -40,6 +40,7 @@ const Card: Component = forwardRef((props, ref) => {
 		borderColor: "neutral-faded",
 		border: true,
 		shadow: raised ? "raised" : "outline",
+		height,
 	});
 
 	const rootClassNames = classNames(
@@ -59,7 +60,6 @@ const Card: Component = forwardRef((props, ref) => {
 	const contentNode = (
 		<View
 			className={s.content}
-			height={height}
 			padding={padding}
 			direction={direction}
 			gap={gap}
