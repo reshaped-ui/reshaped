@@ -38,16 +38,16 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	} = useFlyoutContext();
 	const { status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
-
 	const shadowRootRef = React.useRef<ShadowRoot | null>(null);
-	const rootNode = triggerElRef?.current?.getRootNode();
-	if (rootNode instanceof ShadowRoot) shadowRootRef.current = rootNode;
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
 	}, []);
 
 	if (status === "idle" || !mounted) return null;
+
+	const rootNode = triggerElRef?.current?.getRootNode();
+	if (rootNode instanceof ShadowRoot) shadowRootRef.current = rootNode;
 
 	const positionerClassNames = classNames(
 		s.positioner,
