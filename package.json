@@ -18,7 +18,7 @@
 		"build:chromatic": "STORYBOOK_ENV=chromatic storybook build",
 		"release": "bash ./bin/release.sh",
 		"release:canary": "bash ./bin/release-canary.sh",
-		"release:local": "pnpm --filter reshaped run release:local",
+		"release:local": "bash ./bin/release-local.sh",
 		"chromatic": "chromatic -b build:chromatic --project-token=$(cat .chromatic) --only-changed --externals '.storybook/public/**'",
 		"test:vrt": "pnpm chromatic",
 		"test:browser": "pnpm -r run test:browser",

@@ -58,6 +58,9 @@
 			"import": "./dist/bundle.js",
 			"default": "./dist/bundle.js"
 		},
+		"./themes/slate/*": "./dist/themes/slate/*",
+		"./themes/figma/*": "./dist/themes/figma/*",
+		"./themes/fragments/twitter/*": "./dist/themes/fragments/twitter/*",
 		"./bundle.css": "./dist/bundle.css",
 		"./package.json": "./package.json"
 	},
@@ -71,7 +74,6 @@
 		"build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",
 		"build:bundle": "vite build && shx cp dist/index.d.ts dist/bundle.d.ts",
 		"build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
-		"release:local": "pnpm build && pnpm pack --out reshaped-local.tgz",
 		"test:browser": "vitest run --project=storybook",
 		"test:unit": "vitest run --project=unit",
 		"test:size": "size-limit"
