@@ -13,6 +13,7 @@ import Icon from "@/components/Icon";
 import useFadeSide from "@/hooks/_private/useFadeSide";
 import IconChevronLeft from "@/icons/ChevronLeft";
 import IconChevronRight from "@/icons/ChevronRight";
+import { checkTransitions } from "@/utilities/animation";
 
 import s from "./Tabs.module.css";
 import { useTabs } from "./TabsContext";
@@ -137,7 +138,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		const selectionStyle = getElementSelectionStyle(elActiveRef.current);
 
 		if (!selectionStyle) return;
-		setSelection({ ...selectionStyle, status: "animated" });
+		setSelection({ ...selectionStyle, status: checkTransitions() ? "animated" : "idle" });
 	}, [selection]);
 
 	return (
