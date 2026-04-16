@@ -1,5 +1,14 @@
 # reshaped
 
+## 3.10.3
+
+### Patch Changes
+
+- [`db2f0c6`](https://github.com/reshaped-ui/reshaped/commit/db2f0c662f15a721db0f2c450b66c049c4f9fad3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added missing reduced motion checks for components relying on transition evens
+
+- Updated dependencies []:
+  - @reshaped/headless@3.10.3
+
 ## 3.10.2
 
 ### Patch Changes
