@@ -11,7 +11,7 @@ import useIsDismissible from "@/hooks/useIsDismissible";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "@/hooks/useScrollLock";
 import useToggle from "@/hooks/useToggle";
-import { onNextFrame } from "@/utilities/animation";
+import { onNextFrame, checkTransitions } from "@/utilities/animation";
 import type * as T from "./Overlay.types";
 import s from "./Overlay.module.css";
 
@@ -37,6 +37,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	// Selectors wrapped with refs to simplify working with useEffect dependency array
 	const onCloseRef = useHandlerRef(onClose);
 	const onOpenRef = useHandlerRef(onOpen);
+	const onAfterCloseRef = useHandlerRef(onAfterClose);
 
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
@@ -126,18 +127,27 @@ const Overlay: React.FC<T.Props> = (props) => {
 	);
 
 	React.useEffect(() => {
-		setAnimated(true);
+		const hasTransitions = checkTransitions();
+
+		if (hasTransitions) setAnimated(true);
 		if (active && !rendered) render();
-		if (!active && rendered) hide();
-	}, [active, render, hide, rendered]);
+		if (!active && rendered) {
+			if (!hasTransitions) {
+				unlockScroll();
+				remove();
+				onAfterCloseRef.current?.();
+				return;
+			}
+
+			hide();
+		}
+	}, [active, render, hide, rendered, remove, unlockScroll, onAfterCloseRef]);
 
 	// Show overlay after it was rendered
 	React.useEffect(() => {
 		if (!rendered) return;
 		if (!transparent) lockScroll();
-		onNextFrame(() => {
-			show();
-		});
+		onNextFrame(() => show());
 	}, [rendered, show, lockScroll, transparent]);
 
 	React.useEffect(() => {

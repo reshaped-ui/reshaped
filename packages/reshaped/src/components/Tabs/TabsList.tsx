@@ -9,6 +9,7 @@ import useFadeSide from "@/hooks/_internal/useFadeSide";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation";
 import useRTL from "@/hooks/useRTL";
+import { checkTransitions } from "@/utilities/animation";
 import IconChevronLeft from "@/icons/ChevronLeft";
 import IconChevronRight from "@/icons/ChevronRight";
 import type * as T from "./Tabs.types";
@@ -121,7 +122,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		const selectionStyle = getElementSelectionStyle(elActiveRef.current);
 
 		if (!selectionStyle) return;
-		setSelection({ ...selectionStyle, status: "animated" });
+		setSelection({ ...selectionStyle, status: checkTransitions() ? "animated" : "idle" });
 	}, [selection]);
 
 	return (

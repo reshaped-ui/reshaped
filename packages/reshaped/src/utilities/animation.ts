@@ -5,6 +5,7 @@ export const onNextFrame = (cb: () => void) => {
 };
 
 const transitionAttribute = "data-rs-no-transition";
+const reducedMotionMediaQuery = "(prefers-reduced-motion: reduce)";
 
 export const disableTransitions = () => {
 	document.documentElement.setAttribute(transitionAttribute, "true");
@@ -16,6 +17,7 @@ export const enableTransitions = () => {
 
 export const checkTransitions = () => {
 	if (document.documentElement.hasAttribute(transitionAttribute)) return false;
-	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-	return true;
+
+	if (typeof window === "undefined" || typeof window.matchMedia !== "function") return false;
+	return !window.matchMedia(reducedMotionMediaQuery).matches;
 };

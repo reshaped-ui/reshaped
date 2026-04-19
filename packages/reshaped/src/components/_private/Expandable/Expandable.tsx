@@ -4,7 +4,7 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import { onNextFrame } from "@/utilities/animation";
+import { onNextFrame, checkTransitions } from "@/utilities/animation";
 import * as T from "./Expandable.types";
 import s from "./Expandable.module.css";
 
@@ -38,6 +38,11 @@ const Expandable: React.FC<T.ContentProps> = (props) => {
 	useIsomorphicLayoutEffect(() => {
 		const rootEl = rootRef.current;
 		if (!rootEl || !mountedRef.current) return;
+
+		if (!checkTransitions()) {
+			setAnimatedHeight(active ? "auto" : null);
+			return;
+		}
 
 		if (active) {
 			rootEl.style.height = "auto";
