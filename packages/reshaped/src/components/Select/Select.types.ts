@@ -30,6 +30,7 @@ export type OptionProps = Pick<
 	| "startSlot"
 	| "icon"
 	| "onClick"
+	| "size"
 > & {
 	value: string;
 };

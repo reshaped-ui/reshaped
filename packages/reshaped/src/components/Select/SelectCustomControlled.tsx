@@ -5,6 +5,7 @@ import React from "react";
 import DropdownMenu from "@/components/DropdownMenu";
 import Icon from "@/components/Icon";
 import View from "@/components/View";
+import { responsivePropDependency } from "@/utilities/props";
 import CheckmarkIcon from "@/icons/Checkmark";
 import type * as T from "./Select.types";
 import SelectGroup from "./SelectGroup";
@@ -23,6 +24,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		position,
 		fallbackPositions,
 		positionRef,
+		size,
 		renderValue: passedRenderValue,
 	} = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
@@ -52,6 +54,10 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 
 				return React.cloneElement(component, {
 					key: option.value,
+					size: responsivePropDependency(size, (size) => {
+						if (size === "xlarge") return "large";
+						return size;
+					}),
 					onClick: (e) => {
 						option.onClick?.(e);
 						if (multiple) {

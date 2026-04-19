@@ -227,3 +227,28 @@ export const className: StoryObj = {
 		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
+
+const Wrapper = () => (
+	<>
+		<Resizable.Item>
+			<Panel />
+		</Resizable.Item>
+		<Resizable.Handle />
+		<Resizable.Item>
+			<Panel />
+		</Resizable.Item>
+	</>
+);
+
+export const testWrapper = {
+	name: "test: compound wrapper",
+	render: () => (
+		<Resizable height="200px">
+			<Resizable.Item>
+				<Panel />
+			</Resizable.Item>
+			<Resizable.Handle />
+			<Wrapper />
+		</Resizable>
+	),
+};

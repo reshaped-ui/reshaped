@@ -6,16 +6,16 @@ import { classNames } from "@reshaped/utilities";
 import View from "@/components/View";
 import useDrag from "@/hooks/_internal/useDrag";
 import type * as T from "./Resizable.types";
+import { ResizableContext } from "./ResizableContext";
 import s from "./Resizable.module.css";
-
-export const ResizableHandleContext = React.createContext({} as T.HandleContext);
 
 const ResizableHandle: React.FC<T.HandleProps> = (props) => {
 	const { children } = props;
-	const { containerRef, onDrag, index, direction } = React.useContext(ResizableHandleContext);
+	const { containerRef, onDrag, direction } = React.useContext(ResizableContext);
 	const { ref, active } = useDrag(
 		(args) => {
-			onDrag({ ...args, index });
+			if (!ref.current) return;
+			onDrag({ ...args, handleEl: ref.current });
 		},
 		{
 			containerRef,
