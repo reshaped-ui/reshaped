@@ -13,7 +13,7 @@ import { type FocusableElement } from "@reshaped/headless/internal";
 import React from "react";
 
 import Portal from "@/components/_private/Portal";
-import { onNextFrame } from "@/utilities/animation";
+import { checkTransitions, onNextFrame } from "@/utilities/animation";
 
 import s from "./Overlay.module.css";
 
@@ -40,6 +40,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	// Selectors wrapped with refs to simplify working with useEffect dependency array
 	const onCloseRef = useHandlerRef(onClose);
 	const onOpenRef = useHandlerRef(onOpen);
+	const onAfterCloseRef = useHandlerRef(onAfterClose);
 
 	const isTransparent = transparent === true;
 	const opacity = isTransparent ? 0 : (1 - (transparent || 0)) * 0.7;
@@ -131,18 +132,27 @@ const Overlay: React.FC<T.Props> = (props) => {
 	);
 
 	React.useEffect(() => {
-		setAnimated(true);
+		const hasTransitions = checkTransitions();
+
+		if (hasTransitions) setAnimated(true);
 		if (active && !rendered) render();
-		if (!active && rendered) hide();
-	}, [active, render, hide, rendered]);
+		if (!active && rendered) {
+			if (!hasTransitions) {
+				unlockScroll();
+				remove();
+				onAfterCloseRef.current?.();
+				return;
+			}
+
+			hide();
+		}
+	}, [active, render, hide, rendered, remove, unlockScroll, onAfterCloseRef]);
 
 	// Show overlay after it was rendered
 	React.useEffect(() => {
 		if (!rendered) return;
 		if (!isTransparent) lockScroll();
-		onNextFrame(() => {
-			show();
-		});
+		onNextFrame(() => show());
 	}, [rendered, show, lockScroll, isTransparent]);
 
 	React.useEffect(() => {

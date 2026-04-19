@@ -4,7 +4,7 @@ import { TrapFocus, classNames } from "@reshaped/headless";
 import { checkKeyboardMode } from "@reshaped/headless/internal";
 import React from "react";
 
-import { onNextFrame } from "@/utilities/animation";
+import { checkTransitions, onNextFrame } from "@/utilities/animation";
 
 import Toast from "./Toast";
 import { timeouts } from "./Toast.constants";
@@ -42,9 +42,14 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 		if (timeout === 0) return;
 
 		timeoutRef.current = setTimeout(() => {
+			if (!checkTransitions()) {
+				remove(id);
+				return;
+			}
+
 			hide(id);
 		}, timeoutValue ?? timeouts.short);
-	}, [hide, id, timeout, stopTimer]);
+	}, [hide, id, remove, timeout, stopTimer]);
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
 		if (e.propertyName !== "height") return;
