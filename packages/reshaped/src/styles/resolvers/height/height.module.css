@@ -2,31 +2,34 @@
 --rs-h is used in other components
 we're resolving --rs-h separately to make sure it uses the resolved value in other components calc (e.g. Avatar)
 */
-.root {
-	--rs-h-s: auto;
-	--rs-h-m: var(--rs-h-s);
-	--rs-h-l: var(--rs-h-m);
-	--rs-h-xl: var(--rs-h-l);
 
-	height: var(--rs-h) !important;
-}
+@layer rs.mixins.height {
+	.root {
+		--rs-h-s: auto;
+		--rs-h-m: var(--rs-h-s);
+		--rs-h-l: var(--rs-h-m);
+		--rs-h-xl: var(--rs-h-l);
 
-.--type-literal {
-	--rs-h: var(--rs-h-s);
-}
+		height: var(--rs-h);
+	}
 
-.--type-unit {
-	--rs-h: calc(var(--rs-h-s) * var(--rs-unit-x1));
-}
+	.--type-literal {
+		--rs-h: var(--rs-h-s);
+	}
 
-@each $viewport in m, l, xl {
-	@media (--rs-viewport-$viewport) {
-		.--type-literal--$viewport {
-			--rs-h: var(--rs-h-$viewport);
-		}
+	.--type-unit {
+		--rs-h: calc(var(--rs-h-s) * var(--rs-unit-x1));
+	}
 
-		.--type-unit--$viewport {
-			--rs-h: calc(var(--rs-h-$viewport) * var(--rs-unit-x1));
+	@each $viewport in m, l, xl {
+		@media (--rs-viewport-$viewport) {
+			.--type-literal--$viewport {
+				--rs-h: var(--rs-h-$viewport);
+			}
+
+			.--type-unit--$viewport {
+				--rs-h: calc(var(--rs-h-$viewport) * var(--rs-unit-x1));
+			}
 		}
 	}
 }

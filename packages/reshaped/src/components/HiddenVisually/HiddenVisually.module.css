@@ -1,8 +1,10 @@
-.root {
-	width: 1px;
-	height: 1px;
-	clip-path: inset(1px);
-	white-space: nowrap;
-	overflow: hidden;
-	position: absolute;
+@layer rs.components.hidden-visually {
+	.root {
+		width: 1px;
+		height: 1px;
+		clip-path: inset(1px);
+		white-space: nowrap;
+		overflow: hidden;
+		position: absolute;
+	}
 }

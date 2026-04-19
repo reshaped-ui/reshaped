@@ -1,4 +1,4 @@
-@layer rs.reset {
+@layer rs.reset.actionable {
 	.root {
 		display: inline-block;
 		vertical-align: top;
@@ -16,76 +16,76 @@
 		isolation: isolate;
 		-webkit-tap-highlight-color: transparent;
 	}
-}
 
-.touch {
-	position: absolute;
-	inset: 50%;
-	height: 100%;
-	width: 100%;
-	transform: translate(-50%, -50%);
+	.touch {
+		position: absolute;
+		inset: 50%;
+		height: 100%;
+		width: 100%;
+		transform: translate(-50%, -50%);
 
-	/* WCAG AA size requirement */
-	min-width: 24px;
-	min-height: 24px;
-}
-
-.root:focus {
-	outline: none;
-}
-
-[data-rs-keyboard] .root {
-	&:focus {
-		outline: var(--rs-outline);
-		outline-offset: var(--rs-outline-width);
-		z-index: var(--rs-z-index-relative);
+		/* WCAG AA size requirement */
+		min-width: 24px;
+		min-height: 24px;
 	}
 
-	&.--inset:focus {
-		outline-offset: calc(var(--rs-outline-width) * -1);
-	}
-
-	&.--disabled-focus-ring:focus {
+	.root:focus {
 		outline: none;
 	}
 
-	&.--radius-inherit {
+	[data-rs-keyboard] .root {
 		&:focus {
+			outline: var(--rs-outline);
+			outline-offset: var(--rs-outline-width);
+			z-index: var(--rs-z-index-relative);
+		}
+
+		&.--inset:focus {
+			outline-offset: calc(var(--rs-outline-width) * -1);
+		}
+
+		&.--disabled-focus-ring:focus {
 			outline: none;
 		}
 
-		&:focus > * {
-			outline: var(--rs-outline);
-			outline-offset: var(--rs-outline-width);
-		}
+		&.--radius-inherit {
+			&:focus {
+				outline: none;
+			}
 
-		&.--inset:focus > * {
-			outline-offset: calc(var(--rs-outline-width) * -1);
+			&:focus > * {
+				outline: var(--rs-outline);
+				outline-offset: var(--rs-outline-width);
+			}
+
+			&.--inset:focus > * {
+				outline-offset: calc(var(--rs-outline-width) * -1);
+			}
 		}
 	}
-}
 
-button.root,
-[role="button"].root {
-	cursor: pointer;
-	user-select: none;
-}
-
-/* In case there are hidden inputs rendered inside, automatically apply focus ring */
-[data-rs-keyboard] label.root:has([data-rs-hidden-input]:focus) {
-	z-index: var(--rs-z-index-relative);
-	box-shadow: var(--rs-shadow-focus);
-}
-
-.root.--disabled,
-.root[disabled] {
-	cursor: default;
-
-	&:active {
-		transform: none;
+	button.root,
+	[role="button"].root {
+		cursor: pointer;
+		user-select: none;
 	}
-}
 
-.root.--full-width {
-	width: 100%;
+	/* In case there are hidden inputs rendered inside, automatically apply focus ring */
+	[data-rs-keyboard] label.root:has([data-rs-hidden-input]:focus) {
+		z-index: var(--rs-z-index-relative);
+		box-shadow: var(--rs-outline-shadow);
+	}
+
+	.root.--disabled,
+	.root[disabled] {
+		cursor: default;
+
+		&:active {
+			transform: none;
+		}
+	}
+
+	.root.--full-width {
+		width: 100%;
+	}
 }

@@ -1,28 +1,30 @@
-.root {
-	--rs-form-control-gap: 1;
-	--rs-form-control-gap-value: calc(var(--rs-form-control-gap) * var(--rs-unit-x1));
+@layer rs.components.form-control {
+	.root {
+		--rs-form-control-gap: 1;
+		--rs-form-control-gap-value: calc(var(--rs-form-control-gap) * var(--rs-unit-x1));
 
-	border: none;
-}
-
-.label {
-	display: block;
-	margin-bottom: var(--rs-form-control-gap-value);
-
-	&:last-child {
-		margin-bottom: 0;
+		border: none;
 	}
-}
 
-.caption {
-	margin-top: var(--rs-form-control-gap-value);
-	display: block;
-}
+	.label {
+		display: block;
+		margin-bottom: var(--rs-form-control-gap-value);
 
-.caption + .caption {
-	margin-top: 0;
-}
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 
-.--size-large {
-	--rs-form-control-gap: 1.5;
+	.caption {
+		margin-top: var(--rs-form-control-gap-value);
+		display: block;
+	}
+
+	.caption + .caption {
+		margin-top: 0;
+	}
+
+	.--size-large {
+		--rs-form-control-gap: 1.5;
+	}
 }

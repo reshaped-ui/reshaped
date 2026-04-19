@@ -1,4 +1,6 @@
-.root {
-	display: contents;
-	color: inherit;
+@layer rs.components.reshaped {
+	.root {
+		display: contents;
+		color: inherit;
+	}
 }

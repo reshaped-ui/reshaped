@@ -1,121 +1,123 @@
-.positioner {
-	--rs-flyout-max-h: 100%;
-	--rs-flyout-max-w: 100%;
-	--rs-flyout-z-index: var(--rs-z-index-absolute);
-	--rs-flyout-origin-x: 50%;
-	--rs-flyout-origin-y: 50%;
+@layer rs.reset.flyout {
+	.positioner {
+		--rs-flyout-max-h: 100%;
+		--rs-flyout-max-w: 100%;
+		--rs-flyout-z-index: var(--rs-z-index-absolute);
+		--rs-flyout-origin-x: 50%;
+		--rs-flyout-origin-y: 50%;
 
-	position: absolute;
-	isolation: isolate;
-	z-index: var(--rs-flyout-z-index);
+		position: absolute;
+		isolation: isolate;
+		z-index: var(--rs-flyout-z-index);
 
-	/* Make content child grow based on its max height with flex grow */
-	display: flex;
-	flex-direction: column;
+		/* Make content child grow based on its max height with flex grow */
+		display: flex;
+		flex-direction: column;
 
-	/* Ignore the padding for non-hover trigger types */
-	pointer-events: none;
-
-	&.--hover {
-		pointer-events: all;
-	}
-
-	&.--hover-disabled,
-	&.--hover-disabled .content {
+		/* Ignore the padding for non-hover trigger types */
 		pointer-events: none;
+
+		&.--hover {
+			pointer-events: all;
+		}
+
+		&.--hover-disabled,
+		&.--hover-disabled .content {
+			pointer-events: none;
+		}
 	}
-}
 
-.content {
-	pointer-events: all;
-	opacity: 0;
-	transform: scale(0.92) translateY(0);
-	transform-origin: var(--rs-flyout-origin-x) var(--rs-flyout-origin-y);
-	outline: none;
-	height: 100%;
-	max-width: var(--rs-flyout-max-w);
-	max-height: var(--rs-flyout-max-h);
-	backface-visibility: hidden;
+	.content {
+		pointer-events: all;
+		opacity: 0;
+		transform: scale(0.92) translateY(0);
+		transform-origin: var(--rs-flyout-origin-x) var(--rs-flyout-origin-y);
+		outline: none;
+		height: 100%;
+		max-width: var(--rs-flyout-max-w);
+		max-height: var(--rs-flyout-max-h);
+		backface-visibility: hidden;
 
-	/* Grow based on its parent's max height */
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
+		/* Grow based on its parent's max height */
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
 
-	/* Using 1ms to still trigger transitionEnd event */
-	transition: 1ms var(--rs-easing-accelerate);
+		/* Using 1ms to still trigger transitionEnd event */
+		transition: 1ms var(--rs-easing-accelerate);
 
-	[data-rs-keyboard] &:focus {
-		box-shadow: var(--rs-shadow-focus);
+		[data-rs-keyboard] &:focus {
+			box-shadow: var(--rs-outline-shadow);
+		}
 	}
-}
 
-.scrollable {
-	overflow: auto;
-	max-height: 100%;
-	flex-grow: 1;
-	overscroll-behavior: none;
-}
+	.scrollable {
+		overflow: auto;
+		max-height: 100%;
+		flex-grow: 1;
+		overscroll-behavior: none;
+	}
 
-.positioner.--width-trigger .content {
-	transform: scale(1) translateY(var(--rs-unit-x2));
-}
+	.positioner.--width-trigger .content {
+		transform: scale(1) translateY(var(--rs-unit-x2));
+	}
 
-.positioner.--position-top,
-.positioner.--position-top-end,
-.positioner.--position-top-start {
-	--rs-flyout-origin-y: 100%;
-}
+	.positioner.--position-top,
+	.positioner.--position-top-end,
+	.positioner.--position-top-start {
+		--rs-flyout-origin-y: 100%;
+	}
 
-.positioner.--position-bottom,
-.positioner.--position-bottom-end,
-.positioner.--position-bottom-start {
-	--rs-flyout-origin-y: 0%;
-}
+	.positioner.--position-bottom,
+	.positioner.--position-bottom-end,
+	.positioner.--position-bottom-start {
+		--rs-flyout-origin-y: 0%;
+	}
 
-.positioner.--position-top-start,
-.positioner.--position-bottom-start {
-	--rs-flyout-origin-x: 0%;
-}
+	.positioner.--position-top-start,
+	.positioner.--position-bottom-start {
+		--rs-flyout-origin-x: 0%;
+	}
 
-.positioner.--position-top-end,
-.positioner.--position-bottom-end {
-	--rs-flyout-origin-x: 100%;
-}
+	.positioner.--position-top-end,
+	.positioner.--position-bottom-end {
+		--rs-flyout-origin-x: 100%;
+	}
 
-.positioner.--position-start,
-.positioner.--position-start-top,
-.positioner.--position-start-bottom {
-	--rs-flyout-origin-x: 100%;
-}
+	.positioner.--position-start,
+	.positioner.--position-start-top,
+	.positioner.--position-start-bottom {
+		--rs-flyout-origin-x: 100%;
+	}
 
-.positioner.--position-end,
-.positioner.--position-end-top,
-.positioner.--position-end-bottom {
-	--rs-flyout-origin-x: 0%;
-}
+	.positioner.--position-end,
+	.positioner.--position-end-top,
+	.positioner.--position-end-bottom {
+		--rs-flyout-origin-x: 0%;
+	}
 
-.positioner.--position-start-top,
-.positioner.--position-end-top {
-	--rs-flyout-origin-y: 0%;
-}
+	.positioner.--position-start-top,
+	.positioner.--position-end-top {
+		--rs-flyout-origin-y: 0%;
+	}
 
-.positioner.--position-start-bottom,
-.positioner.--position-end-bottom {
-	--rs-flyout-origin-y: 100%;
-}
+	.positioner.--position-start-bottom,
+	.positioner.--position-end-bottom {
+		--rs-flyout-origin-y: 100%;
+	}
 
-.positioner.--visible .content {
-	opacity: 1;
-	transform: scale(1) translateY(0);
-}
+	.positioner.--visible .content {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
 
-.positioner.--animated .content {
-	transition-duration: var(--rs-duration-rapid);
-	transition-property: opacity, transform;
-}
+	.positioner.--animated .content {
+		transition-duration: var(--rs-duration-rapid);
+		transition-property: opacity, transform;
+	}
 
-.positioner.--animated.--visible .content {
-	transition-duration: var(--rs-duration-fast);
-	transition-timing-function: var(--rs-easing-decelerate);
+	.positioner.--animated.--visible .content {
+		transition-duration: var(--rs-duration-fast);
+		transition-timing-function: var(--rs-easing-decelerate);
+	}
 }

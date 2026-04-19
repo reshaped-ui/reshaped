@@ -1,7 +1,9 @@
-@responsive [style*="--rs-ratio-"] {
-	@variable --rs-ratio 0;
-}
+@layer rs.mixins.aspect-ratio {
+	@responsive [style*="--rs-ratio-"] {
+		@variable --rs-ratio 0;
+	}
 
-[style*="--rs-ratio-s:"] {
-	aspect-ratio: var(--rs-ratio);
+	[style*="--rs-ratio-s:"] {
+		aspect-ratio: var(--rs-ratio);
+	}
 }

@@ -1,49 +1,55 @@
-.root {
-	position: relative;
-
-	/* Using after while borders are using before */
-	&::after {
-		content: "";
-		position: absolute;
-		inset: 1px;
-		pointer-events: none;
-		border-radius: inherit;
-		z-index: var(--rs-z-index-relative);
+@layer rs.reset.shadow {
+	.root {
+		position: relative;
 	}
 }
 
-.--shadow-outline {
-	&::after {
-		box-shadow: var(--rs-shadow-outline);
+@layer rs.mixins.shadow {
+	.root {
+		/* Using after while borders are using before */
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 1px;
+			pointer-events: none;
+			border-radius: inherit;
+			z-index: var(--rs-z-index-relative);
+		}
 	}
-}
 
-.--shadow-outline-intense {
-	&::after {
-		box-shadow: var(--rs-shadow-outline-intense);
+	.--shadow-outline {
+		&::after {
+			box-shadow: var(--rs-shadow-outline);
+		}
 	}
-}
 
-.--shadow-raised {
-	&::after {
-		box-shadow: var(--rs-shadow-raised);
+	.--shadow-outline-intense {
+		&::after {
+			box-shadow: var(--rs-shadow-outline-intense);
+		}
 	}
-}
 
-.--shadow-raised-intense {
-	&::after {
-		box-shadow: var(--rs-shadow-raised-intense);
+	.--shadow-raised {
+		&::after {
+			box-shadow: var(--rs-shadow-raised);
+		}
 	}
-}
 
-.--shadow-overlay {
-	&::after {
-		box-shadow: var(--rs-shadow-overlay);
+	.--shadow-raised-intense {
+		&::after {
+			box-shadow: var(--rs-shadow-raised-intense);
+		}
 	}
-}
 
-.--shadow-overlay-intense {
-	&::after {
-		box-shadow: var(--rs-shadow-overlay-intense);
+	.--shadow-overlay {
+		&::after {
+			box-shadow: var(--rs-shadow-overlay);
+		}
+	}
+
+	.--shadow-overlay-intense {
+		&::after {
+			box-shadow: var(--rs-shadow-overlay-intense);
+		}
 	}
 }

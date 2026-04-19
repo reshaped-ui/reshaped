@@ -1,5 +1,7 @@
-@responsive [style*="--rs-position-"] {
-	@variable --rs-position;
+@layer rs.mixins.position {
+	@responsive [style*="--rs-position-"] {
+		@variable --rs-position;
 
-	position: var(--rs-position) !important;
+		position: var(--rs-position);
+	}
 }

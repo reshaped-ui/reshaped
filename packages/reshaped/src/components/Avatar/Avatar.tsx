@@ -49,13 +49,7 @@ const Avatar: React.FC<T.Props> = (props) => {
 	}
 
 	const mixinStyles = resolveMixin({ height: size });
-	const rootClassNames = classNames(
-		s.root,
-		className,
-		mixinStyles?.classNames,
-		color && s[`--color-${color}`],
-		variant && s[`--variant-${variant}`]
-	);
+	const rootClassNames = classNames(s.root, className, mixinStyles?.classNames);
 
 	return (
 		<View
@@ -66,7 +60,11 @@ const Avatar: React.FC<T.Props> = (props) => {
 			className={rootClassNames}
 		>
 			{icon ? (
-				<Icon svg={icon} size={responsivePropDependency(size, (size) => Math.ceil(size * 0.4))} />
+				<Icon
+					svg={icon}
+					color={variant === "faded" ? color : undefined}
+					size={responsivePropDependency(size, (size) => Math.ceil(size * 0.4))}
+				/>
 			) : (
 				initials
 			)}

@@ -1,91 +1,93 @@
-.root {
-	/* Add an offset in case overlay is rendered inside a scrolled container */
-	--rs-overlay-offset-y: 0px;
-	--rs-overlay-offset-x: 0px;
-	--rs-overlay-opacity: 0;
+@layer rs.components.overlay {
+	.root {
+		/* Add an offset in case overlay is rendered inside a scrolled container */
+		--rs-overlay-offset-y: 0px;
+		--rs-overlay-offset-x: 0px;
+		--rs-overlay-opacity: 0;
 
-	position: fixed;
-	overflow-x: clip;
-	-webkit-overflow-scrolling: touch;
+		position: fixed;
+		overflow-x: clip;
+		-webkit-overflow-scrolling: touch;
 
-	/* Not using logical properties here because offset is calculated with scrollLeft */
-	left: var(--rs-overlay-offset-x);
-	top: var(--rs-overlay-offset-y);
-	height: 100%;
-	width: 100%;
-	z-index: var(--rs-z-index-fixed);
-	color: var(--rs-color-white);
-	background-color: rgb(from var(--rs-color-black) r g b / 0%);
-	opacity: 0;
-	outline: none;
-	isolation: isolate;
+		/* Not using logical properties here because offset is calculated with scrollLeft */
+		left: var(--rs-overlay-offset-x);
+		top: var(--rs-overlay-offset-y);
+		height: 100%;
+		width: 100%;
+		z-index: var(--rs-z-index-fixed);
+		color: var(--rs-color-white);
+		background-color: rgb(from var(--rs-color-black) r g b / 0%);
+		opacity: 0;
+		outline: none;
+		isolation: isolate;
 
-	/* Override default Tailwind reset */
-	cursor: default !important;
-}
-
-.wrapper {
-	display: table;
-	height: 100%;
-	width: 100%;
-}
-
-.inner {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-}
-
-.content {
-	display: inline-block;
-	vertical-align: middle;
-	text-align: initial;
-}
-
-.root.--visible {
-	--rs-overlay-opacity: 1;
-
-	background-color: rgb(from var(--rs-color-black) r g b / calc(var(--rs-overlay-opacity) * 0.7));
-	opacity: 1;
-}
-
-.root.--click-through {
-	color: inherit;
-	pointer-events: none;
-}
-
-.root.--blurred {
-	backdrop-filter: blur(3px);
-
-	/* Applying blur causes some browsers (e.g. Chrome) to render a 1px border */
-	left: calc(var(--rs-overlay-offset-x) - 1px);
-	top: calc(var(--rs-overlay-offset-y) - 1px);
-	width: calc(100% + 2px);
-	height: calc(100% + 2px);
-}
-
-.root.--click-through > *:not(.wrapper) {
-	pointer-events: all;
-}
-
-.root.--click-through .content {
-	pointer-events: all;
-}
-
-.root.--contained {
-	position: absolute;
-}
-
-.root.--animated {
-	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
-	transition-property: background-color, opacity;
-
-	&.--visible {
-		transition-timing-function: var(--rs-easing-decelerate);
+		/* Override default Tailwind reset */
+		cursor: default !important;
 	}
-}
 
-.root.--overflow-auto {
-	overflow: auto;
-	overscroll-behavior: none;
+	.wrapper {
+		display: table;
+		height: 100%;
+		width: 100%;
+	}
+
+	.inner {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+
+	.content {
+		display: inline-block;
+		vertical-align: middle;
+		text-align: initial;
+	}
+
+	.root.--visible {
+		--rs-overlay-opacity: 1;
+
+		background-color: rgb(from var(--rs-color-black) r g b / calc(var(--rs-overlay-opacity) * 0.7));
+		opacity: 1;
+	}
+
+	.root.--click-through {
+		color: inherit;
+		pointer-events: none;
+	}
+
+	.root.--blurred {
+		backdrop-filter: blur(3px);
+
+		/* Applying blur causes some browsers (e.g. Chrome) to render a 1px border */
+		left: calc(var(--rs-overlay-offset-x) - 1px);
+		top: calc(var(--rs-overlay-offset-y) - 1px);
+		width: calc(100% + 2px);
+		height: calc(100% + 2px);
+	}
+
+	.root.--click-through > *:not(.wrapper) {
+		pointer-events: all;
+	}
+
+	.root.--click-through .content {
+		pointer-events: all;
+	}
+
+	.root.--contained {
+		position: absolute;
+	}
+
+	.root.--animated {
+		transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
+		transition-property: background-color, opacity;
+
+		&.--visible {
+			transition-timing-function: var(--rs-easing-decelerate);
+		}
+	}
+
+	.root.--overflow-auto {
+		overflow: auto;
+		overscroll-behavior: none;
+	}
 }

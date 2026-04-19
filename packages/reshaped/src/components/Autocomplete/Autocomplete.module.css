@@ -1,3 +1,5 @@
-.item--disabled {
-	pointer-events: none;
+@layer rs.overrides.autocomplete {
+	.item--disabled {
+		pointer-events: none;
+	}
 }

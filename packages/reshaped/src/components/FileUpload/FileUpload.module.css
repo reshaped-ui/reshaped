@@ -1,75 +1,83 @@
-.root {
-	--rs-file-upload-radius: var(--rs-radius-large);
-	--rs-file-upload-border-color: var(--rs-color-border-neutral);
-	--rs-file-upload-hover-background-color: var(--rs-color-background-neutral-highlighted-faded);
+@layer rs.components.file-upload {
+	.root {
+		--rs-file-upload-radius: var(--rs-radius-large);
+		--rs-file-upload-border-color: var(--rs-color-border-neutral);
+		--rs-file-upload-hover-background-color: var(--rs-color-background-neutral-highlighted-faded);
 
-	display: block;
+		display: block;
 
-	[data-rs-keyboard] &:focus-within {
-		box-shadow: var(--rs-shadow-focus);
+		[data-rs-keyboard] &:focus-within {
+			box-shadow: var(--rs-outline-shadow);
+		}
 	}
-}
 
-.triggerLayer {
-	&:has(.trigger) {
-		pointer-events: none;
+	.triggerLayer {
+		&:has(.trigger) {
+			pointer-events: none;
 
-		& .trigger,
-		& button,
-		& a {
-			pointer-events: all;
+			& .trigger,
+			& button,
+			& a {
+				pointer-events: all;
+			}
+		}
+	}
+
+	.trigger {
+		display: contents;
+	}
+
+	.--inline {
+		--rs-file-upload-radius: var(--rs-radius-medium);
+
+		&,
+		& .triggerLayer {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+
+	.--variant-outline {
+		& .triggerLayer {
+			border: 1px dashed var(--rs-file-upload-border-color);
+			border-radius: var(--rs-file-upload-radius);
+			transition: var(--rs-duration-fast) var(--rs-easing-standard);
+			transition-property: background-color, border-color;
+
+			.--highlighted& {
+				background: var(--rs-color-background-primary-highlighted-faded);
+				border-color: var(--rs-color-border-primary);
+			}
+
+			@media (hover: hover) and (pointer: fine) {
+				&:hover:not(:has(.trigger)) {
+					background: var(--rs-file-upload-hover-background-color);
+				}
+			}
+		}
+	}
+
+	.--disabled {
+		--rs-file-upload-border-color: var(--rs-color-border-disabled);
+		--rs-file-upload-hover-background-color: transparent;
+
+		& .triggerLayer {
+			cursor: not-allowed;
+		}
+
+		& .triggerLayer > * {
+			opacity: 0.4;
 		}
 	}
 }
 
-.trigger {
-	display: contents;
-}
-
-.--inline {
-	--rs-file-upload-radius: var(--rs-radius-medium);
-
-	&,
-	& .triggerLayer {
-		display: inline-block;
-		vertical-align: top;
-	}
-
+/* Global overrides, outside layers */
+.--variant-headless {
 	[data-rs-keyboard] &:focus-within {
 		box-shadow: none;
 	}
 
 	[data-rs-keyboard] &:focus-within .triggerLayer > * {
-		box-shadow: var(--rs-shadow-focus);
-	}
-}
-
-.--variant-outline {
-	& .triggerLayer {
-		border: 1px dashed var(--rs-file-upload-border-color);
-		border-radius: var(--rs-file-upload-radius);
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
-		transition-property: background-color, border-color;
-
-		.--highlighted& {
-			background: var(--rs-color-background-primary-highlighted-faded);
-			border-color: var(--rs-color-border-primary);
-		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover:not(:has(.trigger)) {
-				background: var(--rs-file-upload-hover-background-color);
-			}
-		}
-	}
-}
-
-.--disabled {
-	--rs-file-upload-border-color: var(--rs-color-border-disabled);
-	--rs-file-upload-hover-background-color: transparent;
-
-	& .triggerLayer {
-		cursor: not-allowed;
-		opacity: 0.4;
+		box-shadow: var(--rs-outline-shadow);
 	}
 }

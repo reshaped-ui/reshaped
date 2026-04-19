@@ -1,13 +1,15 @@
-@responsive .root[style*="--rs-max-w-"] {
-	@variable --rs-max-w none;
-}
-
-@responsive .--type {
-	@value literal {
-		max-width: var(--rs-max-w) !important;
+@layer rs.mixins.max-width {
+	@responsive .root[style*="--rs-max-w-"] {
+		@variable --rs-max-w none;
 	}
 
-	@value unit {
-		max-width: calc(var(--rs-max-w) * var(--rs-unit-x1)) !important;
+	@responsive .--type {
+		@value literal {
+			max-width: var(--rs-max-w);
+		}
+
+		@value unit {
+			max-width: calc(var(--rs-max-w) * var(--rs-unit-x1));
+		}
 	}
 }

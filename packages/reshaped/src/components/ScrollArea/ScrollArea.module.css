@@ -1,104 +1,110 @@
-.root {
-	--rs-scroll-area-thumb-size: var(--rs-unit-x1);
-	--rs-scroll-area-thumb-offset: var(--rs-unit-x1);
+@layer rs.components.scroll-area {
+	.root {
+		--rs-scroll-area-thumb-size: var(--rs-unit-x1);
+		--rs-scroll-area-thumb-offset: var(--rs-unit-x1);
 
-	overflow: hidden;
-	height: 100%;
-	position: relative;
-
-	[data-rs-keyboard] &:has(.scrollable:focus) {
-		outline: var(--rs-outline);
-	}
-}
-
-.scrollable {
-	height: 100%;
-	position: relative;
-	overflow: auto;
-	scrollbar-width: none;
-	outline: none;
-	-webkit-overflow-scrolling: touch;
-
-	&::-webkit-scrollbar {
-		display: none;
-		width: 0;
-		height: 0;
-	}
-}
-
-/* Inline block that stretches based on the content to trigger ResizeObserver  */
-.content {
-	display: inline-block;
-	vertical-align: top;
-	min-width: 100%;
-	min-height: 100%;
-}
-
-.scrollbar {
-	position: absolute;
-	box-sizing: initial;
-	padding: var(--rs-scroll-area-thumb-offset);
-}
-
-.thumb {
-	position: relative;
-	height: 100%;
-	width: 100%;
-	background-color: var(--rs-color-background-neutral-faded);
-	border-radius: var(--rs-radius-circular);
-	opacity: 0;
-
-	&::before {
-		content: "";
-		display: block;
-		border-radius: var(--rs-radius-circular);
-		background: var(--rs-color-foreground-neutral);
-		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
-		position: absolute;
-		opacity: 0.2;
-	}
-}
-
-.--scrollbar-y {
-	inset-block: 0;
-	inset-inline-end: 0;
-	width: var(--rs-scroll-area-thumb-size);
-
-	& .thumb::before {
-		inset-block-start: calc(var(--rs-scroll-area-position) * 100%);
-		width: 100%;
-		height: calc(var(--rs-scroll-area-ratio) * 100%);
-	}
-}
-
-.--scrollbar-x {
-	inset-inline: 0;
-	inset-block-end: 0;
-	height: var(--rs-scroll-area-thumb-size);
-
-	& .thumb::before {
-		inset-inline-start: calc(var(--rs-scroll-area-position) * 100%);
+		overflow: hidden;
 		height: 100%;
-		width: calc(var(--rs-scroll-area-ratio) * 100%);
+		position: relative;
+
+		[data-rs-keyboard] &:has(.scrollable:focus) {
+			outline: var(--rs-outline);
+		}
 	}
-}
 
-.--scrollbar-y:not(:last-child) {
-	inset-block-end: calc(var(--rs-scroll-area-thumb-size) + var(--rs-scroll-area-thumb-offset) * 2);
-}
+	.scrollable {
+		height: 100%;
+		position: relative;
+		overflow: auto;
+		scrollbar-width: none;
+		outline: none;
+		-webkit-overflow-scrolling: touch;
 
-.--scrollbar-y ~ .--scrollbar-x {
-	inset-inline-end: calc(var(--rs-scroll-area-thumb-size) + var(--rs-scroll-area-thumb-offset) * 2);
-}
+		&::-webkit-scrollbar {
+			display: none;
+			width: 0;
+			height: 0;
+		}
+	}
 
-/* Only show the thumb for the current scroll area and not for the nested ones */
-.--display-visible > .scrollbar .thumb,
-.--display-hover:hover > .scrollbar .thumb {
-	opacity: 1;
-}
+	/* Inline block that stretches based on the content to trigger ResizeObserver  */
+	.content {
+		display: inline-block;
+		vertical-align: top;
+		min-width: 100%;
+		min-height: 100%;
+	}
 
-.--scrollbar-dragging .thumb::before,
-.--display-hover:hover .--scrollbar-dragging .thumb::before,
-.scrollbar:hover .thumb::before {
-	opacity: 0.32;
+	.scrollbar {
+		position: absolute;
+		box-sizing: initial;
+		padding: var(--rs-scroll-area-thumb-offset);
+	}
+
+	.thumb {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		background-color: var(--rs-color-background-neutral-faded);
+		border-radius: var(--rs-radius-circular);
+		opacity: 0;
+
+		&::before {
+			content: "";
+			display: block;
+			border-radius: var(--rs-radius-circular);
+			background: var(--rs-color-foreground-neutral);
+			transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+			position: absolute;
+			opacity: 0.2;
+		}
+	}
+
+	.--scrollbar-y {
+		inset-block: 0;
+		inset-inline-end: 0;
+		width: var(--rs-scroll-area-thumb-size);
+
+		& .thumb::before {
+			inset-block-start: calc(var(--rs-scroll-area-position) * 100%);
+			width: 100%;
+			height: calc(var(--rs-scroll-area-ratio) * 100%);
+		}
+	}
+
+	.--scrollbar-x {
+		inset-inline: 0;
+		inset-block-end: 0;
+		height: var(--rs-scroll-area-thumb-size);
+
+		& .thumb::before {
+			inset-inline-start: calc(var(--rs-scroll-area-position) * 100%);
+			height: 100%;
+			width: calc(var(--rs-scroll-area-ratio) * 100%);
+		}
+	}
+
+	.--scrollbar-y:not(:last-child) {
+		inset-block-end: calc(
+			var(--rs-scroll-area-thumb-size) + var(--rs-scroll-area-thumb-offset) * 2
+		);
+	}
+
+	.--scrollbar-y ~ .--scrollbar-x {
+		inset-inline-end: calc(
+			var(--rs-scroll-area-thumb-size) + var(--rs-scroll-area-thumb-offset) * 2
+		);
+	}
+
+	/* Only show the thumb for the current scroll area and not for the nested ones */
+	.--display-visible > .scrollbar .thumb,
+	.--display-hover:hover > .scrollbar .thumb {
+		opacity: 1;
+	}
+
+	.--scrollbar-dragging .thumb::before,
+	.--display-hover:hover .--scrollbar-dragging .thumb::before,
+	.scrollbar:hover .thumb::before {
+		opacity: 0.32;
+	}
 }

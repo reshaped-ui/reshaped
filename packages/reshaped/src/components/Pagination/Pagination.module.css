@@ -1,3 +1,5 @@
-.page {
-	font-variant-numeric: tabular-nums;
+@layer rs.components.pagination {
+	.page {
+		font-variant-numeric: tabular-nums;
+	}
 }

@@ -1,53 +1,55 @@
-[style*="--rs-border-w"] {
-	/* Using before while shadows are using after */
-	&::before {
-		content: "";
-		position: absolute;
-		pointer-events: none;
-		border-radius: inherit;
-		z-index: var(--rs-z-index-relative);
-		inset: 0;
+@layer rs.mixins.border {
+	[style*="--rs-border-w"] {
+		/* Using before while shadows are using after */
+		&::before {
+			content: "";
+			position: absolute;
+			pointer-events: none;
+			border-radius: inherit;
+			z-index: var(--rs-z-index-relative);
+			inset: 0;
+		}
 	}
-}
 
-@responsive [style*="--rs-border-w-s:"]::before {
-	@variable --rs-border-w 1px;
+	@responsive [style*="--rs-border-w-s:"]::before {
+		@variable --rs-border-w 1px;
 
-	border: var(--rs-border-w) solid var(--rs-border-color);
-}
+		border: var(--rs-border-w) solid var(--rs-border-color);
+	}
 
-@responsive [style*="--rs-border-w-top"]::before {
-	@variable --rs-border-w-top 1px;
+	@responsive [style*="--rs-border-w-top"]::before {
+		@variable --rs-border-w-top 1px;
 
-	border-top: var(--rs-border-w-top) solid var(--rs-border-color);
-}
+		border-top: var(--rs-border-w-top) solid var(--rs-border-color);
+	}
 
-@responsive [style*="--rs-border-w-bottom"]::before {
-	@variable --rs-border-w-bottom 1px;
+	@responsive [style*="--rs-border-w-bottom"]::before {
+		@variable --rs-border-w-bottom 1px;
 
-	border-bottom: var(--rs-border-w-bottom) solid var(--rs-border-color);
-}
+		border-bottom: var(--rs-border-w-bottom) solid var(--rs-border-color);
+	}
 
-@responsive [style*="--rs-border-w-start"]::before {
-	@variable --rs-border-w-start 1px;
+	@responsive [style*="--rs-border-w-start"]::before {
+		@variable --rs-border-w-start 1px;
 
-	border-inline-start: var(--rs-border-w-start) solid var(--rs-border-color);
-}
+		border-inline-start: var(--rs-border-w-start) solid var(--rs-border-color);
+	}
 
-@responsive [style*="--rs-border-w-end"]::before {
-	@variable --rs-border-w-end 1px;
+	@responsive [style*="--rs-border-w-end"]::before {
+		@variable --rs-border-w-end 1px;
 
-	border-inline-end: var(--rs-border-w-end) solid var(--rs-border-color);
-}
+		border-inline-end: var(--rs-border-w-end) solid var(--rs-border-color);
+	}
 
-@responsive [style*="--rs-border-w-inline"]::before {
-	@variable --rs-border-w-inline 1px;
+	@responsive [style*="--rs-border-w-inline"]::before {
+		@variable --rs-border-w-inline 1px;
 
-	border-inline: var(--rs-border-w-inline) solid var(--rs-border-color);
-}
+		border-inline: var(--rs-border-w-inline) solid var(--rs-border-color);
+	}
 
-@responsive [style*="--rs-border-w-block"]::before {
-	@variable --rs-border-w-block 1px;
+	@responsive [style*="--rs-border-w-block"]::before {
+		@variable --rs-border-w-block 1px;
 
-	border-block: var(--rs-border-w-block) solid var(--rs-border-color);
+		border-block: var(--rs-border-w-block) solid var(--rs-border-color);
+	}
 }

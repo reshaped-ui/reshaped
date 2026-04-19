@@ -1,3 +1,5 @@
-.root {
-	display: none;
+@layer rs.components.portal {
+	.root {
+		display: none;
+	}
 }

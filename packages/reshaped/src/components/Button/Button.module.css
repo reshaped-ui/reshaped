@@ -1,463 +1,455 @@
-/*
-- Button overflow shouldn't be hidden to make sure the button group separators are visible
-*/
+@layer rs.components.button.base {
+	.root {
+		/* Using --rs-button-p and --rs-p to dynamically reassign --rs-p for all sizes of ghost buttons, used by Aligner */
+		--rs-p-v: var(--rs-button-p-v);
+		--rs-p-h: var(--rs-button-p-h);
 
-.root {
-	/* Using --rs-button-p and --rs-p to dynamically reassign --rs-p for all sizes of ghost buttons, used by Aligner */
-	--rs-p-v: var(--rs-button-p-v);
-	--rs-p-h: var(--rs-button-p-h);
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: background-color, box-shadow, border-color, color, transform, opacity;
+		padding: var(--rs-unit-x1) var(--rs-p-h);
+		border-radius: var(--rs-button-radius);
+		cursor: pointer;
+		position: relative;
+		z-index: 0;
 
-	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: background-color, box-shadow, border-color, color, transform, opacity;
-	padding: var(--rs-unit-x1) var(--rs-p-h);
-	border-radius: var(--rs-button-radius);
-	cursor: pointer;
-	position: relative;
-	z-index: 0;
-
-	/* In case it breaks into multiple lines – it should keep default text alignment */
-	text-align: initial;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	text-decoration: none;
-	user-select: none;
-	-webkit-tap-highlight-color: transparent;
-	font-family: var(--rs-font-family-body);
-	font-weight: var(--rs-font-weight-medium);
-	font-size: var(--rs-button-font-size);
-	line-height: var(--rs-button-line-height);
-	letter-spacing: var(--rs-button-letter-spacing);
-	box-sizing: border-box;
-	min-height: calc(var(--rs-button-line-height) + var(--rs-p-v) * 2);
-	min-width: calc(
-		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
-	);
-	background-color: var(--rs-button-background-color);
-	color: var(--rs-button-color);
-	isolation: isolate;
-
-	&:active {
-		transform: scale(0.98);
-	}
-
-	&.--highlighted {
-		z-index: var(--rs-z-index-relative);
-
-		/* If there is a highlight element, it's used for the background color instead */
-		&:not(:has(.highlight)),
-		& .highlight {
-			background-color: var(--rs-button-highlight-color);
-		}
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(:has(.highlight)),
-		&:hover .highlight {
-			background-color: var(--rs-button-highlight-color);
-		}
-	}
-}
-
-.text {
-	display: flex;
-	align-items: center;
-	gap: var(--rs-button-gap);
-
-	& > :is(:first-child):not(.label, :only-child) {
-		margin-inline-start: calc(var(--rs-button-icon-align) * -1);
-	}
-
-	&:not(:only-child) > :is(:last-child):not(.label, :only-child) {
-		margin-inline-end: calc(var(--rs-button-icon-align) * -1);
-	}
-}
-
-.icon {
-	/* Starts with 1x and then grows based on the padding size */
-	margin-inline-end: var(--rs-button-gap);
-	margin-inline-start: calc(var(--rs-button-icon-align) * -1);
-
-	&.--icon-position-end {
-		margin-inline-end: calc(var(--rs-button-icon-align) * -1);
-		margin-inline-start: var(--rs-button-gap);
-	}
-}
-
-.--icon-only .icon {
-	margin: 0 !important;
-}
-
-.text,
-.icon {
-	position: relative;
-	z-index: var(--rs-z-index-relative);
-}
-
-.loader {
-	position: absolute;
-	inset: 0;
-	display: none;
-	align-items: center;
-	justify-content: center;
-	z-index: var(--rs-z-index-relative);
-}
-
-.highlight {
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	border-radius: inherit;
-	background-color: transparent;
-	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-
-	/* Avoid edge cases when hovering causes icons to jump in Safari */
-	transform: translateZ(0);
-}
-
-.root.--icon-only {
-	/* Reduce the padding to make sure the button keeps the square shape */
-	--rs-p-h: calc(var(--rs-button-p-h) - var(--rs-unit-x1) / 2);
-}
-
-.root.--loading {
-	cursor: default;
-
-	& .text,
-	& .icon {
-		visibility: hidden;
-	}
-
-	& .loader {
-		display: flex;
-	}
-}
-
-.root.--rounded {
-	&,
-	&::before {
-		border-radius: var(--rs-radius-circular);
-	}
-}
-
-@responsive .--size {
-	@value small {
-		--rs-button-p-v: var(--rs-unit-x1);
-		--rs-button-p-h: var(--rs-unit-x2);
-		--rs-button-gap: var(--rs-unit-x1-5);
-		--rs-button-icon-align: var(--rs-unit-x0-5);
-		--rs-button-line-height: var(--rs-line-height-body-2);
-		--rs-button-font-size: var(--rs-font-size-body-2);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
-		--rs-button-radius: var(--rs-radius-small);
-	}
-
-	@value medium {
-		--rs-button-p-v: var(--rs-unit-x2);
-		--rs-button-p-h: var(--rs-unit-x3);
-		--rs-button-gap: var(--rs-unit-x2);
-		--rs-button-icon-align: var(--rs-unit-x0-5);
-		--rs-button-line-height: var(--rs-line-height-body-2);
-		--rs-button-font-size: var(--rs-font-size-body-2);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
-		--rs-button-radius: var(--rs-radius-medium);
-	}
-
-	@value large {
-		--rs-button-p-v: var(--rs-unit-x3);
-		--rs-button-p-h: var(--rs-unit-x4);
-		--rs-button-gap: var(--rs-unit-x2);
-		--rs-button-icon-align: var(--rs-unit-x1);
-		--rs-button-line-height: var(--rs-line-height-body-1);
-		--rs-button-font-size: var(--rs-font-size-body-1);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-1);
-		--rs-button-radius: var(--rs-radius-medium);
-	}
-
-	@value xlarge {
-		--rs-button-p-v: var(--rs-unit-x4);
-		--rs-button-p-h: var(--rs-unit-x5);
-		--rs-button-gap: var(--rs-unit-x3);
-		--rs-button-icon-align: var(--rs-unit-x1);
-		--rs-button-line-height: var(--rs-line-height-title-6);
-		--rs-button-font-size: var(--rs-font-size-title-6);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-1);
-		--rs-button-radius: var(--rs-radius-medium);
-	}
-}
-
-@responsive .--full-width {
-	@value true {
-		width: 100%;
-		text-align: center;
-	}
-
-	@value false {
-		width: auto;
+		/* In case it breaks into multiple lines – it should keep default text alignment */
 		text-align: initial;
-	}
-}
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+		font-family: var(--rs-font-family-body);
+		font-weight: var(--rs-font-weight-medium);
+		font-size: var(--rs-button-font-size);
+		line-height: var(--rs-button-line-height);
+		letter-spacing: var(--rs-button-letter-spacing);
+		box-sizing: border-box;
+		min-height: calc(var(--rs-button-line-height) + var(--rs-p-v) * 2);
+		min-width: calc(
+			var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
+		);
+		background-color: var(--rs-button-background-color);
+		color: var(--rs-button-color);
+		isolation: isolate;
 
-.root.--variant-solid {
-	--rs-button-border-width: 0px;
+		&:active {
+			transform: scale(0.98);
+		}
 
-	&.--color-neutral {
-		--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
-		--rs-button-background-color: var(--rs-color-background-neutral);
-		--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted);
-		--rs-button-color: var(--rs-color-on-background-neutral);
-	}
+		&.--highlighted {
+			z-index: var(--rs-z-index-relative);
 
-	@each $color in primary, critical, positive {
-		&.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-$(color));
-			--rs-button-background-color: var(--rs-color-background-$(color));
-			--rs-button-highlight-color: var(--rs-color-background-$(color)-highlighted);
-			--rs-button-color: var(--rs-color-on-background-$(color));
+			/* If there is a highlight element, it's used for the background color instead */
+			&:not(:has(.highlight)),
+			& .highlight {
+				background-color: var(--rs-button-highlight-color);
+			}
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(:has(.highlight)),
+			&:hover .highlight {
+				background-color: var(--rs-button-highlight-color);
+			}
 		}
 	}
 
-	&.--color-media {
-		--rs-button-group-separator-color: rgb(from var(--rs-color-white) r g b / 12%);
-		--rs-button-color: var(--rs-color-white);
-		--rs-button-background-color: rgb(from var(--rs-color-black) r g b / 28%);
-		--rs-button-highlight-color: rgb(from var(--rs-color-black) r g b / 36%);
-	}
-}
+	.text {
+		display: flex;
+		align-items: center;
+		gap: var(--rs-button-gap);
 
-.root.--variant-outline {
-	--rs-button-border-width: 1px;
+		& > :is(:first-child):not(.label, :only-child) {
+			margin-inline-start: calc(var(--rs-button-icon-align) * -1);
+		}
 
-	&::before {
-		content: "";
-		position: absolute;
-		pointer-events: none;
-		border-radius: inherit;
-		z-index: calc(var(--rs-z-index-relative) - 1);
-		inset: 0;
-		border: var(--rs-button-border-width) solid var(--rs-color-border-neutral);
-	}
-
-	&::after {
-		box-shadow: var(--rs-shadow-outline);
-	}
-
-	@each $color in neutral, primary, critical, positive {
-		&.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-neutral);
-			--rs-button-color: var(--rs-color-foreground-$(color));
-			--rs-button-background-color: var(--rs-color-background-elevation-base);
-			--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted-faded);
+		&:not(:only-child) > :is(:last-child):not(.label, :only-child) {
+			margin-inline-end: calc(var(--rs-button-icon-align) * -1);
 		}
 	}
 
-	&.--color-inherit {
-		--rs-button-group-separator-color: var(--rs-color-border-neutral);
-		--rs-button-color: currentcolor;
-		--rs-button-background-color: var(--rs-color-background-elevation-base);
-		--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted-faded);
-	}
-}
+	.icon {
+		/* Starts with 1x and then grows based on the padding size */
+		margin-inline-end: var(--rs-button-gap);
+		margin-inline-start: calc(var(--rs-button-icon-align) * -1);
 
-.root.--variant-ghost {
-	--rs-button-border-width: 0px;
-
-	transition-duration: var(--rs-duration-rapid);
-
-	@each $color in neutral, primary, critical, positive {
-		&.--color-$(color) {
-			--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
-			--rs-button-color: var(--rs-color-foreground-$(color));
-			--rs-button-background-color: transparent;
-			--rs-button-highlight-color: var(--rs-color-background-$(color)-highlighted-faded);
+		&.--icon-position-end {
+			margin-inline-end: calc(var(--rs-button-icon-align) * -1);
+			margin-inline-start: var(--rs-button-gap);
 		}
 	}
 
-	&.--color-inherit {
-		--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
-		--rs-button-color: inherit;
-		--rs-button-highlight-color: currentcolor;
-
-		& .highlight {
-			opacity: 0.08;
-		}
+	.--icon-only .icon {
+		margin: 0 !important;
 	}
-}
 
-.root.--variant-outline,
-.root.--raised {
-	&::after {
-		content: "";
-		position: absolute;
-		inset: var(--rs-button-border-width);
-		pointer-events: none;
-		border-radius: inherit;
+	.text,
+	.icon {
+		position: relative;
 		z-index: var(--rs-z-index-relative);
 	}
-}
 
-.root.--raised {
-	&::after {
-		box-shadow: var(--rs-shadow-raised-intense);
+	.loader {
+		position: absolute;
+		inset: 0;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		z-index: var(--rs-z-index-relative);
 	}
 
-	&.--variant-solid.--color-neutral,
-	&.--variant-outline {
-		&::after {
-			box-shadow: var(--rs-shadow-raised);
+	.highlight {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		border-radius: inherit;
+		background-color: transparent;
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+
+		/* Avoid edge cases when hovering causes icons to jump in Safari */
+		transform: translateZ(0);
+	}
+
+	.root.--icon-only {
+		/* Reduce the padding to make sure the button keeps the square shape */
+		--rs-p-h: calc(var(--rs-button-p-h) - var(--rs-unit-x1) / 2);
+	}
+
+	.root.--loading {
+		cursor: default;
+
+		& .text,
+		& .icon {
+			visibility: hidden;
+		}
+
+		& .loader {
+			display: flex;
 		}
 	}
 
-	&.--variant-outline {
-		background-color: var(--rs-color-background-elevation-raised);
+	.root.--rounded {
+		&,
+		&::before {
+			border-radius: var(--rs-radius-circular);
+		}
 	}
-}
 
-.root.--disabled:not(.--color-media) {
-	&,
-	&:hover,
-	&:active,
-	&.--highlighted {
-		color: var(--rs-color-foreground-disabled) !important;
-		background-color: var(--rs-color-background-disabled) !important;
-
-		& .highlight {
-			opacity: 0 !important;
+	@responsive .--size {
+		@value small {
+			--rs-button-p-v: var(--rs-unit-x1);
+			--rs-button-p-h: var(--rs-unit-x2);
+			--rs-button-gap: var(--rs-unit-x1-5);
+			--rs-button-icon-align: var(--rs-unit-x0-5);
+			--rs-button-line-height: var(--rs-line-height-body-2);
+			--rs-button-font-size: var(--rs-font-size-body-2);
+			--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+			--rs-button-radius: var(--rs-radius-small);
 		}
 
-		&.--variant-outline {
-			background-color: transparent !important;
+		@value medium {
+			--rs-button-p-v: var(--rs-unit-x2);
+			--rs-button-p-h: var(--rs-unit-x3);
+			--rs-button-gap: var(--rs-unit-x2);
+			--rs-button-icon-align: var(--rs-unit-x0-5);
+			--rs-button-line-height: var(--rs-line-height-body-2);
+			--rs-button-font-size: var(--rs-font-size-body-2);
+			--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+			--rs-button-radius: var(--rs-radius-medium);
+		}
 
-			&::before {
-				border-color: var(--rs-color-border-disabled) !important;
+		@value large {
+			--rs-button-p-v: var(--rs-unit-x3);
+			--rs-button-p-h: var(--rs-unit-x4);
+			--rs-button-gap: var(--rs-unit-x2);
+			--rs-button-icon-align: var(--rs-unit-x1);
+			--rs-button-line-height: var(--rs-line-height-body-1);
+			--rs-button-font-size: var(--rs-font-size-body-1);
+			--rs-button-letter-spacing: var(--rs-letter-spacing-body-1);
+			--rs-button-radius: var(--rs-radius-medium);
+		}
+
+		@value xlarge {
+			--rs-button-p-v: var(--rs-unit-x4);
+			--rs-button-p-h: var(--rs-unit-x5);
+			--rs-button-gap: var(--rs-unit-x3);
+			--rs-button-icon-align: var(--rs-unit-x1);
+			--rs-button-line-height: var(--rs-line-height-title-6);
+			--rs-button-font-size: var(--rs-font-size-title-6);
+			--rs-button-letter-spacing: var(--rs-letter-spacing-body-1);
+			--rs-button-radius: var(--rs-radius-medium);
+		}
+	}
+
+	@responsive .--full-width {
+		@value true {
+			width: 100%;
+			text-align: center;
+		}
+
+		@value false {
+			width: auto;
+			text-align: initial;
+		}
+	}
+
+	.root.--variant-solid {
+		--rs-button-border-width: 0px;
+
+		&.--color-neutral {
+			--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
+			--rs-button-background-color: var(--rs-color-background-neutral);
+			--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted);
+			--rs-button-color: var(--rs-color-on-background-neutral);
+		}
+
+		@each $color in primary, critical, positive {
+			&.--color-$(color) {
+				--rs-button-group-separator-color: var(--rs-color-border-$(color));
+				--rs-button-background-color: var(--rs-color-background-$(color));
+				--rs-button-highlight-color: var(--rs-color-background-$(color)-highlighted);
+				--rs-button-color: var(--rs-color-on-background-$(color));
 			}
-
-			&::after {
-				content: none !important;
-			}
 		}
 
-		&.--variant-ghost {
-			background-color: transparent !important;
+		&.--color-media {
+			--rs-button-group-separator-color: rgb(from var(--rs-color-white) r g b / 12%);
+			--rs-button-color: var(--rs-color-white);
+			--rs-button-background-color: rgb(from var(--rs-color-black) r g b / 28%);
+			--rs-button-highlight-color: rgb(from var(--rs-color-black) r g b / 36%);
 		}
 	}
-}
 
-.root.--color-media.--disabled {
-	&,
-	&:hover,
-	&:active,
-	&.--highlighted {
-		opacity: 0.6 !important;
-		background-color: var(--rs-button-background-color) !important;
-	}
-}
-
-/* Button group */
-
-.group {
-	display: inline-flex;
-	position: relative;
-
-	&:has(.--full-width) {
-		display: flex;
-	}
-
-	&:has(.--variant-outline) {
-		&::before,
-		&::after {
-			border-radius: var(--rs-radius-medium);
-		}
-
-		&:has(.--size-small) {
-			border-radius: var(--rs-radius-small);
-		}
+	.root.--variant-outline {
+		--rs-button-border-width: 1px;
 
 		&::before {
 			content: "";
 			position: absolute;
 			pointer-events: none;
-			z-index: var(--rs-z-index-relative);
+			border-radius: inherit;
+			z-index: calc(var(--rs-z-index-relative) - 1);
 			inset: 0;
-			border: 1px solid var(--rs-color-border-neutral);
-			border-radius: 6px;
+			border: var(--rs-button-border-width) solid var(--rs-color-border-neutral);
 		}
 
 		&::after {
+			box-shadow: var(--rs-shadow-outline);
+		}
+
+		@each $color in neutral, primary, critical, positive {
+			&.--color-$(color) {
+				--rs-button-group-separator-color: var(--rs-color-border-neutral);
+				--rs-button-color: var(--rs-color-foreground-$(color));
+				--rs-button-background-color: var(--rs-color-background-elevation-base);
+				--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted-faded);
+			}
+		}
+
+		&.--color-inherit {
+			--rs-button-group-separator-color: var(--rs-color-border-neutral);
+			--rs-button-color: currentcolor;
+			--rs-button-background-color: var(--rs-color-background-elevation-base);
+			--rs-button-highlight-color: var(--rs-color-background-neutral-highlighted-faded);
+		}
+	}
+
+	.root.--variant-ghost {
+		--rs-button-border-width: 0px;
+
+		transition-duration: var(--rs-duration-rapid);
+
+		@each $color in neutral, primary, critical, positive {
+			&.--color-$(color) {
+				--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
+				--rs-button-color: var(--rs-color-foreground-$(color));
+				--rs-button-background-color: transparent;
+				--rs-button-highlight-color: var(--rs-color-background-$(color)-highlighted-faded);
+			}
+		}
+
+		&.--color-inherit {
+			--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);
+			--rs-button-color: inherit;
+			--rs-button-highlight-color: currentcolor;
+
+			& .highlight {
+				opacity: 0.08;
+			}
+		}
+	}
+
+	.root.--variant-outline,
+	.root.--raised {
+		&::after {
 			content: "";
 			position: absolute;
-			inset: 1px;
+			inset: var(--rs-button-border-width);
 			pointer-events: none;
 			border-radius: inherit;
 			z-index: var(--rs-z-index-relative);
 		}
 	}
-}
 
-.group .root {
-	flex-shrink: 0;
-	width: auto;
-
-	&:active {
-		transform: scale(1);
-	}
-
-	&,
-	& .highlight {
-		border-radius: 0;
-	}
-
-	&:first-child {
-		&,
-		& .highlight {
-			border-start-start-radius: var(--rs-button-radius);
-			border-end-start-radius: var(--rs-button-radius);
+	.root.--raised {
+		&::after {
+			box-shadow: var(--rs-shadow-raised-intense);
 		}
-	}
 
-	&:last-child {
-		&,
-		& .highlight {
-			border-start-end-radius: var(--rs-button-radius);
-			border-end-end-radius: var(--rs-button-radius);
+		&.--variant-solid.--color-neutral,
+		&.--variant-outline {
+			&::after {
+				box-shadow: var(--rs-shadow-raised);
+			}
 		}
-	}
 
-	/* Reset outline border */
-	&::before {
-		border: none;
-		inset-inline-end: auto;
-		border-radius: 0;
-		transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
-	}
-
-	/* Reset outline shadow */
-	&::after {
-		content: none;
-	}
-
-	&:not(:first-child)::before {
-		content: "";
-		position: absolute;
-		width: 1px;
-		inset-block: var(--rs-unit-x1);
-		inset-inline-start: -0.5px;
-		border-radius: var(--rs-radius-circular);
-		background-color: var(--rs-button-group-separator-color);
-	}
-
-	&.--variant-outline {
-		background: transparent;
-	}
-
-	&.--full-width {
-		flex-grow: 1;
+		&.--variant-outline {
+			background-color: var(--rs-color-background-elevation-raised);
+		}
 	}
 }
 
-/* Button aligner */
+@layer rs.components.button.disabled {
+	.root.--disabled:not(.--color-media) {
+		color: var(--rs-color-foreground-disabled);
+		background-color: var(--rs-color-background-disabled);
+		cursor: not-allowed;
 
-/* Prevent buttons inside the aligned from adding parent line-height */
-.aligner {
-	line-height: 0;
+		& .highlight {
+			opacity: 0;
+		}
+
+		&.--variant-outline {
+			background-color: transparent;
+
+			&::before {
+				border-color: var(--rs-color-border-disabled);
+			}
+
+			&::after {
+				content: none;
+			}
+		}
+
+		&.--variant-ghost {
+			background-color: transparent;
+		}
+	}
+
+	.root.--color-media.--disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+		background-color: var(--rs-button-background-color);
+	}
+}
+
+@layer rs.components.button.group {
+	.group {
+		display: inline-flex;
+		position: relative;
+
+		&:has(.--full-width) {
+			display: flex;
+		}
+
+		&:has(.--variant-outline) {
+			&::before,
+			&::after {
+				border-radius: var(--rs-radius-medium);
+			}
+
+			&:has(.--size-small) {
+				border-radius: var(--rs-radius-small);
+			}
+
+			&::before {
+				content: "";
+				position: absolute;
+				pointer-events: none;
+				z-index: var(--rs-z-index-relative);
+				inset: 0;
+				border: 1px solid var(--rs-color-border-neutral);
+				border-radius: 6px;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				inset: 1px;
+				pointer-events: none;
+				border-radius: inherit;
+				z-index: var(--rs-z-index-relative);
+			}
+		}
+	}
+
+	.group .root {
+		flex-shrink: 0;
+		width: auto;
+
+		&:active {
+			transform: scale(1);
+		}
+
+		&,
+		& .highlight {
+			border-radius: 0;
+		}
+
+		&:first-child {
+			&,
+			& .highlight {
+				border-start-start-radius: var(--rs-button-radius);
+				border-end-start-radius: var(--rs-button-radius);
+			}
+		}
+
+		&:last-child {
+			&,
+			& .highlight {
+				border-start-end-radius: var(--rs-button-radius);
+				border-end-end-radius: var(--rs-button-radius);
+			}
+		}
+
+		/* Reset outline border */
+		&::before {
+			border: none;
+			inset-inline-end: auto;
+			border-radius: 0;
+			transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
+		}
+
+		/* Reset outline shadow */
+		&::after {
+			content: none;
+		}
+
+		&:not(:first-child)::before {
+			content: "";
+			position: absolute;
+			width: 1px;
+			inset-block: var(--rs-unit-x1);
+			inset-inline-start: -0.5px;
+			border-radius: var(--rs-radius-circular);
+			background-color: var(--rs-button-group-separator-color);
+		}
+
+		&.--variant-outline {
+			background: transparent;
+		}
+
+		&.--full-width {
+			flex-grow: 1;
+		}
+	}
+}
+
+@layer rs.overrides.button {
+	/* Prevent buttons inside the aligner from adding parent line-height */
+	.aligner {
+		line-height: 0;
+	}
 }

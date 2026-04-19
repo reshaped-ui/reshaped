@@ -1,3 +1,5 @@
-.root {
-	display: contents;
+@layer rs.components.context-menu.base {
+	.root {
+		display: contents;
+	}
 }

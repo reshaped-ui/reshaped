@@ -1,7 +1,9 @@
-.icon {
-	transition: transform var(--rs-duration-fast) var(--rs-easing-standard);
-}
+@layer rs.overrides.accordion {
+	.icon {
+		transition: transform var(--rs-duration-fast) var(--rs-easing-standard);
+	}
 
-.icon--active {
-	transform: rotate(180deg);
+	.icon--active {
+		transform: rotate(180deg);
+	}
 }

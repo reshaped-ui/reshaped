@@ -1,22 +1,24 @@
-.root {
-	display: contents;
-}
-
-@responsive .--hidden {
-	@value true {
-		display: none;
-
-		&.--visibility {
-			display: contents;
-			visibility: hidden;
-		}
+@layer rs.components.hidden {
+	.root {
+		display: contents;
 	}
 
-	@value false {
-		display: contents;
+	@responsive .--hidden {
+		@value true {
+			display: none;
 
-		&.--visibility {
-			visibility: visible;
+			&.--visibility {
+				display: contents;
+				visibility: hidden;
+			}
+		}
+
+		@value false {
+			display: contents;
+
+			&.--visibility {
+				visibility: visible;
+			}
 		}
 	}
 }

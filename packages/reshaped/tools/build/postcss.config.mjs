@@ -2,10 +2,12 @@ import cssNano from "cssnano";
 import eachPlugin from "postcss-each";
 import nestedPlugin from "postcss-nested";
 
+import layersPlugin from "./postcss.layers.mjs";
 import responsivePlugin from "./postcss.responsive.mjs";
 
 export default {
 	plugins: [
+		layersPlugin(),
 		responsivePlugin(),
 		eachPlugin(),
 		nestedPlugin(),

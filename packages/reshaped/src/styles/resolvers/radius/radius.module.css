@@ -1,25 +1,30 @@
-.root {
-	border-radius: var(--rs-radius);
-}
+/* Dependencies */
+@layer rs.mixins.radius, rs.mixins.bleed;
 
-@responsive .--radius {
-	@value none {
-		--rs-radius: 0;
+@layer rs.mixins.radius {
+	.root {
+		border-radius: var(--rs-radius);
 	}
 
-	@value small {
-		--rs-radius: var(--rs-radius-small);
-	}
+	@responsive .--radius {
+		@value none {
+			--rs-radius: 0;
+		}
 
-	@value medium {
-		--rs-radius: var(--rs-radius-medium);
-	}
+		@value small {
+			--rs-radius: var(--rs-radius-small);
+		}
 
-	@value large {
-		--rs-radius: var(--rs-radius-large);
-	}
+		@value medium {
+			--rs-radius: var(--rs-radius-medium);
+		}
 
-	@value circular {
-		--rs-radius: var(--rs-radius-circular);
+		@value large {
+			--rs-radius: var(--rs-radius-large);
+		}
+
+		@value circular {
+			--rs-radius: var(--rs-radius-circular);
+		}
 	}
 }

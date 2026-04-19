@@ -1,8 +1,10 @@
-.root {
-	overflow: hidden;
-	height: 0;
-}
+@layer rs.components.expandable {
+	.root {
+		overflow: hidden;
+		height: 0;
+	}
 
-.root.--animated {
-	transition: height var(--rs-duration-medium) var(--rs-easing-standard);
+	.root.--animated {
+		transition: height var(--rs-duration-medium) var(--rs-easing-standard);
+	}
 }

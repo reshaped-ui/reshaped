@@ -1,5 +1,7 @@
-@responsive [style*="--rs-justify-"] {
-	@variable --rs-justify;
+@layer rs.mixins.justify {
+	@responsive [style*="--rs-justify-"] {
+		@variable --rs-justify;
 
-	justify-content: var(--rs-justify) !important;
+		justify-content: var(--rs-justify);
+	}
 }

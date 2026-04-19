@@ -1,61 +1,65 @@
-.root {
-	display: inline;
-	text-underline-offset: calc(var(--rs-unit-x1) / 2);
-}
+@layer rs.components.link.base {
+	.root {
+		display: inline;
+		text-underline-offset: calc(var(--rs-unit-x1) / 2);
+	}
 
-.root.--color-primary {
-	color: var(--rs-color-foreground-primary);
-}
+	.root.--color-primary {
+		color: var(--rs-color-foreground-primary);
+	}
 
-.root.--color-critical {
-	color: var(--rs-color-foreground-critical);
-}
+	.root.--color-critical {
+		color: var(--rs-color-foreground-critical);
+	}
 
-.root.--color-positive {
-	color: var(--rs-color-foreground-positive);
-}
+	.root.--color-positive {
+		color: var(--rs-color-foreground-positive);
+	}
 
-.root.--color-warning {
-	color: var(--rs-color-foreground-warning);
-}
+	.root.--color-warning {
+		color: var(--rs-color-foreground-warning);
+	}
 
-.root.--color-inherit {
-	/* currentColor for color is not supported in Safari iOS */
-	color: inherit;
-}
+	.root.--color-inherit {
+		/* currentColor for color is not supported in Safari iOS */
+		color: inherit;
+	}
 
-.root.--variant-plain {
-	transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
-	opacity: 1;
+	.root.--variant-plain {
+		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
+		opacity: 1;
 
-	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(.--disabled) {
-			/* Same as in button */
-			opacity: 0.8;
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--disabled) {
+				/* Same as in button */
+				opacity: 0.8;
+			}
 		}
+	}
+
+	.root.--variant-underline {
+		text-decoration: underline;
+		text-decoration-color: currentcolor;
+		transition: text-decoration-color var(--rs-duration-fast) var(--rs-easing-standard);
+
+		@media (hover: hover) and (pointer: fine) {
+			&:hover:not(.--disabled) {
+				text-decoration-color: transparent;
+			}
+		}
+	}
+
+	.root.--with-icon {
+		display: inline-flex;
+		align-items: center;
+		gap: round(down, calc(1em / 2.5), var(--rs-unit-x1));
 	}
 }
 
-.root.--variant-underline {
-	text-decoration: underline;
-	text-decoration-color: currentcolor;
-	transition: text-decoration-color var(--rs-duration-fast) var(--rs-easing-standard);
-
-	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(.--disabled) {
-			text-decoration-color: transparent;
-		}
+@layer rs.components.link.disabled {
+	.root.--disabled {
+		text-decoration: none;
+		opacity: 1;
+		color: var(--rs-color-foreground-disabled);
 	}
-}
-
-.root.--disabled {
-	text-decoration: none;
-	opacity: 1;
-	color: var(--rs-color-foreground-disabled);
-}
-
-.root.--with-icon {
-	display: inline-flex;
-	align-items: center;
-	gap: round(down, calc(1em / 2.5), var(--rs-unit-x1));
 }

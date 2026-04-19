@@ -12,99 +12,101 @@
 }
 /* stylelint-enable plugin/browser-compat */
 
-.root {
-	overflow: auto;
-	mask-image: linear-gradient(
-		to right,
-		rgb(0 0 0 / 0%) 0,
-		rgb(0 0 0 / 100%) var(--rs-table-fade-start),
-		rgb(0 0 0 / 100%) calc(100% - var(--rs-table-fade-end)),
-		rgb(0 0 0 / 0%) 100%
-	);
-	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
-	transition-property: --rs-table-fade-start, --rs-table-fade-end;
-}
-
-.table {
-	min-width: 100%;
-	border-collapse: separate;
-	overflow: hidden;
-}
-
-.row {
-	transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
-
-	&[tabindex] {
-		cursor: pointer;
+@layer rs.components.table {
+	.root {
+		overflow: auto;
+		mask-image: linear-gradient(
+			to right,
+			rgb(0 0 0 / 0%) 0,
+			rgb(0 0 0 / 100%) var(--rs-table-fade-start),
+			rgb(0 0 0 / 100%) calc(100% - var(--rs-table-fade-end)),
+			rgb(0 0 0 / 0%) 100%
+		);
+		transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
+		transition-property: --rs-table-fade-start, --rs-table-fade-end;
 	}
 
-	[data-rs-keyboard] &:focus {
-		outline: none;
-		z-index: var(--rs-z-index-relative);
-		box-shadow: var(--rs-shadow-focus-inset);
-	}
-}
-
-.cell {
-	--rs-table-p-vertical-s: 3;
-	--rs-table-p-horizontal-s: 4;
-
-	padding: calc(var(--rs-unit-x1) * var(--rs-table-p-vertical-s))
-		calc(var(--rs-unit-x1) * var(--rs-table-p-horizontal-s));
-	text-align: start;
-	vertical-align: top;
-
-	&:not(:last-child) {
-		padding-inline-end: 0;
-	}
-}
-
-.row:not(:first-child) .cell,
-.head + .body .row:first-child .cell {
-	border-top: 1px solid var(--rs-color-border-neutral-faded);
-}
-
-@each $align in start, center, end {
-	.cell--align-$(align) {
-		text-align: $(align);
-	}
-}
-
-@each $align, $value in (start, center, end), (top, middle, bottom) {
-	.cell--valign-$(align) {
-		vertical-align: $(value);
-	}
-}
-
-.cell--width-auto {
-	white-space: nowrap;
-}
-
-.--row-highlighted {
-	background-color: var(--rs-color-background-neutral-highlighted-faded);
-}
-
-.--border-outer .table {
-	border-radius: var(--rs-radius-medium);
-	border: 1px solid var(--rs-color-border-neutral-faded);
-}
-
-.--border-column .cell {
-	&:not(:first-child) {
-		border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+	.table {
+		min-width: 100%;
+		border-collapse: separate;
+		overflow: hidden;
 	}
 
-	&:not(:last-child) {
-		padding-inline-end: calc(var(--rs-unit-x1) * var(--rs-table-p-horizontal-s));
+	.row {
+		transition: background-color var(--rs-duration-fast) var(--rs-easing-standard);
+
+		&[tabindex] {
+			cursor: pointer;
+		}
+
+		[data-rs-keyboard] &:focus {
+			outline: none;
+			z-index: var(--rs-z-index-relative);
+			box-shadow: var(--rs-outline-shadow);
+		}
 	}
-}
 
-.--fade-start,
-[dir="rtl"] .--fade-end {
-	--rs-table-fade-start: var(--rs-unit-x4);
-}
+	.cell {
+		--rs-table-p-vertical-s: 3;
+		--rs-table-p-horizontal-s: 4;
 
-.--fade-end,
-[dir="rtl"] .--fade-start {
-	--rs-table-fade-end: var(--rs-unit-x4);
+		padding: calc(var(--rs-unit-x1) * var(--rs-table-p-vertical-s))
+			calc(var(--rs-unit-x1) * var(--rs-table-p-horizontal-s));
+		text-align: start;
+		vertical-align: top;
+
+		&:not(:last-child) {
+			padding-inline-end: 0;
+		}
+	}
+
+	.row:not(:first-child) .cell,
+	.head + .body .row:first-child .cell {
+		border-top: 1px solid var(--rs-color-border-neutral-faded);
+	}
+
+	@each $align in start, center, end {
+		.cell--align-$(align) {
+			text-align: $(align);
+		}
+	}
+
+	@each $align, $value in (start, center, end), (top, middle, bottom) {
+		.cell--valign-$(align) {
+			vertical-align: $(value);
+		}
+	}
+
+	.cell--width-auto {
+		white-space: nowrap;
+	}
+
+	.--row-highlighted {
+		background-color: var(--rs-color-background-neutral-highlighted-faded);
+	}
+
+	.--border-outer .table {
+		border-radius: var(--rs-radius-medium);
+		border: 1px solid var(--rs-color-border-neutral-faded);
+	}
+
+	.--border-column .cell {
+		&:not(:first-child) {
+			border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+		}
+
+		&:not(:last-child) {
+			padding-inline-end: calc(var(--rs-unit-x1) * var(--rs-table-p-horizontal-s));
+		}
+	}
+
+	.--fade-start,
+	[dir="rtl"] .--fade-end {
+		--rs-table-fade-start: var(--rs-unit-x4);
+	}
+
+	.--fade-end,
+	[dir="rtl"] .--fade-start {
+		--rs-table-fade-end: var(--rs-unit-x4);
+	}
 }

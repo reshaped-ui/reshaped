@@ -1,4 +1,6 @@
-.root {
-	color: var(--rs-color-foreground-neutral);
-	display: contents;
+@layer rs.reset.theme {
+	.root {
+		color: var(--rs-color-foreground-neutral);
+		display: contents;
+	}
 }

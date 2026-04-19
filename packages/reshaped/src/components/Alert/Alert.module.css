@@ -1,6 +1,8 @@
-.icon {
-	/* Align the icon vertically with the text for rem fonts */
-	height: var(--rs-line-height-body-2);
-	display: flex;
-	align-items: center;
+@layer rs.components.alert {
+	.icon {
+		/* Align the icon vertically with the text for rem fonts */
+		height: var(--rs-line-height-body-2);
+		display: flex;
+		align-items: center;
+	}
 }

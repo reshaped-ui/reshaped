@@ -1,13 +1,15 @@
-@responsive .root[style*="--rs-min-w-"] {
-	@variable --rs-min-w none;
-}
-
-@responsive .--type {
-	@value literal {
-		min-width: var(--rs-min-w) !important;
+@layer rs.mixins.min-width {
+	@responsive .root[style*="--rs-min-w-"] {
+		@variable --rs-min-w none;
 	}
 
-	@value unit {
-		min-width: calc(var(--rs-min-w) * var(--rs-unit-x1)) !important;
+	@responsive .--type {
+		@value literal {
+			min-width: var(--rs-min-w);
+		}
+
+		@value unit {
+			min-width: calc(var(--rs-min-w) * var(--rs-unit-x1));
+		}
 	}
 }

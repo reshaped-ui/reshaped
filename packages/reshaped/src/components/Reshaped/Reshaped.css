@@ -1,4 +1,4 @@
-@layer rs.reset {
+@layer rs.global {
 	[data-rs-theme] {
 		--rs-outline-width: 1.5px;
 		--rs-outline: var(--rs-outline-width) solid var(--rs-color-border-primary);

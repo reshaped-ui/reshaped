@@ -1,11 +1,13 @@
-.root {
-	animation: rs-skeleton-pulse 2.5s ease-in-out infinite;
-	min-height: var(--rs-unit-x5);
-}
-
-@media (prefers-reduced-motion) {
+@layer rs.components.skeleton {
 	.root {
-		animation: none;
+		animation: rs-skeleton-pulse 2.5s ease-in-out infinite;
+		min-height: var(--rs-unit-x5);
+	}
+
+	@media (prefers-reduced-motion) {
+		.root {
+			animation: none;
+		}
 	}
 }
 

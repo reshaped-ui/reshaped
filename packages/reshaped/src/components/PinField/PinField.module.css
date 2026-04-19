@@ -1,50 +1,52 @@
-.root {
-	display: inline-flex;
-	vertical-align: top;
-}
-
-.input {
-	position: absolute;
-	font-size: 16px;
-
-	/* Keep input focusable on ios */
-	background: transparent;
-	color: transparent;
-	border: transparent;
-	outline: none;
-	caret-color: transparent;
-	vertical-align: top;
-	pointer-events: none;
-	user-select: none;
-	inset: 0;
-	opacity: 0;
-}
-
-.item {
-	cursor: text;
-	box-sizing: border-box;
-}
-
-.item--focused {
-	box-shadow: 0 0 0 1.5px var(--rs-color-border-primary) inset;
-
-	/* Only show if the value is empty */
-	& .caret:last-child {
-		display: block;
+@layer rs.components.pin-field {
+	.root {
+		display: inline-flex;
+		vertical-align: top;
 	}
-}
 
-.caret {
-	width: 1px;
-	height: var(--rs-font-size-body-2);
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	border-radius: var(--rs-radius-circular);
-	animation: rs-pin-field-caret 1s ease-out infinite;
-	display: none;
-	background: var(--rs-color-foreground-neutral-faded);
+	.input {
+		position: absolute;
+		font-size: 16px;
+
+		/* Keep input focusable on ios */
+		background: transparent;
+		color: transparent;
+		border: transparent;
+		outline: none;
+		caret-color: transparent;
+		vertical-align: top;
+		pointer-events: none;
+		user-select: none;
+		inset: 0;
+		opacity: 0;
+	}
+
+	.item {
+		cursor: text;
+		box-sizing: border-box;
+	}
+
+	.item--focused {
+		box-shadow: 0 0 0 1.5px var(--rs-color-border-primary) inset;
+
+		/* Only show if the value is empty */
+		& .caret:last-child {
+			display: block;
+		}
+	}
+
+	.caret {
+		width: 1px;
+		height: var(--rs-font-size-body-2);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: var(--rs-radius-circular);
+		animation: rs-pin-field-caret 1s ease-out infinite;
+		display: none;
+		background: var(--rs-color-foreground-neutral-faded);
+	}
 }
 
 @keyframes rs-pin-field-caret {

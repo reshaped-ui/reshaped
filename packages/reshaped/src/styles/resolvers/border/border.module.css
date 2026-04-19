@@ -1,53 +1,58 @@
-@responsive .--border {
-	@value neutral {
-		--rs-border-color: var(--rs-color-border-neutral);
-	}
+/* Dependencies */
+@layer rs.mixins.border, rs.mixins.bleed;
 
-	@value neutral-faded {
-		--rs-border-color: var(--rs-color-border-neutral-faded);
-	}
+@layer rs.mixins.border {
+	@responsive .--border {
+		@value neutral {
+			--rs-border-color: var(--rs-color-border-neutral);
+		}
 
-	@value positive {
-		--rs-border-color: var(--rs-color-border-positive);
-	}
+		@value neutral-faded {
+			--rs-border-color: var(--rs-color-border-neutral-faded);
+		}
 
-	@value positive-faded {
-		--rs-border-color: var(--rs-color-border-positive-faded);
-	}
+		@value positive {
+			--rs-border-color: var(--rs-color-border-positive);
+		}
 
-	@value warning {
-		--rs-border-color: var(--rs-color-border-warning);
-	}
+		@value positive-faded {
+			--rs-border-color: var(--rs-color-border-positive-faded);
+		}
 
-	@value warning-faded {
-		--rs-border-color: var(--rs-color-border-warning-faded);
-	}
+		@value warning {
+			--rs-border-color: var(--rs-color-border-warning);
+		}
 
-	@value critical {
-		--rs-border-color: var(--rs-color-border-critical);
-	}
+		@value warning-faded {
+			--rs-border-color: var(--rs-color-border-warning-faded);
+		}
 
-	@value critical-faded {
-		--rs-border-color: var(--rs-color-border-critical-faded);
-	}
+		@value critical {
+			--rs-border-color: var(--rs-color-border-critical);
+		}
 
-	@value primary {
-		--rs-border-color: var(--rs-color-border-primary);
-	}
+		@value critical-faded {
+			--rs-border-color: var(--rs-color-border-critical-faded);
+		}
 
-	@value primary-faded {
-		--rs-border-color: var(--rs-color-border-primary-faded);
-	}
+		@value primary {
+			--rs-border-color: var(--rs-color-border-primary);
+		}
 
-	@value disabled {
-		--rs-border-color: var(--rs-color-border-disabled);
-	}
+		@value primary-faded {
+			--rs-border-color: var(--rs-color-border-primary-faded);
+		}
 
-	@value brand {
-		--rs-border-color: var(--rs-color-brand);
-	}
+		@value disabled {
+			--rs-border-color: var(--rs-color-border-disabled);
+		}
 
-	@value transparent {
-		--rs-border-color: transparent;
+		@value brand {
+			--rs-border-color: var(--rs-color-brand);
+		}
+
+		@value transparent {
+			--rs-border-color: transparent;
+		}
 	}
 }

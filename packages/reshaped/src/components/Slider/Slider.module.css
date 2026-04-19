@@ -1,239 +1,243 @@
-.root {
-	/* Reserve additional space to keep thumb focus visible when clip is applied */
-	--rs-slider-overflow-gap: var(--rs-unit-x1);
-	--rs-slider-thumb-size: var(--rs-unit-x4);
+@layer rs.components.slider.base {
+	.root {
+		/* Reserve additional space to keep thumb focus visible when clip is applied */
+		--rs-slider-overflow-gap: var(--rs-unit-x1);
+		--rs-slider-thumb-size: var(--rs-unit-x4);
 
-	position: relative;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-	user-select: none;
-	-webkit-tap-highlight-color: transparent;
+		position: relative;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
 
-	&:has(.thumb:hover, .thumb--active, .input:focus-visible) {
-		overflow: visible;
-	}
-}
-
-.bar {
-	border-radius: var(--rs-radius-small);
-	background: var(--rs-color-background-neutral);
-	position: relative;
-	overflow: hidden;
-}
-
-.input {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	opacity: 0;
-	overflow: hidden;
-	pointer-events: none;
-}
-
-.selection {
-	position: absolute;
-	background: var(--rs-color-background-primary);
-}
-
-.tooltip {
-	--rs-slider-tooltip-translate: calc(-50% + var(--rs-slider-tooltip-offset, 0px));
-
-	position: absolute;
-	min-width: var(--rs-line-height-caption-1);
-	box-sizing: initial;
-	text-align: center;
-	opacity: 0;
-	user-select: none;
-	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: opacity, transform;
-	color: var(--rs-color-foreground-neutral);
-	background: var(--rs-color-background-elevation-overlay);
-	box-shadow: var(--rs-shadow-overlay);
-	border-radius: var(--rs-radius-small);
-	padding: calc(var(--rs-unit-x1) / 2) var(--rs-unit-x1);
-	white-space: nowrap;
-	will-change: transform;
-	pointer-events: none;
-	font-variant-numeric: tabular-nums;
-}
-
-.thumbs {
-	position: absolute;
-}
-
-.thumb {
-	position: absolute;
-
-	&::before {
-		content: "";
-		position: absolute;
-		width: var(--rs-slider-thumb-size);
-		height: var(--rs-slider-thumb-size);
-		border-radius: var(--rs-radius-circular);
-		background: var(--rs-color-background-primary);
-		box-shadow: 0 0 0 2px var(--rs-color-background-elevation-base);
-		box-sizing: border-box;
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
-		transition-property: box-shadow;
-	}
-
-	&::after {
-		content: "";
-		position: absolute;
-		width: var(--rs-unit-x7);
-		height: var(--rs-unit-x7);
-		cursor: grab;
-	}
-
-	&:hover .tooltip {
-		opacity: 1;
-	}
-
-	[data-rs-keyboard] .input:focus + &,
-	&--active {
-		&::after {
-			cursor: grabbing;
+		&:has(.thumb:hover, .thumb--active, .input:focus-visible) {
+			overflow: visible;
 		}
+	}
+
+	.bar {
+		border-radius: var(--rs-radius-small);
+		background: var(--rs-color-background-neutral);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.input {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		overflow: hidden;
+		pointer-events: none;
+	}
+
+	.selection {
+		position: absolute;
+		background: var(--rs-color-background-primary);
+	}
+
+	.tooltip {
+		--rs-slider-tooltip-translate: calc(-50% + var(--rs-slider-tooltip-offset, 0px));
+
+		position: absolute;
+		min-width: var(--rs-line-height-caption-1);
+		box-sizing: initial;
+		text-align: center;
+		opacity: 0;
+		user-select: none;
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: opacity, transform;
+		color: var(--rs-color-foreground-neutral);
+		background: var(--rs-color-background-elevation-overlay);
+		box-shadow: var(--rs-shadow-overlay);
+		border-radius: var(--rs-radius-small);
+		padding: calc(var(--rs-unit-x1) / 2) var(--rs-unit-x1);
+		white-space: nowrap;
+		will-change: transform;
+		pointer-events: none;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.thumbs {
+		position: absolute;
+	}
+
+	.thumb {
+		position: absolute;
 
 		&::before {
-			box-shadow: 0 0 0 1px var(--rs-color-background-elevation-base);
+			content: "";
+			position: absolute;
+			width: var(--rs-slider-thumb-size);
+			height: var(--rs-slider-thumb-size);
+			border-radius: var(--rs-radius-circular);
+			background: var(--rs-color-background-primary);
+			box-shadow: 0 0 0 2px var(--rs-color-background-elevation-base);
+			box-sizing: border-box;
+			transition: var(--rs-duration-fast) var(--rs-easing-standard);
+			transition-property: box-shadow;
 		}
 
-		& .tooltip {
+		&::after {
+			content: "";
+			position: absolute;
+			width: var(--rs-unit-x7);
+			height: var(--rs-unit-x7);
+			cursor: grab;
+		}
+
+		&:hover .tooltip {
 			opacity: 1;
 		}
-	}
 
-	[data-rs-keyboard] .input:focus + &::before {
-		box-shadow: var(--rs-shadow-focus);
-	}
-}
-
-.--orientation {
-	&-horizontal {
-		height: var(--rs-slider-thumb-size);
-		overflow-x: clip;
-		margin-inline: calc(var(--rs-slider-overflow-gap) * -1);
-		padding-inline: var(--rs-slider-overflow-gap);
-
-		& .bar {
-			height: var(--rs-unit-x1);
-			width: 100%;
-		}
-
-		& .selection {
-			height: 100%;
-			inset-inline-start: var(--rs-slider-selection-start);
-			width: var(--rs-slider-selection-size);
-		}
-
-		& .tooltip {
-			bottom: 100%;
-			left: 50%;
-			transform: translate(var(--rs-slider-tooltip-translate), 0);
-		}
-
-		& .thumbs {
-			inset-inline: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
-			height: 100%;
-		}
-
-		& .thumb {
-			width: 0;
-			height: 100%;
-			inset-inline-start: var(--ts-slider-thumb-position);
-
-			&::before,
+		[data-rs-keyboard] .input:focus + &,
+		&--active {
 			&::after {
-				left: 0;
-				top: 50%;
-				transform: translate(-50%, -50%);
+				cursor: grabbing;
 			}
 
-			&:hover .tooltip,
-			&--active .tooltip {
+			&::before {
+				box-shadow: 0 0 0 1px var(--rs-color-background-elevation-base);
+			}
+
+			& .tooltip {
+				opacity: 1;
+			}
+		}
+
+		[data-rs-keyboard] .input:focus + &::before {
+			box-shadow: var(--rs-outline-shadow);
+		}
+	}
+
+	.--orientation {
+		&-horizontal {
+			height: var(--rs-slider-thumb-size);
+			overflow-x: clip;
+			margin-inline: calc(var(--rs-slider-overflow-gap) * -1);
+			padding-inline: var(--rs-slider-overflow-gap);
+
+			& .bar {
+				height: var(--rs-unit-x1);
+				width: 100%;
+			}
+
+			& .selection {
+				height: 100%;
+				inset-inline-start: var(--rs-slider-selection-start);
+				width: var(--rs-slider-selection-size);
+			}
+
+			& .tooltip {
+				bottom: 100%;
+				left: 50%;
+				transform: translate(var(--rs-slider-tooltip-translate), 0);
+			}
+
+			& .thumbs {
+				inset-inline: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
+				height: 100%;
+			}
+
+			& .thumb {
+				width: 0;
+				height: 100%;
+				inset-inline-start: var(--ts-slider-thumb-position);
+
+				&::before,
+				&::after {
+					left: 0;
+					top: 50%;
+					transform: translate(-50%, -50%);
+				}
+
+				&:hover .tooltip,
+				&--active .tooltip {
+					transform: translate(var(--rs-slider-tooltip-translate), calc(var(--rs-unit-x1) * -1.5));
+				}
+			}
+
+			& .input:focus + .thumb .tooltip {
 				transform: translate(var(--rs-slider-tooltip-translate), calc(var(--rs-unit-x1) * -1.5));
 			}
 		}
 
-		& .input:focus + .thumb .tooltip {
-			transform: translate(var(--rs-slider-tooltip-translate), calc(var(--rs-unit-x1) * -1.5));
-		}
-	}
-
-	&-vertical {
-		height: 100%;
-		width: var(--rs-slider-thumb-size);
-		flex-direction: column;
-		overflow-y: clip;
-		margin-block: calc(var(--rs-slider-overflow-gap) * -1);
-		padding-block: var(--rs-slider-overflow-gap);
-
-		& .bar {
-			width: var(--rs-unit-x1);
+		&-vertical {
 			height: 100%;
-		}
+			width: var(--rs-slider-thumb-size);
+			flex-direction: column;
+			overflow-y: clip;
+			margin-block: calc(var(--rs-slider-overflow-gap) * -1);
+			padding-block: var(--rs-slider-overflow-gap);
 
-		& .selection {
-			width: 100%;
-			inset-inline-start: auto;
-			inset-block-end: var(--rs-slider-selection-start);
-			height: var(--rs-slider-selection-size);
-		}
-
-		& .tooltip {
-			top: 50%;
-			inset-inline-start: 100%;
-			transform: translate(0, var(--rs-slider-tooltip-translate));
-		}
-
-		& .thumbs {
-			inset-block: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
-			width: 100%;
-		}
-
-		& .thumb {
-			height: 0;
-			width: 100%;
-			inset-block-end: var(--ts-slider-thumb-position);
-
-			&::before,
-			&::after {
-				top: 0;
-				left: 50%;
-				transform: translate(-50%, -50%);
+			& .bar {
+				width: var(--rs-unit-x1);
+				height: 100%;
 			}
 
-			&:hover .tooltip,
-			&--active .tooltip {
+			& .selection {
+				width: 100%;
+				inset-inline-start: auto;
+				inset-block-end: var(--rs-slider-selection-start);
+				height: var(--rs-slider-selection-size);
+			}
+
+			& .tooltip {
+				top: 50%;
+				inset-inline-start: 100%;
+				transform: translate(0, var(--rs-slider-tooltip-translate));
+			}
+
+			& .thumbs {
+				inset-block: calc(var(--rs-slider-thumb-size) / 2 + var(--rs-slider-overflow-gap));
+				width: 100%;
+			}
+
+			& .thumb {
+				height: 0;
+				width: 100%;
+				inset-block-end: var(--ts-slider-thumb-position);
+
+				&::before,
+				&::after {
+					top: 0;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+
+				&:hover .tooltip,
+				&--active .tooltip {
+					transform: translate(calc(var(--rs-unit-x1) * 1.5), -50%);
+				}
+			}
+
+			& .input:focus + .thumb .tooltip {
 				transform: translate(calc(var(--rs-unit-x1) * 1.5), -50%);
 			}
-		}
-
-		& .input:focus + .thumb .tooltip {
-			transform: translate(calc(var(--rs-unit-x1) * 1.5), -50%);
 		}
 	}
 }
 
-.--disabled {
-	cursor: not-allowed;
-
-	& .bar {
-		background-color: var(--rs-color-background-disabled);
-	}
-
-	& .selection,
-	& .thumb::before {
-		background-color: var(--rs-color-foreground-disabled);
-	}
-
-	& .thumb::after {
+@layer rs.components.slider.disabled {
+	.--disabled {
 		cursor: not-allowed;
-	}
 
-	& .thumb:hover .tooltip {
-		opacity: 0;
+		& .bar {
+			background-color: var(--rs-color-background-disabled);
+		}
+
+		& .selection,
+		& .thumb::before {
+			background-color: var(--rs-color-foreground-disabled);
+		}
+
+		& .thumb::after {
+			cursor: not-allowed;
+		}
+
+		& .thumb:hover .tooltip {
+			opacity: 0;
+		}
 	}
 }
