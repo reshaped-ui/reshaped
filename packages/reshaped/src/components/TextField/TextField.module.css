@@ -55,7 +55,7 @@
 		min-height: var(--rs-text-field-min-height);
 
 		/* Take the full height to make input clickable */
-		margin: calc(var(--rs-text-field-p-v) * -1) calc(var(--rs-text-field-gap) * -1);
+		margin: calc(var(--rs-unit-x1) * -1) calc(var(--rs-text-field-gap) * -1);
 		padding-inline: var(--rs-text-field-gap);
 		padding-block: 0;
 		font-weight: var(--rs-font-weight-regular);
@@ -195,7 +195,6 @@
 		@value small {
 			--rs-text-field-gap: var(--rs-unit-x1-5);
 			--rs-text-field-radius: var(--rs-radius-small);
-			--rs-text-field-p-v: var(--rs-unit-x1);
 			--rs-text-field-p-h: var(--rs-unit-x2);
 			--rs-text-field-icon-align: var(--rs-unit-x0-5);
 			--rs-text-field-font-size: var(--rs-font-size-body-2);
@@ -208,7 +207,6 @@
 		@value medium {
 			--rs-text-field-gap: var(--rs-unit-x2);
 			--rs-text-field-radius: var(--rs-radius-medium);
-			--rs-text-field-p-v: var(--rs-unit-x2);
 			--rs-text-field-p-h: var(--rs-unit-x3);
 			--rs-text-field-icon-align: var(--rs-unit-x0-5);
 			--rs-text-field-font-size: var(--rs-font-size-body-2);
@@ -221,7 +219,6 @@
 		@value large {
 			--rs-text-field-gap: var(--rs-unit-x2);
 			--rs-text-field-radius: var(--rs-radius-medium);
-			--rs-text-field-p-v: var(--rs-unit-x3);
 			--rs-text-field-p-h: var(--rs-unit-x4);
 			--rs-text-field-icon-align: var(--rs-unit-x1);
 			--rs-text-field-font-size: var(--rs-font-size-body-1);
@@ -234,7 +231,6 @@
 		@value xlarge {
 			--rs-text-field-gap: var(--rs-unit-x3);
 			--rs-text-field-radius: var(--rs-radius-medium);
-			--rs-text-field-p-v: var(--rs-unit-x4);
 			--rs-text-field-p-h: var(--rs-unit-x5);
 			--rs-text-field-icon-align: var(--rs-unit-x1);
 			--rs-text-field-font-size: var(--rs-font-size-body-1);
@@ -253,7 +249,7 @@
 		background: transparent;
 	}
 
-	.root.--status-error {
+	.root.--status-error:not(.--variant-headless) {
 		box-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-critical) inset;
 	}
 }

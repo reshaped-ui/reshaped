@@ -1,4 +1,4 @@
-@layer rs.components.number-field {
+@layer rs.overrides.number-field {
 	.field {
 		font-variant-numeric: tabular-nums;
 	}
@@ -16,6 +16,7 @@
 		inset-block: 1px;
 		inset-inline-end: 0;
 		transition: border-color var(--rs-duration-fast) var(--rs-easing-standard);
+		margin-block: calc(var(--rs-unit-x1) * -1);
 
 		/* Both controls are disabled */
 		&:has([aria-disabled] + [aria-disabled]) {

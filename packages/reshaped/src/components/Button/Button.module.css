@@ -81,10 +81,6 @@
 		}
 	}
 
-	.--icon-only .icon {
-		margin: 0 !important;
-	}
-
 	.text,
 	.icon {
 		position: relative;
@@ -451,5 +447,9 @@
 	/* Prevent buttons inside the aligner from adding parent line-height */
 	.aligner {
 		line-height: 0;
+	}
+
+	.--icon-only .icon {
+		margin: 0;
 	}
 }

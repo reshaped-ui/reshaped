@@ -1,4 +1,4 @@
-@layer rs.components.select {
+@layer rs.components.select.base {
 	.root {
 		/* This variable is only used by Aligner */
 		--rs-p-h: var(--rs-select-p-h);
@@ -165,14 +165,7 @@
 		background: transparent;
 	}
 
-	.root.--variant-headless {
-		--rs-select-focus-border-color: transparent;
-
-		background: transparent;
-		box-shadow: none !important;
-	}
-
-	.root.--status-error:not(.--variant-headless) {
+	.root.--status-error {
 		box-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-critical) inset;
 	}
 
@@ -185,10 +178,21 @@
 			color: var(--rs-color-foreground-disabled);
 		}
 	}
+}
 
+@layer rs.overrides.select.headless {
+	.root.--variant-headless {
+		--rs-select-focus-border-color: transparent;
+
+		background: transparent;
+		box-shadow: none;
+	}
+}
+
+@layer rs.overrides.select.mobile {
 	@media (--rs-viewport-s) and (hover: none) {
 		.input {
-			font-size: var(--rs-font-size-body-1) !important;
+			font-size: var(--rs-font-size-body-1);
 		}
 	}
 }
