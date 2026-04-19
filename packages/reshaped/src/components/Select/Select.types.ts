@@ -13,6 +13,13 @@ type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 type RenderSingleValue = (args: { value: string }) => React.ReactNode;
 type RenderMultipleValues = (args: { value: string[] }) => React.ReactNode;
 
+// Use a single event type across Native and Custom Select variants so that
+// inline `onChange` callbacks can be contextually typed consistently across
+// overloads. Native fires a real `HTMLSelectElement` change event; Custom
+// never emits an event (it's always `undefined` at runtime), but the type
+// stays unified to avoid contravariant mismatches during overload resolution.
+type SelectChangeHandler<Value> = G.ChangeHandler<Value, React.ChangeEvent<HTMLSelectElement>>;
+
 export type OptionProps = Pick<
 	MenuItemProps,
 	| "attributes"
@@ -76,13 +83,13 @@ export type NativeControlledFragment = {
 	value: string;
 	defaultValue?: never;
 	renderValue?: never;
-	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
+	onChange?: SelectChangeHandler<string>;
 };
 export type NativeUncontrolledFragment = {
 	value?: never;
 	defaultValue?: string;
 	renderValue?: never;
-	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
+	onChange?: SelectChangeHandler<string>;
 };
 
 export type CustomControlledFragment =
@@ -91,14 +98,14 @@ export type CustomControlledFragment =
 			value: string;
 			defaultValue?: never;
 			renderValue?: RenderSingleValue;
-			onChange?: G.ChangeHandler<string>;
+			onChange?: SelectChangeHandler<string>;
 	  }
 	| {
 			multiple: true;
 			value: string[];
 			defaultValue?: never[];
 			renderValue: RenderMultipleValues;
-			onChange?: G.ChangeHandler<string[]>;
+			onChange?: SelectChangeHandler<string[]>;
 	  };
 export type CustomUncontrolledFragment =
 	| {
@@ -106,14 +113,14 @@ export type CustomUncontrolledFragment =
 			value?: never;
 			defaultValue?: string;
 			renderValue?: RenderSingleValue;
-			onChange?: G.ChangeHandler<string>;
+			onChange?: SelectChangeHandler<string>;
 	  }
 	| {
 			multiple: true;
 			value?: never[];
 			defaultValue?: string[];
 			renderValue: RenderMultipleValues;
-			onChange?: G.ChangeHandler<string[]>;
+			onChange?: SelectChangeHandler<string[]>;
 	  };
 
 export type NativeControlledProps = BaseFragment & NativeFragment & NativeControlledFragment;
