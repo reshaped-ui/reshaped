@@ -144,6 +144,10 @@ class TrapFocus {
 			// Focus stayed inside the wrapper, no need to refocus
 			if (this.#root.contains(currentActiveElement)) return;
 
+			// Focus was intentionally moved to another component (e.g. a portal opened from inside the trap).
+			// Only refocus when focus was dropped (fell back to body), not when another component took it.
+			if (document.activeElement && document.activeElement !== document.body) return;
+
 			const focusable = getFocusableElements(this.#root, {
 				additionalElement: includeTrigger ? trigger : undefined,
 			});
