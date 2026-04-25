@@ -7,7 +7,7 @@ import type { Attributes } from "@/types/global";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = Pick<
 	ViewProps,
-	"padding" | "bleed" | "height" | "direction" | "gap" | "align" | "justify"
+	"padding" | "bleed" | "height" | "direction" | "gap" | "align" | "justify" | "borderRadius"
 > & {
 	/** Highlight the component when component is used for an active state */
 	selected?: boolean;

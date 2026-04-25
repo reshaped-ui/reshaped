@@ -17,6 +17,7 @@ export type Component = {
 const Card: Component = forwardRef((props, ref) => {
 	const {
 		padding = 4,
+		borderRadius,
 		selected,
 		raised,
 		bleed,
@@ -35,7 +36,7 @@ const Card: Component = forwardRef((props, ref) => {
 	} = props;
 	const isActionable = !!href || !!onClick;
 	const mixinStyles = resolveMixin({
-		radius: "large",
+		radius: borderRadius || "large",
 		bleed,
 		borderColor: "neutral-faded",
 		border: true,

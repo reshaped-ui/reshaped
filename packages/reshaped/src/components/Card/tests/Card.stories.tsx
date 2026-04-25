@@ -47,6 +47,34 @@ export const padding = {
 	),
 };
 
+export const borderRadius = {
+	name: "borderRadius",
+	render: () => (
+		<Example>
+			<Example.Item title="borderRadius: small">
+				<Card borderRadius="small">
+					<Placeholder h={10} />
+				</Card>
+			</Example.Item>
+			<Example.Item title="borderRadius: medium">
+				<Card borderRadius="medium">
+					<Placeholder h={30} />
+				</Card>
+			</Example.Item>
+			<Example.Item title="borderRadius: large">
+				<Card borderRadius="large">
+					<Placeholder h={60} />
+				</Card>
+			</Example.Item>
+			<Example.Item title={["borderRadius: responsive", "[s] small", "[m+] large"]}>
+				<Card borderRadius={{ s: "small", m: "large" }}>
+					<Placeholder h={60} />
+				</Card>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const selected = {
 	name: "selected",
 	render: () => {
