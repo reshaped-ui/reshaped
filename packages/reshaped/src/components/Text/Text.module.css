@@ -147,23 +147,23 @@
 
 @responsive .--weight {
 	@value regular {
-		font-weight: var(--rs-font-weight-regular) !important;
+		font-weight: var(--rs-font-weight-regular);
 	}
 
 	@value medium {
-		font-weight: var(--rs-font-weight-medium) !important;
+		font-weight: var(--rs-font-weight-medium);
 	}
 
 	@value semibold {
-		font-weight: var(--rs-font-weight-semibold) !important;
+		font-weight: var(--rs-font-weight-semibold);
 	}
 
 	@value bold {
-		font-weight: var(--rs-font-weight-bold) !important;
+		font-weight: var(--rs-font-weight-bold);
 	}
 
 	@value extrabold {
-		font-weight: var(--rs-font-weight-extrabold) !important;
+		font-weight: var(--rs-font-weight-extrabold);
 	}
 }
 

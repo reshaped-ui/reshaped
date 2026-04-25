@@ -44,7 +44,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, 0) !important;
+			transform: translate(0, 0);
 			opacity: 1;
 		}
 	}
@@ -69,7 +69,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px)) !important;
+			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px));
 		}
 	}
 
@@ -97,7 +97,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0) !important;
+			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0);
 		}
 	}
 
@@ -125,7 +125,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0) !important;
+			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0);
 		}
 	}
 
@@ -148,7 +148,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, 0) !important;
+			transform: translate(0, 0);
 			opacity: 1;
 		}
 	}

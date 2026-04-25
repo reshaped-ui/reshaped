@@ -14,7 +14,7 @@
 	}
 
 	&:focus-within {
-		box-shadow: var(--rs-outline-shadow) !important;
+		box-shadow: var(--rs-outline-shadow);
 	}
 
 	&::after {

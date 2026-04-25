@@ -19,9 +19,6 @@
 	opacity: 0;
 	outline: none;
 	isolation: isolate;
-
-	/* Override default Tailwind reset */
-	cursor: default !important;
 }
 
 .wrapper {
