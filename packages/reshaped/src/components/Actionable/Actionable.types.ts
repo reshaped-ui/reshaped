@@ -9,8 +9,8 @@ type Attributes = AttributesType<"button"> &
 		ref?: AttributesRef;
 	};
 
-export type RenderAttributes = AttributesType<"a"> & {
-	ref: React.RefObject<HTMLAnchorElement | null>;
+export type RenderAttributes = Omit<Attributes, "ref"> & {
+	ref: React.Ref<HTMLButtonElement> & React.Ref<HTMLAnchorElement>;
 	children: React.ReactNode;
 };
 

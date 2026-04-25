@@ -2,6 +2,7 @@ import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
 import Actionable from "@/components/Actionable";
+import Button from "@/components/Button";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
 
@@ -225,6 +226,19 @@ export const as: StoryObj = {
 			</Example.Item>
 			<Example.Item title="render, disabled">
 				<Actionable disabled onClick={() => {}} render={(props) => <section {...props} />}>
+					Trigger
+				</Actionable>
+			</Example.Item>
+			<Example.Item title="render, with component">
+				<Actionable
+					disabled
+					onClick={() => {}}
+					render={({ children, ref, disabled, ...attributes }) => (
+						<Button disabled={disabled} attributes={attributes} ref={ref}>
+							{children}
+						</Button>
+					)}
+				>
 					Trigger
 				</Actionable>
 			</Example.Item>
