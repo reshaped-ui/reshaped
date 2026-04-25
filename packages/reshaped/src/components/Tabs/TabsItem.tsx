@@ -1,18 +1,17 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
-import { findParent } from "@reshaped/headless/internal";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
+import { findParent } from "@reshaped/utilities/internal";
 
 import Actionable, { type ActionableRef } from "@/components/Actionable";
 import HiddenInput from "@/components/HiddenInput";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
-
-import s from "./Tabs.module.css";
-import { useTabs } from "./TabsContext";
-
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import type * as T from "./Tabs.types";
+import { useTabs } from "./TabsContext";
+import s from "./Tabs.module.css";
 
 const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const { value, children, icon, href, disabled, attributes } = props;
@@ -31,10 +30,10 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const itemRef = React.useRef<HTMLDivElement>(null);
 	const active = tabsValue === value;
 	const visuallySelected = active && selection.status === "idle";
-	const itemClassNames = classNames(
-		s.item,
-		visuallySelected && s["item--active"],
-		disabled && s["item--disabled"]
+	const buttonClassNames = classNames(
+		s.button,
+		visuallySelected && s["button--active"],
+		disabled && s["button--disabled"]
 	);
 	const isFormControl = !!name;
 	const tabAttributes = {
@@ -89,45 +88,45 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	}, [active, updateRefs]);
 
 	return (
-		<div {...attributes} className={itemClassNames} ref={itemRef} role="presentation">
-			<Actionable
-				ref={ref}
-				href={href}
-				disableFocusRing
-				disabled={disabled}
-				onClick={!name ? handleChange : undefined}
-				className={s.button}
-				as={name ? "label" : undefined}
-				attributes={{
-					...(!isFormControl && tabAttributes),
-					"aria-controls": panelId,
-					id: buttonId,
-				}}
-			>
-				{name && (
-					<HiddenInput
-						type="radio"
-						name={name}
-						value={value}
-						checked={visuallySelected}
-						onChange={handleChange}
-						className={s.radio}
-					/>
+		<Actionable
+			ref={ref}
+			href={href}
+			disableFocusRing
+			disabled={disabled}
+			onClick={!name ? handleChange : undefined}
+			className={buttonClassNames}
+			as={name ? "label" : undefined}
+			attributes={{
+				...attributes,
+				...(!isFormControl && tabAttributes),
+				"aria-controls": panelId,
+				id: buttonId,
+			}}
+		>
+			{name && (
+				<HiddenInput
+					type="radio"
+					name={name}
+					value={value}
+					checked={visuallySelected}
+					onChange={handleChange}
+					className={s.radio}
+				/>
+			)}
+
+			<span className={s.buttonContent} ref={itemRef}>
+				{icon && <Icon svg={icon} className={s.icon} size={4} />}
+				{children && (
+					<Text
+						variant={size === "large" ? "body-1" : "body-2"}
+						weight="medium"
+						className={s.buttonText}
+					>
+						{children}
+					</Text>
 				)}
-				<span className={s.buttonContent}>
-					{icon && <Icon svg={icon} className={s.icon} size={4} />}
-					{children && (
-						<Text
-							variant={size === "large" ? "body-2" : "body-3"}
-							weight="medium"
-							className={s.buttonText}
-						>
-							{children}
-						</Text>
-					)}
-				</span>
-			</Actionable>
-		</div>
+			</span>
+		</Actionable>
 	);
 });
 

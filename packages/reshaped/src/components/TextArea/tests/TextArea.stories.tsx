@@ -22,6 +22,10 @@ export const variants = {
 	name: "variant",
 	render: () => (
 		<Example>
+			<Example.Item title="variant: outline">
+				<TextArea name="Name" placeholder="Enter your name" />
+			</Example.Item>
+
 			<Example.Item title="variant: faded">
 				<TextArea variant="faded" name="Name" placeholder="Enter your name" />
 			</Example.Item>
@@ -91,7 +95,7 @@ export const aligner = {
 		<Example>
 			<Example.Item title="aligner">
 				<View gap={2}>
-					<Text variant="featured-2">What problem are you trying to solve?</Text>
+					<Text variant="title-5">What problem are you trying to solve?</Text>
 					<TextArea.Aligner>
 						<TextArea
 							variant="headless"

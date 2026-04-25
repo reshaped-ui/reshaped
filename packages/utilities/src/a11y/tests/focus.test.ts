@@ -1,14 +1,14 @@
-import { expect, test, describe, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, test } from "vitest";
 
 import {
-	getActiveElement,
 	focusElement,
-	getFocusableElements,
-	getFocusData,
-	focusNextElement,
-	focusPreviousElement,
 	focusFirstElement,
 	focusLastElement,
+	focusNextElement,
+	focusPreviousElement,
+	getActiveElement,
+	getFocusableElements,
+	getFocusData,
 } from "../focus";
 
 describe("a11y/focus", () => {

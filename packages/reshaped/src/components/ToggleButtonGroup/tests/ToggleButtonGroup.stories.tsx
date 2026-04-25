@@ -3,10 +3,10 @@ import { expect, fn, Mock, userEvent } from "storybook/test";
 
 import ToggleButton from "@/components/ToggleButton";
 import ToggleButtonGroup from "@/components/ToggleButtonGroup";
+import { Example } from "@/utilities/storybook";
 import IconCheckmark from "@/icons/Checkmark";
 import IconMinus from "@/icons/Minus";
 import IconPlus from "@/icons/Plus";
-import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Components/ToggleButtonGroup",

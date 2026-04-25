@@ -1,0 +1,62 @@
+{
+	"name": "@reshaped/theming",
+	"version": "4.0.0-canary.17",
+	"description": "Theme generation and theming utilities for Reshaped",
+	"homepage": "https://reshaped.so",
+	"bugs": {
+		"url": "https://github.com/reshaped-ui/reshaped/issues"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Dmitry Belyaev",
+		"email": "blv.dmitry@gmail.com",
+		"url": "https://reshaped.so"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/reshaped-ui/reshaped.git",
+		"directory": "packages/theming"
+	},
+	"files": [
+		"bin/cli.js",
+		"dist/**/*",
+		"src/themes/**/*.css",
+		"src/themes/**/*.json"
+	],
+	"sideEffects": [
+		"*.css"
+	],
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./cli": {
+			"types": "./dist/cli/index.d.ts",
+			"import": "./dist/cli/index.js",
+			"default": "./dist/cli/index.js"
+		},
+		"./cli/run": {
+			"types": "./dist/cli/run.d.ts",
+			"import": "./dist/cli/run.js",
+			"default": "./dist/cli/run.js"
+		},
+		"./themes/slate/*": "./src/themes/slate/*",
+		"./themes/figma/*": "./src/themes/figma/*",
+		"./themes/fragments/twitter/*": "./src/themes/fragments/twitter/*",
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"clean": "rm -rf dist",
+		"dev": "tsc-watch --onSuccess \"resolve-tspaths\"",
+		"build": "tsc && resolve-tspaths"
+	},
+	"dependencies": {
+		"@types/culori": "4.0.1",
+		"chalk": "4.1.2",
+		"commander": "14.0.2",
+		"culori": "4.0.2"
+	}
+}

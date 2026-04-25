@@ -1,20 +1,21 @@
-import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
+import type * as G from "@/types/global";
+import type { Attributes } from "@/types/global";
 
 export type Variant =
+	| "headline-1"
+	| "headline-2"
+	| "headline-3"
 	| "title-1"
 	| "title-2"
 	| "title-3"
 	| "title-4"
 	| "title-5"
 	| "title-6"
-	| "featured-1"
-	| "featured-2"
-	| "featured-3"
 	| "body-1"
 	| "body-2"
-	| "body-3"
 	| "caption-1"
 	| "caption-2";
 

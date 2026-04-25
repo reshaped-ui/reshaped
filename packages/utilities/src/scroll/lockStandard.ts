@@ -1,5 +1,4 @@
 import { StyleCache } from "@/css";
-
 import { getScrollbarWidth } from "./helpers";
 
 const styleCache = new StyleCache();

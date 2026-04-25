@@ -1,14 +1,13 @@
 "use client";
 
-import { useIsomorphicLayoutEffect, useToggle } from "@reshaped/headless";
 import React from "react";
 import ReactDOM from "react-dom";
 
 import Theme from "@/components/Theme";
-
-import s from "./Portal.module.css";
-
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import useToggle from "@/hooks/useToggle";
 import type * as T from "./Portal.types";
+import s from "./Portal.module.css";
 
 const PortalScopeContext = React.createContext<T.Context>({} as T.Context);
 

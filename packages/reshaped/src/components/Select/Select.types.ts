@@ -1,25 +1,24 @@
 import React from "react";
+import type { ClassName } from "@reshaped/utilities";
 
 import type { ActionableProps } from "@/components/Actionable";
 import type { DropdownMenuProps } from "@/components/DropdownMenu";
 import type { IconProps } from "@/components/Icon";
 import type { MenuItemProps } from "@/components/MenuItem";
 import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type { Attributes } from "@/types/global";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
 type RenderSingleValue = (args: { value: string }) => React.ReactNode;
 type RenderMultipleValues = (args: { value: string[] }) => React.ReactNode;
 
-type NativeOption = {
-	/** Option text label */
-	label: string;
-	/** Option value used in the form submission */
-	value: string;
-	/** Disable the option from the selection */
-	disabled?: boolean;
-};
+// Use a single event type across Native and Custom Select variants so that
+// inline `onChange` callbacks can be contextually typed consistently across
+// overloads. Native fires a real `HTMLSelectElement` change event; Custom
+// never emits an event (it's always `undefined` at runtime), but the type
+// stays unified to avoid contravariant mismatches during overload resolution.
+type SelectChangeHandler<Value> = G.ChangeHandler<Value, React.ChangeEvent<HTMLSelectElement>>;
 
 export type OptionProps = Pick<
 	MenuItemProps,
@@ -31,6 +30,7 @@ export type OptionProps = Pick<
 	| "startSlot"
 	| "icon"
 	| "onClick"
+	| "size"
 > & {
 	value: string;
 };
@@ -56,6 +56,8 @@ type BaseFragment = {
 	icon?: IconProps["svg"];
 	/** Node for inserting content before the select value */
 	startSlot?: React.ReactNode;
+	/** Position of the selected checkmark icon in custom options */
+	selectedIconPosition?: "start" | "end";
 	/** Show an error state, automatically inherited when component is used inside FormControl */
 	hasError?: boolean;
 	/** Callback when the trigger is clicked */
@@ -69,25 +71,11 @@ type BaseFragment = {
 };
 
 export type CustomFragment = {
-	/** Options for the select */
-	options?: never;
-	/** Callback when the input is focused */
-	onFocus?: (e: React.FocusEvent<HTMLButtonElement>) => void;
-	/** Callback when the input is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLButtonElement>) => void;
-	// TODO: Replace / add trigger attributes in v4, currently they're passed to the Actionable component instead of the input to enable Flyout positioning
-	/** Additional attributes for the trigger element */
-	inputAttributes?: ActionableProps["attributes"];
+	/** Additional attributes for the native input element */
+	inputAttributes?: Attributes<"input">;
 } & Pick<DropdownMenuProps, "position" | "width" | "fallbackPositions" | "positionRef">;
 
 export type NativeFragment = {
-	/** Options for the select */
-	/** @deprecated Use <option /> children instead */
-	options?: NativeOption[];
-	/** Callback when the input is focused */
-	onFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
-	/** Callback when the input is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 	/** Additional attributes for the input element */
 	inputAttributes?: Attributes<"select">;
 };
@@ -96,13 +84,13 @@ export type NativeControlledFragment = {
 	value: string;
 	defaultValue?: never;
 	renderValue?: never;
-	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
+	onChange?: SelectChangeHandler<string>;
 };
 export type NativeUncontrolledFragment = {
 	value?: never;
 	defaultValue?: string;
 	renderValue?: never;
-	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLSelectElement>>;
+	onChange?: SelectChangeHandler<string>;
 };
 
 export type CustomControlledFragment =
@@ -111,14 +99,14 @@ export type CustomControlledFragment =
 			value: string;
 			defaultValue?: never;
 			renderValue?: RenderSingleValue;
-			onChange?: G.ChangeHandler<string>;
+			onChange?: SelectChangeHandler<string>;
 	  }
 	| {
 			multiple: true;
 			value: string[];
 			defaultValue?: never[];
-			renderValue?: RenderMultipleValues;
-			onChange?: G.ChangeHandler<string[]>;
+			renderValue: RenderMultipleValues;
+			onChange?: SelectChangeHandler<string[]>;
 	  };
 export type CustomUncontrolledFragment =
 	| {
@@ -126,14 +114,14 @@ export type CustomUncontrolledFragment =
 			value?: never;
 			defaultValue?: string;
 			renderValue?: RenderSingleValue;
-			onChange?: G.ChangeHandler<string>;
+			onChange?: SelectChangeHandler<string>;
 	  }
 	| {
 			multiple: true;
 			value?: never[];
 			defaultValue?: string[];
-			renderValue?: RenderMultipleValues;
-			onChange?: G.ChangeHandler<string[]>;
+			renderValue: RenderMultipleValues;
+			onChange?: SelectChangeHandler<string[]>;
 	  };
 
 export type NativeControlledProps = BaseFragment & NativeFragment & NativeControlledFragment;
@@ -152,20 +140,23 @@ export type Props =
 
 export type TriggerProps = Pick<
 	CustomControlledProps,
+	| "attributes"
+	| "className"
 	| "disabled"
+	| "hasError"
 	| "onClick"
-	| "onFocus"
-	| "onBlur"
 	| "inputAttributes"
 	| "startSlot"
 	| "icon"
 	| "size"
+	| "variant"
 	| "placeholder"
 	| "value"
 	| "name"
 	| "id"
 > & {
 	children?: React.ReactNode;
+	triggerAttributes?: ActionableProps["attributes"];
 };
 
 export type RootProps = Omit<Props, "children"> & {

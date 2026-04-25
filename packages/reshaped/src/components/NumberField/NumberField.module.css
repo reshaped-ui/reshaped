@@ -12,7 +12,7 @@
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	inset-block: 0;
+	inset-block: 1px;
 	inset-inline-end: 0;
 	transition: border-color var(--rs-duration-fast) var(--rs-easing-standard);
 
@@ -99,7 +99,7 @@
 
 	@media (hover: hover) and (pointer: fine) {
 		&:not([aria-disabled]):hover {
-			background: rgba(var(--rs-color-rgb-background-neutral), 32%);
+			background: var(--rs-color-background-neutral-highlighted-faded);
 		}
 	}
 }

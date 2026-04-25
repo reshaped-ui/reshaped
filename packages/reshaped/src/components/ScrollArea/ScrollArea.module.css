@@ -1,13 +1,13 @@
 .root {
-	--rs-scroll-area-thumb-size: calc(var(--rs-unit-x1) * 1.5);
-	--rs-scroll-area-thumb-offset: calc(var(--rs-unit-x1) / 2);
+	--rs-scroll-area-thumb-size: var(--rs-unit-x1);
+	--rs-scroll-area-thumb-offset: var(--rs-unit-x1);
 
 	overflow: hidden;
 	height: 100%;
 	position: relative;
 
 	[data-rs-keyboard] &:has(.scrollable:focus) {
-		box-shadow: var(--rs-shadow-focus);
+		outline: var(--rs-outline);
 	}
 }
 
@@ -44,15 +44,18 @@
 	position: relative;
 	height: 100%;
 	width: 100%;
+	background-color: var(--rs-color-background-neutral-faded);
+	border-radius: var(--rs-radius-circular);
+	opacity: 0;
 
 	&::before {
 		content: "";
 		display: block;
 		border-radius: var(--rs-radius-circular);
 		background: var(--rs-color-foreground-neutral);
-		opacity: 0;
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 		position: absolute;
+		opacity: 0.2;
 	}
 }
 
@@ -88,13 +91,10 @@
 	inset-inline-end: calc(var(--rs-scroll-area-thumb-size) + var(--rs-scroll-area-thumb-offset) * 2);
 }
 
-.--display-visible .thumb::before {
-	opacity: 0.2;
-}
-
 /* Only show the thumb for the current scroll area and not for the nested ones */
-.--display-hover:hover > .scrollbar .thumb::before {
-	opacity: 0.2;
+.--display-visible > .scrollbar .thumb,
+.--display-hover:hover > .scrollbar .thumb {
+	opacity: 1;
 }
 
 .--scrollbar-dragging .thumb::before,

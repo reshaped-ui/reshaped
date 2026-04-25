@@ -16,12 +16,12 @@
 	overflow: auto;
 	mask-image: linear-gradient(
 		to right,
-		rgba(0, 0, 0, 0%) 0,
-		rgba(0, 0, 0, 100%) var(--rs-table-fade-start),
-		rgba(0, 0, 0, 100%) calc(100% - var(--rs-table-fade-end)),
-		rgba(0, 0, 0, 0%) 100%
+		rgb(0 0 0 / 0%) 0,
+		rgb(0 0 0 / 100%) var(--rs-table-fade-start),
+		rgb(0 0 0 / 100%) calc(100% - var(--rs-table-fade-end)),
+		rgb(0 0 0 / 0%) 100%
 	);
-	transition: var(--rs-duration-medium) var(--rs-easing-decelerate);
+	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
 	transition-property: --rs-table-fade-start, --rs-table-fade-end;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .--row-highlighted {
-	background-color: rgba(var(--rs-color-rgb-background-neutral), 24%);
+	background-color: var(--rs-color-background-neutral-highlighted-faded);
 }
 
 .--border-outer .table {

@@ -1,22 +1,22 @@
 "use client";
 
-import { useHotkeys, useHandlerRef, useElementId } from "@reshaped/headless";
 import React from "react";
 
 import Actionable from "@/components/Actionable";
 import { useFormControl } from "@/components/FormControl";
 import Icon from "@/components/Icon";
 import TextField, { TextFieldProps } from "@/components/TextField";
+import useElementId from "@/hooks/useElementId";
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useHotkeys from "@/hooks/useHotkeys";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 import * as keys from "@/constants/keys";
 import IconChevronDown from "@/icons/ChevronDown";
 import IconChevronUp from "@/icons/ChevronUp";
 import IconMinus from "@/icons/Minus";
 import IconPlus from "@/icons/Plus";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./NumberField.module.css";
-
 import type * as T from "./NumberField.types";
+import s from "./NumberField.module.css";
 
 const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	const {

@@ -1,6 +1,5 @@
 import path from "path";
 import { fileURLToPath } from "url";
-
 import postcssGlobalData from "@csstools/postcss-global-data";
 import customMediaPlugin from "postcss-custom-media";
 
@@ -13,7 +12,7 @@ export default {
 	plugins: [
 		...baseConfig.plugins,
 		postcssGlobalData({
-			files: [path.resolve(__dirname, "../packages/reshaped/src/themes/reshaped/media.css")],
+			files: [path.resolve(__dirname, "../packages/reshaped/src/themes/slate/media.css")],
 		}),
 		customMediaPlugin(),
 	],

@@ -1,12 +1,10 @@
 "use client";
 
 import Text from "@/components/Text";
-
 import { useFormControlPrivate } from "./FormControl.context";
-import s from "./FormControl.module.css";
-import { getCaptionId } from "./FormControl.utilities";
-
 import type * as T from "./FormControl.types";
+import { getCaptionId } from "./FormControl.utilities";
+import s from "./FormControl.module.css";
 
 const FormControlCaption: React.FC<T.PrivateCaptionProps> = (props) => {
 	const { children, variant, disabled } = props;
@@ -18,7 +16,7 @@ const FormControlCaption: React.FC<T.PrivateCaptionProps> = (props) => {
 	return (
 		<Text
 			as="span"
-			variant={size === "large" ? "body-3" : "caption-1"}
+			variant={size === "large" ? "body-2" : "caption-1"}
 			color={disabled && !variant ? "disabled" : color}
 			attributes={{ id, role: color ? "alert" : undefined, "aria-disabled": disabled, ref }}
 			className={s.caption}

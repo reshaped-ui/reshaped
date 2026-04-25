@@ -1,8 +1,7 @@
 import React from "react";
+import type { ClassName } from "@reshaped/utilities";
 
 import * as G from "@/types/global";
-
-import type { ClassName } from "@reshaped/headless";
 
 /* Values */
 type Unit = number;
@@ -27,6 +26,13 @@ export type Justify = "start" | "center" | "end" | "space-between";
 export type Align = "start" | "center" | "end" | "stretch" | "baseline";
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
+export type Shadow =
+	| "outline"
+	| "outline-intense"
+	| "raised"
+	| "raised-intense"
+	| "overlay"
+	| "overlay-intense";
 
 export type Border = boolean;
 export type BorderColor =
@@ -70,6 +76,8 @@ export type Mixin = {
 	borderEnd?: G.Responsive<Border>;
 	borderInline?: G.Responsive<Border>;
 	borderBlock?: G.Responsive<Border>;
+
+	shadow?: Shadow;
 
 	width?: G.Responsive<Width>;
 	height?: G.Responsive<Height>;

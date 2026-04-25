@@ -1,8 +1,7 @@
-import { useHotkeys } from "@reshaped/headless";
 import React from "react";
 
+import useHotkeys from "@/hooks/useHotkeys";
 import * as keys from "@/constants/keys";
-
 import { getFocusableDates } from "./Calendar.utils";
 
 const useCalendarKeyboardNavigation = (props: {
@@ -34,7 +33,7 @@ const useCalendarKeyboardNavigation = (props: {
 
 			if (!currentDateString) return;
 
-			const [year, month, date] = currentDateString?.split("-").map(Number) as number[];
+			const [year, month, date] = currentDateString.split("-").map(Number);
 			let nextDate;
 
 			if (date) {

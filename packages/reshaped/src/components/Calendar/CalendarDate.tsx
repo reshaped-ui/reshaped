@@ -1,13 +1,11 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
-
-import s from "./Calendar.module.css";
-import { getLocalISODate } from "./Calendar.utils";
-
 import type * as T from "./Calendar.types";
+import { getLocalISODate } from "./Calendar.utils";
+import s from "./Calendar.module.css";
 
 const CalendarDate: React.FC<T.DateProps> = (props) => {
 	const {
@@ -92,8 +90,18 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 		onDateHover(date);
 	};
 
-	const handleMouseLeave = () => {
+	const handleInteractionEnd = (relatedTarget: EventTarget | null) => {
+		// If mouse moved to another date cell, it will be handled on mouse enter
+		if (relatedTarget instanceof Element && relatedTarget.closest("[data-rs-date]")) return;
 		onDateHoverEnd(date);
+	};
+
+	const handleMouseLeave = (e: React.MouseEvent<HTMLTableCellElement>) => {
+		handleInteractionEnd(e.relatedTarget);
+	};
+
+	const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+		handleInteractionEnd(e.relatedTarget);
 	};
 
 	const handleFocus = () => {
@@ -102,10 +110,14 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 	};
 
 	return (
-		<td className={dateClassNames} role={disabled ? "presentation" : "gridcell"}>
+		<td
+			className={dateClassNames}
+			role={disabled ? "presentation" : "gridcell"}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
 			<Actionable
 				fullWidth
-				insetFocus
 				className={s["cell-button"]}
 				disabled={disabled}
 				onClick={handleClick}
@@ -118,10 +130,8 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 						: date.toLocaleDateString("en-us", { month: "long", day: "numeric", weekday: "long" }),
 					"aria-checked": !!selection,
 					"data-rs-date": getLocalISODate({ date }),
-					onMouseEnter: handleMouseEnter,
-					onMouseLeave: handleMouseLeave,
 					onFocus: handleFocus,
-					onBlur: handleMouseLeave,
+					onBlur: handleBlur,
 				}}
 			>
 				{renderValue ? renderValue({ date }) : date.getDate()}

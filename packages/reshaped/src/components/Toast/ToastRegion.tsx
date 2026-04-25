@@ -1,22 +1,30 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
-import { focusableSelector } from "@reshaped/headless/internal";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
+import { focusableSelector } from "@reshaped/utilities/internal";
 
 import ToastContext from "./Toast.context";
-import s from "./Toast.module.css";
 import * as T from "./Toast.types";
 import ToastContainer from "./ToastContainer";
+import s from "./Toast.module.css";
 
 const ToastRegion: React.FC<T.RegionProps> = (props) => {
 	const { position, nested } = props;
-	const { queues, options } = React.useContext(ToastContext);
+	const { queues } = React.useContext(ToastContext);
 	const [inspecting, setInspecting] = React.useState(false);
 	const ignoreHoverRef = React.useRef(false);
 	const rootRef = React.useRef<HTMLUListElement>(null);
 	const queue = queues[position];
-	const { width, expanded } = options?.[position] || {};
+	const collapsedWidth = React.useMemo(() => {
+		for (let index = queue.length - 1; index >= 0; index -= 1) {
+			const item = queue[index];
+			if (item.status === "exiting") continue;
+			return item.toastProps.width;
+		}
+
+		return undefined;
+	}, [queue]);
 	const regionClassNames = classNames(
 		s.region,
 		s[`region--position-${position}`],
@@ -66,7 +74,7 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 
 	return (
 		// We only use onClick for touch devices since touchend is not supported
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+		// oxlint-disable-next-line jsx_a11y/no-noninteractive-element-interactions, jsx_a11y/click-events-have-key-events
 		<ul
 			role="region"
 			aria-live="polite"
@@ -76,11 +84,9 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 			onClick={handleClick}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			style={{ width }}
 		>
 			{queue.map((data, index) => {
 				const visibleIndex = filteredLength - index + hiddenCount - 1;
-				// eslint-disable-next-line react-hooks/immutability
 				if (data.status !== "entered") hiddenCount += 1;
 
 				return (
@@ -88,7 +94,8 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 						key={data.id}
 						{...data}
 						index={visibleIndex}
-						inspected={inspecting || !!expanded}
+						inspected={inspecting}
+						collapsedWidth={collapsedWidth}
 					/>
 				);
 			})}

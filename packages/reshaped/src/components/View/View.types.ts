@@ -1,7 +1,9 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type * as TStyles from "@/styles/types";
 import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
-import type React from "react";
+import type { Attributes } from "@/types/global";
 
 type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto";
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";
@@ -64,9 +66,9 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 		| "critical"
 		| "critical-faded"
 		| "positive"
+		| "positive-faded"
 		| "warning"
 		| "warning-faded"
-		| "positive-faded"
 		| "primary"
 		| "primary-faded"
 		| "elevation-base"
@@ -112,7 +114,7 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	/** z-index style */
 	zIndex?: number;
 	/** Shadow style, based on the shadow tokens */
-	shadow?: "raised" | "overlay";
+	shadow?: TStyles.Shadow;
 	/** Overflow style */
 	overflow?: "hidden" | "auto";
 	/** Add transition for the properties */
@@ -149,7 +151,6 @@ export type ItemProps<TagName extends keyof React.JSX.IntrinsicElements | void =
 export type RenderItem = (args: {
 	className?: string;
 	// Using any in favor of resolving the props in runtime where we don't know their props definitions
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	child: any;
 	index: number;
 }) => React.ReactNode;

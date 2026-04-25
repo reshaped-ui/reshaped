@@ -1,14 +1,14 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect, useHandlerRef } from "@reshaped/headless";
-import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React, { forwardRef } from "react";
+import { classNames } from "@reshaped/utilities";
+import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import { resolveMixin } from "@/styles/mixin";
-
-import s from "./ScrollArea.module.css";
-
 import type * as T from "./ScrollArea.types";
+import s from "./ScrollArea.module.css";
 
 const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 	const { ratio, position, vertical, onThumbMove } = props;
@@ -110,6 +110,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
 	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
 	const scrollableRef = React.useRef<HTMLDivElement>(null);
+	const contentRef = React.useRef<HTMLDivElement>(null);
 	const rootRef = React.useRef<HTMLDivElement>(null);
 	const mixinStyles = resolveMixin({ height, maxHeight });
 	const rootClassNames = classNames(
@@ -117,7 +118,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
 		className
 	);
-	const contentClassNames = classNames(s.content, mixinStyles.classNames);
+	const scrollableClassNames = classNames(s.scrollable, mixinStyles.classNames);
 
 	const updateScroll = React.useCallback(() => {
 		const scrollableEl = scrollableRef.current;
@@ -176,19 +177,24 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	}, [updateScroll]);
 
 	useIsomorphicLayoutEffect(() => {
-		const rootEl = rootRef.current;
-		if (!rootEl) return;
+		const contentEl = contentRef.current;
+		if (!contentEl) return;
 
 		const observer = new ResizeObserver(updateScroll);
 
-		observer.observe(rootEl);
+		observer.observe(contentEl);
 		return () => observer.disconnect();
 	}, [updateScroll]);
 
 	return (
 		<div {...attributes} ref={rootRef} className={rootClassNames}>
-			<div className={s.scrollable} ref={scrollableRef} onScroll={handleScroll}>
-				<div className={contentClassNames} style={{ ...mixinStyles.variables }}>
+			<div
+				className={scrollableClassNames}
+				ref={scrollableRef}
+				onScroll={handleScroll}
+				style={{ ...mixinStyles.variables }}
+			>
+				<div className={s.content} ref={contentRef}>
 					{children}
 				</div>
 			</div>

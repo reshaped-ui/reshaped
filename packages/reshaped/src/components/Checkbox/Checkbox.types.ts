@@ -1,6 +1,8 @@
-import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
+import type * as G from "@/types/global";
+import type { Attributes } from "@/types/global";
 
 type BaseProps = {
 	/** Node for inserting the label */
@@ -21,10 +23,6 @@ type BaseProps = {
 	size?: G.Responsive<"small" | "medium" | "large">;
 	/** Callback when the component selection changes */
 	onChange?: G.ChangeHandler<boolean>;
-	/** Callback when the component is focused */
-	onFocus?: (e: React.FocusEvent) => void;
-	/** Callback when the component is blurred */
-	onBlur?: (e: React.FocusEvent) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Additional attributes for the root element */

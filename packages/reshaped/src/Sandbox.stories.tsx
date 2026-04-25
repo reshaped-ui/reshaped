@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-import Card from "@/components/Card";
-import FormControl from "@/components/FormControl";
-import HiddenInput from "@/components/HiddenInput";
 import Image from "@/components/Image";
-import RadioGroup from "@/components/RadioGroup";
-import Text from "@/components/Text";
 import View from "@/components/View";
+import Tabs from "./components/Tabs";
 
 export default {
 	title: "Sandbox",
@@ -34,39 +30,15 @@ export const preview = () => {
 };
 
 const Component = () => {
-	const [value, setValue] = useState<string>("");
-
-	const options = [
-		{
-			value: "card",
-			label: "Card",
-		},
-		{
-			value: "apple-pay",
-			label: "Apple Pay",
-		},
-		{
-			value: "PayPal",
-			label: "PayPal",
-		},
-	];
-
 	return (
-		<FormControl group>
-			<FormControl.Label>Payment method</FormControl.Label>
-
-			<RadioGroup name="payment-method" value={value} onChange={(args) => setValue(args.value)}>
-				<View gap={2} direction="row">
-					{options.map((option) => (
-						<View.Item grow>
-							<Card as="label" selected={value === option.value}>
-								<HiddenInput type="radio" name="test-name" value={option.value} />
-								<Text>{option.label}</Text>
-							</Card>
-						</View.Item>
-					))}
-				</View>
-			</RadioGroup>
-		</FormControl>
+		<View align="center" justify="center" height="100px">
+			<Tabs variant="pills-raised" defaultValue="0">
+				<Tabs.List>
+					<Tabs.Item value="0">Themes</Tabs.Item>
+					<Tabs.Item value="1">Components</Tabs.Item>
+					<Tabs.Item value="2">Templates</Tabs.Item>
+				</Tabs.List>
+			</Tabs>
+		</View>
 	);
 };

@@ -1,9 +1,8 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import View from "@/components/View";
-
-import s from "./Skeleton.module.css";
 import * as T from "./Skeleton.types";
+import s from "./Skeleton.module.css";
 
 const Skeleton: React.FC<T.Props> = (props) => {
 	const { borderRadius = "small", width, height, className, attributes } = props;
@@ -11,7 +10,7 @@ const Skeleton: React.FC<T.Props> = (props) => {
 
 	return (
 		<View
-			backgroundColor="disabled"
+			backgroundColor="neutral-faded"
 			width={width}
 			height={height}
 			borderRadius={borderRadius}

@@ -1,4 +1,4 @@
-import { expect, test, describe, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, test } from "vitest";
 
 import TrapScreenReader from "../TrapScreenReader";
 

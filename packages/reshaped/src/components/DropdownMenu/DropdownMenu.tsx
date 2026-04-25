@@ -1,18 +1,17 @@
 "use client";
 
-import { classNames, useHotkeys, useRTL } from "@reshaped/headless";
 import React from "react";
 
 import { useFlyoutContext } from "@/components/Flyout";
 import Icon from "@/components/Icon";
 import MenuItem from "@/components/MenuItem";
 import Popover from "@/components/Popover";
+import useHotkeys from "@/hooks/useHotkeys";
+import useRTL from "@/hooks/useRTL";
 import * as keys from "@/constants/keys";
 import IconChevronRight from "@/icons/ChevronRight";
-
-import s from "./DropdownMenu.module.css";
-
 import type * as T from "./DropdownMenu.types";
+import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
 const DropdownMenuSubTriggerContext = React.createContext<boolean>(false);
@@ -23,7 +22,6 @@ const DropdownMenu: React.FC<T.Props> = (props) => {
 		position = "bottom-start",
 		triggerType = "click",
 		trapFocusMode = "action-menu",
-		borderRadius = "small",
 		...popoverProps
 	} = props;
 
@@ -31,10 +29,9 @@ const DropdownMenu: React.FC<T.Props> = (props) => {
 		<Popover
 			{...popoverProps}
 			position={position}
-			padding={0}
+			padding={1}
 			trapFocusMode={trapFocusMode}
 			triggerType={triggerType}
-			borderRadius={borderRadius}
 			disableHideAnimation={triggerType !== "hover"}
 		>
 			{children}
@@ -59,7 +56,6 @@ export const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 			ref: attributes?.ref as React.RefObject<HTMLDivElement | null>,
 		}
 	);
-	const contentClassName = classNames(s.menu, className);
 
 	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		/**
@@ -72,7 +68,7 @@ export const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 
 	return (
 		<Popover.Content
-			className={contentClassName}
+			className={className}
 			attributes={{ ...attributes, ref, onClick: handleClick }}
 		>
 			{children}

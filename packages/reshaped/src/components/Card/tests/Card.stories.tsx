@@ -1,7 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
-import React from "react";
+import { useState } from "react";
 import { expect, fn, userEvent } from "storybook/test";
 
+import Button from "@/components/Button";
 import Card from "@/components/Card";
 import { Example, Placeholder } from "@/utilities/storybook";
 
@@ -46,25 +47,57 @@ export const padding = {
 	),
 };
 
-export const selected = {
-	name: "selected",
+export const borderRadius = {
+	name: "borderRadius",
 	render: () => (
 		<Example>
-			<Example.Item title="selected">
-				<Card selected>
-					<Placeholder />
+			<Example.Item title="borderRadius: small">
+				<Card borderRadius="small">
+					<Placeholder h={10} />
+				</Card>
+			</Example.Item>
+			<Example.Item title="borderRadius: medium">
+				<Card borderRadius="medium">
+					<Placeholder h={30} />
+				</Card>
+			</Example.Item>
+			<Example.Item title="borderRadius: large">
+				<Card borderRadius="large">
+					<Placeholder h={60} />
+				</Card>
+			</Example.Item>
+			<Example.Item title={["borderRadius: responsive", "[s] small", "[m+] large"]}>
+				<Card borderRadius={{ s: "small", m: "large" }}>
+					<Placeholder h={60} />
 				</Card>
 			</Example.Item>
 		</Example>
 	),
 };
 
-export const elevated = {
-	name: "elevated",
+export const selected = {
+	name: "selected",
+	render: () => {
+		const [selected, setSelected] = useState(true);
+
+		return (
+			<Example title={<Button onClick={() => setSelected(!selected)}>Toggle selecion</Button>}>
+				<Example.Item title="selected">
+					<Card selected={selected}>
+						<Placeholder />
+					</Card>
+				</Example.Item>
+			</Example>
+		);
+	},
+};
+
+export const raised = {
+	name: "raised",
 	render: () => (
 		<Example>
-			<Example.Item title="elevated">
-				<Card elevated>
+			<Example.Item title="raised">
+				<Card raised>
 					<Placeholder />
 				</Card>
 			</Example.Item>
@@ -90,12 +123,19 @@ export const bleed = {
 	),
 };
 
-export const height = {
-	name: "height",
+export const layout = {
+	name: "height, direction, gap, align, justify",
 	render: () => (
 		<Example>
 			<Example.Item title="height: 200px">
 				<Card height="200px" />
+			</Example.Item>
+
+			<Example.Item title="direction: row, gap: 4, align: center, justify: space-between">
+				<Card direction="row" gap={4} align="center" justify="space-between">
+					<Placeholder />
+					<Placeholder h={100} />
+				</Card>
 			</Example.Item>
 		</Example>
 	),

@@ -2,9 +2,8 @@
 
 import React from "react";
 
-import CalendarControlled from "./CalendarControlled";
-
 import type * as T from "./Calendar.types";
+import CalendarControlled from "./CalendarControlled";
 
 const CalendarUncontrolled: React.FC<T.UncontrolledProps & T.BaseProps> = (props) => {
 	const { onChange, defaultValue, range, ...controlledProps } = props;

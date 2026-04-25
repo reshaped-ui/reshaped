@@ -7,11 +7,10 @@
  * on the --rs-p, --rs-p-v and --rs-p-h css variables
  */
 
-import { classNames } from "@reshaped/headless";
-
-import s from "./Aligner.module.css";
+import { classNames } from "@reshaped/utilities";
 
 import type * as T from "./Aligner.types";
+import s from "./Aligner.module.css";
 
 const Aligner: React.FC<T.Props> = (props) => {
 	const { side: passedSide = "all", children, className, attributes } = props;

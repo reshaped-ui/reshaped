@@ -1,14 +1,14 @@
-import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { fireEvent, fn, expect } from "storybook/test";
+import { expect, fireEvent, fn } from "storybook/test";
 
 import Button from "@/components/Button";
 import View from "@/components/View";
-import useDrag from "@/hooks/_private/useDrag";
+import useDrag from "@/hooks/_internal/useDrag";
+import useToggle from "@/hooks/useToggle";
 
 export default {
-	title: "Internal/useDrag",
+	title: "Hooks/Internal/useDrag",
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},

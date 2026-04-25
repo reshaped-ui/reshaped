@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { positions, defaultContextData } from "./Toast.constants";
+import { defaultContextData, positions } from "./Toast.constants";
 import ToastContext from "./Toast.context";
 import * as T from "./Toast.types";
 import ToastRegion from "./ToastRegion";
@@ -20,7 +20,14 @@ const toastReducer: T.Reducer = (state, action) => {
 
 			return {
 				...state,
-				[position]: [...state[position], { id: action.payload.id, toastProps, status: "entering" }],
+				[position]: [
+					...state[position],
+					{
+						id: action.payload.id,
+						toastProps: { ...toastProps, width: "short" },
+						status: "entering",
+					},
+				],
 			};
 		}
 
@@ -65,7 +72,7 @@ const toastReducer: T.Reducer = (state, action) => {
 };
 
 const ToastProvider: React.FC<T.ProviderProps> = (props) => {
-	const { children, options } = props;
+	const { children } = props;
 	const toast = useToast();
 	const id = React.useId();
 	const [data, dispatch] = React.useReducer(toastReducer, defaultContextData.queues);
@@ -98,9 +105,8 @@ const ToastProvider: React.FC<T.ProviderProps> = (props) => {
 			hide,
 			remove,
 			inspecting: false,
-			options,
 		}),
-		[data, show, hide, add, remove, id, options]
+		[data, show, hide, add, remove, id]
 	);
 
 	return (

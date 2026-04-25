@@ -1,10 +1,12 @@
 pre-commit:
   parallel: true
   commands:
-    eslint:
-      glob: "*.{ts,tsx}"
-      run: yarn lint:js --fix {staged_files} && git add {staged_files}
-    stylelint:
-      glob: "*.css"
-      run: yarn lint:css --fix {staged_files} && git add {staged_files}
-
+    lint:js:
+      glob: "packages/**/*.{ts,tsx}"
+      run: pnpm -s oxlint --fix --deny-warnings {staged_files} && git add {staged_files}
+    lint:css:
+      glob: "packages/**/*.css"
+      run: pnpm -s stylelint --fix --max-warnings 0 {staged_files} && git add {staged_files}
+    lint:format:
+      glob: "packages/**/*.{js,jsx,ts,tsx,css,json,md,yml,yaml}"
+      run: pnpm -s oxfmt {staged_files} && git add {staged_files}

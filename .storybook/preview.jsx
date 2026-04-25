@@ -1,15 +1,15 @@
 import React from "react";
-import { useRTL } from "../packages/headless";
-import Reshaped from "../packages/reshaped/src/components/Reshaped";
+
 import Button from "../packages/reshaped/src/components/Button";
-import View from "../packages/reshaped/src/components/View";
-import Text from "../packages/reshaped/src/components/Text";
-import Hidden from "../packages/reshaped/src/components/Hidden";
 import DropdownMenu from "../packages/reshaped/src/components/DropdownMenu";
+import Hidden from "../packages/reshaped/src/components/Hidden";
 import Icon from "../packages/reshaped/src/components/Icon";
+import Reshaped from "../packages/reshaped/src/components/Reshaped";
+import Text from "../packages/reshaped/src/components/Text";
 import { useTheme } from "../packages/reshaped/src/components/Theme";
+import View from "../packages/reshaped/src/components/View";
+import useRTL from "../packages/reshaped/src/hooks/useRTL";
 import IconCheckmark from "../packages/reshaped/src/icons/Checkmark";
-import "../packages/reshaped/src/themes/reshaped/theme.css";
 import "../packages/reshaped/src/themes/slate/theme.css";
 import "../packages/reshaped/src/themes/figma/theme.css";
 import "../packages/reshaped/src/themes/fragments/twitter/theme.css";
@@ -61,7 +61,7 @@ const ThemeSwitch = () => {
 				Toggle mode
 			</Button>
 
-			<DropdownMenu position="top-end" forcePosition>
+			<DropdownMenu position="top-end" fallbackPositions={[]}>
 				<DropdownMenu.Trigger>
 					{(attributes) => (
 						<Button attributes={attributes} size="small">
@@ -78,16 +78,7 @@ const ThemeSwitch = () => {
 					>
 						Slate
 					</DropdownMenu.Item>
-					<DropdownMenu.Item
-						onClick={() => handleThemeChange("reshaped")}
-						endSlot={
-							theme === "reshaped" ? (
-								<Icon svg={IconCheckmark} color="primary" size={5} />
-							) : undefined
-						}
-					>
-						Reshaped
-					</DropdownMenu.Item>
+
 					<DropdownMenu.Item
 						onClick={() => handleThemeChange("figma")}
 						endSlot={
@@ -110,7 +101,6 @@ const reshapedDecorator = (Story, { parameters }) => {
 			<Reshaped
 				defaultTheme={localStorage.getItem("__reshaped-theme") || "slate"}
 				defaultColorMode={localStorage.getItem("__reshaped-mode") || "dark"}
-				toastOptions={{ "bottom-start": { width: "440px", expanded: true } }}
 			>
 				<View paddingBottom={10}>
 					<Story />

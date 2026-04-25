@@ -1,6 +1,5 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig, mergeConfig } from "vitest/config";
@@ -26,6 +25,8 @@ export default mergeConfig(
 					],
 					test: {
 						name: "storybook",
+						// Storybook merges `root` to the repo root; keep test discovery scoped to this package.
+						dir: dirname,
 						// Enable browser mode
 						browser: {
 							enabled: true,
@@ -37,7 +38,6 @@ export default mergeConfig(
 						coverage: {
 							provider: "istanbul",
 						},
-						setupFiles: ["../../.storybook/vitest.setup.ts"],
 					},
 				},
 				{

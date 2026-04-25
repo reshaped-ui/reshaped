@@ -1,4 +1,4 @@
-import { expect, test, describe, beforeEach, vi, afterAll } from "vitest";
+import { afterAll, beforeEach, describe, expect, test, vi } from "vitest";
 
 import isRTL from "../isRTL";
 

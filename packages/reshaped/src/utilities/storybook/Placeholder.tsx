@@ -18,7 +18,7 @@ const Placeholder: React.FC<Props> = (props) => {
 				height: h,
 				minWidth: minW,
 				padding: "var(--rs-unit-x2)",
-				background: "rgba(var(--rs-color-rgb-background-neutral), 0.32)",
+				background: "var(--rs-color-background-neutral-faded)",
 				boxSizing: "border-box",
 				display: "flex",
 				alignItems: "center",

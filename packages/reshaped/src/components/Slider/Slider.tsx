@@ -1,7 +1,6 @@
+import type * as T from "./Slider.types";
 import SliderControlled from "./SliderControlled";
 import SliderUncontrolled from "./SliderUncontrolled";
-
-import type * as T from "./Slider.types";
 
 const Slider: React.FC<T.Props> = (props) => {
 	const { min = 0, max = 100, ...rest } = props;

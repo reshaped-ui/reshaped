@@ -1,15 +1,14 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Portal from "@/components/_private/Portal";
-
-import { useFlyoutContext, ContentProvider } from "./Flyout.context";
-import s from "./Flyout.module.css";
-import cooldown from "./utilities/cooldown";
-
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import { ContentProvider, useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
+import cooldown from "./utilities/cooldown";
+import s from "./Flyout.module.css";
 
 const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const { children, className, attributes } = props;
@@ -26,6 +25,8 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		handleContentMouseUp,
 		contentClassName,
 		contentAttributes,
+		scrollableClassName,
+		scrollableAttributes,
 		contentMaxHeight,
 		contentMaxWidth,
 		contentZIndex,
@@ -37,10 +38,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	} = useFlyoutContext();
 	const { status, position } = flyout;
 	const [mounted, setMounted] = React.useState(false);
-
 	const shadowRootRef = React.useRef<ShadowRoot | null>(null);
-	const rootNode = triggerElRef?.current?.getRootNode();
-	if (rootNode instanceof ShadowRoot) shadowRootRef.current = rootNode;
 
 	useIsomorphicLayoutEffect(() => {
 		setMounted(true);
@@ -48,8 +46,11 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 
 	if (status === "idle" || !mounted) return null;
 
-	const rootClassNames = classNames(
-		s.content,
+	const rootNode = triggerElRef?.current?.getRootNode();
+	if (rootNode instanceof ShadowRoot) shadowRootRef.current = rootNode;
+
+	const positionerClassNames = classNames(
+		s.positioner,
 		triggerType === "hover" && s["--hover"],
 		status === "visible" && s["--visible"],
 		// animating only when we're opening the first flyout or closing the last flyout within the same cooldown
@@ -60,9 +61,19 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		width === "trigger" && s["--width-trigger"],
 		triggerType === "hover" && disableContentHover && s["--hover-disabled"]
 	);
-	// className is applied to inner element because it has the transform and is treated like a real root element
-	const innerClassNames = classNames(s.inner, className, contentClassName);
-	let role = attributes?.role;
+	const contentClassNames = classNames(
+		s.content,
+		className,
+		contentClassName,
+		attributes?.className,
+		contentAttributes?.className
+	);
+	const scrollableClassNames = classNames(
+		s.scrollable,
+		scrollableClassName,
+		scrollableAttributes?.className
+	);
+	let role = attributes?.role || contentAttributes?.role;
 
 	if (triggerType === "hover") {
 		role = "tooltip";
@@ -78,9 +89,9 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 
 	const content = (
 		<ContentProvider value={{ elRef: flyoutElRef }}>
-			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+			{/* oxlint-disable-next-line jsx_a11y/no-static-element-interactions */}
 			<div
-				className={rootClassNames}
+				className={positionerClassNames}
 				style={
 					{
 						"--rs-flyout-max-h": contentMaxHeight,
@@ -99,14 +110,17 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 			>
 				<div
 					role={role}
+					{...contentAttributes}
 					{...attributes}
 					id={id}
 					tabIndex={!autoFocus ? -1 : undefined}
 					aria-modal={role === "dialog" ? true : undefined}
-					style={{ ...attributes?.style, ...contentAttributes?.style }}
-					className={innerClassNames}
+					style={{ ...contentAttributes?.style, ...attributes?.style }}
+					className={contentClassNames}
 				>
-					{children}
+					<div {...scrollableAttributes} className={scrollableClassNames}>
+						{children}
+					</div>
 				</div>
 			</div>
 		</ContentProvider>

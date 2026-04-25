@@ -1,12 +1,12 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Hotkey from "@/components/Hotkey";
+import Badge from "@/components/Badge";
 import MenuItem from "@/components/MenuItem";
 import Text from "@/components/Text";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/MenuItem",
@@ -23,17 +23,27 @@ export const size = {
 	render: () => (
 		<Example>
 			<Example.Item title="size: small">
-				<MenuItem size="small" icon={IconZap} onClick={() => {}} endSlot={<Hotkey>⌘K</Hotkey>}>
+				<MenuItem
+					size="small"
+					icon={IconZap}
+					onClick={() => {}}
+					endSlot={<Badge size="small">12</Badge>}
+				>
 					Menu item
 				</MenuItem>
 			</Example.Item>
 			<Example.Item title="size: medium">
-				<MenuItem icon={IconZap} onClick={() => {}}>
+				<MenuItem icon={IconZap} onClick={() => {}} endSlot={<Badge size="small">12</Badge>}>
 					Menu item
 				</MenuItem>
 			</Example.Item>
 			<Example.Item title="size: large">
-				<MenuItem size="large" icon={IconZap} onClick={() => {}}>
+				<MenuItem
+					size="large"
+					icon={IconZap}
+					onClick={() => {}}
+					endSlot={<Badge size="medium">12</Badge>}
+				>
 					Menu item
 				</MenuItem>
 			</Example.Item>
@@ -51,17 +61,17 @@ export const color = {
 	render: () => (
 		<Example>
 			<Example.Item title="color: neutral">
-				<MenuItem color="neutral" icon={IconZap}>
+				<MenuItem color="neutral" icon={IconZap} onClick={() => {}}>
 					Menu item
 				</MenuItem>
 			</Example.Item>
 			<Example.Item title="color: primary">
-				<MenuItem color="primary" icon={IconZap}>
+				<MenuItem color="primary" icon={IconZap} onClick={() => {}}>
 					Menu item
 				</MenuItem>
 			</Example.Item>
 			<Example.Item title="color: critical">
-				<MenuItem color="critical" icon={IconZap}>
+				<MenuItem color="critical" icon={IconZap} onClick={() => {}}>
 					Menu item
 				</MenuItem>
 			</Example.Item>
@@ -74,36 +84,17 @@ export const selected = {
 	render: () => (
 		<Example>
 			<Example.Item title="selected, color: neutral">
-				<MenuItem color="neutral" selected icon={IconZap}>
+				<MenuItem color="neutral" selected icon={IconZap} onClick={() => {}}>
 					Menu item
 				</MenuItem>
 			</Example.Item>
 			<Example.Item title="selected, color: primary">
-				<MenuItem color="primary" selected icon={IconZap}>
+				<MenuItem color="primary" selected icon={IconZap} onClick={() => {}}>
 					Menu item
 				</MenuItem>
 			</Example.Item>
 			<Example.Item title="selected, color: critical">
-				<MenuItem color="critical" selected icon={IconZap}>
-					Menu item
-				</MenuItem>
-			</Example.Item>
-		</Example>
-	),
-};
-
-export const roundedCorners = {
-	name: "roundedCorners",
-	render: () => (
-		<Example>
-			<Example.Item title="roundedCorners">
-				<MenuItem roundedCorners selected icon={IconZap}>
-					Menu item
-				</MenuItem>
-			</Example.Item>
-
-			<Example.Item title={["responsive roundedCorners", "[s]: false", "[m+]: true"]}>
-				<MenuItem roundedCorners={{ s: false, m: true }} selected icon={IconZap}>
+				<MenuItem color="critical" selected icon={IconZap} onClick={() => {}}>
 					Menu item
 				</MenuItem>
 			</Example.Item>
@@ -116,7 +107,12 @@ export const slots = {
 	render: () => (
 		<Example>
 			<Example.Item title="startSlot, endSlot, selected">
-				<MenuItem startSlot={<Placeholder h={20} />} endSlot={<Placeholder h={20} />} selected>
+				<MenuItem
+					startSlot={<Placeholder h={20} />}
+					endSlot={<Placeholder h={20} />}
+					selected
+					onClick={() => {}}
+				>
 					Menu item
 				</MenuItem>
 			</Example.Item>
@@ -143,7 +139,9 @@ export const aligner = {
 				<View gap={2}>
 					<Text variant="title-6">Heading</Text>
 					<MenuItem.Aligner>
-						<MenuItem selected>Menu item</MenuItem>
+						<MenuItem selected onClick={() => {}}>
+							Menu item
+						</MenuItem>
 					</MenuItem.Aligner>
 				</View>
 			</Example.Item>
@@ -152,7 +150,7 @@ export const aligner = {
 				<View gap={2}>
 					<Text variant="title-6">Heading</Text>
 					<MenuItem.Aligner>
-						<MenuItem size="large" selected>
+						<MenuItem size="large" selected onClick={() => {}}>
 							Menu item
 						</MenuItem>
 					</MenuItem.Aligner>
