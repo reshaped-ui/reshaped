@@ -90,7 +90,7 @@ export const sections = {
 	),
 };
 
-export const submenu = {
+export const submenu: StoryObj = {
 	name: "submenu",
 	render: () => (
 		<Example>
@@ -113,6 +113,13 @@ export const submenu = {
 							<DropdownMenu.Content>
 								<DropdownMenu.Item onClick={() => {}}>SubItem 2-1</DropdownMenu.Item>
 								<DropdownMenu.Item onClick={() => {}}>SubItem 2-2</DropdownMenu.Item>
+								<DropdownMenu.SubMenu>
+									<DropdownMenu.SubTrigger>SubItem 2-1</DropdownMenu.SubTrigger>
+									<DropdownMenu.Content>
+										<DropdownMenu.Item onClick={() => {}}>SubItem 2-1-1</DropdownMenu.Item>
+										<DropdownMenu.Item onClick={() => {}}>SubItem 2-1-2</DropdownMenu.Item>
+									</DropdownMenu.Content>
+								</DropdownMenu.SubMenu>
 							</DropdownMenu.Content>
 						</DropdownMenu.SubMenu>
 
@@ -128,6 +135,23 @@ export const submenu = {
 			</Example.Item>
 		</Example>
 	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getByRole("button", { name: "Open" });
+
+		await userEvent.click(trigger);
+
+		const rootItem = await canvas.findByText("Item 1");
+		await userEvent.hover(canvas.getByText("Item 2"));
+
+		const nestedItem = await canvas.findByText("SubItem 1");
+		await userEvent.click(nestedItem);
+
+		await waitFor(() => {
+			expect(rootItem).not.toBeInTheDocument();
+			expect(nestedItem).not.toBeInTheDocument();
+		});
+	},
 };
 
 export const defaultActive: StoryObj<{

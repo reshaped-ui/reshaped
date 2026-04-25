@@ -140,7 +140,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const disableTriggers = React.useCallback(() => {
 		if (triggerType !== "hover") return;
 
-		document.querySelectorAll("[data-rs-flyout-active]").forEach((el) => {
+		document.querySelectorAll("[data-rs-flyout-active=true]").forEach((el) => {
 			if (el === triggerElRef.current) return;
 			(el as HTMLElement).style.pointerEvents = "none";
 		});
@@ -168,7 +168,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
-			const isLocked = triggerType === "click" && !isDismissible();
+			const isLocked = triggerType === "click" && !options.closeParents && !isDismissible();
 			const canClose = !isLocked && (isRendered || disabled);
 
 			if (!canClose) return;

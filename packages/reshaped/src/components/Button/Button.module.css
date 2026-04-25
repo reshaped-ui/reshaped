@@ -38,7 +38,7 @@
 	isolation: isolate;
 
 	&:active {
-		transform: scale(0.98);
+		transform: scale(0.985) translateZ(0);
 	}
 
 	&.--highlighted {
@@ -52,8 +52,8 @@
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		&:hover:not(:has(.highlight)),
-		&:hover .highlight {
+		&:hover:not(:has(.highlight), .--loading),
+		&:hover:not(.--loading) .highlight {
 			background-color: var(--rs-button-highlight-color);
 		}
 	}
@@ -315,8 +315,8 @@
 
 .root.--disabled:not(.--color-media) {
 	&,
-	&:hover,
-	&:active,
+	&:hover:not(.--loading),
+	&:active:not(.--loading),
 	&.--highlighted {
 		color: var(--rs-color-foreground-disabled) !important;
 		background-color: var(--rs-color-background-disabled) !important;
@@ -399,7 +399,7 @@
 	width: auto;
 
 	&:active {
-		transform: scale(1);
+		transform: scale(1) translateZ(0);
 	}
 
 	&,

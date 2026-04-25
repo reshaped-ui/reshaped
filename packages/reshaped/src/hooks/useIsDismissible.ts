@@ -14,14 +14,17 @@ let queue: Record<string, QueueItem> = {};
 let latestId: string | null = null;
 
 const removeFromQueue = (id: string) => {
-	// Ignore removal of non-existing ids when called on component mount with active: false
-	if (!queue[id]) return;
+	const item = queue[id];
+	if (!item) return;
 
-	if (id === latestId) latestId = queue[id].parentId;
+	Object.values(queue).forEach((queueItem) => {
+		if (queueItem.parentId === id) {
+			queueItem.parentId = item.parentId;
+		}
+	});
+
+	if (latestId === id) latestId = item.parentId;
 	delete queue[id];
-
-	// Clear up all unused ids after the queue is resolved
-	if (latestId === null) queue = {};
 };
 
 const addToQueue = (id: string, contentRef: Ref, triggerRef?: Ref) => {
