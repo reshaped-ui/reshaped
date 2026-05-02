@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "4.0.0-canary.5",
+    "reshaped": "4.0.0-canary.6",
     "@reshaped/theming": "4.0.0-canary.17",
-    "@reshaped/utilities": "4.0.0-canary.5"
+    "@reshaped/utilities": "4.0.0-canary.6"
   },
   "changesets": [
     "beige-sheep-chew",
