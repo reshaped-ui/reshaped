@@ -188,12 +188,13 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		);
 	};
 
-	const renderItem: T.RenderItem = ({ className, child, index }) => {
+	const renderItem: T.RenderItem = ({ className, child, index, fallbackKey }) => {
 		const isElement = isValidElement(child);
 		const isItem = isElement && child.type === ViewItem;
 		const isView = isElement && child.type === View;
-		const key = child.key;
-		const dividerElement = !!index && divided && renderDivider({ className, key });
+		const key = isElement ? child.key : undefined;
+		const itemKey = key ?? fallbackKey;
+		const dividerElement = !!index && divided && renderDivider({ className, key: itemKey });
 		let itemElement;
 
 		if (isItem) {
@@ -210,7 +211,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 			itemElement = child;
 		} else {
 			itemElement = (
-				<div className={className} key={key}>
+				<div className={className} key={itemKey}>
 					{child}
 				</div>
 			);
@@ -227,7 +228,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		if (isItem && child.props?.gap === "auto") nowrap = true;
 
 		return (
-			<React.Fragment key={key ? `${key}-fragment` : undefined}>
+			<React.Fragment key={itemKey != null ? `${itemKey}-fragment` : undefined}>
 				{dividerElement}
 				{itemElement}
 			</React.Fragment>
@@ -237,12 +238,11 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	// Using any in favor of resolving the props in runtime where we don't know their props definitions
 	const formattedChildren = React.Children.map(children, (child: any, index) => {
 		if (!child) return null;
+		const isElement = isValidElement<{ children?: React.ReactNode }>(child);
 
-		const usedIndex = renderedItemIndex;
-		renderedItemIndex += 1;
-
-		if (isValidElement(child) && child.type === Hidden) {
-			// @ts-expect-error -- child is guaranteed to be an element
+		if (isElement && child.type === Hidden) {
+			const usedIndex = renderedItemIndex;
+			renderedItemIndex += 1;
 			const { children: hiddenChild, ...hiddenProps } = child.props;
 			const key = child.key || index;
 
@@ -253,15 +253,26 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 			);
 		}
 
-		if (child.type === React.Fragment && React.Children.count(child.props.children) > 1) {
+		if (
+			isElement &&
+			child.type === React.Fragment &&
+			React.Children.count(child.props.children) > 1
+		) {
 			// Using any in favor of resolving the props in runtime where we don't know their props definitions
-			return child.props.children.map((child: any) => {
-				if (!child) return null;
+			return React.Children.map(child.props.children, (fragmentChild: any, fragmentIndex) => {
+				if (!fragmentChild) return null;
+				const usedIndex = renderedItemIndex;
 				renderedItemIndex += 1;
-				return renderItem({ child, index: renderedItemIndex });
+				return renderItem({
+					child: fragmentChild,
+					index: usedIndex,
+					fallbackKey: `${child.key ?? index}-${fragmentIndex}`,
+				});
 			});
 		}
 
+		const usedIndex = renderedItemIndex;
+		renderedItemIndex += 1;
 		return renderItem({ child, index: usedIndex });
 	});
 

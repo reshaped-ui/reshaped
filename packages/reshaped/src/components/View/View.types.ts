@@ -153,6 +153,7 @@ export type RenderItem = (args: {
 	// Using any in favor of resolving the props in runtime where we don't know their props definitions
 	child: any;
 	index: number;
+	fallbackKey?: React.Key;
 }) => React.ReactNode;
 
-export type RenderDivider = (args: { className?: string; key: string }) => React.ReactNode;
+export type RenderDivider = (args: { className?: string; key?: React.Key }) => React.ReactNode;
