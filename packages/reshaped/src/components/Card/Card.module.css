@@ -4,8 +4,6 @@
 	display: block;
 	position: relative;
 	text-align: initial;
-	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
-	transition-property: box-shadow;
 }
 
 .content {
@@ -14,9 +12,14 @@
 	height: 100%;
 }
 
-.--selected {
+.--selected > .content::after {
+	content: "";
+	position: absolute;
+	inset: 0;
 	box-shadow: 0 0 0 2px var(--rs-color-border-primary) inset;
-	transition-timing-function: var(--rs-easing-decelerate);
+	border-radius: inherit;
+	z-index: var(--rs-z-index-relative);
+	pointer-events: none;
 }
 
 .--elevation-raised {
@@ -24,7 +27,7 @@
 }
 
 .--actionable:not(.--selected) {
-	& .content::before {
+	& > .content::before {
 		content: "";
 		position: absolute;
 		inset: 0;
@@ -35,7 +38,7 @@
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		&:hover .content::before {
+		&:hover > .content::before {
 			opacity: 1;
 		}
 	}

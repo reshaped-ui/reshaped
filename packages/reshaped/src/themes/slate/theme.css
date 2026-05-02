@@ -192,8 +192,8 @@
 --rs-color-background-neutral-faded: oklch(1 0 89.88 / 0.03);
 --rs-color-background-neutral-highlighted: oklch(0.3608 0 89.88);
 --rs-color-background-neutral-highlighted-faded: oklch(0.32 0 89.88 / 0.28);
---rs-color-border-neutral: oklch(1 0 89.88 / 0.12);
---rs-color-border-neutral-faded: oklch(1 0 89.88 / 0.08);
+--rs-color-border-neutral: oklch(1 0 89.88 / 0.1);
+--rs-color-border-neutral-faded: oklch(1 0 89.88 / 0.07);
 --rs-color-foreground-neutral: oklch(0.96 0 89.88);
 --rs-color-foreground-neutral-faded: oklch(0.81 0 89.88);
 --rs-color-background-disabled: oklch(0.28 0 89.88);

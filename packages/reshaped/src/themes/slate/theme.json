@@ -537,10 +537,10 @@
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.12
+        "alpha": 0.1
       },
       "hex": "#0000001f",
-      "hexDark": "#ffffff1f"
+      "hexDark": "#ffffff1a"
     },
     "borderNeutralFaded": {
       "oklch": {
@@ -555,10 +555,10 @@
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.08
+        "alpha": 0.07
       },
       "hex": "#00000014",
-      "hexDark": "#ffffff14"
+      "hexDark": "#ffffff12"
     },
     "foregroundNeutral": {
       "oklch": {
