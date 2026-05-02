@@ -1,6 +1,6 @@
 {
 	"name": "@reshaped/utilities",
-	"version": "4.0.0-canary.5",
+	"version": "4.0.0-canary.6",
 	"description": "Vanilla JS utilities for implementing common UI patterns",
 	"homepage": "https://reshaped.so",
 	"bugs": {

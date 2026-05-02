@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "3.11.0-canary.4",
-    "@reshaped/theming": "3.10.0-canary.16",
-    "@reshaped/utilities": "3.11.0-canary.4"
+    "reshaped": "4.0.0-canary.5",
+    "@reshaped/theming": "4.0.0-canary.17",
+    "@reshaped/utilities": "4.0.0-canary.5"
   },
   "changesets": [
     "beige-sheep-chew",
@@ -25,6 +25,7 @@
     "gentle-frogs-cheer",
     "green-ads-sing",
     "green-jeans-tell",
+    "hip-kiwis-turn",
     "itchy-icons-switch",
     "jolly-pets-kiss",
     "late-zebras-push",
@@ -33,6 +34,7 @@
     "lemon-berries-leave",
     "little-mangos-attack",
     "loud-houses-watch",
+    "many-moles-end",
     "moody-lands-lead",
     "ninety-worms-return",
     "open-peas-work",
@@ -48,6 +50,7 @@
     "quick-dingos-stand",
     "quick-sheep-dress",
     "shaky-bottles-live",
+    "shaky-lamps-accept",
     "shiny-chefs-peel",
     "silly-plums-ask",
     "silver-ants-cheer",
@@ -72,6 +75,7 @@
     "warm-dingos-accept",
     "warm-tigers-wait",
     "wise-goats-report",
+    "wise-lands-cheer",
     "young-meals-clap"
   ]
 }

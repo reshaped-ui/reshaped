@@ -1,5 +1,24 @@
 # reshaped
 
+## 4.0.0-canary.6
+
+### Major Changes
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`7b1f71d`](https://github.com/reshaped-ui/reshaped/commit/7b1f71d9bbee1b0287575347bf68ef48d14ec89a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Automatically match the select size and options size
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`7b1f71d`](https://github.com/reshaped-ui/reshaped/commit/7b1f71d9bbee1b0287575347bf68ef48d14ec89a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Resizable: Added support for wrapping items and handles into re-usable components
+
+### Minor Changes
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`7218d29`](https://github.com/reshaped-ui/reshaped/commit/7218d294bb480153ff7a18aacb37e34093e6e8ad) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Card: Added borderRadius property
+
+### Patch Changes
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`a4a7838`](https://github.com/reshaped-ui/reshaped/commit/a4a78380b2be90a82f9da9c05f4ee77c264708c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - View: improved keys handling
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.0.0-canary.6
+
 ## 4.0.0-canary.5
 
 ### Major Changes
