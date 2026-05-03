@@ -38,6 +38,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const onCloseRef = useHandlerRef(onClose);
 	const onOpenRef = useHandlerRef(onOpen);
 	const onAfterCloseRef = useHandlerRef(onAfterClose);
+	const onAfterOpenRef = useHandlerRef(onAfterOpen);
 
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
@@ -105,18 +106,22 @@ const Overlay: React.FC<T.Props> = (props) => {
 		close({ reason: "overlay-click" });
 	};
 
-	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
+	const handleAfterClose = React.useCallback(() => {
 		setAnimated(false);
 
 		if (visible) {
-			onAfterOpen?.();
+			onAfterOpenRef.current?.();
 			return;
 		}
 
 		unlockScroll();
 		remove();
-		onAfterClose?.();
+		onAfterCloseRef.current?.();
+	}, [visible, onAfterOpenRef, onAfterCloseRef, unlockScroll, remove]);
+
+	const handleTransitionEnd = (e: React.TransitionEvent) => {
+		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
+		handleAfterClose();
 	};
 
 	useHotkeys(
@@ -132,16 +137,10 @@ const Overlay: React.FC<T.Props> = (props) => {
 		if (hasTransitions) setAnimated(true);
 		if (active && !rendered) render();
 		if (!active && rendered) {
-			if (!hasTransitions) {
-				unlockScroll();
-				remove();
-				onAfterCloseRef.current?.();
-				return;
-			}
-
 			hide();
+			if (!hasTransitions) handleAfterClose();
 		}
-	}, [active, render, hide, rendered, remove, unlockScroll, onAfterCloseRef]);
+	}, [active, render, hide, rendered, handleAfterClose]);
 
 	// Show overlay after it was rendered
 	React.useEffect(() => {

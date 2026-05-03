@@ -6,7 +6,7 @@ import React from "react";
  * Types
  */
 type Callback = (e?: KeyboardEvent) => void;
-type PressedMap = Map<string, KeyboardEvent>;
+type PressedMap = Record<string, KeyboardEvent>;
 export type Hotkeys = Record<string, Callback | null>;
 type HotkeyOptions = { preventDefault?: boolean };
 type Context = {
@@ -52,6 +52,7 @@ const getEventKey = (e: KeyboardEvent) => {
 };
 
 // Removing the unknown gets highlighted an invalid syntax
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
 const walkHotkeys = <T extends unknown>(
 	hotkeys: Record<string, T>,
 	cb: (id: string, hotkeyData: T) => void
@@ -104,9 +105,9 @@ export class HotkeyStore {
 	};
 
 	handleKeyDown = (pressedMap: PressedMap, e: KeyboardEvent) => {
-		if (!pressedMap.size) return;
+		const pressedKeys = Object.keys(pressedMap);
+		if (!pressedKeys.length) return;
 
-		const pressedKeys = [...pressedMap.keys()];
 		const pressedId = getHotkeyId(pressedKeys.join(COMBINATION_DELIMETER));
 		const pressedFormattedKeys = pressedId.split(COMBINATION_DELIMETER);
 
@@ -137,7 +138,7 @@ export class HotkeyStore {
 						return;
 					}
 
-					const resolvedEvent = pressedMap.get(pressedId);
+					const resolvedEvent = pressedMap[pressedId];
 
 					if (data.options.preventDefault) {
 						resolvedEvent?.preventDefault();
@@ -160,26 +161,26 @@ const HotkeyContext = React.createContext({} as Context);
 
 export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const { children } = props;
-	const [pressedMap, setPressedMap] = React.useState<PressedMap>(new Map());
+	const [pressedMap, setPressedMap] = React.useState<PressedMap>({});
 	const hooksCountRef = React.useRef(0);
 
 	const addPressedKey = React.useCallback(
-		(e: KeyboardEvent) => {
+		(e: KeyboardEvent): PressedMap | undefined => {
 			if (e.repeat || hooksCountRef.current === 0) return;
 
 			const eventKey = getEventKey(e);
 			if (!eventKey) return;
 
-			const nextPressedMap = new Map(pressedMap);
-			nextPressedMap.set(eventKey, e);
+			const nextPressedMap = { ...pressedMap };
+			nextPressedMap[eventKey] = e;
 
 			// Key up won't trigger for other keys while Meta is pressed so we need to cache them
 			// and remove on Meta keyup
-			if (e.metaKey) modifiedKeys.push(...nextPressedMap.keys());
+			if (e.metaKey) modifiedKeys.push(...Object.keys(nextPressedMap));
 
-			if (nextPressedMap.has("Meta")) modifiedKeys.push(eventKey);
-
+			if (nextPressedMap["meta"]) modifiedKeys.push(eventKey);
 			setPressedMap(nextPressedMap);
+			return nextPressedMap;
 		},
 		[pressedMap]
 	);
@@ -191,21 +192,20 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 			const eventKey = getEventKey(e);
 			if (!eventKey) return;
 
-			const nextPressedMap = new Map(pressedMap);
-			nextPressedMap.delete(eventKey);
+			const nextPressedMap = { ...pressedMap };
+			delete nextPressedMap[eventKey];
 
 			if (eventKey === "meta" || eventKey === "control") {
-				nextPressedMap.delete("mod");
+				delete nextPressedMap["mod"];
 			}
 
 			if (eventKey === "meta") {
 				modifiedKeys.forEach((key) => {
-					if (!nextPressedMap.has(key)) return;
-					nextPressedMap.delete(key);
+					if (!nextPressedMap[key]) return;
+					delete nextPressedMap[key];
 				});
 				modifiedKeys = [];
 			}
-
 			setPressedMap(nextPressedMap);
 		},
 		[pressedMap]
@@ -214,7 +214,7 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 	const isPressed = (hotkey: string) => {
 		const keys = formatHotkey(hotkey).split(COMBINATION_DELIMETER);
 
-		if (keys.some((key) => !pressedMap.has(key))) return false;
+		if (keys.some((key) => !pressedMap[key])) return false;
 		return true;
 	};
 
@@ -223,8 +223,8 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 			// Browsers trigger keyboard event without passing e.key when you click on autocomplete
 			if (!e.key) return;
 
-			addPressedKey(e);
-			globalHotkeyStore.handleKeyDown(pressedMap, e);
+			const nextPressedMap = addPressedKey(e) ?? pressedMap;
+			globalHotkeyStore.handleKeyDown(nextPressedMap, e);
 		},
 		[addPressedKey, pressedMap]
 	);
@@ -239,7 +239,7 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 	);
 
 	const handleWindowBlur = React.useCallback(() => {
-		setPressedMap(new Map());
+		setPressedMap({});
 		modifiedKeys = [];
 	}, []);
 
