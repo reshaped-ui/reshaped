@@ -1,14 +1,15 @@
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Dismissible from "@/components/Dismissible";
 import Image from "@/components/Image";
 import Text from "@/components/Text";
-import { useToast, ToastProvider } from "@/components/Toast";
+import { ToastProvider, useToast } from "@/components/Toast";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/Toast",
@@ -19,18 +20,18 @@ export default {
 	},
 };
 
-const Size = () => {
+const Orientation = () => {
 	const toast = useToast();
 	const props = {
 		icon: IconZap,
 		title: "Hey!",
 		text: "Event completed",
-		actionsSlot: [<Button>Action</Button>],
+		actionsSlot: <Button>Action</Button>,
 	};
 
 	return (
 		<Example>
-			<Example.Item title="size: small">
+			<Example.Item title="orientation: horizontal">
 				<Button
 					onClick={() => {
 						toast.show({ ...props });
@@ -39,19 +40,19 @@ const Size = () => {
 					Show toast
 				</Button>
 			</Example.Item>
-			<Example.Item title="size: medium">
+			<Example.Item title="orientation: horizontal, without title">
 				<Button
 					onClick={() => {
-						toast.show({ ...props, size: "medium" });
+						toast.show({ ...props, title: undefined, timeout: 0 });
 					}}
 				>
 					Show toast
 				</Button>
 			</Example.Item>
-			<Example.Item title="large">
+			<Example.Item title="orientation: vertical">
 				<Button
 					onClick={() => {
-						toast.show({ ...props, size: "large" });
+						toast.show({ ...props, orientation: "vertical" });
 					}}
 				>
 					Show toast
@@ -60,7 +61,7 @@ const Size = () => {
 		</Example>
 	);
 };
-export const size = { name: "size", render: () => <Size /> };
+export const orientation = { name: "orientation", render: () => <Orientation /> };
 
 const Position = () => {
 	const toast = useToast();
@@ -149,24 +150,6 @@ const Color = () => {
 
 	return (
 		<Example>
-			<Example.Item title="color: inverted">
-				<Button
-					onClick={() => {
-						const id = toast.show({
-							text: "Event completed",
-							color: "inverted",
-							title: "Hey!",
-							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
-						});
-					}}
-				>
-					Show toast
-				</Button>
-			</Example.Item>
 			<Example.Item title="color: neutral">
 				<Button
 					onClick={() => {
@@ -175,10 +158,12 @@ const Color = () => {
 							color: "neutral",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -193,10 +178,12 @@ const Color = () => {
 							color: "primary",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -211,10 +198,12 @@ const Color = () => {
 							color: "positive",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -229,10 +218,12 @@ const Color = () => {
 							color: "critical",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -247,10 +238,13 @@ const Color = () => {
 							color: "warning",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: [
-								<Button onClick={() => toast.hide(id)}>Undo</Button>,
-								<Button onClick={() => toast.hide(id)}>Hide</Button>,
-							],
+							timeout: 0,
+							actionsSlot: (
+								<>
+									<Button onClick={() => toast.hide(id)}>Undo</Button>
+									<Button onClick={() => toast.hide(id)}>Hide</Button>
+								</>
+							),
 						});
 					}}
 				>
@@ -309,27 +303,58 @@ const Timeout = () => {
 };
 export const timeout = { name: "timeout", render: () => <Timeout /> };
 
-const Expanded = () => {
+const Width = () => {
 	const toast = useToast();
+	const counterRef = React.useRef(0);
+	const widths = ["260px", "360px", "420px"] as const;
 
 	return (
 		<Example>
-			<Example.Item title="Custom width coming from Reshaped provider for bottom-start">
+			<Example.Item title="width: literal">
 				<Button
 					onClick={() => {
+						const width = widths[counterRef.current % widths.length];
+						counterRef.current += 1;
 						toast.show({
-							text: "Event completed",
-							position: "bottom-start",
+							title: `Toast width ${width}`,
+							text: "Stack to inspect collapsed and expanded widths",
+							width,
 						});
 					}}
 				>
-					Show toast
+					Show next width toast
+				</Button>
+			</Example.Item>
+			<Example.Item title="width: short">
+				<Button
+					onClick={() => {
+						toast.show({
+							title: "Short preset",
+							text: "Uses default toast width",
+							width: "short",
+						});
+					}}
+				>
+					Show short preset
+				</Button>
+			</Example.Item>
+			<Example.Item title="width: long">
+				<Button
+					onClick={() => {
+						toast.show({
+							title: "Long preset",
+							text: "Uses wider banner-like toast width",
+							width: "long",
+						});
+					}}
+				>
+					Show long preset
 				</Button>
 			</Example.Item>
 		</Example>
 	);
 };
-export const regionOptions = { name: "expanded", render: () => <Expanded /> };
+export const width = { name: "width", render: () => <Width /> };
 
 const Slots = () => {
 	const toast = useToast();
@@ -359,7 +384,7 @@ const Slots = () => {
 													Look at this gradient!
 												</Text>
 											</Dismissible>
-											<Text variant="body-3">
+											<Text variant="body-2">
 												If you start using more gradients, your product will become even more
 												succesful.
 											</Text>
@@ -370,6 +395,7 @@ const Slots = () => {
 							color: "neutral",
 							position: "bottom-start",
 							timeout: 0,
+							width: "long",
 						});
 					}}
 				>
@@ -426,46 +452,6 @@ export const base: StoryObj = {
 	},
 };
 
-const NestedDemo = () => {
-	const toast = useToast();
-
-	return (
-		<Button
-			onClick={() => {
-				toast.show({
-					text: "Content",
-				});
-			}}
-		>
-			Show toast
-		</Button>
-	);
-};
-
-export const nested: StoryObj = {
-	name: "ToastProvider",
-	render: () => {
-		return (
-			<div data-testid="test-container-id">
-				<ToastProvider>
-					<NestedDemo />
-				</ToastProvider>
-			</div>
-		);
-	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const button = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(button);
-
-		const container = canvas.getByTestId("test-container-id");
-		const toast = within(container).getByText("Content");
-
-		expect(toast).toBeInTheDocument();
-	},
-};
-
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => {
@@ -518,7 +504,7 @@ const Nested = () => {
 	const toast = useToast();
 
 	return (
-		<View height="300px">
+		<View height="300px" attributes={{ "data-testid": "test-container-id" }}>
 			<Button
 				onClick={() => {
 					toast.show({
@@ -531,13 +517,14 @@ const Nested = () => {
 		</View>
 	);
 };
-export const edgeCases = {
+export const edgeCases: StoryObj = {
 	name: "test: edge cases",
 	render: () => (
 		<Example>
 			<Example.Item title="Multiline, should support dynamic height">
 				<Multiline />
 			</Example.Item>
+
 			<Example.Item title="Nested ToastProvider">
 				<ToastProvider>
 					<Nested />

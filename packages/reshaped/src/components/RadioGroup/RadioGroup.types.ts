@@ -1,7 +1,9 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type { RadioProps } from "@/components/Radio";
 import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
-import type React from "react";
+import type { Attributes } from "@/types/global";
 
 type BaseProps = {
 	/** Unique identifier for the radio group */

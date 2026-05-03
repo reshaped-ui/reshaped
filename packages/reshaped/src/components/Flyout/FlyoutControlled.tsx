@@ -1,36 +1,32 @@
 "use client";
 
-import {
-	TrapFocus,
-	useHotkeys,
-	useIsomorphicLayoutEffect,
-	useHandlerRef,
-	useOnClickOutside,
-	useIsDismissible,
-	useElementId,
-} from "@reshaped/headless";
+import React from "react";
+import { TrapFocus } from "@reshaped/utilities";
 import {
 	checkKeyboardMode,
-	type FocusableElement,
 	type Coordinates,
-} from "@reshaped/headless/internal";
-import React from "react";
+	type FocusableElement,
+} from "@reshaped/utilities/internal";
 
-import usePrevious from "@/hooks/_private/usePrevious";
+import usePrevious from "@/hooks/_internal/usePrevious";
+import useElementId from "@/hooks/useElementId";
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useHotkeys from "@/hooks/useHotkeys";
+import useIsDismissible from "@/hooks/useIsDismissible";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { checkTransitions } from "@/utilities/animation";
-
 import * as timeouts from "./Flyout.constants";
 import {
 	Provider,
-	useFlyoutTriggerContext,
-	useFlyoutContext,
 	useFlyoutContentContext,
+	useFlyoutContext,
+	useFlyoutTriggerContext,
 } from "./Flyout.context";
+import type * as T from "./Flyout.types";
 import useFlyout from "./useFlyout";
 import cooldown from "./utilities/cooldown";
 import { createSafeArea } from "./utilities/safeArea";
-
-import type * as T from "./Flyout.types";
 
 const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {
@@ -40,7 +36,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		onClose,
 		children,
 		disabled,
-		forcePosition,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 		trapFocusMode = "dialog",
@@ -54,9 +49,12 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		contentShift,
 		contentMaxHeight,
 		contentMaxWidth,
+		fallbackPositions,
 		contentZIndex,
 		contentClassName,
 		contentAttributes,
+		scrollableClassName,
+		scrollableAttributes,
 		position: passedPosition,
 		active: passedActive,
 		id: passedId,
@@ -65,8 +63,6 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		initialFocusRef,
 		positionRef,
 	} = props;
-	const fallbackPositions =
-		props.fallbackPositions === false || forcePosition ? [] : props.fallbackPositions;
 	const onOpenRef = useHandlerRef(onOpen);
 	const onCloseRef = useHandlerRef(onClose);
 	const active = disabled === true ? false : passedActive;
@@ -119,7 +115,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		position: passedPosition,
 		defaultActive: active,
 		container: containerRef?.current,
-		fallbackPositions,
+		fallbackPositions: fallbackPositions === false ? [] : fallbackPositions,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 		contentGap,
@@ -144,7 +140,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const disableTriggers = React.useCallback(() => {
 		if (triggerType !== "hover") return;
 
-		document.querySelectorAll("[data-rs-flyout-active]").forEach((el) => {
+		document.querySelectorAll("[data-rs-flyout-active=true]").forEach((el) => {
 			if (el === triggerElRef.current) return;
 			(el as HTMLElement).style.pointerEvents = "none";
 		});
@@ -172,7 +168,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
-			const isLocked = triggerType === "click" && !isDismissible();
+			const isLocked = triggerType === "click" && !options.closeParents && !isDismissible();
 			const canClose = !isLocked && (isRendered || disabled);
 
 			if (!canClose) return;
@@ -466,6 +462,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				contentZIndex,
 				contentClassName,
 				contentAttributes,
+				scrollableClassName,
+				scrollableAttributes,
 				contentGap,
 				contentMaxHeight,
 				contentMaxWidth,

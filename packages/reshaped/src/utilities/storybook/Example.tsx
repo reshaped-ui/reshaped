@@ -39,6 +39,7 @@ const ExampleItem: React.FC<Props> = (props) => {
 	return (
 		<View
 			borderColor="neutral-faded"
+			shadow="outline"
 			borderRadius="medium"
 			overflow="hidden"
 			backgroundColor="elevation-base"
@@ -46,7 +47,7 @@ const ExampleItem: React.FC<Props> = (props) => {
 			{title && (
 				<View paddingInline={4} paddingBlock={3} backgroundColor="neutral-faded">
 					{title.map((line, index) => (
-						<Text variant="body-3" color={index > 0 ? "neutral-faded" : "neutral"} key={index}>
+						<Text variant="body-2" color={index > 0 ? "neutral-faded" : "neutral"} key={index}>
 							{line}
 						</Text>
 					))}

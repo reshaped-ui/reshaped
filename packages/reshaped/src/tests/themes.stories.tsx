@@ -1,4 +1,5 @@
 import { useLayoutEffect, useState } from "react";
+import { baseThemeDefinition, generateThemeColors, getThemeCSS } from "@reshaped/theming";
 
 import Actionable from "@/components/Actionable";
 import Alert from "@/components/Alert";
@@ -13,11 +14,8 @@ import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import Theme, { useTheme } from "@/components/Theme";
 import View from "@/components/View";
-import IconZap from "@/icons/Mic";
 import { Example } from "@/utilities/storybook";
-
-import { getThemeCSS, generateThemeColors, baseThemeDefinition } from "themes";
-
+import IconZap from "@/icons/Mic";
 import ThemePlayground from "./ThemesPlayground";
 
 export default {
@@ -43,7 +41,7 @@ const colors = [
 	"#000000",
 ];
 
-export const test = () => {
+export const Test = () => {
 	const { colorMode } = useTheme();
 	const [activeColor, setColor] = useState(colors[0]);
 	const [theme, setTheme] = useState("");
@@ -131,11 +129,11 @@ const cssGenerated = getThemeCSS("generated", {
 
 const componentExamples = (
 	<View gap={4} padding={6} backgroundColor="page">
-		<Text variant="featured-2">Hello world</Text>
-		<Text color="neutral-faded" variant="featured-2">
+		<Text variant="title-5">Hello world</Text>
+		<Text color="neutral-faded" variant="title-5">
 			Hello world faded
 		</Text>
-		<Text color="disabled" variant="featured-2">
+		<Text color="disabled" variant="title-5">
 			Hello world disabled
 		</Text>
 
@@ -272,14 +270,14 @@ const componentExamples = (
 			<View.Item columns={6}>
 				<Card>
 					<View gap={2} align="start">
-						<Badge variant="outline" color="primary">
+						<Badge variant="faded" color="primary">
 							Badge
 						</Badge>
 						<View gap={2} direction="row">
 							<DropdownMenu>
 								<DropdownMenu.Trigger>
 									{(attributes) => (
-										<Button variant="faded" attributes={attributes}>
+										<Button variant="outline" attributes={attributes}>
 											Menu
 										</Button>
 									)}
@@ -302,9 +300,9 @@ const componentExamples = (
 				</Card>
 			</View.Item>
 			<View.Item columns={6}>
-				<Card elevated>
+				<Card raised>
 					<View gap={2} align="start">
-						<Badge variant="outline" color="primary">
+						<Badge variant="faded" color="primary">
 							Badge
 						</Badge>
 

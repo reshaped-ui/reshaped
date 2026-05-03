@@ -5,24 +5,20 @@
  * If you want to use one of these utilities, open an issue or a PR about moving it to the public API file
  */
 
+export type { FocusableElement, TrapMode } from "./a11y";
 export {
+	activateKeyboardMode,
+	checkKeyboardMode,
+	deactivateKeyboardMode,
 	focusableSelector,
-	getActiveElement,
-	getFocusableElements,
-	focusNextElement,
-	focusPreviousElement,
 	focusFirstElement,
 	focusLastElement,
-	activateKeyboardMode,
-	deactivateKeyboardMode,
-	checkKeyboardMode,
+	focusNextElement,
+	focusPreviousElement,
+	getActiveElement,
+	getFocusableElements,
 } from "./a11y";
-
-export type { TrapMode, FocusableElement } from "./a11y";
-
-export { disableScroll, enableScroll } from "./scroll";
-
+export { findParent, getShadowRoot } from "./dom";
 export { rafThrottle } from "./helpers";
-export { getShadowRoot, findParent } from "./dom";
-
+export { disableScroll, enableScroll } from "./scroll";
 export type { Coordinates } from "./types/global";

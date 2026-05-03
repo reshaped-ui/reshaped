@@ -1,11 +1,10 @@
 .root {
 	/* This variable is only used by Aligner */
-	--rs-p-h: var(--rs-text-field-gap);
-	--rs-text-field-border-color: var(--rs-color-border-neutral);
-	--rs-text-field-focus-border-color: var(--rs-color-border-primary);
-	--rs-text-field-border-width: 1px;
+	--rs-p-h: var(--rs-text-field-p-h);
+	--rs-p-v: 0px;
 	--rs-text-field-start-slot-padding: var(--rs-unit-x2);
-	--rs-text-field-end-slot-padding: var(--rs-unit-x1);
+	--rs-text-field-end-slot-padding: var(--rs-unit-x2);
+	--rs-text-field-focus-border-color: var(--rs-color-border-primary);
 
 	display: flex;
 	align-items: center;
@@ -13,16 +12,15 @@
 	z-index: 0;
 	background: var(--rs-color-background-elevation-base);
 	border-radius: var(--rs-text-field-radius);
-	padding: 0 var(--rs-text-field-gap);
-	column-gap: var(--rs-text-field-gap);
-	box-shadow: 0 0 0 var(--rs-text-field-border-width) var(--rs-text-field-border-color) inset;
+	padding: var(--rs-unit-x1) var(--rs-text-field-p-h);
+	min-height: var(--rs-text-field-min-height);
 
 	&:not(
 			:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus, select:focus)
 		):focus-within,
 	&:has(.icon:active),
 	&.--focused {
-		box-shadow: 0 0 0 2px var(--rs-text-field-focus-border-color) inset;
+		box-shadow: var(--rs-outline-shadow);
 	}
 
 	&.--multiline {
@@ -34,23 +32,13 @@
 	}
 
 	&.--rounded {
-		border-radius: var(--rs-radius-circular);
-
-		& .affix:first-child,
-		& .icon:first-child {
-			padding-inline-start: var(--rs-unit-x1);
-		}
-
-		& .input:first-child {
-			padding-inline-start: calc(var(--rs-text-field-gap) + var(--rs-unit-x1));
-		}
+		--rs-text-field-radius: var(--rs-radius-circular);
 	}
 }
 
 .inner {
 	display: inline-flex;
 	flex-grow: 1;
-	column-gap: var(--rs-text-field-gap);
 }
 
 .input {
@@ -63,9 +51,12 @@
 	box-sizing: border-box;
 	width: 100%;
 	color: var(--rs-color-foreground-neutral);
-	margin: 0 calc(var(--rs-text-field-gap) * -1);
+	min-height: var(--rs-text-field-min-height);
+
+	/* Take the full height to make input clickable */
+	margin: calc(var(--rs-text-field-p-v) * -1) calc(var(--rs-text-field-gap) * -1);
 	padding-inline: var(--rs-text-field-gap);
-	padding-block: var(--rs-text-field-p-v);
+	padding-block: 0;
 	font-weight: var(--rs-font-weight-regular);
 	font-family: var(--rs-font-family-body);
 }
@@ -83,10 +74,6 @@
 	letter-spacing: var(--rs-text-field-letter-spacing);
 }
 
-.icon {
-	cursor: text;
-}
-
 .slot,
 .icon,
 .affix {
@@ -96,7 +83,92 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	min-height: var(--rs-text-field-attachment-height);
+	min-height: calc(var(--rs-text-field-min-height) - var(--rs-unit-x2));
+}
+
+.slot--position-start,
+.icon--position-start,
+.affix--position-start {
+	margin-inline-end: var(--rs-text-field-gap);
+}
+
+.slot--position-end,
+.icon--position-end,
+.affix--position-end {
+	margin-inline-start: var(--rs-text-field-gap);
+}
+
+.icon {
+	cursor: text;
+
+	&.icon--position-start {
+		margin-inline-start: calc(var(--rs-text-field-icon-align) * -1);
+	}
+
+	&.icon--position-end {
+		margin-inline-end: calc(var(--rs-text-field-icon-align) * -1);
+	}
+}
+
+.slot {
+	/* slots can have negative margin to based on the slot padding value passed to the component */
+	&.slot--position-start {
+		--rs-text-field-slot-adjustment: calc(
+			var(--rs-text-field-start-slot-padding) - var(--rs-text-field-p-h)
+		);
+
+		margin-inline-start: var(--rs-text-field-slot-adjustment);
+
+		.icon + & {
+			margin-inline-start: 0;
+		}
+
+		&:has(+ .slot--position-start) {
+			/* 
+			in case it had negative margin – reset it and add the regular gap 
+			this approach lets us align slots rendered on multiple lines
+			*/
+			margin-inline-end: calc(
+				max(calc(var(--rs-text-field-slot-adjustment) * -1), 0px) + var(--rs-text-field-gap)
+			);
+		}
+	}
+
+	&.slot--position-end {
+		--rs-text-field-slot-adjustment: calc(
+			var(--rs-text-field-end-slot-padding) - var(--rs-text-field-p-h)
+		);
+
+		margin-inline-end: var(--rs-text-field-slot-adjustment);
+	}
+}
+
+.affix {
+	color: var(--rs-color-foreground-neutral-faded);
+
+	&.affix--position-start {
+		padding-inline-end: calc(var(--rs-text-field-gap) + 1px);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: var(--rs-unit-x1-5);
+			inset-inline-end: 0;
+			border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
+		}
+	}
+
+	&.affix--position-end {
+		padding-inline-start: calc(var(--rs-text-field-gap) + 1px);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block: var(--rs-unit-x1-5);
+			inset-inline-start: 0;
+			border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
+		}
+	}
 }
 
 /* Ensure that when wrapping to the new line, end attachments stay in the end */
@@ -104,42 +176,6 @@
 .input + .affix--position-end,
 .input + .slot--position-end {
 	margin-inline-start: auto;
-}
-
-.slot--position-start {
-	margin-inline-start: calc(var(--rs-text-field-start-slot-padding) - var(--rs-text-field-gap));
-}
-
-.slot--position-end {
-	margin-inline-end: calc(var(--rs-text-field-end-slot-padding) - var(--rs-text-field-gap));
-}
-
-.affix {
-	color: var(--rs-color-foreground-neutral-faded);
-
-	&.affix--position-start {
-		padding-inline-end: var(--rs-text-field-gap);
-
-		&::after {
-			content: "";
-			position: absolute;
-			inset-block: var(--rs-unit-x1);
-			inset-inline-end: 0;
-			border-inline-end: 1px solid var(--rs-color-border-neutral-faded);
-		}
-	}
-
-	&.affix--position-end {
-		padding-inline-start: var(--rs-text-field-gap);
-
-		&::after {
-			content: "";
-			position: absolute;
-			inset-block: var(--rs-unit-x1);
-			inset-inline-start: 0;
-			border-inline-start: 1px solid var(--rs-color-border-neutral-faded);
-		}
-	}
 }
 
 .root.--disabled {
@@ -156,76 +192,79 @@
 
 @responsive .--size {
 	@value small {
-		--rs-text-field-gap: var(--rs-unit-x2);
+		--rs-text-field-gap: var(--rs-unit-x1-5);
 		--rs-text-field-radius: var(--rs-radius-small);
 		--rs-text-field-p-v: var(--rs-unit-x1);
-		--rs-text-field-font-size: var(--rs-font-size-body-3);
-		--rs-text-field-line-height: var(--rs-line-height-body-3);
-		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-text-field-p-h: var(--rs-unit-x2);
+		--rs-text-field-icon-align: var(--rs-unit-x0-5);
+		--rs-text-field-font-size: var(--rs-font-size-body-2);
+		--rs-text-field-line-height: var(--rs-line-height-body-2);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
-		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x2));
+		--rs-text-field-min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x1) * 2);
 	}
 
 	@value medium {
 		--rs-text-field-gap: var(--rs-unit-x2);
-		--rs-text-field-radius: var(--rs-radius-small);
+		--rs-text-field-radius: var(--rs-radius-medium);
 		--rs-text-field-p-v: var(--rs-unit-x2);
-		--rs-text-field-font-size: var(--rs-font-size-body-3);
-		--rs-text-field-line-height: var(--rs-line-height-body-3);
-		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-3);
+		--rs-text-field-p-h: var(--rs-unit-x3);
+		--rs-text-field-icon-align: var(--rs-unit-x0-5);
+		--rs-text-field-font-size: var(--rs-font-size-body-2);
+		--rs-text-field-line-height: var(--rs-line-height-body-2);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
-		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
+		--rs-text-field-min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x2) * 2);
 	}
 
 	@value large {
-		--rs-text-field-gap: var(--rs-unit-x3);
+		--rs-text-field-gap: var(--rs-unit-x2);
 		--rs-text-field-radius: var(--rs-radius-medium);
 		--rs-text-field-p-v: var(--rs-unit-x3);
-		--rs-text-field-font-size: var(--rs-font-size-body-2);
-		--rs-text-field-line-height: var(--rs-line-height-body-2);
-		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-text-field-p-h: var(--rs-unit-x4);
+		--rs-text-field-icon-align: var(--rs-unit-x1);
+		--rs-text-field-font-size: var(--rs-font-size-body-1);
+		--rs-text-field-line-height: var(--rs-line-height-body-1);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-1);
 		--rs-text-field-action-inset: var(--rs-unit-x2);
-		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
+		--rs-text-field-min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x3) * 2);
 	}
 
 	@value xlarge {
-		--rs-text-field-gap: var(--rs-unit-x4);
+		--rs-text-field-gap: var(--rs-unit-x3);
 		--rs-text-field-radius: var(--rs-radius-medium);
 		--rs-text-field-p-v: var(--rs-unit-x4);
-		--rs-text-field-font-size: var(--rs-font-size-body-2);
-		--rs-text-field-line-height: var(--rs-line-height-body-2);
-		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-text-field-p-h: var(--rs-unit-x5);
+		--rs-text-field-icon-align: var(--rs-unit-x1);
+		--rs-text-field-font-size: var(--rs-font-size-body-1);
+		--rs-text-field-line-height: var(--rs-line-height-body-1);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-1);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
-		--rs-text-field-attachment-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4));
+		--rs-text-field-min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x4) * 2);
 	}
 }
 
 .root.--variant-faded {
-	--rs-text-field-border-color: transparent;
-
 	background: var(--rs-color-background-neutral-faded);
 }
 
 .root.--variant-ghost {
-	--rs-text-field-border-color: transparent;
-
 	background: transparent;
 }
 
 .root.--variant-headless {
-	--rs-text-field-border-color: transparent;
 	--rs-text-field-focus-border-color: transparent;
 
 	background: transparent;
+	box-shadow: none !important;
 }
 
-.root.--status-error {
-	--rs-text-field-border-color: var(--rs-color-border-critical);
-	--rs-text-field-border-width: 2px;
+.root.--status-error:not(.--variant-headless) {
+	box-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-critical) inset;
 }
 
 @media (--rs-viewport-s) and (hover: none) {
 	.input {
-		font-size: var(--rs-font-size-body-2) !important;
+		font-size: var(--rs-font-size-body-1) !important;
 	}
 }

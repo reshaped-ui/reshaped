@@ -3,8 +3,8 @@ import { expect, fn, userEvent } from "storybook/test";
 
 import Badge from "@/components/Badge";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/Breadcrumbs",
@@ -21,7 +21,7 @@ export const color = {
 	render: () => (
 		<Example>
 			<Example.Item title="color: neutral">
-				<Breadcrumbs ariaLabel="breadcrumb neutral">
+				<Breadcrumbs expandAriaLabel="Expand items" ariaLabel="breadcrumb neutral">
 					<Breadcrumbs.Item onClick={() => {}}>Item 1</Breadcrumbs.Item>
 					<Breadcrumbs.Item onClick={() => {}}>Item 2</Breadcrumbs.Item>
 					<Breadcrumbs.Item>Item 3</Breadcrumbs.Item>
@@ -29,7 +29,7 @@ export const color = {
 			</Example.Item>
 
 			<Example.Item title="color: primary">
-				<Breadcrumbs color="primary" ariaLabel="breadcrumb primary">
+				<Breadcrumbs color="primary" expandAriaLabel="Expand items" ariaLabel="breadcrumb primary">
 					<Breadcrumbs.Item onClick={() => {}}>Item 1</Breadcrumbs.Item>
 					<Breadcrumbs.Item onClick={() => {}}>Item 2</Breadcrumbs.Item>
 					<Breadcrumbs.Item>Item 3</Breadcrumbs.Item>
@@ -44,7 +44,7 @@ export const item = {
 	render: () => (
 		<Example>
 			<Example.Item title="disabled item">
-				<Breadcrumbs color="primary" ariaLabel="breadcrumb disabled">
+				<Breadcrumbs color="primary" expandAriaLabel="Expand items" ariaLabel="breadcrumb disabled">
 					<Breadcrumbs.Item onClick={() => {}}>Item 1</Breadcrumbs.Item>
 					<Breadcrumbs.Item onClick={() => {}} disabled>
 						Disabled item 2
@@ -61,7 +61,11 @@ export const icon = {
 	render: () => (
 		<Example>
 			<Example.Item title="item with icon">
-				<Breadcrumbs color="primary" ariaLabel="breadcrumb with icon">
+				<Breadcrumbs
+					color="primary"
+					expandAriaLabel="Expand items"
+					ariaLabel="breadcrumb with icon"
+				>
 					<Breadcrumbs.Item icon={IconZap} onClick={() => {}}>
 						Item 1
 					</Breadcrumbs.Item>
@@ -78,7 +82,12 @@ export const slots = {
 	render: () => (
 		<Example>
 			<Example.Item title="slot: separator">
-				<Breadcrumbs color="primary" separator="/" ariaLabel="breadcrumb with separator">
+				<Breadcrumbs
+					color="primary"
+					separator="/"
+					expandAriaLabel="Expand items"
+					ariaLabel="breadcrumb with separator"
+				>
 					<Breadcrumbs.Item onClick={() => {}}>Item 1</Breadcrumbs.Item>
 					<Breadcrumbs.Item onClick={() => {}}>Item 2</Breadcrumbs.Item>
 					<Breadcrumbs.Item>Item 3</Breadcrumbs.Item>
@@ -86,7 +95,7 @@ export const slots = {
 			</Example.Item>
 
 			<Example.Item title="custom child content">
-				<Breadcrumbs ariaLabel="breadcrumb with custom children">
+				<Breadcrumbs expandAriaLabel="Expand items" ariaLabel="breadcrumb with custom children">
 					<Breadcrumbs.Item onClick={() => {}}>
 						<Badge>Item 1</Badge>
 					</Breadcrumbs.Item>
@@ -133,7 +142,12 @@ export const collapsed: StoryObj = {
 			</Example.Item>
 
 			<Example.Item title="collapsed, 3 items shown by default, not expandable">
-				<Breadcrumbs defaultVisibleItems={3} ariaLabel="breadcrumb three" disableExpand>
+				<Breadcrumbs
+					defaultVisibleItems={3}
+					expandAriaLabel="Expand items"
+					ariaLabel="breadcrumb three"
+					disableExpand
+				>
 					<Breadcrumbs.Item onClick={() => {}}>Item 1</Breadcrumbs.Item>
 					<Breadcrumbs.Item onClick={() => {}}>Item 2</Breadcrumbs.Item>
 					<Breadcrumbs.Item onClick={() => {}}>Item 3</Breadcrumbs.Item>
@@ -166,7 +180,7 @@ export const multiline = {
 	render: () => (
 		<Example>
 			<Example.Item title="wraps content when multiline">
-				<Breadcrumbs ariaLabel="breadcrumb multiline">
+				<Breadcrumbs expandAriaLabel="Expand items" ariaLabel="breadcrumb multiline">
 					{[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
 						<Breadcrumbs.Item onClick={() => {}} key={i}>
 							Item {i}
@@ -184,7 +198,7 @@ export const onClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
 		handleClick: fn(),
 	},
 	render: (args) => (
-		<Breadcrumbs>
+		<Breadcrumbs expandAriaLabel="Expand items">
 			<Breadcrumbs.Item onClick={args.handleClick}>Trigger</Breadcrumbs.Item>
 			<Breadcrumbs.Item onClick={args.handleClick} disabled>
 				Trigger
@@ -208,7 +222,7 @@ export const onClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
 export const href: StoryObj = {
 	name: "item, href",
 	render: () => (
-		<Breadcrumbs>
+		<Breadcrumbs expandAriaLabel="Expand items">
 			<Breadcrumbs.Item href="https://reshaped.so">Trigger</Breadcrumbs.Item>
 		</Breadcrumbs>
 	),
@@ -223,7 +237,11 @@ export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
 		<div data-testid="root">
-			<Breadcrumbs className="test-classname" attributes={{ id: "test-id" }}>
+			<Breadcrumbs
+				className="test-classname"
+				expandAriaLabel="Expand items"
+				attributes={{ id: "test-id" }}
+			>
 				<Breadcrumbs.Item>Trigger</Breadcrumbs.Item>
 			</Breadcrumbs>
 		</div>

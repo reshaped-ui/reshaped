@@ -46,25 +46,29 @@ const Demo: React.FC<
 	const { position = "bottom-start", children, text, contentHeight, contentWidth, ...rest } = props;
 
 	return (
-		<Flyout position={position} {...rest}>
+		<Flyout
+			position={position}
+			{...rest}
+			scrollableAttributes={{
+				style: {
+					padding: "var(--rs-unit-x4)",
+				},
+			}}
+			contentAttributes={{
+				style: {
+					background: "var(--rs-color-background-elevation-overlay)",
+					height: contentHeight === false ? undefined : contentHeight || 160,
+					width: contentWidth === false ? undefined : contentWidth || 160,
+					borderRadius: "var(--rs-radius-medium)",
+					border: "1px solid var(--rs-color-border-neutral-faded)",
+					boxSizing: "border-box",
+				},
+			}}
+		>
 			<Flyout.Trigger>
 				{(attributes) => <Button attributes={attributes}>{text || position}</Button>}
 			</Flyout.Trigger>
-			<Flyout.Content
-				attributes={{
-					style: {
-						background: "var(--rs-color-background-elevation-overlay)",
-						padding: "var(--rs-unit-x4)",
-						height: contentHeight === false ? undefined : contentHeight || 160,
-						width: contentWidth === false ? undefined : contentWidth || 160,
-						borderRadius: "var(--rs-radius-medium)",
-						border: "1px solid var(--rs-color-border-neutral-faded)",
-						boxSizing: "border-box",
-					},
-				}}
-			>
-				{children || "Content"}
-			</Flyout.Content>
+			<Flyout.Content>{children || "Content"}</Flyout.Content>
 		</Flyout>
 	);
 };
@@ -331,16 +335,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					fallbackPositions={false}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="end-bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetStart={4} insetTop={80} gap={2}>
@@ -350,32 +356,36 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="top-end"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom-end"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetBottom={4} insetStart={4} gap={2}>
@@ -385,16 +395,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="end"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			{/* Right side */}
@@ -406,16 +418,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="start-bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetEnd={4} insetTop={80} gap={2}>
@@ -425,32 +439,36 @@ const FallbackAdjustLayoutControls = ({
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="top"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom-start"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					position="bottom"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					contentWidth={contentWidth}
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 
 			<View position="absolute" insetBottom={4} insetEnd={4} gap={2}>
@@ -460,16 +478,18 @@ const FallbackAdjustLayoutControls = ({
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 				<Demo
 					contentHeight={contentHeight}
 					position="start"
 					fallbackPositions={false}
 					fallbackAdjustLayout
 					containerRef={containerRef}
-					children={content}
-				/>
+				>
+					{content}
+				</Demo>
 			</View>
 		</>
 	);
@@ -1071,12 +1091,12 @@ export const testScopedTheming = {
 	render: () => (
 		<View gap={3} align="start">
 			<Button color="primary">Slate button</Button>
-			<Theme name="reshaped">
+			<Theme name="figma">
 				<Flyout triggerType="click" active position="bottom-start">
 					<Flyout.Trigger>
 						{(attributes) => (
 							<Button color="primary" attributes={attributes}>
-								Reshaped button
+								Figma button
 							</Button>
 						)}
 					</Flyout.Trigger>
@@ -1084,7 +1104,7 @@ export const testScopedTheming = {
 						<Content>
 							<View gap={1}>
 								<View.Item>Portal content, rendered in body</View.Item>
-								<Button color="primary">Reshaped button</Button>
+								<Button color="primary">Figma button</Button>
 							</View>
 						</Content>
 					</Flyout.Content>
@@ -1115,31 +1135,38 @@ export const testWithoutFocusable: StoryObj = {
 export const testChangeSize = {
 	name: "test: size updates",
 	render: () => {
-		const [position, setPosition] = React.useState<FlyoutProps["position"]>("bottom-start");
+		const [position, setPosition] =
+			React.useState<NonNullable<FlyoutProps["position"]>>("bottom-start");
 		const [updatedHeight, setUpdatedHeight] = React.useState(false);
+		const positions = [
+			"bottom-start",
+			"bottom",
+			"bottom-end",
+			"top-start",
+			"top",
+			"top-end",
+			"start-top",
+			"start",
+			"start-bottom",
+			"end-top",
+			"end",
+			"end-bottom",
+		] as const;
 
 		return (
 			<>
 				<View direction="row" gap={4} align="center">
 					<Select
 						name="position"
-						options={[
-							"bottom-start",
-							"bottom",
-							"bottom-end",
-							"top-start",
-							"top",
-							"top-end",
-							"start-top",
-							"start",
-							"start-bottom",
-							"end-top",
-							"end",
-							"end-bottom",
-						].map((p) => ({ label: p, value: p }))}
-						onChange={(args) => setPosition(args.value as FlyoutProps["position"])}
+						onChange={(args) => setPosition(args.value as NonNullable<FlyoutProps["position"]>)}
 						value={position}
-					/>
+					>
+						{positions.map((p) => (
+							<Select.Option key={p} value={p}>
+								{p}
+							</Select.Option>
+						))}
+					</Select>
 					<Switch name="height" onChange={(args) => setUpdatedHeight(args.checked)}>
 						Change height
 					</Switch>

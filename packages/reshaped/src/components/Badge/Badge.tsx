@@ -1,14 +1,12 @@
-import { classNames } from "@reshaped/headless";
 import { forwardRef } from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable, { type ActionableProps, type ActionableRef } from "@/components/Actionable";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
 import IconClose from "@/icons/Close";
-
-import s from "./Badge.module.css";
-
 import type * as T from "./Badge.types";
+import s from "./Badge.module.css";
 
 const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {
@@ -30,7 +28,11 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		as,
 	} = props;
 	const isActionable = !!(onClick || href);
-	const iconSize = size === "small" ? 3 : 4;
+	const iconSize = {
+		small: 3,
+		medium: 3.5,
+		large: 4,
+	}[size];
 	const empty = !children && !icon && !endIcon;
 	const rootClassName = classNames(
 		s.root,
@@ -63,7 +65,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			{icon && <Icon svg={icon} autoWidth size={iconSize} className={s.icon} />}
 			{children && (
 				<Text
-					variant={size === "large" ? "body-3" : "caption-1"}
+					variant={size === "large" ? "body-2" : "caption-1"}
 					weight="medium"
 					attributes={{
 						"aria-hidden": hidden ? "true" : undefined,

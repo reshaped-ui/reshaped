@@ -1,4 +1,3 @@
-import { useToggle } from "@reshaped/headless";
 import React from "react";
 
 import Alert from "@/components/Alert";
@@ -19,6 +18,7 @@ import Table from "@/components/Table";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import View, { ViewProps } from "@/components/View";
+import useToggle from "@/hooks/useToggle";
 import IconChevronDown from "@/icons/ChevronDown";
 import IconChevronRight from "@/icons/ChevronRight";
 import IconZap from "@/icons/Zap";
@@ -226,7 +226,7 @@ const ExampleAnalytics = () => (
 					</Button>
 				</Button.Aligner>
 			</View>
-			<Text variant="featured-2" color="positive">
+			<Text variant="title-5" color="positive">
 				+76.28%
 			</Text>
 			<View gap={2}>
@@ -304,7 +304,7 @@ const ExampleLogin = () => {
 	return (
 		<Card height="100%">
 			<View gap={3}>
-				<Text variant="featured-3">Sign in to your account</Text>
+				<Text variant="title-6">Sign in to your account</Text>
 
 				<Button variant="outline" fullWidth>
 					Sign in with Figma
@@ -386,7 +386,7 @@ const ExampleSettings = () => (
 				</Text>
 
 				<View grow justify="end">
-					<Button color="primary" variant="faded">
+					<Button color="primary" variant="outline">
 						Save settings
 					</Button>
 				</View>
@@ -587,26 +587,7 @@ const ThemePlayground = () => {
 						</Button>
 						<Badge color="warning">Warning</Badge>
 					</View>
-					<View direction="row" gap={2}>
-						<Button color="neutral" variant="faded" onClick={() => {}}>
-							Neutral
-						</Button>
-						<Button color="primary" variant="faded" onClick={() => {}}>
-							Primary
-						</Button>
-						<Button color="critical" variant="faded" onClick={() => {}}>
-							Critical
-						</Button>
-						<Button color="positive" variant="faded" onClick={() => {}}>
-							Positive
-						</Button>
-						<Button color="primary" variant="faded" disabled onClick={() => {}}>
-							Disabled
-						</Button>
-						<Badge color="warning" variant="faded">
-							Warning
-						</Badge>
-					</View>
+
 					<View direction="row" gap={2}>
 						<Button color="neutral" variant="outline" onClick={() => {}}>
 							Neutral
@@ -623,9 +604,7 @@ const ThemePlayground = () => {
 						<Button color="primary" variant="outline" disabled onClick={() => {}}>
 							Disabled
 						</Button>
-						<Badge color="warning" variant="outline">
-							Warning
-						</Badge>
+						<Badge color="warning">Warning</Badge>
 					</View>
 					{/* <View direction="row" gap={4}>
 						<View

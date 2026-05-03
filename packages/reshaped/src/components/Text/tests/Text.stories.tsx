@@ -18,8 +18,19 @@ export const variant = {
 	name: "variant",
 	render: () => (
 		<Example>
+			<Example.Item title="variant: headline-1">
+				<Text variant="headline-1">Headline 1</Text>
+			</Example.Item>
+			<Example.Item title="variant: headline-2">
+				<Text variant="headline-2">Headline 2</Text>
+			</Example.Item>
+			<Example.Item title="variant: headline-3">
+				<Text variant="headline-3">Headline 3</Text>
+			</Example.Item>
 			<Example.Item title="variant: title-1">
-				<Text variant="title-1">Title 1</Text>
+				<Text variant="title-1" weight="regular">
+					Title 1
+				</Text>
 			</Example.Item>
 			<Example.Item title="variant: title-2">
 				<Text variant="title-2">Title 2</Text>
@@ -36,23 +47,11 @@ export const variant = {
 			<Example.Item title="variant: title-6">
 				<Text variant="title-6">Title 6</Text>
 			</Example.Item>
-			<Example.Item title="variant: featured-1">
-				<Text variant="featured-1">Featured 1</Text>
-			</Example.Item>
-			<Example.Item title="variant: featured-2">
-				<Text variant="featured-2">Featured 2</Text>
-			</Example.Item>
-			<Example.Item title="variant: featured-3">
-				<Text variant="featured-3">Featured 3</Text>
-			</Example.Item>
 			<Example.Item title="variant: body-1">
 				<Text variant="body-1">Body 1</Text>
 			</Example.Item>
 			<Example.Item title="variant: body-2">
 				<Text variant="body-2">Body 2</Text>
-			</Example.Item>
-			<Example.Item title="variant: body-3">
-				<Text variant="body-3">Body 3</Text>
 			</Example.Item>
 			<Example.Item title="variant: caption-1">
 				<Text variant="caption-1">Caption 1</Text>
@@ -60,8 +59,8 @@ export const variant = {
 			<Example.Item title="variant: caption-2">
 				<Text variant="caption-2">Caption 2</Text>
 			</Example.Item>
-			<Example.Item title={["responsive variant", "[s] body-3", "[m+] title-4"]}>
-				<Text variant={{ s: "body-3", m: "title-4" }}>Responsive</Text>
+			<Example.Item title={["responsive variant", "[s] body-2", "[m+] title-4"]}>
+				<Text variant={{ s: "body-2", m: "title-4" }}>Responsive</Text>
 			</Example.Item>
 		</Example>
 	),

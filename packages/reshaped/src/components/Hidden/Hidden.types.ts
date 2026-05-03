@@ -1,5 +1,6 @@
-import type * as G from "@/types/global";
 import type React from "react";
+
+import type * as G from "@/types/global";
 
 export type Props = {
 	/** Pick at which viewport sizes to hide the children*/

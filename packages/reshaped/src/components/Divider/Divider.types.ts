@@ -1,14 +1,16 @@
-import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
+import type * as G from "@/types/global";
+import type { Attributes } from "@/types/global";
 
 export type Props = {
 	/** Change component to take no space, useful for using it as a border in components like Tabs */
 	blank?: boolean;
 	/** Change component to render vertically */
 	vertical?: G.Responsive<boolean>;
-	/** Offset the divider from the container bounds */
-	offset?: string;
+	/** Inset the divider from the container bounds */
+	inset?: G.Responsive<number>;
 	/** Color of the divider
 	 * @default "neutral-faded"
 	 */

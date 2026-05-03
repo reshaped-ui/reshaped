@@ -1,29 +1,24 @@
 "use client";
 
-import {
-	classNames,
-	useIsomorphicLayoutEffect,
-	useRTL,
-	useKeyboardArrowNavigation,
-} from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
 import Icon from "@/components/Icon";
-import useFadeSide from "@/hooks/_private/useFadeSide";
+import useFadeSide from "@/hooks/_internal/useFadeSide";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation";
+import useRTL from "@/hooks/useRTL";
+import { checkTransitions } from "@/utilities/animation";
 import IconChevronLeft from "@/icons/ChevronLeft";
 import IconChevronRight from "@/icons/ChevronRight";
-import { checkTransitions } from "@/utilities/animation";
-
-import s from "./Tabs.module.css";
-import { useTabs } from "./TabsContext";
-import TabsItem from "./TabsItem";
-
 import type * as T from "./Tabs.types";
+import { useTabs } from "./TabsContext";
+import s from "./Tabs.module.css";
 
 const findParentItem = (el: HTMLElement | null, rootEl: HTMLElement): HTMLElement | null => {
 	if (el === rootEl || !el) return null;
-	if (el.classList.contains(s.listItem)) return el;
+	if (el.classList.contains(s.button)) return el;
 	return findParentItem(el.parentElement, rootEl);
 };
 
@@ -31,7 +26,6 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 	const { children, className, attributes } = props;
 	const {
 		value,
-		setDefaultValue,
 		itemWidth,
 		variant,
 		name,
@@ -46,6 +40,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 	} = useTabs();
 	const [rtl] = useRTL();
 	const fadeSide = useFadeSide(elScrollableRef, { disabled: itemWidth === "equal" });
+	const listRef = React.useRef<HTMLDivElement>(null);
 	const rootClassNames = classNames(
 		s.root,
 		size && s[`--size-${size}`],
@@ -88,35 +83,24 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 
 	const getElementSelectionStyle = React.useCallback(
 		(el: HTMLElement): Pick<T.SelectionState, "scaleX" | "scaleY" | "left" | "top"> | null => {
-			if (!elScrollableRef.current) return null;
+			if (!elScrollableRef.current || !listRef.current) return null;
 
 			const itemEl = findParentItem(el, elScrollableRef.current);
 			if (!itemEl) return null;
+			const listRect = listRef.current.getBoundingClientRect();
+			const itemRect = itemEl.getBoundingClientRect();
 
 			return {
-				scaleX: itemEl.clientWidth,
-				scaleY: itemEl.clientHeight,
-				top: itemEl.offsetTop,
-				left: itemEl.offsetLeft,
+				scaleX: itemRect.width,
+				scaleY: itemRect.height,
+				top: itemRect.top - listRect.top,
+				left: itemRect.left - listRect.left,
 			};
 		},
 		[elScrollableRef]
 	);
 
 	useKeyboardArrowNavigation({ ref: elScrollableRef, disabled: !!name });
-
-	useIsomorphicLayoutEffect(() => {
-		if (value) return;
-
-		const firstItem = React.Children.toArray(children)[0];
-
-		if (!React.isValidElement(firstItem)) return;
-		if (!firstItem || firstItem.type !== TabsItem) return;
-
-		const props = firstItem.props as T.ItemProps;
-
-		setDefaultValue(props.value);
-	}, [value]);
 
 	useIsomorphicLayoutEffect(() => {
 		// Do not update selection on mount, until we receive new activeId
@@ -144,17 +128,8 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 	return (
 		<div {...attributes} className={rootClassNames}>
 			<div className={s.inner} ref={elScrollableRef}>
-				<div className={s.list} role="tablist">
-					{React.Children.map(children, (child, index: number) => {
-						if (!React.isValidElement(child)) return null;
-						const props = child.props as T.ItemProps;
-
-						return (
-							<div className={s.listItem} key={props.value || child.key || index} data-rs-tabs-item>
-								{child}
-							</div>
-						);
-					})}
+				<div className={s.list} role="tablist" ref={listRef}>
+					{children}
 
 					{!disableSelectionAnimation && (
 						<div

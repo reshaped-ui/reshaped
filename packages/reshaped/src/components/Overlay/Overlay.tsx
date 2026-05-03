@@ -1,23 +1,19 @@
 "use client";
 
-import {
-	TrapFocus,
-	useHotkeys,
-	useIsomorphicLayoutEffect,
-	useHandlerRef,
-	useScrollLock,
-	useToggle,
-} from "@reshaped/headless";
-import { classNames, useIsDismissible } from "@reshaped/headless";
-import { type FocusableElement } from "@reshaped/headless/internal";
 import React from "react";
+import { TrapFocus, classNames } from "@reshaped/utilities";
+import { type FocusableElement } from "@reshaped/utilities/internal";
 
 import Portal from "@/components/_private/Portal";
-import { checkTransitions, onNextFrame } from "@/utilities/animation";
-
-import s from "./Overlay.module.css";
-
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useHotkeys from "@/hooks/useHotkeys";
+import useIsDismissible from "@/hooks/useIsDismissible";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import useScrollLock from "@/hooks/useScrollLock";
+import useToggle from "@/hooks/useToggle";
+import { onNextFrame, checkTransitions } from "@/utilities/animation";
 import type * as T from "./Overlay.types";
+import s from "./Overlay.module.css";
 
 const Overlay: React.FC<T.Props> = (props) => {
 	const {
@@ -34,6 +30,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		containerRef,
 		contained,
 		className,
+		instanceRef,
 		attributes,
 	} = props;
 
@@ -41,12 +38,12 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const onCloseRef = useHandlerRef(onClose);
 	const onOpenRef = useHandlerRef(onOpen);
 	const onAfterCloseRef = useHandlerRef(onAfterClose);
+	const onAfterOpenRef = useHandlerRef(onAfterOpen);
 
-	const isTransparent = transparent === true;
-	const opacity = isTransparent ? 0 : (1 - (transparent || 0)) * 0.7;
 	const [mounted, setMounted] = React.useState(false);
 	const [animated, setAnimated] = React.useState(false);
 	const [offset, setOffset] = React.useState([0, 0]);
+	const rootRef = React.useRef<HTMLDivElement>(null);
 	const scopeRef = React.useRef<HTMLDivElement>(null);
 	const contentRef = React.useRef<HTMLDivElement>(null);
 	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
@@ -66,7 +63,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const rootClassNames = classNames(
 		s.root,
 		visible && s["--visible"],
-		isTransparent && s["--click-through"],
+		transparent && s["--click-through"],
 		blurred && s["--blurred"],
 		animated && s["--animated"],
 		shouldBeContained && s["--contained"],
@@ -88,7 +85,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 			if (originalOverflowRef.current && containerRef?.current) {
 				containerRef.current.style.overflow = originalOverflowRef.current;
-				containerRef.current.style.removeProperty("isolation");
 				originalOverflowRef.current = null;
 			}
 
@@ -103,25 +99,29 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 	const handleMouseUp = (event: React.MouseEvent<HTMLElement>) => {
 		const isMouseUpValid = !isInsideContent(event.target as HTMLElement);
-		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !isTransparent;
+		const shouldClose = isMouseDownValidRef.current && isMouseUpValid && !transparent;
 
 		if (!shouldClose || disableCloseOnClick) return;
 
 		close({ reason: "overlay-click" });
 	};
 
-	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
+	const handleAfterClose = React.useCallback(() => {
 		setAnimated(false);
 
 		if (visible) {
-			onAfterOpen?.();
+			onAfterOpenRef.current?.();
 			return;
 		}
 
 		unlockScroll();
 		remove();
-		onAfterClose?.();
+		onAfterCloseRef.current?.();
+	}, [visible, onAfterOpenRef, onAfterCloseRef, unlockScroll, remove]);
+
+	const handleTransitionEnd = (e: React.TransitionEvent) => {
+		if (e.propertyName !== "opacity" || e.target !== e.currentTarget) return;
+		handleAfterClose();
 	};
 
 	useHotkeys(
@@ -137,23 +137,17 @@ const Overlay: React.FC<T.Props> = (props) => {
 		if (hasTransitions) setAnimated(true);
 		if (active && !rendered) render();
 		if (!active && rendered) {
-			if (!hasTransitions) {
-				unlockScroll();
-				remove();
-				onAfterCloseRef.current?.();
-				return;
-			}
-
 			hide();
+			if (!hasTransitions) handleAfterClose();
 		}
-	}, [active, render, hide, rendered, remove, unlockScroll, onAfterCloseRef]);
+	}, [active, render, hide, rendered, handleAfterClose]);
 
 	// Show overlay after it was rendered
 	React.useEffect(() => {
 		if (!rendered) return;
-		if (!isTransparent) lockScroll();
+		if (!transparent) lockScroll();
 		onNextFrame(() => show());
-	}, [rendered, show, lockScroll, isTransparent]);
+	}, [rendered, show, lockScroll, transparent]);
 
 	React.useEffect(() => {
 		if (!rendered || !contentRef.current) return;
@@ -165,7 +159,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 			originalOverflowRef.current = containerEl.style.overflow;
 
 			containerEl.style.setProperty("overflow", "hidden");
-			containerEl.style.setProperty("isolation", "isolate");
 			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
 		}
 
@@ -189,6 +182,17 @@ const Overlay: React.FC<T.Props> = (props) => {
 		setMounted(true);
 	}, []);
 
+	React.useImperativeHandle(
+		instanceRef,
+		() => ({
+			setOpacity: (value: number) => {
+				if (transparent) return;
+				rootRef.current?.style.setProperty("--rs-overlay-opacity", `${value}`);
+			},
+		}),
+		[transparent]
+	);
+
 	if (!rendered || !mounted) return null;
 
 	return (
@@ -197,14 +201,18 @@ const Overlay: React.FC<T.Props> = (props) => {
 				{(ref) => (
 					<div
 						{...attributes}
-						ref={ref}
+						ref={(node) => {
+							rootRef.current = node;
+							ref.current = node;
+						}}
 						style={
 							{
-								"--rs-overlay-opacity": opacity,
 								"--rs-overlay-offset-x": containerRef ? `${offset[0]}px` : undefined,
 								"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
+								"--rs-overlay-opacity": transparent ? 0 : undefined,
 							} as React.CSSProperties
 						}
+						// oxlint-disable-next-line jsx_a11y/prefer-tag-over-role
 						role="button"
 						tabIndex={-1}
 						className={rootClassNames}

@@ -37,7 +37,8 @@
 	}
 
 	[data-rs-keyboard] &:focus + .area {
-		box-shadow: var(--rs-shadow-focus);
+		outline: var(--rs-outline);
+		outline-offset: var(--rs-outline-width);
 	}
 
 	&[disabled] + .area {
@@ -95,7 +96,7 @@
 	@value small {
 		--rs-switch-height: var(--rs-unit-x4);
 		--rs-switch-width: var(--rs-unit-x6);
-		--rs-switch-gap: var(--rs-unit-x1);
+		--rs-switch-gap: var(--rs-unit-x1-5);
 		--rs-switch-line-height: var(--rs-line-height-caption-1);
 		--rs-switch-font-size: var(--rs-font-size-caption-1);
 	}
@@ -104,15 +105,15 @@
 		--rs-switch-height: var(--rs-unit-x5);
 		--rs-switch-width: var(--rs-unit-x8);
 		--rs-switch-gap: var(--rs-unit-x2);
-		--rs-switch-line-height: var(--rs-line-height-body-3);
-		--rs-switch-font-size: var(--rs-font-size-body-3);
+		--rs-switch-line-height: var(--rs-line-height-body-2);
+		--rs-switch-font-size: var(--rs-font-size-body-2);
 	}
 
 	@value large {
 		--rs-switch-height: var(--rs-unit-x6);
 		--rs-switch-width: var(--rs-unit-x10);
 		--rs-switch-gap: var(--rs-unit-x2);
-		--rs-switch-line-height: var(--rs-line-height-body-2);
-		--rs-switch-font-size: var(--rs-font-size-body-2);
+		--rs-switch-line-height: var(--rs-line-height-body-1);
+		--rs-switch-font-size: var(--rs-font-size-body-1);
 	}
 }

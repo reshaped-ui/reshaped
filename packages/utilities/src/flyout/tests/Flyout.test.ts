@@ -1,6 +1,6 @@
-import { expect, test, describe, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
-import Flyout from "flyout/Flyout";
+import Flyout from "../Flyout";
 
 describe("flyout/Flyout", () => {
 	let content: HTMLElement;

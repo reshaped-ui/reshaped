@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const defaultThemeMediaCSSPath = path.resolve(__dirname, "../themes/reshaped/media.css");
+const defaultThemeMediaCSSPath = path.resolve(__dirname, "../themes/slate/media.css");
 
 // Using [plugin]: { ...options } format here because it's supported by the most frameworks
 // - require('plugin') is not supported by Next

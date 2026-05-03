@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { ThemeContext, GlobalColorModeContext } from "./Theme.context";
+import { GlobalColorModeContext, ThemeContext } from "./Theme.context";
 
 export const useGlobalColorMode = () => {
 	return React.useContext(GlobalColorModeContext);

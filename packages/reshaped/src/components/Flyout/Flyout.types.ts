@@ -1,7 +1,8 @@
 import React from "react";
+import type { ClassName } from "@reshaped/utilities";
+import type { Coordinates, TrapMode } from "@reshaped/utilities/internal";
 
-import type { Attributes, ClassName } from "@reshaped/headless";
-import type { TrapMode, Coordinates } from "@reshaped/headless/internal";
+import type { Attributes } from "@/types/global";
 
 /**
  * Utility
@@ -80,7 +81,6 @@ type WithControlled = {
 
 export type TriggerAttributes = {
 	// FIXME: Once we only support React 19+, we can drop this any
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	ref: React.RefObject<HTMLButtonElement | null> | any;
 	onBlur?: (e: React.FocusEvent) => void;
 	onFocus?: () => void;
@@ -108,16 +108,10 @@ type BaseProps = {
 	groupTimeouts?: boolean;
 	/** Content position relative to the trigger element */
 	position?: Position;
-	/**
-	 * @deprecated Use fallbackPosition={false} instead, will be removed in v4
-	 */
-	forcePosition?: boolean;
 	/** Fallback positions for the content when it doesn't fit into the viewport or container */
 	fallbackPositions?: Position[] | false;
 	/** Adjust the content size and shift its position to fit into the container when none of the fallback positions work */
 	fallbackAdjustLayout?: boolean;
-	/** @deprecated Minimum width for the content when fallbackAdjustLayout is true */
-	fallbackMinWidth?: string;
 	/** Minimum height for the content when fallbackAdjustLayout is true */
 	fallbackMinHeight?: string;
 	/** Change component trap focus keyboard behavior and shortcuts */
@@ -158,6 +152,10 @@ type BaseProps = {
 	contentClassName?: string;
 	/** Additional attributes for the content element */
 	contentAttributes?: Attributes<"div">;
+	/** Additional classname for the scrollable element */
+	scrollableClassName?: string;
+	/** Additional attributes for the scrollable element */
+	scrollableAttributes?: Attributes<"div">;
 	/** Ref accessor for the flyout methods */
 	instanceRef?: React.Ref<Instance>;
 	/** Container to render the content in using a portal, position is calculated based on the container bounds
@@ -217,6 +215,8 @@ export type ContextProps = {
 	| "triggerType"
 	| "contentClassName"
 	| "contentAttributes"
+	| "scrollableClassName"
+	| "scrollableAttributes"
 	| "contentGap"
 	| "contentMaxHeight"
 	| "contentMaxWidth"

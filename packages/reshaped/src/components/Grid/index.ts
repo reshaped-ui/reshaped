@@ -7,4 +7,4 @@ const GridRoot = Grid as typeof Grid & {
 GridRoot.Item = GridItem;
 
 export default GridRoot;
-export type { Props as GridProps, ItemProps as GridItemProps } from "./Grid.types";
+export type { ItemProps as GridItemProps, Props as GridProps } from "./Grid.types";

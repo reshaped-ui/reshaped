@@ -1,15 +1,15 @@
 "use client";
 
-import { classNames, useElementId } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
 import Icon from "@/components/Icon";
+import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./TextField.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./TextField.types";
+import s from "./TextField.module.css";
 
 const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 	const { slot, icon, size, affix, position, id } = props;
@@ -65,8 +65,6 @@ const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 const TextField: React.FC<T.Props> = (props) => {
 	const {
 		onChange,
-		onFocus,
-		onBlur,
 		name,
 		value,
 		defaultValue,
@@ -93,10 +91,16 @@ const TextField: React.FC<T.Props> = (props) => {
 		formControl?.attributes.id || (props.inputAttributes?.id as string | undefined) || id;
 	const disabled = formControl?.disabled || props.disabled;
 	const hasError = formControl?.hasError || props.hasError;
+	const mixin = resolveMixin({
+		shadow: variant === "outline" ? "outline" : undefined,
+		borderColor: disabled ? "disabled" : "neutral",
+		border: variant === "outline" ? true : undefined,
+	});
 	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
 	const rootClassName = classNames(
 		s.root,
 		className,
+		...mixin.classNames,
 		size && responsiveClassNames(s, "--size", size),
 		hasError && s["--status-error"],
 		disabled && s["--disabled"],
@@ -125,6 +129,7 @@ const TextField: React.FC<T.Props> = (props) => {
 						endSlotPadding !== undefined && endSlotPadding >= 0
 							? `calc(var(--rs-unit-x1) * ${endSlotPadding})`
 							: undefined,
+					...mixin.variables,
 				} as React.CSSProperties
 			}
 			data-rs-aligner-target
@@ -151,8 +156,6 @@ const TextField: React.FC<T.Props> = (props) => {
 					value={value}
 					defaultValue={defaultValue}
 					onChange={handleChange}
-					onFocus={onFocus || inputAttributes?.onFocus}
-					onBlur={onBlur || inputAttributes?.onBlur}
 					id={inputId}
 				/>
 

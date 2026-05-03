@@ -1,7 +1,9 @@
-import type { OverlayProps, OverlayCloseReason } from "@/components/Overlay";
-import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
+import type { OverlayCloseReason, OverlayProps } from "@/components/Overlay";
+import type * as G from "@/types/global";
+import type { Attributes } from "@/types/global";
 
 export type Context = {
 	id: string;

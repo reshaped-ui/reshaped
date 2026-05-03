@@ -8,6 +8,6 @@ AutocompleteRoot.Item = AutocompleteItem;
 
 export default AutocompleteRoot;
 export type {
-	Props as AutocompleteProps,
 	Instance as AutocompleteInstance,
+	Props as AutocompleteProps,
 } from "./Autocomplete.types";

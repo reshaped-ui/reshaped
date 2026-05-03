@@ -48,5 +48,3 @@ Every PR with user-facing changes should include a changeset:
 - `pnpm changeset` – create a new changeset
 - `pnpm changeset:status` – preview what will be released
 - `pnpm version` – consume all changesets and bump package version (used during release)
-
-

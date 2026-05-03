@@ -1,112 +1,100 @@
 {
-  "name": "reshaped",
-  "description": "Professionally crafted design system in React and Figma for building products of any scale and complexity",
-  "version": "3.11.0-canary.4",
-  "license": "MIT",
-  "email": "hello@reshaped.so",
-  "homepage": "https://reshaped.so",
-  "keywords": [
-    "react",
-    "ui",
-    "design-system",
-    "react-components",
-    "component-library",
-    "components",
-    "css-modules",
-    "figma",
-    "ui-kit",
-    "accessibility",
-    "accessible"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reshaped-ui/reshaped.git",
-    "directory": "packages/reshaped"
-  },
-  "bugs": {
-    "url": "https://github.com/reshaped-ui/reshaped/issues"
-  },
-  "author": {
-    "name": "Dmitry Belyaev",
-    "email": "blv.dmitry@gmail.com",
-    "url": "https://reshaped.so"
-  },
-  "sideEffects": [
-    "*.css"
-  ],
-  "files": [
-    "bin/cli.js",
-    "dist/**/*"
-  ],
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
-    },
-    "./themes": {
-      "types": "./dist/themes/index.d.ts",
-      "import": "./dist/themes/index.js",
-      "default": "./dist/themes/index.js"
-    },
-    "./config/postcss": {
-      "types": "./dist/config/postcss.d.ts",
-      "import": "./dist/config/postcss.js",
-      "default": "./dist/config/postcss.cjs"
-    },
-    "./config/tailwind": {
-      "types": "./dist/config/tailwind.d.ts",
-      "import": "./dist/config/tailwind.js",
-      "default": "./dist/config/tailwind.js"
-    },
-    "./bundle": {
-      "types": "./dist/bundle.d.ts",
-      "import": "./dist/bundle.js",
-      "default": "./dist/bundle.js"
-    },
-    "./bundle.css": "./dist/bundle.css",
-    "./themes/reshaped/*": "./dist/themes/reshaped/*",
-    "./themes/slate/*": "./dist/themes/slate/*",
-    "./themes/figma/*": "./dist/themes/figma/*",
-    "./themes/fragments/twitter/*": "./dist/themes/fragments/twitter/*",
-    "./package.json": "./package.json"
-  },
-  "bin": {
-    "reshaped": "./bin/cli.js"
-  },
-  "scripts": {
-    "clean": "bash ./bin/clean.sh",
-    "dev": "storybook dev -p 3001 -c ../../.storybook --disable-telemetry",
-    "build": "pnpm clean && pnpm build:stories && pnpm build:esm && pnpm build:css && pnpm build:bundle",
-    "build:themes": "node bin/cli.js theming --config dist/cli/theming/reshaped.config.js --output src/themes",
-    "build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
-    "build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
-    "build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",
-    "build:bundle": "vite build && shx cp dist/index.d.ts dist/bundle.d.ts",
-    "build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
-    "release:local": "pnpm build && pnpm pack --out reshaped-local.tgz",
-    "test:browser": "vitest run --project=storybook",
-    "test:unit": "vitest run --project=unit",
-    "test:size": "size-limit"
-  },
-  "browserslist": [
-    "defaults and not IE 11"
-  ],
-  "peerDependencies": {
-    "postcss": "^8",
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
-  },
-  "dependencies": {
-    "@csstools/postcss-global-data": "4.0.0",
-    "@reshaped/headless": "workspace:*",
-    "@types/culori": "4.0.1",
-    "chalk": "4.1.2",
-    "commander": "14.0.3",
-    "cssnano": "7.1.2",
-    "csstype": "3.2.3",
-    "culori": "4.0.2",
-    "postcss-custom-media": "12.0.1"
-  }
+	"name": "reshaped",
+	"version": "4.0.0-canary.6",
+	"description": "Professionally crafted design system in React and Figma for building products of any scale and complexity",
+	"keywords": [
+		"accessibility",
+		"accessible",
+		"component-library",
+		"components",
+		"css-modules",
+		"design-system",
+		"figma",
+		"react",
+		"react-components",
+		"ui",
+		"ui-kit"
+	],
+	"homepage": "https://reshaped.so",
+	"bugs": {
+		"url": "https://github.com/reshaped-ui/reshaped/issues"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Dmitry Belyaev",
+		"email": "blv.dmitry@gmail.com",
+		"url": "https://reshaped.so"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/reshaped-ui/reshaped.git",
+		"directory": "packages/reshaped"
+	},
+	"bin": {
+		"reshaped": "./bin/cli.js"
+	},
+	"files": [
+		"bin/cli.js",
+		"skills/**/*",
+		"dist/**/*"
+	],
+	"sideEffects": [
+		"*.css"
+	],
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./config/postcss": {
+			"types": "./dist/config/postcss.d.ts",
+			"import": "./dist/config/postcss.js",
+			"default": "./dist/config/postcss.cjs"
+		},
+		"./bundle": {
+			"types": "./dist/bundle.d.ts",
+			"import": "./dist/bundle.js",
+			"default": "./dist/bundle.js"
+		},
+		"./themes/slate/*": "./dist/themes/slate/*",
+		"./themes/figma/*": "./dist/themes/figma/*",
+		"./themes/fragments/twitter/*": "./dist/themes/fragments/twitter/*",
+		"./bundle.css": "./dist/bundle.css",
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"clean": "bash ./bin/clean.sh",
+		"dev": "storybook dev -p 3001 -c ../../.storybook --disable-telemetry",
+		"build": "pnpm clean && pnpm build:stories && pnpm build:esm && pnpm build:css && pnpm build:bundle",
+		"build:themes": "node bin/cli.js theming --output src/themes",
+		"build:esm": "tsc -p tsconfig.esm.json && resolve-tspaths -p tsconfig.esm.json",
+		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
+		"build:stories": "tsc -p tsconfig.stories.json && resolve-tspaths -p tsconfig.stories.json",
+		"build:bundle": "vite build && shx cp dist/index.d.ts dist/bundle.d.ts",
+		"build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
+		"test:browser": "vitest run --project=storybook",
+		"test:unit": "vitest run --project=unit",
+		"test:size": "size-limit"
+	},
+	"dependencies": {
+		"@csstools/postcss-global-data": "4.0.0",
+		"@reshaped/theming": "workspace:*",
+		"@reshaped/utilities": "workspace:*",
+		"chalk": "4.1.2",
+		"commander": "14.0.3",
+		"cssnano": "7.1.4",
+		"csstype": "3.2.3",
+		"postcss-custom-media": "12.0.1"
+	},
+	"peerDependencies": {
+		"postcss": "^8",
+		"react": "^18 || ^19",
+		"react-dom": "^18 || ^19"
+	},
+	"browserslist": [
+		"defaults and not IE 11"
+	],
+	"email": "hello@reshaped.so"
 }

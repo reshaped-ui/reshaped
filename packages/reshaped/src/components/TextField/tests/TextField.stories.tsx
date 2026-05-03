@@ -3,14 +3,12 @@ import { expect, fn, userEvent } from "storybook/test";
 
 import Badge from "@/components/Badge";
 import Button from "@/components/Button";
-import Divider from "@/components/Divider";
 import FormControl from "@/components/FormControl";
-import Select from "@/components/Select";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/TextField",
@@ -26,16 +24,20 @@ export const variant = {
 	name: "variant",
 	render: () => (
 		<Example>
+			<Example.Item title="variant: outline">
+				<TextField name="foo" placeholder="Enter value" />
+			</Example.Item>
+
 			<Example.Item title="variant: faded">
-				<TextField variant="faded" name="Name" placeholder="Enter your name" />
+				<TextField variant="faded" name="foo" placeholder="Enter value" />
+			</Example.Item>
+
+			<Example.Item title="variant: ghost">
+				<TextField variant="ghost" name="foo" placeholder="Enter value" />
 			</Example.Item>
 
 			<Example.Item title="variant: headless">
-				<TextField variant="ghost" name="Name" placeholder="Enter your name" />
-			</Example.Item>
-
-			<Example.Item title="variant: headless">
-				<TextField variant="headless" name="Name" placeholder="Enter your name" />
+				<TextField variant="headless" name="foo" placeholder="Enter value" />
 			</Example.Item>
 		</Example>
 	),
@@ -48,8 +50,8 @@ export const rounded = {
 			<Example.Item title="rounded">
 				<TextField
 					rounded
-					name="Name"
-					placeholder="Enter your name"
+					name="foo"
+					placeholder="Enter value"
 					icon={IconZap}
 					prefix="+31"
 					endSlot={<Button rounded size="small" icon={IconZap} />}
@@ -62,8 +64,8 @@ export const rounded = {
 						<TextField
 							rounded
 							variant="faded"
-							name="Name"
-							placeholder="Enter your name"
+							name="foo"
+							placeholder="Enter value"
 							startSlot={
 								<Badge rounded size="small">
 									Hello
@@ -83,7 +85,7 @@ export const error = {
 	render: () => (
 		<Example>
 			<Example.Item title="error">
-				<TextField name="Name" placeholder="Enter your name" hasError />
+				<TextField name="foo" placeholder="Enter value" hasError />
 			</Example.Item>
 		</Example>
 	),
@@ -114,6 +116,7 @@ export const attachments = {
 					name="Name"
 					placeholder="Enter your name"
 					value="Reshaped"
+					endSlotPadding={1}
 					endSlot={
 						<Button
 							icon={IconZap}
@@ -157,9 +160,7 @@ export const attachments = {
 					placeholder="Enter your name"
 					value="Reshaped"
 					startSlot={[...Array(10).keys()].map((i) => (
-						<Badge size="small" key={i}>
-							Item {i + 1}
-						</Badge>
+						<Badge key={i}>Item {i + 1}</Badge>
 					))}
 					multiline
 				/>
@@ -206,7 +207,7 @@ export const aligner = {
 		<Example>
 			<Example.Item title="aligner">
 				<View gap={2}>
-					<Text variant="featured-2">What problem are you trying to solve?</Text>
+					<Text variant="title-5">What problem are you trying to solve?</Text>
 					<TextField.Aligner>
 						<TextField
 							variant="headless"
@@ -376,27 +377,4 @@ export const formControl = {
 			</Example.Item>
 		</Example>
 	),
-};
-
-export const foo = () => {
-	return (
-		<TextField
-			name="test-name"
-			inputAttributes={{ "aria-label": "Label" }}
-			endSlotPadding={0}
-			endSlot={
-				<View gap={0} direction="row" align="stretch">
-					<Divider color="neutral" vertical />
-					<Select.Custom
-						name="test-name"
-						inputAttributes={{ "aria-label": "Label" }}
-						variant="ghost"
-					>
-						<Select.Option value="dog">Dog</Select.Option>
-						<Select.Option value="turtle">Turtle</Select.Option>
-					</Select.Custom>
-				</View>
-			}
-		/>
-	);
 };

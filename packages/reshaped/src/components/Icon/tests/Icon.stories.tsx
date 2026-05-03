@@ -4,9 +4,9 @@ import { expect } from "storybook/test";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
 import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 import IconMic from "@/icons/Mic";
 import IconZap from "@/icons/Zap";
-import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/Icon",

@@ -1,20 +1,18 @@
 "use client";
 
-import { classNames, useElementId } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
+import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames } from "@/utilities/props";
-
-import s from "./TextArea.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./TextArea.types";
+import s from "./TextArea.module.css";
 
 const TextArea: React.FC<T.Props> = (props) => {
 	const {
 		onChange,
-		onFocus,
-		onBlur,
 		name,
 		value,
 		defaultValue,
@@ -32,6 +30,11 @@ const TextArea: React.FC<T.Props> = (props) => {
 		formControl?.attributes?.id || (props.inputAttributes?.id as string | undefined) || id;
 	const disabled = formControl?.disabled || props.disabled;
 	const hasError = formControl?.hasError || props.hasError;
+	const decoratorMixin = resolveMixin({
+		shadow: variant === "outline" ? "outline" : undefined,
+		borderColor: disabled ? "disabled" : "neutral",
+		border: variant === "outline" ? true : undefined,
+	});
 	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
 	const rootClassName = classNames(
 		s.root,
@@ -42,6 +45,7 @@ const TextArea: React.FC<T.Props> = (props) => {
 		resize !== undefined && s[`--resize-${resize}`],
 		className
 	);
+	const decoratorClassName = classNames(s.decorator, decoratorMixin.classNames);
 
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const nextValue = event.target.value;
@@ -74,10 +78,10 @@ const TextArea: React.FC<T.Props> = (props) => {
 				value={value}
 				defaultValue={defaultValue}
 				onChange={handleChange}
-				onFocus={onFocus || inputAttributes?.onFocus}
-				onBlur={onBlur || inputAttributes?.onBlur}
 				id={inputId}
 			/>
+
+			<div className={decoratorClassName} style={decoratorMixin.variables} />
 		</div>
 	);
 };

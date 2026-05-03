@@ -1,4 +1,4 @@
-import Modal, { ModalTitle, ModalSubtitle } from "./Modal";
+import Modal, { ModalSubtitle, ModalTitle } from "./Modal";
 
 const ModalRoot = Modal as typeof Modal & {
 	Title: typeof ModalTitle;

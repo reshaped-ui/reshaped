@@ -1,7 +1,7 @@
 .root {
-	--rs-file-upload-radius: var(--rs-radius-medium);
+	--rs-file-upload-radius: var(--rs-radius-large);
 	--rs-file-upload-border-color: var(--rs-color-border-neutral);
-	--rs-file-upload-hover-background-color: rgba(var(--rs-color-rgb-background-neutral), 0.16);
+	--rs-file-upload-hover-background-color: var(--rs-color-background-neutral-highlighted-faded);
 
 	display: block;
 
@@ -27,7 +27,7 @@
 }
 
 .--inline {
-	--rs-file-upload-radius: var(--rs-radius-small);
+	--rs-file-upload-radius: var(--rs-radius-medium);
 
 	&,
 	& .triggerLayer {
@@ -52,7 +52,7 @@
 		transition-property: background-color, border-color;
 
 		.--highlighted& {
-			background: rgba(var(--rs-color-rgb-background-primary), 0.08);
+			background: var(--rs-color-background-primary-highlighted-faded);
 			border-color: var(--rs-color-border-primary);
 		}
 

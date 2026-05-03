@@ -1,4 +1,3 @@
-import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useState } from "react";
 import { expect } from "storybook/test";
@@ -10,8 +9,8 @@ import MenuItem from "@/components/MenuItem";
 import Tabs from "@/components/Tabs";
 import Text from "@/components/Text";
 import View, { type ViewProps } from "@/components/View";
-import IconPlus from "@/icons/Plus";
-import { Placeholder, Example } from "@/utilities/storybook";
+import useToggle from "@/hooks/useToggle";
+import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/View",
@@ -827,23 +826,65 @@ export const shadow = {
 	name: "shadow",
 	render: () => (
 		<Example>
+			<Example.Item title="shadow: outline, radius: medium">
+				<View direction="row" gap={4}>
+					<View
+						height="100px"
+						width="100px"
+						shadow="outline"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="elevation-base"
+					/>
+					<View
+						height="100px"
+						width="100px"
+						shadow="outline-intense"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="primary"
+					/>
+				</View>
+			</Example.Item>
 			<Example.Item title="shadow: raised, radius: medium">
-				<View
-					height="100px"
-					width="100px"
-					shadow="raised"
-					borderRadius="medium"
-					backgroundColor="elevation-raised"
-				/>
+				<View direction="row" gap={4}>
+					<View
+						height="100px"
+						width="100px"
+						shadow="raised"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="elevation-base"
+					/>
+					<View
+						height="100px"
+						width="100px"
+						shadow="raised-intense"
+						borderColor="neutral-faded"
+						borderRadius="medium"
+						backgroundColor="primary"
+					/>
+				</View>
 			</Example.Item>
 			<Example.Item title="shadow: overlay, radius: medium">
-				<View
-					height="100px"
-					width="100px"
-					shadow="overlay"
-					borderRadius="medium"
-					backgroundColor="elevation-overlay"
-				/>
+				<View direction="row" gap={4}>
+					<View
+						height="100px"
+						width="100px"
+						shadow="overlay"
+						borderRadius="medium"
+						borderColor="neutral-faded"
+						backgroundColor="elevation-overlay"
+					/>
+					<View
+						height="100px"
+						width="100px"
+						shadow="overlay-intense"
+						borderRadius="medium"
+						borderColor="neutral-faded"
+						backgroundColor="primary"
+					/>
+				</View>
 			</Example.Item>
 		</Example>
 	),
@@ -892,6 +933,7 @@ export const positioning = {
 			</Example.Item>
 
 			<Example.Item title="position: sticky">
+				{/* oxlint-disable-next-line jsx_a11y/prefer-tag-over-role */}
 				<div style={{ overflow: "auto", height: 100 }} tabIndex={0} role="button">
 					<View position="sticky" borderColor="primary" insetTop={0}>
 						Content
@@ -904,6 +946,7 @@ export const positioning = {
 				<div
 					style={{ overflow: "auto", height: 100, position: "relative" }}
 					tabIndex={0}
+					// oxlint-disable-next-line jsx_a11y/prefer-tag-over-role
 					role="button"
 				>
 					<View position={{ s: "absolute", m: "relative" }} borderColor="primary" insetTop={0}>
@@ -1422,25 +1465,6 @@ export const testComposition = {
 	name: "composition, edge cases",
 	render: () => (
 		<Example>
-			<Example.Item>
-				<View direction="row" align="center" gap={4} padding={4}>
-					<View width="80px" height="60px" backgroundColor="neutral-faded" borderRadius="small" />
-
-					<View direction="row" align="center" gap={1} grow>
-						<View.Item shrink>
-							<Text>Text (like Jeff's Puzzles)</Text>
-						</View.Item>
-
-						<View minWidth="auto" grow>
-							<Button size="small" color="neutral" icon={IconPlus} />
-						</View>
-					</View>
-
-					<Button color="primary" rounded>
-						Button
-					</Button>
-				</View>
-			</Example.Item>
 			<Example.Item
 				title={[
 					"View.Item, MenuItem, Aspect ratio",
@@ -1466,7 +1490,7 @@ export const testComposition = {
 					<Placeholder />
 					<View.Item grow>
 						<View padding={0} align="center">
-							<Tabs variant="pills">
+							<Tabs variant="pills" defaultValue="1">
 								<Tabs.List>
 									<Tabs.Item value="1">Very long item</Tabs.Item>
 									<Tabs.Item value="2">Very long item</Tabs.Item>

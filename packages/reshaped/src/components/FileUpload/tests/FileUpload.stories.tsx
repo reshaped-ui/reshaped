@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, userEvent, fn } from "storybook/test";
+import { expect, fn, userEvent } from "storybook/test";
 
 import Button from "@/components/Button";
 import FileUpload from "@/components/FileUpload";
@@ -8,8 +8,8 @@ import Icon from "@/components/Icon";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import View from "@/components/View";
-import IconMic from "@/icons/Mic";
 import { Example } from "@/utilities/storybook";
+import IconMic from "@/icons/Mic";
 
 export default {
 	title: "Components/FileUpload",
@@ -28,7 +28,7 @@ const Demo = () => {
 		<View gap={2}>
 			<FileUpload name="file" onChange={(args) => setFiles((prev) => [...prev, ...args.value])}>
 				<View gap={3}>
-					<Icon svg={IconMic} size={8} />
+					<Icon svg={IconMic} size={5} />
 					Drop files to attach
 				</View>
 			</FileUpload>

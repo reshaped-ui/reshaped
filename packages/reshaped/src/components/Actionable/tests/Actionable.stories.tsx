@@ -1,7 +1,8 @@
 import { StoryObj } from "@storybook/react-vite";
-import { userEvent, expect, fn } from "storybook/test";
+import { expect, fn, userEvent } from "storybook/test";
 
 import Actionable from "@/components/Actionable";
+import Button from "@/components/Button";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
 
@@ -228,6 +229,19 @@ export const as: StoryObj = {
 					Trigger
 				</Actionable>
 			</Example.Item>
+			<Example.Item title="render, with component">
+				<Actionable
+					disabled
+					onClick={() => {}}
+					render={({ children, ref, disabled, ...attributes }) => (
+						<Button disabled={disabled} attributes={attributes} ref={ref}>
+							{children}
+						</Button>
+					)}
+				>
+					Trigger
+				</Actionable>
+			</Example.Item>
 		</Example>
 	),
 	play: ({ canvas }) => {
@@ -245,7 +259,7 @@ export const stopPropagation: StoryObj<{ handleParentClick: ReturnType<typeof fn
 		handleParentClick: fn(),
 	},
 	render: (args) => (
-		// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+		// oxlint-disable-next-line jsx_a11y/click-events-have-key-events, jsx_a11y/no-static-element-interactions
 		<div onClick={args.handleParentClick}>
 			<Actionable stopPropagation onClick={() => {}}>
 				Trigger

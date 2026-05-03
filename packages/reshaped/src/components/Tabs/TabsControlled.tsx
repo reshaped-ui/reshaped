@@ -1,20 +1,18 @@
 "use client";
 
-import { useElementId } from "@reshaped/headless";
 import React from "react";
 
+import useElementId from "@/hooks/useElementId";
+import type * as T from "./Tabs.types";
 import { TabsProvider } from "./TabsContext";
 
-import type * as T from "./Tabs.types";
-
-const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
+const TabsControlled: React.FC<T.ControlledProps> = (props) => {
 	const {
 		children,
 		value,
 		onChange,
-		onSilentChange,
 		itemWidth,
-		variant,
+		variant = "bordered",
 		name,
 		disableSelectionAnimation,
 		direction = "row",
@@ -25,6 +23,7 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 
 	const elPrevActiveRef = React.useRef<HTMLDivElement>(elActiveRef.current);
 	const elScrollableRef = React.useRef<HTMLDivElement>(null);
+	const [registeredPanels, setRegisteredPanels] = React.useState<Record<string, boolean>>({});
 	const [selection, setSelection] = React.useState<T.SelectionState>({
 		scaleX: 0,
 		scaleY: 0,
@@ -33,10 +32,18 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 		status: "idle",
 	});
 
-	const setDefaultValue = (value: string) => {
-		if (value === undefined) return;
-		if (onSilentChange) onSilentChange({ value, name });
-	};
+	const registerPanel = React.useCallback((panelValue: string) => {
+		setRegisteredPanels((prev) => ({ ...prev, [panelValue]: true }));
+	}, []);
+
+	const unregisterPanel = React.useCallback((panelValue: string) => {
+		setRegisteredPanels((prev) => ({ ...prev, [panelValue]: false }));
+	}, []);
+
+	const hasPanel = React.useCallback(
+		(panelValue: string) => registeredPanels[panelValue],
+		[registeredPanels]
+	);
 
 	return (
 		<TabsProvider
@@ -49,7 +56,9 @@ const TabsControlled: React.FC<T.PrivateControlledProps> = (props) => {
 				variant,
 				onChange,
 				id,
-				setDefaultValue,
+				registerPanel,
+				unregisterPanel,
+				hasPanel,
 				elActiveRef,
 				elPrevActiveRef,
 				elScrollableRef,

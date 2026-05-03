@@ -36,30 +36,31 @@
 
 [data-rs-keyboard] .root {
 	&:focus {
-		outline: none;
+		outline: var(--rs-outline);
+		outline-offset: var(--rs-outline-width);
 		z-index: var(--rs-z-index-relative);
-		box-shadow: var(--rs-shadow-focus);
 	}
 
 	&.--inset:focus {
-		box-shadow: var(--rs-shadow-focus-inset);
+		outline-offset: calc(var(--rs-outline-width) * -1);
 	}
 
 	&.--disabled-focus-ring:focus {
-		box-shadow: none;
+		outline: none;
 	}
 
 	&.--radius-inherit {
 		&:focus {
-			box-shadow: none;
+			outline: none;
 		}
 
 		&:focus > * {
-			box-shadow: var(--rs-shadow-focus);
+			outline: var(--rs-outline);
+			outline-offset: var(--rs-outline-width);
 		}
 
 		&.--inset:focus > * {
-			box-shadow: var(--rs-shadow-focus-inset);
+			outline-offset: calc(var(--rs-outline-width) * -1);
 		}
 	}
 }
@@ -78,7 +79,7 @@ button.root,
 
 .root.--disabled,
 .root[disabled] {
-	cursor: not-allowed;
+	cursor: default;
 
 	&:active {
 		transform: none;

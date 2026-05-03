@@ -1,12 +1,12 @@
-import { classNames, type StyleAttribute } from "@reshaped/headless";
+import type React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Text from "@/components/Text";
-import { responsiveClassNames } from "@/utilities/props";
-
-import s from "./Divider.module.css";
-
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
+import { resolveMixin } from "@/styles/mixin";
+import type { StyleAttribute } from "@/types/global";
 import type * as T from "./Divider.types";
-import type React from "react";
+import s from "./Divider.module.css";
 
 const Divider: React.FC<T.Props> = (props) => {
 	const {
@@ -15,16 +15,22 @@ const Divider: React.FC<T.Props> = (props) => {
 		children,
 		contentPosition = "center",
 		color,
-		offset,
+		inset,
 		className,
 		attributes,
 	} = props;
+	const paddingDirection = responsivePropDependency(vertical, (value) =>
+		value ? "paddingBlock" : "paddingInline"
+	);
+	const mixinStyles = resolveMixin({ [paddingDirection]: inset });
+
 	const rootClassNames = classNames(
 		s.root,
 		className,
 		blank && s["--blank"],
 		color && s[`--color-${color}`],
 		children ? s[`--content-position-${contentPosition}`] : undefined,
+		...mixinStyles.classNames,
 		...responsiveClassNames(s, "--vertical", vertical)
 	);
 
@@ -40,7 +46,7 @@ const Divider: React.FC<T.Props> = (props) => {
 			role="separator"
 			aria-orientation={ariaOrientation}
 			className={rootClassNames}
-			style={{ ...attributes?.style, "--rs-divider-offset": offset } as StyleAttribute}
+			style={{ ...attributes?.style, ...mixinStyles.variables } as StyleAttribute}
 		>
 			{children && (
 				<Text color="neutral-faded" variant="caption-1" className={s.label}>

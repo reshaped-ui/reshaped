@@ -1,6 +1,7 @@
 import React from "react";
+import type { ClassName } from "@reshaped/utilities";
 
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type { Attributes } from "@/types/global";
 
 export type Props = {
 	/** Add border around the table */

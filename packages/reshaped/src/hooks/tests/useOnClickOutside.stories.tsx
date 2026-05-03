@@ -1,0 +1,160 @@
+import { StoryObj } from "@storybook/react-vite";
+import React from "react";
+import { expect, fn, type Mock, userEvent } from "storybook/test";
+
+import useOnClickOutside from "../useOnClickOutside";
+
+export default {
+	title: "Hooks/useOnClickOutside",
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+};
+
+const DemoBase = (props: { onOutsideClick: () => void }) => {
+	const ref = React.useRef(null);
+	const [target, setTarget] = React.useState<"inside" | "outside" | null>(null);
+
+	useOnClickOutside([ref], () => {
+		props.onOutsideClick();
+		console.log("clicked outside");
+		setTarget("outside");
+	});
+
+	return (
+		<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
+			<button
+				ref={ref}
+				onClick={() => {
+					console.log("clicked inside");
+					setTarget("inside");
+				}}
+			>
+				Trigger
+			</button>
+			{target && `Clicked ${target}`}
+		</div>
+	);
+};
+
+export const base: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "base",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => <DemoBase onOutsideClick={args.handleOutsideClick} />,
+	play: async ({ canvas, args }) => {
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(button);
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		await userEvent.click(document.body);
+
+		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
+		expect(args.handleOutsideClick).toHaveBeenCalledWith();
+	},
+};
+
+const DemoRefs = (props: { onOutsideClick: () => void }) => {
+	const ref = React.useRef(null);
+	const ref2 = React.useRef(null);
+
+	useOnClickOutside([ref, ref2], () => {
+		props.onOutsideClick();
+	});
+
+	return (
+		<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
+			<button ref={ref}>Trigger</button>
+			<button ref={ref2}>Trigger 2</button>
+		</div>
+	);
+};
+
+export const refs: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "multiple refs",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => <DemoRefs onOutsideClick={args.handleOutsideClick} />,
+	play: async ({ canvas, args }) => {
+		const [button, button2] = canvas.getAllByRole("button");
+
+		await userEvent.click(button);
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		await userEvent.click(button2);
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		await userEvent.click(document.body);
+
+		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
+		expect(args.handleOutsideClick).toHaveBeenCalledWith();
+	},
+};
+
+export const disabled: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "disabled",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => {
+		const ref = React.useRef(null);
+
+		useOnClickOutside(
+			[ref],
+			() => {
+				args.handleOutsideClick();
+			},
+			{
+				disabled: true,
+			}
+		);
+
+		return <button ref={ref}>Trigger</button>;
+	},
+	play: async ({ args }) => {
+		await userEvent.click(document.body);
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+	},
+};
+
+const DemoDeps = (props: { onOutsideClick: (props: { count: number }) => void }) => {
+	const ref = React.useRef(null);
+	const [count, setCount] = React.useState(0);
+
+	useOnClickOutside([ref], () => {
+		props.onOutsideClick({ count });
+	});
+
+	return (
+		<button ref={ref} onClick={() => setCount((prev) => prev + 1)}>
+			Trigger
+		</button>
+	);
+};
+
+export const deps: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "test: handler uses latest state",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => <DemoDeps onOutsideClick={args.handleOutsideClick} />,
+	play: async ({ canvas, args }) => {
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(document.body);
+
+		expect(args.handleOutsideClick).toHaveBeenLastCalledWith({ count: 0 });
+
+		await userEvent.click(button);
+		await userEvent.click(document.body);
+
+		expect(args.handleOutsideClick).toHaveBeenLastCalledWith({ count: 1 });
+	},
+};

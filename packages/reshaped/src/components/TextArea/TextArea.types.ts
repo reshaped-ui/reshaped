@@ -1,8 +1,9 @@
 import React from "react";
+import type { ClassName } from "@reshaped/utilities";
 
 import type { FormControlProps } from "@/components/FormControl";
 import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
+import type { Attributes } from "@/types/global";
 
 type Size = G.Responsive<"medium" | "large" | "xlarge">;
 
@@ -25,10 +26,6 @@ type BaseProps = {
 	placeholder?: string;
 	/** Callback when the text area value changes */
 	onChange?: G.ChangeHandler<string, React.ChangeEvent<HTMLTextAreaElement>>;
-	/** Callback when the text area is focused */
-	onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-	/** Callback when the text area is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Additional attributes for the root element */

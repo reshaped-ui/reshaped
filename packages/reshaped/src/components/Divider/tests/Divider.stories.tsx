@@ -89,12 +89,12 @@ export const offset: StoryObj = {
 		<Example>
 			<Example.Item title="offset: 10px">
 				<View width="100px" backgroundColor="neutral" paddingBlock={4}>
-					<Divider offset="40px" />
+					<Divider inset={10} />
 				</View>
 			</Example.Item>
 			<Example.Item title="offset: 10px, vertical">
 				<View height="100px" backgroundColor="neutral" paddingInline={4} width="33px">
-					<Divider vertical offset="40px" />
+					<Divider vertical inset={10} />
 				</View>
 			</Example.Item>
 		</Example>

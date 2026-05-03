@@ -1,13 +1,13 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
 import border, {
-	borderTop,
+	borderBlock,
 	borderBottom,
-	borderStart,
+	borderColor,
 	borderEnd,
 	borderInline,
-	borderBlock,
-	borderColor,
+	borderStart,
+	borderTop,
 } from "./index";
 
 describe("Styles/BorderColor", () => {

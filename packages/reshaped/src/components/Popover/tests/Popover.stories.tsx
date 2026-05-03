@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
-import { useState, useId } from "react";
-import { expect, fn, userEvent, within, waitFor } from "storybook/test";
+import { useId, useState } from "react";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import MenuItem from "@/components/MenuItem";
@@ -276,7 +276,7 @@ export const autoFocus: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="autoFocus=false">
-				{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+				{/* oxlint-disable-next-line jsx_a11y/no-autofocus */}
 				<Demo autoFocus={false} />
 			</Example.Item>
 		</Example>
@@ -423,28 +423,4 @@ export const testContentEditable = {
 			</Popover>
 		);
 	},
-};
-
-export const variant = {
-	name: "variant [deprecated]",
-	render: () => (
-		<Example>
-			<Example.Item title="variant: headless">
-				<Popover variant="headless" defaultActive position="bottom-start">
-					<Popover.Trigger>
-						{(attributes) => <Button attributes={attributes}>Open</Button>}
-					</Popover.Trigger>
-					<Popover.Content>
-						<View
-							height="100px"
-							width="100px"
-							borderColor="primary"
-							borderRadius="medium"
-							backgroundColor="primary-faded"
-						/>
-					</Popover.Content>
-				</Popover>
-			</Example.Item>
-		</Example>
-	),
 };

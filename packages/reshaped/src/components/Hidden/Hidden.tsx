@@ -1,10 +1,8 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import { responsiveClassNames } from "@/utilities/props";
-
-import s from "./Hidden.module.css";
-
 import type * as T from "./Hidden.types";
+import s from "./Hidden.module.css";
 
 const Hidden: React.FC<T.Props> = (props) => {
 	const { as: TagName = "div", children, visibility, hide } = props;

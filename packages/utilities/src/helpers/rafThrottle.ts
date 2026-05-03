@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const rafThrottle = <T extends (...args: any[]) => void>(fn: T): T => {
 	let rafId: number | null = null;
 	let args: Parameters<T> | null = null;
