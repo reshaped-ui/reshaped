@@ -32,8 +32,8 @@ button.root {
 
 @responsive .--size {
 	@value small {
-		--rs-p-v: var(--rs-unit-x1-5);
-		--rs-p-h: var(--rs-unit-x2);
+		--rs-p-v: var(--rs-unit-x1);
+		--rs-p-h: var(--rs-unit-x1-5);
 		--rs-menu-item-radius: var(--rs-radius-small);
 
 		font-size: var(--rs-font-size-body-2);

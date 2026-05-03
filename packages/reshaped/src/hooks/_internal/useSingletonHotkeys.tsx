@@ -28,7 +28,6 @@ type HotkeyData = {
  * Utilities
  */
 const COMBINATION_DELIMETER = "+";
-const pressedMap: PressedMap = new Map();
 let modifiedKeys: string[] = [];
 
 const formatHotkey = (hotkey: string) => {
@@ -161,43 +160,56 @@ const HotkeyContext = React.createContext({} as Context);
 
 export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const { children } = props;
+	const [pressedMap, setPressedMap] = React.useState<PressedMap>(new Map());
 	const hooksCountRef = React.useRef(0);
 
-	const addPressedKey = React.useCallback((e: KeyboardEvent) => {
-		if (e.repeat || hooksCountRef.current === 0) return;
+	const addPressedKey = React.useCallback(
+		(e: KeyboardEvent) => {
+			if (e.repeat || hooksCountRef.current === 0) return;
 
-		const eventKey = getEventKey(e);
-		if (!eventKey) return;
+			const eventKey = getEventKey(e);
+			if (!eventKey) return;
 
-		pressedMap.set(eventKey, e);
+			const nextPressedMap = new Map(pressedMap);
+			nextPressedMap.set(eventKey, e);
 
-		// Key up won't trigger for other keys while Meta is pressed so we need to cache them
-		// and remove on Meta keyup
-		if (e.metaKey) modifiedKeys.push(...pressedMap.keys());
+			// Key up won't trigger for other keys while Meta is pressed so we need to cache them
+			// and remove on Meta keyup
+			if (e.metaKey) modifiedKeys.push(...nextPressedMap.keys());
 
-		if (pressedMap.has("Meta")) modifiedKeys.push(eventKey);
-	}, []);
+			if (nextPressedMap.has("Meta")) modifiedKeys.push(eventKey);
 
-	const removePressedKey = React.useCallback((e: KeyboardEvent) => {
-		if (hooksCountRef.current === 0) return;
+			setPressedMap(nextPressedMap);
+		},
+		[pressedMap]
+	);
 
-		const eventKey = getEventKey(e);
-		if (!eventKey) return;
+	const removePressedKey = React.useCallback(
+		(e: KeyboardEvent) => {
+			if (hooksCountRef.current === 0) return;
 
-		pressedMap.delete(eventKey);
+			const eventKey = getEventKey(e);
+			if (!eventKey) return;
 
-		if (eventKey === "meta" || eventKey === "control") {
-			pressedMap.delete("mod");
-		}
+			const nextPressedMap = new Map(pressedMap);
+			nextPressedMap.delete(eventKey);
 
-		if (eventKey === "meta") {
-			modifiedKeys.forEach((key) => {
-				if (!pressedMap.has(key)) return;
-				pressedMap.delete(key);
-			});
-			modifiedKeys = [];
-		}
-	}, []);
+			if (eventKey === "meta" || eventKey === "control") {
+				nextPressedMap.delete("mod");
+			}
+
+			if (eventKey === "meta") {
+				modifiedKeys.forEach((key) => {
+					if (!nextPressedMap.has(key)) return;
+					nextPressedMap.delete(key);
+				});
+				modifiedKeys = [];
+			}
+
+			setPressedMap(nextPressedMap);
+		},
+		[pressedMap]
+	);
 
 	const isPressed = (hotkey: string) => {
 		const keys = formatHotkey(hotkey).split(COMBINATION_DELIMETER);
@@ -214,7 +226,7 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 			addPressedKey(e);
 			globalHotkeyStore.handleKeyDown(pressedMap, e);
 		},
-		[addPressedKey]
+		[addPressedKey, pressedMap]
 	);
 
 	const handleWindowKeyUp = React.useCallback(
@@ -227,7 +239,7 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 	);
 
 	const handleWindowBlur = React.useCallback(() => {
-		pressedMap.clear();
+		setPressedMap(new Map());
 		modifiedKeys = [];
 	}, []);
 

@@ -28,7 +28,9 @@ export const variant = {
 				<Text variant="headline-3">Headline 3</Text>
 			</Example.Item>
 			<Example.Item title="variant: title-1">
-				<Text variant="title-1">Title 1</Text>
+				<Text variant="title-1" weight="regular">
+					Title 1
+				</Text>
 			</Example.Item>
 			<Example.Item title="variant: title-2">
 				<Text variant="title-2">Title 2</Text>
