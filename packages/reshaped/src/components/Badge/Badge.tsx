@@ -31,7 +31,8 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	} = props;
 	const isActionable = !!(onClick || href);
 	const iconSize = size === "small" ? 3 : 4;
-	const empty = !children && !icon && !endIcon;
+	const hasText = children !== undefined && children !== null;
+	const empty = !hasText && !icon && !endIcon;
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -61,7 +62,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			touchHitbox={isActionable}
 		>
 			{icon && <Icon svg={icon} autoWidth size={iconSize} className={s.icon} />}
-			{children && (
+			{hasText && (
 				<Text
 					variant={size === "large" ? "body-3" : "caption-1"}
 					weight="medium"
