@@ -30,6 +30,7 @@ export const active: StoryObj<{
 	},
 	render: (args) => {
 		const toggle = useToggle(true);
+		const [value, setValue] = React.useState("");
 
 		return (
 			<Example>
@@ -40,6 +41,8 @@ export const active: StoryObj<{
 							name="fruit"
 							placeholder="Pick your food"
 							active={toggle.active}
+							value={value}
+							onChange={(args) => setValue(args.value)}
 							onOpen={() => {
 								args.handleOpen();
 								toggle.activate();
@@ -48,9 +51,9 @@ export const active: StoryObj<{
 								args.handleClose();
 								toggle.deactivate();
 							}}
-							onChange={(args) => console.log(args)}
 						>
 							{["Pizza", "Pie", "Ice-cream"].map((v) => {
+								if (!v.toLowerCase().includes(value.toLowerCase())) return;
 								return (
 									<Autocomplete.Item key={v} value={v}>
 										{v}

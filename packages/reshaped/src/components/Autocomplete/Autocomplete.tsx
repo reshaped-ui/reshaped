@@ -165,12 +165,23 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 	useIsomorphicLayoutEffect(() => {
 		if (!isDropdownActive) return;
 
-		requestAnimationFrame(() => {
+		const updateHighlightedId = () => {
 			const options = getOptionElements();
 			const firstId = options[0]?.id;
 
 			if (firstId) setHighlightedId(firstId);
+		};
+
+		const mutationObserver = new MutationObserver(updateHighlightedId);
+
+		requestAnimationFrame(() => {
+			if (!contentRef.current) return;
+
+			mutationObserver.observe(contentRef.current, { childList: true });
+			updateHighlightedId();
 		});
+
+		return () => mutationObserver.disconnect();
 	}, [isDropdownActive]);
 
 	const contextValue = React.useMemo(
