@@ -96,6 +96,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const flyoutElRef = React.useRef<HTMLDivElement>(null);
 	const id = useElementId(passedId);
 	const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
+	const lockedTimerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
 	// Lock blur event while pressing anywhere inside the flyout content
@@ -389,7 +390,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			/* Locking the popover to not open it again on trigger focus */
 			if (triggerType === "hover" && checkKeyboardMode()) {
 				lockedRef.current = true;
-				setTimeout(() => {
+				if (lockedTimerRef.current) clearTimeout(lockedTimerRef.current);
+				lockedTimerRef.current = setTimeout(() => {
 					lockedRef.current = false;
 				}, 100);
 			}
@@ -413,6 +415,17 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	React.useEffect(() => {
 		return () => trapFocusRef.current?.release();
 	}, []);
+
+	/**
+	 * Clean up pending timers on unmount to avoid running callbacks
+	 * after the component (or test environment) is torn down
+	 */
+	React.useEffect(() => {
+		return () => {
+			clearTimer();
+			if (lockedTimerRef.current) clearTimeout(lockedTimerRef.current);
+		};
+	}, [clearTimer]);
 
 	/**
 	 * Imperative methods for controlling Flyout
