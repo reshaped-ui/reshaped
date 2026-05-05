@@ -2,12 +2,16 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "@reshaped/headless": "3.11.0-canary.3",
-    "reshaped": "3.11.0-canary.3",
-    "@reshaped/utilities": "3.11.0-canary.3"
+    "@reshaped/headless": "3.11.0-canary.4",
+    "reshaped": "3.11.0-canary.4",
+    "@reshaped/utilities": "3.11.0-canary.4"
   },
   "changesets": [
+    "better-cycles-take",
     "bright-eagles-cover",
+    "chatty-papayas-sink",
+    "dull-melons-divide",
+    "flat-bars-return",
     "pink-olives-fry",
     "plenty-boxes-work",
     "quick-dingos-stand",

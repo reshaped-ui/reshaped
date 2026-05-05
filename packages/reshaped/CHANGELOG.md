@@ -1,5 +1,20 @@
 # reshaped
 
+## 3.11.0-canary.5
+
+### Patch Changes
+
+- [`3bd3aa2`](https://github.com/reshaped-ui/reshaped/commit/3bd3aa27ed0a18572115dfa383e9f0abbc56524d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added timeout cleanup on unmount
+
+- [`a08ce8e`](https://github.com/reshaped-ui/reshaped/commit/a08ce8eb28681a2f88296feabd1e332abc9f8c06) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Support rendering 0 integer as children
+
+- [`9ecdada`](https://github.com/reshaped-ui/reshaped/commit/9ecdadad859f26a5899f8586d02ec5ba1957d68c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Autocomplete: Added mutationObserver to update the focused item on filtering
+
+- [`b93437a`](https://github.com/reshaped-ui/reshaped/commit/b93437a9ba63b8d5008a8a3eaa9da17e3491826f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added automatic position updated for containerRef resizing
+
+- Updated dependencies []:
+  - @reshaped/headless@3.11.0-canary.5
+
 ## 3.11.0-canary.4
 
 ### Patch Changes

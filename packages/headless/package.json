@@ -1,7 +1,7 @@
 {
 	"name": "@reshaped/headless",
 	"description": "Headless components and utilities for React",
-	"version": "3.11.0-canary.4",
+	"version": "3.11.0-canary.5",
 	"license": "MIT",
 	"homepage": "https://reshaped.so",
 	"repository": {
