@@ -735,44 +735,55 @@ export const containerRef: StoryObj = {
 		const portalRef = React.useRef<HTMLDivElement>(null);
 		const portalRef2 = React.useRef<HTMLDivElement>(null);
 		const portalRef3 = React.useRef<HTMLDivElement>(null);
+		const [tall, setTall] = React.useState(false);
+		const height = tall ? 90 : 120;
 
 		return (
-			<View gap={4} direction="row">
-				<View
-					grow
-					backgroundColor="neutral-faded"
-					borderRadius="small"
-					height={120}
-					attributes={{ ref: portalRef, "data-testid": "container" }}
-					justify="end"
-					align="start"
-					padding={4}
-				>
-					<Demo containerRef={portalRef} position="bottom-start" defaultActive />
+			<View gap={4}>
+				<View>
+					<Button onClick={() => setTall((prev) => !prev)}>Toggle container height</Button>
 				</View>
-				<View
-					grow
-					backgroundColor="neutral-faded"
-					borderRadius="small"
-					height={120}
-					attributes={{ ref: portalRef2 }}
-					justify="start"
-					align="end"
-					padding={4}
-				>
-					<Demo containerRef={portalRef2} position="top-end" />
-				</View>
-				<View
-					width={50}
-					backgroundColor="neutral-faded"
-					borderRadius="small"
-					height={120}
-					attributes={{ ref: portalRef3 }}
-					padding={4}
-					overflow="auto"
-				>
-					<View height={200} width="120%" justify="center" align="center">
-						<Demo containerRef={portalRef3} position="bottom-end" />
+				<View gap={4} direction="row">
+					<View
+						grow
+						backgroundColor="neutral-faded"
+						borderRadius="small"
+						height={height}
+						attributes={{
+							ref: portalRef,
+							"data-testid": "container",
+							style: { transition: "height 0.3s ease-in-out" },
+						}}
+						justify="end"
+						align="start"
+						padding={4}
+					>
+						<Demo containerRef={portalRef} position="bottom-start" active />
+					</View>
+					<View
+						grow
+						backgroundColor="neutral-faded"
+						borderRadius="small"
+						height={height}
+						attributes={{ ref: portalRef2, style: { transition: "height 0.3s ease-in-out" } }}
+						justify="start"
+						align="end"
+						padding={4}
+					>
+						<Demo containerRef={portalRef2} position="top-end" />
+					</View>
+					<View
+						width={50}
+						backgroundColor="neutral-faded"
+						borderRadius="small"
+						height={height}
+						attributes={{ ref: portalRef3, style: { transition: "height 0.3s ease-in-out" } }}
+						padding={4}
+						overflow="auto"
+					>
+						<View height={200} width="120%" justify="center" align="center">
+							<Demo containerRef={portalRef3} position="bottom-end" />
+						</View>
 					</View>
 				</View>
 			</View>

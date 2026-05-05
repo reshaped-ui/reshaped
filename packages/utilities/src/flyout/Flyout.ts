@@ -84,6 +84,7 @@ class Flyout {
 		window.addEventListener("resize", handleResize);
 		if (this.#options.trigger) observer.observe(this.#options.trigger);
 		if (this.#options.content) observer.observe(this.#options.content);
+		if (this.#options.container) observer.observe(this.#options.container);
 
 		this.#handlerCleanupMap.resize = () => {
 			observer.disconnect();
