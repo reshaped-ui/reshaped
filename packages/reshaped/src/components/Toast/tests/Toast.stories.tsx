@@ -1,4 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 
 import Button from "@/components/Button";
@@ -545,4 +546,62 @@ export const edgeCases = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+const ContainerRefDemo = () => {
+	const toast = useToast();
+
+	return (
+		<Button
+			onClick={() => {
+				toast.show({
+					text: "Content",
+					position: "top-start",
+				});
+			}}
+		>
+			Show toast
+		</Button>
+	);
+};
+
+export const containerRef: StoryObj = {
+	name: "containerRef",
+	render: () => {
+		const ref = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<Example>
+				<Example.Item title="containerRef, regions portalled into target container">
+					<ToastProvider containerRef={ref}>
+						<View gap={4} align="start">
+							<ContainerRefDemo />
+							<View
+								attributes={{
+									ref,
+									"data-testid": "test-container-ref-id",
+								}}
+								position="relative"
+								backgroundColor="neutral-faded"
+								borderRadius="medium"
+								width="100%"
+								minHeight={50}
+							/>
+						</View>
+					</ToastProvider>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(button);
+
+		const container = canvas.getByTestId("test-container-ref-id");
+		const toast = within(container).getByText("Content");
+
+		expect(toast).toBeInTheDocument();
+	},
 };

@@ -49,6 +49,8 @@ export type ProviderProps = {
 			}
 		>
 	>;
+	/** Container to render the toast regions in using a portal, must be CSS-positioned */
+	containerRef?: React.RefObject<HTMLElement | null>;
 };
 
 export type RegionProps = {

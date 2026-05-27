@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { createPortal } from "react-dom";
 
 import { positions, defaultContextData } from "./Toast.constants";
 import ToastContext from "./Toast.context";
@@ -65,7 +66,7 @@ const toastReducer: T.Reducer = (state, action) => {
 };
 
 const ToastProvider: React.FC<T.ProviderProps> = (props) => {
-	const { children, options } = props;
+	const { children, options, containerRef } = props;
 	const toast = useToast();
 	const id = React.useId();
 	const [data, dispatch] = React.useReducer(toastReducer, defaultContextData.queues);
@@ -103,12 +104,16 @@ const ToastProvider: React.FC<T.ProviderProps> = (props) => {
 		[data, show, hide, add, remove, id, options]
 	);
 
+	const regions = positions.map((position) => (
+		<ToastRegion position={position} key={position} nested={!!toast.id} />
+	));
+
+	const portalTarget = containerRef?.current ?? null;
+
 	return (
 		<ToastContext.Provider value={value}>
 			{children}
-			{positions.map((position) => (
-				<ToastRegion position={position} key={position} nested={!!toast.id} />
-			))}
+			{portalTarget ? createPortal(<>{regions}</>, portalTarget) : regions}
 		</ToastContext.Provider>
 	);
 };
