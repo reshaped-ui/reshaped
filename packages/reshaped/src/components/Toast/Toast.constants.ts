@@ -26,4 +26,5 @@ export const defaultContextData = {
 	hide: () => {},
 	remove: () => {},
 	add: () => "",
+	root: null,
 };

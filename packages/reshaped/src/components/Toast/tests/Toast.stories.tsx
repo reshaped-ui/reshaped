@@ -605,3 +605,61 @@ export const containerRef: StoryObj = {
 		expect(toast).toBeInTheDocument();
 	},
 };
+
+const GlobalDemo = () => {
+	const toast = useToast();
+
+	return (
+		<Button
+			onClick={() => {
+				toast.show({
+					text: "Global content",
+					position: "top-start",
+					global: true,
+				});
+			}}
+		>
+			Show toast
+		</Button>
+	);
+};
+
+export const global: StoryObj = {
+	name: "global",
+	render: () => {
+		const ref = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<Example>
+				<Example.Item title="global, renders in the root provider ignoring containerRef">
+					<ToastProvider containerRef={ref}>
+						<View gap={4} align="start">
+							<GlobalDemo />
+							<View
+								attributes={{ ref, "data-testid": "test-global-container-id" }}
+								position="relative"
+								backgroundColor="neutral-faded"
+								borderRadius="medium"
+								width="100%"
+								minHeight={50}
+							/>
+						</View>
+					</ToastProvider>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.click(button);
+
+		const toast = canvas.getByText("Global content");
+		const container = canvas.getByTestId("test-global-container-id");
+
+		// Global toast renders outside the containerRef target
+		expect(toast).toBeInTheDocument();
+		expect(container).not.toContainElement(toast);
+	},
+};
