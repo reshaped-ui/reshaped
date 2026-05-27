@@ -88,7 +88,8 @@
 		"vitest-browser-react": "2.0.5"
 	},
 	"engines": {
-		"node": ">=22"
+		"node": ">=22",
+		"pnpm": ">=11"
 	},
 	"size-limit": [
 		{
@@ -111,5 +112,6 @@
 			"path": "packages/reshaped/dist/tests/themingWithDefinition.js",
 			"webpack": true
 		}
-	]
+	],
+	"packageManager": "pnpm@11.3.0"
 }

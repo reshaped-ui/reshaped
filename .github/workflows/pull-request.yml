@@ -22,8 +22,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: latest
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -56,8 +54,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: latest
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -99,8 +95,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: latest
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -143,8 +137,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: latest
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -181,8 +173,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: latest
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -226,8 +216,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: latest
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
@@ -259,8 +247,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: latest
 
       - name: Restore node_modules cache
         uses: actions/cache@v4
