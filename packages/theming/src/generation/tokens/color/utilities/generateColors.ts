@@ -95,7 +95,7 @@ const generateColorValues = (
 				c: Math.min(warning ? 0.04 : 0.02, bg.c / 5),
 			};
 	const bgFadedDark = neutral
-		? { ...bgDark, l: 1, alpha: 0.03 }
+		? { ...bgDark, l: 1, alpha: 0.04 }
 		: {
 				...bgDark,
 				l: 0.24,
@@ -184,11 +184,11 @@ const generateColorValues = (
 		};
 		output[`backgroundElevationRaised`] = {
 			oklch: { ...bg, l: 1, c: 0 },
-			oklchDark: { ...bgDark, l: 0.215, c: 0 },
+			oklchDark: { ...bgDark, l: 0.23, c: 0 },
 		};
 		output[`backgroundElevationOverlay`] = {
 			oklch: { ...bg, l: 1, c: 0 },
-			oklchDark: { ...bgDark, l: 0.23, c: 0 },
+			oklchDark: { ...bgDark, l: 0.245, c: 0 },
 		};
 		output[`backgroundPage`] = {
 			oklch: { ...bg, l: 1, c: 0 },

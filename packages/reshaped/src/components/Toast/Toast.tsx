@@ -85,15 +85,21 @@ const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 					{actions.length && (
 						<View direction="row" align="center" gap={2}>
 							{actions.map((slot, index) => {
-								const isPrimary = isVertical ? index === 0 : index === actions.length - 1;
-								const primaryColor = color === "neutral" ? "neutral" : "media";
 								const defaultProps: Partial<ButtonProps> = {
-									variant: isPrimary ? "solid" : "ghost",
+									variant: "ghost",
 									size: "small",
-									color: isPrimary ? primaryColor : "inherit",
+									color: "inherit",
 								};
 
 								if (slot.type === Button) {
+									if (index === 0) {
+										return (
+											<Button.Aligner side={index === 0 ? "start" : "end"} key={index}>
+												<Button {...defaultProps} {...slot.props} />
+											</Button.Aligner>
+										);
+									}
+
 									return <Button {...defaultProps} {...slot.props} key={index} />;
 								} else {
 									return slot;

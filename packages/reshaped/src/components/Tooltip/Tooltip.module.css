@@ -2,7 +2,14 @@
 	color: var(--rs-color-foreground-neutral);
 	background: var(--rs-color-background-elevation-overlay);
 	border: 1px solid var(--rs-color-border-neutral-faded);
-	box-shadow: var(--rs-shadow-overlay);
+	box-shadow: var(--rs-shadow-overlay-intense);
 	border-radius: var(--rs-radius-small);
 	padding: var(--rs-unit-x1) var(--rs-unit-x2);
+
+	/* Not using Text for now to avoid scoped theme transitions */
+	font-size: var(--rs-font-size-caption-1);
+	line-height: var(--rs-line-height-caption-1);
+	letter-spacing: var(--rs-letter-spacing-caption-1);
+	font-weight: var(--rs-font-weight-regular);
+	font-family: var(--rs-font-family-caption-1);
 }

@@ -218,10 +218,10 @@
 	}
 
 	&.--color-media {
-		--rs-button-group-separator-color: rgb(from var(--rs-color-white) r g b / 12%);
-		--rs-button-color: var(--rs-color-white);
-		--rs-button-background-color: rgb(from var(--rs-color-black) r g b / 28%);
-		--rs-button-highlight-color: rgb(from var(--rs-color-black) r g b / 36%);
+		--rs-button-group-separator-color: rgb(from var(--rs-color-black) r g b / 12%);
+		--rs-button-color: var(--rs-color-black);
+		--rs-button-background-color: var(--rs-color-white);
+		--rs-button-highlight-color: rgb(from var(--rs-color-white) r g b / 88%);
 	}
 }
 
@@ -281,6 +281,13 @@
 		& .highlight {
 			opacity: 0.08;
 		}
+	}
+
+	&.--color-media {
+		--rs-button-group-separator-color: rgb(from var(--rs-color-white) r g b / 12%);
+		--rs-button-color: var(--rs-color-white);
+		--rs-button-background-color: rgb(from var(--rs-color-black) r g b / 28%);
+		--rs-button-highlight-color: rgb(from var(--rs-color-black) r g b / 12%);
 	}
 }
 

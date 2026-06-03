@@ -124,7 +124,7 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 				width: resolvedWidth,
 				maxWidth: "100%",
 				// Height + padding + borders
-				height: status === "entered" ? `calc(${toastHeight}px + var(--rs-unit-x2) + 2px)` : 0,
+				height: status === "entered" ? `calc(${toastHeight}px + var(--rs-unit-x2))` : 0,
 				// Disable transition when height of the toast can change
 
 				transitionDuration: resizingRef.current ? "0s" : undefined,

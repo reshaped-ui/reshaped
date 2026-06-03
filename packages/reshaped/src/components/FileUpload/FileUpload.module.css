@@ -6,7 +6,7 @@
 	display: block;
 
 	[data-rs-keyboard] &:focus-within {
-		box-shadow: var(--rs-shadow-focus);
+		box-shadow: var(--rs-outline-shadow);
 	}
 }
 
@@ -40,7 +40,7 @@
 	}
 
 	[data-rs-keyboard] &:focus-within .triggerLayer > * {
-		box-shadow: var(--rs-shadow-focus);
+		box-shadow: var(--rs-outline-shadow);
 	}
 }
 

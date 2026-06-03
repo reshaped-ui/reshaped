@@ -213,6 +213,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			{...textFieldProps}
 			className={[
 				textFieldProps.className,
+				s.root,
 				responsiveClassNames(s, "controls--size", size),
 				!(textFieldProps.variant === "faded" || textFieldProps.variant === "headless") &&
 					s["--outline"],

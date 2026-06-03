@@ -158,12 +158,14 @@ const Color = () => {
 							color: "neutral",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: (
-								<>
-									<Button onClick={() => toast.hide(id)}>Undo</Button>
-									<Button onClick={() => toast.hide(id)}>Hide</Button>
-								</>
-							),
+							actionsSlot: [
+								<Button key={1} onClick={() => toast.hide(id)}>
+									Undo
+								</Button>,
+								<Button key={2} onClick={() => toast.hide(id)}>
+									Hide
+								</Button>,
+							],
 						});
 					}}
 				>
@@ -178,12 +180,14 @@ const Color = () => {
 							color: "primary",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: (
-								<>
-									<Button onClick={() => toast.hide(id)}>Undo</Button>
-									<Button onClick={() => toast.hide(id)}>Hide</Button>
-								</>
-							),
+							actionsSlot: [
+								<Button key={1} onClick={() => toast.hide(id)}>
+									Undo
+								</Button>,
+								<Button key={2} onClick={() => toast.hide(id)}>
+									Hide
+								</Button>,
+							],
 						});
 					}}
 				>
@@ -198,12 +202,14 @@ const Color = () => {
 							color: "positive",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: (
-								<>
-									<Button onClick={() => toast.hide(id)}>Undo</Button>
-									<Button onClick={() => toast.hide(id)}>Hide</Button>
-								</>
-							),
+							actionsSlot: [
+								<Button key={1} onClick={() => toast.hide(id)}>
+									Undo
+								</Button>,
+								<Button key={2} onClick={() => toast.hide(id)}>
+									Hide
+								</Button>,
+							],
 						});
 					}}
 				>
@@ -218,12 +224,14 @@ const Color = () => {
 							color: "critical",
 							title: "Hey!",
 							icon: IconZap,
-							actionsSlot: (
-								<>
-									<Button onClick={() => toast.hide(id)}>Undo</Button>
-									<Button onClick={() => toast.hide(id)}>Hide</Button>
-								</>
-							),
+							actionsSlot: [
+								<Button key={1} onClick={() => toast.hide(id)}>
+									Undo
+								</Button>,
+								<Button key={2} onClick={() => toast.hide(id)}>
+									Hide
+								</Button>,
+							],
 						});
 					}}
 				>
@@ -239,12 +247,14 @@ const Color = () => {
 							title: "Hey!",
 							icon: IconZap,
 							timeout: 0,
-							actionsSlot: (
-								<>
-									<Button onClick={() => toast.hide(id)}>Undo</Button>
-									<Button onClick={() => toast.hide(id)}>Hide</Button>
-								</>
-							),
+							actionsSlot: [
+								<Button key={1} onClick={() => toast.hide(id)}>
+									Undo
+								</Button>,
+								<Button key={2} onClick={() => toast.hide(id)}>
+									Hide
+								</Button>,
+							],
 						});
 					}}
 				>

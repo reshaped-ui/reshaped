@@ -485,10 +485,10 @@
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.03
+        "alpha": 0.04
       },
       "hex": "#00000008",
-      "hexDark": "#ffffff08"
+      "hexDark": "#ffffff0a"
     },
     "backgroundNeutralHighlighted": {
       "oklch": {
@@ -498,13 +498,13 @@
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.3608,
+        "l": 0.3744,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "hex": "#e2e2e2",
-      "hexDark": "#3d3d3d"
+      "hexDark": "#414141"
     },
     "backgroundNeutralHighlightedFaded": {
       "oklch": {
@@ -682,13 +682,13 @@
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.215,
+        "l": 0.23,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "hex": "#ffffff",
-      "hexDark": "#191919"
+      "hexDark": "#1d1d1d"
     },
     "backgroundElevationOverlay": {
       "oklch": {
@@ -698,13 +698,13 @@
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.23,
+        "l": 0.245,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "hex": "#ffffff",
-      "hexDark": "#1d1d1d"
+      "hexDark": "#202020"
     },
     "backgroundPage": {
       "oklch": {
@@ -907,7 +907,16 @@
       "fontWeightToken": "bold",
       "fontFamilyToken": "headline"
     },
-    "title1": {
+    "featured1": {
+      "fontSize": {
+        "px": 40
+      },
+      "lineHeight": {
+        "px": 44
+      },
+      "fontFamilyToken": "title"
+    },
+    "featured2": {
       "fontSize": {
         "px": 32
       },
@@ -916,7 +925,7 @@
       },
       "fontFamilyToken": "title"
     },
-    "title2": {
+    "featured3": {
       "fontSize": {
         "px": 28
       },
@@ -925,7 +934,7 @@
       },
       "fontFamilyToken": "title"
     },
-    "title3": {
+    "featured4": {
       "fontSize": {
         "px": 24
       },
@@ -934,16 +943,7 @@
       },
       "fontFamilyToken": "title"
     },
-    "title4": {
-      "fontSize": {
-        "px": 22
-      },
-      "lineHeight": {
-        "px": 28
-      },
-      "fontFamilyToken": "title"
-    },
-    "title5": {
+    "featured5": {
       "fontSize": {
         "px": 20
       },
@@ -952,7 +952,7 @@
       },
       "fontFamilyToken": "title"
     },
-    "title6": {
+    "featured6": {
       "fontSize": {
         "px": 18
       },

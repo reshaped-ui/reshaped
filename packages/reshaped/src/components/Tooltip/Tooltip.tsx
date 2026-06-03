@@ -1,7 +1,6 @@
 "use client";
 
 import Flyout from "@/components/Flyout";
-import Text from "@/components/Text";
 import Theme from "@/components/Theme";
 import type * as T from "./Tooltip.types";
 import s from "./Tooltip.module.css";
@@ -31,9 +30,7 @@ const Tooltip: React.FC<T.Props> = (props) => {
 		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>
 			<Theme colorMode={color}>
-				<Flyout.Content>
-					<Text variant="caption-1">{text}</Text>
-				</Flyout.Content>
+				<Flyout.Content>{text}</Flyout.Content>
 			</Theme>
 		</Flyout>
 	);

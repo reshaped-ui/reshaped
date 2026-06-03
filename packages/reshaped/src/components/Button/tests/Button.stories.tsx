@@ -84,6 +84,13 @@ export const variantAndColor = {
 					<Button onClick={() => {}} color="positive" variant="ghost">
 						Positive
 					</Button>
+
+					<View backgroundColor="primary" borderRadius="medium" padding={2} direction="row" gap={4}>
+						<Button onClick={() => {}} variant="ghost" color="media">
+							Media
+						</Button>
+					</View>
+
 					<View attributes={{ style: { color: "#029CFD" } }}>
 						<Button onClick={() => {}} color="inherit" variant="ghost">
 							Inherit

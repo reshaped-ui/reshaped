@@ -48,32 +48,32 @@ const theme: ThemeDefinition = {
 			fontWeightToken: "bold",
 			fontFamilyToken: "headline",
 		},
-		title1: {
+		featured1: {
+			fontSize: { px: 40 },
+			lineHeight: { px: 44 },
+			fontFamilyToken: "title",
+		},
+		featured2: {
 			fontSize: { px: 32 },
 			lineHeight: { px: 36 },
 			fontFamilyToken: "title",
 		},
-		title2: {
+		featured3: {
 			fontSize: { px: 28 },
 			lineHeight: { px: 32 },
 			fontFamilyToken: "title",
 		},
-		title3: {
+		featured4: {
 			fontSize: { px: 24 },
 			lineHeight: { px: 32 },
 			fontFamilyToken: "title",
 		},
-		title4: {
-			fontSize: { px: 22 },
-			lineHeight: { px: 28 },
-			fontFamilyToken: "title",
-		},
-		title5: {
+		featured5: {
 			fontSize: { px: 20 },
 			lineHeight: { px: 28 },
 			fontFamilyToken: "title",
 		},
-		title6: {
+		featured6: {
 			fontSize: { px: 18 },
 			lineHeight: { px: 24 },
 			fontFamilyToken: "title",

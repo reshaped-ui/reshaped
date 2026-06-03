@@ -6,12 +6,12 @@ import type * as T from "./Text.types";
 import s from "./Text.module.css";
 
 const tagMap: Partial<Record<T.Variant, keyof React.JSX.IntrinsicElements>> = {
-	"title-1": "h1",
-	"title-2": "h2",
-	"title-3": "h3",
-	"title-4": "h4",
-	"title-5": "h5",
-	"title-6": "h6",
+	"featured-1": "h1",
+	"featured-2": "h2",
+	"featured-3": "h3",
+	"featured-4": "h4",
+	"featured-5": "h5",
+	"featured-6": "h6",
 };
 
 const Text = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Props<As>) => {

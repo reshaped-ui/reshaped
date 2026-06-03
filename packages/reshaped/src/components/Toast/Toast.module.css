@@ -53,7 +53,7 @@
 	display: flex;
 	flex-direction: column;
 	margin-top: var(--rs-unit-x2);
-	box-shadow: var(--rs-shadow-overlay);
+	box-shadow: var(--rs-shadow-overlay-intense);
 	border-radius: var(--rs-radius-medium);
 	overflow: hidden;
 	transform-origin: 50% 0;

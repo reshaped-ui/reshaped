@@ -64,52 +64,52 @@
 		font-family: var(--rs-font-family-headline-3);
 	}
 
-	@value title-1 {
-		font-size: var(--rs-font-size-title-1);
-		line-height: var(--rs-line-height-title-1);
-		letter-spacing: var(--rs-letter-spacing-title-1);
+	@value featured-1 {
+		font-size: var(--rs-font-size-featured-1);
+		line-height: var(--rs-line-height-featured-1);
+		letter-spacing: var(--rs-letter-spacing-featured-1);
 		font-weight: var(--rs-font-weight-semibold);
-		font-family: var(--rs-font-family-title-1);
+		font-family: var(--rs-font-family-featured-1);
 	}
 
-	@value title-2 {
-		font-size: var(--rs-font-size-title-2);
-		line-height: var(--rs-line-height-title-2);
-		letter-spacing: var(--rs-letter-spacing-title-2);
+	@value featured-2 {
+		font-size: var(--rs-font-size-featured-2);
+		line-height: var(--rs-line-height-featured-2);
+		letter-spacing: var(--rs-letter-spacing-featured-2);
 		font-weight: var(--rs-font-weight-semibold);
-		font-family: var(--rs-font-family-title-2);
+		font-family: var(--rs-font-family-featured-2);
 	}
 
-	@value title-3 {
-		font-size: var(--rs-font-size-title-3);
-		line-height: var(--rs-line-height-title-3);
-		letter-spacing: var(--rs-letter-spacing-title-3);
+	@value featured-3 {
+		font-size: var(--rs-font-size-featured-3);
+		line-height: var(--rs-line-height-featured-3);
+		letter-spacing: var(--rs-letter-spacing-featured-3);
 		font-weight: var(--rs-font-weight-semibold);
-		font-family: var(--rs-font-family-title-3);
+		font-family: var(--rs-font-family-featured-3);
 	}
 
-	@value title-4 {
-		font-size: var(--rs-font-size-title-4);
-		line-height: var(--rs-line-height-title-4);
-		letter-spacing: var(--rs-letter-spacing-title-4);
+	@value featured-4 {
+		font-size: var(--rs-font-size-featured-4);
+		line-height: var(--rs-line-height-featured-4);
+		letter-spacing: var(--rs-letter-spacing-featured-4);
 		font-weight: var(--rs-font-weight-semibold);
-		font-family: var(--rs-font-family-title-4);
+		font-family: var(--rs-font-family-featured-4);
 	}
 
-	@value title-5 {
-		font-size: var(--rs-font-size-title-5);
-		line-height: var(--rs-line-height-title-5);
-		letter-spacing: var(--rs-letter-spacing-title-5);
+	@value featured-5 {
+		font-size: var(--rs-font-size-featured-5);
+		line-height: var(--rs-line-height-featured-5);
+		letter-spacing: var(--rs-letter-spacing-featured-5);
 		font-weight: var(--rs-font-weight-semibold);
-		font-family: var(--rs-font-family-title-5);
+		font-family: var(--rs-font-family-featured-5);
 	}
 
-	@value title-6 {
-		font-size: var(--rs-font-size-title-6);
-		line-height: var(--rs-line-height-title-6);
-		letter-spacing: var(--rs-letter-spacing-title-6);
+	@value featured-6 {
+		font-size: var(--rs-font-size-featured-6);
+		line-height: var(--rs-line-height-featured-6);
+		letter-spacing: var(--rs-letter-spacing-featured-6);
 		font-weight: var(--rs-font-weight-semibold);
-		font-family: var(--rs-font-family-title-6);
+		font-family: var(--rs-font-family-featured-6);
 	}
 
 	@value body-1 {
