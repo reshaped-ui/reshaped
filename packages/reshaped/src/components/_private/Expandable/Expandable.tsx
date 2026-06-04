@@ -75,6 +75,7 @@ const Expandable: React.FC<T.ContentProps> = (props) => {
 					: undefined
 			}
 			onTransitionEnd={handleTransitionEnd}
+			// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 			role="region"
 			hidden={!active && animatedHeight === null}
 		>

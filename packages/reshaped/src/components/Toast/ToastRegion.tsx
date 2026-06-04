@@ -76,6 +76,7 @@ const ToastRegion: React.FC<T.RegionProps> = (props) => {
 		// We only use onClick for touch devices since touchend is not supported
 		// oxlint-disable-next-line jsx_a11y/no-noninteractive-element-interactions, jsx_a11y/click-events-have-key-events
 		<ul
+			// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 			role="region"
 			aria-live="polite"
 			className={regionClassNames}

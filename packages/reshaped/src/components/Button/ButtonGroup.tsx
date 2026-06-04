@@ -8,6 +8,7 @@ const ButtonGroup: React.FC<T.GroupProps> = (props) => {
 	const groupClassNames = classNames(s.group, className);
 
 	return (
+		// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 		<div {...attributes} className={groupClassNames} role="group">
 			{children}
 		</div>

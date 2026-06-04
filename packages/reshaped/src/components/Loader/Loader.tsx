@@ -17,6 +17,7 @@ const Loader: React.FC<T.Props> = (props) => {
 	return (
 		<span
 			{...attributes}
+			// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 			role="progressbar"
 			aria-live={ariaLabel ? "assertive" : undefined}
 			aria-label={ariaLabel}

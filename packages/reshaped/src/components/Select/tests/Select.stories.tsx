@@ -847,6 +847,7 @@ export const triggerOnly: StoryObj<{ handleClick: Mock }> = {
 						padding={2}
 						attributes={{ "aria-label": "Select an animal" }}
 					>
+						{/* oxlint-disable-next-line jsx-a11y/prefer-tag-over-role */}
 						<div role="listbox" aria-label="Select an animal">
 							<MenuItem
 								roundedCorners

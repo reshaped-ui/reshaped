@@ -389,7 +389,9 @@ export const testContentEditable = {
 							<div
 								style={{ height: "200px" }}
 								contentEditable
+								// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 								role="textbox"
+								aria-label="Content editable"
 								tabIndex={0}
 								onInput={(e) => {
 									setActive(e.currentTarget.innerText.startsWith("@"));

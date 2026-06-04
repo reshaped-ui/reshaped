@@ -352,6 +352,7 @@ const Modal: FC<T.Props> = (props) => {
 							aria-label={ariaLabel || attributes?.["aria-label"]}
 							className={rootClassNames}
 							aria-modal="true"
+							// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 							role="dialog"
 							tabIndex={!autoFocus ? -1 : undefined}
 							ref={rootRef}

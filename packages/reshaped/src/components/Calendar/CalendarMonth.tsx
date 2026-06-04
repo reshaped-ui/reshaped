@@ -33,6 +33,7 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 	const weekdayNames = getWeekdayNames({ firstWeekDay, renderWeekDay });
 
 	return (
+		// oxlint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
 		<table className={s.selection} role="grid">
 			<thead aria-hidden="true">
 				<tr>

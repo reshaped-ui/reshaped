@@ -32,6 +32,7 @@ const CalendarYear: React.FC<T.YearProps> = (props) => {
 	}, []);
 
 	return (
+		// oxlint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
 		<table ref={rootRef} role="grid" className={s.selection}>
 			<tbody>
 				{rows.map((row, i) => (

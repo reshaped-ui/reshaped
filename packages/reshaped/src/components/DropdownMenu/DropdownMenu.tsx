@@ -80,6 +80,7 @@ export const DropdownMenuSection: React.FC<T.SectionProps> = (props) => {
 	const { children } = props;
 
 	return (
+		// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 		<div className={s.section} role="group">
 			{children}
 		</div>

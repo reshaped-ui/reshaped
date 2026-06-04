@@ -13,7 +13,7 @@ Before:
 import { Progress } from "reshaped";
 import type { ProgressProps } from "reshaped";
 
-<Progress value={40} />
+<Progress value={40} />;
 ```
 
 After:
@@ -22,5 +22,5 @@ After:
 import { ProgressBar } from "reshaped";
 import type { ProgressBarProps } from "reshaped";
 
-<ProgressBar value={40} />
+<ProgressBar value={40} />;
 ```

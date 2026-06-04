@@ -43,6 +43,7 @@ const Divider: React.FC<T.Props> = (props) => {
 	return (
 		<div
 			{...attributes}
+			// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 			role="separator"
 			aria-orientation={ariaOrientation}
 			className={rootClassNames}
