@@ -1,5 +1,14 @@
 # reshaped
 
+## 4.0.0-canary.7
+
+### Patch Changes
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`d364ef6`](https://github.com/reshaped-ui/reshaped/commit/d364ef6e4338ddd83ee11b8d5d5de194e0c1d1d4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated generated theme colors
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.0.0-canary.7
+
 ## 4.0.0-canary.6
 
 ### Major Changes
