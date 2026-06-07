@@ -49,6 +49,8 @@ export type ProviderProps = {
 			}
 		>
 	>;
+	/** Container to render the toast regions in using a portal, must be CSS-positioned */
+	containerRef?: React.RefObject<HTMLElement | null>;
 };
 
 export type RegionProps = {
@@ -64,7 +66,12 @@ export type ContainerProps = {
 	inspected: boolean;
 };
 
-export type ShowOptions = { timeout?: Timeout; position?: Position };
+export type ShowOptions = {
+	timeout?: Timeout;
+	position?: Position;
+	/** Render the toast in the root provider, ignoring any nested provider's */
+	global?: boolean;
+};
 export type ShowProps = Props & ShowOptions;
 
 export type Context = {
@@ -72,9 +79,16 @@ export type Context = {
 	queues: Record<RegionProps["position"], Array<ContainerProps>>;
 	add: (toast: ShowProps) => string;
 	show: (id: string) => void;
-	hide: (id: string) => void;
+	hide: (id: string, options?: { global?: boolean }) => void;
 	remove: (id: string) => void;
 	id: string;
+	/** Topmost provider in the tree, used to render global toasts */
+	root: RootContext | null;
+};
+
+export type RootContext = {
+	add: (toast: ShowProps) => string;
+	hide: (id: string) => void;
 };
 
 type AddAction = {
