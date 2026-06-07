@@ -1,6 +1,7 @@
 packages:
   - "packages/**"
 
-ignoredBuiltDependencies:
-  - esbuild
-  - lefthook
+allowBuilds:
+  esbuild: false
+  lefthook: false
+  unrs-resolver: false
