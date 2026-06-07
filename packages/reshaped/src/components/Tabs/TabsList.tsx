@@ -100,7 +100,42 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		[elScrollableRef]
 	);
 
+	const scrollActiveItemIntoView = React.useCallback(
+		(behavior: ScrollBehavior) => {
+			const elScrollable = elScrollableRef.current;
+			const activeEl = elActiveRef.current;
+
+			if (!elScrollable || !activeEl || elScrollable.scrollWidth === elScrollable.clientWidth) {
+				return;
+			}
+
+			const elItem = findParentItem(activeEl, elScrollable);
+			if (!elItem) return;
+
+			// Big enough value to show there are more items and not overlap arrow controls
+			const visibilityThreshold = 48;
+			const startOverflow = elItem.offsetLeft - elScrollable.scrollLeft;
+			const endOverflow =
+				elScrollable.scrollLeft +
+				elScrollable.clientWidth -
+				(elItem.offsetLeft + elItem.clientWidth);
+
+			if (startOverflow < visibilityThreshold || endOverflow < visibilityThreshold) {
+				elScrollable.scrollTo({
+					left: elItem.offsetLeft + elItem.clientWidth / 2 - elScrollable.clientWidth / 2,
+					behavior,
+				});
+			}
+		},
+		[elActiveRef, elScrollableRef]
+	);
+
 	useKeyboardArrowNavigation({ ref: elScrollableRef, disabled: !!name });
+
+	useIsomorphicLayoutEffect(() => {
+		if (!elActiveRef.current) return;
+		scrollActiveItemIntoView(elPrevActiveRef.current ? "smooth" : "auto");
+	}, [value, scrollActiveItemIntoView]);
 
 	useIsomorphicLayoutEffect(() => {
 		// Do not update selection on mount, until we receive new activeId

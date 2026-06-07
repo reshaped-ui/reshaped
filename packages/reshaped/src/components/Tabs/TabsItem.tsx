@@ -2,7 +2,6 @@
 
 import React from "react";
 import { classNames } from "@reshaped/utilities";
-import { findParent } from "@reshaped/utilities/internal";
 
 import Actionable, { type ActionableRef } from "@/components/Actionable";
 import HiddenInput from "@/components/HiddenInput";
@@ -25,7 +24,6 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 		selection,
 		elActiveRef,
 		elPrevActiveRef,
-		elScrollableRef,
 	} = useTabs(value);
 	const itemRef = React.useRef<HTMLDivElement>(null);
 	const active = tabsValue === value;
@@ -50,36 +48,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 	const handleChange = () => {
 		if (href && !onChange) return;
 
-		const listEl = elScrollableRef.current;
-		const currentListItem = itemRef.current?.parentElement;
-		const prevListItem = elActiveRef.current?.parentElement;
-
 		if (onChange) onChange({ value, name });
-
-		if (!listEl || !currentListItem || !prevListItem || listEl.scrollWidth === listEl.clientWidth) {
-			return;
-		}
-
-		if (!elScrollableRef.current) return;
-
-		// Big enough value to show there are more items and not overlap arrow controls
-		const visibilityThreshold = 48;
-		const elItem =
-			itemRef.current && findParent(itemRef.current, (el) => el.hasAttribute("data-rs-tabs-item"));
-
-		if (!elItem) return;
-
-		const elScrollable = elScrollableRef.current;
-		const startOverflow = elItem.offsetLeft - elScrollable.scrollLeft;
-		const endOverflow =
-			elScrollable.scrollLeft + elScrollable.clientWidth - (elItem.offsetLeft + elItem.clientWidth);
-
-		if (startOverflow < visibilityThreshold || endOverflow < visibilityThreshold) {
-			elScrollableRef.current.scrollTo({
-				left: elItem.offsetLeft + elItem.clientWidth / 2 - elScrollable.clientWidth / 2,
-				behavior: "smooth",
-			});
-		}
 	};
 
 	useIsomorphicLayoutEffect(() => {
