@@ -498,13 +498,13 @@
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.3744,
+        "l": 0.3608,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "hex": "#e2e2e2",
-      "hexDark": "#414141"
+      "hexDark": "#3d3d3d"
     },
     "backgroundNeutralHighlightedFaded": {
       "oklch": {
@@ -914,7 +914,8 @@
       "lineHeight": {
         "px": 44
       },
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "title",
+      "fontWeightToken": "semibold"
     },
     "featured2": {
       "fontSize": {
@@ -923,7 +924,8 @@
       "lineHeight": {
         "px": 36
       },
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "title",
+      "fontWeightToken": "semibold"
     },
     "featured3": {
       "fontSize": {
@@ -932,7 +934,8 @@
       "lineHeight": {
         "px": 32
       },
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "title",
+      "fontWeightToken": "semibold"
     },
     "featured4": {
       "fontSize": {
@@ -941,7 +944,8 @@
       "lineHeight": {
         "px": 32
       },
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "title",
+      "fontWeightToken": "semibold"
     },
     "featured5": {
       "fontSize": {
@@ -950,7 +954,8 @@
       "lineHeight": {
         "px": 28
       },
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "title",
+      "fontWeightToken": "semibold"
     },
     "featured6": {
       "fontSize": {
@@ -959,7 +964,8 @@
       "lineHeight": {
         "px": 24
       },
-      "fontFamilyToken": "title"
+      "fontFamilyToken": "title",
+      "fontWeightToken": "semibold"
     },
     "body1": {
       "fontSize": {
@@ -968,7 +974,8 @@
       "lineHeight": {
         "px": 24
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "body",
+      "fontWeightToken": "regular"
     },
     "body2": {
       "fontSize": {
@@ -977,7 +984,8 @@
       "lineHeight": {
         "px": 20
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "body",
+      "fontWeightToken": "regular"
     },
     "caption1": {
       "fontSize": {
@@ -986,7 +994,8 @@
       "lineHeight": {
         "px": 16
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "body",
+      "fontWeightToken": "regular"
     },
     "caption2": {
       "fontSize": {
@@ -995,7 +1004,8 @@
       "lineHeight": {
         "px": 12
       },
-      "fontFamilyToken": "body"
+      "fontFamilyToken": "body",
+      "fontWeightToken": "regular"
     }
   },
   "unit": {

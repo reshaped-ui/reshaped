@@ -30,14 +30,12 @@ const transformToken: Transformer<T.Token> = (name, token) => {
 		});
 	}
 
-	if (token.fontWeightToken) {
-		result.push({
-			name,
-			tokenType: "fontWeight",
-			type: "variable",
-			value: `var(${getVariableName(token.fontWeightToken, "fontWeight")})`,
-		});
-	}
+	result.push({
+		name,
+		tokenType: "fontWeight",
+		type: "variable",
+		value: `var(${getVariableName(token.fontWeightToken ?? "regular", "fontWeight")})`,
+	});
 
 	result.push({
 		name,
