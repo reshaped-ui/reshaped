@@ -322,7 +322,7 @@ export const align = {
 			<Example.Item title="align: baseline, direction: row">
 				<View align="baseline" direction="row" gap={3}>
 					<Placeholder />
-					<Text variant="title-6">Content</Text>
+					<Text variant="featured-6">Content</Text>
 				</View>
 			</Example.Item>
 

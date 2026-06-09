@@ -126,7 +126,7 @@ export const aligner = {
 		<Example>
 			<Example.Item title="size: small">
 				<View gap={2}>
-					<Text variant="title-6">Heading</Text>
+					<Text variant="featured-6">Heading</Text>
 					<MenuItem.Aligner>
 						<MenuItem size="small" selected onClick={() => {}}>
 							Menu item
@@ -137,7 +137,7 @@ export const aligner = {
 
 			<Example.Item title="size: medium">
 				<View gap={2}>
-					<Text variant="title-6">Heading</Text>
+					<Text variant="featured-6">Heading</Text>
 					<MenuItem.Aligner>
 						<MenuItem selected onClick={() => {}}>
 							Menu item
@@ -148,7 +148,7 @@ export const aligner = {
 
 			<Example.Item title="size: large">
 				<View gap={2}>
-					<Text variant="title-6">Heading</Text>
+					<Text variant="featured-6">Heading</Text>
 					<MenuItem.Aligner>
 						<MenuItem size="large" selected onClick={() => {}}>
 							Menu item

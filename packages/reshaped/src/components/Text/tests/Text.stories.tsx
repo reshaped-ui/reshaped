@@ -57,7 +57,7 @@ export const variant = {
 			<Example.Item title="variant: caption-2">
 				<Text variant="caption-2">Caption 2</Text>
 			</Example.Item>
-			<Example.Item title={["responsive variant", "[s] body-2", "[m+] title-4"]}>
+			<Example.Item title={["responsive variant", "[s] body-2", "[m+] featured-4"]}>
 				<Text variant={{ s: "body-2", m: "featured-4" }}>Responsive</Text>
 			</Example.Item>
 		</Example>
@@ -137,7 +137,7 @@ export const wrap = {
 	render: () => (
 		<Example>
 			<Example.Item title="wrap: balance">
-				<Text wrap="balance" variant="title-3">
+				<Text wrap="balance" variant="featured-3">
 					The design system you want to build
 				</Text>
 			</Example.Item>

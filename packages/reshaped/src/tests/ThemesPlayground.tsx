@@ -226,7 +226,7 @@ const ExampleAnalytics = () => (
 					</Button>
 				</Button.Aligner>
 			</View>
-			<Text variant="title-5" color="positive">
+			<Text variant="featured-5" color="positive">
 				+76.28%
 			</Text>
 			<View gap={2}>
@@ -304,7 +304,7 @@ const ExampleLogin = () => {
 	return (
 		<Card height="100%">
 			<View gap={3}>
-				<Text variant="title-6">Sign in to your account</Text>
+				<Text variant="featured-6">Sign in to your account</Text>
 
 				<Button variant="outline" fullWidth>
 					Sign in with Figma

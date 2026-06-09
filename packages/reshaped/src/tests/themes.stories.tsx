@@ -129,11 +129,11 @@ const cssGenerated = getThemeCSS("generated", {
 
 const componentExamples = (
 	<View gap={4} padding={6} backgroundColor="page">
-		<Text variant="title-5">Hello world</Text>
-		<Text color="neutral-faded" variant="title-5">
+		<Text variant="featured-5">Hello world</Text>
+		<Text color="neutral-faded" variant="featured-5">
 			Hello world faded
 		</Text>
-		<Text color="disabled" variant="title-5">
+		<Text color="disabled" variant="featured-5">
 			Hello world disabled
 		</Text>
 

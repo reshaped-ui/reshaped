@@ -23,7 +23,6 @@ description: Updated token naming and removed `-rgb` color tokens
 ## Manual migration
 
 - For tokens that no longer have direct semantic equivalents, review visual intent and choose the closest replacement.
-- Replace removed `--rs-font-weight-title-4`, `--rs-font-weight-title-5`, and `--rs-font-weight-title-6` with `--rs-font-weight-semibold`.
 
 ## Examples
 

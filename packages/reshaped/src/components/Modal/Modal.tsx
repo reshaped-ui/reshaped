@@ -47,7 +47,7 @@ export const ModalTitle: FC<T.TitleProps> = (props) => {
 	}, [setTitleMounted]);
 
 	return (
-		<Text variant="title-6" weight="bold" attributes={{ id: `${id}-title` }}>
+		<Text variant="featured-6" weight="bold" attributes={{ id: `${id}-title` }}>
 			{children}
 		</Text>
 	);

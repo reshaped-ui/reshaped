@@ -84,7 +84,7 @@ export const icon = {
 			<Example.Item
 				title={["icon, variant: underline", "should inherit display-1 size from the parent"]}
 			>
-				<Text variant="title-3">
+				<Text variant="featured-3">
 					<Link icon={IconZap} variant="underline" onClick={() => {}}>
 						Instant delivery
 					</Link>

@@ -37,7 +37,7 @@ export const size = {
 				<Icon svg={IconZap} size={{ s: 5, m: 10 }} />
 			</Example.Item>
 			<Example.Item title="size: inherit from font">
-				<Text variant="title-6">
+				<Text variant="featured-6">
 					<View direction="row" align="center" gap={2}>
 						<Icon svg={IconZap} />
 						<View.Item>Reshaped</View.Item>

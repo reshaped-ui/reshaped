@@ -179,8 +179,8 @@
 		--rs-button-p-h: var(--rs-unit-x5);
 		--rs-button-gap: var(--rs-unit-x3);
 		--rs-button-icon-align: var(--rs-unit-x1);
-		--rs-button-line-height: var(--rs-line-height-title-6);
-		--rs-button-font-size: var(--rs-font-size-title-6);
+		--rs-button-line-height: var(--rs-line-height-featured-6);
+		--rs-button-font-size: var(--rs-font-size-featured-6);
 		--rs-button-letter-spacing: var(--rs-letter-spacing-body-1);
 		--rs-button-radius: var(--rs-radius-medium);
 	}
