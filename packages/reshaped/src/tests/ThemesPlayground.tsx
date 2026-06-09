@@ -283,14 +283,14 @@ const ExampleSocial = () => {
 					named it Twitter for some reason. Why is this happening?!
 				</Text>
 				<View direction="row" gap={2}>
-					<View grow aspectRatio={1}>
-						<Image src="" borderRadius="medium" fallback />
+					<View grow>
+						<Image src="" borderRadius="medium" fallback aspectRatio={1} />
 					</View>
-					<View grow aspectRatio={1}>
-						<Image src="" borderRadius="medium" fallback />
+					<View grow>
+						<Image src="" borderRadius="medium" fallback aspectRatio={1} />
 					</View>
-					<View grow aspectRatio={1}>
-						<Image src="" borderRadius="medium" fallback />
+					<View grow>
+						<Image src="" borderRadius="medium" fallback aspectRatio={1} />
 					</View>
 				</View>
 			</View>

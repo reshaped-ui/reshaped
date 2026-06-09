@@ -11,7 +11,7 @@ import cooldown from "./utilities/cooldown";
 import s from "./Flyout.module.css";
 
 const FlyoutContent: React.FC<T.ContentProps> = (props) => {
-	const { children, className, attributes } = props;
+	const { children, className, attributes, colorMode } = props;
 	const {
 		flyout,
 		id,
@@ -126,7 +126,11 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		</ContentProvider>
 	);
 
-	return <Portal targetRef={shadowRootRef.current ? shadowRootRef : undefined}>{content}</Portal>;
+	return (
+		<Portal targetRef={shadowRootRef.current ? shadowRootRef : undefined} colorMode={colorMode}>
+			{content}
+		</Portal>
+	);
 };
 
 FlyoutContent.displayName = "Flyout.Content";

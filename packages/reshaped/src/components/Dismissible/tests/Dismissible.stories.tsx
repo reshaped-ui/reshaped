@@ -28,12 +28,11 @@ export const variant = {
 			<Example.Item title="variant: media">
 				<View width="300px">
 					<Dismissible variant="media" closeAriaLabel="Close banner" onClose={() => {}}>
-						<View aspectRatio={16 / 9}>
-							<Image
-								height="100%"
-								src="https://images.unsplash.com/photo-1607030529528-ca6923e27f77?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80)"
-							/>
-						</View>
+						<Image
+							aspectRatio={16 / 9}
+							height="100%"
+							src="https://images.unsplash.com/photo-1607030529528-ca6923e27f77?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80)"
+						/>
 					</Dismissible>
 				</View>
 			</Example.Item>
@@ -53,12 +52,11 @@ export const align = {
 
 			<Example.Item title="align: center, variant: media">
 				<Dismissible align="center" closeAriaLabel="Close" variant="media" onClose={() => {}}>
-					<View aspectRatio={16 / 9}>
-						<Image
-							height="100%"
-							src="https://images.unsplash.com/photo-1607030529528-ca6923e27f77?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80)"
-						/>
-					</View>
+					<Image
+						aspectRatio={16 / 9}
+						height="100%"
+						src="https://images.unsplash.com/photo-1607030529528-ca6923e27f77?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80)"
+					/>
 				</Dismissible>
 			</Example.Item>
 		</Example>

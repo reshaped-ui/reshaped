@@ -20,7 +20,7 @@ export const usePortalScope = () => {
  * That gives Portal time to receive scope on first render
  */
 const Portal: React.FC<T.Props> = (props) => {
-	const { children, targetRef } = props;
+	const { children, targetRef, colorMode } = props;
 	const mountedToggle = useToggle();
 	const rootRef = React.useRef<HTMLDivElement>(null);
 
@@ -47,7 +47,7 @@ const Portal: React.FC<T.Props> = (props) => {
 
 	/* Preserve the current theme when rendered in body */
 	return [
-		ReactDOM.createPortal(<Theme>{children}</Theme>, targetEl),
+		ReactDOM.createPortal(<Theme colorMode={colorMode}>{children}</Theme>, targetEl),
 		// Make sure this element doesn't affect components using :last-child when their children use portals
 		!mountedToggle.active && <div ref={rootRef} className={s.root} key="root" />,
 	];

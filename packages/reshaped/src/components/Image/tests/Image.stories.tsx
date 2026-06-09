@@ -181,17 +181,27 @@ export const fallback = {
 
 			<Example.Item title="fallback, icon, on error">
 				<View width="300px">
-					<View aspectRatio={16 / 9}>
-						<Image src="error" fallback={<Icon svg={IconZap} size={10} />} />
-					</View>
+					<Image aspectRatio={16 / 9} src="error" fallback={<Icon svg={IconZap} size={10} />} />
 				</View>
 			</Example.Item>
 			<Example.Item title="fallback, icon, no url">
 				<View width="300px">
-					<View aspectRatio={16 / 9}>
-						<Image fallback={<Icon svg={IconZap} size={10} />} />
-					</View>
+					<Image aspectRatio={16 / 9} fallback={<Icon svg={IconZap} size={10} />} />
 				</View>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const ratio = {
+	name: "aspectRatio",
+	render: () => (
+		<Example>
+			<Example.Item title="ratio: 16/9">
+				<Image src={imgUrl} aspectRatio={16 / 9} />
+			</Example.Item>
+			<Example.Item title="ratio: 16/9, displayMode: contain">
+				<Image src={imgUrl} displayMode="contain" aspectRatio={16 / 9} />
 			</Example.Item>
 		</Example>
 	),
@@ -252,22 +262,4 @@ export const imageAttributes: StoryObj = {
 		expect(root).toHaveAttribute("id", "test-id");
 		expect(img).toHaveAttribute("data-testid", "test-img-id");
 	},
-};
-
-export const ratio = {
-	name: "test: aspectRatio",
-	render: () => (
-		<Example>
-			<Example.Item title="ratio: 16/9">
-				<View aspectRatio={16 / 9}>
-					<Image src={imgUrl} />
-				</View>
-			</Example.Item>
-			<Example.Item title="ratio: 16/9, displayMode: contain">
-				<View aspectRatio={16 / 9}>
-					<Image src={imgUrl} displayMode="contain" />
-				</View>
-			</Example.Item>
-		</Example>
-	),
 };

@@ -337,7 +337,7 @@ export const testPortal: StoryObj<{
 								insetStart={4}
 								width={30}
 								height={30}
-								backgroundColor="neutral-faded"
+								backgroundColor="neutral"
 								zIndex={9999}
 								padding={4}
 								borderRadius="small"
