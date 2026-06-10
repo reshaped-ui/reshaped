@@ -143,3 +143,14 @@
 		width: 360px;
 	}
 }
+
+.icon {
+	&--position-start-top,
+	&--position-end-top {
+		align-self: flex-start;
+	}
+
+	&--position-end-center {
+		align-self: center;
+	}
+}

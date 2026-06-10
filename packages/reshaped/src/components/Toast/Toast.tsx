@@ -22,10 +22,13 @@ const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 		title,
 		actionsSlot,
 		startSlot,
+		iconPosition = "start-center",
 		collapsed,
 		className,
 		attributes,
 	} = props;
+	const isIconAtEnd = iconPosition.startsWith("end-");
+
 	let backgroundColor: ViewProps["backgroundColor"] =
 		color === "inverted" || color === "neutral" ? "elevation-overlay" : color;
 	if (color === "neutral") backgroundColor = collapsed ? "neutral" : "elevation-overlay";
@@ -51,6 +54,10 @@ const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 		</React.Fragment>
 	);
 
+	const iconNode = icon && (
+		<Icon size={5} svg={icon} className={s[`icon--position-${iconPosition}`]} />
+	);
+
 	const toastNode = (
 		<View
 			backgroundColor={backgroundColor}
@@ -64,8 +71,8 @@ const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 			className={[s.toast, className]}
 			attributes={attributes}
 		>
-			{icon && <Icon size={5} svg={icon} className={s.icon} />}
-			{startSlot && !icon && <View.Item>{startSlot}</View.Item>}
+			{!isIconAtEnd && iconNode}
+			{startSlot && (!icon || isIconAtEnd) && <View.Item>{startSlot}</View.Item>}
 
 			<View.Item grow>
 				<View direction={isLarge ? "column" : "row"} align={isLarge ? "start" : "center"} gap={3}>
@@ -103,6 +110,7 @@ const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 					)}
 				</View>
 			</View.Item>
+			{isIconAtEnd && iconNode}
 		</View>
 	);
 

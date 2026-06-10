@@ -381,6 +381,75 @@ const Slots = () => {
 };
 export const slots = { name: "slots", render: () => <Slots /> };
 
+const IconPosition = () => {
+	const toast = useToast();
+	const props = {
+		icon: IconZap,
+		title: "Hey!",
+		text: "Very long event completed notification message that spans multiple lines",
+		size: "medium" as const,
+	};
+
+	return (
+		<Example>
+			<Example.Item title="iconPosition: start-center (default)">
+				<Button
+					onClick={() => {
+						toast.show({ ...props });
+					}}
+				>
+					Show toast
+				</Button>
+			</Example.Item>
+			<Example.Item title="iconPosition: start-top">
+				<Button
+					onClick={() => {
+						toast.show({ ...props, iconPosition: "start-top" });
+					}}
+				>
+					Show toast
+				</Button>
+			</Example.Item>
+			<Example.Item title="iconPosition: end-center">
+				<Button
+					onClick={() => {
+						toast.show({ ...props, iconPosition: "end-center" });
+					}}
+				>
+					Show toast
+				</Button>
+			</Example.Item>
+			<Example.Item title="iconPosition: end-top">
+				<Button
+					onClick={() => {
+						toast.show({ ...props, iconPosition: "end-top" });
+					}}
+				>
+					Show toast
+				</Button>
+			</Example.Item>
+			<Example.Item title="iconPosition: end-center with startSlot">
+				<Button
+					onClick={() => {
+						toast.show({
+							...props,
+							iconPosition: "end-center",
+							startSlot: "Slot",
+						});
+					}}
+				>
+					Show toast
+				</Button>
+			</Example.Item>
+		</Example>
+	);
+};
+
+export const iconPosition = {
+	name: "iconPosition",
+	render: () => <IconPosition />,
+};
+
 export const base: StoryObj = {
 	name: "base",
 	render: () => {

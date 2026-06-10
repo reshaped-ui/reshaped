@@ -14,6 +14,10 @@ export type Props = {
 	size?: "small" | "medium" | "large";
 	/** Icon at the inline start position of the toast */
 	icon?: IconProps["svg"];
+	/** Position of the icon relative to the content
+	 * @default "start-center"
+	 */
+	iconPosition?: "start-center" | "start-top" | "end-center" | "end-top";
 	/** Node for inserting content at the inline start position of the toast */
 	startSlot?: React.ReactNode;
 	/** Title value for the toast */
