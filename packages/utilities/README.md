@@ -200,7 +200,7 @@ class Modal {
 }
 ```
 
-By default, `lockScroll` will lock the scrolling of the document body and there are a few additional options you can pass to customize the behavior. Calling the returned `unlockScroll` function will unlock the scrolling based on the originally passed options.
+By default, `lockScroll` will lock the scrolling of the document and there are a few additional options you can pass to customize the behavior. Calling the returned `unlockScroll` function will unlock the scrolling based on the originally passed options.
 
 `lockScroll` options:
 

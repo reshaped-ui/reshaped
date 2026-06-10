@@ -133,7 +133,8 @@ export const defaultActive: StoryObj<{
 		</Tooltip>
 	),
 	play: async ({ canvasElement, args }) => {
-		const body = canvasElement.ownerDocument.body;
+		const { ownerDocument } = canvasElement;
+		const body = ownerDocument.body;
 		const canvas = within(body);
 		const trigger = canvas.getAllByRole("button")[0];
 
@@ -148,7 +149,10 @@ export const defaultActive: StoryObj<{
 		expect(item).toBeInTheDocument();
 
 		await userEvent.unhover(trigger);
-		fireEvent.mouseMove(body, { clientX: 0, clientY: 0 });
+		fireEvent.mouseMove(ownerDocument, {
+			clientX: (ownerDocument.defaultView?.innerWidth ?? 0) + 1000,
+			clientY: (ownerDocument.defaultView?.innerHeight ?? 0) + 1000,
+		});
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);

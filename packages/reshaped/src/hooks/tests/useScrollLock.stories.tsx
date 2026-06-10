@@ -30,11 +30,11 @@ export const base: StoryObj = {
 
 		await userEvent.click(button);
 
-		expect(document.body).toHaveStyle("overflow: hidden");
+		expect(document.documentElement).toHaveStyle("overflow: hidden");
 
 		await userEvent.click(button);
 
-		expect(document.body).not.toHaveStyle("overflow: hidden");
+		expect(document.documentElement).not.toHaveStyle("overflow: hidden");
 	},
 };
 
@@ -116,11 +116,11 @@ export const testContainerAsync: StoryObj = {
 		const [buttonGlobal, buttonScoped] = canvas.getAllByRole("button");
 
 		await userEvent.click(buttonGlobal);
-		expect(document.body).toHaveStyle("overflow: hidden");
+		expect(document.documentElement).toHaveStyle("overflow: hidden");
 
 		await userEvent.click(buttonScoped);
 		await userEvent.click(buttonGlobal);
 
-		expect(document.body).not.toHaveStyle("overflow: hidden");
+		expect(document.documentElement).not.toHaveStyle("overflow: hidden");
 	},
 };

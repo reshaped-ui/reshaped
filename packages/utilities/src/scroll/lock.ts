@@ -14,13 +14,13 @@ export const lockScroll = (args?: {
 	const container =
 		args?.containerEl ??
 		(args?.originEl && findClosestScrollableContainer({ el: args.originEl })) ??
-		document.body;
-	const lockedBodyScroll = container === document.body;
+		document.documentElement;
+	const lockedDocumentScroll = container === document.documentElement;
 
 	// Already locked so no need to lock again and trigger the callback
 	if (container.style.overflow === "hidden") return;
 
-	if (isIOSLock && lockedBodyScroll) {
+	if (isIOSLock && lockedDocumentScroll) {
 		reset = lockSafariScroll();
 	} else {
 		reset = lockStandardScroll({ container });
