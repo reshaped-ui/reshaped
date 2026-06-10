@@ -154,7 +154,7 @@
 --rs-color-background-disabled: oklch(0.95 0 89.88);
 --rs-color-background-disabled-faded: oklch(0.98 0 89.88);
 --rs-color-border-disabled: oklch(0 0 89.88 / 0.06);
---rs-color-foreground-disabled: oklch(0.84 0 89.88);
+--rs-color-foreground-disabled: oklch(0.65 0 89.88);
 --rs-color-background-elevation-base: oklch(1 0 89.88);
 --rs-color-background-elevation-raised: oklch(1 0 89.88);
 --rs-color-background-elevation-overlay: oklch(1 0 89.88);
@@ -209,7 +209,7 @@
 --rs-color-background-disabled: oklch(0.28 0 89.88);
 --rs-color-background-disabled-faded: oklch(0.225 0 89.88);
 --rs-color-border-disabled: oklch(1 0 89.88 / 0.06);
---rs-color-foreground-disabled: oklch(0.4 0 89.88);
+--rs-color-foreground-disabled: oklch(0.45 0 89.88);
 --rs-color-background-elevation-base: oklch(0.2 0 89.88);
 --rs-color-background-elevation-raised: oklch(0.23 0 89.88);
 --rs-color-background-elevation-overlay: oklch(0.245 0 89.88);

@@ -644,19 +644,19 @@
     },
     "foregroundDisabled": {
       "oklch": {
-        "l": 0.84,
+        "l": 0.65,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.4,
+        "l": 0.45,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
-      "hex": "#cacaca",
-      "hexDark": "#484848"
+      "hex": "#8f8f8f",
+      "hexDark": "#555555"
     },
     "backgroundElevationBase": {
       "oklch": {

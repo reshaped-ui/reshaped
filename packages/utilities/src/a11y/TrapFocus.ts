@@ -166,9 +166,13 @@ class TrapFocus {
 		if (!isLastInChain) {
 			this.#chainId = TrapFocus.chain.add(this);
 
-			// If the focus was moved manually (e.g. with autoFocus) - keep it there
-			if (!this.#root.contains(currentActiveElement)) {
-				focusElement(initialFocusEl || focusable[0], { pseudoFocus });
+			const focusInside = this.#root.contains(currentActiveElement);
+
+			if (initialFocusEl) {
+				focusElement(initialFocusEl, { pseudoFocus });
+				// If the focus was moved manually (e.g. with autoFocus) - keep it there
+			} else if (!focusInside) {
+				focusElement(focusable[0], { pseudoFocus });
 			}
 		}
 

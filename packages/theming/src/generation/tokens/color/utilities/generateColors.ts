@@ -175,8 +175,8 @@ const generateColorValues = (
 			oklchDark: { ...bgDark, l: 1, c: 0, alpha: 0.06 },
 		};
 		output[`foregroundDisabled`] = {
-			oklch: { ...fg, l: 0.84, c: 0 },
-			oklchDark: { ...fgDark, l: 0.4, c: 0 },
+			oklch: { ...fg, l: 0.65, c: 0 },
+			oklchDark: { ...fgDark, l: 0.45, c: 0 },
 		};
 		output[`backgroundElevationBase`] = {
 			oklch: { ...bg, l: 1, c: 0 },

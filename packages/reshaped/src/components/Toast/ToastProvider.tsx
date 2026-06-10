@@ -16,7 +16,11 @@ const toastReducer: T.Reducer = (state, action) => {
 
 	switch (action.type) {
 		case "add": {
-			const { position = "bottom-end", ...toastProps } = action.payload.toastProps || {};
+			const {
+				position = "bottom-end",
+				width = "short",
+				...toastProps
+			} = action.payload.toastProps || {};
 
 			return {
 				...state,
@@ -24,7 +28,7 @@ const toastReducer: T.Reducer = (state, action) => {
 					...state[position],
 					{
 						id: action.payload.id,
-						toastProps: { ...toastProps, width: "short" },
+						toastProps: { ...toastProps, width },
 						status: "entering",
 					},
 				],

@@ -15,7 +15,7 @@ button.root {
 	}
 
 	[data-rs-keyboard] &[role="option"]:focus {
-		box-shadow: none;
+		outline: none;
 		background-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
 }
