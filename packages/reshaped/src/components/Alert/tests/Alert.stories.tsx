@@ -3,8 +3,8 @@ import { expect } from "storybook/test";
 
 import Alert from "@/components/Alert";
 import Link from "@/components/Link";
-import IconZap from "@/icons/Zap";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/Alert",

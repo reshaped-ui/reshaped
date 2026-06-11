@@ -1,23 +1,21 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import View from "@/components/View";
-import useDrag from "@/hooks/_private/useDrag";
-
-import s from "./Resizable.module.css";
-
+import useDrag from "@/hooks/_internal/useDrag";
 import type * as T from "./Resizable.types";
-
-export const ResizableHandleContext = React.createContext({} as T.HandleContext);
+import { ResizableContext } from "./ResizableContext";
+import s from "./Resizable.module.css";
 
 const ResizableHandle: React.FC<T.HandleProps> = (props) => {
 	const { children } = props;
-	const { containerRef, onDrag, index, direction } = React.useContext(ResizableHandleContext);
+	const { containerRef, onDrag, direction } = React.useContext(ResizableContext);
 	const { ref, active } = useDrag(
 		(args) => {
-			onDrag({ ...args, index });
+			if (!ref.current) return;
+			onDrag({ ...args, handleEl: ref.current });
 		},
 		{
 			containerRef,
@@ -41,7 +39,6 @@ const ResizableHandle: React.FC<T.HandleProps> = (props) => {
 				tabIndex: 0,
 				"aria-hidden": true,
 				ref: (el) => {
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 					// @ts-ignore
 					ref.current = el;
 				},

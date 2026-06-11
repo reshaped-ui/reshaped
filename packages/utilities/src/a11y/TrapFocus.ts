@@ -1,11 +1,9 @@
 import keys from "@/constants/keys";
 import { getShadowRoot } from "@/dom";
-
 import Chain from "./Chain";
-import { getActiveElement, getFocusableElements, focusElement, getFocusData } from "./focus";
+import { focusElement, getActiveElement, getFocusableElements, getFocusData } from "./focus";
 import { checkKeyboardMode } from "./keyboardMode";
 import TrapScreenReader from "./TrapScreenReader";
-
 import type { FocusableElement, TrapMode } from "./types";
 
 type ReleaseOptions = { withoutFocusReturn?: boolean };
@@ -168,9 +166,13 @@ class TrapFocus {
 		if (!isLastInChain) {
 			this.#chainId = TrapFocus.chain.add(this);
 
-			// If the focus was moved manually (e.g. with autoFocus) - keep it there
-			if (!this.#root.contains(currentActiveElement)) {
-				focusElement(initialFocusEl || focusable[0], { pseudoFocus });
+			const focusInside = this.#root.contains(currentActiveElement);
+
+			if (initialFocusEl) {
+				focusElement(initialFocusEl, { pseudoFocus });
+				// If the focus was moved manually (e.g. with autoFocus) - keep it there
+			} else if (!focusInside) {
+				focusElement(focusable[0], { pseudoFocus });
 			}
 		}
 

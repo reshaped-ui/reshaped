@@ -1,12 +1,12 @@
 export {
 	focusableSelector,
-	getActiveElement,
-	getFocusableElements,
-	focusNextElement,
-	focusPreviousElement,
 	focusFirstElement,
 	focusLastElement,
+	focusNextElement,
+	focusPreviousElement,
+	getActiveElement,
+	getFocusableElements,
 } from "./focus";
-export { activateKeyboardMode, deactivateKeyboardMode, checkKeyboardMode } from "./keyboardMode";
+export { activateKeyboardMode, checkKeyboardMode, deactivateKeyboardMode } from "./keyboardMode";
 export { default as TrapFocus } from "./TrapFocus";
-export type { TrapMode, FocusableElement } from "./types";
+export type { FocusableElement, TrapMode } from "./types";

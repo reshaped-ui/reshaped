@@ -1,6 +1,5 @@
-import * as T from "@/styles/types";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-
+import * as T from "@/styles/types";
 import s from "./width.module.css";
 
 const width: T.StyleResolver<T.Width> = (value) => {

@@ -1,15 +1,14 @@
 "use client";
 
-import { classNames, useElementId } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
 import Text from "@/components/Text";
+import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./Switch.module.css";
-
 import type * as T from "./Switch.types";
+import s from "./Switch.module.css";
 
 const Switch: React.FC<T.Props> = (props) => {
 	const {
@@ -20,8 +19,6 @@ const Switch: React.FC<T.Props> = (props) => {
 		reversed,
 		defaultChecked,
 		onChange,
-		onFocus,
-		onBlur,
 		className,
 		attributes,
 	} = props;
@@ -58,8 +55,6 @@ const Switch: React.FC<T.Props> = (props) => {
 				defaultChecked={defaultChecked}
 				disabled={disabled}
 				onChange={handleChange}
-				onFocus={onFocus || inputAttributes?.onFocus}
-				onBlur={onBlur || inputAttributes?.onBlur}
 				id={id}
 			/>
 			<span className={s.area} aria-hidden="true">
@@ -69,8 +64,8 @@ const Switch: React.FC<T.Props> = (props) => {
 			{children && (
 				<Text
 					variant={responsivePropDependency(size, (value) => {
-						if (value === "large") return "body-2";
-						if (value === "medium") return "body-3";
+						if (value === "large") return "body-1";
+						if (value === "medium") return "body-2";
 						return "caption-1";
 					})}
 					weight="medium"

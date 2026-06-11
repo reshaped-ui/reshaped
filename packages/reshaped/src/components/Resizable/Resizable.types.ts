@@ -1,6 +1,7 @@
-import type { ViewProps } from "@/components/View";
-import type { UseDragCallbackArgs } from "@/hooks/_private/useDrag";
 import type React from "react";
+
+import type { ViewProps } from "@/components/View";
+import type { UseDragCallbackArgs } from "@/hooks/_internal/useDrag";
 
 export type Props = {
 	/** Component render variant */
@@ -20,10 +21,6 @@ export type ItemProps = {
 	defaultSize?: `${number}px`;
 };
 
-export type PrivateItemProps = ItemProps & {
-	index: number;
-};
-
 export type HandleProps = {
 	/** Render function for custom resize handles with attributes and props passed as arguments */
 	children?: (
@@ -32,10 +29,11 @@ export type HandleProps = {
 	) => React.ReactNode;
 };
 
-export type HandleContext = {
+export type Context = {
 	containerRef: React.RefObject<HTMLDivElement | null>;
-	index: number;
-	onDrag: (args: UseDragCallbackArgs & { index: number }) => void;
+	registerItem: (
+		el: HTMLDivElement,
+		getProps: Pick<ItemProps, "minSize" | "maxSize">
+	) => () => void;
+	onDrag: (args: UseDragCallbackArgs & { handleEl: HTMLElement }) => void;
 } & Pick<Props, "direction">;
-
-export type ItemsRefProps = { el: HTMLDivElement | null; props: ItemProps }[];

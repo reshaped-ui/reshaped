@@ -1,5 +1,4 @@
 import Aligner from "@/components/_private/Aligner";
-
 import TextArea from "./TextArea";
 
 const TextAreaRoot = TextArea as typeof TextArea & {

@@ -1,8 +1,11 @@
 import React from "react";
 
+import { ThemeProps } from "@/components/Theme";
+
 export type Props = {
 	children?: React.ReactNode;
 	targetRef?: React.RefObject<HTMLElement | ShadowRoot | null>;
+	colorMode?: ThemeProps["colorMode"];
 };
 
 export type ScopeProps<T extends HTMLElement> = {

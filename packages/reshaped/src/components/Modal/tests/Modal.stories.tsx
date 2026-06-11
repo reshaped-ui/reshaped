@@ -1,4 +1,3 @@
-import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
@@ -11,6 +10,7 @@ import Radio from "@/components/Radio";
 import Switch from "@/components/Switch";
 import TextField from "@/components/TextField";
 import View from "@/components/View";
+import useToggle from "@/hooks/useToggle";
 import { sleep } from "@/utilities/helpers";
 import { Example, Placeholder } from "@/utilities/storybook";
 
@@ -305,14 +305,12 @@ export const renderProps: StoryObj = {
 };
 
 export const handlers: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
 	handleAfterOpen: ReturnType<typeof fn>;
 	handleClose: ReturnType<typeof fn>;
 	handleAfterClose: ReturnType<typeof fn>;
 }> = {
-	name: "onOpen, onClose, onAfterOpen, onAfterClose",
+	name: "onClose, onAfterOpen, onAfterClose",
 	args: {
-		handleOpen: fn(),
 		handleClose: fn(),
 		handleAfterClose: fn(),
 		handleAfterOpen: fn(),
@@ -329,7 +327,6 @@ export const handlers: StoryObj<{
 						overlayToggle.deactivate();
 						args.handleClose(closeArgs);
 					}}
-					onOpen={args.handleOpen}
 					onAfterOpen={args.handleAfterOpen}
 					onAfterClose={args.handleAfterClose}
 				>
@@ -344,11 +341,6 @@ export const handlers: StoryObj<{
 		const trigger = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleOpen).toHaveBeenCalledWith();
-		});
 
 		// Wait for transition
 		await waitFor(() => {
@@ -435,7 +427,7 @@ export const edgeCases = {
 					</Demo>
 				</Example.Item>
 				<Example.Item title="keyboard focus stays on the modal first">
-					{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+					{/* oxlint-disable-next-line jsx_a11y/no-autofocus */}
 					<Demo title="Modal title" autoFocus={false} />
 				</Example.Item>
 				<Example.Item title="trap focus works with custom children components">
@@ -449,7 +441,7 @@ export const edgeCases = {
 				<Example.Item title="focus moves to the input">
 					<Demo
 						title="Modal title"
-						onOpen={() => {
+						onAfterOpen={() => {
 							inputRef.current?.focus();
 						}}
 					>

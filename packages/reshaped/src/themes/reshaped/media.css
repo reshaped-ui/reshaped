@@ -1,5 +1,0 @@
-
-	@custom-media --rs-viewport-m (min-width: 660px);
-@custom-media --rs-viewport-l (min-width: 900px);
-@custom-media --rs-viewport-xl (min-width: 1280px);
-@custom-media --rs-viewport-s (max-width: 659px);

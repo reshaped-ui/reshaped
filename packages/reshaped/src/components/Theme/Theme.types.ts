@@ -1,8 +1,7 @@
 import React from "react";
+import type { ClassName } from "@reshaped/utilities";
 
 import * as G from "@/types/global";
-
-import type { ClassName } from "@reshaped/headless";
 
 export type GlobalColorModeContextData = {
 	mode: G.ColorMode;

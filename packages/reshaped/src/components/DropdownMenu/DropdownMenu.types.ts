@@ -1,7 +1,8 @@
+import type React from "react";
+
 import type { FlyoutContentProps } from "@/components/Flyout";
 import type { MenuItemProps } from "@/components/MenuItem";
-import type { PopoverProps, PopoverInstance } from "@/components/Popover";
-import type React from "react";
+import type { PopoverInstance, PopoverProps } from "@/components/Popover";
 
 export type Instance = PopoverInstance;
 
@@ -9,10 +10,8 @@ export type Props = Pick<
 	PopoverProps,
 	| "children"
 	| "position"
-	| "forcePosition"
 	| "fallbackPositions"
 	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
 	| "fallbackMinHeight"
 	| "triggerType"
 	| "contentGap"
@@ -21,6 +20,8 @@ export type Props = Pick<
 	| "contentZIndex"
 	| "onOpen"
 	| "onClose"
+	| "onAfterOpen"
+	| "onAfterClose"
 	| "active"
 	| "defaultActive"
 	| "width"
@@ -30,7 +31,6 @@ export type Props = Pick<
 	| "containerRef"
 	| "positionRef"
 	| "originCoordinates"
-	| "borderRadius"
 	| "elevation"
 	| "initialFocusRef"
 > & {
@@ -53,10 +53,8 @@ export type SubMenuProps = {
 } & Pick<
 	PopoverProps,
 	| "position"
-	| "forcePosition"
 	| "fallbackPositions"
 	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
 	| "fallbackMinHeight"
 	| "contentGap"
 	| "contentShift"

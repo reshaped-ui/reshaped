@@ -1,16 +1,17 @@
 "use client";
 
-import { classNames, useRTL, useHandlerRef, useElementId } from "@reshaped/headless";
-import { disableScroll, enableScroll } from "@reshaped/headless/internal";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
+import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 
 import { useFormControl } from "@/components/FormControl";
-
-import s from "./Slider.module.css";
+import useElementId from "@/hooks/useElementId";
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useRTL from "@/hooks/useRTL";
+import type * as T from "./Slider.types";
 import { applyStepToValue, getDragCoord, triggerChangeEvent } from "./Slider.utilities";
 import SliderThumb from "./SliderThumb";
-
-import type * as T from "./Slider.types";
+import s from "./Slider.module.css";
 
 const THUMB_SIZE = 16;
 
@@ -130,17 +131,14 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			const args = { minValue: value, maxValue, name, minName, maxName };
 
 			// Manually controlled resolving of single/range handlers
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			if (options.commit) onChangeCommitRef.current?.(args);
 
 			// Keyboard changes should commit immediately
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			if (options.native && !draggingId) onChangeCommitRef.current?.(args);
 
 			// Manually controlled resolving of single/range handlers
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			if (options.native) onChangeRef.current?.(args);
 
@@ -156,17 +154,14 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				: { value, name };
 
 			// Manually controlled resolving of single/range handlers
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			if (options.commit) onChangeCommitRef.current?.(args);
 
 			// Keyboard changes should commit immediately
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			if (options.native && !draggingId) onChangeCommitRef.current?.(args);
 
 			// Manually controlled resolving of single/range handlers
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			if (options.native) onChangeRef.current?.(args);
 
@@ -293,7 +288,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	return (
 		// mouse/touch events only needed for non-keyboard use
-		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
+		// oxlint-disable-next-line jsx_a11y/no-static-element-interactions
 		<div
 			{...attributes}
 			className={rootClassNames}

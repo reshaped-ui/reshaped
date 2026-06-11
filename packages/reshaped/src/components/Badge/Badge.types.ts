@@ -1,7 +1,9 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type { ActionableProps } from "@/components/Actionable";
 import type { IconProps } from "@/components/Icon";
-import type { Attributes, ClassName } from "@reshaped/headless";
-import type React from "react";
+import type { Attributes } from "@/types/global";
 
 type BaseProps = {
 	/** Component color scheme
@@ -32,7 +34,7 @@ type WithChildren = BaseProps & {
 	/** Component render variant
 	 * @default "solid"
 	 */
-	variant?: "solid" | "faded" | "outline";
+	variant?: "solid" | "faded";
 };
 
 type WithEmpty = BaseProps & {

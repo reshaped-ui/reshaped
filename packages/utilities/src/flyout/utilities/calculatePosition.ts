@@ -1,7 +1,6 @@
+import type { Position } from "../types";
 import centerBySize from "./centerBySize";
 import getRTLPosition from "./getRTLPosition";
-
-import type { Position } from "../types";
 
 type CalculatePositionArgs = {
 	triggerBounds: DOMRect;

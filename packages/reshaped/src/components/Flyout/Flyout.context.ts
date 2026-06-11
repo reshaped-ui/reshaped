@@ -16,11 +16,11 @@ const TriggerProvider = FlyoutTriggerContext.Provider;
 const ContentProvider = FlyoutContentContext.Provider;
 
 export {
+	ContentProvider,
 	Provider,
 	TriggerProvider,
-	ContentProvider,
+	useFlyoutContentContext,
 	useFlyoutContext,
 	useFlyoutTriggerContext,
-	useFlyoutContentContext,
 };
 export default FlyoutContext;

@@ -1,20 +1,19 @@
-import { classNames } from "@reshaped/headless";
 import { forwardRef } from "react";
+import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable, { type ActionableRef } from "@/components/Actionable";
 import Icon from "@/components/Icon";
 import Loader from "@/components/Loader";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./Button.module.css";
-
 import type * as T from "./Button.types";
+import s from "./Button.module.css";
 
 const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {
 		variant = "solid",
 		color = "neutral",
-		elevated,
+		raised,
 		highlighted,
 		fullWidth,
 		loading,
@@ -42,7 +41,7 @@ const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		variant && s[`--variant-${variant}`],
 		responsiveClassNames(s, "--size", size),
 		responsiveClassNames(s, "--full-width", fullWidth),
-		elevated && variant !== "ghost" && s["--elevated"],
+		raised && variant !== "ghost" && color !== "media" && s["--raised"],
 		rounded && s["--rounded"],
 		disabled && s["--disabled"],
 		loading && s["--loading"],
@@ -96,8 +95,19 @@ const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 				</div>
 			)}
 			{renderIcon("start")}
-			{children && <span className={s.text}>{children}</span>}
+			{children && (
+				<span className={s.text}>
+					{React.Children.map(children, (child) => {
+						if (typeof child === "string") {
+							return <span className={s.label}>{child}</span>;
+						}
+
+						return child;
+					})}
+				</span>
+			)}
 			{renderIcon("end")}
+			{["outline", "ghost"].includes(variant) && <span className={s.highlight} />}
 		</Actionable>
 	);
 });

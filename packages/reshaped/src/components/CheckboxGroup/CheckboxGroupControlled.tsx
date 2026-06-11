@@ -1,7 +1,6 @@
 "use client";
 
 import Context from "./CheckboxGroup.context";
-
 import type * as T from "./CheckboxGroup.types";
 
 const CheckboxGroupControlled: React.FC<T.ControlledProps> = (props) => {

@@ -1,7 +1,7 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
@@ -9,7 +9,6 @@ import Text from "@/components/Text";
 import View from "@/components/View";
 import IconChevronRight from "@/icons/ChevronRight";
 import IconDotsHorizontal from "@/icons/DotsHorizontal";
-
 import * as T from "./Breadcrumbs.types";
 
 const Breadcrumbs: React.FC<T.Props> = (props) => {
@@ -49,7 +48,6 @@ const Breadcrumbs: React.FC<T.Props> = (props) => {
 					const isAfterCollapse = renderIndex > lastCollapsedIndex;
 					const isDisplayed = !visibleItems || isBeforeCollapse || isAfterCollapse || expanded;
 					const isCollapseButton = renderIndex === lastCollapsedIndex;
-					// eslint-disable-next-line react-hooks/immutability
 					renderIndex += 1;
 
 					let itemNode = null;
@@ -81,7 +79,7 @@ const Breadcrumbs: React.FC<T.Props> = (props) => {
 									{separator || <Icon svg={IconChevronRight} size={3} />}
 								</Text>
 							)}
-							<Text variant="body-3" color={color === "primary" ? "primary" : "neutral-faded"}>
+							<Text variant="body-2" color={color === "primary" ? "primary" : "neutral-faded"}>
 								{itemNode}
 							</Text>
 						</View>

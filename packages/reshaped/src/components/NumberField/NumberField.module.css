@@ -1,3 +1,7 @@
+.root {
+	overflow: hidden;
+}
+
 .field {
 	font-variant-numeric: tabular-nums;
 }
@@ -15,6 +19,7 @@
 	inset-block: 0;
 	inset-inline-end: 0;
 	transition: border-color var(--rs-duration-fast) var(--rs-easing-standard);
+	margin-block: calc(var(--rs-unit-x1) * -1);
 
 	/* Both controls are disabled */
 	&:has([aria-disabled] + [aria-disabled]) {
@@ -99,7 +104,7 @@
 
 	@media (hover: hover) and (pointer: fine) {
 		&:not([aria-disabled]):hover {
-			background: rgba(var(--rs-color-rgb-background-neutral), 32%);
+			background: var(--rs-color-background-neutral-highlighted-faded);
 		}
 	}
 }
@@ -111,6 +116,7 @@
 .--outline {
 	& .controls {
 		inset-inline-end: 1px;
+		inset-block: 1px;
 		border-inline-start: 1px solid var(--rs-number-field-control-border-color);
 	}
 

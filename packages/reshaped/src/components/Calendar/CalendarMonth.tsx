@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 
-import s from "./Calendar.module.css";
-import { getMonthWeeks, getWeekdayNames, getLocalISODate, isDateFocusable } from "./Calendar.utils";
-import CalendarDate from "./CalendarDate";
-
 import type * as T from "./Calendar.types";
+import { getLocalISODate, getMonthWeeks, getWeekdayNames, isDateFocusable } from "./Calendar.utils";
+import CalendarDate from "./CalendarDate";
+import s from "./Calendar.module.css";
 
 const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 	const {
@@ -34,6 +33,7 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 	const weekdayNames = getWeekdayNames({ firstWeekDay, renderWeekDay });
 
 	return (
+		// oxlint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
 		<table className={s.selection} role="grid">
 			<thead aria-hidden="true">
 				<tr>
@@ -60,7 +60,6 @@ const CalendarMonth: React.FC<T.MonthProps> = (props) => {
 										!!date &&
 										isDateFocusable({ date, lastFocusedDate, startValue });
 
-								// eslint-disable-next-line react-hooks/immutability
 								if (focusable) foundFocusableDate = true;
 
 								return (

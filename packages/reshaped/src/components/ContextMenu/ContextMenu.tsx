@@ -1,14 +1,13 @@
 "use client";
 
-import { useHandlerRef, useScrollLock } from "@reshaped/headless";
 import React from "react";
+import type { Coordinates } from "@reshaped/utilities/internal";
 
 import DropdownMenu from "@/components/DropdownMenu";
-
-import s from "./ContextMenu.module.css";
-
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useScrollLock from "@/hooks/useScrollLock";
 import type * as T from "./ContextMenu.types";
-import type { Coordinates } from "@reshaped/headless/internal";
+import s from "./ContextMenu.module.css";
 
 const ContextMenu: React.FC<T.Props> = (props) => {
 	const { position = "end-top", onOpen, onClose, ...dropdownMenuProps } = props;

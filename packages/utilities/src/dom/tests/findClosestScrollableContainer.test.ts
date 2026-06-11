@@ -1,4 +1,4 @@
-import { expect, test, describe, afterEach } from "vitest";
+import { afterEach, describe, expect, test } from "vitest";
 
 import findClosestScrollableContainer from "../findClosestScrollableContainer";
 

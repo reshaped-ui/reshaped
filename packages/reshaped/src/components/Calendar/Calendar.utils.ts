@@ -52,7 +52,7 @@ export const getWeekdayNames = (args: {
 export const getMonthNames = (args: { renderMonthLabel: T.BaseProps["renderMonthLabel"] }) => {
 	const { renderMonthLabel } = args;
 
-	return new Array(12).fill(null).map((_, i) => {
+	return Array.from({ length: 12 }).map((_, i) => {
 		const date = new Date(0, i);
 		return renderMonthLabel
 			? renderMonthLabel({ month: i, date })
@@ -67,12 +67,15 @@ export const getMonthWeeks = (args: { date: Date; firstWeekDay?: number }): (Dat
 	const { date, firstWeekDay } = args;
 	const month = date.getMonth();
 	const year = date.getFullYear();
-	const weeks: Date[][] = [];
+	const weeks: (Date | null)[][] = [];
 	const currentDate = new Date(year, month, 1);
 
 	// Fill in the days if month starts in the middle of the week
 	const firstDay = getNormalizedDay({ date: currentDate, firstWeekDay });
-	if (firstDay !== 0) weeks.push(new Array(firstDay).fill(null));
+	if (firstDay !== 0) {
+		const emptyDates = Array.from({ length: firstDay }).map(() => null);
+		weeks.push(emptyDates);
+	}
 
 	while (month === currentDate.getMonth()) {
 		const day = getNormalizedDay({ date: currentDate, firstWeekDay });
@@ -85,7 +88,10 @@ export const getMonthWeeks = (args: { date: Date; firstWeekDay?: number }): (Dat
 
 	// Fill in the days if month ends in the middle of the week
 	const lastDay = getNormalizedDay({ date: currentDate, firstWeekDay });
-	if (lastDay !== 0) weeks[weeks.length - 1].push(...new Array(7 - lastDay).fill(null));
+	if (lastDay !== 0) {
+		const emptyDates = Array.from({ length: 7 - lastDay }).map(() => null);
+		weeks[weeks.length - 1].push(...emptyDates);
+	}
 
 	return weeks;
 };

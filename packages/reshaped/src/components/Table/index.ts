@@ -1,4 +1,4 @@
-import Table, { TableCell, TableHeading, TableRow, TableBody, TableHead } from "./Table";
+import Table, { TableBody, TableCell, TableHead, TableHeading, TableRow } from "./Table";
 
 const TableRoot = Table as typeof Table & {
 	Cell: typeof TableCell;
@@ -16,10 +16,10 @@ TableRoot.Head = TableHead;
 
 export default TableRoot;
 export type {
-	Props as TableProps,
-	HeadProps as TableHeadProps,
 	BodyProps as TableBodyProps,
-	RowProps as TableRowProps,
 	CellProps as TableCellProps,
 	HeadingProps as TableHeadingProps,
+	HeadProps as TableHeadProps,
+	Props as TableProps,
+	RowProps as TableRowProps,
 } from "./Table.types";

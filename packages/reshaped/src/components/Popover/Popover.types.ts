@@ -1,5 +1,6 @@
-import type { FlyoutProps, FlyoutInstance } from "@/components/Flyout";
 import type React from "react";
+
+import type { FlyoutInstance, FlyoutProps } from "@/components/Flyout";
 
 export type Instance = FlyoutInstance;
 
@@ -7,13 +8,13 @@ export type Props = Pick<
 	FlyoutProps,
 	| "id"
 	| "position"
-	| "forcePosition"
 	| "fallbackPositions"
 	| "fallbackAdjustLayout"
-	| "fallbackMinWidth"
 	| "fallbackMinHeight"
 	| "onOpen"
 	| "onClose"
+	| "onAfterOpen"
+	| "onAfterClose"
 	| "width"
 	| "trapFocusMode"
 	| "active"
@@ -40,7 +41,5 @@ export type Props = Pick<
 	/** Component elevation level */
 	elevation?: "raised" | "overlay";
 	/** Border radius for the content */
-	borderRadius?: "small" | "medium";
-	/** @deprecated use Flyout utility instead, will be removed in v4 */
-	variant?: "elevated" | "headless";
+	borderRadius?: "medium" | "large";
 };

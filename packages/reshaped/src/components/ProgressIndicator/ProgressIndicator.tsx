@@ -1,11 +1,10 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
 import React from "react";
-
-import s from "./ProgressIndicator.module.css";
+import { classNames } from "@reshaped/utilities";
 
 import type * as T from "./ProgressIndicator.types";
+import s from "./ProgressIndicator.module.css";
 
 const VISIBLE_ITEMS = 7;
 const HALF_ITEMS = Math.floor(VISIBLE_ITEMS / 2);

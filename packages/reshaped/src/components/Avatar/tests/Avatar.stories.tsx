@@ -4,8 +4,8 @@ import { expect, fn, Mock, waitFor } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
+import IconZap from "@/icons/Zap";
 
 export default {
 	title: "Components/Avatar",
@@ -188,7 +188,7 @@ export const renderImage: StoryObj = {
 				<Avatar
 					src="https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80"
 					alt="Amsterdam canal"
-					// eslint-disable-next-line jsx-a11y/alt-text
+					// oxlint-disable-next-line jsx_a11y/alt-text
 					renderImage={(attributes) => <img {...attributes} id="test-image" />}
 				/>
 			</Example.Item>

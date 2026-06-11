@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { expect, fireEvent, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Popover from "@/components/Popover";
@@ -133,7 +133,9 @@ export const defaultActive: StoryObj<{
 		</Tooltip>
 	),
 	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
+		const { ownerDocument } = canvasElement;
+		const body = ownerDocument.body;
+		const canvas = within(body);
 		const trigger = canvas.getAllByRole("button")[0];
 
 		await userEvent.hover(trigger);
@@ -147,6 +149,10 @@ export const defaultActive: StoryObj<{
 		expect(item).toBeInTheDocument();
 
 		await userEvent.unhover(trigger);
+		fireEvent.mouseMove(ownerDocument, {
+			clientX: (ownerDocument.defaultView?.innerWidth ?? 0) + 1000,
+			clientY: (ownerDocument.defaultView?.innerHeight ?? 0) + 1000,
+		});
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);

@@ -2,11 +2,9 @@ import React from "react";
 
 import Actionable from "@/components/Actionable";
 import { onNextFrame } from "@/utilities/animation";
-
-import s from "./Calendar.module.css";
-import { getMonthNames } from "./Calendar.utils";
-
 import type * as T from "./Calendar.types";
+import { getMonthNames } from "./Calendar.utils";
+import s from "./Calendar.module.css";
 
 const MONTHS_PER_ROW = 3;
 
@@ -34,6 +32,7 @@ const CalendarYear: React.FC<T.YearProps> = (props) => {
 	}, []);
 
 	return (
+		// oxlint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
 		<table ref={rootRef} role="grid" className={s.selection}>
 			<tbody>
 				{rows.map((row, i) => (

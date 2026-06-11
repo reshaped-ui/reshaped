@@ -121,47 +121,6 @@ export const disabled: StoryObj = {
 	},
 };
 
-export const onFocus: StoryObj<{ handleFocus: ReturnType<typeof fn> }> = {
-	name: "onFocus",
-	args: {
-		handleFocus: fn(),
-	},
-	render: (args) => (
-		<HiddenInput type="checkbox" name="test-name" value="test-value" onFocus={args.handleFocus} />
-	),
-	play: async ({ canvas, args }) => {
-		const input = canvas.getByRole("checkbox");
-
-		await userEvent.click(input);
-
-		expect(args.handleFocus).toHaveBeenCalledTimes(1);
-		expect(args.handleFocus).toHaveBeenCalledWith(expect.objectContaining({ target: input }));
-	},
-};
-
-export const onBlur: StoryObj<{ handleBlur: ReturnType<typeof fn> }> = {
-	name: "onBlur",
-	args: {
-		handleBlur: fn(),
-	},
-	render: (args) => (
-		<div>
-			<HiddenInput type="checkbox" name="test-name" value="test-value" onBlur={args.handleBlur} />
-			<button type="button">Other element</button>
-		</div>
-	),
-	play: async ({ canvas, args }) => {
-		const input = canvas.getByRole("checkbox");
-		const [button] = canvas.getAllByRole("button");
-
-		await userEvent.click(input);
-		await userEvent.click(button);
-
-		expect(args.handleBlur).toHaveBeenCalledTimes(1);
-		expect(args.handleBlur).toHaveBeenCalledWith(expect.objectContaining({ target: input }));
-	},
-};
-
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (

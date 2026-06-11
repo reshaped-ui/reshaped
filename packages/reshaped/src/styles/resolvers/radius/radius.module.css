@@ -20,6 +20,6 @@
 	}
 
 	@value circular {
-		--rs-radius: 9999px;
+		--rs-radius: var(--rs-radius-circular);
 	}
 }

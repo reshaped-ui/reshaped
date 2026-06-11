@@ -1,12 +1,12 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
 import inset, {
-	insetTop,
+	insetBlock,
 	insetBottom,
-	insetStart,
 	insetEnd,
 	insetInline,
-	insetBlock,
+	insetStart,
+	insetTop,
 } from "./index";
 
 describe("Styles/Inset", () => {

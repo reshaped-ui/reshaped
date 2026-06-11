@@ -11,7 +11,7 @@ ResizableRoot.Handle = ResizableHandle;
 
 export default ResizableRoot;
 export type {
-	Props as ResizableProps,
-	ItemProps as ResizableItemProps,
 	HandleProps as ResizableHandleProps,
+	ItemProps as ResizableItemProps,
+	Props as ResizableProps,
 } from "./Resizable.types";

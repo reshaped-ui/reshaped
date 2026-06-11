@@ -9,7 +9,7 @@ const IconChevronDown = () => {
 			strokeLinecap="round"
 			strokeLinejoin="round"
 		>
-			<polyline points="6 9 12 15 18 9" />
+			<polyline points="6 10 12 16 18 10" />
 		</svg>
 	);
 };

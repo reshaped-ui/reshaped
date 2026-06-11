@@ -1,8 +1,10 @@
+import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
 import type { FormControlProps } from "@/components/FormControl";
 import type { IconProps } from "@/components/Icon";
 import type * as G from "@/types/global";
-import type { Attributes, ClassName } from "@reshaped/headless";
-import type React from "react";
+import type { Attributes } from "@/types/global";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
@@ -47,10 +49,6 @@ export type BaseProps = {
 	variant?: "outline" | "faded" | "ghost" | "headless";
 	/** Callback when the text field value changes */
 	onChange?: G.ChangeHandler<string>;
-	/** Callback when the text field is focused */
-	onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-	/** Callback when the text field is blurred */
-	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Additional attributes for the root element */

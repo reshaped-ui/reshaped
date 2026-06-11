@@ -2,9 +2,8 @@
 
 import React from "react";
 
-import RadioGroupControlled from "./RadioGroupControlled";
-
 import type * as T from "./RadioGroup.types";
+import RadioGroupControlled from "./RadioGroupControlled";
 
 const RadioGroupUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange } = props;

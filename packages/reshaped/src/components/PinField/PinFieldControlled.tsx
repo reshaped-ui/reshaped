@@ -1,23 +1,21 @@
 "use client";
 
-import { useHotkeys } from "@reshaped/headless";
 import React from "react";
 
 import { useFormControl } from "@/components/FormControl";
 import Text from "@/components/Text";
 import View from "@/components/View";
-import * as keys from "@/constants/keys";
+import useHotkeys from "@/hooks/useHotkeys";
 import { onNextFrame } from "@/utilities/animation";
 import { responsivePropDependency } from "@/utilities/props";
-
+import * as keys from "@/constants/keys";
 import {
-	regExpNumericChar,
 	regExpAlphabeticChar,
 	regExpAlphaNumericChar,
+	regExpNumericChar,
 } from "./PinField.constants";
-import s from "./PinField.module.css";
-
 import type * as T from "./PinField.types";
+import s from "./PinField.module.css";
 
 const sizeMap: Record<T.Size, number> = {
 	small: 7,
@@ -48,10 +46,10 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	const patternRegexp = patternMap[pattern];
 	const responsiveInputSize = responsivePropDependency(size, (value) => sizeMap[value]);
 	const responsiveTextVariant = responsivePropDependency(size, (value) =>
-		value === "medium" ? "body-3" : "body-2"
+		value === "medium" ? "body-2" : "body-1"
 	);
 	const responsiveRadius = responsivePropDependency(size, (value) =>
-		value === "xlarge" ? "medium" : "small"
+		value === "small" ? "small" : "medium"
 	);
 	const [focusedIndex, setFocusedIndex] = React.useState<number | null>(null);
 	const formControl = useFormControl();
@@ -197,7 +195,6 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	const handleItemClick = (event: React.MouseEvent | React.TouchEvent, index: number) => {
 		if (!inputRef.current) return;
 
-		event.preventDefault();
 		inputRef.current.focus();
 
 		modeRef.current = index >= value.length ? "type" : "edit";
@@ -211,13 +208,15 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				height={responsiveInputSize}
 				width={responsiveInputSize}
 				borderRadius={responsiveRadius}
-				borderColor={variant === "faded" ? "transparent" : "neutral"}
+				borderColor={variant === "faded" ? undefined : "neutral"}
+				shadow={variant === "faded" ? undefined : "outline"}
 				backgroundColor={variant === "faded" ? "neutral-faded" : "elevation-base"}
 				align="center"
 				justify="center"
 				className={[s.item, focusedIndex === i && s["item--focused"]]}
 				attributes={{
 					onMouseDown: (e) => {
+						e.preventDefault();
 						handleItemClick(e, i);
 					},
 					onTouchStart: (e) => {
@@ -225,6 +224,7 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 					},
 				}}
 			>
+				<span className={s.caret} />
 				{value[i] && <Text variant={responsiveTextVariant}>{value[i]}</Text>}
 			</View>
 		);
@@ -234,25 +234,23 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		<View gap={2} direction="row" className={[s.root, className]} attributes={attributes}>
 			{nodes}
 
-			<div className={s.inputWrapper}>
-				<input
-					{...inputAttributes}
-					{...formControl.attributes}
-					type="text"
-					className={s.input}
-					onFocus={handleFocus}
-					onBlur={handleBlur}
-					onPaste={handlePaste}
-					onInput={handleInput}
-					value={value}
-					name={name}
-					maxLength={valueLength}
-					ref={inputRef}
-					autoComplete={inputAttributes?.autoComplete || "one-time-code"}
-					inputMode={pattern === "numeric" ? "numeric" : undefined}
-					pattern={`${patternRegexp}{${valueLength}}`}
-				/>
-			</div>
+			<input
+				{...inputAttributes}
+				{...formControl.attributes}
+				type="text"
+				className={s.input}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
+				onPaste={handlePaste}
+				onInput={handleInput}
+				value={value}
+				name={name}
+				maxLength={valueLength}
+				ref={inputRef}
+				autoComplete={inputAttributes?.autoComplete || "one-time-code"}
+				inputMode={pattern === "numeric" ? "numeric" : undefined}
+				pattern={`${patternRegexp}{${valueLength}}`}
+			/>
 		</View>
 	);
 };

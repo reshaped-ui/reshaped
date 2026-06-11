@@ -1,5 +1,5 @@
 .root {
-	animation: rs-skeleton-pulse 2.4s ease-in-out infinite;
+	animation: rs-skeleton-pulse 2.5s ease-in-out infinite;
 	min-height: var(--rs-unit-x5);
 }
 

@@ -1,27 +1,24 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
 import { useFormControl } from "@/components/FormControl";
 import HiddenInput from "@/components/HiddenInput";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
-import IconCheckmark from "@/icons/Checkmark";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./Checkbox.module.css";
-
+import IconCheckmark from "@/icons/Checkmark";
 import type * as T from "./Checkbox.types";
+import s from "./Checkbox.module.css";
 
 const Checkbox: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		value,
 		onChange,
-		onFocus,
-		onBlur,
 		indeterminate,
 		size = "medium",
 		className,
@@ -61,8 +58,6 @@ const Checkbox: React.FC<T.Props> = (props) => {
 					disabled={disabled}
 					value={value}
 					onChange={onChange}
-					onFocus={onFocus}
-					onBlur={onBlur}
 					attributes={{
 						...inputAttributes,
 						ref: inputRef,
@@ -85,9 +80,9 @@ const Checkbox: React.FC<T.Props> = (props) => {
 				<Text
 					as="span"
 					variant={responsivePropDependency(size, (size) => {
-						if (size === "large") return "body-2";
+						if (size === "large") return "body-1";
 						if (size === "small") return "caption-1";
-						return "body-3";
+						return "body-2";
 					})}
 				>
 					{children}

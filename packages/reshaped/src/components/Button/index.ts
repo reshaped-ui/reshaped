@@ -12,7 +12,7 @@ ButtonRoot.Group = ButtonGroup;
 
 export default ButtonRoot;
 export type {
-	Props as ButtonProps,
 	AlignerProps as ButtonAlignerProps,
 	GroupProps as ButtonGroupProps,
+	Props as ButtonProps,
 } from "./Button.types";

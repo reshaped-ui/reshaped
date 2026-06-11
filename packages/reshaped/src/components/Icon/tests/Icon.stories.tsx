@@ -4,9 +4,9 @@ import { expect } from "storybook/test";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
 import View from "@/components/View";
+import { Example } from "@/utilities/storybook";
 import IconMic from "@/icons/Mic";
 import IconZap from "@/icons/Zap";
-import { Example } from "@/utilities/storybook";
 
 export default {
 	title: "Utility components/Icon",
@@ -37,7 +37,7 @@ export const size = {
 				<Icon svg={IconZap} size={{ s: 5, m: 10 }} />
 			</Example.Item>
 			<Example.Item title="size: inherit from font">
-				<Text variant="title-6">
+				<Text variant="featured-6">
 					<View direction="row" align="center" gap={2}>
 						<Icon svg={IconZap} />
 						<View.Item>Reshaped</View.Item>

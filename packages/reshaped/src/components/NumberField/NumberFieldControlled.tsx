@@ -1,22 +1,22 @@
 "use client";
 
-import { useHotkeys, useHandlerRef, useElementId } from "@reshaped/headless";
 import React from "react";
 
 import Actionable from "@/components/Actionable";
 import { useFormControl } from "@/components/FormControl";
 import Icon from "@/components/Icon";
 import TextField, { TextFieldProps } from "@/components/TextField";
+import useElementId from "@/hooks/useElementId";
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useHotkeys from "@/hooks/useHotkeys";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
 import * as keys from "@/constants/keys";
 import IconChevronDown from "@/icons/ChevronDown";
 import IconChevronUp from "@/icons/ChevronUp";
 import IconMinus from "@/icons/Minus";
 import IconPlus from "@/icons/Plus";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./NumberField.module.css";
-
 import type * as T from "./NumberField.types";
+import s from "./NumberField.module.css";
 
 const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	const {
@@ -50,14 +50,20 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	const pressedTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const changeIntervalRef = React.useRef<ReturnType<typeof setInterval>>(null);
 
+	const clampValue = React.useCallback(
+		(value: number) => {
+			if (max !== undefined && value > max) return max;
+			if (min !== undefined && value < min) return min;
+			return value;
+		},
+		[min, max]
+	);
+
 	const calculateDirectionalChange = React.useCallback(
 		(direction: -1 | 1) => {
 			const delta = step * direction;
 			const value = valueRef.current;
-			let nextValue = value === null ? delta : value + delta;
-
-			if (max !== undefined && nextValue > max) nextValue = max;
-			if (min !== undefined && nextValue < min) nextValue = min;
+			const nextValue = clampValue(value === null ? delta : value + delta);
 
 			// Keep the right precision and avoid JS rounding errors
 			const stepFloatPartLength = step.toString().split(".")[1]?.length || 0;
@@ -65,7 +71,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			const floatPartLength = Math.max(stepFloatPartLength, valueFloatPartLength);
 			return Number(nextValue.toFixed(floatPartLength));
 		},
-		[step, min, max]
+		[step, clampValue]
 	);
 
 	const commitValue = React.useCallback(
@@ -103,6 +109,19 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 
 		if (isNaN(numberValue)) return;
 		commitValue(numberValue);
+	};
+
+	const handleBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
+		textFieldProps.inputAttributes?.onBlur?.(event);
+
+		const numberValue = parseFloat(textValue);
+		if (isNaN(numberValue)) return;
+
+		const nextValue = clampValue(numberValue);
+		if (nextValue === numberValue) return;
+
+		setTextValue(nextValue.toString());
+		commitValue(nextValue);
 	};
 
 	const handleControlPointerDown = (
@@ -213,6 +232,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			{...textFieldProps}
 			className={[
 				textFieldProps.className,
+				s.root,
 				responsiveClassNames(s, "controls--size", size),
 				!(textFieldProps.variant === "faded" || textFieldProps.variant === "headless") &&
 					s["--outline"],
@@ -233,6 +253,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				max,
 				step,
 				className: s.field,
+				onBlur: handleBlur,
 			}}
 			size={size}
 			id={inputId}

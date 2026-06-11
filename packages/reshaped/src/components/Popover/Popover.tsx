@@ -1,35 +1,39 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import Dismissible, { type DismissibleProps } from "@/components/Dismissible";
-import Flyout, { useFlyoutContext, type FlyoutProps } from "@/components/Flyout";
+import Flyout, { type FlyoutProps, useFlyoutContext } from "@/components/Flyout";
 import { resolveMixin } from "@/styles/mixin";
-
-import s from "./Popover.module.css";
-
 import type * as T from "./Popover.types";
+import s from "./Popover.module.css";
 
 const Popover: React.FC<T.Props> = (props) => {
 	const {
 		width,
-		variant = "elevated",
 		triggerType = "click",
 		position = "bottom",
-		elevation,
-		borderRadius,
+		elevation = "overlay",
+		borderRadius = "large",
+		padding = 4,
 		...flyoutProps
 	} = props;
-	const padding = props.padding ?? (variant === "headless" ? 0 : 4);
 	const trapFocusMode =
 		props.trapFocusMode ?? (triggerType === "hover" ? "content-menu" : undefined);
-	const mixinStyles = resolveMixin({ padding });
+	const contentMixinStyles = resolveMixin({
+		shadow: elevation,
+		border: true,
+		borderColor: "neutral-faded",
+		radius: borderRadius,
+	});
+	const scrollableMixinStyles = resolveMixin({
+		padding,
+	});
 	const contentClassName = classNames(
 		s.content,
 		!!width && s["content--has-width"],
-		variant && s[`content--variant-${variant}`],
 		elevation && s[`content--elevation-${elevation}`],
-		borderRadius && s[`content--radius-${borderRadius}`],
-		mixinStyles.classNames
+		contentMixinStyles.classNames
 	);
+	const scrollableClassName = classNames(scrollableMixinStyles.classNames);
 
 	return (
 		<Flyout
@@ -39,7 +43,9 @@ const Popover: React.FC<T.Props> = (props) => {
 			triggerType={triggerType}
 			width={width}
 			contentClassName={contentClassName}
-			contentAttributes={{ style: { ...mixinStyles.variables } }}
+			contentAttributes={{ style: contentMixinStyles.variables }}
+			scrollableClassName={scrollableClassName}
+			scrollableAttributes={{ style: scrollableMixinStyles.variables }}
 		/>
 	);
 };

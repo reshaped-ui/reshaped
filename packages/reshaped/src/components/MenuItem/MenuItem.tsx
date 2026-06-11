@@ -1,14 +1,12 @@
-import { classNames } from "@reshaped/headless";
 import { forwardRef } from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable, { type ActionableRef } from "@/components/Actionable";
 import Icon from "@/components/Icon";
 import View from "@/components/View";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./MenuItem.module.css";
-
 import type * as T from "./MenuItem.types";
+import s from "./MenuItem.module.css";
 
 const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	const {
@@ -23,7 +21,6 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		onClick,
 		href,
 		size = "medium",
-		roundedCorners,
 		stopPropagation,
 		as,
 		render,
@@ -34,7 +31,6 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		s.root,
 		className,
 		responsiveClassNames(s, "--size", size),
-		responsiveClassNames(s, "--rounded-corners", roundedCorners),
 		color && s[`--color-${color}`],
 		selected && s["--selected"],
 		disabled && s["--disabled"],

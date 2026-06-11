@@ -1,15 +1,13 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Text from "@/components/Text";
 import Theme from "@/components/Theme";
-
-import s from "./Slider.module.css";
-import { getPrecision } from "./Slider.utilities";
-
 import type * as T from "./Slider.types";
+import { getPrecision } from "./Slider.utilities";
+import s from "./Slider.module.css";
 
 const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) => {
 	const {

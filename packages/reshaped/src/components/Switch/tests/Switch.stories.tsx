@@ -17,11 +17,11 @@ export default {
 
 export const size = () => (
 	<Example>
-		<Example.Item title="size: medium">
-			<Switch name="active" size="medium" inputAttributes={{ "aria-label": "test switch" }} />
-		</Example.Item>
 		<Example.Item title="size: small">
 			<Switch name="active" size="small" inputAttributes={{ "aria-label": "test switch" }} />
+		</Example.Item>
+		<Example.Item title="size: medium">
+			<Switch name="active" size="medium" inputAttributes={{ "aria-label": "test switch" }} />
 		</Example.Item>
 		<Example.Item title="size: large">
 			<Switch name="active" size="large" inputAttributes={{ "aria-label": "test switch" }} />
@@ -38,16 +38,6 @@ export const size = () => (
 
 export const label = () => (
 	<Example>
-		<Example.Item title="size: medium">
-			<View direction="row" gap={8}>
-				<Switch name="active" inputAttributes={{ "aria-label": "test switch" }}>
-					Wi-fi
-				</Switch>
-				<Switch reversed name="active" inputAttributes={{ "aria-label": "test switch" }}>
-					Wi-fi
-				</Switch>
-			</View>
-		</Example.Item>
 		<Example.Item title="size: small">
 			<View direction="row" gap={8}>
 				<Switch name="active" size="small" inputAttributes={{ "aria-label": "test switch" }}>
@@ -59,6 +49,17 @@ export const label = () => (
 					size="small"
 					inputAttributes={{ "aria-label": "test switch" }}
 				>
+					Wi-fi
+				</Switch>
+			</View>
+		</Example.Item>
+
+		<Example.Item title="size: medium">
+			<View direction="row" gap={8}>
+				<Switch name="active" inputAttributes={{ "aria-label": "test switch" }}>
+					Wi-fi
+				</Switch>
+				<Switch reversed name="active" inputAttributes={{ "aria-label": "test switch" }}>
 					Wi-fi
 				</Switch>
 			</View>

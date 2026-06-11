@@ -1,6 +1,5 @@
 import Link from "@/components/Link";
 import Text from "@/components/Text";
-
 import type * as T from "./Breadcrumbs.types";
 
 const BreadcrumbsItem: React.FC<T.ItemProps> = (props) => {
@@ -8,7 +7,7 @@ const BreadcrumbsItem: React.FC<T.ItemProps> = (props) => {
 
 	if (!href && !onClick && !disabled) {
 		return (
-			<Text variant="body-3" weight="medium" color="neutral">
+			<Text variant="body-2" weight="medium" color="neutral">
 				{children}
 			</Text>
 		);

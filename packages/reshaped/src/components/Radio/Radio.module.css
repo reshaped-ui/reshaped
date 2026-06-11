@@ -52,27 +52,36 @@ since it reset the border width/color without using @layer
 		transition: var(--rs-duration-fast) var(--rs-easing-standard);
 		transition-property: opacity, transform;
 	}
+
+	[data-rs-keyboard] & {
+		transition: none;
+
+		&::after {
+			transition: none;
+		}
+	}
 }
 
 @responsive .--size {
 	@value small {
 		--rs-radio-line-height: var(--rs-line-height-caption-1);
-		--rs-radio-gap: var(--rs-unit-x1);
+		--rs-radio-gap: var(--rs-unit-x1-5);
 	}
 
 	@value medium {
-		--rs-radio-line-height: var(--rs-line-height-body-3);
+		--rs-radio-line-height: var(--rs-line-height-body-2);
 		--rs-radio-gap: var(--rs-unit-x2);
 	}
 
 	@value large {
-		--rs-radio-line-height: var(--rs-line-height-body-2);
+		--rs-radio-line-height: var(--rs-line-height-body-1);
 		--rs-radio-gap: var(--rs-unit-x2);
 	}
 }
 
 [data-rs-keyboard] .input:focus + .decorator {
-	box-shadow: var(--rs-shadow-focus);
+	outline: var(--rs-outline);
+	outline-offset: var(--rs-outline-width);
 }
 
 /* } */
@@ -80,6 +89,7 @@ since it reset the border width/color without using @layer
 /* @layer rs.radio.error { */
 .root.--error .decorator {
 	border-color: var(--rs-color-border-critical);
+	border-width: var(--rs-outline-width);
 }
 
 /* } */

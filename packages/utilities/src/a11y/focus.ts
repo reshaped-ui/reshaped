@@ -1,5 +1,4 @@
 import { getShadowRoot } from "@/dom";
-
 import type { FocusableElement, FocusableOptions } from "./types";
 
 const pseudoFocusAttribute = "data-rs-focus";
