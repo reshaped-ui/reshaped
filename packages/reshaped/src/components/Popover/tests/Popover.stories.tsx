@@ -223,6 +223,69 @@ export const activeFalse: StoryObj<{
 	},
 };
 
+export const handlers: StoryObj<{
+	handleAfterOpen: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+	handleAfterClose: ReturnType<typeof fn>;
+}> = {
+	name: "onAfterOpen, onAfterClose",
+	args: {
+		handleClose: fn(),
+		handleAfterOpen: fn(),
+		handleAfterClose: fn(),
+	},
+	render: (args) => {
+		const [active, setActive] = useState(false);
+
+		return (
+			<Popover
+				active={active}
+				onOpen={() => setActive(true)}
+				onClose={(closeArgs) => {
+					setActive(false);
+					args.handleClose(closeArgs);
+				}}
+				onAfterOpen={args.handleAfterOpen}
+				onAfterClose={args.handleAfterClose}
+			>
+				<Popover.Trigger>
+					{(attributes) => <Button attributes={attributes}>Open</Button>}
+				</Popover.Trigger>
+				<Popover.Content>Content</Popover.Content>
+			</Popover>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		// Wait for the color mode initialization to re-enable transitions globally
+		await sleep(100);
+
+		await userEvent.click(trigger);
+
+		// Wait for the open transition
+		await waitFor(() => {
+			expect(args.handleAfterOpen).toHaveBeenCalledTimes(1);
+			expect(args.handleAfterOpen).toHaveBeenCalledWith();
+		});
+
+		expect(args.handleAfterClose).toHaveBeenCalledTimes(0);
+
+		// Close by clicking outside
+		await userEvent.click(document.body);
+
+		// Wait for the close transition
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
+			expect(args.handleAfterClose).toHaveBeenCalledWith();
+		});
+
+		expect(args.handleAfterOpen).toHaveBeenCalledTimes(1);
+	},
+};
+
 export const dismissible: StoryObj<{
 	handleClose: ReturnType<typeof fn>;
 }> = {

@@ -20,6 +20,8 @@ export type Props = Pick<
 	| "contentZIndex"
 	| "onOpen"
 	| "onClose"
+	| "onAfterOpen"
+	| "onAfterClose"
 	| "active"
 	| "defaultActive"
 	| "width"

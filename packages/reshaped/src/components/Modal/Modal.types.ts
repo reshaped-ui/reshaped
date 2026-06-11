@@ -56,7 +56,4 @@ export type Props = {
 	overlayClassName?: ClassName;
 	/** Additional attributes for the root element */
 	attributes?: Attributes<"div"> & { ref?: React.RefObject<HTMLDivElement | null> };
-} & Pick<
-	OverlayProps,
-	"onOpen" | "onAfterOpen" | "onAfterClose" | "active" | "containerRef" | "contained"
->;
+} & Pick<OverlayProps, "onAfterOpen" | "onAfterClose" | "active" | "containerRef" | "contained">;

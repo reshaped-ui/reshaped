@@ -23,7 +23,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 		blurred,
 		overflow,
 		onClose,
-		onOpen,
 		onAfterClose,
 		onAfterOpen,
 		disableCloseOnClick,
@@ -36,7 +35,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 	// Selectors wrapped with refs to simplify working with useEffect dependency array
 	const onCloseRef = useHandlerRef(onClose);
-	const onOpenRef = useHandlerRef(onOpen);
 	const onAfterCloseRef = useHandlerRef(onAfterClose);
 	const onAfterOpenRef = useHandlerRef(onAfterOpen);
 
@@ -168,10 +166,8 @@ const Overlay: React.FC<T.Props> = (props) => {
 				| undefined,
 		});
 
-		onOpenRef.current?.();
-
 		return () => trapFocus.release();
-	}, [rendered, onOpenRef, containerRef]);
+	}, [rendered, containerRef]);
 
 	// Unlock scroll on unmount
 	React.useEffect(() => {

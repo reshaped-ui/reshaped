@@ -13,6 +13,8 @@ export type Props = Pick<
 	| "fallbackMinHeight"
 	| "onOpen"
 	| "onClose"
+	| "onAfterOpen"
+	| "onAfterClose"
 	| "width"
 	| "trapFocusMode"
 	| "active"

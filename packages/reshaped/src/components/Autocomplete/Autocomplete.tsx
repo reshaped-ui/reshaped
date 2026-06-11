@@ -30,6 +30,8 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 		active,
 		onOpen,
 		onClose,
+		onAfterOpen,
+		onAfterClose,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
 		contentMaxHeight,
@@ -198,6 +200,8 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 				active={isDropdownActive}
 				onClose={handleClose}
 				onOpen={handleOpen}
+				onAfterOpen={onAfterOpen}
+				onAfterClose={onAfterClose}
 				containerRef={containerRef}
 				fallbackAdjustLayout={fallbackAdjustLayout}
 				fallbackMinHeight={fallbackMinHeight}

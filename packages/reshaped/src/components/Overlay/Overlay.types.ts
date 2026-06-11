@@ -24,8 +24,6 @@ export type Props = {
 	onClose?: (args: { reason: CloseReason }) => void;
 	/** Callback after the component close transition is complete */
 	onAfterClose?: () => void;
-	/** Callback when the component is opened */
-	onOpen?: () => void;
 	/** Callback after the component open transition is complete */
 	onAfterOpen?: () => void;
 	/** Disable closing the component on outside click */

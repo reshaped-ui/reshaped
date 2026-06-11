@@ -73,7 +73,6 @@ const Modal: FC<T.Props> = (props) => {
 	const {
 		children,
 		onClose,
-		onOpen,
 		onAfterClose,
 		onAfterOpen,
 		active,
@@ -308,7 +307,6 @@ const Modal: FC<T.Props> = (props) => {
 		<Overlay
 			instanceRef={overlayRef}
 			onClose={onClose}
-			onOpen={onOpen}
 			onAfterClose={onAfterClose}
 			onAfterOpen={onAfterOpen}
 			disableCloseOnClick={disableCloseOnOutsideClick}

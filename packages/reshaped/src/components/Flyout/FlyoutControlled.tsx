@@ -34,6 +34,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		groupTimeouts,
 		onOpen,
 		onClose,
+		onAfterOpen,
+		onAfterClose,
 		children,
 		disabled,
 		fallbackAdjustLayout,
@@ -65,6 +67,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	} = props;
 	const onOpenRef = useHandlerRef(onOpen);
 	const onCloseRef = useHandlerRef(onClose);
+	const onAfterOpenRef = useHandlerRef(onAfterOpen);
+	const onAfterCloseRef = useHandlerRef(onAfterClose);
 	const active = disabled === true ? false : passedActive;
 	const prevActive = usePrevious(active);
 	const parentFlyoutContext = useFlyoutContext();
@@ -312,9 +316,17 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
-			if (status === "hidden") remove();
+
+			if (status === "visible") {
+				onAfterOpenRef.current?.();
+			}
+
+			if (status === "hidden") {
+				remove();
+				onAfterCloseRef.current?.();
+			}
 		},
-		[remove, status]
+		[remove, status, onAfterOpenRef, onAfterCloseRef]
 	);
 
 	/**
@@ -340,8 +352,19 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		} else {
 			// In case transitions are disabled globally - remove from the DOM immediately
 			remove();
+			onAfterCloseRef.current?.();
 		}
-	}, [active, prevActive, render, hide, remove, disableHideAnimation, disabled, groupTimeouts]);
+	}, [
+		active,
+		prevActive,
+		render,
+		hide,
+		remove,
+		disableHideAnimation,
+		disabled,
+		groupTimeouts,
+		onAfterCloseRef,
+	]);
 
 	useIsomorphicLayoutEffect(() => {
 		if (status === "rendered") show();

@@ -137,6 +137,10 @@ type BaseProps = {
 	onOpen?: () => void;
 	/** Callback when the content is closed */
 	onClose?: (args: { reason?: CloseReason }) => void;
+	/** Callback after the content open transition is complete */
+	onAfterOpen?: () => void;
+	/** Callback after the content close transition is complete */
+	onAfterClose?: () => void;
 	/** Content width, literal css value or unit token multiplier */
 	width?: Width;
 	/** Gap between the content and the trigger element */

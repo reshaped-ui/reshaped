@@ -18,6 +18,8 @@ export type Props = TextFieldProps &
 		| "active"
 		| "onOpen"
 		| "onClose"
+		| "onAfterOpen"
+		| "onAfterClose"
 		| "fallbackAdjustLayout"
 		| "fallbackMinHeight"
 		| "contentMaxHeight"
