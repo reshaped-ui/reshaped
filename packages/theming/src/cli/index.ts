@@ -1,0 +1,55 @@
+import fs from "node:fs";
+import path from "node:path";
+import chalk from "chalk";
+
+import baseDefinition from "@/generation/definitions/slate";
+import type { PassedThemeDefinition } from "@/generation/tokens/types";
+import transform from "@/generation/transform";
+import type * as T from "@/generation/types";
+import mergeDefinitions from "@/generation/utilities/mergeDefinitions";
+import { transformToTailwind } from "./tailwind";
+
+const transformDefinition = (
+	name: string,
+	definition: PassedThemeDefinition,
+	options: T.CLIOptions
+) => {
+	const { isFragment, outputPath } = options;
+	const code = transform(name, definition, options);
+
+	const themeFolderPath = isFragment
+		? path.resolve(outputPath, "fragments", name)
+		: path.resolve(outputPath, name);
+
+	const themePath = path.resolve(themeFolderPath, "theme.css");
+	const themeMediaPath = path.resolve(themeFolderPath, "media.css");
+	const twPath = path.resolve(themeFolderPath, "tailwind.css");
+	const themeJsonPath = path.resolve(themeFolderPath, "theme.json");
+
+	fs.mkdirSync(themeFolderPath, { recursive: true });
+	fs.writeFileSync(themePath, code.variables);
+	fs.writeFileSync(themeJsonPath, JSON.stringify(code.theme, null, 2));
+	fs.writeFileSync(twPath, transformToTailwind(code.theme));
+
+	if (code.media) fs.writeFileSync(themeMediaPath, code.media);
+
+	const logOutput = `Compiled ${chalk.bold(name)} theme${isFragment ? " fragment" : ""}`;
+
+	console.log(chalk.green(logOutput));
+};
+
+export const addThemeFragment = (
+	name: string,
+	definition: PassedThemeDefinition,
+	options: T.CLIOptions
+) => {
+	transformDefinition(name, definition, { ...options, isFragment: true });
+};
+
+export const addTheme = (
+	name: string,
+	definition: PassedThemeDefinition,
+	options: T.CLIOptions
+) => {
+	transformDefinition(name, mergeDefinitions(baseDefinition, definition), options);
+};

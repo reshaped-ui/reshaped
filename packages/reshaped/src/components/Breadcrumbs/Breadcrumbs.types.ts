@@ -1,6 +1,8 @@
-import type { LinkProps } from "@/components/Link";
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
+import type { LinkProps } from "@/components/Link";
+import type { Attributes } from "@/types/global";
 
 export type Props = {
 	/** Node for inserting children to position items */
@@ -13,9 +15,8 @@ export type Props = {
 	color?: "neutral" | "primary";
 	/** Number of items to show by default, others will be hidden and can be expanded */
 	defaultVisibleItems?: number;
-	// TODO: make required in the v4
 	/** Aria label for the expand button */
-	expandAriaLabel?: string;
+	expandAriaLabel: string;
 	/** Turn expand button into static text and disable the expand functionality */
 	disableExpand?: boolean;
 	/** aria-label attribute for the component */

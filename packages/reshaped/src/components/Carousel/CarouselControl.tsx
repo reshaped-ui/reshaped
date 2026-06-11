@@ -1,16 +1,15 @@
 "use client";
 
-import { classNames, useIsomorphicLayoutEffect } from "@reshaped/headless";
 import { forwardRef, useState } from "react";
-
-import Button from "@/components/Button";
-import IconChevronLeft from "@/icons/ChevronLeft";
-import IconChevronRight from "@/icons/ChevronRight";
-
-import s from "./Carousel.module.css";
-import * as T from "./Carousel.types";
+import { classNames } from "@reshaped/utilities";
 
 import type { ActionableRef } from "@/components/Actionable";
+import Button from "@/components/Button";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import IconChevronLeft from "@/icons/ChevronLeft";
+import IconChevronRight from "@/icons/ChevronRight";
+import * as T from "./Carousel.types";
+import s from "./Carousel.module.css";
 
 const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) => {
 	const { type, scrollElRef, oppositeControlElRef, scrollPosition, onClick, isRTL, mounted } =
@@ -60,7 +59,7 @@ const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) =
 				icon={isDisplayedAsNext ? IconChevronRight : IconChevronLeft}
 				rounded
 				variant="outline"
-				elevated
+				raised
 				attributes={{ "aria-disabled": !visible, "aria-hidden": true }}
 				ref={ref}
 			/>

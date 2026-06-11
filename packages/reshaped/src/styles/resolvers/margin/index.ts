@@ -1,5 +1,5 @@
-import * as T from "@/styles/types";
 import { responsiveVariables } from "@/utilities/props";
+import * as T from "@/styles/types";
 import "./margin.css";
 
 const margin: T.StyleResolver<T.Margin> = (value) => {

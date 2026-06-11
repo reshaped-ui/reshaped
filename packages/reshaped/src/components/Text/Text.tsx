@@ -1,19 +1,17 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
-import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames } from "@/utilities/props";
-
+import { resolveMixin } from "@/styles/mixin";
+import type * as T from "./Text.types";
 import s from "./Text.module.css";
 
-import type * as T from "./Text.types";
-
 const tagMap: Partial<Record<T.Variant, keyof React.JSX.IntrinsicElements>> = {
-	"title-1": "h1",
-	"title-2": "h2",
-	"title-3": "h3",
-	"title-4": "h4",
-	"title-5": "h5",
-	"title-6": "h6",
+	"featured-1": "h1",
+	"featured-2": "h2",
+	"featured-3": "h3",
+	"featured-4": "h4",
+	"featured-5": "h5",
+	"featured-6": "h6",
 };
 
 const Text = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Props<As>) => {
@@ -36,7 +34,6 @@ const Text = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	const mixinStyles = resolveMixin({ textAlign: align });
 
 	// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const TagName: any = props.as || (largestVariant && tagMap[largestVariant]) || "div";
 
 	const rootClassName = classNames(

@@ -1,5 +1,5 @@
 export { default } from "./Dismissible";
 export type {
-	Props as DismissibleProps,
 	CloseProps as DismissibleCloseProps,
+	Props as DismissibleProps,
 } from "./Dismissible.types";

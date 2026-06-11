@@ -279,6 +279,61 @@ export const minMax: StoryObj = {
 	},
 };
 
+export const clampOnBlur: StoryObj<{ handleChange: Mock; handleBlur: Mock }> = {
+	name: "min, max, clamp on blur",
+	args: {
+		handleChange: fn(),
+		handleBlur: fn(),
+	},
+	render: (args) => (
+		<>
+			<NumberField
+				name="test-name"
+				defaultValue={6}
+				min={5}
+				max={10}
+				onChange={args.handleChange}
+				increaseAriaLabel="Increase"
+				decreaseAriaLabel="Decrease"
+				inputAttributes={{ "aria-label": "Label", onBlur: args.handleBlur }}
+			/>
+			<button type="button">Focusable</button>
+		</>
+	),
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("textbox");
+		const button = canvas.getByRole("button", { name: "Focusable" });
+
+		await userEvent.clear(input);
+		await userEvent.type(input, "11");
+		expect(input).toHaveValue("11");
+		expect(args.handleChange).toHaveBeenLastCalledWith({
+			name: "test-name",
+			value: 11,
+		});
+
+		await userEvent.click(button);
+		expect(input).toHaveValue("10");
+		expect(args.handleChange).toHaveBeenLastCalledWith({
+			name: "test-name",
+			value: 10,
+		});
+		expect(args.handleBlur).toHaveBeenCalledTimes(1);
+
+		await userEvent.clear(input);
+		await userEvent.type(input, "3");
+		expect(input).toHaveValue("3");
+
+		await userEvent.click(button);
+		expect(input).toHaveValue("5");
+		expect(args.handleChange).toHaveBeenLastCalledWith({
+			name: "test-name",
+			value: 5,
+		});
+		expect(args.handleBlur).toHaveBeenCalledTimes(2);
+	},
+};
+
 export const step: StoryObj = {
 	name: "step",
 	render: () => (

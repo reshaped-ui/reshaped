@@ -18,32 +18,32 @@ export const variant = {
 	name: "variant",
 	render: () => (
 		<Example>
-			<Example.Item title="variant: title-1">
-				<Text variant="title-1">Title 1</Text>
+			<Example.Item title="variant: headline-1">
+				<Text variant="headline-1">Headline 1</Text>
 			</Example.Item>
-			<Example.Item title="variant: title-2">
-				<Text variant="title-2">Title 2</Text>
+			<Example.Item title="variant: headline-2">
+				<Text variant="headline-2">Headline 2</Text>
 			</Example.Item>
-			<Example.Item title="variant: title-3">
-				<Text variant="title-3">Title 3</Text>
-			</Example.Item>
-			<Example.Item title="variant: title-4">
-				<Text variant="title-4">Title 4</Text>
-			</Example.Item>
-			<Example.Item title="variant: title-5">
-				<Text variant="title-5">Title 5</Text>
-			</Example.Item>
-			<Example.Item title="variant: title-6">
-				<Text variant="title-6">Title 6</Text>
+			<Example.Item title="variant: headline-3">
+				<Text variant="headline-3">Headline 3</Text>
 			</Example.Item>
 			<Example.Item title="variant: featured-1">
-				<Text variant="featured-1">Featured 1</Text>
+				<Text variant="featured-1">Title 1</Text>
 			</Example.Item>
 			<Example.Item title="variant: featured-2">
-				<Text variant="featured-2">Featured 2</Text>
+				<Text variant="featured-2">Title 2</Text>
 			</Example.Item>
 			<Example.Item title="variant: featured-3">
-				<Text variant="featured-3">Featured 3</Text>
+				<Text variant="featured-3">Title 3</Text>
+			</Example.Item>
+			<Example.Item title="variant: featured-4">
+				<Text variant="featured-4">Title 4</Text>
+			</Example.Item>
+			<Example.Item title="variant: featured-5">
+				<Text variant="featured-5">Title 5</Text>
+			</Example.Item>
+			<Example.Item title="variant: featured-6">
+				<Text variant="featured-6">Title 6</Text>
 			</Example.Item>
 			<Example.Item title="variant: body-1">
 				<Text variant="body-1">Body 1</Text>
@@ -51,17 +51,14 @@ export const variant = {
 			<Example.Item title="variant: body-2">
 				<Text variant="body-2">Body 2</Text>
 			</Example.Item>
-			<Example.Item title="variant: body-3">
-				<Text variant="body-3">Body 3</Text>
-			</Example.Item>
 			<Example.Item title="variant: caption-1">
 				<Text variant="caption-1">Caption 1</Text>
 			</Example.Item>
 			<Example.Item title="variant: caption-2">
 				<Text variant="caption-2">Caption 2</Text>
 			</Example.Item>
-			<Example.Item title={["responsive variant", "[s] body-3", "[m+] title-4"]}>
-				<Text variant={{ s: "body-3", m: "title-4" }}>Responsive</Text>
+			<Example.Item title={["responsive variant", "[s] body-2", "[m+] featured-4"]}>
+				<Text variant={{ s: "body-2", m: "featured-4" }}>Responsive</Text>
 			</Example.Item>
 		</Example>
 	),
@@ -140,7 +137,7 @@ export const wrap = {
 	render: () => (
 		<Example>
 			<Example.Item title="wrap: balance">
-				<Text wrap="balance" variant="title-3">
+				<Text wrap="balance" variant="featured-3">
 					The design system you want to build
 				</Text>
 			</Example.Item>
@@ -156,7 +153,7 @@ export const mono = {
 				<Text monospace>Content</Text>
 			</Example.Item>
 			<Example.Item title="monospace, variant, weight">
-				<Text monospace variant="title-1" weight="regular">
+				<Text monospace variant="featured-1" weight="regular">
 					Content
 				</Text>
 			</Example.Item>
@@ -222,8 +219,8 @@ export const asProp: StoryObj = {
 	render: () => (
 		<>
 			<Text as="h1">Content</Text>
-			<Text variant="title-3">Content</Text>
-			<Text variant={{ s: "title-3", m: "title-4" }}>Content</Text>
+			<Text variant="featured-3">Content</Text>
+			<Text variant={{ s: "featured-3", m: "featured-4" }}>Content</Text>
 		</>
 	),
 	play: async ({ canvas }) => {

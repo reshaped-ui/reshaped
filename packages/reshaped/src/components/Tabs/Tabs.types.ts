@@ -1,6 +1,9 @@
-import type { IconProps } from "@/components/Icon";
-import type { Attributes, ClassName } from "@reshaped/headless";
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
+
+import type { ActionableProps } from "@/components/Actionable";
+import type { IconProps } from "@/components/Icon";
+import type { Attributes } from "@/types/global";
 
 export type SelectionState = {
 	left: number;
@@ -22,7 +25,7 @@ export type ItemProps = {
 	/** Disable the item user interaction */
 	disabled?: boolean;
 	/** Additional attributes for the item element */
-	attributes?: Attributes<"div">;
+	attributes?: ActionableProps["attributes"];
 };
 
 export type ListProps = {
@@ -53,9 +56,9 @@ export type BaseProps = {
 	/** Equal width for the tab buttons */
 	itemWidth?: "equal";
 	/** Render variant for component */
-	variant?: "bordered" | "borderless" | "pills" | "pills-elevated";
+	variant?: "bordered" | "borderless" | "pills" | "pills-raised";
 	/** Component size */
-	size?: "medium" | "large";
+	size?: "small" | "medium" | "large";
 	/** Name of the tab buttons group when used as a form control */
 	name?: string;
 	/** Disable the animation of the tab button selection */
@@ -66,20 +69,16 @@ export type BaseProps = {
 
 export type ControlledProps = BaseProps & {
 	/** Value of the active tab, enables controlled mode */
-	value?: string;
+	value: string;
 	/** Default value of the active tab, enables uncontrolled mode */
 	defaultValue?: never;
-};
-
-export type PrivateControlledProps = ControlledProps & {
-	onSilentChange: BaseProps["onChange"];
 };
 
 export type UncontrolledProps = BaseProps & {
 	/** Value of the active tab, enables controlled mode */
 	value?: never;
 	/** Default value of the active tab, enables uncontrolled mode */
-	defaultValue?: string;
+	defaultValue: string;
 };
 
 export type Props = ControlledProps | UncontrolledProps;
@@ -90,8 +89,10 @@ export type Context = Pick<
 > & {
 	size: NonNullable<BaseProps["size"]>;
 	value?: string;
-	setDefaultValue: (value: string) => void;
 	id: string;
+	registerPanel: (value: string) => void;
+	unregisterPanel: (value: string) => void;
+	hasPanel: (value: string) => boolean;
 	elActiveRef: React.RefObject<HTMLDivElement | null>;
 	elPrevActiveRef: React.RefObject<HTMLDivElement | null>;
 	elScrollableRef: React.RefObject<HTMLDivElement | null>;

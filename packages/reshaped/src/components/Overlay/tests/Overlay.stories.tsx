@@ -1,4 +1,3 @@
-import { useToggle } from "@reshaped/headless";
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -7,6 +6,7 @@ import { expect, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 import Button from "@/components/Button";
 import Overlay from "@/components/Overlay";
 import View from "@/components/View";
+import useToggle from "@/hooks/useToggle";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 
@@ -105,14 +105,12 @@ export const renderProps: StoryObj = {
 };
 
 export const handlers: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
 	handleAfterOpen: ReturnType<typeof fn>;
 	handleClose: ReturnType<typeof fn>;
 	handleAfterClose: ReturnType<typeof fn>;
 }> = {
-	name: "onOpen, onClose, onAfterOpen, onAfterClose",
+	name: "onClose, onAfterOpen, onAfterClose",
 	args: {
-		handleOpen: fn(),
 		handleClose: fn(),
 		handleAfterClose: fn(),
 		handleAfterOpen: fn(),
@@ -129,7 +127,6 @@ export const handlers: StoryObj<{
 						overlayToggle.deactivate();
 						args.handleClose(closeArgs);
 					}}
-					onOpen={args.handleOpen}
 					onAfterOpen={args.handleAfterOpen}
 					onAfterClose={args.handleAfterClose}
 				>
@@ -143,11 +140,6 @@ export const handlers: StoryObj<{
 		const trigger = canvas.getAllByRole("button")[0];
 
 		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleOpen).toHaveBeenCalledWith();
-		});
 
 		// Wait for transition
 		await waitFor(() => {
@@ -308,6 +300,14 @@ export const testPortal: StoryObj<{
 	args: {
 		handleClose: fn(),
 	},
+	parameters: {
+		docs: {
+			source: {
+				type: "code",
+				code: [],
+			},
+		},
+	},
 	render: (args) => {
 		const overlayToggle = useToggle(false);
 
@@ -329,7 +329,7 @@ export const testPortal: StoryObj<{
 								insetStart={4}
 								width={30}
 								height={30}
-								backgroundColor="neutral-faded"
+								backgroundColor="neutral"
 								zIndex={9999}
 								padding={4}
 								borderRadius="small"

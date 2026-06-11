@@ -2,10 +2,8 @@ import React from "react";
 
 import Text from "@/components/Text";
 import View from "@/components/View";
-
-import s from "./Select.module.css";
-
 import type * as T from "./Select.types";
+import s from "./Select.module.css";
 
 const SelectGroup: React.FC<T.GroupProps> = (props) => {
 	const { label, children } = props;

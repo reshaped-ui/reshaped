@@ -1,25 +1,21 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
 import HiddenInput from "@/components/HiddenInput";
 import { useRadioGroup } from "@/components/RadioGroup";
 import Text from "@/components/Text";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-
-import s from "./Radio.module.css";
-
 import type * as T from "./Radio.types";
+import s from "./Radio.module.css";
 
 const Radio: React.FC<T.Props> = (props) => {
 	const {
 		children,
 		value,
 		onChange,
-		onFocus,
-		onBlur,
 		size = "medium",
 		className,
 		attributes,
@@ -52,8 +48,6 @@ const Radio: React.FC<T.Props> = (props) => {
 					disabled={disabled}
 					value={value}
 					onChange={onChange}
-					onFocus={onFocus}
-					onBlur={onBlur}
 					attributes={inputAttributes}
 				/>
 				<div className={s.decorator} />
@@ -63,9 +57,9 @@ const Radio: React.FC<T.Props> = (props) => {
 				<Text
 					as="span"
 					variant={responsivePropDependency(size, (size) => {
-						if (size === "large") return "body-2";
+						if (size === "large") return "body-1";
 						if (size === "small") return "caption-1";
-						return "body-3";
+						return "body-2";
 					})}
 				>
 					{children}

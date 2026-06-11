@@ -5,15 +5,12 @@ import React from "react";
 import DropdownMenu from "@/components/DropdownMenu";
 import Icon from "@/components/Icon";
 import View from "@/components/View";
-import CheckmarkIcon from "@/icons/Checkmark";
 import { responsivePropDependency } from "@/utilities/props";
-
+import CheckmarkIcon from "@/icons/Checkmark";
+import type * as T from "./Select.types";
 import SelectGroup from "./SelectGroup";
 import SelectOption from "./SelectOption";
-import SelectRoot from "./SelectRoot";
 import SelectTrigger from "./SelectTrigger";
-
-import type * as T from "./Select.types";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const {
@@ -21,12 +18,13 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		value,
 		name,
 		placeholder,
-		size,
 		multiple,
+		selectedIconPosition = "start",
 		width = "trigger",
 		position,
 		fallbackPositions,
 		positionRef,
+		size,
 		renderValue: passedRenderValue,
 	} = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
@@ -56,6 +54,10 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 
 				return React.cloneElement(component, {
 					key: option.value,
+					size: responsivePropDependency(size, (size) => {
+						if (size === "xlarge") return "large";
+						return size;
+					}),
 					onClick: (e) => {
 						option.onClick?.(e);
 						if (multiple) {
@@ -69,9 +71,15 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 						}
 					},
 					startSlot:
-						option?.startSlot !== undefined
-							? option.startSlot
-							: hasValue && <Icon svg={selected ? CheckmarkIcon : null} />,
+						option.startSlot ??
+						(selectedIconPosition === "start" && hasValue ? (
+							<Icon svg={selected ? CheckmarkIcon : null} />
+						) : null),
+					endSlot:
+						option.endSlot ??
+						(selectedIconPosition === "end" && hasValue ? (
+							<Icon svg={selected ? CheckmarkIcon : null} />
+						) : null),
 					attributes: {
 						...component.props.attributes,
 						ref: selected ? initialFocusRef : undefined,
@@ -146,53 +154,34 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	};
 
 	return (
-		<SelectRoot {...props}>
-			{(props) => {
-				return (
-					<DropdownMenu
-						width={width}
-						disableHideAnimation
-						position={position ?? "bottom"}
-						fallbackPositions={fallbackPositions ?? (position ? undefined : ["bottom", "top"])}
-						fallbackAdjustLayout
-						fallbackMinHeight="220px"
-						borderRadius={responsivePropDependency(size, (size) =>
-							size === "large" || size === "xlarge" ? "medium" : "small"
-						)}
-						initialFocusRef={initialFocusRef}
-						positionRef={positionRef}
-					>
-						<DropdownMenu.Trigger>
-							{(attributes) => {
-								const triggerProps = {
-									...props,
-									inputAttributes: {
-										...props.inputAttributes,
-										...attributes,
-									},
-								} as T.TriggerProps;
-
-								return (
-									<SelectTrigger {...triggerProps} value={value}>
-										{renderValue()}
-									</SelectTrigger>
-								);
-							}}
-						</DropdownMenu.Trigger>
-						<DropdownMenu.Content
-							attributes={{
-								ref: dropdownRef,
-								onKeyDown: handleKeyDown,
-								// Ignore the default menu role since we're using options
-								role: undefined,
-							}}
-						>
-							{resolvedChildren}
-						</DropdownMenu.Content>
-					</DropdownMenu>
-				);
-			}}
-		</SelectRoot>
+		<DropdownMenu
+			width={width}
+			disableHideAnimation
+			position={position ?? "bottom"}
+			fallbackPositions={fallbackPositions ?? (position ? undefined : ["bottom", "top"])}
+			fallbackAdjustLayout
+			fallbackMinHeight="220px"
+			initialFocusRef={initialFocusRef}
+			positionRef={positionRef}
+		>
+			<DropdownMenu.Trigger>
+				{(attributes) => (
+					<SelectTrigger {...props} triggerAttributes={attributes} value={value}>
+						{renderValue()}
+					</SelectTrigger>
+				)}
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content
+				attributes={{
+					ref: dropdownRef,
+					onKeyDown: handleKeyDown,
+					// Ignore the default menu role since we're using options
+					role: undefined,
+				}}
+			>
+				{resolvedChildren}
+			</DropdownMenu.Content>
+		</DropdownMenu>
 	);
 };
 

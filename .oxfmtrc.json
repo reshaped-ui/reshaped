@@ -1,0 +1,61 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"printWidth": 100,
+	"useTabs": true,
+	"trailingComma": "es5",
+	"sortImports": {
+		"customGroups": [
+			{
+				"groupName": "internal-components",
+				"elementNamePattern": ["@/components/**"],
+				"selector": "internal"
+			},
+			{
+				"groupName": "internal-hooks",
+				"elementNamePattern": ["@/hooks/**"],
+				"selector": "internal"
+			},
+			{
+				"groupName": "internal-utilities",
+				"elementNamePattern": ["@/utilities/**"],
+				"selector": "internal"
+			},
+			{
+				"groupName": "monorepo-value",
+				"elementNamePattern": ["@reshaped/**", "reshaped"],
+				"modifiers": ["value"],
+				"selector": "external"
+			},
+			{
+				"groupName": "monorepo-type",
+				"elementNamePattern": ["@reshaped/**", "reshaped"],
+				"modifiers": ["type"],
+				"selector": "external"
+			}
+		],
+		"groups": [
+			["value-builtin", "type-builtin"],
+			{ "newlinesBetween": false },
+			["value-external", "type-external"],
+			{ "newlinesBetween": false },
+			["monorepo-value", "monorepo-type"],
+			"internal-components",
+			{ "newlinesBetween": false },
+			"internal-hooks",
+			{ "newlinesBetween": false },
+			"internal-utilities",
+			{ "newlinesBetween": false },
+			["value-internal", "type-internal"],
+			{ "newlinesBetween": false },
+			["value-parent", "type-parent"],
+			{ "newlinesBetween": false },
+			["value-sibling", "type-sibling"],
+			{ "newlinesBetween": false },
+			["value-index", "type-index", "side_effect_style", "style"],
+			{ "newlinesBetween": false },
+			"unknown"
+		]
+	},
+	"sortPackageJson": false,
+	"ignorePatterns": ["src/themes/**", "packages/**/src/themes/**"]
+}

@@ -1,0 +1,5 @@
+---
+"reshaped": minor
+---
+
+Select: selectedIconPosition

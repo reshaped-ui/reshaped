@@ -1,12 +1,11 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
 import React from "react";
+import { classNames } from "@reshaped/utilities";
 
 import { resolveMixin } from "@/styles/mixin";
-
-import s from "./Image.module.css";
 import * as T from "./Image.types";
+import s from "./Image.module.css";
 
 const Image: React.FC<T.Props> = (props) => {
 	const {
@@ -72,7 +71,7 @@ const Image: React.FC<T.Props> = (props) => {
 				style,
 			};
 
-			// eslint-disable-next-line jsx-a11y/alt-text
+			// oxlint-disable-next-line jsx_a11y/alt-text
 			return renderImage ? renderImage(imageAttributes) : <img {...imageAttributes} />;
 		}
 

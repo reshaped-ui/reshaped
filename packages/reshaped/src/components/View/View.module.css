@@ -17,7 +17,7 @@
 }
 
 .--animated {
-	transition: var(--rs-duration-medium) var(--rs-easing-standard);
+	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, color, border-color, box-shadow;
 }
 
@@ -49,14 +49,6 @@
 .--bg-black {
 	background-color: var(--rs-color-black);
 	color: var(--rs-color-white);
-}
-
-.--shadow-raised {
-	box-shadow: var(--rs-shadow-raised);
-}
-
-.--shadow-overlay {
-	box-shadow: var(--rs-shadow-overlay);
 }
 
 .--overflow-hidden {

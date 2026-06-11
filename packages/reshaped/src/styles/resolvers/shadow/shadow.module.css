@@ -1,0 +1,49 @@
+.root {
+	position: relative;
+
+	/* Using after while borders are using before */
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 1px;
+		pointer-events: none;
+		border-radius: inherit;
+		z-index: var(--rs-z-index-relative);
+	}
+}
+
+.--shadow-outline {
+	&::after {
+		box-shadow: var(--rs-shadow-outline);
+	}
+}
+
+.--shadow-outline-intense {
+	&::after {
+		box-shadow: var(--rs-shadow-outline-intense);
+	}
+}
+
+.--shadow-raised {
+	&::after {
+		box-shadow: var(--rs-shadow-raised);
+	}
+}
+
+.--shadow-raised-intense {
+	&::after {
+		box-shadow: var(--rs-shadow-raised-intense);
+	}
+}
+
+.--shadow-overlay {
+	&::after {
+		box-shadow: var(--rs-shadow-overlay);
+	}
+}
+
+.--shadow-overlay-intense {
+	&::after {
+		box-shadow: var(--rs-shadow-overlay-intense);
+	}
+}

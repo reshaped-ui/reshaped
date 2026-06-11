@@ -4,6 +4,10 @@ export const timeouts: Record<T.Timeout, number> = {
 	short: 4000,
 	long: 8000,
 };
+export const toastWidths: Record<T.WidthPreset, string | undefined> = {
+	short: "320px",
+	long: "400px",
+};
 
 export const positions: T.Position[] = [
 	"top-start",

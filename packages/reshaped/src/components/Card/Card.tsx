@@ -1,12 +1,11 @@
-import { classNames } from "@reshaped/headless";
 import React, { forwardRef } from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Actionable from "@/components/Actionable";
+import View from "@/components/View";
 import { resolveMixin } from "@/styles/mixin";
-
-import s from "./Card.module.css";
-
 import type * as T from "./Card.types";
+import s from "./Card.module.css";
 
 export type Component = {
 	<As extends keyof React.JSX.IntrinsicElements = "div">(
@@ -16,34 +15,40 @@ export type Component = {
 };
 
 const Card: Component = forwardRef((props, ref) => {
-	const { padding = 4 } = props;
 	const {
+		padding = 4,
+		borderRadius,
 		selected,
-		elevated,
+		raised,
 		bleed,
 		height,
+		direction,
+		gap,
+		align,
+		justify,
 		onClick,
 		href,
 		children,
 		className,
 		attributes,
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 	} = props;
 	const isActionable = !!href || !!onClick;
 	const mixinStyles = resolveMixin({
-		radius: "medium",
+		radius: borderRadius || "large",
 		bleed,
+		borderColor: "neutral-faded",
+		border: true,
+		shadow: raised ? "raised" : "outline",
 		height,
-		padding,
 	});
 
 	const rootClassNames = classNames(
 		s.root,
 		mixinStyles.classNames,
 		isActionable && s["--actionable"],
-		elevated && s["--elevated"],
+		raised && s["--elevation-raised"],
 		selected && s["--selected"],
 		className
 	);
@@ -53,6 +58,19 @@ const Card: Component = forwardRef((props, ref) => {
 		...mixinStyles.variables,
 	};
 
+	const contentNode = (
+		<View
+			className={s.content}
+			padding={padding}
+			direction={direction}
+			gap={gap}
+			align={align}
+			justify={justify}
+		>
+			{children}
+		</View>
+	);
+
 	if (isActionable) {
 		return (
 			<Actionable
@@ -61,10 +79,9 @@ const Card: Component = forwardRef((props, ref) => {
 				href={href}
 				as={TagName}
 				onClick={onClick}
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				ref={ref as any}
 			>
-				{children}
+				{contentNode}
 			</Actionable>
 		);
 	}
@@ -78,7 +95,7 @@ const Card: Component = forwardRef((props, ref) => {
 			className={rootClassNames}
 			style={style}
 		>
-			{children}
+			{contentNode}
 		</TagName>
 	);
 });

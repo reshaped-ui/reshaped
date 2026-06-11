@@ -1,7 +1,6 @@
+import type * as T from "./NumberField.types";
 import NumberFieldControlled from "./NumberFieldControlled";
 import NumberFieldUncontrolled from "./NumberFieldUncontrolled";
-
-import type * as T from "./NumberField.types";
 
 const NumberField: React.FC<T.Props> = (props) => {
 	const { value } = props;

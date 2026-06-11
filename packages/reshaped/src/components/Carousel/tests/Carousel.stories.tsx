@@ -3,7 +3,7 @@ import React from "react";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
 import Button from "@/components/Button";
-import Carousel, { type CarouselInstanceRef } from "@/components/Carousel";
+import Carousel, { type CarouselInstance } from "@/components/Carousel";
 import View from "@/components/View";
 import { Example, Placeholder } from "@/utilities/storybook";
 
@@ -177,7 +177,7 @@ export const instanceRef: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
 		handleChange: fn(),
 	},
 	render: (args) => {
-		const carouselRef = React.useRef<CarouselInstanceRef>(null);
+		const carouselRef = React.useRef<CarouselInstance>(null);
 		const [index, setIndex] = React.useState(0);
 
 		return (

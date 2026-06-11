@@ -1,4 +1,4 @@
-import type { Side, Position } from "../types";
+import type { Position, Side } from "../types";
 
 // All available positions for each side
 const positions: Record<Side, Position[]> = {

@@ -8,6 +8,8 @@ export type Props = Pick<
 	| "position"
 	| "onOpen"
 	| "onClose"
+	| "onAfterOpen"
+	| "onAfterClose"
 	| "active"
 	| "disabled"
 	| "disableContentHover"

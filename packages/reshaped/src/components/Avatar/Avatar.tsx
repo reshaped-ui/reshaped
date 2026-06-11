@@ -1,14 +1,12 @@
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import Icon from "@/components/Icon";
 import Image, { type ImageProps } from "@/components/Image";
 import View from "@/components/View";
-import { resolveMixin } from "@/styles/mixin";
 import { responsivePropDependency } from "@/utilities/props";
-
-import s from "./Avatar.module.css";
-
+import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Avatar.types";
+import s from "./Avatar.module.css";
 
 const Avatar: React.FC<T.Props> = (props) => {
 	const {
@@ -27,8 +25,8 @@ const Avatar: React.FC<T.Props> = (props) => {
 	const alt = props.alt || imageAttributes?.alt;
 	const radius = squared
 		? responsivePropDependency(size, (size) => {
-				if (size >= 24) return "large";
-				if (size >= 12) return "medium";
+				if (size >= 20) return "large";
+				if (size >= 9) return "medium";
 				return "small";
 			})
 		: "circular";
@@ -64,6 +62,7 @@ const Avatar: React.FC<T.Props> = (props) => {
 			borderRadius={radius}
 			attributes={{ ...attributes, style: { ...mixinStyles?.variables } }}
 			backgroundColor={variant === "faded" ? `${color}-${variant}` : color}
+			borderColor={variant === "faded" ? `${color}-faded` : undefined}
 			className={rootClassNames}
 		>
 			{icon ? (

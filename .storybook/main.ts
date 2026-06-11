@@ -1,20 +1,14 @@
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-
+import type { StorybookConfig } from "@storybook/react-vite";
 import { mergeConfig, UserConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-
-import type { StorybookConfig } from "@storybook/react-vite";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const config: StorybookConfig = {
 	framework: "@storybook/react-vite",
-	features: {
-		experimentalComponentsManifest: true,
-		experimentalCodeExamples: true,
-	},
 	typescript: {
 		reactDocgen: "react-docgen-typescript",
 		reactDocgenTypescriptOptions: {
@@ -26,10 +20,7 @@ const config: StorybookConfig = {
 			propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
 		},
 	},
-	stories: [
-		"../packages/reshaped/src/**/*.stories.tsx",
-		"../packages/headless/src/**/*.stories.tsx",
-	],
+	stories: ["../packages/reshaped/src/**/*.stories.tsx"],
 	staticDirs: ["./public"],
 	addons: [
 		"@storybook/addon-vitest",
@@ -47,17 +38,9 @@ const config: StorybookConfig = {
 	],
 	async viteFinal(config: UserConfig) {
 		return mergeConfig(config, {
-			resolve: {
-				alias: {
-					"@reshaped/headless": resolve(__dirname, "../packages/headless/src"),
-				},
-			},
 			plugins: [
 				tsconfigPaths({
-					projects: [
-						resolve(__dirname, "../packages/reshaped/tsconfig.json"),
-						resolve(__dirname, "../packages/headless/tsconfig.json"),
-					],
+					projects: [resolve(__dirname, "../packages/reshaped/tsconfig.json")],
 				}),
 			],
 			css: {

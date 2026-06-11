@@ -1,12 +1,8 @@
 "use client";
 
 import Flyout from "@/components/Flyout";
-import Text from "@/components/Text";
-import Theme from "@/components/Theme";
-
-import s from "./Tooltip.module.css";
-
 import type * as T from "./Tooltip.types";
+import s from "./Tooltip.module.css";
 
 const Tooltip: React.FC<T.Props> = (props) => {
 	const {
@@ -23,20 +19,16 @@ const Tooltip: React.FC<T.Props> = (props) => {
 	return (
 		<Flyout
 			{...flyoutProps}
+			contentGap={flyoutProps.contentGap ?? 1.5}
 			position={position}
 			triggerType="hover"
 			// Disable group timeouts by default since it's not controlled by the default user events
 			groupTimeouts={flyoutProps.active === undefined ? true : false}
 			contentMaxWidth={contentMaxWidth}
+			contentClassName={s.root}
 		>
 			<Flyout.Trigger>{children}</Flyout.Trigger>
-			<Flyout.Content>
-				<Theme colorMode={color}>
-					<Text variant="caption-1" className={s.root}>
-						{text}
-					</Text>
-				</Theme>
-			</Flyout.Content>
+			<Flyout.Content colorMode={color}>{text}</Flyout.Content>
 		</Flyout>
 	);
 };

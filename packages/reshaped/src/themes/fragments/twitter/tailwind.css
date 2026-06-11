@@ -1,6 +1,8 @@
 @theme inline {
     --background-color-primary: var(--rs-color-background-primary);
 --background-color-primary-faded: var(--rs-color-background-primary-faded);
+--background-color-primary-highlighted: var(--rs-color-background-primary-highlighted);
+--background-color-primary-highlighted-faded: var(--rs-color-background-primary-highlighted-faded);
 --border-color-primary: var(--rs-color-border-primary);
 --outline-color-primary: var(--rs-color-border-primary);
 --border-color-primary-faded: var(--rs-color-border-primary-faded);
@@ -8,6 +10,8 @@
 --text-color-primary: var(--rs-color-foreground-primary);
 --background-color-critical: var(--rs-color-background-critical);
 --background-color-critical-faded: var(--rs-color-background-critical-faded);
+--background-color-critical-highlighted: var(--rs-color-background-critical-highlighted);
+--background-color-critical-highlighted-faded: var(--rs-color-background-critical-highlighted-faded);
 --border-color-critical: var(--rs-color-border-critical);
 --outline-color-critical: var(--rs-color-border-critical);
 --border-color-critical-faded: var(--rs-color-border-critical-faded);
@@ -15,6 +19,8 @@
 --text-color-critical: var(--rs-color-foreground-critical);
 --background-color-warning: var(--rs-color-background-warning);
 --background-color-warning-faded: var(--rs-color-background-warning-faded);
+--background-color-warning-highlighted: var(--rs-color-background-warning-highlighted);
+--background-color-warning-highlighted-faded: var(--rs-color-background-warning-highlighted-faded);
 --border-color-warning: var(--rs-color-border-warning);
 --outline-color-warning: var(--rs-color-border-warning);
 --border-color-warning-faded: var(--rs-color-border-warning-faded);
@@ -22,6 +28,8 @@
 --text-color-warning: var(--rs-color-foreground-warning);
 --background-color-positive: var(--rs-color-background-positive);
 --background-color-positive-faded: var(--rs-color-background-positive-faded);
+--background-color-positive-highlighted: var(--rs-color-background-positive-highlighted);
+--background-color-positive-highlighted-faded: var(--rs-color-background-positive-highlighted-faded);
 --border-color-positive: var(--rs-color-border-positive);
 --outline-color-positive: var(--rs-color-border-positive);
 --border-color-positive-faded: var(--rs-color-border-positive-faded);
@@ -29,6 +37,8 @@
 --text-color-positive: var(--rs-color-foreground-positive);
 --background-color-neutral: var(--rs-color-background-neutral);
 --background-color-neutral-faded: var(--rs-color-background-neutral-faded);
+--background-color-neutral-highlighted: var(--rs-color-background-neutral-highlighted);
+--background-color-neutral-highlighted-faded: var(--rs-color-background-neutral-highlighted-faded);
 --border-color-neutral: var(--rs-color-border-neutral);
 --outline-color-neutral: var(--rs-color-border-neutral);
 --border-color-neutral-faded: var(--rs-color-border-neutral-faded);
@@ -48,7 +58,6 @@
 --color-brand: var(--rs-color-brand);
 --color-white: var(--rs-color-white);
 --color-black: var(--rs-color-black);
---background-color-primary-highlighted: var(--rs-color-background-primary-highlighted);
 --text-color-on-primary: var(--rs-color-on-background-primary);
 --radius-small: var(--rs-radius-small);
 --radius-medium: var(--rs-radius-medium);
@@ -70,8 +79,12 @@
 --spacing-x8: var(--rs-unit-x8);
 --spacing-x9: var(--rs-unit-x9);
 --spacing-x10: var(--rs-unit-x10);
+--shadow-outline: var(--rs-shadow-outline);
+--shadow-outline-intense: var(--rs-shadow-outline-intense);
 --shadow-raised: var(--rs-shadow-raised);
+--shadow-raised-intense: var(--rs-shadow-raised-intense);
 --shadow-overlay: var(--rs-shadow-overlay);
+--shadow-overlay-intense: var(--rs-shadow-overlay-intense);
 --breakpoint-m: 660px;
 --breakpoint-l: 900px;
 --breakpoint-xl: 1280px;

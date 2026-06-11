@@ -4,10 +4,8 @@ import { expect, userEvent } from "storybook/test";
 
 import Button from "@/components/Button";
 import { useTheme } from "@/components/Theme";
-
-import Reshaped from "../Reshaped";
-
 import type * as G from "@/types/global";
+import Reshaped from "../Reshaped";
 
 export default {
 	title: "Utility components/Reshaped",
@@ -19,7 +17,7 @@ export default {
 export const rtl = {
 	name: "defaultRTL",
 	render: () => (
-		<Reshaped defaultRTL theme="reshaped" defaultColorMode="dark">
+		<Reshaped defaultRTL theme="slate" defaultColorMode="dark">
 			Hello
 		</Reshaped>
 	),
@@ -31,7 +29,7 @@ export const controlledMode: StoryObj = {
 		const [mode, setMode] = useState<G.ColorMode>("dark");
 
 		return (
-			<Reshaped theme="reshaped" colorMode={mode}>
+			<Reshaped theme="slate" colorMode={mode}>
 				<Button
 					onClick={() => {
 						setMode(mode === "dark" ? "light" : "dark");
@@ -55,12 +53,12 @@ export const controlledMode: StoryObj = {
 
 export const lightMode = {
 	name: "defaultColorMode=light",
-	render: () => <Reshaped theme="reshaped">Hello</Reshaped>,
+	render: () => <Reshaped theme="slate">Hello</Reshaped>,
 	play: () => {
 		const theme = document.documentElement.getAttribute("data-rs-theme");
 		const colorMode = document.documentElement.getAttribute("data-rs-color-mode");
 
-		expect(theme).toEqual("reshaped");
+		expect(theme).toEqual("slate");
 		expect(colorMode).toEqual("light");
 	},
 };
@@ -68,7 +66,7 @@ export const lightMode = {
 export const darkMode = {
 	name: "defaultColorMode=dark",
 	render: () => (
-		<Reshaped theme="reshaped" defaultColorMode="dark">
+		<Reshaped theme="slate" defaultColorMode="dark">
 			Hello
 		</Reshaped>
 	),
@@ -76,7 +74,7 @@ export const darkMode = {
 		const theme = document.documentElement.getAttribute("data-rs-theme");
 		const colorMode = document.documentElement.getAttribute("data-rs-color-mode");
 
-		expect(theme).toEqual("reshaped");
+		expect(theme).toEqual("slate");
 		expect(colorMode).toEqual("dark");
 	},
 };
@@ -84,8 +82,16 @@ export const darkMode = {
 export const scoped = {
 	name: "scoped",
 	render: () => (
-		<Reshaped theme="reshaped" defaultColorMode="dark" scoped>
-			Hello
+		<Reshaped theme="slate" defaultColorMode="dark" scoped>
+			<div
+				style={{
+					backgroundColor: "var(--rs-color-background-page)",
+					padding: "var(--rs-unit-x4)",
+					borderRadius: "var(--rs-radius-large)",
+				}}
+			>
+				Hello
+			</div>
 		</Reshaped>
 	),
 	play: async () => {
@@ -93,7 +99,7 @@ export const scoped = {
 
 		expect(root).toBeInTheDocument();
 		expect(root).not.toBe(document.documentElement);
-		expect(root).toHaveAttribute("data-rs-theme", "reshaped");
+		expect(root).toHaveAttribute("data-rs-theme", "slate");
 		expect(document.documentElement).not.toHaveAttribute("data-rs-theme");
 	},
 };
@@ -107,8 +113,8 @@ const ScopedComponent = () => {
 export const testScoped: StoryObj = {
 	name: "test: scoped switch",
 	render: () => (
-		<Reshaped theme="reshaped">
-			<Reshaped theme="slate" scoped>
+		<Reshaped theme="slate">
+			<Reshaped theme="figma" scoped>
 				<ScopedComponent />
 			</Reshaped>
 		</Reshaped>
@@ -117,10 +123,10 @@ export const testScoped: StoryObj = {
 		const nestedRoot = document.querySelector("[data-rs-root]");
 		const button = canvas.getAllByRole("button")[0];
 
-		expect(document.documentElement).toHaveAttribute("data-rs-theme", "reshaped");
+		expect(document.documentElement).toHaveAttribute("data-rs-theme", "slate");
 		expect(document.documentElement).toHaveAttribute("data-rs-color-mode", "light");
 
-		expect(nestedRoot).toHaveAttribute("data-rs-theme", "slate");
+		expect(nestedRoot).toHaveAttribute("data-rs-theme", "figma");
 		expect(nestedRoot).toHaveAttribute("data-rs-color-mode", "light");
 
 		await userEvent.click(button);
@@ -133,7 +139,7 @@ export const testScoped: StoryObj = {
 export const keyboardMode = {
 	name: "test: keyboard mode",
 	render: () => (
-		<Reshaped theme="reshaped" defaultColorMode="dark">
+		<Reshaped theme="slate" defaultColorMode="dark">
 			Hello
 		</Reshaped>
 	),

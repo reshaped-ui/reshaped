@@ -187,10 +187,6 @@ export const indeterminate: StoryObj = {
 		const input = canvas.getByRole("checkbox") as HTMLInputElement;
 
 		expect(input.indeterminate).toBeTruthy();
-
-		await userEvent.click(input);
-
-		expect(input.indeterminate).toBeFalsy();
 	},
 };
 

@@ -1,22 +1,18 @@
 "use client";
 
-import {
-	useIsomorphicLayoutEffect,
-	useHotkeys,
-	useHandlerRef,
-	useElementId,
-} from "@reshaped/headless";
 import React from "react";
 
 import DropdownMenu from "@/components/DropdownMenu";
-import TextField from "@/components/TextField";
-import * as keys from "@/constants/keys";
-
-import s from "./Autocomplete.module.css";
-import * as T from "./Autocomplete.types";
-
 import type { MenuItemProps } from "@/components/MenuItem";
+import TextField from "@/components/TextField";
 import type { TextFieldProps } from "@/components/TextField";
+import useElementId from "@/hooks/useElementId";
+import useHandlerRef from "@/hooks/useHandlerRef";
+import useHotkeys from "@/hooks/useHotkeys";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import * as keys from "@/constants/keys";
+import * as T from "./Autocomplete.types";
+import s from "./Autocomplete.module.css";
 
 const AutocompleteContext = React.createContext({} as T.Context);
 
@@ -34,8 +30,9 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 		active,
 		onOpen,
 		onClose,
+		onAfterOpen,
+		onAfterClose,
 		fallbackAdjustLayout,
-		fallbackMinWidth,
 		fallbackMinHeight,
 		contentMaxHeight,
 		contentZIndex,
@@ -203,9 +200,10 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 				active={isDropdownActive}
 				onClose={handleClose}
 				onOpen={handleOpen}
+				onAfterOpen={onAfterOpen}
+				onAfterClose={onAfterClose}
 				containerRef={containerRef}
 				fallbackAdjustLayout={fallbackAdjustLayout}
-				fallbackMinWidth={fallbackMinWidth}
 				fallbackMinHeight={fallbackMinHeight}
 				contentMaxHeight={contentMaxHeight}
 				contentZIndex={contentZIndex}
@@ -222,16 +220,14 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 							attributes={{
 								...textFieldProps.attributes,
 								// Ignoring the type check since TS can't infer the correct html element type
-								// eslint-disable-next-line @typescript-eslint/no-explicit-any
 								ref: ref as any,
 								onClick: attributes.onFocus,
 							}}
 							inputAttributes={{
 								...textFieldProps.inputAttributes,
 								...attributes,
-								onFocus: (e) => {
+								onFocus: () => {
 									attributes.onFocus?.();
-									textFieldProps.onFocus?.(e);
 									// Only select the value when user clicks on the input
 									if (!lockedRef.current) inputRef.current?.select();
 								},

@@ -14,4 +14,4 @@ TabsRoot.List = TabsList;
 TabsRoot.Panel = TabsPanel;
 
 export default TabsRoot;
-export type { Props as TabsProps, ItemProps as TabsItemProps } from "./Tabs.types";
+export type { ItemProps as TabsItemProps, Props as TabsProps } from "./Tabs.types";

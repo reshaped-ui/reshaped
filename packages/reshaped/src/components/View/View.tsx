@@ -1,15 +1,13 @@
-import { classNames } from "@reshaped/headless";
 import React, { isValidElement } from "react";
+import { classNames } from "@reshaped/utilities";
 
 import Divider, { type DividerProps } from "@/components/Divider";
 import Hidden from "@/components/Hidden";
-import { resolveMixin } from "@/styles/mixin";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-
-import s from "./View.module.css";
-
-import type * as T from "./View.types";
+import { resolveMixin } from "@/styles/mixin";
 import type * as G from "@/types/global";
+import type * as T from "./View.types";
+import s from "./View.module.css";
 
 export const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
 	props: T.ItemProps<As>
@@ -20,7 +18,6 @@ export const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(
 		shrink,
 		gapBefore,
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		order,
 		children,
@@ -110,7 +107,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		shrink,
 
 		// Using any here to let TS save on type resolving, otherwise TS throws an error due to the type complexity
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		as: TagName = "div" as any,
 		children,
 		divided,
@@ -158,6 +154,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		borderInline,
 		borderBlock,
 		radius: borderRadius,
+		shadow,
 	});
 
 	let renderedItemIndex = 0;
@@ -191,12 +188,13 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		);
 	};
 
-	const renderItem: T.RenderItem = ({ className, child, index }) => {
+	const renderItem: T.RenderItem = ({ className, child, index, fallbackKey }) => {
 		const isElement = isValidElement(child);
 		const isItem = isElement && child.type === ViewItem;
 		const isView = isElement && child.type === View;
-		const key = child.key;
-		const dividerElement = !!index && divided && renderDivider({ className, key });
+		const key = isElement ? child.key : undefined;
+		const itemKey = key ?? fallbackKey;
+		const dividerElement = !!index && divided && renderDivider({ className, key: itemKey });
 		let itemElement;
 
 		if (isItem) {
@@ -213,7 +211,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 			itemElement = child;
 		} else {
 			itemElement = (
-				<div className={className} key={key}>
+				<div className={className} key={itemKey}>
 					{child}
 				</div>
 			);
@@ -230,7 +228,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		if (isItem && child.props?.gap === "auto") nowrap = true;
 
 		return (
-			<React.Fragment key={key ? `${key}-fragment` : undefined}>
+			<React.Fragment key={itemKey != null ? `${itemKey}-fragment` : undefined}>
 				{dividerElement}
 				{itemElement}
 			</React.Fragment>
@@ -238,16 +236,13 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 	};
 
 	// Using any in favor of resolving the props in runtime where we don't know their props definitions
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const formattedChildren = React.Children.map(children, (child: any, index) => {
 		if (!child) return null;
+		const isElement = isValidElement<{ children?: React.ReactNode }>(child);
 
-		const usedIndex = renderedItemIndex;
-		// eslint-disable-next-line react-hooks/immutability
-		renderedItemIndex += 1;
-
-		if (isValidElement(child) && child.type === Hidden) {
-			// @ts-expect-error -- child is guaranteed to be an element
+		if (isElement && child.type === Hidden) {
+			const usedIndex = renderedItemIndex;
+			renderedItemIndex += 1;
 			const { children: hiddenChild, ...hiddenProps } = child.props;
 			const key = child.key || index;
 
@@ -258,16 +253,26 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 			);
 		}
 
-		if (child.type === React.Fragment && React.Children.count(child.props.children) > 1) {
+		if (
+			isElement &&
+			child.type === React.Fragment &&
+			React.Children.count(child.props.children) > 1
+		) {
 			// Using any in favor of resolving the props in runtime where we don't know their props definitions
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			return child.props.children.map((child: any) => {
-				if (!child) return null;
+			return React.Children.map(child.props.children, (fragmentChild: any, fragmentIndex) => {
+				if (!fragmentChild) return null;
+				const usedIndex = renderedItemIndex;
 				renderedItemIndex += 1;
-				return renderItem({ child, index: renderedItemIndex });
+				return renderItem({
+					child: fragmentChild,
+					index: usedIndex,
+					fallbackKey: `${child.key ?? index}-${fragmentIndex}`,
+				});
 			});
 		}
 
+		const usedIndex = renderedItemIndex;
+		renderedItemIndex += 1;
 		return renderItem({ child, index: usedIndex });
 	});
 
@@ -277,7 +282,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		className,
 		mixinStyles.classNames,
 		backgroundColor && s[`--bg-${backgroundColor}`],
-		shadow && s[`--shadow-${shadow}`],
 		overflow && s[`--overflow-${overflow}`],
 		animated && s["--animated"],
 		divided && s["--divided"],

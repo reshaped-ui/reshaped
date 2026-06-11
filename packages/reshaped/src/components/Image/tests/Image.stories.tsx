@@ -3,9 +3,8 @@ import { expect, fn, Mock, waitFor } from "storybook/test";
 
 import Icon from "@/components/Icon";
 import View from "@/components/View";
-import IconZap from "@/icons/Zap";
 import { Example } from "@/utilities/storybook";
-
+import IconZap from "@/icons/Zap";
 import Image from "../Image";
 
 export default {
@@ -182,17 +181,27 @@ export const fallback = {
 
 			<Example.Item title="fallback, icon, on error">
 				<View width="300px">
-					<View aspectRatio={16 / 9}>
-						<Image src="error" fallback={<Icon svg={IconZap} size={10} />} />
-					</View>
+					<Image aspectRatio={16 / 9} src="error" fallback={<Icon svg={IconZap} size={10} />} />
 				</View>
 			</Example.Item>
 			<Example.Item title="fallback, icon, no url">
 				<View width="300px">
-					<View aspectRatio={16 / 9}>
-						<Image fallback={<Icon svg={IconZap} size={10} />} />
-					</View>
+					<Image aspectRatio={16 / 9} fallback={<Icon svg={IconZap} size={10} />} />
 				</View>
+			</Example.Item>
+		</Example>
+	),
+};
+
+export const ratio = {
+	name: "aspectRatio",
+	render: () => (
+		<Example>
+			<Example.Item title="ratio: 16/9">
+				<Image src={imgUrl} aspectRatio={16 / 9} />
+			</Example.Item>
+			<Example.Item title="ratio: 16/9, displayMode: contain">
+				<Image src={imgUrl} displayMode="contain" aspectRatio={16 / 9} />
 			</Example.Item>
 		</Example>
 	),
@@ -206,7 +215,7 @@ export const renderImage: StoryObj = {
 				<Image
 					src={imgUrl}
 					alt="Amsterdam canal"
-					// eslint-disable-next-line jsx-a11y/alt-text
+					// oxlint-disable-next-line jsx_a11y/alt-text
 					renderImage={(attributes) => <img {...attributes} id="test-image" />}
 				/>
 			</Example.Item>
@@ -215,7 +224,7 @@ export const renderImage: StoryObj = {
 					src="error"
 					fallback={imgUrl}
 					alt="Amsterdam canal 2"
-					// eslint-disable-next-line jsx-a11y/alt-text
+					// oxlint-disable-next-line jsx_a11y/alt-text
 					renderImage={(attributes) => <img {...attributes} id="test-image-fallback" />}
 				/>
 			</Example.Item>
@@ -253,22 +262,4 @@ export const imageAttributes: StoryObj = {
 		expect(root).toHaveAttribute("id", "test-id");
 		expect(img).toHaveAttribute("data-testid", "test-img-id");
 	},
-};
-
-export const ratio = {
-	name: "test: aspectRatio",
-	render: () => (
-		<Example>
-			<Example.Item title="ratio: 16/9">
-				<View aspectRatio={16 / 9}>
-					<Image src={imgUrl} />
-				</View>
-			</Example.Item>
-			<Example.Item title="ratio: 16/9, displayMode: contain">
-				<View aspectRatio={16 / 9}>
-					<Image src={imgUrl} displayMode="contain" />
-				</View>
-			</Example.Item>
-		</Example>
-	),
 };

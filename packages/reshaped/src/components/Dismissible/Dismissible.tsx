@@ -1,13 +1,11 @@
 "use client";
 
-import { classNames } from "@reshaped/headless";
+import { classNames } from "@reshaped/utilities";
 
 import Button from "@/components/Button";
 import IconClose from "@/icons/Close";
-
-import s from "./Dismissible.module.css";
-
 import type * as T from "./Dismissible.types";
+import s from "./Dismissible.module.css";
 
 const Dismissible: React.FC<T.Props> = (props) => {
 	const {
@@ -36,7 +34,7 @@ const Dismissible: React.FC<T.Props> = (props) => {
 				<WrapperTag className={s.close}>
 					<Button
 						size="small"
-						{...(variant === "media" ? { color: "media", variant: "faded" } : { variant: "ghost" })}
+						{...(variant === "media" ? { color: "media" } : { variant: "ghost" })}
 						onClick={() => onClose?.()}
 						attributes={{ "aria-label": onClose ? closeAriaLabel : undefined }}
 						icon={IconClose}

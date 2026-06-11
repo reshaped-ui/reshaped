@@ -1,5 +1,5 @@
 // External
-export { default as classNames, type ClassName } from "./classNames";
+export { type ClassName, default as classNames } from "./classNames";
 
 // Internal
 export { default as StyleCache } from "./StyleCache";

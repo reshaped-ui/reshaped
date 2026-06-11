@@ -1,4 +1,4 @@
-import { expect, test, describe, beforeEach, vi, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 import { lockScroll } from "../lock";
 
@@ -9,27 +9,29 @@ vi.mock("@/platform", () => ({
 
 describe("scroll/lockScroll", () => {
 	beforeEach(() => {
-		// Reset the body styles before each test
-		document.body.style.overflow = "";
-		document.body.style.paddingRight = "";
-		document.body.innerHTML = "";
+		// Reset the document styles before each test
+		document.documentElement.style.overflow = "";
+		document.documentElement.style.paddingRight = "";
+		document.documentElement.style.scrollbarGutter = "";
+		document.documentElement.innerHTML = "";
 	});
 
 	afterEach(() => {
 		// Clean up
-		document.body.style.overflow = "";
-		document.body.style.paddingRight = "";
-		document.body.innerHTML = "";
+		document.documentElement.style.overflow = "";
+		document.documentElement.style.paddingRight = "";
+		document.documentElement.style.scrollbarGutter = "";
+		document.documentElement.innerHTML = "";
 	});
 
-	test("locks scroll on body", () => {
+	test("locks scroll on document", () => {
 		const unlock = lockScroll({});
 
-		expect(document.body.style.overflow).toBe("hidden");
+		expect(document.documentElement.style.overflow).toBe("hidden");
 
 		unlock?.();
 
-		expect(document.body.style.overflow).toBe("");
+		expect(document.documentElement.style.overflow).toBe("");
 	});
 
 	test("locks scroll on custom container element", () => {
@@ -41,7 +43,7 @@ describe("scroll/lockScroll", () => {
 		const unlock = lockScroll({ containerEl: container });
 
 		expect(container.style.overflow).toBe("hidden");
-		expect(document.body.style.overflow).not.toBe("hidden");
+		expect(document.documentElement.style.overflow).not.toBe("hidden");
 
 		unlock?.();
 
@@ -75,13 +77,13 @@ describe("scroll/lockScroll", () => {
 		const unlock1 = lockScroll({});
 		const unlock2 = lockScroll({});
 
-		expect(document.body.style.overflow).toBe("hidden");
+		expect(document.documentElement.style.overflow).toBe("hidden");
 
 		unlock1?.();
-		expect(document.body.style.overflow).toBe("");
+		expect(document.documentElement.style.overflow).toBe("");
 
 		unlock2?.();
-		expect(document.body.style.overflow).toBe("");
+		expect(document.documentElement.style.overflow).toBe("");
 	});
 
 	test("calls lock callback immediately", () => {
@@ -101,16 +103,16 @@ describe("scroll/lockScroll", () => {
 		expect(unlockCb).toHaveBeenCalledTimes(1);
 	});
 
-	test("handles origin element when no scrollable container is found (falls back to body)", () => {
+	test("handles origin element when no scrollable container is found (falls back to document)", () => {
 		const originEl = document.createElement("div");
 		document.body.appendChild(originEl);
 
 		const unlock = lockScroll({ originEl });
 
-		expect(document.body.style.overflow).toBe("hidden");
+		expect(document.documentElement.style.overflow).toBe("hidden");
 
 		unlock?.();
 
-		expect(document.body.style.overflow).toBe("");
+		expect(document.documentElement.style.overflow).toBe("");
 	});
 });

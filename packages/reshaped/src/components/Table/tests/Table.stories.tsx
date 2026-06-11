@@ -232,13 +232,13 @@ export const tabIndex: StoryObj = {
 	render: () => (
 		<Table>
 			<Table.Row>
-				<Table.Cell />
+				<Table.Cell>Row 1</Table.Cell>
 			</Table.Row>
 			<Table.Row onClick={() => {}}>
-				<Table.Cell />
+				<Table.Cell>Row 2</Table.Cell>
 			</Table.Row>
 			<Table.Row attributes={{ onClick: () => {} }}>
-				<Table.Cell />
+				<Table.Cell>Row 3</Table.Cell>
 			</Table.Row>
 		</Table>
 	),
@@ -291,7 +291,7 @@ export const edgeCases = {
 				</Table>
 			</Example.Item>
 			<Example.Item title="card with highlighted heading">
-				<Card elevated padding={0}>
+				<Card raised padding={0}>
 					<Table>
 						<Table.Row highlighted>
 							<Table.Heading width="50%" minWidth="200px">

@@ -2,6 +2,7 @@
 	/* Add an offset in case overlay is rendered inside a scrolled container */
 	--rs-overlay-offset-y: 0px;
 	--rs-overlay-offset-x: 0px;
+	--rs-overlay-opacity: 0;
 
 	position: fixed;
 	overflow-x: clip;
@@ -14,13 +15,10 @@
 	width: 100%;
 	z-index: var(--rs-z-index-fixed);
 	color: var(--rs-color-white);
-	background-color: rgba(var(--rs-color-rgb-black), 0);
+	background-color: rgb(from var(--rs-color-black) r g b / 0%);
 	opacity: 0;
 	outline: none;
 	isolation: isolate;
-
-	/* Override default Tailwind reset */
-	cursor: default !important;
 }
 
 .wrapper {
@@ -42,7 +40,9 @@
 }
 
 .root.--visible {
-	background-color: rgba(var(--rs-color-rgb-black), var(--rs-overlay-opacity));
+	--rs-overlay-opacity: 1;
+
+	background-color: rgb(from var(--rs-color-black) r g b / calc(var(--rs-overlay-opacity) * 0.7));
 	opacity: 1;
 }
 
@@ -84,4 +84,5 @@
 
 .root.--overflow-auto {
 	overflow: auto;
+	overscroll-behavior: none;
 }

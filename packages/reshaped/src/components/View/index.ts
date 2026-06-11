@@ -7,4 +7,4 @@ const ViewRoot = View as typeof View & {
 ViewRoot.Item = ViewItem;
 
 export default ViewRoot;
-export type { Props as ViewProps, ItemProps as ViewItemProps } from "./View.types";
+export type { ItemProps as ViewItemProps, Props as ViewProps } from "./View.types";

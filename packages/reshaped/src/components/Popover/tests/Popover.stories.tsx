@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
-import { useState, useId } from "react";
-import { expect, fn, userEvent, within, waitFor } from "storybook/test";
+import { useId, useState } from "react";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import MenuItem from "@/components/MenuItem";
@@ -223,6 +223,69 @@ export const activeFalse: StoryObj<{
 	},
 };
 
+export const handlers: StoryObj<{
+	handleAfterOpen: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+	handleAfterClose: ReturnType<typeof fn>;
+}> = {
+	name: "onAfterOpen, onAfterClose",
+	args: {
+		handleClose: fn(),
+		handleAfterOpen: fn(),
+		handleAfterClose: fn(),
+	},
+	render: (args) => {
+		const [active, setActive] = useState(false);
+
+		return (
+			<Popover
+				active={active}
+				onOpen={() => setActive(true)}
+				onClose={(closeArgs) => {
+					setActive(false);
+					args.handleClose(closeArgs);
+				}}
+				onAfterOpen={args.handleAfterOpen}
+				onAfterClose={args.handleAfterClose}
+			>
+				<Popover.Trigger>
+					{(attributes) => <Button attributes={attributes}>Open</Button>}
+				</Popover.Trigger>
+				<Popover.Content>Content</Popover.Content>
+			</Popover>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		// Wait for the color mode initialization to re-enable transitions globally
+		await sleep(100);
+
+		await userEvent.click(trigger);
+
+		// Wait for the open transition
+		await waitFor(() => {
+			expect(args.handleAfterOpen).toHaveBeenCalledTimes(1);
+			expect(args.handleAfterOpen).toHaveBeenCalledWith();
+		});
+
+		expect(args.handleAfterClose).toHaveBeenCalledTimes(0);
+
+		// Close by clicking outside
+		await userEvent.click(document.body);
+
+		// Wait for the close transition
+		await waitFor(() => {
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
+			expect(args.handleAfterClose).toHaveBeenCalledWith();
+		});
+
+		expect(args.handleAfterOpen).toHaveBeenCalledTimes(1);
+	},
+};
+
 export const dismissible: StoryObj<{
 	handleClose: ReturnType<typeof fn>;
 }> = {
@@ -276,7 +339,7 @@ export const autoFocus: StoryObj = {
 	render: () => (
 		<Example>
 			<Example.Item title="autoFocus=false">
-				{/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+				{/* oxlint-disable-next-line jsx_a11y/no-autofocus */}
 				<Demo autoFocus={false} />
 			</Example.Item>
 		</Example>
@@ -389,7 +452,9 @@ export const testContentEditable = {
 							<div
 								style={{ height: "200px" }}
 								contentEditable
+								// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 								role="textbox"
+								aria-label="Content editable"
 								tabIndex={0}
 								onInput={(e) => {
 									setActive(e.currentTarget.innerText.startsWith("@"));
@@ -423,28 +488,4 @@ export const testContentEditable = {
 			</Popover>
 		);
 	},
-};
-
-export const variant = {
-	name: "variant [deprecated]",
-	render: () => (
-		<Example>
-			<Example.Item title="variant: headless">
-				<Popover variant="headless" defaultActive position="bottom-start">
-					<Popover.Trigger>
-						{(attributes) => <Button attributes={attributes}>Open</Button>}
-					</Popover.Trigger>
-					<Popover.Content>
-						<View
-							height="100px"
-							width="100px"
-							borderColor="primary"
-							borderRadius="medium"
-							backgroundColor="primary-faded"
-						/>
-					</Popover.Content>
-				</Popover>
-			</Example.Item>
-		</Example>
-	),
 };

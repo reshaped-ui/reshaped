@@ -1,6 +1,6 @@
-import { expect, test, describe, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
-import applyPosition from "flyout/utilities/applyPosition";
+import applyPosition from "../applyPosition";
 
 describe("flyout/applyPosition", () => {
 	let content: HTMLElement;

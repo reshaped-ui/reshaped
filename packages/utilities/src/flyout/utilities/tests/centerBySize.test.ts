@@ -1,6 +1,6 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
-import centerBySize from "flyout/utilities/centerBySize";
+import centerBySize from "../centerBySize";
 
 describe("flyout/centerBySize", () => {
 	test("centers even value", () => {

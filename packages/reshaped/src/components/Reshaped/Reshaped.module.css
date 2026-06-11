@@ -1,4 +1,4 @@
 .root {
 	display: contents;
-	color: inherit;
+	color: var(--rs-color-foreground-neutral);
 }

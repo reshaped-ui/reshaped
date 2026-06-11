@@ -30,6 +30,14 @@
 }
 
 .icon {
+	&:first-child {
+		margin-inline-start: calc(var(--rs-unit-x0-5) * -1);
+	}
+
+	&:last-child {
+		margin-inline-end: calc(var(--rs-unit-x0-5) * -1);
+	}
+
 	&:only-child {
 		margin-inline: calc(var(--rs-unit-x1) * -1);
 	}
@@ -39,6 +47,10 @@
 	border-radius: var(--rs-radius-small);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: opacity;
+
+	&:last-child {
+		margin-inline-end: calc(var(--rs-unit-x0-5) * -1);
+	}
 }
 
 .root.--highlighted {
@@ -52,35 +64,22 @@
 	}
 }
 
-.root.--variant {
-	&-faded {
-		background: var(--rs-color-background-neutral-faded);
-		color: var(--rs-color-foreground-neutral-faded);
-	}
+.root.--variant-faded {
+	--rs-badge-border-color: var(--rs-color-border-neutral-faded);
 
-	&-outline {
-		--rs-badge-border-color: var(--rs-color-border-neutral);
-
-		background: none;
-	}
+	background: var(--rs-color-background-neutral-faded);
+	color: var(--rs-color-foreground-neutral-faded);
 }
 
 .root.--color-positive {
 	background: var(--rs-color-background-positive);
 	color: var(--rs-color-on-background-positive);
 
-	&.--variant {
-		&-faded {
-			background: var(--rs-color-background-positive-faded);
-			color: var(--rs-color-foreground-positive);
-		}
+	&.--variant-faded {
+		--rs-badge-border-color: var(--rs-color-border-positive-faded);
 
-		&-outline {
-			--rs-badge-border-color: var(--rs-color-border-positive-faded);
-
-			background: none;
-			color: var(--rs-color-foreground-positive);
-		}
+		background: var(--rs-color-background-positive-faded);
+		color: var(--rs-color-foreground-positive);
 	}
 }
 
@@ -88,18 +87,11 @@
 	background: var(--rs-color-background-critical);
 	color: var(--rs-color-on-background-critical);
 
-	&.--variant {
-		&-faded {
-			background: var(--rs-color-background-critical-faded);
-			color: var(--rs-color-foreground-critical);
-		}
+	&.--variant-faded {
+		--rs-badge-border-color: var(--rs-color-border-critical-faded);
 
-		&-outline {
-			--rs-badge-border-color: var(--rs-color-border-critical-faded);
-
-			background: none;
-			color: var(--rs-color-foreground-critical);
-		}
+		background: var(--rs-color-background-critical-faded);
+		color: var(--rs-color-foreground-critical);
 	}
 }
 
@@ -107,18 +99,11 @@
 	background: var(--rs-color-background-warning);
 	color: var(--rs-color-on-background-warning);
 
-	&.--variant {
-		&-faded {
-			background: var(--rs-color-background-warning-faded);
-			color: var(--rs-color-foreground-warning);
-		}
+	&.--variant-faded {
+		--rs-badge-border-color: var(--rs-color-border-warning-faded);
 
-		&-outline {
-			--rs-badge-border-color: var(--rs-color-border-warning-faded);
-
-			background: none;
-			color: var(--rs-color-foreground-warning);
-		}
+		background: var(--rs-color-background-warning-faded);
+		color: var(--rs-color-foreground-warning);
 	}
 }
 
@@ -126,28 +111,21 @@
 	background: var(--rs-color-background-primary);
 	color: var(--rs-color-on-background-primary);
 
-	&.--variant {
-		&-faded {
-			background: var(--rs-color-background-primary-faded);
-			color: var(--rs-color-foreground-primary);
-		}
+	&.--variant-faded {
+		--rs-badge-border-color: var(--rs-color-border-primary-faded);
 
-		&-outline {
-			--rs-badge-border-color: var(--rs-color-border-primary-faded);
-
-			background: none;
-			color: var(--rs-color-foreground-primary);
-		}
+		background: var(--rs-color-background-primary-faded);
+		color: var(--rs-color-foreground-primary);
 	}
 }
 
 .root.--size {
 	&-small {
 		--rs-badge-p-v: calc(var(--rs-unit-x1) / 2);
-		--rs-badge-p-h: var(--rs-unit-x1);
+		--rs-badge-p-h: var(--rs-unit-x1-5);
 		--rs-badge-line-height: var(--rs-line-height-caption-1);
 		--rs-badge-empty-size: var(--rs-unit-x2);
-		--rs-badge-gap: calc(var(--rs-unit-x1) / 2);
+		--rs-badge-gap: calc(var(--rs-unit-x1));
 	}
 
 	&-medium {
@@ -160,10 +138,10 @@
 
 	&-large {
 		--rs-badge-p-v: var(--rs-unit-x1);
-		--rs-badge-p-h: var(--rs-unit-x2);
-		--rs-badge-line-height: var(--rs-line-height-body-3);
+		--rs-badge-p-h: calc(var(--rs-unit-x0-5) * 5);
+		--rs-badge-line-height: var(--rs-line-height-body-2);
 		--rs-badge-empty-size: var(--rs-unit-x4);
-		--rs-badge-gap: var(--rs-unit-x1);
+		--rs-badge-gap: var(--rs-unit-x1-5);
 	}
 }
 

@@ -6,12 +6,13 @@
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	box-shadow: var(--rs-shadow-raised);
+	box-shadow: var(--rs-shadow-overlay);
 	will-change: transform, opacity;
 	outline: none;
+	overscroll-behavior: none;
 
 	[data-rs-keyboard] &:focus {
-		box-shadow: var(--rs-shadow-focus);
+		outline: var(--rs-outline);
 	}
 
 	&.--contained {
@@ -37,12 +38,13 @@
 		position: relative;
 		border-radius: var(--rs-radius-large);
 		overflow: hidden;
+		overscroll-behavior: auto;
 		opacity: 0;
 		transform: translate(0, var(--rs-unit-x4));
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, 0) !important;
+			transform: translate(0, 0);
 			opacity: 1;
 		}
 	}
@@ -62,11 +64,12 @@
 		position: absolute;
 		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 1;
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px)) !important;
+			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px));
 		}
 	}
 
@@ -85,6 +88,7 @@
 		position: absolute;
 		border-radius: 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
@@ -93,7 +97,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0) !important;
+			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0);
 		}
 	}
 
@@ -112,6 +116,7 @@
 		position: absolute;
 		border-radius: 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
@@ -120,7 +125,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0) !important;
+			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0);
 		}
 	}
 
@@ -138,11 +143,12 @@
 		position: absolute;
 		border-radius: 0;
 		overflow: auto;
+		overscroll-behavior: none;
 		opacity: 0;
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, 0) !important;
+			transform: translate(0, 0);
 			opacity: 1;
 		}
 	}

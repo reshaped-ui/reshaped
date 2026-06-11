@@ -5,6 +5,8 @@ export type Props = {
 	children: React.ReactNode;
 	/** Component size, to be used together with the other form component sizes */
 	size?: "medium" | "large";
+	/** Custom gap between the field and the text labels */
+	gap?: number;
 	/** Change component to show an error state and display FormControl.Error */
 	hasError?: boolean;
 	/** Change component to show a required indicator */

@@ -4,8 +4,7 @@
 		"jsx": "react-native",
 		"outDir": "./dist",
 		"rootDir": "./src",
-		"baseUrl": "./src",
-		"paths": { "@/*": ["./*"] },
+		"paths": { "@/*": ["./src/*"] },
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext"
 	},

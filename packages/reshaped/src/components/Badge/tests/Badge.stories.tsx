@@ -7,9 +7,9 @@ import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import View from "@/components/View";
-import IconCheckmark from "@/icons/Checkmark";
-import IconChevronRight from "@/icons/ChevronRight";
 import { Example } from "@/utilities/storybook";
+import IconCheckmark from "@/icons/Checkmark";
+import IconPlus from "@/icons/Plus";
 
 export default {
 	title: "Components/Badge",
@@ -21,70 +21,48 @@ export default {
 	},
 };
 
-export const variant = {
-	name: "variant",
-	render: () => (
-		<Example>
-			<Example.Item title="variant: default">
-				<Badge>Badge</Badge>
-			</Example.Item>
-			<Example.Item title="variant: faded">
-				<Badge variant="faded">Badge</Badge>
-			</Example.Item>
-			<Example.Item title="variant: outline">
-				<Badge variant="outline">Badge</Badge>
-			</Example.Item>
-		</Example>
-	),
-};
-
 export const color = {
-	name: "color",
+	name: "variant, color",
 	render: () => (
 		<Example>
-			<Example.Item title="color: primary, all variants">
+			<Example.Item title="color: neutral">
+				<View direction="row" gap={3}>
+					<Badge>Badge</Badge>
+					<Badge variant="faded">Badge</Badge>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="color: primary">
 				<View direction="row" gap={3}>
 					<Badge color="primary">Badge</Badge>
 					<Badge variant="faded" color="primary">
 						Badge
 					</Badge>
-					<Badge variant="outline" color="primary">
-						Badge
-					</Badge>
 				</View>
 			</Example.Item>
 
-			<Example.Item title="color: positive, all variants">
+			<Example.Item title="color: positive">
 				<View direction="row" gap={3}>
 					<Badge color="positive">Badge</Badge>
 					<Badge variant="faded" color="positive">
 						Badge
 					</Badge>
-					<Badge variant="outline" color="positive">
-						Badge
-					</Badge>
 				</View>
 			</Example.Item>
 
-			<Example.Item title="color: critical, all variants">
+			<Example.Item title="color: critical">
 				<View direction="row" gap={3}>
 					<Badge color="critical">Badge</Badge>
 					<Badge variant="faded" color="critical">
 						Badge
 					</Badge>
-					<Badge variant="outline" color="critical">
-						Badge
-					</Badge>
 				</View>
 			</Example.Item>
 
-			<Example.Item title="color: warning, all variants">
+			<Example.Item title="color: warning">
 				<View direction="row" gap={3}>
 					<Badge color="warning">Badge</Badge>
 					<Badge variant="faded" color="warning">
-						Badge
-					</Badge>
-					<Badge variant="outline" color="warning">
 						Badge
 					</Badge>
 				</View>
@@ -129,27 +107,31 @@ export const icon = {
 		<Example>
 			<Example.Item title="size: small">
 				<View gap={3} direction="row">
-					<Badge icon={IconCheckmark} endIcon={IconChevronRight} size="small">
+					<Badge size="small" icon={IconPlus}>
 						Badge
 					</Badge>
-					<Badge icon={IconCheckmark} size="small" />
+					<Badge size="small" endIcon={IconPlus}>
+						Badge
+					</Badge>
+					<Badge icon={IconPlus} size="small" />
 				</View>
 			</Example.Item>
 			<Example.Item title="size: medium">
 				<View gap={3} direction="row">
-					<Badge icon={IconCheckmark} endIcon={IconChevronRight}>
-						Badge
-					</Badge>
-					<Badge icon={IconCheckmark} />
+					<Badge icon={IconPlus}>Badge</Badge>
+					<Badge endIcon={IconPlus}>Badge</Badge>
+					<Badge icon={IconPlus} />
 				</View>
 			</Example.Item>
 			<Example.Item title="size: large">
 				<View gap={3} direction="row">
-					<Badge size="large" icon={IconCheckmark} endIcon={IconChevronRight}>
+					<Badge size="large" icon={IconPlus}>
 						Badge
 					</Badge>
-
-					<Badge icon={IconCheckmark} size="large" />
+					<Badge size="large" endIcon={IconPlus}>
+						Badge
+					</Badge>
+					<Badge icon={IconPlus} size="large" />
 				</View>
 			</Example.Item>
 		</Example>
@@ -164,9 +146,19 @@ export const onDismiss: StoryObj<{ handleDismiss: ReturnType<typeof fn> }> = {
 	render: (args) => (
 		<Example>
 			<Example.Item title="onDismiss">
-				<Badge onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss">
-					Badge
-				</Badge>
+				<View direction="row" gap={3}>
+					<Badge onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss" size="small">
+						Badge
+					</Badge>
+
+					<Badge onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss" size="medium">
+						Badge
+					</Badge>
+
+					<Badge onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss" size="large">
+						Badge
+					</Badge>
+				</View>
 			</Example.Item>
 		</Example>
 	),
@@ -189,9 +181,6 @@ export const rounded = {
 				<View direction="row" gap={3}>
 					<Badge rounded>Badge</Badge>
 					<Badge rounded variant="faded">
-						Badge
-					</Badge>
-					<Badge rounded variant="outline">
 						Badge
 					</Badge>
 				</View>
@@ -250,6 +239,9 @@ export const highlighted = {
 		<Example>
 			<Example.Item title="highlighted, color: neutral">
 				<View gap={3} direction="row">
+					<Badge highlighted color="primary">
+						Badge
+					</Badge>
 					<Badge highlighted>Badge</Badge>
 				</View>
 			</Example.Item>

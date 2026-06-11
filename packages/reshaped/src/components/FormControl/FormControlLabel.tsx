@@ -1,11 +1,9 @@
 "use client";
 
 import Text from "@/components/Text";
-
 import { useFormControlPrivate } from "./FormControl.context";
-import s from "./FormControl.module.css";
-
 import type * as T from "./FormControl.types";
+import s from "./FormControl.module.css";
 
 const FormControlLabel: React.FC<T.LabelProps> = (props) => {
 	const { children } = props;
@@ -15,7 +13,7 @@ const FormControlLabel: React.FC<T.LabelProps> = (props) => {
 
 	return (
 		<Text
-			variant={size === "large" ? "body-2" : "body-3"}
+			variant={size === "large" ? "body-1" : "body-2"}
 			weight="medium"
 			className={s.label}
 			color={disabled ? "disabled" : undefined}

@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import root from "react-shadow";
 
 import Autocomplete, { type AutocompleteProps } from "@/components/Autocomplete";
 import Button from "@/components/Button";
 import DropdownMenu from "@/components/DropdownMenu";
-import Reshaped from "@/components/Reshaped";
-import Select from "@/components/Select";
+import { SelectTrigger } from "@/components/Select";
+import Theme from "@/components/Theme";
 import Tooltip from "@/components/Tooltip";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
@@ -62,17 +62,17 @@ const ShadowDiv = forwardRef<HTMLDivElement, React.PropsWithChildren>((props, re
 	}, []);
 
 	return (
-		<Reshaped theme="slate">
-			<root.div className="quote" ref={shadowRef}>
+		<root.div className="quote" ref={shadowRef}>
+			<Theme name="slate">
 				<div ref={ref}>
-					{/* 
+					{/*
 						Adding padding here since otherwise mouseenter won't trigger on contents 
 						when mouse is switching from outside the shadow dom
 					*/}
 					<View padding={4}>{props.children}</View>
 				</div>
-			</root.div>
-		</Reshaped>
+			</Theme>
+		</root.div>
 	);
 });
 
@@ -119,9 +119,14 @@ const Component: React.FC = () => {
 					<DropdownMenu>
 						<DropdownMenu.Trigger>
 							{(attributes) => (
-								<Select placeholder="Pick your animal" name="font" inputAttributes={attributes}>
+								<SelectTrigger
+									placeholder="Pick your animal"
+									name="font"
+									value={valueDropdownShadow}
+									triggerAttributes={attributes}
+								>
 									{valueDropdownShadow}
-								</Select>
+								</SelectTrigger>
 							)}
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>
