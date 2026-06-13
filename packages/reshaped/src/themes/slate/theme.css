@@ -211,8 +211,8 @@
 --rs-color-border-disabled: oklch(1 0 89.88 / 0.06);
 --rs-color-foreground-disabled: oklch(0.45 0 89.88);
 --rs-color-background-elevation-base: oklch(0.2 0 89.88);
---rs-color-background-elevation-raised: oklch(0.23 0 89.88);
---rs-color-background-elevation-overlay: oklch(0.245 0 89.88);
+--rs-color-background-elevation-raised: oklch(0.22 0 89.88);
+--rs-color-background-elevation-overlay: oklch(0.24 0 89.88);
 --rs-color-background-page: oklch(0.16 0 89.88);
 --rs-color-background-page-faded: oklch(0.18 0 89.88);
 --rs-color-on-background-neutral: oklch(1 0 0);
