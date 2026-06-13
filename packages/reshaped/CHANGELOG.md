@@ -1,5 +1,167 @@
 # reshaped
 
+## 4.0.0
+
+### Major Changes
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Overlay: Removed number support from transparency
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Renamed pills-elevated to pills-raised and updated its design
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: renderValue is required for multiselection
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Card: renamed elevated to elevation prop with base, raised and overlay values
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Moved to explicit trigger rendering with SelectTrigger instead of scanning for children
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Removed deprecated position property in aligner
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Stepper: Deleted component
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Toast: Removed provider-level `toastOptions` and moved width control to per-toast `show()` calls.
+  Added `width` support to toast options with `short` and `long` presets (as well as custom CSS width values), where collapsed stacks use the latest toast width and expanded stacks restore each toast's original width.
+  Updated toast API by replacing `size` with `orientation` and removing `inverted` color.
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Removed faded variant
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Removed Select.Custom and made custom rendering as default
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ActionBar: Removed from the library in favor of View
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: inputAttributes now correctly always apply to the input/select element, SelectTrigger got a new triggerAttributes prop for linking it with the flyout
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Removed deprecated forcePosition and fallbackMinWidth props
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Carousel: Dropped CarouselInstanceRef in favor of CarouselInstance type
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Automatically match the select size and options size
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Timeline: Deleted component
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Divider: renamed offset to inset and updated it to use unit tokens instead of string px values
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - MenuItem: Removed roundedCorners property
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Overlay: Removed onOpen handler
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Scrim: Deleted component
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Hokey: Deleted component in favor of using Badge
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Reshaped: Updated default theme to slate
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Autocomplete, Checkbox, HiddenInput, Radio, Select, Switch, TextArea, TextField: Dropped onFocus and onBlur in favor of attributes
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout, Popover: added scrollable element with its own className and attributes, padding moved to it insted of .inner
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Removed outline variant, update icon sizes/gaps/paddings
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ProgressBar: renamed Progress to ProgressBar
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - TextField: Updated default endSlotPadding to 2, layout improvements
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Renamed elevated to raised
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Text: Updated the variant names to match the new typography tokens
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Removed automatic defaultValue detection in favor of manually passing it
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - View: aspectRatio no longer overrides children ratio and only changes the dimensions of the view itself
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Resizable: Added support for wrapping items and handles into re-usable components
+
+### Minor Changes
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Card: Added gap, direction, align, justify props
+
+- [#602](https://github.com/reshaped-ui/reshaped/pull/602) [`1cf5e37`](https://github.com/reshaped-ui/reshaped/commit/1cf5e376df29e2ca8543349718450432808346c3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Added `renderDateValue` support
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Alert: Updated the icon size and neutral alert icon color
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: selectedIconPosition
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - FormControl: added gap property and improved default gaps
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Card: Added borderRadius property
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added onAfterOpen / onAfterClose handlers
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tabs: Added small variant
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button: Updated colors for the outline button, improved spacing and button group styles
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Updated styles to use latest tokens
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - TextArea: Updated styles and fixed min-height when resizing to a single row
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ProgressBar: Added neutral color
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Updated design and fixed resize bug
+
+- [`7afb98c`](https://github.com/reshaped-ui/reshaped/commit/7afb98c3e146918fc50cd6ddd02d9229f1d74e97) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useIsDismissible: exported hook for advanced use cases
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - View: Updated shadow prop to use new shadow tokens
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Modal: Optimized swipe behavior
+
+### Patch Changes
+
+- [`3bd3aa2`](https://github.com/reshaped-ui/reshaped/commit/3bd3aa27ed0a18572115dfa383e9f0abbc56524d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added timeout cleanup on unmount
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Radio: Disabled transition on keyboard mode
+
+- [`a08ce8e`](https://github.com/reshaped-ui/reshaped/commit/a08ce8eb28681a2f88296feabd1e332abc9f8c06) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Support rendering 0 integer as children
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - NumberField: Clamp values to min and max on blur by default
+
+- [`9ecdada`](https://github.com/reshaped-ui/reshaped/commit/9ecdadad859f26a5899f8586d02ec5ba1957d68c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Autocomplete: Added mutationObserver to update the focused item on filtering
+
+- [`b93437a`](https://github.com/reshaped-ui/reshaped/commit/b93437a9ba63b8d5008a8a3eaa9da17e3491826f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added automatic position updated for containerRef resizing
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Switch: Updated styles
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Popover: Applied new shadow/border mixins
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Breadcrumbs: Implemented gap rounding between the text and the icon
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Overlay: Increased animation speed
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Loader: Improved animation timing
+
+- [`a904f6a`](https://github.com/reshaped-ui/reshaped/commit/a904f6a14d1fcaec645cd65ae625bbf1f3e8c5c7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Canary release
+
+- [`abe3012`](https://github.com/reshaped-ui/reshaped/commit/abe3012d03e3b69240b8161bbcb764df0781b83c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: enabled dismissible queue for hover flyouts
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Checkbox: Increase small checkbox gap
+
+- [`e1a857d`](https://github.com/reshaped-ui/reshaped/commit/e1a857df0388529ddd1f4e241d4e3b28e858e499) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Updated text color to use on-background for neutral badges
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Tooltip: Added border
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - View: improved keys handling
+
+- [`dc6ba78`](https://github.com/reshaped-ui/reshaped/commit/dc6ba78fd02526d83b995b55d7478c21a4ff08c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useElementId: exported from headless
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Pagination: Updated button variants used for selected state
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Card: Updated styling to use new shadow and border mixins
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Improved styles and fixed hover events / selection states
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated generated theme colors
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Actionable: Moved focus state from using box-shadow to outline
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Skeleton: Updated background color
+
+- [#610](https://github.com/reshaped-ui/reshaped/pull/610) [`117ec29`](https://github.com/reshaped-ui/reshaped/commit/117ec29b7b48e2f26785626e457ebc6004231338) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Fixed shadow dom and nested modal positioning
+
+- [#608](https://github.com/reshaped-ui/reshaped/pull/608) [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Avatar: Added outline to faded variant
+
+- Updated dependencies [[`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9), [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9), [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9), [`0964160`](https://github.com/reshaped-ui/reshaped/commit/0964160549b98cb3d3b6ddd7c5cc85de033f9ef9)]:
+  - @reshaped/theming@4.0.0
+  - @reshaped/utilities@4.0.0
+
 ## 4.0.0-canary.7
 
 ### Patch Changes
