@@ -854,7 +854,7 @@ export const shadow = {
 						shadow="raised"
 						borderColor="neutral-faded"
 						borderRadius="medium"
-						backgroundColor="elevation-base"
+						backgroundColor="elevation-raised"
 					/>
 					<View
 						height="100px"

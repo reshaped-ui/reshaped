@@ -184,11 +184,11 @@ const generateColorValues = (
 		};
 		output[`backgroundElevationRaised`] = {
 			oklch: { ...bg, l: 1, c: 0 },
-			oklchDark: { ...bgDark, l: 0.23, c: 0 },
+			oklchDark: { ...bgDark, l: 0.22, c: 0 },
 		};
 		output[`backgroundElevationOverlay`] = {
 			oklch: { ...bg, l: 1, c: 0 },
-			oklchDark: { ...bgDark, l: 0.245, c: 0 },
+			oklchDark: { ...bgDark, l: 0.24, c: 0 },
 		};
 		output[`backgroundPage`] = {
 			oklch: { ...bg, l: 1, c: 0 },
