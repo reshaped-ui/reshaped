@@ -1,6 +1,6 @@
 {
 	"name": "@reshaped/utilities",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"description": "Vanilla JS utilities for implementing common UI patterns",
 	"homepage": "https://reshaped.so",
 	"bugs": {

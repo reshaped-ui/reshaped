@@ -1,5 +1,11 @@
 # @reshaped/theming
 
+## 4.0.2
+
+### Patch Changes
+
+- [`a947bb2`](https://github.com/reshaped-ui/reshaped/commit/a947bb26c3398bc8a81a217a13883463f4e150e4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Sync all package versions
+
 ## 4.0.0
 
 ### Major Changes
