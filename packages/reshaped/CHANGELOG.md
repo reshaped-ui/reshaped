@@ -1,5 +1,16 @@
 # reshaped
 
+## 4.0.1
+
+### Patch Changes
+
+- [`07d276e`](https://github.com/reshaped-ui/reshaped/commit/07d276ec4e26adb1bd9a9dcd7a0e722ee8d59426) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added ScrollArea instead of the native scroll
+
+- [`07d276e`](https://github.com/reshaped-ui/reshaped/commit/07d276ec4e26adb1bd9a9dcd7a0e722ee8d59426) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Fixed spacing in icon only badge with onClick
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.0.1
+
 ## 4.0.0
 
 ### Major Changes
