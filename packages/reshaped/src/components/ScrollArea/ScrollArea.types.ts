@@ -20,6 +20,10 @@ export type Props = {
 	className?: ClassName;
 	/** Additional attributes for the root element */
 	attributes?: Attributes<"div">;
+	/** Additional attributes for the scrollable element */
+	scrollableAttributes?: Attributes<"div">;
+	/** Additional classname for the scrollable element */
+	scrollableClassName?: ClassName;
 };
 
 export type BarProps = {

@@ -50,13 +50,6 @@
 	}
 }
 
-.scrollable {
-	overflow: auto;
-	max-height: 100%;
-	flex-grow: 1;
-	overscroll-behavior: none;
-}
-
 .positioner.--width-trigger .content {
 	transform: scale(1) translateY(var(--rs-unit-x2));
 }

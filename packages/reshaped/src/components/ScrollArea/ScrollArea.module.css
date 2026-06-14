@@ -47,6 +47,7 @@
 	background-color: var(--rs-color-background-neutral-faded);
 	border-radius: var(--rs-radius-circular);
 	opacity: 0;
+	transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 
 	&::before {
 		content: "";

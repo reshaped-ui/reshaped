@@ -7,7 +7,6 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--rs-badge-gap);
 	vertical-align: top;
 	border-radius: var(--rs-radius-small);
 	background: var(--rs-color-background-neutral);
@@ -27,6 +26,12 @@
 	min-width: auto;
 	min-height: auto;
 	padding: 0;
+}
+
+.content {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--rs-badge-gap);
 }
 
 .icon {
@@ -125,7 +130,7 @@
 		--rs-badge-p-h: var(--rs-unit-x1-5);
 		--rs-badge-line-height: var(--rs-line-height-caption-1);
 		--rs-badge-empty-size: var(--rs-unit-x2);
-		--rs-badge-gap: calc(var(--rs-unit-x1));
+		--rs-badge-gap: var(--rs-unit-x1);
 	}
 
 	&-medium {

@@ -106,6 +106,8 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		onScroll,
 		className,
 		attributes,
+		scrollableAttributes,
+		scrollableClassName,
 	} = props;
 	const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
 	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
@@ -124,9 +126,16 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		const scrollableEl = scrollableRef.current;
 		if (!scrollableEl) return;
 
+		const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
+			scrollableEl;
+
 		setScrollRatio({
-			x: scrollableEl.clientWidth / scrollableEl.scrollWidth,
-			y: scrollableEl.clientHeight / scrollableEl.scrollHeight,
+			x: scrollWidth === 0 ? 1 : Math.min(clientWidth / scrollWidth, 1),
+			y: scrollHeight === 0 ? 1 : Math.min(clientHeight / scrollHeight, 1),
+		});
+		setScrollPosition({
+			x: scrollWidth <= clientWidth ? 0 : scrollLeft / scrollWidth,
+			y: scrollHeight <= clientHeight ? 0 : scrollTop / scrollHeight,
 		});
 	}, []);
 
@@ -177,11 +186,13 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	}, [updateScroll]);
 
 	useIsomorphicLayoutEffect(() => {
+		const scrollableEl = scrollableRef.current;
 		const contentEl = contentRef.current;
-		if (!contentEl) return;
+		if (!scrollableEl || !contentEl) return;
 
 		const observer = new ResizeObserver(updateScroll);
 
+		observer.observe(scrollableEl);
 		observer.observe(contentEl);
 		return () => observer.disconnect();
 	}, [updateScroll]);
@@ -194,7 +205,11 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 				onScroll={handleScroll}
 				style={{ ...mixinStyles.variables }}
 			>
-				<div className={s.content} ref={contentRef}>
+				<div
+					{...scrollableAttributes}
+					className={classNames(s.content, scrollableClassName)}
+					ref={contentRef}
+				>
 					{children}
 				</div>
 			</div>
