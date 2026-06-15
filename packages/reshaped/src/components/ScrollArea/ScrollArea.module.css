@@ -26,6 +26,14 @@
 	}
 }
 
+.--overscroll-auto {
+	overscroll-behavior: auto;
+}
+
+.--overscroll-contain {
+	overscroll-behavior: contain;
+}
+
 /* Inline block that stretches based on the content to trigger ResizeObserver  */
 .content {
 	display: inline-block;

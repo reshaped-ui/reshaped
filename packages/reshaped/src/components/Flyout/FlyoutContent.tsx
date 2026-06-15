@@ -115,6 +115,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 					className={contentClassNames}
 				>
 					<ScrollArea
+						overscrollBehavior="contain"
 						scrollableAttributes={scrollableAttributes}
 						scrollableClassName={scrollableClassName}
 					>

@@ -31,6 +31,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const searchStringRef = React.useRef<string>("");
 	const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 	const dropdownRef = React.useRef<HTMLDivElement>(null);
+	const [openedWithTouch, setOpenedWithTouch] = React.useState(false);
 	const indexedOptions: Array<{ value: string; text: string }> = [];
 	const selectedOptions: T.OptionProps[] = [];
 	const hasValue = multiple ? value.length > 0 : value;
@@ -159,17 +160,28 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 			disableHideAnimation
 			position={position ?? "bottom"}
 			fallbackPositions={fallbackPositions ?? (position ? undefined : ["bottom", "top"])}
-			fallbackAdjustLayout
+			fallbackAdjustLayout={!openedWithTouch}
 			fallbackMinHeight="220px"
 			initialFocusRef={initialFocusRef}
 			positionRef={positionRef}
+			onClose={() => setOpenedWithTouch(false)}
 		>
 			<DropdownMenu.Trigger>
-				{(attributes) => (
-					<SelectTrigger {...props} triggerAttributes={attributes} value={value}>
-						{renderValue()}
-					</SelectTrigger>
-				)}
+				{(attributes) => {
+					const triggerAttributes = {
+						...attributes,
+						onTouchStart: () => {
+							setOpenedWithTouch(true);
+							attributes.onTouchStart?.();
+						},
+					};
+
+					return (
+						<SelectTrigger {...props} triggerAttributes={triggerAttributes} value={value}>
+							{renderValue()}
+						</SelectTrigger>
+					);
+				}}
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content
 				attributes={{

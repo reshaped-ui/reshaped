@@ -114,6 +114,41 @@ export const scrollbarDisplay = {
 	),
 };
 
+export const overscrollBehavior = {
+	name: "overscrollBehavior",
+	render: () => (
+		<Example>
+			<Example.Item title="overscrollBehavior: auto">
+				<View height="200px" overflow="auto" backgroundColor="neutral-faded" padding={4}>
+					<View height="100px">Parent scroll area content before ScrollArea</View>
+					<ScrollArea height="100px" scrollbarDisplay="visible" overscrollBehavior="auto">
+						<View backgroundColor="neutral-faded" padding={4}>
+							{Array.from({ length: 10 }).map((_, index) => (
+								<div key={index}>Item {index + 1}</div>
+							))}
+						</View>
+					</ScrollArea>
+					<View height="300px">Parent scroll area content after ScrollArea</View>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="overscrollBehavior: contain">
+				<View height="200px" overflow="auto" backgroundColor="neutral-faded" padding={4}>
+					<View height="100px">Parent scroll area content before ScrollArea</View>
+					<ScrollArea height="100px" scrollbarDisplay="visible" overscrollBehavior="contain">
+						<View backgroundColor="neutral-faded" padding={4}>
+							{Array.from({ length: 10 }).map((_, index) => (
+								<div key={index}>Item {index + 1}</div>
+							))}
+						</View>
+					</ScrollArea>
+					<View height="300px">Parent scroll area content after ScrollArea</View>
+				</View>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const height = {
 	name: "height, maxHeight",
 	render: () => (
