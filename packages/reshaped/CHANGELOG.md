@@ -1,5 +1,19 @@
 # reshaped
 
+## 4.0.3
+
+### Patch Changes
+
+- [`c3584c4`](https://github.com/reshaped-ui/reshaped/commit/c3584c4032b567489e3cea2667c3681fc9c454c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added overscrollBehavior prop
+
+- [`c3584c4`](https://github.com/reshaped-ui/reshaped/commit/c3584c4032b567489e3cea2667c3681fc9c454c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Set overscroll behavior to contain
+
+- [`c3584c4`](https://github.com/reshaped-ui/reshaped/commit/c3584c4032b567489e3cea2667c3681fc9c454c8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Remove adjustFallbackLayout for touch devices
+
+- Updated dependencies [[`c3584c4`](https://github.com/reshaped-ui/reshaped/commit/c3584c4032b567489e3cea2667c3681fc9c454c8), [`c3584c4`](https://github.com/reshaped-ui/reshaped/commit/c3584c4032b567489e3cea2667c3681fc9c454c8), [`c3584c4`](https://github.com/reshaped-ui/reshaped/commit/c3584c4032b567489e3cea2667c3681fc9c454c8)]:
+  - @reshaped/utilities@4.0.3
+  - @reshaped/theming@4.0.3
+
 ## 4.0.2
 
 ### Patch Changes
