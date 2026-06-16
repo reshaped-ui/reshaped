@@ -1,5 +1,11 @@
 # Reshaped
 
+<br />
+
+<a href="https://vercel.com/open-source-program">
+  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge-2026.svg" />
+</a>
+
 <img width="2400" height="1260" alt="3 0 (1)" src="https://github.com/user-attachments/assets/ef632fe9-9446-430f-b87d-bebebe6fb595" />
 <br /><br />
 
@@ -29,3 +35,5 @@ Read our [contribution guide](CONTRIBUTING.md) to learn about our principles, de
 ## License
 
 This project is licensed under the terms of the MIT license.
+
+
