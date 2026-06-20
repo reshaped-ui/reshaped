@@ -1,9 +1,8 @@
 "use client";
 
-import { forwardRef, useState } from "react";
+import { useState } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import type { ActionableRef } from "@/components/Actionable";
 import Button from "@/components/Button";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import IconChevronLeft from "@/icons/ChevronLeft";
@@ -11,9 +10,17 @@ import IconChevronRight from "@/icons/ChevronRight";
 import * as T from "./Carousel.types";
 import s from "./Carousel.module.css";
 
-const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) => {
-	const { type, scrollElRef, oppositeControlElRef, scrollPosition, onClick, isRTL, mounted } =
-		props;
+const CarouselControl = (props: T.ControlProps) => {
+	const {
+		type,
+		controlRef,
+		scrollElRef,
+		oppositeControlElRef,
+		scrollPosition,
+		onClick,
+		isRTL,
+		mounted,
+	} = props;
 	const [visible, setVisible] = useState(false);
 	const [rendered, setRendered] = useState(false);
 	const isNext = type === "forward";
@@ -40,7 +47,9 @@ const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) =
 			setVisible(false);
 			timer = setTimeout(() => setRendered(false), 1500);
 
-			oppositeControlElRef.current?.focus();
+			if (controlRef.current && document.activeElement === controlRef.current) {
+				oppositeControlElRef.current?.focus();
+			}
 		} else {
 			setRendered(true);
 			setVisible(true);
@@ -61,11 +70,11 @@ const CarouselControl = forwardRef<ActionableRef, T.ControlProps>((props, ref) =
 				variant="outline"
 				raised
 				attributes={{ "aria-disabled": !visible, "aria-hidden": true }}
-				ref={ref}
+				ref={controlRef}
 			/>
 		</div>
 	);
-});
+};
 
 CarouselControl.displayName = "CarouselControl";
 
