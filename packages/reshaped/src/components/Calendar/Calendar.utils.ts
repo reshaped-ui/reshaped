@@ -104,10 +104,7 @@ export const changeDate = (date: Date, delta: number) =>
 	new Date(date.getFullYear(), date.getMonth(), date.getDate() + delta);
 
 export const setMonthTo = (date: Date, value: number) => {
-	const resultDate = new Date(date);
-
-	resultDate.setMonth(value);
-	return resultDate;
+	return new Date(date.getFullYear(), value, 1);
 };
 
 export const setMonthToPrevious = (date: Date) => {
