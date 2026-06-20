@@ -17,7 +17,7 @@ const lockSafariScroll = () => {
 	});
 
 	return () => {
-		styleCache.reset();
+		styleCache.reset(document.body);
 		window.scrollTo({ top: scrollY, left: scrollX, behavior: "instant" });
 	};
 };

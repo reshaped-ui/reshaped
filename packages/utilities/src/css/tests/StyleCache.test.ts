@@ -19,24 +19,28 @@ describe("css/StyleCache", () => {
 		expect(el.style.color).toBe("blue");
 		expect(el.style.overflow).toBe("hidden");
 
-		styleCache.reset();
+		styleCache.reset(el);
 
 		expect(el.style.color).toBe("red");
 		expect(el.style.overflow).toBe("visible");
 	});
 
-	test("preserves original styles across multiple set calls", () => {
+	test("ignores repeated set calls on an already-cached element", () => {
 		const el = document.createElement("div");
 		el.style.color = "red";
 
 		styleCache.set(el, { color: "blue" });
+		// The element is already cached, so this is a no-op (style stays "blue")
 		styleCache.set(el, { color: "green" });
-		styleCache.reset();
+
+		expect(el.style.color).toBe("blue");
+
+		styleCache.reset(el);
 
 		expect(el.style.color).toBe("red");
 	});
 
-	test("handles multiple elements", () => {
+	test("reset only affects the given element", () => {
 		const el1 = document.createElement("div");
 		const el2 = document.createElement("div");
 		el1.style.color = "red";
@@ -44,18 +48,34 @@ describe("css/StyleCache", () => {
 
 		styleCache.set(el1, { color: "green" });
 		styleCache.set(el2, { color: "yellow" });
-		styleCache.reset();
 
+		styleCache.reset(el1);
+
+		// el1 is restored, el2 stays locked
 		expect(el1.style.color).toBe("red");
+		expect(el2.style.color).toBe("yellow");
+		expect(styleCache.cache.has(el2)).toBe(true);
+
+		styleCache.reset(el2);
+
 		expect(el2.style.color).toBe("blue");
 	});
 
-	test("clears cache after reset", () => {
+	test("reset is a no-op for an element that was never cached", () => {
+		const el = document.createElement("div");
+		el.style.color = "red";
+
+		styleCache.reset(el);
+
+		expect(el.style.color).toBe("red");
+	});
+
+	test("removes the element from the cache after reset", () => {
 		const el = document.createElement("div");
 		el.style.color = "red";
 
 		styleCache.set(el, { color: "blue" });
-		styleCache.reset();
+		styleCache.reset(el);
 
 		expect(styleCache.cache.size).toBe(0);
 	});
