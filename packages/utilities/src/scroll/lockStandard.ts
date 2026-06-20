@@ -5,8 +5,7 @@ const styleCache = new StyleCache();
 
 const lockStandardScroll = (args: { container: HTMLElement }) => {
 	const { container } = args;
-	const rect = container.getBoundingClientRect();
-	const isOverflowing = rect.left + rect.right < window.innerWidth;
+	const isOverflowing = container.scrollHeight > container.clientHeight;
 
 	styleCache.set(container, { overflow: "hidden" });
 
