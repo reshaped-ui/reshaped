@@ -58,6 +58,8 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 		}, timeoutValue ?? timeouts.short);
 	}, [hide, id, remove, timeout, stopTimer]);
 
+	React.useEffect(() => stopTimer, [stopTimer]);
+
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
 		if (e.propertyName !== "height") return;
 
