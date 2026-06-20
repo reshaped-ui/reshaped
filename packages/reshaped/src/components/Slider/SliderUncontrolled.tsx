@@ -10,14 +10,16 @@ const normalizeValue = (value: number, min: number, max: number) =>
 
 const SliderUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (props) => {
 	const { min, max, onChange, range } = props;
+	const defaultValue =
+		"defaultValue" in props && props.defaultValue !== undefined ? props.defaultValue : undefined;
 	const defaultMinValue =
-		("defaultMinValue" in props && props.defaultMinValue !== undefined && props.defaultMinValue) ||
-		("defaultValue" in props && props.defaultValue !== undefined && props.defaultValue) ||
-		min;
+		"defaultMinValue" in props && props.defaultMinValue !== undefined
+			? props.defaultMinValue
+			: (defaultValue ?? min);
 	const defaultMaxValue =
-		("defaultMaxValue" in props && props.defaultMaxValue !== undefined && props.defaultMaxValue) ||
-		("defaultValue" in props && props.defaultValue !== undefined && props.defaultValue) ||
-		(range ? max : min);
+		"defaultMaxValue" in props && props.defaultMaxValue !== undefined
+			? props.defaultMaxValue
+			: (defaultValue ?? (range ? max : min));
 	const [minValue, setMinValue] = React.useState(normalizeValue(defaultMinValue, min, max));
 	const [maxValue, setMaxValue] = React.useState(normalizeValue(defaultMaxValue, min, max));
 
