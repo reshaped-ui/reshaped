@@ -58,6 +58,8 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 		}, timeoutValue ?? timeouts.short);
 	}, [hide, id, remove, timeout, stopTimer]);
 
+	React.useEffect(() => stopTimer, [stopTimer]);
+
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
 		if (e.propertyName !== "height") return;
 
@@ -85,18 +87,15 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	}, [show, id, startTimer]);
 
 	React.useEffect(() => {
-		if (!wrapperRef.current) return;
+		if (!wrapperRef.current || !visible) return;
 
 		const trapFocus = new TrapFocus();
+		trapFocus.trap(wrapperRef.current, {
+			includeTrigger: true,
+			mode: "content-menu",
+		});
 
-		if (visible) {
-			trapFocus.trap(wrapperRef.current, {
-				includeTrigger: true,
-				mode: "content-menu",
-			});
-		} else if (checkKeyboardMode()) {
-			trapFocus.release();
-		}
+		return () => trapFocus.release({ withoutFocusReturn: !checkKeyboardMode() });
 	}, [visible]);
 
 	React.useEffect(() => {

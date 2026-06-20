@@ -245,7 +245,8 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			let nextDraggingId = draggingId;
 
 			if (draggingId === minId && nextValue > maxValue) nextDraggingId = maxId;
-			if (draggingId === maxId && minValue && nextValue < minValue) nextDraggingId = minId;
+			if (draggingId === maxId && minValue !== undefined && nextValue < minValue)
+				nextDraggingId = minId;
 
 			if (nextDraggingId === minId) handleMinChange(nextValue);
 			if (nextDraggingId === maxId) handleMaxChange(nextValue);

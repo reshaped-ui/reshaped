@@ -84,6 +84,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 					attributes: {
 						...component.props.attributes,
 						ref: selected ? initialFocusRef : undefined,
+						"aria-selected": matchingValue,
 					},
 				});
 			}

@@ -169,7 +169,7 @@ const Carousel: React.FC<T.Props> = (props) => {
 					<CarouselControl
 						isRTL={isRTL}
 						type="back"
-						ref={prevControlElRef}
+						controlRef={prevControlElRef}
 						oppositeControlElRef={nextControlElRef}
 						scrollElRef={scrollElRef}
 						scrollPosition={scrollPosition}
@@ -179,7 +179,7 @@ const Carousel: React.FC<T.Props> = (props) => {
 					<CarouselControl
 						isRTL={isRTL}
 						type="forward"
-						ref={nextControlElRef}
+						controlRef={nextControlElRef}
 						oppositeControlElRef={prevControlElRef}
 						scrollElRef={scrollElRef}
 						scrollPosition={scrollPosition}

@@ -50,6 +50,57 @@ describe("scroll/lockScroll", () => {
 		expect(container.style.overflow).toBe("auto");
 	});
 
+	test("reserves space for the scrollbar on a vertically overflowing container", () => {
+		const container = document.createElement("div");
+		container.style.overflow = "auto";
+		container.style.height = "100px";
+		document.body.appendChild(container);
+
+		const content = document.createElement("div");
+		content.style.height = "500px";
+		container.appendChild(content);
+
+		// The container actually overflows vertically, so locking it removes the
+		// vertical scrollbar and must compensate for the horizontal space it took.
+		expect(container.scrollHeight).toBeGreaterThan(container.clientHeight);
+
+		const unlock = lockScroll({ containerEl: container });
+
+		// Chromium (the test browser) supports scrollbar-gutter, so the lock
+		// reserves the gutter rather than falling back to paddingRight.
+		expect(container.style.scrollbarGutter).toBe("stable");
+
+		unlock?.();
+
+		expect(container.style.scrollbarGutter).toBe("");
+
+		document.body.removeChild(container);
+	});
+
+	test("does not reserve space when the container does not overflow vertically", () => {
+		const container = document.createElement("div");
+		container.style.overflow = "auto";
+		container.style.height = "200px";
+		document.body.appendChild(container);
+
+		const content = document.createElement("div");
+		content.style.height = "50px";
+		container.appendChild(content);
+
+		// No vertical overflow -> no scrollbar to compensate for.
+		expect(container.scrollHeight).not.toBeGreaterThan(container.clientHeight);
+
+		const unlock = lockScroll({ containerEl: container });
+
+		expect(container.style.overflow).toBe("hidden");
+		expect(container.style.scrollbarGutter).toBe("");
+		expect(container.style.paddingRight).toBe("");
+
+		unlock?.();
+
+		document.body.removeChild(container);
+	});
+
 	test("finds scrollable container from origin element", () => {
 		const scrollableContainer = document.createElement("div");
 		scrollableContainer.style.overflow = "auto";

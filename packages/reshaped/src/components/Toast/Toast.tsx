@@ -82,7 +82,7 @@ const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {
 						)}
 					</View.Item>
 
-					{actions.length && (
+					{actions.length > 0 && (
 						<View direction="row" align="center" gap={2}>
 							{actions.map((slot, index) => {
 								const defaultProps: Partial<ButtonProps> = {
