@@ -138,7 +138,7 @@ export const applyNavigationBounds = (args: { date: Date; min?: Date; max?: Date
 	const currentMonth = date.getMonth();
 	const currentYear = date.getFullYear();
 	const prevMonthLastDate = new Date(currentYear, currentMonth, 0);
-	const nextMonthFirstDate = setMonthToNext(date);
+	const nextMonthFirstDate = new Date(currentYear, currentMonth + 1, 1);
 	nextMonthFirstDate.setDate(0);
 
 	return {
