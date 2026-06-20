@@ -63,30 +63,32 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			as={as}
 			touchHitbox={isActionable}
 		>
-			{icon && <Icon svg={icon} autoWidth size={iconSize} className={s.icon} />}
-			{hasText && (
-				<Text
-					variant={size === "large" ? "body-2" : "caption-1"}
-					weight="medium"
-					attributes={{
-						"aria-hidden": hidden ? "true" : undefined,
-					}}
-				>
-					{children}
-				</Text>
-			)}
-			{endIcon && <Icon svg={endIcon} autoWidth size={iconSize} className={s.icon} />}
-			{onDismiss && (
-				<Actionable
-					onClick={handleDismiss}
-					className={s.dismiss}
-					as="span"
-					attributes={{ "aria-label": dismissAriaLabel }}
-					touchHitbox
-				>
-					<Icon svg={IconClose} size={iconSize} />
-				</Actionable>
-			)}
+			<span className={s.content}>
+				{icon && <Icon svg={icon} autoWidth size={iconSize} className={s.icon} />}
+				{hasText && (
+					<Text
+						variant={size === "large" ? "body-2" : "caption-1"}
+						weight="medium"
+						attributes={{
+							"aria-hidden": hidden ? "true" : undefined,
+						}}
+					>
+						{children}
+					</Text>
+				)}
+				{endIcon && <Icon svg={endIcon} autoWidth size={iconSize} className={s.icon} />}
+				{onDismiss && (
+					<Actionable
+						onClick={handleDismiss}
+						className={s.dismiss}
+						as="span"
+						attributes={{ "aria-label": dismissAriaLabel }}
+						touchHitbox
+					>
+						<Icon svg={IconClose} size={iconSize} />
+					</Actionable>
+				)}
+			</span>
 		</Actionable>
 	);
 });

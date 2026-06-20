@@ -129,6 +129,31 @@ describe("flyout/Flyout", () => {
 		});
 	});
 
+	test("keeps flyout open on window scroll with layout adjustment", () => {
+		const flyout = new Flyout({
+			content,
+			trigger,
+			triggerCoordinates: null,
+			position: "top",
+			fallbackAdjustLayout: true,
+			onDeactivate: onClose,
+		});
+
+		flyout.activate();
+
+		trigger.style.top = "-100px";
+		window.dispatchEvent(new Event("scroll"));
+
+		return new Promise((resolve) => {
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					expect(onClose).not.toHaveBeenCalled();
+					resolve(undefined);
+				});
+			});
+		});
+	});
+
 	test("updates position on RTL direction change", async () => {
 		const flyout = new Flyout({
 			content,

@@ -10,6 +10,8 @@ export type Props = {
 	children: React.ReactNode;
 	/** Scrollbar visibility behavior based on the user interaction */
 	scrollbarDisplay?: "visible" | "hover" | "hidden";
+	/** Control whether scroll can chain to parent scrollable containers */
+	overscrollBehavior?: "auto" | "contain";
 	/** Callback when the scroll area is scrolled */
 	onScroll?: (args: Coordinates) => void;
 	/** Height of the scroll area, literal css value or unit token multiplier */
@@ -20,6 +22,10 @@ export type Props = {
 	className?: ClassName;
 	/** Additional attributes for the root element */
 	attributes?: Attributes<"div">;
+	/** Additional attributes for the scrollable element */
+	scrollableAttributes?: Attributes<"div">;
+	/** Additional classname for the scrollable element */
+	scrollableClassName?: ClassName;
 };
 
 export type BarProps = {

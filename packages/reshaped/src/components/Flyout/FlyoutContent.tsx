@@ -5,6 +5,7 @@ import { classNames } from "@reshaped/utilities";
 
 import Portal from "@/components/_private/Portal";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import ScrollArea from "../ScrollArea";
 import { ContentProvider, useFlyoutContext } from "./Flyout.context";
 import type * as T from "./Flyout.types";
 import cooldown from "./utilities/cooldown";
@@ -68,11 +69,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		attributes?.className,
 		contentAttributes?.className
 	);
-	const scrollableClassNames = classNames(
-		s.scrollable,
-		scrollableClassName,
-		scrollableAttributes?.className
-	);
 	let role = attributes?.role || contentAttributes?.role;
 
 	if (triggerType === "hover") {
@@ -118,9 +114,13 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 					style={{ ...contentAttributes?.style, ...attributes?.style }}
 					className={contentClassNames}
 				>
-					<div {...scrollableAttributes} className={scrollableClassNames}>
+					<ScrollArea
+						overscrollBehavior="contain"
+						scrollableAttributes={scrollableAttributes}
+						scrollableClassName={scrollableClassName}
+					>
 						{children}
-					</div>
+					</ScrollArea>
 				</div>
 			</div>
 		</ContentProvider>

@@ -24,7 +24,7 @@ class Flyout {
 	};
 
 	#addParentScrollHandler = () => {
-		const { trigger, onDeactivate, fallbackAdjustLayout } = this.#options;
+		const { trigger, onDeactivate } = this.#options;
 		if (!trigger) return;
 
 		const container = findClosestScrollableContainer({ el: trigger });
@@ -33,25 +33,19 @@ class Flyout {
 		const handleScroll = rafThrottle(() => {
 			if (!this.#active) return;
 
-			if (!container && !fallbackAdjustLayout) {
+			if (!container) {
 				this.#update();
 				return;
 			}
 
 			const triggerBounds = trigger.getBoundingClientRect();
-			const containerBounds = container?.getBoundingClientRect();
-			const visibilityBounds = {
-				top: containerBounds?.top ?? 0,
-				left: containerBounds?.left ?? 0,
-				right: containerBounds?.right ?? window.innerWidth,
-				bottom: containerBounds?.bottom ?? window.innerHeight,
-			};
+			const containerBounds = container.getBoundingClientRect();
 
 			if (
-				triggerBounds.top < visibilityBounds.top ||
-				triggerBounds.left < visibilityBounds.left ||
-				triggerBounds.right > visibilityBounds.right ||
-				triggerBounds.bottom > visibilityBounds.bottom
+				triggerBounds.top < containerBounds.top ||
+				triggerBounds.left < containerBounds.left ||
+				triggerBounds.right > containerBounds.right ||
+				triggerBounds.bottom > containerBounds.bottom
 			) {
 				onDeactivate();
 			} else {

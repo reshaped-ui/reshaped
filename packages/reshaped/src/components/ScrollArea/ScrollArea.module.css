@@ -26,6 +26,14 @@
 	}
 }
 
+.--overscroll-auto {
+	overscroll-behavior: auto;
+}
+
+.--overscroll-contain {
+	overscroll-behavior: contain;
+}
+
 /* Inline block that stretches based on the content to trigger ResizeObserver  */
 .content {
 	display: inline-block;
@@ -47,6 +55,7 @@
 	background-color: var(--rs-color-background-neutral-faded);
 	border-radius: var(--rs-radius-circular);
 	opacity: 0;
+	transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 
 	&::before {
 		content: "";

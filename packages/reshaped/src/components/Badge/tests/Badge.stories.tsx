@@ -114,6 +114,8 @@ export const icon = {
 						Badge
 					</Badge>
 					<Badge icon={IconPlus} size="small" />
+					{/* Test with touch hitbox */}
+					<Badge icon={IconPlus} size="small" rounded onClick={() => {}} />
 				</View>
 			</Example.Item>
 			<Example.Item title="size: medium">
@@ -121,6 +123,7 @@ export const icon = {
 					<Badge icon={IconPlus}>Badge</Badge>
 					<Badge endIcon={IconPlus}>Badge</Badge>
 					<Badge icon={IconPlus} />
+					<Badge icon={IconPlus} rounded onClick={() => {}} />
 				</View>
 			</Example.Item>
 			<Example.Item title="size: large">
@@ -132,6 +135,7 @@ export const icon = {
 						Badge
 					</Badge>
 					<Badge icon={IconPlus} size="large" />
+					<Badge icon={IconPlus} size="large" rounded onClick={() => {}} />
 				</View>
 			</Example.Item>
 		</Example>
