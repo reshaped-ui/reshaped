@@ -3,6 +3,10 @@ import { StyleCache } from "@/css";
 const styleCache = new StyleCache();
 
 const lockSafariScroll = () => {
+	if (document.body.style.position === "fixed") {
+		return () => {};
+	}
+
 	const viewport = window.visualViewport;
 	const offsetLeft = viewport?.offsetLeft || 0;
 	const offsetTop = viewport?.offsetTop || 0;
