@@ -24,6 +24,14 @@ const useScrollLock = (options?: {
 		unlockScrollRef.current = null;
 	}, []);
 
+	React.useEffect(
+		() => () => {
+			unlockScrollRef.current?.();
+			unlockScrollRef.current = null;
+		},
+		[]
+	);
+
 	return React.useMemo(
 		() => ({
 			scrollLocked: locked,
