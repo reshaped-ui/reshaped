@@ -7,19 +7,19 @@ const lockStandardScroll = (args: { container: HTMLElement }) => {
 	const { container } = args;
 	const rect = container.getBoundingClientRect();
 	const isOverflowing = rect.left + rect.right < window.innerWidth;
-
-	styleCache.set(container, { overflow: "hidden" });
+	const styles: Record<string, string> = { overflow: "hidden" };
 
 	if (isOverflowing) {
 		if (CSS.supports("scrollbar-gutter", "stable")) {
-			styleCache.set(container, { scrollbarGutter: "stable" });
+			styles.scrollbarGutter = "stable";
 		} else {
-			const scrollBarWidth = getScrollbarWidth();
-			styleCache.set(container, { paddingRight: `${scrollBarWidth}px` });
+			styles.paddingRight = `${getScrollbarWidth()}px`;
 		}
 	}
 
-	return () => styleCache.reset();
+	styleCache.set(container, styles);
+
+	return () => styleCache.reset(container);
 };
 
 export default lockStandardScroll;

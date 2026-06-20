@@ -86,6 +86,37 @@ describe("scroll/lockScroll", () => {
 		expect(document.documentElement.style.overflow).toBe("");
 	});
 
+	test("unlocking one container does not affect another locked container", () => {
+		const a = document.createElement("div");
+		a.style.overflow = "auto";
+		a.style.height = "100px";
+		document.body.appendChild(a);
+
+		const b = document.createElement("div");
+		b.style.overflow = "scroll";
+		b.style.height = "100px";
+		document.body.appendChild(b);
+
+		const unlockA = lockScroll({ containerEl: a });
+		const unlockB = lockScroll({ containerEl: b });
+
+		expect(a.style.overflow).toBe("hidden");
+		expect(b.style.overflow).toBe("hidden");
+
+		unlockA?.();
+
+		// B shares the module-level StyleCache with A, but must stay locked
+		expect(a.style.overflow).toBe("auto");
+		expect(b.style.overflow).toBe("hidden");
+
+		unlockB?.();
+
+		expect(b.style.overflow).toBe("scroll");
+
+		document.body.removeChild(a);
+		document.body.removeChild(b);
+	});
+
 	test("calls lock callback immediately", () => {
 		const lockCb = vi.fn();
 

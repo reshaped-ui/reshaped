@@ -1,26 +1,28 @@
 type Styles = Record<string, string>;
 
 class StyleCache {
-	cache: Map<HTMLElement, Record<string, string>> = new Map();
+	cache: Map<HTMLElement, Styles> = new Map();
 
 	set = (el: HTMLElement, styles: Styles) => {
-		const originalStyles: Styles = {};
-		const cachedStyles = this.cache.get(el);
+		// Already cached (locked) — keep the originals captured the first time and
+		// don't reapply, so locking an element that's already locked is a no-op.
+		if (this.cache.has(el)) return;
 
+		const originalStyles: Styles = {};
 		Object.keys(styles).forEach((key) => {
 			originalStyles[key] = el.style.getPropertyValue(key);
 		});
 
-		this.cache.set(el, { ...originalStyles, ...cachedStyles });
+		this.cache.set(el, originalStyles);
 		Object.assign(el.style, styles);
 	};
 
-	reset = () => {
-		for (const [el, styles] of this.cache.entries()) {
-			Object.assign(el.style, styles);
-		}
+	reset = (el: HTMLElement) => {
+		const styles = this.cache.get(el);
+		if (!styles) return;
 
-		this.cache.clear();
+		Object.assign(el.style, styles);
+		this.cache.delete(el);
 	};
 }
 
