@@ -21,7 +21,7 @@ const getNormalizedDay = (args: { date: Date; firstWeekDay?: number }) => {
 
 	const day = date.getDay();
 
-	return day < firstWeekDay ? DAYS_IN_WEEK - day - firstWeekDay : day - firstWeekDay;
+	return (day - firstWeekDay + DAYS_IN_WEEK) % DAYS_IN_WEEK;
 };
 
 /**
