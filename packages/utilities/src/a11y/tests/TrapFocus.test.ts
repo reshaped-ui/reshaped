@@ -59,6 +59,75 @@ describe("a11y/TrapFocus", () => {
 			expect(trap.trapped).toBeUndefined();
 		});
 
+		test("traps focus once focusable content is added to an empty container", async () => {
+			container.innerHTML = `<div>No focusable content yet</div>`;
+
+			const trap = new TrapFocus();
+			trap.trap(container);
+			expect(trap.trapped).toBeUndefined();
+
+			const btn = document.createElement("button");
+			btn.id = "late";
+			btn.textContent = "Late";
+			container.appendChild(btn);
+
+			// Wait for the MutationObserver callback to run
+			await new Promise((resolve) => setTimeout(resolve, 0));
+
+			expect(trap.trapped).toBe(true);
+			expect(document.activeElement?.id).toBe("late");
+
+			trap.release();
+		});
+
+		test("does not trap added content if another trap was triggered after", async () => {
+			container.innerHTML = `<div>No focusable content yet</div>`;
+
+			const deferredTrap = new TrapFocus();
+			deferredTrap.trap(container);
+			expect(deferredTrap.trapped).toBeUndefined();
+
+			// A newer trap is triggered before the empty container gets content
+			const other = document.createElement("div");
+			other.innerHTML = `<button id="other-btn">Other</button>`;
+			document.body.appendChild(other);
+			const otherTrap = new TrapFocus();
+			otherTrap.trap(other);
+
+			// Now the originally-empty container receives focusable content
+			const btn = document.createElement("button");
+			btn.id = "late";
+			btn.textContent = "Late";
+			container.appendChild(btn);
+
+			await new Promise((resolve) => setTimeout(resolve, 0));
+
+			// The deferred trap must stay inactive and must not steal focus
+			expect(deferredTrap.trapped).toBeUndefined();
+			expect(document.activeElement?.id).not.toBe("late");
+
+			otherTrap.release();
+			document.body.removeChild(other);
+		});
+
+		test("releasing an empty container stops it from trapping later", async () => {
+			container.innerHTML = `<div>No focusable content yet</div>`;
+
+			const trap = new TrapFocus();
+			trap.trap(container);
+			trap.release();
+
+			const btn = document.createElement("button");
+			btn.id = "late";
+			btn.textContent = "Late";
+			container.appendChild(btn);
+
+			await new Promise((resolve) => setTimeout(resolve, 0));
+
+			expect(trap.trapped).toBeUndefined();
+			expect(document.activeElement?.id).not.toBe("late");
+		});
+
 		test("focuses initialFocusEl when provided", () => {
 			container.innerHTML = `
 				<button id="btn1">Button 1</button>

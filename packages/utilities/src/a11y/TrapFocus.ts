@@ -17,6 +17,12 @@ type TrapOptions = {
 class TrapFocus {
 	static chain = new Chain<TrapFocus>();
 
+	// Monotonic counter bumped on every trap() call. Used by the deferred
+	// observer to tell whether a newer trap was triggered after this one.
+	static #globalTrapCounter = 0;
+
+	#trapCounter = 0;
+
 	#chainId?: number;
 
 	#root: HTMLElement | null = null;
@@ -114,59 +120,35 @@ class TrapFocus {
 		return tailItem && tailItem.data.#root === this.#root;
 	};
 
+	#getFocusable = () => {
+		if (!this.#root) return [];
+		return getFocusableElements(this.#root, {
+			additionalElement: this.#options.includeTrigger ? this.#trigger : undefined,
+		});
+	};
+
 	/**
-	 * Trap the focus, add observer and keyboard event listeners
-	 * and create a chain item
+	 * Establish the trap once there is something focusable inside.
+	 * Stays a no-op while the container is empty, so an empty container remains
+	 * deferred until its observer detects focusable content being added.
 	 */
-	trap = (root: HTMLElement, options: TrapOptions = {}) => {
-		const { mode = "dialog", includeTrigger, initialFocusEl } = options;
+	#activate = () => {
+		if (!this.#root || this.trapped) return;
 
-		this.#root = root;
-		this.#screenReaderTrap = new TrapScreenReader(root);
+		const { mode, initialFocusEl, pseudoFocus } = this.#options;
+		const focusable = this.#getFocusable();
 
-		const trigger = getActiveElement(this.#root);
-		const focusable = getFocusableElements(this.#root, {
-			additionalElement: includeTrigger ? trigger : undefined,
-		});
-		const pseudoFocus = mode === "selection-menu";
-
-		this.#options = { ...options, pseudoFocus };
-		this.#trigger = trigger;
-
-		this.#mutationObserver = new MutationObserver(() => {
-			if (!this.#root) return;
-			if (!this.#isLast()) return;
-
-			const currentActiveElement = getActiveElement(this.#root);
-
-			// Focus stayed inside the wrapper, no need to refocus
-			if (this.#root.contains(currentActiveElement)) return;
-
-			const focusable = getFocusableElements(this.#root, {
-				additionalElement: includeTrigger ? trigger : undefined,
-			});
-
-			if (!focusable.length) return;
-			focusElement(focusable[0], { pseudoFocus });
-		});
-
-		this.#removeListeners();
-		this.#mutationObserver.observe(this.#root, { childList: true, subtree: true });
-
-		// Don't trap in case there is nothing to focus inside
+		// Nothing to focus yet — stay deferred.
 		if (!focusable.length && !initialFocusEl) return;
 
 		this.#addListeners();
-		if (mode === "dialog") this.#screenReaderTrap.trap();
-
-		const currentActiveElement = getActiveElement(this.#root);
-		const isLastInChain = this.#isLast();
+		if (mode === "dialog") this.#screenReaderTrap?.trap();
 
 		// Don't add back to the chain if we're traversing back
-		if (!isLastInChain) {
+		if (!this.#isLast()) {
 			this.#chainId = TrapFocus.chain.add(this);
 
-			const focusInside = this.#root.contains(currentActiveElement);
+			const focusInside = this.#root.contains(getActiveElement(this.#root));
 
 			if (initialFocusEl) {
 				focusElement(initialFocusEl, { pseudoFocus });
@@ -180,18 +162,71 @@ class TrapFocus {
 	};
 
 	/**
+	 * Trap the focus, add observer and keyboard event listeners
+	 * and create a chain item
+	 */
+	trap = (root: HTMLElement, options: TrapOptions = {}) => {
+		const { mode = "dialog" } = options;
+		const pseudoFocus = mode === "selection-menu";
+
+		this.#root = root;
+		this.#screenReaderTrap = new TrapScreenReader(root);
+		this.#trigger = getActiveElement(root);
+		this.#options = { ...options, mode, pseudoFocus };
+		this.#trapCounter = ++TrapFocus.#globalTrapCounter;
+
+		this.#removeListeners();
+		this.#mutationObserver?.disconnect();
+
+		this.#mutationObserver = new MutationObserver(() => {
+			if (!this.#root) return;
+
+			// Still deferred: trap once focusable content is added (e.g. async-loaded
+			// dialog content), as long as no newer trap was triggered in the meantime.
+			if (!this.trapped) {
+				if (this.#trapCounter !== TrapFocus.#globalTrapCounter) {
+					this.#mutationObserver?.disconnect();
+					return;
+				}
+
+				this.#activate();
+				return;
+			}
+
+			// Active trap: keep the focus inside the region if it escaped.
+			if (!this.#isLast()) return;
+			if (this.#root.contains(getActiveElement(this.#root))) return;
+
+			const focusable = this.#getFocusable();
+			if (!focusable.length) return;
+			focusElement(focusable[0], { pseudoFocus });
+		});
+
+		this.#mutationObserver.observe(root, { childList: true, subtree: true });
+
+		this.#activate();
+	};
+
+	/**
 	 * Disabled the trap focus for the element,
 	 * cleanup all observers/handlers and trap for the previous element in the chain
 	 */
 	release = (releaseOptions: ReleaseOptions = {}) => {
 		const { withoutFocusReturn } = releaseOptions;
 
-		if (!this.trapped || !this.#chainId || !this.#root) return;
+		if (!this.trapped || !this.#chainId || !this.#root) {
+			// A deferred (never-trapped) empty container may still be observing for
+			// focusable content — disconnect it so it can't trap after release.
+			this.#mutationObserver?.disconnect();
+			return;
+		}
 		this.trapped = false;
 
 		if (this.#trigger && !withoutFocusReturn) {
 			this.#trigger.focus({ preventScroll: !checkKeyboardMode() });
 		}
+
+		const wasTail = TrapFocus.chain.tailId === this.#chainId;
 
 		TrapFocus.chain.removePreviousTill(this.#chainId, (item) =>
 			document.body.contains(item.data.#trigger)
@@ -201,11 +236,13 @@ class TrapFocus {
 		this.#removeListeners();
 		this.#screenReaderTrap?.release();
 
-		const previousItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
+		if (wasTail) {
+			const previousItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
 
-		if (previousItem && previousItem.data.#root) {
-			const trapInstance = new TrapFocus();
-			trapInstance.trap(previousItem.data.#root, previousItem.data.#options);
+			if (previousItem && previousItem.data.#root) {
+				const trapInstance = new TrapFocus();
+				trapInstance.trap(previousItem.data.#root, previousItem.data.#options);
+			}
 		}
 	};
 }
