@@ -19,9 +19,9 @@ class TrapFocus {
 
 	// Monotonic counter bumped on every trap() call. Used by the deferred
 	// observer to tell whether a newer trap was triggered after this one.
-	static #trapCounter = 0;
+	static #globalTrapCounter = 0;
 
-	#trapId = 0;
+	#trapCounter = 0;
 
 	#chainId?: number;
 
@@ -173,7 +173,7 @@ class TrapFocus {
 		this.#screenReaderTrap = new TrapScreenReader(root);
 		this.#trigger = getActiveElement(root);
 		this.#options = { ...options, mode, pseudoFocus };
-		this.#trapId = ++TrapFocus.#trapCounter;
+		this.#trapCounter = ++TrapFocus.#globalTrapCounter;
 
 		this.#removeListeners();
 		this.#mutationObserver?.disconnect();
@@ -184,7 +184,7 @@ class TrapFocus {
 			// Still deferred: trap once focusable content is added (e.g. async-loaded
 			// dialog content), as long as no newer trap was triggered in the meantime.
 			if (!this.trapped) {
-				if (this.#trapId !== TrapFocus.#trapCounter) {
+				if (this.#trapCounter !== TrapFocus.#globalTrapCounter) {
 					this.#mutationObserver?.disconnect();
 					return;
 				}
@@ -226,6 +226,8 @@ class TrapFocus {
 			this.#trigger.focus({ preventScroll: !checkKeyboardMode() });
 		}
 
+		const wasTail = TrapFocus.chain.tailId === this.#chainId;
+
 		TrapFocus.chain.removePreviousTill(this.#chainId, (item) =>
 			document.body.contains(item.data.#trigger)
 		);
@@ -234,11 +236,13 @@ class TrapFocus {
 		this.#removeListeners();
 		this.#screenReaderTrap?.release();
 
-		const previousItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
+		if (wasTail) {
+			const previousItem = TrapFocus.chain.tailId && TrapFocus.chain.get(TrapFocus.chain.tailId);
 
-		if (previousItem && previousItem.data.#root) {
-			const trapInstance = new TrapFocus();
-			trapInstance.trap(previousItem.data.#root, previousItem.data.#options);
+			if (previousItem && previousItem.data.#root) {
+				const trapInstance = new TrapFocus();
+				trapInstance.trap(previousItem.data.#root, previousItem.data.#options);
+			}
 		}
 	};
 }
