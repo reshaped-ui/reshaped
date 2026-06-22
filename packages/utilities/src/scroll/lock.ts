@@ -3,8 +3,7 @@ import { isIOS } from "@/platform";
 import lockSafariScroll from "./lockSafari";
 import lockStandardScroll from "./lockStandard";
 
-const lockCounts = new WeakMap<HTMLElement, number>();
-const lockResets = new WeakMap<HTMLElement, () => void>();
+const locks = new WeakMap<HTMLElement, { count: number; reset: () => void }>();
 
 export const lockScroll = (args?: {
 	containerEl?: HTMLElement | null;
@@ -19,17 +18,15 @@ export const lockScroll = (args?: {
 		document.documentElement;
 	const lockedDocumentScroll = container === document.documentElement;
 
-	const currentCount = lockCounts.get(container) ?? 0;
-
-	if (currentCount === 0) {
+	let lock = locks.get(container);
+	if (!lock) {
 		const reset =
-			isIOSLock && lockedDocumentScroll
-				? lockSafariScroll()
-				: lockStandardScroll({ container });
-		lockResets.set(container, reset);
+			isIOSLock && lockedDocumentScroll ? lockSafariScroll() : lockStandardScroll({ container });
+		lock = { count: 0, reset };
+		locks.set(container, lock);
 	}
 
-	lockCounts.set(container, currentCount + 1);
+	lock.count++;
 	args?.callback?.();
 
 	let released = false;
@@ -37,13 +34,9 @@ export const lockScroll = (args?: {
 		if (released) return;
 		released = true;
 
-		const nextCount = (lockCounts.get(container) ?? 1) - 1;
-		if (nextCount <= 0) {
-			lockCounts.delete(container);
-			lockResets.get(container)?.();
-			lockResets.delete(container);
-		} else {
-			lockCounts.set(container, nextCount);
+		if (--lock.count <= 0) {
+			lock.reset();
+			locks.delete(container);
 		}
 
 		unlockArgs?.callback?.();
