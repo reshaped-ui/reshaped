@@ -124,14 +124,30 @@ describe("scroll/lockScroll", () => {
 		expect(scrollableContainer.style.overflow).toBe("auto");
 	});
 
-	test("unlocks after multiple locks", () => {
+	test("keeps scroll locked until every stacked lock is released", () => {
 		const unlock1 = lockScroll({});
 		const unlock2 = lockScroll({});
 
 		expect(document.documentElement.style.overflow).toBe("hidden");
 
+		// The first release must not unlock while a second lock is still held
 		unlock1?.();
+		expect(document.documentElement.style.overflow).toBe("hidden");
+
+		// Only the last release actually unlocks the container
+		unlock2?.();
 		expect(document.documentElement.style.overflow).toBe("");
+	});
+
+	test("ignores repeated calls to the same unlock", () => {
+		const unlock1 = lockScroll({});
+		const unlock2 = lockScroll({});
+
+		// Calling the first unlock twice must not decrement the count for unlock2
+		unlock1?.();
+		unlock1?.();
+
+		expect(document.documentElement.style.overflow).toBe("hidden");
 
 		unlock2?.();
 		expect(document.documentElement.style.overflow).toBe("");
@@ -171,9 +187,11 @@ describe("scroll/lockScroll", () => {
 	test("calls lock callback immediately", () => {
 		const lockCb = vi.fn();
 
-		lockScroll({ callback: lockCb });
+		const unlock = lockScroll({ callback: lockCb });
 
 		expect(lockCb).toHaveBeenCalledTimes(1);
+
+		unlock?.();
 	});
 
 	test("calls unlock callback when unlocking", () => {
