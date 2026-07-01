@@ -35,6 +35,8 @@ export type { LinkProps } from "@/components/Link";
 export { default as Link } from "@/components/Link";
 export type { LoaderProps } from "@/components/Loader";
 export { default as Loader } from "@/components/Loader";
+export type { LoaderTextProps } from "@/components/LoaderText";
+export { default as LoaderText } from "@/components/LoaderText";
 export type { MenuItemProps } from "@/components/MenuItem";
 export { default as MenuItem } from "@/components/MenuItem";
 export type { ModalProps } from "@/components/Modal";

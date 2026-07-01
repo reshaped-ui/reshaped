@@ -1,0 +1,90 @@
+.root {
+	display: inline-flex;
+	align-items: center;
+
+	/* Matches Link gap approach */
+	gap: round(down, calc(1em / 2.5), var(--rs-unit-x1));
+}
+
+.container {
+	display: inline-grid;
+
+	& > .text,
+	& > .completedText {
+		grid-area: 1 / 1;
+	}
+}
+
+.text {
+	background-image: linear-gradient(
+		100deg,
+		var(--rs-color-foreground-neutral-faded) 0 40%,
+		var(--rs-color-white) 50%,
+		var(--rs-color-foreground-neutral-faded) 60% 100%
+	);
+	background-size: 300% 100%;
+	/* stylelint-disable plugin/browser-compat -- graceful degradation for Firefox */
+	-webkit-background-clip: text;
+	background-clip: text;
+	/* stylelint-enable plugin/browser-compat */
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+.text,
+.completedText {
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
+	transition-property: opacity, transform;
+
+	@media (prefers-reduced-motion) {
+		transition: none;
+	}
+}
+
+.--loading {
+	& .text {
+		animation: rs-loader-text-shimmer 2.5s linear infinite;
+
+		@media (prefers-reduced-motion) {
+			animation: none;
+		}
+	}
+}
+
+.root:has(.completedText) {
+	& .text {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+
+	& .completedText {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	&.--loading {
+		& .text {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		& .completedText {
+			opacity: 0;
+			transform: translateY(-100%);
+		}
+	}
+}
+
+@keyframes rs-loader-text-shimmer {
+	0% {
+		background-position: 150% 0;
+	}
+
+	50% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: 0 0;
+	}
+}
