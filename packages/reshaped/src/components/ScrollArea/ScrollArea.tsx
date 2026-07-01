@@ -119,12 +119,12 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	const rootClassNames = classNames(
 		s.root,
 		scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
+		mixinStyles.classNames,
 		className
 	);
 	const scrollableClassNames = classNames(
 		s.scrollable,
-		overscrollBehavior && s[`--overscroll-${overscrollBehavior}`],
-		mixinStyles.classNames
+		overscrollBehavior && s[`--overscroll-${overscrollBehavior}`]
 	);
 
 	const updateScroll = React.useCallback(() => {
@@ -195,21 +195,33 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		const contentEl = contentRef.current;
 		if (!scrollableEl || !contentEl) return;
 
-		const observer = new ResizeObserver(updateScroll);
+		const resizeObserver = new ResizeObserver(updateScroll);
+		resizeObserver.observe(scrollableEl);
 
-		observer.observe(scrollableEl);
-		observer.observe(contentEl);
-		return () => observer.disconnect();
+		// Since scrollable elements have to follow the root height,
+		// we need to observe the children for detecting size changes
+		const observeChildren = () => {
+			for (const child of contentEl.children) resizeObserver.observe(child);
+		};
+
+		observeChildren();
+
+		const mutationObserver = new MutationObserver(() => {
+			observeChildren();
+			updateScroll();
+		});
+
+		mutationObserver.observe(contentEl, { childList: true });
+
+		return () => {
+			resizeObserver.disconnect();
+			mutationObserver.disconnect();
+		};
 	}, [updateScroll]);
 
 	return (
-		<div {...attributes} ref={rootRef} className={rootClassNames}>
-			<div
-				className={scrollableClassNames}
-				ref={scrollableRef}
-				onScroll={handleScroll}
-				style={{ ...mixinStyles.variables }}
-			>
+		<div {...attributes} ref={rootRef} className={rootClassNames} style={mixinStyles.variables}>
+			<div className={scrollableClassNames} ref={scrollableRef} onScroll={handleScroll}>
 				<div
 					{...scrollableAttributes}
 					className={classNames(s.content, scrollableClassName)}

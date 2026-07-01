@@ -3,6 +3,7 @@ import React from "react";
 import { expect, fn, Mock, userEvent, waitFor } from "storybook/test";
 
 import Button from "@/components/Button";
+import Card from "@/components/Card";
 import ScrollArea from "@/components/ScrollArea";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
@@ -119,31 +120,35 @@ export const overscrollBehavior = {
 	render: () => (
 		<Example>
 			<Example.Item title="overscrollBehavior: auto">
-				<View height="200px" overflow="auto" backgroundColor="neutral-faded" padding={4}>
-					<View height="100px">Parent scroll area content before ScrollArea</View>
-					<ScrollArea height="100px" scrollbarDisplay="visible" overscrollBehavior="auto">
-						<View backgroundColor="neutral-faded" padding={4}>
-							{Array.from({ length: 10 }).map((_, index) => (
-								<div key={index}>Item {index + 1}</div>
-							))}
-						</View>
-					</ScrollArea>
-					<View height="300px">Parent scroll area content after ScrollArea</View>
-				</View>
+				<ScrollArea height="200px" scrollbarDisplay="visible">
+					<View padding={16} backgroundColor="neutral-faded" borderRadius="medium">
+						<ScrollArea height="200px" scrollbarDisplay="visible">
+							<View backgroundColor="neutral" padding={4} borderRadius="medium">
+								{Array(20)
+									.fill("")
+									.map((_, index) => {
+										return <div key={index}>Item {index + 1}</div>;
+									})}
+							</View>
+						</ScrollArea>
+					</View>
+				</ScrollArea>
 			</Example.Item>
 
 			<Example.Item title="overscrollBehavior: contain">
-				<View height="200px" overflow="auto" backgroundColor="neutral-faded" padding={4}>
-					<View height="100px">Parent scroll area content before ScrollArea</View>
-					<ScrollArea height="100px" scrollbarDisplay="visible" overscrollBehavior="contain">
-						<View backgroundColor="neutral-faded" padding={4}>
-							{Array.from({ length: 10 }).map((_, index) => (
-								<div key={index}>Item {index + 1}</div>
-							))}
-						</View>
-					</ScrollArea>
-					<View height="300px">Parent scroll area content after ScrollArea</View>
-				</View>
+				<ScrollArea height="200px" scrollbarDisplay="visible" overscrollBehavior="contain">
+					<View padding={16} backgroundColor="neutral-faded" borderRadius="medium">
+						<ScrollArea height="200px" scrollbarDisplay="visible">
+							<View backgroundColor="neutral" padding={4} borderRadius="medium">
+								{Array(20)
+									.fill("")
+									.map((_, index) => {
+										return <div key={index}>Item {index + 1}</div>;
+									})}
+							</View>
+						</ScrollArea>
+					</View>
+				</ScrollArea>
 			</Example.Item>
 		</Example>
 	),
@@ -274,42 +279,53 @@ export const className: StoryObj = {
 	},
 };
 
-export const testNested = {
-	name: "test: nested",
-	render: () => (
-		<ScrollArea height="100px" scrollbarDisplay="visible">
-			<View padding={4} paddingInline={16}>
-				<ScrollArea height="200px" scrollbarDisplay="visible">
-					{Array(20)
-						.fill("")
-						.map((_, index) => {
-							return <div key={index}>Item {index + 1}</div>;
-						})}
-				</ScrollArea>
-			</View>
-		</ScrollArea>
-	),
-};
-
-export const testDynamicHeight: StoryObj = {
-	name: "test: dynamic height change",
+export const testComposition: StoryObj = {
+	name: "test: composition",
 	render: () => {
 		const [count, setCount] = React.useState(10);
+		const [height, setHeight] = React.useState(100);
 
 		return (
-			<View gap={4}>
-				<View.Item>
-					<Button onClick={() => setCount((prev) => prev + 10)}>Add more items</Button>
-				</View.Item>
-
-				<ScrollArea height="200px" scrollbarDisplay="visible">
-					<View gap={2}>
-						{Array.from({ length: count }).map((_, i) => (
-							<View.Item key={i}>Item {i + 1}</View.Item>
-						))}
+			<Example>
+				<Example.Item title="composition height">
+					<View height="200px">
+						<Card height="100%" padding={0}>
+							<ScrollArea scrollbarDisplay="visible">
+								{/* Should stretch to 100% */}
+								<View height="100%" padding={4} backgroundColor="primary-faded" />
+							</ScrollArea>
+						</Card>
 					</View>
-				</ScrollArea>
-			</View>
+				</Example.Item>
+
+				<Example.Item title="dynamic height change, content">
+					<View gap={4}>
+						<View.Item>
+							<Button onClick={() => setCount((prev) => prev + 10)}>Add more items</Button>
+						</View.Item>
+
+						<ScrollArea height="200px" scrollbarDisplay="visible">
+							<View gap={2}>
+								{Array.from({ length: count }).map((_, i) => (
+									<View.Item key={i}>Item {i + 1}</View.Item>
+								))}
+							</View>
+						</ScrollArea>
+					</View>
+				</Example.Item>
+
+				<Example.Item title="dynamic height change, size">
+					<View gap={4}>
+						<View.Item>
+							<Button onClick={() => setHeight((prev) => prev + 10)}>Increase height</Button>
+						</View.Item>
+
+						<ScrollArea height="200px" scrollbarDisplay="visible">
+							<View height={height} padding={4} backgroundColor="neutral-faded" />
+						</ScrollArea>
+					</View>
+				</Example.Item>
+			</Example>
 		);
 	},
 };
