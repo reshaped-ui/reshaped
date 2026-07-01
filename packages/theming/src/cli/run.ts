@@ -1,12 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
+import { createRequire } from "node:module";
 import chalk from "chalk";
 import { Command } from "commander";
 
 import defaultConfig from "./reshaped.config";
 import { addTheme, addThemeFragment } from "./index";
 
+const require = createRequire(import.meta.url);
 const program = new Command();
 
 const importJSConfig = (configPath: string) => {
