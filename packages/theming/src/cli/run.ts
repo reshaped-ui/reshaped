@@ -1,7 +1,7 @@
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import process from "node:process";
-import { createRequire } from "node:module";
 import chalk from "chalk";
 import { Command } from "commander";
 
