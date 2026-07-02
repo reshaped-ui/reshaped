@@ -396,6 +396,80 @@ describe("flyout/calculateLayoutAdjustment", () => {
 		expect(result.styles.width).toBe(984);
 	});
 
+	test("adjusts height when content overflows on both sides", () => {
+		const result = calculateLayoutAdjustment({
+			position: "bottom",
+			styles: {
+				// Trigger is scrolled past the container top so content starts above it
+				top: -24,
+				left: 200,
+				bottom: null,
+				right: null,
+			},
+			flyoutBounds: createBounds(0, 0, 150, 2000),
+			triggerBounds: createBounds(200, -60, 50, 30),
+			containerBounds: { left: 0, top: 0, width: 1000, height: 800 },
+			fallbackAdjustLayout: true,
+			fallbackMinHeight: undefined,
+			width: undefined,
+		});
+
+		// overflow.top = 0 + 8 - (-24) = 32
+		// overflow.bottom = -24 + 2000 + 8 - 0 - 800 = 1184
+		// height = 2000 - 32 - 1184 = 784, trimmed on both edges
+		// top = -24 + 32 = 8
+		expect(result.styles.top).toBe(VIEWPORT_OFFSET);
+		expect(result.styles.height).toBe(800 - VIEWPORT_OFFSET * 2);
+	});
+
+	test("adjusts right value when right overflows for vertical position with right set", () => {
+		const result = calculateLayoutAdjustment({
+			position: "top-end",
+			styles: {
+				top: 100,
+				left: 900, // With flyout width 150, would overflow right edge
+				bottom: 500,
+				right: -50,
+			},
+			flyoutBounds: createBounds(0, 0, 150, 200),
+			triggerBounds: createBounds(900, 100, 50, 30),
+			containerBounds: { left: 0, top: 0, width: 1000, height: 800 },
+			fallbackAdjustLayout: true,
+			fallbackMinHeight: undefined,
+			width: undefined,
+		});
+
+		// overflow.right = 900 + 150 + 8 - 0 - 1000 = 58
+		// left = 900 - 58 = 842
+		// right = -50 + 58 = 8
+		expect(result.styles.left).toBe(842);
+		expect(result.styles.right).toBe(VIEWPORT_OFFSET);
+	});
+
+	test("adjusts bottom value when bottom overflows for horizontal position with bottom set", () => {
+		const result = calculateLayoutAdjustment({
+			position: "start-bottom",
+			styles: {
+				top: 700, // With flyout height 200, would overflow bottom edge
+				left: 100,
+				bottom: -100,
+				right: 800,
+			},
+			flyoutBounds: createBounds(0, 0, 150, 200),
+			triggerBounds: createBounds(100, 700, 50, 30),
+			containerBounds: { left: 0, top: 0, width: 1000, height: 800 },
+			fallbackAdjustLayout: true,
+			fallbackMinHeight: undefined,
+			width: undefined,
+		});
+
+		// overflow.bottom = 700 + 200 + 8 - 0 - 800 = 108
+		// top = 700 - 108 = 592
+		// bottom = -100 + 108 = 8
+		expect(result.styles.top).toBe(592);
+		expect(result.styles.bottom).toBe(VIEWPORT_OFFSET);
+	});
+
 	test("adjusts height and updates bottom value when bottom is set", () => {
 		const result = calculateLayoutAdjustment({
 			position: "end",

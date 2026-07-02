@@ -23,11 +23,13 @@ const getContainingBlockRect = (
 		offsetParent === document.body ||
 		offsetParent === document.documentElement
 	) {
+		// Initial containing block matches documentElement.clientWidth/Height,
+		// which excludes the classic scrollbars unlike window.innerWidth/Height
 		return {
 			left: -window.scrollX,
 			top: -window.scrollY,
-			right: window.innerWidth - window.scrollX,
-			bottom: window.innerHeight - window.scrollY,
+			right: document.documentElement.clientWidth - window.scrollX,
+			bottom: document.documentElement.clientHeight - window.scrollY,
 		};
 	}
 
@@ -82,7 +84,10 @@ const applyPosition = (
 
 	root.appendChild(contentClone);
 
-	const testPosition = (position: Position, options?: { width?: Width }) => {
+	const testPosition = (
+		position: Position,
+		options?: { width?: Width; disableMinHeight?: boolean }
+	) => {
 		if (options?.width === "100%") {
 			contentClone.style.width = `calc(100% - ${VIEWPORT_OFFSET * 2}px)`;
 		} else if (options?.width === "trigger") {
@@ -107,7 +112,7 @@ const applyPosition = (
 		const adjustedResult = calculateLayoutAdjustment({
 			...result,
 			fallbackAdjustLayout,
-			fallbackMinHeight,
+			fallbackMinHeight: options?.disableMinHeight ? undefined : fallbackMinHeight,
 			width: options?.width,
 			flyoutBounds,
 			containerBounds,
@@ -147,8 +152,9 @@ const applyPosition = (
 
 	// Try full width positions in case it doesn't fit on any side
 	if (!calculated) {
-		const smallScreenFallbackPositions: Position[] = (["top", "bottom"] as const).filter(
-			(position) => testOrder.includes(position)
+		// Keep the testOrder ordering so the preferred position is tried first
+		const smallScreenFallbackPositions: Position[] = testOrder.filter(
+			(position) => position === "top" || position === "bottom"
 		);
 
 		smallScreenFallbackPositions.some((position) => {
@@ -158,6 +164,25 @@ const applyPosition = (
 			if (visible) calculated = tested;
 
 			return visible;
+		});
+	}
+
+	// Nothing fits with the min height applied, meaning it's larger than the space
+	// available on any side, so drop it and pick the position showing the most content
+	if (!calculated && fallbackAdjustLayout && fallbackMinHeight) {
+		let bestHeight = 0;
+
+		testOrder.forEach((currentPosition) => {
+			const tested = testPosition(currentPosition, { width, disableMinHeight: true });
+
+			if (!testVisibility(tested)) return;
+
+			const testedHeight = tested.styles.height ?? Math.ceil(contentClone.clientHeight);
+
+			if (testedHeight > bestHeight) {
+				bestHeight = testedHeight;
+				calculated = tested;
+			}
 		});
 	}
 

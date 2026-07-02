@@ -149,6 +149,30 @@ describe("flyout/applyPosition", () => {
 		expect(result.position).toBe("start");
 	});
 
+	test("keeps content within the viewport when fallbackMinHeight doesn't fit on any side", () => {
+		// Child element keeps its size when content is cloned for the position tests
+		const child = document.createElement("div");
+		child.style.height = "2000px";
+		content.appendChild(child);
+
+		applyPosition({
+			content,
+			trigger,
+			triggerCoordinates: null,
+			position: "bottom",
+			fallbackPositions: ["bottom", "top"],
+			fallbackAdjustLayout: true,
+			fallbackMinHeight: `${window.innerHeight * 2}px`,
+			lastUsedPosition: null,
+			onDeactivate: vi.fn(),
+		});
+
+		const height = parseFloat(content.style.height);
+
+		expect(height).toBeGreaterThan(0);
+		expect(height).toBeLessThanOrEqual(window.innerHeight - 16);
+	});
+
 	test("removes content clone from DOM after calculation", () => {
 		const initialChildCount = document.body.children.length;
 

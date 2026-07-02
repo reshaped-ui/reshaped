@@ -54,6 +54,7 @@ const calculateLayoutAdjustment = (args: CalculateLayoutAdjustmentArgs) => {
 				if (bottom !== null) bottom = bottom - overflow.top;
 			} else if (overflow.bottom > 0) {
 				top = top - overflow.bottom;
+				if (bottom !== null) bottom = bottom + overflow.bottom;
 			}
 		} else {
 			if (overflow.left > 0) {
@@ -61,17 +62,27 @@ const calculateLayoutAdjustment = (args: CalculateLayoutAdjustmentArgs) => {
 				if (right !== null) right = right - overflow.left;
 			} else if (overflow.right > 0) {
 				left = left - overflow.right;
+				if (right !== null) right = right + overflow.right;
 			}
 		}
 
 		const updatedOverflow = getOverflow();
+		const overflowTop = Math.max(0, updatedOverflow.top);
+		const overflowBottom = Math.max(0, updatedOverflow.bottom);
 
-		if (updatedOverflow.top > 0) {
-			height = Math.max(parseInt(fallbackMinHeight ?? "0"), flyoutHeight - updatedOverflow.top);
-			top = top + (flyoutHeight - height);
-		} else if (updatedOverflow.bottom > 0) {
-			height = Math.max(parseInt(fallbackMinHeight ?? "0"), flyoutHeight - updatedOverflow.bottom);
-			if (bottom !== null) bottom = bottom + (flyoutHeight - height);
+		// Content can overflow on both sides at once, for example when the trigger
+		// is scrolled partially out of the container, so both edges have to be trimmed
+		if (overflowTop > 0 || overflowBottom > 0) {
+			height = Math.max(
+				parseInt(fallbackMinHeight ?? "0"),
+				flyoutHeight - overflowTop - overflowBottom
+			);
+
+			const trimmedHeight = flyoutHeight - height;
+			const trimmedTop = Math.min(overflowTop, trimmedHeight);
+
+			top = top + trimmedTop;
+			if (bottom !== null) bottom = bottom + (trimmedHeight - trimmedTop);
 		}
 	}
 
