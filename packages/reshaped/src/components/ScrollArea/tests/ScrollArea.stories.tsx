@@ -154,12 +154,12 @@ export const overscrollBehavior = {
 	),
 };
 
-export const fadeMask = {
-	name: "fadeMask",
+export const fade = {
+	name: "fade",
 	render: () => (
 		<Example>
-			<Example.Item title="fadeMask, vertical scroll">
-				<ScrollArea height="100px" fadeMask>
+			<Example.Item title="fade, vertical scroll">
+				<ScrollArea height="100px" fade>
 					<View backgroundColor="neutral-faded" padding={4}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
@@ -172,8 +172,8 @@ export const fadeMask = {
 				</ScrollArea>
 			</Example.Item>
 
-			<Example.Item title="fadeMask, horizontal scroll">
-				<ScrollArea height="100px" fadeMask>
+			<Example.Item title="fade, horizontal scroll">
+				<ScrollArea height="100px" fade>
 					<View backgroundColor="neutral-faded" padding={4} width="150%" height="100px">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s
@@ -181,8 +181,8 @@ export const fadeMask = {
 				</ScrollArea>
 			</Example.Item>
 
-			<Example.Item title="fadeMask, horizontal and vertical scroll">
-				<ScrollArea height="100px" fadeMask>
+			<Example.Item title="fade, horizontal and vertical scroll">
+				<ScrollArea height="100px" fade>
 					<View backgroundColor="neutral-faded" padding={4} width="150%">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
 						has been the industry's standard dummy text ever since the 1500s, when an unknown
@@ -195,8 +195,8 @@ export const fadeMask = {
 				</ScrollArea>
 			</Example.Item>
 
-			<Example.Item title="fadeMask, no scrollable overflow">
-				<ScrollArea height="100px" fadeMask>
+			<Example.Item title="fade, no scrollable overflow">
+				<ScrollArea height="100px" fade>
 					<View backgroundColor="neutral-faded" padding={4}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 					</View>

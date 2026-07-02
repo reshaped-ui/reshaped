@@ -13,7 +13,7 @@ export type Props = {
 	/** Control whether scroll can chain to parent scrollable containers */
 	overscrollBehavior?: "auto" | "contain";
 	/** Display a fade mask on the sides of the area that can be scrolled towards */
-	fadeMask?: boolean;
+	fade?: boolean;
 	/** Callback when the scroll area is scrolled */
 	onScroll?: (args: Coordinates) => void;
 	/** Height of the scroll area, literal css value or unit token multiplier */

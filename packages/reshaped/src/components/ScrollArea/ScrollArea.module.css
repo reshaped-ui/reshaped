@@ -1,4 +1,4 @@
-/* stylelint-disable plugin/browser-compat -- graceful degradation for browsers without scroll-driven animations support */
+/* stylelint-disable plugin/browser-compat -- graceful degradation for Firefox */
 @property --rs-scroll-area-fade-block-start {
 	syntax: "<length>";
 	initial-value: 0;
@@ -53,14 +53,7 @@
 	}
 }
 
-/*
- * Fade sizes are animated by the scroll position of the scrollable element itself,
- * so the mask only appears on the sides that can be scrolled towards.
- * Scroll timelines stay inactive for the axes without overflow, keeping the fade sizes at 0.
- * Browsers without scroll-driven animations support render the scroll area without the mask.
- */
-/* stylelint-disable plugin/browser-compat -- graceful degradation for browsers without scroll-driven animations support */
-@keyframes fade-mask-block-start {
+@keyframes fade-block-start {
 	from {
 		--rs-scroll-area-fade-block-start: 0px;
 	}
@@ -70,7 +63,7 @@
 	}
 }
 
-@keyframes fade-mask-block-end {
+@keyframes fade-block-end {
 	from {
 		--rs-scroll-area-fade-block-end: var(--rs-scroll-area-fade-size);
 	}
@@ -80,7 +73,7 @@
 	}
 }
 
-@keyframes fade-mask-inline-start {
+@keyframes fade-inline-start {
 	from {
 		--rs-scroll-area-fade-inline-start: 0px;
 	}
@@ -90,7 +83,7 @@
 	}
 }
 
-@keyframes fade-mask-inline-end {
+@keyframes fade-inline-end {
 	from {
 		--rs-scroll-area-fade-inline-end: var(--rs-scroll-area-fade-size);
 	}
@@ -101,7 +94,7 @@
 }
 
 @supports (animation-timeline: scroll(self block)) {
-	.--fade-mask {
+	.--fade {
 		--rs-scroll-area-fade-inline-direction: to right;
 
 		mask-image:
@@ -120,8 +113,7 @@
 				rgb(0 0 0 / 0%) 100%
 			);
 		mask-composite: intersect;
-		animation-name:
-			fade-mask-block-start, fade-mask-block-end, fade-mask-inline-start, fade-mask-inline-end;
+		animation-name: fade-block-start, fade-block-end, fade-inline-start, fade-inline-end;
 		animation-timing-function: linear;
 		animation-fill-mode: both;
 		animation-timeline:
@@ -133,11 +125,10 @@
 			calc(100% - var(--rs-scroll-area-fade-size)) 100%;
 	}
 
-	[dir="rtl"] .--fade-mask {
+	[dir="rtl"] .--fade {
 		--rs-scroll-area-fade-inline-direction: to left;
 	}
 }
-/* stylelint-enable plugin/browser-compat */
 
 .--overscroll-auto {
 	overscroll-behavior: auto;
