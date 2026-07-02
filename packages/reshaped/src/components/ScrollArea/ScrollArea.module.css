@@ -101,15 +101,31 @@
 			linear-gradient(
 				to bottom,
 				rgb(0 0 0 / 0%) 0,
+				rgb(0 0 0 / 10%) calc(var(--rs-scroll-area-fade-block-start) * 0.2),
+				rgb(0 0 0 / 35%) calc(var(--rs-scroll-area-fade-block-start) * 0.4),
+				rgb(0 0 0 / 65%) calc(var(--rs-scroll-area-fade-block-start) * 0.6),
+				rgb(0 0 0 / 90%) calc(var(--rs-scroll-area-fade-block-start) * 0.8),
 				rgb(0 0 0 / 100%) var(--rs-scroll-area-fade-block-start),
 				rgb(0 0 0 / 100%) calc(100% - var(--rs-scroll-area-fade-block-end)),
+				rgb(0 0 0 / 90%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.8),
+				rgb(0 0 0 / 65%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.6),
+				rgb(0 0 0 / 35%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.4),
+				rgb(0 0 0 / 10%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.2),
 				rgb(0 0 0 / 0%) 100%
 			),
 			linear-gradient(
 				var(--rs-scroll-area-fade-inline-direction),
 				rgb(0 0 0 / 0%) 0,
+				rgb(0 0 0 / 10%) calc(var(--rs-scroll-area-fade-inline-start) * 0.2),
+				rgb(0 0 0 / 35%) calc(var(--rs-scroll-area-fade-inline-start) * 0.4),
+				rgb(0 0 0 / 65%) calc(var(--rs-scroll-area-fade-inline-start) * 0.6),
+				rgb(0 0 0 / 90%) calc(var(--rs-scroll-area-fade-inline-start) * 0.8),
 				rgb(0 0 0 / 100%) var(--rs-scroll-area-fade-inline-start),
 				rgb(0 0 0 / 100%) calc(100% - var(--rs-scroll-area-fade-inline-end)),
+				rgb(0 0 0 / 90%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.8),
+				rgb(0 0 0 / 65%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.6),
+				rgb(0 0 0 / 35%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.4),
+				rgb(0 0 0 / 10%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.2),
 				rgb(0 0 0 / 0%) 100%
 			);
 		mask-composite: intersect;
