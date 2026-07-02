@@ -3,7 +3,6 @@
 import React, { isValidElement } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import useFadeSide from "@/hooks/_internal/useFadeSide";
 import { responsiveVariables } from "@/utilities/props";
 import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Table.types";
@@ -100,15 +99,11 @@ export const TableHead: React.FC<T.HeadProps> = (props) => {
 
 const Table: React.FC<T.Props> = (props) => {
 	const { children, border, columnBorder, className, attributes } = props;
-	const rootRef = React.useRef<HTMLDivElement>(null);
-	const fadeSide = useFadeSide(rootRef);
 	const rootClassNames = classNames(
 		s.root,
 		className,
 		border && s["--border-outer"],
-		columnBorder && s["--border-column"],
-		(fadeSide === "start" || fadeSide === "both") && s["--fade-start"],
-		(fadeSide === "end" || fadeSide === "both") && s["--fade-end"]
+		columnBorder && s["--border-column"]
 	);
 	const [firstChild] = React.Children.toArray(children);
 	const isElement = isValidElement(firstChild);
@@ -116,7 +111,7 @@ const Table: React.FC<T.Props> = (props) => {
 	const isHead = isElement && firstChild.type === TableHead;
 
 	return (
-		<div {...attributes} className={rootClassNames} ref={rootRef}>
+		<div {...attributes} className={rootClassNames}>
 			<table className={s.table}>
 				{isBody || isHead ? children : <TableBody>{children}</TableBody>}
 			</table>

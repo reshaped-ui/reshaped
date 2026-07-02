@@ -281,8 +281,8 @@ export const edgeCases = {
 			<Example.Item title="scroll fade">
 				<Table>
 					<Table.Row>
-						<Table.Heading width="500px">Column 1</Table.Heading>
-						<Table.Heading width="500px">Column 2</Table.Heading>
+						<Table.Heading minWidth="300px">Column 1</Table.Heading>
+						<Table.Heading minWidth="300px">Column 2</Table.Heading>
 					</Table.Row>
 					<Table.Row>
 						<Table.Cell>Cell 1</Table.Cell>

@@ -13,16 +13,62 @@
 /* stylelint-enable plugin/browser-compat */
 
 .root {
+	--rs-table-fade-size: var(--rs-unit-x8);
+
 	overflow: auto;
-	mask-image: linear-gradient(
-		to right,
-		rgb(0 0 0 / 0%) 0,
-		rgb(0 0 0 / 100%) var(--rs-table-fade-start),
-		rgb(0 0 0 / 100%) calc(100% - var(--rs-table-fade-end)),
-		rgb(0 0 0 / 0%) 100%
-	);
-	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
-	transition-property: --rs-table-fade-start, --rs-table-fade-end;
+}
+
+@keyframes fade-start {
+	from {
+		--rs-table-fade-start: 0px;
+	}
+
+	to {
+		--rs-table-fade-start: var(--rs-table-fade-size);
+	}
+}
+
+@keyframes fade-end {
+	from {
+		--rs-table-fade-end: var(--rs-table-fade-size);
+	}
+
+	to {
+		--rs-table-fade-end: 0px;
+	}
+}
+
+@supports (animation-timeline: scroll(self inline)) {
+	.root {
+		--rs-table-fade-direction: to right;
+
+		mask-image: linear-gradient(
+			var(--rs-table-fade-direction),
+			rgb(0 0 0 / 0%) 0,
+			rgb(0 0 0 / 10%) calc(var(--rs-table-fade-start) * 0.2),
+			rgb(0 0 0 / 35%) calc(var(--rs-table-fade-start) * 0.4),
+			rgb(0 0 0 / 65%) calc(var(--rs-table-fade-start) * 0.6),
+			rgb(0 0 0 / 90%) calc(var(--rs-table-fade-start) * 0.8),
+			rgb(0 0 0 / 100%) var(--rs-table-fade-start),
+			rgb(0 0 0 / 100%) calc(100% - var(--rs-table-fade-end)),
+			rgb(0 0 0 / 90%) calc(100% - var(--rs-table-fade-end) * 0.8),
+			rgb(0 0 0 / 65%) calc(100% - var(--rs-table-fade-end) * 0.6),
+			rgb(0 0 0 / 35%) calc(100% - var(--rs-table-fade-end) * 0.4),
+			rgb(0 0 0 / 10%) calc(100% - var(--rs-table-fade-end) * 0.2),
+			rgb(0 0 0 / 0%) 100%
+		);
+		animation-name: fade-start, fade-end;
+		animation-timing-function: linear;
+		animation-fill-mode: both;
+		animation-timeline: scroll(self inline), scroll(self inline);
+		animation-range:
+			0 var(--rs-table-fade-size),
+			calc(100% - var(--rs-table-fade-size)) 100%;
+	}
+
+	[dir="rtl"] .root {
+		--rs-table-fade-direction: to left;
+	}
 }
 
 .table {
@@ -97,14 +143,4 @@
 	&:not(:last-child) {
 		padding-inline-end: calc(var(--rs-unit-x1) * var(--rs-table-p-horizontal-s));
 	}
-}
-
-.--fade-start,
-[dir="rtl"] .--fade-end {
-	--rs-table-fade-start: var(--rs-unit-x4);
-}
-
-.--fade-end,
-[dir="rtl"] .--fade-start {
-	--rs-table-fade-end: var(--rs-unit-x4);
 }

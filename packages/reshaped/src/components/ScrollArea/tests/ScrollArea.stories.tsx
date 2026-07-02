@@ -154,6 +154,58 @@ export const overscrollBehavior = {
 	),
 };
 
+export const fade = {
+	name: "fade",
+	render: () => (
+		<Example>
+			<Example.Item title="fade, vertical scroll">
+				<ScrollArea height="100px" fade>
+					<View backgroundColor="neutral-faded" padding={4}>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+						has been the industry's standard dummy text ever since the 1500s, when an unknown
+						printer took a galley of type and scrambled it to make a type specimen book. It has
+						survived not only five centuries, but also the leap into electronic typesetting,
+						remaining essentially unchanged. It was popularised in the 1960s with the release of
+						Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+						publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					</View>
+				</ScrollArea>
+			</Example.Item>
+
+			<Example.Item title="fade, horizontal scroll">
+				<ScrollArea height="100px" fade>
+					<View backgroundColor="neutral-faded" padding={4} width="150%" height="100px">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+						has been the industry's standard dummy text ever since the 1500s
+					</View>
+				</ScrollArea>
+			</Example.Item>
+
+			<Example.Item title="fade, horizontal and vertical scroll">
+				<ScrollArea height="100px" fade>
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+						has been the industry's standard dummy text ever since the 1500s, when an unknown
+						printer took a galley of type and scrambled it to make a type specimen book. It has
+						survived not only five centuries, but also the leap into electronic typesetting,
+						remaining essentially unchanged. It was popularised in the 1960s with the release of
+						Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+						publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					</View>
+				</ScrollArea>
+			</Example.Item>
+
+			<Example.Item title="fade, no scrollable overflow">
+				<ScrollArea height="100px" fade>
+					<View backgroundColor="neutral-faded" padding={4}>
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+					</View>
+				</ScrollArea>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const height = {
 	name: "height, maxHeight",
 	render: () => (

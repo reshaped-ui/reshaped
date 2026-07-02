@@ -36,5 +36,3 @@ Read our [contribution guide](CONTRIBUTING.md) to learn about our principles, de
 ## License
 
 This project is licensed under the terms of the MIT license.
-
-

@@ -1,6 +1,33 @@
+/* stylelint-disable plugin/browser-compat -- graceful degradation for Firefox */
+@property --rs-scroll-area-fade-block-start {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+
+@property --rs-scroll-area-fade-block-end {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+
+@property --rs-scroll-area-fade-inline-start {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+
+@property --rs-scroll-area-fade-inline-end {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+/* stylelint-enable plugin/browser-compat */
+
 .root {
 	--rs-scroll-area-thumb-size: var(--rs-unit-x1);
 	--rs-scroll-area-thumb-offset: var(--rs-unit-x1);
+	--rs-scroll-area-fade-size: var(--rs-unit-x8);
 
 	overflow: hidden;
 	height: 100%;
@@ -23,6 +50,99 @@
 		display: none;
 		width: 0;
 		height: 0;
+	}
+}
+
+@keyframes fade-block-start {
+	from {
+		--rs-scroll-area-fade-block-start: 0px;
+	}
+
+	to {
+		--rs-scroll-area-fade-block-start: var(--rs-scroll-area-fade-size);
+	}
+}
+
+@keyframes fade-block-end {
+	from {
+		--rs-scroll-area-fade-block-end: var(--rs-scroll-area-fade-size);
+	}
+
+	to {
+		--rs-scroll-area-fade-block-end: 0px;
+	}
+}
+
+@keyframes fade-inline-start {
+	from {
+		--rs-scroll-area-fade-inline-start: 0px;
+	}
+
+	to {
+		--rs-scroll-area-fade-inline-start: var(--rs-scroll-area-fade-size);
+	}
+}
+
+@keyframes fade-inline-end {
+	from {
+		--rs-scroll-area-fade-inline-end: var(--rs-scroll-area-fade-size);
+	}
+
+	to {
+		--rs-scroll-area-fade-inline-end: 0px;
+	}
+}
+
+@supports (animation-timeline: scroll(self block)) {
+	.--fade {
+		--rs-scroll-area-fade-inline-direction: to right;
+
+		mask-image:
+			linear-gradient(
+				to bottom,
+				rgb(0 0 0 / 0%) 0,
+				rgb(0 0 0 / 10%) calc(var(--rs-scroll-area-fade-block-start) * 0.2),
+				rgb(0 0 0 / 35%) calc(var(--rs-scroll-area-fade-block-start) * 0.4),
+				rgb(0 0 0 / 65%) calc(var(--rs-scroll-area-fade-block-start) * 0.6),
+				rgb(0 0 0 / 90%) calc(var(--rs-scroll-area-fade-block-start) * 0.8),
+				rgb(0 0 0 / 100%) var(--rs-scroll-area-fade-block-start),
+				rgb(0 0 0 / 100%) calc(100% - var(--rs-scroll-area-fade-block-end)),
+				rgb(0 0 0 / 90%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.8),
+				rgb(0 0 0 / 65%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.6),
+				rgb(0 0 0 / 35%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.4),
+				rgb(0 0 0 / 10%) calc(100% - var(--rs-scroll-area-fade-block-end) * 0.2),
+				rgb(0 0 0 / 0%) 100%
+			),
+			linear-gradient(
+				var(--rs-scroll-area-fade-inline-direction),
+				rgb(0 0 0 / 0%) 0,
+				rgb(0 0 0 / 10%) calc(var(--rs-scroll-area-fade-inline-start) * 0.2),
+				rgb(0 0 0 / 35%) calc(var(--rs-scroll-area-fade-inline-start) * 0.4),
+				rgb(0 0 0 / 65%) calc(var(--rs-scroll-area-fade-inline-start) * 0.6),
+				rgb(0 0 0 / 90%) calc(var(--rs-scroll-area-fade-inline-start) * 0.8),
+				rgb(0 0 0 / 100%) var(--rs-scroll-area-fade-inline-start),
+				rgb(0 0 0 / 100%) calc(100% - var(--rs-scroll-area-fade-inline-end)),
+				rgb(0 0 0 / 90%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.8),
+				rgb(0 0 0 / 65%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.6),
+				rgb(0 0 0 / 35%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.4),
+				rgb(0 0 0 / 10%) calc(100% - var(--rs-scroll-area-fade-inline-end) * 0.2),
+				rgb(0 0 0 / 0%) 100%
+			);
+		mask-composite: intersect;
+		animation-name: fade-block-start, fade-block-end, fade-inline-start, fade-inline-end;
+		animation-timing-function: linear;
+		animation-fill-mode: both;
+		animation-timeline:
+			scroll(self block), scroll(self block), scroll(self inline), scroll(self inline);
+		animation-range:
+			0 var(--rs-scroll-area-fade-size),
+			calc(100% - var(--rs-scroll-area-fade-size)) 100%,
+			0 var(--rs-scroll-area-fade-size),
+			calc(100% - var(--rs-scroll-area-fade-size)) 100%;
+	}
+
+	[dir="rtl"] .--fade {
+		--rs-scroll-area-fade-inline-direction: to left;
 	}
 }
 
