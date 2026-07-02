@@ -104,6 +104,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		maxHeight,
 		scrollbarDisplay = "hover",
 		overscrollBehavior = "auto",
+		fadeMask,
 		onScroll,
 		className,
 		attributes,
@@ -124,7 +125,8 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	);
 	const scrollableClassNames = classNames(
 		s.scrollable,
-		overscrollBehavior && s[`--overscroll-${overscrollBehavior}`]
+		overscrollBehavior && s[`--overscroll-${overscrollBehavior}`],
+		fadeMask && s["--fade-mask"]
 	);
 
 	const updateScroll = React.useCallback(() => {
