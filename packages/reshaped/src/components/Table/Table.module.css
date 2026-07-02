@@ -13,7 +13,7 @@
 /* stylelint-enable plugin/browser-compat */
 
 .root {
-	--rs-table-fade-size: var(--rs-unit-x4);
+	--rs-table-fade-size: var(--rs-unit-x8);
 
 	overflow: auto;
 }

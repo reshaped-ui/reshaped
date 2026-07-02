@@ -27,7 +27,7 @@
 .root {
 	--rs-scroll-area-thumb-size: var(--rs-unit-x1);
 	--rs-scroll-area-thumb-offset: var(--rs-unit-x1);
-	--rs-scroll-area-fade-size: var(--rs-unit-x6);
+	--rs-scroll-area-fade-size: var(--rs-unit-x8);
 
 	overflow: hidden;
 	height: 100%;
