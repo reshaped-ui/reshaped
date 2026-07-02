@@ -111,8 +111,8 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	insetTop?: G.Responsive<TStyles.Inset>;
 	/** Inset bottom, base unit token number multiplier when used as a number */
 	insetBottom?: G.Responsive<TStyles.Inset>;
-	/** z-index style */
-	zIndex?: number;
+	/** z-index style, based on the z-index tokens when used as a string */
+	zIndex?: TStyles.ZIndex;
 	/** Shadow style, based on the shadow tokens */
 	shadow?: TStyles.Shadow;
 	/** Overflow style */

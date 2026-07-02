@@ -135,6 +135,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		minWidth,
 		minHeight,
 		position,
+		zIndex,
 		aspectRatio,
 		textAlign,
 		justify,
@@ -299,7 +300,6 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		...attributes?.style,
 		...responsiveVariables("--rs-view-gap", gap),
 		...mixinStyles.variables,
-		...(zIndex ? { "--rs-view-z": zIndex } : {}),
 	};
 
 	return (

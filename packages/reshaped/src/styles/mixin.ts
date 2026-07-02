@@ -39,6 +39,7 @@ import radius from "@/styles/resolvers/radius";
 import shadow from "@/styles/resolvers/shadow";
 import textAlign from "@/styles/resolvers/textAlign";
 import width from "@/styles/resolvers/width";
+import zIndex from "@/styles/resolvers/zIndex";
 import type { Mixin } from "@/styles/types";
 
 const mixinMap = {
@@ -78,6 +79,7 @@ const mixinMap = {
 	textAlign,
 	width,
 	shadow,
+	zIndex,
 };
 
 export const resolveMixin = (mixin: Mixin) => {

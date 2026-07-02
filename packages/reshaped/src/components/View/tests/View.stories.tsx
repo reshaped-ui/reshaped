@@ -1021,6 +1021,68 @@ export const inset = {
 	),
 };
 
+export const zIndex = {
+	name: "zIndex",
+	render: () => (
+		<Example>
+			<Example.Item title="zIndex: number, higher value stacks on top">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="critical"
+						position="absolute"
+						insetTop={2}
+						insetStart={2}
+						zIndex={1}
+						height={12}
+						width={12}
+					/>
+					<View
+						backgroundColor="primary"
+						position="absolute"
+						insetTop={6}
+						insetStart={6}
+						zIndex={2}
+						height={12}
+						width={12}
+					/>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="zIndex: token, fixed stacks above absolute above relative">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="critical"
+						position="absolute"
+						insetTop={2}
+						insetStart={2}
+						zIndex="relative"
+						height={12}
+						width={12}
+					/>
+					<View
+						backgroundColor="primary"
+						position="absolute"
+						insetTop={6}
+						insetStart={6}
+						zIndex="absolute"
+						height={12}
+						width={12}
+					/>
+					<View
+						backgroundColor="positive"
+						position="absolute"
+						insetTop={10}
+						insetStart={10}
+						zIndex="fixed"
+						height={12}
+						width={12}
+					/>
+				</View>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const animated = {
 	name: "animated",
 	render: () => {

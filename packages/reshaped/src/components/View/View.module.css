@@ -1,9 +1,7 @@
 .root {
 	--rs-view-gaps-count-multiplier: 1;
-	--rs-view-z: auto;
 	--rs-view-gap-value: calc(var(--rs-view-gap) * var(--rs-unit-x1));
 
-	z-index: var(--rs-view-z);
 	gap: var(--rs-view-gap-value);
 	position: relative;
 }

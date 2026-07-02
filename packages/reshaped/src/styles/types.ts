@@ -26,6 +26,7 @@ export type Justify = "start" | "center" | "end" | "space-between";
 export type Align = "start" | "center" | "end" | "stretch" | "baseline";
 export type Radius = "small" | "medium" | "large" | "circular" | "none";
 export type Position = "relative" | "absolute" | "fixed" | "sticky" | "static";
+export type ZIndex = number | "relative" | "absolute" | "fixed";
 export type Shadow =
 	| "outline"
 	| "outline-intense"
@@ -87,6 +88,7 @@ export type Mixin = {
 	minHeight?: G.Responsive<MinHeight>;
 
 	position?: G.Responsive<Position>;
+	zIndex?: ZIndex;
 	inset?: G.Responsive<Inset>;
 	insetTop?: G.Responsive<Inset>;
 	insetBottom?: G.Responsive<Inset>;

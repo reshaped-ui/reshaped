@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Styles/ZIndex > handles numeric value 1`] = `
+{
+  "variables": {
+    "--rs-z": 5,
+  },
+}
+`;
+
+exports[`Styles/ZIndex > handles token value 1`] = `
+{
+  "variables": {
+    "--rs-z": "var(--rs-z-index-fixed)",
+  },
+}
+`;
+
+exports[`Styles/ZIndex > handles undefined value 1`] = `{}`;
