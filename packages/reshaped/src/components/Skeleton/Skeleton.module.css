@@ -1,6 +1,14 @@
 .root {
+	--rs-skeleton-opacity-start: 0.5;
+	--rs-skeleton-opacity-end: 0.25;
+
 	animation: rs-skeleton-pulse 2.5s ease-in-out infinite;
 	min-height: var(--rs-unit-x5);
+
+	[data-rs-color-mode="dark"] & {
+		--rs-skeleton-opacity-start: 0.3;
+		--rs-skeleton-opacity-end: 0.2;
+	}
 }
 
 @media (prefers-reduced-motion) {
@@ -11,14 +19,14 @@
 
 @keyframes rs-skeleton-pulse {
 	0% {
-		opacity: 1;
+		opacity: var(--rs-skeleton-opacity-start);
 	}
 
 	50% {
-		opacity: 0.6;
+		opacity: var(--rs-skeleton-opacity-end);
 	}
 
 	100% {
-		opacity: 1;
+		opacity: var(--rs-skeleton-opacity-start);
 	}
 }

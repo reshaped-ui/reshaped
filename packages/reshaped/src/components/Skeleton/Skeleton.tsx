@@ -10,7 +10,7 @@ const Skeleton: React.FC<T.Props> = (props) => {
 
 	return (
 		<View
-			backgroundColor="neutral-faded"
+			backgroundColor="neutral"
 			width={width}
 			height={height}
 			borderRadius={borderRadius}
