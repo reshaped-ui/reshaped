@@ -384,7 +384,9 @@
 			content: "";
 			position: absolute;
 			pointer-events: none;
-			z-index: var(--rs-z-index-relative);
+
+			/* Keep the group border above highlighted buttons so a plain highlight color doesn't mask it */
+			z-index: calc(var(--rs-z-index-relative) + 1);
 			inset: 0;
 			border: 1px solid var(--rs-color-border-neutral);
 			border-radius: 6px;
@@ -396,7 +398,7 @@
 			inset: 1px;
 			pointer-events: none;
 			border-radius: inherit;
-			z-index: var(--rs-z-index-relative);
+			z-index: calc(var(--rs-z-index-relative) + 1);
 		}
 	}
 }
