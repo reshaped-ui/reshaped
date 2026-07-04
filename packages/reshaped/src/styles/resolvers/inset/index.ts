@@ -1,5 +1,6 @@
-import { responsiveVariables } from "@/utilities/props";
+import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
 import * as T from "@/styles/types";
+import s from "./inset.module.css";
 import "./inset.css";
 
 const inset: T.StyleResolver<T.Inset> = (value) => {
@@ -27,14 +28,34 @@ export const insetEnd: T.StyleResolver<T.Inset> = (value) => {
 	return { variables: responsiveVariables("--rs-inset-end", value) };
 };
 
-export const insetInline: T.StyleResolver<T.Inset> = (value) => {
+export const insetInline: T.StyleResolver<T.InsetAxis> = (value) => {
 	if (value === undefined) return {};
-	return { variables: responsiveVariables("--rs-inset-inline", value) };
+	const classNames = responsiveClassNames(
+		s,
+		(value) => (value === "center" ? "--inline-center" : "--inline-unit"),
+		value,
+		{ excludeValueFromClassName: true }
+	);
+
+	return {
+		classNames: [s.root, classNames],
+		variables: responsiveVariables("--rs-inset-inline", value),
+	};
 };
 
-export const insetBlock: T.StyleResolver<T.Inset> = (value) => {
+export const insetBlock: T.StyleResolver<T.InsetAxis> = (value) => {
 	if (value === undefined) return {};
-	return { variables: responsiveVariables("--rs-inset-block", value) };
+	const classNames = responsiveClassNames(
+		s,
+		(value) => (value === "center" ? "--block-center" : "--block-unit"),
+		value,
+		{ excludeValueFromClassName: true }
+	);
+
+	return {
+		classNames: [s.root, classNames],
+		variables: responsiveVariables("--rs-inset-block", value),
+	};
 };
 
 export default inset;

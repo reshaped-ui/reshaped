@@ -1,9 +1,13 @@
 import type React from "react";
+import type { ClassName } from "@reshaped/utilities";
 
 import * as T from "@/styles/types";
 import "./zIndex.css";
 
-const zIndex: (value?: T.ZIndex) => { variables?: React.CSSProperties } = (value) => {
+const zIndex: (value?: T.ZIndex) => {
+	variables?: React.CSSProperties;
+	classNames?: ClassName;
+} = (value) => {
 	if (value === undefined) return {};
 
 	return {

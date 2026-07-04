@@ -111,6 +111,10 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	insetTop?: G.Responsive<TStyles.Inset>;
 	/** Inset bottom, base unit token number multiplier when used as a number */
 	insetBottom?: G.Responsive<TStyles.Inset>;
+	/** Inset inline, base unit token number multiplier when used as a number, "center" centers on the inline axis */
+	insetInline?: G.Responsive<TStyles.InsetAxis>;
+	/** Inset block, base unit token number multiplier when used as a number, "center" centers on the block axis */
+	insetBlock?: G.Responsive<TStyles.InsetAxis>;
 	/** z-index style, based on the z-index tokens when used as a string */
 	zIndex?: TStyles.ZIndex;
 	/** Shadow style, based on the shadow tokens */
