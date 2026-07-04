@@ -1,0 +1,57 @@
+/* stylelint-disable plugin/browser-compat -- graceful degradation, var() fallbacks keep centering working without @property */
+@property --rs-inset-translate-x {
+	syntax: "<length-percentage>";
+	initial-value: 0;
+	inherits: false;
+}
+
+@property --rs-inset-translate-y {
+	syntax: "<length-percentage>";
+	initial-value: 0;
+	inherits: false;
+}
+/* stylelint-enable plugin/browser-compat */
+
+@responsive .root[style*="--rs-inset-inline-"] {
+	@variable --rs-inset-inline 0;
+}
+
+@responsive .root[style*="--rs-inset-block-"] {
+	@variable --rs-inset-block 0;
+}
+
+@responsive .--inline {
+	@value center {
+		/* Physical properties keep centering direction-agnostic in RTL */
+		left: 50%;
+		right: auto;
+
+		--rs-inset-translate-x: -50%;
+
+		translate: var(--rs-inset-translate-x, 0) var(--rs-inset-translate-y, 0);
+	}
+
+	@value unit {
+		--rs-inset-translate-x: 0;
+
+		inset-inline: calc(var(--rs-inset-inline) * var(--rs-unit-x1));
+	}
+}
+
+@responsive .--block {
+	@value center {
+		/* Physical properties keep centering direction-agnostic in RTL */
+		top: 50%;
+		bottom: auto;
+
+		--rs-inset-translate-y: -50%;
+
+		translate: var(--rs-inset-translate-x, 0) var(--rs-inset-translate-y, 0);
+	}
+
+	@value unit {
+		--rs-inset-translate-y: 0;
+
+		inset-block: calc(var(--rs-inset-block) * var(--rs-unit-x1));
+	}
+}

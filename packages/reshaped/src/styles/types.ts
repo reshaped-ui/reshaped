@@ -11,6 +11,7 @@ type Size = Literal | Unit;
 export type Margin = Unit;
 export type Padding = Unit;
 export type Inset = Unit | "auto";
+export type InsetAxis = Inset | "center";
 export type AspectRatio = number;
 export type Bleed = Unit;
 
@@ -94,8 +95,8 @@ export type Mixin = {
 	insetBottom?: G.Responsive<Inset>;
 	insetStart?: G.Responsive<Inset>;
 	insetEnd?: G.Responsive<Inset>;
-	insetInline?: G.Responsive<Inset>;
-	insetBlock?: G.Responsive<Inset>;
+	insetInline?: G.Responsive<InsetAxis>;
+	insetBlock?: G.Responsive<InsetAxis>;
 
 	padding?: G.Responsive<Padding>;
 	paddingTop?: G.Responsive<Padding>;

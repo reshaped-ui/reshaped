@@ -112,8 +112,16 @@ describe("Styles/Inset/Inline", () => {
 		expect(insetInline()).toMatchSnapshot();
 	});
 
+	test("handles center value", () => {
+		expect(insetInline("center")).toMatchSnapshot();
+	});
+
 	test("handles responsive value", async () => {
 		expect(insetInline({ s: 4, m: 0, l: 2 })).toMatchSnapshot();
+	});
+
+	test("handles responsive center value", async () => {
+		expect(insetInline({ s: "center", m: 4 })).toMatchSnapshot();
 	});
 });
 
@@ -130,7 +138,15 @@ describe("Styles/Inset/Block", () => {
 		expect(insetBlock()).toMatchSnapshot();
 	});
 
+	test("handles center value", () => {
+		expect(insetBlock("center")).toMatchSnapshot();
+	});
+
 	test("handles responsive value", async () => {
 		expect(insetBlock({ s: 4, m: 0, l: 2 })).toMatchSnapshot();
+	});
+
+	test("handles responsive center value", async () => {
+		expect(insetBlock({ s: "center", m: 4 })).toMatchSnapshot();
 	});
 });

@@ -1005,6 +1005,67 @@ export const inset = {
 				</View>
 			</Example.Item>
 
+			<Example.Item title="insetInline: 4">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="neutral"
+						position="absolute"
+						insetInline={4}
+						height={10}
+						width={10}
+					/>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="insetBlock: 4">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="neutral"
+						position="absolute"
+						insetBlock={4}
+						height={10}
+						width={10}
+					/>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="insetInline: center">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="neutral"
+						position="absolute"
+						insetInline="center"
+						height={10}
+						width={10}
+					/>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="insetBlock: center">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="neutral"
+						position="absolute"
+						insetBlock="center"
+						height={10}
+						width={10}
+					/>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="insetInline: center, insetBlock: center">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="neutral"
+						position="absolute"
+						insetInline="center"
+						insetBlock="center"
+						height={10}
+						width={10}
+					/>
+				</View>
+			</Example.Item>
+
 			<Example.Item title="responsive, [s] insetBottom: 4 [m+] insetEnd: 4">
 				<View backgroundColor="neutral-faded" width={25} height={25}>
 					<View
@@ -1012,6 +1073,18 @@ export const inset = {
 						position="absolute"
 						insetBottom={{ s: 4, m: "auto" }}
 						insetEnd={{ s: "auto", m: 4 }}
+						height={10}
+						width={10}
+					/>
+				</View>
+			</Example.Item>
+
+			<Example.Item title="responsive, [s] insetInline: center [m+] insetInline: 4">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="neutral"
+						position="absolute"
+						insetInline={{ s: "center", m: 4 }}
 						height={10}
 						width={10}
 					/>

@@ -98,6 +98,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		insetBottom,
 		insetStart,
 		insetEnd,
+		insetInline,
+		insetBlock,
 		zIndex,
 
 		/**
@@ -127,6 +129,8 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 		insetBottom,
 		insetStart,
 		insetEnd,
+		insetInline,
+		insetBlock,
 		bleed,
 		width,
 		height,

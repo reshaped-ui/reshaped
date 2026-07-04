@@ -30,22 +30,72 @@ exports[`Styles/Inset > handles undefined value 1`] = `{}`;
 
 exports[`Styles/Inset/Block > handles 0 value 1`] = `
 {
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--block-unit_31d553",
+    ],
+  ],
   "variables": {
     "--rs-inset-block-s": 0,
   },
 }
 `;
 
+exports[`Styles/Inset/Block > handles center value 1`] = `
+{
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--block-center_31d553",
+    ],
+  ],
+  "variables": {
+    "--rs-inset-block-s": "center",
+  },
+}
+`;
+
 exports[`Styles/Inset/Block > handles positive value 1`] = `
 {
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--block-unit_31d553",
+    ],
+  ],
   "variables": {
     "--rs-inset-block-s": 4,
   },
 }
 `;
 
+exports[`Styles/Inset/Block > handles responsive center value 1`] = `
+{
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--block-center_31d553",
+      "_--block-unit--m_31d553",
+    ],
+  ],
+  "variables": {
+    "--rs-inset-block-m": 4,
+    "--rs-inset-block-s": "center",
+  },
+}
+`;
+
 exports[`Styles/Inset/Block > handles responsive value 1`] = `
 {
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--block-unit_31d553",
+      "_--block-unit--m_31d553",
+      "_--block-unit--l_31d553",
+    ],
+  ],
   "variables": {
     "--rs-inset-block-l": 2,
     "--rs-inset-block-m": 0,
@@ -114,22 +164,72 @@ exports[`Styles/Inset/End > handles undefined value 1`] = `{}`;
 
 exports[`Styles/Inset/Inline > handles 0 value 1`] = `
 {
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--inline-unit_31d553",
+    ],
+  ],
   "variables": {
     "--rs-inset-inline-s": 0,
   },
 }
 `;
 
+exports[`Styles/Inset/Inline > handles center value 1`] = `
+{
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--inline-center_31d553",
+    ],
+  ],
+  "variables": {
+    "--rs-inset-inline-s": "center",
+  },
+}
+`;
+
 exports[`Styles/Inset/Inline > handles positive value 1`] = `
 {
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--inline-unit_31d553",
+    ],
+  ],
   "variables": {
     "--rs-inset-inline-s": 4,
   },
 }
 `;
 
+exports[`Styles/Inset/Inline > handles responsive center value 1`] = `
+{
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--inline-center_31d553",
+      "_--inline-unit--m_31d553",
+    ],
+  ],
+  "variables": {
+    "--rs-inset-inline-m": 4,
+    "--rs-inset-inline-s": "center",
+  },
+}
+`;
+
 exports[`Styles/Inset/Inline > handles responsive value 1`] = `
 {
+  "classNames": [
+    "_root_31d553",
+    [
+      "_--inline-unit_31d553",
+      "_--inline-unit--m_31d553",
+      "_--inline-unit--l_31d553",
+    ],
+  ],
   "variables": {
     "--rs-inset-inline-l": 2,
     "--rs-inset-inline-m": 0,
