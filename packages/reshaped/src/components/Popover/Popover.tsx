@@ -12,7 +12,7 @@ const Popover: React.FC<T.Props> = (props) => {
 		triggerType = "click",
 		position = "bottom",
 		elevation = "overlay",
-		borderRadius = "large",
+		borderRadius = "medium",
 		padding = 4,
 		...flyoutProps
 	} = props;

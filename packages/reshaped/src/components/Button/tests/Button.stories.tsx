@@ -412,6 +412,19 @@ export const highlighted = {
 					</Button>
 				</View>
 			</Example.Item>
+			<Example.Item title="highlighted, color: primary, all variants">
+				<View gap={3} direction="row">
+					<Button highlighted color="primary" icon={IconZap}>
+						Button
+					</Button>
+					<Button highlighted color="primary" variant="outline" icon={IconZap}>
+						Button
+					</Button>
+					<Button highlighted color="critical" variant="ghost" icon={IconZap}>
+						Button
+					</Button>
+				</View>
+			</Example.Item>
 			<Example.Item title="highlighted, color: critical, all variants">
 				<View gap={3} direction="row">
 					<Button highlighted color="critical" icon={IconZap}>
@@ -753,38 +766,6 @@ export const group: StoryObj = {
 							</Button>
 						</Button.Group>
 					))}
-				</View>
-			</Example.Item>
-
-			<Example.Item title="variant: outline, highlighted">
-				<View gap={2} align="start">
-					{(["neutral", "primary", "critical", "positive"] as const).map((color) => (
-						<Button.Group key={color}>
-							<Button color={color} variant="outline">
-								One
-							</Button>
-							<Button color={color} variant="outline" highlighted>
-								Two
-							</Button>
-							<Button color={color} variant="outline">
-								Three
-							</Button>
-						</Button.Group>
-					))}
-					{/* Plain (opaque) highlight color should not mask the group border – see #649 */}
-					<Button.Group
-						attributes={{
-							style: {
-								["--rs-color-background-neutral-highlighted-faded" as string]: "#d4d4d4",
-							},
-						}}
-					>
-						<Button variant="outline">One</Button>
-						<Button variant="outline" highlighted>
-							Two
-						</Button>
-						<Button variant="outline">Three</Button>
-					</Button.Group>
 				</View>
 			</Example.Item>
 
