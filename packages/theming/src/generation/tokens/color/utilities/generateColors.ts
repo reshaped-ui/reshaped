@@ -111,8 +111,10 @@ const generateColorValues = (
 		fgDarkLightness,
 		neutral ? 0.06 : 0.1
 	);
-	const bgHighlightedFaded = neutral ? { ...bg, alpha: 0.48 } : { ...bg, alpha: 0.06 };
-	const bgHighlightedFadedDark = neutral ? { ...bgDark, alpha: 0.28 } : { ...bgDark, alpha: 0.08 };
+	const bgHighlightedFaded = neutral ? { l: 0, c: 0, h: 0, alpha: 0.03 } : { ...bg, alpha: 0.06 };
+	const bgHighlightedFadedDark = neutral
+		? { l: 1, c: 0, h: 0, alpha: 0.05 }
+		: { ...bgDark, alpha: 0.08 };
 
 	const fg = { ...bg, l: fgLightness };
 	const fgDark = neutral
@@ -120,10 +122,10 @@ const generateColorValues = (
 		: { ...bgDark, l: fgDarkLightness, c: bg.c * 0.85 };
 
 	const bd = neutral ? { ...bg, l: 0, alpha: 0.12 } : { ...bg, l: bg.l - 0.04 };
-	const bdDark = neutral ? { ...bgDark, l: 1, alpha: 0.1 } : { ...bgDark, l: bgDark.l + 0.1 };
+	const bdDark = neutral ? { ...bgDark, l: 1, alpha: 0.11 } : { ...bgDark, l: bgDark.l + 0.1 };
 	const bdFaded = neutral ? { ...bgFaded, l: 0, alpha: 0.08 } : { ...bgFaded, l: bgFaded.l - 0.04 };
 	const bdFadedDark = neutral
-		? { ...bgFadedDark, l: 1, alpha: 0.07 }
+		? { ...bgFadedDark, l: 1, alpha: 0.08 }
 		: { ...bgFadedDark, l: bgFadedDark.l + 0.06 };
 
 	const output = {
@@ -159,8 +161,8 @@ const generateColorValues = (
 
 	if (neutral) {
 		output[`foreground${capitalizedKey}Faded`] = {
-			oklch: { ...fg, l: fg.l + 0.25 },
-			oklchDark: { ...fgDark, l: fgDark.l - 0.15 },
+			oklch: { ...fg, l: fg.l + 0.3 },
+			oklchDark: { ...fgDark, l: fgDark.l - 0.22 },
 		};
 		output[`backgroundDisabled`] = {
 			oklch: { ...bg, l: 0.95, c: 0 },

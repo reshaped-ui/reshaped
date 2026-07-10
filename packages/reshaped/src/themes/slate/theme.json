@@ -578,19 +578,19 @@
     },
     "foregroundNeutralFaded": {
       "oklch": {
-        "l": 0.49,
+        "l": 0.54,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.8099999999999999,
+        "l": 0.74,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
-      "hex": "#606060",
-      "hexDark": "#c1c1c1"
+      "hex": "#6f6f6f",
+      "hexDark": "#ababab"
     },
     "backgroundDisabled": {
       "oklch": {
