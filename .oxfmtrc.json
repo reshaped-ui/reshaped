@@ -57,5 +57,5 @@
 		]
 	},
 	"sortPackageJson": false,
-	"ignorePatterns": ["src/themes/**", "packages/**/src/themes/**"]
+	"ignorePatterns": ["src/themes/**", "packages/**/src/themes/**", "**/*.css"]
 }

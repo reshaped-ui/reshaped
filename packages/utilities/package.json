@@ -36,8 +36,8 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"dev": "tsc-watch --onSuccess \"resolve-tspaths\"",
-		"build": "tsc && resolve-tspaths",
+		"dev": "tsc-watch --onSuccess \"tsc-alias\"",
+		"build": "tsc && tsc-alias",
 		"test:browser": "vitest run --project=browser"
 	},
 	"peerDependencies": {

@@ -5,3 +5,15 @@ allowBuilds:
   esbuild: false
   lefthook: false
   unrs-resolver: false
+
+minimumReleaseAgeExclude:
+  - "@storybook/addon-a11y@10.5.0"
+  - "@storybook/addon-docs@10.5.0"
+  - "@storybook/addon-mcp@0.7.0"
+  - "@storybook/addon-vitest@10.5.0"
+  - "@storybook/builder-vite@10.5.0"
+  - "@storybook/csf-plugin@10.5.0"
+  - "@storybook/react-dom-shim@10.5.0"
+  - "@storybook/react-vite@10.5.0"
+  - "@storybook/react@10.5.0"
+  - storybook@10.5.0

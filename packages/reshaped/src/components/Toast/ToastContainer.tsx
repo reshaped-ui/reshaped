@@ -117,6 +117,7 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	}, [visible, index]);
 
 	return (
+		// oxlint-disable-next-line no-noninteractive-element-interactions
 		<li
 			className={containerClassNames}
 			style={{

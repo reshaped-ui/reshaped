@@ -50,8 +50,8 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"dev": "tsc-watch --onSuccess \"resolve-tspaths\"",
-		"build": "tsc && resolve-tspaths"
+		"dev": "tsc-watch --onSuccess \"tsc-alias\"",
+		"build": "tsc && tsc-alias"
 	},
 	"dependencies": {
 		"@types/culori": "4.0.1",
