@@ -1,5 +1,6 @@
 .root {
 	overflow: hidden;
+	position: relative;
 	height: 0;
 }
 

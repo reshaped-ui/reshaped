@@ -16,8 +16,8 @@
 	min-height: var(--rs-text-field-min-height);
 
 	&:not(
-		:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus, select:focus)
-	):focus-within,
+			:has(button:focus, a:focus, [tabindex="0"]:focus, [role="button"]:focus, select:focus)
+		):focus-within,
 	&:has(.icon:active),
 	&.--focused {
 		box-shadow: var(--rs-outline-shadow);
