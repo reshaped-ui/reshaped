@@ -168,7 +168,7 @@ const theme: Partial<ThemeDefinition> = {
 	},
 
 	easing: {
-		standard: { x1: 0.2, y1: 0, x2: 0, y2: 1 }, // subtle UI transitions
+		standard: { x1: 0.2, y1: 0, x2: 0, y2: 1 }, // persistent / in-place changes
 		accelerate: { x1: 0.4, y1: 0, x2: 1, y2: 1 }, // exit / moving away
 		decelerate: { x1: 0, y1: 0, x2: 0.2, y2: 1 }, // enter / appearing
 	},

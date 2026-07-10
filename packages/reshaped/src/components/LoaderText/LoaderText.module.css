@@ -33,7 +33,7 @@
 
 .text,
 .completedText {
-	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
+	transition: var(--rs-duration-medium) var(--rs-easing-standard);
 	transition-property: opacity, transform;
 
 	@media (prefers-reduced-motion) {

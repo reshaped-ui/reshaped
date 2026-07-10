@@ -508,21 +508,19 @@
     },
     "backgroundNeutralHighlightedFaded": {
       "oklch": {
-        "l": 0.94,
+        "l": 0,
         "c": 0,
-        "h": 89.88,
-        "mode": "oklch",
-        "alpha": 0.48
+        "h": 0,
+        "alpha": 0.03
       },
       "oklchDark": {
-        "l": 0.32,
+        "l": 1,
         "c": 0,
-        "h": 89.88,
-        "mode": "oklch",
-        "alpha": 0.28
+        "h": 0,
+        "alpha": 0.05
       },
-      "hex": "#ebebeb7a",
-      "hexDark": "#33333347"
+      "hex": "#00000008",
+      "hexDark": "#ffffff0d"
     },
     "borderNeutral": {
       "oklch": {
@@ -537,10 +535,10 @@
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.1
+        "alpha": 0.11
       },
       "hex": "#0000001f",
-      "hexDark": "#ffffff1a"
+      "hexDark": "#ffffff1c"
     },
     "borderNeutralFaded": {
       "oklch": {
@@ -555,10 +553,10 @@
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.07
+        "alpha": 0.08
       },
       "hex": "#00000014",
-      "hexDark": "#ffffff12"
+      "hexDark": "#ffffff14"
     },
     "foregroundNeutral": {
       "oklch": {
@@ -1076,9 +1074,9 @@
   },
   "easing": {
     "standard": {
-      "x1": 0.4,
+      "x1": 0.2,
       "y1": 0,
-      "x2": 0.2,
+      "x2": 0,
       "y2": 1
     },
     "accelerate": {

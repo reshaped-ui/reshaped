@@ -78,8 +78,10 @@ since it reset the border width/color without using @layer
 	left: 50%;
 	transform: translate(-50%, -50%) scale(0);
 	opacity: 0;
-	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: opacity, transform;
+
+	/* Overrid default icon color transition */
+	transition: var(--rs-duration-fast) var(--rs-easing-standard) !important;
+	transition-property: opacity, transform !important;
 }
 
 [data-rs-keyboard] .input:focus + .decorator {
