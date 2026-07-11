@@ -1,6 +1,6 @@
 {
 	"name": "@reshaped/theming",
-	"version": "4.1.0-canary.0",
+	"version": "4.1.0",
 	"description": "Theme generation and theming utilities for Reshaped",
 	"homepage": "https://reshaped.so",
 	"bugs": {

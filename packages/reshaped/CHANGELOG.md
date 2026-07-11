@@ -1,5 +1,57 @@
 # reshaped
 
+## 4.1.0
+
+### Minor Changes
+
+- [`c04a1b5`](https://github.com/reshaped-ui/reshaped/commit/c04a1b54055a77b1cf8345d8a09c98cf0ccaa5d1) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added LoaderText component
+
+- [#648](https://github.com/reshaped-ui/reshaped/pull/648) [`144bbda`](https://github.com/reshaped-ui/reshaped/commit/144bbdabb06e91df48f848c75df1d9bef5575884) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added fade prop that displays a fade mask on the sides of the area that can be scrolled towards
+
+- [#650](https://github.com/reshaped-ui/reshaped/pull/650) [`c2ec999`](https://github.com/reshaped-ui/reshaped/commit/c2ec99934537d646fe9cc6d931c300bd6bbafdd7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - View: Added insetInline and insetBlock props with support for the "center" keyword value for centering absolutely positioned elements
+
+### Patch Changes
+
+- [`b79f40c`](https://github.com/reshaped-ui/reshaped/commit/b79f40c4721714fa3749517524da641b993bf173) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Skeleton: Updated opacity animation
+
+- [#651](https://github.com/reshaped-ui/reshaped/pull/651) [`db93fa8`](https://github.com/reshaped-ui/reshaped/commit/db93fa8db32d55458d90a28fe1a51d1123bc3b4e) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button.Group: Fixed the outline group border being masked by a highlighted button when the highlight color is fully opaque, by rendering the group border above highlighted buttons in the stacking context
+
+- [#629](https://github.com/reshaped-ui/reshaped/pull/629) [`c702867`](https://github.com/reshaped-ui/reshaped/commit/c702867c7ea331f6391066926fe717f91a685a6f) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Fixed day cell placement being misaligned for firstWeekDay values of 2 or more
+
+- [#627](https://github.com/reshaped-ui/reshaped/pull/627) [`d93d512`](https://github.com/reshaped-ui/reshaped/commit/d93d51295680b24217f511b86a549a4d29d87ea1) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Calendar: Fixed month navigation skipping months when the anchor date is on a high day-of-month (e.g. the 31st)
+
+- [#635](https://github.com/reshaped-ui/reshaped/pull/635) [`de3c452`](https://github.com/reshaped-ui/reshaped/commit/de3c4529dc61af3a993e1a44bdd6d61a2df33293) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Carousel: Fixed controls stealing focus to the opposite arrow when scrolling to an edge
+
+- [#636](https://github.com/reshaped-ui/reshaped/pull/636) [`84790ef`](https://github.com/reshaped-ui/reshaped/commit/84790ef9d1f6f3ea7618be21a2de8f2f5597ad3b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Fixed listbox accessibility by giving the custom dropdown a listbox role and exposing selection state with aria-selected and aria-multiselectable
+
+- [#634](https://github.com/reshaped-ui/reshaped/pull/634) [`1ccfb6f`](https://github.com/reshaped-ui/reshaped/commit/1ccfb6f4db7bad91dd539c180b825c2f37491fab) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Fixed an uncontrolled default value of 0 being ignored and falling back to min/max
+
+- [#633](https://github.com/reshaped-ui/reshaped/pull/633) [`72eb897`](https://github.com/reshaped-ui/reshaped/commit/72eb8972dbbd4020017deb3864c594843add983e) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Fixed the range max thumb not swapping with the min thumb when the min thumb is at 0
+
+- [#632](https://github.com/reshaped-ui/reshaped/pull/632) [`7bad3b6`](https://github.com/reshaped-ui/reshaped/commit/7bad3b676cbd70fb9748c49cb6f15e3c0ac83885) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Toast: Fixed the focus trap leaking on unmount, which could leave focus trapped after the toast was gone
+
+- [#630](https://github.com/reshaped-ui/reshaped/pull/630) [`2b4d1fc`](https://github.com/reshaped-ui/reshaped/commit/2b4d1fceb146c826b7aed4c3a98e1a717d98680c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Toast: Fixed a stray "0" being rendered when the toast has no actions
+
+- [#631](https://github.com/reshaped-ui/reshaped/pull/631) [`7e5d376`](https://github.com/reshaped-ui/reshaped/commit/7e5d3764bb6d8bb9c0db247c65d86aea735317e9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Toast: Fixed the auto-dismiss timer not being cleared on unmount, which could fire hide/remove for an already-removed toast
+
+- [`4de5654`](https://github.com/reshaped-ui/reshaped/commit/4de5654d57ee6675d0ce8d1d0e773b34ad609a82) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Accordion: Added position relative to the content
+
+- [`6ff6216`](https://github.com/reshaped-ui/reshaped/commit/6ff62161d3641a23184a3a3242d1d9015850b30a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Popover: Change default borderRadius to medium
+
+- [`6f84fc5`](https://github.com/reshaped-ui/reshaped/commit/6f84fc56ed963286eaa1418148045b49da1b39b4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated dark mode color values for better contrast
+
+- [`f37c8e2`](https://github.com/reshaped-ui/reshaped/commit/f37c8e2fae617f856d6ee397d1bb22b3e274dbc2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: fixed stretching of the ScrollArea direct children to 100% of its height
+
+- [`1bb445b`](https://github.com/reshaped-ui/reshaped/commit/1bb445b6f442071694f7aae5e1d3f0bb8eda2feb) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated animation variables
+
+- [#648](https://github.com/reshaped-ui/reshaped/pull/648) [`144bbda`](https://github.com/reshaped-ui/reshaped/commit/144bbdabb06e91df48f848c75df1d9bef5575884) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Table: Fade mask for the horizontally scrollable content is now rendered with CSS scroll-driven animations instead of JS scroll tracking
+
+- [`2805140`](https://github.com/reshaped-ui/reshaped/commit/280514002534780b54ee6705dc51198b7152d4cd) Thanks [@blvdmitry](https://github.com/blvdmitry)! - View: `zIndex` prop now accepts the z-index token names (`relative`, `absolute`, `fixed`) in addition to numeric values
+
+- Updated dependencies [[`4aaa491`](https://github.com/reshaped-ui/reshaped/commit/4aaa49116b642ffa354491b3a2132930229e83d0), [`0b67118`](https://github.com/reshaped-ui/reshaped/commit/0b6711823ba22b493fee2ac6135bbafe18cd5305), [`64b1574`](https://github.com/reshaped-ui/reshaped/commit/64b1574c3c34c87a8550ef11ab7aa99753cd9751), [`193948e`](https://github.com/reshaped-ui/reshaped/commit/193948ec044e4123a241492a4054d96708d13c22), [`52cb0a4`](https://github.com/reshaped-ui/reshaped/commit/52cb0a4e6a6cc5032b027eee3ced95efe7089c8b), [`8acb35b`](https://github.com/reshaped-ui/reshaped/commit/8acb35bde9a062b1148beced5f372764b16cbb27), [`6f84fc5`](https://github.com/reshaped-ui/reshaped/commit/6f84fc56ed963286eaa1418148045b49da1b39b4)]:
+  - @reshaped/utilities@4.1.0
+  - @reshaped/theming@4.1.0
+
 ## 4.1.0-canary.0
 
 ### Minor Changes

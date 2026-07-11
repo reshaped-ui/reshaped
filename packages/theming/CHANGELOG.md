@@ -1,5 +1,13 @@
 # @reshaped/theming
 
+## 4.1.0
+
+### Patch Changes
+
+- [#645](https://github.com/reshaped-ui/reshaped/pull/645) [`8acb35b`](https://github.com/reshaped-ui/reshaped/commit/8acb35bde9a062b1148beced5f372764b16cbb27) Thanks [@pascalduez](https://github.com/pascalduez)! - Fixed cli/run undefined CJS require call in an ES module context.
+
+- [`6f84fc5`](https://github.com/reshaped-ui/reshaped/commit/6f84fc56ed963286eaa1418148045b49da1b39b4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Updated dark mode color values for better contrast
+
 ## 4.1.0-canary.0
 
 ### Patch Changes
