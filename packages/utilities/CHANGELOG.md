@@ -1,5 +1,19 @@
 # @reshaped/utilities
 
+## 4.1.0-canary.0
+
+### Patch Changes
+
+- [#640](https://github.com/reshaped-ui/reshaped/pull/640) [`4aaa491`](https://github.com/reshaped-ui/reshaped/commit/4aaa49116b642ffa354491b3a2132930229e83d0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - lockScroll: Fixed stacked/nested scroll locks releasing the scroll prematurely by reference-counting locks per container
+
+- [#639](https://github.com/reshaped-ui/reshaped/pull/639) [`0b67118`](https://github.com/reshaped-ui/reshaped/commit/0b6711823ba22b493fee2ac6135bbafe18cd5305) Thanks [@blvdmitry](https://github.com/blvdmitry)! - lockScroll: Fixed scrollbar-width compensation not being applied when locking a scrollable container, which caused a layout shift
+
+- [#641](https://github.com/reshaped-ui/reshaped/pull/641) [`64b1574`](https://github.com/reshaped-ui/reshaped/commit/64b1574c3c34c87a8550ef11ab7aa99753cd9751) Thanks [@blvdmitry](https://github.com/blvdmitry)! - StyleCache: `reset()` used to restore and clear the entire cache, which let one scroll lock wipe the saved styles of another still-active lock. It now takes a required element and restores only that one. `set()` is also a no-op when the element is already cached, so locking an already-locked element keeps its original styles intact.
+
+- [#638](https://github.com/reshaped-ui/reshaped/pull/638) [`193948e`](https://github.com/reshaped-ui/reshaped/commit/193948ec044e4123a241492a4054d96708d13c22) Thanks [@blvdmitry](https://github.com/blvdmitry)! - TrapFocus: Trapping a container with no focusable content now defers instead of bailing — once focusable content is added (e.g. async-loaded dialog content) the focus is trapped automatically, as long as no other trap was triggered in the meantime. Also fixed the observer leaking in this case
+
+- [`52cb0a4`](https://github.com/reshaped-ui/reshaped/commit/52cb0a4e6a6cc5032b027eee3ced95efe7089c8b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Improved handling the edge cases when none of the sides fit the flyout
+
 ## 4.0.3
 
 ### Patch Changes

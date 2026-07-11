@@ -1,6 +1,6 @@
 {
 	"name": "reshaped",
-	"version": "4.0.3",
+	"version": "4.1.0-canary.0",
 	"description": "Professionally crafted design system in React and Figma for building products of any scale and complexity",
 	"keywords": [
 		"accessibility",
