@@ -49,7 +49,7 @@ since it reset the border width/color without using @layer
 		left: 50%;
 		transform: translate(-50%, -50%) scale(0);
 		opacity: 0;
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
 		transition-property: opacity, transform;
 	}
 

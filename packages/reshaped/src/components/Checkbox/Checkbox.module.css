@@ -50,7 +50,7 @@ since it reset the border width/color without using @layer
 		background: var(--rs-color-on-background-primary);
 		opacity: 0;
 		transform: translate(-50%, -50%) scale(0);
-		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
 		transition-property: opacity, transform;
 	}
 }
@@ -80,7 +80,7 @@ since it reset the border width/color without using @layer
 	opacity: 0;
 
 	/* Overrid default icon color transition */
-	transition: var(--rs-duration-fast) var(--rs-easing-standard) !important;
+	transition: var(--rs-duration-fast) var(--rs-easing-decelerate) !important;
 	transition-property: opacity, transform !important;
 }
 

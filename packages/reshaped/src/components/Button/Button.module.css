@@ -262,8 +262,6 @@
 .root.--variant-ghost {
 	--rs-button-border-width: 0px;
 
-	transition-duration: var(--rs-duration-rapid);
-
 	@each $color in neutral, primary, critical, positive {
 		&.--color-$(color) {
 			--rs-button-group-separator-color: var(--rs-color-border-neutral-faded);

@@ -104,11 +104,12 @@
 --rs-radius-large: 10px;
 --rs-duration-rapid: 100ms;
 --rs-duration-fast: 150ms;
---rs-duration-medium: 200ms;
---rs-duration-slow: 300ms;
---rs-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+--rs-duration-medium: 250ms;
+--rs-duration-slow: 400ms;
+--rs-easing-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 --rs-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
---rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+--rs-easing-decelerate: cubic-bezier(0.23, 1, 0.32, 1);
+--rs-easing-move: cubic-bezier(0.32, 0.72, 0, 1);
 --rs-viewport-m-min: 660;
 --rs-viewport-l-min: 900;
 --rs-viewport-xl-min: 1280;

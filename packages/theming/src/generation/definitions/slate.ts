@@ -123,8 +123,8 @@ const theme: ThemeDefinition = {
 	duration: {
 		rapid: { ms: 100 },
 		fast: { ms: 150 },
-		medium: { ms: 200 },
-		slow: { ms: 300 },
+		medium: { ms: 250 },
+		slow: { ms: 400 },
 	},
 
 	easing: {
