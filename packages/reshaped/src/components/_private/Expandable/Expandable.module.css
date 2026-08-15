@@ -2,8 +2,15 @@
 	overflow: hidden;
 	position: relative;
 	height: 0;
+	opacity: 0;
+}
+
+.root.--visible {
+	opacity: 1;
 }
 
 .root.--animated {
-	transition: height var(--rs-duration-medium) var(--rs-easing-standard);
+	transition:
+		height var(--rs-duration-medium) var(--rs-easing-standard),
+		opacity var(--rs-duration-medium) var(--rs-easing-standard);
 }

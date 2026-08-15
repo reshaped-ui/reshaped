@@ -17,7 +17,7 @@ const Expandable: React.FC<T.ContentProps> = (props) => {
 	);
 	const contentClassNames = classNames(
 		s.root,
-
+		animatedHeight !== null && animatedHeight !== 0 && s["--visible"],
 		mountedRef.current && animatedHeight !== "auto" && s["--animated"]
 	);
 
