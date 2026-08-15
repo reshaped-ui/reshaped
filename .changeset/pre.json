@@ -1,0 +1,23 @@
+{
+  "mode": "exit",
+  "tag": "canary",
+  "initialVersions": {
+    "reshaped": "4.1.0",
+    "@reshaped/theming": "4.1.0",
+    "@reshaped/utilities": "4.1.0"
+  },
+  "changesets": [
+    "checkbox-radio-outline-shadow",
+    "context-menu-instance-type",
+    "fix-postcss-config-subpath-extension",
+    "flyout-trigger-active-render-prop",
+    "menu-item-critical-hover",
+    "motion-durations-easing",
+    "scroll-area-orientation",
+    "scroll-area-scrollbar-fixes",
+    "scroll-area-scrollbar-scroll-display",
+    "select-render-trigger",
+    "slider-thumb-focus-outline",
+    "small-size-caption-text"
+  ]
+}

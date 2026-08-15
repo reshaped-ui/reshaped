@@ -1,5 +1,39 @@
 # reshaped
 
+## 4.2.0-canary.0
+
+### Minor Changes
+
+- [`df25023`](https://github.com/reshaped-ui/reshaped/commit/df250235f581956397b7246360604cc56b3a880b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added the `active` flyout state as a second argument of the trigger render prop, so components like DropdownMenu, Popover and Tooltip can render their trigger based on whether the flyout is open
+
+- [`abd9635`](https://github.com/reshaped-ui/reshaped/commit/abd9635c8397d39ca59e5677ff48bbb8171552d6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added an `orientation` property (`"vertical" | "horizontal" | "both"`) that limits scrolling to the passed direction and constrains the content size in the other direction, defaulting to `"both"`
+
+- [`c99149d`](https://github.com/reshaped-ui/reshaped/commit/c99149d7ce694e3b8d4675e2b5f9bd8d61005e4c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added `scrollbarDisplay="scroll"` to show the scrollbar only while the area is being scrolled
+
+- [#655](https://github.com/reshaped-ui/reshaped/pull/655) [`00954ae`](https://github.com/reshaped-ui/reshaped/commit/00954aea869b03b7afc6959a1659dd11655163a6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Added a renderTrigger prop for rendering a custom trigger element, it receives the flyout attributes as the first argument and the selection state as the second one
+
+### Patch Changes
+
+- [`4280a15`](https://github.com/reshaped-ui/reshaped/commit/4280a15ad9cad903047520465634e851a36e1b40) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Checkbox, Radio: Added outline shadow to the decorator to match TextField and other form controls, error state no longer applies critical border when selected
+
+- [`fd8b831`](https://github.com/reshaped-ui/reshaped/commit/fd8b831c9a5881e79a510c89054d7e4d76b450bf) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ContextMenu: Added a `ContextMenuInstance` type export for typing the `instanceRef` property value
+
+- [#654](https://github.com/reshaped-ui/reshaped/pull/654) [`b919629`](https://github.com/reshaped-ui/reshaped/commit/b9196293670463545f2fed1e0a08cb0b1cdbcac9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - PostCSS config: Added `reshaped/config/postcss.js` and `reshaped/config/postcss.cjs` to the package exports, so importing the config with a file extension no longer fails with `ERR_PACKAGE_PATH_NOT_EXPORTED`
+
+- [`3dfda4c`](https://github.com/reshaped-ui/reshaped/commit/3dfda4cf3b94e219e6bd4f8aa16f99b3f6db277c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - MenuItem: Updated the `color="critical"` styling so the item renders in neutral colors by default and switches the text and icon to the critical color only on hover, keyboard highlight, and selected states, keeping the neutral background instead of the critical one
+
+- [`e5ff765`](https://github.com/reshaped-ui/reshaped/commit/e5ff76558e2ec27c219607133b3cca99e0a9f424) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Motion: Increased the `duration-medium` token to 250ms and `duration-slow` to 400ms, switched Checkbox, Radio and Switch selection transitions to `easing-decelerate`, and made the MenuItem hover/highlighted background appear instantly and only fade out on leave for a more responsive feel
+
+- [`28d4edb`](https://github.com/reshaped-ui/reshaped/commit/28d4edbd4e4e733ff5d6deec0d0e4813c189e742) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added a vertical/horizontal padding to the scrollbars so the thumb doesn't overlap rounded corners of the parent element, and kept the thumb visible while dragging it with `scrollbarDisplay="hover"` even when the pointer leaves the component
+
+- [`c2554bb`](https://github.com/reshaped-ui/reshaped/commit/c2554bbb5a50cdf623f713de5fbe8040f06f6319) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Rendered the thumb keyboard focus ring as an offset outline instead of an inset box shadow, keeping the thumb halo visible on focus and making the ring show up in forced-colors mode
+
+- [#656](https://github.com/reshaped-ui/reshaped/pull/656) [`792c575`](https://github.com/reshaped-ui/reshaped/commit/792c57562ef77d72b865bcd4400a4fb5962831d2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button, MenuItem, Tabs, TextField, Select and PinField: Small size now renders caption-1 text, their vertical padding grows by the line height difference so the component size stays the same
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.2.0-canary.0
+  - @reshaped/theming@4.2.0-canary.0
+
 ## 4.1.0
 
 ### Minor Changes
