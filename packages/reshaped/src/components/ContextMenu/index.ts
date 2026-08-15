@@ -16,4 +16,7 @@ ContextMenuRoot.SubMenu = DropdownMenu.SubMenu;
 ContextMenuRoot.SubTrigger = DropdownMenu.SubTrigger;
 
 export default ContextMenuRoot;
-export type { Props as ContextMenuProps } from "./ContextMenu.types";
+export type {
+	Instance as ContextMenuInstance,
+	Props as ContextMenuProps,
+} from "./ContextMenu.types";
