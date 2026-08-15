@@ -87,7 +87,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 				{icon && <Icon svg={icon} className={s.icon} size={4} />}
 				{children && (
 					<Text
-						variant={size === "large" ? "body-1" : "body-2"}
+						variant={size === "large" ? "body-1" : size === "small" ? "caption-1" : "body-2"}
 						weight="medium"
 						className={s.buttonText}
 					>

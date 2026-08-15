@@ -107,13 +107,17 @@
 		--rs-select-gap: var(--rs-unit-x1-5);
 		--rs-select-chevron-size: var(--rs-unit-x4);
 		--rs-select-radius: var(--rs-radius-small);
-		--rs-select-p-v: var(--rs-unit-x1);
+
+		/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */
+		--rs-select-p-v: calc(
+			var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+		);
 		--rs-select-p-h: var(--rs-unit-x2);
-		--rs-select-font-size: var(--rs-font-size-body-2);
-		--rs-select-line-height: var(--rs-line-height-body-2);
-		--rs-select-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-select-font-size: var(--rs-font-size-caption-1);
+		--rs-select-line-height: var(--rs-line-height-caption-1);
+		--rs-select-letter-spacing: var(--rs-letter-spacing-caption-1);
 		--rs-select-icon-align: var(--rs-unit-x0-5);
-		--rs-select-min-height: calc(var(--rs-select-line-height) + var(--rs-unit-x1) * 2);
+		--rs-select-min-height: calc(var(--rs-select-line-height) + var(--rs-select-p-v) * 2);
 	}
 
 	@value medium {

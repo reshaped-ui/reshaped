@@ -194,14 +194,20 @@
 	@value small {
 		--rs-text-field-gap: var(--rs-unit-x1-5);
 		--rs-text-field-radius: var(--rs-radius-small);
-		--rs-text-field-p-v: var(--rs-unit-x1);
+
+		/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */
+		--rs-text-field-p-v: calc(
+			var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+		);
 		--rs-text-field-p-h: var(--rs-unit-x2);
 		--rs-text-field-icon-align: var(--rs-unit-x0-5);
-		--rs-text-field-font-size: var(--rs-font-size-body-2);
-		--rs-text-field-line-height: var(--rs-line-height-body-2);
-		--rs-text-field-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-text-field-font-size: var(--rs-font-size-caption-1);
+		--rs-text-field-line-height: var(--rs-line-height-caption-1);
+		--rs-text-field-letter-spacing: var(--rs-letter-spacing-caption-1);
 		--rs-text-field-action-inset: var(--rs-unit-x1);
-		--rs-text-field-min-height: calc(var(--rs-text-field-line-height) + var(--rs-unit-x1) * 2);
+		--rs-text-field-min-height: calc(
+			var(--rs-text-field-line-height) + var(--rs-text-field-p-v) * 2
+		);
 	}
 
 	@value medium {

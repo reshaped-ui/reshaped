@@ -355,7 +355,10 @@
 }
 
 .--size-small {
-	--rs-tabs-item-p-v: var(--rs-unit-x1);
+	/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */
+	--rs-tabs-item-p-v: calc(
+		var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+	);
 	--rs-tabs-item-p-h: var(--rs-unit-x2);
 	--rs-tabs-icon-gap: var(--rs-unit-x1-5);
 	--rs-tabs-radius: var(--rs-radius-small);
