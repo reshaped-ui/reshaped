@@ -202,7 +202,7 @@
 --rs-color-background-neutral-faded: oklch(1 0 89.88 / 0.04);
 --rs-color-background-neutral-highlighted: oklch(0.3608 0 89.88);
 --rs-color-background-neutral-highlighted-faded: oklch(1 0 0 / 0.05);
---rs-color-border-neutral: oklch(1 0 89.88 / 0.11);
+--rs-color-border-neutral: oklch(1 0 89.88 / 0.12);
 --rs-color-border-neutral-faded: oklch(1 0 89.88 / 0.08);
 --rs-color-foreground-neutral: oklch(0.96 0 89.88);
 --rs-color-foreground-neutral-faded: oklch(0.74 0 89.88);

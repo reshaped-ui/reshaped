@@ -535,10 +535,10 @@
         "c": 0,
         "h": 89.88,
         "mode": "oklch",
-        "alpha": 0.11
+        "alpha": 0.12
       },
       "hex": "#0000001f",
-      "hexDark": "#ffffff1c"
+      "hexDark": "#ffffff1f"
     },
     "borderNeutralFaded": {
       "oklch": {

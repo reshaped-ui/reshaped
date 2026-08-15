@@ -3,12 +3,6 @@ Not using layers for now to avoid conflicts with Tailwind v3 preflight
 since it reset the border width/color without using @layer
 */
 
-/* @layer rs.checkbox.base;
-@layer rs.checkbox.error;
-@layer rs.checkbox.checked;
-@layer rs.checkbox.disabled;
-
-@layer rs.checkbox.base { */
 .root {
 	display: inline-flex;
 	gap: var(--rs-checkbox-gap);
@@ -30,29 +24,52 @@ since it reset the border width/color without using @layer
 }
 
 .decorator {
+	--rs-checkbox-border-color: var(--rs-color-border-neutral);
+
+	position: relative;
 	width: var(--rs-checkbox-line-height);
 	height: var(--rs-checkbox-line-height);
 	border-radius: var(--rs-radius-small);
 	color: var(--rs-color-on-background-primary);
-	border: 1px solid var(--rs-color-border-neutral);
 	background: var(--rs-color-background-elevation-base);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: background-color, border-color;
+	transition-property: background-color;
 
-	&::before {
+	/* Same as border / shadow mixins: border on ::before, shadow on ::after */
+	&::before,
+	&::after {
 		content: "";
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		height: 1.5px;
-		border-radius: var(--rs-radius-circular);
-		width: calc(var(--rs-checkbox-line-height) * 0.5);
-		background: var(--rs-color-on-background-primary);
-		opacity: 0;
-		transform: translate(-50%, -50%) scale(0);
-		transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
-		transition-property: opacity, transform;
+		pointer-events: none;
+		border-radius: inherit;
+		z-index: var(--rs-z-index-relative);
 	}
+
+	&::before {
+		inset: 0;
+		border: 1px solid var(--rs-checkbox-border-color);
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: border-color;
+	}
+
+	&::after {
+		inset: 1px;
+		box-shadow: var(--rs-shadow-outline);
+	}
+}
+
+.dash {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 1.5px;
+	border-radius: var(--rs-radius-circular);
+	width: calc(var(--rs-checkbox-line-height) * 0.5);
+	background: var(--rs-color-on-background-primary);
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0);
+	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
+	transition-property: opacity, transform;
 }
 
 @responsive .--size {
@@ -89,51 +106,43 @@ since it reset the border width/color without using @layer
 	outline-offset: var(--rs-outline-width);
 }
 
-/* } */
-
-/* @layer rs.checkbox.error { */
-.root.--error .decorator {
+.root.--error .input:not(:checked, :indeterminate) + .decorator::before {
 	border-color: var(--rs-color-border-critical);
 	border-width: var(--rs-outline-width);
 }
 
-/* } */
-
-/* @layer rs.checkbox.checked { */
 .input:indeterminate + .decorator,
 .input:checked + .decorator {
-	border-color: var(--rs-color-background-primary);
+	--rs-checkbox-border-color: var(--rs-color-background-primary);
+
 	background: var(--rs-color-background-primary);
 }
 
-.input:indeterminate + .decorator::before,
+.input:indeterminate + .decorator .dash,
 .input:checked + .decorator .icon {
 	opacity: 1;
 	transform: translate(-50%, -50%) scale(1);
 }
 
-/* } */
-
-/* @layer rs.checkbox.disabled { */
 .root.--disabled {
 	cursor: not-allowed;
 	color: var(--rs-color-foreground-disabled);
 
 	& .decorator {
+		--rs-checkbox-border-color: var(--rs-color-border-disabled);
+
 		background: var(--rs-color-background-disabled-faded);
-		border-color: var(--rs-color-border-disabled);
 		color: var(--rs-color-foreground-disabled);
 	}
 
 	& .input:checked + .decorator,
 	& .input:indeterminate + .decorator {
-		background: var(--rs-color-background-disabled);
-		border-color: transparent;
+		--rs-checkbox-border-color: transparent;
 
-		&::before {
+		background: var(--rs-color-background-disabled);
+
+		& .dash {
 			background-color: var(--rs-color-foreground-disabled);
 		}
 	}
 }
-
-/* } */

@@ -64,6 +64,7 @@ const Checkbox: React.FC<T.Props> = (props) => {
 					}}
 				/>
 				<div className={s.decorator}>
+					<span className={s.dash} />
 					<Icon
 						svg={IconCheckmark}
 						className={s.icon}

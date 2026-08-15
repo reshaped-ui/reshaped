@@ -30,36 +30,60 @@ since it reset the border width/color without using @layer
 }
 
 .decorator {
+	--rs-radio-border-color: var(--rs-color-border-neutral);
+
+	position: relative;
 	width: var(--rs-radio-line-height);
 	height: var(--rs-radio-line-height);
 	border-radius: 50%;
-	border: 1px solid var(--rs-color-border-neutral);
 	background: var(--rs-color-background-elevation-base);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
-	transition-property: background-color, border-color;
+	transition-property: background-color;
 
+	/* Same as border / shadow mixins: border on ::before, shadow on ::after */
+	&::before,
 	&::after {
 		content: "";
 		position: absolute;
-		height: calc(var(--rs-radio-line-height) * 0.4);
-		width: calc(var(--rs-radio-line-height) * 0.4);
-		background: var(--rs-color-on-background-primary);
-		border-radius: 50%;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) scale(0);
-		opacity: 0;
-		transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
-		transition-property: opacity, transform;
+		pointer-events: none;
+		border-radius: inherit;
+		z-index: var(--rs-z-index-relative);
+	}
+
+	&::before {
+		inset: 0;
+		border: 1px solid var(--rs-radio-border-color);
+		transition: var(--rs-duration-fast) var(--rs-easing-standard);
+		transition-property: border-color;
+	}
+
+	&::after {
+		inset: 1px;
+		box-shadow: var(--rs-shadow-outline);
 	}
 
 	[data-rs-keyboard] & {
 		transition: none;
 
-		&::after {
+		&::before,
+		& .dot {
 			transition: none;
 		}
 	}
+}
+
+.dot {
+	position: absolute;
+	height: calc(var(--rs-radio-line-height) * 0.4);
+	width: calc(var(--rs-radio-line-height) * 0.4);
+	background: var(--rs-color-on-background-primary);
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	opacity: 0;
+	transition: var(--rs-duration-fast) var(--rs-easing-decelerate);
+	transition-property: opacity, transform;
 }
 
 @responsive .--size {
@@ -87,7 +111,7 @@ since it reset the border width/color without using @layer
 /* } */
 
 /* @layer rs.radio.error { */
-.root.--error .decorator {
+.root.--error .input:not(:checked) + .decorator::before {
 	border-color: var(--rs-color-border-critical);
 	border-width: var(--rs-outline-width);
 }
@@ -96,10 +120,11 @@ since it reset the border width/color without using @layer
 
 /* @layer rs.radio.checked { */
 .input:checked + .decorator {
-	border-color: var(--rs-color-background-primary);
+	--rs-radio-border-color: var(--rs-color-background-primary);
+
 	background: var(--rs-color-background-primary);
 
-	&::after {
+	& .dot {
 		opacity: 1;
 		transform: translate(-50%, -50%) scale(1);
 	}
@@ -113,17 +138,19 @@ since it reset the border width/color without using @layer
 	color: var(--rs-color-foreground-disabled);
 
 	& .decorator {
-		background: var(--rs-color-background-disabled-faded);
-		border-color: var(--rs-color-border-disabled);
+		--rs-radio-border-color: var(--rs-color-border-disabled);
 
-		&::after {
+		background: var(--rs-color-background-disabled-faded);
+
+		& .dot {
 			background-color: var(--rs-color-foreground-disabled);
 		}
 	}
 
 	& .input:checked + .decorator {
+		--rs-radio-border-color: transparent;
+
 		background: var(--rs-color-background-disabled);
-		border-color: transparent;
 	}
 }
 

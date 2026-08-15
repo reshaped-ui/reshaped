@@ -50,7 +50,9 @@ const Radio: React.FC<T.Props> = (props) => {
 					onChange={onChange}
 					attributes={inputAttributes}
 				/>
-				<div className={s.decorator} />
+				<div className={s.decorator}>
+					<span className={s.dot} />
+				</div>
 			</span>
 
 			{children && (
