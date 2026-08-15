@@ -114,6 +114,8 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	} = props;
 	const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
 	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
+	const [scrolling, setScrolling] = React.useState(false);
+	const scrollingTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>(undefined);
 	const scrollableRef = React.useRef<HTMLDivElement>(null);
 	const contentRef = React.useRef<HTMLDivElement>(null);
 	const rootRef = React.useRef<HTMLDivElement>(null);
@@ -121,6 +123,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	const rootClassNames = classNames(
 		s.root,
 		scrollbarDisplay && s[`--display-${scrollbarDisplay}`],
+		scrolling && s["--scrolling"],
 		mixinStyles.classNames,
 		className
 	);
@@ -151,6 +154,12 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
 		const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
 			e.currentTarget;
+
+		if (scrollbarDisplay === "scroll") {
+			setScrolling(true);
+			clearTimeout(scrollingTimeoutRef.current);
+			scrollingTimeoutRef.current = setTimeout(() => setScrolling(false), 1000);
+		}
 
 		setScrollPosition({
 			x: scrollLeft / scrollWidth,
@@ -189,6 +198,10 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	};
 
 	React.useImperativeHandle(ref, () => scrollableRef.current!);
+
+	React.useEffect(() => {
+		return () => clearTimeout(scrollingTimeoutRef.current);
+	}, []);
 
 	useIsomorphicLayoutEffect(() => {
 		updateScroll();

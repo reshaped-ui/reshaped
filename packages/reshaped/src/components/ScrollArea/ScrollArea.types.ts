@@ -11,7 +11,7 @@ export type Props = {
 	/** Direction in which the content is allowed to scroll */
 	orientation?: "vertical" | "horizontal" | "both";
 	/** Scrollbar visibility behavior based on the user interaction */
-	scrollbarDisplay?: "visible" | "hover" | "hidden";
+	scrollbarDisplay?: "visible" | "hover" | "scroll" | "hidden";
 	/** Control whether scroll can chain to parent scrollable containers */
 	overscrollBehavior?: "auto" | "contain";
 	/** Display a fade mask on the sides of the area that can be scrolled towards */

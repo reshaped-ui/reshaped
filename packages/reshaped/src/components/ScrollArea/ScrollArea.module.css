@@ -242,7 +242,9 @@
 /* Only show the thumb for the current scroll area and not for the nested ones */
 .--display-visible > .scrollbar .thumb,
 .--display-hover:hover > .scrollbar .thumb,
-.--display-hover > .--scrollbar-dragging .thumb {
+.--display-hover > .--scrollbar-dragging .thumb,
+.--display-scroll.--scrolling > .scrollbar .thumb,
+.--display-scroll > .--scrollbar-dragging .thumb {
 	opacity: 1;
 }
 
