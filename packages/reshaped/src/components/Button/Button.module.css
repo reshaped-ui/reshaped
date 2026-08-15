@@ -6,6 +6,7 @@
 	/* Using --rs-button-p and --rs-p to dynamically reassign --rs-p for all sizes of ghost buttons, used by Aligner */
 	--rs-p-v: var(--rs-button-p-v);
 	--rs-p-h: var(--rs-button-p-h);
+	--rs-button-min-size: calc(var(--rs-button-line-height) + var(--rs-button-p-v) * 2);
 
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: background-color, box-shadow, border-color, color, transform, opacity;
@@ -29,10 +30,10 @@
 	line-height: var(--rs-button-line-height);
 	letter-spacing: var(--rs-button-letter-spacing);
 	box-sizing: border-box;
-	min-height: calc(var(--rs-button-line-height) + var(--rs-p-v) * 2);
-	min-width: calc(
-		var(--rs-button-line-height) - (var(--rs-unit-x1) * 2) + (var(--rs-button-p-h) * 2)
-	);
+
+	/* Keeps icon-only buttons square by using the same value for both dimensions */
+	min-height: var(--rs-button-min-size);
+	min-width: var(--rs-button-min-size);
 	background-color: var(--rs-button-background-color);
 	color: var(--rs-button-color);
 	isolation: isolate;
@@ -142,13 +143,14 @@
 
 @responsive .--size {
 	@value small {
-		--rs-button-p-v: var(--rs-unit-x1);
+		/* Padding grows by the line height difference to keep the size the same as with body-2 text */
+		--rs-button-p-v: calc(var(--rs-unit-x1) + var(--rs-caption-1-line-height-offset));
 		--rs-button-p-h: var(--rs-unit-x2);
 		--rs-button-gap: var(--rs-unit-x1-5);
 		--rs-button-icon-align: var(--rs-unit-x0-5);
-		--rs-button-line-height: var(--rs-line-height-body-2);
-		--rs-button-font-size: var(--rs-font-size-body-2);
-		--rs-button-letter-spacing: var(--rs-letter-spacing-body-2);
+		--rs-button-line-height: var(--rs-line-height-caption-1);
+		--rs-button-font-size: var(--rs-font-size-caption-1);
+		--rs-button-letter-spacing: var(--rs-letter-spacing-caption-1);
 		--rs-button-radius: var(--rs-radius-small);
 	}
 

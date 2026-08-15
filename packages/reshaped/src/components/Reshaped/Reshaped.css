@@ -4,6 +4,15 @@
 		--rs-outline: var(--rs-outline-width) solid var(--rs-color-border-primary);
 		--rs-outline-shadow: 0 0 0 var(--rs-outline-width) var(--rs-color-border-primary) inset;
 		--rs-radius-circular: 9999px;
+
+		/*
+		Small components render caption-1 text while keeping the height they had with body-2 text.
+		Their vertical padding grows by this value on each side to compensate for the line height difference.
+		Themes where both line heights match resolve it to 0 and stay unaffected.
+		*/
+		--rs-caption-1-line-height-offset: calc(
+			(var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+		);
 	}
 
 	[data-rs-theme] body,
