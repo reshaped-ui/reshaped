@@ -214,6 +214,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 									},
 									children: renderedValue ?? placeholder,
 								})}
+
 								<SelectHiddenInput
 									value={value}
 									name={name}

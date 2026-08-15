@@ -14,8 +14,4 @@ SelectRoot.OptionGroup = SelectGroup;
 
 export default SelectRoot;
 export { default as SelectTrigger } from "./SelectTrigger";
-export type {
-	Props as SelectProps,
-	TriggerRenderAttributes as SelectTriggerRenderAttributes,
-	TriggerProps as SelectTriggerProps,
-} from "./Select.types";
+export type { Props as SelectProps, TriggerProps as SelectTriggerProps } from "./Select.types";

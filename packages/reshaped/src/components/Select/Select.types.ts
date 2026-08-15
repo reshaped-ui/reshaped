@@ -36,7 +36,8 @@ type RenderSingleTrigger = (
 	attributes: TriggerRenderAttributes,
 	props: TriggerRenderState & { value: string }
 ) => React.ReactNode;
-type RenderMultipleTriggers = (
+
+type RenderMultipleTrigger = (
 	attributes: TriggerRenderAttributes,
 	props: TriggerRenderState & { value: string[] }
 ) => React.ReactNode;
@@ -137,7 +138,7 @@ export type CustomControlledFragment =
 			value: string[];
 			defaultValue?: never[];
 			renderValue: RenderMultipleValues;
-			renderTrigger?: RenderMultipleTriggers;
+			renderTrigger?: RenderMultipleTrigger;
 			onChange?: SelectChangeHandler<string[]>;
 	  };
 export type CustomUncontrolledFragment =
@@ -154,7 +155,7 @@ export type CustomUncontrolledFragment =
 			value?: never[];
 			defaultValue?: string[];
 			renderValue: RenderMultipleValues;
-			renderTrigger?: RenderMultipleTriggers;
+			renderTrigger?: RenderMultipleTrigger;
 			onChange?: SelectChangeHandler<string[]>;
 	  };
 

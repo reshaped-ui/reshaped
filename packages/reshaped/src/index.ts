@@ -57,11 +57,7 @@ export type { RadioProps } from "@/components/Radio";
 export { default as Radio } from "@/components/Radio";
 export type { RadioGroupProps } from "@/components/RadioGroup";
 export { default as RadioGroup } from "@/components/RadioGroup";
-export type {
-	SelectProps,
-	SelectTriggerProps,
-	SelectTriggerRenderAttributes,
-} from "@/components/Select";
+export type { SelectProps, SelectTriggerProps } from "@/components/Select";
 export { default as Select, SelectTrigger } from "@/components/Select";
 export type { SkeletonProps } from "@/components/Skeleton";
 export { default as Skeleton } from "@/components/Skeleton";
