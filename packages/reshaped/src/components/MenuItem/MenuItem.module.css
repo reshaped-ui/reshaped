@@ -79,17 +79,21 @@ button.root {
 }
 
 .--color-critical {
-	--rs-menu-item-color: var(--rs-color-foreground-critical);
+	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
 	&.--selected,
 	&[data-rs-focus],
 	&.--highlighted {
-		--rs-menu-item-bg-color: var(--rs-color-background-critical-highlighted-faded);
+		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
+		--rs-menu-item-color: var(--rs-color-foreground-critical);
+		--rs-menu-item-icon-color: var(--rs-color-foreground-critical);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		&:hover {
-			--rs-menu-item-bg-color: var(--rs-color-background-critical-highlighted-faded);
+			--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
+			--rs-menu-item-color: var(--rs-color-foreground-critical);
+			--rs-menu-item-icon-color: var(--rs-color-foreground-critical);
 		}
 	}
 }
