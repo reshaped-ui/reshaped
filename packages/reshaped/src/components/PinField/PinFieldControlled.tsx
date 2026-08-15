@@ -45,9 +45,11 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	} = props;
 	const patternRegexp = patternMap[pattern];
 	const responsiveInputSize = responsivePropDependency(size, (value) => sizeMap[value]);
-	const responsiveTextVariant = responsivePropDependency(size, (value) =>
-		value === "medium" ? "body-2" : "body-1"
-	);
+	const responsiveTextVariant = responsivePropDependency(size, (value) => {
+		if (value === "small") return "caption-1";
+		if (value === "medium") return "body-2";
+		return "body-1";
+	});
 	const responsiveRadius = responsivePropDependency(size, (value) =>
 		value === "small" ? "small" : "medium"
 	);

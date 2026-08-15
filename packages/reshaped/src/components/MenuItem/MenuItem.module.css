@@ -32,13 +32,16 @@ button.root {
 
 @responsive .--size {
 	@value small {
-		--rs-p-v: var(--rs-unit-x1);
+		/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */
+		--rs-p-v: calc(
+			var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+		);
 		--rs-p-h: var(--rs-unit-x1-5);
 		--rs-menu-item-radius: var(--rs-radius-small);
 
-		font-size: var(--rs-font-size-body-2);
-		line-height: var(--rs-line-height-body-2);
-		letter-spacing: var(--rs-letter-spacing-body-2);
+		font-size: var(--rs-font-size-caption-1);
+		line-height: var(--rs-line-height-caption-1);
+		letter-spacing: var(--rs-letter-spacing-caption-1);
 	}
 
 	@value medium {
