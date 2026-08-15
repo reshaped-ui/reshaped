@@ -66,6 +66,55 @@ export const base = {
 	),
 };
 
+export const orientation = {
+	name: "orientation",
+	render: () => (
+		<Example>
+			<Example.Item title="orientation: vertical">
+				<ScrollArea height="100px" scrollbarDisplay="visible" orientation="vertical">
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+						has been the industry's standard dummy text ever since the 1500s, when an unknown
+						printer took a galley of type and scrambled it to make a type specimen book. It has
+						survived not only five centuries, but also the leap into electronic typesetting,
+						remaining essentially unchanged. It was popularised in the 1960s with the release of
+						Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+						publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					</View>
+				</ScrollArea>
+			</Example.Item>
+
+			<Example.Item title="orientation: horizontal">
+				<ScrollArea height="100px" scrollbarDisplay="visible" orientation="horizontal">
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+						has been the industry's standard dummy text ever since the 1500s, when an unknown
+						printer took a galley of type and scrambled it to make a type specimen book. It has
+						survived not only five centuries, but also the leap into electronic typesetting,
+						remaining essentially unchanged. It was popularised in the 1960s with the release of
+						Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+						publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					</View>
+				</ScrollArea>
+			</Example.Item>
+
+			<Example.Item title="orientation: both">
+				<ScrollArea height="100px" scrollbarDisplay="visible" orientation="both">
+					<View backgroundColor="neutral-faded" padding={4} width="150%">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+						has been the industry's standard dummy text ever since the 1500s, when an unknown
+						printer took a galley of type and scrambled it to make a type specimen book. It has
+						survived not only five centuries, but also the leap into electronic typesetting,
+						remaining essentially unchanged. It was popularised in the 1960s with the release of
+						Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+						publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					</View>
+				</ScrollArea>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const scrollbarDisplay = {
 	name: "scrollbarDisplay",
 	render: () => (

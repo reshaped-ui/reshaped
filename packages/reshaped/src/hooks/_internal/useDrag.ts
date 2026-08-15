@@ -18,18 +18,18 @@ const useDrag = <
 	options?: {
 		disabled?: boolean;
 		containerRef?: React.RefObject<ContainerElement | null>;
-		orientation?: "horizontal" | "vertical" | "all";
+		orientation?: "horizontal" | "vertical" | "both";
 	}
 ) => {
-	const { disabled, containerRef: passedContainerRef, orientation = "all" } = options || {};
+	const { disabled, containerRef: passedContainerRef, orientation = "both" } = options || {};
 	const cbRef = useHandlerRef(cb);
 	const toggle = useToggle();
 	const triggerRef = React.useRef<TriggerElement>(null);
 	const internalContainerRef = React.useRef<ContainerElement>(null);
 	const containerRef = passedContainerRef || internalContainerRef;
 	const triggerCompensationRef = React.useRef({ x: 0, y: 0 });
-	const isVertical = orientation === "vertical" || orientation === "all";
-	const isHorizontal = orientation === "horizontal" || orientation === "all";
+	const isVertical = orientation === "vertical" || orientation === "both";
+	const isHorizontal = orientation === "horizontal" || orientation === "both";
 
 	const handleKeyboard = (x: number, y: number) => {
 		const triggerEl = triggerRef.current;

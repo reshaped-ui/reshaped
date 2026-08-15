@@ -53,6 +53,22 @@
 	}
 }
 
+.--orientation-vertical {
+	overflow-x: hidden;
+
+	& > .content {
+		max-width: 100%;
+	}
+}
+
+.--orientation-horizontal {
+	overflow-y: hidden;
+
+	& > .content {
+		max-height: 100%;
+	}
+}
+
 @keyframes fade-block-start {
 	from {
 		--rs-scroll-area-fade-block-start: 0px;

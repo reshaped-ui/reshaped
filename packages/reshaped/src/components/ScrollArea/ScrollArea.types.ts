@@ -8,6 +8,8 @@ import type { Attributes } from "@/types/global";
 export type Props = {
 	/** Node for inserting content */
 	children: React.ReactNode;
+	/** Direction in which the content is allowed to scroll */
+	orientation?: "vertical" | "horizontal" | "both";
 	/** Scrollbar visibility behavior based on the user interaction */
 	scrollbarDisplay?: "visible" | "hover" | "hidden";
 	/** Control whether scroll can chain to parent scrollable containers */

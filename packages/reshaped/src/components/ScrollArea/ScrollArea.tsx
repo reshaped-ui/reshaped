@@ -102,6 +102,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		children,
 		height,
 		maxHeight,
+		orientation = "both",
 		scrollbarDisplay = "hover",
 		overscrollBehavior = "auto",
 		fade,
@@ -125,6 +126,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 	);
 	const scrollableClassNames = classNames(
 		s.scrollable,
+		orientation && s[`--orientation-${orientation}`],
 		overscrollBehavior && s[`--overscroll-${overscrollBehavior}`],
 		fade && s["--fade"]
 	);
@@ -232,7 +234,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 					{children}
 				</div>
 			</div>
-			{scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
+			{orientation !== "horizontal" && scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
 				<ScrollAreaBar
 					vertical
 					onThumbMove={handleThumbYMove}
@@ -240,7 +242,7 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 					position={scrollPosition.y}
 				/>
 			)}
-			{scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
+			{orientation !== "vertical" && scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
 				<ScrollAreaBar
 					onThumbMove={handleThumbXMove}
 					ratio={scrollRatio.x}
