@@ -5,7 +5,6 @@ import { expect, fn, Mock, userEvent, within } from "storybook/test";
 import Actionable from "@/components/Actionable";
 import Badge from "@/components/Badge";
 import FormControl from "@/components/FormControl";
-import Icon from "@/components/Icon";
 import MenuItem from "@/components/MenuItem";
 import Modal from "@/components/Modal";
 import Select, { SelectProps, SelectTrigger } from "@/components/Select";
@@ -13,8 +12,6 @@ import Text from "@/components/Text";
 import View from "@/components/View";
 import useToggle from "@/hooks/useToggle";
 import { Example, Placeholder } from "@/utilities/storybook";
-import IconChevronDown from "@/icons/ChevronDown";
-import IconChevronUp from "@/icons/ChevronUp";
 import IconZap from "@/icons/Zap";
 
 export default {
@@ -400,13 +397,15 @@ export const renderTrigger: StoryObj<{ handleChange: Mock }> = {
 			<Example.Item title="renderTrigger">
 				<Select
 					name="animal"
+					position="bottom-start"
+					width="200px"
+					size="small"
 					placeholder="Select an animal"
 					onChange={args.handleChange}
-					renderTrigger={(attributes, { active }) => (
+					renderTrigger={(attributes) => (
 						<Actionable attributes={attributes}>
 							<View direction="row" gap={1} align="center">
 								<Text color="neutral-faded">{attributes.children}</Text>
-								<Icon svg={active ? IconChevronUp : IconChevronDown} size={4} />
 							</View>
 						</Actionable>
 					)}
