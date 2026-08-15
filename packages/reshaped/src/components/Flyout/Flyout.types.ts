@@ -184,7 +184,7 @@ export type Props = ControlledProps | UncontrolledProps;
 
 export type TriggerProps = {
 	/** Node for inserting children, provides attributes for the trigger element */
-	children: (attributes: TriggerAttributes) => React.ReactNode;
+	children: (attributes: TriggerAttributes, props: { active: boolean }) => React.ReactNode;
 };
 
 export type ContentProps = {

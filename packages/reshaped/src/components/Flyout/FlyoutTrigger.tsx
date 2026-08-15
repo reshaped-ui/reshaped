@@ -59,7 +59,7 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 
 	return (
 		<TriggerProvider value={{ elRef: triggerElRef }}>
-			{children(childrenAttributes as T.TriggerAttributes)}
+			{children(childrenAttributes as T.TriggerAttributes, { active })}
 		</TriggerProvider>
 	);
 };

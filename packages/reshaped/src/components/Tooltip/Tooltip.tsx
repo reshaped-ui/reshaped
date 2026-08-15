@@ -14,7 +14,7 @@ const Tooltip: React.FC<T.Props> = (props) => {
 		...flyoutProps
 	} = props;
 
-	if (!text) return children({ ref: null });
+	if (!text) return children({ ref: null }, { active: false });
 
 	return (
 		<Flyout
