@@ -9,6 +9,7 @@ import { responsiveClassNames } from "@/utilities/props";
 import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Select.types";
 import SelectEndContent from "./SelectEndContent";
+import SelectHiddenInput from "./SelectHiddenInput";
 import SelectStartContent from "./SelectStartContent";
 import s from "./Select.module.css";
 
@@ -71,13 +72,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				<SelectEndContent disabled={disabled} size={size} />
 			</Actionable>
 
-			<input
-				{...inputAttributes}
-				type="hidden"
-				value={typeof value === "string" ? value : JSON.stringify(value)}
-				name={name}
-				id={id}
-			/>
+			<SelectHiddenInput value={value} name={name} id={id} inputAttributes={inputAttributes} />
 		</div>
 	);
 };

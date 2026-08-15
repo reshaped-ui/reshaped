@@ -9,6 +9,7 @@ import { responsivePropDependency } from "@/utilities/props";
 import CheckmarkIcon from "@/icons/Checkmark";
 import type * as T from "./Select.types";
 import SelectGroup from "./SelectGroup";
+import SelectHiddenInput from "./SelectHiddenInput";
 import SelectOption from "./SelectOption";
 import SelectTrigger from "./SelectTrigger";
 
@@ -17,6 +18,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		children,
 		value,
 		name,
+		id,
 		placeholder,
 		multiple,
 		selectedIconPosition = "start",
@@ -25,7 +27,12 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		fallbackPositions,
 		positionRef,
 		size,
+		disabled,
+		hasError,
+		inputAttributes,
+		onClick,
 		renderValue: passedRenderValue,
+		renderTrigger: passedRenderTrigger,
 	} = props;
 	const initialFocusRef = React.useRef<HTMLButtonElement>(null);
 	const searchStringRef = React.useRef<string>("");
@@ -155,6 +162,20 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		return null;
 	};
 
+	const renderTrigger = (attributes: T.TriggerRenderAttributes) => {
+		if (!passedRenderTrigger) return null;
+
+		const triggerState = {
+			active: !!attributes["data-rs-flyout-active"],
+			disabled,
+			hasError,
+		};
+
+		// Calling it in both branches for correct type inference, same as renderValue
+		if (multiple) return passedRenderTrigger(attributes, { ...triggerState, value });
+		return passedRenderTrigger(attributes, { ...triggerState, value });
+	};
+
 	return (
 		<DropdownMenu
 			width={width}
@@ -176,6 +197,32 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 							attributes.onTouchStart?.();
 						},
 					};
+
+					if (passedRenderTrigger) {
+						const renderedValue = renderValue();
+
+						return (
+							<>
+								{renderTrigger({
+									...triggerAttributes,
+									// Actionable handles both handlers for the default trigger,
+									// with a custom one we have to compose them manually
+									onClick: (e) => {
+										if (disabled) return;
+										onClick?.(e);
+										triggerAttributes.onClick?.();
+									},
+									children: renderedValue ?? placeholder,
+								})}
+								<SelectHiddenInput
+									value={value}
+									name={name}
+									id={id}
+									inputAttributes={inputAttributes}
+								/>
+							</>
+						);
+					}
 
 					return (
 						<SelectTrigger {...props} triggerAttributes={triggerAttributes} value={value}>

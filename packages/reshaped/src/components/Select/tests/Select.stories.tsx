@@ -2,14 +2,19 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, Mock, userEvent, within } from "storybook/test";
 
+import Actionable from "@/components/Actionable";
 import Badge from "@/components/Badge";
 import FormControl from "@/components/FormControl";
+import Icon from "@/components/Icon";
 import MenuItem from "@/components/MenuItem";
 import Modal from "@/components/Modal";
 import Select, { SelectProps, SelectTrigger } from "@/components/Select";
 import Text from "@/components/Text";
+import View from "@/components/View";
 import useToggle from "@/hooks/useToggle";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconChevronDown from "@/icons/ChevronDown";
+import IconChevronUp from "@/icons/ChevronUp";
 import IconZap from "@/icons/Zap";
 
 export default {
@@ -382,6 +387,61 @@ export const renderValue = {
 				</Example.Item>
 			</Example>
 		);
+	},
+};
+
+export const renderTrigger: StoryObj<{ handleChange: Mock }> = {
+	name: "renderTrigger",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="renderTrigger">
+				<Select
+					name="animal"
+					placeholder="Select an animal"
+					onChange={args.handleChange}
+					renderTrigger={(attributes, { active }) => (
+						<Actionable attributes={attributes}>
+							<View direction="row" gap={1} align="center">
+								<Text color="neutral-faded">{attributes.children}</Text>
+								<Icon svg={active ? IconChevronUp : IconChevronDown} size={4} />
+							</View>
+						</Actionable>
+					)}
+				>
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas, canvasElement, args }) => {
+		const [trigger] = canvas.getAllByRole("button");
+		const [hiddenInput] = Array.from(canvasElement.querySelectorAll('input[type="hidden"]'));
+
+		expect(hiddenInput).toHaveAttribute("name", "animal");
+		expect(hiddenInput).toHaveValue("");
+		expect(trigger).toHaveTextContent("Select an animal");
+		expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+		await userEvent.click(trigger);
+
+		expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+		const [_, option] = within(canvasElement.ownerDocument.body).getAllByRole("option");
+
+		await userEvent.click(option);
+
+		expect(hiddenInput).toHaveValue("turtle");
+		expect(trigger).toHaveTextContent("Turtle");
+		expect(trigger).toHaveAttribute("aria-expanded", "false");
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith({
+			name: "animal",
+			value: "turtle",
+		});
 	},
 };
 
