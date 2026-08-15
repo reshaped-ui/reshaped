@@ -3,6 +3,7 @@ import type { ClassName } from "@reshaped/utilities";
 
 import type { ActionableProps } from "@/components/Actionable";
 import type { DropdownMenuProps } from "@/components/DropdownMenu";
+import type { FlyoutTriggerAttributes } from "@/components/Flyout";
 import type { IconProps } from "@/components/Icon";
 import type { MenuItemProps } from "@/components/MenuItem";
 import type * as G from "@/types/global";
@@ -12,6 +13,34 @@ type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 
 type RenderSingleValue = (args: { value: string }) => React.ReactNode;
 type RenderMultipleValues = (args: { value: string[] }) => React.ReactNode;
+
+/**
+ * Attributes passed to the renderTrigger function, they have to be applied
+ * to the custom trigger element for it to control the dropdown
+ */
+export type TriggerRenderAttributes = Omit<FlyoutTriggerAttributes, "onClick"> & {
+	// Widened from the Flyout signature since we also pass the Select onClick event through it
+	onClick?: ActionableProps["onClick"];
+	/** Currently selected value, falls back to the placeholder when there is no selection */
+	children?: React.ReactNode;
+};
+
+type TriggerRenderState = {
+	/** Indicates that the dropdown is currently displayed */
+	active: boolean;
+	disabled?: boolean;
+	hasError?: boolean;
+};
+
+type RenderSingleTrigger = (
+	attributes: TriggerRenderAttributes,
+	props: TriggerRenderState & { value: string }
+) => React.ReactNode;
+
+type RenderMultipleTrigger = (
+	attributes: TriggerRenderAttributes,
+	props: TriggerRenderState & { value: string[] }
+) => React.ReactNode;
 
 // Use a single event type across Native and Custom Select variants so that
 // inline `onChange` callbacks can be contextually typed consistently across
@@ -84,12 +113,14 @@ export type NativeControlledFragment = {
 	value: string;
 	defaultValue?: never;
 	renderValue?: never;
+	renderTrigger?: never;
 	onChange?: SelectChangeHandler<string>;
 };
 export type NativeUncontrolledFragment = {
 	value?: never;
 	defaultValue?: string;
 	renderValue?: never;
+	renderTrigger?: never;
 	onChange?: SelectChangeHandler<string>;
 };
 
@@ -99,6 +130,7 @@ export type CustomControlledFragment =
 			value: string;
 			defaultValue?: never;
 			renderValue?: RenderSingleValue;
+			renderTrigger?: RenderSingleTrigger;
 			onChange?: SelectChangeHandler<string>;
 	  }
 	| {
@@ -106,6 +138,7 @@ export type CustomControlledFragment =
 			value: string[];
 			defaultValue?: never[];
 			renderValue: RenderMultipleValues;
+			renderTrigger?: RenderMultipleTrigger;
 			onChange?: SelectChangeHandler<string[]>;
 	  };
 export type CustomUncontrolledFragment =
@@ -114,6 +147,7 @@ export type CustomUncontrolledFragment =
 			value?: never;
 			defaultValue?: string;
 			renderValue?: RenderSingleValue;
+			renderTrigger?: RenderSingleTrigger;
 			onChange?: SelectChangeHandler<string>;
 	  }
 	| {
@@ -121,6 +155,7 @@ export type CustomUncontrolledFragment =
 			value?: never[];
 			defaultValue?: string[];
 			renderValue: RenderMultipleValues;
+			renderTrigger?: RenderMultipleTrigger;
 			onChange?: SelectChangeHandler<string[]>;
 	  };
 
@@ -159,6 +194,4 @@ export type TriggerProps = Pick<
 	triggerAttributes?: ActionableProps["attributes"];
 };
 
-export type RootProps = Omit<Props, "children"> & {
-	children: (props: Omit<Props, "children">) => React.ReactNode;
-};
+export type HiddenInputProps = Pick<TriggerProps, "value" | "name" | "id" | "inputAttributes">;
