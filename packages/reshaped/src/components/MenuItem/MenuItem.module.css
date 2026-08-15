@@ -32,8 +32,10 @@ button.root {
 
 @responsive .--size {
 	@value small {
-		/* Padding grows by the line height difference to keep the size the same as with body-2 text */
-		--rs-p-v: calc(var(--rs-unit-x1) + var(--rs-caption-1-line-height-offset));
+		/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */
+		--rs-p-v: calc(
+			var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+		);
 		--rs-p-h: var(--rs-unit-x1-5);
 		--rs-menu-item-radius: var(--rs-radius-small);
 

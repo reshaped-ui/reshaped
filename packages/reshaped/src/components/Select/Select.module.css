@@ -108,8 +108,10 @@
 		--rs-select-chevron-size: var(--rs-unit-x4);
 		--rs-select-radius: var(--rs-radius-small);
 
-		/* Padding grows by the line height difference to keep the size the same as with body-2 text */
-		--rs-select-p-v: calc(var(--rs-unit-x1) + var(--rs-caption-1-line-height-offset));
+		/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */
+		--rs-select-p-v: calc(
+			var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+		);
 		--rs-select-p-h: var(--rs-unit-x2);
 		--rs-select-font-size: var(--rs-font-size-caption-1);
 		--rs-select-line-height: var(--rs-line-height-caption-1);

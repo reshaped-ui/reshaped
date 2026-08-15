@@ -195,8 +195,10 @@
 		--rs-text-field-gap: var(--rs-unit-x1-5);
 		--rs-text-field-radius: var(--rs-radius-small);
 
-		/* Padding grows by the line height difference to keep the size the same as with body-2 text */
-		--rs-text-field-p-v: calc(var(--rs-unit-x1) + var(--rs-caption-1-line-height-offset));
+		/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */
+		--rs-text-field-p-v: calc(
+			var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
+		);
 		--rs-text-field-p-h: var(--rs-unit-x2);
 		--rs-text-field-icon-align: var(--rs-unit-x0-5);
 		--rs-text-field-font-size: var(--rs-font-size-caption-1);
