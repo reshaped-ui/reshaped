@@ -28,7 +28,7 @@ type HotkeyData = {
  * Utilities
  */
 const COMBINATION_DELIMETER = "+";
-let modifiedKeys: string[] = [];
+const MODIFIER_KEYS = ["meta", "control", "alt", "shift"];
 
 const formatHotkey = (hotkey: string) => {
 	if (hotkey === " ") return hotkey;
@@ -44,11 +44,30 @@ const getEventKey = (e: KeyboardEvent) => {
 	if (!e.key) return;
 
 	// Having alt pressed modifies e.key value, so relying on e.code for it
-	if (e.altKey && /^[Key|Digit|Numpad]/.test(e.code)) {
-		return e.code.toLowerCase().replace(/key|digit|numpad/, "");
+	if (e.altKey && /^(Key|Digit|Numpad)/.test(e.code)) {
+		return e.code.toLowerCase().replace(/^(key|digit|numpad)/, "");
 	}
 
 	return e.key.toLowerCase();
+};
+
+/**
+ * Support for `mod` that represents both Mac and Win keyboards
+ * We create the hotkeyId again to sort the mod key correctly
+ */
+const getPressedIds = (pressedId: string) => {
+	const pressedFormattedKeys = pressedId.split(COMBINATION_DELIMETER);
+	const ids = [pressedId];
+
+	if (pressedFormattedKeys.includes("control")) {
+		ids.push(getHotkeyId(pressedId.replace("control", "mod")));
+	}
+
+	if (pressedFormattedKeys.includes("meta")) {
+		ids.push(getHotkeyId(pressedId.replace("meta", "mod")));
+	}
+
+	return ids;
 };
 
 // Removing the unknown gets highlighted an invalid syntax
@@ -72,36 +91,39 @@ export class HotkeyStore {
 
 	getSize = () => Object.keys(this.hotkeyMap).length;
 
+	hasHandlers = (pressedId: string) => {
+		return getPressedIds(pressedId).some((id) => this.hotkeyMap[id]?.size);
+	};
+
 	bindHotkeys = (
 		hotkeys: Hotkeys,
 		ref: React.RefObject<HTMLElement | null>,
 		options: HotkeyOptions
 	) => {
-		walkHotkeys(hotkeys, (id, hotkeyData) => {
-			if (!hotkeyData) return;
+		const boundData: Array<{ id: string; data: HotkeyData }> = [];
+
+		walkHotkeys(hotkeys, (id, callback) => {
+			if (!callback) return;
+
+			const data = { callback, ref, options };
 
 			if (!this.hotkeyMap[id]) {
 				this.hotkeyMap[id] = new Set();
 			}
 
-			this.hotkeyMap[id].add({ callback: hotkeyData, ref, options });
+			this.hotkeyMap[id].add(data);
+			boundData.push({ id, data });
 		});
-	};
 
-	unbindHotkeys = (hotkeys: Hotkeys) => {
-		walkHotkeys(hotkeys, (id, hotkeyCallback) => {
-			if (!hotkeyCallback) return;
+		return () => {
+			boundData.forEach(({ id, data }) => {
+				this.hotkeyMap[id]?.delete(data);
 
-			this.hotkeyMap[id]?.forEach((data) => {
-				if (data.callback === hotkeyCallback) {
-					this.hotkeyMap[id].delete(data);
+				if (!this.hotkeyMap[id]?.size) {
+					delete this.hotkeyMap[id];
 				}
 			});
-
-			if (!this.hotkeyMap[id]?.size) {
-				delete this.hotkeyMap[id];
-			}
-		});
+		};
 	};
 
 	handleKeyDown = (pressedMap: PressedMap, e: KeyboardEvent) => {
@@ -109,45 +131,26 @@ export class HotkeyStore {
 		if (!pressedKeys.length) return;
 
 		const pressedId = getHotkeyId(pressedKeys.join(COMBINATION_DELIMETER));
-		const pressedFormattedKeys = pressedId.split(COMBINATION_DELIMETER);
+		const eventTarget = e.composedPath()[0] as Node;
 
-		const hotkeyData = this.hotkeyMap[pressedId];
+		getPressedIds(pressedId).forEach((id) => {
+			const hotkeyData = this.hotkeyMap[id];
+			if (!hotkeyData?.size) return;
 
-		/**
-		 * Support for `mod` that represents both Mac and Win keyboards
-		 * We create the hotkeyId again to sort the mod key correctly
-		 */
-		const controlToModPressedId = getHotkeyId(pressedId.replace("control", "mod"));
-		const metaToModPressedId = getHotkeyId(pressedId.replace("meta", "mod"));
-		const hotkeyControlModData =
-			pressedFormattedKeys.includes("control") && this.hotkeyMap[controlToModPressedId];
-		const hotkeyMetaModData =
-			pressedFormattedKeys.includes("meta") && this.hotkeyMap[metaToModPressedId];
+			hotkeyData.forEach((data) => {
+				if (
+					data.ref.current &&
+					!(eventTarget === data.ref.current || data.ref.current.contains(eventTarget))
+				) {
+					return;
+				}
 
-		[hotkeyData, hotkeyControlModData, hotkeyMetaModData].forEach((hotkeyData) => {
-			if (!hotkeyData) return;
+				if (data.options.preventDefault) {
+					e.preventDefault();
+				}
 
-			if (hotkeyData?.size) {
-				hotkeyData.forEach((data) => {
-					const eventTarget = e.composedPath()[0] as Node;
-
-					if (
-						data.ref.current &&
-						!(eventTarget === data.ref.current || data.ref.current.contains(eventTarget))
-					) {
-						return;
-					}
-
-					const resolvedEvent = pressedMap[pressedId];
-
-					if (data.options.preventDefault) {
-						resolvedEvent?.preventDefault();
-						e.preventDefault();
-					}
-
-					data.callback(e);
-				});
-			}
+				data.callback(e);
+			});
 		});
 	};
 }
@@ -159,10 +162,21 @@ const globalHotkeyStore = new HotkeyStore();
  */
 const HotkeyContext = React.createContext({} as Context);
 
-export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
+const HotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const { children } = props;
-	const [pressedMap, setPressedMap] = React.useState<PressedMap>({});
+	// Ref is the source of truth to keep the map in sync with the native events,
+	// state is mirroring it to re-render the consumers relying on isPressed
+	const pressedMapRef = React.useRef<PressedMap>({});
+	const [, setPressedState] = React.useState<PressedMap>({});
+	// Keyup events don't trigger for regular keys while Meta is pressed on macOS,
+	// so we track the keys pressed during that time to release them manually
+	const metaModifiedKeysRef = React.useRef<string[]>([]);
 	const hooksCountRef = React.useRef(0);
+
+	const setPressedMap = React.useCallback((nextPressedMap: PressedMap) => {
+		pressedMapRef.current = nextPressedMap;
+		setPressedState(nextPressedMap);
+	}, []);
 
 	const addPressedKey = React.useCallback(
 		(e: KeyboardEvent): PressedMap | undefined => {
@@ -171,18 +185,33 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 			const eventKey = getEventKey(e);
 			if (!eventKey) return;
 
-			const nextPressedMap = { ...pressedMap };
+			const nextPressedMap = { ...pressedMapRef.current };
 			nextPressedMap[eventKey] = e;
 
-			// Key up won't trigger for other keys while Meta is pressed so we need to cache them
-			// and remove on Meta keyup
-			if (e.metaKey) modifiedKeys.push(...Object.keys(nextPressedMap));
+			if (nextPressedMap["meta"]) {
+				if (!MODIFIER_KEYS.includes(eventKey)) {
+					// Keys pressed while Meta was held might have been released already
+					// without us receiving their keyup events, so when the whole pressed combination
+					// doesn't match any hotkey - we treat them as released
+					const staleKeys = metaModifiedKeysRef.current.filter(
+						(key) => key !== eventKey && key in nextPressedMap
+					);
+					const pressedId = getHotkeyId(Object.keys(nextPressedMap).join(COMBINATION_DELIMETER));
 
-			if (nextPressedMap["meta"]) modifiedKeys.push(eventKey);
+					if (staleKeys.length && !globalHotkeyStore.hasHandlers(pressedId)) {
+						staleKeys.forEach((key) => delete nextPressedMap[key]);
+					}
+				}
+
+				metaModifiedKeysRef.current = Object.keys(nextPressedMap).filter(
+					(key) => !MODIFIER_KEYS.includes(key)
+				);
+			}
+
 			setPressedMap(nextPressedMap);
 			return nextPressedMap;
 		},
-		[pressedMap]
+		[setPressedMap]
 	);
 
 	const removePressedKey = React.useCallback(
@@ -192,41 +221,40 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 			const eventKey = getEventKey(e);
 			if (!eventKey) return;
 
-			const nextPressedMap = { ...pressedMap };
+			const nextPressedMap = { ...pressedMapRef.current };
 			delete nextPressedMap[eventKey];
 
-			if (eventKey === "meta" || eventKey === "control") {
-				delete nextPressedMap["mod"];
-			}
-
 			if (eventKey === "meta") {
-				modifiedKeys.forEach((key) => {
-					if (!nextPressedMap[key]) return;
+				metaModifiedKeysRef.current.forEach((key) => {
 					delete nextPressedMap[key];
 				});
-				modifiedKeys = [];
+				metaModifiedKeysRef.current = [];
 			}
+
 			setPressedMap(nextPressedMap);
 		},
-		[pressedMap]
+		[setPressedMap]
 	);
 
-	const isPressed = (hotkey: string) => {
+	const isPressed = React.useCallback((hotkey: string) => {
+		const pressedMap = pressedMapRef.current;
 		const keys = formatHotkey(hotkey).split(COMBINATION_DELIMETER);
 
-		if (keys.some((key) => !pressedMap[key])) return false;
-		return true;
-	};
+		return keys.every((key) => {
+			if (key === "mod") return Boolean(pressedMap["meta"] || pressedMap["control"]);
+			return Boolean(pressedMap[key]);
+		});
+	}, []);
 
 	const handleWindowKeyDown = React.useCallback(
 		(e: KeyboardEvent) => {
 			// Browsers trigger keyboard event without passing e.key when you click on autocomplete
 			if (!e.key) return;
 
-			const nextPressedMap = addPressedKey(e) ?? pressedMap;
+			const nextPressedMap = addPressedKey(e) ?? pressedMapRef.current;
 			globalHotkeyStore.handleKeyDown(nextPressedMap, e);
 		},
-		[addPressedKey, pressedMap]
+		[addPressedKey]
 	);
 
 	const handleWindowKeyUp = React.useCallback(
@@ -240,16 +268,16 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 
 	const handleWindowBlur = React.useCallback(() => {
 		setPressedMap({});
-		modifiedKeys = [];
-	}, []);
+		metaModifiedKeysRef.current = [];
+	}, [setPressedMap]);
 
 	const addHotkeys: Context["addHotkeys"] = React.useCallback((hotkeys, ref, options = {}) => {
 		hooksCountRef.current += 1;
-		globalHotkeyStore.bindHotkeys(hotkeys, ref, options);
+		const unbindHotkeys = globalHotkeyStore.bindHotkeys(hotkeys, ref, options);
 
 		return () => {
 			hooksCountRef.current -= 1;
-			globalHotkeyStore.unbindHotkeys(hotkeys);
+			unbindHotkeys();
 		};
 	}, []);
 
@@ -268,6 +296,16 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 	return (
 		<HotkeyContext.Provider value={{ addHotkeys, isPressed }}>{children}</HotkeyContext.Provider>
 	);
+};
+
+export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
+	const { children } = props;
+	// Hotkeys are handled globally, so nested providers rely on the root provider
+	// instead of attaching their own window event listeners
+	const hasParentProvider = Boolean(React.useContext(HotkeyContext).addHotkeys);
+
+	if (hasParentProvider) return <>{children}</>;
+	return <HotkeysProvider>{children}</HotkeysProvider>;
 };
 
 export const useSingletonHotkeys = () => React.useContext(HotkeyContext);
