@@ -1,5 +1,7 @@
 # @reshaped/utilities
 
+## 4.2.0-canary.1
+
 ## 4.2.0-canary.0
 
 ## 4.1.0

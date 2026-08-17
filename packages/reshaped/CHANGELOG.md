@@ -1,5 +1,15 @@
 # reshaped
 
+## 4.2.0-canary.1
+
+### Patch Changes
+
+- [#657](https://github.com/reshaped-ui/reshaped/pull/657) [`7561531`](https://github.com/reshaped-ui/reshaped/commit/7561531ea8429fca930ec4dea450ca6ba5e81be2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useHotkeys: Fixed hotkeys not triggering when switching between different keys while holding Meta on macOS, since the keyup events for regular keys are not emitted while Meta is pressed. Also fixed the pressed keys tracking for quick key sequences, the `mod` key support in `checkHotkeyState`, duplicate hotkey calls when multiple Reshaped providers are rendered on the same page and hotkeys removal when the same callback is used by multiple components
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.2.0-canary.1
+  - @reshaped/theming@4.2.0-canary.1
+
 ## 4.2.0-canary.0
 
 ### Minor Changes
