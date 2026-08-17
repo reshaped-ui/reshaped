@@ -89,10 +89,6 @@ const walkHotkeys = <T extends unknown>(
 export class HotkeyStore {
 	hotkeyMap: Record<string, Set<HotkeyData>> = {};
 
-	// Multiple providers rendered on the page attach their own window listeners,
-	// so we track the handled events to call the hotkeys only once per event
-	private lastHandledEvent: KeyboardEvent | null = null;
-
 	getSize = () => Object.keys(this.hotkeyMap).length;
 
 	hasHandlers = (pressedId: string) => {
@@ -131,12 +127,8 @@ export class HotkeyStore {
 	};
 
 	handleKeyDown = (pressedMap: PressedMap, e: KeyboardEvent) => {
-		if (e === this.lastHandledEvent) return;
-
 		const pressedKeys = Object.keys(pressedMap);
 		if (!pressedKeys.length) return;
-
-		this.lastHandledEvent = e;
 
 		const pressedId = getHotkeyId(pressedKeys.join(COMBINATION_DELIMETER));
 		const eventTarget = e.composedPath()[0] as Node;
@@ -170,7 +162,7 @@ const globalHotkeyStore = new HotkeyStore();
  */
 const HotkeyContext = React.createContext({} as Context);
 
-export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
+const HotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 	const { children } = props;
 	// Ref is the source of truth to keep the map in sync with the native events,
 	// state is mirroring it to re-render the consumers relying on isPressed
@@ -304,6 +296,16 @@ export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> =
 	return (
 		<HotkeyContext.Provider value={{ addHotkeys, isPressed }}>{children}</HotkeyContext.Provider>
 	);
+};
+
+export const SingletonHotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
+	const { children } = props;
+	// Hotkeys are handled globally, so nested providers rely on the root provider
+	// instead of attaching their own window event listeners
+	const hasParentProvider = Boolean(React.useContext(HotkeyContext).addHotkeys);
+
+	if (hasParentProvider) return <>{children}</>;
+	return <HotkeysProvider>{children}</HotkeysProvider>;
 };
 
 export const useSingletonHotkeys = () => React.useContext(HotkeyContext);
