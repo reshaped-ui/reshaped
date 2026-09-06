@@ -49,6 +49,9 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 	);
 
 	const handleDismiss: ActionableProps["onClick"] = (e) => {
+		// Prevent the parent Actionable from handling the click,
+		// including following the link when the badge is rendered as one
+		e.preventDefault();
 		e.stopPropagation();
 		onDismiss?.();
 	};
@@ -69,6 +72,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 					<Text
 						variant={size === "large" ? "body-2" : "caption-1"}
 						weight="medium"
+						className={s.text}
 						attributes={{
 							"aria-hidden": hidden ? "true" : undefined,
 						}}

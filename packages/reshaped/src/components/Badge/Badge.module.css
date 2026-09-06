@@ -13,6 +13,7 @@
 	color: var(--rs-color-on-background-neutral);
 	box-sizing: border-box;
 	box-shadow: 0 0 0 1px var(--rs-badge-border-color) inset;
+	max-width: 100%;
 
 	/* GPU for container positioning */
 	backface-visibility: hidden;
@@ -32,9 +33,20 @@
 	display: inline-flex;
 	align-items: center;
 	gap: var(--rs-badge-gap);
+	max-width: 100%;
+	min-width: 0;
+}
+
+.text {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	min-width: 0;
 }
 
 .icon {
+	flex-shrink: 0;
+
 	&:first-child {
 		margin-inline-start: calc(var(--rs-unit-x0-5) * -1);
 	}
@@ -49,6 +61,7 @@
 }
 
 .dismiss {
+	flex-shrink: 0;
 	border-radius: var(--rs-radius-small);
 	transition: var(--rs-duration-fast) var(--rs-easing-standard);
 	transition-property: opacity;
@@ -170,6 +183,7 @@
 .container .root {
 	position: absolute;
 	z-index: 10;
+	max-width: none;
 	inset-inline-end: 0;
 	transform: translate(50%, var(--rs-badge-translate-y)) scale(1);
 	user-select: none;
