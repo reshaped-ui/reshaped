@@ -20,6 +20,7 @@ const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		onClick,
 		stopPropagation,
 		render,
+		fullWidth,
 	} = props;
 	const rootClassNames = classNames(
 		s.root,
@@ -34,6 +35,7 @@ const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		<Actionable
 			href={href}
 			disabled={disabled}
+			fullWidth={fullWidth}
 			className={rootClassNames}
 			attributes={attributes}
 			type={type}

@@ -12,6 +12,7 @@ export type Props = Pick<
 	| "type"
 	| "stopPropagation"
 	| "render"
+	| "fullWidth"
 > & {
 	/** Icon at the start position */
 	icon?: IconProps["svg"];

@@ -175,6 +175,15 @@ export const render: StoryObj = {
 	},
 };
 
+export const fullWidth: StoryObj = {
+	name: "fullWidth",
+	render: () => (
+		<Link fullWidth onClick={() => {}}>
+			Trigger
+		</Link>
+	),
+};
+
 export const className: StoryObj = {
 	name: "className, attributes",
 	render: () => (
