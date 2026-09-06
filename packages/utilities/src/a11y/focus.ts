@@ -1,4 +1,5 @@
 import { getShadowRoot } from "@/dom";
+import { checkKeyboardMode } from "./keyboardMode";
 import type { FocusableElement, FocusableOptions } from "./types";
 
 const pseudoFocusAttribute = "data-rs-focus";
@@ -23,7 +24,7 @@ export const focusElement = (el: FocusableElement, options?: { pseudoFocus?: boo
 	if (options?.pseudoFocus) {
 		el.setAttribute(pseudoFocusAttribute, "true");
 	} else {
-		el.focus();
+		el.focus({ preventScroll: !checkKeyboardMode() });
 	}
 };
 
