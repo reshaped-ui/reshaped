@@ -23,7 +23,7 @@ export type { CheckboxProps } from "@/components/Checkbox";
 export { default as Checkbox } from "@/components/Checkbox";
 export type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 export { default as CheckboxGroup } from "@/components/CheckboxGroup";
-export type { ContextMenuProps } from "@/components/ContextMenu";
+export type { ContextMenuInstance, ContextMenuProps } from "@/components/ContextMenu";
 export { default as ContextMenu } from "@/components/ContextMenu";
 export type { DividerProps } from "@/components/Divider";
 export { default as Divider } from "@/components/Divider";

@@ -25,7 +25,7 @@ export type Props = Pick<
 	| "instanceRef"
 > & {
 	/** Node for inserting children */
-	children: (attributes: FlyoutTriggerAttributes) => React.ReactNode;
+	children: (attributes: FlyoutTriggerAttributes, props: { active: boolean }) => React.ReactNode;
 	/** Text content for the tooltip */
 	text?: React.ReactNode;
 	/** Color of the tooltip

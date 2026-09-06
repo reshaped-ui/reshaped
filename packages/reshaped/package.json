@@ -1,6 +1,6 @@
 {
 	"name": "reshaped",
-	"version": "4.0.3",
+	"version": "4.2.0-canary.1",
 	"description": "Professionally crafted design system in React and Figma for building products of any scale and complexity",
 	"keywords": [
 		"accessibility",
@@ -51,6 +51,15 @@
 		"./config/postcss": {
 			"types": "./dist/config/postcss.d.ts",
 			"import": "./dist/config/postcss.js",
+			"default": "./dist/config/postcss.cjs"
+		},
+		"./config/postcss.js": {
+			"types": "./dist/config/postcss.d.ts",
+			"import": "./dist/config/postcss.js",
+			"default": "./dist/config/postcss.cjs"
+		},
+		"./config/postcss.cjs": {
+			"types": "./dist/config/postcss.d.cts",
 			"default": "./dist/config/postcss.cjs"
 		},
 		"./bundle": {

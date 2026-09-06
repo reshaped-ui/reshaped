@@ -53,6 +53,22 @@
 	}
 }
 
+.--orientation-vertical {
+	overflow-x: hidden;
+
+	& > .content {
+		max-width: 100%;
+	}
+}
+
+.--orientation-horizontal {
+	overflow-y: hidden;
+
+	& > .content {
+		max-height: 100%;
+	}
+}
+
 @keyframes fade-block-start {
 	from {
 		--rs-scroll-area-fade-block-start: 0px;
@@ -193,6 +209,7 @@
 	inset-block: 0;
 	inset-inline-end: 0;
 	width: var(--rs-scroll-area-thumb-size);
+	padding-block: calc(var(--rs-scroll-area-thumb-offset) + var(--rs-unit-x1));
 
 	& .thumb::before {
 		inset-block-start: calc(var(--rs-scroll-area-position) * 100%);
@@ -205,6 +222,7 @@
 	inset-inline: 0;
 	inset-block-end: 0;
 	height: var(--rs-scroll-area-thumb-size);
+	padding-inline: calc(var(--rs-scroll-area-thumb-offset) + var(--rs-unit-x0-5));
 
 	& .thumb::before {
 		inset-inline-start: calc(var(--rs-scroll-area-position) * 100%);
@@ -223,7 +241,10 @@
 
 /* Only show the thumb for the current scroll area and not for the nested ones */
 .--display-visible > .scrollbar .thumb,
-.--display-hover:hover > .scrollbar .thumb {
+.--display-hover:hover > .scrollbar .thumb,
+.--display-hover > .--scrollbar-dragging .thumb,
+.--display-scroll.--scrolling > .scrollbar .thumb,
+.--display-scroll > .--scrollbar-dragging .thumb {
 	opacity: 1;
 }
 

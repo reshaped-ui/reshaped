@@ -12,17 +12,19 @@ const Expandable: React.FC<T.ContentProps> = (props) => {
 	const { children, active, attributes } = props;
 	const rootRef = React.useRef<HTMLDivElement>(null);
 	const mountedRef = React.useRef(false);
+	const animatedActiveRef = React.useRef(active);
+	const frameRef = React.useRef<number | null>(null);
 	const [animatedHeight, setAnimatedHeight] = React.useState<React.CSSProperties["height"] | null>(
 		active ? "auto" : null
 	);
 	const contentClassNames = classNames(
 		s.root,
-
+		animatedHeight !== null && animatedHeight !== 0 && s["--visible"],
 		mountedRef.current && animatedHeight !== "auto" && s["--animated"]
 	);
 
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		if (e.propertyName !== "height") return;
+		if (e.propertyName !== "height" || e.target !== rootRef.current) return;
 
 		setAnimatedHeight(active ? "auto" : null);
 	};
@@ -35,33 +37,45 @@ const Expandable: React.FC<T.ContentProps> = (props) => {
 		});
 	}, []);
 
+	// Animating only on the active prop change keeps React from replaying the animation
+	// when it tears down and sets up the effects of the mounted component again
 	useIsomorphicLayoutEffect(() => {
 		const rootEl = rootRef.current;
-		if (!rootEl || !mountedRef.current) return;
+		const activeChanged = animatedActiveRef.current !== active;
 
-		if (!checkTransitions()) {
+		animatedActiveRef.current = active;
+
+		if (!rootEl || !activeChanged) return;
+
+		if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+		frameRef.current = null;
+
+		const settle = () => {
+			rootEl.style.height = "";
 			setAnimatedHeight(active ? "auto" : null);
+		};
+
+		if (!mountedRef.current || !checkTransitions()) {
+			settle();
 			return;
 		}
 
-		if (active) {
-			rootEl.style.height = "auto";
+		const currentHeight = rootEl.clientHeight;
 
-			requestAnimationFrame(() => {
-				const targetHeight = rootEl.clientHeight;
-				rootEl.style.height = "0";
+		if (active) rootEl.style.height = "auto";
+		const targetHeight = active ? rootEl.clientHeight : 0;
 
-				requestAnimationFrame(() => {
-					setAnimatedHeight(targetHeight);
-				});
-			});
-		} else {
-			rootEl.style.height = `${rootEl.clientHeight}px`;
-
-			requestAnimationFrame(() => {
-				setAnimatedHeight(0);
-			});
+		if (targetHeight === currentHeight) {
+			settle();
+			return;
 		}
+
+		rootEl.style.height = `${currentHeight}px`;
+
+		frameRef.current = requestAnimationFrame(() => {
+			frameRef.current = null;
+			setAnimatedHeight(targetHeight);
+		});
 	}, [active]);
 
 	return (

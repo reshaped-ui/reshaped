@@ -101,8 +101,8 @@
 --rs-radius-large: 10px;
 --rs-duration-rapid: 100ms;
 --rs-duration-fast: 150ms;
---rs-duration-medium: 200ms;
---rs-duration-slow: 300ms;
+--rs-duration-medium: 250ms;
+--rs-duration-slow: 400ms;
 --rs-easing-standard: cubic-bezier(0.2, 0, 0, 1);
 --rs-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 --rs-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
@@ -202,7 +202,7 @@
 --rs-color-background-neutral-faded: oklch(1 0 89.88 / 0.04);
 --rs-color-background-neutral-highlighted: oklch(0.3608 0 89.88);
 --rs-color-background-neutral-highlighted-faded: oklch(1 0 0 / 0.05);
---rs-color-border-neutral: oklch(1 0 89.88 / 0.11);
+--rs-color-border-neutral: oklch(1 0 89.88 / 0.12);
 --rs-color-border-neutral-faded: oklch(1 0 89.88 / 0.08);
 --rs-color-foreground-neutral: oklch(0.96 0 89.88);
 --rs-color-foreground-neutral-faded: oklch(0.74 0 89.88);

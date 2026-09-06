@@ -3,6 +3,7 @@ import { expect, fn, Mock, userEvent } from "storybook/test";
 
 import Accordion from "@/components/Accordion";
 import Button from "@/components/Button";
+import MenuItem from "@/components/MenuItem";
 import View from "@/components/View";
 import { Placeholder } from "@/utilities/storybook";
 
@@ -254,4 +255,22 @@ export const className: StoryObj = {
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");
 	},
+};
+
+export const composition: StoryObj = {
+	name: "test: composition",
+	render: () => (
+		<Accordion>
+			<Accordion.Trigger>
+				<Placeholder>Trigger</Placeholder>
+			</Accordion.Trigger>
+			<Accordion.Content>
+				<View paddingTop={2}>
+					<MenuItem>Menu item 1</MenuItem>
+					<MenuItem>Menu item 2</MenuItem>
+					<MenuItem>Menu item 3</MenuItem>
+				</View>
+			</Accordion.Content>
+		</Accordion>
+	),
 };
