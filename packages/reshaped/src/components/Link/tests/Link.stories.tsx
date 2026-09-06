@@ -94,6 +94,34 @@ export const icon = {
 	),
 };
 
+export const fullWidth: StoryObj = {
+	name: "fullWidth",
+	render: () => (
+		<Example>
+			<Example.Item title="fullWidth">
+				<Link fullWidth href="https://reshaped.so">
+					Link
+				</Link>
+			</Example.Item>
+			<Example.Item title="fullWidth, with icon">
+				<Link fullWidth icon={IconZap} href="https://reshaped.so">
+					Link
+				</Link>
+			</Example.Item>
+			<Example.Item title={["responsive fullWidth", "[s] true", "[m+] false"]}>
+				<Link fullWidth={{ s: true, m: false }} href="https://reshaped.so">
+					Link
+				</Link>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas }) => {
+		const el = canvas.getAllByRole("link")[0];
+
+		expect(el).toHaveStyle({ display: "block" });
+	},
+};
+
 export const href: StoryObj = {
 	name: "href",
 	render: () => <Link href="https://reshaped.so">Trigger</Link>,

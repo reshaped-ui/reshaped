@@ -1,5 +1,6 @@
 import type { ActionableProps } from "@/components/Actionable";
 import type { IconProps } from "@/components/Icon";
+import type * as G from "@/types/global";
 
 export type Props = Pick<
 	ActionableProps,
@@ -23,4 +24,6 @@ export type Props = Pick<
 	 * @default "underline"
 	 */
 	variant?: "plain" | "underline";
+	/** Make the component take the full width of the parent element */
+	fullWidth?: G.Responsive<boolean>;
 };

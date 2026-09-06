@@ -3,6 +3,7 @@ import { classNames } from "@reshaped/utilities";
 
 import Actionable, { type ActionableRef } from "@/components/Actionable";
 import Icon from "@/components/Icon";
+import { responsiveClassNames } from "@/utilities/props";
 import type * as T from "./Link.types";
 import s from "./Link.module.css";
 
@@ -13,6 +14,7 @@ const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		href,
 		color = "primary",
 		variant = "underline",
+		fullWidth,
 		className,
 		children,
 		attributes,
@@ -27,7 +29,8 @@ const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		disabled && s["--disabled"],
 		variant && s[`--variant-${variant}`],
 		color && s[`--color-${color}`],
-		icon && s["--with-icon"]
+		icon && s["--with-icon"],
+		responsiveClassNames(s, "--full-width", fullWidth)
 	);
 
 	return (

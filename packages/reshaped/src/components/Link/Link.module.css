@@ -59,3 +59,23 @@
 	align-items: center;
 	gap: round(down, calc(1em / 2.5), var(--rs-unit-x1));
 }
+
+@responsive .root.--full-width {
+	@value true {
+		display: block;
+		width: 100%;
+
+		&.--with-icon {
+			display: flex;
+		}
+	}
+
+	@value false {
+		display: inline;
+		width: auto;
+
+		&.--with-icon {
+			display: inline-flex;
+		}
+	}
+}
