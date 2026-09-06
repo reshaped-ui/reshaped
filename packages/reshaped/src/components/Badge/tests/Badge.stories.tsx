@@ -337,6 +337,69 @@ export const href: StoryObj = {
 	},
 };
 
+export const hrefDismissible: StoryObj<{ handleDismiss: ReturnType<typeof fn> }> = {
+	name: "test: href, onDismiss",
+	args: {
+		handleDismiss: fn(),
+	},
+	render: (args) => (
+		<Badge href="#badge-dismiss" onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss">
+			Badge
+		</Badge>
+	),
+	play: async ({ canvas, args }) => {
+		const initialHash = window.location.hash;
+		const dismissTrigger = canvas.getByRole("button", { name: "Dismiss" });
+
+		expect(canvas.getByRole("link")).toHaveAttribute("href", "#badge-dismiss");
+
+		await userEvent.click(dismissTrigger);
+
+		expect(args.handleDismiss).toHaveBeenCalledTimes(1);
+		// Dismissing the badge shouldn't follow the link
+		expect(window.location.hash).toBe(initialHash);
+	},
+};
+
+export const truncation: StoryObj = {
+	name: "test: truncation",
+	render: () => (
+		<Example>
+			<Example.Item title={["truncation", "text is truncated, badge is not wider than 200px"]}>
+				<View width="200px" align="start" gap={3} attributes={{ "data-testid": "root" }}>
+					<Badge attributes={{ "data-testid": "badge" }}>
+						Badge with a very long text that should get truncated
+					</Badge>
+					<Badge icon={IconPlus} endIcon={IconPlus} attributes={{ "data-testid": "badge" }}>
+						Badge with a very long text that should get truncated
+					</Badge>
+					<Badge
+						onDismiss={() => {}}
+						dismissAriaLabel="Dismiss"
+						attributes={{ "data-testid": "badge" }}
+					>
+						Badge with a very long text that should get truncated
+					</Badge>
+				</View>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvas }) => {
+		const badges = canvas.getAllByTestId("badge");
+
+		badges.forEach((badge) => {
+			// Badge is not growing wider than its parent
+			expect(badge.getBoundingClientRect().width).toBeLessThanOrEqual(200);
+
+			// Badge text is rendered on a single line and gets clipped
+			const text = badge.querySelector("div")!;
+
+			expect(text.scrollWidth).toBeGreaterThan(text.clientWidth);
+			expect(getComputedStyle(text).textOverflow).toBe("ellipsis");
+		});
+	},
+};
+
 export const onClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
 	name: "onClick",
 	args: {
