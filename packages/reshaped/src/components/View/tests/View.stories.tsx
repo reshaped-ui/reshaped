@@ -1066,6 +1066,18 @@ export const inset = {
 				</View>
 			</Example.Item>
 
+			<Example.Item title="inset: center">
+				<View backgroundColor="neutral-faded" width={25} height={25}>
+					<View
+						backgroundColor="neutral"
+						position="absolute"
+						inset="center"
+						height={10}
+						width={10}
+					/>
+				</View>
+			</Example.Item>
+
 			<Example.Item title="responsive, [s] insetBottom: 4 [m+] insetEnd: 4">
 				<View backgroundColor="neutral-faded" width={25} height={25}>
 					<View

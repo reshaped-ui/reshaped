@@ -1,9 +1,3 @@
-@responsive [style*="--rs-inset-s:"] {
-	@variable --rs-inset 0;
-
-	inset: calc(var(--rs-inset) * var(--rs-unit-x1));
-}
-
 @responsive [style*="--rs-inset-end-"] {
 	@variable --rs-inset-end 0;
 
