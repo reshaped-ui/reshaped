@@ -17,6 +17,15 @@ const useOnClickOutside = (
 	 */
 	const isMouseDownInsideRef = React.useRef(false);
 
+	const checkEventInsideRefs = (event: Event) => {
+		const eventEl = event.composedPath()[0] as HTMLElement | undefined;
+		if (!eventEl) return false;
+
+		return refs.some(
+			(elRef) => !!elRef.current && (elRef.current === eventEl || elRef.current.contains(eventEl))
+		);
+	};
+
 	React.useEffect(() => {
 		/**
 		 * Not checking for disabled here since some components can enable the hook
@@ -24,16 +33,7 @@ const useOnClickOutside = (
 		 */
 
 		const handleMouseDown = (event: MouseEvent | TouchEvent | KeyboardEvent) => {
-			isMouseDownInsideRef.current = false;
-
-			const clickedEl = event.composedPath()[0] as HTMLElement;
-
-			refs.forEach((elRef) => {
-				if (!elRef.current) return;
-				if (elRef.current === clickedEl || elRef.current.contains(clickedEl as HTMLElement)) {
-					isMouseDownInsideRef.current = true;
-				}
-			});
+			isMouseDownInsideRef.current = checkEventInsideRefs(event);
 		};
 
 		const handleKeyDown = (event: KeyboardEvent) => {
@@ -58,14 +58,19 @@ const useOnClickOutside = (
 		if (disabled) return;
 
 		const handleClick = (event: MouseEvent | TouchEvent) => {
-			if ("button" in event && event.button === 2) return;
+			if (event.type === "contextmenu") {
+				isMouseDownInsideRef.current = checkEventInsideRefs(event);
+			}
+
 			if (isMouseDownInsideRef.current) return;
 			handlerRef.current?.(event);
 		};
 
 		document.addEventListener("click", handleClick);
+		document.addEventListener("contextmenu", handleClick);
 		return () => {
 			document.removeEventListener("click", handleClick);
+			document.removeEventListener("contextmenu", handleClick);
 		};
 		// oxlint-disable-next-line react-hooks/exhaustive-deps
 	}, [handlerRef, disabled, ...refs]);
