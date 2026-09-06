@@ -57,6 +57,26 @@ export const base: StoryObj<{ handleOutsideClick: Mock }> = {
 	},
 };
 
+export const rightClick: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "test: right click",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => <DemoBase onOutsideClick={args.handleOutsideClick} />,
+	play: async ({ canvas, args }) => {
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.pointer({ keys: "[MouseRight]", target: button });
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		await userEvent.pointer({ keys: "[MouseRight]", target: document.body });
+
+		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
+		expect(args.handleOutsideClick).toHaveBeenCalledWith();
+	},
+};
+
 const DemoRefs = (props: { onOutsideClick: () => void }) => {
 	const ref = React.useRef(null);
 	const ref2 = React.useRef(null);

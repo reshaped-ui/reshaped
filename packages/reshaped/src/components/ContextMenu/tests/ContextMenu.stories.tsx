@@ -97,6 +97,82 @@ export const handlers: StoryObj<{
 	},
 };
 
+export const outsideRightClick: StoryObj<{
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "test: closing on right click outside",
+	args: {
+		handleClose: fn(),
+	},
+	render: (args) => (
+		<View gap={4}>
+			<ContextMenu onClose={args.handleClose}>
+				<View
+					height="60px"
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					attributes={{ "data-testid": "first" }}
+				/>
+
+				<ContextMenu.Content>
+					<ContextMenu.Item>First item</ContextMenu.Item>
+				</ContextMenu.Content>
+			</ContextMenu>
+
+			<ContextMenu>
+				<View
+					height="60px"
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					attributes={{ "data-testid": "second" }}
+				/>
+
+				<ContextMenu.Content>
+					<ContextMenu.Item>Second item</ContextMenu.Item>
+				</ContextMenu.Content>
+			</ContextMenu>
+		</View>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("first") });
+
+		expect(canvas.getByText("First item")).toBeInTheDocument();
+
+		// Wait for the open animation to finish
+		await sleep(500);
+
+		// Opening another context menu should close the previous one
+		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("second") });
+
+		expect(args.handleClose).toHaveBeenCalledTimes(1);
+		expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
+		expect(canvas.getByText("Second item")).toBeInTheDocument();
+
+		await waitFor(
+			() => {
+				expect(canvas.queryByText("First item")).not.toBeInTheDocument();
+			},
+			{
+				timeout: 1000,
+			}
+		);
+
+		// Wait for the open animation to finish
+		await sleep(500);
+
+		// Right clicking the same area again keeps the menu rendered and moves it to the new position
+		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("second") });
+
+		expect(canvas.getByText("Second item")).toBeInTheDocument();
+
+		await sleep(500);
+
+		expect(canvas.getByText("Second item")).toBeInTheDocument();
+	},
+};
+
 const menuData = [
 	{ label: "Action 1" },
 	{ label: "Action 2" },
