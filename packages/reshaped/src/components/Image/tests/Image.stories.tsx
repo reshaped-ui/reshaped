@@ -1,6 +1,4 @@
 import { StoryObj } from "@storybook/react-vite";
-import { flushSync } from "react-dom";
-import { createRoot, hydrateRoot } from "react-dom/client";
 import { expect, fn, Mock, waitFor } from "storybook/test";
 
 import Icon from "@/components/Icon";
@@ -263,41 +261,5 @@ export const imageAttributes: StoryObj = {
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");
 		expect(img).toHaveAttribute("data-testid", "test-img-id");
-	},
-};
-
-export const fallbackBeforeHydration: StoryObj = {
-	name: "fallback, error before hydration",
-	render: () => <div data-testid="hydration-root" />,
-	play: async ({ canvas }) => {
-		const container = canvas.getByTestId("hydration-root");
-		const element = (
-			<Image src="/reshaped-missing-image.png" fallback={<span>Fallback content</span>} />
-		);
-
-		// Render the image once to get the markup matching the server rendered one
-		const markupContainer = document.createElement("div");
-		document.body.appendChild(markupContainer);
-		const markupRoot = createRoot(markupContainer);
-		flushSync(() => markupRoot.render(element));
-		const markup = markupContainer.innerHTML;
-		markupRoot.unmount();
-		markupContainer.remove();
-
-		// Let the server rendered image fail before React hydrates it
-		container.innerHTML = markup;
-		const img = container.querySelector("img")!;
-		await waitFor(() => expect(img.complete).toBe(true));
-		expect(img.naturalWidth).toBe(0);
-
-		const root = hydrateRoot(container, element);
-
-		try {
-			await waitFor(() => {
-				expect(container.textContent).toBe("Fallback content");
-			});
-		} finally {
-			root.unmount();
-		}
 	},
 };

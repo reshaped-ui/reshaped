@@ -66,9 +66,6 @@ const Image: React.FC<T.Props> = (props) => {
 			// Server rendered images start loading before React hydrates,
 			// so their error event can fire before the error handler gets attached
 			if (!el || !src || !el.complete || el.naturalWidth > 0) return;
-
-			// Images without intrinsic dimensions, like svg with a viewBox only,
-			// are decoded successfully, while broken images reject the promise
 			el.decode().catch(() => setStatus("error"));
 		},
 		[passedImageRef, src]
