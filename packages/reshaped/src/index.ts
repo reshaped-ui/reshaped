@@ -114,6 +114,8 @@ export type { HiddenVisuallyProps } from "@/components/HiddenVisually";
 export { default as HiddenVisually } from "@/components/HiddenVisually";
 export type { IconProps } from "@/components/Icon";
 export { default as Icon } from "@/components/Icon";
+export type { IconToggleProps } from "@/components/IconToggle";
+export { default as IconToggle } from "@/components/IconToggle";
 export type { ImageProps } from "@/components/Image";
 export { default as Image } from "@/components/Image";
 export type { OverlayProps } from "@/components/Overlay";

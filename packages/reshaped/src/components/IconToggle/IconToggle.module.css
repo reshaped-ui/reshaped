@@ -1,0 +1,32 @@
+.root {
+	justify-items: center;
+	align-items: center;
+}
+
+.item {
+	display: flex;
+}
+
+.--enter {
+	animation: rs-icon-toggle-enter var(--rs-duration-medium) var(--rs-easing-standard);
+}
+
+.--exit {
+	animation: rs-icon-toggle-exit var(--rs-duration-medium) var(--rs-easing-standard) forwards;
+}
+
+@keyframes rs-icon-toggle-enter {
+	from {
+		opacity: 0;
+		filter: blur(2px);
+		transform: scale(0.25);
+	}
+}
+
+@keyframes rs-icon-toggle-exit {
+	to {
+		opacity: 0;
+		filter: blur(2px);
+		transform: scale(0.25);
+	}
+}

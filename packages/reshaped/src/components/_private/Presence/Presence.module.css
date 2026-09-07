@@ -1,0 +1,14 @@
+.root {
+	display: grid;
+	grid-template-areas: "presence";
+}
+
+.item {
+	grid-area: presence;
+	min-width: 0;
+}
+
+/* Exiting items are only visible, they shouldn't be interactive anymore */
+.--exit {
+	pointer-events: none;
+}
