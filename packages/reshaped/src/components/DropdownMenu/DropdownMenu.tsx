@@ -10,6 +10,7 @@ import useHotkeys from "@/hooks/useHotkeys";
 import useRTL from "@/hooks/useRTL";
 import * as keys from "@/constants/keys";
 import IconChevronRight from "@/icons/ChevronRight";
+import { DropdownMenuProvider, useDropdownMenu } from "./DropdownMenu.context";
 import type * as T from "./DropdownMenu.types";
 import s from "./DropdownMenu.module.css";
 
@@ -22,20 +23,23 @@ const DropdownMenu: React.FC<T.Props> = (props) => {
 		position = "bottom-start",
 		triggerType = "click",
 		trapFocusMode = "action-menu",
+		size,
 		...popoverProps
 	} = props;
 
 	return (
-		<Popover
-			{...popoverProps}
-			position={position}
-			padding={1}
-			trapFocusMode={trapFocusMode}
-			triggerType={triggerType}
-			disableHideAnimation={triggerType !== "hover"}
-		>
-			{children}
-		</Popover>
+		<DropdownMenuProvider size={size}>
+			<Popover
+				{...popoverProps}
+				position={position}
+				padding={1}
+				trapFocusMode={trapFocusMode}
+				triggerType={triggerType}
+				disableHideAnimation={triggerType !== "hover"}
+			>
+				{children}
+			</Popover>
+		</DropdownMenuProvider>
 	);
 };
 
@@ -88,8 +92,9 @@ export const DropdownMenuSection: React.FC<T.SectionProps> = (props) => {
 };
 
 export const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
-	const { onClick } = props;
+	const { onClick, size } = props;
 	const { handleClose } = useFlyoutContext();
+	const { size: menuSize } = useDropdownMenu();
 	const subTriggerContext = React.useContext(DropdownMenuSubTriggerContext);
 
 	const handleClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
@@ -105,6 +110,7 @@ export const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 	return (
 		<MenuItem
 			{...props}
+			size={size ?? menuSize}
 			roundedCorners
 			className={[s.item, props.className]}
 			attributes={{ role: "menuitem", ...props.attributes }}

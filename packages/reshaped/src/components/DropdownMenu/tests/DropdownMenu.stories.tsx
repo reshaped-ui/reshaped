@@ -90,6 +90,30 @@ export const sections = {
 	),
 };
 
+export const size: StoryObj = {
+	name: "size",
+	render: () => (
+		<Example>
+			<Example.Item title="size: small, inherited by the items and the submenu">
+				<DropdownMenu size="small">
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open small</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Item icon={IconCheckmark}>Small item</DropdownMenu.Item>
+						<DropdownMenu.SubMenu>
+							<DropdownMenu.SubTrigger>Small submenu</DropdownMenu.SubTrigger>
+							<DropdownMenu.Content>
+								<DropdownMenu.Item>Small subitem</DropdownMenu.Item>
+							</DropdownMenu.Content>
+						</DropdownMenu.SubMenu>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const submenu: StoryObj = {
 	name: "submenu",
 	render: () => (

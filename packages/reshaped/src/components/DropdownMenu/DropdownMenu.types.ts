@@ -6,6 +6,15 @@ import type { PopoverInstance, PopoverProps } from "@/components/Popover";
 
 export type Instance = PopoverInstance;
 
+export type Context = {
+	size?: MenuItemProps["size"];
+};
+
+export type ProviderProps = {
+	children: React.ReactNode;
+	size?: MenuItemProps["size"];
+};
+
 export type Props = Pick<
 	PopoverProps,
 	| "children"
@@ -36,6 +45,8 @@ export type Props = Pick<
 > & {
 	/** Change component trap focus keyboard behavior and shortcuts */
 	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu"> | false;
+	/** Size used by the menu items */
+	size?: MenuItemProps["size"];
 };
 
 export type ContentProps = Pick<FlyoutContentProps, "attributes" | "children" | "className">;
