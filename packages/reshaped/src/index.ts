@@ -102,6 +102,8 @@ export type { ContentToggleProps } from "@/components/ContentToggle";
 export { default as ContentToggle } from "@/components/ContentToggle";
 export type { DismissibleProps } from "@/components/Dismissible";
 export { default as Dismissible } from "@/components/Dismissible";
+export type { ExpandableProps } from "@/components/Expandable";
+export { default as Expandable } from "@/components/Expandable";
 export type { FlyoutInstance, FlyoutProps, FlyoutTriggerAttributes } from "@/components/Flyout";
 export { default as Flyout } from "@/components/Flyout";
 export type { FormControlProps } from "@/components/FormControl";

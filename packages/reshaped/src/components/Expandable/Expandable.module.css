@@ -1,0 +1,41 @@
+.root {
+	overflow: hidden;
+	position: relative;
+	opacity: 0;
+}
+
+.root.--orientation-vertical {
+	height: 0;
+}
+
+.root.--orientation-horizontal {
+	width: 0;
+
+	/* Lets the root collapse when it's used as a flex or a grid item */
+	min-width: 0;
+}
+
+/* Keeps the content from reflowing while the root width is animated */
+.--orientation-horizontal > .content {
+	width: max-content;
+}
+
+.root.--visible {
+	opacity: 1;
+}
+
+.root.--animated {
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
+}
+
+.root.--animated.--orientation-vertical {
+	transition:
+		height var(--rs-duration-medium) var(--rs-easing-standard),
+		opacity var(--rs-duration-medium) var(--rs-easing-standard);
+}
+
+.root.--animated.--orientation-horizontal {
+	transition:
+		width var(--rs-duration-medium) var(--rs-easing-standard),
+		opacity var(--rs-duration-medium) var(--rs-easing-standard);
+}
