@@ -3,6 +3,7 @@ import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import ContextMenu from "@/components/ContextMenu";
+import MenuItem from "@/components/MenuItem";
 import View from "@/components/View";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
@@ -95,6 +96,64 @@ export const handlers: StoryObj<{
 				timeout: 1000,
 			}
 		);
+	},
+};
+
+export const size: StoryObj = {
+	name: "size",
+	render: () => (
+		<Example>
+			<Example.Item title={["size: large", "item size: small for the last item"]}>
+				<View gap={3}>
+					{/* References for comparing the computed styles of the menu items */}
+					<MenuItem size="small" attributes={{ "data-testid": "reference-small" }}>
+						Reference
+					</MenuItem>
+					<MenuItem size="large" attributes={{ "data-testid": "reference-large" }}>
+						Reference
+					</MenuItem>
+
+					<ContextMenu size="large">
+						<View
+							height="200px"
+							backgroundColor="neutral-faded"
+							borderRadius="medium"
+							justify="center"
+							align="center"
+							attributes={{ "data-testid": "root" }}
+						>
+							Right click here
+						</View>
+
+						<ContextMenu.Content>
+							<ContextMenu.Item attributes={{ "data-testid": "inherited-item" }}>
+								Item 1
+							</ContextMenu.Item>
+							<ContextMenu.Item size="small" attributes={{ "data-testid": "overridden-item" }}>
+								Item 2
+							</ContextMenu.Item>
+						</ContextMenu.Content>
+					</ContextMenu>
+				</View>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const getFontSize = (el: HTMLElement) => getComputedStyle(el).fontSize;
+		const smallFontSize = getFontSize(canvas.getByTestId("reference-small"));
+		const largeFontSize = getFontSize(canvas.getByTestId("reference-large"));
+
+		expect(smallFontSize).not.toBe(largeFontSize);
+
+		await userEvent.pointer({ keys: "[MouseRight>]", target: canvas.getByTestId("root") });
+
+		// Items without their own size use the size passed to the root component
+		const inheritedItem = await canvas.findByTestId("inherited-item");
+		expect(getFontSize(inheritedItem)).toBe(largeFontSize);
+
+		// Item size takes priority over the menu size
+		expect(getFontSize(canvas.getByTestId("overridden-item"))).toBe(smallFontSize);
 	},
 };
 

@@ -3,6 +3,7 @@ import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import DropdownMenu from "@/components/DropdownMenu";
+import MenuItem from "@/components/MenuItem";
 import Theme from "@/components/Theme";
 import { useTheme } from "@/components/Theme/useTheme";
 import View from "@/components/View";
@@ -60,6 +61,80 @@ export const position = {
 				</DropdownMenu>
 			</Example.Item>
 			<div style={{ height: 2000 }} />
+		</Example>
+	),
+};
+
+export const size: StoryObj = {
+	name: "size",
+	render: () => (
+		<Example>
+			<Example.Item title="size: small">
+				<DropdownMenu size="small">
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 1</DropdownMenu.Item>
+						<DropdownMenu.SubMenu>
+							<DropdownMenu.SubTrigger>Item 2</DropdownMenu.SubTrigger>
+							<DropdownMenu.Content>
+								<DropdownMenu.Item>SubItem 1</DropdownMenu.Item>
+							</DropdownMenu.Content>
+						</DropdownMenu.SubMenu>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
+
+			<Example.Item title="size: medium">
+				<DropdownMenu size="medium">
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 1</DropdownMenu.Item>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 2</DropdownMenu.Item>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
+
+			<Example.Item title="size: large">
+				<DropdownMenu size="large">
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 1</DropdownMenu.Item>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 2</DropdownMenu.Item>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
+
+			<Example.Item title={["size: large", "item size: small"]}>
+				<DropdownMenu size="large">
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 1</DropdownMenu.Item>
+						<DropdownMenu.Item icon={IconCheckmark} size="small">
+							Item 2
+						</DropdownMenu.Item>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
+
+			<Example.Item title={["responsive size", "[s] small", "[m+] large"]}>
+				<DropdownMenu size={{ s: "small", m: "large" }}>
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 1</DropdownMenu.Item>
+						<DropdownMenu.Item icon={IconCheckmark}>Item 2</DropdownMenu.Item>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
 		</Example>
 	),
 };
@@ -287,6 +362,70 @@ export const className: StoryObj = {
 		const menu = await canvas.findByTestId("test-id");
 
 		expect(menu).toHaveClass("test-classname");
+	},
+};
+
+export const testSize: StoryObj = {
+	name: "test: size inheritance",
+	render: () => (
+		<View gap={3}>
+			{/* References for comparing the computed styles of the menu items */}
+			<MenuItem size="small" attributes={{ "data-testid": "reference-small" }}>
+				Reference
+			</MenuItem>
+			<MenuItem size="medium" attributes={{ "data-testid": "reference-medium" }}>
+				Reference
+			</MenuItem>
+			<MenuItem size="large" attributes={{ "data-testid": "reference-large" }}>
+				Reference
+			</MenuItem>
+
+			<DropdownMenu size="large" defaultActive>
+				<DropdownMenu.Trigger>
+					{(attributes) => <Button attributes={attributes}>Open</Button>}
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content>
+					<DropdownMenu.Item attributes={{ "data-testid": "inherited-item" }}>
+						Item 1
+					</DropdownMenu.Item>
+					<DropdownMenu.Item size="small" attributes={{ "data-testid": "overridden-item" }}>
+						Item 2
+					</DropdownMenu.Item>
+					<DropdownMenu.SubMenu>
+						<DropdownMenu.SubTrigger attributes={{ "data-testid": "sub-trigger" }}>
+							Item 3
+						</DropdownMenu.SubTrigger>
+						<DropdownMenu.Content>
+							<DropdownMenu.Item attributes={{ "data-testid": "submenu-item" }}>
+								SubItem 1
+							</DropdownMenu.Item>
+						</DropdownMenu.Content>
+					</DropdownMenu.SubMenu>
+				</DropdownMenu.Content>
+			</DropdownMenu>
+		</View>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const getFontSize = (el: HTMLElement) => getComputedStyle(el).fontSize;
+		const smallFontSize = getFontSize(canvas.getByTestId("reference-small"));
+		const mediumFontSize = getFontSize(canvas.getByTestId("reference-medium"));
+		const largeFontSize = getFontSize(canvas.getByTestId("reference-large"));
+
+		expect(largeFontSize).not.toBe(mediumFontSize);
+		expect(smallFontSize).not.toBe(mediumFontSize);
+
+		// Items without their own size use the size passed to the root component
+		const inheritedItem = await canvas.findByTestId("inherited-item");
+		expect(getFontSize(inheritedItem)).toBe(largeFontSize);
+
+		// Item size takes priority over the menu size
+		expect(getFontSize(canvas.getByTestId("overridden-item"))).toBe(smallFontSize);
+
+		// Submenus inherit the size of their parent menu
+		await userEvent.hover(canvas.getByTestId("sub-trigger"));
+		const submenuItem = await canvas.findByTestId("submenu-item");
+		expect(getFontSize(submenuItem)).toBe(largeFontSize);
 	},
 };
 

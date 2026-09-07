@@ -15,6 +15,7 @@ import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
 const DropdownMenuSubTriggerContext = React.createContext<boolean>(false);
+const DropdownMenuSizeContext = React.createContext<T.Props["size"]>(undefined);
 
 const DropdownMenu: React.FC<T.Props> = (props) => {
 	const {
@@ -22,20 +23,28 @@ const DropdownMenu: React.FC<T.Props> = (props) => {
 		position = "bottom-start",
 		triggerType = "click",
 		trapFocusMode = "action-menu",
+		size,
 		...popoverProps
 	} = props;
+	const parentSize = React.useContext(DropdownMenuSizeContext);
+	/**
+	 * Submenus don't pass the size explicitly, so they inherit it from the parent menu
+	 */
+	const resolvedSize = size ?? parentSize;
 
 	return (
-		<Popover
-			{...popoverProps}
-			position={position}
-			padding={1}
-			trapFocusMode={trapFocusMode}
-			triggerType={triggerType}
-			disableHideAnimation={triggerType !== "hover"}
-		>
-			{children}
-		</Popover>
+		<DropdownMenuSizeContext.Provider value={resolvedSize}>
+			<Popover
+				{...popoverProps}
+				position={position}
+				padding={1}
+				trapFocusMode={trapFocusMode}
+				triggerType={triggerType}
+				disableHideAnimation={triggerType !== "hover"}
+			>
+				{children}
+			</Popover>
+		</DropdownMenuSizeContext.Provider>
 	);
 };
 
@@ -88,9 +97,10 @@ export const DropdownMenuSection: React.FC<T.SectionProps> = (props) => {
 };
 
 export const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
-	const { onClick } = props;
+	const { onClick, size } = props;
 	const { handleClose } = useFlyoutContext();
 	const subTriggerContext = React.useContext(DropdownMenuSubTriggerContext);
+	const menuSize = React.useContext(DropdownMenuSizeContext);
 
 	const handleClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
 		/**
@@ -105,6 +115,7 @@ export const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 	return (
 		<MenuItem
 			{...props}
+			size={size ?? menuSize}
 			roundedCorners
 			className={[s.item, props.className]}
 			attributes={{ role: "menuitem", ...props.attributes }}
