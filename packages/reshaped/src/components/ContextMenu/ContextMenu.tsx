@@ -10,9 +10,10 @@ import type * as T from "./ContextMenu.types";
 import s from "./ContextMenu.module.css";
 
 const ContextMenu: React.FC<T.Props> = (props) => {
-	const { position = "end-top", onOpen, onClose, ...dropdownMenuProps } = props;
+	const { position = "end-top", onOpen, onClose, triggerRef, ...dropdownMenuProps } = props;
 	const [coordinates, setCoordinates] = React.useState<Coordinates>();
-	const originRef = React.useRef<HTMLDivElement>(null);
+	const internalOriginRef = React.useRef<HTMLDivElement>(null);
+	const originRef = triggerRef || internalOriginRef;
 	const { lockScroll, unlockScroll } = useScrollLock({ originRef });
 	const onOpenRef = useHandlerRef(onOpen);
 
@@ -29,14 +30,14 @@ const ContextMenu: React.FC<T.Props> = (props) => {
 
 		originEl.addEventListener("contextmenu", handleContextMenu);
 		return () => originEl.removeEventListener("contextmenu", handleContextMenu);
-	}, [lockScroll, onOpenRef]);
+	}, [lockScroll, onOpenRef, originRef]);
 
 	React.useEffect(() => {
 		return () => unlockScroll();
 	}, [unlockScroll]);
 
 	return (
-		<div className={s.root} ref={originRef}>
+		<div className={s.root} ref={internalOriginRef}>
 			<DropdownMenu
 				{...dropdownMenuProps}
 				position={position}

@@ -1,4 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
+import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import ContextMenu from "@/components/ContextMenu";
@@ -93,6 +94,31 @@ export const handlers: StoryObj<{
 			{
 				timeout: 1000,
 			}
+		);
+	},
+};
+
+export const triggerRef: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
+	name: "triggerRef",
+	render: () => {
+		const triggerRef = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<>
+				<View
+					height="200px"
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					attributes={{ ref: triggerRef }}
+				/>
+
+				<ContextMenu triggerRef={triggerRef}>
+					<ContextMenu.Content>
+						<ContextMenu.Item onClick={() => {}}>Item</ContextMenu.Item>
+						<ContextMenu.Item onClick={() => {}}>Item</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+			</>
 		);
 	},
 };

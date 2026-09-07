@@ -59,6 +59,13 @@ const useOnClickOutside = (
 
 		const handleClick = (event: MouseEvent | TouchEvent) => {
 			if (event.type === "contextmenu") {
+				/**
+				 * Context menu events can be claimed by a handler that opens a menu of its own,
+				 * which prevents the default browser behavior. Such events open a new flyout
+				 * instead of dismissing the current one, so they're not outside clicks
+				 */
+				if (event.defaultPrevented) return;
+
 				isMouseDownInsideRef.current = checkEventInsideRefs(event);
 			}
 
