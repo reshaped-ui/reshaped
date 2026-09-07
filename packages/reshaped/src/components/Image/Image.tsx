@@ -27,6 +27,8 @@ const Image: React.FC<T.Props> = (props) => {
 		renderImage,
 	} = props;
 	const [status, setStatus] = React.useState("loading");
+	// Image attributes are merged on top of the root attributes when rendering the image element
+	const passedImageRef = passedImageAttributes?.ref ?? attributes?.ref;
 	const mixinStyles = resolveMixin({ radius: borderRadius, width, height, maxWidth, aspectRatio });
 	const rootClassNames = classNames(
 		s.root,
@@ -55,6 +57,19 @@ const Image: React.FC<T.Props> = (props) => {
 		onError?.(e);
 		passedImageAttributes?.onError?.(e);
 	};
+
+	const handleImageRef = React.useCallback(
+		(el: HTMLImageElement | null) => {
+			if (typeof passedImageRef === "function") passedImageRef(el);
+			else if (passedImageRef) passedImageRef.current = el;
+
+			// Server rendered images start loading before React hydrates,
+			// so their error event can fire before the error handler gets attached
+			if (!el || !src || !el.complete || el.naturalWidth > 0) return;
+			el.decode().catch(() => setStatus("error"));
+		},
+		[passedImageRef, src]
+	);
 
 	React.useEffect(() => {
 		setStatus("loading");
@@ -90,6 +105,7 @@ const Image: React.FC<T.Props> = (props) => {
 		role: alt ? undefined : "presentation",
 		onLoad: handleLoad,
 		onError: handleError,
+		ref: handleImageRef,
 		className: outline ? imageClassNames : classNames([imageClassNames, rootClassNames]),
 		style,
 	};
