@@ -35,6 +35,7 @@ const TextFieldSlot: React.FC<T.SlotProps> = (props) => {
 				size={responsivePropDependency(size, (size) => {
 					if (size === "large") return 5;
 					if (size === "xlarge") return 6;
+					if (size === "small") return 3.5;
 					return 4;
 				})}
 				svg={icon}

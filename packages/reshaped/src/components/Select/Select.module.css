@@ -104,7 +104,7 @@
 
 @responsive .--size {
 	@value small {
-		--rs-select-gap: var(--rs-unit-x1-5);
+		--rs-select-gap: var(--rs-unit-x1);
 		--rs-select-chevron-size: var(--rs-unit-x4);
 		--rs-select-radius: var(--rs-radius-small);
 

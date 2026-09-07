@@ -158,6 +158,7 @@ export const size = {
 					<Button size="small" variant="ghost" icon={IconZap}>
 						Button
 					</Button>
+					<Button size="small" variant="outline" icon={IconZap} />
 				</View>
 			</Example.Item>
 

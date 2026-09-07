@@ -148,7 +148,7 @@
 			var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
 		);
 		--rs-button-p-h: var(--rs-unit-x2);
-		--rs-button-gap: var(--rs-unit-x1-5);
+		--rs-button-gap: var(--rs-unit-x1);
 		--rs-button-icon-align: var(--rs-unit-x0-5);
 		--rs-button-line-height: var(--rs-line-height-caption-1);
 		--rs-button-font-size: var(--rs-font-size-caption-1);

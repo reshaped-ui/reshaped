@@ -60,6 +60,7 @@ const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		const iconSize = responsivePropDependency(size, (size) => {
 			if (size === "large") return 5;
 			if (size === "xlarge") return 6;
+			if (size === "small") return 3.5;
 			return 4;
 		});
 

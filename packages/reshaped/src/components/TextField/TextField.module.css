@@ -192,7 +192,7 @@
 
 @responsive .--size {
 	@value small {
-		--rs-text-field-gap: var(--rs-unit-x1-5);
+		--rs-text-field-gap: var(--rs-unit-x1);
 		--rs-text-field-radius: var(--rs-radius-small);
 
 		/* Padding absorbs the caption-1 line height difference to keep the size it had with body-2 text */

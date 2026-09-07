@@ -39,6 +39,13 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 		tabIndex: active ? 0 : -1,
 		"aria-selected": active,
 	};
+	const iconSize = (
+		{
+			small: 3.5,
+			medium: 4,
+			large: 5,
+		} as const
+	)[size];
 
 	const updateRefs = React.useCallback(() => {
 		elPrevActiveRef.current = elActiveRef.current;
@@ -84,7 +91,7 @@ const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {
 			)}
 
 			<span className={s.buttonContent} ref={itemRef}>
-				{icon && <Icon svg={icon} className={s.icon} size={4} />}
+				{icon && <Icon svg={icon} className={s.icon} size={iconSize} />}
 				{children && (
 					<Text
 						variant={size === "large" ? "body-1" : size === "small" ? "caption-1" : "body-2"}

@@ -96,6 +96,11 @@
 	gap: var(--rs-tabs-icon-gap);
 	position: relative;
 	z-index: var(--rs-z-index-relative);
+
+	/* Icons are optically lighter than text, so they hang into the padding to keep the edges aligned */
+	& > .icon:not(:only-child) {
+		margin-inline-start: calc(var(--rs-tabs-icon-align) * -1);
+	}
 }
 
 .icon {
@@ -238,7 +243,9 @@
 .--variant-bordered,
 .--variant-borderless {
 	& .button {
-		padding-inline: 0;
+		/* These variants have no container to pad against, so text aligns with the edge */
+		--rs-tabs-item-p-h: 0px;
+		--rs-tabs-icon-align: 0px;
 
 		[data-rs-keyboard] &:focus::before {
 			inset-block: var(--rs-unit-x0-5);
@@ -360,7 +367,8 @@
 		var(--rs-unit-x1) + (var(--rs-line-height-body-2) - var(--rs-line-height-caption-1)) / 2
 	);
 	--rs-tabs-item-p-h: var(--rs-unit-x2);
-	--rs-tabs-icon-gap: var(--rs-unit-x1-5);
+	--rs-tabs-icon-gap: var(--rs-unit-x1);
+	--rs-tabs-icon-align: var(--rs-unit-x0-5);
 	--rs-tabs-radius: var(--rs-radius-small);
 }
 
@@ -368,6 +376,7 @@
 	--rs-tabs-item-p-v: var(--rs-unit-x2);
 	--rs-tabs-item-p-h: var(--rs-unit-x3);
 	--rs-tabs-icon-gap: var(--rs-unit-x2);
+	--rs-tabs-icon-align: var(--rs-unit-x0-5);
 	--rs-tabs-radius: var(--rs-radius-medium);
 }
 
@@ -375,6 +384,7 @@
 	--rs-tabs-item-p-v: var(--rs-unit-x3);
 	--rs-tabs-item-p-h: var(--rs-unit-x4);
 	--rs-tabs-icon-gap: var(--rs-unit-x2);
+	--rs-tabs-icon-align: var(--rs-unit-x1);
 	--rs-tabs-radius: var(--rs-radius-medium);
 }
 

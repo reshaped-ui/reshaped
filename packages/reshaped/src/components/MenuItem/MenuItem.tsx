@@ -36,8 +36,16 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		disabled && s["--disabled"],
 		highlighted && s["--highlighted"]
 	);
-	const gapSize = responsivePropDependency(size, (size) => (size === "large" ? 3 : 2));
-	const iconSize = responsivePropDependency(size, (size) => (size === "large" ? 5 : 4));
+	const gapSize = responsivePropDependency(size, (size) => {
+		if (size === "large") return 3;
+		if (size === "small") return 1.5;
+		return 2;
+	});
+	const iconSize = responsivePropDependency(size, (size) => {
+		if (size === "large") return 5;
+		if (size === "small") return 3.5;
+		return 4;
+	});
 
 	return (
 		<Actionable
