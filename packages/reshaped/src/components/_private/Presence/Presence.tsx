@@ -8,8 +8,10 @@ import type * as T from "./Presence.types";
 import s from "./Presence.module.css";
 
 const PresenceItem: React.FC<T.ItemProps> = (props) => {
-	const { entry, status, itemClassName, enterClassName, exitClassName, onExited } = props;
-	const elRef = React.useRef<HTMLSpanElement>(null);
+	const { as, entry, status, itemClassName, enterClassName, exitClassName, onExited } = props;
+	// Rendering a union of every intrinsic tag name blows up the JSX prop type
+	const TagName = as as any;
+	const elRef = React.useRef<HTMLElement>(null);
 	const itemClassNames = classNames(
 		s.item,
 		status && s[`--${status}`],
@@ -37,20 +39,28 @@ const PresenceItem: React.FC<T.ItemProps> = (props) => {
 	}, [status, entry.id, onExited]);
 
 	return (
-		<span
+		<TagName
 			ref={elRef}
 			className={itemClassNames}
 			aria-hidden={status === "exit" || undefined}
 			onAnimationEnd={handleAnimationEnd}
 		>
 			{entry.children}
-		</span>
+		</TagName>
 	);
 };
 
-const Presence: React.FC<T.Props> = (props) => {
-	const { children, itemKey, className, itemClassName, enterClassName, exitClassName, attributes } =
-		props;
+const Presence = <As extends keyof React.JSX.IntrinsicElements = "span">(props: T.Props<As>) => {
+	const {
+		children,
+		itemKey,
+		as: TagName = "span" as any,
+		className,
+		itemClassName,
+		enterClassName,
+		exitClassName,
+		attributes,
+	} = props;
 	const idRef = React.useRef(0);
 	// Holds the children of the last committed render, which become the exiting ones on a key change
 	const childrenRef = React.useRef(children);
@@ -84,10 +94,16 @@ const Presence: React.FC<T.Props> = (props) => {
 		childrenRef.current = children;
 	});
 
-	const itemProps = { itemClassName, enterClassName, exitClassName, onExited: handleExited };
+	const itemProps = {
+		as: TagName,
+		itemClassName,
+		enterClassName,
+		exitClassName,
+		onExited: handleExited,
+	};
 
 	return (
-		<span {...attributes} className={classNames(s.root, className)}>
+		<TagName {...attributes} className={classNames(s.root, className)}>
 			{state.exiting.map((entry) => (
 				<PresenceItem key={entry.id} entry={entry} status="exit" {...itemProps} />
 			))}
@@ -97,7 +113,7 @@ const Presence: React.FC<T.Props> = (props) => {
 				status={state.status}
 				{...itemProps}
 			/>
-		</span>
+		</TagName>
 	);
 };
 

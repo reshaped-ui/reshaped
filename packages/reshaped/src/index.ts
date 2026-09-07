@@ -98,6 +98,8 @@ export type { ActionableProps, ActionableRef } from "@/components/Actionable";
 export { default as Actionable } from "@/components/Actionable";
 export type { ContainerProps } from "@/components/Container";
 export { default as Container } from "@/components/Container";
+export type { ContentToggleProps } from "@/components/ContentToggle";
+export { default as ContentToggle } from "@/components/ContentToggle";
 export type { DismissibleProps } from "@/components/Dismissible";
 export { default as Dismissible } from "@/components/Dismissible";
 export type { FlyoutInstance, FlyoutProps, FlyoutTriggerAttributes } from "@/components/Flyout";

@@ -23,18 +23,23 @@ export type State = {
 };
 
 export type ItemProps = Pick<Props, "itemClassName" | "enterClassName" | "exitClassName"> & {
+	as: keyof React.JSX.IntrinsicElements;
 	entry: Entry;
 	status?: Status;
 	onExited: (id: number) => void;
 };
 
-export type Props = {
+export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
 	children?: React.ReactNode;
 	/**
 	 * Identity of the current children, compared by reference.
 	 * Changing it renders the previous and the next children at the same time
 	 */
 	itemKey: unknown;
+	/** Render the root and every item as a different element */
+	as?: TagName extends keyof React.JSX.IntrinsicElements
+		? TagName
+		: keyof React.JSX.IntrinsicElements;
 	/** Additional classname for the root element */
 	className?: ClassName;
 	/** Classname of every rendered item */
@@ -44,5 +49,5 @@ export type Props = {
 	/** Classname of the item animating out, the item is removed when its animation ends */
 	exitClassName?: ClassName;
 	/** Additional attributes for the root element */
-	attributes?: Attributes<"span">;
+	attributes?: Attributes<TagName>;
 };
