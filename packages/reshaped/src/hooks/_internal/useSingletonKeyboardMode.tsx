@@ -5,6 +5,18 @@ import { activateKeyboardMode, deactivateKeyboardMode } from "@reshaped/utilitie
 
 const ESC = "Escape";
 
+const isEditing = (e: KeyboardEvent) => {
+	const el = e.target as HTMLElement;
+
+	if (!el?.tagName) return false;
+
+	const tagName = el.tagName?.toLowerCase();
+	const editable = el.isContentEditable || tagName === "textarea" || tagName === "input";
+
+	if (!editable) return false;
+	return e.isComposing || e.key.length === 1;
+};
+
 type ContextProps = {
 	disabledRef: React.RefObject<boolean> | null;
 	disable: () => void;
@@ -47,6 +59,7 @@ export const SingletonKeyboardModeProvider: React.FC<{ children: React.ReactNode
 			if (e.metaKey || e.altKey || e.ctrlKey) return;
 			// Prevent focus ring from appearing when using mouse but closing with esc
 			if (e.key === ESC) return;
+			if (isEditing(e)) return;
 			activate();
 		},
 		[activate]
