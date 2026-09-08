@@ -1,5 +1,11 @@
 # @reshaped/utilities
 
+## 4.2.0
+
+### Patch Changes
+
+- [`531f4af`](https://github.com/reshaped-ui/reshaped/commit/531f4af72fdc0c5c60aacc7feafa810a02a2dcef) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Focus utilities: Moving the focus with `focusElement` and the `focusFirstElement`, `focusLastElement`, `focusNextElement` and `focusPreviousElement` helpers now only scrolls the element into view while the keyboard mode is active, matching how TrapFocus returns the focus to the trigger on release. Closing a nested menu with the mouse leaves the focus outside the parent trapped region, and restoring it used to scroll the scrollable parents to the top
+
 ## 4.2.0-canary.1
 
 ## 4.2.0-canary.0

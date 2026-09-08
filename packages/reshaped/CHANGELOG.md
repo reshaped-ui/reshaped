@@ -1,5 +1,67 @@
 # reshaped
 
+## 4.2.0
+
+### Minor Changes
+
+- [`438da4a`](https://github.com/reshaped-ui/reshaped/commit/438da4a96aaea72a9b330b53e8542ff9e4383d7e) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added the `ContentToggle` component for swapping between any content with an animated transition. It takes an `id` property identifying the currently rendered content and a `direction` property (`start` or `end`) controlling which way the content moves: whenever the `id` changes, the previous content cross-fades out towards that side while the new one comes in from the opposite one, and both are rendered in the same grid cell so the surrounding layout doesn't shift.
+
+- [`fc2ddff`](https://github.com/reshaped-ui/reshaped/commit/fc2ddff37f012b77e4928084b2ea61560e67c3ae) Thanks [@blvdmitry](https://github.com/blvdmitry)! - DropdownMenu: Added the `size` property which is used by all menu items and nested submenus by default. ContextMenu inherits the same property, and individual `DropdownMenu.Item` components can still override it.
+
+- [`add32b0`](https://github.com/reshaped-ui/reshaped/commit/add32b0b9965471387bd10a9ec1ab800d2fe0ab4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added the `Expandable` component for animating content in and out by expanding the space it takes. It was previously used internally by `Accordion` and is now available publicly, with an `active` property controlling the visibility, an `orientation` property (`"vertical"` or `"horizontal"`) picking the axis the content expands along and defaulting to `"vertical"`, and an `onAfterClose` callback resolving once the closing transition is finished. The root element is only rendered as a `region` landmark when it's labelled with `aria-label` or `aria-labelledby`.
+
+- [`df25023`](https://github.com/reshaped-ui/reshaped/commit/df250235f581956397b7246360604cc56b3a880b) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Flyout: Added the `active` flyout state as a second argument of the trigger render prop, so components like DropdownMenu, Popover and Tooltip can render their trigger based on whether the flyout is open
+
+- [`6d08a3e`](https://github.com/reshaped-ui/reshaped/commit/6d08a3e6870e1d7b3390c0389708b80941d82f54) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added the `IconToggle` component for swapping between icons with an animated transition. It takes the same properties as `Icon`, with an extra `id` property identifying the currently rendered icon: whenever it changes, the previous icon animates out while the new one animates in, and both are rendered in the same grid cell so the surrounding layout doesn't shift.
+
+- [`abd9635`](https://github.com/reshaped-ui/reshaped/commit/abd9635c8397d39ca59e5677ff48bbb8171552d6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added an `orientation` property (`"vertical" | "horizontal" | "both"`) that limits scrolling to the passed direction and constrains the content size in the other direction, defaulting to `"both"`
+
+- [`c99149d`](https://github.com/reshaped-ui/reshaped/commit/c99149d7ce694e3b8d4675e2b5f9bd8d61005e4c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added `scrollbarDisplay="scroll"` to show the scrollbar only while the area is being scrolled
+
+- [#655](https://github.com/reshaped-ui/reshaped/pull/655) [`00954ae`](https://github.com/reshaped-ui/reshaped/commit/00954aea869b03b7afc6959a1659dd11655163a6) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Select: Added a renderTrigger prop for rendering a custom trigger element, it receives the flyout attributes as the first argument and the selection state as the second one
+
+### Patch Changes
+
+- [`4280a15`](https://github.com/reshaped-ui/reshaped/commit/4280a15ad9cad903047520465634e851a36e1b40) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Checkbox, Radio: Added outline shadow to the decorator to match TextField and other form controls, error state no longer applies critical border when selected
+
+- [`fd8b831`](https://github.com/reshaped-ui/reshaped/commit/fd8b831c9a5881e79a510c89054d7e4d76b450bf) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ContextMenu: Added a `ContextMenuInstance` type export for typing the `instanceRef` property value
+
+- [`1060733`](https://github.com/reshaped-ui/reshaped/commit/1060733b5b0acd3921f2c8609ab716e369446d3d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ContextMenu: Added a `triggerRef` property for using an element rendered outside of the ContextMenu as the trigger. The menu opens on right click on that element and the scroll is locked based on its position in the DOM, instead of the element wrapping the ContextMenu children.
+
+- [#661](https://github.com/reshaped-ui/reshaped/pull/661) [`69b7413`](https://github.com/reshaped-ui/reshaped/commit/69b74133890476956c37af9d23b45afe717b29bb) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Accordion: Fixed the expand animation replaying when React re-attaches the effects of a mounted accordion without changing its state, for example when it's moved between its siblings or hidden and shown by a Suspense boundary. Toggling the accordion while it's still animating now continues from the current height instead of jumping, and transitions bubbling up from the content no longer end the animation early.
+
+- [#662](https://github.com/reshaped-ui/reshaped/pull/662) [`469a1b2`](https://github.com/reshaped-ui/reshaped/commit/469a1b2727a0056fd8c4a8f482f7505183226946) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Fixed dismiss button following the link when the badge is rendered with the href prop
+
+- [#662](https://github.com/reshaped-ui/reshaped/pull/662) [`469a1b2`](https://github.com/reshaped-ui/reshaped/commit/469a1b2727a0056fd8c4a8f482f7505183226946) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge: Limited the width to 100% of the parent element and truncated the long text with an ellipsis
+
+- [#666](https://github.com/reshaped-ui/reshaped/pull/666) [`924b742`](https://github.com/reshaped-ui/reshaped/commit/924b7424173665fdce393c313b3aa4387b32ea0a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Image: Rendered the fallback when a server rendered image fails to load before React hydrates the page
+
+- [#654](https://github.com/reshaped-ui/reshaped/pull/654) [`b919629`](https://github.com/reshaped-ui/reshaped/commit/b9196293670463545f2fed1e0a08cb0b1cdbcac9) Thanks [@blvdmitry](https://github.com/blvdmitry)! - PostCSS config: Added `reshaped/config/postcss.js` and `reshaped/config/postcss.cjs` to the package exports, so importing the config with a file extension no longer fails with `ERR_PACKAGE_PATH_NOT_EXPORTED`
+
+- [`6bda313`](https://github.com/reshaped-ui/reshaped/commit/6bda31387b48a1c2581b193de2bc9d67737aa572) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Link: Added fullWidth support
+
+- [`d34c062`](https://github.com/reshaped-ui/reshaped/commit/d34c0620219d3e86a96de9365ab4ca73368d5349) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Keyboard mode: Typing text inside inputs, textareas and contenteditable elements no longer activates the keyboard mode, so the focus rings don't appear on the focused field while entering the content with the mouse. Navigation keys like Tab and arrows still activate it as before
+
+- [`3dfda4c`](https://github.com/reshaped-ui/reshaped/commit/3dfda4cf3b94e219e6bd4f8aa16f99b3f6db277c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - MenuItem: Updated the `color="critical"` styling so the item renders in neutral colors by default and switches the text and icon to the critical color only on hover, keyboard highlight, and selected states, keeping the neutral background instead of the critical one
+
+- [`e5ff765`](https://github.com/reshaped-ui/reshaped/commit/e5ff76558e2ec27c219607133b3cca99e0a9f424) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Motion: Increased the `duration-medium` token to 250ms and `duration-slow` to 400ms, switched Checkbox, Radio and Switch selection transitions to `easing-decelerate`, and made the MenuItem hover/highlighted background appear instantly and only fade out on leave for a more responsive feel
+
+- [`28d4edb`](https://github.com/reshaped-ui/reshaped/commit/28d4edbd4e4e733ff5d6deec0d0e4813c189e742) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ScrollArea: Added a vertical/horizontal padding to the scrollbars so the thumb doesn't overlap rounded corners of the parent element, and kept the thumb visible while dragging it with `scrollbarDisplay="hover"` even when the pointer leaves the component
+
+- [`c2554bb`](https://github.com/reshaped-ui/reshaped/commit/c2554bbb5a50cdf623f713de5fbe8040f06f6319) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Slider: Rendered the thumb keyboard focus ring as an offset outline instead of an inset box shadow, keeping the thumb halo visible on focus and making the ring show up in forced-colors mode
+
+- [#656](https://github.com/reshaped-ui/reshaped/pull/656) [`792c575`](https://github.com/reshaped-ui/reshaped/commit/792c57562ef77d72b865bcd4400a4fb5962831d2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button, MenuItem, Tabs, TextField, Select and PinField: Small size now renders caption-1 text, their vertical padding grows by the line height difference so the component size stays the same
+
+- [`36abcea`](https://github.com/reshaped-ui/reshaped/commit/36abcea90ae86687fe41a42717ef97b944e17413) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Button, MenuItem, Tabs, TextField and Select: small size now renders a smaller icon with a tighter gap to match its caption-1 text. MenuItem horizontal padding is adjusted across all sizes, and Tabs now matches Button's padding, gap and icon alignment, with icons hanging into the padding of its pill variants.
+
+- [`fa0d227`](https://github.com/reshaped-ui/reshaped/commit/fa0d227d8210cd99ea6ad3c91b4a4fe5967580b3) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useOnClickOutside: contextmenu event support
+
+- [#657](https://github.com/reshaped-ui/reshaped/pull/657) [`7561531`](https://github.com/reshaped-ui/reshaped/commit/7561531ea8429fca930ec4dea450ca6ba5e81be2) Thanks [@blvdmitry](https://github.com/blvdmitry)! - useHotkeys: Fixed hotkeys not triggering when switching between different keys while holding Meta on macOS, since the keyup events for regular keys are not emitted while Meta is pressed. Also fixed the pressed keys tracking for quick key sequences, the `mod` key support in `checkHotkeyState`, duplicate hotkey calls when multiple Reshaped providers are rendered on the same page and hotkeys removal when the same callback is used by multiple components
+
+- Updated dependencies [[`531f4af`](https://github.com/reshaped-ui/reshaped/commit/531f4af72fdc0c5c60aacc7feafa810a02a2dcef)]:
+  - @reshaped/utilities@4.2.0
+  - @reshaped/theming@4.2.0
+
 ## 4.2.0-canary.1
 
 ### Patch Changes
