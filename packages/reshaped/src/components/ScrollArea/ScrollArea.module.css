@@ -194,6 +194,11 @@
 	opacity: 0;
 	transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 
+	/**
+	 * Thumb position follows the scroll with a transform instead of inset,
+	 * so the scroll-linked updates run on the compositor without triggering layout and paint.
+	 * The translate percentage is relative to the thumb size, so the position is divided by the ratio.
+	 */
 	&::before {
 		content: "";
 		display: block;
@@ -202,6 +207,7 @@
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 		position: absolute;
 		opacity: 0.2;
+		will-change: transform;
 	}
 }
 
@@ -212,9 +218,12 @@
 	padding-block: calc(var(--rs-scroll-area-thumb-offset) + var(--rs-unit-x1));
 
 	& .thumb::before {
-		inset-block-start: calc(var(--rs-scroll-area-position) * 100%);
+		inset-block-start: 0;
 		width: 100%;
 		height: calc(var(--rs-scroll-area-ratio) * 100%);
+		transform: translateY(
+			calc(var(--rs-scroll-area-position-y, 0) / var(--rs-scroll-area-ratio) * 100%)
+		);
 	}
 }
 
@@ -225,9 +234,12 @@
 	padding-inline: calc(var(--rs-scroll-area-thumb-offset) + var(--rs-unit-x0-5));
 
 	& .thumb::before {
-		inset-inline-start: calc(var(--rs-scroll-area-position) * 100%);
+		inset-inline-start: 0;
 		height: 100%;
 		width: calc(var(--rs-scroll-area-ratio) * 100%);
+		transform: translateX(
+			calc(var(--rs-scroll-area-position-x, 0) / var(--rs-scroll-area-ratio) * 100%)
+		);
 	}
 }
 
