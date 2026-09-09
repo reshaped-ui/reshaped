@@ -15,7 +15,6 @@
 	width: 100%;
 	z-index: var(--rs-z-index-fixed);
 	color: var(--rs-color-white);
-	background-color: rgb(from var(--rs-color-black) r g b / 0%);
 	opacity: 0;
 	outline: none;
 	isolation: isolate;
@@ -25,6 +24,22 @@
 	display: table;
 	height: 100%;
 	width: 100%;
+	position: relative;
+
+	/**
+	 * Backdrop is rendered as a separate layer with a static color and only its opacity is animated,
+	 * so the transition and the drag-to-close updates run on the compositor instead of repainting the whole viewport.
+	 * It's attached to the wrapper instead of the root to cover the whole scrollable area when overflow is auto.
+	 */
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background-color: rgb(from var(--rs-color-black) r g b / 70%);
+		opacity: var(--rs-overlay-opacity);
+		will-change: opacity;
+	}
 }
 
 .inner {
@@ -42,7 +57,6 @@
 .root.--visible {
 	--rs-overlay-opacity: 1;
 
-	background-color: rgb(from var(--rs-color-black) r g b / calc(var(--rs-overlay-opacity) * 0.7));
 	opacity: 1;
 }
 
@@ -75,10 +89,18 @@
 
 .root.--animated {
 	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
-	transition-property: background-color, opacity;
+	transition-property: opacity;
+
+	& .wrapper::before {
+		transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
+	}
 
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);
+
+		& .wrapper::before {
+			transition-timing-function: var(--rs-easing-decelerate);
+		}
 	}
 }
 
