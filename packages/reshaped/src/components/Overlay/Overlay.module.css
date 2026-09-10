@@ -2,7 +2,6 @@
 	/* Add an offset in case overlay is rendered inside a scrolled container */
 	--rs-overlay-offset-y: 0px;
 	--rs-overlay-offset-x: 0px;
-	--rs-overlay-opacity: 0;
 
 	position: fixed;
 	overflow-x: clip;
@@ -25,21 +24,20 @@
 	height: 100%;
 	width: 100%;
 	position: relative;
+}
 
-	/**
-	 * Backdrop is rendered as a separate layer with a static color and only its opacity is animated,
-	 * so the transition and the drag-to-close updates run on the compositor instead of repainting the whole viewport.
-	 * It's attached to the wrapper instead of the root to cover the whole scrollable area when overflow is auto.
-	 */
-	&::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background-color: rgb(from var(--rs-color-black) r g b / 70%);
-		opacity: var(--rs-overlay-opacity);
-		will-change: opacity;
-	}
+/**
+ * Backdrop is rendered as a separate layer with a static color and only its opacity is animated,
+ * so the transition and the drag-to-close updates run on the compositor instead of repainting the whole viewport.
+ * It's rendered inside the wrapper instead of the root to cover the whole scrollable area when overflow is auto.
+ */
+.backdrop {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background-color: rgb(from var(--rs-color-black) r g b / 70%);
+	opacity: 0;
+	will-change: opacity;
 }
 
 .inner {
@@ -55,14 +53,20 @@
 }
 
 .root.--visible {
-	--rs-overlay-opacity: 1;
-
 	opacity: 1;
+
+	& .backdrop {
+		opacity: 1;
+	}
 }
 
 .root.--click-through {
 	color: inherit;
 	pointer-events: none;
+
+	& .backdrop {
+		opacity: 0;
+	}
 }
 
 .root.--blurred {
@@ -91,14 +95,14 @@
 	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
 	transition-property: opacity;
 
-	& .wrapper::before {
+	& .backdrop {
 		transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
 	}
 
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);
 
-		& .wrapper::before {
+		& .backdrop {
 			transition-timing-function: var(--rs-easing-decelerate);
 		}
 	}
