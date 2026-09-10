@@ -2,6 +2,9 @@
 	--rs-modal-container-width: 100vw;
 	--rs-modal-container-height: 100vh;
 
+	/* Extends the background past the trailing edge so no gap is visible when the modal is rubber-banded or overshoots */
+	--rs-modal-bleed: calc(var(--rs-unit-x1) * 25);
+
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
@@ -66,10 +69,13 @@
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
+		box-shadow:
+			0 var(--rs-modal-bleed) 0 0 var(--rs-color-background-elevation-overlay),
+			var(--rs-shadow-overlay);
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px));
+			transform: translate(0, var(--rs-modal-drag, 0));
 		}
 	}
 
@@ -90,14 +96,20 @@
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
+		box-shadow:
+			calc(var(--rs-modal-bleed) * -1) 0 0 0 var(--rs-color-background-elevation-overlay),
+			var(--rs-shadow-overlay);
 
 		[dir="rtl"] & {
 			transform: translate(100%, 0);
+			box-shadow:
+				var(--rs-modal-bleed) 0 0 0 var(--rs-color-background-elevation-overlay),
+				var(--rs-shadow-overlay);
 		}
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0);
+			transform: translate(var(--rs-modal-drag, 0), 0);
 		}
 	}
 
@@ -118,14 +130,20 @@
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
+		box-shadow:
+			var(--rs-modal-bleed) 0 0 0 var(--rs-color-background-elevation-overlay),
+			var(--rs-shadow-overlay);
 
 		[dir="rtl"] & {
 			transform: translate(-100%, 0);
+			box-shadow:
+				calc(var(--rs-modal-bleed) * -1) 0 0 0 var(--rs-color-background-elevation-overlay),
+				var(--rs-shadow-overlay);
 		}
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0);
+			transform: translate(var(--rs-modal-drag, 0), 0);
 		}
 	}
 
