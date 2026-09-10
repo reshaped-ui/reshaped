@@ -1,3 +1,17 @@
+/* stylelint-disable plugin/browser-compat -- graceful degradation, unsupported browsers fall back to an inherited custom property */
+
+/**
+ * Drag offset is updated on every frame of the swipe gesture.
+ * Registering it as a non-inherited property keeps the style recalculation scoped to the modal root
+ * instead of invalidating every element of the modal content
+ */
+@property --rs-modal-drag {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+/* stylelint-enable plugin/browser-compat */
+
 .root {
 	--rs-modal-container-width: 100vw;
 	--rs-modal-container-height: 100vh;
