@@ -2,7 +2,7 @@
 
 import React, { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
-import { disableScroll, enableScroll, type Coordinates } from "@reshaped/utilities/internal";
+import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 
 import useHandlerRef from "@/hooks/useHandlerRef";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
@@ -11,11 +11,41 @@ import type * as T from "./ScrollArea.types";
 import s from "./ScrollArea.module.css";
 
 const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
-	const { ratio, vertical, onThumbMove } = props;
+	const { ratio, vertical, scrollableRef, onThumbMove } = props;
 	const onThumbMoveRef = useHandlerRef(onThumbMove);
 	const [dragging, setDragging] = React.useState(false);
 	const dragStartPositionRef = React.useRef(0);
 	const barRef = React.useRef<HTMLDivElement>(null);
+
+	/**
+	 * Thumb position is written directly to a css variable on the bar instead of the react state,
+	 * so scrolling doesn't re-render the component and the style recalculation stays scoped to the bar
+	 */
+	useIsomorphicLayoutEffect(() => {
+		const scrollableEl = scrollableRef.current;
+		const barEl = barRef.current;
+		if (!scrollableEl || !barEl) return;
+
+		const updatePosition = () => {
+			const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
+				scrollableEl;
+			const position = vertical
+				? scrollHeight <= clientHeight
+					? 0
+					: scrollTop / scrollHeight
+				: scrollWidth <= clientWidth
+					? 0
+					: scrollLeft / scrollWidth;
+
+			barEl.style.setProperty("--rs-scroll-area-position", `${position}`);
+		};
+
+		updatePosition();
+		scrollableEl.addEventListener("scroll", updatePosition, { passive: true });
+
+		return () => scrollableEl.removeEventListener("scroll", updatePosition);
+		// Ratio is included to re-sync the position after the content or the container size changes
+	}, [vertical, scrollableRef, ratio]);
 	const barClassNames = classNames(
 		s.scrollbar,
 		vertical ? s["--scrollbar-y"] : s["--scrollbar-x"],
@@ -128,34 +158,17 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		fade && s["--fade"]
 	);
 
-	/**
-	 * Scroll position is written directly to the css variables instead of the react state,
-	 * so the scroll events don't re-render the component on every frame
-	 */
-	const setScrollPosition = React.useCallback((position: Coordinates) => {
-		const rootEl = rootRef.current;
-		if (!rootEl) return;
-
-		rootEl.style.setProperty("--rs-scroll-area-position-x", `${position.x}`);
-		rootEl.style.setProperty("--rs-scroll-area-position-y", `${position.y}`);
-	}, []);
-
 	const updateScroll = React.useCallback(() => {
 		const scrollableEl = scrollableRef.current;
 		if (!scrollableEl) return;
 
-		const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
-			scrollableEl;
+		const { clientWidth, clientHeight, scrollWidth, scrollHeight } = scrollableEl;
 
 		setScrollRatio({
 			x: scrollWidth === 0 ? 1 : Math.min(clientWidth / scrollWidth, 1),
 			y: scrollHeight === 0 ? 1 : Math.min(clientHeight / scrollHeight, 1),
 		});
-		setScrollPosition({
-			x: scrollWidth <= clientWidth ? 0 : scrollLeft / scrollWidth,
-			y: scrollHeight <= clientHeight ? 0 : scrollTop / scrollHeight,
-		});
-	}, [setScrollPosition]);
+	}, []);
 
 	const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
 		const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
@@ -167,10 +180,6 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 			scrollingTimeoutRef.current = setTimeout(() => setScrolling(false), 1000);
 		}
 
-		setScrollPosition({
-			x: scrollLeft / scrollWidth,
-			y: scrollTop / scrollHeight,
-		});
 		onScroll?.({
 			x: scrollWidth === clientWidth ? 0 : scrollLeft / (scrollWidth - clientWidth),
 			y: scrollHeight === clientHeight ? 0 : scrollTop / (scrollHeight - clientHeight),
@@ -254,10 +263,19 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 				</div>
 			</div>
 			{orientation !== "horizontal" && scrollRatio.y < 1 && scrollbarDisplay !== "hidden" && (
-				<ScrollAreaBar vertical onThumbMove={handleThumbYMove} ratio={scrollRatio.y} />
+				<ScrollAreaBar
+					vertical
+					onThumbMove={handleThumbYMove}
+					ratio={scrollRatio.y}
+					scrollableRef={scrollableRef}
+				/>
 			)}
 			{orientation !== "vertical" && scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
-				<ScrollAreaBar onThumbMove={handleThumbXMove} ratio={scrollRatio.x} />
+				<ScrollAreaBar
+					onThumbMove={handleThumbXMove}
+					ratio={scrollRatio.x}
+					scrollableRef={scrollableRef}
+				/>
 			)}
 		</div>
 	);

@@ -222,7 +222,7 @@
 		width: 100%;
 		height: calc(var(--rs-scroll-area-ratio) * 100%);
 		transform: translateY(
-			calc(var(--rs-scroll-area-position-y, 0) / var(--rs-scroll-area-ratio) * 100%)
+			calc(var(--rs-scroll-area-position, 0) / var(--rs-scroll-area-ratio) * 100%)
 		);
 	}
 }
@@ -238,7 +238,7 @@
 		height: 100%;
 		width: calc(var(--rs-scroll-area-ratio) * 100%);
 		transform: translateX(
-			calc(var(--rs-scroll-area-position-x, 0) / var(--rs-scroll-area-ratio) * 100%)
+			calc(var(--rs-scroll-area-position, 0) / var(--rs-scroll-area-ratio) * 100%)
 		);
 	}
 }
