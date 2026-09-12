@@ -25,6 +25,10 @@
 				"browserslist": ["baseline widely available with downstream"],
 				"allow": {
 					"features": [
+						"at-rules.property",
+						"at-rules.property.syntax",
+						"at-rules.property.initial-value",
+						"at-rules.property.inherits",
 						"selectors.has",
 						"selectors.-webkit-scrollbar",
 						"selectors.not.selector_list",
