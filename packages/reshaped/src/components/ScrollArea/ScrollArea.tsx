@@ -11,7 +11,7 @@ import type * as T from "./ScrollArea.types";
 import s from "./ScrollArea.module.css";
 
 const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
-	const { ratio, position, vertical, onThumbMove } = props;
+	const { ratio, vertical, scrollableRef, onThumbMove } = props;
 	const onThumbMoveRef = useHandlerRef(onThumbMove);
 	const [dragging, setDragging] = React.useState(false);
 	const dragStartPositionRef = React.useRef(0);
@@ -66,6 +66,36 @@ const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 		enableScroll();
 	}, []);
 
+	/**
+	 * Thumb position is written directly to a css variable on the bar instead of the react state,
+	 * so scrolling doesn't re-render the component and the style recalculation stays scoped to the bar
+	 */
+	useIsomorphicLayoutEffect(() => {
+		const scrollableEl = scrollableRef.current;
+		const barEl = barRef.current;
+		if (!scrollableEl || !barEl) return;
+
+		const updatePosition = () => {
+			const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
+				scrollableEl;
+			const position = vertical
+				? scrollHeight <= clientHeight
+					? 0
+					: scrollTop / scrollHeight
+				: scrollWidth <= clientWidth
+					? 0
+					: scrollLeft / scrollWidth;
+
+			barEl.style.setProperty("--rs-scroll-area-position", `${position}`);
+		};
+
+		updatePosition();
+		scrollableEl.addEventListener("scroll", updatePosition, { passive: true });
+
+		return () => scrollableEl.removeEventListener("scroll", updatePosition);
+		// Ratio is included to re-sync the position after the content or the container size changes
+	}, [vertical, scrollableRef, ratio]);
+
 	React.useEffect(() => {
 		if (!dragging) return;
 
@@ -81,12 +111,7 @@ const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 	return (
 		<div
 			className={barClassNames}
-			style={
-				{
-					"--rs-scroll-area-ratio": ratio,
-					"--rs-scroll-area-position": position,
-				} as React.CSSProperties
-			}
+			style={{ "--rs-scroll-area-ratio": ratio } as React.CSSProperties}
 			ref={barRef}
 			onClick={handleClick}
 			onMouseDown={handleDragStart}
@@ -113,7 +138,6 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		scrollableClassName,
 	} = props;
 	const [scrollRatio, setScrollRatio] = React.useState({ x: 1, y: 1 });
-	const [scrollPosition, setScrollPosition] = React.useState({ x: 0, y: 0 });
 	const [scrolling, setScrolling] = React.useState(false);
 	const scrollingTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>(undefined);
 	const scrollableRef = React.useRef<HTMLDivElement>(null);
@@ -138,16 +162,11 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 		const scrollableEl = scrollableRef.current;
 		if (!scrollableEl) return;
 
-		const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
-			scrollableEl;
+		const { clientWidth, clientHeight, scrollWidth, scrollHeight } = scrollableEl;
 
 		setScrollRatio({
 			x: scrollWidth === 0 ? 1 : Math.min(clientWidth / scrollWidth, 1),
 			y: scrollHeight === 0 ? 1 : Math.min(clientHeight / scrollHeight, 1),
-		});
-		setScrollPosition({
-			x: scrollWidth <= clientWidth ? 0 : scrollLeft / scrollWidth,
-			y: scrollHeight <= clientHeight ? 0 : scrollTop / scrollHeight,
 		});
 	}, []);
 
@@ -161,10 +180,6 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 			scrollingTimeoutRef.current = setTimeout(() => setScrolling(false), 1000);
 		}
 
-		setScrollPosition({
-			x: scrollLeft / scrollWidth,
-			y: scrollTop / scrollHeight,
-		});
 		onScroll?.({
 			x: scrollWidth === clientWidth ? 0 : scrollLeft / (scrollWidth - clientWidth),
 			y: scrollHeight === clientHeight ? 0 : scrollTop / (scrollHeight - clientHeight),
@@ -252,14 +267,14 @@ const ScrollArea = forwardRef<HTMLDivElement, T.Props>((props, ref) => {
 					vertical
 					onThumbMove={handleThumbYMove}
 					ratio={scrollRatio.y}
-					position={scrollPosition.y}
+					scrollableRef={scrollableRef}
 				/>
 			)}
 			{orientation !== "vertical" && scrollRatio.x < 1 && scrollbarDisplay !== "hidden" && (
 				<ScrollAreaBar
 					onThumbMove={handleThumbXMove}
 					ratio={scrollRatio.x}
-					position={scrollPosition.x}
+					scrollableRef={scrollableRef}
 				/>
 			)}
 		</div>
