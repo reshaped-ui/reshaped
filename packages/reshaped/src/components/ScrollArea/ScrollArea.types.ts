@@ -34,7 +34,7 @@ export type Props = {
 
 export type BarProps = {
 	ratio: number;
-	position: number;
 	vertical?: boolean;
+	scrollableRef: React.RefObject<HTMLElement | null>;
 	onThumbMove: (args: { value: number; type: "absolute" | "relative" }) => void;
 };
