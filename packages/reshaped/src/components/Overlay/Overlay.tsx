@@ -42,6 +42,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const [animated, setAnimated] = React.useState(false);
 	const [offset, setOffset] = React.useState([0, 0]);
 	const rootRef = React.useRef<HTMLDivElement>(null);
+	const backdropRef = React.useRef<HTMLDivElement>(null);
 	const scopeRef = React.useRef<HTMLDivElement>(null);
 	const contentRef = React.useRef<HTMLDivElement>(null);
 	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
@@ -183,7 +184,8 @@ const Overlay: React.FC<T.Props> = (props) => {
 		() => ({
 			setOpacity: (value: number) => {
 				if (transparent) return;
-				rootRef.current?.style.setProperty("--rs-overlay-opacity", `${value}`);
+				// Applied directly to the backdrop element to keep the style recalculation scoped to it
+				backdropRef.current?.style.setProperty("opacity", `${value}`);
 			},
 		}),
 		[transparent]
@@ -205,7 +207,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 							{
 								"--rs-overlay-offset-x": containerRef ? `${offset[0]}px` : undefined,
 								"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
-								"--rs-overlay-opacity": transparent ? 0 : undefined,
 							} as React.CSSProperties
 						}
 						// oxlint-disable-next-line jsx_a11y/prefer-tag-over-role
@@ -217,6 +218,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 						onTransitionEnd={handleTransitionEnd}
 					>
 						<div className={s.wrapper}>
+							<div className={s.backdrop} ref={backdropRef} />
 							<div className={s.inner}>
 								<div className={s.content} ref={contentRef}>
 									{typeof children === "function" ? children({ active: visible }) : children}

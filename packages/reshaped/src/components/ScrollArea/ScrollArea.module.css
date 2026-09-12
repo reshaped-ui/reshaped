@@ -202,6 +202,7 @@
 		transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 		position: absolute;
 		opacity: 0.2;
+		will-change: transform;
 	}
 }
 
@@ -212,9 +213,12 @@
 	padding-block: calc(var(--rs-scroll-area-thumb-offset) + var(--rs-unit-x1));
 
 	& .thumb::before {
-		inset-block-start: calc(var(--rs-scroll-area-position) * 100%);
+		inset-block-start: 0;
 		width: 100%;
 		height: calc(var(--rs-scroll-area-ratio) * 100%);
+		transform: translateY(
+			calc(var(--rs-scroll-area-position, 0) / var(--rs-scroll-area-ratio) * 100%)
+		);
 	}
 }
 
@@ -225,9 +229,12 @@
 	padding-inline: calc(var(--rs-scroll-area-thumb-offset) + var(--rs-unit-x0-5));
 
 	& .thumb::before {
-		inset-inline-start: calc(var(--rs-scroll-area-position) * 100%);
+		inset-inline-start: 0;
 		height: 100%;
 		width: calc(var(--rs-scroll-area-ratio) * 100%);
+		transform: translateX(
+			calc(var(--rs-scroll-area-position, 0) / var(--rs-scroll-area-ratio) * 100%)
+		);
 	}
 }
 
