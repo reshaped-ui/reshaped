@@ -1,4 +1,3 @@
-/* stylelint-disable plugin/browser-compat -- graceful degradation for Firefox */
 @property --rs-scroll-area-fade-block-start {
 	syntax: "<length>";
 	initial-value: 0;
@@ -22,7 +21,6 @@
 	initial-value: 0;
 	inherits: false;
 }
-/* stylelint-enable plugin/browser-compat */
 
 .root {
 	--rs-scroll-area-thumb-size: var(--rs-unit-x1);
