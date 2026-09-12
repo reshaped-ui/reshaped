@@ -194,11 +194,6 @@
 	opacity: 0;
 	transition: opacity var(--rs-duration-fast) var(--rs-easing-standard);
 
-	/**
-	 * Thumb position follows the scroll with a transform instead of inset,
-	 * so the scroll-linked updates run on the compositor without triggering layout and paint.
-	 * The translate percentage is relative to the thumb size, so the position is divided by the ratio.
-	 */
 	&::before {
 		content: "";
 		display: block;

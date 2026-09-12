@@ -16,36 +16,6 @@ const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 	const [dragging, setDragging] = React.useState(false);
 	const dragStartPositionRef = React.useRef(0);
 	const barRef = React.useRef<HTMLDivElement>(null);
-
-	/**
-	 * Thumb position is written directly to a css variable on the bar instead of the react state,
-	 * so scrolling doesn't re-render the component and the style recalculation stays scoped to the bar
-	 */
-	useIsomorphicLayoutEffect(() => {
-		const scrollableEl = scrollableRef.current;
-		const barEl = barRef.current;
-		if (!scrollableEl || !barEl) return;
-
-		const updatePosition = () => {
-			const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
-				scrollableEl;
-			const position = vertical
-				? scrollHeight <= clientHeight
-					? 0
-					: scrollTop / scrollHeight
-				: scrollWidth <= clientWidth
-					? 0
-					: scrollLeft / scrollWidth;
-
-			barEl.style.setProperty("--rs-scroll-area-position", `${position}`);
-		};
-
-		updatePosition();
-		scrollableEl.addEventListener("scroll", updatePosition, { passive: true });
-
-		return () => scrollableEl.removeEventListener("scroll", updatePosition);
-		// Ratio is included to re-sync the position after the content or the container size changes
-	}, [vertical, scrollableRef, ratio]);
 	const barClassNames = classNames(
 		s.scrollbar,
 		vertical ? s["--scrollbar-y"] : s["--scrollbar-x"],
@@ -95,6 +65,36 @@ const ScrollAreaBar: React.FC<T.BarProps> = (props) => {
 		setDragging(false);
 		enableScroll();
 	}, []);
+
+	/**
+	 * Thumb position is written directly to a css variable on the bar instead of the react state,
+	 * so scrolling doesn't re-render the component and the style recalculation stays scoped to the bar
+	 */
+	useIsomorphicLayoutEffect(() => {
+		const scrollableEl = scrollableRef.current;
+		const barEl = barRef.current;
+		if (!scrollableEl || !barEl) return;
+
+		const updatePosition = () => {
+			const { scrollLeft, scrollTop, clientWidth, clientHeight, scrollWidth, scrollHeight } =
+				scrollableEl;
+			const position = vertical
+				? scrollHeight <= clientHeight
+					? 0
+					: scrollTop / scrollHeight
+				: scrollWidth <= clientWidth
+					? 0
+					: scrollLeft / scrollWidth;
+
+			barEl.style.setProperty("--rs-scroll-area-position", `${position}`);
+		};
+
+		updatePosition();
+		scrollableEl.addEventListener("scroll", updatePosition, { passive: true });
+
+		return () => scrollableEl.removeEventListener("scroll", updatePosition);
+		// Ratio is included to re-sync the position after the content or the container size changes
+	}, [vertical, scrollableRef, ratio]);
 
 	React.useEffect(() => {
 		if (!dragging) return;
