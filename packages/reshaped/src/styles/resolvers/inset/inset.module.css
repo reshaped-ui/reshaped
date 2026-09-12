@@ -1,4 +1,3 @@
-/* stylelint-disable plugin/browser-compat -- graceful degradation, var() fallbacks keep centering working without @property */
 @property --rs-inset-translate-x {
 	syntax: "<length-percentage>";
 	initial-value: 0;
@@ -10,7 +9,6 @@
 	initial-value: 0;
 	inherits: false;
 }
-/* stylelint-enable plugin/browser-compat */
 
 @responsive .root[style*="--rs-inset-inline-"] {
 	@variable --rs-inset-inline 0;

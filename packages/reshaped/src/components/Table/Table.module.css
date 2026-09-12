@@ -1,4 +1,3 @@
-/* stylelint-disable plugin/browser-compat -- graceful degradation for Firefox */
 @property --rs-table-fade-start {
 	syntax: "<length>";
 	initial-value: 0;
@@ -10,7 +9,6 @@
 	initial-value: 0;
 	inherits: false;
 }
-/* stylelint-enable plugin/browser-compat */
 
 .root {
 	--rs-table-fade-size: var(--rs-unit-x8);
