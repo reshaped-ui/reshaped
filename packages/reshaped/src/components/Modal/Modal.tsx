@@ -1,56 +1,17 @@
 "use client";
 
-import {
-	useCallback,
-	createContext,
-	useContext,
-	useEffect,
-	useMemo,
-	useState,
-	useRef,
-	type FC,
-} from "react";
+import { createContext, useContext, useEffect, useMemo, useState, useRef, type FC } from "react";
 import { classNames } from "@reshaped/utilities";
-import { enableScroll, disableScroll } from "@reshaped/utilities/internal";
 
 import Overlay, { type OverlayInstance } from "@/components/Overlay";
 import Text from "@/components/Text";
 import useElementId from "@/hooks/useElementId";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
-import { resolveSpringTransition } from "@/utilities/animation";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
 import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Modal.types";
+import useModalDrag from "./useModalDrag";
 import s from "./Modal.module.css";
-
-const DRAG_THRESHOLD = 32;
-const DRAG_OPPOSITE_THRESHOLD = 100;
-const DRAG_EDGE_BOUNDARY = 32;
-const DRAG_SCROLL_LOCK_THRESHOLD = 8;
-/** Velocity in px/ms closing the modal on release regardless of the dragged distance */
-const DRAG_VELOCITY_THRESHOLD = 0.4;
-/** Time window in ms used for measuring the release velocity */
-const DRAG_VELOCITY_WINDOW = 100;
-/** Velocity in px/ms passed to the release spring is capped to keep the animation duration reasonable */
-const DRAG_VELOCITY_LIMIT = 3;
-/** Fallback release duration range in ms for browsers without linear() easing support */
-const DRAG_RELEASE_MIN_DURATION = 100;
-const DRAG_RELEASE_MAX_DURATION = 300;
-
-/**
- * Distance in px the modal is currently rendered at from its open position, towards the closing direction.
- * Resolved from the transform so a gesture can pick up an animation that is still in flight,
- * the dragging class disables transitions and would otherwise snap the modal to the animation target
- */
-const getRenderedOffset = (el: HTMLElement, args: { inline: boolean; closingSign: number }) => {
-	const { transform } = window.getComputedStyle(el);
-	if (!transform || transform === "none") return 0;
-
-	const matrix = new DOMMatrixReadOnly(transform);
-	return Math.max(0, (args.inline ? matrix.m41 : matrix.m42) * args.closingSign);
-};
 
 const Context = createContext<T.Context>({
 	id: "",
@@ -116,112 +77,25 @@ const Modal: FC<T.Props> = (props) => {
 		className,
 		attributes,
 	} = props;
-	const onCloseRef = useHandlerRef(onClose);
 	const id = useElementId();
 	const clientPosition = useResponsiveClientValue(position)!;
 	const [titleMounted, setTitleMounted] = useState(false);
 	const [subtitleMounted, setSubtitleMounted] = useState(false);
-	const [dragging, setDragging] = useState(false);
 	const internalRootRef = useRef<HTMLDivElement>(null);
 	const rootRef = attributes?.ref || internalRootRef;
-	const dragStartCoordinatesRef = useRef({ x: 0, y: 0 });
-	const dragLastCoordinateRef = useRef(0);
-	const dragDistanceRef = useRef(0);
-	const dragOffsetRef = useRef(0);
-	const dragFrameRef = useRef<number | null>(null);
-	const dragPendingDistanceRef = useRef(0);
-	const dragSizeRef = useRef(1);
-	const dragSamplesRef = useRef<{ time: number; coordinate: number }[]>([]);
-	const dragSeedOffsetRef = useRef(0);
-	const dragReleasedRef = useRef(false);
 	const overlayRef = useRef<OverlayInstance>(null);
-	const dragDirectionRef = useRef(0);
-	const dragShouldCloseRef = useRef(false);
-	// Closing direction on the drag axis, start drawers close towards the negative coordinates
-	const dragClosingSign = clientPosition === "start" ? -1 : 1;
 	const mixinStyles = resolveMixin({ padding });
 	const shouldBeContained = containerRef && contained !== false;
-
-	const setDragStyles = useCallback(
-		(distance: number) => {
-			const rootEl = rootRef.current;
-			if (!rootEl) return;
-
-			const seedOffset = dragSeedOffsetRef.current;
-			// Positive when dragged towards the closing direction
-			const closingDistance = distance * dragClosingSign;
-			// A gesture picking up an animation starts on an already moving modal, so it skips the dead zone
-			const threshold = seedOffset ? 0 : DRAG_THRESHOLD;
-			const dragOffset = Math.max(0, seedOffset + closingDistance - threshold);
-
-			dragOffsetRef.current = dragOffset;
-			rootEl.style.setProperty("--rs-modal-drag", `${dragOffset * dragClosingSign}px`);
-
-			if (!transparentOverlay && overlayRef.current) {
-				const progress = Math.min(
-					1,
-					Math.max(0, seedOffset + closingDistance) / dragSizeRef.current
-				);
-				const opacity = Math.max(0, 1 - progress * 0.5);
-				overlayRef.current.setOpacity(opacity);
-			}
-		},
-		[dragClosingSign, overlayRef, transparentOverlay, rootRef]
-	);
-
-	/**
-	 * Continues the release animation from the current gesture velocity,
-	 * velocity is passed in px/ms and is positive when moving towards the closing direction
-	 */
-	const setReleaseTransition = useCallback(
-		(args: { closing: boolean; velocity: number }) => {
-			const rootEl = rootRef.current;
-			if (!rootEl) return;
-
-			const { closing, velocity } = args;
-			const target = closing ? dragSizeRef.current : 0;
-			// Both values are measured on the same axis, positive towards the closing direction
-			const displacement = dragOffsetRef.current - target;
-			const cappedVelocity =
-				Math.sign(velocity) * Math.min(Math.abs(velocity), DRAG_VELOCITY_LIMIT);
-
-			// No transition will run without a displacement, so there is nothing to override
-			if (!displacement) return;
-
-			const spring = resolveSpringTransition({ displacement, velocity: cappedVelocity * 1000 });
-
-			if (spring) {
-				rootEl.style.setProperty("transition-duration", `${Math.round(spring.duration)}ms`);
-				rootEl.style.setProperty("transition-timing-function", spring.easing);
-				return;
-			}
-
-			const duration = Math.abs(displacement) / Math.max(Math.abs(velocity), 0.001);
-			rootEl.style.setProperty(
-				"transition-duration",
-				`${Math.round(Math.min(Math.max(duration, DRAG_RELEASE_MIN_DURATION), DRAG_RELEASE_MAX_DURATION))}ms`
-			);
-			rootEl.style.setProperty("transition-timing-function", "var(--rs-easing-decelerate)");
-		},
-		[rootRef]
-	);
-
-	const resetReleaseTransition = useCallback(() => {
-		rootRef.current?.style.removeProperty("transition-duration");
-		rootRef.current?.style.removeProperty("transition-timing-function");
-	}, [rootRef]);
-
-	const getReleaseVelocity = useCallback((time: number) => {
-		const samples = dragSamplesRef.current.filter(
-			(sample) => time - sample.time <= DRAG_VELOCITY_WINDOW
-		);
-		const first = samples[0];
-		const last = samples[samples.length - 1];
-
-		if (!first || !last || first === last) return 0;
-
-		return (last.coordinate - first.coordinate) / (last.time - first.time);
-	}, []);
+	const { dragging, handleTouchStart, handleTransitionEnd } = useModalDrag({
+		position: clientPosition,
+		rootRef,
+		overlayRef,
+		active,
+		containerRef,
+		transparentOverlay,
+		disabled: disableSwipeGesture,
+		onClose,
+	});
 
 	const value = useMemo(
 		() => ({
@@ -233,205 +107,6 @@ const Modal: FC<T.Props> = (props) => {
 		}),
 		[id, subtitleMounted, titleMounted]
 	);
-
-	const resetDragData = useCallback(() => {
-		dragDistanceRef.current = 0;
-		dragPendingDistanceRef.current = 0;
-		dragStartCoordinatesRef.current = { x: 0, y: 0 };
-		dragLastCoordinateRef.current = 0;
-		dragDirectionRef.current = 0;
-		dragShouldCloseRef.current = false;
-		dragSamplesRef.current = [];
-		dragSeedOffsetRef.current = 0;
-		setDragStyles(0);
-	}, [setDragStyles]);
-
-	const unlockDragScroll = useCallback(() => {
-		rootRef.current?.style.removeProperty("overflow");
-	}, [rootRef]);
-
-	const lockDragScroll = useCallback(() => {
-		rootRef.current?.style.setProperty("overflow", "hidden");
-	}, [rootRef]);
-
-	const handleDragStart = (e: React.TouchEvent) => {
-		if (disableSwipeGesture) return;
-		dragShouldCloseRef.current = false;
-
-		// Prevent swipe to close from happening when user is working with text selection
-		if (window.getSelection()?.toString()) return;
-
-		let currentEl = e.target as HTMLElement | null;
-		const rootEl = rootRef.current;
-		const isInline = ["start", "end"].includes(clientPosition);
-
-		while (currentEl && (currentEl === rootEl || rootEl?.contains(currentEl))) {
-			// Prioritize scrolling over modal swiping
-			if (currentEl.scrollTop !== 0 || currentEl.scrollLeft !== 0) return;
-			// Start dragging only when starting on static elements
-			if (currentEl.matches("input,textarea")) return;
-
-			currentEl = currentEl ? currentEl.parentElement : null;
-		}
-
-		// Prevent the drag handling when browser is trying to navigate to a previous page
-		if (clientPosition === "start" && e.targetTouches[0].clientX < DRAG_EDGE_BOUNDARY) return;
-
-		if (rootEl) {
-			dragSizeRef.current = Math.max(1, isInline ? rootEl.clientWidth : rootEl.clientHeight);
-		}
-
-		// Measured before anything is reset, a transition in flight resolves to its current position
-		const seedOffset =
-			active && rootEl
-				? getRenderedOffset(rootEl, { inline: isInline, closingSign: dragClosingSign })
-				: 0;
-
-		// The previous gesture can be left unresolved, e.g. when the modal stays open after a drag close
-		resetDragData();
-		resetReleaseTransition();
-
-		dragReleasedRef.current = false;
-		dragSeedOffsetRef.current = seedOffset;
-		setDragStyles(0);
-
-		if (containerRef?.current) disableScroll();
-		setDragging(true);
-	};
-
-	const handleTransitionEnd = (e: React.TransitionEvent) => {
-		if (e.propertyName !== "transform") return;
-		if (e.currentTarget !== e.target) return;
-
-		resetReleaseTransition();
-
-		// Once modal is closed - reset its drag data
-		if (active) return;
-		resetDragData();
-		unlockDragScroll();
-	};
-
-	// Modal returns to its open position after the dragging class is removed,
-	// so the transition is applied to the reset instead of snapping back
-	useIsomorphicLayoutEffect(() => {
-		if (dragging || !dragReleasedRef.current) return;
-		dragReleasedRef.current = false;
-		resetDragData();
-	}, [dragging, resetDragData]);
-
-	useEffect(() => {
-		if (!dragging) return;
-
-		const handleDragEnd = (e: TouchEvent) => {
-			// Positive when moving towards the closing direction
-			const velocity = getReleaseVelocity(e.timeStamp) * dragClosingSign;
-			const closingDistance = dragDistanceRef.current * dragClosingSign;
-			const flicked = velocity > DRAG_VELOCITY_THRESHOLD;
-			const dragged = closingDistance > DRAG_THRESHOLD && velocity >= 0;
-			dragShouldCloseRef.current = flicked || dragged;
-
-			// Apply the pending frame before the release so the transition starts from the current position
-			if (dragFrameRef.current !== null) {
-				window.cancelAnimationFrame(dragFrameRef.current);
-				dragFrameRef.current = null;
-				setDragStyles(dragPendingDistanceRef.current);
-			}
-
-			setReleaseTransition({ closing: dragShouldCloseRef.current, velocity });
-
-			if (containerRef?.current) enableScroll();
-			if (!dragShouldCloseRef.current) unlockDragScroll();
-			setDragging(false);
-
-			if (dragShouldCloseRef.current) {
-				onCloseRef.current?.({ reason: "drag" });
-			} else {
-				dragReleasedRef.current = true;
-			}
-		};
-
-		const handleDrag = (e: TouchEvent) => {
-			if (!dragging || clientPosition === "center") return;
-			if (rootRef.current?.scrollTop !== 0 || rootRef.current?.scrollLeft !== 0) return;
-
-			const target = e.targetTouches[0];
-			const coordinate = { x: target.clientX, y: target.clientY };
-			const key = clientPosition === "bottom" ? "y" : "x";
-			const oppositeKey = clientPosition === "bottom" ? "x" : "y";
-
-			// Save the initial coordinates
-			if (!dragStartCoordinatesRef.current[key]) {
-				dragStartCoordinatesRef.current = coordinate;
-				dragLastCoordinateRef.current = coordinate[key];
-			}
-
-			const next = Math.abs(coordinate[key] - dragStartCoordinatesRef.current[key]);
-			const nextPerpendicular = Math.abs(
-				coordinate[oppositeKey] - dragStartCoordinatesRef.current[oppositeKey]
-			);
-
-			// For start/end drawers - ignore the swiping
-			// If user is scrolling vertically more than swiping
-			if (
-				position !== "bottom" &&
-				(next < nextPerpendicular || nextPerpendicular > DRAG_OPPOSITE_THRESHOLD)
-			) {
-				dragLastCoordinateRef.current = coordinate[key];
-				return;
-			}
-
-			dragDirectionRef.current = coordinate[key] - dragLastCoordinateRef.current;
-			dragLastCoordinateRef.current = coordinate[key];
-
-			const isClosingDirection = dragDirectionRef.current * dragClosingSign > 0;
-
-			if (next > DRAG_SCROLL_LOCK_THRESHOLD && isClosingDirection) {
-				lockDragScroll();
-			}
-
-			// Clamped so the modal can't be dragged past its open position
-			const nextDistance = (dragDistanceRef.current + dragDirectionRef.current) * dragClosingSign;
-			dragDistanceRef.current =
-				Math.max(-dragSeedOffsetRef.current, nextDistance) * dragClosingSign;
-			dragPendingDistanceRef.current = dragDistanceRef.current;
-
-			dragSamplesRef.current.push({ time: e.timeStamp, coordinate: coordinate[key] });
-			if (dragSamplesRef.current.length > 10) dragSamplesRef.current.shift();
-
-			if (dragFrameRef.current === null) {
-				dragFrameRef.current = window.requestAnimationFrame(() => {
-					setDragStyles(dragPendingDistanceRef.current);
-					dragFrameRef.current = null;
-				});
-			}
-		};
-
-		document.addEventListener("touchmove", handleDrag, { passive: true });
-		document.addEventListener("touchend", handleDragEnd, { passive: true });
-
-		return () => {
-			if (dragFrameRef.current !== null) {
-				window.cancelAnimationFrame(dragFrameRef.current);
-				dragFrameRef.current = null;
-			}
-			if (!dragShouldCloseRef.current) unlockDragScroll();
-			document.removeEventListener("touchmove", handleDrag);
-			document.removeEventListener("touchend", handleDragEnd);
-		};
-	}, [
-		dragging,
-		clientPosition,
-		dragClosingSign,
-		onCloseRef,
-		position,
-		rootRef,
-		containerRef,
-		setDragStyles,
-		setReleaseTransition,
-		getReleaseVelocity,
-		lockDragScroll,
-		unlockDragScroll,
-	]);
 
 	return (
 		<Overlay
@@ -448,7 +123,7 @@ const Modal: FC<T.Props> = (props) => {
 			contained={contained}
 			containerRef={containerRef}
 			attributes={{
-				onTouchStart: handleDragStart,
+				onTouchStart: handleTouchStart,
 			}}
 		>
 			{({ active }) => {
@@ -465,7 +140,6 @@ const Modal: FC<T.Props> = (props) => {
 
 				return (
 					<Context.Provider value={value}>
-						{}
 						<div
 							{...attributes}
 							style={

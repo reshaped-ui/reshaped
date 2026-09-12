@@ -5,6 +5,8 @@ import type { OverlayCloseReason, OverlayProps } from "@/components/Overlay";
 import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
 
+export type Position = "center" | "end" | "bottom" | "start" | "full-screen";
+
 export type Context = {
 	id: string;
 	titleMounted: boolean;
@@ -27,7 +29,7 @@ export type Props = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Component position on the screen */
-	position?: G.Responsive<"center" | "end" | "bottom" | "start" | "full-screen">;
+	position?: G.Responsive<Position>;
 	/** Component size, literal css value */
 	size?: G.Responsive<string>;
 	/** Component padding, unit token multiplier */
