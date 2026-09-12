@@ -26,11 +26,7 @@
 	position: relative;
 }
 
-/**
- * Backdrop is rendered as a separate layer with a static color and only its opacity is animated,
- * so the transition and the drag-to-close updates run on the compositor instead of repainting the whole viewport.
- * It's rendered inside the wrapper instead of the root to cover the whole scrollable area when overflow is auto.
- */
+/* Setting opacity separately for swipe updates directly in the dom */
 .backdrop {
 	position: absolute;
 	inset: 0;
@@ -92,8 +88,7 @@
 }
 
 .root.--animated {
-	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
-	transition-property: opacity;
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
 
 	& .backdrop {
 		transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
