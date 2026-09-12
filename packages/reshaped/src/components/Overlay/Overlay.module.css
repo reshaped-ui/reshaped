@@ -2,7 +2,6 @@
 	/* Add an offset in case overlay is rendered inside a scrolled container */
 	--rs-overlay-offset-y: 0px;
 	--rs-overlay-offset-x: 0px;
-	--rs-overlay-opacity: 0;
 
 	position: fixed;
 	overflow-x: clip;
@@ -15,7 +14,6 @@
 	width: 100%;
 	z-index: var(--rs-z-index-fixed);
 	color: var(--rs-color-white);
-	background-color: rgb(from var(--rs-color-black) r g b / 0%);
 	opacity: 0;
 	outline: none;
 	isolation: isolate;
@@ -25,6 +23,17 @@
 	display: table;
 	height: 100%;
 	width: 100%;
+	position: relative;
+}
+
+/* Setting opacity separately for swipe updates directly in the dom */
+.backdrop {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background-color: rgb(from var(--rs-color-black) r g b / 70%);
+	opacity: 0;
+	will-change: opacity;
 }
 
 .inner {
@@ -40,15 +49,20 @@
 }
 
 .root.--visible {
-	--rs-overlay-opacity: 1;
-
-	background-color: rgb(from var(--rs-color-black) r g b / calc(var(--rs-overlay-opacity) * 0.7));
 	opacity: 1;
+
+	& .backdrop {
+		opacity: 1;
+	}
 }
 
 .root.--click-through {
 	color: inherit;
 	pointer-events: none;
+
+	& .backdrop {
+		opacity: 0;
+	}
 }
 
 .root.--blurred {
@@ -74,11 +88,18 @@
 }
 
 .root.--animated {
-	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
-	transition-property: background-color, opacity;
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
+
+	& .backdrop {
+		transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
+	}
 
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);
+
+		& .backdrop {
+			transition-timing-function: var(--rs-easing-decelerate);
+		}
 	}
 }
 
