@@ -33,22 +33,23 @@ const DRAG_SCROLL_LOCK_THRESHOLD = 8;
 const DRAG_VELOCITY_THRESHOLD = 0.4;
 /** Time window in ms used for measuring the release velocity */
 const DRAG_VELOCITY_WINDOW = 100;
-/** Velocity in px/ms passed to the release spring is capped to keep the overshoot within the modal bleed */
+/** Velocity in px/ms passed to the release spring is capped to keep the animation duration reasonable */
 const DRAG_VELOCITY_LIMIT = 3;
-/** How far the modal can be rubber-banded past its open position, in px */
-const DRAG_OVERDRAG_LIMIT = 40;
-/** Initial resistance of the rubber band, 1 follows the finger exactly */
-const DRAG_OVERDRAG_RESISTANCE = 0.55;
 /** Fallback release duration range in ms for browsers without linear() easing support */
 const DRAG_RELEASE_MIN_DURATION = 100;
 const DRAG_RELEASE_MAX_DURATION = 300;
 
 /**
- * Rubber band: follows the finger at first and asymptotically approaches the limit
+ * Distance in px the modal is currently rendered at from its open position, towards the closing direction.
+ * Resolved from the transform so a gesture can pick up an animation that is still in flight,
+ * the dragging class disables transitions and would otherwise snap the modal to the animation target
  */
-const dampenOverdrag = (distance: number) => {
-	const resisted = distance * DRAG_OVERDRAG_RESISTANCE;
-	return (DRAG_OVERDRAG_LIMIT * resisted) / (resisted + DRAG_OVERDRAG_LIMIT);
+const getRenderedOffset = (el: HTMLElement, args: { inline: boolean; closingSign: number }) => {
+	const { transform } = window.getComputedStyle(el);
+	if (!transform || transform === "none") return 0;
+
+	const matrix = new DOMMatrixReadOnly(transform);
+	return Math.max(0, (args.inline ? matrix.m41 : matrix.m42) * args.closingSign);
 };
 
 const Context = createContext<T.Context>({
@@ -131,7 +132,7 @@ const Modal: FC<T.Props> = (props) => {
 	const dragPendingDistanceRef = useRef(0);
 	const dragSizeRef = useRef(1);
 	const dragSamplesRef = useRef<{ time: number; coordinate: number }[]>([]);
-	const dragCanOverdragRef = useRef(false);
+	const dragSeedOffsetRef = useRef(0);
 	const dragReleasedRef = useRef(false);
 	const overlayRef = useRef<OverlayInstance>(null);
 	const dragDirectionRef = useRef(0);
@@ -146,21 +147,21 @@ const Modal: FC<T.Props> = (props) => {
 			const rootEl = rootRef.current;
 			if (!rootEl) return;
 
+			const seedOffset = dragSeedOffsetRef.current;
 			// Positive when dragged towards the closing direction
 			const closingDistance = distance * dragClosingSign;
-			let dragOffset = 0;
-
-			if (closingDistance > DRAG_THRESHOLD) {
-				dragOffset = closingDistance - DRAG_THRESHOLD;
-			} else if (closingDistance < 0 && dragCanOverdragRef.current) {
-				dragOffset = -dampenOverdrag(-closingDistance);
-			}
+			// A gesture picking up an animation starts on an already moving modal, so it skips the dead zone
+			const threshold = seedOffset ? 0 : DRAG_THRESHOLD;
+			const dragOffset = Math.max(0, seedOffset + closingDistance - threshold);
 
 			dragOffsetRef.current = dragOffset;
 			rootEl.style.setProperty("--rs-modal-drag", `${dragOffset * dragClosingSign}px`);
 
 			if (!transparentOverlay && overlayRef.current) {
-				const progress = Math.min(1, Math.max(0, closingDistance) / dragSizeRef.current);
+				const progress = Math.min(
+					1,
+					Math.max(0, seedOffset + closingDistance) / dragSizeRef.current
+				);
 				const opacity = Math.max(0, 1 - progress * 0.5);
 				overlayRef.current.setOpacity(opacity);
 			}
@@ -241,6 +242,7 @@ const Modal: FC<T.Props> = (props) => {
 		dragDirectionRef.current = 0;
 		dragShouldCloseRef.current = false;
 		dragSamplesRef.current = [];
+		dragSeedOffsetRef.current = 0;
 		setDragStyles(0);
 	}, [setDragStyles]);
 
@@ -262,19 +264,12 @@ const Modal: FC<T.Props> = (props) => {
 		let currentEl = e.target as HTMLElement | null;
 		const rootEl = rootRef.current;
 		const isInline = ["start", "end"].includes(clientPosition);
-		// Rubber band is only applied when there is no content that could scroll in the opposite direction instead
-		let canOverdrag = true;
 
 		while (currentEl && (currentEl === rootEl || rootEl?.contains(currentEl))) {
 			// Prioritize scrolling over modal swiping
 			if (currentEl.scrollTop !== 0 || currentEl.scrollLeft !== 0) return;
 			// Start dragging only when starting on static elements
 			if (currentEl.matches("input,textarea")) return;
-
-			const scrollable = isInline
-				? currentEl.scrollWidth > currentEl.clientWidth
-				: currentEl.scrollHeight > currentEl.clientHeight;
-			if (scrollable) canOverdrag = false;
 
 			currentEl = currentEl ? currentEl.parentElement : null;
 		}
@@ -286,10 +281,19 @@ const Modal: FC<T.Props> = (props) => {
 			dragSizeRef.current = Math.max(1, isInline ? rootEl.clientWidth : rootEl.clientHeight);
 		}
 
-		dragCanOverdragRef.current = canOverdrag;
-		dragReleasedRef.current = false;
-		dragSamplesRef.current = [];
+		// Measured before anything is reset, a transition in flight resolves to its current position
+		const seedOffset =
+			active && rootEl
+				? getRenderedOffset(rootEl, { inline: isInline, closingSign: dragClosingSign })
+				: 0;
+
+		// The previous gesture can be left unresolved, e.g. when the modal stays open after a drag close
+		resetDragData();
 		resetReleaseTransition();
+
+		dragReleasedRef.current = false;
+		dragSeedOffsetRef.current = seedOffset;
+		setDragStyles(0);
 
 		if (containerRef?.current) disableScroll();
 		setDragging(true);
@@ -385,8 +389,10 @@ const Modal: FC<T.Props> = (props) => {
 				lockDragScroll();
 			}
 
-			// Distance is not clamped so the rubber band can follow the finger past the open position
-			dragDistanceRef.current += dragDirectionRef.current;
+			// Clamped so the modal can't be dragged past its open position
+			const nextDistance = (dragDistanceRef.current + dragDirectionRef.current) * dragClosingSign;
+			dragDistanceRef.current =
+				Math.max(-dragSeedOffsetRef.current, nextDistance) * dragClosingSign;
 			dragPendingDistanceRef.current = dragDistanceRef.current;
 
 			dragSamplesRef.current.push({ time: e.timeStamp, coordinate: coordinate[key] });
