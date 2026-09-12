@@ -119,16 +119,6 @@ jobs:
       - name: Lint CSS and JS code
         run: pnpm lint
 
-  lint-pr-title:
-    name: Validate PR title
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    steps:
-      - uses: amannn/action-semantic-pull-request@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   build:
     runs-on: ubuntu-latest
     needs: setup
