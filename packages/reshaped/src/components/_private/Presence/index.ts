@@ -1,1 +1,1 @@
-export { default } from "./Presence";
+export { default } from "./Presence.js";

@@ -1,7 +1,7 @@
 import { classNames } from "@reshaped/utilities";
 
-import { responsiveClassNames } from "@/utilities/props";
-import type * as T from "./Hidden.types";
+import { responsiveClassNames } from "@/utilities/props.js";
+import type * as T from "./Hidden.types.js";
 import s from "./Hidden.module.css";
 
 const Hidden: React.FC<T.Props> = (props) => {

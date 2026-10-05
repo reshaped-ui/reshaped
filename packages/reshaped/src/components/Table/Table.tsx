@@ -3,9 +3,9 @@
 import React, { isValidElement } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { responsiveVariables } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Table.types";
+import { responsiveVariables } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Table.types.js";
 import s from "./Table.module.css";
 
 const TableCellPrivate: React.FC<T.PrivateCellProps> = (props) => {

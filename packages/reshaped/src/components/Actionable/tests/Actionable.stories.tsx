@@ -1,10 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Actionable from "@/components/Actionable";
-import Button from "@/components/Button";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
+import Actionable from "@/components/Actionable/index.js";
+import Button from "@/components/Button/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Utility components/Actionable",

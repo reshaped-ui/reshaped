@@ -1,4 +1,4 @@
-import Autocomplete, { AutocompleteItem } from "./Autocomplete";
+import Autocomplete, { AutocompleteItem } from "./Autocomplete.js";
 
 const AutocompleteRoot = Autocomplete as typeof Autocomplete & {
 	Item: typeof AutocompleteItem;
@@ -10,4 +10,4 @@ export default AutocompleteRoot;
 export type {
 	Instance as AutocompleteInstance,
 	Props as AutocompleteProps,
-} from "./Autocomplete.types";
+} from "./Autocomplete.types.js";

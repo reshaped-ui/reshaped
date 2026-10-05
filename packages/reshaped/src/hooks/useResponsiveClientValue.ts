@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 
-import useViewport from "@/hooks/useViewport";
-import type * as G from "@/types/global";
+import useViewport from "@/hooks/useViewport.js";
+import type * as G from "@/types/global.js";
 
 const useResponsiveClientValue = <T>(value: G.Responsive<T>): T | undefined => {
 	const viewport = useViewport();

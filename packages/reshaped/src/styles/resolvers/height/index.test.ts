@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import height from "./index";
+import height from "./index.js";
 
 describe("Styles/Height", () => {
 	test("handles px value", () => {

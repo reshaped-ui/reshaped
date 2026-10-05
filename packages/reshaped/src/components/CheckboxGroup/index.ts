@@ -1,3 +1,3 @@
-export { default } from "./CheckboxGroup";
-export { useCheckboxGroup } from "./CheckboxGroup.context";
-export type { Props as CheckboxGroupProps } from "./CheckboxGroup.types";
+export { default } from "./CheckboxGroup.js";
+export { useCheckboxGroup } from "./CheckboxGroup.context.js";
+export type { Props as CheckboxGroupProps } from "./CheckboxGroup.types.js";

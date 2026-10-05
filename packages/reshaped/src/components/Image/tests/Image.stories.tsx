@@ -1,11 +1,11 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, Mock, waitFor } from "storybook/test";
 
-import Icon from "@/components/Icon";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
-import IconZap from "@/icons/Zap";
-import Image from "../Image";
+import Icon from "@/components/Icon/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconZap from "@/icons/Zap.js";
+import Image from "../Image.js";
 
 export default {
 	title: "Utility components/Image",

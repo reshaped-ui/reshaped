@@ -1,6 +1,6 @@
 import React from "react";
 
-import Portal from "@/components/_private/Portal";
+import Portal from "@/components/_private/Portal/index.js";
 
 export default { title: "Internal/Portal" };
 

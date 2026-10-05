@@ -1,3 +1,3 @@
-import { useSingletonRTL } from "./_internal/useSingletonRTL";
+import { useSingletonRTL } from "./_internal/useSingletonRTL.js";
 
 export default useSingletonRTL;

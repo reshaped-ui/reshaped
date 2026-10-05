@@ -1,9 +1,9 @@
 import type React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
-import type { OverlayCloseReason, OverlayProps } from "@/components/Overlay";
-import type * as G from "@/types/global";
-import type { Attributes } from "@/types/global";
+import type { OverlayCloseReason, OverlayProps } from "@/components/Overlay/index.js";
+import type * as G from "@/types/global.js";
+import type { Attributes } from "@/types/global.js";
 
 export type Position = "center" | "end" | "bottom" | "start" | "full-screen";
 

@@ -1,4 +1,4 @@
-import type * as T from "./Calendar.types";
+import type * as T from "./Calendar.types.js";
 
 const DAYS_IN_WEEK = 7;
 const FIRST_WEEK_DAY = 1;

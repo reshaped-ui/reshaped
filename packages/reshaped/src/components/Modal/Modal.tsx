@@ -3,14 +3,14 @@
 import { createContext, useContext, useEffect, useMemo, useState, useRef, type FC } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Overlay, { type OverlayInstance } from "@/components/Overlay";
-import Text from "@/components/Text";
-import useElementId from "@/hooks/useElementId";
-import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
-import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Modal.types";
-import useModalDrag from "./useModalDrag";
+import Overlay, { type OverlayInstance } from "@/components/Overlay/index.js";
+import Text from "@/components/Text/index.js";
+import useElementId from "@/hooks/useElementId.js";
+import useResponsiveClientValue from "@/hooks/useResponsiveClientValue.js";
+import { responsiveClassNames, responsiveVariables } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Modal.types.js";
+import useModalDrag from "./useModalDrag.js";
 import s from "./Modal.module.css";
 
 const Context = createContext<T.Context>({

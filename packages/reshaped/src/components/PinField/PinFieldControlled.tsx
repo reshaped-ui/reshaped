@@ -2,19 +2,19 @@
 
 import React from "react";
 
-import { useFormControl } from "@/components/FormControl";
-import Text from "@/components/Text";
-import View from "@/components/View";
-import useHotkeys from "@/hooks/useHotkeys";
-import { onNextFrame } from "@/utilities/animation";
-import { responsivePropDependency } from "@/utilities/props";
-import * as keys from "@/constants/keys";
+import { useFormControl } from "@/components/FormControl/index.js";
+import Text from "@/components/Text/index.js";
+import View from "@/components/View/index.js";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import { onNextFrame } from "@/utilities/animation.js";
+import { responsivePropDependency } from "@/utilities/props.js";
+import * as keys from "@/constants/keys.js";
 import {
 	regExpAlphabeticChar,
 	regExpAlphaNumericChar,
 	regExpNumericChar,
-} from "./PinField.constants";
-import type * as T from "./PinField.types";
+} from "./PinField.constants.js";
+import type * as T from "./PinField.types.js";
 import s from "./PinField.module.css";
 
 const sizeMap: Record<T.Size, number> = {

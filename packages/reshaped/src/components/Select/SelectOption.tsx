@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import DropdownMenu from "@/components/DropdownMenu";
-import type * as T from "./Select.types";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import type * as T from "./Select.types.js";
 import s from "./Select.module.css";
 
 const SelectOption: React.FC<T.OptionProps> = (props) => {

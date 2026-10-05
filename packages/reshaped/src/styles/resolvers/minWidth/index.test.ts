@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import minWidth from "./index";
+import minWidth from "./index.js";
 
 describe("Styles/MinWidth", () => {
 	test("handles px value", () => {

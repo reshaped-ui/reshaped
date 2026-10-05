@@ -3,11 +3,11 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { useFormControl } from "@/components/FormControl";
-import useElementId from "@/hooks/useElementId";
-import { responsiveClassNames } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./TextArea.types";
+import { useFormControl } from "@/components/FormControl/index.js";
+import useElementId from "@/hooks/useElementId.js";
+import { responsiveClassNames } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./TextArea.types.js";
 import s from "./TextArea.module.css";
 
 const TextArea: React.FC<T.Props> = (props) => {

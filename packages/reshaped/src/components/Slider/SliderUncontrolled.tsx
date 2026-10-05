@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import type * as T from "./Slider.types";
-import SliderControlled from "./SliderControlled";
+import type * as T from "./Slider.types.js";
+import SliderControlled from "./SliderControlled.js";
 
 const normalizeValue = (value: number, min: number, max: number) =>
 	Math.min(Math.max(value, min), max);

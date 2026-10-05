@@ -8,25 +8,25 @@ import {
 	type FocusableElement,
 } from "@reshaped/utilities/internal";
 
-import usePrevious from "@/hooks/_internal/usePrevious";
-import useElementId from "@/hooks/useElementId";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useHotkeys from "@/hooks/useHotkeys";
-import useIsDismissible from "@/hooks/useIsDismissible";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import useOnClickOutside from "@/hooks/useOnClickOutside";
-import { checkTransitions } from "@/utilities/animation";
-import * as timeouts from "./Flyout.constants";
+import usePrevious from "@/hooks/_internal/usePrevious.js";
+import useElementId from "@/hooks/useElementId.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import useIsDismissible from "@/hooks/useIsDismissible.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import useOnClickOutside from "@/hooks/useOnClickOutside.js";
+import { checkTransitions } from "@/utilities/animation.js";
+import * as timeouts from "./Flyout.constants.js";
 import {
 	Provider,
 	useFlyoutContentContext,
 	useFlyoutContext,
 	useFlyoutTriggerContext,
-} from "./Flyout.context";
-import type * as T from "./Flyout.types";
-import useFlyout from "./useFlyout";
-import cooldown from "./utilities/cooldown";
-import { createSafeArea } from "./utilities/safeArea";
+} from "./Flyout.context.js";
+import type * as T from "./Flyout.types.js";
+import useFlyout from "./useFlyout.js";
+import cooldown from "./utilities/cooldown.js";
+import { createSafeArea } from "./utilities/safeArea.js";
 
 const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) => {
 	const {

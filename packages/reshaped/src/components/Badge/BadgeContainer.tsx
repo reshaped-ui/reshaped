@@ -1,6 +1,6 @@
 import { classNames } from "@reshaped/utilities";
 
-import type * as T from "./Badge.types";
+import type * as T from "./Badge.types.js";
 import s from "./Badge.module.css";
 
 const BadgeContainer: React.FC<T.ContainerProps> = (props) => {

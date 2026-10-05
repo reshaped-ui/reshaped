@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import bleed from "./index";
+import bleed from "./index.js";
 
 describe("Styles/Bleed", () => {
 	test("handles positive value", () => {

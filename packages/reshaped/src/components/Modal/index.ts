@@ -1,4 +1,4 @@
-import Modal, { ModalSubtitle, ModalTitle } from "./Modal";
+import Modal, { ModalSubtitle, ModalTitle } from "./Modal.js";
 
 const ModalRoot = Modal as typeof Modal & {
 	Title: typeof ModalTitle;
@@ -9,4 +9,4 @@ ModalRoot.Title = ModalTitle;
 ModalRoot.Subtitle = ModalSubtitle;
 
 export default ModalRoot;
-export type { Props as ModalProps } from "./Modal.types";
+export type { Props as ModalProps } from "./Modal.types.js";

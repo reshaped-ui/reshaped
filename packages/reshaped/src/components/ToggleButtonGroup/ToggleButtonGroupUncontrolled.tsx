@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import type * as T from "./ToggleButtonGroup.types";
-import ToggleButtonGroupControlled from "./ToggleButtonGroupControlled";
+import type * as T from "./ToggleButtonGroup.types.js";
+import ToggleButtonGroupControlled from "./ToggleButtonGroupControlled.js";
 
 const ToggleButtonGroupUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange } = props;

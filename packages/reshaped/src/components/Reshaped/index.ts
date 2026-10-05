@@ -1,2 +1,2 @@
-export { default } from "./Reshaped";
-export type { Props as ReshapedProps } from "./Reshaped.types";
+export { default } from "./Reshaped.js";
+export type { Props as ReshapedProps } from "./Reshaped.types.js";

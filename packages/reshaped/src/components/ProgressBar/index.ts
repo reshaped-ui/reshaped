@@ -1,2 +1,2 @@
-export { default } from "./ProgressBar";
-export type { Props as ProgressBarProps } from "./ProgressBar.types";
+export { default } from "./ProgressBar.js";
+export type { Props as ProgressBarProps } from "./ProgressBar.types.js";

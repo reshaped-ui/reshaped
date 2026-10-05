@@ -1,13 +1,13 @@
 import React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
-import type { ActionableProps } from "@/components/Actionable";
-import type { DropdownMenuProps } from "@/components/DropdownMenu";
-import type { FlyoutTriggerAttributes } from "@/components/Flyout";
-import type { IconProps } from "@/components/Icon";
-import type { MenuItemProps } from "@/components/MenuItem";
-import type * as G from "@/types/global";
-import type { Attributes } from "@/types/global";
+import type { ActionableProps } from "@/components/Actionable/index.js";
+import type { DropdownMenuProps } from "@/components/DropdownMenu/index.js";
+import type { FlyoutTriggerAttributes } from "@/components/Flyout/index.js";
+import type { IconProps } from "@/components/Icon/index.js";
+import type { MenuItemProps } from "@/components/MenuItem/index.js";
+import type * as G from "@/types/global.js";
+import type { Attributes } from "@/types/global.js";
 
 type Size = G.Responsive<"small" | "medium" | "large" | "xlarge">;
 

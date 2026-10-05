@@ -3,10 +3,10 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import useElementId from "@/hooks/useElementId";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import AccordionContext from "./Accordion.context";
-import * as T from "./Accordion.types";
+import useElementId from "@/hooks/useElementId.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import AccordionContext from "./Accordion.context.js";
+import * as T from "./Accordion.types.js";
 
 const AccordionControlled: React.FC<T.ControlledProps> = (props) => {
 	const { children, onToggle, active, iconPosition, iconSize, gap, className, attributes } = props;

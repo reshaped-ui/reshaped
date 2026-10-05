@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type * as T from "./CheckboxGroup.types";
+import type * as T from "./CheckboxGroup.types.js";
 
 const CheckboxContext = React.createContext<T.Context | null>(null);
 

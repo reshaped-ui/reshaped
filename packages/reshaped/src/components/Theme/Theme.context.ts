@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type * as T from "./Theme.types";
+import type * as T from "./Theme.types.js";
 
 /* Context used to store data responsible for switching between modes of a theme */
 export const ThemeContext = React.createContext({} as T.ThemeContextData);

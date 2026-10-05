@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import type * as T from "./Tabs.types";
-import TabsControlled from "./TabsControlled";
+import type * as T from "./Tabs.types.js";
+import TabsControlled from "./TabsControlled.js";
 
 const TabsUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange } = props;

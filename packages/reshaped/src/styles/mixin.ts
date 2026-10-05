@@ -1,8 +1,8 @@
 import type { ClassName } from "@reshaped/utilities";
 
-import align from "@/styles/resolvers/align";
-import aspectRatio from "@/styles/resolvers/aspectRatio";
-import bleed from "@/styles/resolvers/bleed";
+import align from "@/styles/resolvers/align/index.js";
+import aspectRatio from "@/styles/resolvers/aspectRatio/index.js";
+import bleed from "@/styles/resolvers/bleed/index.js";
 import border, {
 	borderBlock,
 	borderBottom,
@@ -11,8 +11,8 @@ import border, {
 	borderInline,
 	borderStart,
 	borderTop,
-} from "@/styles/resolvers/border";
-import height from "@/styles/resolvers/height";
+} from "@/styles/resolvers/border/index.js";
+import height from "@/styles/resolvers/height/index.js";
 import inset, {
 	insetBlock,
 	insetBottom,
@@ -20,12 +20,12 @@ import inset, {
 	insetInline,
 	insetStart,
 	insetTop,
-} from "@/styles/resolvers/inset";
-import justify from "@/styles/resolvers/justify";
-import maxHeight from "@/styles/resolvers/maxHeight";
-import maxWidth from "@/styles/resolvers/maxWidth";
-import minHeight from "@/styles/resolvers/minHeight";
-import minWidth from "@/styles/resolvers/minWidth";
+} from "@/styles/resolvers/inset/index.js";
+import justify from "@/styles/resolvers/justify/index.js";
+import maxHeight from "@/styles/resolvers/maxHeight/index.js";
+import maxWidth from "@/styles/resolvers/maxWidth/index.js";
+import minHeight from "@/styles/resolvers/minHeight/index.js";
+import minWidth from "@/styles/resolvers/minWidth/index.js";
 import padding, {
 	paddingBlock,
 	paddingBottom,
@@ -33,14 +33,14 @@ import padding, {
 	paddingInline,
 	paddingStart,
 	paddingTop,
-} from "@/styles/resolvers/padding";
-import position from "@/styles/resolvers/position";
-import radius from "@/styles/resolvers/radius";
-import shadow from "@/styles/resolvers/shadow";
-import textAlign from "@/styles/resolvers/textAlign";
-import width from "@/styles/resolvers/width";
-import zIndex from "@/styles/resolvers/zIndex";
-import type { Mixin } from "@/styles/types";
+} from "@/styles/resolvers/padding/index.js";
+import position from "@/styles/resolvers/position/index.js";
+import radius from "@/styles/resolvers/radius/index.js";
+import shadow from "@/styles/resolvers/shadow/index.js";
+import textAlign from "@/styles/resolvers/textAlign/index.js";
+import width from "@/styles/resolvers/width/index.js";
+import zIndex from "@/styles/resolvers/zIndex/index.js";
+import type { Mixin } from "@/styles/types.js";
 
 const mixinMap = {
 	align,

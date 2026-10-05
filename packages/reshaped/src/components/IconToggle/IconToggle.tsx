@@ -3,9 +3,9 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Presence from "@/components/_private/Presence";
-import Icon from "@/components/Icon";
-import type * as T from "./IconToggle.types";
+import Presence from "@/components/_private/Presence/index.js";
+import Icon from "@/components/Icon/index.js";
+import type * as T from "./IconToggle.types.js";
 import s from "./IconToggle.module.css";
 
 const IconToggle: React.FC<T.Props> = (props) => {

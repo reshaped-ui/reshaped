@@ -1,7 +1,7 @@
 import { classNames } from "@reshaped/utilities";
 
-import View from "@/components/View";
-import type * as T from "./Container.types";
+import View from "@/components/View/index.js";
+import type * as T from "./Container.types.js";
 import s from "./Container.module.css";
 
 const Container: React.FC<T.Props> = (props) => {

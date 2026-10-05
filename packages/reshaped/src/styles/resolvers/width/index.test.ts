@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import width from "./index";
+import width from "./index.js";
 
 describe("Styles/Width", () => {
 	test("handles px value", () => {

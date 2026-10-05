@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent } from "storybook/test";
 
-import useScrollLock from "../useScrollLock";
+import useScrollLock from "../useScrollLock.js";
 
 export default {
 	title: "Hooks/useScrollLock",

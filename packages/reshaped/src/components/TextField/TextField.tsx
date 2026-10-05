@@ -3,12 +3,12 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { useFormControl } from "@/components/FormControl";
-import Icon from "@/components/Icon";
-import useElementId from "@/hooks/useElementId";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./TextField.types";
+import { useFormControl } from "@/components/FormControl/index.js";
+import Icon from "@/components/Icon/index.js";
+import useElementId from "@/hooks/useElementId.js";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./TextField.types.js";
 import s from "./TextField.module.css";
 
 const TextFieldSlot: React.FC<T.SlotProps> = (props) => {

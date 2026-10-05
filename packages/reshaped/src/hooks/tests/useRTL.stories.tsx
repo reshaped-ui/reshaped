@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect } from "storybook/test";
 
-import useRTL from "../useRTL";
+import useRTL from "../useRTL.js";
 
 export default {
 	title: "Hooks/useRTL",

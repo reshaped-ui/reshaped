@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react-vite";
 import { useRef } from "react";
 import { expect, userEvent } from "storybook/test";
 
-import useKeyboardArrowNavigation from "../useKeyboardArrowNavigation";
+import useKeyboardArrowNavigation from "../useKeyboardArrowNavigation.js";
 
 export default {
 	title: "Hooks/useKeyboardArrowNavigation",

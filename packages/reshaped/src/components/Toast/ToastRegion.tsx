@@ -4,9 +4,9 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 import { focusableSelector } from "@reshaped/utilities/internal";
 
-import ToastContext from "./Toast.context";
-import * as T from "./Toast.types";
-import ToastContainer from "./ToastContainer";
+import ToastContext from "./Toast.context.js";
+import * as T from "./Toast.types.js";
+import ToastContainer from "./ToastContainer.js";
 import s from "./Toast.module.css";
 
 const ToastRegion: React.FC<T.RegionProps> = (props) => {

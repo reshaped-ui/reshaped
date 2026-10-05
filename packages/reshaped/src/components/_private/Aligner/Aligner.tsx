@@ -9,7 +9,7 @@
 
 import { classNames } from "@reshaped/utilities";
 
-import type * as T from "./Aligner.types";
+import type * as T from "./Aligner.types.js";
 import s from "./Aligner.module.css";
 
 const Aligner: React.FC<T.Props> = (props) => {

@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import type * as T from "./CheckboxGroup.types";
-import CheckboxGroupControlled from "./CheckboxGroupControlled";
+import type * as T from "./CheckboxGroup.types.js";
+import CheckboxGroupControlled from "./CheckboxGroupControlled.js";
 
 const CheckboxGroupUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange } = props;

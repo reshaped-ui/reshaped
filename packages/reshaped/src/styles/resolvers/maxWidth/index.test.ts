@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import maxWidth from "./index";
+import maxWidth from "./index.js";
 
 describe("Styles/MaxWidth", () => {
 	test("handles px value", () => {

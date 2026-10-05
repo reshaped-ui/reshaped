@@ -1,2 +1,2 @@
-export { default } from "./ContentToggle";
-export type { Props as ContentToggleProps } from "./ContentToggle.types";
+export { default } from "./ContentToggle.js";
+export type { Props as ContentToggleProps } from "./ContentToggle.types.js";

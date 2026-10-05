@@ -1,6 +1,6 @@
 import type { ClassName } from "@reshaped/utilities";
 
-import * as T from "@/styles/types";
+import * as T from "@/styles/types.js";
 import s from "./shadow.module.css";
 
 const shadow: (value: T.Shadow) => { classNames?: ClassName; variables?: React.CSSProperties } = (

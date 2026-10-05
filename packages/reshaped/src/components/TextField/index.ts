@@ -1,5 +1,5 @@
-import Aligner from "@/components/_private/Aligner";
-import TextField from "./TextField";
+import Aligner from "@/components/_private/Aligner/index.js";
+import TextField from "./TextField.js";
 
 const TextFieldRoot = TextField as typeof TextField & {
 	Aligner: typeof Aligner;
@@ -8,4 +8,7 @@ const TextFieldRoot = TextField as typeof TextField & {
 TextFieldRoot.Aligner = Aligner;
 
 export default TextFieldRoot;
-export type { BaseProps as TextFieldBaseProps, Props as TextFieldProps } from "./TextField.types";
+export type {
+	BaseProps as TextFieldBaseProps,
+	Props as TextFieldProps,
+} from "./TextField.types.js";

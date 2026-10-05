@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type * as T from "./DropdownMenu.types";
+import type * as T from "./DropdownMenu.types.js";
 
 const DropdownMenuContext = React.createContext<T.Context>({});
 

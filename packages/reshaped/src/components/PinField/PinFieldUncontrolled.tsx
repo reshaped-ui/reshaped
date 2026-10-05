@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import type * as T from "./PinField.types";
-import PinFieldControlled from "./PinFieldControlled";
+import type * as T from "./PinField.types.js";
+import PinFieldControlled from "./PinFieldControlled.js";
 
 const PinFieldUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultValue, onChange, ...controlledProps } = props;

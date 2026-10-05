@@ -4,9 +4,9 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 import { getFocusableElements } from "@reshaped/utilities/internal";
 
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import type * as T from "./Tabs.types";
-import { useTabs } from "./TabsContext";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import type * as T from "./Tabs.types.js";
+import { useTabs } from "./TabsContext.js";
 import s from "./Tabs.module.css";
 
 const TabsPanel: React.FC<T.PanelProps> = (props) => {

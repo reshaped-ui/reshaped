@@ -1,11 +1,14 @@
 import { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable, { type ActionableProps, type ActionableRef } from "@/components/Actionable";
-import Icon from "@/components/Icon";
-import Text from "@/components/Text";
-import IconClose from "@/icons/Close";
-import type * as T from "./Badge.types";
+import Actionable, {
+	type ActionableProps,
+	type ActionableRef,
+} from "@/components/Actionable/index.js";
+import Icon from "@/components/Icon/index.js";
+import Text from "@/components/Text/index.js";
+import IconClose from "@/icons/Close.js";
+import type * as T from "./Badge.types.js";
 import s from "./Badge.module.css";
 
 const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {

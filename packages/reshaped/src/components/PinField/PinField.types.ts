@@ -1,7 +1,7 @@
 import type { ClassName } from "@reshaped/utilities";
 
-import type * as G from "@/types/global";
-import type { Attributes } from "@/types/global";
+import type * as G from "@/types/global.js";
+import type { Attributes } from "@/types/global.js";
 
 export type Size = "small" | "medium" | "large" | "xlarge";
 

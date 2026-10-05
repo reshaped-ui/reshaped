@@ -1,11 +1,11 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
-import Actionable from "@/components/Actionable";
-import LoaderText from "@/components/LoaderText";
-import useToggle from "@/hooks/useToggle";
-import { Example } from "@/utilities/storybook";
-import IconMicrophone from "@/icons/Mic";
+import Actionable from "@/components/Actionable/index.js";
+import LoaderText from "@/components/LoaderText/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconMicrophone from "@/icons/Mic.js";
 
 export default {
 	title: "Components/LoaderText",

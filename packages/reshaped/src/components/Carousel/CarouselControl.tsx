@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Button from "@/components/Button";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import IconChevronLeft from "@/icons/ChevronLeft";
-import IconChevronRight from "@/icons/ChevronRight";
-import * as T from "./Carousel.types";
+import Button from "@/components/Button/index.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import IconChevronLeft from "@/icons/ChevronLeft.js";
+import IconChevronRight from "@/icons/ChevronRight.js";
+import * as T from "./Carousel.types.js";
 import s from "./Carousel.module.css";
 
 const CarouselControl = (props: T.ControlProps) => {

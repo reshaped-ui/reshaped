@@ -1,6 +1,6 @@
 import type { ClassName } from "@reshaped/utilities";
 
-import type { Attributes } from "@/types/global";
+import type { Attributes } from "@/types/global.js";
 
 type Side = "start" | "end" | "top" | "bottom" | "inline" | "block" | "all";
 

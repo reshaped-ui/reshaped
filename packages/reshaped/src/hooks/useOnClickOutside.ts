@@ -1,7 +1,7 @@
 import React from "react";
 import { keys } from "@reshaped/utilities";
 
-import useHandlerRef from "./useHandlerRef";
+import useHandlerRef from "./useHandlerRef.js";
 
 const useOnClickOutside = (
 	refs: React.RefObject<HTMLElement | null>[],

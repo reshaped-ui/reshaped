@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable from "@/components/Actionable";
-import View from "@/components/View";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Card.types";
+import Actionable from "@/components/Actionable/index.js";
+import View from "@/components/View/index.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Card.types.js";
 import s from "./Card.module.css";
 
 export type Component = {

@@ -1,5 +1,5 @@
-import Resizable, { ResizableItem } from "./Resizable";
-import ResizableHandle from "./ResizableHandle";
+import Resizable, { ResizableItem } from "./Resizable.js";
+import ResizableHandle from "./ResizableHandle.js";
 
 const ResizableRoot = Resizable as typeof Resizable & {
 	Item: typeof ResizableItem;
@@ -14,4 +14,4 @@ export type {
 	HandleProps as ResizableHandleProps,
 	ItemProps as ResizableItemProps,
 	Props as ResizableProps,
-} from "./Resizable.types";
+} from "./Resizable.types.js";

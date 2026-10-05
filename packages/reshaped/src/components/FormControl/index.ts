@@ -1,7 +1,7 @@
-import FormControl from "./FormControl";
-import FormControlError from "./FormControlError";
-import FormControlHelper from "./FormControlHelper";
-import FormControlLabel from "./FormControlLabel";
+import FormControl from "./FormControl.js";
+import FormControlError from "./FormControlError.js";
+import FormControlHelper from "./FormControlHelper.js";
+import FormControlLabel from "./FormControlLabel.js";
 
 const FormControlRoot = FormControl as typeof FormControl & {
 	Label: typeof FormControlLabel;
@@ -14,5 +14,5 @@ FormControlRoot.Helper = FormControlHelper;
 FormControlRoot.Error = FormControlError;
 
 export default FormControlRoot;
-export { useFormControl } from "./FormControl.context";
-export type { Props as FormControlProps } from "./FormControl.types";
+export { useFormControl } from "./FormControl.context.js";
+export type { Props as FormControlProps } from "./FormControl.types.js";

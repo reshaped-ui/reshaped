@@ -3,7 +3,7 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import type * as T from "./ProgressIndicator.types";
+import type * as T from "./ProgressIndicator.types.js";
 import s from "./ProgressIndicator.module.css";
 
 const VISIBLE_ITEMS = 7;

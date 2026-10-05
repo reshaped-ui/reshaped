@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import textAlign from "./index";
+import textAlign from "./index.js";
 
 describe("Styles/TextAlign", () => {
 	test("handles value", () => {

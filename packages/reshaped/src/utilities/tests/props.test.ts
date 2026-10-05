@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
 
 describe("Utilities/Props/responsiveClassNames", () => {
 	const s = { "--size-small": "small", "--size-medium--l": "medium" };

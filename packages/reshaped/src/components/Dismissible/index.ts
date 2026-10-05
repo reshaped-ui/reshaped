@@ -1,5 +1,5 @@
-export { default } from "./Dismissible";
+export { default } from "./Dismissible.js";
 export type {
 	CloseProps as DismissibleCloseProps,
 	Props as DismissibleProps,
-} from "./Dismissible.types";
+} from "./Dismissible.types.js";

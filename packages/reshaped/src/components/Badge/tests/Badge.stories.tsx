@@ -2,14 +2,14 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Avatar from "@/components/Avatar";
-import Badge from "@/components/Badge";
-import Button from "@/components/Button";
-import Icon from "@/components/Icon";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
-import IconCheckmark from "@/icons/Checkmark";
-import IconPlus from "@/icons/Plus";
+import Avatar from "@/components/Avatar/index.js";
+import Badge from "@/components/Badge/index.js";
+import Button from "@/components/Button/index.js";
+import Icon from "@/components/Icon/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconCheckmark from "@/icons/Checkmark.js";
+import IconPlus from "@/icons/Plus.js";
 
 export default {
 	title: "Components/Badge",

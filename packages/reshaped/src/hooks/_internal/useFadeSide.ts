@@ -3,8 +3,8 @@
 import React from "react";
 import { rafThrottle } from "@reshaped/utilities/internal";
 
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import useRTL from "@/hooks/useRTL";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import useRTL from "@/hooks/useRTL.js";
 
 const useFadeSide = (
 	scrollableRef: React.RefObject<HTMLElement | null>,

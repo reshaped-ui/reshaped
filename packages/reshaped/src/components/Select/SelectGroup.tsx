@@ -1,8 +1,8 @@
 import React from "react";
 
-import Text from "@/components/Text";
-import View from "@/components/View";
-import type * as T from "./Select.types";
+import Text from "@/components/Text/index.js";
+import View from "@/components/View/index.js";
+import type * as T from "./Select.types.js";
 import s from "./Select.module.css";
 
 const SelectGroup: React.FC<T.GroupProps> = (props) => {

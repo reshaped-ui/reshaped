@@ -3,8 +3,8 @@
 import React from "react";
 import { breakpoints as defaultBreakpoints } from "@reshaped/theming";
 
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import type * as G from "@/types/global";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import type * as G from "@/types/global.js";
 
 const SingletonViewportContext = React.createContext<{
 	viewport: G.Viewport;

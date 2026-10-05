@@ -2,17 +2,17 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
-import Button from "@/components/Button";
-import Dismissible from "@/components/Dismissible";
-import DropdownMenu from "@/components/DropdownMenu";
-import Modal, { type ModalProps } from "@/components/Modal";
-import Radio from "@/components/Radio";
-import Switch from "@/components/Switch";
-import TextField from "@/components/TextField";
-import View from "@/components/View";
-import useToggle from "@/hooks/useToggle";
-import { sleep } from "@/utilities/helpers";
-import { Example, Placeholder } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import Dismissible from "@/components/Dismissible/index.js";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import Modal, { type ModalProps } from "@/components/Modal/index.js";
+import Radio from "@/components/Radio/index.js";
+import Switch from "@/components/Switch/index.js";
+import TextField from "@/components/TextField/index.js";
+import View from "@/components/View/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import { sleep } from "@/utilities/helpers.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/Modal",

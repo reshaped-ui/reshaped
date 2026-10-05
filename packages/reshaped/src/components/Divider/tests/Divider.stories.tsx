@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
-import Divider from "@/components/Divider";
-import View from "@/components/View";
-import { Example, Placeholder } from "@/utilities/storybook";
+import Divider from "@/components/Divider/index.js";
+import View from "@/components/View/index.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/Divider",

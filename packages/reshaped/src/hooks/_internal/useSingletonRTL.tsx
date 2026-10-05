@@ -3,7 +3,7 @@
 import React from "react";
 import { isRTL } from "@reshaped/utilities";
 
-import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
+import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect.js";
 
 type Context = {
 	rtl: [boolean, (state: boolean) => void];

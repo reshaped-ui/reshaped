@@ -1,11 +1,11 @@
 "use client";
 
-import Button from "@/components/Button";
-import View from "@/components/View";
-import { range } from "@/utilities/helpers";
-import IconChevronLeft from "@/icons/ChevronLeft";
-import IconChevronRight from "@/icons/ChevronRight";
-import type * as T from "./Pagination.types";
+import Button from "@/components/Button/index.js";
+import View from "@/components/View/index.js";
+import { range } from "@/utilities/helpers.js";
+import IconChevronLeft from "@/icons/ChevronLeft.js";
+import IconChevronRight from "@/icons/ChevronRight.js";
+import type * as T from "./Pagination.types.js";
 import s from "./Pagination.module.css";
 
 const PaginationControlled: React.FC<T.ControlledProps> = (props) => {

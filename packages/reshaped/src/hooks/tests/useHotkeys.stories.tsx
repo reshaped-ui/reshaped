@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import useHotkeys from "../useHotkeys";
+import useHotkeys from "../useHotkeys.js";
 
 export default {
 	title: "Hooks/useHotkeys",

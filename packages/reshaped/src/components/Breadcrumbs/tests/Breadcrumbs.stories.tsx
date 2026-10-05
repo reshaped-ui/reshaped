@@ -1,10 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Badge from "@/components/Badge";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { Example } from "@/utilities/storybook";
-import IconZap from "@/icons/Zap";
+import Badge from "@/components/Badge/index.js";
+import Breadcrumbs from "@/components/Breadcrumbs/index.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconZap from "@/icons/Zap.js";
 
 export default {
 	title: "Components/Breadcrumbs",

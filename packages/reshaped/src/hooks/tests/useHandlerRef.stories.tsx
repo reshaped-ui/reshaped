@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, Mock, userEvent } from "storybook/test";
 
-import useHandlerRef from "../useHandlerRef";
+import useHandlerRef from "../useHandlerRef.js";
 
 export default {
 	title: "Hooks/useHandlerRef",

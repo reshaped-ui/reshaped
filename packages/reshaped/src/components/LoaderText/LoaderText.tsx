@@ -1,8 +1,8 @@
 import { classNames } from "@reshaped/utilities";
 
-import Text from "@/components/Text";
-import Icon from "../Icon";
-import type * as T from "./LoaderText.types";
+import Text from "@/components/Text/index.js";
+import Icon from "../Icon/index.js";
+import type * as T from "./LoaderText.types.js";
 import s from "./LoaderText.module.css";
 
 const LoaderText: React.FC<T.Props> = (props) => {

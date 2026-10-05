@@ -2,7 +2,7 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, type Mock, userEvent } from "storybook/test";
 
-import useOnClickOutside from "../useOnClickOutside";
+import useOnClickOutside from "../useOnClickOutside.js";
 
 export default {
 	title: "Hooks/useOnClickOutside",

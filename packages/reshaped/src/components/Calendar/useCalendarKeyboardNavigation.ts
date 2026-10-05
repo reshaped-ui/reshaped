@@ -1,8 +1,8 @@
 import React from "react";
 
-import useHotkeys from "@/hooks/useHotkeys";
-import * as keys from "@/constants/keys";
-import { getFocusableDates } from "./Calendar.utils";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import * as keys from "@/constants/keys.js";
+import { getFocusableDates } from "./Calendar.utils.js";
 
 const useCalendarKeyboardNavigation = (props: {
 	monthDate: Date;

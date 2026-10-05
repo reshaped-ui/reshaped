@@ -1,5 +1,5 @@
-import View, { type ViewProps } from "@/components/View";
-import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
+import View, { type ViewProps } from "@/components/View/index.js";
+import useResponsiveClientValue from "@/hooks/useResponsiveClientValue.js";
 
 export default {
 	title: "Hooks/useResponsiveClientValue",

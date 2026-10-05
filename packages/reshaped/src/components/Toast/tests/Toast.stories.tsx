@@ -2,14 +2,14 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, userEvent, within } from "storybook/test";
 
-import Button from "@/components/Button";
-import Dismissible from "@/components/Dismissible";
-import Image from "@/components/Image";
-import Text from "@/components/Text";
-import { ToastProvider, useToast } from "@/components/Toast";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
-import IconZap from "@/icons/Zap";
+import Button from "@/components/Button/index.js";
+import Dismissible from "@/components/Dismissible/index.js";
+import Image from "@/components/Image/index.js";
+import Text from "@/components/Text/index.js";
+import { ToastProvider, useToast } from "@/components/Toast/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconZap from "@/icons/Zap.js";
 
 export default {
 	title: "Components/Toast",

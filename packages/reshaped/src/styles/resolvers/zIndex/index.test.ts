@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import zIndex from "./index";
+import zIndex from "./index.js";
 
 describe("Styles/ZIndex", () => {
 	test("handles numeric value", () => {

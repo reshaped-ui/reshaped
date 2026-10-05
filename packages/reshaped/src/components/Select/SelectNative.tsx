@@ -3,11 +3,11 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { responsiveClassNames } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Select.types";
-import SelectEndContent from "./SelectEndContent";
-import SelectStartContent from "./SelectStartContent";
+import { responsiveClassNames } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Select.types.js";
+import SelectEndContent from "./SelectEndContent.js";
+import SelectStartContent from "./SelectStartContent.js";
 import s from "./Select.module.css";
 
 const SelectNative: React.FC<T.NativeProps> = (props) => {

@@ -1,6 +1,6 @@
 import type { ClassName } from "@reshaped/utilities";
 
-import type { Attributes } from "@/types/global";
+import type { Attributes } from "@/types/global.js";
 
 export type SingleChangeArgs = {
 	/** Value of the slider, enables controlled mode */

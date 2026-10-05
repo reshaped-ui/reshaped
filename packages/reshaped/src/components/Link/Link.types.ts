@@ -1,5 +1,5 @@
-import type { ActionableProps } from "@/components/Actionable";
-import type { IconProps } from "@/components/Icon";
+import type { ActionableProps } from "@/components/Actionable/index.js";
+import type { IconProps } from "@/components/Icon/index.js";
 
 export type Props = Pick<
 	ActionableProps,

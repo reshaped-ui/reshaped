@@ -1,14 +1,14 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import root from "react-shadow";
 
-import Autocomplete, { type AutocompleteProps } from "@/components/Autocomplete";
-import Button from "@/components/Button";
-import DropdownMenu from "@/components/DropdownMenu";
-import { SelectTrigger } from "@/components/Select";
-import Theme from "@/components/Theme";
-import Tooltip from "@/components/Tooltip";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
+import Autocomplete, { type AutocompleteProps } from "@/components/Autocomplete/index.js";
+import Button from "@/components/Button/index.js";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import { SelectTrigger } from "@/components/Select/index.js";
+import Theme from "@/components/Theme/index.js";
+import Tooltip from "@/components/Tooltip/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Internal/ShadowDOM",

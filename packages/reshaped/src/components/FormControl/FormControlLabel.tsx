@@ -1,8 +1,8 @@
 "use client";
 
-import Text from "@/components/Text";
-import { useFormControlPrivate } from "./FormControl.context";
-import type * as T from "./FormControl.types";
+import Text from "@/components/Text/index.js";
+import { useFormControlPrivate } from "./FormControl.context.js";
+import type * as T from "./FormControl.types.js";
 import s from "./FormControl.module.css";
 
 const FormControlLabel: React.FC<T.LabelProps> = (props) => {

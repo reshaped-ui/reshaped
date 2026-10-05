@@ -4,13 +4,13 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 import { rafThrottle } from "@reshaped/utilities/internal";
 
-import type { ActionableRef } from "@/components/Actionable";
-import View from "@/components/View";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import useRTL from "@/hooks/useRTL";
-import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-import * as T from "./Carousel.types";
-import CarouselControl from "./CarouselControl";
+import type { ActionableRef } from "@/components/Actionable/index.js";
+import View from "@/components/View/index.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import useRTL from "@/hooks/useRTL.js";
+import { responsiveClassNames, responsiveVariables } from "@/utilities/props.js";
+import * as T from "./Carousel.types.js";
+import CarouselControl from "./CarouselControl.js";
 import s from "./Carousel.module.css";
 
 const Carousel: React.FC<T.Props> = (props) => {

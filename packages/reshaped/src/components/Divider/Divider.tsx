@@ -1,11 +1,11 @@
 import type React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Text from "@/components/Text";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type { StyleAttribute } from "@/types/global";
-import type * as T from "./Divider.types";
+import Text from "@/components/Text/index.js";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type { StyleAttribute } from "@/types/global.js";
+import type * as T from "./Divider.types.js";
 import s from "./Divider.module.css";
 
 const Divider: React.FC<T.Props> = (props) => {

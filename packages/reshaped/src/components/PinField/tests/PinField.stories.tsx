@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
-import FormControl from "@/components/FormControl";
-import PinField from "@/components/PinField";
-import { Example } from "@/utilities/storybook";
+import FormControl from "@/components/FormControl/index.js";
+import PinField from "@/components/PinField/index.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/PinField",

@@ -2,8 +2,8 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { Flyout } from "@reshaped/utilities";
 import { type Coordinates } from "@reshaped/utilities/internal";
 
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import type * as T from "./Flyout.types";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import type * as T from "./Flyout.types.js";
 
 type UseFlyout = (
 	args: Pick<

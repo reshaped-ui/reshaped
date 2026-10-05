@@ -2,9 +2,9 @@
 
 import React from "react";
 
-import View from "@/components/View";
-import { onNextFrame } from "@/utilities/animation";
-import type * as T from "./Calendar.types";
+import View from "@/components/View/index.js";
+import { onNextFrame } from "@/utilities/animation.js";
+import type * as T from "./Calendar.types.js";
 import {
 	applyNavigationBounds,
 	setMonthTo,
@@ -12,11 +12,11 @@ import {
 	setMonthToPrevious,
 	setYearToNext,
 	setYearToPrevious,
-} from "./Calendar.utils";
-import CalendarControls from "./CalendarControls";
-import CalendarMonth from "./CalendarMonth";
-import CalendarYear from "./CalendarYear";
-import useCalendarKeyboardNavigation from "./useCalendarKeyboardNavigation";
+} from "./Calendar.utils.js";
+import CalendarControls from "./CalendarControls.js";
+import CalendarMonth from "./CalendarMonth.js";
+import CalendarYear from "./CalendarYear.js";
+import useCalendarKeyboardNavigation from "./useCalendarKeyboardNavigation.js";
 
 const CalendarControlled: React.FC<T.ControlledProps & T.BaseProps> = (props) => {
 	const {

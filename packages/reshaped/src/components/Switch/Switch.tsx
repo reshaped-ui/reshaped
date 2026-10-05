@@ -3,11 +3,11 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { useFormControl } from "@/components/FormControl";
-import Text from "@/components/Text";
-import useElementId from "@/hooks/useElementId";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-import type * as T from "./Switch.types";
+import { useFormControl } from "@/components/FormControl/index.js";
+import Text from "@/components/Text/index.js";
+import useElementId from "@/hooks/useElementId.js";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
+import type * as T from "./Switch.types.js";
 import s from "./Switch.module.css";
 
 const Switch: React.FC<T.Props> = (props) => {

@@ -1,7 +1,7 @@
 import type React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
-import * as T from "@/styles/types";
+import * as T from "@/styles/types.js";
 import "./zIndex.css";
 
 const zIndex: (value?: T.ZIndex) => {

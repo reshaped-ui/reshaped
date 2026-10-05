@@ -1,8 +1,8 @@
 import type React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
-import type { IconProps } from "@/components/Icon";
-import type { Attributes } from "@/types/global";
+import type { IconProps } from "@/components/Icon/index.js";
+import type { Attributes } from "@/types/global.js";
 
 export type Status = "entering" | "entered" | "exited";
 export type TimeoutAlias = "short" | "long";

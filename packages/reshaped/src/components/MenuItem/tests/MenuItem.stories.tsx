@@ -1,12 +1,12 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Badge from "@/components/Badge";
-import MenuItem from "@/components/MenuItem";
-import Text from "@/components/Text";
-import View from "@/components/View";
-import { Example, Placeholder } from "@/utilities/storybook";
-import IconZap from "@/icons/Zap";
+import Badge from "@/components/Badge/index.js";
+import MenuItem from "@/components/MenuItem/index.js";
+import Text from "@/components/Text/index.js";
+import View from "@/components/View/index.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
+import IconZap from "@/icons/Zap.js";
 
 export default {
 	title: "Components/MenuItem",

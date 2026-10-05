@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import * as T from "./Pagination.types";
-import PaginationControlled from "./PaginationControlled";
+import * as T from "./Pagination.types.js";
+import PaginationControlled from "./PaginationControlled.js";
 
 const PaginationUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultPage = 1, onChange, ...controlledProps } = props;

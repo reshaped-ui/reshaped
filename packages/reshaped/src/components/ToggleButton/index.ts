@@ -1,2 +1,2 @@
-export { default } from "./ToggleButton";
-export type { Props as ToggleButtonProps } from "./ToggleButton.types";
+export { default } from "./ToggleButton.js";
+export type { Props as ToggleButtonProps } from "./ToggleButton.types.js";

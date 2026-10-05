@@ -1,11 +1,11 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, Mock, userEvent } from "storybook/test";
 
-import Accordion from "@/components/Accordion";
-import Button from "@/components/Button";
-import MenuItem from "@/components/MenuItem";
-import View from "@/components/View";
-import { Placeholder } from "@/utilities/storybook";
+import Accordion from "@/components/Accordion/index.js";
+import Button from "@/components/Button/index.js";
+import MenuItem from "@/components/MenuItem/index.js";
+import View from "@/components/View/index.js";
+import { Placeholder } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Utility components/Accordion",

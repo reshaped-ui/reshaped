@@ -1,13 +1,13 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, userEvent } from "storybook/test";
 
-import Button from "@/components/Button";
-import Card from "@/components/Card";
-import MenuItem from "@/components/MenuItem";
-import Popover from "@/components/Popover";
-import Theme, { useTheme } from "@/components/Theme";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import Card from "@/components/Card/index.js";
+import MenuItem from "@/components/MenuItem/index.js";
+import Popover from "@/components/Popover/index.js";
+import Theme, { useTheme } from "@/components/Theme/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Utility components/Theme",

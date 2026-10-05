@@ -2,10 +2,10 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
-import Button from "@/components/Button";
-import Carousel, { type CarouselInstance } from "@/components/Carousel";
-import View from "@/components/View";
-import { Example, Placeholder } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import Carousel, { type CarouselInstance } from "@/components/Carousel/index.js";
+import View from "@/components/View/index.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/Carousel",

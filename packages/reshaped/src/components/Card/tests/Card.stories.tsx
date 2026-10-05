@@ -2,9 +2,9 @@ import { StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Button from "@/components/Button";
-import Card from "@/components/Card";
-import { Example, Placeholder } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import Card from "@/components/Card/index.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/Card",

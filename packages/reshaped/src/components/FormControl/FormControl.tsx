@@ -3,10 +3,10 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import useElementId from "@/hooks/useElementId";
-import { Provider } from "./FormControl.context";
-import type * as T from "./FormControl.types";
-import { getCaptionId } from "./FormControl.utilities";
+import useElementId from "@/hooks/useElementId.js";
+import { Provider } from "./FormControl.context.js";
+import type * as T from "./FormControl.types.js";
+import { getCaptionId } from "./FormControl.utilities.js";
 import s from "./FormControl.module.css";
 
 const FormControl: React.FC<T.Props> = (props) => {

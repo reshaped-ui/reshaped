@@ -1,12 +1,12 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
-import FormControl from "@/components/FormControl";
-import Radio from "@/components/Radio";
-import RadioGroup from "@/components/RadioGroup";
-import TextField from "@/components/TextField";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
+import FormControl from "@/components/FormControl/index.js";
+import Radio from "@/components/Radio/index.js";
+import RadioGroup from "@/components/RadioGroup/index.js";
+import TextField from "@/components/TextField/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Utility components/FormControl",

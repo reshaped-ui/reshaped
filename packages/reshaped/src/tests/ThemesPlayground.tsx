@@ -1,27 +1,27 @@
 import React from "react";
 
-import Alert from "@/components/Alert";
-import Avatar from "@/components/Avatar";
-import Badge from "@/components/Badge";
-import Button from "@/components/Button";
-import Card from "@/components/Card";
-import Checkbox from "@/components/Checkbox";
-import CheckboxGroup from "@/components/CheckboxGroup";
-import Divider from "@/components/Divider";
-import DropdownMenu from "@/components/DropdownMenu";
-import FormControl from "@/components/FormControl";
-import Grid from "@/components/Grid";
-import Image from "@/components/Image";
-import Link from "@/components/Link";
-import Switch from "@/components/Switch";
-import Table from "@/components/Table";
-import Text from "@/components/Text";
-import TextField from "@/components/TextField";
-import View, { ViewProps } from "@/components/View";
-import useToggle from "@/hooks/useToggle";
-import IconChevronDown from "@/icons/ChevronDown";
-import IconChevronRight from "@/icons/ChevronRight";
-import IconZap from "@/icons/Zap";
+import Alert from "@/components/Alert/index.js";
+import Avatar from "@/components/Avatar/index.js";
+import Badge from "@/components/Badge/index.js";
+import Button from "@/components/Button/index.js";
+import Card from "@/components/Card/index.js";
+import Checkbox from "@/components/Checkbox/index.js";
+import CheckboxGroup from "@/components/CheckboxGroup/index.js";
+import Divider from "@/components/Divider/index.js";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import FormControl from "@/components/FormControl/index.js";
+import Grid from "@/components/Grid/index.js";
+import Image from "@/components/Image/index.js";
+import Link from "@/components/Link/index.js";
+import Switch from "@/components/Switch/index.js";
+import Table from "@/components/Table/index.js";
+import Text from "@/components/Text/index.js";
+import TextField from "@/components/TextField/index.js";
+import View, { ViewProps } from "@/components/View/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import IconChevronDown from "@/icons/ChevronDown.js";
+import IconChevronRight from "@/icons/ChevronRight.js";
+import IconZap from "@/icons/Zap.js";
 
 const Color = (props: Pick<ViewProps, "backgroundColor" | "borderColor" | "children">) => {
 	return (

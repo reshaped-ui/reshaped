@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ThemeProps } from "@/components/Theme";
+import { ThemeProps } from "@/components/Theme/index.js";
 
 export type Props = {
 	children?: React.ReactNode;

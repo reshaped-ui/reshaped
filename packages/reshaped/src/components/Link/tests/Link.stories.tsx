@@ -1,10 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Link from "@/components/Link";
-import Text from "@/components/Text";
-import { Example } from "@/utilities/storybook";
-import IconZap from "@/icons/Zap";
+import Link from "@/components/Link/index.js";
+import Text from "@/components/Text/index.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconZap from "@/icons/Zap.js";
 
 export default {
 	title: "Components/Link",

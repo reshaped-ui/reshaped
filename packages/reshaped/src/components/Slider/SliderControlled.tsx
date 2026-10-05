@@ -4,13 +4,13 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 
-import { useFormControl } from "@/components/FormControl";
-import useElementId from "@/hooks/useElementId";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useRTL from "@/hooks/useRTL";
-import type * as T from "./Slider.types";
-import { applyStepToValue, getDragCoord, triggerChangeEvent } from "./Slider.utilities";
-import SliderThumb from "./SliderThumb";
+import { useFormControl } from "@/components/FormControl/index.js";
+import useElementId from "@/hooks/useElementId.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useRTL from "@/hooks/useRTL.js";
+import type * as T from "./Slider.types.js";
+import { applyStepToValue, getDragCoord, triggerChangeEvent } from "./Slider.utilities.js";
+import SliderThumb from "./SliderThumb.js";
 import s from "./Slider.module.css";
 
 const THUMB_SIZE = 16;

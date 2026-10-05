@@ -3,10 +3,10 @@
 import React from "react";
 import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useHotkeys from "@/hooks/useHotkeys";
-import useToggle from "@/hooks/useToggle";
-import * as keys from "@/constants/keys";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import useToggle from "@/hooks/useToggle.js";
+import * as keys from "@/constants/keys.js";
 
 export type UseDragCallbackArgs = { x: number; y: number; triggerX: number; triggerY: number };
 

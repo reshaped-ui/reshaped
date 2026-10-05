@@ -3,17 +3,17 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable from "@/components/Actionable";
-import Icon from "@/components/Icon";
-import useFadeSide from "@/hooks/_internal/useFadeSide";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation";
-import useRTL from "@/hooks/useRTL";
-import { checkTransitions } from "@/utilities/animation";
-import IconChevronLeft from "@/icons/ChevronLeft";
-import IconChevronRight from "@/icons/ChevronRight";
-import type * as T from "./Tabs.types";
-import { useTabs } from "./TabsContext";
+import Actionable from "@/components/Actionable/index.js";
+import Icon from "@/components/Icon/index.js";
+import useFadeSide from "@/hooks/_internal/useFadeSide.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation.js";
+import useRTL from "@/hooks/useRTL.js";
+import { checkTransitions } from "@/utilities/animation.js";
+import IconChevronLeft from "@/icons/ChevronLeft.js";
+import IconChevronRight from "@/icons/ChevronRight.js";
+import type * as T from "./Tabs.types.js";
+import { useTabs } from "./TabsContext.js";
 import s from "./Tabs.module.css";
 
 const findParentItem = (el: HTMLElement | null, rootEl: HTMLElement): HTMLElement | null => {

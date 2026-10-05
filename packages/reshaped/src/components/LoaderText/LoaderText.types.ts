@@ -1,5 +1,5 @@
-import type { TextProps } from "@/components/Text";
-import type { IconProps } from "../Icon";
+import type { TextProps } from "@/components/Text/index.js";
+import type { IconProps } from "../Icon/index.js";
 
 export type Props = Pick<
 	TextProps,

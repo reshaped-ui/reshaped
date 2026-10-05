@@ -3,8 +3,8 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Presence from "@/components/_private/Presence";
-import type * as T from "./ContentToggle.types";
+import Presence from "@/components/_private/Presence/index.js";
+import type * as T from "./ContentToggle.types.js";
 import s from "./ContentToggle.module.css";
 
 const ContentToggle: React.FC<T.Props> = (props) => {

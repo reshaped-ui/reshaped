@@ -3,13 +3,13 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Button from "@/components/Button";
-import Icon from "@/components/Icon";
-import Text from "@/components/Text";
-import View from "@/components/View";
-import IconChevronRight from "@/icons/ChevronRight";
-import IconDotsHorizontal from "@/icons/DotsHorizontal";
-import * as T from "./Breadcrumbs.types";
+import Button from "@/components/Button/index.js";
+import Icon from "@/components/Icon/index.js";
+import Text from "@/components/Text/index.js";
+import View from "@/components/View/index.js";
+import IconChevronRight from "@/icons/ChevronRight.js";
+import IconDotsHorizontal from "@/icons/DotsHorizontal.js";
+import * as T from "./Breadcrumbs.types.js";
 
 const Breadcrumbs: React.FC<T.Props> = (props) => {
 	const {

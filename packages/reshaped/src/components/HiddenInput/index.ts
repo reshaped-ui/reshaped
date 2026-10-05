@@ -1,2 +1,2 @@
-export { default } from "./HiddenInput";
-export type { Props as HiddenInputProps } from "./HiddenInput.types";
+export { default } from "./HiddenInput.js";
+export type { Props as HiddenInputProps } from "./HiddenInput.types.js";

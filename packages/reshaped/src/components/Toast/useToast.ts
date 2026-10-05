@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import ToastContext from "./Toast.context";
+import ToastContext from "./Toast.context.js";
 
 const useToast = () => {
 	const { add, hide, id } = React.useContext(ToastContext);

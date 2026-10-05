@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type * as T from "./FormControl.types";
+import type * as T from "./FormControl.types.js";
 
 const FormControlContext = React.createContext({ attributes: {} } as T.Context);
 

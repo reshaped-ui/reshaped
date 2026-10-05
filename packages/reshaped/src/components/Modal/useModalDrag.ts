@@ -3,11 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { enableScroll, disableScroll } from "@reshaped/utilities/internal";
 
-import type { OverlayInstance } from "@/components/Overlay";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import { resolveSpringTransition } from "@/utilities/animation";
-import type * as T from "./Modal.types";
+import type { OverlayInstance } from "@/components/Overlay/index.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import { resolveSpringTransition } from "@/utilities/animation.js";
+import type * as T from "./Modal.types.js";
 
 /** Distance in px the modal has to be dragged before it starts following the finger */
 const THRESHOLD = 32;

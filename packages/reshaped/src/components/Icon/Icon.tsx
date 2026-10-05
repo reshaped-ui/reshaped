@@ -1,8 +1,8 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Icon.types";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Icon.types.js";
 import s from "./Icon.module.css";
 
 const Icon: React.FC<T.Props> = (props) => {

@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import type * as T from "./Select.types";
-import SelectCustomControlled from "./SelectCustomControlled";
+import type * as T from "./Select.types.js";
+import SelectCustomControlled from "./SelectCustomControlled.js";
 
 const SelectCustomUncontrolled: React.FC<T.CustomUncontrolledProps> = (props) => {
 	const { defaultValue, onChange, multiple, ...controlledProps } = props;

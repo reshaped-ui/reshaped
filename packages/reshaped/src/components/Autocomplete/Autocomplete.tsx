@@ -2,16 +2,16 @@
 
 import React from "react";
 
-import DropdownMenu from "@/components/DropdownMenu";
-import type { MenuItemProps } from "@/components/MenuItem";
-import TextField from "@/components/TextField";
-import type { TextFieldProps } from "@/components/TextField";
-import useElementId from "@/hooks/useElementId";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useHotkeys from "@/hooks/useHotkeys";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import * as keys from "@/constants/keys";
-import * as T from "./Autocomplete.types";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import type { MenuItemProps } from "@/components/MenuItem/index.js";
+import TextField from "@/components/TextField/index.js";
+import type { TextFieldProps } from "@/components/TextField/index.js";
+import useElementId from "@/hooks/useElementId.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import * as keys from "@/constants/keys.js";
+import * as T from "./Autocomplete.types.js";
 import s from "./Autocomplete.module.css";
 
 const AutocompleteContext = React.createContext({} as T.Context);

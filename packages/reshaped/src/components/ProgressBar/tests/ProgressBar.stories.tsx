@@ -2,10 +2,10 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect } from "storybook/test";
 
-import Button from "@/components/Button";
-import ProgressBar from "@/components/ProgressBar";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import ProgressBar from "@/components/ProgressBar/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/ProgressBar",

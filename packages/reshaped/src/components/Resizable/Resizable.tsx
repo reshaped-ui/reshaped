@@ -3,9 +3,9 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import View from "@/components/View";
-import type * as T from "./Resizable.types";
-import { ResizableContext } from "./ResizableContext";
+import View from "@/components/View/index.js";
+import type * as T from "./Resizable.types.js";
+import { ResizableContext } from "./ResizableContext.js";
 import s from "./Resizable.module.css";
 
 export const ResizableItem: React.FC<T.ItemProps> = (props) => {

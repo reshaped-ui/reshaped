@@ -3,12 +3,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { expect, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 
-import Button from "@/components/Button";
-import Overlay from "@/components/Overlay";
-import View from "@/components/View";
-import useToggle from "@/hooks/useToggle";
-import { sleep } from "@/utilities/helpers";
-import { Example } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import Overlay from "@/components/Overlay/index.js";
+import View from "@/components/View/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import { sleep } from "@/utilities/helpers.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Utility components/Overlay",

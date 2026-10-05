@@ -1,11 +1,11 @@
 import React from "react";
 
-import Button from "@/components/Button";
-import ContentToggle from "@/components/ContentToggle";
-import Text from "@/components/Text";
-import View from "@/components/View";
-import IconChevronLeft from "@/icons/ChevronLeft";
-import IconChevronRight from "@/icons/ChevronRight";
+import Button from "@/components/Button/index.js";
+import ContentToggle from "@/components/ContentToggle/index.js";
+import Text from "@/components/Text/index.js";
+import View from "@/components/View/index.js";
+import IconChevronLeft from "@/icons/ChevronLeft.js";
+import IconChevronRight from "@/icons/ChevronRight.js";
 
 export default {
 	title: "Utility components/ContentToggle",

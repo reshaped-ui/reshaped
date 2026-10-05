@@ -1,5 +1,5 @@
-import MenuItem from "./MenuItem";
-import MenuItemAligner from "./MenuItemAligner";
+import MenuItem from "./MenuItem.js";
+import MenuItemAligner from "./MenuItemAligner.js";
 
 const MenuItemRoot = MenuItem as typeof MenuItem & {
 	Aligner: typeof MenuItemAligner;
@@ -8,4 +8,4 @@ const MenuItemRoot = MenuItem as typeof MenuItem & {
 MenuItemRoot.Aligner = MenuItemAligner;
 
 export default MenuItemRoot;
-export type { Props as MenuItemProps } from "./MenuItem.types";
+export type { Props as MenuItemProps } from "./MenuItem.types.js";

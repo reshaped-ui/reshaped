@@ -2,16 +2,16 @@
 
 import React from "react";
 
-import { useFlyoutContext } from "@/components/Flyout";
-import Icon from "@/components/Icon";
-import MenuItem from "@/components/MenuItem";
-import Popover from "@/components/Popover";
-import useHotkeys from "@/hooks/useHotkeys";
-import useRTL from "@/hooks/useRTL";
-import * as keys from "@/constants/keys";
-import IconChevronRight from "@/icons/ChevronRight";
-import { DropdownMenuProvider, useDropdownMenu } from "./DropdownMenu.context";
-import type * as T from "./DropdownMenu.types";
+import { useFlyoutContext } from "@/components/Flyout/index.js";
+import Icon from "@/components/Icon/index.js";
+import MenuItem from "@/components/MenuItem/index.js";
+import Popover from "@/components/Popover/index.js";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import useRTL from "@/hooks/useRTL.js";
+import * as keys from "@/constants/keys.js";
+import IconChevronRight from "@/icons/ChevronRight.js";
+import { DropdownMenuProvider, useDropdownMenu } from "./DropdownMenu.context.js";
+import type * as T from "./DropdownMenu.types.js";
 import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);

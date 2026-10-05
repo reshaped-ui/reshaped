@@ -1,8 +1,8 @@
 "use client";
 
-import useToggle from "@/hooks/useToggle";
-import type * as T from "./ToggleButton.types";
-import ToggleButtonControlled from "./ToggleButtonControlled";
+import useToggle from "@/hooks/useToggle.js";
+import type * as T from "./ToggleButton.types.js";
+import ToggleButtonControlled from "./ToggleButtonControlled.js";
 
 const ToggleButtonUncontrolled: React.FC<T.UncontrolledProps> = (props) => {
 	const { defaultChecked, onChange, ...buttonProps } = props;

@@ -1,4 +1,4 @@
-import Table, { TableBody, TableCell, TableHead, TableHeading, TableRow } from "./Table";
+import Table, { TableBody, TableCell, TableHead, TableHeading, TableRow } from "./Table.js";
 
 const TableRoot = Table as typeof Table & {
 	Cell: typeof TableCell;
@@ -22,4 +22,4 @@ export type {
 	HeadProps as TableHeadProps,
 	Props as TableProps,
 	RowProps as TableRowProps,
-} from "./Table.types";
+} from "./Table.types.js";

@@ -1,4 +1,4 @@
-import type * as T from "./Select.types";
+import type * as T from "./Select.types.js";
 
 /**
  * Holds the selected value for the form submission,

@@ -1,8 +1,8 @@
 "use client";
 
-import { useFormControlPrivate } from "./FormControl.context";
-import type * as T from "./FormControl.types";
-import FormControlCaption from "./FormControlCaption";
+import { useFormControlPrivate } from "./FormControl.context.js";
+import type * as T from "./FormControl.types.js";
+import FormControlCaption from "./FormControlCaption.js";
 
 const FormControlHelper: React.FC<T.CaptionProps> = (props) => {
 	const { children } = props;

@@ -1,3 +1,3 @@
-export { default } from "./RadioGroup";
-export { useRadioGroup } from "./RadioGroup.context";
-export type { Props as RadioGroupProps } from "./RadioGroup.types";
+export { default } from "./RadioGroup.js";
+export { useRadioGroup } from "./RadioGroup.context.js";
+export type { Props as RadioGroupProps } from "./RadioGroup.types.js";

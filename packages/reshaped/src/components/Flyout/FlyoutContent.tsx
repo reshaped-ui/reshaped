@@ -3,12 +3,12 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Portal from "@/components/_private/Portal";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import ScrollArea from "../ScrollArea";
-import { ContentProvider, useFlyoutContext } from "./Flyout.context";
-import type * as T from "./Flyout.types";
-import cooldown from "./utilities/cooldown";
+import Portal from "@/components/_private/Portal/index.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import ScrollArea from "../ScrollArea/index.js";
+import { ContentProvider, useFlyoutContext } from "./Flyout.context.js";
+import type * as T from "./Flyout.types.js";
+import cooldown from "./utilities/cooldown.js";
 import s from "./Flyout.module.css";
 
 const FlyoutContent: React.FC<T.ContentProps> = (props) => {

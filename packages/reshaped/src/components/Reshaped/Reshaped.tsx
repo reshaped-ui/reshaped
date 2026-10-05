@@ -3,14 +3,14 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { GlobalColorMode, PrivateTheme } from "@/components/Theme";
-import { useGlobalColorMode } from "@/components/Theme/useTheme";
-import { ToastProvider } from "@/components/Toast";
-import { SingletonHotkeysProvider } from "@/hooks/_internal/useSingletonHotkeys";
-import { SingletonKeyboardModeProvider } from "@/hooks/_internal/useSingletonKeyboardMode";
-import { SingletonRTLProvider } from "@/hooks/_internal/useSingletonRTL";
-import { SingletonViewportProvider } from "@/hooks/_internal/useSingletonViewport";
-import type * as T from "./Reshaped.types";
+import { GlobalColorMode, PrivateTheme } from "@/components/Theme/index.js";
+import { useGlobalColorMode } from "@/components/Theme/useTheme.js";
+import { ToastProvider } from "@/components/Toast/index.js";
+import { SingletonHotkeysProvider } from "@/hooks/_internal/useSingletonHotkeys.js";
+import { SingletonKeyboardModeProvider } from "@/hooks/_internal/useSingletonKeyboardMode.js";
+import { SingletonRTLProvider } from "@/hooks/_internal/useSingletonRTL.js";
+import { SingletonViewportProvider } from "@/hooks/_internal/useSingletonViewport.js";
+import type * as T from "./Reshaped.types.js";
 import "./Reshaped.css";
 import s from "./Reshaped.module.css";
 

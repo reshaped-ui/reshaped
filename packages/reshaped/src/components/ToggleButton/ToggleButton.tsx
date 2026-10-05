@@ -1,6 +1,6 @@
-import type * as T from "./ToggleButton.types";
-import ToggleButtonControlled from "./ToggleButtonControlled";
-import ToggleButtonUncontrolled from "./ToggleButtonUncontrolled";
+import type * as T from "./ToggleButton.types.js";
+import ToggleButtonControlled from "./ToggleButtonControlled.js";
+import ToggleButtonUncontrolled from "./ToggleButtonUncontrolled.js";
 
 const ToggleButton: React.FC<T.Props> = (props) => {
 	const { checked } = props;

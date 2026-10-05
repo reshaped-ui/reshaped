@@ -2,20 +2,20 @@
 
 import React from "react";
 
-import Actionable from "@/components/Actionable";
-import { useFormControl } from "@/components/FormControl";
-import Icon from "@/components/Icon";
-import TextField, { TextFieldProps } from "@/components/TextField";
-import useElementId from "@/hooks/useElementId";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useHotkeys from "@/hooks/useHotkeys";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-import * as keys from "@/constants/keys";
-import IconChevronDown from "@/icons/ChevronDown";
-import IconChevronUp from "@/icons/ChevronUp";
-import IconMinus from "@/icons/Minus";
-import IconPlus from "@/icons/Plus";
-import type * as T from "./NumberField.types";
+import Actionable from "@/components/Actionable/index.js";
+import { useFormControl } from "@/components/FormControl/index.js";
+import Icon from "@/components/Icon/index.js";
+import TextField, { TextFieldProps } from "@/components/TextField/index.js";
+import useElementId from "@/hooks/useElementId.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
+import * as keys from "@/constants/keys.js";
+import IconChevronDown from "@/icons/ChevronDown.js";
+import IconChevronUp from "@/icons/ChevronUp.js";
+import IconMinus from "@/icons/Minus.js";
+import IconPlus from "@/icons/Plus.js";
+import type * as T from "./NumberField.types.js";
 import s from "./NumberField.module.css";
 
 const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {

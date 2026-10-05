@@ -2,11 +2,11 @@ import { forwardRef } from "react";
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable, { type ActionableRef } from "@/components/Actionable";
-import Icon from "@/components/Icon";
-import Loader from "@/components/Loader";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-import type * as T from "./Button.types";
+import Actionable, { type ActionableRef } from "@/components/Actionable/index.js";
+import Icon from "@/components/Icon/index.js";
+import Loader from "@/components/Loader/index.js";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
+import type * as T from "./Button.types.js";
 import s from "./Button.module.css";
 
 const Button = forwardRef<ActionableRef, T.Props>((props, ref) => {

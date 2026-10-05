@@ -1,6 +1,6 @@
 import type React from "react";
 
-import type { DropdownMenuInstance, DropdownMenuProps } from "@/components/DropdownMenu";
+import type { DropdownMenuInstance, DropdownMenuProps } from "@/components/DropdownMenu/index.js";
 
 export type Instance = DropdownMenuInstance;
 export type Props = Omit<DropdownMenuProps, "active" | "defaultActive"> & {

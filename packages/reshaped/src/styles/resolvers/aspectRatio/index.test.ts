@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import aspectRatio from "./index";
+import aspectRatio from "./index.js";
 
 describe("Styles/AspectRatio", () => {
 	test("handles positive value", () => {

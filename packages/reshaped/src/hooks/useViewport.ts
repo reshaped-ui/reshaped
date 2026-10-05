@@ -1,4 +1,4 @@
-import useSingletonViewport from "@/hooks/_internal/useSingletonViewport";
+import useSingletonViewport from "@/hooks/_internal/useSingletonViewport.js";
 
 const useViewport = () => {
 	const { viewport } = useSingletonViewport();

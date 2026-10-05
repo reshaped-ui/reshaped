@@ -1,5 +1,5 @@
-import DropdownMenu from "@/components/DropdownMenu";
-import ContextMenu from "./ContextMenu";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import ContextMenu from "./ContextMenu.js";
 
 const ContextMenuRoot = ContextMenu as typeof ContextMenu & {
 	Content: typeof DropdownMenu.Content;
@@ -19,4 +19,4 @@ export default ContextMenuRoot;
 export type {
 	Instance as ContextMenuInstance,
 	Props as ContextMenuProps,
-} from "./ContextMenu.types";
+} from "./ContextMenu.types.js";

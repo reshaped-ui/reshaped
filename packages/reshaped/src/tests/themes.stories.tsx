@@ -1,22 +1,22 @@
 import { useLayoutEffect, useState } from "react";
 import { baseThemeDefinition, generateThemeColors, getThemeCSS } from "@reshaped/theming";
 
-import Actionable from "@/components/Actionable";
-import Alert from "@/components/Alert";
-import Avatar from "@/components/Avatar";
-import Badge from "@/components/Badge";
-import Button from "@/components/Button";
-import Card from "@/components/Card";
-import DropdownMenu from "@/components/DropdownMenu";
-import Link from "@/components/Link";
-import Switch from "@/components/Switch";
-import Text from "@/components/Text";
-import TextField from "@/components/TextField";
-import Theme, { useTheme } from "@/components/Theme";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
-import IconZap from "@/icons/Mic";
-import ThemePlayground from "./ThemesPlayground";
+import Actionable from "@/components/Actionable/index.js";
+import Alert from "@/components/Alert/index.js";
+import Avatar from "@/components/Avatar/index.js";
+import Badge from "@/components/Badge/index.js";
+import Button from "@/components/Button/index.js";
+import Card from "@/components/Card/index.js";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import Link from "@/components/Link/index.js";
+import Switch from "@/components/Switch/index.js";
+import Text from "@/components/Text/index.js";
+import TextField from "@/components/TextField/index.js";
+import Theme, { useTheme } from "@/components/Theme/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconZap from "@/icons/Mic.js";
+import ThemePlayground from "./ThemesPlayground.js";
 
 export default {
 	title: "Internal/Themes",

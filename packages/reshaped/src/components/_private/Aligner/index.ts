@@ -1,2 +1,2 @@
-export { default } from "./Aligner";
-export type { Props as AlignerProps } from "./Aligner.types";
+export { default } from "./Aligner.js";
+export type { Props as AlignerProps } from "./Aligner.types.js";

@@ -2,10 +2,10 @@ import { StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { expect, userEvent } from "storybook/test";
 
-import Button from "@/components/Button";
-import { useTheme } from "@/components/Theme";
-import type * as G from "@/types/global";
-import Reshaped from "../Reshaped";
+import Button from "@/components/Button/index.js";
+import { useTheme } from "@/components/Theme/index.js";
+import type * as G from "@/types/global.js";
+import Reshaped from "../Reshaped.js";
 
 export default {
 	title: "Utility components/Reshaped",

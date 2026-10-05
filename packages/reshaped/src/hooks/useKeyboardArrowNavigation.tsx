@@ -7,7 +7,7 @@ import {
 	getFocusableElements,
 } from "@reshaped/utilities/internal";
 
-import useHotkeys from "./useHotkeys";
+import useHotkeys from "./useHotkeys.js";
 
 type Props = {
 	ref: React.RefObject<HTMLElement | null>;

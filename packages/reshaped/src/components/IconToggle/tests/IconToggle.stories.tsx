@@ -1,9 +1,9 @@
 import React from "react";
 
-import Actionable from "@/components/Actionable";
-import IconToggle from "@/components/IconToggle";
-import IconCheckmark from "@/icons/Checkmark";
-import IconClose from "@/icons/Close";
+import Actionable from "@/components/Actionable/index.js";
+import IconToggle from "@/components/IconToggle/index.js";
+import IconCheckmark from "@/icons/Checkmark.js";
+import IconClose from "@/icons/Close.js";
 
 export default {
 	title: "Utility components/IconToggle",

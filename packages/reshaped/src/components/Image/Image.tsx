@@ -3,8 +3,8 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { resolveMixin } from "@/styles/mixin";
-import * as T from "./Image.types";
+import { resolveMixin } from "@/styles/mixin.js";
+import * as T from "./Image.types.js";
 import s from "./Image.module.css";
 
 const Image: React.FC<T.Props> = (props) => {

@@ -1,9 +1,9 @@
 import React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
-import type { FormControlProps } from "@/components/FormControl";
-import type * as G from "@/types/global";
-import type { Attributes } from "@/types/global";
+import type { FormControlProps } from "@/components/FormControl/index.js";
+import type * as G from "@/types/global.js";
+import type { Attributes } from "@/types/global.js";
 
 type Size = G.Responsive<"medium" | "large" | "xlarge">;
 

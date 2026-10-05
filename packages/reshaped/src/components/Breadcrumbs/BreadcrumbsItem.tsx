@@ -1,6 +1,6 @@
-import Link from "@/components/Link";
-import Text from "@/components/Text";
-import type * as T from "./Breadcrumbs.types";
+import Link from "@/components/Link/index.js";
+import Text from "@/components/Text/index.js";
+import type * as T from "./Breadcrumbs.types.js";
 
 const BreadcrumbsItem: React.FC<T.ItemProps> = (props) => {
 	const { children, onClick, href, icon, disabled } = props;

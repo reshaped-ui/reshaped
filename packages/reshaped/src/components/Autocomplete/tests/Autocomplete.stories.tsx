@@ -2,12 +2,12 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fireEvent, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 
-import Autocomplete from "@/components/Autocomplete";
-import Badge from "@/components/Badge";
-import FormControl from "@/components/FormControl";
-import useToggle from "@/hooks/useToggle";
-import { sleep } from "@/utilities/helpers";
-import { Example } from "@/utilities/storybook";
+import Autocomplete from "@/components/Autocomplete/index.js";
+import Badge from "@/components/Badge/index.js";
+import FormControl from "@/components/FormControl/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import { sleep } from "@/utilities/helpers.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/Autocomplete",

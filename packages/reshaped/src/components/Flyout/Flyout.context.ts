@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type * as T from "./Flyout.types";
+import type * as T from "./Flyout.types.js";
 
 const FlyoutContext = React.createContext({} as T.ContextProps);
 const FlyoutTriggerContext = React.createContext<T.TriggerContextProps | null>(null);

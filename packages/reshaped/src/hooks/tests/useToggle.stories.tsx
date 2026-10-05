@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, userEvent } from "storybook/test";
 
-import useToggle from "../useToggle";
+import useToggle from "../useToggle.js";
 
 export default {
 	title: "Hooks/useToggle",

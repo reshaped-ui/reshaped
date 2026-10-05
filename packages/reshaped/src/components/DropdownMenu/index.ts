@@ -1,11 +1,11 @@
-import Popover from "@/components/Popover";
+import Popover from "@/components/Popover/index.js";
 import DropdownMenu, {
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuSection,
 	DropdownMenuSubMenu,
 	DropdownMenuSubTrigger,
-} from "./DropdownMenu";
+} from "./DropdownMenu.js";
 
 const DropdownMenuRoot = DropdownMenu as typeof DropdownMenu & {
 	Dismissible: typeof Popover.Dismissible;
@@ -29,4 +29,4 @@ export default DropdownMenuRoot;
 export type {
 	Instance as DropdownMenuInstance,
 	Props as DropdownMenuProps,
-} from "./DropdownMenu.types";
+} from "./DropdownMenu.types.js";

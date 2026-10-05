@@ -1,7 +1,7 @@
 "use client";
 
-import Flyout from "@/components/Flyout";
-import type * as T from "./Tooltip.types";
+import Flyout from "@/components/Flyout/index.js";
+import type * as T from "./Tooltip.types.js";
 import s from "./Tooltip.module.css";
 
 const Tooltip: React.FC<T.Props> = (props) => {

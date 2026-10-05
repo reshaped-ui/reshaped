@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import maxHeight from "./index";
+import maxHeight from "./index.js";
 
 describe("Styles/MaxHeight", () => {
 	test("handles px value", () => {

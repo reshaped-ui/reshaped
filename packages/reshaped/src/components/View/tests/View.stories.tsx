@@ -2,15 +2,15 @@ import { StoryObj } from "@storybook/react-vite";
 import React, { useEffect, useState } from "react";
 import { expect } from "storybook/test";
 
-import Avatar from "@/components/Avatar";
-import Button from "@/components/Button";
-import Hidden from "@/components/Hidden";
-import MenuItem from "@/components/MenuItem";
-import Tabs from "@/components/Tabs";
-import Text from "@/components/Text";
-import View, { type ViewProps } from "@/components/View";
-import useToggle from "@/hooks/useToggle";
-import { Example, Placeholder } from "@/utilities/storybook";
+import Avatar from "@/components/Avatar/index.js";
+import Button from "@/components/Button/index.js";
+import Hidden from "@/components/Hidden/index.js";
+import MenuItem from "@/components/MenuItem/index.js";
+import Tabs from "@/components/Tabs/index.js";
+import Text from "@/components/Text/index.js";
+import View, { type ViewProps } from "@/components/View/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Utility components/View",

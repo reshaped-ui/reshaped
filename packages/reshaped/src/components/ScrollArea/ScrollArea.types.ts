@@ -2,8 +2,8 @@ import type React from "react";
 import type { ClassName } from "@reshaped/utilities";
 import type { Coordinates } from "@reshaped/utilities/internal";
 
-import type * as G from "@/types/global";
-import type { Attributes } from "@/types/global";
+import type * as G from "@/types/global.js";
+import type { Attributes } from "@/types/global.js";
 
 export type Props = {
 	/** Node for inserting content */

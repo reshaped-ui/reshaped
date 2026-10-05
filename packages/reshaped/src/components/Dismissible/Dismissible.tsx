@@ -2,9 +2,9 @@
 
 import { classNames } from "@reshaped/utilities";
 
-import Button from "@/components/Button";
-import IconClose from "@/icons/Close";
-import type * as T from "./Dismissible.types";
+import Button from "@/components/Button/index.js";
+import IconClose from "@/icons/Close.js";
+import type * as T from "./Dismissible.types.js";
 import s from "./Dismissible.module.css";
 
 const Dismissible: React.FC<T.Props> = (props) => {

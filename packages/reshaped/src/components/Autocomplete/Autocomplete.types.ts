@@ -1,7 +1,7 @@
-import type { DropdownMenuInstance, DropdownMenuProps } from "@/components/DropdownMenu";
-import type { MenuItemProps } from "@/components/MenuItem";
-import type { TextFieldProps } from "@/components/TextField";
-import type * as G from "@/types/global";
+import type { DropdownMenuInstance, DropdownMenuProps } from "@/components/DropdownMenu/index.js";
+import type { MenuItemProps } from "@/components/MenuItem/index.js";
+import type { TextFieldProps } from "@/components/TextField/index.js";
+import type * as G from "@/types/global.js";
 
 type SelectArgs = {
 	/** Value that will be passed to the input on selection */

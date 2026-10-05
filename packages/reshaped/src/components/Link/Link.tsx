@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable, { type ActionableRef } from "@/components/Actionable";
-import Icon from "@/components/Icon";
-import type * as T from "./Link.types";
+import Actionable, { type ActionableRef } from "@/components/Actionable/index.js";
+import Icon from "@/components/Icon/index.js";
+import type * as T from "./Link.types.js";
 import s from "./Link.module.css";
 
 const Link = forwardRef<ActionableRef, T.Props>((props, ref) => {

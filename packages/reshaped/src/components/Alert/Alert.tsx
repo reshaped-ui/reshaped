@@ -1,9 +1,9 @@
 import React from "react";
 
-import Icon from "@/components/Icon";
-import Text from "@/components/Text";
-import View from "@/components/View";
-import * as T from "./Alert.types";
+import Icon from "@/components/Icon/index.js";
+import Text from "@/components/Text/index.js";
+import View from "@/components/View/index.js";
+import * as T from "./Alert.types.js";
 import s from "./Alert.module.css";
 
 const Alert: React.FC<T.Props> = (props) => {

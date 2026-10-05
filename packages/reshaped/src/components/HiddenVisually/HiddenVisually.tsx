@@ -1,4 +1,4 @@
-import type * as T from "./HiddenVisually.types";
+import type * as T from "./HiddenVisually.types.js";
 import s from "./HiddenVisually.module.css";
 
 const HiddenVisually: React.FC<T.Props> = (props) => {

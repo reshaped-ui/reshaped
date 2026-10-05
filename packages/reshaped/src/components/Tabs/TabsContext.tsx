@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type * as T from "./Tabs.types";
+import type * as T from "./Tabs.types.js";
 
 const Context = React.createContext({} as T.Context);
 

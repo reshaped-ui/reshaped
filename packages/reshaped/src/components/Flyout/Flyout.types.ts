@@ -2,8 +2,8 @@ import React from "react";
 import type { ClassName } from "@reshaped/utilities";
 import type { Coordinates, TrapMode } from "@reshaped/utilities/internal";
 
-import type * as G from "@/types/global";
-import { ThemeProps } from "../Theme";
+import type * as G from "@/types/global.js";
+import { ThemeProps } from "../Theme/index.js";
 
 /**
  * Utility

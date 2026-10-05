@@ -1,8 +1,8 @@
 import React from "react";
 
-import Image from "@/components/Image";
-import View from "@/components/View";
-import Tabs from "./components/Tabs";
+import Image from "@/components/Image/index.js";
+import View from "@/components/View/index.js";
+import Tabs from "./components/Tabs.js";
 
 export default {
 	title: "Sandbox",

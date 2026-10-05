@@ -4,10 +4,10 @@ import React, { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
 import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./ScrollArea.types";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./ScrollArea.types.js";
 import s from "./ScrollArea.module.css";
 
 const ScrollAreaBar: React.FC<T.BarProps> = (props) => {

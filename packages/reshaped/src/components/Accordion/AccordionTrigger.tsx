@@ -3,12 +3,12 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable from "@/components/Actionable";
-import Icon from "@/components/Icon";
-import View from "@/components/View";
-import IconChevronDown from "@/icons/ChevronDown";
-import AccordionContext from "./Accordion.context";
-import * as T from "./Accordion.types";
+import Actionable from "@/components/Actionable/index.js";
+import Icon from "@/components/Icon/index.js";
+import View from "@/components/View/index.js";
+import IconChevronDown from "@/icons/ChevronDown.js";
+import AccordionContext from "./Accordion.context.js";
+import * as T from "./Accordion.types.js";
 import s from "./Accordion.module.css";
 
 const AccordionTrigger: React.FC<T.TriggerProps> = (props) => {

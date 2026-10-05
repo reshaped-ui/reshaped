@@ -1,5 +1,5 @@
-import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-import * as T from "@/styles/types";
+import { responsiveClassNames, responsiveVariables } from "@/utilities/props.js";
+import * as T from "@/styles/types.js";
 import s from "./inset.module.css";
 import "./inset.css";
 

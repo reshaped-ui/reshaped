@@ -1,6 +1,6 @@
 import { classNames } from "@reshaped/utilities";
 
-import type * as T from "./Button.types";
+import type * as T from "./Button.types.js";
 import s from "./Button.module.css";
 
 const ButtonGroup: React.FC<T.GroupProps> = (props) => {

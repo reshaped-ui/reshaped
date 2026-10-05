@@ -1,5 +1,5 @@
-import Flyout from "@/components/Flyout";
-import Popover, { PopoverDismissible } from "./Popover";
+import Flyout from "@/components/Flyout/index.js";
+import Popover, { PopoverDismissible } from "./Popover.js";
 
 const PopoverRoot = Popover as typeof Popover & {
 	Dismissible: typeof PopoverDismissible;
@@ -12,4 +12,4 @@ PopoverRoot.Trigger = Flyout.Trigger;
 PopoverRoot.Content = Flyout.Content;
 
 export default PopoverRoot;
-export type { Instance as PopoverInstance, Props as PopoverProps } from "./Popover.types";
+export type { Instance as PopoverInstance, Props as PopoverProps } from "./Popover.types.js";

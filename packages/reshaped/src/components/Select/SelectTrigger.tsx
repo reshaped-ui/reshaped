@@ -3,14 +3,14 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable from "@/components/Actionable";
-import Text from "@/components/Text";
-import { responsiveClassNames } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Select.types";
-import SelectEndContent from "./SelectEndContent";
-import SelectHiddenInput from "./SelectHiddenInput";
-import SelectStartContent from "./SelectStartContent";
+import Actionable from "@/components/Actionable/index.js";
+import Text from "@/components/Text/index.js";
+import { responsiveClassNames } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Select.types.js";
+import SelectEndContent from "./SelectEndContent.js";
+import SelectHiddenInput from "./SelectHiddenInput.js";
+import SelectStartContent from "./SelectStartContent.js";
 import s from "./Select.module.css";
 
 const SelectTrigger: React.FC<T.TriggerProps> = (props) => {

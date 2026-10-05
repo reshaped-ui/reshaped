@@ -1,7 +1,7 @@
 "use client";
 
-import { TriggerProvider, useFlyoutContext } from "./Flyout.context";
-import type * as T from "./Flyout.types";
+import { TriggerProvider, useFlyoutContext } from "./Flyout.context.js";
+import type * as T from "./Flyout.types.js";
 
 const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;

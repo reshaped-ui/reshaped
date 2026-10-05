@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import position from "./index";
+import position from "./index.js";
 
 describe("Styles/Position", () => {
 	test("handles value", () => {

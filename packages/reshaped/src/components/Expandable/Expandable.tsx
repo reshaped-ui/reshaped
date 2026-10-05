@@ -3,10 +3,10 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import { onNextFrame, checkTransitions } from "@/utilities/animation";
-import type * as T from "./Expandable.types";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import { onNextFrame, checkTransitions } from "@/utilities/animation.js";
+import type * as T from "./Expandable.types.js";
 import s from "./Expandable.module.css";
 
 const Expandable: React.FC<T.Props> = (props) => {

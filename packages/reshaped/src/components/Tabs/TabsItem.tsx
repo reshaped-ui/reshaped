@@ -3,13 +3,13 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable, { type ActionableRef } from "@/components/Actionable";
-import HiddenInput from "@/components/HiddenInput";
-import Icon from "@/components/Icon";
-import Text from "@/components/Text";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import type * as T from "./Tabs.types";
-import { useTabs } from "./TabsContext";
+import Actionable, { type ActionableRef } from "@/components/Actionable/index.js";
+import HiddenInput from "@/components/HiddenInput/index.js";
+import Icon from "@/components/Icon/index.js";
+import Text from "@/components/Text/index.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import type * as T from "./Tabs.types.js";
+import { useTabs } from "./TabsContext.js";
 import s from "./Tabs.module.css";
 
 const TabsItem = React.forwardRef<ActionableRef, T.ItemProps>((props, ref) => {

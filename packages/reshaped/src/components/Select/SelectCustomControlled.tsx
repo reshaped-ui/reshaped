@@ -2,16 +2,16 @@
 
 import React from "react";
 
-import DropdownMenu from "@/components/DropdownMenu";
-import Icon from "@/components/Icon";
-import View from "@/components/View";
-import { responsivePropDependency } from "@/utilities/props";
-import CheckmarkIcon from "@/icons/Checkmark";
-import type * as T from "./Select.types";
-import SelectGroup from "./SelectGroup";
-import SelectHiddenInput from "./SelectHiddenInput";
-import SelectOption from "./SelectOption";
-import SelectTrigger from "./SelectTrigger";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import Icon from "@/components/Icon/index.js";
+import View from "@/components/View/index.js";
+import { responsivePropDependency } from "@/utilities/props.js";
+import CheckmarkIcon from "@/icons/Checkmark.js";
+import type * as T from "./Select.types.js";
+import SelectGroup from "./SelectGroup.js";
+import SelectHiddenInput from "./SelectHiddenInput.js";
+import SelectOption from "./SelectOption.js";
+import SelectTrigger from "./SelectTrigger.js";
 
 const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const {

@@ -3,10 +3,10 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import View from "@/components/View";
-import useDrag from "@/hooks/_internal/useDrag";
-import type * as T from "./Resizable.types";
-import { ResizableContext } from "./ResizableContext";
+import View from "@/components/View/index.js";
+import useDrag from "@/hooks/_internal/useDrag.js";
+import type * as T from "./Resizable.types.js";
+import { ResizableContext } from "./ResizableContext.js";
 import s from "./Resizable.module.css";
 
 const ResizableHandle: React.FC<T.HandleProps> = (props) => {

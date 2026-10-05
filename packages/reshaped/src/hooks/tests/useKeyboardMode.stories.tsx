@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, userEvent } from "storybook/test";
 
-import useKeyboardMode from "../useKeyboardMode";
+import useKeyboardMode from "../useKeyboardMode.js";
 
 export default {
 	title: "Hooks/useKeyboardMode",

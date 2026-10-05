@@ -2,10 +2,10 @@
 
 import React from "react";
 
-import Button from "@/components/Button";
-import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation";
-import Context from "./ToggleButtonGroup.context";
-import type * as T from "./ToggleButtonGroup.types";
+import Button from "@/components/Button/index.js";
+import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation.js";
+import Context from "./ToggleButtonGroup.context.js";
+import type * as T from "./ToggleButtonGroup.types.js";
 
 const ToggleButtonGroupControlled: React.FC<T.ControlledProps> = (props) => {
 	const {

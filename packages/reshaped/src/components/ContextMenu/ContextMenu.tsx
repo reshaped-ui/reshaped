@@ -3,10 +3,10 @@
 import React from "react";
 import type { Coordinates } from "@reshaped/utilities/internal";
 
-import DropdownMenu from "@/components/DropdownMenu";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useScrollLock from "@/hooks/useScrollLock";
-import type * as T from "./ContextMenu.types";
+import DropdownMenu from "@/components/DropdownMenu/index.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useScrollLock from "@/hooks/useScrollLock.js";
+import type * as T from "./ContextMenu.types.js";
 import s from "./ContextMenu.module.css";
 
 const ContextMenu: React.FC<T.Props> = (props) => {

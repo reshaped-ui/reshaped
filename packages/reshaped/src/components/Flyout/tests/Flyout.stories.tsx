@@ -2,16 +2,16 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { userEvent, waitFor, within, expect, fn } from "storybook/test";
 
-import Button from "@/components/Button";
-import Flyout, { FlyoutInstance, FlyoutProps } from "@/components/Flyout";
-import Modal from "@/components/Modal";
-import Select from "@/components/Select";
-import Switch from "@/components/Switch";
-import TextField from "@/components/TextField";
-import Theme from "@/components/Theme";
-import View from "@/components/View";
-import { sleep } from "@/utilities/helpers";
-import { Example } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import Flyout, { FlyoutInstance, FlyoutProps } from "@/components/Flyout/index.js";
+import Modal from "@/components/Modal/index.js";
+import Select from "@/components/Select/index.js";
+import Switch from "@/components/Switch/index.js";
+import TextField from "@/components/TextField/index.js";
+import Theme from "@/components/Theme/index.js";
+import View from "@/components/View/index.js";
+import { sleep } from "@/utilities/helpers.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default { title: "Utility components/Flyout" };
 

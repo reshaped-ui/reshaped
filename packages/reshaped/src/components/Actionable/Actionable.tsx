@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react";
 import { classNames, keys } from "@reshaped/utilities";
 
-import type * as T from "./Actionable.types";
+import type * as T from "./Actionable.types.js";
 import s from "./Actionable.module.css";
 
 const Actionable = forwardRef<T.Ref, T.Props>((props, ref) => {

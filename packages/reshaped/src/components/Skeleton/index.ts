@@ -1,2 +1,2 @@
-export { default } from "./Skeleton";
-export type { Props as SkeletonProps } from "./Skeleton.types";
+export { default } from "./Skeleton.js";
+export type { Props as SkeletonProps } from "./Skeleton.types.js";

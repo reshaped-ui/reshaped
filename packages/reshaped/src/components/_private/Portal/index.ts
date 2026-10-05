@@ -1,4 +1,4 @@
-import Portal, { PortalScope } from "./Portal";
+import Portal, { PortalScope } from "./Portal.js";
 
 const PortalRoot = Portal as typeof Portal & {
 	Scope: typeof PortalScope;
@@ -7,4 +7,4 @@ const PortalRoot = Portal as typeof Portal & {
 PortalRoot.Scope = PortalScope;
 
 export default PortalRoot;
-export type { Props as PortalProps } from "./Portal.types";
+export type { Props as PortalProps } from "./Portal.types.js";

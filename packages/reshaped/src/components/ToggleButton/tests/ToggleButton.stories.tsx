@@ -1,8 +1,8 @@
 import { type StoryObj } from "@storybook/react-vite";
 import { expect, fn, type Mock, userEvent } from "storybook/test";
 
-import { Example } from "@/utilities/storybook";
-import ToggleButton from "../ToggleButton";
+import { Example } from "@/utilities/storybook/index.js";
+import ToggleButton from "../ToggleButton.js";
 
 export default {
 	title: "Components/ToggleButton",

@@ -1,9 +1,9 @@
 import type React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
-import type { ActionableProps } from "@/components/Actionable";
-import type { ViewProps } from "@/components/View";
-import type { Attributes } from "@/types/global";
+import type { ActionableProps } from "@/components/Actionable/index.js";
+import type { ViewProps } from "@/components/View/index.js";
+import type { Attributes } from "@/types/global.js";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = Pick<
 	ViewProps,

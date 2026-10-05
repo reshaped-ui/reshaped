@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import minHeight from "./index";
+import minHeight from "./index.js";
 
 describe("Styles/MinHeight", () => {
 	test("handles px value", () => {

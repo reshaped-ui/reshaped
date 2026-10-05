@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import justify from "./index";
+import justify from "./index.js";
 
 describe("Styles/Justify", () => {
 	test("handles value", () => {

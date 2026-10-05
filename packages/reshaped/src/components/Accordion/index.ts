@@ -1,6 +1,6 @@
-import Accordion from "./Accordion";
-import AccordionContent from "./AccordionContent";
-import AccordionTrigger from "./AccordionTrigger";
+import Accordion from "./Accordion.js";
+import AccordionContent from "./AccordionContent.js";
+import AccordionTrigger from "./AccordionTrigger.js";
 
 const AccordionRoot = Accordion as typeof Accordion & {
 	Trigger: typeof AccordionTrigger;
@@ -11,4 +11,4 @@ AccordionRoot.Trigger = AccordionTrigger;
 AccordionRoot.Content = AccordionContent;
 
 export default AccordionRoot;
-export type { Props as AccordionProps } from "./Accordion.types";
+export type { Props as AccordionProps } from "./Accordion.types.js";

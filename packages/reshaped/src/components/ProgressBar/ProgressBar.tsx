@@ -1,7 +1,7 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import type * as T from "./ProgressBar.types";
+import type * as T from "./ProgressBar.types.js";
 import s from "./ProgressBar.module.css";
 
 const ProgressBar: React.FC<T.Props> = (props) => {

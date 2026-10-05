@@ -1,5 +1,5 @@
-import { responsiveClassNames } from "@/utilities/props";
-import * as T from "@/styles/types";
+import { responsiveClassNames } from "@/utilities/props.js";
+import * as T from "@/styles/types.js";
 import s from "./radius.module.css";
 
 const radius: T.StyleResolver<T.Radius> = (value) => {

@@ -4,11 +4,11 @@ import React from "react";
 import { classNames, TrapFocus } from "@reshaped/utilities";
 import { checkKeyboardMode } from "@reshaped/utilities/internal";
 
-import { onNextFrame, checkTransitions } from "@/utilities/animation";
-import Toast from "./Toast";
-import { timeouts, toastWidths } from "./Toast.constants";
-import ToastContext from "./Toast.context";
-import type * as T from "./Toast.types";
+import { onNextFrame, checkTransitions } from "@/utilities/animation.js";
+import Toast from "./Toast.js";
+import { timeouts, toastWidths } from "./Toast.constants.js";
+import ToastContext from "./Toast.context.js";
+import type * as T from "./Toast.types.js";
 import s from "./Toast.module.css";
 
 const isWidthPreset = (width: T.ShowProps["width"]): width is T.WidthPreset =>

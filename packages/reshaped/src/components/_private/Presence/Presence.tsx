@@ -3,8 +3,8 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import type * as T from "./Presence.types";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import type * as T from "./Presence.types.js";
 import s from "./Presence.module.css";
 
 const PresenceItem: React.FC<T.ItemProps> = (props) => {

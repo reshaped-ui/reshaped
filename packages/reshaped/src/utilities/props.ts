@@ -1,5 +1,5 @@
-import type * as G from "@/types/global";
-import type { CSSVariable } from "@/types/global";
+import type * as G from "@/types/global.js";
+import type { CSSVariable } from "@/types/global.js";
 
 type Value = string | boolean | number | undefined;
 type ClassNameResolver = string | ((value: Value) => string);

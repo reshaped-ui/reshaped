@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Checkbox from "@/components/Checkbox";
-import CheckboxGroup from "@/components/CheckboxGroup";
-import View from "@/components/View";
+import Checkbox from "@/components/Checkbox/index.js";
+import CheckboxGroup from "@/components/CheckboxGroup/index.js";
+import View from "@/components/View/index.js";
 
 export default {
 	title: "Components/CheckboxGroup",

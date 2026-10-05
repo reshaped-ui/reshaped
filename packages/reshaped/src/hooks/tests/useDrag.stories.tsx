@@ -2,10 +2,10 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fireEvent, fn } from "storybook/test";
 
-import Button from "@/components/Button";
-import View from "@/components/View";
-import useDrag from "@/hooks/_internal/useDrag";
-import useToggle from "@/hooks/useToggle";
+import Button from "@/components/Button/index.js";
+import View from "@/components/View/index.js";
+import useDrag from "@/hooks/_internal/useDrag.js";
+import useToggle from "@/hooks/useToggle.js";
 
 export default {
 	title: "Hooks/Internal/useDrag",

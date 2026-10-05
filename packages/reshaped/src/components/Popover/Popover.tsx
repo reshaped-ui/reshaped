@@ -1,9 +1,9 @@
 import { classNames } from "@reshaped/utilities";
 
-import Dismissible, { type DismissibleProps } from "@/components/Dismissible";
-import Flyout, { type FlyoutProps, useFlyoutContext } from "@/components/Flyout";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Popover.types";
+import Dismissible, { type DismissibleProps } from "@/components/Dismissible/index.js";
+import Flyout, { type FlyoutProps, useFlyoutContext } from "@/components/Flyout/index.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Popover.types.js";
 import s from "./Popover.module.css";
 
 const Popover: React.FC<T.Props> = (props) => {

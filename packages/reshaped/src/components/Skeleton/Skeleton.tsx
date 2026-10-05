@@ -1,7 +1,7 @@
 import { classNames } from "@reshaped/utilities";
 
-import View from "@/components/View";
-import * as T from "./Skeleton.types";
+import View from "@/components/View/index.js";
+import * as T from "./Skeleton.types.js";
 import s from "./Skeleton.module.css";
 
 const Skeleton: React.FC<T.Props> = (props) => {

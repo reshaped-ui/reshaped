@@ -1,4 +1,4 @@
-import type * as T from "./Toast.types";
+import type * as T from "./Toast.types.js";
 
 export const timeouts: Record<T.Timeout, number> = {
 	short: 4000,

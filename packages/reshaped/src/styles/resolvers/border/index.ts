@@ -2,8 +2,8 @@ import {
 	responsiveClassNames,
 	responsivePropDependency,
 	responsiveVariables,
-} from "@/utilities/props";
-import * as T from "@/styles/types";
+} from "@/utilities/props.js";
+import * as T from "@/styles/types.js";
 import "./borderWidth.css";
 import s from "./border.module.css";
 

@@ -4,15 +4,15 @@ import React from "react";
 import { TrapFocus, classNames } from "@reshaped/utilities";
 import { type FocusableElement } from "@reshaped/utilities/internal";
 
-import Portal from "@/components/_private/Portal";
-import useHandlerRef from "@/hooks/useHandlerRef";
-import useHotkeys from "@/hooks/useHotkeys";
-import useIsDismissible from "@/hooks/useIsDismissible";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import useScrollLock from "@/hooks/useScrollLock";
-import useToggle from "@/hooks/useToggle";
-import { onNextFrame, checkTransitions } from "@/utilities/animation";
-import type * as T from "./Overlay.types";
+import Portal from "@/components/_private/Portal/index.js";
+import useHandlerRef from "@/hooks/useHandlerRef.js";
+import useHotkeys from "@/hooks/useHotkeys.js";
+import useIsDismissible from "@/hooks/useIsDismissible.js";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import useScrollLock from "@/hooks/useScrollLock.js";
+import useToggle from "@/hooks/useToggle.js";
+import { onNextFrame, checkTransitions } from "@/utilities/animation.js";
+import type * as T from "./Overlay.types.js";
 import s from "./Overlay.module.css";
 
 const Overlay: React.FC<T.Props> = (props) => {

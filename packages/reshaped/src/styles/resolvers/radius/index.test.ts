@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import radius from "./index";
+import radius from "./index.js";
 
 describe("Styles/Radius", () => {
 	test("handles value", () => {

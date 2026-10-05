@@ -2,11 +2,11 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, Mock, userEvent, waitFor } from "storybook/test";
 
-import Button from "@/components/Button";
-import Expandable from "@/components/Expandable";
-import View from "@/components/View";
-import { checkTransitions } from "@/utilities/animation";
-import { Example, Placeholder } from "@/utilities/storybook";
+import Button from "@/components/Button/index.js";
+import Expandable from "@/components/Expandable/index.js";
+import View from "@/components/View/index.js";
+import { checkTransitions } from "@/utilities/animation.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Utility components/Expandable",

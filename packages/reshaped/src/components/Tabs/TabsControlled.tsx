@@ -2,9 +2,9 @@
 
 import React from "react";
 
-import useElementId from "@/hooks/useElementId";
-import type * as T from "./Tabs.types";
-import { TabsProvider } from "./TabsContext";
+import useElementId from "@/hooks/useElementId.js";
+import type * as T from "./Tabs.types.js";
+import { TabsProvider } from "./TabsContext.js";
 
 const TabsControlled: React.FC<T.ControlledProps> = (props) => {
 	const {

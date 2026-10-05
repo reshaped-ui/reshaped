@@ -1,7 +1,7 @@
 import type React from "react";
 
-import type { ButtonGroupProps } from "@/components/Button";
-import type { ToggleButtonProps } from "@/components/ToggleButton";
+import type { ButtonGroupProps } from "@/components/Button/index.js";
+import type { ToggleButtonProps } from "@/components/ToggleButton/index.js";
 
 type BaseProps = {
 	/** Selection mode for the toggle button group

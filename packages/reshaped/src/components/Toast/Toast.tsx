@@ -2,11 +2,11 @@
 
 import React from "react";
 
-import Button, { type ButtonProps } from "@/components/Button";
-import Icon from "@/components/Icon";
-import Text from "@/components/Text";
-import View, { type ViewProps } from "@/components/View";
-import type * as T from "./Toast.types";
+import Button, { type ButtonProps } from "@/components/Button/index.js";
+import Icon from "@/components/Icon/index.js";
+import Text from "@/components/Text/index.js";
+import View, { type ViewProps } from "@/components/View/index.js";
+import type * as T from "./Toast.types.js";
 import s from "./Toast.module.css";
 
 const Toast: React.FC<T.Props & { collapsed: boolean }> = (props) => {

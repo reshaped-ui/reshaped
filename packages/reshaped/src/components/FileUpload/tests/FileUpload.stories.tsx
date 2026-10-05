@@ -2,14 +2,14 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent } from "storybook/test";
 
-import Button from "@/components/Button";
-import FileUpload from "@/components/FileUpload";
-import Icon from "@/components/Icon";
-import Image from "@/components/Image";
-import Link from "@/components/Link";
-import View from "@/components/View";
-import { Example } from "@/utilities/storybook";
-import IconMic from "@/icons/Mic";
+import Button from "@/components/Button/index.js";
+import FileUpload from "@/components/FileUpload/index.js";
+import Icon from "@/components/Icon/index.js";
+import Image from "@/components/Image/index.js";
+import Link from "@/components/Link/index.js";
+import View from "@/components/View/index.js";
+import { Example } from "@/utilities/storybook/index.js";
+import IconMic from "@/icons/Mic.js";
 
 export default {
 	title: "Components/FileUpload",

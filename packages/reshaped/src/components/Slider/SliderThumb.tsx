@@ -3,10 +3,10 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Text from "@/components/Text";
-import Theme from "@/components/Theme";
-import type * as T from "./Slider.types";
-import { getPrecision } from "./Slider.utilities";
+import Text from "@/components/Text/index.js";
+import Theme from "@/components/Theme/index.js";
+import type * as T from "./Slider.types.js";
+import { getPrecision } from "./Slider.utilities.js";
 import s from "./Slider.module.css";
 
 const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) => {

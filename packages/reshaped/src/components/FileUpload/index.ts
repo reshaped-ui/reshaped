@@ -1,4 +1,4 @@
-import FileUpload, { FileUploadTrigger } from "./FileUpload";
+import FileUpload, { FileUploadTrigger } from "./FileUpload.js";
 
 const FileUploadRoot = FileUpload as typeof FileUpload & {
 	Trigger: typeof FileUploadTrigger;
@@ -7,4 +7,4 @@ const FileUploadRoot = FileUpload as typeof FileUpload & {
 FileUploadRoot.Trigger = FileUploadTrigger;
 
 export default FileUploadRoot;
-export type { Props as FileUploadProps } from "./FileUpload.types";
+export type { Props as FileUploadProps } from "./FileUpload.types.js";

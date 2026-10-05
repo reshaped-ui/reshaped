@@ -1,5 +1,5 @@
-import type { TextFieldBaseProps } from "@/components/TextField";
-import type * as G from "@/types/global";
+import type { TextFieldBaseProps } from "@/components/TextField/index.js";
+import type * as G from "@/types/global.js";
 
 export type BaseProps = Omit<
 	TextFieldBaseProps,

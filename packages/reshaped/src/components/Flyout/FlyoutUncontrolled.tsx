@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import type * as T from "./Flyout.types";
-import FlyoutControlled from "./FlyoutControlled";
+import type * as T from "./Flyout.types.js";
+import FlyoutControlled from "./FlyoutControlled.js";
 
 const FlyoutUncontrolled: React.FC<T.UncontrolledProps & T.DefaultProps> = (props) => {
 	const { defaultActive, onClose, onOpen } = props;

@@ -1,10 +1,10 @@
 import type React from "react";
 import type { ClassName } from "@reshaped/utilities";
 
-import type { ActionableProps } from "@/components/Actionable";
-import type { IconProps } from "@/components/Icon";
-import type * as G from "@/types/global";
-import type { Attributes } from "@/types/global";
+import type { ActionableProps } from "@/components/Actionable/index.js";
+import type { IconProps } from "@/components/Icon/index.js";
+import type * as G from "@/types/global.js";
+import type { Attributes } from "@/types/global.js";
 
 export type Size = "xlarge" | "large" | "medium" | "small";
 
@@ -60,4 +60,4 @@ export type GroupProps = {
 	attributes?: Attributes<"div">;
 };
 
-export type { AlignerProps } from "@/components/_private/Aligner";
+export type { AlignerProps } from "@/components/_private/Aligner/index.js";

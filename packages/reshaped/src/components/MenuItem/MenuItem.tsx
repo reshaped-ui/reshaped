@@ -1,11 +1,11 @@
 import { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Actionable, { type ActionableRef } from "@/components/Actionable";
-import Icon from "@/components/Icon";
-import View from "@/components/View";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-import type * as T from "./MenuItem.types";
+import Actionable, { type ActionableRef } from "@/components/Actionable/index.js";
+import Icon from "@/components/Icon/index.js";
+import View from "@/components/View/index.js";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
+import type * as T from "./MenuItem.types.js";
 import s from "./MenuItem.module.css";
 
 const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {

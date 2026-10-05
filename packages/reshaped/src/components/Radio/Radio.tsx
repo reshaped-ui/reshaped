@@ -3,12 +3,12 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { useFormControl } from "@/components/FormControl";
-import HiddenInput from "@/components/HiddenInput";
-import { useRadioGroup } from "@/components/RadioGroup";
-import Text from "@/components/Text";
-import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
-import type * as T from "./Radio.types";
+import { useFormControl } from "@/components/FormControl/index.js";
+import HiddenInput from "@/components/HiddenInput/index.js";
+import { useRadioGroup } from "@/components/RadioGroup/index.js";
+import Text from "@/components/Text/index.js";
+import { responsiveClassNames, responsivePropDependency } from "@/utilities/props.js";
+import type * as T from "./Radio.types.js";
 import s from "./Radio.module.css";
 
 const Radio: React.FC<T.Props> = (props) => {

@@ -2,17 +2,17 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, Mock, userEvent, within } from "storybook/test";
 
-import Actionable from "@/components/Actionable";
-import Badge from "@/components/Badge";
-import FormControl from "@/components/FormControl";
-import MenuItem from "@/components/MenuItem";
-import Modal from "@/components/Modal";
-import Select, { SelectProps, SelectTrigger } from "@/components/Select";
-import Text from "@/components/Text";
-import View from "@/components/View";
-import useToggle from "@/hooks/useToggle";
-import { Example, Placeholder } from "@/utilities/storybook";
-import IconZap from "@/icons/Zap";
+import Actionable from "@/components/Actionable/index.js";
+import Badge from "@/components/Badge/index.js";
+import FormControl from "@/components/FormControl/index.js";
+import MenuItem from "@/components/MenuItem/index.js";
+import Modal from "@/components/Modal/index.js";
+import Select, { SelectProps, SelectTrigger } from "@/components/Select/index.js";
+import Text from "@/components/Text/index.js";
+import View from "@/components/View/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import { Example, Placeholder } from "@/utilities/storybook/index.js";
+import IconZap from "@/icons/Zap.js";
 
 export default {
 	title: "Components/Select",

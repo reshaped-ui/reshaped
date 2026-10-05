@@ -1,6 +1,6 @@
-import type * as T from "./RadioGroup.types";
-import RadioGroupControlled from "./RadioGroupControlled";
-import RadioGroupUncontrolled from "./RadioGroupUncontrolled";
+import type * as T from "./RadioGroup.types.js";
+import RadioGroupControlled from "./RadioGroupControlled.js";
+import RadioGroupUncontrolled from "./RadioGroupUncontrolled.js";
 
 const RadioGroup: React.FC<T.Props> = (props) => {
 	const { value } = props;

@@ -3,11 +3,11 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import { ThemeContext } from "./Theme.context";
-import * as T from "./Theme.types";
-import { getRootThemeEl } from "./Theme.utilities";
-import { useGlobalColorMode, useTheme } from "./useTheme";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect.js";
+import { ThemeContext } from "./Theme.context.js";
+import * as T from "./Theme.types.js";
+import { getRootThemeEl } from "./Theme.utilities.js";
+import { useGlobalColorMode, useTheme } from "./useTheme.js";
 import s from "./Theme.module.css";
 
 const getThemeAttribute = (theme: NonNullable<T.Props["name"]>) => {

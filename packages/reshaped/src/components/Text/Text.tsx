@@ -1,8 +1,8 @@
 import { classNames } from "@reshaped/utilities";
 
-import { responsiveClassNames } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as T from "./Text.types";
+import { responsiveClassNames } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as T from "./Text.types.js";
 import s from "./Text.module.css";
 
 const tagMap: Partial<Record<T.Variant, keyof React.JSX.IntrinsicElements>> = {

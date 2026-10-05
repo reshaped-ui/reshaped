@@ -2,11 +2,11 @@
 
 import React from "react";
 
-import useElementId from "@/hooks/useElementId";
-import { useFormControl } from "../FormControl";
-import type * as T from "./Select.types";
-import SelectCustom from "./SelectCustom";
-import SelectNative from "./SelectNative";
+import useElementId from "@/hooks/useElementId.js";
+import { useFormControl } from "../FormControl/index.js";
+import type * as T from "./Select.types.js";
+import SelectCustom from "./SelectCustom.js";
+import SelectNative from "./SelectNative.js";
 
 function Select(props: T.NativeControlledProps): React.JSX.Element;
 function Select(props: T.NativeUncontrolledProps): React.JSX.Element;

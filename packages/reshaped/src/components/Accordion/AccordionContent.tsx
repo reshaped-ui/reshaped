@@ -2,10 +2,10 @@
 
 import React from "react";
 
-import Expandable from "@/components/Expandable";
-import View from "@/components/View";
-import AccordionContext from "./Accordion.context";
-import type * as T from "./Accordion.types";
+import Expandable from "@/components/Expandable/index.js";
+import View from "@/components/View/index.js";
+import AccordionContext from "./Accordion.context.js";
+import type * as T from "./Accordion.types.js";
 
 const AccordionContent: React.FC<T.ContentProps> = (props) => {
 	const { children } = props;

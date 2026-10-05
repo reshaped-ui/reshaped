@@ -1,12 +1,12 @@
 import React, { isValidElement } from "react";
 import { classNames } from "@reshaped/utilities";
 
-import Divider, { type DividerProps } from "@/components/Divider";
-import Hidden from "@/components/Hidden";
-import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
-import type * as G from "@/types/global";
-import type * as T from "./View.types";
+import Divider, { type DividerProps } from "@/components/Divider/index.js";
+import Hidden from "@/components/Hidden/index.js";
+import { responsiveClassNames, responsiveVariables } from "@/utilities/props.js";
+import { resolveMixin } from "@/styles/mixin.js";
+import type * as G from "@/types/global.js";
+import type * as T from "./View.types.js";
 import s from "./View.module.css";
 
 export const ViewItem = <As extends keyof React.JSX.IntrinsicElements = "div">(

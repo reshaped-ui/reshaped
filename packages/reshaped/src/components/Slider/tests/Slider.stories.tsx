@@ -2,11 +2,11 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fireEvent, fn, Mock } from "storybook/test";
 
-import Modal from "@/components/Modal";
-import Slider from "@/components/Slider";
-import View from "@/components/View";
-import useToggle from "@/hooks/useToggle";
-import { Example } from "@/utilities/storybook";
+import Modal from "@/components/Modal/index.js";
+import Slider from "@/components/Slider/index.js";
+import View from "@/components/View/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import { Example } from "@/utilities/storybook/index.js";
 
 export default {
 	title: "Components/Slider",

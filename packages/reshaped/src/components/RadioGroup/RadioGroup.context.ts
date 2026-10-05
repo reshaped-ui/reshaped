@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import type * as T from "./RadioGroup.types";
+import type * as T from "./RadioGroup.types.js";
 
 const RadioContext = React.createContext<T.Context | null>(null);
 

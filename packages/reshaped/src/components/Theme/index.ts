@@ -1,4 +1,4 @@
-export { default as GlobalColorMode } from "./GlobalColorMode";
-export { default, PrivateTheme } from "./Theme";
-export type { GlobalColorModeProps, Props as ThemeProps } from "./Theme.types";
-export { useTheme } from "./useTheme";
+export { default as GlobalColorMode } from "./GlobalColorMode.js";
+export { default, PrivateTheme } from "./Theme.js";
+export type { GlobalColorModeProps, Props as ThemeProps } from "./Theme.types.js";
+export { useTheme } from "./useTheme.js";

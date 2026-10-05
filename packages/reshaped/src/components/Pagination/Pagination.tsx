@@ -1,6 +1,6 @@
-import * as T from "./Pagination.types";
-import PaginationControlled from "./PaginationControlled";
-import PaginationUncontrolled from "./PaginationUncontrolled";
+import * as T from "./Pagination.types.js";
+import PaginationControlled from "./PaginationControlled.js";
+import PaginationUncontrolled from "./PaginationUncontrolled.js";
 
 const Pagination: React.FC<T.Props> = (props) => {
 	const { page } = props;

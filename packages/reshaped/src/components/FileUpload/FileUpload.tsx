@@ -3,10 +3,10 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import HiddenVisually from "@/components/HiddenVisually";
-import View from "@/components/View";
-import useToggle from "@/hooks/useToggle";
-import type * as T from "./FileUpload.types";
+import HiddenVisually from "@/components/HiddenVisually/index.js";
+import View from "@/components/View/index.js";
+import useToggle from "@/hooks/useToggle.js";
+import type * as T from "./FileUpload.types.js";
 import s from "./FileUpload.module.css";
 
 export const FileUploadTrigger: React.FC<T.TriggerProps> = (props) => {
