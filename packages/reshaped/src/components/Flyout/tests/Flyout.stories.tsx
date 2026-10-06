@@ -724,6 +724,140 @@ export const disableHideAnimation = {
 	render: () => <Demo disableHideAnimation defaultActive />,
 };
 
+export const testFrozenContentOnClose: StoryObj<{ handleAfterClose: ReturnType<typeof fn> }> = {
+	name: "test: content doesn't change while closing",
+	args: {
+		handleAfterClose: fn(),
+	},
+	render: (args) => {
+		const [active, setActive] = React.useState(false);
+		const [value, setValue] = React.useState("First");
+
+		return (
+			<Flyout
+				active={active}
+				onOpen={() => setActive(true)}
+				onClose={() => setActive(false)}
+				onAfterClose={args.handleAfterClose}
+			>
+				<Flyout.Trigger>
+					{(attributes) => <Button attributes={attributes}>{value}</Button>}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<Content>
+						<div data-testid="selected-value">Selected: {value}</div>
+						<Button
+							onClick={() => {
+								setValue("Second");
+								setActive(false);
+							}}
+						>
+							Select second
+						</Button>
+					</Content>
+				</Flyout.Content>
+			</Flyout>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		// Transitions are disabled for the first frames after the color mode gets applied
+		await waitFor(() => {
+			expect(document.documentElement).not.toHaveAttribute("data-rs-no-transition");
+		});
+
+		await userEvent.click(canvas.getByRole("button", { name: "First" }));
+
+		await waitFor(() => {
+			expect(canvas.getByTestId("selected-value")).toBeVisible();
+		});
+
+		// Record the content state after every DOM update since the hide animation might end before click resolves
+		const snapshots: { text?: string | null; visible: boolean }[] = [];
+		const observer = new MutationObserver(() => {
+			const el = canvasElement.ownerDocument.querySelector<HTMLElement>(
+				"[data-testid=selected-value]"
+			);
+			if (!el) return;
+			snapshots.push({ text: el.textContent, visible: el.checkVisibility() });
+		});
+		observer.observe(canvasElement.ownerDocument.body, {
+			subtree: true,
+			childList: true,
+			attributes: true,
+			characterData: true,
+		});
+
+		await userEvent.click(canvas.getByText("Select second"));
+
+		await waitFor(() => {
+			expect(canvas.queryByTestId("selected-value")).not.toBeInTheDocument();
+		});
+		observer.disconnect();
+
+		// Trigger is updated right away while the content keeps its last state during the hide animation
+		expect(canvas.getAllByRole("button")[0]).toHaveTextContent("Second");
+		expect(snapshots.length).toBeGreaterThan(0);
+		snapshots.forEach((snapshot) => {
+			expect(snapshot).toEqual({ text: "Selected: First", visible: true });
+		});
+		expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
+	},
+};
+
+export const testCloseRightAfterOpen: StoryObj<{ handleAfterClose: ReturnType<typeof fn> }> = {
+	name: "test: close right after opening",
+	args: {
+		handleAfterClose: fn(),
+	},
+	render: (args) => {
+		const [active, setActive] = React.useState(false);
+		const [closeOnOpen, setCloseOnOpen] = React.useState(false);
+
+		// Closing in the same frame, before the open transition starts
+		React.useEffect(() => {
+			if (active && closeOnOpen) setActive(false);
+		}, [active, closeOnOpen]);
+
+		return (
+			<Flyout active={active} onAfterClose={args.handleAfterClose}>
+				<Flyout.Trigger>
+					{(attributes) => (
+						<Button
+							attributes={attributes}
+							onClick={() => {
+								setCloseOnOpen(true);
+								setActive(true);
+							}}
+						>
+							Trigger
+						</Button>
+					)}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<Content />
+				</Flyout.Content>
+			</Flyout>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		// Transitions are disabled for the first frames after the color mode gets applied
+		await waitFor(() => {
+			expect(document.documentElement).not.toHaveAttribute("data-rs-no-transition");
+		});
+
+		await userEvent.click(canvas.getByRole("button", { name: "Trigger" }));
+
+		await waitFor(() => {
+			expect(canvas.queryByText("Content")).not.toBeInTheDocument();
+			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
+		});
+	},
+};
+
 export const disabled: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
 	name: "disabled",
 	args: {

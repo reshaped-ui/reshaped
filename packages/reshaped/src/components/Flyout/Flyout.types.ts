@@ -200,6 +200,8 @@ export type ContentProps = {
 
 export type ContextProps = {
 	id: string;
+	/** Content is requested to be visible, stays false while the content is animating out */
+	active: boolean;
 	flyout: UseFlyoutData;
 	width?: Width;
 	triggerElRef?: React.RefObject<HTMLButtonElement | null>;

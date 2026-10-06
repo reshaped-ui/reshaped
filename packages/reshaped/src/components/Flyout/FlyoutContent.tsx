@@ -3,6 +3,7 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
+import Freeze from "@/components/_private/Freeze";
 import Portal from "@/components/_private/Portal";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import ScrollArea from "../ScrollArea";
@@ -14,6 +15,7 @@ import s from "./Flyout.module.css";
 const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	const { children, className, attributes, colorMode } = props;
 	const {
+		active,
 		flyout,
 		id,
 		triggerElRef,
@@ -119,7 +121,8 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 						scrollableAttributes={scrollableAttributes}
 						scrollableClassName={scrollableClassName}
 					>
-						{children}
+						{/* Keep the content unchanged while it's animating out, even if its state changes on close */}
+						<Freeze frozen={!active}>{children}</Freeze>
 					</ScrollArea>
 				</div>
 			</div>

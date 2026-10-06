@@ -7,6 +7,7 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 	const { children } = props;
 	const {
 		id,
+		active: requestedActive,
 		triggerElRef,
 		triggerType,
 		flyout,
@@ -53,8 +54,9 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 			childrenAttributes["aria-haspopup"] = "menu";
 		}
 
-		childrenAttributes["aria-expanded"] = active;
-		childrenAttributes["aria-controls"] = active ? id : undefined;
+		// Content is reported as collapsed right away, even while it's still animating out
+		childrenAttributes["aria-expanded"] = active && requestedActive;
+		childrenAttributes["aria-controls"] = active && requestedActive ? id : undefined;
 	}
 
 	return (

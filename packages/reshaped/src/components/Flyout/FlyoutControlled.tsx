@@ -371,6 +371,26 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, show]);
 
 	/**
+	 * Closing right after opening, before the content moved, cancels the transition instead of reversing it
+	 * so transitionend never fires. Removing the content right away when there is nothing to wait for
+	 */
+	useIsomorphicLayoutEffect(() => {
+		if (status !== "hidden") return;
+
+		const contentEl = flyoutElRef.current?.firstElementChild;
+		const animations = contentEl?.getAnimations?.() ?? [];
+		const hasTransition = animations.some(
+			(animation) =>
+				animation instanceof CSSTransition && animation.transitionProperty === "transform"
+		);
+
+		if (hasTransition) return;
+
+		remove();
+		onAfterCloseRef.current?.();
+	}, [status, remove, onAfterCloseRef]);
+
+	/**
 	 * Handle focus trap
 	 *
 	 * We release focus on visible change to not wait till animation ends
@@ -402,8 +422,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, triggerType, trapFocusMode, autoFocus]);
 
 	React.useEffect(() => {
-		if (!disableHideAnimation && status !== "hidden") return;
-		if (disableHideAnimation && isRendered) return;
+		// Release when the hide animation starts or right away when the content is removed without it
+		if (status !== "hidden" && isRendered) return;
 
 		if (trapFocusRef.current?.trapped) {
 			/* Locking the popover to not open it again on trigger focus */
@@ -418,7 +438,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			trapFocusRef.current.release({ withoutFocusReturn: !shouldReturnFocusRef.current });
 			shouldReturnFocusRef.current = true;
 		}
-	}, [status, isRendered, triggerType, disableHideAnimation]);
+	}, [status, isRendered, triggerType]);
 
 	/**
 	 * Clean up safe polygon tracking on unmount or when flyout closes
@@ -477,6 +497,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		<Provider
 			value={{
 				id,
+				active: !!active,
 				flyout,
 				width,
 				triggerElRef,

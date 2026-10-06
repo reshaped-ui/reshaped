@@ -207,7 +207,6 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 				fallbackMinHeight={fallbackMinHeight}
 				contentMaxHeight={contentMaxHeight}
 				contentZIndex={contentZIndex}
-				disableHideAnimation
 				instanceRef={instanceRef}
 			>
 				<DropdownMenu.Trigger>
