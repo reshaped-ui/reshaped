@@ -5,8 +5,8 @@
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"paths": { "@/*": ["./src/*"] },
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext"
+		"module": "esnext",
+		"moduleResolution": "bundler"
 	},
 	"include": ["./src/**/tests/*.stories.tsx", "./src/**/*.d.ts", "./storybook/**.*.tsx"],
 	"exclude": ["node_modules", "dist", "tools"]
