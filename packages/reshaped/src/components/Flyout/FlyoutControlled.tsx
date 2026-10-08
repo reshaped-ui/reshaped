@@ -371,6 +371,18 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, show]);
 
 	/**
+	 * Closing before the open transition starts cancels it instead of reversing,
+	 * so there is no transitionend to wait for
+	 */
+	useIsomorphicLayoutEffect(() => {
+		if (status !== "hidden") return;
+		if (flyoutElRef.current?.firstElementChild?.getAnimations?.().length) return;
+
+		remove();
+		onAfterCloseRef.current?.();
+	}, [status, remove, onAfterCloseRef]);
+
+	/**
 	 * Handle focus trap
 	 *
 	 * We release focus on visible change to not wait till animation ends
@@ -402,8 +414,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, triggerType, trapFocusMode, autoFocus]);
 
 	React.useEffect(() => {
-		if (!disableHideAnimation && status !== "hidden") return;
-		if (disableHideAnimation && isRendered) return;
+		// Release when the hide animation starts or right away when the content is removed without it
+		if (status !== "hidden" && isRendered) return;
 
 		if (trapFocusRef.current?.trapped) {
 			/* Locking the popover to not open it again on trigger focus */
@@ -418,7 +430,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			trapFocusRef.current.release({ withoutFocusReturn: !shouldReturnFocusRef.current });
 			shouldReturnFocusRef.current = true;
 		}
-	}, [status, isRendered, triggerType, disableHideAnimation]);
+	}, [status, isRendered, triggerType]);
 
 	/**
 	 * Clean up safe polygon tracking on unmount or when flyout closes
@@ -477,6 +489,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		<Provider
 			value={{
 				id,
+				active: !!active,
 				flyout,
 				width,
 				triggerElRef,

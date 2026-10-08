@@ -179,7 +179,6 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	return (
 		<DropdownMenu
 			width={width}
-			disableHideAnimation
 			position={position ?? "bottom"}
 			fallbackPositions={fallbackPositions ?? (position ? undefined : ["bottom", "top"])}
 			fallbackAdjustLayout={!openedWithTouch}
