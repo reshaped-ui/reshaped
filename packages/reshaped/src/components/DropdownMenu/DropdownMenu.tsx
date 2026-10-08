@@ -35,7 +35,6 @@ const DropdownMenu: React.FC<T.Props> = (props) => {
 				padding={1}
 				trapFocusMode={trapFocusMode}
 				triggerType={triggerType}
-				disableHideAnimation={triggerType !== "hover"}
 			>
 				{children}
 			</Popover>
