@@ -121,7 +121,6 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 						scrollableAttributes={scrollableAttributes}
 						scrollableClassName={scrollableClassName}
 					>
-						{/* Keep the content unchanged while it's animating out, even if its state changes on close */}
 						<Freeze frozen={!active}>{children}</Freeze>
 					</ScrollArea>
 				</div>
