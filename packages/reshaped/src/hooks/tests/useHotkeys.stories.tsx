@@ -211,3 +211,22 @@ export const optionModified: StoryObj<{
 		expect(args.handleHotkey).toHaveBeenCalledTimes(1);
 	},
 };
+
+export const imeComposition: StoryObj<{ handleHotkey: ReturnType<typeof fn> }> = {
+	name: "ignores IME composition",
+	args: {
+		handleHotkey: fn(),
+	},
+	render: (args) => <Component hotkeys={{ enter: args.handleHotkey }} />,
+	play: async ({ args }) => {
+		window.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", isComposing: true }));
+		window.dispatchEvent(new KeyboardEvent("keyup", { key: "Enter" }));
+		// Safari ends the composition before keydown, so only keyCode 229 marks it
+		window.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", keyCode: 229 }));
+		window.dispatchEvent(new KeyboardEvent("keyup", { key: "Enter" }));
+		expect(args.handleHotkey).not.toHaveBeenCalled();
+
+		await userEvent.keyboard("{Enter}");
+		expect(args.handleHotkey).toHaveBeenCalledTimes(1);
+	},
+};

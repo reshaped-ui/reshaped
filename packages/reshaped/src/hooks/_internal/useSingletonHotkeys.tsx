@@ -250,6 +250,9 @@ const HotkeysProvider: React.FC<{ children: React.ReactNode }> = (props) => {
 		(e: KeyboardEvent) => {
 			// Browsers trigger keyboard event without passing e.key when you click on autocomplete
 			if (!e.key) return;
+			// Keys handled by an IME are not hotkeys. Safari fires the Enter that confirms
+			// a composition after compositionend, so only keyCode 229 marks it
+			if (e.isComposing || e.keyCode === 229) return;
 
 			const nextPressedMap = addPressedKey(e) ?? pressedMapRef.current;
 			globalHotkeyStore.handleKeyDown(nextPressedMap, e);
