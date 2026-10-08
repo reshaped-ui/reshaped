@@ -7,15 +7,10 @@ export type Props = {
 	children?: React.ReactNode;
 };
 
-export type SuspenderProps = Props & {
-	frozenRef: React.RefObject<FrozenState>;
-};
-
-export type FrozenState = {
-	/** Frozen render was committed, children have to stay suspended until unfrozen */
-	committed: boolean;
-	/** Pending suspension used to detect renders that never get committed */
+export type State = {
+	/** Frozen render was committed, children stay suspended until unfrozen */
+	committed?: boolean;
+	/** Frozen render wasn't committed in time, children render without freezing */
+	expired?: boolean;
 	pending?: Promise<void>;
-	/** Pending suspension expired without a commit, children are rendered without freezing */
-	expired: boolean;
 };
