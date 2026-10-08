@@ -28,11 +28,6 @@ const Suspend: React.FC<{ stateRef: React.RefObject<T.State> }> = (props) => {
 	throw state.pending;
 };
 
-/**
- * Keeps the last rendered output of the children while frozen, ignoring updates from their props, state or context.
- * Suspended children keep their DOM but React hides it, so we show it again before the browser paints.
- * Wrapper element keeps text nodes from getting cleared and doesn't override the children inline styles
- */
 const Freeze: React.FC<T.Props> = (props) => {
 	const { frozen, children } = props;
 	const stateRef = React.useRef<T.State>({});
