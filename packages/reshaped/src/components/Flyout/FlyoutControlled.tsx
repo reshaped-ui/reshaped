@@ -371,20 +371,12 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, show]);
 
 	/**
-	 * Closing right after opening, before the content moved, cancels the transition instead of reversing it
-	 * so transitionend never fires. Removing the content right away when there is nothing to wait for
+	 * Closing before the open transition starts cancels it instead of reversing,
+	 * so there is no transitionend to wait for
 	 */
 	useIsomorphicLayoutEffect(() => {
 		if (status !== "hidden") return;
-
-		const contentEl = flyoutElRef.current?.firstElementChild;
-		const animations = contentEl?.getAnimations?.() ?? [];
-		const hasTransition = animations.some(
-			(animation) =>
-				animation instanceof CSSTransition && animation.transitionProperty === "transform"
-		);
-
-		if (hasTransition) return;
+		if (flyoutElRef.current?.firstElementChild?.getAnimations?.().length) return;
 
 		remove();
 		onAfterCloseRef.current?.();

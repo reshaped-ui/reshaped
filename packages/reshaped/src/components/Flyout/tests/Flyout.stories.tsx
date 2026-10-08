@@ -858,6 +858,52 @@ export const testCloseRightAfterOpen: StoryObj<{ handleAfterClose: ReturnType<ty
 	},
 };
 
+export const testFocusReturnWithoutTransitions: StoryObj = {
+	name: "test: focus returns to the trigger with transitions disabled",
+	render: () => (
+		<Flyout>
+			<Flyout.Trigger>
+				{(attributes) => <Button attributes={attributes}>Trigger</Button>}
+			</Flyout.Trigger>
+			<Flyout.Content>
+				<Content>
+					<Button onClick={() => {}}>Inside</Button>
+				</Content>
+			</Flyout.Content>
+		</Flyout>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getByRole("button", { name: "Trigger" });
+
+		// Wait for the provider to enable transitions after mount before disabling them again
+		await waitFor(() => {
+			expect(document.documentElement).not.toHaveAttribute("data-rs-no-transition");
+		});
+
+		// Same as prefers-reduced-motion, content is removed without the hide animation
+		document.documentElement.setAttribute("data-rs-no-transition", "true");
+
+		try {
+			trigger.focus();
+			await userEvent.keyboard("{Enter}");
+
+			await waitFor(() => {
+				expect(canvas.getByRole("dialog")).toContainElement(document.activeElement as HTMLElement);
+			});
+
+			await userEvent.keyboard("{Escape}");
+
+			await waitFor(() => {
+				expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
+			});
+			expect(trigger).toHaveFocus();
+		} finally {
+			document.documentElement.removeAttribute("data-rs-no-transition");
+		}
+	},
+};
+
 export const disabled: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
 	name: "disabled",
 	args: {

@@ -440,7 +440,11 @@ export const renderTrigger: StoryObj<{ handleChange: Mock }> = {
 
 		expect(hiddenInput).toHaveValue("turtle");
 		expect(trigger).toHaveTextContent("Turtle");
-		expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+		// Trigger stays expanded until the hide animation ends
+		await waitFor(() => {
+			expect(trigger).toHaveAttribute("aria-expanded", "false");
+		});
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
 			name: "animal",
