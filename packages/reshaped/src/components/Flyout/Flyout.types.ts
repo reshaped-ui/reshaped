@@ -200,6 +200,7 @@ export type ContentProps = {
 
 export type ContextProps = {
 	id: string;
+	active: boolean;
 	flyout: UseFlyoutData;
 	width?: Width;
 	triggerElRef?: React.RefObject<HTMLButtonElement | null>;

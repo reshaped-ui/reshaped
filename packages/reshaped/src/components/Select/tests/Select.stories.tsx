@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, Mock, userEvent, within } from "storybook/test";
+import { expect, fn, Mock, userEvent, waitFor, within } from "storybook/test";
 
 import Actionable from "@/components/Actionable";
 import Badge from "@/components/Badge";
@@ -82,6 +82,11 @@ export const base: StoryObj = {
 		expect(options[1]).toHaveTextContent("Turtle");
 
 		await userEvent.click(document.body);
+
+		// Wait for the previous menu to finish its hide animation
+		await waitFor(() => {
+			expect(within(canvasElement.ownerDocument.body).queryAllByRole("option")).toHaveLength(0);
+		});
 
 		const [_, triggerWithGroups] = canvas.getAllByRole("button");
 		const hiddenInputs2 = canvasElement.querySelectorAll('input[type="hidden"]');
@@ -435,7 +440,11 @@ export const renderTrigger: StoryObj<{ handleChange: Mock }> = {
 
 		expect(hiddenInput).toHaveValue("turtle");
 		expect(trigger).toHaveTextContent("Turtle");
-		expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+		// Trigger stays expanded until the hide animation ends
+		await waitFor(() => {
+			expect(trigger).toHaveAttribute("aria-expanded", "false");
+		});
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
 			name: "animal",
@@ -842,6 +851,11 @@ export const defaultHandlers: StoryObj<{
 
 		// Controlled
 		await userEvent.click(document.body);
+
+		// Wait for the previous menu to finish its hide animation
+		await waitFor(() => {
+			expect(within(canvasElement.ownerDocument.body).queryAllByRole("option")).toHaveLength(0);
+		});
 
 		const [__, controlled, focusable] = canvas.getAllByRole("button");
 		const hiddenInputs2 = canvasElement.querySelectorAll('input[type="hidden"]');
