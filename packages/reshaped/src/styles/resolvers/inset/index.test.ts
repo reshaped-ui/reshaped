@@ -25,6 +25,14 @@ describe("Styles/Inset", () => {
 	test("handles responsive value", async () => {
 		expect(inset({ s: 4, m: 0, l: 2 })).toMatchSnapshot();
 	});
+
+	test("handles center value", () => {
+		expect(inset("center")).toMatchSnapshot();
+	});
+
+	test("handles responsive center value", async () => {
+		expect(inset({ s: "center", m: 4 })).toMatchSnapshot();
+	});
 });
 
 describe("Styles/Inset/Top", () => {

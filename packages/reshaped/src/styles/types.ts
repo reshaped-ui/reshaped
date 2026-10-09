@@ -90,7 +90,7 @@ export type Mixin = {
 
 	position?: G.Responsive<Position>;
 	zIndex?: ZIndex;
-	inset?: G.Responsive<Inset>;
+	inset?: G.Responsive<InsetAxis>;
 	insetTop?: G.Responsive<Inset>;
 	insetBottom?: G.Responsive<Inset>;
 	insetStart?: G.Responsive<Inset>;
