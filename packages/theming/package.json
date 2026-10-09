@@ -26,6 +26,7 @@
 	"sideEffects": [
 		"*.css"
 	],
+	"type": "module",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
@@ -50,8 +51,8 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"dev": "tsc-watch --onSuccess \"tsc-alias --resolve-full-paths\"",
-		"build": "tsc && tsc-alias --resolve-full-paths"
+		"dev": "tsc-watch --onSuccess \"tsc-alias",
+		"build": "tsc && tsc-alias"
 	},
 	"dependencies": {
 		"@types/culori": "4.0.1",
