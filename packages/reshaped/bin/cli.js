@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require("@reshaped/theming/cli/run");
+import "@reshaped/theming/cli/run";

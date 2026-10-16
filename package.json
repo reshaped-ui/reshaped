@@ -83,7 +83,7 @@
 	"size-limit": [
 		{
 			"name": "Library / JS",
-			"path": "packages/reshaped/dist/bundle.js",
+			"path": "packages/reshaped/dist/bundle.cjs",
 			"webpack": false
 		},
 		{
