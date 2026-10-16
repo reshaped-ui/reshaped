@@ -51,7 +51,7 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"dev": "tsc-watch --onSuccess \"tsc-alias",
+		"dev": "tsc-watch --onSuccess \"tsc-alias\"",
 		"build": "tsc && tsc-alias"
 	},
 	"dependencies": {
