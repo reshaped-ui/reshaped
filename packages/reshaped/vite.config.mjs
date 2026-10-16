@@ -25,8 +25,8 @@ export default defineConfig({
 			logLevel: "silent",
 			external: ["react", "react/jsx-runtime", "react-dom"],
 			output: {
-				entryFileNames: "bundle.js",
-				chunkFileNames: "[name].js",
+				entryFileNames: "bundle.cjs",
+				chunkFileNames: "[name].cjs",
 				globals: {
 					react: "React",
 					"react-dom": "ReactDOM",

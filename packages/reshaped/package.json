@@ -64,9 +64,9 @@
 			"default": "./dist/config/postcss.cjs"
 		},
 		"./bundle": {
-			"types": "./dist/bundle.d.ts",
-			"import": "./dist/bundle.js",
-			"default": "./dist/bundle.js"
+			"types": "./dist/bundle.d.cts",
+			"import": "./dist/bundle.cjs",
+			"default": "./dist/bundle.cjs"
 		},
 		"./themes/slate/*": "./dist/themes/slate/*",
 		"./themes/figma/*": "./dist/themes/figma/*",
@@ -82,7 +82,7 @@
 		"build:esm": "tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
 		"build:css": "postcss \"src/**/*.css\" --dir dist --base src --config tools/build",
 		"build:stories": "tsc -p tsconfig.stories.json && tsc-alias -p tsconfig.stories.json",
-		"build:bundle": "vite build && shx cp dist/index.d.ts dist/bundle.d.ts",
+		"build:bundle": "vite build && shx cp dist/index.d.ts dist/bundle.d.cts",
 		"build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
 		"test:browser": "vitest run --project=storybook",
 		"test:unit": "vitest run --project=unit",
