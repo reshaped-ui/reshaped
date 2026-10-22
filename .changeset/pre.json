@@ -1,0 +1,18 @@
+{
+  "mode": "exit",
+  "tag": "canary",
+  "initialVersions": {
+    "reshaped": "4.2.0",
+    "@reshaped/theming": "4.2.0",
+    "@reshaped/utilities": "4.2.0"
+  },
+  "changesets": [
+    "context-menu-close-on-another-menu",
+    "flyout-frozen-exit-animation",
+    "hotkeys-ime-composition",
+    "modal-drag-physics",
+    "modal-drag-property",
+    "overlay-backdrop-compositor",
+    "scroll-area-thumb-compositor"
+  ]
+}
