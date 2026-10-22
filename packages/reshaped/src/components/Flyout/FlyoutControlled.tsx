@@ -370,6 +370,13 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (status === "rendered") show();
 	}, [status, show]);
 
+	// Content can be reopened at new coordinates without closing in between
+	useIsomorphicLayoutEffect(() => {
+		if (!originCoordinates || !isRendered) return;
+		updatePosition();
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
+	}, [originCoordinates?.x, originCoordinates?.y]);
+
 	/**
 	 * Closing before the open transition starts cancels it instead of reversing,
 	 * so there is no transitionend to wait for

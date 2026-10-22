@@ -2,7 +2,9 @@ import { StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
+import Button from "@/components/Button";
 import ContextMenu from "@/components/ContextMenu";
+import Popover from "@/components/Popover";
 import View from "@/components/View";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
@@ -120,6 +122,150 @@ export const triggerRef: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
 				</ContextMenu>
 			</>
 		);
+	},
+};
+
+export const sameMenuRightClick: StoryObj<{
+	handleOpen: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "test: right click on the same context menu",
+	args: {
+		handleOpen: fn(),
+		handleClose: fn(),
+	},
+	render: (args) => {
+		const triggerRef = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<View gap={4}>
+				<ContextMenu onOpen={args.handleOpen} onClose={args.handleClose}>
+					<View
+						height="60px"
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						attributes={{ "data-testid": "children" }}
+					/>
+
+					<ContextMenu.Content>
+						<ContextMenu.Item>Children item</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+
+				<View
+					height="60px"
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					attributes={{ ref: triggerRef, "data-testid": "trigger-ref" }}
+				/>
+
+				<ContextMenu triggerRef={triggerRef} onOpen={args.handleOpen} onClose={args.handleClose}>
+					<ContextMenu.Content>
+						<ContextMenu.Item>Trigger ref item</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+			</View>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		for (const [testId, text] of [
+			["children", "Children item"],
+			["trigger-ref", "Trigger ref item"],
+		]) {
+			const trigger = canvas.getByTestId(testId);
+
+			args.handleOpen.mockClear();
+			args.handleClose.mockClear();
+
+			const { left, top } = trigger.getBoundingClientRect();
+
+			await userEvent.pointer({
+				keys: "[MouseRight]",
+				target: trigger,
+				coords: { clientX: left + 10, clientY: top + 10 },
+			});
+
+			expect(args.handleOpen).toHaveBeenCalledTimes(1);
+
+			const menu = canvas.getByRole("menu");
+			const initialLeft = menu.getBoundingClientRect().left;
+
+			// Wait for the open animation to finish
+			await sleep(500);
+
+			await userEvent.pointer({
+				keys: "[MouseRight]",
+				target: trigger,
+				coords: { clientX: left + 210, clientY: top + 10 },
+			});
+
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
+			expect(args.handleOpen).toHaveBeenCalledTimes(2);
+
+			await sleep(500);
+
+			expect(canvas.getByText(text)).toBeInTheDocument();
+			expect(canvas.getByRole("menu").getBoundingClientRect().left).toBe(initialLeft + 200);
+
+			await userEvent.click(trigger);
+
+			expect(args.handleClose).toHaveBeenCalledTimes(2);
+
+			await waitFor(
+				() => {
+					expect(canvas.queryByText(text)).not.toBeInTheDocument();
+				},
+				{
+					timeout: 1000,
+				}
+			);
+		}
+	},
+};
+
+export const insideFlyoutRightClick: StoryObj<{
+	handlePopoverClose: ReturnType<typeof fn>;
+}> = {
+	name: "test: right click inside another flyout",
+	args: {
+		handlePopoverClose: fn(),
+	},
+	render: (args) => (
+		<Popover onClose={args.handlePopoverClose}>
+			<Popover.Trigger>
+				{(attributes) => <Button attributes={attributes}>Open popover</Button>}
+			</Popover.Trigger>
+			<Popover.Content>
+				<ContextMenu>
+					<View
+						width="200px"
+						height="60px"
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						attributes={{ "data-testid": "popover-area" }}
+					/>
+
+					<ContextMenu.Content>
+						<ContextMenu.Item>Context menu item</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+			</Popover.Content>
+		</Popover>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await userEvent.click(canvas.getByText("Open popover"));
+		await sleep(500);
+
+		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("popover-area") });
+
+		expect(canvas.getByText("Context menu item")).toBeInTheDocument();
+		expect(canvas.getByTestId("popover-area")).toBeInTheDocument();
+		expect(args.handlePopoverClose).not.toHaveBeenCalled();
 	},
 };
 
