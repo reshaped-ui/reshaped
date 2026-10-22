@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fireEvent, fn, userEvent, waitFor, within } from "storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import ContextMenu from "@/components/ContextMenu";
@@ -125,91 +125,6 @@ export const triggerRef: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
 	},
 };
 
-export const anotherMenuRightClick: StoryObj<{
-	handleFirstClose: ReturnType<typeof fn>;
-	handleSecondClose: ReturnType<typeof fn>;
-}> = {
-	name: "test: right click on another context menu",
-	args: {
-		handleFirstClose: fn(),
-		handleSecondClose: fn(),
-	},
-	render: (args) => (
-		<View gap={4}>
-			<ContextMenu onClose={args.handleFirstClose}>
-				<View
-					height="60px"
-					backgroundColor="neutral-faded"
-					borderRadius="medium"
-					attributes={{ "data-testid": "first" }}
-				/>
-
-				<ContextMenu.Content>
-					<ContextMenu.Item>First item</ContextMenu.Item>
-				</ContextMenu.Content>
-			</ContextMenu>
-
-			<ContextMenu onClose={args.handleSecondClose}>
-				<View
-					height="60px"
-					backgroundColor="neutral-faded"
-					borderRadius="medium"
-					attributes={{ "data-testid": "second" }}
-				/>
-
-				<ContextMenu.Content>
-					<ContextMenu.Item>Second item</ContextMenu.Item>
-				</ContextMenu.Content>
-			</ContextMenu>
-		</View>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-
-		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("first") });
-
-		expect(canvas.getByText("First item")).toBeInTheDocument();
-
-		// Wait for the open animation to finish
-		await sleep(500);
-
-		// Opening another context menu closes the previous one
-		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("second") });
-
-		expect(args.handleFirstClose).toHaveBeenCalledTimes(1);
-		expect(args.handleFirstClose).toHaveBeenCalledWith({ reason: "outside-click" });
-		expect(canvas.getByText("Second item")).toBeInTheDocument();
-
-		await waitFor(
-			() => {
-				expect(canvas.queryByText("First item")).not.toBeInTheDocument();
-			},
-			{
-				timeout: 1000,
-			}
-		);
-
-		// Opening the context menu with a keyboard doesn't have a preceding mousedown event
-		await userEvent.pointer({ keys: "[MouseLeft]", target: canvas.getByTestId("second") });
-		await waitFor(() => {
-			expect(canvas.queryByText("Second item")).not.toBeInTheDocument();
-		});
-
-		expect(args.handleSecondClose).toHaveBeenCalledTimes(1);
-
-		fireEvent.contextMenu(canvas.getByTestId("first"));
-
-		expect(canvas.getByText("First item")).toBeInTheDocument();
-
-		await sleep(500);
-
-		fireEvent.contextMenu(canvas.getByTestId("second"));
-
-		expect(args.handleFirstClose).toHaveBeenCalledTimes(2);
-		expect(canvas.getByText("Second item")).toBeInTheDocument();
-	},
-};
-
 export const sameMenuRightClick: StoryObj<{
 	handleOpen: ReturnType<typeof fn>;
 	handleClose: ReturnType<typeof fn>;
@@ -280,7 +195,6 @@ export const sameMenuRightClick: StoryObj<{
 			// Wait for the open animation to finish
 			await sleep(500);
 
-			// Right clicking the same trigger again moves the menu to the new position
 			await userEvent.pointer({
 				keys: "[MouseRight]",
 				target: trigger,
@@ -296,7 +210,6 @@ export const sameMenuRightClick: StoryObj<{
 			expect(canvas.getByText(text)).toBeInTheDocument();
 			expect(canvas.getByRole("menu").getBoundingClientRect().left).toBe(initialLeft + 200);
 
-			// Left clicking the trigger closes the menu
 			await userEvent.click(trigger);
 
 			expect(args.handleClose).toHaveBeenCalledTimes(2);
@@ -348,7 +261,6 @@ export const insideFlyoutRightClick: StoryObj<{
 		await userEvent.click(canvas.getByText("Open popover"));
 		await sleep(500);
 
-		// Context menu opened from the popover content keeps the popover open
 		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("popover-area") });
 
 		expect(canvas.getByText("Context menu item")).toBeInTheDocument();

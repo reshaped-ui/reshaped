@@ -370,10 +370,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (status === "rendered") show();
 	}, [status, show]);
 
-	/**
-	 * Move the rendered content when it's opened again at different coordinates,
-	 * e.g. when right clicking a context menu area while its menu is open
-	 */
+	// Content can be reopened at new coordinates without closing in between
 	useIsomorphicLayoutEffect(() => {
 		if (!originCoordinates || !isRendered) return;
 		updatePosition();

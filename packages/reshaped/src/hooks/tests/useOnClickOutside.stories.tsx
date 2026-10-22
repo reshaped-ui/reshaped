@@ -74,6 +74,14 @@ export const rightClick: StoryObj<{ handleOutsideClick: Mock }> = {
 
 		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
 		expect(args.handleOutsideClick).toHaveBeenCalledWith();
+
+		// Opening another context menu outside
+		const preventDefault = (e: Event) => e.preventDefault();
+		document.body.addEventListener("contextmenu", preventDefault);
+		await userEvent.pointer({ keys: "[MouseRight]", target: document.body });
+		document.body.removeEventListener("contextmenu", preventDefault);
+
+		expect(args.handleOutsideClick).toHaveBeenCalledTimes(2);
 	},
 };
 
@@ -86,7 +94,7 @@ export const keyboardContextMenu: StoryObj<{ handleOutsideClick: Mock }> = {
 	play: async ({ canvas, args }) => {
 		const button = canvas.getAllByRole("button")[0];
 
-		// Context menu key doesn't trigger mousedown, so the result of the previous mousedown is ignored
+		// Context menu key doesn't trigger mousedown
 		fireEvent.mouseDown(document.body);
 		fireEvent.contextMenu(button);
 
