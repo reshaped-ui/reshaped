@@ -3,8 +3,20 @@ import { keys } from "@reshaped/utilities";
 
 import useHandlerRef from "./useHandlerRef";
 
+type Refs = React.RefObject<HTMLElement | null>[];
+
+const checkEventInsideRefs = (refs: Refs, event: Event) => {
+	const targetEl = event.composedPath()[0] as HTMLElement | undefined;
+	if (!targetEl) return false;
+
+	return refs.some((elRef) => {
+		const el = elRef.current;
+		return !!el && (el === targetEl || el.contains(targetEl));
+	});
+};
+
 const useOnClickOutside = (
-	refs: React.RefObject<HTMLElement | null>[],
+	refs: Refs,
 	handler: (event: Event) => void,
 	options?: { disabled?: boolean }
 ) => {
@@ -17,15 +29,6 @@ const useOnClickOutside = (
 	 */
 	const isMouseDownInsideRef = React.useRef(false);
 
-	const checkEventInsideRefs = (event: Event) => {
-		const eventEl = event.composedPath()[0] as HTMLElement | undefined;
-		if (!eventEl) return false;
-
-		return refs.some(
-			(elRef) => !!elRef.current && (elRef.current === eventEl || elRef.current.contains(eventEl))
-		);
-	};
-
 	React.useEffect(() => {
 		/**
 		 * Not checking for disabled here since some components can enable the hook
@@ -33,7 +36,7 @@ const useOnClickOutside = (
 		 */
 
 		const handleMouseDown = (event: MouseEvent | TouchEvent | KeyboardEvent) => {
-			isMouseDownInsideRef.current = checkEventInsideRefs(event);
+			isMouseDownInsideRef.current = checkEventInsideRefs(refs, event);
 		};
 
 		const handleKeyDown = (event: KeyboardEvent) => {
@@ -58,26 +61,35 @@ const useOnClickOutside = (
 		if (disabled) return;
 
 		const handleClick = (event: MouseEvent | TouchEvent) => {
-			if (event.type === "contextmenu") {
-				/**
-				 * Context menu events can be claimed by a handler that opens a menu of its own,
-				 * which prevents the default browser behavior. Such events open a new flyout
-				 * instead of dismissing the current one, so they're not outside clicks
-				 */
-				if (event.defaultPrevented) return;
-
-				isMouseDownInsideRef.current = checkEventInsideRefs(event);
-			}
-
+			// Right click doesn't trigger the click event in most browsers, it's handled with the contextmenu event
+			if ("button" in event && event.button === 2) return;
 			if (isMouseDownInsideRef.current) return;
 			handlerRef.current?.(event);
 		};
 
+		/**
+		 * Right click doesn't produce a click event, so we handle it separately.
+		 * Checking the target synchronously since the contextmenu event can also be triggered
+		 * with a keyboard, without a preceding mousedown event.
+		 */
+		const handleContextMenu = (event: MouseEvent) => {
+			if (checkEventInsideRefs(refs, event)) return;
+			handlerRef.current?.(event);
+		};
+
 		document.addEventListener("click", handleClick);
-		document.addEventListener("contextmenu", handleClick);
+		/**
+		 * Using the capture phase to handle the event before any handlers of its target:
+		 * - Currently rendered content closes before another component opens its own content
+		 *   on the same event, e.g. when right clicking from one context menu to another
+		 * - Content opened by this event subscribes after the capture phase is over,
+		 *   so it doesn't get closed by the same event that opened it
+		 */
+		document.addEventListener("contextmenu", handleContextMenu, { capture: true });
+
 		return () => {
 			document.removeEventListener("click", handleClick);
-			document.removeEventListener("contextmenu", handleClick);
+			document.removeEventListener("contextmenu", handleContextMenu, { capture: true });
 		};
 		// oxlint-disable-next-line react-hooks/exhaustive-deps
 	}, [handlerRef, disabled, ...refs]);

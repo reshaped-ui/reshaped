@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, type Mock, userEvent } from "storybook/test";
+import { expect, fireEvent, fn, type Mock, userEvent } from "storybook/test";
 
 import useOnClickOutside from "../useOnClickOutside";
 
@@ -54,6 +54,48 @@ export const base: StoryObj<{ handleOutsideClick: Mock }> = {
 
 		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
 		expect(args.handleOutsideClick).toHaveBeenCalledWith();
+	},
+};
+
+export const rightClick: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "test: right click",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => <DemoBase onOutsideClick={args.handleOutsideClick} />,
+	play: async ({ canvas, args }) => {
+		const button = canvas.getAllByRole("button")[0];
+
+		await userEvent.pointer({ keys: "[MouseRight]", target: button });
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		await userEvent.pointer({ keys: "[MouseRight]", target: document.body });
+
+		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
+		expect(args.handleOutsideClick).toHaveBeenCalledWith();
+	},
+};
+
+export const keyboardContextMenu: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "test: context menu key",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => <DemoBase onOutsideClick={args.handleOutsideClick} />,
+	play: async ({ canvas, args }) => {
+		const button = canvas.getAllByRole("button")[0];
+
+		// Context menu key doesn't trigger mousedown, so the result of the previous mousedown is ignored
+		fireEvent.mouseDown(document.body);
+		fireEvent.contextMenu(button);
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		fireEvent.mouseDown(button);
+		fireEvent.contextMenu(document.body);
+
+		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
 	},
 };
 

@@ -1,8 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { expect, fireEvent, fn, userEvent, waitFor, within } from "storybook/test";
 
+import Button from "@/components/Button";
 import ContextMenu from "@/components/ContextMenu";
+import Popover from "@/components/Popover";
 import View from "@/components/View";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
@@ -120,6 +122,225 @@ export const triggerRef: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
 				</ContextMenu>
 			</>
 		);
+	},
+};
+
+export const anotherMenuRightClick: StoryObj<{
+	handleFirstClose: ReturnType<typeof fn>;
+	handleSecondClose: ReturnType<typeof fn>;
+}> = {
+	name: "test: right click on another context menu",
+	args: {
+		handleFirstClose: fn(),
+		handleSecondClose: fn(),
+	},
+	render: (args) => (
+		<View gap={4}>
+			<ContextMenu onClose={args.handleFirstClose}>
+				<View
+					height="60px"
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					attributes={{ "data-testid": "first" }}
+				/>
+
+				<ContextMenu.Content>
+					<ContextMenu.Item>First item</ContextMenu.Item>
+				</ContextMenu.Content>
+			</ContextMenu>
+
+			<ContextMenu onClose={args.handleSecondClose}>
+				<View
+					height="60px"
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					attributes={{ "data-testid": "second" }}
+				/>
+
+				<ContextMenu.Content>
+					<ContextMenu.Item>Second item</ContextMenu.Item>
+				</ContextMenu.Content>
+			</ContextMenu>
+		</View>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("first") });
+
+		expect(canvas.getByText("First item")).toBeInTheDocument();
+
+		// Wait for the open animation to finish
+		await sleep(500);
+
+		// Opening another context menu closes the previous one
+		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("second") });
+
+		expect(args.handleFirstClose).toHaveBeenCalledTimes(1);
+		expect(args.handleFirstClose).toHaveBeenCalledWith({ reason: "outside-click" });
+		expect(canvas.getByText("Second item")).toBeInTheDocument();
+
+		await waitFor(
+			() => {
+				expect(canvas.queryByText("First item")).not.toBeInTheDocument();
+			},
+			{
+				timeout: 1000,
+			}
+		);
+
+		// Opening the context menu with a keyboard doesn't have a preceding mousedown event
+		await userEvent.pointer({ keys: "[MouseLeft]", target: canvas.getByTestId("second") });
+		await waitFor(() => {
+			expect(canvas.queryByText("Second item")).not.toBeInTheDocument();
+		});
+
+		expect(args.handleSecondClose).toHaveBeenCalledTimes(1);
+
+		fireEvent.contextMenu(canvas.getByTestId("first"));
+
+		expect(canvas.getByText("First item")).toBeInTheDocument();
+
+		await sleep(500);
+
+		fireEvent.contextMenu(canvas.getByTestId("second"));
+
+		expect(args.handleFirstClose).toHaveBeenCalledTimes(2);
+		expect(canvas.getByText("Second item")).toBeInTheDocument();
+	},
+};
+
+export const sameMenuRightClick: StoryObj<{
+	handleOpen: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "test: right click on the same context menu",
+	args: {
+		handleOpen: fn(),
+		handleClose: fn(),
+	},
+	render: (args) => {
+		const triggerRef = React.useRef<HTMLDivElement>(null);
+
+		return (
+			<View gap={4}>
+				<ContextMenu onOpen={args.handleOpen} onClose={args.handleClose}>
+					<View
+						height="60px"
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						attributes={{ "data-testid": "children" }}
+					/>
+
+					<ContextMenu.Content>
+						<ContextMenu.Item>Children item</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+
+				<View
+					height="60px"
+					backgroundColor="neutral-faded"
+					borderRadius="medium"
+					attributes={{ ref: triggerRef, "data-testid": "trigger-ref" }}
+				/>
+
+				<ContextMenu triggerRef={triggerRef} onOpen={args.handleOpen} onClose={args.handleClose}>
+					<ContextMenu.Content>
+						<ContextMenu.Item>Trigger ref item</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+			</View>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		for (const [testId, text] of [
+			["children", "Children item"],
+			["trigger-ref", "Trigger ref item"],
+		]) {
+			const trigger = canvas.getByTestId(testId);
+
+			args.handleOpen.mockClear();
+			args.handleClose.mockClear();
+
+			await userEvent.pointer({ keys: "[MouseRight]", target: trigger });
+
+			expect(args.handleOpen).toHaveBeenCalledTimes(1);
+			expect(canvas.getByText(text)).toBeInTheDocument();
+
+			// Wait for the open animation to finish
+			await sleep(500);
+
+			// Right clicking the same trigger again keeps the menu open
+			await userEvent.pointer({ keys: "[MouseRight]", target: trigger });
+
+			expect(args.handleOpen).toHaveBeenCalledTimes(2);
+			expect(args.handleClose).not.toHaveBeenCalled();
+
+			await sleep(500);
+
+			expect(canvas.getByText(text)).toBeInTheDocument();
+
+			// Left clicking the same trigger still closes the menu
+			await userEvent.click(trigger);
+
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
+
+			await waitFor(
+				() => {
+					expect(canvas.queryByText(text)).not.toBeInTheDocument();
+				},
+				{
+					timeout: 1000,
+				}
+			);
+		}
+	},
+};
+
+export const insideFlyoutRightClick: StoryObj<{
+	handlePopoverClose: ReturnType<typeof fn>;
+}> = {
+	name: "test: right click inside another flyout",
+	args: {
+		handlePopoverClose: fn(),
+	},
+	render: (args) => (
+		<Popover onClose={args.handlePopoverClose}>
+			<Popover.Trigger>
+				{(attributes) => <Button attributes={attributes}>Open popover</Button>}
+			</Popover.Trigger>
+			<Popover.Content>
+				<ContextMenu>
+					<View
+						width="200px"
+						height="60px"
+						backgroundColor="neutral-faded"
+						borderRadius="medium"
+						attributes={{ "data-testid": "popover-area" }}
+					/>
+
+					<ContextMenu.Content>
+						<ContextMenu.Item>Context menu item</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+			</Popover.Content>
+		</Popover>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await userEvent.click(canvas.getByText("Open popover"));
+		await sleep(500);
+
+		// Context menu opened from the popover content keeps the popover open
+		await userEvent.pointer({ keys: "[MouseRight]", target: canvas.getByTestId("popover-area") });
+
+		expect(canvas.getByText("Context menu item")).toBeInTheDocument();
+		expect(canvas.getByTestId("popover-area")).toBeInTheDocument();
+		expect(args.handlePopoverClose).not.toHaveBeenCalled();
 	},
 };
 

@@ -18,9 +18,11 @@ import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { checkTransitions } from "@/utilities/animation";
 import * as timeouts from "./Flyout.constants";
 import {
+	OriginProvider,
 	Provider,
 	useFlyoutContentContext,
 	useFlyoutContext,
+	useFlyoutOriginContext,
 	useFlyoutTriggerContext,
 } from "./Flyout.context";
 import type * as T from "./Flyout.types";
@@ -74,6 +76,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const parentFlyoutContext = useFlyoutContext();
 	const { elRef: parentTriggerRef } = useFlyoutTriggerContext() || {};
 	const { elRef: parentContentRef } = useFlyoutContentContext() || {};
+	const { elRef: originElRef } = useFlyoutOriginContext() || {};
 
 	const isSubmenu =
 		parentFlyoutContext.trapFocusMode === "action-menu" ||
@@ -475,7 +478,16 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	useOnClickOutside(
 		[flyoutElRef, triggerElRef],
-		() => {
+		(event) => {
+			/**
+			 * Right clicking the origin element again opens the flyout at the new coordinates,
+			 * so it shouldn't close it. Left clicks on the origin element still close the flyout
+			 */
+			const originEl = originElRef?.current;
+			if (event.type === "contextmenu" && originEl && event.composedPath().includes(originEl)) {
+				return;
+			}
+
 			// Clicking outside changes focused element so we don't need to set it back ourselves
 			shouldReturnFocusRef.current = false;
 			handleClose({ reason: "outside-click" });
@@ -522,7 +534,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				isSubmenu,
 			}}
 		>
-			{children}
+			{/* Origin element is only used by this flyout, nested flyouts shouldn't inherit it */}
+			<OriginProvider value={null}>{children}</OriginProvider>
 		</Provider>
 	);
 };

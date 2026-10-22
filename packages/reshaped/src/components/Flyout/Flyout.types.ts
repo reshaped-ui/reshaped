@@ -237,3 +237,4 @@ export type ContextProps = {
 
 export type TriggerContextProps = { elRef?: ContextProps["triggerElRef"] };
 export type ContentContextProps = { elRef?: ContextProps["flyoutElRef"] };
+export type OriginContextProps = { elRef: React.RefObject<HTMLElement | null> };
