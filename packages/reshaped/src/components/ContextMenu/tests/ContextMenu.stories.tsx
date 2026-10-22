@@ -264,29 +264,42 @@ export const sameMenuRightClick: StoryObj<{
 			args.handleOpen.mockClear();
 			args.handleClose.mockClear();
 
-			await userEvent.pointer({ keys: "[MouseRight]", target: trigger });
+			const { left, top } = trigger.getBoundingClientRect();
+
+			await userEvent.pointer({
+				keys: "[MouseRight]",
+				target: trigger,
+				coords: { clientX: left + 10, clientY: top + 10 },
+			});
 
 			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(canvas.getByText(text)).toBeInTheDocument();
+
+			const menu = canvas.getByRole("menu");
+			const initialLeft = menu.getBoundingClientRect().left;
 
 			// Wait for the open animation to finish
 			await sleep(500);
 
-			// Right clicking the same trigger again keeps the menu open
-			await userEvent.pointer({ keys: "[MouseRight]", target: trigger });
+			// Right clicking the same trigger again moves the menu to the new position
+			await userEvent.pointer({
+				keys: "[MouseRight]",
+				target: trigger,
+				coords: { clientX: left + 210, clientY: top + 10 },
+			});
 
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
 			expect(args.handleOpen).toHaveBeenCalledTimes(2);
-			expect(args.handleClose).not.toHaveBeenCalled();
 
 			await sleep(500);
 
 			expect(canvas.getByText(text)).toBeInTheDocument();
+			expect(canvas.getByRole("menu").getBoundingClientRect().left).toBe(initialLeft + 200);
 
-			// Left clicking the same trigger still closes the menu
+			// Left clicking the trigger closes the menu
 			await userEvent.click(trigger);
 
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
+			expect(args.handleClose).toHaveBeenCalledTimes(2);
 
 			await waitFor(
 				() => {

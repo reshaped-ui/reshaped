@@ -4,7 +4,6 @@ import React from "react";
 import type { Coordinates } from "@reshaped/utilities/internal";
 
 import DropdownMenu from "@/components/DropdownMenu";
-import { OriginProvider } from "@/components/Flyout/Flyout.context";
 import useHandlerRef from "@/hooks/useHandlerRef";
 import useScrollLock from "@/hooks/useScrollLock";
 import type * as T from "./ContextMenu.types";
@@ -39,19 +38,17 @@ const ContextMenu: React.FC<T.Props> = (props) => {
 
 	return (
 		<div className={s.root} ref={internalOriginRef}>
-			<OriginProvider value={{ elRef: originRef }}>
-				<DropdownMenu
-					{...dropdownMenuProps}
-					position={position}
-					originCoordinates={coordinates}
-					active={!!coordinates}
-					onClose={(args) => {
-						setCoordinates(undefined);
-						unlockScroll();
-						onClose?.(args);
-					}}
-				/>
-			</OriginProvider>
+			<DropdownMenu
+				{...dropdownMenuProps}
+				position={position}
+				originCoordinates={coordinates}
+				active={!!coordinates}
+				onClose={(args) => {
+					setCoordinates(undefined);
+					unlockScroll();
+					onClose?.(args);
+				}}
+			/>
 		</div>
 	);
 };
