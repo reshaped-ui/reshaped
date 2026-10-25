@@ -142,3 +142,20 @@ export const className: StoryObj = {
 		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
+
+export const testLabel: StoryObj = {
+	name: "test: label",
+	render: () => (
+		<View gap={4}>
+			<Divider>Label</Divider>
+			<Divider attributes={{ "aria-label": "Custom label" }}>Label</Divider>
+		</View>
+	),
+	play: async ({ canvas }) => {
+		const [divider, customDivider] = canvas.getAllByRole("separator");
+
+		// Separator children are presentational, so the label is used as its name
+		expect(divider).toHaveAccessibleName("Label");
+		expect(customDivider).toHaveAccessibleName("Custom label");
+	},
+};

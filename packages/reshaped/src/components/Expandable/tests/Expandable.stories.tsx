@@ -5,7 +5,7 @@ import { expect, fn, Mock, userEvent, waitFor } from "storybook/test";
 import Button from "@/components/Button";
 import Expandable from "@/components/Expandable";
 import View from "@/components/View";
-import { checkTransitions } from "@/utilities/animation";
+import { checkTransitions, enableTransitions } from "@/utilities/animation";
 import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
@@ -97,5 +97,51 @@ export const onAfterClose: StoryObj<{ handleAfterClose: Mock }> = {
 		await userEvent.click(trigger);
 		await waitFor(() => expect(content).toBeVisible());
 		expect(handleAfterClose).toBeCalledTimes(1);
+	},
+};
+
+export const testWithoutSizeTransition: StoryObj<{ handleAfterClose: Mock }> = {
+	name: "test: settles without size transition",
+	args: {
+		handleAfterClose: fn(),
+	},
+	render: (args) => {
+		const [active, setActive] = React.useState(true);
+
+		return (
+			<View gap={4}>
+				<style>{`[data-testid="expandable"] { transition-property: opacity !important; }`}</style>
+				<Button onClick={() => setActive((prev) => !prev)}>Toggle</Button>
+				<Expandable
+					active={active}
+					onAfterClose={args.handleAfterClose}
+					attributes={{ "data-testid": "expandable" }}
+				>
+					<Placeholder />
+				</Expandable>
+			</View>
+		);
+	},
+	play: async ({ canvas, args }) => {
+		const expandable = canvas.getByTestId("expandable");
+
+		// Other stories might disable transitions globally
+		enableTransitions();
+
+		// Wait for the mount frame so the toggle is animated
+		await new Promise((resolve) => setTimeout(resolve, 100));
+		await userEvent.click(canvas.getByRole("button", { name: "Toggle" }));
+
+		await waitFor(() => {
+			expect(expandable).toHaveAttribute("hidden");
+			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
+		});
+
+		await userEvent.click(canvas.getByRole("button", { name: "Toggle" }));
+
+		await waitFor(() => {
+			expect(expandable).not.toHaveAttribute("hidden");
+			expect(expandable.style.height).toBe("auto");
+		});
 	},
 };

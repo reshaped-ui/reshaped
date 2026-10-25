@@ -7,6 +7,8 @@ import ScrollArea from "@/components/ScrollArea";
 import Tabs from "@/components/Tabs";
 import Text from "@/components/Text";
 import View from "@/components/View";
+import { enableTransitions } from "@/utilities/animation";
+import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 import IconZap from "@/icons/Zap";
 
@@ -714,5 +716,35 @@ export const testEdgeCaseDom = {
 				</Example.Item>
 			</Example>
 		);
+	},
+};
+
+export const testWithoutSelectorTransition: StoryObj = {
+	name: "test: selector settles without transition",
+	render: () => (
+		<>
+			<style>{`[data-testid="tabs"] [role="tablist"] > :last-child { transition: none !important; }`}</style>
+			<View attributes={{ "data-testid": "tabs" }}>
+				<Tabs defaultValue="0">
+					<Tabs.List>
+						<Tabs.Item value="0">Item 0</Tabs.Item>
+						<Tabs.Item value="1">Item 1</Tabs.Item>
+					</Tabs.List>
+				</Tabs>
+			</View>
+		</>
+	),
+	play: async ({ canvas }) => {
+		const tablist = canvas.getByRole("tablist");
+		const selector = tablist.lastElementChild as HTMLElement;
+
+		// Other stories might disable transitions globally
+		enableTransitions();
+
+		await userEvent.click(canvas.getByRole("tab", { name: "Item 1" }));
+
+		// Selector is hidden again once it settles on the active tab
+		await sleep(300);
+		expect(selector.className).toContain("selector--hidden");
 	},
 };
