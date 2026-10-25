@@ -286,7 +286,7 @@ export const testErrorRequired: StoryObj = {
 			</FormControl>
 			<FormControl hasError required>
 				<FormControl.Label>Custom Select</FormControl.Label>
-				<Select name="custom-select" placeholder="Select">
+				<Select name="custom-select" placeholder="Pick">
 					<Select.Option value="1">One</Select.Option>
 				</Select>
 			</FormControl>
@@ -328,7 +328,10 @@ export const testErrorRequired: StoryObj = {
 			expect(input).toHaveAttribute("aria-required", "true");
 		});
 
-		expect(canvas.getByRole("button", { name: /Select/ })).toHaveAttribute("aria-invalid", "true");
+		expect(canvas.getByRole("button", { name: "Custom Select Pick" })).toHaveAttribute(
+			"aria-invalid",
+			"true"
+		);
 	},
 };
 

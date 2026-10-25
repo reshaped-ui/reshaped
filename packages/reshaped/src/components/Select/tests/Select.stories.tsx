@@ -968,3 +968,82 @@ export const triggerOnly: StoryObj<{ handleClick: Mock }> = {
 		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: trigger }));
 	},
 };
+
+export const testA11y: StoryObj = {
+	name: "test: listbox, label, multiple stays open",
+	render: () => (
+		<View gap={4}>
+			<FormControl>
+				<FormControl.Label>Animal</FormControl.Label>
+				<Select name="animal" placeholder="Select an animal">
+					<Select.Option value="dog">Dog</Select.Option>
+					<Select.Option value="turtle">Turtle</Select.Option>
+				</Select>
+				<FormControl.Helper>Caption</FormControl.Helper>
+			</FormControl>
+
+			<Select multiple name="animals" placeholder="Select animals" defaultValue={[]}>
+				<Select.Option value="dog">Dog</Select.Option>
+				<Select.Option value="turtle">Turtle</Select.Option>
+			</Select>
+		</View>
+	),
+	play: async ({ canvas, canvasElement }) => {
+		const body = within(canvasElement.ownerDocument.body);
+		const [trigger, multipleTrigger] = canvas.getAllByRole("button");
+
+		expect(trigger).toHaveAccessibleName("Animal Select an animal");
+		expect(trigger).toHaveAccessibleDescription("Caption");
+		expect(trigger).toHaveAttribute("aria-haspopup", "listbox");
+
+		await userEvent.click(trigger);
+
+		await waitFor(() => {
+			expect(body.getByRole("listbox")).not.toHaveAttribute("aria-multiselectable");
+		});
+
+		await userEvent.click(body.getByRole("option", { name: "Dog" }));
+
+		await waitFor(() => {
+			expect(body.queryByRole("listbox")).not.toBeInTheDocument();
+		});
+
+		await userEvent.click(multipleTrigger);
+
+		await waitFor(() => {
+			expect(body.getByRole("listbox")).toHaveAttribute("aria-multiselectable", "true");
+		});
+
+		await userEvent.click(body.getByRole("option", { name: "Dog" }));
+		await userEvent.click(body.getByRole("option", { name: "Turtle" }));
+
+		const listbox = body.getByRole("listbox");
+		expect(listbox).toBeInTheDocument();
+		expect(body.getByRole("option", { name: "Dog" })).toHaveAttribute("aria-selected", "true");
+		expect(body.getByRole("option", { name: "Turtle" })).toHaveAttribute("aria-selected", "true");
+	},
+};
+
+export const testWithoutPlaceholder: StoryObj = {
+	name: "test: without placeholder",
+	render: () => (
+		<Select name="animal">
+			<Select.Group label="Mammals">
+				<Select.Option value="dog">Dog</Select.Option>
+				<Select.Option value="cat">Cat</Select.Option>
+			</Select.Group>
+			<Select.Group label="Reptiles">
+				<Select.Option value="turtle">Turtle</Select.Option>
+			</Select.Group>
+		</Select>
+	),
+	play: async ({ canvasElement }) => {
+		const trigger = canvasElement.querySelector('[aria-haspopup="listbox"]');
+		const hiddenInput = canvasElement.querySelector('input[type="hidden"]');
+
+		// Displayed and submitted values should match
+		expect(trigger).toHaveTextContent("Dog");
+		expect(trigger).not.toHaveTextContent("Turtle");
+		expect(hiddenInput).toHaveValue("dog");
+	},
+};

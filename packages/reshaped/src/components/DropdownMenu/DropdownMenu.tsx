@@ -16,6 +16,11 @@ import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
 const DropdownMenuSubTriggerContext = React.createContext<boolean>(false);
+/**
+ * Keeps the menu open after selecting an item, used by components built on top of DropdownMenu
+ * For example, Select with multiple selection
+ */
+export const DropdownMenuKeepOpenContext = React.createContext<boolean>(false);
 
 const DropdownMenu: React.FC<T.Props> = (props) => {
 	const {
@@ -95,12 +100,13 @@ export const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 	const { handleClose } = useFlyoutContext();
 	const { size: menuSize } = useDropdownMenu();
 	const subTriggerContext = React.useContext(DropdownMenuSubTriggerContext);
+	const keepOpen = React.useContext(DropdownMenuKeepOpenContext);
 
 	const handleClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
 		/**
 		 * Don't close the menu when clicking on a trigger of a submenu
 		 */
-		if (handleClose && !subTriggerContext) {
+		if (handleClose && !subTriggerContext && !keepOpen) {
 			handleClose({ closeParents: true, reason: "item-selection" });
 		}
 		if (onClick) onClick(e);
