@@ -53,6 +53,8 @@ const Switch: React.FC<T.Props> = (props) => {
 		<label {...attributes} className={rootClassNames}>
 			<input
 				type="checkbox"
+				// Native checkbox already exposes its checked state, so aria-checked isn't needed
+				// oxlint-disable-next-line jsx-a11y/role-has-required-aria-props
 				role="switch"
 				{...inputAttributes}
 				className={s.input}
