@@ -40,6 +40,10 @@ const FlyoutTrigger: React.FC<T.TriggerProps> = (props) => {
 	if ((triggerType === "hover" && !isSubmenu) || triggerType === "focus") {
 		childrenAttributes.onFocus = handleFocus;
 		childrenAttributes.onBlur = handleBlur;
+	}
+
+	// Focus triggers are linked to their content with aria-controls instead
+	if (triggerType === "hover" && !isSubmenu) {
 		childrenAttributes["aria-describedby"] = active ? id : undefined;
 	}
 

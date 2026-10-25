@@ -1383,3 +1383,98 @@ export const testChangeSize = {
 		);
 	},
 };
+
+export const testRoles: StoryObj = {
+	name: "test: content roles",
+	render: () => (
+		<View gap={4} direction="row">
+			<Flyout triggerType="hover" active>
+				<Flyout.Trigger>
+					{(attributes) => <Button attributes={attributes}>Tooltip</Button>}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<Content>
+						Tooltip content <button type="button">Inside tooltip</button>
+					</Content>
+				</Flyout.Content>
+			</Flyout>
+
+			<Flyout triggerType="hover" trapFocusMode="action-menu" active>
+				<Flyout.Trigger>
+					{(attributes) => <Button attributes={attributes}>Menu</Button>}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<Content>Menu content</Content>
+				</Flyout.Content>
+			</Flyout>
+
+			<Flyout triggerType="hover" trapFocusMode="content-menu" active>
+				<Flyout.Trigger>
+					{(attributes) => <Button attributes={attributes}>Content menu</Button>}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<Content>Content menu content</Content>
+				</Flyout.Content>
+			</Flyout>
+		</View>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await waitFor(() => {
+			expect(canvas.getByRole("tooltip")).toHaveTextContent("Tooltip content");
+		});
+
+		expect(canvas.getAllByRole("tooltip")).toHaveLength(1);
+		expect(canvas.getByRole("menu")).toHaveTextContent("Menu content");
+		expect(canvas.getByText("Content menu content").closest('[role="tooltip"]')).toBeNull();
+
+		// Tooltips don't trap focus, even with interactive content inside
+		expect(canvas.getByText("Inside tooltip")).not.toHaveFocus();
+	},
+};
+
+export const testEscape: StoryObj<{
+	handleCloseFirst: ReturnType<typeof fn>;
+	handleCloseSecond: ReturnType<typeof fn>;
+}> = {
+	name: "test: escape closes the latest flyout",
+	args: {
+		handleCloseFirst: fn(),
+		handleCloseSecond: fn(),
+	},
+	render: (args) => (
+		<View gap={4} direction="row">
+			<Flyout triggerType="hover" active onClose={args.handleCloseFirst}>
+				<Flyout.Trigger>
+					{(attributes) => <Button attributes={attributes}>First</Button>}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<Content>First content</Content>
+				</Flyout.Content>
+			</Flyout>
+
+			<Flyout triggerType="hover" active onClose={args.handleCloseSecond}>
+				<Flyout.Trigger>
+					{(attributes) => <Button attributes={attributes}>Second</Button>}
+				</Flyout.Trigger>
+				<Flyout.Content>
+					<Content>Second content</Content>
+				</Flyout.Content>
+			</Flyout>
+		</View>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await waitFor(() => {
+			expect(canvas.getAllByRole("tooltip")).toHaveLength(2);
+		});
+
+		await userEvent.keyboard("{Escape}");
+
+		expect(args.handleCloseFirst).not.toHaveBeenCalled();
+		expect(args.handleCloseSecond).toHaveBeenCalledTimes(1);
+		expect(args.handleCloseSecond).toHaveBeenCalledWith({ reason: "escape-key" });
+	},
+};

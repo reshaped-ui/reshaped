@@ -43,19 +43,26 @@ const useIsDismissible = (args: { active?: boolean; contentRef: Ref; triggerRef?
 		return () => removeFromQueue(id);
 	}, [active, id, contentRef, triggerRef]);
 
-	return React.useCallback(() => {
-		if (!active) return true;
+	return React.useCallback(
+		/**
+		 * Strict mode only allows the latest element to be dismissed,
+		 * even if it's not nested in the other elements, e.g. for closing with Escape
+		 */
+		(options?: { strict?: boolean }) => {
+			if (!active) return true;
 
-		const latest = latestId ? queue[latestId] : undefined;
-		const latestTrigger = latest?.triggerRef?.current;
-		const prev = latest?.parentId ? queue[latest.parentId] : undefined;
-		const prevContent = prev?.contentRef.current;
-		const nested = prevContent && latestTrigger && prevContent.contains(latestTrigger);
+			const latest = latestId ? queue[latestId] : undefined;
+			const latestTrigger = latest?.triggerRef?.current;
+			const prev = latest?.parentId ? queue[latest.parentId] : undefined;
+			const prevContent = prev?.contentRef.current;
+			const nested = prevContent && latestTrigger && prevContent.contains(latestTrigger);
 
-		// Don't block independently rendered components that are not nested in each other
-		if (triggerRef?.current && !nested) return true;
-		return !latestId || latestId === id;
-	}, [id, active, triggerRef]);
+			// Don't block independently rendered components that are not nested in each other
+			if (!options?.strict && triggerRef?.current && !nested) return true;
+			return !latestId || latestId === id;
+		},
+		[id, active, triggerRef]
+	);
 };
 
 export default useIsDismissible;
