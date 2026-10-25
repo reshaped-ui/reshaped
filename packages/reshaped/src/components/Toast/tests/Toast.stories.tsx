@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Dismissible from "@/components/Dismissible";
@@ -8,6 +8,7 @@ import Image from "@/components/Image";
 import Text from "@/components/Text";
 import { ToastProvider, useToast } from "@/components/Toast";
 import View from "@/components/View";
+import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 import IconZap from "@/icons/Zap";
 
@@ -541,4 +542,102 @@ export const edgeCases: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
+};
+
+const ShowToast: React.FC<{ timeout?: number }> = (props) => {
+	const toast = useToast();
+
+	return (
+		<Button
+			onClick={() => {
+				toast.show({
+					text: "Test toast",
+					timeout: props.timeout ?? 0,
+					actionsSlot: <Button onClick={() => {}}>Toast action</Button>,
+				});
+			}}
+		>
+			Show toast
+		</Button>
+	);
+};
+
+export const testPauseRemainingTime: StoryObj = {
+	name: "test: hover pauses the remaining time",
+	render: () => <ShowToast timeout={1000} />,
+	play: async ({ canvas, canvasElement }) => {
+		const body = within(canvasElement.ownerDocument.body);
+
+		await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
+		const toastText = await body.findByText("Test toast");
+		const region = toastText.closest('[role="region"]')!;
+
+		await sleep(700);
+		// React handles mouseenter and mouseleave based on the mouseover and mouseout events
+		fireEvent.mouseOver(region);
+		await sleep(500);
+
+		// Timer is paused while hovered
+		expect(body.getByText("Test toast")).toBeInTheDocument();
+		fireEvent.mouseOut(region, { relatedTarget: canvasElement.ownerDocument.body });
+
+		// Only the remaining ~300ms are left after resuming instead of the full timeout
+		await waitFor(
+			() => {
+				expect(body.queryByText("Test toast")).not.toBeInTheDocument();
+			},
+			{ timeout: 800 }
+		);
+	},
+};
+
+export const testBlurWhileHovered: StoryObj = {
+	name: "test: blur while hovered keeps the timer paused",
+	render: () => (
+		<View gap={2} direction="row">
+			<ShowToast timeout={500} />
+			<Button onClick={() => {}}>Outside</Button>
+		</View>
+	),
+	play: async ({ canvas, canvasElement }) => {
+		const body = within(canvasElement.ownerDocument.body);
+
+		await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
+		const toastText = await body.findByText("Test toast");
+		const region = toastText.closest('[role="region"]')!;
+
+		fireEvent.mouseOver(region);
+		await sleep(50);
+		body.getByRole("button", { name: "Toast action" }).focus();
+		await sleep(50);
+		canvas.getByRole("button", { name: "Outside" }).focus();
+
+		await sleep(800);
+		expect(body.getByText("Test toast").closest("li")).not.toHaveStyle({ height: "0px" });
+
+		fireEvent.mouseOut(region, { relatedTarget: canvasElement.ownerDocument.body });
+	},
+};
+
+export const testRemoveWithoutHeightTransition: StoryObj = {
+	name: "test: removed without height transition",
+	render: () => (
+		<>
+			<style>{`[role="region"] li, [role="region"] li * { transition-property: opacity !important; }`}</style>
+			<ShowToast timeout={300} />
+		</>
+	),
+	play: async ({ canvas, canvasElement }) => {
+		const body = within(canvasElement.ownerDocument.body);
+
+		await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
+		await body.findByText("Test toast");
+
+		await waitFor(
+			() => {
+				expect(body.queryByText("Test toast")).not.toBeInTheDocument();
+			},
+			{ timeout: 1500 }
+		);
+	},
 };

@@ -25,6 +25,10 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	const { show, hide, remove } = React.useContext(ToastContext);
 	const [toastHeight, setToastHeight] = React.useState<number>();
 	const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null);
+	// Time left before hiding the toast, preserved when the timer gets paused
+	const remainingTimeRef = React.useRef<number | null>(null);
+	const timerStartRef = React.useRef(0);
+	const rootRef = React.useRef<HTMLLIElement>(null);
 	const resizingRef = React.useRef(false);
 	const wrapperRef = React.useRef<HTMLDivElement>(null);
 	const visible = status === "entered";
@@ -40,6 +44,11 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	const stopTimer = React.useCallback(() => {
 		if (!timeoutRef.current) return;
 		clearTimeout(timeoutRef.current);
+		timeoutRef.current = null;
+
+		if (remainingTimeRef.current !== null) {
+			remainingTimeRef.current -= Date.now() - timerStartRef.current;
+		}
 	}, []);
 
 	const startTimer = React.useCallback(() => {
@@ -48,6 +57,12 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 		const timeoutValue = typeof timeout === "string" ? timeouts[timeout] : timeout;
 		if (timeout === 0) return;
 
+		// Resume the paused timer instead of starting it over
+		remainingTimeRef.current = Math.max(
+			0,
+			remainingTimeRef.current ?? timeoutValue ?? timeouts.short
+		);
+		timerStartRef.current = Date.now();
 		timeoutRef.current = setTimeout(() => {
 			if (!checkTransitions()) {
 				remove(id);
@@ -55,7 +70,7 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 			}
 
 			hide(id);
-		}, timeoutValue ?? timeouts.short);
+		}, remainingTimeRef.current);
 	}, [hide, id, remove, timeout, stopTimer]);
 
 	React.useEffect(() => stopTimer, [stopTimer]);
@@ -65,6 +80,29 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 
 		if (visible) return;
 		remove(id);
+	};
+
+	/**
+	 * Height transition might be missing, e.g. when it's removed with custom styles,
+	 * so there won't be a transitionend event to remove the toast after hiding it
+	 */
+	React.useEffect(() => {
+		if (status !== "exiting") return;
+
+		onNextFrame(() => {
+			const animations = rootRef.current?.getAnimations?.() ?? [];
+			const hasHeightTransition = animations.some(
+				(animation) => (animation as CSSTransition).transitionProperty === "height"
+			);
+
+			if (!hasHeightTransition) remove(id);
+		});
+	}, [status, id, remove]);
+
+	const handleBlur = () => {
+		// Region is still hovered, so the timer resumes once the mouse leaves it
+		if (inspected) return;
+		startTimer();
 	};
 
 	React.useEffect(() => {
@@ -119,6 +157,7 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	return (
 		// oxlint-disable-next-line no-noninteractive-element-interactions
 		<li
+			ref={rootRef}
 			className={containerClassNames}
 			style={{
 				width: resolvedWidth,
@@ -131,7 +170,7 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 			}}
 			onTransitionEnd={handleTransitionEnd}
 			onFocus={stopTimer}
-			onBlur={startTimer}
+			onBlur={handleBlur}
 		>
 			<span className={s.wrapper}>
 				<Toast
