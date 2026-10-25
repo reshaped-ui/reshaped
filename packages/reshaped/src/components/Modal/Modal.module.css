@@ -106,9 +106,13 @@
 			transform: translate(100%, 0);
 		}
 
-		&.--active,
-		[dir="rtl"] &.--active {
+		&.--active {
 			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0);
+		}
+
+		/* Start drawer is attached to the right side in rtl, so it's dragged in the opposite direction */
+		[dir="rtl"] &.--active {
+			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0);
 		}
 	}
 
@@ -134,9 +138,13 @@
 			transform: translate(-100%, 0);
 		}
 
-		&.--active,
-		[dir="rtl"] &.--active {
+		&.--active {
 			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0);
+		}
+
+		/* End drawer is attached to the left side in rtl, so it's dragged in the opposite direction */
+		[dir="rtl"] &.--active {
+			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0);
 		}
 	}
 

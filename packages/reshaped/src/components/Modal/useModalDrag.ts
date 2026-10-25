@@ -6,6 +6,7 @@ import { enableScroll, disableScroll } from "@reshaped/utilities/internal";
 import type { OverlayInstance } from "@/components/Overlay";
 import useHandlerRef from "@/hooks/useHandlerRef";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import useRTL from "@/hooks/useRTL";
 import { resolveSpringTransition } from "@/utilities/animation";
 import type * as T from "./Modal.types";
 
@@ -107,9 +108,11 @@ const useModalDrag = (args: {
 	const [dragging, setDragging] = useState(false);
 	const stateRef = useRef<State>(getInitialState());
 	const frameRef = useRef<number | null>(null);
+	const [rtl] = useRTL();
 	const axis: "x" | "y" = position === "bottom" ? "y" : "x";
-	// Start drawers close towards the negative coordinates
-	const closingSign = position === "start" ? -1 : 1;
+	// Drawers attached to the left side close towards the negative coordinates
+	const leftSide = rtl ? position === "end" : position === "start";
+	const closingSign = leftSide ? -1 : 1;
 
 	const render = useCallback(() => {
 		const rootEl = rootRef.current;
@@ -194,7 +197,7 @@ const useModalDrag = (args: {
 		}
 
 		// Prevent the drag handling when browser is trying to navigate to a previous page
-		if (position === "start" && touch.clientX < EDGE_BOUNDARY) return;
+		if (axis === "x" && closingSign === -1 && touch.clientX < EDGE_BOUNDARY) return;
 
 		// Measured before the state is replaced, a transition in flight resolves to its current position
 		const seed = active && rootEl ? getRenderedOffset(rootEl, { axis, closingSign }) : 0;

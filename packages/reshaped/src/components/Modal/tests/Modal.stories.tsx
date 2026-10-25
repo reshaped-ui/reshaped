@@ -10,6 +10,7 @@ import Radio from "@/components/Radio";
 import Switch from "@/components/Switch";
 import TextField from "@/components/TextField";
 import View from "@/components/View";
+import useRTL from "@/hooks/useRTL";
 import useToggle from "@/hooks/useToggle";
 import { sleep } from "@/utilities/helpers";
 import { Example, Placeholder } from "@/utilities/storybook";
@@ -364,7 +365,7 @@ export const handlers: StoryObj<{
 		await userEvent.click(trigger);
 		await sleep(100);
 
-		const overlay = canvas.getAllByRole("button", { hidden: true }).at(-1)!;
+		const overlay = canvas.getAllByRole("presentation", { hidden: true }).at(-1)!;
 
 		// Close by clicking on the overlay
 		await userEvent.click(overlay);
@@ -556,5 +557,58 @@ export const trapFocusEdgeCases = {
 				</Example.Item>
 			</Example>
 		);
+	},
+};
+
+const RTLDrawer: React.FC<{ position: "start" | "end" }> = (props) => {
+	const [, setRTL] = useRTL();
+
+	React.useEffect(() => {
+		setRTL(true);
+		return () => setRTL(false);
+	}, [setRTL]);
+
+	return (
+		<Modal active position={props.position} attributes={{ "data-testid": props.position }}>
+			<View height="200px">{props.position} drawer</View>
+		</Modal>
+	);
+};
+
+const dispatchTouch = (el: Element, type: string, clientX: number) => {
+	const touch = new Touch({ identifier: 1, target: el, clientX, clientY: 100 });
+
+	el.dispatchEvent(
+		new TouchEvent(type, {
+			touches: type === "touchend" ? [] : [touch],
+			targetTouches: type === "touchend" ? [] : [touch],
+			changedTouches: [touch],
+			bubbles: true,
+			cancelable: true,
+		})
+	);
+};
+
+export const testRTLSwipe: StoryObj<{ position: "start" | "end" }> = {
+	name: "test: rtl swipe direction",
+	args: { position: "start" },
+	render: (args) => <RTLDrawer position={args.position} />,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const modal = await canvas.findByTestId("start");
+
+		await sleep(400);
+
+		// Start drawer is attached to the right side in rtl, so it closes by swiping right
+		dispatchTouch(modal, "touchstart", 400);
+		await sleep(50);
+		dispatchTouch(modal, "touchmove", 450);
+		dispatchTouch(modal, "touchmove", 500);
+
+		await waitFor(() => {
+			expect(parseFloat(modal.style.getPropertyValue("--rs-modal-drag"))).toBeGreaterThan(0);
+		});
+
+		dispatchTouch(modal, "touchend", 500);
 	},
 };
