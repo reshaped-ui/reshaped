@@ -4,6 +4,7 @@ import React from "react";
 
 import useElementId from "@/hooks/useElementId";
 import { useFormControl } from "../FormControl";
+import { getInputAttributes } from "../FormControl/FormControl.utilities";
 import type * as T from "./Select.types";
 import SelectCustom from "./SelectCustom";
 import SelectNative from "./SelectNative";
@@ -15,12 +16,17 @@ function Select(props: T.CustomUncontrolledProps): React.JSX.Element;
 function Select(passedProps: T.Props): React.JSX.Element {
 	const formControl = useFormControl();
 	const internalId = useElementId(passedProps.id);
+	const hasError = formControl?.hasError || passedProps.hasError;
 	const props = {
 		...passedProps,
 		id: formControl?.attributes?.id || passedProps.inputAttributes?.id || internalId,
 		disabled: formControl?.disabled || passedProps.disabled,
-		hasError: formControl?.hasError || passedProps.hasError,
-		inputAttributes: { ...passedProps.inputAttributes, ...formControl?.attributes },
+		hasError,
+		inputAttributes: getInputAttributes({
+			attributes: passedProps.inputAttributes,
+			formControl,
+			hasError,
+		}),
 	};
 	const { children } = props;
 

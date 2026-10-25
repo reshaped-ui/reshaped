@@ -3,7 +3,8 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { useFormControl } from "@/components/FormControl";
+import { useFormControlPrivate } from "@/components/FormControl/FormControl.context";
+import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
 import HiddenInput from "@/components/HiddenInput";
 import { useRadioGroup } from "@/components/RadioGroup";
 import Text from "@/components/Text";
@@ -21,13 +22,15 @@ const Radio: React.FC<T.Props> = (props) => {
 		attributes,
 		inputAttributes,
 	} = props;
-	const formControl = useFormControl();
+	const formControl = useFormControlPrivate();
 	const radioGroup = useRadioGroup();
 	const hasError = formControl?.hasError || props.hasError || radioGroup?.hasError;
 	const disabled = formControl?.disabled || props.disabled || radioGroup?.disabled;
 	const checked = radioGroup ? radioGroup.value === value : props.checked;
 	const defaultChecked = radioGroup ? undefined : props.defaultChecked;
 	const name = radioGroup ? radioGroup.name : props.name;
+	// FormControl label and captions are only linked to a single radio, groups use fieldset instead
+	const grouped = formControl.group || !!radioGroup;
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -48,7 +51,11 @@ const Radio: React.FC<T.Props> = (props) => {
 					disabled={disabled}
 					value={value}
 					onChange={onChange}
-					attributes={inputAttributes}
+					attributes={getInputAttributes({
+						attributes: inputAttributes,
+						formControl: grouped ? { attributes: {} } : formControl,
+						hasError,
+					})}
 				/>
 				<div className={s.decorator}>
 					<span className={s.dot} />

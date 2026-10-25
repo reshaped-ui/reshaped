@@ -4,6 +4,7 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
+import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
 import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames } from "@/utilities/props";
 import { resolveMixin } from "@/styles/mixin";
@@ -35,7 +36,11 @@ const TextArea: React.FC<T.Props> = (props) => {
 		borderColor: disabled ? "disabled" : "neutral",
 		border: variant === "outline" ? true : undefined,
 	});
-	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
+	const inputAttributes = getInputAttributes({
+		attributes: props.inputAttributes,
+		formControl,
+		hasError,
+	});
 	const rootClassName = classNames(
 		s.root,
 		size && responsiveClassNames(s, "--size", size),

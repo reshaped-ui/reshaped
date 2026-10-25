@@ -4,7 +4,8 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
-import { useFormControl } from "@/components/FormControl";
+import { useFormControlPrivate } from "@/components/FormControl/FormControl.context";
+import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
 import HiddenInput from "@/components/HiddenInput";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
@@ -27,13 +28,15 @@ const Checkbox: React.FC<T.Props> = (props) => {
 	} = props;
 
 	const checkboxGroup = useCheckboxGroup();
-	const formControl = useFormControl();
+	const formControl = useFormControlPrivate();
 	const hasError = formControl?.hasError || props.hasError || checkboxGroup?.hasError;
 	const disabled = formControl?.disabled || props.disabled || checkboxGroup?.disabled;
 	const checked = checkboxGroup ? checkboxGroup.value?.includes(value!) : props.checked;
 	const defaultChecked = checkboxGroup ? undefined : props.defaultChecked;
 	const name = checkboxGroup ? checkboxGroup.name : props.name;
 	const inputRef = React.useRef<HTMLInputElement>(null);
+	// FormControl label and captions are only linked to a single checkbox, groups use fieldset instead
+	const grouped = formControl.group || !!checkboxGroup;
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -59,7 +62,11 @@ const Checkbox: React.FC<T.Props> = (props) => {
 					value={value}
 					onChange={onChange}
 					attributes={{
-						...inputAttributes,
+						...getInputAttributes({
+							attributes: inputAttributes,
+							formControl: grouped ? { attributes: {} } : formControl,
+							hasError,
+						}),
 						ref: inputRef,
 					}}
 				/>

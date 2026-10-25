@@ -4,6 +4,7 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
+import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
 import Text from "@/components/Text";
 import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
@@ -32,7 +33,11 @@ const Switch: React.FC<T.Props> = (props) => {
 	const id = useElementId(
 		formControl?.attributes.id || props.id || (props.inputAttributes?.id as string | undefined)
 	);
-	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
+	const inputAttributes = getInputAttributes({
+		attributes: props.inputAttributes,
+		formControl,
+		hasError: formControl.hasError,
+	});
 	const disabled = formControl?.disabled || props.disabled;
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

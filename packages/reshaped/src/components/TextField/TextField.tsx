@@ -4,6 +4,7 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 
 import { useFormControl } from "@/components/FormControl";
+import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
 import Icon from "@/components/Icon";
 import useElementId from "@/hooks/useElementId";
 import { responsiveClassNames, responsivePropDependency } from "@/utilities/props";
@@ -97,7 +98,11 @@ const TextField: React.FC<T.Props> = (props) => {
 		borderColor: disabled ? "disabled" : "neutral",
 		border: variant === "outline" ? true : undefined,
 	});
-	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
+	const inputAttributes = getInputAttributes({
+		attributes: props.inputAttributes,
+		formControl,
+		hasError,
+	});
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -142,7 +147,7 @@ const TextField: React.FC<T.Props> = (props) => {
 				slot={startSlot}
 				size={size}
 				affix={prefix}
-				id={id}
+				id={inputId}
 			/>
 
 			<div className={s.inner}>
@@ -166,7 +171,7 @@ const TextField: React.FC<T.Props> = (props) => {
 					slot={endSlot}
 					size={size}
 					affix={suffix}
-					id={id}
+					id={inputId}
 				/>
 			</div>
 		</div>

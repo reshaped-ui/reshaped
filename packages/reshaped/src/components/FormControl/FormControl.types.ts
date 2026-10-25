@@ -42,6 +42,6 @@ export type Context = {
 	required?: boolean;
 	group?: boolean;
 	attributes: Attributes & { id: string };
-	helperRef: () => void;
-	errorRef: () => void;
+	helperRef: (el: HTMLElement | null) => void;
+	errorRef: (el: HTMLElement | null) => void;
 } & Pick<Props, "hasError" | "disabled" | "size">;

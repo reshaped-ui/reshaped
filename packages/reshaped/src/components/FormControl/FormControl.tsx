@@ -21,15 +21,16 @@ const FormControl: React.FC<T.Props> = (props) => {
 	]
 		.filter(Boolean)
 		.join(" ");
-	const attributes = { id, "aria-describedby": describedby };
+	const attributes = { id, "aria-describedby": describedby || undefined };
 
-	const errorRef = () => {
-		setErrorRendered(true);
-	};
+	// Stable refs, so they're only called when the captions mount and unmount
+	const errorRef = React.useCallback((el: HTMLElement | null) => {
+		setErrorRendered(!!el);
+	}, []);
 
-	const helperRef = () => {
-		setHelperRendered(true);
-	};
+	const helperRef = React.useCallback((el: HTMLElement | null) => {
+		setHelperRendered(!!el);
+	}, []);
 
 	return (
 		<WrapperTagName
