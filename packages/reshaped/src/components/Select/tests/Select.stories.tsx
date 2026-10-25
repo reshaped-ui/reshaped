@@ -982,7 +982,13 @@ export const testA11y: StoryObj = {
 				<FormControl.Helper>Caption</FormControl.Helper>
 			</FormControl>
 
-			<Select multiple name="animals" placeholder="Select animals" defaultValue={[]}>
+			<Select
+				multiple
+				name="animals"
+				placeholder="Select animals"
+				defaultValue={[]}
+				renderValue={(args) => args.value.join(", ")}
+			>
 				<Select.Option value="dog">Dog</Select.Option>
 				<Select.Option value="turtle">Turtle</Select.Option>
 			</Select>
