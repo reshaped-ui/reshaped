@@ -53,6 +53,7 @@ const Switch: React.FC<T.Props> = (props) => {
 		<label {...attributes} className={rootClassNames}>
 			<input
 				type="checkbox"
+				role="switch"
 				{...inputAttributes}
 				className={s.input}
 				name={name}
