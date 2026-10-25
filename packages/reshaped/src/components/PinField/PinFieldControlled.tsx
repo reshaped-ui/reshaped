@@ -151,20 +151,49 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	};
 
 	const handlePaste = (e: React.ClipboardEvent) => {
-		if (focusedIndex === null || !inputRef.current) return;
+		const el = inputRef.current;
+		if (focusedIndex === null || !el) return;
+
+		/**
+		 * Pasted codes are often formatted with whitespace, e.g. "123 456", so it gets removed before validation
+		 */
+		const pastedData = e.clipboardData.getData("text");
+		const data = pastedData.replace(/\s/g, "");
 
 		/**
 		 * Input might not have enough space for pasting the value so we free up space based on the pasted value length
 		 */
-		const data = e.clipboardData.getData("text");
 		const updatedValue = value.slice(0, focusedIndex) + value.slice(focusedIndex + data.length);
+
+		if (data !== pastedData) {
+			/**
+			 * Native paste would insert the whitespace, so the value is inserted manually
+			 * and the input event is triggered to go through the same validation as typing
+			 */
+			e.preventDefault();
+
+			const nextValue = (
+				updatedValue.slice(0, focusedIndex) +
+				data +
+				updatedValue.slice(focusedIndex)
+			).slice(0, valueLength);
+			const nativeValueSetter = Object.getOwnPropertyDescriptor(
+				window.HTMLInputElement.prototype,
+				"value"
+			)!.set!;
+
+			nativeValueSetter.call(el, nextValue);
+			el.setSelectionRange(focusedIndex + data.length, focusedIndex + data.length);
+			el.dispatchEvent(new Event("input", { bubbles: true }));
+			return;
+		}
 
 		/**
 		 * Manually update the value and selection to preserve all not affected values and keep caret in the correct position
 		 */
 
-		inputRef.current.value = updatedValue;
-		inputRef.current.selectionEnd = focusedIndex;
+		el.value = updatedValue;
+		el.selectionEnd = focusedIndex;
 	};
 
 	const handleInput = (event: React.InputEvent<HTMLInputElement>) => {

@@ -431,3 +431,21 @@ export const testSwipe = {
 		);
 	},
 };
+
+export const testRangeBoundaries: StoryObj = {
+	name: "test: range thumbs boundaries",
+	render: () => (
+		<View paddingTop={10}>
+			<Slider range name="test-name" defaultMinValue={20} defaultMaxValue={60} />
+		</View>
+	),
+	play: async ({ canvas }) => {
+		const [minInput, maxInput] = canvas.getAllByRole("slider");
+
+		// Keyboard navigation is bound by the native input range
+		expect(minInput).toHaveAttribute("min", "0");
+		expect(minInput).toHaveAttribute("max", "60");
+		expect(maxInput).toHaveAttribute("min", "20");
+		expect(maxInput).toHaveAttribute("max", "100");
+	},
+};

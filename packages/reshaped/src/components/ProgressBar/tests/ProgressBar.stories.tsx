@@ -126,3 +126,14 @@ export const className: StoryObj = {
 		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
+
+export const testMin: StoryObj = {
+	name: "test: min, max",
+	render: () => <ProgressBar value={75} min={50} max={100} ariaLabel="Progress" />,
+	play: async ({ canvas }) => {
+		const progress = canvas.getByRole("progressbar");
+		const valueEl = progress.firstElementChild as HTMLElement;
+
+		expect(valueEl.style.getPropertyValue("--rs-progress-value")).toBe("-50%");
+	},
+};

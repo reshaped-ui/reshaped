@@ -285,3 +285,39 @@ export const keyboard: StoryObj = {
 		});
 	},
 };
+
+export const testPaste: StoryObj<{ handleChange?: ReturnType<typeof fn> }> = {
+	name: "test: paste with whitespace",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<PinField
+			name="test-name"
+			onChange={args.handleChange}
+			inputAttributes={{ "aria-label": "Label" }}
+		/>
+	),
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("textbox");
+
+		input.focus();
+
+		// Native clipboard event, to read the data the same way as the browser paste does
+		const clipboardData = new DataTransfer();
+		clipboardData.setData("text/plain", "12 34");
+		await waitFor(() => {
+			input.dispatchEvent(
+				new ClipboardEvent("paste", { clipboardData, bubbles: true, cancelable: true })
+			);
+			expect(args.handleChange).toHaveBeenCalled();
+		});
+
+		expect(args.handleChange).toHaveBeenLastCalledWith(
+			expect.objectContaining({ name: "test-name", value: "1234" })
+		);
+		await waitFor(() => {
+			expect(input).toHaveValue("1234");
+		});
+	},
+};
