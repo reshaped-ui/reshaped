@@ -9,7 +9,7 @@ import useFadeSide from "@/hooks/_internal/useFadeSide";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useKeyboardArrowNavigation from "@/hooks/useKeyboardArrowNavigation";
 import useRTL from "@/hooks/useRTL";
-import { checkTransitions } from "@/utilities/animation";
+import { checkTransitions, onNextFrame } from "@/utilities/animation";
 import IconChevronLeft from "@/icons/ChevronLeft";
 import IconChevronRight from "@/icons/ChevronRight";
 import type * as T from "./Tabs.types";
@@ -41,6 +41,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 	const [rtl] = useRTL();
 	const fadeSide = useFadeSide(elScrollableRef, { disabled: itemWidth === "equal" });
 	const listRef = React.useRef<HTMLDivElement>(null);
+	const selectorRef = React.useRef<HTMLDivElement>(null);
 	const rootClassNames = classNames(
 		s.root,
 		size && s[`--size-${size}`],
@@ -80,6 +81,21 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 			status: "idle",
 		}));
 	};
+
+	// Selector transition might be removed with custom styles, so there won't be a transitionend event
+	React.useEffect(() => {
+		if (selection.status !== "animated") return;
+
+		onNextFrame(() => {
+			if (selectorRef.current?.getAnimations?.().length) return;
+
+			setSelection((selectionStyle) =>
+				selectionStyle.status === "animated"
+					? { ...selectionStyle, status: "idle" }
+					: selectionStyle
+			);
+		});
+	}, [selection.status, setSelection]);
 
 	const getElementSelectionStyle = React.useCallback(
 		(el: HTMLElement): Pick<T.SelectionState, "scaleX" | "scaleY" | "left" | "top"> | null => {
@@ -168,6 +184,7 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 
 					{!disableSelectionAnimation && (
 						<div
+							ref={selectorRef}
 							onTransitionEnd={handleTransitionEnd}
 							className={selectorClassNames}
 							style={

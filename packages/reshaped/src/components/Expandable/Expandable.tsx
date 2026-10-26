@@ -19,6 +19,8 @@ const Expandable: React.FC<T.Props> = (props) => {
 	const mountedRef = React.useRef(false);
 	const animatedActiveRef = React.useRef(active);
 	const frameRef = React.useRef<number | null>(null);
+	// Size transition that hasn't finished yet, used to settle it when transitionend doesn't happen
+	const pendingTransitionRef = React.useRef(false);
 	const onAfterCloseRef = useHandlerRef(onAfterClose);
 	const [animatedSize, setAnimatedSize] = React.useState<React.CSSProperties["height"] | null>(
 		active ? autoSize : null
@@ -36,6 +38,7 @@ const Expandable: React.FC<T.Props> = (props) => {
 	const handleTransitionEnd = (e: React.TransitionEvent) => {
 		if (e.propertyName !== sizeProperty || e.target !== rootRef.current) return;
 
+		pendingTransitionRef.current = false;
 		setAnimatedSize(active ? autoSize : null);
 		if (!active) onAfterCloseRef.current?.();
 	};
@@ -60,6 +63,7 @@ const Expandable: React.FC<T.Props> = (props) => {
 
 		if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
 		frameRef.current = null;
+		pendingTransitionRef.current = false;
 
 		const settle = () => {
 			rootEl.style[sizeProperty] = "";
@@ -87,7 +91,21 @@ const Expandable: React.FC<T.Props> = (props) => {
 
 		frameRef.current = requestAnimationFrame(() => {
 			frameRef.current = null;
+			pendingTransitionRef.current = true;
 			setAnimatedSize(targetSize);
+
+			// Size transition might be removed with custom styles, so there won't be a transitionend event
+			onNextFrame(() => {
+				if (!pendingTransitionRef.current || animatedActiveRef.current !== active) return;
+
+				const transitioning = rootEl
+					.getAnimations?.()
+					.some((animation) => (animation as CSSTransition).transitionProperty === sizeProperty);
+				if (transitioning) return;
+
+				pendingTransitionRef.current = false;
+				settle();
+			});
 		});
 	}, [active, horizontal, sizeProperty, autoSize, onAfterCloseRef]);
 

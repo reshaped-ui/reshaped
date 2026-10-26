@@ -45,6 +45,10 @@ const Divider: React.FC<T.Props> = (props) => {
 			{...attributes}
 			// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
 			role="separator"
+			// Separator content is presentational, so the label is passed as its accessible name
+			aria-label={
+				attributes?.["aria-label"] ?? (typeof children === "string" ? children : undefined)
+			}
 			aria-orientation={ariaOrientation}
 			className={rootClassNames}
 			style={{ ...attributes?.style, ...mixinStyles.variables } as StyleAttribute}
