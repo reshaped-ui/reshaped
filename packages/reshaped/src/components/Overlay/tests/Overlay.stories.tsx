@@ -290,6 +290,8 @@ export const className: StoryObj = {
 		const root = canvas.getByTestId("test-id");
 
 		expect(root).toHaveClass("test-classname");
+		// Backdrop click is a pointer shortcut, it shouldn't be announced as a button
+		expect(root).toHaveAttribute("role", "presentation");
 	},
 };
 

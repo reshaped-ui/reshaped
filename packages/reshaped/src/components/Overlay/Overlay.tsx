@@ -209,8 +209,8 @@ const Overlay: React.FC<T.Props> = (props) => {
 								"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
 							} as React.CSSProperties
 						}
-						// oxlint-disable-next-line jsx_a11y/prefer-tag-over-role
-						role="button"
+						// Clicking the backdrop is a pointer shortcut, keyboard users close it with Escape
+						role="presentation"
 						tabIndex={-1}
 						className={rootClassNames}
 						onMouseDown={handleMouseDown}
