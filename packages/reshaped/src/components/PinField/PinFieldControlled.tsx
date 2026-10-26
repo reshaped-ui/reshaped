@@ -3,7 +3,6 @@
 import React from "react";
 
 import { useFormControl } from "@/components/FormControl";
-import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
 import Text from "@/components/Text";
 import View from "@/components/View";
 import useHotkeys from "@/hooks/useHotkeys";
@@ -283,7 +282,8 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			{nodes}
 
 			<input
-				{...getInputAttributes({ attributes: inputAttributes, formControl, hasError })}
+				{...inputAttributes}
+				{...formControl.attributes}
 				type="text"
 				disabled={disabled}
 				className={s.input}
