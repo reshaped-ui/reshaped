@@ -9,7 +9,7 @@ const FormControlContext = React.createContext({ attributes: {} } as T.Context);
 export const Provider = FormControlContext.Provider;
 export const useFormControlPrivate = () => React.useContext(FormControlContext);
 export const useFormControl = () => {
-	const { attributes, required, hasError, disabled, group } = useFormControlPrivate();
+	const { attributes, required, hasError, disabled } = useFormControlPrivate();
 
-	return { attributes, required, hasError, disabled, group };
+	return { attributes, required, hasError, disabled };
 };

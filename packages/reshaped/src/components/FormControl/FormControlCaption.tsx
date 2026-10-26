@@ -8,8 +8,8 @@ import s from "./FormControl.module.css";
 
 const FormControlCaption: React.FC<T.PrivateCaptionProps> = (props) => {
 	const { children, variant, disabled } = props;
-	const { attributes, size, helperRef, errorRef } = useFormControlPrivate();
-	const id = getCaptionId(attributes.id, variant);
+	const { id: formControlId, size, helperRef, errorRef } = useFormControlPrivate();
+	const id = getCaptionId(formControlId, variant);
 	const isError = variant === "error";
 	const color = isError ? "critical" : "neutral-faded";
 	const ref = isError ? errorRef : helperRef;
