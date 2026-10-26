@@ -3,34 +3,6 @@ import { keys } from "@reshaped/utilities";
 
 import useHandlerRef from "./useHandlerRef";
 
-/**
- * Shared across all hook instances so disabled hooks don't need their own listeners.
- * Some components enable the hook between mousedown and click (e.g. Flyout with focus trigger opening on mousedown),
- * so they read the element of the last mousedown when they get enabled
- */
-let lastMouseDownEl: HTMLElement | undefined;
-let isTrackingMouseDown = false;
-
-const trackMouseDown = () => {
-	if (isTrackingMouseDown) return;
-	isTrackingMouseDown = true;
-
-	const handleMouseDown = (event: Event) => {
-		lastMouseDownEl = event.composedPath()[0] as HTMLElement | undefined;
-	};
-
-	document.addEventListener("mousedown", handleMouseDown, { passive: true, capture: true });
-	document.addEventListener("touchstart", handleMouseDown, { passive: true, capture: true });
-	document.addEventListener(
-		"keydown",
-		(event) => {
-			if (![keys.ENTER, keys.SPACE].includes(event.key)) return;
-			handleMouseDown(event);
-		},
-		{ passive: true, capture: true }
-	);
-};
-
 const useOnClickOutside = (
 	refs: React.RefObject<HTMLElement | null>[],
 	handler: (event: Event) => void,
@@ -41,11 +13,13 @@ const useOnClickOutside = (
 	/**
 	 * We're checking the element position in the DOM on mousedown to make sure
 	 * it happens before any other click events that could potentially remove the clicked el
-	 * before we checked if it's inside the refs
+	 * before we checked if it's inside the refs.
+	 * Null means there was no mousedown since the hook got enabled
 	 */
-	const isMouseDownInsideRef = React.useRef(false);
+	const isMouseDownInsideRef = React.useRef<boolean | null>(null);
 
-	const checkElInsideRefs = (eventEl?: HTMLElement) => {
+	const checkEventInsideRefs = (event: Event) => {
+		const eventEl = event.composedPath()[0] as HTMLElement | undefined;
 		if (!eventEl) return false;
 
 		return refs.some(
@@ -53,21 +27,14 @@ const useOnClickOutside = (
 		);
 	};
 
-	const checkEventInsideRefs = (event: Event) =>
-		checkElInsideRefs(event.composedPath()[0] as HTMLElement | undefined);
-
-	React.useEffect(() => {
-		trackMouseDown();
-	}, []);
-
 	React.useEffect(() => {
 		if (disabled) return;
 
 		/**
-		 * Some components can enable the hook after it was clicked,
-		 * so the mousedown that happened before is checked here
+		 * Some components can enable the hook after the mousedown of the click,
+		 * e.g. Flyout with focus trigger, so the click target is checked until the next mousedown
 		 */
-		isMouseDownInsideRef.current = checkElInsideRefs(lastMouseDownEl);
+		isMouseDownInsideRef.current = null;
 
 		const handleMouseDown = (event: MouseEvent | TouchEvent | KeyboardEvent) => {
 			isMouseDownInsideRef.current = checkEventInsideRefs(event);
@@ -95,7 +62,7 @@ const useOnClickOutside = (
 		if (disabled) return;
 
 		const handleClick = (event: MouseEvent | TouchEvent) => {
-			if (isMouseDownInsideRef.current) return;
+			if (isMouseDownInsideRef.current ?? checkEventInsideRefs(event)) return;
 			handlerRef.current?.(event);
 		};
 

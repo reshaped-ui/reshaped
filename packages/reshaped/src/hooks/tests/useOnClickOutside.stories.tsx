@@ -238,10 +238,11 @@ export const disabledListeners: StoryObj = {
 		spy.mockRestore();
 
 		expect(canvas.getAllByText("Item")).toHaveLength(10);
-		expect(types).not.toContain("click");
-		expect(types).not.toContain("contextmenu");
-		// Only the mousedown tracking shared by all hooks can be added, once per event type
-		expect(new Set(types).size).toBe(types.length);
+		expect(
+			types.filter((type) =>
+				["mousedown", "touchstart", "keydown", "click", "contextmenu"].includes(type)
+			)
+		).toHaveLength(0);
 	},
 };
 
