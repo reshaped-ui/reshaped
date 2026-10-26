@@ -53,7 +53,7 @@ const Popover: React.FC<T.Props> = (props) => {
 export const PopoverDismissible: React.FC<DismissibleProps> = (props) => {
 	const { handleClose } = useFlyoutContext();
 
-	return <Dismissible {...props} onClose={() => handleClose({})} />;
+	return <Dismissible {...props} onClose={() => handleClose({ reason: "close-button" })} />;
 };
 
 Popover.displayName = "Popover";

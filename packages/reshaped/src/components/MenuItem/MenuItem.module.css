@@ -89,8 +89,10 @@ button.root {
 		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
 
+	/* Menu items are highlighted on keyboard focus, so hover is ignored in keyboard mode to avoid highlighting two items */
 	@media (hover: hover) and (pointer: fine) {
-		&:hover {
+		:root:not([data-rs-keyboard]) &:hover,
+		&:not([role="menuitem"], [role="option"]):hover {
 			--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 		}
 	}
@@ -107,8 +109,10 @@ button.root {
 		--rs-menu-item-icon-color: var(--rs-color-foreground-critical);
 	}
 
+	/* Menu items are highlighted on keyboard focus, so hover is ignored in keyboard mode to avoid highlighting two items */
 	@media (hover: hover) and (pointer: fine) {
-		&:hover {
+		:root:not([data-rs-keyboard]) &:hover,
+		&:not([role="menuitem"], [role="option"]):hover {
 			--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 			--rs-menu-item-color: var(--rs-color-foreground-critical);
 			--rs-menu-item-icon-color: var(--rs-color-foreground-critical);
@@ -124,8 +128,10 @@ button.root {
 		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
 
+	/* Menu items are highlighted on keyboard focus, so hover is ignored in keyboard mode to avoid highlighting two items */
 	@media (hover: hover) and (pointer: fine) {
-		&:hover {
+		:root:not([data-rs-keyboard]) &:hover,
+		&:not([role="menuitem"], [role="option"]):hover {
 			--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 		}
 	}

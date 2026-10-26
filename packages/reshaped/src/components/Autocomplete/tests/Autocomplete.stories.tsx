@@ -344,3 +344,49 @@ export const multiselect = {
 		);
 	},
 };
+
+export const testKeyboardScroll: StoryObj = {
+	name: "test: keyboard highlight scroll",
+	render: () => (
+		<Autocomplete
+			name="fruit"
+			placeholder="Pick a fruit"
+			contentMaxHeight="100px"
+			inputAttributes={{ "aria-label": "Fruit" }}
+		>
+			{Array.from({ length: 20 }, (_, index) => (
+				<Autocomplete.Item key={index} value={`Item ${index}`}>
+					{`Item ${index}`}
+				</Autocomplete.Item>
+			))}
+		</Autocomplete>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const input = canvas.getByRole("combobox");
+
+		input.focus();
+
+		await waitFor(() => {
+			expect(canvas.getAllByRole("option")).toHaveLength(20);
+		});
+
+		// Content is linked with aria-controls, describing the input with the whole list is too verbose
+		expect(input).not.toHaveAttribute("aria-describedby");
+		expect(input).toHaveAttribute("aria-controls", canvas.getByRole("listbox").id);
+
+		for (let i = 0; i < 10; i++) {
+			await userEvent.keyboard("{ArrowDown}");
+		}
+
+		const highlightedOption = document.getElementById(
+			input.getAttribute("aria-activedescendant")!
+		)!;
+		const optionRect = highlightedOption.getBoundingClientRect();
+		const contentRect = canvas.getByRole("listbox").getBoundingClientRect();
+
+		expect(highlightedOption).toHaveTextContent("Item 10");
+		expect(optionRect.top).toBeGreaterThanOrEqual(contentRect.top);
+		expect(optionRect.bottom).toBeLessThanOrEqual(contentRect.bottom);
+	},
+};

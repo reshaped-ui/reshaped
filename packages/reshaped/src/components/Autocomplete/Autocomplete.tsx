@@ -140,6 +140,7 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 					const nextOption = options.at(highlightedIndex - 1) || options.at(-1)!;
 
 					setHighlightedId(nextOption.id);
+					nextOption.scrollIntoView({ block: "nearest" });
 				}
 			},
 			[keys.DOWN]: () => {
@@ -152,6 +153,7 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 					const nextOption = options.at(highlightedIndex + 1) || options.at(0)!;
 
 					setHighlightedId(nextOption.id);
+					nextOption.scrollIntoView({ block: "nearest" });
 				}
 			},
 		},
