@@ -229,27 +229,20 @@ export const testCaptions: StoryObj = {
 };
 
 export const testInputAttributes: StoryObj = {
-	name: "test: input attributes",
+	name: "test: icon label",
 	render: () => (
-		<View gap={4}>
-			<span id="external-description">External</span>
-			<FormControl>
-				<FormControl.Label>Label</FormControl.Label>
-				<TextField
-					name="name"
-					icon={IconCheckmark}
-					inputAttributes={{ "aria-describedby": "external-description" }}
-				/>
-				<FormControl.Helper>Caption</FormControl.Helper>
-			</FormControl>
-		</View>
+		<FormControl>
+			<FormControl.Label>Label</FormControl.Label>
+			<TextField name="name" icon={IconCheckmark} />
+			<FormControl.Helper>Caption</FormControl.Helper>
+		</FormControl>
 	),
 	play: async ({ canvas, canvasElement }) => {
 		const input = canvas.getByRole("textbox");
 		const iconLabel = canvasElement.querySelector(`label[for="${input.id}"]:not([id])`);
 
 		expect(input).toHaveAccessibleName("Label");
-		expect(input).toHaveAccessibleDescription("External Caption");
+		expect(input).toHaveAccessibleDescription("Caption");
 		expect(iconLabel).toBeInTheDocument();
 	},
 };

@@ -21,7 +21,12 @@ const FormControl: React.FC<T.Props> = (props) => {
 	]
 		.filter(Boolean)
 		.join(" ");
-	const attributes = { id, "aria-describedby": describedby || undefined };
+	const attributes = {
+		id,
+		"aria-describedby": describedby || undefined,
+		"aria-invalid": hasError || undefined,
+		"aria-required": required || undefined,
+	};
 
 	// Stable refs, so they're only called when the captions mount and unmount
 	const errorRef = React.useCallback((el: HTMLElement | null) => {
