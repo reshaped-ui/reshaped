@@ -2,4 +2,4 @@
 "reshaped": patch
 ---
 
-Fixed `useRTL` creating its own RTL state for every component that calls it. `useRTL` now reads the state of the `Reshaped` provider, so only the provider observes and updates the `dir` attribute on the root element. Pages that render many `DropdownMenu`, `Tabs`, `Carousel` or `Slider` components no longer pay for it on every instance, and `setRTL` changes the direction for the whole app.
+Fixed `useRTL` creating its own RTL state for every component that calls it. It now reads the `Reshaped` provider state, so only the provider observes and updates the `dir` attribute and `setRTL` changes the direction for the whole app.

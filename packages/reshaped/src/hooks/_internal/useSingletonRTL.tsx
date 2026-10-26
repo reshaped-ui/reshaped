@@ -6,14 +6,14 @@ import { isRTL } from "@reshaped/utilities";
 import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
 
 type Context = {
-	rtl: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+	rtl: [boolean, (state: boolean) => void];
 };
 
-const SingletonRTLContext = React.createContext<Context>({
+export const SingletonRTLContext = React.createContext<Context>({
 	rtl: [false, () => {}],
 });
 
-const useRTLState = (defaultRTL?: boolean) => {
+export const useSingletonRTL = (defaultRTL?: boolean) => {
 	const state = React.useState(defaultRTL || false);
 	const [rtl, setRTL] = state;
 
@@ -49,7 +49,7 @@ export const SingletonRTLProvider: React.FC<{
 	defaultRTL?: boolean;
 }> = (props) => {
 	const { children, defaultRTL } = props;
-	const rtlState = useRTLState(defaultRTL);
+	const rtlState = useSingletonRTL(defaultRTL);
 
 	return (
 		<SingletonRTLContext.Provider value={{ rtl: rtlState }}>
@@ -57,9 +57,3 @@ export const SingletonRTLProvider: React.FC<{
 		</SingletonRTLContext.Provider>
 	);
 };
-
-/**
- * Reads the state owned by SingletonRTLProvider, so only the provider observes and updates the dir attribute
- * @param _defaultRTL - deprecated, ignored. Use defaultRTL on the Reshaped provider instead
- */
-export const useSingletonRTL = (_defaultRTL?: boolean) => React.useContext(SingletonRTLContext).rtl;
