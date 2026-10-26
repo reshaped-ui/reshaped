@@ -28,8 +28,6 @@ const Radio: React.FC<T.Props> = (props) => {
 	const checked = radioGroup ? radioGroup.value === value : props.checked;
 	const defaultChecked = radioGroup ? undefined : props.defaultChecked;
 	const name = radioGroup ? radioGroup.name : props.name;
-	// FormControl label and captions are only linked to a single radio, groups use fieldset instead
-	const grouped = formControl.group || !!radioGroup;
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -52,7 +50,7 @@ const Radio: React.FC<T.Props> = (props) => {
 					onChange={onChange}
 					attributes={{
 						...inputAttributes,
-						...(grouped ? undefined : formControl.attributes),
+						...formControl.attributes,
 						"aria-invalid": hasError || undefined,
 					}}
 				/>

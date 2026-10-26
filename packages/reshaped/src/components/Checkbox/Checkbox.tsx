@@ -34,8 +34,6 @@ const Checkbox: React.FC<T.Props> = (props) => {
 	const defaultChecked = checkboxGroup ? undefined : props.defaultChecked;
 	const name = checkboxGroup ? checkboxGroup.name : props.name;
 	const inputRef = React.useRef<HTMLInputElement>(null);
-	// FormControl label and captions are only linked to a single checkbox, groups use fieldset instead
-	const grouped = formControl.group || !!checkboxGroup;
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -62,7 +60,7 @@ const Checkbox: React.FC<T.Props> = (props) => {
 					onChange={onChange}
 					attributes={{
 						...inputAttributes,
-						...(grouped ? undefined : formControl.attributes),
+						...formControl.attributes,
 						"aria-invalid": hasError || undefined,
 						ref: inputRef,
 					}}
