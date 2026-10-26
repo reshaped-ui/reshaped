@@ -35,7 +35,11 @@ const TextArea: React.FC<T.Props> = (props) => {
 		borderColor: disabled ? "disabled" : "neutral",
 		border: variant === "outline" ? true : undefined,
 	});
-	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
+	const inputAttributes = {
+		...props.inputAttributes,
+		...formControl?.attributes,
+		"aria-invalid": hasError || undefined,
+	};
 	const rootClassName = classNames(
 		s.root,
 		size && responsiveClassNames(s, "--size", size),

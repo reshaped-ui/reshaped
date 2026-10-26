@@ -21,23 +21,33 @@ const FormControl: React.FC<T.Props> = (props) => {
 	]
 		.filter(Boolean)
 		.join(" ");
-	const attributes = { id, "aria-describedby": describedby };
+	// Group fields are labelled and described by the fieldset, so they don't receive the attributes
+	const attributes = group
+		? {}
+		: {
+				id,
+				"aria-describedby": describedby || undefined,
+				"aria-invalid": hasError || undefined,
+				"aria-required": required || undefined,
+			};
 
-	const errorRef = () => {
-		setErrorRendered(true);
-	};
+	// Stable refs, so they're only called when the captions mount and unmount
+	const errorRef = React.useCallback((el: HTMLElement | null) => {
+		setErrorRendered(!!el);
+	}, []);
 
-	const helperRef = () => {
-		setHelperRendered(true);
-	};
+	const helperRef = React.useCallback((el: HTMLElement | null) => {
+		setHelperRendered(!!el);
+	}, []);
 
 	return (
 		<WrapperTagName
+			aria-describedby={group ? describedby || undefined : undefined}
 			className={classNames(s.root, size && s["--size-large"])}
 			style={{ "--rs-form-control-gap": gap } as React.CSSProperties}
 		>
 			<Provider
-				value={{ required, hasError, errorRef, helperRef, attributes, group, disabled, size }}
+				value={{ id, required, hasError, errorRef, helperRef, attributes, group, disabled, size }}
 			>
 				{children}
 			</Provider>

@@ -48,7 +48,11 @@ const Radio: React.FC<T.Props> = (props) => {
 					disabled={disabled}
 					value={value}
 					onChange={onChange}
-					attributes={inputAttributes}
+					attributes={{
+						...inputAttributes,
+						...formControl.attributes,
+						"aria-invalid": hasError || undefined,
+					}}
 				/>
 				<div className={s.decorator}>
 					<span className={s.dot} />

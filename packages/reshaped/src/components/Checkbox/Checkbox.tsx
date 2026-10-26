@@ -60,6 +60,8 @@ const Checkbox: React.FC<T.Props> = (props) => {
 					onChange={onChange}
 					attributes={{
 						...inputAttributes,
+						...formControl.attributes,
+						"aria-invalid": hasError || undefined,
 						ref: inputRef,
 					}}
 				/>

@@ -15,12 +15,17 @@ function Select(props: T.CustomUncontrolledProps): React.JSX.Element;
 function Select(passedProps: T.Props): React.JSX.Element {
 	const formControl = useFormControl();
 	const internalId = useElementId(passedProps.id);
+	const hasError = formControl?.hasError || passedProps.hasError;
 	const props = {
 		...passedProps,
 		id: formControl?.attributes?.id || passedProps.inputAttributes?.id || internalId,
 		disabled: formControl?.disabled || passedProps.disabled,
-		hasError: formControl?.hasError || passedProps.hasError,
-		inputAttributes: { ...passedProps.inputAttributes, ...formControl?.attributes },
+		hasError,
+		inputAttributes: {
+			...passedProps.inputAttributes,
+			...formControl?.attributes,
+			"aria-invalid": hasError || undefined,
+		},
 	};
 	const { children } = props;
 

@@ -62,7 +62,7 @@ const SelectTrigger: React.FC<T.TriggerProps> = (props) => {
 				disabled={disabled}
 				disableFocusRing
 				onClick={onClick}
-				attributes={triggerAttributes}
+				attributes={{ ...triggerAttributes, "aria-invalid": hasError || undefined }}
 			>
 				<SelectStartContent startSlot={startSlot} icon={icon} size={size} />
 				{children ? (

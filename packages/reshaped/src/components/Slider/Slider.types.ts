@@ -177,4 +177,5 @@ export type ThumbProps = {
 	renderValue?: BaseProps["renderValue"];
 	tooltipRef: React.RefObject<HTMLDivElement | null>;
 	inputRef: React.RefObject<HTMLInputElement | null>;
+	inputAttributes?: Attributes<"input">;
 };
