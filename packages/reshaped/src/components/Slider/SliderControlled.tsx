@@ -5,7 +5,6 @@ import { classNames } from "@reshaped/utilities";
 import { disableScroll, enableScroll } from "@reshaped/utilities/internal";
 
 import { useFormControl } from "@/components/FormControl";
-import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
 import useElementId from "@/hooks/useElementId";
 import useHandlerRef from "@/hooks/useHandlerRef";
 import useRTL from "@/hooks/useRTL";
@@ -53,12 +52,8 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const minId = `${inputId}-min`;
 	const maxId = `${inputId}-max`;
 	const disabled = formControl?.disabled || props.disabled;
-	const formControlAttributes = getInputAttributes({
-		formControl,
-		hasError: formControl.hasError,
-	});
 	// FormControl label targets the first input by its id, so the second range input only gets the captions
-	const secondaryInputAttributes = { ...formControlAttributes, id: undefined };
+	const secondaryInputAttributes = { ...formControl.attributes, id: undefined };
 	const rootClassNames = classNames(
 		s.root,
 		disabled && s["--disabled"],
@@ -332,7 +327,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 						ref={minRef}
 						tooltipRef={minTooltipRef}
 						inputRef={minInputRef}
-						inputAttributes={formControlAttributes}
+						inputAttributes={formControl.attributes}
 						renderValue={renderValue}
 						step={step}
 						orientation={orientation}
@@ -353,7 +348,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 					ref={maxRef}
 					tooltipRef={maxTooltipRef}
 					inputRef={maxInputRef}
-					inputAttributes={range ? secondaryInputAttributes : formControlAttributes}
+					inputAttributes={range ? secondaryInputAttributes : formControl.attributes}
 					renderValue={renderValue}
 					step={step}
 					orientation={orientation}

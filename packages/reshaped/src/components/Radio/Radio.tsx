@@ -3,8 +3,7 @@
 import React from "react";
 import { classNames } from "@reshaped/utilities";
 
-import { useFormControlPrivate } from "@/components/FormControl/FormControl.context";
-import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
+import { useFormControl } from "@/components/FormControl";
 import HiddenInput from "@/components/HiddenInput";
 import { useRadioGroup } from "@/components/RadioGroup";
 import Text from "@/components/Text";
@@ -22,7 +21,7 @@ const Radio: React.FC<T.Props> = (props) => {
 		attributes,
 		inputAttributes,
 	} = props;
-	const formControl = useFormControlPrivate();
+	const formControl = useFormControl();
 	const radioGroup = useRadioGroup();
 	const hasError = formControl?.hasError || props.hasError || radioGroup?.hasError;
 	const disabled = formControl?.disabled || props.disabled || radioGroup?.disabled;
@@ -51,11 +50,11 @@ const Radio: React.FC<T.Props> = (props) => {
 					disabled={disabled}
 					value={value}
 					onChange={onChange}
-					attributes={getInputAttributes({
-						attributes: inputAttributes,
-						formControl: grouped ? { attributes: {} } : formControl,
-						hasError,
-					})}
+					attributes={{
+						...inputAttributes,
+						...(grouped ? undefined : formControl.attributes),
+						"aria-invalid": hasError || undefined,
+					}}
 				/>
 				<div className={s.decorator}>
 					<span className={s.dot} />
