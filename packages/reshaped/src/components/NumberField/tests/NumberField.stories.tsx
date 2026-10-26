@@ -1,5 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect, fn, Mock, userEvent } from "storybook/test";
+import React from "react";
+import { expect, fireEvent, fn, Mock, userEvent } from "storybook/test";
 
 import FormControl from "@/components/FormControl";
 import NumberField from "@/components/NumberField";
@@ -478,3 +479,122 @@ export const valueChanges: StoryObj = {
 };
 
 // Value change edge cases
+
+export const testBoundaries: StoryObj<{ handleChange: Mock }> = {
+	name: "test: zero boundaries, inputMode",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<>
+			<NumberField
+				name="test-max"
+				value={0}
+				max={0}
+				onChange={args.handleChange}
+				increaseAriaLabel="Increase max"
+				decreaseAriaLabel="Decrease max"
+				inputAttributes={{ "aria-label": "Max" }}
+			/>
+			<NumberField
+				name="test-min"
+				value={0}
+				min={0}
+				onChange={args.handleChange}
+				increaseAriaLabel="Increase min"
+				decreaseAriaLabel="Decrease min"
+				inputAttributes={{ "aria-label": "Min" }}
+			/>
+			<NumberField
+				name="test-step"
+				defaultValue={0}
+				step={0.1}
+				increaseAriaLabel="Increase step"
+				decreaseAriaLabel="Decrease step"
+				inputAttributes={{ "aria-label": "Step" }}
+			/>
+			<NumberField
+				name="test-negative"
+				defaultValue={0}
+				min={-10}
+				increaseAriaLabel="Increase negative"
+				decreaseAriaLabel="Decrease negative"
+				inputAttributes={{ "aria-label": "Negative" }}
+			/>
+		</>
+	),
+	play: async ({ canvas }) => {
+		expect(document.querySelector('[aria-label="Increase max"]')).toHaveAttribute(
+			"aria-disabled",
+			"true"
+		);
+		expect(document.querySelector('[aria-label="Decrease min"]')).toHaveAttribute(
+			"aria-disabled",
+			"true"
+		);
+
+		expect(canvas.getByLabelText("Max")).toHaveAttribute("inputmode", "numeric");
+		expect(canvas.getByLabelText("Step")).toHaveAttribute("inputmode", "decimal");
+		expect(canvas.getByLabelText("Negative")).toHaveAttribute("inputmode", "decimal");
+	},
+};
+
+export const testTyping: StoryObj<{ handleChange: Mock }> = {
+	name: "test: typing decimals, controlled",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => {
+		const [value, setValue] = React.useState<number | null>(null);
+
+		return (
+			<NumberField
+				name="test-name"
+				value={value}
+				onChange={(changeArgs) => {
+					args.handleChange(changeArgs);
+					setValue(changeArgs.value);
+				}}
+				increaseAriaLabel="Increase"
+				decreaseAriaLabel="Decrease"
+				inputAttributes={{ "aria-label": "Label" }}
+			/>
+		);
+	},
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("textbox");
+
+		// Typed text shouldn't be replaced with the parsed value, e.g. "-0" with "0"
+		await userEvent.type(input, "-0.5");
+
+		expect(input).toHaveValue("-0.5");
+		expect(args.handleChange).toHaveBeenLastCalledWith({ name: "test-name", value: -0.5 });
+	},
+};
+
+export const testPointerCancel: StoryObj<{ handleChange: Mock }> = {
+	name: "test: pointercancel",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => (
+		<NumberField
+			name="test-name"
+			defaultValue={0}
+			onChange={args.handleChange}
+			increaseAriaLabel="Increase"
+			decreaseAriaLabel="Decrease"
+			inputAttributes={{ "aria-label": "Label" }}
+		/>
+	),
+	play: async ({ args }) => {
+		const increaseButton = document.querySelector('[aria-label="Increase"]')!;
+
+		fireEvent.pointerDown(increaseButton);
+		fireEvent.pointerCancel(increaseButton);
+
+		await new Promise((resolve) => setTimeout(resolve, 700));
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+	},
+};
