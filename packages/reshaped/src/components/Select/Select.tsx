@@ -4,7 +4,6 @@ import React from "react";
 
 import useElementId from "@/hooks/useElementId";
 import { useFormControl } from "../FormControl";
-import { getInputAttributes } from "../FormControl/FormControl.utilities";
 import type * as T from "./Select.types";
 import SelectCustom from "./SelectCustom";
 import SelectNative from "./SelectNative";
@@ -22,11 +21,11 @@ function Select(passedProps: T.Props): React.JSX.Element {
 		id: formControl?.attributes?.id || passedProps.inputAttributes?.id || internalId,
 		disabled: formControl?.disabled || passedProps.disabled,
 		hasError,
-		inputAttributes: getInputAttributes({
-			attributes: passedProps.inputAttributes,
-			formControl,
-			hasError,
-		}),
+		inputAttributes: {
+			...passedProps.inputAttributes,
+			...formControl?.attributes,
+			"aria-invalid": hasError || undefined,
+		},
 	};
 	const { children } = props;
 

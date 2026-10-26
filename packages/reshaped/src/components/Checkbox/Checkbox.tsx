@@ -4,8 +4,7 @@ import React from "react";
 import { classNames } from "@reshaped/utilities";
 
 import { useCheckboxGroup } from "@/components/CheckboxGroup";
-import { useFormControlPrivate } from "@/components/FormControl/FormControl.context";
-import { getInputAttributes } from "@/components/FormControl/FormControl.utilities";
+import { useFormControl } from "@/components/FormControl";
 import HiddenInput from "@/components/HiddenInput";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
@@ -28,7 +27,7 @@ const Checkbox: React.FC<T.Props> = (props) => {
 	} = props;
 
 	const checkboxGroup = useCheckboxGroup();
-	const formControl = useFormControlPrivate();
+	const formControl = useFormControl();
 	const hasError = formControl?.hasError || props.hasError || checkboxGroup?.hasError;
 	const disabled = formControl?.disabled || props.disabled || checkboxGroup?.disabled;
 	const checked = checkboxGroup ? checkboxGroup.value?.includes(value!) : props.checked;
@@ -62,11 +61,9 @@ const Checkbox: React.FC<T.Props> = (props) => {
 					value={value}
 					onChange={onChange}
 					attributes={{
-						...getInputAttributes({
-							attributes: inputAttributes,
-							formControl: grouped ? { attributes: {} } : formControl,
-							hasError,
-						}),
+						...inputAttributes,
+						...(grouped ? undefined : formControl.attributes),
+						"aria-invalid": hasError || undefined,
 						ref: inputRef,
 					}}
 				/>
