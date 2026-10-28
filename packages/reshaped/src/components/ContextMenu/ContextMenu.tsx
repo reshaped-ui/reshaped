@@ -25,7 +25,7 @@ const ContextMenu: React.FC<T.Props> = (props) => {
 			e.preventDefault();
 			setCoordinates({ x: e.clientX, y: e.clientY });
 			lockScroll();
-			onOpenRef.current?.();
+			onOpenRef.current?.({ event: e, target: e.target as Element });
 		};
 
 		originEl.addEventListener("contextmenu", handleContextMenu);

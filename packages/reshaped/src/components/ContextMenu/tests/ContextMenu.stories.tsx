@@ -5,6 +5,7 @@ import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import Button from "@/components/Button";
 import ContextMenu from "@/components/ContextMenu";
 import Popover from "@/components/Popover";
+import Text from "@/components/Text";
 import View from "@/components/View";
 import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
@@ -72,7 +73,10 @@ export const handlers: StoryObj<{
 		await userEvent.pointer({ keys: "[MouseRight>]", target: root });
 
 		expect(args.handleOpen).toHaveBeenCalledTimes(1);
-		expect(args.handleOpen).toHaveBeenCalledWith();
+		expect(args.handleOpen).toHaveBeenCalledWith({
+			event: expect.any(MouseEvent),
+			target: root,
+		});
 
 		const item = canvas.getByText("Item");
 
@@ -122,6 +126,61 @@ export const triggerRef: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
 				</ContextMenu>
 			</>
 		);
+	},
+};
+
+export const openTarget: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
+	name: "onOpen, target",
+	args: {
+		handleOpen: fn(),
+	},
+	render: (args) => {
+		const triggerRef = React.useRef<HTMLDivElement>(null);
+		const [item, setItem] = React.useState<string>();
+
+		return (
+			<>
+				<View gap={2} attributes={{ ref: triggerRef }}>
+					{["Item 1", "Item 2", "Item 3"].map((label) => (
+						<View
+							key={label}
+							padding={4}
+							backgroundColor="neutral-faded"
+							borderRadius="medium"
+							attributes={{ "data-item": label, "data-testid": label }}
+						>
+							<Text>{label}</Text>
+						</View>
+					))}
+				</View>
+
+				<ContextMenu
+					triggerRef={triggerRef}
+					onOpen={(openArgs) => {
+						args.handleOpen(openArgs);
+						setItem(openArgs.target.closest("[data-item]")?.getAttribute("data-item") ?? undefined);
+					}}
+					onClose={() => setItem(undefined)}
+				>
+					<ContextMenu.Content>
+						<ContextMenu.Item>Delete {item}</ContextMenu.Item>
+					</ContextMenu.Content>
+				</ContextMenu>
+			</>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const target = canvas.getByText("Item 2");
+
+		await userEvent.pointer({ keys: "[MouseRight]", target });
+
+		expect(args.handleOpen).toHaveBeenCalledTimes(1);
+		expect(args.handleOpen).toHaveBeenCalledWith({
+			event: expect.objectContaining({ type: "contextmenu", target }),
+			target,
+		});
+		expect(canvas.getByText("Delete Item 2")).toBeInTheDocument();
 	},
 };
 
