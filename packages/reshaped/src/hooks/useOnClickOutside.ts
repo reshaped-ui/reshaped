@@ -13,9 +13,10 @@ const useOnClickOutside = (
 	/**
 	 * We're checking the element position in the DOM on mousedown to make sure
 	 * it happens before any other click events that could potentially remove the clicked el
-	 * before we checked if it's inside the refs
+	 * before we checked if it's inside the refs.
+	 * Null means there was no mousedown since the hook got enabled
 	 */
-	const isMouseDownInsideRef = React.useRef(false);
+	const isMouseDownInsideRef = React.useRef<boolean | null>(null);
 
 	const checkEventInsideRefs = (event: Event) => {
 		const eventEl = event.composedPath()[0] as HTMLElement | undefined;
@@ -27,10 +28,13 @@ const useOnClickOutside = (
 	};
 
 	React.useEffect(() => {
+		if (disabled) return;
+
 		/**
-		 * Not checking for disabled here since some components can enable the hook
-		 * after it was clicked
+		 * Some components can enable the hook after the mousedown of the click,
+		 * e.g. Flyout with focus trigger, so the click target is checked until the next mousedown
 		 */
+		isMouseDownInsideRef.current = null;
 
 		const handleMouseDown = (event: MouseEvent | TouchEvent | KeyboardEvent) => {
 			isMouseDownInsideRef.current = checkEventInsideRefs(event);
@@ -51,14 +55,14 @@ const useOnClickOutside = (
 			document.removeEventListener("keydown", handleKeyDown);
 		};
 		// oxlint-disable-next-line react-hooks/exhaustive-deps
-	}, [...refs]);
+	}, [disabled, ...refs]);
 
 	React.useEffect(() => {
 		if (!handlerRef.current) return;
 		if (disabled) return;
 
 		const handleClick = (event: MouseEvent | TouchEvent) => {
-			if (isMouseDownInsideRef.current) return;
+			if (isMouseDownInsideRef.current ?? checkEventInsideRefs(event)) return;
 			handlerRef.current?.(event);
 		};
 

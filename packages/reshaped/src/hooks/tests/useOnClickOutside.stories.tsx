@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fireEvent, fn, type Mock, userEvent } from "storybook/test";
+import { expect, fireEvent, fn, type Mock, spyOn, userEvent } from "storybook/test";
 
 import useOnClickOutside from "../useOnClickOutside";
 
@@ -206,5 +206,81 @@ export const deps: StoryObj<{ handleOutsideClick: Mock }> = {
 		await userEvent.click(document.body);
 
 		expect(args.handleOutsideClick).toHaveBeenLastCalledWith({ count: 1 });
+	},
+};
+
+const DemoDisabledItem = () => {
+	const ref = React.useRef(null);
+
+	useOnClickOutside([ref], () => {}, { disabled: true });
+
+	return <div ref={ref}>Item</div>;
+};
+
+export const disabledListeners: StoryObj = {
+	name: "test: disabled doesn't add listeners",
+	render: () => {
+		const [mounted, setMounted] = React.useState(false);
+
+		return (
+			<div>
+				<button onClick={() => setMounted(true)}>Mount</button>
+				{mounted && Array.from({ length: 10 }).map((_, i) => <DemoDisabledItem key={i} />)}
+			</div>
+		);
+	},
+	play: async ({ canvas }) => {
+		const spy = spyOn(document, "addEventListener");
+
+		await userEvent.click(canvas.getByRole("button", { name: "Mount" }));
+
+		const types = spy.mock.calls.map((call) => call[0]);
+		spy.mockRestore();
+
+		expect(canvas.getAllByText("Item")).toHaveLength(10);
+		expect(
+			types.filter((type) =>
+				["mousedown", "touchstart", "keydown", "click", "contextmenu"].includes(type)
+			)
+		).toHaveLength(0);
+	},
+};
+
+const DemoEnable = (props: { onOutsideClick: () => void }) => {
+	const ref = React.useRef(null);
+	const [enabled, setEnabled] = React.useState(false);
+
+	useOnClickOutside([ref], props.onOutsideClick, { disabled: !enabled });
+
+	return (
+		<div style={{ display: "flex", gap: 16, flexDirection: "column", alignItems: "flex-start" }}>
+			<input ref={ref} onFocus={() => setEnabled(true)} aria-label="Enable" />
+			{enabled && "Enabled"}
+		</div>
+	);
+};
+
+export const enable: StoryObj<{ handleOutsideClick: Mock }> = {
+	name: "test: enabled during click inside",
+	args: {
+		handleOutsideClick: fn(),
+	},
+	render: (args) => <DemoEnable onOutsideClick={args.handleOutsideClick} />,
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("textbox", { name: "Enable" });
+
+		await userEvent.click(document.body);
+
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		// Focus on mousedown enables the hook, so the mousedown happened inside before it was enabled
+		await userEvent.click(input);
+
+		expect(canvas.getByText("Enabled")).toBeInTheDocument();
+		expect(args.handleOutsideClick).not.toHaveBeenCalled();
+
+		await userEvent.click(document.body);
+
+		expect(args.handleOutsideClick).toHaveBeenCalledTimes(1);
 	},
 };
