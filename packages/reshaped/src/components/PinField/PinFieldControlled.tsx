@@ -55,6 +55,8 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	);
 	const [focusedIndex, setFocusedIndex] = React.useState<number | null>(null);
 	const formControl = useFormControl();
+	const { hasError } = formControl;
+	const disabled = formControl.disabled || inputAttributes?.disabled;
 	/**
 	 * Most of the logic works based on this mode parameter
 	 * `edit` mode means user has selected an already filled item and is changing its value,
@@ -195,7 +197,7 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 	 * Manually handle correct caret position when any of the items are clicked
 	 */
 	const handleItemClick = (event: React.MouseEvent | React.TouchEvent, index: number) => {
-		if (!inputRef.current) return;
+		if (!inputRef.current || disabled) return;
 
 		inputRef.current.focus();
 
@@ -210,13 +212,23 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				height={responsiveInputSize}
 				width={responsiveInputSize}
 				borderRadius={responsiveRadius}
-				borderColor={variant === "faded" ? undefined : "neutral"}
+				borderColor={
+					hasError
+						? "critical"
+						: disabled
+							? "disabled"
+							: variant === "faded"
+								? undefined
+								: "neutral"
+				}
 				shadow={variant === "faded" ? undefined : "outline"}
 				backgroundColor={variant === "faded" ? "neutral-faded" : "elevation-base"}
 				align="center"
 				justify="center"
 				className={[s.item, focusedIndex === i && s["item--focused"]]}
 				attributes={{
+					// Only the input is exposed to assistive technologies, items are a visual representation of its value
+					"aria-hidden": true,
 					onMouseDown: (e) => {
 						e.preventDefault();
 						handleItemClick(e, i);
@@ -227,7 +239,11 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				}}
 			>
 				<span className={s.caret} />
-				{value[i] && <Text variant={responsiveTextVariant}>{value[i]}</Text>}
+				{value[i] && (
+					<Text variant={responsiveTextVariant} color={disabled ? "disabled" : undefined}>
+						{value[i]}
+					</Text>
+				)}
 			</View>
 		);
 	}
@@ -240,6 +256,7 @@ const PinFieldControlled: React.FC<T.ControlledProps> = (props) => {
 				{...inputAttributes}
 				{...formControl.attributes}
 				type="text"
+				disabled={disabled}
 				className={s.input}
 				onFocus={handleFocus}
 				onBlur={handleBlur}

@@ -163,11 +163,19 @@ export const group: StoryObj = {
 					<Radio value="2">Two</Radio>
 				</View>
 			</RadioGroup>
+			<FormControl.Helper>Caption</FormControl.Helper>
 		</FormControl>
 	),
 	play: async ({ canvas }) => {
 		const group = canvas.getByRole("group");
+		const radios = canvas.getAllByRole("radio");
 
-		expect(group).toBeInTheDocument();
+		expect(group).toHaveAccessibleDescription("Caption");
+
+		// Group fields don't receive the FormControl attributes
+		radios.forEach((radio) => {
+			expect(radio).not.toHaveAttribute("id");
+			expect(radio).not.toHaveAttribute("aria-describedby");
+		});
 	},
 };

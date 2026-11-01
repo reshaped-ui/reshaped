@@ -97,7 +97,11 @@ const TextField: React.FC<T.Props> = (props) => {
 		borderColor: disabled ? "disabled" : "neutral",
 		border: variant === "outline" ? true : undefined,
 	});
-	const inputAttributes = { ...props.inputAttributes, ...formControl?.attributes };
+	const inputAttributes = {
+		...props.inputAttributes,
+		...formControl?.attributes,
+		"aria-invalid": hasError || undefined,
+	};
 	const rootClassName = classNames(
 		s.root,
 		className,
@@ -142,7 +146,7 @@ const TextField: React.FC<T.Props> = (props) => {
 				slot={startSlot}
 				size={size}
 				affix={prefix}
-				id={id}
+				id={inputId}
 			/>
 
 			<div className={s.inner}>
@@ -166,7 +170,7 @@ const TextField: React.FC<T.Props> = (props) => {
 					slot={endSlot}
 					size={size}
 					affix={suffix}
-					id={id}
+					id={inputId}
 				/>
 			</div>
 		</div>
