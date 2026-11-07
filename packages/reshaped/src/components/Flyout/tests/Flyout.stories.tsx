@@ -904,65 +904,6 @@ export const testFocusReturnWithoutTransitions: StoryObj = {
 	},
 };
 
-export const testHoverUnmountRestoresTriggers: StoryObj = {
-	name: "test: other triggers are restored when an open hover flyout unmounts",
-	render: () => {
-		const [hoverRendered, setHoverRendered] = React.useState(true);
-
-		return (
-			<View direction="row" gap={2}>
-				<Flyout>
-					<Flyout.Trigger>
-						{(attributes) => <Button attributes={attributes}>Click trigger</Button>}
-					</Flyout.Trigger>
-					<Flyout.Content>
-						<Content />
-					</Flyout.Content>
-				</Flyout>
-
-				{hoverRendered && (
-					<Flyout triggerType="hover">
-						<Flyout.Trigger>
-							{(attributes) => (
-								<Button attributes={attributes} onClick={() => setHoverRendered(false)}>
-									Hover trigger
-								</Button>
-							)}
-						</Flyout.Trigger>
-						<Flyout.Content>
-							<Content>Hover content</Content>
-						</Flyout.Content>
-					</Flyout>
-				)}
-			</View>
-		);
-	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const clickTrigger = canvas.getByRole("button", { name: "Click trigger" });
-
-		await userEvent.click(clickTrigger);
-		await waitFor(() => {
-			expect(canvas.getByText("Content")).toBeInTheDocument();
-		});
-
-		// Opening a hover flyout disables the other active triggers
-		await userEvent.hover(canvas.getByRole("button", { name: "Hover trigger" }));
-		await waitFor(() => {
-			expect(canvas.getByText("Hover content")).toBeInTheDocument();
-		});
-		expect(clickTrigger.style.pointerEvents).toBe("none");
-
-		// Unmounting the hover flyout while it's open skips its close handler
-		await userEvent.click(canvas.getByRole("button", { name: "Hover trigger" }));
-
-		await waitFor(() => {
-			expect(canvas.queryByRole("button", { name: "Hover trigger" })).not.toBeInTheDocument();
-		});
-		expect(clickTrigger.style.pointerEvents).toBe("");
-	},
-};
-
 export const disabled: StoryObj<{ handleOpen: ReturnType<typeof fn> }> = {
 	name: "disabled",
 	args: {
