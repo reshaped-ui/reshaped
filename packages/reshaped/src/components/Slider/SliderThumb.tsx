@@ -25,8 +25,8 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 		tooltipRef,
 		inputRef,
 		orientation,
+		inputAttributes,
 	} = props;
-	const id = React.useId();
 	const thumbClassNames = classNames(s.thumb, active && s["thumb--active"]);
 	const precision = getPrecision(step);
 	const tooltipValue = renderValue ? renderValue({ value }) : value.toFixed(precision);
@@ -38,6 +38,7 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 	return (
 		<>
 			<input
+				{...inputAttributes}
 				className={s.input}
 				type="range"
 				name={name}
@@ -47,7 +48,6 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 				max={max}
 				min={min}
 				step={step}
-				aria-labelledby={id}
 				aria-orientation={orientation}
 				ref={inputRef}
 			/>
@@ -57,7 +57,6 @@ const SliderThumb = React.forwardRef<HTMLDivElement, T.ThumbProps>((props, ref) 
 				onMouseDown={onDragStart}
 				onTouchStart={onDragStart}
 				style={{ "--ts-slider-thumb-position": `${position}%` } as React.CSSProperties}
-				id={id}
 				aria-hidden="true"
 			>
 				{renderValue !== false && (
