@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, userEvent } from "storybook/test";
+import { expect, fn, userEvent, waitFor } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
 import Badge from "@/components/Badge";
@@ -320,6 +320,48 @@ export const container = {
 				</Example.Item>
 			</Example>
 		);
+	},
+};
+
+export const cutout: StoryObj = {
+	name: "container, cutout",
+	render: () => {
+		const [hidden, setHidden] = React.useState(false);
+		const [count, setCount] = React.useState(5);
+
+		return (
+			<Example
+				title={
+					<View direction="row" gap={2}>
+						<Button onClick={() => setHidden(!hidden)}>Toggle badge</Button>
+						<Button onClick={() => setCount(count === 5 ? 128 : 5)}>Toggle count</Button>
+					</View>
+				}
+			>
+				<Example.Item title="cutout, on a colored background">
+					<View backgroundColor="primary-faded" padding={6} align="start">
+						<Badge.Container overlap attributes={{ "data-testid": "container" }}>
+							<Badge color="primary" rounded hidden={hidden}>
+								{count}
+							</Badge>
+							<Avatar
+								src="https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80"
+								size={16}
+							/>
+						</Badge.Container>
+					</View>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvas }) => {
+		const container = canvas.getByTestId("container");
+		const content = container.lastElementChild as HTMLElement;
+
+		await waitFor(() => {
+			expect(container.style.getPropertyValue("--rs-badge-width")).not.toBe("");
+		});
+		expect(getComputedStyle(content).maskImage).toContain("gradient");
 	},
 };
 
