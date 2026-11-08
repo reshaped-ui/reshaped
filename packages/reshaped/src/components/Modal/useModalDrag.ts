@@ -12,12 +12,13 @@ import type * as T from "./Modal.types";
 
 /** Distance in px the modal has to be dragged before it starts following the finger */
 const THRESHOLD = 32;
-/** Distance in px on the axis perpendicular to the drag axis cancelling the gesture */
-const OPPOSITE_THRESHOLD = 100;
 /** Screen edge zone in px reserved for the browser back gesture */
 const EDGE_BOUNDARY = 32;
-/** Distance in px after which the modal content stops scrolling for the rest of the gesture */
-const SCROLL_LOCK_THRESHOLD = 8;
+/**
+ * Distance in px the finger has to travel before the gesture resolves into a swipe or a scroll,
+ * a swipe also stops the modal content from scrolling for the rest of the gesture
+ */
+const DIRECTION_THRESHOLD = 8;
 /** Velocity in px/ms closing the modal on release regardless of the dragged distance */
 const VELOCITY_THRESHOLD = 0.4;
 /** Time window in ms used for measuring the release velocity */
@@ -33,7 +34,7 @@ type State = {
 	origin: number;
 	/** Coordinate on the perpendicular axis the gesture started from */
 	oppositeOrigin: number;
-	/** Coordinate on the drag axis from the previous move, used for resolving the direction */
+	/** Coordinate on the drag axis from the previous move, used for resolving the per-move delta */
 	previous: number;
 	/** Offset the gesture started from, above zero when it picked up an animation in flight */
 	seed: number;
@@ -45,6 +46,11 @@ type State = {
 	size: number;
 	/** Recent coordinates on the drag axis, used for measuring the release velocity */
 	samples: { time: number; coordinate: number }[];
+	/**
+	 * Resolved once the gesture travels past the direction threshold:
+	 * swipe when it moves along the drag axis, scroll when it moves along the perpendicular axis
+	 */
+	intent: "swipe" | "scroll" | null;
 	/** Gesture is released and the modal is closing */
 	closing: boolean;
 	/** Gesture is released and the modal is animating back to its open position */
@@ -60,6 +66,7 @@ const getInitialState = (): State => ({
 	offset: 0,
 	size: 1,
 	samples: [],
+	intent: null,
 	closing: false,
 	returning: false,
 });
@@ -75,6 +82,32 @@ const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign
 
 	const matrix = new DOMMatrixReadOnly(transform);
 	return Math.max(0, (args.axis === "y" ? matrix.m42 : matrix.m41) * args.closingSign);
+};
+
+/**
+ * Element can still scroll its content in the direction the finger moves when closing the modal,
+ * this scroll takes priority over the swipe
+ */
+const canScrollTowardsClosing = (
+	el: HTMLElement,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
+	const vertical = args.axis === "y";
+	const maxScroll = vertical ? el.scrollHeight - el.clientHeight : el.scrollWidth - el.clientWidth;
+	if (maxScroll <= 0) return false;
+
+	// Content with overflow hidden can't be scrolled with the finger
+	const style = window.getComputedStyle(el);
+	const overflow = vertical ? style.overflowY : style.overflowX;
+	if (overflow !== "auto" && overflow !== "scroll") return false;
+
+	// Distance left to scroll towards the top or left side, scrollLeft goes from 0 to negative values in RTL
+	const rtl = !vertical && style.direction === "rtl";
+	const scroll = vertical ? el.scrollTop : el.scrollLeft;
+	const startDistance = rtl ? maxScroll + scroll : scroll;
+
+	// Finger moving down or right reveals the content on the top or left side and vice versa
+	return (args.closingSign === 1 ? startDistance : maxScroll - startDistance) >= 1;
 };
 
 /** Velocity in px/ms measured over the most recent samples, signed on the drag axis */
@@ -188,8 +221,9 @@ const useModalDrag = (args: {
 		let currentEl = e.target as HTMLElement | null;
 
 		while (currentEl && (currentEl === rootEl || rootEl?.contains(currentEl))) {
-			// Prioritize scrolling over modal swiping
-			if (currentEl.scrollTop !== 0 || currentEl.scrollLeft !== 0) return;
+			// Prioritize scrolling over modal swiping when content can scroll on the drag axis,
+			// scrolling on the perpendicular axis is resolved from the gesture direction instead
+			if (canScrollTowardsClosing(currentEl, { axis, closingSign })) return;
 			// Start dragging only when starting on static elements
 			if (currentEl.matches("input,textarea")) return;
 
@@ -244,26 +278,32 @@ const useModalDrag = (args: {
 
 		const handleTouchMove = (e: TouchEvent) => {
 			const state = stateRef.current;
-			const rootEl = rootRef.current;
-			if (rootEl?.scrollTop !== 0 || rootEl?.scrollLeft !== 0) return;
-
 			const touch = e.targetTouches[0];
 			const coordinate = axis === "y" ? touch.clientY : touch.clientX;
 			const oppositeCoordinate = axis === "y" ? touch.clientX : touch.clientY;
 			const travel = Math.abs(coordinate - state.origin);
 			const oppositeTravel = Math.abs(oppositeCoordinate - state.oppositeOrigin);
+
+			// Resolve the gesture direction once, so scrolling the content on the perpendicular axis
+			// doesn't move the modal and swiping the modal doesn't scroll the content.
+			// The previous coordinate stays at the origin until then, so the swipe doesn't lose the travelled distance
+			if (!state.intent) {
+				if (Math.max(travel, oppositeTravel) < DIRECTION_THRESHOLD) return;
+
+				state.intent = travel > oppositeTravel ? "swipe" : "scroll";
+			}
+
+			if (state.intent === "scroll") return;
+
+			const rootEl = rootRef.current;
+			if (rootEl && canScrollTowardsClosing(rootEl, { axis, closingSign })) return;
+
 			// Positive when moving towards the closing direction
 			const delta = (coordinate - state.previous) * closingSign;
 
 			state.previous = coordinate;
 
-			// For start/end drawers - ignore the swiping
-			// If user is scrolling vertically more than swiping
-			if (axis === "x" && (travel < oppositeTravel || oppositeTravel > OPPOSITE_THRESHOLD)) {
-				return;
-			}
-
-			if (travel > SCROLL_LOCK_THRESHOLD && delta > 0) setScrollLock(true);
+			if (delta > 0) setScrollLock(true);
 
 			// Clamped so the modal can't be dragged past its open position
 			state.distance = Math.max(-state.seed, state.distance + delta);

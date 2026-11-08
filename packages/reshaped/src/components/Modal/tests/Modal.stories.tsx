@@ -483,6 +483,20 @@ export const edgeCases = {
 						</Modal>
 					</View>
 				</Example.Item>
+				<Example.Item title="scrolled side modal supports swipe-to-close, vertical swipes keep scrolling">
+					<Demo position="end">
+						<Placeholder h="1000px" minW={0} />
+					</Demo>
+				</Example.Item>
+				<Example.Item title="horizontal scroll area in side modal takes priority over swipe-to-close until it reaches its edge">
+					<Demo position="start">
+						<View overflow="auto">
+							<Placeholder w="1000px" h="200px">
+								Horizontally scrollable content
+							</Placeholder>
+						</View>
+					</Demo>
+				</Example.Item>
 				<Example.Item
 					title={[
 						"trap focus works correctly when it was already trapped",
