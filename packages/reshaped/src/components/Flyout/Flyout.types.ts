@@ -125,6 +125,8 @@ type BaseProps = {
 	disableContentHover?: boolean;
 	/** Disable the flyout content close on outside click */
 	disableCloseOnOutsideClick?: boolean;
+	/** Ignore touch interactions with the trigger when triggerType is hover, the content still opens with keyboard focus */
+	disableTouchTrigger?: boolean;
 	/** Automatically focus the first focusable element in the content, when false the content container will be focused instead
 	 * @default true
 	 */

@@ -22,6 +22,8 @@ const Tooltip: React.FC<T.Props> = (props) => {
 			contentGap={flyoutProps.contentGap ?? 1.5}
 			position={position}
 			triggerType="hover"
+			// Tapping the trigger usually runs its action, so tooltips only open with hover and keyboard focus
+			disableTouchTrigger
 			// Disable group timeouts by default since it's not controlled by the default user events
 			groupTimeouts={flyoutProps.active === undefined ? true : false}
 			contentMaxWidth={contentMaxWidth}
