@@ -10,7 +10,14 @@ import type * as T from "./ContextMenu.types";
 import s from "./ContextMenu.module.css";
 
 const ContextMenu: React.FC<T.Props> = (props) => {
-	const { position = "end-top", onOpen, onClose, triggerRef, ...dropdownMenuProps } = props;
+	const {
+		position = "end-top",
+		disableHideAnimation = true,
+		onOpen,
+		onClose,
+		triggerRef,
+		...dropdownMenuProps
+	} = props;
 	const [coordinates, setCoordinates] = React.useState<Coordinates>();
 	const internalOriginRef = React.useRef<HTMLDivElement>(null);
 	const originRef = triggerRef || internalOriginRef;
@@ -41,6 +48,7 @@ const ContextMenu: React.FC<T.Props> = (props) => {
 			<DropdownMenu
 				{...dropdownMenuProps}
 				position={position}
+				disableHideAnimation={disableHideAnimation}
 				originCoordinates={coordinates}
 				active={!!coordinates}
 				onClose={(args) => {
