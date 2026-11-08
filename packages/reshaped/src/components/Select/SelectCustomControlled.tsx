@@ -3,6 +3,8 @@
 import React from "react";
 
 import DropdownMenu from "@/components/DropdownMenu";
+import { DropdownMenuKeepOpenContext } from "@/components/DropdownMenu/DropdownMenu";
+import { useFormControl } from "@/components/FormControl";
 import Icon from "@/components/Icon";
 import View from "@/components/View";
 import { responsivePropDependency } from "@/utilities/props";
@@ -39,6 +41,8 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 	const dropdownRef = React.useRef<HTMLDivElement>(null);
 	const [openedWithTouch, setOpenedWithTouch] = React.useState(false);
+	const formControl = useFormControl();
+	const triggerId = `${id}-trigger`;
 	const indexedOptions: Array<{ value: string; text: string }> = [];
 	const selectedOptions: T.OptionProps[] = [];
 	const hasValue = multiple ? value.length > 0 : value;
@@ -191,6 +195,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 				{(attributes) => {
 					const triggerAttributes = {
 						...attributes,
+						"aria-haspopup": "listbox" as const,
 						onTouchStart: () => {
 							setOpenedWithTouch(true);
 							attributes.onTouchStart?.();
@@ -225,7 +230,19 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 					}
 
 					return (
-						<SelectTrigger {...props} triggerAttributes={triggerAttributes} value={value}>
+						<SelectTrigger
+							{...props}
+							triggerAttributes={{
+								...triggerAttributes,
+								id: triggerId,
+								// Label the trigger with the FormControl label, while keeping the selected value in its name
+								"aria-labelledby": formControl.attributes.id
+									? `${formControl.attributes.id}-label ${triggerId}`
+									: undefined,
+								"aria-describedby": formControl.attributes["aria-describedby"],
+							}}
+							value={value}
+						>
 							{renderValue()}
 						</SelectTrigger>
 					);
@@ -235,11 +252,13 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 				attributes={{
 					ref: dropdownRef,
 					onKeyDown: handleKeyDown,
-					// Ignore the default menu role since we're using options
-					role: undefined,
+					role: "listbox",
+					"aria-multiselectable": multiple || undefined,
 				}}
 			>
-				{resolvedChildren}
+				<DropdownMenuKeepOpenContext.Provider value={!!multiple}>
+					{resolvedChildren}
+				</DropdownMenuKeepOpenContext.Provider>
 			</DropdownMenu.Content>
 		</DropdownMenu>
 	);

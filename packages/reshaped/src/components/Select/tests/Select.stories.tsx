@@ -72,10 +72,14 @@ export const base: StoryObj = {
 		expect(hiddenInput).toHaveAttribute("name", "animal");
 		expect(hiddenInput).toHaveAttribute("id", "animal-1");
 		expect(trigger).toHaveTextContent("Select an animal");
+		expect(trigger).toHaveAttribute("aria-haspopup", "listbox");
 
 		await userEvent.click(trigger);
 
-		const options = within(canvasElement.ownerDocument.body).getAllByRole("option");
+		const listbox = within(canvasElement.ownerDocument.body).getByRole("listbox");
+		const options = within(listbox).getAllByRole("option");
+
+		expect(listbox).not.toHaveAttribute("aria-multiselectable");
 
 		expect(options).toHaveLength(2);
 		expect(options[0]).toHaveTextContent("Dog");
@@ -170,6 +174,11 @@ export const multiple: StoryObj<{ handleChange: Mock }> = {
 
 		await userEvent.click(uncontrolledOption);
 
+		// Content stays open to select multiple options
+		expect(within(canvasElement.ownerDocument.body).getByRole("listbox")).toHaveAttribute(
+			"aria-multiselectable",
+			"true"
+		);
 		expect(inputUncontrolled).toHaveValue('["dog","turtle"]');
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
@@ -567,6 +576,12 @@ export const formControl: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
+	play: async ({ canvas }) => {
+		const trigger = canvas.getByRole("button", { name: /Animal/ });
+
+		expect(trigger).toHaveAccessibleName("Animal Select an animal");
+		expect(trigger).toHaveAccessibleDescription("This field is required");
+	},
 };
 
 export const testComposition: StoryObj = {
