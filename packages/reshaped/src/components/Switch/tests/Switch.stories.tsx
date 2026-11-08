@@ -94,7 +94,7 @@ export const defaultChecked: StoryObj<{ handleChange: ReturnType<typeof fn> }> =
 		</Switch>
 	),
 	play: async ({ canvas, args }) => {
-		const input = canvas.getByRole("checkbox");
+		const input = canvas.getByRole("switch");
 
 		expect(input).toBeChecked();
 
@@ -121,7 +121,7 @@ export const checked: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
 		</Switch>
 	),
 	play: async ({ canvas, args }) => {
-		const input = canvas.getByRole("checkbox");
+		const input = canvas.getByRole("switch");
 
 		expect(input).toBeChecked();
 
@@ -160,7 +160,7 @@ export const disabled: StoryObj = {
 		</Example>
 	),
 	play: async ({ canvas }) => {
-		const [input] = canvas.getAllByRole("checkbox");
+		const [input] = canvas.getAllByRole("switch");
 		expect(input).toBeDisabled();
 	},
 };
@@ -181,7 +181,7 @@ export const className: StoryObj = {
 	),
 	play: async ({ canvas }) => {
 		const root = canvas.getByTestId("root").firstChild;
-		const input = canvas.getByRole("checkbox");
+		const input = canvas.getByRole("switch");
 
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");

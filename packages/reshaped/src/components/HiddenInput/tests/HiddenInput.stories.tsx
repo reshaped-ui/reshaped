@@ -305,3 +305,37 @@ export const composition: StoryObj = {
 		);
 	},
 };
+
+export const withoutName: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
+	name: "test: onChange without name",
+	args: {
+		handleChange: fn(),
+	},
+	render: (args) => <HiddenInput type="checkbox" value="test-value" onChange={args.handleChange} />,
+	play: async ({ canvas, args }) => {
+		const input = canvas.getByRole("checkbox");
+
+		await userEvent.click(input);
+
+		expect(args.handleChange).toHaveBeenCalledTimes(1);
+		expect(args.handleChange).toHaveBeenCalledWith(
+			expect.objectContaining({ value: "test-value", checked: true })
+		);
+	},
+};
+
+export const disabledPrecedence: StoryObj = {
+	name: "test: disabled precedence",
+	render: () => (
+		<FormControl disabled={false}>
+			<CheckboxGroup name="test-name" disabled>
+				<HiddenInput type="checkbox" value="test-value" />
+			</CheckboxGroup>
+		</FormControl>
+	),
+	play: async ({ canvas }) => {
+		const input = canvas.getByRole("checkbox");
+
+		expect(input).toBeDisabled();
+	},
+};
