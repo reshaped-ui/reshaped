@@ -25,7 +25,7 @@ const ProgressBar: React.FC<T.Props> = (props) => {
 	);
 	const total = max - min;
 	const normalizedValue = value - min;
-	const resolvedValue = Math.max(min, Math.min(max, normalizedValue));
+	const resolvedValue = Math.max(0, Math.min(total, normalizedValue));
 	const width = (resolvedValue / total) * 100;
 	const translate = `${width - 100}%`;
 

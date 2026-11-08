@@ -321,7 +321,8 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 						value={minValue}
 						onDragStart={handleMinDragStart}
 						position={minPercentPosition}
-						max={max}
+						// Keyboard changes shouldn't move the thumb past the other one
+						max={maxValue}
 						min={min}
 						ref={minRef}
 						tooltipRef={minTooltipRef}
@@ -343,7 +344,7 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 					onDragStart={handleMaxDragStart}
 					position={maxPercentPosition}
 					max={max}
-					min={min}
+					min={range && minValue !== undefined ? minValue : min}
 					ref={maxRef}
 					tooltipRef={maxTooltipRef}
 					inputRef={maxInputRef}

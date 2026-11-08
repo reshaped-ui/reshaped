@@ -37,8 +37,10 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		formControl?.attributes.id || (props.inputAttributes?.id as string | undefined) || id;
 	const disabled = formControl?.disabled || props.disabled;
 	const hasError = formControl?.hasError || props.hasError;
-	const increaseDisabled = disabled || (value && max ? value >= max : false);
-	const decreaseDisabled = disabled || (value && min ? value <= min : false);
+	const increaseDisabled = disabled || (value !== null && max !== undefined && value >= max);
+	const decreaseDisabled = disabled || (value !== null && min !== undefined && value <= min);
+	// Numeric keyboard on mobile doesn't include the decimal separator and the minus sign
+	const inputMode = step % 1 !== 0 || (min !== undefined && min < 0) ? "decimal" : "numeric";
 
 	const inputRef = React.useRef<HTMLInputElement>(null);
 	const rootRef = React.useRef<HTMLDivElement>(null);
@@ -143,9 +145,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 		}, 500);
 	};
 
-	const handleControlPointerUp = () => {
-		if (disabled) return;
-
+	const clearControlTimers = React.useCallback(() => {
 		if (pressedTimeoutRef.current) {
 			clearTimeout(pressedTimeoutRef.current);
 			pressedTimeoutRef.current = null;
@@ -155,6 +155,11 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			clearTimeout(changeIntervalRef.current);
 			changeIntervalRef.current = null;
 		}
+	}, []);
+
+	const handleControlPointerUp = () => {
+		if (disabled) return;
+		clearControlTimers();
 	};
 
 	useHotkeys(
@@ -171,8 +176,11 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 
 	React.useEffect(() => {
 		valueRef.current = value;
-		setTextValue(value?.toString() ?? "");
+		// Keep the typed text if it already represents the value, e.g. "1." while typing "1.5"
+		setTextValue((prev) => (parseFloat(prev) === value ? prev : (value?.toString() ?? "")));
 	}, [value]);
+
+	React.useEffect(() => clearControlTimers, [clearControlTimers]);
 
 	const mouseIconSize = responsivePropDependency(size, (size) => {
 		return size === "large" || size === "xlarge" ? 4 : 3;
@@ -196,6 +204,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 						onPointerDown: (e) => handleControlPointerDown(e, handleIncrease),
 						onPointerUp: handleControlPointerUp,
 						onPointerLeave: handleControlPointerUp,
+						onPointerCancel: handleControlPointerUp,
 						// Prevent menu from opening on long press
 						onContextMenu: (e) => e.preventDefault(),
 					}}
@@ -216,6 +225,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 						onPointerDown: (e) => handleControlPointerDown(e, handleDecrease),
 						onPointerUp: handleControlPointerUp,
 						onPointerLeave: handleControlPointerUp,
+						onPointerCancel: handleControlPointerUp,
 						// Prevent menu from opening on long press
 						onContextMenu: (e) => e.preventDefault(),
 					}}
@@ -245,7 +255,7 @@ const NumberFieldControlled: React.FC<T.ControlledProps> = (props) => {
 			inputAttributes={{
 				...textFieldProps.inputAttributes,
 				ref: inputRef,
-				inputMode: "numeric",
+				inputMode,
 				autoComplete: "off",
 				autoCorrect: "off",
 				spellCheck: "false",
