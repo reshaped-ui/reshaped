@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "4.3.0-canary.0",
-    "@reshaped/theming": "4.3.0-canary.0",
-    "@reshaped/utilities": "4.3.0-canary.0"
+    "reshaped": "4.3.0-canary.1",
+    "@reshaped/theming": "4.3.0-canary.1",
+    "@reshaped/utilities": "4.3.0-canary.1"
   },
   "changesets": [
     "badge-container-cutout",
