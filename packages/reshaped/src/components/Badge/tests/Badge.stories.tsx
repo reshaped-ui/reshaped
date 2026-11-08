@@ -324,7 +324,7 @@ export const container = {
 };
 
 export const cutout: StoryObj = {
-	name: "container, cutout",
+	name: "container, cutout by default",
 	render: () => {
 		const [hidden, setHidden] = React.useState(false);
 		const [count, setCount] = React.useState(5);
@@ -340,7 +340,7 @@ export const cutout: StoryObj = {
 			>
 				<Example.Item title="cutout, on a colored background">
 					<View backgroundColor="primary-faded" padding={6} align="start">
-						<Badge.Container overlap cutout attributes={{ "data-testid": "container" }}>
+						<Badge.Container overlap attributes={{ "data-testid": "container" }}>
 							<Badge color="primary" rounded hidden={hidden}>
 								{count}
 							</Badge>

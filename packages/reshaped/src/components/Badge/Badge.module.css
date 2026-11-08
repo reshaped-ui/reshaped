@@ -255,6 +255,8 @@
 	}
 
 	&:has(> .root) > :not(.root) {
+		/* Keep focus rings and shadows painted outside the content box visible */
+		--rs-badge-cutout-overflow: var(--rs-unit-x4);
 		--rs-badge-cutout-w: calc(
 			(var(--rs-badge-width) + var(--rs-unit-x0-5) * 2) * var(--rs-badge-cutout-scale)
 		);
@@ -307,7 +309,8 @@
 				var(--rs-badge-cutout-circle)
 			);
 		mask-size:
-			100% 100%,
+			calc(100% + var(--rs-badge-cutout-overflow) * 2)
+				calc(100% + var(--rs-badge-cutout-overflow) * 2),
 			var(--rs-badge-cutout-size),
 			var(--rs-badge-cutout-size),
 			var(--rs-badge-cutout-size),
@@ -315,7 +318,7 @@
 			var(--rs-badge-cutout-size),
 			var(--rs-badge-cutout-size);
 		mask-position:
-			0 0,
+			calc(var(--rs-badge-cutout-overflow) * -1) calc(var(--rs-badge-cutout-overflow) * -1),
 			var(--rs-badge-cutout-position),
 			var(--rs-badge-cutout-position),
 			var(--rs-badge-cutout-position),
@@ -323,6 +326,7 @@
 			var(--rs-badge-cutout-position),
 			var(--rs-badge-cutout-position);
 		mask-repeat: no-repeat;
+		mask-clip: no-clip;
 		mask-composite: subtract, add, add, add, add, add, add;
 		transition: --rs-badge-cutout-scale var(--rs-duration-medium) var(--rs-easing-standard);
 	}
