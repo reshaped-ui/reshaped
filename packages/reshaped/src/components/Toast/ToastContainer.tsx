@@ -26,7 +26,9 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	const [toastHeight, setToastHeight] = React.useState<number>();
 	const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	// Time left before hiding the toast, preserved when the timer gets paused
-	const remainingTimeRef = React.useRef<number | null>(null);
+	const remainingTimeRef = React.useRef(
+		(typeof timeout === "string" ? timeouts[timeout] : timeout) ?? timeouts.short
+	);
 	const timerStartRef = React.useRef(0);
 	const rootRef = React.useRef<HTMLLIElement>(null);
 	const resizingRef = React.useRef(false);
@@ -45,23 +47,14 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 		if (!timeoutRef.current) return;
 		clearTimeout(timeoutRef.current);
 		timeoutRef.current = null;
-
-		if (remainingTimeRef.current !== null) {
-			remainingTimeRef.current -= Date.now() - timerStartRef.current;
-		}
+		remainingTimeRef.current -= Date.now() - timerStartRef.current;
 	}, []);
 
 	const startTimer = React.useCallback(() => {
 		stopTimer();
-
-		const timeoutValue = typeof timeout === "string" ? timeouts[timeout] : timeout;
 		if (timeout === 0) return;
 
-		// Resume the paused timer instead of starting it over
-		remainingTimeRef.current = Math.max(
-			0,
-			remainingTimeRef.current ?? timeoutValue ?? timeouts.short
-		);
+		// Resumes with the time left instead of starting the timer over
 		timerStartRef.current = Date.now();
 		timeoutRef.current = setTimeout(() => {
 			if (!checkTransitions()) {
@@ -89,7 +82,11 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 	React.useEffect(() => {
 		if (status !== "exiting") return;
 
+		let cancelled = false;
+
 		onNextFrame(() => {
+			if (cancelled) return;
+
 			const animations = rootRef.current?.getAnimations?.() ?? [];
 			const hasHeightTransition = animations.some(
 				(animation) => (animation as CSSTransition).transitionProperty === "height"
@@ -97,6 +94,10 @@ const ToastContainer: React.FC<T.ContainerProps> = (props) => {
 
 			if (!hasHeightTransition) remove(id);
 		});
+
+		return () => {
+			cancelled = true;
+		};
 	}, [status, id, remove]);
 
 	const handleBlur = () => {
