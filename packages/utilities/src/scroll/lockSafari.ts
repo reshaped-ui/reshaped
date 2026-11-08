@@ -8,8 +8,8 @@ const styleCache = new StyleCache();
  */
 const getViewportScroller = () => {
 	const html = document.documentElement;
-	const { overflow, overflowX, overflowY } = window.getComputedStyle(html);
-	const htmlHasOverflow = /auto|scroll|overlay|hidden|clip/.test(overflow + overflowX + overflowY);
+	const { overflowX, overflowY } = window.getComputedStyle(html);
+	const htmlHasOverflow = overflowX !== "visible" || overflowY !== "visible";
 
 	return htmlHasOverflow ? html : document.body;
 };
@@ -23,7 +23,7 @@ const lockSafariScroll = () => {
 	const el = getViewportScroller();
 
 	// Longhands keep the original value of each axis when unlocking, e.g. overflow-x: hidden on body
-	styleCache.set(el, { "overflow-x": "hidden", "overflow-y": "hidden" });
+	styleCache.set(el, { overflowX: "hidden", overflowY: "hidden" });
 
 	return () => styleCache.reset(el);
 };

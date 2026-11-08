@@ -76,8 +76,11 @@ const getInitialState = (): State => ({
  * Resolved from the transform so a gesture can pick up an animation that is still in flight,
  * the dragging class disables transitions and would otherwise snap the modal to the animation target
  */
-const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign: number }) => {
-	const { transform } = window.getComputedStyle(el);
+const getRenderedOffset = (
+	style: CSSStyleDeclaration,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
+	const { transform } = style;
 	if (!transform || transform === "none") return 0;
 
 	const matrix = new DOMMatrixReadOnly(transform);
@@ -87,8 +90,11 @@ const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign
 /**
  * Distance in px the modal travels to its closed position, including its offset from the container edge
  */
-const getClosingSize = (el: HTMLElement, args: { axis: "x" | "y"; closingSign: number }) => {
-	const style = window.getComputedStyle(el);
+const getClosingSize = (
+	el: HTMLElement,
+	style: CSSStyleDeclaration,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
 	const size = args.axis === "y" ? el.offsetHeight : el.offsetWidth;
 	const edgeOffset =
 		args.axis === "y" ? style.bottom : args.closingSign === -1 ? style.left : style.right;
@@ -245,8 +251,9 @@ const useModalDrag = (args: {
 		// Prevent the drag handling when browser is trying to navigate to a previous page
 		if (axis === "x" && closingSign === -1 && touch.clientX < EDGE_BOUNDARY) return;
 
+		const rootStyle = rootEl && window.getComputedStyle(rootEl);
 		// Measured before the state is replaced, a transition in flight resolves to its current position
-		const seed = active && rootEl ? getRenderedOffset(rootEl, { axis, closingSign }) : 0;
+		const seed = active && rootStyle ? getRenderedOffset(rootStyle, { axis, closingSign }) : 0;
 		const origin = axis === "y" ? touch.clientY : touch.clientX;
 
 		// The previous gesture can be left unresolved, e.g. when the modal stays open after a drag close
@@ -256,7 +263,7 @@ const useModalDrag = (args: {
 			oppositeOrigin: axis === "y" ? touch.clientX : touch.clientY,
 			previous: origin,
 			seed,
-			size: rootEl ? getClosingSize(rootEl, { axis, closingSign }) : 1,
+			size: rootEl && rootStyle ? getClosingSize(rootEl, rootStyle, { axis, closingSign }) : 1,
 		};
 
 		resetReleaseTransition();

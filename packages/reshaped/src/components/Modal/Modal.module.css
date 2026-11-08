@@ -18,10 +18,20 @@
 	 * increased to the browser safe area insets when they're larger, e.g. for the notch and the home indicator
 	 */
 	--rs-modal-offset: var(--rs-unit-x2);
-	--rs-modal-inset-top: max(var(--rs-modal-offset), env(safe-area-inset-top, 0px));
-	--rs-modal-inset-bottom: max(var(--rs-modal-offset), env(safe-area-inset-bottom, 0px));
-	--rs-modal-inset-start: max(var(--rs-modal-offset), env(safe-area-inset-left, 0px));
-	--rs-modal-inset-end: max(var(--rs-modal-offset), env(safe-area-inset-right, 0px));
+	--rs-modal-safe-top: env(safe-area-inset-top, 0px);
+	--rs-modal-safe-bottom: env(safe-area-inset-bottom, 0px);
+	--rs-modal-safe-start: env(safe-area-inset-left, 0px);
+	--rs-modal-safe-end: env(safe-area-inset-right, 0px);
+	--rs-modal-inset-top: max(var(--rs-modal-offset), var(--rs-modal-safe-top));
+	--rs-modal-inset-bottom: max(var(--rs-modal-offset), var(--rs-modal-safe-bottom));
+	--rs-modal-inset-start: max(var(--rs-modal-offset), var(--rs-modal-safe-start));
+	--rs-modal-inset-end: max(var(--rs-modal-offset), var(--rs-modal-safe-end));
+
+	/*
+	 * Radius of the corners facing the screen corners, browsers don't expose the device screen radius
+	 * so it can be overridden with --rs-modal-edge-radius from any parent element
+	 */
+	--rs-modal-screen-radius: var(--rs-modal-edge-radius, var(--rs-radius-large));
 
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
@@ -39,8 +49,8 @@
 	}
 
 	[dir="rtl"] & {
-		--rs-modal-inset-start: max(var(--rs-modal-offset), env(safe-area-inset-right, 0px));
-		--rs-modal-inset-end: max(var(--rs-modal-offset), env(safe-area-inset-left, 0px));
+		--rs-modal-safe-start: env(safe-area-inset-right, 0px);
+		--rs-modal-safe-end: env(safe-area-inset-left, 0px);
 	}
 
 	/* Modal stays on top of the page content without the overlay, so it keeps the overlay elevation */
@@ -52,10 +62,10 @@
 	&.--contained {
 		--rs-modal-container-width: 100%;
 		--rs-modal-container-height: 100%;
-		--rs-modal-inset-top: var(--rs-modal-offset);
-		--rs-modal-inset-bottom: var(--rs-modal-offset);
-		--rs-modal-inset-start: var(--rs-modal-offset);
-		--rs-modal-inset-end: var(--rs-modal-offset);
+		--rs-modal-safe-top: 0px;
+		--rs-modal-safe-bottom: 0px;
+		--rs-modal-safe-start: 0px;
+		--rs-modal-safe-end: 0px;
 	}
 }
 
@@ -103,13 +113,8 @@
 		transform: translate(0, calc(100% + var(--rs-modal-inset-bottom)));
 		position: absolute;
 		border-radius: var(--rs-radius-large);
-
-		/*
-		 * Corners facing the screen corners, browsers don't expose the device screen radius
-		 * so it can be overridden with --rs-modal-edge-radius from any parent element
-		 */
-		border-end-start-radius: var(--rs-modal-edge-radius, var(--rs-radius-large));
-		border-end-end-radius: var(--rs-modal-edge-radius, var(--rs-radius-large));
+		border-end-start-radius: var(--rs-modal-screen-radius);
+		border-end-end-radius: var(--rs-modal-screen-radius);
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
@@ -136,8 +141,8 @@
 		transform: translate(calc(-100% - var(--rs-modal-inset-start)), 0);
 		position: absolute;
 		border-radius: var(--rs-radius-large);
-		border-start-start-radius: var(--rs-modal-edge-radius, var(--rs-radius-large));
-		border-end-start-radius: var(--rs-modal-edge-radius, var(--rs-radius-large));
+		border-start-start-radius: var(--rs-modal-screen-radius);
+		border-end-start-radius: var(--rs-modal-screen-radius);
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
@@ -172,8 +177,8 @@
 		transform: translate(calc(100% + var(--rs-modal-inset-end)), 0);
 		position: absolute;
 		border-radius: var(--rs-radius-large);
-		border-start-end-radius: var(--rs-modal-edge-radius, var(--rs-radius-large));
-		border-end-end-radius: var(--rs-modal-edge-radius, var(--rs-radius-large));
+		border-start-end-radius: var(--rs-modal-screen-radius);
+		border-end-end-radius: var(--rs-modal-screen-radius);
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
