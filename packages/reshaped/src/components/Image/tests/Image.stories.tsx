@@ -1,7 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, Mock, waitFor } from "storybook/test";
 
+import Avatar from "@/components/Avatar";
 import Icon from "@/components/Icon";
+import Modal from "@/components/Modal";
+import Text from "@/components/Text";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
 import IconZap from "@/icons/Zap";
@@ -111,32 +114,12 @@ export const displayMode = {
 	),
 };
 
-const largeImgUrl =
-	"data:image/svg+xml," +
-	encodeURIComponent(
-		'<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect width="100%" height="100%" fill="teal"/></svg>'
-	);
-
 export const outline: StoryObj = {
 	name: "outline",
 	render: () => (
 		<Example>
 			<Example.Item title="outline: true">
 				<Image src={imgUrl} height="200px" width="100%" outline borderRadius="small" />
-			</Example.Item>
-
-			<Example.Item title="outline: true, aspectRatio: 1, image larger than the root">
-				<View direction="row" align="center" gap={4}>
-					<Image
-						src={largeImgUrl}
-						alt="large photo"
-						width="36px"
-						aspectRatio={1}
-						outline
-						borderRadius="circular"
-						attributes={{ id: "test-outline-root" }}
-					/>
-				</View>
 			</Example.Item>
 		</Example>
 	),
@@ -299,5 +282,29 @@ export const imageAttributes: StoryObj = {
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");
 		expect(img).toHaveAttribute("data-testid", "test-img-id");
+	},
+};
+
+const largeImage =
+	"data:image/svg+xml," +
+	encodeURIComponent(
+		'<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect width="100%" height="100%" fill="teal"/></svg>'
+	);
+
+export const testCases = {
+	name: "test: edge cases",
+	render: () => {
+		return (
+			<Example>
+				<Example.Item title="image larger than the root, safari">
+					<Modal active position="center" onClose={() => {}}>
+						<View direction="row" align="center" gap={4}>
+							<Avatar size={9} src={largeImage} />
+							<Text>Large image</Text>
+						</View>
+					</Modal>
+				</Example.Item>
+			</Example>
+		);
 	},
 };
