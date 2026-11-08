@@ -10,7 +10,6 @@ import View from "@/components/View";
 import { responsivePropDependency } from "@/utilities/props";
 import CheckmarkIcon from "@/icons/Checkmark";
 import type * as T from "./Select.types";
-import { getFirstOptionValue } from "./Select.utilities";
 import SelectGroup from "./SelectGroup";
 import SelectHiddenInput from "./SelectHiddenInput";
 import SelectOption from "./SelectOption";
@@ -44,13 +43,9 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 	const [openedWithTouch, setOpenedWithTouch] = React.useState(false);
 	const formControl = useFormControl();
 	const triggerId = `${id}-trigger`;
-	// Without a placeholder, first option is displayed as selected, so it's also used as the form value
-	const fallbackValue =
-		!multiple && !placeholder && !value ? getFirstOptionValue(children) : undefined;
-	const resolvedValue = fallbackValue ?? value;
 	const indexedOptions: Array<{ value: string; text: string }> = [];
 	const selectedOptions: T.OptionProps[] = [];
-	const hasValue = multiple ? value.length > 0 : resolvedValue;
+	const hasValue = multiple ? value.length > 0 : value;
 
 	const traverseOptionList = (children: React.ReactNode): React.ReactNode => {
 		return React.Children.map(children, (child, index) => {
@@ -59,7 +54,8 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 			if (child.type === SelectOption) {
 				const component = child as React.ReactElement<T.OptionProps>;
 				const option = component.props;
-				const selected = multiple ? value.includes(option.value) : option.value === resolvedValue;
+				const matchingValue = multiple ? value.includes(option.value) : option.value === value;
+				const selected = matchingValue || (!placeholder && !value && index === 0);
 
 				if (selected) selectedOptions.push(option);
 
@@ -99,7 +95,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 					attributes: {
 						...component.props.attributes,
 						ref: selected ? initialFocusRef : undefined,
-						"aria-selected": selected,
+						"aria-selected": matchingValue,
 					},
 				});
 			}
@@ -153,7 +149,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 		if (passedRenderValue) {
 			// Returning the same call for correct type inference
 			if (multiple) return passedRenderValue({ value });
-			return passedRenderValue({ value: fallbackValue ?? value });
+			return passedRenderValue({ value });
 		}
 
 		if (selectedOptions.length === 1) return selectedOptions[0].children;
@@ -181,7 +177,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 
 		// Calling it in both branches for correct type inference, same as renderValue
 		if (multiple) return passedRenderTrigger(attributes, { ...triggerState, value });
-		return passedRenderTrigger(attributes, { ...triggerState, value: fallbackValue ?? value });
+		return passedRenderTrigger(attributes, { ...triggerState, value });
 	};
 
 	return (
@@ -224,7 +220,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 								})}
 
 								<SelectHiddenInput
-									value={resolvedValue}
+									value={value}
 									name={name}
 									id={id}
 									inputAttributes={inputAttributes}
@@ -245,7 +241,7 @@ const SelectCustomControlled: React.FC<T.CustomControlledProps> = (props) => {
 									: undefined,
 								"aria-describedby": formControl.attributes["aria-describedby"],
 							}}
-							value={resolvedValue}
+							value={value}
 						>
 							{renderValue()}
 						</SelectTrigger>
