@@ -121,6 +121,16 @@ export const outline: StoryObj = {
 			<Example.Item title="outline: true">
 				<Image src={imgUrl} height="200px" width="100%" outline borderRadius="small" />
 			</Example.Item>
+			<Example.Item title="outline: true, image larger than the root">
+				<Image
+					src={largeImage}
+					alt="large photo"
+					width="36px"
+					height="36px"
+					outline
+					attributes={{ id: "test-outline-root" }}
+				/>
+			</Example.Item>
 		</Example>
 	),
 	play: async ({ canvas }) => {
