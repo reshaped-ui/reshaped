@@ -50,6 +50,25 @@ export const base: StoryObj = {
 	},
 };
 
+export const today: StoryObj = {
+	name: "today",
+	render: () => (
+		<Example>
+			<Example.Item title="today's date is bold">
+				<Calendar />
+			</Example.Item>
+		</Example>
+	),
+	play: ({ canvas }) => {
+		const now = new Date();
+		const dates = canvas.getAllByRole("checkbox");
+		const todayDates = dates.filter((el) => el.getAttribute("aria-current") === "date");
+
+		expect(todayDates).toHaveLength(1);
+		expect(todayDates[0]).toHaveTextContent(String(now.getDate()));
+	},
+};
+
 export const month: StoryObj<{ handleDefaultMonthChange: Mock; handleMonthChange: Mock }> = {
 	name: "defaultMonth, month, onMonthChange",
 	args: {

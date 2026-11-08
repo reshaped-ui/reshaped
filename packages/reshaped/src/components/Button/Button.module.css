@@ -87,6 +87,11 @@
 
 .--icon-only .icon {
 	margin: 0;
+
+	/* Keep the gap between icon and endIcon when there is no text between them */
+	& + .icon {
+		margin-inline-start: var(--rs-button-gap);
+	}
 }
 
 .text,

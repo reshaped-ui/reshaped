@@ -37,6 +37,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 	const isEndValue = Boolean(isoDate && !!isoEndValue && isoDate === isoEndValue);
 	const isAfterStartValue = Boolean(isoDate && isoStartValue && isoDate > isoStartValue);
 	const isBeforeEndValue = Boolean(isoDate && isoEndValue && isoDate < isoEndValue);
+	const isToday = isoDate === getLocalISODate({ date: new Date() });
 	const isInHoveredRange = Boolean(hoveredDate && !endValue && hoveredDate > date);
 	const isInSelectedDates = !!selectedDates?.some(
 		(selectedDate) => getLocalISODate({ date: selectedDate }) === isoDate
@@ -66,6 +67,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 
 	const dateClassNames = classNames([
 		s.cell,
+		isToday && s["--today"],
 		selection && s["--active"],
 		selection && s[`--selection-${selection}`],
 	]);
@@ -129,6 +131,7 @@ const CalendarDate: React.FC<T.DateProps> = (props) => {
 						? renderAriaLabel({ date })
 						: date.toLocaleDateString("en-us", { month: "long", day: "numeric", weekday: "long" }),
 					"aria-checked": !!selection,
+					"aria-current": isToday ? "date" : undefined,
 					"data-rs-date": getLocalISODate({ date }),
 					onFocus: handleFocus,
 					onBlur: handleBlur,
