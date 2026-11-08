@@ -8,6 +8,7 @@ import Image from "@/components/Image";
 import Text from "@/components/Text";
 import View from "@/components/View";
 import { Example, Placeholder } from "@/utilities/storybook";
+import IconChevronDown from "@/icons/ChevronDown";
 import IconPlus from "@/icons/Plus";
 import IconZap from "@/icons/Zap";
 
@@ -114,7 +115,7 @@ export const variantAndColor = {
 	),
 };
 
-export const icon = {
+export const icon: StoryObj = {
 	name: "icon",
 	render: () => (
 		<Example>
@@ -139,8 +140,24 @@ export const icon = {
 			<Example.Item title="icon only">
 				<Button onClick={() => {}} icon={IconZap} attributes={{ "aria-label": "Action" }} />
 			</Example.Item>
+
+			<Example.Item title="icon, endIcon, icon only">
+				<Button
+					onClick={() => {}}
+					icon={IconZap}
+					endIcon={IconChevronDown}
+					attributes={{ "aria-label": "Options", "data-testid": "icon-end-icon-only" }}
+				/>
+			</Example.Item>
 		</Example>
 	),
+	play: ({ canvas }) => {
+		const el = canvas.getByTestId("icon-end-icon-only");
+		const [startIcon, endIcon] = el.querySelectorAll("[aria-hidden='true']");
+		const gap = endIcon.getBoundingClientRect().left - startIcon.getBoundingClientRect().right;
+
+		expect(gap).toBe(parseFloat(getComputedStyle(el).getPropertyValue("--rs-button-gap")));
+	},
 };
 
 export const size = {

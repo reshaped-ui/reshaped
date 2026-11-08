@@ -28,6 +28,10 @@
 		}
 	}
 
+	&.--today .cell-button {
+		font-weight: var(--rs-font-weight-bold);
+	}
+
 	&.--active {
 		& .cell-button {
 			color: var(--rs-color-on-background-primary);
