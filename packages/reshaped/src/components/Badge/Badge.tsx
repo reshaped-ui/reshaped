@@ -58,11 +58,14 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 
 	// Pass the badge size to Badge.Container for the cutout mask, border box size ignores the badge transforms
 	useIsomorphicLayoutEffect(() => {
-		const containerEl = containerRef?.current;
 		const badgeEl = rootRef.current;
-		if (!containerEl || !badgeEl) return;
+		if (!containerRef || !badgeEl) return;
 
 		const resizeObserver = new ResizeObserver(([entry]) => {
+			// Resolved here since child layout effects run before the parent container ref is attached on mount
+			const containerEl = containerRef.current;
+			if (!containerEl) return;
+
 			const { inlineSize, blockSize } = entry.borderBoxSize[0];
 
 			containerEl.style.setProperty("--rs-badge-width", `${inlineSize}px`);
