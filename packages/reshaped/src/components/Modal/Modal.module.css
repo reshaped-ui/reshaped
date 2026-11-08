@@ -255,6 +255,25 @@
 	}
 }
 
+/**
+ * Strip with the modal background fixed to the bottom edge of the screen behind the bottom modal.
+ * iOS Safari doesn't render the modal under its floating toolbar
+ * and fills the toolbar area with the color of the fixed elements attached to the screen edge instead
+ */
+.edge {
+	position: fixed;
+	inset-inline: 0;
+	bottom: 0;
+	height: calc(var(--rs-unit-x1) * 12);
+	background: var(--rs-color-background-elevation-overlay);
+	pointer-events: none;
+	opacity: 0;
+
+	&.--active {
+		opacity: 1;
+	}
+}
+
 .--active,
 [dir="rtl"] .--active {
 	transition-timing-function: var(--rs-easing-decelerate);

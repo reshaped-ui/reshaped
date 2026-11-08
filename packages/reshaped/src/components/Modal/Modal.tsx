@@ -140,6 +140,10 @@ const Modal: FC<T.Props> = (props) => {
 
 				return (
 					<Context.Provider value={value}>
+						{/* Rendered before the modal so it stays behind it */}
+						{clientPosition === "bottom" && !shouldBeContained && (
+							<div className={classNames(s.edge, active && s["--active"])} aria-hidden="true" />
+						)}
 						<div
 							{...attributes}
 							style={
