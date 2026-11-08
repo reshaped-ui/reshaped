@@ -1,7 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
 import { expect, fn, Mock, waitFor } from "storybook/test";
 
+import Avatar from "@/components/Avatar";
 import Icon from "@/components/Icon";
+import Modal from "@/components/Modal";
+import Text from "@/components/Text";
 import View from "@/components/View";
 import { Example } from "@/utilities/storybook";
 import IconZap from "@/icons/Zap";
@@ -111,7 +114,7 @@ export const displayMode = {
 	),
 };
 
-export const outline = {
+export const outline: StoryObj = {
 	name: "outline",
 	render: () => (
 		<Example>
@@ -120,6 +123,24 @@ export const outline = {
 			</Example.Item>
 		</Example>
 	),
+	play: async ({ canvas }) => {
+		const img = canvas.getByAltText("large photo");
+		const root = img.parentElement!;
+
+		// Root attributes are applied to the wrapper only
+		expect(root).toHaveAttribute("id", "test-outline-root");
+		expect(img).not.toHaveAttribute("id");
+
+		await waitFor(() => expect((img as HTMLImageElement).complete).toBe(true));
+
+		const rootRect = root.getBoundingClientRect();
+		const imgRect = img.getBoundingClientRect();
+
+		expect(rootRect.width).toBe(36);
+		expect(rootRect.height).toBe(36);
+		expect(imgRect.width).toBe(36);
+		expect(imgRect.height).toBe(36);
+	},
 };
 
 export const onLoad: StoryObj<{ handleLoad: ReturnType<typeof fn> }> = {
@@ -261,5 +282,29 @@ export const imageAttributes: StoryObj = {
 		expect(root).toHaveClass("test-classname");
 		expect(root).toHaveAttribute("id", "test-id");
 		expect(img).toHaveAttribute("data-testid", "test-img-id");
+	},
+};
+
+const largeImage =
+	"data:image/svg+xml," +
+	encodeURIComponent(
+		'<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect width="100%" height="100%" fill="teal"/></svg>'
+	);
+
+export const testCases = {
+	name: "test: edge cases",
+	render: () => {
+		return (
+			<Example>
+				<Example.Item title="image larger than the root, safari">
+					<Modal active position="center" onClose={() => {}}>
+						<View direction="row" align="center" gap={4}>
+							<Avatar size={9} src={largeImage} />
+							<Text>Large image</Text>
+						</View>
+					</Modal>
+				</Example.Item>
+			</Example>
+		);
 	},
 };
