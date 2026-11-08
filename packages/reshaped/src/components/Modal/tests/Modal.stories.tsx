@@ -416,6 +416,7 @@ export const edgeCases = {
 		const menuModalToggle = useToggle();
 		const menuModalToggleInner = useToggle();
 		const scrollModalToggle = useToggle();
+		const scrollDrawerToggle = useToggle();
 		const inputRef = React.useRef<HTMLInputElement>(null);
 
 		return (
@@ -471,6 +472,25 @@ export const edgeCases = {
 							onClose={scrollModalToggle.deactivate}
 							size="300px"
 							position="bottom"
+						>
+							<View
+								height="1000px"
+								backgroundColor="neutral-faded"
+								borderRadius="medium"
+								padding={4}
+							>
+								Content
+							</View>
+						</Modal>
+					</View>
+				</Example.Item>
+				<Example.Item title="scrolled side modal supports swipe-to-close, vertical swipes keep scrolling">
+					<View gap={3} direction="row">
+						<Button onClick={scrollDrawerToggle.activate}>Open</Button>
+						<Modal
+							active={scrollDrawerToggle.active}
+							onClose={scrollDrawerToggle.deactivate}
+							position="end"
 						>
 							<View
 								height="1000px"
