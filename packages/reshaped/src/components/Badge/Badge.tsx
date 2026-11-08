@@ -1,10 +1,14 @@
-import { forwardRef } from "react";
+"use client";
+
+import React, { forwardRef } from "react";
 import { classNames } from "@reshaped/utilities";
 
 import Actionable, { type ActionableProps, type ActionableRef } from "@/components/Actionable";
 import Icon from "@/components/Icon";
 import Text from "@/components/Text";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import IconClose from "@/icons/Close";
+import BadgeCutoutContext from "./Badge.context";
 import type * as T from "./Badge.types";
 import s from "./Badge.module.css";
 
@@ -27,6 +31,8 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		attributes,
 		as,
 	} = props;
+	const rootRef = React.useRef<ActionableRef>(null);
+	const cutoutContainerRef = React.useContext(BadgeCutoutContext);
 	const isActionable = !!(onClick || href);
 	const iconSize = {
 		small: 3,
@@ -48,6 +54,25 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		empty && s["--empty"]
 	);
 
+	React.useImperativeHandle(ref, () => rootRef.current!);
+
+	// Pass the badge size to Badge.Container for the cutout mask, border box size ignores the badge transforms
+	useIsomorphicLayoutEffect(() => {
+		const containerEl = cutoutContainerRef?.current;
+		const badgeEl = rootRef.current;
+		if (!containerEl || !badgeEl) return;
+
+		const resizeObserver = new ResizeObserver(([entry]) => {
+			const { inlineSize, blockSize } = entry.borderBoxSize[0];
+
+			containerEl.style.setProperty("--rs-badge-width", `${inlineSize}px`);
+			containerEl.style.setProperty("--rs-badge-height", `${blockSize}px`);
+		});
+
+		resizeObserver.observe(badgeEl);
+		return () => resizeObserver.disconnect();
+	}, [cutoutContainerRef]);
+
 	const handleDismiss: ActionableProps["onClick"] = (e) => {
 		// Prevent the parent Actionable from handling the click,
 		// including following the link when the badge is rendered as one
@@ -62,7 +87,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 			href={href}
 			className={rootClassName}
 			attributes={attributes}
-			ref={ref}
+			ref={rootRef}
 			as={as}
 			touchHitbox={isActionable}
 		>
