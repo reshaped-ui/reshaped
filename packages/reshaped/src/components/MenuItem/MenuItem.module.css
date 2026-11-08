@@ -35,6 +35,17 @@ button.root {
 	}
 }
 
+/* Hovered item has a higher priority than the focused one, so only one item is highlighted in the menu */
+@media (hover: hover) and (pointer: fine) {
+	:is([role="menu"], [role="listbox"]):has(.root:hover) .root:focus:not(:hover) {
+		outline: none;
+
+		&[role="option"] {
+			background-color: var(--rs-menu-item-bg-color);
+		}
+	}
+}
+
 .icon {
 	color: var(--rs-menu-item-icon-color, inherit);
 }
@@ -89,10 +100,8 @@ button.root {
 		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
 
-	/* Menu items are highlighted on keyboard focus, so hover is ignored in keyboard mode to avoid highlighting two items */
 	@media (hover: hover) and (pointer: fine) {
-		:root:not([data-rs-keyboard]) &:hover,
-		&:not([role="menuitem"], [role="option"]):hover {
+		&:hover {
 			--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 		}
 	}
@@ -109,10 +118,8 @@ button.root {
 		--rs-menu-item-icon-color: var(--rs-color-foreground-critical);
 	}
 
-	/* Menu items are highlighted on keyboard focus, so hover is ignored in keyboard mode to avoid highlighting two items */
 	@media (hover: hover) and (pointer: fine) {
-		:root:not([data-rs-keyboard]) &:hover,
-		&:not([role="menuitem"], [role="option"]):hover {
+		&:hover {
 			--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 			--rs-menu-item-color: var(--rs-color-foreground-critical);
 			--rs-menu-item-icon-color: var(--rs-color-foreground-critical);
@@ -128,10 +135,8 @@ button.root {
 		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
 
-	/* Menu items are highlighted on keyboard focus, so hover is ignored in keyboard mode to avoid highlighting two items */
 	@media (hover: hover) and (pointer: fine) {
-		:root:not([data-rs-keyboard]) &:hover,
-		&:not([role="menuitem"], [role="option"]):hover {
+		&:hover {
 			--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 		}
 	}
