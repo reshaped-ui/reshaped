@@ -2,17 +2,42 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "4.2.0",
-    "@reshaped/theming": "4.2.0",
-    "@reshaped/utilities": "4.2.0"
+    "reshaped": "4.3.0-canary.0",
+    "@reshaped/theming": "4.3.0-canary.0",
+    "@reshaped/utilities": "4.3.0-canary.0"
   },
   "changesets": [
+    "badge-container-cutout",
+    "button-icon-only-end-icon-gap",
+    "calendar-today-bold",
+    "checkable-inputs",
     "context-menu-close-on-another-menu",
+    "context-menu-hide-animation",
+    "context-menu-open-target",
+    "dark-elevation-colors",
+    "expandable-close-easing",
+    "flyout-a11y",
     "flyout-frozen-exit-animation",
+    "flyout-hover-unmount-triggers",
+    "form-control-a11y",
     "hotkeys-ime-composition",
+    "image-outline-aspect-ratio-webkit",
+    "ios-scroll-lock-overflow",
+    "menu-item-focus-indicator",
     "modal-drag-physics",
     "modal-drag-property",
+    "modal-ios-toolbar",
+    "modal-rubber-band",
+    "modal-safe-area-padding",
+    "modal-side-offset",
+    "modal-side-swipe-scrolled",
+    "numeric-inputs",
+    "on-click-outside-disabled-listeners",
     "overlay-backdrop-compositor",
-    "scroll-area-thumb-compositor"
+    "overlay-modal",
+    "scroll-area-thumb-compositor",
+    "select-a11y",
+    "tooltip-disable-touch",
+    "use-rtl-shared-state"
   ]
 }

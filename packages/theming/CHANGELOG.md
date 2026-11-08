@@ -1,5 +1,11 @@
 # @reshaped/theming
 
+## 4.3.0-canary.1
+
+### Minor Changes
+
+- [#704](https://github.com/reshaped-ui/reshaped/pull/704) [`8ff0310`](https://github.com/reshaped-ui/reshaped/commit/8ff03109006e519f48a51ef196ba29ee816a268a) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Moved the dark mode `elevation-raised` and `elevation-overlay` background colors closer to `elevation-base`, so overlay components like `Modal` and `Popover` no longer look washed out on top of the page. Regenerate custom themes to pick up the new values
+
 ## 4.3.0-canary.0
 
 ## 4.2.0
