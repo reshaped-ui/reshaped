@@ -17,6 +17,7 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		color = "primary",
 		selected,
 		highlighted,
+		focusIndicator = "outline",
 		disabled,
 		onClick,
 		href,
@@ -34,7 +35,8 @@ const MenuItem = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		color && s[`--color-${color}`],
 		selected && s["--selected"],
 		disabled && s["--disabled"],
-		highlighted && s["--highlighted"]
+		highlighted && s["--highlighted"],
+		focusIndicator === "highlight" && s["--focus-highlight"]
 	);
 	const gapSize = responsivePropDependency(size, (size) => {
 		if (size === "large") return 3;

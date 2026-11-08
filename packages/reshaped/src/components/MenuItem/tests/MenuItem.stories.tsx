@@ -102,6 +102,29 @@ export const selected = {
 	),
 };
 
+export const focusIndicator = {
+	name: "focusIndicator",
+	render: () => (
+		<Example>
+			<Example.Item title="focusIndicator: outline">
+				<MenuItem icon={IconZap} onClick={() => {}}>
+					Menu item
+				</MenuItem>
+			</Example.Item>
+			<Example.Item title="focusIndicator: highlight">
+				<MenuItem focusIndicator="highlight" icon={IconZap} onClick={() => {}}>
+					Menu item
+				</MenuItem>
+			</Example.Item>
+			<Example.Item title="focusIndicator: highlight, color: critical">
+				<MenuItem focusIndicator="highlight" color="critical" icon={IconZap} onClick={() => {}}>
+					Menu item
+				</MenuItem>
+			</Example.Item>
+		</Example>
+	),
+};
+
 export const slots = {
 	name: "startSlot, endSlot",
 	render: () => (

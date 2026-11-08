@@ -14,15 +14,17 @@ button.root {
 		transition: none;
 	}
 
-	[data-rs-keyboard] &[role="option"]:focus {
+	[data-rs-keyboard] &.--focus-highlight:focus {
 		outline: none;
-		background-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
 
 	/* Highlight appears instantly and only fades out, so quickly moving through items feels responsive */
 	&.--highlighted,
 	&.--highlighted .icon,
-	&.--highlighted .content {
+	&.--highlighted .content,
+	[data-rs-keyboard] &.--focus-highlight:focus,
+	[data-rs-keyboard] &.--focus-highlight:focus .icon,
+	[data-rs-keyboard] &.--focus-highlight:focus .content {
 		transition-duration: var(--rs-duration-rapid);
 	}
 
@@ -40,8 +42,11 @@ button.root {
 	:is([role="menu"], [role="listbox"]):has(.root:hover) .root:focus:not(:hover) {
 		outline: none;
 
-		&[role="option"] {
-			background-color: var(--rs-menu-item-bg-color);
+		/* Reset the focus highlight to the default item styles, selected and highlighted items keep their styles */
+		&.--focus-highlight:not(.--selected, .--highlighted) {
+			--rs-menu-item-bg-color: initial;
+			--rs-menu-item-color: initial;
+			--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 		}
 	}
 }
@@ -95,7 +100,7 @@ button.root {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
 	&.--selected,
-	&[data-rs-focus],
+	[data-rs-keyboard] &.--focus-highlight:focus,
 	&.--highlighted {
 		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
@@ -111,7 +116,7 @@ button.root {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
 	&.--selected,
-	&[data-rs-focus],
+	[data-rs-keyboard] &.--focus-highlight:focus,
 	&.--highlighted {
 		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 		--rs-menu-item-color: var(--rs-color-foreground-critical);
@@ -130,7 +135,7 @@ button.root {
 .--color-primary {
 	--rs-menu-item-icon-color: var(--rs-color-foreground-neutral-faded);
 
-	&[data-rs-focus],
+	[data-rs-keyboard] &.--focus-highlight:focus,
 	&.--highlighted {
 		--rs-menu-item-bg-color: var(--rs-color-background-neutral-highlighted-faded);
 	}
