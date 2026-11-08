@@ -9,7 +9,7 @@ type Context = {
 	rtl: [boolean, (state: boolean) => void];
 };
 
-const SingletonRTLContext = React.createContext<Context>({
+export const SingletonRTLContext = React.createContext<Context>({
 	rtl: [false, () => {}],
 });
 

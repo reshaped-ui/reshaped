@@ -23,6 +23,14 @@
 }
 
 .--outline {
+	/*
+	 * Image fills the wrapper as a flex item instead of relying on height: 100%,
+	 * since WebKit doesn't resolve it when the wrapper height comes from aspect-ratio
+	 */
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+
 	&::after {
 		content: "";
 		position: absolute;

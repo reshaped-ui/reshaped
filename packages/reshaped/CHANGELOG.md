@@ -1,5 +1,29 @@
 # reshaped
 
+## 4.3.0-canary.0
+
+### Minor Changes
+
+- [#675](https://github.com/reshaped-ui/reshaped/pull/675) [`d9770c5`](https://github.com/reshaped-ui/reshaped/commit/d9770c54651b915f82a14a431dc8e995c24f8656) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Restored the `Flyout` hide animation by default for `Select`, `DropdownMenu` and `Autocomplete`. Flyout content is now frozen while animating out, so it keeps its last rendered state even when the component updates on close, for example when `Select` changes its selected value. `disableHideAnimation` is still supported to opt out of the animation. Content that's animating out no longer reacts to pointer events, content closed right after opening no longer stays mounted, and focus now returns to the trigger when the content is closed without an animation, for example with reduced motion enabled.
+
+- [#670](https://github.com/reshaped-ui/reshaped/pull/670) [`cf7ac31`](https://github.com/reshaped-ui/reshaped/commit/cf7ac31a5aa91ea50ae2c5fd3bb3b420329adaf1) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Improved the `Modal` swipe gesture physics. On release, the closing or returning animation now continues from the current velocity of the gesture using a critically damped spring, so a quick flick closes the modal right away while a slow release settles smoothly, instead of restarting a fixed-duration transition from zero. Returning to the open position is animated as well, where previously it snapped back, and starting a new swipe while the modal is still animating picks it up from its current position instead of snapping to the position the animation was heading to.
+
+### Patch Changes
+
+- [#678](https://github.com/reshaped-ui/reshaped/pull/678) [`4d8b937`](https://github.com/reshaped-ui/reshaped/commit/4d8b937f933f2c4a720ed7814b4cccd4df00f8cb) Thanks [@blvdmitry](https://github.com/blvdmitry)! - ContextMenu: Fixed the open menu staying on the screen when right clicking another ContextMenu trigger, only the new menu is shown now. Right clicking the trigger of the open menu again moves the menu to the new position.
+
+- [#676](https://github.com/reshaped-ui/reshaped/pull/676) [`6150f4f`](https://github.com/reshaped-ui/reshaped/commit/6150f4fc37306e8d27b28eb8df56dd4cfe1f8ae9) Thanks [@mahirhir](https://github.com/mahirhir)! - Fixed `useHotkeys` reacting to keys that belong to an IME composition. With a Japanese, Chinese or Korean input method, the Enter that confirms a conversion no longer triggers hotkeys, so `Autocomplete` no longer selects the highlighted option or calls `onEnter` with unfinished text.
+
+- [#669](https://github.com/reshaped-ui/reshaped/pull/669) [`9c58807`](https://github.com/reshaped-ui/reshaped/commit/9c5880724416c9dea4b2186524262704d796e6d5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Improved the `Modal` swipe-to-close performance on mobile. The drag offset custom property is now registered as non-inherited, so updating it on every frame of the gesture only recalculates the style of the modal root instead of every element of the modal content.
+
+- [#667](https://github.com/reshaped-ui/reshaped/pull/667) [`3d94de2`](https://github.com/reshaped-ui/reshaped/commit/3d94de232da541d4c6ee513cdc308e744c7c35e5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Improved the `Overlay` animation performance by rendering its backdrop as a separate layer with a static color and transitioning only its `opacity`. Previously the full-viewport root transitioned `background-color` on open and close and during the `Modal` drag-to-close gesture, which forced the browser to repaint the whole viewport on every frame on the main thread. The transition now runs entirely on the compositor thread while keeping the same visual result.
+
+- [#668](https://github.com/reshaped-ui/reshaped/pull/668) [`3c21d21`](https://github.com/reshaped-ui/reshaped/commit/3c21d21e6c5c63572c791d93382acc686a74e624) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Improved the `ScrollArea` scrolling performance. The custom scrollbar thumb now follows the scroll position with a `transform` instead of `inset`, so the scroll-linked updates run on the compositor thread without triggering layout and paint, and the scroll position is written directly to a css variable instead of re-rendering the component on every scroll event. This also fixes the horizontal thumb moving outside of the scrollbar track when scrolling in RTL.
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.3.0-canary.0
+  - @reshaped/theming@4.3.0-canary.0
+
 ## 4.2.0
 
 ### Minor Changes

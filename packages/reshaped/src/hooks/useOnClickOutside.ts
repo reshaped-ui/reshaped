@@ -58,26 +58,25 @@ const useOnClickOutside = (
 		if (disabled) return;
 
 		const handleClick = (event: MouseEvent | TouchEvent) => {
-			if (event.type === "contextmenu") {
-				/**
-				 * Context menu events can be claimed by a handler that opens a menu of its own,
-				 * which prevents the default browser behavior. Such events open a new flyout
-				 * instead of dismissing the current one, so they're not outside clicks
-				 */
-				if (event.defaultPrevented) return;
-
-				isMouseDownInsideRef.current = checkEventInsideRefs(event);
-			}
-
 			if (isMouseDownInsideRef.current) return;
 			handlerRef.current?.(event);
 		};
 
+		/**
+		 * Capture phase closes the content before another context menu opens on the same event,
+		 * while the content opened by this event subscribes too late to get closed by it.
+		 * Target is checked directly since the context menu key doesn't trigger mousedown
+		 */
+		const handleContextMenu = (event: MouseEvent) => {
+			if (checkEventInsideRefs(event)) return;
+			handlerRef.current?.(event);
+		};
+
 		document.addEventListener("click", handleClick);
-		document.addEventListener("contextmenu", handleClick);
+		document.addEventListener("contextmenu", handleContextMenu, { capture: true });
 		return () => {
 			document.removeEventListener("click", handleClick);
-			document.removeEventListener("contextmenu", handleClick);
+			document.removeEventListener("contextmenu", handleContextMenu, { capture: true });
 		};
 		// oxlint-disable-next-line react-hooks/exhaustive-deps
 	}, [handlerRef, disabled, ...refs]);

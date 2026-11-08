@@ -24,18 +24,24 @@
 	opacity: 1;
 }
 
+/*
+ * Closing accelerates, so the content stays readable while it starts collapsing
+ * instead of losing most of its size and opacity in the first frames
+ */
 .root.--animated {
-	transition: opacity var(--rs-duration-medium) var(--rs-easing-standard);
+	transition: var(--rs-duration-medium) var(--rs-easing-accelerate);
+	transition-property: opacity;
 }
 
 .root.--animated.--orientation-vertical {
-	transition:
-		height var(--rs-duration-medium) var(--rs-easing-standard),
-		opacity var(--rs-duration-medium) var(--rs-easing-standard);
+	transition-property: height, opacity;
 }
 
 .root.--animated.--orientation-horizontal {
-	transition:
-		width var(--rs-duration-medium) var(--rs-easing-standard),
-		opacity var(--rs-duration-medium) var(--rs-easing-standard);
+	transition-property: width, opacity;
+}
+
+/* Opening keeps the standard easing, so the content arrives quickly and then settles */
+.root.--animated.--visible {
+	transition-timing-function: var(--rs-easing-standard);
 }

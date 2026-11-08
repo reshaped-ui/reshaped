@@ -106,6 +106,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
+	// Other triggers got pointer-events disabled by this flyout and still have to be restored
+	const triggersDisabledRef = React.useRef(false);
 	// Cleanup function for safe area tracking
 	const safeAreaRef = React.useRef<{ origin: Coordinates; cleanup: () => void } | null>(null);
 
@@ -145,6 +147,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const disableTriggers = React.useCallback(() => {
 		if (triggerType !== "hover") return;
 
+		triggersDisabledRef.current = true;
 		document.querySelectorAll("[data-rs-flyout-active=true]").forEach((el) => {
 			if (el === triggerElRef.current) return;
 			(el as HTMLElement).style.pointerEvents = "none";
@@ -154,6 +157,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const enableTriggers = React.useCallback(() => {
 		if (triggerType !== "hover") return;
 
+		triggersDisabledRef.current = false;
 		document.querySelectorAll("[data-rs-flyout-active]").forEach((el) => {
 			(el as HTMLElement).style.removeProperty("pointer-events");
 		});
@@ -370,6 +374,13 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (status === "rendered") show();
 	}, [status, show]);
 
+	// Content can be reopened at new coordinates without closing in between
+	useIsomorphicLayoutEffect(() => {
+		if (!originCoordinates || !isRendered) return;
+		updatePosition();
+		// oxlint-disable-next-line react-hooks/exhaustive-deps
+	}, [originCoordinates?.x, originCoordinates?.y]);
+
 	/**
 	 * Closing before the open transition starts cancels it instead of reversing,
 	 * so there is no transitionend to wait for
@@ -439,6 +450,17 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (!isRendered) return;
 		return () => safeAreaRef.current?.cleanup();
 	}, [isRendered]);
+
+	/**
+	 * Restore the triggers disabled on open when the content goes away without handleClose,
+	 * for example when the flyout unmounts while open or gets hidden with active/disabled props
+	 */
+	React.useEffect(() => {
+		if (!isRendered) return;
+		return () => {
+			if (triggersDisabledRef.current) enableTriggers();
+		};
+	}, [isRendered, enableTriggers]);
 
 	/**
 	 * Release focus trapping on unmount
