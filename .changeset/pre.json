@@ -8,6 +8,7 @@
   },
   "changesets": [
     "badge-container-cutout",
+    "badge-cutout-mount",
     "button-icon-only-end-icon-gap",
     "calendar-today-bold",
     "checkable-inputs",

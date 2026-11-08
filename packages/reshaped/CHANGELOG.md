@@ -1,5 +1,15 @@
 # reshaped
 
+## 4.3.0-canary.2
+
+### Patch Changes
+
+- [#706](https://github.com/reshaped-ui/reshaped/pull/706) [`b69f1eb`](https://github.com/reshaped-ui/reshaped/commit/b69f1eb04d4fcef8f192932437ddbad08ba48674) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Badge.Container: Fixed the cutout around the badge not rendering outside of React strict mode
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.3.0-canary.2
+  - @reshaped/theming@4.3.0-canary.2
+
 ## 4.3.0-canary.1
 
 ### Minor Changes

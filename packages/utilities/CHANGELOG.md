@@ -1,5 +1,7 @@
 # @reshaped/utilities
 
+## 4.3.0-canary.2
+
 ## 4.3.0-canary.1
 
 ### Patch Changes
