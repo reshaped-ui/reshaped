@@ -25,6 +25,20 @@ describe("css/StyleCache", () => {
 		expect(el.style.overflow).toBe("visible");
 	});
 
+	test("restores camelCase properties", () => {
+		const el = document.createElement("div");
+		el.style.paddingRight = "4px";
+
+		styleCache.set(el, { paddingRight: "16px", scrollbarGutter: "stable" });
+
+		expect(el.style.paddingRight).toBe("16px");
+
+		styleCache.reset(el);
+
+		expect(el.style.paddingRight).toBe("4px");
+		expect(el.style.scrollbarGutter).toBe("");
+	});
+
 	test("ignores repeated set calls on an already-cached element", () => {
 		const el = document.createElement("div");
 		el.style.color = "red";

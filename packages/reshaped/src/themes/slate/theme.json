@@ -680,13 +680,13 @@
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.22,
+        "l": 0.215,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "hex": "#ffffff",
-      "hexDark": "#1b1b1b"
+      "hexDark": "#191919"
     },
     "backgroundElevationOverlay": {
       "oklch": {
@@ -696,13 +696,13 @@
         "mode": "oklch"
       },
       "oklchDark": {
-        "l": 0.24,
+        "l": 0.23,
         "c": 0,
         "h": 89.88,
         "mode": "oklch"
       },
       "hex": "#ffffff",
-      "hexDark": "#1f1f1f"
+      "hexDark": "#1d1d1d"
     },
     "backgroundPage": {
       "oklch": {

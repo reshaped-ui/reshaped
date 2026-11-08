@@ -8,9 +8,11 @@ class StyleCache {
 		// don't reapply, so locking an element that's already locked is a no-op.
 		if (this.cache.has(el)) return;
 
+		// Reading through the style object supports both camelCase and kebab-case keys, same as Object.assign
+		const elStyles = el.style as unknown as Styles;
 		const originalStyles: Styles = {};
 		Object.keys(styles).forEach((key) => {
-			originalStyles[key] = el.style.getPropertyValue(key);
+			originalStyles[key] = elStyles[key];
 		});
 
 		this.cache.set(el, originalStyles);

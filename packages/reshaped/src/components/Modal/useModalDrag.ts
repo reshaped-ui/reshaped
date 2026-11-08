@@ -36,13 +36,18 @@ type State = {
 	oppositeOrigin: number;
 	/** Coordinate on the drag axis from the previous move, used for resolving the per-move delta */
 	previous: number;
-	/** Offset the gesture started from, above zero when it picked up an animation in flight */
+	/**
+	 * Distance the gesture started from, non-zero when it picked up an animation in flight.
+	 * Negative when the modal was past its open position, stored as the undamped distance
+	 */
 	seed: number;
-	/** Distance dragged since the gesture started, clamped at the open position */
+	/** Distance dragged since the gesture started */
 	distance: number;
+	/** Modal can be dragged past its open position, false when its content can scroll in that direction */
+	overshoot: boolean;
 	/** Offset the modal is currently rendered at, resolved from the seed and the distance */
 	offset: number;
-	/** Modal size on the drag axis in px, used as the closing target */
+	/** Distance on the drag axis in px from the open to the closed position, used as the closing target */
 	size: number;
 	/** Recent coordinates on the drag axis, used for measuring the release velocity */
 	samples: { time: number; coordinate: number }[];
@@ -63,6 +68,7 @@ const getInitialState = (): State => ({
 	previous: 0,
 	seed: 0,
 	distance: 0,
+	overshoot: false,
 	offset: 0,
 	size: 1,
 	samples: [],
@@ -72,16 +78,42 @@ const getInitialState = (): State => ({
 });
 
 /**
- * Distance in px the modal is currently rendered at from its open position, towards the closing direction.
+ * Dragging past the open position is damped the same way as in Base UI,
+ * so the modal resists the finger like a rubber band
+ */
+const dampOvershoot = (distance: number) => -Math.sqrt(-distance);
+const undampOvershoot = (offset: number) => -(offset ** 2);
+
+/**
+ * Distance in px the modal is currently rendered at from its open position, towards the closing direction,
+ * negative when it's past the open position.
  * Resolved from the transform so a gesture can pick up an animation that is still in flight,
  * the dragging class disables transitions and would otherwise snap the modal to the animation target
  */
-const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign: number }) => {
-	const { transform } = window.getComputedStyle(el);
+const getRenderedOffset = (
+	style: CSSStyleDeclaration,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
+	const { transform } = style;
 	if (!transform || transform === "none") return 0;
 
 	const matrix = new DOMMatrixReadOnly(transform);
-	return Math.max(0, (args.axis === "y" ? matrix.m42 : matrix.m41) * args.closingSign);
+	return (args.axis === "y" ? matrix.m42 : matrix.m41) * args.closingSign;
+};
+
+/**
+ * Distance in px the modal travels to its closed position, including its offset from the container edge
+ */
+const getClosingSize = (
+	el: HTMLElement,
+	style: CSSStyleDeclaration,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
+	const size = args.axis === "y" ? el.offsetHeight : el.offsetWidth;
+	const edgeOffset =
+		args.axis === "y" ? style.bottom : args.closingSign === -1 ? style.left : style.right;
+
+	return Math.max(1, size + (parseFloat(edgeOffset) || 0));
 };
 
 /**
@@ -156,12 +188,15 @@ const useModalDrag = (args: {
 		const threshold = state.seed ? 0 : THRESHOLD;
 		const closingDistance = state.seed + state.distance;
 
-		state.offset = Math.max(0, closingDistance - threshold);
+		state.offset =
+			closingDistance < 0
+				? dampOvershoot(closingDistance)
+				: Math.max(0, closingDistance - threshold);
 		rootEl.style.setProperty("--rs-modal-drag", `${state.offset * closingSign}px`);
 
 		if (transparentOverlay) return;
 
-		const progress = Math.min(1, closingDistance / state.size);
+		const progress = Math.min(1, Math.max(0, closingDistance) / state.size);
 		overlayRef.current?.setOpacity(1 - progress * 0.5);
 	}, [closingSign, transparentOverlay, rootRef, overlayRef]);
 
@@ -219,6 +254,7 @@ const useModalDrag = (args: {
 		const rootEl = rootRef.current;
 		const touch = e.targetTouches[0];
 		let currentEl = e.target as HTMLElement | null;
+		let overshoot = true;
 
 		while (currentEl && (currentEl === rootEl || rootEl?.contains(currentEl))) {
 			// Prioritize scrolling over modal swiping when content can scroll on the drag axis,
@@ -226,6 +262,9 @@ const useModalDrag = (args: {
 			if (canScrollTowardsClosing(currentEl, { axis, closingSign })) return;
 			// Start dragging only when starting on static elements
 			if (currentEl.matches("input,textarea")) return;
+			// Content scrolling in the opposite direction takes priority over dragging past the open position
+			if (canScrollTowardsClosing(currentEl, { axis, closingSign: -closingSign }))
+				overshoot = false;
 
 			currentEl = currentEl.parentElement;
 		}
@@ -234,7 +273,11 @@ const useModalDrag = (args: {
 		if (axis === "x" && closingSign === -1 && touch.clientX < EDGE_BOUNDARY) return;
 
 		// Measured before the state is replaced, a transition in flight resolves to its current position
-		const seed = active && rootEl ? getRenderedOffset(rootEl, { axis, closingSign }) : 0;
+		const rootStyle = rootEl && window.getComputedStyle(rootEl);
+		const renderedOffset =
+			active && rootStyle ? getRenderedOffset(rootStyle, { axis, closingSign }) : 0;
+		// Damped offset past the open position is converted back to the dragged distance
+		const seed = renderedOffset < 0 ? undampOvershoot(renderedOffset) : renderedOffset;
 		const origin = axis === "y" ? touch.clientY : touch.clientX;
 
 		// The previous gesture can be left unresolved, e.g. when the modal stays open after a drag close
@@ -244,7 +287,8 @@ const useModalDrag = (args: {
 			oppositeOrigin: axis === "y" ? touch.clientX : touch.clientY,
 			previous: origin,
 			seed,
-			size: rootEl ? Math.max(1, axis === "y" ? rootEl.clientHeight : rootEl.clientWidth) : 1,
+			overshoot,
+			size: rootEl && rootStyle ? getClosingSize(rootEl, rootStyle, { axis, closingSign }) : 1,
 		};
 
 		resetReleaseTransition();
@@ -305,8 +349,9 @@ const useModalDrag = (args: {
 
 			if (delta > 0) setScrollLock(true);
 
-			// Clamped so the modal can't be dragged past its open position
-			state.distance = Math.max(-state.seed, state.distance + delta);
+			state.distance += delta;
+			// Clamped at the open position when the content scrolls in that direction instead
+			if (!state.overshoot) state.distance = Math.max(-state.seed, state.distance);
 			state.samples.push({ time: e.timeStamp, coordinate });
 			if (state.samples.length > VELOCITY_SAMPLES) state.samples.shift();
 
@@ -334,7 +379,8 @@ const useModalDrag = (args: {
 				render();
 			}
 
-			setReleaseTransition({ closing: state.closing, velocity });
+			// Finger velocity doesn't match the damped movement past the open position, so it settles from rest
+			setReleaseTransition({ closing: state.closing, velocity: state.offset < 0 ? 0 : velocity });
 
 			if (containerRef?.current) enableScroll();
 			if (state.returning) setScrollLock(false);

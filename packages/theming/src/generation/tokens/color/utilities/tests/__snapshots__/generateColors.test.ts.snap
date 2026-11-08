@@ -112,7 +112,7 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
     "oklchDark": {
       "c": 0,
       "h": 89.88,
-      "l": 0.24,
+      "l": 0.23,
       "mode": "oklch",
     },
   },
@@ -126,7 +126,7 @@ exports[`themes/tokens/color/utilities/generateColors > with a passed value 1`] 
     "oklchDark": {
       "c": 0,
       "h": 89.88,
-      "l": 0.22,
+      "l": 0.215,
       "mode": "oklch",
     },
   },
@@ -788,7 +788,7 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
     "oklchDark": {
       "c": 0,
       "h": 89.88,
-      "l": 0.24,
+      "l": 0.23,
       "mode": "oklch",
     },
   },
@@ -802,7 +802,7 @@ exports[`themes/tokens/color/utilities/generateColors > with default values 1`] 
     "oklchDark": {
       "c": 0,
       "h": 89.88,
-      "l": 0.22,
+      "l": 0.215,
       "mode": "oklch",
     },
   },

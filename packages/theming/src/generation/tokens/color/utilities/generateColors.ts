@@ -184,13 +184,14 @@ const generateColorValues = (
 			oklch: { ...bg, l: 1, c: 0 },
 			oklchDark: { ...bgDark, l: 0.2, c: 0 },
 		};
+		// Dark elevation steps stay close to the base layer, so the overlay content doesn't look washed out
 		output[`backgroundElevationRaised`] = {
 			oklch: { ...bg, l: 1, c: 0 },
-			oklchDark: { ...bgDark, l: 0.22, c: 0 },
+			oklchDark: { ...bgDark, l: 0.215, c: 0 },
 		};
 		output[`backgroundElevationOverlay`] = {
 			oklch: { ...bg, l: 1, c: 0 },
-			oklchDark: { ...bgDark, l: 0.24, c: 0 },
+			oklchDark: { ...bgDark, l: 0.23, c: 0 },
 		};
 		output[`backgroundPage`] = {
 			oklch: { ...bg, l: 1, c: 0 },
