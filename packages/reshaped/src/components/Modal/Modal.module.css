@@ -17,21 +17,23 @@
 	--rs-modal-env-bottom: env(safe-area-inset-bottom, 0px);
 	--rs-modal-env-start: env(safe-area-inset-left, 0px);
 	--rs-modal-env-end: env(safe-area-inset-right, 0px);
-	--rs-modal-direction: 1;
 
-	/*
-	 * Copy of the modal background behind its screen edge, offset with --rs-modal-bleed-x/y per position.
-	 * Keeps the edge covered when the modal is dragged past its open position
-	 */
-	--rs-modal-bleed: calc(var(--rs-unit-x1) * 12);
+	/* Distance between the side modals and the screen edges, increased to the safe area insets when they're larger */
+	--rs-modal-offset: var(--rs-unit-x2);
+	--rs-modal-inset-top: max(var(--rs-modal-offset), var(--rs-modal-env-top));
+	--rs-modal-inset-bottom: max(var(--rs-modal-offset), var(--rs-modal-env-bottom));
+	--rs-modal-inset-start: max(var(--rs-modal-offset), var(--rs-modal-env-start));
+	--rs-modal-inset-end: max(var(--rs-modal-offset), var(--rs-modal-env-end));
+
+	/* Space left for the overlay on the side of the side modals far from the screen edge */
+	--rs-modal-far-offset: var(--rs-unit-x6);
 
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	box-shadow:
-		var(--rs-shadow-overlay),
-		var(--rs-modal-bleed-x) var(--rs-modal-bleed-y) 0 0 var(--rs-color-background-elevation-overlay);
+	box-shadow: var(--rs-shadow-overlay);
+	border: 0 solid var(--rs-color-border-neutral-faded);
 	will-change: transform, opacity;
 	outline: none;
 	overscroll-behavior: none;
@@ -43,10 +45,9 @@
 	[dir="rtl"] & {
 		--rs-modal-env-start: env(safe-area-inset-right, 0px);
 		--rs-modal-env-end: env(safe-area-inset-left, 0px);
-		--rs-modal-direction: -1;
 	}
 
-	/* Safe areas and the bleed only apply to the viewport edges */
+	/* Safe areas only apply to the viewport edges */
 	&.--contained {
 		--rs-modal-container-width: 100%;
 		--rs-modal-container-height: 100%;
@@ -54,7 +55,6 @@
 		--rs-modal-env-bottom: 0px;
 		--rs-modal-env-start: 0px;
 		--rs-modal-env-end: 0px;
-		--rs-modal-bleed: 0px;
 	}
 }
 
@@ -69,8 +69,6 @@
 		--rs-modal-safe-bottom: 0px;
 		--rs-modal-safe-start: 0px;
 		--rs-modal-safe-end: 0px;
-		--rs-modal-bleed-x: 0px;
-		--rs-modal-bleed-y: 0px;
 
 		width: var(--rs-modal-size);
 		height: auto;
@@ -79,6 +77,7 @@
 		margin: var(--rs-unit-x4);
 		inset: 0;
 		position: relative;
+		border-width: 1px;
 		border-radius: var(--rs-radius-large);
 		overflow: hidden;
 		overscroll-behavior: auto;
@@ -98,8 +97,6 @@
 		--rs-modal-safe-bottom: var(--rs-modal-env-bottom);
 		--rs-modal-safe-start: var(--rs-modal-env-start);
 		--rs-modal-safe-end: var(--rs-modal-env-end);
-		--rs-modal-bleed-x: 0px;
-		--rs-modal-bleed-y: var(--rs-modal-bleed);
 
 		width: 100%;
 		height: var(--rs-modal-size);
@@ -111,6 +108,9 @@
 		inset-block-start: initial;
 		transform: translate(0, 100%);
 		position: absolute;
+
+		/* Sides attached to the screen edges don't need a border */
+		border-width: 1px 0 0;
 		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
 		overscroll-behavior: none;
@@ -132,95 +132,73 @@
 
 	@value start {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
-		--rs-modal-safe-top: var(--rs-modal-env-top);
-		--rs-modal-safe-bottom: var(--rs-modal-env-bottom);
-		--rs-modal-safe-start: var(--rs-modal-env-start);
+		--rs-modal-safe-top: 0px;
+		--rs-modal-safe-bottom: 0px;
+		--rs-modal-safe-start: 0px;
 		--rs-modal-safe-end: 0px;
-		--rs-modal-bleed-x: calc(var(--rs-modal-bleed) * var(--rs-modal-direction) * -1);
-		--rs-modal-bleed-y: 0px;
 
 		width: var(--rs-modal-size);
-		height: 100%;
-		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
-		max-height: 100%;
+		height: auto;
+		max-width: calc(
+			var(--rs-modal-container-width) - var(--rs-modal-inset-start) -
+				max(var(--rs-modal-far-offset), var(--rs-modal-env-end))
+		);
+		max-height: none;
 		margin: 0;
-		margin-inline-end: var(--rs-unit-x4);
-		inset: 0;
-		inset-inline-end: initial;
-		transform: translate(-100%, 0);
+		inset-block: var(--rs-modal-inset-top) var(--rs-modal-inset-bottom);
+		inset-inline: var(--rs-modal-inset-start) auto;
+		transform: translate(calc(-100% - var(--rs-modal-inset-start)), 0);
 		position: absolute;
-		border-radius: 0;
-
-		/* Round the corners away from the screen edge, logical properties flip them in rtl */
-		border-start-end-radius: var(--rs-radius-large);
-		border-end-end-radius: var(--rs-radius-large);
+		border-width: 1px;
+		border-radius: var(--rs-radius-large);
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate(100%, 0);
+			transform: translate(calc(100% + var(--rs-modal-inset-start)), 0);
 		}
 
 		/* Drag offset is resolved with the screen side the drawer is attached to */
 		&.--active,
 		[dir="rtl"] &.--active {
 			transform: translate(var(--rs-modal-drag, 0), 0);
-		}
-
-		/* Higher specificity than the padding prop styles, so the safe area is added on top of them */
-		.root& {
-			padding-block: calc(var(--rs-modal-padding) + var(--rs-modal-safe-top))
-				calc(var(--rs-modal-padding) + var(--rs-modal-safe-bottom));
-			padding-inline: calc(var(--rs-modal-padding) + var(--rs-modal-safe-start))
-				calc(var(--rs-modal-padding) + var(--rs-modal-safe-end));
 		}
 	}
 
 	@value end {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
-		--rs-modal-safe-top: var(--rs-modal-env-top);
-		--rs-modal-safe-bottom: var(--rs-modal-env-bottom);
+		--rs-modal-safe-top: 0px;
+		--rs-modal-safe-bottom: 0px;
 		--rs-modal-safe-start: 0px;
-		--rs-modal-safe-end: var(--rs-modal-env-end);
-		--rs-modal-bleed-x: calc(var(--rs-modal-bleed) * var(--rs-modal-direction));
-		--rs-modal-bleed-y: 0px;
+		--rs-modal-safe-end: 0px;
 
 		width: var(--rs-modal-size);
-		height: 100%;
-		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
-		max-height: 100%;
+		height: auto;
+		max-width: calc(
+			var(--rs-modal-container-width) - var(--rs-modal-inset-end) -
+				max(var(--rs-modal-far-offset), var(--rs-modal-env-start))
+		);
+		max-height: none;
 		margin: 0;
-		margin-inline-start: var(--rs-unit-x4);
-		inset: 0;
-		inset-inline-start: initial;
-		transform: translate(100%, 0);
+		inset-block: var(--rs-modal-inset-top) var(--rs-modal-inset-bottom);
+		inset-inline: auto var(--rs-modal-inset-end);
+		transform: translate(calc(100% + var(--rs-modal-inset-end)), 0);
 		position: absolute;
-		border-radius: 0;
-
-		/* Round the corners away from the screen edge, logical properties flip them in rtl */
-		border-start-start-radius: var(--rs-radius-large);
-		border-end-start-radius: var(--rs-radius-large);
+		border-width: 1px;
+		border-radius: var(--rs-radius-large);
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate(-100%, 0);
+			transform: translate(calc(-100% - var(--rs-modal-inset-end)), 0);
 		}
 
 		/* Drag offset is resolved with the screen side the drawer is attached to */
 		&.--active,
 		[dir="rtl"] &.--active {
 			transform: translate(var(--rs-modal-drag, 0), 0);
-		}
-
-		/* Higher specificity than the padding prop styles, so the safe area is added on top of them */
-		.root& {
-			padding-block: calc(var(--rs-modal-padding) + var(--rs-modal-safe-top))
-				calc(var(--rs-modal-padding) + var(--rs-modal-safe-bottom));
-			padding-inline: calc(var(--rs-modal-padding) + var(--rs-modal-safe-start))
-				calc(var(--rs-modal-padding) + var(--rs-modal-safe-end));
 		}
 	}
 
@@ -230,8 +208,6 @@
 		--rs-modal-safe-bottom: 0px;
 		--rs-modal-safe-start: 0px;
 		--rs-modal-safe-end: 0px;
-		--rs-modal-bleed-x: 0px;
-		--rs-modal-bleed-y: 0px;
 
 		width: 100%;
 		height: 100%;
@@ -242,6 +218,7 @@
 		inset-block-start: initial;
 		transform: translate(0, var(--rs-unit-x4));
 		position: absolute;
+		border-width: 0;
 		border-radius: 0;
 		overflow: auto;
 		overscroll-behavior: none;

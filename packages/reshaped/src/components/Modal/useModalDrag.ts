@@ -47,7 +47,7 @@ type State = {
 	overshoot: boolean;
 	/** Offset the modal is currently rendered at, resolved from the seed and the distance */
 	offset: number;
-	/** Modal size on the drag axis in px, used as the closing target */
+	/** Distance on the drag axis in px from the open to the closed position, used as the closing target */
 	size: number;
 	/** Recent coordinates on the drag axis, used for measuring the release velocity */
 	samples: { time: number; coordinate: number }[];
@@ -95,6 +95,18 @@ const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign
 
 	const matrix = new DOMMatrixReadOnly(transform);
 	return (args.axis === "y" ? matrix.m42 : matrix.m41) * args.closingSign;
+};
+
+/**
+ * Distance in px the modal travels to its closed position, including its offset from the container edge
+ */
+const getClosingSize = (el: HTMLElement, args: { axis: "x" | "y"; closingSign: number }) => {
+	const style = window.getComputedStyle(el);
+	const size = args.axis === "y" ? el.offsetHeight : el.offsetWidth;
+	const edgeOffset =
+		args.axis === "y" ? style.bottom : args.closingSign === -1 ? style.left : style.right;
+
+	return Math.max(1, size + (parseFloat(edgeOffset) || 0));
 };
 
 /**
@@ -267,7 +279,7 @@ const useModalDrag = (args: {
 			previous: origin,
 			seed,
 			overshoot,
-			size: rootEl ? Math.max(1, axis === "y" ? rootEl.clientHeight : rootEl.clientWidth) : 1,
+			size: rootEl ? getClosingSize(rootEl, { axis, closingSign }) : 1,
 		};
 
 		resetReleaseTransition();
