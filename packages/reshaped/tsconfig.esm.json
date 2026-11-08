@@ -17,5 +17,8 @@
 		"./src/**/*.test.tsx",
 		"./src/**/*.test.ts",
 		"./src/**/*.stories.tsx"
-	]
+	],
+	"tsc-alias": {
+		"resolveFullPaths": true
+	}
 }
