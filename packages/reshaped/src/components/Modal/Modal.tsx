@@ -8,7 +8,6 @@ import Text from "@/components/Text";
 import useElementId from "@/hooks/useElementId";
 import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
-import { resolveMixin } from "@/styles/mixin";
 import type * as T from "./Modal.types";
 import useModalDrag from "./useModalDrag";
 import s from "./Modal.module.css";
@@ -84,7 +83,6 @@ const Modal: FC<T.Props> = (props) => {
 	const internalRootRef = useRef<HTMLDivElement>(null);
 	const rootRef = attributes?.ref || internalRootRef;
 	const overlayRef = useRef<OverlayInstance>(null);
-	const mixinStyles = resolveMixin({ padding });
 	const shouldBeContained = containerRef && contained !== false;
 	const { dragging, handleTouchStart, handleTransitionEnd } = useModalDrag({
 		position: clientPosition,
@@ -134,22 +132,21 @@ const Modal: FC<T.Props> = (props) => {
 					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],
 					shouldBeContained && s["--contained"],
-					responsiveClassNames(s, "--position", position),
-					mixinStyles.classNames
+					responsiveClassNames(s, "--position", position)
 				);
 
 				return (
 					<Context.Provider value={value}>
 						{/* Rendered before the modal so it stays behind it */}
-						{clientPosition === "bottom" && !shouldBeContained && (
-							<div className={classNames(s.edge, active && s["--active"])} aria-hidden="true" />
+						{active && clientPosition === "bottom" && !shouldBeContained && (
+							<div className={s.edge} aria-hidden="true" />
 						)}
 						<div
 							{...attributes}
 							style={
 								{
-									...mixinStyles.variables,
 									...responsiveVariables("--rs-modal-size", size),
+									...responsiveVariables("--rs-modal-p", padding),
 									"--rs-modal-drag": "0px",
 								} as React.CSSProperties
 							}

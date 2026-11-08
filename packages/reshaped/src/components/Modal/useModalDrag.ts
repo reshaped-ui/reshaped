@@ -82,6 +82,7 @@ const getInitialState = (): State => ({
  * so the modal resists the finger like a rubber band
  */
 const dampOvershoot = (distance: number) => -Math.sqrt(-distance);
+const undampOvershoot = (offset: number) => -(offset ** 2);
 
 /**
  * Distance in px the modal is currently rendered at from its open position, towards the closing direction,
@@ -89,8 +90,11 @@ const dampOvershoot = (distance: number) => -Math.sqrt(-distance);
  * Resolved from the transform so a gesture can pick up an animation that is still in flight,
  * the dragging class disables transitions and would otherwise snap the modal to the animation target
  */
-const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign: number }) => {
-	const { transform } = window.getComputedStyle(el);
+const getRenderedOffset = (
+	style: CSSStyleDeclaration,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
+	const { transform } = style;
 	if (!transform || transform === "none") return 0;
 
 	const matrix = new DOMMatrixReadOnly(transform);
@@ -100,8 +104,11 @@ const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign
 /**
  * Distance in px the modal travels to its closed position, including its offset from the container edge
  */
-const getClosingSize = (el: HTMLElement, args: { axis: "x" | "y"; closingSign: number }) => {
-	const style = window.getComputedStyle(el);
+const getClosingSize = (
+	el: HTMLElement,
+	style: CSSStyleDeclaration,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
 	const size = args.axis === "y" ? el.offsetHeight : el.offsetWidth;
 	const edgeOffset =
 		args.axis === "y" ? style.bottom : args.closingSign === -1 ? style.left : style.right;
@@ -266,9 +273,11 @@ const useModalDrag = (args: {
 		if (axis === "x" && closingSign === -1 && touch.clientX < EDGE_BOUNDARY) return;
 
 		// Measured before the state is replaced, a transition in flight resolves to its current position
-		const renderedOffset = active && rootEl ? getRenderedOffset(rootEl, { axis, closingSign }) : 0;
+		const rootStyle = rootEl && window.getComputedStyle(rootEl);
+		const renderedOffset =
+			active && rootStyle ? getRenderedOffset(rootStyle, { axis, closingSign }) : 0;
 		// Damped offset past the open position is converted back to the dragged distance
-		const seed = renderedOffset < 0 ? -(renderedOffset ** 2) : renderedOffset;
+		const seed = renderedOffset < 0 ? undampOvershoot(renderedOffset) : renderedOffset;
 		const origin = axis === "y" ? touch.clientY : touch.clientX;
 
 		// The previous gesture can be left unresolved, e.g. when the modal stays open after a drag close
@@ -279,7 +288,7 @@ const useModalDrag = (args: {
 			previous: origin,
 			seed,
 			overshoot,
-			size: rootEl ? getClosingSize(rootEl, { axis, closingSign }) : 1,
+			size: rootEl && rootStyle ? getClosingSize(rootEl, rootStyle, { axis, closingSign }) : 1,
 		};
 
 		resetReleaseTransition();
