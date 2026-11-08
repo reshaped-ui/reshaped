@@ -3,9 +3,11 @@
 import React from "react";
 
 /**
- * Container element of Badge.Container with cutout enabled.
- * Badge reports its size to it since css can't read the size of a sibling element.
+ * Element of the parent Badge.Container.
+ * Badge reports its size to it for the cutout since css can't read the size of a sibling element.
  */
-const BadgeCutoutContext = React.createContext<React.RefObject<HTMLDivElement | null> | null>(null);
+const BadgeContainerContext = React.createContext<React.RefObject<HTMLDivElement | null> | null>(
+	null
+);
 
-export default BadgeCutoutContext;
+export default BadgeContainerContext;

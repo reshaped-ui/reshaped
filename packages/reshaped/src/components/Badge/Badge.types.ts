@@ -64,10 +64,6 @@ export type ContainerProps = {
 	position?: "top-end" | "bottom-end";
 	/** Move the badge closer to center to overlap with the child component, could be used to overlap with rounded shapes */
 	overlap?: boolean;
-	/** Cut out a transparent gap around the badge from the content it's positioned against, making it stand out on top of images and colored backgrounds
-	 * @default true
-	 */
-	cutout?: boolean;
 	/** Node for inserting children to position the badge against */
 	children: React.ReactNode;
 	/** Additional classname for the root element */

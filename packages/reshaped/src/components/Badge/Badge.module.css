@@ -228,12 +228,13 @@
 
 /*
  * Cutout
+ * Transparent gap around the badge cut out of the content it's positioned against.
  * Badge reports its size to Badge.Container, the rest is derived here.
  * The hole is a rounded rectangle built from 2 bands and 4 corner circles,
  * which are added together and then subtracted from a full layer to keep the gap transparent.
  */
 
-.--container-cutout {
+.container:has(> .root) {
 	--rs-badge-cutout-radius: var(--rs-radius-small);
 	--rs-badge-cutout-side-x: right;
 	--rs-badge-cutout-side-y: top;
@@ -254,7 +255,7 @@
 		--rs-badge-cutout-scale: 0;
 	}
 
-	&:has(> .root) > :not(.root) {
+	& > :not(.root) {
 		/* Keep focus rings and shadows painted outside the content box visible */
 		--rs-badge-cutout-overflow: var(--rs-unit-x4);
 		--rs-badge-cutout-w: calc(

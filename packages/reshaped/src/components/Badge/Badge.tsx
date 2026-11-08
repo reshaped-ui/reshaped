@@ -8,7 +8,7 @@ import Icon from "@/components/Icon";
 import Text from "@/components/Text";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import IconClose from "@/icons/Close";
-import BadgeCutoutContext from "./Badge.context";
+import BadgeContainerContext from "./Badge.context";
 import type * as T from "./Badge.types";
 import s from "./Badge.module.css";
 
@@ -32,7 +32,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 		as,
 	} = props;
 	const rootRef = React.useRef<ActionableRef>(null);
-	const cutoutContainerRef = React.useContext(BadgeCutoutContext);
+	const containerRef = React.useContext(BadgeContainerContext);
 	const isActionable = !!(onClick || href);
 	const iconSize = {
 		small: 3,
@@ -58,7 +58,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 
 	// Pass the badge size to Badge.Container for the cutout mask, border box size ignores the badge transforms
 	useIsomorphicLayoutEffect(() => {
-		const containerEl = cutoutContainerRef?.current;
+		const containerEl = containerRef?.current;
 		const badgeEl = rootRef.current;
 		if (!containerEl || !badgeEl) return;
 
@@ -71,7 +71,7 @@ const Badge = forwardRef<ActionableRef, T.Props>((props, ref) => {
 
 		resizeObserver.observe(badgeEl);
 		return () => resizeObserver.disconnect();
-	}, [cutoutContainerRef]);
+	}, [containerRef]);
 
 	const handleDismiss: ActionableProps["onClick"] = (e) => {
 		// Prevent the parent Actionable from handling the click,

@@ -324,7 +324,7 @@ export const container = {
 };
 
 export const cutout: StoryObj = {
-	name: "container, cutout by default",
+	name: "container, cutout",
 	render: () => {
 		const [hidden, setHidden] = React.useState(false);
 		const [count, setCount] = React.useState(5);
