@@ -40,8 +40,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		disabled,
 		fallbackAdjustLayout,
 		fallbackMinHeight,
-		// Hover content is a tooltip by default, so it doesn't trap focus
-		trapFocusMode = triggerType === "hover" ? false : "dialog",
+		trapFocusMode = "dialog",
 		width,
 		disableHideAnimation,
 		disableContentHover,
@@ -497,8 +496,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	useHotkeys(
 		{
 			Escape: () => {
-				// Only close the latest opened flyout, even if other flyouts are not nested in it
-				if (!isDismissible({ strict: true })) return;
+				// Nested flyouts are closed one by one, starting from the latest opened one
+				if (!isDismissible()) return;
 				handleClose({ reason: "escape-key" });
 			},
 		},
