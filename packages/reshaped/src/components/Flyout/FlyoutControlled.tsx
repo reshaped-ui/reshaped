@@ -45,6 +45,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		disableHideAnimation,
 		disableContentHover,
 		disableCloseOnOutsideClick,
+		disableTouchTrigger,
 		autoFocus = true,
 		originCoordinates,
 		contentGap = 2,
@@ -106,6 +107,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	// Touch devices trigger onMouseEnter but we don't need to apply regular hover timeouts
 	// So we're saving a flag on touch start and then change the mouse enter behavior
 	const hoverTriggeredWithTouchEventRef = React.useRef(false);
+	// Mouse enter emulated after a touch should be ignored when touch interactions are disabled
+	const ignoreTouchMouseEnterRef = React.useRef(false);
 	// Other triggers got pointer-events disabled by this flyout and still have to be restored
 	const triggersDisabledRef = React.useRef(false);
 	// Cleanup function for safe area tracking
@@ -229,8 +232,14 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleTouchStart = React.useCallback(() => {
 		if (triggerType !== "hover") return;
+
+		if (disableTouchTrigger) {
+			ignoreTouchMouseEnterRef.current = true;
+			return;
+		}
+
 		hoverTriggeredWithTouchEventRef.current = true;
-	}, [triggerType]);
+	}, [triggerType, disableTouchTrigger]);
 
 	const handleContentMouseEnter = React.useCallback(() => {
 		clearTimer();
@@ -252,6 +261,11 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleTriggerMouseEnter = React.useCallback(
 		(e: React.MouseEvent) => {
+			if (ignoreTouchMouseEnterRef.current) {
+				ignoreTouchMouseEnterRef.current = false;
+				return;
+			}
+
 			if (e.currentTarget === triggerElRef.current) {
 				safeAreaRef.current?.cleanup();
 			}
