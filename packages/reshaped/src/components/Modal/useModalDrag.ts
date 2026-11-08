@@ -84,9 +84,32 @@ const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign
 	return Math.max(0, (args.axis === "y" ? matrix.m42 : matrix.m41) * args.closingSign);
 };
 
-/** Scroll position of the element on the drag axis */
-const getScrollOffset = (el: HTMLElement, axis: "x" | "y") =>
-	axis === "y" ? el.scrollTop : el.scrollLeft;
+/**
+ * Element can still scroll its content in the direction the finger moves when closing the modal,
+ * this scroll takes priority over the swipe
+ */
+const canScrollTowardsClosing = (
+	el: HTMLElement,
+	args: { axis: "x" | "y"; closingSign: number }
+) => {
+	// Bottom modals close with the finger moving down, which scrolls the content towards the top
+	if (args.axis === "y") return el.scrollTop !== 0;
+
+	const maxScroll = el.scrollWidth - el.clientWidth;
+	if (maxScroll <= 0) return false;
+
+	// Content with overflow hidden can't be scrolled with the finger
+	const style = window.getComputedStyle(el);
+	if (style.overflowX !== "auto" && style.overflowX !== "scroll") return false;
+
+	// Distances left to scroll towards the physical sides, scrollLeft goes from 0 to negative values in RTL
+	const rtl = style.direction === "rtl";
+	const leftDistance = rtl ? maxScroll + el.scrollLeft : el.scrollLeft;
+	const rightDistance = rtl ? -el.scrollLeft : maxScroll - el.scrollLeft;
+
+	// Finger moving right reveals the content on the left side and vice versa
+	return (args.closingSign === 1 ? leftDistance : rightDistance) >= 1;
+};
 
 /** Velocity in px/ms measured over the most recent samples, signed on the drag axis */
 const getVelocity = (state: State, time: number) => {
@@ -199,9 +222,9 @@ const useModalDrag = (args: {
 		let currentEl = e.target as HTMLElement | null;
 
 		while (currentEl && (currentEl === rootEl || rootEl?.contains(currentEl))) {
-			// Prioritize scrolling over modal swiping when content is scrolled on the drag axis,
+			// Prioritize scrolling over modal swiping when content can scroll on the drag axis,
 			// scrolling on the perpendicular axis is resolved from the gesture direction instead
-			if (getScrollOffset(currentEl, axis) !== 0) return;
+			if (canScrollTowardsClosing(currentEl, { axis, closingSign })) return;
 			// Start dragging only when starting on static elements
 			if (currentEl.matches("input,textarea")) return;
 
@@ -275,7 +298,7 @@ const useModalDrag = (args: {
 				if (state.intent === "scroll") return;
 			}
 
-			if (rootEl && getScrollOffset(rootEl, axis) !== 0) return;
+			if (rootEl && canScrollTowardsClosing(rootEl, { axis, closingSign })) return;
 
 			// Positive when moving towards the closing direction
 			const delta = (coordinate - state.previous) * closingSign;

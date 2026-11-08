@@ -417,6 +417,7 @@ export const edgeCases = {
 		const menuModalToggleInner = useToggle();
 		const scrollModalToggle = useToggle();
 		const scrollDrawerToggle = useToggle();
+		const horizontalScrollDrawerToggle = useToggle();
 		const inputRef = React.useRef<HTMLInputElement>(null);
 
 		return (
@@ -499,6 +500,28 @@ export const edgeCases = {
 								padding={4}
 							>
 								Content
+							</View>
+						</Modal>
+					</View>
+				</Example.Item>
+				<Example.Item title="horizontal scroll area in side modal takes priority over swipe-to-close until it reaches its edge">
+					<View gap={3} direction="row">
+						<Button onClick={horizontalScrollDrawerToggle.activate}>Open</Button>
+						<Modal
+							active={horizontalScrollDrawerToggle.active}
+							onClose={horizontalScrollDrawerToggle.deactivate}
+							position="start"
+						>
+							<View overflow="auto">
+								<View
+									width="1000px"
+									height="200px"
+									backgroundColor="neutral-faded"
+									borderRadius="medium"
+									padding={4}
+								>
+									Horizontally scrollable content
+								</View>
 							</View>
 						</Modal>
 					</View>
