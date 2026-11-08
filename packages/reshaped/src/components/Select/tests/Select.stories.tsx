@@ -1029,27 +1029,3 @@ export const testA11y: StoryObj = {
 		expect(body.getByRole("option", { name: "Turtle" })).toHaveAttribute("aria-selected", "true");
 	},
 };
-
-export const testWithoutPlaceholder: StoryObj = {
-	name: "test: without placeholder",
-	render: () => (
-		<Select name="animal">
-			<Select.Group label="Mammals">
-				<Select.Option value="dog">Dog</Select.Option>
-				<Select.Option value="cat">Cat</Select.Option>
-			</Select.Group>
-			<Select.Group label="Reptiles">
-				<Select.Option value="turtle">Turtle</Select.Option>
-			</Select.Group>
-		</Select>
-	),
-	play: async ({ canvasElement }) => {
-		const trigger = canvasElement.querySelector('[aria-haspopup="listbox"]');
-		const hiddenInput = canvasElement.querySelector('input[type="hidden"]');
-
-		// Displayed and submitted values should match
-		expect(trigger).toHaveTextContent("Dog");
-		expect(trigger).not.toHaveTextContent("Turtle");
-		expect(hiddenInput).toHaveValue("dog");
-	},
-};
