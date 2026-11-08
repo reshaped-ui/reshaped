@@ -72,10 +72,14 @@ export const base: StoryObj = {
 		expect(hiddenInput).toHaveAttribute("name", "animal");
 		expect(hiddenInput).toHaveAttribute("id", "animal-1");
 		expect(trigger).toHaveTextContent("Select an animal");
+		expect(trigger).toHaveAttribute("aria-haspopup", "listbox");
 
 		await userEvent.click(trigger);
 
-		const options = within(canvasElement.ownerDocument.body).getAllByRole("option");
+		const listbox = within(canvasElement.ownerDocument.body).getByRole("listbox");
+		const options = within(listbox).getAllByRole("option");
+
+		expect(listbox).not.toHaveAttribute("aria-multiselectable");
 
 		expect(options).toHaveLength(2);
 		expect(options[0]).toHaveTextContent("Dog");
@@ -170,6 +174,11 @@ export const multiple: StoryObj<{ handleChange: Mock }> = {
 
 		await userEvent.click(uncontrolledOption);
 
+		// Content stays open to select multiple options
+		expect(within(canvasElement.ownerDocument.body).getByRole("listbox")).toHaveAttribute(
+			"aria-multiselectable",
+			"true"
+		);
 		expect(inputUncontrolled).toHaveValue('["dog","turtle"]');
 		expect(args.handleChange).toHaveBeenCalledTimes(1);
 		expect(args.handleChange).toHaveBeenCalledWith({
@@ -567,6 +576,12 @@ export const formControl: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
+	play: async ({ canvas }) => {
+		const trigger = canvas.getByRole("button", { name: /Animal/ });
+
+		expect(trigger).toHaveAccessibleName("Animal Select an animal");
+		expect(trigger).toHaveAccessibleDescription("This field is required");
+	},
 };
 
 export const testComposition: StoryObj = {
@@ -966,66 +981,5 @@ export const triggerOnly: StoryObj<{ handleClick: Mock }> = {
 
 		expect(args.handleClick).toHaveBeenCalledTimes(1);
 		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: trigger }));
-	},
-};
-
-export const testA11y: StoryObj = {
-	name: "test: listbox, label, multiple stays open",
-	render: () => (
-		<View gap={4}>
-			<FormControl>
-				<FormControl.Label>Animal</FormControl.Label>
-				<Select name="animal" placeholder="Select an animal">
-					<Select.Option value="dog">Dog</Select.Option>
-					<Select.Option value="turtle">Turtle</Select.Option>
-				</Select>
-				<FormControl.Helper>Caption</FormControl.Helper>
-			</FormControl>
-
-			<Select
-				multiple
-				name="animals"
-				placeholder="Select animals"
-				defaultValue={[]}
-				renderValue={(args) => args.value.join(", ")}
-			>
-				<Select.Option value="dog">Dog</Select.Option>
-				<Select.Option value="turtle">Turtle</Select.Option>
-			</Select>
-		</View>
-	),
-	play: async ({ canvas, canvasElement }) => {
-		const body = within(canvasElement.ownerDocument.body);
-		const [trigger, multipleTrigger] = canvas.getAllByRole("button");
-
-		expect(trigger).toHaveAccessibleName("Animal Select an animal");
-		expect(trigger).toHaveAccessibleDescription("Caption");
-		expect(trigger).toHaveAttribute("aria-haspopup", "listbox");
-
-		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			expect(body.getByRole("listbox")).not.toHaveAttribute("aria-multiselectable");
-		});
-
-		await userEvent.click(body.getByRole("option", { name: "Dog" }));
-
-		await waitFor(() => {
-			expect(body.queryByRole("listbox")).not.toBeInTheDocument();
-		});
-
-		await userEvent.click(multipleTrigger);
-
-		await waitFor(() => {
-			expect(body.getByRole("listbox")).toHaveAttribute("aria-multiselectable", "true");
-		});
-
-		await userEvent.click(body.getByRole("option", { name: "Dog" }));
-		await userEvent.click(body.getByRole("option", { name: "Turtle" }));
-
-		const listbox = body.getByRole("listbox");
-		expect(listbox).toBeInTheDocument();
-		expect(body.getByRole("option", { name: "Dog" })).toHaveAttribute("aria-selected", "true");
-		expect(body.getByRole("option", { name: "Turtle" })).toHaveAttribute("aria-selected", "true");
 	},
 };
