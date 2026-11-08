@@ -35,6 +35,17 @@ button.root {
 	}
 }
 
+/* Hovered item has a higher priority than the focused one, so only one item is highlighted in the menu */
+@media (hover: hover) and (pointer: fine) {
+	:is([role="menu"], [role="listbox"]):has(.root:hover) .root:focus:not(:hover) {
+		outline: none;
+
+		&[role="option"] {
+			background-color: var(--rs-menu-item-bg-color);
+		}
+	}
+}
+
 .icon {
 	color: var(--rs-menu-item-icon-color, inherit);
 }

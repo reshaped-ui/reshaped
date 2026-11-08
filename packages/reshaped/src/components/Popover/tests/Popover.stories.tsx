@@ -324,7 +324,7 @@ export const dismissible: StoryObj<{
 
 		await waitFor(() => {
 			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({});
+			expect(args.handleClose).toHaveBeenCalledWith({ reason: "close-button" });
 		});
 
 		await sleep(300);

@@ -73,7 +73,9 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 	);
 	let role = attributes?.role || contentAttributes?.role;
 
-	if (triggerType === "hover") {
+	// Hover content keeps the default dialog focus trapping for keyboard navigation but is announced as a tooltip,
+	// explicit trap modes mean it contains interactive elements, e.g. submenus
+	if (triggerType === "hover" && (trapFocusMode === "dialog" || !trapFocusMode)) {
 		role = "tooltip";
 	} else if (trapFocusMode === "dialog") {
 		role = "dialog";

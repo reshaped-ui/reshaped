@@ -493,7 +493,16 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		[handleOpen, handleClose, updatePosition]
 	);
 
-	useHotkeys({ Escape: () => handleClose({ reason: "escape-key" }) }, [handleClose]);
+	useHotkeys(
+		{
+			Escape: () => {
+				// Nested flyouts are closed one by one, starting from the latest opened one
+				if (!isDismissible()) return;
+				handleClose({ reason: "escape-key" });
+			},
+		},
+		[handleClose, isDismissible]
+	);
 
 	useOnClickOutside(
 		[flyoutElRef, triggerElRef],
