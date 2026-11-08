@@ -323,6 +323,101 @@ export const container = {
 	},
 };
 
+export const cutout: StoryObj = {
+	name: "container, cutout",
+	render: () => {
+		const [hidden, setHidden] = React.useState(false);
+		const [count, setCount] = React.useState(5);
+		const src =
+			"https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80";
+		// Patterned background to show that the cutout is transparent
+		const background = {
+			padding: 16,
+			backgroundImage:
+				"radial-gradient(circle, var(--rs-color-border-neutral) 2px, transparent 2px)",
+			backgroundSize: "12px 12px",
+		};
+
+		return (
+			<Example
+				title={
+					<View direction="row" gap={2}>
+						<Button onClick={() => setHidden(!hidden)}>Toggle badges</Button>
+						<Button onClick={() => setCount(count === 5 ? 128 : 5)}>Toggle count</Button>
+					</View>
+				}
+			>
+				<Example.Item title="cutout, overlap, rounded">
+					<View direction="row" gap={6} attributes={{ style: background }}>
+						<Badge.Container overlap cutout attributes={{ "data-testid": "container" }}>
+							<Badge color="critical" rounded hidden={hidden}>
+								{count}
+							</Badge>
+							<Avatar src={src} size={16} />
+						</Badge.Container>
+
+						<Badge.Container overlap cutout position="bottom-end">
+							<Badge color="positive" rounded hidden={hidden} />
+							<Avatar src={src} size={16} />
+						</Badge.Container>
+					</View>
+				</Example.Item>
+
+				<Example.Item title="cutout, squared">
+					<View direction="row" gap={6} attributes={{ style: background }}>
+						<Badge.Container cutout>
+							<Badge color="primary" hidden={hidden}>
+								{count}
+							</Badge>
+							<Avatar src={src} size={16} squared />
+						</Badge.Container>
+
+						<Badge.Container cutout>
+							<Badge color="primary" variant="faded" rounded hidden={hidden}>
+								{count}
+							</Badge>
+							<Avatar initials="A" size={16} squared color="primary" />
+						</Badge.Container>
+					</View>
+				</Example.Item>
+
+				<Example.Item title="cutout, icon">
+					<View direction="row" gap={6} attributes={{ style: background }}>
+						<Badge.Container overlap cutout>
+							<Badge size="small" color="critical" rounded hidden={hidden} />
+							<Icon svg={IconCheckmark} size={8} />
+						</Badge.Container>
+					</View>
+				</Example.Item>
+
+				<Example.Item title={["cutout, custom size", "--rs-badge-cutout-size: 4px"]}>
+					<View direction="row" gap={6} attributes={{ style: background }}>
+						<Badge.Container
+							overlap
+							cutout
+							attributes={{ style: { "--rs-badge-cutout-size": "4px" } as React.CSSProperties }}
+						>
+							<Badge color="critical" rounded hidden={hidden}>
+								{count}
+							</Badge>
+							<Avatar src={src} size={16} />
+						</Badge.Container>
+					</View>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvas }) => {
+		const container = canvas.getByTestId("container");
+		const content = container.lastElementChild as HTMLElement;
+
+		expect(container.style.getPropertyValue("--rs-badge-cutout-image")).toContain(
+			"data:image/svg+xml"
+		);
+		expect(getComputedStyle(content).maskImage).toContain("data:image/svg+xml");
+	},
+};
+
 export const href: StoryObj = {
 	name: "href",
 	render: () => (

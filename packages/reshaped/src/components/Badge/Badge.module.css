@@ -1,3 +1,9 @@
+@property --rs-badge-cutout-size {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: true;
+}
+
 .root {
 	--rs-badge-border-color: transparent;
 
@@ -226,5 +232,41 @@
 
 	&.--container-overlap .root {
 		bottom: 14%;
+	}
+}
+
+/*
+ * Cutout
+ * Badge.Container measures the badge and passes its shape as an svg mask layer.
+ * Excluding it from a full layer removes the area around the badge from the content,
+ * so the gap stays transparent and shows whatever is rendered behind the container.
+ */
+
+.--container-cutout {
+	--rs-badge-cutout-size: var(--rs-unit-x0-5);
+	--rs-badge-cutout-scale: 1;
+
+	&:has(> .root.--hidden) {
+		--rs-badge-cutout-scale: 0;
+	}
+
+	& > :not(.root) {
+		--rs-badge-cutout-mask-width: calc(var(--rs-badge-cutout-width) * var(--rs-badge-cutout-scale));
+		--rs-badge-cutout-mask-height: calc(
+			var(--rs-badge-cutout-height) * var(--rs-badge-cutout-scale)
+		);
+
+		mask-image: var(--rs-badge-cutout-image), linear-gradient(#000 0 0);
+		mask-repeat: no-repeat;
+		mask-size:
+			var(--rs-badge-cutout-mask-width) var(--rs-badge-cutout-mask-height),
+			100% 100%;
+		mask-position:
+			calc(var(--rs-badge-cutout-x) - var(--rs-badge-cutout-mask-width) / 2)
+				calc(var(--rs-badge-cutout-y) - var(--rs-badge-cutout-mask-height) / 2),
+			0 0;
+		mask-composite: exclude;
+		transition: var(--rs-duration-medium) var(--rs-easing-standard);
+		transition-property: mask-size, mask-position;
 	}
 }
