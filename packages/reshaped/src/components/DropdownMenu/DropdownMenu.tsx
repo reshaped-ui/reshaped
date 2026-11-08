@@ -116,7 +116,7 @@ export const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 		<MenuItem
 			{...props}
 			size={size ?? menuSize}
-			focusIndicator={props.focusIndicator ?? "highlight"}
+			focusIndicator="highlight"
 			roundedCorners
 			className={[s.item, props.className]}
 			attributes={{ role: "menuitem", ...props.attributes }}

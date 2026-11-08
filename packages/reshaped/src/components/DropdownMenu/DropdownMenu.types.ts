@@ -51,7 +51,7 @@ export type Props = Pick<
 
 export type ContentProps = Pick<FlyoutContentProps, "attributes" | "children" | "className">;
 
-export type ItemProps = Omit<MenuItemProps, "roundedCorners">;
+export type ItemProps = Omit<MenuItemProps, "roundedCorners" | "focusIndicator">;
 
 export type SectionProps = {
 	/** Node for inserting children */
@@ -73,4 +73,4 @@ export type SubMenuProps = {
 	| "containerRef"
 >;
 
-export type SubTriggerProps = Omit<MenuItemProps, "endSlot" | "roundedCorners">;
+export type SubTriggerProps = Omit<MenuItemProps, "endSlot" | "roundedCorners" | "focusIndicator">;
