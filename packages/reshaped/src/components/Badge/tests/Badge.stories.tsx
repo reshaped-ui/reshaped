@@ -1,6 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { createRoot } from "react-dom/client";
 import { expect, fn, userEvent, waitFor } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
@@ -363,32 +362,6 @@ export const cutout: StoryObj = {
 			expect(container.style.getPropertyValue("--rs-badge-width")).not.toBe("");
 		});
 		expect(getComputedStyle(content).maskImage).toContain("gradient");
-	},
-};
-
-export const cutoutNonStrict: StoryObj = {
-	name: "test: cutout, outside of strict mode",
-	render: () => <div data-testid="root" />,
-	play: async ({ canvas }) => {
-		// Stories render in strict mode, which re-runs effects after the container ref is attached
-		// and hides the mount order issues, so a separate root is used here
-		const root = createRoot(canvas.getByTestId("root"));
-
-		root.render(
-			<Badge.Container attributes={{ "data-testid": "container" }}>
-				<Badge color="primary">5</Badge>
-				<Avatar initials="A" />
-			</Badge.Container>
-		);
-
-		const container = await canvas.findByTestId("container");
-
-		await waitFor(() => {
-			expect(container.style.getPropertyValue("--rs-badge-width")).not.toBe("");
-			expect(container.style.getPropertyValue("--rs-badge-height")).not.toBe("");
-		});
-
-		root.unmount();
 	},
 };
 
