@@ -3,9 +3,30 @@ import * as T from "@/styles/types";
 import s from "./inset.module.css";
 import "./inset.css";
 
-const inset: T.StyleResolver<T.Inset> = (value) => {
+const inset: T.StyleResolver<T.InsetAxis> = (value) => {
 	if (value === undefined) return {};
-	return { variables: responsiveVariables("--rs-inset", value) };
+	// Insetting all sides is sugar for insetting both axes, which also lets
+	// `inset="center"` reuse the per-axis centering classes for both directions
+	const inlineClassNames = responsiveClassNames(
+		s,
+		(value) => (value === "center" ? "--inline-center" : "--inline-unit"),
+		value,
+		{ excludeValueFromClassName: true }
+	);
+	const blockClassNames = responsiveClassNames(
+		s,
+		(value) => (value === "center" ? "--block-center" : "--block-unit"),
+		value,
+		{ excludeValueFromClassName: true }
+	);
+
+	return {
+		classNames: [s.root, inlineClassNames, blockClassNames],
+		variables: {
+			...responsiveVariables("--rs-inset-inline", value),
+			...responsiveVariables("--rs-inset-block", value),
+		},
+	};
 };
 
 export const insetTop: T.StyleResolver<T.Inset> = (value) => {

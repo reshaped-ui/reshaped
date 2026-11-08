@@ -101,8 +101,8 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	borderRadius?: G.Responsive<TStyles.Radius>;
 	/** Position style */
 	position?: G.Responsive<TStyles.Position>;
-	/** Inset style, base unit token number multiplier when used as a number */
-	inset?: G.Responsive<TStyles.Inset>;
+	/** Inset style, base unit token number multiplier when used as a number, "center" centers the element on both axes */
+	inset?: G.Responsive<TStyles.InsetAxis>;
 	/** Inset start, base unit token number multiplier when used as a number */
 	insetStart?: G.Responsive<TStyles.Inset>;
 	/** Inset end, base unit token number multiplier when used as a number */
