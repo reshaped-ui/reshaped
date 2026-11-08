@@ -9,16 +9,6 @@
 	}
 }
 
-/*
- * When the root gets its size from aspectRatio or height, take the image out of the flow
- * so it doesn't affect the root size. WebKit doesn't resolve height: 100% against the aspect-ratio box
- * inside height: auto containers and falls back to the image natural height instead
- */
-.--fill .image {
-	position: absolute;
-	inset: 0;
-}
-
 .image {
 	max-width: 100%;
 	display: block;
@@ -33,6 +23,14 @@
 }
 
 .--outline {
+	/*
+	 * Image fills the wrapper as a flex item instead of relying on height: 100%,
+	 * since WebKit doesn't resolve it when the wrapper height comes from aspect-ratio
+	 */
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+
 	&::after {
 		content: "";
 		position: absolute;

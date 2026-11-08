@@ -134,6 +134,7 @@ export const outline: StoryObj = {
 						aspectRatio={1}
 						outline
 						borderRadius="circular"
+						attributes={{ id: "test-outline-root" }}
 					/>
 				</View>
 			</Example.Item>
@@ -142,6 +143,10 @@ export const outline: StoryObj = {
 	play: async ({ canvas }) => {
 		const img = canvas.getByAltText("large photo");
 		const root = img.parentElement!;
+
+		// Root attributes are applied to the wrapper only
+		expect(root).toHaveAttribute("id", "test-outline-root");
+		expect(img).not.toHaveAttribute("id");
 
 		await waitFor(() => expect((img as HTMLImageElement).complete).toBe(true));
 

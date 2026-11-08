@@ -27,14 +27,16 @@ const Image: React.FC<T.Props> = (props) => {
 		renderImage,
 	} = props;
 	const [status, setStatus] = React.useState("loading");
-	// Image attributes are merged on top of the root attributes when rendering the image element
-	const passedImageRef = passedImageAttributes?.ref ?? attributes?.ref;
+	// Image attributes are merged on top of the root attributes when rendering the image element.
+	// With outline, root attributes go to the wrapper instead and the image only fills it
+	const passedImageRef = outline
+		? passedImageAttributes?.ref
+		: (passedImageAttributes?.ref ?? attributes?.ref);
 	const mixinStyles = resolveMixin({ radius: borderRadius, width, height, maxWidth, aspectRatio });
 	const rootClassNames = classNames(
 		s.root,
 		mixinStyles.classNames,
 		outline && s["--outline"],
-		outline && (aspectRatio !== undefined || height !== undefined) && s["--fill"],
 		className
 	);
 	const imageClassNames = classNames([
@@ -99,7 +101,7 @@ const Image: React.FC<T.Props> = (props) => {
 	}
 
 	const imageAttributes = {
-		...attributes,
+		...(outline ? undefined : attributes),
 		...passedImageAttributes,
 		src: src ?? "",
 		alt: alt ?? "",
@@ -108,7 +110,7 @@ const Image: React.FC<T.Props> = (props) => {
 		onError: handleError,
 		ref: handleImageRef,
 		className: outline ? imageClassNames : classNames([imageClassNames, rootClassNames]),
-		style,
+		style: outline ? passedImageAttributes?.style : style,
 	};
 
 	// eslint-disable-next-line jsx-a11y/alt-text
