@@ -111,15 +111,48 @@ export const displayMode = {
 	),
 };
 
-export const outline = {
+const largeImgUrl =
+	"data:image/svg+xml," +
+	encodeURIComponent(
+		'<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect width="100%" height="100%" fill="teal"/></svg>'
+	);
+
+export const outline: StoryObj = {
 	name: "outline",
 	render: () => (
 		<Example>
 			<Example.Item title="outline: true">
 				<Image src={imgUrl} height="200px" width="100%" outline borderRadius="small" />
 			</Example.Item>
+
+			<Example.Item title="outline: true, aspectRatio: 1, image larger than the root">
+				<View direction="row" align="center" gap={4}>
+					<Image
+						src={largeImgUrl}
+						alt="large photo"
+						width="36px"
+						aspectRatio={1}
+						outline
+						borderRadius="circular"
+					/>
+				</View>
+			</Example.Item>
 		</Example>
 	),
+	play: async ({ canvas }) => {
+		const img = canvas.getByAltText("large photo");
+		const root = img.parentElement!;
+
+		await waitFor(() => expect((img as HTMLImageElement).complete).toBe(true));
+
+		const rootRect = root.getBoundingClientRect();
+		const imgRect = img.getBoundingClientRect();
+
+		expect(rootRect.width).toBe(36);
+		expect(rootRect.height).toBe(36);
+		expect(imgRect.width).toBe(36);
+		expect(imgRect.height).toBe(36);
+	},
 };
 
 export const onLoad: StoryObj<{ handleLoad: ReturnType<typeof fn> }> = {

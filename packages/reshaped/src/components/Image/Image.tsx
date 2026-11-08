@@ -34,6 +34,7 @@ const Image: React.FC<T.Props> = (props) => {
 		s.root,
 		mixinStyles.classNames,
 		outline && s["--outline"],
+		outline && (aspectRatio !== undefined || height !== undefined) && s["--fill"],
 		className
 	);
 	const imageClassNames = classNames([
