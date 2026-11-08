@@ -20,9 +20,9 @@ dist
 /cli
 /index.js
 /index.d.ts
-/bundle.js
-/bundle.js.map
+/bundle.cjs
+/bundle.cjs.map
 /bundle.css
 /bundle.css.map
-/bundle.d.ts
+/bundle.d.cts
 *.log
