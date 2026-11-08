@@ -13,25 +13,9 @@
 	--rs-modal-container-width: 100vw;
 	--rs-modal-container-height: 100vh;
 
-	/**
-	 * Distance between the edge attached modals and the screen edges,
-	 * increased to the browser safe area insets when they're larger, e.g. for the notch and the home indicator
-	 */
-	--rs-modal-offset: var(--rs-unit-x2);
-	--rs-modal-safe-top: env(safe-area-inset-top, 0px);
-	--rs-modal-safe-bottom: env(safe-area-inset-bottom, 0px);
-	--rs-modal-safe-start: env(safe-area-inset-left, 0px);
-	--rs-modal-safe-end: env(safe-area-inset-right, 0px);
-	--rs-modal-inset-top: max(var(--rs-modal-offset), var(--rs-modal-safe-top));
-	--rs-modal-inset-bottom: max(var(--rs-modal-offset), var(--rs-modal-safe-bottom));
-	--rs-modal-inset-start: max(var(--rs-modal-offset), var(--rs-modal-safe-start));
-	--rs-modal-inset-end: max(var(--rs-modal-offset), var(--rs-modal-safe-end));
-
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
-
-	/* Modal is the base layer for its content, so raised and overlay elements inside it look the same as on the page */
-	background: var(--rs-color-background-elevation-base);
+	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
 	box-shadow: var(--rs-shadow-overlay);
 	will-change: transform, opacity;
@@ -42,24 +26,9 @@
 		outline: var(--rs-outline);
 	}
 
-	[dir="rtl"] & {
-		--rs-modal-safe-start: env(safe-area-inset-right, 0px);
-		--rs-modal-safe-end: env(safe-area-inset-left, 0px);
-	}
-
-	/* Modal stays on top of the page content without the overlay, so it keeps the overlay elevation */
-	&.--transparent-overlay {
-		background: var(--rs-color-background-elevation-overlay);
-	}
-
-	/* Safe areas only apply to the viewport edges */
 	&.--contained {
 		--rs-modal-container-width: 100%;
 		--rs-modal-container-height: 100%;
-		--rs-modal-safe-top: 0px;
-		--rs-modal-safe-bottom: 0px;
-		--rs-modal-safe-start: 0px;
-		--rs-modal-safe-end: 0px;
 	}
 }
 
@@ -94,19 +63,17 @@
 	@value bottom {
 		--rs-modal-size-s: auto;
 
-		width: auto;
+		width: 100%;
 		height: var(--rs-modal-size);
-		max-width: none;
-		max-height: calc(
-			var(--rs-modal-container-height) - var(--rs-modal-inset-bottom) -
-				max(var(--rs-unit-x4), var(--rs-modal-inset-top))
-		);
+		max-width: 100%;
+		max-height: calc(var(--rs-modal-container-height) - var(--rs-unit-x4));
 		margin: 0;
-		inset-block: auto var(--rs-modal-inset-bottom);
-		inset-inline: var(--rs-modal-inset-start) var(--rs-modal-inset-end);
-		transform: translate(0, calc(100% + var(--rs-modal-inset-bottom)));
+		margin-top: var(--rs-unit-x4);
+		inset: 0;
+		inset-block-start: initial;
+		transform: translate(0, 100%);
 		position: absolute;
-		border-radius: var(--rs-radius-large);
+		border-radius: var(--rs-radius-large) var(--rs-radius-large) 0 0;
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
@@ -121,24 +88,26 @@
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
 
 		width: var(--rs-modal-size);
-		height: auto;
-		max-width: calc(
-			var(--rs-modal-container-width) - var(--rs-modal-inset-start) -
-				max(var(--rs-unit-x4), var(--rs-modal-inset-end))
-		);
-		max-height: none;
+		height: 100%;
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
+		max-height: 100%;
 		margin: 0;
-		inset-block: var(--rs-modal-inset-top) var(--rs-modal-inset-bottom);
-		inset-inline: var(--rs-modal-inset-start) auto;
-		transform: translate(calc(-100% - var(--rs-modal-inset-start)), 0);
+		margin-inline-end: var(--rs-unit-x4);
+		inset: 0;
+		inset-inline-end: initial;
+		transform: translate(-100%, 0);
 		position: absolute;
-		border-radius: var(--rs-radius-large);
+		border-radius: 0;
+
+		/* Round the corners away from the screen edge, logical properties flip them in rtl */
+		border-start-end-radius: var(--rs-radius-large);
+		border-end-end-radius: var(--rs-radius-large);
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate(calc(100% + var(--rs-modal-inset-start)), 0);
+			transform: translate(100%, 0);
 		}
 
 		&.--active {
@@ -155,24 +124,26 @@
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
 
 		width: var(--rs-modal-size);
-		height: auto;
-		max-width: calc(
-			var(--rs-modal-container-width) - var(--rs-modal-inset-end) -
-				max(var(--rs-unit-x4), var(--rs-modal-inset-start))
-		);
-		max-height: none;
+		height: 100%;
+		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x4));
+		max-height: 100%;
 		margin: 0;
-		inset-block: var(--rs-modal-inset-top) var(--rs-modal-inset-bottom);
-		inset-inline: auto var(--rs-modal-inset-end);
-		transform: translate(calc(100% + var(--rs-modal-inset-end)), 0);
+		margin-inline-start: var(--rs-unit-x4);
+		inset: 0;
+		inset-inline-start: initial;
+		transform: translate(100%, 0);
 		position: absolute;
-		border-radius: var(--rs-radius-large);
+		border-radius: 0;
+
+		/* Round the corners away from the screen edge, logical properties flip them in rtl */
+		border-start-start-radius: var(--rs-radius-large);
+		border-end-start-radius: var(--rs-radius-large);
 		overflow: auto;
 		overscroll-behavior: none;
 		opacity: 1;
 
 		[dir="rtl"] & {
-			transform: translate(calc(-100% - var(--rs-modal-inset-end)), 0);
+			transform: translate(-100%, 0);
 		}
 
 		&.--active {

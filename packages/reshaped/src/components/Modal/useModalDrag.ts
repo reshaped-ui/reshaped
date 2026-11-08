@@ -42,7 +42,7 @@ type State = {
 	distance: number;
 	/** Offset the modal is currently rendered at, resolved from the seed and the distance */
 	offset: number;
-	/** Distance on the drag axis in px from the open to the closed position, used as the closing target */
+	/** Modal size on the drag axis in px, used as the closing target */
 	size: number;
 	/** Recent coordinates on the drag axis, used for measuring the release velocity */
 	samples: { time: number; coordinate: number }[];
@@ -76,30 +76,12 @@ const getInitialState = (): State => ({
  * Resolved from the transform so a gesture can pick up an animation that is still in flight,
  * the dragging class disables transitions and would otherwise snap the modal to the animation target
  */
-const getRenderedOffset = (
-	style: CSSStyleDeclaration,
-	args: { axis: "x" | "y"; closingSign: number }
-) => {
-	const { transform } = style;
+const getRenderedOffset = (el: HTMLElement, args: { axis: "x" | "y"; closingSign: number }) => {
+	const { transform } = window.getComputedStyle(el);
 	if (!transform || transform === "none") return 0;
 
 	const matrix = new DOMMatrixReadOnly(transform);
 	return Math.max(0, (args.axis === "y" ? matrix.m42 : matrix.m41) * args.closingSign);
-};
-
-/**
- * Distance in px the modal travels to its closed position, including its offset from the container edge
- */
-const getClosingSize = (
-	el: HTMLElement,
-	style: CSSStyleDeclaration,
-	args: { axis: "x" | "y"; closingSign: number }
-) => {
-	const size = args.axis === "y" ? el.offsetHeight : el.offsetWidth;
-	const edgeOffset =
-		args.axis === "y" ? style.bottom : args.closingSign === -1 ? style.left : style.right;
-
-	return Math.max(1, size + (parseFloat(edgeOffset) || 0));
 };
 
 /**
@@ -251,9 +233,8 @@ const useModalDrag = (args: {
 		// Prevent the drag handling when browser is trying to navigate to a previous page
 		if (axis === "x" && closingSign === -1 && touch.clientX < EDGE_BOUNDARY) return;
 
-		const rootStyle = rootEl && window.getComputedStyle(rootEl);
 		// Measured before the state is replaced, a transition in flight resolves to its current position
-		const seed = active && rootStyle ? getRenderedOffset(rootStyle, { axis, closingSign }) : 0;
+		const seed = active && rootEl ? getRenderedOffset(rootEl, { axis, closingSign }) : 0;
 		const origin = axis === "y" ? touch.clientY : touch.clientX;
 
 		// The previous gesture can be left unresolved, e.g. when the modal stays open after a drag close
@@ -263,7 +244,7 @@ const useModalDrag = (args: {
 			oppositeOrigin: axis === "y" ? touch.clientX : touch.clientY,
 			previous: origin,
 			seed,
-			size: rootEl && rootStyle ? getClosingSize(rootEl, rootStyle, { axis, closingSign }) : 1,
+			size: rootEl ? Math.max(1, axis === "y" ? rootEl.clientHeight : rootEl.clientWidth) : 1,
 		};
 
 		resetReleaseTransition();

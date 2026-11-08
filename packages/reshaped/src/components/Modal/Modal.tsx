@@ -134,7 +134,6 @@ const Modal: FC<T.Props> = (props) => {
 					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],
 					shouldBeContained && s["--contained"],
-					transparentOverlay && s["--transparent-overlay"],
 					responsiveClassNames(s, "--position", position),
 					mixinStyles.classNames
 				);
