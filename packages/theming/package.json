@@ -52,7 +52,8 @@
 	"scripts": {
 		"clean": "rm -rf dist",
 		"dev": "tsc-watch --onSuccess \"tsc-alias\"",
-		"build": "tsc && tsc-alias"
+		"build": "tsc && tsc-alias",
+		"test:unit": "vitest run"
 	},
 	"dependencies": {
 		"@types/culori": "4.0.1",
