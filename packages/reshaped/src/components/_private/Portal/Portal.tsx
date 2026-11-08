@@ -23,10 +23,15 @@ const Portal: React.FC<T.Props> = (props) => {
 	const { children, targetRef, colorMode } = props;
 	const mountedToggle = useToggle();
 	const rootRef = React.useRef<HTMLDivElement>(null);
+	const shadowRootRef = React.useRef<ShadowRoot | null>(null);
 
+	/**
+	 * Root element is removed after mount, so the detected shadow root is stored
+	 * to keep rendering into it on the next renders
+	 */
 	const rootNode = rootRef.current?.getRootNode();
-	const isShadowDom = rootNode instanceof ShadowRoot;
-	const defaultTargetEl = isShadowDom ? rootNode : document.body;
+	if (rootNode instanceof ShadowRoot) shadowRootRef.current = rootNode;
+	const defaultTargetEl = shadowRootRef.current ?? document.body;
 
 	/**
 	 * Check for parent portal to render inside it

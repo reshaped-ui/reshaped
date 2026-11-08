@@ -364,7 +364,7 @@ export const handlers: StoryObj<{
 		await userEvent.click(trigger);
 		await sleep(100);
 
-		const overlay = canvas.getAllByRole("button", { hidden: true }).at(-1)!;
+		const overlay = canvas.getAllByRole("presentation", { hidden: true }).at(-1)!;
 
 		// Close by clicking on the overlay
 		await userEvent.click(overlay);
