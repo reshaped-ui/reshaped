@@ -7,26 +7,45 @@
 	display: flex;
 }
 
+/*
+ * Blur is kept in a separate animation since browsers can't run filters that move pixels
+ * on the compositor. Combined in the same keyframes, it would pull transform and opacity
+ * to the main thread too, making the animation stutter whenever the main thread is busy
+ */
 .--enter {
-	animation: rs-icon-toggle-enter var(--rs-duration-medium) var(--rs-easing-standard);
+	animation:
+		rs-icon-toggle-enter var(--rs-duration-medium) var(--rs-easing-standard),
+		rs-icon-toggle-enter-blur var(--rs-duration-medium) var(--rs-easing-standard);
 }
 
 .--exit {
-	animation: rs-icon-toggle-exit var(--rs-duration-medium) var(--rs-easing-standard) forwards;
+	animation:
+		rs-icon-toggle-exit var(--rs-duration-medium) var(--rs-easing-standard) forwards,
+		rs-icon-toggle-exit-blur var(--rs-duration-medium) var(--rs-easing-standard) forwards;
 }
 
 @keyframes rs-icon-toggle-enter {
 	from {
 		opacity: 0;
-		filter: blur(2px);
 		transform: scale(0.25);
+	}
+}
+
+@keyframes rs-icon-toggle-enter-blur {
+	from {
+		filter: blur(2px);
 	}
 }
 
 @keyframes rs-icon-toggle-exit {
 	to {
 		opacity: 0;
-		filter: blur(2px);
 		transform: scale(0.25);
+	}
+}
+
+@keyframes rs-icon-toggle-exit-blur {
+	to {
+		filter: blur(2px);
 	}
 }
