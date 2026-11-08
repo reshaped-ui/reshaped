@@ -34,7 +34,7 @@ type State = {
 	origin: number;
 	/** Coordinate on the perpendicular axis the gesture started from */
 	oppositeOrigin: number;
-	/** Coordinate on the drag axis from the previous move, used for resolving the direction */
+	/** Coordinate on the drag axis from the previous move, used for resolving the per-move delta */
 	previous: number;
 	/** Offset the gesture started from, above zero when it picked up an animation in flight */
 	seed: number;
@@ -92,23 +92,22 @@ const canScrollTowardsClosing = (
 	el: HTMLElement,
 	args: { axis: "x" | "y"; closingSign: number }
 ) => {
-	// Bottom modals close with the finger moving down, which scrolls the content towards the top
-	if (args.axis === "y") return el.scrollTop !== 0;
-
-	const maxScroll = el.scrollWidth - el.clientWidth;
+	const vertical = args.axis === "y";
+	const maxScroll = vertical ? el.scrollHeight - el.clientHeight : el.scrollWidth - el.clientWidth;
 	if (maxScroll <= 0) return false;
 
 	// Content with overflow hidden can't be scrolled with the finger
 	const style = window.getComputedStyle(el);
-	if (style.overflowX !== "auto" && style.overflowX !== "scroll") return false;
+	const overflow = vertical ? style.overflowY : style.overflowX;
+	if (overflow !== "auto" && overflow !== "scroll") return false;
 
-	// Distances left to scroll towards the physical sides, scrollLeft goes from 0 to negative values in RTL
-	const rtl = style.direction === "rtl";
-	const leftDistance = rtl ? maxScroll + el.scrollLeft : el.scrollLeft;
-	const rightDistance = rtl ? -el.scrollLeft : maxScroll - el.scrollLeft;
+	// Distance left to scroll towards the top or left side, scrollLeft goes from 0 to negative values in RTL
+	const rtl = !vertical && style.direction === "rtl";
+	const scroll = vertical ? el.scrollTop : el.scrollLeft;
+	const startDistance = rtl ? maxScroll + scroll : scroll;
 
-	// Finger moving right reveals the content on the left side and vice versa
-	return (args.closingSign === 1 ? leftDistance : rightDistance) >= 1;
+	// Finger moving down or right reveals the content on the top or left side and vice versa
+	return (args.closingSign === 1 ? startDistance : maxScroll - startDistance) >= 1;
 };
 
 /** Velocity in px/ms measured over the most recent samples, signed on the drag axis */
@@ -279,9 +278,6 @@ const useModalDrag = (args: {
 
 		const handleTouchMove = (e: TouchEvent) => {
 			const state = stateRef.current;
-			const rootEl = rootRef.current;
-			if (state.intent === "scroll") return;
-
 			const touch = e.targetTouches[0];
 			const coordinate = axis === "y" ? touch.clientY : touch.clientX;
 			const oppositeCoordinate = axis === "y" ? touch.clientX : touch.clientY;
@@ -295,9 +291,11 @@ const useModalDrag = (args: {
 				if (Math.max(travel, oppositeTravel) < DIRECTION_THRESHOLD) return;
 
 				state.intent = travel > oppositeTravel ? "swipe" : "scroll";
-				if (state.intent === "scroll") return;
 			}
 
+			if (state.intent === "scroll") return;
+
+			const rootEl = rootRef.current;
 			if (rootEl && canScrollTowardsClosing(rootEl, { axis, closingSign })) return;
 
 			// Positive when moving towards the closing direction
