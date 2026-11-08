@@ -1,6 +1,6 @@
-@property --rs-badge-cutout-size {
-	syntax: "<length>";
-	initial-value: 0;
+@property --rs-badge-cutout-scale {
+	syntax: "<number>";
+	initial-value: 1;
 	inherits: true;
 }
 
@@ -237,36 +237,112 @@
 
 /*
  * Cutout
- * Badge.Container measures the badge and passes its shape as an svg mask layer.
- * Excluding it from a full layer removes the area around the badge from the content,
- * so the gap stays transparent and shows whatever is rendered behind the container.
+ * Badge.Container provides the badge size, the rest is derived here.
+ * The hole is a rounded rectangle built from 2 bands and 4 corner circles,
+ * which are added together and then subtracted from a full layer to keep the gap transparent.
  */
 
 .--container-cutout {
-	--rs-badge-cutout-size: var(--rs-unit-x0-5);
-	--rs-badge-cutout-scale: 1;
+	--rs-badge-cutout-gap: var(--rs-unit-x0-5);
+	--rs-badge-cutout-radius: var(--rs-radius-small);
+	--rs-badge-cutout-side-x: right;
+	--rs-badge-cutout-side-y: top;
 
-	&:has(> .root.--hidden) {
+	/* Matches the badge center offset, 0 for the corner, 0.14 for overlap */
+	--rs-badge-cutout-inset: 0;
+
+	transition: --rs-badge-cutout-scale var(--rs-duration-medium) var(--rs-easing-standard);
+
+	[dir="rtl"] & {
+		--rs-badge-cutout-side-x: left;
+	}
+
+	&.--container-position-bottom-end {
+		--rs-badge-cutout-side-y: bottom;
+	}
+
+	&.--container-overlap {
+		--rs-badge-cutout-inset: 0.14;
+	}
+
+	&:has(> .root.--rounded) {
+		--rs-badge-cutout-radius: var(--rs-radius-circular);
+	}
+
+	&:has(> .root.--hidden),
+	&:not(:has(> .root)) {
 		--rs-badge-cutout-scale: 0;
 	}
 
 	& > :not(.root) {
-		--rs-badge-cutout-mask-width: calc(var(--rs-badge-cutout-width) * var(--rs-badge-cutout-scale));
-		--rs-badge-cutout-mask-height: calc(
-			var(--rs-badge-cutout-height) * var(--rs-badge-cutout-scale)
+		--rs-badge-cutout-w: calc(
+			(var(--rs-badge-width) + var(--rs-badge-cutout-gap) * 2) * var(--rs-badge-cutout-scale)
 		);
+		--rs-badge-cutout-h: calc(
+			(var(--rs-badge-height) + var(--rs-badge-cutout-gap) * 2) * var(--rs-badge-cutout-scale)
+		);
+		--rs-badge-cutout-r: min(
+			(var(--rs-badge-cutout-radius) + var(--rs-badge-cutout-gap)) * var(--rs-badge-cutout-scale),
+			var(--rs-badge-cutout-w) / 2,
+			var(--rs-badge-cutout-h) / 2
+		);
+		--rs-badge-cutout-size: var(--rs-badge-cutout-w) var(--rs-badge-cutout-h);
 
-		mask-image: var(--rs-badge-cutout-image), linear-gradient(#000 0 0);
-		mask-repeat: no-repeat;
+		/* Percentages resolve against the container size minus the hole size, so the px part compensates for it */
+		--rs-badge-cutout-position: var(--rs-badge-cutout-side-x)
+			calc(
+				var(--rs-badge-cutout-inset) * 100% + (var(--rs-badge-cutout-inset) - 0.5) *
+					var(--rs-badge-cutout-w)
+			)
+			var(--rs-badge-cutout-side-y)
+			calc(
+				var(--rs-badge-cutout-inset) * 100% + (var(--rs-badge-cutout-inset) - 0.5) *
+					var(--rs-badge-cutout-h)
+			);
+		--rs-badge-cutout-band:
+			transparent var(--rs-badge-cutout-r), #000 0 calc(100% - var(--rs-badge-cutout-r)),
+			transparent 0;
+		--rs-badge-cutout-circle:
+			#000 calc(var(--rs-badge-cutout-r) - 0.5px),
+			transparent calc(var(--rs-badge-cutout-r) + 0.5px);
+		--rs-badge-cutout-end: calc(100% - var(--rs-badge-cutout-r));
+
+		mask-image:
+			linear-gradient(#000 0 0), linear-gradient(to right, var(--rs-badge-cutout-band)),
+			linear-gradient(to bottom, var(--rs-badge-cutout-band)),
+			radial-gradient(
+				circle at var(--rs-badge-cutout-r) var(--rs-badge-cutout-r),
+				var(--rs-badge-cutout-circle)
+			),
+			radial-gradient(
+				circle at var(--rs-badge-cutout-end) var(--rs-badge-cutout-r),
+				var(--rs-badge-cutout-circle)
+			),
+			radial-gradient(
+				circle at var(--rs-badge-cutout-r) var(--rs-badge-cutout-end),
+				var(--rs-badge-cutout-circle)
+			),
+			radial-gradient(
+				circle at var(--rs-badge-cutout-end) var(--rs-badge-cutout-end),
+				var(--rs-badge-cutout-circle)
+			);
 		mask-size:
-			var(--rs-badge-cutout-mask-width) var(--rs-badge-cutout-mask-height),
-			100% 100%;
+			100% 100%,
+			var(--rs-badge-cutout-size),
+			var(--rs-badge-cutout-size),
+			var(--rs-badge-cutout-size),
+			var(--rs-badge-cutout-size),
+			var(--rs-badge-cutout-size),
+			var(--rs-badge-cutout-size);
 		mask-position:
-			calc(var(--rs-badge-cutout-x) - var(--rs-badge-cutout-mask-width) / 2)
-				calc(var(--rs-badge-cutout-y) - var(--rs-badge-cutout-mask-height) / 2),
-			0 0;
-		mask-composite: exclude;
-		transition: var(--rs-duration-medium) var(--rs-easing-standard);
-		transition-property: mask-size, mask-position;
+			0 0,
+			var(--rs-badge-cutout-position),
+			var(--rs-badge-cutout-position),
+			var(--rs-badge-cutout-position),
+			var(--rs-badge-cutout-position),
+			var(--rs-badge-cutout-position),
+			var(--rs-badge-cutout-position);
+		mask-repeat: no-repeat;
+		mask-composite: subtract, add, add, add, add, add, add;
 	}
 }
