@@ -7,6 +7,7 @@ import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
 
 export type Size = "small" | "medium" | "large";
+export type FocusIndicator = "outline" | "highlight";
 
 export type Props = Pick<
 	ActionableProps,
@@ -32,6 +33,8 @@ export type Props = Pick<
 	endSlot?: React.ReactNode;
 	/** Highlight the component as hovered or focused. For example, when displaying currently focused item in Autocomplete */
 	highlighted?: boolean;
+	/** Visual indicator for the keyboard focus state, highlight uses the same styles as hover */
+	focusIndicator?: FocusIndicator;
 	/** Highlight the component as selected */
 	selected?: boolean;
 	/** Component size */

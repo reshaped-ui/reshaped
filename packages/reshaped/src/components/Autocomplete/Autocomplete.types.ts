@@ -37,7 +37,7 @@ export type Props = TextFieldProps &
 		children: React.ReactNode;
 	};
 
-export type ItemProps = MenuItemProps & SelectArgs;
+export type ItemProps = Omit<MenuItemProps, "focusIndicator"> & SelectArgs;
 
 export type Context = {
 	onItemClick: (args: SelectArgs) => void;
