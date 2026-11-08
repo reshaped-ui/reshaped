@@ -72,7 +72,9 @@ export const handlers: StoryObj<{
 		await userEvent.pointer({ keys: "[MouseRight>]", target: root });
 
 		expect(args.handleOpen).toHaveBeenCalledTimes(1);
-		expect(args.handleOpen).toHaveBeenCalledWith();
+		expect(args.handleOpen).toHaveBeenCalledWith({
+			event: expect.objectContaining({ type: "contextmenu", target: root }),
+		});
 
 		const item = canvas.getByText("Item");
 

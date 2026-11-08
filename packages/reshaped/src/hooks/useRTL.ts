@@ -1,3 +1,7 @@
-import { useSingletonRTL } from "./_internal/useSingletonRTL";
+import React from "react";
 
-export default useSingletonRTL;
+import { SingletonRTLContext } from "./_internal/useSingletonRTL";
+
+const useRTL = () => React.useContext(SingletonRTLContext).rtl;
+
+export default useRTL;
