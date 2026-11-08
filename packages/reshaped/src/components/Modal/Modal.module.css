@@ -12,12 +12,26 @@
 .root {
 	--rs-modal-container-width: 100vw;
 	--rs-modal-container-height: 100vh;
+	--rs-modal-padding: calc(var(--rs-p, 0) * var(--rs-unit-x1));
+	--rs-modal-env-top: env(safe-area-inset-top, 0px);
+	--rs-modal-env-bottom: env(safe-area-inset-bottom, 0px);
+	--rs-modal-env-start: env(safe-area-inset-left, 0px);
+	--rs-modal-env-end: env(safe-area-inset-right, 0px);
+	--rs-modal-direction: 1;
+
+	/*
+	 * Copy of the modal background behind its screen edge, offset with --rs-modal-bleed-x/y per position.
+	 * Keeps the edge covered when the modal is dragged past its open position
+	 */
+	--rs-modal-bleed: calc(var(--rs-unit-x1) * 12);
 
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	box-shadow: var(--rs-shadow-overlay);
+	box-shadow:
+		var(--rs-shadow-overlay),
+		var(--rs-modal-bleed-x) var(--rs-modal-bleed-y) 0 0 var(--rs-color-background-elevation-overlay);
 	will-change: transform, opacity;
 	outline: none;
 	overscroll-behavior: none;
@@ -26,9 +40,21 @@
 		outline: var(--rs-outline);
 	}
 
+	[dir="rtl"] & {
+		--rs-modal-env-start: env(safe-area-inset-right, 0px);
+		--rs-modal-env-end: env(safe-area-inset-left, 0px);
+		--rs-modal-direction: -1;
+	}
+
+	/* Safe areas and the bleed only apply to the viewport edges */
 	&.--contained {
 		--rs-modal-container-width: 100%;
 		--rs-modal-container-height: 100%;
+		--rs-modal-env-top: 0px;
+		--rs-modal-env-bottom: 0px;
+		--rs-modal-env-start: 0px;
+		--rs-modal-env-end: 0px;
+		--rs-modal-bleed: 0px;
 	}
 }
 
@@ -39,6 +65,12 @@
 @responsive .--position {
 	@value center {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+		--rs-modal-safe-top: 0px;
+		--rs-modal-safe-bottom: 0px;
+		--rs-modal-safe-start: 0px;
+		--rs-modal-safe-end: 0px;
+		--rs-modal-bleed-x: 0px;
+		--rs-modal-bleed-y: 0px;
 
 		width: var(--rs-modal-size);
 		height: auto;
@@ -62,6 +94,12 @@
 
 	@value bottom {
 		--rs-modal-size-s: auto;
+		--rs-modal-safe-top: 0px;
+		--rs-modal-safe-bottom: var(--rs-modal-env-bottom);
+		--rs-modal-safe-start: var(--rs-modal-env-start);
+		--rs-modal-safe-end: var(--rs-modal-env-end);
+		--rs-modal-bleed-x: 0px;
+		--rs-modal-bleed-y: var(--rs-modal-bleed);
 
 		width: 100%;
 		height: var(--rs-modal-size);
@@ -80,12 +118,26 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, max(var(--rs-modal-drag, 0px), 0px));
+			transform: translate(0, var(--rs-modal-drag, 0));
+		}
+
+		/* Higher specificity than the padding prop styles, so the safe area is added on top of them */
+		.root& {
+			padding-block: calc(var(--rs-modal-padding) + var(--rs-modal-safe-top))
+				calc(var(--rs-modal-padding) + var(--rs-modal-safe-bottom));
+			padding-inline: calc(var(--rs-modal-padding) + var(--rs-modal-safe-start))
+				calc(var(--rs-modal-padding) + var(--rs-modal-safe-end));
 		}
 	}
 
 	@value start {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+		--rs-modal-safe-top: var(--rs-modal-env-top);
+		--rs-modal-safe-bottom: var(--rs-modal-env-bottom);
+		--rs-modal-safe-start: var(--rs-modal-env-start);
+		--rs-modal-safe-end: 0px;
+		--rs-modal-bleed-x: calc(var(--rs-modal-bleed) * var(--rs-modal-direction) * -1);
+		--rs-modal-bleed-y: 0px;
 
 		width: var(--rs-modal-size);
 		height: 100%;
@@ -110,18 +162,29 @@
 			transform: translate(100%, 0);
 		}
 
-		&.--active {
-			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0);
+		/* Drag offset is resolved with the screen side the drawer is attached to */
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate(var(--rs-modal-drag, 0), 0);
 		}
 
-		/* Start drawer is attached to the right side in rtl, so it's dragged in the opposite direction */
-		[dir="rtl"] &.--active {
-			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0);
+		/* Higher specificity than the padding prop styles, so the safe area is added on top of them */
+		.root& {
+			padding-block: calc(var(--rs-modal-padding) + var(--rs-modal-safe-top))
+				calc(var(--rs-modal-padding) + var(--rs-modal-safe-bottom));
+			padding-inline: calc(var(--rs-modal-padding) + var(--rs-modal-safe-start))
+				calc(var(--rs-modal-padding) + var(--rs-modal-safe-end));
 		}
 	}
 
 	@value end {
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
+		--rs-modal-safe-top: var(--rs-modal-env-top);
+		--rs-modal-safe-bottom: var(--rs-modal-env-bottom);
+		--rs-modal-safe-start: 0px;
+		--rs-modal-safe-end: var(--rs-modal-env-end);
+		--rs-modal-bleed-x: calc(var(--rs-modal-bleed) * var(--rs-modal-direction));
+		--rs-modal-bleed-y: 0px;
 
 		width: var(--rs-modal-size);
 		height: 100%;
@@ -146,18 +209,29 @@
 			transform: translate(-100%, 0);
 		}
 
-		&.--active {
-			transform: translate(max(var(--rs-modal-drag, 0px), 0px), 0);
+		/* Drag offset is resolved with the screen side the drawer is attached to */
+		&.--active,
+		[dir="rtl"] &.--active {
+			transform: translate(var(--rs-modal-drag, 0), 0);
 		}
 
-		/* End drawer is attached to the left side in rtl, so it's dragged in the opposite direction */
-		[dir="rtl"] &.--active {
-			transform: translate(min(var(--rs-modal-drag, 0px), 0px), 0);
+		/* Higher specificity than the padding prop styles, so the safe area is added on top of them */
+		.root& {
+			padding-block: calc(var(--rs-modal-padding) + var(--rs-modal-safe-top))
+				calc(var(--rs-modal-padding) + var(--rs-modal-safe-bottom));
+			padding-inline: calc(var(--rs-modal-padding) + var(--rs-modal-safe-start))
+				calc(var(--rs-modal-padding) + var(--rs-modal-safe-end));
 		}
 	}
 
 	@value full-screen {
 		--rs-modal-size-s: 100%;
+		--rs-modal-safe-top: 0px;
+		--rs-modal-safe-bottom: 0px;
+		--rs-modal-safe-start: 0px;
+		--rs-modal-safe-end: 0px;
+		--rs-modal-bleed-x: 0px;
+		--rs-modal-bleed-y: 0px;
 
 		width: 100%;
 		height: 100%;
