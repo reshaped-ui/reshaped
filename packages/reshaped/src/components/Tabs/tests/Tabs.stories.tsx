@@ -772,16 +772,17 @@ export const testOverflowResize: StoryObj = {
 
 		const [containerButton, labelButton] = canvas.getAllByRole("button");
 
-		await waitFor(() => expect(getOverflow("container-tabs")).toBe("visible"));
-		await userEvent.click(containerButton);
-		await waitFor(() => expect(getOverflow("container-tabs")).toBe("auto"));
-		await userEvent.click(containerButton);
-		await waitFor(() => expect(getOverflow("container-tabs")).toBe("visible"));
+		const cases = [
+			["container-tabs", containerButton],
+			["content-tabs", labelButton],
+		] as const;
 
-		await waitFor(() => expect(getOverflow("content-tabs")).toBe("visible"));
-		await userEvent.click(labelButton);
-		await waitFor(() => expect(getOverflow("content-tabs")).toBe("auto"));
-		await userEvent.click(labelButton);
-		await waitFor(() => expect(getOverflow("content-tabs")).toBe("visible"));
+		for (const [testId, button] of cases) {
+			await waitFor(() => expect(getOverflow(testId)).toBe("visible"));
+			await userEvent.click(button);
+			await waitFor(() => expect(getOverflow(testId)).toBe("auto"));
+			await userEvent.click(button);
+			await waitFor(() => expect(getOverflow(testId)).toBe("visible"));
+		}
 	},
 };

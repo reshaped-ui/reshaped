@@ -8,9 +8,9 @@ import useRTL from "@/hooks/useRTL";
 
 const useFadeSide = (
 	scrollableRef: React.RefObject<HTMLElement | null>,
-	options: { disabled?: boolean } = {}
+	options: { contentRef?: React.RefObject<HTMLElement | null>; disabled?: boolean } = {}
 ) => {
-	const { disabled } = options;
+	const { contentRef, disabled } = options;
 	const [rtl] = useRTL();
 	const [fadeSide, setFadeSide] = React.useState<"start" | "end" | "both" | null>(null);
 
@@ -42,9 +42,9 @@ const useFadeSide = (
 
 		const debouncedUpdate = rafThrottle(updateFade);
 
-		const resizeObserver = new ResizeObserver(debouncedUpdate);
+		const resizeObserver = new ResizeObserver(() => updateFade());
 		resizeObserver.observe(elScrollable);
-		if (elScrollable.firstElementChild) resizeObserver.observe(elScrollable.firstElementChild);
+		if (contentRef?.current) resizeObserver.observe(contentRef.current);
 
 		elScrollable.addEventListener("scroll", debouncedUpdate);
 

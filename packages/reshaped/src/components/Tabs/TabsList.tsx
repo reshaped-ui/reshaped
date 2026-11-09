@@ -39,8 +39,11 @@ const TabsList: React.FC<T.ListProps> = (props) => {
 		disableSelectionAnimation,
 	} = useTabs();
 	const [rtl] = useRTL();
-	const fadeSide = useFadeSide(elScrollableRef, { disabled: itemWidth === "equal" });
 	const listRef = React.useRef<HTMLDivElement>(null);
+	const fadeSide = useFadeSide(elScrollableRef, {
+		contentRef: listRef,
+		disabled: itemWidth === "equal",
+	});
 	const rootClassNames = classNames(
 		s.root,
 		size && s[`--size-${size}`],
