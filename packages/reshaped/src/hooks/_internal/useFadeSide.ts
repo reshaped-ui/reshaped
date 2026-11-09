@@ -42,10 +42,6 @@ const useFadeSide = (
 
 		const debouncedUpdate = rafThrottle(updateFade);
 
-		// Observe both sides of the clientWidth / scrollWidth comparison:
-		// - the scrollable element catches its available width changing (container resize, siblings appearing or growing)
-		// - the list element catches the content width changing (labels changing, badges appearing, fonts loading)
-		// ResizeObserver also reports the initial size once observation starts, so no separate initial measurement is needed
 		const resizeObserver = new ResizeObserver(debouncedUpdate);
 		resizeObserver.observe(elScrollable);
 		if (elScrollable.firstElementChild) resizeObserver.observe(elScrollable.firstElementChild);
