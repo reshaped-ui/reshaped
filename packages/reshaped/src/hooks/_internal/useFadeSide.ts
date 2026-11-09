@@ -19,7 +19,10 @@ const useFadeSide = (
 		if (!elScrollable) return;
 
 		const isScrollable = elScrollable.clientWidth < elScrollable.scrollWidth;
-		if (!isScrollable) setFadeSide(null);
+		if (!isScrollable) {
+			setFadeSide(null);
+			return;
+		}
 
 		// scrollLeft in RTL starts from 1 instead of 0, so we compare values using this delta
 		const scrollLeft = elScrollable.scrollLeft * (rtl ? -1 : 1);
@@ -39,15 +42,18 @@ const useFadeSide = (
 
 		const debouncedUpdate = rafThrottle(updateFade);
 
-		// Use RaF when scroll to have scrollWidth calculated correctly on the first effect
-		// For example: And edge case inside the complex flexbox layout
-		requestAnimationFrame(() => updateFade());
+		// Observe both sides of the clientWidth / scrollWidth comparison:
+		// - the scrollable element catches its available width changing (container resize, siblings appearing or growing)
+		// - the list element catches the content width changing (labels changing, badges appearing, fonts loading)
+		// ResizeObserver also reports the initial size once observation starts, so no separate initial measurement is needed
+		const resizeObserver = new ResizeObserver(debouncedUpdate);
+		resizeObserver.observe(elScrollable);
+		if (elScrollable.firstElementChild) resizeObserver.observe(elScrollable.firstElementChild);
 
-		window.addEventListener("resize", debouncedUpdate);
 		elScrollable.addEventListener("scroll", debouncedUpdate);
 
 		return () => {
-			window.removeEventListener("resize", debouncedUpdate);
+			resizeObserver.disconnect();
 			elScrollable.removeEventListener("scroll", debouncedUpdate);
 		};
 	}, [rtl, disabled]);
