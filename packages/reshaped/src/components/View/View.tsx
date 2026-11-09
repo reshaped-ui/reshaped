@@ -278,7 +278,7 @@ const View = <As extends keyof React.JSX.IntrinsicElements = "div">(props: T.Pro
 
 		const usedIndex = renderedItemIndex;
 		renderedItemIndex += 1;
-		return renderItem({ child, index: usedIndex });
+		return renderItem({ child, index: usedIndex, fallbackKey: usedIndex });
 	});
 
 	// Classnames and attributes are written here so we can assign nowrap to the root element based on the children
