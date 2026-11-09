@@ -8,9 +8,9 @@ import useRTL from "@/hooks/useRTL";
 
 const useFadeSide = (
 	scrollableRef: React.RefObject<HTMLElement | null>,
-	options: { disabled?: boolean } = {}
+	options: { contentRef?: React.RefObject<HTMLElement | null>; disabled?: boolean } = {}
 ) => {
-	const { disabled } = options;
+	const { contentRef, disabled } = options;
 	const [rtl] = useRTL();
 	const [fadeSide, setFadeSide] = React.useState<"start" | "end" | "both" | null>(null);
 
@@ -19,7 +19,10 @@ const useFadeSide = (
 		if (!elScrollable) return;
 
 		const isScrollable = elScrollable.clientWidth < elScrollable.scrollWidth;
-		if (!isScrollable) setFadeSide(null);
+		if (!isScrollable) {
+			setFadeSide(null);
+			return;
+		}
 
 		// scrollLeft in RTL starts from 1 instead of 0, so we compare values using this delta
 		const scrollLeft = elScrollable.scrollLeft * (rtl ? -1 : 1);
@@ -39,15 +42,14 @@ const useFadeSide = (
 
 		const debouncedUpdate = rafThrottle(updateFade);
 
-		// Use RaF when scroll to have scrollWidth calculated correctly on the first effect
-		// For example: And edge case inside the complex flexbox layout
-		requestAnimationFrame(() => updateFade());
+		const resizeObserver = new ResizeObserver(() => updateFade());
+		resizeObserver.observe(elScrollable);
+		if (contentRef?.current) resizeObserver.observe(contentRef.current);
 
-		window.addEventListener("resize", debouncedUpdate);
 		elScrollable.addEventListener("scroll", debouncedUpdate);
 
 		return () => {
-			window.removeEventListener("resize", debouncedUpdate);
+			resizeObserver.disconnect();
 			elScrollable.removeEventListener("scroll", debouncedUpdate);
 		};
 	}, [rtl, disabled]);

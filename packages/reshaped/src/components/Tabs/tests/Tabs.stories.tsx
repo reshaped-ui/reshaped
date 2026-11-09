@@ -716,3 +716,73 @@ export const testEdgeCaseDom = {
 		);
 	},
 };
+
+export const testOverflowResize: StoryObj = {
+	name: "test: overflow on size change",
+	render: () => {
+		const [narrow, setNarrow] = React.useState(false);
+		const [longLabel, setLongLabel] = React.useState(false);
+
+		return (
+			<Example>
+				<Example.Item title="container width changes without window resize">
+					<View gap={3}>
+						<View width={narrow ? "200px" : "640px"}>
+							<Tabs defaultValue="0">
+								<Tabs.List attributes={{ "data-testid": "container-tabs" }}>
+									{[...Array(4)].map((_, i) => (
+										<Tabs.Item value={`${i}`} key={i}>
+											Item {i}
+										</Tabs.Item>
+									))}
+								</Tabs.List>
+							</Tabs>
+						</View>
+						<View direction="row">
+							<Button onClick={() => setNarrow((v) => !v)}>Toggle container width</Button>
+						</View>
+					</View>
+				</Example.Item>
+
+				<Example.Item title="content width changes">
+					<View gap={3}>
+						<View width="200px">
+							<Tabs defaultValue="0">
+								<Tabs.List attributes={{ "data-testid": "content-tabs" }}>
+									<Tabs.Item value="0">Item 0</Tabs.Item>
+									<Tabs.Item value="1">
+										{longLabel ? "Very long item label that doesn't fit" : "Item 1"}
+									</Tabs.Item>
+								</Tabs.List>
+							</Tabs>
+						</View>
+						<View direction="row">
+							<Button onClick={() => setLongLabel((v) => !v)}>Toggle label length</Button>
+						</View>
+					</View>
+				</Example.Item>
+			</Example>
+		);
+	},
+	play: async ({ canvas }) => {
+		const getOverflow = (testId: string) => {
+			const tablist = within(canvas.getByTestId(testId)).getByRole("tablist");
+			return getComputedStyle(tablist.parentElement!).overflowX;
+		};
+
+		const [containerButton, labelButton] = canvas.getAllByRole("button");
+
+		const cases = [
+			["container-tabs", containerButton],
+			["content-tabs", labelButton],
+		] as const;
+
+		for (const [testId, button] of cases) {
+			await waitFor(() => expect(getOverflow(testId)).toBe("visible"));
+			await userEvent.click(button);
+			await waitFor(() => expect(getOverflow(testId)).toBe("auto"));
+			await userEvent.click(button);
+			await waitFor(() => expect(getOverflow(testId)).toBe("visible"));
+		}
+	},
+};
