@@ -1,0 +1,12 @@
+{
+  "mode": "exit",
+  "tag": "canary",
+  "initialVersions": {
+    "reshaped": "4.3.0",
+    "@reshaped/theming": "4.3.0",
+    "@reshaped/utilities": "4.3.0"
+  },
+  "changesets": [
+    "overlay-ios-backdrop"
+  ]
+}

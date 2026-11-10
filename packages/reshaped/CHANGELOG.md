@@ -1,5 +1,15 @@
 # reshaped
 
+## 4.3.1-canary.0
+
+### Patch Changes
+
+- [#709](https://github.com/reshaped-ui/reshaped/pull/709) [`8f75674`](https://github.com/reshaped-ui/reshaped/commit/8f756748ae54d948a5c5600791f0316b567e7843) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Overlay` backdrop is now rendered outside of the fixed overlay container and uses absolute positioning on iOS, following the Base UI approach. iOS Safari fills its toolbar area with the color of the fixed elements attached to the screen edges, which painted the overlay as a solid dark bar behind the toolbar. Safari now renders the dimmed page under its toolbar for overlays, centered and side modals. `Modal` with `start` and `end` positions doesn't render its shadow on iOS since it was picked up by Safari as the toolbar color, and `full-screen` modal background is extended past the screen edges to avoid the overlay showing between the modal and the toolbars
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.3.1-canary.0
+  - @reshaped/theming@4.3.1-canary.0
+
 ## 4.3.0
 
 ### Minor Changes
