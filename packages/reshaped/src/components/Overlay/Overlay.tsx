@@ -70,6 +70,14 @@ const Overlay: React.FC<T.Props> = (props) => {
 		className
 	);
 
+	const backdropClassNames = classNames(
+		s.backdrop,
+		visible && s["--visible"],
+		transparent && s["--click-through"],
+		animated && s["--animated"],
+		shouldBeContained && s["--contained"]
+	);
+
 	const isInsideContent = (el: HTMLElement) => {
 		// Clicked on another portal rendered above the overlay so it's considered as a part of the modal
 		if (!scopeRef.current?.contains(el)) return true;
@@ -170,6 +178,24 @@ const Overlay: React.FC<T.Props> = (props) => {
 		return () => trapFocus.release();
 	}, [rendered, containerRef]);
 
+	/**
+	 * iOS Safari tints its toolbar with the color of the fixed elements attached to the bottom screen edge,
+	 * so the backdrop is positioned absolutely there and is aligned with the viewport manually.
+	 * Page scroll is locked with overflow only on iOS, so the scroll position stays the same while it's rendered
+	 */
+	useIsomorphicLayoutEffect(() => {
+		const backdropEl = backdropRef.current;
+		if (!rendered || !mounted || !backdropEl || shouldBeContained) return;
+		if (window.getComputedStyle(backdropEl).position !== "absolute") return;
+
+		backdropEl.style.setProperty("top", "0px");
+		backdropEl.style.setProperty("left", "0px");
+
+		const rect = backdropEl.getBoundingClientRect();
+		backdropEl.style.setProperty("top", `${-rect.top}px`);
+		backdropEl.style.setProperty("left", `${-rect.left}px`);
+	}, [rendered, mounted, shouldBeContained]);
+
 	// Unlock scroll on unmount
 	React.useEffect(() => {
 		return () => unlockScroll();
@@ -193,8 +219,20 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 	if (!rendered || !mounted) return null;
 
+	const offsetStyle = {
+		"--rs-overlay-offset-x": containerRef ? `${offset[0]}px` : undefined,
+		"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
+	} as React.CSSProperties;
+
 	return (
 		<Portal targetRef={containerRef}>
+			{/* Rendered outside the root to avoid being a part of its fixed container */}
+			<div
+				className={backdropClassNames}
+				style={offsetStyle}
+				ref={backdropRef}
+				aria-hidden="true"
+			/>
 			<Portal.Scope scopeRef={scopeRef}>
 				{(ref) => (
 					<div
@@ -203,12 +241,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 							rootRef.current = node;
 							ref.current = node;
 						}}
-						style={
-							{
-								"--rs-overlay-offset-x": containerRef ? `${offset[0]}px` : undefined,
-								"--rs-overlay-offset-y": containerRef ? `${offset[1]}px` : undefined,
-							} as React.CSSProperties
-						}
+						style={offsetStyle}
 						// Clicking the backdrop is a pointer shortcut, keyboard users close it with Escape
 						role="presentation"
 						tabIndex={-1}
@@ -218,7 +251,6 @@ const Overlay: React.FC<T.Props> = (props) => {
 						onTransitionEnd={handleTransitionEnd}
 					>
 						<div className={s.wrapper}>
-							<div className={s.backdrop} ref={backdropRef} />
 							<div className={s.inner}>
 								<div className={s.content} ref={contentRef}>
 									{typeof children === "function" ? children({ active: visible }) : children}

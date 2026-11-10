@@ -26,14 +26,35 @@
 	position: relative;
 }
 
-/* Setting opacity separately for swipe updates directly in the dom */
+/**
+ * Rendered as a sibling of the root with opacity set separately for swipe updates directly in the dom
+ * Not receiving pointer events since the root handles the outside clicks
+ */
 .backdrop {
-	position: absolute;
+	--rs-overlay-offset-y: 0px;
+	--rs-overlay-offset-x: 0px;
+
+	position: fixed;
 	inset: 0;
-	z-index: -1;
+	z-index: var(--rs-z-index-fixed);
 	background-color: rgb(from var(--rs-color-black) r g b / 70%);
 	opacity: 0;
 	will-change: opacity;
+	pointer-events: none;
+
+	/**
+	 * iOS 26+: Safari fills its toolbar area with the color of the fixed elements attached to the bottom screen edge.
+	 * Absolute backdrop lets Safari render the backdrop itself under the toolbar.
+	 * Its position is aligned with the viewport in Overlay.tsx
+	 */
+	@supports (-webkit-touch-callout: none) {
+		position: absolute;
+		inset: auto;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100lvh;
+	}
 }
 
 .inner {
@@ -48,21 +69,18 @@
 	text-align: initial;
 }
 
-.root.--visible {
+.root.--visible,
+.backdrop.--visible {
 	opacity: 1;
-
-	& .backdrop {
-		opacity: 1;
-	}
 }
 
 .root.--click-through {
 	color: inherit;
 	pointer-events: none;
+}
 
-	& .backdrop {
-		opacity: 0;
-	}
+.backdrop.--click-through {
+	opacity: 0;
 }
 
 .root.--blurred {
@@ -87,19 +105,22 @@
 	position: absolute;
 }
 
-.root.--animated {
-	transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
+/* Matches the root size and offset inside the container */
+.backdrop.--contained {
+	position: absolute;
+	inset: auto;
+	left: var(--rs-overlay-offset-x);
+	top: var(--rs-overlay-offset-y);
+	width: 100%;
+	height: 100%;
+}
 
-	& .backdrop {
-		transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
-	}
+.root.--animated,
+.backdrop.--animated {
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
 
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);
-
-		& .backdrop {
-			transition-timing-function: var(--rs-easing-decelerate);
-		}
 	}
 }
 
