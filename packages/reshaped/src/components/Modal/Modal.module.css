@@ -27,12 +27,12 @@
 
 	/* Space left for the overlay on the side of the side modals far from the screen edge */
 	--rs-modal-far-offset: var(--rs-unit-x6);
+	--rs-modal-floating-shadow: var(--rs-shadow-overlay);
 
 	transition: var(--rs-duration-fast) var(--rs-easing-accelerate);
 	transition-property: transform, opacity;
 	background: var(--rs-color-background-elevation-overlay);
 	color: var(--rs-color-foreground-neutral);
-	box-shadow: var(--rs-shadow-overlay);
 	border: 0 solid var(--rs-color-border-neutral-faded);
 
 	/* Safe area insets are added on the sides attached to the screen edges when --rs-modal-safe is 1 */
@@ -53,8 +53,18 @@
 		--rs-modal-env-end: env(safe-area-inset-left, 0px);
 	}
 
+	/**
+	 * iOS 26+: Safari fills its toolbars with the color sampled from the fixed layers a few pixels away from the screen edges.
+	 * Shadow of the side modals reaches that area and turns the toolbar into an opaque bar,
+	 * so it's removed to let Safari render the overlay under the toolbar instead
+	 */
+	@supports (-webkit-touch-callout: none) {
+		--rs-modal-floating-shadow: none;
+	}
+
 	/* Safe areas only apply to the viewport edges */
 	&.--contained {
+		--rs-modal-floating-shadow: var(--rs-shadow-overlay);
 		--rs-modal-container-width: 100%;
 		--rs-modal-container-height: 100%;
 		--rs-modal-env-top: 0px;
@@ -74,6 +84,7 @@
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
 		--rs-modal-safe: 0;
 
+		box-shadow: var(--rs-shadow-overlay);
 		width: var(--rs-modal-size);
 		height: auto;
 		max-width: calc(var(--rs-modal-container-width) - var(--rs-unit-x8));
@@ -99,6 +110,7 @@
 		--rs-modal-size-s: auto;
 		--rs-modal-safe: 1;
 
+		box-shadow: var(--rs-shadow-overlay);
 		width: 100%;
 		height: var(--rs-modal-size);
 		max-width: 100%;
@@ -127,6 +139,7 @@
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
 		--rs-modal-safe: 0;
 
+		box-shadow: var(--rs-modal-floating-shadow);
 		width: var(--rs-modal-size);
 		height: auto;
 		max-width: calc(
@@ -160,6 +173,7 @@
 		--rs-modal-size-s: calc(var(--rs-unit-x1) * 100);
 		--rs-modal-safe: 0;
 
+		box-shadow: var(--rs-modal-floating-shadow);
 		width: var(--rs-modal-size);
 		height: auto;
 		max-width: calc(
@@ -193,6 +207,7 @@
 		--rs-modal-size-s: 100%;
 		--rs-modal-safe: 0;
 
+		box-shadow: var(--rs-shadow-overlay);
 		width: 100%;
 		height: 100%;
 		max-width: var(--rs-modal-container-width);
