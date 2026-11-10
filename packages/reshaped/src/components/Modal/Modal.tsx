@@ -163,6 +163,11 @@ const Modal: FC<T.Props> = (props) => {
 						>
 							{children}
 						</div>
+						{/* Rendered after the modal so it's the top element at the top edge of the screen */}
+						{active &&
+							clientPosition !== "full-screen" &&
+							!transparentOverlay &&
+							!shouldBeContained && <div className={s.topEdge} aria-hidden="true" />}
 					</Context.Provider>
 				);
 			}}

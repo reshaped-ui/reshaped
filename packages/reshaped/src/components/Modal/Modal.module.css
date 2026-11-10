@@ -245,6 +245,29 @@
 	pointer-events: none;
 }
 
+/**
+ * Invisible strip at the top edge of the screen with the overlay background color.
+ * iOS Safari uses the background color of the fixed elements attached to the top screen edge for its top bar,
+ * so the top bar stays dimmed with the overlay color instead of showing the page background or fading the content.
+ * Background is not painted since the padding takes all the height, and the strip has to be taller than 10px for Safari to use its color
+ */
+.topEdge {
+	display: none;
+	position: fixed;
+	inset-inline: 0;
+	top: 0;
+	box-sizing: border-box;
+	height: 16px;
+	padding-top: 16px;
+	background: rgb(from var(--rs-color-black) r g b / 70%);
+	background-clip: content-box;
+	pointer-events: none;
+
+	@supports (-webkit-touch-callout: none) {
+		display: block;
+	}
+}
+
 .--active,
 [dir="rtl"] .--active {
 	transition-timing-function: var(--rs-easing-decelerate);
