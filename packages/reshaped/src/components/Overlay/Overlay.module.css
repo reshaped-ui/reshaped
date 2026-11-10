@@ -47,15 +47,20 @@
 	/**
 	 * iOS 26+: Safari fills its toolbar area with the color of the fixed elements attached to the bottom screen edge.
 	 * Absolute backdrop lets Safari render the backdrop itself under the toolbar.
+	 * Page content is rendered under the status bar and the toolbar outside the viewport,
+	 * so the backdrop bleeds past the viewport edges to cover them.
 	 * Its position is aligned with the viewport in Overlay.tsx
 	 */
 	@supports (-webkit-touch-callout: none) {
+		--rs-overlay-backdrop-bleed: 50lvh;
+
 		position: absolute;
 		inset: auto;
 		top: 0;
 		left: 0;
 		width: 100vw;
-		height: 100dvh;
+		height: calc(100dvh + var(--rs-overlay-backdrop-bleed) * 2);
+		margin-top: calc(var(--rs-overlay-backdrop-bleed) * -1);
 	}
 }
 
@@ -118,6 +123,7 @@
 	top: var(--rs-overlay-offset-y);
 	width: 100%;
 	height: 100%;
+	margin: 0;
 }
 
 .root.--animated,

@@ -181,19 +181,25 @@ const Overlay: React.FC<T.Props> = (props) => {
 	/**
 	 * iOS Safari tints its toolbar with the color of the fixed elements attached to the bottom screen edge,
 	 * so the backdrop is positioned absolutely there and is aligned with the viewport manually.
+	 * Its margins are kept as the offset from the viewport edges to let it bleed under the browser toolbars.
 	 * Page scroll is locked with overflow only on iOS, so the scroll position stays the same while it's rendered
 	 */
 	useIsomorphicLayoutEffect(() => {
 		const backdropEl = backdropRef.current;
 		if (!rendered || !mounted || !backdropEl || shouldBeContained) return;
-		if (window.getComputedStyle(backdropEl).position !== "absolute") return;
+
+		const style = window.getComputedStyle(backdropEl);
+		if (style.position !== "absolute") return;
 
 		backdropEl.style.setProperty("top", "0px");
 		backdropEl.style.setProperty("left", "0px");
 
 		const rect = backdropEl.getBoundingClientRect();
-		backdropEl.style.setProperty("top", `${-rect.top}px`);
-		backdropEl.style.setProperty("left", `${-rect.left}px`);
+		const top = Number.parseFloat(style.marginTop) - rect.top;
+		const left = Number.parseFloat(style.marginLeft) - rect.left;
+
+		backdropEl.style.setProperty("top", `${top}px`);
+		backdropEl.style.setProperty("left", `${left}px`);
 	}, [rendered, mounted, shouldBeContained]);
 
 	// Unlock scroll on unmount
