@@ -26,14 +26,40 @@
 	position: relative;
 }
 
-/* Setting opacity separately for swipe updates directly in the dom */
+/**
+ * Rendered as a sibling of the root, not receiving pointer events since the root handles the outside clicks.
+ * Swipe updates set the opacity of the visible backdrop directly in the dom with a variable,
+ * so the backdrop still fades out on close since it's not affected by the root opacity
+ */
 .backdrop {
-	position: absolute;
+	--rs-overlay-backdrop-opacity: 1;
+
+	position: fixed;
 	inset: 0;
-	z-index: -1;
+	z-index: var(--rs-z-index-fixed);
 	background-color: rgb(from var(--rs-color-black) r g b / 70%);
 	opacity: 0;
 	will-change: opacity;
+	pointer-events: none;
+
+	/**
+	 * iOS 26+: Safari fills its toolbar area with the color of the fixed elements attached to the screen edges.
+	 * Absolute backdrop lets Safari render the backdrop itself under the toolbar.
+	 * Page content is rendered under the status bar and the toolbar outside the viewport,
+	 * so the backdrop bleeds past the viewport edges to cover them.
+	 * Its position is aligned with the viewport in Overlay.tsx
+	 */
+	@supports (-webkit-touch-callout: none) {
+		&:not(.--contained) {
+			--rs-overlay-backdrop-bleed: 50lvh;
+
+			position: absolute;
+			inset: 0 auto auto 0;
+			width: 100vw;
+			height: calc(100dvh + var(--rs-overlay-backdrop-bleed) * 2);
+			margin-top: calc(var(--rs-overlay-backdrop-bleed) * -1);
+		}
+	}
 }
 
 .inner {
@@ -50,19 +76,19 @@
 
 .root.--visible {
 	opacity: 1;
+}
 
-	& .backdrop {
-		opacity: 1;
-	}
+.backdrop.--visible {
+	opacity: var(--rs-overlay-backdrop-opacity);
 }
 
 .root.--click-through {
 	color: inherit;
 	pointer-events: none;
+}
 
-	& .backdrop {
-		opacity: 0;
-	}
+.backdrop.--click-through {
+	opacity: 0;
 }
 
 .root.--blurred {
@@ -87,19 +113,20 @@
 	position: absolute;
 }
 
-.root.--animated {
-	transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
+/* Matches the root size and offset inside the container */
+.backdrop.--contained {
+	position: absolute;
+	inset: var(--rs-overlay-offset-y) auto auto var(--rs-overlay-offset-x);
+	width: 100%;
+	height: 100%;
+}
 
-	& .backdrop {
-		transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
-	}
+.root.--animated,
+.backdrop.--animated {
+	transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
 
 	&.--visible {
 		transition-timing-function: var(--rs-easing-decelerate);
-
-		& .backdrop {
-			transition-timing-function: var(--rs-easing-decelerate);
-		}
 	}
 }
 
