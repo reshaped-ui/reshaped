@@ -27,12 +27,14 @@
 }
 
 /**
- * Rendered as a sibling of the root with opacity set separately for swipe updates directly in the dom
- * Not receiving pointer events since the root handles the outside clicks
+ * Rendered as a sibling of the root, not receiving pointer events since the root handles the outside clicks.
+ * Swipe updates set the opacity of the visible backdrop directly in the dom with a variable,
+ * so the backdrop still fades out on close since it's not affected by the root opacity
  */
 .backdrop {
 	--rs-overlay-offset-y: 0px;
 	--rs-overlay-offset-x: 0px;
+	--rs-overlay-backdrop-opacity: 1;
 
 	position: fixed;
 	inset: 0;
@@ -69,9 +71,12 @@
 	text-align: initial;
 }
 
-.root.--visible,
-.backdrop.--visible {
+.root.--visible {
 	opacity: 1;
+}
+
+.backdrop.--visible {
+	opacity: var(--rs-overlay-backdrop-opacity);
 }
 
 .root.--click-through {

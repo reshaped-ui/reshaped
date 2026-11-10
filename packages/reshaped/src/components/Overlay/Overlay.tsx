@@ -211,7 +211,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 			setOpacity: (value: number) => {
 				if (transparent) return;
 				// Applied directly to the backdrop element to keep the style recalculation scoped to it
-				backdropRef.current?.style.setProperty("opacity", `${value}`);
+				backdropRef.current?.style.setProperty("--rs-overlay-backdrop-opacity", `${value}`);
 			},
 		}),
 		[transparent]
