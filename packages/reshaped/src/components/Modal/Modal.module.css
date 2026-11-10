@@ -62,14 +62,14 @@
 	 * so the overlay doesn't show between the modal and the toolbars tinted with its color
 	 */
 	@supports (-webkit-touch-callout: none) {
-		--rs-modal-floating-shadow: none;
-		--rs-modal-full-screen-shadow: 0 0 0 50lvh var(--rs-color-background-elevation-overlay);
+		&:not(.--contained) {
+			--rs-modal-floating-shadow: none;
+			--rs-modal-full-screen-shadow: 0 0 0 50lvh var(--rs-color-background-elevation-overlay);
+		}
 	}
 
 	/* Safe areas only apply to the viewport edges */
 	&.--contained {
-		--rs-modal-floating-shadow: var(--rs-shadow-overlay);
-		--rs-modal-full-screen-shadow: var(--rs-shadow-overlay);
 		--rs-modal-container-width: 100%;
 		--rs-modal-container-height: 100%;
 		--rs-modal-env-top: 0px;
