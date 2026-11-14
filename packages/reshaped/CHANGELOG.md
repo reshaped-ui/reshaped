@@ -1,5 +1,25 @@
 # reshaped
 
+## 4.4.0-canary.1
+
+### Minor Changes
+
+- [#715](https://github.com/reshaped-ui/reshaped/pull/715) [`ad23786`](https://github.com/reshaped-ui/reshaped/commit/ad23786a36fdc3fa495facd8fe9ee652b5f2c9e0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `DropdownMenu` and `ContextMenu` support `submenuTriggerType="click"` to open their submenus on click instead of hover, inherited by nested submenus. `DropdownMenu.SubMenu` supports `triggerType` to override it for a single submenu. Click submenus stay open when the mouse leaves them and close when another item of the same menu is pressed, including another submenu trigger
+
+- [#715](https://github.com/reshaped-ui/reshaped/pull/715) [`ad23786`](https://github.com/reshaped-ui/reshaped/commit/ad23786a36fdc3fa495facd8fe9ee652b5f2c9e0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `useOnClickOutside` supports the `capture` option to handle clicks in the capture phase, so they're detected even when the clicked element stops the event propagation
+
+### Patch Changes
+
+- [#716](https://github.com/reshaped-ui/reshaped/pull/716) [`84d7e6e`](https://github.com/reshaped-ui/reshaped/commit/84d7e6eb500455be3d5fe76bec05c9a5d224d9b4) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Flyout` and `Tooltip` with `disableContentHover` let the pointer through the visible content again and close as soon as the pointer leaves the trigger, without keeping the content open in the hover safe area. Other hover triggers also stay interactive while such content is open, so moving across rows or columns of tooltips no longer stacks them up
+
+- [#715](https://github.com/reshaped-ui/reshaped/pull/715) [`ad23786`](https://github.com/reshaped-ui/reshaped/commit/ad23786a36fdc3fa495facd8fe9ee652b5f2c9e0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Popover` and other Flyout based components don't treat clicks inside their nested flyouts as outside clicks, even though nested flyouts are rendered outside of the parent content element. Flyouts detect outside clicks in the capture phase, so clicks are detected even when the clicked element stops their propagation
+
+- [#714](https://github.com/reshaped-ui/reshaped/pull/714) [`e0d2d1d`](https://github.com/reshaped-ui/reshaped/commit/e0d2d1dd5d601486a73b764af45451c01190de49) Thanks [@Xapollon430](https://github.com/Xapollon430)! - Prevent autocomplete selections while the autocomplete or its form control is disabled.
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.4.0-canary.1
+  - @reshaped/theming@4.4.0-canary.1
+
 ## 4.3.1-canary.0
 
 ### Patch Changes

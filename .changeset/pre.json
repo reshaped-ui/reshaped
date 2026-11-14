@@ -2,11 +2,16 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "4.3.0",
-    "@reshaped/theming": "4.3.0",
-    "@reshaped/utilities": "4.3.0"
+    "reshaped": "4.3.1-canary.0",
+    "@reshaped/theming": "4.3.1-canary.0",
+    "@reshaped/utilities": "4.3.1-canary.0"
   },
   "changesets": [
-    "overlay-ios-backdrop"
+    "dropdown-menu-submenu-click",
+    "flyout-content-hover-disabled",
+    "flyout-nested-outside-click",
+    "overlay-ios-backdrop",
+    "quiet-apples-wait",
+    "use-on-click-outside-capture"
   ]
 }
