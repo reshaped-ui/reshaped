@@ -6,11 +6,6 @@ import type { PopoverInstance, PopoverProps } from "@/components/Popover";
 
 export type Instance = PopoverInstance;
 
-export type ActiveSubMenu = {
-	triggerElRef?: React.RefObject<HTMLElement | null>;
-	close: () => void;
-};
-
 export type SubMenuTriggerType = "hover" | "click";
 
 export type Context = {

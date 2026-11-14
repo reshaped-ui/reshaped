@@ -292,6 +292,72 @@ export const submenuTriggerType: StoryObj = {
 	},
 };
 
+export const testSubmenuInsideClick: StoryObj = {
+	name: "test: submenu inside click",
+	render: () => (
+		<Example>
+			<Example.Item title="clicks inside nested submenus don't close the parent menus">
+				<DropdownMenu submenuTriggerType="click">
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.SubMenu>
+							<DropdownMenu.SubTrigger>Item</DropdownMenu.SubTrigger>
+							<DropdownMenu.Content>
+								<DropdownMenu.SubMenu>
+									<DropdownMenu.SubTrigger>Nested item</DropdownMenu.SubTrigger>
+									<DropdownMenu.Content>
+										<View padding={2}>Nested content</View>
+										<DropdownMenu.Item onClick={() => {}}>Nested action</DropdownMenu.Item>
+									</DropdownMenu.Content>
+								</DropdownMenu.SubMenu>
+							</DropdownMenu.Content>
+						</DropdownMenu.SubMenu>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getByRole("button", { name: "Open" });
+
+		await userEvent.click(trigger);
+		await userEvent.click(await canvas.findByText("Item"));
+		await userEvent.click(await canvas.findByText("Nested item"));
+
+		const nestedContent = await canvas.findByText("Nested content");
+		await userEvent.click(nestedContent);
+		await sleep(100);
+
+		expect(canvas.getByText("Item")).toBeInTheDocument();
+		expect(canvas.getByText("Nested item")).toBeInTheDocument();
+		expect(nestedContent).toBeInTheDocument();
+
+		// Outside click after interacting with the nested content closes all menus
+		await userEvent.click(document.body);
+		await waitFor(() => {
+			expect(canvas.queryByText("Item")).not.toBeInTheDocument();
+			expect(canvas.queryByText("Nested content")).not.toBeInTheDocument();
+		});
+
+		// Pressing the nested submenu trigger with keyboard keeps the parent menus open
+		trigger.focus();
+		await userEvent.keyboard("{Enter}");
+		await canvas.findByText("Item");
+		await userEvent.keyboard("{ArrowRight}");
+		await waitFor(() => {
+			expect(canvas.getByText("Nested item").closest("button")).toHaveFocus();
+		});
+		await userEvent.keyboard("{Enter}");
+
+		expect(await canvas.findByText("Nested content")).toBeInTheDocument();
+		await sleep(100);
+		expect(canvas.getByText("Item")).toBeInTheDocument();
+	},
+};
+
 export const defaultActive: StoryObj<{
 	handleOpen: ReturnType<typeof fn>;
 	handleClose: ReturnType<typeof fn>;

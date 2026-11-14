@@ -6,7 +6,6 @@ import { useFlyoutContext } from "@/components/Flyout";
 import Icon from "@/components/Icon";
 import MenuItem from "@/components/MenuItem";
 import Popover from "@/components/Popover";
-import useHandlerRef from "@/hooks/useHandlerRef";
 import useHotkeys from "@/hooks/useHotkeys";
 import useRTL from "@/hooks/useRTL";
 import * as keys from "@/constants/keys";
@@ -17,13 +16,6 @@ import s from "./DropdownMenu.module.css";
 
 const DropdownMenuSubContext = React.createContext<React.RefObject<T.Instance> | null>(null);
 const DropdownMenuSubTriggerContext = React.createContext<boolean>(false);
-/**
- * Submenu opened with click, tracked by the content it's rendered in.
- * Content stops click propagation, so the submenu doesn't get its outside click
- * when another item of the same menu is pressed and has to be closed by the content instead
- */
-const DropdownMenuActiveSubMenuContext =
-	React.createContext<React.RefObject<T.ActiveSubMenu | null> | null>(null);
 /**
  * Keeps the menu open after selecting an item, used by components built on top of DropdownMenu
  * For example, Select with multiple selection
@@ -60,7 +52,6 @@ export const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 	const { children, attributes, className } = props;
 	const { flyout } = useFlyoutContext();
 	const subMenuInstance = React.useContext(DropdownMenuSubContext);
-	const activeSubMenuRef = React.useRef<T.ActiveSubMenu>(null);
 	const [rtl] = useRTL();
 	const { ref } = useHotkeys<HTMLDivElement>(
 		{
@@ -75,29 +66,9 @@ export const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 		}
 	);
 
-	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-		const activeSubMenu = activeSubMenuRef.current;
-
-		if (activeSubMenu && !activeSubMenu.triggerElRef?.current?.contains(e.target as Node)) {
-			activeSubMenu.close();
-		}
-
-		/**
-		 * Stop event propagation to make sure outside click doesn't get triggered
-		 * after the content is closed
-		 */
-		e.stopPropagation();
-		attributes?.onClick?.(e);
-	};
-
 	return (
-		<Popover.Content
-			className={className}
-			attributes={{ ...attributes, ref, onClick: handleClick }}
-		>
-			<DropdownMenuActiveSubMenuContext.Provider value={activeSubMenuRef}>
-				{children}
-			</DropdownMenuActiveSubMenuContext.Provider>
+		<Popover.Content className={className} attributes={{ ...attributes, ref }}>
+			{children}
 		</Popover.Content>
 	);
 };
@@ -196,27 +167,6 @@ export const DropdownMenuSubTriggerItem: React.FC<T.SubTriggerProps> = (props) =
 
 export const DropdownMenuSubTrigger: React.FC<T.SubTriggerProps> = (props) => {
 	const { attributes, ...menuItemProps } = props;
-	const { flyout, triggerType, triggerElRef, handleClose } = useFlyoutContext();
-	const activeSubMenuRef = React.useContext(DropdownMenuActiveSubMenuContext);
-	const handleCloseRef = useHandlerRef(handleClose);
-	const active = flyout.status !== "idle";
-
-	React.useEffect(() => {
-		if (!active || triggerType !== "click" || !activeSubMenuRef) return;
-
-		const subMenu: T.ActiveSubMenu = {
-			triggerElRef,
-			close: () => handleCloseRef.current?.({}),
-		};
-
-		// Only one submenu can be opened at a time on the same level
-		if (activeSubMenuRef.current) activeSubMenuRef.current.close();
-		activeSubMenuRef.current = subMenu;
-
-		return () => {
-			if (activeSubMenuRef.current === subMenu) activeSubMenuRef.current = null;
-		};
-	}, [active, triggerType, triggerElRef, activeSubMenuRef, handleCloseRef]);
 
 	return (
 		<DropdownMenuSubTriggerContext.Provider value={true}>

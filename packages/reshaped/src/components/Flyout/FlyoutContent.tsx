@@ -26,6 +26,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 		handleMouseLeave,
 		handleContentMouseDown,
 		handleContentMouseUp,
+		handleContentKeyDown,
 		contentClassName,
 		contentAttributes,
 		scrollableClassName,
@@ -107,6 +108,7 @@ const FlyoutContent: React.FC<T.ContentProps> = (props) => {
 				onTouchStart={handleContentMouseDown}
 				onMouseUp={handleContentMouseUp}
 				onTouchEnd={handleContentMouseUp}
+				onKeyDown={handleContentKeyDown}
 			>
 				<div
 					role={role}

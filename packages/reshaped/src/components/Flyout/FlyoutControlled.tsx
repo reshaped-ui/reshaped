@@ -113,6 +113,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const ignoreTouchMouseEnterRef = React.useRef(false);
 	// Other triggers got pointer-events disabled by this flyout and still have to be restored
 	const triggersDisabledRef = React.useRef(false);
+	// Interaction started inside the content React tree, including nested flyouts portaled outside of the content element
+	const interactionInsideContentRef = React.useRef(false);
 	// Cleanup function for safe area tracking
 	const safeAreaRef = React.useRef<{ origin: Coordinates; cleanup: () => void } | null>(null);
 
@@ -185,7 +187,15 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
-			const isLocked = triggerType === "click" && !options.closeParents && !isDismissible();
+			/**
+			 * Click flyouts with nested flyouts opened are closed one by one, starting from the latest opened one.
+			 * Outside clicks don't need the lock since clicks inside the nested flyouts are not counted as outside
+			 */
+			const isLocked =
+				triggerType === "click" &&
+				!options.closeParents &&
+				options.reason !== "outside-click" &&
+				!isDismissible();
 			const canClose = !isLocked && (isRendered || openRequestedRef.current || disabled);
 
 			if (!canClose) return;
@@ -332,9 +342,13 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleContentMouseDown = () => {
 		lockedBlurEffects.current = true;
 		hoverTriggeredWithTouchEventRef.current = true;
+		interactionInsideContentRef.current = true;
 	};
 	const handleContentMouseUp = () => {
 		lockedBlurEffects.current = false;
+	};
+	const handleContentKeyDown = () => {
+		interactionInsideContentRef.current = true;
 	};
 
 	const finishHide = React.useCallback(() => {
@@ -460,6 +474,30 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, isRendered, triggerType]);
 
 	/**
+	 * Nested flyouts are portaled outside of the parent content element but are still rendered inside its React tree.
+	 * React events bubble through portals, so content handlers mark the interactions coming from the nested flyouts too
+	 * and the flag gets reset in the capture phase before every new interaction
+	 */
+	React.useEffect(() => {
+		if (!isRendered) return;
+
+		const resetInteraction = () => {
+			interactionInsideContentRef.current = false;
+		};
+
+		document.addEventListener("mousedown", resetInteraction, { capture: true, passive: true });
+		document.addEventListener("touchstart", resetInteraction, { capture: true, passive: true });
+		document.addEventListener("keydown", resetInteraction, { capture: true, passive: true });
+
+		return () => {
+			document.removeEventListener("mousedown", resetInteraction, { capture: true });
+			document.removeEventListener("touchstart", resetInteraction, { capture: true });
+			document.removeEventListener("keydown", resetInteraction, { capture: true });
+			resetInteraction();
+		};
+	}, [isRendered]);
+
+	/**
 	 * Clean up safe polygon tracking on unmount or when flyout closes
 	 */
 	React.useEffect(() => {
@@ -523,6 +561,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	useOnClickOutside(
 		[flyoutElRef, triggerElRef],
 		() => {
+			// Clicks inside nested flyouts are not considered outside clicks
+			if (interactionInsideContentRef.current) return;
+
 			// Clicking outside changes focused element so we don't need to set it back ourselves
 			shouldReturnFocusRef.current = false;
 			handleClose({ reason: "outside-click" });
@@ -553,6 +594,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				handleClick: handleTriggerClick,
 				handleContentMouseDown,
 				handleContentMouseUp,
+				handleContentKeyDown,
 				triggerType,
 				trapFocusMode,
 				contentZIndex,

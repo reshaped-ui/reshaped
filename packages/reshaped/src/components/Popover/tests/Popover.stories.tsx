@@ -390,7 +390,7 @@ export const testNested = {
 					Popover content
 					<Popover>
 						<Popover.Trigger>
-							{(attributes) => <Button attributes={attributes}>Open</Button>}
+							{(attributes) => <Button attributes={attributes}>Open nested</Button>}
 						</Popover.Trigger>
 						<Popover.Content>Hello</Popover.Content>
 					</Popover>
@@ -398,6 +398,28 @@ export const testNested = {
 			</Popover.Content>
 		</Popover>
 	),
+	play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await userEvent.click(canvas.getByRole("button", { name: "Open" }));
+		const content = await canvas.findByText("Popover content");
+
+		await userEvent.click(canvas.getByRole("button", { name: "Open nested" }));
+		const nestedContent = await canvas.findByText("Hello");
+
+		// Clicks inside the nested popover are not outside clicks for the parent popover
+		await userEvent.click(nestedContent);
+		await sleep(100);
+		expect(content).toBeInTheDocument();
+		expect(nestedContent).toBeInTheDocument();
+
+		// Outside click closes all popovers at once
+		await userEvent.click(canvasElement.ownerDocument.body);
+		await waitFor(() => {
+			expect(content).not.toBeInTheDocument();
+			expect(nestedContent).not.toBeInTheDocument();
+		});
+	},
 };
 
 export const testWithTooltip = {
