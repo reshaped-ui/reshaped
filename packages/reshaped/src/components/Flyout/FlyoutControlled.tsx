@@ -100,6 +100,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const lockedTimerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
+	// Open was requested but the content might not be rendered yet, so it still has to be closable
+	const openRequestedRef = React.useRef(!!active);
 	// Lock blur event while pressing anywhere inside the flyout content
 	const lockedBlurEffects = React.useRef(false);
 	// Focus shouldn't return back to the trigger when user intentionally clicks outside the flyout
@@ -175,6 +177,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (lockedRef.current) return;
 		if (isRendered && triggerType !== "hover") return;
 
+		openRequestedRef.current = true;
 		onOpenRef.current?.();
 		disableTriggers();
 	}, [onOpenRef, isRendered, triggerType, disableTriggers]);
@@ -182,10 +185,11 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
 			const isLocked = triggerType === "click" && !options.closeParents && !isDismissible();
-			const canClose = !isLocked && (isRendered || disabled);
+			const canClose = !isLocked && (isRendered || openRequestedRef.current || disabled);
 
 			if (!canClose) return;
 
+			openRequestedRef.current = false;
 			onCloseRef.current?.({ reason: options.reason });
 			enableTriggers();
 
@@ -361,6 +365,10 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	/**
 	 * Control the display based on the props
 	 */
+	useIsomorphicLayoutEffect(() => {
+		openRequestedRef.current = !!active;
+	}, [active]);
+
 	useIsomorphicLayoutEffect(() => {
 		if (active) {
 			render();
