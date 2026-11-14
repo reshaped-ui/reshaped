@@ -153,12 +153,17 @@ export const outline: StoryObj = {
 	},
 };
 
+const localImage =
+	"data:image/svg+xml," +
+	encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"/>');
+
 export const onLoad: StoryObj<{ handleLoad: ReturnType<typeof fn> }> = {
 	name: "onLoad",
 	args: {
 		handleLoad: fn(),
 	},
-	render: (args) => <Image src={imgUrl} alt="photo" onLoad={args.handleLoad} />,
+	// Local image keeps the test independent from the network
+	render: (args) => <Image src={localImage} alt="photo" onLoad={args.handleLoad} />,
 	play: async ({ canvas, args }) => {
 		const { handleLoad } = args;
 		const img = canvas.getByRole("img");
