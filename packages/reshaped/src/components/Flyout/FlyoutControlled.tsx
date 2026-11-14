@@ -100,6 +100,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const lockedTimerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 	const trapFocusRef = React.useRef<TrapFocus | null>(null);
 	const lockedRef = React.useRef(false);
+	// Open was requested but the content might not be rendered yet, so it still has to be closable
+	const openRequestedRef = React.useRef(false);
 	// Lock blur event while pressing anywhere inside the flyout content
 	const lockedBlurEffects = React.useRef(false);
 	// Focus shouldn't return back to the trigger when user intentionally clicks outside the flyout
@@ -134,6 +136,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	});
 	const { status, updatePosition, render, hide, remove, show } = flyout;
 	const isRendered = status !== "idle";
+	// Hover content that can be reached by the pointer, which keeps it open while moving towards it
+	const hasSafeArea = triggerType === "hover" && !disableContentHover;
 	const isDismissible = useIsDismissible({
 		active: isRendered,
 		contentRef: flyoutElRef,
@@ -148,14 +152,14 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * Disable all triggers while mouse is moving over the safe area
 	 */
 	const disableTriggers = React.useCallback(() => {
-		if (triggerType !== "hover") return;
+		if (!hasSafeArea) return;
 
 		triggersDisabledRef.current = true;
 		document.querySelectorAll("[data-rs-flyout-active=true]").forEach((el) => {
 			if (el === triggerElRef.current) return;
 			(el as HTMLElement).style.pointerEvents = "none";
 		});
-	}, [triggerElRef, triggerType]);
+	}, [triggerElRef, hasSafeArea]);
 
 	const enableTriggers = React.useCallback(() => {
 		if (triggerType !== "hover") return;
@@ -174,6 +178,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		if (lockedRef.current) return;
 		if (isRendered && triggerType !== "hover") return;
 
+		openRequestedRef.current = true;
 		onOpenRef.current?.();
 		disableTriggers();
 	}, [onOpenRef, isRendered, triggerType, disableTriggers]);
@@ -181,10 +186,11 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
 			const isLocked = triggerType === "click" && !options.closeParents && !isDismissible();
-			const canClose = !isLocked && (isRendered || disabled);
+			const canClose = !isLocked && (isRendered || openRequestedRef.current || disabled);
 
 			if (!canClose) return;
 
+			openRequestedRef.current = false;
 			onCloseRef.current?.({ reason: options.reason });
 			enableTriggers();
 
@@ -293,7 +299,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 			safeAreaRef.current?.cleanup();
 
-			if (triggerType === "hover" && isRendered) {
+			if (hasSafeArea && isRendered) {
 				// Safe area coordinates are defined based on the trigger mouse out, even when returning mouse from content to trigger
 				const origin =
 					e.currentTarget === flyoutElRef.current && safeAreaRef.current?.origin
@@ -312,7 +318,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				handleClose({});
 			}
 		},
-		[clearTimer, handleClose, triggerElRef, flyoutElRef, triggerType, isRendered, flyout.position]
+		[clearTimer, handleClose, triggerElRef, flyoutElRef, hasSafeArea, isRendered, flyout.position]
 	);
 
 	const handleTriggerClick = React.useCallback(() => {
@@ -331,6 +337,11 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		lockedBlurEffects.current = false;
 	};
 
+	const finishHide = React.useCallback(() => {
+		remove();
+		onAfterCloseRef.current?.();
+	}, [remove, onAfterCloseRef]);
+
 	const handleTransitionEnd = React.useCallback(
 		(e: React.TransitionEvent) => {
 			if (flyoutElRef.current !== e.currentTarget || e.propertyName !== "transform") return;
@@ -339,18 +350,17 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				onAfterOpenRef.current?.();
 			}
 
-			if (status === "hidden") {
-				remove();
-				onAfterCloseRef.current?.();
-			}
+			if (status === "hidden") finishHide();
 		},
-		[remove, status, onAfterOpenRef, onAfterCloseRef]
+		[finishHide, status, onAfterOpenRef]
 	);
 
 	/**
 	 * Control the display based on the props
 	 */
 	useIsomorphicLayoutEffect(() => {
+		openRequestedRef.current = !!active;
+
 		if (active) {
 			render();
 			return;
@@ -369,20 +379,9 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 			hide();
 		} else {
 			// In case transitions are disabled globally - remove from the DOM immediately
-			remove();
-			onAfterCloseRef.current?.();
+			finishHide();
 		}
-	}, [
-		active,
-		prevActive,
-		render,
-		hide,
-		remove,
-		disableHideAnimation,
-		disabled,
-		groupTimeouts,
-		onAfterCloseRef,
-	]);
+	}, [active, prevActive, render, hide, finishHide, disableHideAnimation, disabled, groupTimeouts]);
 
 	useIsomorphicLayoutEffect(() => {
 		if (status === "rendered") show();
@@ -395,17 +394,20 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		// oxlint-disable-next-line react-hooks/exhaustive-deps
 	}, [originCoordinates?.x, originCoordinates?.y]);
 
-	/**
-	 * Closing before the open transition starts cancels it instead of reversing,
-	 * so there is no transitionend to wait for
-	 */
 	useIsomorphicLayoutEffect(() => {
 		if (status !== "hidden") return;
-		if (flyoutElRef.current?.firstElementChild?.getAnimations?.().length) return;
 
-		remove();
-		onAfterCloseRef.current?.();
-	}, [status, remove, onAfterCloseRef]);
+		// Closing before the open transition starts cancels it instead of reversing,
+		// so there is no transitionend to wait for
+		if (!flyoutElRef.current?.firstElementChild?.getAnimations?.().length) {
+			finishHide();
+			return;
+		}
+
+		// Grouped flyouts switch without animations, so the hide animation is cut short
+		// once another flyout from the group gets hovered
+		if (groupTimeouts) return cooldown.onRewarm(finishHide);
+	}, [status, groupTimeouts, finishHide]);
 
 	/**
 	 * Handle focus trap

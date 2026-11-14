@@ -121,7 +121,7 @@ type BaseProps = {
 	disabled?: boolean;
 	/** Disable the flyout content hide animation */
 	disableHideAnimation?: boolean;
-	/** Ignore the content hover events and hide it if the triggerType is hover */
+	/** Ignore the content hover events and hide it as soon as the pointer leaves the trigger if the triggerType is hover */
 	disableContentHover?: boolean;
 	/** Disable the flyout content close on outside click */
 	disableCloseOnOutsideClick?: boolean;
