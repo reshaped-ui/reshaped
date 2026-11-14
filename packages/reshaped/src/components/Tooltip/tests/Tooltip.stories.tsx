@@ -171,40 +171,34 @@ export const disableContentHover: StoryObj<{ handleClose: ReturnType<typeof fn> 
 	args: {
 		handleClose: fn(),
 	},
-	render: (args) => (
-		<Example>
-			<Example.Item title="disableContentHover, row of triggers">
-				<View direction="row" gap={2}>
-					{Array.from({ length: 4 }).map((_, index) => (
-						<Tooltip
-							key={index}
-							disableContentHover
-							position="bottom"
-							text="Very long tooltip text that overlaps the neighbouring triggers"
-							onClose={index === 0 ? args.handleClose : undefined}
-						>
-							{(attributes) => <Button attributes={attributes}>Trigger {index + 1}</Button>}
-						</Tooltip>
-					))}
-				</View>
-			</Example.Item>
+	render: (args) => {
+		const renderTriggers = (text: string) =>
+			Array.from({ length: 4 }).map((_, index) => (
+				<Demo
+					key={index}
+					position="bottom"
+					text={text}
+					disableContentHover
+					onClose={index === 0 ? args.handleClose : undefined}
+				/>
+			));
 
-			<Example.Item title="disableContentHover, column of triggers">
-				<View gap={1} align="start">
-					{Array.from({ length: 4 }).map((_, index) => (
-						<Tooltip
-							key={index}
-							disableContentHover
-							position="bottom"
-							text="Tooltip opens over the next trigger"
-						>
-							{(attributes) => <Button attributes={attributes}>Trigger {index + 1}</Button>}
-						</Tooltip>
-					))}
-				</View>
-			</Example.Item>
-		</Example>
-	),
+		return (
+			<Example>
+				<Example.Item title="disableContentHover, row of triggers">
+					<View direction="row" gap={2}>
+						{renderTriggers("Very long tooltip text that overlaps the neighbouring triggers")}
+					</View>
+				</Example.Item>
+
+				<Example.Item title="disableContentHover, column of triggers">
+					<View gap={1} align="start">
+						{renderTriggers("Tooltip opens over the next trigger")}
+					</View>
+				</Example.Item>
+			</Example>
+		);
+	},
 	play: async ({ canvasElement, args }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
 		const trigger = canvas.getAllByRole("button")[0];
