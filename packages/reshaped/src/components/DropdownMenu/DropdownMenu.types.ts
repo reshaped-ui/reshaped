@@ -6,6 +6,11 @@ import type { PopoverInstance, PopoverProps } from "@/components/Popover";
 
 export type Instance = PopoverInstance;
 
+export type ActiveSubMenu = {
+	triggerElRef?: React.RefObject<HTMLElement | null>;
+	close: () => void;
+};
+
 export type Context = {
 	size?: MenuItemProps["size"];
 };
@@ -61,6 +66,8 @@ export type SectionProps = {
 export type SubMenuProps = {
 	/** Node for inserting children */
 	children: React.ReactNode;
+	/** Interaction used to open the submenu, keyboard navigation works for both of them */
+	triggerType?: "hover" | "click";
 } & Pick<
 	PopoverProps,
 	| "position"

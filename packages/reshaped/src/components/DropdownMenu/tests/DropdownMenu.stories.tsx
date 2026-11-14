@@ -178,6 +178,83 @@ export const submenu: StoryObj = {
 	},
 };
 
+export const submenuTriggerType: StoryObj = {
+	name: "submenu, triggerType",
+	render: () => (
+		<Example>
+			<Example.Item title="submenu, triggerType: click">
+				<DropdownMenu>
+					<DropdownMenu.Trigger>
+						{(attributes) => <Button attributes={attributes}>Open</Button>}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Item onClick={() => {}}>Item 1</DropdownMenu.Item>
+						<DropdownMenu.SubMenu triggerType="click">
+							<DropdownMenu.SubTrigger>Item 2</DropdownMenu.SubTrigger>
+							<DropdownMenu.Content>
+								<DropdownMenu.Item onClick={() => {}}>SubItem 1</DropdownMenu.Item>
+								<DropdownMenu.Item onClick={() => {}}>SubItem 2</DropdownMenu.Item>
+							</DropdownMenu.Content>
+						</DropdownMenu.SubMenu>
+						<DropdownMenu.SubMenu triggerType="click">
+							<DropdownMenu.SubTrigger>Item 3</DropdownMenu.SubTrigger>
+							<DropdownMenu.Content>
+								<DropdownMenu.Item onClick={() => {}}>SubItem 2-1</DropdownMenu.Item>
+								<DropdownMenu.SubMenu triggerType="click">
+									<DropdownMenu.SubTrigger>SubItem 2-2</DropdownMenu.SubTrigger>
+									<DropdownMenu.Content>
+										<DropdownMenu.Item onClick={() => {}}>SubItem 2-2-1</DropdownMenu.Item>
+										<DropdownMenu.Item onClick={() => {}}>SubItem 2-2-2</DropdownMenu.Item>
+									</DropdownMenu.Content>
+								</DropdownMenu.SubMenu>
+							</DropdownMenu.Content>
+						</DropdownMenu.SubMenu>
+					</DropdownMenu.Content>
+				</DropdownMenu>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getByRole("button", { name: "Open" });
+
+		await userEvent.click(trigger);
+
+		const rootItem = await canvas.findByText("Item 1");
+		const subTrigger = canvas.getByText("Item 2");
+
+		// Hover doesn't open the submenu
+		await userEvent.hover(subTrigger);
+		await sleep(100);
+		expect(canvas.queryByText("SubItem 1")).not.toBeInTheDocument();
+
+		await userEvent.click(subTrigger);
+		const subItem = await canvas.findByText("SubItem 1");
+
+		// Moving the mouse away doesn't close the submenu
+		await userEvent.unhover(subTrigger);
+		await userEvent.hover(rootItem);
+		await sleep(100);
+		expect(subItem).toBeInTheDocument();
+
+		// Opening another submenu closes the previous one
+		await userEvent.click(canvas.getByText("Item 3"));
+		const nestedSubTrigger = await canvas.findByText("SubItem 2-2");
+		await waitFor(() => {
+			expect(subItem).not.toBeInTheDocument();
+		});
+
+		await userEvent.click(nestedSubTrigger);
+		const nestedItem = await canvas.findByText("SubItem 2-2-1");
+		await userEvent.click(nestedItem);
+
+		await waitFor(() => {
+			expect(rootItem).not.toBeInTheDocument();
+			expect(nestedItem).not.toBeInTheDocument();
+		});
+	},
+};
+
 export const defaultActive: StoryObj<{
 	handleOpen: ReturnType<typeof fn>;
 	handleClose: ReturnType<typeof fn>;
