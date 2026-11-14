@@ -11,13 +11,17 @@ export type ActiveSubMenu = {
 	close: () => void;
 };
 
+export type SubMenuTriggerType = "hover" | "click";
+
 export type Context = {
 	size?: MenuItemProps["size"];
+	submenuTriggerType?: SubMenuTriggerType;
 };
 
 export type ProviderProps = {
 	children: React.ReactNode;
 	size?: MenuItemProps["size"];
+	submenuTriggerType?: SubMenuTriggerType;
 };
 
 export type Props = Pick<
@@ -52,6 +56,10 @@ export type Props = Pick<
 	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu"> | false;
 	/** Size used by the menu items */
 	size?: MenuItemProps["size"];
+	/** Interaction used to open all submenus of the menu, keyboard navigation works for both of them
+	 * @default "hover"
+	 */
+	submenuTriggerType?: SubMenuTriggerType;
 };
 
 export type ContentProps = Pick<FlyoutContentProps, "attributes" | "children" | "className">;
@@ -66,8 +74,8 @@ export type SectionProps = {
 export type SubMenuProps = {
 	/** Node for inserting children */
 	children: React.ReactNode;
-	/** Interaction used to open the submenu, keyboard navigation works for both of them */
-	triggerType?: "hover" | "click";
+	/** Interaction used to open the submenu, overrides the submenuTriggerType of the menu */
+	triggerType?: SubMenuTriggerType;
 } & Pick<
 	PopoverProps,
 	| "position"

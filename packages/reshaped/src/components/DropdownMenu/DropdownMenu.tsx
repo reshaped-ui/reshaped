@@ -37,11 +37,12 @@ const DropdownMenu: React.FC<T.Props> = (props) => {
 		triggerType = "click",
 		trapFocusMode = "action-menu",
 		size,
+		submenuTriggerType,
 		...popoverProps
 	} = props;
 
 	return (
-		<DropdownMenuProvider size={size}>
+		<DropdownMenuProvider size={size} submenuTriggerType={submenuTriggerType}>
 			<Popover
 				{...popoverProps}
 				position={position}
@@ -147,16 +148,17 @@ export const DropdownMenuSubMenu: React.FC<T.SubMenuProps> = (props) => {
 		children,
 		position = "end-top",
 		contentGap = 0.5,
-		triggerType = "hover",
+		triggerType,
 		...dropdownMenuProps
 	} = props;
+	const { submenuTriggerType } = useDropdownMenu();
 	const dropdownMenuRef = React.useRef<T.Instance>(null);
 
 	return (
 		<DropdownMenuSubContext.Provider value={dropdownMenuRef}>
 			<DropdownMenu
 				{...dropdownMenuProps}
-				triggerType={triggerType}
+				triggerType={triggerType ?? submenuTriggerType ?? "hover"}
 				position={position}
 				contentGap={contentGap}
 				instanceRef={dropdownMenuRef}
