@@ -166,6 +166,68 @@ export const defaultActive: StoryObj<{
 	},
 };
 
+export const disableContentHover: StoryObj<{ handleClose: ReturnType<typeof fn> }> = {
+	name: "disableContentHover",
+	args: {
+		handleClose: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="disableContentHover, row of triggers">
+				<View direction="row" gap={2}>
+					{Array.from({ length: 4 }).map((_, index) => (
+						<Tooltip
+							key={index}
+							disableContentHover
+							position="bottom"
+							text="Very long tooltip text that overlaps the neighbouring triggers"
+							onClose={index === 0 ? args.handleClose : undefined}
+						>
+							{(attributes) => <Button attributes={attributes}>Trigger {index + 1}</Button>}
+						</Tooltip>
+					))}
+				</View>
+			</Example.Item>
+
+			<Example.Item title="disableContentHover, column of triggers">
+				<View gap={1} align="start">
+					{Array.from({ length: 4 }).map((_, index) => (
+						<Tooltip
+							key={index}
+							disableContentHover
+							position="bottom"
+							text="Tooltip opens over the next trigger"
+						>
+							{(attributes) => <Button attributes={attributes}>Trigger {index + 1}</Button>}
+						</Tooltip>
+					))}
+				</View>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		await userEvent.hover(trigger);
+
+		const content = await canvas.findByRole("tooltip");
+		await waitFor(() => {
+			expect(getComputedStyle(content).pointerEvents).toBe("none");
+		});
+
+		// Closes right away without waiting for the pointer to leave the safe area
+		await userEvent.unhover(trigger);
+
+		await waitFor(
+			() => {
+				expect(args.handleClose).toHaveBeenCalledTimes(1);
+			},
+			{ timeout: 500 }
+		);
+	},
+};
+
 export const contentMaxWidth = {
 	name: "contentMaxWidth",
 	render: () => (

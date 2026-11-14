@@ -148,14 +148,15 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * Disable all triggers while mouse is moving over the safe area
 	 */
 	const disableTriggers = React.useCallback(() => {
-		if (triggerType !== "hover") return;
+		// Content with disabled hover has no safe area, so other triggers stay interactive
+		if (triggerType !== "hover" || disableContentHover) return;
 
 		triggersDisabledRef.current = true;
 		document.querySelectorAll("[data-rs-flyout-active=true]").forEach((el) => {
 			if (el === triggerElRef.current) return;
 			(el as HTMLElement).style.pointerEvents = "none";
 		});
-	}, [triggerElRef, triggerType]);
+	}, [triggerElRef, triggerType, disableContentHover]);
 
 	const enableTriggers = React.useCallback(() => {
 		if (triggerType !== "hover") return;
@@ -293,7 +294,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 			safeAreaRef.current?.cleanup();
 
-			if (triggerType === "hover" && isRendered) {
+			// Content with disabled hover can't be reached, so it closes as soon as the pointer leaves the trigger
+			if (triggerType === "hover" && isRendered && !disableContentHover) {
 				// Safe area coordinates are defined based on the trigger mouse out, even when returning mouse from content to trigger
 				const origin =
 					e.currentTarget === flyoutElRef.current && safeAreaRef.current?.origin
@@ -312,7 +314,16 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				handleClose({});
 			}
 		},
-		[clearTimer, handleClose, triggerElRef, flyoutElRef, triggerType, isRendered, flyout.position]
+		[
+			clearTimer,
+			handleClose,
+			triggerElRef,
+			flyoutElRef,
+			triggerType,
+			isRendered,
+			disableContentHover,
+			flyout.position,
+		]
 	);
 
 	const handleTriggerClick = React.useCallback(() => {

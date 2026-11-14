@@ -101,6 +101,10 @@
 .positioner.--visible .content {
 	opacity: 1;
 	transform: scale(1) translateY(0);
+}
+
+/* Content with disabled hover lets the pointer through to the elements behind it */
+.positioner.--visible:not(.--hover-disabled) .content {
 	pointer-events: all;
 }
 
