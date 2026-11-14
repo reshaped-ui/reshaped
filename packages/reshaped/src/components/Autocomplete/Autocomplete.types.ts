@@ -40,6 +40,7 @@ export type Props = TextFieldProps &
 export type ItemProps = Omit<MenuItemProps, "focusIndicator"> & SelectArgs;
 
 export type Context = {
+	disabled: boolean;
 	onItemClick: (args: SelectArgs) => void;
 	highlightedId?: string;
 	setHighlightedId: (value?: string) => void;

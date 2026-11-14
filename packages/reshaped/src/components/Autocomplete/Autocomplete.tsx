@@ -3,6 +3,7 @@
 import React from "react";
 
 import DropdownMenu from "@/components/DropdownMenu";
+import { useFormControl } from "@/components/FormControl";
 import type { MenuItemProps } from "@/components/MenuItem";
 import TextField from "@/components/TextField";
 import type { TextFieldProps } from "@/components/TextField";
@@ -55,7 +56,9 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 	const onChangeRef = useHandlerRef(onChange);
 	const onItemSelectRef = useHandlerRef(onItemSelect);
 	const onEnterRef = useHandlerRef(onEnter);
-	const isDropdownActive = hasChildren && (active ?? internalActive);
+	const formControl = useFormControl();
+	const disabled = formControl.disabled || textFieldProps.disabled || false;
+	const isDropdownActive = !disabled && hasChildren && (active ?? internalActive);
 
 	const lockDropdown = React.useCallback(() => {
 		// Prevent dropdown from re-opening when clicked on item with mouse
@@ -67,10 +70,10 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 	}, []);
 
 	const handleOpen = React.useCallback(() => {
-		if (lockedRef.current) return;
+		if (disabled || lockedRef.current) return;
 		setInternalActive(true);
 		onOpenRef.current?.();
-	}, [onOpenRef]);
+	}, [disabled, onOpenRef]);
 
 	const handleClose: T.Props["onClose"] = (args) => {
 		setInternalActive(false);
@@ -185,11 +188,12 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 
 	const contextValue = React.useMemo(
 		() => ({
+			disabled,
 			onItemClick: handleItemClick,
 			highlightedId,
 			setHighlightedId,
 		}),
-		[highlightedId, handleItemClick]
+		[disabled, highlightedId, handleItemClick]
 	);
 
 	return (
@@ -254,12 +258,15 @@ const Autocomplete: React.FC<T.Props> = (props) => {
 };
 
 export const AutocompleteItem: React.FC<T.ItemProps> = (props) => {
-	const { value, data, onClick, disabled, ...menuItemProps } = props;
-	const { onItemClick, highlightedId } = React.useContext(AutocompleteContext);
+	const { value, data, onClick, disabled: disabledProp, ...menuItemProps } = props;
+	const context = React.useContext(AutocompleteContext);
+	const { onItemClick, highlightedId } = context;
+	const disabled = disabledProp || context.disabled;
 	const id = useElementId();
 	const highlighted = highlightedId === id;
 
 	const handleClick: MenuItemProps["onClick"] = (e) => {
+		if (disabled) return;
 		onClick?.(e);
 		onItemClick({ value, data });
 	};
