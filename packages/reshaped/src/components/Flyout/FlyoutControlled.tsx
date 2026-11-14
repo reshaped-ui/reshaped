@@ -479,23 +479,23 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	 * and the flag gets reset in the capture phase before every new interaction
 	 */
 	React.useEffect(() => {
-		if (!isRendered) return;
+		if (!isRendered || disableCloseOnOutsideClick) return;
 
+		const events = ["mousedown", "touchstart", "keydown"] as const;
 		const resetInteraction = () => {
 			interactionInsideContentRef.current = false;
 		};
 
-		document.addEventListener("mousedown", resetInteraction, { capture: true, passive: true });
-		document.addEventListener("touchstart", resetInteraction, { capture: true, passive: true });
-		document.addEventListener("keydown", resetInteraction, { capture: true, passive: true });
+		events.forEach((event) => {
+			document.addEventListener(event, resetInteraction, { capture: true, passive: true });
+		});
 
 		return () => {
-			document.removeEventListener("mousedown", resetInteraction, { capture: true });
-			document.removeEventListener("touchstart", resetInteraction, { capture: true });
-			document.removeEventListener("keydown", resetInteraction, { capture: true });
-			resetInteraction();
+			events.forEach((event) => {
+				document.removeEventListener(event, resetInteraction, { capture: true });
+			});
 		};
-	}, [isRendered]);
+	}, [isRendered, disableCloseOnOutsideClick]);
 
 	/**
 	 * Clean up safe polygon tracking on unmount or when flyout closes

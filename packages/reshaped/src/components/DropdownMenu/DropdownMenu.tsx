@@ -68,11 +68,8 @@ export const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 
 	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		/**
-		 * Content is portaled but React events still bubble through the React tree,
-		 * so clicks on the items would reach the components the menu is rendered in,
-		 * for example a clickable card or a router link wrapping the menu.
-		 * Elements wrapping the items inside the content, like router links, still receive the click.
-		 * Flyouts detect outside clicks in the capture phase, so they're not affected
+		 * React events bubble through the portal, so item clicks would reach the components
+		 * the menu is rendered in, like a clickable card. Wrappers inside the content still get them
 		 */
 		e.stopPropagation();
 		attributes?.onClick?.(e);

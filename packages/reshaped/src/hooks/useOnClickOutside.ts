@@ -15,7 +15,7 @@ const useOnClickOutside = (
 		capture?: boolean;
 	}
 ) => {
-	const { disabled, capture = false } = options || {};
+	const { disabled, capture } = options || {};
 	const handlerRef = useHandlerRef(handler);
 	/**
 	 * We're checking the element position in the DOM on mousedown to make sure

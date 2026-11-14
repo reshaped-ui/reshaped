@@ -6,17 +6,15 @@ import type { PopoverInstance, PopoverProps } from "@/components/Popover";
 
 export type Instance = PopoverInstance;
 
-export type SubMenuTriggerType = "hover" | "click";
+export type SubMenuTriggerType = Extract<PopoverProps["triggerType"], "hover" | "click">;
 
 export type Context = {
 	size?: MenuItemProps["size"];
 	submenuTriggerType?: SubMenuTriggerType;
 };
 
-export type ProviderProps = {
+export type ProviderProps = Context & {
 	children: React.ReactNode;
-	size?: MenuItemProps["size"];
-	submenuTriggerType?: SubMenuTriggerType;
 };
 
 export type Props = Pick<

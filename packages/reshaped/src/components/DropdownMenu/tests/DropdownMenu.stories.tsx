@@ -178,6 +178,12 @@ export const submenu: StoryObj = {
 	},
 };
 
+const expectNotOpenedOnHover = async (trigger: HTMLElement, contentText: string) => {
+	await userEvent.hover(trigger);
+	await sleep(100);
+	expect(within(document.body).queryByText(contentText)).not.toBeInTheDocument();
+};
+
 export const submenuTriggerType: StoryObj = {
 	name: "submenuTriggerType",
 	render: () => (
@@ -245,9 +251,7 @@ export const submenuTriggerType: StoryObj = {
 		const subTrigger = canvas.getByText("Item 2");
 
 		// Hover doesn't open the submenu
-		await userEvent.hover(subTrigger);
-		await sleep(100);
-		expect(canvas.queryByText("SubItem 1")).not.toBeInTheDocument();
+		await expectNotOpenedOnHover(subTrigger, "SubItem 1");
 
 		await userEvent.click(subTrigger);
 		const subItem = await canvas.findByText("SubItem 1");
@@ -266,9 +270,7 @@ export const submenuTriggerType: StoryObj = {
 		});
 
 		// Nested submenus inherit the trigger type
-		await userEvent.hover(nestedSubTrigger);
-		await sleep(100);
-		expect(canvas.queryByText("SubItem 2-2-1")).not.toBeInTheDocument();
+		await expectNotOpenedOnHover(nestedSubTrigger, "SubItem 2-2-1");
 
 		await userEvent.click(nestedSubTrigger);
 		const nestedItem = await canvas.findByText("SubItem 2-2-1");
@@ -283,9 +285,7 @@ export const submenuTriggerType: StoryObj = {
 		await userEvent.click(canvas.getByRole("button", { name: "Open with override" }));
 
 		const clickTrigger = await canvas.findByText("Click item");
-		await userEvent.hover(clickTrigger);
-		await sleep(100);
-		expect(canvas.queryByText("Click subitem")).not.toBeInTheDocument();
+		await expectNotOpenedOnHover(clickTrigger, "Click subitem");
 
 		await userEvent.hover(canvas.getByText("Hover item"));
 		expect(await canvas.findByText("Hover subitem")).toBeInTheDocument();
