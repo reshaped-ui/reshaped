@@ -358,6 +358,81 @@ export const testSubmenuInsideClick: StoryObj = {
 	},
 };
 
+export const testClickPropagation: StoryObj<{
+	handleParentClick: ReturnType<typeof fn>;
+	handleItemWrapperClick: ReturnType<typeof fn>;
+	handleClose: ReturnType<typeof fn>;
+}> = {
+	name: "test: click propagation",
+	args: {
+		handleParentClick: fn(),
+		handleItemWrapperClick: fn(),
+		handleClose: fn(),
+	},
+	render: (args) => (
+		<Example>
+			<Example.Item title="menu inside a clickable parent, item inside a link-like wrapper">
+				<View
+					padding={4}
+					backgroundColor="neutral-faded"
+					attributes={{ onClick: args.handleParentClick }}
+				>
+					<DropdownMenu submenuTriggerType="click" onClose={args.handleClose}>
+						<DropdownMenu.Trigger>
+							{(attributes) => <Button attributes={attributes}>Open</Button>}
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content>
+							<View attributes={{ onClick: args.handleItemWrapperClick }}>
+								<DropdownMenu.Item>Wrapped item</DropdownMenu.Item>
+							</View>
+							<DropdownMenu.SubMenu>
+								<DropdownMenu.SubTrigger>Submenu</DropdownMenu.SubTrigger>
+								<DropdownMenu.Content>
+									<DropdownMenu.Item>Nested item</DropdownMenu.Item>
+								</DropdownMenu.Content>
+							</DropdownMenu.SubMenu>
+						</DropdownMenu.Content>
+					</DropdownMenu>
+				</View>
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getByRole("button", { name: "Open" });
+
+		await userEvent.click(trigger);
+		args.handleParentClick.mockClear();
+
+		// Clicks reach the elements wrapping the item inside the menu, like router links
+		// but don't propagate to the parents of the menu through the portal
+		await userEvent.click(await canvas.findByText("Wrapped item"));
+		await waitFor(() => {
+			expect(canvas.queryByText("Wrapped item")).not.toBeInTheDocument();
+		});
+		expect(args.handleItemWrapperClick).toHaveBeenCalledTimes(1);
+		expect(args.handleParentClick).not.toHaveBeenCalled();
+
+		// Selecting an item closes the menu once without triggering an outside click afterwards
+		expect(args.handleClose).toHaveBeenCalledTimes(1);
+		expect(args.handleClose).toHaveBeenCalledWith({ reason: "item-selection" });
+
+		await userEvent.click(trigger);
+		args.handleParentClick.mockClear();
+		args.handleClose.mockClear();
+
+		await userEvent.click(await canvas.findByText("Submenu"));
+		await userEvent.click(await canvas.findByText("Nested item"));
+		await waitFor(() => {
+			expect(canvas.queryByText("Nested item")).not.toBeInTheDocument();
+			expect(canvas.queryByText("Submenu")).not.toBeInTheDocument();
+		});
+		expect(args.handleParentClick).not.toHaveBeenCalled();
+		expect(args.handleClose).toHaveBeenCalledTimes(1);
+		expect(args.handleClose).toHaveBeenCalledWith({ reason: "item-selection" });
+	},
+};
+
 export const defaultActive: StoryObj<{
 	handleOpen: ReturnType<typeof fn>;
 	handleClose: ReturnType<typeof fn>;

@@ -6,9 +6,16 @@ import useHandlerRef from "./useHandlerRef";
 const useOnClickOutside = (
 	refs: React.RefObject<HTMLElement | null>[],
 	handler: (event: Event) => void,
-	options?: { disabled?: boolean }
+	options?: {
+		disabled?: boolean;
+		/**
+		 * Handle clicks in the capture phase, so they are detected even when
+		 * the clicked element stops the event propagation
+		 */
+		capture?: boolean;
+	}
 ) => {
-	const { disabled } = options || {};
+	const { disabled, capture = false } = options || {};
 	const handlerRef = useHandlerRef(handler);
 	/**
 	 * We're checking the element position in the DOM on mousedown to make sure
@@ -76,14 +83,14 @@ const useOnClickOutside = (
 			handlerRef.current?.(event);
 		};
 
-		document.addEventListener("click", handleClick);
+		document.addEventListener("click", handleClick, { capture });
 		document.addEventListener("contextmenu", handleContextMenu, { capture: true });
 		return () => {
-			document.removeEventListener("click", handleClick);
+			document.removeEventListener("click", handleClick, { capture });
 			document.removeEventListener("contextmenu", handleContextMenu, { capture: true });
 		};
 		// oxlint-disable-next-line react-hooks/exhaustive-deps
-	}, [handlerRef, disabled, ...refs]);
+	}, [handlerRef, disabled, capture, ...refs]);
 };
 
 export default useOnClickOutside;

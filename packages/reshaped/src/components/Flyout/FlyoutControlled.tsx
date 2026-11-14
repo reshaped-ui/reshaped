@@ -570,6 +570,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 		},
 		{
 			disabled: !isRendered || disableCloseOnOutsideClick,
+			// Content of components like DropdownMenu can stop the click propagation
+			capture: true,
 		}
 	);
 
