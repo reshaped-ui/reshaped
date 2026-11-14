@@ -187,15 +187,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 
 	const handleClose = React.useCallback<T.ContextProps["handleClose"]>(
 		(options) => {
-			/**
-			 * Click flyouts with nested flyouts opened are closed one by one, starting from the latest opened one.
-			 * Outside clicks don't need the lock since clicks inside the nested flyouts are not counted as outside
-			 */
-			const isLocked =
-				triggerType === "click" &&
-				!options.closeParents &&
-				options.reason !== "outside-click" &&
-				!isDismissible();
+			const isLocked = triggerType === "click" && !options.closeParents && !isDismissible();
 			const canClose = !isLocked && (isRendered || openRequestedRef.current || disabled);
 
 			if (!canClose) return;

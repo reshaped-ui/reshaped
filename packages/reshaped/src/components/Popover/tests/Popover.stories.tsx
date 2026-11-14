@@ -413,11 +413,16 @@ export const testNested = {
 		expect(content).toBeInTheDocument();
 		expect(nestedContent).toBeInTheDocument();
 
-		// Outside click closes all popovers at once
+		// Outside clicks close the popovers one by one, starting from the latest opened one
+		await userEvent.click(canvasElement.ownerDocument.body);
+		await waitFor(() => {
+			expect(nestedContent).not.toBeInTheDocument();
+		});
+		expect(content).toBeInTheDocument();
+
 		await userEvent.click(canvasElement.ownerDocument.body);
 		await waitFor(() => {
 			expect(content).not.toBeInTheDocument();
-			expect(nestedContent).not.toBeInTheDocument();
 		});
 	},
 };
