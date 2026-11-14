@@ -427,6 +427,19 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, remove, onAfterCloseRef]);
 
 	/**
+	 * Grouped flyouts switch without animations, so content that is still animating its hiding
+	 * gets removed right away once another flyout from the group gets hovered
+	 */
+	useIsomorphicLayoutEffect(() => {
+		if (status !== "hidden" || !groupTimeouts) return;
+
+		return cooldown.onRewarm(() => {
+			remove();
+			onAfterCloseRef.current?.();
+		});
+	}, [status, groupTimeouts, remove, onAfterCloseRef]);
+
+	/**
 	 * Handle focus trap
 	 *
 	 * We release focus on visible change to not wait till animation ends

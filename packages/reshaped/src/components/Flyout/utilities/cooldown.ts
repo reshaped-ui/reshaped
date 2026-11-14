@@ -3,11 +3,24 @@ class Cooldown {
 
 	timer?: ReturnType<typeof setTimeout>;
 
+	private rewarmListeners = new Set<() => void>();
+
+	/**
+	 * Called when another flyout gets hovered while the group is still cooling down
+	 */
+	onRewarm = (listener: () => void) => {
+		this.rewarmListeners.add(listener);
+		return () => {
+			this.rewarmListeners.delete(listener);
+		};
+	};
+
 	warm = () => {
 		clearTimeout(this.timer);
 
 		if (this.status === "cooling") {
 			this.status = "warm";
+			this.rewarmListeners.forEach((listener) => listener());
 			return;
 		}
 
