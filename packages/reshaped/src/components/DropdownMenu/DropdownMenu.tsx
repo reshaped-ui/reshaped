@@ -29,11 +29,12 @@ const DropdownMenu: React.FC<T.Props> = (props) => {
 		triggerType = "click",
 		trapFocusMode = "action-menu",
 		size,
+		submenuTriggerType,
 		...popoverProps
 	} = props;
 
 	return (
-		<DropdownMenuProvider size={size}>
+		<DropdownMenuProvider size={size} submenuTriggerType={submenuTriggerType}>
 			<Popover
 				{...popoverProps}
 				position={position}
@@ -67,8 +68,8 @@ export const DropdownMenuContent: React.FC<T.ContentProps> = (props) => {
 
 	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		/**
-		 * Stop event propagation to make sure outside click doesn't get triggered
-		 * after the content is closed
+		 * React events bubble through the portal, so item clicks would reach the components
+		 * the menu is rendered in, like a clickable card. Wrappers inside the content still get them
 		 */
 		e.stopPropagation();
 		attributes?.onClick?.(e);
@@ -126,14 +127,21 @@ export const DropdownMenuItem: React.FC<T.ItemProps> = (props) => {
 };
 
 export const DropdownMenuSubMenu: React.FC<T.SubMenuProps> = (props) => {
-	const { children, position = "end-top", contentGap = 0.5, ...dropdownMenuProps } = props;
+	const {
+		children,
+		position = "end-top",
+		contentGap = 0.5,
+		triggerType,
+		...dropdownMenuProps
+	} = props;
+	const { submenuTriggerType } = useDropdownMenu();
 	const dropdownMenuRef = React.useRef<T.Instance>(null);
 
 	return (
 		<DropdownMenuSubContext.Provider value={dropdownMenuRef}>
 			<DropdownMenu
 				{...dropdownMenuProps}
-				triggerType="hover"
+				triggerType={triggerType ?? submenuTriggerType ?? "hover"}
 				position={position}
 				contentGap={contentGap}
 				instanceRef={dropdownMenuRef}

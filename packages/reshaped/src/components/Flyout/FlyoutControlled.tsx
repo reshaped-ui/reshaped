@@ -113,6 +113,8 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const ignoreTouchMouseEnterRef = React.useRef(false);
 	// Other triggers got pointer-events disabled by this flyout and still have to be restored
 	const triggersDisabledRef = React.useRef(false);
+	// Interaction started inside the content React tree, including nested flyouts portaled outside of the content element
+	const interactionInsideContentRef = React.useRef(false);
 	// Cleanup function for safe area tracking
 	const safeAreaRef = React.useRef<{ origin: Coordinates; cleanup: () => void } | null>(null);
 
@@ -332,9 +334,13 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	const handleContentMouseDown = () => {
 		lockedBlurEffects.current = true;
 		hoverTriggeredWithTouchEventRef.current = true;
+		interactionInsideContentRef.current = true;
 	};
 	const handleContentMouseUp = () => {
 		lockedBlurEffects.current = false;
+	};
+	const handleContentKeyDown = () => {
+		interactionInsideContentRef.current = true;
 	};
 
 	const finishHide = React.useCallback(() => {
@@ -460,6 +466,30 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	}, [status, isRendered, triggerType]);
 
 	/**
+	 * Nested flyouts are portaled outside of the parent content element but are still rendered inside its React tree.
+	 * React events bubble through portals, so content handlers mark the interactions coming from the nested flyouts too
+	 * and the flag gets reset in the capture phase before every new interaction
+	 */
+	React.useEffect(() => {
+		if (!isRendered || disableCloseOnOutsideClick) return;
+
+		const events = ["mousedown", "touchstart", "keydown"] as const;
+		const resetInteraction = () => {
+			interactionInsideContentRef.current = false;
+		};
+
+		events.forEach((event) => {
+			document.addEventListener(event, resetInteraction, { capture: true, passive: true });
+		});
+
+		return () => {
+			events.forEach((event) => {
+				document.removeEventListener(event, resetInteraction, { capture: true });
+			});
+		};
+	}, [isRendered, disableCloseOnOutsideClick]);
+
+	/**
 	 * Clean up safe polygon tracking on unmount or when flyout closes
 	 */
 	React.useEffect(() => {
@@ -523,12 +553,17 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	useOnClickOutside(
 		[flyoutElRef, triggerElRef],
 		() => {
+			// Clicks inside nested flyouts are not considered outside clicks
+			if (interactionInsideContentRef.current) return;
+
 			// Clicking outside changes focused element so we don't need to set it back ourselves
 			shouldReturnFocusRef.current = false;
 			handleClose({ reason: "outside-click" });
 		},
 		{
 			disabled: !isRendered || disableCloseOnOutsideClick,
+			// Content of components like DropdownMenu can stop the click propagation
+			capture: true,
 		}
 	);
 
@@ -553,6 +588,7 @@ const FlyoutControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 				handleClick: handleTriggerClick,
 				handleContentMouseDown,
 				handleContentMouseUp,
+				handleContentKeyDown,
 				triggerType,
 				trapFocusMode,
 				contentZIndex,

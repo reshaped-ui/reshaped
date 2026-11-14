@@ -14,10 +14,14 @@ export const useDropdownMenu = () => React.useContext(DropdownMenuContext);
  * define themselves are inherited from the menu they're nested in.
  */
 export const DropdownMenuProvider: React.FC<T.ProviderProps> = (props) => {
-	const { size, children } = props;
+	const { size, submenuTriggerType, children } = props;
 	const parentContext = useDropdownMenu();
 	const resolvedSize = size ?? parentContext.size;
-	const value = React.useMemo(() => ({ size: resolvedSize }), [resolvedSize]);
+	const resolvedSubmenuTriggerType = submenuTriggerType ?? parentContext.submenuTriggerType;
+	const value = React.useMemo(
+		() => ({ size: resolvedSize, submenuTriggerType: resolvedSubmenuTriggerType }),
+		[resolvedSize, resolvedSubmenuTriggerType]
+	);
 
 	return <DropdownMenuContext.Provider value={value}>{children}</DropdownMenuContext.Provider>;
 };

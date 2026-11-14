@@ -219,6 +219,7 @@ export type ContextProps = {
 	handleTouchStart: () => void;
 	handleContentMouseDown: () => void;
 	handleContentMouseUp: () => void;
+	handleContentKeyDown: () => void;
 	isSubmenu: boolean;
 } & Pick<
 	Props,
