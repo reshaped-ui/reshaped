@@ -1,21 +1,36 @@
 import type React from "react";
 
 export type Props = {
-	/** Node for inserting children */
+	/** Node for inserting the form field together with FormControl.Label, FormControl.Helper and FormControl.Error */
 	children: React.ReactNode;
-	/** Component size, to be used together with the other form component sizes */
+	/** Size of the label and caption text, to be used together with the other form component sizes.
+	 * It doesn't change the size of the field, set the field size on the field component itself
+	 * @default "medium"
+	 */
 	size?: "medium" | "large";
-	/** Custom gap between the field and the text labels */
+	/** Custom gap between the field and the label and captions, base unit token number multiplier
+	 * @default 1, or 1.5 when size is "large"
+	 */
 	gap?: number;
-	/** Change component to show an error state and display FormControl.Error */
+	/** Show an error state and mark the field as invalid. When set on FormControl, it applies to the form field
+	 * rendered inside and displays FormControl.Error, which renders nothing otherwise
+	 */
 	hasError?: boolean;
-	/** Change component to show a required indicator */
+	/** Show a required indicator in FormControl.Label and set aria-required on the field.
+	 * It doesn't add the native required attribute, so the browser form validation is not triggered
+	 */
 	required?: boolean;
-	/** Apply disabled styles */
+	/** Disable the form field rendered inside and apply disabled styles to the label and the helper.
+	 * The field can't opt out by passing disabled={false} itself
+	 */
 	disabled?: boolean;
-	/** Apply semantic html markup when used for displaying multiple form fields together with a single label */
+	/** Render as a fieldset with a legend when a single label is used for multiple form fields, like a RadioGroup.
+	 * Fields inside a group don't receive the id and aria attributes, the captions describe the fieldset instead
+	 */
 	group?: boolean;
-	/** Custom id for the form control */
+	/** Custom id for the form field element, the label and the captions use it as a prefix for their own ids.
+	 * Generated automatically when not passed
+	 */
 	id?: string;
 };
 

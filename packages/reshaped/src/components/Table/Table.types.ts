@@ -8,18 +8,24 @@ export type Props = {
 	border?: boolean;
 	/** Add border between the table columns */
 	columnBorder?: boolean;
-	/** Node for inserting children */
+	/** Node for inserting children.
+	 * Rows can be passed directly and get wrapped with Table.Body, unless the first child is Table.Head or Table.Body
+	 */
 	children: React.ReactNode;
 	/** Additional classname for the root element */
 	className?: ClassName;
-	/** Additional attributes for the root element */
+	/** Additional attributes for the root element, which is a horizontally scrollable div wrapping the table element */
 	attributes?: Attributes<"div">;
 };
 
 export type RowProps = {
-	/** Indicate that the row is selected */
+	/** Highlight the row with a background color, for example for selected rows or for the row with headings.
+	 * Only changes the styles and doesn't set any selection attributes
+	 */
 	highlighted?: boolean;
-	/** Callback when the row is clicked */
+	/** Callback when the row is clicked. Makes the row focusable and shows a pointer cursor,
+	 * but doesn't add a role or trigger on Enter and Space, so keep the same action available from a control inside the row
+	 */
 	onClick?: (e: React.MouseEvent) => void;
 	/** Node for inserting children */
 	children: React.ReactNode;
@@ -30,21 +36,34 @@ export type RowProps = {
 };
 
 export type CellProps = {
-	/** Align the cell content */
+	/** Align the cell content horizontally
+	 * @default "start"
+	 */
 	align?: "start" | "center" | "end";
-	/** Align the cell content vertically */
+	/** Align the cell content vertically
+	 * @default "start"
+	 */
 	verticalAlign?: "start" | "center" | "end";
 	/** Merge the cell with the cells below */
 	rowSpan?: number;
 	/** Merge the cell with the cells to the right */
 	colSpan?: number;
-	/** Padding of the cell */
+	/** Padding of the cell for both directions, base unit token number multiplier.
+	 * paddingInline and paddingBlock take priority over it
+	 */
 	padding?: number;
-	/** Padding of the cell inline, base unit token number multiplier */
+	/** Padding of the cell inline, base unit token number multiplier.
+	 * Applied only to the start side unless it's the last cell of the row or the table uses columnBorder
+	 * @default 4
+	 */
 	paddingInline?: number;
-	/** Padding of the cell block, base unit token number multiplier */
+	/** Padding of the cell block, base unit token number multiplier
+	 * @default 3
+	 */
 	paddingBlock?: number;
-	/** Width of the cell, literal css value or a base unit token number multiplier */
+	/** Width of the cell, literal css value or a base unit token number multiplier.
+	 * Use "auto" to shrink the column to the width of its content without wrapping it
+	 */
 	width?: "auto" | string | number;
 	/** Minimum width of the cell, literal css value or a base unit token number multiplier */
 	minWidth?: string | number;

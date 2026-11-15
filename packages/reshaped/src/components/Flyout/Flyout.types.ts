@@ -59,24 +59,30 @@ export type UseFlyoutData = Pick<State, "position" | "status"> & {
  * Component
  */
 export type Instance = {
-	/** Open the flyout content */
+	/** Open the flyout content, in controlled mode it only calls onOpen */
 	open: () => void;
-	/** Close the flyout content */
+	/** Close the flyout content, in controlled mode it only calls onClose */
 	close: () => void;
-	/** Sync the flyout content position with the trigger element position */
+	/** Sync the flyout content position with the trigger element position.
+	 * It's already updated on scroll and on window, trigger and content resize, call it when the trigger moves for other reasons
+	 */
 	updatePosition: () => void;
 } | null;
 
 type WithUncontrolled = {
-	/** Control the content visibility, enables controlled mode */
+	/** Control the content visibility, enables controlled mode.
+	 * The component doesn't change it itself, update the value in the onOpen and onClose handlers
+	 */
 	active?: never;
-	/** Control the content default visibility, enables uncontrolled mode */
+	/** Content visibility on mount, enables uncontrolled mode where the component handles its state itself */
 	defaultActive?: boolean;
 };
 type WithControlled = {
-	/** Control the content visibility, enables controlled mode */
+	/** Control the content visibility, enables controlled mode.
+	 * The component doesn't change it itself, update the value in the onOpen and onClose handlers
+	 */
 	active: boolean;
-	/** Control the content default visibility, enables uncontrolled mode */
+	/** Content visibility on mount, enables uncontrolled mode where the component handles its state itself */
 	defaultActive?: never;
 };
 
@@ -101,23 +107,43 @@ export type TriggerAttributes = {
 };
 
 type BaseProps = {
-	/** Unique id for the flyout content and trigger */
+	/** Id of the content element, referenced by the aria attributes of the trigger. Generated automatically when not passed */
 	id?: string;
-	/** Event used for displaying the content */
+	/** Event used for displaying the content.
+	 * "hover" also opens it when the trigger is focused with the keyboard, "focus" opens it when the trigger receives focus
+	 * @default "click"
+	 */
 	triggerType?: "hover" | "click" | "focus";
-	/** Removes the content display delay if another flyout is already active */
+	/** Delay opening the content on hover, used for groups of hover triggers like tooltips.
+	 * The delay and the animations are skipped when the pointer moves over from another flyout using this flag
+	 */
 	groupTimeouts?: boolean;
-	/** Content position relative to the trigger element */
+	/** Preferred content position relative to the trigger element: the side to render it on, optionally followed by its alignment.
+	 * Start and end are flipped in RTL, another position is used when the content doesn't fit, see fallbackPositions.
+	 * Defaults to "bottom", DropdownMenu uses "bottom-start", its submenus and ContextMenu use "end-top"
+	 */
 	position?: Position;
-	/** Fallback positions for the content when it doesn't fit into the viewport or container */
+	/** Limit the positions the content can switch to when it doesn't fit into the viewport or container.
+	 * Positions are tried in a predefined order starting with the side of the passed position, not in the order of the array.
+	 * Pass false or an empty array to always keep the passed position
+	 */
 	fallbackPositions?: Position[] | false;
-	/** Adjust the content size and shift its position to fit into the container when none of the fallback positions work */
+	/** Shift the content along the trigger and reduce its height to fit it into the viewport or container.
+	 * It's applied to every position before checking if it fits, so the content can shrink in place instead of switching positions.
+	 * Use fallbackMinHeight to limit how much it can shrink
+	 */
 	fallbackAdjustLayout?: boolean;
-	/** Minimum height for the content when fallbackAdjustLayout is true */
+	/** Minimum height the content can be reduced to when fallbackAdjustLayout is true, other positions are tried when it can't be kept.
+	 * Only pixel values are supported, for example "200px"
+	 */
 	fallbackMinHeight?: string;
-	/** Change component trap focus keyboard behavior and shortcuts */
+	/** Keyboard navigation mode of the content, also defines its role. "dialog" traps the Tab navigation inside the content,
+	 * "action-menu" and "action-bar" navigate with the arrow keys and close on Tab, "content-menu" lets Tab pass through the content
+	 * and continue on the page, "selection-menu" keeps the focus on the trigger while the arrow keys highlight the options.
+	 * Pass false to disable the focus trapping. Defaults to "dialog", Popover with the hover triggerType defaults to "content-menu"
+	 */
 	trapFocusMode?: TrapMode | false;
-	/** Disable the flyout content interactivity */
+	/** Prevent the content from opening and hide it if it's already open, the trigger element itself is not disabled */
 	disabled?: boolean;
 	/** Disable the flyout content hide animation */
 	disableHideAnimation?: boolean;
@@ -127,31 +153,40 @@ type BaseProps = {
 	disableCloseOnOutsideClick?: boolean;
 	/** Ignore touch interactions with the trigger when triggerType is hover, the content still opens with keyboard focus */
 	disableTouchTrigger?: boolean;
-	/** Automatically focus the first focusable element in the content, when false the content container will be focused instead
+	/** Automatically focus the first focusable element in the content, when false the content container will be focused instead.
+	 * Label the content when it's false, for example with aria-label passed to the Content attributes
 	 * @default true
 	 */
 	autoFocus?: boolean;
-	/** Origin coordinates for the content when there is no trigger element */
+	/** Viewport coordinates to position the content against instead of the trigger element, like clientX and clientY of a mouse event */
 	originCoordinates?: Coordinates;
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Callback when the content is opened */
 	onOpen?: () => void;
-	/** Callback when the content is closed */
+	/** Callback when the content is closed.
+	 * Reason is only passed for the Escape key, outside clicks, menu item selection and the Dismissible close button
+	 */
 	onClose?: (args: { reason?: CloseReason }) => void;
 	/** Callback after the content open transition is complete */
 	onAfterOpen?: () => void;
 	/** Callback after the content close transition is complete */
 	onAfterClose?: () => void;
-	/** Content width, literal css value or unit token multiplier */
+	/** Content width, literal css value.
+	 * "trigger" matches the width of the trigger element and "100%" stretches the content to the viewport width
+	 */
 	width?: Width;
-	/** Gap between the content and the trigger element */
+	/** Gap between the content and the trigger element, base unit token multiplier.
+	 * Defaults to 2, Tooltip uses 1.5 and DropdownMenu submenus use 0.5
+	 */
 	contentGap?: number;
-	/** Shift the content on the secondary axis, relative to its original position */
+	/** Shift the content on the secondary axis, relative to its original position, base unit token multiplier.
+	 * Positive values move it to the right for top and bottom positions and down for start and end positions
+	 */
 	contentShift?: number;
-	/** Maximum height for the content */
+	/** Maximum height for the content, literal css value. Taller content is scrollable */
 	contentMaxHeight?: string;
-	/** Maximum width for the content */
+	/** Maximum width for the content, literal css value */
 	contentMaxWidth?: string;
 	/** Z-index for the content element */
 	contentZIndex?: number;
@@ -159,19 +194,19 @@ type BaseProps = {
 	contentClassName?: string;
 	/** Additional attributes for the content element */
 	contentAttributes?: G.Attributes<"div">;
-	/** Additional classname for the scrollable element */
+	/** Additional classname for the element wrapping the children inside the scrollable area, use it for the content padding */
 	scrollableClassName?: string;
-	/** Additional attributes for the scrollable element */
+	/** Additional attributes for the element wrapping the children inside the scrollable area */
 	scrollableAttributes?: G.Attributes<"div">;
 	/** Ref accessor for the flyout methods */
 	instanceRef?: React.Ref<Instance>;
-	/** Container to render the content in using a portal, position is calculated based on the container bounds
-	 * @default document.body
+	/** Element the content has to fit into, its bounds are used instead of the viewport when picking the position.
+	 * It doesn't change where the content is rendered, the content is still rendered with a portal
 	 */
 	containerRef?: React.RefObject<HTMLElement | null>;
-	/** Element used to calculate the position of the content against */
+	/** Element used to calculate the position of the content against instead of the trigger element, which still handles the events */
 	positionRef?: React.RefObject<HTMLElement | null>;
-	/** Element to focus when the content is opened */
+	/** Element to focus when the content is opened instead of its first focusable element, ignored when autoFocus is false */
 	initialFocusRef?: React.RefObject<HTMLElement | null>;
 };
 
@@ -185,7 +220,10 @@ export type ControlledProps = BaseProps & WithControlled;
 export type Props = ControlledProps | UncontrolledProps;
 
 export type TriggerProps = {
-	/** Node for inserting children, provides attributes for the trigger element */
+	/** Render function for the trigger element.
+	 * Pass the provided attributes to an interactive element, for example with the attributes property of Button,
+	 * to apply the ref, event handlers and aria attributes. Second argument provides the active state of the content
+	 */
 	children: (attributes: TriggerAttributes, props: { active: boolean }) => React.ReactNode;
 };
 

@@ -14,13 +14,13 @@ export type SelectionState = {
 };
 
 export type ItemProps = {
-	/** Value of the item used for the active item selection */
+	/** Value of the item used for the active item selection, links the item to the Tabs.Panel with the same value */
 	value: string;
 	/** Node for inserting children */
 	children?: React.ReactNode;
 	/** Icon of the item at the start position */
 	icon?: IconProps["svg"];
-	/** Link of the item, renders as an anchor element */
+	/** Link of the item, renders as an anchor element. Clicking the item still triggers the Tabs onChange */
 	href?: string;
 	/** Disable the item user interaction */
 	disabled?: boolean;
@@ -29,18 +29,18 @@ export type ItemProps = {
 };
 
 export type ListProps = {
-	/** Node for inserting children */
+	/** Node for inserting Tabs.Item components */
 	children?: React.ReactNode;
-	/** Additional classname for the list element */
+	/** Additional classname for the root element of the list */
 	className?: ClassName;
-	/** Additional attributes for the list element */
+	/** Additional attributes for the root element of the list, which wraps the element with the tablist role */
 	attributes?: Attributes<"div">;
 };
 
 export type PanelProps = {
-	/** Value of the panel used for the active panel selection */
+	/** Value of the panel used for the active panel selection, should match the value of its Tabs.Item */
 	value: string;
-	/** Node for inserting children */
+	/** Node for inserting children. Rendered only while the panel is active, so its state is not preserved when switching tabs */
 	children?: React.ReactNode;
 	/** Additional classname for the panel element */
 	className?: ClassName;
@@ -49,17 +49,25 @@ export type PanelProps = {
 };
 
 export type BaseProps = {
-	/** Node for inserting children */
+	/** Node for inserting Tabs.List and Tabs.Panel components, they can be placed at any depth since Tabs doesn't render an element itself */
 	children?: React.ReactNode;
-	/** Direction of the tab buttons */
+	/** Direction of the tab buttons
+	 * @default "row"
+	 */
 	direction?: "column" | "row";
-	/** Equal width for the tab buttons */
+	/** Equal width for the tab buttons, they fill the list width and truncate their text instead of making the list scrollable */
 	itemWidth?: "equal";
-	/** Render variant for component */
+	/** Render variant for component
+	 * @default "bordered"
+	 */
 	variant?: "bordered" | "borderless" | "pills" | "pills-raised";
-	/** Component size */
+	/** Component size
+	 * @default "medium"
+	 */
 	size?: "small" | "medium" | "large";
-	/** Name of the tab buttons group when used as a form control */
+	/** Name of the tab buttons group when used as a form control.
+	 * Renders the tab buttons as radio inputs, so the selected value is submitted with the form
+	 */
 	name?: string;
 	/** Disable the animation of the tab button selection */
 	disableSelectionAnimation?: boolean;
@@ -70,14 +78,18 @@ export type BaseProps = {
 export type ControlledProps = BaseProps & {
 	/** Value of the active tab, enables controlled mode */
 	value: string;
-	/** Default value of the active tab, enables uncontrolled mode */
+	/** Default value of the active tab, enables uncontrolled mode.
+	 * No tab is selected when it doesn't match any of the item values
+	 */
 	defaultValue?: never;
 };
 
 export type UncontrolledProps = BaseProps & {
 	/** Value of the active tab, enables controlled mode */
 	value?: never;
-	/** Default value of the active tab, enables uncontrolled mode */
+	/** Default value of the active tab, enables uncontrolled mode.
+	 * No tab is selected when it doesn't match any of the item values
+	 */
 	defaultValue: string;
 };
 

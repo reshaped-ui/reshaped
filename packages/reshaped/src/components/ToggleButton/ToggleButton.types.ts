@@ -5,15 +5,17 @@ type BaseProps = Omit<ButtonProps, "variant" | "highlighted"> & {
 	 * @default "outline"
 	 */
 	variant?: ButtonProps["variant"];
-	/** Component color scheme when selected
-	 * @default "neutral"
-	 */
+	/** Component color scheme when selected, uses the color value when not passed */
 	selectedColor?: ButtonProps["color"];
-	/** Component variant when selected */
+	/** Component variant when selected, uses the variant value when not passed */
 	selectedVariant?: ButtonProps["variant"];
-	/** Value of the toggle button, enables controlled mode for the ToggleButtonGroup */
+	/** Value of the toggle button, passed to the onChange handler.
+	 * Required inside ToggleButtonGroup, where the group value defines if the button is checked
+	 */
 	value?: string;
-	/** Callback when the toggle button value changes */
+	/** Callback when the toggle button checked state changes.
+	 * Not called inside ToggleButtonGroup, use the group onChange instead
+	 */
 	onChange?: (args: {
 		checked: boolean;
 		value: string;
@@ -22,15 +24,15 @@ type BaseProps = Omit<ButtonProps, "variant" | "highlighted"> & {
 };
 
 export type ControlledProps = BaseProps & {
-	/** Default value of the toggle button, enables uncontrolled mode */
+	/** Default checked state of the toggle button, enables uncontrolled mode */
 	defaultChecked?: never;
-	/** Value of the toggle button, enables controlled mode */
+	/** Checked state of the toggle button, enables controlled mode */
 	checked: boolean;
 };
 export type UncontrolledProps = BaseProps & {
-	/** Default value of the toggle button, enables uncontrolled mode */
+	/** Default checked state of the toggle button, enables uncontrolled mode */
 	defaultChecked?: boolean;
-	/** Value of the toggle button, enables controlled mode */
+	/** Checked state of the toggle button, enables controlled mode */
 	checked?: never;
 };
 export type Props = ControlledProps | UncontrolledProps;

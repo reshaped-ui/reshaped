@@ -7,11 +7,11 @@ import type { Attributes } from "@/types/global";
 
 export type Instance =
 	| {
-			/** Scroll to the previous item */
+			/** Scroll back by the width of the visible area, same as the back navigation control */
 			navigateBack: () => void;
-			/** Scroll to the next item */
+			/** Scroll forward by the width of the visible area, same as the forward navigation control */
 			navigateForward: () => void;
-			/** Scroll to the item at the given index */
+			/** Scroll to the item at the given zero-based index */
 			navigateTo: (index: number) => void;
 	  }
 	| undefined;
@@ -28,15 +28,19 @@ export type ControlProps = {
 };
 
 export type Props = {
-	/** Node for inserting children, each child is rendered as a carousel item */
+	/** Node for inserting children, each child is rendered as a carousel item. Children of a fragment are rendered together as a single item */
 	children?: React.ReactNode;
-	/** Number of items visible at once in the container*/
+	/** Number of items visible at once in the container. When not passed, the items are sized based on their content */
 	visibleItems?: G.Responsive<number>;
-	/** Gap between items in the container, base unit multiplier */
+	/** Gap between items in the container, base unit multiplier
+	 * @default 3
+	 */
 	gap?: G.Responsive<number>;
 	/** Apply negative margins, base unit multiplier, can be used to make sure the items don't get clipped when scrolling */
 	bleed?: G.Responsive<number>;
-	/** Hide navigation controls */
+	/** Hide navigation controls, can be used when navigating with the instanceRef methods.
+	 * Otherwise, they are displayed on devices supporting hover or starting from the large viewport, while there is content to scroll to
+	 */
 	navigationDisplay?: "hidden";
 	/** Ref accessor for the carousel methods */
 	instanceRef?: React.Ref<Instance>;
@@ -46,6 +50,6 @@ export type Props = {
 	onScroll?: (e: React.UIEvent<HTMLUListElement>) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
-	/** Additional attributes for the root element */
+	/** Additional attributes for the root element. Pass `aria-label` or `aria-labelledby` to describe the carousel content for screen readers */
 	attributes?: Attributes<"div">;
 };
