@@ -45,9 +45,15 @@ export type Props = Pick<
 	| "elevation"
 	| "initialFocusRef"
 > & {
-	/** Change component trap focus keyboard behavior and shortcuts */
+	/** Change component trap focus keyboard behavior and shortcuts.
+	 * "action-menu" moves the focus to the menu and navigates its items with the arrow keys,
+	 * "selection-menu" keeps the focus on the trigger while the arrow keys highlight the items, false disables the focus trapping
+	 * @default "action-menu"
+	 */
 	trapFocusMode?: Extract<PopoverProps["trapFocusMode"], "action-menu" | "selection-menu"> | false;
-	/** Size used by the menu items */
+	/** Size used by the menu items, including the items of the submenus. Can be overridden with the size of a single item
+	 * @default "medium"
+	 */
 	size?: MenuItemProps["size"];
 	/** Interaction used to open all submenus of the menu, keyboard navigation works for both of them
 	 * @default "hover"
@@ -65,7 +71,7 @@ export type SectionProps = {
 };
 
 export type SubMenuProps = {
-	/** Node for inserting children */
+	/** Node for inserting children, DropdownMenu.SubTrigger and DropdownMenu.Content of the submenu */
 	children: React.ReactNode;
 	/** Interaction used to open the submenu, overrides the submenuTriggerType of the menu */
 	triggerType?: SubMenuTriggerType;

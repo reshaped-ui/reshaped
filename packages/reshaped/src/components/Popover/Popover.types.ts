@@ -36,10 +36,16 @@ export type Props = Pick<
 > & {
 	/** Node for inserting children */
 	children?: React.ReactNode;
-	/** Content element padding, unit token multiplier */
+	/** Content element padding, unit token multiplier
+	 * @default 4
+	 */
 	padding?: number;
-	/** Component elevation level */
+	/** Component elevation level, defines the shadow and the background color of the content
+	 * @default "overlay"
+	 */
 	elevation?: "raised" | "overlay";
-	/** Border radius for the content */
+	/** Border radius for the content
+	 * @default "medium"
+	 */
 	borderRadius?: "medium" | "large";
 };

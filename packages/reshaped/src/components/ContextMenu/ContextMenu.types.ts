@@ -11,7 +11,9 @@ export type Props = Omit<
 	 * @default true
 	 */
 	disableHideAnimation?: boolean;
-	/** Element that opens the menu on right click, used when it's rendered outside of the ContextMenu */
+	/** Element that opens the menu on right click, used when it's rendered outside of the ContextMenu.
+	 * By default the menu is opened by a right click on any of the ContextMenu children
+	 */
 	triggerRef?: React.RefObject<HTMLElement | null>;
 	/** Callback when the menu is opened, receives the contextmenu event that opened it */
 	onOpen?: (args: { event: MouseEvent }) => void;

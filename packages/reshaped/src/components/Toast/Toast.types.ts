@@ -12,19 +12,23 @@ export type WidthPreset = "short" | "long";
 export type Width = WidthPreset | (string & {});
 
 export type Props = {
-	/** Orientation of the toast layout */
+	/** Orientation of the toast layout, "vertical" renders the actions below the content instead of next to it
+	 * @default "horizontal"
+	 */
 	orientation?: "horizontal" | "vertical";
 	/** Icon at the inline start position of the toast */
 	icon?: IconProps["svg"];
-	/** Node for inserting content at the inline start position of the toast */
+	/** Node for inserting content at the inline start position of the toast, ignored when icon is passed */
 	startSlot?: React.ReactNode;
 	/** Title value for the toast */
 	title?: React.ReactNode;
 	/** Text content for the toast */
 	text?: React.ReactNode;
-	/** Node for inserting children */
+	/** Node for inserting custom content, rendered below the title and text when they are passed */
 	children?: React.ReactNode;
-	/** Node for inserting content after the toast actions */
+	/** Node for inserting the toast actions, a single element or an array of them.
+	 * Button components get the ghost variant, small size and inherit color by default
+	 */
 	actionsSlot?: React.ReactNode;
 	/** Color of the toast
 	 * @default "neutral"
@@ -60,9 +64,16 @@ export type ContainerProps = {
 };
 
 export type ShowOptions = {
+	/** Time before the toast is hidden automatically: "short" is 4 seconds, "long" is 8 seconds, number is a custom value in ms.
+	 * Pass 0 to keep the toast until hide() is called. The timer is stopped while the toasts are hovered or focused and restarts afterwards
+	 * @default "short"
+	 */
 	timeout?: Timeout;
+	/** Position of the region the toast is shown in
+	 * @default "bottom-end"
+	 */
 	position?: Position;
-	/** Width of the toast rendered inside the region
+	/** Width of the toast rendered inside the region, "short", "long" or a literal css value
 	 * @default "short"
 	 */
 	width?: Width;
