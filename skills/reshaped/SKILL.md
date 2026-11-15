@@ -42,14 +42,18 @@ Upgrading from v3? Use the `reshaped-v3-v4` skill instead of this one.
 
 ```tsx
 <View direction="row" gap={3} align="center" justify="space-between">
-  <Text variant="featured-3" weight="bold">Projects</Text>
-  <Button color="primary">Create</Button>
+	<Text variant="featured-3" weight="bold">
+		Projects
+	</Text>
+	<Button color="primary">Create</Button>
 </View>
 ```
 
 - Flexbox turns on when `direction`, `gap`, `align` or `justify` is passed, and the default `direction` is `"column"`. Pass `direction="row"` for horizontal layouts.
+- A row wraps its children and aligns them to the start by default. Pass `align="center"` to center them vertically and `wrap={false}` to keep them on one line.
 - Space siblings with `gap` on the parent `View`. Don't add margins or spacer elements.
-- `View.Item` controls how a single child behaves: `grow`, `shrink`, `columns` (1–12 or `"auto"`, items wrap to the next row automatically), `order` and `gapBefore` (overrides the gap before this one item; `gapBefore="auto"` pushes the rest of the items to the opposite side). `grow` and `shrink` can also be set on a child `View` directly.
+- `View.Item` controls how a single child behaves: `grow`, `shrink`, `columns` (1–12 or `"auto"`, for row direction, items wrap to the next row automatically), `order` and `gapBefore` (overrides the gap before this one item; `gapBefore="auto"` pushes the item to the end of the row). `grow` and `shrink` can also be set on a child `View` directly.
+- For a "fill the remaining space" layout, give one child `grow`. The parent then stops wrapping and the other children keep their size.
 - `divided` renders dividers between the children; don't insert `Divider` manually between `View` children.
 - Surfaces: `backgroundColor`, `borderColor`, `borderRadius`, `shadow`, `padding`. Setting `backgroundColor` also sets a readable text color for that background. Passing `borderColor` enables the border on all sides; use `borderTop`, `borderBlock` etc. to render only some of them.
 - Positioning: `position`, `inset*` and `zIndex` cover overlays, sticky headers and badges without custom CSS. `inset="center"` centers an absolutely positioned child.
@@ -62,7 +66,7 @@ Upgrading from v3? Use the `reshaped-v3-v4` skill instead of this one.
 
 - **Numbers are multipliers of the base unit** (4px in the default theme): `gap={4}` is 16px, `padding={6}` is 24px. Never convert pixels by hand into `gap={16}`.
 - **Strings are literal CSS values** for the size props that accept them (`width`, `height`, `maxWidth`, `minHeight`, …): `width="320px"`, `height="100%"`, `maxWidth="60ch"`. Spacing props (`gap`, `padding*`, `bleed`) only take numbers.
-- **Responsive values** are objects keyed by viewport and are mobile-first: `{ s: "column", l: "row" }` means column on `s` and `m`, row on `l` and `xl`. Viewports are `s`, `m` (≥660px), `l` (≥900px) and `xl` (≥1280px) in the default theme.
+- **Responsive values** are objects keyed by viewport and are mobile-first: `{ s: "column", l: "row" }` means column on `s` and `m`, row on `l` and `xl`. Viewports are `s`, `m` (≥660px), `l` (≥900px) and `xl` (≥1280px) in the default theme. Always include the `s` key – an object without it isn't treated as a responsive value.
 - Only props that affect layout are responsive (`G.Responsive<…>` in the types) – for example `View` layout props, `Button` `size` and `fullWidth`, `Text` `variant`. Others, like `color`, are not. For those, resolve the value on the client with `useResponsiveClientValue({ s: …, l: … })` or render different content with `Hidden`.
 - Don't read `window.innerWidth` or write media queries in JS for layout – use the responsive props.
 
@@ -80,38 +84,42 @@ Upgrading from v3? Use the `reshaped-v3-v4` skill instead of this one.
 ## Text
 
 - Render text with `Text`. Variants, from largest to smallest: `headline-1…3`, `featured-1…6`, `body-1`, `body-2`, `caption-1`, `caption-2`. `body-2` is the default size of the application text.
-- The variant only changes the style. Set the HTML tag with `as` for headings and paragraphs: `<Text as="h1" variant="featured-1" weight="bold">`.
+- Set the HTML tag with `as` for headings and paragraphs: `<Text as="h2" variant="featured-3" weight="bold">`, `<Text as="p">`. Without `as`, `featured-1`…`featured-6` render as `h1`…`h6` and every other variant renders a `div`, so pass `as` whenever the heading level shouldn't follow the variant number.
 - Secondary text uses `color="neutral-faded"`; don't lower the opacity.
 - `maxLines` truncates, `wrap="balance"` balances headings, `numeric` keeps digit widths stable for changing numbers.
 
 ## Actions and icons
 
-- `Button`, `Link`, `MenuItem`, `Card` and others are based on `Actionable`: passing `href` renders an `<a>`, passing `onClick` (or `type`) renders a `<button>`. Don't wrap a `Button` in an `<a>` or put click handlers on non-interactive elements – use `Actionable` for custom clickable areas, it handles keyboard support and focus rings.
-- For client-side routing, pass the router link through `render`: `<Button href="/settings" render={(props) => <RouterLink {...props} />}>`.
-- Links can't be disabled; don't combine `href` with `disabled`.
+- `Button`, `Link` and `MenuItem` are based on `Actionable`: passing `href` renders an `<a>`, passing `onClick` (or `type`) renders a `<button>`, and passing none of them renders a non-interactive `<span>`. Don't put click handlers on non-interactive elements – use `Actionable` for custom clickable areas, it handles keyboard support and focus rings.
+- For client-side routing, pass the router link through `render` and spread everything it receives: `<Button href="/settings" render={(props) => <RouterLink {...props} />}>`. Wrapping a `Button` without `href` in a router link gives a `<span>` inside an anchor.
+- Buttons render with `type="button"`. Pass `type="submit"` to the button that submits a form.
 - Icons are passed as components, not rendered elements: `<Button icon={PlusIcon}>`, `<Icon svg={PlusIcon} />`. Any SVG icon library works (e.g. `lucide-react`); the SVG should use `currentColor`.
 - An icon-only button needs an accessible name: `<Button icon={TrashIcon} attributes={{ "aria-label": "Delete" }} />`.
-- `Icon` sizes are unit multipliers (`size={5}` is 20px) and it inherits the text color by default. `<Icon svg={null} />` renders an empty box of the same size – use it to keep rows with and without icons aligned.
+- `Icon` sizes are unit multipliers (`size={5}` is 20px) and it inherits the text color by default. `<Icon svg={null} />` renders an empty box of the same size – use it to keep rows with and without icons aligned. The `icon` props of other components render nothing for `null`; pass the empty `Icon` through their `startSlot` instead.
 - One `color="primary"` button per group of actions; secondary actions stay neutral or use `variant="outline"` / `variant="ghost"`.
 
 ## Forms
 
 - Every input takes a `name` and calls `onChange` with an object, not a DOM event: `onChange={({ name, value, event }) => …}` (`checked` instead of `value` for `Checkbox` and `Switch`).
 - Inputs are uncontrolled with `defaultValue` / `defaultChecked` and controlled with `value` / `checked` + `onChange`. Don't pass both.
-- Wrap fields in `FormControl` for the label, helper and error text – it wires ids and aria attributes, and passes `hasError`, `disabled` and `required` down to the input:
+- Wrap fields in `FormControl` for the label, helper and error text – it wires ids and aria attributes, and applies its `hasError` and `disabled` to the field inside:
 
   ```tsx
   <FormControl hasError={!!error}>
-    <FormControl.Label>Email</FormControl.Label>
-    <TextField name="email" inputAttributes={{ type: "email" }} />
-    <FormControl.Helper>We'll only use it for receipts</FormControl.Helper>
-    <FormControl.Error>{error}</FormControl.Error>
+  	<FormControl.Label>Email</FormControl.Label>
+  	<TextField name="email" inputAttributes={{ type: "email" }} />
+  	<FormControl.Helper>We'll only use it for receipts</FormControl.Helper>
+  	<FormControl.Error>{error}</FormControl.Error>
   </FormControl>
   ```
 
-  `FormControl.Error` is rendered only while `hasError` is set. Use `<FormControl group>` around a `RadioGroup` or `CheckboxGroup`.
+  `FormControl.Error` is rendered only while `hasError` is set. `required` shows the indicator and sets `aria-required`, it doesn't enable native validation. `size` only changes the label and caption text – set the field `size` on the field itself.
+
+- Use `<FormControl group>` around a `RadioGroup` or `CheckboxGroup`. Inside a group, each `Radio` / `Checkbox` needs a `value`, and the group owns `name`, the checked state and `onChange`. Groups render no element, so lay their children out with a `View`.
 - Native input attributes (`type`, `autoComplete`, `inputMode`, `ref`) go to `inputAttributes`; `attributes` applies to the root element of the field.
-- `Select` renders a custom dropdown with `Select.Option` children and a native `<select>` with `<option>` children.
+- `Select` renders a custom dropdown with `Select.Option` children and a native `<select>` with `<option>` children. Give a custom `Select` a `placeholder` or an initial value, and label it with `FormControl.Label` – `inputAttributes` go to its hidden input, not to the trigger.
+- `Autocomplete` is a controlled text field with suggestions: keep `value` in state, update it in `onChange` (called for typing and for selecting an item) and render only the `Autocomplete.Item`s matching it – items are not filtered for you.
+- `NumberField` requires `increaseAriaLabel` and `decreaseAriaLabel`.
 - With React Hook Form, use `Controller` and adapt the handler: `onChange={({ event }) => field.onChange(event)}`.
 
 ## Overlays
@@ -134,26 +142,29 @@ Upgrading from v3? Use the `reshaped-v3-v4` skill instead of this one.
   ```
 
 - `Modal` is controlled: pass `active` and `onClose`. Keep it mounted and toggle `active` instead of rendering it conditionally, otherwise its close animation doesn't run. `useToggle()` returns `{ active, activate, deactivate, toggle }` for this. Use `Modal.Title` and `Modal.Subtitle` so the dialog is labelled for screen readers.
-- Toasts are shown imperatively: `const toast = useToast(); const id = toast.show({ title, text, icon, color, actionsSlot }); toast.hide(id);`. There's no `<Toast>` component to render.
+- `Popover`, `DropdownMenu` and `Tooltip` manage their own state. Passing `active` makes them controlled – they then only open and close when you update it in `onOpen` / `onClose`. To keep one from opening, pass `disabled` instead of `active={false}`.
+- `Tooltip` describes its trigger only while it's shown and doesn't open on touch, so it doesn't replace an `aria-label` and shouldn't hold information that isn't available elsewhere. With an empty `text` it renders just the trigger, so conditional tooltips don't need branching.
+- Pressing a `DropdownMenu.Item` closes the menu. `ContextMenu` has no trigger: everything rendered inside it except `ContextMenu.Content` is the right-click area.
+- Toasts are shown imperatively: `const toast = useToast(); const id = toast.show({ title, text, icon, color, actionsSlot }); toast.hide(id);`. There's no `<Toast>` component to render. Toasts hide after a timeout; pass `timeout: 0` together with an action that calls `hide` for the ones that should stay.
 - Overlays render in a portal and manage focus trapping, scroll locking and z-index themselves. Don't set `z-index` on them.
 
 ## Choosing a component
 
-| Need | Use |
-| --- | --- |
-| Pick one option from a list | `Select`; `RadioGroup` when all options should stay visible; `ToggleButtonGroup` or `Tabs` with `variant="pills"` for a compact switcher |
-| Pick an option by typing | `Autocomplete` (it's a text field with suggestions; filter the items yourself) |
-| Menu of actions on a button | `DropdownMenu`; `ContextMenu` for right click |
-| Arbitrary floating content | `Popover`; `Tooltip` for a short text hint on hover or focus |
-| Blocking dialog, drawer, bottom sheet | `Modal` with `position` |
-| Feedback after an action | toast via `useToast`; `Alert` for a persistent message inside the page |
-| Boolean setting | `Switch` when it applies immediately, `Checkbox` inside a submitted form |
-| Navigation between views | `Tabs` (items accept `href`), `Breadcrumbs`, `Pagination` |
-| List row or navigation item | `MenuItem` |
-| Clickable surface | `Card` with `onClick` or `href` |
-| Show/hide a section | `Accordion` |
-| Loading | `Skeleton` for content placeholders, `Loader` for spinners, `Button` `loading` for pending actions |
-| Status label or counter | `Badge` (`Badge.Container` to attach it to another element) |
+| Need                                  | Use                                                                                                                                                     |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pick one option from a list           | `Select`; `RadioGroup` when all options should stay visible; `ToggleButtonGroup` or `Tabs` with `variant="pills"` for a compact switcher                |
+| Pick an option by typing              | `Autocomplete`                                                                                                                                          |
+| Menu of actions on a button           | `DropdownMenu`; `ContextMenu` for right click                                                                                                           |
+| Arbitrary floating content            | `Popover`; `Tooltip` for a short text hint on hover or focus                                                                                            |
+| Blocking dialog, drawer, bottom sheet | `Modal` with `position`                                                                                                                                 |
+| Feedback after an action              | toast via `useToast`; `Alert` for a persistent message inside the page                                                                                  |
+| Boolean setting                       | `Switch` when it applies immediately, `Checkbox` inside a submitted form                                                                                |
+| Navigation between views              | `Tabs` (pass `value` or `defaultValue`, nothing is selected otherwise; items accept `href`; inactive panels are unmounted), `Breadcrumbs`, `Pagination` |
+| List row or navigation item           | `MenuItem`                                                                                                                                              |
+| Surface for grouped content           | `Card` (padding of 4 units by default, `padding={0}` for edge-to-edge media or tables; `onClick` or `href` makes it clickable)                          |
+| Show/hide a section                   | `Accordion`                                                                                                                                             |
+| Loading                               | `Skeleton` for content placeholders, `Loader` for spinners, `Button` `loading` for pending actions                                                      |
+| Status label or counter               | `Badge` (`Badge.Container` to attach it to another element)                                                                                             |
 
 ## Customizing components
 
