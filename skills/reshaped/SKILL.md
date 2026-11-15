@@ -169,7 +169,8 @@ Upgrading from v3? Use the `reshaped-v3-v4` skill instead of this one.
 ## Customizing components
 
 - Every component accepts `className` and `attributes` for its root element. `attributes` takes any HTML attribute, `data-*` and `aria-*` attribute, `style` and `ref`. Some components expose the same for inner elements (`inputAttributes`, `contentAttributes`, …).
-- Reach for props and composition first, then theming, then `className`. Don't override the internal class names of the components – they're hashed and change between releases.
+- Using `className` or `attributes` (including `style`) to override the existing styles of a component is not recommended. Component styles are internal: their class names are hashed and their markup can change between releases, so overrides break without warning. Change how a component looks through its props and by composing components instead – for example, build a custom card from `View` instead of restyling `Card`, or put custom content into a slot instead of restyling what's already rendered there.
+- `className` and `attributes` are meant for what the props don't cover and what doesn't conflict with the component styles: positioning the component in your own layout, `data-*` and `aria-*` attributes, ids, refs and event handlers.
 - A custom look for a group of components (e.g. a branded button) is done with a scoped theme: `<Theme name="…">`.
 - Build custom components from `View`, `Text`, `Actionable` and tokens so they pick up theming, dark mode and RTL for free.
 
@@ -184,4 +185,3 @@ Upgrading from v3? Use the `reshaped-v3-v4` skill instead of this one.
 - `{open && <Modal>}` → `<Modal active={open} onClose={…}>`.
 - Forgetting to pass the trigger `attributes` in `Popover` / `DropdownMenu` / `Tooltip` – the overlay never opens.
 - `<Button icon={<PlusIcon />}>` works, but `icon={PlusIcon}` is the convention; an icon-only button without `aria-label` is inaccessible.
-- v3 APIs that no longer exist: `variant="faded"` on `Button`, `variant="outline"` on `Badge`, `elevated` on `Button` and `Card` (now `raised`), `Text` variants `title-*` and `body-3`, `Select.Custom`, `onFocus` / `onBlur` on inputs (pass them through `inputAttributes`), the `inverted` toast color, `toastOptions` on `Reshaped`, and the `ActionBar`, `Stepper`, `Timeline`, `Scrim` and `Hotkey` components.
