@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { createPortal } from "react-dom";
 
 import { defaultContextData, positions } from "./Toast.constants";
 import ToastContext from "./Toast.context";
@@ -76,25 +77,35 @@ const toastReducer: T.Reducer = (state, action) => {
 };
 
 const ToastProvider: React.FC<T.ProviderProps> = (props) => {
-	const { children } = props;
-	const toast = useToast();
+	const { children, containerRef } = props;
+	const parentToast = useToast();
 	const id = React.useId();
 	const [data, dispatch] = React.useReducer(toastReducer, defaultContextData.queues);
+	const isRoot = !parentToast.id;
 
-	const add = React.useCallback<T.Context["add"]>((toastProps) => {
-		const id = generateId();
+	const add = React.useCallback<T.Context["add"]>(
+		(toastProps) => {
+			// Global toasts bubble up until they reach the root provider
+			if (toastProps.global && !isRoot) return parentToast.show(toastProps);
 
-		dispatch({ type: "add", payload: { toastProps, id } });
-		return id;
-	}, []);
+			const id = generateId();
+			dispatch({ type: "add", payload: { toastProps, id } });
+			return id;
+		},
+		[isRoot, parentToast]
+	);
 
 	const show = React.useCallback((id: string) => {
 		dispatch({ type: "show", payload: { id } });
 	}, []);
 
-	const hide = React.useCallback((id: string) => {
-		dispatch({ type: "hide", payload: { id } });
-	}, []);
+	const hide = React.useCallback<T.Context["hide"]>(
+		(id, options) => {
+			if (options?.global && !isRoot) return parentToast.hide(id, options);
+			dispatch({ type: "hide", payload: { id } });
+		},
+		[isRoot, parentToast]
+	);
 
 	const remove = React.useCallback((id: string) => {
 		dispatch({ type: "remove", payload: { id } });
@@ -113,12 +124,16 @@ const ToastProvider: React.FC<T.ProviderProps> = (props) => {
 		[data, show, hide, add, remove, id]
 	);
 
+	// Regions rendered inside a custom container are positioned relative to it, even for the root provider
+	const regions = positions.map((position) => (
+		<ToastRegion position={position} key={position} nested={!isRoot || !!containerRef} />
+	));
+	const portalTarget = containerRef?.current;
+
 	return (
 		<ToastContext.Provider value={value}>
 			{children}
-			{positions.map((position) => (
-				<ToastRegion position={position} key={position} nested={!!toast.id} />
-			))}
+			{portalTarget ? createPortal(regions, portalTarget) : regions}
 		</ToastContext.Provider>
 	);
 };

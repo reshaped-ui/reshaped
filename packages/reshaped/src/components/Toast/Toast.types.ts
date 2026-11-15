@@ -39,6 +39,10 @@ export type Props = {
 export type ProviderProps = {
 	/** Node for inserting children */
 	children?: React.ReactNode;
+	/** Container to render the toast regions in using a portal, must be CSS-positioned.
+	 * The ref is read when the provider renders, so the element should be mounted before toasts are shown
+	 */
+	containerRef?: React.RefObject<HTMLElement | null>;
 };
 
 export type RegionProps = {
@@ -62,14 +66,22 @@ export type ShowOptions = {
 	 * @default "short"
 	 */
 	width?: Width;
+	/** Render the toast in the root provider, ignoring any nested providers and their containerRef.
+	 * Pass the same flag to hide() to hide it manually
+	 */
+	global?: boolean;
 };
 export type ShowProps = Props & ShowOptions;
+export type HideOptions = {
+	/** Hide a toast that was shown with the global option */
+	global?: boolean;
+};
 
 export type Context = {
 	queues: Record<RegionProps["position"], Array<ContainerProps>>;
 	add: (toast: ShowProps) => string;
 	show: (id: string) => void;
-	hide: (id: string) => void;
+	hide: (id: string, options?: HideOptions) => void;
 	remove: (id: string) => void;
 	id: string;
 };
