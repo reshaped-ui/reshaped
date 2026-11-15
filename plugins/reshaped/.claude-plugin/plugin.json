@@ -1,0 +1,19 @@
+{
+	"name": "reshaped",
+	"displayName": "Reshaped",
+	"description": "Guidelines for building UI with the Reshaped design system, v3 to v4 migration and the Reshaped MCP server",
+	"author": {
+		"name": "Reshaped",
+		"url": "https://reshaped.so"
+	},
+	"homepage": "https://reshaped.so",
+	"repository": "https://github.com/reshaped-ui/reshaped",
+	"license": "MIT",
+	"keywords": ["design-system", "react", "components", "ui"],
+	"mcpServers": {
+		"reshaped": {
+			"type": "http",
+			"url": "https://main--5ed400f96e43cc00226d4df6.chromatic.com/mcp"
+		}
+	}
+}

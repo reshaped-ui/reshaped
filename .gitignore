@@ -5,6 +5,7 @@
 .chromatic
 node_modules
 dist
+packages/reshaped/skills
 
 /app
 /components

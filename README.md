@@ -25,6 +25,19 @@ To get started, check out the [Reshaped documentation](https://reshaped.so/docs/
 - `@reshaped/headless` - headless React components and utilities for building your own design system / product with custom styles
 - `@reshaped/utilities` - framework-agnostic UI utilities built with vanilla TypeScript
 
+## Coding agents
+
+Reshaped provides agent skills with guidelines for building UI with Reshaped and for migrating from v3 to v4, together with the Reshaped MCP server.
+
+In Claude Code, install them as a plugin:
+
+```
+/plugin marketplace add reshaped-ui/reshaped
+/plugin install reshaped@reshaped
+```
+
+For other agents supporting skills, like Codex or Cursor, copy the folders from [`plugins/reshaped/skills`](plugins/reshaped/skills) to the skills folder of your agent. They're also included in the `reshaped` npm package at `node_modules/reshaped/skills`.
+
 ## Contributing
 
 Read our [contribution guide](CONTRIBUTING.md) to learn about our principles, development process and testing.
