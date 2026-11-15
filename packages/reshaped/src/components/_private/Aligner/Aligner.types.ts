@@ -8,7 +8,7 @@ export type Props = {
 	/** Node for inserting children components */
 	children: React.ReactElement;
 	/** Side of the parent element to align the component with, applies negative margin on the chosen sides
-	 * @default "all"
+	 * @default "all", "inline" for MenuItem.Aligner
 	 */
 	side?: Side | Side[];
 	/** Additional classname for the root element */

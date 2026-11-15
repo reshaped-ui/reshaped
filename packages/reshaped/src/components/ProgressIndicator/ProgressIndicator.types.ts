@@ -11,7 +11,7 @@ export type Props = {
 	 * @default 0
 	 */
 	activeIndex?: number;
-	/** Component size */
+	/** Has no effect, the component is always rendered in the same size */
 	size?: "small" | "medium";
 	/** Component color scheme.
 	 * Use "media" for white dots when rendering on top of images or dark backgrounds

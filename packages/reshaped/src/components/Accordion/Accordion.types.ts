@@ -6,15 +6,19 @@ import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
 
 export type BaseProps = {
-	/** Expand / collapse icon size in units */
+	/** Expand / collapse icon size, literal css value or unit token multiplier
+	 * @default 4
+	 */
 	iconSize?: IconProps["size"];
-	/** Position of the expand / collapse icon */
+	/** Position of the expand / collapse icon
+	 * @default "end"
+	 */
 	iconPosition?: "start" | "end";
-	/** Gap between the trigger and the content */
+	/** Gap between the trigger and the content, base unit token number multiplier */
 	gap?: G.Responsive<number>;
 	/** Node for inserting the trigger and the content */
 	children?: React.ReactNode;
-	/** Callback when the accordion is expanded or collapsed */
+	/** Callback when the trigger is clicked, receives the next active state */
 	onToggle?: (active: boolean) => void;
 	/** Additional classname for the root element */
 	className?: ClassName;
@@ -23,7 +27,9 @@ export type BaseProps = {
 };
 
 export type TriggerProps = {
-	/** Node or render function for inserting the trigger */
+	/** Node or render function for inserting the trigger.
+	 * The function replaces the default trigger and its icon, pass the attributes it receives to your own interactive element
+	 */
 	children?:
 		| ((
 				attributes: {
@@ -38,20 +44,24 @@ export type TriggerProps = {
 };
 
 export type ContentProps = {
-	/** Node for inserting the expandable content */
+	/** Node for inserting the expandable content, stays mounted while collapsed */
 	children?: React.ReactNode;
 };
 
 export type ControlledProps = BaseProps & {
 	/** Control whether the accordion is expanded or collapsed, enables controlled mode */
 	active: boolean;
-	/** Control whether the accordion is expanded or collapsed by default, enables uncontrolled mode */
+	/** Control whether the accordion is expanded or collapsed by default, enables uncontrolled mode
+	 * @default false
+	 */
 	defaultActive?: never;
 };
 export type UncontrolledProps = BaseProps & {
 	/** Control whether the accordion is expanded or collapsed, enables controlled mode */
 	active?: never;
-	/** Control whether the accordion is expanded or collapsed by default, enables uncontrolled mode */
+	/** Control whether the accordion is expanded or collapsed by default, enables uncontrolled mode
+	 * @default false
+	 */
 	defaultActive?: boolean;
 };
 export type Props = ControlledProps | UncontrolledProps;

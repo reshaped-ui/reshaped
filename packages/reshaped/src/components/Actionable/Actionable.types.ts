@@ -17,25 +17,35 @@ export type RenderAttributes = Omit<Attributes, "ref"> & {
 export type Props = {
 	/** Node for inserting the content */
 	children?: React.ReactNode;
-	/** Render a custom root element, useful for integrating with routers */
+	/** Render a custom root element, useful for integrating with routers.
+	 * Receives the resolved root attributes including ref, className, event handlers and children, which should all be passed to the rendered element
+	 */
 	render?: (attributes: RenderAttributes) => React.ReactNode;
-	/** Callback when clicked, renders it as a button tag if href is not provided */
+	/** Callback when clicked, renders it as a button tag if href is not provided. Not called when disabled.
+	 * When href, onClick and type are all omitted, it renders as a non-interactive span unless handlers or ref are passed with attributes
+	 */
 	onClick?: (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
-	/** URL, renders it as an anchor tag */
+	/** URL, renders it as an anchor tag even when onClick, type or as are passed */
 	href?: string;
-	/** Type attribute, renders it as a button tag */
+	/** Type attribute, renders it as a button tag.
+	 * Buttons are rendered with the button type by default, so pass submit to make it submit a parent form
+	 */
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
-	/** Disable from user interaction */
+	/** Disable from user interaction. Prevents onClick, sets aria-disabled and also works for links by not rendering their href */
 	disabled?: boolean;
-	/** Prevent the event from bubbling up to the parent */
+	/** Prevent the click event from bubbling up to the parent, can be used when rendered inside another clickable element */
 	stopPropagation?: boolean;
-	/** Render as a different element */
+	/** Render as a different element, ignored when href is passed.
+	 * When used with onClick, the element gets the button role, tabIndex and keyboard handling, which allows rendering it inside another button
+	 */
 	as?: keyof React.JSX.IntrinsicElements;
 	/** Additional classname for the root element */
 	className?: ClassName;
-	/** Additional attributes for the root element */
+	/** Additional attributes for the root element.
+	 * Passing href here renders it as an anchor tag, while onClick, onFocus, onBlur or ref render it as a button
+	 */
 	attributes?: Attributes;
-	/** Enable a minimum required touch hitbox */
+	/** Expand the clickable area to at least 24x24px without affecting the layout, for elements smaller than that */
 	touchHitbox?: boolean;
 	/** Take up the full width of its parent */
 	fullWidth?: boolean;
@@ -43,7 +53,7 @@ export type Props = {
 	insetFocus?: boolean;
 	/** Don't show a focus ring on focus, can be used when it is within a container with a focus ring */
 	disableFocusRing?: boolean;
-	/** Apply the focus ring to the child and rely on its border radius */
+	/** Apply the focus ring to the direct children instead of the root element, so it follows their border radius */
 	borderRadius?: "inherit";
 };
 
