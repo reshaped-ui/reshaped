@@ -1,0 +1,15 @@
+{
+	"name": "reshaped",
+	"description": "Agent plugins for building products with the Reshaped design system",
+	"owner": {
+		"name": "Reshaped",
+		"url": "https://reshaped.so"
+	},
+	"plugins": [
+		{
+			"name": "reshaped",
+			"source": "./plugins/reshaped",
+			"description": "Guidelines for building UI with Reshaped, v3 to v4 migration and the Reshaped MCP server"
+		}
+	]
+}
