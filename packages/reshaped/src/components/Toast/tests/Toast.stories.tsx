@@ -545,29 +545,51 @@ export const edgeCases: StoryObj = {
 
 const ContainerRefDemo = () => {
 	const toast = useToast();
+	const globalIdRef = React.useRef<string>(null);
 
 	return (
-		<Button
-			onClick={() => {
-				toast.show({
-					text: "Content",
-					position: "top-start",
-				});
-			}}
-		>
-			Show toast
-		</Button>
+		<View direction="row" gap={2}>
+			<Button
+				onClick={() => {
+					toast.show({
+						text: "Content",
+						position: "top-start",
+					});
+				}}
+			>
+				Show toast
+			</Button>
+			<Button
+				onClick={() => {
+					globalIdRef.current = toast.show({
+						text: "Global content",
+						position: "top-start",
+						timeout: 0,
+						global: true,
+					});
+				}}
+			>
+				Show global toast
+			</Button>
+			<Button
+				onClick={() => {
+					if (globalIdRef.current) toast.hide(globalIdRef.current, { global: true });
+				}}
+			>
+				Hide global toast
+			</Button>
+		</View>
 	);
 };
 
 export const containerRef: StoryObj = {
-	name: "containerRef",
+	name: "containerRef, global",
 	render: () => {
 		const ref = React.useRef<HTMLDivElement>(null);
 
 		return (
 			<Example>
-				<Example.Item title="containerRef, regions portalled into target container">
+				<Example.Item title="containerRef, regions portalled into target container, global toasts render in the root provider">
 					<ToastProvider containerRef={ref}>
 						<View gap={4} align="start">
 							<ContainerRefDemo />
@@ -590,86 +612,19 @@ export const containerRef: StoryObj = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
-		const button = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(button);
-
 		const container = canvas.getByTestId("test-container-ref-id");
-		const toast = within(container).getByText("Content");
 
-		expect(toast).toBeInTheDocument();
-	},
-};
-
-const GlobalDemo = () => {
-	const toast = useToast();
-	const idRef = React.useRef<string>(null);
-
-	return (
-		<View direction="row" gap={2}>
-			<Button
-				onClick={() => {
-					idRef.current = toast.show({
-						text: "Global content",
-						position: "top-start",
-						timeout: 0,
-						global: true,
-					});
-				}}
-			>
-				Show toast
-			</Button>
-			<Button
-				onClick={() => {
-					if (idRef.current) toast.hide(idRef.current, { global: true });
-				}}
-			>
-				Hide toast
-			</Button>
-		</View>
-	);
-};
-
-export const global: StoryObj = {
-	name: "global",
-	render: () => {
-		const ref = React.useRef<HTMLDivElement>(null);
-
-		return (
-			<Example>
-				<Example.Item title="global, renders in the root provider ignoring containerRef">
-					<ToastProvider containerRef={ref}>
-						<View gap={4} align="start">
-							<GlobalDemo />
-							<View
-								attributes={{ ref, "data-testid": "test-global-container-id" }}
-								position="relative"
-								backgroundColor="neutral-faded"
-								borderRadius="medium"
-								width="100%"
-								minHeight={50}
-							/>
-						</View>
-					</ToastProvider>
-				</Example.Item>
-			</Example>
-		);
-	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const button = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(button);
-
-		const toast = canvas.getByText("Global content");
-		const container = canvas.getByTestId("test-global-container-id");
+		// Local toast renders inside the containerRef target
+		await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
+		expect(within(container).getByText("Content")).toBeInTheDocument();
 
 		// Global toast renders outside the containerRef target
-		expect(toast).toBeInTheDocument();
-		expect(container).not.toContainElement(toast);
+		await userEvent.click(canvas.getByRole("button", { name: "Show global toast" }));
+		const globalToast = canvas.getByText("Global content");
+		expect(globalToast).toBeInTheDocument();
+		expect(container).not.toContainElement(globalToast);
 
-		await userEvent.click(canvas.getAllByRole("button")[1]);
-
+		await userEvent.click(canvas.getByRole("button", { name: "Hide global toast" }));
 		await waitFor(() => {
 			expect(canvas.queryByText("Global content")).not.toBeInTheDocument();
 		});
