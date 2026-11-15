@@ -6,9 +6,13 @@ import type * as G from "@/types/global";
 import type { Attributes } from "@/types/global";
 
 export type Props = Pick<ViewProps, "align" | "justify" | "height" | "maxHeight"> & {
-	/** Component inline padding */
+	/** Component inline padding, base unit token number multiplier
+	 * @default 4
+	 */
 	padding?: ViewProps["padding"];
-	/** Component width, literal css value or unit token multiplier */
+	/** Component width, literal css value or unit token multiplier.
+	 * Container is centered horizontally and doesn't grow wider than its parent
+	 */
 	width?: G.Responsive<string | number>;
 	/** Node for inserting children */
 	children?: React.ReactNode;

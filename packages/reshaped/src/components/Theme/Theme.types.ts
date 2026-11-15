@@ -18,11 +18,18 @@ export type ThemeContextData = {
 };
 
 export type Props = {
-	/** Name of the theme to use, enables controlled mode */
+	/** Name of the theme to use or an array of names to combine.
+	 * Enables controlled mode, where `setTheme` from the useTheme hook has no effect
+	 */
 	name?: G.Theme;
-	/** Default name of the theme to use, enables uncontrolled mode */
+	/** Default name of the theme to use, enables uncontrolled mode
+	 * where it can be changed with `setTheme` from the useTheme hook.
+	 * Theme of the parent provider is used when both `name` and `defaultName` are not passed
+	 */
 	defaultName?: G.Theme;
-	/** Color mode to use */
+	/** Color mode to use, "inverted" applies the mode opposite to the one used by the parent.
+	 * Color mode of the parent is used when not passed
+	 */
 	colorMode?: G.ColorMode | "inverted";
 	/** Additional classname for the root element */
 	className?: ClassName;

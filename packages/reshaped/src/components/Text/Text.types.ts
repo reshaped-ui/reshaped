@@ -20,13 +20,15 @@ export type Variant =
 	| "caption-2";
 
 export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = void> = {
-	/** Text render variant */
+	/** Text render variant, applies the font size, line height, weight and family of the typography token.
+	 * Font size, weight and family are inherited from the parent when not passed
+	 */
 	variant?: G.Responsive<Variant>;
-	/** Text font weight */
+	/** Text font weight, overrides the font weight of the `variant` */
 	weight?: G.Responsive<"regular" | "medium" | "semibold" | "bold" | "extrabold">;
 	/** Render monospace font */
 	monospace?: boolean;
-	/** Text color, based on the color tokens */
+	/** Text color, based on the color tokens. Color is inherited from the parent when not passed */
 	color?:
 		| "neutral"
 		| "neutral-faded"
@@ -51,7 +53,9 @@ export type Props<TagName extends keyof React.JSX.IntrinsicElements | void = voi
 	className?: ClassName;
 	/** Additional attributes for the root element */
 	attributes?: Attributes<TagName>;
-	/** Render as a different html tag */
+	/** Render as a different html tag. When not passed, "featured-1" to "featured-6" variants render as h1 to h6
+	 * and the rest of the variants render as div
+	 */
 	as?: TagName extends keyof React.JSX.IntrinsicElements
 		? TagName
 		: keyof React.JSX.IntrinsicElements;

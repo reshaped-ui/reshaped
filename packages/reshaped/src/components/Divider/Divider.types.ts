@@ -7,15 +7,17 @@ import type { Attributes } from "@/types/global";
 export type Props = {
 	/** Change component to take no space, useful for using it as a border in components like Tabs */
 	blank?: boolean;
-	/** Change component to render vertically */
+	/** Change component to render vertically, `children` are not displayed for the vertical dividers */
 	vertical?: G.Responsive<boolean>;
-	/** Inset the divider from the container bounds */
+	/** Inset the divider from the container bounds on both of its ends, base unit token number multiplier */
 	inset?: G.Responsive<number>;
 	/** Color of the divider
 	 * @default "neutral-faded"
 	 */
 	color?: "neutral-faded" | "neutral";
-	/** Position for rendering children */
+	/** Position for rendering children
+	 * @default "center"
+	 */
 	contentPosition?: "start" | "center" | "end";
 	/** Node for inserting text labels or custom components as a part of divider */
 	children?: React.ReactNode;
