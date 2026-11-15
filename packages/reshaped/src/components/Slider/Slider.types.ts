@@ -3,47 +3,47 @@ import type { ClassName } from "@reshaped/utilities";
 import type { Attributes } from "@/types/global";
 
 export type SingleChangeArgs = {
-	/** Value of the slider, enables controlled mode */
+	/** Selected value of the slider */
 	value: number;
-	/** Minimum value of the slider */
+	/** Selected range start value, only passed for range sliders */
 	minValue?: never;
-	/** Maximum value of the slider */
+	/** Selected range end value, only passed for range sliders */
 	maxValue?: never;
 	/** Name of the slider input element */
 	name: string;
-	/** Name of the slider min value input element, overrides the name */
+	/** Name of the range start input element, only passed for range sliders */
 	minName?: never;
-	/** Name of the slider max value input element, overrides the name */
+	/** Name of the range end input element, only passed for range sliders */
 	maxName?: never;
 };
 
 export type RangeChangeArgs = {
-	/** Value of the slider, enables controlled mode */
+	/** Selected value of the slider, only passed for single value sliders */
 	value?: never;
-	/** Minimum value of the slider */
+	/** Selected range start value */
 	minValue: number;
-	/** Maximum value of the slider */
+	/** Selected range end value */
 	maxValue: number;
-	/** Name of the slider input element, overrides the name */
+	/** Name of the slider input elements */
 	name: string;
-	/** Name of the slider min value input element, overrides the name */
+	/** Name of the range start input element */
 	minName?: never;
-	/** Name of the slider max value input element, overrides the name */
+	/** Name of the range end input element */
 	maxName?: never;
 };
 
 export type NameRangeChangeArgs = {
-	/** Value of the slider, enables controlled mode */
+	/** Selected value of the slider, only passed for single value sliders */
 	value?: never;
-	/** Minimum value of the slider */
+	/** Selected range start value */
 	minValue: number;
-	/** Maximum value of the slider */
+	/** Selected range end value */
 	maxValue: number;
-	/** Name of the slider input element */
+	/** Name of the slider input elements */
 	name?: never;
-	/** Name of the slider min value input element, overrides the name */
+	/** Name of the range start input element */
 	minName: string;
-	/** Name of the slider max value input element, overrides the name */
+	/** Name of the range end input element */
 	maxName: string;
 };
 
@@ -52,43 +52,49 @@ type SingleSelectionProps = {
 	range?: false;
 	/** Name of the slider input element */
 	name: string;
-	/** Name of the slider min value input element, overrides the name */
+	/** Name of the range start input element, only supported for range sliders */
 	minName?: never;
-	/** Name of the slider max value input element, overrides the name */
+	/** Name of the range end input element, only supported for range sliders */
 	maxName?: never;
-	/** Callback when the slider value changes */
+	/** Callback when the slider value changes, called continuously while dragging the thumb */
 	onChange?: (args: SingleChangeArgs) => void;
-	/** Callback when the user commits the change by releasing the thumb */
+	/** Callback when the user commits the change by releasing the thumb or changing the value with the keyboard.
+	 * Can be used instead of onChange when only the final value is needed
+	 */
 	onChangeCommit?: (args: SingleChangeArgs) => void;
 };
 
 type RangeSelectionProps = {
-	/** Enables range slider with two thumbs */
+	/** Enables range slider with two thumbs. Uses minValue, maxValue, defaultMinValue and defaultMaxValue instead of value and defaultValue */
 	range: true;
-	/** Name of the slider input element */
+	/** Name of the slider input elements, applied to both range inputs. Use minName and maxName instead to submit them with different names */
 	name: string;
-	/** Name of the slider min value input element, overrides the name */
+	/** Name of the range start input element, used together with maxName instead of name */
 	minName?: never;
-	/** Name of the slider max value input element, overrides the name */
+	/** Name of the range end input element, used together with minName instead of name */
 	maxName?: never;
-	/** Callback when the slider value changes */
+	/** Callback when the slider value changes, called continuously while dragging the thumbs */
 	onChange?: (args: RangeChangeArgs) => void;
-	/** Callback when the user commits the change by releasing the thumbs */
+	/** Callback when the user commits the change by releasing the thumbs or changing the value with the keyboard.
+	 * Can be used instead of onChange when only the final value is needed
+	 */
 	onChangeCommit?: (args: RangeChangeArgs) => void;
 };
 
 type NameRangeSelectionProps = {
-	/** Enables range slider with two thumbs */
+	/** Enables range slider with two thumbs. Uses minValue, maxValue, defaultMinValue and defaultMaxValue instead of value and defaultValue */
 	range: true;
-	/** Name of the slider input element */
+	/** Name of the slider input elements, can't be combined with minName and maxName */
 	name?: never;
-	/** Name of the slider min value input element, overrides the name */
+	/** Name of the range start input element, used together with maxName instead of name */
 	minName: string;
-	/** Name of the slider max value input element, overrides the name */
+	/** Name of the range end input element, used together with minName instead of name */
 	maxName: string;
-	/** Callback when the slider value changes */
+	/** Callback when the slider value changes, called continuously while dragging the thumbs */
 	onChange?: (args: RangeChangeArgs) => void;
-	/** Callback when the user commits the change by releasing the thumbs */
+	/** Callback when the user commits the change by releasing the thumbs or changing the value with the keyboard.
+	 * Can be used instead of onChange when only the final value is needed
+	 */
 	onChangeCommit?: (args: RangeChangeArgs) => void;
 };
 
@@ -100,50 +106,66 @@ type ControlledSingleProps = {
 };
 
 type ControlledRangeProps = {
-	/** Minimum value of the slider */
+	/** Selected range start value, enables controlled mode when passed together with maxValue */
 	minValue: number;
-	/** Maximum value of the slider */
+	/** Selected range end value, enables controlled mode when passed together with minValue */
 	maxValue: number;
-	/** Default minimum value of the slider, enables uncontrolled mode */
+	/** Default selected range start value, enables uncontrolled mode */
 	defaultMinValue?: never;
-	/** Default maximum value of the slider, enables uncontrolled mode */
+	/** Default selected range end value, enables uncontrolled mode */
 	defaultMaxValue?: never;
 };
 
 type UncontrolledSingleProps = {
 	/** Value of the slider, enables controlled mode */
 	value?: never;
-	/** Default value of the slider, enables uncontrolled mode */
+	/** Default value of the slider, enables uncontrolled mode
+	 * @default min
+	 */
 	defaultValue?: number;
 };
 
 type UncontrolledRangeProps = {
-	/** Minimum value of the slider */
+	/** Selected range start value, enables controlled mode when passed together with maxValue */
 	minValue?: never;
-	/** Maximum value of the slider */
+	/** Selected range end value, enables controlled mode when passed together with minValue */
 	maxValue?: never;
-	/** Default minimum value of the slider, enables uncontrolled mode */
+	/** Default selected range start value, enables uncontrolled mode
+	 * @default min
+	 */
 	defaultMinValue?: number;
-	/** Default maximum value of the slider, enables uncontrolled mode */
+	/** Default selected range end value, enables uncontrolled mode
+	 * @default max
+	 */
 	defaultMaxValue?: number;
 };
 
 type BaseProps = {
-	/** Step of the slider */
+	/** Step of the slider. Selected values, including the ones passed to the component, are rounded to the closest multiple of the step
+	 * @default 1
+	 */
 	step?: number;
-	/** Disable the slider user interaction */
+	/** Disable the slider user interaction, passing `false` doesn't enable it inside a disabled FormControl */
 	disabled?: boolean;
-	/** Minimum value of the slider */
+	/** Minimum value of the slider
+	 * @default 0
+	 */
 	min?: number;
-	/** Maximum value of the slider */
+	/** Maximum value of the slider
+	 * @default 100
+	 */
 	max?: number;
-	/** Orientation of the slider */
+	/** Orientation of the slider. Vertical slider takes the full height of its parent, so the parent should have its height defined
+	 * @default "horizontal"
+	 */
 	orientation?: "vertical" | "horizontal";
-	/** Render a custom value in the thumb tooltip */
+	/** Render a custom value in the thumb tooltip, which is displayed on thumb hover, focus and drag. Pass `false` to hide the tooltip.
+	 * The tooltip is only visual and is hidden from screen readers
+	 */
 	renderValue?: ((args: { value: number }) => string) | false;
 	/** Additional classname for the root element */
 	className?: ClassName;
-	/** Additional attributes for the root element */
+	/** Additional attributes for the root element. They are not applied to the inputs, use the component inside FormControl to label them */
 	attributes?: Attributes<"div">;
 };
 

@@ -1,52 +1,70 @@
 export type SelectionMode = "date" | "month";
 
 export type BaseProps = {
-	/** Default month to display. Used in uncontrolled mode to provide the initial month and then updated by the component internally
-	 * @default Date.now()
+	/** Default month to display. Used in uncontrolled mode to provide the initial month and then updated by the component internally.
+	 * It doesn't follow the selected value, so pass it to display the month of a preselected date
+	 * @default new Date()
 	 */
 	defaultMonth?: Date;
 	/** Month to display. Used in controlled mode and should be updated using the `onMonthChange` callback */
 	month?: Date;
-	/** Callback when the month changes */
+	/** Callback when the displayed month changes with the navigation controls, month selection or keyboard navigation.
+	 * `date` is a date within the first displayed month
+	 */
 	onMonthChange?: (args: { date: Date }) => void;
-	/** Minimum date that can be selected */
+	/** Minimum date that can be selected, also hides the navigation to the earlier months.
+	 * Dates are compared with their time included, so pass the start of the day to keep that day selectable
+	 */
 	min?: Date;
-	/** Maximum date that can be selected */
+	/** Maximum date that can be selected, also hides the navigation to the later months */
 	max?: Date;
-	/** Number of months to render at the same time
+	/** Number of months to render at the same time, displayed next to each other
 	 * @default 1
 	 */
 	monthsToRender?: number;
-	/** First day of the week
+	/** First day of the week, from 0 for Sunday to 6 for Saturday
 	 * @default 1, Monday
 	 */
 	firstWeekDay?: number;
-	/** Dates that are selected */
+	/** Additional dates displayed as selected, independent from the component value. Can be used for selecting multiple individual dates */
 	selectedDates?: Date[];
-	/** Dates that are disabled */
+	/** Dates that are disabled, matched by day with their time ignored */
 	disabledDates?: Date[];
-	/** Render a custom weekday label, can be used for localization */
+	/** Render a custom weekday label, can be used for localization. Only the first 2 characters of the label are displayed.
+	 * `date` is a sample date of that weekday, `weekDay` starts from firstWeekDay and keeps counting after 6
+	 */
 	renderWeekDay?: (args: { weekDay: number; date: Date }) => string;
-	/** Render a custom month label, can be used for localization */
+	/** Render a custom label for the month title displayed above the dates, can be used for localization */
 	renderSelectedMonthLabel?: (args: { date: Date }) => string;
-	/** Render a custom month label, can be used for localization */
+	/** Render a custom label for the months in the month selection view, can be used for localization. `month` is a zero-based month index */
 	renderMonthLabel?: (args: { month: number; date: Date }) => string;
-	/** Render a custom date value */
+	/** Render a custom date value instead of the day number */
 	renderDateValue?: (args: { date: Date }) => React.ReactNode;
-	/** Render a custom date slot content under the date number */
+	/** Render a custom date slot content under the date number. `selected` is false for the dates in the middle of the selected range */
 	renderDateSlot?: (args: { date: Date; selected: boolean }) => React.ReactNode;
-	/** Aria label for the previous month button */
+	/** Aria label for the previous month button
+	 * @default "Previous month"
+	 */
 	previousMonthAriaLabel?: string;
+	/** Aria label for the next month button
+	 * @default "Next month"
+	 */
 	nextMonthAriaLabel?: string;
-	/** Aria label for the previous year button */
+	/** Aria label for the previous year button
+	 * @default "Previous year"
+	 */
 	previousYearAriaLabel?: string;
-	/** Aria label for the next year button */
+	/** Aria label for the next year button
+	 * @default "Next year"
+	 */
 	nextYearAriaLabel?: string;
-	/** Aria label for the month selection button */
+	/** Visually hidden text added after the month title in the month selection button
+	 * @default "Select a month"
+	 */
 	monthSelectionAriaLabel?: string;
-	/** Dynamic aria label applied to each date cell based on the arguments */
+	/** Dynamic aria label applied to each date cell based on the arguments. Defaults to the en-US weekday, month and day of the date */
 	renderDateAriaLabel?: (args: { date: Date }) => string;
-	/** Dynamic aria label applied to each month element based on the arguments */
+	/** Dynamic aria label applied to each month element based on the arguments. `month` is a zero-based month index. Defaults to the month label */
 	renderMonthAriaLabel?: (args: { month: number }) => string;
 };
 
@@ -56,41 +74,48 @@ export type RangeValue = { start: Date | null; end: Date | null };
 export type ControlledSingleProps = {
 	/** Disable range selection */
 	range?: false;
-	/** Current selected date value, enables controlled mode */
+	/** Current selected date value, enables controlled mode. Pass `null` when no date is selected */
 	value: SingleValue | null;
 	/** Default selected date value, enables uncontrolled mode */
 	defaultValue?: never;
-	/** Callback when date selection changes */
+	/** Callback when a date is selected, `value` is set to the start of that day in the local timezone.
+	 * It's also called when clicking the date that is already selected
+	 */
 	onChange?: (args: { value: SingleValue }) => void;
 };
 
 export type UncontrolledSingleProps = {
 	/** Disable range selection */
 	range?: false;
+	/** Current selected date value, enables controlled mode */
 	value?: never;
 	/** Default selected date value, enables uncontrolled mode */
 	defaultValue?: SingleValue;
-	/** Callback when date selection changes */
+	/** Callback when a date is selected, `value` is set to the start of that day in the local timezone.
+	 * It's also called when clicking the date that is already selected
+	 */
 	onChange?: (args: { value: SingleValue }) => void;
 };
 
 export type ControlledRangeProps = {
 	/** Enable range selection */
 	range: true;
-	/** Current selected range value, enables controlled mode */
+	/** Current selected range value, enables controlled mode. Pass `null` as `start` and `end` when they are not selected */
 	value: RangeValue;
+	/** Default selected range value, enables uncontrolled mode */
 	defaultValue?: never;
-	/** Callback when range selection changes */
+	/** Callback when range selection changes. Called on every date click, with `end` set to `null` until the range end is selected */
 	onChange?: (args: { value: RangeValue }) => void;
 };
 
 export type UncontrolledRangeProps = {
 	/** Enable range selection */
 	range: true;
+	/** Current selected range value, enables controlled mode */
 	value?: never;
 	/** Default selected range value, enables uncontrolled mode */
 	defaultValue?: RangeValue;
-	/** Callback when range selection changes */
+	/** Callback when range selection changes. Called on every date click, with `end` set to `null` until the range end is selected */
 	onChange?: (args: { value: RangeValue }) => void;
 };
 
