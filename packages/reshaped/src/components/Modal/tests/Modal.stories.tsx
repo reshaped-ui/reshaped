@@ -608,8 +608,35 @@ export const trapFocusEdgeCases = {
 	},
 };
 
-export const testSwipeCancel: StoryObj<{ handleClose: ReturnType<typeof fn> }> = {
-	name: "test: interrupted swipe gesture",
+/**
+ * Swipe gesture is only enabled on touch devices, where it's handled by the native scrolling.
+ * Scrolling can't be triggered with touch events in tests, so they stub the touch support
+ * and scroll the modal container the same way the browser does while it's swiped
+ */
+const stubTouchSupport = () => {
+	Object.defineProperty(navigator, "maxTouchPoints", { configurable: true, value: 1 });
+
+	return () => {
+		// @ts-expect-error Removes the stubbed value from the navigator itself
+		delete navigator.maxTouchPoints;
+	};
+};
+
+const createTouchEvent = (type: string, target: HTMLElement) => {
+	const touch = new Touch({ identifier: 1, target, clientX: 100, clientY: 100 });
+	const touches = type === "touchstart" ? [touch] : [];
+
+	return new TouchEvent(type, { bubbles: true, touches, changedTouches: [touch] });
+};
+
+const getOpenOffset = (scroller: HTMLElement, dialog: HTMLElement) => {
+	return Math.round(
+		dialog.getBoundingClientRect().bottom - scroller.getBoundingClientRect().bottom
+	);
+};
+
+export const testSwipe: StoryObj<{ handleClose: ReturnType<typeof fn> }> = {
+	name: "test: swipe gesture",
 	args: {
 		handleClose: fn(),
 	},
@@ -634,44 +661,182 @@ export const testSwipeCancel: StoryObj<{ handleClose: ReturnType<typeof fn> }> =
 	},
 	play: async ({ canvasElement, args }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getByRole("button", { name: "Open modal" });
+		const restoreTouchSupport = stubTouchSupport();
 
-		await userEvent.click(canvas.getByRole("button", { name: "Open modal" }));
+		try {
+			await userEvent.click(trigger);
 
-		const dialog = await canvas.findByRole("dialog");
-		const createEvent = (type: string, y: number) => {
-			const touch = new Touch({ identifier: 1, target: dialog, clientX: 100, clientY: y });
-			const touches = type === "touchmove" || type === "touchstart" ? [touch] : [];
+			let dialog = await canvas.findByRole("dialog");
+			let scroller = dialog.parentElement!.parentElement!;
 
-			return new TouchEvent(type, {
-				bubbles: true,
-				touches,
-				targetTouches: touches,
-				changedTouches: [touch],
+			// Modal is rendered after a spacer of the screen size and is scrolled into the view
+			expect(getComputedStyle(scroller).overflowY).toBe("auto");
+			await waitFor(() => {
+				expect(scroller.scrollTop).toBeGreaterThan(0);
+				expect(getOpenOffset(scroller, dialog)).toBe(0);
 			});
-		};
 
-		// Wait for the open animation, so the gesture starts from the open position
+			// Scrolling without a touch is not a part of the gesture, e.g. when it's triggered with a keyboard
+			scroller.scrollTop = 0;
+
+			await waitFor(() => {
+				expect(getOpenOffset(scroller, dialog)).toBe(0);
+			});
+			await sleep(300);
+			expect(args.handleClose).not.toHaveBeenCalled();
+
+			// Modal is not closed while it's still held with a finger
+			dialog.dispatchEvent(createTouchEvent("touchstart", dialog));
+			scroller.scrollTop = 0;
+			await sleep(300);
+
+			expect(scroller.scrollTop).toBe(0);
+			expect(args.handleClose).not.toHaveBeenCalled();
+
+			dialog.dispatchEvent(createTouchEvent("touchend", dialog));
+
+			await waitFor(() => {
+				expect(args.handleClose).toHaveBeenCalledTimes(1);
+				expect(args.handleClose).toHaveBeenCalledWith({ reason: "drag" });
+			});
+
+			// Modal is already out of the view, so it's removed without the close animation
+			await waitFor(
+				() => {
+					expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
+				},
+				{ timeout: 300 }
+			);
+
+			// Modal released before it's swiped away returns back
+			await userEvent.click(trigger);
+
+			dialog = await canvas.findByRole("dialog");
+			scroller = dialog.parentElement!.parentElement!;
+
+			await waitFor(() => {
+				expect(getOpenOffset(scroller, dialog)).toBe(0);
+			});
+
+			dialog.dispatchEvent(createTouchEvent("touchstart", dialog));
+			scroller.scrollTop -= 20;
+			dialog.dispatchEvent(createTouchEvent("touchend", dialog));
+
+			await waitFor(() => {
+				expect(getOpenOffset(scroller, dialog)).toBe(0);
+			});
+			await sleep(300);
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+		} finally {
+			restoreTouchSupport();
+		}
+	},
+};
+
+export const testSwipeKeptOpen: StoryObj<{ handleClose: ReturnType<typeof fn> }> = {
+	name: "test: swipe gesture, modal kept open",
+	args: {
+		handleClose: fn(),
+	},
+	render: (args) => {
+		const toggle = useToggle();
+
+		return (
+			<>
+				<Button onClick={toggle.activate}>Open modal</Button>
+				<Modal position="end" active={toggle.active} onClose={args.handleClose}>
+					<Placeholder h={300}>Content</Placeholder>
+				</Modal>
+			</>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const restoreTouchSupport = stubTouchSupport();
+
+		try {
+			await userEvent.click(canvas.getByRole("button", { name: "Open modal" }));
+
+			const dialog = await canvas.findByRole("dialog");
+			const scroller = dialog.parentElement!.parentElement!;
+			const getOffset = () => {
+				return Math.round(
+					dialog.parentElement!.getBoundingClientRect().right -
+						scroller.getBoundingClientRect().right
+				);
+			};
+
+			// Side modals are swiped away horizontally
+			expect(getComputedStyle(scroller).overflowX).toBe("auto");
+			await waitFor(() => {
+				expect(scroller.scrollLeft).toBeGreaterThan(0);
+				expect(getOffset()).toBe(0);
+			});
+
+			dialog.dispatchEvent(createTouchEvent("touchstart", dialog));
+			scroller.scrollLeft = 0;
+			dialog.dispatchEvent(createTouchEvent("touchend", dialog));
+
+			await waitFor(() => {
+				expect(args.handleClose).toHaveBeenCalledWith({ reason: "drag" });
+			});
+
+			// Active state was not changed, so the modal scrolls back to its open position
+			await waitFor(
+				() => {
+					expect(getOffset()).toBe(0);
+				},
+				{ timeout: 3000 }
+			);
+			expect(dialog).toBeInTheDocument();
+			expect(args.handleClose).toHaveBeenCalledTimes(1);
+		} finally {
+			restoreTouchSupport();
+		}
+	},
+};
+
+export const testSwipeDisabled: StoryObj = {
+	name: "test: swipe gesture, not available",
+	render: () => (
+		<Example>
+			<Example.Item title="no touch support">
+				<Demo position="bottom" />
+			</Example.Item>
+			<Example.Item title="disableSwipeGesture">
+				<Demo position="bottom" disableSwipeGesture />
+			</Example.Item>
+		</Example>
+	),
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const [trigger, disabledTrigger] = canvas.getAllByRole("button", { name: "Open dialog" });
+
+		// Modal keeps its default positioning without the scroll container when it can't be swiped
+		await userEvent.click(trigger);
+
+		let dialog = await canvas.findByRole("dialog");
+
+		expect(getComputedStyle(dialog.parentElement!.parentElement!).display).toBe("contents");
+		expect(getComputedStyle(dialog).position).toBe("absolute");
+
+		await userEvent.click(within(dialog).getByRole("button", { name: "Close" }));
 		await waitFor(() => {
-			expect(new DOMMatrixReadOnly(getComputedStyle(dialog).transform).m42).toBe(0);
+			expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
 		});
 
-		dialog.dispatchEvent(createEvent("touchstart", 100));
-		// Move listeners are added after the gesture has started
-		await sleep(50);
-		document.dispatchEvent(createEvent("touchmove", 150));
-		document.dispatchEvent(createEvent("touchmove", 250));
+		const restoreTouchSupport = stubTouchSupport();
 
-		await waitFor(() => {
-			expect(parseFloat(dialog.style.getPropertyValue("--rs-modal-drag"))).toBeGreaterThan(0);
-		});
+		try {
+			await userEvent.click(disabledTrigger);
 
-		// Gesture is taken over by the system instead of being released
-		document.dispatchEvent(createEvent("touchcancel", 250));
+			dialog = await canvas.findByRole("dialog");
 
-		await waitFor(() => {
-			expect(dialog.style.getPropertyValue("--rs-modal-drag")).toBe("0px");
-		});
-
-		expect(args.handleClose).not.toHaveBeenCalled();
+			expect(getComputedStyle(dialog.parentElement!.parentElement!).display).toBe("contents");
+			expect(getComputedStyle(dialog).position).toBe("absolute");
+		} finally {
+			restoreTouchSupport();
+		}
 	},
 };

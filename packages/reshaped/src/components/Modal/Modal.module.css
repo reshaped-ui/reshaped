@@ -1,14 +1,3 @@
-/**
- * Drag offset is updated on every frame of the swipe gesture.
- * Registering it as a non-inherited property keeps the style recalculation scoped to the modal root
- * instead of invalidating every element of the modal content
- */
-@property --rs-modal-drag {
-	syntax: "<length>";
-	initial-value: 0;
-	inherits: false;
-}
-
 .root {
 	--rs-modal-container-width: 100vw;
 	--rs-modal-container-height: 100vh;
@@ -141,7 +130,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, var(--rs-modal-drag));
+			transform: translate(0, 0);
 		}
 	}
 
@@ -172,10 +161,9 @@
 			transform: translate(calc(100% + var(--rs-modal-inset-start)), 0);
 		}
 
-		/* Drag offset is resolved with the screen side the drawer is attached to */
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(var(--rs-modal-drag), 0);
+			transform: translate(0, 0);
 		}
 	}
 
@@ -206,10 +194,9 @@
 			transform: translate(calc(-100% - var(--rs-modal-inset-end)), 0);
 		}
 
-		/* Drag offset is resolved with the screen side the drawer is attached to */
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(var(--rs-modal-drag), 0);
+			transform: translate(0, 0);
 		}
 	}
 
@@ -260,10 +247,221 @@
 	transition-timing-function: var(--rs-easing-decelerate);
 }
 
-.--dragging {
-	transition: none;
-}
-
 .--overflow-visible {
 	overflow: visible;
+}
+
+/**
+ * Swipe gesture of the touch devices is based on the native scrolling.
+ * Modal is rendered next to a spacer of the screen size inside a scroll container,
+ * with the snap points at its open and closed positions. Swiping the modal scrolls the container,
+ * so it's moved by the browser the same way any other scrollable content is.
+ *
+ * Wrappers don't render their boxes without the gesture, so the modal keeps its default positioning
+ */
+.scroller,
+.track {
+	display: contents;
+}
+
+.spacer {
+	display: none;
+}
+
+.scroller.--scrollable {
+	/* Similar to the animation of the native iOS sheets */
+	--rs-modal-sheet-duration: 500ms;
+	--rs-modal-sheet-easing: cubic-bezier(0.32, 0.72, 0, 1);
+
+	display: flex;
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	overscroll-behavior: contain;
+	scrollbar-width: none;
+
+	/* Area outside of the modal belongs to the overlay, it can't be used for swiping and still closes the modal on click */
+	pointer-events: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	& > .spacer {
+		flex: none;
+		scroll-snap-align: start;
+	}
+
+	/* Wraps the modal together with its offsets from the screen edges, so the scrollable distance matches their size */
+	& > .track {
+		display: flex;
+		flex: none;
+	}
+
+	& > .track > .root {
+		position: relative;
+		inset: auto;
+		flex: none;
+		pointer-events: auto;
+
+		/* Swiping the modal content that can't scroll any further moves the modal itself */
+		overscroll-behavior: auto;
+	}
+
+	/**
+	 * Percentage sizes can't be resolved against the track wrapping the modal,
+	 * so they're applied to the track and the modal fills it instead
+	 */
+	& > .track.--sized > .root {
+		flex: 1 1 auto;
+	}
+}
+
+/**
+ * Modal rendered inside a container is limited by the container size,
+ * which can't be resolved with percentages against the track wrapping the modal
+ */
+.scroller.--scrollable.--scroller-contained {
+	container-type: size;
+
+	& > .track > .root {
+		--rs-modal-container-width: 100cqw;
+		--rs-modal-container-height: 100cqh;
+	}
+}
+
+.scroller.--scrollable-bottom {
+	flex-direction: column;
+	overflow-y: auto;
+	scroll-snap-type: y mandatory;
+
+	& > .spacer:first-child {
+		display: block;
+		height: 100%;
+	}
+
+	& > .track {
+		flex-direction: column;
+		scroll-snap-align: end;
+	}
+
+	/**
+	 * Browsers with an elastic overscroll let the modal be pulled up from the screen edge,
+	 * so its background is extended below with a shadow of its own size, which doesn't affect the scrollable area.
+	 * Shadow overlaps the modal to hide its rounded corners
+	 */
+	& > .track > .root {
+		box-shadow:
+			var(--rs-shadow-overlay),
+			0 calc(var(--rs-modal-sheet-size, 0px) - var(--rs-radius-large)) 0 0
+				var(--rs-color-background-elevation-overlay);
+	}
+
+	& > .track.--sized {
+		box-sizing: content-box;
+		height: var(--rs-modal-track-size);
+		max-height: 100%;
+		padding-top: var(--rs-unit-x4);
+
+		& > .root {
+			height: auto;
+			min-height: 0;
+			margin-top: 0;
+		}
+	}
+}
+
+.scroller.--scrollable-start,
+.scroller.--scrollable-end,
+.scroller.--scrollable-full-screen {
+	flex-direction: row;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+}
+
+.scroller.--scrollable-start,
+.scroller.--scrollable-end {
+	/* Modal is stretched between its offsets from the top and bottom edges */
+	& > .track > .root {
+		height: auto;
+		margin-block: var(--rs-modal-inset-top) var(--rs-modal-inset-bottom);
+	}
+
+	& > .track.--sized {
+		width: var(--rs-modal-track-size);
+		max-width: 100%;
+
+		& > .root {
+			width: auto;
+			min-width: 0;
+		}
+	}
+}
+
+.scroller.--scrollable-end,
+.scroller.--scrollable-full-screen {
+	& > .spacer:first-child {
+		display: block;
+		width: 100%;
+	}
+
+	& > .track {
+		scroll-snap-align: end;
+	}
+}
+
+.scroller.--scrollable-start {
+	& > .spacer:last-child {
+		display: block;
+		width: 100%;
+	}
+
+	& > .track {
+		scroll-snap-align: start;
+	}
+
+	& > .track > .root {
+		margin-inline-start: var(--rs-modal-inset-start);
+	}
+}
+
+.scroller.--scrollable-end > .track > .root {
+	margin-inline-end: var(--rs-modal-inset-end);
+}
+
+.scroller.--scrollable-full-screen > .track {
+	width: 100%;
+}
+
+.scroller.--scrollable-bottom,
+.scroller.--scrollable-start,
+.scroller.--scrollable-end {
+	& > .track > .root {
+		transition-duration: var(--rs-modal-sheet-duration);
+		transition-timing-function: var(--rs-modal-sheet-easing);
+	}
+}
+
+/**
+ * Overlay is displayed for the whole duration of the modal animation.
+ * Its content doesn't fade, so the modal stays opaque while it's moving and only the backdrop is animated
+ */
+.overlay--sheet,
+.overlay--sheet-fade {
+	--rs-overlay-duration: 500ms;
+}
+
+.overlay--sheet {
+	--rs-overlay-easing-open: step-start;
+	--rs-overlay-easing-close: step-end;
+}
+
+.overlay--sheet-fade {
+	--rs-overlay-easing-open: cubic-bezier(0.32, 0.72, 0, 1);
+	--rs-overlay-easing-close: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Modal is already out of the view after it's swiped away */
+.overlay--dismissed {
+	--rs-overlay-duration: 1ms;
 }
