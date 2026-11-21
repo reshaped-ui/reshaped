@@ -27,3 +27,7 @@ packages/reshaped/skills
 /bundle.css.map
 /bundle.d.cts
 *.log
+
+# Vitest browser mode failure screenshots
+__screenshots__
+.vitest-attachments
