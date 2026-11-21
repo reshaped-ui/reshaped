@@ -4,7 +4,7 @@ import getRTLPosition from "./getRTLPosition";
 
 type CalculatePositionArgs = {
 	triggerBounds: DOMRect;
-	flyoutBounds: DOMRect;
+	flyoutBounds: Pick<DOMRect, "width" | "height">;
 	position: Position;
 	rtl: boolean;
 	contentGap: number;

@@ -365,3 +365,43 @@ export const testPortal: StoryObj<{
 		expect(args.handleClose).toHaveBeenCalledTimes(0);
 	},
 };
+
+export const testTransitionStart: StoryObj = {
+	name: "test: transition start",
+	render: () => {
+		const overlayToggle = useToggle(false);
+
+		return (
+			<>
+				<Button onClick={overlayToggle.activate}>Open overlay</Button>
+				<Overlay active={overlayToggle.active} onClose={overlayToggle.deactivate}>
+					Content
+				</Overlay>
+			</>
+		);
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const trigger = canvas.getAllByRole("button")[0];
+
+		// Transitions are paused for a couple of frames after the theme is mounted
+		await sleep(100);
+
+		// Dispatched without the user event delays to check the overlay in the frame following the click
+		trigger.click();
+		await new Promise((resolve) => requestAnimationFrame(resolve));
+
+		const overlay = canvas.getByText("Content").closest<HTMLElement>("[role=presentation]")!;
+		const transitions = overlay
+			.getAnimations()
+			.filter((animation) => animation instanceof CSSTransition);
+
+		// Overlay is already fading in instead of staying hidden for a few more frames
+		expect(transitions).toHaveLength(1);
+		expect(transitions[0].transitionProperty).toBe("opacity");
+
+		await waitFor(() => {
+			expect(overlay).toHaveStyle({ opacity: "1" });
+		});
+	},
+};

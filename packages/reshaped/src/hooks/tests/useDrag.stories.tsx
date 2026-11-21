@@ -156,6 +156,34 @@ export const touchEvents: StoryObj<{ handleDrag: ReturnType<typeof fn> }> = {
 	},
 };
 
+export const touchCancel: StoryObj<{ handleDrag: ReturnType<typeof fn> }> = {
+	name: "onDrag, cancelled touch",
+	args: {
+		handleDrag: fn(),
+	},
+	render: (args) => {
+		return <Demo onDrag={args.handleDrag} />;
+	},
+	play: ({ canvas, args }) => {
+		const createTouch = (target: HTMLElement, x: number, y: number) => {
+			return new Touch({ identifier: Date.now(), target, clientX: x, clientY: y });
+		};
+
+		const trigger = canvas.getByTestId("test-handle-id");
+
+		fireEvent.touchStart(trigger, { changedTouches: [createTouch(trigger, 0, 0)] });
+		fireEvent.touchMove(document.body, { changedTouches: [createTouch(trigger, 100, 50)] });
+
+		expect(args.handleDrag).toHaveBeenCalledTimes(1);
+
+		// Touch taken over by the system stops the drag without triggering touchend
+		fireEvent.touchCancel(document.body, { changedTouches: [createTouch(trigger, 100, 50)] });
+		fireEvent.touchMove(document.body, { changedTouches: [createTouch(trigger, 50, 100)] });
+
+		expect(args.handleDrag).toHaveBeenCalledTimes(1);
+	},
+};
+
 export const orientationHorizontal: StoryObj<{ handleDrag: ReturnType<typeof fn> }> = {
 	name: "orientation horizontal",
 	args: {

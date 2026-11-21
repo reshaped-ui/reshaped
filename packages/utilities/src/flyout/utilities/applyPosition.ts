@@ -1,7 +1,7 @@
 import { getShadowRoot } from "@/dom";
 import isRTL from "@/i18n/isRTL";
 import { RESET_STYLES, VIEWPORT_OFFSET } from "../constants";
-import type { Options, Position, Width } from "../types";
+import type { ContentMeasurements, ContentSize, Options, Position, Width } from "../types";
 import calculateLayoutAdjustment from "./calculateLayoutAdjustment";
 import calculatePosition from "./calculatePosition";
 import getPositionFallbacks from "./getPositionFallbacks";
@@ -40,6 +40,11 @@ const getContainingBlockRect = (
 const applyPosition = (
 	args: Options & {
 		lastUsedPosition: Position | null;
+		/**
+		 * Content sizes measured during the previous calls, keyed by the width they were measured with.
+		 * Passing the same map again skips measuring the content for the widths it already has
+		 */
+		measurements?: ContentMeasurements;
 	}
 ) => {
 	const {
@@ -55,9 +60,9 @@ const applyPosition = (
 		fallbackMinHeight,
 		width,
 		lastUsedPosition,
+		measurements,
 	} = args;
 	const rtl = isRTL();
-	const contentClone = content.cloneNode(true) as HTMLElement;
 	const triggerBounds = triggerCoordinates || trigger?.getBoundingClientRect();
 	const containerBounds = container?.getBoundingClientRect() ?? {
 		width: window.innerWidth,
@@ -66,39 +71,62 @@ const applyPosition = (
 		top: 0,
 	};
 
-	contentClone.style.cssText = "";
-
 	if (!triggerBounds) return { position };
 
 	const resolvedTriggerBounds = getRectFromCoordinates(triggerBounds);
+	let contentClone: HTMLElement | null = null;
 
-	Object.keys(RESET_STYLES).forEach((_key) => {
-		const key = _key as keyof typeof RESET_STYLES;
-		const value = RESET_STYLES[key];
+	/**
+	 * Content is measured with a clone, so its size is not affected by the currently applied position.
+	 * Cloning the content and laying it out is the most expensive part of the positioning,
+	 * so the clone is only created when the requested size is not available in the passed measurements
+	 */
+	const measureContent = (styleWidth: string): ContentSize => {
+		const measured = measurements?.get(styleWidth);
+		if (measured) return measured;
 
-		if (value) contentClone.style[key] = value.toString();
-	});
+		if (!contentClone) {
+			contentClone = content.cloneNode(true) as HTMLElement;
+			contentClone.style.cssText = "";
 
-	// Insert inside shadow root if possible to make sure styles are applied correctly
-	const root = (trigger && getShadowRoot(trigger)) ?? document.body;
+			Object.keys(RESET_STYLES).forEach((_key) => {
+				const key = _key as keyof typeof RESET_STYLES;
+				const value = RESET_STYLES[key];
 
-	root.appendChild(contentClone);
+				if (value) contentClone!.style[key] = value.toString();
+			});
+
+			// Insert inside shadow root if possible to make sure styles are applied correctly
+			const root = (trigger && getShadowRoot(trigger)) ?? document.body;
+
+			root.appendChild(contentClone);
+		}
+
+		contentClone.style.width = styleWidth;
+
+		const bounds = contentClone.getBoundingClientRect();
+		const size = {
+			width: bounds.width,
+			height: bounds.height,
+			clientWidth: contentClone.clientWidth,
+			clientHeight: contentClone.clientHeight,
+		};
+
+		measurements?.set(styleWidth, size);
+		return size;
+	};
+
+	const getStyleWidth = (passedWidth?: Width) => {
+		if (passedWidth === "100%") return `calc(100% - ${VIEWPORT_OFFSET * 2}px)`;
+		if (passedWidth === "trigger") return `${resolvedTriggerBounds.width}px`;
+		return width ?? "";
+	};
 
 	const testPosition = (
 		position: Position,
 		options?: { width?: Width; disableMinHeight?: boolean }
 	) => {
-		if (options?.width === "100%") {
-			contentClone.style.width = `calc(100% - ${VIEWPORT_OFFSET * 2}px)`;
-		} else if (options?.width === "trigger") {
-			contentClone.style.width = `${resolvedTriggerBounds.width}px`;
-		} else if (width) {
-			contentClone.style.width = width;
-		} else {
-			contentClone.style.width = "";
-		}
-
-		const flyoutBounds = contentClone.getBoundingClientRect();
+		const flyoutBounds = measureContent(getStyleWidth(options?.width));
 
 		const result = calculatePosition({
 			triggerBounds: resolvedTriggerBounds,
@@ -119,16 +147,16 @@ const applyPosition = (
 			triggerBounds: resolvedTriggerBounds,
 		});
 
-		return adjustedResult;
+		return { ...adjustedResult, contentSize: flyoutBounds };
 	};
 
-	const testVisibility = (calculated: ReturnType<typeof calculateLayoutAdjustment>) => {
+	const testVisibility = (calculated: ReturnType<typeof testPosition>) => {
 		const flyoutBounds = {
 			// Flyout is rendered in body with position absolute, so bounds need to include the page scroll
 			left: calculated.styles.left,
 			top: calculated.styles.top,
-			height: calculated.styles.height ?? Math.ceil(contentClone.clientHeight),
-			width: calculated.styles.width ?? Math.ceil(contentClone.clientWidth),
+			height: calculated.styles.height ?? Math.ceil(calculated.contentSize.clientHeight),
+			width: calculated.styles.width ?? Math.ceil(calculated.contentSize.clientWidth),
 		};
 
 		return isFullyVisible({
@@ -137,7 +165,7 @@ const applyPosition = (
 		});
 	};
 
-	let calculated: ReturnType<typeof calculateLayoutAdjustment> | null = null;
+	let calculated: ReturnType<typeof testPosition> | null = null;
 
 	const testOrder = getPositionFallbacks(position, fallbackPositions);
 
@@ -177,7 +205,7 @@ const applyPosition = (
 
 			if (!testVisibility(tested)) return;
 
-			const testedHeight = tested.styles.height ?? Math.ceil(contentClone.clientHeight);
+			const testedHeight = tested.styles.height ?? Math.ceil(tested.contentSize.clientHeight);
 
 			if (testedHeight > bestHeight) {
 				bestHeight = testedHeight;
@@ -189,7 +217,8 @@ const applyPosition = (
 	// None of the positions fit, use the last used position or the default position
 	if (!calculated) calculated = testPosition(lastUsedPosition ?? position, { width });
 
-	root.removeChild(contentClone);
+	// Typed explicitly since the clone is assigned inside the measuring closure
+	(contentClone as HTMLElement | null)?.remove();
 
 	const { styles } = calculated;
 	const containingBlockRect = getContainingBlockRect(content);
@@ -212,10 +241,14 @@ const applyPosition = (
 	};
 
 	Object.entries(resolvedStyles).forEach(([key, value]) => {
-		content.style.removeProperty(key);
+		// Writing the same value again still invalidates the content styles
+		if (content.style.getPropertyValue(key) === (value ?? "")) return;
 
-		if (!value) return;
-		content.style.setProperty(key, value);
+		if (value) {
+			content.style.setProperty(key, value);
+		} else {
+			content.style.removeProperty(key);
+		}
 	});
 
 	return { position: calculated.position };

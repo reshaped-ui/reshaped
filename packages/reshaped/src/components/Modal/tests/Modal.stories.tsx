@@ -607,3 +607,71 @@ export const trapFocusEdgeCases = {
 		);
 	},
 };
+
+export const testSwipeCancel: StoryObj<{ handleClose: ReturnType<typeof fn> }> = {
+	name: "test: interrupted swipe gesture",
+	args: {
+		handleClose: fn(),
+	},
+	render: (args) => {
+		const toggle = useToggle();
+
+		return (
+			<>
+				<Button onClick={toggle.activate}>Open modal</Button>
+				<Modal
+					position="bottom"
+					active={toggle.active}
+					onClose={(closeArgs) => {
+						args.handleClose(closeArgs);
+						toggle.deactivate();
+					}}
+				>
+					<Placeholder h={300}>Content</Placeholder>
+				</Modal>
+			</>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+
+		await userEvent.click(canvas.getByRole("button", { name: "Open modal" }));
+
+		const dialog = await canvas.findByRole("dialog");
+		const createEvent = (type: string, y: number) => {
+			const touch = new Touch({ identifier: 1, target: dialog, clientX: 100, clientY: y });
+			const touches = type === "touchmove" || type === "touchstart" ? [touch] : [];
+
+			return new TouchEvent(type, {
+				bubbles: true,
+				touches,
+				targetTouches: touches,
+				changedTouches: [touch],
+			});
+		};
+
+		// Wait for the open animation, so the gesture starts from the open position
+		await waitFor(() => {
+			expect(new DOMMatrixReadOnly(getComputedStyle(dialog).transform).m42).toBe(0);
+		});
+
+		dialog.dispatchEvent(createEvent("touchstart", 100));
+		// Move listeners are added after the gesture has started
+		await sleep(50);
+		document.dispatchEvent(createEvent("touchmove", 150));
+		document.dispatchEvent(createEvent("touchmove", 250));
+
+		await waitFor(() => {
+			expect(parseFloat(dialog.style.getPropertyValue("--rs-modal-drag"))).toBeGreaterThan(0);
+		});
+
+		// Gesture is taken over by the system instead of being released
+		document.dispatchEvent(createEvent("touchcancel", 250));
+
+		await waitFor(() => {
+			expect(dialog.style.getPropertyValue("--rs-modal-drag")).toBe("0px");
+		});
+
+		expect(args.handleClose).not.toHaveBeenCalled();
+	},
+};
