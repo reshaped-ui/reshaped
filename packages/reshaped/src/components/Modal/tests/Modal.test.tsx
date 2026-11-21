@@ -258,7 +258,12 @@ describe("Components/Modal", () => {
 		test("keeps the scroll container interactive outside of the overlay area", async () => {
 			const { dialog, scroller } = await openSwipeDemo({ position: "bottom", onClose: vi.fn() });
 			// Hit testing needs the modal at its final position, after the open animation
-			await Promise.all(dialog.element().getAnimations().map((animation) => animation.finished));
+			await Promise.all(
+				dialog
+					.element()
+					.getAnimations()
+					.map((animation) => animation.finished)
+			);
 			const dialogRect = dialog.element().getBoundingClientRect();
 			const hitTest = (y: number) => document.elementFromPoint(dialogRect.left + 10, y);
 
