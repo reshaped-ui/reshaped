@@ -364,12 +364,15 @@ const useModalDrag = (args: {
 
 		const handleTouchEnd = (e: TouchEvent) => {
 			const state = stateRef.current;
+			// Gesture taken over by the system, e.g. by an incoming call or a system swipe, is not released by the user,
+			// so the modal returns to its open position instead of staying where the gesture has stopped
+			const cancelled = e.type === "touchcancel";
 			// Positive when moving towards the closing direction
-			const velocity = getVelocity(state, e.timeStamp) * closingSign;
+			const velocity = cancelled ? 0 : getVelocity(state, e.timeStamp) * closingSign;
 			const flicked = velocity > VELOCITY_THRESHOLD;
 			const dragged = state.distance > THRESHOLD && velocity >= 0;
 
-			state.closing = flicked || dragged;
+			state.closing = !cancelled && (flicked || dragged);
 			state.returning = !state.closing;
 
 			// Apply the pending frame before the release so the transition starts from the current position
@@ -391,6 +394,7 @@ const useModalDrag = (args: {
 
 		document.addEventListener("touchmove", handleTouchMove, { passive: true });
 		document.addEventListener("touchend", handleTouchEnd, { passive: true });
+		document.addEventListener("touchcancel", handleTouchEnd, { passive: true });
 
 		return () => {
 			if (frameRef.current !== null) {
@@ -401,6 +405,7 @@ const useModalDrag = (args: {
 			if (!stateRef.current.closing) setScrollLock(false);
 			document.removeEventListener("touchmove", handleTouchMove);
 			document.removeEventListener("touchend", handleTouchEnd);
+			document.removeEventListener("touchcancel", handleTouchEnd);
 		};
 	}, [
 		dragging,
