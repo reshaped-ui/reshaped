@@ -1,5 +1,25 @@
 # reshaped
 
+## 4.4.0-canary.2
+
+### Minor Changes
+
+- [#717](https://github.com/reshaped-ui/reshaped/pull/717) [`8eb87a4`](https://github.com/reshaped-ui/reshaped/commit/8eb87a4e0198a6c93d082f27f4948adb0297cbf0) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `ToastProvider`: Added `containerRef` prop to render toast regions into a specific DOM element, and a `global` option in `show` and `hide` to render a toast in the root provider, ignoring any nested providers and their `containerRef`
+
+- [#720](https://github.com/reshaped-ui/reshaped/pull/720) [`4f58aee`](https://github.com/reshaped-ui/reshaped/commit/4f58aeeb64ef518ccc3a450ce549a68e32c8838d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Added `useVirtualKeyboard` hook returning the `height` of the area the on-screen keyboard covers at the bottom of the viewport. It's 0 when the keyboard is closed and when the browser resizes the layout to fit above the keyboard
+
+### Patch Changes
+
+- [#719](https://github.com/reshaped-ui/reshaped/pull/719) [`8eaf64b`](https://github.com/reshaped-ui/reshaped/commit/8eaf64bb933c1857d7b68021eeeba6945b35b92c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - The `reshaped` package includes the agent skills in the `skills` folder: guidelines for building with Reshaped and the v3 to v4 migration. They're also available as a Claude Code plugin with `/plugin marketplace add reshaped-ui/reshaped`.
+
+- [#720](https://github.com/reshaped-ui/reshaped/pull/720) [`4f58aee`](https://github.com/reshaped-ui/reshaped/commit/4f58aeeb64ef518ccc3a450ce549a68e32c8838d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Modal` doesn't keep the bottom safe area inset while the on-screen keyboard covers it. iOS keeps reporting the home indicator inset with the keyboard open, which left a gap between the keyboard and the modals with `start` and `end` positions, and an extra bottom padding in the modals with `bottom` position
+
+- [#718](https://github.com/reshaped-ui/reshaped/pull/718) [`6ae1679`](https://github.com/reshaped-ui/reshaped/commit/6ae16796086b79faefab66a0751bc4d09ce85f04) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Reviewed the prop documentation comments of all components: fixed inaccurate descriptions and default values, added missing defaults and notes on how properties interact with each other. Added the `reshaped` skill with general guidelines for building with the library.
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.4.0-canary.2
+  - @reshaped/theming@4.4.0-canary.2
+
 ## 4.4.0-canary.1
 
 ### Minor Changes

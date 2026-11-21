@@ -1,17 +1,22 @@
 {
-	"mode": "exit",
-	"tag": "canary",
-	"initialVersions": {
-		"reshaped": "4.3.1-canary.0",
-		"@reshaped/theming": "4.3.1-canary.0",
-		"@reshaped/utilities": "4.3.1-canary.0"
-	},
-	"changesets": [
-		"dropdown-menu-submenu-click",
-		"flyout-content-hover-disabled",
-		"flyout-nested-outside-click",
-		"overlay-ios-backdrop",
-		"quiet-apples-wait",
-		"use-on-click-outside-capture"
-	]
+  "mode": "exit",
+  "tag": "canary",
+  "initialVersions": {
+    "reshaped": "4.4.0-canary.1",
+    "@reshaped/theming": "4.4.0-canary.1",
+    "@reshaped/utilities": "4.4.0-canary.1"
+  },
+  "changesets": [
+    "agent-skills-package",
+    "dropdown-menu-submenu-click",
+    "flyout-content-hover-disabled",
+    "flyout-nested-outside-click",
+    "modal-keyboard-safe-area",
+    "overlay-ios-backdrop",
+    "quiet-apples-wait",
+    "reviewed-prop-docs",
+    "toast-provider-container-ref",
+    "use-on-click-outside-capture",
+    "use-virtual-keyboard"
+  ]
 }
