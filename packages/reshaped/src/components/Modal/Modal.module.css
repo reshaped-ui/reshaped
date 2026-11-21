@@ -9,6 +9,13 @@
 	inherits: false;
 }
 
+/* Height of the bottom modal, set when it's dragged and used for extending its background below it */
+@property --rs-modal-height {
+	syntax: "<length>";
+	initial-value: 0;
+	inherits: false;
+}
+
 .root {
 	--rs-modal-container-width: 100vw;
 	--rs-modal-container-height: 100vh;
@@ -120,7 +127,15 @@
 		--rs-modal-size-s: auto;
 		--rs-modal-safe: 1;
 
-		box-shadow: var(--rs-shadow-overlay);
+		/**
+		 * Modal dragged past its open position moves away from the screen edge,
+		 * so its background is extended below it with a shadow of its own height.
+		 * Extension overlaps the modal to cover its rounded corners and is painted above its regular shadow
+		 */
+		box-shadow:
+			0 max(0px, var(--rs-modal-height) - var(--rs-radius-large)) 0 0
+				var(--rs-color-background-elevation-overlay),
+			var(--rs-shadow-overlay);
 		width: 100%;
 		height: var(--rs-modal-size);
 		max-width: 100%;
@@ -235,7 +250,7 @@
 
 		&.--active,
 		[dir="rtl"] &.--active {
-			transform: translate(0, 0);
+			transform: translate(var(--rs-modal-drag), 0);
 			opacity: 1;
 		}
 	}
@@ -260,8 +275,36 @@
 	transition-timing-function: var(--rs-easing-decelerate);
 }
 
+/* Similar to the animation of the native iOS sheets */
+.--sheet {
+	transition-duration: 500ms;
+	transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+
+	&.--active {
+		transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+	}
+}
+
 .--dragging {
 	transition: none;
+}
+
+/**
+ * Overlay is displayed until the modal animation ends, including the release animation after the swipe gesture.
+ * Its content doesn't fade, so the modal stays opaque while it's moving and only the backdrop is animated
+ */
+.overlay--sheet,
+.overlay--sheet-fade {
+	--rs-overlay-duration: 500ms;
+	--rs-overlay-easing-open: cubic-bezier(0.32, 0.72, 0, 1);
+	--rs-overlay-easing-close: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.overlay--sheet {
+	/* Covers the longest release animation of the swipe gesture */
+	--rs-overlay-duration: 600ms;
+	--rs-overlay-easing-open: step-start;
+	--rs-overlay-easing-close: step-end;
 }
 
 .--overflow-visible {

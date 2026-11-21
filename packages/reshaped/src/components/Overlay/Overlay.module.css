@@ -109,6 +109,12 @@
 	pointer-events: all;
 }
 
+/* Overlay that is closing lets the page receive input right away, without waiting for its close animation */
+.root:not(.--visible),
+.root:not(.--visible) .content {
+	pointer-events: none;
+}
+
 .root.--contained {
 	position: absolute;
 }
@@ -121,12 +127,17 @@
 	height: 100%;
 }
 
+/**
+ * Transition is defined with variables, so the components rendering their content in the overlay
+ * can align it with the animation of that content
+ */
 .root.--animated,
 .backdrop.--animated {
-	transition: opacity var(--rs-duration-medium) var(--rs-easing-accelerate);
+	transition: opacity var(--rs-overlay-duration, var(--rs-duration-medium))
+		var(--rs-overlay-easing-close, var(--rs-easing-accelerate));
 
 	&.--visible {
-		transition-timing-function: var(--rs-easing-decelerate);
+		transition-timing-function: var(--rs-overlay-easing-open, var(--rs-easing-decelerate));
 	}
 }
 

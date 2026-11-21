@@ -52,7 +52,7 @@ const fireMouseEvent = (
 
 const fireTouchEvent = (
 	el: Element,
-	type: "touchstart" | "touchmove" | "touchend",
+	type: "touchstart" | "touchmove" | "touchend" | "touchcancel",
 	init?: TouchEventInit
 ) => {
 	el.dispatchEvent(new TouchEvent(type, { bubbles: true, cancelable: true, ...init }));
@@ -118,6 +118,32 @@ describe("Hooks/Internal/useDrag", () => {
 		fireTouchEvent(document.body, "touchend", {
 			changedTouches: [createTouch(triggerEl, 100, 50)],
 		});
+		fireTouchEvent(document.body, "touchmove", {
+			changedTouches: [createTouch(triggerEl, 50, 100)],
+		});
+
+		expect(handleDrag).toHaveBeenCalledTimes(1);
+	});
+
+	test("onDrag, cancelled touch", async () => {
+		const handleDrag = vi.fn();
+		await render(<Demo onDrag={handleDrag} />);
+		const trigger = page.getByTestId("test-handle-id");
+		const triggerEl = trigger.element();
+
+		fireTouchEvent(triggerEl, "touchstart", { changedTouches: [createTouch(triggerEl, 0, 0)] });
+		await expect.element(trigger).toHaveAttribute("data-active", "true");
+		fireTouchEvent(document.body, "touchmove", {
+			changedTouches: [createTouch(triggerEl, 100, 50)],
+		});
+
+		expect(handleDrag).toHaveBeenCalledTimes(1);
+
+		// Touch taken over by the system stops the drag without triggering touchend
+		fireTouchEvent(document.body, "touchcancel", {
+			changedTouches: [createTouch(triggerEl, 100, 50)],
+		});
+		await expect.element(trigger).toHaveAttribute("data-active", "false");
 		fireTouchEvent(document.body, "touchmove", {
 			changedTouches: [createTouch(triggerEl, 50, 100)],
 		});

@@ -10,17 +10,22 @@ import useRTL from "@/hooks/useRTL";
 import { resolveSpringTransition } from "@/utilities/animation";
 import type * as T from "./Modal.types";
 
-/** Distance in px the modal has to be dragged before it starts following the finger */
-const THRESHOLD = 32;
-/** Screen edge zone in px reserved for the browser back gesture */
+/** Screen edge zones in px reserved for the browser back and forward gestures */
 const EDGE_BOUNDARY = 32;
 /**
  * Distance in px the finger has to travel before the gesture resolves into a swipe or a scroll,
  * a swipe also stops the modal content from scrolling for the rest of the gesture
  */
 const DIRECTION_THRESHOLD = 8;
-/** Velocity in px/ms closing the modal on release regardless of the dragged distance */
-const VELOCITY_THRESHOLD = 0.4;
+/**
+ * Time in ms used for projecting where the modal would stop after the release with the current velocity,
+ * matches the normal deceleration rate of the iOS scroll views
+ */
+const PROJECTION_TIME = 0.998 / (1 - 0.998);
+/** Resistance of the rubber band applied when the modal is dragged past its open position, same as in iOS */
+const RUBBER_BAND_COEFFICIENT = 0.55;
+/** Time in ms given to the close handler to update the active state before the modal returns to its open position */
+const KEEP_OPEN_TIMEOUT = 100;
 /** Time window in ms used for measuring the release velocity */
 const VELOCITY_WINDOW = 100;
 const VELOCITY_SAMPLES = 10;
@@ -45,6 +50,11 @@ type State = {
 	distance: number;
 	/** Modal can be dragged past its open position, false when its content can scroll in that direction */
 	overshoot: boolean;
+	/**
+	 * Elements under the touch that can scroll their content towards the closing direction.
+	 * They scroll first and the modal starts following the finger once they reach their edge
+	 */
+	scrollers: HTMLElement[];
 	/** Offset the modal is currently rendered at, resolved from the seed and the distance */
 	offset: number;
 	/** Distance on the drag axis in px from the open to the closed position, used as the closing target */
@@ -69,6 +79,7 @@ const getInitialState = (): State => ({
 	seed: 0,
 	distance: 0,
 	overshoot: false,
+	scrollers: [],
 	offset: 0,
 	size: 1,
 	samples: [],
@@ -78,11 +89,19 @@ const getInitialState = (): State => ({
 });
 
 /**
- * Dragging past the open position is damped the same way as in Base UI,
- * so the modal resists the finger like a rubber band
+ * Dragging past the open position is damped the same way as the iOS scroll views,
+ * so the modal resists the finger more the further it's dragged.
+ * Distances are negative past the open position and the dimension limits how far it can go
  */
-const dampOvershoot = (distance: number) => -Math.sqrt(-distance);
-const undampOvershoot = (offset: number) => -(offset ** 2);
+const dampOvershoot = (distance: number, dimension: number) => {
+	const ratio = (-distance * RUBBER_BAND_COEFFICIENT) / dimension;
+	return -(1 - 1 / (ratio + 1)) * dimension;
+};
+
+const undampOvershoot = (offset: number, dimension: number) => {
+	const ratio = 1 / (1 + offset / dimension) - 1;
+	return -(ratio * dimension) / RUBBER_BAND_COEFFICIENT;
+};
 
 /**
  * Distance in px the modal is currently rendered at from its open position, towards the closing direction,
@@ -161,22 +180,35 @@ const useModalDrag = (args: {
 	position: T.Position;
 	rootRef: React.RefObject<HTMLDivElement | null>;
 	overlayRef: React.RefObject<OverlayInstance | null>;
+	/** Strip filling the browser toolbar area behind the bottom modal, moved together with it */
+	edgeRef: React.RefObject<HTMLDivElement | null>;
 	active?: boolean;
 	disabled?: boolean;
 	transparentOverlay?: boolean;
 	containerRef?: T.Props["containerRef"];
 	onClose?: T.Props["onClose"];
 }) => {
-	const { position, rootRef, overlayRef, active, disabled, transparentOverlay, containerRef } =
-		args;
+	const {
+		position,
+		rootRef,
+		overlayRef,
+		edgeRef,
+		active,
+		disabled,
+		transparentOverlay,
+		containerRef,
+	} = args;
 	const onCloseRef = useHandlerRef(args.onClose);
 	const [dragging, setDragging] = useState(false);
 	const stateRef = useRef<State>(getInitialState());
-	const frameRef = useRef<number | null>(null);
+	const activeRef = useRef(active);
+	const keepOpenTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+	activeRef.current = active;
 	const [rtl] = useRTL();
 	const axis: "x" | "y" = position === "bottom" ? "y" : "x";
-	// Drawers attached to the left side close towards the negative coordinates
-	const leftSide = rtl ? position === "end" : position === "start";
+	// Drawers attached to the left side close towards the negative coordinates,
+	// full-screen modals close towards the end side
+	const leftSide = rtl ? position === "end" || position === "full-screen" : position === "start";
 	const closingSign = leftSide ? -1 : 1;
 
 	const render = useCallback(() => {
@@ -184,21 +216,18 @@ const useModalDrag = (args: {
 		const state = stateRef.current;
 		if (!rootEl) return;
 
-		// A gesture picking up an animation starts on an already moving modal, so it skips the dead zone
-		const threshold = state.seed ? 0 : THRESHOLD;
 		const closingDistance = state.seed + state.distance;
 
 		state.offset =
-			closingDistance < 0
-				? dampOvershoot(closingDistance)
-				: Math.max(0, closingDistance - threshold);
+			closingDistance < 0 ? dampOvershoot(closingDistance, state.size) : closingDistance;
 		rootEl.style.setProperty("--rs-modal-drag", `${state.offset * closingSign}px`);
+		edgeRef.current?.style.setProperty("transform", `translateY(${Math.max(0, state.offset)}px)`);
 
 		if (transparentOverlay) return;
 
-		const progress = Math.min(1, Math.max(0, closingDistance) / state.size);
-		overlayRef.current?.setOpacity(1 - progress * 0.5);
-	}, [closingSign, transparentOverlay, rootRef, overlayRef]);
+		const progress = Math.min(1, Math.max(0, state.offset) / state.size);
+		overlayRef.current?.setOpacity(1 - progress);
+	}, [closingSign, transparentOverlay, rootRef, overlayRef, edgeRef]);
 
 	const reset = useCallback(() => {
 		stateRef.current = getInitialState();
@@ -248,6 +277,8 @@ const useModalDrag = (args: {
 
 	const handleTouchStart = (e: React.TouchEvent) => {
 		if (disabled || position === "center") return;
+		// Modal released towards its closed position is already closing, so it can't be caught again
+		if (!active) return;
 		// Prevent swipe to close from happening when user is working with text selection
 		if (window.getSelection()?.toString()) return;
 
@@ -255,11 +286,12 @@ const useModalDrag = (args: {
 		const touch = e.targetTouches[0];
 		let currentEl = e.target as HTMLElement | null;
 		let overshoot = true;
+		const scrollers: HTMLElement[] = [];
 
 		while (currentEl && (currentEl === rootEl || rootEl?.contains(currentEl))) {
-			// Prioritize scrolling over modal swiping when content can scroll on the drag axis,
+			// Content that can scroll on the drag axis takes priority over the modal until it reaches its edge,
 			// scrolling on the perpendicular axis is resolved from the gesture direction instead
-			if (canScrollTowardsClosing(currentEl, { axis, closingSign })) return;
+			if (canScrollTowardsClosing(currentEl, { axis, closingSign })) scrollers.push(currentEl);
 			// Start dragging only when starting on static elements
 			if (currentEl.matches("input,textarea")) return;
 			// Content scrolling in the opposite direction takes priority over dragging past the open position
@@ -269,16 +301,20 @@ const useModalDrag = (args: {
 			currentEl = currentEl.parentElement;
 		}
 
-		// Prevent the drag handling when browser is trying to navigate to a previous page
-		if (axis === "x" && closingSign === -1 && touch.clientX < EDGE_BOUNDARY) return;
+		// Prevent the drag handling when browser is trying to navigate to the previous or the next page
+		if (axis === "x" && touch.clientX < EDGE_BOUNDARY) return;
+		if (axis === "x" && touch.clientX > window.innerWidth - EDGE_BOUNDARY) return;
 
 		// Measured before the state is replaced, a transition in flight resolves to its current position
 		const rootStyle = rootEl && window.getComputedStyle(rootEl);
-		const renderedOffset =
-			active && rootStyle ? getRenderedOffset(rootStyle, { axis, closingSign }) : 0;
+		const renderedOffset = rootStyle ? getRenderedOffset(rootStyle, { axis, closingSign }) : 0;
+		const size = rootEl && rootStyle ? getClosingSize(rootEl, rootStyle, { axis, closingSign }) : 1;
 		// Damped offset past the open position is converted back to the dragged distance
-		const seed = renderedOffset < 0 ? undampOvershoot(renderedOffset) : renderedOffset;
+		const seed = renderedOffset < 0 ? undampOvershoot(renderedOffset, size) : renderedOffset;
 		const origin = axis === "y" ? touch.clientY : touch.clientX;
+
+		// Background of the bottom modal is extended below it while it's dragged past its open position
+		if (axis === "y") rootEl?.style.setProperty("--rs-modal-height", `${rootEl.offsetHeight}px`);
 
 		// The previous gesture can be left unresolved, e.g. when the modal stays open after a drag close
 		stateRef.current = {
@@ -288,7 +324,8 @@ const useModalDrag = (args: {
 			previous: origin,
 			seed,
 			overshoot,
-			size: rootEl && rootStyle ? getClosingSize(rootEl, rootStyle, { axis, closingSign }) : 1,
+			scrollers,
+			size,
 		};
 
 		resetReleaseTransition();
@@ -309,6 +346,8 @@ const useModalDrag = (args: {
 		reset();
 		setScrollLock(false);
 	};
+
+	useEffect(() => () => clearTimeout(keepOpenTimerRef.current), []);
 
 	// Modal returns to its open position after the dragging class is removed,
 	// so the transition is applied to the reset instead of snapping back
@@ -340,7 +379,16 @@ const useModalDrag = (args: {
 			if (state.intent === "scroll") return;
 
 			const rootEl = rootRef.current;
-			if (rootEl && canScrollTowardsClosing(rootEl, { axis, closingSign })) return;
+			const contentScrolls = [...state.scrollers, rootEl].some((el) => {
+				return el && canScrollTowardsClosing(el, { axis, closingSign });
+			});
+
+			// Content scrolls with the finger until it reaches its edge and the modal follows it from that point,
+			// so the distance travelled while scrolling the content doesn't move the modal
+			if (contentScrolls) {
+				state.previous = coordinate;
+				return;
+			}
 
 			// Positive when moving towards the closing direction
 			const delta = (coordinate - state.previous) * closingSign;
@@ -355,29 +403,22 @@ const useModalDrag = (args: {
 			state.samples.push({ time: e.timeStamp, coordinate });
 			if (state.samples.length > VELOCITY_SAMPLES) state.samples.shift();
 
-			if (frameRef.current !== null) return;
-			frameRef.current = window.requestAnimationFrame(() => {
-				frameRef.current = null;
-				render();
-			});
+			// Touch events are dispatched once per frame, so the modal is moved right away without waiting for the next one
+			render();
 		};
 
 		const handleTouchEnd = (e: TouchEvent) => {
 			const state = stateRef.current;
+			// Gesture taken over by the system, e.g. by an incoming call or a system swipe, is not released by the user,
+			// so the modal returns to its open position instead of staying where the gesture has stopped
+			const cancelled = e.type === "touchcancel";
 			// Positive when moving towards the closing direction
-			const velocity = getVelocity(state, e.timeStamp) * closingSign;
-			const flicked = velocity > VELOCITY_THRESHOLD;
-			const dragged = state.distance > THRESHOLD && velocity >= 0;
+			const velocity = cancelled ? 0 : getVelocity(state, e.timeStamp) * closingSign;
+			// Modal closes when it would stop past the middle of its size after the release, like the iOS sheets
+			const projectedOffset = state.offset + velocity * PROJECTION_TIME;
 
-			state.closing = flicked || dragged;
+			state.closing = !cancelled && state.intent === "swipe" && projectedOffset > state.size / 2;
 			state.returning = !state.closing;
-
-			// Apply the pending frame before the release so the transition starts from the current position
-			if (frameRef.current !== null) {
-				window.cancelAnimationFrame(frameRef.current);
-				frameRef.current = null;
-				render();
-			}
 
 			// Finger velocity doesn't match the damped movement past the open position, so it settles from rest
 			setReleaseTransition({ closing: state.closing, velocity: state.offset < 0 ? 0 : velocity });
@@ -386,21 +427,30 @@ const useModalDrag = (args: {
 			if (state.returning) setScrollLock(false);
 			setDragging(false);
 
-			if (state.closing) onCloseRef.current?.({ reason: "drag" });
+			if (!state.closing) return;
+
+			onCloseRef.current?.({ reason: "drag" });
+
+			// Modal stays open when its active state is not updated in the close handler,
+			// so it returns to its open position instead of staying where it was released
+			keepOpenTimerRef.current = setTimeout(() => {
+				if (!activeRef.current || stateRef.current !== state) return;
+
+				state.closing = false;
+				setReleaseTransition({ closing: false, velocity: 0 });
+				reset();
+			}, KEEP_OPEN_TIMEOUT);
 		};
 
 		document.addEventListener("touchmove", handleTouchMove, { passive: true });
 		document.addEventListener("touchend", handleTouchEnd, { passive: true });
+		document.addEventListener("touchcancel", handleTouchEnd, { passive: true });
 
 		return () => {
-			if (frameRef.current !== null) {
-				window.cancelAnimationFrame(frameRef.current);
-				frameRef.current = null;
-			}
-
 			if (!stateRef.current.closing) setScrollLock(false);
 			document.removeEventListener("touchmove", handleTouchMove);
 			document.removeEventListener("touchend", handleTouchEnd);
+			document.removeEventListener("touchcancel", handleTouchEnd);
 		};
 	}, [
 		dragging,
@@ -410,6 +460,7 @@ const useModalDrag = (args: {
 		rootRef,
 		onCloseRef,
 		render,
+		reset,
 		setScrollLock,
 		setReleaseTransition,
 	]);

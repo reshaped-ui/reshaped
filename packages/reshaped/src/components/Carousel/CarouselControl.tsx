@@ -11,19 +11,9 @@ import * as T from "./Carousel.types";
 import s from "./Carousel.module.css";
 
 const CarouselControl = (props: T.ControlProps) => {
-	const {
-		type,
-		controlRef,
-		scrollElRef,
-		oppositeControlElRef,
-		scrollPosition,
-		onClick,
-		isRTL,
-		mounted,
-	} = props;
+	const { type, controlRef, oppositeControlElRef, hidden, onClick, isRTL } = props;
 	const [visible, setVisible] = useState(false);
 	const [rendered, setRendered] = useState(false);
-	const isNext = type === "forward";
 	const isDisplayedAsNext = type === (isRTL ? "back" : "forward");
 	const controlClassNames = classNames(
 		s.control,
@@ -33,17 +23,12 @@ const CarouselControl = (props: T.ControlProps) => {
 	);
 
 	useIsomorphicLayoutEffect(() => {
-		const scrollEl = scrollElRef.current;
-		if (!scrollEl || !mounted) return;
+		// Scroll position is not resolved before the carousel is mounted
+		if (hidden === undefined) return;
 
 		let timer: ReturnType<typeof setTimeout>;
-		const normalizedScrollPosition = Math.abs(scrollPosition);
-		const isScrollAtStart = normalizedScrollPosition <= 0;
-		const isScrollAtEnd =
-			normalizedScrollPosition + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
-		const hideControl = isNext ? isScrollAtEnd : isScrollAtStart;
 
-		if (hideControl) {
+		if (hidden) {
 			setVisible(false);
 			timer = setTimeout(() => setRendered(false), 1500);
 
@@ -58,7 +43,7 @@ const CarouselControl = (props: T.ControlProps) => {
 		return () => {
 			if (timer) clearTimeout(timer);
 		};
-	}, [scrollPosition, scrollElRef, mounted, isNext]);
+	}, [hidden]);
 
 	return (
 		<div className={controlClassNames}>

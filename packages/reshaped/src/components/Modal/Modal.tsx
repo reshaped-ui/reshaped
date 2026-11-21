@@ -85,11 +85,16 @@ const Modal: FC<T.Props> = (props) => {
 	const internalRootRef = useRef<HTMLDivElement>(null);
 	const rootRef = attributes?.ref || internalRootRef;
 	const overlayRef = useRef<OverlayInstance>(null);
+	const edgeRef = useRef<HTMLDivElement>(null);
 	const shouldBeContained = containerRef && contained !== false;
+	// Modals attached to the screen edges on touch devices animate like the native sheets
+	const touch = typeof navigator !== "undefined" && navigator.maxTouchPoints > 0;
+	const sheet = touch && ["bottom", "start", "end"].includes(clientPosition);
 	const { dragging, handleTouchStart, handleTransitionEnd } = useModalDrag({
 		position: clientPosition,
 		rootRef,
 		overlayRef,
+		edgeRef,
 		active,
 		containerRef,
 		transparentOverlay,
@@ -119,7 +124,13 @@ const Modal: FC<T.Props> = (props) => {
 			transparent={transparentOverlay}
 			blurred={blurredOverlay}
 			overflow={clientPosition === "center" ? "auto" : "hidden"}
-			className={overlayClassName}
+			className={[
+				// Modal stays opaque while it's moving and only the backdrop fades,
+				// except for the blur that is applied to the overlay itself
+				sheet && (blurredOverlay ? s["overlay--sheet-fade"] : s["overlay--sheet"]),
+				overlayClassName,
+			]}
+			backdropClassName={sheet && s["overlay--sheet-fade"]}
 			contained={contained}
 			containerRef={containerRef}
 			attributes={{
@@ -131,6 +142,7 @@ const Modal: FC<T.Props> = (props) => {
 					s.root,
 					className,
 					active && s["--active"],
+					sheet && s["--sheet"],
 					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],
 					shouldBeContained && s["--contained"],
@@ -141,7 +153,7 @@ const Modal: FC<T.Props> = (props) => {
 					<Context.Provider value={value}>
 						{/* Rendered before the modal so it stays behind it */}
 						{active && clientPosition === "bottom" && !shouldBeContained && (
-							<div className={s.edge} aria-hidden="true" />
+							<div className={s.edge} ref={edgeRef} aria-hidden="true" />
 						)}
 						<div
 							{...attributes}

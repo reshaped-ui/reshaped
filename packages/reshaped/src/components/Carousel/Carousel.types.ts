@@ -20,11 +20,10 @@ export type ControlProps = {
 	type: "back" | "forward";
 	controlRef: React.RefObject<ActionableRef | null>;
 	oppositeControlElRef: React.RefObject<ActionableRef | null>;
-	scrollElRef: React.RefObject<HTMLElement | null>;
-	scrollPosition: number;
+	/** Carousel can't be scrolled further in the direction of the control, undefined until its scroll position is resolved */
+	hidden?: boolean;
 	onClick: () => void;
 	isRTL: boolean;
-	mounted: boolean;
 };
 
 export type Props = {

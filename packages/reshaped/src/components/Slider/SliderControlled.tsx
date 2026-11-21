@@ -275,12 +275,15 @@ const SliderControlled: React.FC<T.ControlledProps & T.DefaultProps> = (props) =
 	React.useEffect(() => {
 		window.addEventListener("mouseup", handleDragStop);
 		window.addEventListener("touchend", handleDragStop);
+		// Touch taken over by the system doesn't trigger touchend, which would leave the thumb in the dragging state
+		window.addEventListener("touchcancel", handleDragStop);
 		window.addEventListener("mousemove", handleDrag);
 		window.addEventListener("touchmove", handleDrag);
 
 		return () => {
 			window.removeEventListener("mouseup", handleDragStop);
 			window.removeEventListener("touchend", handleDragStop);
+			window.removeEventListener("touchcancel", handleDragStop);
 			window.removeEventListener("mousemove", handleDrag);
 			window.removeEventListener("touchmove", handleDrag);
 		};

@@ -89,4 +89,42 @@ describe("Components/Carousel", () => {
 		await expect.element(el).toHaveClass("test-classname");
 		await expect.element(el).toHaveAttribute("id", "test-id");
 	});
+
+	test("navigation controls", async () => {
+		const handleRender = vi.fn();
+
+		await render(
+			<React.Profiler id="carousel" onRender={handleRender}>
+				<Carousel visibleItems={2} attributes={{ "data-testid": "root" }}>
+					<Item>Item 0</Item>
+					<Item>Item 1</Item>
+					<Item>Item 2</Item>
+					<Item>Item 3</Item>
+					<Item>Item 4</Item>
+					<Item>Item 5</Item>
+				</Carousel>
+			</React.Profiler>
+		);
+		const root = page.getByTestId("root").element();
+		const scrollEl = root.querySelector("ul")!;
+		const [backControl, forwardControl] = Array.from(root.querySelectorAll("button")).map(
+			(button) => button.parentElement!
+		);
+
+		await expect.element(backControl).toHaveStyle({ opacity: "0" });
+		await expect.element(forwardControl).toHaveStyle({ opacity: "1" });
+
+		handleRender.mockClear();
+		scrollEl.scrollTo({ left: scrollEl.scrollWidth, behavior: "smooth" });
+
+		// Smooth scrolling through the whole carousel takes longer than the default timeout
+		await expect
+			.poll(() => scrollEl.scrollLeft + scrollEl.clientWidth, { timeout: 5000 })
+			.toBeGreaterThanOrEqual(scrollEl.scrollWidth - 1);
+		await expect.element(backControl).toHaveStyle({ opacity: "1" });
+		await expect.element(forwardControl).toHaveStyle({ opacity: "0" });
+
+		// Carousel only renders when the controls change and not on every frame of the scroll animation
+		expect(handleRender.mock.calls.length).toBeLessThan(8);
+	});
 });

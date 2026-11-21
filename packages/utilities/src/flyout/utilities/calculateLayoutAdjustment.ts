@@ -4,7 +4,7 @@ import type { CalculatePositionResult } from "./calculatePosition";
 
 type CalculateLayoutAdjustmentArgs = CalculatePositionResult &
 	Pick<Options, "fallbackAdjustLayout" | "fallbackMinHeight" | "width"> & {
-		flyoutBounds: DOMRect;
+		flyoutBounds: Pick<DOMRect, "width" | "height">;
 		triggerBounds: DOMRect;
 		containerBounds: Pick<DOMRect, "left" | "top" | "width" | "height">;
 	};

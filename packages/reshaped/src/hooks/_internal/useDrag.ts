@@ -110,12 +110,15 @@ const useDrag = <
 
 		document.addEventListener("touchmove", handleDrag, { passive: true });
 		document.addEventListener("touchend", handleDragEnd, { passive: true });
+		// Touch taken over by the system doesn't trigger touchend, which would leave the drag active
+		document.addEventListener("touchcancel", handleDragEnd, { passive: true });
 		document.addEventListener("mousemove", handleDrag, { passive: true });
 		document.addEventListener("mouseup", handleDragEnd, { passive: true });
 
 		return () => {
 			document.removeEventListener("touchmove", handleDrag);
 			document.removeEventListener("touchend", handleDragEnd);
+			document.removeEventListener("touchcancel", handleDragEnd);
 			document.removeEventListener("mousemove", handleDrag);
 			document.removeEventListener("mouseup", handleDragEnd);
 		};
