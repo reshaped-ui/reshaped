@@ -14,7 +14,12 @@
 	--rs-modal-container-height: 100vh;
 	--rs-modal-padding: calc(var(--rs-modal-p) * var(--rs-unit-x1));
 	--rs-modal-env-top: env(safe-area-inset-top, 0px);
-	--rs-modal-env-bottom: env(safe-area-inset-bottom, 0px);
+
+	/* iOS keeps reporting the bottom safe area while the on-screen keyboard covers it */
+	--rs-modal-env-bottom: max(
+		0px,
+		env(safe-area-inset-bottom, 0px) - var(--rs-modal-keyboard-height, 0px)
+	);
 	--rs-modal-env-start: env(safe-area-inset-left, 0px);
 	--rs-modal-env-end: env(safe-area-inset-right, 0px);
 

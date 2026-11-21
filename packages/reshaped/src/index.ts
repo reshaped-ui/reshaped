@@ -154,6 +154,7 @@ export { default as useOnClickOutside } from "@/hooks/useOnClickOutside";
 export { default as useRTL } from "@/hooks/useRTL";
 export { default as useScrollLock } from "@/hooks/useScrollLock";
 export { default as useToggle } from "@/hooks/useToggle";
+export { default as useVirtualKeyboard } from "@/hooks/useVirtualKeyboard";
 export { default as useIsDismissible } from "@/hooks/useIsDismissible";
 
 /**
