@@ -1,10 +1,7 @@
 import { StoryObj } from "@storybook/react-vite";
-import React from "react";
-import { expect, fn, userEvent, waitFor } from "storybook/test";
+import { expect } from "storybook/test";
 
-import Button from "@/components/Button";
-import Carousel, { type CarouselInstance } from "@/components/Carousel";
-import View from "@/components/View";
+import Carousel from "@/components/Carousel";
 import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
@@ -33,7 +30,7 @@ export const base: StoryObj = {
 			<Placeholder h={100}>Content</Placeholder>
 		</Carousel>
 	),
-	play: async ({ canvas }) => {
+	play: ({ canvas }) => {
 		const root = canvas.getByTestId("test-id");
 		const items = canvas.getAllByText("Content");
 		const buttons = root.querySelectorAll("button");
@@ -163,154 +160,10 @@ export const navigationDisplay: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvas }) => {
+	play: ({ canvas }) => {
 		const root = canvas.getByTestId("test-id");
 		const buttons = root.querySelectorAll("button");
 
 		expect(buttons).toHaveLength(0);
-	},
-};
-
-export const instanceRef: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
-	name: "instanceRef, onChange",
-	args: {
-		handleChange: fn(),
-	},
-	render: (args) => {
-		const carouselRef = React.useRef<CarouselInstance>(null);
-		const [index, setIndex] = React.useState(0);
-
-		return (
-			<Example>
-				<Example.Item title="instanceRef, onChange">
-					<View gap={3}>
-						<View gap={3} direction="row" align="center">
-							<Button onClick={() => carouselRef.current?.navigateBack()}>Back</Button>
-							<Button onClick={() => carouselRef.current?.navigateForward()}>Forward</Button>
-							<Button onClick={() => carouselRef.current?.navigateTo(3)}>To 3</Button>
-							<View.Item>Index: {index}</View.Item>
-						</View>
-						<Carousel
-							visibleItems={2}
-							instanceRef={carouselRef}
-							navigationDisplay="hidden"
-							onChange={(changeArgs) => {
-								args.handleChange(changeArgs);
-								setIndex(changeArgs.index);
-							}}
-						>
-							<Placeholder h={100}>Item 0</Placeholder>
-							<Placeholder h={100}>Item 1</Placeholder>
-							<Placeholder h={100}>Item 2</Placeholder>
-							<Placeholder h={100}>Item 3</Placeholder>
-							<Placeholder h={100}>Item 4</Placeholder>
-							<Placeholder h={100}>Item 5</Placeholder>
-						</Carousel>
-					</View>
-				</Example.Item>
-			</Example>
-		);
-	},
-	play: async ({ canvas, args }) => {
-		const buttons = canvas.getAllByRole("button");
-		const backButton = buttons[0];
-		const forwardButton = buttons[1];
-		const toButton = buttons[2];
-
-		await userEvent.click(forwardButton);
-
-		await waitFor(() => {
-			expect(args.handleChange).toHaveBeenCalledWith({ index: 1 });
-			expect(args.handleChange).toHaveBeenCalledWith({ index: 2 });
-			expect(args.handleChange).not.toHaveBeenCalledWith({ index: 3 });
-		});
-
-		args.handleChange.mockClear();
-		await userEvent.click(backButton);
-
-		await waitFor(() => {
-			expect(args.handleChange).toHaveBeenCalledWith({ index: 0 });
-			expect(args.handleChange).toHaveBeenCalledWith({ index: 1 });
-		});
-
-		args.handleChange.mockClear();
-		await userEvent.click(toButton);
-
-		await waitFor(() => {
-			expect(args.handleChange).toHaveBeenCalledWith({ index: 1 });
-			expect(args.handleChange).toHaveBeenCalledWith({ index: 2 });
-			expect(args.handleChange).toHaveBeenCalledWith({ index: 3 });
-		});
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Carousel visibleItems={2} className="test-classname" attributes={{ id: "test-id" }}>
-				<Placeholder h={100}>Item 0</Placeholder>
-				<Placeholder h={100}>Item 1</Placeholder>
-				<Placeholder h={100}>Item 2</Placeholder>
-				<Placeholder h={100}>Item 3</Placeholder>
-				<Placeholder h={100}>Item 4</Placeholder>
-				<Placeholder h={100}>Item 5</Placeholder>
-			</Carousel>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
-};
-
-export const testControls: StoryObj<{ handleRender: ReturnType<typeof fn> }> = {
-	name: "test: navigation controls",
-	args: {
-		handleRender: fn(),
-	},
-	render: (args) => (
-		<React.Profiler id="carousel" onRender={args.handleRender}>
-			<Carousel visibleItems={2} attributes={{ "data-testid": "test-id" }}>
-				<Placeholder h={100}>Item 0</Placeholder>
-				<Placeholder h={100}>Item 1</Placeholder>
-				<Placeholder h={100}>Item 2</Placeholder>
-				<Placeholder h={100}>Item 3</Placeholder>
-				<Placeholder h={100}>Item 4</Placeholder>
-				<Placeholder h={100}>Item 5</Placeholder>
-			</Carousel>
-		</React.Profiler>
-	),
-	play: async ({ canvas, args }) => {
-		const root = canvas.getByTestId("test-id");
-		const scrollEl = root.querySelector("ul")!;
-		const [backControl, forwardControl] = Array.from(root.querySelectorAll("button")).map(
-			(button) => button.parentElement!
-		);
-
-		await waitFor(() => {
-			expect(backControl).toHaveStyle({ opacity: "0" });
-			expect(forwardControl).toHaveStyle({ opacity: "1" });
-		});
-
-		args.handleRender.mockClear();
-		scrollEl.scrollTo({ left: scrollEl.scrollWidth, behavior: "smooth" });
-
-		// Smooth scrolling through the whole carousel takes longer than the default timeout
-		await waitFor(
-			() => {
-				expect(scrollEl.scrollLeft + scrollEl.clientWidth).toBeGreaterThanOrEqual(
-					scrollEl.scrollWidth - 1
-				);
-				expect(backControl).toHaveStyle({ opacity: "1" });
-				expect(forwardControl).toHaveStyle({ opacity: "0" });
-			},
-			{ timeout: 5000 }
-		);
-
-		// Carousel only renders when the controls change and not on every frame of the scroll animation
-		expect(args.handleRender.mock.calls.length).toBeLessThan(8);
 	},
 };

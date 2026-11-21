@@ -22,9 +22,15 @@ For all new features, we recommend to start with a feature proposal first where 
 
 ### Testing
 
-- All component tests we write are running directly in Storybook and you can see their results in the action panel of a specific component. You can also run all component using the storybook test widget in the browser.
-- All unit tests for other utilities can be executed using `pnpm test:unit`.
-- Visual regression testing access is limited to the repository maintainers and will be triggered manually before the release or for pull requests with major changes.
+Component tests are split by what they check:
+
+- **Stories** (`tests/*.stories.tsx`) show the visual variants and states of a component. Every story is a visual regression snapshot in Chromatic. A story can have a `play` function asserting that its visual state is correct in the DOM too, e.g. a disabled button story checking the `disabled` attribute. Play functions run in Storybook's test widget and with `pnpm test:browser`.
+- **Browser tests** (`tests/*.test.tsx`) cover behavior: handlers, controlled and uncontrolled state, keyboard navigation, focus, attribute forwarding and other edge cases. They run with Vitest browser mode in Chromium and don't produce snapshots, so they're the place for adding as many edge cases as needed without adding more stories. Run them with `pnpm --filter reshaped test:components`.
+- **Unit tests** (`*.test.ts`) cover pure functions and run with `pnpm test:unit`.
+
+See [AGENTS.md](./AGENTS.md#testing) for the detailed conventions and examples.
+
+Visual regression testing access is limited to the repository maintainers and will be triggered manually before the release or for pull requests with major changes.
 
 ## Changelog
 

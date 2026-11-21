@@ -1,6 +1,6 @@
 {
 	"name": "reshaped",
-	"version": "4.4.0-canary.1",
+	"version": "4.4.0-canary.2",
 	"description": "Professionally crafted design system in React and Figma for building products of any scale and complexity",
 	"keywords": [
 		"accessibility",
@@ -85,7 +85,9 @@
 		"build:bundle": "vite build && shx cp dist/index.d.ts dist/bundle.d.cts",
 		"build:skills": "shx rm -rf skills && shx cp -r ../../plugins/reshaped/skills skills",
 		"build:size": "pnpm clean && pnpm build:esm && pnpm build:bundle",
-		"test:browser": "vitest run --project=storybook",
+		"test:browser": "vitest run --project=storybook --project=browser",
+		"test:stories": "vitest run --project=storybook",
+		"test:components": "vitest run --project=browser",
 		"test:unit": "vitest run --project=unit",
 		"test:size": "size-limit"
 	},

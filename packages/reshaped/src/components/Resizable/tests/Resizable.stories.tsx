@@ -1,6 +1,3 @@
-import { StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
-
 import Button from "@/components/Button";
 import Resizable from "@/components/Resizable";
 import View from "@/components/View";
@@ -203,29 +200,6 @@ export const layout = {
 			</Resizable.Item>
 		</Resizable>
 	),
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Resizable className="test-classname" attributes={{ id: "test-id" }} height="200px">
-				<Resizable.Item>
-					<Panel />
-				</Resizable.Item>
-				<Resizable.Handle />
-				<Resizable.Item>
-					<Panel />
-				</Resizable.Item>
-			</Resizable>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
 };
 
 const Wrapper = () => (

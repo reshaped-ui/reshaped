@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fireEvent, fn, Mock } from "storybook/test";
+import { expect, fn, Mock } from "storybook/test";
 
 import Modal from "@/components/Modal";
 import Slider from "@/components/Slider";
@@ -40,17 +40,6 @@ export const base: StoryObj = {
 			<div style={{ height: 2000 }} />
 		</Example>
 	),
-	play: ({ canvas }) => {
-		const inputs = canvas.getAllByRole("slider");
-
-		expect(inputs[0]).toHaveAttribute("name", "slider-single");
-
-		expect(inputs[1]).toHaveAttribute("name", "slider-range");
-		expect(inputs[2]).toHaveAttribute("name", "slider-range");
-
-		expect(inputs[3]).toHaveAttribute("name", "slider-min");
-		expect(inputs[4]).toHaveAttribute("name", "slider-max");
-	},
 };
 
 export const orientation = {
@@ -94,13 +83,6 @@ export const minMax: StoryObj = {
 		expect(inputs[0]).toHaveAttribute("min", "50");
 		expect(inputs[0]).toHaveAttribute("max", "70");
 		expect(inputs[0]).toHaveValue("60");
-
-		fireEvent.change(inputs[0], { target: { value: 30 } });
-		expect(inputs[0]).toHaveValue("50");
-
-		fireEvent.change(inputs[0], { target: { value: 80 } });
-		expect(inputs[0]).toHaveValue("70");
-
 		expect(inputs[1]).toHaveValue("50");
 		expect(inputs[2]).toHaveValue("70");
 	},
@@ -127,13 +109,6 @@ export const step: StoryObj = {
 		const inputs = canvas.getAllByRole("slider");
 
 		expect(inputs[0]).toHaveValue("30");
-
-		fireEvent.change(inputs[0], { target: { value: 31 } });
-		expect(inputs[0]).toHaveValue("30");
-
-		fireEvent.change(inputs[0], { target: { value: 34 } });
-		expect(inputs[0]).toHaveValue("35");
-
 		expect(inputs[1]).toHaveValue("30");
 	},
 };
@@ -180,196 +155,6 @@ export const renderValue: StoryObj = {
 	},
 };
 
-export const defaultValue: StoryObj<{
-	handleChange: Mock;
-	handleChangeCommit: Mock;
-}> = {
-	name: "defaultValue, onChange, onChangeCommit",
-	args: {
-		handleChange: fn(),
-		handleChangeCommit: fn(),
-	},
-	render: (args) => (
-		<View paddingTop={10}>
-			<Slider
-				name="test-name"
-				defaultValue={50}
-				onChange={args.handleChange}
-				onChangeCommit={args.handleChangeCommit}
-			/>
-		</View>
-	),
-	play: async ({ canvas, args }) => {
-		const input = canvas.getByRole("slider");
-
-		expect(input).toHaveValue("50");
-
-		fireEvent.change(input, { target: { value: 51 } });
-
-		expect(args.handleChange).toHaveBeenCalledTimes(1);
-		expect(args.handleChange).toHaveBeenCalledWith({ value: 51, name: "test-name" });
-
-		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
-		expect(args.handleChangeCommit).toHaveBeenCalledWith({ value: 51, name: "test-name" });
-
-		expect(input).toHaveValue("51");
-	},
-};
-
-export const value: StoryObj<{
-	handleChange: Mock;
-	handleChangeCommit: Mock;
-}> = {
-	name: "value, onChange, onChangeCommit",
-	args: {
-		handleChange: fn(),
-		handleChangeCommit: fn(),
-	},
-	render: (args) => (
-		<View paddingTop={10}>
-			<Slider
-				name="test-name"
-				value={50}
-				onChange={args.handleChange}
-				onChangeCommit={args.handleChangeCommit}
-			/>
-		</View>
-	),
-	play: async ({ canvas, args }) => {
-		const input = canvas.getByRole("slider");
-
-		expect(input).toHaveValue("50");
-
-		fireEvent.change(input, { target: { value: 51 } });
-
-		expect(args.handleChange).toHaveBeenCalledTimes(1);
-		expect(args.handleChange).toHaveBeenCalledWith({ value: 51, name: "test-name" });
-
-		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
-		expect(args.handleChangeCommit).toHaveBeenCalledWith({ value: 51, name: "test-name" });
-
-		expect(input).toHaveValue("50");
-	},
-};
-
-export const rangeDefaultValue: StoryObj<{
-	handleChange: Mock;
-	handleChangeCommit: Mock;
-}> = {
-	name: "range, defaultValue, onChange, onChangeCommit",
-	args: {
-		handleChange: fn(),
-		handleChangeCommit: fn(),
-	},
-	render: (args) => (
-		<View paddingTop={10}>
-			<Slider
-				range
-				name="test-name"
-				defaultMinValue={50}
-				defaultMaxValue={70}
-				onChange={args.handleChange}
-				onChangeCommit={args.handleChangeCommit}
-			/>
-		</View>
-	),
-	play: async ({ canvas, args }) => {
-		const [minInput, maxInput] = canvas.getAllByRole("slider");
-
-		expect(minInput).toHaveValue("50");
-		expect(maxInput).toHaveValue("70");
-
-		fireEvent.change(minInput, { target: { value: 51 } });
-
-		expect(args.handleChange).toHaveBeenCalledTimes(1);
-		expect(args.handleChange).toHaveBeenCalledWith({
-			minValue: 51,
-			maxValue: 70,
-			name: "test-name",
-			minName: "test-name",
-			maxName: "test-name",
-		});
-
-		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
-		expect(args.handleChangeCommit).toHaveBeenCalledWith({
-			minValue: 51,
-			maxValue: 70,
-			name: "test-name",
-			minName: "test-name",
-			maxName: "test-name",
-		});
-
-		expect(minInput).toHaveValue("51");
-		expect(maxInput).toHaveValue("70");
-	},
-};
-
-export const rangeValue: StoryObj<{
-	handleChange: Mock;
-	handleChangeCommit: Mock;
-}> = {
-	name: "range, value, onChange, onChangeCommit, minName, maxName",
-	args: {
-		handleChange: fn(),
-		handleChangeCommit: fn(),
-	},
-	render: (args) => (
-		<View paddingTop={10}>
-			<Slider
-				range
-				minName="test-name-min"
-				maxName="test-name-max"
-				minValue={50}
-				maxValue={70}
-				onChange={args.handleChange}
-				onChangeCommit={args.handleChangeCommit}
-			/>
-		</View>
-	),
-	play: async ({ canvas, args }) => {
-		const [minInput, maxInput] = canvas.getAllByRole("slider");
-
-		expect(minInput).toHaveValue("50");
-		expect(maxInput).toHaveValue("70");
-
-		fireEvent.change(minInput, { target: { value: 51 } });
-
-		expect(args.handleChange).toHaveBeenCalledTimes(1);
-		expect(args.handleChange).toHaveBeenCalledWith({
-			minValue: 51,
-			maxValue: 70,
-			minName: "test-name-min",
-			maxName: "test-name-max",
-		});
-
-		expect(args.handleChangeCommit).toHaveBeenCalledTimes(1);
-		expect(args.handleChangeCommit).toHaveBeenCalledWith({
-			minValue: 51,
-			maxValue: 70,
-			minName: "test-name-min",
-			maxName: "test-name-max",
-		});
-
-		expect(minInput).toHaveValue("50");
-		expect(maxInput).toHaveValue("70");
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Slider name="name" className="test-classname" attributes={{ id: "test-id" }} />
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
-};
-
 export const testForm: StoryObj<{ handleFormChange: Mock; handleFormInit: Mock }> = {
 	name: "test: form onChange",
 	args: {
@@ -404,15 +189,8 @@ export const testForm: StoryObj<{ handleFormChange: Mock; handleFormInit: Mock }
 			</View>
 		);
 	},
-	play: async () => {
-		/**
-		 * Placeholder
-		 *
-		 * No way to test dragging here without calling fireEvent.change
-		 * Which defeats the purpose of testing custom emitted events
-		 *
-		 * Test this behavior manually in Storybook by dragging the thumbs
-		 */
+	parameters: {
+		chromatic: { disableSnapshot: true },
 	},
 };
 

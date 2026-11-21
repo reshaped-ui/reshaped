@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent } from "storybook/test";
+import { expect } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
 import Badge from "@/components/Badge";
@@ -636,111 +636,6 @@ export const composition = {
 	),
 };
 
-export const href: StoryObj = {
-	name: "href",
-	render: () => <Button href="https://reshaped.so">Trigger</Button>,
-	play: async ({ canvas }) => {
-		const el = canvas.getByRole("link");
-
-		expect(el).toHaveAttribute("href", "https://reshaped.so");
-	},
-};
-
-export const onClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
-	name: "onClick",
-	args: {
-		handleClick: fn(),
-	},
-	render: (args) => <Button onClick={args.handleClick}>Trigger</Button>,
-	play: async ({ canvas, args }) => {
-		const { handleClick } = args;
-		const el = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(el);
-
-		expect(el).toHaveAttribute("type", "button");
-		expect(handleClick).toHaveBeenCalledTimes(1);
-		expect(handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: el }));
-	},
-};
-
-export const hrefOnClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
-	name: "href, onClick",
-	args: {
-		handleClick: fn(),
-	},
-	render: (args) => (
-		<Button
-			onClick={(e) => {
-				e.preventDefault();
-				args.handleClick(e);
-			}}
-			href="https://reshaped.so"
-		>
-			Trigger
-		</Button>
-	),
-	play: async ({ canvas, args }) => {
-		const { handleClick } = args;
-		const el = canvas.getByRole("link");
-
-		await userEvent.click(el);
-
-		expect(el).toHaveAttribute("href", "https://reshaped.so");
-		expect(handleClick).toHaveBeenCalledTimes(1);
-		expect(handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: el }));
-	},
-};
-
-export const as: StoryObj = {
-	name: "as",
-	render: () => (
-		<Example>
-			<Example.Item title="as: span">
-				<Button onClick={() => {}} as="span">
-					Trigger
-				</Button>
-			</Example.Item>
-			<Example.Item title="render, disabled">
-				<Button
-					disabled
-					onClick={() => {}}
-					render={(props) => <section {...props} />}
-					attributes={{ "data-testid": "render-el" }}
-				>
-					Trigger
-				</Button>
-			</Example.Item>
-		</Example>
-	),
-	play: ({ canvas }) => {
-		const [asEl] = canvas.getAllByText("Trigger");
-		const renderEl = canvas.getByTestId("render-el");
-
-		expect(asEl.tagName).toBe("SPAN");
-
-		expect(renderEl.tagName).toBe("SECTION");
-		expect(renderEl).toHaveAttribute("aria-disabled", "true");
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Button className="test-classname" attributes={{ id: "test-id" }}>
-				Trigger
-			</Button>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
-};
-
 export const group: StoryObj = {
 	name: "group",
 	render: () => (
@@ -831,21 +726,4 @@ export const groupFullWidth: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-};
-
-export const groupClassName: StoryObj = {
-	name: "group className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Button.Group className="test-classname" attributes={{ id: "test-id" }}>
-				<Button>Trigger</Button>
-			</Button.Group>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
 };

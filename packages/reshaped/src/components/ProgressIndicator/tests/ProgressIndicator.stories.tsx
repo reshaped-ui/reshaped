@@ -1,6 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect } from "storybook/test";
 
 import Button from "@/components/Button";
 import ProgressIndicator from "@/components/ProgressIndicator";
@@ -101,33 +100,5 @@ export const color = {
 				</Example.Item>
 			</Example>
 		);
-	},
-};
-
-export const ariaLabel: StoryObj = {
-	name: "ariaLabel",
-	render: () => <ProgressIndicator total={10} className="test-classname" ariaLabel="Progress" />,
-	play: async ({ canvas }) => {
-		const progress = canvas.getByRole("progressbar");
-
-		expect(progress).toHaveAttribute("aria-valuenow", "0");
-		expect(progress).toHaveAttribute("aria-valuemin", "0");
-		expect(progress).toHaveAttribute("aria-valuemax", "9");
-		expect(progress).toHaveAccessibleName("Progress");
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<ProgressIndicator total={10} className="test-classname" attributes={{ id: "test-id" }} />
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
 	},
 };

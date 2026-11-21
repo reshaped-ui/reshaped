@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { expect, fn, Mock, waitFor } from "storybook/test";
+import { expect } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
 import View from "@/components/View";
@@ -152,12 +152,9 @@ export const colors = {
 	),
 };
 
-export const fallback: StoryObj<{ handleError: Mock }> = {
+export const fallback = {
 	name: "test: fallback",
-	args: {
-		handleError: fn(),
-	},
-	render: (args) => {
+	render: () => {
 		const [error, setError] = useState(false);
 
 		return (
@@ -165,22 +162,14 @@ export const fallback: StoryObj<{ handleError: Mock }> = {
 				src={error ? undefined : "/foo"}
 				icon={IconZap}
 				imageAttributes={{
-					onError: () => {
-						setError(true);
-						args.handleError();
-					},
+					onError: () => setError(true),
 				}}
 			/>
 		);
 	},
-	play: async ({ args }) => {
-		await waitFor(() => {
-			expect(args.handleError).toHaveBeenCalledTimes(1);
-		});
-	},
 };
 
-export const renderImage: StoryObj = {
+export const renderImage = {
 	name: "renderImage",
 	render: () => (
 		<Example>
@@ -194,36 +183,4 @@ export const renderImage: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: ({ canvas }) => {
-		const img = canvas.getByRole("img");
-
-		expect(img).toBeInTheDocument();
-		expect(img).toHaveAccessibleName("Amsterdam canal");
-		expect(img).toHaveAttribute("id", "test-image");
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes, imageAttributes",
-	render: () => (
-		<div data-testid="root">
-			<Avatar
-				src="https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80"
-				className="test-classname"
-				attributes={{ id: "test-id" }}
-				imageAttributes={{ id: "test-image-id", alt: "test image" }}
-			/>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-		const img = canvas.getByRole("img");
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-
-		expect(img).toHaveAttribute("id", "test-image-id");
-		// Uses alt attribute in case prop is not passed
-		expect(img).toHaveAccessibleName("test image");
-	},
 };
