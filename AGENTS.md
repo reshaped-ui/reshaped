@@ -53,6 +53,7 @@ They are also what people browse in Storybook, so keep them focused on variants 
   For example, the `disabled` story renders all disabled buttons and its `play` checks that the button is actually `disabled`.
 - Visual edge cases that need a screenshot (overflowing text, composition with slots) are stories named `"test: <case>"`.
 - Don't add stories that only exist to run assertions: single unstyled elements, handler calls, attribute forwarding, controlled vs uncontrolled state, keyboard navigation. Those belong in browser tests.
+- Utility components without visual output of their own (for example `Portal` and `Freeze` in `components/_private`) don't get story files – test them only with browser tests. Hooks get a story only when an interactive demo is useful for manual checks.
 - If a story is needed for interactive manual checks but has no visual value, disable its snapshot with `parameters: { chromatic: { disableSnapshot: true } }`.
 
 ### 2. Browser tests (`tests/*.test.tsx`) – how the component behaves
