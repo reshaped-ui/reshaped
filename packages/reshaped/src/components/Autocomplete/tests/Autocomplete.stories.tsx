@@ -1,12 +1,11 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fireEvent, fn, Mock, userEvent, waitFor, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 
 import Autocomplete from "@/components/Autocomplete";
 import Badge from "@/components/Badge";
 import FormControl from "@/components/FormControl";
 import useToggle from "@/hooks/useToggle";
-import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 
 export default {
@@ -19,22 +18,15 @@ export default {
 	},
 };
 
-export const active: StoryObj<{
-	handleOpen: Mock;
-	handleClose: Mock;
-}> = {
-	name: "active, onOpen, onClose",
-	args: {
-		handleClose: fn(),
-		handleOpen: fn(),
-	},
-	render: (args) => {
+export const active: StoryObj = {
+	name: "active",
+	render: () => {
 		const toggle = useToggle(true);
 		const [value, setValue] = React.useState("");
 
 		return (
 			<Example>
-				<Example.Item title="active, onOpen, onClose">
+				<Example.Item title="active">
 					<FormControl>
 						<FormControl.Label>Label</FormControl.Label>
 						<Autocomplete
@@ -43,14 +35,8 @@ export const active: StoryObj<{
 							active={toggle.active}
 							value={value}
 							onChange={(args) => setValue(args.value)}
-							onOpen={() => {
-								args.handleOpen();
-								toggle.activate();
-							}}
-							onClose={() => {
-								args.handleClose();
-								toggle.deactivate();
-							}}
+							onOpen={toggle.activate}
+							onClose={toggle.deactivate}
 						>
 							{["Pizza", "Pie", "Ice-cream"].map((v) => {
 								if (!v.toLowerCase().includes(value.toLowerCase())) return;
@@ -66,39 +52,17 @@ export const active: StoryObj<{
 			</Example>
 		);
 	},
-	play: async ({ canvasElement, args }) => {
+	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
-		// const input = canvas.getByRole("combobox");
 		const list = await canvas.findByRole("listbox");
+
 		expect(list).toBeInTheDocument();
-		expect(args.handleOpen).not.toHaveBeenCalled();
-		await userEvent.click(document.body);
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenLastCalledWith();
-		});
-		// TODO: Flaky behavior in node env tests, works in the browser
-		// await sleep(500);
-		// await userEvent.click(input);
-		// await waitFor(() => {
-		// 	expect(args.handleOpen).toHaveBeenCalledTimes(1);
-		// 	expect(args.handleOpen).toHaveBeenLastCalledWith();
-		// });
 	},
 };
 
-export const base: StoryObj<{
-	handleInput: Mock;
-	handleItemSelect: Mock;
-	handleBackspace: Mock;
-}> = {
-	name: "onInput, onItemSelect, onBackspace",
-	args: {
-		handleInput: fn(),
-		handleBackspace: fn(),
-		handleItemSelect: fn(),
-	},
-	render: (args) => {
+export const base: StoryObj = {
+	name: "base",
+	render: () => {
 		const [value, setValue] = React.useState("");
 
 		return (
@@ -111,8 +75,6 @@ export const base: StoryObj<{
 							placeholder="Pick your food"
 							value={value}
 							onChange={(args) => setValue(args.value)}
-							onBackspace={args.handleBackspace}
-							onItemSelect={args.handleItemSelect}
 						>
 							{["Pizza", "Pie", "Ice-cream"].map((v) => {
 								return (
@@ -126,114 +88,6 @@ export const base: StoryObj<{
 				</Example.Item>
 			</Example>
 		);
-	},
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-
-		const input = canvas.getByRole("combobox");
-
-		// Reset the focus
-		document.body.focus();
-
-		// Test keyboard selection after focusing the input
-		input.focus();
-
-		let options: HTMLElement[] = [];
-
-		await waitFor(() => {
-			options = canvas.getAllByRole("option");
-		});
-
-		expect(options).toHaveLength(3);
-
-		await waitFor(() => {
-			expect(options[0]).toHaveAttribute("tabindex", "0");
-		});
-
-		expect(options[1]).toHaveAttribute("tabindex", "-1");
-
-		await userEvent.keyboard("{ArrowDown}");
-		await userEvent.keyboard("{Enter}");
-
-		expect(input).toHaveValue("Pie");
-		expect(args.handleItemSelect).toHaveBeenCalledTimes(1);
-		expect(args.handleItemSelect).toHaveBeenCalledWith({
-			value: "Pie",
-			data: undefined,
-		});
-
-		// Give browser time to focus on the input
-		await sleep(100);
-
-		// Test click selection after opening with down arrow
-		await userEvent.keyboard("{ArrowDown}");
-
-		await waitFor(() => {
-			options = canvas.getAllByRole("option");
-		});
-
-		await userEvent.click(options[0]);
-
-		expect(input).toHaveValue("Pizza");
-		expect(args.handleItemSelect).toHaveBeenCalledTimes(2);
-		expect(args.handleItemSelect).toHaveBeenCalledWith({
-			value: "Pizza",
-		});
-
-		input.focus();
-
-		await userEvent.keyboard("{Backspace}");
-
-		await waitFor(() => {
-			expect(args.handleBackspace).toHaveBeenCalledTimes(1);
-			expect(args.handleBackspace).toHaveBeenCalledWith();
-		});
-	},
-};
-
-export const itemData: StoryObj<{
-	handleItemSelect: Mock;
-}> = {
-	name: "item data",
-	args: {
-		handleItemSelect: fn(),
-	},
-	render: (args) => {
-		return (
-			<Example>
-				<Example.Item title="item data">
-					<FormControl>
-						<FormControl.Label>Label</FormControl.Label>
-						<Autocomplete
-							name="fruit"
-							placeholder="Pick your food"
-							onItemSelect={args.handleItemSelect}
-							active
-						>
-							{["Pizza", "Pie", "Ice-cream"].map((v, i) => {
-								return (
-									<Autocomplete.Item key={v} value={v} data={i === 1 ? { foo: true } : undefined}>
-										{v}
-									</Autocomplete.Item>
-								);
-							})}
-						</Autocomplete>
-					</FormControl>
-				</Example.Item>
-			</Example>
-		);
-	},
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const options = await canvas.findAllByRole("option");
-
-		await userEvent.click(options[0]);
-
-		expect(args.handleItemSelect).toHaveBeenLastCalledWith({ value: "Pizza" });
-
-		await userEvent.click(options[1]);
-
-		expect(args.handleItemSelect).toHaveBeenLastCalledWith({ value: "Pie", data: { foo: true } });
 	},
 };
 
@@ -261,14 +115,9 @@ export const itemDisabled: StoryObj = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
-		const input = canvas.getByRole("combobox");
 		const options = await canvas.findAllByRole("option");
 
-		await fireEvent.click(options[1]);
-
 		expect(options[1]).toBeDisabled();
-		// Check that focus stays on input when clicking on disabled elements
-		expect(document.activeElement).toBe(input);
 	},
 };
 

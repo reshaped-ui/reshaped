@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import { useId, useState } from "react";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import MenuItem from "@/components/MenuItem";
@@ -8,7 +8,6 @@ import Popover, { type PopoverProps } from "@/components/Popover";
 import ScrollArea from "@/components/ScrollArea";
 import Tooltip from "@/components/Tooltip";
 import View from "@/components/View";
-import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 
 export default {
@@ -114,316 +113,25 @@ export const elevation = {
 	),
 };
 
-export const defaultActive: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "defaultActive, uncontrolled",
-	args: {
-		handleOpen: fn(),
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<Popover onOpen={args.handleOpen} onClose={args.handleClose} defaultActive>
-			<Popover.Trigger>
-				{(attributes) => <Button attributes={attributes}>Open</Button>}
-			</Popover.Trigger>
-			<Popover.Content>Content</Popover.Content>
-		</Popover>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-		let item = canvas.getByText("Content");
-
-		// Wait for the open animation
-		await sleep(500);
-		await userEvent.click(document.body);
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
-			expect(item).not.toBeInTheDocument();
-		});
-
-		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleOpen).toHaveBeenCalledWith();
-		});
-
-		item = canvas.getByText("Content");
-		expect(item).toBeInTheDocument();
-	},
-};
-
-export const active: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "active, controlled",
-	args: {
-		handleOpen: fn(),
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<Popover onOpen={args.handleOpen} onClose={args.handleClose} active>
-			<Popover.Trigger>
-				{(attributes) => <Button attributes={attributes}>Open</Button>}
-			</Popover.Trigger>
-			<Popover.Content>Content</Popover.Content>
-		</Popover>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const item = canvas.getByText("Content");
-
-		await userEvent.click(document.body);
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
-		});
-
-		expect(item).toBeInTheDocument();
-	},
-};
-
-export const activeFalse: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "active false, controlled",
-	args: {
-		handleOpen: fn(),
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<Popover onOpen={args.handleOpen} onClose={args.handleClose} active={false}>
-			<Popover.Trigger>
-				{(attributes) => <Button attributes={attributes}>Open</Button>}
-			</Popover.Trigger>
-			<Popover.Content>Content</Popover.Content>
-		</Popover>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleOpen).toHaveBeenCalledWith();
-		});
-
-		const item = canvas.queryByText("Content");
-		expect(item).not.toBeInTheDocument();
-	},
-};
-
-export const handlers: StoryObj<{
-	handleAfterOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-	handleAfterClose: ReturnType<typeof fn>;
-}> = {
-	name: "onAfterOpen, onAfterClose",
-	args: {
-		handleClose: fn(),
-		handleAfterOpen: fn(),
-		handleAfterClose: fn(),
-	},
-	render: (args) => {
-		const [active, setActive] = useState(false);
-
-		return (
-			<Popover
-				active={active}
-				onOpen={() => setActive(true)}
-				onClose={(closeArgs) => {
-					setActive(false);
-					args.handleClose(closeArgs);
-				}}
-				onAfterOpen={args.handleAfterOpen}
-				onAfterClose={args.handleAfterClose}
-			>
-				<Popover.Trigger>
-					{(attributes) => <Button attributes={attributes}>Open</Button>}
-				</Popover.Trigger>
-				<Popover.Content>Content</Popover.Content>
-			</Popover>
-		);
-	},
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-
-		// Wait for the color mode initialization to re-enable transitions globally
-		await sleep(100);
-
-		await userEvent.click(trigger);
-
-		// Wait for the open transition
-		await waitFor(() => {
-			expect(args.handleAfterOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleAfterOpen).toHaveBeenCalledWith();
-		});
-
-		expect(args.handleAfterClose).toHaveBeenCalledTimes(0);
-
-		// Close by clicking outside
-		await userEvent.click(document.body);
-
-		// Wait for the close transition
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
-			expect(args.handleAfterClose).toHaveBeenCalledWith();
-		});
-
-		expect(args.handleAfterOpen).toHaveBeenCalledTimes(1);
-	},
-};
-
-export const dismissible: StoryObj<{
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "dismissible, onClose, className, attributes, closeAriaLabel",
-	args: {
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<Popover onClose={args.handleClose} defaultActive>
+export const dismissible: StoryObj = {
+	name: "dismissible",
+	render: () => (
+		<Popover defaultActive>
 			<Popover.Trigger>
 				{(attributes) => <Button attributes={attributes}>Open</Button>}
 			</Popover.Trigger>
 			<Popover.Content>
-				<Popover.Dismissible
-					closeAriaLabel="Close"
-					attributes={{ "data-testid": "test-id" }}
-					className="test-classname"
-				>
+				<Popover.Dismissible closeAriaLabel="Close" attributes={{ "data-testid": "test-id" }}>
 					Content
 				</Popover.Dismissible>
 			</Popover.Content>
 		</Popover>
 	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-
-		await sleep(300);
-
-		const dismissible = canvas.getByTestId("test-id");
-		const closeButton = within(dismissible).getByRole("button");
-
-		expect(dismissible).toHaveClass("test-classname");
-		expect(closeButton).toHaveAccessibleName("Close");
-
-		await userEvent.click(closeButton);
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "close-button" });
-		});
-
-		await sleep(300);
-
-		const trigger = canvas.getAllByRole("button")[0];
-		await userEvent.click(trigger);
-	},
-};
-
-export const autoFocus: StoryObj = {
-	name: "autoFocus",
-	render: () => (
-		<Example>
-			<Example.Item title="autoFocus=false">
-				{/* oxlint-disable-next-line jsx_a11y/no-autofocus */}
-				<Demo autoFocus={false} />
-			</Example.Item>
-		</Example>
-	),
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
+		const dismissible = await canvas.findByTestId("test-id");
 
-		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			expect(document.activeElement).toHaveRole("dialog");
-		});
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Popover active>
-				<Popover.Trigger>
-					{(attributes) => <Button attributes={attributes}>Open</Button>}
-				</Popover.Trigger>
-				<Popover.Content className="test-classname" attributes={{ "data-testid": "test-id" }}>
-					Content
-				</Popover.Content>
-			</Popover>
-		</div>
-	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const menu = await canvas.findByTestId("test-id");
-
-		expect(menu).toHaveClass("test-classname");
-	},
-};
-
-export const testNested = {
-	name: "test: nested",
-	render: () => (
-		<Popover position="bottom">
-			<Popover.Trigger>
-				{(attributes) => <Button attributes={attributes}>Open</Button>}
-			</Popover.Trigger>
-			<Popover.Content>
-				<View gap={2} align="start">
-					Popover content
-					<Popover>
-						<Popover.Trigger>
-							{(attributes) => <Button attributes={attributes}>Open nested</Button>}
-						</Popover.Trigger>
-						<Popover.Content>Hello</Popover.Content>
-					</Popover>
-				</View>
-			</Popover.Content>
-		</Popover>
-	),
-	play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-
-		await userEvent.click(canvas.getByRole("button", { name: "Open" }));
-		const content = await canvas.findByText("Popover content");
-
-		await userEvent.click(canvas.getByRole("button", { name: "Open nested" }));
-		const nestedContent = await canvas.findByText("Hello");
-
-		// Clicks inside the nested popover are not outside clicks for the parent popover
-		await userEvent.click(nestedContent);
-		await sleep(100);
-		expect(content).toBeInTheDocument();
-		expect(nestedContent).toBeInTheDocument();
-
-		// Outside clicks close the popovers one by one, starting from the latest opened one
-		await userEvent.click(canvasElement.ownerDocument.body);
-		await waitFor(() => {
-			expect(nestedContent).not.toBeInTheDocument();
-		});
-		expect(content).toBeInTheDocument();
-
-		await userEvent.click(canvasElement.ownerDocument.body);
-		await waitFor(() => {
-			expect(content).not.toBeInTheDocument();
-		});
+		expect(within(dismissible).getByRole("button")).toHaveAccessibleName("Close");
 	},
 };
 

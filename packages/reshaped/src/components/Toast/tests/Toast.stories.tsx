@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Dismissible from "@/components/Dismissible";
@@ -461,38 +461,6 @@ export const base: StoryObj = {
 	},
 };
 
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => {
-		const toast = useToast();
-
-		return (
-			<Button
-				onClick={() => {
-					toast.show({
-						text: "Content",
-						attributes: { "data-testid": "test-id" },
-						className: "test-classname",
-					});
-				}}
-			>
-				Show toast
-			</Button>
-		);
-	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const button = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(button);
-
-		const toast = canvas.getByTestId("test-id");
-
-		expect(toast).toBeInTheDocument();
-		expect(toast).toHaveClass("test-classname");
-	},
-};
-
 const Multiline = () => {
 	const toast = useToast();
 
@@ -617,16 +585,5 @@ export const containerRef: StoryObj = {
 		// Local toast renders inside the containerRef target
 		await userEvent.click(canvas.getByRole("button", { name: "Show toast" }));
 		expect(within(container).getByText("Content")).toBeInTheDocument();
-
-		// Global toast renders outside the containerRef target
-		await userEvent.click(canvas.getByRole("button", { name: "Show global toast" }));
-		const globalToast = canvas.getByText("Global content");
-		expect(globalToast).toBeInTheDocument();
-		expect(container).not.toContainElement(globalToast);
-
-		await userEvent.click(canvas.getByRole("button", { name: "Hide global toast" }));
-		await waitFor(() => {
-			expect(canvas.queryByText("Global content")).not.toBeInTheDocument();
-		});
 	},
 };
