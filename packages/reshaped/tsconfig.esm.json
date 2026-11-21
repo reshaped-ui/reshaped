@@ -13,7 +13,8 @@
 		"node_modules",
 		"dist",
 		"tools",
-		"src/utilities/testPresets.tsx",
+		"src/tests/setup.ts",
+		"src/tests/render.tsx",
 		"./src/**/*.test.tsx",
 		"./src/**/*.test.ts",
 		"./src/**/*.stories.tsx"
