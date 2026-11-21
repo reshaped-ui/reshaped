@@ -412,16 +412,14 @@ export const className: StoryObj = {
 
 export const virtualKeyboard: StoryObj = {
 	name: "test: virtual keyboard",
-	render: () => (
-		<Modal active position="end">
-			<Modal.Title>Title</Modal.Title>
-			<TextField name="name" />
-		</Modal>
-	),
+	render: () => <Demo position="end" title="Modal title" />,
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement.ownerDocument.body);
-		const root = canvas.getByRole("dialog");
 		const viewport = window.visualViewport!;
+
+		await userEvent.click(canvas.getByRole("button", { name: "Open dialog" }));
+
+		const root = await canvas.findByRole("dialog");
 
 		expect(root.style.getPropertyValue("--rs-modal-keyboard-height")).toBe("0px");
 
