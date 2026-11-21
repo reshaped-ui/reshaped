@@ -181,4 +181,137 @@ describe("flyout/Flyout", () => {
 
 		document.documentElement.setAttribute("dir", "ltr");
 	});
+
+	describe("content measuring", () => {
+		const waitFrames = () =>
+			new Promise((resolve) => {
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => resolve(undefined));
+				});
+			});
+
+		const setup = () => {
+			const container = document.createElement("div");
+			container.style.position = "relative";
+			container.style.width = "500px";
+			container.style.height = "500px";
+			container.style.overflow = "auto";
+			document.body.appendChild(container);
+
+			const spacer = document.createElement("div");
+			spacer.style.height = "2000px";
+			container.appendChild(spacer);
+
+			trigger.style.position = "absolute";
+			trigger.style.top = "200px";
+			container.appendChild(trigger);
+
+			// Size is defined by the children, so it can be measured without the applied position
+			content.style.width = "";
+			content.style.height = "";
+
+			const child = document.createElement("div");
+			child.style.width = "100px";
+			child.style.height = "50px";
+			content.appendChild(child);
+
+			const cloneNode = vi.spyOn(content, "cloneNode");
+			const flyout = new Flyout({
+				content,
+				trigger,
+				triggerCoordinates: null,
+				position: "bottom",
+				onDeactivate: onClose,
+			});
+
+			return { container, child, cloneNode, flyout };
+		};
+
+		test("measures the content once when activated", async () => {
+			const { container, cloneNode, flyout } = setup();
+
+			flyout.activate();
+			// Resize observer reports the initial sizes of the observed elements
+			await waitFrames();
+
+			expect(cloneNode).toHaveBeenCalledTimes(1);
+
+			flyout.deactivate();
+			document.body.removeChild(container);
+		});
+
+		test("follows the trigger on scroll without measuring the content again", async () => {
+			const { container, cloneNode, flyout } = setup();
+
+			flyout.activate();
+			await waitFrames();
+
+			const transform = content.style.transform;
+
+			container.scrollTop = 50;
+			container.dispatchEvent(new Event("scroll"));
+			await waitFrames();
+
+			expect(content.style.transform).not.toBe(transform);
+			expect(cloneNode).toHaveBeenCalledTimes(1);
+
+			flyout.deactivate();
+			document.body.removeChild(container);
+		});
+
+		test("measures the content again when it gets resized", async () => {
+			const { container, child, cloneNode, flyout } = setup();
+
+			flyout.activate();
+			await waitFrames();
+
+			const transform = content.style.transform;
+
+			child.style.width = "200px";
+			await waitFrames();
+
+			expect(cloneNode).toHaveBeenCalledTimes(2);
+			// Content stays centered against the trigger
+			expect(content.style.transform).not.toBe(transform);
+
+			flyout.deactivate();
+			document.body.removeChild(container);
+		});
+
+		test("measures the content again on scroll after its children change", async () => {
+			const { container, cloneNode, flyout } = setup();
+
+			flyout.activate();
+			await waitFrames();
+
+			// Doesn't resize the content, so it's not reported by the resize observer
+			content.appendChild(document.createComment("change"));
+			await waitFrames();
+
+			expect(cloneNode).toHaveBeenCalledTimes(1);
+
+			container.scrollTop = 50;
+			container.dispatchEvent(new Event("scroll"));
+			await waitFrames();
+
+			expect(cloneNode).toHaveBeenCalledTimes(2);
+
+			flyout.deactivate();
+			document.body.removeChild(container);
+		});
+
+		test("measures the content again when the position is updated manually", async () => {
+			const { container, cloneNode, flyout } = setup();
+
+			flyout.activate();
+			await waitFrames();
+
+			flyout.update();
+
+			expect(cloneNode).toHaveBeenCalledTimes(2);
+
+			flyout.deactivate();
+			document.body.removeChild(container);
+		});
+	});
 });

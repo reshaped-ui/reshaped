@@ -25,3 +25,13 @@ export type Options = {
 
 	onDeactivate: () => void;
 };
+
+export type ContentSize = {
+	width: number;
+	height: number;
+	clientWidth: number;
+	clientHeight: number;
+};
+
+/** Sizes of the content keyed by the css width value they were measured with */
+export type ContentMeasurements = Map<string, ContentSize>;

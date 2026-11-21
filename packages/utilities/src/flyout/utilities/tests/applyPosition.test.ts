@@ -188,4 +188,40 @@ describe("flyout/applyPosition", () => {
 		// Clone should be removed
 		expect(document.body.children.length).toBe(initialChildCount);
 	});
+
+	test("reuses the passed content measurements instead of measuring the content again", () => {
+		const cloneNode = vi.spyOn(content, "cloneNode");
+		const measurements = new Map();
+		const args = {
+			content,
+			trigger,
+			triggerCoordinates: null,
+			position: "top" as const,
+			lastUsedPosition: null,
+			onDeactivate: vi.fn(),
+			measurements,
+		};
+
+		applyPosition(args);
+
+		expect(cloneNode).toHaveBeenCalledTimes(1);
+		expect(measurements.size).toBe(1);
+
+		const transform = content.style.transform;
+
+		trigger.style.top = "300px";
+		applyPosition(args);
+
+		// Content still follows the trigger
+		expect(cloneNode).toHaveBeenCalledTimes(1);
+		expect(content.style.transform).not.toBe(transform);
+
+		// Sizes are stored per width, so the content is measured for a new one
+		trigger.style.width = "80px";
+		applyPosition({ ...args, width: "trigger" });
+
+		expect(cloneNode).toHaveBeenCalledTimes(2);
+		expect(measurements.size).toBe(2);
+		expect(content.style.width).toBe("80px");
+	});
 });
