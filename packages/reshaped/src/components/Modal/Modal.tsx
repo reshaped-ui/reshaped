@@ -7,6 +7,7 @@ import Overlay, { type OverlayInstance } from "@/components/Overlay";
 import Text from "@/components/Text";
 import useElementId from "@/hooks/useElementId";
 import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
+import useVirtualKeyboard from "@/hooks/useVirtualKeyboard";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
 import type * as T from "./Modal.types";
 import useModalDrag from "./useModalDrag";
@@ -78,6 +79,7 @@ const Modal: FC<T.Props> = (props) => {
 	} = props;
 	const id = useElementId();
 	const clientPosition = useResponsiveClientValue(position)!;
+	const keyboard = useVirtualKeyboard();
 	const [titleMounted, setTitleMounted] = useState(false);
 	const [subtitleMounted, setSubtitleMounted] = useState(false);
 	const internalRootRef = useRef<HTMLDivElement>(null);
@@ -148,6 +150,7 @@ const Modal: FC<T.Props> = (props) => {
 									...responsiveVariables("--rs-modal-size", size),
 									...responsiveVariables("--rs-modal-p", padding),
 									"--rs-modal-drag": "0px",
+									"--rs-modal-keyboard-height": `${keyboard.height}px`,
 								} as React.CSSProperties
 							}
 							aria-labelledby={titleMounted ? `${id}-title` : undefined}

@@ -410,6 +410,41 @@ export const className: StoryObj = {
 	},
 };
 
+export const virtualKeyboard: StoryObj = {
+	name: "test: virtual keyboard",
+	render: () => <Demo position="end" title="Modal title" />,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const viewport = window.visualViewport!;
+
+		await userEvent.click(canvas.getByRole("button", { name: "Open dialog" }));
+
+		const root = await canvas.findByRole("dialog");
+
+		expect(root.style.getPropertyValue("--rs-modal-keyboard-height")).toBe("0px");
+
+		// On-screen keyboard shrinks the visual viewport without changing the layout
+		Object.defineProperty(viewport, "height", {
+			configurable: true,
+			value: window.innerHeight - 300,
+		});
+		viewport.dispatchEvent(new Event("resize"));
+
+		// Bottom safe area inset is reduced by the keyboard height covering it
+		await waitFor(() => {
+			expect(root.style.getPropertyValue("--rs-modal-keyboard-height")).toBe("300px");
+		});
+
+		// @ts-expect-error Removes the stubbed value from the viewport itself
+		delete viewport.height;
+		viewport.dispatchEvent(new Event("resize"));
+
+		await waitFor(() => {
+			expect(root.style.getPropertyValue("--rs-modal-keyboard-height")).toBe("0px");
+		});
+	},
+};
+
 export const edgeCases = {
 	name: "test: edge cases",
 	render: () => {
