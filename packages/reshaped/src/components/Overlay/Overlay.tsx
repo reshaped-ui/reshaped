@@ -216,7 +216,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 	/**
 	 * iOS Safari tints its toolbars with the color of the fixed elements attached to the screen edges,
 	 * so the backdrop is positioned absolutely there and is aligned with the viewport manually.
-	 * Its top margin is kept as the offset from the viewport edge to let it bleed under the browser toolbars.
+	 * It bleeds under the browser toolbars with its shadow, which doesn't change its position.
 	 * Page scroll is locked with overflow only on iOS, so the scroll position stays the same while it's rendered
 	 */
 	useIsomorphicLayoutEffect(() => {
@@ -231,7 +231,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		backdropEl.style.setProperty("left", "0px");
 
 		const rect = backdropEl.getBoundingClientRect();
-		backdropEl.style.setProperty("top", `${Number.parseFloat(style.marginTop) - rect.top}px`);
+		backdropEl.style.setProperty("top", `${-rect.top}px`);
 		backdropEl.style.setProperty("left", `${-rect.left}px`);
 	}, [rendered, mounted, shouldBeContained]);
 
