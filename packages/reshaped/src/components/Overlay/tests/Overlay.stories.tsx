@@ -405,3 +405,49 @@ export const testTransitionStart: StoryObj = {
 		});
 	},
 };
+
+export const testImmediateClose: StoryObj<{ handleAfterClose: ReturnType<typeof fn> }> = {
+	name: "test: closed before the open transition",
+	args: {
+		handleAfterClose: fn(),
+	},
+	render: (args) => {
+		const overlayToggle = useToggle(false);
+
+		return (
+			<>
+				<Button onClick={overlayToggle.activate}>Open overlay</Button>
+				<Button onClick={overlayToggle.deactivate}>Close overlay</Button>
+				<Overlay active={overlayToggle.active} onAfterClose={args.handleAfterClose}>
+					Content
+				</Overlay>
+			</>
+		);
+	},
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement.ownerDocument.body);
+		const [openTrigger, closeTrigger] = canvas.getAllByRole("button");
+
+		// Transitions are paused for a couple of frames after the theme is mounted
+		await sleep(100);
+
+		// Overlay is closed in the same frame it was opened in, before the browser could start its transition
+		openTrigger.click();
+		await Promise.resolve();
+		expect(canvas.getByText("Content")).toBeInTheDocument();
+		closeTrigger.click();
+
+		await waitFor(() => {
+			expect(canvas.queryByText("Content")).not.toBeInTheDocument();
+			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
+		});
+
+		// Overlay still animates the next time it opens
+		openTrigger.click();
+		await new Promise((resolve) => requestAnimationFrame(resolve));
+
+		const overlay = canvas.getByText("Content").closest<HTMLElement>("[role=presentation]")!;
+
+		expect(overlay.getAnimations()).toHaveLength(1);
+	},
+};

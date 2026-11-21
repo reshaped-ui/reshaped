@@ -43,6 +43,8 @@ export type Props = {
 	contained?: boolean;
 	/** Additional classname for the root element */
 	className?: ClassName;
+	/** Additional classname for the backdrop element, rendered next to the root element */
+	backdropClassName?: ClassName;
 	/** Ref accessor for the overlay methods */
 	instanceRef?: React.RefObject<Instance>;
 	/** Additional attributes for the root element */

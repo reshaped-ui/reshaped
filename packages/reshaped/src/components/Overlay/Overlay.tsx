@@ -29,6 +29,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		containerRef,
 		contained,
 		className,
+		backdropClassName,
 		instanceRef,
 		attributes,
 	} = props;
@@ -46,6 +47,9 @@ const Overlay: React.FC<T.Props> = (props) => {
 	const scopeRef = React.useRef<HTMLDivElement>(null);
 	const contentRef = React.useRef<HTMLDivElement>(null);
 	const { lockScroll, unlockScroll } = useScrollLock({ containerRef });
+
+	const activeRef = React.useRef(active);
+	activeRef.current = active;
 
 	// Store overflow value in case we override it when rendering inside containerRef
 	const originalOverflowRef = React.useRef<string | null>(null);
@@ -75,7 +79,8 @@ const Overlay: React.FC<T.Props> = (props) => {
 		visible && s["--visible"],
 		transparent && s["--click-through"],
 		animated && s["--animated"],
-		shouldBeContained && s["--contained"]
+		shouldBeContained && s["--contained"],
+		backdropClassName
 	);
 
 	const isInsideContent = (el: HTMLElement) => {
@@ -153,6 +158,21 @@ const Overlay: React.FC<T.Props> = (props) => {
 		}
 	}, [active, render, hide, rendered, handleAfterClose]);
 
+	/**
+	 * Closing the overlay before its open transition has started cancels that transition instead of reversing it,
+	 * so there is no transitionend event to wait for
+	 */
+	useIsomorphicLayoutEffect(() => {
+		const rootEl = rootRef.current;
+		if (active || visible || !rendered || !rootEl) return;
+
+		const transitioning = rootEl.getAnimations?.().some((animation) => {
+			return animation instanceof CSSTransition && animation.transitionProperty === "opacity";
+		});
+
+		if (!transitioning) handleAfterClose();
+	}, [active, visible, rendered, handleAfterClose]);
+
 	// Applied before the overlay is shown, so it's rendered with the container offset from its first frame
 	useIsomorphicLayoutEffect(() => {
 		const containerEl = containerRef?.current;
@@ -171,7 +191,10 @@ const Overlay: React.FC<T.Props> = (props) => {
 
 		// Overlay rendered while the transitions are paused waits for them to still animate
 		if (checkPausedTransitions()) {
-			onNextFrame(() => show());
+			onNextFrame(() => {
+				// Overlay could have been closed while waiting
+				if (activeRef.current) show();
+			});
 			return;
 		}
 
