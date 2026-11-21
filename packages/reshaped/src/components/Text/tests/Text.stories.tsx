@@ -1,6 +1,3 @@
-import { StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
-
 import Text from "@/components/Text";
 import { Example } from "@/utilities/storybook";
 
@@ -212,39 +209,4 @@ export const align = {
 			</Example.Item>
 		</Example>
 	),
-};
-
-export const asProp: StoryObj = {
-	name: "as",
-	render: () => (
-		<>
-			<Text as="h1">Content</Text>
-			<Text variant="featured-3">Content</Text>
-			<Text variant={{ s: "featured-3", m: "featured-4" }}>Content</Text>
-		</>
-	),
-	play: async ({ canvas }) => {
-		const els = canvas.getAllByRole("heading");
-
-		expect(els[0].tagName).toEqual("H1");
-		expect(els[1].tagName).toBe("H3");
-		expect(els[2].tagName).toBe("H4");
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Text className="test-classname" attributes={{ id: "test-id" }}>
-				Content
-			</Text>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
 };

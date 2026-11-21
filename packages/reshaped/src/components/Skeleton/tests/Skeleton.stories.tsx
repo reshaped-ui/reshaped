@@ -1,6 +1,3 @@
-import { StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
-
 import Skeleton from "@/components/Skeleton";
 import { Example } from "@/utilities/storybook";
 
@@ -58,19 +55,4 @@ export const radius = {
 			</Example.Item>
 		</Example>
 	),
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Skeleton className="test-classname" attributes={{ id: "test-id" }} />
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
 };

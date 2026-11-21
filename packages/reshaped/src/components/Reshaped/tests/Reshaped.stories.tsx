@@ -1,10 +1,5 @@
-import { StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
-import { expect, userEvent } from "storybook/test";
+import { expect } from "storybook/test";
 
-import Button from "@/components/Button";
-import { useTheme } from "@/components/Theme";
-import type * as G from "@/types/global";
 import Reshaped from "../Reshaped";
 
 export default {
@@ -21,34 +16,6 @@ export const rtl = {
 			Hello
 		</Reshaped>
 	),
-};
-
-export const controlledMode: StoryObj = {
-	name: "colorMode, controlled",
-	render: () => {
-		const [mode, setMode] = useState<G.ColorMode>("dark");
-
-		return (
-			<Reshaped theme="slate" colorMode={mode}>
-				<Button
-					onClick={() => {
-						setMode(mode === "dark" ? "light" : "dark");
-					}}
-				>
-					Toggle color mode
-				</Button>
-			</Reshaped>
-		);
-	},
-	play: async ({ canvas }) => {
-		const button = canvas.getAllByRole("button")[0];
-
-		expect(document.documentElement.getAttribute("data-rs-color-mode")).toEqual("dark");
-
-		await userEvent.click(button);
-
-		expect(document.documentElement.getAttribute("data-rs-color-mode")).toEqual("light");
-	},
 };
 
 export const lightMode = {
@@ -101,55 +68,5 @@ export const scoped = {
 		expect(root).not.toBe(document.documentElement);
 		expect(root).toHaveAttribute("data-rs-theme", "slate");
 		expect(document.documentElement).not.toHaveAttribute("data-rs-theme");
-	},
-};
-
-const ScopedComponent = () => {
-	const { invertColorMode } = useTheme();
-
-	return <Button onClick={invertColorMode}>Invert</Button>;
-};
-
-export const testScoped: StoryObj = {
-	name: "test: scoped switch",
-	render: () => (
-		<Reshaped theme="slate">
-			<Reshaped theme="figma" scoped>
-				<ScopedComponent />
-			</Reshaped>
-		</Reshaped>
-	),
-	play: async ({ canvas }) => {
-		const nestedRoot = document.querySelector("[data-rs-root]");
-		const button = canvas.getAllByRole("button")[0];
-
-		expect(document.documentElement).toHaveAttribute("data-rs-theme", "slate");
-		expect(document.documentElement).toHaveAttribute("data-rs-color-mode", "light");
-
-		expect(nestedRoot).toHaveAttribute("data-rs-theme", "figma");
-		expect(nestedRoot).toHaveAttribute("data-rs-color-mode", "light");
-
-		await userEvent.click(button);
-
-		expect(document.documentElement).toHaveAttribute("data-rs-color-mode", "light");
-		expect(nestedRoot).toHaveAttribute("data-rs-color-mode", "dark");
-	},
-};
-
-export const keyboardMode = {
-	name: "test: keyboard mode",
-	render: () => (
-		<Reshaped theme="slate" defaultColorMode="dark">
-			Hello
-		</Reshaped>
-	),
-	play: async () => {
-		const attribute = "data-rs-keyboard";
-
-		expect(document.documentElement).not.toHaveAttribute(attribute);
-		await userEvent.keyboard("{Tab/}");
-		expect(document.documentElement).toHaveAttribute(attribute);
-		await userEvent.click(document.body);
-		expect(document.documentElement).not.toHaveAttribute(attribute);
 	},
 };

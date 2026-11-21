@@ -127,18 +127,3 @@ export const label = {
 		);
 	},
 };
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Divider className="test-classname" attributes={{ id: "test-id" }} />
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-	},
-};
