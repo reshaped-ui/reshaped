@@ -148,19 +148,14 @@ const Overlay: React.FC<T.Props> = (props) => {
 	 * Updates coming from the regular effects are deferred and could leave the overlay hidden for another frame
 	 */
 	useIsomorphicLayoutEffect(() => {
-		const hasTransitions = checkTransitions();
-
-		if (hasTransitions) setAnimated(true);
+		if (checkTransitions()) setAnimated(true);
 		if (active && !rendered) render();
-		if (!active && rendered) {
-			hide();
-			if (!hasTransitions) handleAfterClose();
-		}
-	}, [active, render, hide, rendered, handleAfterClose]);
+		if (!active && rendered) hide();
+	}, [active, render, hide, rendered]);
 
 	/**
-	 * Closing the overlay before its open transition has started cancels that transition instead of reversing it,
-	 * so there is no transitionend event to wait for
+	 * Hidden overlay is removed once its close transition ends, or right away when there is no transition to wait for:
+	 * when the transitions are disabled or when it's closed before its open transition has started
 	 */
 	useIsomorphicLayoutEffect(() => {
 		const rootEl = rootRef.current;

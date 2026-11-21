@@ -1,4 +1,5 @@
-import { describe, expect, test, vi } from "vitest";
+import type React from "react";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 import Button from "@/components/Button";
@@ -7,20 +8,6 @@ import Modal from "@/components/Modal";
 import useToggle from "@/hooks/useToggle";
 import { render } from "@/tests/render";
 
-/**
- * Swipe gesture is only enabled on touch devices, where it's handled by the native scrolling.
- * Scrolling can't be triggered with touch events in tests, so they stub the touch support
- * and scroll the modal container the same way the browser does while the modal is swiped
- */
-const stubTouchSupport = () => {
-	Object.defineProperty(navigator, "maxTouchPoints", { configurable: true, value: 1 });
-
-	return () => {
-		// @ts-expect-error Removes the stubbed value from the navigator itself
-		delete navigator.maxTouchPoints;
-	};
-};
-
 const fireTouchEvent = (target: Element, type: "touchstart" | "touchend") => {
 	const touch = new Touch({ identifier: 1, target, clientX: 100, clientY: 100 });
 	const touches = type === "touchstart" ? [touch] : [];
@@ -28,18 +15,27 @@ const fireTouchEvent = (target: Element, type: "touchstart" | "touchend") => {
 	target.dispatchEvent(new TouchEvent(type, { bubbles: true, touches, changedTouches: [touch] }));
 };
 
-/** Scroll container and the element wrapping the modal with its offsets from the screen edges */
-const getScrollElements = (dialog: Element) => {
+/**
+ * Elements rendered around the modal for the swipe gesture: the scroll container
+ * and the track wrapping the modal together with its offsets from the screen edges
+ */
+const getSwipeElements = (dialog: Element) => {
 	const track = dialog.parentElement!;
+	const scroller = track.parentElement!;
+	const side = getComputedStyle(scroller).overflowY === "auto" ? "bottom" : "right";
 
-	return { track, scroller: track.parentElement! };
+	return {
+		scroller,
+		/** Distance the modal is scrolled away from its open position */
+		getOffset: () =>
+			Math.round(track.getBoundingClientRect()[side] - scroller.getBoundingClientRect()[side]),
+	};
 };
 
 const SwipeDemo = (props: {
 	position: "bottom" | "end";
 	onClose: (args: { reason: string }) => void;
 	keepOpen?: boolean;
-	disableSwipeGesture?: boolean;
 }) => {
 	const { active, activate, deactivate } = useToggle();
 
@@ -49,7 +45,6 @@ const SwipeDemo = (props: {
 			<Modal
 				active={active}
 				position={props.position}
-				disableSwipeGesture={props.disableSwipeGesture}
 				onClose={(args) => {
 					props.onClose(args);
 					if (!props.keepOpen) deactivate();
@@ -59,6 +54,29 @@ const SwipeDemo = (props: {
 			</Modal>
 		</>
 	);
+};
+
+/** Opens the modal and waits for it to be scrolled to its open position */
+const openSwipeDemo = async (props: React.ComponentProps<typeof SwipeDemo>) => {
+	await render(<SwipeDemo {...props} />);
+	await userEvent.click(page.getByRole("button", { name: "Open dialog" }));
+
+	const dialog = page.getByRole("dialog");
+	await expect.element(dialog).toBeInTheDocument();
+
+	const elements = getSwipeElements(dialog.element());
+	await expect.poll(elements.getOffset).toBe(0);
+
+	return { dialog, ...elements };
+};
+
+/** Modal keeps its default positioning without the scroll container when it can't be swiped */
+const expectDefaultPositioning = async () => {
+	const dialog = page.getByRole("dialog");
+	await expect.element(dialog).toBeInTheDocument();
+
+	expect(getComputedStyle(getSwipeElements(dialog.element()).scroller).display).toBe("contents");
+	expect(getComputedStyle(dialog.element()).position).toBe("absolute");
 };
 
 describe("Components/Modal", () => {
@@ -213,46 +231,43 @@ describe("Components/Modal", () => {
 		await expect.poll(getKeyboardHeight).toBe("0px");
 	});
 
-	test("test: swipe gesture closes the modal", async () => {
-		const handleClose = vi.fn();
-		const restoreTouchSupport = stubTouchSupport();
+	test("test: swipe gesture is not available without touch support", async () => {
+		await render(
+			<Modal active position="bottom">
+				<Modal.Title>Modal title</Modal.Title>
+			</Modal>
+		);
 
-		try {
-			await render(<SwipeDemo position="bottom" onClose={handleClose} />);
-			const trigger = page.getByRole("button", { name: "Open dialog" });
-			const dialog = page.getByRole("dialog");
+		await expectDefaultPositioning();
+	});
 
-			await userEvent.click(trigger);
-			await expect.element(dialog).toBeInTheDocument();
+	/**
+	 * Swipe gesture is only enabled on touch devices, where it's handled by the native scrolling.
+	 * Scrolling can't be triggered with touch events in tests, so they stub the touch support
+	 * and scroll the modal container the same way the browser does while the modal is swiped
+	 */
+	describe("swipe gesture", () => {
+		beforeEach(() => {
+			vi.spyOn(navigator, "maxTouchPoints", "get").mockReturnValue(1);
+		});
 
-			const { scroller, track } = getScrollElements(dialog.element());
-			// Distance the modal is scrolled away from its open position
-			const getOffset = () => {
-				return Math.round(
-					track.getBoundingClientRect().bottom - scroller.getBoundingClientRect().bottom
-				);
-			};
+		afterEach(() => {
+			vi.restoreAllMocks();
+		});
+
+		test("closes the modal", async () => {
+			const handleClose = vi.fn();
+			const { dialog, scroller } = await openSwipeDemo({
+				position: "bottom",
+				onClose: handleClose,
+			});
 
 			// Modal is rendered after a spacer of the screen size and is scrolled into the view
 			expect(getComputedStyle(scroller).overflowY).toBe("auto");
-			await expect.poll(getOffset).toBe(0);
 			expect(scroller.scrollTop).toBeGreaterThan(0);
 
-			// Scrolling without a touch is not a part of the gesture, e.g. when it's triggered with a keyboard
-			scroller.scrollTop = 0;
-			scroller.dispatchEvent(new Event("scrollend"));
-
-			await expect.poll(getOffset).toBe(0);
-			expect(handleClose).not.toHaveBeenCalled();
-
-			// Modal is not closed while it's still held with a finger
 			fireTouchEvent(dialog.element(), "touchstart");
 			scroller.scrollTop = 0;
-			scroller.dispatchEvent(new Event("scrollend"));
-
-			expect(scroller.scrollTop).toBe(0);
-			expect(handleClose).not.toHaveBeenCalled();
-
 			fireTouchEvent(dialog.element(), "touchend");
 
 			await vi.waitFor(() => expect(handleClose).toHaveBeenCalledTimes(1));
@@ -260,30 +275,45 @@ describe("Components/Modal", () => {
 
 			// Modal is already out of the view, so it's removed without the close animation
 			await expect.element(dialog, { timeout: 300 }).not.toBeInTheDocument();
-		} finally {
-			restoreTouchSupport();
-		}
-	});
+		});
 
-	test("test: swipe gesture returns the modal released before it's swiped away", async () => {
-		const handleClose = vi.fn();
-		const restoreTouchSupport = stubTouchSupport();
+		test("doesn't close the modal while it's held with a finger", async () => {
+			const handleClose = vi.fn();
+			const { dialog, scroller } = await openSwipeDemo({
+				position: "bottom",
+				onClose: handleClose,
+			});
 
-		try {
-			await render(<SwipeDemo position="bottom" onClose={handleClose} />);
-			const dialog = page.getByRole("dialog");
+			fireTouchEvent(dialog.element(), "touchstart");
+			scroller.scrollTop = 0;
+			// Resolved synchronously, without waiting for the browser to report the end of the scrolling
+			scroller.dispatchEvent(new Event("scrollend"));
 
-			await userEvent.click(page.getByRole("button", { name: "Open dialog" }));
-			await expect.element(dialog).toBeInTheDocument();
+			expect(scroller.scrollTop).toBe(0);
+			expect(handleClose).not.toHaveBeenCalled();
+		});
 
-			const { scroller, track } = getScrollElements(dialog.element());
-			const getOffset = () => {
-				return Math.round(
-					track.getBoundingClientRect().bottom - scroller.getBoundingClientRect().bottom
-				);
-			};
+		test("ignores scrolling that isn't started with a touch", async () => {
+			const handleClose = vi.fn();
+			const { scroller, getOffset } = await openSwipeDemo({
+				position: "bottom",
+				onClose: handleClose,
+			});
+
+			// For example, scrolling triggered with a keyboard
+			scroller.scrollTop = 0;
+			scroller.dispatchEvent(new Event("scrollend"));
 
 			await expect.poll(getOffset).toBe(0);
+			expect(handleClose).not.toHaveBeenCalled();
+		});
+
+		test("returns the modal released before it's swiped away", async () => {
+			const handleClose = vi.fn();
+			const { dialog, scroller, getOffset } = await openSwipeDemo({
+				position: "bottom",
+				onClose: handleClose,
+			});
 
 			fireTouchEvent(dialog.element(), "touchstart");
 			scroller.scrollTop -= 20;
@@ -294,33 +324,18 @@ describe("Components/Modal", () => {
 			scroller.dispatchEvent(new Event("scrollend"));
 
 			expect(handleClose).not.toHaveBeenCalled();
-			await expect.element(dialog).toBeInTheDocument();
-		} finally {
-			restoreTouchSupport();
-		}
-	});
+		});
 
-	test("test: swipe gesture returns the modal kept open in onClose", async () => {
-		const handleClose = vi.fn();
-		const restoreTouchSupport = stubTouchSupport();
-
-		try {
-			await render(<SwipeDemo position="end" onClose={handleClose} keepOpen />);
-			const dialog = page.getByRole("dialog");
-
-			await userEvent.click(page.getByRole("button", { name: "Open dialog" }));
-			await expect.element(dialog).toBeInTheDocument();
-
-			const { scroller, track } = getScrollElements(dialog.element());
-			const getOffset = () => {
-				return Math.round(
-					track.getBoundingClientRect().right - scroller.getBoundingClientRect().right
-				);
-			};
+		test("returns the modal kept open in onClose", async () => {
+			const handleClose = vi.fn();
+			const { dialog, scroller, getOffset } = await openSwipeDemo({
+				position: "end",
+				onClose: handleClose,
+				keepOpen: true,
+			});
 
 			// Side modals are swiped away horizontally
 			expect(getComputedStyle(scroller).overflowX).toBe("auto");
-			await expect.poll(getOffset).toBe(0);
 			expect(scroller.scrollLeft).toBeGreaterThan(0);
 
 			fireTouchEvent(dialog.element(), "touchstart");
@@ -333,39 +348,16 @@ describe("Components/Modal", () => {
 			await expect.poll(getOffset, { timeout: 3000 }).toBe(0);
 			await expect.element(dialog).toBeInTheDocument();
 			expect(handleClose).toHaveBeenCalledTimes(1);
-		} finally {
-			restoreTouchSupport();
-		}
-	});
+		});
 
-	test("test: swipe gesture is not available without touch support and with disableSwipeGesture", async () => {
-		const Component = (props: { disableSwipeGesture?: boolean }) => (
-			<Modal active position="bottom" disableSwipeGesture={props.disableSwipeGesture}>
-				<Modal.Title>Modal title</Modal.Title>
-			</Modal>
-		);
-		const dialog = page.getByRole("dialog");
-		// Modal keeps its default positioning without the scroll container when it can't be swiped
-		const expectDefaultPositioning = async () => {
-			await expect.element(dialog).toBeInTheDocument();
+		test("disableSwipeGesture", async () => {
+			await render(
+				<Modal active position="bottom" disableSwipeGesture>
+					<Modal.Title>Modal title</Modal.Title>
+				</Modal>
+			);
 
-			const { scroller } = getScrollElements(dialog.element());
-
-			expect(getComputedStyle(scroller).display).toBe("contents");
-			expect(getComputedStyle(dialog.element()).position).toBe("absolute");
-		};
-
-		const screen = await render(<Component />);
-		await expectDefaultPositioning();
-		await screen.unmount();
-
-		const restoreTouchSupport = stubTouchSupport();
-
-		try {
-			await render(<Component disableSwipeGesture />);
 			await expectDefaultPositioning();
-		} finally {
-			restoreTouchSupport();
-		}
+		});
 	});
 });

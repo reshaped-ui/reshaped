@@ -253,6 +253,7 @@ describe("Utility components/Overlay", () => {
 
 		// Closed in the same frame it was opened in, before the browser could start its transition
 		openTrigger.click();
+		// React flushes the click updates in a microtask
 		await Promise.resolve();
 		expect(overlay.element()).toBeInTheDocument();
 		closeTrigger.click();

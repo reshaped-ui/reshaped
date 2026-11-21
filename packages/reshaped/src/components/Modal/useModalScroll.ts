@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { rafThrottle } from "@reshaped/utilities/internal";
 
 import type { OverlayInstance } from "@/components/Overlay";
 import useHandlerRef from "@/hooks/useHandlerRef";
@@ -80,7 +81,6 @@ const useModalScroll = (args: {
 		let returning = false;
 		// Position of the modal during the previous check, used for detecting if it's still moving
 		let settledHidden: number | null = null;
-		let frame: number | null = null;
 		let timer: ReturnType<typeof setTimeout> | null = null;
 		let keepOpenTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -122,6 +122,14 @@ const useModalScroll = (args: {
 			// Strip filling the browser toolbar area moves away together with the modal
 			edgeRef.current?.style.setProperty("transform", `translateY(${Math.max(0, hidden)}px)`);
 		};
+		const renderOnNextFrame = rafThrottle(render);
+
+		/** Marks the gesture and the return animation as finished */
+		const resetGesture = () => {
+			gesture = false;
+			returning = false;
+			settledHidden = null;
+		};
 
 		const dismiss = () => {
 			setDismissed(true);
@@ -154,29 +162,19 @@ const useModalScroll = (args: {
 			settledHidden = hidden;
 
 			if (gesture && size > 0 && hidden >= size - 1) {
-				gesture = false;
-				settledHidden = null;
+				resetGesture();
 				dismiss();
 				return;
 			}
 
-			if (Math.abs(hidden) < 1) {
-				gesture = false;
-				returning = false;
-				settledHidden = null;
-				render();
-				return;
-			}
-
 			// Browser is still moving the modal to one of its positions, e.g. while it bounces back after an overscroll
-			if ((gesture || returning) && moved) {
+			if (Math.abs(hidden) >= 1 && (gesture || returning) && moved) {
 				scheduleSettle();
 				return;
 			}
 
-			gesture = false;
-			returning = false;
-			settledHidden = null;
+			resetGesture();
+			// Keeps the modal open in case the browser hasn't snapped it back
 			align();
 			render();
 		};
@@ -191,12 +189,7 @@ const useModalScroll = (args: {
 			if (!gesture && !touching && !returning) align();
 
 			scheduleSettle();
-
-			if (frame !== null) return;
-			frame = requestAnimationFrame(() => {
-				frame = null;
-				render();
-			});
+			renderOnNextFrame();
 		};
 
 		const handleTouchStart = () => {
@@ -253,7 +246,6 @@ const useModalScroll = (args: {
 		scrollerEl.addEventListener("wheel", handleWheel, { passive: false });
 
 		return () => {
-			if (frame !== null) cancelAnimationFrame(frame);
 			if (timer) clearTimeout(timer);
 			if (keepOpenTimer) clearTimeout(keepOpenTimer);
 
