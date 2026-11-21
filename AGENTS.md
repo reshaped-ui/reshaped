@@ -95,6 +95,18 @@ describe("Components/Button", () => {
 - Name the `describe` block after the story title (`Components/Button`, `Hooks/useToggle`) and name tests after the prop or scenario they cover.
 - Use `renderHook` for hooks that don't need DOM interaction; render a small test component for hooks that do.
 - Failure screenshots land in `__screenshots__/` next to the test and are git-ignored.
+- Wait for state with `await expect.element(…)`, `expect.poll(…)` or `vi.waitFor(…)`, never with fixed timeouts. Always `await` them – an un-awaited `waitFor` never fails, which is how several old story plays silently tested nothing.
+- Tests that need a different provider setup (color mode, RTL, no provider at all) pass their own `wrapper` to `render`. Tests that change `<html>` attributes (`dir`, `data-rs-theme`, `data-rs-color-mode`) must reset them in `beforeEach`/`afterEach` so they don't leak into other tests.
+
+Browser quirks that come up often:
+
+- Visually hidden native inputs (`HiddenInput`, checkbox, radio) can't be clicked by Playwright directly – click their label or the visible control instead.
+- An open overlay or flyout covers the elements below it, so a real click lands on the overlay. Click the backdrop, move the pointer outside the content, or use `element.click()` when the test is about state rather than pointer behavior. Submenus may need a wider viewport: `await page.viewport(1024, 768)`.
+- Playwright doesn't click `aria-disabled` elements without `{ force: true }`.
+- A `<th>` without `scope` has the `cell` role, not `columnheader`.
+- React clears `event.currentTarget` after the handler returns, so check `event.target` containment in handler mocks.
+- `page.elementLocator()` doesn't work for `<html>`; pass `document.documentElement` to `expect.element` directly.
+- Dependencies imported only by tests should be added to `optimizeDeps.include` of the `browser` project in `packages/reshaped/vitest.config.mjs`, otherwise a cold Vite cache (like in CI) reloads the page mid-run.
 
 ### 3. Unit tests (`*.test.ts`) – pure logic
 

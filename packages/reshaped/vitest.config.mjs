@@ -41,6 +41,10 @@ export default mergeConfig(
 				},
 				{
 					extends: true,
+					optimizeDeps: {
+						// Pre-bundle deps only imported by tests, so a cold cache doesn't reload the page mid-run
+						include: ["react-shadow", "vitest-browser-react"],
+					},
 					test: {
 						name: "browser",
 						// Component and hook behavior tests that don't need a visual snapshot

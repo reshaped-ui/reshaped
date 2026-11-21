@@ -1,17 +1,17 @@
 {
-  "mode": "exit",
-  "tag": "canary",
-  "initialVersions": {
-    "reshaped": "4.3.1-canary.0",
-    "@reshaped/theming": "4.3.1-canary.0",
-    "@reshaped/utilities": "4.3.1-canary.0"
-  },
-  "changesets": [
-    "dropdown-menu-submenu-click",
-    "flyout-content-hover-disabled",
-    "flyout-nested-outside-click",
-    "overlay-ios-backdrop",
-    "quiet-apples-wait",
-    "use-on-click-outside-capture"
-  ]
+	"mode": "exit",
+	"tag": "canary",
+	"initialVersions": {
+		"reshaped": "4.3.1-canary.0",
+		"@reshaped/theming": "4.3.1-canary.0",
+		"@reshaped/utilities": "4.3.1-canary.0"
+	},
+	"changesets": [
+		"dropdown-menu-submenu-click",
+		"flyout-content-hover-disabled",
+		"flyout-nested-outside-click",
+		"overlay-ios-backdrop",
+		"quiet-apples-wait",
+		"use-on-click-outside-capture"
+	]
 }
