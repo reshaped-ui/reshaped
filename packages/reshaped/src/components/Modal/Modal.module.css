@@ -277,11 +277,15 @@
 	position: absolute;
 	inset: 0;
 	overflow: hidden;
-	overscroll-behavior: contain;
-	scrollbar-width: none;
 
-	/* Area outside of the modal belongs to the overlay, it can't be used for swiping and still closes the modal on click */
-	pointer-events: none;
+	/**
+	 * Modal is clipped to its open position, so it can't be pulled past it.
+	 * Area outside of the clip belongs to the overlay and still closes the modal on click.
+	 * Clipping is used instead of disabling the pointer events since iOS doesn't let the touches
+	 * scroll a container that doesn't receive pointer events itself, even when they start on its children
+	 */
+	overscroll-behavior: none;
+	scrollbar-width: none;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -302,7 +306,6 @@
 		position: relative;
 		inset: auto;
 		flex: none;
-		pointer-events: auto;
 
 		/* Swiping the modal content that can't scroll any further moves the modal itself */
 		overscroll-behavior: auto;
@@ -343,18 +346,6 @@
 	& > .track {
 		flex-direction: column;
 		scroll-snap-align: end;
-	}
-
-	/**
-	 * Browsers with an elastic overscroll let the modal be pulled up from the screen edge,
-	 * so its background is extended below with a shadow of its own size, which doesn't affect the scrollable area.
-	 * Shadow overlaps the modal to hide its rounded corners
-	 */
-	& > .track > .root {
-		box-shadow:
-			var(--rs-shadow-overlay),
-			0 calc(var(--rs-modal-sheet-size, 0px) - var(--rs-radius-large)) 0 0
-				var(--rs-color-background-elevation-overlay);
 	}
 
 	& > .track.--sized {

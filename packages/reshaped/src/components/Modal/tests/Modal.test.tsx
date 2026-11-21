@@ -255,6 +255,22 @@ describe("Components/Modal", () => {
 			vi.restoreAllMocks();
 		});
 
+		test("keeps the scroll container interactive outside of the overlay area", async () => {
+			const { dialog, scroller } = await openSwipeDemo({ position: "bottom", onClose: vi.fn() });
+			// Hit testing needs the modal at its final position, after the open animation
+			await Promise.all(dialog.element().getAnimations().map((animation) => animation.finished));
+			const dialogRect = dialog.element().getBoundingClientRect();
+			const hitTest = (y: number) => document.elementFromPoint(dialogRect.left + 10, y);
+
+			// iOS only scrolls containers that receive pointer events themselves,
+			// even when the touch starts on their children
+			expect(getComputedStyle(scroller).pointerEvents).not.toBe("none");
+			expect(dialog.element().contains(hitTest(dialogRect.top + 10))).toBe(true);
+
+			// Area above the modal still belongs to the overlay
+			expect(scroller.contains(hitTest(dialogRect.top - 40))).toBe(false);
+		});
+
 		test("closes the modal", async () => {
 			const handleClose = vi.fn();
 			const { dialog, scroller } = await openSwipeDemo({

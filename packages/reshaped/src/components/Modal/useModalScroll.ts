@@ -222,9 +222,24 @@ const useModalScroll = (args: {
 		};
 
 		const touchOptions = { passive: true, capture: true };
+		/**
+		 * Container is clipped to the area of the open modal, so the touches and clicks outside of it reach the overlay.
+		 * Pointer events can't be disabled for the container instead, since iOS doesn't scroll containers without them
+		 */
+		const clip = () => {
+			const scrollerSize = vertical ? scrollerEl.clientHeight : scrollerEl.clientWidth;
+			const offset = Math.max(0, scrollerSize - measure().size);
+			const insets = {
+				bottom: [offset, 0, 0, 0],
+				left: [0, offset, 0, 0],
+				right: [0, 0, 0, offset],
+			};
+
+			scrollerEl.style.setProperty("clip-path", `inset(${insets[side].join("px ")}px)`);
+		};
+
 		const resizeObserver = new ResizeObserver(() => {
-			// Used for extending the modal background past the screen edge while it's pulled away from it
-			trackEl.style.setProperty("--rs-modal-sheet-size", `${measure().size}px`);
+			clip();
 
 			if (touching || gesture || returning) return;
 			align();
@@ -250,6 +265,7 @@ const useModalScroll = (args: {
 			if (keepOpenTimer) clearTimeout(keepOpenTimer);
 
 			resizeObserver.disconnect();
+			scrollerEl.style.removeProperty("clip-path");
 			scrollerEl.removeEventListener("scroll", handleScroll);
 			scrollerEl.removeEventListener("scrollend", settle);
 			scrollerEl.removeEventListener("touchstart", handleTouchStart, touchOptions);
