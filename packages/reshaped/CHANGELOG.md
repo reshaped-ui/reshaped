@@ -1,5 +1,36 @@
 # reshaped
 
+## 4.4.0-canary.3
+
+### Minor Changes
+
+- [#721](https://github.com/reshaped-ui/reshaped/pull/721) [`979424d`](https://github.com/reshaped-ui/reshaped/commit/979424d0b4be26dddb9b105c69d6264ed2b49ce5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Modal` swipe gesture on touch devices behaves closer to the native iOS sheets:
+  - Modal follows the finger 1:1 from the start of the gesture, it used to ignore the first 32px and stay behind the finger by that distance
+  - Released modal closes when it would stop past the middle of its size with the release velocity, it used to close after any 32px drag
+  - Dragging past the open position uses the iOS rubber band resistance and the background of the bottom modal is extended below it
+  - Content scrolling on the swipe axis scrolls first and the modal starts following the finger once the content reaches its edge, within the same gesture
+  - Modal released towards its closed position can't be caught again and the page receives input while it's closing
+  - Modal kept open in `onClose` returns to its open position instead of staying where it was released
+  - `full-screen` modals move with the swipe towards the end side, they used to close without any visual feedback
+  - Touches starting at the screen edges are left to the browser back and forward gestures for all horizontal positions
+  - `bottom`, `start` and `end` modals use a longer decelerating animation similar to the native sheets and stay opaque while they slide, only the backdrop fades
+
+  `Overlay` supports `backdropClassName` and its transition can be customized with `--rs-overlay-duration`, `--rs-overlay-easing-open` and `--rs-overlay-easing-close` variables. Closing overlays let the page receive input right away, and an overlay deactivated before its open transition has started is now removed correctly.
+
+### Patch Changes
+
+- [#721](https://github.com/reshaped-ui/reshaped/pull/721) [`979424d`](https://github.com/reshaped-ui/reshaped/commit/979424d0b4be26dddb9b105c69d6264ed2b49ce5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Carousel` doesn't render itself and all of its items on every frame while it's scrolling. Its navigation controls only depend on the scroll reaching the start or the end, so the component renders when that changes. Resolving the first visible item, which reads the layout of the items, is skipped when `onChange` is not passed
+
+- [#721](https://github.com/reshaped-ui/reshaped/pull/721) [`979424d`](https://github.com/reshaped-ui/reshaped/commit/979424d0b4be26dddb9b105c69d6264ed2b49ce5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Flyout` measures its content once when it opens instead of twice, and reuses that measurement while following the trigger on scroll. Positioning used to clone and lay out the whole content on every scroll frame, which made scrolling with an open `Popover`, `DropdownMenu`, `Select` or `Autocomplete` drop frames on mobile devices, especially for long lists. The content is measured again when it gets resized, its children change or the position is updated manually
+
+- [#721](https://github.com/reshaped-ui/reshaped/pull/721) [`979424d`](https://github.com/reshaped-ui/reshaped/commit/979424d0b4be26dddb9b105c69d6264ed2b49ce5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Overlay` and `Modal` start their open animation in the same frame they're triggered in. They used to stay hidden for around 3 frames (50ms on 60Hz screens) before starting to animate, which made opening them feel delayed after a tap. `Overlay` rendered inside `containerRef` also applies the container scroll offset before its first frame
+
+- [#721](https://github.com/reshaped-ui/reshaped/pull/721) [`979424d`](https://github.com/reshaped-ui/reshaped/commit/979424d0b4be26dddb9b105c69d6264ed2b49ce5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Slider` and `Resizable` handle the touches taken over by the system, for example by an incoming call or a system swipe on iOS. Those touches end with `touchcancel` instead of `touchend`, which kept the slider thumb and the resizable handle in their dragging state
+
+- Updated dependencies [[`979424d`](https://github.com/reshaped-ui/reshaped/commit/979424d0b4be26dddb9b105c69d6264ed2b49ce5)]:
+  - @reshaped/utilities@4.4.0-canary.3
+  - @reshaped/theming@4.4.0-canary.3
+
 ## 4.4.0-canary.2
 
 ### Minor Changes

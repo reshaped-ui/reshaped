@@ -1,5 +1,11 @@
 # @reshaped/utilities
 
+## 4.4.0-canary.3
+
+### Patch Changes
+
+- [#721](https://github.com/reshaped-ui/reshaped/pull/721) [`979424d`](https://github.com/reshaped-ui/reshaped/commit/979424d0b4be26dddb9b105c69d6264ed2b49ce5) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Flyout` measures its content once when it opens instead of twice, and reuses that measurement while following the trigger on scroll. Positioning used to clone and lay out the whole content on every scroll frame, which made scrolling with an open `Popover`, `DropdownMenu`, `Select` or `Autocomplete` drop frames on mobile devices, especially for long lists. The content is measured again when it gets resized, its children change or the position is updated manually
+
 ## 4.4.0-canary.2
 
 ## 4.4.0-canary.1
