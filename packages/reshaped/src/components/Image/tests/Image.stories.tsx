@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect, fn, Mock, waitFor } from "storybook/test";
+import { expect, waitFor } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
 import Icon from "@/components/Icon";
@@ -122,24 +122,13 @@ export const outline: StoryObj = {
 				<Image src={imgUrl} height="200px" width="100%" outline borderRadius="small" />
 			</Example.Item>
 			<Example.Item title="outline: true, image larger than the root">
-				<Image
-					src={largeImage}
-					alt="large photo"
-					width="36px"
-					height="36px"
-					outline
-					attributes={{ id: "test-outline-root" }}
-				/>
+				<Image src={largeImage} alt="large photo" width="36px" height="36px" outline />
 			</Example.Item>
 		</Example>
 	),
 	play: async ({ canvas }) => {
 		const img = canvas.getByAltText("large photo");
 		const root = img.parentElement!;
-
-		// Root attributes are applied to the wrapper only
-		expect(root).toHaveAttribute("id", "test-outline-root");
-		expect(img).not.toHaveAttribute("id");
 
 		await waitFor(() => expect((img as HTMLImageElement).complete).toBe(true));
 
@@ -150,49 +139,6 @@ export const outline: StoryObj = {
 		expect(rootRect.height).toBe(36);
 		expect(imgRect.width).toBe(36);
 		expect(imgRect.height).toBe(36);
-	},
-};
-
-const localImage =
-	"data:image/svg+xml," +
-	encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"/>');
-
-export const onLoad: StoryObj<{ handleLoad: ReturnType<typeof fn> }> = {
-	name: "onLoad",
-	args: {
-		handleLoad: fn(),
-	},
-	// Local image keeps the test independent from the network
-	render: (args) => <Image src={localImage} alt="photo" onLoad={args.handleLoad} />,
-	play: async ({ canvas, args }) => {
-		const { handleLoad } = args;
-		const img = canvas.getByRole("img");
-
-		await waitFor(() => {
-			expect(handleLoad).toHaveBeenCalledTimes(1);
-			expect(handleLoad).toHaveBeenCalledWith(
-				expect.objectContaining({ target: img, type: "load" })
-			);
-		});
-	},
-};
-
-export const onError: StoryObj<{ handleError: Mock }> = {
-	name: "onError",
-	args: {
-		handleError: fn(),
-	},
-	render: (args) => <Image src="/invalid.png" alt="photo" onError={args.handleError} />,
-	play: async ({ canvas, args }) => {
-		const { handleError } = args;
-		const img = canvas.getByRole("img");
-
-		await waitFor(() => {
-			expect(handleError).toHaveBeenCalledTimes(1);
-			expect(handleError).toHaveBeenCalledWith(
-				expect.objectContaining({ target: img, type: "error" })
-			);
-		});
 	},
 };
 
@@ -243,7 +189,7 @@ export const ratio = {
 	),
 };
 
-export const renderImage: StoryObj = {
+export const renderImage = {
 	name: "renderImage",
 	render: () => (
 		<Example>
@@ -266,38 +212,6 @@ export const renderImage: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: ({ canvas }) => {
-		const images = canvas.getAllByRole("img");
-
-		expect(images[0]).toHaveAccessibleName("Amsterdam canal");
-		expect(images[0]).toHaveAttribute("id", "test-image");
-
-		expect(images[1]).toHaveAccessibleName("Amsterdam canal 2");
-		expect(images[1]).toHaveAttribute("id", "test-image-fallback");
-	},
-};
-
-export const imageAttributes: StoryObj = {
-	name: "className, attributes,imageAttributes",
-	render: () => (
-		<div data-testid="root">
-			<Image
-				src={imgUrl}
-				alt="photo"
-				className="test-classname"
-				attributes={{ id: "test-id" }}
-				imageAttributes={{ "data-testid": "test-img-id" }}
-			/>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const img = canvas.getByRole("img");
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
-		expect(img).toHaveAttribute("data-testid", "test-img-id");
-	},
 };
 
 const largeImage =

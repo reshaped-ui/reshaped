@@ -27,10 +27,31 @@ export default mergeConfig(
 						name: "storybook",
 						// Storybook merges `root` to the repo root; keep test discovery scoped to this package.
 						dir: dirname,
-						// Enable browser mode
+						// Runs story play functions in the browser
 						browser: {
 							enabled: true,
-							// Make sure to install Playwright
+							provider: playwright({}),
+							headless: true,
+							instances: [{ browser: "chromium" }],
+						},
+						coverage: {
+							provider: "istanbul",
+						},
+					},
+				},
+				{
+					extends: true,
+					optimizeDeps: {
+						// Pre-bundle deps only imported by tests, so a cold cache doesn't reload the page mid-run
+						include: ["react-shadow", "vitest-browser-react"],
+					},
+					test: {
+						name: "browser",
+						// Component and hook behavior tests that don't need a visual snapshot
+						include: ["./src/**/*.test.tsx"],
+						setupFiles: ["./src/tests/setup.ts"],
+						browser: {
+							enabled: true,
 							provider: playwright({}),
 							headless: true,
 							instances: [{ browser: "chromium" }],

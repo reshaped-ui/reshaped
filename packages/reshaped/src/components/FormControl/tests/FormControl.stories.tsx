@@ -130,28 +130,6 @@ export const composition = {
 	),
 };
 
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<FormControl id="test-id" hasError>
-			<FormControl.Label>Label</FormControl.Label>
-			<TextField name="name" />
-			<FormControl.Helper>Caption</FormControl.Helper>
-			<FormControl.Error>Error</FormControl.Error>
-		</FormControl>
-	),
-	play: async ({ canvas }) => {
-		const input = canvas.getByRole("textbox");
-		const label = canvas.getByText("Label");
-
-		expect(input).toHaveAttribute("id", "test-id");
-		expect(input).toHaveAttribute("aria-describedby", `test-id-caption test-id-error`);
-
-		expect(label).toHaveAttribute("for", "test-id");
-		expect(label).toHaveAttribute("id", `test-id-label`);
-	},
-};
-
 export const group: StoryObj = {
 	name: "group, gap",
 	render: () => (
@@ -168,14 +146,7 @@ export const group: StoryObj = {
 	),
 	play: async ({ canvas }) => {
 		const group = canvas.getByRole("group");
-		const radios = canvas.getAllByRole("radio");
 
 		expect(group).toHaveAccessibleDescription("Caption");
-
-		// Group fields don't receive the FormControl attributes
-		radios.forEach((radio) => {
-			expect(radio).not.toHaveAttribute("id");
-			expect(radio).not.toHaveAttribute("aria-describedby");
-		});
 	},
 };

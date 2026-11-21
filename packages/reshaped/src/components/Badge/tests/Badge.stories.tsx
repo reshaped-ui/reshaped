@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, userEvent, waitFor } from "storybook/test";
+import { expect, waitFor } from "storybook/test";
 
 import Avatar from "@/components/Avatar";
 import Badge from "@/components/Badge";
@@ -142,38 +142,31 @@ export const icon = {
 	),
 };
 
-export const onDismiss: StoryObj<{ handleDismiss: ReturnType<typeof fn> }> = {
+export const onDismiss: StoryObj = {
 	name: "onDismiss, dismissAriaLabel",
-	args: {
-		handleDismiss: fn(),
-	},
-	render: (args) => (
+	render: () => (
 		<Example>
 			<Example.Item title="onDismiss">
 				<View direction="row" gap={3}>
-					<Badge onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss" size="small">
+					<Badge onDismiss={() => {}} dismissAriaLabel="Dismiss" size="small">
 						Badge
 					</Badge>
 
-					<Badge onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss" size="medium">
+					<Badge onDismiss={() => {}} dismissAriaLabel="Dismiss" size="medium">
 						Badge
 					</Badge>
 
-					<Badge onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss" size="large">
+					<Badge onDismiss={() => {}} dismissAriaLabel="Dismiss" size="large">
 						Badge
 					</Badge>
 				</View>
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvas, args }) => {
-		const dismissTrigger = canvas.getAllByRole("button")[0];
+	play: async ({ canvas }) => {
+		const dismissTriggers = canvas.getAllByRole("button", { name: "Dismiss" });
 
-		await userEvent.click(dismissTrigger);
-
-		expect(dismissTrigger).toHaveAccessibleName("Dismiss");
-		expect(args.handleDismiss).toHaveBeenCalledTimes(1);
-		expect(args.handleDismiss).toHaveBeenCalledWith();
+		expect(dismissTriggers).toHaveLength(3);
 	},
 };
 
@@ -365,44 +358,6 @@ export const cutout: StoryObj = {
 	},
 };
 
-export const href: StoryObj = {
-	name: "href",
-	render: () => (
-		<Badge href="https://reshaped.so" dismissAriaLabel="Dismiss">
-			Badge
-		</Badge>
-	),
-	play: async ({ canvas }) => {
-		const link = canvas.getByRole("link");
-
-		expect(link).toHaveAttribute("href", "https://reshaped.so");
-	},
-};
-
-export const hrefDismissible: StoryObj<{ handleDismiss: ReturnType<typeof fn> }> = {
-	name: "test: href, onDismiss",
-	args: {
-		handleDismiss: fn(),
-	},
-	render: (args) => (
-		<Badge href="#badge-dismiss" onDismiss={args.handleDismiss} dismissAriaLabel="Dismiss">
-			Badge
-		</Badge>
-	),
-	play: async ({ canvas, args }) => {
-		const initialHash = window.location.hash;
-		const dismissTrigger = canvas.getByRole("button", { name: "Dismiss" });
-
-		expect(canvas.getByRole("link")).toHaveAttribute("href", "#badge-dismiss");
-
-		await userEvent.click(dismissTrigger);
-
-		expect(args.handleDismiss).toHaveBeenCalledTimes(1);
-		// Dismissing the badge shouldn't follow the link
-		expect(window.location.hash).toBe(initialHash);
-	},
-};
-
 export const truncation: StoryObj = {
 	name: "test: truncation",
 	render: () => (
@@ -439,37 +394,6 @@ export const truncation: StoryObj = {
 			expect(text.scrollWidth).toBeGreaterThan(text.clientWidth);
 			expect(getComputedStyle(text).textOverflow).toBe("ellipsis");
 		});
-	},
-};
-
-export const onClick: StoryObj<{ handleClick: ReturnType<typeof fn> }> = {
-	name: "onClick",
-	args: {
-		handleClick: fn(),
-	},
-	render: (args) => <Badge onClick={args.handleClick}>Badge</Badge>,
-	play: async ({ canvas, args }) => {
-		const button = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(button);
-
-		expect(args.handleClick).toHaveBeenCalledTimes(1);
-		expect(args.handleClick).toHaveBeenCalledWith(expect.objectContaining({ target: button }));
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Badge color="primary" className="test-classname" attributes={{ id: "test-id" }} />
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
 

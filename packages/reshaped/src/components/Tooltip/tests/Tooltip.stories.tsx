@@ -1,5 +1,4 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect, fireEvent, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import Popover from "@/components/Popover";
@@ -118,69 +117,12 @@ export const color = {
 	),
 };
 
-export const defaultActive: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "uncontrolled",
-	args: {
-		handleOpen: fn(),
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<Tooltip text="Content" onOpen={args.handleOpen} onClose={args.handleClose}>
-			{(attributes) => <Button attributes={attributes}>Trigger</Button>}
-		</Tooltip>
-	),
-	play: async ({ canvasElement, args }) => {
-		const { ownerDocument } = canvasElement;
-		const body = ownerDocument.body;
-		const canvas = within(body);
-		const trigger = canvas.getAllByRole("button")[0];
-
-		await userEvent.hover(trigger);
-
-		await waitFor(() => {
-			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleOpen).toHaveBeenCalledWith();
-		});
-
-		const item = canvas.getByText("Content");
-		expect(item).toBeInTheDocument();
-
-		await userEvent.unhover(trigger);
-		fireEvent.mouseMove(ownerDocument, {
-			clientX: (ownerDocument.defaultView?.innerWidth ?? 0) + 1000,
-			clientY: (ownerDocument.defaultView?.innerHeight ?? 0) + 1000,
-		});
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({});
-		});
-
-		// FIXME: Fix for the CLI tests, works in Storybook
-		// await waitFor(() => {
-		// expect(item).not.toBeInTheDocument();
-		// });
-	},
-};
-
-export const disableContentHover: StoryObj<{ handleClose: ReturnType<typeof fn> }> = {
+export const disableContentHover: StoryObj = {
 	name: "disableContentHover",
-	args: {
-		handleClose: fn(),
-	},
-	render: (args) => {
+	render: () => {
 		const renderTriggers = (text: string) =>
 			Array.from({ length: 4 }).map((_, index) => (
-				<Demo
-					key={index}
-					position="bottom"
-					text={text}
-					disableContentHover
-					onClose={index === 0 ? args.handleClose : undefined}
-				/>
+				<Demo key={index} position="bottom" text={text} disableContentHover />
 			));
 
 		return (
@@ -197,27 +139,6 @@ export const disableContentHover: StoryObj<{ handleClose: ReturnType<typeof fn> 
 					</View>
 				</Example.Item>
 			</Example>
-		);
-	},
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-
-		await userEvent.hover(trigger);
-
-		const content = await canvas.findByRole("tooltip");
-		await waitFor(() => {
-			expect(getComputedStyle(content).pointerEvents).toBe("none");
-		});
-
-		// Closes right away without waiting for the pointer to leave the safe area
-		await userEvent.unhover(trigger);
-
-		await waitFor(
-			() => {
-				expect(args.handleClose).toHaveBeenCalledTimes(1);
-			},
-			{ timeout: 500 }
 		);
 	},
 };

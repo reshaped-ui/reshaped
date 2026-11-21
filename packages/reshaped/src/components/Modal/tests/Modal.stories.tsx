@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { fn } from "storybook/test";
 
 import Button from "@/components/Button";
 import Dismissible from "@/components/Dismissible";
@@ -11,7 +11,6 @@ import Switch from "@/components/Switch";
 import TextField from "@/components/TextField";
 import View from "@/components/View";
 import useToggle from "@/hooks/useToggle";
-import { sleep } from "@/utilities/helpers";
 import { Example, Placeholder } from "@/utilities/storybook";
 
 export default {
@@ -285,163 +284,6 @@ export const containerRef = {
 				</Example.Item>
 			</Example>
 		);
-	},
-};
-
-export const renderProps: StoryObj = {
-	name: "children, render props",
-	render: () => (
-		<Modal active className="test-classname" attributes={{ "data-testid": "test-id" }}>
-			<Modal.Title>Title</Modal.Title>
-			Content
-		</Modal>
-	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const root = canvas.getByText("Content");
-
-		expect(root).toBeInTheDocument();
-	},
-};
-
-export const handlers: StoryObj<{
-	handleAfterOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-	handleAfterClose: ReturnType<typeof fn>;
-}> = {
-	name: "onClose, onAfterOpen, onAfterClose",
-	args: {
-		handleClose: fn(),
-		handleAfterClose: fn(),
-		handleAfterOpen: fn(),
-	},
-	render: (args) => {
-		const overlayToggle = useToggle();
-
-		return (
-			<>
-				<Button onClick={() => overlayToggle.toggle()}>Open overlay</Button>
-				<Modal
-					active={overlayToggle.active}
-					onClose={(closeArgs) => {
-						overlayToggle.deactivate();
-						args.handleClose(closeArgs);
-					}}
-					onAfterOpen={args.handleAfterOpen}
-					onAfterClose={args.handleAfterClose}
-				>
-					<Modal.Title>Title</Modal.Title>
-					Content
-				</Modal>
-			</>
-		);
-	},
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(trigger);
-
-		// Wait for transition
-		await waitFor(() => {
-			expect(args.handleAfterOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleAfterOpen).toHaveBeenCalledWith();
-		});
-
-		// Close by changing the state after the trigger click
-		await userEvent.click(trigger);
-
-		// Wait for transition
-		await waitFor(() => {
-			// Changing state doesn't trigger onClose
-			expect(args.handleClose).toHaveBeenCalledTimes(0);
-
-			expect(args.handleAfterClose).toHaveBeenCalledTimes(1);
-			expect(args.handleAfterClose).toHaveBeenCalledWith();
-		});
-
-		// Open
-		await userEvent.click(trigger);
-		await sleep(100);
-
-		const overlay = canvas.getAllByRole("presentation", { hidden: true }).at(-1)!;
-
-		// Close by clicking on the overlay
-		await userEvent.click(overlay);
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "overlay-click" });
-
-			expect(args.handleAfterClose).toHaveBeenCalledTimes(2);
-			expect(args.handleAfterClose).toHaveBeenCalledWith();
-		});
-
-		// Open
-		await userEvent.click(trigger);
-		await sleep(100);
-
-		// Close by pressing Escape
-		await userEvent.keyboard("{Escape}");
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(2);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "escape-key" });
-
-			expect(args.handleAfterClose).toHaveBeenCalledTimes(3);
-			expect(args.handleAfterClose).toHaveBeenCalledWith();
-		});
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<Modal active className="test-classname" attributes={{ "data-testid": "test-id" }}>
-			<Modal.Title>Title</Modal.Title>
-			Content
-		</Modal>
-	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const root = canvas.getByTestId("test-id");
-
-		expect(root).toHaveClass("test-classname");
-	},
-};
-
-export const virtualKeyboard: StoryObj = {
-	name: "test: virtual keyboard",
-	render: () => <Demo position="end" title="Modal title" />,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const viewport = window.visualViewport!;
-
-		await userEvent.click(canvas.getByRole("button", { name: "Open dialog" }));
-
-		const root = await canvas.findByRole("dialog");
-
-		expect(root.style.getPropertyValue("--rs-modal-keyboard-height")).toBe("0px");
-
-		// On-screen keyboard shrinks the visual viewport without changing the layout
-		Object.defineProperty(viewport, "height", {
-			configurable: true,
-			value: window.innerHeight - 300,
-		});
-		viewport.dispatchEvent(new Event("resize"));
-
-		// Bottom safe area inset is reduced by the keyboard height covering it
-		await waitFor(() => {
-			expect(root.style.getPropertyValue("--rs-modal-keyboard-height")).toBe("300px");
-		});
-
-		// @ts-expect-error Removes the stubbed value from the viewport itself
-		delete viewport.height;
-		viewport.dispatchEvent(new Event("resize"));
-
-		await waitFor(() => {
-			expect(root.style.getPropertyValue("--rs-modal-keyboard-height")).toBe("0px");
-		});
 	},
 };
 

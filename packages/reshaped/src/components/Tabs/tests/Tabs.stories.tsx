@@ -1,6 +1,6 @@
 import { StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { expect } from "storybook/test";
 
 import Button from "@/components/Button";
 import ScrollArea from "@/components/ScrollArea";
@@ -37,7 +37,7 @@ export const base: StoryObj = {
 			</Tabs.Panel>
 		</Tabs>
 	),
-	play: async ({ canvas }) => {
+	play: ({ canvas }) => {
 		const list = canvas.getByRole("tablist");
 		const items = canvas.getAllByRole("tab");
 		const panels = canvas.getAllByRole("tabpanel", { hidden: true });
@@ -57,14 +57,6 @@ export const base: StoryObj = {
 		const unselectedPanel = panels[1];
 		expect(unselectedItem).toHaveAttribute("aria-selected", "false");
 		expect(unselectedItem.getAttribute("aria-controls")).toBe(unselectedPanel.getAttribute("id"));
-
-		await userEvent.tab();
-		expect(document.activeElement).toBe(items[0]);
-
-		await userEvent.tab();
-		waitFor(() => {
-			expect(document.activeElement).toBe(panels[0]);
-		});
 	},
 };
 
@@ -421,76 +413,6 @@ export const disabled: StoryObj = {
 	},
 };
 
-export const defaultValue: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
-	name: "defaultValue, uncontrolled",
-	args: {
-		handleChange: fn(),
-	},
-	render: (args) => (
-		<Tabs defaultValue="2" onChange={args.handleChange}>
-			<Tabs.List>
-				<Tabs.Item value="1">Item 1</Tabs.Item>
-				<Tabs.Item value="2">Item 2</Tabs.Item>
-			</Tabs.List>
-
-			<Tabs.Panel value="1">Content 1</Tabs.Panel>
-			<Tabs.Panel value="2">Content 2</Tabs.Panel>
-		</Tabs>
-	),
-	play: async ({ canvas, args }) => {
-		const items = canvas.getAllByRole("tab");
-
-		expect(items[1]).toHaveAttribute("aria-selected", "true");
-		expect(items[1]).toHaveAttribute("tabindex", "0");
-		expect(items[0]).toHaveAttribute("tabindex", "-1");
-
-		await userEvent.click(items[0]);
-
-		expect(args.handleChange).toHaveBeenCalledTimes(1);
-		expect(args.handleChange).toHaveBeenCalledWith({ value: "1" });
-
-		expect(document.activeElement).toBe(items[0]);
-		expect(items[0]).toHaveAttribute("aria-selected", "true");
-		expect(items[0]).toHaveAttribute("tabindex", "0");
-		expect(items[1]).toHaveAttribute("tabindex", "-1");
-	},
-};
-
-export const value: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
-	name: "value, controlled",
-	args: {
-		handleChange: fn(),
-	},
-	render: (args) => (
-		<Tabs value="2" onChange={args.handleChange}>
-			<Tabs.List>
-				<Tabs.Item value="1">Item 1</Tabs.Item>
-				<Tabs.Item value="2">Item 2</Tabs.Item>
-			</Tabs.List>
-
-			<Tabs.Panel value="1">Content 1</Tabs.Panel>
-			<Tabs.Panel value="2">Content 2</Tabs.Panel>
-		</Tabs>
-	),
-	play: async ({ canvas, args }) => {
-		const items = canvas.getAllByRole("tab");
-
-		expect(items[1]).toHaveAttribute("aria-selected", "true");
-		expect(items[1]).toHaveAttribute("tabindex", "0");
-		expect(items[0]).toHaveAttribute("tabindex", "-1");
-
-		await userEvent.click(items[0]);
-
-		expect(args.handleChange).toHaveBeenCalledTimes(1);
-		expect(args.handleChange).toHaveBeenCalledWith({ value: "1" });
-
-		expect(document.activeElement).toBe(items[0]);
-		expect(items[1]).toHaveAttribute("aria-selected", "true");
-		expect(items[1]).toHaveAttribute("tabindex", "0");
-		expect(items[0]).toHaveAttribute("tabindex", "-1");
-	},
-};
-
 export const disableSelectionAnimation: StoryObj = {
 	name: "disableSelectionAnimation",
 	render: () => (
@@ -513,38 +435,6 @@ export const disableSelectionAnimation: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<Tabs defaultValue="1">
-				<Tabs.List attributes={{ id: "test-list-id" }} className="test-list-classname">
-					<Tabs.Item attributes={{ "data-test-id": "test-item-id" }} value="1">
-						Item
-					</Tabs.Item>
-				</Tabs.List>
-
-				<Tabs.Panel
-					attributes={{ "data-testid": "test-panel-id" }}
-					className="test-panel-classname"
-					value="1"
-				/>
-			</Tabs>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const list = canvas.getByTestId("root").firstChild as HTMLElement;
-		const item = within(list).getByRole("tab");
-		const panel = canvas.getByRole("tabpanel");
-
-		expect(list).toHaveClass("test-list-classname");
-		expect(list).toHaveAttribute("id", "test-list-id");
-		expect(item).toHaveAttribute("data-test-id", "test-item-id");
-		expect(panel).toHaveClass("test-panel-classname");
-		expect(panel).toHaveAttribute("data-testid", "test-panel-id");
-	},
 };
 
 export const testFocusableContent = {
@@ -714,75 +604,5 @@ export const testEdgeCaseDom = {
 				</Example.Item>
 			</Example>
 		);
-	},
-};
-
-export const testOverflowResize: StoryObj = {
-	name: "test: overflow on size change",
-	render: () => {
-		const [narrow, setNarrow] = React.useState(false);
-		const [longLabel, setLongLabel] = React.useState(false);
-
-		return (
-			<Example>
-				<Example.Item title="container width changes without window resize">
-					<View gap={3}>
-						<View width={narrow ? "200px" : "640px"}>
-							<Tabs defaultValue="0">
-								<Tabs.List attributes={{ "data-testid": "container-tabs" }}>
-									{[...Array(4)].map((_, i) => (
-										<Tabs.Item value={`${i}`} key={i}>
-											Item {i}
-										</Tabs.Item>
-									))}
-								</Tabs.List>
-							</Tabs>
-						</View>
-						<View direction="row">
-							<Button onClick={() => setNarrow((v) => !v)}>Toggle container width</Button>
-						</View>
-					</View>
-				</Example.Item>
-
-				<Example.Item title="content width changes">
-					<View gap={3}>
-						<View width="200px">
-							<Tabs defaultValue="0">
-								<Tabs.List attributes={{ "data-testid": "content-tabs" }}>
-									<Tabs.Item value="0">Item 0</Tabs.Item>
-									<Tabs.Item value="1">
-										{longLabel ? "Very long item label that doesn't fit" : "Item 1"}
-									</Tabs.Item>
-								</Tabs.List>
-							</Tabs>
-						</View>
-						<View direction="row">
-							<Button onClick={() => setLongLabel((v) => !v)}>Toggle label length</Button>
-						</View>
-					</View>
-				</Example.Item>
-			</Example>
-		);
-	},
-	play: async ({ canvas }) => {
-		const getOverflow = (testId: string) => {
-			const tablist = within(canvas.getByTestId(testId)).getByRole("tablist");
-			return getComputedStyle(tablist.parentElement!).overflowX;
-		};
-
-		const [containerButton, labelButton] = canvas.getAllByRole("button");
-
-		const cases = [
-			["container-tabs", containerButton],
-			["content-tabs", labelButton],
-		] as const;
-
-		for (const [testId, button] of cases) {
-			await waitFor(() => expect(getOverflow(testId)).toBe("visible"));
-			await userEvent.click(button);
-			await waitFor(() => expect(getOverflow(testId)).toBe("auto"));
-			await userEvent.click(button);
-			await waitFor(() => expect(getOverflow(testId)).toBe("visible"));
-		}
 	},
 };

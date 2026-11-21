@@ -1,5 +1,4 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
 
 import Actionable from "@/components/Actionable";
 import LoaderText from "@/components/LoaderText";
@@ -51,22 +50,5 @@ export const completed: StoryObj = {
 				</Example.Item>
 			</Example>
 		);
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<LoaderText className="test-classname" attributes={{ id: "test-id" }}>
-				Loading
-			</LoaderText>
-		</div>
-	),
-	play: async ({ canvas }) => {
-		const root = canvas.getByTestId("root").firstChild;
-
-		expect(root).toHaveClass("test-classname");
-		expect(root).toHaveAttribute("id", "test-id");
 	},
 };

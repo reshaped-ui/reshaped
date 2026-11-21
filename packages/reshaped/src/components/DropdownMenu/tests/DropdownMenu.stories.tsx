@@ -1,12 +1,10 @@
 import { StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 
 import Button from "@/components/Button";
 import DropdownMenu from "@/components/DropdownMenu";
 import Theme from "@/components/Theme";
 import { useTheme } from "@/components/Theme/useTheme";
 import View from "@/components/View";
-import { sleep } from "@/utilities/helpers";
 import { Example } from "@/utilities/storybook";
 import IconCheckmark from "@/icons/Checkmark";
 
@@ -159,29 +157,6 @@ export const submenu: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getByRole("button", { name: "Open" });
-
-		await userEvent.click(trigger);
-
-		const rootItem = await canvas.findByText("Item 1");
-		await userEvent.hover(canvas.getByText("Item 2"));
-
-		const nestedItem = await canvas.findByText("SubItem 1");
-		await userEvent.click(nestedItem);
-
-		await waitFor(() => {
-			expect(rootItem).not.toBeInTheDocument();
-			expect(nestedItem).not.toBeInTheDocument();
-		});
-	},
-};
-
-const expectNotOpenedOnHover = async (trigger: HTMLElement, contentText: string) => {
-	await userEvent.hover(trigger);
-	await sleep(100);
-	expect(within(document.body).queryByText(contentText)).not.toBeInTheDocument();
 };
 
 export const submenuTriggerType: StoryObj = {
@@ -242,190 +217,6 @@ export const submenuTriggerType: StoryObj = {
 			</Example.Item>
 		</Example>
 	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-
-		await userEvent.click(canvas.getByRole("button", { name: "Open" }));
-
-		const rootItem = await canvas.findByText("Item 1");
-		const subTrigger = canvas.getByText("Item 2");
-
-		// Hover doesn't open the submenu
-		await expectNotOpenedOnHover(subTrigger, "SubItem 1");
-
-		await userEvent.click(subTrigger);
-		const subItem = await canvas.findByText("SubItem 1");
-
-		// Moving the mouse away doesn't close the submenu
-		await userEvent.unhover(subTrigger);
-		await userEvent.hover(rootItem);
-		await sleep(100);
-		expect(subItem).toBeInTheDocument();
-
-		// Opening another submenu closes the previous one
-		await userEvent.click(canvas.getByText("Item 3"));
-		const nestedSubTrigger = await canvas.findByText("SubItem 2-2");
-		await waitFor(() => {
-			expect(subItem).not.toBeInTheDocument();
-		});
-
-		// Nested submenus inherit the trigger type
-		await expectNotOpenedOnHover(nestedSubTrigger, "SubItem 2-2-1");
-
-		await userEvent.click(nestedSubTrigger);
-		const nestedItem = await canvas.findByText("SubItem 2-2-1");
-		await userEvent.click(nestedItem);
-
-		await waitFor(() => {
-			expect(rootItem).not.toBeInTheDocument();
-			expect(nestedItem).not.toBeInTheDocument();
-		});
-
-		// SubMenu triggerType overrides the menu submenuTriggerType
-		await userEvent.click(canvas.getByRole("button", { name: "Open with override" }));
-
-		const clickTrigger = await canvas.findByText("Click item");
-		await expectNotOpenedOnHover(clickTrigger, "Click subitem");
-
-		await userEvent.hover(canvas.getByText("Hover item"));
-		expect(await canvas.findByText("Hover subitem")).toBeInTheDocument();
-	},
-};
-
-export const defaultActive: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "defaultActive, uncontrolled",
-	args: {
-		handleOpen: fn(),
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<DropdownMenu onOpen={args.handleOpen} onClose={args.handleClose} defaultActive>
-			<DropdownMenu.Trigger>
-				{(attributes) => <Button attributes={attributes}>Open</Button>}
-			</DropdownMenu.Trigger>
-			<DropdownMenu.Content>
-				<DropdownMenu.Item>Item</DropdownMenu.Item>
-			</DropdownMenu.Content>
-		</DropdownMenu>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-		let item = canvas.getByText("Item");
-
-		await sleep(500);
-		await userEvent.click(document.body);
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
-			expect(item).not.toBeInTheDocument();
-		});
-
-		await userEvent.click(trigger);
-
-		item = canvas.getByText("Item");
-
-		await waitFor(() => {
-			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleOpen).toHaveBeenCalledWith();
-			expect(item).toBeInTheDocument();
-		});
-	},
-};
-
-export const active: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "active, controlled",
-	args: {
-		handleOpen: fn(),
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<DropdownMenu onOpen={args.handleOpen} onClose={args.handleClose} active>
-			<DropdownMenu.Trigger>
-				{(attributes) => <Button attributes={attributes}>Open</Button>}
-			</DropdownMenu.Trigger>
-			<DropdownMenu.Content>
-				<DropdownMenu.Item>Item</DropdownMenu.Item>
-			</DropdownMenu.Content>
-		</DropdownMenu>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const item = canvas.getByText("Item");
-
-		await userEvent.click(document.body);
-
-		await waitFor(() => {
-			expect(args.handleClose).toHaveBeenCalledTimes(1);
-			expect(args.handleClose).toHaveBeenCalledWith({ reason: "outside-click" });
-		});
-
-		expect(item).toBeInTheDocument();
-	},
-};
-
-export const activeFalse: StoryObj<{
-	handleOpen: ReturnType<typeof fn>;
-	handleClose: ReturnType<typeof fn>;
-}> = {
-	name: "active false, controlled",
-	args: {
-		handleOpen: fn(),
-		handleClose: fn(),
-	},
-	render: (args) => (
-		<DropdownMenu onOpen={args.handleOpen} onClose={args.handleClose} active={false}>
-			<DropdownMenu.Trigger>
-				{(attributes) => <Button attributes={attributes}>Open</Button>}
-			</DropdownMenu.Trigger>
-			<DropdownMenu.Content>
-				<DropdownMenu.Item>Item</DropdownMenu.Item>
-			</DropdownMenu.Content>
-		</DropdownMenu>
-	),
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const trigger = canvas.getAllByRole("button")[0];
-
-		await userEvent.click(trigger);
-
-		await waitFor(() => {
-			expect(args.handleOpen).toHaveBeenCalledTimes(1);
-			expect(args.handleOpen).toHaveBeenCalledWith();
-		});
-
-		const item = canvas.queryByText("Item");
-		expect(item).not.toBeInTheDocument();
-	},
-};
-
-export const className: StoryObj = {
-	name: "className, attributes",
-	render: () => (
-		<div data-testid="root">
-			<DropdownMenu active>
-				<DropdownMenu.Trigger>
-					{(attributes) => <Button attributes={attributes}>Open</Button>}
-				</DropdownMenu.Trigger>
-				<DropdownMenu.Content className="test-classname" attributes={{ "data-testid": "test-id" }}>
-					<DropdownMenu.Item>Item</DropdownMenu.Item>
-				</DropdownMenu.Content>
-			</DropdownMenu>
-		</div>
-	),
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement.ownerDocument.body);
-		const menu = await canvas.findByTestId("test-id");
-
-		expect(menu).toHaveClass("test-classname");
-	},
 };
 
 export const testScroll = {
