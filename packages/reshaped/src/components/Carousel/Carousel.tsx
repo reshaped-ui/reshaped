@@ -29,7 +29,11 @@ const Carousel: React.FC<T.Props> = (props) => {
 	const currentIndexRef = React.useRef(0);
 	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([]);
 	const [mounted, setMounted] = React.useState(false);
-	const [scrollPosition, setScrollPosition] = React.useState(0);
+	// Scroll position is only used for displaying the controls, so it's stored as the reached edges.
+	// Their values rarely change, which keeps the carousel from rendering on every frame while it scrolls
+	const [scrollEdges, setScrollEdges] = React.useState<{ start: boolean; end: boolean } | null>(
+		null
+	);
 	const [isRTL] = useRTL();
 	const scrollElRef = React.useRef<HTMLUListElement>(null);
 	const prevControlElRef = React.useRef<ActionableRef>(null);
@@ -57,14 +61,28 @@ const Carousel: React.FC<T.Props> = (props) => {
 		// };
 	};
 
-	const handleScroll = rafThrottle((event: React.UIEvent<HTMLUListElement>) => {
-		const el = event.target as Element;
-		const firstVisibleIndex = getFirstVisibleIndex();
+	const updateScrollEdges = () => {
+		const scrollEl = scrollElRef.current;
+		if (!scrollEl) return;
 
-		setScrollPosition(el.scrollLeft);
+		// scrollLeft goes from 0 to negative values in RTL
+		const scrollPosition = Math.abs(scrollEl.scrollLeft);
+		const start = scrollPosition <= 0;
+		const end = scrollPosition + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
+
+		setScrollEdges((prev) => (prev?.start === start && prev.end === end ? prev : { start, end }));
+	};
+
+	const handleScroll = rafThrottle((event: React.UIEvent<HTMLUListElement>) => {
+		updateScrollEdges();
 		onScroll?.(event);
 
-		if (currentIndexRef.current !== firstVisibleIndex) onChange?.({ index: firstVisibleIndex });
+		// Resolving the index reads the layout of the items, so it's skipped when nothing is listening to it
+		if (!onChange) return;
+
+		const firstVisibleIndex = getFirstVisibleIndex();
+
+		if (currentIndexRef.current !== firstVisibleIndex) onChange({ index: firstVisibleIndex });
 		currentIndexRef.current = firstVisibleIndex;
 	});
 
@@ -154,6 +172,14 @@ const Carousel: React.FC<T.Props> = (props) => {
 		setMounted(true);
 	}, []);
 
+	/**
+	 * Measured in the render following the mount, so it's not affected by the layout effects of the parent components.
+	 * For example, a theme applied by the provider on its mount changes the size of the items
+	 */
+	useIsomorphicLayoutEffect(() => {
+		if (mounted) updateScrollEdges();
+	}, [mounted]);
+
 	return (
 		<section
 			{...attributes}
@@ -171,20 +197,16 @@ const Carousel: React.FC<T.Props> = (props) => {
 						type="back"
 						controlRef={prevControlElRef}
 						oppositeControlElRef={nextControlElRef}
-						scrollElRef={scrollElRef}
-						scrollPosition={scrollPosition}
+						hidden={scrollEdges?.start}
 						onClick={navigateBack}
-						mounted={mounted}
 					/>
 					<CarouselControl
 						isRTL={isRTL}
 						type="forward"
 						controlRef={nextControlElRef}
 						oppositeControlElRef={prevControlElRef}
-						scrollElRef={scrollElRef}
-						scrollPosition={scrollPosition}
+						hidden={scrollEdges?.end}
 						onClick={navigateForward}
-						mounted={mounted}
 					/>
 				</>
 			)}

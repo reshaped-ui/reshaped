@@ -265,3 +265,52 @@ export const className: StoryObj = {
 		expect(root).toHaveAttribute("id", "test-id");
 	},
 };
+
+export const testControls: StoryObj<{ handleRender: ReturnType<typeof fn> }> = {
+	name: "test: navigation controls",
+	args: {
+		handleRender: fn(),
+	},
+	render: (args) => (
+		<React.Profiler id="carousel" onRender={args.handleRender}>
+			<Carousel visibleItems={2} attributes={{ "data-testid": "test-id" }}>
+				<Placeholder h={100}>Item 0</Placeholder>
+				<Placeholder h={100}>Item 1</Placeholder>
+				<Placeholder h={100}>Item 2</Placeholder>
+				<Placeholder h={100}>Item 3</Placeholder>
+				<Placeholder h={100}>Item 4</Placeholder>
+				<Placeholder h={100}>Item 5</Placeholder>
+			</Carousel>
+		</React.Profiler>
+	),
+	play: async ({ canvas, args }) => {
+		const root = canvas.getByTestId("test-id");
+		const scrollEl = root.querySelector("ul")!;
+		const [backControl, forwardControl] = Array.from(root.querySelectorAll("button")).map(
+			(button) => button.parentElement!
+		);
+
+		await waitFor(() => {
+			expect(backControl).toHaveStyle({ opacity: "0" });
+			expect(forwardControl).toHaveStyle({ opacity: "1" });
+		});
+
+		args.handleRender.mockClear();
+		scrollEl.scrollTo({ left: scrollEl.scrollWidth, behavior: "smooth" });
+
+		// Smooth scrolling through the whole carousel takes longer than the default timeout
+		await waitFor(
+			() => {
+				expect(scrollEl.scrollLeft + scrollEl.clientWidth).toBeGreaterThanOrEqual(
+					scrollEl.scrollWidth - 1
+				);
+				expect(backControl).toHaveStyle({ opacity: "1" });
+				expect(forwardControl).toHaveStyle({ opacity: "0" });
+			},
+			{ timeout: 5000 }
+		);
+
+		// Carousel only renders when the controls change and not on every frame of the scroll animation
+		expect(args.handleRender.mock.calls.length).toBeLessThan(8);
+	},
+};
