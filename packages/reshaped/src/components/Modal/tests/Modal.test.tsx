@@ -1,5 +1,5 @@
 import type React from "react";
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 
 import Button from "@/components/Button";
@@ -8,34 +8,65 @@ import Modal from "@/components/Modal";
 import useToggle from "@/hooks/useToggle";
 import { render } from "@/tests/render";
 
-const fireTouchEvent = (target: Element, type: "touchstart" | "touchend") => {
-	const touch = new Touch({ identifier: 1, target, clientX: 100, clientY: 100 });
-	const touches = type === "touchstart" ? [touch] : [];
+type TouchType = "touchstart" | "touchmove" | "touchend" | "touchcancel";
 
-	target.dispatchEvent(new TouchEvent(type, { bubbles: true, touches, changedTouches: [touch] }));
+const fireTouchEvent = (target: EventTarget, type: TouchType, point: { x: number; y: number }) => {
+	const touch = new Touch({
+		identifier: 1,
+		target: target instanceof Element ? target : document.body,
+		clientX: point.x,
+		clientY: point.y,
+	});
+	const touches = type === "touchstart" || type === "touchmove" ? [touch] : [];
+
+	target.dispatchEvent(
+		new TouchEvent(type, {
+			bubbles: true,
+			touches,
+			targetTouches: touches,
+			changedTouches: [touch],
+		})
+	);
 };
 
 /**
- * Elements rendered around the modal for the swipe gesture: the scroll container
- * and the track wrapping the modal together with its offsets from the screen edges
+ * Swipe gesture driven with touch events, moving the finger in steps along the path.
+ * Finger rests before the release by default, so the release velocity doesn't affect the result
  */
-const getSwipeElements = (dialog: Element) => {
-	const track = dialog.parentElement!;
-	const scroller = track.parentElement!;
-	const side = getComputedStyle(scroller).overflowY === "auto" ? "bottom" : "right";
+const swipe = async (
+	el: Element,
+	args: { from: { x: number; y: number }; by: { x?: number; y?: number }; release?: TouchType }
+) => {
+	const { from, by, release = "touchend" } = args;
+	const steps = 10;
+	let point = from;
 
-	return {
-		scroller,
-		/** Distance the modal is scrolled away from its open position */
-		getOffset: () =>
-			Math.round(track.getBoundingClientRect()[side] - scroller.getBoundingClientRect()[side]),
-	};
+	fireTouchEvent(el, "touchstart", from);
+	// Move listeners are added once the gesture has started
+	await new Promise(requestAnimationFrame);
+
+	for (let i = 1; i <= steps; i++) {
+		point = { x: from.x + ((by.x ?? 0) * i) / steps, y: from.y + ((by.y ?? 0) * i) / steps };
+		fireTouchEvent(document, "touchmove", point);
+	}
+
+	if (release === "touchmove") return;
+
+	// Velocity is measured over the most recent moves
+	await new Promise((resolve) => setTimeout(resolve, 150));
+	fireTouchEvent(document, release, point);
+};
+
+const getDragOffset = (el: Element) => {
+	return parseFloat((el as HTMLElement).style.getPropertyValue("--rs-modal-drag"));
 };
 
 const SwipeDemo = (props: {
-	position: "bottom" | "end";
+	position?: "bottom" | "end" | "full-screen";
 	onClose: (args: { reason: string }) => void;
 	keepOpen?: boolean;
+	disableSwipeGesture?: boolean;
+	children?: React.ReactNode;
 }) => {
 	const { active, activate, deactivate } = useToggle();
 
@@ -44,39 +75,39 @@ const SwipeDemo = (props: {
 			<Button onClick={activate}>Open dialog</Button>
 			<Modal
 				active={active}
-				position={props.position}
+				position={props.position ?? "bottom"}
+				size={props.position === "bottom" || !props.position ? "300px" : undefined}
+				disableSwipeGesture={props.disableSwipeGesture}
 				onClose={(args) => {
 					props.onClose(args);
 					if (!props.keepOpen) deactivate();
 				}}
 			>
 				<Modal.Title>Modal title</Modal.Title>
+				{props.children}
 			</Modal>
 		</>
 	);
 };
 
-/** Opens the modal and waits for it to be scrolled to its open position */
+/** Opens the modal and waits for its open animation, so the gesture starts from its open position */
 const openSwipeDemo = async (props: React.ComponentProps<typeof SwipeDemo>) => {
 	await render(<SwipeDemo {...props} />);
 	await userEvent.click(page.getByRole("button", { name: "Open dialog" }));
 
 	const dialog = page.getByRole("dialog");
 	await expect.element(dialog).toBeInTheDocument();
+	await Promise.all(
+		dialog
+			.element()
+			.getAnimations()
+			.map((animation) => animation.finished)
+	);
 
-	const elements = getSwipeElements(dialog.element());
-	await expect.poll(elements.getOffset).toBe(0);
+	const el = dialog.element();
+	const rect = el.getBoundingClientRect();
 
-	return { dialog, ...elements };
-};
-
-/** Modal keeps its default positioning without the scroll container when it can't be swiped */
-const expectDefaultPositioning = async () => {
-	const dialog = page.getByRole("dialog");
-	await expect.element(dialog).toBeInTheDocument();
-
-	expect(getComputedStyle(getSwipeElements(dialog.element()).scroller).display).toBe("contents");
-	expect(getComputedStyle(dialog.element()).position).toBe("absolute");
+	return { dialog, el, from: { x: rect.left + 100, y: rect.top + 20 } };
 };
 
 describe("Components/Modal", () => {
@@ -231,154 +262,137 @@ describe("Components/Modal", () => {
 		await expect.poll(getKeyboardHeight).toBe("0px");
 	});
 
-	test("test: swipe gesture is not available without touch support", async () => {
-		await render(
-			<Modal active position="bottom">
-				<Modal.Title>Modal title</Modal.Title>
-			</Modal>
-		);
-
-		await expectDefaultPositioning();
-	});
-
-	/**
-	 * Swipe gesture is only enabled on touch devices, where it's handled by the native scrolling.
-	 * Scrolling can't be triggered with touch events in tests, so they stub the touch support
-	 * and scroll the modal container the same way the browser does while the modal is swiped
-	 */
 	describe("swipe gesture", () => {
-		beforeEach(() => {
-			vi.spyOn(navigator, "maxTouchPoints", "get").mockReturnValue(1);
-		});
-
-		afterEach(() => {
-			vi.restoreAllMocks();
-		});
-
-		test("keeps the scroll container interactive outside of the overlay area", async () => {
-			const { dialog, scroller } = await openSwipeDemo({ position: "bottom", onClose: vi.fn() });
-			// Hit testing needs the modal at its final position, after the open animation
-			await Promise.all(
-				dialog
-					.element()
-					.getAnimations()
-					.map((animation) => animation.finished)
-			);
-			const dialogRect = dialog.element().getBoundingClientRect();
-			const hitTest = (y: number) => document.elementFromPoint(dialogRect.left + 10, y);
-
-			// iOS only scrolls containers that receive pointer events themselves,
-			// even when the touch starts on their children
-			expect(getComputedStyle(scroller).pointerEvents).not.toBe("none");
-			expect(dialog.element().contains(hitTest(dialogRect.top + 10))).toBe(true);
-
-			// Area above the modal still belongs to the overlay
-			expect(scroller.contains(hitTest(dialogRect.top - 40))).toBe(false);
-		});
-
-		test("closes the modal", async () => {
+		test("follows the finger and closes the modal released past half of its size", async () => {
 			const handleClose = vi.fn();
-			const { dialog, scroller } = await openSwipeDemo({
-				position: "bottom",
-				onClose: handleClose,
-			});
+			const { dialog, el, from } = await openSwipeDemo({ onClose: handleClose });
 
-			// Modal is rendered after a spacer of the screen size and is scrolled into the view
-			expect(getComputedStyle(scroller).overflowY).toBe("auto");
-			expect(scroller.scrollTop).toBeGreaterThan(0);
+			await swipe(el, { from, by: { y: 60 }, release: "touchmove" });
 
-			fireTouchEvent(dialog.element(), "touchstart");
-			scroller.scrollTop = 0;
-			fireTouchEvent(dialog.element(), "touchend");
+			// Modal follows the finger without a dead zone
+			expect(getDragOffset(el)).toBe(60);
 
-			await vi.waitFor(() => expect(handleClose).toHaveBeenCalledTimes(1));
+			fireTouchEvent(document, "touchmove", { x: from.x, y: from.y + 200 });
+			await new Promise((resolve) => setTimeout(resolve, 150));
+			fireTouchEvent(document, "touchend", { x: from.x, y: from.y + 200 });
+
+			expect(handleClose).toHaveBeenCalledTimes(1);
 			expect(handleClose).toHaveBeenCalledWith({ reason: "drag" });
-
-			// Modal is already out of the view, so it's removed without the close animation
-			await expect.element(dialog, { timeout: 300 }).not.toBeInTheDocument();
+			await expect.element(dialog).not.toBeInTheDocument();
 		});
 
-		test("doesn't close the modal while it's held with a finger", async () => {
+		test("returns the modal released before half of its size", async () => {
 			const handleClose = vi.fn();
-			const { dialog, scroller } = await openSwipeDemo({
-				position: "bottom",
-				onClose: handleClose,
-			});
+			const { dialog, el, from } = await openSwipeDemo({ onClose: handleClose });
 
-			fireTouchEvent(dialog.element(), "touchstart");
-			scroller.scrollTop = 0;
-			// Resolved synchronously, without waiting for the browser to report the end of the scrolling
-			scroller.dispatchEvent(new Event("scrollend"));
+			await swipe(el, { from, by: { y: 100 } });
 
-			expect(scroller.scrollTop).toBe(0);
 			expect(handleClose).not.toHaveBeenCalled();
+			await expect.poll(() => getDragOffset(el)).toBe(0);
+			await expect.element(dialog).toBeInTheDocument();
 		});
 
-		test("ignores scrolling that isn't started with a touch", async () => {
+		test("closes the modal flicked with a high velocity", async () => {
 			const handleClose = vi.fn();
-			const { scroller, getOffset } = await openSwipeDemo({
-				position: "bottom",
-				onClose: handleClose,
-			});
+			const { el, from } = await openSwipeDemo({ onClose: handleClose });
 
-			// For example, scrolling triggered with a keyboard
-			scroller.scrollTop = 0;
-			scroller.dispatchEvent(new Event("scrollend"));
+			// Moves are dispatched right after each other, so the release velocity is high
+			await swipe(el, { from, by: { y: 40 }, release: "touchmove" });
+			fireTouchEvent(document, "touchend", { x: from.x, y: from.y + 40 });
 
-			await expect.poll(getOffset).toBe(0);
-			expect(handleClose).not.toHaveBeenCalled();
+			expect(handleClose).toHaveBeenCalledWith({ reason: "drag" });
 		});
 
-		test("returns the modal released before it's swiped away", async () => {
-			const handleClose = vi.fn();
-			const { dialog, scroller, getOffset } = await openSwipeDemo({
-				position: "bottom",
-				onClose: handleClose,
-			});
+		test("resists dragging past the open position", async () => {
+			const { el, from } = await openSwipeDemo({ onClose: vi.fn() });
 
-			fireTouchEvent(dialog.element(), "touchstart");
-			scroller.scrollTop -= 20;
-			fireTouchEvent(dialog.element(), "touchend");
+			await swipe(el, { from, by: { y: -150 }, release: "touchmove" });
 
-			// Browser snaps the modal back to its open position
-			await expect.poll(getOffset).toBe(0);
-			scroller.dispatchEvent(new Event("scrollend"));
+			const offset = getDragOffset(el);
+			expect(offset).toBeLessThan(0);
+			expect(offset).toBeGreaterThan(-150 / 2);
 
-			expect(handleClose).not.toHaveBeenCalled();
+			fireTouchEvent(document, "touchend", { x: from.x, y: from.y - 150 });
+			await expect.poll(() => getDragOffset(el)).toBe(0);
+		});
+
+		test("doesn't catch the modal released towards its closed position", async () => {
+			const { el, from } = await openSwipeDemo({ onClose: vi.fn() });
+
+			await swipe(el, { from, by: { y: 200 } });
+
+			// Touching the closing modal doesn't stop its close animation
+			fireTouchEvent(el, "touchstart", from);
+			await new Promise(requestAnimationFrame);
+
+			expect(getComputedStyle(el).transitionProperty).not.toBe("none");
+		});
+
+		test("lets the page receive input while the modal is closing", async () => {
+			const { el, from } = await openSwipeDemo({ onClose: vi.fn() });
+
+			await swipe(el, { from, by: { y: 200 } });
+
+			expect(getComputedStyle(el).pointerEvents).toBe("none");
 		});
 
 		test("returns the modal kept open in onClose", async () => {
 			const handleClose = vi.fn();
-			const { dialog, scroller, getOffset } = await openSwipeDemo({
-				position: "end",
-				onClose: handleClose,
-				keepOpen: true,
+			const { dialog, el, from } = await openSwipeDemo({ onClose: handleClose, keepOpen: true });
+
+			await swipe(el, { from, by: { y: 200 } });
+
+			expect(handleClose).toHaveBeenCalledWith({ reason: "drag" });
+			await expect.poll(() => getDragOffset(el)).toBe(0);
+			await expect.element(dialog).toBeInTheDocument();
+		});
+
+		test("returns the modal when the touch is cancelled", async () => {
+			const handleClose = vi.fn();
+			const { el, from } = await openSwipeDemo({ onClose: handleClose });
+
+			// Gesture taken over by the system instead of being released
+			await swipe(el, { from, by: { y: 200 }, release: "touchcancel" });
+
+			expect(handleClose).not.toHaveBeenCalled();
+			await expect.poll(() => getDragOffset(el)).toBe(0);
+		});
+
+		test("scrolls the content first and moves the modal once it reaches its edge", async () => {
+			const { el, from } = await openSwipeDemo({
+				onClose: vi.fn(),
+				children: <div style={{ height: 1000 }} />,
 			});
 
-			// Side modals are swiped away horizontally
-			expect(getComputedStyle(scroller).overflowX).toBe("auto");
-			expect(scroller.scrollLeft).toBeGreaterThan(0);
+			el.scrollTop = 50;
+			await swipe(el, { from, by: { y: 30 }, release: "touchmove" });
 
-			fireTouchEvent(dialog.element(), "touchstart");
-			scroller.scrollLeft = 0;
-			fireTouchEvent(dialog.element(), "touchend");
+			// Touch events don't scroll the content in tests, so it keeps the modal in place
+			expect(getDragOffset(el)).toBe(0);
 
-			await vi.waitFor(() => expect(handleClose).toHaveBeenCalledWith({ reason: "drag" }));
+			// Content reaches its top while the finger keeps moving
+			el.scrollTop = 0;
+			fireTouchEvent(document, "touchmove", { x: from.x, y: from.y + 50 });
+			fireTouchEvent(document, "touchmove", { x: from.x, y: from.y + 90 });
 
-			// Active state was not changed, so the modal scrolls back to its open position
-			await expect.poll(getOffset, { timeout: 3000 }).toBe(0);
-			await expect.element(dialog).toBeInTheDocument();
-			expect(handleClose).toHaveBeenCalledTimes(1);
+			// Modal follows the finger from the point where the content stopped scrolling
+			expect(getDragOffset(el)).toBe(60);
+		});
+
+		test("moves full-screen modals towards the end side", async () => {
+			const { el, from } = await openSwipeDemo({ position: "full-screen", onClose: vi.fn() });
+
+			await swipe(el, { from, by: { x: 80 }, release: "touchmove" });
+
+			expect(getDragOffset(el)).toBe(80);
 		});
 
 		test("disableSwipeGesture", async () => {
-			await render(
-				<Modal active position="bottom" disableSwipeGesture>
-					<Modal.Title>Modal title</Modal.Title>
-				</Modal>
-			);
+			const { el, from } = await openSwipeDemo({ onClose: vi.fn(), disableSwipeGesture: true });
 
-			await expectDefaultPositioning();
+			await swipe(el, { from, by: { y: 60 }, release: "touchmove" });
+
+			expect(getDragOffset(el)).toBe(0);
 		});
 	});
 });

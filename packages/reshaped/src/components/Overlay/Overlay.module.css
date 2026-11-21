@@ -109,6 +109,12 @@
 	pointer-events: all;
 }
 
+/* Overlay that is closing lets the page receive input right away, without waiting for its close animation */
+.root:not(.--visible),
+.root:not(.--visible) .content {
+	pointer-events: none;
+}
+
 .root.--contained {
 	position: absolute;
 }

@@ -7,11 +7,10 @@ import Overlay, { type OverlayInstance } from "@/components/Overlay";
 import Text from "@/components/Text";
 import useElementId from "@/hooks/useElementId";
 import useResponsiveClientValue from "@/hooks/useResponsiveClientValue";
-import useRTL from "@/hooks/useRTL";
 import useVirtualKeyboard from "@/hooks/useVirtualKeyboard";
 import { responsiveClassNames, responsiveVariables } from "@/utilities/props";
 import type * as T from "./Modal.types";
-import useModalScroll, { type Side } from "./useModalScroll";
+import useModalDrag from "./useModalDrag";
 import s from "./Modal.module.css";
 
 const Context = createContext<T.Context>({
@@ -86,24 +85,20 @@ const Modal: FC<T.Props> = (props) => {
 	const internalRootRef = useRef<HTMLDivElement>(null);
 	const rootRef = attributes?.ref || internalRootRef;
 	const overlayRef = useRef<OverlayInstance>(null);
+	const edgeRef = useRef<HTMLDivElement>(null);
 	const shouldBeContained = containerRef && contained !== false;
-	const [rtl] = useRTL();
-	// Swiping is based on the native scrolling of the touch devices, modal is positioned without it everywhere else
+	// Modals attached to the screen edges on touch devices animate like the native sheets
 	const touch = typeof navigator !== "undefined" && navigator.maxTouchPoints > 0;
-	const scrollable = touch && !disableSwipeGesture && clientPosition !== "center";
-	// Side modals move the same way the bottom one does, so they share its animation
-	const sheet = scrollable && clientPosition !== "full-screen";
-	// Full-screen modal is swiped away towards the end side
-	const startSide = clientPosition === "start";
-	const side: Side = clientPosition === "bottom" ? "bottom" : startSide !== rtl ? "left" : "right";
-	const clientSize = useResponsiveClientValue(size);
-	// Percentage sizes are relative to the screen, which the element wrapping the modal has to resolve
-	const trackSize = scrollable && clientSize?.includes("%") ? clientSize : undefined;
-	const { scrollerRef, trackRef, edgeRef, dismissed } = useModalScroll({
-		side,
+	const sheet = touch && ["bottom", "start", "end"].includes(clientPosition);
+	const { dragging, handleTouchStart, handleTransitionEnd } = useModalDrag({
+		position: clientPosition,
+		rootRef,
 		overlayRef,
+		edgeRef,
 		active,
-		enabled: scrollable,
+		containerRef,
+		transparentOverlay,
+		disabled: disableSwipeGesture,
 		onClose,
 	});
 
@@ -133,27 +128,25 @@ const Modal: FC<T.Props> = (props) => {
 				// Modal stays opaque while it's moving and only the backdrop fades,
 				// except for the blur that is applied to the overlay itself
 				sheet && (blurredOverlay ? s["overlay--sheet-fade"] : s["overlay--sheet"]),
-				dismissed && s["overlay--dismissed"],
 				overlayClassName,
 			]}
-			backdropClassName={[sheet && s["overlay--sheet-fade"], dismissed && s["overlay--dismissed"]]}
+			backdropClassName={sheet && s["overlay--sheet-fade"]}
 			contained={contained}
 			containerRef={containerRef}
+			attributes={{
+				onTouchStart: handleTouchStart,
+			}}
 		>
 			{({ active }) => {
 				const rootClassNames = classNames(
 					s.root,
 					className,
 					active && s["--active"],
+					sheet && s["--sheet"],
+					dragging && s["--dragging"],
 					overflow && s[`--overflow-${overflow}`],
 					shouldBeContained && s["--contained"],
 					responsiveClassNames(s, "--position", position)
-				);
-				const scrollerClassNames = classNames(
-					s.scroller,
-					scrollable && s["--scrollable"],
-					scrollable && s[`--scrollable-${clientPosition}`],
-					scrollable && shouldBeContained && s["--scroller-contained"]
 				);
 
 				return (
@@ -162,37 +155,28 @@ const Modal: FC<T.Props> = (props) => {
 						{active && clientPosition === "bottom" && !shouldBeContained && (
 							<div className={s.edge} ref={edgeRef} aria-hidden="true" />
 						)}
-						{/* Wrappers are always rendered to keep the modal content mounted when its position changes */}
-						<div className={scrollerClassNames} ref={scrollerRef}>
-							<div className={s.spacer} aria-hidden="true" />
-							<div
-								className={classNames(s.track, trackSize && s["--sized"])}
-								style={{ "--rs-modal-track-size": trackSize } as React.CSSProperties}
-								ref={trackRef}
-							>
-								<div
-									{...attributes}
-									style={
-										{
-											...responsiveVariables("--rs-modal-size", size),
-											...responsiveVariables("--rs-modal-p", padding),
-											"--rs-modal-keyboard-height": `${keyboard.height}px`,
-										} as React.CSSProperties
-									}
-									aria-labelledby={titleMounted ? `${id}-title` : undefined}
-									aria-describedby={subtitleMounted ? `${id}-subtitle` : undefined}
-									aria-label={ariaLabel || attributes?.["aria-label"]}
-									className={rootClassNames}
-									aria-modal="true"
-									// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
-									role="dialog"
-									tabIndex={!autoFocus ? -1 : undefined}
-									ref={rootRef}
-								>
-									{children}
-								</div>
-							</div>
-							<div className={s.spacer} aria-hidden="true" />
+						<div
+							{...attributes}
+							style={
+								{
+									...responsiveVariables("--rs-modal-size", size),
+									...responsiveVariables("--rs-modal-p", padding),
+									"--rs-modal-drag": "0px",
+									"--rs-modal-keyboard-height": `${keyboard.height}px`,
+								} as React.CSSProperties
+							}
+							aria-labelledby={titleMounted ? `${id}-title` : undefined}
+							aria-describedby={subtitleMounted ? `${id}-subtitle` : undefined}
+							aria-label={ariaLabel || attributes?.["aria-label"]}
+							className={rootClassNames}
+							aria-modal="true"
+							// oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
+							role="dialog"
+							tabIndex={!autoFocus ? -1 : undefined}
+							ref={rootRef}
+							onTransitionEnd={handleTransitionEnd}
+						>
+							{children}
 						</div>
 					</Context.Provider>
 				);
