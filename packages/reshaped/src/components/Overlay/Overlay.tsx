@@ -11,7 +11,7 @@ import useIsDismissible from "@/hooks/useIsDismissible";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import useScrollLock from "@/hooks/useScrollLock";
 import useToggle from "@/hooks/useToggle";
-import { onNextFrame, checkTransitions } from "@/utilities/animation";
+import { onNextFrame, checkTransitions, checkPausedTransitions } from "@/utilities/animation";
 import type * as T from "./Overlay.types";
 import s from "./Overlay.module.css";
 
@@ -138,7 +138,11 @@ const Overlay: React.FC<T.Props> = (props) => {
 		[close]
 	);
 
-	React.useEffect(() => {
+	/**
+	 * Rendering and showing the overlay is handled in the layout effects, so their state updates are applied synchronously.
+	 * Updates coming from the regular effects are deferred and could leave the overlay hidden for another frame
+	 */
+	useIsomorphicLayoutEffect(() => {
 		const hasTransitions = checkTransitions();
 
 		if (hasTransitions) setAnimated(true);
@@ -149,25 +153,38 @@ const Overlay: React.FC<T.Props> = (props) => {
 		}
 	}, [active, render, hide, rendered, handleAfterClose]);
 
+	// Applied before the overlay is shown, so it's rendered with the container offset from its first frame
+	useIsomorphicLayoutEffect(() => {
+		const containerEl = containerRef?.current;
+		if (!rendered || !mounted || !containerEl) return;
+
+		originalOverflowRef.current = containerEl.style.overflow;
+
+		containerEl.style.setProperty("overflow", "hidden");
+		setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
+	}, [rendered, mounted, containerRef]);
+
 	// Show overlay after it was rendered
-	React.useEffect(() => {
-		if (!rendered) return;
+	useIsomorphicLayoutEffect(() => {
+		if (!rendered || !mounted) return;
 		if (!transparent) lockScroll();
-		onNextFrame(() => show());
-	}, [rendered, show, lockScroll, transparent]);
+
+		// Overlay rendered while the transitions are paused waits for them to still animate
+		if (checkPausedTransitions()) {
+			onNextFrame(() => show());
+			return;
+		}
+
+		// Resolving the layout applies the hidden styles of the rendered overlay,
+		// so its transition starts in the same frame instead of waiting for the next ones
+		rootRef.current?.getBoundingClientRect();
+		show();
+	}, [rendered, mounted, show, lockScroll, transparent]);
 
 	React.useEffect(() => {
 		if (!rendered || !contentRef.current) return;
 
 		const trapFocus = new TrapFocus();
-		const containerEl = containerRef?.current;
-
-		if (containerEl) {
-			originalOverflowRef.current = containerEl.style.overflow;
-
-			containerEl.style.setProperty("overflow", "hidden");
-			setOffset([containerEl.scrollLeft, containerEl.scrollTop]);
-		}
 
 		trapFocus.trap(contentRef.current, {
 			initialFocusEl: contentRef.current.querySelector("[role=dialog][tabindex='-1']") as
@@ -176,7 +193,7 @@ const Overlay: React.FC<T.Props> = (props) => {
 		});
 
 		return () => trapFocus.release();
-	}, [rendered, containerRef]);
+	}, [rendered]);
 
 	/**
 	 * iOS Safari tints its toolbars with the color of the fixed elements attached to the screen edges,
