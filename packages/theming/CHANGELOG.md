@@ -1,5 +1,7 @@
 # @reshaped/theming
 
+## 4.4.0-canary.4
+
 ## 4.4.0-canary.3
 
 ## 4.4.0-canary.2

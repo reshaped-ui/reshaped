@@ -1,5 +1,17 @@
 # reshaped
 
+## 4.4.0-canary.4
+
+### Patch Changes
+
+- [#723](https://github.com/reshaped-ui/reshaped/pull/723) [`f6f5ef6`](https://github.com/reshaped-ui/reshaped/commit/f6f5ef63b76d78ec852ffe3b75a06996c39f5215) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Modal` with `bottom`, `start`, `end` and `full-screen` positions ends above the on-screen keyboard when the browser doesn't resize the layout for it, like iOS Safari. These modals used to stay under the keyboard, so the end of their content could only be reached by panning the page
+
+- [#723](https://github.com/reshaped-ui/reshaped/pull/723) [`f6f5ef6`](https://github.com/reshaped-ui/reshaped/commit/f6f5ef63b76d78ec852ffe3b75a06996c39f5215) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Overlay` backdrop on iOS bleeds under the browser toolbars with a shadow instead of extending its own size past the viewport. Its size made the document scrollable while an overlay was open, even with the page scroll locked, so Safari could scroll the page to reveal a focused field and then blurred the status bar area over the scrolled page
+
+- Updated dependencies []:
+  - @reshaped/utilities@4.4.0-canary.4
+  - @reshaped/theming@4.4.0-canary.4
+
 ## 4.4.0-canary.3
 
 ### Minor Changes
