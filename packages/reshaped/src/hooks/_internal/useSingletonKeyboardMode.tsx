@@ -56,6 +56,8 @@ export const SingletonKeyboardModeProvider: React.FC<{ children: React.ReactNode
 
 	const handleKeyDown = React.useCallback(
 		(e: KeyboardEvent) => {
+			// Browsers and password managers dispatch keydown events without e.key when autofilling fields
+			if (typeof e.key !== "string") return;
 			if (e.metaKey || e.altKey || e.ctrlKey) return;
 			// Prevent focus ring from appearing when using mouse but closing with esc
 			if (e.key === ESC) return;
