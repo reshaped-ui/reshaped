@@ -1,5 +1,17 @@
 # reshaped
 
+## 4.4.0-canary.5
+
+### Patch Changes
+
+- [#725](https://github.com/reshaped-ui/reshaped/pull/725) [`60f82ca`](https://github.com/reshaped-ui/reshaped/commit/60f82ca95f1c9b8cd56dfd62af76438410a123d7) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Keyboard mode doesn't throw on `keydown` events without a `key`, which browsers and password managers dispatch when autofilling fields, and these events don't turn the keyboard mode on
+
+- [#727](https://github.com/reshaped-ui/reshaped/pull/727) [`8b8ae9a`](https://github.com/reshaped-ui/reshaped/commit/8b8ae9aecd3eee58ddc77e26c636a745a0e3e1e8) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Page scroll lock on iOS keeps Safari from panning the page for the on-screen keyboard. Safari pans the whole page to reveal a focused field even while the page scroll is locked, which moved the fixed content rendered above it outside of the screen: a `Modal` ending above the keyboard was pushed up by the keyboard height, leaving a gap below it with its top unreachable. While `Overlay`, `Modal` and other components locking the page scroll are open, the pressed fields are focused without letting Safari pan for them, the focused field is revealed inside its own scrollable container instead, and a page panned anyway is put back
+
+- Updated dependencies [[`8b8ae9a`](https://github.com/reshaped-ui/reshaped/commit/8b8ae9aecd3eee58ddc77e26c636a745a0e3e1e8)]:
+  - @reshaped/utilities@4.4.0-canary.5
+  - @reshaped/theming@4.4.0-canary.5
+
 ## 4.4.0-canary.4
 
 ### Patch Changes

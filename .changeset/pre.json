@@ -2,9 +2,9 @@
   "mode": "exit",
   "tag": "canary",
   "initialVersions": {
-    "reshaped": "4.4.0-canary.3",
-    "@reshaped/theming": "4.4.0-canary.3",
-    "@reshaped/utilities": "4.4.0-canary.3"
+    "reshaped": "4.4.0-canary.4",
+    "@reshaped/theming": "4.4.0-canary.4",
+    "@reshaped/utilities": "4.4.0-canary.4"
   },
   "changesets": [
     "agent-skills-package",
@@ -13,6 +13,7 @@
     "flyout-content-hover-disabled",
     "flyout-content-measuring",
     "flyout-nested-outside-click",
+    "keyboard-mode-autofill",
     "modal-keyboard-inset",
     "modal-keyboard-safe-area",
     "modal-swipe-gesture",
@@ -21,6 +22,7 @@
     "overlay-open-latency",
     "quiet-apples-wait",
     "reviewed-prop-docs",
+    "scroll-lock-keyboard-pan",
     "toast-provider-container-ref",
     "touch-cancel-gestures",
     "use-on-click-outside-capture",
