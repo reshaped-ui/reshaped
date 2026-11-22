@@ -215,7 +215,7 @@ describe("Components/Modal", () => {
 		await expect.element(page.getByTestId("test-id")).toHaveClass("test-classname");
 	});
 
-	test("test: virtual keyboard", async () => {
+	test("stays in place when the on-screen keyboard covers the viewport", async () => {
 		const Component = () => {
 			const { active, activate, deactivate } = useToggle();
 
@@ -237,36 +237,24 @@ describe("Components/Modal", () => {
 
 		const root = page.getByRole("dialog");
 		await expect.element(root).toBeInTheDocument();
-		const getKeyboardHeight = () =>
-			root.element().style.getPropertyValue("--rs-modal-keyboard-height");
-
-		const getBottomOffset = () =>
-			window.innerHeight - root.element().getBoundingClientRect().bottom;
-
-		expect(getKeyboardHeight()).toBe("0px");
-		const bottomOffset = getBottomOffset();
+		const getBottom = () => root.element().getBoundingClientRect().bottom;
+		const bottom = getBottom();
 
 		try {
-			// On-screen keyboard shrinks the visual viewport without changing the layout
+			// On-screen keyboard shrinks the visual viewport without changing the layout,
+			// and revealing the focused field above it is left to the browser
 			Object.defineProperty(viewport, "height", {
 				configurable: true,
 				value: window.innerHeight - 300,
 			});
 			viewport.dispatchEvent(new Event("resize"));
+			await new Promise(requestAnimationFrame);
 
-			// Bottom safe area inset is reduced by the keyboard height covering it
-			await expect.poll(getKeyboardHeight).toBe("300px");
-			// Modal ends above the keyboard with the same offset it has from the screen edge
-			expect(getBottomOffset()).toBe(bottomOffset + 300);
+			expect(getBottom()).toBe(bottom);
 		} finally {
 			// @ts-expect-error Removes the stubbed value from the viewport itself
 			delete viewport.height;
 		}
-
-		viewport.dispatchEvent(new Event("resize"));
-
-		await expect.poll(getKeyboardHeight).toBe("0px");
-		expect(getBottomOffset()).toBe(bottomOffset);
 	});
 
 	describe("swipe gesture", () => {

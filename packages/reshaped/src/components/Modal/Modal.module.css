@@ -21,27 +21,14 @@
 	--rs-modal-container-height: 100vh;
 	--rs-modal-padding: calc(var(--rs-modal-p) * var(--rs-unit-x1));
 	--rs-modal-env-top: env(safe-area-inset-top, 0px);
-
-	/* iOS keeps reporting the bottom safe area while the on-screen keyboard covers it */
-	--rs-modal-env-bottom: max(
-		0px,
-		env(safe-area-inset-bottom, 0px) - var(--rs-modal-keyboard-height, 0px)
-	);
+	--rs-modal-env-bottom: env(safe-area-inset-bottom, 0px);
 	--rs-modal-env-start: env(safe-area-inset-left, 0px);
 	--rs-modal-env-end: env(safe-area-inset-right, 0px);
-
-	/**
-	 * On-screen keyboard that doesn't resize the layout covers the bottom of the viewport,
-	 * so the modals attached to the bottom edge end above it to keep their content reachable
-	 */
-	--rs-modal-keyboard: var(--rs-modal-keyboard-height, 0px);
 
 	/* Distance between the side modals and the screen edges, increased to the safe area insets when they're larger */
 	--rs-modal-offset: var(--rs-unit-x2);
 	--rs-modal-inset-top: max(var(--rs-modal-offset), var(--rs-modal-env-top));
-	--rs-modal-inset-bottom: calc(
-		max(var(--rs-modal-offset), var(--rs-modal-env-bottom)) + var(--rs-modal-keyboard)
-	);
+	--rs-modal-inset-bottom: max(var(--rs-modal-offset), var(--rs-modal-env-bottom));
 	--rs-modal-inset-start: max(var(--rs-modal-offset), var(--rs-modal-env-start));
 	--rs-modal-inset-end: max(var(--rs-modal-offset), var(--rs-modal-env-end));
 
@@ -96,7 +83,6 @@
 		--rs-modal-env-bottom: 0px;
 		--rs-modal-env-start: 0px;
 		--rs-modal-env-end: 0px;
-		--rs-modal-keyboard: 0px;
 	}
 }
 
@@ -148,13 +134,11 @@
 		width: 100%;
 		height: var(--rs-modal-size);
 		max-width: 100%;
-		max-height: calc(
-			var(--rs-modal-container-height) - var(--rs-unit-x4) - var(--rs-modal-keyboard)
-		);
+		max-height: calc(var(--rs-modal-container-height) - var(--rs-unit-x4));
 		margin: 0;
 		margin-top: var(--rs-unit-x4);
 		inset: 0;
-		inset-block: auto var(--rs-modal-keyboard);
+		inset-block-start: initial;
 		transform: translate(0, 100%);
 		position: absolute;
 
@@ -245,12 +229,12 @@
 
 		box-shadow: var(--rs-modal-full-screen-shadow);
 		width: 100%;
-		height: calc(100% - var(--rs-modal-keyboard));
+		height: 100%;
 		max-width: var(--rs-modal-container-width);
 		max-height: 100%;
 		margin: 0;
 		inset: 0;
-		inset-block: auto var(--rs-modal-keyboard);
+		inset-block-start: initial;
 		transform: translate(0, var(--rs-unit-x4));
 		position: absolute;
 		border-width: 0;

@@ -59,23 +59,15 @@ describe("scroll/lockSafariScroll", () => {
 		expect(window.scrollY).toBe(300);
 	});
 
-	test("keeps the keyboard from panning the page until unlocked", () => {
-		document.body.innerHTML = `<input /><textarea></textarea>`;
+	test("leaves focusing the pressed fields to the browser", () => {
+		document.body.innerHTML = `<input />`;
 		const input = document.body.querySelector("input")!;
-		const textarea = document.body.querySelector("textarea")!;
-		const press = (target: Element) => {
-			target.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, cancelable: true }));
-		};
 
 		const unlock = lockSafariScroll();
+		input.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, cancelable: true }));
 
-		// Fields are focused by the lock itself, before the browser pans the page for them
-		press(input);
-		expect(document.activeElement).toBe(input);
+		expect(document.activeElement).not.toBe(input);
 
 		unlock();
-
-		press(textarea);
-		expect(document.activeElement).toBe(input);
 	});
 });
