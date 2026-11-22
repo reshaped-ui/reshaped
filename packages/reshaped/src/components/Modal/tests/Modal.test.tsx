@@ -317,7 +317,8 @@ describe("Components/Modal", () => {
 
 			const offset = getDragOffset(el);
 			expect(offset).toBeLessThan(0);
-			expect(offset).toBeGreaterThan(-150 / 2);
+			// Square root damping keeps the modal close to its open position
+			expect(offset).toBeGreaterThan(-Math.sqrt(150) - 1);
 
 			fireTouchEvent(document, "touchend", { x: from.x, y: from.y - 150 });
 			await expect.poll(() => getDragOffset(el)).toBe(0);
