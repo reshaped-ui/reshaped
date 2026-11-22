@@ -1,5 +1,17 @@
 # reshaped
 
+## 4.4.0-canary.6
+
+### Patch Changes
+
+- [#728](https://github.com/reshaped-ui/reshaped/pull/728) [`09f1b44`](https://github.com/reshaped-ui/reshaped/commit/09f1b44c3c5393b27879738077c539b80a9b937c) Thanks [@blvdmitry](https://github.com/blvdmitry)! - `Modal` dragged past its open position resists the swipe gesture more, moving only slightly with the finger like before. The overshoot is damped with a square root curve again instead of scaling with the modal size, which let large modals travel too far
+
+- [#729](https://github.com/reshaped-ui/reshaped/pull/729) [`e6fc413`](https://github.com/reshaped-ui/reshaped/commit/e6fc413b9ebb84bd2858a9dce07b08c91f2d368d) Thanks [@blvdmitry](https://github.com/blvdmitry)! - Page scroll lock on iOS and `Modal` leave revealing the focused field above the on-screen keyboard to the browser. Scroll lock no longer takes over focusing the pressed fields or puts back the page Safari panned for the keyboard, and `Modal` no longer ends above the keyboard. Both raced Safari's own panning, which moved the modal content around while focusing fields. `useVirtualKeyboard` stays available for positioning custom content above the keyboard
+
+- Updated dependencies [[`e6fc413`](https://github.com/reshaped-ui/reshaped/commit/e6fc413b9ebb84bd2858a9dce07b08c91f2d368d)]:
+  - @reshaped/utilities@4.4.0-canary.6
+  - @reshaped/theming@4.4.0-canary.6
+
 ## 4.4.0-canary.5
 
 ### Patch Changes
