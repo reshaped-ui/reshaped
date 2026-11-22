@@ -240,7 +240,11 @@ describe("Components/Modal", () => {
 		const getKeyboardHeight = () =>
 			root.element().style.getPropertyValue("--rs-modal-keyboard-height");
 
+		const getBottomOffset = () =>
+			window.innerHeight - root.element().getBoundingClientRect().bottom;
+
 		expect(getKeyboardHeight()).toBe("0px");
+		const bottomOffset = getBottomOffset();
 
 		try {
 			// On-screen keyboard shrinks the visual viewport without changing the layout
@@ -252,6 +256,8 @@ describe("Components/Modal", () => {
 
 			// Bottom safe area inset is reduced by the keyboard height covering it
 			await expect.poll(getKeyboardHeight).toBe("300px");
+			// Modal ends above the keyboard with the same offset it has from the screen edge
+			expect(getBottomOffset()).toBe(bottomOffset + 300);
 		} finally {
 			// @ts-expect-error Removes the stubbed value from the viewport itself
 			delete viewport.height;
@@ -260,6 +266,7 @@ describe("Components/Modal", () => {
 		viewport.dispatchEvent(new Event("resize"));
 
 		await expect.poll(getKeyboardHeight).toBe("0px");
+		expect(getBottomOffset()).toBe(bottomOffset);
 	});
 
 	describe("swipe gesture", () => {
