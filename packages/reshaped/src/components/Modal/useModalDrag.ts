@@ -22,8 +22,6 @@ const DIRECTION_THRESHOLD = 8;
  * matches the normal deceleration rate of the iOS scroll views
  */
 const PROJECTION_TIME = 0.998 / (1 - 0.998);
-/** Resistance of the rubber band applied when the modal is dragged past its open position, same as in iOS */
-const RUBBER_BAND_COEFFICIENT = 0.55;
 /** Time in ms given to the close handler to update the active state before the modal returns to its open position */
 const KEEP_OPEN_TIMEOUT = 100;
 /** Time window in ms used for measuring the release velocity */
@@ -89,19 +87,12 @@ const getInitialState = (): State => ({
 });
 
 /**
- * Dragging past the open position is damped the same way as the iOS scroll views,
- * so the modal resists the finger more the further it's dragged.
- * Distances are negative past the open position and the dimension limits how far it can go
+ * Dragging past the open position is damped with a square root curve,
+ * so the modal resists the finger like a tight rubber band and moves only slightly past its open position.
+ * Distances are negative past the open position
  */
-const dampOvershoot = (distance: number, dimension: number) => {
-	const ratio = (-distance * RUBBER_BAND_COEFFICIENT) / dimension;
-	return -(1 - 1 / (ratio + 1)) * dimension;
-};
-
-const undampOvershoot = (offset: number, dimension: number) => {
-	const ratio = 1 / (1 + offset / dimension) - 1;
-	return -(ratio * dimension) / RUBBER_BAND_COEFFICIENT;
-};
+const dampOvershoot = (distance: number) => -Math.sqrt(-distance);
+const undampOvershoot = (offset: number) => -(offset ** 2);
 
 /**
  * Distance in px the modal is currently rendered at from its open position, towards the closing direction,
@@ -218,8 +209,7 @@ const useModalDrag = (args: {
 
 		const closingDistance = state.seed + state.distance;
 
-		state.offset =
-			closingDistance < 0 ? dampOvershoot(closingDistance, state.size) : closingDistance;
+		state.offset = closingDistance < 0 ? dampOvershoot(closingDistance) : closingDistance;
 		rootEl.style.setProperty("--rs-modal-drag", `${state.offset * closingSign}px`);
 		edgeRef.current?.style.setProperty("transform", `translateY(${Math.max(0, state.offset)}px)`);
 
@@ -310,7 +300,7 @@ const useModalDrag = (args: {
 		const renderedOffset = rootStyle ? getRenderedOffset(rootStyle, { axis, closingSign }) : 0;
 		const size = rootEl && rootStyle ? getClosingSize(rootEl, rootStyle, { axis, closingSign }) : 1;
 		// Damped offset past the open position is converted back to the dragged distance
-		const seed = renderedOffset < 0 ? undampOvershoot(renderedOffset, size) : renderedOffset;
+		const seed = renderedOffset < 0 ? undampOvershoot(renderedOffset) : renderedOffset;
 		const origin = axis === "y" ? touch.clientY : touch.clientX;
 
 		// Background of the bottom modal is extended below it while it's dragged past its open position
