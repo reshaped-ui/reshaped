@@ -1,32 +1,22 @@
 "use client";
 
 import React from "react";
-import {
-	getVirtualKeyboardHeight,
-	getVirtualKeyboardOffset,
-	subscribeVirtualKeyboard,
-} from "@reshaped/utilities/internal";
+import { getVirtualKeyboardHeight, subscribeVirtualKeyboard } from "@reshaped/utilities/internal";
 
-const getServerValue = () => 0;
+const getServerHeight = () => 0;
 
 /**
- * Returns the height of the area the on-screen keyboard covers at the bottom of the viewport,
- * and the offset the browser has panned the visible area down by while the keyboard is open.
- * Both are 0 when the keyboard is closed and when the browser resizes the layout to fit above it
+ * Returns the height of the area the on-screen keyboard covers at the bottom of the viewport.
+ * It's 0 when the keyboard is closed and when the browser resizes the layout to fit above it
  */
 const useVirtualKeyboard = () => {
 	const height = React.useSyncExternalStore(
 		subscribeVirtualKeyboard,
 		getVirtualKeyboardHeight,
-		getServerValue
-	);
-	const offset = React.useSyncExternalStore(
-		subscribeVirtualKeyboard,
-		getVirtualKeyboardOffset,
-		getServerValue
+		getServerHeight
 	);
 
-	return React.useMemo(() => ({ height, offset }), [height, offset]);
+	return React.useMemo(() => ({ height }), [height]);
 };
 
 export default useVirtualKeyboard;

@@ -2,7 +2,6 @@ type Listener = () => void;
 
 const listeners = new Set<Listener>();
 let height = 0;
-let offset = 0;
 
 /**
  * iOS, and Android by default, keep the layout as it is when the on-screen keyboard opens and only shrink the visual viewport,
@@ -31,24 +30,11 @@ const measure = () => {
 	return Math.max(0, Math.floor(dynamicHeight - scrollbarHeight - visibleHeight));
 };
 
-/**
- * Browser pans the visual viewport down the layout to reveal the focused field, which moves the fixed elements up with the page.
- * Only the pan that happens with the keyboard open is kept, a pinch zoom pans the viewport as well
- */
-const measureOffset = (keyboardHeight: number) => {
-	const viewport = window.visualViewport;
-	if (!viewport || !keyboardHeight) return 0;
-
-	return Math.min(keyboardHeight, Math.max(0, Math.round(viewport.offsetTop)));
-};
-
 const update = () => {
 	const nextHeight = measure();
-	const nextOffset = measureOffset(nextHeight);
-	if (nextHeight === height && nextOffset === offset) return;
+	if (nextHeight === height) return;
 
 	height = nextHeight;
-	offset = nextOffset;
 	listeners.forEach((listener) => listener());
 };
 
@@ -59,16 +45,9 @@ const update = () => {
  */
 export const getVirtualKeyboardHeight = () => height;
 
-/**
- * Distance the visible area is panned down the layout while the keyboard is open,
- * the part of the keyboard height that is above the visible area instead of below it
- */
-export const getVirtualKeyboardOffset = () => offset;
-
 export const subscribeVirtualKeyboard = (listener: Listener) => {
 	if (!listeners.size) {
 		window.visualViewport?.addEventListener("resize", update);
-		window.visualViewport?.addEventListener("scroll", update);
 		update();
 	}
 
@@ -76,9 +55,6 @@ export const subscribeVirtualKeyboard = (listener: Listener) => {
 
 	return () => {
 		listeners.delete(listener);
-		if (listeners.size) return;
-
-		window.visualViewport?.removeEventListener("resize", update);
-		window.visualViewport?.removeEventListener("scroll", update);
+		if (!listeners.size) window.visualViewport?.removeEventListener("resize", update);
 	};
 };
