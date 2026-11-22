@@ -1,9 +1,13 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
-import { getVirtualKeyboardHeight, subscribeVirtualKeyboard } from "../virtualKeyboard";
+import {
+	getVirtualKeyboardHeight,
+	getVirtualKeyboardOffset,
+	subscribeVirtualKeyboard,
+} from "../virtualKeyboard";
 
 const original = Object.getOwnPropertyDescriptor(window, "visualViewport")!;
-let viewport: EventTarget & { height: number; scale: number };
+let viewport: EventTarget & { height: number; scale: number; offsetTop: number };
 let unsubscribe: (() => void) | undefined;
 
 const resize = (args: { height: number; scale?: number }) => {
@@ -12,9 +16,18 @@ const resize = (args: { height: number; scale?: number }) => {
 	viewport.dispatchEvent(new Event("resize"));
 };
 
+const pan = (offsetTop: number) => {
+	viewport.offsetTop = offsetTop;
+	viewport.dispatchEvent(new Event("scroll"));
+};
+
 describe("viewport/virtualKeyboard", () => {
 	beforeEach(() => {
-		viewport = Object.assign(new EventTarget(), { height: window.innerHeight, scale: 1 });
+		viewport = Object.assign(new EventTarget(), {
+			height: window.innerHeight,
+			scale: 1,
+			offsetTop: 0,
+		});
 		Object.defineProperty(window, "visualViewport", { configurable: true, value: viewport });
 	});
 
@@ -41,6 +54,36 @@ describe("viewport/virtualKeyboard", () => {
 
 		expect(getVirtualKeyboardHeight()).toBe(0);
 		expect(listener).toHaveBeenCalledTimes(2);
+	});
+
+	test("returns the offset the visible area is panned by while the keyboard is open", () => {
+		const listener = vi.fn();
+		unsubscribe = subscribeVirtualKeyboard(listener);
+		resize({ height: window.innerHeight - 300 });
+
+		pan(120);
+
+		expect(getVirtualKeyboardOffset()).toBe(120);
+		expect(getVirtualKeyboardHeight()).toBe(300);
+		expect(listener).toHaveBeenCalledTimes(2);
+
+		// Panned no further than the keyboard height, the layout ends there
+		pan(400);
+		expect(getVirtualKeyboardOffset()).toBe(300);
+
+		resize({ height: window.innerHeight });
+		expect(getVirtualKeyboardOffset()).toBe(0);
+	});
+
+	test("ignores the pan of the pinch zoom", () => {
+		const listener = vi.fn();
+		unsubscribe = subscribeVirtualKeyboard(listener);
+
+		resize({ height: window.innerHeight / 2, scale: 2 });
+		pan(200);
+
+		expect(getVirtualKeyboardOffset()).toBe(0);
+		expect(listener).not.toHaveBeenCalled();
 	});
 
 	test("measures the keyboard opened before subscribing", () => {

@@ -242,9 +242,11 @@ describe("Components/Modal", () => {
 
 		const getBottomOffset = () =>
 			window.innerHeight - root.element().getBoundingClientRect().bottom;
+		const getTop = () => root.element().getBoundingClientRect().top;
 
 		expect(getKeyboardHeight()).toBe("0px");
 		const bottomOffset = getBottomOffset();
+		const top = getTop();
 
 		try {
 			// On-screen keyboard shrinks the visual viewport without changing the layout
@@ -258,15 +260,26 @@ describe("Components/Modal", () => {
 			await expect.poll(getKeyboardHeight).toBe("300px");
 			// Modal ends above the keyboard with the same offset it has from the screen edge
 			expect(getBottomOffset()).toBe(bottomOffset + 300);
+
+			// Browser pans the visible area down the layout to reveal the focused field,
+			// the modal moves down with it and keeps its offsets from the visible area edges
+			Object.defineProperty(viewport, "offsetTop", { configurable: true, value: 200 });
+			viewport.dispatchEvent(new Event("scroll"));
+
+			await expect.poll(getTop).toBe(top + 200);
+			expect(getBottomOffset()).toBe(bottomOffset + 100);
 		} finally {
 			// @ts-expect-error Removes the stubbed value from the viewport itself
 			delete viewport.height;
+			// @ts-expect-error Removes the stubbed value from the viewport itself
+			delete viewport.offsetTop;
 		}
 
 		viewport.dispatchEvent(new Event("resize"));
 
 		await expect.poll(getKeyboardHeight).toBe("0px");
 		expect(getBottomOffset()).toBe(bottomOffset);
+		expect(getTop()).toBe(top);
 	});
 
 	describe("swipe gesture", () => {

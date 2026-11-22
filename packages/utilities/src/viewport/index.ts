@@ -1,2 +1,6 @@
 // Internal
-export { getVirtualKeyboardHeight, subscribeVirtualKeyboard } from "./virtualKeyboard";
+export {
+	getVirtualKeyboardHeight,
+	getVirtualKeyboardOffset,
+	subscribeVirtualKeyboard,
+} from "./virtualKeyboard";

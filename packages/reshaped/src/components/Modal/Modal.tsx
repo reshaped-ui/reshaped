@@ -163,6 +163,7 @@ const Modal: FC<T.Props> = (props) => {
 									...responsiveVariables("--rs-modal-p", padding),
 									"--rs-modal-drag": "0px",
 									"--rs-modal-keyboard-height": `${keyboard.height}px`,
+									"--rs-modal-keyboard-offset": `${keyboard.offset}px`,
 								} as React.CSSProperties
 							}
 							aria-labelledby={titleMounted ? `${id}-title` : undefined}
