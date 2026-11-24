@@ -2,6 +2,7 @@
 
 import React from "react";
 import { classNames } from "@reshaped/utilities";
+import { handOverIOSKeyboardPan } from "@reshaped/utilities/internal";
 
 import { GlobalColorMode, PrivateTheme } from "@/components/Theme";
 import { useGlobalColorMode } from "@/components/Theme/useTheme";
@@ -28,6 +29,10 @@ const Reshaped: React.FC<T.Props> = (props) => {
 	const rootClassNames = classNames(s.root, className);
 	const scopeRef = React.useRef<HTMLDivElement>(null);
 	const parentGlobalColorMode = useGlobalColorMode();
+
+	// Pages scrolling inside their own container can't be scrolled back from the pan iOS adds for the keyboard,
+	// with or without an open modal locking the page scroll
+	React.useEffect(() => handOverIOSKeyboardPan(), []);
 
 	return (
 		<SingletonRTLProvider defaultRTL={defaultRTL}>
