@@ -43,10 +43,12 @@ Before:
 
 ```css
 font-size: var(--rs-font-size-title-1);
+line-height: var(--rs-line-height-title-1);
 ```
 
 After:
 
 ```css
 font-size: var(--rs-font-size-headline-1);
+line-height: var(--rs-line-height-headline-1);
 ```
