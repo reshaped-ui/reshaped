@@ -16,7 +16,7 @@ description: Updated variant names to match new typography tokens
   - `featured-2` -> `featured-5`
   - `featured-3` -> `featured-6`
   - `body-1` -> `featured-6`
-  - `body-2` -> `body-2`
+  - `body-2` -> `body-1`
   - `body-3` -> `body-2`
 
 - Variant property might also be responsive, with an object of values which have to be migrated as well.
