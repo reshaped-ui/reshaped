@@ -20,6 +20,6 @@ export {
 } from "./a11y";
 export { findParent, getShadowRoot } from "./dom";
 export { rafThrottle } from "./helpers";
-export { disableScroll, enableScroll } from "./scroll";
+export { disableScroll, enableScroll, handOverIOSKeyboardPan } from "./scroll";
 export type { Coordinates } from "./types/global";
 export { getVirtualKeyboardHeight, subscribeVirtualKeyboard } from "./viewport";
